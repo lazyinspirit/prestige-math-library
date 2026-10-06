@@ -1,0 +1,730 @@
+[
+  {
+    "order": 510.019,
+    "id": "primitive-ideals-and-duflo-theorem",
+    "kind": "A",
+    "category": "lie-theory",
+    "title": "Primitive Ideals and Duflo Theorem",
+    "companion": "primitive-ideals-and-duflo-theorem-examples",
+    "requires": [
+      "harish-chandra-isomorphism-casimir-and-central-characters",
+      "verma-modules-and-shapovalov-forms",
+      "homomorphisms-between-verma-modules-and-linkage",
+      "category-o-finiteness-duality-and-blocks",
+      "projectives-standard-filtrations-and-bgg-reciprocity",
+      "lie-algebra-representations-enveloping-algebras-and-pbw",
+      "classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface"
+    ],
+    "items": [
+      {
+        "id": "def-annihilator-ideal-of-a-lie-algebra-module",
+        "kind": "definition",
+        "title": "The annihilator of a module over an enveloping algebra",
+        "deps": [
+          "def-universal-enveloping-algebra-as-a-tensor-quotient",
+          "prop-lie-algebra-actions-extend-to-unital-actions-of-the-enveloping-algebra",
+          "def-left-right-and-two-sided-ideal",
+          "thm-ring-homomorphism-kernel-is-an-ideal",
+          "def-left-and-right-modules"
+        ],
+        "statement": "Let $\\mathfrak g$ be a complex Lie algebra and let $M$ be a nonzero left $U(\\mathfrak g)$-module with action $\\rho_M\\colon U(\\mathfrak g)\\to\\operatorname{End}_{\\mathbb C}(M)$. The annihilator of $M$ is $$\\operatorname{Ann}_{U(\\mathfrak g)}(M)=\\{u\\in U(\\mathfrak g): um=0\\text{ for every }m\\in M\\}=\\ker\\rho_M,$$ and for $m\\in M$ one writes $\\operatorname{Ann}(m)=\\{u:um=0\\}$. Then $\\operatorname{Ann}_{U(\\mathfrak g)}(M)$ is a two-sided ideal of $U(\\mathfrak g)$, equal to the intersection of the left ideals $\\operatorname{Ann}(m)$, $m\\in M$; the action descends to a faithful action of the quotient algebra $U(\\mathfrak g)/\\operatorname{Ann}_{U(\\mathfrak g)}(M)$ on $M$.",
+        "strategy": "Unwind the definitions. The annihilator of the whole module is exactly the kernel of the algebra homomorphism $\\rho_M$, hence a two-sided ideal by the kernel theorem for ring homomorphisms; the pointwise description follows by intersecting the pointwise kernels. The induced action of the quotient is faithful by construction, and the quotient acts by the same formula.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-primitive-ideal-of-an-enveloping-algebra",
+        "kind": "definition",
+        "title": "Primitive ideals of an enveloping algebra",
+        "deps": [
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "def-simple-module",
+          "def-left-right-and-two-sided-ideal"
+        ],
+        "statement": "Let $\\mathfrak g$ be a complex Lie algebra. A two-sided ideal\n$I\\mathrel{\\trianglelefteq}U(\\mathfrak g)$ ([[def-left-right-and-two-sided-ideal]])\nis **primitive** if there exists a simple left $U(\\mathfrak g)$-module $M$\n([[def-simple-module]]) with\n\n$$I=\\operatorname{Ann}_{U(\\mathfrak g)}(M)=\\{u\\in U(\\mathfrak g):um=0\\text{ for every }m\\in M\\}$$\n\n([[def-annihilator-ideal-of-a-lie-algebra-module]]). Equivalently: a two-sided\nideal is primitive if it is the kernel of the action of $U(\\mathfrak g)$ on some\nsimple module. Every primitive ideal is proper, and $U(\\mathfrak g)/I$ admits the faithful\nsimple module $M$; no highest-weight hypothesis is imposed on $M$.",
+        "strategy": "Definition: combine the annihilator definition with simplicity of the module. Properness follows because $1$ acts as the identity on a nonzero module, so $1\\notin I$. Faithfulness of the quotient action on $M$ is the last part of the annihilator definition. The equivalent kernel formulation is the same statement.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "prop-annihilators-of-simple-highest-weight-modules-are-primitive",
+        "kind": "proposition",
+        "title": "Annihilators of simple highest-weight modules are primitive",
+        "deps": [
+          "def-primitive-ideal-of-an-enveloping-algebra",
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "thm-verma-module-has-a-unique-simple-quotient",
+          "def-verma-module"
+        ],
+        "statement": "Let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra, let $\\lambda\\in\\mathfrak h^*$, let $M(\\lambda)$ be the Verma module of highest weight $\\lambda$, and let $L(\\lambda)$ be its unique simple quotient. Then $I(\\lambda):=\\operatorname{Ann}_{U(\\mathfrak g)}(L(\\lambda))$ is a primitive ideal of $U(\\mathfrak g)$; moreover $\\operatorname{Ann}_{U(\\mathfrak g)}M(\\lambda)\\subseteq I(\\lambda)$, with equality whenever $M(\\lambda)$ is simple (in which case $L(\\lambda)\\cong M(\\lambda)$).",
+        "strategy": "The unique-simple-quotient theorem supplies a nonzero simple module $L(\\lambda)$, so its annihilator is primitive by definition. Since $L(\\lambda)$ is a quotient of $M(\\lambda)$, every operator annihilating $M(\\lambda)$ annihilates the quotient, which gives the inclusion. If $M(\\lambda)$ is itself simple, then $L(\\lambda)\\cong M(\\lambda)$ and the annihilators coincide.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "prop-primitive-ideals-are-prime-in-the-noncommutative-sense",
+        "kind": "proposition",
+        "title": "Primitive ideals are prime in the noncommutative sense",
+        "deps": [
+          "def-primitive-ideal-of-an-enveloping-algebra",
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "def-simple-module",
+          "def-sum-and-product-of-ideals",
+          "thm-sum-and-product-of-ideals-are-ideals",
+          "def-left-right-and-two-sided-ideal"
+        ],
+        "statement": "Let $I$ be a primitive ideal of $U(\\mathfrak g)$ and let $A,B$ be two-sided ideals of $U(\\mathfrak g)$ with $AB\\subseteq I$. Then $A\\subseteq I$ or $B\\subseteq I$. The claim holds for every complex Lie algebra $\\mathfrak g$, and equivalently the quotient ring $U(\\mathfrak g)/I$ is prime.",
+        "strategy": "Choose a simple left module $M$ with $I=\\operatorname{Ann}M$. If $B\\not\\subseteq I$, then $BM\\neq0$, and $BM$ is a submodule of the simple module $M$, so $BM=M$. Then $AM=A(BM)=(AB)M\\subseteq IM=0$, hence $A\\subseteq\\operatorname{Ann}M=I$. Thus failure of $B\\subseteq I$ forces $A\\subseteq I$. Use the product of ideals and its closure under the usual operations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-dixmiers-lemma-for-countable-dimensional-algebras",
+        "kind": "lemma",
+        "title": "Dixmier's lemma: endomorphisms of a simple module over a countable-dimensional algebra",
+        "deps": [
+          "thm-schurs-lemma-for-modules",
+          "def-division-ring",
+          "def-simple-module",
+          "def-endomorphism-ring-of-a-module",
+          "def-countable",
+          "def-dimension",
+          "def-algebraic-and-transcendental-elements",
+          "cor-rational-function-field-as-a-fraction-field",
+          "thm-simple-transcendental-extension-is-rational-expressions-in-the-generator",
+          "def-field-of-fractions",
+          "thm-r-uncountable",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "def-universal-enveloping-algebra-as-a-tensor-quotient",
+          "thm-the-complex-numbers-are-algebraically-closed",
+          "def-complex-numbers-and-arithmetic",
+          "thm-product-of-countable",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "thm-n-cross-n-countable",
+          "lem-subset-of-countable"
+        ],
+        "statement": "Let $A$ be a unital $\\mathbb C$-algebra which admits a countable $\\mathbb C$-basis, and let $M$ be a simple left $A$-module. Then every $A$-endomorphism of $M$ is multiplication by a scalar: $\\operatorname{End}_A(M)=\\mathbb C\\cdot\\operatorname{id}_M$. Consequently the center $Z(A)$ acts on $M$ by scalars and there is a unital $\\mathbb C$-algebra homomorphism $\\chi\\colon Z(A)\\to\\mathbb C$ with $zm=\\chi(z)m$ for all $z\\in Z(A)$, $m\\in M$. In particular this applies to $A=U(\\mathfrak g)$ for a finite-dimensional complex Lie algebra $\\mathfrak g$.",
+        "strategy": "Schur's lemma makes $D=\\operatorname{End}_A(M)$ a division ring containing $\\mathbb C$. An element $x\\in D\\setminus\\mathbb C$ is transcendental over the algebraically closed field $\\mathbb C$: an algebraic element satisfies a split polynomial over $\\mathbb C$, and a product of nonzero factors in a division ring is nonzero. Hence $D$ contains the rational function field $\\mathbb C(x)$, in which the elements $1/(x-a)$, $a\\in\\mathbb C$, are $\\mathbb C$-linearly independent: a finite relation multiplied by $\\prod_i(x-a_i)$ and evaluated at $a_j$ isolates $c_j\\prod_{i\\neq j}(a_j-a_i)=0$. On the other hand, for $0\\neq v\\in M$ the evaluation map $D\\to M$, $T\\mapsto Tv$, is injective because $M=Av$ and $T=0$ on $v$ forces $T=0$; and $M$, as a quotient of the countable-dimensional space $A$, is a countable union of finite-dimensional subspaces, which cannot contain an uncountable linearly independent set. Therefore $D=\\mathbb C$. For $z\\in Z(A)$ the map $m\\mapsto zm$ is an $A$-endomorphism, hence a scalar $\\chi(z)$, and $\\chi$ is a unital algebra homomorphism because the module is nonzero. Use PBW to see that $U(\\mathfrak g)$ is countable-dimensional for finite-dimensional $\\mathfrak g$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-a-primitive-ideal-determines-a-central-character",
+        "kind": "proposition",
+        "title": "A primitive ideal determines a central character",
+        "deps": [
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "def-primitive-ideal-of-an-enveloping-algebra",
+          "def-central-character-of-a-lie-algebra-module",
+          "lem-dixmiers-lemma-for-countable-dimensional-algebras",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "def-prime-and-maximal-ideals",
+          "def-simple-module"
+        ],
+        "statement": "Let $\\mathfrak g$ be a finite-dimensional complex Lie algebra and let $I$ be a primitive ideal of $U(\\mathfrak g)$, say $I=\\operatorname{Ann}_{U(\\mathfrak g)}(M)$ with $M$ simple. Then $Z(U(\\mathfrak g))$ acts on $M$ by a central character $\\chi_I\\colon Z(U(\\mathfrak g))\\to\\mathbb C$, and $$I\\cap Z(U(\\mathfrak g))=\\ker\\chi_I.$$ In particular $I\\cap Z(U(\\mathfrak g))$ is a maximal ideal of the commutative algebra $Z(U(\\mathfrak g))$, and $U(\\mathfrak g)\\ker\\chi_I\\subseteq I$.",
+        "strategy": "Dixmier's lemma gives the central character: every central element acts on the simple module $M$ by a scalar, and the scalars assemble into a unital algebra homomorphism $\\chi_I$. If $z\\in I\\cap Z$, then $z$ acts as $0$ and as $\\chi_I(z)$, so $\\chi_I(z)=0$ because $M\\neq0$. Conversely, if $z\\in\\ker\\chi_I$, then $z$ acts as $0$ on $M$, so $z\\in I$. Hence $I\\cap Z=\\ker\\chi_I$. This ideal is maximal because $\\chi_I$ is a unital homomorphism onto the field $\\mathbb C$, so $Z/\\ker\\chi_I\\cong\\mathbb C$ is a field. Finally $z\\in\\ker\\chi_I$ lies in the two-sided ideal $I$, so the two-sided ideal $U(\\mathfrak g)\\ker\\chi_I$ is contained in $I$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-central-reduction-of-the-enveloping-algebra",
+        "kind": "definition",
+        "title": "The central reduction of the enveloping algebra at a central character",
+        "deps": [
+          "def-central-character-of-a-lie-algebra-module",
+          "def-sum-and-product-of-ideals",
+          "thm-sum-and-product-of-ideals-are-ideals",
+          "thm-quotient-ring-universal-property",
+          "def-left-right-and-two-sided-ideal",
+          "def-universal-enveloping-algebra-as-a-tensor-quotient"
+        ],
+        "statement": "Let $\\chi\\colon Z(U(\\mathfrak g))\\to\\mathbb C$ be a central character of $U(\\mathfrak g)$ and let $U(\\mathfrak g)\\ker\\chi$ be the two-sided ideal generated by the kernel of $\\chi$. The central reduction of $U(\\mathfrak g)$ at $\\chi$ is the quotient algebra $$U_\\chi:=U(\\mathfrak g)\\,/\\,U(\\mathfrak g)\\ker\\chi.$$ It is a unital associative $\\mathbb C$-algebra, the natural map $U(\\mathfrak g)\\to U_\\chi$ is a surjective algebra homomorphism with kernel $U(\\mathfrak g)\\ker\\chi$, the image of $Z(U(\\mathfrak g))$ in $U_\\chi$ is $\\mathbb C\\cdot1$, and for a $U(\\mathfrak g)$-module $M$ the following are equivalent: (i) $M$ has central character $\\chi$; (ii) $\\ker\\chi$ annihilates $M$; (iii) the action of $U(\\mathfrak g)$ on $M$ factors uniquely through $U_\\chi$. Thus the $U(\\mathfrak g)$-modules with central character $\\chi$ are exactly the $U_\\chi$-modules.",
+        "strategy": "Definitions plus the universal property of quotients. The ideal $U(\\mathfrak g)\\ker\\chi$ is two-sided because it is generated by a set of central elements. A module on which every $z-\\chi(z)$ acts by zero is the same as a module killed by $\\ker\\chi$, equivalently a module for the quotient; the factorization is unique because the quotient map is surjective. On the quotient, every central element acts by its scalar, so the image of the center is the scalars.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-verma-annihilator-contains-the-central-character-ideal",
+        "kind": "proposition",
+        "title": "The Verma annihilator contains the central-character ideal",
+        "deps": [
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "def-central-reduction-of-the-enveloping-algebra",
+          "def-central-character-of-a-lie-algebra-module",
+          "def-verma-module",
+          "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar",
+          "lem-harish-chandra-projection-computes-highest-weight-scalars",
+          "thm-verma-module-has-a-unique-simple-quotient",
+          "def-highest-weight-vector-and-cyclic-highest-weight-module"
+        ],
+        "statement": "Let $\\lambda\\in\\mathfrak h^*$, let $\\chi_\\lambda\\colon Z(U(\\mathfrak g))\\to\\mathbb C$ be the central character determined by $\\lambda$ through the Harish-Chandra projection, so that every $z\\in Z(U(\\mathfrak g))$ acts on the Verma module $M(\\lambda)$ by the scalar $\\chi_\\lambda(z)=\\operatorname{pr}(z)(\\lambda)$. Then $$U(\\mathfrak g)\\ker\\chi_\\lambda\\subseteq\\operatorname{Ann}_{U(\\mathfrak g)}M(\\lambda)\\subseteq\\operatorname{Ann}_{U(\\mathfrak g)}L(\\lambda)=I(\\lambda),$$ and every element of the two-sided ideal generated by $\\ker\\chi_\\lambda$ annihilates every cyclic highest-weight module of highest weight $\\lambda$.",
+        "strategy": "The central elements act on the cyclic highest-weight module $M(\\lambda)$ by scalars, and the Harish-Chandra projection computes the scalar as $\\operatorname{pr}(z)(\\lambda)=\\chi_\\lambda(z)$; hence $\\ker\\chi_\\lambda$ annihilates $M(\\lambda)$. Since an annihilator is a two-sided ideal, this gives $U(\\mathfrak g)\\ker\\chi_\\lambda\\subseteq\\operatorname{Ann}M(\\lambda)$. The second inclusion holds because $L(\\lambda)$ is a quotient of $M(\\lambda)$: an operator annihilating $M(\\lambda)$ annihilates every quotient.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-adjoint-action-preserves-the-associated-graded-of-a-two-sided-ideal",
+        "kind": "lemma",
+        "title": "The adjoint action preserves the associated graded of a two-sided ideal",
+        "deps": [
+          "def-pbw-filtration-by-tensor-degree-on-the-enveloping-algebra",
+          "prop-associated-graded-of-the-pbw-filtration-is-commutative",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "def-left-right-and-two-sided-ideal",
+          "def-derivation-of-a-lie-algebra"
+        ],
+        "statement": "Let $\\mathfrak g$ be a finite-dimensional complex Lie algebra with the PBW\nfiltration $F^nU(\\mathfrak g)$, $n\\ge0$, and the identification\n$\\operatorname{gr}U(\\mathfrak g)=S(\\mathfrak g)$. For every two-sided ideal\n$I\\subseteq U(\\mathfrak g)$ the associated graded subspace\n\n$$\\operatorname{gr}I=\\bigoplus_{n\\ge0}\\bigl(I\\cap F^nU(\\mathfrak g)\\bigr)\\big/\\bigl(I\\cap F^{n-1}U(\\mathfrak g)\\bigr)\\subseteq S(\\mathfrak g)$$\n\nis a graded ideal of $S(\\mathfrak g)$. Moreover, writing $D_x$ for the\nderivation of $S(\\mathfrak g)$ that extends the linear map\n$\\operatorname{ad}_x\\colon\\mathfrak g\\to\\mathfrak g$, $y\\mapsto[x,y]$\n([[def-derivation-of-a-lie-algebra]]), one has\n$D_x(\\operatorname{gr}I)\\subseteq\\operatorname{gr}I$ for every $x\\in\\mathfrak g$,\nand, with $\\sigma_n\\colon F^nU(\\mathfrak g)\\to F^nU(\\mathfrak g)/F^{n-1}U(\\mathfrak g)$ the degree-$n$ quotient map, the induced derivation satisfies:\n\n$$\\sigma_n(\\operatorname{ad}_xu)=D_x(\\sigma_n(u)),\\qquad \\operatorname{ad}_xu=xu-ux,$$\n\nfor every $n\\ge0$ and $u\\in F^nU(\\mathfrak g)$. If the commutator has degree less than $n$, its degree-$n$ symbol is zero.",
+        "strategy": "Use the degree-n quotient map sigma_n. The commutator preserves each PBW filtration level and the two-sided ideal; the induced graded derivation agrees on generators with D_x and hence agrees everywhere. Its invariance preserves gr I even when the commutator drops degree.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            },
+            {
+              "title": "D. A. Vogan, The orbit method and primitive ideals for semisimple Lie algebras (CMS Conf. Proc. 1986)",
+              "url": "https://math.mit.edu/~dav/vogan86CMS.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-associated-graded-variety-of-a-two-sided-ideal",
+        "kind": "definition",
+        "title": "The associated graded variety of a two-sided ideal",
+        "deps": [
+          "def-pbw-filtration-by-tensor-degree-on-the-enveloping-algebra",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "prop-associated-graded-of-the-pbw-filtration-is-commutative",
+          "def-left-right-and-two-sided-ideal",
+          "def-classical-affine-algebraic-set-with-empty-boundaries",
+          "def-classical-vanishing-ideal",
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+          "def-classical-affine-coordinate-ring"
+        ],
+        "statement": "Let $\\mathfrak g$ be a finite-dimensional complex Lie algebra and let $I\\subseteq U(\\mathfrak g)$ be a two-sided ideal. Its associated graded ideal is $\\operatorname{gr}I\\subseteq\\operatorname{gr}U(\\mathfrak g)=S(\\mathfrak g)$, and $S(\\mathfrak g)$ is identified with the polynomial functions on $\\mathfrak g^*$ via a chosen basis, so the associated variety of $I$ is the classical affine algebraic set $$\\mathcal V(I):=V(\\operatorname{gr}I)=\\{\\xi\\in\\mathfrak g^*:f(\\xi)=0\\text{ for every }f\\in\\operatorname{gr}I\\};$$ it is Zariski closed in $\\mathfrak g^*$. Since $\\operatorname{gr}I$ has no component in degree zero when $I$ is proper, $0\\in\\mathcal V(I)$; $\\mathcal V(I)=\\mathfrak g^*$ holds exactly for $I=0$, and $\\mathcal V(I)$ is the zero set of the homogeneous generators of $\\operatorname{gr}I$.",
+        "strategy": "Define $\\operatorname{gr}I$ by the induced filtration $(I\\cap F^nU(\\mathfrak g))_n$, transport the PBW identification $\\operatorname{gr}U(\\mathfrak g)=S(\\mathfrak g)$ and the polynomial-function model of the coordinate ring of $\\mathfrak g^*$, and apply the zero-locus construction for ideals in a polynomial ring. The membership of the origin is the vanishing of all positive-degree polynomials at $0$, and the case of the zero ideal is the definition of the empty set of equations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            },
+            {
+              "title": "D. A. Vogan, The orbit method and primitive ideals for semisimple Lie algebras (CMS Conf. Proc. 1986)",
+              "url": "https://math.mit.edu/~dav/vogan86CMS.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-associated-variety-of-a-primitive-ideal-is-conical-and-g-invariant",
+        "kind": "proposition",
+        "title": "The associated variety is a closed conical coadjoint-invariant cone",
+        "deps": [
+          "def-associated-graded-variety-of-a-two-sided-ideal",
+          "lem-adjoint-action-preserves-the-associated-graded-of-a-two-sided-ideal",
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+          "def-classical-affine-algebraic-set-with-empty-boundaries",
+          "lem-exponential-series-has-infinite-radius",
+          "cor-complex-power-series-sums-have-derivatives-of-all-orders",
+          "cor-complex-power-series-sums-are-analytic",
+          "thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition",
+          "thm-complex-analytic-functions-are-holomorphic",
+          "thm-taylor-expansion-holomorphic-function",
+          "thm-chain-rule-for-complex-derivatives",
+          "thm-algebra-of-complex-derivatives"
+        ],
+        "statement": "Let $\\mathfrak g$ be a finite-dimensional complex Lie algebra and let $I\\subseteq U(\\mathfrak g)$ be a two-sided ideal. Then $\\mathcal V(I)\\subseteq\\mathfrak g^*$ is a closed cone: for $\\xi\\in\\mathcal V(I)$ and $t\\in\\mathbb C$ one has $t\\xi\\in\\mathcal V(I)$. Moreover $\\mathcal V(I)$ is invariant under the coadjoint action: for every $x\\in\\mathfrak g$ and $\\xi\\in\\mathcal V(I)$ the curve $t\\mapsto\\xi\\circ e^{-t\\,\\operatorname{ad}_x}$ (the exponential of $-t\\operatorname{ad}_x$, a one-parameter subgroup of linear automorphisms of $\\mathfrak g^*$) stays inside $\\mathcal V(I)$. In particular the same conclusions hold for every primitive ideal.",
+        "strategy": "Gradedness of $\\operatorname{gr}I$ makes the zero set a cone: a polynomial relation vanishes on $t\\xi$ by homogeneity. For coadjoint invariance, let $D_x$ be the derivation of $S(\\mathfrak g)=\\mathbb C[\\mathfrak g^*]$ extending $\\operatorname{ad}_x$; it preserves $\\operatorname{gr}I$ by the preceding lemma. A finite-dimensional norm majorizes the matrix-exponential series by the scalar exponential series, so $p(t)=f(\\xi\\circ e^{-t\\operatorname{ad}_x})$ is entire; its derivatives at zero are $(-1)^k(D_x^kf)(\\xi)$ by termwise differentiation and the chain rule. These vanish because $D_x^kf\\in\\operatorname{gr}I$ and $\\xi\\in\\mathcal V(I)$, and the global Taylor theorem gives $p\\equiv0$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            },
+            {
+              "title": "D. A. Vogan, The orbit method and primitive ideals for semisimple Lie algebras (CMS Conf. Proc. 1986)",
+              "url": "https://math.mit.edu/~dav/vogan86CMS.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-every-central-character-of-the-enveloping-algebra-arises-from-a-weight",
+        "kind": "lemma",
+        "title": "Every central character of a semisimple enveloping algebra arises from a weight",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-central-character-of-a-lie-algebra-module",
+          "thm-chevalley-shephard-todd-for-finite-weyl-groups",
+          "thm-harish-chandra-isomorphism-for-the-center",
+          "cor-the-center-is-a-polynomial-algebra-of-rank-many-generators",
+          "lem-harish-chandra-projection-computes-highest-weight-scalars",
+          "lem-determinant-trick-for-nakayama",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "cor-affine-algebra-maximal-ideals-as-points-over-algebraically-closed-field",
+          "cor-central-characters-are-dot-weyl-orbits",
+          "def-harish-chandra-projection",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "def-prime-and-maximal-ideals",
+          "thm-the-complex-numbers-are-algebraically-closed"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\mathfrak g$ be a finite-dimensional complex\nsemisimple Lie algebra with Cartan subalgebra $\\mathfrak h$ and a fixed positive\nsystem. Then every unital $\\mathbb C$-algebra homomorphism\n$\\chi\\colon Z(U(\\mathfrak g))\\to\\mathbb C$ equals $\\chi_\\lambda$ for some\n$\\lambda\\in\\mathfrak h^*$, where $\\chi_\\lambda(z)=\\operatorname{pr}(z)(\\lambda)$;\nequivalently, the maximal ideals of $Z(U(\\mathfrak g))$ are exactly the kernels\n$\\ker\\chi_\\lambda$, and $\\lambda\\mapsto\\ker\\chi_\\lambda$ induces a bijection\n$\\mathfrak h^*/W\\to\\operatorname{Max}Z(U(\\mathfrak g))$, so that\n$\\chi_\\lambda=\\chi_\\mu$ if and only if $\\mu\\in W\\cdot\\lambda$. Here $w\\cdot\\lambda=w(\\lambda+\\rho)-\\rho$, and $\\mathfrak h^*/W$ denotes the quotient for this dot action.",
+        "strategy": "Compose $\\chi$ with the inverse of the Harish-Chandra isomorphism to get a unital homomorphism $\\psi\\colon S(\\mathfrak h)^W\\to\\mathbb C$; its kernel is maximal. By Chevalley-Shephard-Todd, $S(\\mathfrak h)$ is a free, hence finite, module over the polynomial algebra $S(\\mathfrak h)^W$. The determinant trick shows that $(\\ker\\psi)S(\\mathfrak h)\\neq S(\\mathfrak h)$: otherwise $(1-a)S(\\mathfrak h)=0$ for some $a\\in\\ker\\psi$, forcing $a=1$. Under Choice a maximal ideal $\\mathfrak n$ of $S(\\mathfrak h)$ contains $(\\ker\\psi)S(\\mathfrak h)$, and $S(\\mathfrak h)/\\mathfrak n$ is a finite-dimensional field extension of $S(\\mathfrak h)^W/\\ker\\psi\\cong\\mathbb C$, hence equals $\\mathbb C$; the composite $S(\\mathfrak h)\\to\\mathbb C$ extends $\\psi$ and is evaluation at some $\\lambda\\in\\mathfrak h^*$. Then $\\chi(z)=\\psi(HC_\\rho(z))=HC_\\rho(z)(\\lambda)=\\operatorname{pr}(z)(\\lambda-\\rho)$ in the shifted convention, which is $\\chi_{\\lambda-\\rho}(z)$; for the bijection statement, every maximal ideal of $Z(U(\\mathfrak g))$ is the kernel of a unital homomorphism to $\\mathbb C$ because $Z(U(\\mathfrak g))$ is an affine $\\mathbb C$-algebra and $\\mathbb C$ is algebraically closed, and the preceding paragraph identifies these kernels with the $\\chi_\\lambda$; injectivity on $W$-orbits is the published orbit theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-primitive-ideals-are-partitioned-by-dot-orbit-central-character",
+        "kind": "corollary",
+        "title": "Primitive ideals are partitioned by dot-orbit central characters",
+        "deps": [
+          "prop-a-primitive-ideal-determines-a-central-character",
+          "lem-every-central-character-of-the-enveloping-algebra-arises-from-a-weight",
+          "cor-central-characters-are-dot-weyl-orbits",
+          "def-axiom-of-choice",
+          "def-central-character-of-a-lie-algebra-module",
+          "def-primitive-ideal-of-an-enveloping-algebra"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra with Cartan subalgebra $\\mathfrak h$ and a fixed positive system. If $I$ is a primitive ideal of $U(\\mathfrak g)$, then $I\\cap Z(U(\\mathfrak g))=\\ker\\chi_I$ for a unique central character $\\chi_I$, and there is a unique dot-Weyl orbit $W\\cdot\\lambda\\subseteq\\mathfrak h^*$ with $\\chi_I=\\chi_\\lambda$; this orbit is determined by $I$ alone. Consequently, for primitive ideals $I,J$: $I\\cap Z=J\\cap Z$ if and only if $\\chi_I=\\chi_J$, if and only if $W\\cdot\\lambda=W\\cdot\\mu$ for any $\\lambda,\\mu$ with $\\chi_\\lambda=\\chi_I$ and $\\chi_\\mu=\\chi_J$. Thus the primitive ideals are partitioned by their central characters, and the central character of a primitive ideal is exactly a dot-Weyl orbit under the Harish-Chandra isomorphism.",
+        "strategy": "Apply the primitive-central-character proposition to write $I\\cap Z=\\ker\\chi_I$; a central character is determined by its kernel, so $\\chi_I$ is unique. The parametrization lemma produces $\\lambda$ with $\\chi_I=\\chi_\\lambda$, and the published orbit theorem gives $\\chi_\\lambda=\\chi_\\mu$ exactly on the dot orbit $W\\cdot\\lambda$, which therefore is independent of the choice of $\\lambda$ and depends only on $I$. The stated equivalences follow.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters",
+        "kind": "lemma",
+        "title": "The central reduction of U(sl2) is simple away from the finite-dimensional central characters",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-central-reduction-of-the-enveloping-algebra",
+          "def-central-character-of-a-lie-algebra-module",
+          "def-pbw-filtration-by-tensor-degree-on-the-enveloping-algebra",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "prop-associated-graded-of-the-pbw-filtration-is-commutative",
+          "def-special-linear-lie-algebra-sl-two",
+          "prop-casimir-eigenvalue-on-a-highest-weight-module",
+          "def-verma-module",
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "cor-polynomial-ring-over-a-field-is-euclidean",
+          "thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights",
+          "cor-verma-irreducibility-criterion-from-shapovalov-determinants",
+          "def-quadratic-casimir-element",
+          "def-killing-form-of-a-semisimple-lie-algebra",
+          "lem-adjoint-action-preserves-the-associated-graded-of-a-two-sided-ideal",
+          "thm-symmetric-invariants-restrict-to-weyl-invariants",
+          "def-root-reflections-and-the-weyl-group-action",
+          "def-cartan-subalgebra-of-a-lie-algebra",
+          "def-normalizer-of-a-lie-subalgebra",
+          "def-root-and-root-space-relative-to-a-cartan-subalgebra",
+          "thm-the-complex-numbers-are-algebraically-closed"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\mathfrak g=\\mathfrak{sl}_2(\\mathbb C)$ with standard basis $e,f,h$, Casimir element $\\Omega$, and center $Z(U(\\mathfrak g))=\\mathbb C[\\Omega]$. Let $\\chi$ be a central character, determined by the scalar $\\chi(\\Omega)$. Then the central reduction $U_\\chi$ is a simple ring if and only if $\\chi$ is not the central character of any nonzero finite-dimensional $U(\\mathfrak g)$-module, equivalently if and only if $\\chi(\\Omega)$ is not the eigenvalue of $\\Omega$ on any finite-dimensional simple module $L(n)$, $n\\ge0$ (these eigenvalues are pairwise distinct). When $U_\\chi$ is simple, every nonzero $U(\\mathfrak g)$-module with central character $\\chi$ is faithful over $U_\\chi$, every Verma module $M(\\lambda)$ with $\\chi_\\lambda=\\chi$ is simple, and $\\operatorname{Ann}_{U(\\mathfrak g)}M(\\lambda)=U(\\mathfrak g)\\ker\\chi$.",
+        "strategy": "First normalize the library Casimir by the local Killing-form calculation: Ω=ef+fe+½h²=4C. The line ℂh is Cartan by the bracket relations; its roots are ±α with α(h)=2, so the Weyl reflection acts by sign and S(h)^W=ℂ[h²]. Chevalley restriction and the PBW symbol of C show that σ(C) generates S(g)^g. The graded-adjoint lemma makes σ(z) invariant for every central z; homogeneity makes it a scalar multiple of σ(C)^k, and subtracting the same multiple of C^k lowers PBW degree. Induction proves Z(U(sl2))=ℂ[C]=ℂ[Ω]. In U_χ, write fe=p(h)=-¼(h²+2h-2c) and ef=q(h)=p(h-2). The PBW quotient has Hilbert function 2d+1; degree counting and the generator actions give the normal-form basis {f^i h^a} and {e^j h^a}, so U_χ is infinite-dimensional. Any nonzero two-sided ideal contains a weight vector and hence a nonzero polynomial in h; a least-degree generator P satisfies the two commutator divisibilities. At a root of P, the divisibilities force the last roots of the upward and downward 2-step chains to be roots of p and q. If t^2=1+2c is not an integer square, the terminal-root constraints contradict each other (including t=0), leaving P constant by algebraic closedness of C. If t is a nonzero integer, c=n(n+2)/2 for n=|t|-1 and L(n) gives a nonzero proper kernel in the infinite-dimensional U_χ. Conversely, any nonzero finite-dimensional module with central character χ has a simple submodule, necessarily some L(n), so its central scalar is n(n+2)/2. This proves the simplicity criterion. Simplicity then gives faithfulness of every nonzero U_χ-module; the Verma irreducibility criterion and quotient-kernel description give the final Verma and annihilator claims.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Gaddis, The Weyl algebra and its friends: a survey (arXiv:2305.01609)",
+              "url": "https://arxiv.org/pdf/2305.01609"
+            },
+            {
+              "title": "R. E. Block, The irreducible representations of the Lie algebra sl(2) and of the Weyl algebra, Adv. Math. 39 (1981) 69-110",
+              "url": "https://mathdept.ucr.edu/sites/default/files/2019-11/Block%20AdvMath%201981.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "rem-highest-weights-can-have-the-same-primitive-ideal",
+        "kind": "remark",
+        "title": "Highest weights can have the same primitive ideal",
+        "deps": [
+          "prop-annihilators-of-simple-highest-weight-modules-are-primitive",
+          "def-primitive-ideal-of-an-enveloping-algebra",
+          "def-annihilator-ideal-of-a-lie-algebra-module"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and let $\\mathfrak g$ be finite-dimensional complex semisimple. The assignment $\\lambda\\mapsto I(\\lambda)=\\operatorname{Ann}_{U(\\mathfrak g)}L(\\lambda)$\nfrom weights to primitive ideals ([[prop-annihilators-of-simple-highest-weight-modules-are-primitive]],\n[[def-primitive-ideal-of-an-enveloping-algebra]],\n[[def-annihilator-ideal-of-a-lie-algebra-module]]) is not injective in general,\nand a fixed central character can carry more than one primitive ideal;\ndescribing the fibres of this map is the content of Joseph's theory of Goldie\nrank polynomials and of Kazhdan-Lusztig cell theory, which is not part of the\nalgebraic prefix on this page. For noninjectivity, already in $\\mathfrak{sl}_2$ the distinct weights $1/2$ and $-5/2$ have normalized Casimir value $5/8$, which is not $n(n+2)/2$ for any integer $n\\ge0$: those values are $0$ for $n=0$ and at least $3/2$ for $n\\ge1$. By [[lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters]], both Verma modules are simple and have the same annihilator, namely the central ideal. In contrast, the\ntrivial central character carries the distinct primitive ideals\n$\\operatorname{Ann}L(0)$ and $\\operatorname{Ann}L(-2)$ — the annihilators of\nthe trivial module and of the simple Verma module $M(-2)=L(-2)$ — so Duflo's\nsurjectivity is not a bijection between weights and primitive ideals.",
+        "strategy": "Record the boundary: cite the non-uniqueness note that accompanies the classification statement, and the fibre description by character polynomials. No proof is asserted here; the remark prevents overstatement of the surjectivity theorem as a bijection.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 510.02,
+    "id": "primitive-ideals-and-duflo-theorem-examples",
+    "kind": "B",
+    "category": "lie-theory",
+    "title": "Primitive Ideals and Duflo Theorem — Examples",
+    "companion": "primitive-ideals-and-duflo-theorem",
+    "requires": [
+      "primitive-ideals-and-duflo-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-primitive-ideals-of-usl2-at-a-generic-central-character",
+        "kind": "example",
+        "title": "Primitive ideals of U(sl2) at a generic central character",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters",
+          "def-central-reduction-of-the-enveloping-algebra",
+          "prop-verma-annihilator-contains-the-central-character-ideal",
+          "prop-annihilators-of-simple-highest-weight-modules-are-primitive",
+          "prop-a-primitive-ideal-determines-a-central-character",
+          "def-central-character-of-a-lie-algebra-module",
+          "def-verma-module",
+          "def-primitive-ideal-of-an-enveloping-algebra",
+          "def-special-linear-lie-algebra-sl-two",
+          "prop-casimir-eigenvalue-on-a-highest-weight-module",
+          "def-left-right-and-two-sided-ideal"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\mathfrak g=\\mathfrak{sl}_2(\\mathbb C)$ and let $\\chi$ be a central character which is not the central character of any nonzero finite-dimensional $U(\\mathfrak g)$-module. Then the central reduction $U_\\chi$ is a simple ring, and the unique primitive ideal of $U(\\mathfrak g)$ with central character $\\chi$ is $U(\\mathfrak g)\\ker\\chi$: for every $\\lambda\\in\\mathfrak h^*$ with $\\chi_\\lambda=\\chi$ the Verma module $M(\\lambda)$ is simple and $$\\operatorname{Ann}_{U(\\mathfrak g)}M(\\lambda)=U(\\mathfrak g)\\ker\\chi,$$ so the annihilator is generated by the Casimir relation $\\Omega-\\chi(\\Omega)$ alone. This is the smallest instance of a Duflo annihilator: over a generic central character the primitive ideal is exactly the unavoidable central ideal.",
+        "strategy": "The Axiom of Choice is inherited from [[lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters]]. By the simplicity lemma for the $\\mathfrak{sl}_2$ central reduction, $U_\\chi$ has no nonzero proper two-sided ideal. For any primitive ideal $I$ with central character $\\chi$, the primitive-central-character proposition gives $I\\cap Z=\\ker\\chi$, so $U(\\mathfrak g)\\ker\\chi\\subseteq I$; the image of $I$ in the simple ring $U_\\chi$ is a two-sided ideal, hence $0$ or $U_\\chi$, and it is not $U_\\chi$ because $I$ is proper; therefore $I=U(\\mathfrak g)\\ker\\chi$. For $\\lambda$ with $\\chi_\\lambda=\\chi$, the Verma module $M(\\lambda)$ is simple by the simplicity lemma, so $L(\\lambda)=M(\\lambda)$, and the annihilator contains $U(\\mathfrak g)\\ker\\chi$; it equals it because $U_\\chi$ acts faithfully on the nonzero module $M(\\lambda)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "J. Gaddis, The Weyl algebra and its friends: a survey (arXiv:2305.01609)",
+              "url": "https://arxiv.org/pdf/2305.01609"
+            },
+            {
+              "title": "R. E. Block, The irreducible representations of the Lie algebra sl(2) and of the Weyl algebra, Adv. Math. 39 (1981) 69-110",
+              "url": "https://mathdept.ucr.edu/sites/default/files/2019-11/Block%20AdvMath%201981.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-annihilator-of-the-trivial-sl2-module",
+        "kind": "example",
+        "title": "The annihilator of the trivial sl(2)-module",
+        "deps": [
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "def-primitive-ideal-of-an-enveloping-algebra",
+          "prop-verma-annihilator-contains-the-central-character-ideal",
+          "prop-a-primitive-ideal-determines-a-central-character",
+          "def-central-character-of-a-lie-algebra-module",
+          "def-special-linear-lie-algebra-sl-two",
+          "def-verma-module",
+          "prop-casimir-eigenvalue-on-a-highest-weight-module",
+          "cor-verma-irreducibility-criterion-from-shapovalov-determinants",
+          "def-highest-weight-vector-and-cyclic-highest-weight-module",
+          "def-axiom-of-choice",
+          "cor-the-center-is-a-polynomial-algebra-of-rank-many-generators",
+          "lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\mathfrak g=\\mathfrak{sl}_2(\\mathbb C)$ with\nstandard basis $e,f,h$ and Casimir element $\\Omega$, so that\n$Z(U(\\mathfrak g))=\\mathbb C[\\Omega]$. The annihilator of the trivial module $\\mathbb C$ is\nthe augmentation ideal\n$\\operatorname{Ann}_{U(\\mathfrak g)}\\mathbb C=U(\\mathfrak g)\\mathfrak g=(e,f,h)$,\nthe two-sided ideal generated by $\\mathfrak g$; it is a primitive ideal whose\ncentral character $\\chi_0$ is the one with $\\chi_0(\\Omega)=0$, and\n$\\operatorname{Ann}_{U(\\mathfrak g)}\\mathbb C\\cap Z(U(\\mathfrak g))=(\\Omega)$ is\na maximal ideal of $Z(U(\\mathfrak g))$. The central ideal\n$U(\\mathfrak g)\\ker\\chi_0=(\\Omega)U(\\mathfrak g)$ is strictly smaller than the\nannihilator: the highest vector of the simple Verma module $M(-2)$ is an\neigenvector of $h$ with eigenvalue $-2$, so $h\\in\\operatorname{Ann}\\mathbb C$\nbut $h\\notin(\\Omega)U(\\mathfrak g)$. Thus at the trivial central character the\nannihilator of the trivial module is not generated by the Casimir relation.",
+        "strategy": "The trivial module acts by the augmentation $\\varepsilon\\colon U(\\mathfrak g)\\to\\mathbb C$, so its kernel is the augmentation ideal, generated by $\\mathfrak g$. The central character sends $\\Omega$ to the Casimir eigenvalue of the trivial module, which is $0$, so $\\ker\\chi_0=(\\Omega)$ in $Z(U(\\mathfrak g))=\\mathbb C[\\Omega]$. Since $h$ acts by $0$ on $\\mathbb C$ but by $-2$ on the highest vector of the simple Verma module $M(-2)$, the two-sided ideal $(\\Omega)U(\\mathfrak g)$ does not contain $h$; here $M(-2)$ is a module with central character $\\chi_0$, and $(\\Omega)U(\\mathfrak g)$ annihilates it by the Verma central-character proposition, while $h$ does not.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "R. E. Block, The irreducible representations of the Lie algebra sl(2) and of the Weyl algebra, Adv. Math. 39 (1981) 69-110",
+              "url": "https://mathdept.ucr.edu/sites/default/files/2019-11/Block%20AdvMath%201981.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-associated-variety-of-a-finite-dimensional-simple-annihilator",
+        "kind": "example",
+        "title": "The associated variety of a finite-dimensional simple annihilator is the origin",
+        "deps": [
+          "def-associated-graded-variety-of-a-two-sided-ideal",
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights",
+          "def-pbw-filtration-by-tensor-degree-on-the-enveloping-algebra",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+          "thm-cayley-hamilton",
+          "def-polynomial-evaluation-at-an-endomorphism"
+        ],
+        "statement": "Let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra and let\n$L(\\lambda)$ be a finite-dimensional simple $U(\\mathfrak g)$-module, with\n$\\lambda$ dominant integral. Then\n$I(\\lambda)=\\operatorname{Ann}_{U(\\mathfrak g)}L(\\lambda)$ has finite codimension\nin $U(\\mathfrak g)$, and its associated variety is the origin:\n\n$$\\mathcal V(I(\\lambda))=\\{0\\}\\subseteq\\mathfrak g^*.$$ Indeed, with $d=\\dim_{\\mathbb C}L(\\lambda)$, Cayley-Hamilton shows that for every $y\\in\\mathfrak g$ the power $y^d$ is the symbol of an element of $I(\\lambda)$, so $\\operatorname{gr}I(\\lambda)$ contains the $d$-th powers of all of $\\mathfrak g$. Over $\\mathbb C$, the polarization identity shows that these pure $d$-th powers span $S^d(\\mathfrak g)$: for $y_1,\\ldots,y_d\\in\\mathfrak g$, $$d!\\,y_1\\cdots y_d=\\sum_{J\\subseteq\\{1,\\ldots,d\\}}(-1)^{d-|J|} \\left(\\sum_{j\\in J}y_j\\right)^d.$$\nSince $\\operatorname{gr}I(\\lambda)$ is an\nideal in $S(\\mathfrak g)$, it contains every $S^k(\\mathfrak g)$ for $k\\ge d$.\nIts zero set is therefore $\\{0\\}$; equivalently, every point $\\xi$ in it\nsatisfies $\\xi(y)^d=0$ for all $y\\in\\mathfrak g$. The finite-dimensionality\nof $L(\\lambda)$ is essential here. Infinite-dimensional (Verma-type)\nannihilators behave differently: their associated varieties need not be\n$\\{0\\}$, and on this page no positive-dimensionality statement about them is\nasserted.",
+        "strategy": "The action quotient $U(\\mathfrak g)/I(\\lambda)$ embeds in the finite-dimensional algebra $\\operatorname{End}_{\\mathbb C}L(\\lambda)$, so it has finite codimension. Put $d=\\dim L(\\lambda)$. For each $y\\in\\mathfrak g$, Cayley--Hamilton for the action of $y$ gives a monic degree-$d$ relation $p_y(y)\\in I(\\lambda)$ whose leading PBW symbol is $y^d$; hence $y^d\\in\\operatorname{gr}I(\\lambda)$. Polarization over $\\mathbb C$ shows that these powers span $S^d(\\mathfrak g)$, and the ideal property of $\\operatorname{gr}I(\\lambda)$ then gives $S^k(\\mathfrak g)\\subseteq\\operatorname{gr}I(\\lambda)$ for every $k\\ge d$. Thus every point of the associated variety satisfies $\\xi(y)^d=0$ for every $y\\in\\mathfrak g$, so it is the origin; conversely, properness of $I(\\lambda)$ puts the origin in the variety. Finite codimension does not imply $F_nU(\\mathfrak g)\\subseteq I(\\lambda)$ for large $n$; the Cayley--Hamilton argument supplies the needed graded statement directly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Barbasch, Cells in Weyl groups and primitive ideals (AIM workshop notes, 2006)",
+              "url": "http://www.liegroups.org/papers/summer06/cells.pdf"
+            },
+            {
+              "title": "D. A. Vogan, The orbit method and primitive ideals for semisimple Lie algebras (CMS Conf. Proc. 1986)",
+              "url": "https://math.mit.edu/~dav/vogan86CMS.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-an-intersection-of-two-primitive-ideals-need-not-be-primitive",
+        "kind": "counterexample",
+        "title": "An intersection of two primitive ideals need not be primitive",
+        "deps": [
+          "prop-a-primitive-ideal-determines-a-central-character",
+          "prop-annihilators-of-simple-highest-weight-modules-are-primitive",
+          "def-primitive-ideal-of-an-enveloping-algebra",
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "def-special-linear-lie-algebra-sl-two",
+          "thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights",
+          "prop-casimir-eigenvalue-on-a-highest-weight-module",
+          "def-prime-and-maximal-ideals",
+          "def-central-character-of-a-lie-algebra-module"
+        ],
+        "statement": "In $U(\\mathfrak{sl}_2(\\mathbb C))$ the ideals $I_0=\\operatorname{Ann}L(0)$ (the trivial module) and $I_1=\\operatorname{Ann}L(1)$ (the two-dimensional standard module) are primitive, but their intersection $I_0\\cap I_1$ is not primitive. Hence the set of primitive ideals is not closed under finite intersections, and the central-character criterion detects this: $(I_0\\cap I_1)\\cap Z(U(\\mathfrak g))=\\ker\\chi_0\\cap\\ker\\chi_1$ is not a maximal ideal.",
+        "strategy": "Both annihilators are primitive by the annihilator proposition. Their central intersections are $I_j\\cap Z=\\ker\\chi_j$ by the primitive-central-character proposition, and $\\chi_0\\neq\\chi_1$ because the Casimir eigenvalues of $L(0)$ and $L(1)$ differ. Intersecting the two maximal ideals gives $(I_0\\cap I_1)\\cap Z=\\ker\\chi_0\\cap\\ker\\chi_1$, which is strictly contained in the maximal ideal $\\ker\\chi_0$ and hence is not maximal. By the primitive-central-character proposition a primitive ideal has maximal central intersection, so $I_0\\cap I_1$ is not primitive.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": []
+        },
+        "dependency_level": 3,
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-the-central-character-does-not-determine-the-primitive-ideal",
+        "kind": "counterexample",
+        "title": "The central character does not determine the primitive ideal",
+        "deps": [
+          "prop-annihilators-of-simple-highest-weight-modules-are-primitive",
+          "def-primitive-ideal-of-an-enveloping-algebra",
+          "def-annihilator-ideal-of-a-lie-algebra-module",
+          "cor-antidominant-verma-modules-are-simple",
+          "def-axiom-of-choice",
+          "def-special-linear-lie-algebra-sl-two",
+          "def-verma-module",
+          "prop-casimir-eigenvalue-on-a-highest-weight-module",
+          "thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights",
+          "prop-weights-of-a-verma-module-lie-below-lambda",
+          "cor-central-characters-are-dot-weyl-orbits",
+          "lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters"
+        ],
+        "statement": "Assume the Axiom of Choice. In $U(\\mathfrak{sl}_2(\\mathbb C))$, for every integer $n\\ge0$ the primitive ideals $I(n)=\\operatorname{Ann}L(n)$ and $J(n)=\\operatorname{Ann}M(-n-2)$ are distinct, although $L(n)$ and the simple Verma module $M(-n-2)$ have the same central character $\\chi_n=\\chi_{-n-2}$. Thus a central character does not determine a unique primitive ideal over it: for $n\\ge0$ the fibre of the central-character map on primitive ideals has at least two points, and the assignment $\\lambda\\mapsto\\operatorname{Ann}L(\\lambda)$ is not injective. In particular the fibre over the regular integral central character $\\chi_0$ already has two points.",
+        "strategy": "Assume equality of the annihilators of L(n) and the simple M(-n-2). The quotient algebra embeds into End_C L(n), so images of its finite basis span the cyclic simple Verma module, contradicting its distinct nonzero weights -n-2-2k. AC is carried from antidominant simplicity and dot-orbit equality. Separately, weights 1/2 and -5/2 have normalized Casimir value 5/8 and identical central-ideal annihilators by the generic simplicity lemma; this proves noninjectivity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757, MIT OCW 2023 full notes)",
+              "url": "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+            },
+            {
+              "title": "R. E. Block, The irreducible representations of the Lie algebra sl(2) and of the Weyl algebra, Adv. Math. 39 (1981) 69-110",
+              "url": "https://mathdept.ucr.edu/sites/default/files/2019-11/Block%20AdvMath%201981.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  }
+]

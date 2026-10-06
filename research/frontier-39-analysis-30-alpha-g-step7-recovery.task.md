@@ -1,0 +1,202 @@
+# Step 7 adjudication — group **g**, run `frontier-39-analysis-30`
+
+You are the group Alpha for batches **12**, **14**, **24**: 3 A/B pair(s), 6 page(s), 90 item(s), 0 open rejection(s) over 0 item(s).
+
+This is a fresh adjudication context. The durable digest below carries the
+findings from the rejection-blind whole-group reading at step 6 without
+replaying that reader's transcript. Nothing from step 3, step 5, or another
+group is assumed.
+Everything below is
+derived from disk by `tools/step7-scope.mjs`; no line of it is a judgement
+about mathematics.
+
+## What you recorded at step 6
+
+**No step-6 digest exists for this group.** The reading half did not run or did
+not produce one, so you are meeting this mathematics for the first time with the
+rejections already in front of you. Read the pages before the verdicts anyway —
+the order matters more than where the notes came from.
+
+## Read scope, write scope
+
+**Audit and repair one item at a time. Inspect related items first only when necessary.** `items/` holds every published item and
+every item this run has built, and your sandbox is the repository root. Open
+anything a rejection touches — a published dependency, another group's page,
+a definition three levels down. Adjudicating a citation objection without
+opening the cited item is exactly what the refuter rule forbids.
+
+**You may write only inside your own group.** A `confirmed_fatal` licenses a
+repair to an item in the batches listed above. If a rejection's real defect
+lies in an item owned by another group, do not repair it: record the finding
+in `research/frontier-39-analysis-30-step7-cross-group.jsonl` as
+`{from_group, item, owning_group, finding, severity, source_rejection:{id,model,context_sha256}}`
+and adjudicate your own rejection on what is true. The source tuple is
+provenance only; it cannot license a repair to the target. The gate routes a
+stable alert to the owning group, and a finding nobody answers fails the stage.
+
+## Your pages
+
+| batch | page | kind | category | order | requires |
+|---|---|---|---|---|---|
+| 12 | `interior-and-boundary-sobolev-elliptic-regularity` | A | pde | 458.033 | `fredholm-elliptic-problems-and-the-elliptic-spectrum` |
+| 12 | `interior-and-boundary-sobolev-elliptic-regularity-examples` | B | pde | 458.034 | `interior-and-boundary-sobolev-elliptic-regularity`, `conformal-mapping-branches-and-the-schwarz-lemma` |
+| 14 | `weak-elliptic-maximum-principles-and-holder-regularity` | A | pde | 458.037 | `schauder-and-lp-elliptic-estimates`, `interior-and-boundary-sobolev-elliptic-regularity` |
+| 14 | `weak-elliptic-maximum-principles-and-holder-regularity-examples` | B | pde | 458.038 | `weak-elliptic-maximum-principles-and-holder-regularity` |
+| 24 | `primitive-ideals-and-duflo-theorem` | A | lie-theory | 510.019 | `harish-chandra-isomorphism-casimir-and-central-characters`, `verma-modules-and-shapovalov-forms`, `homomorphisms-between-verma-modules-and-linkage`, `category-o-finiteness-duality-and-blocks`, `projectives-standard-filtrations-and-bgg-reciprocity`, `lie-algebra-representations-enveloping-algebras-and-pbw`, `classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface` |
+| 24 | `primitive-ideals-and-duflo-theorem-examples` | B | lie-theory | 510.02 | `primitive-ideals-and-duflo-theorem` |
+
+## Your content, in full
+
+Every item you own. This is the inventory, not the mathematics — open the
+files under `items/` for that.
+
+### `interior-and-boundary-sobolev-elliptic-regularity` — Interior and Boundary Sobolev Elliptic Regularity (29 item(s))
+
+- `def-first-difference-quotient` · definition — Difference quotients on a shrunken domain
+- `lem-difference-quotient-integration-by-parts` · lemma — Difference-quotient calculus: integration by parts, product rule, commutation
+- `lem-cutoff-difference-quotient-commutator-estimate` · lemma — The cutoff difference-quotient commutator estimate
+- `lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative` · lemma — Uniformly bounded difference quotients represent a weak derivative
+- `thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one` · theorem — The difference-quotient characterisation of $W^{1,p}$ for $1<p<\infty$
+- `rem-the-p-one-difference-quotient-converse-leads-to-bv-not-w-one-one` · remark — At $p=1$ uniform difference-quotient bounds give only a measure derivative
+- `def-local-weak-solution-for-a-divergence-form-operator` · definition — Local weak solutions of a divergence-form operator
+- `thm-caccioppoli-inequality-for-weak-elliptic-solutions` · theorem — The Caccioppoli inequality for weak elliptic solutions
+- `cor-scaled-caccioppoli-inequality-on-concentric-balls` · corollary — Scaled Caccioppoli inequality on concentric balls
+- `lem-tangential-difference-quotient-test-function` · lemma — The difference-quotient test function and its commutators
+- `lem-localisation-identity-for-a-divergence-form-weak-solution` · lemma — Localisation of a weak solution up to a bounded first-order term
+- `lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates` · lemma — Absorption of lower-order Sobolev terms in the elliptic estimate
+- `thm-interior-h-two-estimate-for-constant-coefficient-elliptic-equations` · theorem — Interior $H^2$ estimate for constant-coefficient elliptic equations
+- `lem-weak-equation-for-a-first-derivative-includes-coefficient-commutators` · lemma — The differentiated weak equation with coefficient commutators
+- `thm-interior-h-two-regularity-for-divergence-form-equations` · theorem — Interior $H^2$ regularity for divergence-form equations
+- `lem-nested-domain-induction-for-interior-elliptic-derivatives` · lemma — Nested-domain induction for interior elliptic derivatives
+- `thm-interior-h-k-plus-two-elliptic-regularity` · theorem — Interior $H^{k+2}$ elliptic regularity
+- `cor-smooth-data-give-smooth-interior-solutions` · corollary — Smooth data give smooth interior solutions
+- `lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts` · lemma — Weak divergence-form equations are invariant under $C^2$ boundary charts
+- `lem-c-two-boundary-flattening-transforms-uniform-ellipticity` · lemma — $C^2$ flattening preserves uniform ellipticity quantitatively
+- `lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary` · lemma — Tangential $H^2$ estimate near a flat Dirichlet boundary
+- `lem-normal-second-derivative-recovered-from-the-elliptic-equation` · lemma — The normal second derivative is recovered from the equation
+- `lem-finite-boundary-and-interior-partition-glues-local-h-two-estimates` · lemma — A finite partition glues the local interior and boundary $H^2$ estimates
+- `thm-global-h-two-dirichlet-regularity` · theorem — Global $H^2$ Dirichlet regularity
+- `cor-global-h-two-estimate-without-the-ltwo-term-under-uniqueness` · corollary — The global $H^2$ estimate without the $L^2$ term under uniqueness
+- `thm-higher-order-boundary-regularity-for-dirichlet-problems` · theorem — Higher-order boundary regularity for Dirichlet problems
+- `cor-smooth-weak-dirichlet-solutions-are-classical` · corollary — Smooth weak Dirichlet solutions are classical
+- `cor-smooth-coefficients-and-boundary-make-elliptic-eigenfunctions-smooth` · corollary — Smooth coefficients and boundary make elliptic eigenfunctions smooth
+- `rem-regularity-estimates-do-not-create-boundary-compatibility` · remark — Regularity estimates do not create boundary compatibility
+
+### `interior-and-boundary-sobolev-elliptic-regularity-examples` — Interior and Boundary Sobolev Elliptic Regularity — Examples (10 item(s))
+
+- `ex-poisson-equation-with-ltwo-data-gains-two-interior-derivatives` · example — Poisson's equation with $L^2$ data gains two interior derivatives
+- `ex-piecewise-smooth-coefficient-produces-limited-regularity` · example — A piecewise-smooth coefficient gives an $H^2$ solution that is not twice classically differentiable
+- `cex-interior-regularity-does-not-imply-boundary-regularity` · counterexample — Interior regularity does not imply boundary regularity
+- `cex-boundary-h-two-regularity-needs-domain-regularity` · counterexample — Boundary $H^2$ regularity needs domain regularity
+- `cex-h-two-estimate-needs-an-ltwo-kernel-term-without-injectivity` · counterexample — The $H^2$ estimate needs the $L^2$ kernel term without injectivity
+- `ex-bootstrapping-a-smooth-poisson-problem` · example — Bootstrapping a smooth Poisson problem
+- `cex-bounded-discontinuous-elliptic-coefficients-do-not-force-h-two-regularity` · counterexample — Bounded discontinuous elliptic coefficients need not give $H^2$ solutions
+- `ex-reentrant-sector-harmonic-singularity-has-explicit-sobolev-threshold` · example — The reentrant sector singularity has an explicit Sobolev threshold
+- `cex-higher-elliptic-regularity-cannot-exceed-the-forcing-regularity-by-more-than-two-derivatives` · counterexample — Higher elliptic regularity cannot gain more than two derivatives
+- `cex-smooth-interior-data-do-not-repair-incompatible-dirichlet-corner-values` · counterexample — Smooth interior data do not repair incompatible Dirichlet corner values
+
+### `weak-elliptic-maximum-principles-and-holder-regularity` — Weak Elliptic Maximum Principles and Holder Regularity (22 item(s))
+
+- `def-weak-subsolution-and-supersolution-of-a-divergence-form-equation` · definition — Weak subsolutions and supersolutions of a divergence-form equation
+- `lem-positive-part-is-an-admissible-weak-test-by-truncation` · lemma — Positive parts, level truncations and cut-off variants are admissible weak tests
+- `lem-positive-part-of-a-zero-trace-function-has-zero-trace` · lemma — A function whose trace is at most a level has positive part in the zero-boundary space
+- `lem-caccioppoli-inequality-for-truncated-subsolutions` · lemma — Caccioppoli inequality for truncated subsolutions
+- `lem-sobolev-level-set-iteration-step` · lemma — Sobolev level-set step: energy decay with explicit level gap and radius loss
+- `lem-nonlinear-geometric-iteration-sequence-converges-to-zero` · lemma — The nonlinear geometric iteration: an explicit threshold forces convergence to zero
+- `thm-weak-maximum-principle-for-coercive-divergence-form-equations` · theorem — Weak maximum principle for coercive divergence-form equations
+- `cor-weak-comparison-and-uniqueness` · corollary — Weak comparison and uniqueness for the Dirichlet problem
+- `thm-de-giorgi-local-boundedness-for-homogeneous-subsolutions` · theorem — De Giorgi local boundedness of homogeneous subsolutions
+- `thm-de-giorgi-local-boundedness-with-scale-correct-forcing-term` · theorem — De Giorgi local boundedness with a scale-correct forcing term
+- `lem-de-giorgi-oscillation-reduction` · lemma — De Giorgi oscillation reduction: one half-level set is small
+- `thm-de-giorgi-nash-interior-holder-regularity` · theorem — De Giorgi-Nash interior Holder regularity for divergence-form equations
+- `lem-geometric-oscillation-decay-implies-a-holder-modulus` · lemma — Geometric oscillation decay implies a Hölder modulus
+- `lem-logarithmic-caccioppoli-estimate-for-positive-supersolutions` · lemma — Logarithmic Caccioppoli estimate for positive supersolutions
+- `lem-moser-iteration-for-positive-supersolutions` · lemma — Moser iteration for positive supersolutions: negative-power and logarithmic comparison
+- `thm-weak-harnack-inequality-for-nonnegative-supersolutions` · theorem — Weak Harnack inequality for nonnegative supersolutions
+- `rem-weak-harnack-exponent-has-a-coefficient-and-dimension-dependent-upper-range` · remark — Weak-Harnack exponent range and its dimension-dependent upper endpoint
+- `thm-harnack-inequality-for-nonnegative-weak-solutions` · theorem — Harnack inequality for nonnegative weak solutions
+- `lem-finite-interior-ball-chain-propagates-weak-harnack-bounds` · lemma — A finite interior ball chain propagates weak Harnack bounds
+- `lem-zero-set-propagation-for-a-nonnegative-holder-weak-solution` · lemma — Zero-set propagation for a nonnegative Holder weak solution
+- `cor-strong-maximum-principle-for-weak-elliptic-solutions` · corollary — Strong maximum principle for weak elliptic solutions
+- `rem-scalar-de-giorgi-theory-does-not-transfer-verbatim-to-systems` · remark — Scalar De Giorgi theory does not transfer verbatim to systems
+
+### `weak-elliptic-maximum-principles-and-holder-regularity-examples` — Weak Elliptic Maximum Principles and Holder Regularity — Examples (9 item(s))
+
+- `ex-weak-and-classical-maximum-principles-agree-for-smooth-solutions` · example — The weak and the classical maximum principles agree on a smooth subsolution
+- `ex-measurable-coefficients-with-a-holder-regular-weak-solution` · example — Measurable coefficients with a Holder-regular weak solution
+- `cex-weak-maximum-principle-needs-the-zero-order-sign` · counterexample — The weak maximum principle needs the zero-order sign condition
+- `cex-harnack-requires-nonnegativity` · counterexample — The Harnack inequality requires nonnegativity
+- `ex-oscillation-decay-implies-a-holder-modulus` · example — Worked oscillation decay and its Hölder modulus
+- `cex-degenerate-ellipticity-allows-nonconstant-solutions-with-interior-zero-sets` · counterexample — Degenerate ellipticity allows nonconstant solutions with interior zero sets
+- `cex-harnack-estimate-needs-an-additive-forcing-term` · counterexample — The Harnack estimate needs an additive forcing term
+- `ex-essential-supremum-precedes-holder-representative-in-de-giorgi-theory` · example — The essential supremum precedes the Holder representative in De Giorgi theory
+- `cex-global-harnack-comparison-needs-connectedness` · counterexample — The global Harnack comparison needs connectedness
+
+### `primitive-ideals-and-duflo-theorem` — Primitive Ideals and Duflo Theorem (15 item(s))
+
+- `def-annihilator-ideal-of-a-lie-algebra-module` · definition — The annihilator of a module over an enveloping algebra
+- `def-primitive-ideal-of-an-enveloping-algebra` · definition — Primitive ideals of an enveloping algebra
+- `prop-annihilators-of-simple-highest-weight-modules-are-primitive` · proposition — Annihilators of simple highest-weight modules are primitive
+- `prop-primitive-ideals-are-prime-in-the-noncommutative-sense` · proposition — Primitive ideals are prime in the noncommutative sense
+- `lem-dixmiers-lemma-for-countable-dimensional-algebras` · lemma — Dixmier's lemma: endomorphisms of a simple module over a countable-dimensional algebra
+- `prop-a-primitive-ideal-determines-a-central-character` · proposition — A primitive ideal determines a central character
+- `def-central-reduction-of-the-enveloping-algebra` · definition — The central reduction of the enveloping algebra at a central character
+- `prop-verma-annihilator-contains-the-central-character-ideal` · proposition — The Verma annihilator contains the central-character ideal
+- `lem-adjoint-action-preserves-the-associated-graded-of-a-two-sided-ideal` · lemma — The adjoint action preserves the associated graded of a two-sided ideal
+- `def-associated-graded-variety-of-a-two-sided-ideal` · definition — The associated graded variety of a two-sided ideal
+- `prop-associated-variety-of-a-primitive-ideal-is-conical-and-g-invariant` · proposition — The associated variety is a closed conical coadjoint-invariant cone
+- `lem-every-central-character-of-the-enveloping-algebra-arises-from-a-weight` · lemma — Every central character of a semisimple enveloping algebra arises from a weight
+- `cor-primitive-ideals-are-partitioned-by-dot-orbit-central-character` · corollary — Primitive ideals are partitioned by dot-orbit central characters
+- `lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters` · lemma — The central reduction of U(sl2) is simple away from the finite-dimensional central characters
+- `rem-highest-weights-can-have-the-same-primitive-ideal` · remark — Highest weights can have the same primitive ideal
+
+### `primitive-ideals-and-duflo-theorem-examples` — Primitive Ideals and Duflo Theorem — Examples (5 item(s))
+
+- `ex-primitive-ideals-of-usl2-at-a-generic-central-character` · example — Primitive ideals of U(sl2) at a generic central character
+- `ex-annihilator-of-the-trivial-sl2-module` · example — The annihilator of the trivial sl(2)-module
+- `ex-associated-variety-of-a-finite-dimensional-simple-annihilator` · example — The associated variety of a finite-dimensional simple annihilator is the origin
+- `cex-an-intersection-of-two-primitive-ideals-need-not-be-primitive` · counterexample — An intersection of two primitive ideals need not be primitive
+- `cex-the-central-character-does-not-determine-the-primitive-ideal` · counterexample — The central character does not determine the primitive ideal
+
+## Your seams
+
+Your pages depend on another group's:
+
+- `interior-and-boundary-sobolev-elliptic-regularity` requires `fredholm-elliptic-problems-and-the-elliptic-spectrum` (group a, batch 11)
+- `weak-elliptic-maximum-principles-and-holder-regularity` requires `schauder-and-lp-elliptic-estimates` (group h, batch 13)
+
+Another group's pages depend on yours:
+
+- `the-direct-method-and-euler-lagrange-equations` (group i) requires your `interior-and-boundary-sobolev-elliptic-regularity`
+- `constrained-variational-problems-and-variational-inequalities` (group i) requires your `weak-elliptic-maximum-principles-and-holder-regularity`
+
+Both directions are yours to check for citation fidelity: the citing text must
+state the cited proposition, not a summary of what it is for, and must not have
+changed a domain, quantifier, hypothesis, direction or conclusion.
+
+## Step-6 reader warnings
+
+None. No Step-6 reader warning targets an item you own.
+
+## Your rejections
+
+**None open at render time.** That is a real outcome, not an error: Sol
+may have passed every item you own. Verify it against
+`research/frontier-39-analysis-30-judge.jsonl` yourself before reporting nothing to do —
+a rejection recorded after this file was rendered is still yours.
+
+---
+
+# Historical Step-7 closure recovery, `frontier-39-analysis-30`
+
+Historical compatibility task only. Preserve historical exact-tuple decisions
+as evidence; this template grants no current repair or certification authority.
+Historical receipts constrain `defect_type` to exactly one of
+`logic`, `dependency_citation`, or `other`; do not reinterpret those records
+as current round coverage.
+
+Current rounds use `tools/step7-workflow.mjs`, `briefs/step7-adjudicator.md`
+and `briefs/step7-owner-repair.md`. Follow those briefs
+and the generated round-bound task. Repair all confirmed defects, including
+nonfatal defects, and continue downstream repair until complete before the
+single central certification pass.

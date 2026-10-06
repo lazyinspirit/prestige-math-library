@@ -1,0 +1,1866 @@
+[
+  {
+    "order": 458.029,
+    "id": "lax-milgram-and-weak-elliptic-solutions",
+    "kind": "A",
+    "category": "pde",
+    "title": "Lax Milgram and Weak Elliptic Solutions",
+    "companion": "lax-milgram-and-weak-elliptic-solutions-examples",
+    "requires": [
+      "rellich-kondrachov-and-sobolev-compactness",
+      "trigonometric-and-oscillatory-examples-in-one-variable"
+    ],
+    "items": [
+      {
+        "id": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+        "kind": "definition",
+        "title": "Bounded, coercive and symmetric sesquilinear forms",
+        "statement": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-hilbert-space",
+          "def-linear-map",
+          "def-norm-and-normed-space",
+          "def-real-and-complex-inner-product-space",
+          "def-sesquilinear-and-hermitian-forms-over-a-field-with-involution",
+          "rem-real-and-complex-normed-space-convention"
+        ],
+        "strategy": "This fixes the four vocabulary pieces the pag's proofs consume: sesquilinearity in the librar's first-slot-linear convention, the quantitative bound $M$, coercivity with the constant $\\alpha$, and symmetry. The adjoint form $a^*$ is defined here because it is what makes the coercivity of adjoints checkable ([[lem-adjoint-of-a-coercive-sesquilinear-form-is-coercive]]). The real bilinear convention is stated separately, as the design requires, and the degenerate zero space is recorded so that later statements about 'the' coercivity constant are not read as claims of uniqueness of constants. The conjugation conventions are those of [[def-real-and-complex-inner-product-space]] and are used unchanged by every later item on the page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, the definition of a sesquilinear form used in Theorem 4.12, printed p. 98"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the bilinear form hypotheses (i)–(iii) preceding the Lax–Milgram Lemma, printed p. 71"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.7, the bilinear form $a$ of (4.20) and the coercivity/boundedness hypotheses, printed p. 103"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-form-to-bounded-operator-by-hilbert-riesz",
+        "kind": "lemma",
+        "title": "A bounded form is represented by a unique bounded operator",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]), used through [[thm-riesz-representation-for-hilbert-space]]. Let $H$ be a real or complex Hilbert space and let $a$ be a bounded sesquilinear form on $H$ with bound $M$ in the sense of [[def-bounded-coercive-and-symmetric-sesquilinear-forms]]. Then there is a unique bounded linear operator $A\\in\\mathcal B(H)$ with $$a(u,v)=(Au,v)\\qquad\\text{for all }u,v\\in H,$$ and $\\|A\\|\\le M$; if $M$ is the least bound of $a$ then $\\|A\\|=M$. The map $a\\mapsto A$ is linear, and $a$ is coercive with constant $\\alpha$ if and only if $\\operatorname{Re}(Au,u)\\ge\\alpha\\|u\\|^2$ for all $u$. For the adjoint form one has $a^*(u,v)=(A^*u,v)$, where $A^*$ is the Hilbert adjoint of [[def-hilbert-space-adjoint]].",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "def-operator-norm",
+          "def-real-and-complex-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-hilbert-adjoint-properties",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "strategy": "For fixed $u$ the map $v\\mapsto\\overline{a(u,v)}$ is a bounded linear functional with norm at most $M\\|u\\|$, because $a$ is conjugate-linear in $v$ and $|\\overline{a(u,v)}|=|a(u,v)|$. Riesz representation gives a unique $Au\\in H$ with $\\overline{a(u,v)}=(v,Au)$, that is $a(u,v)=(Au,v)$. Uniqueness of the representing vector makes $u\\mapsto Au$ additive and homogeneous, so $A$ is linear, and $\\|Au\\|=\\sup_{\\|v\\|\\le1}|\\overline{a(u,v)}|\\le M\\|u\\|$ gives $\\|A\\|\\le M$; conversely $|a(u,v)|=|(Au,v)|\\le\\|Au\\|\\|v\\|$ gives the reverse inequality when $M$ is least. Coercivity is the same inequality with $v=u$. For the adjoint form, $a^*(u,v)=\\overline{a(v,u)}=\\overline{(Av,u)}=(u,Av)=(A^*u,v)$ by the defining identity of the Hilbert adjoint. Countable Choice is consumed exactly once, through Riesz representation; no Hahn--Banach input is used. The operator $A$ is canonical, so no additional choice is made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, first paragraph of the proof of Theorem 4.12: $a(v,u)=\\langle v,Au\\rangle$ by Riesz representation, printed p. 99"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the construction of $T$ from the Lax–Milgram Lemma by the Riesz representation theorem, printed p. 71"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, the operator $A$ with $a(u,v)=(Au,v)$ in the proof of Theorem 5.6, printed p. 139"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-coercive-form-operator-is-bounded-below",
+        "kind": "lemma",
+        "title": "A coercive form operator is bounded below",
+        "statement": "Assume Countable Choice, used through [[lem-form-to-bounded-operator-by-hilbert-riesz]]. Let $a$ be a bounded coercive sesquilinear form on a real or complex Hilbert space $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]) and let $A$ be its operator, $a(u,v)=(Au,v)$. Then $$\\alpha\\|u\\|\\le\\|Au\\|\\le M\\|u\\|\\qquad\\text{for every }u\\in H,$$ so $A$ is injective and bounded below with constant $\\alpha$ in the sense of [[def-bounded-below-operator]].",
+        "deps": [
+          "def-bounded-below-operator",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-operator-norm",
+          "lem-form-to-bounded-operator-by-hilbert-riesz",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "strategy": "Coercivity gives $\\alpha\\|u\\|^2\\le\\operatorname{Re}a(u,u)=\\operatorname{Re}(Au,u)\\le|(Au,u)|\\le\\|Au\\|\\,\\|u\\|$ by Cauchy--Schwarz; for $u\\ne0$ divide by $\\|u\\|$. The upper bound is immediate from $\\|A\\|\\le M$. Injectivity follows since $Au=0$ forces $\\alpha\\|u\\|\\le0$. This is the quantitative injectivity step isolated from the Lax--Milgram existence proof.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.7, Theorem 4.20, printed p. 103: the real bilinear Lax–Milgram statement; its proof is referred to [9]. The lower-bound derivation is proved here."
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the unnumbered coercivity/Cauchy–Schwarz lower bound in the Lax–Milgram proof, printed p. 71 (PDF p. 38); (4.13) is Laugesen’s numbering, not Simon’s."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, estimate (4.13) $c\\|u\\|_K\\le\\|Au\\|_K$ in the proof of Theorem 4.12, printed p. 99"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-bounded-below-operator-has-closed-range",
+        "kind": "lemma",
+        "title": "A bounded-below operator has closed range",
+        "statement": "Assume Countable Choice. Let $X$ be a Banach space, $Y$ a normed space over the same field, and let $T\\in\\mathcal B(X,Y)$ satisfy $\\|Tx\\|\\ge c\\|x\\|$ for all $x\\in X$ and some $c>0$ ([[def-bounded-below-operator]], [[def-bounded-linear-operator]]). Then $T$ is injective and its range $\\operatorname{ran}T$ is a closed linear subspace of $Y$; the inverse $\\operatorname{ran}T\\to X$ is bounded with norm at most $1/c$. The proof uses Countable Choice only to pass from sequential closedness to closedness; the Cauchy-sequence step uses completeness of $X$.",
+        "deps": [
+          "def-banach-space",
+          "def-bounded-below-operator",
+          "def-bounded-linear-operator",
+          "def-cauchy-in-metric",
+          "def-complete-metric-space",
+          "def-countable-choice",
+          "def-linear-subspace",
+          "def-norm-and-normed-space",
+          "def-operator-norm",
+          "lem-metric-limits-unique",
+          "lem-vector-operations-are-continuous-in-a-normed-space",
+          "thm-metric-closure-characterisation",
+          "thm-metric-continuity-characterisations",
+          "thm-metric-sequential-closure"
+        ],
+        "strategy": "Injectivity is immediate. For closedness, bounded-below estimates and completeness of X show that the range is sequentially closed; Countable Choice is used exactly to pass from sequential closedness to closedness. The inverse estimate is the given lower bound. This is the elementary closed-range direction and avoids the Baire-category/Dependent Choice route.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, the closed-range paragraph in the proof of Theorem 4.12, printed p. 99"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, `$T$ has closed range` derived from $c\\|u\\|\\le\\|Tu\\|$, printed p. 72"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, Remark 8(b): $R(A)$ is closed since $\\alpha|v|\\le|Av|$, printed p. 140"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-adjoint-of-a-coercive-sesquilinear-form-is-coercive",
+        "kind": "lemma",
+        "title": "The adjoint of a coercive form is coercive with the same constants",
+        "statement": "Assume Countable Choice, used through the Riesz representation and Hilbert-adjoint suppliers. Let $a$ be a bounded sesquilinear form on a real or complex Hilbert space with bound $M$ and coercivity constant $\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $a^*(u,v):=\\overline{a(v,u)}$. Then $a^*$ is bounded with the same bound $M$ and coercive with the same constant $\\alpha$; its operator is the Hilbert adjoint $A^*$ of the operator $A$ of $a$ ([[lem-form-to-bounded-operator-by-hilbert-riesz]]). In particular $\\ker A^*=\\{0\\}$ and $(\\operatorname{ran}A)^\\perp=\\ker A^*$, so the range of $A$ is dense in the classical route to surjectivity.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-real-and-complex-inner-product-space",
+          "lem-coercive-form-operator-is-bounded-below",
+          "lem-form-to-bounded-operator-by-hilbert-riesz",
+          "lem-kernel-range-orthogonality-for-hilbert-adjoints",
+          "thm-hilbert-adjoint-properties"
+        ],
+        "strategy": "Boundedness: $|a^*(u,v)|=|a(v,u)|\\le M\\|v\\|\\|u\\|$. Coercivity: $a^*(u,u)=\\overline{a(u,u)}$ has the same real part, so $\\operatorname{Re}a^*(u,u)=\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2$. The operator identity $a^*(u,v)=(A^*u,v)$ is [[lem-form-to-bounded-operator-by-hilbert-riesz]]. Bounded below with constant $\\alpha$ gives $\\ker A^*=\\{0\\}$ ([[lem-coercive-form-operator-is-bounded-below]]), and the Hilbert kernel--range identity gives $(\\operatorname{ran}A)^\\perp=\\ker A^*$ ([[lem-kernel-range-orthogonality-for-hilbert-adjoints]]). The last sentence isolates the density half of the classical surjectivity argument and is consumed by [[lem-coercivity-of-the-adjoint-makes-the-form-operator-range-dense]]; it is also the form in which the next pag's adjoint weak problem inherits coercivity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Section 4.4, Theorem 4.12 and its proof, printed pp. 98–99: bounded/coercive operator representation and the density argument. The same-constant adjoint calculation is proved here, not taken from an adjoint discussion in those pages."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.7, the bilinear form and its adjoint in the general elliptic discussion, printed pp. 103–105"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 5.3, Remark 8(b)–(c), printed pp. 140–141: closed range and density for a coercive operator. This is real bilinear background; the adjoint-form identity and its same-constant coercivity are proved here."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-coercivity-of-the-adjoint-makes-the-form-operator-range-dense",
+        "kind": "lemma",
+        "title": "Coercivity of the adjoint makes the form-operator range dense",
+        "statement": "Assume Countable Choice. Let $a$ be a bounded coercive sesquilinear form on a real or complex Hilbert space $H$ with constants $M,\\alpha$, and let $A$ be the operator with $a(u,v)=(Au,v)$ ([[lem-form-to-bounded-operator-by-hilbert-riesz]]). Then $$(\\operatorname{ran}A)^\\perp=\\ker A^*=\\{0\\},\\qquad \\overline{\\operatorname{ran}A}=H .$$ Combined with the closedness from [[lem-bounded-below-operator-has-closed-range]] this gives $\\operatorname{ran}A=H$; this is the classical closed-range/density route to Lax--Milgram, recorded here as the pla's operator-level density step.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-orthogonality-and-orthogonal-complement",
+          "lem-adjoint-of-a-coercive-sesquilinear-form-is-coercive",
+          "lem-bounded-below-operator-has-closed-range",
+          "lem-coercive-form-operator-is-bounded-below",
+          "lem-form-to-bounded-operator-by-hilbert-riesz",
+          "lem-kernel-range-orthogonality-for-hilbert-adjoints",
+          "thm-double-orthogonal-complement-is-closure"
+        ],
+        "strategy": "By [[lem-kernel-range-orthogonality-for-hilbert-adjoints]], $(\\operatorname{ran}A)^\\perp=\\ker A^*$. The adjoint form $a^*$ is coercive with constant $\\alpha$, hence $A^*$ is bounded below with constant $\\alpha$ and $\\ker A^*=\\{0\\}$ ([[lem-adjoint-of-a-coercive-sesquilinear-form-is-coercive]], [[lem-coercive-form-operator-is-bounded-below]]). Therefore $(\\operatorname{ran}A)^\\perp=\\{0\\}$, and [[thm-double-orthogonal-complement-is-closure]] gives $\\overline{\\operatorname{ran}A}=(\\operatorname{ran}A)^{\\perp\\perp}=\\{0\\}^\\perp=H$. The final combination with closedness is stated for the record; the pag's own proof of [[thm-lax-milgram]] uses the contraction route of the desig's hard obligation, and this item is the pla's retained operator-level density step.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the orthogonality argument completing surjectivity of $T$, printed p. 72"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, the final paragraph proving $R(A)^\\perp=\\{0\\}$ in Theorem 4.12, printed p. 99"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 5.3, Remark 8(c), printed p. 141: R(A) is dense since a vector orthogonal to every Au must vanish."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-coercivity-makes-a-small-form-step-a-contraction",
+        "kind": "lemma",
+        "title": "Coercivity makes a small form step a strict contraction",
+        "statement": "Assume Countable Choice, used through [[lem-form-to-bounded-operator-by-hilbert-riesz]]. Let $H\\ne\\{0\\}$ be a real or complex Hilbert space and let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M>0,\\alpha>0$ (so necessarily $\\alpha\\le M$); let $A$ be its operator. Put $q_\\rho:=\\sqrt{1-2\\rho\\alpha+\\rho^2M^2}$ for $0<\\rho<2\\alpha/M^2$. Then $0\\le q_\\rho<1$, and for every $w\\in H$ the map $$T_{\\rho,w}(u):=u-\\rho(Au-w)$$ is a strict contraction of $H$ with constant $q_\\rho$: $\\|T_{\\rho,w}(u)-T_{\\rho,w}(v)\\|\\le q_\\rho\\|u-v\\|$ for all $u,v$. In particular $I-\\rho A$ is a strict contraction with the same constant. The estimate is the only place where the coercivity constant and the bound enter the contraction argument.",
+        "deps": [
+          "thm-of-square-roots",
+          "cor-inner-product-induces-a-norm",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-lipschitz-holder-contraction",
+          "def-real-power",
+          "lem-coercive-form-operator-is-bounded-below",
+          "lem-form-to-bounded-operator-by-hilbert-riesz",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "strategy": "For $z\\in H$, $\\|z-\\rho Az\\|^2=\\|z\\|^2-2\\rho\\operatorname{Re}(Az,z)+\\rho^2\\|Az\\|^2\\le\\|z\\|^2-2\\rho\\alpha\\|z\\|^2+\\rho^2M^2\\|z\\|^2$, using $\\operatorname{Re}(Az,z)=\\operatorname{Re}a(z,z)\\ge\\alpha\\|z\\|^2$ and $\\|Az\\|\\le M\\|z\\|$ ([[lem-coercive-form-operator-is-bounded-below]]). Taking square roots, $\\|(I-\\rho A)z\\|\\le q_\\rho\\|z\\|$. Since $T_{\\rho,w}(u)-T_{\\rho,w}(v)=(I-\\rho A)(u-v)$, this is the contraction estimate. Near the minimum $\\rho=\\alpha/M^2$ one has $q_\\rho^2\\le1-\\alpha^2/M^2<1$ because $\\alpha\\le M$ (the two constants are comparable by evaluating the defining inequalities at a unit vector), and $q_\\rho\\ge0$ by construction; both endpoints of the interval have limit $q_\\rho=1$ and are excluded. This is Brezi's estimating step for the Stampacchia map with $K=H$, where the projection is the identity. The fixed point of $T_{\\rho,w}$ solves $Au=w$, which is the variational equation after [[lem-form-to-bounded-operator-by-hilbert-riesz]]; that solution use is [[thm-lax-milgram]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, proof of Theorem 5.6: $|Sv_1-Sv_2|^2\\le|v_1-v_2|^2(1-2\\rho\\alpha+\\rho^2C^2)$ and $0<\\rho<2\\alpha/C^2$, printed p. 139"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.7, Theorem 4.21, estimates (4.23)–(4.24), printed pp. 103–104. These are elliptic energy/boundedness background; the contraction estimate is supplied by the Brezis proof and the local norm expansion."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, estimates (4.12)–(4.13) in the proof of Theorem 4.12, printed p. 99"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-lax-milgram",
+        "kind": "theorem",
+        "title": "The Lax--Milgram theorem",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-bounded-linear-operator",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-lipschitz-holder-contraction",
+          "def-operator-norm",
+          "lem-coercive-form-operator-is-bounded-below",
+          "lem-coercivity-makes-a-small-form-step-a-contraction",
+          "lem-form-to-bounded-operator-by-hilbert-riesz",
+          "thm-banach-fixed-point",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "strategy": "Let $A$ be the operator of $a$ ([[lem-form-to-bounded-operator-by-hilbert-riesz]]). **Step 1 (existence).** Since $F$ is conjugate-linear, $\\overline{F(\\cdot)}$ is a bounded linear functional, so [[thm-riesz-representation-for-hilbert-space]] gives a unique $w\\in H$ with $\\overline{F(v)}=(v,w)$ for all $v$, equivalently $F(v)=(w,v)$. By [[lem-coercivity-makes-a-small-form-step-a-contraction]], for $0<\\rho<2\\alpha/M^2$ the map $T_{\\rho,w}(u)=u-\\rho(Au-w)$ is a strict contraction of the complete space $H$; [[thm-banach-fixed-point]] gives $u$ with $u=u-\\rho(Au-w)$, hence $Au=w$. Then $a(u,v)=(Au,v)=(w,v)=F(v)$ for every $v$. **Step 2 (uniqueness).** If $a(u,v)=0$ for all $v$, test $v=u$: $\\alpha\\|u\\|^2\\le\\operatorname{Re}a(u,u)=0$, so $u=0$; applying this to the difference of two solutions gives uniqueness. **Step 3 (estimate).** For the solution, $\\alpha\\|u\\|^2\\le\\operatorname{Re}a(u,u)=\\operatorname{Re}F(u)\\le|F(u)|\\le\\|F\\|\\,\\|u\\|$, so $\\alpha\\|u\\|\\le\\|F\\|$ (the case $u=0$ is trivial). Countable Choice is inherited from Riesz representation; the fixed-point step itself adds no choice beyond the canonical iterate of [[thm-banach-fixed-point]]. The proof deliberately does not import Lax--Milgram from the functional-analysis track: FA-13 supplies only the Riesz representation, and the contraction is built here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, Corollary 5.8 (Lax–Milgram) and its proof from Theorem 5.6 with $K=H$, printed pp. 139–140"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, Theorem 4.12 (Lax–Milgram), printed pp. 98–99"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the Lax–Milgram Lemma (real bilinear statement) and its proof, printed pp. 71–72"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.2, Theorem 10.9 (Lax–Milgram) with the estimate $\\|u\\|\\le\\varepsilon^{-1}\\|f\\|$, printed pp. 233–234"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.7, Theorem 4.20 (real bilinear form), printed p. 103"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-lax-milgram-inverse-has-norm-at-most-one-over-alpha",
+        "kind": "corollary",
+        "title": "The Lax--Milgram solution operator has norm at most $1/\\alpha$",
+        "statement": "Under the hypotheses of [[thm-lax-milgram]], let $\\mathcal{F}$ be the space of bounded conjugate-linear functionals on $H$, normed by $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$, and let $S:\\mathcal{F}\\to H$ assign to $F$ the unique solution $u$ of $a(u,v)=F(v)$ for all $v$. Then $S$ is well defined and linear, and $$\\|S\\|\\le\\frac1\\alpha .$$ In particular $\\|u\\|\\le\\|F\\|/\\alpha$ for every $F$, and the estimate is uniform over all data.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-operator-norm",
+          "def-space-of-bounded-linear-operators",
+          "thm-lax-milgram"
+        ],
+        "strategy": "Lax--Milgram gives the unique solution map; linearity follows from first-slot linearity and uniqueness. Its a priori estimate directly yields the operator-norm bound, with no operator closed-range or bounded-below input.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, the bound $|A^{-1}|\\le1/\\alpha$ implicit in Corollary 5.8 and Remark 8, printed pp. 139–140"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the unnumbered isomorphism estimate in the Lax–Milgram Lemma, printed p. 71, and surjectivity on p. 72; (4.13) is Laugesen’s numbering."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, the bounded inverse statement of Theorem 4.12, printed p. 98"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-symmetric-lax-milgram-is-energy-minimisation",
+        "kind": "corollary",
+        "title": "Symmetric Lax--Milgram is energy minimisation",
+        "statement": "Assume Countable Choice. Let $a$ be a bounded coercive **symmetric** sesquilinear form on a real or complex Hilbert space $H$ with coercivity constant $\\alpha>0$ and let $F$ be a bounded conjugate-linear functional, with $u$ the Lax--Milgram solution of [[thm-lax-milgram]]. Then the functional $$J(v):=\\tfrac12\\operatorname{Re}a(v,v)-\\operatorname{Re}F(v)$$ is real valued and attains its strict minimum on $H$ at $u$: $J(v)>J(u)$ for every $v\\ne u$. In the real case $J(v)=\\tfrac12a(v,v)-F(v)$, and in the complex case $a(v,v)$ is already real by symmetry, so $J(v)=\\tfrac12a(v,v)-\\operatorname{Re}F(v)$; no claim is made that a nonsymmetric form has such a minimisation. Consequently the solution is characterised by the minimisation problem independently of uniqueness in [[thm-lax-milgram]].",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-hilbert-space",
+          "thm-lax-milgram"
+        ],
+        "strategy": "Symmetry gives $a(v,v)=\\overline{a(v,v)}$, so $a(v,v)$ and $J(v)$ are real. Put $w=v-u$. Using symmetry and the weak equation $a(u,w)=F(w)$ (and its conjugate for $a(w,u)$), expansion of $a(u+w,u+w)$ gives $$J(v)-J(u)=\\tfrac12\\operatorname{Re}a(w,w)\\ge\\tfrac{\\alpha}2\\|w\\|^2 ,$$ which is positive for $w\\ne0$. Hence $u$ is the unique minimiser. The direction $a(u,v)=F(v)$ for all $v$ shows the Euler--Lagrange equation of $J$ is exactly the weak equation in the symmetric case. The pla's well-definedness requirement is met by stating the complex case with the real part explicitly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, Corollary 5.8 and the characterisation (18) of the solution by minimising $\\tfrac12a(v,v)-\\langle\\varphi,v\\rangle$, printed p. 140"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.2 and Corollary 4.6: the minimiser of the Dirichlet energy is a weak solution for the symmetric problem, printed pp. 93–95"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§3.10, the Dirichlet principle: minimisers satisfy Poisso's equation weakly, printed pp. 79–82"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-nonsymmetric-lax-milgram-is-not-a-scalar-minimisation-principle",
+        "kind": "remark",
+        "title": "Nonsymmetric Lax--Milgram is not a scalar minimisation principle",
+        "statement": "Existence and uniqueness in [[thm-lax-milgram]] do not require symmetry: only boundedness and coercivity are used, and the contraction proof never symmetrises the form. Symmetry is, however, exactly what the energy characterisation of [[cor-symmetric-lax-milgram-is-energy-minimisation]] consumes. If $a$ is bounded and coercive but not symmetric, and $F$ is bounded and conjugate-linear, then the solution of $a(u,v)=F(v)$ is in general not a critical point, and not a minimiser, of $v\\mapsto\\tfrac12\\operatorname{Re}a(v,v)-\\operatorname{Re}F(v)$: the Euler--Lagrange equation of that functional involves the symmetrised form $a_s=\\tfrac12(a+a^*)$, whose operator is $\\tfrac12(A+A^*)$, whereas the weak equation involves $A$. The two coincide exactly when $a$ is symmetric. The companion page's positive-definite-plus-skew counterexample and drift example exhibit the failure concretely. This is a remark: it records the boundary of the variational statement and is not used as a proof step.",
+        "deps": [
+          "cor-symmetric-lax-milgram-is-energy-minimisation",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-hilbert-space",
+          "lem-adjoint-of-a-coercive-sesquilinear-form-is-coercive",
+          "thm-lax-milgram"
+        ],
+        "strategy": "The symmetrised form $a_s=\\tfrac12(a+a^*)$ is symmetric with the same bound and coercivity constant, and its operator is $\\tfrac12(A+A^*)$ by [[lem-adjoint-of-a-coercive-sesquilinear-form-is-coercive]]. Computing the first variation of $J$ at $u$ in the direction $w$ gives $\\operatorname{Re}a_s(u,w)-\\operatorname{Re}F(w)$, which vanishes for all $w$ exactly when $a_s(u,v)=F(v)$ for all $v$. For the Lax--Milgram solution one has $a(u,v)=F(v)$, and $a_s(u,v)=F(v)$ for all $v$ would force $a(u,v)=a^*(u,v)$ for all $u,v$, that is symmetry. The nonsymmetric examples show the failure is realised. No proof obligation beyond the cited items is claimed here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, the remark that the general operator need not be symmetric and the discussion of the formal adjoint, printed pp. 101–103"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, Remark 7 on the connection between equation (17) and the minimisation problem (18), printed p. 140"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "def-h-minus-one-as-the-dual-of-h-one-zero",
+        "kind": "definition",
+        "title": "The negative Sobolev space $H^{-1}(\\Omega)$",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) and let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, with $H^1_0(\\Omega;\\mathbb K)$ the zero-boundary Sobolev space $W^{1,2}_0$ over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]). Define\n$$H^{-1}(\\Omega):=\\{\\,F:H^1_0(\\Omega)\\to\\mathbb K : F\\text{ is bounded and conjugate-linear}\\,\\},$$\nwith\n$$\\|F\\|_{H^{-1}}:=\\sup_{\\|v\\|_{H^1_0}\\le1}|F(v)| .$$\n**Pairing convention.** The pairing $\\langle F,v\\rangle:=F(v)$ is linear in $F$ and conjugate-linear in $v$; it is the dual pairing of $H^{-1}(\\Omega)$ with $H^1_0(\\Omega)$, not the $L^2$ inner product. The map $F\\mapsto\\overline{F(\\cdot)}$ is an isometric conjugate-linear bijection of $H^{-1}(\\Omega)$ onto the Banach dual $(H^1_0(\\Omega))^*$ of [[def-dual-space-of-a-normed-space]] ([[def-operator-norm]], [[def-space-of-bounded-linear-operators]]); the design's notation $(H^1_0)^*$ is read through this identification, which is the one compatible with the page's sesquilinear convention (linear in the first argument, conjugate-linear in the second) fixed in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]]. The space $H^{-1}(\\Omega)$ is a normed space, complete because $(H^1_0(\\Omega))^*$ is complete and $\\overline{F(\\cdot)}$ is an isometry in both directions ([[thm-bounded-operator-space-is-banach]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]). For $f\\in L^2(\\Omega)$ the map $v\\mapsto(f,v)_{L^2}$ is the corresponding element of $H^{-1}(\\Omega)$ under the conventions of [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-complex-lp-and-euclidean-test-function-conventions]], where complex integrability is in the sense of the latter; identifying a general element of $H^{-1}$ with an $L^2$ function is an embedding statement, never a definition. Elements of $H^{-1}$ are defined here by their action on Sobolev classes; this does not exclude their identification with distributions through smooth test functions.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-dual-space-of-a-normed-space",
+          "def-hk-and-hk-zero-notation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-operator-norm",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-space-of-bounded-linear-operators",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-bounded-operator-space-is-banach"
+        ],
+        "strategy": "This fixes the dual space used by the weak Dirichlet problem. The conventions are forced by the rest of the page: the divergence form $a(u,v)$ is conjugate-linear in the test slot, so the right-hand side $F(v)$ must be conjugate-linear, which is exactly the class defined here; the conjugate identification with the Banach dual keeps the notation of the design while making the pairing explicit, and in the real case the two classes coincide. Completeness passes from the dual ([[thm-bounded-operator-space-is-banach]], which supplies completeness of the operator space) to the conjugate-linear functionals by the isometry $F\\mapsto\\overline{F(\\cdot)}$. The warning that an $H^{-1}$ element is not in general an $L^2$ function and that the pairing is not the $L^2$ inner product implements the pla's well-definedness ledger row.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.3, the space $H^{-1}(\\Omega)$ and Theorem 4.7 with the norm formula (4.9), printed pp. 95–98"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 8.3, the notation H-minus-one as the dual of H-one-zero and Proposition 8.14, printed pp. 219–220 (real-scalar model for the conjugate-dual convention here)."
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 8.4, Remark 22, printed p. 221: the Riesz–Frechet identification with the H1 inner product."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.1, the weak Dirichlet problem for $f\\in L^2$ and the identification of the dual pairing, printed pp. 223–226"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-ltwo-and-divergence-data-embed-in-h-minus-one",
+        "kind": "lemma",
+        "title": "$L^2$ forcing and divergence data embed in $H^{-1}$ with a quantitative bound",
+        "statement": "Assume the Axiom of Choice, inherited through the Poincar\\'e supplier named below, together with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, nonempty, bounded in one direction (so the Poincar\\'e inequality of [[thm-poincare-inequality-for-w-one-p-zero]] holds; every bounded open set qualifies), and let $f_0,f_1,\\dots,f_n\\in L^2(\\Omega;\\mathbb K)$. Define\n$$F(v):=(f_0,v)_{L^2}+\\sum_{i=1}^n(f_i,D_iv)_{L^2},\\qquad v\\in H^1_0(\\Omega),$$\nwith the $L^2$ inner product of [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Then $F$ is a well-defined conjugate-linear functional on $H^1_0(\\Omega)$, independent of the $L^2$ classes chosen only through those classes, and bounded: with the Poincar\\'e constant $C_P$ of $\\Omega$ for $W^{1,2}_0$,\n$$|F(v)|\\le\\Big(C_P\\|f_0\\|_{L^2}+\\sum_{i=1}^n\\|f_i\\|_{L^2}\\Big)\\|v\\|_{H^1_0},\\qquad \\|F\\|_{H^{-1}}\\le C_P\\|f_0\\|_{L^2}+\\sum_{i=1}^n\\|f_i\\|_{L^2}.$$\nIn particular $F\\in H^{-1}(\\Omega)$ in the sense of [[def-h-minus-one-as-the-dual-of-h-one-zero]], and if $\\Omega$ is bounded then every $f\\in L^2(\\Omega)$ defines an $H^{-1}$ element by $v\\mapsto(f,v)_{L^2}$. The functional is the weak form of $f_0-\\sum_iD_if_i$; no claim that every $H^{-1}$ element arises this way is made here.",
+        "deps": [
+          "def-distributional-derivative",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-axiom-of-choice",
+          "def-bounded-linear-operator",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-operator-norm",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-holder-inequality-for-integrals",
+          "thm-poincare-inequality-for-w-one-p-zero"
+        ],
+        "strategy": "Conjugate-linearity in $v$ follows from conjugate-linearity of the $L^2$ pairing and of the weak derivative in its argument. For the bound, $|(f_0,v)_{L^2}|\\le\\|f_0\\|_{L^2}\\|v\\|_{L^2}$ and $|(f_i,D_iv)_{L^2}|\\le\\|f_i\\|_{L^2}\\|D_iv\\|_{L^2}$ by H\\'older ([[thm-holder-inequality-for-integrals]]), while $\\|v\\|_{L^2}\\le C_P\\|Dv\\|_{L^2}$ on $H^1_0$ and $\\|D_iv\\|_{L^2}\\le\\|v\\|_{H^1_0}$. Summing gives the displayed bound. The terms are class functionals because the $L^2$ pairing is invariant under null-set changes and the weak derivative is a class operator. No choice is used in the estimate itself; Countable Choice is inherited from the Sobolev interfaces named in the statement. The pla's requirement that coefficient exponents be listed rather than assuming every product integrable is met by the explicit $L^2$ hypothesis on each $f_i$ and the explicit H\\'older step.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.3, Theorem 4.7: distributions $f=f_0+\\sum\\partial_if_i$ act boundedly on $H^1_0$ and the norm is given by (4.9), printed pp. 95–98"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.4, Theorem 4.9 (Poincar'e inequality for $H^1_0$) used for the constant $C_P$, printed pp. 98–99"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, the weak form $(f,v)_{L^2}$ of the generalized Poisson equation, printed p. 101"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-every-h-minus-one-functional-has-ltwo-plus-divergence-form",
+        "kind": "theorem",
+        "title": "Every $H^{-1}$ functional is an $L^2$ function plus a divergence",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$. For every $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]) there are $f_0,f_1,\\dots,f_n\\in L^2(\\Omega)$ such that $$F(v)=(f_0,v)_{L^2}+\\sum_{i=1}^n(f_i,D_iv)_{L^2}\\qquad\\text{for every }v\\in H^1_0(\\Omega),$$ the norm is exactly the infimum over all such representations, $$\\|F\\|_{H^{-1}}=\\inf\\Big\\{\\Big(\\sum_{i=0}^n\\|f_i\\|_{L^2}^2\\Big)^{1/2}:F(v)=(f_0,v)_{L^2}+\\sum_{i=1}^n(f_i,D_iv)_{L^2}\\ \\forall v\\Big\\},$$ and the infimum is attained by the canonical choice $f_0=g$, $f_i=D_ig$ given by the Riesz vector of $\\overline{F(\\cdot)}$; in particular the data are controlled by the norm and conversely. The representation is the converse of [[lem-ltwo-and-divergence-data-embed-in-h-minus-one]] and needs no Hahn--Banach extension theorem: Riesz representation in $H^1_0$ already produces it.",
+        "deps": [
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-bounded-linear-operator",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-hilbert-space",
+          "def-hk-and-hk-zero-notation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-operator-norm",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-ltwo-and-divergence-data-embed-in-h-minus-one",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "strategy": "Since $F$ is bounded and conjugate-linear, $G:=\\overline{F(\\cdot)}$ is a bounded linear functional on the Hilbert space $H^1_0$ with the same norm. Riesz representation gives a unique $g\\in H^1_0$ with $G(v)=(v,g)_{H^1_0}$ and $\\|g\\|_{H^1_0}=\\|G\\|=\\|F\\|$. Expanding the $H^1_0$ inner product, $F(v)=\\overline{(v,g)_{H^1_0}}=(g,v)_{L^2}+\\sum_i(D_ig,D_iv)_{L^2}$, so $f_0=g$ and $f_i=D_ig$ give the representation; it is canonical because the Riesz vector is unique. The norm identity is the Pythagorean expansion $\\|g\\|_{H^1_0}^2=\\sum_{i=0}^n\\|f_i\\|_{L^2}^2$ for this choice. Countable Choice is inherited from Riesz representation; the derivation makes no further choice. This matches Hunte's description of $H^{-1}$ as the set of $f_0+\\sum\\partial_if_i$ with $f_i\\in L^2$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.3, Theorem 4.7 and the infimum formula (4.9) describing $H^{-1}$ as $f_0+\\sum\\partial_if_i$, printed pp. 95–98"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, the generalized Poisson equation with $L^2$ data, printed p. 101"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 8.3, Proposition 8.14 and its Hahn–Banach proof, printed pp. 219–220: representation by f0 and f1. Brezis uses the sum Sobolev norm and a maximum data norm; the Euclidean data-norm identity for the H1 norm here is proved independently by Hilbert Riesz representation."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-uniformly-elliptic-divergence-form-operator",
+        "kind": "definition",
+        "title": "Uniformly elliptic divergence-form operators and their sesquilinear forms",
+        "statement": "Assume Countable Choice for the Sobolev interfaces. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Let $a^{ij},b^i,c:\\Omega\\to\\mathbb K$, $i,j=1,\\dots,n$, be measurable ([[def-measurable-function-between-measurable-spaces]]) and essentially bounded ([[def-l-infinity-on-a-measure-space]], [[def-essential-supremum-with-respect-to-a-measure]]), with bounds $$|a^{ij}|\\le M_a,\\quad |b^i|\\le M_b,\\quad |c|\\le M_c\\quad\\text{a.e. on }\\Omega,$$ and suppose the **uniform ellipticity** condition holds: there is $\\theta>0$ with $$\\operatorname{Re}\\Big(\\sum_{i,j=1}^n a^{ij}(x)\\xi_j\\overline{\\xi_i}\\Big)\\ge\\theta|\\xi|^2\\qquad\\text{for a.e. }x\\in\\Omega\\text{ and all }\\xi\\in\\mathbb C^n .$$ The associated **divergence-form expression** is $$Lu:=-D_i(a^{ij}D_ju)+b^iD_iu+cu$$ (Einstein summation over $i,j$), and the associated sesquilinear form on $H^1(\\Omega)$ is $$a(u,v):=\\int_\\Omega\\Big(a^{ij}D_ju\\overline{D_iv}+b^iD_iu\\overline{v}+cu\\overline{v}\\Big)dx .$$ The form is linear in $u$ and conjugate-linear in $v$, in the convention of [[def-bounded-coercive-and-symmetric-sesquilinear-forms]]; the classical Dirichlet problem consists of $Lu=f$ in $\\Omega$ with prescribed boundary values. The operator is determined by the coefficient functions only a.e., and all later statements about $a$ are statements about those classes. Where the domain and boundary data demand it ([[def-weak-dirichlet-solution-for-a-divergence-form-operator]], [[cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting]]) the domain is additionally a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]). The convention is the complex sesquilinear one with conjugation in the second slot, as the plan's convention audit directs; the real case is the same with conjugation read as the identity.",
+        "deps": [
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-hk-and-hk-zero-notation",
+          "def-l-infinity-on-a-measure-space",
+          "def-measurable-function-between-measurable-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function"
+        ],
+        "strategy": "This is the coefficient package the whole elliptic part of the page cites. The hypotheses are exactly those needed by [[lem-elliptic-form-is-well-defined-and-bounded]] (bounded measurable coefficients give absolutely convergent integrals) and by [[lem-coercivity-of-the-principal-dirichlet-form]] (uniform ellipticity gives the pointwise lower bound for the principal part). No regularity of coefficients beyond measurability and boundedness is assumed anywhere the classical consistency lemma is not invoked; [[lem-classical-solutions-satisfy-the-weak-formulation]] states its own extra $C^1$/continuity hypotheses. The exponent bookkeeping is explicit: every coefficient is in $L^\\infty$, so no product of $L^2$ derivatives with a merely $L^1$ coefficient is ever formed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.6, equations (4.16)–(4.18): the divergence-form operator, coefficient bounds and uniform ellipticity, printed pp. 101–103"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, the generalized Poisson operator $Lu=-\\sum(a^{jk}u_{x_j})_{x_k}+\\sum b^ju_{x_j}+cu$ and the weak form $\\alpha(u,v)=\\langle f,v\\rangle$, printed p. 101"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the higher-order operator and the ellipticity and boundedness conditions (E) and (B), printed pp. 68–69"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.2, the elliptic operator and coefficient bounds (10.42)–(10.43), printed pp. 232–234"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+        "kind": "definition",
+        "title": "Weak Dirichlet solutions for a divergence-form operator",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]), and let $L$ and its form $a$ be as in [[def-uniformly-elliptic-divergence-form-operator]] on an open set $\\Omega\\subseteq\\mathbb R^n$. **Homogeneous problem.** Given $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]), a **weak solution** of $Lu=F$ with zero boundary values is a class $u\\in H^1_0(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]) with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H^1_0(\\Omega).$$ **Inhomogeneous problem.** Additionally assume the Axiom of Choice ([[def-axiom-of-choice]]) for the trace supplier, and let $n\\ge2$ and $\\Omega$ be a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]), let $g\\in H^{1/2}(\\partial\\Omega):=W^{1/2,2}(\\partial\\Omega)$ in the boundary scale of [[def-fractional-sobolev-space-on-a-compact-c-one-boundary]] and let $T$ be the trace operator of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]]. A weak solution with boundary data $g$ is a class $u\\in H^1(\\Omega)$ with $Tu=g$ and $a(u,v)=F(v)$ for every $v\\in H^1_0(\\Omega)$. The defining identities are identities between functionals on the $H^1_0$ classes, so they are independent of the chosen almost-everywhere representatives of $u$, of the coefficients and of the data ([[lem-weak-derivative-is-independent-of-lp-representatives]], [[def-complex-lp-and-euclidean-test-function-conventions]]); the boundary condition is imposed through the trace of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]], never by pointwise evaluation. The Dirichlet condition is imposed by $u\\in H^1_0(\\Omega)$ in the homogeneous problem and by $Tu=g$ in the inhomogeneous problem; testing against $v\\in H^1_0$ expresses the weak equation and does not by itself impose boundary data; the integrals are the ones proved absolutely convergent in [[lem-elliptic-form-is-well-defined-and-bounded]].",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-weak-derivative-is-independent-of-lp-representatives",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain"
+        ],
+        "strategy": "The definition is the standard weak formulation in the librar's sesquilinear convention: because $a(u,\\cdot)$ is conjugate-linear, the datum $F$ is taken in the conjugate dual $H^{-1}$ defined on [[def-h-minus-one-as-the-dual-of-h-one-zero]]. Well-definedness (independence of representatives) is the content of the class conventions of the Sobolev spaces and will be verified term by term in [[lem-elliptic-form-is-well-defined-and-bounded]]. For the inhomogeneous problem, $g$ is required to lie in the trace range rather than in arbitrary $L^2(\\partial\\Omega)$, as the pla's well-definedness ledger demands; existence of liftings is the published [[thm-bounded-right-inverse-for-the-sobolev-trace]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.1, Definition 4.2 of a weak solution of the Dirichlet problem, printed pp. 91–92"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.6, Definition 4.19: weak solution of the general divergence-form Dirichlet problem, printed p. 102"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, weak solution of the generalized Poisson equation with Dirichlet data, printed p. 101"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§9.5, the weak Dirichlet problem and Theorem 9.21, printed pp. 291–298"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.1, weak solutions of the Dirichlet problem (10.5), printed pp. 223–226"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-elliptic-form-is-well-defined-and-bounded",
+        "kind": "lemma",
+        "title": "The elliptic form is well defined and bounded on $H^1$",
+        "statement": "Assume Countable Choice. Let $L$ and $a$ be as in [[def-uniformly-elliptic-divergence-form-operator]] with coefficient bounds $M_a,M_b,M_c$ (measurability and essential boundedness only; uniform ellipticity is not needed for this lemma). Then every term of\n$$a(u,v)=\\int_\\Omega\\Big(a^{ij}D_ju\\overline{D_iv}+b^iD_iu\\overline{v}+cu\\overline{v}\\Big)dx$$\nis absolutely convergent for $u,v\\in H^1(\\Omega)$, the value depends only on the $H^1$ classes, and $a$ is a bounded sesquilinear form on $H^1(\\Omega)$ with\n$$|a(u,v)|\\le (nM_a+nM_b+M_c)\\|u\\|_{H^1}\\|v\\|_{H^1}.$$\nThe same bound holds for the restriction of $a$ to $H^1_0(\\Omega)$. The listed coefficient exponents are the whole hypothesis: no extra integrability of products is assumed.",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-l-infinity-on-a-measure-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-measurable-function-between-measurable-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "lem-weak-derivative-is-independent-of-lp-representatives",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-generalized-holder-inequality-for-products",
+          "thm-holder-inequality-for-integrals",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space"
+        ],
+        "strategy": "The coefficients, weak derivatives and representatives are measurable, so the integrands are measurable. For the principal term, use the componentwise bounds and the finite-dimensional estimate \\(\\|\\xi\\|_{\\ell^1}\\le\\sqrt{n}\\|\\xi\\|_{\\ell^2}\\): for almost every \\(x\\),\n$$\\left|\\sum_{i,j=1}^n a^{ij}D_ju\\,\\overline{D_iv}\\right|\\le M_a\\left(\\sum_{j=1}^n|D_ju|\\right)\\left(\\sum_{i=1}^n|D_iv|\\right)\\le nM_a|Du||Dv|.$$\nConsequently its absolute integral is at most \\(nM_a\\|Du\\|_{L^2}\\|Dv\\|_{L^2}\\). For the drift term, summing the \\(n\\) component estimates and applying Hölder gives\n$$\\sum_{i=1}^n\\int_\\Omega|b^iD_iu\\,\\overline v|\\,dx\\le M_b\\sum_{i=1}^n\\|D_iu\\|_{L^2}\\|v\\|_{L^2}\\le nM_b\\|Du\\|_{L^2}\\|v\\|_{L^2},$$\nsince each \\(\\|D_i u\\|_{L^2}\\le\\|Du\\|_{L^2}\\). The reaction term is bounded in absolute integral by \\(M_c\\|u\\|_{L^2}\\|v\\|_{L^2}\\). These estimates prove absolute convergence and, because the \\(H^1\\) norm dominates both the \\(L^2\\) norm and the gradient norm, give the displayed bound. Weak derivatives and coefficients are equivalence classes modulo null sets, so changing representatives changes neither the integrands almost everywhere nor the integrals ([[lem-weak-derivative-is-independent-of-lp-representatives]], [[def-l-p-space-as-a-quotient-by-null-functions]]). Restriction to the subspace \\(H^1_0\\) preserves the estimate. No sum of \\(n^2\\) independent \\(M_a\\)-bounds is used: the \\(\\ell^1\\)-to-\\(\\ell^2\\) estimate combines the indices before integration. P: Cauchy--Schwarz in the finite coordinate index and Hölder in \\(\\Omega\\).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.7, the estimate (4.24) $|a(u,v)|\\le C_2\\|u\\|_{H^1_0}\\|v\\|_{H^1_0}$ with the displayed term-by-term bound, printed pp. 103–104"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, the coefficient hypotheses $a^{jk},b^j,c\\in L^\\infty(U)$ for the weak generalized Poisson equation, printed p. 101"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.2, the boundedness estimate (10.43) $|a(v,u)|\\le C\\|v\\|\\|u\\|$ from coefficient bounds, printed p. 234"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-coercivity-of-the-principal-dirichlet-form",
+        "kind": "lemma",
+        "title": "Coercivity of the principal Dirichlet form",
+        "statement": "Assume the Axiom of Choice, inherited through the Poincaré supplier named below, together with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open and bounded in one direction, and let $a_0(u,v)=\\int_\\Omega a^{ij}D_ju\\overline{D_iv}\\,dx$ be the principal part of a uniformly elliptic form with constants $\\theta$ and $M_a$ ([[def-uniformly-elliptic-divergence-form-operator]]), restricted to $u,v\\in H^1_0(\\Omega)$. Then $a_0$ is a bounded sesquilinear form on $H^1_0(\\Omega)$ and $$\\operatorname{Re}a_0(u,u)=\\int_\\Omega\\operatorname{Re}\\big(a^{ij}D_ju\\overline{D_iu}\\big)dx\\ge\\theta\\|Du\\|_{L^2}^2\\ge\\frac{\\theta}{1+C_P^2}\\|u\\|_{H^1_0}^2\\qquad(u\\in H^1_0(\\Omega)),$$ where $C_P$ is the Poincar\\'e constant of [[thm-poincare-inequality-for-w-one-p-zero]] for $p=2$. Hence $a_0$ is coercive on $H^1_0(\\Omega)$ with constant $\\alpha=\\theta/(1+C_P^2)$, and $\\operatorname{Re}a_0(u,u)=\\theta\\|Du\\|^2$ in the model case $a^{ij}=\\delta^{ij}$ (so $\\theta=1$).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "thm-holder-inequality-for-integrals",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-poincare-inequality-for-w-one-p-zero"
+        ],
+        "strategy": "The pointwise ellipticity condition gives $\\operatorname{Re}(a^{ij}(x)D_ju(x)\\overline{D_iu(x)})\\ge\\theta|Du(x)|^2$ for a.e. $x$; integrating preserves the inequality for the nonnegative measurable functions involved ([[thm-monotone-convergence-for-the-integral]] applied to the constant sequence, or the elementary monotonicity of the nonnegative integral). The Poincar\\'e inequality gives $\\|u\\|_{L^2}\\le C_P\\|Du\\|_{L^2}$ for $u\\in H^1_0$, hence $\\|u\\|_{H^1_0}^2=\\|u\\|^2_{L^2}+\\|Du\\|^2_{L^2}\\le(1+C_P^2)\\|Du\\|^2_{L^2}$, which is the second inequality. Boundedness is [[lem-elliptic-form-is-well-defined-and-bounded]]. The Poincar\\'e theorem is the batch-4 draft supplier [[thm-poincare-inequality-for-w-one-p-zero]], consumed here with the exact constant $C_P$ of its statement.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.5–4.6, the energy estimate in the proof of Theorem 4.11 and the uniform ellipticity condition (4.18), printed pp. 99–102"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, uniform ellipticity with constant $\\theta$ for the generalized Poisson operator, printed p. 101"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.2, coercivity of $a$ from ellipticity, printed pp. 233–234"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound",
+        "kind": "lemma",
+        "title": "Testing a coercive weak solution with itself gives the energy bound",
+        "statement": "Let $H$ be a real or complex Hilbert space, $a$ a bounded coercive sesquilinear form with constant $\\alpha>0$, $F$ a bounded conjugate-linear functional on $H$, and $u\\in H$ a solution of $a(u,v)=F(v)$ for all $v\\in H$. Then $$\\alpha\\|u\\|^2\\le\\operatorname{Re}a(u,u)=\\operatorname{Re}F(u)\\le\\|F\\|\\,\\|u\\|,\\qquad\\text{hence }\\alpha\\|u\\|\\le\\|F\\| .$$ The bound is a priori in the sense that it uses only the equation, coercivity and the norm of the datum, not the construction of $u$; it applies directly to homogeneous Dirichlet solutions $u\\in H^1_0(\\Omega)$ of [[def-weak-dirichlet-solution-for-a-divergence-form-operator]] after substituting their coercivity constants. For an inhomogeneous Dirichlet solution, first subtract a lifting to obtain a solution in $H^1_0(\\Omega)$ and use its residual datum; the original solution need not itself be an admissible test.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-bounded-linear-operator",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-hilbert-space",
+          "def-operator-norm",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "thm-lax-milgram"
+        ],
+        "strategy": "Substitute $v=u$ in the weak equation and take real parts: $\\operatorname{Re}a(u,u)=\\operatorname{Re}F(u)$, while coercivity bounds the left side below by $\\alpha\\|u\\|^2$ and $\\operatorname{Re}F(u)\\le|F(u)|\\le\\|F\\|\\|u\\|$ bounds it above. If $u\\ne0$ divide by $\\|u\\|$. The argument is the estimate step of [[thm-lax-milgram]] isolated so that any weak solution, constructed or assumed, satisfies it; this is used for the a priori bounds of [[thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem]], [[thm-lax-milgram-solvability-for-coercive-divergence-form-equations]] and [[cor-weak-solution-depends-continuously-on-data]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.5, the energy estimate underlying Theorem 4.11, printed pp. 99–101"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the coercivity estimate used to bound the solution operator, printed pp. 72–73"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, the estimate $|u|\\le|\\varphi|/\\alpha$ for the Lax–Milgram solution, printed p. 140"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+        "kind": "theorem",
+        "title": "Existence and uniqueness for the weak Dirichlet Poisson problem",
+        "statement": "Assume the Axiom of Choice, inherited through the Poincaré supplier named below, together with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, nonempty and bounded in one direction, with Poincar\\'e constant $C_P$ for $W^{1,2}_0$ ([[thm-poincare-inequality-for-w-one-p-zero]]). For every $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]) there is a unique $u\\in H^1_0(\\Omega)$ with $$\\int_\\Omega\\nabla u\\cdot\\overline{\\nabla v}\\,dx=F(v)\\qquad\\text{for every }v\\in H^1_0(\\Omega),$$ that is, the unique weak solution of $-\\Delta u=F$ with zero boundary values; it satisfies $$\\|u\\|_{H^1_0}\\le(1+C_P^2)\\|F\\|_{H^{-1}},\\qquad\\text{and}\\qquad\\|Du\\|_{L^2}\\le(1+C_P^2)^{1/2}\\|F\\|_{H^{-1}} .$$ Here $-\\Delta$ is the constant-coefficient operator $Lu=-\\Delta u$ of [[def-uniformly-elliptic-divergence-form-operator]], and the solution is the Lax--Milgram solution for the form $a_0(u,v)=\\int\\nabla u\\cdot\\overline{\\nabla v}$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-coercivity-of-the-principal-dirichlet-form",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-lax-milgram",
+          "thm-poincare-inequality-for-w-one-p-zero"
+        ],
+        "strategy": "The form $a_0(u,v)=\\int\\nabla u\\cdot\\overline{\\nabla v}$ is the principal form with $a^{ij}=\\delta^{ij}$, hence bounded with $M=1$ ([[lem-elliptic-form-is-well-defined-and-bounded]]) and coercive on $H^1_0$ with constant $\\alpha=1/(1+C_P^2)$ ([[lem-coercivity-of-the-principal-dirichlet-form]] with $\\theta=1$). Lax--Milgram ([[thm-lax-milgram]]) applied to $F\\in H^{-1}$ gives a unique solution, and the estimate of [[lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound]] gives $\\|u\\|_{H^1_0}\\le\\|F\\|/\\alpha=(1+C_P^2)\\|F\\|$; the sharper-looking $\\|Du\\|\\le\\|F\\|$ is the same substitution read before applying Poincar\\'e. The weak equation is $-\\Delta u=F$ in the sense of [[def-weak-dirichlet-solution-for-a-divergence-form-operator]]. Countable Choice is inherited from Riesz representation and the cited Poincar\\'e supplier. This is the pla's item 13 and the base case consumed by the interval example [[ex-weak-dirichlet-poisson-problem-on-an-interval]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.5, Theorem 4.11: existence and uniqueness of the weak solution of $-\\Delta u=f$ for $f\\in H^{-1}$, printed pp. 99–101"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§9.5, Theorem 9.21 (Dirichlet, Riemann, Poincaré, Hilbert), printed pp. 296–298"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.1, Theorem 10.1: unique weak solution of the Poisson equation in $H^1_0(U)$, printed pp. 223–226"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§3.10, the Dirichlet principle for Poisson’s equation, printed pp. 79–82"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-lax-milgram-solvability-for-coercive-divergence-form-equations",
+        "kind": "theorem",
+        "title": "Lax--Milgram solvability for coercive divergence-form equations",
+        "statement": "Assume the Axiom of Choice, inherited through the Poincaré supplier named below, together with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, nonempty and bounded in one direction, let $L$ and $a$ be as in [[def-uniformly-elliptic-divergence-form-operator]] with ellipticity constant $\\theta$, coefficient bounds $M_a,M_b,M_c$ (with the componentwise drift bounds $|b^i|\\le M_b$), and let $C_P$ be the Poincar\\'e constant of [[thm-poincare-inequality-for-w-one-p-zero]] for $p=2$. Assume the explicit smallness condition $$\\theta-\\sqrt n\\,C_PM_b-C_P^2M_c>0 .$$ Then for every $F\\in H^{-1}(\\Omega)$ there is a unique weak solution $u\\in H^1_0(\\Omega)$ of $Lu=F$ ([[def-weak-dirichlet-solution-for-a-divergence-form-operator]]), and with $\\alpha_0:=\\theta-\\sqrt n\\,C_PM_b-C_P^2M_c$ it satisfies $$\\|u\\|_{H^1_0}\\le\\frac{1+C_P^2}{\\alpha_0}\\|F\\|_{H^{-1}} .$$ When $b\\equiv0$, taking $M_b=0$, the condition reduces to $M_c<\\theta/C_P^2$, the sign/smallness condition of the plan; in the model case $a^{ij}=\\delta^{ij}$, $b=0$, $c=0$, taking $\\theta=1$ and $M_b=M_c=0$, it gives $\\alpha_0=1$ and gives existence and uniqueness for the zero-boundary weak Poisson problem.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-l-infinity-on-a-measure-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-coercivity-of-the-principal-dirichlet-form",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-lax-milgram",
+          "thm-poincare-inequality-for-w-one-p-zero"
+        ],
+        "strategy": "For u in H^1_0, the componentwise bound |b^i| ≤ M_b and Cauchy--Schwarz over the coordinates give |integral sum_i b^i D_i u conjugate(u)| ≤ sqrt(n) M_b ||Du||_2 ||u||_2. Poincare then yields Re a(u,u) ≥ (theta - sqrt(n) C_P M_b - C_P^2 M_c)||Du||_2^2 = alpha_0 ||Du||_2^2. The strict hypothesis makes alpha_0 positive; comparison of the H^1_0 and gradient norms gives coercivity constant alpha_0/(1+C_P^2). Boundedness, Lax--Milgram and the energy estimate give existence, uniqueness and the displayed bound. The b=0 specialization and Laplacian model remain unchanged.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.6–4.7, Theorem 4.21 (G\\r{a}rding-type energy estimate) and Theorem 4.22 (solvability for $\\mu\\ge\\gamma$), printed pp. 103–105"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, strict coercivity of the shifted problem and the Lax–Milgram application, printed pp. 72–75"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.2, coercivity of $a$ for the general elliptic operator and Lax–Milgram solvability, printed pp. 233–236"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§9.5, solvability of elliptic boundary value problems by Lax–Milgram, printed pp. 291–298"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-w-one-two-is-a-hilbert-space",
+        "kind": "lemma",
+        "title": "The Sobolev space $H^1$ is a Hilbert space",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. On $H^1(\\Omega)=W^{1,2}(\\Omega;\\mathbb K)$ ([[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]) define $$(u,v)_{H^1}:=(u,v)_{L^2}+\\sum_{i=1}^n(D_iu,D_iv)_{L^2},$$ with the $L^2$ inner product of [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Then $(\\cdot,\\cdot)_{H^1}$ is an inner product on the Sobolev classes whose induced norm is the $W^{1,2}$ norm of [[def-sobolev-space-wkp-and-its-norm]], and $H^1(\\Omega)$ is a Hilbert space for it. The zero-boundary space $H^1_0(\\Omega)$ is a closed subspace of $H^1(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]) and hence a Hilbert space for the restricted inner product. The pairing is linear in the first argument and conjugate-linear in the second, in the convention of [[def-real-and-complex-inner-product-space]].",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-hk-and-hk-zero-notation",
+          "def-inner-product-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-real-and-complex-inner-product-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-sobolev-norm-is-well-defined-and-definite",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-metric-closure-characterisation",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space"
+        ],
+        "strategy": "The displayed expression is a finite sum of $L^2$ inner products of the classes $u$ and $D_iu$, all of which are well defined and linear/conjugate-linear in the required slots. Its induced norm is $\\|u\\|_{L^2}^2+\\sum_i\\|D_iu\\|_{L^2}^2$, which is exactly the squared $W^{1,2}$ norm as defined by the finite sum formula of [[def-sobolev-space-wkp-and-its-norm]]. Since the norm is an $\\ell^2$ combination of $L^2$ seminorms, it inherits the parallelogram law from the $L^2$ inner product ([[thm-parallelogram-law]]), and the Jordan--von Neumann theorem ([[thm-jordan-von-neumann-polarization]]) identifies the displayed pairing as the inner product inducing it. Completeness is [[thm-sobolev-spaces-are-banach-spaces]], so the inner-product space is a Hilbert space in the sense of [[def-hilbert-space]]. Finally $H^1_0$ is by definition the closure of the test functions in $H^1$, hence closed, and a closed subspace of a complete space is complete for the restricted metric; the restricted pairing satisfies the inner-product axioms by restriction. The closed subspace lemma is the published [[lem-closed-subspace-of-a-banach-space-is-banach]] applied to the underlying normed space. This item exists because the Neumann and reaction coercivity results apply [[thm-lax-milgram]] on $H^1$ and on the closed mean-zero subspace rather than only on $H^1_0$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§3.5, the $H^1$ inner product and the associated norm, printed pp. 58–60"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§9.1, the Hilbert structure of $W^{1,2}$ and the inner product $\\int(\\nabla u\\cdot\\nabla v+uv)$, printed pp. 263–271"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.1, $H^1(U)$ with the inner product used to solve the Dirichlet problem, printed pp. 223–226"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace",
+        "kind": "theorem",
+        "title": "Weak Neumann solvability on the mean-zero subspace",
+        "statement": "Assume the Axiom of Choice, inherited through the Poincaré supplier named below, together with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$, $n\\ge1$, be a nonempty bounded connected $W^{1,2}$-extension domain ([[def-sobolev-extension-domain-and-extension-operator]]), let $H^1(\\Omega)$ carry the inner product of [[lem-w-one-two-is-a-hilbert-space]], and let $F$ be a bounded conjugate-linear functional on $H^1(\\Omega)$ with $$F(\\mathbf 1)=0,\\qquad \\mathbf 1\\text{ the constant function }1 .$$ Then there is a unique $u\\in H^1(\\Omega)$ with $\\int_\\Omega u\\,dx=0$ and $$\\int_\\Omega\\nabla u\\cdot\\overline{\\nabla v}\\,dx=F(v)\\qquad\\text{for every }v\\in H^1(\\Omega),$$ the weak form of the homogeneous Neumann problem $-\\Delta u=F$ with $\\partial_\\nu u=0$; the full solution set is $\\{u+c\\mathbf 1 : c\\in\\mathbb K\\}$, and with $C_W$ the Poincar\\'e--Wirtinger constant of [[thm-poincare-wirtinger-on-bounded-connected-extension-domains]], $$\\|u\\|_{H^1}\\le(1+C_W^2)\\|F\\| .$$ The compatibility $F(\\mathbf 1)=0$ is necessary: constants lie in the kernel of the form, so if $F(\\mathbf 1)\\ne0$ no solution exists. On a disconnected bounded $W^{1,2}$-extension domain there are finitely many connected components $\\Omega_k$. Solvability is equivalent to $F(\\mathbf 1_{\\Omega_k})=0$ for each component, with a unique solution having zero mean on each component; steps 1.3 and 4.2 prove this extension separately from the connected-domain Poincar\\'e--Wirtinger supplier.",
+        "deps": [
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "def-axiom-of-choice",
+          "def-bounded-linear-operator",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-dual-space-of-a-normed-space",
+          "def-hk-and-hk-zero-notation",
+          "def-integral-over-a-measurable-set",
+          "def-linear-subspace",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-bounded-linear-operator-equivalences",
+          "thm-holder-inequality-for-integrals",
+          "thm-lax-milgram",
+          "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "thm-zero-weak-gradient-implies-componentwise-constancy"
+        ],
+        "strategy": "Let $V=\\{v\\in H^1(\\Omega):\\int_\\Omega v=0\\}$. The functional $v\\mapsto\\int_\\Omega v$ is bounded on $H^1$ by H\\'older, so $V$ is a closed linear subspace and hence a Hilbert space for the restricted inner product. On $V$ the form $a(u,v)=\\int\\nabla u\\cdot\\overline{\\nabla v}$ is bounded with $M=1$ and coercive with constant $1/(1+C_W^2)$ by Poincar\\'e--Wirtinger ([[thm-poincare-wirtinger-on-bounded-connected-extension-domains]], a batch-9 item of this run). Lax--Milgram on $V$ gives a unique mean-zero solution of $a(u,v)=F(v)$ for $v\\in V$. For general $v\\in H^1$ write $v=v_0+c\\mathbf 1$ with $v_0\\in V$ and $c=|\\Omega|^{-1}\\int v$; then $a(u,v)=a(u,v_0)$ and, since $F$ is conjugate-linear, $F(v)=F(v_0)+\\bar cF(\\mathbf 1)=F(v_0)$, so the equation holds on all of $H^1$. Uniqueness of the mean-zero solution follows from coercivity on $V$. If $u'$ is any solution, then $\\nabla(u'-u)=0$ because the form vanishes on $u'-u$ tested against itself, so $u'-u$ is constant by [[thm-zero-weak-gradient-implies-componentwise-constancy]] and the solution set is $u+\\mathbb K\\mathbf 1$. Necessity of $F(\\mathbf 1)=0$ follows by testing $v=\\mathbf 1$. The disconnected caveat is recorded because the pla's drift verdict requires compatibility on each component; no unproved disconnected theorem is asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, Exercise 5.1: the weak Neumann problem is solvable exactly when $\\int_Uf=0$, with uniqueness up to constants and a mean-zero normalisation, printed pp. 105–106"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§9.5, Example 4 (homogeneous Neumann problem) and its weak formulation, printed pp. 295–297"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.4, the Poincar'e inequality used for the coercivity constant, printed pp. 98–99"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-positive-reaction-restores-coercivity-without-dirichlet-poincare",
+        "kind": "corollary",
+        "title": "A positive reaction term restores coercivity without Poincar\\'e",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open (no boundedness and no Dirichlet boundary condition assumed), and let $a$ be the divergence form of [[def-uniformly-elliptic-divergence-form-operator]] on $H^1(\\Omega)$ with ellipticity constant $\\theta$, coefficient bounds $M_a,M_b,M_c$ where $|b^i|\\le M_b$ componentwise, and $$\\operatorname{ess\\,inf}_{\\Omega}\\operatorname{Re}c\\ge c_0>0,\\qquad \\sqrt n\\,M_b<2\\min(\\theta,c_0).$$ Then $a$ is coercive on $\\Omega$ with constant $\\alpha:=\\min(\\theta,c_0)-\\sqrt n\\,M_b/2>0$: $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|_{H^1(\\Omega)}^2\\qquad(u\\in H^1(\\Omega)) .$$ Consequently [[thm-lax-milgram]] applies on the Hilbert space $H^1(\\Omega)$ and gives, for every bounded conjugate-linear functional $F$ on $H^1(\\Omega)$, a unique $u\\in H^1(\\Omega)$ with $a(u,v)=F(v)$ for all $v$: a second legitimate coercivity mechanism, driven by the reaction coefficient rather than by a Poincar\\'e inequality or boundary condition. When $b\\equiv0$, taking $M_b=0$, the condition is $\\operatorname{ess\\,inf}\\operatorname{Re}c>0$ only.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-l-infinity-on-a-measure-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-lax-milgram"
+        ],
+        "strategy": "The componentwise coefficient bound gives |sum_i b^i D_i u| ≤ sqrt(n) M_b |Du| by Cauchy--Schwarz in the coordinate index. The drift contribution is therefore at most sqrt(n) M_b ||Du||_2 ||u||_2. Young’s inequality yields Re a(u,u) ≥ (theta - sqrt(n) M_b/2)||Du||_2^2 + (c_0 - sqrt(n) M_b/2)||u||_2^2, hence coercivity with alpha = min(theta,c_0) - sqrt(n) M_b/2 > 0 under the stated condition. No integration by parts, boundary condition or Poincare inequality is used; boundedness and the Hilbert structure are supplied by the cited lemma results.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.7, Theorem 4.21's remark that a positive $c$ with $b=0$ can be taken with $\\gamma=\\theta-c_0$, printed p. 103"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the coercivity discussion for the shifted problem, printed pp. 72–75"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, the generalized Poisson operator with drift and reaction, printed p. 101. This is operator background; the boundary-independent coercivity argument is proved here."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting",
+        "kind": "corollary",
+        "title": "The inhomogeneous weak Dirichlet problem by a trace lifting",
+        "statement": "Assume the Axiom of Choice (through the published Sobolev trace results) together with Countable Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain, let $g\\in H^{1/2}(\\partial\\Omega)=W^{1/2,2}(\\partial\\Omega)$ and $F\\in H^{-1}(\\Omega)$, and let $a$ be the divergence form of [[def-uniformly-elliptic-divergence-form-operator]] satisfying the coercivity condition of [[thm-lax-milgram-solvability-for-coercive-divergence-form-equations]] on $H^1_0(\\Omega)$; write $\\alpha:=\\alpha_0/(1+C_P^2)>0$ for its coercivity constant, where $\\alpha_0=\\theta-\\sqrt n\\,C_PM_b-C_P^2M_c$. Fix a bounded right inverse $R:H^{1/2}(\\partial\\Omega)\\to H^1(\\Omega)$ of the trace, $T\\circ R=\\mathrm{id}$, as in [[thm-bounded-right-inverse-for-the-sobolev-trace]]. Then there is a unique $u\\in H^1(\\Omega)$ with $$Tu=g\\qquad\\text{and}\\qquad a(u,v)=F(v)\\quad\\text{for every }v\\in H^1_0(\\Omega),$$ and with $C_a=nM_a+nM_b+M_c$ the bound of [[lem-elliptic-form-is-well-defined-and-bounded]] on all of $H^1$, $$\\|u\\|_{H^1}\\le\\|Rg\\|_{H^1}+\\frac{\\|F\\|_{H^{-1}}+C_a\\|Rg\\|_{H^1}}{\\alpha}\\le C(\\Omega,a,R)\\big(\\|g\\|_{W^{1/2,2}}+\\|F\\|_{H^{-1}}\\big) .$$ The solution is independent of the choice of lifting; the displayed estimate depends on the fixed right inverse $R$. Boundary data outside the trace range $H^{1/2}(\\partial\\Omega)$ are not admissible: no $H^1$ function has such a trace, the trace range being exactly $H^{1/2}(\\partial\\Omega)$ ([[thm-sharp-trace-theorem-for-w-one-p]]).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "thm-bounded-right-inverse-for-the-sobolev-trace",
+          "thm-holder-inequality-for-integrals",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "thm-lax-milgram-solvability-for-coercive-divergence-form-equations",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-sharp-trace-theorem-for-w-one-p"
+        ],
+        "strategy": "Set $u_0:=Rg$ and define $\\widetilde F(v):=F(v)-a(u_0,v)$ for $v\\in H^1_0$. Since $a$ is bounded on $H^1_0$ with bound $C_a$ and $F\\in H^{-1}$, the functional $\\widetilde F$ is bounded and conjugate-linear with $\\|\\widetilde F\\|_{H^{-1}}\\le\\|F\\|_{H^{-1}}+C_a\\|u_0\\|_{H^1}$. By [[thm-lax-milgram-solvability-for-coercive-divergence-form-equations]] there is a unique $w\\in H^1_0$ with $a(w,v)=\\widetilde F(v)$ for all $v\\in H^1_0$, and the energy bound gives $\\|w\\|_{H^1}\\le\\|\\widetilde F\\|_{H^{-1}}/\\alpha$ with the coercivity constant $\\alpha$ of the previous paragraph. Then $u:=u_0+w$ has $Tu=Tu_0+Tw=g+0$ because $w\\in H^1_0$ equals the kernel of the trace ([[thm-kernel-of-the-trace-is-w-one-p-zero]]), and $a(u,v)=a(u_0,v)+a(w,v)=F(v)$. Uniqueness: two solutions differ by an element of $\\ker T=H^1_0$ solving the homogeneous equation, hence vanish by coercivity. The bound uses the right-inverse estimate $\\|Rg\\|_{H^1}\\le C\\|g\\|_{W^{1/2,2}}$. The Axiom of Choice is inherited from the published trace right-inverse theorem; no new choice is made in the lifting argument beyond the fixed $R$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.3–4.5, the dual data space and homogeneous weak Dirichlet problem, printed pp. 95–101. The boundary lifting reduction is proved here."
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 9.5, the weak Dirichlet setup, printed pp. 291–294; the boundary lifting estimate is proved here with the cited trace right inverse."
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 8.4, Example 1, printed pp. 222–223: inhomogeneous Dirichlet data and the affine space K. Examples 3–4 on pp. 225–226 concern homogeneous and inhomogeneous Neumann data, not Dirichlet lifting."
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-classical-solutions-satisfy-the-weak-formulation",
+        "kind": "lemma",
+        "title": "Classical solutions satisfy the weak formulation",
+        "statement": "Assume the Axiom of Choice (through the published Sobolev Gauss--Green formula) and Countable Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain, let $a^{ij}\\in C^1(\\overline\\Omega)$, $b^i,c\\in C(\\overline\\Omega)$ with uniform ellipticity constant $\\theta$ ([[def-uniformly-elliptic-divergence-form-operator]], [[def-bounded-c-k-domain-and-boundary-charts]]), let $u\\in C^2(\\overline\\Omega)\\cap H^1_0(\\Omega)$ and $f\\in C(\\overline\\Omega)$, and set $$Lu:=-D_i(a^{ij}D_ju)+b^iD_iu+cu .$$ If $Lu=f$ on $\\Omega$, then $u$ is a weak solution in the sense of [[def-weak-dirichlet-solution-for-a-divergence-form-operator]] for the datum $F_f(v):=(f,v)_{L^2}$: $$a(u,v)=\\int_\\Omega f\\overline v\\,dx\\qquad\\text{for every }v\\in H^1_0(\\Omega) .$$ No converse is claimed: the lemma is the classical-to-weak consistency statement only.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-classical-normal-derivative",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-ltwo-and-divergence-data-embed-in-h-minus-one",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "thm-holder-inequality-for-integrals",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-sobolev-gauss-green-formula-on-c-one-domains"
+        ],
+        "strategy": "Fix $v\\in H^1_0(\\Omega)$. Apply the Sobolev Gauss--Green formula ([[thm-sobolev-gauss-green-formula-on-c-one-domains]]) to the $C^1$ field $F_i:=a^{ij}D_ju$ and the test class $\\overline v\\in H^1$: $\\int_\\Omega a^{ij}D_ju\\,\\overline{D_iv}\\,dx=-\\int_\\Omega D_i(a^{ij}D_ju)\\overline v\\,dx+\\int_{\\partial\\Omega}T(a^{ij}D_ju)T(\\overline v)\\nu_i\\,dS$. The boundary term vanishes because $v\\in H^1_0(\\Omega)=\\ker T$ ([[thm-kernel-of-the-trace-is-w-one-p-zero]]) and $T(\\overline v)=\\overline{Tv}=0$. Substituting the classical identity $Lu=f$ and the weak-derivative agreement of [[lem-classical-derivatives-are-weak-derivatives]] turns the sum of all terms into $\\int_\\Omega f\\overline v\\,dx$, which is the claimed weak equation with $F_f(v)=(f,v)_{L^2}\\in H^{-1}$ ([[lem-ltwo-and-divergence-data-embed-in-h-minus-one]]). All boundary terms are controlled by the published trace theorem, and the coefficient regularity $C^1(\\overline\\Omega)$ is exactly what makes $D_i(a^{ij}D_ju)$ a continuous function.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.6, the passage from the classical to the weak formulation of the Dirichlet problem, printed pp. 101–102"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§9.5, Step A: every classical solution is a weak solution for the Dirichlet problem, printed pp. 292–294"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the weak formulation of the Dirichlet problem for the operator with $C^1$ coefficients, printed pp. 68–70"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Section 2.2, printed p. 37, classical-to-weak integration by parts for Poisson; Section 5.1, printed p. 101, the divergence-form weak equation."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-weak-solution-depends-continuously-on-data",
+        "kind": "corollary",
+        "title": "Weak solutions depend continuously on the data",
+        "statement": "Assume the Axiom of Choice and Countable Choice, and take the hypotheses of [[cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting]] with one fixed right inverse $R$ and coercivity constant $\\alpha=\\alpha_0/(1+C_P^2)$ (the constant displayed there, where $\\alpha_0=\\theta-\\sqrt n\\,C_PM_b-C_P^2M_c$). If $u_i$ solve the weak Dirichlet problems with data $(F_i,g_i)\\in H^{-1}(\\Omega)\\times H^{1/2}(\\partial\\Omega)$, $i=1,2$, then $$\\|u_1-u_2\\|_{H^1}\\le\\Big(1+\\frac{C_a}{\\alpha}\\Big)\\|R(g_1-g_2)\\|_{H^1}+\\frac{\\|F_1-F_2\\|_{H^{-1}}}{\\alpha}\\le C(\\Omega,a)\\big(\\|F_1-F_2\\|_{H^{-1}}+\\|g_1-g_2\\|_{W^{1/2,2}}\\big),$$ where $C_a=nM_a+nM_b+M_c$ is the full $H^1$ bound of the form and $C(\\Omega,a)$ depends only on the domain, the coefficients, the coercivity constant and the fixed right inverse. Thus the solution map is Lipschitz on the product of the data spaces, and $u_1=u_2$ when the data agree.",
+        "deps": [
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting",
+          "cor-lax-milgram-inverse-has-norm-at-most-one-over-alpha",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-operator-norm",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound",
+          "thm-bounded-right-inverse-for-the-sobolev-trace",
+          "thm-lax-milgram-solvability-for-coercive-divergence-form-equations"
+        ],
+        "strategy": "Put $w:=(u_1-u_2)-R(g_1-g_2)\\in H^1_0$; the difference of the two weak equations gives $a(w,v)=(F_1-F_2)(v)-a(R(g_1-g_2),v)=:\\widetilde F(v)$ for all $v\\in H^1_0$, with $\\|\\widetilde F\\|_{H^{-1}}\\le\\|F_1-F_2\\|_{H^{-1}}+C_a\\|R(g_1-g_2)\\|_{H^1}$. The a priori energy bound ([[lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound]]) gives $\\|w\\|_{H^1}\\le\\|\\widetilde F\\|/\\alpha$, and the triangle inequality plus the right-inverse bound $\\|R(g_1-g_2)\\|_{H^1}\\le C\\|g_1-g_2\\|_{W^{1/2,2}}$ yields the displayed Lipschitz estimate. The abstract form of the estimate is the operator bound [[cor-lax-milgram-inverse-has-norm-at-most-one-over-alpha]]. This is the pla's item 17.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§9.5, continuous dependence of the solution on the data via the Lax--Milgram solution operator, printed pp. 291–298"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.3 and §4.5, the norm control of $H^{-1}$ data and the a priori estimate for weak solutions, printed pp. 95–101"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, Theorem 5.1: the solution map is linear and continuous with $\\|u\\|_{H^1}\\le C\\|f\\|_{L^2}$, printed pp. 101–102"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-sharp-dirichlet-poincare-inequality-on-an-interval",
+        "kind": "lemma",
+        "title": "The sharp Dirichlet Poincare inequality on an interval",
+        "statement": "Assume Countable Choice. Let $L>0$, $I=(0,L)$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then every $u\\in H^1_0(I;\\mathbb K)$ satisfies\n$$\\|u\\|_{L^2(I)}\\le\\frac L\\pi\\|u'\\|_{L^2(I)}.$$\nThe constant $L/\\pi$ is optimal: $\\phi(x)=\\sin(\\pi x/L)$ belongs to $H^1_0(I)$, is nonzero, and attains equality. Moreover\n$$\\int_I\\phi'\\overline{v'}\\,dx=(\\pi/L)^2\\int_I\\phi\\overline v\\,dx\\qquad(v\\in H^1_0(I)).$$\nThis is a direct interval inequality and weak identity; no spectral decomposition is assumed.",
+        "deps": [
+          "cor-pi-is-the-first-positive-sine-zero",
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-the-standard-smooth-step-function",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-integral-elementary-bounds",
+          "thm-additivity-over-subintervals",
+          "thm-algebra-of-derivatives",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-chain-rule",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-continuous-implies-integrable",
+          "thm-extreme-value-r",
+          "thm-ftc-second-part",
+          "thm-integration-by-parts",
+          "thm-linearity-of-the-integral",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "strategy": "Put $k=\\pi/L$ and $\\phi=\\sin(kx)$. The derivative and positivity suppliers give $\\phi''=-k^2\\phi$ and $\\phi>0$ on $I$. For $u\\in C_c^\\infty(I;\\mathbb K)$, set $w=u/\\phi$, which is smooth and compactly supported in $I$. Expanding $|u'|^2$ and using $(|w|^2)'=2\\operatorname{Re}(w'\\overline w)$ gives\n$$\\int_I(|u'|^2-k^2|u|^2)\\,dx=\\int_I\\phi^2|w'|^2\\,dx+\\int_I(\\phi\\phi'|w|^2)'\\,dx=\\int_I\\phi^2|w'|^2\\,dx\\ge0.$$\nThe derivative term integrates to zero on a compact subinterval containing the support, by integration by parts; complex computations are componentwise real computations. The bounded Borel Riemann/Lebesgue comparison licenses these smooth integrations as Lebesgue integrations. For arbitrary $u\\in H^1_0$, approximate in $H^1$ by tests using the closure definition. The reverse triangle inequality for the $L^2$ norm makes both squared norms converge, giving the inequality without any singular quotient at an endpoint.\nFor the equality witness, take the published smooth step $\\sigma$ and $\\eta_\\varepsilon(x)=\\sigma(x/\\varepsilon-1)\\sigma((L-x)/\\varepsilon-1)$ for $0<\\varepsilon<L/4$. Then $\\eta_\\varepsilon\\phi\\in C_c^\\infty(I)$, $|\\eta_\\varepsilon'|\\le C/\\varepsilon$, and the difference from $\\phi$ is supported in endpoint strips of total length $4\\varepsilon$. Since $\\phi$ vanishes at the endpoints and $|\\phi'|\\le k$, the fundamental theorem of calculus gives $|\\phi|\\le k\\operatorname{dist}(x,\\{0,L\\})$. Thus on the strips $|\\phi|\\le2k\\varepsilon$, so $\\|(\\eta_\\varepsilon-1)\\phi\\|_2=O(\\varepsilon^{3/2})$ and $\\|((\\eta_\\varepsilon-1)\\phi)'\\|_2=O(\\varepsilon^{1/2})$. This proves $\\phi\\in H^1_0$ directly. It is nonzero by positivity. Integration by parts with $v\\in C_c^\\infty$ gives $\\int\\phi'\\overline{v'}=k^2\\int\\phi\\overline v$; both sides extend to every $H^1_0$ test by the $L^2$ Holder bounds. Testing with $v=\\phi$ gives $\\|\\phi'\\|_2^2=k^2\\|\\phi\\|_2^2$, proving equality and optimality. P: ground-state identity, closure, explicit boundary cutoff.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 8.6, Theorem 8.22 and the example on printed pp. 231–232: e_n=sqrt(2) sin(n pi x), lambda_n=n^2 pi^2. The interval statement is extracted and scaled; the independent proof here replaces the spectral decomposition by a ground-state identity."
+            }
+          ]
+        },
+        "dependency_level": 0
+      }
+    ]
+  },
+  {
+    "order": 458.03,
+    "id": "lax-milgram-and-weak-elliptic-solutions-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Lax Milgram and Weak Elliptic Solutions — Examples",
+    "companion": "lax-milgram-and-weak-elliptic-solutions",
+    "requires": [
+      "lax-milgram-and-weak-elliptic-solutions"
+    ],
+    "items": [
+      {
+        "id": "ex-weak-dirichlet-poisson-problem-on-an-interval",
+        "kind": "example",
+        "title": "The weak Dirichlet Poisson problem on an interval",
+        "statement": "Assume the Axiom of Choice inherited through the cited suppliers, together with Countable Choice. Let $I=(0,1)$ and $f\\in L^2(I)$. Define $$u(x):=\\int_0^1G(x,y)f(y)\\,dy,\\qquad G(x,y):=\\min(x,y)-xy .$$ Then $G$ is continuous on $[0,1]^2$ with $G(0,\\cdot)=G(1,\\cdot)=0$, $u\\in H^1_0(I)$ is the unique weak solution of $-u''=f$ with zero boundary values in the sense of [[thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem]], and $$\\int_0^1u'(x)\\overline{\\varphi'(x)}\\,dx=\\int_0^1f(x)\\overline{\\varphi(x)}\\,dx\\qquad\\text{for every }\\varphi\\in C_c^\\infty(I) .$$ The solution is recovered by two integrations: $u'$ is absolutely continuous, $u''=-f$ a.e. and $u(0)=u(1)=0$; for $f=\\mathbf 1$ this gives the explicit $u(x)=\\frac12x(1-x)$. More generally, if $F\\in H^{-1}(I)$ is represented as $F(v)=(f_0,v)_{L^2}+(f_1,v')_{L^2}$ with $f_0,f_1\\in L^2(I)$ ([[thm-every-h-minus-one-functional-has-ltwo-plus-divergence-form]]), then the weak solution is $u(x)=\\int_0^1G(x,y)f_0(y)\\,dy+\\int_0^1\\partial_yG(x,y)f_1(y)\\,dy$, where $\\partial_yG$ is taken in the distributional sense, matching the one-dimensional integration-by-parts formula. This illustrates item 13 of the design on a one-dimensional model; no general Green-function theory is claimed.",
+        "deps": [
+          "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+          "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-integral-over-a-measurable-set",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-the-standard-smooth-step-function",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-compact-support-zero-extension-in-wkp",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-absolute-continuity-of-the-integral",
+          "thm-acl-characterisation-of-w-one-p",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-every-h-minus-one-functional-has-ltwo-plus-divergence-form",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "thm-ftc-second-part",
+          "thm-holder-inequality-for-integrals",
+          "thm-extreme-value-r",
+          "thm-integration-by-parts",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-linearity-of-the-integral",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "strategy": "Differentiate the Dirichlet Green kernel under the integral using dominated convergence. Prove the zero-endpoint H^1_0 criterion by smooth boundary cutoffs, the endpoint Cauchy estimates for chi-prime times w, and zero extension/mollification; then verify the weak identity and use the same kernel for the L^2-plus-divergence representation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Section 5.2, Exercise 5.3, printed p. 114: weak one-dimensional Poisson solutions have a second weak derivative and are C1. The Green kernel formula is proved directly here, not asserted by that exercise."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.5, the one-dimensional model of the weak Dirichlet problem, printed pp. 99–101"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 8.4, Proposition 8.15 and Remark 22, printed pp. 221–222: one-dimensional weak Dirichlet problems (with a positive reaction term) and the Riesz identification; the pure Poisson Green kernel is computed here."
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-ltwo-forcing-defines-an-h-minus-one-functional",
+        "kind": "example",
+        "title": "$L^2$ forcing defines an $H^{-1}$ functional",
+        "statement": "Assume the Axiom of Choice inherited through the cited suppliers, together with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, nonempty and bounded in one direction, with Poincar\\'e constant $C_P$ for $W^{1,2}_0$ ([[thm-poincare-inequality-for-w-one-p-zero]]). For $f\\in L^2(\\Omega)$ define $F_f(v):=(f,v)_{L^2}$, $v\\in H^1_0(\\Omega)$. Then $F_f\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]) with $$\\|F_f\\|_{H^{-1}}\\le C_P\\|f\\|_{L^2}.$$ If moreover $f\\in H^1_0(\\Omega)$ and $f\\ne0$, testing $v=f$ gives the data-dependent lower bound $$\\|F_f\\|_{H^{-1}}\\ge\\frac{\\|f\\|_{L^2}^2}{\\|f\\|_{H^1_0}};$$ no uniform positive lower bound by $\\|f\\|_{L^2}$ holds on all of $H^1_0$, as the interval sine sequence below shows. The map $f\\mapsto F_f$ is injective: if $F_f=0$ then $(f,v)_{L^2}=0$ for all $v\\in C_c^\\infty(\\Omega)$, hence $f=0$ a.e. Taking $f=\\mathbf 1$ on a bounded interval $(0,L)$ shows that the upper bound $C_P\\|f\\|_{L^2}$ is at least $(L/\\pi)\\sqrt L$ there and grows with the domain diameter. This is the exact cheap estimate that the plan records as consumed by the weak Dirichlet problem ([[lem-ltwo-and-divergence-data-embed-in-h-minus-one]]); it is not surjectivity of the embedding, which fails for $n\\ge1$ (an explicit datum outside its range is constructed in step 1.4; [[thm-every-h-minus-one-functional-has-ltwo-plus-divergence-form]] supplies the general representation).",
+        "deps": [
+          "thm-ftc-second-part",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-integral-over-a-measurable-set",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-test-function-space-d-of-an-open-set",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-integral-elementary-bounds",
+          "lem-ltwo-and-divergence-data-embed-in-h-minus-one",
+          "lem-sharp-dirichlet-poincare-inequality-on-an-interval",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-holder-inequality-for-integrals",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-the-standard-smooth-step-function",
+          "thm-extreme-value-r",
+          "thm-integration-by-parts"
+        ],
+        "strategy": "The upper estimate is the Hölder plus Poincaré embedding. Testing v=f gives only the exact data-dependent lower bound ||F_f|| >= ||f||_2^2/||f||_{H^1_0}; an explicit high-frequency sine sequence proves no uniform lower bound proportional to ||f||_2. Distributional injectivity and interval scaling remain.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.3–4.4, the estimate $\\|f\\|_{H^{-1}}\\le C\\|f\\|_{L^2}$ from Poincar'e, printed pp. 95–99"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, $L^2$ data are used through the pairing $(f,v)_{L^2}$ in the weak equation, printed p. 101"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.1, the weak problem with $L^2$ forcing, printed pp. 223–226"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-nonsymmetric-coercive-elliptic-form",
+        "kind": "example",
+        "title": "A nonsymmetric coercive elliptic form",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be nonempty, open and bounded in one direction, and let $C_P$ be its Poincar\\'e constant for $W^{1,2}_0$. Set $b=e_1$ and define $$a(u,v):=\\int_\\Omega\\nabla u\\cdot\\overline{\\nabla v}\\,dx+\\int_\\Omega\\partial_1u\\,\\overline v\\,dx\\qquad(u,v\\in H^1_0(\\Omega)).$$ This is a bounded sesquilinear form with bound $2$ and is coercive with constant $1/(1+C_P^2)$. It is not symmetric: choose $x_0\\in\\Omega$ with $x_{0,2}\\ne0$, a ball $B_r(x_0)\\subset\\Omega$, a nonzero real radial bump $\\eta$ supported in that ball, and put $u=x_2\\eta$, $v=x_1\\eta$. Then $$a(u,v)-\\overline{a(v,u)}=-\\int_\\Omega x_2\\eta^2\\,dx=-x_{0,2}\\int_\\Omega\\eta^2\\,dx\\ne0.$$ Thus Lax--Milgram ([[thm-lax-milgram]]) applies to this weak Dirichlet problem for $Lu=-\\Delta u+\\partial_1u$, while the minimisation characterisation of [[cor-symmetric-lax-milgram-is-energy-minimisation]] does not apply. This is the companion example of [[rem-nonsymmetric-lax-milgram-is-not-a-scalar-minimisation-principle]] and of the drift term in [[cex-a-large-adverse-zero-order-term-destroys-dirichlet-coercivity]].",
+        "deps": [
+          "cor-symmetric-lax-milgram-is-energy-minimisation",
+          "def-axiom-of-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-test-function-space-d-of-an-open-set",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-coercivity-of-the-principal-dirichlet-form",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-the-standard-smooth-step-function",
+          "thm-chain-rule",
+          "lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands",
+          "rem-nonsymmetric-lax-milgram-is-not-a-scalar-minimisation-principle",
+          "thm-holder-inequality-for-integrals",
+          "thm-algebra-of-derivatives",
+          "thm-ftc-second-part",
+          "thm-lax-milgram",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "strategy": "Specialize to b=e_1 in n>=2. A compactly supported test-function calculation shows the drift has zero real part; density extends it to H^1_0. Poincare gives coercivity, and a radial bump away from x_2=0 gives the explicit nonzero antisymmetric pairing.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, the nonsymmetric form $\\alpha(u,v)$ with the first-order term, printed p. 101"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.6, the general linear second-order elliptic operator with drift, printed pp. 101–103"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§9.5, nonsymmetric elliptic operators solved by Lax–Milgram, printed pp. 291–298"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-bounded-form-without-coercivity-need-not-be-solvable",
+        "kind": "counterexample",
+        "title": "A bounded form without coercivity need not be solvable",
+        "statement": "Let $H$ be a nonzero real or complex Hilbert space and let $a\\equiv0$, so $a$ is a bounded sesquilinear form with bound $M=0$, but $a$ is not coercive: $\\operatorname{Re}a(u,u)=0$ for all $u$, so no $\\alpha>0$ satisfies $\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2$ at any $u\\ne0$. Let $F\\ne0$ be a bounded conjugate-linear functional on $H$. Then the equation $a(u,v)=F(v)$ for all $v\\in H$ has no solution, since its left side is identically $0$ while the right side is not. Hence boundedness alone does not imply existence or uniqueness, and the coercivity hypothesis of [[thm-lax-milgram]] cannot be dropped. The same witness shows that the estimate $\\|u\\|\\le\\|F\\|/\\alpha$ has no content without $\\alpha>0$.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-bounded-linear-operator",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-hilbert-space",
+          "def-operator-norm",
+          "thm-lax-milgram"
+        ],
+        "strategy": "Choose $v_0\\in H$ with $F(v_0)\\ne0$, possible because $F\\ne0$ and $H\\ne\\{0\\}$. Any solution $u$ would satisfy $0=a(u,v_0)=F(v_0)\\ne0$, a contradiction. The form is bounded with the optimal constant $M=0$ and fails coercivity as displayed. This is the minimal witness separating boundedness from coercivity; it is the plan’s B-page counterexample and requires no further construction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.5–4.7, the coercivity hypothesis is used essentially in Theorem 4.11 and Theorem 4.22, printed pp. 99–105"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, hypothesis (iii) (strict coercivity) is required for the Lax–Milgram Lemma, printed p. 71"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, ellipticity/coercivity is a hypothesis of Theorem 4.12, printed p. 98"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-coercive-form-need-not-be-symmetric",
+        "kind": "counterexample",
+        "title": "A coercive form need not be symmetric",
+        "statement": "Assume Countable Choice for the Lax--Milgram conclusion. On $H=\\mathbb C^2$ with the standard inner product define $$a(u,v):=u_1\\overline{v_1}+u_2\\overline{v_2}+iu_1\\overline{v_2}.$$ Then $a$ is sesquilinear in the convention of [[def-bounded-coercive-and-symmetric-sesquilinear-forms]], bounded with $|a(u,v)|\\le2\\|u\\|\\|v\\|$ and coercive with $\\operatorname{Re}a(u,u)\\ge\\tfrac12\\|u\\|^2$, so $\\alpha=\\tfrac12$. It is not symmetric: with $e_1=(1,0)$, $e_2=(0,1)$ one has $a(e_1,e_2)=i$ while $\\overline{a(e_2,e_1)}=0$. Hence the Lax--Milgram theorem [[thm-lax-milgram]] applies to this nonsymmetric form, and symmetry is not needed for existence and uniqueness; the energy-minimisation corollary [[cor-symmetric-lax-milgram-is-energy-minimisation]] is the part that genuinely uses symmetry. The example is consistent with the abstract forcing remark [[rem-nonsymmetric-lax-milgram-is-not-a-scalar-minimisation-principle]].",
+        "deps": [
+          "def-countable-choice",
+          "cor-symmetric-lax-milgram-is-energy-minimisation",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-hilbert-space",
+          "def-real-and-complex-inner-product-space",
+          "rem-nonsymmetric-lax-milgram-is-not-a-scalar-minimisation-principle",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-lax-milgram"
+        ],
+        "strategy": "Boundedness: $|a(u,v)|\\le|u_1||v_1|+|u_2||v_2|+|u_1||v_2|\\le(|u_1|+|u_2|)(|v_1|+|v_2|)\\le2\\|u\\|\\|v\\|$. Coercivity: $a(u,u)=|u_1|^2+|u_2|^2+i|u_1|^2$, whose real part is $\\|u\\|^2$. Nonsymmetry is the two-vector computation displayed. All constants are explicit; no hidden smallness or dimension restriction is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, the Lax–Milgram theorem covers continuous coercive forms without assuming symmetry, printed pp. 139–140"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.4, `Lax–Milgram and nonsymmetric sesquilinear forms`, printed pp. 98–100"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§10.2, the remark that $a$ is no longer symmetric unless $b\\equiv0$, printed p. 233"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-arbitrary-ltwo-boundary-data-need-not-have-an-h-one-lifting",
+        "kind": "counterexample",
+        "title": "Arbitrary $L^2$ boundary data need not have an $H^1$ lifting",
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^2$ be a bounded $C^1$ domain, let a boundary chart contain the closed straight segment $[0,1]$ strictly inside its patch, and let $g:=\\mathbf 1_{(0,1)}$ on that segment, extended by zero. Then $g\\in L^2(\\partial\\Omega)$, but $g\\notin H^{1/2}(\\partial\\Omega)=W^{1/2,2}(\\partial\\Omega)$: the Slobodeckij seminorm of the line jump at exponent $\\theta=1-1/2$ diverges logarithmically, and by the sharp trace theorem the trace range of $W^{1,2}(\\Omega)$ is exactly $W^{1/2,2}(\\partial\\Omega)$. Consequently no $u\\in H^1(\\Omega)$ has $Tu=g$, so the boundary-value problem with this $L^2$ datum is not solvable in $H^1$: the lifting hypothesis of the weak Dirichlet formulation cannot be relaxed to arbitrary $L^2$ boundary data. No claim is made about the range $1<p<2$, where the same jump function does lie in the trace space.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-countable-choice",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-fractional-boundary-norm-is-independent-of-atlas",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "strategy": "The published counterexample supplies the exact chart computation: integrating both outside half-lines for the indicator of $(0,1)$ gives $(4/(p\\theta))\\int_0^1x^{-p\\theta}dx$ up to constants, finite exactly when $p\\theta<1$; at $p=2$, $\\theta=1/2$ one has $p\\theta=1$ and the integral diverges logarithmically, so $g\\notin W^{1/2,2}(\\partial\\Omega)$. The sharp trace theorem identifies the range of $T$ with $W^{1/2,2}$, so no $H^1$ lifting exists. This is a citation of published content with the exponent checked; no new computation is claimed beyond the endpoint evaluation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 3.9, Theorem 3.44 and the paragraph following its proof, printed pp. 72–73: the p>1 trace range is a proper fractional/Besov subspace of Lp."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 3.9, printed pp. 72–73, trace background only. The indicator jump and its divergent Slobodeckij seminorm are computed in the local proof; no jump example is claimed on p. 72."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284–305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "Teorema [1.I], printed p. 289: the trace class is a strict subspace of $L^p(\\Gamma)$"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§9.4–9.5, the trace space of $W^{1,p}$ is strictly smaller than $L^p(\\partial\\Omega)$, printed pp. 287–298"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-neumann-poisson-problem-is-not-coercive-on-all-of-h-one",
+        "kind": "counterexample",
+        "title": "The Neumann Poisson problem is not coercive on all of $H^1$",
+        "statement": "Assume the Axiom of Choice inherited through the cited suppliers, together with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be a nonempty bounded open set and consider the form $a(u,v)=\\int_\\Omega\\nabla u\\cdot\\overline{\\nabla v}\\,dx$ on $H^1(\\Omega)$ with the inner product of [[lem-w-one-two-is-a-hilbert-space]]. The constant function $\\mathbf 1$ satisfies $a(\\mathbf 1,\\mathbf 1)=0$ while $\\|\\mathbf 1\\|_{H^1}=|\\Omega|^{1/2}>0$, so no $\\alpha>0$ can satisfy $\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2_{H^1}$ for all $u\\in H^1(\\Omega)$: the form is not coercive on $H^1(\\Omega)$, and Lax--Milgram does not apply in that space. The obstruction is exactly the kernel: $a(u,u)=0$ forces $\\nabla u=0$, hence $u$ is constant on each connected component ([[thm-zero-weak-gradient-implies-componentwise-constancy]]), and the associated Neumann problem $a(u,v)=F(v)$ for all $v$ can have no solution when $F(\\mathbf 1)\\ne0$ while constants give nontrivial solutions of the homogeneous equation. This motivates the mean-zero subspace formulation [[thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace]] and its compatibility condition.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-connected-component-and-quasicomponent",
+          "def-hilbert-space",
+          "def-integral-over-a-measurable-set",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace",
+          "thm-zero-weak-gradient-implies-componentwise-constancy"
+        ],
+        "strategy": "The computation is immediate: $\\nabla\\mathbf 1=0$, so $a(\\mathbf 1,\\mathbf 1)=0$, while $\\|\\mathbf 1\\|^2_{H^1}=\\int_\\Omega1^2=|\\Omega|>0$. Coercivity would require $0=\\operatorname{Re}a(\\mathbf 1,\\mathbf 1)\\ge\\alpha|\\Omega|>0$, a contradiction for every $\\alpha>0$. The kernel statement is the cited zero-gradient constancy theorem, and the compatibility obstruction is testing the weak equation at $v=\\mathbf 1$. This is the plan’s counterexample motivating quotient/mean-zero Neumann formulations; it is the direct companion of the mean-zero solvability theorem on the A page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, Exercise 5.1: the Neumann problem is solvable only under the compatibility condition and unique only up to constants, printed pp. 105–106"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 9.5, Example 4, printed pp. 296–297: Neumann testing on H1 for the reaction-shifted equation -Delta u+u=f. This is formulation background; the unshifted kernel obstruction is computed here."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.4, introductory discussion, printed p. 98: constants have zero derivative, motivating boundary or mean-zero conditions for Poincare estimates."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-complex-sesquilinear-coercivity-differs-from-bilinear-positivity",
+        "kind": "example",
+        "title": "Complex sesquilinear coercivity differs from bilinear positivity",
+        "statement": "On $H=\\mathbb C$ define $a(u,v):=u\\overline v$ and $b(u,v):=uv$. Then $a$ is sesquilinear in the convention of [[def-bounded-coercive-and-symmetric-sesquilinear-forms]] (linear in the first argument, conjugate-linear in the second), bounded with $M=1$, and coercive with constant $\\alpha=1$ because $a(u,u)=|u|^2$. The expression $b$ is bilinear, not conjugate-linear in the second argument, and it fails the coercivity condition: $b(i,i)=-1$, so $\\operatorname{Re}b(u,u)\\ge\\alpha|u|^2$ fails at $u=i$ for every $\\alpha>0$. More generally $b(u,u)=u^2$ is not real for $u\\notin\\mathbb R\\cup i\\mathbb R$, and its real part is negative, for example, at $u=1+2i$, since $(1+2i)^2=-3+4i$. Hence the conjugation in the second slot is not cosmetic: the complex Lax--Milgram hypotheses cannot be applied to this bilinear pairing $b$, and the real bilinear convention of [[def-bounded-coercive-and-symmetric-sesquilinear-forms]] is genuinely a different hypothesis. This tests exactly the convention on which [[thm-lax-milgram]] and [[lem-form-to-bounded-operator-by-hilbert-riesz]] depend, and complements the real-form sources [Si] and [H], which state real bilinear versions.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-hilbert-space",
+          "def-real-and-complex-inner-product-space",
+          "lem-form-to-bounded-operator-by-hilbert-riesz",
+          "thm-lax-milgram"
+        ],
+        "strategy": "The claims about $a$ are the direct scalar computations $|u\\overline v|=|u||v|$ and $u\\overline u=|u|^2$. For $b$, bilinearity is $b(\\lambda u,v)=\\lambda b(u,v)=b(u,\\lambda v)$, and $b(i,i)=i^2=-1$ exhibits failure of coercivity. The comparison isolates the hypothesis that the complex theory requires; it uses no compactness, no completeness and no choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the real bilinear Lax–Milgram Lemma (hypotheses (i)–(iii)), printed p. 71"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.7, the real Hilbert-space bilinear form of Theorem 4.20, printed p. 103"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 5.3, Theorem 5.6 and Corollary 5.8, printed pp. 138–140: real bilinear coercivity background. The complex sesquilinear/bilinear distinction is computed directly here."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-one-dimensional-form-attains-the-lax-milgram-one-over-alpha-bound",
+        "kind": "example",
+        "title": "A one-dimensional form attains the $1/\\alpha$ Lax--Milgram bound",
+        "statement": "On $H=\\mathbb C$ with the standard inner product and $\\alpha>0$, let $a(u,v):=\\alpha u\\overline v$ and let $F_c(v):=c\\overline v$ for a fixed $c\\in\\mathbb C$. Then $a$ is bounded with $M=\\alpha$, coercive with the same constant $\\alpha$, and the Lax--Milgram solution of $a(u,v)=F_c(v)$ for all $v$ is $$u=\\frac{c}{\\alpha},$$ since $\\alpha u\\overline v=c\\overline v$ for all $v$ forces $\\alpha u=c$. The solution operator has norm exactly $1/\\alpha$: $\\|F_c\\|=\\sup_{|v|\\le1}|c\\overline v|=|c|$ and $|u|=|c|/\\alpha$, so $$\\|S\\|=\\frac1\\alpha .$$ Hence the bound of [[cor-lax-milgram-inverse-has-norm-at-most-one-over-alpha]] is attained and cannot be improved uniformly over coercive forms; this is the plan’s sharpness example and the one-dimensional model of the general estimate.",
+        "deps": [
+          "cor-lax-milgram-inverse-has-norm-at-most-one-over-alpha",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-hilbert-space",
+          "def-operator-norm",
+          "thm-lax-milgram"
+        ],
+        "strategy": "Solve directly: testing against $v=1$ gives $u=c/\\alpha$, and this $u$ works for every $v$; uniqueness is [[thm-lax-milgram]]. The operator norms are computed from the definition: $\\|F_c\\|=|c|$ and the solution map sends $F_c$ to $c/\\alpha$, so its norm is exactly $1/\\alpha$. No estimate with a better constant is possible because equality holds on every nonzero datum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§5.3, the estimate $|u|\\le|\\varphi|/\\alpha$ and its use in Corollary 5.8, printed p. 140"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, the two-sided isomorphism bound in the Lax–Milgram Lemma, printed p. 71, with surjectivity completed on p. 72."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-neumann-kernel-dimension-equals-the-number-of-connected-components",
+        "kind": "example",
+        "title": "The Neumann kernel is spanned by the componentwise constants",
+        "statement": "Assume the Axiom of Choice inherited through the cited suppliers, together with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be a nonempty bounded extension domain ([[def-sobolev-extension-domain-and-extension-operator]]) whose connected components are $\\Omega_1,\\dots,\\Omega_m$, and let $a(u,v)=\\int_\\Omega\\nabla u\\cdot\\overline{\\nabla v}\\,dx$ on $H^1(\\Omega)$. Then $$\\{u\\in H^1(\\Omega):a(u,v)=0\\ \\text{for all }v\\in H^1(\\Omega)\\}=\\{u\\in H^1(\\Omega):\\nabla u=0\\ \\text{a.e.}\\}=\\operatorname{span}_{\\mathbb K}\\{\\mathbf 1_{\\Omega_1},\\dots,\\mathbf 1_{\\Omega_m}\\},$$ the space of classes constant on each connected component. The indicators are linearly independent because they are nonzero on disjoint sets of positive measure, so the kernel is $m$-dimensional; for a connected $\\Omega$ it is exactly the constants and the Neumann form has a one-dimensional kernel. This refines the connected-domain constants warning on the base page and motivates the per-component compatibility condition recorded in [[thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace]]; the plan's B-page example states it so that no separate dimension theory is needed.",
+        "deps": [
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "def-axiom-of-choice",
+          "def-connected-component-and-quasicomponent",
+          "def-countable-choice",
+          "def-derivative",
+          "def-integral-over-a-measurable-set",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-linear-subspace",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-zero-weak-gradient-implies-componentwise-constancy"
+        ],
+        "strategy": "If $a(u,v)=0$ for all $v$, test $v=u$: $\\|\\nabla u\\|_{L^2}^2=0$, so $\\nabla u=0$ a.e. Conversely $\\nabla u=0$ gives $a(u,\\cdot)=0$. The zero-gradient constancy theorem ([[thm-zero-weak-gradient-implies-componentwise-constancy]]) identifies the classes with functions constant on each connected component, i.e. with linear combinations of the indicators. Independence of the indicators is immediate from disjointness and positive measure of each nonempty open component. No dimension theory beyond the display is invoked.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§4.3, Corollary 4.9 and the Neumann spectrum discussion: constants span the kernel of the Neumann form, printed pp. 94–97"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.4, introductory discussion, printed p. 98: constant functions have zero derivative. The componentwise kernel identification is proved here using the cited zero-gradient supplier."
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Section 9.5, Example 4, printed pp. 296–297: weak Neumann formulation with a positive reaction term; the unshifted componentwise kernel and its dimension are established by the local proof, not by the Dirichlet spectral theorem on pp. 311–312."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-a-large-adverse-zero-order-term-destroys-dirichlet-coercivity",
+        "kind": "counterexample",
+        "title": "A large adverse zero-order term destroys Dirichlet coercivity",
+        "statement": "Assume the Axiom of Choice inherited through the cited general solvability theorem, together with Countable Choice. Let $I=(0,1)$, $c\\ge0$ and\n$$a_c(u,v)=\\int_0^1u'\\overline{v'}\\,dx-c\\int_0^1u\\overline v\\,dx\\qquad(u,v\\in H^1_0(I)).$$\nThe sharp constant is $C_P=1/\\pi$ by [[lem-sharp-dirichlet-poincare-inequality-on-an-interval]]. For $0\\le c<\\pi^2$, the form is coercive with constant $(\\pi^2-c)/(1+\\pi^2)$ in the standard $H^1$ norm, and [[thm-lax-milgram]] gives a unique weak solution for every bounded conjugate-linear functional. For $c\\ge\\pi^2$, the nonzero test $\\phi(x)=\\sin(\\pi x)$ gives $a_c(\\phi,\\phi)=(\\pi^2-c)\\|\\phi\\|_2^2\\le0$, so the form is not coercive. At the endpoint $c=\\pi^2$, the helper's weak identity gives $a_c(\\phi,v)=0$ for every $v\\in H^1_0(I)$: both $0$ and $\\phi$ solve the homogeneous weak Dirichlet problem. The original polynomial witness also remains valid: $p(x)=x(1-x)\\in H^1_0(I)$ satisfies $\\|p'\\|_2^2=1/3$ and $\\|p\\|_2^2=1/30$, hence $a_c(p,p)=1/3-c/30\\le0$ for $c\\ge10$.\nThus the lower-order sign/smallness mechanism in [[thm-lax-milgram-solvability-for-coercive-divergence-form-equations]] cannot be omitted. In this interval model its energy argument with the local sharp constant gives the exact coercivity condition $c<1/C_P^2=\\pi^2$; the generic Poincare supplier itself is not claimed to provide that numerical constant.",
+        "deps": [
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-the-standard-smooth-step-function",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-integral-elementary-bounds",
+          "lem-sharp-dirichlet-poincare-inequality-on-an-interval",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-additivity-over-subintervals",
+          "thm-algebra-of-derivatives",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-chain-rule",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-continuous-implies-integrable",
+          "thm-extreme-value-r",
+          "thm-ftc-second-part",
+          "thm-holder-inequality-for-integrals",
+          "thm-lax-milgram",
+          "thm-lax-milgram-solvability-for-coercive-divergence-form-equations",
+          "thm-linearity-of-the-integral"
+        ],
+        "strategy": "The helper gives $\\|u\\|_2^2\\le\\pi^{-2}\\|u'\\|_2^2$, so for $0\\le c<\\pi^2$,\n$$a_c(u,u)\\ge(1-c/\\pi^2)\\|u'\\|_2^2\\ge\\frac{\\pi^2-c}{1+\\pi^2}\\|u\\|_{H^1}^2.$$\nThe form is bounded by $|a_c(u,v)|\\le(1+c)\\|u\\|_{H^1}\\|v\\|_{H^1}$, using the $L^2$ Holder inequality. Apply Lax–Milgram (the Hilbert property of $H^1_0$ is [[lem-w-one-two-is-a-hilbert-space]]) for unique solvability below the threshold. The helper's equality witness and weak identity prove respectively failure of coercivity for every $c\\ge\\pi^2$ and nonuniqueness at $c=\\pi^2$. This does not assert that every $c>\\pi^2$ is a nonuniqueness parameter. For $p=x(1-x)$, the same endpoint cutoff construction used in the helper proves $p\\in H^1_0$: $p$ and $p'$ are bounded, $p$ vanishes at both endpoints and $|p(x)|\\le\\operatorname{dist}(x,\\{0,1\\})$. FTC gives the original integrals $1/3$ and $1/30$. The sharp comparison is supported only by the new helper, not by the unspecified generic constant or by any downstream spectral item.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.5, Existence and failure: the discussion of $\\mu<0$ and the loss of solvability for the Dirichlet problem, printed pp. 99–101"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.7, the G\\r{a}rding shift and the role of the sign of $c$, printed pp. 103–105"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 7, strict coercivity is exactly what the Lax–Milgram application needs, printed pp. 72–75"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§5.1, the zero-eigenvalue hypothesis in Theorem 5.1 and its failure, printed pp. 101–104"
+            }
+          ]
+        },
+        "dependency_level": 7
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+# B3 scope repair proposal
+
+The isolated proposal preserves homogeneous Dirichlet **and** homogeneous Neumann energy conservation. Integrate individual changed objects from `proposed-pages.json` and changed rows from `proposed-coverage.json`; these are snapshots, not an instruction to overwrite concurrent canonical edits. `repair.json` binds the original input hashes and lists the dependency-ordered consumer frontier. No canonical manifest, receipt, workflow state, or item was edited, and no workflow control or tests ran. The three JSON sidecars were parsed successfully with Python's JSON parser.
+
+## Exact omission and source evidence
+
+The scope receipt identifies one omitted boundary condition in `thm-conservation-of-total-wave-energy`: its existing case (c) is Dirichlet-only despite two Teschl coverage rows and its own source locator promising both conditions. Direct extraction of the archived PDF confirms printed p.176 / PDF page189: “A straightforward calculation verifies that if u satisfies Dirichlet (or Neumann) boundary conditions on ∂U, then Ė(t)=0”; Lemma7.10 explicitly states the Neumann extension with normal derivative zero. Problem7.15, “Show Lemma7.10”, is on printed p.178 / PDF page191. The previous report's PDF-page188 locator was off by one. PDF SHA256 is `cea9939acea1858e812e7bbd61cd8bf8ad67cd11ca1351cac0a447747030b72f`.
+
+The proposed theorem retains the scaffold's **C² up-to-boundary** regularity for both conditions. This supplies C¹ flux and continuous energy time derivative on compact time intervals and matches the actual divergence supplier. It does not adopt Teschl's weaker C² interior/C¹ boundary Neumann regularity without the separate approximation argument that would require. With outward normal ν,
+
+`E′(t) = −∫∂U q·ν = c²∫∂U u_t ∂νu`.
+
+Dirichlet traces give `u_t=0`; homogeneous Neumann gives `∂νu=0`. Differentiating a Dirichlet trace is justified by passing to the boundary in the interior time FTC identity using uniform continuity. All compact rectangles use `[a,b]⊂(0,T)`; the original strategy's interval beginning at zero was not supported by its stated interior regularity. Compact-support cases explicitly require `U=Rⁿ`. No initial energy identity is asserted without an initial trace; consumers with C² initial traces on bounded/support-bounded domains obtain it by continuity.
+
+The bounded-C¹-domain definition and divergence theorem are stated for `n≥2`. The existing theorem promised `n≥1`; the proposed one-dimensional clause uses finite unions of intervals, endpoint normals ±1, and FTC. Accordingly `thm-ftc-second-part` is added rather than pretending the divergence supplier covers dimension one. The explicitly cited energy and domain definitions are also made direct deps. These published suppliers leave dependency level2 unchanged.
+
+## Half-line coverage and direct consumer repair
+
+Ivrii's printed p.90 / PDF page100, §2.7 Problem1 actually treats `u_tt−c²u_xx+f(u)=0` and includes a potential primitive. This was verified from the full PDF (`02c9eb1e43203930108b468adf12dd82142b16475893db2a741856f188010a56`). The coverage now names **the homogeneous specialization f=F=0** explicitly. The open-boundary packet example assumes `F′` is nonzero somewhere in `(0,1)`, so its initial interval energy is positive and its later zero energy proves nonconstancy. It also gives a compact half-line comparison proving both conditions under local uniform compact support of `v_x,v_t`: integrate to R beyond that support, obtain `E′=q(0)−q(R)`, and kill each endpoint flux. Its level2 is unchanged; the added zero-derivative supplier is published. The nonlinear extension remains outside this homogeneous wave pair. Ivrii's printed nonlinear potential has a normalization discrepancy if F′=f (the conserved density needs +F rather than +F/2); no nonlinear formula is adopted.
+
+Review of all three direct total-energy consumers found a repair needed in `ex-reflection-at-a-dirichlet-endpoint`: it asserted finite conserved half-line energy for arbitrary odd C²/C¹ data while its proof assumed compact support. The proposal states compactly supported odd data, makes the special packet φ half-line data whose **odd extensions** are used, and invokes a uniform support bound on each finite comparison interval. Both other direct consumers keep the retained cases: Cauchy uniqueness explicitly assumes energy conservation through the initial time; bounded Dirichlet uniqueness has C² initial traces and hence energy continuity at zero.
+
+The remaining dependency-ordered consumer statement/strategy interfaces were read. The Neumann addition changes none of their consumed claims. No further edits are proposed by this boundary-energy scope repair. The frontier listing is an interface review, not an independent whole-item proof audit or a certification.
+
+## Integration
+
+Replace three item objects and three coverage rows surgically. Update the batch notes to describe both bounded-domain conditions, the homogeneous half-line specialization, and the compact-support reflection hypothesis. Record that the four harvested treatments substitute for the plan's Evans primary backing; Evans was not read here and no Evans-specific claim is being certified. Refresh required readiness, contracts, owner scope evidence, and affected consumer evidence through the engine, then perform the orchestrator's dependency-ordered Step3 recertification. The sidecar recommends enrichment/proceed only after that work and does not itself close the escalation.

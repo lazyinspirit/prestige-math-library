@@ -1,0 +1,1003 @@
+[
+  {
+    "order": 799.1,
+    "id": "tensor-product-multiplicities-and-littlewood-richardson",
+    "kind": "A",
+    "category": "lie-theory",
+    "title": "Tensor Product Multiplicities and Littlewood Richardson",
+    "companion": "tensor-product-multiplicities-and-littlewood-richardson-examples",
+    "requires": [
+      "weyl-character-and-multiplicity-formulas",
+      "semisimple-lie-algebras-cohomology-and-levi-theory",
+      "symmetric-functions-hall-inner-product-and-schur-bases",
+      "the-branching-rule-and-the-young-graph"
+    ],
+    "items": [
+      {
+        "id": "def-tensor-product-multiplicity-for-highest-weight-modules",
+        "kind": "definition",
+        "title": "Tensor-product multiplicities for finite-dimensional simple modules",
+        "statement": "Assume the Axiom of Choice. Let $\\mathfrak g$ be a finite-dimensional complex\nsemisimple Lie algebra with Cartan subalgebra $\\mathfrak h$, positive system\n$\\Phi^+$ with base $\\alpha_1,\\dots,\\alpha_r$, positive cone\n$Q_+=\\sum_i\\mathbb Z_{\\ge0}\\alpha_i$, Weyl vector $\\rho$, weight lattice $P$\nand set of dominant integral weights\n$\\Lambda^+=\\{\\lambda\\in P:\\langle\\lambda,\\alpha_i^\\vee\\rangle\\ge0\\ \\text{for all }i\\}$\n([[def-finite-weyl-root-system-lattice-and-chamber-conventions]],\n[[def-integral-dominant-and-strictly-dominant-weights]]).\n\nFor $\\lambda\\in\\Lambda^+$ let $L(\\lambda)$ denote the finite-dimensional\nsimple $\\mathfrak g$-module of highest weight $\\lambda$\n([[thm-highest-weight-classification-of-finite-dimensional-irreducible-representations]]),\nand let $L(\\lambda)\\otimes L(\\mu)$ carry the tensor-product action\n$x\\cdot(v\\otimes w)=xv\\otimes w+v\\otimes xw$\n([[prop-direct-sum-dual-hom-and-tensor-representations]]). By Weyl's complete\nreducibility theorem ([[thm-weyls-complete-reducibility-theorem]]) and the\nclassification of finite-dimensional simple modules there is a decomposition\n$$L(\\lambda)\\otimes L(\\mu)\\cong\\bigoplus_{\\nu\\in\\Lambda^+}L(\\nu)^{\\oplus c^\\nu_{\\lambda\\mu}}$$\nwith uniquely determined integers $c^\\nu_{\\lambda\\mu}\\ge0$. The direct sum is\nfinite because $L(\\lambda)\\otimes L(\\mu)$ is finite-dimensional, so its\ncompletely reducible decomposition has only finitely many nonzero simple\nsummands. Each constituent highest weight is a weight and lies below\n$\\lambda+\\mu$ in the partial order of weights: every tensor-product weight is\na sum of a weight of $L(\\lambda)$, which lies in $\\lambda-Q_+$, and a weight\nof $L(\\mu)$, which lies in $\\mu-Q_+$\n([[lem-highest-weight-modules-have-weights-below-the-top-weight]]).\n\nThe integers $c^\\nu_{\\lambda\\mu}=[L(\\lambda)\\otimes L(\\mu):L(\\nu)]$ are the\n**tensor-product multiplicities** of $\\mathfrak g$. More generally, for a\nfinite-dimensional completely reducible $\\mathfrak g$-module $V$ we write\n$[V:L(\\nu)]$ for the number of summands isomorphic to $L(\\nu)$ in any\ndecomposition of $V$ into simple modules; this number does not depend on the\nchosen decomposition. By Schur's lemma\n([[cor-schurs-lemma-for-irreducible-lie-algebra-representations]]) the\nmultiplicity has the equivalent hom-space description\n$$c^\\nu_{\\lambda\\mu}=\\dim\\operatorname{Hom}_{\\mathfrak g}\\bigl(L(\\nu),L(\\lambda)\\otimes L(\\mu)\\bigr).$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-weyls-complete-reducibility-theorem",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "prop-direct-sum-dual-hom-and-tensor-representations",
+          "lem-highest-weight-modules-have-weights-below-the-top-weight",
+          "def-partial-order-on-weights",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "cor-schurs-lemma-for-irreducible-lie-algebra-representations"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a727.1 tensor products of fundamental representations, printed p. 145 (state space of the tensor product and multiplicities), together with \u00a726.1--26.2 for the character conventions; complete lecture notes pp. 145--164 consulted."
+            },
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 5 \u00a75.5.4 Theorem 5.5.22, printed pp. 273--275 (classification of irreducible rational representations of $GL_n$ by dominant weights); Ch. 7 \u00a77.1 Corollaries 7.1.6--7.1.7, printed pp. 333--334 (multiplicity extraction)."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-tensor-product-multiplicities-are-character-structure-constants",
+        "kind": "proposition",
+        "title": "Tensor-product multiplicities are character structure constants",
+        "statement": "Assume the Axiom of Choice. In the notation of\n[[def-tensor-product-multiplicity-for-highest-weight-modules]], for all\n$\\lambda,\\mu\\in\\Lambda^+$ the following hold in the completed character ring\n$\\mathcal R$ of [[def-completed-formal-character-ring-for-downward-cones]]:\n\n(i) $\\operatorname{ch}(L(\\lambda)\\otimes L(\\mu))=\\sum_{\\nu\\in\\Lambda^+}c^\\nu_{\\lambda\\mu}\\operatorname{ch}L(\\nu)$,\na finite sum;\n(ii) if $V$ is any finite-dimensional $\\mathfrak g$-module and\n$\\operatorname{ch}V=\\sum_{\\nu\\in\\Lambda^+}a_\\nu\\operatorname{ch}L(\\nu)$ with\nintegers $a_\\nu$ (finitely many nonzero), then $a_\\nu=[V:L(\\nu)]$ for every\n$\\nu$, so the expansion coefficients of the character are exactly the\ncomposition multiplicities and the elements $\\operatorname{ch}L(\\nu)$,\n$\\nu\\in\\Lambda^+$, are linearly independent in $\\mathcal R$;\n(iii) for every weight $\\gamma\\in\\mathfrak h^*$ one has the weight-multiplicity\nformula\n$$\\dim\\bigl(L(\\lambda)\\otimes L(\\mu)\\bigr)_\\gamma=\\sum_{\\sigma+\\tau=\\gamma}m_\\lambda(\\sigma)m_\\mu(\\tau),$$\na finite sum, where $m_\\lambda(\\sigma)=\\dim L(\\lambda)_\\sigma$ and\n$m_\\mu(\\tau)=\\dim L(\\mu)_\\tau$\n([[def-formal-character-of-a-finite-dimensional-weight-module]],\n[[def-weight-and-weight-space-of-a-lie-algebra-representation]]).",
+        "deps": [
+          "def-tensor-product-multiplicity-for-highest-weight-modules",
+          "def-axiom-of-choice",
+          "def-formal-character-of-a-finite-dimensional-weight-module",
+          "prop-formal-characters-are-additive-and-multiplicative",
+          "def-completed-formal-character-ring-for-downward-cones",
+          "prop-finite-dimensional-representations-of-a-complex-semisimple-lie-algebra-decompose-into-weight-spaces",
+          "def-weight-and-weight-space-of-a-lie-algebra-representation",
+          "lem-highest-weight-modules-have-weights-below-the-top-weight",
+          "def-partial-order-on-weights",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a727.1, printed p. 145 (characters multiply in tensor products and the multiplicities are read off from the product of characters); \u00a726.1--26.3, printed pp. 138--142 (formal characters and weight multiplicities)."
+            },
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 7 \u00a77.1 Corollaries 7.1.6--7.1.7, printed pp. 333--334 (multiplicity extraction from the character and the tensor-product multiplicity formula, complete proofs)."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-weyl-alternation-extracts-a-dominant-highest-weight-coefficient",
+        "kind": "lemma",
+        "title": "Weyl alternation extracts a dominant highest-weight coefficient",
+        "statement": "Assume the Axiom of Choice. Let $V$ be a finite-dimensional $\\mathfrak g$-module\nwith formal character $\\operatorname{ch}V\\in\\mathcal R$, the completed\ncharacter ring of\n[[def-completed-formal-character-ring-for-downward-cones]], and let $A$ be\nthe Weyl alternation operator of [[def-weyl-alternation-operator]], with\n$A(\\eta)=\\sum_{w\\in W}(-1)^{\\ell(w)}e^{w\\eta}$ for $\\eta\\in\\mathfrak h^*$ and\n$A(\\rho)$ the Weyl denominator. For every $\\nu\\in\\Lambda^+$ the coefficient of\n$e^{\\nu+\\rho}$ in $A(\\rho)\\operatorname{ch}V\\in\\mathcal R$ equals the\nmultiplicity $[V:L(\\nu)]$ of\n[[def-tensor-product-multiplicity-for-highest-weight-modules]]. Explicitly,\n$$\\operatorname{ch}V=\\sum_{\\mu\\in\\Lambda^+}[V:L(\\mu)]\\operatorname{ch}L(\\mu) \\qquad\\text{and}\\qquad A(\\rho)\\operatorname{ch}V=\\sum_{\\mu\\in\\Lambda^+}[V:L(\\mu)]\\,A(\\mu+\\rho),$$\nand $[e^{\\nu+\\rho}]A(\\mu+\\rho)=\\delta_{\\mu\\nu}$ for $\\mu,\\nu\\in\\Lambda^+$.",
+        "deps": [
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "def-axiom-of-choice",
+          "def-tensor-product-multiplicity-for-highest-weight-modules",
+          "prop-tensor-product-multiplicities-are-character-structure-constants",
+          "thm-weyl-character-formula",
+          "def-weyl-alternation-operator",
+          "def-completed-formal-character-ring-for-downward-cones",
+          "lem-geometric-series-invertibility-in-the-completed-character-ring",
+          "prop-formal-characters-are-additive-and-multiplicative",
+          "thm-weyls-complete-reducibility-theorem",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "lem-finite-weyl-closed-chambers-and-stabilizers",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 7 \u00a77.1 Corollaries 7.1.6--7.1.7, printed pp. 333--334 (skew-symmetrisation of the character extracts the multiplicity of each dominant constituent, with complete proofs)."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a726.1--26.2 and \u00a727.1, printed pp. 138--141 and 145 (Weyl numerator and denominator, coefficient extraction from products of characters)."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-steinberg-tensor-product-multiplicity-formula",
+        "kind": "theorem",
+        "title": "Steinberg's tensor-product multiplicity formula",
+        "statement": "Assume the Axiom of Choice. For all dominant integral weights\n$\\lambda,\\mu,\\nu\\in\\Lambda^+$ the tensor-product multiplicity of\n[[def-tensor-product-multiplicity-for-highest-weight-modules]] is\n$$c^\\nu_{\\lambda\\mu}=\\sum_{w\\in W}(-1)^{\\ell(w)}\\,m_\\mu\\bigl(w(\\nu+\\rho)-(\\lambda+\\rho)\\bigr),$$\nwhere $m_\\mu(\\sigma)=\\dim L(\\mu)_\\sigma$ is the weight multiplicity\n([[def-formal-character-of-a-finite-dimensional-weight-module]]) and $W$ is\nthe Weyl group with length function $\\ell$; only finitely many summands are\nnonzero. Equivalently, after the substitution $w\\mapsto w^{-1}$ and\nWeyl-invariance of the weight multiplicities\n([[prop-characters-of-finite-dimensional-modules-are-weyl-invariant]]),\n$$c^\\nu_{\\lambda\\mu}=\\sum_{w\\in W}(-1)^{\\ell(w)}\\,m_\\mu\\bigl(\\nu+\\rho-w(\\lambda+\\rho)\\bigr).$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-tensor-product-multiplicity-for-highest-weight-modules",
+          "prop-tensor-product-multiplicities-are-character-structure-constants",
+          "lem-weyl-alternation-extracts-a-dominant-highest-weight-coefficient",
+          "thm-weyl-character-formula",
+          "prop-characters-of-finite-dimensional-modules-are-weyl-invariant",
+          "lem-weyl-length-parity-is-multiplicative",
+          "def-formal-character-of-a-finite-dimensional-weight-module",
+          "def-completed-formal-character-ring-for-downward-cones",
+          "lem-geometric-series-invertibility-in-the-completed-character-ring",
+          "prop-finite-dimensional-representations-of-a-complex-semisimple-lie-algebra-decompose-into-weight-spaces",
+          "def-root-reflections-and-the-weyl-group-action",
+          "prop-the-weyl-group-is-finite-and-acts-faithfully-on-the-root-system",
+          "def-weight-and-weight-space-of-a-lie-algebra-representation",
+          "prop-formal-characters-are-additive-and-multiplicative"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 7 \u00a77.1 Corollary 7.1.7, printed pp. 333--334 (the tensor-product multiplicity formula $\\operatorname{mult}_{V^\\mu\\otimes V^\\nu}(V^\\lambda)=\\sum_{t\\in W}\\operatorname{sgn}(t)m_\\mu(\\lambda+\\rho-t(\\nu+\\rho))$, with the complete proof from the skew-symmetrisation formula 7.1.6)."
+            },
+            {
+              "title": "A. W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Birkh\u00e4user 2002",
+              "url": "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf",
+              "locator": "Ch. IX \u00a78 Problem 17 and its printed solution, printed pp. 611--612 and 747--748 (the equivalent $\\operatorname{sgn}$/dominant-conjugate form of the formula)."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a726.2 and \u00a727.1, printed pp. 140--141 and 145 (Weyl numerator and denominator, multiplication of characters)."
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-racah-speiser-tensor-product-algorithm",
+        "kind": "corollary",
+        "title": "The Racah--Speiser tensor-product algorithm",
+        "statement": "Assume the Axiom of Choice. Let $\\lambda,\\mu\\in\\Lambda^+$. For every weight\n$\\varphi$ of $L(\\mu)$ with multiplicity $m_\\mu(\\varphi)>0$ put\n$\\psi=\\varphi+\\lambda$ and say that $\\varphi$ is **regular relative to\n$\\lambda$** when $\\psi+\\rho$ is fixed by no reflection of $W$, equivalently\n$\\langle\\psi+\\rho,\\alpha^\\vee\\rangle\\ne0$ for every root $\\alpha$. If\n$\\varphi$ is regular relative to $\\lambda$, there is a unique $u\\in W$ with\n$u(\\psi+\\rho)$ strictly dominant\n([[lem-finite-weyl-closed-chambers-and-stabilizers]]), and then\n$\\nu(\\varphi):=u(\\psi+\\rho)-\\rho=u\\cdot\\psi$ is a dominant integral weight\n(the shifted action being $u\\cdot\\xi=u(\\xi+\\rho)-\\rho$). The Racah--Speiser\nalgorithm computes the multiplicities of\n[[thm-steinberg-tensor-product-multiplicity-formula]] as\n$$c^\\nu_{\\lambda\\mu}=\\sum_{\\substack{\\varphi\\text{ weight of }L(\\mu)\\\\ \\varphi\\text{ regular relative to }\\lambda,\\ \\nu(\\varphi)=\\nu}}(-1)^{\\ell(u(\\varphi))}\\,m_\\mu(\\varphi),$$\nthe sum being finite; a weight $\\varphi$ for which $\\psi+\\rho$ is not regular\nis discarded, and every $\\nu\\in\\Lambda^+$ with $c^\\nu_{\\lambda\\mu}\\ne0$ occurs\nas $\\nu(\\varphi)$ for some regular weight $\\varphi$ of $L(\\mu)$.",
+        "deps": [
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "def-axiom-of-choice",
+          "def-tensor-product-multiplicity-for-highest-weight-modules",
+          "thm-steinberg-tensor-product-multiplicity-formula",
+          "lem-weyl-length-parity-is-multiplicative",
+          "lem-finite-weyl-closed-chambers-and-stabilizers",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "def-root-reflections-and-the-weyl-group-action",
+          "def-weight-and-weight-space-of-a-lie-algebra-representation"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Birkh\u00e4user 2002",
+              "url": "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf",
+              "locator": "Ch. IX \u00a78 Problems 15--24 and the printed solutions, printed pp. 611--612 and 747--748: the regrouping of Steinberg's sum by the dominant conjugate of $\\varphi+\\lambda+\\delta$, with wall contributions discarded."
+            },
+            {
+              "title": "D. E. Littlewood and A. R. Richardson / G. Racah and J. Speiser, as presented in R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, GTM 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 7 \u00a77.1 Corollaries 7.1.6--7.1.7, printed pp. 333--334, with the remark that the summands can be regrouped by the Weyl group (the $t$-sum over $t\\in W$)."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a726.2, printed pp. 140--141 (Weyl group action on the regular elements and the chamber)."
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "def-minuscule-weight",
+        "kind": "definition",
+        "title": "Minuscule weights",
+        "statement": "Assume the Axiom of Choice. Let $\\mathfrak g$ be a finite-dimensional complex\nsimple Lie algebra, with Cartan subalgebra $\\mathfrak h$, root system\n$\\Phi\\subseteq\\mathfrak h^*$, positive system $\\Phi^+$, set of dominant\nintegral weights\n$\\Lambda^+=\\{\\lambda\\in P:\\langle\\lambda,\\alpha^\\vee\\rangle\\ge0\\ \\forall\\alpha\\in\\Phi^+\\}$\nand coroots $\\alpha^\\vee\\in\\mathfrak h$ of roots\n$\\alpha$ ([[def-integral-dominant-and-strictly-dominant-weights]],\n[[def-coroot-of-a-lie-algebra-root]],\n[[def-finite-weyl-root-system-lattice-and-chamber-conventions]]). Here\n$\\langle\\lambda,\\alpha^\\vee\\rangle=\\lambda(h_\\alpha)$ is the natural pairing, and\nthe coroots of $\\Phi$ form the dual root system\n$\\Phi^\\vee=\\{\\alpha^\\vee:\\alpha\\in\\Phi\\}$\n([[thm-the-root-set-is-a-reduced-crystallographic-root-system]],\n[[def-fundamental-weights]]).\n\nA dominant integral weight $\\omega\\in\\Lambda^+$ is **minuscule** if\n$$\\langle\\omega,\\beta^\\vee\\rangle\\le1\\qquad\\text{for every }\\beta\\in\\Phi^+.$$\nSince the coroot of a negative root is the negative of the coroot of the\npositive root, $\\Phi^\\vee=-\\Phi^\\vee$ at the level of the sets\n$\\{\\beta^\\vee\\}$, and since $\\omega$ is dominant integral the pairing\n$\\langle\\omega,\\beta^\\vee\\rangle$ is a nonnegative integer for\n$\\beta\\in\\Phi^+$; hence the displayed condition is equivalent to\n$$|\\langle\\omega,\\beta^\\vee\\rangle|\\le1\\qquad\\text{for every }\\beta\\in\\Phi.$$\nThe zero weight is minuscule, and the Weyl group acts on weights by the\nreflection action $\\lambda\\mapsto w\\lambda$\n([[def-root-reflections-and-the-weyl-group-action]]).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-coroot-of-a-lie-algebra-root",
+          "def-root-reflections-and-the-weyl-group-action",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "thm-the-root-set-is-a-reduced-crystallographic-root-system",
+          "def-fundamental-weights"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a730.1--30.2, printed pp. 158--160: Definition 30.1 (minuscule weights, $\\langle\\omega,\\beta^\\vee\\rangle\\le 1$ for positive roots and the equivalence with $|\\langle\\omega,\\beta^\\vee\\rangle|\\le1$), Lemma 30.2 (pairings with the Weyl orbit), Lemma 30.3, Proposition 30.4 (the equivalences (1)--(3)) and Corollary 30.5 (orbit-sum character)."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-minuscule-weights-are-the-weyl-orbit",
+        "kind": "lemma",
+        "title": "Minuscule weights have exactly the Weyl orbit as their weights",
+        "statement": "Assume the Axiom of Choice. For a dominant integral weight\n$\\omega\\in\\Lambda^+$ of a finite-dimensional complex simple Lie algebra\n$\\mathfrak g$, the following are equivalent ([[def-minuscule-weight]]):\n\n1. $\\omega$ is minuscule;\n2. every weight of the finite-dimensional simple module $L(\\omega)$ belongs\n   to the Weyl orbit $W\\omega$;\n3. every dominant integral weight $\\lambda$ with $\\omega-\\lambda\\in Q_+$\n   equals $\\omega$.\n\nConsequently, if $\\omega$ is minuscule, then each weight space of $L(\\omega)$\nis at most one-dimensional, $L(\\omega)$ has exactly $|W\\omega|$ distinct\nweights, and $\\operatorname{ch}L(\\omega)=\\sum_{\\gamma\\in W\\omega}e^\\gamma$.",
+        "deps": [
+          "def-minuscule-weight",
+          "def-axiom-of-choice",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "lem-highest-weight-modules-have-weights-below-the-top-weight",
+          "prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one",
+          "lem-finite-weyl-closed-chambers-and-stabilizers",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "prop-root-vectors-shift-weight-spaces",
+          "def-fundamental-weights",
+          "prop-dominant-integral-weights-are-nonnegative-combinations-of-fundamental-weights",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "thm-the-root-set-is-a-reduced-crystallographic-root-system",
+          "thm-root-sl-two-triple",
+          "thm-finite-dimensional-representations-of-sl-two",
+          "def-height-of-a-root-and-highest-root",
+          "prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system",
+          "def-coroot-and-dual-root-system",
+          "def-positive-system-and-base-of-simple-roots",
+          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
+          "def-reducible-and-irreducible-root-system",
+          "prop-root-systems-decompose-uniquely-into-irreducible-components",
+          "lem-finite-weyl-positive-roots-and-simple-reflections"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a730.1, printed pp. 158--160: the paragraph after Definition 30.1 (minuscule weights are fundamental, via the maximal coroot with strictly positive coefficients), Lemma 30.2, Lemma 30.3 with its complete proof, Proposition 30.4 (1)\u21d4(2)\u21d4(3) with the complete proof reproduced here, and Corollary 30.5 (orbit-sum character)."
+            },
+            {
+              "title": "A. W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Birkh\u00e4user 2002",
+              "url": "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf",
+              "locator": "Ch. V \u00a71 and Ch. VI \u00a71: Weyl group action on weights, invariant form and sl2-strings (companion treatment of the weight-orbit invariance used in the proof)."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-minuscule-tensor-product-rule",
+        "kind": "corollary",
+        "title": "Tensor product with a minuscule representation",
+        "statement": "Assume the Axiom of Choice. Let $\\omega\\in\\Lambda^+$ be a minuscule weight\n([[def-minuscule-weight]]) of a finite-dimensional complex simple Lie algebra\n$\\mathfrak g$, and let $\\lambda\\in\\Lambda^+$. Then\n$$L(\\omega)\\otimes L(\\lambda)\\cong\\bigoplus_{\\gamma\\in W\\omega}L(\\lambda+\\gamma),$$\nwhere $L(\\lambda+\\gamma)$ is read as $0$ when $\\lambda+\\gamma\\notin\\Lambda^+$;\nequivalently the sum runs over those $\\gamma\\in W\\omega$ with $\\lambda+\\gamma$\ndominant integral and each such summand occurs once. In characters,\n$$\\operatorname{ch}\\bigl(L(\\omega)\\otimes L(\\lambda)\\bigr)=\\sum_{\\gamma:\\,\\lambda+\\gamma\\in\\Lambda^+}\\operatorname{ch}L(\\lambda+\\gamma).$$",
+        "deps": [
+          "def-minuscule-weight",
+          "lem-minuscule-weights-are-the-weyl-orbit",
+          "def-weyl-vector-rho-for-a-chosen-positive-system",
+          "lem-finite-weyl-positive-roots-and-simple-reflections",
+          "def-axiom-of-choice",
+          "thm-weyl-character-formula",
+          "def-weyl-alternation-operator",
+          "lem-weyl-alternants-are-skew-invariant",
+          "lem-geometric-series-invertibility-in-the-completed-character-ring",
+          "prop-formal-characters-are-additive-and-multiplicative",
+          "def-completed-formal-character-ring-for-downward-cones",
+          "thm-weyls-complete-reducibility-theorem",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "lem-finite-weyl-closed-chambers-and-stabilizers",
+          "prop-tensor-product-multiplicities-are-character-structure-constants"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a730.1 Corollary 30.5 and \u00a730.2 Corollary 30.7 with its complete proof, printed pp. 158--160 (the orbit-sum character $\\chi_\\omega=\\sum_{\\gamma\\in W\\omega}e^\\gamma$ and the tensor-product rule $L_\\omega\\otimes L_\\lambda=\\bigoplus_{\\gamma\\in W\\omega}L_{\\lambda+\\gamma}$, non-dominant terms read as $0$); \u00a730.3.1, printed pp. 160--164 (the $SL_n$ and $GL_n$ consequences)."
+            },
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 7 \u00a77.1, printed pp. 330--334 (Weyl character formula and multiplicity extraction; independent treatment of the orbit-sum calculation)."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "def-polynomial-glr-highest-weights-as-partitions",
+        "kind": "definition",
+        "title": "Polynomial representations of GL_r and their highest weights",
+        "statement": "Assume the Axiom of Choice. Let $V$ be a finite-dimensional complex vector\nspace of dimension $r\\ge1$ and put $G=\\operatorname{GL}(V)$; fixing a basis,\nidentify $G$ with $\\operatorname{GL}_r(\\mathbb C)$ and let $g_{ij}$ denote the\nmatrix entries of $g\\in G$. A finite-dimensional representation\n$\\rho\\colon G\\to\\operatorname{GL}(W)$ is **polynomial** if in some pair of\nbases (equivalently, in every pair of bases) the matrix coefficients of\n$\\rho$ are polynomial functions of the $g_{ij}$; it is **rational** if these\ncoefficients are rational functions defined on all of $G$.\n\nFor the diagonal torus\n$T=\\{\\operatorname{diag}(t_1,\\dots,t_r):t_i\\in\\mathbb C^\\times\\}$ a polynomial\nrepresentation is a direct sum of **weight spaces**\n$$W_\\alpha=\\{w\\in W:\\rho(t)w=t^\\alpha w\\ \\text{for all }t\\in T\\},\\qquad \\alpha=(\\alpha_1,\\dots,\\alpha_r)\\in\\mathbb Z^r,\\quad t^\\alpha=t_1^{\\alpha_1}\\cdots t_r^{\\alpha_r},$$\nthe eigenvalues $\\alpha$ with $W_\\alpha\\ne0$ being the **weights** of $W$\n(Etingof \u00a727.3; Goodman--Wallach Ch. 8 \u00a78.1.2). A weight of a polynomial\nrepresentation has nonnegative entries, $\\alpha\\in\\mathbb Z_{\\ge0}^r$: the\nmatrix coefficients are polynomial and $t\\mapsto t^\\alpha$ occurs as a\npolynomial character, so $\\alpha_i<0$ is impossible. Consequently the highest\nweight of a polynomial irreducible representation of $G$ (with respect to the\nBorel subgroup of upper triangular matrices) is a partition\n$\\lambda=(\\lambda_1\\ge\\dots\\ge\\lambda_r\\ge0)$ padded by zeros, that is, a\npartition with at most $r$ parts\n([[def-partition-young-diagram-and-conjugate-partition]]).\n\nFor every partition $\\lambda$ with $\\ell(\\lambda)\\le r$ put\n$n=|\\lambda|$ and let\n$S_\\lambda(V):=\\operatorname{Hom}_{S_n}\\bigl(S^\\lambda,V^{\\otimes n}\\bigr)$ be\nthe Schur--Weyl module of\n[[thm-schur-weyl-decomposition-with-length-cutoff]], where $S^\\lambda$ is the\ncomplex Specht module\n([[def-column-antisymmetrizer-polytabloid-and-specht-module]]) and $S_n$ acts\non $V^{\\otimes n}$ by place permutations\n([[def-commuting-symmetric-and-linear-actions-on-tensor-power]]). Then\n$S_\\lambda(V)$ is a nonzero polynomial irreducible representation of $G$ of\nhighest weight $\\lambda$, and distinct partitions with at most $r$ parts give\nnon-isomorphic modules ([[thm-schur-weyl-decomposition-with-length-cutoff]]\nparts (1)--(4)). Conversely every polynomial irreducible representation of $G$\nis isomorphic to $S_\\lambda(V)$ for exactly one partition $\\lambda$ with\n$\\ell(\\lambda)\\le r$: this is the classical type-$A$ highest-weight\nclassification of polynomial representations (Etingof \u00a727.3--27.4;\nGoodman--Wallach Theorem 5.5.22 for the corresponding rational\nclassification; see [[def-schur-module-and-schur-polynomial-character]] for\nthe module notation used below).",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-schur-weyl-decomposition-with-length-cutoff",
+          "def-commuting-symmetric-and-linear-actions-on-tensor-power",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "T. Seynnaeve, Representation Theory (lecture notes, Bern)",
+              "url": "https://timseynnaeve.github.io/misc/Rep_Theory_Notes.pdf",
+              "locator": "Ch. 9 Definition 9.1 and Remarks 9.4--9.6, printed pp. 51--52 (polynomial and rational representations of $GL(V)$; weights of a polynomial representation are nonnegative); Ch. 11 Definition 11.1, Theorems 11.6--11.8, printed pp. 54--56 (Schur modules, classification of polynomial irreducibles, characters, irreducibility)."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a727.2--27.4, printed pp. 145--150: representations of $SL_n$ and $GL_n$, polynomial representations, highest weights and Schur--Weyl duality, including the statement that polynomial irreducibles of $GL_n$ correspond to partitions with at most $n$ parts."
+            },
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 5 \u00a75.5.4 Theorem 5.5.22, printed pp. 273--275 (classification of irreducible rational representations of $GL_n$ by dominant integral weights, with the determinant twist); Ch. 8 \u00a78.1.2, printed pp. 377--381 (weight basis $\\{u_A\\}$ of $F^\\lambda_n$ indexed by semistandard tableaux, Corollary 8.1.7)."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-schur-module-and-schur-polynomial-character",
+        "kind": "definition",
+        "title": "Schur modules and their characters",
+        "statement": "Assume the Axiom of Choice. Let $V=\\mathbb C^r$, $r\\ge1$, and let $\\lambda$ be a partition with at most $r$ parts. Put $n=|\\lambda|$ and define the **Schur module** $S_\\lambda(V):=\\operatorname{Hom}_{S_n}(S^\\lambda,V^{\\otimes n})$, where $S^\\lambda$ is the complex Specht module ([[def-column-antisymmetrizer-polytabloid-and-specht-module]]) and $S_n$ acts on $V^{\\otimes n}$ by place permutations ([[def-commuting-symmetric-and-linear-actions-on-tensor-power]]), with the $\\operatorname{GL}(V)$-action by postcomposition $(g\\cdot\\varphi)(s)=g^{\\otimes n}\\varphi(s)$. By [[thm-schur-weyl-decomposition-with-length-cutoff]], $S_\\lambda(V)$ is a nonzero irreducible polynomial $\\operatorname{GL}(V)$-module of highest weight $\\lambda$ in the sense of [[def-polynomial-glr-highest-weights-as-partitions]]; for $\\ell(\\lambda)>r$ define $S_\\lambda(V):=0$. The **character** of a finite-dimensional polynomial $\\operatorname{GL}(V)$-module $W$ is the polynomial $$\\operatorname{ch}W=\\sum_{\\alpha\\in\\mathbb Z^r}\\dim W_\\alpha\\,x^\\alpha\\in\\mathbb Z[x_1,\\dots,x_r],$$ where $W_\\alpha$ is the weight space of the diagonal torus $T$ and $x^\\alpha=x_1^{\\alpha_1}\\cdots x_r^{\\alpha_r}$. Characters are additive over direct sums, and $\\operatorname{ch}(W\\otimes W')=\\operatorname{ch}W\\cdot\\operatorname{ch}W'$ for finite-dimensional polynomial modules, because $(W\\otimes W')_\\alpha=\\bigoplus_{\\beta+\\gamma=\\alpha}W_\\beta\\otimes W'_\\gamma$. In particular $\\operatorname{ch}S_\\lambda(V)$ is a symmetric polynomial of degree $n$ for $\\ell(\\lambda)\\le r$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-polynomial-glr-highest-weights-as-partitions",
+          "thm-schur-weyl-decomposition-with-length-cutoff",
+          "def-commuting-symmetric-and-linear-actions-on-tensor-power",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a7\u00a727--30, printed pp. 145--164: \u00a727.1 tensor products of fundamental representations p. 145; \u00a727.2--27.3 representations of $SL_n$ and $GL_n$, polynomial representations pp. 145--147; \u00a727.4 Schur--Weyl duality pp. 147--150; \u00a728 Schur functors and invariant theory pp. 151--154; \u00a729 Schur polynomials and Howe duality pp. 155--157; \u00a730 minuscule weights and tensor products with a minuscule representation pp. 158--164."
+            },
+            {
+              "title": "T. Seynnaeve, Representation Theory (lecture notes, Bern)",
+              "url": "https://timseynnaeve.github.io/misc/Rep_Theory_Notes.pdf",
+              "locator": "Ch. 9 Definition 9.1 and Remarks 9.4--9.6, printed pp. 51--52 (polynomial and rational representations of $GL(V)$); Ch. 11 Definition 11.1, Theorems 11.6--11.8, printed pp. 54--56 (Schur modules, classification, character as a Schur polynomial, irreducibility); \u00a712.1 Proposition 12.1, printed pp. 59--60 (rational representations and determinant twists)."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "prop-semistandard-tableaux-expand-schur-characters",
+        "kind": "proposition",
+        "title": "Semistandard tableaux expand Schur characters",
+        "statement": "Assume the Axiom of Choice. Let $V=\\mathbb C^r$, $r\\ge1$\n([[def-schur-module-and-schur-polynomial-character]]), and let $\\lambda$ be a\npartition with $\\ell(\\lambda)\\le r$\n([[def-partition-young-diagram-and-conjugate-partition]]). Then\n$$\\operatorname{ch}S_\\lambda(V)=\\sum_T x^{\\operatorname{wt}(T)},$$\nthe sum over all semistandard tableaux $T$ of shape $\\lambda$ with entries in\n$\\{1,\\dots,r\\}$, where $\\operatorname{wt}(T)=(a_1,\\dots,a_r)$ records the\nmultiplicity of each entry\n([[def-semistandard-tableau-and-kostka-number]],\n[[def-skew-diagram-and-semistandard-skew-tableau]]). Moreover this polynomial\nis the rank-$r$ Schur polynomial $s_\\lambda(x_1,\\dots,x_r)$ of\n[[def-stable-schur-function-by-bialternants]], i.e.\n$$s_\\lambda(x_1,\\dots,x_r)=\\frac{a_{\\lambda+\\delta_r}(x_1,\\dots,x_r)}{a_{\\delta_r}(x_1,\\dots,x_r)}=\\sum_Tx^{\\operatorname{wt}(T)}$$\nfor $\\ell(\\lambda)\\le r$, while $s_\\lambda(x_1,\\dots,x_r):=0$ and\n$\\operatorname{ch}S_\\lambda(V)=0$ when $\\ell(\\lambda)>r$. In particular\n$S_\\lambda(V)\\ne0$ if and only if $\\ell(\\lambda)\\le r$, and the multiplicity of\nthe weight $\\alpha$ in $S_\\lambda(V)$ equals the number of semistandard\ntableaux of shape $\\lambda$ and weight $\\alpha$; by\n[[lem-bender-knuth-involutions-on-semistandard-tableaux]] this polynomial is\nsymmetric in $x_1,\\dots,x_r$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-schur-module-and-schur-polynomial-character",
+          "def-polynomial-glr-highest-weights-as-partitions",
+          "thm-schur-weyl-decomposition-with-length-cutoff",
+          "thm-youngs-rule-for-permutation-modules",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "cor-schurs-lemma-for-irreducible-representations",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-stable-schur-function-by-bialternants",
+          "thm-skew-jacobi-trudi-and-tableau-expansion",
+          "lem-bender-knuth-involutions-on-semistandard-tableaux",
+          "def-commuting-symmetric-and-linear-actions-on-tensor-power"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 8 \u00a78.1.2 Corollary 8.1.7, printed pp. 380--381 (the irreducible $GL_n$ module $F^\\lambda_n$ has a basis $\\{u_A\\}$ indexed by semistandard tableaux $A$ of shape $\\lambda$ and weight $\\nu$, with $u_A$ of weight $\\nu$); Ch. 5 \u00a75.5.4 Theorem 5.5.22, printed pp. 273--275."
+            },
+            {
+              "title": "T. Seynnaeve, Representation Theory (lecture notes, Bern)",
+              "url": "https://timseynnaeve.github.io/misc/Rep_Theory_Notes.pdf",
+              "locator": "Ch. 11 Theorems 11.6--11.8, printed pp. 54--56 (character of the Schur module is the Schur polynomial in the displayed variables; weight multiplicities from semistandard tableaux)."
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a75",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "\u00a7I.5 Example 5, printed pp. 74--76 (Schur functions as generating functions of semistandard tableaux)."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-littlewood-richardson-tableau-and-coefficient",
+        "kind": "definition",
+        "title": "Littlewood--Richardson tableaux and coefficients",
+        "statement": "Let $\\mu,\\lambda$ be partitions with $[\\lambda]\\subseteq[\\nu]$ (English diagram containment) and $|\\nu|=|\\lambda|+|\\mu|$, and use the conventions of [[def-skew-diagram-and-semistandard-skew-tableau]] for the skew diagram $\\nu/\\lambda$, for semistandard skew tableaux, for their weight and for a horizontal strip. The **reading word** $w(T)$ of a semistandard skew tableau $T$ of shape $\\nu/\\lambda$ is the word obtained by reading the rows of $T$ from right to left, beginning with the top row and proceeding to the bottom row. The word $w(T)$ is a **lattice word** (lattice permutation) if in every prefix and for every $i\\ge1$ the number of letters $i$ in the prefix is at least the number of letters $i+1$. A **Littlewood--Richardson tableau** (LR tableau) of shape $\\nu/\\lambda$ and content $\\mu$ is a semistandard skew tableau of shape $\\nu/\\lambda$, content $\\mu$ ([[def-semistandard-tableau-and-kostka-number]]), whose reading word is a lattice word. The **Littlewood--Richardson coefficient** $c^\\nu_{\\lambda\\mu}\\in\\mathbb Z_{\\ge0}$ is the number of LR tableaux of shape $\\nu/\\lambda$ and content $\\mu$; it is $0$ when $[\\lambda]\\not\\subseteq[\\nu]$, when $|\\nu|\\ne|\\lambda|+|\\mu|$, or when no such tableau exists, and $c^\\nu_{\\lambda\\lambda}=1$ for the empty skew tableau when $\\mu=\\varnothing$.",
+        "deps": [
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Complete note, printed pp. 1--4: Bender--Knuth involutions p. 2; bi-alternant theorem and its sign-reversing-involution proof pp. 2--3; bi-alternant formula and Zelevinsky corollary p. 3. The design's mirror http://www.emis.de/journals/EJC/Volume_9/PDF/v9i1n5.pdf and the Kyoto EMIS copy now redirect to the retired EMIS site; recovered at the EJC official download URL."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a7\u00a727--30, printed pp. 145--164: \u00a727.1 tensor products of fundamental representations p. 145; \u00a727.2--27.3 representations of $SL_n$ and $GL_n$, polynomial representations pp. 145--147; \u00a727.4 Schur--Weyl duality pp. 147--150; \u00a728 Schur functors and invariant theory pp. 151--154; \u00a729 Schur polynomials and Howe duality pp. 155--157; \u00a730 minuscule weights and tensor products with a minuscule representation pp. 158--164."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-bender-knuth-involutions-on-semistandard-tableaux",
+        "kind": "lemma",
+        "title": "Bender--Knuth involutions permute the weights of semistandard tableaux",
+        "statement": "Fix $r\\ge1$ and a skew shape $\\nu/\\lambda$ (for a partition shape take\n$\\lambda=\\varnothing$), let $k\\in\\{1,\\dots,r-1\\}$, and let $T$ be a\nsemistandard skew tableau of shape $\\nu/\\lambda$ with entries in\n$\\{1,\\dots,r\\}$ ([[def-skew-diagram-and-semistandard-skew-tableau]],\n[[def-semistandard-tableau-and-kostka-number]]). Call an entry $k$ or $k+1$ of\n$T$ **free** if there is no $k+1$ respectively no $k$ in the same column. Then:\n\n(i) the free positions in each row occupy consecutive cells of that row;\n(ii) replacing in every row the free $k$'s and free $k+1$'s by their\ncomplementary counts (if the row has $a_i$ free $k$'s and $b_i$ free $k+1$'s,\nthen after the replacement it has $b_i$ free $k$'s and $a_i$ free $k+1$'s in\nthe same free cells, the remaining entries unchanged, the free cells filled\nfrom left to right by the $b_i$ copies of $k$ followed by the $a_i$ copies of\n$k+1$) produces again a semistandard skew tableau $\\sigma_k(T)$ of the same\nshape, with entries in $\\{1,\\dots,r\\}$;\n(iii) $\\sigma_k$ is an involution of the set of semistandard skew tableaux of\nshape $\\nu/\\lambda$ with the same set of free positions, and\n$\\operatorname{wt}(\\sigma_k(T))=s_k\\operatorname{wt}(T)$, where $s_k$ is the\ntransposition of $k$ and $k+1$ acting on weights\n([[def-semistandard-tableau-and-kostka-number]], with weights read as vectors\nin $\\mathbb Z^r$).\n\nConsequently, for every weight $\\alpha\\in\\mathbb Z^r_{\\ge0}$ the number of\nsemistandard skew tableaux of shape $\\nu/\\lambda$ and weight $\\alpha$ equals\nthe number of weight $s_k\\alpha$, and the generating function\n$\\sum_Tx^{\\operatorname{wt}(T)}$, over semistandard skew tableaux of shape\n$\\nu/\\lambda$ with entries in $\\{1,\\dots,r\\}$, is symmetric in\n$x_1,\\dots,x_r$ ([[def-partition-young-diagram-and-conjugate-partition]]).",
+        "deps": [
+          "def-semistandard-tableau-and-kostka-number",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Printed p. 2: 'There is a well-known set of involutions $\\sigma_1,\\dots,\\sigma_{n-1}$ on $S(\\mu/\\nu)$, due to Bender and Knuth [BK], with the property that $\\sigma_k$ acts by changing certain entries of $T$ from $k$ to $k+1$ and vice-versa ... $\\omega(\\sigma_k(T))=s_k\\omega(T)$' and the explicit description of free entries; the existence of the involutions 'proves that $s_{\\mu/\\nu}$ is a symmetric function of $x_1,\\dots,x_n$'."
+            },
+            {
+              "title": "T. Seynnaeve, Representation Theory (lecture notes, Bern)",
+              "url": "https://timseynnaeve.github.io/misc/Rep_Theory_Notes.pdf",
+              "locator": "Ch. 11 Definition 11.1 and Theorems 11.6--11.8, printed pp. 54--56 (semistandard tableaux and Schur modules); the involution argument is reproduced here for the symmetry of the tableau generating series."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-highest-weight-vectors-in-a-schur-tensor-product-are-lr-tableaux",
+        "kind": "lemma",
+        "title": "The admissible-tableau count equals the Littlewood--Richardson coefficient",
+        "statement": "Assume the Axiom of Choice. Let $V=\\mathbb C^r$, $r\\ge1$, and let\n$\\lambda,\\mu$ be partitions with $\\ell(\\lambda),\\ell(\\mu)\\le r$. Write\n$\\rho_r=(r-1,r-2,\\dots,0)$, $a_\\eta=\\det(x_i^{\\eta_j})_{1\\le i,j\\le r}$, and\n$s_\\mu=\\sum_Tx^{\\operatorname{wt}(T)}$ over semistandard tableaux of shape\n$\\mu$ with entries in $\\{1,\\dots,r\\}$\n([[prop-semistandard-tableaux-expand-schur-characters]],\n[[def-stable-schur-function-by-bialternants]]). Say that a semistandard\ntableau $T$ of shape $\\mu$ with entries in $\\{1,\\dots,r\\}$ is **admissible**\nfor $\\lambda$ if $\\lambda+\\operatorname{wt}(T_{\\ge j})$ is a partition with at\nmost $r$ parts for every $j\\ge1$, where $T_{\\ge j}$ is the subtableau\nconsisting of the entries in columns $j,j+1,\\dots$. Then:\n\n(i) (bi-alternant expansion)\n$$a_{\\lambda+\\rho_r}s_\\mu=\\sum_{T\\text{ admissible}}a_{\\lambda+\\operatorname{wt}(T)+\\rho_r}, \\qquad\\text{equivalently}\\qquad s_\\lambda s_\\mu=\\sum_{T\\text{ admissible}}s_{\\lambda+\\operatorname{wt}(T)},$$\nthe second identity obtained by dividing by $a_{\\rho_r}$ and using\n$\\ell(\\lambda+\\operatorname{wt}(T))\\le r$ for admissible $T$.\n\n(ii) For every partition $\\nu$ with $\\ell(\\nu)\\le r$, the number of\nadmissible tableaux $T$ of shape $\\mu$ with\n$\\lambda+\\operatorname{wt}(T)=\\nu$ equals the number of\nLittlewood--Richardson tableaux of shape $\\nu/\\lambda$ and content $\\mu$,\nnamely the Littlewood--Richardson coefficient $c^\\nu_{\\lambda\\mu}$\n([[def-littlewood-richardson-tableau-and-coefficient]]). This count identity\nis the classical Littlewood--Richardson comparison; it is cited to Macdonald\n\u00a7I.9, (9.2)--(9.4), whose Littlewood--Robinson algorithm proves it. No\nbijection between the two tableau sets is asserted here. Moreover the\nmultiplicity of $S_\\nu(V)$ in the polynomial $\\operatorname{GL}(V)$-module\n$S_\\lambda(V)\\otimes S_\\mu(V)$ equals $c^\\nu_{\\lambda\\mu}$, because the\ncharacter of that tensor product is\n$\\operatorname{ch}S_\\lambda(V)\\operatorname{ch}S_\\mu(V)=s_\\lambda s_\\mu$\n([[def-schur-module-and-schur-polynomial-character]]) and the multiplicities\nare read off from the expansion in the basis $s_\\nu$ of characters of pairwise\nnon-isomorphic simple modules\n([[thm-schur-weyl-decomposition-with-length-cutoff]] parts (2) and (3)).",
+        "deps": [
+          "cor-schurs-lemma-for-irreducible-representations",
+          "def-axiom-of-choice",
+          "prop-semistandard-tableaux-expand-schur-characters",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "lem-bender-knuth-involutions-on-semistandard-tableaux",
+          "def-schur-module-and-schur-polynomial-character",
+          "def-stable-schur-function-by-bialternants",
+          "thm-skew-jacobi-trudi-and-tableau-expansion",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "thm-schur-weyl-decomposition-with-length-cutoff",
+          "lem-highest-weight-modules-have-weights-below-the-top-weight",
+          "def-dominance-order-on-partitions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Printed pp. 2--3: the bi-alternant theorem '$a_{\\lambda+\\rho}s_{\\mu/\\nu}=\\sum a_{\\lambda+\\omega(T)+\\rho}$ ... T in $S(\\mu/\\nu)$ such that $\\lambda+\\omega(T_{\\ge j})\\in P_n$ for all $j\\ge1$' with the complete sign-reversing-involution proof (bad guys), the bi-alternant corollary $s_\\mu=a_{\\mu+\\rho}/a_\\rho$, and the Zelevinsky corollary $s_\\lambda s_{\\mu/\\nu}=\\sum_T s_{\\lambda+\\omega(T)}$ together with the remark that 'it is a not-too-difficult exercise to show that these two formulations count the same tableaux' (printed p. 3)."
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a79",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "\u00a7I.9, printed pp. 142--148: the Littlewood--Richardson rule (9.2) in the lattice-permutation form and the complete Littlewood--Robinson proof of (9.4), which identifies the tableaux counted by the lattice condition with the tableaux counted by the recursive/dominant-weight description; the two formulations are there proved to count the same tableaux."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "strategy": "The Bender--Knuth sign-reversing involution gives the admissible-tableau expansion after division by the Vandermonde alternant. For each nu, the coefficient of s_nu is the admissible-tableau count; Macdonald, \u00a7I.9, (9.2)--(9.4), proves the classical count identity with the Littlewood--Richardson coefficient by the Littlewood--Robinson algorithm. Use that imported equality and the Schur-character basis to conclude the tensor multiplicity. No bijection between the two tableau sets is asserted."
+      },
+      {
+        "id": "thm-littlewood-richardson-tensor-product-rule",
+        "kind": "theorem",
+        "title": "The Littlewood--Richardson tensor-product rule",
+        "statement": "Assume the Axiom of Choice. Let $V=\\mathbb C^r$, $r\\ge1$, and let\n$\\lambda,\\mu$ be partitions with $\\ell(\\lambda),\\ell(\\mu)\\le r$. Then\n$$S_\\lambda(V)\\otimes S_\\mu(V)\\cong\\bigoplus_{\\nu:\\,\\ell(\\nu)\\le r}S_\\nu(V)^{\\oplus c^\\nu_{\\lambda\\mu}},$$\nthe finite direct sum over partitions $\\nu$ with at most $r$ rows, where\n$c^\\nu_{\\lambda\\mu}$ is the Littlewood--Richardson coefficient of\n[[def-littlewood-richardson-tableau-and-coefficient]]; $c^\\nu_{\\lambda\\mu}=0$\nunless $\\lambda\\subseteq\\nu$ and $|\\nu|=|\\lambda|+|\\mu|$. Equivalently in\ncharacters\n$$s_\\lambda(x_1,\\dots,x_r)\\,s_\\mu(x_1,\\dots,x_r)=\\sum_{\\nu:\\,\\ell(\\nu)\\le r}c^\\nu_{\\lambda\\mu}\\,s_\\nu(x_1,\\dots,x_r),$$\nwith $s_\\nu(x_1,\\dots,x_r)=0$ for $\\ell(\\nu)>r$\n([[def-stable-schur-function-by-bialternants]]); the coefficients\n$c^\\nu_{\\lambda\\mu}$ do not depend on $r$.",
+        "deps": [
+          "def-stable-schur-function-by-bialternants",
+          "def-axiom-of-choice",
+          "lem-highest-weight-vectors-in-a-schur-tensor-product-are-lr-tableaux",
+          "prop-semistandard-tableaux-expand-schur-characters",
+          "def-schur-module-and-schur-polynomial-character",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-polynomial-glr-highest-weights-as-partitions",
+          "thm-schur-weyl-decomposition-with-length-cutoff",
+          "def-commuting-symmetric-and-linear-actions-on-tensor-power",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "lem-highest-weight-modules-have-weights-below-the-top-weight"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Printed pp. 1--4; the introduction states that the Littlewood--Richardson rule for Schur functions is the tensor-product rule for $GL_n(\\mathbb C)$, and the corollary on printed p. 3 expresses $s_\\lambda s_\\mu$ as the sum over admissible tableaux."
+            },
+            {
+              "title": "T. Seynnaeve, Representation Theory (lecture notes, Bern)",
+              "url": "https://timseynnaeve.github.io/misc/Rep_Theory_Notes.pdf",
+              "locator": "Ch. 11 Theorems 11.6--11.8, printed pp. 54--56 (Schur modules, character, irreducibility and highest weights) and Ch. 9 Remarks 9.4--9.6, printed pp. 51--52 (polynomial representations, rank bound)."
+            },
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 9 \u00a79.3.5, printed pp. 418--421: the Littlewood--Richardson rule as the tensor-product decomposition of $GL(n,\\mathbb C)$-modules, with the worked examples."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-horizontal-pieri-rule",
+        "kind": "corollary",
+        "title": "The horizontal Pieri rule",
+        "statement": "Assume the Axiom of Choice. Let $V=\\mathbb C^r$, $r\\ge1$, let $\\lambda$ be a\npartition with $\\ell(\\lambda)\\le r$ and let $d\\ge0$. Then\n$$S_\\lambda(V)\\otimes\\operatorname{Sym}^d(V)\\cong\\bigoplus_\\nu S_\\nu(V),$$\nthe sum over those partitions $\\nu$ of $|\\lambda|+d$ with $\\ell(\\nu)\\le r$ and\n$[\\lambda]\\subseteq[\\nu]$ for which the skew diagram $\\nu/\\lambda$ is a\nhorizontal strip (at most one box in each column,\n[[def-skew-diagram-and-semistandard-skew-tableau]]), each summand occurring\nwith multiplicity one; equivalently\n$$s_\\lambda h_d=\\sum_{\\nu/\\lambda\\text{ horizontal}}s_\\nu$$\nin the rank-$r$ Schur basis, where\n$\\operatorname{Sym}^d(V)$ is the $d$-th symmetric power\n([[def-symmetric-and-exterior-powers-over-an-arbitrary-field]]).",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-littlewood-richardson-tensor-product-rule",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-schur-module-and-schur-polynomial-character",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-symmetric-and-exterior-powers-over-an-arbitrary-field",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-semistandard-tableau-and-kostka-number",
+          "prop-semistandard-tableaux-expand-schur-characters",
+          "def-stable-schur-function-by-bialternants"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Printed pp. 1--3 (the LR rule and its lattice-word formulation; the Pieri case is the specialization to the one-row content)."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a727.2 Example 27.2, printed p. 146 (symmetric powers), and \u00a729.1, printed p. 155 (their characters are complete symmetric polynomials); the horizontal Pieri argument is supplied locally from the LR theorem."
+            },
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 9 \u00a79.2.4 Corollary 9.2.4, printed pp. 411--412 (Pieri's rule for the tensor product with a symmetric power); \u00a79.3.5, printed pp. 418--421."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-vertical-pieri-rule",
+        "kind": "corollary",
+        "title": "The vertical Pieri rule",
+        "statement": "Assume the Axiom of Choice. Let $V=\\mathbb C^r$, $r\\ge1$, let $\\lambda$ be a\npartition with $\\ell(\\lambda)\\le r$ and let $d\\ge0$. Then\n$$S_\\lambda(V)\\otimes\\Lambda^d(V)\\cong\\bigoplus_\\nu S_\\nu(V),$$\nthe sum over those partitions $\\nu$ of $|\\lambda|+d$ with $\\ell(\\nu)\\le r$ and\n$[\\lambda]\\subseteq[\\nu]$ for which the skew diagram $\\nu/\\lambda$ is a\nvertical strip (at most one box in each row,\n[[def-skew-diagram-and-semistandard-skew-tableau]]), each summand occurring\nwith multiplicity one; equivalently\n$$s_\\lambda e_d=\\sum_{\\nu/\\lambda\\text{ vertical}}s_\\nu$$\nin the rank-$r$ Schur basis, where $\\Lambda^d(V)$ is the $d$-th exterior\npower ([[def-symmetric-and-exterior-powers-over-an-arbitrary-field]]).",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-littlewood-richardson-tensor-product-rule",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-schur-module-and-schur-polynomial-character",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-symmetric-and-exterior-powers-over-an-arbitrary-field",
+          "cor-the-kth-exterior-power-vanishes-above-dimension",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-semistandard-tableau-and-kostka-number",
+          "prop-semistandard-tableaux-expand-schur-characters",
+          "def-stable-schur-function-by-bialternants"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Printed pp. 1--3 (the LR rule; the column-content specialization is the vertical Pieri case)."
+            },
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 9 \u00a79.2.4 Corollary 9.2.4, printed pp. 411--412 (the transposed Pieri rule for tensor products with exterior powers); \u00a79.3.5, printed pp. 418--421 (LR rule as tensor product rule)."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a730.2 Example 30.8(2), printed p. 161 (tensoring a Schur module with an exterior power by adding boxes in different rows)."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "prop-determinant-twists-translate-glr-highest-weights",
+        "kind": "proposition",
+        "title": "Determinant twists translate GL_r highest weights",
+        "statement": "Assume the Axiom of Choice. Let $V=\\mathbb C^r$ as in\n[[def-schur-module-and-schur-polynomial-character]], and let\n$\\det\\colon\\operatorname{GL}(V)\\to\\mathbb C^\\times$ be the determinant\ncharacter. Write $\\lambda_j=0$ for $j>\\ell(\\lambda)$ when using\nrow-length coordinates; these zeros are not parts.\n\n(i) For every partition $\\lambda$ with $\\ell(\\lambda)\\le r$ and every integer\n$k\\ge-\\lambda_r$, let $\\lambda+(k^r)$ denote the partition obtained from\n$(\\lambda_1+k,\\dots,\\lambda_r+k)$ by deleting all trailing zeros; the\nall-zero tuple gives $\\varnothing$\n([[def-partition-young-diagram-and-conjugate-partition]]). Then one has\n$$S_{\\lambda+(k^r)}(V)\\cong S_\\lambda(V)\\otimes\\det{}^k$$\nas rational $\\operatorname{GL}(V)$-modules, where $\\det^k$ for $k<0$ is the\n$|k|$-fold tensor power of the dual of the one-dimensional module\n$\\det=\\Lambda^rV$ ([[cor-the-top-exterior-power-acts-by-the-determinant]],\n[[cor-determinant-multiplicativity-from-the-top-exterior-power]]).\n\n(ii) Consequently the irreducible rational representations of\n$\\operatorname{GL}(V)$ are, up to isomorphism, exactly the twists\n$S_\\lambda(V)\\otimes\\det{}^k$ with $\\lambda$ a partition of at most $r$ parts\nand $k\\in\\mathbb Z$; the irreducible rational representation of highest weight\n$\\eta=(\\eta_1\\ge\\dots\\ge\\eta_r)\\in\\mathbb Z^r$ is\n$S_{\\bar\\eta}(V)\\otimes\\det{}^{\\eta_r}$, where $\\bar\\eta$ is obtained from\n$(\\eta_1-\\eta_r,\\dots,\\eta_r-\\eta_r)$ by deleting all trailing zeros,\nagain giving $\\varnothing$ if every coordinate is zero.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-schur-module-and-schur-polynomial-character",
+          "def-polynomial-glr-highest-weights-as-partitions",
+          "prop-semistandard-tableaux-expand-schur-characters",
+          "def-stable-schur-function-by-bialternants",
+          "cor-the-top-exterior-power-acts-by-the-determinant",
+          "cor-determinant-multiplicativity-from-the-top-exterior-power",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "T. Seynnaeve, Representation Theory (lecture notes, Bern)",
+              "url": "https://timseynnaeve.github.io/misc/Rep_Theory_Notes.pdf",
+              "locator": "\u00a712.1 Proposition 12.1, printed pp. 59--60 (irreducible rational representations of $GL(V)$ are $S_\\lambda(V)\\otimes\\det^k$, and the highest weight is translated by $k(1^r)$); Ch. 9 Remarks 9.4--9.6, printed pp. 51--52."
+            },
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 5 \u00a75.5.4 Theorem 5.5.22, printed pp. 273--275 (classification of irreducible rational representations of $GL_n$ by dominant integral weights and central character, including the determinant twist)."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a729.1, printed pp. 155--157 (Schur polynomials in $r$ variables), \u00a727.4, pp. 147--150 (Schur--Weyl modules)."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-littlewood-richardson-coefficients-stabilize-with-rank",
+        "kind": "proposition",
+        "title": "Littlewood--Richardson coefficients stabilise with rank",
+        "statement": "Assume the Axiom of Choice. Let $\\lambda,\\mu$ be partitions, padding their row-length coordinates by zeros when needed, and let\n$c^\\nu_{\\lambda\\mu}$ be the Littlewood--Richardson coefficients of\n[[def-littlewood-richardson-tableau-and-coefficient]].\n\n(i) If $c^\\nu_{\\lambda\\mu}\\ne0$, then $\\lambda\\subseteq\\nu$ and\n$|\\nu|=|\\lambda|+|\\mu|$; in particular $\\nu_1\\le\\lambda_1+\\mu_1$ and\n$\\ell(\\nu)\\le\\ell(\\lambda)+\\ell(\\mu)$.\n\n(ii) For every $r\\ge\\max(1,\\ell(\\lambda),\\ell(\\mu))$ the tensor product over\n$V=\\mathbb C^r$ decomposes as\n$$S_\\lambda(V)\\otimes S_\\mu(V)\\cong\\bigoplus_{\\nu:\\,\\ell(\\nu)\\le r}S_\\nu(V)^{\\oplus c^\\nu_{\\lambda\\mu}},$$\nwith the same coefficients $c^\\nu_{\\lambda\\mu}$ for every such $r$; if\n$r\\ge\\ell(\\lambda)+\\ell(\\mu)$ no coefficient visible at a larger rank is lost,\nand for every such $r$ one has\n$s_\\lambda(x_1,\\dots,x_r)s_\\mu(x_1,\\dots,x_r)=\\sum_{\\nu:\\ell(\\nu)\\le r}c^\\nu_{\\lambda\\mu}s_\\nu(x_1,\\dots,x_r)$\nwith $s_\\nu(x_1,\\dots,x_r)=0$ for $\\ell(\\nu)>r$\n([[def-stable-schur-function-by-bialternants]]).",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-littlewood-richardson-tensor-product-rule",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-schur-module-and-schur-polynomial-character",
+          "def-stable-schur-function-by-bialternants",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "lem-highest-weight-modules-have-weights-below-the-top-weight"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Printed pp. 2--3: the LR rule is stated for a fixed number $n$ of variables with the admissible/lattice tableaux of shapes with at most $n$ rows, and the bi-alternant corollary divides by $a_\\rho$; the stability of the coefficients is the statement that the tableau count does not involve $n$."
+            },
+            {
+              "title": "T. Seynnaeve, Representation Theory (lecture notes, Bern)",
+              "url": "https://timseynnaeve.github.io/misc/Rep_Theory_Notes.pdf",
+              "locator": "Ch. 9 Remarks 9.4--9.6, printed pp. 51--52 (a partition with more rows than $\\dim V$ cannot occur as a polynomial highest weight); Ch. 11 Theorems 11.6--11.8, printed pp. 54--56."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a727.3--27.4, printed pp. 145--150 (polynomial representations of $GL_n$ and the row bound on highest weights)."
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 799.2,
+    "id": "tensor-product-multiplicities-and-littlewood-richardson-examples",
+    "kind": "B",
+    "category": "lie-theory",
+    "title": "Tensor Product Multiplicities and Littlewood Richardson \u2014 Examples",
+    "companion": "tensor-product-multiplicities-and-littlewood-richardson",
+    "requires": [
+      "tensor-product-multiplicities-and-littlewood-richardson"
+    ],
+    "items": [
+      {
+        "id": "ex-clebsch-gordan-decomposition-for-sl2",
+        "kind": "example",
+        "title": "The Clebsch--Gordan tensor decomposition for sl2",
+        "statement": "Assume the Axiom of Choice. Take $\\mathfrak g=\\mathfrak{sl}_2$ with positive\nroot $\\alpha$ and Weyl group $W=\\{1,s\\}$, so that $\\rho=\\alpha/2=:\\omega$ and\nthe dominant integral weights are $m\\omega$, $m\\ge0$\n([[prop-root-systems-of-the-classical-complex-lie-algebras]],\n[[def-classical-complex-matrix-lie-algebras]],\n[[def-integral-dominant-and-strictly-dominant-weights]],\n[[def-weyl-vector-rho-for-a-chosen-positive-system]]). For an integer $m\\ge0$ let\n$L(m)=L(m\\omega)$ be the finite-dimensional simple module of highest weight\n$m\\omega$; it has dimension $m+1$ and weights\n$m\\omega,(m-2)\\omega,\\dots,-m\\omega$, each of multiplicity one\n([[thm-finite-dimensional-representations-of-sl-two]],\n[[thm-highest-weight-classification-of-finite-dimensional-irreducible-representations]]).\nThen for all integers $a,b\\ge0$ the tensor-product multiplicities of\n[[def-tensor-product-multiplicity-for-highest-weight-modules]] are\n$$c^{c}_{ab}=\\begin{cases}1,&|a-b|\\le c\\le a+b,\\ c\\equiv a+b\\ (\\mathrm{mod}\\ 2),\\\\0,&\\text{otherwise,}\\end{cases} \\qquad\\text{equivalently}\\qquad L(a)\\otimes L(b)\\cong\\bigoplus_{j=0}^{\\min(a,b)}L(a+b-2j).$$\nIn particular there are exactly $\\min(a,b)+1$ simple summands, with extreme\nsummands $L(a+b)$ and $L(|a-b|)$. The number matches the Racah--Speiser sum of\n[[cor-racah-speiser-tensor-product-algorithm]]: in the $\\rho=\\omega$\nnormalisation a weight $\\varphi$ of $L(b)$ is irregular relative to $a\\omega$\nexactly when $\\varphi+a\\omega+\\rho=0$, i.e. $\\varphi=-(a+1)\\omega$, which is a\nweight of $L(b)$ exactly when $a+1\\le b$ and $a+b$ is odd; the remaining $b+1$ (or $b$) weights\ncontribute $\\pm1$, and the contributions with sign $-1$ cancel the\noverlapping range $0\\le c\\le b-a-2$ when $a<b$, leaving exactly the\nmultiplicities $1$ above.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-tensor-product-multiplicity-for-highest-weight-modules",
+          "cor-racah-speiser-tensor-product-algorithm",
+          "thm-finite-dimensional-representations-of-sl-two",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "prop-root-systems-of-the-classical-complex-lie-algebras",
+          "def-classical-complex-matrix-lie-algebras",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-weyl-vector-rho-for-a-chosen-positive-system"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Birkh\u00e4user 2002",
+              "url": "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf",
+              "locator": "Ch. IX \u00a78 Problem 17 with its printed solution, printed pp. 611--612 and 747--748 (the Steinberg/Racah--Speiser formula; specialization to $A_1$ gives the Clebsch--Gordan decomposition)."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a726.1--26.3, printed pp. 138--142 (weights and characters of $\\mathfrak{sl}_2$-modules); \u00a727.1, printed p. 145."
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-three-tensor-three-for-sl3",
+        "kind": "example",
+        "title": "Three times three for sl3",
+        "statement": "Assume the Axiom of Choice. Take $\\mathfrak g=\\mathfrak{sl}_3$ with simple\nroots $\\alpha_1,\\alpha_2$, positive roots\n$\\Phi^+=\\{\\alpha_1,\\alpha_2,\\alpha_1+\\alpha_2\\}$, Weyl vector\n$\\rho=\\alpha_1+\\alpha_2$, fundamental weights $\\omega_1,\\omega_2$, and let\n$V=L(\\omega_1)$ be the standard three-dimensional simple module\n([[prop-root-systems-of-the-classical-complex-lie-algebras]],\n[[def-classical-complex-matrix-lie-algebras]], [[def-fundamental-weights]],\n[[thm-highest-weight-classification-of-finite-dimensional-irreducible-representations]]).\nThen the tensor-product multiplicities of\n[[def-tensor-product-multiplicity-for-highest-weight-modules]] are\n$c^{2\\omega_1}_{\\omega_1\\omega_1}=c^{\\omega_2}_{\\omega_1\\omega_1}=1$ and all\nothers are zero, that is\n$$L(\\omega_1)\\otimes L(\\omega_1)\\cong L(2\\omega_1)\\oplus L(\\omega_2)=\\operatorname{Sym}^2V\\oplus\\Lambda^2V,\\qquad 3\\otimes 3=6\\oplus\\bar 3,$$\nwith summands of dimensions $6$ and $3$; in particular the trivial module\n$L(0)$ is not a summand. The same answer is obtained from\n[[cor-minuscule-tensor-product-rule]]: $\\omega_1$ is minuscule\n([[def-minuscule-weight]]), its weight orbit is\n$W\\omega_1=\\{\\omega_1,\\ \\omega_2-\\omega_1,\\ -\\omega_2\\}$, the three weights of\n$V$, each of multiplicity one\n([[lem-minuscule-weights-are-the-weyl-orbit]]), and among the three translates\n$\\omega_1+\\gamma$ exactly $2\\omega_1$ and $\\omega_2$ are dominant integral\nwhile $\\omega_1-\\omega_2$ is not. Two consistency checks fix the omissions:\n$L(0)$ is excluded because $-\\omega_1\\notin W\\omega_1$, and the dimension\ncount is $\\dim\\operatorname{Sym}^2V+\\dim\\Lambda^2V=6+3=9=\\dim(V\\otimes V)$.",
+        "deps": [
+          "prop-direct-sum-dual-hom-and-tensor-representations",
+          "def-symmetric-and-exterior-powers-over-an-arbitrary-field",
+          "thm-weyls-complete-reducibility-theorem",
+          "def-axiom-of-choice",
+          "def-tensor-product-multiplicity-for-highest-weight-modules",
+          "cor-minuscule-tensor-product-rule",
+          "def-minuscule-weight",
+          "lem-minuscule-weights-are-the-weyl-orbit",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "prop-root-systems-of-the-classical-complex-lie-algebras",
+          "def-classical-complex-matrix-lie-algebras",
+          "def-fundamental-weights",
+          "def-integral-dominant-and-strictly-dominant-weights"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a727.2--27.3, printed pp. 145--147 (the standard representation of $\\mathfrak{sl}_3$ and tensor products), \u00a730.2 Corollary 30.7 and its proof, printed pp. 159--160 (tensor product with a minuscule representation)."
+            },
+            {
+              "title": "T. Seynnaeve, Representation Theory (lecture notes, Bern)",
+              "url": "https://timseynnaeve.github.io/misc/Rep_Theory_Notes.pdf",
+              "locator": "Ch. 9 Remarks 9.4--9.6, printed pp. 51--52 (weights of polynomial representations, powers and exterior powers of the standard representation)."
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-littlewood-richardson-product-s21-times-s1",
+        "kind": "example",
+        "title": "The product s(2,1)s(1) by Pieri",
+        "statement": "Assume the Axiom of Choice. Let $r\\ge2$, $V=\\mathbb C^r$, and let\n$s_\\nu(x_1,\\dots,x_r)$ denote the rank-$r$ Schur polynomial, with\n$s_\\nu(x_1,\\dots,x_r)=0$ for $\\ell(\\nu)>r$\n([[def-stable-schur-function-by-bialternants]],\n[[prop-semistandard-tableaux-expand-schur-characters]]). Then\n$$s_{(2,1)}(x_1,\\dots,x_r)\\,s_{(1)}(x_1,\\dots,x_r)=s_{(3,1)}(x_1,\\dots,x_r)+s_{(2,2)}(x_1,\\dots,x_r)+s_{(2,1,1)}(x_1,\\dots,x_r),$$\nwhere the last term is read as $0$ when $r=2$; correspondingly, in the\nnotation of [[def-schur-module-and-schur-polynomial-character]],\n$$S_{(2,1)}(V)\\otimes V\\cong S_{(3,1)}(V)\\oplus S_{(2,2)}(V)\\oplus S_{(2,1,1)}(V)$$\nwith LR coefficient one for each listed shape; when $r=2$ the final Schur\nmodule is zero, so only the first two are nonzero summands\n([[thm-littlewood-richardson-tensor-product-rule]],\n[[cor-horizontal-pieri-rule]]). The three partitions $\\nu$ are exactly the\npartitions of $4$ with $[(2,1)]\\subseteq[\\nu]$ for which the skew diagram\n$\\nu/(2,1)$ is a horizontal strip, namely the three legal ways of adding one\nbox to the diagram of $(2,1)$\n([[def-skew-diagram-and-semistandard-skew-tableau]]). The rank bound is\nvisible in the dimensions: for $r=3$ the identity reads $15+6+3=24=8\\cdot3$,\nand for $r=2$ the shape $(2,1,1)$ has more rows than variables and drops out,\nleaving $3+1=4=2\\cdot2$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-littlewood-richardson-tensor-product-rule",
+          "cor-horizontal-pieri-rule",
+          "def-schur-module-and-schur-polynomial-character",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-stable-schur-function-by-bialternants",
+          "prop-semistandard-tableaux-expand-schur-characters",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Printed pp. 1--3 (LR rule and lattice words; the content $(1)$ case is the Pieri specialization)."
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a75",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "\u00a7I.5 Examples, printed pp. 74--76 (Pieri rule $s_\\lambda h_d=\\sum s_\\nu$ over horizontal strips)."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-a-littlewood-richardson-coefficient-greater-than-one",
+        "kind": "example",
+        "title": "A Littlewood--Richardson coefficient greater than one",
+        "statement": "Assume the Axiom of Choice. For partitions $\\lambda,\\mu,\\nu$, let\n$c^\\nu_{\\lambda\\mu}$ be the Littlewood--Richardson coefficient of\n[[def-littlewood-richardson-tableau-and-coefficient]], the number of LR\ntableaux of shape $\\nu/\\lambda$ and content $\\mu$; by\n[[thm-littlewood-richardson-tensor-product-rule]] it is the multiplicity of\n$S_\\nu(V)$ in $S_\\lambda(V)\\otimes S_\\mu(V)$ for $V=\\mathbb C^r$ when\n$\\ell(\\lambda),\\ell(\\mu),\\ell(\\nu)\\le r$; if $\\ell(\\nu)>r$, the coefficient\nremains the same LR tableau count but $S_\\nu(V)=0$\n([[def-schur-module-and-schur-polynomial-character]]). Then\n$$c^{(3,2,1)}_{(2,1),(2,1)}=2.$$\nExplicitly, the skew diagram $(3,2,1)/(2,1)$ consists of one box in each of\nthe three rows, at $(1,3)$, $(2,2)$ and $(3,1)$ in English row-column\ncoordinates ([[def-partition-young-diagram-and-conjugate-partition]]), so the\nsemistandard skew tableaux of content $(2,1)$ are simply the three words of\ncontent $(2,1)$; their reading words, taken right to left in each row starting\nwith the top row, are $1,1,2$; $1,2,1$; and $2,1,1$, and the first two are\nlattice words while $2,1,1$ fails at its first letter. The corresponding\nexpansion in Schur functions is\n$$s_{(2,1)}^{2}=s_{(4,2)}+s_{(4,1,1)}+s_{(3,3)}+2s_{(3,2,1)}+s_{(3,1,1,1)}+s_{(2,2,2)}+s_{(2,2,1,1)},$$\nwhich at rank $3$ gives $8^2=27+10+10+2\\cdot8+1$, the two shapes with four\nrows contributing $0$\n([[def-stable-schur-function-by-bialternants]],\n[[prop-semistandard-tableaux-expand-schur-characters]]).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "thm-littlewood-richardson-tensor-product-rule",
+          "def-schur-module-and-schur-polynomial-character",
+          "def-stable-schur-function-by-bialternants",
+          "prop-semistandard-tableaux-expand-schur-characters",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Printed pp. 1--3 (LR tableaux and the lattice-word criterion; the example is the smallest case in which the enumeration has two tableaux)."
+            },
+            {
+              "title": "R. Goodman and N. R. Wallach, Symmetry, Representations, and Invariants, Graduate Texts in Mathematics 255, Springer 2009",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/goodwallx.pdf",
+              "locator": "Ch. 9 \u00a79.3.5, printed p. 421 (the $GL(n,\\mathbb C)$-example with $\\mu=[2,1]$, $\\nu=[1,1]$ and multiplicity-free summands) and the worked LR counts pp. 419--421."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-a-semistandard-skew-tableau-with-nonlattice-word-is-not-lr",
+        "kind": "counterexample",
+        "title": "A semistandard tableau with non-lattice reading word is not a Littlewood--Richardson tableau",
+        "statement": "For partitions $\\lambda\\subseteq\\nu$ and $\\mu$ with\n$|\\nu|=|\\lambda|+|\\mu|$, every semistandard skew tableau of shape\n$\\nu/\\lambda$ and content $\\mu$ is a Littlewood--Richardson tableau, i.e. its\nreading word is automatically a lattice word\n([[def-littlewood-richardson-tableau-and-coefficient]]).",
+        "deps": [
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "thm-skew-jacobi-trudi-and-tableau-expansion",
+          "def-stable-schur-function-by-bialternants"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, A Concise Proof of the Littlewood--Richardson Rule, Electronic Journal of Combinatorics 9 (2002), #N5, 4 pp.",
+              "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v9i1n5/pdf",
+              "locator": "Complete note, printed pp. 1--4; the reading-word and lattice-permutation conventions are the ones converted in the remark on printed p. 3, and the finite tableau below was checked directly against those conventions."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-a-partition-with-too-many-rows-vanishes-at-fixed-rank",
+        "kind": "counterexample",
+        "title": "A partition with too many rows vanishes at fixed rank",
+        "statement": "In the Littlewood--Richardson tensor-product rule\n$S_\\lambda(V)\\otimes S_\\mu(V)\\cong\\bigoplus_\\nu S_\\nu(V)^{\\oplus c^\\nu_{\\lambda\\mu}}$\nthe row bound $\\ell(\\nu)\\le r=\\dim V$ on the summands may be suppressed: every\npartition $\\nu$ with $c^\\nu_{\\lambda\\mu}\\ne0$ contributes a nonzero summand\n$S_\\nu(V)$ of the tensor product\n([[thm-littlewood-richardson-tensor-product-rule]],\n[[def-schur-module-and-schur-polynomial-character]]).",
+        "deps": [
+          "prop-semistandard-tableaux-expand-schur-characters",
+          "cor-the-top-exterior-power-acts-by-the-determinant",
+          "def-axiom-of-choice",
+          "def-schur-module-and-schur-polynomial-character",
+          "thm-littlewood-richardson-tensor-product-rule",
+          "cor-vertical-pieri-rule",
+          "prop-littlewood-richardson-coefficients-stabilize-with-rank",
+          "cor-the-kth-exterior-power-vanishes-above-dimension",
+          "def-stable-schur-function-by-bialternants",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "T. Seynnaeve, Representation Theory (lecture notes, Bern)",
+              "url": "https://timseynnaeve.github.io/misc/Rep_Theory_Notes.pdf",
+              "locator": "Ch. 9 Definition 9.1 and Remarks 9.4--9.6, printed pp. 51--52 (a polynomial representation has only nonnegative torus weights, so a partition with more rows than $\\dim V$ cannot occur); \u00a712.1, printed pp. 59--60."
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (MIT 18.755, Spring 2024), complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf",
+              "locator": "\u00a727.3--27.4, printed pp. 145--150 (polynomial representations of $GL_n$ and the bound on the number of rows)."
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  }
+]

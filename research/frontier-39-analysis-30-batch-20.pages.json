@@ -1,0 +1,1783 @@
+[
+  {
+    "order": 458.049,
+    "id": "scalar-conservation-laws-and-entropy-solutions",
+    "kind": "A",
+    "category": "pde",
+    "title": "Scalar Conservation Laws and Entropy Solutions",
+    "companion": "scalar-conservation-laws-and-entropy-solutions-examples",
+    "requires": [
+      "hamilton-jacobi-equations-and-viscosity-solutions",
+      "rellich-kondrachov-and-sobolev-compactness",
+      "heat-equation-maximum-principles-duhamel-and-smoothing"
+    ],
+    "items": [
+      {
+        "id": "def-scalar-conservation-law-and-flux",
+        "kind": "definition",
+        "title": "Scalar conservation laws, fluxes and Cauchy data",
+        "statement": "Let $n\\ge1$ and let $\\Pi=O\\times(a,b)\\subseteq\\mathbb R^n\\times\\mathbb R$ be an open space--time cylinder. The equation\n$$u_t+\\operatorname{div}_x f(u)=0\\qquad\\text{in }\\Pi$$\nis the **scalar conservation law in conservation form**, where the unknown $u:\\Pi\\to\\mathbb R$ is the conserved quantity and the flux is a map $f:\\mathbb R\\to\\mathbb R^n$. The classical expression is used when $u$ and $f\\circ u$ are $C^1$; the distributional expression is used whenever $u,f(u)\\in L^1_{\\mathrm{loc}}(\\Pi)$. In particular, if $u$ is bounded measurable and $f$ is continuous, then $f(u)$ is locally integrable and its distributional divergence is defined. A Cauchy problem is posed separately on $\\Pi_T=\\mathbb R^n\\times(0,T)$ and has initial datum $u_0\\in L^\\infty(\\mathbb R^n)\\cap L^1_{\\mathrm{loc}}(\\mathbb R^n)$, understood as an equivalence class; the weak formulation records it in the initial boundary term and the entropy formulation uses a strong local $L^1$ trace. If $f\\in C^1(\\mathbb R;\\mathbb R^n)$ and $u\\in C^1$, the chain rule gives the equivalent quasilinear equation $u_t+f'(u)\\cdot\\nabla u=0$ ([[thm-chain-rule]]). This equivalence is not asserted for discontinuous $u$: the product of $f'(u)$ with a distributional gradient is not generally defined, while $\\operatorname{div}_x f(u)$ is defined distributionally whenever $f(u)\\in L^1_{\\mathrm{loc}}$. The one-dimensional case is $u_t+f(u)_x=0$ with scalar flux $f:\\mathbb R\\to\\mathbb R$. Whenever the Riemann theory, the Rankine--Hugoniot condition or the characteristic formula below is invoked, $f$ is assumed at least $C^1$ (and $C^2$ where $f'$ or $f''$ is differentiated); adding a constant vector to $f$ does not change the equation because its divergence is zero.",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-directional-and-partial-derivatives",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-total-derivative-in-euclidean-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-locally-integrable-function-on-r-n",
+          "thm-chain-rule"
+        ],
+        "strategy": "Definition and notational contract. Separate the local conservation equation on an arbitrary cylinder from the Cauchy problem on $\\mathbb R^n\\times(0,T)$, so the initial plane is always $t=0$. The distributional divergence is defined only when both $u$ and the composition $f(u)$ are locally integrable; continuity of $f$ and boundedness of $u$ suffice for the weak formulation used here. For $C^1$ flux and solution, [[thm-chain-rule]] gives $\\operatorname{div} f(u)=f'(u)\\cdot\\nabla u$; this is the only use of the nonconservative quasilinear notation. The one-dimensional reduction and additive-constant freedom are notational consequences. No choice principle occurs. S: [KR] §§1--2, equations (1.1)--(1.2) and (1.5); [KL] §1 and §§4.1--4.2, equations (4.2)--(4.3); [BCL] §1.1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§§1--2, equations (1.1)--(1.6), pp. 217--221"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§1 and §4.1--4.2, pp. 1--4 and 18--23"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§1.1--1.2, pp. 1--6"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-distributional-weak-solution-of-a-scalar-conservation-law",
+        "kind": "definition",
+        "title": "Distributional weak solutions of the Cauchy problem",
+        "statement": "Let $n\\ge1$, $T>0$, $\\Pi_T=\\mathbb R^n\\times(0,T)$, let $f:\\mathbb R\\to\\mathbb R^n$ be continuous and let $u_0\\in L^\\infty(\\mathbb R^n)\\cap L^1_{\\mathrm{loc}}(\\mathbb R^n)$. A bounded measurable $u:\\Pi_T\\to\\mathbb R$ is a **distributional weak solution** of the Cauchy problem $u_t+\\operatorname{div}_x f(u)=0$, $u(\\cdot,0)=u_0$, if for every $\\varphi\\in C_c^\\infty(\\mathbb R^n\\times(-\\infty,T))$ --- test functions whose support may meet the initial plane $t=0$ --- one has $$\\int_{\\Pi_T}\\Bigl(u\\,\\varphi_t+f(u)\\cdot\\nabla_x\\varphi\\Bigr)\\,dx\\,dt+\\int_{\\mathbb R^n}u_0(x)\\varphi(x,0)\\,dx=0.$$ Equivalently $u_t+\\operatorname{div}_x f(u)=0$ in $\\mathcal D'(\\Pi_T)$ together with the displayed initial boundary term. The integrals are absolutely convergent: $u$ is bounded, $f(u)$ is bounded on the bounded range, and $\\varphi$ has compact support. The condition is an equality in the $L^1_{\\mathrm{loc}}$ classes of $u$ and $f(u)$; it involves no pointwise assignment of $u$ on $\\{t=0\\}$, and the initial datum enters only through the boundary term. For the entropy formulation of this page the initial condition is instead imposed as a strong local $L^1$ trace ([[def-kruzhkov-entropy-solution]]).",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-test-function-space-d-of-an-open-set",
+          "def-locally-integrable-function-on-r-n",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "strategy": "Definition and notational contract; no proof. The test-function class is $\\mathcal D(\\mathbb R^n\\times(-\\infty,T))$, so supports may touch $t=0$ and the initial term is retained; this is the formulation in [KL] (4.3) with the initial datum taken in the sense fixed there, and the formulation [KR] writes as the integral identity (1.6) with condition (2.2). Well-definedness: $u$ and $fu$ are $L^1_{\\mathrm{loc}}$ classes, so the identity is representative-independent; the pairing conventions are [[def-distribution]] and unit test functions are smooth and compactly supported by [[def-test-function-space-d-of-an-open-set]]. No choice principle occurs beyond the integration interfaces. S: [KR] \\u00a72, identity (1.6) and Definition 1 along with condition (2.1)--(2.2), pp. 220--221; [KL] \\u00a74.1, equation (4.3), p. 18; [BCL] \\u00a72.1, p. 9.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§2, (1.5)--(1.6) and Definition 1, pp. 220--221"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§4.1, (4.2)--(4.3), p. 18"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.1, weak solutions, p. 9"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "prop-classical-solutions-satisfy-the-weak-conservation-law",
+        "kind": "proposition",
+        "title": "Classical solutions are weak solutions, and conversely",
+        "statement": "Let $n\\ge1$, $T>0$, $f\\in C^1(\\mathbb R;\\mathbb R^n)$ and $u_0\\in L^\\infty(\\mathbb R^n)\\cap L^1_{\\mathrm{loc}}(\\mathbb R^n)$. (i) If $u\\in C^1(\\Pi_T)\\cap C^0([0,T];L^1_{\\mathrm{loc}}(\\mathbb R^n))\\cap L^\\infty(\\Pi_T)$ satisfies $u_t+\\operatorname{div}_x f(u)=0$ pointwise in $\\Pi_T$ and has initial trace $u(\\cdot,t)\\to u_0$ in $L^1_{\\mathrm{loc}}$ as $t\\downarrow0$, then $u$ is a distributional weak solution in the sense of [[def-distributional-weak-solution-of-a-scalar-conservation-law]]. (ii) Conversely, if $u$ is a bounded distributional weak solution, $u\\in C^1(\\Pi_T)$, and $u(\\cdot,t)$ has an $L^1_{\\mathrm{loc}}$-continuous trace $\\bar u_0$ as $t\\downarrow0$, then $u_t+\\operatorname{div}_x f(u)=0$ pointwise in $\\Pi_T$ and $\\bar u_0=u_0$ as $L^1_{\\mathrm{loc}}$ equivalence classes. The initial-trace conclusion is an almost-everywhere class equality; no pointwise representative on $t=0$ is asserted.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "thm-ftc-second-part",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-countable-choice",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "strategy": "Proof by integration by parts. (i) Fix a test $\\varphi\\in C_c^\\infty(\\mathbb R^n\\times(-\\infty,T))$. Choose a bounded box containing its spatial support and integrate the pointwise equation by parts over that box times $(\\delta,T)$, using [[thm-ftc-second-part]] in time and [[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]] in space. The support avoids the spatial and terminal faces. Since $u$ is bounded and $f$ is continuous, the flux terms are locally integrable; the only surviving boundary term is at $t=\\delta$. As $\\delta\\downarrow0$, the $L^1_{\\mathrm{loc}}$ trace and uniform convergence of $\\varphi(\\cdot,\\delta)$ on its compact spatial support give the prescribed initial term, which is exactly the weak identity. (ii) Test the weak identity with functions supported away from $t=0$; integration by parts gives $\\int_{\\Pi_T}(u_t+\\operatorname{div}f(u))\\varphi=0$. By [[thm-chain-rule]] and the $C^1$ hypotheses, the residual is continuous, so [[ex-smooth-compactly-supported-bump]] implies that it vanishes pointwise. To identify the initial trace, integrate the pointwise equation from $\\delta$ to $T$ against a spatial test function and pass $\\delta\\downarrow0$ using the assumed $L^1_{\\mathrm{loc}}$ trace. Comparing with the weak identity shows that $\\bar u_0$ and $u_0$ have equal pairings with every compactly supported smooth spatial test; hence they are the same $L^1_{\\mathrm{loc}}$ class, not necessarily pointwise equal. S: [KL] §4.1, Theorem 4.1 and Corollary 4.2 (Green--Gauss and integration by parts) and weak formulation (4.3), pp. 18--20; [KR] §2, relation of (2.1) to (1.6), p. 221.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§4.1, Theorem 4.1 and Corollary 4.2 (Green--Gauss and integration by parts) and the weak formulation (4.3), pp. 18--20"
+            },
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§2, relation of (2.1) to (1.6), p. 221"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+        "kind": "proposition",
+        "title": "Characteristics and the Riccati equation for the spatial derivative",
+        "statement": "Let $T>0$, $f\\in C^2(\\mathbb R)$, and let $u\\in C^1(\\mathbb R\\times(0,T))$ be a classical solution of $u_t+f(u)_x=0$ ([[def-scalar-conservation-law-and-flux]], [[def-ck-and-multi-index-notation-in-several-variables]]). (i) Along every characteristic $x(t)$ solving $\\dot x=f'(u(x(t),t))$, the value $u(x(t),t)$ is constant. (ii) If in addition $u\\in C^2(\\mathbb R\\times(0,T))$, then $p(t)=u_x(x(t),t)$ satisfies along each characteristic $$\\dot p(t)=-f''(u(x(t),t))p(t)^2.$$ Consequently, if $f''\\ge0$ on the range of $u$, then $p$ is nonincreasing along characteristics. More precisely, fix $t_0\\in(0,T)$ and a characteristic through $(x_0,t_0)$, and set $p_0=u_x(x_0,t_0)$. If $p_0<0$ and $f''(u(x_0,t_0))\\ge\\kappa>0$, then, as long as the classical solution exists along that characteristic, $$p(t)=\\frac{p_0}{1+f''(u(x_0,t_0))p_0(t-t_0)}.$$ If the solution exists along this characteristic up to that time, its derivative tends to $-\\infty$ at $t_*=t_0+1/(f''(u(x_0,t_0))|p_0|)\\le t_0+1/(\\kappa|p_0|)$; hence a $C^2$ solution cannot persist through $t_*$ along this characteristic ([[def-total-derivative-in-euclidean-space]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[def-linear-transport-equation-and-its-characteristic-flow]]).",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-linear-transport-equation-and-its-characteristic-flow",
+          "lem-transport-equation-along-a-characteristic",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution"
+        ],
+        "strategy": "For (i), differentiate $u(x(t),t)$: the chain rule gives $u_t+u_x\\dot x=u_t+f'(u)u_x=0$. For (ii), the extra $C^2$ hypothesis justifies differentiating the equation in $x$: with $p=u_x$, $$p_t+\\partial_x(f'(u)p)=p_t+f'(u)p_x+f''(u)p^2=0.$$ Along the same characteristic this is the stated Riccati equation. The characteristic value $u_*=u(x_0,t_0)$ is constant by (i), so $c=f''(u_*)$ is constant on the curve. If $c\\ge0$, $p'=-cp^2\\le0$. If $p(t_0)=p_0<0$ and $c\\ge\\kappa>0$, separation (or direct differentiation) gives $p(t)=p_0/(1+cp_0(t-t_0))$ until the denominator vanishes, at $t_*=t_0+1/(c|p_0|)\\le t_0+1/(\\kappa|p_0|)$. The pole prevents a $C^2$ solution from extending through that time along the characteristic. S: [KL] \\u00a73.1--3.4, characteristic system and formation-of-singularities estimates, pp. 10--18; [KR] \\u00a71, pp. 217--219; [IVR] \\u00a712.1.1, characteristics and the derivative blow-up calculation, pp. 350--352.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, Kruzhkov's lectures on first-order quasilinear PDEs, in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "Sections 3.1--3.4, pp. 10--18"
+            },
+            {
+              "title": "S. N. Kruzhkov, First order quasilinear equations in several independent variables, Mat. USSR-Sbornik 10 (1970), 217--243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "Section 1, pp. 217--219; Section 5, pp. 239--241"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations, University of Toronto 2018, complete 415-page textbook",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Section 12.1.1, pp. 350--352"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-piecewise-smooth-shock-and-one-sided-traces",
+        "kind": "definition",
+        "title": "Piecewise smooth shocks and one-sided traces",
+        "statement": "Let \\(n\\ge1\\), \\(T>0\\), and \\(f\\in C^1(\\mathbb R;\\mathbb R^n)\\). Let \\(\\Gamma\\) be a \\(C^1\\) hypersurface in \\(\\Pi_T:=\\mathbb R^n\\times(0,T)\\) with a two-sided open neighborhood \\(U\\subset\\Pi_T\\), so \\(U\\setminus\\Gamma=U^-\\mathbin{\\dot\\cup}U^+\\) for disjoint open sides \\(U^\\pm\\). Fix the unit normal \\(\\nu=(\\nu_t,\\nu_x)\\) on \\(\\Gamma\\) oriented from \\(U^-\\) toward \\(U^+\\), with \\(\\nu_t^2+|\\nu_x|^2=1\\). A **piecewise \\(C^1\\) weak solution near \\(\\Gamma\\)** is a distributional weak solution \\(u\\) of \\(u_t+\\operatorname{div}_x f(u)=0\\) on \\(\\Pi_T\\) ([[def-distributional-weak-solution-of-a-scalar-conservation-law]]) such that at each \\(\\zeta\\in\\Gamma\\) there is a neighborhood \\(V_\\zeta\\subset U\\) and functions \\(\\widetilde u^\\pm_\\zeta\\in C^1(V_\\zeta)\\) representing \\(u\\) on \\(V_\\zeta\\cap U^\\pm\\), respectively. The **one-sided traces** at \\(\\zeta\\) are \\(u^\\pm(\\zeta):=\\widetilde u^\\pm_\\zeta(\\zeta)\\). They are independent of the chosen local extensions, since continuous extensions agreeing almost everywhere on an open side agree throughout that side and at its interface points. Thus genuine traces are specified at every point of \\(\\Gamma\\subset U\\); arbitrary representative values on \\(\\Gamma\\) do not affect the weak-solution class or these traces. Write \\([u](\\zeta)=u^+(\\zeta)-u^-(\\zeta)\\) and \\([f](\\zeta)=f(u^+(\\zeta))-f(u^-(\\zeta))\\). A point is a **shock point** when \\([u](\\zeta)\\ne0\\). In one space dimension, this includes a \\(C^1\\) graph \\(x=s(t)\\), with sides \\(x<s(t)\\) and \\(x>s(t)\\).",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-metric-interior-closure-boundary",
+          "def-total-derivative-in-euclidean-space"
+        ],
+        "strategy": "Definition and notational contract; no proof. The item is scoped to scalar conservation laws with vector flux in \\(\\mathbb R^n\\), and to a two-sided \\(C^1\\) space-time hypersurface. Its local side extensions give representative-independent traces at every point of the interface inside \\(U\\); arbitrary values assigned on the interface itself are irrelevant. The one-dimensional graph is a specialization, not the full scope of the definition. The existence of these strong traces is part of the piecewise-smooth hypothesis and is not inferred for arbitrary \\(L^\\infty\\) weak solutions. S: [KL] §4.2, Proposition 4.3 and Definition 4.4, pp. 20--23; [BCL] §§2.1--2.2, pp. 9--11.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§4.2, pp. 20--23"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.1--2.2, pp. 9--11"
+            },
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§1, pp. 217–218"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-rankine-hugoniot-jump-condition",
+        "kind": "theorem",
+        "title": "The Rankine--Hugoniot jump condition",
+        "statement": "Let \\(n\\ge1\\), \\(T>0\\), \\(f\\in C^1(\\mathbb R;\\mathbb R^n)\\) ([[def-scalar-conservation-law-and-flux]]), and let \\(u\\) be a piecewise \\(C^1\\) distributional weak solution ([[def-distributional-weak-solution-of-a-scalar-conservation-law]]) with two-sided \\(C^1\\) interface \\(\\Gamma\\) and traces as in [[def-piecewise-smooth-shock-and-one-sided-traces]]. Orient the unit space-time normal \\(\\nu=(\\nu_t,\\nu_x)\\) from the minus side to the plus side. Then at every \\(\\zeta\\in\\Gamma\\subset U\\),\n$$[u](\\zeta)\\nu_t(\\zeta)+[f](\\zeta)\\cdot\\nu_x(\\zeta)=0,$$\nwhere \\([u]=u^+-u^-\\) and \\([f]=f(u^+)-f(u^-)\\). In one space dimension, for a graph \\(x=s(t)\\) with minus side \\(x<s(t)\\) and plus side \\(x>s(t)\\), \\(\\nu=(-s'(t),1)/\\sqrt{1+s'(t)^2}\\), so the condition is \\(s'(t)[u](t)=[f](t)\\) at every graph point. If \\([u]\\ne0\\) in one dimension, \\(s'=[f]/[u]\\); if \\([u]=0\\), then \\([f]=0\\) and the relation is \\(0=0\\), with no speed constraint.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "def-piecewise-smooth-shock-and-one-sided-traces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-ftc-second-part",
+          "thm-chain-rule",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step"
+        ],
+        "strategy": "Fix \\(\\zeta_0\\in\\Gamma\\subset U\\). By the local graph property of the \\(C^1\\) hypersurface, after permuting the coordinates write a patch as \\(z_k=\\gamma(z')\\), where \\(z'\\) denotes the other \\(n\\) space-time coordinates. Shrink to a box \\(B'\\times(a,b)\\Subset U\\) in which the graph remains between \\(a\\) and \\(b\\), and take a smooth test \\(\\varphi\\) compactly supported there. Write the space-time flux as \\(F(u)=(u,f(u))\\) in coordinates \\((t,x)\\), permuting its components with the coordinates. The weak identity, tested away from \\(t=0\\), gives \\(\\int F(u)\\cdot D\\varphi=0\\). On each side the residual \\(\\operatorname{div}_{t,x}F(u)\\) is continuous and zero as a distribution; if it were nonzero at a point, a nonnegative smooth bump in a sign-preserving neighborhood ([[ex-smooth-compactly-supported-bump]]) would contradict the weak identity. Thus \\(\\operatorname{div}_{t,x}F(u^\\pm)=0\\) pointwise on each side, and the integrand is \\(\\operatorname{div}_{t,x}(F(u^\\pm)\\varphi)\\) by the product rule.\n\nPut \\(N=e_k-\\sum_{j\\ne k}(\\partial_j\\gamma)e_j\\), the unnormalised normal pointing from below the graph to above it, and let \\(\\sigma=1\\) if the minus side is below and \\(\\sigma=-1\\) otherwise. Then \\(\\nu=\\sigma N/|N|\\). Set \\(G_j^{L,R}(z)=F_j(u^{L,R}(z))\\varphi(z)\\), using the side extensions. Fubini [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]] and the one-dimensional FTC [[thm-ftc-second-part]] give the lower-side boundary contribution: the \\(k\\) derivative integrates to \\(G_k^L(z',\\gamma(z'))\\), while for \\(j\\ne k\\), differentiating \\(A_j^L(z')=\\int_a^{\\gamma(z')}G_j^L(z',r)\\,dr\\) by the chain rule [[thm-chain-rule]] gives the tangential contribution \\(-G_j^L(z',\\gamma)\\partial_j\\gamma\\), since the integral of \\(\\partial_j A_j^L\\) vanishes by compact support and FTC. Thus the lower side contributes \\(G^L\\cdot N\\); the analogous upper-side computation contributes \\(-G^R\\cdot N\\). Summing and using \\([F]=F(u^+)-F(u^-)=([u],[f])\\), the weak identity becomes\n$$-\\sigma\\int_{B'}\\varphi(z',\\gamma(z'))[F](z',\\gamma(z'))\\cdot N(z')\\,dz'=-\\int_{B'}\\varphi(z',\\gamma(z'))|N(z')|[F]\\cdot\\nu\\,dz'=0.$$\nThe integrand \\([F]\\cdot\\nu\\) is continuous. If it were nonzero at \\(\\zeta_0\\), it would keep one sign on a smaller patch; a nonnegative smooth bump supported there and positive at \\(\\zeta_0\\) would make this integral nonzero. Hence \\([F]\\cdot\\nu=0\\) at every point. Since \\(F=(u,f(u))\\), this is \\([u]\\nu_t+[f]\\cdot\\nu_x=0\\). For the one-dimensional graph with minus side \\(x<s(t)\\), \\(N=(-s',1)\\), so the relation is \\(s'[u]=[f]\\). P: local graph integration by parts using Fubini and one-dimensional FTC; no divergence theorem is used. S: [KL] §4.2, Proposition 4.3 and equations (4.5)--(4.7), pp. 20--23; [BCL] §2.2, Theorem 1 and (2.6)--(2.10), pp. 11--14; [KR] §1, pp. 217--218.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§4.2, Proposition 4.3, pp. 20--23"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.2, Theorem 1, pp. 11--14"
+            },
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§1, pp. 217–218"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "prop-distributional-weak-solutions-are-not-unique",
+        "kind": "proposition",
+        "title": "Weak solutions are not unique without an entropy condition",
+        "statement": "Take $n=1$, $f(u)=u^2$ and $u_0\\equiv0$. For every $\\delta>0$ define, for $t>0$, $$u_\\delta(t,x)=\\begin{cases}0,&x<-\\delta t,\\\\-\\delta,&-\\delta t<x<0,\\\\+\\delta,&0<x<\\delta t,\\\\0,&x>\\delta t.\\end{cases}$$ This is a bounded distributional weak solution of $u_t+(u^2)_x=0$ on $\\Pi_T$ with strong local $L^1$ initial trace $u_0=0$, and is not identically zero. At its three jumps the speeds $s=[u^2]/[u]$ are, respectively, $-\\delta$, $0$, and $+\\delta$, so each jump coefficient $[u^2]-s[u]$ in the weak equation vanishes. The middle stationary jump violates the Kruzhkov entropy inequality for $k=0$: $\\eta_0(u)=|u|$, $q_0(u)=\\operatorname{sgn}(u)u^2$, and its entropy production is $$[q_0]-0[\\eta_0]=\\delta^2-(-\\delta^2)=2\\delta^2>0,$$ whereas the entropy inequality requires this coefficient to be nonpositive ([[def-kruzhkov-entropy-solution]]). Thus this profile is a weak solution but not an entropy solution, and the zero solution gives a distinct weak solution with the same initial data.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "def-piecewise-smooth-shock-and-one-sided-traces",
+          "def-kruzhkov-entropy-solution"
+        ],
+        "strategy": "The four constant regions solve the equation classically. Across a jump on $x=s(t)$, integration by parts gives the distributional coefficient $[u^2]-s[u]$ for $u_t+(u^2)_x$. At the three rays these coefficients vanish: for $0\\to-\\delta$, $s=-\\delta$; for $-\\delta\\to+\\delta$, $s=0$; and for $+\\delta\\to0$, $s=\\delta$. Thus the equation holds distributionally on $\\Pi_T$. To verify the initial term in the weak Cauchy formulation, for every compact $K\\subset\\mathbb R$ one has $\\int_K|u_\\delta(t,x)|\\,dx\\le2\\delta^2t\\to0$; integrating by parts first on $t>\\varepsilon$ and sending $\\varepsilon\\downarrow0$ therefore gives the weak formulation with datum zero. For the entropy check, at the middle jump the left and right states are $-\\delta,+\\delta$ and its speed is zero. With $k=0$, the Kruzhkov entropy pair is $\\eta_0(u)=|u|$, $q_0(u)=\\operatorname{sgn}(u)u^2$. The distribution $\\partial_t\\eta_0(u_\\delta)+\\partial_xq_0(u_\\delta)$ has coefficient $[q_0]-s[\\eta_0]=2\\delta^2>0$ on the stationary ray, so the required nonpositive entropy production fails. The two outer jumps need not be classified to conclude nonuniqueness without entropy. S: [KL] Section 4.3, formulas (4.11)--(4.13) and the jump verifications, pp. 27--30; [IVR] Section 12.1.2, two weak solutions in Case 1, pp. 352--353; [KR] Section 2, the weak formulation and entropy inequality, pp. 219--221.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, Kruzhkov's lectures on first-order quasilinear PDEs, in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "Section 4.3, pp. 27--30; Section 5.1, Remark 5.1, p. 32"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations, University of Toronto 2018, complete 415-page textbook",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Section 12.1.2, pp. 352--353"
+            },
+            {
+              "title": "S. N. Kruzhkov, First order quasilinear equations in several independent variables, Mat. USSR-Sbornik 10 (1970), 217--243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "Section 2, p. 219"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-convex-entropy-entropy-flux-pair",
+        "kind": "definition",
+        "title": "Convex entropy--entropy flux pairs",
+        "statement": "Let $n\\ge1$, let $f:\\mathbb R\\to\\mathbb R^n$ be $C^1$ and let $\\eta:\\mathbb R\\to\\mathbb R$ be convex with $\\eta\\in C^1$ and, where derivatives are used, $\\eta\\in C^2$ with $\\eta''\\ge0$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]). An **entropy flux** for $f$ and $\\eta$ is a $C^1$ function $q=(q_1,\\dots,q_n)$ with $$q'(u)=\\eta'(u)f'(u)\\quad\\text{for a.e. }u;$$ it is unique up to an additive constant vector, fixed once a normalisation such as $q(0)=0$ is imposed. Such a pair $(\\eta,q)$ is an **entropy--entropy flux pair**, and the corresponding **entropy inequality** for a function $u:\\Pi_T\\to\\mathbb R$ is $$\\eta(u)_t+\\operatorname{div}_x q(u)\\le0\\quad\\text{in }\\mathcal D'(\\Pi_T),$$ that is, $\\int_{\\Pi_T}\\bigl(\\eta(u)\\varphi_t+q(u)\\cdot\\nabla\\varphi\\bigr)\\ge0$ for every nonnegative $\\varphi\\in C_c^\\infty(\\Pi_T)$. Replacing $q$ by $q+C$ leaves the divergence and hence the inequality unchanged. For $\\eta(u)=u$ and $q(u)=f(u)$ the inequality degenerates to the weak conservation law, which is an equality.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "cor-primitives-of-a-continuous-function",
+          "thm-ftc-second-part",
+          "def-distribution",
+          "def-distributional-derivative"
+        ],
+        "strategy": "Definition and well-definedness contract; no proof. The flux $q$ is obtained coordinatewise from the continuous function $\\eta'f_i'$ by the fundamental theorem of calculus ([[cor-primitives-of-a-continuous-function]], [[thm-ftc-second-part]]), so it exists and is determined up to an additive constant; the distributional divergence of a constant vector field is zero, so the inequality depends only on the pair up to that normalisation. The convexity hypothesis is the essential one: $\\eta''\\ge0$ is what makes the entropy inequality dissipative under the vanishing viscosity. No choice principle occurs. S: [KR] \\u00a72 and \\u00a75.3, pp. 219--220 and 236--238; [BCL] \\u00a72.3, Definition 5, p. 16; [KL] \\u00a75.3, pp. 40--42.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§2 and §5.3, pp. 219--220, 236--238"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.3, Definition 5, p. 16"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.3, pp. 40--42"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "prop-viscous-entropy-dissipation-identity",
+        "kind": "proposition",
+        "title": "The viscous entropy dissipation identity",
+        "statement": "Let $n\\ge1$, $\\varepsilon>0$, $f\\in C^1(\\mathbb R;\\mathbb R^n)$ and let $u^\\varepsilon\\in C^{1,2}(\\Pi_T)$ be a classical solution of the viscous conservation law $$u^\\varepsilon_t+\\operatorname{div}_x f(u^\\varepsilon)=\\varepsilon\\Delta u^\\varepsilon\\qquad\\text{in }\\Pi_T.$$ For every convex $\\eta\\in C^2(\\mathbb R)$ and entropy flux $q$ with $q'(s)=\\eta'(s)f'(s)$, the pointwise viscous entropy balance is $$\\eta(u^\\varepsilon)_t+\\operatorname{div}_x q(u^\\varepsilon)=\\varepsilon\\Delta_x\\eta(u^\\varepsilon)-\\varepsilon\\eta''(u^\\varepsilon)|\\nabla_xu^\\varepsilon|^2\\le\\varepsilon\\Delta_x\\eta(u^\\varepsilon).$$ The nonpositive term is the entropy dissipation; for fixed $\\varepsilon>0$ this is a balance with diffusion, not the first-order entropy inequality.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-convex-entropy-entropy-flux-pair",
+          "def-laplacian-of-a-c2-function",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-divergence-and-curl-of-a-c1-vector-field"
+        ],
+        "strategy": "Multiply the viscous equation by $\\eta'(u^\\varepsilon)$. The chain rules give $\\eta'(u^\\varepsilon)u^\\varepsilon_t=\\partial_t\\eta(u^\\varepsilon)$, $\\eta'(u^\\varepsilon)f'(u^\\varepsilon)\\cdot\\nabla u^\\varepsilon=\\operatorname{div}q(u^\\varepsilon)$, and $$\\eta'(u^\\varepsilon)\\Delta u^\\varepsilon=\\Delta\\eta(u^\\varepsilon)-\\eta''(u^\\varepsilon)|\\nabla u^\\varepsilon|^2.$$ Substitution yields the displayed equality. Convexity gives $\\eta''\\ge0$, so the dissipation term is nonpositive, but the remaining $\\varepsilon\\Delta\\eta(u^\\varepsilon)$ term cannot be dropped pointwise or for a fixed-$\\varepsilon$ distributional inequality. Under vanishing viscosity, testing this term against a compactly supported smooth function contributes $\\varepsilon\\int\\eta(u^\\varepsilon)\\Delta\\phi$, which tends to zero when $u^\\varepsilon$ is uniformly bounded on the support.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§5.2, pp. 236--238"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.2, pp. 48--49"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-kruzhkov-entropy-solution",
+        "kind": "definition",
+        "title": "Kruzhkov entropy solutions",
+        "statement": "Let $n\\ge1$, $T>0$, $f\\in C^1(\\mathbb R;\\mathbb R^n)$, and $\\Pi_T=\\mathbb R^n\\times(0,T)$. The unknown and initial datum are equivalence classes $[u]\\in L^\\infty(\\Pi_T)$ and $[u_0]\\in L^\\infty(\\mathbb R^n)\\cap L^1_{\\mathrm{loc}}(\\mathbb R^n)$, where equality is Lebesgue-a.e. For $k\\in\\mathbb R$ define $\\eta_k(s)=|s-k|$ and $q_k(s)=\\operatorname{sgn}(s-k)(f(s)-f(k))$, with $\\operatorname{sgn}(0)=0$. The class $[u]$ is a Kruzhkov entropy solution of $u_t+\\operatorname{div}_x f(u)=0$ with initial trace $[u_0]$ if: (i) for every $k\\in\\mathbb R$ and every nonnegative $\\varphi\\in C_c^\\infty(\\Pi_T)$,\n$$\\int_{\\Pi_T}\\bigl(\\eta_k(u)\\,\\varphi_t+q_k(u)\\cdot\\nabla_x\\varphi\\bigr)\\,dx\\,dt\\ge0;$$\n(ii) for every compact $K\\subseteq\\mathbb R^n$,\n$$\\lim_{\\delta\\downarrow0}\\operatorname*{ess\\,sup}_{0<t<\\min\\{\\delta,T\\}}\\int_K|u(t,x)-u_0(x)|\\,dx=0.$$\nThe integral in (i) is independent of the representative because its integrand is unchanged almost everywhere. For (ii), Fubini's theorem gives locally integrable spatial sections for almost every $t$; the displayed slice integral is defined for those times and its essential supremum ignores the exceptional null set. If $u$ or $u_0$ is changed on a null set in its respective space, Fubini's theorem shows the slice-integral function changes only for a null set of times, so the trace condition is well-defined on the equivalence classes. This is the strong local $L^1$ initial trace. The entropy inequality is the distributional inequality $\\partial_t\\eta_k(u)+\\operatorname{div}_x q_k(u)\\le0$; taking $k$ above and below the essential range of $u$ recovers the weak conservation law of [[def-distributional-weak-solution-of-a-scalar-conservation-law]].",
+        "deps": [
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "def-convex-entropy-entropy-flux-pair",
+          "def-abs-value",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-locally-integrable-function-on-r-n",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "strategy": "Definition and notational contract. The Kruzhkov entropy-flux family is $(\\eta_k,q_k)$; $\\eta_k$ is convex, and $q_k'=\\eta_k'f'$ almost everywhere. Each integral in (i) depends only on the spacetime-a.e. class of $u$, since composition with the measurable functions $\\eta_k,q_k$ preserves a.e. equality. For (ii), fix compact $K$. The function $|u-u_0|$ is integrable on $K\\times(0,T)$: $u$ is essentially bounded and $u_0\\in L^1(K)$, with $T<\\infty$. Fubini gives a measurable function $g_K(t)=\\int_K|u(t,x)-u_0(x)|\\,dx$ for almost every $t$. If $\\tilde u=u$ spacetime-a.e. and $\\tilde u_0=u_0$ spatially a.e., applying Fubini to the null sets where these classes differ shows $g_K=\\tilde g_K$ for almost every $t$; hence $\\operatorname*{ess\\,sup}_{0<t<\\delta}g_K(t)$ is representative-independent. The limit in (ii) is the essential strong local $L^1$ trace. Taking $k$ above and below an essential bound for $u$ in (i), the constant terms integrate to zero against compactly supported tests and give opposite inequalities for the weak conservation-law integral; together they give equality for nonnegative tests, and then for all tests by linearity. This matches [KR] §2, Definition 1, condition (2.2), with the initial trace expressed on spacetime equivalence classes. S: [KR] §2, Definition 1, (2.1)--(2.2), pp. 220--221; [KL] §5.5, Definition 5.11 and Proposition 5.12, pp. 45--46; [BCL] §2.3, Admissibility Condition 2, pp. 16--17. Step-5a cutoff clarification: use smooth nondecreasing zeta equal to zero for r<=1/2 and one for r>=1, so phi zeta(t/delta) is supported away from zero and its derivative has mass one.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§2, Definition 1, pp. 220–221"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.5, Definition 5.11 and Proposition 5.12, pp. 45–46"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.3, pp. 16–17"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution",
+        "kind": "theorem",
+        "title": "The viscous scalar Cauchy problem with smooth data has a global classical solution",
+        "statement": "Assume Countable Choice (CC) for the heat-kernel and $L^1$ interfaces below. Let $n\\ge1$, $\\varepsilon>0$, let $f:\\mathbb R\\to\\mathbb R^n$ be $C^2$ with $f(0)=0$, and let $u_0\\in C_c^\\infty(\\mathbb R^n)$. For every $T>0$ there is a mild solution $u$ of $$u_t+\\operatorname{div}_x f(u)=\\varepsilon\\Delta u\\qquad\\text{on }\\mathbb R^n\\times(0,T),\\qquad u(x,0)=u_0(x),$$ with $u\\in C([0,T];C_b(\\mathbb R^n))\\cap C([0,T];L^1(\\mathbb R^n))\\cap C^{1,2}(\\mathbb R^n\\times(0,T))$. The solution is global in the sense that these solutions are compatible on finite time intervals; for every $t\\in[0,T]$, $$\\sup_{x\\in\\mathbb R^n}u(t,x)\\le\\sup_xu_0(x),\\qquad \\inf_{x\\in\\mathbb R^n}u(t,x)\\ge\\inf_xu_0(x).$$ In particular it is bounded and remains in the initial range. No uniqueness beyond the constructed mild solution is asserted.",
+        "deps": [
+          "def-heat-evolution-of-initial-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-heat-cauchy-solution-for-bounded-continuous-data",
+          "thm-lp-to-lq-heat-kernel-estimate",
+          "thm-spatial-derivative-estimates-for-heat-flow",
+          "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time",
+          "thm-young-convolution-inequality",
+          "thm-banach-fixed-point",
+          "thm-uniform-limit-continuous-real-functions",
+          "thm-complete-subspace-iff-closed",
+          "thm-dominated-convergence",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "def-laplacian-of-a-c2-function",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-l-one-approximate-identities-converge-in-l-p"
+        ],
+        "strategy": "Write $H_t$ for the heat semigroup and use the mild map $$\\mathcal Tu(t)=H_{\\varepsilon t}u_0-\\int_0^t\\nabla H_{\\varepsilon(t-s)}*f(u(s))\\,ds.$$ On the closed $C([0,\\tau];C_b)$ ball of radius $R:=2\\|u_0\\|_\\infty+1$, let $L_R:=\\sup_{|z|\\le R}|f'(z)|<\\infty$. The derivative-kernel estimate gives $\\|\\nabla H_{\\varepsilon s}*g\\|_\\infty\\le C(\\varepsilon s)^{-1/2}\\|g\\|_\\infty$, so for functions in this ball $$\\|\\mathcal Tu-\\mathcal Tv\\|_{C_tC_b}\\le q\\|u-v\\|_{C_tC_b},\\qquad q:=2CL_R\\sqrt{\\tau/\\varepsilon}.$$ Since $f(0)=0$, $|f(z)|\\le L_R|z|$ on the range; choosing $\\tau$ with $q<1/2$ makes the ball invariant and the map a contraction. Banach's theorem gives the local mild solution. The Picard iterates also remain in $C([0,\\tau];L^1)$: Young's inequality and $\\|\\nabla H_{\\varepsilon s}\\|_1\\le C(\\varepsilon s)^{-1/2}$ give the same factor $q$ for successive differences in $C_tL^1$. The first difference is $L^1$ because $u_0\\in L^1$ and $|f(u_0)|\\le L_R|u_0|$. Thus the iterates are Cauchy in $C_tL^1$; Riesz--Fischer gives an $L^1$ limit, which agrees a.e. with the uniform $C_b$ limit. Hence the constructed solution is continuous in both norms. For regularity, the same local iteration in $C_b^1$ moves one spatial derivative onto $f(u)$, leaving the integrable $\\nabla H_{\\varepsilon(t-s)}$ kernel and $D f(u)=f'(u)Du$; bounded $f'$ and $f''$ on the invariant range give the local derivative estimates. On any strip bounded away from the initial time, heat-potential estimates first make $u$ and $Du$ parabolically Hölder; then $-f'(u)\\cdot Du$ is Hölder in the nondivergence form $u_t-\\varepsilon\\Delta u=-f'(u)\\cdot Du$. The standard heat-potential bootstrap ([KR] §4; [KL] §5.2) gives $C^{1,2}$ on each such strip. This only uses $f\\in C^2$ on the bounded range. It remains to obtain the range bound without differentiating a spatial supremum. On a bounded solution strip $[a,b]$, rewrite the equation as $u_t-\\varepsilon\\Delta u+B(t,x)\\cdot Du=0$, where $B=f'(u)$ is bounded, say $|B|\\le K$. Put $M_a=\\sup_xu(a,x)$ and, for $\\delta>0$, $\\Phi(t,x)=\\delta e^{\\lambda(t-a)}(1+|x|^2)$. For $\\lambda$ sufficiently large depending on $K,n,\\varepsilon$, $$(\\partial_t-\\varepsilon\\Delta+B\\cdot D)\\Phi=\\delta e^{\\lambda(t-a)}\\bigl(\\lambda(1+|x|^2)-2\\varepsilon n+2B\\cdot x\\bigr)>0.$$ Thus $z=u-M_a-\\Phi$ is a strict subsolution of this linear drift operator. It is negative at $t=a$ and on the lateral sphere of every sufficiently large ball, since $u$ is bounded on the strip and $\\Phi\\ge\\delta(1+|x|^2)$. If $z$ had a positive maximum inside such a closed cylinder, then at that point $z_t\\ge0$, $Dz=0$, and $\\Delta z\\le0$, contradicting strict subsolution status. Hence $u\\le M_a+\\Phi$; let $\\delta\\downarrow0$. Applying the same argument to $-u$, whose flux is $\\tilde f(s)=-f(-s)$, gives $u\\ge\\inf_xu(a,x)$. These bounds keep every restart in the same bounded range, so its local existence time is uniform; finitely many restarts cover any finite $[0,T]$. The local $L^1$ construction persists under each restart. The barrier maximum uses compactness of bounded cylinders and the ordinary extreme-value theorem, not the pure-heat whole-space maximum principle. S: [KR] §4, (1.3)--(1.4) and the parabolic a priori bound, pp. 229--232; [KL] §5.2, existence and positive-time smoothness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§4, (1.3)--(1.4) and the a priori bound, pp. 229--232"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.2, pp. 34--40"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+        "kind": "lemma",
+        "title": "Uniform L-infinity, mass and energy bounds for the viscous approximations",
+        "statement": "Assume Countable Choice (CC). Let $n\\ge1$, $0<\\varepsilon\\le1$,\n$f\\in C^2(\\mathbb R;\\mathbb R^n)$ with $f(0)=0$, and\n$u_0\\in C_c^\\infty(\\mathbb R^n)$. Let $u^\\varepsilon$ be the viscous solution\nconstructed in\n[[thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution]],\nso that\n$u^\\varepsilon\\in C([0,T];C_b(\\mathbb R^n))\\cap C([0,T];L^1(\\mathbb R^n))\\cap C^{1,2}(\\mathbb R^n\\times(0,T))$\nsolves $u^\\varepsilon_t+\\operatorname{div}_x f(u^\\varepsilon)=\\varepsilon\\Delta u^\\varepsilon$\npointwise. Then for every $t\\in[0,T]$:\n\n(i) $\\|u^\\varepsilon(t)\\|_\\infty\\le\\|u_0\\|_\\infty$;\n\n(ii) signed mass is conserved, $\\int_{\\mathbb R^n}u^\\varepsilon(t,x)\\,dx=\\int_{\\mathbb R^n}u_0(x)\\,dx$,\nwhile the $L^1$ norm is nonincreasing, $\\|u^\\varepsilon(t)\\|_1\\le\\|u_0\\|_1$ (in\ngeneral it is not constant);\n\n(iii) the integrated energy identity\n$$\\frac12\\|u^\\varepsilon(t)\\|_2^2+\\varepsilon\\int_0^t\\!\\!\\int_{\\mathbb R^n}|\\nabla u^\\varepsilon|^2\\,dx\\,ds=\\frac12\\|u_0\\|_2^2,$$\nso that $\\varepsilon\\int_0^T\\!\\!\\int|\\nabla u^\\varepsilon|^2\\le\\tfrac12\\|u_0\\|_2^2$,\nuniformly for $0<\\varepsilon\\le1$.",
+        "deps": [
+          "thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution",
+          "prop-viscous-entropy-dissipation-identity",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-integration-by-parts-with-interior-derivatives",
+          "def-laplacian-of-a-c2-function",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-convex-entropy-entropy-flux-pair",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "strategy": "The maximum principle gives the range bound. For signed mass, test the equation with smooth radial cutoffs increasing to one; the flux and Laplacian cutoff errors vanish by the uniform L1 and L-infinity bounds, so dominated convergence gives conservation. For the L1 estimate, use eta_delta(s)=sqrt(s^2+delta^2)-delta and its viscous entropy balance, discard the nonnegative dissipation, let the spatial cutoff tend to one, then use monotone convergence as delta decreases to zero. For energy, fix 0<s<t, use eta(s)=s^2/2 in the balance with a compact cutoff, and pass the cutoff radius to infinity. Positive-time smoothness justifies the local identity; the flux and Laplacian cutoff errors vanish, while dominated and monotone convergence give the full-space identity and finite dissipation on [s,t]. Finally, C([0,T];L1) continuity and the uniform L-infinity bound imply L2 convergence to u0 as s decreases to zero, since ||u(s)-u0||_2^2 <= 2M||u(s)-u0||_1. Monotone convergence then gives the claimed identity from time zero. S: [KR] §4, pp. 229--238; [KL] §5.4, pp. 42--45.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§4, mass and energy cutoffs, pp. 229--238"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.4, pp. 42--45"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "lem-viscous-scalar-laws-contract-spatial-translates-in-lone",
+        "kind": "lemma",
+        "title": "Viscous solutions contract spatial translates in $L^1$",
+        "statement": "Let $n\\ge1$, $0<\\varepsilon\\le1$, let $f\\in C^2(\\mathbb R;\\mathbb R^n)$ satisfy $f(0)=0$, and let $u_0\\in C_c^\\infty(\\mathbb R^n)$. Let $u^\\varepsilon\\in C([0,T];L^1(\\mathbb R^n))\\cap C^{1,2}(\\mathbb R^n\\times(0,T))$ be the mild viscous solution with initial datum $u_0$ from [[thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution]]. Then for every $h\\in\\mathbb R^n$ and $t\\in[0,T]$, $$\\|u^\\varepsilon(\\cdot+h,t)-u^\\varepsilon(\\cdot,t)\\|_1\\le\\|u_0(\\cdot+h)-u_0(\\cdot)\\|_1.$$ The estimate depends on $f$ only through a bound for $|f'|$ on the solution range. Thus it is uniform for any family of such fluxes with a common derivative bound on that range and the same initial datum.",
+        "deps": [
+          "thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution",
+          "def-abs-value",
+          "thm-dominated-convergence",
+          "thm-integration-by-parts-with-interior-derivatives",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-laplacian-of-a-c2-function",
+          "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-countable-choice",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "strategy": "Fix $h$ and put $w(t,x)=u^\\varepsilon(t,x+h)-u^\\varepsilon(t,x)$. By the theorem's $C([0,T];L^1)$ property, $w(t)\\in L^1$ continuously in time. Set $$a(t,x)=\\int_0^1 f'(s u^\\varepsilon(t,x+h)+(1-s)u^\\varepsilon(t,x))\\,ds.$$ Then $a$ is bounded on the solution range, $f(u^\\varepsilon(t,x+h))-f(u^\\varepsilon(t,x))=a(t,x)w(t,x)$, and $w_t-\\varepsilon\\Delta w+\\operatorname{div}(aw)=0$. For $\\delta>0$, set $\\eta_\\delta(r)=\\sqrt{r^2+\\delta^2}$. The chain rule on compact subsets of positive time gives $$\\partial_t\\eta_\\delta(w)+\\operatorname{div}(a\\eta_\\delta(w))-\\varepsilon\\Delta\\eta_\\delta(w) =\\frac{\\delta^2}{\\eta_\\delta(w)}\\operatorname{div}a-\\varepsilon\\frac{\\delta^2|\\nabla w|^2}{\\eta_\\delta(w)^3}.$$ The second term is nonpositive; on each compact subset $\\operatorname{div}a$ is bounded and $\\delta^2/\\eta_\\delta\\le\\delta$, so the first term tends to zero in $L^1$. Letting $\\delta\\downarrow0$ yields the distributional inequality $$\\partial_t|w|+\\operatorname{div}(a|w|)\\le\\varepsilon\\Delta|w|.$$ Test it with $\\chi_R(x)=\\chi(x/R)$, where $\\chi\\in C_c^\\infty$, $0\\le\\chi\\le1$, $\\chi=1$ on $B_1$, and $\\chi_R\\to1$ pointwise. The flux and diffusion errors on $[s,t]$ are bounded by $$C\\bigl(R^{-1}\\|a\\|_\\infty+\\varepsilon R^{-2}\\bigr)\\int_s^t\\|w(r)\\|_1\\,dr.$$ They vanish as $R\\to\\infty$, since $w$ is continuous in $L^1$. Dominated convergence gives $\\|w(t)\\|_1\\le\\|w(s)\\|_1$ for $0<s<t$. Let $s\\downarrow0$ using the same $C_tL^1$ trace and $w(0,x)=u_0(x+h)-u_0(x)$. The estimate is uniform over fluxes with a common derivative bound. S: [KR] Section 4, parabolic comparison estimates for the translation modulus, pp. 230-235; [KL] Section 5.2, linearised viscous equation and comparison.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§4, pp. 230--235"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.2 and §5.4, pp. 34--45"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-kato-inequality-for-two-entropy-solutions",
+        "kind": "lemma",
+        "title": "Kato's inequality for two entropy solutions",
+        "statement": "Let $n\\ge1$, $T>0$, $f\\in C^1(\\mathbb R;\\mathbb R^n)$, and let $u,v$ be bounded Kruzhkov entropy solutions on $\\Pi_T$ in the sense of [[def-kruzhkov-entropy-solution]]. Then, in the sense of distributions on $\\Pi_T$, $$\\partial_t|u-v|+\\operatorname{div}_x\\Bigl(\\operatorname{sgn}(u-v)\\bigl(f(u)-f(v)\\bigr)\\Bigr)\\ \\le\\ 0.$$ Equivalently, for every nonnegative $\\varphi\\in C_c^\\infty(\\Pi_T)$, $$\\int_{\\Pi_T}\\Bigl(|u-v|\\,\\varphi_t+\\operatorname{sgn}(u-v)\\bigl(f(u)-f(v)\\bigr)\\cdot\\nabla_x\\varphi\\Bigr)\\,dx\\,dt\\ \\ge\\ 0.$$ Together with the weak equation this is the \"doubling-variables\" inequality from which uniqueness and the $L^1$ contraction of [[thm-kruzhkov-local-l1-contraction]] are read off; $\\operatorname{sgn}(0)=0$.",
+        "deps": [
+          "def-kruzhkov-entropy-solution",
+          "def-convex-entropy-entropy-flux-pair",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-convolution-of-a-distribution-with-a-test-function",
+          "def-radial-mollifier-family-in-rn",
+          "thm-mollifier-approximation-in-distributions",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-abs-value"
+        ],
+        "strategy": "Doubling of variables, following [KR] \\u00a73. Apply the Kruzhkov inequality for $u$ with $k=v(\\tau,y)$, tested by $g(t,x;\\tau,y)=\\varphi\\bigl(\\tfrac{t+\\tau}2,\\tfrac{x+y}2\\bigr)\\rho_h(t-\\tau)\\rho_h(x-y)$, and the inequality for $v$ with $k=u(t,x)$, tested by the same $g$; integrate over $\\Pi_T\\times\\Pi_T$. By Lemma 3 of [KR] (a Lipschitz function of bounded measurable arguments is an admissible integrand) and Lemma 2 (mollifiers converge), the limit $h\\downarrow0$ of the sum of the two inequalities is the displayed distributional inequality; the terms that contain $\\nabla_{(t,x)}g+\\nabla_{(\\tau,y)}g$ cancel after adding the two inequalities and using the symmetry of $g$, and the remaining terms converge by dominated convergence since $u,v$ are bounded and $\\varphi$ has compact support. S: [KR] \\u00a73, (3.2)--(3.7) and Lemmas 1--3, pp. 222--228; [KL] \\u00a75.5, the doubling-variables proof of uniqueness, pp. 46--48; [BCL] \\u00a76.1, pp. 49--50.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§3, Lemmas 1--3 and (3.2)--(3.7), pp. 222--228"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.5, pp. 46--48"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§6.1, pp. 49--50"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-kruzhkov-local-l1-contraction",
+        "kind": "theorem",
+        "title": "Local $L^1$ contraction for two entropy solutions",
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $T>0$, and $f\\colon\\mathbb R\\to\\mathbb R^n$\nbe $C^1$. Let $M,L\\ge0$ and assume $|f(a)-f(b)|\\le L|a-b|$ for all\n$a,b\\in[-M,M]$. Let $u,v$ be bounded Kruzhkov entropy solutions on $\\Pi_T$ in\nthe sense of [[def-kruzhkov-entropy-solution]], with $|u|,|v|\\le M$ almost\neverywhere and initial data $u_0,v_0\\in L^\\infty\\cap L^1_{\\mathrm{loc}}$. For\neach fixed $x_0\\in\\mathbb R^n$ and $R>0$, for almost every $t\\in(0,T)$\nsatisfying $Lt<R$,\n$$\\int_{B(x_0,R-Lt)}|u(t,x)-v(t,x)|\\,dx\\le\\int_{B(x_0,R)}|u_0(x)-v_0(x)|\\,dx.$$\nIn particular, for each fixed $x_0,R$, if $u_0=v_0$ almost everywhere on\n$B(x_0,R)$, then $u(t,\\cdot)=v(t,\\cdot)$ almost everywhere on $B(x_0,R-Lt)$ for\nalmost every $t$ with $Lt<R$. The exceptional null set may depend on $x_0$ and\n$R$.",
+        "deps": [
+          "lem-kato-inequality-for-two-entropy-solutions",
+          "def-kruzhkov-entropy-solution",
+          "def-lipschitz-holder-contraction",
+          "thm-dominated-convergence",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "def-metric-ball",
+          "thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice"
+        ],
+        "strategy": "Put w=|u−v| and q=sgn(u−v)(f(u)−f(v)). By [[lem-kato-inequality-for-two-entropy-solutions]], ∂ₜw+div q≤0 in distributions, so ∫(w φₜ+q·∇φ) dx dt≥0 for every nonnegative φ∈C_c∞(Π_T). Since u,v∈[−M,M] almost everywhere and f is L-Lipschitz there, |q|≤Lw almost everywhere.\n\nFix x₀,R and t₂ with 0<t₂<T and Lt₂<R. Choose t₃>t₂ with t₃<T and Lt₃<R (if L=0, only t₃<T is required). For 0<σ<R−Lt₃, choose a smooth nonincreasing βσ:ℝ→[0,1] with βσ(s)=1 for s≤R−σ and βσ(s)=0 for s≥R. Such a profile is obtained by integrating a nonnegative smooth unit-mass bump supported in (0,1); its existence follows from [[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]]. Set Φσ(t,x)=βσ(|x−x₀|+Lt). On 0<t<t₃ this is smooth: near x₀ the argument is strictly below R−σ, so Φσ is constant there; away from x₀ the distance is smooth. It has compact spatial support and satisfies ∂ₜΦσ+L|∇ₓΦσ|=0.\n\nFor nonnegative η∈C_c∞((0,t₃)), φ(t,x)=η(t)Φσ(t,x) is an admissible Kato test. Define Fσ(t)=∫w(t,x)Φσ(t,x) dx and Gσ(t)=∫(w∂ₜΦσ+q·∇ₓΦσ) dx. The Kato inequality gives 0≤∫Fσ(t)η′(t)dt+∫η(t)Gσ(t)dt. Also Gσ≤∫w(∂ₜΦσ+L|∇ₓΦσ|)dx=0. Therefore ∫Fση′≥0. Fix a smooth nonnegative unit-mass bump ζ supported in (0,1) and let H(r)=∫_{−∞}^r ζ(a) da. For Lebesgue points 0<s<t<t₃, the nonnegative cutoff ηε(τ)=H((τ−s)/ε)−H((τ−t)/ε) is compactly supported in (0,t₃) for small ε and its derivative tends to the endpoint masses +δ_s−δ_t. Thus ∫Fσηε′→Fσ(s)−Fσ(t), and ∫Fσηε′≥0 gives Fσ(s)≥Fσ(t).\n\nThe strong local L¹ initial traces and uniform convergence Φσ(s,·)→Φσ(0,·) on B(x₀,R) imply, along valid time slices s↓0 that are Lebesgue points of Fσ, Fσ(s)→∫|u₀−v₀|(x)βσ(|x−x₀|)dx. Hence for almost every t₂<t₃, Fσ(t₂)≤∫|u₀−v₀|(x)βσ(|x−x₀|)dx. Choose a decreasing sequence σⱼ↓0 with σⱼ<R−Lt₃ and intersect the corresponding full-measure sets of t₂. For every t₂ in this intersection, dominated convergence as j→∞ gives the desired ball inequality; the sphere boundary has Lebesgue measure zero. The equality-of-initial-data conclusion follows because the right-hand side is zero. This proves the estimate for each fixed ball, with a ball-dependent exceptional null set. Sources: [KR] §3, Theorem 1 and proof, pp. 222–228 (autonomous case); [BCL] §6.1, Theorem 4, pp. 49–50; [KL] §5.5–6, pp. 46–52.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, ‘First order quasilinear equations in several independent variables,’ Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§3, Theorem 1 and proof, pp. 222–228"
+            },
+            {
+              "title": "Alberto Bressan, ‘Hyperbolic Conservation Laws: An Illustrated Tutorial,’ 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§6.1, Theorem 4, pp. 49–50"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, ‘S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,’ in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.5, pp. 46–48"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+        "kind": "corollary",
+        "title": "Uniqueness, comparison and order preservation of entropy solutions",
+        "statement": "Let $n\\ge1$, $T>0$ and let $f$ be Lipschitz on bounded intervals. (i) If $u,v$ are bounded Kruzhkov entropy solutions on $\\Pi_T$ with $|u|,|v|\\le M$ and $u_0\\le v_0$ almost everywhere, then $u\\le v$ almost everywhere on $\\Pi_T$. (ii) There is at most one bounded Kruzhkov entropy solution with a given initial datum $u_0\\in L^\\infty\\cap L^1_{\\mathrm{loc}}$; if $u_0=v_0$ almost everywhere on the whole of $\\mathbb R^n$, then $u=v$ almost everywhere on $\\Pi_T$. (iii) The positive part contracts: $\\int(u(t,\\cdot)-v(t,\\cdot))_+\\,dx\\le\\int(u_0-v_0)_+\\,dx$ for almost every $t\\in(0,T)$ whenever both sides are finite.",
+        "deps": [
+          "thm-kruzhkov-local-l1-contraction",
+          "def-kruzhkov-entropy-solution",
+          "lem-kato-inequality-for-two-entropy-solutions",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-abs-value"
+        ],
+        "strategy": "(i) Apply the local contraction estimate of [[thm-kruzhkov-local-l1-contraction]] to the nonnegative function $(u-v)_+$: the same doubling-variables inequality used there, applied to the positive part rather than the absolute value, gives $\\int_{B(x_0,R-Lt)}(u-v)_+\\le\\int_{B(x_0,R)}(u_0-v_0)_+=0$; letting the ball grow and using monotone convergence gives $(u-v)_+=0$ a.e. (ii) With $u_0\\le v_0$ and $v_0\\le u_0$ both hypotheses hold, so $u=v$ a.e.; equality of traces uses the strong $L^1$ trace in [[def-kruzhkov-entropy-solution]]. (iii) The same positive-part inequality with a general pair: the doubling inequality tested by the cone cut-off is applied to $(u-v)_+$ (a Lipschitz convex function of the two solutions), and the estimates pass as in the local theorem; the only change is the replacement of $|u-v|$ by the positive part, whose flux is $\\operatorname{sgn}_+(u-v)(f(u)-f(v))$ with $\\operatorname{sgn}_+(0)=0$ S: [KR] \\u00a73, Theorems 1--3 and the monotone-dependence estimate (3.16), pp. 222--229; [KL] \\u00a75.5, pp. 46--48.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§3, Theorems 1--3, especially (3.16), pp. 222--229"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.5, pp. 46--48"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-finite-propagation-for-scalar-conservation-laws",
+        "kind": "corollary",
+        "title": "Finite propagation for scalar conservation laws",
+        "statement": "Let $n\\ge1$, let $f$ be Lipschitz on bounded intervals with constant $L\\ge0$ on the common range, and let $u,v$ be bounded Kruzhkov entropy solutions on $\\Pi_T$. Fix $x_0\\in\\mathbb R^n$ and $R>0$. If $u_0=v_0$ almost everywhere on $B(x_0,R)$, then for almost every $t\\in(0,T)$ with $Lt<R$, $$u(t,\\cdot)=v(t,\\cdot)\\quad\\text{almost everywhere on }B(x_0,R-Lt).$$ For $L=0$ this holds for almost every $t\\in(0,T)$ on the stationary ball $B(x_0,R)$. In particular, if $u_0=0$ almost everywhere outside $B(x_0,R)$, then $u(t,x)=0$ for almost every $(t,x)\\in\\Pi_T$ with $|x-x_0|>R+Lt$. The conclusions are a.e. statements for each fixed cone; an every-time claim requires a chosen time-continuous representative.",
+        "deps": [
+          "thm-kruzhkov-local-l1-contraction",
+          "def-kruzhkov-entropy-solution",
+          "def-metric-ball",
+          "def-lipschitz-holder-contraction",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "def-l-p-space-as-a-quotient-by-null-functions"
+        ],
+        "strategy": "For fixed $x_0,R$, apply [[thm-kruzhkov-local-l1-contraction]] with this center and radius. Its right side is zero, so for almost every $t$ with $Lt<R$ the nonnegative integral on $B(x_0,R-Lt)$ vanishes. For the support assertion compare with $v\\equiv0$, which is an entropy solution for every flux because its entropy flux is spatially constant. The exterior spacetime cone is covered by countably many forward cones with rational centers $q$ and rational radii $r_0$ such that $B(q,r_0)\\subset\\mathbb R^n\\setminus\\overline B(x_0,R)$. For each fixed $(q,r_0)$, the first assertion gives $u=0$ on $B(q,r_0-Lt)$ for almost every $t$ with $Lt<r_0$. These cones cover the exterior region; countability gives the claimed spacetime-a.e. support conclusion. When $L=0$ use stationary balls; no division by $L$ occurs. S: [KR] Section 3, Theorem 3 and Section 1, pp. 217-219 and 228-229; [KL] Section 5.4 and Afterword, pp. 42-45 and 61-62.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§3, pp. 222--229"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.4 and Afterword, pp. 42--45, 61--62"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-vanishing-viscosity-families-are-locally-precompact-in-lone",
+        "kind": "lemma",
+        "title": "Vanishing-viscosity families are locally precompact in $L^1$",
+        "statement": "Assume Dependent Choice. Let $n\\ge1$, $T>0$, $u_0\\in C_c^\\infty(\\mathbb R^n)$,\nand put $M=\\|u_0\\|_\\infty$. Let $(f_j)_{j\\ge1}$ be $C^2$ fluxes\n$f_j\\colon\\mathbb R\\to\\mathbb R^n$ with $f_j(0)=0$ and\n$$\\sup_j\\sup_{|s|\\le M+1}|f_j'(s)|<\\infty.$$\nFor $0<\\varepsilon_j\\le1$ with $\\varepsilon_j\\downarrow0$, let $u^j$ be the\nglobal mild classical viscous solution with flux $f_j$ and datum $u_0$, as\nsupplied by\n[[thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution]].\nThen every subsequence has a further subsequence converging in $L^1(K)$ for\nevery compact $K\\Subset\\Pi_T$ to $u\\in L^\\infty\\cap L^1_{\\mathrm{loc}}(\\Pi_T)$\nwith $\\|u\\|_\\infty\\le M$; a further subsequence converges almost everywhere on\n$\\Pi_T$. The limit has a representative in\n$C([0,T];L^1_{\\mathrm{loc}}(\\mathbb R^n))$ with $u(0)=u_0$ in\n$L^1_{\\mathrm{loc}}$. In particular this applies to a $C^1$-convergent smooth\napproximation of one flux. The extraction uses Dependent Choice; energy\ndissipation alone does not give this strong compactness\n([[def-metric-ball]], [[def-l-p-space-as-a-quotient-by-null-functions]]).",
+        "deps": [
+          "lem-viscous-scalar-laws-contract-spatial-translates-in-lone",
+          "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+          "thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution",
+          "thm-frechet-kolmogorov-compactness-criterion-in-lp",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-radial-mollifier-family-in-rn",
+          "def-metric-ball",
+          "thm-heine-borel-rn",
+          "thm-compact-implies-the-other-compactness-forms",
+          "cor-l-one-convergence-has-an-almost-everywhere-convergent-subsequence",
+          "thm-dominated-convergence",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set"
+        ],
+        "strategy": "The common range and L1 bounds and the spatial translation estimate give a uniform spatial modulus. For a compact spatial ball, mollify each time difference and test the viscous equation against a mollified local sign; the flux and diffusion terms give a bound C_R tau h^-2, while mollification costs the spatial modulus. Taking h=tau^(1/3) gives a local L1 time modulus uniformly in j, including comparisons with time zero. Cut off on compact space-time cylinders and apply Frechet--Kolmogorov, then exhaust Pi_T and take a diagonal subsequence; a further subsequence converges almost everywhere and retains the uniform range bound. Fubini and dominated convergence then give convergence in L1(B_m) on a common full-measure set of times. For each B_m compare the limit locally by lower semicontinuity, bounding the approximating difference on a larger B_m' with the local time modulus; for the initial endpoint use u^j(0)=u0 in the same comparison. Completeness extends this map continuously to [0,T], consistently on nested balls, with value u0 at zero. S: [KR] §4, Lemmas 4--5 and (4.12)--(4.15), pp. 232--235; [KL] §5.4, pp. 42--45.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§4, Lemmas 4–5 and (4.12)–(4.15), pp. 232–235"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.4, pp. 42–45"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+        "kind": "corollary",
+        "title": "Global $L^1$ contraction from the local estimate",
+        "statement": "Let $n\\ge1$, $T>0$, let $f$ be Lipschitz on the common range, and let $u,v$ be bounded Kruzhkov entropy solutions with initial data $u_0,v_0\\in L^1(\\mathbb R^n)\\cap L^\\infty(\\mathbb R^n)$. Then for almost every $t\\in(0,T)$, $$\\|u(t,\\cdot)-v(t,\\cdot)\\|_1\\le\\|u_0-v_0\\|_1.$$ If $u,v$ have representatives continuous in $L^1_{\\mathrm{loc}}$ on $[0,T]$, the same inequality holds for every $t\\in[0,T]$.",
+        "deps": [
+          "thm-kruzhkov-local-l1-contraction",
+          "def-kruzhkov-entropy-solution",
+          "thm-monotone-convergence-for-the-integral",
+          "def-metric-ball",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "thm-ftc-second-part"
+        ],
+        "strategy": "Set $R_m=LT+m+1$, so $R_m>Lt$ for every $m$ and $0<t<T$. For each $m$, [[thm-kruzhkov-local-l1-contraction]] with center $0$ and radius $R_m$ gives, outside a null set depending on $m$, $$\\int_{B(0,R_m-Lt)}|u(t,x)-v(t,x)|\\,dx\\le\\int_{B(0,R_m)}|u_0(x)-v_0(x)|\\,dx.$$ Intersect these countably many full-measure sets. The two ball sequences increase to $\\mathbb R^n$, so monotone convergence proves the global inequality and finiteness of its left side; no tail integrability or finite-propagation premise is needed. If the representatives are continuous in $L^1_{\\mathrm{loc}}$, approach any $t$ by times in this full-measure set. Local $L^1$ convergence and lower semicontinuity on expanding balls give $$\\|u(t)-v(t)\\|_1\\le\\liminf_j\\|u(t_j)-v(t_j)\\|_1\\le\\|u_0-v_0\\|_1,$$ which proves the conditional every-time assertion. S: [KR] Section 3, Theorem 1 for the autonomous scalar law, pp. 222-228; [BCL] Section 6.1, Theorem 4, pp. 49-50.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§3, Theorem 1, pp. 222--228"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§6.1, Theorem 4, pp. 49--50"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-existence-of-bounded-kruzhkov-entropy-solutions",
+        "kind": "theorem",
+        "title": "Existence of bounded Kruzhkov entropy solutions",
+        "statement": "Assume Countable Choice and Dependent Choice ([[def-countable-choice]],\n[[def-dependent-choice]]) for the heat-kernel, $L^1$ completeness and\nvanishing-viscosity extraction interfaces used below. Let $n\\ge1$, $T>0$, let\n$f\\colon\\mathbb R\\to\\mathbb R^n$ be locally Lipschitz and $C^1$, and let\n$u_0\\in L^\\infty(\\mathbb R^n)\\cap L^1(\\mathbb R^n)$. Then there exists a\nKruzhkov entropy solution\n$u\\in L^\\infty(\\Pi_T)\\cap C^0([0,T];L^1_{\\mathrm{loc}}(\\mathbb R^n))$ of\n$u_t+\\operatorname{div}_x f(u)=0$ with $u(\\cdot,0)=u_0$ in the strong\n$L^1_{\\mathrm{loc}}$ sense, satisfying $\\|u(t,\\cdot)\\|_\\infty\\le\\|u_0\\|_\\infty$\nfor every $t$. By\n[[cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions]] this\nsolution is unique. The route is vanishing viscosity, and the compactness comes\nfrom the translation lemmas, not from the energy dissipation alone\n([[def-scalar-conservation-law-and-flux]], [[def-kruzhkov-entropy-solution]]).",
+        "deps": [
+          "lem-vanishing-viscosity-families-are-locally-precompact-in-lone",
+          "lem-viscous-scalar-laws-contract-spatial-translates-in-lone",
+          "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+          "thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution",
+          "def-kruzhkov-entropy-solution",
+          "prop-viscous-entropy-dissipation-identity",
+          "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+          "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-scalar-conservation-law-and-flux",
+          "thm-riesz-fischer-completeness-of-l-p"
+        ],
+        "strategy": "Normalize f by subtracting f(0), approximate it in C1 on the common range by smooth global fluxes, and solve the viscous problems for smooth compactly supported data with epsilon decreasing to zero. The uniform range and translation estimates give L1loc and almost-everywhere compactness with the strong local initial trace. Pass the weak equation using the vanishing diffusion term; pass each regularized convex entropy balance using its nonnegative viscous dissipation, then let the entropy regularization vanish to obtain all Kruzhkov inequalities. For general L1 cap L-infinity data, approximate by smooth compactly supported data with no larger L-infinity norm. Global contraction makes the entropy solutions uniformly Cauchy in time in L1, so completeness gives a continuous local-L1 limit with the required trace. The L-infinity bound is closed under L1loc convergence, using (|u|-M)_+ <= |u-u^r|. The weak equation and each entropy inequality pass by Lipschitz continuity of f, |s-k| and the Kruzhkov flux on [-M,M], including the initial entropy term; no almost-everywhere subsequence is needed for this last approximation. Uniqueness follows from the comparison corollary. S: [KR] §4, Theorems 4--5, pp. 229--239; [KL] §§5.5--6, pp. 45--52; [BCL] §8, pp. 57--60.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§4, Theorems 4–5, pp. 229–239"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§§5.5–6, pp. 45–52"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§8, pp. 57–60"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+        "kind": "lemma",
+        "title": "The convex entropy condition for a single shock is the chord condition",
+        "statement": "Let $n=1$, $f\\in C^1(\\mathbb R)$, and let $u$ be a piecewise $C^1$ weak solution with a single jump from the left state $u^-$ to the right state $u^+$ across a $C^1$ curve $x=s(t)$, whose speed satisfies the Rankine--Hugoniot condition $s'=(f(u^+)-f(u^-))/(u^+-u^-)$. Put $F(z)=f(z)-f(u^-)-s'(z-u^-)$ (so $F(u^-)=F(u^+)=0$). Then the entropy inequality $\\eta(u)_t+q(u)_x\\le0$ of [[def-convex-entropy-entropy-flux-pair]] holds for every convex entropy pair $(\\eta,q)$ if and only if $$F(z)\\,(u^+-u^-)\\ \\ge\\ 0\\qquad\\text{for every }z\\text{ between }u^-\\text{ and }u^+;$$ equivalently, in the case $u^-<u^+$ the graph of $f$ on $[u^-,u^+]$ lies above the chord joining $(u^-,f(u^-))$ and $(u^+,f(u^+))$, while in the case $u^->u^+$ it lies below that chord (both in the non-strict sense).",
+        "deps": [
+          "def-piecewise-smooth-shock-and-one-sided-traces",
+          "thm-rankine-hugoniot-jump-condition",
+          "def-convex-entropy-entropy-flux-pair",
+          "def-kruzhkov-entropy-solution",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "cor-primitives-of-a-continuous-function",
+          "thm-ftc-second-part",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "def-abs-value"
+        ],
+        "strategy": "Test the distributional entropy identity across the single jump (as in [[thm-rankine-hugoniot-jump-condition]]): the entropy production is carried by the measure $\\bigl([q]-\\sigma[\\eta]\\bigr)\\delta_\\Gamma$ with $\\sigma=s'$, so the inequality holds for a pair $(\\eta,q)$ iff $[q]\\le\\sigma[\\eta]$. Writing $[h]=\\int_{u^-}^{u^+}h'(z)\\,dz$ and using $q'=\\eta'f'$ gives the condition $\\int_{u^-}^{u^+}\\eta'(z)\\bigl(f'(z)-\\sigma\\bigr)\\,dz\\le0$ for every convex $\\eta$. Since $\\int_{u^-}^{u^+}(f'-\\sigma)=0$ by the jump condition, one may subtract a constant from $\\eta'$, so the condition is: $\\int_{u^-}^{u^+}g(z)F'(z)\\,dz\\le0$ for every nondecreasing $g$. Integrating by parts with the test step function $g=\\mathbf 1_{(z,u^\\pm)}$ and using $F(u^-)=F(u^+)=0$ shows that this holds iff $F$ has the fixed sign $\\operatorname{sgn}(u^+-u^-)$ on the interval, i.e. the chord condition; conversely that sign condition makes every term nonpositive (or nonnegative, according to the orientation). The equivalence with the convex/concave case is [KL] Remark 5.6. S: [KL] \\u00a75.1--5.2, conditions (5.19')--(5.22) and Remark 5.6, pp. 31--40; [BCL] \\u00a72.3, (2.25)--(2.26) and the geometric interpretation, pp. 17--19; [KR] \\u00a72, (2.3) and the discussion following Definition 1, p. 221.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.1--5.2, (5.19')--(5.22) and Remark 5.6, pp. 31--40"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.3, (2.25)--(2.26), pp. 17--19"
+            },
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§2, p. 221"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-self-similar-riemann-problem",
+        "kind": "definition",
+        "title": "The self-similar Riemann problem",
+        "statement": "Let $n=1$ and $f\\in C^1(\\mathbb R)$. The **Riemann problem** for $u_t+f(u)_x=0$ prescribes the two-state initial datum $$u_0(x)=\\begin{cases}u_L,&x<0,\\\\u_R,&x>0,\\end{cases}\\qquad u_L,u_R\\in\\mathbb R.$$ One looks for **self-similar** solutions $u(t,x)=v(x/t)$, $t>0$, i.e. solutions invariant under the scaling $(t,x)\\mapsto(\\lambda t,\\lambda x)$, $\\lambda>0$; such a $u$ is determined by the single function $v:\\mathbb R\\to\\mathbb R$ and is constant on each ray $x=\\xi t$. The initial condition is read as the strong local $L^1$ trace $u(t,\\cdot)\\to u_0$ as $t\\downarrow0$, and any jump or corner of $v$ occurs on a ray; admissibility is the entropy condition of [[def-kruzhkov-entropy-solution]], not a further restriction on the self-similar ansatz.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "def-kruzhkov-entropy-solution"
+        ],
+        "strategy": "Definition and notational contract; no proof. The item fixes the two constant states, the self-similar ansatz and the initial trace; it records that self-similarity is an ansatz to be justified by the uniqueness theorem rather than an additional hypothesis. No choice principle occurs. S: [KL] \\u00a76.1--6.2, the formulation of the Riemann problem (6.1)--(6.2), pp. 52--54; [KL] \\u00a76.1 (evolution of a primitive jump), pp. 52--55; [IVR] \\u00a712.1.1, the two cases (12.1.1)--(12.1.5), pp. 350--351.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§6.1--6.2, pp. 52--54"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations, University of Toronto 2018, complete 415-page textbook",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§12.1.1, pp. 350--351"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-riemann-solver-for-strictly-convex-scalar-flux",
+        "kind": "theorem",
+        "title": "The Riemann solver for a strictly convex flux",
+        "statement": "Let $f\\in C^2(\\mathbb R)$ be strictly convex and let $u_L,u_R\\in\\mathbb R$. The unique Kruzhkov entropy solution of the Riemann problem ([[def-self-similar-riemann-problem]]) is: (i) if $u_L>u_R$, the shock $$u(t,x)=\\begin{cases}u_L,&x<st,\\\\u_R,&x>st,\\end{cases}\\qquad s=\\frac{f(u_R)-f(u_L)}{u_R-u_L};$$ (ii) if $u_L<u_R$, the centred rarefaction $$u(t,x)=\\begin{cases}u_L,&x/t\\le f'(u_L),\\\\(f')^{-1}(x/t),&f'(u_L)<x/t<f'(u_R),\\\\u_R,&x/t\\ge f'(u_R).\\end{cases}$$ Here $f'$ is continuous and strictly increasing, so its inverse on $[f'(u_L),f'(u_R)]$ is continuous; it need not be differentiable, and the rarefaction may have a cusp when $f''$ vanishes. Both profiles satisfy the weak conservation law, all Kruzhkov entropy inequalities, and the strong local $L^1$ initial trace. Uniqueness in the bounded Kruzhkov class follows from [[cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions]]. If $u_L=u_R$, the constant solution is the unique one.",
+        "deps": [
+          "def-self-similar-riemann-problem",
+          "def-scalar-conservation-law-and-flux",
+          "thm-rankine-hugoniot-jump-condition",
+          "def-convex-entropy-entropy-flux-pair",
+          "def-kruzhkov-entropy-solution",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "thm-differentiable-convex-functions-and-monotone-derivatives",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-dominated-convergence",
+          "def-l-p-space-as-a-quotient-by-null-functions"
+        ],
+        "strategy": "(i) The shock speed is the chord slope, so Rankine--Hugoniot holds ([[thm-rankine-hugoniot-jump-condition]]). Strict convexity places the graph of $f$ below the chord on $[u_R,u_L]$; the entropy chord criterion [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]] therefore gives every convex entropy inequality. Its initial trace follows because the discrepancy from the step datum is supported on an interval of length $|s|t$. (ii) Strict convexity makes $f'$ strictly increasing, but does not make $(f')^{-1}$ differentiable. To verify the fan without assuming a nonvanishing $f''$, regularize the flux by $f_\\epsilon(r)=f(r)+\\epsilon r^2/2$. On $[u_L,u_R]$, $f_\\epsilon''\\ge\\epsilon$, so $\\psi_\\epsilon=(f_\\epsilon')^{-1}$ is $C^1$ by the inverse function theorem. The associated fan is piecewise $C^1$, solves the equation in each region by the chain rule, and has no jump terms at its edges because it is continuous. Thus every smooth convex entropy has zero production there; approximate $|u-k|$ by smooth convex entropies and pass by dominated convergence to obtain all Kruzhkov inequalities. On the fixed state interval, $f_\\epsilon'\\to f'$ uniformly and the strictly increasing continuous inverse is uniformly continuous; consequently the extended fan profiles and their entropy fluxes converge uniformly on compact subsets of $t>0$ to the displayed fan for $f$. Passing to the limit in the weak and entropy test integrals gives the claims for the possibly cusped profile. Its initial trace follows since its nonconstant region has width $(f'(u_R)-f'(u_L))t$ and bounded amplitude. Finally apply [[cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions]]. S: [KL] Section 6.2, (6.6)--(6.7) and entropy verification, pp. 53--55; [IVR] Section 12.1.1--12.1.2, pp. 350--353; [KR] Section 5.1, pp. 218--219.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, Kruzhkov's lectures on first-order quasilinear PDEs, in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "Section 6.2, pp. 53--55"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations, University of Toronto 2018, complete 415-page textbook",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Sections 12.1.1--12.1.2, pp. 350--353"
+            },
+            {
+              "title": "S. N. Kruzhkov, First order quasilinear equations in several independent variables, Mat. USSR-Sbornik 10 (1970), 217--243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "Section 5.1, pp. 218--219"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-oleinik-one-sided-entropy-condition",
+        "kind": "theorem",
+        "title": "Oleinik's one-sided estimate characterizes bounded entropy solutions",
+        "statement": "Assume Countable Choice and Dependent Choice, as used by the mollification and vanishing-viscosity compactness interfaces. Let $T>0$, $f\\in C^2(\\mathbb R)$, and let $I\\subset\\mathbb R$ be a bounded closed interval with $f''\\ge\\kappa>0$ on $I$. Let $u_0\\in L^\\infty(\\mathbb R)$ and let $u\\in L^\\infty((0,T)\\times\\mathbb R)$ be a distributional weak solution of $u_t+\\partial_x f(u)=0$, with $u_0$ and the essential range of $u$ in $I$, and with the strong local $L^1$ initial trace $u_0$ in [[def-kruzhkov-entropy-solution]]. The following are equivalent: (i) $u$ is a Kruzhkov entropy solution with that trace; (ii) for almost every $t\\in(0,T)$ and almost every pair $x<y$, $$u(t,y)-u(t,x)\\le\\frac{y-x}{\\kappa t};$$ (iii) for almost every $t\\in(0,T)$, $D_xu(t,\\cdot)\\le(\\kappa t)^{-1}\\mathcal L^1$ in distributional order. The initial trace and weak equation are hypotheses of the equivalence; the slope bound alone is not a definition of an entropy solution. For piecewise $C^1$ solutions, the bound in particular excludes upward jumps, and the convex chord criterion makes the remaining shocks entropy-admissible. The state-slope constant $1/\\kappa$ requires uniform convexity on the solution range.",
+        "deps": [
+          "def-kruzhkov-entropy-solution",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution",
+          "def-heat-evolution-of-initial-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-vanishing-viscosity-families-are-locally-precompact-in-lone",
+          "thm-existence-of-bounded-kruzhkov-entropy-solutions",
+          "thm-kruzhkov-local-l1-contraction",
+          "def-radial-mollifier-family-in-rn",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-dominated-convergence",
+          "cor-l-one-convergence-has-an-almost-everywhere-convergent-subsequence",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "lem-distributional-derivatives-commute-with-convolution-against-test-functions",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "strategy": "Fix c in I, set J=I-c, normalize \\widetilde f=f-f(0), and use the shifted flux g(v)=\\widetilde f(v+c)-\\widetilde f(c)=f(v+c)-f(c). For smooth compact data v_0^s valued in J, solve the viscous Cauchy problem for g; the original-state profile v^epsilon+c has constant-c tails, so the approximation never assumes a compactly supported I-valued profile when 0 is not in I. Restart the heat identity on positive-time strips. Spatial and temporal Gaussian translation bounds give C^{alpha,alpha/2} regularity; differentiating the restarted formula after subtracting g(v(t,x)) under D_xx Gamma, with integral D_xx Gamma=0, yields an integrable r^{-1+alpha/2}+r^{-1/2} bound and hence a global positive-strip bound for p=v_x.\n\nDistributionally differentiate the viscous equation. For q=1/(kappa(t-tau)), W=p-q satisfies L W<0 where W>0, for L=partial_t+g'(v)partial_x-epsilon partial_xx. Subtract rho times Phi=e^{A(t-tau)}(1+x^2), with A chosen so L Phi>0. On a finite rectangle choose t_0 close to tau so q exceeds the positive-strip bound, and choose lateral boundaries where Z=W-rho Phi is negative. The distributional differentiated equation, local boundedness of p_x and b_x, and time regularization justify testing by Z^+; the energy inequality and Gronwall force Z^+=0. Let rho and tau decrease to zero to obtain p<=1/(kappa t), then integrate in x.\n\nFor smooth compact shifted data, vanishing viscosity and local compactness pass the estimate to the Kruzhkov solution. For general data, truncate u_0-c on growing compact intervals and mollify; these data stay in J and converge locally in L^1. Local Kruzhkov contraction transfers the bound to u-c. The pointwise-pair and distributional-slope formulations are equivalent by interval averages and spatial mollification. For the converse, mollify a bounded weak solution with a nonnegative spacetime kernel. Uniform convexity gives a nonpositive Jensen commutator; the assumed slope bound bounds the mollified gradient on each compact positive-time cylinder. The local L^1 commutator tends to zero, yielding every convex entropy inequality and then the Kruzhkov inequalities. The weak equation and strong local trace are hypotheses. The piecewise C^1 shock observation follows from the slope inequality and the chord criterion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, Kruzhkov's lectures on first-order quasilinear PDEs, in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "Section 5.1, (5.4)--(5.7), pp. 31--33"
+            },
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial, 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "Section 2.3, (2.25)--(2.26), printed pp. 18--19 (shock chord criterion only)"
+            },
+            {
+              "title": "C. De Lellis, F. Otto and M. Westdickenberg, Minimal entropy conditions for Burgers equation, complete article",
+              "url": "http://www.instmath.rwth-aachen.de/~mwest/files/Burgers.pdf",
+              "locator": "Introduction: condition (2), printed p. 1, and equivalence assertion, printed p. 2; the general bounded-class converse is proved locally by a mollification commutator"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "cor-lax-shock-inequalities-for-convex-scalar-laws",
+        "kind": "corollary",
+        "title": "The Lax shock inequalities for convex scalar laws",
+        "statement": "Let $f\\in C^2(\\mathbb R)$ be strictly convex. Consider a nontrivial one-dimensional jump from the left trace $u^-$ to the right trace $u^+$ across $x=s(t)$, with traces as in [[def-piecewise-smooth-shock-and-one-sided-traces]], satisfying the Rankine--Hugoniot condition of [[thm-rankine-hugoniot-jump-condition]]. The jump is Kruzhkov entropy-admissible ([[def-kruzhkov-entropy-solution]]) if and only if $u^->u^+$. In that case its speed is $$s'=\\frac{f(u^+)-f(u^-)}{u^+-u^-},$$ and it satisfies the Lax shock inequalities $$f'(u^+)\\le s'\\le f'(u^-).$$ In particular, every nontrivial entropy-admissible jump is compressive; no admissible jump increases the state across the shock.",
+        "deps": [
+          "def-piecewise-smooth-shock-and-one-sided-traces",
+          "thm-rankine-hugoniot-jump-condition",
+          "def-kruzhkov-entropy-solution",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "thm-differentiable-convex-functions-and-monotone-derivatives",
+          "cor-mean-value-theorem"
+        ],
+        "strategy": "Fix a time and write $a=u^+$, $b=u^-$ when $u^->u^+$. Rankine--Hugoniot gives $\\sigma=s'=(f(b)-f(a))/(b-a)$. The affine chord through $(a,f(a))$ and $(b,f(b))$ has slope $\\sigma$, so $F(z)=f(z)-f(b)-\\sigma(z-b)$ vanishes at $a,b$ and, by strict convexity, is nonpositive on $[a,b]$ (strictly negative in the interior). The jump criterion [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]] therefore gives the Kruzhkov entropy inequalities. By the mean value theorem, $\\sigma=f'(c)$ for some $c\\in(a,b)$; monotonicity of $f'$ for convex differentiable $f$ gives $f'(a)\\le\\sigma\\le f'(b)$ (indeed strict inequalities here). Conversely, for a nontrivial Rankine--Hugoniot jump with $u^-<u^+$, strict convexity puts the graph strictly below its endpoint chord, whereas the jump criterion requires the opposite sign of the chord residual; hence it is not entropy-admissible. These two cases classify every nontrivial Rankine--Hugoniot jump and establish the stated equivalence. S: [KL] §5.1, (5.7) and the surrounding discussion, pp. 32--33; [KL] §6.2, p. 53; [BCL] §2.3, pp. 16--19.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.1, (5.7), pp. 32--33; §6.2, p. 53"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.3, pp. 16--19"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+        "kind": "theorem",
+        "title": "The Hamilton--Jacobi correspondence in one dimension",
+        "statement": "Assume Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]]) for the heat-kernel, $L^1$ completeness and vanishing-viscosity extraction interfaces used below. Let $f\\in C^2(\\mathbb R)$ be strictly convex and superlinear, with $f(p)/|p|\\to\\infty$ as $|p|\\to\\infty$. (i) Let $U_0\\in C^{0,1}(\\mathbb R)\\cap L^\\infty(\\mathbb R)$ and let $u_0=U_0'$ be its a.e. derivative. The Hopf--Lax function $$V(t,x)=Q_tU_0(x)=\\inf_{y\\in\\mathbb R}\\left\\{U_0(y)+tL\\!\\left(\\frac{x-y}{t}\\right)\\right\\},\\qquad t>0,\\quad V(0,x)=U_0(x),$$ where $L=f^*$, is the unique viscosity solution of $V_t+f(V_x)=0$ with initial datum $U_0$ among functions bounded and uniformly continuous on $[0,S]\\times\\mathbb R$ for every finite $S>0$ ([[def-hamilton-jacobi-cauchy-problem]], [[def-discontinuous-viscosity-solution]]). Its a.e. spatial derivative $v=V_x$ is the bounded Kruzhkov entropy solution of $v_t+\\partial_xf(v)=0$ with initial datum $u_0$. (ii) Conversely, let $u_0\\in L^1(\\mathbb R)\\cap L^\\infty(\\mathbb R)$ have compact support and let $u$ be its bounded Kruzhkov entropy solution, using the strong local $L^1$ initial trace. With $$U_0(x)=\\int_{-\\infty}^xu_0(y)\\,dy,\\qquad U(t,x)=\\int_{-\\infty}^xu(t,y)\\,dy-tf(0),$$ the function $U$ is the unique viscosity solution of $U_t+f(U_x)=0$ with datum $U_0$ in the same finite-slab class as in (i), and $U_x=u$ almost everywhere. In the compactly supported datum class of (ii), differentiation and the normalized primitive are inverse correspondences ([[def-kruzhkov-entropy-solution]], [[thm-existence-of-bounded-kruzhkov-entropy-solutions]]).",
+        "deps": [
+          "def-kruzhkov-entropy-solution",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "thm-kruzhkov-local-l1-contraction",
+          "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+          "cor-finite-propagation-for-scalar-conservation-laws",
+          "def-hamilton-jacobi-cauchy-problem",
+          "def-discontinuous-viscosity-solution",
+          "thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation",
+          "cor-hopf-lax-is-a-contraction-in-the-supremum-norm",
+          "def-hopf-lax-operator",
+          "def-legendre-transform-of-a-hamiltonian",
+          "lem-hopf-lax-infima-localise",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "def-l-one-approximate-identity-on-rn",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-existence-of-bounded-kruzhkov-entropy-solutions",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution",
+          "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+          "lem-vanishing-viscosity-families-are-locally-precompact-in-lone",
+          "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+          "def-heat-evolution-of-initial-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-dominated-convergence",
+          "thm-ftc-second-part",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-viscosity-subsolution-and-supersolution",
+          "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "thm-l-one-approximate-identities-converge-in-l-p"
+        ],
+        "strategy": "On each arbitrary finite horizon, strict convexity and superlinearity give L′=(f′)^(-1), a minimizer speed bound, and spatial/time Lipschitz estimates. Since min L=-f(0), Q_t0=-tf(0) and sup contraction gives ||Q_tU0+tf(0)||_infinity<=||U0||_infinity. For smooth compact initial derivatives, heat-kernel viscous primitives solve the viscous Hamilton--Jacobi equation and have left limit -tf(0). Exterior entropy cutoffs give uniform L1 tails; local spacetime compactness and a common primitive time modulus give uniform convergence of these primitives on finite slabs. Viscosity test contacts pass the equation to the limit, and finite-slab Hopf--Lax uniqueness identifies the limit. Mollification and global L1 contraction extend the compact-data correspondence to bounded compact data. Constant-tail truncations of any bounded Lipschitz primitive and minimizer localization prove the entropy derivative correspondence for nonintegrable derivatives as well. Entropy and viscosity uniqueness give compatibility on overlapping finite horizons. The potentials are bounded and uniformly continuous on each finite slab, with no globally uniform time bound. CC and DC remain explicit; no viscosity/entropy equivalence is imported from the contextual De Lellis--Otto--Westdickenberg source.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. De Lellis, F. Otto and M. Westdickenberg, “Minimal entropy conditions for Burgers equation,” complete article",
+              "url": "http://www.instmath.rwth-aachen.de/~mwest/files/Burgers.pdf",
+              "locator": "Introduction, printed p. 2 (strictly convex viscosity/entropy equivalence); Corollary 2.5 proof, printed p. 4 (invokes that equivalence via Hopf--Lax and notes the potential is locally Lipschitz). The imported flux hypothesis is f in C^2(R), strictly convex; superlinearity here is additional and is used for Hopf--Lax."
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2 §5.4, Hopf--Lax representation and viscosity solution, printed pp. 67--68"
+            },
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§3, Theorem 1 and proof, pp. 222–228 (local L1 contraction)"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-mass-conservation-for-integrable-entropy-solutions",
+        "kind": "corollary",
+        "title": "Mass conservation for compactly supported entropy solutions",
+        "statement": "Assume Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]]) for the heat-kernel, $L^1$ completeness and vanishing-viscosity extraction interfaces used below. Let $n\\ge1$, let $f:\\mathbb R\\to\\mathbb R^n$ be $C^1$ with $f(0)=0$, let $u_0\\in L^1(\\mathbb R^n)\\cap L^\\infty(\\mathbb R^n)$ be compactly supported, and let $u$ be the entropy solution of [[thm-existence-of-bounded-kruzhkov-entropy-solutions]]. Then $\\int_{\\mathbb R^n}u(t,x)\\,dx=\\int_{\\mathbb R^n}u_0(x)\\,dx$ for almost every $t\\ge0$, and the function $t\\mapsto\\int u(t,x)\\,dx$ is constant on $[0,\\infty)$ after choosing the continuous representative of the $L^1$ orbit.",
+        "deps": [
+          "thm-existence-of-bounded-kruzhkov-entropy-solutions",
+          "def-kruzhkov-entropy-solution",
+          "cor-finite-propagation-for-scalar-conservation-laws",
+          "def-metric-ball",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "strategy": "Fix a finite $T>0$, choose $x_0,R$ with $u_0=0$ a.e. outside $B(x_0,R)$, and set $M=\\|u_0\\|_\\infty$ and $L=\\sup_{|s|\\le M}|f'(s)|$. Take the representative $u\\in C([0,T];L^1_{\\rm loc})$ supplied by [[thm-existence-of-bounded-kruzhkov-entropy-solutions]]. By [[cor-finite-propagation-for-scalar-conservation-laws]] with the zero solution, $u(t)=0$ a.e. outside $B(x_0,R+Lt)$ for a.e. $t$. This cone support holds at every time for the chosen representative: fix $t_0\\in[0,T]$ and a compact $K\\subset\\{x:|x-x_0|>R+Lt_0\\}$. For all $s$ in some neighborhood of $t_0$, $K$ remains outside $B(x_0,R+Ls)$, so $g(s)=\\|u(s)\\|_{L^1(K)}$ vanishes for a.e. such $s$. Local $L^1$ continuity makes $g$ continuous, hence identically zero there. A countable compact exhaustion of the strict exterior gives the asserted support bound at $t_0$. Thus every $u(t)$ is supported in the fixed ball $B(x_0,R+LT)$; local $L^1$ continuity on a slightly larger ball is global $L^1$ continuity, and the strong local initial trace is global $L^1$ convergence on this common support. Choose $\\beta\\in C_c^\\infty(\\mathbb R^n)$ equal to $1$ on a neighborhood of $\\overline B(x_0,R+LT)$. In the weak identity [[def-distributional-weak-solution-of-a-scalar-conservation-law]], test with $\\varphi(t,x)=\\psi(t)\\beta(x)$, $\\psi\\in C_c^\\infty((-\\infty,T))$. Since $f(0)=0$, $f(u)=0$ off the support and $D\\beta=0$ on it, the flux term vanishes. The identity says that the continuous function $m(t)=\\int_{\\mathbb R^n}u(t,x)\\,dx$ has zero distributional derivative and initial value $m(0)=\\int u_0$; hence $m(t)=m(0)$ for every $t\\in[0,T]$. Since $T$ was arbitrary, this proves the claim on every finite time interval. S: [KR] §§2--4, weak identity and conservation argument, pp. 220--239; [KL] §5.3, conservation of mass, pp. 40--42.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§2 and §4, pp. 220--239"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.3, pp. 40--42"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "lem-additive-constant-in-an-entropy-flux-does-not-change-the-entropy-inequality",
+        "kind": "lemma",
+        "title": "An additive constant in the entropy flux is immaterial",
+        "statement": "Let $n\\ge1$, $f\\in C^1(\\mathbb R;\\mathbb R^n)$, let $(\\eta,q)$ be an entropy\npair as in [[def-convex-entropy-entropy-flux-pair]], and let $q^C=q+C$ with a\nconstant vector $C\\in\\mathbb R^n$. Then for every bounded measurable\n$u\\colon\\Pi_T\\to\\mathbb R$ the distributional inequalities\n$$\\eta(u)_t+\\operatorname{div}_x q(u)\\le0\\qquad\\text{and}\\qquad\\eta(u)_t+\\operatorname{div}_x q^C(u)\\le0$$\nare equivalent in $\\mathcal D'(\\Pi_T)$; the two divergences differ by the zero\ndistribution, because the divergence of a constant vector field vanishes.",
+        "deps": [
+          "def-convex-entropy-entropy-flux-pair",
+          "def-kruzhkov-entropy-solution",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-test-function-space-d-of-an-open-set"
+        ],
+        "strategy": "Definitional computation. For a test function $\\varphi\\in C_c^\\infty(\\Pi_T)$ one has $\\langle\\operatorname{div}_x q^C(u),\\varphi\\rangle=-\\int q^C(u)\\cdot\\nabla\\varphi=-\\int q(u)\\cdot\\nabla\\varphi-\\sum_iC_i\\int\\partial_{x_i}\\varphi$, and each $\\int\\partial_{x_i}\\varphi=0$ by the fundamental theorem of calculus for compactly supported smooth functions. Hence $\\operatorname{div}_xq^C(u)=\\operatorname{div}_xq(u)$ in $\\mathcal D'$ and the two inequalities coincide. S: [KR] \\u00a72, the definition of entropy flux and its normalisation, p. 220; [KL] \\u00a75.3, pp. 40--42.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§2, p. 220"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.3, pp. 40--42"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "cor-linfinity-maximum-bound-for-scalar-entropy-solutions",
+        "kind": "corollary",
+        "title": "The $L^\\infty$ maximum bound for entropy solutions",
+        "statement": "Let $n\\ge1$, $T>0$, let $f$ be locally Lipschitz and $C^1$, and let $u$ be a bounded Kruzhkov entropy solution with initial datum $u_0\\in L^\\infty$. Then, with essential extrema taken with respect to Lebesgue measure, $$\\operatorname{ess\\,inf}_{\\mathbb R^n}u_0\\ \\le\\ u(t,x)\\ \\le\\ \\operatorname{ess\\,sup}_{\\mathbb R^n}u_0\\qquad\\text{for a.e. }(t,x)\\in\\Pi_T;$$ in particular $\\|u(t,\\cdot)\\|_\\infty\\le\\|u_0\\|_\\infty$ for almost every $t$. For a representative continuous in local $L^1$, the same bound holds at every $t$: local $L^1$ convergence from times in the full-measure set preserves the range bound.",
+        "deps": [
+          "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+          "def-kruzhkov-entropy-solution",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "strategy": "Every constant function is a Kruzhkov entropy solution: for $u\\equiv c$ the weak equation is an equality and the Kruzhkov inequalities degenerate to the identity because $q_k(c)=\\operatorname{sgn}(c-k)(f(c)-f(k))$ is constant in $(t,x)$ and its divergence vanishes. Apply the order-preservation clause of [[cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions]] to the pairs $(u_0,c)$ with $c=\\operatorname{ess\\,sup}u_0$ and $(c,u_0)$ with $c=\\operatorname{ess\\,inf}u_0$, using that inequalites of $L^\\infty$ classes are read almost everywhere. S: [KR] \\u00a73, Theorem 3 and its proof, pp. 228--229; [KL] \\u00a75.4, the maximum principle for admissible solutions, pp. 42--45. No existence theorem is needed: the given solution is compared directly with the constant entropy solutions. If a local-$L^1$ continuous representative is specified, approach any fixed time by times where the bound holds, pass to the limit on each compact ball, and exhaust $\\mathbb R^n$ to obtain the range bound at that time.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§3, Theorem 3, pp. 228--229"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.4, pp. 42--45"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-entropy-solution-semigroup-on-lone",
+        "kind": "theorem",
+        "title": "The entropy solution semigroup on $L^1\\cap L^\\infty$",
+        "statement": "Assume Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]]) for the heat-kernel, $L^1$ completeness and vanishing-viscosity extraction interfaces used below. Let $n\\ge1$ and let $f:\\mathbb R\\to\\mathbb R^n$ be locally Lipschitz and $C^1$. For $u_0\\in L^1(\\mathbb R^n)\\cap L^\\infty(\\mathbb R^n)$ and $t\\ge0$ let $S_tu_0$ be the value at time $t$ of the unique Kruzhkov entropy solution with datum $u_0$ ([[thm-existence-of-bounded-kruzhkov-entropy-solutions]], [[cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions]]), with $S_0u_0=u_0$. Then: (i) $S_{t+s}=S_t\\circ S_s$ for all $s,t\\ge0$ (semigroup law); (ii) each $S_t$ is order-preserving and an $L^1$ contraction, $\\|S_tu_0-S_tv_0\\|_1\\le\\|u_0-v_0\\|_1$; (iii) $\\|S_tu_0\\|_\\infty\\le\\|u_0\\|_\\infty$. If in addition $f(0)=0$ and $f$ is globally Lipschitz on $\\mathbb R$, then each $S_t$ extends uniquely to a map on $L^1(\\mathbb R^n)$ that is order-preserving, an $L^1$ contraction and satisfies the same semigroup law; the extension agrees with the classical flow on $L^1\\cap L^\\infty$.",
+        "deps": [
+          "thm-existence-of-bounded-kruzhkov-entropy-solutions",
+          "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+          "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+          "cor-linfinity-maximum-bound-for-scalar-entropy-solutions",
+          "cor-finite-propagation-for-scalar-conservation-laws",
+          "def-metric-ball",
+          "def-kruzhkov-entropy-solution",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "strategy": "(i) Compare the solution to zero by global L^1 contraction and use the maximum bound to show each S_su_0 is again in L^1 cap L^infinity. Time translation then gives another entropy solution with datum S_su_0; local L^1 continuity gives its trace and uniqueness yields S_{t+s}=S_tS_s. (ii) Comparison, global L^1 contraction and the maximum bound give order preservation, contraction and the L^infinity estimate. (iii) Under f(0)=0 and global Lipschitz continuity, truncate arbitrary L^1 data and use contraction to define the unique order-preserving contractive semigroup extension. To prove L^1 continuity, first approximate each bounded datum by compactly supported truncations: finite propagation gives a common compact support on finite time intervals, so local L^1 continuity becomes global L^1 continuity; contraction then passes continuity to all bounded data and uniform convergence passes it to the L^1 extension. The extension agrees with the original flow on L^1 cap L^infinity. Sources: [KR] §§3–4, pp. 222–239; [BCL] §6.1, pp. 49–51; [KL] §§5.5–6, pp. 45–52.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§3--4, pp. 222--239"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§6.1, pp. 49--51"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.5--6, pp. 45--52"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "thm-entropy-solution-orbits-are-strongly-continuous-in-lone",
+        "kind": "theorem",
+        "title": "Entropy solution orbits are strongly continuous in $L^1$",
+        "statement": "Assume Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]]) for the heat-kernel, $L^1$ completeness and vanishing-viscosity extraction interfaces used below. Let $n\\ge1$, let $f:\\mathbb R\\to\\mathbb R^n$ be locally Lipschitz and $C^1$ with $f(0)=0$ globally Lipschitz when the datum is not compactly supported, and let $u_0\\in L^1(\\mathbb R^n)\\cap L^\\infty(\\mathbb R^n)$. Then the orbit $t\\mapsto S_tu_0$ is continuous from $[0,\\infty)$ to $L^1(\\mathbb R^n)$: for every $t\\ge0$, $\\|S_tu_0-S_{s}u_0\\|_1\\to0$ as $s\\to t$, and in particular $$\\lim_{t\\downarrow0}\\|S_tu_0-u_0\\|_{L^1(\\mathbb R^n)}=0.$$ Thus $S$ is a strongly continuous semigroup of $L^1$ contractions on the closure of $L^1\\cap L^\\infty$ in $L^1$.",
+        "deps": [
+          "thm-entropy-solution-semigroup-on-lone",
+          "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+          "cor-finite-propagation-for-scalar-conservation-laws",
+          "def-kruzhkov-entropy-solution",
+          "thm-existence-of-bounded-kruzhkov-entropy-solutions",
+          "thm-monotone-convergence-for-the-integral",
+          "def-metric-ball",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "strategy": "First prove continuity at $0$. Fix $R>0$, write $u_0^R=u_0\\mathbf 1_{B(0,R)}$, and let $v^R(t)=S_tu_0^R$. On each finite time interval, [[thm-existence-of-bounded-kruzhkov-entropy-solutions]] supplies a representative $v^R\\in C([0,T];L^1_{\\rm loc})$. Let $L$ be a Lipschitz constant of $f$ on the common solution range. The support conclusion of [[cor-finite-propagation-for-scalar-conservation-laws]] gives $v^R(t)=0$ outside $B(0,R+Lt)$ for a.e. $t$. For each fixed $t_0$ and compact $K\\subset\\{|x|>R+Lt_0\\}$, $K$ remains outside $B(0,R+Ls)$ for all $s$ near $t_0$. Hence $s\\mapsto\\|v^R(s)\\|_{L^1(K)}$ is continuous and zero a.e. nearby, so it is zero at $t_0$. A countable compact exhaustion extends the support bound to every $t\\in[0,T]$. Thus $v^R(t)\\in L^1$ for every time and all its supports on $[0,T]$ lie in $B(0,R+LT)$. The all-time clause of [[cor-global-lone-contraction-from-the-local-kruzhkov-estimate]] applies because the entropy solutions have locally $L^1$-continuous representatives, and yields $$\\|S_tu_0-v^R(t)\\|_1\\le\\|u_0-u_0^R\\|_1=\\|u_0\\|_{L^1(B(0,R)^c)}$$ for every $t\\in[0,T]$. For small $t$ with $Lt<1$, $B(0,R+Lt)\\subset B(0,R+1)$; using the support of $v^R(t)$ gives $$\\|S_tu_0-u_0\\|_1\\le\\|S_tu_0-u_0\\|_{L^1(B(0,R+1))}+2\\|u_0\\|_{L^1(B(0,R)^c)}.$$ The first term tends to zero by the strong local $L^1$ trace in [[def-kruzhkov-entropy-solution]] and [[thm-existence-of-bounded-kruzhkov-entropy-solutions]]. Let $R\\to\\infty$ and use monotone convergence to make the tail term vanish. For $s,t\\ge0$, the semigroup law and $L^1$ contraction then give $$\\|S_tu_0-S_su_0\\|_1\\le\\|S_{|t-s|}u_0-u_0\\|_1,$$ proving continuity at every time. S: [KR] §§2--3, condition (2.2) and Theorem 1, pp. 220--228; [BCL] §6.1, pp. 49--51; [KL] §5.5, pp. 45--48.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§2--3, pp. 220--228"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§6.1, pp. 49--51"
+            },
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.5, pp. 45--48"
+            }
+          ]
+        },
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 458.05,
+    "id": "scalar-conservation-laws-and-entropy-solutions-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Scalar Conservation Laws and Entropy Solutions — Examples",
+    "companion": "scalar-conservation-laws-and-entropy-solutions",
+    "requires": [
+      "scalar-conservation-laws-and-entropy-solutions"
+    ],
+    "items": [
+      {
+        "id": "ex-burgers-shock-riemann-solution",
+        "kind": "example",
+        "title": "The Burgers shock Riemann solution",
+        "statement": "Let $f(u)=\\tfrac12u^2$ and let $u_L>u_R$. Then the Riemann problem ([[def-self-similar-riemann-problem]]) has the entropy solution $$u(t,x)=\\begin{cases}u_L,&x<st,\\\\ u_R,&x>st,\\end{cases}\\qquad s=\\frac{u_L+u_R}{2}.$$ Indeed the Rankine--Hugoniot condition at the jump gives $s=\\dfrac{f(u_R)-f(u_L)}{u_R-u_L}=\\dfrac{u_L+u_R}{2}$, and the Lax inequalities $f'(u_R)=u_R\\le s\\le u_L=f'(u_L)$ hold because $u_L>u_R$; the data are attained in the strong local $L^1$ sense. For example, $u_L=1$, $u_R=0$ gives the shock $x=t/2$ separating $1$ from $0$.",
+        "deps": [
+          "def-self-similar-riemann-problem",
+          "thm-riemann-solver-for-strictly-convex-scalar-flux",
+          "thm-rankine-hugoniot-jump-condition",
+          "cor-lax-shock-inequalities-for-convex-scalar-laws",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "def-kruzhkov-entropy-solution",
+          "def-countable-choice"
+        ],
+        "strategy": "Specialise [[thm-riemann-solver-for-strictly-convex-scalar-flux]] to $f(u)=u^2/2$: the chord slope is $(u_R^2-u_L^2)/(2(u_R-u_L))=(u_L+u_R)/2$, and the Lax inequalities are [[cor-lax-shock-inequalities-for-convex-scalar-laws]]. The initial trace is immediate for a piecewise constant function. S: [KL] \\u00a76.1--6.2, equations (6.4)--(6.6), pp. 52--54; [IVR] \\u00a712.1.2, (12.1.7)--(12.1.8), pp. 352--353.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§6.1--6.2, pp. 52--54"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations, University of Toronto 2018, complete 415-page textbook",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§12.1.2, pp. 352--353"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "ex-burgers-rarefaction-riemann-solution",
+        "kind": "example",
+        "title": "The Burgers rarefaction Riemann solution",
+        "statement": "Let $f(u)=\\tfrac12u^2$ and $u_L<u_R$. Then the entropy solution of the Riemann problem ([[def-self-similar-riemann-problem]]) is the centred rarefaction $$u(t,x)=\\begin{cases}u_L,&x\\le u_Lt,\\\\[2pt] x/t,&u_Lt<x<u_Rt,\\\\[2pt] u_R,&x\\ge u_Rt.\\end{cases}$$ The middle branch satisfies $u_t+uu_x=0$, the outer branches are constant, and the values match continuously across the rays $x=u_Lt$ and $x=u_Rt$. For every $t>0$ the profile is locally Lipschitz in $(t,x)$ (on the fan $u_x=1/t$); thus the chain rule gives zero distributional production for every convex entropy pair on $\\mathbb R\\times(0,\\infty)$. The solution attains the Riemann data in the strong local $L^1$ sense as $t\\downarrow0$. For $u_L=0$, $u_R=1$, the fan is $u=x/t$ on $0<x<t$.",
+        "deps": [
+          "def-self-similar-riemann-problem",
+          "thm-riemann-solver-for-strictly-convex-scalar-flux",
+          "def-kruzhkov-entropy-solution",
+          "thm-chain-rule"
+        ],
+        "strategy": "Specialise [[thm-riemann-solver-for-strictly-convex-scalar-flux]] to $f(u)=u^2/2$, so $(f')^{-1}(\\xi)=\\xi$. On each smooth piece verify the conservation law; continuity across the two rays prevents any jump measure. The fan derivative $u_x=1/t$ shows the profile is locally Lipschitz for $t>0$, which suffices for the entropy chain rule on every compact subset of the open strip; no uniform Lipschitz bound as $t\\downarrow0$ is asserted. The initial trace follows by direct local integration over the fan interval, whose length is $O(t)$. S: [KL] §6.1, pp. 52--53; [IVR] §12.1.1, pp. 350--351.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§6.1, pp. 52--53"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations, University of Toronto 2018, complete 415-page textbook",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§12.1.1, pp. 350--351"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "ex-gradient-catastrophe-before-shock-formation",
+        "kind": "example",
+        "title": "Gradient catastrophe before shock formation",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for entropy uniqueness. Let $f(u)=\\tfrac12u^2$ and $u_0(x)=-\\arctan x$. Then\n$u_0\\in C^\\infty\\cap L^\\infty$, $u_0'(y)=-1/(1+y^2)\\in[-1,0]$, and\n$\\min_yu_0'(y)=-1$ at $y=0$. For $0\\le t<1$, the characteristic map\n$X_t(y)=y+u_0(y)t=y-t\\arctan y$ is an increasing diffeomorphism of\n$\\mathbb R$, and the classical solution is $u(X_t(y),t)=u_0(y)$ with\n$$u_x(X_t(y),t)=\\frac{u_0'(y)}{1+tu_0'(y)}=-\\frac{1}{1+y^2-t}.$$\nIn particular $u_x(0,t)=-1/(1-t)$, so the first gradient catastrophe is at\n$T_*=1$. At $t=1$ the solution remains continuous, with unbounded slope at\n$x=0$; a nonzero shock is present for every $t>1$. More precisely, for each\n$t>1$ the unique $a(t)>0$ satisfying $a=t\\arctan a$ gives characteristics from\n$y=\\pm a$ meeting at $x=0$; the shock traces are $u^-=\\arctan a$ and\n$u^+=-\\arctan a$, and its speed is $0$. This is a compressive Burgers shock,\nand the explicit outer-branch construction below gives its entropy continuation beyond $T_*$. The datum is not in $L^1$, so the integrable-data existence theorem does not apply. Uniqueness is [[cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions]]\n([[prop-characteristics-for-a-one-dimensional-scalar-conservation-law]],\n[[def-kruzhkov-entropy-solution]],\n[[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]]).",
+        "deps": [
+          "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+          "def-kruzhkov-entropy-solution",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "thm-euclidean-inverse-function-theorem",
+          "cor-mean-value-theorem",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+          "def-countable-choice",
+          "thm-rankine-hugoniot-jump-condition",
+          "thm-dominated-convergence"
+        ],
+        "strategy": "For $t<1$, $X_t'(y)=1-t/(1+y^2)>0$ and $X_t(y)\\to\\pm\\infty$ as $y\\to\\pm\\infty$, hence $X_t$ is a global diffeomorphism; differentiating the characteristic formula gives the displayed $u_x$ and its first blow-up at $(t,y)=(1,0)$. At $t=1$, $X_1$ is still strictly increasing but has derivative zero at $0$, so the profile is continuous with a gradient catastrophe, not a finite jump. If $t>1$, $a\\mapsto\\arctan(a)/a$ decreases from $1$ to $0$, giving a unique $a(t)>0$ with $a=t\\arctan a$. Symmetry sends the two characteristic feet $\\pm a$ to $x=0$; their states are opposite and the Rankine–Hugoniot speed is zero. Since $f'(u^+)<0<f'(u^-)$, the shock is admissible; equivalently the Burgers flux lies below its chord for the descending jump, as in [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]]. The monotone outer inverse branches give a bounded entropy continuation directly; their stationary descending jump satisfies the chord criterion, and matching local $L^1$ traces at $t=1$ cancel the time-interface terms. Countable Choice is assumed for the entropy uniqueness supplier; no integrable-data existence theorem is invoked for the nonintegrable datum. S: [KL] §3.3--3.4, pp. 14--18; [IVR] §12.1.1, pp. 350--351; [KR] §4, Theorem 5, pp. 237--238.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§3.3--3.4, pp. 14--18"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations, University of Toronto 2018, complete 415-page textbook",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§12.1.1, pp. 350--351"
+            },
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§4, Theorem 5, pp. 237–238 (existence for bounded measurable initial data)"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "ex-rankine-hugoniot-in-space-time-normal-form",
+        "kind": "example",
+        "title": "Rankine--Hugoniot in space--time normal form",
+        "statement": "Let $n\\ge2$, $T>0$, $f\\in C^1(\\mathbb R;\\mathbb R^n)$, $c\\in\\mathbb R$, a unit vector $\\eta\\in\\mathbb R^n$, and distinct states $u_L,u_R\\in\\mathbb R$. Prescribe the Riemann datum $u_0(x)=u_L$ for $x\\cdot\\eta<0$ and $u_0(x)=u_R$ for $x\\cdot\\eta>0$, and for $0<t<T$ set $u(t,x)=u_L$ when $x\\cdot\\eta<ct$ and $u(t,x)=u_R$ when $x\\cdot\\eta>ct$. This bounded piecewise-constant function has strong local $L^1$ initial trace $u_0$ and is a distributional weak solution of $u_t+\\operatorname{div}_x f(u)=0$ exactly when $$\\bigl(f(u_R)-f(u_L)\\bigr)\\cdot\\eta=c\\,(u_R-u_L).$$ The plane interface $\\Gamma=\\{(t,x):x\\cdot\\eta=ct\\}$ has unit normal from the left side to the right side $\\nu=(-c,\\eta)/\\sqrt{1+c^2}$; hence the equivalent space--time normal equation is $$[u]\\nu_t+[f(u)]\\cdot\\nu_x=\\frac{-c\\,(u_R-u_L)+(f(u_R)-f(u_L))\\cdot\\eta}{\\sqrt{1+c^2}}=0.$$ This direct plane calculation uses no division by the jump.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-ftc-second-part",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step"
+        ],
+        "strategy": "Choose an index $k$ with $\\eta_k\\ne0$ and solve the plane for $x_k=\\gamma(t,x')=(ct-\\sum_{j\\ne k}\\eta_jx_j)/\\eta_k$. If $\\eta_k>0$, the minus side is $x_k<\\gamma$; if $\\eta_k<0$, it is $x_k>\\gamma$. Apply Fubini to the weak test integral, which is compactly supported. On a subgraph, one-dimensional FTC in $x_k$ gives the normal contribution from the $x_k$ derivative; for each tangential variable $z_j$ (including $t$), differentiate $I_j(z')=\\int_{-\\infty}^{\\gamma(z')}F_j\\varphi\\,dx_k$ under the integral sign (the smooth compact test supplies a uniform integrable majorant), use the chain rule for the endpoint, and integrate its compactly supported derivative to zero. The supergraph case has the opposite orientation. The interface contribution is therefore $-[F]\\cdot N$ times the test trace in graph coordinates, where $F=(u,f(u))$ is the space--time flux and $N$ is the unnormalised normal from the minus side to the plus side. Since $\\nabla\\gamma=(c/\\eta_k,-\\eta_{j\\ne k}/\\eta_k)$, this normal is $N=(-c,\\eta)/|\\eta_k|$ in the chosen orientation, and $[F]\\cdot N=(-c[u]+[f]\\cdot\\eta)/|\\eta_k|$. The bottom boundary terms cancel the weak formulation's initial-data term. A finite product of translated one-dimensional bumps from [[ex-smooth-compactly-supported-bump]] is a nonnegative smooth compactly supported test positive on a small interface patch; products are smooth by [[thm-algebra-of-derivatives]], so it shows necessity; the same integration-by-parts calculation proves sufficiency. Thus the exact condition is $[f]\\cdot\\eta=c[u]$. This is a Fubini/one-dimensional FTC graph calculation and uses no divergence theorem or choice principle. S: [KL] §4.2, pp. 20--23 and [BCL] §2.2, pp. 11--14 support the one-dimensional jump identity; the planar extension is derived here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§4.2, pp. 21--23"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.2, pp. 11--14"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "ex-kruzhkov-entropy-inequality-for-a-shock",
+        "kind": "example",
+        "title": "The Kruzhkov entropy inequality across a shock",
+        "statement": "Let $f(u)=\\tfrac12u^2$, let $u_L>u_R$, and let $u$ be the shock of [[ex-burgers-shock-riemann-solution]] with speed $s=\\frac{u_L+u_R}{2}$. For the Kruzhkov entropy $\\eta_k(u)=|u-k|$ with flux $q_k(u)=\\operatorname{sgn}(u-k)(f(u)-f(k))$, the entropy-production distribution in space--time is $$\\partial_t\\eta_k(u)+\\partial_xq_k(u)=\\bigl([q_k]-s[\\eta_k]\\bigr)\\,\\delta(x-st),$$ where $\\delta(x-st)$ denotes the distribution paired by $\\langle\\delta(x-st),\\varphi\\rangle=\\int\\varphi(t,st)\\,dt$ (equivalently, the density with respect to arclength on $\\Gamma$ is divided by $\\sqrt{1+s^2}$). Direct computation gives, for every $k\\in\\mathbb R$, $$[q_k]-s[\\eta_k]=\\begin{cases}0,&k\\le u_R\\text{ or }k\\ge u_L,\\\\[2pt](k-u_R)(k-u_L)<0,&u_R<k<u_L,\\end{cases}$$ so the distribution is nonpositive, with strict dissipation exactly for $u_R<k<u_L$. For $u_L=1$, $u_R=0$, $k=\\tfrac12$, the coefficient is $-\\tfrac14$.",
+        "deps": [
+          "ex-burgers-shock-riemann-solution",
+          "def-kruzhkov-entropy-solution",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "thm-rankine-hugoniot-jump-condition",
+          "def-abs-value"
+        ],
+        "strategy": "Use $s=(u_L+u_R)/2$ and $q_k(u)=(u+k)|u-k|/2$. For $k\\le u_R$ or $k\\ge u_L$, direct subtraction gives zero; for $u_R<k<u_L$ it gives $(k-u_R)(k-u_L)$. The distributional coefficient multiplies $\\delta(x-st)$ with $dt$ parameterization, so no arclength normalization is implicit. Its sign is the admissibility condition of [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]]. In the unit example, the flux jump is $-1/4$ and the entropy jump is zero. S: [KL] §5.5, Proposition 5.13, pp. 46--48; [BCL] §2.3, pp. 16--19.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.5, Proposition 5.13, pp. 46--48"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.3, pp. 16--19"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-hamilton-jacobi-primitive-of-a-burgers-solution",
+        "kind": "example",
+        "title": "The Hamilton--Jacobi primitive of a Burgers solution",
+        "statement": "Let $f(u)=\\tfrac12u^2$ and let $u$ be the Burgers rarefaction with Riemann data $u_0=\\mathbf 1_{(0,\\infty)}$ ([[ex-burgers-rarefaction-riemann-solution]]): $u(t,x)=0$ for $x\\le0$, $u(t,x)=x/t$ for $0<x<t$, and $u(t,x)=1$ for $x\\ge t$. Its normalized primitive is $$U(t,x)=\\int_{-\\infty}^x u(t,y)\\,dy=\\begin{cases}0,&x\\le0,\\\\[2pt] x^2/(2t),&0<x<t,\\\\[2pt]x-t/2,&x\\ge t.\\end{cases}$$ For every $t>0$, $U$ is $C^1$ across both rays $x=0$ and $x=t$, satisfies $U_t+\\tfrac12(U_x)^2=0$ pointwise, and has $U_x=u$. It is Lipschitz on $[0,\\infty)\\times\\mathbb R$, but $u_0\\notin L^1(\\mathbb R)$ and $U_0(x)=x_+$ is unbounded, so this is not an instance of the bounded-primitive correspondence theorem.",
+        "deps": [
+          "ex-burgers-rarefaction-riemann-solution",
+          "def-kruzhkov-entropy-solution",
+          "def-viscosity-subsolution-and-supersolution",
+          "thm-fermat-for-euclidean-local-extrema",
+          "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+          "def-countable-choice"
+        ],
+        "strategy": "Integrating the three pieces of the fan gives the displayed formula. On x<0 the derivatives vanish; on 0<x<t they are U_t=-x^2/(2t^2), U_x=x/t; on x>t they are U_t=-1/2, U_x=1. The values and first derivatives match at the two rays, so the equation holds pointwise and U is C^1 for t>0. Correctly oriented viscosity tests and Fermat give equality in both inequalities. The gradient bound on each region and the explicit Lipschitz restrictions to the rays and initial line give global Lipschitz continuity. The current correspondence theorem is used to verify that the example falls outside both of its data cases. P: direct calculus and contact test. S: [KL] §§6.1–6.2, pp. 52–55.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§6.1--6.2, the Burgers rarefaction and Hamilton--Jacobi primitive, pp. 52--55"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-expansion-shock-is-weak-but-not-entropic",
+        "kind": "counterexample",
+        "title": "The expansion shock is weak but not entropic",
+        "statement": "Let $f(u)=\\tfrac12u^2$ and let the Riemann data be $u_0(x)=0$ for $x<0$ and $u_0(x)=1$ for $x>0$. The increasing-state jump with left state $u^-=0$, right state $u^+=1$, and speed $s=\\frac12$ is $$u(t,x)=\\begin{cases}0,&x<t/2,\\\\1,&x>t/2.\\end{cases}$$ It is a distributional weak solution with those data because the Rankine--Hugoniot condition holds. It is not a Kruzhkov entropy solution: for the convex entropy $\\eta(u)=\\tfrac12u^2$ with flux $q(u)=\\tfrac13u^3$, the jump production is $[q]-s[\\eta]=\\tfrac13-\\tfrac14=\\tfrac1{12}>0$. It also fails the Kruzhkov test $k=\\tfrac12$: $q_k(0)=\\tfrac18$, $q_k(1)=\\tfrac38$, and $[\\eta_k]=0$, so $[q_k]-s[\\eta_k]=\\tfrac14>0$. For the same Riemann data, [[ex-burgers-rarefaction-riemann-solution]] gives an entropy solution, so the Rankine--Hugoniot condition alone admits both the expansion shock and the entropy rarefaction.",
+        "deps": [
+          "thm-rankine-hugoniot-jump-condition",
+          "def-kruzhkov-entropy-solution",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "def-convex-entropy-entropy-flux-pair",
+          "ex-burgers-rarefaction-riemann-solution",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law"
+        ],
+        "strategy": "The jump speed is $(f(1)-f(0))/(1-0)=1/2$, so [[thm-rankine-hugoniot-jump-condition]] gives the weak-solution jump condition. For $(\\eta,q)=(u^2/2,u^3/3)$ the coefficient is $1/3-(1/2)(1/2)=1/12>0$, violating the required nonpositive entropy production; this also violates the chord condition in [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]]. For $k=1/2$, $q_k(0)=1/8$, $q_k(1)=3/8$, and both entropy values equal $1/2$, giving coefficient $1/4>0$ directly in the Kruzhkov family. The rarefaction [[ex-burgers-rarefaction-riemann-solution]] is the entropy solution for these same data. S: [KL] §5.1--5.2, pp. 32--40; [IVR] §12.1.2, pp. 352--353.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.1--5.2, pp. 32--40"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations, University of Toronto 2018, complete 415-page textbook",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§12.1.2, pp. 352--353"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-rankine-hugoniot-alone-does-not-give-uniqueness",
+        "kind": "counterexample",
+        "title": "Rankine--Hugoniot alone does not give uniqueness",
+        "statement": "Let $f(u)=\\tfrac12u^2$ and let the Riemann data be $u_L=0$, $u_R=1$. Then both of the following are weak solutions of the same Cauchy problem: the expansion shock from [[cex-expansion-shock-is-weak-but-not-entropic]] and the rarefaction fan from [[ex-burgers-rarefaction-riemann-solution]], $$u_{\\mathrm{shock}}(t,x)=\\begin{cases}0,&x<t/2,\\\\ 1,&x>t/2,\\end{cases}\\qquad u_{\\mathrm{fan}}(t,x)=\\begin{cases}0,&x\\le0,\\\\ x/t,&0<x<t,\\\\ 1,&x\\ge t.\\end{cases}$$ Only the fan is a Kruzhkov entropy solution ([[thm-riemann-solver-for-strictly-convex-scalar-flux]]); the shock violates the entropy inequality. Thus the Rankine--Hugoniot condition and the weak formulation do not by themselves determine the solution, and an entropy selection is indispensable.",
+        "deps": [
+          "cex-expansion-shock-is-weak-but-not-entropic",
+          "ex-burgers-rarefaction-riemann-solution",
+          "thm-riemann-solver-for-strictly-convex-scalar-flux",
+          "def-kruzhkov-entropy-solution",
+          "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+          "def-self-similar-riemann-problem"
+        ],
+        "strategy": "Collect the two explicit weak solutions and invoke [[cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions]] for uniqueness within the entropy class; the shock's non-admissibility is [[cex-expansion-shock-is-weak-but-not-entropic]]. S: [KL] \\u00a74.3 and \\u00a75.1, pp. 27--33; [IVR] \\u00a712.1.2, pp. 352--353.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§4.3 and §5.1, pp. 27--33"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations, University of Toronto 2018, complete 415-page textbook",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§12.1.2, pp. 352--353"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-pointwise-shock-values-do-not-affect-the-weak-solution",
+        "kind": "counterexample",
+        "title": "Pointwise shock values do not affect the weak solution",
+        "statement": "Let $u$ be a bounded distributional weak solution of $u_t+f(u)_x=0$ on $\\Pi_T$ that is piecewise $C^1$ with shock curve $\\Gamma=\\{x=s(t)\\}$. For any bounded measurable $\\theta:(0,T)\\to\\mathbb R$, define $\\tilde u(t,x)=u(t,x)$ for $x\\ne s(t)$ and $\\tilde u(t,s(t))=\\theta(t)$. Then $\\tilde u=u$ almost everywhere and represents the same $L^1_{\\mathrm{loc}}$ class, so it has the same weak formulation and initial datum. More generally, any bounded measurable modification on a Lebesgue-null subset of $\\Pi_T$ leaves the weak-solution class unchanged. Thus the weak formulation cannot determine pointwise values on a shock curve.",
+        "deps": [
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "def-piecewise-smooth-shock-and-one-sided-traces",
+          "def-measure-null-set-and-almost-everywhere",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ],
+        "strategy": "The shock curve is a Lebesgue-null subset of space--time. A bounded measurable reassignment on it preserves measurability and boundedness, and changes neither the $L^1_{\\mathrm{loc}}$ equivalence class nor any integral in the weak identity. The same argument applies to any bounded measurable modification on a null set. S: [KL] §4.1--4.2, pp. 18--23; [BCL] §2.1, p. 9.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§4.1--4.2, pp. 18--23"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.1, p. 9"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux",
+        "kind": "counterexample",
+        "title": "The convex-flux Riemann formula fails for a nonconvex flux",
+        "statement": "Let $f(u)=u^3$ and take the Riemann data $u_L=1$ for $x<0$, $u_R=-1$ for $x>0$. The single jump $$u(t,x)=\\begin{cases}1,&x<t,\\\\-1,&x>t\\end{cases}$$ has Rankine--Hugoniot speed $s=1$ and is a distributional weak solution with these data: integration by parts on the two sides leaves only the interface coefficient $s[u]-[f]=1(-2)-(-2)=0$. Its strong local $L^1$ trace is the stated datum because the discrepancy is supported on $0<x<t$ and has amplitude $2$. It is not a Kruzhkov entropy solution. For $k=-\\tfrac12$, the Kruzhkov pair has $\\eta_k(1)=\\tfrac32$, $\\eta_k(-1)=\\tfrac12$, $q_k(1)=\\tfrac98$, and $q_k(-1)=\\tfrac78$, hence $$[q_k]-s[\\eta_k]= -\\tfrac14-(-1)=\\tfrac34>0,$$ violating the required nonpositive entropy production. Equivalently, the chord from $(-1,-1)$ to $(1,1)$ is $z\\mapsto z$, while $z^3-z>0$ on $(-1,0)$ and $z^3-z<0$ on $(0,1)$, so the graph fails the required one-sided condition in [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]]. The strictly convex Riemann solver theorem does not apply: $f''(u)=6u$ changes sign and $f'$ is not monotone on $[-1,1]$. Thus its formula does not extend to this nonconvex flux; the concave-hull construction gives the corresponding composite entropy wave.",
+        "deps": [
+          "thm-riemann-solver-for-strictly-convex-scalar-flux",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "thm-rankine-hugoniot-jump-condition",
+          "def-self-similar-riemann-problem",
+          "def-kruzhkov-entropy-solution",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-ftc-second-part",
+          "thm-chain-rule",
+          "def-countable-choice",
+          "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions"
+        ],
+        "strategy": "The speed is $(f(-1)-f(1))/(-1-1)=1$, so $s[u]=[f]=-2$. To check the weak Cauchy identity directly, integrate by parts over $x<t$ and $x>t$; the only interior term is the interface coefficient $s[u]-[f]$, which vanishes, and the bottom term is canceled by the prescribed initial datum. The initial local $L^1$ discrepancy is at most $2t$. For $k=-1/2$, $q_k(1)=9/8$, $q_k(-1)=7/8$, $[\\eta_k]=-1$, and the entropy production is $3/4>0$. The chord calculation independently violates the general shock criterion [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]]. Do not use the convex-only Lax corollary: its strict-convexity hypothesis fails for $u^3$. The concave-hull construction gives the corresponding composite wave. S: [KL] §6.3, Example 6.7 and concave-hull construction, pp. 55--58; [BCL] §3.1, pp. 21--24.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§6.3 and Example 6.7, pp. 55--58"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§3.1, pp. 21--24"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-distinct-states-with-equal-flux-give-a-stationary-weak-discontinuity",
+        "kind": "example",
+        "title": "Distinct states with equal flux give a stationary weak discontinuity",
+        "statement": "Let $f(u)=u^2$ and $u_L=1>u_R=-1$. Since $f(u_L)=f(u_R)=1$, the Rankine--Hugoniot speed of the jump is $s=\\dfrac{f(u_R)-f(u_L)}{u_R-u_L}=0$: the function $u(t,x)=1$ for $x<0$ and $u(t,x)=-1$ for $x>0$ is a stationary weak solution of $u_t+(u^2)_x=0$ with the corresponding Riemann data. It is also entropic: the chord condition of [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]] with $u^-=1>u^+=-1$ requires the graph of $f(u)=u^2$ on $[-1,1]$ to lie below the chord through the endpoints, and that chord is the constant line $1$, with $u^2\\le1$ throughout. Thus $f(u_L)=f(u_R)$ yields a zero-speed admissible shock; admissibility was a separate check and did not follow from the jump condition.",
+        "deps": [
+          "thm-rankine-hugoniot-jump-condition",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "def-kruzhkov-entropy-solution",
+          "def-self-similar-riemann-problem"
+        ],
+        "strategy": "The jump condition gives $s=0$ because the flux values coincide; weak solvability follows from [[thm-rankine-hugoniot-jump-condition]]. Admissibility is checked by the chord condition of [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]]: the relevant chord is horizontal at height $1$ and the parabola $u^2$ lies below it on $[-1,1]$. S: [KL] \\u00a75.1--5.2, pp. 31--40; [BCL] \\u00a72.3, pp. 16--19.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§5.1--5.2, pp. 31--40"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.3, pp. 16--19"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "ex-affine-flux-reduces-the-entropy-semigroup-to-translation",
+        "kind": "example",
+        "title": "Affine flux reduces the entropy semigroup to translation",
+        "statement": "Assume countable choice and dependent choice ([[def-countable-choice]], [[def-dependent-choice]]), as used by the translation-continuity and entropy-semigroup results below. Let $f(u)=cu+d$, with $c,d\\in\\mathbb R$, and let $u_0\\in L^1(\\mathbb R)\\cap L^\\infty(\\mathbb R)$. The entropy solution is $$u(t,x)=u_0(x-ct).$$ For every convex entropy pair $(\\eta,q)$, $q'(u)=c\\eta'(u)$, hence $q(u)=c\\eta(u)+C$; the transport change of variables gives $$\\partial_t\\eta(u)+\\partial_xq(u)=0$$ in distributions, so entropy production is zero. Any jump already present in $u_0$ translates at speed $c$ with the same left and right states and zero production $[q]-c[\\eta]=0$; the affine evolution creates no new shocks. In particular the semigroup of [[thm-entropy-solution-semigroup-on-lone]] is $S_tu_0=u_0(\\cdot-ct)$.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "thm-entropy-solution-semigroup-on-lone",
+          "def-kruzhkov-entropy-solution",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "def-convex-entropy-entropy-flux-pair",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-ftc-second-part",
+          "thm-chain-rule",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-measure-preserving-transformation-and-system",
+          "def-translation-of-a-function-on-rn",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "strategy": "Let $\\varphi\\in C_c^\\infty(\\mathbb R\\times(0,T))$ and set $\\psi(t,y)=\\varphi(t,y+ct)$. Then $\\psi_t=\\varphi_t(t,y+ct)+c\\varphi_x(t,y+ct)$ by [[thm-chain-rule]]. Translation preserves Lebesgue measure ([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]], [[def-measure-preserving-transformation-and-system]], [[thm-integrals-are-invariant-under-measure-preserving-maps]]); Fubini and FTC therefore reduce the weak transport identity for $u_0(x-ct)$ to $\\int u_0(y)\\psi_t(t,y)\\,dy\\,dt=0$. The constant flux term $d$ integrates to zero against $\\varphi_x$. Including a test that meets $t=0$, the same calculation leaves $\\int u_0(y)\\psi(0,y)\\,dy$, exactly canceled by the initial-data term, so this is a weak solution with datum $u_0$. For each convex entropy pair, $q=c\\eta+C$ and the same distributional transport calculation applied to $\\eta(u_0)$ gives zero production. The $L^1$ translation-continuity theorem ([[thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity]]) gives the strong initial trace; hence the profile is the entropy solution and equals $S_tu_0$ by the uniqueness built into [[thm-entropy-solution-semigroup-on-lone]]. For a datum with a jump $a\\to b$, its translate remains a jump $a\\to b$ and $[q]-c[\\eta]=0$. S: [KR] §5, remarks on linear equations and the degenerate case, pp. 239--241; [BCL] §3.1, linear-flux Riemann solution, pp. 21--22.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. N. Kruzhkov, “First order quasilinear equations in several independent variables,” Mat. USSR-Sbornik 10 (1970), 217–243, complete English translation",
+              "url": "https://www.mathnet.ru/links/c11e6b0d0e3edba28696e58d4e1fd4db/sm3372_eng.pdf",
+              "locator": "§5, pp. 239--241"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§3.1, pp. 21--22"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-nonconvex-riemann-data-can-require-a-composite-rarefaction-shock-wave",
+        "kind": "example",
+        "title": "Nonconvex Riemann data can require a composite shock--rarefaction wave",
+        "statement": "Let $f(u)=u^3$ and take the Riemann data $u_L=1$ for $x<0$, $u_R=-1$ for $x>0$ as in [[cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux]]. The entropy profile is $$u(t,x)=\\begin{cases}1,&x<\\tfrac34t,\\\\[3pt]-\\sqrt{\\dfrac{x}{3t}},&\\tfrac34t<x<3t,\\\\[3pt]-1,&x\\ge3t.\\end{cases}$$ It consists of an admissible shock $1\\to-\\tfrac12$ at speed $3/4$ and a centred rarefaction on the strictly concave flux interval $[-1,-\\tfrac12]$, followed by the constant state $-1$. The shock chord residual factors as $$f(z)-f(1)-\\tfrac34(z-1)=(z-1)(z+\\tfrac12)^2\\le0\\quad(-\\tfrac12\\le z\\le1),$$ so the general entropy chord criterion gives admissibility. On the concave interval, $f'(u)=3u^2$ is strictly decreasing and its inverse is $\\psi(\\xi)=-\\sqrt{\\xi/3}$ for $3/4\\le\\xi\\le3$; hence the fan solves the equation pointwise and all entropy productions vanish there. The traces match continuously at $x=3t$, and the initial trace is the stated Riemann datum. The concave-hull prescription consists of the cubic arc on $[-1,-\\tfrac12]$ followed by the chord from $(-\\tfrac12,-\\tfrac18)$ to $(1,1)$.",
+        "deps": [
+          "cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux",
+          "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+          "thm-rankine-hugoniot-jump-condition",
+          "def-piecewise-smooth-shock-and-one-sided-traces",
+          "def-kruzhkov-entropy-solution",
+          "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+          "def-self-similar-riemann-problem",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-chain-rule",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-ftc-second-part"
+        ],
+        "strategy": "Tangency of the chord from $(1,1)$ to $f(z)=z^3$ at $\\hat u=-1/2$ gives shock speed $s=(1-(-1/8))/(1-(-1/2))=3/4$. Across the descending jump $1\\to-1/2$, Rankine--Hugoniot holds. To verify the weak Cauchy identity, integrate the test expression on the constant left region, the fan, and the constant right region; the interface coefficient $s[u]-[f]$ vanishes at the shock, while the traces match at the fan's right edge $x=3t$. The bottom term is canceled by the initial datum. The shock residual factors as $(z-1)(z+1/2)^2\\le0$ on $[-1/2,1]$; since $[u]=-3/2<0$, the product in [[lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality]] is nonnegative. For the fan, $\\psi(\\xi)=-\\sqrt{\\xi/3}$ is the smooth inverse of the strictly decreasing $f'$ on $[-1,-1/2]$. With $\\xi=x/t$, $u_t+f'(u)u_x=\\psi'(\\xi)(-\\xi/t+f'(\\psi(\\xi))/t)=0$; the fan is locally Lipschitz on $t>0$, continuous at both edges, so the chain rule yields zero entropy production there. The profile differs from the initial step only on $0<x<3t$, with amplitude at most $2$, hence its local $L^1$ trace is the prescribed datum. Uniqueness of the entropy solution follows from [[cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions]]. This direct concave-segment proof does not invoke the strictly convex Riemann solver or convex Lax criterion. S: [KL] §6.3, Example 6.7, pp. 55--57; [BCL] §3.1, pp. 21--26.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Chechkin, A. Yu. Goritsky and B. Andreianov, “S. N. Kruzhkov’s lectures on first-order quasilinear PDEs,” in Analytical and Numerical Aspects of PDEs, de Gruyter 2009, complete lecture-notes text",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "§6.3, Example 6.7, pp. 55--57"
+            },
+            {
+              "title": "Alberto Bressan, “Hyperbolic Conservation Laws: An Illustrated Tutorial,” 2009, complete lecture notes",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§3.1, pp. 21--26"
+            }
+          ]
+        },
+        "dependency_level": 8
+      }
+    ]
+  }
+]

@@ -1,0 +1,1411 @@
+[
+  {
+    "order": 458.025,
+    "id": "sobolev-poincare-and-morrey-inequalities",
+    "kind": "A",
+    "category": "pde",
+    "title": "Sobolev Poincare and Morrey Inequalities",
+    "companion": "sobolev-poincare-and-morrey-inequalities-examples",
+    "requires": [
+      "sobolev-traces-and-zero-boundary-values",
+      "poisson-problems-and-interior-harmonic-estimates"
+    ],
+    "items": [
+      {
+        "id": "def-sobolev-conjugate-exponent",
+        "kind": "definition",
+        "title": "The Sobolev conjugate exponent and the scaling identity",
+        "deps": [
+          "def-conjugate-exponents",
+          "def-real-power"
+        ],
+        "statement": "Let $n\\ge2$ and $1\\le p<n$. The **Sobolev conjugate** of $p$ is\n$$p^{*}=\\frac{np}{n-p}.$$\nThe denominator $n-p$ is positive, so $p^{*}$ is a finite real number greater\nthan $1$. Conjugate exponents in the sense of\n[[def-conjugate-exponents]] and real powers in the sense of\n[[def-real-power]] are used below.\n\nThe following elementary identities are part of the definition and record how\n$p^{*}$ is used.\n$$\\frac{1}{p^{*}}=\\frac{n-p}{np}=\\frac1p-\\frac1n,\\qquad p^{*}-p=\\frac{np-p(n-p)}{n-p}=\\frac{p^{2}}{n-p}>0,$$\nso $p^{*}>p$ and $1/p^{*}+1/n=1/p$; in particular $p^{*}=n/(n-1)$ when $p=1$.\nEquivalently $p^{*}=n\\big/\\big(\\frac np-1\\big)$.\n\nFor $k\\ge1$ with $kp<n$ the **$k$-fold Sobolev conjugate** $p^{*}_{k}$ is\ndefined recursively by\n$$\\frac{1}{p^{*}_{1}}=\\frac1p-\\frac1n,\\qquad \\frac{1}{p^{*}_{j+1}}=\\frac{1}{p^{*}_{j}}-\\frac1n\\quad(1\\le j<k).$$\nInduction on $j$ gives $\\frac1{p^{*}_{j}}=\\frac1p-\\frac jn$ and hence\n$$p^{*}_{k}=\\frac{np}{n-kp};$$\nthe recursion is well posed because $jp<n$ for $j\\le k$ keeps every\n$p^{*}_{j}$ finite and greater than $1$.\n\nFinally, the map $p\\mapsto p^{*}=n/(\\frac np-1)$ is continuous on $(1,n)$,\nsince $n/p-1>0$ there and the reciprocal and affine maps are continuous; it is\nstrictly increasing on $(1,n)$, because $p\\mapsto n/p$ is strictly decreasing\nand $t\\mapsto n/(t-1)$ is strictly decreasing on $(1,\\infty)$; and\n$p^{*}\\to\\infty$ as $p\\to n^{-}$, because $n/p-1\\to0^{+}$. No finite Sobolev\nconjugate is attached to $p\\ge n$: for $p=n$ the formula has denominator $0$,\nand for $p>n$ the expression $np/(n-p)$ is negative.",
+        "strategy": "Direct algebra with reciprocals and real powers using $n-p>0$; both displayed identities are rearrangements of $p^{*}=np/(n-p)$. The recursion is induction on $j$ and gives $\\frac1{p^{*}_k}=\\frac1p-\\frac k n$; monotonicity and the limit follow by differentiating or by rewriting $p^{*}=n\\big/(\\frac n p-1)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.1, displayed formulas and the moral after (3.1), printed pp. 61-62."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, Definition 3.25 and (3.11), printed p. 60."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pointwise-potential-bound-for-compactly-supported-smooth-functions",
+        "kind": "lemma",
+        "title": "Pointwise potential bound for compactly supported smooth functions",
+        "deps": [
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $n\\ge2$ and $u\\in C_c^{\\infty}(\\mathbb R^n;\\mathbb K)$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then for every $x\\in\\mathbb R^n$, $|u(x)|\\le\\frac1{\\sigma(S^{n-1})}\\int_{\\mathbb R^n}|Du(y)|\\,|x-y|^{1-n}\\,dy$, where $\\sigma$ is the polar surface measure of [[def-polar-surface-measure-on-the-unit-sphere]] and $|Du|$ is the Euclidean norm of the gradient. In particular $|u(x)|\\le C(n)\\int_{\\mathbb R^n}|Du(y)|\\,|x-y|^{1-n}dy$.",
+        "strategy": "Fix $x$ and $\\omega\\in S^{n-1}$. Since $u$ is smooth and compactly supported, $t\\mapsto u(x+t\\omega)$ is absolutely continuous on $[0,\\infty)$ with value $0$ at $+\\infty$, so the fundamental theorem of calculus gives $|u(x)|\\le\\int_0^{\\infty}|Du(x+t\\omega)|\\,dt$. Integrate in $\\omega$ against $\\sigma$: the left side contributes $|u(x)|\\sigma(S^{n-1})$, and the translated polar-coordinates formula for Lebesgue measure (translation invariance plus the rotation-invariant polar decomposition) rewrites the right side as $\\int_{\\mathbb R^n}|Du(y)|\\,|x-y|^{1-n}dy$. Positivity and finiteness of $\\sigma(S^{n-1})$ follow from the defining relation $\\sigma(S^{n-1})=n\\lambda(B(0,1))$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 5 \u00a75.3, Lemma 5.22 and Remark 5.23(1), printed pp. 133-135."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.8, the potential representation in the proof of Theorem 3.36, display (3.14), printed pp. 68-70."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-gagliardo-nirenberg-sobolev-inequality-for-p-one",
+        "kind": "theorem",
+        "title": "The p=1 Gagliardo-Nirenberg-Sobolev inequality",
+        "deps": [
+          "thm-generalized-holder-inequality-for-products",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $n\\ge2$. There is a constant $C(n)$ such that $\\|u\\|_{L^{n/(n-1)}(\\mathbb R^n)}\\le C(n)\\,\\|Du\\|_{L^1(\\mathbb R^n)}$ for every $u\\in C_c^{\\infty}(\\mathbb R^n;\\mathbb K)$.",
+        "strategy": "For each $j$ the fundamental theorem of calculus and compact support give $|u(x)|\\le\\int_{\\mathbb R}|\\partial_ju(x_1,\\dots,t,\\dots,x_n)|\\,dt$ for every $x$. Multiply the $n$ pointwise inequalities and take the $(n-1)$-th root: $|u(x)|^{n/(n-1)}\\le\\prod_{j=1}^n\\big(\\int_{\\mathbb R}|\\partial_ju|\\,dt_j\\big)^{1/(n-1)}$. Integrate successively over $x_1,x_2,\\dots,x_n$; at step $j$ apply the generalized H\u00f6lder inequality to the product of the $n-1$ remaining factors, each of which is an $L^1$ function of the free variables; Tonelli's theorem justifies the iterated integrals. The result is $\\|u\\|_{n/(n-1)}^{n/(n-1)}\\le\\prod_j\\int_{\\mathbb R^n}|Du|=\\|Du\\|_1^{n/(n-1)}$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.1, Lemma 3.2 and the first part of the proof of Theorem 3.3, printed pp. 62-64."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, the case p=1 in the proof of Theorem 3.28, printed pp. 64-66."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.17 including the N=1, p=1 case, printed pp. 65-66."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-gagliardo-nirenberg-sobolev-inequality",
+        "kind": "theorem",
+        "title": "The Gagliardo-Nirenberg-Sobolev inequality for $1<p<n$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-sobolev-conjugate-exponent",
+          "thm-gagliardo-nirenberg-sobolev-inequality-for-p-one",
+          "thm-holder-inequality-for-integrals",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-dominated-convergence",
+          "def-test-function-space-d-of-an-open-set",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, $1<p<n$ and $p^{*}=\\frac{np}{n-p}$. There is a constant $C(n,p)$ such that\n$$\\|u\\|_{L^{p^{*}}(\\mathbb R^n)}\\le C(n,p)\\,\\|Du\\|_{L^p(\\mathbb R^n)}$$\nfor every $u\\in W^{1,p}(\\mathbb R^n;\\mathbb K)$; here $|Du|$ is the Euclidean norm of the weak gradient.",
+        "strategy": "For smooth compactly supported real u, choose a smooth compact cutoff equal to one near supp u and apply the p=1 GNS inequality to chi(u^2+delta^2)^(gamma/2). The cutoff-gradient contribution is delta^gamma Dchi and vanishes; dominated convergence gives the |u|^gamma limit and the gradient integral. Holder with (gamma-1)p/(p-1)=p* yields the real estimate; split into real and imaginary parts for complex u. Extend to W^{1,p} by compactly supported smooth density, applying the smooth estimate to differences and using L^{p*} completeness and an almost-everywhere subsequence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.1, proof of Theorem 3.3, parts (1)-(2), printed pp. 63-65."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, Theorem 3.28, Theorem 3.31 and their proofs, printed pp. 65-67."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.17, printed pp. 65-66."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 9 \u00a79.3, Theorem 9.22 and proof, printed pp. 211-214."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-sobolev-inequality-for-w-one-p-zero",
+        "kind": "corollary",
+        "title": "The Sobolev inequality for zero-boundary Sobolev closures on open sets",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-sobolev-conjugate-exponent",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-zero-extension-from-w-one-p-zero",
+          "thm-gagliardo-nirenberg-sobolev-inequality",
+          "thm-gagliardo-nirenberg-sobolev-inequality-for-p-one",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge2$, $1\\le p<n$ and $p^{*}=\\frac{np}{n-p}$. There is $C(n,p)$ with\n$$\\|u\\|_{L^{p^{*}}(\\Omega)}\\le C(n,p)\\|Du\\|_{L^p(\\Omega)}$$\nfor every $u\\in W^{1,p}_0(\\Omega;\\mathbb K)$.",
+        "strategy": "Let $\\tilde u$ be the zero extension of $u$; it lies in $W^{1,p}(\\mathbb R^n)$ with $D\\tilde u=Du$ on $\\Omega$ and $D\\tilde u=0$ off $\\Omega$, so both norms are unchanged. Since $W^{1,p}_0(\\Omega)$ is by definition the closure of $C_c^{\\infty}(\\Omega)$ and the zero extensions of $C_c^{\\infty}(\\Omega)$ functions are compactly supported smooth functions, approximate $\\tilde u$ in $W^{1,p}(\\mathbb R^n)$ by compactly supported smooth functions and apply the whole-space inequality to the approximations and their differences, exactly as in the density step of [[thm-gagliardo-nirenberg-sobolev-inequality]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.1, Remark 3.4(3), printed p. 65."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.18, printed pp. 66-67."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-poincare-inequality-on-a-ball",
+        "kind": "theorem",
+        "title": "Poincare inequality on a ball",
+        "deps": [
+          "cor-poincare-wirtinger-on-convex-domains",
+          "def-ball-average-operator-on-r-n",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge1$, $B=B(x_0,r)\\subseteq\\mathbb R^n$ with $r>0$, $1\\le p<\\infty$, and $u\\in W^{1,p}(B;\\mathbb K)$ with ball average $u_B=|B|^{-1}\\int_Bu$. Then $\\|u-u_B\\|_{L^p(B)}\\le C(n,p)\\,r\\,\\|Du\\|_{L^p(B)}$.",
+        "strategy": "Translation and dilation reduce to $B=B(0,r)$; by local smooth approximation it suffices to treat $u\\in C^{\\infty}(B)\\cap W^{1,p}(B)$ and pass to the limit in $W^{1,p}$. (i) For $x,y\\in B$ the segment $[x,y]$ lies in the ball and the fundamental theorem gives $|u(x)-u(y)|^p\\le|x-y|^p\\int_0^1|Du(x+t(y-x))|^pdt$. (ii) Integrate in $y$ in polar coordinates $y=x+s\\omega$ centred at $x$: the radial range satisfies $s\\le2r$, and the substitution $\\rho=ts$ turns the inner integral into $\\int_0^s|Du(x+\\rho\\omega)|^pd\\rho$, so $\\int_0^{s_{\\max}}s^{p+n-2}\\int_0^s|Du(x+\\rho\\omega)|^pd\\rho\\,ds\\le Cr^{p+n-1}\\int_B|Du(z)|^p|x-z|^{1-n}dz$ with all integration confined to $B$. (iii) Integrate over $x\\in B$ and use $\\int_B|x-z|^{1-n}dx\\le C(n)r$ to get $\\int_B\\int_B|u(x)-u(y)|^p\\le Cr^{p+n}\\|Du\\|_{L^p(B)}^p$. (iv) Jensen (H\u00f6lder with the probability measure $|B|^{-1}dx$) gives $\\int_B|u-u_B|^p\\le|B|^{-1}\\int_B\\int_B|u(x)-u(y)|^p$, and $|B|=c_nr^n$ yields the claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 5 \u00a75.3, Lemma 5.22, Remark 5.23 and Theorem 5.25, printed pp. 133-136."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Exercise 3.25, printed p. 79."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-poincare-inequality-for-w-one-p-zero",
+        "kind": "theorem",
+        "title": "The Poincare inequality for zero-boundary Sobolev closures on domains bounded in one direction",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-holder-inequality-for-integrals",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open and bounded in one direction: there are a unit vector $e$ and $a<b$ with $a<x\\cdot e<b$ for every $x\\in\\Omega$. Let $1\\le p<\\infty$. Then $\\|u\\|_{L^p(\\Omega)}\\le C(p)\\,(b-a)\\,\\|Du\\|_{L^p(\\Omega)}$ for every $u\\in W^{1,p}_0(\\Omega;\\mathbb K)$.",
+        "strategy": "Rotate so that $e=e_n$ and $\\Omega\\subset\\{a<x_n<b\\}$. For $u\\in C_c^{\\infty}(\\Omega)$, the fundamental theorem in the $x_n$ direction and compact support give $|u(x)|\\le\\int_a^b|\\partial_nu(x',t)|dt$; H\u00f6lder gives $|u(x)|^p\\le(b-a)^{p-1}\\int_a^b|\\partial_nu(x',t)|^pdt$. Integrate over $\\Omega$, extend the $x_n$-integral over $(a,b)$ for each $x'$ and apply Tonelli: $\\|u\\|_p^p\\le(b-a)^p\\|Du\\|_p^p$. The full class follows because $C_c^{\\infty}(\\Omega)$ is dense in $W^{1,p}_0(\\Omega)$ by definition and both sides are continuous in the $W^{1,p}$-norm. The factor $2\\operatorname{diam}$-type constants of the general statements are not needed here; boundedness in one direction suffices.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.2, Theorem 3.10 and its proof, printed pp. 68-69"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 4 \u00a74.4, Theorem 4.9 and its proof, printed p. 98 (the source proves p=2; the present argument uses Holder for general p)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 9 \u00a79.3, the first half of Theorem 9.34, printed pp. 219-220"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-mean-zero-poincare-estimate-on-bounded-connected-extension-domains-for-p-less-than-n",
+        "kind": "lemma",
+        "title": "Mean-zero Poincare estimate on bounded connected extension domains below the dimension",
+        "statement": "Assume the Axiom of Choice (and hence Countable Choice and Dependent Choice). Let $n\\ge2$, $1<p<n$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $\\Omega\\subset\\mathbb R^n$ be a nonempty bounded connected $W^{1,p}$-extension domain. Then there exists $C_P=C_P(n,p,\\Omega,\\mathbb K)$ such that $\\|u-u_\\Omega\\|_{L^p(\\Omega)}\\le C_P\\|Du\\|_{L^p(\\Omega)}$ for every $u\\in W^{1,p}(\\Omega;\\mathbb K)$, where $u_\\Omega=|\\Omega|^{-1}\\int_\\Omega u$.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-minkowski-integral-inequality",
+          "thm-holder-inequality-for-integrals",
+          "def-radial-mollifier-family-in-rn",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-metric-compactness-equivalences",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "lem-weak-derivatives-are-unique-almost-everywhere",
+          "thm-zero-weak-gradient-implies-componentwise-constancy",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "prop-measure-monotonicity",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-completion-measurable-functions-have-base-measurable-representatives",
+          "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure"
+        ],
+        "dependency_level": 0,
+        "strategy": "Suppose the estimate fails. Countable Choice selects mean-zero $v_j$ with $\\|v_j\\|_p=1$ and $\\|Dv_j\\|_p<1/j$. Fix one bounded extension operator $E$ and a smooth compactly supported cutoff $\\chi=1$ on a neighborhood of $\\overline\\Omega$. Put $F_j=\\chi Ev_j$. By the extension bound and weak Leibniz rule there is $M$ with $\\|F_j\\|_{W^{1,p}(\\mathbb R^n)}\\le M$, all $F_j$ have support in a common compact ball, and $F_j|_\\Omega=v_j$. For smooth compactly supported $F$, the line FTC and Minkowski give $\\|F(\\cdot-h)-F\\|_p\\le |h|\\|DF\\|_p$; global smooth density passes this to every $W^{1,p}(\\mathbb R^n)$ class. Thus for the unit-mass radial mollifier supported in $B_\\varepsilon$, Minkowski gives $\\|F_j*\\rho_\\varepsilon-F_j\\|_p\\le\\varepsilon M$. For each fixed $0<\\varepsilon\\le1$, differentiation under the convolution integral and Holder give uniform bounds $\\|F_j*\\rho_\\varepsilon\\|_\\infty\\le M\\|\\rho_\\varepsilon\\|_{p'}$ and $\\|D(F_j*\\rho_\\varepsilon)\\|_\\infty\\le M\\|D\\rho_\\varepsilon\\|_{p'}$. All convolutions have support in one fixed compact ball $K$. Arzela--Ascoli and metric sequential compactness give a uniformly convergent subsequence for this fixed epsilon; apply the real-valued theorem first to real and then to imaginary parts when needed. Using Dependent Choice, extract nested subsequences for $\\varepsilon_m=2^{-m}$, then take a diagonal subsequence $F_{j_k}$. For fixed $m$, the smoothed diagonal tail is Cauchy in $L^p(K)$, and $\\|F_{j_k}-F_{j_l}\\|_p\\le2M\\varepsilon_m+\\|F_{j_k}*\\rho_{\\varepsilon_m}-F_{j_l}*\\rho_{\\varepsilon_m}\\|_p$. First choose $m$ large, then $k,l$ large: the diagonal is Cauchy in $L^p(\\mathbb R^n)$, hence converges by Riesz--Fischer. Restriction gives $v_{j_k}\\to v$ in $L^p(\\Omega)$. Holder and norm continuity give $\\int_\\Omega v=0$ and $\\|v\\|_p=1$. For every $\\varphi\\in C_c^\\infty(\\Omega)$, pass $\\int v_{j_k}\\partial_i\\varphi=-\\int\\partial_iv_{j_k}\\varphi$ to the limit using Holder and $Dv_{j_k}\\to0$; this proves the weak derivatives of $v$ are zero, without asserting gradient norm convergence from Rellich alone. Connectedness and the published zero-gradient theorem imply $v$ is constant a.e., and its zero mean gives $v=0$, a contradiction. This is an internal compactness argument proved from published smoothing and Arzela--Ascoli interfaces; it uses no later PDE-15 supplier. No compactness-free proof is claimed. AC is inherited by the smooth-density interface; CC selects the contradicting sequence and DC selects nested subsequences.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Theorem 3.47, printed pp. 90\u201391 (PDF pp. 93\u201394), mean-zero contradiction proof; the internal smoothing compactness argument supplies its Theorem 3.44 use locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-john-domain-and-john-constant",
+        "kind": "definition",
+        "title": "John domains and the John constant",
+        "deps": [
+          "def-arc-length-function",
+          "def-absolute-line-integral-over-a-rectifiable-path",
+          "def-metric-interior-closure-boundary",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "lem-distance-to-set-is-lipschitz",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be\nopen, bounded and nonempty. Its boundary $\\partial\\Omega$ is then a nonempty\ncompact subset of $\\mathbb R^n$ contained in a sufficiently large closed ball\n([[def-metric-interior-closure-boundary]],\n[[cor-euclidean-closed-balls-and-spheres-are-compact]]), and the distance\n$\\operatorname{dist}(x,\\partial\\Omega)$ is defined for every $x$ and is a\n$1$-Lipschitz function of $x$ ([[lem-distance-to-set-is-lipschitz]]).\n\nRectifiable curves, their arclength functions are used with the conventions of [[def-arc-length-function]].\n\n**John domain and John constant.** A pair $(\\Omega,x_0)$ with $x_0\\in\\Omega$\nsatisfies the **John condition** with constant $c\\ge1$ if for every $x\\in\\Omega$\nthere is a rectifiable curve $\\gamma:[0,l]\\to\\Omega$ parametrised by arclength,\nwith $\\gamma(0)=x$, $\\gamma(l)=x_0$ and\n$$\\operatorname{dist}(\\gamma(t),\\partial\\Omega)\\ge c^{-1}|x-\\gamma(t)|\\qquad\\text{for every }t\\in[0,l].$$\nWrite $c_J(\\Omega,x_0)$ for the infimum of the admissible constants $c\\ge1$;\nwith the convention $\\inf\\varnothing=+\\infty$, this value belongs to $[1,+\\infty]$. The domain $\\Omega$ is a\n**John domain** if $c_J(\\Omega,x_0)<\\infty$ for some $x_0\\in\\Omega$, and\n$c_J(\\Omega,x_0)$ is the **John constant of the pair** $(\\Omega,x_0)$. The\nestimates below use an admissible constant, never the finiteness of the\ninfimum alone, and whether the infimum is attained is immaterial.\n\n**Arclength form.** If $\\gamma$ is arclength parametrised from $x$, then\n$t\\ge|\\gamma(t)-x|$ for $0\\le t\\le l$, because the straight segment from $x$ to\n$\\gamma(t)$ is no longer than the curve. Hence a curve satisfying the\narclength normalisation $\\operatorname{dist}(\\gamma(t),\\partial\\Omega)\\ge\nc^{-1}t$ for all $t$ also satisfies the displayed relative-distance condition\nwith the same constant $c$. Only this implication is used here; the chain construction below uses the displayed relative-distance condition.\n\n**Connectedness.** A John domain is path-connected and hence connected: given\n$x,y\\in\\Omega$, choose curves $\\gamma_x$ from $x$ to $x_0$ and $\\gamma_y$ from\n$y$ to $x_0$ as in the definition (under Countable Choice the two curves may be\nchosen simultaneously) and traverse $\\gamma_x$ followed by the reverse of\n$\\gamma_y$. No regularity of $\\partial\\Omega$ is assumed beyond what the\ndefinition uses.",
+        "strategy": "No proof is required for the definition. The stated equivalence is immediate from $t\\ge|x-\\gamma(t)|$ in one direction and from the standard reparametrisation of a curve satisfying the relative-distance condition in the other.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 5 \u00a75.4, Definition 5.31 and Remarks 5.32, printed pp. 140-141: John domains, the distinguished point, the relative-distance condition and the interior-cone remark."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 1 \u00a71.1, printed pp. 3-5: open sets, connectedness and rectifiable curves used in the convention below."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-john-domain-admits-bounded-overlap-ball-chains",
+        "kind": "lemma",
+        "title": "Bounded-overlap ball chains in a bounded John domain",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-john-domain-and-john-constant",
+          "def-measure",
+          "prop-measure-monotonicity",
+          "lem-sphere-and-ball-measures-scale",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-intermediate-value",
+          "def-continuity-real"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be a bounded John domain with distinguished point $x_0$ and admissible constant $c_J\\ge1$; set $r_0=\\frac14\\operatorname{dist}(x_0,\\partial\\Omega)$ and $B_0=B(x_0,r_0)$. There is a constant $M=M(n,c_J)\\ge1$ such that for every $x\\in\\Omega$ there are balls $B_i=B(x_i,r_i)\\subseteq\\Omega$, $i\\ge0$, with:\n\n1. $|B_i\\cup B_{i+1}|\\le M\\,|B_i\\cap B_{i+1}|$ for all $i\\ge0$;\n2. $\\operatorname{dist}(x,B_i)\\le Mr_i$ for all $i\\ge0$, and $r_i\\to0$, $x_i\\to x$ as $i\\to\\infty$;\n3. no point of $\\Omega$ belongs to more than $M$ of the balls $B_i$.\n\nFor $x\\notin B(x_0,2r_0)$ the chain starts with $B_0=B(x_0,r_0)$ and follows a John curve from $x_0$ to $x$; for $x\\in B(x_0,2r_0)$ it is the explicit geometric chain constructed below. The choice assumption supplies Countable Choice for the John-domain and Lebesgue-measure interfaces; selecting a curve for one fixed $x$ needs no choice axiom.",
+        "strategy": "For x outside B(x0,2r0), choose a John curve and construct the chain by taking each next centre at the first boundary point encountered while moving along the curve toward x. The first pair has r0/(4cJ) <= r1 <= (1+1/(4cJ))r0; an intersection ball of radius r1/2 centred halfway from x1 toward x0 gives a ratio bound depending only on n,cJ. From the second transition onward, consecutive radii differ by factors between 3/4 and 5/4, so midpoint balls of radius ri/4 give uniform overlap bounds. The John condition gives the distance and convergence estimates, and a packing argument gives bounded multiplicity. For x in B(x0,2r0), use the explicit geometric chain with halving radii and multiplicity at most two. One John curve is selected for each x.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 5 \u00a75.4, Definition 5.31 and the proof of Theorem 5.33, printed pp. 141-142."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-truncated-riesz-kernel-potential-bounded-on-lp",
+        "kind": "lemma",
+        "title": "The truncated Riesz kernel is bounded on $L^p$ of a bounded set",
+        "deps": [
+          "thm-minkowski-integral-inequality",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "prop-measure-monotonicity",
+          "def-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-measurable-function-between-measurable-spaces",
+          "def-john-domain-and-john-constant",
+          "thm-intermediate-value",
+          "def-countable-choice",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-completion-measurable-functions-have-base-measurable-representatives",
+          "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure",
+          "thm-lebesgue-measure-under-dilations-and-reflections"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $n\\ge2$, let $z_0\\in\\mathbb R^n$, $\\rho>0$, and let $\\Omega\\subseteq B(z_0,\\rho)$ be measurable, $1\\le p<\\infty$ and $f\\in L^p(\\Omega;\\mathbb K)$. Then $\\big\\|\\int_\\Omega|x-y|^{1-n}|f(y)|\\,dy\\big\\|_{L^p(\\Omega)}\\le C(n)\\,\\rho\\,\\|f\\|_{L^p(\\Omega)}$. In particular, for a bounded John domain the John condition gives $\\operatorname{diam}\\Omega\\le c|\\Omega|^{1/n}$, so the bound holds with coefficient $C(n,c_J)|\\Omega|^{1/n}$.",
+        "strategy": "Since $\\Omega\\subseteq B(z_0,\\rho)$ one has $|x-y|\\le2\\rho$ for all $x,y\\in\\Omega$, so the kernel may be truncated: $Tf(x)=\\int_{\\mathbb R^n}k(x-y)f(y)dy$ with $k(z)=|z|^{1-n}\\mathbf 1_{B(0,2\\rho)}(z)\\in L^1$, $\\|k\\|_1=C(n)\\rho$ (radial integration). Tonelli gives the strong $(1,1)$ bound $\\|Tf\\|_1\\le\\|k\\|_1\\|f\\|_1$ and the pointwise estimate $|Tf(x)|\\le\\|k\\|_1\\|f\\|_\\infty$ gives the strong $(\\infty,\\infty)$ bound, hence a weak $(1,1)$ bound. Marcinkiewicz interpolation yields the strong $L^p$ bound with constant $C\\|k\\|_1$ for $1<p<\\infty$, and $p=1$ is the Tonelli bound. For a bounded John domain, $\\operatorname{diam}\\Omega\\le c(n,c_J)|\\Omega|^{1/n}$ (the John condition at the distinguished point) lets one take $\\rho=c(n,c_J)|\\Omega|^{1/n}$ after covering $\\Omega$ by such a ball.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 5 \u00a75.2, Lemma 5.15 and proof, printed p. 128, for the finite-measure potential bound; the present truncated-kernel argument uses Minkowski."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.8, display (3.14) and the Holder passage, printed pp. 68-69."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-poincare-wirtinger-on-bounded-john-domains",
+        "kind": "theorem",
+        "title": "The mean-zero Poincare inequality on bounded John domains",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-ball-average-operator-on-r-n",
+          "def-john-domain-and-john-constant",
+          "lem-john-domain-admits-bounded-overlap-ball-chains",
+          "thm-poincare-inequality-on-a-ball",
+          "lem-ball-mean-oscillation-potential-bound",
+          "lem-truncated-riesz-kernel-potential-bounded-on-lp",
+          "thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n",
+          "thm-holder-inequality-for-integrals",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-sphere-and-ball-measures-scale"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded John domain with admissible constant $c_J$, and let $1\\le p<\\infty$. There is a constant $C(n,p,c_J)$ with\n$$\\|u-u_\\Omega\\|_{L^p(\\Omega)}\\le C(n,p,c_J)\\operatorname{diam}(\\Omega)\\|Du\\|_{L^p(\\Omega)}$$\nfor every $u\\in W^{1,p}(\\Omega;\\mathbb K)$, where $u_\\Omega=|\\Omega|^{-1}\\int_\\Omega u$. The factor $\\operatorname{diam}(\\Omega)$ is necessary: for the function $u(x)=x_1$ on a ball of radius $R$ with the centre as distinguished point, the ratio $\\|u-u_B\\|_{L^p(B)}/\\|Du\\|_{L^p(B)}$ grows linearly in $R$, while the John constant of that pair is $1$ for every $R$.",
+        "strategy": "For almost every x, compare each John-chain ball B_i to the centered ball B(x,(M+2)r_i): the chain distance condition gives inclusion and the volume ratio is (M+2)^n, so Lebesgue differentiation yields u_{B_i}\u2192u(x). Telescope the means from the reference ball, use ball Poincare and overlap to bound the pointwise difference by the truncated potential of |Du|, then apply the truncated-kernel Lp estimate and adjust the reference mean to u_\u03a9. A linear function on expanding centered balls shows the diameter factor is necessary.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 5 \u00a75.4, Theorem 5.33 and its proof, printed pp. 141-143."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.29 and the Poincare discussion, printed pp. 77-79."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-poincare-inequality-with-a-positive-measure-zero-set",
+        "kind": "theorem",
+        "title": "The Poincare inequality with a positive-measure zero set",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-ball-average-operator-on-r-n",
+          "def-john-domain-and-john-constant",
+          "thm-poincare-wirtinger-on-bounded-john-domains",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, let $\\Omega$ be a bounded John domain with admissible constant $c_J$, let $1\\le p<\\infty$, and let $A\\subseteq\\Omega$ be measurable with $|A|\\ge\\gamma|\\Omega|$ for some $\\gamma\\in(0,1]$. If $u\\in W^{1,p}(\\Omega;\\mathbb K)$ vanishes almost everywhere on $A$, then\n$$\\|u\\|_{L^p(\\Omega)}\\le C(n,p,c_J,\\gamma)\\operatorname{diam}(\\Omega)\\|Du\\|_{L^p(\\Omega)}.$$",
+        "strategy": "Since $u$ vanishes a.e. on $A$, $|u_\\Omega|\\le\\fint_\\Omega|u|=\\fint_{\\Omega\\setminus A}|u|$, and H\u00f6lder over the normalised measure on $\\Omega\\setminus A$ gives $|u_\\Omega|\\le(1-\\gamma)^{1-1/p}\\|u\\|_{L^p(\\Omega)}$ for $p>1$ (and the direct bound for $p=1$). Write $\\|u\\|_p\\le\\|u-u_\\Omega\\|_p+|\\Omega|^{1/p}|u_\\Omega|$, bound the first term by the mean-zero Poincare inequality and absorb $(1-\\gamma)^{1-1/p}\\|u\\|_p$ into the left side; the coefficient $1-(1-\\gamma)^{1-1/p}$ is positive because $\\gamma>0$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.2, Remark 3.20 and the zero-set variant of the Poincare inequality, printed pp. 74\u201375."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, the discussion of conditions eliminating constants, printed pp. 77-78."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-poincare-wirtinger-on-convex-domains",
+        "kind": "corollary",
+        "title": "Poincare-Wirtinger on bounded convex domains by the direct pairwise argument",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-local-smooth-approximation-in-wkp",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-jensens-integral-inequality",
+          "thm-holder-inequality-for-integrals",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-chain-rule-for-total-derivatives",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "prop-measure-monotonicity",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-dominated-convergence"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open, bounded, convex and nonempty, and let $1\\le p<\\infty$. Then $\\|u-u_\\Omega\\|_{L^p(\\Omega)}\\le C(n)\\operatorname{diam}(\\Omega)\\|Du\\|_{L^p(\\Omega)}$ for every $u\\in W^{1,p}(\\Omega;\\mathbb K)$.\n\nHere $u_\\Omega=|\\Omega|^{-1}\\int_\\Omega u\\,dx$ is the mean of $u$ over $\\Omega$,\nwhich is well defined because $\\Omega$ is nonempty open and bounded. The proof\nbelow gives the explicit choice\n$$C(n)=\\frac{2\\,(2^n-1)}{n},$$\nwhich depends only on the dimension; no dependence on $p$, on the shape of\n$\\Omega$, on $|\\Omega|$ or on the regularity of $\\partial\\Omega$ is used.",
+        "strategy": "Repeat the pairwise argument of [[thm-poincare-inequality-on-a-ball]] with the ball replaced by the convex set $\\Omega$: for $x,y\\in\\Omega$ the segment $[x,y]$ lies in $\\Omega$, so $|u(x)-u(y)|^p\\le|x-y|^p\\int_0^1|Du(x+t(y-x))|^pdt$; polar integration around $x$ has radial range at most $D=\\operatorname{diam}\\Omega$ and the weight satisfies $\\int_\\Omega|x-z|^{1-n}dz\\le C(n)D$; integrating over $x,y$ and applying Jensen to the mean gives the claim. Smooth approximations extend the result to $W^{1,p}(\\Omega)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 5 \u00a75.3, Lemma 5.22 and Theorem 5.25, printed pp. 133-136; the segment argument is run with the ball replaced by the convex set."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Exercise 3.25 and the Poincare discussion of Theorem 3.29, printed pp. 77-79."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n",
+        "kind": "theorem",
+        "title": "Sobolev embedding on bounded extension domains for $p<n$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-sobolev-conjugate-exponent",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "thm-gagliardo-nirenberg-sobolev-inequality",
+          "cor-sobolev-embeddings-transfer-from-rn-to-extension-domains",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "thm-holder-inequality-for-integrals",
+          "thm-gagliardo-nirenberg-sobolev-inequality-for-p-one",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded $W^{1,p}$-extension domain with a bounded extension operator $E$, and let $1\\le p<n$, $p\\le q\\le p^{*}=\\frac{np}{n-p}$. Then $W^{1,p}(\\Omega)\\hookrightarrow L^q(\\Omega)$ continuously:\n$$\\|u\\|_{L^q(\\Omega)}\\le C(n,p,q,\\Omega)\\|u\\|_{W^{1,p}(\\Omega)}\\qquad(u\\in W^{1,p}(\\Omega;\\mathbb K)).$$",
+        "strategy": "Let $W=Eu$. The whole-space inequality [[thm-gagliardo-nirenberg-sobolev-inequality]] applied to $W$ gives $\\|W\\|_{L^{p^{*}}(\\mathbb R^n)}\\le C\\|DW\\|_{L^p(\\mathbb R^n)}\\le C\\|E\\|\\|u\\|_{W^{1,p}(\\Omega)}$; restricting to $\\Omega$ and applying the transfer corollary gives the endpoint case $q=p^{*}$. For $p\\le q\\le p^{*}$ write $1/q=\\theta/p+(1-\\theta)/p^{*}$ with $\\theta\\in[0,1]$; H\u00f6lder on the finite-measure set $\\Omega$ gives $\\|u\\|_q\\le\\|u\\|_p^{\\theta}\\|u\\|_{p^{*}}^{1-\\theta}\\le C\\|u\\|_{W^{1,p}(\\Omega)}$, since $\\|u\\|_p\\le\\|u\\|_{W^{1,p}}$. Every bounded $C^k$ domain, $k\\ge1$, supplies an admissible $E$ through the extension theorem cited in the transfer corollary.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.6, Definition 3.42 and Theorem 3.43 with proof, printed pp. 84\u201385."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, Theorem 3.28 and the extension discussion, printed pp. 65-67."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-sobolev-poincare-on-bounded-connected-extension-domains",
+        "kind": "theorem",
+        "title": "Sobolev-Poincare on bounded connected extension domains",
+        "statement": "Assume the Axiom of Choice (and hence Countable Choice and Dependent Choice). Let $n\\ge2$, $1<p<n$, $p^{*}=\\frac{np}{n-p}$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $\\Omega\\subset\\mathbb R^n$ be a nonempty bounded connected $W^{1,p}$-extension domain. There is $C=C(n,p,\\Omega,\\mathbb K)$ such that every $u\\in W^{1,p}(\\Omega;\\mathbb K)$ satisfies\n$$\\|u-u_\\Omega\\|_{L^{p^{*}}(\\Omega)}\\le C\\|Du\\|_{L^p(\\Omega)},\\qquad u_\\Omega=|\\Omega|^{-1}\\int_\\Omega u .$$\nThe domain constant is not uniform over arbitrary extension domains.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-sobolev-conjugate-exponent",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-mean-zero-poincare-estimate-on-bounded-connected-extension-domains-for-p-less-than-n",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 3,
+        "strategy": "Holder on the finite positive measure domain makes the mean finite. Set $v=u-u_\\Omega$; weak derivative linearity gives $Dv=Du$. Apply the local mean-zero estimate [[lem-mean-zero-poincare-estimate-on-bounded-connected-extension-domains-for-p-less-than-n]] to get $\\|v\\|_p\\le C_P\\|Du\\|_p$. Use the existing extension-domain embedding [[thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n]] at $q=p^*$ to obtain $\\|v\\|_{p^*}\\le C_E\\|v\\|_{W^{1,p}}\\le C_E(1+C_P)\\|Du\\|_p$ (with an equivalent norm constant if the selected Sobolev norm convention requires it). The proof retains exactly the source range $1<p<n$, and inherits choice only from its two suppliers. No later-page dependency occurs.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Theorem 3.47, printed pp. 90\u201391 (PDF pp. 93\u201394), read in full; real statement extended componentwise to complex scalar classes."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-critical-sobolev-embedding-into-every-finite-lq",
+        "kind": "theorem",
+        "title": "The critical Sobolev embedding into every finite $L^q$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-sobolev-conjugate-exponent",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n",
+          "thm-holder-inequality-for-integrals",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be nonempty, open, bounded and a $W^{1,p}$-extension domain for every $p\\in(n/2,n)$ (the extension operator may depend on $p$). For every $1\\le q<\\infty$ there is $C(n,q,\\Omega)$ with\n$$\\|u\\|_{L^q(\\Omega)}\\le C(n,q,\\Omega)\\|u\\|_{W^{1,n}(\\Omega)}\\qquad(u\\in W^{1,n}(\\Omega;\\mathbb K));$$\nthat is, $W^{1,n}(\\Omega)\\hookrightarrow L^q(\\Omega)$ continuously for every finite $q$. The constant necessarily blows up as $q\\to\\infty$, so no $L^\\infty$ bound is asserted.",
+        "strategy": "For q\u2264n, Holder on the finite-measure domain gives the estimate from the L^n term. For q>n, set s=nq/(n+q)\u2208(n/2,n); the assumed W^{1,s}-extension property gives W^{1,s}\u2192L^{s*}=L^q, while finite measure embeds W^{1,n} continuously into W^{1,s}. To show the constants diverge, localize the double-log W^{1,n} singularity in an interior ball; it is unbounded but lies in W^{1,n}, so its L^q norms tend to infinity on the finite-measure domain.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.2, Remark 3.16 and the critical exponent discussion, printed pp. 73-74."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, the discussion at the exponent p=n, printed p. 66."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-ball-mean-oscillation-potential-bound",
+        "kind": "lemma",
+        "title": "Ball-mean oscillation bound by the Riesz potential of the gradient",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-ball-average-operator-on-r-n",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-sphere-and-ball-measures-scale",
+          "lem-truncated-riesz-kernel-potential-bounded-on-lp",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-local-smooth-approximation-in-wkp",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-dominated-convergence",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $n\\ge2$, let $1\\le p<\\infty$, let $B(x,r)\\subseteq\\mathbb R^n$ be a ball, and let $u\\in W^{1,p}(B(x,r);\\mathbb K)$ with ball average $u_{B(x,r)}$. Then\n$$\\bigl|u(z)-u_{B(x,r)}\\bigr|\\le C(n)\\int_{B(x,r)}|Du(y)|\\,|z-y|^{1-n}\\,dy$$\nfor almost every $z\\in B(x,r)$; here $|Du|$ is the Euclidean norm of the weak gradient and $C(n)$ depends only on $n$.",
+        "strategy": "For $u\\in C^1$ (Kinnunen's Lemma 5.22): $u(z)-u_B=\\fint_B(u(z)-u(y))dy$; for $y\\ne z$, write $u(y)-u(z)=\\int_0^1Du(ty+(1-t)z)\\cdot(y-z)dt$; integrate in polar coordinates centred at $z$ and change variables $w=ty+(1-t)z$ on the sphere $\\partial B(z,\\rho)$ with $dS(y)=t^{1-n}dS(w)$, $|w-z|=t|y-z|$; integrating the resulting expression in $\\rho\\in(0,2r)$ yields $|u(z)-u_B|\\le c(n)\\int_B|Du(y)||z-y|^{1-n}dy$. For $u\\in W^{1,p}$, apply the $C^1$ bound to local smooth approximations $u_i\\to u$ in $W^{1,p}(B)$; the truncated-kernel bound shows $I(|Du_i|\\chi_B)\\to I(|Du|\\chi_B)$ in $L^p(B)$, and passing to an a.e.-convergent subsequence gives the bound a.e.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 5 \u00a75.3, Lemma 5.22 and Remarks 5.23(1), printed pp. 133-135."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.8, the potential representation in the proof of Theorem 3.36, display (3.14), printed pp. 68-70."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-morrey-inequality-for-p-greater-than-n",
+        "kind": "theorem",
+        "title": "Morrey's inequality for $p>n$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-ball-average-operator-on-r-n",
+          "def-local-holder-and-c-two-alpha-norms-on-euclidean-balls",
+          "lem-ball-mean-oscillation-potential-bound",
+          "lem-sphere-and-ball-measures-scale",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-holder-inequality-for-integrals",
+          "thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, $n<p<\\infty$, let $\\Omega\\subseteq\\mathbb R^n$ be open and let $u\\in W^{1,p}(\\Omega;\\mathbb K)$. Then $u$ has a continuous representative $u^{*}$, and for every ball $B(x,r)$ with $B(x,2r)\\Subset\\Omega$ one has\n$$|u^{*}(z)-u^{*}(y)|\\le C(n,p)\\,|z-y|^{1-n/p}\\,\\|Du\\|_{L^p(B(x,2r))}\\qquad(z,y\\in B(x,r));$$\nequivalently $[u^{*}]_{C^{0,1-n/p}(B(x,r))}\\le C(n,p)\\|Du\\|_{L^p(B(x,2r))}$.",
+        "strategy": "For a.e. $z\\in B(x,\\rho)$ the previous lemma and H\u00f6lder (with $(n-1)p'<n$ because $p>n$) give $|u(z)-u_{B(x,\\rho)}|\\le C\\rho^{1-n/p}\\|Du\\|_{L^p(B(x,\\rho))}$ for all $0<\\rho\\le r$. For $0<\\rho,\\sigma\\le r$, comparing both balls through an intermediate ball contained in $B(x,r)$ gives $|u_{B(x,\\rho)}-u_{B(x,\\sigma)}|\\le C\\max(\\rho,\\sigma)^{1-n/p}\\|Du\\|_{L^p(B(x,r))}$; hence the means are Cauchy as $\\rho\\downarrow0$ and $u^{*}(x)=\\lim_{\\rho\\to0}u_{B(x,\\rho)}$ exists with $|u^{*}(x)-u_{B(x,\\rho)}|\\le C\\rho^{1-n/p}\\|Du\\|_{L^p(B(x,r))}$. Lebesgue's differentiation theorem gives $u^{*}=u$ a.e., and the same comparison at scale $\\rho=|z-y|$ inside $B(x,2r)$ gives the H\u00f6lder bound. Continuity on $\\Omega$ follows by covering $\\Omega$ with balls whose doubles lie in $\\Omega$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.3, Theorem 3.23 and Remark 3.25(3), printed pp. 76-79."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.8, Theorem 3.36 and its proof, printed pp. 68-70."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-w-one-infinity-functions-have-lipschitz-representatives",
+        "kind": "theorem",
+        "title": "$W^{1,\\infty}$ functions on convex domains have Lipschitz representatives",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-ball-average-operator-on-r-n",
+          "def-lipschitz-holder-contraction",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-pointwise-potential-bound-for-compactly-supported-smooth-functions",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "prop-measure-monotonicity",
+          "thm-c1-lipschitz-ac-bv-hierarchy",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-dominated-convergence",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-local-smooth-approximation-in-wkp",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-uniformly-continuous-extension-from-dense",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-completion-measurable-functions-have-base-measurable-representatives",
+          "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge1$ and let $\\Omega\\subseteq\\mathbb R^n$ be open, bounded and convex. If $u\\in W^{1,\\infty}(\\Omega;\\mathbb K)$, then $u$ has a representative $u^{*}$ with\n$$|u^{*}(x)-u^{*}(y)|\\le\\|Du\\|_{L^\\infty(\\Omega)}\\,|x-y|\\qquad(x,y\\in\\Omega),$$\nand $u^{*}=u$ almost everywhere on $\\Omega$. Conversely, every Lipschitz function $f:\\Omega\\to\\mathbb K$ with constant $L$ lies in $W^{1,\\infty}(\\Omega)$ and $\\|Df\\|_{L^\\infty(\\Omega)}\\le L$ for real scalars, while $\\|Df\\|_{L^\\infty(\\Omega)}\\le\\sqrt2 L$ for complex scalars. In both cases the real-linear derivative has operator norm at most $L$ almost everywhere.\n\n**Gradient convention.** For a weak gradient $Dv=(D_1v,\\ldots,D_nv)$ we write $|Dv|=(\\sum_{i=1}^n|D_iv|^2)^{1/2}$ for its Euclidean norm and $\\|Dv\\|_{L^\\infty(\\Omega)}:=\\||Dv|\\|_{L^\\infty(\\Omega)}$ for the essential supremum of that norm, as in [[lem-pointwise-potential-bound-for-compactly-supported-smooth-functions]]. For real scalars this norm equals the derivative operator norm. For complex scalars it is the Frobenius norm of the real-linear map $\\mathbb R^n\\to\\mathbb R^2$ and can exceed its operator norm: $f(x)=x_1+ix_2$ is $1$-Lipschitz but $|Df|=\\sqrt2$. If $\\Omega=\\varnothing$ both assertions hold vacuously.",
+        "strategy": "For the first direction, the ACL characterisation gives an absolutely continuous representative on a.e. line; for a.e. $x,y$ the segment $[x,y]$ lies in $\\Omega$ and $|u(x)-u(y)|\\le\\int_0^1|Du(x+t(y-x))|dt\\le\\|Du\\|_\\infty|x-y|$. The ball means then satisfy $|\\fint_{B(x,\\rho)}u-\\fint_{B(x,\\sigma)}u|\\le\\|Du\\|_\\infty(\\rho+\\sigma)$ (compare through an intermediate ball), so $u^{*}(x)=\\lim_{\\rho\\to0}\\fint_{B(x,\\rho)}u$ exists for every $x$, is $\\|Du\\|_\\infty$-Lipschitz, and equals $u$ a.e. by Lebesgue's differentiation theorem. For the converse, a Lipschitz $f$ is absolutely continuous on every line with $|f(x+te_j)-f(x+se_j)|\\le L|t-s|$; its classical coordinate derivatives exist a.e. and are bounded by $L$, so applying the ACL characterisation with $p=1$ gives $f\\in W^{1,1}(\\Omega)$ with $D_jf$ the a.e. coordinate derivative; since that derivative lies in $L^\\infty$ and $f$ is bounded on the bounded domain, $f\\in W^{1,\\infty}(\\Omega)$ with $\\|Df\\|_\\infty\\le L$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.4, Theorem 3.31 and its proof, printed pp. 79-80."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.A.1\u20133.A.2, printed pp. 77\u201381, for Lipschitz and absolutely continuous functions; Proposition 3.22, printed p. 57, for scalar composition of weak derivatives."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 9 \u00a79.3, Theorem 9.29 (Rademacher) and Theorem 9.30, printed pp. 215-218."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-weak-partial-derivatives-lower-sobolev-order",
+        "kind": "lemma",
+        "title": "Weak partial derivatives lower the Sobolev order",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "lem-weak-derivatives-are-unique-almost-everywhere",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open, $k\\ge1$, $1\\le p\\le\\infty$ and $u\\in W^{k,p}(\\Omega;\\mathbb K)$. For every multi-index $\\beta$ with $|\\beta|\\le k$ the weak derivative $D^{\\beta}u$, viewed as an $L^p$ class, belongs to $W^{k-|\\beta|,p}(\\Omega)$, and $D^{\\alpha}(D^{\\beta}u)=D^{\\alpha+\\beta}u$ a.e. whenever $|\\alpha|+|\\beta|\\le k$.",
+        "strategy": "For $k=1$ and $|\\beta|=1$, $D^{\\beta}u\\in L^p$ by definition and its weak derivative in a further coordinate direction $e_j$ is $D^{\\beta+e_j}u$: the defining integration-by-parts identity for $D^{\\beta+e_j}u$ is exactly the identity for the class $D^{\\beta}u$ tested against $\\partial_j\\varphi$, by the commutation and locality properties of weak derivatives. Uniqueness of weak derivatives makes the construction representative-independent. The general case is induction on $k$ using this single step.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 \u00a71.2, Definition 1.8, printed pp. 4\u20135; \u00a71.3, Lemma 1.14(2) and proof, printed pp. 9\u201310, for iterated weak derivatives."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-higher-order-sobolev-embedding",
+        "kind": "theorem",
+        "title": "Higher-order Sobolev embedding",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-hk-and-hk-zero-notation",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-local-holder-and-c-two-alpha-norms-on-euclidean-balls",
+          "lem-weak-partial-derivatives-lower-sobolev-order",
+          "lem-weak-derivatives-are-unique-almost-everywhere",
+          "def-sobolev-conjugate-exponent",
+          "thm-morrey-inequality-for-p-greater-than-n",
+          "thm-holder-inequality-for-integrals",
+          "thm-gagliardo-nirenberg-sobolev-inequality-for-p-one",
+          "thm-gagliardo-nirenberg-sobolev-inequality",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, let $\\Omega$ be a bounded $W^{k,p}$-extension domain, $k\\ge1$ and $1\\le p<\\infty$. Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and $u\\in W^{k,p}(\\Omega;\\mathbb K)$. Then:\n\n1. if $kp<n$, $\\|u\\|_{L^q(\\Omega)}\\le C\\|u\\|_{W^{k,p}(\\Omega)}$ for every $q$ with $\\frac1q\\ge\\frac1p-\\frac kn$ (equivalently $1\\le q\\le\\frac{np}{n-kp}$);\n2. if $kp=n$, $\\|u\\|_{L^q(\\Omega)}\\le C(q)\\|u\\|_{W^{k,p}(\\Omega)}$ for every finite $q$;\n3. if $kp>n$, then for every integer $m\\ge0$ and every $0<\\alpha<1$ with $m+\\alpha<k-\\frac np$ there is a representative in $C^{m,\\alpha}(\\overline\\Omega)$ with $\\|u\\|_{C^{m,\\alpha}(\\overline\\Omega)}\\le C\\|u\\|_{W^{k,p}(\\Omega)}$; when $k-\\frac np\\notin\\mathbb Z$ one may take $m=\\lfloor k-\\frac np\\rfloor$ and $\\alpha=k-\\frac np-m$.\n\nHere $C^{m,\\alpha}(\\overline\\Omega)$ uses the continuous derivatives of the constructed representative on an ambient neighbourhood of $\\overline\\Omega$, with norm\n$$\\|g\\|_{C^{m,\\alpha}(\\overline\\Omega)}:=\\sum_{|\\beta|\\le m}\\sup_{\\overline\\Omega}|D^\\beta g|+\\sum_{|\\beta|=m}\\sup_{\\substack{x,y\\in\\overline\\Omega\\\\x\\ne y}}\\frac{|D^\\beta g(x)-D^\\beta g(y)|}{|x-y|^\\alpha}.$$\nFor $\\Omega=\\varnothing$ set these norm values to $0$. The proof supplies such an ambient representative, so no boundary differentiability or regularity of $\\partial\\Omega$ is assumed.",
+        "strategy": "Iterate the first-order whole-space Sobolev inequality on a compactly supported W^{k,p} extension. In the supercritical case, descend derivative order while increasing the exponent until q>=n; if q>n, Morrey on a fixed ambient ball gives a closure-wide representative, with extra remaining derivatives allowing any larger finite q. If q=n, at least two derivatives remain and compact support plus Holder reduces w and Dw to W^{1,s} for s<n near n, after which Gagliardo-Nirenberg-Sobolev gives a supercritical exponent. Mollification proves consistency of the continuous derivative representatives.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.5, Remark 3.41 and its iteration argument, printed pp. 83\u201384; \u00a73.3, Theorem 3.23 and Remarks 3.25, printed pp. 75\u201377, for the first-order Morrey input."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 9 \u00a79.3, Theorem 9.22 and the higher-order iterates, printed pp. 211-214."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-weak-product-rule-for-bounded-sobolev-functions",
+        "kind": "lemma",
+        "title": "Weak product rule for bounded Sobolev functions",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "thm-holder-inequality-for-integrals",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open, $1\\le p<\\infty$, and let $u,v\\in W^{1,p}(\\Omega;\\mathbb K)\\cap L^\\infty(\\Omega)$. Then $uv\\in W^{1,p}(\\Omega)$ and $D_j(uv)=(D_ju)v+u(D_jv)$ a.e. for every $j$.",
+        "strategy": "Approximate: choose $u_k,v_k\\in C^{\\infty}(\\Omega)\\cap W^{1,p}$ with $u_k\\to u$, $v_k\\to v$ in $W^{1,p}$ and $\\|u_k\\|_\\infty\\le\\|u\\|_\\infty$, $\\|v_k\\|_\\infty\\le\\|v\\|_\\infty$ (local smooth approximation followed by truncation at $\\pm\\|u\\|_\\infty$, which preserves $W^{1,p}$ by the chain rule for globally Lipschitz maps). The classical Leibniz rule gives $D_j(u_kv_k)=(D_ju_k)v_k+u_k(D_jv_k)$. H\u00f6lder bounds $\\|u_kv_k-uv\\|_p\\le\\|u_k\\|_\\infty\\|v_k-v\\|_p+\\|v\\|_\\infty\\|u_k-u\\|_p\\to0$ and $\\|D_j(u_kv_k)-[(D_ju)v+u(D_jv)]\\|_p\\to0$; closedness of the weak derivative operator transfers the identity to $uv$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 2 \u00a72.1, Lemma 2.1 and proof, printed pp. 26\u201328; the present proof applies that scalar chain-rule route to a truncated square and polarises."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-sobolev-algebra-above-the-critical-index",
+        "kind": "corollary",
+        "title": "The Sobolev space $W^{k,p}$ is an algebra above the critical index",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-higher-order-sobolev-embedding",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "thm-holder-inequality-for-integrals",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "lem-weak-partial-derivatives-lower-sobolev-order",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "lem-classical-derivatives-are-weak-derivatives"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, let $\\Omega$ be a bounded $W^{k,p}$-extension domain, $k\\ge1$ and $1\\le p<\\infty$ with $kp>n$. Then there is $C(n,p,k,\\Omega)$ with\n$$\\|uv\\|_{W^{k,p}(\\Omega)}\\le C\\|u\\|_{W^{k,p}(\\Omega)}\\|v\\|_{W^{k,p}(\\Omega)}\\qquad(u,v\\in W^{k,p}(\\Omega)),$$\nso $W^{k,p}(\\Omega)$ is a Banach algebra; the constants and the conclusion may depend on the choice of equivalent Sobolev norm only through $C$.",
+        "strategy": "Step 1.1 proves the multiplicative estimate for pairs of derivatives: for $w_1,w_2\\in W^{k,p}(\\Omega)$ and $|\\gamma_1|+|\\gamma_2|\\le k$, the embedding places $D^{\\gamma_i}w_i$ in $L^{q_i}$ with $\\frac1{q_1}+\\frac1{q_2}\\le\\frac1p$ (bounded factors when the remaining order exceeds $n/p$, every finite exponent at the critical order, and the Sobolev exponent below it), and H\u00f6lder bounds $\\|D^{\\gamma_1}w_1D^{\\gamma_2}w_2\\|_{L^p}\\le C\\|w_1\\|_{W^{k,p}}\\|w_2\\|_{W^{k,p}}$. Step 2.1 chooses smooth $u_j,v_j$ converging to $u,v$ in $W^{k,p}$ by Meyers-Serrin, applies the classical Leibniz formula to the pairs $(u_j,v_j)$, passes each summand to the limit in $L^p$ by step 1.1, and identifies $\\sum_{\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}D^{\\beta}u\\,D^{\\alpha-\\beta}v$ as the weak $\\alpha$-derivative of $uv$ through the test-function identity; summing over $|\\alpha|\\le k$ gives the asserted algebra inequality.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.5, Remark 3.41 and its iteration argument, printed pp. 83\u201384; \u00a73.3, Theorem 3.23 and Remarks 3.25, printed pp. 75\u201377, for the first-order Morrey input."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, Theorem 3.31, printed pp. 66\u201367, for the first-order integrability embedding used in the product argument; the higher-order algebra proof is reconstructed here."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-critical-sobolev-does-not-embed-in-linfinity",
+        "kind": "remark",
+        "title": "The $p=n$ endpoint: no $L^\\infty$ or Holder embedding",
+        "deps": [],
+        "statement": "Let $n\\ge2$. On nonempty bounded $C^1$ domains in $\\mathbb R^n$ (or domains satisfying the all-exponents extension hypothesis of the critical embedding theorem), $W^{1,n}$ embeds into $L^q$ for\nevery finite $q$ but not into $L^\\infty$, and some $W^{1,n}$ classes have no representative in\n$C^{0,\\alpha}(\\overline\\Omega)$ for any $\\alpha>0$. The exponential improvement\nof Trudinger-Moser and the BMO/John-Nirenberg route to the same integrability\nare outside this pair's scope and are recorded in the planning scope-denial\nledger; the companion page carries the witnesses.\n\nThe dimension restriction is essential: on a bounded interval $I$, every\n$W^{1,1}(I)$ class has an absolutely continuous representative and satisfies\n$\\|u\\|_{L^\\infty(I)}\\le |I|^{-1}\\|u\\|_{L^1(I)}+\\|u'\\|_{L^1(I)}$.",
+        "strategy": "Statement-only remark. The witnesses and the failure of the uniform Holder bound are worked out on the B companion page; Trudinger-Moser and the BMO route are deliberately not built here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.2, Remark 3.16(1)-(3) and the Trudinger-Moser remark following it, printed pp. 73-74."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, Example 3.30 and the preceding limiting-case remark, printed p. 66."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.23, printed p. 72, for the supercritical higher-order comparison; the critical limitation is supplied by Kinnunen and Hunter."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "rem-domain-classes-for-the-mean-zero-poincare-inequality",
+        "kind": "remark",
+        "title": "Domain classes covered by the mean-zero Poincare inequality",
+        "deps": [
+          "def-john-domain-and-john-constant",
+          "thm-poincare-wirtinger-on-bounded-john-domains",
+          "cor-poincare-wirtinger-on-convex-domains"
+        ],
+        "statement": "This page proves the mean-zero Poincare-Wirtinger inequality directly for bounded John domains [[thm-poincare-wirtinger-on-bounded-john-domains]] and for bounded convex domains [[cor-poincare-wirtinger-on-convex-domains]], both on the same page. Bounded $C^1$ and bounded Lipschitz domains satisfy the uniform interior cone condition, and every nonempty bounded connected open set satisfying that uniform condition is a John domain (Kinnunen, Remark 5.32(1)); hence the inequality applies to those classes as well. The John-class hypothesis $1\\le p<\\infty$ is the one used by the direct proof; no Sobolev exponent and no compactness input enter it. The bounded connected extension-domain Sobolev-Poincare form $1<p<n$ is a separate statement on this page, proved from the local mean-zero estimate and the extension-domain embedding, and it does not supersede the John-domain result.",
+        "strategy": "Statement-only scope remark. PDE-14 proves the John and convex cases directly; PDE-15 proves the full bounded connected extension-domain claim without weakening its statement.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 5 \u00a75.4, Remark 5.32(1)-(2), printed p. 141."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.29 and proof, printed pp. 78\u201379, for the bounded connected C^1 case; the John/cone comparison is Kinnunen Remark 5.32."
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 458.026,
+    "id": "sobolev-poincare-and-morrey-inequalities-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Sobolev Poincare and Morrey Inequalities \u2014 Examples",
+    "companion": "sobolev-poincare-and-morrey-inequalities",
+    "requires": [
+      "sobolev-poincare-and-morrey-inequalities"
+    ],
+    "items": [
+      {
+        "id": "ex-scaling-for-the-sobolev-conjugate",
+        "kind": "example",
+        "title": "Dilations force the Sobolev conjugate",
+        "deps": [
+          "def-sobolev-conjugate-exponent",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-chain-rule-for-total-derivatives",
+          "def-countable-choice",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $n\\ge2$, $1\\le p<n$, and let $1\\le q\\le\\infty$ and $u\\in C_c^\\infty(\\mathbb R^n)\\setminus\\{0\\}$; for $\\lambda>0$ put $u_\\lambda(x):=u(\\lambda x)$. Then\n$$\\|u_\\lambda\\|_{L^q}=\\lambda^{-n/q}\\|u\\|_{L^q},\\qquad\\|Du_\\lambda\\|_{L^p}=\\lambda^{\\,1-n/p}\\|Du\\|_{L^p}.$$\nIf the inequality $\\|u_\\lambda\\|_{L^q}\\le C\\|Du_\\lambda\\|_{L^p}$ is to hold for all $\\lambda>0$ with a constant $C$ independent of $\\lambda$, then the two powers of $\\lambda$ must balance:\n$$-\\frac nq-\\Bigl(1-\\frac np\\Bigr)=0,\\qquad\\text{that is}\\qquad 1-\\frac np+\\frac nq=0,$$\nwhich is equivalent to $q=\\frac{np}{n-p}=p^{*}$. The exponent $p^{*}$ is therefore forced by scaling alone.",
+        "strategy": "Change variables $y=\\lambda x$ in both norms and compare the two powers of $\\lambda$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.1, the dilation computation opening the chapter, printed p. 61."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, the scaling discussion before Theorem 3.28, printed pp. 63-65."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-poincare-on-an-interval-with-sharp-scaling",
+        "kind": "example",
+        "title": "Poincare on an interval: the length dependence is linear",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-holder-inequality-for-integrals",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "cor-newton-leibniz-with-finitely-many-exceptional-points",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $I=(0,L)$ with $L>0$ and let $1\\le p<\\infty$. For every $u\\in W^{1,p}(I)$ with mean $u_I=|I|^{-1}\\int_Iu$ one has\n$$\\|u-u_I\\|_{L^p(I)}\\le L\\,\\|u'\\|_{L^p(I)} .$$\nThe dependence on $L$ cannot be improved below a positive multiple of $L$: for $u(x)=x-\\frac{L}{2}$ the weak derivative is $u'\\equiv1$, the mean vanishes, and\n$$\\|u-u_I\\|_{L^p(I)}=L^{1+1/p}2^{-1}(p+1)^{-1/p},\\qquad\\|u'\\|_{L^p(I)}=L^{1/p},$$\nso the ratio $\\|u-u_I\\|_{L^p}/\\|\\text{u}'\\|_{L^p}$ equals $c_pL$ with $c_p=\\frac12(p+1)^{-1/p}>0$. Consequently every admissible constant for this family is at least $c_pL$, while the inequality above shows that $L$ itself is admissible: the optimal constant is of order $L$.",
+        "strategy": "Upper bound: the absolutely continuous representative satisfies $|u(x)-u(y)|\\le\\int_I|u'|\\le L^{1-1/p}\\|u'\\|_{L^p}$ for all $x,y$; Jensen gives $|u(x)-u_I|^p\\le\\fint_I|u(x)-u(y)|^pdy\\le L^{p-1}\\|u'\\|_p^p$, and integrating over $x$ yields the bound. Lower bound: direct evaluation of the linear function's norms.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.2, Theorem 3.12 for $n=1$, printed pp. 70-71."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 4 \u00a74.4, Theorem 4.9 and its remarks, printed p. 98 (the source proves p=2; the present argument uses Holder for general p)."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-poincare-wirtinger-needs-connectedness",
+        "kind": "counterexample",
+        "title": "Poincare-Wirtinger fails on disconnected bounded domains",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-poincare-wirtinger-on-bounded-john-domains",
+          "def-ball-average-operator-on-r-n",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "prop-measure-monotonicity",
+          "def-measure",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega=B(0,1)\\cup B(3e_1,1)\\subset\\mathbb R^2$ (two disjoint unit balls) and $u=\\mathbf 1_{B(3e_1,1)}$. Then $Du=0$ almost everywhere and $u$ is not almost everywhere constant on $\\Omega$, so $u-u_\\Omega$ is nonzero on a set of positive measure and $\\|u-u_\\Omega\\|_{L^p(\\Omega)}>0$: the mean-zero Poincare-Wirtinger inequality is false on disconnected bounded open sets, and connectedness is essential for the single-global-mean normalisation.",
+        "strategy": "Compute:$|\\Omega|=2|B(0,1)|$, $u_\\Omega=\\frac12$, $\\|u-u_\\Omega\\|=\\frac12$ on each ball, so $\\|u-u_\\Omega\\|_{L^p}=2^{1/p}\\cdot\\frac12>0$, while $Du=0$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.2, Remark 3.11 and the discussion of what eliminates constants, printed pp. 68-69."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 4 \u00a74.4, the discussion of conditions eliminating constant functions, printed p. 98."
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-poincare-without-mean-trace-or-zero-set-normalisation-fails",
+        "kind": "counterexample",
+        "title": "A gradient-only Poincare estimate needs normalisation",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $n\\ge2$ and $1<p<n$ with $p^{*}=\\frac{np}{n-p}$, and let $\\Omega$ be a nonempty bounded connected domain with smooth boundary. The following two assertions are false:\n\n1. there is a finite constant $C$ with $\\|u\\|_{L^{p^{*}}(\\Omega)}\\le C\\|Du\\|_{L^p(\\Omega)}$ for every $u\\in W^{1,p}(\\Omega;\\mathbb K)$;\n2. there is a finite constant $C$ with $\\|u\\|_{L^p(\\Omega)}\\le C\\|Du\\|_{L^p(\\Omega)}$ for every $u\\in W^{1,p}(\\Omega;\\mathbb K)$.\n\nA condition excluding nonzero constants is necessary; mean subtraction, zero trace, and vanishing on a set of positive measure are standard normalisations.",
+        "deps": [
+          "def-sobolev-conjugate-exponent",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-ftc-second-part",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "def-countable-choice",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets"
+        ],
+        "dependency_level": 1,
+        "strategy": "Take $\\Omega=B(0,1)$ and $u\\equiv1$. For each $\\varphi\\in C_c^\\infty(\\Omega)$ extend the test by zero; Fubini and the one-dimensional FTC give $\\int_\\Omega\\partial_i\\varphi=0$, so every weak derivative of $u$ is zero. Both $u$ and its derivatives are in the required Lp spaces because the ball has finite positive measure. Its $L^{p^*}$ norm is $|\\Omega|^{1/p^*}>0$, its $L^p$ norm is $|\\Omega|^{1/p}>0$, and $\\|Du\\|_p=0$. Both proposed inequalities fail for every finite $C$. Subtracting the mean annihilates this witness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Theorem 3.47, printed pp. 90\u201391; explicit constant-function necessity witness."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-w-one-p-to-lq-bound-fails-for-q-greater-than-p-star-by-dilation",
+        "kind": "counterexample",
+        "title": "The $W^{1,p}\\to L^q$ bound fails for $q>p^{*}$ by dilation",
+        "deps": [
+          "def-sobolev-conjugate-exponent",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-chain-rule-for-total-derivatives",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $n\\ge2$, $1\\le p<n$ and $q>p^{*}=\\frac{np}{n-p}$. The assertion that there is a finite constant $C$ with\n$$\\|u\\|_{L^q(\\mathbb R^n)}\\le C\\|Du\\|_{L^p(\\mathbb R^n)}\\qquad\\text{for every }u\\in C_c^\\infty(\\mathbb R^n)$$\nis false. The stronger full-norm assertion $\\|u\\|_{L^q}\\le C\\|u\\|_{W^{1,p}}$ also fails for this family, so the exponent $p^{*}$ is sharp for both estimates.",
+        "strategy": "For finite q>p*, dilate a fixed nonzero smooth bump to small scales; the L^q-to-gradient ratio has exponent 1+n/q\u2212n/p<0 and diverges. For q=\u221e, dilation preserves the essential supremum while the L^p gradient norm scales as lambda^(n/p\u22121), so the ratio diverges because p<n.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.1, the moral after the dilation computation, printed pp. 61-62."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Exercise 3.24, printed p. 78, for the critical concentration family; the present computation proves the larger-q failure."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-critical-w-one-n-does-not-embed-in-linfinity",
+        "kind": "counterexample",
+        "title": "$W^{1,n}$ is not contained in $L^\\infty$",
+        "deps": [
+          "def-axiom-of-choice",
+          "cex-morrey-endpoint-p-equals-n-fails",
+          "thm-critical-sobolev-embedding-into-every-finite-lq",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "lem-classical-derivatives-are-weak-derivatives"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$ and let $\\varphi\\in C_c^\\infty(\\mathbb R^n)$ satisfy $0\\le\\varphi\\le1$, $\\varphi=1$ on $B(0,\\frac12)$ and $\\operatorname{supp}\\varphi\\subseteq B(0,2)$, and set $f(x)=\\varphi(x)\\log\\log\\bigl(1+\\frac1{|x|}\\bigr)$ for $x\\ne0$, $f(0)=0$. Then $f\\in W^{1,n}(\\mathbb R^n)$ but $f$ is unbounded near the origin; therefore this $W^{1,n}$ class admits no bounded (and no continuous, let alone Holder) representative, and the endpoint $p=n$ has no $L^\\infty$ embedding, while this compactly supported witness belongs to $L^q$ for every finite $q$ (the general bounded-domain finite-$q$ embedding is stated separately).",
+        "strategy": "Let g be the double-log witness on B(0,1), and choose the stated cutoff \u03c6. On B(0,1), \u03c6g is L^n; away from the origin it is smooth with compact support. Split \u03c6g as (\u03c7\u03c6)g+(1\u2212\u03c7)\u03c6g for a smooth \u03c7 supported in B(0,1) and equal to one near 0. The first term has the weak product derivative on B(0,1) and extends by zero because \u03c7\u03c6 is compactly supported there; the second is smooth compactly supported away from 0. The resulting function is W^{1,n} and essentially unbounded, so no bounded representative exists; the finite-q contrast follows from the critical embedding.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, Example 3.30, printed p. 66."
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.2, Remark 3.16(1), printed p. 73."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-morrey-endpoint-p-equals-n-fails",
+        "kind": "counterexample",
+        "title": "Morrey's inequality has no $p=n$ endpoint",
+        "deps": [
+          "thm-morrey-inequality-for-p-greater-than-n",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-local-smooth-approximation-in-wkp",
+          "thm-sobolev-chain-rule-for-c-one-lipschitz-compositions",
+          "thm-holder-inequality-for-integrals",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $n\\ge2$ and let $B=B(0,1)$. There are no constants $\\alpha>0$ and $C$ with\n$$[u]_{C^{0,\\alpha}(B)}\\le C\\|u\\|_{W^{1,n}(B)}\\qquad\\text{for every }u\\in W^{1,n}(B);$$\nthat is, Morrey's inequality has no endpoint at $p=n$. The witness is\n$$f(x)=\\log\\log\\Bigl(1+\\frac1{|x|}\\Bigr)\\quad(x\\in B\\setminus\\{0\\}),\\qquad f(0)=0,$$\nwhich lies in $W^{1,n}(B)$ but has no bounded representative. The hypothesis $p>n$ in Morrey's inequality is therefore essential.",
+        "strategy": "Use the double logarithm on B(0,1). Near r=0, polar coordinates bound the L^n gradient integral by \u222b_0^{1/2} dr/[r(log(1/r))^n], which converges for n\u22652; on 1/2\u2264r<1 the exact radial derivative is bounded. The function is in L^n, and integration by parts on punctured balls identifies the weak gradient because the inner boundary term tends to zero. Its divergence near 0 excludes any bounded representative and hence any Holder representative on B.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.2, Remark 3.16(1), printed p. 73."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 \u00a73.7, Example 3.30 and the limiting-case remark preceding it, printed p. 66."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-holder-representative-of-a-radial-sobolev-function",
+        "kind": "example",
+        "title": "Radial powers approach the Morrey borderline exponent",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-morrey-inequality-for-p-greater-than-n",
+          "def-local-holder-and-c-two-alpha-norms-on-euclidean-balls",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "thm-real-power-continuity-and-derivatives",
+          "cor-newton-leibniz-with-finitely-many-exceptional-points",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "def-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, $n<p<\\infty$, $\\alpha_0=1-\\frac np\\in(0,1)$, and for $0<\\delta<\\frac np$ define $u_\\delta(x)=|x|^{\\alpha_0+\\delta}$ on $B=B(0,1)$, with $u_\\delta(0)=0$. Then $u_\\delta\\in W^{1,p}(B)$ and\n$$\\|Du_\\delta\\|_{L^p(B)}=(\\alpha_0+\\delta)\\Bigl(\\frac{\\sigma(S^{n-1})}{p\\delta}\\Bigr)^{1/p}.$$\nThe function $u_\\delta$ is Holder of exponent $\\alpha_0+\\delta$ on $B$ with $[u_\\delta]_{C^{0,\\alpha_0+\\delta}}=1$, and the local Morrey estimate holds on each $B(0,r)$ with $2r<1$; as $\\delta\\downarrow0$ the energy $\\|Du_\\delta\\|_{L^p(B)}^p$ diverges like $\\alpha_0^p\\sigma(S^{n-1})/(p\\delta)$, and the borderline function $|x|^{\\alpha_0}$ is not in $W^{1,p}(B)$. The exponent $\\alpha_0=1-\\frac np$ is exactly the borderline produced by $p>n$.",
+        "strategy": "For 0<\u03b4<n/p, \u03b1=1\u2212n/p+\u03b4 lies in (0,1). Compute the radial derivative and integrate |Du|^p in polar coordinates to obtain \u03c3(S^{n\u22121})\u03b1^p/(p\u03b4); the elementary H\u00f6lder inequality for r\u21a6r^\u03b1 gives seminorm 1. As \u03b4\u21930 the gradient energy has leading term \u03b1\u2080^p\u03c3(S^{n\u22121})/(p\u03b4), while the limiting borderline power has divergent derivative integral.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.3, Theorem 3.23 and Remarks 3.25, printed pp. 75\u201377; the exact radial energy and seminorm are computed locally here."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.21 and proof, printed pp. 69\u201371, for Morrey; the radial computation is derived here."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-sobolev-embedding-on-an-unbounded-domain-needs-the-full-norm-or-decay",
+        "kind": "counterexample",
+        "title": "Outward dilation defeats subcritical inclusion and homogeneous Poincare on Euclidean space",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-sobolev-conjugate-exponent",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-gagliardo-nirenberg-sobolev-inequality",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-gagliardo-nirenberg-sobolev-inequality-for-p-one",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-real-power-continuity-and-derivatives",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, $1\\le p<n$ and $0<q<p$. The assertions\n\n1. $W^{1,p}(\\mathbb R^n)\\hookrightarrow L^q(\\mathbb R^n)$ continuously, and\n2. the homogeneous Poincare inequality (even restricted to mean-zero functions) $\\|u\\|_{L^p(\\mathbb R^n)}\\le C\\|Du\\|_{L^p(\\mathbb R^n)}$ for compactly supported smooth $u$,\n\nare both false. In fact $W^{1,p}(\\mathbb R^n)$ is not even a subset of $L^q(\\mathbb R^n)$. Although on bounded sets the inclusion $W^{1,p}\\subseteq L^q$ for $q<p$ follows by applying Holder to $|u|^q$ and $1$ with exponents $p/q$ and $p/(p-q)$, on the whole of $\\mathbb R^n$ even the full $W^{1,p}$ norm does not bound $L^q$ for $q<p$; additional quantitative decay or integrability assumptions would be needed. The whole-space inequality at $q=p^{*}$ is unaffected.",
+        "strategy": "Change variables $y=x/k$ in both norms and let $k\\to\\infty$; the exponent $1+\\frac nq-\\frac np>0$ iff $q<p$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 \u00a73.1, Remark 3.4 and the dilation discussion, printed pp. 61-66."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.17, printed p. 66, and Theorem 3.19, printed p. 68, for comparison with the critical and bounded-domain embeddings; the outward-dilation failure is derived here."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

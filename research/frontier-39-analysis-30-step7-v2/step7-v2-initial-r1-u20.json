@@ -1,0 +1,645 @@
+{
+  "run": "frontier-39-analysis-30",
+  "phase": "initial",
+  "round": 1,
+  "unit": "20",
+  "input_sha256": "9338524b8f90ef76ff4d0d3c41b2d942e870edbc6da3d7062fa8aeac770c3e1f",
+  "decisions": [
+    {
+      "id": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "47c3c7c7c51ab23de954b3ddd4d28bdc8fb6492e833cd3aff97be1fdbaab2387",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 wrongly asserted C1 regularity of the differentiated PDE. C2 u makes p and f\u2032(u)p C1, but their derivatives and f\u2033(u) only continuous. The proof differentiates only the C1 product and composes the C1 p with a characteristic, so no higher regularity is needed. Corrected F3; checked mixed partials, transport and ODE interfaces, the reciprocal Riccati formula and interior continuation. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "c7509a79fe99725c985c0204871dd5df01c8c89738e13829a438357e87a3ac3a",
+      "outcome": "confirmed_fatal",
+      "reason": "The cited integration-by-parts theorem is one-dimensional and cannot be restated as a theorem on balls. F4 now derives compact spatial integration by parts on coordinate slices of a box, transfers continuous slice integrals from Riemann to Lebesgue, and applies Fubini, twice for the Laplacian. Checked cutoff errors using finite L1 orbit bound, monotone dissipation and the L2 initial-time limit; defined M in the energy step. The full mass, norm and energy statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "id": "lem-viscous-scalar-laws-contract-spatial-translates-in-lone",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "c9a9000754558e3a0f9f5dda53690fd43b4118104e6215cd9ca200392bd43808",
+      "outcome": "confirmed_fatal",
+      "reason": "The bracket in step 2.1 already equals -w div a; subtracting w eta-prime div a outside it counted that term twice. The outside divergence contribution is now eta div a, yielding exactly (eta-w eta-prime) div a minus the nonnegative viscous dissipation. Derived coordinate integration by parts with Fubini and the Riemann/Lebesgue bridge, and made the distributional time-cutoff passage explicit. Compact divergence bounds kill the delta error, finite L1 bounds kill the spatial cutoff errors, and L1 continuity includes 0 and T. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "a0c993b70b238e559652274bde29f020ccdf7f1d549e4357f87328517af7c278",
+      "outcome": "confirmed_fatal",
+      "reason": "F1 incorrectly used the given essential-range constant in a theorem requiring a bound on the entire interval [-M,M]. The C1 hypothesis already provides the finite interval constant L-star=sup |f-prime| there; coordinate FTC proves its Lipschitz inequality. F1 and exhausting radii now use L-star internally, preserving the original claim and hypotheses. Countable null-set union and monotone exhaustion prove the almost-everywhere estimate; local L1 continuity passes each ball estimate to every time, including endpoints.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "id": "cor-linfinity-maximum-bound-for-scalar-entropy-solutions",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "91c2e86367c50cb88c9f5e332c5e65df59430bd9af731e78b1440fe943561f17",
+      "outcome": "confirmed_fatal",
+      "reason": "F3 falsely attributed signed essential extrema and least-bound attainment to an absolute-value norm definition. F3 now defines the signed infimum and supremum of essential bounds and proves attainment by the deterministic bounds M0+1/j and m0-1/j outside a countable union of null sets. It also proves max(|m0|,|M0|)=the essential norm. Constant solutions and comparison with an explicitly common finite bound give the range; Fubini and local L1 convergence give almost-every-time and every-time slices. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "id": "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "415ae81028ec3da59498e86c76ddc777291d458ed700c71046e31762757bc438",
+      "outcome": "confirmed_fatal",
+      "reason": "F2 asserted an unexported common time modulus for the derivatives, and step 2.1 used it without proof. Removed that assertion and proved instead a modulus CM sqrt(h)+Bh for W-epsilon using its restarted heat formula, spatial Lipschitz bound and Gaussian first moment. Uniform tails and local space-time L1 convergence give time-integrated global L1 convergence and global time continuity of the limit. The primitive norm is bounded by that L1 difference, and equicontinuity upgrades its time-integrated convergence to uniform convergence, licensing the viscosity contact argument. Mollification and localized constant-tail truncations retain both original correspondence classes and the -tf(0) normalization.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "id": "cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "5ff49728f26c50210dab3815ffae6ad5110bedd52614a96e894bda6b5f7b9e07",
+      "outcome": "confirmed_fatal",
+      "reason": "The original proof verified failure of the single shock but did not prove its additional composite-entropy-wave claim. Added the explicit shock at 3t/4 followed by -sqrt(x/(3t)) up to 3t. Checked its Rankine-Hugoniot coefficient, classical fan equation, continuous right attachment and 6t trace bound. The shock chord residual (z-1)(z+1/2)^2 is nonpositive; smooth convex inequalities and uniform approximation of Kruzhkov pairs prove entropy admissibility, and bounded-class uniqueness applies. The arc and tangent chord form the least concave majorant by derivative monotonicity and concavity of every competing majorant. Statement unchanged; no circular dependency on the later composite example.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "ex-burgers-shock-riemann-solution",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "6aefe9f9ed9b4d8a94c1e2c66eab0b0d19202b5a09630ae4cb4c9d3a94d7a41b",
+      "outcome": "confirmed_fatal",
+      "reason": "F2 omitted the weak-solution premise of Rankine-Hugoniot and step 1.1 invoked it before weak solvability was established. F2 now states that premise, and step 1.1 first applies the existing strictly convex Riemann solver, whose exact hypotheses hold for the C2 quadratic flux and descending states. That theorem supplies the weak entropy shock and its chord speed; cancellation of the nonzero jump gives (uL+uR)/2. The later Lax/chord checks are now licensed, and the local trace error remains amplitude times |s|t, including a stationary shock. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+      "disposition": "repaired",
+      "post_sha256": "2af4297a430f381367fa48d58a1ccf5e20b826af73433afa2bb4b7f8e57dadf3",
+      "review_context_sha256": "8f47fbb70b479f8503e418adc6ce78b8efab19d4f04030b829765c9dd074397d",
+      "reason": "F3 wrongly asserted C1 regularity of the differentiated PDE. C2 u makes p and f\u2032(u)p C1, but their derivatives and f\u2033(u) only continuous. The proof differentiates only the C1 product and composes the C1 p with a characteristic, so no higher regularity is needed. Corrected F3; checked mixed partials, transport and ODE interfaces, the reciprocal Riccati formula and interior continuation. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+      "disposition": "repaired",
+      "post_sha256": "c663391365fb70849ddc0b8790a99827bb5777180653ce888b7799f8fbfc12fa",
+      "review_context_sha256": "afd5552c42fff2f09f1137b7a1f3fef127e063dc30c46fd4db92a75e9f89b0ac",
+      "reason": "The cited integration-by-parts theorem is one-dimensional and cannot be restated as a theorem on balls. F4 now derives compact spatial integration by parts on coordinate slices of a box, transfers continuous slice integrals from Riemann to Lebesgue, and applies Fubini, twice for the Laplacian. Checked cutoff errors using finite L1 orbit bound, monotone dissipation and the L2 initial-time limit; defined M in the energy step. The full mass, norm and energy statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-viscous-scalar-laws-contract-spatial-translates-in-lone",
+      "disposition": "repaired",
+      "post_sha256": "3a0822c483b9dcfc57524ffefb402d3a81d91e71b68d6e980ad987640ee5ffdc",
+      "review_context_sha256": "c0660e14cf310c2ac118df2f7de8e40b6780bbaecc0118c055b7af4cd650f479",
+      "reason": "The bracket in step 2.1 already equals -w div a; subtracting w eta-prime div a outside it counted that term twice. The outside divergence contribution is now eta div a, yielding exactly (eta-w eta-prime) div a minus the nonnegative viscous dissipation. Derived coordinate integration by parts with Fubini and the Riemann/Lebesgue bridge, and made the distributional time-cutoff passage explicit. Compact divergence bounds kill the delta error, finite L1 bounds kill the spatial cutoff errors, and L1 continuity includes 0 and T. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+      "disposition": "repaired",
+      "post_sha256": "d61b5f5d05fda4dc903781993a88089e448adaefb7c35793b53bb2855b69c3a3",
+      "review_context_sha256": "1a3724ca4893518087c1365101bbfa7bfee7d5cb6aefa603010a8dd19516f9e2",
+      "reason": "F1 incorrectly used the given essential-range constant in a theorem requiring a bound on the entire interval [-M,M]. The C1 hypothesis already provides the finite interval constant L-star=sup |f-prime| there; coordinate FTC proves its Lipschitz inequality. F1 and exhausting radii now use L-star internally, preserving the original claim and hypotheses. Countable null-set union and monotone exhaustion prove the almost-everywhere estimate; local L1 continuity passes each ball estimate to every time, including endpoints.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-linfinity-maximum-bound-for-scalar-entropy-solutions",
+      "disposition": "repaired",
+      "post_sha256": "a852c278fce344474b8f3587fe40cc9d1d754e75954a8ad67e85120a564505d8",
+      "review_context_sha256": "fd8d746857bced17c39a4a1a6cdc88f137f33f1d8445a7d6c1c64b28f0c95d95",
+      "reason": "F3 falsely attributed signed essential extrema and least-bound attainment to an absolute-value norm definition. F3 now defines the signed infimum and supremum of essential bounds and proves attainment by the deterministic bounds M0+1/j and m0-1/j outside a countable union of null sets. It also proves max(|m0|,|M0|)=the essential norm. Constant solutions and comparison with an explicitly common finite bound give the range; Fubini and local L1 convergence give almost-every-time and every-time slices. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+      "disposition": "repaired",
+      "post_sha256": "db4be62866aea5bafa75f9d75c2f988daf45fe66252f2ea8bf31b5f0f28c664e",
+      "review_context_sha256": "b9624f3c9effec613d2aa441256e0e68ebc6d0b523071b98311a2de6f151f7a6",
+      "reason": "F2 asserted an unexported common time modulus for the derivatives, and step 2.1 used it without proof. Removed that assertion and proved instead a modulus CM sqrt(h)+Bh for W-epsilon using its restarted heat formula, spatial Lipschitz bound and Gaussian first moment. Uniform tails and local space-time L1 convergence give time-integrated global L1 convergence and global time continuity of the limit. The primitive norm is bounded by that L1 difference, and equicontinuity upgrades its time-integrated convergence to uniform convergence, licensing the viscosity contact argument. Mollification and localized constant-tail truncations retain both original correspondence classes and the -tf(0) normalization.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux",
+      "disposition": "repaired",
+      "post_sha256": "997a3d5fed17808c8ec56d2de27395eb749a83d05a4e886c23c54b5ea92ae152",
+      "review_context_sha256": "07ce7a3ebe14d6c83ff7cc380952a18c14a977a25d41f55efd39d74ee8bb8fe1",
+      "reason": "The original proof verified failure of the single shock but did not prove its additional composite-entropy-wave claim. Added the explicit shock at 3t/4 followed by -sqrt(x/(3t)) up to 3t. Checked its Rankine-Hugoniot coefficient, classical fan equation, continuous right attachment and 6t trace bound. The shock chord residual (z-1)(z+1/2)^2 is nonpositive; smooth convex inequalities and uniform approximation of Kruzhkov pairs prove entropy admissibility, and bounded-class uniqueness applies. The arc and tangent chord form the least concave majorant by derivative monotonicity and concavity of every competing majorant. Statement unchanged; no circular dependency on the later composite example.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-burgers-shock-riemann-solution",
+      "disposition": "repaired",
+      "post_sha256": "954530256ffeaecc71bf1243b3aa980a848caaf92516ecfaaeb5380c75bf45ed",
+      "review_context_sha256": "648f4174a268306db45a884cdcafc46084ac23144741e1e20bd5e350c5a11b24",
+      "reason": "F2 omitted the weak-solution premise of Rankine-Hugoniot and step 1.1 invoked it before weak solvability was established. F2 now states that premise, and step 1.1 first applies the existing strictly convex Riemann solver, whose exact hypotheses hold for the C2 quadratic flux and descending states. That theorem supplies the weak entropy shock and its chord speed; cancellation of the nonzero jump gives (uL+uR)/2. The later Lax/chord checks are now licensed, and the local trace error remains amplitude times |s|t, including a stationary shock. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger_path": "research/defect-ledger.jsonl",
+      "proposal": {
+        "defect_id": "f39-step7-initial-r1-u20-prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+        "run": "frontier-39-analysis-30",
+        "at": "2026-10-06T03:15:10.252837+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+        "caught_at_stage": "7-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "20",
+        "source": "gpt-6.1-sol:47c3c7c7c51ab23de954b3ddd4d28bdc8fb6492e833cd3aff97be1fdbaab2387",
+        "repair_confidence": 1,
+        "evidence": [
+          {
+            "path": "items/prop-characteristics-for-a-one-dimensional-scalar-conservation-law.md",
+            "note": "F3 wrongly asserted C1 regularity of the differentiated PDE. C2 u makes p and f\u2032(u)p C1, but their derivatives and f\u2033(u) only continuous. The proof differentiates only the C1 product and composes the C1 p with a characteristic, so no higher regularity is needed. Corrected F3; checked mixed partials, transport and ODE interfaces, the reciprocal Riccati formula and interior continuation. Statement unchanged."
+          }
+        ],
+        "adjudication_ref": [
+          "research/frontier-39-analysis-30-step7-v2/step7-v2-initial-r1-u20.json"
+        ],
+        "round_phase": "initial",
+        "round": 1,
+        "unit": "20"
+      },
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger_path": "research/defect-ledger.jsonl",
+      "proposal": {
+        "defect_id": "f39-step7-initial-r1-u20-lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+        "run": "frontier-39-analysis-30",
+        "at": "2026-10-06T03:15:10.252837+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+        "caught_at_stage": "7-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "20",
+        "source": "gpt-6.1-sol:c7509a79fe99725c985c0204871dd5df01c8c89738e13829a438357e87a3ac3a",
+        "repair_confidence": 1,
+        "evidence": [
+          {
+            "path": "items/lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds.md",
+            "note": "The cited integration-by-parts theorem is one-dimensional and cannot be restated as a theorem on balls. F4 now derives compact spatial integration by parts on coordinate slices of a box, transfers continuous slice integrals from Riemann to Lebesgue, and applies Fubini, twice for the Laplacian. Checked cutoff errors using finite L1 orbit bound, monotone dissipation and the L2 initial-time limit; defined M in the energy step. The full mass, norm and energy statement is unchanged."
+          }
+        ],
+        "adjudication_ref": [
+          "research/frontier-39-analysis-30-step7-v2/step7-v2-initial-r1-u20.json"
+        ],
+        "round_phase": "initial",
+        "round": 1,
+        "unit": "20"
+      },
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger_path": "research/defect-ledger.jsonl",
+      "proposal": {
+        "defect_id": "f39-step7-initial-r1-u20-lem-viscous-scalar-laws-contract-spatial-translates-in-lone",
+        "run": "frontier-39-analysis-30",
+        "at": "2026-10-06T03:15:10.252837+00:00",
+        "class": "accuracy",
+        "subclass": "invalid-inference",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "lem-viscous-scalar-laws-contract-spatial-translates-in-lone",
+        "caught_at_stage": "7-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "20",
+        "source": "gpt-6.1-sol:c9a9000754558e3a0f9f5dda53690fd43b4118104e6215cd9ca200392bd43808",
+        "repair_confidence": 1,
+        "evidence": [
+          {
+            "path": "items/lem-viscous-scalar-laws-contract-spatial-translates-in-lone.md",
+            "note": "The bracket in step 2.1 already equals -w div a; subtracting w eta-prime div a outside it counted that term twice. The outside divergence contribution is now eta div a, yielding exactly (eta-w eta-prime) div a minus the nonnegative viscous dissipation. Derived coordinate integration by parts with Fubini and the Riemann/Lebesgue bridge, and made the distributional time-cutoff passage explicit. Compact divergence bounds kill the delta error, finite L1 bounds kill the spatial cutoff errors, and L1 continuity includes 0 and T. Statement unchanged."
+          }
+        ],
+        "adjudication_ref": [
+          "research/frontier-39-analysis-30-step7-v2/step7-v2-initial-r1-u20.json"
+        ],
+        "round_phase": "initial",
+        "round": 1,
+        "unit": "20"
+      },
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger_path": "research/defect-ledger.jsonl",
+      "proposal": {
+        "defect_id": "f39-step7-initial-r1-u20-cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+        "run": "frontier-39-analysis-30",
+        "at": "2026-10-06T03:15:10.252837+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+        "caught_at_stage": "7-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "20",
+        "source": "gpt-6.1-sol:a0c993b70b238e559652274bde29f020ccdf7f1d549e4357f87328517af7c278",
+        "repair_confidence": 1,
+        "evidence": [
+          {
+            "path": "items/cor-global-lone-contraction-from-the-local-kruzhkov-estimate.md",
+            "note": "F1 incorrectly used the given essential-range constant in a theorem requiring a bound on the entire interval [-M,M]. The C1 hypothesis already provides the finite interval constant L-star=sup |f-prime| there; coordinate FTC proves its Lipschitz inequality. F1 and exhausting radii now use L-star internally, preserving the original claim and hypotheses. Countable null-set union and monotone exhaustion prove the almost-everywhere estimate; local L1 continuity passes each ball estimate to every time, including endpoints."
+          }
+        ],
+        "adjudication_ref": [
+          "research/frontier-39-analysis-30-step7-v2/step7-v2-initial-r1-u20.json"
+        ],
+        "round_phase": "initial",
+        "round": 1,
+        "unit": "20"
+      },
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger_path": "research/defect-ledger.jsonl",
+      "proposal": {
+        "defect_id": "f39-step7-initial-r1-u20-cor-linfinity-maximum-bound-for-scalar-entropy-solutions",
+        "run": "frontier-39-analysis-30",
+        "at": "2026-10-06T03:15:10.252837+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "cor-linfinity-maximum-bound-for-scalar-entropy-solutions",
+        "caught_at_stage": "7-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "20",
+        "source": "gpt-6.1-sol:91c2e86367c50cb88c9f5e332c5e65df59430bd9af731e78b1440fe943561f17",
+        "repair_confidence": 1,
+        "evidence": [
+          {
+            "path": "items/cor-linfinity-maximum-bound-for-scalar-entropy-solutions.md",
+            "note": "F3 falsely attributed signed essential extrema and least-bound attainment to an absolute-value norm definition. F3 now defines the signed infimum and supremum of essential bounds and proves attainment by the deterministic bounds M0+1/j and m0-1/j outside a countable union of null sets. It also proves max(|m0|,|M0|)=the essential norm. Constant solutions and comparison with an explicitly common finite bound give the range; Fubini and local L1 convergence give almost-every-time and every-time slices. Statement unchanged."
+          }
+        ],
+        "adjudication_ref": [
+          "research/frontier-39-analysis-30-step7-v2/step7-v2-initial-r1-u20.json"
+        ],
+        "round_phase": "initial",
+        "round": 1,
+        "unit": "20"
+      },
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger_path": "research/defect-ledger.jsonl",
+      "proposal": {
+        "defect_id": "f39-step7-initial-r1-u20-thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+        "run": "frontier-39-analysis-30",
+        "at": "2026-10-06T03:15:10.252837+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+        "caught_at_stage": "7-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "20",
+        "source": "gpt-6.1-sol:415ae81028ec3da59498e86c76ddc777291d458ed700c71046e31762757bc438",
+        "repair_confidence": 1,
+        "evidence": [
+          {
+            "path": "items/thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension.md",
+            "note": "F2 asserted an unexported common time modulus for the derivatives, and step 2.1 used it without proof. Removed that assertion and proved instead a modulus CM sqrt(h)+Bh for W-epsilon using its restarted heat formula, spatial Lipschitz bound and Gaussian first moment. Uniform tails and local space-time L1 convergence give time-integrated global L1 convergence and global time continuity of the limit. The primitive norm is bounded by that L1 difference, and equicontinuity upgrades its time-integrated convergence to uniform convergence, licensing the viscosity contact argument. Mollification and localized constant-tail truncations retain both original correspondence classes and the -tf(0) normalization."
+          }
+        ],
+        "adjudication_ref": [
+          "research/frontier-39-analysis-30-step7-v2/step7-v2-initial-r1-u20.json"
+        ],
+        "round_phase": "initial",
+        "round": 1,
+        "unit": "20"
+      },
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger_path": "research/defect-ledger.jsonl",
+      "proposal": {
+        "defect_id": "f39-step7-initial-r1-u20-cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux",
+        "run": "frontier-39-analysis-30",
+        "at": "2026-10-06T03:15:10.252837+00:00",
+        "class": "accuracy",
+        "subclass": "invalid-inference",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux",
+        "caught_at_stage": "7-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "20",
+        "source": "gpt-6.1-sol:5ff49728f26c50210dab3815ffae6ad5110bedd52614a96e894bda6b5f7b9e07",
+        "repair_confidence": 1,
+        "evidence": [
+          {
+            "path": "items/cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux.md",
+            "note": "The original proof verified failure of the single shock but did not prove its additional composite-entropy-wave claim. Added the explicit shock at 3t/4 followed by -sqrt(x/(3t)) up to 3t. Checked its Rankine-Hugoniot coefficient, classical fan equation, continuous right attachment and 6t trace bound. The shock chord residual (z-1)(z+1/2)^2 is nonpositive; smooth convex inequalities and uniform approximation of Kruzhkov pairs prove entropy admissibility, and bounded-class uniqueness applies. The arc and tangent chord form the least concave majorant by derivative monotonicity and concavity of every competing majorant. Statement unchanged; no circular dependency on the later composite example."
+          }
+        ],
+        "adjudication_ref": [
+          "research/frontier-39-analysis-30-step7-v2/step7-v2-initial-r1-u20.json"
+        ],
+        "round_phase": "initial",
+        "round": 1,
+        "unit": "20"
+      },
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger_path": "research/defect-ledger.jsonl",
+      "proposal": {
+        "defect_id": "f39-step7-initial-r1-u20-ex-burgers-shock-riemann-solution",
+        "run": "frontier-39-analysis-30",
+        "at": "2026-10-06T03:15:10.252837+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "ex-burgers-shock-riemann-solution",
+        "caught_at_stage": "7-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "20",
+        "source": "gpt-6.1-sol:6aefe9f9ed9b4d8a94c1e2c66eab0b0d19202b5a09630ae4cb4c9d3a94d7a41b",
+        "repair_confidence": 1,
+        "evidence": [
+          {
+            "path": "items/ex-burgers-shock-riemann-solution.md",
+            "note": "F2 omitted the weak-solution premise of Rankine-Hugoniot and step 1.1 invoked it before weak solvability was established. F2 now states that premise, and step 1.1 first applies the existing strictly convex Riemann solver, whose exact hypotheses hold for the C2 quadratic flux and descending states. That theorem supplies the weak entropy shock and its chord speed; cancellation of the nonzero jump gives (uL+uR)/2. The later Lax/chord checks are now licensed, and the local trace error remains amplitude times |s|t, including a stationary shock. Statement unchanged."
+          }
+        ],
+        "adjudication_ref": [
+          "research/frontier-39-analysis-30-step7-v2/step7-v2-initial-r1-u20.json"
+        ],
+        "round_phase": "initial",
+        "round": 1,
+        "unit": "20"
+      },
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger_path": "research/defect-ledger.jsonl",
+      "route": "frontier-owner",
+      "subject": "cor-finite-propagation-for-scalar-conservation-laws",
+      "status": "draft",
+      "disposition": "owner-review-required",
+      "finding": "The Statement assumes an L-Lipschitz bound only on the common essential range, but Given replaces that premise by an interval bound on [-M,M] before F1 applies the local contraction theorem. This is the same dependency-interface mismatch found in the assigned global-contraction corollary. The finite-propagation item is outside this unit; it has not been edited or adjudicated here. The HJ proof only needs a finite interval derivative speed, which C1 supplies, so this finer-speed mismatch does not invalidate its assigned use.",
+      "affected_use": "items/cor-finite-propagation-for-scalar-conservation-laws.md, Given and F1 -> Proof 1.1: the interval inequality needed by thm-kruzhkov-local-l1-contraction is asserted without following from the Statement premise.",
+      "invalidated_claim": "The existing proof does not justify its application of local contraction with the specific essential-range constant L. This observation does not assert that the finite-propagation conclusion itself is false.",
+      "minimality": "Have its frontier owner justify the original speed L from the pairwise entropy-flux estimate on actual values, or otherwise close the exact premise mismatch without weakening the stated conclusion. No propagation or consumer editing is authorized by this unchanged-interface finding.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+      "claim": "Characteristic constancy and Riccati evolution, with conditional blow-up.",
+      "dependencies_checked": [
+        "def-ck-and-multi-index-notation-in-several-variables",
+        "thm-clairaut-schwarz-mixed-partials",
+        "lem-transport-equation-along-a-characteristic",
+        "thm-picard-lindelof-local-existence-and-uniqueness",
+        "thm-existence-and-uniqueness-of-a-maximal-ode-solution"
+      ],
+      "validation": "Final focused checks passed: precheck 8/8 (exit 0), rendercheck 8/8 (exit 0), strict proof-contract 8/8 with zero errors or warnings (exit 0), scoped depcheck (exit 0), manifest-deps 44 items with zero errors (exit 0), and one final proof-layout batch: 8 items, 39 steps, zero defects (exit 0). Stored review item/context hashes remain current in the final read-only comparison.",
+      "next_action": "Controller collection and independent rejudgment; no assigned mathematical obligations remain.",
+      "unresolved_obligations": [],
+      "interface": "The original Statement was read and preserved during the edits; its exact section digest equals the frozen initial-1.json before_statements entry. No Definition exists in this item. No direct-consumer propagation is triggered."
+    },
+    {
+      "id": "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+      "claim": "Uniform range and L1 bounds, signed mass conservation and integrated energy equality in every dimension.",
+      "dependencies_checked": [
+        "thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution",
+        "prop-viscous-entropy-dissipation-identity",
+        "thm-integration-by-parts-with-interior-derivatives",
+        "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+      ],
+      "validation": "Final focused checks passed: precheck 8/8 (exit 0), rendercheck 8/8 (exit 0), strict proof-contract 8/8 with zero errors or warnings (exit 0), scoped depcheck (exit 0), manifest-deps 44 items with zero errors (exit 0), and one final proof-layout batch: 8 items, 39 steps, zero defects (exit 0). Stored review item/context hashes remain current in the final read-only comparison.",
+      "metadata": "Added the bridge and Fubini dependencies to the assigned item and owning manifest and contract under the shared lock.",
+      "next_action": "Controller collection and independent rejudgment; no assigned mathematical obligations remain.",
+      "unresolved_obligations": [],
+      "interface": "The original Statement was read and preserved during the edits; its exact section digest equals the frozen initial-1.json before_statements entry. No Definition exists in this item. No direct-consumer propagation is triggered."
+    },
+    {
+      "id": "lem-viscous-scalar-laws-contract-spatial-translates-in-lone",
+      "claim": "Every-time global L1 contraction of viscous spatial translates, uniform over common range derivative bounds.",
+      "dependencies_checked": [
+        "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+        "thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution",
+        "thm-integration-by-parts-with-interior-derivatives",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+        "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+      ],
+      "validation": "Final focused checks passed: precheck 8/8 (exit 0), rendercheck 8/8 (exit 0), strict proof-contract 8/8 with zero errors or warnings (exit 0), scoped depcheck (exit 0), manifest-deps 44 items with zero errors (exit 0), and one final proof-layout batch: 8 items, 39 steps, zero defects (exit 0). Stored review item/context hashes remain current in the final read-only comparison.",
+      "operational_note": "One initial metadata edit proceeded after lock acquisition reported busy; latest shared files were reread and the assigned entries synchronized under a successfully acquired lock. No other item entry was intentionally altered.",
+      "next_action": "Controller collection and independent rejudgment; no assigned mathematical obligations remain.",
+      "unresolved_obligations": [],
+      "interface": "The original Statement was read and preserved during the edits; its exact section digest equals the frozen initial-1.json before_statements entry. No Definition exists in this item. No direct-consumer propagation is triggered."
+    },
+    {
+      "id": "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+      "claim": "Global L1 contraction at almost every time, and every time for locally continuous representatives.",
+      "dependencies_checked": [
+        "thm-kruzhkov-local-l1-contraction",
+        "thm-ftc-second-part",
+        "thm-monotone-convergence-for-the-integral",
+        "def-kruzhkov-entropy-solution"
+      ],
+      "validation": "Final focused checks passed: precheck 8/8 (exit 0), rendercheck 8/8 (exit 0), strict proof-contract 8/8 with zero errors or warnings (exit 0), scoped depcheck (exit 0), manifest-deps 44 items with zero errors (exit 0), and one final proof-layout batch: 8 items, 39 steps, zero defects (exit 0). Stored review item/context hashes remain current in the final read-only comparison.",
+      "next_action": "Controller collection and independent rejudgment; no assigned mathematical obligations remain.",
+      "unresolved_obligations": [],
+      "interface": "The original Statement was read and preserved during the edits; its exact section digest equals the frozen initial-1.json before_statements entry. No Definition exists in this item. No direct-consumer propagation is triggered."
+    },
+    {
+      "id": "cor-linfinity-maximum-bound-for-scalar-entropy-solutions",
+      "claim": "Preservation of the signed essential initial range and the maximum norm.",
+      "dependencies_checked": [
+        "def-essential-supremum-with-respect-to-a-measure",
+        "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+        "def-kruzhkov-entropy-solution",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+      ],
+      "validation": "Final focused checks passed: precheck 8/8 (exit 0), rendercheck 8/8 (exit 0), strict proof-contract 8/8 with zero errors or warnings (exit 0), scoped depcheck (exit 0), manifest-deps 44 items with zero errors (exit 0), and one final proof-layout batch: 8 items, 39 steps, zero defects (exit 0). Stored review item/context hashes remain current in the final read-only comparison.",
+      "next_action": "Controller collection and independent rejudgment; no assigned mathematical obligations remain.",
+      "unresolved_obligations": [],
+      "interface": "The original Statement was read and preserved during the edits; its exact section digest equals the frozen initial-1.json before_statements entry. No Definition exists in this item. No direct-consumer propagation is triggered."
+    },
+    {
+      "id": "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+      "claim": "Both bounded Lipschitz potential differentiation and compact-data normalized entropy primitives give the HJ/entropy correspondence.",
+      "dependencies_checked": [
+        "thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation",
+        "lem-hopf-lax-infima-localise",
+        "lem-vanishing-viscosity-families-are-locally-precompact-in-lone",
+        "thm-existence-of-bounded-kruzhkov-entropy-solutions",
+        "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+        "lem-heat-kernel-normalisation-scaling-and-derivatives",
+        "def-heat-evolution-of-initial-data",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+        "thm-first-fundamental-theorem-of-calculus-for-l-one",
+        "thm-l-one-approximate-identities-converge-in-l-p"
+      ],
+      "validation": "Final focused checks passed: precheck 8/8 (exit 0), rendercheck 8/8 (exit 0), strict proof-contract 8/8 with zero errors or warnings (exit 0), scoped depcheck (exit 0), manifest-deps 44 items with zero errors (exit 0), and one final proof-layout batch: 8 items, 39 steps, zero defects (exit 0). Stored review item/context hashes remain current in the final read-only comparison.",
+      "next_action": "Controller collection and independent rejudgment; no assigned mathematical obligations remain.",
+      "unresolved_obligations": [],
+      "interface": "The original Statement was read and preserved during the edits; its exact section digest equals the frozen initial-1.json before_statements entry. No Definition exists in this item. No direct-consumer propagation is triggered."
+    },
+    {
+      "id": "cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux",
+      "claim": "The cubic single shock is weak but non-entropic; the concave-hull composite is the corresponding entropy wave.",
+      "dependencies_checked": [
+        "thm-rankine-hugoniot-jump-condition",
+        "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+        "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions",
+        "def-kruzhkov-entropy-solution",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+        "thm-ftc-second-part"
+      ],
+      "validation": "Final focused checks passed: precheck 8/8 (exit 0), rendercheck 8/8 (exit 0), strict proof-contract 8/8 with zero errors or warnings (exit 0), scoped depcheck (exit 0), manifest-deps 44 items with zero errors (exit 0), and one final proof-layout batch: 8 items, 39 steps, zero defects (exit 0). Stored review item/context hashes remain current in the final read-only comparison.",
+      "next_action": "Controller collection and independent rejudgment; no assigned mathematical obligations remain.",
+      "unresolved_obligations": [],
+      "interface": "The original Statement was read and preserved during the edits; its exact section digest equals the frozen initial-1.json before_statements entry. No Definition exists in this item. No direct-consumer propagation is triggered."
+    },
+    {
+      "id": "ex-burgers-shock-riemann-solution",
+      "claim": "The descending Burgers Riemann shock with speed (uL+uR)/2 is the unique entropy solution.",
+      "dependencies_checked": [
+        "thm-riemann-solver-for-strictly-convex-scalar-flux",
+        "thm-rankine-hugoniot-jump-condition",
+        "cor-lax-shock-inequalities-for-convex-scalar-laws",
+        "lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality",
+        "def-kruzhkov-entropy-solution"
+      ],
+      "validation": "Final focused checks passed: precheck 8/8 (exit 0), rendercheck 8/8 (exit 0), strict proof-contract 8/8 with zero errors or warnings (exit 0), scoped depcheck (exit 0), manifest-deps 44 items with zero errors (exit 0), and one final proof-layout batch: 8 items, 39 steps, zero defects (exit 0). Stored review item/context hashes remain current in the final read-only comparison.",
+      "next_action": "Controller collection and independent rejudgment; no assigned mathematical obligations remain.",
+      "unresolved_obligations": [],
+      "interface": "The original Statement was read and preserved during the edits; its exact section digest equals the frozen initial-1.json before_statements entry. No Definition exists in this item. No direct-consumer propagation is triggered."
+    },
+    {
+      "scope": "published-maintenance",
+      "finding": "No potentially defective published consumer was identified in these unchanged supplier-interface repairs; no published-ledger append is proposed."
+    }
+  ],
+  "validation": {
+    "precheck": {
+      "exit_code": 0,
+      "items": 8,
+      "failing": 0
+    },
+    "rendercheck": {
+      "exit_code": 0,
+      "files": 8
+    },
+    "proof_contract": {
+      "exit_code": 0,
+      "checked": 8,
+      "errors": 0,
+      "warnings": 0
+    },
+    "depcheck": {
+      "exit_code": 0,
+      "selected_items": 8
+    },
+    "manifest_deps": {
+      "exit_code": 0,
+      "items": 44,
+      "errors": 0
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/prop-characteristics-for-a-one-dimensional-scalar-conservation-law.md items/lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds.md items/lem-viscous-scalar-laws-contract-spatial-translates-in-lone.md items/cor-global-lone-contraction-from-the-local-kruzhkov-estimate.md items/cor-linfinity-maximum-bound-for-scalar-entropy-solutions.md items/thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension.md items/cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux.md items/ex-burgers-shock-riemann-solution.md",
+      "exit_code": 0,
+      "items": 8,
+      "steps": 39,
+      "defects": 0
+    },
+    "statements_unchanged": [
+      "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+      "lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds",
+      "lem-viscous-scalar-laws-contract-spatial-translates-in-lone",
+      "cor-global-lone-contraction-from-the-local-kruzhkov-estimate",
+      "cor-linfinity-maximum-bound-for-scalar-entropy-solutions",
+      "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+      "cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux",
+      "ex-burgers-shock-riemann-solution"
+    ],
+    "independent_review_of_repairs": false
+  }
+}

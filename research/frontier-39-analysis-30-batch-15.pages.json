@@ -1,0 +1,1401 @@
+[
+  {
+    "order": 458.039,
+    "id": "the-direct-method-and-euler-lagrange-equations",
+    "kind": "A",
+    "category": "pde",
+    "title": "The Direct Method and Euler Lagrange Equations",
+    "companion": "the-direct-method-and-euler-lagrange-equations-examples",
+    "requires": [
+      "schauder-and-lp-elliptic-estimates",
+      "interior-and-boundary-sobolev-elliptic-regularity",
+      "monadicity-and-becks-theorem",
+      "banach-space-differential-calculus-and-banach-manifolds"
+    ],
+    "items": [
+      {
+        "id": "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+        "kind": "definition",
+        "title": "Proper, coercive and weakly lower semicontinuous extended-real functionals",
+        "statement": "**Setting.** Let $X$ be a real normed space (in particular, a Banach space as in [[def-banach-space]]) and let $A\\subseteq X$ be a nonempty subset, the **admissible set**. An **extended-real functional on $A$** is a map $I:A\\to(-\\infty,+\\infty]$; its **effective domain** is $\\operatorname{dom}I=\\{u\\in A: I(u)<+\\infty\\}$.\n**Properness.** $I$ is **proper** if $\\operatorname{dom}I\\ne\\varnothing$, equivalently if $\\inf_A I<+\\infty$; a point of $\\operatorname{dom}I$ is a **finite competitor**.\n**Coercivity.** $I$ is **coercive on $A$** if for every $M\\in\\mathbb R$ there is $R\\ge0$ such that $I(u)>M$ whenever $u\\in A$ and $\\|u\\|\\ge R$; equivalently (the form used below) every sublevel set $\\{u\\in A:I(u)\\le\\Lambda\\}$, $\\Lambda\\in\\mathbb R$, is bounded.\n**Weak lower semicontinuity.** $I$ is **weakly sequentially lower semicontinuous at $u\\in A$** if $I(u)\\le\\liminf_j I(u_j)$ for every sequence $(u_j)_{j\\in\\mathbb N}\\subseteq A$ with $u_j\\rightharpoonup u$ ([[def-weak-convergence-of-nets-and-sequences]]), and **weakly sequentially lower semicontinuous on $A$** if this holds at every $u\\in A$. Analogously $I$ is **sequentially lower semicontinuous** on $A$ if $I(u)\\le\\liminf_j I(u_j)$ whenever $u_j\\to u$ in norm; all infima and limits inferior are taken in $\\overline{\\mathbb R}=[-\\infty,+\\infty]$, using the complete extended order of [[lem-extended-reals-complete]]. For an extended-real sequence $(a_j)$, set $\\liminf_j a_j:=\\sup_N\\inf_{j\\ge N}a_j$; this extends the tail formula of [[def-limsup-liminf]] to sequences that may contain $+\\infty$ ([[def-extended-reals]]). In particular, the infimum or limit inferior may equal $-\\infty$.\n**Convention.** Only the values on $A$ enter these notions, and $I$ is identified with its restriction to $A$; a point of $X\\setminus A$ is inadmissible, not a point where $I$ equals $+\\infty$.",
+        "deps": [
+          "def-banach-space",
+          "def-weak-topology-on-a-normed-space",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-extended-reals",
+          "def-limsup-liminf",
+          "def-infimum",
+          "lem-extended-reals-complete"
+        ],
+        "strategy": "Fix the three notions and record the two equivalent formulations of coercivity used later: the sublevel-set form is the one consumed by [[lem-coercivity-makes-every-finite-level-minimising-sequence-bounded]], the divergence form is the one stated in the sources ([MA] Chapter 2 Section 1, Definition 2.3; [G] Section 4.1, Definition 4.1; [T] Section 13.2). The equivalence of the two forms is a direct unwinding of the definitions of supremum and boundedness, which is carried out in the item body. No convexity or continuity is assumed here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, printed pp. 296-298 (variational principle and weak forcing)"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 1, printed pp. 31-33 (Theorem 2.2, Definition 2.3, Theorem 2.4)"
+            },
+            {
+              "title": "Viktor Grigoryan, Math 246B Partial Differential Equations, UCSB 2011 (complete 31-page course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Section 4.1, printed pp. 26-27 (Definitions 4.1 and 4.4)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+        "kind": "definition",
+        "title": "Convex and strictly convex functionals on a convex subset of a real vector space",
+        "statement": "Let $X$ be a real vector space and $K\\subseteq X$. The set $K$ is **convex** if $\\lambda u+(1-\\lambda)v\\in K$ for all $u,v\\in K$ and $\\lambda\\in[0,1]$. Fix a nonempty convex $K$ and an extended-real functional $I:K\\to(-\\infty,+\\infty]$ ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]), with the sums and positive-weight products of [[def-extended-reals]]. For convex combinations only, additionally define $0\\cdot(+\\infty)=0$; this is a local convention, since that product is left undefined in the general extended-real arithmetic. Then $I$ is **convex** if\n$$I\\big(\\lambda u+(1-\\lambda)v\\big)\\le\\lambda I(u)+(1-\\lambda)I(v),\\qquad u,v\\in K,\\ \\lambda\\in[0,1],$$\nand **strictly convex** if the inequality is strict whenever $u\\ne v$, $I(u),I(v)<+\\infty$ and $\\lambda\\in(0,1)$. A convex functional has convex sublevel sets: for every $t\\in\\mathbb R$ the set $\\{u\\in K:I(u)\\le t\\}$ is convex. Only real coefficients are used: on a complex vector space these notions are read on the underlying real structure.",
+        "deps": [
+          "def-extended-reals",
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional"
+        ],
+        "strategy": "The definition is the real-linear specialisation of the Euclidean notion of [[def-convex-and-strictly-convex-functions-on-euclidean-sets]] to a convex subset of a real vector space, with the extended-value conventions of [[def-extended-reals]] kept explicit because minimisation theorems are stated for extended-real functionals ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]). Convexity of sublevel sets is the one-line computation $I(\\lambda u+(1-\\lambda)v)\\le\\max\\{I(u),I(v)\\}\\le t$ for $u,v$ in a sublevel set; it is needed by [[lem-convex-norm-lower-semicontinuous-functionals-are-weakly-lower-semicontinuous]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, printed pp. 298-299 (quasiconvexity and the extension by $+infty$)"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 4, printed p. 44 (Theorem 2.44(ii) and its convexity step)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-norm-closed-convex-sets-are-weakly-closed",
+        "kind": "lemma",
+        "title": "A norm-closed convex set is weakly sequentially closed",
+        "statement": "Assume the Axiom of Choice. Let $X$ be a real or complex normed space and let $K\\subseteq X$ be convex and closed in the norm topology. Then $K$ is closed in the weak topology $\\sigma(X,X^*)$ ([[def-weak-topology-on-a-normed-space]]); in particular $K$ is weakly sequentially closed: if $(u_j)\\subseteq K$ and $u_j\\rightharpoonup u$ ([[def-weak-convergence-of-nets-and-sequences]]), then $u\\in K$.",
+        "deps": [
+          "thm-strong-separation-of-closed-and-compact-convex-sets",
+          "def-weak-topology-on-a-normed-space",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "If $x\\notin K$, apply the strong separation theorem [[thm-strong-separation-of-closed-and-compact-convex-sets]] to the disjoint convex sets $K$ (closed) and $\\{x\\}$ (compact): there are $f\\in X^*$ and $\\alpha<\\beta$ with $\\operatorname{Re}f\\le\\alpha$ on $K$ and $\\operatorname{Re}f(x)\\ge\\beta$. The weak-open half-space $\\{y:\\operatorname{Re}f(y)>(\\alpha+\\beta)/2\\}$ then contains $x$ and misses $K$, so $K^{\\mathrm c}$ is weakly open and $K$ is weakly closed; the sequential statement follows because a weakly convergent sequence has its limit in the weak closure. This is the FA-5 separation route prescribed in the design and the proof given in [T] Lemma 13.2; the conclusion also follows from the published [[thm-mazur-weak-and-norm-closure-of-convex-sets]] and [[thm-norm-closed-convex-iff-weakly-closed]], and the item is retained to fix the sequential form consumed by the direct-method items of this page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Lemma 13.2 and its proof, printed p. 297"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 4, Lemma 2.41, printed p. 43"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-convex-norm-lower-semicontinuous-functionals-are-weakly-lower-semicontinuous",
+        "kind": "lemma",
+        "title": "A convex norm-lower-semicontinuous functional is weakly lower semicontinuous",
+        "statement": "Assume HB ([[def-hahn-banach-extension-principle-relative]]) and Countable Choice ([[def-countable-choice]]). Let $X$ be a real normed space, let $K\\subseteq X$ be nonempty and convex ([[def-convex-and-strictly-convex-functionals-on-a-banach-space]]) and let $I:K\\to(-\\infty,+\\infty]$ be convex and sequentially lower semicontinuous in the norm topology ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]). Then $I$ is weakly sequentially lower semicontinuous on $K$: for every $(u_j)\\subseteq K$ with $u_j\\rightharpoonup u\\in K$ ([[def-weak-convergence-of-nets-and-sequences]]),\n$$I(u)\\le\\liminf_j I(u_j).$$",
+        "deps": [
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "thm-norm-closed-convex-iff-weakly-closed",
+          "def-hahn-banach-extension-principle-relative",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-limsup-liminf",
+          "def-countable-choice"
+        ],
+        "strategy": "direct, by comparing the norm and weak closures of a convex sublevel set.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Lemma 13.3 and its proof, printed p. 298"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 4, printed pp. 43-44 (Theorem 2.40, Lemma 2.41, Theorem 2.44(ii))"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-coercivity-makes-every-finite-level-minimising-sequence-bounded",
+        "kind": "lemma",
+        "title": "Coercivity bounds every finite-level sequence",
+        "statement": "Let $I:A\\to(-\\infty,+\\infty]$ be coercive on the nonempty set $A\\subseteq X$ ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]). Then for every $\\Lambda\\in\\mathbb R$ the sublevel set $\\{u\\in A:I(u)\\le\\Lambda\\}$ is norm bounded; consequently every sequence $(u_j)\\subseteq A$ with $\\sup_j I(u_j)<+\\infty$ is norm bounded. In particular every minimising sequence $(u_j)$ with $I(u_j)\\to\\inf_AI<+\\infty$ is norm bounded.",
+        "deps": [
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "def-infimum"
+        ],
+        "strategy": "Coercivity applied with $M=\\Lambda$ gives $R\\ge0$ such that $I(u)>\\Lambda$ whenever $\\|u\\|\\ge R$, so the sublevel set lies in the ball of radius $R$; a sequence with bounded values lies in one sublevel set. A minimising sequence with finite infimum has $\\sup_j I(u_j)<+\\infty$ after discarding finitely many terms, since $I(u_j)\\to\\inf_AI$. This is the first compactness gate of the direct method ([T] proof of Theorem 13.1; [MA] Chapter 2 Section 1; [G] Remark 4.3).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, proof of Theorem 13.1, printed pp. 296-297"
+            },
+            {
+              "title": "Viktor Grigoryan, Math 246B Partial Differential Equations, UCSB 2011 (complete 31-page course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Section 4.1, printed p. 27 (Remark 4.3)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+        "kind": "lemma",
+        "title": "A bounded sequence in a reflexive Banach space has a weakly convergent subsequence",
+        "statement": "Assume the ultrafilter lemma, DC and HB. Let $X$ be a real reflexive Banach space ([[def-reflexive-banach-space]]) and let $(u_j)$ be a norm-bounded sequence in $X$. Then $(u_j)$ has a subsequence converging weakly to a point of $X$ ([[def-weak-convergence-of-nets-and-sequences]]).",
+        "deps": [
+          "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence",
+          "def-reflexive-banach-space",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-weak-convergence-of-nets-and-sequences"
+        ],
+        "strategy": "This is exactly the forward implication of [[cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence]], whose statement carries the three choice principles named above; the proof is a direct citation, the published corollary having been obtained from the weak compactness of the unit ball, Eberlein-Smulian and the norming functional. The item exists so that the reflexivity input of the direct method is a named, checkable step rather than a parenthetical citation ([T] Theorem 13.1 cites the Banach-Alaoglu variant; [MA] Chapter 2 Section 2).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, first paragraph and Theorem 13.1, printed pp. 296-297"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 2, printed pp. 33-36 (Banach-Alaoglu and reflexivity of W^{1,p})"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-w-one-p-is-reflexive",
+        "kind": "lemma",
+        "title": "W^{1,p}(Omega) is reflexive for 1<p<infinity",
+        "statement": "Assume the ultrafilter lemma, DC and HB ([[def-ultrafilter-extension-principle]], [[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $1<p<\\infty$. Then the real Banach space $W^{1,p}(\\Omega)$ of [[def-sobolev-space-wkp-and-its-norm]] is reflexive ([[def-reflexive-banach-space]]).",
+        "deps": [
+          "thm-sobolev-spaces-are-banach-spaces",
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "thm-closed-subspaces-of-reflexive-spaces-are-reflexive",
+          "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence",
+          "def-reflexive-banach-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-banach-space"
+        ],
+        "strategy": "Local prerequisite added in Step 3b: the direct-method existence theorems of this page are applied in the reflexive space $W^{1,p}(\\Omega)$, and the library had no item stating that $W^{1,p}$ is reflexive for $1<p<\\infty$ (the scaffold used $W^{1,p}$ reflexivity in the strategy of [[thm-direct-method-for-convex-integral-functionals]] without a supplier). The proof embeds $W^{1,p}(\\Omega)$ isometrically into the finite $\\ell^p$-sum of the reflexive spaces $L^p(\\Omega)$, identifies the image as a closed subspace, and transfers reflexivity back along the isometry. Sources: [MA] Chapter 2 Section 2; [T] Section 13.2.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 2, reflexivity of W^{1,p} and Banach-Alaoglu, printed pp. 33-36"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, first paragraph (reflexive spaces and weak compactness), printed p. 296"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-weak-closedness-keeps-the-direct-method-limit-admissible",
+        "kind": "lemma",
+        "title": "Weak closedness keeps the direct-method limit admissible",
+        "statement": "Let $X$ be a normed space and let $K\\subseteq X$ be weakly sequentially closed ([[def-weak-convergence-of-nets-and-sequences]]). If $(u_j)\\subseteq K$ and $u_j\\rightharpoonup u$, then $u\\in K$. In particular, under the Axiom of Choice every nonempty convex norm-closed $K$ has this property, by [[lem-norm-closed-convex-sets-are-weakly-closed]].",
+        "deps": [
+          "def-weak-convergence-of-nets-and-sequences",
+          "lem-norm-closed-convex-sets-are-weakly-closed"
+        ],
+        "strategy": "The first sentence is the definition of weak sequential closedness. The second is [[lem-norm-closed-convex-sets-are-weakly-closed]]. The item makes the admissibility of the weak limit an explicit checked step of the direct method ([MA] Chapter 2 Section 1; [T] proof of Theorem 13.1), rather than hiding it in the phrase \"since $K$ is weakly closed\".",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, proof of Theorem 13.1, printed p. 297"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 1, printed pp. 31-33"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-liminf-passage-makes-the-weak-limit-a-minimiser",
+        "kind": "lemma",
+        "title": "The liminf passage makes the weak limit a minimiser",
+        "statement": "Let $A\\subseteq X$ and $I:A\\to(-\\infty,+\\infty]$ be proper, and let $(u_j)\\subseteq A$ be a minimising sequence with $u_j\\rightharpoonup u\\in A$ ([[def-weak-convergence-of-nets-and-sequences]]). If $I$ is weakly sequentially lower semicontinuous at $u$ ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]), then $I(u)=\\inf_AI$, so $u$ is a minimiser of $I$ on $A$.",
+        "deps": [
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "def-infimum",
+          "def-limsup-liminf",
+          "def-weak-convergence-of-nets-and-sequences"
+        ],
+        "strategy": "direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, proof of Theorem 13.1, printed p. 297"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 1, Theorem 2.4 and its proof, printed pp. 31-32"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-direct-method-in-a-reflexive-banach-space",
+        "kind": "theorem",
+        "title": "The direct method in a reflexive Banach space",
+        "statement": "Assume the ultrafilter lemma, DC and HB. Let $X$ be a real reflexive Banach space ([[def-reflexive-banach-space]]), let $A\\subseteq X$ be nonempty and weakly sequentially closed ([[def-weak-convergence-of-nets-and-sequences]]), and let $I:A\\to(-\\infty,+\\infty]$ be proper, coercive on $A$ and weakly sequentially lower semicontinuous on $A$ ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]). Then $I$ attains its infimum on $A$: there exists $u_0\\in A$ with $I(u_0)=\\inf_A I$. The admissible set may be taken convex and norm closed in $X$, by [[thm-norm-closed-convex-iff-weakly-closed]].",
+        "deps": [
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "lem-convex-norm-lower-semicontinuous-functionals-are-weakly-lower-semicontinuous",
+          "lem-coercivity-makes-every-finite-level-minimising-sequence-bounded",
+          "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "lem-weak-closedness-keeps-the-direct-method-limit-admissible",
+          "lem-liminf-passage-makes-the-weak-limit-a-minimiser",
+          "def-reflexive-banach-space",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "thm-norm-closed-convex-iff-weakly-closed",
+          "def-infimum",
+          "def-weak-convergence-of-nets-and-sequences",
+          "lem-dependent-choice-implies-countable-choice"
+        ],
+        "strategy": "direct, by selecting a minimising sequence, extracting a weakly convergent subsequence and passing to the limit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Theorem 13.1 (variational principle), printed pp. 296-297"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 1, Theorems 2.2 and 2.4, printed pp. 31-32"
+            },
+            {
+              "title": "Viktor Grigoryan, Math 246B Partial Differential Equations, UCSB 2011 (complete 31-page course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Sections 4.1-4.2, printed pp. 26-28"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-strict-convexity-gives-uniqueness-of-a-minimiser",
+        "kind": "corollary",
+        "title": "Strict convexity gives uniqueness of a minimiser",
+        "statement": "Let $K$ be a convex subset of a real vector space and let $I:K\\to(-\\infty,+\\infty]$ be proper and strictly convex ([[def-convex-and-strictly-convex-functionals-on-a-banach-space]], [[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]). If $u,v\\in K$ both minimise $I$ on $K$, then $u=v$.",
+        "deps": [
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-infimum",
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional"
+        ],
+        "strategy": "direct, by evaluating strict convexity at the midpoint of two minimisers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Corollary 13.4 and its proof, printed p. 299"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 2 Section 4, printed p. 14"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-gateaux-and-frechet-derivatives-of-a-functional",
+        "kind": "definition",
+        "title": "Gateaux and Frechet derivatives of a functional",
+        "statement": "Let $X$ be a real Banach space, $U\\subseteq X$ open and $F:U\\to\\mathbb R$.\n**Frechet differentiability.** $F$ is **Frechet differentiable at $u\\in U$** if there is a bounded linear functional $DF(u)\\in X^*$ ([[def-frechet-derivative-between-banach-spaces]], [[def-bounded-linear-operator]], [[def-dual-space-of-a-normed-space]]) with\n$$F(u+h)=F(u)+DF(u)h+o(\\|h\\|)\\qquad(h\\to0),$$\nthat is, $\\lim_{h\\to0}|F(u+h)-F(u)-D F(u)h|/\\|h\\|=0$; such $DF(u)$ is unique.\n**Gateaux differentiability.** $F$ is **Gateaux differentiable at $u$ in the direction $v\\in X$** if the limit\n$$\\delta F(u;v):=\\lim_{\\varepsilon\\to0,\\ \\varepsilon\\ne0}\\frac{F(u+\\varepsilon v)-F(u)}{\\varepsilon}\\in\\mathbb R$$\nexists; $F$ is **Gateaux differentiable at $u$** if that limit exists for every $v\\in X$ and the resulting map $v\\mapsto\\delta F(u;v)$ is a bounded linear functional, written $\\delta F(u)\\in X^*$ and called the **Gateaux (variational) derivative** of $F$ at $u$.\n**Relation and caveat.** Frechet differentiability at $u$ implies Gateaux differentiability at $u$ with $\\delta F(u)=DF(u)$, because $F(u+\\varepsilon v)-F(u)=DF(u)(\\varepsilon v)+o(|\\varepsilon|)$; the converse fails, and the directional limits $\\delta F(u;v)$ need not be linear or bounded in $v$ when only the one-dimensional limits exist. For each fixed $v$ the function $\\varphi(\\varepsilon):=F(u+\\varepsilon v)$ satisfies $\\varphi'(0)=\\delta F(u;v)$.",
+        "deps": [
+          "def-frechet-derivative-between-banach-spaces",
+          "def-bounded-linear-operator",
+          "def-dual-space-of-a-normed-space"
+        ],
+        "strategy": "The Frechet part is the published definition [[def-frechet-derivative-between-banach-spaces]] restricted to scalar-valued maps; the Gateaux/variational derivative is the one-dimensional limit of the sources ([T] (13.4)-(13.6), [G] Section 4.1). The implication and the failure of its converse are recorded with the standard examples ([T] Example 13.2: a Gateaux differentiable map that is not Frechet differentiable, and an unbounded linear functional). The last sentence is the only form in which the Gateaux derivative is used below: [[thm-first-variation-vanishes-at-an-interior-minimiser]] applies Fermat's theorem to $\\varphi$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.1, (13.1)-(13.6) and Examples 13.1-13.2, printed pp. 293-295"
+            },
+            {
+              "title": "Viktor Grigoryan, Math 246B Partial Differential Equations, UCSB 2011 (complete 31-page course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Section 4.1, printed pp. 26-27"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-fundamental-lemma-of-the-calculus-of-variations",
+        "kind": "lemma",
+        "title": "The fundamental lemma of the calculus of variations",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $g\\in L^1_{\\mathrm{loc}}(\\Omega;\\mathbb C)$ ([[def-locally-integrable-function-as-a-regular-distribution]]) satisfy\n$$\\int_\\Omega g\\,\\varphi\\,dx=0\\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega)$$\n([[def-test-function-space-d-of-an-open-set]]). Then $g=0$ almost everywhere on $\\Omega$. Moreover, if $g$ is real-valued and $\\int_\\Omega g\\varphi\\,dx\\ge0$ for every nonnegative $\\varphi\\in C_c^\\infty(\\Omega)$, then $g\\ge0$ almost everywhere.",
+        "deps": [
+          "def-locally-integrable-function-as-a-regular-distribution",
+          "def-test-function-space-d-of-an-open-set",
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "def-lebesgue-point-and-lebesgue-set",
+          "thm-almost-every-point-is-a-lebesgue-point",
+          "lem-radial-majorized-kernels-recover-lebesgue-point-values",
+          "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "def-countable-choice",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ],
+        "strategy": "direct; the sign statement is proved with a mollifier kernel at almost every point, and the vanishing statement follows by applying the sign statement to $g$ and $-g$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 4 Section 4.1, Lemma 4.1 and its proof, printed pp. 47-48"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 1 Section 2.1, Lemmas 1.8 and 1.13, printed pp. 6-8 and 14"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-caratheodory-composition-is-measurable",
+        "kind": "lemma",
+        "title": "A Caratheodory integrand composed with measurable functions is measurable",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be Lebesgue measurable and let $f:\\Omega\\times\\mathbb R\\times\\mathbb R^n\\to\\mathbb R$ be a Caratheodory integrand: for every $(s,\\xi)\\in\\mathbb R\\times\\mathbb R^n$ the map $x\\mapsto f(x,s,\\xi)$ is measurable ([[def-borel-and-lebesgue-measurable-function-on-rn]]), and for almost every $x\\in\\Omega$ the map $(s,\\xi)\\mapsto f(x,s,\\xi)$ is continuous. If $u:\\Omega\\to\\mathbb R$ and $w:\\Omega\\to\\mathbb R^n$ are measurable, then $x\\mapsto f(x,u(x),w(x))$ is measurable.",
+        "deps": [
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "cor-measurable-functions-admit-dominated-simple-approximations",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-countable-choice"
+        ],
+        "strategy": "direct, by approximation with measurable simple functions and passage to the pointwise limit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 3.1, Caratheodory framework, printed pp. 41-42"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.1, Example 13.3 and the preceding conventions, printed pp. 295-296"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-differentiation-of-an-integral-functional",
+        "kind": "lemma",
+        "title": "Differentiation of an integral functional under growth domination",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]), $1<p<\\infty$, and let $f:\\Omega\\times\\mathbb R\\times\\mathbb R^n\\to\\mathbb R$ be a Caratheodory integrand ([[lem-caratheodory-composition-is-measurable]]) whose classical partial derivatives $f_s$, $f_\\xi$ exist and are continuous in $(s,\\xi)$ for almost every $x$, with a constant $C\\ge0$ and functions $G\\in L^1(\\Omega)$, $g\\in L^{p'}(\\Omega)$, where $p'=p/(p-1)$, such that for almost every $x$ and all $(s,\\xi)$\n$$|f(x,s,\\xi)|\\le C(1+|s|^p+|\\xi|^p)+G(x),\\quad |f_s(x,s,\\xi)|+|f_\\xi(x,s,\\xi)|\\le C(1+|s|^{p-1}+|\\xi|^{p-1})+g(x).$$\nThen $I(u):=\\int_\\Omega f(x,u(x),Du(x))\\,dx$ is well defined and finite on $W^{1,p}(\\Omega)$ ([[def-sobolev-space-wkp-and-its-norm]]), and for all $u,v\\in W^{1,p}(\\Omega)$\n$$\\delta I(u;v)=\\int_\\Omega\\big(f_s(x,u,Du)\\,v+f_\\xi(x,u,Du)\\cdot Dv\\big)\\,dx .$$\nIn particular $I$ is Gateaux differentiable at every $u$, with bounded Gateaux derivative $\\delta I(u)\\in W^{1,p}(\\Omega)^*$ ([[def-gateaux-and-frechet-derivatives-of-a-functional]]).",
+        "deps": [
+          "def-gateaux-and-frechet-derivatives-of-a-functional",
+          "lem-caratheodory-composition-is-measurable",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "thm-dominated-convergence",
+          "thm-holder-inequality-for-integrals",
+          "cor-mean-value-theorem",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "def-countable-choice",
+          "thm-sobolev-spaces-are-banach-spaces"
+        ],
+        "strategy": "direct, by difference quotients, the mean value theorem, a uniform integrable dominator and dominated convergence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.1, Example 13.3, printed pp. 295-296"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 5 Section 2, Proposition 5.1 and the first variation in weak form, printed pp. 93-95"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-first-variation-vanishes-at-an-interior-minimiser",
+        "kind": "theorem",
+        "title": "The first variation vanishes at an interior minimiser",
+        "statement": "Let $X$ be a real Banach space, $U\\subseteq X$ open, $F:U\\to\\mathbb R$ Gateaux differentiable at $u\\in U$ ([[def-gateaux-and-frechet-derivatives-of-a-functional]]) and suppose $u$ is a local minimiser of $F$: $F(u)\\le F(w)$ for all $w\\in U$ with $\\|w-u\\|$ small ([[def-local-extremum]]). Then\n$$\\delta F(u;v)=0\\qquad\\text{for every }v\\in X.$$\nMore generally, if $V\\subseteq X$ is a linear subspace and $F(u)\\le F(w)$ for all $w\\in(u+V)\\cap U$ with $\\|w-u\\|$ small, then $\\delta F(u;v)=0$ for every $v\\in V$.",
+        "deps": [
+          "def-gateaux-and-frechet-derivatives-of-a-functional",
+          "thm-fermat-interior-extremum",
+          "def-local-extremum"
+        ],
+        "strategy": "direct, reducing to the one-variable Fermat theorem along each admissible line.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Theorem 13.1 and its final paragraph, printed pp. 296-297"
+            },
+            {
+              "title": "Viktor Grigoryan, Math 246B Partial Differential Equations, UCSB 2011 (complete 31-page course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Section 4.1, printed p. 27"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-weak-euler-lagrange-equation-for-integral-functionals",
+        "kind": "theorem",
+        "title": "The weak Euler-Lagrange equation for integral functionals with fixed trace",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain, $1<p<\\infty$, let $f$ and $I$ satisfy the hypotheses of [[lem-differentiation-of-an-integral-functional]], and let $g\\in W^{1-1/p,p}(\\partial\\Omega)$ lie in the trace range of $T:W^{1,p}(\\Omega)\\to W^{1-1/p,p}(\\partial\\Omega)$ ([[thm-sharp-trace-theorem-for-w-one-p]], [[def-fractional-sobolev-space-on-a-compact-c-one-boundary]], [[thm-lp-trace-operator-on-a-bounded-c-one-domain]]). Let $u\\in W^{1,p}(\\Omega)$ with $Tu=g$ be a local minimiser of $I$ among the functions with trace $g$: $I(u)\\le I(w)$ for all $w\\in W^{1,p}(\\Omega)$ with $Tw=g$ and $\\|w-u\\|_{W^{1,p}}$ small. Then\n$$\\int_\\Omega\\big(f_\\xi(x,u,Du)\\cdot D\\varphi+f_s(x,u,Du)\\,\\varphi\\big)\\,dx=0$$\nfor every $\\varphi\\in W^{1,p}_0(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]); equivalently, for every $\\varphi\\in C_c^\\infty(\\Omega)$ ([[def-test-function-space-d-of-an-open-set]]).",
+        "deps": [
+          "lem-differentiation-of-an-integral-functional",
+          "thm-first-variation-vanishes-at-an-interior-minimiser",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-test-function-space-d-of-an-open-set",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "def-axiom-of-choice",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary"
+        ],
+        "strategy": "direct, by testing the affine first-variation theorem against the kernel of the trace.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 4 Section 4.1, Theorem 4.3, printed pp. 47-48"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 5 Section 2, first variation in weak form, printed pp. 94-95"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, displays (13.10)-(13.13), printed p. 301"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-classical-euler-lagrange-equation-under-regularity",
+        "kind": "corollary",
+        "title": "The classical Euler-Lagrange equation under regularity",
+        "statement": "Let the hypotheses of [[thm-weak-euler-lagrange-equation-for-integral-functionals]] hold, and assume in addition that $f\\in C^2(\\overline\\Omega\\times\\mathbb R\\times\\mathbb R^n)$ and $u\\in C^2(\\overline\\Omega)$ ([[def-ck-and-multi-index-notation-in-several-variables]]). Then $w(x):=f_\\xi(x,u(x),Du(x))\\in C^1(\\Omega;\\mathbb R^n)$ and\n$$-\\operatorname{div} w+f_s(x,u(x),Du(x))=0\\qquad(x\\in\\Omega),$$\nthe classical Euler-Lagrange equation ([[def-divergence-and-curl-of-a-c1-vector-field]]), with the first variation supplied by [[lem-differentiation-of-an-integral-functional]].",
+        "deps": [
+          "thm-weak-euler-lagrange-equation-for-integral-functionals",
+          "lem-fundamental-lemma-of-the-calculus-of-variations",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "cor-first-green-identity-on-a-bounded-c-one-domain",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "def-countable-choice",
+          "lem-differentiation-of-an-integral-functional"
+        ],
+        "strategy": "direct, by testing the weak equation with compactly supported functions and integrating by parts.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 4 Section 4.1, Definition 4.2 and Theorem 4.3, printed pp. 47-48"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, displays (13.11)-(13.13), printed p. 301"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-boundary-fundamental-lemma-of-the-calculus-of-variations",
+        "kind": "lemma",
+        "title": "The boundary fundamental lemma of the calculus of variations",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain with surface measure $\\sigma$ on $\\partial\\Omega$ ([[def-surface-integral-on-a-compact-c-one-hypersurface]], [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]). If $g\\in C(\\overline\\Omega)$ satisfies\n$$\\int_{\\partial\\Omega}g\\,\\varphi\\,d\\sigma=0\\qquad\\text{for every }\\varphi\\in C^\\infty(\\overline\\Omega),$$\nthen $g=0$ on $\\partial\\Omega$. Equivalently, if $h\\in C(\\overline\\Omega;\\mathbb R^n)$ satisfies $\\int_{\\partial\\Omega}(h\\cdot\\nu)\\varphi\\,d\\sigma=0$ for every $\\varphi\\in C^\\infty(\\overline\\Omega)$, then $h\\cdot\\nu=0$ on $\\partial\\Omega$, where $\\nu$ is the outward unit normal.",
+        "deps": [
+          "lem-fundamental-lemma-of-the-calculus-of-variations",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "direct, by flattening the boundary at an arbitrary boundary point and applying the fundamental lemma to the charted integrand.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 4 Section 4.2, Lemma 4.4 and its proof, printed pp. 49-50"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 1 Section 2.3, Neumann boundary conditions, printed pp. 8-9"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-natural-boundary-condition-for-free-boundary-variations",
+        "kind": "theorem",
+        "title": "The natural boundary condition for free boundary variations",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let the hypotheses of [[thm-weak-euler-lagrange-equation-for-integral-functionals]] hold, but with no prescribed trace: $u\\in W^{1,p}(\\Omega)$ is a local minimiser of $I$ on the whole of $W^{1,p}(\\Omega)$. Assume in addition that $f\\in C^2(\\overline\\Omega\\times\\mathbb R\\times\\mathbb R^n)$ and $u\\in C^2(\\overline\\Omega)$, and let $\\nu$ be the outward unit normal ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]). Then\n$$-\\operatorname{div}\\big(f_\\xi(x,u,Du)\\big)+f_s(x,u,Du)=0\\quad\\text{in }\\Omega,\\qquad f_\\xi(x,u(x),Du(x))\\cdot\\nu(x)=0\\quad\\text{on }\\partial\\Omega .$$\nThe second identity is the **natural (Neumann-type) boundary condition** attached to free boundary variations; no such condition appears when the trace is fixed.",
+        "deps": [
+          "lem-differentiation-of-an-integral-functional",
+          "thm-first-variation-vanishes-at-an-interior-minimiser",
+          "cor-classical-euler-lagrange-equation-under-regularity",
+          "lem-boundary-fundamental-lemma-of-the-calculus-of-variations",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "cor-first-green-identity-on-a-bounded-c-one-domain",
+          "thm-weak-euler-lagrange-equation-for-integral-functionals",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "direct, combining the fixed-trace interior equation with the free boundary variation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 4 Section 4.2, Theorem 4.5 and its proof, printed pp. 49-50"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 1 Sections 2.3-2.4, Neumann and mixed boundary conditions, printed pp. 8-10"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-affine-dirichlet-trace-class-is-nonempty-convex-and-weakly-closed",
+        "kind": "lemma",
+        "title": "The affine Dirichlet trace class is nonempty, convex and weakly closed",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be a bounded $C^1$ domain, $1<p<\\infty$, and let $g\\in W^{1-1/p,p}(\\partial\\Omega)$ lie in the trace range of $T:W^{1,p}(\\Omega)\\to W^{1-1/p,p}(\\partial\\Omega)$ ([[thm-sharp-trace-theorem-for-w-one-p]], [[thm-lp-trace-operator-on-a-bounded-c-one-domain]]). Then the affine trace class\n$$K_g:=\\{v\\in W^{1,p}(\\Omega):Tv=g\\}$$\nis nonempty, convex, norm closed in $W^{1,p}(\\Omega)$ and weakly closed; moreover, for every right inverse $R$ of $T$ with $TRg=g$, $K_g=Rg+W^{1,p}_0(\\Omega)$ ([[thm-bounded-right-inverse-for-the-sobolev-trace]], [[thm-kernel-of-the-trace-is-w-one-p-zero]], [[def-wkp-zero-as-a-sobolev-closure]]).",
+        "deps": [
+          "lem-norm-closed-convex-sets-are-weakly-closed",
+          "thm-bounded-right-inverse-for-the-sobolev-trace",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm"
+        ],
+        "strategy": "Nonemptiness holds because $g$ is in the trace range; choose a bounded right inverse $R$ with $TRg=g$. For $u\\in W^{1,p}(\\Omega)$ one has $u\\in K_g$ iff $T(u-Rg)=0$ iff $u-Rg\\in W^{1,p}_0(\\Omega)$; this proves $K_g=Rg+W^{1,p}_0(\\Omega)$ and convexity (an affine subspace). Norm closedness: $K_g=T^{-1}(\\{g\\})$ is the preimage of a point under the bounded operator $T$. Weak closedness: apply [[lem-norm-closed-convex-sets-are-weakly-closed]] to the convex norm-closed set $K_g$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Example 13.7, printed pp. 299-300"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 3, admissible classes and trace data, printed pp. 41-43"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-stationarity-is-sufficient-for-a-global-minimum-of-a-convex-differentiable-functional",
+        "kind": "theorem",
+        "title": "Stationarity is sufficient for a global minimum of a convex differentiable functional",
+        "statement": "Let $K$ be a convex subset of a real Banach space and let $I:K\\to(-\\infty,+\\infty]$ be convex ([[def-convex-and-strictly-convex-functionals-on-a-banach-space]]). Fix $u\\in K$ with $I(u)<+\\infty$, and assume that for every $v\\in K$ the finite one-sided admissible directional derivative\n$$\\delta_+I(u;v-u):=\\lim_{t\\downarrow0}\\frac{I(u+t(v-u))-I(u)}{t}$$\nexists and is nonnegative. Then $I(u)=\\inf_KI$. If $I$ is strictly convex, $u$ is the unique minimiser. In particular, for a real-valued Gateaux differentiable functional on an open neighbourhood of $K$, the condition $\\delta I(u;v-u)\\ge0$ for every $v\\in K$ suffices, since the one-sided derivative agrees with that of [[def-gateaux-and-frechet-derivatives-of-a-functional]].",
+        "deps": [
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-gateaux-and-frechet-derivatives-of-a-functional",
+          "cor-strict-convexity-gives-uniqueness-of-a-minimiser",
+          "lem-three-slope-inequality-for-convex-functions",
+          "thm-supporting-lines-for-convex-functions",
+          "def-infimum"
+        ],
+        "strategy": "direct, by monotonicity of the secant slopes along the admissible segment.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 1 Section 2, Remark 1.5, printed p. 7"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Corollary 13.4, printed p. 299"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 2, Sections 2.4-2.5, printed pp. 14-16"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-a-twice-differentiable-local-minimiser-has-nonnegative-second-variation",
+        "kind": "lemma",
+        "title": "A twice differentiable local minimiser has nonnegative second variation",
+        "statement": "Let $X$ be a real Banach space, $U\\subseteq X$ open, $F:U\\to\\mathbb R$ of class $C^2$ ([[def-c-k-map-between-banach-spaces]]) and let $u\\in U$ be a local minimiser of $F$, meaning that there is $\\delta>0$ such that $F(w)\\ge F(u)$ whenever $w\\in U$ and $\\|w-u\\|<\\delta$. Then for every $v\\in X$\n$$D^2F(u)[v,v]\\ge0,$$\nwhere $D^2F(u)\\in\\mathcal B(X,\\mathcal B(X,\\mathbb R))$ is the second Frechet derivative of $F$ at $u$ ([[def-frechet-derivative-between-banach-spaces]]); that is, the second variation of $F$ at $u$ is nonnegative in every direction.",
+        "deps": [
+          "def-c-k-map-between-banach-spaces",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-local-extremum",
+          "thm-fermat-interior-extremum",
+          "cor-taylor-lagrange-and-cauchy-remainders",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
+        ],
+        "strategy": "Fix $v\\ne0$ and put $\\varphi(\\varepsilon):=F(u+\\varepsilon v)$ for $|\\varepsilon|$ small. The chain rule along the curve (twice, using the $C^2$ calculus of [[def-c-k-map-between-banach-spaces]]) gives $\\varphi\\in C^2$ with $\\varphi'(0)=DF(u)v$ and $\\varphi''(0)=D^2F(u)[v,v]$. Since $0$ is an interior local minimum of $\\varphi$, Fermat's theorem ([[thm-fermat-interior-extremum]]) gives $\\varphi'(0)=0$; Taylor's formula with Lagrange remainder ([[cor-taylor-lagrange-and-cauchy-remainders]]) at order $1$ gives $\\varphi(h)-\\varphi(0)=\\tfrac12\\varphi''(\\xi_h)h^2$ for some $\\xi_h$ between $0$ and $h$, and the left side is $\\ge0$ for small $h>0$, so $\\varphi''(\\xi_h)\\ge0$; letting $h\\downarrow0$ and using continuity of $\\varphi''$ gives $\\varphi''(0)\\ge0$. This is the second-order necessary condition recorded in [CV] Chapter 5 Section 5.1 and [T] Problem 13.1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 5 Section 5.1, non-negativity of the second variation, printed p. 57"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.1, differentiation in Banach spaces (framework for differentiating along a curve), printed pp. 293-296"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-direct-method-for-convex-integral-functionals",
+        "kind": "theorem",
+        "title": "The direct method for convex integral functionals",
+        "statement": "Assume the ultrafilter lemma, DC and HB. Let $n\\ge2$, $1<p<\\infty$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded $C^1$ domain, and let $u_b\\in W^{1,p}(\\Omega)$. Set\n$$K:=u_b+W^{1,p}_0(\\Omega),$$\nwhere $W^{1,p}_0(\\Omega)$ is the closure of $C_c^\\infty(\\Omega)$ in $W^{1,p}(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]). Let $f:\\Omega\\times\\mathbb R\\times\\mathbb R^n\\to\\mathbb R$ be a Caratheodory integrand ([[lem-caratheodory-composition-is-measurable]]) such that for almost every $x$ the map $(s,\\xi)\\mapsto f(x,s,\\xi)$ is convex and lower semicontinuous ([[def-convex-and-strictly-convex-functionals-on-a-banach-space]]). Assume the upper growth bound\n$$f(x,s,\\xi)\\le C\\,(1+|s|^p+|\\xi|^p)+G(x)\\qquad\\text{for almost every }x\\text{ and all }(s,\\xi),$$\nwhere $G\\in L^1(\\Omega)$, together with the coercivity hypothesis: there are $\\nu>0$, $c\\ge0$, $q\\in[1,p]$ and $h\\in L^1(\\Omega)$, $h\\ge0$, with\n$$f(x,s,\\xi)\\ \\ge\\ \\nu|\\xi|^p-c|s|^q-h(x)$$\nfor almost every $x$ and all $(s,\\xi)$, where, in the case $q=p$, the smallness condition\n$$2^{p-1}c\\,C_P^{\\,p}\\le\\nu\\,2^{-p}$$\nholds for a Poincare constant $C_P$ of $W^{1,p}_0(\\Omega)$ ([[thm-poincare-inequality-for-w-one-p-zero]]). Then $I(u)=\\int_\\Omega f(x,u(x),Du(x))\\,dx$ is finite on $W^{1,p}(\\Omega)$ and attains its infimum on $K$. If in addition $f$ satisfies the hypotheses of [[lem-differentiation-of-an-integral-functional]], then every minimiser $u$ satisfies\n$$\\int_\\Omega\\big(f_s(x,u,Du)\\,v+f_\\xi(x,u,Du)\\cdot Dv\\big)\\,dx=0\\qquad(v\\in W^{1,p}_0(\\Omega)),$$\nthe weak Euler-Lagrange equation for zero-boundary variations. If $f(x,\\cdot,\\cdot)$ is strictly convex for almost every $x$, the minimiser is unique.",
+        "deps": [
+          "thm-direct-method-in-a-reflexive-banach-space",
+          "lem-convex-norm-lower-semicontinuous-functionals-are-weakly-lower-semicontinuous",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "cor-strict-convexity-gives-uniqueness-of-a-minimiser",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-differentiation-of-an-integral-functional",
+          "lem-caratheodory-composition-is-measurable",
+          "thm-first-variation-vanishes-at-an-interior-minimiser",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-fatou-lemma",
+          "def-reflexive-banach-space",
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "lem-w-one-p-is-reflexive",
+          "thm-norm-closed-convex-iff-weakly-closed",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "direct; finiteness, convexity and norm lower semicontinuity of $I$, then the coercivity estimate and the direct method.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Sections 3-4, printed pp. 41-45 (Theorem 2.44(ii) and the existence criteria)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Examples 13.7-13.8 and Corollary 13.4, printed pp. 299-301"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations, University of Illinois (complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Section 3.10, printed pp. 79-82 (Lemma 3.30 and Proposition 3.31)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-dirichlet-principle-for-poisson-equation",
+        "kind": "theorem",
+        "title": "The Dirichlet principle for the Poisson equation",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), the ultrafilter lemma, DC and HB. Let $\\Omega\\subseteq\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain, let $f\\in L^2(\\Omega)$ and let $g\\in H^{1/2}(\\partial\\Omega)=W^{1/2,2}(\\partial\\Omega)$ lie in the trace range of $T:H^1(\\Omega)\\to H^{1/2}(\\partial\\Omega)$ ([[thm-sharp-trace-theorem-for-w-one-p]], [[def-fractional-sobolev-space-on-a-compact-c-one-boundary]]). Put\n$$I(u)=\\frac12\\int_\\Omega|Du|^2\\,dx-\\int_\\Omega fu\\,dx,\\qquad K_g=\\{u\\in H^1(\\Omega):Tu=g\\}.$$\nThen:\n(i) $I$ is strictly convex, coercive and weakly sequentially lower semicontinuous on $K_g$ ([[def-convex-and-strictly-convex-functionals-on-a-banach-space]], [[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]), and attains its infimum at exactly one $u_0\\in K_g$ ([[thm-direct-method-for-convex-integral-functionals]], [[cor-strict-convexity-gives-uniqueness-of-a-minimiser]]);\n(ii) $u_0$ is the unique weak solution of the Poisson problem $-\\Delta u=f$ with trace $g$ in the sense of [[def-weak-dirichlet-solution-for-a-divergence-form-operator]], so that $\\int_\\Omega Du_0\\cdot D\\varphi\\,dx=\\int_\\Omega f\\varphi\\,dx$ for every $\\varphi\\in H^1_0(\\Omega)$ ([[thm-weak-euler-lagrange-equation-for-integral-functionals]], [[thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem]], [[cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting]]);\n(iii) the classical one-directional Dirichlet principle holds: if $v\\in C^2(\\overline\\Omega)$ satisfies $-\\Delta v=f$ in $\\Omega$ and $v|_{\\partial\\Omega}=g$, then $I(v)\\le I(w)$ for every $w\\in K_g$ ([[cor-first-green-identity-on-a-bounded-c-one-domain]], [[lem-classical-solutions-satisfy-the-weak-formulation]]).",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-direct-method-for-convex-integral-functionals",
+          "thm-weak-euler-lagrange-equation-for-integral-functionals",
+          "cor-strict-convexity-gives-uniqueness-of-a-minimiser",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "lem-affine-dirichlet-trace-class-is-nonempty-convex-and-weakly-closed",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting",
+          "lem-classical-solutions-satisfy-the-weak-formulation",
+          "cor-first-green-identity-on-a-bounded-c-one-domain",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "lem-differentiation-of-an-integral-functional",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "def-hk-and-hk-zero-notation",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "direct, by checking the hypotheses of the convex direct method for the Dirichlet integrand.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 5.5, printed pp. 130-131; Section 13.2, Example 13.7, printed pp. 299-300"
+            },
+            {
+              "title": "Viktor Grigoryan, Math 246B Partial Differential Equations, UCSB 2011 (complete 31-page course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Section 4.2, printed pp. 27-28"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations, University of Illinois (complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Section 3.10, printed pp. 79-82 (Lemma 3.30, Propositions 3.31-3.32)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cor-minimisers-are-classical-when-elliptic-regularity-applies",
+        "kind": "corollary",
+        "title": "Minimisers are classical when elliptic regularity applies",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$, $n\\ge2$, be a bounded domain, let $f$ and $g$ be given and let $u_0\\in K_g$ be the minimiser of the Dirichlet energy of [[thm-dirichlet-principle-for-poisson-equation]]. Then:\n(i) if $\\Omega$ is a bounded $C^\\infty$ domain, $f$ extends to a $C^\\infty$ function on a neighbourhood of $\\overline\\Omega$, and there is $G\\in C^\\infty(U)$ on a neighbourhood $U$ of $\\overline\\Omega$ with $G|_{\\partial\\Omega}=g$, then $u_0$ agrees almost everywhere with a function $\\widetilde u\\in C^\\infty(\\overline\\Omega)$ satisfying $-\\Delta\\widetilde u=f$ pointwise in $\\Omega$ and $\\widetilde u=g$ on $\\partial\\Omega$ ([[cor-smooth-weak-dirichlet-solutions-are-classical]]);\n(ii) if $0<\\alpha<1$, $\\Omega$ is a bounded $C^{2,\\alpha}$ domain, $f\\in C^{0,\\alpha}(\\overline\\Omega)$ and $g\\in C^{2,\\alpha}(\\overline\\Omega)$, then $u_0\\in C^{2,\\alpha}(\\overline\\Omega)$, $-\\Delta u_0=f$ pointwise and $u_0=g$ on $\\partial\\Omega$ ([[thm-global-schauder-regularity-for-the-weak-dirichlet-laplacian]]).\nVariational existence alone gives only $u_0\\in H^1(\\Omega)$; the smoothness asserted here is a consequence of elliptic regularity and fails without the corresponding hypotheses on the domain, coefficients and data.",
+        "deps": [
+          "thm-dirichlet-principle-for-poisson-equation",
+          "cor-smooth-weak-dirichlet-solutions-are-classical",
+          "thm-global-schauder-regularity-for-the-weak-dirichlet-laplacian",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "thm-weak-euler-lagrange-equation-for-integral-functionals",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-holder-inequality-for-integrals",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "strategy": "Identify the minimizer with the weak Dirichlet solution. For smooth nonzero boundary data admitting a smooth lift G, subtract G; the difference has zero trace, and integration by parts in the weak Euler-Lagrange identity shows it solves -Delta v=f+Delta G. Apply the zero-boundary smooth regularity corollary and restore G. In the Holder case, apply the Schauder theorem directly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, interior and boundary elliptic regularity for weak solutions, printed pp. 240-246"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "rem-euler-lagrange-is-necessary-not-sufficient-without-convexity",
+        "kind": "remark",
+        "title": "Euler-Lagrange is necessary but not sufficient without convexity",
+        "statement": "For a Gateaux differentiable functional on an open set, the first variation vanishes at an interior local minimiser; on an affine admissible class $u+V$ it vanishes in the directions $v\\in V$ ([[thm-first-variation-vanishes-at-an-interior-minimiser]]). For integral functionals satisfying its differentiation and fixed-trace hypotheses, [[thm-weak-euler-lagrange-equation-for-integral-functionals]] gives the weak Euler-Lagrange equation for zero-boundary variations. Conversely, for a convex functional Gateaux differentiable on an open neighbourhood of a convex admissible set $K$, the condition $\\delta I(u;v-u)\\ge0$ for every $v\\in K$ suffices for a global minimum ([[thm-stationarity-is-sufficient-for-a-global-minimum-of-a-convex-differentiable-functional]]). Without convexity the three notions must be kept apart: a **stationary point** solves the Euler-Lagrange equation, a **local minimiser** minimises among nearby admissible competitors, and a **global minimiser** minimises on the whole admissible set. In general none of the implications \"stationary $\\Rightarrow$ local minimiser\", \"local minimiser $\\Rightarrow$ global minimiser\" or \"global minimiser $\\Rightarrow$ unique\" holds, and the Euler-Lagrange equation alone therefore cannot be used as an existence criterion. Convexity upgrades the variational inequality to global minimality, whereas coercivity and weak lower semicontinuity enter the separate existence argument; a concave quadratic functional is the standard illustration, and the companion page records explicit counterexamples. For the other failed implications already mentioned, $F(t)=t^2-3t^3+t^4$ has a local minimum at $0$ (the coefficient $1-3t+t^2$ is positive near $0$) but $F(1)=-1<F(0)=0$, while $(t^2-1)^2$ has the two global minimisers $\\pm1$.\n\nFor inequality constraints, two-sided variations need not be admissible. Local minimality gives only a nonnegative one-sided derivative along an admissible segment, since $[I(u+tv)-I(u)]/t\\ge0$ for sufficiently small feasible $t>0$; it need not give stationarity in arbitrary directions.",
+        "deps": [
+          "thm-first-variation-vanishes-at-an-interior-minimiser",
+          "thm-weak-euler-lagrange-equation-for-integral-functionals",
+          "thm-stationarity-is-sufficient-for-a-global-minimum-of-a-convex-differentiable-functional",
+          "cor-strict-convexity-gives-uniqueness-of-a-minimiser"
+        ],
+        "strategy": "A non-proved orientation remark: it states the logical relations among the three notions and why the page's theorems carry their convexity hypotheses. The standard witnesses are the concave quadratic functional $J(u)=-\\tfrac12\\int|Du|^2$ on $H^1_0(\\Omega)$, whose only stationary point $0$ is not a minimiser, and the non-strictly-convex functional $I(x,y)=x^2$ on $\\mathbb R^2$, whose minimiser set is a line; both are worked out on the companion page. No new mathematics is claimed, and the remark is not load-bearing.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 1 Sections 1-2, printed pp. 5-7 (minimisers, critical points and the convex converse)"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 5, Section 5.1, printed p. 57"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 458.04,
+    "id": "the-direct-method-and-euler-lagrange-equations-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "The Direct Method and Euler Lagrange Equations — Examples",
+    "companion": "the-direct-method-and-euler-lagrange-equations",
+    "requires": [
+      "the-direct-method-and-euler-lagrange-equations"
+    ],
+    "items": [
+      {
+        "id": "ex-dirichlet-energy-with-affine-boundary-data",
+        "kind": "example",
+        "title": "The harmonic affine extension minimises the Dirichlet energy",
+        "statement": "**Example.** Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain and let $a(x)=c_0+\\ell(x)$ be affine on $\\overline\\Omega$, so that $\\Delta a=0$ and $Da=\\ell$ is constant. Then $a$ is the unique minimiser of the Dirichlet energy\n$$I(v)=\\frac12\\int_\\Omega|Dv|^2\\,dx$$\non the affine trace class $K_{a}=\\{v\\in H^1(\\Omega):Tv=Ta\\}$ ([[thm-lp-trace-operator-on-a-bounded-c-one-domain]]): for every $v\\in K_a$, $v-a\\in H^1_0(\\Omega)$ and\n$$I(v)=I(a)+\\frac12\\int_\\Omega|D(v-a)|^2\\,dx\\ \\ge\\ I(a),$$\nwith equality if and only if $D(v-a)=0$ almost everywhere, and then $v=a$ almost everywhere by the Poincare inequality on $H^1_0(\\Omega)$ ([[thm-poincare-inequality-for-w-one-p-zero]]).",
+        "deps": [
+          "thm-dirichlet-principle-for-poisson-equation",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-hk-and-hk-zero-notation",
+          "def-axiom-of-choice",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "direct completion of the square.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Example 13.7, printed pp. 299-300"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 4 Section 4.1, example (i), printed p. 48"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-one-dimensional-euler-lagrange-equation",
+        "kind": "example",
+        "title": "The one-dimensional Euler-Lagrange equation for an energy with a potential",
+        "statement": "**Example.** Assume Countable Choice ([[def-countable-choice]]). Let $V\\in C^1(\\mathbb R)$, let $a<b$ be real numbers and let\n$$I(u)=\\int_a^b\\Big(\\frac12 u'(x)^2+V(u(x))\\Big)dx .$$\nOn the admissible class $C^2([a,b])$ with fixed endpoint values $u(a)=u_0$, $u(b)=u_1$, a local minimiser in the $C^2$ norm satisfies the boundary value problem\n$$u''=V'(u)\\ \\text{ in }(a,b),\\qquad u(a)=u_0,\\quad u(b)=u_1,$$\nthe classical Euler-Lagrange equation of the Lagrangian $f(x,s,\\xi)=\\tfrac12\\xi^2+V(s)$ ([[cor-classical-euler-lagrange-equation-under-regularity]]). In the special case $V=0$ this is the one-dimensional Laplace equation $u''=0$ with the affine solution $u(x)=u_0+\\frac{u_1-u_0}{b-a}(x-a)$; for $V(s)=\\tfrac12\\omega^2s^2$ it is the equation of an inverted harmonic oscillator $u''=\\omega^2u$.",
+        "deps": [
+          "cor-classical-euler-lagrange-equation-under-regularity",
+          "thm-weak-euler-lagrange-equation-for-integral-functionals",
+          "thm-fermat-interior-extremum",
+          "lem-fundamental-lemma-of-the-calculus-of-variations",
+          "cor-mean-value-theorem",
+          "def-countable-choice",
+          "thm-integration-by-parts-with-interior-derivatives",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-heine-cantor-metric"
+        ],
+        "strategy": "direct, by testing the minimality of $u$ against compactly supported variations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A, UC Berkeley, 19 March 2024 (complete 179-page author PDF)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "Section 1.4, printed pp. 7-8"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 1 Section 2.4, Example 1.10 and Remark 1.11, printed pp. 9-10"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-a-coercive-functional-need-not-attain-without-weak-lower-semicontinuity",
+        "kind": "counterexample",
+        "title": "A coercive functional need not attain without weak lower semicontinuity",
+        "statement": "**Counterexample.** Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $H=\\ell^2(\\mathbb N,\\mathbb R)$ ([[def-square-summable-family-on-an-arbitrary-index-set]]), let $e_k$ be the family that is $1$ at $k$ and $0$ elsewhere, and define $I:H\\to\\mathbb R$ by\n$$I(0):=1,\\qquad I(u):=\\|u\\|^2\\ \\ (u\\ne0).$$\nThen $I$ is proper and coercive ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]) and $\\inf_HI=0$, but no point of $H$ minimises $I$: the value $0$ is not attained, because only $u=0$ gives $\\|u\\|^2=0$ and $I(0)=1$. The functional is not weakly sequentially lower semicontinuous at $0$: for $j\\ge1$, $e_j/j\\rightharpoonup0$ while $I(e_j/j)=1/j^2\\to0<1=I(0)$. Hence the weak lower semicontinuity hypothesis in [[thm-direct-method-in-a-reflexive-banach-space]] cannot be replaced by coercivity alone, even in a reflexive space.",
+        "deps": [
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "thm-direct-method-in-a-reflexive-banach-space",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "cor-ell-p-duality-by-counting-measure",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-axiom-of-choice",
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "rem-ell-p-is-l-p-of-counting-measure"
+        ],
+        "strategy": "direct computation of the values along the sequence $e_j/j$, $j\\ge1$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Sections 1 and 4, printed pp. 31-33 and 44-45"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, warning and Example 13.4, printed p. 296"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-a-minimising-sequence-need-not-converge-strongly",
+        "kind": "counterexample",
+        "title": "A minimising sequence need not converge strongly",
+        "statement": "**Counterexample.** Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $H=\\ell^2(\\mathbb N,\\mathbb R)$, let $B=\\{u\\in H:\\|u\\|\\le1\\}$ be its closed unit ball and let\n$$I(u)=\\sum_{j\\ge0}\\frac{1}{j+1}u_j^2\\qquad(u\\in H).$$\nThen $I$ is nonnegative, convex and continuous, $I(0)=0$, and $u_k:=e_k$ is a minimising sequence for $\\inf_BI=0$ with $I(e_k)=1/(k+1)\\to0$; moreover $e_k\\rightharpoonup0\\in B$ and $0$ is the unique minimiser of $I$ on $B$, but $\\|e_k-0\\|=1$ for every $k$, so no subsequence of the minimising sequence converges strongly to the minimiser. The compactness recovered in the direct method is therefore genuinely weak compactness ([[thm-direct-method-in-a-reflexive-banach-space]]).",
+        "deps": [
+          "thm-direct-method-in-a-reflexive-banach-space",
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "cor-ell-p-duality-by-counting-measure",
+          "def-weak-convergence-of-nets-and-sequences",
+          "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "def-axiom-of-choice",
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "rem-ell-p-is-l-p-of-counting-measure"
+        ],
+        "strategy": "direct computation along the standard basis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Example 13.4, printed p. 296"
+            },
+            {
+              "title": "Viktor Grigoryan, Math 246B Partial Differential Equations, UCSB 2011 (complete 31-page course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Section 4.1, printed p. 27"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-euler-lagrange-stationarity-does-not-imply-a-minimum",
+        "kind": "counterexample",
+        "title": "Stationarity of the Euler-Lagrange equation does not imply a minimum",
+        "statement": "**Counterexample.** Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be a bounded $C^1$ domain and let\n$$J(u)=-\\frac12\\int_\\Omega|Du|^2\\,dx\\qquad(u\\in H^1_0(\\Omega)).$$\nThen $u=0$ is the only stationary point: its weak Euler-Lagrange (stationarity) equation reads $-\\int_\\Omega Du\\cdot D\\varphi\\,dx=0$ for every $\\varphi\\in H^1_0(\\Omega)$, which forces $Du=0$ and then $u=0$ almost everywhere by the Poincare inequality ([[thm-poincare-inequality-for-w-one-p-zero]]). But $J$ is not bounded below: for any fixed nonzero $\\varphi\\in H^1_0(\\Omega)$ one has $J(t\\varphi)=-\\tfrac{t^2}{2}\\|D\\varphi\\|_2^2\\to-\\infty$ as $|t|\\to\\infty$. So the Euler-Lagrange equation is a necessary condition only; the functional is concave, not convex, and [[thm-stationarity-is-sufficient-for-a-global-minimum-of-a-convex-differentiable-functional]] does not apply.",
+        "deps": [
+          "thm-weak-euler-lagrange-equation-for-integral-functionals",
+          "thm-stationarity-is-sufficient-for-a-global-minimum-of-a-convex-differentiable-functional",
+          "thm-first-variation-vanishes-at-an-interior-minimiser",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-axiom-of-choice",
+          "thm-holder-inequality-for-integrals",
+          "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound"
+        ],
+        "strategy": "direct computation of the stationary equation and along the line $t\\varphi$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 2 Section 2.4 and Chapter 5 Section 5.1, printed pp. 14-15 and 57-58"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 1 Section 2, Remark 1.5, printed p. 7"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-nonstrict-convexity-allows-many-minimisers",
+        "kind": "counterexample",
+        "title": "Non-strict convexity allows many minimisers",
+        "statement": "**Counterexample.** On the real Banach space $\\mathbb R^2$ consider $I(x,y)=x^2$. Then $I$ is convex ([[def-convex-and-strictly-convex-functionals-on-a-banach-space]]) and\n$$\\operatorname*{arg\\,min}_{\\mathbb R^2}I=\\{(0,y):y\\in\\mathbb R\\},$$\nan affine line of minimisers: $I\\ge0$ and $I(0,y)=0$ for every $y$, while for $x\\ne0$, $I(x,y)>0$. The functional is not strictly convex, so the strictness hypothesis in [[cor-strict-convexity-gives-uniqueness-of-a-minimiser]] is genuinely needed: convexity alone does not force uniqueness of a minimiser.",
+        "deps": [
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "cor-strict-convexity-gives-uniqueness-of-a-minimiser"
+        ],
+        "strategy": "Direct verification: $I(\\lambda(x_1,y_1)+(1-\\lambda)(x_2,y_2))=\\lambda x_1^2+(1-\\lambda)x_2^2-2\\lambda(1-\\lambda)((x_1-x_2)/2)^2\\le\\lambda I(x_1,y_1)+(1-\\lambda)I(x_2,y_2)$, with strict inequality exactly when $x_1\\ne x_2$ in a nontrivial convex combination; the minimiser set is computed from $I\\ge0$ and $I=0\\iff x=0$. The flat-direction phenomenon is the standard sharpness example for [[cor-strict-convexity-gives-uniqueness-of-a-minimiser]] and matches [T] Corollary 13.4's remark that strict quasiconvexity is what gives uniqueness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Corollary 13.4 and Example 13.5, printed p. 299"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 2 Section 2.4, convex functions, printed pp. 14-15"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-natural-neumann-condition-from-a-free-endpoint",
+        "kind": "example",
+        "title": "The natural Neumann condition from a free endpoint in one dimension",
+        "statement": "**Example.** Assume Countable Choice ([[def-countable-choice]]) and let $a<b$. On $C^2([a,b])$ consider $I(u)=\\int_a^b f(x,u(x),u'(x))\\,dx$ with $f\\in C^2$, no boundary conditions, and let $u$ be a free-endpoint local minimiser in the $C^2$ norm. Retaining the boundary term produced by integration by parts gives, in addition to the Euler-Lagrange equation $f_s-\\frac{d}{dx}f_\\xi=0$ ([[cor-classical-euler-lagrange-equation-under-regularity]]), the two **natural boundary conditions**\n$$f_\\xi(a,u(a),u'(a))=0,\\qquad f_\\xi(b,u(b),u'(b))=0,$$\nwhich are precisely the one-dimensional case of [[thm-natural-boundary-condition-for-free-boundary-variations]]. For $f(x,s,\\xi)=\\tfrac12\\xi^2-g(x)s$ they read $u''=-g$ on $(a,b)$ with $u'(a)=u'(b)=0$.",
+        "deps": [
+          "thm-natural-boundary-condition-for-free-boundary-variations",
+          "cor-classical-euler-lagrange-equation-under-regularity",
+          "thm-fermat-interior-extremum",
+          "cor-mean-value-theorem",
+          "lem-fundamental-lemma-of-the-calculus-of-variations",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-integration-by-parts-with-interior-derivatives",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-heine-cantor-metric",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-chain-rule-for-total-derivatives",
+          "def-countable-choice"
+        ],
+        "strategy": "direct, testing the first variation with compactly supported and with endpoint-supported variations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 3 Section 3.5, Lemma 3.36 and the free-endpoint equation, printed pp. 37-38"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A, UC Berkeley, 19 March 2024 (complete 179-page author PDF)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "Section 1.4, printed pp. 7-8"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-a-norm-closed-nonconvex-set-need-not-be-weakly-closed",
+        "kind": "counterexample",
+        "title": "A norm-closed nonconvex set need not be weakly closed",
+        "statement": "**Counterexample.** Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $H=\\ell^2(\\mathbb N,\\mathbb R)$ ([[def-hilbert-space]], [[def-square-summable-family-on-an-arbitrary-index-set]]) and let $S=\\{u\\in H:\\|u\\|=1\\}$ be its unit sphere. Then $S$ is norm closed and norm bounded, but it is not weakly sequentially closed: the coordinate vectors $e_j$, the families that are $1$ at $j$ and $0$ elsewhere, lie in $S$ and satisfy $e_j\\rightharpoonup0\\notin S$. Indeed the weak closure of $S$ is the closed unit ball ([[cor-weak-closure-of-the-unit-sphere-is-the-closed-unit-ball]]). So the convexity hypothesis in [[lem-norm-closed-convex-sets-are-weakly-closed]] cannot be dropped, and a norm-closed admissible set need not be weakly closed for [[thm-direct-method-in-a-reflexive-banach-space]].",
+        "deps": [
+          "lem-norm-closed-convex-sets-are-weakly-closed",
+          "thm-direct-method-in-a-reflexive-banach-space",
+          "cor-weak-closure-of-the-unit-sphere-is-the-closed-unit-ball",
+          "def-hilbert-space",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "cor-ell-p-duality-by-counting-measure",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-axiom-of-choice",
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "rem-ell-p-is-l-p-of-counting-measure"
+        ],
+        "strategy": "direct verification with an orthonormal sequence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, discussion after Lemma 13.2, printed p. 297"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 2, compactness in Banach spaces, printed pp. 33-36"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-nonconvex-gradient-energy-can-lose-weak-lower-semicontinuity",
+        "kind": "counterexample",
+        "title": "A nonconvex gradient energy can lose weak lower semicontinuity",
+        "statement": "**Counterexample.** Assume the Axiom of Choice, the ultrafilter lemma, DC and HB ([[def-axiom-of-choice]], [[def-ultrafilter-extension-principle]], [[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]). On $\\Omega=(0,1)$ let $w:\\mathbb R\\to\\mathbb R$ be the $1$-periodic function with $w(t)=t$ on $[0,\\tfrac12]$ and $w(t)=1-t$ on $[\\tfrac12,1]$, and put $u_k(x)=\\tfrac1k w(kx)$ for integers $k\\ge1$. Then $u_k\\to0$ uniformly, $u_k'\\in\\{\\pm1\\}$ almost everywhere, and $u_k\\rightharpoonup0$ in $H^1(0,1)$. For the nonnegative integrand $f(\\xi)=(\\xi^2-1)^2$, which is not convex since $f(0)=1>\\tfrac12f(-1)+\\tfrac12f(1)=0$,\nThe integral is interpreted in $[0,+\\infty]$ on $H^1(0,1)$; it need not be finite for every $H^1$ function.\n$$I(u)=\\int_0^1\\big(u'(x)^2-1\\big)^2dx$$\nsatisfies $I(u_k)=0$ for every $k$, while $I(0)=\\int_0^1 1\\,dx=1$. Hence $I(0)>\\lim_kI(u_k)=0$ and $I$ is not weakly sequentially lower semicontinuous. Also $I$ is not convex: $I(u_1)=I(-u_1)=0<I((u_1-u_1)/2)=1$, so [[lem-convex-norm-lower-semicontinuous-functionals-are-weakly-lower-semicontinuous]] does not apply. Nevertheless $I$ attains its minimum $0$ at every $u_k$. This example does not refute the existence conclusion of [[thm-direct-method-for-convex-integral-functionals]] with convexity removed: it also lies outside that theorem's $n\\ge2$ and $p=2$ upper-growth hypotheses.",
+        "deps": [
+          "lem-convex-norm-lower-semicontinuous-functionals-are-weakly-lower-semicontinuous",
+          "thm-direct-method-for-convex-integral-functionals",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "thm-acl-characterisation-of-w-one-p",
+          "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence",
+          "lem-w-one-p-is-reflexive",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-axiom-of-choice",
+          "def-extended-reals",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "direct computation along the oscillating sawtooth sequence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 2 Section 4.1, Theorems 2.46-2.50 and Example 2.54, printed pp. 44-45 and 52"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 13.2, Example 13.6 (convexity hypothesis), printed p. 298"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-fixed-trace-and-free-trace-variations-give-different-boundary-equations",
+        "kind": "example",
+        "title": "Fixed-trace and free-trace variations give different boundary equations",
+        "statement": "**Example.** Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain, let $f\\in L^2(\\Omega;\\mathbb R)$, and put\n$$I(u)=\\frac12\\int_\\Omega|Du|^2\\,dx-\\int_\\Omega fu\\,dx.$$\n(a) **Fixed trace:** a local minimiser in the $H^1$ norm on the nonempty affine class $K_g=\\{v\\in H^1(\\Omega):Tv=g\\}$, with $g\\in H^{1/2}(\\partial\\Omega)$, solves the weak Dirichlet problem $-\\Delta u=f$, $Tu=g$ ([[thm-dirichlet-principle-for-poisson-equation]], [[lem-affine-dirichlet-trace-class-is-nonempty-convex-and-weakly-closed]]).\n(b) **Free trace:** if $u\\in C^2(\\overline\\Omega)$ is a local minimiser in the $C^2$ norm on $C^2(\\overline\\Omega)$, then $-\\Delta u=f$ almost everywhere in $\\Omega$ and $\\partial_\\nu u=0$ on $\\partial\\Omega$. Choosing the continuous representative $f=-\\Delta u$ makes the interior equation pointwise. This is the boundary condition suggested by [[thm-natural-boundary-condition-for-free-boundary-variations]], proved directly here since a general $L^2$ forcing need not give a $C^2$ integrand.\n\nThe constant-shift identity is $I(u+c)=I(u)-c\\int_\\Omega f$. Thus $I$ is invariant under global constants exactly when $\\int_\\Omega f=0$, and it is never coercive on all of $H^1(\\Omega)$. If $\\int_\\Omega f\\ne0$, no free local minimiser exists. On a connected domain satisfying the extension-domain hypothesis of [[thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace]], zero-mean forcing gives a unique mean-zero weak Neumann solution; nonzero mean cannot be repaired merely by normalising the solution. On a disconnected domain compatibility is required on each component and the additive constants are independent on those components.",
+        "deps": [
+          "thm-weak-euler-lagrange-equation-for-integral-functionals",
+          "thm-natural-boundary-condition-for-free-boundary-variations",
+          "thm-dirichlet-principle-for-poisson-equation",
+          "lem-affine-dirichlet-trace-class-is-nonempty-convex-and-weakly-closed",
+          "thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace",
+          "lem-boundary-fundamental-lemma-of-the-calculus-of-variations",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "cor-first-green-identity-on-a-bounded-c-one-domain",
+          "lem-fundamental-lemma-of-the-calculus-of-variations",
+          "thm-holder-inequality-for-integrals",
+          "thm-fermat-interior-extremum"
+        ],
+        "strategy": "In case (a) the admissible directions are $H^1_0(\\Omega)$ and the bulk term vanishes on $C_c^\\infty$ tests, giving $\\int Du\\cdot D\\varphi=\\int f\\varphi$ for every $\\varphi\\in H^1_0(\\Omega)$; this is the Dirichlet problem. In case (b) with $\\varphi\\in C^\\infty(\\overline\\Omega)$ the same computation leaves the boundary term $\\int_{\\partial\\Omega}(\\partial_\\nu u)\\varphi\\,d\\sigma$, and the boundary fundamental lemma forces $\\partial_\\nu u=0$ on $\\partial\\Omega$. The final warning records that the free problem's coercivity fails modulo constants and that the mean-zero solvability statement is the one supplied by the linear theory; the example itself asserts the formal boundary identity only for a $C^2$ local minimiser.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 4 Sections 4.1-4.2, Theorems 4.3 and 4.5, printed pp. 47-50"
+            },
+            {
+              "title": "Francesco Paolo Maiale (course by Giovanni Alberti), Lecture Notes Calculus of Variations A, University of Pisa (last update 21 August 2019; complete 149-page notes)",
+              "url": "https://poisson.phc.dm.unipi.it/~fpmaiale/notes/CdV-A.pdf",
+              "locator": "Chapter 1 Sections 2.2-2.4, Dirichlet/Neumann/mixed conditions, printed pp. 7-10"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A, UC Berkeley, 19 March 2024 (complete 179-page author PDF)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "Section 1.4, printed pp. 7-8"
+            }
+          ]
+        },
+        "dependency_level": 9
+      }
+    ]
+  }
+]

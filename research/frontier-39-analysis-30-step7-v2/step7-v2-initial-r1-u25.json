@@ -1,0 +1,108 @@
+{
+  "run": "frontier-39-analysis-30",
+  "phase": "initial",
+  "round": 1,
+  "unit": "25",
+  "input_sha256": "9338524b8f90ef76ff4d0d3c41b2d942e870edbc6da3d7062fa8aeac770c3e1f",
+  "decisions": [
+    {
+      "id": "ex-kostant-n-cohomology-for-the-trivial-sl3-module",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "71452568465fbd2624e518f4d80f751eed6f74104537a53842528216bf2b1bc4",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Step 2.1 asserts that each H^k has all six dot weights, contrary to L3, whose summands require length(w)=k. For k=0 the only element is the identity, so the only weight is 0. This is a false mathematical inference in the verification, not a missing citation. Repaired by retaining exactly the weights attached to length-k elements and the empty sum for k>3.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.columbia.edu/~woit/LieGroups-2012/borelweilbott.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-kostant-n-cohomology-for-the-trivial-sl3-module",
+      "disposition": "repaired",
+      "post_sha256": "88525fc53d738a8c6d5d54f5d9895dc64af27de3aa9d5c3c17de7811b717d146",
+      "review_context_sha256": "d5c6f3e6830ebca8ea5dd8f600b679d8ff787c508b6633cef0d1041c94146ad6",
+      "reason": "The trivial one-dimensional module has dominant integral highest weight 0. In A2, rho=alpha1+alpha2 and the simple reflections swap adjacent coordinate functionals; the six permutations have lengths 0,1,1,2,2,3. Applying each permutation to rho and subtracting rho gives the six listed distinct weights. The corrected degree restriction yields weight 0 in H^0, -alpha1 and -alpha2 in H^1, -2alpha1-alpha2 and -alpha1-2alpha2 in H^2, and -2alpha1-2alpha2 in H^3, with dimensions 1,2,2,1 and zero above degree 3. The AC premise is retained from the supplier; the enumeration itself is finite. The Example and page interface are unchanged. This is a local repair review, not independent acceptance of my own edit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.columbia.edu/~woit/LieGroups-2012/borelweilbott.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_closed_defect",
+      "id": "ex-kostant-n-cohomology-for-the-trivial-sl3-module",
+      "run": "frontier-39-analysis-30",
+      "stage": "7-adjudicate",
+      "phase": "initial",
+      "round": 1,
+      "unit": "25",
+      "class": "accuracy",
+      "subclass": "invalid-inference",
+      "severity": "fatal",
+      "location": "proof-step",
+      "step": "2.1",
+      "disposition": "fixed",
+      "finding": "The degree-k group was incorrectly assigned every dot weight instead of only the weights attached to length-k Weyl elements; H^0 has weight 0 alone.",
+      "repair": "Step 2.1 now restricts weights to length-k elements and states the empty-sum vanishing above degree three.",
+      "post_sha256": "88525fc53d738a8c6d5d54f5d9895dc64af27de3aa9d5c3c17de7811b717d146",
+      "evidence_path": "research/frontier-39-analysis-30-step7-v2/step7-v2-initial-r1-u25.json",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.columbia.edu/~woit/LieGroups-2012/borelweilbott.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "source_check": "Consulted Woit, section 2, printed page 4, Theorem 1 and its complete accompanying proof-method discussion. It supplies the length-indexed theorem for finite-dimensional highest-weight modules, not the local sl3 computation. No claim of reading Al-Faisal in this session.",
+    "dependencies_checked": [
+      "thm-kostant-nilradical-cohomology-theorem",
+      "def-length-and-longest-element-of-a-finite-weyl-group",
+      "prop-weyl-length-equals-positive-root-inversion-number",
+      "thm-rank-two-root-system-classification",
+      "prop-root-systems-of-the-classical-complex-lie-algebras",
+      "def-classical-complex-matrix-lie-algebras",
+      "def-integral-dominant-and-strictly-dominant-weights",
+      "def-weyl-vector-rho-for-a-chosen-positive-system",
+      "def-root-reflections-and-the-weyl-group-action",
+      "def-axiom-of-choice"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-kostant-n-cohomology-for-the-trivial-sl3-module.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-kostant-n-cohomology-for-the-trivial-sl3-module.md",
+        "exit_code": 0,
+        "result": "1 file; YAML and all math spans parse"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-kostant-n-cohomology-for-the-trivial-sl3-module.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-39-analysis-30-batch-25.proof-contracts.json --strict --items ex-kostant-n-cohomology-for-the-trivial-sl3-module",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 item checked; first attempt reported six missing L1-to-2.1 citation-use mappings, all corrected before this passing check."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller integration and independent rejudgment; no worker judgment, stamp, certificate, or round-state write performed.",
+    "contract_repair": "Under the shared-write lock, synchronized only the assigned derivation 2.1, its L1 citation-use maps, and the empty boundary evidence in research/frontier-39-analysis-30-batch-25.proof-contracts.json. Original risk-review evidence is preserved. Aggregate contract regeneration belongs to the controller integration path.",
+    "interface_comparison": "Only Verification step 2.1 changed. The complete Example section, all Statements/Definitions, dependencies, sources, and owning page remain unchanged, so no downstream propagation is required.",
+    "published_ledger": "No published defect was discovered in the actual consumed clauses; no published-ledger update proposed."
+  }
+}

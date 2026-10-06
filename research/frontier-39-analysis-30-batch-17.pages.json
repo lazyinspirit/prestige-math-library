@@ -1,0 +1,1782 @@
+[
+  {
+    "order": 458.043,
+    "id": "strongly-continuous-semigroups-and-hille-yosida",
+    "kind": "A",
+    "category": "pde",
+    "title": "Strongly Continuous Semigroups and Hille Yosida",
+    "companion": "strongly-continuous-semigroups-and-hille-yosida-examples",
+    "requires": [
+      "constrained-variational-problems-and-variational-inequalities"
+    ],
+    "items": [
+      {
+        "id": "def-strongly-continuous-semigroup",
+        "kind": "definition",
+        "title": "Strongly continuous semigroup",
+        "statement": "Let $X$ be a Banach space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ ([[def-banach-space]], [[rem-real-and-complex-normed-space-convention]]) and let $\\mathcal B(X)$ be the bounded linear operators on $X$ ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). A family $(T(t))_{t\\ge0}\\subseteq\\mathcal B(X)$ is a **strongly continuous one-parameter semigroup** (or $C_0$-semigroup) if (i) $T(0)=I$; (ii) $T(t+s)=T(t)T(s)$ for all $s,t\\ge0$; (iii) for every $x\\in X$ the orbit map $t\\mapsto T(t)x$ is continuous from $[0,\\infty)$ into $X$. Property (iii) says that $t\\mapsto T(t)$ is continuous for the strong operator topology on $\\mathcal B(X)$; no continuity in the operator norm ([[def-operator-norm]]) is assumed or implied, and the operators need be neither isometries nor contractions. A **strongly continuous group** is defined analogously with $\\mathbb R$ in place of $[0,\\infty)$ and the functional equation holding for all $s,t\\in\\mathbb R$.",
+        "deps": [
+          "def-operator-norm",
+          "def-banach-space",
+          "rem-real-and-complex-normed-space-convention",
+          "def-bounded-linear-operator",
+          "def-space-of-bounded-linear-operators"
+        ],
+        "strategy": "Definition and the elementary consequences proved in its current Definition section.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 5, Definition 5.1, printed p. 36"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, Definition 1.1, printed p. 1"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-a-c-zero-semigroup-is-uniformly-bounded-on-every-compact-time-interval",
+        "kind": "lemma",
+        "title": "A semigroup with continuity at zero is uniformly bounded on every compact time interval",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $X$ be a Banach space and let $(T(t))_{t\\ge0}\\subseteq\\mathcal B(X)$ satisfy $T(0)=I$, $T(t+s)=T(t)T(s)$ for $s,t\\ge0$ and $\\lim_{t\\downarrow0}T(t)x=x$ for every $x\\in X$ (in particular every strongly continuous semigroup satisfies these hypotheses, [[def-strongly-continuous-semigroup]]). Then for every $t_0\\ge0$, $\\sup_{0\\le t\\le t_0}\\|T(t)\\|<\\infty$.",
+        "deps": [
+          "def-strongly-continuous-semigroup",
+          "thm-uniform-boundedness-principle",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "lem-composition-operator-norm-inequality",
+          "def-dependent-choice"
+        ],
+        "strategy": "direct, combining the uniform boundedness principle with the semigroup law: first a finite bound on a small interval $[0,\\delta]$, then iteration over $\\lfloor t_0/\\delta\\rfloor$ steps.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 5, Lemma 5.2 and Proposition 5.3, printed pp. 37-38"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, Lemma 11.6, printed pp. 253-254"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, Lemma 1.4 and Lemma 1.7, printed pp. 3-5"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-strong-continuity-at-zero-implies-orbit-continuity",
+        "kind": "lemma",
+        "title": "Continuity at time zero implies continuity of every orbit",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $X$ be a Banach space and $(T(t))_{t\\ge0}\\subseteq\\mathcal B(X)$ satisfy $T(0)=I$, $T(t+s)=T(t)T(s)$ for $s,t\\ge0$ and $\\lim_{t\\downarrow0}T(t)x=x$ for every $x\\in X$. Then $(T(t))$ is a strongly continuous semigroup ([[def-strongly-continuous-semigroup]]): every orbit map $t\\mapsto T(t)x$ is continuous on $[0,\\infty)$.",
+        "deps": [
+          "def-dependent-choice",
+          "def-strongly-continuous-semigroup",
+          "lem-a-c-zero-semigroup-is-uniformly-bounded-on-every-compact-time-interval",
+          "def-operator-norm",
+          "lem-composition-operator-norm-inequality"
+        ],
+        "strategy": "direct, transporting continuity at $0$ to an arbitrary time with the functional equation and the local bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 5, Proposition 5.3, printed pp. 37-38"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, Lemma 1.7, printed pp. 4-5"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "thm-exponential-bound-for-a-c-zero-semigroup",
+        "kind": "theorem",
+        "title": "Exponential bound for a C0-semigroup",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ ([[def-strongly-continuous-semigroup]]). Then there exist $M\\ge1$ and $\\omega\\in\\mathbb R$ with $\\|T(t)\\| \\le Me^{\\omega t}$ for all $t\\ge0$. For $X\\ne\\{0\\}$ one may take $M:=\\sup_{0\\le s\\le1}\\|T(s)\\|$ and $\\omega:=\\log M$; for $X=\\{0\\}$ take $M=1$, $\\omega=0$.",
+        "deps": [
+          "def-dependent-choice",
+          "def-strongly-continuous-semigroup",
+          "lem-a-c-zero-semigroup-is-uniformly-bounded-on-every-compact-time-interval",
+          "def-operator-norm",
+          "lem-composition-operator-norm-inequality",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "thm-exponential-addition-formula",
+          "def-bounded-linear-operator"
+        ],
+        "strategy": "direct, bounding the powers of $T(1)$ by the local bound and absorbing them into an exponential.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 5, Proposition 5.5 and Definition 5.6, printed pp. 39-40"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, Lemma 11.6, printed pp. 253-254"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, Lemma 1.4, printed pp. 2-3"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "lem-linearity-of-the-bochner-integral",
+        "kind": "lemma",
+        "title": "Linearity of the Bochner integral",
+        "statement": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space, let $X$ be a real or complex Banach space, and let $f,g:\\Omega\\to X$ be Bochner integrable ([[def-bochner-integrable-function]]) with $\\alpha,\\beta$ scalars. Then $\\alpha f+\\beta g$ is Bochner integrable and $\\int_\\Omega(\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int_\\Omega f\\,d\\mu+\\beta\\int_\\Omega g\\,d\\mu$; for a measurable set $E$ the same identity holds with $f,g$ replaced by $f\\mathbf 1_E,g\\mathbf 1_E$. The integral is therefore additive and homogeneous, and in particular well defined on differences.",
+        "deps": [
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "lem-banach-valued-simple-integral-is-well-defined",
+          "lem-vector-operations-are-continuous-in-a-normed-space"
+        ],
+        "strategy": "direct, approximating $\\alpha f+\\beta g$ by the corresponding linear combinations of the defining simple functions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.1, the integral of regulated functions and its linearity, printed pp. 249-250"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 7, integral manipulations in the proof of Theorems 7.4 and 7.10, printed pp. 186-198"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-average-convergence-of-a-continuous-banach-valued-function",
+        "kind": "lemma",
+        "title": "Average convergence for a continuous Banach-valued function",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$ and let $f:[a,b]\\to X$ be continuous. Then $f$ is Bochner integrable, and for $t\\in[a,b)$ and $h>0$ with $t+h\\le b$ one has $\\bigl\\|\\frac1h\\int_t^{t+h}f(s)\\,ds-f(t)\\bigr\\|\\le\\sup_{s\\in[t,t+h]}\\|f(s)-f(t)\\| \\to0$ as $h\\downarrow0$; analogously $\\frac1h\\int_{t-h}^t f\\to f(t)$ as $h\\downarrow0$ for $t\\in(a,b]$. The same one-sided limits hold for vector-valued curves that are merely continuous at $t$ provided they are Bochner integrable on some neighbourhood of $t$.",
+        "deps": [
+          "def-countable-choice",
+          "lem-linearity-of-the-bochner-integral",
+          "def-bochner-integrable-function",
+          "lem-bochner-integral-norm-inequality",
+          "def-metric-continuity",
+          "thm-heine-cantor-metric",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "direct, using explicit uniform step approximation, then linearity and the integral norm inequality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.1, proof of Theorem 11.3, printed p. 249"
+            },
+            {
+              "title": "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)",
+              "url": "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf",
+              "locator": "Chapter 6 Section 2.1, difference-quotient estimate in the proof of Theorem 2, printed p. 12"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve",
+        "kind": "lemma",
+        "title": "Mean value inequality for a differentiable Banach-valued curve",
+        "statement": "Let $X$ be a Banach space, $a<b$, and let $\\varphi:[a,b]\\to X$ be continuous on $[a,b]$ and differentiable on $(a,b)$ in the sense of [[def-frechet-derivative-between-banach-spaces]]. If there is $C\\ge0$ with $\\|\\varphi'(s)\\| \\le C$ for all $s\\in(a,b)$, then $\\|\\varphi(b)-\\varphi(a)\\| \\le C(b-a)$. In particular, if $\\varphi$ is continuous, differentiable on $(a,b)$ and $\\varphi'=0$ there, then $\\varphi$ is constant.",
+        "deps": [
+          "def-frechet-derivative-between-banach-spaces",
+          "def-banach-space",
+          "lem-vector-operations-are-continuous-in-a-normed-space",
+          "lem-reverse-triangle-inequality-in-a-normed-space"
+        ],
+        "strategy": "direct, by a maximal-interval argument on the auxiliary function $d(\\tau)=\\|\\varphi(\\tau)-\\varphi(r)\\|-\\widetilde C(\\tau-r)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.1, Theorem 11.1 and Corollary 11.2, printed pp. 247-248"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 7, difference-quotient estimates in the proofs of Theorems 7.4 and 7.5, printed pp. 186-192"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+        "kind": "lemma",
+        "title": "Fundamental theorem of calculus for Banach-valued continuous curves",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+        "deps": [
+          "def-countable-choice",
+          "lem-average-convergence-of-a-continuous-banach-valued-function",
+          "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve",
+          "lem-linearity-of-the-bochner-integral",
+          "def-bochner-integrable-function",
+          "lem-bochner-integral-norm-inequality",
+          "def-frechet-derivative-between-banach-spaces"
+        ],
+        "strategy": "direct, computing the difference quotient of the primitive with the average-convergence lemma and then applying the mean value inequality to $\\varphi$ minus its integral.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.1, Theorem 11.3, printed pp. 249-250"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, Remark 1.15(f), equations (1.2)-(1.4) and proof, printed p. 9 (March 19, 2026 revision)"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "def-infinitesimal-generator-of-a-c-zero-semigroup",
+        "kind": "definition",
+        "title": "Infinitesimal generator of a C0-semigroup",
+        "statement": "For a Banach space $X$, the operator vocabulary of [[def-unbounded-linear-operator-domain-and-graph]] and [[def-densely-defined-closed-and-closable-operator]] is extended as follows: an operator is a linear map $A:D(A)\\to X$ on a linear subspace of $X$, its graph is $\\Gamma(A)=\\{(x,Ax):x\\in D(A)\\}\\subseteq X\\times X$, it is closed when this graph is closed, and densely defined when $D(A)$ is dense in $X$. Use $\\|(x,y)\\|=\\|x\\|+\\|y\\|$ on $X\\times X$ and the graph norm $\\|x\\|_A=\\|x\\|+\\|Ax\\|$. These norms are equivalent to the square-sum norms in the Hilbert suppliers. The product is Banach because its two coordinate Cauchy sequences converge in $X$; the closed graph is therefore Banach, and $x\\mapsto(x,Ax)$ is an isometry of the graph-norm domain onto it. Under Countable Choice, sequential closedness is equivalent to closedness: for any point in a closure, choose graph points within $1/n$ and pass to their limit.\n\nLet $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ ([[def-strongly-continuous-semigroup]]). Its **infinitesimal generator** is the linear operator $A:D(A)\\subseteq X\\to X$ with domain $$D(A):=\\Bigl\\{x\\in X:\\ \\lim_{t\\downarrow0}\\frac{T(t)x-x}{t}\\ \\text{exists in }X\\Bigr\\}$$ and $Ax:=\\lim_{t\\downarrow0}\\frac{T(t)x-x}{t}$ for $x\\in D(A)$. The limit is a one-sided limit at the boundary point $0$, and $D(A)$ is a linear subspace of $X$ ([[def-normed-subspace]]); the operator is recorded as the pair $(A,D(A))$ in the sense of [[def-unbounded-linear-operator-domain-and-graph]] and [[def-densely-defined-closed-and-closable-operator]]. Neither boundedness nor closedness of $A$, nor density of $D(A)$, is assumed in the definition; under its stated choice hypothesis, [[thm-generators-are-closed-and-densely-defined]] proves that the graph of $A$ is closed and $D(A)$ is dense in $X$. The domain need not be closed in the norm of $X$.\n\n**The one-sided limit.** For $x\\in D(A)$ the difference quotient\n$\\frac{T(t)x-x}{t}\\in X$ is defined for every $t>0$, and the defining limit is\ntaken along $t\\downarrow0$ only; no two-sided limit at the boundary point $0$ of\n$[0,\\infty)$ is considered, and the vector $Ax$ is the limit when it exists. The\nvalue $Ax$ is unique because $X$ is a metric space ([[def-banach-space]]).\n\n**The domain is a linear subspace.** The zero vector lies in $D(A)$ and $A0=0$. If $x,y\\in D(A)$ and $\\alpha,\\beta$ are scalars, then by linearity of\neach $T(t)$ ([[def-bounded-linear-operator]]) the difference quotient of\n$\\alpha x+\\beta y$ equals\n$\\alpha\\frac{T(t)x-x}{t}+\\beta\\frac{T(t)y-y}{t}$ for every $t>0$; as\n$t\\downarrow0$ this converges to $\\alpha Ax+\\beta Ay$, because vector addition\nand scalar multiplication are continuous and scalar multiplication by the fixed\nscalars $\\alpha,\\beta$ is continuous. Hence $\\alpha x+\\beta y\\in D(A)$ with\n$A(\\alpha x+\\beta y)=\\alpha Ax+\\beta Ay$, so $D(A)$ is a linear subspace of $X$\n([[def-normed-subspace]]) and $A$ is linear on it. The operator is recorded as\nthe pair $(A,D(A))$ in the vocabulary of [[def-unbounded-linear-operator-domain-and-graph]]\nand [[def-densely-defined-closed-and-closable-operator]].\n\n**What is not assumed.** Boundedness and graph closedness of $A$, and density of\n$D(A)$ in $X$, are not defining assumptions. Graph closedness and domain density\nare conclusions of the later theorem under its stated choice hypothesis; they\ndo not assert that $D(A)$ is closed in the norm of $X$. The semigroup axioms used here are those of\n[[def-strongly-continuous-semigroup]], in particular $T(t)$ is everywhere\ndefined and bounded for every $t\\ge0$.",
+        "deps": [
+          "def-strongly-continuous-semigroup",
+          "def-banach-space",
+          "def-bounded-linear-operator",
+          "def-unbounded-linear-operator-domain-and-graph",
+          "def-densely-defined-closed-and-closable-operator",
+          "def-normed-subspace"
+        ],
+        "strategy": "Definition and the elementary consequences proved in its current Definition section.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 1, Definition 1.2 and the following observations, printed pp. 49-50"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, definition of generator, printed pp. 254-255"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, Definition 1.1 and Remark 1.2, printed pp. 1-2 (March 19, 2026 revision)"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-semigroup-generator-commutes-with-orbits-on-its-domain",
+        "kind": "lemma",
+        "title": "The generator commutes with the semigroup on its domain",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with generator $(A,D(A))$ ([[def-infinitesimal-generator-of-a-c-zero-semigroup]]). If $x\\in D(A)$, then $T(t)x\\in D(A)$ and $AT(t)x=T(t)Ax$ for every $t\\ge0$; moreover the orbit $t\\mapsto T(t)x$ is differentiable on $(0,\\infty)$ with $\\frac{d}{dt}T(t)x=T(t)Ax=AT(t)x$, and right differentiable at $t=0$ with right derivative $Ax$.",
+        "deps": [
+          "lem-a-c-zero-semigroup-is-uniformly-bounded-on-every-compact-time-interval",
+          "def-dependent-choice",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "def-strongly-continuous-semigroup",
+          "def-operator-norm",
+          "lem-composition-operator-norm-inequality",
+          "lem-strong-continuity-at-zero-implies-orbit-continuity"
+        ],
+        "strategy": "direct, writing the difference quotients of the orbit as $T(\\cdot)$ applied to the generator quotient.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 1, Lemma 1.3, printed pp. 50-51"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, Lemma 11.7 and Corollary 11.10, printed pp. 255-259"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, Proposition 1.10 and proof, printed pp. 6-7 (March 19, 2026 revision)"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "lem-integrated-semigroup-orbits-belong-to-the-generator-domain",
+        "kind": "lemma",
+        "title": "Time integrals of semigroup orbits lie in the generator domain",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with generator $(A,D(A))$ ([[def-infinitesimal-generator-of-a-c-zero-semigroup]]). For every $x\\in X$ and every $t\\ge0$ the Bochner integral $J_tx:=\\int_0^tT(s)x\\,ds$ belongs to $D(A)$, and $AJ_tx=T(t)x-x$. The integral is taken in the sense of [[def-bochner-integrable-function]]; the integrand is continuous, hence Bochner integrable on $[0,t]$.",
+        "deps": [
+          "def-countable-choice",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "def-strongly-continuous-semigroup",
+          "lem-average-convergence-of-a-continuous-banach-valued-function",
+          "lem-linearity-of-the-bochner-integral",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "lem-bochner-integral-norm-inequality",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-bounded-linear-operator"
+        ],
+        "strategy": "direct, differentiating the orbit integral at $0$ with the functional equation and the average-convergence lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 1, Lemma 1.3.(iii)-(iv) and its proof, printed p. 51"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, proof of Corollary 11.10, printed pp. 255-258"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "thm-generators-are-closed-and-densely-defined",
+        "kind": "theorem",
+        "title": "The generator is closed and densely defined",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with generator $(A,D(A))$ ([[def-infinitesimal-generator-of-a-c-zero-semigroup]]). Then $A$ is a closed linear operator and $D(A)$ is dense in $X$ ([[def-densely-defined-closed-and-closable-operator]]).",
+        "deps": [
+          "def-dependent-choice",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "lem-integrated-semigroup-orbits-belong-to-the-generator-domain",
+          "lem-semigroup-generator-commutes-with-orbits-on-its-domain",
+          "lem-strong-continuity-at-zero-implies-orbit-continuity",
+          "def-densely-defined-closed-and-closable-operator",
+          "def-unbounded-linear-operator-domain-and-graph",
+          "lem-average-convergence-of-a-continuous-banach-valued-function",
+          "lem-a-c-zero-semigroup-is-uniformly-bounded-on-every-compact-time-interval",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "def-strongly-continuous-semigroup",
+          "def-bochner-integrable-function"
+        ],
+        "strategy": "direct: density from the orbit averages, closedness by passing a convergent sequence through the integral identity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 1, Theorem 1.4, printed pp. 51-52"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, Corollary 11.10, printed pp. 255-259"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, Proposition 1.19, proof parts 1-2, printed pp. 11-12 (March 19, 2026 revision)"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "def-resolvent-of-a-closed-operator",
+        "kind": "definition",
+        "title": "Resolvent and spectrum of a closed operator on a Banach space",
+        "statement": "Let $X$ be a Banach space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ ([[def-banach-space]], [[rem-real-and-complex-normed-space-convention]]) and let $A:D(A)\\subseteq X\\to X$ be a closed linear operator: $D(A)$ is a linear subspace and $\\Gamma(A)=\\{(x,Ax):x\\in D(A)\\}$ is closed in $X\\times X$ with norm $\\|(x,y)\\|=\\|x\\|+\\|y\\|$. This extends the Hilbert-space vocabulary of [[def-unbounded-linear-operator-domain-and-graph]] and [[def-densely-defined-closed-and-closable-operator]] to Banach spaces. A scalar $\\lambda\\in\\mathbb K$ belongs to the **resolvent set** $\\rho(A)$ if $\\lambda I-A:D(A)\\to X$ is bijective and its inverse is bounded on $X$. Under Dependent Choice, boundedness of the inverse follows from bijectivity by [[thm-closed-graph-theorem]]; thus under DC this is equivalent to the bijectivity-only convention. For $\\lambda\\in\\rho(A)$ the bounded operator $$R(\\lambda,A):=(\\lambda I-A)^{-1}\\in\\mathcal B(X)$$ is the **resolvent**, and $\\sigma(A):=\\mathbb K\\setminus\\rho(A)$ is the spectrum. One has $R(\\lambda,A)X=D(A)$, $R(\\lambda,A)(\\lambda I-A)y=y$ for $y\\in D(A)$, and $\\lambda R(\\lambda,A)x-x=AR(\\lambda,A)x$ for $x\\in X$; in particular $AR(\\lambda,A)=\\lambda R(\\lambda,A)-I\\in\\mathcal B(X)$. This is the Banach-space form of the Hilbert-space vocabulary [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]; the shift convention $\\lambda I-A$ is the same, with the closed graph theorem replacing the Hilbert-space bounded-inverse convention.\n\n**Boundedness under DC.** Assume Dependent Choice. If $\\lambda\\in\\mathbb K$ and $\\lambda I-A$ is\nbijective, then $\\lambda I-A$ is a closed operator: its graph is the image of\nthe graph $\\Gamma(A)\\subseteq X\\oplus X$ ([[def-unbounded-linear-operator-domain-and-graph]])\nunder the homeomorphism $(y,z)\\mapsto(y,\\lambda y-z)$ of $X\\oplus X$ with\ninverse $(u,v)\\mapsto(u,\\lambda u-v)$. Hence $(\\lambda I-A)^{-1}:X\\to X$ has\nclosed graph and is everywhere defined, so the closed graph theorem\n([[thm-closed-graph-theorem]], which assumes DC) makes it bounded; this is the\none place where an axiom beyond ZF enters, and it is the DC carried by the cited\ntheorem. The Banach-space vocabulary is [[def-banach-space]] with the scalar\nconvention of [[rem-real-and-complex-normed-space-convention]]; boundedness and\nthe space $\\mathcal B(X)$ are those of [[def-bounded-linear-operator]].\n\n**Elementary identities.** Let $\\lambda\\in\\rho(A)$ and $R:=R(\\lambda,A)$. Since\n$R$ is the inverse of the bijection $\\lambda I-A:D(A)\\to X$, its range is\n$D(A)$: $RX=D(A)$. It satisfies\n$$R(\\lambda I-A)y=y\\quad(y\\in D(A)),\\qquad(\\lambda I-A)Rx=x\\quad(x\\in X).$$\nThe first identity says $R(\\lambda,A)(\\lambda I-A)=I_{D(A)}$ and the second\nsays $(\\lambda I-A)R(\\lambda,A)=I_X$. Reading the second identity as\n$\\lambda Rx-ARx=x$ and rearranging gives\n$$\\lambda R(\\lambda,A)x-x=AR(\\lambda,A)x\\qquad(x\\in X),$$\nthat is $AR(\\lambda,A)=\\lambda R(\\lambda,A)-I$ as everywhere-defined operators\n$X\\to X$; in particular $AR(\\lambda,A)\\in\\mathcal B(X)$ even though $A$ itself\nneed not be bounded. The same identities hold for every $\\lambda\\in\\rho(A)$,\nand $\\sigma(A):=\\mathbb K\\setminus\\rho(A)$ collects the scalars for which\n$\\lambda I-A$ fails to be bijective or has an unbounded inverse. Under DC,\nthe latter possibility is excluded by the closed graph argument above. When $X$ is a Hilbert space this is the\nBanach-space form of [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]],\nwith the same shift convention $\\lambda I-A$; the closed graph theorem replaces\nthe Hilbert-space convention that the resolvent is bounded by definition.",
+        "deps": [
+          "def-banach-space",
+          "rem-real-and-complex-normed-space-convention",
+          "def-unbounded-linear-operator-domain-and-graph",
+          "def-densely-defined-closed-and-closable-operator",
+          "thm-closed-graph-theorem",
+          "def-bounded-linear-operator",
+          "def-resolvent-and-spectrum-of-a-closed-unbounded-operator"
+        ],
+        "strategy": "Definition and the elementary consequences proved in its current Definition section.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter IV Section 1, Definition 1.1 and the resolvent identity (1.1), printed pp. 239-241"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, resolvent definition preceding Remark 1.16 and Remark 1.16(a)-(c), printed p. 10 (March 19, 2026 revision)"
+            },
+            {
+              "title": "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)",
+              "url": "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf",
+              "locator": "Chapter 6 Section 2.2, Definitions 3-4, printed pp. 12-13"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-semigroup-generator-resolvents-satisfy-the-resolvent-identity",
+        "kind": "lemma",
+        "title": "Resolvent identity for closed operators",
+        "statement": "Let $A:D(A)\\subseteq X\\to X$ be a closed linear operator on a Banach space $X$, with resolvent $R(\\lambda,A)=(\\lambda I-A)^{-1}$ on $\\rho(A)$ ([[def-resolvent-of-a-closed-operator]]). For all $\\lambda,\\mu\\in\\rho(A)$, $$R(\\lambda,A)-R(\\mu,A)=(\\mu-\\lambda)R(\\lambda,A)R(\\mu,A),$$ and consequently $R(\\lambda,A)R(\\mu,A)=R(\\mu,A)R(\\lambda,A)$.",
+        "deps": [
+          "def-resolvent-of-a-closed-operator",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "def-bounded-linear-operator",
+          "def-unbounded-linear-operator-domain-and-graph"
+        ],
+        "strategy": "direct, factoring the difference of the two inverse shifts through the common domain $D(A)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter IV Section 1, Resolvent Equation 1.2, printed pp. 240-241"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1, Remark 1.16(c), resolvent equation (1.7), printed p. 10 (March 19, 2026 revision)"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "thm-laplace-transform-formula-for-the-semigroup-resolvent",
+        "kind": "theorem",
+        "title": "Laplace transform formula for the resolvent",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with generator $A$, and let $M\\ge1$, $\\omega\\in\\mathbb R$ satisfy $\\|T(t)\\| \\le Me^{\\omega t}$ for all $t\\ge0$ ([[thm-exponential-bound-for-a-c-zero-semigroup]]). Then for every real $\\lambda>\\omega$: $\\lambda\\in\\rho(A)$; for every $x\\in X$ the improper Bochner integral $$\\int_0^\\infty e^{-\\lambda t}T(t)x\\,dt:=\\lim_{R\\to\\infty}\\int_0^R e^{-\\lambda t}T(t)x\\,dt$$ converges in $X$; and $$R(\\lambda,A)x=\\int_0^\\infty e^{-\\lambda t}T(t)x\\,dt,\\qquad \\|R(\\lambda,A)\\| \\le\\frac{M}{\\lambda-\\omega}.$$ In particular $(\\omega,\\infty)\\subseteq\\rho(A)$.",
+        "deps": [
+          "def-dependent-choice",
+          "def-resolvent-of-a-closed-operator",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "lem-integrated-semigroup-orbits-belong-to-the-generator-domain",
+          "lem-semigroup-generator-commutes-with-orbits-on-its-domain",
+          "thm-generators-are-closed-and-densely-defined",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "lem-linearity-of-the-bochner-integral",
+          "lem-average-convergence-of-a-continuous-banach-valued-function",
+          "thm-exponential-bound-for-a-c-zero-semigroup",
+          "lem-bochner-integral-norm-inequality",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion"
+        ],
+        "strategy": "direct: define the Laplace integral as a norm limit of finite integrals, verify the two inverse identities on $D(A)$, and transfer them to $X$ by closedness and density.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 1, Theorem 1.10, printed pp. 55-56"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, Lemma 11.13, printed pp. 262-263"
+            },
+            {
+              "title": "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)",
+              "url": "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf",
+              "locator": "Chapter 6 Section 2.2, the Laplace-transform derivation following Theorem 3, printed p. 14"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "cor-resolvent-power-estimates-for-semigroup-generators",
+        "kind": "corollary",
+        "title": "Resolvent power estimates for semigroup generators",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with generator $A$ and let $M\\ge1$, $\\omega\\in\\mathbb R$ satisfy $\\|T(t)\\| \\le Me^{\\omega t}$ ([[thm-exponential-bound-for-a-c-zero-semigroup]]). Then for every real $\\lambda>\\omega$ and every integer $m\\ge1$, $$R(\\lambda,A)^mx=\\frac1{(m-1)!}\\int_0^\\infty s^{m-1}e^{-\\lambda s}T(s)x\\,ds\\qquad(x\\in X),$$ the integral converging absolutely, and $$\\|R(\\lambda,A)^m\\| \\le\\frac{M}{(\\lambda-\\omega)^m}.$$",
+        "deps": [
+          "def-dependent-choice",
+          "thm-laplace-transform-formula-for-the-semigroup-resolvent",
+          "lem-semigroup-generator-resolvents-satisfy-the-resolvent-identity",
+          "lem-linearity-of-the-bochner-integral",
+          "def-bochner-integrable-function",
+          "lem-bochner-integral-norm-inequality",
+          "thm-exponential-bound-for-a-c-zero-semigroup"
+        ],
+        "strategy": "direct: differentiate the Laplace representation in $\\lambda$, identify the derivative with $-R(\\lambda,A)^2$ by the resolvent identity, and iterate.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 1, Corollary 1.11, printed pp. 56-57"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, Corollary 11.14, printed pp. 263-264"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "lem-exponential-series-of-a-bounded-operator",
+        "kind": "lemma",
+        "title": "The exponential series of a bounded operator",
+        "statement": "Let $X$ be a real or complex Banach space and let $A\\in\\mathcal B(X)$ ([[def-bounded-linear-operator]]). For $t\\in\\mathbb R$ define $E(t):=\\sum_{n=0}^\\infty\\frac{t^n}{n!}A^n$. Then the series converges absolutely in the operator norm $\\|\\cdot\\|$ of $\\mathcal B(X)$, uniformly for $t$ in compact subsets of $\\mathbb R$; $E(t)\\in\\mathcal B(X)$ with $\\|E(t)\\| \\le e^{|t|\\|A\\|}$; $E(0)=I$ and $E(t+s)=E(t)E(s)$ for all $s,t\\in\\mathbb R$; $t\\mapsto E(t)$ is of class $C^\\infty$ in the operator norm with $$E'(t)=AE(t)=E(t)A,$$ and $\\|E(t)-I-tA\\| \\le\\frac{t^2}{2}\\|A\\|^2e^{|t|\\|A\\|}$, so that $\\frac{E(t)-I}{t}\\to A$ in operator norm as $t\\to0$. In particular $E$ is a uniformly continuous (hence strongly continuous) group of bounded operators on $X$ whose generator is the bounded operator $A$.",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "lem-operator-norm-is-a-norm",
+          "lem-composition-operator-norm-inequality",
+          "thm-bounded-operator-space-is-banach",
+          "def-series-and-absolute-convergence-in-a-normed-space",
+          "thm-banach-series-criterion",
+          "lem-absolutely-convergent-series-is-cauchy",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-is-a-bijection-onto-positive-reals"
+        ],
+        "strategy": "direct, by norm estimates on the exponential series and an elementary Cauchy-product lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.2, Theorem 11.4, printed pp. 250-252"
+            },
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 3, Theorem 3.7 (uniformly continuous semigroups), printed pp. 20-23"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-yosida-resolvent-converges-strongly-to-the-identity",
+        "kind": "lemma",
+        "title": "The Yosida resolvent converges strongly to the identity",
+        "statement": "Let $A:D(A)\\subseteq X\\to X$ be closed and densely defined on a Banach space $X$, and let $M\\ge1$, $\\omega\\in\\mathbb R$ be such that $(\\omega,\\infty)\\subseteq\\rho(A)$ and $\\|R(\\lambda,A)^n\\| \\le M(\\lambda-\\omega)^{-n}$ for all real $\\lambda>\\omega$ and every $n\\ge1$ ([[def-resolvent-of-a-closed-operator]]). Then, as $\\lambda\\to\\infty$ along the reals, $\\lambda R(\\lambda,A)x\\to x$ for every $x\\in X$, and $\\lambda R(\\lambda,A)Ax\\to Ax$ for every $x\\in D(A)$.",
+        "deps": [
+          "def-resolvent-of-a-closed-operator",
+          "cor-resolvent-power-estimates-for-semigroup-generators",
+          "thm-generators-are-closed-and-densely-defined",
+          "def-bounded-linear-operator",
+          "def-operator-norm"
+        ],
+        "strategy": "direct: the identity on the dense domain and a uniform bound, then a three-epsilon argument.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3, Lemma 3.4, printed pp. 72-73"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, Lemma 11.15, printed pp. 263-264"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.2, Yosida approximation step of Theorem 1.26, printed pp. 16-20"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "def-yosida-approximants",
+        "kind": "definition",
+        "title": "Yosida approximants",
+        "statement": "Let $A:D(A)\\subseteq X\\to X$ be closed and densely defined on a Banach space $X$ with $(\\omega,\\infty)\\subseteq\\rho(A)$, and let $R(\\lambda,A)=(\\lambda I-A)^{-1}$ ([[def-resolvent-of-a-closed-operator]]). For real $\\lambda>\\omega$ the **Yosida approximant** of $A$ at $\\lambda$ is $$A_\\lambda:=\\lambda AR(\\lambda,A)=\\lambda^2R(\\lambda,A)-\\lambda I\\in\\mathcal B(X).$$ The equality with $\\lambda^2R(\\lambda,A)-\\lambda I$ uses $AR(\\lambda,A)=\\lambda R(\\lambda,A)-I$; in particular $A_\\lambda$ is a bounded everywhere defined operator. Distinct approximants commute, $A_\\lambda A_\\mu=A_\\mu A_\\lambda$, and each commutes with $R(\\mu,A)$.\n\n**The two formulae agree.** Since $\\lambda\\in\\rho(A)$, the resolvent identity\n$AR(\\lambda,A)=\\lambda R(\\lambda,A)-I$ of [[def-resolvent-of-a-closed-operator]]\ngives\n$$A_\\lambda=\\lambda AR(\\lambda,A)=\\lambda\\bigl(\\lambda R(\\lambda,A)-I\\bigr)=\\lambda^2R(\\lambda,A)-\\lambda I,$$\nand the right-hand side is a sum of bounded everywhere defined operators\n([[def-bounded-linear-operator]]). Hence each $A_\\lambda$ is bounded with\n$D(A_\\lambda)=X$, and it is meant as a bounded approximation of the possibly\nunbounded $A$; the sense in which $A_\\lambda x\\to Ax$ for $x\\in D(A)$ is a\ntheorem proved on this page, not part of the definition.\n\n**Commutativity.** For real $\\lambda,\\mu>\\omega$ the resolvents commute,\n$R(\\lambda,A)R(\\mu,A)=R(\\mu,A)R(\\lambda,A)$, by\n[[lem-semigroup-generator-resolvents-satisfy-the-resolvent-identity]].\nTherefore\n$$A_\\lambda A_\\mu=(\\lambda^2R(\\lambda,A)-\\lambda I)(\\mu^2R(\\mu,A)-\\mu I)$$\nis symmetric in $\\lambda$ and $\\mu$: the only mixed term that is not obviously\nsymmetric is $\\lambda^2\\mu^2R(\\lambda,A)R(\\mu,A)$, and that product is symmetric\nby the resolvent identity. Hence distinct approximants commute, and for the same\nreason\n$$A_\\lambda R(\\mu,A)=\\lambda\\bigl(\\lambda R(\\lambda,A)-I\\bigr)R(\\mu,A)=\\lambda^2R(\\lambda,A)R(\\mu,A)-\\lambda R(\\mu,A)$$\nequals $R(\\mu,A)A_\\lambda$, since $A_\\lambda$ is the product of $R(\\lambda,A)$\nwith bounded operators and resolvents at $\\lambda$ and $\\mu$ commute. The closedness and density of $A$ are hypotheses, not conclusions drawn from a generator theorem. The resolvent vocabulary is [[def-resolvent-of-a-closed-operator]], and the definition itself asserts no approximation property.",
+        "deps": [
+          "def-resolvent-of-a-closed-operator",
+          "def-bounded-linear-operator",
+          "lem-semigroup-generator-resolvents-satisfy-the-resolvent-identity"
+        ],
+        "strategy": "Definition and the elementary consequences proved in its current Definition section.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3, formula (3.7), printed p. 74"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, formula (11.33), printed p. 263"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.2, Lemma 1.22 and Yosida approximations in the proof of Theorem 1.26, printed pp. 16, 18-19 (March 19, 2026 revision)"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "lem-yosida-approximants-are-bounded-and-converge-on-the-domain",
+        "kind": "lemma",
+        "title": "Yosida approximants are bounded and converge on the domain",
+        "statement": "Under the hypotheses of [[lem-yosida-resolvent-converges-strongly-to-the-identity]], let $A_\\lambda=\\lambda AR(\\lambda,A)$ be the Yosida approximants ([[def-yosida-approximants]]). Then $\\|A_\\lambda\\| \\le\\lambda^2\\frac{M}{\\lambda-\\omega}+|\\lambda|$ for $\\lambda>\\omega$, and $A_\\lambda x\\to Ax$ as $\\lambda\\to\\infty$ for every $x\\in D(A)$.",
+        "deps": [
+          "lem-yosida-resolvent-converges-strongly-to-the-identity",
+          "def-yosida-approximants",
+          "def-resolvent-of-a-closed-operator",
+          "cor-resolvent-power-estimates-for-semigroup-generators",
+          "lem-operator-norm-is-a-norm",
+          "def-operator-norm"
+        ],
+        "strategy": "direct: the norm bound from the identity form, and pointwise convergence from the strong resolvent convergence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3, Lemma 3.4, printed pp. 72-73"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, Lemma 11.15, printed pp. 263-264"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "justified_by": []
+      },
+      {
+        "id": "thm-bounded-yosida-semigroups-converge-to-the-generated-semigroup",
+        "kind": "theorem",
+        "title": "Bounded Yosida semigroups converge to the generated semigroup",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $A:D(A)\\subseteq X\\to X$ be closed and densely defined on a Banach space $X$ and let $M\\ge1$, $\\omega\\in\\mathbb R$ satisfy $(\\omega,\\infty)\\subseteq\\rho(A)$ and $\\|R(\\lambda,A)^n\\| \\le M(\\lambda-\\omega)^{-n}$ for all real $\\lambda>\\omega$, $n\\ge1$. Let $A_\\lambda=\\lambda AR(\\lambda,A)$ be the Yosida approximants ([[def-yosida-approximants]]) and let $E_\\lambda(t):=e^{tA_\\lambda}$ be the bounded-operator exponentials of [[lem-exponential-series-of-a-bounded-operator]]. Then for every $x\\in X$ the limit $T(t)x:=\\lim_{\\lambda\\to\\infty}E_\\lambda(t)x$ exists, uniformly for $t$ in compact subsets of $[0,\\infty)$, and $T$ is a strongly continuous semigroup on $X$ with $\\|T(t)\\| \\le Me^{\\omega t}$ and generator $A$.",
+        "deps": [
+          "def-dependent-choice",
+          "lem-exponential-series-of-a-bounded-operator",
+          "lem-yosida-approximants-are-bounded-and-converge-on-the-domain",
+          "def-yosida-approximants",
+          "thm-generators-are-closed-and-densely-defined",
+          "def-resolvent-of-a-closed-operator",
+          "def-strongly-continuous-semigroup",
+          "lem-strong-continuity-at-zero-implies-orbit-continuity",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "def-operator-norm",
+          "lem-composition-operator-norm-inequality",
+          "thm-laplace-transform-formula-for-the-semigroup-resolvent",
+          "lem-average-convergence-of-a-continuous-banach-valued-function"
+        ],
+        "strategy": "direct: uniform bounds and a Cauchy estimate on the dense domain, then passage to the limit, and identification of the generator by uniqueness of the resolvent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3, Generation Theorem 3.8 and its proof, pp. 77-78"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, Theorem 11.16 and its proof, printed pp. 264-265"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.2, Theorem 1.26 and its proof, printed pp. 16-20"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "justified_by": []
+      },
+      {
+        "id": "thm-hille-yosida-generation-theorem",
+        "kind": "theorem",
+        "title": "Hille-Yosida generation theorem",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $A:D(A)\\subseteq X\\to X$ be a closed and densely defined linear operator on a Banach space $X$ and let $M\\ge1$, $\\omega\\in\\mathbb R$. Then $A$ generates a strongly continuous semigroup $(T(t))_{t\\ge0}$ with $\\|T(t)\\| \\le Me^{\\omega t}$ for all $t\\ge0$ if and only if both: (i) $(\\omega,\\infty)\\subseteq\\rho(A)$, and (ii) $\\|R(\\lambda,A)^n\\| \\le M(\\lambda-\\omega)^{-n}$ for every real $\\lambda>\\omega$ and every $n\\ge1$ ([[def-resolvent-of-a-closed-operator]]). All resolvent powers are required in general; the first power alone guarantees all power estimates when $M=1$, the exponentially rescaled contraction case, where all higher power estimates follow from the single one by submultiplicativity (treated later on this page).",
+        "deps": [
+          "def-dependent-choice",
+          "thm-bounded-yosida-semigroups-converge-to-the-generated-semigroup",
+          "thm-laplace-transform-formula-for-the-semigroup-resolvent",
+          "cor-resolvent-power-estimates-for-semigroup-generators",
+          "thm-generators-are-closed-and-densely-defined",
+          "def-resolvent-of-a-closed-operator",
+          "def-strongly-continuous-semigroup"
+        ],
+        "strategy": "direct: sufficiency is the Yosida construction and necessity is read off from the Laplace representation of the resolvent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3, Generation Theorem 3.8, printed pp. 77-78"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, Theorem 11.16, printed pp. 263-265"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.2, Theorem 1.26, printed pp. 16-20"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Comments on Chapter 7, Theorem 7.8 and Theorem 7.9, printed pp. 197-198"
+            }
+          ]
+        },
+        "dependency_level": 10,
+        "justified_by": []
+      },
+      {
+        "id": "cor-contraction-hille-yosida-theorem",
+        "kind": "corollary",
+        "title": "Contraction Hille-Yosida theorem",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $A:D(A)\\subseteq X\\to X$ be closed and densely defined on a Banach space $X$. Then $A$ generates a strongly continuous semigroup of contractions ($\\|T(t)\\| \\le1$ for all $t\\ge0$) if and only if $(0,\\infty)\\subseteq\\rho(A)$ and $\\|\\lambda R(\\lambda,A)\\| \\le1$ for all $\\lambda>0$, equivalently $\\|R(\\lambda,A)\\| \\le1/\\lambda$ for all $\\lambda>0$. In this case the first-power estimate implies all the power estimates $\\|R(\\lambda,A)^n\\| \\le\\lambda^{-n}$ by submultiplicativity, so no separate power condition is needed; when $X$ is complex, every $z$ with $\\operatorname{Re}z>0$ belongs to $\\rho(A)$ and $\\|R(z,A)^n\\|\\le(\\operatorname{Re}z)^{-n}$ for every $n\\ge1$.",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-resolvent-power-estimates-for-semigroup-generators",
+          "thm-laplace-transform-formula-for-the-semigroup-resolvent",
+          "def-dependent-choice",
+          "thm-hille-yosida-generation-theorem",
+          "lem-operator-norm-is-a-norm",
+          "lem-composition-operator-norm-inequality"
+        ],
+        "strategy": "direct: specialise the general theorem and observe that the first-power estimate implies all power estimates by submultiplicativity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3, Generation Theorem 3.5, printed pp. 73-77"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, Corollary 11.18, printed pp. 266-267"
+            },
+            {
+              "title": "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)",
+              "url": "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf",
+              "locator": "Chapter 6 Section 2.2, Theorem 3 and Section 5 Appendix, printed pp. 13-14, 33-37"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.2, the $\\omega$-contraction case (1.17) of Theorem 1.26, printed pp. 16-17"
+            }
+          ]
+        },
+        "dependency_level": 11,
+        "justified_by": []
+      },
+      {
+        "id": "def-dissipative-operator",
+        "kind": "definition",
+        "title": "Dissipative operator",
+        "statement": "Let $X$ be a Banach space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and let $A:D(A)\\subseteq X\\to X$ be a linear operator with domain $D(A)$ ([[def-unbounded-linear-operator-domain-and-graph]]). $A$ is **dissipative** if $$\\|(\\lambda I-A)x\\| \\ge\\lambda\\|x\\|\\qquad\\text{for all }\\lambda>0\\ \\text{and all }x\\in D(A);$$ equivalently $\\|x-\\alpha Ax\\| \\ge\\|x\\|$ for all $\\alpha>0$ and $x\\in D(A)$. A dissipative operator has injective $\\lambda I-A$ for every $\\lambda>0$ and $\\|(\\lambda I-A)^{-1}z\\| \\le\\lambda^{-1}\\|z\\|$ on the range of $\\lambda I-A$; no surjectivity, closedness or density is implied. If $X$ is a Hilbert space ([[def-hilbert-space]]), then $A$ is dissipative if and only if $\\mathrm{Re}\\,\\langle Ax,x\\rangle\\le0$ for every $x\\in D(A)$: from the norm dissipativity inequality, squaring gives $\\mathrm{Re}\\,\\langle Ax,x\\rangle\\le\\|Ax\\|^2/(2\\lambda)$ for every $\\lambda>0$, so letting $\\lambda\\to\\infty$ yields $\\mathrm{Re}\\,\\langle Ax,x\\rangle\\le0$. Conversely, if this real-part inequality holds, expanding $\\|(\\lambda I-A)x\\|^2=\\lambda^2\\|x\\|^2-2\\lambda\\mathrm{Re}\\,\\langle Ax,x\\rangle+\\|Ax\\|^2$ gives the norm dissipativity inequality. Finally, under the Hahn-Banach extension principle HB ([[def-hahn-banach-extension-principle-relative]]) dissipativity is equivalent to the **norm-duality form**: for every $x\\in D(A)$ there exists $x^*\\in X^*$ with $\\|x^*\\|=\\|x\\|$, $x^*(x)=\\|x\\|^2$ and $\\mathrm{Re}\\,x^*(Ax)\\le0$; the equivalence is the two-dimensional argument of [T] Lemma 11.19, where HB produces the norming functionals and supplies the extension from $\\mathrm{span}\\{x,Ax\\}$ ([[cor-relative-hahn-banach-dual-norming]]), and the extraction of the limit uses compactness of the finite-dimensional dual unit ball ([[cor-bolzano-weierstrass-in-rn]]).\n\n**Two normalisations of the defining inequality.** Putting $\\alpha=1/\\lambda$\nshows that the displayed inequality is equivalent to\n$\\|x-\\alpha Ax\\|\\ge\\|x\\|$ for all $\\alpha>0$ and $x\\in D(A)$. Since\n$\\lambda x=(\\lambda I-A)x+Ax$, the inequality $\\|(\\lambda I-A)x\\|\\ge\\lambda\\|x\\|$\nis in turn equivalent to the one-sided estimate\n$\\lambda\\|x\\|\\le\\|(\\lambda I-A)x\\|$ used below.\n\n**Injectivity and the inverse bound.** If $(\\lambda I-A)x=0$ for some\n$\\lambda>0$ and $x\\in D(A)$, then $\\lambda\\|x\\|\\le\\|(\\lambda I-A)x\\|=0$, so\n$x=0$: each $\\lambda I-A$ is injective. If $z=(\\lambda I-A)x$ lies in the range,\nthen $\\|x\\|\\le\\lambda^{-1}\\|z\\|$, so the inverse defined on the range satisfies\n$\\|(\\lambda I-A)^{-1}z\\|\\le\\lambda^{-1}\\|z\\|$. No surjectivity onto $X$, no\nclosedness of $A$ and no density of $D(A)$ is asserted, and none is implied.\n\n**The real-part form on a Hilbert space.** Let $X$ be a Hilbert space. If $A$\nis dissipative and $x\\in D(A)$, then for every $\\lambda>0$ the expansion\n$$\\|(\\lambda I-A)x\\|^2=\\lambda^2\\|x\\|^2-2\\lambda\\operatorname{Re}\\langle Ax,x\\rangle+\\|Ax\\|^2$$\ngives $2\\lambda\\operatorname{Re}\\langle Ax,x\\rangle\\le\\|Ax\\|^2$, that is\n$\\operatorname{Re}\\langle Ax,x\\rangle\\le\\|Ax\\|^2/(2\\lambda)$; letting\n$\\lambda\\to\\infty$ yields $\\operatorname{Re}\\langle Ax,x\\rangle\\le0$.\nConversely, if $\\operatorname{Re}\\langle Ax,x\\rangle\\le0$ for all $x\\in D(A)$,\nthe same expansion gives\n$\\|(\\lambda I-A)x\\|^2\\ge\\lambda^2\\|x\\|^2$ for every $\\lambda>0$, so $A$ is\ndissipative. This real-part form is choice-free; the Hilbert-space vocabulary\ncomes from [[def-hilbert-space]].\n\n**The norm-duality form under HB.** Assume the Hahn-Banach extension principle\n([[def-hahn-banach-extension-principle-relative]]) and let\n$x\\in D(A)$. We claim that $A$ is dissipative if and only if for every\n$x\\in D(A)$ there is $x^*\\in X^*$ with $\\|x^*\\|=\\|x\\|$, $x^*(x)=\\|x\\|^2$ and\n$\\operatorname{Re}x^*(Ax)\\le0$.\n\n*Sufficiency.* If such $x^*$ is given and $\\lambda>0$, then\n$$\\lambda\\|x\\|^2=\\lambda\\operatorname{Re}x^*(x)=\\operatorname{Re}x^*((\\lambda I-A)x)+\\operatorname{Re}x^*(Ax)\\le\\operatorname{Re}x^*((\\lambda I-A)x)\\le\\|x^*\\|\\,\\|(\\lambda I-A)x\\|=\\|x\\|\\,\\|(\\lambda I-A)x\\|.$$\nFor $x\\ne0$ this is $\\lambda\\|x\\|\\le\\|(\\lambda I-A)x\\|$; for $x=0$ it is\ntrivial. Hence $A$ is dissipative.\n\n*Necessity.* Fix $x\\in D(A)$; for $x=0$ take $x^*=0$, so assume $x\\ne0$ and put\n$M:=\\operatorname{span}\\{x,Ax\\}$, a subspace of finite dimension at most two\nover the scalar field $\\mathbb K$. For each positive integer $\\lambda=n$ the vector\n$(\\lambda I-A)x$ is nonzero, because $(\\lambda I-A)$ is injective. Construct a sequence $y_n\\in M^*$ without simultaneously choosing functionals on $X$. Fix a basis of the finite-dimensional space $M$. The coordinate vectors of functionals of norm at most one form a closed bounded subset of a finite real coordinate space: $|y(u)|\\le\\|u\\|$ for every $u\\in M$ is an intersection of closed conditions, and each basis evaluation is bounded. For each $n$, intersect this set with $y((nI-A)x)=\\|(nI-A)x\\|$. The intersection is nonempty by [[cor-relative-hahn-banach-dual-norming]] applied to $M$, and compact by [[thm-heine-borel-rn]]. Select its lexicographically least coordinate vector by minimizing its real coordinates successively; each minimum exists because the corresponding projected compact set is nonempty. This finite deterministic procedure defines $y_n$ for all $n$, with norm one and the required norming identity, without Countable Choice. Write $y_\\lambda=y_n$, $\\lambda=n$, below. Then\n$$\\operatorname{Re}y_\\lambda(Ax)=\\lambda\\operatorname{Re}y_\\lambda(x)-\\|(\\lambda I-A)x\\|\\le\\lambda|y_\\lambda(x)|-\\lambda\\|x\\|\\le0,$$\nand likewise\n$y_\\lambda(x)=\\|(\\lambda I-A)x\\|/\\lambda+y_\\lambda(Ax)/\\lambda$, where\n$\\bigl|\\|(\\lambda I-A)x\\|/\\lambda-\\|x\\|\\bigr|\\le\\|Ax\\|/\\lambda\\to0$ and\n$|y_\\lambda(Ax)|\\le\\|Ax\\|$; hence $y_\\lambda(x)\\to\\|x\\|$.\n\nPassing to a subsequence. The restrictions $y_n$ lie in the unit ball\nof the dual of the finite-dimensional space $M$, which is sequentially compact:\nafter choosing coordinates for $M^*$, the coordinates of a functional amount to a\nbounded sequence in a Euclidean space, and [[cor-bolzano-weierstrass-in-rn]]\nextracts a convergent subsequence. Take $\\lambda_n\\to\\infty$ along a subsequence\non which $y_{\\lambda_n}$ converges to some $y\\in M^*$. Then $\\|y\\|\\le1$,\n$\\operatorname{Re}y(Ax)\\le0$ (a closed condition), and\n$y(x)=\\lim_n y_{\\lambda_n}(x)=\\|x\\|$; consequently $\\|y\\|=1$ because\n$|y(x)|=\\|x\\|$ with $x\\ne0$.\n\nExtension to $X$. The real part $g:=\\operatorname{Re}y$ is a real-linear\nfunctional on the real vector space $M$ with $|g(u)|\\le\\|u\\|$ for $u\\in M$;\nhere the real structure of $X$ is the one underlying the complex case as well.\nApply HB, with the sublinear functional $p(u)=\\|u\\|$, to extend $g$ to a\nreal-linear $G:X\\to\\mathbb R$ satisfying $G(u)\\le\\|u\\|$ for all $u\\in X$; then\n$|G(u)|\\le\\|u\\|$ by applying the inequality to $-u$. In the real case set\n$\\widetilde x:=G$. In the complex case set\n$\\widetilde x(u):=G(u)-iG(iu)$; then $\\widetilde x(iu)=G(iu)+iG(u)=i\\widetilde x(u)$; together with real linearity this proves complex linearity, and its real part is $G$. For $\\|u\\|\\le1$ put $z=\\widetilde x(u)$. If $z\\ne0$, take $c=\\overline z/|z|$, so $|c|=1$ and $\\widetilde x(cu)=cz=|z|$ is real. Thus $|z|=G(cu)\\le\\|cu\\|=\\|u\\|\\le1$; if $z=0$ the same bound is immediate. Thus $\\|\\widetilde x\\|\\le1$ in either case, and\n$x^*:=\\|x\\|\\,\\widetilde x$ satisfies $\\|x^*\\|=\\|x\\|$ because\n$\\widetilde x(x)$, having real part $G(x)=g(x)=\\|x\\|$ and modulus at most\n$\\|x\\|$, equals the positive real number $\\|x\\|$. Finally\n$\\operatorname{Re}x^*(Ax)=\\|x\\|\\,G(Ax)=\\|x\\|\\operatorname{Re}y(Ax)\\le0$,\nas required. The definition and both elementary forms are choice-free; only the\nnorm-duality form uses HB and the finite-dimensional compactness above.",
+        "deps": [
+          "thm-heine-borel-rn",
+          "def-banach-space",
+          "def-unbounded-linear-operator-domain-and-graph",
+          "def-hilbert-space",
+          "cor-relative-hahn-banach-dual-norming",
+          "def-hahn-banach-extension-principle-relative",
+          "cor-bolzano-weierstrass-in-rn",
+          "def-bounded-linear-operator"
+        ],
+        "strategy": "Definition and the elementary consequences proved in its current Definition section.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3, Definition 3.13 and Proposition 3.23, printed pp. 82-85, 90-91"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, definition (11.42), Lemma 11.19 and Corollary 11.20, printed pp. 268-269"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.3, Definition 1.31 and Proposition 1.32, printed pp. 23-25"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "thm-lumer-phillips-generation-theorem",
+        "kind": "theorem",
+        "title": "Lumer-Phillips generation theorem",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $A:D(A)\\subseteq X\\to X$ be a densely defined dissipative operator on a Banach space $X$ ([[def-dissipative-operator]]). Then the following are equivalent: (a) $A$ generates a strongly continuous semigroup of contractions; (b) $\\mathrm{Ran}(\\lambda_0I-A)=X$ for some $\\lambda_0>0$; (c) $\\mathrm{Ran}(\\lambda I-A)=X$ for every $\\lambda>0$. In that case $A$ is closed, $(0,\\infty)\\subseteq\\rho(A)$, $\\|R(\\lambda,A)\\| \\le1/\\lambda$ for all $\\lambda>0$, and $A$ is maximal dissipative (it has no proper dissipative extension).",
+        "deps": [
+          "def-dependent-choice",
+          "def-dissipative-operator",
+          "cor-contraction-hille-yosida-theorem",
+          "lem-semigroup-generator-resolvents-satisfy-the-resolvent-identity",
+          "def-resolvent-of-a-closed-operator",
+          "thm-generators-are-closed-and-densely-defined",
+          "lem-neumann-series",
+          "def-strongly-continuous-semigroup",
+          "lem-operator-norm-is-a-norm",
+          "thm-bounded-operator-space-is-banach",
+          "lem-composition-operator-norm-inequality",
+          "def-unital-banach-algebra",
+          "def-operator-norm"
+        ],
+        "strategy": "direct: dissipativity gives injectivity and the inverse bound, surjectivity at one $\\lambda_0$ propagates by the resolvent series, and the contraction generation theorem finishes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3, Proposition 3.14 and Theorem 3.15, printed pp. 82-84"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, Theorem 11.21, printed pp. 266-270"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.3, Theorem 1.39 and proof, printed pp. 30-31 (March 19, 2026 revision)"
+            },
+            {
+              "title": "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)",
+              "url": "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf",
+              "locator": "Chapter 6 Section 2.2, Theorem 5, printed p. 18"
+            }
+          ]
+        },
+        "dependency_level": 12,
+        "justified_by": []
+      },
+      {
+        "id": "lem-variation-of-constants-integral-is-continuous-for-lone-time-forcing",
+        "kind": "lemma",
+        "title": "The variation-of-constants integral is continuous for integrable forcing",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for Lebesgue time integration. Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with constants $M\\ge1$, $\\omega\\in\\mathbb R$ and $\\|T(t)\\| \\le Me^{\\omega t}$ ([[thm-exponential-bound-for-a-c-zero-semigroup]]). Let $T_0>0$ and let $f:(0,T_0)\\to X$ be Bochner integrable with $\\int_0^{T_0}\\|f(s)\\|\\,ds<\\infty$ ([[def-bochner-integrable-function]]). Then $$u_f(t):=\\int_0^tT(t-s)f(s)\\,ds\\qquad(0\\le t\\le T_0)$$ is a well-defined element of $X$, the map $t\\mapsto u_f(t)$ is continuous on $[0,T_0]$, and $\\|u_f(t)\\| \\le M_{T_0}e^{\\omega t}\\int_0^t\\|f(s)\\|\\,ds$ for a constant $M_{T_0}$ depending only on $M,\\omega,T_0$ and the local bound of $\\|T\\|$ on $[0,T_0]$.",
+        "deps": [
+          "def-countable-choice",
+          "thm-exponential-bound-for-a-c-zero-semigroup",
+          "lem-linearity-of-the-bochner-integral",
+          "thm-absolute-continuity-of-the-integral",
+          "lem-bochner-integral-norm-inequality",
+          "def-bochner-integrable-function",
+          "def-strongly-measurable-banach-valued-function",
+          "thm-bochner-integrability-criterion",
+          "def-strongly-continuous-semigroup"
+        ],
+        "strategy": "direct: well-definedness from the Bochner criterion, then a uniform estimate $\\int\\|(T(h)-I)f\\|\\to0$ obtained from a single simple approximation, and a splitting of the increment.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 6, Propositions 6.2-6.4, printed pp. 145-147"
+            },
+            {
+              "title": "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)",
+              "url": "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf",
+              "locator": "Chapter 6 Section 3.1, formula (15) and its derivation, printed pp. 19-20"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "def-classical-strong-and-mild-abstract-cauchy-solutions",
+        "kind": "definition",
+        "title": "Classical, strong and mild abstract Cauchy solutions",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue time integrals. Let $A:D(A)\\subseteq X\\to X$ be a linear operator on a real or complex Banach space $X$, with the Banach graph conventions of [[def-infinitesimal-generator-of-a-c-zero-semigroup]]. Let $T_0>0$, $x\\in X$ and let $f:(0,T_0)\\to X$ be Bochner integrable ([[def-bochner-integrable-function]]). Consider the abstract Cauchy problem $u'(t)=Au(t)+f(t)$ for $0<t<T_0$, $u(0)=x$; endpoint equations are imposed only when $f$ is continuously extended to $[0,T_0]$. Derivatives use the underlying real structure, with one-sided derivatives at the endpoints. (1) A **classical solution** is a function $u\\in C^1([0,T_0];X)$ with $u(t)\\in D(A)$ for every $t\\in[0,T_0]$, $Au\\in C([0,T_0];X)$, $u\\prime(t)=Au(t)+f(t)$ for $0<t<T_0$ and $u(0)=x$; here membership in $D(A)$ is with the graph norm and the derivative is the Fréchet derivative of a curve ([[def-frechet-derivative-between-banach-spaces]]). (2) A **strong solution** is a continuous $u\\in C([0,T_0];X)$ with $u(t)\\in D(A)$ for all $t$, $u(0)=x$, and $Au\\in C([0,T_0];X)$, such that $u(t)=x+\\int_0^t(Au(s)+f(s))\\,ds$ for every $t$. (3) When $A$ generates a strongly continuous semigroup $T$ satisfying an exponential norm bound, a **mild solution** (variation-of-constants solution) is the continuous function given by the convergent Bochner integral $$u(t)=T(t)x+\\int_0^tT(t-s)f(s)\\,ds,$$ which is well defined by [[lem-variation-of-constants-integral-is-continuous-for-lone-time-forcing]]. (4) An **integral (integrated) solution** is a continuous $u$ with $\\int_0^tu(s)\\,ds\\in D(A)$ and $u(t)=x+A\\int_0^tu(s)\\,ds+\\int_0^tf(s)\\,ds$ for all $t$; for $f=0$ this is the integrated form of the homogeneous problem. These are four formulations, with overlaps and equivalences under additional hypotheses: neither differentiability nor membership of $u(t)$ in $D(A)$ is asserted by the mild definition, and the definitions do not assign a derivative to a mild solution.\n\nHere “strong solution” means the graph-continuous integral notion explicitly stated above; some sources use that term for an almost-everywhere differential notion instead. Engel–Nagel II.6.3 calls the homogeneous integral formulation “mild”, whereas the variation-of-constants terminology here follows Schnaubelt Definition 2.11. The mild and integral formulations coincide for generators by the variation-of-constants theorem; they are not asserted to be different classes. Under DC the exponential bound required for the mild formulation is automatic, by [[thm-exponential-bound-for-a-c-zero-semigroup]].\n\n**Classical solution.** A classical solution is $C^1$ on the closed interval\nand takes values in the domain of $A$ at every time, including the endpoints;\nthe equation $u\\prime(t)=Au(t)+f(t)$ is required pointwise on $(0,T_0)$, and the derivative is\nthe Fréchet derivative of the curve\n([[def-frechet-derivative-between-banach-spaces]]). Since $A$ is generally\nunbounded, membership $u(t)\\in D(A)$ and continuity of $Au$ are genuine restrictions. Together with continuity of $u$, they mean graph-norm continuity in $D(A)$\n([[def-unbounded-linear-operator-domain-and-graph]]).\n\n**Strong solution.** A strong solution need not be differentiable; instead\n$Au$ is continuous, and the equation is imposed in integrated form\n$u(t)=x+\\int_0^t\\bigl(Au(s)+f(s)\\bigr)ds$, which makes sense because $Au$ is\ncontinuous and $f$ is Bochner integrable\n([[def-bochner-integrable-function]]). If $Au+f$ on $(0,T_0)$ extends continuously to $[0,T_0]$, this identity\ngives $u\\in C^1([0,T_0];X)$, with $u'=Au+f$ in the interior and one-sided\nendpoint derivatives equal to the extension values, by\n[[lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves]].\nThus strong and classical solutions coincide when $f$ extends continuously\nto $[0,T_0]$; continuity only on $(0,T_0)$ does not ensure endpoint derivatives.\n\n**Mild solution.** The mild solution is the explicit variation-of-constants\nfunction\n$$u(t)=T(t)x+\\int_0^tT(t-s)f(s)\\,ds,$$\nwhich is a well-defined continuous $X$-valued function on $[0,T_0]$ by\n[[lem-variation-of-constants-integral-is-continuous-for-lone-time-forcing]];\nhere $f$ need only be Bochner integrable, and no differentiability, no\nmembership of $u(t)$ in $D(A)$ and no pointwise equation are asserted.\n\n**Integral (integrated) solution.** An integral solution replaces\ndifferentiability by a weaker regularity: the primitive $\\int_0^tu(s)\\,ds$ lies\nin $D(A)$ for every $t$, and\n$u(t)=x+A\\int_0^tu(s)\\,ds+\\int_0^tf(s)\\,ds$ holds. For $f=0$ this is the\nintegrated form of the homogeneous problem $u'=Au$, $u(0)=x$; its advantage is\nthat it only evaluates $A$ on the primitive, which always lies in $D(A)$ when\n$u$ is a mild solution of the homogeneous problem.\n\nThe definitions do not by themselves assert implications between the four\nnotions beyond the elementary ones visible above, and they do not assign a\nderivative to a mild solution. The precise equivalence results under additional\nhypotheses, and the separation of the notions when those hypotheses fail, are\nproved as theorems and exhibited by counterexamples on the companion pages.",
+        "deps": [
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-exponential-bound-for-a-c-zero-semigroup",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "def-strongly-continuous-semigroup",
+          "lem-variation-of-constants-integral-is-continuous-for-lone-time-forcing",
+          "def-bochner-integrable-function",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-metric-continuity"
+        ],
+        "strategy": "Definition and the elementary consequences proved in its current Definition section.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 6, Definitions 6.1, 6.3 and 6.8, printed pp. 145-151"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, the paragraphs after Lemma 11.12, printed pp. 259-260"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "thm-well-posed-abstract-cauchy-problem-if-and-only-if-generation",
+        "kind": "theorem",
+        "title": "Well-posedness of the abstract Cauchy problem is equivalent to generation",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $A:D(A)\\subseteq X\\to X$ be a closed linear operator on a Banach space $X$ and consider the homogeneous problem $u'(t)=Au(t)$, $u(0)=x$. Let (EU) be the statement that for every $x\\in D(A)$ there exists exactly one classical solution $u(\\cdot,x)$ on $[0,\\infty)$ ([[def-classical-strong-and-mild-abstract-cauchy-solutions]]). Then the following conditions are equivalent: (a) $A$ generates a strongly continuous semigroup; (b) (EU) holds and $\\rho(A)\\ne\\varnothing$; (c) (EU) holds and there is a sequence $\\lambda_n\\uparrow\\infty$ with $(\\lambda_nI-A)D(A)=X$ for every $n$; (d) (EU) holds, $D(A)$ is dense, and for every sequence $x_n\\in D(A)$ with $x_n\\to0$ one has $u(t,x_n)\\to0$ uniformly for $t$ in compact subsets of $[0,\\infty)$. Condition (d) is the definition of well-posedness of the abstract Cauchy problem; it is existence plus uniqueness plus continuous dependence on the initial datum in the uniform topology on compact time intervals. If any (hence all) holds, then $u(t,x)=T(t)x$ for the generated semigroup $T$.",
+        "deps": [
+          "lem-linearity-of-the-bochner-integral",
+          "lem-bochner-integral-norm-inequality",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "def-classical-strong-and-mild-abstract-cauchy-solutions",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "thm-generators-are-closed-and-densely-defined",
+          "lem-a-c-zero-semigroup-is-uniformly-bounded-on-every-compact-time-interval",
+          "lem-strong-continuity-at-zero-implies-orbit-continuity",
+          "lem-integrated-semigroup-orbits-belong-to-the-generator-domain",
+          "def-unbounded-linear-operator-domain-and-graph",
+          "def-densely-defined-closed-and-closable-operator",
+          "thm-closed-graph-theorem",
+          "thm-exponential-bound-for-a-c-zero-semigroup",
+          "thm-laplace-transform-formula-for-the-semigroup-resolvent",
+          "lem-semigroup-generator-commutes-with-orbits-on-its-domain",
+          "def-normed-subspace",
+          "def-dependent-choice"
+        ],
+        "strategy": "direct, following the standard reduction to the graph-norm space $X_1$: first an internal lemma identifying (EU) with generation on $X_1$, then the four implications.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 6, Proposition 6.6, Theorem 6.7 and Corollary 6.9, printed pp. 147-151"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Comments on Chapter 7, Theorem 7.8, printed p. 197"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 2 Section 2.1, Definition 2.1, Theorem 2.2 and Remark 2.3(b), printed pp. 46-47 (March 19, 2026 revision)"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "thm-variation-of-constants-formula",
+        "kind": "theorem",
+        "title": "Variation of constants for the inhomogeneous abstract Cauchy problem",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with generator $A$ ([[def-infinitesimal-generator-of-a-c-zero-semigroup]]), let $T_0>0$, $x\\in X$, and let $f:(0,T_0)\\to X$ be Bochner integrable with $\\int_0^{T_0}\\|f(s)\\|\\,ds<\\infty$. Then: (1) (Duhamel rigidity) every classical solution $u$ of $u'=Au+f$, $u(0)=x$ on $[0,T_0]$ satisfies $$u(t)=T(t)x+\\int_0^tT(t-s)f(s)\\,ds\\qquad(0\\le t\\le T_0).$$ (2) The formula defines a continuous $u$, which is the unique mild solution and the unique integral solution of the problem in the sense of [[def-classical-strong-and-mild-abstract-cauchy-solutions]]: if $v$ is an integral solution, then $v=u$. (3) (classical upgrade) If in addition $x\\in D(A)$ and $f$ extends to $[0,T_0]$ either as a $C^1$ curve or in the form $f(t)=f(0)+\\int_0^t g(s)\\,ds$ for some Bochner integrable $g:(0,T_0)\\to X$, then $u$ is a classical solution: $u\\in C^1([0,T_0];X)$, $u(t)\\in D(A)$ for all $t$, $u(0)=x$ and $u'(t)=Au(t)+f(t)$ pointwise. Mere continuity, or mere Lipschitz continuity on an arbitrary Banach space, is not asserted to give a classical solution. A Lipschitz curve is covered by (3) when it additionally has the displayed Bochner derivative representation.",
+        "deps": [
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-laplace-transform-formula-for-the-semigroup-resolvent",
+          "thm-exponential-bound-for-a-c-zero-semigroup",
+          "thm-heine-cantor-metric",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-dependent-choice",
+          "def-classical-strong-and-mild-abstract-cauchy-solutions",
+          "lem-variation-of-constants-integral-is-continuous-for-lone-time-forcing",
+          "lem-semigroup-generator-commutes-with-orbits-on-its-domain",
+          "lem-integrated-semigroup-orbits-belong-to-the-generator-domain",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "lem-linearity-of-the-bochner-integral",
+          "lem-bochner-integral-norm-inequality",
+          "def-bochner-integrable-function",
+          "thm-generators-are-closed-and-densely-defined",
+          "lem-average-convergence-of-a-continuous-banach-valued-function",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup"
+        ],
+        "strategy": "direct: the product rule for $s\\mapsto T(t-s)u(s)$ gives Duhamel's formula; the integral solution identity is verified for simple forcing and transferred by closedness; uniqueness follows from a vanishing integral.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, Lemma 11.12 and Example 11.3, printed pp. 258-260"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Comments on Chapter 7, Theorem 7.10, printed p. 198"
+            },
+            {
+              "title": "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)",
+              "url": "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf",
+              "locator": "Chapter 6 Section 3.1, formula (15) and the classical representation, printed pp. 19-20"
+            },
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 6, Propositions 6.2-6.4, printed pp. 145-147"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "thm-uniqueness-of-the-scalar-laplace-transform-in-the-exponential-growth-class",
+        "kind": "theorem",
+        "title": "Uniqueness of the scalar Laplace transform in the exponential-growth class",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and let $f:[0,\\infty)\\to\\mathbb K$ be continuous with $|f(t)|\\le Ce^{\\sigma t}$ for some $C\\ge0$, $\\sigma\\in\\mathbb R$ and all $t\\ge0$. If the Laplace transform vanishes on a right half-line, $$\\int_0^\\infty e^{-\\lambda t}f(t)\\,dt=0\\qquad\\text{for every real }\\lambda>\\sigma,$$ then $f(t)=0$ for every $t\\ge0$.",
+        "deps": [
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-countable-choice",
+          "cor-weierstrass-approximation-on-the-unit-interval",
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "def-l-one-of-a-measure",
+          "def-integral-over-a-measurable-set"
+        ],
+        "strategy": "direct, reducing to real $f$, converting the Laplace moments into moments of a continuous function on $[0,1]$, and applying polynomial density.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 1, Theorem 1.10 and its use for uniqueness, printed pp. 55-58"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3-11.4, the transform arguments preceding Lemma 11.13, printed pp. 262-263"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 7 Section 7.2, Laplace-transform manipulation in the proof of Theorem 7.4, printed pp. 186-188"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-laplace-transform-uniqueness-identifies-two-exponentially-bounded-semigroups",
+        "kind": "lemma",
+        "title": "Laplace uniqueness identifies two exponentially bounded semigroups",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]) and the Hahn-Banach extension principle HB ([[def-hahn-banach-extension-principle-relative]]). Let $(S(t))_{t\\ge0}$ and $(T(t))_{t\\ge0}$ be strongly continuous semigroups on a Banach space $X$ with generators $A$ and $B$ and resolvents $R_A,R_B$ ([[def-resolvent-of-a-closed-operator]]), and suppose there are $M\\ge1$, $\\omega\\in\\mathbb R$ with $\\|S(t)\\|,\\|T(t)\\| \\le Me^{\\omega t}$ for all $t\\ge0$. If $R_A(\\lambda)=R_B(\\lambda)$ for every real $\\lambda>\\omega$, then $S(t)=T(t)$ for every $t\\ge0$. In particular two strongly continuous semigroups with the same generator coincide.",
+        "deps": [
+          "def-dependent-choice",
+          "thm-laplace-transform-formula-for-the-semigroup-resolvent",
+          "thm-uniqueness-of-the-scalar-laplace-transform-in-the-exponential-growth-class",
+          "cor-relative-hahn-banach-dual-norming",
+          "def-hahn-banach-extension-principle-relative",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "def-bochner-integrable-function",
+          "def-strongly-continuous-semigroup",
+          "thm-exponential-bound-for-a-c-zero-semigroup",
+          "def-resolvent-of-a-closed-operator"
+        ],
+        "strategy": "direct: scalarise the difference of the two semigroups by a functional and apply scalar Laplace uniqueness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Sections 1-2, integral representation and uniqueness of the generator, printed pp. 55-58, 59-64"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.4, Lemma 11.13 and Corollary 11.11, printed pp. 262-263"
+            },
+            {
+              "title": "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)",
+              "url": "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf",
+              "locator": "Chapter 6 Section 2.2, uniqueness clause following Theorem 3, printed pp. 13-15"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "cor-closed-invariant-subspace-restriction-is-a-c-zero-semigroup",
+        "kind": "corollary",
+        "title": "Restriction to a closed invariant subspace is a C0-semigroup and its generator is the part",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with generator $(A,D(A))$, and let $Y\\subseteq X$ be a closed linear subspace ([[def-normed-subspace]], [[lem-closed-subspace-of-a-banach-space-is-banach]]) such that $T(t)Y\\subseteq Y$ for every $t\\ge0$. Then the restrictions $T_Y(t):=T(t)|_Y$ form a strongly continuous semigroup on the Banach space $Y$, and its generator is the **part** $A_Y$ of $A$ in $Y$: $D(A_Y)=\\{y\\in D(A)\\cap Y:\\ Ay\\in Y\\}$ and $A_Yy=Ay$. In particular the generator of the restricted semigroup is the restriction of $A$ to that domain.",
+        "deps": [
+          "def-countable-choice",
+          "def-strongly-continuous-semigroup",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "lem-integrated-semigroup-orbits-belong-to-the-generator-domain",
+          "def-normed-subspace",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "def-bochner-integrable-function"
+        ],
+        "strategy": "direct: inheritance of the semigroup properties, then comparison of the two difference-quotient limits through the closed subspace.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 2, standard constructions for closed invariant subspaces, printed pp. 59-64"
+            },
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.1-1.2, restriction of a C0-semigroup to a closed invariant subspace, printed pp. 6-8"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "rem-semigroup-sign-and-generator-conventions",
+        "kind": "remark",
+        "title": "Semigroup sign and generator conventions",
+        "statement": "Generation and automatic exponential-bound results below are understood under the DC hypotheses of their supplier theorems.\n\nThis track consistently writes the abstract evolution equation as $u'=Au+f$ and defines the generator by $Ax=\\lim_{t\\downarrow0}(T(t)x-x)/t$; the heat flow on a Dirichlet domain is therefore generated by $A=\\Delta_D$, the Dirichlet Laplacian (the negative of the $L^2$ operator associated with the Dirichlet energy form), not by $-\\Delta_D$. Sources writing $u'+Bu=0$ or $u_t+Au=0$ use $B=-A$ or generate $e^{-tA}$: Brezis's maximal-monotone chapter is stated for $u'+Au=0$ with $A$ m-accretive, so its $A$ corresponds to $-A$ here, and Pazy-type statements $\\dot u+Au=0$ translate the same way. Resolvents are normalised as $R(\\lambda,A)=(\\lambda I-A)^{-1}$; a source using $(A-\\lambda)^{-1}$ has the opposite sign, and its resolvent equals $-R(\\lambda,A)$ at the same parameter, so the norms of all powers are unchanged. The contraction case $\\|T(t)\\| \\le1$ corresponds to $M=1$, $\\omega=0$; boundedness ($M>1$) is not the same as contractivity, and the general generation theorem keeps all resolvent powers.\n\n**The convention of this track.** The abstract evolution equation is written\n$$u'(t)=Au(t)+f(t),\\qquad u(0)=x,$$\nand the generator is defined by $Ax=\\lim_{t\\downarrow0}\\bigl(T(t)x-x\\bigr)/t$\non its domain ([[def-infinitesimal-generator-of-a-c-zero-semigroup]]). The\nresolvent is normalised as $R(\\lambda,A)=(\\lambda I-A)^{-1}$. If\n$\\|T(t)\\|\\le Me^{\\omega t}$ for all $t\\ge0$, then for every real\n$\\lambda>\\omega$ the Laplace representation is\n$R(\\lambda,A)x=\\int_0^\\infty e^{-\\lambda t}T(t)x\\,dt$\n([[def-resolvent-of-a-closed-operator]],\n[[thm-laplace-transform-formula-for-the-semigroup-resolvent]]); membership\nin $\\rho(A)$ alone does not guarantee convergence of this integral.\n\n**Translation dictionary.** A source that writes the homogeneous equation as\n$u'+Bu=0$ or $u_t+Au=0$ is using the opposite sign: its $B$ equals $-A$ in\nthis track, and its solutions are $e^{-tB}$ in its own notation, that is\n$e^{tA}$ here. In the same way a source whose resolvent is\n$(A-\\lambda)^{-1}$ instead of $(\\lambda I-A)^{-1}$ has the opposite shift\nconvention; $(A-\\lambda I)^{-1}=-R(\\lambda,A)$ at the same $\\lambda$; its $n$th power is $(-1)^nR(\\lambda,A)^n$, so its norm is unchanged. Negating the operator itself is a separate change of generator sign.\n\n**Heat flow.** With this convention the Dirichlet heat flow $\\partial_tu=\\Delta u$\non a Dirichlet domain is generated by $A=\\Delta_D$, the Dirichlet Laplacian (the negative of the $L^2$ operator associated with the Dirichlet energy form), and not by\n$-\\Delta_D$; the sign of the generator is the sign of the spatial operator in\nthe equation, not its negative. The dissipativity used by Lumer-Phillips is\ntherefore the inequality $\\operatorname{Re}\\langle\\Delta_Du,u\\rangle\\le0$ on\nthe domain of the Dirichlet Laplacian\n([[def-infinitesimal-generator-of-a-c-zero-semigroup]] names the generator\nwhose behaviour is being discussed), and this is the identification used\ndownstream when the heat semigroup is realised from the Laplacian.\n\n**Contraction versus boundedness.** The contraction case is the pair\n$M=1$, $\\omega=0$ of the general generation theorem; a bound with $M>1$ alone does not imply that the semigroup is contractive, and the general theorem keeps *all*\nresolvent power estimates, the first estimate alone guaranteeing all powers when $M=1$ (with exponential rescaling if $\\omega\\ne0$). This dictionary is the one applied when\n[[thm-hille-yosida-generation-theorem]] is specialised to $A=\\Delta_D$ and when\nvariation of constants is written in the form\n$u(t)=T(t)x+\\int_0^tT(t-s)f(s)\\,ds$.",
+        "deps": [
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "def-resolvent-of-a-closed-operator",
+          "thm-hille-yosida-generation-theorem",
+          "thm-laplace-transform-formula-for-the-semigroup-resolvent"
+        ],
+        "strategy": "The current sign, resolvent and contraction convention dictionary.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Notation preceding Lemma II.1.3 and the remark on rescaling I.5.11, printed pp. 48-50, 43-44"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 7, the equation $du/dt+Au=0$ and Comment 4, printed pp. 181, 198"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3-11.4, the equation $\\dot u=Au$ (11.10) and the remarks on sign, printed pp. 250, 262-266"
+            }
+          ]
+        },
+        "dependency_level": 11,
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 458.044,
+    "id": "strongly-continuous-semigroups-and-hille-yosida-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Strongly Continuous Semigroups and Hille Yosida — Examples",
+    "companion": "strongly-continuous-semigroups-and-hille-yosida",
+    "requires": [
+      "strongly-continuous-semigroups-and-hille-yosida"
+    ],
+    "items": [
+      {
+        "id": "ex-bounded-operator-exponential-semigroup",
+        "kind": "example",
+        "title": "The exponential of a bounded operator is a uniformly continuous semigroup",
+        "statement": "Let $X$ be a Banach space and let $A\\in\\mathcal B(X)$. The exponential series of [[lem-exponential-series-of-a-bounded-operator]] defines $E(t)=e^{tA}$ for all real $t$, and $T(t):=E(t)|_{t\\ge0}$ is a strongly continuous semigroup on $X$ with: (i) $\\|T(t)\\| \\le e^{t\\|A\\|}$ and $T(0)=I$; (ii) $t\\mapsto T(t)$ is continuous for the operator norm, so $T$ is uniformly continuous; (iii) the generator of $T$ is $A$, with domain $D(A)=X$; (iv) $E(t+s)=E(t)E(s)$ for all $s,t\\in\\mathbb R$, so $E$ is a group; and $t\\mapsto T(t)x$ solves $u'=Au$, $u(0)=x$ for every $x\\in X$, in fact classically with $u\\in C^1(\\mathbb R;X)$ and $u'=Au$ everywhere.",
+        "deps": [
+          "lem-exponential-series-of-a-bounded-operator",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "def-strongly-continuous-semigroup",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "def-resolvent-of-a-closed-operator"
+        ],
+        "strategy": "direct verification of the semigroup axioms and of the generator difference quotients from the exponential-series lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.2, Theorem 11.4 and Example 11.1, printed pp. 250-253"
+            },
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 3, Theorem 3.7, printed pp. 20-23"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "ex-right-translation-semigroup-on-lp",
+        "kind": "example",
+        "title": "The right-translation semigroup on Lp has the weak derivative as generator",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $1\\le p<\\infty$ and $X=L^p(\\mathbb R)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). For $t\\ge0$ and $f\\in X$ define $(T(t)f)(s):=f(s+t)$ (the right translation, represented on the a.e. class by [[def-translation-of-a-function-on-rn]]). Then $(T(t))_{t\\ge0}$ is a strongly continuous semigroup of isometries on $X$ (each $T(t)$ has norm $1$), and its generator is $$Af=f'\\quad\\text{with}\\quad D(A)=W^{1,p}(\\mathbb R)=\\{f\\in L^p(\\mathbb R):\\ f'\\in L^p(\\mathbb R)\\},$$ the derivative being the weak derivative ([[def-weak-derivative-of-a-locally-integrable-function]], [[def-sobolev-space-wkp-and-its-norm]]). Moreover $\\|\\frac{T(h)f-f}{h}-f'\\|_p\\to0$ for every $f\\in W^{1,p}(\\mathbb R)$.",
+        "deps": [
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-strongly-continuous-semigroup",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "thm-dominated-convergence",
+          "def-translation-of-a-function-on-rn",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-holder-inequality-for-integrals",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-countable-choice",
+          "lem-average-convergence-of-a-continuous-banach-valued-function",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-conjugate-exponents",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"
+        ],
+        "strategy": "direct: identify the difference quotients with averages of translates of the weak derivative, then identify the generator in both directions by test-function pairings.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 4.c, translation semigroups, printed pp. 33-36"
+            },
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 2, Example 2.13 and its generator, printed pp. 65-68"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, Example 11.2, printed pp. 256-258"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "ex-multiplication-semigroup-and-its-generator",
+        "kind": "example",
+        "title": "A multiplication semigroup with an unbounded generator",
+        "statement": "Assume Countable Choice. Let $1\\le p<\\infty$, $X=L^p(0,\\infty)$ and $q(s):=-s$. For $t\\ge0$ define $(T(t)f)(s):=e^{tq(s)}f(s)=e^{-ts}f(s)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). Then $(T(t))_{t\\ge0}$ is a strongly continuous semigroup of contractions on $X$, and its generator is the multiplication operator $$Af=qf,\\qquad D(A)=\\{f\\in L^p(0,\\infty):\\ qf\\in L^p(0,\\infty)\\}=\\{f:\\ sf\\in L^p(0,\\infty)\\},$$ which is unbounded: $D(A)\\ne X$.",
+        "deps": [
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-strongly-continuous-semigroup",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-dominated-convergence",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-countable-choice"
+        ],
+        "strategy": "direct: pointwise computation for the semigroup and its difference quotients, dominated convergence for both inclusions of the generator domain, and a bump-function family for unboundedness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 4.b, multiplication semigroups on $L^p$, printed pp. 30-33"
+            },
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 2, multiplication examples and their generators, printed pp. 65-67"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3-11.4, multiplication-type examples, printed pp. 256-266"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "ex-dirichlet-heat-semigroup-from-the-laplacian",
+        "kind": "example",
+        "title": "The Dirichlet Laplacian generates the heat semigroup",
+        "statement": "Assume the Axiom of Choice and Countable Choice ([[def-axiom-of-choice]], [[def-countable-choice]]), as required by the batch-11 spectral and compactness suppliers used below. Let $\\Omega\\subseteq\\mathbb R^n$ be nonempty, bounded and open, $H=L^2(\\Omega)$, and let $L$ be the $L^2$ operator associated with the symmetric Dirichlet form $a(u,v)=\\int_\\Omega\\nabla u\\cdot\\overline{\\nabla v}\\,dx$ on $H^1_0(\\Omega)$ ([[def-ltwo-operator-associated-with-a-symmetric-elliptic-form]]), with $L$ densely defined, symmetric, lower bounded and self-adjoint with compact resolvent ([[lem-associated-elliptic-operator-is-densely-defined-symmetric-and-lower-bounded]], [[thm-symmetric-elliptic-form-operator-is-self-adjoint-with-compact-resolvent]]). Put $A:=-L=\\Delta_D$ with $D(A)=D(L)$; this is the Dirichlet Laplacian with the sign convention of [[rem-semigroup-sign-and-generator-conventions]]. Then $A$ is closed, densely defined and dissipative, $I-A=I+L$ is bijective, and Lumer--Phillips makes $A$ the generator of a strongly continuous contraction semigroup $T$ on $H$. With the eigenvalues $0<\\lambda_1\\le\\lambda_2\\le\\cdots\\to\\infty$ and orthonormal basis $(e_j)$ of $H$ furnished by [[thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator]], one has\n$$T(t)f=\\sum_{j\\ge1}e^{-\\lambda_jt}(f,e_j)_{L^2}\\,e_j\\qquad(f\\in H),$$\nthe series converging in $H$. For every $f\\in H$ and every $t>0$, $T(t)f\\in D(A)$; the orbit is continuous in the graph norm on compact subintervals of $(0,\\infty)$ and is a classical solution there, with $u_t=Au=\\Delta_Du$. At $t=0$ the general initial datum is attained in the $L^2$ norm, $T(t)f\\to f$ as $t\\downarrow0$; no graph-norm trace at $0$ is asserted for general $f$. For $f\\in D(A)$, the orbit is the classical solution also at $t=0$. In no case is $D(A)$ identified with a spatial $H^2$ space for the arbitrary bounded open set $\\Omega$.",
+        "deps": [
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-lumer-phillips-generation-theorem",
+          "thm-variation-of-constants-formula",
+          "def-classical-strong-and-mild-abstract-cauchy-solutions",
+          "def-ltwo-operator-associated-with-a-symmetric-elliptic-form",
+          "lem-associated-elliptic-operator-is-densely-defined-symmetric-and-lower-bounded",
+          "thm-symmetric-elliptic-form-operator-is-self-adjoint-with-compact-resolvent",
+          "thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "rem-semigroup-sign-and-generator-conventions",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dissipative-operator",
+          "def-strongly-continuous-semigroup",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "thm-garding-inequality-for-a-divergence-form-elliptic-operator",
+          "def-unbounded-linear-operator-domain-and-graph",
+          "lem-semigroup-generator-commutes-with-orbits-on-its-domain",
+          "thm-exponential-beats-every-polynomial"
+        ],
+        "strategy": "identify the form operator, check dissipativity and bijectivity of $I-A$, apply Lumer--Phillips, and then use the eigen expansion to establish positive-time graph-norm smoothing.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roland Schnaubelt, Evolution Equations, Karlsruhe Institute of Technology (2023/24 course, complete lecture notes)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "Chapter 1 Section 1.4, The Laplacian and related operators, printed pp. 35-45"
+            },
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3.b, dissipative operators and contraction semigroups, printed pp. 82-89"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Universitext, Springer 2011 (complete 614-page text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 7 Sections 7.2-7.4, the heat equation as the model evolution problem, printed pp. 184-197"
+            }
+          ]
+        },
+        "dependency_level": 13,
+        "justified_by": []
+      },
+      {
+        "id": "cex-strong-continuity-does-not-imply-operator-norm-continuity",
+        "kind": "counterexample",
+        "title": "Strong continuity does not imply operator-norm continuity",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $1\\le p<\\infty$ and let $(T(t))_{t\\ge0}$ be the right-translation semigroup on $L^p(\\mathbb R)$ ([[ex-right-translation-semigroup-on-lp]]), which is strongly continuous. Then $T$ is not continuous at $0$ in the operator norm: $\\|T(t)-I\\|\\ge2^{1/p}$ for every $t>0$, so $\\|T(t)-I\\|\\not\\to0$ as $t\\downarrow0$. Hence strong continuity of a $C_0$-semigroup is strictly weaker than norm continuity of $t\\mapsto T(t)$.\n\n**Refuted claim.** For a strongly continuous semigroup on a Banach space, the map $t\\mapsto T(t)$ is continuous at $0$ in the operator norm. The right-translation semigroup on $L^p(\\mathbb R)$, $1\\le p<\\infty$, is strongly continuous, but the distance $\\|T(t)-I\\|$ stays bounded below by $2^{1/p}$ for all $t>0$.",
+        "deps": [
+          "def-countable-choice",
+          "ex-right-translation-semigroup-on-lp",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-operator-norm",
+          "def-strongly-continuous-semigroup",
+          "def-translation-of-a-function-on-rn",
+          "def-bounded-linear-operator"
+        ],
+        "strategy": "direct computation with the unit vector $f_t=t^{-1/p}\\mathbf 1_{(0,t)}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 5, the translation example and the strong-versus-norm discussion, printed pp. 39-41"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, Example 11.2, printed pp. 256-258"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "cex-a-mild-solution-need-not-be-classical",
+        "kind": "counterexample",
+        "title": "A mild solution need not be classical",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]), hence Countable Choice. Let $1\\le p<\\infty$, $X=L^p(\\mathbb R)$, let $(T(t))_{t\\ge0}$ be the right-translation semigroup with generator $A f=f'$, $D(A)=W^{1,p}(\\mathbb R)$ ([[ex-right-translation-semigroup-on-lp]]), and let $f_0:=\\mathbf 1_{(0,1)}\\in L^p(\\mathbb R)$. Then $f_0\\notin D(A)$ and $u(t):=T(t)f_0=\\mathbf 1_{(-t,1-t)}$ is the unique mild solution of $u'=Au$, $u(0)=f_0$ ([[def-classical-strong-and-mild-abstract-cauchy-solutions]], [[thm-variation-of-constants-formula]]), but $u$ is not a classical solution: for every $t\\ge0$, $u(t)=\\mathbf 1_{(-t,1-t)}$ is a nondegenerate indicator and hence not in $W^{1,p}(\\mathbb R)=D(A)$, whereas a classical solution must satisfy $u(t)\\in D(A)$ for all $t\\ge0$, in particular at $t=0$. The difference quotients $(T(h)f_0-f_0)/h$ have no limit in $L^p$, consistently with $f_0\\notin D(A)$.\n\n**Refuted claim.** Every mild solution of the homogeneous abstract Cauchy problem $u'=Au$, $u(0)=x$ is a classical solution. The right-translation semigroup on $L^p(\\mathbb R)$ provides a mild solution whose initial datum lies outside the generator domain, so the classical-solution condition $u(t)\\in D(A)$ fails at every time.",
+        "deps": [
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-dependent-choice",
+          "ex-right-translation-semigroup-on-lp",
+          "def-classical-strong-and-mild-abstract-cauchy-solutions",
+          "thm-variation-of-constants-formula",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions"
+        ],
+        "strategy": "direct: identify the mild solution and test membership in $W^{1,p}$ by the defining weak-derivative identity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, Example 11.3 and the paragraph defining mild solutions, printed pp. 259-260"
+            },
+            {
+              "title": "Mathew A. Johnson, Math 951 Lecture Notes, Chapter 6: Introduction to Semigroup Methods, University of Kansas (complete 37-page chapter)",
+              "url": "https://matjohn.ku.edu/sites/matjohn/files/files/Math951Notes_Ch6A.pdf",
+              "locator": "Chapter 6 Section 3.1, the mild-solution construction, printed pp. 19-20"
+            },
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 6, the discussion of immediate differentiability after Proposition 6.2, printed pp. 145-146"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "cex-translation-semigroup-is-not-strongly-continuous-on-linfinity",
+        "kind": "counterexample",
+        "title": "The translation semigroup is not strongly continuous on L-infinity",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the $L^\\infty$ Banach-space interface. Let $X=L^\\infty(\\mathbb R)$ with the essential-supremum norm ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-essential-supremum-with-respect-to-a-measure]]) and let $(T(t)f)(s):=f(s+t)$ ([[def-translation-of-a-function-on-rn]]). Then $T(0)=I$, $T(t+s)=T(t)T(s)$ and every $T(t)$ is a linear isometry of $X$, but $(T(t))_{t\\ge0}$ is not strongly continuous: for $f:=\\mathbf 1_{(-\\infty,0]}$ and every $t>0$ one has $\\|T(t)f-f\\|_\\infty=1$, so $T(t)f\\not\\to f$ as $t\\downarrow0$. This is the endpoint excluded by the finite-$p$ translation theorem.\n\n**Refuted claim.** Every one-parameter family $(T(t))_{t\\ge0}$ of linear isometries of $L^\\infty(\\mathbb R)$ with $T(0)=I$ and $T(t+s)=T(t)T(s)$ is strongly continuous. The right translation semigroup below satisfies all the algebraic hypotheses and all the isometry properties but fails strong continuity at $0$; this is the $p=\\infty$ endpoint excluded from the finite-$p$ translation theorem.",
+        "deps": [
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-countable-choice",
+          "def-strongly-continuous-semigroup",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-translation-of-a-function-on-rn"
+        ],
+        "strategy": "direct computation with the step function $f=\\mathbf 1_{(-\\infty,0]}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter I Section 5, the discussion of $L^\\infty$ and the Lotz remark, printed pp. 42-43"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, the discussion of translation on $L^\\infty$, printed pp. 256-258"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "thm-semigroup-orbit-is-right-differentiable-at-zero-if-and-only-if-the-vector-is-in-the-generator-domain",
+        "kind": "theorem",
+        "title": "An orbit is right differentiable at zero exactly on the generator domain",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with generator $(A,D(A))$ ([[def-infinitesimal-generator-of-a-c-zero-semigroup]]). For every $t\\ge0$ and $x\\in X$, the right derivative of the orbit exists in $X$ exactly when $T(t)x\\in D(A)$, and then it equals $AT(t)x$. In particular, at $t=0$ this derivative exists if and only if $x\\in D(A)$ and equals $Ax$. If $x\\in D(A)$, domain invariance gives $T(t)x\\in D(A)$ and $AT(t)x=T(t)Ax$ for every $t\\ge0$ ([[lem-semigroup-generator-commutes-with-orbits-on-its-domain]]). A vector outside $D(A)$ may still yield a differentiable orbit at a positive time when $T(t)$ maps it into $D(A)$.",
+        "deps": [
+          "def-dependent-choice",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "lem-semigroup-generator-commutes-with-orbits-on-its-domain",
+          "def-strongly-continuous-semigroup"
+        ],
+        "strategy": "direct: apply the definition of the generator to the vector $T(t)x$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 1, Lemma 1.3 and the remark after Definition 1.2, printed pp. 49-51"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.3, Lemma 11.7, printed p. 255"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "cor-a-semigroup-with-unbounded-generator-cannot-be-operator-norm-continuous-at-zero",
+        "kind": "corollary",
+        "title": "A semigroup with unbounded generator is not norm continuous at zero",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $(T(t))_{t\\ge0}$ be a strongly continuous semigroup on a Banach space $X$ with generator $(A,D(A))$ ([[def-infinitesimal-generator-of-a-c-zero-semigroup]]). If $T$ is continuous at $0$ in the operator norm, i.e. $\\|T(t)-I\\|\\to0$ as $t\\downarrow0$, then $A\\in\\mathcal B(X)$ and $D(A)=X$. Consequently either an unbounded generator or a proper generator domain $D(A)\\ne X$ rules out operator-norm continuity at $0$.",
+        "deps": [
+          "def-countable-choice",
+          "def-bochner-integrable-function",
+          "def-bounded-linear-operator",
+          "def-infinitesimal-generator-of-a-c-zero-semigroup",
+          "def-operator-norm",
+          "def-strongly-continuous-semigroup",
+          "def-unital-banach-algebra",
+          "lem-bochner-integral-norm-inequality",
+          "lem-linearity-of-the-bochner-integral",
+          "lem-composition-operator-norm-inequality",
+          "lem-integrated-semigroup-orbits-belong-to-the-generator-domain",
+          "lem-neumann-series",
+          "thm-bounded-operator-space-is-banach"
+        ],
+        "strategy": "direct: a short-time integral of the semigroup is invertible and maps onto the generator domain; the integrated-orbits identity then expresses the generator as a product of bounded operators.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 1, Corollary 1.5 and the equivalence with uniform continuity, printed pp. 52-54"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 11 Section 11.2, Problem 11.10 and the discussion after Theorem 11.4, printed pp. 251-252"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "cex-first-resolvent-estimate-does-not-give-hille-yosida-bound",
+        "kind": "counterexample",
+        "title": "A first resolvent estimate does not ensure the prescribed semigroup bound",
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]). Let $X=\\mathbb C^2$ over the complex field ([[def-complex-numbers-and-arithmetic]]) have the maximum product norm\n$$\\|(z_1,z_2)\\|_\\infty=\\max(|z_1|,|z_2|)$$\n([[def-product-norms-on-finitely-many-normed-spaces]], [[rem-real-and-complex-normed-space-convention]]); this finite-dimensional normed space is Banach ([[cor-finite-dimensional-normed-spaces-are-banach]]). Let $A\\in\\mathcal B(X)$ ([[def-bounded-linear-operator]]) be the matrix\n$$A=\\begin{pmatrix}-1&4\\\\0&-1\\end{pmatrix},\\qquad D(A)=X.$$\nFor $M=25/16$ and $\\omega=0$, every $\\lambda>0$ lies in $\\rho(A)$ and the first resolvent estimate\n$$\\|R(\\lambda,A)\\|_\\infty\\le \\frac{M}{\\lambda}$$\nholds ([[def-resolvent-of-a-closed-operator]], [[def-operator-norm]]). But the $n=2$ Hille--Yosida estimate required by [[thm-hille-yosida-generation-theorem]] fails at $\\lambda=3$:\n$$\\|R(3,A)^2\\|_\\infty=\\frac{3}{16}>\\frac{25}{144}=\\frac{M}{3^2}.$$\nThe bounded-operator exponential semigroup generated by $A$ ([[lem-exponential-series-of-a-bounded-operator]]) is\n$$e^{tA}=e^{-t}\\begin{pmatrix}1&4t\\\\0&1\\end{pmatrix},$$\nand\n$$\\|e^{A/2}\\|_\\infty=3e^{-1/2}>\\frac{25}{16}.$$\nThus a first-power resolvent estimate alone does not ensure the semigroup bound with the same $M>1$ and $\\omega=0$.\n\n**Refuted claim.** For every $M\\ge1$, a closed densely defined operator whose positive real resolvent set contains $(0,\\infty)$ and satisfies only $\\|R(\\lambda,A)\\|\\le M/\\lambda$ for all $\\lambda>0$ necessarily generates a strongly continuous semigroup bounded by $M$.",
+        "deps": [
+          "def-dependent-choice",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "cor-two-less-than-e-less-than-three",
+          "def-bounded-linear-operator",
+          "def-complex-numbers-and-arithmetic",
+          "def-matrix-product-and-identity-matrix",
+          "def-operator-norm",
+          "def-product-norms-on-finitely-many-normed-spaces",
+          "def-resolvent-of-a-closed-operator",
+          "lem-exponential-series-of-a-bounded-operator",
+          "rem-real-and-complex-normed-space-convention",
+          "thm-hille-yosida-generation-theorem"
+        ],
+        "strategy": "direct matrix calculations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Klaus-Jochen Engel and Rainer Nagel, One-Parameter Semigroups for Linear Evolution Equations, Graduate Texts in Mathematics 194 (complete author-hosted monograph)",
+              "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+              "locator": "Chapter II Section 3, Generation Theorem II.3.8 and Example II.3.2; the source motivates the sharpness claim, while the specific two-dimensional matrix witness is computed locally."
+            }
+          ]
+        },
+        "dependency_level": 11,
+        "justified_by": []
+      }
+    ]
+  }
+]

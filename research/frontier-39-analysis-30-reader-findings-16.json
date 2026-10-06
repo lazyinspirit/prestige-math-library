@@ -1,0 +1,52 @@
+{
+  "batch": "16",
+  "findings": [
+    {
+      "id": "lem-form-to-bounded-operator-by-hilbert-riesz",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "thm-stampacchia-variational-inequality",
+      "observed_source": {
+        "snapshot": "pre",
+        "item_sha256": "de9f5643f378c2754fe9adda56a924770aa2e5256a72566eb0b4dcb08aac4b63"
+      },
+      "location": "Proof step 3.1, complex-scalar linearity calculation in the pre-reader source",
+      "defect": "unlicensed-inference",
+      "evidence": "The observed proof moved complex scalars through the conjugate-linear second inner-product slot without conjugation. The calculation should use (A(su+tw),v) in the first slot. The complete original lemma was read and fingerprinted; its raw hash matches the batch-10 pre-reader snapshot. The current producer now contains the correct calculation. Retain this historical finding for producer closure; the assigned consumer uses the unaffected real case.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "lem-positive-part-of-a-zero-trace-function-has-zero-trace",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "def-closed-convex-obstacle-set-and-variational-inequality",
+      "observed_source": null,
+      "location": "Facts & Assumptions F4 and Proof step 2.1 in the initially observed source",
+      "defect": "unlicensed-inference",
+      "evidence": "Initially F4 invoked dominated convergence for the indicator-gradient term without establishing a.e. convergence of the approximants. H1 convergence and the cited truncation formulas alone do not supply that hypothesis. Extracting an a.e. convergent further subsequence from every subsequence, then applying the level-set gradient identity and a full-sequence contradiction, closes the short omission. Current batch-14 F4 was reopened and now supplies this argument. Original bytes were not fingerprinted at observation, so no historical snapshot binding is claimed.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "thm-poincare-inequality-for-w-one-p-zero",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "thm-first-dirichlet-eigenfunction-by-constrained-minimisation",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "caa9cb6472b8c1cb956516d2d21a65979211a1b8605f90f895af741cd9ba4d5b"
+      },
+      "location": "Statement; contrast Facts & Assumptions Given/F7 and Proof step 3.1",
+      "defect": "missing-hypothesis",
+      "evidence": "The Statement omits Countable Choice, although Given and F7 explicitly assume it. The opened Sobolev closure and measure interfaces require Countable Choice, and step 3.1 selects countably many smooth approximants. Add Countable Choice to the Statement or provide a choice-free proof and prerequisite interfaces. Batch 4 owns this supplier. The assigned consumer already assumes stronger choice.",
+      "severity": "fatal"
+    },
+    {
+      "id": "constrained-variational-problems-and-variational-inequalities-examples",
+      "subject_type": "page",
+      "consumer_id": null,
+      "observed_source": null,
+      "location": "Final paragraph, lines 40–43: claim that explicit computations use only Countable Choice",
+      "defect": "false-claim",
+      "evidence": "The integral-constraint and obstacle verifications invoke trace and absolutely continuous representative suppliers assuming AC, and integration by parts explicitly assuming both Countable Choice and DC. Only the Rayleigh computation uses merely Countable Choice through its sharp interval supplier. Replace the sentence with the actual per-example choice footprints. Assigned B-page prose is outside reader edit authority.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Report written to research/frontier-39-analysis-30-reader-16.md. Read both pages, all 34 assigned items, all contracts, and 156 supplier files for relevant interfaces and targeted proofs. Initial scans preceded some auxiliary supplier openings. No exhaustive audit of the 1,592-item foundational closure or every bibliography PDF is claimed. Relevant Andersson, Brezis, Cristoferi and Ouaro–Traore arguments were read. Sixteen items and A-page prose were repaired. Required reflow/precheck passed; strict contracts checked 34 items, rendering checked 36 files, and final batched proof layout checked 88 steps with zero defects. Two outside-batch findings are historical and currently corrected. No judgment or certification was issued."
+}

@@ -1,0 +1,521 @@
+{
+  "run": "frontier-39-analysis-30",
+  "phase": "initial",
+  "round": 1,
+  "unit": "3",
+  "input_sha256": "9338524b8f90ef76ff4d0d3c41b2d942e870edbc6da3d7062fa8aeac770c3e1f",
+  "decisions": [
+    {
+      "id": "def-wave-energy-and-energy-flux",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "877ded5d53df10f540887397f2713141b3b2567f6c95c39cf99c9a7bd20cd237",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed undefined-domain defect: for U=(0,1) and Omega=R, e is undefined outside U. Requiring measurable Omega contained in U makes every integral well-defined, with infinity still allowed. Also corrected the final sentence to describe the conservation theorem as supplying sufficient settings, not a necessity classification; density and flux formulas are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "1622d45efe15dd6e4b8e848b30ceec7152d38430a458c25abfa978d3905a835c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The objection is fatal for the original Proof 4.1: arbitrary endpoint assignments are unconstrained by pointwise Cauchy limits, so u=v on [0,T) did not follow. The original Statement concerns solutions on (0,T) and remains unchanged. Repaired F1 and Proof 1.1-4.1 to use positive-time density and sharp data energy, prove a single space-time constant, and distinguish equality on (0,T) from equality of the canonical Cauchy extensions at zero. No differentiability or continuity of data beyond the given hypotheses is silently assumed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-compact-support-expands-at-speed-at-most-c",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "5e94784a943553cb1823fa6363ec800f5e345b2ae62410490109f3851895f77e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F1 originally dropped the finite-propagation supplier's t>0 hypothesis and Proof 1.1 invoked it at all vertices in the empty-K case. At t=0 the base ball is empty, so the asserted implication is false for w=1, g=0. Restored t>0 in F1 and restricted cone applications to positive times; handled t=0 from continuity near the initial slab and the prescribed displacement limit. Also explicitly used closedness of the distance sublevel set to pass from pointwise vanishing on its complement to the support inclusion. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-two-dimensional-pulse-has-a-tail-inside-the-cone",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "64f21468c3b7f5311c3dcde14bce5093f7d4564d81a04e8b11d7dc9855881036",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The positivity formula and Example are valid, but Verification 3.1 falsely described the three-dimensional shell as quiet. The paired example puts the possible pulse in ct-r<=|x-x0|<=ct+r and says the interior |x-x0|<ct-r is quiet. This ancillary contrast is a confirmed nonfatal defect. Removed the false comparison from the verification and stated the actual interior-data witness; the correct quiet-interior comparison in the Example remains unchanged. F2 now states precisely the supplied n=2 failure claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-finite-speed-does-not-imply-strong-huygens",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "2e76867b441390241967c975844a7497917025ce0b7db0ddf3aa1bedb36d2d7c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F4 originally called S(x0,t0) the carrier sphere, but the supplied definition fixes radius c*t0. For c!=1 the radii differ, so that false restatement did not justify the Huygens contradiction. Corrected F4 to S(x0,c*t0)=boundary B_{c*t0}(x0), retaining neighbourhood agreement rather than bare sphere restrictions. Also restored the finite-speed supplier's C2-near-initial-slab hypothesis in F3, already established for these witnesses in the unchanged statement prose.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-wave-energy-and-energy-flux",
+      "disposition": "repaired",
+      "post_sha256": "481b14c5ecbbd26cee62e15e82eeb1ab6b7fe7160b9623fd9ae81a3055c7b21a",
+      "review_context_sha256": "478d788fd2907998e34c15475b1332aac4ca21e0bacad9a5158ffcbfa15c5968",
+      "reason": "Checked C2 regularity, nonnegative density, c-squared flux, measurable-region containment and finite/infinite energy conventions. Existing definition contract boundaries remain true; no proof obligations were added. Rendercheck and strict owning contract check each passed (exit 0). This is a local repair review, not an independent audit of my edits. Final owning strict proof-contract check passed (5/5 items, zero errors/warnings); batched proof-layout passed (5 items, 15 steps, zero defects).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+      "disposition": "repaired",
+      "post_sha256": "b0091b14422648577b58243c45fe762bc6c7805f45c59055cc6b5710ebd0d9b2",
+      "review_context_sha256": "7fe13cd10a734f8b6e92326a9d3fc669f8e6ba9538d47097d83594a940926206",
+      "reason": "Checked the Cauchy interface specifies only limits, conservation is an explicit positive-time hypothesis, continuous nonnegative density of integral zero vanishes pointwise, and the convex space-time constancy lemma fixes the residual constant from displacement limits. The reverse zero-energy implication uses positive-time constancy and velocity limits, avoiding any unjustified continuity of the data. Statement unchanged. Precheck and rendercheck passed (exit 0). Final owning strict proof-contract check passed (5/5 items, zero errors/warnings); batched proof-layout passed (5 items, 15 steps, zero defects).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-compact-support-expands-at-speed-at-most-c",
+      "disposition": "repaired",
+      "post_sha256": "71dd60c18ed5a06ad8a0aef9246bd955a5dbf77320b5662253af478fc40a6d00",
+      "review_context_sha256": "8f6a3d8c2ef82c431923e95f2b039a6fe56dd6ce585ae55dbca3763a3bb8d318",
+      "reason": "Checked source and data vanish on each closed backward cone by the distance triangle inequality; C2 regularity near the initial slab satisfies the supplier; positive-time vertices meet t>0. Empty support is handled separately at zero. Compactness gives attainment of distance and closedness, so pointwise vanishing implies support containment. No statement change. Precheck and rendercheck passed (exit 0). Final owning strict proof-contract check passed (5/5 items, zero errors/warnings); batched proof-layout passed (5 items, 15 steps, zero defects).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-two-dimensional-pulse-has-a-tail-inside-the-cone",
+      "disposition": "repaired",
+      "post_sha256": "bb0a184eb223c75b3cc8c4aa08141a21b68b8fbe57f13f16d1da8aab5278037b",
+      "review_context_sha256": "31d2af4907ba690699b4af8e8e31efa6cfe4058ca1b890025dbf4c073d8e306b",
+      "reason": "Checked the zero-displacement Poisson coefficient 1/(2pi c), compact support strictly inside B_ct for t>r/c, positive kernel bounded below by 1/(ct), and a continuous nonzero nonnegative bump positive on a ball of positive measure. The data vanish near the boundary sphere while the centre value remains positive. The paired three-dimensional example and page identify the quiet interior, not the shell. Precheck and rendercheck passed (exit 0). Final owning strict proof-contract check passed (5/5 items, zero errors/warnings); batched proof-layout passed (5 items, 15 steps, zero defects).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-finite-speed-does-not-imply-strong-huygens",
+      "disposition": "repaired",
+      "post_sha256": "5b227ac0229e468f6422e65fd4222d402ccd7a13953a4596663b2c1f13c296f0",
+      "review_context_sha256": "aa817e7d8384dc4ac8c63bfd7d73bc21e3c31b352455bc21b3ddbb7842ec3d5d",
+      "reason": "Checked the strong-Huygens germ definition at radius c*t0, admissible interior nonzero smooth velocity bumps, positive dAlembert/Poisson values, and finite propagation for their C2 extensions through zero. Also checked the C2 profile (1-s^2)^3|s|^(5/2) matches through order two at 0 and +/-1 but is not C3, the FTC gives F(x-ct), and fixed-support differentiation gives the negative Poisson coefficient -c*t0/(2pi). Statements unchanged. Precheck and rendercheck passed (exit 0). Final owning strict proof-contract check passed (5/5 items, zero errors/warnings); batched proof-layout passed (5 items, 15 steps, zero defects).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cex-global-energy-identity-needs-integrability-or-decay",
+    "cex-wave-energy-need-not-be-conserved-through-an-open-boundary",
+    "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+    "cor-time-reversed-energy-uniqueness-from-final-data",
+    "ex-conserved-energy-of-a-travelling-wave-packet",
+    "ex-reflection-at-a-dirichlet-endpoint",
+    "ex-zero-wave-energy-means-spatial-constant-before-data-fix-the-constant",
+    "lem-energy-identity-on-a-truncated-wave-cone",
+    "lem-local-wave-energy-conservation-law",
+    "thm-conservation-of-total-wave-energy",
+    "thm-energy-continuous-dependence-for-the-forced-wave-equation",
+    "thm-energy-uniqueness-for-homogeneous-dirichlet-waves-on-bounded-domains",
+    "thm-finite-propagation-speed-for-the-wave-equation"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-wave-energy-and-energy-flux",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "repaired",
+      "reason": "Confirmed undefined-domain defect: for U=(0,1) and Omega=R, e is undefined outside U. Requiring measurable Omega contained in U makes every integral well-defined, with infinity still allowed. Also corrected the final sentence to describe the conservation theorem as supplying sufficient settings, not a necessity classification; density and flux formulas are unchanged."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "repaired",
+      "reason": "The objection is fatal for the original Proof 4.1: arbitrary endpoint assignments are unconstrained by pointwise Cauchy limits, so u=v on [0,T) did not follow. The original Statement concerns solutions on (0,T) and remains unchanged. Repaired F1 and Proof 1.1-4.1 to use positive-time density and sharp data energy, prove a single space-time constant, and distinguish equality on (0,T) from equality of the canonical Cauchy extensions at zero. No differentiability or continuity of data beyond the given hypotheses is silently assumed."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "cor-compact-support-expands-at-speed-at-most-c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "status": "repaired",
+      "reason": "F1 originally dropped the finite-propagation supplier's t>0 hypothesis and Proof 1.1 invoked it at all vertices in the empty-K case. At t=0 the base ball is empty, so the asserted implication is false for w=1, g=0. Restored t>0 in F1 and restricted cone applications to positive times; handled t=0 from continuity near the initial slab and the prescribed displacement limit. Also explicitly used closedness of the distance sublevel set to pass from pointwise vanishing on its complement to the support inclusion. Statement unchanged."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-two-dimensional-pulse-has-a-tail-inside-the-cone",
+      "outcome": "confirmed_nonfatal",
+      "status": "repaired",
+      "reason": "The positivity formula and Example are valid, but Verification 3.1 falsely described the three-dimensional shell as quiet. The paired example puts the possible pulse in ct-r<=|x-x0|<=ct+r and says the interior |x-x0|<ct-r is quiet. This ancillary contrast is a confirmed nonfatal defect. Removed the false comparison from the verification and stated the actual interior-data witness; the correct quiet-interior comparison in the Example remains unchanged. F2 now states precisely the supplied n=2 failure claim."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "cex-finite-speed-does-not-imply-strong-huygens",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "status": "repaired",
+      "reason": "F4 originally called S(x0,t0) the carrier sphere, but the supplied definition fixes radius c*t0. For c!=1 the radii differ, so that false restatement did not justify the Huygens contradiction. Corrected F4 to S(x0,c*t0)=boundary B_{c*t0}(x0), retaining neighbourhood agreement rather than bare sphere restrictions. Also restored the finite-speed supplier's C2-near-initial-slab hypothesis in F3, already established for these witnesses in the unchanged statement prose."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-wave-tails-in-one-and-even-spatial-dimensions",
+      "status": "owner_required",
+      "finding": {
+        "id": "thm-wave-tails-in-one-and-even-spatial-dimensions",
+        "path": "items/thm-wave-tails-in-one-and-even-spatial-dimensions.md",
+        "locator": "Statement opening paragraph",
+        "affected_use": "Data supported in B_{ct0}(x0) are claimed to vanish near S(x0,t0); the actual Huygens carrier has radius c*t0.",
+        "invalidated_claim": "The parenthetical radius identification S(x0,t0) is inaccurate for c different from one.",
+        "minimality": "Replace S(x0,t0) with boundary B_{ct0}(x0), or explicitly define S as that speed-dependent sphere; the interior-data witness and kernel calculations are unchanged.",
+        "reason": "Read the entire Statement and compared it with the supplied strong-Huygens Definition. The n=2 interior-bump claim consumed by my example is expressed with B_{ct0}(x0) and remains sound; the sphere notation is a separate supplier-interface typo.",
+        "disposition": "reported_to_frontier_owner_without_edit",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      "reason": "Read the entire Statement and compared it with the supplied strong-Huygens Definition. The n=2 interior-bump claim consumed by my example is expressed with B_{ct0}(x0) and remains sound; the sphere notation is a separate supplier-interface typo."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-wave-equation-cauchy-data-and-wave-speed",
+      "status": "owner_required",
+      "finding": {
+        "id": "def-wave-equation-cauchy-data-and-wave-speed",
+        "path": "items/def-wave-equation-cauchy-data-and-wave-speed.md",
+        "locator": "Definition opening paragraph",
+        "affected_use": "The wave operator uses the linked Laplacian, but its displayed coordinate restatement sums partial_j squared from j=1 through n.",
+        "invalidated_claim": "With the library gradient coordinates 0 through n-1, partial_n is not a spatial coordinate derivative and partial_0 is omitted.",
+        "minimality": "Align the coordinate restatement with the Laplacian supplier sum over j<n; retain the defined Laplacian operator and all Cauchy conventions.",
+        "reason": "Compared the opening Definition with def-laplacian-of-a-c2-function and the zero-based spatial gradient used by the energy Definition. Assigned repairs use the linked Laplacian operator, not the erroneous index restatement.",
+        "disposition": "reported_to_frontier_owner_without_edit",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      "reason": "Compared the opening Definition with def-laplacian-of-a-c2-function and the zero-based spatial gradient used by the energy Definition. Assigned repairs use the linked Laplacian operator, not the erroneous index restatement."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-wave-energy-and-energy-flux",
+      "claim": "e and q live on U times I; total energy integrates e only over measurable Omega contained in U. Sufficient conservation settings are not a necessity classification.",
+      "dependencies": [
+        "def-nonnegative-lebesgue-integral",
+        "def-jacobian-matrix-and-gradient"
+      ],
+      "sources_consulted": [
+        "items/def-wave-energy-and-energy-flux.md",
+        "items/thm-conservation-of-total-wave-energy.md"
+      ],
+      "source_urls": [],
+      "familiar": true,
+      "unresolved_obligations": [],
+      "next_action": "Assigned review complete; controller integrates ledger proposals and owning contracts, then routes the recorded outside-lane findings.",
+      "validation": [
+        "node tools/rendercheck.mjs items/def-wave-energy-and-energy-flux.md: exit 0, 1 file OK",
+        "node tools/proof-contract.mjs research/frontier-39-analysis-30-batch-3.proof-contracts.json --strict --items def-wave-energy-and-energy-flux: exit 0, 0 errors/warnings",
+        "Final owning strict proof-contract check: exit 0, 0 errors, 0 warnings, 5/5 items checked."
+      ],
+      "page_review": "Main page states three admissible sufficient conservation settings; examples page uses whole-line and half-line energy. Both remain sound without edits."
+    },
+    {
+      "id": "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+      "claim": "Sharp zero energy implies one constant on Rn times (0,T); zero Cauchy displacement fixes it to zero. Equal-data solutions agree in the interior and their canonical extensions agree at zero.",
+      "dependencies": [
+        "thm-conservation-of-total-wave-energy",
+        "lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets",
+        "def-wave-equation-cauchy-data-and-wave-speed",
+        "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+      ],
+      "sources_consulted": [
+        "items/def-wave-equation-cauchy-data-and-wave-speed.md: Definition Cauchy limits",
+        "items/thm-conservation-of-total-wave-energy.md: Statement (a),(b)",
+        "items/lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets.md: Statement"
+      ],
+      "validation": [
+        "Focused precheck exit 0: 1 checked, 0 failing",
+        "Focused rendercheck exit 0: 1 file OK",
+        "Final owning strict proof-contract check: exit 0, 0 errors, 0 warnings, 5/5 items checked."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned review complete; controller integrates ledger proposals and owning contracts, then routes the recorded outside-lane findings."
+    },
+    {
+      "id": "cor-compact-support-expands-at-speed-at-most-c",
+      "claim": "Data supported in compact K and source within dist(y,K)<=cs imply support u(t) within dist(x,K)<=ct, including empty K and t=0.",
+      "dependencies": [
+        "thm-finite-propagation-speed-for-the-wave-equation",
+        "def-support-and-compactly-supported-riemann-integral-in-rn",
+        "thm-extreme-value-metric",
+        "thm-cauchy-schwarz-and-the-euclidean-norm"
+      ],
+      "sources_consulted": [
+        "items/thm-finite-propagation-speed-for-the-wave-equation.md: Statement t0>0 and closed-cone neighbourhood",
+        "items/cor-compact-support-expands-at-speed-at-most-c.md: Statement neighbourhood regularity"
+      ],
+      "validation": [
+        "Focused precheck exit 0: 1 checked, 0 failing",
+        "Focused rendercheck exit 0: 1 file OK",
+        "Final owning strict proof-contract check: exit 0, 0 errors, 0 warnings, 5/5 items checked."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned review complete; controller integrates ledger proposals and owning contracts, then routes the recorded outside-lane findings."
+    },
+    {
+      "id": "ex-two-dimensional-pulse-has-a-tail-inside-the-cone",
+      "claim": "Nonnegative nonzero Cc2 velocity in B_r(x0) gives positive Poisson displacement at x0 for every t>r/c; this interior tail contrasts with the three-dimensional quiet interior.",
+      "dependencies": [
+        "thm-poisson-formula-for-the-two-dimensional-wave-equation",
+        "thm-wave-tails-in-one-and-even-spatial-dimensions",
+        "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+        "lem-sphere-and-ball-measures-scale"
+      ],
+      "sources_consulted": [
+        "items/thm-poisson-formula-for-the-two-dimensional-wave-equation.md: Statement",
+        "items/thm-wave-tails-in-one-and-even-spatial-dimensions.md: Statement n=2",
+        "items/ex-three-dimensional-spherical-pulse-leaves-a-quiet-tail.md: Example shell and quiet interior",
+        "library/pde/wave-energy-finite-propagation-and-huygens-examples.md: final comparison"
+      ],
+      "validation": [
+        "Focused precheck exit 0: 1 checked, 0 failing",
+        "Focused rendercheck exit 0: 1 file OK",
+        "Final owning strict proof-contract check: exit 0, 0 errors, 0 warnings, 5/5 items checked."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned review complete; controller integrates ledger proposals and owning contracts, then routes the recorded outside-lane findings."
+    },
+    {
+      "id": "cex-finite-speed-does-not-imply-strong-huygens",
+      "claim": "Finite speed coexists with failure of strong Huygens in dimensions 1 and 2, a traveling C2 non-C3 cusp, and sign reversal of a nonnegative displacement bump.",
+      "dependencies": [
+        "def-strong-huygens-principle",
+        "cor-compact-support-expands-at-speed-at-most-c",
+        "thm-dalembert-formula",
+        "thm-poisson-formula-for-the-two-dimensional-wave-equation",
+        "thm-differentiation-under-the-integral-sign",
+        "lem-smooth-bump-between-concentric-euclidean-balls"
+      ],
+      "sources_consulted": [
+        "items/def-strong-huygens-principle.md: Definition radius and neighbourhood formulation",
+        "items/thm-dalembert-formula.md: Statement and Proof 1.1",
+        "items/thm-poisson-formula-for-the-two-dimensional-wave-equation.md: Statement",
+        "items/cor-compact-support-expands-at-speed-at-most-c.md: Statement"
+      ],
+      "validation": [
+        "Focused precheck exit 0: 1 checked, 0 failing",
+        "Focused rendercheck exit 0: 1 file OK",
+        "Final owning strict proof-contract check: exit 0, 0 errors, 0 warnings, 5/5 items checked."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned review complete; controller integrates ledger proposals and owning contracts, then routes the recorded outside-lane findings."
+    },
+    {
+      "scope": "batch",
+      "claim": "Only the energy Definition changed its public interface; all four other original Statement/Definition sections remain byte-identical. All 13 graph consumers are in the frozen frontier; no published or outside consumer of this interface was found.",
+      "sources_consulted": [
+        "tools/step7-statement.mjs: literal Statement/Definition section hashing",
+        "tools/step7-rounds.mjs: full dependency/reference graph",
+        "library/pde/wave-energy-finite-propagation-and-huygens.md",
+        "library/pde/wave-energy-finite-propagation-and-huygens-examples.md"
+      ],
+      "validation": [
+        "Literal interface hashes compared against initial-1.json before_statements: one changed, four unchanged.",
+        "Current full dependency/reference graph direct consumers exactly match the 13 downstream IDs.",
+        "Final owning strict proof-contract check: exit 0, 0 errors, 0 warnings, 5/5 items checked."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned review complete; controller integrates ledger proposals and owning contracts, then routes the recorded outside-lane findings."
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "lem-local-wave-energy-conservation-law",
+      "path": "items/lem-local-wave-energy-conservation-law.md",
+      "locator": "Statement and Proof 1.1-2.1",
+      "affected_use": "Pointwise e,q on U times I; no total-energy domain is used.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "lem-energy-identity-on-a-truncated-wave-cone",
+      "path": "items/lem-energy-identity-on-a-truncated-wave-cone.md",
+      "locator": "Statement E(t) display and Given",
+      "affected_use": "Energy over B_{c(t0-t)}(x0), where the C2 neighbourhood of the closed frustum defines u.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+      "path": "items/cor-energy-uniqueness-for-the-wave-cauchy-problem.md",
+      "locator": "Statement and Given",
+      "affected_use": "E_Rn(t)=integral_Rn e for u defined on the whole spatial Rn at positive times.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "cor-time-reversed-energy-uniqueness-from-final-data",
+      "path": "items/cor-time-reversed-energy-uniqueness-from-final-data.md",
+      "locator": "F3 and Proof 2.1",
+      "affected_use": "Energy density transforms under time reversal on the same whole-space domain.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "ex-conserved-energy-of-a-travelling-wave-packet",
+      "path": "items/ex-conserved-energy-of-a-travelling-wave-packet.md",
+      "locator": "Example and F3",
+      "affected_use": "Whole-line energy of u(x,t)=F(x-ct), defined for every real x and t.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "ex-zero-wave-energy-means-spatial-constant-before-data-fix-the-constant",
+      "path": "items/ex-zero-wave-energy-means-spatial-constant-before-data-fix-the-constant.md",
+      "locator": "Given",
+      "affected_use": "Whole-space energy and density for a solution on Rn times (0,T).",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "cex-global-energy-identity-needs-integrability-or-decay",
+      "path": "items/cex-global-energy-identity-needs-integrability-or-decay.md",
+      "locator": "Statement refuted and Proof 4.1",
+      "affected_use": "Whole-space integral of a plane-wave density on its full domain Rn; infinity permitted.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "cex-wave-energy-need-not-be-conserved-through-an-open-boundary",
+      "path": "items/cex-wave-energy-need-not-be-conserved-through-an-open-boundary.md",
+      "locator": "Statement refuted, Given and Proof 2.1",
+      "affected_use": "Interval energy Omega=(0,1) for globally defined packet F(x-ct); half-line comparison integrates within its domain.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "ex-reflection-at-a-dirichlet-endpoint",
+      "path": "items/ex-reflection-at-a-dirichlet-endpoint.md",
+      "locator": "Example (iii) and F3",
+      "affected_use": "E_(0,infinity) for the half-line restriction of a globally defined dAlembert wave.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "thm-conservation-of-total-wave-energy",
+      "path": "items/thm-conservation-of-total-wave-energy.md",
+      "locator": "Statement (a)-(c)",
+      "affected_use": "Both whole-space cases use Omega=U=Rn; bounded-domain case uses Omega=U.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "thm-energy-continuous-dependence-for-the-forced-wave-equation",
+      "path": "items/thm-energy-continuous-dependence-for-the-forced-wave-equation.md",
+      "locator": "Statement energy display",
+      "affected_use": "Omega=Rn or Omega=U respectively matches the solution spatial domain.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "thm-energy-uniqueness-for-homogeneous-dirichlet-waves-on-bounded-domains",
+      "path": "items/thm-energy-uniqueness-for-homogeneous-dirichlet-waves-on-bounded-domains.md",
+      "locator": "Given",
+      "affected_use": "E_U(t)=integral_U e with u defined up to the boundary of that same U.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-wave-energy-and-energy-flux",
+      "id": "thm-finite-propagation-speed-for-the-wave-equation",
+      "path": "items/thm-finite-propagation-speed-for-the-wave-equation.md",
+      "locator": "Given",
+      "affected_use": "E(t) integrates over balls inside the closed cone on whose neighbourhood u is C2.",
+      "disposition": "unchanged_sound",
+      "reason": "The integration region is contained in the stated spatial domain; pointwise formulas and sufficient conservation settings are unchanged.",
+      "route": "frontier-owner"
+    }
+  ],
+  "outside_lane_findings": [
+    {
+      "id": "thm-wave-tails-in-one-and-even-spatial-dimensions",
+      "path": "items/thm-wave-tails-in-one-and-even-spatial-dimensions.md",
+      "locator": "Statement opening paragraph",
+      "affected_use": "Data supported in B_{ct0}(x0) are claimed to vanish near S(x0,t0); the actual Huygens carrier has radius c*t0.",
+      "invalidated_claim": "The parenthetical radius identification S(x0,t0) is inaccurate for c different from one.",
+      "minimality": "Replace S(x0,t0) with boundary B_{ct0}(x0), or explicitly define S as that speed-dependent sphere; the interior-data witness and kernel calculations are unchanged.",
+      "reason": "Read the entire Statement and compared it with the supplied strong-Huygens Definition. The n=2 interior-bump claim consumed by my example is expressed with B_{ct0}(x0) and remains sound; the sphere notation is a separate supplier-interface typo.",
+      "disposition": "reported_to_frontier_owner_without_edit",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-wave-equation-cauchy-data-and-wave-speed",
+      "path": "items/def-wave-equation-cauchy-data-and-wave-speed.md",
+      "locator": "Definition opening paragraph",
+      "affected_use": "The wave operator uses the linked Laplacian, but its displayed coordinate restatement sums partial_j squared from j=1 through n.",
+      "invalidated_claim": "With the library gradient coordinates 0 through n-1, partial_n is not a spatial coordinate derivative and partial_0 is omitted.",
+      "minimality": "Align the coordinate restatement with the Laplacian supplier sum over j<n; retain the defined Laplacian operator and all Cauchy conventions.",
+      "reason": "Compared the opening Definition with def-laplacian-of-a-c2-function and the zero-based spatial gradient used by the energy Definition. Assigned repairs use the linked Laplacian operator, not the erroneous index restatement.",
+      "disposition": "reported_to_frontier_owner_without_edit",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "validation": [
+    {
+      "command": "node tools/proof-contract.mjs research/frontier-39-analysis-30-batch-3.proof-contracts.json --strict --items def-wave-energy-and-energy-flux,cor-energy-uniqueness-for-the-wave-cauchy-problem,cor-compact-support-expands-at-speed-at-most-c,ex-two-dimensional-pulse-has-a-tail-inside-the-cone,cex-finite-speed-does-not-imply-strong-huygens",
+      "exit_code": 0,
+      "result": "0 errors, 0 warnings, 5/5 items checked; run after locked contract regeneration and boundary synchronization."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-wave-energy-and-energy-flux.md items/cor-energy-uniqueness-for-the-wave-cauchy-problem.md items/cor-compact-support-expands-at-speed-at-most-c.md items/ex-two-dimensional-pulse-has-a-tail-inside-the-cone.md items/cex-finite-speed-does-not-imply-strong-huygens.md",
+      "exit_code": 0,
+      "result": "5 items, 15 steps, 0 defects; run once after all item edits."
+    },
+    {
+      "command": "Read-only comparison of saved reviews with current reviewContextHashes and frozen before_statements",
+      "exit_code": 0,
+      "result": "Exact input hash verified; all five original recorded post/context hashes remain current, none refreshed; only the energy Definition changed."
+    }
+  ],
+  "integration_notes": "The owning batch-3 contract entries were reread, regenerated only for the four assigned proof-bearing items, boundary evidence updated only for the assigned energy Definition and uniqueness corollary, checked, and released under tools/step7-shared-write-lock.mjs. Historical risk_review records are preserved; no central contracts, stamps, certificates, round state, shared ledgers, or other item files were edited. No new prerequisites were needed. No published-consumer ledger update is proposed: all direct consumers of the changed Definition are frozen-frontier drafts."
+}

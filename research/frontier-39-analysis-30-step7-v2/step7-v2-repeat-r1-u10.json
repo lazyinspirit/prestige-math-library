@@ -1,0 +1,118 @@
+{
+  "run": "frontier-39-analysis-30",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "10",
+  "input_sha256": "4f91ca21b77ba02bf6d92ea5243cd78e0ee21674158fffdec4d98596ef6beea2",
+  "decisions": [
+    {
+      "id": "lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "af925475c26cd14cf0c8cd265843520a40e5b471a17b12d35208188d4c23d262",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2's contextual existence assertion omits the Countable Choice premise explicitly required by thm-lax-milgram. This does not invalidate the a priori estimate: the Given already assumes u solves the equation, and neither proof step constructs u or invokes existence. Qualified F2 by the additional Countable Choice hypothesis; the Statement and the two proof steps remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound",
+      "disposition": "repaired",
+      "post_sha256": "a4bdced118eb5f879bad3967ac12feef01315c1881eb49c7636195a2ec7935ce",
+      "review_context_sha256": "300371f48514b853223803fd92646a9062f40216fb87bebf7ad7bcc3600e99be",
+      "reason": "Checked the complete assigned item, owning batch-10 contract, Lax–Milgram and form/weak-Dirichlet interfaces, all F1 contract source sections, and home-page prose. Testing v=u gives Re a(u,u)=Re F(u); coercivity and |F(u)|<=||F||||u|| give the stated estimate, dividing only for u nonzero. The conjugate-linear norm estimate follows by real positive normalization and requires no choice. Homogeneous PDE use requires u in H1-zero; inhomogeneous use subtracts a lifting and uses the residual functional. Corrected only F2's contextual existence assertion to require additional Countable Choice. The contract already quotes that exact supplier hypothesis and declares the existence citation contextual; its derivations and boundaries remain accurate. Focused precheck, rendercheck, strict proof-contract and final proof-layout checks pass. This is a local repair review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "defect_id": "frontier-39-analysis-30-step7-repeat-r1-u10-F2-choice",
+      "run": "frontier-39-analysis-30",
+      "at": "2026-10-06",
+      "class": "accuracy",
+      "subclass": "missing-choice-scope",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "subject": "lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound",
+      "caught_at_stage": "7-adjudicate",
+      "caught_by_role": "group-alpha",
+      "disposition": "fixed",
+      "introduced_at_stage": "unknown",
+      "repair_cost": "inline-fix",
+      "adjudication_ref": [
+        {
+          "ledger": "research/frontier-39-analysis-30-step7-v2/step7-v2-repeat-r1-u10.json",
+          "model": "gpt-6.1-sol",
+          "context_sha256": "af925475c26cd14cf0c8cd265843520a40e5b471a17b12d35208188d4c23d262"
+        }
+      ],
+      "item_sha256": "a4bdced118eb5f879bad3967ac12feef01315c1881eb49c7636195a2ec7935ce",
+      "subclass_note": "F2 claimed contextual Lax–Milgram existence under the lemma's hypotheses although the supplier explicitly assumes Countable Choice. Added the missing conditional qualification; the assumed-solution estimate is already choice-free and remains unchanged.",
+      "evidence": [
+        {
+          "path": "items/lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound.md",
+          "anchor": "F2"
+        },
+        {
+          "path": "items/thm-lax-milgram.md",
+          "anchor": "Statement"
+        }
+      ],
+      "prevention": {
+        "kind": "process",
+        "ref": "Compare every contextual existence assertion with the supplier's explicit choice hypotheses."
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound.md"
+    ],
+    "claim": "For an assumed solution a(u,v)=F(v), alpha||u||^2<=Re F(u)<=||F||||u|| and alpha||u||<=||F||.",
+    "conventions": "Sesquilinear forms are linear in the first slot and conjugate-linear in the second; real conjugation is the identity. The abstract estimate needs no choice principle.",
+    "sources_consulted": [
+      "items/thm-lax-milgram.md: complete Statement, Facts and Proof",
+      "items/def-bounded-coercive-and-symmetric-sesquilinear-forms.md: complete Definition",
+      "items/def-weak-dirichlet-solution-for-a-divergence-form-operator.md: complete Definition",
+      "research/frontier-39-analysis-30-batch-10.proof-contracts.json: assigned contract and complete F1 source-section quotations",
+      "library/pde/lax-milgram-and-weak-elliptic-solutions.md: complete page",
+      "library/pde/lax-milgram-and-weak-elliptic-solutions-examples.md: complete page"
+    ],
+    "external_source_reading": "No external source retrieved or claimed; the elementary a priori argument is familiar.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound.md library/pde/lax-milgram-and-weak-elliptic-solutions.md",
+        "exit_code": 0,
+        "result": "2 files; all math spans and frontmatter parse"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-39-analysis-30-batch-10.proof-contracts.json --strict --items lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 checked"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects"
+      }
+    ],
+    "interface_change": false,
+    "published_ledger_update": "None: no published defect discovered and no Statement or Definition changed.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this exact round report; no workers, gates, certificates or round transitions launched."
+  }
+}

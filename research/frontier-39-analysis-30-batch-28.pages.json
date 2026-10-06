@@ -1,0 +1,835 @@
+[
+  {
+    "order": 510.06507,
+    "id": "finite-fourier-analysis-and-the-fast-fourier-transform",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "Finite Fourier Analysis and the Fast Fourier Transform",
+    "companion": "finite-fourier-analysis-and-the-fast-fourier-transform-examples",
+    "requires": [
+      "character-groups-and-elementary-lca-duals",
+      "bochner-inversion-and-plancherel-on-lca-groups",
+      "pontryagin-duality-for-locally-compact-abelian-groups"
+    ],
+    "items": [
+      {
+        "id": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+        "kind": "lemma",
+        "title": "Orthogonality of the characters $x\\mapsto e^{2\\pi ikx/N}$ on $\\mathbb Z/N\\mathbb Z$",
+        "deps": [
+          "def-canonical-natural",
+          "def-complex-exponential",
+          "def-complex-integer-powers",
+          "def-congruence-modulo-an-integer",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-group-power",
+          "def-integers-modulo-n",
+          "lem-congruence-is-an-equivalence-relation",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-integer-multiples-agree-with-canonical-natural",
+          "lem-power-laws",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "thm-induction-principle",
+          "thm-kernel-and-fibres-of-complex-exponential"
+        ],
+        "statement": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then $$\\sum_{x=0}^{N-1}e^{2\\pi i(k-\\ell)x/N}=\\begin{cases}N,&k\\equiv\\ell\\pmod N,\\\\ 0,&k\\not\\equiv\\ell\\pmod N.\\end{cases}$$ At $N=1$ the congruence holds for all $k,\\ell$ and the sum is $1$. The sum is a finite sum of complex numbers ([[def-finite-sum-in-a-commutative-monoid]]), and $N$ on the right is the image of the natural number $N$ in $\\mathbb C$.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, PDF pp. 86-88: the pairing $(\\omega^j,\\ell)\\mapsto\\omega^{j\\ell}$, the functions $e_j$ of (11.6), Proposition 11.2, and the geometric-sum orthogonality proof with the case $\\omega^m=1$ separated"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 3: root-of-unity computations and the coefficient-recovery sum"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf",
+              "locator": "Appendix C.3, printed p. 435: orthogonality of distinct characters on a compact abelian group, of which the finite cyclic case is the instance used here"
+            }
+          ]
+        },
+        "strategy": "Case split on the ratio $\\omega:=e^{2\\pi i(k-\\ell)/N}$. If $k\\equiv\\ell\\pmod N$ then $(k-\\ell)x/N\\in\\mathbb Z$ for every integer $x$, so every summand $\\omega^x$ equals $1$ by [[thm-kernel-and-fibres-of-complex-exponential]]; the sum of $N$ copies of $1$ in the additive monoid of $\\mathbb C$ is $N\\cdot1_{\\mathbb C}=\\iota(N)$ by the recursive definition of [[def-finite-sum-in-a-commutative-monoid]] and [[lem-integer-multiples-agree-with-canonical-natural]]. If $k\\not\\equiv\\ell\\pmod N$ then $(k-\\ell)/N\\notin\\mathbb Z$, so $\\omega\\ne1$, while $\\omega^N=e^{2\\pi i(k-\\ell)}=1$ by the addition law and the kernel theorem; prove the complex geometric identity $1-\\omega^n=(1-\\omega)\\sum_{x<n}\\omega^x$ for every $n\\in\\mathbb N$ by induction on $n$ directly from the same recursion ([[thm-induction-principle]], [[lem-power-laws]], [[thm-complex-numbers-form-a-field]]), then insert $n=N$ and use $\\omega^N=1$ and $1-\\omega\\ne0$ in the field to conclude that the sum vanishes. This is the coincident-root/geometric-sum case split of Taylor §11; the real-variable factorisation lemma and the published representation-theoretic orthogonality are independent cross-checks, not dependencies, because both are stated outside the complex-sum setting used here. Include the $N=1$ clause explicitly, since the transform page must be total at length one.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-unitary-discrete-fourier-transform-on-z-mod-n",
+        "kind": "definition",
+        "title": "The unitary discrete Fourier transform on $\\mathbb Z/N\\mathbb Z$",
+        "deps": [
+          "def-complex-exponential",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-function-space",
+          "def-integers-modulo-n",
+          "def-rational-power",
+          "def-vector-space",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-congruence-is-an-equivalence-relation",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-rational-power-laws",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-standard-representatives-modulo-n"
+        ],
+        "statement": "Let $N\\ge1$ and let $\\mathbb C^{\\mathbb Z/N}$ be the complex vector space of functions $\\mathbb Z/N\\mathbb Z\\to\\mathbb C$ ([[def-function-space]], [[def-vector-space]]). For $f\\in\\mathbb C^{\\mathbb Z/N}$ define the **unitary discrete Fourier transform** $\\mathcal F_Nf:\\mathbb Z\\to\\mathbb C$ by $$(\\mathcal F_Nf)(k):=N^{-1/2}\\sum_{x=0}^{N-1}f([x]_N)\\,e^{-2\\pi ikx/N},$$ where $[x]_N$ is the class of the integer $x$ and $N^{-1/2}$ is the rational power of [[def-rational-power]]. Then $(\\mathcal F_Nf)(k+N)=(\\mathcal F_Nf)(k)$ for every $k\\in\\mathbb Z$, so $\\mathcal F_Nf$ is a well-defined function on $\\mathbb Z/N\\mathbb Z$ and $\\mathcal F_N$ is a map $\\mathbb C^{\\mathbb Z/N}\\to\\mathbb C^{\\mathbb Z/N}$. Equivalently $(\\mathcal F_Nf)(k)=N^{-1/2}\\sum_{x\\in\\mathbb Z/N}f(x)\\,\\chi_{-k}(x)$ with the characters $\\chi_k([m])=\\exp(2\\pi ikm/N)$ of [[ex-pontryagin-dual-of-a-finite-cyclic-group]]. This fixes the negative-sign, $N^{-1/2}$-normalised convention of the page; the unnormalised engineering convention is [[def-unnormalised-engineering-dft-and-conversion]].",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, PDF pp. 86-88: the transforms (11.1)-(11.2) and the unitary $L^2$ conventions (11.4)-(11.5), transposed from the multiplicative group $\\Gamma_n$ to $\\mathbb Z/N\\mathbb Z$ with the sign and normalisation fixed as stated"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 3: the finite Fourier transform as evaluation of a polynomial at the $n$-th roots of unity, and the symmetric forward/inverse forms"
+            }
+          ]
+        },
+        "strategy": "Well-definedness: the display sums over the $N$ representatives $0,\\dots,N-1$, and [[ex-pontryagin-dual-of-a-finite-cyclic-group]] identifies $e^{-2\\pi ikx/N}$ with $\\chi_{-k}([x]_N)$, so each summand depends only on $[x]_N$; reindexing by another representative list is [[lem-finite-sum-reindexing-and-fubini]]. Periodicity in $k$: $e^{-2\\pi i(k+N)x/N}=e^{-2\\pi ikx/N}e^{-2\\pi ix}$ and $e^{-2\\pi ix}=1$ for every integer $x$ because $-2\\pi x\\in2\\pi\\mathbb Z$ ([[thm-kernel-and-fibres-of-complex-exponential]], [[thm-complex-exponential-addition-and-real-extension]]), so all summands are unchanged. The scalar $N^{-1/2}$ is legitimate because $N>0$ ([[def-rational-power]], [[lem-rational-power-laws]]). State the linearity of $\\mathcal F_N$ as part of the definitional content if needed; unitarity is proved separately in [[thm-finite-parseval-and-plancherel]] and is not assumed here.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-counting-inner-product-on-complex-functions-on-z-mod-n",
+        "kind": "definition",
+        "title": "The counting inner product on $\\mathbb C^{\\mathbb Z/N\\mathbb Z}$",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-counting-measure",
+          "def-finite-sum",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-function-space",
+          "def-inner-product-space",
+          "def-integers-modulo-n",
+          "def-real-and-complex-inner-product-space",
+          "def-vector-space",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-finite-sum-laws",
+          "lem-finite-sum-reindexing-and-fubini",
+          "thm-complex-numbers-form-a-field",
+          "thm-standard-representatives-modulo-n"
+        ],
+        "statement": "Let $N\\ge1$ and $f,g\\in\\mathbb C^{\\mathbb Z/N}$. Define $$\\langle f,g\\rangle:=\\sum_{x\\in\\mathbb Z/N}f(x)\\,\\overline{g(x)}=\\sum_{x=0}^{N-1}f([x]_N)\\,\\overline{g([x]_N)}.$$ This is the inner product on $\\mathbb C^{\\mathbb Z/N}$ induced by the counting measure on the finite group $\\mathbb Z/N\\mathbb Z$: it is $\\mathbb C$-linear in the first argument, conjugate-symmetric, and satisfies $\\langle f,f\\rangle=\\sum_x|f(x)|^2\\ge0$, with $\\langle f,f\\rangle=0$ if and only if $f=0$.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, formula (11.5) and the following lines: $L^2$ pairings by counting measure on $\\mathbb Z_n$ and $(1/n)$-weighted counting measure on $\\Gamma_n$"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf",
+              "locator": "Appendix C.2-C.3, printed pp. 431-435: Haar measure on a discrete group is counting measure, and $\\langle f_1,f_2\\rangle=\\int_Gf_1\\overline{f_2}\\,dm_G$"
+            }
+          ]
+        },
+        "strategy": "The two displays agree by reindexing the finite sum ([[lem-finite-sum-reindexing-and-fubini]]). Linearity in the first argument, conjugate symmetry and $\\langle f,f\\rangle=\\sum_x|f(x)|^2$ follow from the recursive sum definition ([[def-finite-sum-in-a-commutative-monoid]]) with the field laws ([[thm-complex-numbers-form-a-field]]) and the conjugation and modulus laws ([[lem-complex-conjugation-and-modulus-laws]]); the axioms compared against are those of [[def-inner-product-space]] with the linear-first convention. Definiteness: enumerate $\\mathbb Z/N$ as $[0],\\dots,[N-1]$; each $|f([k])|^2$ is a nonnegative real and the sequential real sum $\\sum_{k<N}|f([k])|^2$ vanishes only if every term vanishes ([[lem-finite-sum-laws]], claim 4), while the group sum agrees with that sequential sum by the enumeration independence of [[def-finite-sum-in-a-commutative-monoid]] and the reindexing rule of [[lem-finite-sum-reindexing-and-fubini]]; hence $\\langle f,f\\rangle=0$ forces $|f(x)|=0$ and therefore $f(x)=0$ for every $x$. Counting measure enters only through the normalisation-free weight $\\sum_x\\delta_x$ on the finite discrete group ([[def-counting-measure]], [[ex-counting-measure-as-haar-measure-on-a-discrete-group]]); no factor $1/N$ is inserted, exactly as in Taylor (11.5) on the dual side.",
+        "dependency_level": 0,
+        "local_addition": true
+      },
+      {
+        "id": "def-cyclic-convolution-on-z-mod-n",
+        "kind": "definition",
+        "title": "The unnormalised cyclic convolution on $\\mathbb Z/N\\mathbb Z$",
+        "deps": [
+          "def-counting-measure",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-function-space",
+          "def-injection-surjection-bijection",
+          "def-integers-modulo-n",
+          "lem-finite-sum-reindexing-and-fubini",
+          "thm-complex-numbers-form-a-field",
+          "thm-integers-modulo-n-basic-algebra"
+        ],
+        "statement": "Let $N\\ge1$ and $f,g\\in\\mathbb C^{\\mathbb Z/N}$. The **cyclic convolution** of $f$ and $g$ (unnormalised: no factor $1/N$ or $1/\\sqrt N$ is inserted) is the function $f*g:\\mathbb Z/N\\mathbb Z\\to\\mathbb C$ defined by $$(f*g)(x):=\\sum_{y\\in\\mathbb Z/N}f(y)\\,g(x-y),\\qquad x\\in\\mathbb Z/N\\mathbb Z,$$ where $x-y$ is the group operation of $\\mathbb Z/N\\mathbb Z$ ([[thm-integers-modulo-n-basic-algebra]]) and the sum is the finite sum over the group. The operation is commutative, and it is the convolution attached to the counting measure on the finite group.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, formula (11.30) and its surroundings: discrete convolution and Fourier multipliers on $\\Gamma_n$; the same construction is stated here on $\\mathbb Z/N\\mathbb Z$"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "headings 3-4: polynomial products and the Convolution viewpoint behind the transform"
+            }
+          ]
+        },
+        "strategy": "The value is a finite sum of complex numbers indexed by the finite group, hence well defined; $f(y)$ and $g(x-y)$ are values of functions on classes, so no representative is chosen. Commutativity: the substitution $z=x-y$ reindexes the finite sum by the bijection $y\\mapsto x-y$ of $\\mathbb Z/N\\mathbb Z$ ([[def-injection-surjection-bijection]], [[lem-finite-sum-reindexing-and-fubini]]) and gives $\\sum_zg(z)f(x-z)$. No normalisation factor is included; the factor $\\sqrt N$ in [[lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product]] is the exact price of this convention. Distinguish this cyclic operation from linear convolution of finite sequences, which coincides with it only after sufficient zero padding ([[cex-linear-and-cyclic-convolution-are-not-the-same-without-zero-padding]]).",
+        "dependency_level": 0,
+        "local_addition": true
+      },
+      {
+        "id": "thm-finite-fourier-inversion",
+        "kind": "theorem",
+        "title": "Finite Fourier inversion for the unitary transform on $\\mathbb Z/N\\mathbb Z$",
+        "deps": [
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-function-space",
+          "def-injection-surjection-bijection",
+          "def-integers-modulo-n",
+          "def-rational-power",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "lem-rational-power-laws",
+          "thm-a-function-is-a-bijection-exactly-when-it-has-a-two-sided-inverse",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-standard-representatives-modulo-n"
+        ],
+        "statement": "Let $N\\ge1$ and $f\\in\\mathbb C^{\\mathbb Z/N}$. Then for every $x\\in\\mathbb Z/N\\mathbb Z$ $$f(x)=N^{-1/2}\\sum_{k=0}^{N-1}(\\mathcal F_Nf)(k)\\,e^{2\\pi ikx/N},$$ the right-hand side being independent of the chosen representative of $x$. Consequently $\\mathcal F_N$ is bijective with inverse the positive-sign unitary transform $(\\mathcal G_Ng)(x):=N^{-1/2}\\sum_{k=0}^{N-1}g(k)e^{2\\pi ikx/N}$, and there is no convergence, regularity or support hypothesis.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, Proposition 11.1 and formula (11.4): the inversion formula for $\\Phi_n$, with inverse (11.2)"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 3: the inverse transformation by multiplying each $p_k$ by $z^{-sk}$ and summing, giving $a_s=(1/n)\\sum_kp_kz^{-sk}$"
+            }
+          ]
+        },
+        "strategy": "Substitute the definition of $\\mathcal F_N$, interchange the two finite sums by the finite Fubini rule (part 3 of [[lem-finite-sum-reindexing-and-fubini]]), moving the scalar factors through the inner sums by distributivity ([[thm-complex-numbers-form-a-field]], [[def-finite-sum-in-a-commutative-monoid]]), and evaluate the inner sum $\\sum_{k=0}^{N-1}e^{-2\\pi ik(y-x)/N}$ by [[lem-orthogonality-of-characters-on-a-finite-cyclic-group]]: it is $N$ when $y=x$ and $0$ otherwise. The outer sum over $y$ then collapses to $N^{-1/2}\\cdot N^{-1/2}\\cdot Nf(x)=f(x)$ using $N^{-1/2}N^{-1/2}=N^{-1}$ and $N\\cdot N^{-1}=1$ ([[lem-rational-power-laws]], [[thm-complex-numbers-form-a-field]]). The same computation with the roles of the two exponentials exchanged proves $\\mathcal G_N\\circ\\mathcal F_N=\\mathrm{id}$ and $\\mathcal F_N\\circ\\mathcal G_N=\\mathrm{id}$, so $\\mathcal F_N$ is bijective; one of the two identities already suffices on the finite set $\\mathbb C^{\\mathbb Z/N}$. Record that the right side is $N$-periodic in $x$ ([[thm-kernel-and-fibres-of-complex-exponential]]).",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-finite-parseval-and-plancherel",
+        "kind": "theorem",
+        "title": "Finite Parseval and Plancherel identity for the unitary DFT",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-counting-inner-product-on-complex-functions-on-z-mod-n",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-integers-modulo-n",
+          "def-rational-power",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "lem-rational-power-laws",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-standard-representatives-modulo-n"
+        ],
+        "statement": "Let $N\\ge1$ and $f,g\\in\\mathbb C^{\\mathbb Z/N}$. Then $$\\langle\\mathcal F_Nf,\\mathcal F_Ng\\rangle=\\langle f,g\\rangle,$$ where both pairings are the counting inner products of [[def-counting-inner-product-on-complex-functions-on-z-mod-n]]. In particular $\\sum_{k=0}^{N-1}|(\\mathcal F_Nf)(k)|^2=\\sum_{x=0}^{N-1}|f(x)|^2$, so $\\mathcal F_N$ preserves the counting inner product of [[def-counting-inner-product-on-complex-functions-on-z-mod-n]].",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, Proposition 11.1: $\\Phi_n$ is a unitary isomorphism; formula (11.5) fixes the two inner products"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf",
+              "locator": "Appendix C.3, printed p. 435: the Parseval formula $\\langle f,g\\rangle_G=\\langle\\widehat f,\\widehat g\\rangle_{\\widehat G}$, of which the finite cyclic case is the instance proved here"
+            }
+          ]
+        },
+        "strategy": "Expand $\\langle\\mathcal F_Nf,\\mathcal F_Ng\\rangle=\\sum_k(\\mathcal F_Nf)(k)\\overline{(\\mathcal F_Ng)(k)}$ using the definition, conjugate the second factor and interchange the finite sums by the finite Fubini rule of [[lem-finite-sum-reindexing-and-fubini]], with the scalar factors moved through the sums by distributivity ([[thm-complex-numbers-form-a-field]]) and the conjugation laws ([[lem-complex-conjugation-and-modulus-laws]]). The inner sum is $\\sum_ke^{-2\\pi ik(x-y)/N}=N\\delta_{x=y}$ by [[lem-orthogonality-of-characters-on-a-finite-cyclic-group]], and the prefactor $N^{-1/2}\\cdot N^{-1/2}=N^{-1}$ cancels the $N$ ([[lem-rational-power-laws]]). The norm identity is the case $g=f$ with $z\\overline z=|z|^2$ ([[lem-complex-conjugation-and-modulus-laws]]). The identity is exactly the statement that $\\mathcal F_N$ is an isometry for the counting inner product; invertibility of $\\mathcal F_N$ is not asserted here.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product",
+        "kind": "lemma",
+        "title": "The DFT turns cyclic convolution into a scaled pointwise product",
+        "deps": [
+          "def-cyclic-convolution-on-z-mod-n",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-integers-modulo-n",
+          "def-rational-power",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-rational-power-laws",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "thm-integers-modulo-n-basic-algebra"
+        ],
+        "statement": "Let $N\\ge1$ and $f,g\\in\\mathbb C^{\\mathbb Z/N}$. Then for every $k\\in\\mathbb Z$ $$(\\mathcal F_N(f*g))(k)=\\sqrt N\\,(\\mathcal F_Nf)(k)(\\mathcal F_Ng)(k),$$ where $*$ is the unnormalised cyclic convolution of [[def-cyclic-convolution-on-z-mod-n]] and $\\sqrt N=N^{1/2}$. Equivalently, the unnormalised transform $X$ of [[def-unnormalised-engineering-dft-and-conversion]] satisfies $X_k(f*g)=X_k(f)X_k(g)$ for every $k$: with the engineering normalisation the convolution law has no extra factor.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, formulas (11.30)-(11.31): the transform of a discrete convolution is the product of the transforms"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "headings 3-4: the transform converts polynomial products (hence convolution) into pointwise products"
+            }
+          ]
+        },
+        "strategy": "Substitute both definitions and interchange the finite sums: $$(\\mathcal F_N(f*g))(k)=N^{-1/2}\\sum_{y\\in\\mathbb Z/N}f(y)e^{-2\\pi iky/N}\\sum_{z\\in\\mathbb Z/N}g(z)e^{-2\\pi ikz/N},$$ where, for fixed $y$, the substitution $z=x-y$ reindexes the sum over $x$ ([[lem-finite-sum-reindexing-and-fubini]]). The two inner sums are $N^{1/2}(\\mathcal F_Nf)(k)$ and $N^{1/2}(\\mathcal F_Ng)(k)$, so the prefactor gives $\\sqrt N$ ([[lem-rational-power-laws]]). The unnormalised form follows from $X_k=\\sqrt N\\,\\mathcal F_N$ ([[def-unnormalised-engineering-dft-and-conversion]]). The lemma distinguishes cyclic from linear convolution ([[cex-linear-and-cyclic-convolution-are-not-the-same-without-zero-padding]]).",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-dft-squares-to-reflection-and-has-fourth-power-identity",
+        "kind": "lemma",
+        "title": "$\\mathcal F_N^2$ is reflection and $\\mathcal F_N^4$ is the identity",
+        "deps": [
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-function-space",
+          "def-integers-modulo-n",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "lem-rational-power-laws",
+          "thm-a-function-is-a-bijection-exactly-when-it-has-a-two-sided-inverse",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-standard-representatives-modulo-n"
+        ],
+        "statement": "Let $N\\ge1$ and $f\\in\\mathbb C^{\\mathbb Z/N}$. Define the reflection $Rf$ by $(Rf)(x):=f(-x)$. Then $\\mathcal F_N^2f=Rf$ and $\\mathcal F_N^4=\\mathrm{id}$; consequently $\\mathcal F_N^2$ is an involution and $\\mathcal F_N^3=\\mathcal F_N^{-1}$. At $N=1$ and $N=2$ the reflection is the identity, so $\\mathcal F_N^2=\\mathrm{id}$ there.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, formulas (11.1)-(11.6) and Proposition 11.2: the transform pair and the exponent bookkeeping behind the fourth-power identity"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 3: the forward and inverse transforms differ by the sign of the root, so two applications recover the reflection of the input"
+            }
+          ]
+        },
+        "strategy": "Expand $$\\mathcal F_N^2f(x)=N^{-1/2}\\sum_{k=0}^{N-1}\\Big(N^{-1/2}\\sum_{y=0}^{N-1}f(y)e^{-2\\pi iky/N}\\Big)e^{-2\\pi ikx/N},$$ interchange the finite sums and evaluate the inner $k$-sum by [[lem-orthogonality-of-characters-on-a-finite-cyclic-group]] as $N\\delta_{x=-y}$; the prefactor cancels and the surviving term is $f(-x)$. Applying the identity twice gives $\\mathcal F_N^4f(x)=\\mathcal F_N^2(\\mathcal F_N^2f)(x)=(\\mathcal F_N^2f)(-x)=f(-(-x))=f(x)$, using $-(-x)=x$ in $\\mathbb Z/N\\mathbb Z$ ([[thm-integers-modulo-n-basic-algebra]]). In particular $R^2=\\mathrm{id}$ and $\\mathcal F_N^2$ is an involution; combine with [[thm-finite-fourier-inversion]] to read $\\mathcal F_N^3=\\mathcal F_N^{-1}$.",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-unnormalised-engineering-dft-and-conversion",
+        "kind": "definition",
+        "title": "The unnormalised engineering DFT and its conversion to the unitary transform",
+        "deps": [
+          "def-complex-exponential",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-integers-modulo-n",
+          "def-rational-power",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-rational-power-laws",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "thm-finite-fourier-inversion",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-kernel-and-fibres-of-complex-exponential"
+        ],
+        "statement": "Let $N\\ge1$ and $f\\in\\mathbb C^{\\mathbb Z/N}$. The **unnormalised (engineering) discrete Fourier transform** of $f$ is the $N$-periodic function $X(f):\\mathbb Z\\to\\mathbb C$ defined by $$X_k(f):=\\sum_{x=0}^{N-1}f([x]_N)\\,e^{-2\\pi ikx/N}=\\sqrt N\\,(\\mathcal F_Nf)(k),\\qquad k\\in\\mathbb Z.$$ The two transforms determine each other by the conversions $X_k(f)=\\sqrt N(\\mathcal F_Nf)(k)$ and $(\\mathcal F_Nf)(k)=N^{-1/2}X_k(f)$. The inverse formulas are $f(x)=N^{-1/2}\\sum_{k=0}^{N-1}(\\mathcal F_Nf)(k)e^{2\\pi ikx/N}$ and, in the engineering normalisation, $$f(x)=\\frac1N\\sum_{k=0}^{N-1}X_k(f)\\,e^{2\\pi ikx/N},\\qquad x\\in\\mathbb Z/N\\mathbb Z.$$ This is the convention in which the radix-two algorithm of [[def-recursive-radix-two-fast-fourier-transform]] computes its output; the unitary normalisation is recovered by the explicit rescaling $2^{-m/2}$ at length $N=2^m$.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§12, formula (12.1) and the surrounding computation counts: the transform computed numerically before normalisation"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 3: forward evaluations $p(z^k)$ and the inverse $a_s=(1/n)\\sum_kp_kz^{-sk}$ with the factor $1/n$ visible"
+            }
+          ]
+        },
+        "strategy": "Definitional conversion: $X_k(f)=\\sqrt N\\,\\mathcal F_Nf(k)$ is immediate from [[def-unitary-discrete-fourier-transform-on-z-mod-n]] and [[lem-rational-power-laws]]; the $N$-periodicity of $X(f)$ is that of $\\mathcal F_Nf$. The inverse formulas are [[thm-finite-fourier-inversion]] multiplied by $N^{-1/2}\\cdot N^{1/2}=1$ and rewritten with $X$. State the ratio $X/\\mathcal F_N=\\sqrt N$ and its inverse $1/\\sqrt N=N^{-1/2}$ once, so that no later item mixes the two normalisations: the cyclic-convolution law [[lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product]] and the FFT correctness/complexity theorems [[thm-radix-two-fft-correctness]], [[thm-radix-two-fft-arithmetic-complexity]] are both stated for $X$, and the unitary transform is recovered by the single rescaling stated above.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-radix-two-even-odd-dft-factorisation",
+        "kind": "lemma",
+        "title": "The radix-two even/odd factorisation of the DFT",
+        "deps": [
+          "def-complex-exponential",
+          "def-divides-in-z",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-function-space",
+          "def-integers-modulo-n",
+          "def-unnormalised-engineering-dft-and-conversion",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-int-cancellation",
+          "lem-units-of-z",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-division-algorithm-in-z",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-int-ordered-ring",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-standard-representatives-modulo-n"
+        ],
+        "statement": "Let $M\\ge1$, $N=2M$ and $f\\in\\mathbb C^{\\mathbb Z/N}$. Define the even and odd parts $e,o\\in\\mathbb C^{\\mathbb Z/M}$ by $e(r):=f(2r)$ and $o(r):=f(2r+1)$ for $r\\in\\mathbb Z/M\\mathbb Z$, where $2r$ and $2r+1$ denote the classes in $\\mathbb Z/N\\mathbb Z$ of the corresponding integers (the maps $r\\mapsto2r$ and $r\\mapsto2r+1$ from $\\mathbb Z/M\\mathbb Z$ to $\\mathbb Z/N\\mathbb Z$ are well-defined and injective with disjoint images, which together exhaust $\\mathbb Z/N\\mathbb Z$). Let $X(f)$, $X(e)$, $X(o)$ be the unnormalised transforms of [[def-unnormalised-engineering-dft-and-conversion]], the latter two extended $M$-periodically to $\\mathbb Z$. Then for every $k\\in\\mathbb Z$ $$X_k(f)=X_k(e)+e^{-2\\pi ik/N}X_k(o),\\qquad X_{k+M}(f)=X_k(e)-e^{-2\\pi ik/N}X_k(o).$$ Thus an $N$-point transform is computed from the two $M$-point transforms of its even and odd parts and the twiddle factors $e^{-2\\pi ik/N}$; this is the radix-two (decimation-in-time) step of the fast Fourier transform.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 4: the reduction of an n-point transform to the two s-point transforms of the even and odd coefficient sequences, with the $z^j$ twiddle in the odd evaluations"
+            },
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§12, (12.8)-(12.11) and Proposition 12.1: the mirror-image decimation-in-frequency form, which the proof absorbs as the equivalent formulation"
+            }
+          ]
+        },
+        "strategy": "Partition the defining sum over $\\mathbb Z/N=2\\mathbb Z/M\\sqcup(2\\mathbb Z/M+1)$ and reindex each part by $r\\in\\mathbb Z/M$; well-definedness of $r\\mapsto2r$ and $r\\mapsto2r+1$ uses $2(r+M)=2r+N$ and $(2r+1)+N$ ([[thm-integers-modulo-n-basic-algebra]], [[lem-finite-sum-reindexing-and-fubini]]). The character identity is $\\chi_{-k}(2r)=e^{-2\\pi ikr/M}$ and $\\chi_{-k}(2r+1)=e^{-2\\pi ik/N}\\chi_{-k}(2r)$, which is the addition law for the exponential plus the character computation of [[ex-pontryagin-dual-of-a-finite-cyclic-group]]. For the second identity use $M$-periodicity of $k\\mapsto X_k(e),X_k(o)$ and $e^{-2\\pi i(k+M)/N}=e^{-2\\pi ik/N}e^{-\\pi i}=-e^{-2\\pi ik/N}$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]). Taylor's Proposition 12.1 proves the decimation-in-frequency variant (input halves, output parities); record that it is the mirror of the displayed identity rather than a second independent result.",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-recursive-radix-two-fast-fourier-transform",
+        "kind": "definition",
+        "title": "The recursive radix-two fast Fourier transform",
+        "deps": [
+          "def-complex-exponential",
+          "def-function-space",
+          "def-integers-modulo-n",
+          "def-natural-numbers",
+          "def-rational-power",
+          "def-unnormalised-engineering-dft-and-conversion",
+          "lem-power-laws",
+          "lem-radix-two-even-odd-dft-factorisation",
+          "lem-rational-power-laws",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-induction-principle",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-recursion"
+        ],
+        "statement": "Let $m\\in\\mathbb N$ and $N=2^m$. Define the **radix-two fast Fourier transform** $\\operatorname{FFT}_m:\\mathbb C^{\\mathbb Z/N}\\to\\mathbb C^{\\mathbb Z/N}$ by recursion on $m$: $\\operatorname{FFT}_0=\\mathrm{id}$, and for $m\\ge1$, given $f\\in\\mathbb C^{\\mathbb Z/2^m}$ with even and odd parts $e,o\\in\\mathbb C^{\\mathbb Z/2^{m-1}}$ and $E=\\operatorname{FFT}_{m-1}(e)$, $O=\\operatorname{FFT}_{m-1}(o)$ extended $2^{m-1}$-periodically to $\\mathbb Z$, set $$\\operatorname{FFT}_m(f)(k):=E(k)+e^{-2\\pi ik/2^m}O(k),\\qquad k\\in\\mathbb Z.$$ Then $\\operatorname{FFT}_m(f)(k+2^m)=\\operatorname{FFT}_m(f)(k)$ for every $k$, so $\\operatorname{FFT}_m$ is a well-defined map on $\\mathbb C^{\\mathbb Z/2^m}$; the recursion terminates after $m$ levels at the base case $N=1$, where it returns the input, and at each level it forms the even and odd parts and one combine per subproblem. The algorithm computes the unnormalised transform $X$ of [[def-unnormalised-engineering-dft-and-conversion]] ([[thm-radix-two-fft-correctness]]); the unitary transform is recovered by the rescaling $2^{-m/2}$.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 4: iterate the even/odd reduction until degree 0, evaluating the two $s$-point transforms in parallel"
+            },
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§12, (12.8)-(12.23): the inductive procedure and its iterative implementation, with the base case $G_0=\\{1\\}$"
+            }
+          ]
+        },
+        "strategy": "Apply ordinary recursion to the tagged state set A={(m,g):g:F_m→F_m}, where F_m=C^{Z/2^m}; start at (0,id_F0). For each tagged state (m,g), the even/odd split and the combine formula define a total map F_{m+1}→F_{m+1}; prove it is well defined because the recursive outputs are 2^m-periodic and the twiddle is 2^{m+1}-periodic. The total step maps (m,g) to (m+1,g+). Recursion and induction recover the stated family FFT_m. Termination is immediate, and rescaling uses 2^{-m/2}=(2^m)^{-1/2}.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-radix-two-fft-correctness",
+        "kind": "theorem",
+        "title": "Correctness of the recursive radix-two FFT",
+        "deps": [
+          "def-integers-modulo-n",
+          "def-natural-numbers",
+          "def-rational-power",
+          "def-recursive-radix-two-fast-fourier-transform",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "def-unnormalised-engineering-dft-and-conversion",
+          "lem-power-laws",
+          "lem-radix-two-even-odd-dft-factorisation",
+          "lem-rational-power-laws",
+          "thm-induction-principle",
+          "thm-integers-modulo-n-basic-algebra"
+        ],
+        "statement": "Let $m\\in\\mathbb N$, $N=2^m$ and $f\\in\\mathbb C^{\\mathbb Z/N}$. Then $$\\operatorname{FFT}_m(f)(k)=X_k(f)\\qquad\\text{for every }k\\in\\mathbb Z,$$ where $X(f)$ is the unnormalised $N$-point discrete Fourier transform of [[def-unnormalised-engineering-dft-and-conversion]]. Equivalently $\\operatorname{FFT}_m(f)=2^{m/2}\\,\\mathcal F_Nf$; consequently the algorithm returns the unitary transform after the single rescaling $2^{-m/2}$, and it does so for every input of length $2^m$.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 4: the even/odd reduction is exact at every level, so iterating it returns the evaluations"
+            },
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§12, Proposition 12.1 with (12.11)-(12.23): the inductive identities, for the mirror decimation-in-frequency form"
+            }
+          ]
+        },
+        "strategy": "Induction on m. Base m=0: the length-one transform is the identity. For the successor, fix m≥0 and assume P(m); set N=2^{m+1} and M=2^m, and split an input in F_{m+1} into even/odd parts in F_m. By the recursive definition, FFT_{m+1}(f)(k)=FFT_m(e)(k)+e^{-2πik/2^{m+1}}FFT_m(o)(k). The induction hypothesis gives X_k(e), X_k(o), and the radix-two factorisation with N=2M gives X_k(f), proving P(m+1). Then rescale by 2^{-m/2} to recover the unitary transform; correctness does not assert a speed or stability bound.",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-radix-two-fft-arithmetic-complexity",
+        "kind": "theorem",
+        "title": "The radix-two FFT uses $O(N\\log_2N)$ complex arithmetic operations",
+        "deps": [
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-logarithm-to-a-base",
+          "def-natural-logarithm",
+          "def-natural-numbers",
+          "def-real-power",
+          "def-recursive-radix-two-fast-fourier-transform",
+          "lem-power-laws",
+          "thm-induction-principle",
+          "thm-natural-logarithm-laws",
+          "thm-real-power-agrees-with-rational-exponent",
+          "thm-recursion"
+        ],
+        "statement": "Let $T_m$ be the number of complex-number multiplications and additions performed by the recursion of [[def-recursive-radix-two-fast-fourier-transform]] on an input of length $N=2^m$, counted as the operations of the two recursive subproblems of length $2^{m-1}$ plus, at the top level, the $2^m$ twiddle multiplications $e^{-2\\pi ik/2^m}O(k)$ and the $2^m$ additions $E(k)+\\cdot$ needed to form all $2^m$ values, and with no other operations counted. Then $T_0=0$, $T_m\\le2T_{m-1}+2\\cdot2^m$ for $m\\ge1$, and $$T_m\\le2m\\,2^m=2N\\log_2N.$$ In particular $T_m=O(m2^m)$, so the algorithm uses $O(N\\log_2N)$ complex arithmetic operations on inputs of length $N=2^m$, whereas independent direct evaluation of all $N$ coefficients uses $n(n-1)$ additions and $n^2$ multiplications (Taylor §12). The count is of arithmetic operations only: integer index arithmetic, twiddle evaluation, memory access and bit complexity are not counted, and no numerical-stability claim is made.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§12, the cost paragraph after (12.13): after $k$ iterations the computation takes $kn$ additions and $kn/2$ multiplications of complex numbers, $n=2^k$, plus the direct-evaluation baseline $n^2$ multiplications and $n(n-1)$ additions of (12.1)"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 4: at each reduction $s$ additions, $s$ subtractions and $s$ multiplications reduce the problem by a factor of two"
+            }
+          ]
+        },
+        "strategy": "Unroll the recurrence: dividing $U_m:=T_m/2^m$ by the level size turns $T_m\\le2T_{m-1}+2\\cdot2^m$ into $U_m\\le U_{m-1}+2$, so $U_m\\le2m$ and $T_m\\le2m2^m$ by induction ([[thm-induction-principle]], [[lem-power-laws]]). Use the item's local eventual-domination definition of $O$ to infer $T_m=O(m2^m)$ from the explicit constant $2$, then rewrite $m=\\log_2(2^m)$ via [[def-logarithm-to-a-base]]. The operation model is the theorem's explicit hypothesis and must be restated in the item: only complex multiplications and additions inside the recursion and combine, no twiddle evaluation or memory traffic; this matches Taylor's counting to within constants (kn additions and kn/2 multiplications against our $2m2^m$ upper bound).",
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-cooley-tukey-factorisation-for-composite-lengths",
+        "kind": "remark",
+        "title": "Mixed-radix factorisation for composite lengths (recorded, not proved here)",
+        "deps": [
+          "def-recursive-radix-two-fast-fourier-transform",
+          "lem-radix-two-even-odd-dft-factorisation",
+          "thm-radix-two-fft-arithmetic-complexity"
+        ],
+        "statement": "**Recorded, not proved here.** The radix-two step is the case $R=2$ of a mixed-radix (Cooley-Tukey) factorisation: for $N=RS$ the input indices split into the $R$ residue classes modulo $R$, the $N$-point transform reduces to $R$ transforms of length $S$ combined with twiddle factors, and Taylor §12 Exercise 4 records the generalisation to $n=3^k$ and to products of small primes. For prime $N$ no such nontrivial factorisation exists, and the bound of [[thm-radix-two-fft-arithmetic-complexity]] is proved only for $N$ a power of two: it is not a claim about prime lengths, and no $O(N\\log N)$ bound for arbitrary $N$ is asserted on this page.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "proved_here": false,
+        "external_dependency": {
+          "source_url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+          "exact_statement": "Taylor, §12, Exercise 4: \"Generalize the FFT algorithm to a cyclic group $\\Gamma_n$ with $n=3^k$. Also, generalize to the case $n=p_1\\cdots p_k$ where $p_j$ are 'small' primes.\" The main text of §12 restricts the displayed recursion to the case $n=2^k$.",
+          "local_proof_attempt": "Not reconstructed here: the design assigns this row proof provenance not-supplied. The general step would replace the two-class partition by the $R$ residue classes modulo $R$ and use twiddle factors $e^{-2\\pi i\\cdot/N}$ on the resulting short transforms, but no local proof is written on this page and the remark is a leaf.",
+          "necessity": "Prevents the $O(N\\log_2N)$ theorem for powers of two from being read as a statement about every $N$, and records where composite-length mixed-radix recursions come from without claiming them locally."
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§12, main text restriction to $n=2^k$ and Exercise 4 generalising to $n=3^k$ and products of small primes"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 4: the reduction is stated for even $n$ and iterated to powers of two"
+            }
+          ]
+        },
+        "strategy": "Recorded, not proved here; the mixed-radix claim is quoted from Taylor §12 Exercise 4 and carries no local proof. The remark is a leaf: no item of this pair or any later pair depends on it. Its purpose is to keep the power-of-two complexity theorem from being read as an unrestricted $O(N\\log N)$ statement. Author the item frontmatter with proved_here: false, the external_dependency record carried from this manifest (source_url, exact_statement, local_proof_attempt, necessity), no Proof section and verification.precheck: n/a, per SCHEMA.md.",
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 510.06508,
+    "id": "finite-fourier-analysis-and-the-fast-fourier-transform-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "Finite Fourier Analysis and the Fast Fourier Transform — Examples",
+    "companion": "finite-fourier-analysis-and-the-fast-fourier-transform",
+    "requires": [
+      "finite-fourier-analysis-and-the-fast-fourier-transform"
+    ],
+    "items": [
+      {
+        "id": "ex-unitary-dft-for-n-equals-one-and-two",
+        "kind": "example",
+        "title": "The unitary DFT for $N=1$ and $N=2$",
+        "deps": [
+          "def-complex-exponential",
+          "def-function-space",
+          "def-integers-modulo-n",
+          "def-matrix-product-and-identity-matrix",
+          "def-rational-power",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-dft-squares-to-reflection-and-has-fourth-power-identity",
+          "lem-rational-power-laws",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-finite-fourier-inversion",
+          "thm-finite-parseval-and-plancherel",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-kernel-and-fibres-of-complex-exponential"
+        ],
+        "statement": "For $N=1$ the unitary transform of [[def-unitary-discrete-fourier-transform-on-z-mod-n]] is the identity, $\\mathcal F_1f=f$, with matrix $[1]$. For $N=2$, writing $f=(f_0,f_1)$, $$\\mathcal F_2(f_0,f_1)=2^{-1/2}(f_0+f_1,\\ f_0-f_1),$$ whose matrix $\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$ is real symmetric, unitary and equal to its own inverse. Since the reflection $x\\mapsto-x$ is the identity on $\\mathbb Z/1$ and on $\\mathbb Z/2$, the fourth-power identity of [[lem-dft-squares-to-reflection-and-has-fourth-power-identity]] reads $\\mathcal F_N^2=\\mathcal F_N^4=\\mathrm{id}$ for $N=1,2$, consistent with [[thm-finite-fourier-inversion]].",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, (11.1)-(11.4): the definitions specialise to these two cases"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "headings 3: the transform at the degenerate lengths"
+            }
+          ]
+        },
+        "strategy": "Verification by direct evaluation: at $N=1$ the only term is $f([0])$ with coefficient $1^{-1/2}=1$; at $N=2$ one has $e^{-\\pi ik}=(-1)^k$, giving the displayed pair, and the matrix identity $A^2=I$ is checked by multiplying $1/\\sqrt2\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$ by itself. The reflection clause uses $-x=x$ in $\\mathbb Z/1$ and $\\mathbb Z/2$ ([[thm-integers-modulo-n-basic-algebra]]).",
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-cyclic-convolution-via-the-dft",
+        "kind": "example",
+        "title": "Cyclic convolution on $\\mathbb Z/4\\mathbb Z$ via the DFT",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-complex-exponential",
+          "def-cyclic-convolution-on-z-mod-n",
+          "def-integers-modulo-n",
+          "def-rational-power",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "def-unnormalised-engineering-dft-and-conversion",
+          "lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product",
+          "lem-rational-power-laws",
+          "thm-complex-numbers-form-a-field",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-finite-fourier-inversion",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-standard-representatives-modulo-n"
+        ],
+        "statement": "On $\\mathbb Z/4\\mathbb Z$ let $f=(1,1,0,0)$ and $g=(1,1,0,0)$. Their unnormalised transforms are $X(f)=X(g)=(2,1-i,0,1+i)$, so the engineering form of [[lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product]] gives $X(f*g)=(4,-2i,0,2i)$; inverse transforming, $(f*g)(x)=\\frac14\\sum_{k=0}^3X_k(f*g)e^{2\\pi ikx/4}$ gives $(f*g)=(1,2,1,0)$. Direct evaluation of $(f*g)(x)=\\sum_{y\\in\\mathbb Z/4}f(y)g(x-y)$ gives the same tuple: $1,2,1,0$. In this instance the length is large enough that no wrap-around occurs, so the cyclic convolution equals the linear convolution $(1,2,1,0)$ of the coefficient sequences.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, (11.30)-(11.31): the discrete convolution and its transform law, here computed for a four-point example"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "headings 3-4: the transform converts polynomial products into pointwise products"
+            }
+          ]
+        },
+        "strategy": "Direct computation of both sides: $X_k(f)=1+e^{-2\\pi ik/4}=1+(-i)^k$ gives $(2,1-i,0,1+i)$; squaring componentwise gives $(4,-2i,0,2i)$; the inverse engineering formula has the prefactor $1/4$ and the values $e^{2\\pi ikx/4}\\in\\{1,i,-1,-i\\}$ produce $(1,2,1,0)$. The direct sum over $y$ is evaluated at all four classes. Compare with [[cex-linear-and-cyclic-convolution-are-not-the-same-without-zero-padding]] for the length regime in which the two notions differ.",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-four-point-radix-two-fft",
+        "kind": "example",
+        "title": "The four-point radix-two FFT executed in full",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-complex-exponential",
+          "def-integers-modulo-n",
+          "def-logarithm-to-a-base",
+          "def-natural-logarithm",
+          "def-recursive-radix-two-fast-fourier-transform",
+          "def-unnormalised-engineering-dft-and-conversion",
+          "lem-radix-two-even-odd-dft-factorisation",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-complex-numbers-form-a-field",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-radix-two-fft-arithmetic-complexity",
+          "thm-radix-two-fft-correctness"
+        ],
+        "statement": "For $N=4=2^2$ and $f=(f_0,f_1,f_2,f_3)$, the recursion of [[def-recursive-radix-two-fast-fourier-transform]] takes the even part $e=(f_0,f_2)$ and the odd part $o=(f_1,f_3)$. The two length-two unnormalised transforms are $E=(f_0+f_2,\\ f_0-f_2)$ and $O=(f_1+f_3,\\ f_1-f_3)$, extended $2$-periodically, and the combine with twiddle $e^{-2\\pi ik/4}=(-i)^k$ gives $$X_0=f_0+f_1+f_2+f_3,\\quad X_2=f_0-f_1+f_2-f_3,$$ $$X_1=f_0-if_1-f_2+if_3,\\quad X_3=f_0+if_1-f_2-if_3.$$ These agree with direct evaluation of $X_k=\\sum_{x=0}^3f_xe^{-2\\pi ikx/4}$, as [[thm-radix-two-fft-correctness]] requires, and the merge uses $O(4\\log_24)$ complex operations ([[thm-radix-two-fft-arithmetic-complexity]]).",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§12, (12.2)-(12.7): the explicit four-point identities, in the mirror decimation-in-frequency form"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 4: the worked four-coefficient reduction"
+            }
+          ]
+        },
+        "strategy": "Execute both levels by hand: $E(0)=f_0+f_2$, $E(1)=f_0-f_2$, $O(0)=f_1+f_3$, $O(1)=f_1-f_3$; then $X_k=E(k)+(-i)^kO(k)$ for $k=0,1$ and, using the second branch of [[lem-radix-two-even-odd-dft-factorisation]], $X_{k+2}=E(k)-(-i)^kO(k)$; substituting $E,O$ gives the displayed four values. Compare each with the direct sum. The check exercises the base case $m=0$ implicitly through the two-point transforms.",
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-linear-and-cyclic-convolution-are-not-the-same-without-zero-padding",
+        "kind": "counterexample",
+        "title": "Cyclic convolution wraps a high coefficient without zero padding",
+        "deps": [
+          "def-addition-and-multiplication-modulo-n",
+          "def-cyclic-convolution-on-z-mod-n",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-function-space",
+          "def-integers-modulo-n",
+          "lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product",
+          "thm-complex-numbers-form-a-field",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-standard-representatives-modulo-n"
+        ],
+        "statement": "For $f=g=(1,1)$ on $\\mathbb Z/2\\mathbb Z$ the cyclic convolution of [[def-cyclic-convolution-on-z-mod-n]] is $(f*g)(0)=1\\cdot1+1\\cdot1=2$ and $(f*g)(1)=1\\cdot1+1\\cdot1=2$, so $f*g=(2,2)$. The product $(1+z)(1+z)=1+2z+z^2$ of the associated polynomials has coefficient sequence $(1,2,1)$, and reducing exponents modulo $2$ (that is, modulo $z^2-1$) sends $(1,2,1)$ to $(1+1,2)=(2,2)$. The coefficient $1$ of $z^2$ has wrapped into degree $0$. Zero-padding both inputs to length $N'\\ge3$ gives the cyclic convolution $(1,2,1,0,\\dots)$, which equals the linear convolution; without sufficient padding the two notions differ, and the product law [[lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product]] computes the cyclic, not the linear, convolution.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, (11.30)-(11.33): convolution on $\\mathbb Z_n$ is cyclic, with the wrap-around visible in the exponent arithmetic"
+            },
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 3: the polynomial product whose degree-$\\ge n$ coefficients reduce modulo $z^n-1$"
+            }
+          ]
+        },
+        "strategy": "Direct computation of the cyclic sum at each of the two classes, side by side with the coefficient product $1+2z+z^2$; the reduction $z^2\\mapsto1$ (equivalently $x\\cdot x^1$ reindexed modulo $2$ in the convolution sum) exhibits the wrap. Verify the padded case by the same sum with the inputs $(1,1,0,0)$: the length-four cyclic convolution is $(1,2,1,0)$, matching the linear coefficient list. No claim is made that cyclic convolutions are unusable; the point is that the padding length must be at least the number of coefficients of the linear product.",
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-radix-two-recursion-does-not-directly-apply-to-odd-length",
+        "kind": "counterexample",
+        "title": "The radix-two split fails for odd $N$",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-addition-and-multiplication-modulo-n",
+          "def-integers-modulo-n",
+          "def-recursive-radix-two-fast-fourier-transform",
+          "lem-radix-two-even-odd-dft-factorisation",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-kernel-and-fibres-of-complex-exponential"
+        ],
+        "statement": "The radix-two step of [[lem-radix-two-even-odd-dft-factorisation]] and the recursion of [[def-recursive-radix-two-fast-fourier-transform]] require an even length. For $N=3$ the doubling map $r\\mapsto2r$ is a bijection of $\\mathbb Z/3\\mathbb Z$ (its inverse is doubling again, since $2\\cdot2=4\\equiv1$), so $2\\mathbb Z/3\\mathbb Z=\\mathbb Z/3\\mathbb Z$; likewise $r\\mapsto2r+1$ is a bijection. Hence the 'even' and 'odd' classes each exhaust $\\mathbb Z/3\\mathbb Z$ and do not partition it into two subproblems of size $M=N/2$; moreover $M=3/2$ is not an integer, so the twiddle identity $e^{-2\\pi iM/N}=-1$ used by the combine has no integer-length interpretation. This says nothing against direct evaluation of the three-point transform.",
+        "design_row": "FR-18",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "locator": "heading 4: the reduction explicitly assumes $n=2s$"
+            },
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§12: the recursion is stated 'in case $n$ is a power of 2'"
+            }
+          ]
+        },
+        "strategy": "Direct computation in $\\mathbb Z/3\\mathbb Z$: $2\\cdot0=0$, $2\\cdot1=2$, $2\\cdot2=4\\equiv1$, so doubling is the permutation $(0)(1\\,2)$; adding $1$ gives the translated permutation. Hence each of the two attempted index sets is all of $\\mathbb Z/3\\mathbb Z$, and no two-coset decomposition with $M=3/2$ exists. The counterexample tests only the algorithm's length hypothesis; it deliberately makes no hardness claim about odd-length transforms.",
+        "dependency_level": 5
+      }
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+---
+page: "wave-energy-finite-propagation-and-huygens-examples"
+title: "Wave Energy, Finite Propagation and Huygens' Principle — Examples"
+status: draft
+items: []
+examples: ["ex-conserved-energy-of-a-travelling-wave-packet", "ex-plane-wave-shows-the-characteristic-speed-is-sharp", "cex-global-energy-identity-needs-integrability-or-decay", "cex-wave-energy-need-not-be-conserved-through-an-open-boundary", "ex-reflection-at-a-dirichlet-endpoint", "ex-zero-wave-energy-means-spatial-constant-before-data-fix-the-constant", "ex-three-dimensional-spherical-pulse-leaves-a-quiet-tail", "ex-two-dimensional-pulse-has-a-tail-inside-the-cone", "cex-finite-speed-does-not-imply-strong-huygens"]
+---
+
+These companions illustrate and test the energy and propagation theory of the main page. The conserved energy of a one-dimensional travelling packet is computed explicitly, with its equal kinetic and potential split and with the caution that in dimensions $n\ge2$ the same profile has infinite total energy; the plane-wave family shows that the characteristic speed $c$ is attained by the moving support, not merely an upper bound. Two counterexamples probe the hypotheses of the conservation theorem: a plane-wave profile whose local conservation law holds while the total energy is infinite, and a compactly supported packet leaving an interval, where the interior energy decays exactly by the flux through the open boundary. Odd reflection realises the Dirichlet half-line problem, with the reflected wave re-entering with reversed sign and the half-line energy equal to half of the conserved whole-line energy. The zero-energy example isolates the residual spatial constant that the displacement datum fixes. The final comparison exhibits the dimensional dichotomy at the heart of Huygens' principle: a three-dimensional spherical pulse leaves a quiet interior behind its expanding front, while the two-dimensional pulse keeps a positive tail at the centre after the front has passed; the last counterexample uses one- and two-dimensional interior-data witnesses to show that finite propagation does not imply strong Huygens.
+
+All statements are read under the Axiom of Countable Choice; the travelling-packet, plane-wave and open-boundary computations use only Lebesgue integration, differentiation under the integral and the fundamental theorem of calculus.

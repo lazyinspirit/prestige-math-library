@@ -1,0 +1,1446 @@
+[
+  {
+    "order": 458.027,
+    "id": "rellich-kondrachov-and-sobolev-compactness",
+    "kind": "A",
+    "category": "pde",
+    "title": "Rellich Kondrachov and Sobolev Compactness",
+    "companion": "rellich-kondrachov-and-sobolev-compactness-examples",
+    "requires": [
+      "sobolev-poincare-and-morrey-inequalities"
+    ],
+    "items": [
+      {
+        "id": "def-compactly-embedded-normed-spaces",
+        "kind": "definition",
+        "title": "Compactly embedded normed spaces",
+        "statement": "Let $X$ and $Y$ be normed spaces over the same field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with $X\\subseteq Y$ and continuous inclusion $\\iota:X\\to Y$, so that $\\|x\\|_Y\\le C\\|x\\|_X$ for all $x\\in X$. One says that $X$ is **compactly embedded** in $Y$, written $X\\Subset Y$, when the inclusion operator is a compact operator in the sense of [[def-compact-linear-operator]]: the image under $\\iota$ of every bounded subset of $X$ has compact closure in $Y$. Equivalently (under Countable and Dependent Choice), every bounded sequence $(x_j)$ in $X$ has a subsequence $(x_{j_k})$ that converges in $Y$. On this page every compact-embedding statement is used in one of these two forms, and the continuity of the inclusion is always verified separately through a Sobolev embedding theorem.",
+        "deps": [
+          "def-compact-linear-operator",
+          "def-norm-and-normed-space",
+          "rem-real-and-complex-normed-space-convention",
+          "def-bounded-linear-operator",
+          "def-metric-compactness",
+          "def-metric-bounded-diameter",
+          "thm-metric-compactness-equivalences",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "strategy": "The two forms are the definition of compactness of the inclusion operator and the metric form of compactness of the closures of its bounded images; the metric equivalence between compactness and sequential compactness is [[thm-metric-compactness-equivalences]], which carries exactly Countable and Dependent Choice. Continuity of the inclusion is a separate hypothesis, never inferred from compactness, and the page's theorems establish it from the cited Sobolev embeddings. Boundedness is read in the metric sense of [[def-metric-bounded-diameter]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Definition 3.24 and the surrounding discussion of continuous and compact imbeddings, printed p. 74"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 3.10, first paragraph: the definition of $X\\Subset Y$ by precompact images of bounded sets, printed p. 73"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-translation-estimate-for-w-one-p-functions",
+        "kind": "lemma",
+        "title": "The translation estimate for $W^{1,p}$ functions on $\\mathbb R^n$",
+        "statement": "Assume the Axiom of Choice, used through the ACL characterisation of [[thm-acl-characterisation-of-w-one-p]]. Let $n\\ge1$, $1\\le p<\\infty$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and $u\\in W^{1,p}(\\mathbb R^n;\\mathbb K)$. For $h\\in\\mathbb R^n$ let $\\tau_hu:=u(\\cdot+h)$, read on almost-everywhere classes. Then $\\tau_hu\\in W^{1,p}(\\mathbb R^n)$ with $D_j(\\tau_hu)=\\tau_hD_ju$, and $$\\|\\tau_hu-u\\|_{L^p(\\mathbb R^n)}\\le|h|\\,\\|Du\\|_{L^p(\\mathbb R^n)},$$ where $|Du|=(\\sum_{j=1}^n|D_ju|^2)^{1/2}$ and $|h|$ is the Euclidean norm of $h$. The estimate is a statement about classes and does not depend on the chosen representatives.",
+        "deps": [
+          "thm-acl-characterisation-of-w-one-p",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-translation-of-a-function-on-rn",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-holder-inequality-for-integrals",
+          "thm-generalized-holder-inequality-for-products",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Choose the ACL representative $u^*$ of [[thm-acl-characterisation-of-w-one-p]]: it is absolutely continuous on almost every line, with classical derivatives equal to the weak derivatives almost everywhere. For almost every $x$, the fundamental theorem of calculus along the segment from $x$ to $x+h$ gives $|u^*(x+h)-u^*(x)|\\le|h|\\int_0^1|Du^*(x+th)|\\,dt$. Raise to the $p$-th power, integrate in $x$, and use Tonelli with translation invariance of Lebesgue measure to interchange and translate the inner integral: $\\|\\tau_hu-u\\|_p^p\\le|h|^p\\int_0^1\\!\\int|Du^*(x+th)|^p\\,dx\\,dt=|h|^p\\|Du\\|_p^p$. The identification $|Du|^2=\\sum_j|D_ju|^2$ with the derivative-sum norm is the finite-dimensional equivalence of norms, and the membership $\\tau_hu\\in W^{1,p}$ with $D(\\tau_hu)=\\tau_h(Du)$ follows from the same ACL description. Representative independence is immediate because translations preserve null sets. The ACL characterisation is the only use of the Axiom of Choice; Tonelli is used through its Countable-Choice interface.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3, the estimate in the proof of Theorem 3.44, step (2), displayed before the mollification-rate claim, printed p. 86"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Lemma 9.10 and its use in the proof of Theorem 9.31, printed pp. 217-218"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Display (3.17) in the proof of Theorem 3.45, printed p. 74"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-relative-compactness-implies-uniform-translation-continuity-in-lp",
+        "kind": "lemma",
+        "title": "Relative compactness forces uniform translation continuity in $L^p$",
+        "statement": "Assume Countable Choice. Let 1≤p<∞ and F⊆Lᵖ(ℝⁿ) be relatively compact. In the displayed nonnegative supremum, take the value 0 if F=∅. Then sup_{f∈F}||τ_hf−f||_p→0 as |h|→0, the necessity of translation continuity in the Fréchet–Kolmogorov criterion.",
+        "deps": [
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "thm-compact-implies-complete-and-totally-bounded",
+          "lem-totally-bounded-basic",
+          "def-totally-bounded",
+          "def-translation-of-a-function-on-rn",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-metric-ball",
+          "def-countable-choice"
+        ],
+        "strategy": "Given $\\varepsilon>0$, relative compactness makes $\\mathcal F$ totally bounded, so there are $f_1,\\dots,f_N\\in\\mathcal F$ with $\\mathcal F$ covered by the $L^p$-balls of radius $\\varepsilon/3$ about them. By [[thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity]] choose $\\delta>0$ with $\\|\\tau_hf_i-f_i\\|_p<\\varepsilon/3$ for all $i$ and all $|h|<\\delta$. Translations are isometries of $L^p$, so for $f$ with $\\|f-f_i\\|_p<\\varepsilon/3$ the triangle inequality gives $\\|\\tau_hf-f\\|_p\\le\\|\\tau_h(f-f_i)\\|_p+\\|\\tau_hf_i-f_i\\|_p+\\|f_i-f\\|_p<\\varepsilon$ whenever $|h|<\\delta$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 1.15, condition (3) of the Fr\\'echet--Kolmogorov criterion and the surrounding discussion of necessity, printed pp. 6-7"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem B.15, condition (i), printed p. 360"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic",
+        "kind": "lemma",
+        "title": "Uniformly supported families have vanishing tails",
+        "statement": "Let 1≤p<∞, let E⊆ℝⁿ be bounded, and let F⊆Lᵖ(ℝⁿ) have every member zero almost everywhere outside E. In the displayed nonnegative supremum, take the value 0 if F=∅. For every ε>0 there is R>0 with sup_{f∈F}∫_{|x|>R}|f(x)|ᵖ dx<ε. Thus tightness is automatic for common bounded support.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-metric-bounded-diameter",
+          "def-metric-ball",
+          "def-measure-null-set-and-almost-everywhere"
+        ],
+        "strategy": "Boundedness of $E$ gives $E\\subseteq B(0,R)$ for some $R>0$. Off $B(0,R)$ every representative of every $f\\in\\mathcal F$ vanishes almost everywhere, so the tail integral is the integral of the zero class and equals $0$; taking $R$ as above makes the supremum $0<\\varepsilon$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 1.15, condition (2) and the preceding example, printed pp. 6-7"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 9.33, whose extra hypothesis is the tightness condition, printed p. 219"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-frechet-kolmogorov-compactness-criterion-in-lp",
+        "kind": "theorem",
+        "title": "The Fr\\'echet--Kolmogorov compactness criterion in $L^p(\\mathbb R^n)$",
+        "statement": "Assume Countable Choice and Dependent Choice. Let 1≤p<∞ and F⊆Lᵖ(ℝⁿ). In each of the three displayed nonnegative suprema take the value 0 if F=∅. If F is bounded, has uniformly vanishing tails, and is uniformly translation continuous, then F is totally bounded, its closure is compact, and every sequence in F has an Lᵖ-convergent subsequence.",
+        "deps": [
+          "def-radial-mollifier-family-in-rn",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-young-convolution-inequality",
+          "thm-minkowski-integral-inequality",
+          "thm-holder-inequality-for-integrals",
+          "def-translation-of-a-function-on-rn",
+          "lem-equicontinuous-families-have-finite-sup-nets",
+          "thm-arzela-ascoli-for-real-ck",
+          "def-totally-bounded",
+          "lem-totally-bounded-basic",
+          "thm-complete-subspace-iff-closed",
+          "thm-complete-and-totally-bounded-implies-compact",
+          "def-metric-ball",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "strategy": "Fix $\\varepsilon>0$, choose $R$ with tails $<\\varepsilon$ by (ii) and $\\delta$ with translation control $<\\varepsilon$ by (iii), and let $\\eta$ be the radial mollifier. For $f\\in\\mathcal F$ put $f_R:=f\\mathbf 1_{B(0,R)}$ and $f_{R,\\delta}:=f_R*\\eta_\\delta$. Then $\\|f-f_R\\|_p\\le\\varepsilon$, while $f_R-f_{R,\\delta}=\\int\\eta_\\delta(y)(f_R-\\tau_{-y}f_R)\\,dy$ and $\\|f_R-\\tau_{-y}f_R\\|_p\\le3\\varepsilon$ for $|y|\\le\\delta$ (triangle inequality plus the tail bound), so Minkowski gives $\\|f_R-f_{R,\\delta}\\|_p\\le3\\varepsilon$; hence every $f\\in\\mathcal F$ lies within $4\\varepsilon$ of the regularised family $\\mathcal G_\\delta:=\\{f_{R,\\delta}:f\\in\\mathcal F\\}$. Each $g\\in\\mathcal G_\\delta$ is supported in the fixed ball $B(0,R+1)$ with $\\|g\\|_\\infty\\le\\|\\eta_\\delta\\|_{p'}\\|f\\|_p\\le C$ and $|\\nabla g|\\le\\|\\nabla\\eta_\\delta\\|_{p'}\\|f\\|_p\\le C_\\delta$ by H\\\"older, so $\\mathcal G_\\delta$ is uniformly bounded and uniformly Lipschitz; applying [[lem-equicontinuous-families-have-finite-sup-nets]] to the real and imaginary parts on the compact ball (with [[thm-arzela-ascoli-for-real-ck]] supplying the equicontinuity framework) shows $\\mathcal G_\\delta$ is totally bounded in the supremum metric, hence in $L^p(\\mathbb R^n)$. Therefore $\\mathcal F$ is totally bounded in $L^p$, its closure is totally bounded and closed, hence complete and compact by [[thm-complete-subspace-iff-closed]] and [[thm-complete-and-totally-bounded-implies-compact]], and the metric equivalence of compactness and sequential compactness gives the subsequence form.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 1.15 and Example 1.16, printed pp. 6-7"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem B.15 (Kolmogorov--Riesz--Sudakov), printed pp. 360-361. The printed statement lists conditions (i)-(ii) but not the boundedness hypothesis; the manifest restores it, since the family $f_n=n\\mathbf 1_U$ on a bounded open $U$ satisfies both listed conditions and is not relatively compact. The reading is recorded as a source caveat."
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3, Section 3.6, the mollification and Arzel\\`a--Ascoli method of the proof of Theorem 3.44, printed pp. 86-89"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-rellich-compactness-from-w-one-p-zero-to-lp",
+        "kind": "theorem",
+        "title": "Compactness of $W^{1,p}_0(\\Omega)\\hookrightarrow L^p(\\Omega)$ on bounded open sets",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded open set and let $1\\le p<\\infty$. Then $W^{1,p}_0(\\Omega)$ is compactly embedded in $L^p(\\Omega)$: the inclusion is bounded, and every sequence bounded in $W^{1,p}_0(\\Omega)$ has a subsequence converging in $L^p(\\Omega)$. No regularity of $\\partial\\Omega$ is needed.",
+        "deps": [
+          "lem-translation-estimate-for-w-one-p-functions",
+          "lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic",
+          "thm-frechet-kolmogorov-compactness-criterion-in-lp",
+          "lem-zero-extension-from-w-one-p-zero",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-metric-bounded-diameter",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Let $(u_j)$ be bounded in $W^{1,p}_0(\\Omega)$ and let $\\tilde u_j$ be the zero extensions of [[lem-zero-extension-from-w-one-p-zero]]; each $\\tilde u_j$ lies in $W^{1,p}(\\mathbb R^n)$ with $\\|\\tilde u_j\\|_{W^{1,p}(\\mathbb R^n)}=\\|u_j\\|_{W^{1,p}(\\Omega)}$ and support in the fixed bounded set $\\overline\\Omega$. The family $\\{\\tilde u_j\\}$ satisfies the three hypotheses of [[thm-frechet-kolmogorov-compactness-criterion-in-lp]]: it is bounded in $L^p$; it has vanishing tails by [[lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic]]; and it is uniformly translation continuous because [[lem-translation-estimate-for-w-one-p-functions]] gives $\\|\\tau_h\\tilde u_j-\\tilde u_j\\|_p\\le|h|\\,\\|D\\tilde u_j\\|_p\\le C|h|$ with $C$ independent of $j$. Hence a subsequence of the extensions converges in $L^p(\\mathbb R^n)$, and restriction to $\\Omega$, a contraction, gives convergence of the corresponding $u_j$ in $L^p(\\Omega)$. The inclusion is bounded because $\\|u\\|_{L^p(\\Omega)}\\le\\|u\\|_{W^{1,p}_0(\\Omega)}$. The Axiom of Choice is inherited through the ACL-based translation estimate [[lem-translation-estimate-for-w-one-p-functions]]; the extraction uses Countable and Dependent Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 3.45 and its proof, printed pp. 73-74"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Theorem 3.26 and its proof, printed pp. 74-76"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 9.31, the $W^{1,p}_0(U)$ clause, printed p. 218"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+        "kind": "theorem",
+        "title": "Compactness of $W^{1,p}(\\Omega)\\hookrightarrow L^p(\\Omega)$ on bounded extension domains",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded extension domain ([[def-sobolev-extension-domain-and-extension-operator]]) and let $1\\le p<\\infty$. Then $W^{1,p}(\\Omega)$ is compactly embedded in $L^p(\\Omega)$: every sequence bounded in $W^{1,p}(\\Omega)$ has a subsequence converging in $L^p(\\Omega)$. Every bounded $C^1$ domain is an example.",
+        "deps": [
+          "lem-translation-estimate-for-w-one-p-functions",
+          "lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic",
+          "thm-frechet-kolmogorov-compactness-criterion-in-lp",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-metric-bounded-diameter",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Fix a bounded extension operator $E$ for $\\Omega$ and, by [[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]], a function $\\eta\\in C_c^\\infty(\\mathbb R^n)$ with $\\eta=1$ on $\\Omega$. For a sequence $(u_j)$ bounded in $W^{1,p}(\\Omega)$ put $v_j:=\\eta\\,Eu_j$. By the weak Leibniz rule each $v_j$ lies in $W^{1,p}(\\mathbb R^n)$, is supported in the fixed bounded set $\\operatorname{supp}\\eta$, and satisfies $\\|v_j\\|_{W^{1,p}(\\mathbb R^n)}\\le C\\sup_j\\|u_j\\|_{W^{1,p}(\\Omega)}$ by the product rule and the bound for $E$. The family $\\{v_j\\}$ therefore meets the three hypotheses of [[thm-frechet-kolmogorov-compactness-criterion-in-lp]]: boundedness, automatic tails by [[lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic]], and uniform translation control $\\|\\tau_hv_j-v_j\\|_p\\le|h|\\|Dv_j\\|_p\\le C|h|$ from [[lem-translation-estimate-for-w-one-p-functions]]. A subsequence converges in $L^p(\\mathbb R^n)$, and since $v_j=u_j$ almost everywhere on $\\Omega$ restriction gives the asserted convergence in $L^p(\\Omega)$. The Axiom of Choice is inherited through [[lem-translation-estimate-for-w-one-p-functions]] and the cited extension theorem; the extraction uses Countable and Dependent Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Theorem 3.27 and its proof, printed pp. 76-77"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 3.45 together with the transfer discussion of Section 3.11, printed pp. 74-76"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 9.31, the extension-property clause, printed p. 218"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+        "kind": "theorem",
+        "title": "Poincare-Wirtinger on bounded connected extension domains by Rellich compactness",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a nonempty bounded connected extension domain, and let $1\\le p<\\infty$. Then there is $C=C(\\Omega,p)$ such that every $u\\in W^{1,p}(\\Omega;\\mathbb K)$ satisfies\n$$\\|u-u_\\Omega\\|_{L^p(\\Omega)}\\le C\\|Du\\|_{L^p(\\Omega)},\\qquad u_\\Omega:=|\\Omega|^{-1}\\int_\\Omega u(x)\\,dx.$$",
+        "deps": [
+          "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "thm-zero-weak-gradient-implies-componentwise-constancy",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "strategy": "Suppose no such constant exists. After subtracting means and normalizing, choose $u_j\\in W^{1,p}(\\Omega)$ with $\\int_\\Omega u_j=0$, $\\|u_j\\|_{L^p}=1$, and $\\|Du_j\\|_{L^p}\\to0$. The sequence is bounded in $W^{1,p}(\\Omega)$, so [[thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain]] gives a subsequence converging strongly in $L^p(\\Omega)$ to $u$. Since $\\Omega$ has finite measure, [[thm-holder-inequality-for-integrals]] passes the mean to the limit; norm continuity gives $\\int_\\Omega u=0$ and $\\|u\\|_{L^p}=1$. For every test function $\\varphi\\in C_c^\\infty(\\Omega)$, strong $L^p$ convergence and $Du_j\\to0$ in $L^p$ pass the weak-derivative identity to the limit, so $Du=0$. By [[thm-zero-weak-gradient-implies-componentwise-constancy]], connectedness makes $u$ a.e. constant; its mean is zero, hence $u=0$, contradicting its unit norm. The violating sequence uses Countable Choice, and the compactness extraction inherits the choice strength stated in Rellich.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.29, compactness proof of Poincare inequality on connected C^1 domains, printed pp. 77-78; the extension-domain generality here follows from this page's Rellich item 4 and the published zero-gradient constancy theorem."
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 §3.1 and Chapter 5 §5.9, Poincare inequalities and their domain hypotheses."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-local-lp-compactness-of-w-one-p-bounded-sequences",
+        "kind": "theorem",
+        "title": "Local $L^p$ compactness of $W^{1,p}_{\\mathrm{loc}}$-bounded sequences",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open and let $1\\le p<\\infty$. Let $(u_j)$ be a sequence that is bounded in $W^{1,p}_{\\mathrm{loc}}(\\Omega)$: for every $\\Omega'\\Subset\\Omega$ there is $C_{\\Omega'}$ with $\\|u_j\\|_{W^{1,p}(\\Omega')}\\le C_{\\Omega'}$ for all $j$. Then $(u_j)$ has a subsequence converging in $L^p_{\\mathrm{loc}}(\\Omega)$, and the limit belongs to $W^{1,p}_{\\mathrm{loc}}(\\Omega)$.",
+        "deps": [
+          "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "lem-weak-lower-semicontinuity-of-the-sobolev-norm",
+          "cor-rn-is-locally-compact-and-sigma-compact",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Choose a countable exhaustion $\\Omega=\\bigcup_{k\\ge1}B_k$ by open balls with $\\overline{B_k}\\subset B_{k+1}$ (possible because $\\Omega$ is locally compact and $\\sigma$-compact, [[cor-rn-is-locally-compact-and-sigma-compact]]). Inductively, having a subsequence that converges in $L^p(B_k)$, apply [[thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain]] on the bounded $C^1$ domain $B_{k+1}$ to extract a further subsequence converging in $L^p(B_{k+1})$; the diagonal is eventually a subsequence of every stage and converges in $L^p(B_k)$ for each $k$, hence in $L^p(\\Omega')$ for every $\\Omega'\\Subset\\Omega$. Weak lower semicontinuity of the Sobolev norm ([[lem-weak-lower-semicontinuity-of-the-sobolev-norm]]) gives the local $W^{1,p}$ bound for the limit, so it lies in $W^{1,p}_{\\mathrm{loc}}(\\Omega)$. The Axiom of Choice is inherited through [[thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain]] and [[lem-weak-lower-semicontinuity-of-the-sobolev-norm]]; the diagonal extraction uses Countable and Dependent Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3, Section 3.6, localization form of the Rellich--Kondrachov theorem and the compactly contained cutoff step, printed pp. 85-86"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 3.11, the localisation of the previous results by finitely many balls, printed pp. 75-76"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-subcritical-compactness-for-w-one-p-zero-on-arbitrary-bounded-open-sets",
+        "kind": "corollary",
+        "title": "Subcritical compactness for $W^{1,p}_0$ on arbitrary bounded open sets",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded open set with no boundary regularity assumed, let $1\\le p<n$ and $p^{*}=\\frac{np}{n-p}$. For every $1\\le q<p^{*}$ the space $W^{1,p}_0(\\Omega)$ is compactly embedded in $L^q(\\Omega)$: every sequence bounded in $W^{1,p}_0(\\Omega)$ has a subsequence converging in $L^q(\\Omega)$.",
+        "deps": [
+          "thm-rellich-compactness-from-w-one-p-zero-to-lp",
+          "cor-sobolev-inequality-for-w-one-p-zero",
+          "def-sobolev-conjugate-exponent",
+          "thm-lyapunov-interpolation-inequality-for-l-p-norms",
+          "thm-holder-inequality-for-integrals",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Extract a subsequence converging in $L^p(\\Omega)$ by [[thm-rellich-compactness-from-w-one-p-zero-to-lp]]. The zero extensions are bounded in $W^{1,p}(\\mathbb R^n)$ with norms independent of the sequence, so the whole-space inequality [[cor-sobolev-inequality-for-w-one-p-zero]] gives the uniform bound $\\sup_j\\|u_j\\|_{L^{p^{*}}(\\Omega)}\\le C$. For $p\\le q<p^{*}$ the Lyapunov interpolation inequality [[thm-lyapunov-interpolation-inequality-for-l-p-norms]] applied to the differences gives $\\|u_{j_k}-u_{j_l}\\|_{L^q}\\le\\|u_{j_k}-u_{j_l}\\|_p^{1-\\theta}\\|u_{j_k}-u_{j_l}\\|_{p^{*}}^{\\theta}$ with $\\frac1q=\\frac{1-\\theta}{p}+\\frac{\\theta}{p^{*}}$, which tends to $0$; for $q<p$ H\\\"older's inequality on the bounded set $\\Omega$ gives $\\|\\cdot\\|_{L^q}\\le|\\Omega|^{1/q-1/p}\\|\\cdot\\|_{L^p}$ and the same conclusion. No property of $\\partial\\Omega$ is used. The Axiom of Choice is inherited through [[thm-rellich-compactness-from-w-one-p-zero-to-lp]] and [[cor-sobolev-inequality-for-w-one-p-zero]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 3.45 and display (3.18): the interpolation of the $L^1$-rate with the Sobolev embedding to every $q<p^{*}$, printed p. 74"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 9.31, the $W^{1,p}_0(U)$ clause with the interpolation step of its proof, printed p. 218"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-rellich-kondrachov-for-p-less-than-n",
+        "kind": "theorem",
+        "title": "The Rellich--Kondrachov theorem for $1\\le p<n$ on bounded extension domains",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded extension domain, let $1\\le p<n$ and $p^{*}=\\frac{np}{n-p}$. Then for every $1\\le q<p^{*}$ the inclusion $W^{1,p}(\\Omega)\\hookrightarrow L^q(\\Omega)$ is bounded and compact: every sequence bounded in $W^{1,p}(\\Omega)$ has a subsequence converging in $L^q(\\Omega)$.",
+        "deps": [
+          "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n",
+          "def-sobolev-conjugate-exponent",
+          "thm-lyapunov-interpolation-inequality-for-l-p-norms",
+          "thm-holder-inequality-for-integrals",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-compactly-embedded-normed-spaces",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Pass to an $L^p(\\Omega)$-convergent subsequence with [[thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain]]. Boundedness of the sequence in $W^{1,p}(\\Omega)$ and the continuous embedding [[thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n]] give the uniform $L^{p^{*}}(\\Omega)$ bound $\\|u_j\\|_{p^{*}}\\le C$ for all $j$, hence also for the differences $u_{j_k}-u_{j_l}$ with uniformly bounded $W^{1,p}$ norms. For $p\\le q<p^{*}$ Lyapunov interpolation of the differences between $L^p$ and $L^{p^{*}}$ gives convergence in $L^q$; for $q<p$ H\\\"older's inequality on the bounded set $\\Omega$ transfers the $L^p$ convergence. The boundedness of the inclusion is the same Sobolev embedding. The Axiom of Choice is inherited through [[thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain]] and the PDE-14 supplier [[thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Theorem 3.44 (Rellich--Kondrachov) and its proof, printed pp. 85-89"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Theorem 3.27, printed pp. 76-77"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 9.31, printed p. 218"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext, 2011, complete text)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Theorem 9.16 (Rellich--Kondrachov), printed pp. 285-288"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-rellich-kondrachov-at-the-critical-source-exponent",
+        "kind": "theorem",
+        "title": "Rellich--Kondrachov at the critical source exponent $p=n$",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$ and let $\\Omega\\subseteq\\mathbb R^n$ be a bounded extension domain. Then $W^{1,n}(\\Omega)$ is compactly embedded in $L^q(\\Omega)$ for every finite $q$: for each fixed $1\\le q<\\infty$, every sequence bounded in $W^{1,n}(\\Omega)$ has a subsequence converging in $L^q(\\Omega)$. There is no claim of compactness into $L^\\infty$.",
+        "deps": [
+          "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "thm-critical-sobolev-embedding-into-every-finite-lq",
+          "thm-lyapunov-interpolation-inequality-for-l-p-norms",
+          "thm-holder-inequality-for-integrals",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-compactly-embedded-normed-spaces",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Apply [[thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain]] with $p=n$ to obtain an $L^n(\\Omega)$-convergent subsequence. Fix $q<\\infty$ and choose $q'>q$. The critical embedding [[thm-critical-sobolev-embedding-into-every-finite-lq]] bounds $\\|u_j\\|_{L^{q'}(\\Omega)}\\le C$ uniformly, and Lyapunov interpolation of the differences between $L^n$ and $L^{q'}$ gives convergence in $L^q$; when $q\\le n$ the same conclusion follows from H\\\"older's inequality on the bounded set $\\Omega$. The uniform $L^{q'}$ bound has a constant that necessarily blows up as $q'\\to\\infty$, and the companion page exhibits a bounded $W^{1,n}$ sequence with unbounded essential supremum. The Axiom of Choice is inherited through [[thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain]] and the PDE-14 supplier [[thm-critical-sobolev-embedding-into-every-finite-lq]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 9.31 together with the interpolation remark in its proof (replace $p^{*}$ by any value larger than $q$ when $p=n$), printed p. 218"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 3.49(2), the $kp=n$ clause, printed p. 76"
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3, Section 3.6, the compactness theorem and the discarded endpoint, printed pp. 85-89"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-morrey-rellich-compactness-for-p-greater-than-n",
+        "kind": "theorem",
+        "title": "Morrey--Rellich compactness for $p>n$",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded extension domain, let $n<p<\\infty$ and $\\alpha=1-\\frac np$. Replace every $u\\in W^{1,p}(\\Omega)$ by its continuous Morrey representative $u^{*}$ ([[thm-morrey-inequality-for-p-greater-than-n]]). Then every sequence bounded in $W^{1,p}(\\Omega)$ has a subsequence whose representatives converge in $C^{0,\\beta}(\\overline\\Omega)$ for every $0\\le\\beta<\\alpha$; in particular $W^{1,p}(\\Omega)$ is compactly embedded in every $C^{0,\\beta}(\\overline\\Omega)$, $0\\le\\beta<\\alpha$, and in particular in $L^q(\\Omega)$ for every finite $q$.",
+        "deps": [
+          "thm-morrey-inequality-for-p-greater-than-n",
+          "thm-arzela-ascoli-for-real-ck",
+          "def-local-holder-and-c-two-alpha-norms-on-euclidean-balls",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-compactly-embedded-normed-spaces",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Extend each $u_j$ by a bounded extension operator and multiply by $\\eta\\in C_c^\\infty(\\mathbb R^n)$ equal to $1$ on $\\Omega$; the products $v_j=\\eta Eu_j$ lie in $W^{1,p}(\\mathbb R^n)$ with compact support and $\\|v_j\\|_{W^{1,p}(\\mathbb R^n)}\\le C$. Morrey's inequality [[thm-morrey-inequality-for-p-greater-than-n]] applied on $\\mathbb R^n$ gives, for the continuous representative $v_j^{*}$, the H\\\"older seminorm bound $[v_j^{*}]_{C^{0,\\alpha}}\\le C\\|Dv_j\\|_{L^p}\\le C'$, and averaging over a unit ball gives $\\|v_j^{*}\\|_\\infty\\le C''(\\|v_j\\|_{L^p}+\\|Dv_j\\|_{L^p})$; hence $\\|v_j^{*}\\|_{C^{0,\\alpha}(\\mathbb R^n)}\\le C'''$ uniformly. On the compact metric space $\\overline\\Omega$ the restrictions $v_j^{*}|_{\\overline\\Omega}$ are uniformly bounded and equicontinuous, so [[thm-arzela-ascoli-for-real-ck]], applied to real and imaginary parts, yields a subsequence converging uniformly, i.e.\\ in $C^{0,0}(\\overline\\Omega)$. For $0<\\beta<\\alpha$ the interpolation inequality $\\|g\\|_{C^{0,\\beta}}\\le\\|g\\|_\\infty^{1-\\beta/\\alpha}\\|g\\|_{C^{0,\\alpha}}^{\\beta/\\alpha}$ upgrades this to convergence in $C^{0,\\beta}(\\overline\\Omega)$, because the $C^{0,\\alpha}$ norms stay bounded. Since $v_j^{*}=u_j$ almost everywhere on $\\Omega$ and $\\eta=1$ there, the restricted representatives are the Morrey representatives of the original classes. The Axiom of Choice is inherited through the Morrey inequality [[thm-morrey-inequality-for-p-greater-than-n]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 3.48 and its proof by Theorem 3.36 (Morrey) plus Arzel\\`a--Ascoli, printed p. 75"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 9.31, the $p>n$ clause and Theorem B.3, printed pp. 218 and 341"
+            },
+            {
+              "title": "Viktor Grigoryan, Math 246B: Partial Differential Equations (UCSB, 2011, full course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Theorem 1.34 and the compactness discussion of Section 1.6, printed pp. 12-14"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-higher-order-rellich-kondrachov",
+        "kind": "theorem",
+        "title": "Higher-order Rellich--Kondrachov compactness",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded extension domain, let $k>m\\ge0$ be integers and $1\\le p<\\infty$; write $p^{*}_{k-m}=\\frac{np}{n-(k-m)p}$ when $(k-m)p<n$. (a) If $(k-m)p<n$, then $W^{k,p}(\\Omega)$ is compactly embedded in $W^{m,q}(\\Omega)$ for every $1\\le q<p^{*}_{k-m}$. (b) If $(k-m)p\\ge n$, then $W^{k,p}(\\Omega)$ is compactly embedded in $W^{m,q}(\\Omega)$ for every finite $q$. (c) If $(k-m)p>n$ and $0\\le\\beta<k-m-\\frac np$, then every sequence bounded in $W^{k,p}(\\Omega)$ has a subsequence whose representatives converge in $C^{m,\\beta}(\\overline\\Omega)$.",
+        "deps": [
+          "lem-weak-partial-derivatives-lower-sobolev-order",
+          "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "thm-higher-order-sobolev-embedding",
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-metric-compactness-equivalences",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-hk-and-hk-zero-notation",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-lyapunov-interpolation-inequality-for-l-p-norms",
+          "thm-holder-inequality-for-integrals",
+          "def-local-holder-and-c-two-alpha-norms-on-euclidean-balls",
+          "def-compactly-embedded-normed-spaces",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Extract strong Lp convergence for the finite derivative family, interpolate against higher-order Sobolev bounds for (a) and (b), and use Arzela-Ascoli plus Holder interpolation for (c).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 3.49, all clauses, and the reduction to derivatives, printed p. 76"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 9.31 with Corollary 9.32, printed pp. 218-219"
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3, Section 3.6, the higher-order iteration remark before Theorem 3.44, printed p. 84"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-bounded-sobolev-sequences-have-strongly-convergent-subsequences",
+        "kind": "corollary",
+        "title": "Bounded Sobolev sequences have strongly convergent subsequences with the weak limit as limit",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded extension domain, let $1\\le p<n$, $p^{*}=\\frac{np}{n-p}$, and let $(u_j)$ be bounded in $W^{1,p}(\\Omega)$ with $u_j\\rightharpoonup u$ weakly in $W^{1,p}(\\Omega)$. Then $u_j\\to u$ in $L^q(\\Omega)$ for every $1\\le q<p^{*}$; the convergence is of the whole sequence, not merely of a subsequence.",
+        "deps": [
+          "thm-rellich-kondrachov-for-p-less-than-n",
+          "def-weak-convergence-of-nets-and-sequences",
+          "thm-weak-topology-is-hausdorff",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "thm-holder-inequality-for-integrals",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Every subsequence of $(u_j)$ is bounded in $W^{1,p}(\\Omega)$ and still converges weakly to $u$, so [[thm-rellich-kondrachov-for-p-less-than-n]] supplies a further subsequence converging in $L^q(\\Omega)$ to some $v$. To identify $v=u$, test against $\\varphi\\in C_c^\\infty(\\Omega)$: weak convergence in $W^{1,p}(\\Omega)$ gives $\\int\\varphi u_j\\to\\int\\varphi u$ because $\\varphi\\in L^{p'}(\\Omega)\\subseteq(W^{1,p}(\\Omega))^{*}$ on the bounded set, while strong $L^q$-convergence gives $\\int\\varphi u_j\\to\\int\\varphi v$ because $\\varphi\\in L^{q'}(\\Omega)$; hence $\\int\\varphi(u-v)=0$ for every test function. Since $C_c^\\infty(\\Omega)$ is dense in $L^{q'}(\\Omega)$ ([[thm-c-c-is-dense-in-l-p-for-radon-measures]] applied to Lebesgue measure), duality gives $u=v$ in $L^q(\\Omega)$. Thus every subsequence has a further subsequence converging to the same limit $u$; in a metric space this forces the whole sequence to converge to $u$. Uniqueness of weak limits in the Hausdorff weak topology is [[thm-weak-topology-is-hausdorff]]. The Axiom of Choice is inherited through [[thm-rellich-kondrachov-for-p-less-than-n]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Remark 3.45 after Rellich--Kondrachov: the almost-everywhere and limit identification remarks, printed pp. 89-90"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Corollary 9.32 and its use, printed p. 219"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "The proof of Theorem 3.29 (Poincar\\'e), which upgrades weak limits by compactness, printed pp. 77-78"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-weak-h-one-convergence-plus-compactness-gives-strong-ltwo-convergence",
+        "kind": "corollary",
+        "title": "Weak $H^1$ convergence plus compactness gives strong $L^2$ convergence",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded extension domain and let $(u_j)$ be bounded in $H^1(\\Omega)=W^{1,2}(\\Omega)$ with $u_j\\rightharpoonup u$ weakly in $H^1(\\Omega)$. Then $u_j\\to u$ in $L^2(\\Omega)$.",
+        "deps": [
+          "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "def-hk-and-hk-zero-notation",
+          "def-weak-convergence-of-nets-and-sequences",
+          "thm-holder-inequality-for-integrals",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Every subsequence has a further L2-convergent subsequence by first-order Rellich; finite-measure indicator tests identify the limit with the weak limit, forcing convergence of the whole sequence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Viktor Grigoryan, Math 246B: Partial Differential Equations (UCSB, 2011, full course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Section 2.4 and Theorem 2.33's use of the compact embedding $H^1_0(\\Omega)\\Subset L^2(\\Omega)$, printed pp. 15-18"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Exercise 3.23 and the compact imbedding theorem behind it, printed p. 77"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "rem-rellich-is-a-strictly-subcritical-theorem",
+        "kind": "remark",
+        "title": "Rellich compactness is strictly subcritical",
+        "statement": "The compactness statements of this page are strictly subcritical and each exclusion has a witness on the companion page. (i) For 1≤p<n on a bounded domain the continuous embedding W^{1,p}_0(Ω)↪L^{p*}(Ω) is not compact, so the strict inequality q<p* cannot be replaced by q=p* (witness: a concentrating bump sequence). (ii) On ℝⁿ boundedness in W^{1,p} and translation control alone do not give compactness: translates of one compactly supported bump satisfy the boundedness and translation hypotheses of the Fréchet–Kolmogorov criterion but not its tightness hypothesis. (iii) In the Morrey range p>n the endpoint Hölder exponent β=1−n/p is excluded (witness: rescaled Hölder spikes). (iv) At p=n there is compactness into every finite L^q but no L^∞ bound, and the constants blow up as q→∞. For W^{1,p} compactness theorems on extension domains, boundedness and the extension hypothesis are part of the stated setting. The W^{1,p}_0 compactness results need only bounded openness and zero extension, with no boundary regularity. On ℝⁿ, translations and dilations destroy compactness when the corresponding tail control is absent.",
+        "deps": [
+          "thm-rellich-kondrachov-for-p-less-than-n",
+          "thm-rellich-kondrachov-at-the-critical-source-exponent",
+          "thm-morrey-rellich-compactness-for-p-greater-than-n",
+          "thm-frechet-kolmogorov-compactness-criterion-in-lp",
+          "cor-subcritical-compactness-for-w-one-p-zero-on-arbitrary-bounded-open-sets"
+        ],
+        "strategy": "No proof: the remark records the exclusions and points to the companion-page witnesses, which supply the corresponding counterexamples. Each clause is a statement about the sharpness of a hypothesis of a theorem proved on this page, not a new mathematical claim.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Examples 3.46 and 3.47 and the closing paragraph of Section 3.10, printed pp. 74-75"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Examples 9.13 and 9.14, printed pp. 218-219"
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "The moral after Example 3.46: Rellich--Kondrachov does not hold at $q=p^{*}$, printed p. 90"
+            }
+          ]
+        },
+        "forward_refs": [
+          "cex-critical-sobolev-embedding-is-not-compact",
+          "cex-rellich-fails-without-uniform-tail-control",
+          "cex-morrey-compactness-loses-the-endpoint-holder-exponent"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-fractional-level-set-kernel-measure-estimate",
+        "kind": "lemma",
+        "title": "The level-set kernel measure estimate for the Slobodeckij kernel",
+        "statement": "Assume the Axiom of Countable Choice. Let $d\\ge1$, $0<\\theta<1$, $1\\le p<\\infty$ with $p\\theta<d$, let $x\\in\\mathbb R^d$ and let $E\\subseteq\\mathbb R^d$ be Lebesgue measurable with $0<|E|<\\infty$. Then $$\\int_{\\mathbb R^d\\setminus E}|x-y|^{-d-p\\theta}\\,dy\\ \\ge\\ c(d,p,\\theta)\\,|E|^{-p\\theta/d}.$$",
+        "deps": [
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-countable-choice"
+        ],
+        "strategy": "Let $\\rho=(|E|/\\omega_d)^{1/d}$, so that $|B_\\rho(x)|=|E|$. Split $\\mathbb R^d\\setminus E$ into its part inside $B_\\rho(x)$ and its part outside. On the inside, the kernel is at least $\\rho^{-d-p\\theta}$ and the set has measure $|E\\setminus B_\\rho(x)|=|(\\mathbb R^d\\setminus E)\\cap B_\\rho(x)|$; on the outside the integral is bounded below by the integral over $\\mathbb R^d\\setminus B_\\rho(x)$. Adding the two lower bounds and using that they cover a set of measure at least $|B_\\rho(x)|$ inside, the total dominates $\\int_{\\mathbb R^d\\setminus B_\\rho(x)}|x-y|^{-d-p\\theta}\\,dy$. Polar coordinates centred at $x$ evaluate this as $\\sigma(S^{d-1})\\int_\\rho^\\infty r^{-1-p\\theta}\\,dr=c\\rho^{-p\\theta}=c'|E|^{-p\\theta/d}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eleonora Di Nezza, Giampiero Palatucci and Enrico Valdinoci, Hitchhiker's guide to the fractional Sobolev spaces (arXiv:1104.4345, survey)",
+              "url": "https://arxiv.org/pdf/1104.4345",
+              "locator": "Lemma 6.1 and its proof, printed p. 39"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem B.15 and its surrounding compactness discussion, printed pp. 360-361"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-dyadic-level-set-summability-estimate",
+        "kind": "lemma",
+        "title": "A dyadic summability estimate for decreasing level-set sequences",
+        "statement": "Let $d\\ge1$, $0<\\theta<1$, $1\\le p<\\infty$ with $p\\theta<d$ and $T>1$. Let $(a_k)_{k\\in\\mathbb Z}$ be a bounded nonnegative nonincreasing sequence with $a_k=0$ for all sufficiently large $k$. Then $$\\sum_{k\\in\\mathbb Z}a_k^{(d-p\\theta)/d}\\,T^{k}\\ \\le\\ C(d,p,\\theta,T)\\sum_{k:\\,a_k\\ne0}a_{k+1}\\,a_k^{-p\\theta/d}\\,T^{k}.$$",
+        "deps": [
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "Two applications of H\\\"older's inequality ([[thm-holder-inequality-for-integrals]] read on the finite counting measure, the sums being finite because $a_k=0$ for large $k$) with exponents $\\alpha=d/(p\\theta)$ and $\\beta=d/(d-p\\theta)$ applied to the factorisation $a_k^{(d-p\\theta)/d}T^k=\\bigl(a_k^{p\\theta/(d\\alpha)}T^{k/\\alpha}\\bigr)\\bigl(a_{k+1}a_k^{-p\\theta/d}T^k\\bigr)^{1/\\beta}\\bigl(a_k/a_{k+1}\\bigr)^{1/\\beta}$, together with the monotonicity $a_{k+1}\\le a_k$ and the shift $k\\mapsto k-1$, gives $$\\frac1T\\sum_k a_k^{(d-p\\theta)/d}T^k\\le\\Bigl(\\sum_k a_k^{(d-p\\theta)/d}T^k\\Bigr)^{p\\theta/d}\\Bigl(\\sum_{a_k\\ne0}a_{k+1}a_k^{-p\\theta/d}T^k\\Bigr)^{(d-p\\theta)/d};$$ cancelling the common positive factor (when it vanishes the claim is trivial) yields the stated inequality. The argument is elementary and uses no choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eleonora Di Nezza, Giampiero Palatucci and Enrico Valdinoci, Hitchhiker's guide to the fractional Sobolev spaces (arXiv:1104.4345, survey)",
+              "url": "https://arxiv.org/pdf/1104.4345",
+              "locator": "Lemma 6.2 and its proof, printed pp. 40-41"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-slobodeckij-seminorm-controls-dyadic-level-sets",
+        "kind": "lemma",
+        "title": "The Slobodeckij seminorm bounds the dyadic level-set sum",
+        "statement": "Assume the Axiom of Countable Choice. Let $d\\ge1$, $0<\\theta<1$, $1\\le p<\\infty$ with $p\\theta<d$, let $f\\in L^\\infty(\\mathbb R^d)$ have compact support, and put $A_k:=\\{|f|>2^k\\}$, $a_k:=|A_k|$. Then $$[f]_{\\theta,p}^{p}\\ \\ge\\ c(d,p,\\theta)\\sum_{k:\\,a_k\\ne0}a_{k+1}\\,a_k^{-p\\theta/d}\\,2^{pk},$$ where $[\\cdot]_{\\theta,p}$ is the Slobodeckij seminorm of [[def-fractional-slobodeckij-space-on-euclidean-space]].",
+        "deps": [
+          "lem-fractional-level-set-kernel-measure-estimate",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "def-countable-choice"
+        ],
+        "strategy": "Replace $f$ by $|f|$ and write $D_k=A_k\\setminus A_{k+1}$. For $x\\in D_k$ and $y\\in D_j$ with $j\\le k-2$ one has $|f(x)-f(y)|\\ge2^k-2^{k-1}=2^{k-1}$, so, using $\\bigcup_{j\\le k-2}D_j=(A_{k-1})^{c}$, the double integral of the seminorm dominates $2^{p(k-1)}\\int_{D_k}\\int_{(A_{k-1})^{c}}|x-y|^{-d-p\\theta}\\,dy\\,dx$. Lemma [[lem-fractional-level-set-kernel-measure-estimate]] applied to $E=A_{k-1}$ bounds the inner integral below by $c\\,a_{k-1}^{-p\\theta/d}$ for every $x$, so the contribution of the block $D_k$ is at least $c\\,2^{pk}d_k a_{k-1}^{-p\\theta/d}$. Summing over the $k$ with $a_{k-1}\\ne0$ and relabelling the index (using $a_{k+1}\\le a_k$ to absorb the monotonicity factor, as in the source) gives the stated sum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eleonora Di Nezza, Giampiero Palatucci and Enrico Valdinoci, Hitchhiker's guide to the fractional Sobolev spaces (arXiv:1104.4345, survey)",
+              "url": "https://arxiv.org/pdf/1104.4345",
+              "locator": "Lemma 6.3 and its proof, printed pp. 41-44"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-fractional-sobolev-inequality-on-euclidean-space",
+        "kind": "theorem",
+        "title": "The critical fractional Sobolev inequality on $\\mathbb R^d$",
+        "statement": "Assume the Axiom of Countable Choice. Let $d\\ge1$, $0<\\theta<1$, $1\\le p<\\infty$ with $p\\theta<d$ and $p_\\star:=\\frac{dp}{d-p\\theta}$. There is $C=C(d,p,\\theta)$ such that every measurable, compactly supported $f:\\mathbb R^d\\to\\mathbb K$ satisfies $$\\|f\\|_{L^{p_\\star}(\\mathbb R^d)}^{p}\\ \\le\\ C\\int_{\\mathbb R^d}\\!\\int_{\\mathbb R^d}\\frac{|f(x)-f(y)|^p}{|x-y|^{d+p\\theta}}\\,dx\\,dy\\ =\\ C\\,[f]_{\\theta,p}^{p}.$$ Consequently, for every bounded open $U\\subseteq\\mathbb R^d$ and every $1\\le q\\le p_\\star$ there is $C'=C'(d,p,\\theta,U,q)$ with $\\|f\\|_{L^q(U)}\\le C'\\bigl(\\|f\\|_{L^p(\\mathbb R^d)}+[f]_{\\theta,p}\\bigr)$ for every compactly supported measurable $f$.",
+        "deps": [
+          "lem-slobodeckij-seminorm-controls-dyadic-level-sets",
+          "lem-dyadic-level-set-summability-estimate",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-fatou-lemma",
+          "thm-dominated-convergence",
+          "thm-holder-inequality-for-integrals",
+          "thm-lyapunov-interpolation-inequality-for-l-p-norms",
+          "def-countable-choice"
+        ],
+        "strategy": "Assume first $f\\in L^\\infty$ with compact support, and put $a_k=|\\{|f|>2^k\\}|$. On $A_k\\setminus A_{k+1}$ one has $|f|\\le2^{k+1}$, so the layer-cake bound gives $\\|f\\|_{p_\\star}^{p}\\le2^p\\bigl(\\sum_k2^{kp_\\star}a_k\\bigr)^{p/p_\\star}$. Since $p_\\star/p=d/(d-p\\theta)>1$, convexity gives $\\bigl(\\sum_kb_k^{p_\\star/p}\\bigr)^{p/p_\\star}\\le\\sum_kb_k$ with $b_k=a_k^{(d-p\\theta)/d}2^{pk}$, because $b_k^{p_\\star/p}=a_k2^{kp_\\star}$; hence $\\|f\\|_{p_\\star}^{p}\\le2^p\\sum_ka_k^{(d-p\\theta)/d}2^{pk}$. Lemma [[lem-dyadic-level-set-summability-estimate]] with $T=2^p$ converts the right-hand side into $C\\sum_{a_k\\ne0}a_{k+1}a_k^{-p\\theta/d}2^{pk}$, and Lemma [[lem-slobodeckij-seminorm-controls-dyadic-level-sets]] bounds that sum by $C'[f]_{\\theta,p}^p$. For general compactly supported $f$ truncate at levels $\\pm N$; dominated convergence applies to the seminorm integral because $|f_N-f|^p\\le2^p|f|^p$ and the weighted integral of $|f|^p$ is finite by hypothesis, while $\\|f_N\\|_{p_\\star}\\to\\|f\\|_{p_\\star}$ follows from the pointwise convergence and Fatou. The subcritical consequence follows by Lyapunov interpolation between $L^p$ and $L^{p_\\star}$ for $p\\le q\\le p_\\star$, and from H\\\"older on the bounded set $U$ for $q<p$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eleonora Di Nezza, Giampiero Palatucci and Enrico Valdinoci, Hitchhiker's guide to the fractional Sobolev spaces (arXiv:1104.4345, survey)",
+              "url": "https://arxiv.org/pdf/1104.4345",
+              "locator": "Theorem 6.5 and its proof, printed pp. 45-47; Theorem 6.7 for the extension-domain consequence, printed pp. 47-48"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 3.31 and the interpolation Lemma 1.11, printed pp. 66-67 (the integer-order model of the same layer-cake and interpolation pattern)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-slobodeckij-mollification-approximation-rates",
+        "kind": "lemma",
+        "title": "Mollification rates for compactly supported Slobodeckij functions",
+        "statement": "Assume Countable Choice. For compactly supported g∈W^{θ,p}(ℝᵈ), mollified by a radial η with ∫η=1, gδ is smooth and supported in the δ-neighbourhood of supp g. There are C₁=C₁(d,p,θ) and C₂=C₂(d,p,θ,η) such that ||g−gδ||ₚ≤C₁δᵗʰᵉᵗᵃ[g]θ,p and ||gδ||W¹,ₚ≤C₂(||g||ₚ+δ^{θ−1}[g]θ,p).",
+        "deps": [
+          "def-radial-mollifier-family-in-rn",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-young-convolution-inequality",
+          "thm-minkowski-integral-inequality",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-translation-of-a-function-on-rn",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice"
+        ],
+        "strategy": "Write $\\omega(t):=\\sup_{|z|\\le t}\\|\\tau_zg-g\\|_p$. From the definition of the Slobodeckij seminorm, $[g]_{\\theta,p}^p=\\int_{\\mathbb R^d}\\|\\tau_zg-g\\|_p^p\\,|z|^{-d-p\\theta}dz$, so restricting the integral to the shell $\\frac\\delta4\\le|z|\\le\\frac\\delta2$ and using the monotonicity and subadditivity $\\omega(2t)\\le2\\omega(t)$ of the translation modulus gives $\\omega(\\delta)\\le4\\,\\omega(\\delta/4)\\le C\\delta^{\\theta}[g]_{\\theta,p}$. For (i), $g-g_\\delta=\\int\\eta_\\delta(y)(g-\\tau_{-y}g)\\,dy$, so Minkowski's integral inequality gives $\\|g-g_\\delta\\|_p\\le\\int\\eta_\\delta(y)\\|g-\\tau_{-y}g\\|_p\\,dy\\le\\omega(\\delta)\\le C\\delta^{\\theta}[g]_{\\theta,p}$. For (ii), $\\nabla g_\\delta=\\int(g(x-y)-g(x))\\nabla\\eta_\\delta(y)\\,dy$ because $\\int\\nabla\\eta_\\delta=0$ for a radial mollifier, so $\\|\\nabla g_\\delta\\|_p\\le\\omega(\\delta)\\int|\\nabla\\eta_\\delta|=C\\delta^{-1}\\omega(\\delta)\\le C\\delta^{\\theta-1}[g]_{\\theta,p}$, while $\\|g_\\delta\\|_p\\le\\|g\\|_p$ by Young's convolution inequality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3, Section 3.6, the mollification-rate computation of step (2) and the Lipschitz bounds of step (3), printed pp. 86-88"
+            },
+            {
+              "title": "Eleonora Di Nezza, Giampiero Palatucci and Enrico Valdinoci, Hitchhiker's guide to the fractional Sobolev spaces (arXiv:1104.4345, survey)",
+              "url": "https://arxiv.org/pdf/1104.4345",
+              "locator": "Section 5 and the difference-quotient control of the Gagliardo seminorm, printed pp. 25-38"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-fractional-rellich-kondrachov-compactness-on-bounded-sets",
+        "kind": "theorem",
+        "title": "Subcritical compactness for compactly supported Slobodeckij functions",
+        "statement": "Assume Choice. Let d≥1, 0<θ<1, 1≤p<∞ with pθ<d, and p⋆=dp/(d−pθ). If F⊆W^{θ,p}(ℝᵈ) is supported in one fixed bounded set and sup_{g∈F}(||g||_p+[g]_{θ,p})<∞, with the displayed nonnegative supremum defined as 0 for F=∅, then F is relatively compact in Lᵠ(ℝᵈ) for every 1≤q<p⋆.",
+        "deps": [
+          "thm-fractional-sobolev-inequality-on-euclidean-space",
+          "lem-slobodeckij-mollification-approximation-rates",
+          "thm-rellich-kondrachov-for-p-less-than-n",
+          "thm-rellich-kondrachov-at-the-critical-source-exponent",
+          "thm-morrey-rellich-compactness-for-p-greater-than-n",
+          "thm-lyapunov-interpolation-inequality-for-l-p-norms",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-totally-bounded",
+          "thm-complete-and-totally-bounded-implies-compact",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice",
+          "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "Mollify the bounded family, apply integer-order compactness including the one-dimensional branch, control the mollification error by fractional Sobolev interpolation, and obtain total boundedness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eleonora Di Nezza, Giampiero Palatucci and Enrico Valdinoci, Hitchhiker's guide to the fractional Sobolev spaces (arXiv:1104.4345, survey)",
+              "url": "https://arxiv.org/pdf/1104.4345",
+              "locator": "Theorem 6.7 for the continuous embedding on bounded extension domains and Section 5 for the approximation themes, printed pp. 25-48"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorems 3.45 and 3.49 for the integer-order compactness used on the mollified family, printed pp. 74-76"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-subcritical-compactness-of-the-sobolev-trace",
+        "kind": "theorem",
+        "title": "Subcritical compactness of the Sobolev trace",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, let $\\Omega\\subset\\mathbb R^n$ be a bounded $C^1$ domain, let $T:W^{1,p}(\\Omega)\\to L^p(\\partial\\Omega)$ be the trace of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]], and let $1<p<n$ with $p_\\ast:=\\frac{(n-1)p}{n-p}$. Then $T$ is compact as a map into $L^q(\\partial\\Omega)$ for every $1\\le q<p_\\ast$: every sequence bounded in $W^{1,p}(\\Omega)$ has a subsequence whose traces converge in $L^q(\\partial\\Omega)$. If $p>n$, then the traces of a suitable subsequence converge in $C^{0,\\beta}(\\partial\\Omega)$ for every $0\\le\\beta<1-\\frac np$, hence also in every $L^q(\\partial\\Omega)$, $q<\\infty$; the endpoint case $p=n$ is not claimed.",
+        "deps": [
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-fractional-rellich-kondrachov-compactness-on-bounded-sets",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "lem-fractional-boundary-norm-is-independent-of-atlas",
+          "lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts",
+          "thm-morrey-rellich-compactness-for-p-greater-than-n",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "For $1<p<n$, the sharp trace theorem [[thm-sharp-trace-theorem-for-w-one-p]] bounds $T$ from $W^{1,p}(\\Omega)$ into the fractional boundary space $W^{\\theta,p}(\\partial\\Omega)$, $\\theta=1-\\frac1p$, so a bounded sequence in $W^{1,p}(\\Omega)$ has traces bounded in $W^{\\theta,p}(\\partial\\Omega)$. The boundary norm is the finite sum over an atlas of the Euclidean $W^{\\theta,p}$ norms of compactly supported chart representations ([[def-fractional-sobolev-space-on-a-compact-c-one-boundary]], with atlas independence [[lem-fractional-boundary-norm-is-independent-of-atlas]]). In dimension $d=n-1$ one has $d-p\\theta=(n-1)-(p-1)=n-p>0$, so the critical exponent of $W^{\\theta,p}(\\mathbb R^{n-1})$ is exactly $\\frac{(n-1)p}{n-p}=p_\\ast$; [[thm-fractional-rellich-kondrachov-compactness-on-bounded-sets]] therefore yields, after passing to finitely many diagonal subsequences, convergence of every chart representation in $L^q$. Because each cutoff is compactly supported in its chart and the surface-measure density of the parametrisation is continuous and positive on the compact patch, these convergences transfer to $L^q(\\partial\\Omega)$ with respect to surface measure, and their finite sum, equal to $Tu$ up to the partition of unity, converges as well ([[def-surface-integral-on-a-compact-c-one-hypersurface]], [[lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts]]). For $p>n$, a bounded sequence has a subsequence whose representatives converge uniformly on $\\overline\\Omega$ by [[thm-morrey-rellich-compactness-for-p-greater-than-n]] with $\\beta=0$, and for each $\\beta<1-\\frac np$ in $C^{0,\\beta}(\\overline\\Omega)$; by [[lem-sobolev-trace-agrees-with-continuous-boundary-values]] the trace of such a class is its classical restriction, so the restrictions converge in $C^{0,\\beta}(\\partial\\Omega)$ and hence in every finite $L^q(\\partial\\Omega)$. The endpoint $p=n$ would require the limiting fractional embedding at $\\theta=d/p$ and is deliberately not claimed. The Axiom of Choice is inherited through the published trace theorems [[thm-sharp-trace-theorem-for-w-one-p]] and [[thm-lp-trace-operator-on-a-bounded-c-one-domain]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Sections 3.7 and 3.9: the boundary trace theorem and the compact imbedding theorem, printed pp. 62-64 and 74-77"
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3, Section 3.6 (compactness) with the fractional trace loss recorded in the surrounding chapters, printed pp. 84-90"
+            },
+            {
+              "title": "Eleonora Di Nezza, Giampiero Palatucci and Enrico Valdinoci, Hitchhiker's guide to the fractional Sobolev spaces (arXiv:1104.4345, survey)",
+              "url": "https://arxiv.org/pdf/1104.4345",
+              "locator": "Theorem 6.7 and the compactness framework of Section 6, printed pp. 45-48"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-strong-lq-convergence-implies-strong-convergence-of-subcritical-powers",
+        "kind": "corollary",
+        "title": "Strong convergence of subcritical powers",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^n$ have finite measure, $1\\le q<r<\\infty$, $m\\ge1$, and $u_j\\to u$ in $L^q(\\Omega;\\mathbb R)$ with $\\sup_j\\|u_j\\|_r<\\infty$. Then $u\\in L^r(\\Omega)$ and, for every $1\\le s<r/m$, $|u_j|^{m-1}u_j\\to |u|^{m-1}u$ in $L^s(\\Omega)$. The range is nonempty only when $m<r$; the endpoint $s=r/m$ is not asserted.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "thm-fatou-lemma",
+          "thm-lyapunov-interpolation-inequality-for-l-p-norms",
+          "thm-holder-inequality-for-integrals",
+          "cor-mean-value-theorem",
+          "def-countable-choice"
+        ],
+        "strategy": "This is a locally derived nonlinear consequence of the sourced compactness/interpolation mechanism, not a quoted theorem. The published a.e.-subsequence corollary gives representatives converging a.e. along a subsequence; Fatou yields $\\|u\\|_r\\le\\sup_j\\|u_j\\|_r$. The full difference sequence is uniformly bounded in $L^r$. For $t=ms<r$, finite-measure Holder gives $L^t$ convergence if $t\\le q$; otherwise Lyapunov interpolation between $q$ and $r$ gives it. For $m>1$, the scalar mean-value theorem implies $||a|^{m-1}a-|b|^{m-1}b|\\le m(|a|^{m-1}+|b|^{m-1})|a-b|$; Holder with exponents $m/(m-1)$ and $m$ gives $\\|N(u_j)-N(u)\\|_s\\le m(\\|u_j\\|_{ms}^{m-1}+\\|u\\|_{ms}^{m-1})\\|u_j-u\\|_{ms}\\to0$. For $m=1$ use $N(u)=u$. Countable Choice is inherited through the representative extraction and Fatou interfaces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces, complete 168-page 2026 notes",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 Section 3.6, Theorem 3.44, Remark 3.45 and Example 3.46, printed pp. 85-90."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations, complete 242-page 2014 notes",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Sections 1.5 and 3.10, printed pp. 6-7 and 73-74; locally derived consequences are identified in strategies."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-bounded-map-into-h-one-zero-followed-by-rellich-is-compact-on-ltwo",
+        "kind": "corollary",
+        "title": "A bounded map into $H^1_0$ yields a compact $L^2$ operator",
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$ be a bounded open set and $T:L^2(\\Omega)\\to H^1_0(\\Omega)$ a bounded linear operator. Then $\\iota T:L^2(\\Omega)\\to L^2(\\Omega)$ is compact, where $\\iota:H^1_0(\\Omega)\\hookrightarrow L^2(\\Omega)$ is inclusion. No boundary regularity is needed.",
+        "deps": [
+          "thm-rellich-compactness-from-w-one-p-zero-to-lp",
+          "def-compactly-embedded-normed-spaces",
+          "def-compact-linear-operator",
+          "def-bounded-linear-operator",
+          "def-hk-and-hk-zero-notation",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Given a bounded sequence $f_j$ in $L^2$, boundedness of $T$ makes $Tf_j$ bounded in $H^1_0=W^{1,2}_0$. Apply the zero-boundary $L^p$ Rellich theorem at $p=2$ to obtain a subsequence convergent in $L^2$. The inclusion is bounded since the $L^2$ norm is part of the $H^1$ norm; hence the composition is bounded linear and the compact-operator criterion applies. The Axiom of Choice is inherited through the zero-boundary Rellich supplier. This abstracts the resolvent composition without imposing any elliptic equation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations, complete 242-page 2014 notes",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Sections 1.5 and 3.10, printed pp. 6-7 and 73-74; locally derived consequences are identified in strategies."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-strong-lp-closed-constraints-pass-through-rellich-limits",
+        "kind": "lemma",
+        "title": "Closed target constraints survive compact extraction",
+        "statement": "Assume Countable and Dependent Choice. Let $X$ be a normed space with compact continuous inclusion $J:X\\hookrightarrow L^p(\\Omega)$, $1\\le p<\\infty$, and let $C\\subseteq L^p(\\Omega)$ be closed in norm. Every bounded sequence $u_j\\in X$ with $Ju_j\\in C$ admits a subsequence $Ju_{j_k}\\to v$ in $L^p(\\Omega)$ with $v\\in C$. In particular this applies to any of this page's Rellich inclusions, with their stated domain, exponent and choice hypotheses. This statement does not assert that $v$ belongs to $X$ or that $C$ is weakly closed.",
+        "deps": [
+          "def-compactly-embedded-normed-spaces",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-metric-topology",
+          "def-topological-space",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "strategy": "By the definition of compact inclusion and the metric compactness equivalence, select a target-norm-convergent subsequence of $Ju_j$. If its limit $v$ were outside $C$, openness of the complement would give a target-norm ball about $v$ disjoint from $C$, contradicting convergence and membership of each term in $C$. Thus the constraint survives extraction. Countable and Dependent Choice are the exact compactness-to-subsequence interface; in the concrete Rellich applications carry each theorem's inherited Axiom of Choice separately.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations, complete 242-page 2014 notes",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Sections 1.5 and 3.10, printed pp. 6-7 and 73-74; locally derived consequences are identified in strategies."
+            }
+          ]
+        },
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 458.028,
+    "id": "rellich-kondrachov-and-sobolev-compactness-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Rellich Kondrachov and Sobolev Compactness — Examples",
+    "companion": "rellich-kondrachov-and-sobolev-compactness",
+    "requires": [
+      "rellich-kondrachov-and-sobolev-compactness"
+    ],
+    "items": [
+      {
+        "id": "ex-compactness-of-a-bounded-w-one-p-sequence-on-an-interval",
+        "kind": "example",
+        "title": "Compactness of a bounded $W^{1,p}$ sequence on an interval",
+        "statement": "Assume the Axiom of Choice. Let $I=(0,1)$, $1\\le p\\le\\infty$, and let $(u_j)$ be bounded in $W^{1,p}(I)$. Each $u_j$ has an absolutely continuous representative $u_j^{*}$ on $[0,1]$ with $|u_j^{*}(x)-u_j^{*}(y)|\\le|x-y|^{1-1/p}\\|u_j'\\|_{L^p(I)}$ for $p<\\infty$ (and $|u_j^{*}(x)-u_j^{*}(y)|\\le|x-y|\\|u_j'\\|_\\infty$ for $p=\\infty$), and $\\|u_j^{*}\\|_\\infty\\le C(\\|u_j\\|_{L^p(I)}+\\|u_j'\\|_{L^p(I)})$. Consequently the family $\\{u_j^{*}\\}$ is uniformly bounded and equicontinuous, a subsequence converges uniformly on $[0,1]$, and that subsequence converges in $L^q(I)$ for every finite $q$. This is the one-dimensional instance of the compact embedding, valid for every $1\\le p\\le\\infty$.",
+        "deps": [
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-holder-inequality-for-integrals",
+          "thm-arzela-ascoli-for-real-ck",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-absolute-continuity-on-almost-every-coordinate-line",
+          "def-continuous-real-functions-on-a-compact-metric-space",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Verification. The absolute-continuity representation and the H\\\"older estimate on the line are [[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]]: the FTC gives $|u^{*}(x)-u^{*}(y)|\\le\\int_x^y|u'|\\le|x-y|^{1-1/p}\\|u'\\|_p$ by H\\\"older. The supremum bound follows from the same estimate combined with $\\|u^{*}\\|_\\infty\\le\\|u\\|_1/\\dots$ or directly from the mean value bound $\\|u^{*}\\|_\\infty\\le\\|u\\|_p+\\|u'\\|_p$ obtained by writing $u^{*}(x)=u_{I}+\\int(u'-$mean$)$, so the family is uniformly bounded and equicontinuous; [[thm-arzela-ascoli-for-real-ck]] (applied to real and imaginary parts) gives a uniformly convergent subsequence, and uniform convergence implies convergence in every $L^q(I)$ since $I$ has finite measure. The Axiom of Choice is inherited through [[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Exercise 3.23 and the one-dimensional absolute-continuity discussion of Chapter 3, printed pp. 76-77"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Example 9.3 and Problem 9.32 on the one-dimensional and borderline cases, printed pp. 192-194 and 219"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-critical-sobolev-embedding-is-not-compact",
+        "kind": "counterexample",
+        "title": "The critical Sobolev embedding is not compact",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, $\\Omega=B(0,1)\\subset\\mathbb R^n$, $1\\le p<n$ and $p^{*}=\\frac{np}{n-p}$. The functions $u_k(x):=k^{(n-p)/p}\\max\\{0,1-k|x|\\}$ lie in $W^{1,p}_0(\\Omega)$, satisfy $\\sup_k\\|u_k\\|_{W^{1,p}(\\Omega)}<\\infty$ and $u_k\\to0$ almost everywhere and in $L^p(\\Omega)$, but $\\|u_k\\|_{L^{p^{*}}(\\Omega)}=\\|u_1\\|_{L^{p^{*}}(\\Omega)}>0$ for every $k$; hence no subsequence converges in $L^{p^{*}}(\\Omega)$ and the embedding $W^{1,p}_0(\\Omega)\\hookrightarrow L^{p^{*}}(\\Omega)$ is not compact.",
+        "deps": [
+          "cor-subcritical-compactness-for-w-one-p-zero-on-arbitrary-bounded-open-sets",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-positive-negative-part-and-truncation-calculus-in-w-one-p",
+          "thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use a boundary-vanishing Lipschitz cone in W1p_0, compute the scale-invariant critical norm, and rule out strong subsequences using almost-everywhere convergence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Example 3.46 and the moral following it, printed pp. 89-90"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Example 3.47, printed p. 74"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Example 9.13, printed p. 218"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-rellich-fails-on-rn-by-translations",
+        "kind": "counterexample",
+        "title": "Rellich compactness fails on $\\mathbb R^n$ by translations",
+        "statement": "Let $n\\ge1$, $1\\le p<\\infty$ and let $\\varphi\\in W^{1,p}(\\mathbb R^n)$ be a nonzero compactly supported function (for instance a smooth bump). Put $u_k(x):=\\varphi(x-ke_1)$. Then $\\sup_k\\|u_k\\|_{W^{1,p}(\\mathbb R^n)}=\\|\\varphi\\|_{W^{1,p}(\\mathbb R^n)}<\\infty$, but $\\|u_k-u_l\\|_{L^p(\\mathbb R^n)}^p=2\\|\\varphi\\|_{L^p(\\mathbb R^n)}^p>0$ for all sufficiently large $|k-l|$, so no subsequence converges in $L^p(\\mathbb R^n)$; the embedding $W^{1,p}(\\mathbb R^n)\\hookrightarrow L^p(\\mathbb R^n)$ is not compact.",
+        "deps": [
+          "ex-smooth-compactly-supported-bump",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-translation-of-a-function-on-rn",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "def-l-p-space-as-a-quotient-by-null-functions"
+        ],
+        "strategy": "Translation invariance of Lebesgue measure gives $\\|u_k\\|_{W^{1,p}}=\\|\\varphi\\|_{W^{1,p}}$ and $D_ju_k=\\tau_{ke_1}(D_j\\varphi)$, so the family is bounded. If $|k-l|$ exceeds the diameter of $\\operatorname{supp}\\varphi$, the supports of $u_k$ and $u_l$ are disjoint, so $\\|u_k-u_l\\|_{L^p}^p=\\|\\varphi\\|_{L^p}^p+\\|\\varphi\\|_{L^p}^p>0$; hence the sequence is not Cauchy in $L^p$ and admits no convergent subsequence (any convergent subsequence would be Cauchy).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Example 9.14, printed p. 219"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Example 3.46, printed p. 74"
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026, complete graduate lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "The discussion of escape to infinity after Theorem 3.44, printed p. 89"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-rellich-fails-without-uniform-tail-control",
+        "kind": "counterexample",
+        "title": "The tightness hypothesis of the Fr\\'echet--Kolmogorov criterion cannot be dropped",
+        "statement": "Assume the Axiom of Countable Choice and the Axiom of Dependent Choice. With $\\varphi$ and $u_k(x)=\\varphi(x-ke_1)$ as in [[cex-rellich-fails-on-rn-by-translations]], the family $\\mathcal F=\\{u_k:k\\ge1\\}\\subseteq L^p(\\mathbb R^n)$ is bounded, and it is uniformly translation continuous: $\\sup_k\\|\\tau_hu_k-u_k\\|_{L^p}=\\|\\tau_h\\varphi-\\varphi\\|_{L^p}\\to0$ as $|h|\\to0$. It fails the tightness condition of [[thm-frechet-kolmogorov-compactness-criterion-in-lp]], since for every $R$ the tails $\\int_{|x|>R}|u_k|^p$ equal $\\|\\varphi\\|_p^p$ for all large $k$, and it is not relatively compact in $L^p(\\mathbb R^n)$. Hence the two remaining hypotheses do not by themselves force compactness.",
+        "deps": [
+          "cex-rellich-fails-on-rn-by-translations",
+          "thm-frechet-kolmogorov-compactness-criterion-in-lp",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "def-translation-of-a-function-on-rn",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-totally-bounded",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "strategy": "Rebuild the translation witness against the hypotheses of the criterion, which is a counterexample to the claim that condition (ii) is redundant. Boundedness and uniform translation control are translation invariance statements: $\\|u_k\\|_p=\\|\\varphi\\|_p$ and $\\|\\tau_hu_k-u_k\\|_p=\\|\\tau_h\\varphi-\\varphi\\|_p$, the latter tending to $0$ by continuity of translation in $L^p$. For tightness, fix $R$; for $k$ with $k>R+\\operatorname{diam}(\\operatorname{supp}\\varphi)$ the support of $u_k$ lies outside $B(0,R)$ up to a null set, so the tail equals $\\|\\varphi\\|_p^p>0$; hence no $R$ makes the tails uniformly small. Non-relative-compactness is [[cex-rellich-fails-on-rn-by-translations]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 1.15 and Example 1.16, printed pp. 6-7"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem B.15 and Example 9.14, printed pp. 219 and 360-361"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-morrey-compactness-loses-the-endpoint-holder-exponent",
+        "kind": "counterexample",
+        "title": "Morrey--Rellich compactness loses the endpoint H\\\"older exponent",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, $p>n$, $\\alpha=1-\\frac np$ and let $\\varphi\\in C_c^\\infty(\\mathbb R^n)$ be a nonzero bump with $\\varphi(0)=1$ and support in $B(0,1)$. On $\\Omega=B(0,1)$ put $u_k(x):=k^{-\\alpha}\\varphi(kx)$. Then $\\{u_k\\}$ is bounded in $W^{1,p}(\\Omega)$ (indeed $\\|Du_k\\|_{L^p(\\Omega)}=\\|D\\varphi\\|_{L^p(\\mathbb R^n)}$ and $\\|u_k\\|_{L^p(\\Omega)}\\to0$), the representatives converge uniformly to $0$, but $[u_k]_{C^{0,\\alpha}(\\Omega)}=[\\varphi]_{C^{0,\\alpha}(\\mathbb R^n)}>0$ for every $k$; hence no subsequence converges in $C^{0,\\alpha}(\\overline\\Omega)$, and the endpoint exponent in [[thm-morrey-rellich-compactness-for-p-greater-than-n]] cannot be attained.",
+        "deps": [
+          "thm-morrey-rellich-compactness-for-p-greater-than-n",
+          "def-local-holder-and-c-two-alpha-norms-on-euclidean-balls",
+          "def-sobolev-space-wkp-and-its-norm",
+          "ex-smooth-compactly-supported-bump",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Under $x\\mapsto kx$ the $p$-norms scale as $\\|u_k\\|_p=k^{-\\alpha-n/p}\\|\\varphi\\|_p=k^{-1}\\|\\varphi\\|_p\\to0$ (using $\\alpha+\\frac np=1$) and $\\|Du_k\\|_p=k^{1-\\alpha-n/p}\\|D\\varphi\\|_p=\\|D\\varphi\\|_p$, so the sequence is bounded in $W^{1,p}$ and its elements converge to $0$ uniformly on $\\Omega$. For the H\\\"older seminorm, $|u_k(x)-u_k(y)|/|x-y|^{\\alpha}=|\\varphi(kx)-\\varphi(ky)|/(k|x-y|)^{\\alpha}$, so $[u_k]_{C^{0,\\alpha}(\\Omega)}$ is the $C^{0,\\alpha}$ seminorm of $\\varphi$ over the set $k\\Omega$; for $k\\ge1$ this set contains $\\operatorname{supp}\\varphi$, hence the seminorm equals the global seminorm $[\\varphi]_{C^{0,\\alpha}}$, which is positive because $\\varphi(0)=1$ while $\\varphi$ vanishes off $B(0,1)$. A subsequence converging in $C^{0,\\alpha}(\\overline\\Omega)$ would converge uniformly, hence to $0$, forcing its $C^{0,\\alpha}$ seminorms to tend to $0$, a contradiction. The Axiom of Choice is inherited through [[thm-morrey-rellich-compactness-for-p-greater-than-n]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "The proof of Theorem 3.48 and the excluded endpoint in Theorem 3.49(3), printed pp. 75-76"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 9.31(3) and the strictness of the H\\\"older range, printed p. 218"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-strong-ltwo-convergence-preserves-a-normalisation-constraint",
+        "kind": "example",
+        "title": "Strong $L^2$ convergence preserves an $L^2$-normalisation constraint",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded extension domain and let $u_j\\rightharpoonup u$ weakly in $H^1(\\Omega)$ with $\\sup_j\\|u_j\\|_{H^1(\\Omega)}<\\infty$ and $\\|u_j\\|_{L^2(\\Omega)}=1$ for all $j$. Then $u_j\\to u$ in $L^2(\\Omega)$ and $\\|u\\|_{L^2(\\Omega)}=1$. Thus an $L^2$-normalisation constraint passes to the weak limit, which is exactly the step used when a constrained minimisation or eigenvalue problem is solved by taking a weakly convergent minimising sequence and then upgrading to strong convergence.",
+        "deps": [
+          "cor-weak-h-one-convergence-plus-compactness-gives-strong-ltwo-convergence",
+          "cor-of-reverse-triangle",
+          "def-hk-and-hk-zero-notation",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Verification. Strong convergence in $L^2$ is [[cor-weak-h-one-convergence-plus-compactness-gives-strong-ltwo-convergence]]. The norm is $1$-Lipschitz by the reverse triangle inequality, so $\\bigl|\\|u_j\\|_2-\\|u\\|_2\\bigr|\\le\\|u_j-u\\|_2\\to0$; since $\\|u_j\\|_2=1$ for all $j$, the limit norm is $1$. Consequently the weak limit of a normalised minimising sequence is again normalised, so it is admissible for the constraint set and can be used as a candidate minimiser; in applications this is combined with weak lower semicontinuity of the energy, which is not asserted here. The Axiom of Choice is inherited through [[cor-weak-h-one-convergence-plus-compactness-gives-strong-ltwo-convergence]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Exercise 3.23, whose non-convergent $W^{1,2}$ sequence converges strongly in $L^2$ and shows why the $L^2$ constraint survives, printed p. 77"
+            },
+            {
+              "title": "Viktor Grigoryan, Math 246B: Partial Differential Equations (UCSB, 2011, full course notes)",
+              "url": "https://web.math.ucsb.edu/~grigoryan/246B/lecs/246B.pdf",
+              "locator": "Section 2.4 and Theorem 2.33: compactness of a resolvent upgrades weak convergence of minimising sequences, printed pp. 15-18"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-high-frequency-oscillations-violate-uniform-translation-control",
+        "kind": "counterexample",
+        "title": "High frequencies destroy uniform translation control",
+        "statement": "Let $1\\le p<\\infty$, $c_p=(\\int_0^{2\\pi}|\\sin x|^p\\,dx)^{-1/p}$, and $f_j(x)=c_p\\mathbf1_{(0,2\\pi)}(x)\\sin(jx)$ on $\\mathbb R$. Then $\\|f_j\\|_p=1$ and all supports lie in $[0,2\\pi]$, but with $h_j=\\pi/j\\to0$ one has $\\liminf_j\\|f_j(\\cdot+h_j)-f_j\\|_p\\ge2$. Hence boundedness and tightness do not imply uniform translation continuity or relative compactness in $L^p$.",
+        "deps": [
+          "lem-relative-compactness-implies-uniform-translation-continuity-in-lp",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "def-countable-choice"
+        ],
+        "strategy": "The period decomposition and substitution $y=jx$ give the normalization. On $(0,2\\pi-h_j)$, the shift reverses the sine sign, so the difference has magnitude $2c_p|\\sin(jx)|$. The integral lost over the strip of length $h_j$ is at most $h_j$, so the pth power of the difference norm is at least $2^pc_p^p(\\int_0^{2\\pi}|\\sin(jx)|^p-h_j)\\to2^p$. Relative compactness would force uniform translation continuity by the A-page necessity lemma, a contradiction. Countable Choice is inherited only when invoking that necessity lemma; the displayed estimates themselves use no choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations, complete 242-page 2014 notes",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Sections 1.5 and 3.10, printed pp. 6-7 and 73-74; locally derived consequences are identified in strategies."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-normalised-critical-bubbles-converge-weakly-but-not-strongly-at-p-star",
+        "kind": "example",
+        "title": "Critical bubbles converge weakly but not strongly",
+        "statement": "Assume Countable Choice. Let $n\\ge2$, $1\\le p<n$, $p^*=np/(n-p)$, and choose a nonzero real $\\varphi\\in C_c^\\infty(B(0,1))$ with $\\|\\varphi\\|_{p^*}=1$. On $\\Omega=B(0,1)$ put $u_j(x)=j^{(n-p)/p}\\varphi(jx)$. Then $u_j\\in W^{1,p}_0(\\Omega)$, $\\|u_j\\|_{p^*}=1$, $\\|Du_j\\|_p=\\|D\\varphi\\|_p$, and $\\|u_j\\|_p=j^{-1}\\|\\varphi\\|_p$. Moreover $u_j\\rightharpoonup0$ in $L^{p^*}$ and $u_j\\to0$ a.e.; no subsequence converges strongly in $L^{p^*}$.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "ex-smooth-compactly-supported-bump",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-holder-inequality-for-integrals",
+          "thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity",
+          "thm-dominated-convergence",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-countable-choice"
+        ],
+        "strategy": "This is the smooth-profile version of Hunter Example 3.47 and Kinnunen Example 3.46, with the weak-limit assertion checked locally. Scaling gives all three norms. The supports shrink to the origin, so pointwise convergence holds away from that single null point. Since $p^*>1$, every real bounded linear functional on $L^{p^*}$ is integration against some $g\\in L^{(p^*)\\prime}$ by the published duality theorem. Holder gives $|\\int u_jg|\\le\\|g\\mathbf1_{B(0,1/j)}\\|_{(p^*)\\prime}\\to0$ by dominated convergence. Any strong subsequential limit would be weakly zero and therefore zero, contradicting norm 1. Countable Choice is inherited through duality and dominated convergence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces, complete 168-page 2026 notes",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 Section 3.6, Theorem 3.44, Remark 3.45 and Example 3.46, printed pp. 85-90."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations, complete 242-page 2014 notes",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Sections 1.5 and 3.10, printed pp. 6-7 and 73-74; locally derived consequences are identified in strategies."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-critical-trace-compactness-fails-by-tangential-dilation",
+        "kind": "counterexample",
+        "title": "Critical traces fail compactness under boundary dilation",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, $1<p<n$, $q_\\partial=p(n-1)/(n-p)$, and let $\\Omega$ be a bounded smooth domain having a flat boundary patch at the origin: locally $\\Omega=\\{x_n>0\\}$ and $\\partial\\Omega=\\{x_n=0\\}$. Choose a smooth compactly supported profile $\\psi$ on the closed half-space, supported in a sufficiently small patch, whose boundary restriction $g(x\\prime)=\\psi(x\\prime,0)$ is nonzero. Put $u_j(x)=j^{(n-p)/p}\\psi(jx)$ on $\\Omega$ for sufficiently large $j$. Then $(u_j)$ is bounded in $W^{1,p}(\\Omega)$, while its traces have fixed positive $L^{q_\\partial}(\\partial\\Omega)$ norm and converge to zero at every boundary point except the origin. The critical trace inclusion is not compact even on such a domain.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "ex-smooth-compactly-supported-bump",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "This is a locally checked sharpness witness using the sourced trace scaling, not a quoted trace counterexample. Choose any bounded smooth domain with a flat patch, obtainable by smoothly joining a planar disk to a cap, and take the profile supported where the flat description holds. The bulk gradient scales by $j^{(n-p)/p+1-n/p}=1$ and the bulk Lp norm by $j^{-1}$. For the trace, (n-1)-dimensional change of variables gives $\\|\\gamma u_j\\|_{q_\\partial}=j^{(n-p)/p-(n-1)/q_\\partial}\\|g\\|_{q_\\partial}=\\|g\\|_{q_\\partial}>0$. For smooth functions the published trace operator agrees with boundary restriction. Supports shrink to the origin. If a subsequence converged strongly at the critical boundary exponent, the published a.e.-subsequence theorem on surface measure would identify its limit with zero, contradicting the fixed norm. This disproves any general compactness claim at the critical exponent; the Axiom of Choice is inherited through the trace interface.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations, full graduate notes",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Section 3.7, Theorem 3.14, printed pp. 62-64 (trace); Section 3.9, Exercise 3.24, printed p. 78 (critical scaling)."
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces, complete 168-page 2026 notes",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 Section 3.6, Theorem 3.44, Remark 3.45 and Example 3.46, printed pp. 85-90."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-dilations-can-destroy-tightness-on-an-unbounded-domain",
+        "kind": "counterexample",
+        "title": "Expanding bumps lose tightness",
+        "statement": "Let $1\\le p<\\infty$ and let $\\varphi\\in C_c^\\infty(\\mathbb R^n)$ satisfy $\\|\\varphi\\|_p=1$. Put $f_j(x)=j^{-n/p}\\varphi(x/j)$. Then $\\|f_j\\|_p=1$, $\\|Df_j\\|_p=j^{-1}\\|D\\varphi\\|_p$, and for every fixed $R$, $\\int_{B(0,R)}|f_j|^p\\to0$ and $\\int_{|x|>R}|f_j|^p\\to1$. The family is uniformly translation continuous but not tight or relatively compact in $L^p(\\mathbb R^n)$.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "ex-smooth-compactly-supported-bump",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "Scaling gives the two norms. The mass in a fixed ball is $\\int_{B(0,R/j)}|\\varphi(y)|^pdy\\le\\|\\varphi\\|_\\infty^p|B(0,R/j)|\\to0$. Direct integration along segments gives $\\|\\tau_h f_j-f_j\\|_p\\le |h|j^{-1}\\|D\\varphi\\|_p\\le|h|\\|D\\varphi\\|_p$. Finally, $f_j\\to0$ uniformly on each fixed ball; any Lp convergent subsequence would converge in Lp on each ball and hence have global limit zero, contrary to its constant unit norm. This is dilation escape, with the noncompactness proof independent of a criterion or a choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations, complete 242-page 2014 notes",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Sections 1.5 and 3.10, printed pp. 6-7 and 73-74; locally derived consequences are identified in strategies."
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces, complete 168-page 2026 notes",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 Section 3.6, Theorem 3.44, Remark 3.45 and Example 3.46, printed pp. 85-90."
+            }
+          ]
+        },
+        "dependency_level": 0
+      }
+    ]
+  }
+]

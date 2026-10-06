@@ -1,0 +1,813 @@
+[
+  {
+    "order": 510.06511,
+    "id": "uncertainty-principles-for-fourier-analysis",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "Uncertainty Principles for Fourier Analysis",
+    "companion": "uncertainty-principles-for-fourier-analysis-examples",
+    "requires": [
+      "finite-fourier-analysis-and-the-fast-fourier-transform",
+      "schwartz-space-and-the-plancherel-theorem",
+      "the-identity-theorem-and-the-open-mapping-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-spatial-and-frequency-centres-and-variances",
+        "kind": "definition",
+        "title": "Spatial and frequency centres and variances of an $L^2$ function with finite second moments",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "thm-plancherel"
+        ],
+        "statement": "Assume countable choice ([[def-countable-choice]]). Let $n\\ge1$ and let $f\\in L^2(\\mathbb R^n;\\mathbb C)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]) be nonzero with finite second moments, $$\\int_{\\mathbb R^n}|x|^2|f(x)|^2\\,dx<\\infty,\\qquad \\int_{\\mathbb R^n}|\\xi|^2|\\widehat f(\\xi)|^2\\,d\\xi<\\infty,$$ where $\\widehat f$ is the Plancherel transform of [[thm-plancherel]]. Define the **spatial mean** $a=(a_1,\\dots,a_n)$ and **spatial variance** $V_x(f)$, and the **frequency mean** $b=(b_1,\\dots,b_n)$ and **frequency variance** $V_\\xi(f)$, by $$a_j:=\\frac{1}{\\|f\\|_2^2}\\int x_j|f(x)|^2\\,dx,\\qquad V_x(f):=\\frac{1}{\\|f\\|_2^2}\\int |x-a|^2|f(x)|^2\\,dx,$$ $$b_j:=\\frac{1}{\\|\\widehat f\\|_2^2}\\int \\xi_j|\\widehat f(\\xi)|^2\\,d\\xi,\\qquad V_\\xi(f):=\\frac{1}{\\|\\widehat f\\|_2^2}\\int |\\xi-b|^2|\\widehat f(\\xi)|^2\\,d\\xi .$$ These are the probability-normalised means and variances of the measures $|f(x)|^2dx/\\|f\\|_2^2$ and $|\\widehat f(\\xi)|^2d\\xi/\\|\\widehat f\\|_2^2$.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845)",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 24, pp. 141–146; Proposition 24.1 p. 141; Theorem 24.2 p. 142; Theorem 24.4 and Example 24.5 pp. 144–146; Remark 24.6 pp. 145–146"
+            }
+          ]
+        },
+        "strategy": "Well-definedness only. Each numerator is finite: $|x_j|\\,|f|^2\\le(|x_j||f|)|f|$ with both factors in $L^2$, so Cauchy-Schwarz in complex $L^2$ ([[lem-complex-lp-completeness-density-and-inner-product]]) bounds $\\int|x_j||f|^2$ by $\\||x|f\\|_2\\|f\\|_2$; the same argument applies on the frequency side, and $\\int|x|^2|f|^2<\\infty$ controls $\\int|x_j||f|^2$ by the same inequality. Plancherel ([[thm-plancherel]]) gives $\\|\\widehat f\\|_2=\\|f\\|_2>0$, so both normalising constants are nonzero, and it identifies the frequency measure used throughout the page. The definition is translation and modulation invariant only in the sense made precise by [[lem-centering-by-translation-and-modulation-preserves-the-variance-product]]; no centring is asserted here.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-centering-by-translation-and-modulation-preserves-the-variance-product",
+        "kind": "lemma",
+        "title": "Centring by translation and modulation preserves the variance product",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "def-spatial-and-frequency-centres-and-variances",
+          "def-translation-of-a-function-on-rn",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "lem-schwartz-space-is-dense-in-l-two",
+          "thm-l-one-l-two-agreement-of-fourier-transform",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "thm-plancherel",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ],
+        "statement": "Assume countable choice. Let $f\\in L^2(\\mathbb R^n;\\mathbb C)$ be nonzero with finite second moments, spatial mean $a$, frequency mean $b$, and variances $V_x(f),V_\\xi(f)$ as in [[def-spatial-and-frequency-centres-and-variances]] ([[def-translation-of-a-function-on-rn]]). Define $$g(x):=e^{-2\\pi i\\,b\\cdot x}f(x+a).$$ Then $g\\in L^2$ is nonzero with finite second moments, its spatial mean is $0$ and its frequency mean is $0$, and for every $j$ $$\\|x_jg\\|_2=\\|(x_j-a_j)f\\|_2,\\qquad \\|\\xi_j\\widehat g\\|_2=\\|(\\xi_j-b_j)\\widehat f\\|_2 .$$ Consequently $V_x(g)=V_x(f)$, $V_\\xi(g)=V_\\xi(f)$, and $V_x(g)V_\\xi(g)=V_x(f)V_\\xi(f)$.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845)",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 24, pp. 141–146; Proposition 24.1 p. 141; Theorem 24.2 p. 142; Theorem 24.4 and Example 24.5 pp. 144–146; Remark 24.6 pp. 145–146"
+            }
+          ]
+        },
+        "strategy": "Translation is measure preserving and the modulation factor has unit modulus ([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]], [[cor-c-one-change-of-variables-for-l-one-functions]]), so $g\\in L^2$ is nonzero, $\\|g\\|_2=\\|f\\|_2$, $\\int x_j|g|^2=\\int(x_j-a_j)|f|^2=0$, and $V_x(g)=V_x(f)$. For the frequency side the transform laws ([[thm-fourier-translation-modulation-dilation-and-reflection-laws]]) give $\\widehat{\\tau_{-a}f}(\\xi)=e^{2\\pi ia\\cdot\\xi}\\widehat f(\\xi)$ and $\\widehat{M_{-b}h}(\\xi)=\\widehat h(\\xi+b)$; hence $|\\widehat g(\\xi)|=|\\widehat f(\\xi+b)|$. Substituting $\\xi\\mapsto\\xi-b$ gives $\\int\\xi_j|\\widehat g|^2=\\int(\\eta_j-b_j)|\\widehat f|^2=0$ and $V_\\xi(g)=V_\\xi(f)$; Plancherel ([[thm-plancherel]]) keeps $\\|\\widehat g\\|_2=\\|g\\|_2$ and $\\|\\widehat f\\|_2=\\|f\\|_2$. This is the phase computation of Sheagren §3, equations (3.3)–(3.7), and of Laugesen Example 24.5; the sign of the modulation is fixed by this library's $e^{-2\\pi ix\\cdot\\xi}$ convention.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-position-derivative-commutator-estimate",
+        "kind": "lemma",
+        "title": "The coordinate inequality $\\|x_jf\\|_2\\|\\partial_jf\\|_2\\ge\\frac12\\|f\\|_2^2$",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "lem-sobolev-integration-by-parts-for-dual-exponents",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "thm-dominated-convergence",
+          "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $j\\in\\{1,\\dots,n\\}$ and $f\\in H^1(\\mathbb R^n;\\mathbb C)$ with $xf\\in L^2(\\mathbb R^n;\\mathbb C^n)$. Here $H^1=W^{1,2}$ under the regular-distribution identification of [[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]], and $D_jf\\in L^2$ denotes the weak partial derivative. Then $$\\|x_jf\\|_2\\,\\|D_jf\\|_2\\ge \\tfrac12\\|f\\|_2^2.$$ By the Fourier characterization of $H^1$, this is the coordinate estimate on the natural domain where both $|x|f$ and $|\\xi|\\widehat f$ lie in $L^2$. Both sides vanish when $f=0$; for nonzero $f$ the right side is positive.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845)",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 24, pp. 141–146; Proposition 24.1 p. 141; Theorem 24.2 p. 142; Theorem 24.4 and Example 24.5 pp. 144–146; Remark 24.6 pp. 145–146"
+            }
+          ]
+        },
+        "strategy": "Fix $x'\\in\\mathbb R^{n-1}$ and apply one-dimensional integration by parts ([[lem-complex-integration-by-parts-on-intervals-and-decaying-lines]]) to $u(t)=t$, $v(t)=|f(t,x')|^2$. Both are $C^1$, $uv$ tends to $0$ at $\\pm\\infty$ by rapid decay, and $u'v=|f|^2$, $uv'=t\\,2\\operatorname{Re}(\\overline f\\,\\partial_jf)$ are $t$-integrable by [[lem-schwartz-functions-and-all-derivatives-are-integrable]]. Hence $\\int_{\\mathbb R}t\\,\\partial_j(|f(t,x')|^2)\\,dt=-\\int_{\\mathbb R}|f(t,x')|^2\\,dt$. Fubini ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]) applies because $\\int|t||f||\\partial_jf|\\le\\|x_jf\\|_2\\|\\partial_jf\\|_2<\\infty$, and $\\partial_j(|f|^2)=2\\operatorname{Re}(\\overline f\\,\\partial_jf)$ by the product rule ([[thm-product-rule]]). Therefore $\\|f\\|_2^2=-2\\operatorname{Re}\\int x_j\\overline f\\,\\partial_jf$, and Cauchy-Schwarz in complex $L^2$ ([[lem-complex-lp-completeness-density-and-inner-product]]) bounds the right side by $2\\|x_jf\\|_2\\|\\partial_jf\\|_2$. This is the integration-by-parts core of Sheagren §3, (3.8)–(3.12), and Laugesen Remark 24.6.2.",
+        "dependency_level": 0
+      },
+      {
+        "id": "rem-heisenberg-uncertainty-is-owned-by-functional-analysis",
+        "kind": "remark",
+        "title": "The sharp Heisenberg theorem is owned by functional analysis",
+        "deps": [
+          "def-countable-choice",
+          "lem-centering-by-translation-and-modulation-preserves-the-variance-product",
+          "lem-position-derivative-commutator-estimate"
+        ],
+        "statement": "Assume countable choice, as does the cited theorem. The sharp Heisenberg uncertainty inequality and its equality classification are owned by functional analysis: [[thm-heisenberg-uncertainty-inequality]] states that for $f\\in\\mathcal S(\\mathbb R^n)$ and $a,b\\in\\mathbb R^n$ $$\\big\\||x-a|f\\big\\|_2\\big\\||\\xi-b|\\widehat f\\big\\|_2\\ge\\frac{n}{4\\pi}\\|f\\|_2^2,$$ with equality for nonzero $f$ exactly for $f(x)=c\\exp(-\\lambda|x-a|^2/2)\\exp(2\\pi ib\\cdot x)$, $c\\ne0$, $\\lambda>0$. Under this library's $e^{-2\\pi ix\\cdot\\xi}$ convention its coordinate form is $\\|x_jf\\|_2\\|\\xi_j\\widehat f\\|_2\\ge(4\\pi)^{-1}\\|f\\|_2^2$. This page does not re-prove that classification: [[lem-position-derivative-commutator-estimate]] supplies the local real-variable coordinate core, [[lem-centering-by-translation-and-modulation-preserves-the-variance-product]] centres the variance formulation, and [[cor-dimensional-heisenberg-uncertainty-inequality]] records the summed $n$-dimensional consequence used below. Gaussian attainment in this convention is checked in [[ex-gaussian-attains-heisenberg-equality]].",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Theorem 14.15, pp. 385–386"
+            },
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            }
+          ]
+        },
+        "strategy": "The remark records ownership and the exact constant rather than a new proof. The quoted statement is FA-23's published item with its hypotheses (Schwartz class, countable choice, centres $a,b$) and equality family; the coordinate form is its specialisation to the coordinate functions, and the local items named above are the page's route to the summed consequence. No statement of FA-23 is duplicated here, and the remark consumes no example-leaf item.",
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-dimensional-heisenberg-uncertainty-inequality",
+        "kind": "corollary",
+        "title": "The summed $n$-dimensional Heisenberg inequality",
+        "deps": [
+          "def-countable-choice",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "lem-position-derivative-commutator-estimate",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces",
+          "thm-plancherel"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$ and let $f\\in H^1(\\mathbb R^n;\\mathbb C)$ satisfy $xf\\in L^2(\\mathbb R^n;\\mathbb C^n)$. Write $\\widehat f=\\mathcal F_2f$ for its Plancherel transform. Then $$\\bigl\\||x|f\\bigr\\|_2\\,\\bigl\\||\\xi|\\widehat f\\bigr\\|_2\\ge \\frac{n}{4\\pi}\\|f\\|_2^2.$$ The Fourier characterization of $H^1$ makes this exactly the domain where both spatial and Plancherel-frequency second moments are finite. For $f=0$ both sides vanish. Equality cases on this full domain are not decided here; the published sharp equality theorem is stated for Schwartz functions.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845)",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 24, pp. 141–146; Proposition 24.1 p. 141; Theorem 24.2 p. 142; Theorem 24.4 and Example 24.5 pp. 144–146; Remark 24.6 pp. 145–146"
+            }
+          ]
+        },
+        "strategy": "Fix $j\\in\\{1,\\dots,n\\}$. By [F1] the weak derivative $D_jf$ is in $L^2$, and by [F2]–[F3] $$\\|D_jf\\|_2=\\|\\mathcal F_2(D_jf)\\|_2=2\\pi\\|\\xi_j\\widehat f\\|_2.$$ Applying the coordinate estimate [F5] and dividing by $2\\pi$ yields $$\\|x_jf\\|_2\\,\\|\\xi_j\\widehat f\\|_2\\ge\\frac1{4\\pi}\\|f\\|_2^2.$$ [A1, F1, F2, F3, F5, given] Summing the inequalities of step 1.1 gives $$\\sum_{j=1}^n\\|x_jf\\|_2\\,\\|\\xi_j\\widehat f\\|_2\\ge\\frac{n}{4\\pi}\\|f\\|_2^2.$$ By [F4] the left side is at most $$\\Bigl(\\sum_j\\|x_jf\\|_2^2\\Bigr)^{1/2} \\Bigl(\\sum_j\\|\\xi_j\\widehat f\\|_2^2\\Bigr)^{1/2} =\\bigl\\||x|f\\bigr\\|_2\\,\\bigl\\||\\xi|\\widehat f\\bigr\\|_2,$$ where the equalities follow by summing the coordinate integrals. This proves the asserted inequality, including $n=1$.",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-support-measure-uncertainty-inequality",
+        "kind": "theorem",
+        "title": "The support-measure uncertainty inequality $|E||F|\\ge1$",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-l-one-fourier-transform-is-well-defined",
+          "thm-holder-inequality-for-integrals",
+          "thm-l-one-l-two-agreement-of-fourier-transform",
+          "thm-plancherel",
+          "thm-riemann-lebesgue",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ],
+        "statement": "Assume countable choice. Let $f\\in L^2(\\mathbb R^n;\\mathbb C)$ be nonzero and let $E,F\\subseteq\\mathbb R^n$ be Lebesgue measurable sets of finite measure such that $f=0$ almost everywhere on $\\mathbb R^n\\setminus E$ and $\\widehat f=0$ almost everywhere on $\\mathbb R^n\\setminus F$. Here $\\widehat f$ denotes the continuous $L^1$ transform ([[lem-l-one-fourier-transform-is-well-defined]]), which is defined because $|E|<\\infty$ forces $f\\in L^1$. Then $$|E|\\,|F|\\ge1 .$$ No regularity of $E$ or $F$ beyond measurability and finite measure is assumed, and no complex analysis is used.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845)",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 24, pp. 141–146; Proposition 24.1 p. 141; Theorem 24.2 p. 142; Theorem 24.4 and Example 24.5 pp. 144–146; Remark 24.6 pp. 145–146"
+            },
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            }
+          ]
+        },
+        "strategy": "The function is integrable and its transform is bounded. Since $f=0$ almost everywhere on $\\mathbb R^n\\setminus E$, one has $\\int_{\\mathbb R^n}|f|=\\int_E|f|$; applying [F3] with $u=|f|$ and $v=\\mathbf 1_E$, whose $\\mathcal L^2$ norm is $|E|^{1/2}<\\infty$, gives $\\int_E|f|\\le\\|f\\|_2|E|^{1/2}<\\infty$. Hence $f\\in L^1\\cap L^2$, its $L^1$ transform $\\widehat f$ is defined and continuous [F2], and $|\\widehat f(\\xi)|\\le\\|f\\|_1\\le|E|^{1/2}\\|f\\|_2$ for every $\\xi\\in\\mathbb R^n$. Plancherel size from the two supports. As $f\\in L^1\\cap L^2$, the continuous transform $\\widehat f$ represents $\\mathcal F_2f$ almost everywhere [F4]; since $\\widehat f=0$ almost everywhere off $F$, also $\\mathcal F_2f=0$ almost everywhere off $F$. Therefore $\\mathcal F_2f$ is represented by the function that vanishes off $F$ and equals $\\widehat f$ on $F$, and $$\\int_{\\mathbb R^n}|\\mathcal F_2f|^2=\\int_F|\\widehat f|^2\\le|F|\\,\\sup_{\\xi\\in\\mathbb R^n}|\\widehat f(\\xi)|^2\\le|E|\\,|F|\\,\\|f\\|_2^2 ,$$ where the last inequality inserts the uniform bound of step 1.1 and $|F|<\\infty$ is used. Conclusion. Plancherel's isometry [F4] gives $\\|\\mathcal F_2f\\|_2^2=\\|f\\|_2^2$, so step 2.1 yields $\\|f\\|_2^2\\le|E||F|\\|f\\|_2^2$. Since $f$ is nonzero, $\\|f\\|_2^2>0$, and dividing gives $|E||F|\\ge1$.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-compact-support-gives-an-entire-fourier-laplace-transform",
+        "kind": "lemma",
+        "title": "Compact support gives an entire Fourier-Laplace transform by slices",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-compact-space",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-fourier-transform-on-l-one-of-rn",
+          "lem-l-one-fourier-transform-is-well-defined",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-dominated-convergence",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ],
+        "statement": "Let $n\\ge1$ and let $f\\in L^1(\\mathbb R^n;\\mathbb C)$ vanish almost everywhere outside a compact set $K\\subseteq\\mathbb R^n$. Define $$F(z):=\\int_{\\mathbb R^n}f(x)e^{-2\\pi i\\,x\\cdot z}\\,dx,\\qquad z\\in\\mathbb C^n .$$ Then the integral converges absolutely for every $z$ and its value does not depend on the representative of the $L^1$ class; for every $j$ and every fixed values of the other $n-1$ complex coordinates, the coordinate slice $w\\mapsto F(z_1,\\dots,z_{j-1},w,z_{j+1},\\dots,z_n)$ is entire on $\\mathbb C$, with $$\\frac{\\partial}{\\partial z_j}F(z)=\\int_{\\mathbb R^n}f(x)\\,(-2\\pi ix_j)e^{-2\\pi i\\,x\\cdot z}\\,dx ;$$ and $F(x)=f^{\\wedge}(x)$ for every $x\\in\\mathbb R^n$, where $f^{\\wedge}$ is the $L^1$ transform of [[def-fourier-transform-on-l-one-of-rn]].",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Mathilda Lindell, The Phragmén–Lindelöf Principle and Its Applications (Lund University bachelor's thesis 2025:K15)",
+              "url": "https://lup.lub.lu.se/luur/download?func=downloadFile&recordOId=9206853&fileOId=9206856",
+              "locator": "§3.2 and Lemmas 3.2.2–3.2.4, printed pp. 12–16 (PDF pp. 24–28); §2.2 sector Phragmén–Lindelöf"
+            }
+          ]
+        },
+        "strategy": "Fix a representative. If $K=\\varnothing$ then $f=0$ almost everywhere, so every integral below vanishes by [F3], giving $F\\equiv0$, and all claims of the lemma hold trivially; assume $K\\ne\\varnothing$ and let $M$ be the bound of [F5]. Multiplying $f$ by the indicator of the closed set $K$ produces a measurable representative in $L^1$ that vanishes everywhere outside $K$ and agrees with $f$ almost everywhere, so no integral below changes ([F3, F6]); from here we use this representative. Absolute convergence and representative independence. For $x\\in K$ the exponential law and modulus formula [F1] give $|f(x)e^{-2\\pi ix\\cdot z}|=|f(x)|e^{2\\pi x\\cdot\\operatorname{Im}z}\\le|f(x)|e^{2\\pi M|\\operatorname{Im}z|}$, while for $x\\notin K$ both sides vanish. Hence $\\int_{\\mathbb R^n}|f(x)e^{-2\\pi ix\\cdot z}|\\,dx\\le e^{2\\pi M|\\operatorname{Im}z|}\\|f\\|_1<\\infty$ for the given $z$, and since $z$ was arbitrary the integral defining $F$ converges absolutely at every point of $\\mathbb C^n$. If $\\tilde f=f$ almost everywhere is a second representative, the two integrands agree almost everywhere and are both integrable, so the two integrals agree by [F3]; thus the value is representative-independent. The slice as a one-variable integral. Fix $j$ and complex numbers $z_k$ for $k\\ne j$, and set $g(x):=f(x)e^{-2\\pi i\\sum_{k\\ne j}x_kz_k}$. Then $g$ is measurable and $|g(x)|\\le|f(x)|e^{2\\pi M|\\operatorname{Im}z|}$ for every $x$ by the same bound as in step 1.2, so $g\\in L^1$; for $w\\in\\mathbb C$ define $h(w):=\\int_{\\mathbb R^n}g(x)e^{-2\\pi ix_jw}\\,dx$. By the addition law [F1] the integrand equals $f(x)e^{-2\\pi ix\\cdot z'}$ with $z'=(z_1,\\dots,z_{j-1},w,z_{j+1},\\dots,z_n)$, so $h(w)=F(z')$ and step 1.2 shows that the integral for $h(w)$ converges absolutely at every $w\\in\\mathbb C$. Difference quotients are integrals. Fix $w\\in\\mathbb C$ and $s\\in\\mathbb C\\setminus\\{0\\}$. For every $x$ the addition law [F1] gives $e^{-2\\pi ix_j(w+s)}-e^{-2\\pi ix_jw}=e^{-2\\pi ix_jw}(e^{-2\\pi ix_js}-1)$, and both integrands $g(x)e^{-2\\pi ix_j(w+s)}$ and $g(x)e^{-2\\pi ix_jw}$ are integrable because $g\\in L^1$ and the exponential factors are bounded on the support of $g$ by step 2.1. Applying additivity and scaling from [F3] therefore yields $$\\frac{h(w+s)-h(w)}{s}=\\int_{\\mathbb R^n}g(x)e^{-2\\pi ix_jw}\\,\\frac{e^{-2\\pi ix_js}-1}{s}\\,dx .$$ Uniform remainder estimate. Put $S:=S_j\\le M$ and $L:=\\int g(x)(-2\\pi ix_j)e^{-2\\pi ix_jw}\\,dx$, which is absolutely convergent since $|x_j|\\le S$ on the support of $g$. If $S=0$, step 3.1 is identically zero and $L=0$. Otherwise, for any $\\varepsilon>0$, [F1] gives $\\delta>0$ such that $|(e^\\zeta-1)/\\zeta-1|<\\varepsilon$ when $0<|\\zeta|<\\delta$. For $0<|s|<\\delta/(2\\pi S)$, setting $\\zeta=-2\\pi ix_js$ therefore bounds the difference between the quotient integrand and its limiting integrand by $2\\pi S\\varepsilon e^{2\\pi S|\\operatorname{Im}w|}|g(x)|$ on $K$, with zero remainder when $x_j=0$. By [F2] and linearity [F3], $$\\left|\\frac{h(w+s)-h(w)}s-L\\right|\\le2\\pi S\\varepsilon e^{2\\pi S|\\operatorname{Im}w|}\\|g\\|_1.$$ Since $\\varepsilon$ is arbitrary, the complex difference quotient tends to $L$ directly, without selecting a sequence. Conclusion. The limit in step 4.1 shows that $h$ is complex differentiable at every $w\\in\\mathbb C$ with derivative $h'(w)=\\int_{\\mathbb R^n}g(x)(-2\\pi ix_j)e^{-2\\pi ix_jw}\\,dx$; a function holomorphic on all of $\\mathbb C$ is entire by definition ([F7]). Rewriting the derivative integrand gives the displayed formula for $\\partial F/\\partial z_j$. At real $z=\\xi\\in\\mathbb R^n$ the defining integral of $F$ is literally the $L^1$ transform formula, so $F(\\xi)=\\widehat f(\\xi)$ at every real $\\xi$ by [F4].",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-qualitative-compact-support-uncertainty-principle",
+        "kind": "theorem",
+        "title": "A nonzero L1 function and its transform cannot both have compact support",
+        "deps": [
+          "cor-uniqueness-of-the-l-one-fourier-transform",
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "lem-compact-support-gives-an-entire-fourier-laplace-transform",
+          "lem-separately-holomorphic-vanishing-on-a-real-box-is-zero",
+          "thm-heine-borel-rn"
+        ],
+        "statement": "Assume countable choice, used through the $L^1$ uniqueness theorem. Let $f\\in L^1(\\mathbb R^n;\\mathbb C)$ and let $K_1,K_2\\subseteq\\mathbb R^n$ be compact sets such that $f=0$ almost everywhere on $\\mathbb R^n\\setminus K_1$ and $f^{\\wedge}=0$ on $\\mathbb R^n\\setminus K_2$, where $f^{\\wedge}$ is the continuous $L^1$ transform ([[def-fourier-transform-on-l-one-of-rn]]). Then $f=0$ almost everywhere. In particular, if $f$ is nonzero and $L^1$ with compact support, its transform cannot have compact support.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845)",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 24, pp. 141–146; Proposition 24.1 p. 141; Theorem 24.2 p. 142; Theorem 24.4 and Example 24.5 pp. 144–146; Remark 24.6 pp. 145–146"
+            },
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            }
+          ]
+        },
+        "strategy": "The entire continuation of $f$. By [F2] there is a function $F:\\mathbb C^n\\to\\mathbb C$ with entire coordinate slices and $F(x)=\\widehat f(x)$ for every real $x$; hence $F$ is separately holomorphic and vanishes wherever $\\widehat f$ does. A box outside the compact frequency support. Since $K_2$ is bounded by [F5] and $n\\ge1$, choose $R>0$ such that $K_2\\subseteq\\{|x|\\le R\\}$ and take $\\xi=(R+1,0,\\ldots,0)\\notin K_2$. Since $K_2$ is closed, its complement is a nonempty open set; [F5] supplies a nondegenerate real box there. The argument also applies when $K_2$ is empty. Vanishing of the continuation. On the box from step 1.2, $\\widehat f=0$ by hypothesis and $F=\\widehat f$ by step 1.1. Thus the separately holomorphic function $F$ vanishes on a nondegenerate real box. By [F3], $F\\equiv0$ on $\\mathbb C^n$, so $\\widehat f\\equiv0$ on $\\mathbb R^n$. Return to the original function. The $L^1$ functions $f$ and $0$ now have equal transforms, so [F1, F4] gives $f=0$ almost everywhere. Consequently a nonzero compactly supported $L^1$ function cannot also have compactly supported transform.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-hardy-entire-growth-rigidity",
+        "kind": "lemma",
+        "title": "Entire rigidity under Gaussian growth and real-axis decay",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-complex-logarithms-principal-logarithm-and-complex-powers",
+          "def-real-power",
+          "thm-algebra-of-complex-derivatives",
+          "thm-chain-rule-for-complex-derivatives",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-complex-numbers-form-a-field",
+          "thm-liouville-bounded-entire-function",
+          "thm-maximum-modulus-principle-with-boundary-and-infinity-control",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "statement": "Let $a>0$, $b>0$ and let $F:\\mathbb C\\to\\mathbb C$ be entire. Suppose there are $C_1,C_2\\ge0$ with $$|F(x+iy)|\\le C_1e^{\\pi y^2/a},\\qquad |F(x)|\\le C_2e^{-\\pi bx^2}\\qquad(x,y\\in\\mathbb R).$$ Then: (i) if $ab>1$, $F\\equiv0$; (ii) if $ab=1$, $F(z)=F(0)e^{-\\pi z^2/a}$ for every $z\\in\\mathbb C$. All constants are absorbed into the two bounds; no further hypothesis on $F$ is imposed.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Terence Tao, Hardy's uncertainty principle (blog post, 18 February 2009)",
+              "url": "https://terrytao.wordpress.com/2009/02/18/hardys-uncertainty-principle/",
+              "locator": "Section 1, the complex-variable proof with the sector Phragmén–Lindelöf tweak"
+            },
+            {
+              "title": "Mathilda Lindell, The Phragmén–Lindelöf Principle and Its Applications (Lund University bachelor's thesis 2025:K15)",
+              "url": "https://lup.lub.lu.se/luur/download?func=downloadFile&recordOId=9206853&fileOId=9206856",
+              "locator": "§3.2 and Lemmas 3.2.2–3.2.4, printed pp. 12–16 (PDF pp. 24–28); §2.2 sector Phragmén–Lindelöf"
+            },
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            }
+          ]
+        },
+        "strategy": "To prove the asserted cases (i) and (ii), it suffices to treat $ab\\ge1$; assume $b\\ge1/a$ throughout the proof. This makes the real-axis bound for the critical function uniform on the two anchor rays used in the sector argument. The critical function. Put $\\Phi(z):=e^{\\pi z^2/a}F(z)$. The map $z\\mapsto\\pi z^2/a$ is a polynomial, hence complex differentiable everywhere, and composing it with the entire exponential and multiplying by the entire $F$ shows that $\\Phi$ is entire ([F1, F2]). For real $x$ and $y$, using $|e^{\\pi z^2/a}|=e^{\\pi\\operatorname{Re}(z^2)/a}$ and the two hypotheses, $$|\\Phi(x)|=e^{\\pi x^2/a}|F(x)|\\le C_2e^{-\\pi(b-1/a)x^2}\\le C_2,\\qquad |\\Phi(iy)|=e^{-\\pi y^2/a}|F(iy)|\\le C_1,$$ and, since $\\operatorname{Re}(z^2)=(\\operatorname{Re}z)^2-(\\operatorname{Im}z)^2$, $$|\\Phi(z)|=e^{\\pi((\\operatorname{Re}z)^2-(\\operatorname{Im}z)^2)/a}|F(z)|\\le C_1e^{\\pi(\\operatorname{Re}z)^2/a}.$$ In particular $|\\Phi(0)|=|F(0)|\\le C_2\\le C$. Sector data. Fix $\\delta>0$ and any $\\theta$ with $\\arctan\\frac{\\pi}{2a\\delta}<\\theta<\\frac\\pi2$; equivalently $\\pi\\cos^2\\theta/a<\\delta\\sin2\\theta$. Fix also $\\varepsilon>0$ small enough that $(2+\\varepsilon)\\theta<\\pi$, and put $$\\sigma_\\varepsilon:=\\cos\\tfrac{(2+\\varepsilon)\\theta}2>0,\\qquad \\eta_\\varepsilon:=\\tfrac\\pi2-\\tfrac{(2+\\varepsilon)\\theta}2,$$ defining two auxiliary functions on the sectors $S_1=\\{0<\\arg z<\\theta\\}$ and $S_2=\\{\\pi-\\theta<\\arg z<\\pi\\}$, both contained in the slit plane $S$ of [F3]: $$h_\\varepsilon(z):=\\exp\\!\\big(i\\varepsilon\\,e^{i\\mu}\\,z^{2+\\varepsilon}_{\\mathrm{pr}}\\big),\\qquad q_\\delta(z):=e^{i\\delta z^2}\\ \\ (z\\in S_1),\\qquad q_\\delta(z):=e^{-i\\delta z^2}\\ \\ (z\\in S_2),$$ with $\\mu:=\\eta_\\varepsilon$ on $S_1$ and $\\mu:=\\eta_\\varepsilon-(2+\\varepsilon)(\\pi-\\theta)$ on $S_2$. Since $z^{2+\\varepsilon}_{\\mathrm{pr}}$ is holomorphic on $S$ and exponentials and polynomials are entire, $h_\\varepsilon$ and $q_\\delta$ are holomorphic on each sector, and so is $G_\\varepsilon:=h_\\varepsilon q_\\delta\\Phi$ ([F1, F2, F3]). For $z=re^{i\\alpha}$ in the closure of either sector, $|z^{2+\\varepsilon}_{\\mathrm{pr}}|=r^{2+\\varepsilon}$ and $$|h_\\varepsilon(z)|=\\exp\\!\\big(-\\varepsilon r^{2+\\varepsilon}\\sin(\\mu+(2+\\varepsilon)\\alpha)\\big)\\le e^{-\\varepsilon\\sigma_\\varepsilon r^{2+\\varepsilon}}\\le1,$$ because $\\mu+(2+\\varepsilon)\\alpha\\in[\\tfrac\\pi2-\\tfrac{(2+\\varepsilon)\\theta}2,\\tfrac\\pi2+\\tfrac{(2+\\varepsilon)\\theta}2]$ for $\\alpha\\in[0,\\theta]$ on $S_1$ and for $\\alpha\\in[\\pi-\\theta,\\pi]$ on $S_2$. Also $|q_\\delta(z)|=e^{\\mp\\delta\\operatorname{Im}(z^2)}$ with the sign making $|q_\\delta|\\le1$ on the sector. Boundary bounds. On the far ray $\\arg z=\\theta$ of $S_1$ one has $\\operatorname{Re}z=r\\cos\\theta$ and, by [F6], $|q_\\delta(z)|=e^{-\\delta r^2\\sin2\\theta}$, so steps 1.1 and 1.2 give $|G_\\varepsilon(z)|\\le|q_\\delta(z)||\\Phi(z)|\\le C_1\\exp\\big(r^2(\\pi\\cos^2\\theta/a-\\delta\\sin2\\theta)\\big)\\le C_1\\le C$ by the choice of $\\theta$. On the far ray $\\arg z=\\pi-\\theta$ of $S_2$ one has $\\operatorname{Re}z=-r\\cos\\theta$ and $|q_\\delta(z)|=e^{-\\delta r^2\\sin2\\theta}$ as well, so the same computation gives $|G_\\varepsilon(z)|\\le C_1\\le C$ there. On the anchor rays $\\arg z=0$ and $\\arg z=\\pi$ the identity [F6] gives $|q_\\delta(z)|=1$, and the display of step 1.2 gives $|h_\\varepsilon|\\le1$; hence $|G_\\varepsilon(z)|\\le C_2\\le C$ there, and at $z=0$ one has $|G_\\varepsilon(0)|=|F(0)|\\le C$. Boundedness on the sectors. In the closure of either sector, steps 1.1 and 1.2 give $$|G_\\varepsilon(z)|\\le C_1\\exp\\big(r^2(\\tfrac\\pi a+2\\delta)-\\varepsilon\\sigma_\\varepsilon r^{2+\\varepsilon}\\big)\\longrightarrow0\\qquad(r\\to\\infty),$$ because $\\cos^2\\alpha\\le1$ and $|\\sin2\\alpha|\\le1$ on the compact angular interval; this is the control at infinity. Step 2.1 gives $|G_\\varepsilon|\\le C$ on the boundary rays, and $|G_\\varepsilon|$ is continuous on the closed sector (the principal power extends continuously from $S$ to the closure of each sector, and $|G_\\varepsilon|$ is a finite product of continuous functions), so every boundary point has a neighbourhood $V$ with $|G_\\varepsilon|<C+\\varepsilon'$ on $V$ intersected with the sector. The maximum modulus principle [F5], applied to the domains $S_1$ and $S_2$, therefore gives $|G_\\varepsilon|\\le C$ on both sectors. Removing the auxiliary and the sector truncation. Fix $\\delta>0$. The perturbation $h_\\varepsilon$ tends to $1$ pointwise as $\\varepsilon\\to0$ along any sequence with $(2+\\varepsilon)\\theta<\\pi$, so step 3.1 gives $|q_\\delta\\Phi|\\le C$ on each sector $S_1(\\theta),S_2(\\theta)$ for every admissible $\\theta\\in(\\arctan\\frac{\\pi}{2a\\delta},\\frac\\pi2)$. Since $\\theta$ was arbitrary in that interval and the sectors with larger $\\theta$ contain those with smaller $\\theta$, while $q_\\delta$ does not depend on $\\theta$, taking $\\theta\\to\\pi/2$ yields $|e^{i\\delta z^2}\\Phi(z)|\\le C$ for every $z$ with $0<\\arg z<\\pi/2$ and $|e^{-i\\delta z^2}\\Phi(z)|\\le C$ for every $z$ with $\\pi/2<\\arg z<\\pi$. Letting now $\\delta\\downarrow0$ along any sequence, $|q_\\delta(z)|\\to1$ at each fixed $z$ by [F1] (the exponent $i\\delta z^2\\to0$), so $$|\\Phi(z)|\\le C\\qquad(0<\\arg z<\\pi,\\ z\\ne0).$$ The lower half-plane. The function $\\tilde\\Phi(z):=\\Phi(-z)$ is entire ([F2]) and satisfies the same three estimates as $\\Phi$ in step 1.1, since the bounds $|F(-x)|\\le C_2e^{-\\pi bx^2}$, $|F(-iy)|\\le C_1e^{\\pi y^2/a}$ and the growth estimate only involve absolute values and $(\\operatorname{Re}(-z))^2=(\\operatorname{Re}z)^2$. Applying steps 1.1–4.1 to $\\tilde\\Phi$ gives $|\\Phi(-z)|\\le C$ for $0<\\arg z<\\pi$, that is, $|\\Phi(w)|\\le C$ for $-\\pi<\\arg w<0$. Conclusion of the critical case and of (i). By steps 4.1 and 5.1 the entire function $\\Phi$ satisfies $|\\Phi|\\le C$ off the coordinate axes, while on the axes step 1.1 gives $|\\Phi(x)|\\le C_2\\le C$ and $|\\Phi(iy)|\\le C_1\\le C$ directly. Hence $\\Phi$ is a bounded entire function, so $\\Phi$ is constant by [F4]; the constant is $\\Phi(0)=F(0)$. Therefore, whenever $b\\ge1/a$, $$F(z)=F(0)e^{-\\pi z^2/a}\\qquad(z\\in\\mathbb C).$$ If $ab>1$ then $b>1/a$, so the display applies; evaluating at real $x$ gives $|F(0)|e^{-\\pi x^2/a}=|F(x)|\\le C_2e^{-\\pi bx^2}$, that is, $|F(0)|\\le C_2e^{-\\pi(b-1/a)x^2}$ for every real $x$, and letting $x\\to\\infty$ forces $F(0)=0$ and hence $F\\equiv0$. If $ab=1$ then the display is assertion (ii).",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-hardy-gaussian-uncertainty-principle",
+        "kind": "theorem",
+        "title": "Hardy's Gaussian uncertainty principle in $\\mathbb R^n$",
+        "deps": [
+          "cor-uniqueness-of-the-l-one-fourier-transform",
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "lem-gaussian-decay-gives-an-entire-fourier-laplace-transform",
+          "lem-hardy-entire-growth-rigidity",
+          "lem-separately-holomorphic-vanishing-on-a-real-box-is-zero"
+        ],
+        "statement": "Assume countable choice. Let $n\\ge1$ and $a,b,C>0$ and let $f:\\mathbb R^n\\to\\mathbb C$ be measurable with $|f(x)|\\le Ce^{-\\pi a|x|^2}$ for almost every $x$; then $f\\in L^1$ and $\\widehat f$ is its continuous $L^1$ transform ([[def-fourier-transform-on-l-one-of-rn]]). Suppose $|\\widehat f(\\xi)|\\le Ce^{-\\pi b|\\xi|^2}$ for every $\\xi\\in\\mathbb R^n$. Then: (i) if $ab>1$, $f=0$ almost everywhere; (ii) if $ab=1$, there is $c\\in\\mathbb C$ with $f(x)=ce^{-\\pi a|x|^2}$ for almost every $x$; necessarily $c=\\widehat f(0)\\,a^{n/2}$ with $\\widehat f(0)=\\int f$. Equality in (ii) is asserted almost everywhere only; no continuity of $f$ is assumed.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Terence Tao, Hardy's uncertainty principle (blog post, 18 February 2009)",
+              "url": "https://terrytao.wordpress.com/2009/02/18/hardys-uncertainty-principle/",
+              "locator": "Section 1, the complex-variable proof with the sector Phragmén–Lindelöf tweak"
+            },
+            {
+              "title": "Aingeru Fernández-Bertolín and Eugenia Malinnikova, Dynamical Versions of Hardy's Uncertainty Principle: A Survey (arXiv:2210.03369)",
+              "url": "https://arxiv.org/pdf/2210.03369",
+              "locator": "§§1–2, pp. 1–8; Theorem 1 and the higher-dimensional remark p. 2; Theorem 3 p. 3; §2.3 pp. 5–8"
+            },
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            }
+          ]
+        },
+        "strategy": "Entire continuation. By [F1, F2], $f\\in L^1$ and its continuation $F$ has entire coordinate slices, $F(x)=\\widehat f(x)$ for real $x$, and $$|F(z)|\\le Ca^{-n/2}e^{\\pi|\\operatorname{Im}z|^2/a},\\qquad |F(x)|\\le Ce^{-\\pi b|x|^2}.$$ Coordinate rigidity. Fix $j$ and real coordinates $y_k$ for $k\\ne j$. The entire slice $\\varphi(w)=F(y_1,\\ldots,y_{j-1},w,y_{j+1},\\ldots,y_n)$ satisfies $$|\\varphi(u+iv)|\\le Ca^{-n/2}e^{\\pi v^2/a},\\qquad |\\varphi(u)|\\le Ce^{-\\pi b\\sum_{k\\ne j}y_k^2}e^{-\\pi bu^2}.$$ Thus [F3] applies with $C_1=Ca^{-n/2}$ and $C_2=Ce^{-\\pi b\\sum_{k\\ne j}y_k^2}$. If $ab>1$, every such slice is zero, so $F=0$ on $\\mathbb R^n$. If $ab=1$, every such slice satisfies $\\varphi(w)=\\varphi(0)e^{-\\pi w^2/a}$. Critical factorization. If $ab=1$, apply the slice identity in step 2.1 successively to coordinates $1,\\ldots,n$ of a real point $x$, leaving the other coordinates real at each application. This gives $$F(x)=F(0)\\prod_{j=1}^ne^{-\\pi x_j^2/a}=F(0)e^{-\\pi|x|^2/a}.$$ In fact the same formula holds for complex $z$: the difference $F(z)-F(0)e^{-\\pi\\sum_jz_j^2/a}$ has entire coordinate slices and vanishes on $[0,1]^n$, so [F4] makes it identically zero. This includes $n=1$. Fourier uniqueness and the constant. If $ab>1$, step 2.1 gives $\\widehat f=0$ and [F6] yields $f=0$ almost everywhere. If $ab=1$, [F5] says $g(x)=F(0)a^{n/2}e^{-\\pi a|x|^2}$ is integrable with transform $F(0)e^{-\\pi|\\xi|^2/a}$, equal to $\\widehat f$ by step 3.1. By [F6], $f=g$ almost everywhere. Hence the scalar is $c=F(0)a^{n/2}=\\widehat f(0)a^{n/2}$, and $\\widehat f(0)=\\int f$.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-hardy-subcritical-gaussians-show-the-threshold-is-sharp",
+        "kind": "lemma",
+        "title": "Subcritical Gaussians show the Hardy threshold $ab=1$ is sharp",
+        "deps": [
+          "def-countable-choice",
+          "def-real-power",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "thm-exponential-is-strictly-increasing",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "statement": "Assume countable choice. Let $n\\ge1$ and let $a,b>0$ with $ab<1$. Then $(a,1/b)$ is a nonempty open interval, and for every $c$ with $a<c<1/b$ the Gaussian $f_c(x):=e^{-\\pi c|x|^2}$ satisfies $$|f_c(x)|\\le e^{-\\pi a|x|^2},\\qquad |\\widehat{f_c}(\\xi)|\\le c^{-n/2}e^{-\\pi b|\\xi|^2}\\qquad(x,\\xi\\in\\mathbb R^n).$$ In particular Hardy's two Gaussian bounds hold at every subcritical pair $ab<1$ with a nonzero function, so the vanishing and classification conclusions genuinely require $ab\\ge1$.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Aingeru Fernández-Bertolín and Eugenia Malinnikova, Dynamical Versions of Hardy's Uncertainty Principle: A Survey (arXiv:2210.03369)",
+              "url": "https://arxiv.org/pdf/2210.03369",
+              "locator": "§§1–2, pp. 1–8; Theorem 1 and the higher-dimensional remark p. 2; Theorem 3 p. 3; §2.3 pp. 5–8"
+            }
+          ]
+        },
+        "strategy": "The interval and the first bound. Since $b>0$, the inequality $ab<1$ is equivalent to $a<1/b$, so $(a,1/b)$ is a nonempty open interval and the given $c$ satisfies $c>a>0$. The function $f_c$ is continuous and hence measurable, with $f_c>0$ and $f_c(0)=1$. For every $x\\in\\mathbb R^n$ one has $-\\pi c|x|^2\\le-\\pi a|x|^2$ because $c\\ge a$, and the real exponential is strictly increasing [F3], so $0<f_c(x)=e^{-\\pi c|x|^2}\\le e^{-\\pi a|x|^2}$. Hence $|f_c(x)|\\le e^{-\\pi a|x|^2}$ for every $x$, and $f_c\\ne0$. The transform and the second bound. By [F2] the Gaussian $f_c$ is absolutely integrable and its $L^1$ Fourier transform is $\\widehat{f_c}(\\xi)=c^{-n/2}e^{-\\pi|\\xi|^2/c}$ for every $\\xi\\in\\mathbb R^n$; this is a positive real number. Since $c<1/b$ gives $b<1/c$, one has $-\\pi|\\xi|^2/c\\le-\\pi b|\\xi|^2$, and strict increase of the exponential [F3] gives $e^{-\\pi|\\xi|^2/c}\\le e^{-\\pi b|\\xi|^2}$. The factor $c^{-n/2}$ is positive by [F3]. Therefore $|\\widehat{f_c}(\\xi)|=c^{-n/2}e^{-\\pi|\\xi|^2/c}\\le c^{-n/2}e^{-\\pi b|\\xi|^2}$ for every $\\xi$. Conclusion. By steps 1.1 and 2.1 the nonzero Gaussian $f_c$ satisfies both Gaussian bounds of the subcritical pair $(a,b)$ whenever $a<c<1/b$, and such $c$ exists at every pair with $ab<1$. Hence at every subcritical pair the two Gaussian hypotheses admit a nonzero solution, so the vanishing conclusion cannot hold below that threshold. Nor can the critical classification with rate $a$ hold: $f_c(x)/e^{-\\pi a|x|^2}=e^{-\\pi(c-a)|x|^2}$ equals $1$ at $0$ and is smaller at $x=(1,0,\\ldots,0)$, so is nonconstant. By continuity it cannot be constant almost everywhere either.",
+        "dependency_level": 0
+      },
+      {
+        "id": "rem-proof-cost-and-complex-analysis-interface-for-hardy-uncertainty",
+        "kind": "remark",
+        "title": "Proof cost and complex-analysis interface for Hardy uncertainty",
+        "deps": [
+          "lem-hardy-entire-growth-rigidity",
+          "thm-hardy-gaussian-uncertainty-principle"
+        ],
+        "statement": "[[lem-hardy-entire-growth-rigidity]] is the precise complex-analysis cost of [[thm-hardy-gaussian-uncertainty-principle]]: a sector estimate for the auxiliary $h_M(z)=\\exp(iM e^{iM}z^{2+M})$ on a sector of aperture $\\theta<\\pi/2$ together with Liouville's theorem, applied after the entire continuation of $\\widehat f$. No real-variable argument is silently substituted for the critical case: the published real-variable route (Tao's weak Hardy theorem) proves only a non-sharp threshold $ab>C_0$. The bound $|F(x+iy)|\\le C_1e^{\\pi y^2/a}$ is the quantitative content of the first Gaussian hypothesis, and the exponent $ab=1$ is the exact balance between that growth and the real-axis decay $e^{-\\pi x^2/a}$.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aingeru Fernández-Bertolín and Eugenia Malinnikova, Dynamical Versions of Hardy's Uncertainty Principle: A Survey (arXiv:2210.03369)",
+              "url": "https://arxiv.org/pdf/2210.03369",
+              "locator": "§§1–2, pp. 1–8; Theorem 1 and the higher-dimensional remark p. 2; Theorem 3 p. 3; §2.3 pp. 5–8"
+            },
+            {
+              "title": "Terence Tao, Hardy's uncertainty principle (blog post, 18 February 2009)",
+              "url": "https://terrytao.wordpress.com/2009/02/18/hardys-uncertainty-principle/",
+              "locator": "Section 1, the complex-variable proof with the sector Phragmén–Lindelöf tweak"
+            }
+          ]
+        },
+        "strategy": "The remark records the interface and its cost; it proves nothing new. The named items are the ones where the sector estimate, the continuation and the inversion are spent, and the companion real-variable threshold is recorded as non-sharp so that no reader mistakes it for a substitute.",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-dft-support-product-uncertainty",
+        "kind": "theorem",
+        "title": "Finite support-product uncertainty for the unitary DFT",
+        "deps": [
+          "def-counting-inner-product-on-complex-functions-on-z-mod-n",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-integers-modulo-n",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-finite-sum-laws",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-complex-numbers-form-a-field",
+          "thm-finite-parseval-and-plancherel"
+        ],
+        "statement": "Let $N\\ge1$, let $f\\in\\mathbb C^{\\mathbb Z/N\\mathbb Z}$ be nonzero and let $\\mathcal F_N$ be the unitary discrete Fourier transform of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]. Writing $\\operatorname{supp}f:=\\{x:f(x)\\ne0\\}$ and $\\operatorname{supp}\\mathcal F_Nf:=\\{k:(\\mathcal F_Nf)(k)\\ne0\\}$, $$|\\operatorname{supp}f|\\cdot|\\operatorname{supp}\\mathcal F_Nf|\\ge N .$$ At $N=1$ the bound is equality for every nonzero $f$. No convergence or regularity hypothesis is involved.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, PDF pp. 86–93; §12, PDF pp. 94–100"
+            },
+            {
+              "title": "Terence Tao, An Uncertainty Principle for Cyclic Groups of Prime Order, Math. Res. Lett. 12 (2005) 121–127 (arXiv:math/0308286)",
+              "url": "https://arxiv.org/pdf/math/0308286",
+              "locator": "Abstract and §1, pp. 1–2 (the classical product bound with proof), and §1–§5, pp. 2–7 (the prime-order refinement and its consequences)"
+            }
+          ]
+        },
+        "strategy": "The two supports. Since $f\\ne0$ there is a class with $f(x)\\ne0$, so $S\\ne\\varnothing$ and $\\|f\\|_2^2=\\sum_x|f(x)|^2>0$ by [F4]. Applying [F3] with $g=h=f$ and restricting the sum over all classes to the support $T$, $$\\sum_{k\\in T}|(\\mathcal F_Nf)(k)|^2=\\|\\mathcal F_Nf\\|_2^2=\\|f\\|_2^2>0 ,$$ so $T\\ne\\varnothing$ as well. Pointwise bound on the support of the transform. For $k\\in T$, the triangle inequality and the normalisation $N^{-1/2}$ of the transform give $$|(\\mathcal F_Nf)(k)|\\le N^{-1/2}\\sum_{x\\in S}|f(x)| ,$$ the sum running only over $S$ because the remaining summands vanish. Cauchy–Schwarz [F2] applied on $\\mathbb Z/N\\mathbb Z$ to $u(x)=|f(x)|$ and $v(x)=\\mathbf1_S(x)$ gives $\\sum_{x\\in S}|f(x)|=\\langle u,v\\rangle\\le\\|u\\|_2\\|v\\|_2=|S|^{1/2}\\|f\\|_2$. Hence $|(\\mathcal F_Nf)(k)|\\le N^{-1/2}|S|^{1/2}\\|f\\|_2$ for every $k\\in T$. Summing over the support. Squaring the bound of step 1.2 and summing over the $|T|$ classes of $T$ gives $$\\|\\mathcal F_Nf\\|_2^2=\\sum_{k\\in T}|(\\mathcal F_Nf)(k)|^2\\le|T|\\,N^{-1}|S|\\,\\|f\\|_2^2 .$$ By Parseval [F3] the left side is $\\|f\\|_2^2$, and step 1.1 gives $\\|f\\|_2^2>0$, so dividing yields $|S|\\,|T|\\ge N$. The case $N=1$ and conclusion. If $N=1$ the group $\\mathbb Z/1\\mathbb Z$ has the single class $[0]$, $N^{-1/2}=1$ and $e^{-2\\pi i\\cdot0\\cdot0}=1$, so $(\\mathcal F_Nf)([0])=f([0])$; hence $T=S=\\{[0]\\}$ for nonzero $f$ and $|S||T|=1=N$, an equality. Together with step 2.1 this proves the claim for every $N\\ge1$.",
+        "dependency_level": 2
+      },
+      {
+        "id": "rem-uncertainty-principles-measure-different-notions-of-localisation",
+        "kind": "remark",
+        "title": "Uncertainty principles measure different notions of localisation",
+        "deps": [
+          "cor-dimensional-heisenberg-uncertainty-inequality",
+          "def-spatial-and-frequency-centres-and-variances",
+          "lem-hardy-entire-growth-rigidity",
+          "thm-finite-dft-support-product-uncertainty",
+          "thm-hardy-gaussian-uncertainty-principle",
+          "thm-support-measure-uncertainty-inequality"
+        ],
+        "statement": "Three inequivalent notions of localisation are in play on this page and their hypotheses and conclusions are not interchangeable: the variance pair $(V_x,V_\\xi)$ of [[def-spatial-and-frequency-centres-and-variances]] with the product bound [[cor-dimensional-heisenberg-uncertainty-inequality]]; support measure with the product bound [[thm-support-measure-uncertainty-inequality]] and the compact-support dichotomy; and Gaussian decay with the Hardy threshold [[thm-hardy-gaussian-uncertainty-principle]], whose critical rigidity is isolated in [[lem-hardy-entire-growth-rigidity]]. Gaussian decay implies finite second moments in both domains, but need not give compact support. Finite variance is not compact support — the Gaussian of [[cex-finite-variance-is-not-the-same-as-compact-support]] has finite variances in both domains and full support — while Gaussian decay and its critical rigidity remain a stronger, distinct formulation. The finite product bound [[thm-finite-dft-support-product-uncertainty]] is not the Heisenberg product: its right side is $N$, not $(4\\pi)^{-1}$, and its equality set is different. No implication among these statements is asserted beyond the ones proved on this page.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aingeru Fernández-Bertolín and Eugenia Malinnikova, Dynamical Versions of Hardy's Uncertainty Principle: A Survey (arXiv:2210.03369)",
+              "url": "https://arxiv.org/pdf/2210.03369",
+              "locator": "§§1–2, pp. 1–8; Theorem 1 and the higher-dimensional remark p. 2; Theorem 3 p. 3; §2.3 pp. 5–8"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845)",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 24, pp. 141–146; Proposition 24.1 p. 141; Theorem 24.2 p. 142; Theorem 24.4 and Example 24.5 pp. 144–146; Remark 24.6 pp. 145–146"
+            }
+          ]
+        },
+        "strategy": "The remark compares the displayed items by stating exactly which hypothesis class each uses and which examples separate them ([[cex-finite-variance-is-not-the-same-as-compact-support]]); it asserts no inequality of its own and prevents the standard false corollaries that exchange one localisation notion for another.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-gaussian-decay-gives-an-entire-fourier-laplace-transform",
+        "kind": "lemma",
+        "title": "Gaussian decay gives an entire Fourier-Laplace transform and its growth bound",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-complex-exponential",
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "lem-exponential-dominates-one-plus-x",
+          "lem-l-one-fourier-transform-is-well-defined",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-dominated-convergence",
+          "thm-integral-triangle-inequality",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ],
+        "statement": "Assume countable choice ([[def-countable-choice]]). Let $n\\ge1$, $a>0$, $C\\ge0$, and let $f:\\mathbb R^n\\to\\mathbb C$ be measurable with $|f(x)|\\le Ce^{-\\pi a|x|^2}$ for almost every $x$ (so $f\\in L^1$). Define $F(z):=\\int_{\\mathbb R^n}f(x)e^{-2\\pi i\\,x\\cdot z}\\,dx$. Then the integral converges absolutely for every $z\\in\\mathbb C^n$ and is independent of the representative of the class; every coordinate slice of $F$ is entire, with $$\\frac{\\partial}{\\partial z_j}F(z)=\\int_{\\mathbb R^n}f(x)(-2\\pi ix_j)e^{-2\\pi i\\,x\\cdot z}\\,dx ;$$ $F(x)=\\widehat f(x)$ for every $x\\in\\mathbb R^n$; and $$|F(z)|\\le C\\,a^{-n/2}e^{\\pi|\\operatorname{Im}z|^2/a}\\qquad(z\\in\\mathbb C^n).$$",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Mathilda Lindell, The Phragmén–Lindelöf Principle and Its Applications (Lund University bachelor's thesis 2025:K15)",
+              "url": "https://lup.lub.lu.se/luur/download?func=downloadFile&recordOId=9206853&fileOId=9206856",
+              "locator": "§3.2 and Lemmas 3.2.2–3.2.4, printed pp. 12–16 (PDF pp. 24–28); §2.2 sector Phragmén–Lindelöf"
+            }
+          ]
+        },
+        "strategy": "Fix a representative satisfying the bound. By [F5] we may modify $f$ on the null set where $|f(x)|>Ce^{-\\pi a|x|^2}$ without changing any integral below; after this modification $|f(x)|\\le Ce^{-\\pi a|x|^2}$ holds for every $x$, and $f$ remains measurable. Two exact integrals. (i) For $v\\in\\mathbb R^n$ the algebraic identity $-\\pi a|x|^2+2\\pi x\\cdot v=\\pi|v|^2/a-\\pi a|x-v/a|^2$ and the scalar rule of [F6], the translation identity of [F7] applied to $y\\mapsto e^{-\\pi a|y|^2}$, and the Gaussian identity of [F7] give $$\\int_{\\mathbb R^n}e^{-\\pi a|x|^2+2\\pi x\\cdot v}dx=e^{\\pi|v|^2/a}\\int_{\\mathbb R^n}e^{-\\pi a|x-v/a|^2}dx=e^{\\pi|v|^2/a}\\,a^{-n/2}.$$ (ii) For $c\\ge0$, the elementary inequality $2\\pi|x|c\\le\\frac{\\pi a}{4}|x|^2+\\frac{4\\pi}{a}c^2$ (from $2AB\\le A^2+B^2$ with $A=\\frac{\\sqrt{\\pi a}}{2}|x|$ and $B=\\frac{2\\sqrt\\pi}{\\sqrt a}c$), together with $|x|e^{-\\pi a|x|^2/2}\\le e^{1/(2\\pi a)}$ — which follows from [F8] as $|x|\\le e^{|x|}$ and $s-\\frac{\\pi a}2s^2\\le\\frac1{2\\pi a}$ for $s\\ge0$ — gives $|x|e^{-\\pi a|x|^2+2\\pi|x|c}\\le e^{1/(2\\pi a)}e^{(4\\pi/a)c^2}e^{-\\pi a|x|^2/4}$; by [F6] and [F7] (with $b=a/4$) this is integrable with $$\\int_{\\mathbb R^n}|x|e^{-\\pi a|x|^2+2\\pi|x|c}\\,dx\\le\\Big(\\frac4a\\Big)^{n/2}e^{1/(2\\pi a)}e^{(4\\pi/a)c^2}<\\infty .$$ Absolute convergence, growth bound, and representative independence. Put $v:=\\operatorname{Im}z$. The exact modulus identity in [F2] and the assumed Gaussian bound give, almost everywhere, $|f(x)e^{-2\\pi ix\\cdot z}|=|f(x)|e^{2\\pi x\\cdot v}\\le Ce^{-\\pi a|x|^2+2\\pi x\\cdot v}.$ Completing the square as in computation (i) of step 1.2 and applying [F6] yields $\\int_{\\mathbb R^n}|f(x)e^{-2\\pi ix\\cdot z}|\\,dx\\le C\\int_{\\mathbb R^n}e^{-\\pi a|x|^2+2\\pi x\\cdot v}\\,dx=Ca^{-n/2}e^{\\pi|v|^2/a}<\\infty .$ Hence the integral defining $F$ converges absolutely at the arbitrary point $z$, and [F6] gives the growth bound $|F(z)|\\le Ca^{-n/2}e^{\\pi|\\operatorname{Im}z|^2/a}$. If $\\tilde f=f$ almost everywhere is another representative, the integrands agree almost everywhere; the same majorant makes both integrable, so [F5] gives equal integrals. The slice as a one-variable integral. Fix $j$ and complex numbers $z_k$ for $k\\ne j$, and let $v'$ be the vector of their imaginary parts, with zero in coordinate $j$. Set $g(x):=f(x)e^{-2\\pi i\\sum_{k\\ne j}x_kz_k}$. Then $g$ is measurable and $|g(x)|\\le Ce^{-\\pi a|x|^2+2\\pi x\\cdot v'}$ almost everywhere, so $g\\in L^1$ by the completed-square calculation of step 1.2. For $w\\in\\mathbb C$ put $h(w):=\\int_{\\mathbb R^n}g(x)e^{-2\\pi ix_jw}\\,dx$. The addition law [F2] turns the integrand into $f(x)e^{-2\\pi ix\\cdot z'}$ with $z'=(z_1,\\dots,z_{j-1},w,z_{j+1},\\dots,z_n)$, so $h(w)=F(z')$; step 2.1 gives absolute convergence at every $w$. Difference quotients are integrals. Fix $w\\in\\mathbb C$ and $s\\in\\mathbb C\\setminus\\{0\\}$. For every $x$ the addition law [F2] gives $e^{-2\\pi ix_j(w+s)}-e^{-2\\pi ix_jw}=e^{-2\\pi ix_jw}(e^{-2\\pi ix_js}-1)$, and both integrands are integrable by step 3.1; additivity and scaling from [F5] therefore yield $$\\frac{h(w+s)-h(w)}{s}=\\int_{\\mathbb R^n}g(x)e^{-2\\pi ix_jw}\\,\\frac{e^{-2\\pi ix_js}-1}{s}\\,dx .$$ Pointwise limit and an integrable majorant. Let $s_n\\to0$ be any sequence in $\\mathbb C\\setminus\\{0\\}$. By [F2] the quotients converge pointwise to $g(x)(-2\\pi ix_j)e^{-2\\pi ix_jw}$. By [F3], whenever $|s_n|\\le1$ one has $\\bigl|(e^{-2\\pi ix_js_n}-1)/s_n\\bigr|\\le2\\pi|x_j|e^{2\\pi|x_j|}$. The $n$-th quotient integrand is therefore bounded in modulus by $2\\pi C|x|e^{-\\pi a|x|^2+2\\pi|x|(|\\operatorname{Im}w|+|v'|+1)},$ where $v'$ is from step 3.1. Its integral is finite by computation (ii) of step 1.2. Passing to the tail of the sequence, dominated convergence [F4] gives $\\lim_{n\\to\\infty}\\frac{h(w+s_n)-h(w)}{s_n}=\\int_{\\mathbb R^n}g(x)(-2\\pi ix_j)e^{-2\\pi ix_jw}\\,dx ,$ and the limit integral is absolutely convergent by the same majorant. Conclusion. Since the nonzero null sequence $s_n\\to0$ was arbitrary, step 5.1 shows that $h$ is complex differentiable at every $w\\in\\mathbb C$, with $h'(w)=\\int_{\\mathbb R^n}g(x)(-2\\pi ix_j)e^{-2\\pi ix_jw}\\,dx$; being holomorphic on all of $\\mathbb C$, the slice is entire by [F10], and rewriting the derivative gives the displayed formula for $\\partial F/\\partial z_j$. At real $z=\\xi\\in\\mathbb R^n$ the defining integral is literally the $L^1$ transform formula, so $F(\\xi)=\\widehat f(\\xi)$ by [F9].",
+        "dependency_level": 0,
+        "local_addition": true
+      },
+      {
+        "id": "lem-separately-holomorphic-vanishing-on-a-real-box-is-zero",
+        "kind": "lemma",
+        "title": "Separately holomorphic functions vanishing on a real box are zero",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "thm-identity-theorem-holomorphic-functions"
+        ],
+        "statement": "Let $n\\ge1$ and let $G:\\mathbb C^n\\to\\mathbb C$ be separately holomorphic: for every $j$ and every fixed $w\\in\\mathbb C^n$, the one-variable map $$z\\mapsto G(w_1,\\dots,w_{j-1},z,w_{j+1},\\dots,w_n)$$ is entire on $\\mathbb C$. If there are nondegenerate intervals $I_1,\\dots,I_n\\subseteq\\mathbb R$ with $G=0$ on $I_1\\times\\cdots\\times I_n$, then $G\\equiv0$ on $\\mathbb C^n$.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Mathilda Lindell, The Phragmén–Lindelöf Principle and Its Applications (Lund University bachelor's thesis 2025:K15)",
+              "url": "https://lup.lub.lu.se/luur/download?func=downloadFile&recordOId=9206853&fileOId=9206856",
+              "locator": "§3.2 and Lemmas 3.2.2–3.2.4, printed pp. 12–16 (PDF pp. 24–28); §2.2 sector Phragmén–Lindelöf"
+            }
+          ]
+        },
+        "strategy": "Base case $n=1$. Here $G$ is an entire function of one variable and vanishes on the nondegenerate interval $I_1$. Choose $p$ in the interior of $I_1$; by [F3], $p$ is an accumulation point in $\\mathbb C$ of the set where $G$ and the zero function agree, and both are entire [F2]. The identity theorem [F1] on the domain $\\mathbb C$ gives $G\\equiv0$. Inductive hypothesis and setup. Assume $n\\ge2$ and that the assertion holds for $n-1$ variables. Choose $p\\in\\operatorname{int}I_1$, which is possible because $I_1$ is nondegenerate, and fix an arbitrary $z'\\in\\mathbb C^{n-1}$; it remains to show $G(p,z')=0$. The slice in the last $n-1$ variables. The map $z'\\mapsto G(p,z')$ on $\\mathbb C^{n-1}$ is separately holomorphic, because each of its one-variable slices is a slice of $G$ with all other coordinates fixed, hence entire by [F2]. It vanishes on the box $I_2\\times\\cdots\\times I_n$, whose factors are nondegenerate, so the induction hypothesis of step 1.2 applies and gives $G(p,z')=0$. Vanishing on a slab. The point $p\\in\\operatorname{int}I_1$ in step 1.2 was chosen arbitrarily in the interior, so step 2.1 gives $G=0$ on $\\operatorname{int}I_1\\times\\mathbb C^{n-1}$. The slice in the first variable. For the fixed $z'$ of step 1.2, the one-variable map $w\\mapsto G(w,z')$ is entire by [F2] and vanishes on the nondegenerate interval $\\operatorname{int}I_1$ by step 3.1. Its zero set therefore has the accumulation point $p$ of [F3] inside the domain $\\mathbb C$, and [F1] gives $G(w,z')=0$ for every $w\\in\\mathbb C$. Conclusion. Since $z'\\in\\mathbb C^{n-1}$ was arbitrary in step 1.2, step 4.1 gives $G\\equiv0$ on $\\mathbb C^n$, which discharges the induction step and completes the induction.",
+        "dependency_level": 0,
+        "local_addition": true
+      }
+    ]
+  },
+  {
+    "order": 510.06512,
+    "id": "uncertainty-principles-for-fourier-analysis-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "Uncertainty Principles for Fourier Analysis — Examples",
+    "companion": "uncertainty-principles-for-fourier-analysis",
+    "requires": [
+      "uncertainty-principles-for-fourier-analysis"
+    ],
+    "items": [
+      {
+        "id": "ex-gaussian-attains-heisenberg-equality",
+        "kind": "example",
+        "title": "The Gaussian attains equality in the Heisenberg inequality",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "cor-dimensional-heisenberg-uncertainty-inequality",
+          "def-countable-choice",
+          "def-real-power",
+          "def-spatial-and-frequency-centres-and-variances",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-gaussian-integral",
+          "thm-plancherel",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "statement": "Assume countable choice. Let $a>0$ and $f(x):=e^{-\\pi a|x|^2}$. Then $\\|f\\|_2^2=(2a)^{-n/2}$, the means of $|f|^2$ and of $|\\widehat f|^2$ are $0$, and $$V_x(f)=\\frac{n}{4\\pi a},\\qquad V_\\xi(f)=\\frac{na}{4\\pi},$$ so $V_x(f)V_\\xi(f)=\\frac{n^2}{16\\pi^2}$ and $\\sqrt{V_x(f)}\\sqrt{V_\\xi(f)}=\\frac{n}{4\\pi}$; hence $f$ attains equality in [[cor-dimensional-heisenberg-uncertainty-inequality]], and FA-23's equality family $c\\exp(-\\lambda|x-a|^2/2)\\exp(2\\pi ib\\cdot x)$ is realised with $c=1$, $\\lambda=2\\pi a$, $a=b=0$.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845)",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 24, pp. 141–146; Proposition 24.1 p. 141; Theorem 24.2 p. 142; Theorem 24.4 and Example 24.5 pp. 144–146; Remark 24.6 pp. 145–146"
+            }
+          ]
+        },
+        "strategy": "Norm, transform, evenness and vanishing means. By [F2] with $t=2a$, $\\|f\\|_2^2=\\int e^{-2\\pi a|x|^2}dx=(2a)^{-n/2}<\\infty$, and $\\widehat f(\\xi)=a^{-n/2}e^{-\\pi|\\xi|^2/a}$, so $\\|\\widehat f\\|_2^2=a^{-n}\\int e^{-2\\pi|\\xi|^2/a}d\\xi=(2a)^{-n/2}$ by [F2] with $t=2/a$ and [F4]. Both $f$ and $\\widehat f$ are even and strictly positive. The functions $x\\mapsto x_j|f(x)|^2$ and $\\xi\\mapsto\\xi_j|\\widehat f(\\xi)|^2$ are odd in their $j$-th coordinate, so by [F4] (reflection) each integral equals its own negative; since they are integrable by [F2] and the remark above, both vanish. Hence both means are $0$, and the variances are the uncentred second moments divided by $(2a)^{-n/2}$. Second moments and variances. Differentiating the identity $\\int_{\\mathbb R^n}e^{-2\\pi c|x|^2}dx=(2c)^{-n/2}$ in the parameter $c>0$ ([F2] with $t=2c$, [F5]) is legitimate by [F3]: on an open neighbourhood with closure contained in $(0,\\infty)$ the derivative $-2\\pi|x|^2e^{-2\\pi c|x|^2}$ is dominated by $2\\pi|x|^2e^{-2\\pi c_0|x|^2}$ for a positive lower bound $c_0$ of that interval, which is integrable by [F2]. Hence for every $c>0$ $$\\int_{\\mathbb R^n}|x|^2e^{-2\\pi c|x|^2}dx=\\frac1{2\\pi}\\,n(2c)^{-n/2-1}=\\frac{n}{4\\pi c}(2c)^{-n/2}.$$ With $c=a$ and step 1.1 this gives $\\int|x|^2|f|^2=\\frac{n}{4\\pi a}\\|f\\|_2^2$, hence $$V_x(f)=\\frac{\\int|x|^2|f|^2}{\\|f\\|_2^2}=\\frac{n}{4\\pi a}.$$ Next, $|\\widehat f(\\xi)|^2=a^{-n}e^{-2\\pi|\\xi|^2/a}=a^{-n}e^{-2\\pi c|\\xi|^2}$ with $c=1/a$, so the same identity gives $\\int|\\xi|^2|\\widehat f|^2d\\xi=a^{-n}\\frac{na}{4\\pi}(2/a)^{-n/2}=\\frac{na}{4\\pi}(2a)^{-n/2}=\\frac{na}{4\\pi}\\|\\widehat f\\|_2^2$ by step 1.1, and therefore $$V_\\xi(f)=\\frac{\\int|\\xi|^2|\\widehat f|^2}{\\|\\widehat f\\|_2^2}=\\frac{na}{4\\pi}.$$ Equality. By step 2.1, $\\int(1+|\\xi|^2)|\\widehat f|^2<\\infty$, so [F4, F6] give $f\\in H^1$; the finite spatial moment is also verified there. Hence the domain of the cited Heisenberg corollary is satisfied. Steps 1.1 and 2.1 give $\\||x|f\\|_2^2=\\frac{n}{4\\pi a}\\|f\\|_2^2$ and $\\||\\xi|\\widehat f\\|_2^2=\\frac{na}{4\\pi}\\|f\\|_2^2$, hence $$\\||x|f\\|_2\\||\\xi|\\widehat f\\|_2=\\|f\\|_2^2\\sqrt{\\frac{n}{4\\pi a}}\\sqrt{\\frac{na}{4\\pi}}=\\frac{n}{4\\pi}\\|f\\|_2^2,$$ so the inequality of [[cor-dimensional-heisenberg-uncertainty-inequality]] is an equality. The product of variances is $\\frac{n}{4\\pi a}\\cdot\\frac{na}{4\\pi}=\\frac{n^2}{16\\pi^2}$ and its square root is $\\frac{n}{4\\pi}$. Finally the entire family $c\\exp(-\\lambda|x-a_0|^2/2)\\exp(2\\pi ib_0\\cdot x)$ of the published Heisenberg theorem contains $f$ at $c=1$, $\\lambda=2\\pi a$, $a_0=b_0=0$.",
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-finite-variance-is-not-the-same-as-compact-support",
+        "kind": "counterexample",
+        "title": "Finite variance is not compact support",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "def-real-power",
+          "def-spatial-and-frequency-centres-and-variances",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "thm-gaussian-integral",
+          "thm-support-measure-uncertainty-inequality"
+        ],
+        "statement": "Assume countable choice, as the cited Plancherel and Gaussian-transform interfaces do. For $a>0$ the Gaussian $f(x)=e^{-\\pi a|x|^2}$ has finite second moments and zero means, hence finite variances $V_x(f),V_\\xi(f)$ in the sense of [[def-spatial-and-frequency-centres-and-variances]], but $f$ and $\\widehat f$ are strictly positive everywhere: $\\widehat f(\\xi)=a^{-n/2}e^{-\\pi|\\xi|^2/a}$ by [[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]. Consequently neither $f$ nor $\\widehat f$ vanishes off any set of finite measure. Finite variance is therefore not the same as compact support, and the support-measure hypothesis of [[thm-support-measure-uncertainty-inequality]] cannot be deduced from, nor reduced to, the variance hypotheses of the Heisenberg items.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845)",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 24, pp. 141–146; Proposition 24.1 p. 141; Theorem 24.2 p. 142; Theorem 24.4 and Example 24.5 pp. 144–146; Remark 24.6 pp. 145–146"
+            }
+          ]
+        },
+        "strategy": "The Gaussian and its transform are strictly positive and integrable. $f(x)=e^{-\\pi a|x|^2}>0$ for every $x$, $f$ is continuous and even, and by [F2] with $t=2a$, $\\|f\\|_2^2=\\int_{\\mathbb R^n}f^2=(2a)^{-n/2}<\\infty$, so $f\\in L^1\\cap L^2$ and [F2] identifies its integral and Plancherel transforms, with $\\widehat f(\\xi)=a^{-n/2}e^{-\\pi|\\xi|^2/a}>0$ for every $\\xi\\in\\mathbb R^n$. Finite second moments and vanishing means. By [F2] with $t=2a$ one has $\\|f\\|_2^2=(2a)^{-n/2}<\\infty$, and since $|\\widehat f(\\xi)|^2=a^{-n}e^{-2\\pi|\\xi|^2/a}$, [F2] with $t=2/a$ gives $\\|\\widehat f\\|_2^2=(2a)^{-n/2}<\\infty$ as well. By [F2], $|x|^2e^{-2\\pi a|x|^2}$ and $|\\xi|^2a^{-n}e^{-2\\pi|\\xi|^2/a}$ are integrable polynomial multiples of positive Gaussians. Thus both second moments are finite. The functions $x\\mapsto x_j|f(x)|^2$ and $\\xi\\mapsto\\xi_j|\\widehat f(\\xi)|^2$ are odd in their $j$-th coordinate while $f$ and $\\widehat f$ are even, so [F3] applied to the reflection $T(x)=-x$ shows that each of these integrals equals its own negative and hence vanishes; consequently both means are $0$ and the variances $V_x(f),V_\\xi(f)$ of [F4] are finite. No finite-measure support in either domain. Let $E\\subseteq\\mathbb R^n$ be measurable with $f=0$ almost everywhere on $\\mathbb R^n\\setminus E$. Since $f>0$ everywhere, the set where $f$ differs from $0$ inside $\\mathbb R^n\\setminus E$ is $\\mathbb R^n\\setminus E$ itself, so $\\mathbb R^n\\setminus E$ is null and $E$ has full measure, $|E|=\\infty$; the same argument with the strictly positive transform $\\widehat f$ shows that no measurable $F$ of finite measure can carry $\\widehat f=0$ almost everywhere off it. By [F5], compact sets have finite measure, so neither function can have compact support. Consequently the counterexample has finite second moments and finite variances in both domains but neither it nor its transform is supported ($\\mathrm{a.e.}$) on a set of finite measure, so finite variance does not force compact support, and the support-measure hypothesis of [F4] is not implied by the variance hypotheses.",
+        "dependency_level": 1,
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-hardy-critical-and-subcritical-gaussian-regimes",
+        "kind": "example",
+        "title": "Critical, subcritical and supercritical Gaussian regimes for Hardy's theorem",
+        "deps": [
+          "def-countable-choice",
+          "def-real-power",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "lem-hardy-subcritical-gaussians-show-the-threshold-is-sharp",
+          "thm-hardy-gaussian-uncertainty-principle"
+        ],
+        "statement": "Assume countable choice, as [[thm-hardy-gaussian-uncertainty-principle]] and the Gaussian-transform interface do. Fix $a>0$ and put $b:=1/a$. At the critical product $ab=1$ the Gaussian $f(x)=e^{-\\pi a|x|^2}$ satisfies the two Hardy bounds $|f(x)|\\le e^{-\\pi a|x|^2}$ and $|\\widehat f(\\xi)|\\le a^{-n/2}e^{-\\pi|\\xi|^2/a}$ of [[thm-hardy-gaussian-uncertainty-principle]], and the theorem returns a scalar multiple of the same Gaussian. In the subcritical regime $ab<1$, every $c$ with $a<c<1/b$ gives the Gaussian $e^{-\\pi c|x|^2}$ satisfying both bounds, so no vanishing conclusion holds ([[lem-hardy-subcritical-gaussians-show-the-threshold-is-sharp]]). In the supercritical regime $ab>1$ the theorem forces $f=0$, and no Gaussian can satisfy both bounds: $|e^{-\\pi c|x|^2}|\\le Ce^{-\\pi a|x|^2}$ forces $c\\ge a$ and $|\\widehat{f_c}|\\le C'e^{-\\pi b|\\xi|^2}$ forces $c\\le1/b$, which is impossible when $a>1/b$.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aingeru Fernández-Bertolín and Eugenia Malinnikova, Dynamical Versions of Hardy's Uncertainty Principle: A Survey (arXiv:2210.03369)",
+              "url": "https://arxiv.org/pdf/2210.03369",
+              "locator": "§§1–2, pp. 1–8; Theorem 1 and the higher-dimensional remark p. 2; Theorem 3 p. 3; §2.3 pp. 5–8"
+            },
+            {
+              "title": "Calder Sheagren, Uncertainty Principles with Fourier Analysis (University of Chicago REU 2017, author PDF)",
+              "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Sheagren.pdf",
+              "locator": "§§1–5, pp. 1–13; §2 Plancherel p. 5; §3 Heisenberg pp. 5–8 (3.3–3.12); §4 Phragmén–Lindelöf pp. 10–11; §5 Lemma 5.1, Theorem 5.2 and Corollary 5.3 pp. 11–12"
+            }
+          ]
+        },
+        "strategy": "Critical regime. For $g=f_a$ we have $|g(x)|=e^{-\\pi a|x|^2}\\le C_0e^{-\\pi a|x|^2}$ and, by [F2] with $t=a$, $|\\widehat g(\\xi)|=a^{-n/2}e^{-\\pi|\\xi|^2/a}\\le C_0e^{-\\pi b|\\xi|^2}$ since $b=1/a$. Thus $g$ meets both Hardy bounds with one common constant $C_0$. Since $ab=1$, [F4] returns $g(x)=\\widehat g(0)a^{n/2}e^{-\\pi a|x|^2}$ almost everywhere, with $\\widehat g(0)=\\int g=a^{-n/2}$; that is the same Gaussian, so the classification is attained, not merely bounded. Subcritical regime. Suppose $ab<1$, equivalently $a<1/b$. By [F3] the interval $(a,1/b)$ is nonempty and every $c\\in(a,1/b)$ produces a nonzero Gaussian $f_c$ satisfying $|f_c|\\le e^{-\\pi a|x|^2}$ and $|\\widehat{f_c}|\\le c^{-n/2}e^{-\\pi b|\\xi|^2}$. With $C_c=\\max\\{1,c^{-n/2}\\}$ both bounds hold with a single constant, so the Hardy hypotheses admit a nonzero function and no vanishing conclusion can be drawn. Supercritical regime. Suppose $ab>1$, equivalently $a>1/b$. If $c>0$ and constants $C,C'>0$ satisfied $e^{-\\pi c|x|^2}\\le Ce^{-\\pi a|x|^2}$ almost everywhere, then $e^{\\pi(a-c)|x|^2}\\le C$ would hold on a set of full measure, and a set of full measure is unbounded by [F5]; were $c<a$, the left side would tend to $+\\infty$ along that unbounded set, which is impossible for a finite constant, so $c\\ge a$. Similarly, by [F2], $|\\widehat{f_c}(\\xi)|=c^{-n/2}e^{-\\pi|\\xi|^2/c}\\le C'e^{-\\pi b|\\xi|^2}$ for every $\\xi$ would give $e^{\\pi(b-1/c)|\\xi|^2}\\le C'c^{n/2}$ for every $\\xi$; if $b>1/c$, the left side diverges as $|\\xi|\\to\\infty$, contradicting the finite bound; thus $1/c\\ge b$, that is $c\\le1/b$. Both requirements together would give $a\\le c\\le1/b$, hence $ab\\le1$, contrary to the hypothesis; so no Gaussian meets the two bounds, and by [F4] the only function satisfying them is $0$ almost everywhere. Tabulation. Steps 1.1–1.3 separate the three parameter regions: at $ab=1$ the Gaussian $e^{-\\pi a|x|^2}$ is a nonzero solution classified as itself, for $ab<1$ nonzero Gaussian solutions exist with rate $c\\in(a,1/b)$, and for $ab>1$ no Gaussian solution exists and every solution vanishes almost everywhere.",
+        "dependency_level": 2,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-finite-dft-delta-and-constant-extremisers",
+        "kind": "example",
+        "title": "Delta and constant functions are finite DFT extremisers",
+        "deps": [
+          "def-counting-inner-product-on-complex-functions-on-z-mod-n",
+          "def-integers-modulo-n",
+          "def-rational-power",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "lem-rational-power-laws",
+          "thm-complex-numbers-form-a-field",
+          "thm-finite-dft-support-product-uncertainty"
+        ],
+        "statement": "Let $N\\ge1$, let $\\delta_0\\in\\mathbb C^{\\mathbb Z/N\\mathbb Z}$ be the delta at the class of $0$ and let $\\mathbf 1$ be the constant function $1$. Then $$\\mathcal F_N\\delta_0=N^{-1/2}\\mathbf 1,\\qquad \\mathcal F_N\\mathbf 1=N^{1/2}\\delta_0 .$$ Hence $|\\operatorname{supp}\\delta_0|=1=|\\operatorname{supp}\\mathcal F_N\\mathbf 1|$ and $|\\operatorname{supp}\\mathbf 1|=N=|\\operatorname{supp}\\mathcal F_N\\delta_0|$, so both functions have support product $N$ and attain equality in [[thm-finite-dft-support-product-uncertainty]]. At $N=1$ one has $\\delta_0=\\mathbf 1$ and the two identities coincide.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "locator": "§11, PDF pp. 86–93; §12, PDF pp. 94–100"
+            },
+            {
+              "title": "Terence Tao, An Uncertainty Principle for Cyclic Groups of Prime Order, Math. Res. Lett. 12 (2005) 121–127 (arXiv:math/0308286)",
+              "url": "https://arxiv.org/pdf/math/0308286",
+              "locator": "Abstract and §1, pp. 1–2 (the classical product bound with proof), and §1–§5, pp. 2–7 (the prime-order refinement and its consequences)"
+            }
+          ]
+        },
+        "strategy": "Evaluate the definition of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]: $\\mathcal F_N\\delta_0(k)=N^{-1/2}e^{0}=N^{-1/2}$, and $\\mathcal F_N\\mathbf 1(k)=N^{-1/2}\\sum_{x=0}^{N-1}e^{-2\\pi ikx/N}$, which is $N^{1/2}$ for $k\\equiv0$ and $0$ otherwise by the geometric-sum orthogonality of [[lem-orthogonality-of-characters-on-a-finite-cyclic-group]] (available through the finite Parseval/orthogonality cluster of FR-18's scaffold). The supports and products follow; $N=1$ degenerates as stated because $1^{-1/2}=1^{1/2}=1$ ([[lem-rational-power-laws]]). This is the finite equality check of the design's B page.",
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-both-supports-cannot-be-singletons-when-n-is-greater-than-one",
+        "kind": "counterexample",
+        "title": "Both finite supports cannot be singletons when $N>1$",
+        "deps": [
+          "def-integers-modulo-n",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "ex-finite-dft-delta-and-constant-extremisers",
+          "thm-finite-dft-support-product-uncertainty"
+        ],
+        "statement": "For $N>1$ there is no nonzero $f\\in\\mathbb C^{\\mathbb Z/N\\mathbb Z}$ with $|\\operatorname{supp}f|=|\\operatorname{supp}\\mathcal F_Nf|=1$: if both supports were singletons then [[thm-finite-dft-support-product-uncertainty]] would give $1=|\\operatorname{supp}f|\\cdot|\\operatorname{supp}\\mathcal F_Nf|\\ge N$, contradicting $N>1$. For $N=1$ the delta $\\delta_0$ does have both supports of size one ([[ex-finite-dft-delta-and-constant-extremisers]]), so the hypothesis $N>1$ is essential.",
+        "design_row": "FR-20",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Terence Tao, An Uncertainty Principle for Cyclic Groups of Prime Order, Math. Res. Lett. 12 (2005) 121–127 (arXiv:math/0308286)",
+              "url": "https://arxiv.org/pdf/math/0308286",
+              "locator": "Abstract and §1, pp. 1–2 (the classical product bound with proof), and §1–§5, pp. 2–7 (the prime-order refinement and its consequences)"
+            }
+          ]
+        },
+        "strategy": "Impossibility for $N>1$. Suppose $N>1$ and a nonzero $f$ satisfied $|\\operatorname{supp}f|=|\\operatorname{supp}\\mathcal F_Nf|=1$. Then the left-hand side of the bound [F1] equals $1$, so $1\\ge N$, contradicting $N>1$. Hence no such $f$ exists for $N>1$. The case $N=1$. At $N=1$ the group $\\mathbb Z/1\\mathbb Z$ has the single class $[0]$, and by [F2] the delta $\\delta_0$ is the constant function $1$ with $\\mathcal F_1\\delta_0=\\delta_0$; both its support and the support of its transform equal the one-element set $\\{[0]\\}$. Conclusion. The universal claim fails already at $N=2$, where [F1] forces a support product of at least $2$; step 1.2 shows that the hypothesis $N>1$ is essential, since the excluded configuration does occur at $N=1$ and the bound of [F1] is exactly attained there.",
+        "dependency_level": 4,
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

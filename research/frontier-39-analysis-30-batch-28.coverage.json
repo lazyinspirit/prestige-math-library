@@ -1,0 +1,433 @@
+{
+  "run": "frontier-39-analysis-30",
+  "batch": 28,
+  "pages": [
+    {
+      "page": "finite-fourier-analysis-and-the-fast-fourier-transform",
+      "sources": [
+        {
+          "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+          "kind": "textbook",
+          "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+          "locator": "§§11-12, PDF pp. 86-100 of the 107-page author PDF: the discrete Fourier transform and the fast Fourier transform, read in full in the PDF text.",
+          "contents": [
+            {
+              "name": "§11 opening: the finite cyclic group Γ_n = ⟨ω⟩, ω = e^{2πi/n}; the pairing (ω^j, ℓ) ↦ ω^{jℓ}; the discrete transforms f# (11.1) and ĝ (11.2)",
+              "locator": "PDF pp. 86-87",
+              "disposition": "included",
+              "item": "def-unitary-discrete-fourier-transform-on-z-mod-n"
+            },
+            {
+              "name": "§11 Proposition 11.1 and (11.4): Φ_n: L²(Γ_n) → L²(Z_n) is a unitary isomorphism, with the inverse transform of (11.2) and the inversion formula",
+              "locator": "PDF pp. 87-88",
+              "disposition": "included",
+              "item": "thm-finite-fourier-inversion"
+            },
+            {
+              "name": "§11 formula (11.5): the L² conventions, counting measure on Z_n and (1/n)·counting measure on Γ_n",
+              "locator": "PDF p. 88",
+              "disposition": "included",
+              "item": "def-counting-inner-product-on-complex-functions-on-z-mod-n"
+            },
+            {
+              "name": "§11 (11.6) and Proposition 11.2: the functions e_j(ω^k) = ω^{jk} form an orthonormal basis, proved by the geometric-sum orthogonality computation with the case ω^m = 1 separated",
+              "locator": "PDF p. 88",
+              "disposition": "included",
+              "item": "lem-orthogonality-of-characters-on-a-finite-cyclic-group"
+            },
+            {
+              "name": "§11 Proposition 11.3: the aliasing identity f#(ℓ) = Σ_{j∈Z} f̂(ℓ+jn) for absolutely convergent Fourier series on S¹",
+              "locator": "PDF pp. 88-89",
+              "disposition": "deferred",
+              "destination": "poisson-summation-sampling-and-lattice-duality",
+              "reason": "The discretisation aliasing identity is the continuous-to-lattice interface used by the sampling page (FR-19), which owns periodisation and Poisson summation; FR-18 proves only exact finite identities."
+            },
+            {
+              "name": "§11 Propositions 11.3-11.4 and the discretisation operators R_n, E_n and the multiplier comparison (11.20)-(11.29), including the centered-difference second-order estimate",
+              "locator": "PDF pp. 89-92",
+              "disposition": "out-of-scope",
+              "reason": "Numerical discretisation-error estimates for Fourier series on the circle; no FR-18 row approximates continuous functions and the page proves exact finite identities only."
+            },
+            {
+              "name": "§11 (11.30)-(11.31): discrete convolution and Fourier multipliers on Γ_n, F(D_n)u = (k_F ∗ u)",
+              "locator": "PDF p. 92",
+              "disposition": "included",
+              "item": "def-cyclic-convolution-on-z-mod-n"
+            },
+            {
+              "name": "§11 (11.32)-(11.33): the discrete Poisson kernel p_y(ω^j) written as a sum of two finite geometric series, with the closed form",
+              "locator": "PDF pp. 92-93",
+              "disposition": "out-of-scope",
+              "reason": "Closed-form summation of the discrete heat/Poisson kernel; the finite transform page needs only the general convolution identity, and no FR-18 row evaluates that kernel."
+            },
+            {
+              "name": "§11 Proposition 11.5, (11.34)-(11.40), and exercises 1-8: Gauss sums, their evaluation by the Gaussian integral, and the quadratic-reciprocity applications",
+              "locator": "PDF pp. 92-95",
+              "disposition": "out-of-scope",
+              "reason": "Number-theoretic Gauss-sum evaluations and quadratic reciprocity; they sit on the number-theory track and no FR-18 row uses them."
+            },
+            {
+              "name": "§12 (12.1)-(12.3): the direct computation count (n² multiplications, n(n-1) additions of complex numbers) and the Γ_4 identities",
+              "locator": "PDF pp. 95-96",
+              "disposition": "included",
+              "item": "thm-radix-two-fft-arithmetic-complexity"
+            },
+            {
+              "name": "§12 (12.4)-(12.7): the explicit Γ_4 decomposition 2f#(2ℓ) = 0f#(ℓ), 2f#(2ℓ+1) = 1f#(ℓ)",
+              "locator": "PDF p. 96",
+              "disposition": "included",
+              "item": "ex-four-point-radix-two-fft"
+            },
+            {
+              "name": "§12 (12.8)-(12.11) and Proposition 12.1: the input-half functions 0f, 1f and the identities n f#(2ℓ) = 0f#(ℓ), n f#(2ℓ+1) = 1f#(ℓ) (decimation in frequency)",
+              "locator": "PDF pp. 96-97",
+              "disposition": "inline",
+              "item": "lem-radix-two-even-odd-dft-factorisation"
+            },
+            {
+              "name": "§12 cost paragraph after (12.13): after k iterations, kn additions and kn/2 complex multiplications, plus the comparable integer operations and memory fetches",
+              "locator": "PDF p. 97",
+              "disposition": "included",
+              "item": "thm-radix-two-fft-arithmetic-complexity"
+            },
+            {
+              "name": "§12 (12.14)-(12.23) and the following discussion: the iterative implementation, bit reversal, the in-place variant, and machine-dependent trade-offs",
+              "locator": "PDF pp. 97-99",
+              "disposition": "out-of-scope",
+              "reason": "Implementation engineering (array variants, bit reversal, in-place updates, machine-dependent optimisation); FR-18 specifies the recursive algorithm and proves correctness and the arithmetic-operation count, not an implementation."
+            },
+            {
+              "name": "§12 exercises 1-3: program the recursion, apply it to the heat equation, and discuss multidimensional transforms and memory",
+              "locator": "PDF p. 99",
+              "disposition": "out-of-scope",
+              "reason": "Programming and application exercises with no theorem consumed by FR-18."
+            },
+            {
+              "name": "§12 exercise 4: generalisation of the FFT algorithm to n = 3^k and to products of small primes",
+              "locator": "PDF p. 99",
+              "disposition": "included",
+              "item": "rem-cooley-tukey-factorisation-for-composite-lengths"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "at": "2026-10-04T06:13:05.428Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-04T06:13:05.428Z",
+            "bytes": 603921,
+            "sha256_16": "e85e7a4e882a278d",
+            "kind": "pdf",
+            "pages": 107
+          }
+        },
+        {
+          "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+          "kind": "lecture-notes",
+          "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+          "locator": "Complete unpaginated lecture, headings 1-4 (Introduction; The Fourier Transform; The Finite Fourier Transform; The Cooley-Tukey Fast Fourier Transform Algorithm), read in full from the course HTML.",
+          "contents": [
+            {
+              "name": "Heading 1: Fourier series, orthogonality of sines, and the coefficient formula",
+              "locator": "complete lecture, heading 1",
+              "disposition": "already-published",
+              "item": "thm-parseval-identity-for-fourier-series"
+            },
+            {
+              "name": "Heading 2: the Fourier transform as an integral representation and the eigenfunction motivation",
+              "locator": "complete lecture, heading 2",
+              "disposition": "already-published",
+              "item": "thm-fourier-inversion-on-schwartz-space"
+            },
+            {
+              "name": "Heading 3: the finite Fourier transform as evaluation of a degree n-1 polynomial at the n roots of unity, with a primitive n-th root, and the symmetric forward form Σ_j a_j z^{jk}",
+              "locator": "complete lecture, heading 3",
+              "disposition": "included",
+              "item": "def-unitary-discrete-fourier-transform-on-z-mod-n"
+            },
+            {
+              "name": "Heading 3: the inverse transformation by multiplying each p_k by z^{-sk} and summing, giving a_s = (1/n)Σ_k p_k z^{-sk} via the power sums of the roots",
+              "locator": "complete lecture, heading 3",
+              "disposition": "included",
+              "item": "thm-finite-fourier-inversion"
+            },
+            {
+              "name": "Heading 3: the direct n² evaluation/coefficient-recovery cost of the naive method",
+              "locator": "complete lecture, heading 3",
+              "disposition": "inline",
+              "item": "thm-radix-two-fft-arithmetic-complexity"
+            },
+            {
+              "name": "Heading 4: the Cooley-Tukey reduction for n = 2s: 2s evaluations reduce to two s-point transforms after s additions, s subtractions and s multiplications",
+              "locator": "complete lecture, heading 4",
+              "disposition": "included",
+              "item": "lem-radix-two-even-odd-dft-factorisation"
+            },
+            {
+              "name": "Heading 4: iteration of the reduction until degree 0, producing the evaluations",
+              "locator": "complete lecture, heading 4",
+              "disposition": "included",
+              "item": "def-recursive-radix-two-fast-fourier-transform"
+            },
+            {
+              "name": "Heading 4: the worked example on coefficients (1,3,2,5) modulo 17 with 4 a primitive fourth root, and the inverse division by n",
+              "locator": "complete lecture, heading 4",
+              "disposition": "inline",
+              "item": "ex-four-point-radix-two-fft"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "at": "2026-10-04T06:13:06.155Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-04T06:13:06.155Z",
+            "bytes": 25994,
+            "sha256_16": "e30b7b67c1cdd48e",
+            "kind": "html",
+            "text_chars": 12371
+          }
+        },
+        {
+          "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C (course-hosted full text)",
+          "kind": "textbook",
+          "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf",
+          "locator": "Appendix C.1-C.3, printed pp. 429-439: topological groups and Haar measure (C.1-C.2), character groups with the compact-open topology, orthogonality of characters, Parseval (C.3 through Theorem C.10 and Example C.14), read in the full text.",
+          "contents": [
+            {
+              "name": "C.1 Definition C.1, Lemma C.2, Example C.3: topological groups, compactness and metrisability, GL_n(C)",
+              "locator": "printed pp. 429-431",
+              "disposition": "already-published",
+              "item": "def-topological-group"
+            },
+            {
+              "name": "C.2: Haar measure on locally compact groups; Examples C.5, including counting measure on a discrete group and the multiplicative measure |z|^{-1}dx on C∖{0}",
+              "locator": "printed pp. 431-432",
+              "disposition": "already-published",
+              "item": "ex-counting-measure-as-haar-measure-on-a-discrete-group"
+            },
+            {
+              "name": "C.3: characters as continuous homomorphisms into S¹, the dual group Ĝ with pointwise multiplication and the compact-open topology, and Theorem C.6 (the dual is LCA; separating subgroups are dense)",
+              "locator": "printed p. 433",
+              "disposition": "already-published",
+              "item": "def-pontryagin-dual-and-compact-open-topology"
+            },
+            {
+              "name": "C.3: the Fourier transform on L¹(G), its separating self-adjoint algebra of images, the convolution law, and the L¹ → L∞ bound; Lemma C.7 (discrete groups have compact duals and conversely)",
+              "locator": "printed pp. 433-435",
+              "disposition": "already-published",
+              "item": "thm-compact-groups-have-discrete-duals-and-discrete-groups-have-compact-duals"
+            },
+            {
+              "name": "C.3 following Lemma C.7: the orthogonality computation ∫_G (χη^{-1})(g) dm_G = 0 for distinct characters, and the derivative fact that the trivial character is isolated in Ĝ",
+              "locator": "printed p. 435",
+              "disposition": "inline",
+              "item": "lem-orthogonality-of-characters-on-a-finite-cyclic-group"
+            },
+            {
+              "name": "C.3 Theorem C.8: the Parseval formula ⟨f,g⟩_G = ⟨f̂, ĝ⟩_Ĝ for L² functions on an LCA group",
+              "locator": "printed p. 435",
+              "disposition": "inline",
+              "item": "thm-finite-parseval-and-plancherel"
+            },
+            {
+              "name": "C.3 Theorem C.9 (Herglotz-Bochner) and Theorem C.10 (inversion for L¹ ∩ B(G), with the compact-group normalisation of counting measure on the dual)",
+              "locator": "printed pp. 435-436",
+              "disposition": "deferred",
+              "destination": "bochner-inversion-and-plancherel-on-lca-groups",
+              "reason": "Bochner's theorem and the LCA inversion theorem with its measure normalisation are the subject of the FR-16 supplier page (in-run batch 26); FR-18 uses only the finite-dimensional case proved directly on this page."
+            },
+            {
+              "name": "C.3 Theorem C.11 and the following completeness discussion: for compact abelian G the characters form a complete orthonormal basis, proved by Stone-Weierstrass",
+              "locator": "printed pp. 436-437",
+              "disposition": "out-of-scope",
+              "reason": "Completeness of the character system for general compact abelian groups; the finite case here is finite-dimensional and needs no Stone-Weierstrass argument."
+            },
+            {
+              "name": "C.3 Theorem C.12 (Pontryagin duality), Theorem C.13 (annihilator and quotient duals), dual homomorphisms, and the torsion/monothetic discussion",
+              "locator": "printed p. 437",
+              "disposition": "deferred",
+              "destination": "pontryagin-duality-for-locally-compact-abelian-groups",
+              "reason": "Pontryagin duality and the annihilator calculus are the subject of the FR-17 supplier page (in-run batch 27); FR-18 cites only the published finite cyclic instance for its character family."
+            },
+            {
+              "name": "C.3 Example C.14: computed duals of Z, R, locally compact fields K, and Q_p, plus the solenoid remark for discrete Q",
+              "locator": "printed pp. 438-439",
+              "disposition": "already-published",
+              "item": "ex-pontryagin-dual-of-the-integers-is-the-circle"
+            },
+            {
+              "name": "C.3 Example C.14(2) and (3): the duals of R and of locally compact non-discrete fields",
+              "locator": "printed p. 438",
+              "disposition": "already-published",
+              "item": "ex-pontryagin-dual-of-euclidean-space"
+            },
+            {
+              "name": "C.3 Lemma C.15 (Riemann-Lebesgue for absolutely continuous measures) and Lemma C.16 (the measure-theoretic refinement on S¹)",
+              "locator": "printed pp. 438-439",
+              "disposition": "deferred",
+              "destination": "bochner-inversion-and-plancherel-on-lca-groups",
+              "reason": "Riemann-Lebesgue on LCA groups is scaffolded on the FR-16 supplier page (batch 26, thm-riemann-lebesgue-lemma-on-lca-groups); Lemma C.16 is a measure-theoretic refinement not used by FR-18."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf",
+              "at": "2026-10-04T06:13:17.768Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-04T06:13:17.768Z",
+            "bytes": 1024475,
+            "sha256_16": "c8e8b3e47226ca27",
+            "kind": "pdf",
+            "pages": 171
+          }
+        },
+        {
+          "title": "J. W. Cooley and J. W. Tukey, An Algorithm for the Machine Calculation of Complex Fourier Series, Mathematics of Computation 19 (1965), 297-301",
+          "kind": "paper",
+          "url": "https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Cooley65.pdf",
+          "locator": "Printed pp. 297-298, equations (3)-(8): the general composite-length split N=r1r2 and its two-stage Fourier-sum evaluation; the full five-page paper was read.",
+          "recovery_attempts": [
+            {
+              "url": "https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Cooley65.pdf",
+              "at": "2026-10-05T08:34:27.755Z",
+              "outcome": "Complete PDF fetched (358294 bytes); all article pages were rendered and printed pp. 297-301, including equations (3)-(8), were read visually."
+            }
+          ],
+          "contents": [
+            {
+              "name": "Printed pp. 297-298, equations (3)-(8): general composite N=r1r2 index decomposition and two-stage finite-sum Fourier evaluation",
+              "item": "rem-cooley-tukey-factorisation-for-composite-lengths",
+              "disposition": "included"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-05T08:34:27.755Z",
+            "bytes": 358294,
+            "sha256_16": "8fe5d32dcf08c01f",
+            "kind": "pdf",
+            "pages": 6
+          }
+        }
+      ]
+    },
+    {
+      "page": "finite-fourier-analysis-and-the-fast-fourier-transform-examples",
+      "sources": [
+        {
+          "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE (author PDF)",
+          "kind": "textbook",
+          "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+          "locator": "§§11-12, PDF pp. 86-100; the B-page computations use (11.1)-(11.6), (11.30)-(11.31), (12.1)-(12.7), and the power-of-two restriction of §12.",
+          "contents": [
+            {
+              "name": "§11 (11.1)-(11.6): the transform pair and characters, whose length-one and length-two instances are written out as matrices",
+              "locator": "PDF pp. 86-88",
+              "disposition": "included",
+              "item": "ex-unitary-dft-for-n-equals-one-and-two"
+            },
+            {
+              "name": "§11 (11.30)-(11.31): discrete convolution transformed to a product, instantiated on a four-point sequence",
+              "locator": "PDF p. 92",
+              "disposition": "included",
+              "item": "ex-cyclic-convolution-via-the-dft"
+            },
+            {
+              "name": "§11 (11.30)-(11.33): convolution on Z_n is cyclic; high coefficients wrap by the residue arithmetic",
+              "locator": "PDF pp. 92-93",
+              "disposition": "included",
+              "item": "cex-linear-and-cyclic-convolution-are-not-the-same-without-zero-padding"
+            },
+            {
+              "name": "§12 (12.2)-(12.7): the explicit four-point identities 4f#(0), 4f#(2), 4f#(1), 4f#(3) and their two-level structure",
+              "locator": "PDF p. 96",
+              "disposition": "included",
+              "item": "ex-four-point-radix-two-fft"
+            },
+            {
+              "name": "§12 opening and (12.8)-(12.13): the recursion is developed only 'in case n is a power of 2'",
+              "locator": "PDF pp. 95-97",
+              "disposition": "included",
+              "item": "cex-radix-two-recursion-does-not-directly-apply-to-odd-length"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf",
+              "at": "2026-10-04T06:13:17.848Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-04T06:13:17.848Z",
+            "bytes": 603921,
+            "sha256_16": "e85e7a4e882a278d",
+            "kind": "pdf",
+            "pages": 107
+          }
+        },
+        {
+          "title": "MIT 18.310 lecture 23, The Finite Fourier Transform and the Fast Fourier Transform Algorithm (course page)",
+          "kind": "lecture-notes",
+          "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+          "locator": "Complete unpaginated lecture; the B-page computations use headings 3 and 4 (finite transform formulas and the Cooley-Tukey reduction).",
+          "contents": [
+            {
+              "name": "Heading 3: the forward evaluations p(z^k), the inverse a_s = (1/n)Σ p_k z^{-sk}, and the degenerate small lengths",
+              "locator": "heading 3",
+              "disposition": "included",
+              "item": "ex-unitary-dft-for-n-equals-one-and-two"
+            },
+            {
+              "name": "Heading 3: the transform converts polynomial products into pointwise products",
+              "locator": "heading 3",
+              "disposition": "included",
+              "item": "ex-cyclic-convolution-via-the-dft"
+            },
+            {
+              "name": "Heading 3: recovering coefficients from values requires the length to cover the polynomial degree; otherwise the reduction modulo z^n-1 wraps coefficients",
+              "locator": "heading 3",
+              "disposition": "included",
+              "item": "cex-linear-and-cyclic-convolution-are-not-the-same-without-zero-padding"
+            },
+            {
+              "name": "Heading 4: the reduction is stated for n even (n = 2s) and iterated to powers of two",
+              "locator": "heading 4",
+              "disposition": "included",
+              "item": "cex-radix-two-recursion-does-not-directly-apply-to-odd-length"
+            },
+            {
+              "name": "Heading 4: the worked four-coefficient computation, executed in two levels",
+              "locator": "heading 4",
+              "disposition": "inline",
+              "item": "ex-four-point-radix-two-fft"
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://math.mit.edu/~djk/18.310/18.310F04/23_finite_fourier.html",
+              "at": "2026-10-04T06:13:18.544Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-04T06:13:18.544Z",
+            "bytes": 25994,
+            "sha256_16": "e30b7b67c1cdd48e",
+            "kind": "html",
+            "text_chars": 12371
+          }
+        }
+      ]
+    }
+  ]
+}

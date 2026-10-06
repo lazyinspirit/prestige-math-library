@@ -1,0 +1,1130 @@
+[
+  {
+    "order": 458.017,
+    "id": "wave-energy-finite-propagation-and-huygens",
+    "kind": "A",
+    "category": "pde",
+    "title": "Wave Energy Finite Propagation and Huygens",
+    "companion": "wave-energy-finite-propagation-and-huygens-examples",
+    "requires": [
+      "wave-equation-representation-formulas"
+    ],
+    "items": [
+      {
+        "id": "def-wave-energy-and-energy-flux",
+        "kind": "definition",
+        "title": "Wave energy density, energy flux and total energy",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-jacobian-matrix-and-gradient",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-euclidean-inner-product",
+          "def-nonnegative-lebesgue-integral"
+        ],
+        "statement": "Let $n\\ge1$, $c>0$, let $U\\subseteq\\mathbb R^n$ be open, let $I\\subseteq\\mathbb R$ be an open interval and let $u:U\\times I\\to\\mathbb R$ be $C^2$ ([[def-ck-and-multi-index-notation-in-several-variables]]), with $Du=(\\partial_1u,\\dots,\\partial_nu)$ the spatial gradient ([[def-jacobian-matrix-and-gradient]]) and $u_t=\\partial_tu$. The **kinetic density**, **potential density** and **energy density** are $e_{\\mathrm{kin}}:=\\frac12u_t^2$, $e_{\\mathrm{pot}}:=\\frac{c^2}{2}|Du|^2$ and $e:=e_{\\mathrm{kin}}+e_{\\mathrm{pot}}=\\frac12(u_t^2+c^2|Du|^2)$, and the **energy flux** is the $C^1$ field $q:=-c^2u_t\\,Du$ ([[def-divergence-and-curl-of-a-c1-vector-field]]). For a Lebesgue-measurable $\\Omega\\subseteq\\mathbb R^n$ and $t$ with $\\int_\\Omega e(x,t)\\,dx<\\infty$, the **total energy in $\\Omega$** is $E_\\Omega(t):=\\int_\\Omega e(x,t)\\,dx$ ([[def-nonnegative-lebesgue-integral]]). **Sign convention.** With $\\nu$ the outward unit normal, $\\int_{\\partial\\Omega}q\\cdot\\nu\\,dS$ is the energy leaving $\\Omega$ across the boundary, consistently with $\\partial_te+\\operatorname{div}q=u_t\\Box_cu$ of [[lem-local-wave-energy-conservation-law]]. **Speed convention (drift-noted).** The gradient term carries the exact factor $c^2$; at unit speed this is the familiar $\\frac12u_t^2+\\frac12|Du|^2$. No equation for $u$, no finiteness of a particular integral and no boundary regularity is asserted.",
+        "strategy": "Definition of the standard vocabulary, with the $c^2$ gradient weight retained at speed $c$ exactly as the drift review requires. Sources: Hunter §7.1.1 (energy density and flux $-u_tDu$ at unit speed), Ivrii (2.7.3)-(2.7.5) ($e=\\frac12u_t^2+\\frac12c^2|\\nabla u|^2$, $S=-c^2u_t\\nabla u$) and Teschl (7.27); the enrichment row `lem-local-energy-balance-for-the-forced-wave-equation` is written at $c=1$ and is the case $c=1$ of the identity proved in [[lem-local-wave-energy-conservation-law]]. Energy integrals are left arbitrary until a setting supplies finiteness (that is exactly what the three cases of [[thm-conservation-of-total-wave-energy]] do).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed p. 176, (7.27): the energy $E(t)=\\frac12\\int_U(|\\nabla u|^2+u_t^2)\\,d^nx$"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§2.7.1, printed pp. 87-88, (2.7.3)-(2.7.5): energy density $e$ and energy flow $S$ with the $c^2$ weight"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§7.1.1, printed p. 212, (7.3) and the following display: energy density and flux $-u_tDu$ at unit speed"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-local-wave-energy-conservation-law",
+        "kind": "lemma",
+        "title": "The local wave-energy conservation law",
+        "deps": [
+          "def-wave-energy-and-energy-flux",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "thm-chain-rule-for-total-derivatives",
+          "def-laplacian-of-a-c2-function",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-algebra-of-derivatives",
+          "def-euclidean-inner-product"
+        ],
+        "statement": "Let $n\\ge1$, $c>0$, $U\\subseteq\\mathbb R^n$ open, $I\\subseteq\\mathbb R$ an open interval and $u\\in C^2(U\\times I)$ ([[def-ck-and-multi-index-notation-in-several-variables]]). Put $f:=\\Box_cu=\\partial_t^2u-c^2\\Delta u$ ([[def-wave-equation-cauchy-data-and-wave-speed]], [[def-laplacian-of-a-c2-function]]) and let $e,q$ be the energy density and flux of [[def-wave-energy-and-energy-flux]]. Then the pointwise identity $$\\partial_te+\\operatorname{div}q=fu_t$$ holds on $U\\times I$; in particular for every classical solution of the homogeneous equation $\\partial_te+\\operatorname{div}q=0$. At unit speed the identity reads $\\partial_t\\bigl[\\tfrac12(u_t^2+|Du|^2)\\bigr]=\\operatorname{div}(u_tDu)$, the differential energy balance of the enrichment row `lem-local-energy-balance-for-the-forced-wave-equation` ($q=-c^2u_tDu$ gives $-\\operatorname{div}(u_tDu)=\\operatorname{div}q$ at $c=1$).",
+        "strategy": "Product rule, coordinatewise: $\\partial_te=u_tu_{tt}+c^2\\langle Du,Du_t\\rangle$, while $\\operatorname{div}q=-c^2\\langle Du,Du_t\\rangle-c^2u_t\\Delta u$ ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]] for $\\operatorname{div}(u_tDu)$, [[thm-chain-rule-for-total-derivatives]] for $\\partial_t$ of the gradient). Adding, $\\partial_te+\\operatorname{div}q=u_t(u_{tt}-c^2\\Delta u)=fu_t$. This is Hunter (7.3), Ivrii (2.7.2) and (9.2.2), and Teschl's §7.3 computation, with the general speed $c$; the enrichment's form is the case $c=1$. No integration or boundary is involved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§7.1.1, printed p. 212, (7.3): $\\partial_t(\\frac12u_t^2+\\frac12|Du|^2)-\\operatorname{div}(u_tDu)=0$"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§2.7.1, printed p. 88, (2.7.2) and §9.2.1, printed p. 289, (9.2.2): the differential conservation law with $e=\\frac12u_t^2+\\frac12c^2|\\nabla u|^2$ and $S=-c^2u_t\\nabla u$"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed pp. 176-178, the local computation opening the proof of Theorem 7.12"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-integral-of-a-divergence-of-an-l-one-c-one-field-vanishes",
+        "kind": "lemma",
+        "title": "The integral of the divergence of an integrable C1 field vanishes",
+        "deps": [
+          "def-countable-choice",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "thm-dominated-convergence",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "thm-darboux-equals-riemann",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "def-l-one-of-a-measure",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+        ],
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$ and\nlet $F\\in C^1(\\mathbb R^n;\\mathbb R^n)$ ([[def-divergence-and-curl-of-a-c1-vector-field]])\nsatisfy $F\\in L^1(\\lambda_n)$ and $\\operatorname{div}F\\in L^1(\\lambda_n)$, where\n$\\lambda_n$ is $n$-dimensional Lebesgue measure\n([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], [[def-l-one-of-a-measure]]).\nThen\n\n$$\\int_{\\mathbb R^n}\\operatorname{div}F\\,d\\lambda_n=0 .$$\n\nBoth integrability hypotheses are used: $F\\in L^1$ is what dominates the cutoff\nterm $R^{-1}\\langle D\\chi_R,F\\rangle$, and $\\operatorname{div}F\\in L^1$ is both\nthe integrand whose integral is computed and its own dominating function. The\nconclusion fails if $F\\in L^1$ is dropped (a compactly supported $C^1$ function\n$h$ with $\\int h=1$ has $F(x)=\\int_{-\\infty}^xh$, so $F\\in C^1$ has\n$F'=h\\in L^1$ but $F\\notin L^1$ and $\\int_{\\mathbb R}F'=1$), and without\n$\\operatorname{div}F\\in L^1$ the displayed integral need not be defined. No decay of the flux is asserted beyond the two stated integrabilities.",
+        "strategy": "Choose a smooth bump $\\chi$ with $\\chi\\equiv1$ on $\\overline B_1(0)$ and $\\operatorname{supp}\\chi\\subseteq B_2(0)$ ([[lem-smooth-bump-between-concentric-euclidean-balls]]) and set $\\chi_R(x)=\\chi(x/R)$. Then $\\chi_RF\\in C_c^1$, so on a large ball the divergence theorem gives $\\int\\operatorname{div}(\\chi_RF)=0$ ([[thm-divergence-theorem-for-bounded-c-one-euclidean-domains]]); expand $\\operatorname{div}(\\chi_RF)=\\chi_R\\operatorname{div}F+\\langle D\\chi_R,F\\rangle$ ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]); $\\chi_R\\operatorname{div}F\\to\\operatorname{div}F$ in $L^1$ and $|\\langle D\\chi_R,F\\rangle|\\le C|F|/R$ with $|F|\\in L^1$ ([[thm-chain-rule-for-total-derivatives]], [[thm-dominated-convergence]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]]). Let $R\\to\\infty$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§1.12, printed pp. 17-18, Theorem 1.46 (the divergence theorem used with the cutoff)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.1, printed pp. 289-290, (9.2.2)-(9.2.3): the divergence identity integrated against an arbitrary bounded domain; the unit-speed whole-space energy argument is the same cutoff computation"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-truncated-wave-cone-geometry-and-frustum-presentation",
+        "kind": "lemma",
+        "title": "Truncated wave cones: convexity, piecewise C1 presentation and outward normals",
+        "deps": [
+          "def-countable-choice",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "def-convex-subset-of-euclidean-space",
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "lem-sphere-and-ball-measures-scale",
+          "lem-lipschitz-images-of-lebesgue-null-sets-are-lebesgue-null"
+        ],
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$,\n$c>0$, $x_0\\in\\mathbb R^n$, $t_0>0$ and $0<t_1<t_2<t_0$. In space-time\n$\\mathbb R^{n+1}$ with coordinates $(x,t)$ (Euclidean, so $(0,-1)$ and $(0,1)$\nbelow have zero space part) put\n\n$$K(t_1,t_2):=\\{(x,t):t_1<t<t_2,\\ |x-x_0|<c(t_0-t)\\}.$$\n\nThen:\n\n(i) $K(t_1,t_2)$ is a nonempty open bounded convex set\n([[def-convex-subset-of-euclidean-space]]);\n\n(ii) it has the finite piecewise $C^1$ presentation of\n[[def-bounded-piecewise-c-one-euclidean-domain]] whose non-edge faces are the\nbottom disk $\\overline B_{c(t_0-t_1)}(x_0)\\times\\{t_1\\}$, the top disk\n$\\overline B_{c(t_0-t_2)}(x_0)\\times\\{t_2\\}$ and the lateral frustum\n$$L:=\\{(x,t):|x-x_0|=c(t_0-t),\\ t_1\\le t\\le t_2\\},$$\nthe edge set being the two boundary circles\n$S_{c(t_0-t_1)}(x_0)\\times\\{t_1\\}$ and $S_{c(t_0-t_2)}(x_0)\\times\\{t_2\\}$;\n\n(iii) the corresponding outward unit normals are $(0,-1)$ on the bottom disk,\n$(0,1)$ on the top disk, and\n$$\\nu_{\\mathrm{lat}}(x,t)=\\left(\\frac{x-x_0}{|x-x_0|},\\,c\\right)\\Big/\\sqrt{1+c^2}$$\nat points of $L$;\n\n(iv) the closed backward cone\n$K^-(x_0,t_0)=\\{(x,t):0\\le t\\le t_0,\\ |x-x_0|\\le c(t_0-t)\\}$ is compact and\nconvex, and $K(t_1,t_2)$ is its interior intersected with the slab\n$\\{t_1<t<t_2\\}$.\n\nAll statements are also true at $c=1$, and\n$n=1$ is the characteristic trapezium.",
+        "strategy": "Convexity of the function $(x,t)\\mapsto|x-x_0|+ct$ (triangle inequality plus an affine function) gives (i) and (iv). For (ii) verify the definition of [[def-bounded-piecewise-c-one-euclidean-domain]] face by face: the two disks and the frustum are compact Borel subsets of regular $C^1$ hypersurface patches because $\\nabla(|x-x_0|+ct)=(\\widehat{x-x_0},c)\\neq0$ on $x\\neq x_0$; the two edge circles have surface measure zero in each face; off the edge set the boundary is locally a single $C^1$ graph with $K$ on one side (the cone function $t_0-|x-x_0|/c$ is $C^1$ away from $x_0$). Part (iii) is the outward-normal computation $\\nu=\\nabla(|x-x_0|+ct)/|\\nabla(|x-x_0|+ct)|$ ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]], [[def-surface-integral-is-independent-of-c-one-boundary-charts]]). The drift review requires this normal computation; it drives the sign estimate of [[lem-energy-identity-on-a-truncated-wave-cone]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§1.12, printed pp. 17-18: the piecewise extension of the divergence theorem the presentation is built for"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.3, printed p. 292: the backward cone $K^-(y,\\tau)=\\{(x,t):t\\le\\tau,\\ |y-x|<c(\\tau-t)\\}$ and its characteristic mantle"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf",
+              "locator": "§2, printed/PDF pp. 3-4, Theorem 2.1: the truncated backwards light cone with flat base, flat top and mantle used in the cone energy estimate"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets",
+        "kind": "lemma",
+        "title": "Vanishing gradient and time derivative force constancy on convex sets",
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "cor-zero-total-derivative-on-a-convex-open-set-is-constant"
+        ],
+        "statement": "Let $U\\subseteq\\mathbb R^{m}$ be an open convex set ([[def-convex-subset-of-euclidean-space]]) and $w\\in C^1(U)$ ([[def-ck-and-multi-index-notation-in-several-variables]]) with $Dw=0$ on $U$, i.e. $\\partial_iw=0$ for every coordinate ([[def-directional-and-partial-derivatives]]). Then $w$ is constant on $U$. In particular, if $(x,t)\\mapsto u(x,t)$ is $C^1$ on an open convex subset of space-time with $\\partial_tu=0$ and $D_xu=0$ there, then $u$ is constant there; this is the conclusion used when an energy density vanishes identically on a cone or ball.",
+        "strategy": "For $p,q\\in U$ the segment $\\gamma(s)=(1-s)p+sq$, $s\\in[0,1]$, lies in $U$; $g(s):=w(\\gamma(s))$ is continuous on $[0,1]$ and differentiable on $(0,1)$ with $g'(s)=Dw(\\gamma(s))\\cdot(q-p)=0$ by the chain rule ([[thm-chain-rule-for-total-derivatives]]); hence $g$ is constant ([[cor-zero-derivative-implies-constant]]). Space-time is $\\mathbb R^{n+1}$ with its Euclidean coordinates, so the same statement covers $\\partial_tw=D_xw=0$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§1.12, printed p. 17: coordinates and differentiation in Euclidean space (the segment argument)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.3, printed pp. 290-291: the step '$u_t=\\nabla u=0$ on $S_T$ ... since we can select $T$ arbitrarily' ends by constancy of $u$"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-conservation-of-total-wave-energy",
+        "kind": "theorem",
+        "title": "Conservation of total wave energy in three admissible settings",
+        "deps": [
+          "def-countable-choice",
+          "lem-local-wave-energy-conservation-law",
+          "def-wave-energy-and-energy-flux",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "lem-integral-of-a-divergence-of-an-l-one-c-one-field-vanishes",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-differentiation-under-dominated-improper-multiple-integrals",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "cor-zero-derivative-implies-constant",
+          "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "thm-ftc-second-part",
+          "thm-darboux-equals-riemann",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$, $c>0$, $T>0$, let $U\\subseteq\\mathbb R^n$ be open and let $u\\in C^2(U\\times(0,T))$ solve the homogeneous equation $\\Box_cu=0$ ([[def-wave-equation-cauchy-data-and-wave-speed]]), with $e,q$ as in [[def-wave-energy-and-energy-flux]] and [[lem-local-wave-energy-conservation-law]]. Then $E_\\Omega(t)$ is constant in $t$ in each of the following settings, and in each the vanishing boundary term is: (a) **fixed spatial support**: $\\Omega=\\mathbb R^n$ and $U=\\mathbb R^n$ and there is a compact $K$ with $\\operatorname{supp}u(\\cdot,t)\\subseteq K$ for all $t\\in(0,T)$ ([[def-support-and-compactly-supported-riemann-integral-in-rn]]); the flux term through $\\partial B_R$ vanishes for a large ball $B_R\\supset K$. (b) **integrable flux (sufficient decay)**: $U=\\Omega=\\mathbb R^n$, $e(\\cdot,t),q(\\cdot,t),\\operatorname{div}q(\\cdot,t)\\in L^1(\\mathbb R^n)$ for every $t$, $t\\mapsto E_{\\mathbb R^n}(t)$ is differentiable with $E_{\\mathbb R^n}'(t)=\\int_{\\mathbb R^n}\\partial_te(x,t)\\,dx$ (automatic, for instance, when $\\partial_te$ is dominated on compact time intervals by a fixed $L^1$ function), and $\\int_{\\mathbb R^n}\\operatorname{div}q(\\cdot,t)\\,dx=0$ by [[lem-integral-of-a-divergence-of-an-l-one-c-one-field-vanishes]]; this integrability is exactly the hypothesis a plane wave fails. (c) **bounded domain with homogeneous Dirichlet or homogeneous Neumann data**: for $n\\ge2$, $U$ is a bounded $C^1$ domain ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]); for $n=1$, $U$ is a finite union of disjoint bounded open intervals with pairwise disjoint closures and the outward normals at the left and right endpoints are $-1$ and $+1$. Require $u\\in C^2(\\overline U\\times(0,T))$ in the interior-up-to-boundary convention, $\\Omega=U$, and either $u(x,t)=0$ on all of $\\partial U\\times(0,T)$ or $\\partial_\\nu u(x,t):=Du(x,t)\\cdot\\nu(x)=0$ there. In the Dirichlet case $u_t|_{\\partial U}=0$; in the Neumann case $\\partial_\\nu u=0$. Thus in both cases the outward flux $q\\cdot\\nu=-c^2u_t\\partial_\\nu u$ vanishes.",
+        "strategy": "Fix a compact time interval [a,b] inside (0,T) and use the local balance law. In (a), support confines the integral to a ball; continuity bounds the time derivative on that localized compact cylinder. In (b), use the stated integrability and differentiation hypotheses, with no boundedness claim on the whole-space cylinder. In (c), continuity bounds the derivatives on the compact set Ū×[a,b]. Differentiate under the integral and use the divergence theorem or the integrable-divergence lemma; the stated boundary conditions or support make the flux vanish.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed p. 176, Lemma 7.10 and Problem 7.15: constant energy under Dirichlet (and Neumann) boundary conditions"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§7.1.1, printed p. 212: integration of (7.3) over $\\Omega$ with $u=0$ on $\\partial\\Omega$ gives $\\frac{dE}{dt}=0$"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§2.7.1, printed p. 88, (2.7.6); §9.2.1, printed p. 289, (9.2.2)-(9.2.3)"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+        "kind": "corollary",
+        "title": "Energy uniqueness for the wave Cauchy problem",
+        "deps": [
+          "def-countable-choice",
+          "thm-conservation-of-total-wave-energy",
+          "lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-wave-energy-and-energy-flux",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-algebra-of-derivatives",
+          "def-convex-subset-of-euclidean-space"
+        ],
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $c>0$,\n$T>0$ and let $u$ be a classical solution of $\\Box_cu=0$ on\n$\\mathbb R^n\\times(0,T)$ with Cauchy data $(u_0,u_1)$ and differentiable displacement $u_0$, so $Du_0$ in the initial-energy hypothesis is defined, and assume the total\nenergy has a finite initial value and is conserved in the sharp form\n$E_{\\mathbb R^n}(t)=E_{\\mathbb R^n}(0)$ for every $t\\in(0,T)$, where\n$E_{\\mathbb R^n}(0)=\\tfrac12\\int_{\\mathbb R^n}(u_1^2+c^2|Du_0|^2)\\,dx$. This\nholds, for instance, when the solution has fixed compact spatial support (by\n[[thm-conservation-of-total-wave-energy]](a) together with continuity of $e$ up\nto $t=0$ on the fixed support with its value given by the data density), or when the integrability hypotheses of that\ntheorem's case (b) hold and $E_{\\mathbb R^n}$ has a continuous extension to\n$0$ with value equal to the displayed data energy.\n\n(i) If the Cauchy data vanish, $u_0=u_1=0$, then $E_{\\mathbb R^n}(0)=0$,\nhence $E_{\\mathbb R^n}(t)=0$ for all $t$, hence $u_t(\\cdot,t)=Du(\\cdot,t)=0$\nand $u(\\cdot,t)$ is constant on $\\mathbb R^n$ for every $t\\in(0,T)$; the\nconstant is the common limit of $u(\\cdot,t)$ as $t\\downarrow0$, namely $u_0=0$,\nso $u\\equiv0$.\n\n(ii) More generally, if $u_1=0$ and $Du_0=0$ (equivalently\n$E_{\\mathbb R^n}(0)=0$ under the conserved-solution hypotheses), then $u(\\cdot,t)\\equiv u_0$ for every $t$, where the\ndisplacement datum $u_0$ is then constant: the energy sees only $(u_t,Du)$, and\nthe displacement datum fixes the residual spatial constant.\nConsequently, two classical solutions with equal Cauchy data in a class closed under differences, in which each difference has the stated sharp energy conservation, agree.",
+        "strategy": "Conservation gives $E(t)=E(0)$; $e\\ge0$ is continuous and $\\int e=0$, so $e(\\cdot,t)\\equiv0$, hence $u_t=Du=0$; constancy on the connected $\\mathbb R^n$ follows from [[lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets]] applied on the convex exhaustion by balls. For (ii) the constant equals the (constant) initial displacement. Uniqueness follows by applying (i) to the difference of two solutions with equal data. This is Teschl Corollary 7.13 and Theorem 7.11, Ivrii Theorem 9.2.2, and Hunter's energy-uniqueness remark; the drift note's 'zero energy leaves a spatial constant until the displacement datum fixes it' is exactly clause (ii).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed p. 176, Theorem 7.11; printed p. 178, Corollary 7.13"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.3, printed pp. 290-292, Theorems 9.2.2-9.2.3"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§7.1.1, printed p. 212: the energy estimate provides uniqueness ('This result provides an $L^2$-energy estimate')"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-energy-continuous-dependence-for-the-forced-wave-equation",
+        "kind": "theorem",
+        "title": "Continuous dependence of wave energy on the forcing",
+        "deps": [
+          "def-countable-choice",
+          "lem-local-wave-energy-conservation-law",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-wave-energy-and-energy-flux",
+          "thm-monotonicity-from-the-derivative",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-ftc-first-part",
+          "thm-continuous-implies-integrable",
+          "thm-darboux-equals-riemann",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $c>0$, $T>0$ and let $u\\in C^2$ solve the forced equation $\\Box_cu=f$ either on $\\mathbb R^n\\times[0,T)$ or on $U\\times[0,T)$ with $U$ a bounded $C^1$ domain and homogeneous Dirichlet boundary data; assume the total energy $E$ satisfies the energy identity $E'(t)=(f(t),u_t(t))$ and $E(t)<\\infty$ for all $t$ (this holds in the settings (a)-(c) of [[thm-conservation-of-total-wave-energy]] by [[lem-local-wave-energy-conservation-law]]), and that $f(t)\\in L^2(\\mathbb R^n)$ with $t\\mapsto\\|f(t)\\|_2$ locally integrable. Then for every $t\\in[0,T)$ $$\\sqrt{2E(t)}\\le\\sqrt{2E(0)}+\\int_0^t\\|f(s)\\|_2\\,ds,\\qquad\\text{hence}\\qquad E(t)^{1/2}\\le E(0)^{1/2}+\\int_0^t\\|f(s)\\|_2\\,ds .$$ This is the enrichment row `thm-forced-wave-energy-norm-estimate`: stability with the sharp $L^1_tL^2_x$ forcing constant, not only conservation.",
+        "strategy": "Put $\\varphi(t)=\\sqrt{2E(t)}=\\|(u_t,cDu)(t)\\|_2$ and regularise $\\varphi_\\epsilon=\\sqrt{2E+\\epsilon^2}$. Then $\\varphi_\\epsilon'=E'/\\varphi_\\epsilon=(f,u_t)/\\varphi_\\epsilon\\le\\|f\\|_2\\|u_t\\|_2/\\varphi_\\epsilon\\le\\|f\\|_2$ by Cauchy-Schwarz ([[cor-cauchy-schwarz-inequality-for-l-two]]) and $\\|u_t\\|_2\\le\\varphi\\le\\varphi_\\epsilon$. Integrate on $[0,t]$ and let $\\epsilon\\downarrow0$. The design's sketch says 'Cauchy-Schwarz and Gronwall'; the sharp constant comes from this regularised division — the device the enrichment row itself names — and Gronwall's inequality with $b=0$ ([[thm-gronwall-integral-inequality]]) is the equivalent abstract form. The displayed second inequality uses $1/\\sqrt2\\le1$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed pp. 176–178, (7.27) and Theorem 7.12: homogeneous energy and cone estimates; the forced estimate here is derived from the explicitly assumed identity for E prime"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.5, printed p. 293, Remark 9.2.2: the energy approach also gives stability of solutions"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§7.1.1, printed p. 212: the $L^2$-energy estimate obtained from the differential energy identity"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "def-forward-and-backward-wave-cones-domain-of-dependence-and-influence",
+        "kind": "definition",
+        "title": "Forward and backward wave cones, domain of dependence and influence",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-interval"
+        ],
+        "statement": "Let $n\\ge1$, let $c>0$ and let $x_0\\in\\mathbb R^n$, $t_0\\ge0$. Write\n$|z|:=\\lVert z\\rVert_2$ for the Euclidean norm and\n$B_r(x_0)=\\{x\\in\\mathbb R^n:|x-x_0|<r\\}$,\n$\\overline B_r(x_0)=\\{x\\in\\mathbb R^n:|x-x_0|\\le r\\}$ for the open and closed\nballs, $r\\ge0$ ([[def-euclidean-inner-product]]). Space-time points are written\n$(x,t)\\in\\mathbb R^n\\times\\mathbb R$, with $t$ the time coordinate.\n\nThe **(closed) backward cone** with vertex $(x_0,t_0)$ and speed $c$ is\n\n$$K^-(x_0,t_0):=\\{(x,t):0\\le t\\le t_0,\\ |x-x_0|\\le c(t_0-t)\\}.$$\n\nIts **base ball** is $B_{ct_0}(x_0)\\times\\{0\\}$, and its **lateral boundary**, including the base rim and excluding the vertex, is\n$\\{(x,t):0\\le t<t_0,\\ |x-x_0|=c(t_0-t)\\}$. The\n**(closed) forward cone** with vertex $(x_0,t_0)$ is\n\n$$K^+(x_0,t_0):=\\{(x,t):t\\ge t_0,\\ |x-x_0|\\le c(t-t_0)\\}.$$\n\nFor data given on a set $S\\subseteq\\mathbb R^n$ at time $0$, the **domain of\ninfluence of $S$ at time $t\\ge0$** is\n\n$$S+\\overline B_{ct}(0)=\\{x+y:x\\in S,\\ |y|\\le ct\\},$$\n\nthe set of points that data on $S$ can reach by time $t$ at speed at most $c$.\n\nThe **domain of dependence of $(x_0,t_0)$** is not left as an undefined\nphysical phrase: the causal content of the name is formalised by the local\nuniqueness theorem [[thm-domain-of-dependence-and-local-uniqueness]], which\nsays, under Countable Choice and for $t_0>0$, that two $C^2$ solutions on a neighbourhood of the closed cone with the same Cauchy\ndata on $B_{ct_0}(x_0)$ and the same source on the cone $K^-(x_0,t_0)$ agree at\nevery point of $K^-(x_0,t_0)$ (in particular at the vertex). Truncated cones\n$K(t_1,t_2)=\\{(x,t):t_1<t<t_2,\\ |x-x_0|<c(t_0-t)\\}$ with $0<t_1<t_2<t_0$, their\npiecewise $C^1$ presentation and their outward normals are those of\n[[lem-truncated-wave-cone-geometry-and-frustum-presentation]].\n\nThe slope $c$ is part of the definition and not decoration: at $n=1$ the\nbackward cone is the characteristic triangle with the two characteristic lines\n$x=x_0\\pm c(t_0-t)$, and the open base ball is the interval $(x_0-ct_0,x_0+ct_0)$\n([[def-interval]]). No propagation, uniqueness or support claim is asserted by\nthis item; those are [[thm-finite-propagation-speed-for-the-wave-equation]],\n[[thm-domain-of-dependence-and-local-uniqueness]] and\n[[cor-compact-support-expands-at-speed-at-most-c]].",
+        "strategy": "Definition of the standard causal vocabulary, matching Teschl (7.29) (the cone $K(t_0,x_0)$) and Ivrii's $K^-(y,\\tau)=\\{(x,t):t\\le\\tau,|y-x|<c(\\tau-t)\\}$, and Speck's development/range-of-influence language. The design's well-definedness note requires 'depends on' to be formalised by the local uniqueness statement rather than used as an undefined phrase, which is what the last sentence does. No propagation or dependence claim is asserted by this item; those are [[thm-finite-propagation-speed-for-the-wave-equation]] and [[thm-domain-of-dependence-and-local-uniqueness]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed p. 177, (7.29): $K(t_0,x_0)=\\{(t,x):0\\le t\\le t_0,\\ |x-x_0|\\le t_0-t\\}$"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.3, printed p. 292, Theorem 9.2.3: the backward light cone $K^-(y,\\tau)$"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf",
+              "locator": "§3, printed/PDF pp. 5-6, Definitions 3.0.3-3.0.6 and Examples 3.0.5-3.0.7: development and range of influence"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-energy-identity-on-a-truncated-wave-cone",
+        "kind": "lemma",
+        "title": "Energy identity on a truncated wave cone and positivity of the null-side flux",
+        "deps": [
+          "def-countable-choice",
+          "lem-local-wave-energy-conservation-law",
+          "def-wave-energy-and-energy-flux",
+          "lem-truncated-wave-cone-geometry-and-frustum-presentation",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-euclidean-inner-product"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $n\\ge1$, $c>0$, $x_0\\in\\mathbb R^n$, $t_0>0$, $0<t_1<t_2<t_0$, let $K=K(t_1,t_2)$ be the space-time frustum of [[lem-truncated-wave-cone-geometry-and-frustum-presentation]] and let $u\\in C^2$ solve $\\Box_cu=f$ on a neighbourhood of $\\overline K$ ([[def-wave-equation-cauchy-data-and-wave-speed]]). With $e,q$ as in [[def-wave-energy-and-energy-flux]] and $E(t):=\\int_{B_{c(t_0-t)}(x_0)}e(x,t)\\,dx$, $$\\int_K f\\,u_t\\,dx\\,dt=E(t_2)-E(t_1)+\\int_{t_1}^{t_2}\\!\\int_{\\partial B_{c(t_0-t)}(x_0)}\\ell\\,dS\\,dt ,$$ where, with $\\partial_ru=Du\\cdot\\frac{x-x_0}{|x-x_0|}$ and $D_{\\mathrm{tan}}u$ the tangential part of $Du$ on the sphere, the **null-side (lateral) flux density** is $$\\ell=\\frac{c\\,e-c^2u_t\\,\\partial_ru}{\\sqrt{1+c^2}} =\\frac{c}{2\\sqrt{1+c^2}}\\Bigl((u_t-c\\,\\partial_ru)^2+c^2|D_{\\mathrm{tan}}u|^2\\Bigr)\\ \\ge 0 .$$ Thus the lateral term is a sum of squares, vanishing identically exactly when $u_t=c\\,\\partial_ru$ and $D_{\\mathrm{tan}}u=0$ on the lateral surface. (Differentiating the shrinking-ball energy $t\\mapsto E(t)$ along the cone, Teschl's route, yields the same inequality $\\dot E(t)\\le0$.)",
+        "strategy": "Apply the space-time divergence theorem on the frustum, [[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]], whose hypotheses are verified in [[lem-truncated-wave-cone-geometry-and-frustum-presentation]], to the $C^1$ field $(q,e)$ in space-time: $\\operatorname{div}_{(x,t)}(q,e)=\\operatorname{div}q+\\partial_te=fu_t$ by [[lem-local-wave-energy-conservation-law]]. The bottom and top faces contribute $-E(t_1)$ and $+E(t_2)$; the lateral face has outward normal $(\\hat x,c)/\\sqrt{1+c^2}$ by the geometry lemma, so its flux density is $(q\\cdot\\hat x+ce)/\\sqrt{1+c^2}$. Insert $q=-c^2u_tDu$ and complete the square using $|Du|^2=(\\partial_ru)^2+|D_{\\mathrm{tan}}u|^2$. This is the design's hard obligation 'compute the cone-side normal and flux sign'; equivalently it is the quadratic form $Q$ of Ivrii Proposition 9.2.1 (nonnegative on characteristic surfaces) and Teschl's boundary inequality $|u_t\\partial_\\nu u|\\le\\frac12u_t^2+\\frac12|\\nabla u|^2$ completed to a square. The enrichment row `lem-backward-cone-energy-is-monotone-up-to-source-work` is this same identity in the shrinking-ball (differentiated) form; no claim is dropped by stating it on the frustum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed pp. 177-178, proof of Theorem 7.12: the shrinking-ball derivative and the inequality $|u_t\\partial_\\nu u|\\le\\frac12u_t^2+\\frac12|\\nabla u|^2$"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.1, printed p. 289, (9.2.3) and §9.2.2, printed p. 290, Proposition 9.2.1: the boundary integral and the nonnegative characteristic quadratic form"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf",
+              "locator": "§2, printed/PDF pp. 3-4, Theorem 2.1: flux through the mantle computed as $T(X,L)\\ge0$"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-propagation-speed-for-the-wave-equation",
+        "kind": "theorem",
+        "title": "Finite propagation speed: vanishing data and source in a backward cone",
+        "deps": [
+          "def-countable-choice",
+          "lem-energy-identity-on-a-truncated-wave-cone",
+          "lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets",
+          "def-forward-and-backward-wave-cones-domain-of-dependence-and-influence",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-wave-energy-and-energy-flux",
+          "thm-dominated-convergence",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "lem-truncated-wave-cone-geometry-and-frustum-presentation"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $c>0$, $x_0\\in\\mathbb R^n$, $t_0>0$, and let $u\\in C^2$ solve $\\Box_cu=f$ on a neighbourhood of the closed backward cone $K^-(x_0,t_0)$ ([[def-forward-and-backward-wave-cones-domain-of-dependence-and-influence]]). If $f=0$ on $K^-(x_0,t_0)$ and $u(\\cdot,0)=u_t(\\cdot,0)=0$ on the base ball $B_{ct_0}(x_0)$, then $u\\equiv0$ on $K^-(x_0,t_0)$; in particular $u(x_0,t_0)=0$. The source term is included, in the sharp form of the enrichment row `thm-finite-propagation-for-forced-waves`: data and source in a backward cone control the whole cone.",
+        "strategy": "For $0<t_1<t_2<t_0$ apply [[lem-energy-identity-on-a-truncated-wave-cone]] with $f=0$: $E(t_2)=E(t_1)-\\int_{t_1}^{t_2}\\!\\int\\ell\\,dS\\,dt\\le E(t_1)$, so $E$ is non-increasing on $(0,t_0)$ and $E\\ge0$. As $t\\downarrow0$, $E(t)\\to E(0)=\\frac12\\int_{B_{ct_0}}(u_1^2+c^2|Du_0|^2)=0$ by dominated convergence (continuity of $e$ up to $t=0$ and exhaustion of the base ball, [[thm-dominated-convergence]]). Hence $E\\equiv0$; since $e\\ge0$ is continuous, $u_t=Du=0$ on $K^-$, so $u$ is constant on the convex cone ([[lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets]]) and the constant is $0$ because $u(\\cdot,0)=0$; continuity extends the conclusion to the lateral boundary and the vertex. Teschl Theorem 7.12 (unit speed) and Ivrii Theorem 9.2.3, with the forcing included.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed pp. 177-178, Theorem 7.12 and its proof"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.3, printed pp. 290-292, Theorem 9.2.3 (backward light cone)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf",
+              "locator": "§2, printed/PDF p. 4, Corollary 2.0.4 (uniqueness on the solid backward light cone)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-compact-support-expands-at-speed-at-most-c",
+        "kind": "corollary",
+        "title": "Compact support expands at speed at most c",
+        "deps": [
+          "def-countable-choice",
+          "thm-finite-propagation-speed-for-the-wave-equation",
+          "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "def-forward-and-backward-wave-cones-domain-of-dependence-and-influence",
+          "def-wave-equation-cauchy-data-and-wave-speed"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $c>0$, $T>0$, let $K\\subseteq\\mathbb R^n$ be compact and let $u\\in C^2(\\mathbb R^n\\times[0,T))$ solve $\\Box_cu=f$ with $\\operatorname{supp}u(\\cdot,0)\\cup\\operatorname{supp}u_t(\\cdot,0)\\subseteq K$ ([[def-support-and-compactly-supported-riemann-integral-in-rn]]) and $\\operatorname{supp}f\\subseteq\\{(x,t):0\\le t<T,\\ \\operatorname{dist}(x,K)\\le ct\\}$. Then for every $t\\in[0,T)$, $$\\operatorname{supp}u(\\cdot,t)\\subseteq K+\\overline B_{ct}(0)=\\{x:\\operatorname{dist}(x,K)\\le ct\\},$$ the time-$t$ domain of influence of the data support ([[def-forward-and-backward-wave-cones-domain-of-dependence-and-influence]]).",
+        "strategy": "Let $x\\notin K+\\overline B_{ct}(0)$, so $\\operatorname{dist}(x,K)>ct$. Then $B_{ct}(x)\\cap K=\\varnothing$, so the data vanish on the base ball of $K^-(x,t)$; and if $(y,s)$ is in that backward cone and $\\operatorname{dist}(y,K)\\le cs$, then $\\operatorname{dist}(x,K)\\le|x-y|+\\operatorname{dist}(y,K)\\le c(t-s)+cs=ct$, a contradiction, so $f$ vanishes on the cone as well. [[thm-finite-propagation-speed-for-the-wave-equation]] gives $u(x,t)=0$. The case $t=0$ is the support hypothesis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.1, printed p. 289, remark (c): $u(x,t)$ does not depend on data with $|x-y|>ct$ or sources with $|x-y|>c|t-\\tau|$"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 167-172 and §7.3, printed p. 177: support carried by the cone"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf",
+              "locator": "§3, printed/PDF pp. 5-6, definitions of development and range of influence"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-domain-of-dependence-and-local-uniqueness",
+        "kind": "theorem",
+        "title": "Domain of dependence and local uniqueness inside a backward cone",
+        "deps": [
+          "def-countable-choice",
+          "thm-finite-propagation-speed-for-the-wave-equation",
+          "def-forward-and-backward-wave-cones-domain-of-dependence-and-influence",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "thm-algebra-of-derivatives"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $c>0$, $x_0\\in\\mathbb R^n$, $t_0>0$, and let $u,v\\in C^2$ solve $\\Box_cu=f$ and $\\Box_cv=g$ on a neighbourhood of $K^-(x_0,t_0)$. If $f=g$ on $K^-(x_0,t_0)$, and $u(\\cdot,0)=v(\\cdot,0)$, $u_t(\\cdot,0)=v_t(\\cdot,0)$ on the base ball $B_{ct_0}(x_0)$, then $u=v$ on $K^-(x_0,t_0)$. This is the formal content, required by the design's well-definedness note, of 'the value at $(x_0,t_0)$ depends only on the Cauchy data on the base ball and the source on the cone'.",
+        "strategy": "Apply [[thm-finite-propagation-speed-for-the-wave-equation]] to $w=u-v$: it is $C^2$ on a neighbourhood of the cone, solves the homogeneous equation there, and has homogeneous base data. This is the finite-propagation form of uniqueness; Ivrii Theorem 9.2.3, Teschl Theorem 7.12, Speck Corollary 2.0.4.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed p. 177, Theorem 7.12 (the cone of dependence)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.3, printed p. 292, Theorem 9.2.3"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #13-14: Geometric Energy Estimates (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/ad3a71c522df2396b6248cf9b35aedea_MIT18_152F11_lec_13_14.pdf",
+              "locator": "§2, printed/PDF p. 4, Corollary 2.0.4 (uniqueness on the solid backward light cone)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-strong-huygens-principle",
+        "kind": "definition",
+        "title": "The strong Huygens principle in the precise homogeneous Cauchy sense",
+        "deps": [
+          "def-countable-choice",
+          "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-spherical-mean-of-space-dependent-data",
+          "thm-kirchhoff-formula-for-the-three-dimensional-wave-equation",
+          "thm-finite-propagation-speed-for-the-wave-equation"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $n\\ge1$, $c>0$ and fix the homogeneous Cauchy setting of the page: **admissible data** is a pair $(u_0,u_1)$ in the regularity class of the dimension-$n$ representation formula of the preceding pair `wave-equation-representation-formulas` ([[def-wave-equation-cauchy-data-and-wave-speed]], [[def-spherical-mean-of-space-dependent-data]]), and **the solution** is the $C^2$ solution given by that formula, unique in its finite-energy class by [[cor-energy-uniqueness-for-the-wave-cauchy-problem]]. For $x_0\\in\\mathbb R^n$, $t_0>0$ put $S:=\\partial B_{ct_0}(x_0)$. The homogeneous Cauchy problem with speed $c$ satisfies the **strong Huygens principle** in dimension $n$ if for every $(x_0,t_0)$ the value $u(x_0,t_0)$ is unchanged when the data are replaced by admissible data agreeing with them on a **neighbourhood of $S$**; equivalently, the data-to-value functional is carried by the sphere $S$ (perturbations of the data vanishing on a neighbourhood of $S$ do not change the value). Equivalent formulations used below: (i) **strictly-inside form** (Ivrii's remark (e)): the value does not depend on $u_0,u_1$ at points $y$ with $|y-x_0|<ct_0$, i.e. changes compactly supported in the open base ball do not affect the value; (ii) **shell form** for compactly supported data: if the data are supported in the compact $K$, then $u(x,t)=0$ whenever $S(x,ct)\\cap K=\\varnothing$ — the solution at time $t$ is carried by the $ct$-sphere shell of $K$; (iii) **germ form**: the value depends only on the jet of the data along $S$. **Caution.** The value may involve finitely many transverse (radial) derivatives, so agreement of the bare restrictions to $S$ is not in general enough: for $n=3$, $c=1$, the radial datum $u_0(y)=(1-|y|)\\psi(|y|)$ with $\\psi$ smooth, $\\psi\\equiv1$ near $|y|=1$, and $u_1=0$ vanishes on $S=\\partial B_1(0)$, yet Kirchhoff's formula ([[thm-kirchhoff-formula-for-the-three-dimensional-wave-equation]]) gives $u(0,1)=u_0(1)+u_0'(1)=-\\psi(1)\\neq0$. The precise positive statement is [[thm-strong-huygens-principle-in-odd-spatial-dimensions]] and the failures are [[thm-wave-tails-in-one-and-even-spatial-dimensions]].",
+        "strategy": "Definition of the named principle in the sharp homogeneous Cauchy sense demanded by the design ('in the precise homogeneous Cauchy sense') and by Ivrii's remark (e) ('for odd $n\\ge3$ solution $u(x,t)$ does not depend on $g(y),h(y)$ with $|x-y|<ct$' — the strictly-inside form (i)). Formulation (ii) follows from the germ form together with the domain-of-dependence statements and is the classical 'sharp Huygens' shell picture (Speck Remark 1.0.1, Hunter's domain-of-dependence discussion); (iii) is the jet reformulation proved for odd dimensions below. The caution is not decoration: the textbook shorthand 'depends only on the values of the initial data on $\\partial B_t(x)$' (Teschl p. 172, Speck Lecture 12 Remark 1.0.1) is false if read as agreement of the bare restrictions, and the radial example shows it. The definition asserts no existence or uniqueness beyond the page's classical class.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.1, printed p. 289, remark (e): no dependence on data with $|x-y|<ct$ for odd $n\\ge3$, 'no leftovers after front passed with a speed c'"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 171-172: the three-dimensional sphere dependence versus the two-dimensional solid-ball dependence"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #12: Kirchhoff's Formula and Minkowskian Geometry (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/940561a138578640826f762b5a57bcad_MIT18_152F11_lec_12.pdf",
+              "locator": "Remark 1.0.1, printed/PDF pp. 1-2: the sharp Huygens principle (boundary of a ball, not the solid ball) in odd $n\\ge3$, failing for $n=1$ and even $n$"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-strong-huygens-principle-in-odd-spatial-dimensions",
+        "kind": "theorem",
+        "title": "The strong Huygens principle in odd spatial dimensions",
+        "deps": [
+          "def-strong-huygens-principle",
+          "thm-odd-dimensional-wave-formula-by-spherical-means",
+          "lem-spherical-means-of-smooth-data-are-smooth",
+          "def-spherical-mean-of-space-dependent-data",
+          "def-countable-choice",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "lem-relative-compact-closed-sets-have-a-positive-distance-gap",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-algebra-of-derivatives",
+          "def-support-and-compactly-supported-riemann-integral-in-rn"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $n=2k+1\\ge3$ be odd, $c>0$, and let $u$ be the $C^2$ solution given by the odd-dimensional formula [[thm-odd-dimensional-wave-formula-by-spherical-means]] for admissible data $(u_0,u_1)$, $u_0\\in C^{k+2}(\\mathbb R^n)$, $u_1\\in C^{k+1}(\\mathbb R^n)$ ([[def-spherical-mean-of-space-dependent-data]]). Fix $x_0\\in\\mathbb R^n$, $t_0>0$ and $S=\\partial B_{ct_0}(x_0)$. Then: (a) **(germ form)** $u(x_0,t_0)$ is a finite linear combination $$\\sum_{j\\le k}\\alpha_j\\,\\partial_r^jM_{u_0}(x_0,ct_0)+\\sum_{j\\le k-1}\\beta_j\\,\\partial_r^jM_{u_1}(x_0,ct_0)$$ of radial derivatives of spherical means, and $$\\partial_r^jM_f(x_0,r)=\\frac1{\\omega_{n-1}}\\int_{S^{n-1}}\\partial_r^j\\bigl[f(x_0+r\\omega)\\bigr]\\,d\\sigma(\\omega)\\quad(r=ct_0),$$ so the value is determined by the jet of $(u_0,u_1)$ on $S$: admissible data agreeing on a neighbourhood of $S$ give the same value at $(x_0,t_0)$. (b) **(shell form)** if the data are supported in the compact $K$, then $u(x,t)=0$ whenever $S(x,ct)\\cap K=\\varnothing$; in particular for $K=\\overline B_r(x_0)$ and $ct>r$ the interior $B_{ct-r}(x_0)$ is quiet, while the front and back of the disturbance travel at speed $c$. Hence the strong Huygens principle of [[def-strong-huygens-principle]] holds in dimension $n$ (germ form (iii), and with it the strictly-inside form (i) and the shell form (ii)); bare agreement of the restrictions to $S$ is not sufficient in general, exactly because the transverse derivatives displayed above may differ (the caution in [[def-strong-huygens-principle]]).",
+        "strategy": "Expand $D_t^{k-1}[t^{n-2}g(t)]$ by the product rule into $\\sum_jp_j(t)g^{(j)}(t)$ with polynomial coefficients $p_j$, and evaluate the odd-dimensional formula at $t=t_0$; the identities $\\partial_t^jM_f(x_0,ct)|_{t_0}=c^j\\partial_r^jM_f(x_0,ct_0)$ and the displayed sphere-integral form of $\\partial_r^jM_f$ follow by induction from [[lem-spherical-means-of-smooth-data-are-smooth]] (differentiation under the compact sphere integral). Each radial derivative of $f$ at a point of $S$ is determined by the jet of $f$ at that point, so the total is a finite-order functional supported on $S$; a difference of two data pairs agreeing near $S$ has all displayed derivatives $0$ on $S$, giving (a). For (b): if $S(x,ct)\\cap K=\\varnothing$ with $K$ compact and the sphere closed, the two disjoint compact sets have a positive gap ([[lem-relative-compact-closed-sets-have-a-positive-distance-gap]]), so the data vanish on a neighbourhood of $S(x,ct)$, and comparison with the zero data (value $0$) gives $u(x,t)=0$. This is Teschl Theorem 7.7 read at the vertex and the sharp form of Speck Remark 1.0.1; the scaffold deliberately does not consume the in-run support-dichotomy item's sphere-restriction phrasing, which is false as literally stated (recorded in the batch notes).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.2, printed pp. 174–175, (7.23) and Theorem 7.7: odd-dimensional representation; §7.1, printed pp. 171–172: the three-dimensional sharp support consequence"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.1, printed pp. 281-289, remarks (c) and (e): for odd $n\\ge3$ the value does not depend on the data at points with $|x-y|<ct$"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #12: Kirchhoff's Formula and Minkowskian Geometry (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/940561a138578640826f762b5a57bcad_MIT18_152F11_lec_12.pdf",
+              "locator": "Remark 1.0.1: the sharp Huygens principle in odd dimensions $n\\ge3$"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-wave-tails-in-one-and-even-spatial-dimensions",
+        "kind": "theorem",
+        "title": "Wave tails in dimension one and in even dimensions",
+        "deps": [
+          "def-strong-huygens-principle",
+          "thm-even-dimensional-wave-formula-by-descent",
+          "thm-dalembert-formula",
+          "thm-poisson-formula-for-the-two-dimensional-wave-equation",
+          "def-spherical-mean-of-space-dependent-data",
+          "def-countable-choice",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-algebra-of-derivatives",
+          "lem-sphere-and-ball-measures-scale",
+          "thm-strong-huygens-principle-in-odd-spatial-dimensions"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Strong Huygens fails in dimension $1$ and in every even dimension $n\\ge2$, in the sharp sense that there are admissible compactly supported data whose difference from the zero data is supported in a compact subset of the open base ball (hence vanishes in a neighbourhood of the sphere $S(x_0,t_0)$) yet whose values at $(x_0,t_0)$ differ. (i) $n=1$: for every $x_0\\in\\mathbb R$, $t_0>0$ and every $u_1\\in C^1_c(\\mathbb R)$ supported in $(x_0-ct_0,x_0+ct_0)$ with $\\int_{\\mathbb R}u_1\\neq0$, the pair $(0,u_1)$ has $$u(x_0,t_0)=\\frac1{2c}\\int_{x_0-ct_0}^{x_0+ct_0}u_1\\neq0$$ by d'Alembert's formula [[thm-dalembert-formula]], while zero data give $u\\equiv0$. (ii) $n=2k$ even: for every $x_0,t_0$ and all sufficiently small $\\varepsilon>0$ there are $u_1\\in C_c^{k+1}(B_\\varepsilon(x_0))$, $u_1\\ge0$, $u_1\\not\\equiv0$, with $$u(x_0,t_0)=\\int_{B_\\varepsilon(x_0)}u_1(y)\\,K(|y-x_0|,t_0)\\,dy\\neq0,$$ where, with $D_t=t^{-1}\\partial_t$, the kernel of the even-dimensional formula [[thm-even-dimensional-wave-formula-by-descent]] is $$K(\\rho,t)=c^{1-n}\\,D_t^{k-1}\\Bigl[\\frac{(c^2t^2-\\rho^2)^{-1/2}}{n!!\\,V_n}\\Bigr],\\qquad K(0,t_0)=c^{-n}\\,(n!!\\,V_n)^{-1}(-1)^{k-1}(2k-3)!!\\,t_0^{-(n-1)}\\neq0$$ (with $(2k-3)!!=1$ for $k=1$), so $K$ has a constant sign on a small ball and the integral is nonzero; the $n=2$ instance is Poisson's formula [[thm-poisson-formula-for-the-two-dimensional-wave-equation]]. Thus data supported strictly inside the base ball affect the value, proving failure by interior data exactly as the design's hard obligation requires.",
+        "strategy": "Part (i) is the velocity integral of d'Alembert's formula. Part (ii): with $u_0=0$ the even formula gives $u(x_0,t_0)=c^{1-n}D_t^{k-1}W_{u_1}(x_0,t_0)$; because $u_1$ is supported at positive distance inside $B_{ct_0}(x_0)$, the operator $D_t^{k-1}$ may be taken under the integral sign and commutes with the $y$-integral, producing the displayed kernel $K$ (legitimate: $(c^2t^2-\\rho^2)^{-1/2}$ is $C^\\infty$ on a neighbourhood of $[t_0-\\delta,t_0+\\delta]\\times\\overline B_\\varepsilon(x_0)$). At $\\rho=0$, each application of $D_t$ sends $t^\\alpha\\mapsto\\alpha t^{\\alpha-2}$, so $D_t^{k-1}[t^{-1}]=(-1)^{k-1}(2k-3)!!\\,t^{-(2k-1)}\\neq0$; continuity of $K$ near $\\rho=0$ then makes the integral of a nonnegative nonzero bump nonzero ([[thm-linearity-of-the-lebesgue-integral-on-l-one]] for the sign argument). This is Teschl's two-versus-three-dimensional contrast (printed pp. 171-172) and Ivrii's descent; it proves failure by strictly interior data, not merely by a formula contrast.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 171–172: the two- versus three-dimensional contrast; §7.2, printed p. 175, (7.24): the general even-dimensional kernel; §4.4, printed pp. 89–90, (4.27) and Problem 4.14: one-dimensional tails"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.1, printed pp. 281-289, remarks (c) and (e): descent to even dimensions fills the interior of the cone"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "rem-finite-propagation-is-not-huygens-principle",
+        "kind": "remark",
+        "title": "Finite propagation is not Huygens' principle",
+        "deps": [
+          "def-countable-choice",
+          "cor-compact-support-expands-at-speed-at-most-c",
+          "thm-strong-huygens-principle-in-odd-spatial-dimensions",
+          "thm-wave-tails-in-one-and-even-spatial-dimensions",
+          "def-strong-huygens-principle"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. For homogeneous waves with compactly supported initial data, the strong Huygens principle implies finite propagation, but the converse is false. Finite propagation ([[cor-compact-support-expands-at-speed-at-most-c]]) holds in every dimension $n\\ge1$: data supported in $K$ stay in the full $ct$-neighbourhood $K+\\overline B_{ct}(0)$ at time $t$. Strong Huygens ([[def-strong-huygens-principle]]) is the stronger shell statement: the solution is carried by the sphere shell and data supported strictly inside the base ball have no effect. It holds for odd $n\\ge3$ ([[thm-strong-huygens-principle-in-odd-spatial-dimensions]]) and fails for $n=1$ and every even $n$ ([[thm-wave-tails-in-one-and-even-spatial-dimensions]]), where a lasting interior tail remains after the front has passed. Consequently finite propagation alone is not Huygens' principle, and 'faster than light' intuitions drawn from tails are not a violation of finite speed: the tail stays inside the cone.",
+        "strategy": "Compare the two statements literally: [[cor-compact-support-expands-at-speed-at-most-c]] bounds the support at time $t$ by the solid $ct$-neighbourhood; strong Huygens replaces it by the shell and is asserted only in odd dimensions $\\ge3$, with the failure witnesses of [[thm-wave-tails-in-one-and-even-spatial-dimensions]]. This remark is design item 14; it records the exact distinction fixed by the drift review ('shell-only propagation does not hold in every dimension') and is used to keep the B-page counterexample `cex-finite-speed-does-not-imply-strong-huygens` honest.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #12: Kirchhoff's Formula and Minkowskian Geometry (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/940561a138578640826f762b5a57bcad_MIT18_152F11_lec_12.pdf",
+              "locator": "Remark 1.0.1, printed/PDF pp. 1-2: sharp Huygens holds in odd $n\\ge3$ but not for $n=1$ or even $n$, while finite speed of propagation still holds"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.1, printed p. 289, remarks (c) and (e): finite speed in all dimensions, no interior leftovers only in odd $n\\ge3$"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 171-172: the dimension contrast between solid-ball and sphere dependence"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": [],
+        "forward_refs": [
+          "cex-finite-speed-does-not-imply-strong-huygens"
+        ]
+      },
+      {
+        "id": "cor-time-reversed-energy-uniqueness-from-final-data",
+        "kind": "corollary",
+        "title": "Time-reversed energy uniqueness from final data",
+        "deps": [
+          "def-countable-choice",
+          "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+          "cor-time-reversal-invariance-of-the-homogeneous-wave-equation",
+          "thm-conservation-of-total-wave-energy",
+          "def-wave-energy-and-energy-flux"
+        ],
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $c>0$,\n$T>0$ and let $u,v\\in C^2(\\mathbb R^n\\times[0,T])$ solve $\\Box_cw=0$, with $u$\nand $v$ lying in a class of homogeneous solutions that is closed under taking\ndifferences and in which the total energy is conserved on $[0,T]$ in one of the\nwhole-space senses (a) or (b) of [[thm-conservation-of-total-wave-energy]] (for instance both\nhave fixed compact spatial support inside a common compact set). If $u(\\cdot,T)=v(\\cdot,T)$ and $u_t(\\cdot,T)=v_t(\\cdot,T)$, then\n$u=v$ on $\\mathbb R^n\\times[0,T]$.\n\nThus equal terminal displacement and velocity determine the same\nfinite-energy homogeneous solution backward in time; reversibility is a\nconsequence of energy uniqueness together with time-reversal symmetry, not of\nany representation formula. The time-reversal item\n[[cor-time-reversal-invariance-of-the-homogeneous-wave-equation]] itself belongs\nto the preceding pair and is consumed here, not reproved.",
+        "strategy": "$w=u-v$ is a homogeneous solution and $\\tilde w(x,s)=w(x,T-s)$ is again a homogeneous classical solution with $\\tilde w(\\cdot,0)=w(\\cdot,T)=0$ and $\\partial_s\\tilde w(\\cdot,0)=-w_t(\\cdot,T)=0$ ([[cor-time-reversal-invariance-of-the-homogeneous-wave-equation]]); its energy is conserved because that of $w$ is, so [[cor-energy-uniqueness-for-the-wave-cauchy-problem]] gives $\\tilde w\\equiv0$ and hence $w\\equiv0$. This is the enrichment row `cor-time-reversed-energy-uniqueness-from-final-data`; the time-reversal item itself belongs to the preceding pair and is consumed, not reproved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.2-§7.3, printed pp. 170-178: reversibility of the homogeneous flow and Corollary 7.13"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§7.1, printed p. 211: time reversibility in the qualitative-property list; §7.1.1, printed p. 212: the energy estimate"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-energy-uniqueness-for-homogeneous-dirichlet-waves-on-bounded-domains",
+        "kind": "theorem",
+        "title": "Energy uniqueness for homogeneous Dirichlet waves on bounded domains",
+        "deps": [
+          "def-countable-choice",
+          "thm-conservation-of-total-wave-energy",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-wave-energy-and-energy-flux",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "def-polygonal-path-and-polygonal-connectedness",
+          "cor-zero-derivative-implies-constant",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $c>0$, $T>0$, let $U\\subseteq\\mathbb R^n$ be a bounded connected $C^1$ domain ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]) and let $u\\in C^2(\\overline U\\times[0,T])$ solve $\\Box_cu=0$ on $U\\times(0,T)$ with homogeneous Dirichlet boundary data $u(\\cdot,t)|_{\\partial U}=0$ for every $t$ and homogeneous initial data $u(\\cdot,0)=u_t(\\cdot,0)=0$. Then $u\\equiv0$ on $\\overline U\\times[0,T]$. More generally, two such Dirichlet solutions with equal initial data agree. This is the enrichment row `thm-energy-uniqueness-for-homogeneous-dirichlet-waves-on-bounded-domains`; the trace condition $u|_{\\partial U}=0$ is stated explicitly because it is exactly the boundary flux that is being killed.",
+        "strategy": "Case (c) gives constant energy on (0,T). Since the density is continuous on the compact bounded-domain cylinder, its integral is continuous at t=0, so the constant equals the zero initial energy. Nonnegativity gives zero density and vanishing first derivatives for interior times, and continuity extends this to both endpoints. The segment argument makes u spatially constant on each connected component; the zero boundary trace fixes that constant to zero. The same proof applies componentwise when the domain is disconnected with corresponding boundary regularity; subtracting solutions gives uniqueness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed p. 176, Lemma 7.10 and Theorem 7.11: conserved energy and uniqueness under Dirichlet boundary data"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2.4, printed p. 292, Theorem 9.2.4: the Dirichlet alternative for the IBVP, by the energy method"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ],
+    "batch": "3"
+  },
+  {
+    "order": 458.018,
+    "id": "wave-energy-finite-propagation-and-huygens-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Wave Energy Finite Propagation and Huygens — Examples",
+    "companion": "wave-energy-finite-propagation-and-huygens",
+    "requires": [
+      "wave-energy-finite-propagation-and-huygens"
+    ],
+    "items": [
+      {
+        "id": "ex-conserved-energy-of-a-travelling-wave-packet",
+        "kind": "example",
+        "title": "Conserved energy of a travelling wave packet",
+        "deps": [
+          "def-wave-energy-and-energy-flux",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "thm-chain-rule-for-total-derivatives",
+          "lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-support-and-compactly-supported-riemann-integral-in-rn"
+        ],
+        "statement": "Let $c>0$ and $F\\in C_c^2(\\mathbb R)$ ([[def-wave-equation-cauchy-data-and-wave-speed]]). In one dimension put $u(x,t)=F(x-ct)$. Then $u$ is a classical solution of $\\Box_cu=0$ and for every $t$ its total energy ([[def-wave-energy-and-energy-flux]]) is finite, independent of $t$, and splits equally:\n$$E(t)=\\int_{\\mathbb R}\\tfrac12(u_t^2+c^2u_x^2)\\,dx=c^2\\int_{\\mathbb R}F'(s)^2\\,ds,\\qquad E_{\\rm kin}(t)=E_{\\rm pot}(t)=\\tfrac12c^2\\int_{\\mathbb R}F'(s)^2\\,ds.$$\nMore generally, for every $n\\ge1$ and unit vector $\\omega\\in\\mathbb R^n$, $u(x,t)=F(\\omega\\cdot x-ct)$ is a classical solution and its kinetic and potential energy densities split equally pointwise: $e_{\\rm kin}=e_{\\rm pot}=\\tfrac12c^2F'(\\omega\\cdot x-ct)^2$. If $n\\ge2$ and $F'\\not\\equiv0$, then the total energy on $\\mathbb R^n$ is $+\\infty$ for every $t$: $F'^2$ has a positive lower bound on a nondegenerate interval, and the corresponding transverse cylinders have unbounded $n$-dimensional measure. Thus the finite conserved total energy formula is one-dimensional.",
+        "strategy": "The chain rule gives equal kinetic and potential densities; in one dimension, translation in the integral gives the finite constant total energy. In dimension n≥2, choose an interval I on which F′² is bounded below by a positive number. For each R, the full transverse cylinder {(ct+s)ω+y : s∈I, y∈B_R^{n−1}∩ω⊥} has measure |I||B_R^{n−1}| and lies in the slab where the density has that lower bound. These cylinder measures grow without bound, so the total energy is infinite.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§2.1.B, printed pp. 36-38: running wave solutions $u=f(x\\cdot\\omega-ct)$"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§4.4, printed pp. 88-90, (4.23)-(4.27): the wave equation on the line, travelling profiles and the finite-propagation remark"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "ex-reflection-at-a-dirichlet-endpoint",
+        "kind": "example",
+        "title": "Reflection at a Dirichlet endpoint: odd reflection, reversed sign, conserved energy",
+        "deps": [
+          "def-countable-choice",
+          "thm-conservation-of-total-wave-energy",
+          "thm-dalembert-formula",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-wave-energy-and-energy-flux",
+          "def-support-and-compactly-supported-riemann-integral-in-rn"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $c>0$. Let $u_0\\in C_c^2(\\mathbb R)$, $u_1\\in C_c^1(\\mathbb R)$ be odd (equivalently, Cauchy data on the half-line $x>0$ extended oddly) and let $U$ be the d'Alembert solution of the whole-line problem with data $(u_0,u_1)$ ([[thm-dalembert-formula]]). Then: (i) $U(\\cdot,t)$ is odd for every $t$, so $u:=U|_{x>0}$ solves the Dirichlet half-line problem $u_{tt}=c^2u_{xx}$ on $x>0$ with $u(0,t)=0$ and data $u_0|_{x>0},u_1|_{x>0}$; (ii) for data obtained by oddly extending $u_0=\\phi$, $u_1=c\\phi'$ from $x>0$, where $\\phi\\in C_c^2((0,\\infty))$, the reflected part re-enters with reversed sign: $u(x,t)=\\phi(x+ct)-\\phi(ct-x)$ for $0<x<ct$; (iii) the half-line energy $E_{(0,\\infty)}(t)$ equals half of the whole-line energy of $U$ and is constant in $t$.",
+        "strategy": "Oddness of $U(\\cdot,t)$ follows from the oddness of the data in d'Alembert's formula (the formula preserves oddness), giving (i). Part (ii) is Ivrii's Example 2.6.1(b), formula (2.6.12): '$g=\\phi$, $h=c\\phi'$, $p=0$: wave initially running to the left and then reflected from the (left) end', where the reflected term is $-\\phi(ct-x)$; Teschl's Problem 4.16 gives the same Dirichlet reflection. For (iii), the energy density of $U$ is even in $x$ (built from the odd function $U$ and its derivatives), so $\\int_{\\mathbb R}e\\,dx=2\\int_0^\\infty e\\,dx$, and the whole-line energy is conserved by case (a) of [[thm-conservation-of-total-wave-energy]] (the data are compactly supported and d'Alembert's formula bounds the support uniformly on every compact time interval; apply case (a) on any finite time interval containing the two comparison times). This is the design's B-page Dirichlet-reflection example; the energy conservation is Ivrii §2.7 Problem 1 (Dirichlet case) as well.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§2.6.1, printed pp. 67-69, Example 2.6.1(b) and (2.6.12), Dirichlet reflection at the left end; §2.7, printed p. 90, Problem 1 (Dirichlet energy conservation)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§4.4, printed p. 90, Problem 4.16: the wave equation on $(0,\\infty)$ with a Dirichlet boundary condition (Hint: Reflection)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-three-dimensional-spherical-pulse-leaves-a-quiet-tail",
+        "kind": "example",
+        "title": "A three-dimensional spherical pulse leaves a quiet interior",
+        "deps": [
+          "def-countable-choice",
+          "thm-strong-huygens-principle-in-odd-spatial-dimensions",
+          "thm-kirchhoff-formula-for-the-three-dimensional-wave-equation",
+          "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "def-strong-huygens-principle"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $c>0$, $x_0\\in\\mathbb R^3$, $r>0$, and let $(u_0,u_1)\\in C^3_c\\times C^2_c$ be supported in $\\overline B_r(x_0)$ ([[def-support-and-compactly-supported-riemann-integral-in-rn]]). Then the Kirchhoff solution ([[thm-kirchhoff-formula-for-the-three-dimensional-wave-equation]]) satisfies $u(x,t)=0$ whenever $|x-x_0|>ct+r$ or $|x-x_0|<ct-r$; at time $t$ the pulse is carried by the spherical shell $ct-r\\le|x-x_0|\\le ct+r$, and the interior $B_{ct-r}(x_0)$ behind the front is quiet. This is the concrete illustration of the strong Huygens principle in three dimensions ([[thm-strong-huygens-principle-in-odd-spatial-dimensions]](b)).",
+        "strategy": "Kirchhoff's formula integrates $u_0$, $u_1$ and $\\nabla u_0$ over the sphere $\\partial B_{ct}(x)$. If $|x-x_0|<ct-r$ that sphere misses the support ball with positive distance, so the integrand vanishes identically (and $\\nabla u_0$ vanishes near the sphere); if $|x-x_0|>ct+r$ the sphere also misses the support. This is Teschl Problem 7.3 (the times $t_0=R-r$, $t_1=R+r$ at which a distant observer starts and stops noticing the effects) and Speck's Remark 1.0.1; it is the three-dimensional instance of the shell form proved in [[thm-strong-huygens-principle-in-odd-spatial-dimensions]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 167-172, Theorem 7.2 and Problem 7.3 (the observation times $R-r$ and $R+r$)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #12: Kirchhoff's Formula and Minkowskian Geometry (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/940561a138578640826f762b5a57bcad_MIT18_152F11_lec_12.pdf",
+              "locator": "Theorem 1.1 and Remark 1.0.1, printed/PDF pp. 1-2: Kirchhoff's formula and the sharp Huygens principle"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-two-dimensional-pulse-has-a-tail-inside-the-cone",
+        "kind": "example",
+        "title": "A two-dimensional pulse has a tail inside the cone",
+        "deps": [
+          "def-countable-choice",
+          "thm-wave-tails-in-one-and-even-spatial-dimensions",
+          "thm-poisson-formula-for-the-two-dimensional-wave-equation",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-support-and-compactly-supported-riemann-integral-in-rn"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $c>0$, $x_0\\in\\mathbb R^2$, $r>0$, and let $u_1\\in C_c^2(\\mathbb R^2)$ be nonnegative, not identically zero, with support in $B_r(x_0)$; let $u$ be the Poisson solution with data $(0,u_1)$ ([[thm-poisson-formula-for-the-two-dimensional-wave-equation]]). Then for every $t>r/c$, $$u(x_0,t)=\\frac1{2\\pi c}\\int_{B_{ct}(x_0)}\\frac{u_1(y)}{\\sqrt{c^2t^2-|y-x_0|^2}}\\,dy>0 .$$ The centre of the forward cone keeps seeing the pulse after the front has passed: the two-dimensional pulse has a tail, in contrast with the quiet three-dimensional interior of [[ex-three-dimensional-spherical-pulse-leaves-a-quiet-tail]].",
+        "strategy": "This is part (ii) of [[thm-wave-tails-in-one-and-even-spatial-dimensions]] in the case $n=2$, read from Poisson's formula: for $t>r/c$ the support of $u_1$ lies in the open ball $B_{ct}(x_0)$, where the weight $(c^2t^2-|y-x_0|^2)^{-1/2}$ is continuous and strictly positive, so the integral of the nonnegative nonzero $u_1$ is strictly positive ([[thm-linearity-of-the-lebesgue-integral-on-l-one]]); the integrand is a smooth positive function of $t$ for $t>r/c$. This is Hunter's remark that in two dimensions the formula involves the interior of the circle rather than only its circumference, made quantitative at the centre.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 171-172: in two dimensions the solution depends on the data on all of $B_t(x)$"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.5, printed/PDF p. 43: 'the formula for $u$ involves integrals over the interior of circles ... not just their circumference'"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-finite-speed-does-not-imply-strong-huygens",
+        "kind": "counterexample",
+        "title": "Finite speed does not imply strong Huygens",
+        "deps": [
+          "def-countable-choice",
+          "cor-compact-support-expands-at-speed-at-most-c",
+          "thm-dalembert-formula",
+          "thm-poisson-formula-for-the-two-dimensional-wave-equation",
+          "def-strong-huygens-principle",
+          "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "rem-finite-propagation-is-not-huygens-principle"
+        ],
+        "statement": "The finite-speed property ([[cor-compact-support-expands-at-speed-at-most-c]])\ncoexists with three distinct wave phenomena: the strong Huygens principle can\nfail ([[def-strong-huygens-principle]]), regularity need not improve, and\nnonnegative displacement data need not produce a nonnegative solution. The\nfollowing compactly supported witnesses make these distinctions explicit.\n\n1. **Failure of strong Huygens.** Let $c>0$, $x_0\\in\\mathbb R^n$,\n   $t_0>0$ and $n\\in\\{1,2\\}$. In dimension $1$, choose\n   $u_0=0$ and a nonnegative nonzero $u_1\\in C_c^1(\\mathbb R)$ supported in\n   $(x_0-ct_0,x_0+ct_0)$. Then the d'Alembert formula gives\n   $u(x_0,t_0)=\\frac1{2c}\\int u_1>0$. In dimension $2$, choose $u_0=0$ and\n   a nonnegative nonzero $u_1\\in C_c^2(\\mathbb R^2)$ supported in\n   $B_r(x_0)$ for some $r<ct_0$; the Poisson formula gives $u(x_0,t_0)>0$.\n   In both cases the data vanish on a neighbourhood of\n   $S(x_0,ct_0)$, yet the value is nonzero, while finite speed still holds.\n\n2. **No smoothing.** There is a compactly supported $F\\in C^2(\\mathbb R)$\n   that is not $C^3$. The traveling wave $u(x,t)=F(x-ct)$ solves the\n   one-dimensional equation and remains $C^2$ but not $C^3$ for every\n   $t\\ge0$. Its support translates at speed $c$.\n\n3. **No maximum principle.** In dimension $2$, take a nonnegative nonzero\n   $u_0\\in C_c^\\infty(B_r(x_0))$ and $u_1=0$. At any time $t_0>r/c$, the\n   displacement term of Poisson's formula gives $u(x_0,t_0)<0$. Thus the\n   solution can change sign although the initial displacement is nonnegative\n   and the initial velocity is zero.\n\nAll four data pairs are compactly supported, so [[cor-compact-support-expands-at-speed-at-most-c]] supplies the finite-speed bound. The no-smoothing and sign-change examples are independent of the Huygens witnesses; they show why the qualitative properties listed by Hunter require separate arguments.",
+        "strategy": "Apply d'Alembert and Poisson directly for the one- and two-dimensional interior tails. A compact profile with a C2 cusp travels unchanged by d'Alembert; differentiating the 2D displacement kernel for support strictly inside the cone gives a negative value from nonnegative data. The compact-support propagation corollary applies separately to each witness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #12: Kirchhoff's Formula and Minkowskian Geometry (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/940561a138578640826f762b5a57bcad_MIT18_152F11_lec_12.pdf",
+              "locator": "Remark 1.0.1, printed/PDF pp. 1-2: 'even when the sharp version fails, there still is a finite speed of propagation property; the solution in these cases depends on the data in the solid ball'"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 171-172: two-dimensional tails versus three-dimensional sphere dependence"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.1, printed p. 289, remarks (c) and (e): finite speed in all dimensions, no interior leftovers only in odd $n\\ge3$"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "justified_by": []
+      },
+      {
+        "id": "cex-wave-energy-need-not-be-conserved-through-an-open-boundary",
+        "kind": "counterexample",
+        "title": "Wave energy need not be conserved through an open boundary",
+        "deps": [
+          "thm-conservation-of-total-wave-energy",
+          "def-wave-energy-and-energy-flux",
+          "lem-local-wave-energy-conservation-law",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-ftc-second-part",
+          "thm-darboux-equals-riemann",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "cor-zero-derivative-implies-constant",
+          "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "def-directional-and-partial-derivatives"
+        ],
+        "statement": "Let $c>0$, $\\Omega=(0,1)\\subseteq\\mathbb R$, and let $F\\in C_c^2(\\mathbb R)$ with $F'$ nonzero somewhere in $(0,1)$; put $u(x,t):=F(x-ct)$, the right-moving packet. Then $u$ solves $\\Box_cu=0$ on $\\mathbb R\\times\\mathbb R$, but its energy in the fixed interval $\\Omega$, $E_\\Omega(t)=c^2\\int_0^1F'(x-ct)^2dx$, is not constant: it equals $c^2\\int_0^1F'(x)^2dx>0$ at $t=0$ and is $0$ for all sufficiently large $t$, once the packet has left the interval. The decrease is exactly the boundary flux: with $q=-c^2u_tu_x=c^3F'^2$, $$\\frac{d}{dt}E_\\Omega(t)=q(0,t)-q(1,t),$$ so the energy lost through the right endpoint is accounted for. Hence total-energy conservation ([[thm-conservation-of-total-wave-energy]]) may not be invoked on a domain with an open boundary without the vanishing-flux hypothesis. **Homogeneous-boundary comparison on the half-line.** If $v\\in C^2([0,\\infty)\\times I)$ solves $v_{tt}-c^2v_{xx}=0$ on an open time interval $I$, and for each compact $J\\subset I$ there is $R_J<\\infty$ with $v_x=v_t=0$ for $x\\ge R_J$ and $t\\in J$, then $E_+(t):=\\frac12\\int_0^\\infty(v_t^2+c^2v_x^2)dx$ is constant under either $v(0,t)=0$ for every $t\\in I$ or $v_x(0,t)=0$ for every $t\\in I$. These are precisely the Dirichlet and homogeneous Neumann comparisons for the linear case of Ivrii §2.7 Problem 1.",
+        "strategy": "Direct computation of the energy density as in [[ex-conserved-energy-of-a-travelling-wave-packet]]: $e=c^2F'(x-ct)^2$. Differentiate under the integral sign ([[thm-differentiation-under-the-integral-sign]]) and use the fundamental theorem of calculus ([[thm-ftc-second-part]]): $\\frac{d}{dt}\\int_0^1F'(x-ct)^2dx=-c\\int_0^1(F'^2)'(x-ct)dx=-c\\bigl[F'^2(1-ct)-F'^2(-ct)\\bigr]$, which is exactly the negative boundary-flux difference of the displayed identity. Since $F'$ is continuous and nonzero somewhere in $(0,1)$, $E_\\Omega(0)>0$; since $\\operatorname{supp}F'$ is compact, $E_\\Omega(t)=0$ for all sufficiently large $t$. This is the design's open-boundary counterexample and exhibits the role of the boundary bracket in the global identity. For the half-line comparison fix a compact $J\\subset I$ and $R>R_J$. Differentiation on $[0,R]$ and the local balance give $E_+'(t)=q_v(0,t)-q_v(R,t)$ by [[thm-ftc-second-part]], where $q_v=-c^2v_tv_x$. The right flux is zero by the support assumption; the left flux is zero because the Dirichlet trace differentiates to $v_t(0,t)=0$, or because the Neumann trace gives $v_x(0,t)=0$. Thus [[cor-zero-derivative-implies-constant]] gives constancy on $I$. No nonlinear potential term is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§7.1.1, printed p. 212: the boundary term $\\int_{\\partial\\Omega}q\\cdot\\nu\\,dS$ is what is dropped when $u=0$ on $\\partial\\Omega$"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§2.7.1, printed p. 88, (2.7.6): $E_V(t_2)-E_V(t_1)+\\int_{t_1}^{t_2}\\!\\int_\\Sigma S\\cdot n\\,d\\sigma\\,dt=0$, the flux balance through the boundary of $V$; §2.7 Problems, printed p. 90, Problem 1: homogeneous specialization f=0 and F=0, with either Dirichlet or Neumann data at x=0"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "cex-global-energy-identity-needs-integrability-or-decay",
+        "kind": "counterexample",
+        "title": "The local conservation law need not integrate to a finite conserved energy",
+        "deps": [
+          "thm-conservation-of-total-wave-energy",
+          "def-wave-energy-and-energy-flux",
+          "lem-local-wave-energy-conservation-law",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+        ],
+        "statement": "The claim refuted is that the pointwise local conservation law\n$\\partial_te+\\operatorname{div}q=0$ by itself integrates to a finite conserved\ntotal energy on all of $\\mathbb R^n$. Explicitly: **not** every classical\nsolution of $\\Box_cu=0$ has finite total energy in the sense of\n[[def-wave-energy-and-energy-flux]], and for such a solution the local law supplies no finite conserved energy; the integrability\nhypotheses of [[thm-conservation-of-total-wave-energy]](b) are therefore not\nredundant.\n\nAssume the Axiom of Countable Choice ([[def-countable-choice]]) for the Lebesgue product measure used below. Witness. Let $n\\ge2$, $c>0$, let $e_0$ be the first standard basis vector,\nlet $F\\in C^2(\\mathbb R)$ with $F'\\not\\equiv0$ (for instance $F(s)=\\cos s$),\nand put\n\n$$u(x,t):=F(x_0-ct)\\qquad(x=(x_0,\\ldots,x_{n-1})\\in\\mathbb R^n).$$\n\nThen $u$ is a classical solution of $\\Box_cu=0$ on $\\mathbb R^n\\times\\mathbb R$\nand the local law [[lem-local-wave-energy-conservation-law]] holds pointwise,\nthe energy density is $e(x,t)=c^2F'(x_0-ct)^2\\ge0$, and\n$\\int_{\\mathbb R^n}e(x,t)\\,dx=+\\infty$ for every $t$, although the\none-dimensional profile is $C^2$. The same divergence occurs for $n=1$ with\n$F(s)=s$, since its energy density is the positive constant $c^2$.",
+        "strategy": "Chain rule gives $u_t=-cF'$, $Du=F'\\omega$, so $e=c^2F'(\\omega\\cdot x-ct)^2\\ge0$. For $F(s)=\\cos s$, reduce the integral by an orthogonal change of variables ([[thm-linear-change-of-variables-for-lebesgue-measure]]) to the product form and integrate by Fubini ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]): $\\int_{\\mathbb R^n}\\sin^2(\\omega\\cdot x-ct)dx=\\bigl(\\int_{\\mathbb R}\\sin^2\\bigr)\\bigl(\\int_{\\mathbb R^{n-1}}1\\bigr)=+\\infty$. The nonnegative-integral monotonicity ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) turns the divergence of the product into $+\\infty$ for the full integral. No integration of the local law is claimed, so no contradiction arises.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§2.7.1, printed pp. 87-88 and §9.2.1, printed pp. 289-290: the local energy identity and the finite-energy hypotheses; the running wave has infinite energy in the transverse directions"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed p. 176, (7.27) and Lemma 7.10: bounded-domain energy and its conservation under homogeneous boundary data; the infinite whole-space witnesses here are computed directly"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "ex-plane-wave-shows-the-characteristic-speed-is-sharp",
+        "kind": "example",
+        "title": "Plane waves show that the characteristic speed is sharp",
+        "deps": [
+          "thm-finite-propagation-speed-for-the-wave-equation",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "thm-chain-rule-for-total-derivatives",
+          "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "def-directional-and-partial-derivatives",
+          "def-laplacian-of-a-c2-function",
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient"
+        ],
+        "statement": "Let $c>0$, let $\\omega$ be a unit vector and let $F\\in C^2(\\mathbb R)$ with compact nonempty support, and put $u(x,t):=F(\\omega\\cdot x-ct)$. Then $u$ solves $\\Box_cu=0$ and for every $t$ its support is exactly the slab $$\\operatorname{supp}u(\\cdot,t)=\\{x:\\omega\\cdot x-ct\\in\\operatorname{supp}F\\},$$ which translates with velocity $c\\,\\omega$ as $t$ increases. Thus the characteristic speed $c$ is attained, not merely an upper bound: the front and the back of a plane-wave disturbance move at speed exactly $c$, in contrast with the general upper bound [[thm-finite-propagation-speed-for-the-wave-equation]].",
+        "strategy": "Direct chain rule: $u_{tt}=c^2F''(\\omega\\cdot x-ct)$ and $\\Delta u=F''(\\omega\\cdot x-ct)|\\omega|^2=F''(\\omega\\cdot x-ct)$, so $\\Box_cu=0$; the support identity is immediate from $u(x,t)\\neq0\\iff\\omega\\cdot x-ct\\in\\operatorname{supp}F$ and continuity of $x\\mapsto\\omega\\cdot x$, and the slab translates by $ct$ in the $\\omega$ direction. This is the enrichment row `ex-plane-wave-shows-the-characteristic-speed-is-sharp`; Ivrii's §2.1.B 'running wave solutions' is the source treatment of the same family.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§2.1.B, printed pp. 36-38: running wave solutions and their transport at the characteristic speed"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§4.4, printed pp. 88-90: the wave equation on the line and its travelling profiles"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "ex-zero-wave-energy-means-spatial-constant-before-data-fix-the-constant",
+        "kind": "example",
+        "title": "Zero wave energy means a spatial constant until the datum fixes it",
+        "deps": [
+          "def-countable-choice",
+          "thm-conservation-of-total-wave-energy",
+          "cor-energy-uniqueness-for-the-wave-cauchy-problem",
+          "lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets",
+          "def-wave-energy-and-energy-flux",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $c>0$ and let $u\\in C^2(\\mathbb R^n\\times[0,T))$ solve the homogeneous equation $\\Box_cu=0$ with total energy conserved ([[thm-conservation-of-total-wave-energy]]) and $E(0)=0$. Then $u_t(\\cdot,0)=0$ and $Du(\\cdot,0)=0$, so $u_0=u(\\cdot,0)$ is constant on $\\mathbb R^n$; the energy seminorm sees only $(u_t,Du)$ and cannot fix that constant, and the evolution keeps it: $u(\\cdot,t)\\equiv u_0$ for every $t$. In particular any constant displacement with zero initial velocity is a genuine classical solution of zero energy, so 'zero energy' is strictly weaker than 'zero solution', and the displacement datum is what fixes the residual constant ([[cor-energy-uniqueness-for-the-wave-cauchy-problem]](ii)). This is the enrichment row `ex-zero-wave-energy-means-spatial-constant-before-data-fix-the-constant`.",
+        "strategy": "$e(0)\\ge0$ has zero integral, hence $u_t(\\cdot,0)=Du(\\cdot,0)=0$; $u_0$ is constant on the connected $\\mathbb R^n$ by [[lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets]]. Conservation gives $E(t)=0$ for every $t$, so again $u_t(\\cdot,t)=Du(\\cdot,t)=0$ and $u(\\cdot,t)$ is spatially constant; differentiating the constant in $t$ shows it does not change. The direct check that $u\\equiv\\mathrm{const}$ solves $\\Box_cu=0$ with zero energy closes the example.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.3, printed p. 176: the energy $\\frac12\\int(|\\nabla u|^2+u_t^2)$ and its zero set (Lemma 7.10 and Theorem 7.12 context)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.2, printed pp. 289-292: the energy identity and the step $u_t=\\nabla u=0$ after $E=0$"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ],
+    "batch": "3"
+  }
+]

@@ -1,0 +1,446 @@
+{
+  "namespace": "b5_gate_repairs",
+  "contract_file": "research/frontier-39-analysis-30-batch-5.proof-contracts.json",
+  "contracts": {
+    "lem-tangential-maximal-function-norm-bound": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-sphere-and-ball-measures-scale",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For $n\\ge1$ and $r>0$, $|\\partial B_r|=\\omega_{n-1}r^{n-1}$ and $|B_r|=\\omega_{n-1}r^n/n$; both factors are finite and positive.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$, work with $\\mathcal S(\\mathbb R^n)$ and\n$\\mathcal S'(\\mathbb R^n)$ of [[def-schwartz-space-and-its-seminorms]] and\n[[def-tempered-distribution]], and let $\\varphi\\in\\mathcal S(\\mathbb R^n)$\nsatisfy $\\int_{\\mathbb R^n}\\varphi\\ne0$. For $t>0$ write\n$$\\varphi_t(x)=t^{-n}\\varphi(x/t),\\qquad x\\in\\mathbb R^n .$$\nFor $f\\in\\mathcal S'(\\mathbb R^n)$ define the **radial maximal function**\n$$M^0_\\varphi f(x)=\\sup_{t>0}|(f*\\varphi_t)(x)|,\\qquad x\\in\\mathbb R^n,$$\nand, for an **aperture** $a\\ge1$, the **nontangential maximal function**\n$$M^{*,a}_\\varphi f(x)=\\sup_{t>0}\\ \\sup_{|y-x|\\le at}|(f*\\varphi_t)(y)|, \\qquad x\\in\\mathbb R^n .$$\n\nEach convolution is the distributional convolution of\n[[def-convolution-of-a-tempered-distribution-with-a-schwartz-function]]. It is\nwell defined: $x\\mapsto t^{-n}\\varphi(x/t)$ again lies in\n$\\mathcal S(\\mathbb R^n)$ by\n[[lem-schwartz-dilations-preserve-schwartz-space]], so the pairing of $f$ with\nthe reflected translate of $\\varphi_t$ exists at every point. Its values are\nsmooth and of polynomial growth by\n[[thm-tempered-convolution-is-smooth-with-polynomial-growth]], so each function\n$x\\mapsto(f*\\varphi_t)(x)$ is finite at every point and the suprema displayed\nabove are suprema of a nonempty family of real numbers; the radial case is the\ndiagonal $y=x$ of the nontangential case, so\n$M^0_\\varphi f\\le M^{*,a}_\\varphi f$ for every $a\\ge1$.\n\nThe aperture convention is $|y-x|\\le at$ with the closed cone, and the\nnormalisation $t^{-n}$ is the one of the sources, so that each $\\varphi_t$ has\nthe same integral as $\\varphi$ by\n[[lem-schwartz-dilations-preserve-schwartz-space]]. No measurability of\n$M^0_\\varphi f$ or $M^{*,a}_\\varphi f$ is asserted here, and no choice\nprinciple is used in this definition; the finiteness of the supremum at a point\nis not claimed, since the family $\\{(f*\\varphi_t)(y)\\}$ need not be bounded\na priori. Apertures $a>1$ and the grand maximal function are treated in the\nfollowing items.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $1<p<\\infty$. Then there is a constant $C_{n,p}$ such that every\n$f\\in L^p(\\mathbb{R}^n)$ satisfies\n$$\\|Mf\\|_p\\le C_{n,p}\\|f\\|_p.$$\nBy comparison, the same is true for the uncentered maximal function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-centered-and-uncentered-hardy-littlewood-maximal-functions",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $f\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n)$. The **centered\nHardy-Littlewood maximal function** of $f$ is\n$$Mf(x):=\\sup_{r>0} A_r|f|(x) =\\sup_{r>0}\\frac{1}{\\lambda(B(x,r))}\\int_{B(x,r)}|f(y)|\\,d\\lambda(y).$$\n\nThe **uncentered Hardy-Littlewood maximal function** of $f$ is\n$$M^*f(x):=\\sup_{x\\in B(y,r)} \\frac{1}{\\lambda(B(y,r))}\\int_{B(y,r)}|f(z)|\\,d\\lambda(z),$$\nwhere the supremum is over all Euclidean balls containing $x$.\n\nBoth functions take values in $[0,\\infty]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smooth-maximal-functions-of-tempered-distributions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $f\\in\\mathcal S'(\\mathbb R^n)$ and\n$\\varphi\\in\\mathcal S(\\mathbb R^n)$. Then the function\n$(y,t)\\mapsto(f*\\varphi_t)(y)$ is continuous on\n$\\mathbb R^n\\times(0,\\infty)$, where\n$\\varphi_t(x)=t^{-n}\\varphi(x/t)$ and the convolution is the distributional\nconvolution of\n[[def-convolution-of-a-tempered-distribution-with-a-schwartz-function]].\nIf $\\int_{\\mathbb R^n}\\varphi\\ne0$, the radial maximal function $M^0_\\varphi f$\nand every nontangential maximal function $M^{*,a}_\\varphi f$ with $a\\ge1$\n([[def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution]])\nare Borel measurable as $[0,\\infty]$-valued functions and may be identically\n$+\\infty$. For every integer $N\\ge1$, the grand maximal function $M_Nf$ of\n[[def-grand-maximal-test-class-of-order-n]] is also Borel measurable, may be\nidentically $+\\infty$, and its definition imposes no integral condition on the\ntests in $\\mathcal F_N$. Moreover, when $\\int\\varphi\\ne0$, $M^0_\\varphi f$ and\nevery $M^{*,a}_\\varphi f$ are lower semicontinuous, and every $M_Nf$ is lower\nsemicontinuous for all $N\\ge1$. Thus their strict superlevel sets are open;\nin particular $\\Omega_r=\\{M_Nf>2^r\\}$, $r\\in\\mathbb Z$, used in the level\ndecomposition are open.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Pointwise bound. Fix $x,y,t$ and put $g=(M^{*,1}_\\varphi f)^q$, which is nonnegative Borel by [F3]. By [F1], $|(f*\\varphi_t)(x-y)|^q\\le g(z)$ for every $z\\in B(x-y,t)$. Averaging (allowing an infinite integral) and enlarging to $B(x,|y|+t)$ gives $$|(f*\\varphi_t)(x-y)|^q\\le\\frac{1}{\\lambda(B(x-y,t))}\\int_{B(x-y,t)}g \\le\\frac{\\lambda(B(x,|y|+t))}{\\lambda(B(x-y,t))}\\cdot\\frac{1}{\\lambda(B(x,|y|+t))}\\int_{B(x,|y|+t)}g \\le(1+|y|/t)^n\\,\\widetilde Mg(x),$$ by [L1]. Since $Tq=n$, division by $(1+|y|/t)^{Tq}$ and taking the supremum over $t,y$ proves the pointwise inequality.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$L^p$ bound. If $\\|M^{*,1}_\\varphi f\\|_{L^p}=\\infty$, the asserted norm inequality is trivial. Otherwise [F3] gives that $g=(M^{*,1}_\\varphi f)^q$ is Borel and belongs to $L^{p/q}$. Since $p/q>1$, [F3] also gives $g\\in L^1_{\\mathrm{loc}}$, so $\\widetilde Mg=Mg$. Apply [F2] with $r=p/q$ and use step 1.1: $$\\|M_{\\varphi,T}f\\|_{L^p}^q=\\|(M_{\\varphi,T}f)^q\\|_{L^{p/q}} \\le\\|Mg\\|_{L^{p/q}}\\le C_{n,p,q}\\|g\\|_{L^{p/q}} =C_{n,p,q}\\|M^{*,1}_\\varphi f\\|_{L^p}^q.$$ Taking $q$-th roots proves the estimate (with the constant renamed).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conclusion. Step 1.1 gives pointwise domination by the extended centered average, which agrees with the ordinary maximal operator on the locally integrable input in step 2.1; the strong $L^{p/q}$ bound then proves the norm estimate.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the suprema over t>0 and y in R^n run over nonempty families and the argument is pointwise in x; no empty set is integrated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: if M^{*,1}_phi f=0 the right-hand side is zero and the pointwise inequality forces M_{phi,T}f=0; the zero distribution is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: q<p and T=n/q, so r=p/q>1; the case p=2q is included and the sharp endpoint r=1 is excluded by hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: the ratio (1+|y|/t)^n is defined for every t>0 and y in R^n, and the ball B(x-y,t) has positive radius; no degenerate t=0 or zero-radius ball occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1: the exponent r=p/q is strictly greater than 1, and the Hardy-Littlewood bound is applied away from its endpoint; both sides are allowed to be +infinity, so infinite endpoint values are covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement and step 1.1: the averaging balls are centred at fixed points and no selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: a pointwise domination and an L^p bound are asserted, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no converse is asserted."
+        }
+      ]
+    },
+    "lem-truncated-maximal-function-estimates": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-seminorm-bound-characterizes-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Let $u:\\mathcal S(\\mathbb R^n)\\to\\mathbb C$ be complex-linear.  Then $u$ is\ntempered if and only if there are $C\\geq0$ and integers $N,M\\geq0$ such that\n\n$$|\\langle u,\\varphi\\rangle| \\leq C\\max_{|\\alpha|\\leq N,\\ |\\beta|\\leq M} \\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta\\varphi(x)|$$\n\nfor every $\\varphi\\in\\mathcal S(\\mathbb R^n)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].\n\nPointwise differentiation is linear; thus $p_{\\alpha\\beta}(f+g)\\le p_{\\alpha\\beta}(f)+p_{\\alpha\\beta}(g)$ and $p_{\\alpha\\beta}(cf)=|c|p_{\\alpha\\beta}(f)$. In particular this set is a complex vector space and each $p_{\\alpha\\beta}$ is a seminorm. The zero function belongs to it. Since $p_{00}(f)=0$ forces $f(x)=0$ for every $x$, the family separates functions. No choice principle is needed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-centered-and-uncentered-hardy-littlewood-maximal-functions",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $f\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n)$. The **centered\nHardy-Littlewood maximal function** of $f$ is\n$$Mf(x):=\\sup_{r>0} A_r|f|(x) =\\sup_{r>0}\\frac{1}{\\lambda(B(x,r))}\\int_{B(x,r)}|f(y)|\\,d\\lambda(y).$$\n\nThe **uncentered Hardy-Littlewood maximal function** of $f$ is\n$$M^*f(x):=\\sup_{x\\in B(y,r)} \\frac{1}{\\lambda(B(y,r))}\\int_{B(y,r)}|f(z)|\\,d\\lambda(z),$$\nwhere the supremum is over all Euclidean balls containing $x$.\n\nBoth functions take values in $[0,\\infty]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $1<p<\\infty$. Then there is a constant $C_{n,p}$ such that every\n$f\\in L^p(\\mathbb{R}^n)$ satisfies\n$$\\|Mf\\|_p\\le C_{n,p}\\|f\\|_p.$$\nBy comparison, the same is true for the uncentered maximal function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-schwartz-deconvolution-along-dyadic-dilations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $n\\ge1$ and let $\\varphi\\in\\mathcal S(\\mathbb R^n)$ satisfy\n$\\int_{\\mathbb R^n}\\varphi\\ne0$. Then there is a constant $s_0>0$\n(depending only on $\\varphi$ and $n$) such that for all integers $L,N>0$\nthere exist $C>0$ and $M>0$ (depending on $\\varphi,n,L,N$ but not on the input\nfunction) with the following property: for every $\\psi\\in\\mathcal S$ there are\n$\\eta^j\\in\\mathcal S$, $j\\ge0$, such that\n$$\\psi=\\sum_{j=0}^\\infty \\eta^j*\\varphi_{s_02^{-j}}\\quad\\text{in }\\mathcal S(\\mathbb R^n),$$\nand\n$$\\|\\eta^j\\|_{S_N}\\le C\\,2^{-jnL}\\,\\|\\psi\\|_{S_M}\\qquad(j\\ge0),$$\nwhere $\\varphi_t(x)=t^{-n}\\varphi(x/t)$ and\n$$\\|h\\|_{S_N}:=\\sup_{x\\in\\mathbb R^n}\\max(1,|x|)^N\\max_{|\\alpha|\\le N}|\\partial^\\alpha h(x)|.$$\nAny smaller positive value of $s_0$ also works, with the same conclusion and\nconstants depending on the chosen value. The point of the estimate is that the\ncoefficients $\\eta^j$ become rapidly small in the strong Schwartz norm as\n$j\\to\\infty$, uniformly in $\\psi$: this is what makes the deconvolution usable\ninside maximal-function estimates. Countable Choice is used through the\nFourier automorphism, differentiation identities, and Schwartz convolution\nlaws cited below.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-sphere-and-ball-measures-scale",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For $n\\ge1$ and $r>0$, $|\\partial B_r|=\\omega_{n-1}r^{n-1}$ and $|B_r|=\\omega_{n-1}r^n/n$; both factors are finite and positive.\n\n",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.\n\n",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multidimensional-rectangle-and-volume",
+          "source_section": "Definition",
+          "quote": "Fix a natural number $m\\ge1$. For $a,b\\in\\mathbb R^m$ with $a_j\\le b_j$ for $j<m$, define\n$$[a,b]:=\\{x\\in\\mathbb R^m:a_j\\le x_j\\le b_j\\ (j<m)\\},\\qquad \\operatorname{vol}[a,b]:=\\prod_{j<m}(b_j-a_j).$$\nThe product is the recursively defined finite product of [[def-finite-sum]]. The rectangle is **nondegenerate** when every $a_j<b_j$, and it is a **cube** when all side lengths are equal.\n\nEvery factor is nonnegative, so volume is nonnegative. For a coordinate index $r<m$, cutting at $c\\in[a_r,b_r]$ gives two rectangles whose volumes add to the original, by distributivity in that factor and [[lem-finite-sum-laws]]. Under the standard identification $\\mathbb R^1\\cong\\mathbb R$ ([[lem-metrics-on-rn]], [[def-p-norms-on-rn]]), this is the interval $[a_0,b_0]$ and its length.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-grand-maximal-test-class-of-order-n",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$ and let $\\mathcal S(\\mathbb R^n)$ carry the seminorms\nand topology of [[def-schwartz-space-and-its-seminorms]] and\n[[def-schwartz-topology-and-convergence]], with multi-indices as in\n[[def-ck-and-multi-index-notation-in-several-variables]]. For each integer $N\\ge1$\nand $\\varphi\\in\\mathcal S(\\mathbb R^n)$ define the **Schwartz test seminorm of\norder $N$**\n$$P_N(\\varphi)=\\sup_{x\\in\\mathbb R^n}(1+|x|)^N\\max_{|\\alpha|\\le N+1} |\\partial^\\alpha\\varphi(x)|$$\nand the **grand maximal test class of order $N$**\n$$\\mathcal F_N=\\{\\varphi\\in\\mathcal S(\\mathbb R^n):P_N(\\varphi)\\le1\\}.$$\n\nFor $f\\in\\mathcal S'(\\mathbb R^n)$ the **grand maximal function of order $N$**\nis\n$$M_Nf(x)=\\sup_{\\varphi\\in\\mathcal F_N}\\sup_{t>0}\\sup_{|y-x|\\le t}|(f*\\varphi_t)(y)|,\\qquad x\\in\\mathbb R^n,$$\nwhere $\\varphi_t(u)=t^{-n}\\varphi(u/t)$ and convolution is the distributional\nconvolution of [[def-convolution-of-a-tempered-distribution-with-a-schwartz-function]].\nThe dilated test $\\varphi_t$ is Schwartz for every $t>0$\n([[lem-schwartz-dilations-preserve-schwartz-space]]), so each displayed\nconvolution is defined even when $\\int\\varphi=0$. Thus the full class\n$\\mathcal F_N$, including its zero-integral tests, is used. Each convolution\nhas a finite scalar value and the supremum is a well-defined function with\nvalues in $[0,\\infty]$; the value $+\\infty$ is allowed and no measurability is\nasserted here. The class $\\mathcal F_N$ contains the zero function, is\nsymmetric under $\\varphi\\mapsto-\\varphi$ and under complex conjugation, and is\nnonempty for every $N$. No choice principle is used in this definition.\n\nThe order $N$ is a parameter. The characterisation theorem on this page\nfixes a finite admissible order $N_0(n,p,\\varphi)<\\infty$ depending only on\n$n$, $p$ and the fixed kernel $\\varphi$ and\nworks for every $N\\ge N_0(n,p,\\varphi)$; the value of $N_0$ is whatever the\naccumulated comparison estimates of that proof require, and its existence, not\nan explicit formula, is what the page uses. The sources record the explicit sufficient\nchoices $N\\ge\\lfloor n/p\\rfloor+1$ in [DKKP, Proposition 1, p. 60] and\n[MSV, section 1, p. 16], and $N>n/p+n+1$ in [CUW, Theorem 3.1, p. 8]; these\nrecorded choices are not used as the definition of $N_0$ below. If\n$N'\\ge N$ then $(1+|x|)^{N'}\\max_{|\\alpha|\\le N'+1}|\\partial^\\alpha\\varphi(x)|\n\\ge(1+|x|)^N\\max_{|\\alpha|\\le N+1}|\\partial^\\alpha\\varphi(x)|$ pointwise, so\n$\\mathcal F_{N'}\\subseteq\\mathcal F_N$ and hence\n$$M_{N'}f\\le M_Nf\\qquad\\text{pointwise on }\\mathbb R^n$$\nfor every $f\\in\\mathcal S'$: the grand maximal functions are monotone in the\norder. The aperture is fixed to one; the comparison with larger apertures is\nthe subject of the domination lemma on this page.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].\n\nPointwise differentiation is linear; thus $p_{\\alpha\\beta}(f+g)\\le p_{\\alpha\\beta}(f)+p_{\\alpha\\beta}(g)$ and $p_{\\alpha\\beta}(cf)=|c|p_{\\alpha\\beta}(f)$. In particular this set is a complex vector space and each $p_{\\alpha\\beta}$ is a seminorm. The zero function belongs to it. Since $p_{00}(f)=0$ forces $f(x)=0$ for every $x$, the family separates functions. No choice principle is needed.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-smooth-maximal-functions-of-tempered-distributions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $f\\in\\mathcal S'(\\mathbb R^n)$ and\n$\\varphi\\in\\mathcal S(\\mathbb R^n)$. Then the function\n$(y,t)\\mapsto(f*\\varphi_t)(y)$ is continuous on\n$\\mathbb R^n\\times(0,\\infty)$, where\n$\\varphi_t(x)=t^{-n}\\varphi(x/t)$ and the convolution is the distributional\nconvolution of\n[[def-convolution-of-a-tempered-distribution-with-a-schwartz-function]].\nIf $\\int_{\\mathbb R^n}\\varphi\\ne0$, the radial maximal function $M^0_\\varphi f$\nand every nontangential maximal function $M^{*,a}_\\varphi f$ with $a\\ge1$\n([[def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution]])\nare Borel measurable as $[0,\\infty]$-valued functions and may be identically\n$+\\infty$. For every integer $N\\ge1$, the grand maximal function $M_Nf$ of\n[[def-grand-maximal-test-class-of-order-n]] is also Borel measurable, may be\nidentically $+\\infty$, and its definition imposes no integral condition on the\ntests in $\\mathcal F_N$. Moreover, when $\\int\\varphi\\ne0$, $M^0_\\varphi f$ and\nevery $M^{*,a}_\\varphi f$ are lower semicontinuous, and every $M_Nf$ is lower\nsemicontinuous for all $N\\ge1$. Thus their strict superlevel sets are open;\nin particular $\\Omega_r=\\{M_Nf>2^r\\}$, $r\\in\\mathbb Z$, used in the level\ndecomposition are open.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-tempered-convolution-is-smooth-with-polynomial-growth",
+          "source_section": "Statement",
+          "quote": "For $u\\in\\mathcal S'(\\mathbb R^n)$ and\n$\\varphi\\in\\mathcal S(\\mathbb R^n)$, the function $u*\\varphi$ is smooth and\nevery derivative has polynomial growth.  For each multi-index $\\gamma$,\n\n$$\\partial^\\gamma(u*\\varphi) =(\\partial^\\gamma u)*\\varphi =u*(\\partial^\\gamma\\varphi).$$\n\nConsequently $u*\\varphi$, interpreted as a regular distribution, belongs to\n$\\mathcal S'(\\mathbb R^n)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Finiteness bound. Let $N_0,M,C_\\varphi$ be as in [F1], and choose $L_0=L_0(f,n,\\varphi,p)$ so large that $L_0>n+M$ and $L_0>N_0+n/p$. Fix $L\\ge L_0$. For a witness $(y,t)$ with $0<t<1/\\epsilon$ and $|x-y|<t$, write $W=\\frac{|(f*\\varphi_t)(y)|t^L}{(t+\\epsilon+\\epsilon|y|)^L}$. If $t\\le1$, [F1] and $t+\\epsilon+\\epsilon|y|\\ge\\epsilon(1+|y|)$ give $$W\\le C_\\varphi t^{L-(n+M)}\\epsilon^{-L}(1+|y|)^{N_0-L}\\le C_\\varphi\\epsilon^{-L}(1+|y|)^{N_0-L},$$ because $L>n+M$. If $t\\ge1$, the large-scale bound in [F1] gives $$W\\le C_\\varphi t^{L+N_0-n}\\epsilon^{-L}(1+|y|)^{N_0-L} \\le C_\\varphi\\epsilon^{-(L+\\max\\{0,L+N_0-n\\})}(1+|y|)^{N_0-L},$$ because when $L+N_0-n\\ge0$ one has $t^{L+N_0-n}\\le\\epsilon^{-(L+N_0-n)}$, while when $L+N_0-n<0$ the factor is at most $1$. Thus in both cases $W\\le C'\\epsilon^{-K}(1+|y|)^{-(L-N_0)}$ for some finite $K$. If $|x|\\ge2/\\epsilon$, then $|y|\\ge|x|-t\\ge|x|/2$, so this is at most $C''\\epsilon^{-K}(1+|x|)^{-(L-N_0)}$. If $|x|\\le2/\\epsilon$, then $1+|x|\\le1+2/\\epsilon\\le3/\\epsilon$; absorbing the resulting factor $\\epsilon^{-(L-N_0)}$ gives the same spatial-decay form with a possibly larger finite power of $\\epsilon^{-1}$. Taking the supremum over witnesses yields $$M^{\\epsilon,L}_{\\varphi,1}f(x)\\le C\\epsilon^{-K'}(1+|x|)^{-(L-N_0)}.$$ Because $L>N_0+n/p$, this bound belongs to $L^p(\\mathbb R^n)$, uniformly for each fixed $0<\\epsilon\\le1/2$. By [F7] the maximal function is Borel, so its $L^p$ norm is defined.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Tangential dominated by aperture one. Fix $x,y$ and $0<t<1/\\epsilon$, and put $q=n/T>0$ and $g=(M^{\\epsilon,L}_{\\varphi,1}f)^q$, which is nonnegative Borel by [F7]. For every $z\\in B(x-y,t)$ the definition gives $\\frac{|(f*\\varphi_t)(x-y)|t^L}{(t+\\epsilon+\\epsilon|x-y|)^L}\\le M^{\\epsilon,L}_{\\varphi,1}f(z)$. Raising to the $q$-th power, averaging with the integral allowed to be infinite, and enlarging the ball using [F4] gives $$|(f*\\varphi_t)(x-y)|^q\\frac{t^{Lq}}{(t+\\epsilon+\\epsilon|x-y|)^{Lq}}\\le\\frac{1}{\\lambda(B(x-y,t))}\\int_{B(x-y,t)}g\\le\\Bigl(1+\\frac{|y|}{t}\\Bigr)^n\\widetilde Mg(x).$$ Since $n=Tq$, division by $(1+|y|/t)^{Tq}$ and taking the supremum over $y,t$ proves the pointwise estimate for every $L>0$. For the norm estimate assume $q<p$. If $\\|M^{\\epsilon,L}_{\\varphi,1}f\\|_p=\\infty$, the extended norm inequality is trivial. Otherwise $g\\in L^{p/q}$, and [F6] gives $g\\in L^1_{\\mathrm{loc}}$, so $\\widetilde Mg=Mg$. Applying [F2] with $r=p/q>1$ yields $$\\|M^{\\epsilon,L}_{\\varphi,T}f\\|_p^q\\le\\|Mg\\|_{p/q}\\le C_{n,p,q}\\|g\\|_{p/q}=C_{n,p,q}\\|M^{\\epsilon,L}_{\\varphi,1}f\\|_p^q.$$ Taking $q$-th roots and renaming the constant proves assertion 3.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Truncated grand maximal dominated by the truncated tangential maximal function. Fix $T>0$, $L>0$ and choose integers $L'>L+T$ and $N'>L+T+n$, for example $L'=\\lfloor L+T\\rfloor+1$ and $N'=\\lfloor L+T+n\\rfloor+1$. Apply [F3] with these parameters, obtaining $C_{\\mathrm{dec}},M_{\\mathrm{dec}},s_0$; by the scaling clause of [F3] we may assume $s_0\\le1$, and we take an integer $N\\ge\\max(M_{\\mathrm{dec}},N')$ so that $st\\le t<1/\\epsilon$ for every $j$ and $\\|\\psi\\|_{S_{M_{\\mathrm{dec}}}}\\le1$ for $\\psi\\in\\mathcal F_N$. For $\\psi\\in\\mathcal F_N$, $t\\in(0,1/\\epsilon)$ and $x$ write the deconvolution $\\psi=\\sum_j\\eta^j*\\varphi_{s_02^{-j}}$ and set $s=s_02^{-j}$. Then, with $w$ the integration variable, $$|(f*\\psi_t)(x)|\\le\\sum_j\\int_{\\mathbb R^n}|(f*\\varphi_{s t})(x-w)|\\,|\\eta^j_t(w)|\\,dw .$$ By definition of $M^{\\epsilon,L}_{\\varphi,T}f(x)$, for every $w$ and $s,t>0$ with $st<1/\\epsilon$, $$|(f*\\varphi_{st})(x-w)|\\le M^{\\epsilon,L}_{\\varphi,T}f(x)\\Bigl(1+\\frac{|w|}{st}\\Bigr)^T\\frac{(st+\\epsilon+\\epsilon|x-w|)^L}{(st)^L}.$$ Multiplying by $t^L/(t+\\epsilon+\\epsilon|x|)^L$ and using the triangle inequality $|x-w|\\le|x|+|w|$, together with $\\epsilon/(t+\\epsilon)\\le1/t$ (valid since $\\epsilon\\le1$ and $t\\le1/\\epsilon$), gives $$\\Bigl(\\frac{st+\\epsilon+\\epsilon|x-w|}{st}\\Bigr)^L\\Bigl(\\frac{t}{t+\\epsilon+\\epsilon|x|}\\Bigr)^L\\le\\Bigl(\\frac1s+\\frac{|w|}{st}\\Bigr)^L .$$ Therefore, substituting $w=tu$ and using $N'>L+T+n$ so $(1+|u|)^{L+T-N'}$ is integrable, $$|(f*\\psi_t)(x)|\\frac{t^L}{(t+\\epsilon+\\epsilon|x|)^L}\\le M^{\\epsilon,L}_{\\varphi,T}f(x)\\sum_j\\int_{\\mathbb R^n}\\Bigl(1+\\frac{|u|}{s}\\Bigr)^T\\Bigl(\\frac1s+\\frac{|u|}{s}\\Bigr)^L|\\eta^j(u)|\\,du\\le M^{\\epsilon,L}_{\\varphi,T}f(x)\\sum_j C_{T,L,N'}s^{-(T+L)}\\|\\eta^j\\|_{S_{N'}}\\le C'M^{\\epsilon,L}_{\\varphi,T}f(x)\\sum_j 2^{j(T+L)}2^{-jnL'}=C''M^{\\epsilon,L}_{\\varphi,T}f(x),$$ since $s\\le1$, [F3] gives $\\|\\eta^j\\|_{S_{N'}}\\le C2^{-jnL'}\\|\\psi\\|_{S_{M_{\\mathrm{dec}}}}$, and $nL'>T+L$ makes the geometric series converge. The constants are independent of $N$, $\\epsilon$, $\\psi$, $t$ and $x$; the constant is independent of $\\epsilon$ because no weight with $\\epsilon$ remains. Taking the supremum over $t\\in(0,1/\\epsilon)$ and $\\psi\\in\\mathcal F_N$ gives $M_N^{\\epsilon,L}f(x)\\le C_1M^{\\epsilon,L}_{\\varphi,T}f(x)$ pointwise, with $C_1=C_1(n,\\varphi,T,L)$.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Good-set bound. Fix $p_0>0$, $\\lambda>0$, $N$ large enough for the estimate below, $0<\\epsilon\\le1/2$, and $x$ with $M^{\\epsilon,L}_Nf(x)<\\lambda M^{\\epsilon,L}_{\\varphi,1}f(x)$. This condition forces $M^{\\epsilon,L}_{\\varphi,1}f(x)<\\infty$: put $A=P_N(\\varphi)>0$ and $\\varphi_0=\\varphi/A\\in\\mathcal F_N$. For every aperture-one witness $(t,y)$ at $x$, $v=(x-y)/t$ has $|v|<1$, and the translated kernel $\\Psi(w)=\\varphi_0(w-v)$ satisfies $P_N(\\Psi)\\le2^N$ by [F5]. Thus $\\Psi/2^N\\in\\mathcal F_N$, $(f*\\Psi_t)(x)=(f*(\\varphi_0)_t)(y)$, and the denominator comparison $t+\\epsilon+\\epsilon|x|\\le2(t+\\epsilon+\\epsilon|y|)$ gives $$M^{\\epsilon,L}_Nf(x)\\ge2^{-N-L}A^{-1}M^{\\epsilon,L}_{\\varphi,1}f(x).$$ In particular an infinite right-hand side would force an infinite left-hand side, contrary to the strict good-set inequality. If the aperture-one quantity is positive, its finiteness lets us choose $t\\in(0,1/\\epsilon)$ and $y$ with $|x-y|<t$ such that $$M^{\\epsilon,L}_{\\varphi,1}f(x)\\le2|h(y)|\\frac{t^L}{(t+\\epsilon+\\epsilon|y|)^L},\\qquad h=f*\\varphi_t.$$ If the aperture-one quantity is zero, the strict good-set inequality is impossible because $M^{\\epsilon,L}_Nf(x)\\ge0$. With $c=2^Lc_{N,\\varphi}$, [F5] gives $$t\\sup_{|z-y|<rt}|\\nabla h(z)|\\le c\\,M^{\\epsilon,L}_Nf(x)\\,\\frac{(t+\\epsilon+\\epsilon|y|)^L}{t^L}\\qquad(0<r\\le1).$$ Indeed, $t\\partial_jh(z)=(f*\\Psi^z_t)(x)$ for the translated derivative test function $\\Psi^z$, whose translation length is at most $2$; its $P_N$ seminorm is at most $c_{N,\\varphi}$. Also $t+\\epsilon+\\epsilon|x|\\le2(t+\\epsilon+\\epsilon|y|)$ because $|x-y|<t$ and $\\epsilon\\le1$. The mean value theorem and the good-set hypothesis now give $$|h(x')-h(y)|\\le cr\\lambda M^{\\epsilon,L}_{\\varphi,1}f(x) \\frac{(t+\\epsilon+\\epsilon|y|)^L}{t^L}\\qquad(x'\\in B(y,rt)).$$ Choose $0<r\\le1$ so $cr\\lambda\\le1/4$. The saturation estimate yields $|h(x')|\\ge\\tfrac14M^{\\epsilon,L}_{\\varphi,1}f(x)(t+\\epsilon+\\epsilon|y|)^L/t^L\\ge\\tfrac14M^{\\epsilon,L}_{\\varphi,1}f(x)$ on $B(y,rt)$, and $|h(x')|\\le M^0_\\varphi f(x')$. Thus, using the ball inclusion and [F4], $$M^{\\epsilon,L}_{\\varphi,1}f(x)^{p_0} \\le4^{p_0}\\Bigl(\\frac{1+r}{r}\\Bigr)^n \\frac1{\\lambda(B(x,(1+r)t))}\\int_{B(x,(1+r)t)}(M^0_\\varphi f)^{p_0}.$$ By [F7], $(M^0_\\varphi f)^{p_0}$ is Borel, so the extended average defined before assertion 1 applies even if it is not locally integrable. The displayed average is at most $\\widetilde M((M^0_\\varphi f)^{p_0})(x)$, so assertion 4 follows with $C_3=4((1+r)/r)^{n/p_0}$.",
+          "step": "1.4",
+          "inputs": [
+            "F5",
+            "F7",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Untruncated good-set estimate. Let $x$ satisfy $M_Nf(x)\\le\\lambda M^{*,1}_\\varphi f(x)<\\infty$, with $N\\ge1$. By definition of the supremum choose $t>0,y$ with $|x-y|<t$ and $|h(y)|\\ge\\tfrac12M^{*,1}_\\varphi f(x)$, where $h=f*\\varphi_t$. As in step 1.4 but without truncation weights, $t\\sup_{|z-y|<rt}|\\nabla h(z)|\\le c_{N,\\varphi}M_Nf(x)$ by [F5]. Choose $r\\le1$ so $c_{N,\\varphi}r\\lambda\\le1/4$. The mean value theorem gives $|h(z)|\\ge\\tfrac14M^{*,1}_\\varphi f(x)$ on $B(y,rt)$, and $|h(z)|\\le M^0_\\varphi f(z)$. Using [F4], the ball inclusion and the extended average $\\widetilde M$ defined in step 1.4 yields $$M^{*,1}_\\varphi f(x)^{p_0}\\le 4^{p_0}\\Bigl(\\frac{1+r}{r}\\Bigr)^n \\widetilde M((M^0_\\varphi f)^{p_0})(x).$$ This is assertion 5 with $N_3=1$ and $C_4=4((1+r)/r)^{n/p_0}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.4",
+            "F5",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conclusion. Step 1.1 gives the finiteness and pointwise decay of the aperture-one truncated function; step 1.3 gives the pointwise comparison of the truncated grand maximal function with the truncated tangential one, with constants independent of $\\epsilon$; step 1.2 gives the tangential-to-aperture-one comparison via the Hardy-Littlewood maximal operator; step 1.4 gives the truncated good-set bound and step 2.1 the untruncated one. This proves the five assertions of the lemma.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "step 1.2",
+            "step 1.4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: the suprema defining the truncated functions run over the nonempty range 0<t<1/epsilon; the case of a vanishing grand maximal function is the zero case and no estimate is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: for f=0 every truncated maximal function vanishes and the estimates hold with zero; the constant L_0(f,n,phi,p) is finite for f=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: the case p=1 with N_0 from the finite-seminorm bound is included; the aperture-one comparison in assertion 3 uses q=n/T and r=p/q>1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: t>0 and epsilon in (0,1/2], so the weights and the ball radii are nondegenerate; the case |x|<=2/epsilon is treated separately from |x|>=2/epsilon to avoid a degenerate far-field bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.3: the deconvolution scale satisfies st<=t<1/epsilon by the choice s_0<=1, and step 1.2 treats the endpoint q=n/T of the tangential exponent; assertion 1 takes L>=L_0 with the endpoint L=L_0 included. Step 1.2 uses the extended average for all L>0, including infinite input integrals; the norm estimate splits finite and infinite right-hand norms."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.3: the deconvolution coefficients are supplied by the cited lemma for each fixed test function, and the constants C_dec, M_dec, s_0 are produced constructively; no selection over a family of kernels is made beyond the finite choices recorded in the estimates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: five one-sided estimates are asserted, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no converse is asserted."
+        }
+      ]
+    }
+  },
+  "statement_changes": {
+    "lem-truncated-maximal-function-estimates": "Assertion 3 uses the already-defined extended centered average tilde M for every L>0; ordinary M is used in the proof only after finiteness of the aperture-one Lp norm supplies local integrability. Parameters and all claimed inequalities preserved."
+  },
+  "checks": {
+    "precheck": "2 checked, 0 failing — all clean",
+    "rendercheck": "OK — 2 files, every math span and frontmatter parses",
+    "proof_layout": "2 items, 9 steps, 0 defects"
+  },
+  "source_raw_sha256": {
+    "lem-tangential-maximal-function-norm-bound": "5e5bdf6fe3cb27c49adbde1cbda986e9fc01d89a8c4765d1d24cdee47e1a8b9b",
+    "lem-truncated-maximal-function-estimates": "262ab76b1fad6ac19195a750d513e2092c9b7da993770a8fa4d34365389974c3"
+  },
+  "direct_consumer_review": [
+    {
+      "id": "thm-maximal-function-characterisations-of-real-hardy-spaces",
+      "reviewed_raw_sha256": "caaa9b39fc8fbdb51da0426b63ebeeaa287b3833437919ef8b037823f7702393",
+      "clauses": [
+        "Facts F4",
+        "Proof step 2.1"
+      ],
+      "disposition": "compatible-current-use",
+      "evidence": "Step 2.1 chooses L>=L0 and obtains finite aperture-one Lp norm from assertion 1; it consumes the unchanged assertion-3 norm inequality. Assertion 3 pointwise extended-average notation is not used. F4 already uses extended averages for assertion 5 and explicitly identifies ordinary M after local integrability. C3/C4 remain existential constants; correcting their proof values changes no consumer assumption or conclusion.",
+      "coordination": "audit_b5_b6 notified; consumer source belongs to that agent."
+    }
+  ]
+}

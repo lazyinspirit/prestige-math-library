@@ -1,0 +1,1564 @@
+[
+  {
+    "order": 458.033,
+    "id": "interior-and-boundary-sobolev-elliptic-regularity",
+    "kind": "A",
+    "category": "pde",
+    "title": "Interior and Boundary Sobolev Elliptic Regularity",
+    "companion": "interior-and-boundary-sobolev-elliptic-regularity-examples",
+    "requires": [
+      "fredholm-elliptic-problems-and-the-elliptic-spectrum"
+    ],
+    "items": [
+      {
+        "id": "def-first-difference-quotient",
+        "kind": "definition",
+        "title": "Difference quotients on a shrunken domain",
+        "statement": "Assume Countable Choice for the Sobolev interfaces used below. Let\n$\\Omega\\subseteq\\mathbb R^n$ be open with $n\\ge1$, let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$u\\in L^1_{\\mathrm{loc}}(\\Omega;\\mathbb K)$\n([[def-locally-integrable-function-as-a-regular-distribution]]). For\n$h\\in\\mathbb R\\setminus\\{0\\}$ and $i\\in\\{1,\\dots,n\\}$ let $e_i$ be the\n$i$-th standard unit vector and put\n$$\\Omega_{i,h}:=\\{x\\in\\Omega:x+he_i\\in\\Omega\\}=\\Omega\\cap(\\Omega-he_i),$$\nan open subset of $\\Omega$, since it is the intersection of the open set\n$\\Omega$ with the preimage of $\\Omega$ under the homeomorphism\n$x\\mapsto x+he_i$. The **$i$-th difference quotient of $u$ of size $h$** is\n$$\\delta_h^iu(x):=\\frac{u(x+he_i)-u(x)}{h},\\qquad x\\in\\Omega_{i,h},$$\nread on the almost-everywhere classes\n([[def-l-p-space-as-a-quotient-by-null-functions]]); the\n**difference-quotient vector** is\n$$\\delta_hu:=(\\delta_h^1u,\\dots,\\delta_h^nu),$$\ndefined on the open intersection $\\Omega_h:=\\bigcap_{i=1}^n\\Omega_{i,h}$,\nwhile each component is defined on its own shrunken set $\\Omega_{i,h}$.\n\nThroughout this page the translation notation is the published one of\n[[def-translation-of-a-function-on-rn]], namely\n$\\tau_hu(x)=u(x-h)$; consequently the forward shift that occurs in the\nproduct rule is the translate by $-he_i$:\n$$u(x+he_i)=(\\tau_{-he_i}u)(x),\\qquad \\delta_h^iu=\\frac{\\tau_{-he_i}u-u}{h}\\quad\\text{on }\\Omega_{i,h}.$$\n\nFor the open upper half-space\n$H=\\{x_n>0\\}$ and a **tangential**\nindex $j<n$, the translation $x\\mapsto x+he_j$ maps $H$ onto $H$; hence\n$\\delta_h^ju$ is defined on all of $H$. For the **normal** index $n$ and\n$h>0$ one has $H_{n,h}=H$ (since $x_n>0$ implies $x_n+h>0$), while for\n$h<0$ one has $H_{n,h}=\\{x\\in H:x_n>|h|\\}$, a proper subset of $H$.\n\n**Well-definedness.** Both values $u(x)$ and $u(x+he_i)$ in the numerator are\ndefined for every $x\\in\\Omega_{i,h}$, and\n$$|\\delta_h^iu(x)|\\le\\frac{|u(x+he_i)|+|u(x)|}{|h|},$$\nso $\\delta_h^iu\\in L^1_{\\mathrm{loc}}(\\Omega_{i,h};\\mathbb K)$: on a compact\n$K\\Subset\\Omega_{i,h}$ the first term is controlled by\n$\\int_K|u(x+he_i)|\\,dx=\\int_{K+he_i}|u(y)|\\,dy<\\infty$, because\n$K+he_i$ is a compact subset of $\\Omega$, and the second term is controlled\non $K\\Subset\\Omega$. Further, the definition depends only on the class of\n$u$: if $u=\\widetilde u$ almost everywhere on $\\Omega$ and $E\\subseteq\\Omega$\nis a null set with $u=\\widetilde u$ on $\\Omega\\setminus E$, then\n$\\delta_h^iu\\ne\\delta_h^i\\widetilde u$ only at points of\n$(\\Omega_{i,h}\\cap E)\\cup(\\Omega_{i,h}\\cap(E-he_i))$, a null set because\n$E$ is null and $E-he_i$ is null by the choice-free translation invariance of\nLebesgue measure\n([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]).\n\n**Two warnings, part of the definition.** First, a difference quotient is\nonly defined on the shrunken set $\\Omega_{i,h}$ inside $\\Omega$, never on all\nof $\\Omega$; in particular it may be undefined on a strip of width $|h|$\nalong the boundary, so no estimate below differentiates a Sobolev class\nacross the boundary. Second, extending a class $u\\in H^1_0(\\Omega)$ by zero\ndoes not enlarge the domain of its difference quotient: the quotient of the\nextension agrees with $\\delta_h^iu$ on $\\Omega_{i,h}$, while values outside\n$\\Omega_{i,h}$ use points not both in $\\Omega$ and are not values of the\noriginal quotient. In the upper half-space, $\\Omega_{n,h}=H$ for $h>0$,\nwhereas $\\Omega_{n,h}=\\{x\\in H:x_n>|h|\\}$ for $h<0$. This is why every\nboundary argument on this page uses only\ntangential quotients of compactly supported localisations, for which the\nshrunken domain is the whole half-space and no extension across\n$\\partial\\Omega$ is invoked.",
+        "deps": [
+          "def-locally-integrable-function-as-a-regular-distribution",
+          "def-translation-of-a-function-on-rn",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-countable-choice"
+        ],
+        "strategy": "Fix the shrunken domain $\\Omega_{i,h}$, the translation sign convention of [[def-translation-of-a-function-on-rn]] and the class-level reading of quotients; the half-space statement records that tangential translations preserve $H$. The restriction to the shrunken set is what makes every later integration-by-parts identity well posed, and the Dirichlet warning is the reason the boundary proof may not differentiate in the normal direction ([H] Appendix 4.C, Definition 4.51, printed p. 124; [Si] Lecture 6 difference-quotient notation).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Appendix 4.C, Definition 4.51, printed p. 124 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 6, difference-quotient operators $\\delta_j^{(h)}$, printed pp. 58-62 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-difference-quotient-integration-by-parts",
+        "kind": "lemma",
+        "title": "Difference-quotient calculus: integration by parts, product rule, commutation",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with $n\\ge1$,\nlet $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$u,v\\in L^1_{\\mathrm{loc}}(\\Omega;\\mathbb K)$, and fix $h\\ne0$ and\n$i\\in\\{1,\\dots,n\\}$. Write\n$\\Omega_{i,h}=\\{x\\in\\Omega:x+he_i\\in\\Omega\\}$ and\n$\\Omega_{i,-h}=\\{x\\in\\Omega:x-he_i\\in\\Omega\\}$\n([[def-first-difference-quotient]]), so that\n$\\Omega_{i,-h}=\\Omega_{i,h}+he_i$. Then:\n\n(i) **Integration by parts, two-domain form.** Whenever the displayed\nintegrals converge absolutely,\n$$\\int_{\\Omega_{i,h}}\\delta_h^iu\\,v\\,dx=-\\int_{\\Omega_{i,-h}}u\\,\\delta_{-h}^iv\\,dx+\\frac1h\\Big(\\int_{\\Omega_{i,-h}}uv\\,dx-\\int_{\\Omega_{i,h}}uv\\,dx\\Big).$$\nConsequently, if\n$$\\int_{\\Omega_{i,h}}uv\\,dx=\\int_{\\Omega_{i,-h}}uv\\,dx,$$\nin particular if $uv$ vanishes almost everywhere outside\n$\\Omega_{i,h}\\cap\\Omega_{i,-h}$ — for instance when $uv$ has compact support in\n$\\Omega$ and $|h|<\\operatorname{dist}(\\operatorname{supp}(uv),\\partial\\Omega)$\n— or if $\\Omega_{i,h}=\\Omega_{i,-h}$, then\n$\\int_{\\Omega_{i,h}}\\delta_h^iu\\,v\\,dx=-\\int_{\\Omega_{i,-h}}u\\,\\delta_{-h}^iv\\,dx$,\nwith the integrals taken over their respective shrunken sets. For $\\Omega=\\mathbb R^n$\nand $u\\in L^p(\\Omega)$, $v\\in L^{p'}(\\Omega)$ with $1\\le p\\le\\infty$ and\n$p'$ the Hölder conjugate exponent of [[def-conjugate-exponents]]\n($1/p+1/p'=1$), both sides are absolutely convergent and\n$$\\int_{\\mathbb R^n}\\delta_h^iu\\,v\\,dx=-\\int_{\\mathbb R^n}u\\,\\delta_{-h}^iv\\,dx.$$\n\n(ii) **Product rule.** If $uv\\in L^1_{\\mathrm{loc}}(\\Omega)$, then a.e. on\n$\\Omega_{i,h}$,\n$$\\delta_h^i(uv)=\\big(\\tau_{-he_i}u\\big)\\,\\delta_h^iv+\\big(\\delta_h^iu\\big)\\,v=u\\,\\delta_h^iv+\\big(\\delta_h^iu\\big)\\big(\\tau_{-he_i}v\\big),$$\nwith the translation $\\tau_{-he_i}$ of [[def-translation-of-a-function-on-rn]].\nThe identity is a pointwise a.e. algebraic identity; no local integrability of\nits shifted cross-products is asserted beyond the hypothesis $uv\\in L^1_{\\rm loc}$,\nwhich makes the left side well defined.\n\n(iii) **Commutation with weak derivatives.** If $u$ and all its weak\nderivatives $D^\\gamma u$ with $|\\gamma|\\le|\\alpha|$ have locally integrable\nrepresentatives on $\\Omega$\n([[def-weak-derivative-of-a-locally-integrable-function]]), then\n$$D^\\alpha(\\delta_h^iu)=\\delta_h^i(D^\\alpha u)\\qquad\\text{weakly on }\\Omega_{i,h}.$$\n\nAll identities are identities of almost-everywhere classes\n([[def-l-p-space-as-a-quotient-by-null-functions]]), and the proof uses no\nchoice beyond the Sobolev interfaces.",
+        "deps": [
+          "def-first-difference-quotient",
+          "def-translation-of-a-function-on-rn",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-conjugate-exponents",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "strategy": "Change variables $x'=x+he_i$ in the first half of $\\int\\delta_h^iu\\,v$ to obtain the negative of the $-h$ quotient, exactly as in [H] Proposition 4.52(2); the product rule is the algebraic identity $u_+v_+ -uv=(u_+-u)v+u_+(v_+-v)$ divided by $h$ ([H] Proposition 4.52(3)); weak commutation follows because the weak derivative and the translation commute and $\\delta_h^i$ is a linear combination of two translations. The $L^p$/$L^{p'}$ version is the two-domain form of the identity together with Hölder ([L] equation (5.6) and the remarks around it, printed p. 108).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Appendix 4.C, Proposition 4.52, printed pp. 124-125 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, difference-operator identities and integration by parts (5.6), printed pp. 108-110 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-cutoff-difference-quotient-commutator-estimate",
+        "kind": "lemma",
+        "title": "The cutoff difference-quotient commutator estimate",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $1\\le p\\le\\infty$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, $u\\in W^{1,p}(\\Omega;\\mathbb K)$ and\n$\\eta\\in C_c^\\infty(\\mathbb R^n;\\mathbb R)$ with\n$M_\\eta:=\\|D\\eta\\|_{L^\\infty(\\mathbb R^n)}$ and compact support; the case\n$\\eta\\in C_c^\\infty(\\Omega;\\mathbb R)$ is read by extending $\\eta$ by zero.\nThen for every $i\\in\\{1,\\dots,n\\}$ and every $h\\ne0$, on the shrunken set\n$\\Omega_{i,h}=\\{x\\in\\Omega:x+he_i\\in\\Omega\\}$ of\n[[def-first-difference-quotient]] one has the exact identity\n$$\\delta_h^i(\\eta u)-\\eta\\,\\delta_h^iu=(\\delta_h^i\\eta)\\,(\\tau_{-he_i}u)\\qquad\\text{a.e. on }\\Omega_{i,h},$$\nwhere $\\tau$ is the published translation $\\tau_hu(x)=u(x-h)$ of\n[[def-translation-of-a-function-on-rn]], so that\n$(\\tau_{-he_i}u)(x)=u(x+he_i)$. Consequently\n$$\\|\\delta_h^i(\\eta u)-\\eta\\,\\delta_h^iu\\|_{L^p(\\Omega_{i,h})}\\le M_\\eta\\,\\|\\tau_{-he_i}u\\|_{L^p(\\Omega_{i,h})}\\le M_\\eta\\,\\|u\\|_{L^p(\\Omega)},$$\nand more generally, on the domain where both sides are defined,\n$$\\delta_h^i\\big(\\eta^2\\delta_h^iu\\big)=\\eta^2\\delta_h^i\\delta_h^iu+(\\delta_h^i\\eta^2)\\,(\\tau_{-he_i}\\delta_h^iu).$$\nThe statement is quantitative in $\\|D\\eta\\|_{L^\\infty}$ and does not assume\nany regularity of $u$ beyond $W^{1,p}$.",
+        "deps": [
+          "def-first-difference-quotient",
+          "lem-difference-quotient-integration-by-parts",
+          "thm-mean-value-inequality",
+          "thm-chain-rule-for-total-derivatives",
+          "def-translation-of-a-function-on-rn",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "strategy": "Apply the product rule (ii) of [[lem-difference-quotient-integration-by-parts]] to $\\eta u$ and cancel $\\eta\\delta_h^iu$; the mean value inequality applied to $t\\mapsto\\eta(x+the_i)$ gives $|\\delta_h^i\\eta|\\le M_\\eta$, and $\\tau_{he_i}$ preserves $L^p$ norms. The second identity is the same computation for $\\eta^2$ and $\\delta_h^iu$. This isolates the localisation error: the quotient of the localised function differs from the localisation of the quotient by a term containing the full derivative $D\\eta$, which is what the absorption step of the interior estimate controls ([H] proof of Theorem 4.27, printed pp. 112-113; [Si] Lecture 6, properties (a)-(f) of the difference operators, printed pp. 60-61).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, proof of Theorem 4.27 (commutator terms F), printed pp. 112-113 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 6, difference-quotient product rule and properties (a)-(f), printed pp. 60-62 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative",
+        "kind": "lemma",
+        "title": "Uniformly bounded difference quotients represent a weak derivative",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$\\Omega'\\Subset\\Omega$ open, $1<p<\\infty$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, $u\\in L^p(\\Omega;\\mathbb K)$ and\n$0<h_0<\\operatorname{dist}(\\Omega',\\partial\\Omega)$. Suppose\n$$\\|\\delta_h^iu\\|_{L^p(\\Omega')}\\le C\\qquad(0<|h|<h_0)$$\nfor every coordinate direction $i$. Then $u$ has a weak derivative\n$D_iu\\in L^p(\\Omega')$ with $\\|D_iu\\|_{L^p(\\Omega')}\\le C$, and for every\n$\\varphi\\in L^{p'}(\\Omega')$ one has\n$\\int_{\\Omega'}\\delta_h^iu\\,\\varphi\\,dx\\to\\int_{\\Omega'}D_iu\\,\\varphi\\,dx$\nas $h\\to0$; consequently $\\delta_h^iu\\rightharpoonup D_iu$ weakly in\n$L^p(\\Omega')$. No weak compactness principle and no choice principle beyond\nCountable Choice is used: the uniform bound makes the limit functional bounded\nfor every test function at once.",
+        "deps": [
+          "def-first-difference-quotient",
+          "lem-difference-quotient-integration-by-parts",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-conjugate-exponents",
+          "thm-holder-inequality-for-integrals",
+          "thm-dominated-convergence",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity",
+          "lem-complex-lp-duality-from-real-lp-duality",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-derivative",
+          "thm-mean-value-inequality",
+          "thm-chain-rule-for-total-derivatives",
+          "def-countable-choice"
+        ],
+        "strategy": "For $\\varphi\\in C_c^\\infty(\\Omega'')$ with $\\Omega'\\Subset\\Omega''\\Subset\\Omega$ use integration by parts: $\\int\\delta_h^iu\\,\\varphi=-\\int u\\,\\delta_{-h}^i\\varphi$, and $\\delta_{-h}^i\\varphi\\to\\partial_i\\varphi$ uniformly as $h\\to0$ with the difference bounded by $\\|D^2\\varphi\\|_\\infty|h|$, so dominated convergence gives $\\lim_h\\int\\delta_h^iu\\,\\varphi=-\\int u\\,\\partial_i\\varphi=:\\ell(\\varphi)$. The uniform bound and Hölder give $|\\ell(\\varphi)|\\le C\\|\\varphi\\|_{L^{p'}(\\Omega')}$; since $C_c^\\infty(\\Omega')$ is dense in $L^{p'}(\\Omega')$ (density of compactly supported continuous functions for Radon measures, upgraded by mollification), $\\ell$ extends to a bounded functional on $L^{p'}(\\Omega')$, and the sigma-finite duality theorem represents it by some $w\\in L^p(\\Omega')$ with $\\|w\\|_{L^p}\\le C$. Then $\\int u\\,\\partial_i\\varphi=-\\int w\\varphi$ for every test function, so $D_iu=w$ and $\\|D_iu\\|\\le C$. This is the conclusion of [H] Theorem 4.53(2) and [L] Proposition 5.7(ii) by a route that replaces their Banach-Alaoglu extraction by the duality representation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Appendix 4.C, Theorem 4.53(2) and its proof, printed pp. 125-126 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Proposition 5.7(ii), printed pp. 110-111 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 5, Lemma 7: convergence of difference quotients to weak derivatives (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one",
+        "kind": "theorem",
+        "title": "The difference-quotient characterisation of $W^{1,p}$ for $1<p<\\infty$",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and $\\Omega'\\Subset\\Omega$;\nwrite $\\delta_hu=(\\delta_h^1u,\\dots,\\delta_h^nu)$ and\n$Du=(D_1u,\\dots,D_nu)$ for the difference-quotient and gradient vectors, with\n$$\\|\\delta_hu\\|_{L^p(\\Omega')}:=\\Big\\|\\Big(\\sum_{i=1}^n|\\delta_h^iu|^2\\Big)^{1/2}\\Big\\|_{L^p(\\Omega')},\\qquad \\|Du\\|_{L^p(\\Omega)}:=\\Big\\|\\Big(\\sum_{i=1}^n|D_iu|^2\\Big)^{1/2}\\Big\\|_{L^p(\\Omega)} .$$\n(1) If $1\\le p<\\infty$ and $u\\in W^{1,p}(\\Omega;\\mathbb K)$, then for every\n$0<|h|<\\operatorname{dist}(\\Omega',\\partial\\Omega)$ and every coordinate\ndirection $i$,\n$$\\|\\delta_h^iu\\|_{L^p(\\Omega')}\\le\\|D_iu\\|_{L^p(\\Omega)},\\qquad \\|\\delta_hu\\|_{L^p(\\Omega')}\\le n^{|1/p-1/2|}\\|Du\\|_{L^p(\\Omega)} .$$\nAt $p=2$ the vector estimate has constant one.\n(2) Conversely, if $1<p<\\infty$, $u\\in L^p(\\Omega;\\mathbb K)$ and there is $C$\nwith $\\|\\delta_h^iu\\|_{L^p(\\Omega')}\\le C$ for every coordinate $i$ and all\n$0<|h|<\\operatorname{dist}(\\Omega',\\partial\\Omega)/2$, then\n$u\\in W^{1,p}(\\Omega')$ with $D_iu\\in L^p(\\Omega')$,\n$\\|D_iu\\|_{L^p(\\Omega')}\\le C$, and\n$\\delta_h^iu\\rightharpoonup D_iu$ weakly in $L^p(\\Omega')$ as $h\\to0$.\nBoth parts are identities of classes and hold without any regularity of\n$\\partial\\Omega$. At $p=1$ the converse in (2) is deliberately not asserted;\nthe companion remark records why only a measure derivative survives there.",
+        "deps": [
+          "def-first-difference-quotient",
+          "lem-difference-quotient-integration-by-parts",
+          "lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-conjugate-exponents",
+          "thm-dominated-convergence",
+          "def-countable-choice",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "thm-jensens-integral-inequality",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-ftc-second-part",
+          "thm-chain-rule-for-total-derivatives",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-hk-and-hk-zero-notation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals"
+        ],
+        "strategy": "Part (1) is the integral mean-value formula $u(x+he_i)-u(x)=h\\int_0^1\\partial_iu(x+the_i)\\,dt$ for smooth $u$ followed by Jensen, Fubini and translation invariance, then density of smooth functions: this is [H] Theorem 4.53(1), [L] Proposition 5.7(i) and [Si] Lecture 5 Lemma 7. Part (2) is exactly [[lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative]]. The reflexive-range hypothesis $1<p<\\infty$ is what makes the limit functional bounded in the dual exponent, and the $p=1$ exclusion is recorded by the companion remark ([H] Theorem 4.53, printed pp. 125-126; [L] Proposition 5.7, printed pp. 110-111).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Appendix 4.C, Theorem 4.53, printed pp. 125-126 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Proposition 5.7, printed pp. 110-111 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 5, Lemma 7, and Lecture 6 use of it (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "rem-the-p-one-difference-quotient-converse-leads-to-bv-not-w-one-one",
+        "kind": "remark",
+        "title": "At $p=1$ uniform difference-quotient bounds give only a measure derivative",
+        "statement": "The converse direction (2) of\n[[thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one]]\nis false at $p=1$ and is not asserted there. For the Heaviside step\n$u=\\mathbf 1_{(0,\\infty)}$ on $\\Omega=(-1,1)$ one has\n$\\delta_h^1u=h^{-1}\\mathbf 1_{(-h,0)}$ on $\\Omega_{1,h}=(-1,1-h)$ for $0<h<1$, so\n$$\\|\\delta_h^1u\\|_{L^1(\\Omega_{1,h})}=1\\qquad(0<h<1),$$\nand likewise on any open $\\Omega'\\subseteq\\Omega_{1,h}$ with\n$(-h,0)\\subseteq\\Omega'$, while $u$ has no locally integrable weak derivative\n([F2]); its\ndistributional derivative is the Dirac mass at $0$, and $u$ has bounded\nvariation on every compact subinterval of $\\Omega$\n([[def-bounded-variation-and-total-variation]]). Thus uniform local $L^1$\nbounds on difference quotients yield, in the sharp form exhibited by this\nwitness, a finite measure derivative and a function of bounded variation, and\nnot membership in $W^{1,1}$. No consumer on this page may use part (2) at\n$p=1$.",
+        "deps": [
+          "def-first-difference-quotient",
+          "thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one",
+          "def-bounded-variation-and-total-variation",
+          "lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-absolute-continuity-of-the-integral",
+          "lem-smooth-bump-between-concentric-euclidean-balls"
+        ],
+        "strategy": "Compute $\\delta_h^1u$ and its $L^1$ norm explicitly; the failure of $L^1$ weak differentiability is the published counterexample. The remark records the scope boundary of the characterisation theorem and the reason its proof in [[lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative]], which represents the limit in $L^{p'}$-duality, does not extend to $p=1$; the bounded-variation sharpening is cited, not used ([L] Proposition 5.7(ii) is stated for $1<p<\\infty$; [H] Theorem 4.53(2) likewise, printed p. 125).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Appendix 4.C, Theorem 4.53(2) stated for $1<p<\\infty$, printed p. 125 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Proposition 5.7(ii) stated for $1<p<\\infty$, printed p. 110 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-local-weak-solution-for-a-divergence-form-operator",
+        "kind": "definition",
+        "title": "Local weak solutions of a divergence-form operator",
+        "statement": "Assume Countable Choice for the Sobolev interfaces. Let\n$\\Omega\\subseteq\\mathbb R^n$ be open and not necessarily bounded, $n\\ge1$,\nlet $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $L$ and its sesquilinear\nform $a$ be as in [[def-uniformly-elliptic-divergence-form-operator]], with\nellipticity constant $\\theta$ and coefficient bounds $M_a,M_b,M_c$. Let\n$f\\in L^2_{\\mathrm{loc}}(\\Omega)$\n([[def-l-p-space-as-a-quotient-by-null-functions]]).\n\nA class $u\\in H^1(\\Omega;\\mathbb K)$\n([[def-hk-and-hk-zero-notation]]) is a **local weak solution of $Lu=f$ on\n$\\Omega$** if\n$$a(u,v)=\\int_\\Omega f\\,\\overline v\\,dx\\qquad\\text{for every }v\\in C_c^\\infty(\\Omega;\\mathbb K),$$\nwhere $a$ is the sesquilinear form of\n[[def-uniformly-elliptic-divergence-form-operator]] and the right-hand side is\nfinite because $v$ is bounded with compact support in $\\Omega$ and\n$f\\in L^2_{\\mathrm{loc}}(\\Omega)$.\n\n**Equivalences and well-definedness.** Write $\\Omega_2\\Subset\\Omega$ when\n$\\Omega_2$ is open, bounded and $\\overline{\\Omega_2}\\subseteq\\Omega$. For such\nan $\\Omega_2$ and $v\\in H^1_0(\\Omega_2)$ the class $v$ vanishes a.e. outside\n$\\Omega_2$, so\n$a(u,v)$ and $\\int_{\\Omega_2}f\\overline v$ are finite by\n[[lem-elliptic-form-is-well-defined-and-bounded]] and Cauchy-Schwarz. The\ndefining identity for all $v\\in C_c^\\infty(\\Omega)$ is equivalent to the\nidentity\n$$a(u,v)=\\int_{\\Omega_2}f\\,\\overline v\\,dx\\qquad\\text{for every bounded open }\\Omega_2\\Subset\\Omega\\text{ and every }v\\in H^1_0(\\Omega_2),$$\nbecause $C_c^\\infty(\\Omega_2)$ is dense in $H^1_0(\\Omega_2)$ by definition of\nthe closure ([[def-wkp-zero-as-a-sobolev-closure]]) and both sides are\ncontinuous in $v$ in the $H^1(\\Omega)$ norm: $a$ is bounded on $H^1(\\Omega)$\nby [[lem-elliptic-form-is-well-defined-and-bounded]], and\n$|\\int_{\\Omega_2}f\\overline v\\,dx|\\le\\|f\\|_{L^2(\\Omega_2)}\\|v\\|_{L^2(\\Omega_2)}$\nby Cauchy-Schwarz, while the $H^1(\\Omega_2)$ norm controls the $L^2(\\Omega_2)$\nnorm. If in addition $f\\in L^2(\\Omega)$ then the defining identity is equivalent to\n$a(u,v)=\\int_\\Omega f\\overline v\\,dx$ for every $v\\in H^1_0(\\Omega)$, since\n$v\\mapsto a(u,v)-\\int_\\Omega f\\overline v$ is then bounded on the whole space\n$H^1_0(\\Omega)$ and $C_c^\\infty(\\Omega)$ is dense in it. The definition\ndepends on $u$, on the coefficients and on $f$ only through their\nalmost-everywhere classes; this is the class-level statement of\n[[lem-elliptic-form-is-well-defined-and-bounded]]. No boundary condition is\nimposed, and the data class is $L^2_{\\mathrm{loc}}$; this is strictly weaker\nthan the Dirichlet notion of [[def-weak-dirichlet-solution-for-a-divergence-form-operator]],\nwhich asks for $u\\in H^1_0(\\Omega)$ and a datum in the dual of $H^1_0$.\n\n**Locality.** If $\\Omega_0\\subseteq\\Omega$ is open and $u$ is a local weak\nsolution of $Lu=f$ on $\\Omega$, then the restriction $u|_{\\Omega_0}$ is a local\nweak solution of $Lu=f|_{\\Omega_0}$ on $\\Omega_0$ with the same coefficient\nfunctions restricted to $\\Omega_0$: every test function $\\varphi\\in C_c^\\infty(\\Omega_0)$\nextends by zero to a test function of $\\Omega$, and the defining integrals\nover $\\Omega$ are the integrals over $\\Omega_0$ because $\\varphi$ and all its\nderivatives vanish outside $\\Omega_0$. The equation is therefore a local\ncondition, which is why every regularity argument below may be localised to a\nball, a half-ball or a chart without changing the coefficients or the datum.\n\n**The $H^1$ versus $H^1_0$ convention.** The solution is required to lie in\n$H^1(\\Omega)$ and the tests are required to vanish near $\\partial\\Omega$; this\nis the interior formulation used in the regularity proof. Here\n$H^1_0(\\Omega_2)$ for a bounded $\\Omega_2\\Subset\\Omega$ is the closure of\n$C_c^\\infty(\\Omega_2)$ in the $H^1(\\Omega_2)$ norm\n([[def-wkp-zero-as-a-sobolev-closure]],\n[[def-complex-lp-and-euclidean-test-function-conventions]]), and all the\nintegrals are read in the class conventions of\n[[def-l-p-space-as-a-quotient-by-null-functions]].",
+        "deps": [
+          "def-uniformly-elliptic-divergence-form-operator",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-hk-and-hk-zero-notation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-countable-choice"
+        ],
+        "strategy": "This is the standard interior weak formulation used throughout the regularity proof; it differs from the Dirichlet definition only in dropping $u\\in H^1_0$ and admitting $L^2_{\\mathrm{loc}}$ data, which is exactly what localisation by cutoffs produces. The identity is taken in the class vocabulary of [[lem-elliptic-form-is-well-defined-and-bounded]], and testing against $C_c^\\infty$ is equivalent to testing against $H^1_0$ by the closure definition ([H] Section 4.11, (4.34)-(4.37), printed pp. 110-111; [T] Section 10.3, weak formulation (10.39)-(10.40), printed pp. 240-241).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, weak formulation (4.34)-(4.37), printed pp. 110-111 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, weak formulation of the elliptic problem, printed pp. 240-241 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-caccioppoli-inequality-for-weak-elliptic-solutions",
+        "kind": "theorem",
+        "title": "The Caccioppoli inequality for weak elliptic solutions",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $L,a$ be as in\n[[def-uniformly-elliptic-divergence-form-operator]] with ellipticity constant\n$\\theta$ and coefficient bounds $M_a,M_b,M_c$, let\n$f\\in L^2_{\\mathrm{loc}}(\\Omega)$ and let $u\\in H^1(\\Omega;\\mathbb K)$ be a\nlocal weak solution of $Lu=f$ on $\\Omega$\n([[def-local-weak-solution-for-a-divergence-form-operator]]). For every ball\n$B_R(x_0)\\Subset\\Omega$ and every $0<r<R$ there is a constant\n$C=C(n,\\theta,M_a,M_b,M_c)$ with\n$$\\int_{B_r(x_0)}|Du|^2\\,dx\\le C\\Big(\\frac{1}{(R-r)^2}\\int_{B_R(x_0)}|u|^2\\,dx+\\int_{B_R(x_0)}|u|^2\\,dx+\\int_{B_R(x_0)}|f|^2\\,dx\\Big).$$\nNo regularity of the coefficients beyond measurability and essential\nboundedness is used, and the estimate is uniform in the localisation. When\n$f=0$ the estimate is the energy inequality for a locally weak harmonic class.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-hk-and-hk-zero-notation",
+          "def-the-standard-smooth-step-function",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-holder-inequality-for-integrals",
+          "thm-young-inequality-real-exponents",
+          "def-conjugate-exponents",
+          "def-countable-choice",
+          "lem-compact-support-zero-extension-in-wkp"
+        ],
+        "strategy": "Choose $\\eta\\in C_c^\\infty(B_R(x_0))$ with $0\\le\\eta\\le1$, $\\eta=1$ on $B_r(x_0)$ and $\\|D\\eta\\|_\\infty\\le C/(R-r)$ ([[lem-smooth-bump-between-concentric-euclidean-balls]], rescaled). Test the weak equation with $v=\\eta^2u$, expand the three terms of $a(\\eta^2u,u)$ (or of $a(u,\\eta^2u)$), use uniform ellipticity on the principal part and Cauchy-Schwarz with Young's inequality on the first- and zero-order terms; the terms $\\|\\eta Du\\|\\|uD\\eta\\|$ and $\\|\\eta Du\\|\\|\\eta u\\|$ are absorbed into the left-hand side by the factor $\\theta/2$, and the forcing term gives $\\|\\eta f\\|\\|\\eta u\\|$, again absorbed into $\\|\\eta u\\|^2$ ([Si] Lecture 6, Lemma 1 and its proof, printed pp. 58-59; [H] proof of Theorem 4.27, the $v=\\eta^2u$ step at the end, printed pp. 113-114).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 6, Lemma 1 (Caccioppoli-type energy estimate) and its proof, printed pp. 58-59 (read in full)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, final step of the proof of Theorem 4.27 with test function $\\eta^2u$, printed pp. 112-114 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-scaled-caccioppoli-inequality-on-concentric-balls",
+        "kind": "corollary",
+        "title": "Scaled Caccioppoli inequality on concentric balls",
+        "statement": "In the setting of [[thm-caccioppoli-inequality-for-weak-elliptic-solutions]],\nfor concentric balls $B_r(x_0)\\Subset B_R(x_0)\\Subset\\Omega$ one has, with the\nexplicit scale,\n$$\\|Du\\|^2_{L^2(B_r(x_0))}\\le C\\Big(\\frac{1}{(R-r)^2}\\|u\\|^2_{L^2(B_R(x_0))}+\\|u\\|^2_{L^2(B_R(x_0))}+\\|f\\|^2_{L^2(B_R(x_0))}\\Big),$$\nwhere $C=C(n,\\theta,M_a,M_b,M_c)$ does not depend on $r,R$ or on $x_0$. The\ndisplayed $(R-r)^{-2}$ is the scale used in the nested-ball iteration; the\nconstants are not asserted to be sharp, and no claim is made as $r\\to R$.",
+        "deps": [
+          "thm-caccioppoli-inequality-for-weak-elliptic-solutions",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice"
+        ],
+        "strategy": "Insert into [[thm-caccioppoli-inequality-for-weak-elliptic-solutions]] a cutoff with the quantitative gradient bound $\\|D\\eta\\|_\\infty\\le C/(R-r)$ supplied by [[lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound]], and collect the constants. The zero-order term is retained explicitly because it cannot be absorbed into the $(R-r)^{-2}$ term when $R-r\\ge1$; this harmless term is controlled at the base of every iteration ([Si] Lecture 6, the constant $C(M,\\theta,\\rho,R,n)$ in Lemma 1, printed p. 59; [H] (4.39), printed p. 112).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 6, Lemma 1 and its scaling constants, printed p. 59 (read in full)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, estimate (4.39), printed p. 112 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-tangential-difference-quotient-test-function",
+        "kind": "lemma",
+        "title": "The difference-quotient test function and its commutators",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\n(i) Let $u\\in H^1(\\Omega)$, $\\eta\\in C_c^\\infty(\\Omega)$ and\n$i\\in\\{1,\\dots,n\\}$. For every $0<|h|<\\operatorname{dist}(\\operatorname{supp}\\eta,\\partial\\Omega)$\nthe class $v:=-\\delta_{-h}^i\\big(\\eta^2\\,\\delta_h^iu\\big)$\n([[def-first-difference-quotient]]) is defined, has compact support in\n$\\Omega$, lies in $H^1(\\Omega)$ and therefore in $H^1_0(\\Omega)$\n([[lem-compact-support-zero-extension-in-wkp]],\n[[def-wkp-zero-as-a-sobolev-closure]]). It is an admissible test class in the\nweak equation of [[def-local-weak-solution-for-a-divergence-form-operator]].\n(ii) Let $H=\\{x_n>0\\}$ be the upper half-space,\n$u\\in H^1_0(H;\\mathbb K)$ with $\\operatorname{supp}u\\subseteq B_1(0)\\cap\\overline H$,\n$j<n$ a tangential index, and $\\eta\\in C_c^\\infty(\\mathbb R^n)$. Then for every fixed small $h\\ne0$ the tangential class\n$v:=-\\delta_{-h}^j\\big(\\eta^2\\,\\delta_h^ju\\big)$, read on $H$, lies in\n$H^1_0(H)$: for each fixed $h$ the maps $w\\mapsto\\eta^2w$ and\n$w\\mapsto\\delta_{\\pm h}^jw$ are bounded on $H^1(H)$ and carry\n$C_c^\\infty(H)$ into itself, so they preserve the closure that defines\n$H^1_0(H)$ ([[def-wkp-zero-as-a-sobolev-closure]]). In particular $v$ is admissible in a weak half-space problem whose datum defines a bounded functional on $H^1_0(H)$, including a datum in $L^2(H)$.\n(iii) Fix the quotient direction $k$ (independent of the summed form indices $i,j$), put $w=\\eta^2\\delta_h^ku$ and $v=-\\delta_{-h}^kw$. The principal pairing equals\n$$\\int\\eta^2a^{ij}(x+he_k)\\delta_h^kD_ju\\overline{\\delta_h^kD_iu}+R_{a,h},$$\nwhere, writing $u_+=u(x+he_k)$ and using weak derivatives,\n$$R_{a,h}=\\int\\eta^2(\\delta_h^ka^{ij})D_ju\\overline{\\delta_h^kD_iu}+\\int\\left(a^{ij}(x+he_k)\\delta_h^kD_ju+(\\delta_h^ka^{ij})D_ju\\right)\\overline{D_i(\\eta^2)\\delta_h^ku}.$$\nThe full form adds the undifferentiated lower-order pairing $\\int(b^iD_iu+cu)\\overline v$. All these integrals are finite for each fixed admissible $h$, since bounded coefficient quotients have magnitude at most $2M_a/|h|$. If the principal coefficients have bounded first weak derivatives on the quotient neighbourhood, the principal remainder admits the usual Young bounds uniform in small $h$. No derivative or uniformly bounded difference quotient of $b,c$ is asserted or needed. The integrals are over the supported interior patch in case (i), and over $H$ in case (ii).",
+        "deps": [
+          "def-first-difference-quotient",
+          "lem-difference-quotient-integration-by-parts",
+          "lem-cutoff-difference-quotient-commutator-estimate",
+          "thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one",
+          "lem-compact-support-zero-extension-in-wkp",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "thm-young-inequality-real-exponents",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "In (i), $u\\in H^1$ gives $\\delta_h^iu\\in H^1$ with $D(\\delta_h^iu)=\\delta_h^i(Du)$ by the commutation rule of [[lem-difference-quotient-integration-by-parts]](iii), so $\\eta^2\\delta_h^iu\\in H^1$ by the smooth-factor Leibniz rule ([[lem-cutoff-difference-quotient-commutator-estimate]] and [[lem-weak-leibniz-rule-with-a-smooth-factor]]), and the shifted quotient $\\delta_{-h}^i$ preserves $H^1$ by the same commutation rule; the support lies in $(\\operatorname{supp}\\eta\\cup(\\operatorname{supp}\\eta-he_i))$, a compact subset of $\\Omega$ for small $h$, so the compact-support criterion of [[lem-compact-support-zero-extension-in-wkp]] applied to the interior gives membership in $H^1_0(\\Omega)$. In (ii) the tangential shift preserves $H$, and since $u$ vanishes in $H^1_0$-norm against test functions supported near the boundary, the closure argument in the statement shows that both $\\eta^2\\delta_h^ju$ and its shifted quotient remain in $H^1_0(H)$ without any extension of $u$ across $\\partial H$; the identities of (iii) are the expansions used in [H] (4.40)-(4.42) and in the boundary proof of Theorem 4.30, with the commutator terms controlled by [[lem-cutoff-difference-quotient-commutator-estimate]] ([H] printed pp. 112-115; [T] proof of Lemma 10.18, printed p. 242; [Si] Lecture 9, proof of Theorem 1, printed pp. 88-90).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, (4.40)-(4.42), and Section 4.12, proof of Theorem 4.30, printed pp. 112-115 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, proof of Lemma 10.18 (tangential test functions), printed p. 242 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 9, proof of Theorem 1 (flat boundary and tangential quotients), printed pp. 88-90 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-localisation-identity-for-a-divergence-form-weak-solution",
+        "kind": "lemma",
+        "title": "Localisation of a weak solution up to a bounded first-order term",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $L,a$ be as in\n[[def-uniformly-elliptic-divergence-form-operator]], let\n$f\\in L^2_{\\mathrm{loc}}(\\Omega)$, let $u\\in H^1(\\Omega)$ be a local weak\nsolution of $Lu=f$\n([[def-local-weak-solution-for-a-divergence-form-operator]]) and let\n$\\zeta\\in C_c^\\infty(\\Omega;\\mathbb R)$. Then $\\zeta u\\in H^1(\\Omega)$ and\nfor every $v\\in H^1_0(\\Omega)$\n$$a(\\zeta u,v)=\\int_\\Omega\\zeta f\\,\\overline v\\,dx+\\int_\\Omega a^{ij}(D_j\\zeta)\\,u\\,\\overline{D_iv}\\,dx+\\int_\\Omega b^i u\\,(D_i\\zeta)\\,\\overline v\\,dx-\\int_\\Omega a^{ij}(D_i\\zeta)\\,D_ju\\,\\overline v\\,dx .$$\nThe three commutator terms are bounded by\n$(2nM_a+\\sqrt n M_b)\\|D\\zeta\\|_\\infty\\|u\\|_{H^1(\\Omega)}\\|v\\|_{H^1(\\Omega)}$ and\nform a bounded sesquilinear form in $(u,v)$ with coefficients of first and\nzero order bounded by $3nM_a\\|D\\zeta\\|_\\infty$ and $\\sqrt n M_b\\|D\\zeta\\|_\\infty$,\nwhile $\\zeta f\\in L^2(\\Omega)$ with\n$\\|\\zeta f\\|_{L^2}\\le\\|\\zeta\\|_\\infty\\|f\\|_{L^2(\\operatorname{supp}\\zeta)}$.\nIn particular a localised weak solution is a weak solution of the same\nprincipal-part form with right-hand side $\\zeta f$ in $L^2$ plus a bounded\nfirst-order term, so it satisfies the Caccioppoli and difference-quotient\nestimates of this page with constants depending only on\n$n,M_a,M_b,M_c$ and $\\|D\\zeta\\|_\\infty$. The scaffold displayed only the\nfirst two commutator terms; the term $-\\int_\\Omega a^{ij}(D_i\\zeta)D_ju\\overline v$\nis required by the product rule, and the derivation below exhibits it.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "strategy": "Expand $D_j(\\zeta u)=\\zeta D_ju+uD_j\\zeta$ and use the weak Leibniz rule [[lem-weak-leibniz-rule-with-a-smooth-factor]] (valid for $u\\in H^1$) inside the form; the terms containing $\\zeta$ reproduce $a(u,v)=\\int f\\overline v$ by the weak equation, and the remaining two terms are displayed. Boundedness follows from $a^{ij},b^i\\in L^\\infty$, $u,D\\zeta\\in L^2$ and Hölder, exactly as in [[lem-elliptic-form-is-well-defined-and-bounded]]. This is the localisation computation used in [Si] Lecture 6 (replace $u$ by $\\zeta u$ in the differential equation) and in [T] proof of Lemma 10.18 (reduction to $u_j=\\zeta_ju$), printed pp. 60-62 and 242.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 6, proof of Theorem 1 (localisation by cutoffs), printed pp. 60-62 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, proof of Lemma 10.18 (reduction to $u_j=\\zeta_ju$), printed p. 242 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates",
+        "kind": "lemma",
+        "title": "Absorption of lower-order Sobolev terms in the elliptic estimate",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $m\\ge1$. For every\n$\\varepsilon>0$ there is $C=C(n,m,\\varepsilon)$ such that every\n$u\\in H^{m+1}_0(\\Omega;\\mathbb K)$ satisfies\n$$\\|D^mu\\|_{L^2(\\Omega)}\\le\\varepsilon\\,\\|D^{m+1}u\\|_{L^2(\\Omega)}+C\\,\\|D^{m-1}u\\|_{L^2(\\Omega)},$$\nand the same estimate holds for every $u\\in H^{m+1}(\\Omega;\\mathbb K)$ whose\nclass vanishes almost everywhere outside a compact subset of $\\Omega$. In\nboth displays\n$$\\|D^ju\\|_{L^2(\\Omega)}^2:=\\sum_{\\alpha\\in\\mathbb N_0^n,\\,|\\alpha|=j}\\|D^\\alpha u\\|_{L^2(\\Omega)}^2 .$$\nIn particular, for $u\\in H^2_0(\\Omega;\\mathbb K)$,\n$$\\|Du\\|_{L^2(\\Omega)}\\le\\varepsilon\\|D^2u\\|_{L^2(\\Omega)}+C_\\varepsilon\\|u\\|_{L^2(\\Omega)} .$$\nThe constants are not asserted sharp, and the estimate is the tool that\nabsorbs commutator terms linear in the highest derivatives.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-hk-and-hk-zero-notation",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-young-inequality-real-exponents",
+          "lem-compact-support-zero-extension-in-wkp",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "def-countable-choice"
+        ],
+        "strategy": "For compactly supported smooth $u$ and each multi-index $\\alpha$ with $|\\alpha|=m$, choose a coordinate $k$ with $\\alpha_k\\ge1$ and integrate by parts once: $\\|D^\\alpha u\\|^2_{L^2}=-\\int D^{\\alpha+e_k}u\\,\\overline{D^{\\alpha-e_k}u}\\,dx$ (for complex $u$ integrate the conjugate factor), hence $\\|D^\\alpha u\\|^2\\le\\|D^{m+1}u\\|\\,\\|D^{m-1}u\\|$; summing over the finitely many $\\alpha$ and applying Young's inequality gives the claim, and the general class follows by density and closedness. This is the interpolation inequality of [Si] Lecture 5, Lemma 6 (stated there as $\\|u\\|_{m-1}\\le\\varepsilon\\|u\\|_m+C_\\varepsilon\\|u\\|_0$), used in the improvement of the interior estimate to the $L^2$ norm on the right; [H] uses the scalar version inside the absorption step of the proof of Theorem 4.27.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 5, Lemma 6 and proof, printed pp. 52-53 (read in full)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, Cauchy inequality with $\\epsilon$ in the proof of Theorem 4.27, printed p. 113 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-interior-h-two-estimate-for-constant-coefficient-elliptic-equations",
+        "kind": "theorem",
+        "title": "Interior $H^2$ estimate for constant-coefficient elliptic equations",
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nlet $a^{ij}\\in\\mathbb K$ be a constant matrix satisfying\n$\\operatorname{Re}\\big(\\sum a^{ij}\\xi_j\\overline{\\xi_i}\\big)\\ge\\theta|\\xi|^2$\nwith $\\theta>0$ and $|a^{ij}|\\le M_a$, let $b^i,c\\in\\mathbb K$ be constants with $|b^i|\\le M_b$,\n$|c|\\le M_c$, and let $L$ be the associated constant-coefficient\ndivergence-form operator with form $a$. Let $f\\in L^2(B_R(x_0))$ and let\n$u\\in H^1(B_R(x_0))$ solve $Lu=f$ weakly on $B_R(x_0)$. Then\n$u\\in H^2(B_r(x_0))$ for every $0<r<R$, with\n$$\\|D^2u\\|_{L^2(B_r(x_0))}\\le C\\Big(\\left(1+\\frac{1}{(R-r)^2}\\right)\\|u\\|_{L^2(B_R(x_0))}+\\|f\\|_{L^2(B_R(x_0))}\\Big),$$\nwhere $C=C(n,\\theta,M_a,M_b,M_c)$. No symmetry of $a$ and no boundary condition\non $u$ is required, and the estimate is the transparent constant-coefficient\ncore of the variable-coefficient theorem.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "lem-difference-quotient-integration-by-parts",
+          "lem-tangential-difference-quotient-test-function",
+          "thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one",
+          "cor-scaled-caccioppoli-inequality-on-concentric-balls",
+          "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "thm-young-inequality-real-exponents",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice",
+          "lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative"
+        ],
+        "strategy": "Choose a cutoff $\\eta$ for $B_r\\Subset B_R$ and test with $v=-\\delta_{-h}^k(\\eta^2\\delta_h^ku)$, which is admissible by [[lem-tangential-difference-quotient-test-function]]. Because the $a^{ij}$ are constant, the principal term is exactly $\\int\\eta^2a^{ij}(\\delta_h^k\\partial_ju)\\overline{(\\delta_h^k\\partial_iu)}$, bounded below by $\\theta\\|\\eta\\,\\delta_h^kDu\\|^2$; the constant lower-order terms commute with $\\delta_h^k$ as well, and Cauchy-Schwarz with Young's inequality absorbs them into the left-hand side. This gives a uniform bound on $\\|\\eta\\,\\delta_h^kDu\\|_{L^2}$, hence by [[thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one]](2) the existence of all second weak derivatives with the displayed estimate after [[lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates]] replaces $\\|Du\\|_{L^2(B_R)}$ by $(R-r)^{-1}\\|u\\|_{L^2}$-type terms; the final elimination of $\\|Du\\|$ uses [[cor-scaled-caccioppoli-inequality-on-concentric-balls]]. This is the special case $L=-\\Delta$ of [L] Theorem 5.6 and the local core of [H] Theorem 4.27 ([L] printed pp. 108-110; [H] printed pp. 110-114).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.6 (proof for $L=-\\Delta$) and Proposition 5.7, printed pp. 108-110 (read in full)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, the a priori estimate and proof of Theorem 4.27, printed pp. 110-114 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 6, Theorem 1 for $m=k=1$ and its difference-quotient proof, printed pp. 60-63 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-weak-equation-for-a-first-derivative-includes-coefficient-commutators",
+        "kind": "lemma",
+        "title": "The differentiated weak equation with coefficient commutators",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$a^{ij}\\in W^{2,\\infty}_{\\mathrm{loc}}(\\Omega)$ and\n$b^i,c\\in W^{1,\\infty}_{\\mathrm{loc}}(\\Omega)$ with\n$|a^{ij}|\\le M_a$, $|b^i|\\le M_b$, $|c|\\le M_c$ and\n$|D_ka^{ij}|,|D_kb^i|,|D_kc|\\le M_1$ almost everywhere, let\n$f\\in H^1_{\\mathrm{loc}}(\\Omega)$, and let\n$u\\in H^1(\\Omega)\\cap H^2_{\\mathrm{loc}}(\\Omega)$ be a local weak solution of\n$Lu=f$ on $\\Omega$\n([[def-local-weak-solution-for-a-divergence-form-operator]]). Then for every\ncoordinate direction $k$ and every $\\varphi\\in C_c^\\infty(\\Omega)$, writing\n$v:=D_ku\\in H^1_{\\mathrm{loc}}(\\Omega)$\n([[def-weak-derivative-of-a-locally-integrable-function]]), with\n$f_k:=D_kf$, $\\alpha^{ij}_k:=D_ka^{ij}$, $\\beta^i_k:=D_kb^i$ and\n$\\gamma_k:=D_kc$,\n$$\\int_\\Omega a^{ij}D_jv\\,\\overline{D_i\\varphi}\\,dx+\\int_\\Omega b^iD_iv\\,\\overline\\varphi\\,dx+\\int_\\Omega cv\\,\\overline\\varphi\\,dx=\\int_\\Omega f_k\\,\\overline\\varphi\\,dx-\\int_\\Omega \\alpha^{ij}_kD_ju\\,\\overline{D_i\\varphi}\\,dx-\\int_\\Omega \\beta^i_kD_iu\\,\\overline\\varphi\\,dx-\\int_\\Omega \\gamma_ku\\,\\overline\\varphi\\,dx .$$\nThus $v$ is a local weak solution of an equation with the same principal part\n$a^{ij}$ and with bounded first- and zero-order coefficients; its datum\n$g_k:=D_kf+D_i((D_ka^{ij})D_ju)-(D_kb^i)D_iu-(D_kc)u$ lies in\n$L^2_{\\mathrm{loc}}(\\Omega)$. More generally, if $|\\alpha|=j\\ge1$,\n$u\\in H^{j+1}_{\\mathrm{loc}}$, $f\\in H^j_{\\mathrm{loc}}$,\n$a^{ij}\\in W^{j+1,\\infty}_{\\mathrm{loc}}$ and $b^i,c\\in\nW^{j,\\infty}_{\\mathrm{loc}}$, then $D^\\alpha u$ solves the same-principal-part\nequation with datum\n$$g_\\alpha:=D^\\alpha f+\\sum_{0<\\beta\\le\\alpha}{\\alpha\\choose\\beta}D_i\\!\\left((D^\\beta a^{ij})D_jD^{\\alpha-\\beta}u\\right)-\\sum_{0<\\beta\\le\\alpha}{\\alpha\\choose\\beta}\\left((D^\\beta b^i)D_iD^{\\alpha-\\beta}u+(D^\\beta c)D^{\\alpha-\\beta}u\\right)\\in L^2_{\\mathrm{loc}}(\\Omega).$$\nThe principal coefficient derivatives through order $j+1$ ensure that the\ndivergence commutators are genuine $L^2_{\\mathrm{loc}}$ functions, not merely\n$H^{-1}_{\\mathrm{loc}}$ functionals. The scaffold assumed only $u\\in H^1(\\Omega)$; the integral defining\n$\\int a^{ij}D_jv\\overline{D_i\\varphi}$ requires $v\\in H^1_{\\mathrm{loc}}$,\nequivalently $u\\in H^2_{\\mathrm{loc}}(\\Omega)$, which is the regularity\navailable in every induction step that consumes this lemma.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "def-locally-integrable-function-as-a-regular-distribution",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-hk-and-hk-zero-notation",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "strategy": "Replace $\\varphi$ by $-D_k\\varphi$ in the weak identity and integrate by parts in $x_k$; all terms are absolutely convergent because $Du\\in L^2$ and the coefficient derivatives are bounded ([T] proof of Corollary 10.17: the identity $a(v,\\partial_lu)=\\langle v,\\tilde f\\rangle$ with $\\tilde f=\\partial_l(f-\\sum b_j\\partial_ju-cu)-\\sum\\partial_i(\\partial_lA)\\partial_ju$, printed p. 241; [H] the formal differentiation of the equation before Theorem 4.28, printed p. 114). The lemma displays the commutators $D_ka^{ij}D_ju$ so that no consumer claims that a derivative of a weak solution solves the identical equation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, proof of Corollary 10.17 (differentiated equation), printed p. 241 (read in full)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, the comment preceding Theorem 4.28, printed p. 114 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-interior-h-two-regularity-for-divergence-form-equations",
+        "kind": "theorem",
+        "title": "Interior $H^2$ regularity for divergence-form equations",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$n\\ge1$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $L,a$ be as in\n[[def-uniformly-elliptic-divergence-form-operator]] with constants\n$\\theta,M_a,M_b,M_c$ and with $a^{ij}\\in W^{1,\\infty}(\\Omega)$ satisfying\n$\\|Da^{ij}\\|_\\infty\\le M_1$, and let $f\\in L^2_{\\mathrm{loc}}(\\Omega)$. If\n$u\\in H^1(\\Omega)$ is a local weak solution of $Lu=f$ on $\\Omega$\n([[def-local-weak-solution-for-a-divergence-form-operator]]), then\n$u\\in H^2_{\\mathrm{loc}}(\\Omega)$, and for all open sets\n$\\Omega'\\Subset\\Omega''\\Subset\\Omega$ there is\n$C=C(n,\\theta,M_a,M_b,M_c,M_1,\\Omega',\\Omega'')$ with\n$$\\|u\\|_{H^2(\\Omega')}\\le C\\big(\\|f\\|_{L^2(\\Omega'')}+\\|u\\|_{L^2(\\Omega'')}\\big).$$\nConsequently the equation $Lu=f$ holds pointwise almost everywhere with\n$D_i(a^{ij}D_ju)$ understood through the a.e. defined product\n$(D_ia^{ij})D_ju+a^{ij}D_iD_ju$, and the same estimate holds for complex-valued $u$ by taking real parts in the coercive energy bounds; no splitting of complex coefficients into real and imaginary equations is used.\nThe scaffold wrote $\\|f\\|_{L^2(\\Omega)}+\\|u\\|_{L^2(\\Omega)}$ on the\nright-hand side, which is ill-posed for a datum known only to lie in\n$L^2_{\\mathrm{loc}}(\\Omega)$ (for instance $f=1/x$ on $\\Omega=(0,1)$ is\nlocally but not globally square-integrable); the nested formulation above is\nthe well-posed local statement, and the quantitative content is otherwise\nunchanged.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "lem-tangential-difference-quotient-test-function",
+          "thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one",
+          "lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates",
+          "cor-scaled-caccioppoli-inequality-on-concentric-balls",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-young-inequality-real-exponents",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "strategy": "Use the test function of [[lem-tangential-difference-quotient-test-function]] and isolate the principal term; the coefficient commutator $D_ka^{ij}D_ju$ is controlled by $M_1\\|Du\\|$ and absorbed with the interpolation inequality of [[lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates]] into $\\varepsilon\\|\\eta\\delta_h^kDu\\|^2$ plus $C_\\varepsilon\\|u\\|^2_{L^2}$; this yields a bound on $\\|\\eta\\delta_h^kDu\\|$ uniform in $h$, and [[thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one]](2) produces $D_kDu\\in L^2(\\Omega')$. The interior estimate with the $L^2$ norm of $u$ on the right follows by first taking $\\Omega'\\Subset\\Omega''\\Subset\\Omega$ and then testing the equation with $\\eta^2u$ ([[lem-localisation-identity-for-a-divergence-form-weak-solution]] and [H]'s final step). The a.e. strong form follows because the difference $g:=f-(-D_i(a^{ij}D_ju)+b^iD_iu+cu)\\in L^2_{\\mathrm{loc}}$ pairs trivially with every test function, and $C_c^\\infty$ is dense in $L^2$ ([[lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set]]). Constant coefficients are the core case [[thm-interior-h-two-estimate-for-constant-coefficient-elliptic-equations]]; the general proof is [H] Theorem 4.27, [L] Theorem 5.6 and [T] Lemma 10.16 ([H] printed pp. 110-114; [L] printed pp. 108-110; [T] printed pp. 240-241).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, Theorem 4.27, printed pp. 110-114 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.6, printed pp. 107-110 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Lemma 10.16, printed pp. 240-241 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-nested-domain-induction-for-interior-elliptic-derivatives",
+        "kind": "lemma",
+        "title": "Nested-domain induction for interior elliptic derivatives",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, let $k\\ge0$,\nlet $a^{ij}\\in W^{k+1,\\infty}(\\Omega)$, $b^i,c\\in W^{k,\\infty}(\\Omega)$ with\nbounds $|D^\\ell a^{ij}|\\le M_\\ell$ for $|\\ell|\\le k+1$ and\n$|D^\\ell b^i|,|D^\\ell c|\\le M_\\ell$ for $|\\ell|\\le k$ almost everywhere, let\n$f\\in H^k_{\\mathrm{loc}}(\\Omega)$, and let $u\\in H^1(\\Omega)$ be a local weak\nsolution of $Lu=f$ on $\\Omega$\n([[def-local-weak-solution-for-a-divergence-form-operator]]). Fix open sets\n$\\Omega_{-1},\\Omega_0,\\Omega_1,\\dots,\\Omega_{k+1}$ with\n$\\overline{\\Omega_{-1}}\\Subset\\Omega$, $\\overline{\\Omega_0}\\Subset\\Omega_{-1}$\nand $\\overline{\\Omega_{j+1}}\\Subset\\Omega_j$ for $0\\le j\\le k$. Then for every\n$0\\le j\\le k$ one has $u\\in H^{j+2}(\\Omega_j)$, and there is a constant $C_j$\ndepending only on $n,\\theta,k$, the principal-coefficient bounds through\norder $j+1$, the lower-order coefficient bounds through order $j$, and the sets\n$\\Omega_{-1},\\dots,\\Omega_j$ with\n$$\\|u\\|_{H^{j+2}(\\Omega_j)}\\le C_j\\big(\\|f\\|_{H^j(\\Omega_{-1})}+\\|u\\|_{L^2(\\Omega_{-1})}\\big).$$\nThe induction step is: each weak derivative $D^\\alpha u$ of order $|\\alpha|=j$\nsolves on $\\Omega_{j-1}$ the iterated differentiated equation of\n[[lem-weak-equation-for-a-first-derivative-includes-coefficient-commutators]]\nwith datum in $L^2(\\Omega_{j-1})$ built from $D^jf$, principal coefficient\nderivatives through order $j+1$, and derivatives of $u$ of order at most\n$j+1$, so the interior $H^2$ theorem applied on\n$\\Omega_j\\Subset\\Omega_{j-1}$ recovers two further derivatives; the loss of\ndomain is absorbed into the fixed chain. The scaffold wrote $\\Omega=\\Omega_0$\nand concluded $u\\in H^{j+2}(\\Omega_0)$ at $j=0$, which would be a global\n$H^2(\\Omega)$ claim and is false for an arbitrary local weak solution; the\nouter set $\\Omega_{-1}\\Subset\\Omega$ is the localisation needed for the\ninterior estimates, and all constants below depend on it.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "lem-weak-equation-for-a-first-derivative-includes-coefficient-commutators",
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-hk-and-hk-zero-notation",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-countable-choice"
+        ],
+        "strategy": "Induct on $j$. For $j=0$ this is [[thm-interior-h-two-regularity-for-divergence-form-equations]] on $\\Omega_1$. For the step, apply the induction hypothesis to $v=D_lu$ on the shifted sequence $\\Omega_1\\Supset\\cdots\\Supset\\Omega_{j+1}$ using the differentiated equation of [[lem-weak-equation-for-a-first-derivative-includes-coefficient-commutators]]; the coefficient bounds of order $j+1$ for $u$'s equation control those of $v$'s equation. This is the fixed-nested-cutoff bookkeeping of [H] Theorem 4.28 (via [9] there) and [Si] Lecture 6, Theorem 1, whose constant depends on the fixed balls but not on the number of steps ([H] printed p. 114; [Si] printed pp. 60-63).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, Theorem 4.28 and the remark on repeated application, printed p. 114 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 6, Theorem 1 (induction on $k$) and Lemma 2, printed pp. 60-64 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, proof of Corollary 10.17 (induction on $k$), printed p. 241 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-interior-h-k-plus-two-elliptic-regularity",
+        "kind": "theorem",
+        "title": "Interior $H^{k+2}$ elliptic regularity",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $k\\ge0$, and let $L,a$ be as in\n[[def-uniformly-elliptic-divergence-form-operator]] with\n$a^{ij}\\in W^{k+1,\\infty}_{\\mathrm{loc}}(\\Omega)$,\n$b^i,c\\in W^{k,\\infty}_{\\mathrm{loc}}(\\Omega)$, all derivatives bounded by\nconstants $M_\\ell$; let $f\\in H^k_{\\mathrm{loc}}(\\Omega)$ and let\n$u\\in H^1(\\Omega)$ be a local weak solution of $Lu=f$\n([[def-local-weak-solution-for-a-divergence-form-operator]]). Then\n$u\\in H^{k+2}_{\\mathrm{loc}}(\\Omega)$, and for all open sets\n$\\Omega'\\Subset\\Omega''\\Subset\\Omega$ there is\n$C=C(n,\\theta,k,M_0,\\dots,M_{k+1},\\Omega',\\Omega'')$ with\n$$\\|u\\|_{H^{k+2}(\\Omega')}\\le C\\big(\\|f\\|_{H^k(\\Omega'')}+\\|u\\|_{L^2(\\Omega'')}\\big).$$\nThe gain is exactly two derivatives; the coefficient regularity required is\none order above the data order. For $k=0$ the theorem reduces to\n[[thm-interior-h-two-regularity-for-divergence-form-equations]]. The\nscaffold wrote $\\|f\\|_{H^k(\\Omega)}+\\|u\\|_{L^2(\\Omega)}$ on the right-hand\nside, which is ill-posed for locally Sobolev data on an unbounded $\\Omega$;\nthe nested formulation is the well-posed local statement.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "lem-nested-domain-induction-for-interior-elliptic-derivatives",
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-hk-and-hk-zero-notation",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-countable-choice"
+        ],
+        "strategy": "The induction is [[lem-nested-domain-induction-for-interior-elliptic-derivatives]]: $H^{k+2}_{\\mathrm{loc}}$ is local, so fix $\\Omega'\\Subset\\Omega_{k+1}$ in a nested chain and read the estimate off the chain. This is [H] Theorem 4.28, [L] Theorem 5.8 and [T] Corollary 10.17 ([H] printed p. 114; [L] printed p. 111; [T] printed pp. 240-241). The lower-order coefficients are allowed to be only $W^{k,\\infty}$ on the open set, as in [T]; no boundary condition on $u$ is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, Theorem 4.28, printed p. 114 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.8 (higher interior regularity), printed p. 111 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Corollary 10.17, printed p. 241 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-smooth-data-give-smooth-interior-solutions",
+        "kind": "corollary",
+        "title": "Smooth data give smooth interior solutions",
+        "statement": "Assume the Axiom of Choice for the Sobolev embedding used in the last step,\nand Countable Choice for the Sobolev interfaces. Let $\\Omega\\subseteq\\mathbb\nR^n$ be open, $n\\ge1$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and suppose\nthe coefficients $a^{ij},b^i,c$ and the datum $f$ are of class\n$C^\\infty(\\Omega)$. If $u\\in H^1(\\Omega)$ is a local weak solution of\n$Lu=f$ on $\\Omega$ ([[def-local-weak-solution-for-a-divergence-form-operator]]),\nthen $u\\in H^m_{\\mathrm{loc}}(\\Omega)$ for every $m\\in\\mathbb N$, and\nconsequently $u$ agrees almost everywhere with a function of class\n$C^\\infty(\\Omega)$, for which $Lu=f$ holds pointwise in $\\Omega$. No\nboundary condition is imposed, and the conclusion is interior only.",
+        "deps": [
+          "thm-interior-h-k-plus-two-elliptic-regularity",
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "thm-higher-order-sobolev-embedding",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "def-local-holder-and-c-two-alpha-norms-on-euclidean-balls",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "strategy": "Apply [[thm-interior-h-k-plus-two-elliptic-regularity]] for every $k$ on compactly contained subsets; each step legitimises the next because the coefficients are $C^\\infty$ and $f$ has all local Sobolev orders. Then choose $m$ with $m>n/2$ and apply the higher-order Sobolev embedding and Morrey's inequality on a ball $\\Omega'\\Subset\\Omega$ to obtain derivatives of $u$ up to any fixed order $\\ell$ as continuous functions; since $\\ell$ is arbitrary, the continuous representative is $C^\\infty$ and the a.e. equation becomes pointwise. This is [H] Corollary 4.29 and [L] Theorem 5.9; the embedding step inherits the Axiom of Choice recorded by [[thm-higher-order-sobolev-embedding]] ([H] printed p. 114; [L] printed p. 112).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, Corollary 4.29, printed p. 114 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.9 (infinite interior regularity), printed p. 112 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts",
+        "kind": "lemma",
+        "title": "Weak divergence-form equations are invariant under $C^2$ boundary charts",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $L,a$ be as in [[def-uniformly-elliptic-divergence-form-operator]], let $f\\in L^2_{\\mathrm{loc}}(\\Omega)$ and let $u\\in H^1(\\Omega)$ be a local weak solution of $Lu=f$ ([[def-local-weak-solution-for-a-divergence-form-operator]]). Let $\\Phi:W\\to V$ be a $C^2$ diffeomorphism of ambient open sets such that $\\Phi(W\\cap\\Omega)=V\\cap H$, where $H=\\{y_n>0\\}$, and put $\\psi=\\Phi^{-1}$. Then $\\widehat u=u\\circ\\psi\\in H^1_{\\mathrm{loc}}(V\\cap H)$, with\n$$D\\widehat u(y)=D\\psi(y)^TDu(\\psi(y)),$$\nand it solves $\\widehat L\\widehat u=\\widehat f$ locally weakly, where $\\widehat f=|\\det D\\psi|(f\\circ\\psi)$ and\n$$\\widetilde a^{ij}(y)=|\\det D\\psi(y)|\\sum_{p,q}a^{pq}(\\psi(y))\\partial_p\\Phi_i(\\psi(y))\\partial_q\\Phi_j(\\psi(y)),$$\n$$\\widetilde b^i(y)=|\\det D\\psi(y)|\\sum_pb^p(\\psi(y))\\partial_p\\Phi_i(\\psi(y)),\\qquad \\widetilde c(y)=|\\det D\\psi(y)|c(\\psi(y)).$$\nThe transformed datum is locally $L^2$, and the transformed coefficients are locally bounded; quantitative ellipticity is given by the companion flattening lemma. If $\\zeta\\in C_c^\\infty(W)$ is an ambient cutoff, then $\\widehat{\\zeta u}\\in H^1(V\\cap H)$, with a norm bound determined by the cutoff and the chart/inverse derivative and Jacobian bounds on a compact ambient neighbourhood of $\\operatorname{supp}\\zeta$. Its distributional transformed equation uses the localized datum; when $a\\in W^{1,\\infty}$ and the original datum is square-integrable on the localized patch, that localized datum is also $L^2$. If additionally $u\\in H^1_0(\\Omega)$, then $\\widehat{\\zeta u}\\in H^1_0(V\\cap H)$, so zero Dirichlet data are preserved. In particular these global and zero-trace conclusions hold for $u$ itself when its support in $\\overline\\Omega$ is a compact subset of $W$, by choosing $\\zeta=1$ near that support. The change of variables acts on the weak formulation and requires no classical regularity of $u$.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-chain-rule-for-total-derivatives",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "strategy": "First prove the pullback membership: on a compactly contained open set approximate $u$ in $H^1$ by interior mollifications ([density of $C_c^\\infty$ in $H^1$ of an open set], the convolution-derivative theorem and the commutation of mollification with weak derivatives), pull the smooth approximations back with the chain rule, and pass to the limit using the uniform bounds on $D\\psi$, $|\\det D\\psi|$ and $|\\det D\\Phi|$ over compact subsets; this yields $\\widehat u\\in H^1$ with the displayed a.e. gradient. Then test the transformed equation against $\\widehat v=v\\circ\\Phi$ for $v\\in C_c^\\infty(V\\cap H)$ and use the change-of-variables formula for Lipschitz maps and the chain rule to identify the coefficient formulas exactly as in [H]'s computation for $\\widetilde a^{\\,ij}$ ([H] Section 4.12, printed p. 114); the term $|\\det D\\psi|$ and the shifts of the first-order coefficients $b^i$ are the ones forced by the substitution. The lemma is the PDE-18 addition that separates weak-form legitimacy from ellipticity preservation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, change of variables for the weak formulation and the formulas for $\\widetilde a^{\\,ij}$ and $\\widetilde f$, printed p. 114 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 9, proof of Theorem 1, first step: flattening and transformed equation, printed pp. 88-90 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-c-two-boundary-flattening-transforms-uniform-ellipticity",
+        "kind": "lemma",
+        "title": "$C^2$ flattening preserves uniform ellipticity quantitatively",
+        "statement": "Assume Countable Choice. In the setting of\n[[lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts]]\nwith $W$ compactly contained in the domain of a flattening chart of a bounded\n$C^2$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]), suppose\n$\\Lambda\\ge1$ bounds $|D\\Phi|,|D\\psi|,|\\det D\\Phi|$ and $|\\det D\\psi|$\ntogether with their reciprocals on the relevant closure:\n$\\Lambda^{-1}\\le|\\det D\\psi(y)|\\le\\Lambda$ and\n$|\\zeta|\\le\\Lambda|D\\Phi(y)\\zeta|$ for all $\\zeta$. Then the transformed\ncoefficients $\\widetilde a^{\\,ij}$ of\n[[lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts]]\nsatisfy, for a.e. $y$ in the flattened half-ball,\n$$\\operatorname{Re}\\sum_{i,j}\\widetilde a^{ij}(y)\\xi_j\\overline{\\xi_i}\\ \\ge\\ \\theta\\,\\Lambda^{-2}\\inf|\\det D\\psi|\\ |\\xi|^2\\qquad(\\xi\\in\\mathbb C^n),$$\nso the transformed operator is uniformly elliptic with an explicitly\ncomputable constant depending only on $n,\\theta,\\Lambda$ and the ellipticity\nangle, while the transformed coefficients satisfy\n$|\\widetilde a^{\\,ij}|\\le n^2M_a\\Lambda^3$. The first-order and zero-order\ncoefficients satisfy $|\\widetilde b^{\\,i}|\\le nM_b\\Lambda^2$ and\n$|\\widetilde c|\\le M_c\\Lambda$, hence also the scaffold's non-sharp bounds\n$C(n)(M_a+M_b)\\Lambda^3$ for $|\\widetilde b^{\\,i}|$ and\n$C(n)(M_a+M_b+M_c)\\Lambda^3$ for $|\\widetilde c|$, since $\\Lambda\\ge1$.\nThe constants are not asserted sharp.",
+        "deps": [
+          "lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-countable-choice"
+        ],
+        "strategy": "Insert $\\zeta=(D\\Phi^{T})\\xi$, i.e. $\\zeta_p=\\sum_i\\partial_p\\varphi_i\\,\\xi_i$, into the ellipticity inequality for $a$ at $\\psi(y)$ and use $|\\det D\\psi|>0$ together with the two-sided bound on $D\\Phi$; this is the computation performed in [H] Section 4.12 immediately after the coefficient formulas, where the chain rule expresses $\\sum_{i,j}\\widetilde a^{ij}\\xi_i\\xi_j=|\\det D\\psi|\\sum_{p,q}a^{pq}\\zeta_p\\zeta_q$, and where the remark that $C^2$ boundary is needed for $\\widetilde a^{\\,ij}$ to be $C^1$ (i.e. $W^{1,\\infty}$) appears ([H] printed p. 114; [L] boundary-regularity proof sketch, printed p. 113; [T] proof of Lemma 10.18, printed p. 242).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, ellipticity computation for $\\widetilde a^{\\,ij}$ and the $C^2$-boundary remark, printed p. 114 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, boundary-regularity proof sketch (flattening), printed p. 113 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, proof of Lemma 10.18 (straightening and transformed $A\\in W^{1,\\infty}$), printed p. 242 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary",
+        "kind": "lemma",
+        "title": "Tangential $H^2$ estimate near a flat Dirichlet boundary",
+        "statement": "Assume Countable Choice. Let $H=\\{x_n>0\\}$ be the upper half-space, $n\\ge1$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $L,a$ be as in\n[[def-uniformly-elliptic-divergence-form-operator]] with\n$a^{ij}\\in W^{1,\\infty}(H)$, $b^i,c\\in L^\\infty(H)$ and bounds\n$\\theta,M_a,M_b,M_c,M_1$, let $f\\in L^2(H)$, and let $u\\in H^1_0(H)$ be\nsupported in $B_1(0)\\cap\\overline H$ and solve $Lu=f$ weakly on $H$\n([[def-local-weak-solution-for-a-divergence-form-operator]]). Then for every\ntangential index $k<n$ and every $i$ the weak derivative $D_kD_iu$ belongs\nto $L^2(B_{1/2}(0)\\cap H)$ with\n$$\\sum_{k<n}\\sum_{i=1}^n\\int_{B_{1/2}(0)\\cap H}|D_kD_iu|^2\\,dx\\le C\\big(\\|f\\|^2_{L^2(H)}+\\|u\\|^2_{L^2(H)}\\big),$$\nwhere $C=C(n,\\theta,M_a,M_b,M_c,M_1)$ is independent of the step size. Only\ntangential difference quotients of $u$ are used, so no extension of $u$\nacross the boundary is invoked.",
+        "deps": [
+          "lem-tangential-difference-quotient-test-function",
+          "lem-difference-quotient-integration-by-parts",
+          "lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative",
+          "thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "thm-young-inequality-real-exponents",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "strategy": "Test the weak equation with $v=-\\delta_{-h}^k(\\eta^2\\delta_h^ku)$ for a tangential index $k<n$; by [[lem-tangential-difference-quotient-test-function]] this class is compactly supported in $H$ and lies in $H^1_0(H)$. Because the shift is tangential, the test function stays in $H^1_0(H)$ by part (ii) of [[lem-tangential-difference-quotient-test-function]] and the principal term is the uniformly elliptic quadratic form in $\\delta_h^kDu$; the coefficient commutators are controlled by [[lem-cutoff-difference-quotient-commutator-estimate]] and absorbed by [[lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates]], and the forcing term is bounded by Cauchy-Schwarz. The resulting bound on $\\|\\eta\\delta_h^kDu\\|_{L^2}$ is uniform in $h$, and [[lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative]] identifies the limit as $D_kDu$. This is the first half of the proof of [H] Theorem 4.30 and of [T] Lemma 10.18, and the content of the boundary lemma of [Si] Lecture 8 ([H] printed p. 115; [T] printed p. 242; [Si] printed pp. 82-85).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, proof of Theorem 4.30, tangential difference quotients, printed p. 115 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, proof of Lemma 10.18, tangential derivatives, printed p. 242 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 8, boundary regularity lemma and its proof, printed pp. 80-86 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, boundary-regularity proof sketch, printed p. 113 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-normal-second-derivative-recovered-from-the-elliptic-equation",
+        "kind": "lemma",
+        "title": "The normal second derivative is recovered from the equation",
+        "statement": "Assume Countable Choice. Let $n\\ge1$ and give $\\mathbb R^n$ its Euclidean metric\n([[lem-metrics-on-rn]]). Define the open half-space\n$H:=\\{x\\in\\mathbb R^n:x_n>0\\}$ and its boundary hyperplane\n$\\partial H=\\{x\\in\\mathbb R^n:x_n=0\\}$. For $r>0$, write\n$B_r(x_0):=\\{x:|x-x_0|<r\\}$ ([[def-metric-ball]]), so the boundary\nhalf-ball is $Q=\\{x:|x-x_0|<r,\\ x_n>0\\}$ with $(x_0)_n=0$. Let\n$u\\in H^1_0(H)\\cap H^2_{\\mathrm{loc}}(H)$ be such that the tangential second\nderivatives $D_kD_iu$ ($k<n$) and the derivatives $D_nD_iu$ for $i<n$ exist\nin $L^2_{\\mathrm{loc}}(H)$; suppose $u$ solves $Lu=f$ weakly on $H$ with\n$a^{ij}\\in W^{1,\\infty}(H)$ uniformly elliptic with constant $\\theta$,\n$b^i,c\\in L^\\infty(H)$ and $f\\in L^2_{\\mathrm{loc}}(H)$\n([[def-local-weak-solution-for-a-divergence-form-operator]]). Then the\nmissing normal derivative $D_nD_nu$ exists in $L^2_{\\mathrm{loc}}(H)$ and\nsatisfies throughout $H$, in the almost-everywhere strong form,\n$$D_nD_nu=\\frac{1}{a^{nn}}\\Big(-\\sum_{(i,j)\\ne(n,n)}a^{ij}D_iD_ju-\\sum_{i,j}(D_ia^{ij})D_ju+b^iD_iu+cu-f\\Big)$$\nalmost everywhere, with the pointwise bound\n$|D_nD_nu|\\le\\theta^{-1}(M_a\\sum_{(i,j)\\ne(n,n)}|D_iD_ju|+C(n)(M_1+M_b)|Du|+M_c|u|+|f|)$\nand the corresponding $L^2$ estimate on each boundary half-ball $Q=B_r(x_0)\\cap H$, $x_0\\in\\partial H$, on which $f$ and all the nonnormal second derivatives on the right are in $L^2(Q)$. In particular those hypotheses imply $D_n^2u\\in L^2(Q)$, with\n$$\\|D_n^2u\\|_{L^2(Q)}\\le C\\left(\\sum_{(i,j)\\ne(n,n)}\\|D_iD_ju\\|_{L^2(Q)}+\\|Du\\|_{L^2(Q)}+\\|u\\|_{L^2(Q)}+\\|f\\|_{L^2(Q)}\\right).$$\nUniform ellipticity gives $\\operatorname{Re}a^{nn}\\ge\\theta$ and hence $|a^{nn}|\\ge\\theta$, which makes division legitimate for real or complex coefficients.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "lem-metrics-on-rn",
+          "def-metric-ball",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "def-hk-and-hk-zero-notation",
+          "def-countable-choice"
+        ],
+        "strategy": "Once $u\\in H^2_{\\mathrm{loc}}$, the weak identity tested against $\\varphi\\in C_c^\\infty$ holds with the strong expression, so the distributional identity $a^{nn}D_nD_nu=-\\sum_{(i,j)\\ne(n,n)}a^{ij}D_iD_ju-\\sum_{i,j}(D_ia^{ij})D_ju+b^iD_iu+cu-f$ holds on the region where the right-hand side is in $L^2$; solving for the normal derivative uses $a^{nn}\\ge\\theta$ from ellipticity with $\\xi=e_n$. This is the second half of [H] Theorem 4.30, of [T] Lemma 10.18 and of [L] Theorem 5.10's proof sketch ([H] printed pp. 115-116; [T] printed p. 242; [L] printed p. 113).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, end of the proof of Theorem 4.30 (normal derivative from the equation), printed pp. 115-116 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, end of the proof of Lemma 10.18, printed p. 242 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, proof sketch of Theorem 5.10, printed p. 113 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-finite-boundary-and-interior-partition-glues-local-h-two-estimates",
+        "kind": "lemma",
+        "title": "A finite partition glues the local interior and boundary $H^2$ estimates",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^n$ be a bounded $C^2$\ndomain ([[def-bounded-c-k-domain-and-boundary-charts]]), $n\\ge2$, let $L,a$\nbe as in [[def-uniformly-elliptic-divergence-form-operator]] with\n$a^{ij}\\in W^{1,\\infty}(\\Omega)$, $b^i,c\\in L^\\infty(\\Omega)$, and let\n$f\\in L^2(\\Omega)$. Suppose $u\\in H^1(\\Omega)$ is a local weak solution of\n$Lu=f$ on $\\Omega$\n([[def-local-weak-solution-for-a-divergence-form-operator]]) and suppose the\nfollowing local bounds are available: an interior bound on a fixed open set\n$U_0\\Subset\\Omega$, and, for finitely many boundary charts $(W_\\ell,\\Phi_\\ell)$\ncovering $\\partial\\Omega$, a bound for the flattened localisations\n$\\widehat{(\\zeta_\\ell u)}$ in $H^2$ of the flattened half-balls in the\nvariables of\n[[lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts]],\neach with the bounds of\n[[lem-c-two-boundary-flattening-transforms-uniform-ellipticity]]. Then\n$u\\in H^2(\\Omega)$ and there is $C$, depending only on\n$n,\\Omega,\\theta$ and the coefficient bounds, with\n$$\\|u\\|_{H^2(\\Omega)}\\le C\\big(\\|f\\|_{L^2(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big).$$\nThe proof uses a finite smooth partition of unity subordinate to the cover,\nthe localisation identities of\n[[lem-localisation-identity-for-a-divergence-form-weak-solution]], and the\nfiniteness of the cover; no choice of a cover beyond the finite chart\nneighbourhoods supplied by the definition is used.",
+        "deps": [
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary",
+          "lem-normal-second-derivative-recovered-from-the-elliptic-equation",
+          "lem-localisation-identity-for-a-divergence-form-weak-solution",
+          "lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts",
+          "lem-c-two-boundary-flattening-transforms-uniform-ellipticity",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-countable-choice"
+        ],
+        "strategy": "Cover $\\overline\\Omega$ by the interior set $U_0$ and finitely many chart neighbourhoods $W_\\ell$ (compactness of $\\overline\\Omega$ and the finite boundary atlas of the definition). Choose a finite smooth partition of unity $\\{\\zeta_\\ell\\}$ subordinate to this cover with compact supports using [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]]. Each $\\zeta_\\ell u$ satisfies the localisation identity of [[lem-localisation-identity-for-a-divergence-form-weak-solution]]; on the interior piece apply [[thm-interior-h-two-regularity-for-divergence-form-equations]], on each boundary piece flatten by [[lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts]] (with ellipticity from [[lem-c-two-boundary-flattening-transforms-uniform-ellipticity]]) and apply the tangential estimate of [[lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary]] together with the normal recovery of [[lem-normal-second-derivative-recovered-from-the-elliptic-equation]]; sum the finitely many estimates. This is the globalisation step of [H] Section 4.12, [T] proof of Lemma 10.18 and [Si] Lecture 9 ([H] printed p. 115; [T] printed pp. 242-243; [Si] printed pp. 88-90).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, partition-of-unity reduction in the proof of Theorem 4.30, printed p. 115 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, proof of Lemma 10.18 (partition of unity), printed p. 242 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 9, proof of Theorem 1 (finite cover and half-ball lemma), printed pp. 88-91 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-global-h-two-dirichlet-regularity",
+        "kind": "theorem",
+        "title": "Global $H^2$ Dirichlet regularity",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^n$ be a bounded $C^2$\ndomain, $n\\ge2$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $L,a$ be as in\n[[def-uniformly-elliptic-divergence-form-operator]] with ellipticity\nconstant $\\theta$, bounds $M_a,M_b,M_c$ and $a^{ij}\\in W^{1,\\infty}(\\Omega)$,\n$b^i,c\\in L^\\infty(\\Omega)$, and let $f\\in L^2(\\Omega)$. If\n$u\\in H^1_0(\\Omega)$ is a weak solution of $Lu=f$ with zero boundary values\n([[def-weak-dirichlet-solution-for-a-divergence-form-operator]]), then\n$u\\in H^2(\\Omega)$ and there is\n$C=C(n,\\Omega,\\theta,M_a,M_b,M_c,\\|Da^{ij}\\|_\\infty)$ with\n$$\\|u\\|_{H^2(\\Omega)}\\le C\\big(\\|f\\|_{L^2(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big).$$\nThe $L^2$ norm of $u$ on the right cannot be deleted without a hypothesis\nexcluding the homogeneous kernel, as the companion counterexample shows; the\ntheorem is stated for zero Dirichlet data, and nonzero compatible boundary\ndata are handled by a trace lifting before the theorem is applied.",
+        "deps": [
+          "lem-finite-boundary-and-interior-partition-glues-local-h-two-estimates",
+          "lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary",
+          "lem-normal-second-derivative-recovered-from-the-elliptic-equation",
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts",
+          "lem-c-two-boundary-flattening-transforms-uniform-ellipticity",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-countable-choice",
+          "thm-young-inequality-real-exponents"
+        ],
+        "strategy": "Combine [[thm-interior-h-two-regularity-for-divergence-form-equations]] for the interior piece with the flat-boundary tangential estimate and normal recovery, glued by [[lem-finite-boundary-and-interior-partition-glues-local-h-two-estimates]]. The Dirichlet condition $u\\in H^1_0$ is used only to keep the localisation of $u$ admissible after flattening and to control the support of the tangential test functions; no trace operator is invoked. This is [H] Theorem 4.30, [L] Theorem 5.10 and [T] Lemma 10.18, with the $C^2$ boundary convention of [[def-bounded-c-k-domain-and-boundary-charts]] ([H] printed pp. 114-116; [L] printed pp. 112-113; [T] printed p. 242).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, Theorem 4.30, printed pp. 114-116 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.10 and proof sketch, printed pp. 112-113 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Lemma 10.18, printed p. 242 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-global-h-two-estimate-without-the-ltwo-term-under-uniqueness",
+        "kind": "corollary",
+        "title": "The global $H^2$ estimate without the $L^2$ term under uniqueness",
+        "statement": "Assume the Axiom of Choice and Countable Choice. In the setting of\n[[thm-global-h-two-dirichlet-regularity]] suppose that the homogeneous\nproblem has only the trivial solution: $u\\in H^1_0(\\Omega)$ and\n$a(u,v)=0$ for all $v\\in H^1_0(\\Omega)$ imply $u=0$. Then for every\n$f\\in L^2(\\Omega)$ the unique weak solution $u\\in H^1_0(\\Omega)$ of $Lu=f$\nsatisfies $u\\in H^2(\\Omega)$ and there is\n$C=C(n,\\Omega,\\theta,M_a,M_b,M_c,\\|Da^{ij}\\|_\\infty,\n\\|L^{-1}\\|_{\\mathcal L(L^2(\\Omega),H^1_0(\\Omega))})$ with\n$$\\|u\\|_{H^2(\\Omega)}\\le C\\,\\|f\\|_{L^2(\\Omega)}.$$\nThus the $L^2$ term may be dropped exactly under the injectivity hypothesis,\nand the estimate is uniform over all data.",
+        "deps": [
+          "thm-global-h-two-dirichlet-regularity",
+          "cor-uniqueness-implies-existence-for-the-elliptic-dirichlet-problem",
+          "thm-fredholm-alternative-for-weak-elliptic-dirichlet-problems",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "strategy": "Triviality of the homogeneous kernel excludes the second alternative of the Fredholm alternative of [[thm-fredholm-alternative-for-weak-elliptic-dirichlet-problems]], so the first alternative holds and the solution map $f\\mapsto u$ is bounded from $L^2(\\Omega)$ to $H^1_0(\\Omega)$ by [[cor-uniqueness-implies-existence-for-the-elliptic-dirichlet-problem]]; combining $\\|u\\|_{H^1}\\le C\\|f\\|$ with the estimate of [[thm-global-h-two-dirichlet-regularity]] gives the claim. The design's alternative contradiction argument uses the Rellich compactness of $H^1_0(\\Omega)\\hookrightarrow L^2(\\Omega)$: a sequence with $\\|u_k\\|_{L^2}=1$, $\\|f_k\\|_{L^2}\\to0$ converges weakly in $H^1$ and strongly in $L^2$ along a subsequence to a nontrivial homogeneous solution, contradiction; the scaffold uses the equivalent formalised compactness statement of the Fredholm page so that the compactness content is proved once ([H] Theorem 4.24 and its use of the compact resolvent, printed pp. 106-108).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.10, the alternatives for $Lu-\\lambda u=f$ and the compact-resolvent proof, printed pp. 106-110 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, note after Lemma 10.18 on dropping $\\|u\\|_{L^2}$ when $0$ is not an eigenvalue, printed p. 243 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "thm-higher-order-boundary-regularity-for-dirichlet-problems",
+        "kind": "theorem",
+        "title": "Higher-order boundary regularity for Dirichlet problems",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^n$ be a bounded\n$C^{k+2}$ domain, $n\\ge2$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$k\\ge0$, let $L,a$ be as in\n[[def-uniformly-elliptic-divergence-form-operator]] with\n$a^{ij}\\in W^{k+1,\\infty}(\\Omega)$, $b^i,c\\in W^{k,\\infty}(\\Omega)$ and all\ncoefficient derivatives bounded, and let $f\\in H^k(\\Omega)$. If\n$u\\in H^1_0(\\Omega)$ is a weak solution of $Lu=f$ with zero boundary values\n([[def-weak-dirichlet-solution-for-a-divergence-form-operator]]), then\n$u\\in H^{k+2}(\\Omega)$ and\n$$\\|u\\|_{H^{k+2}(\\Omega)}\\le C\\big(\\|f\\|_{H^k(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big),$$\nwith $C$ depending only on $n,k,\\Omega$ and the coefficient bounds. The\nderivative gain is exactly two orders; the boundary regularity required at\norder $k$ is $C^{k+2}$, the coefficient regularity one order above the data\norder, and the companion page records the sharp two-derivative example. For\n$k=0$ the theorem is\n[[thm-global-h-two-dirichlet-regularity]].",
+        "deps": [
+          "thm-global-h-two-dirichlet-regularity",
+          "lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary",
+          "lem-normal-second-derivative-recovered-from-the-elliptic-equation",
+          "lem-weak-equation-for-a-first-derivative-includes-coefficient-commutators",
+          "lem-nested-domain-induction-for-interior-elliptic-derivatives",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-hk-and-hk-zero-notation",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-countable-choice"
+        ],
+        "strategy": "Localise with the finite partition as in [[lem-finite-boundary-and-interior-partition-glues-local-h-two-estimates]]; after flattening, apply the tangential difference-quotient estimate to derivatives $D_lu$ of increasing order, each of which continues to vanish on the boundary (tangential derivatives preserve $H^1_0$ and the compact support of the localisations), then recover the highest normal derivative from the differentiated equation of [[lem-weak-equation-for-a-first-derivative-includes-coefficient-commutators]] exactly as in [[lem-normal-second-derivative-recovered-from-the-elliptic-equation]]. The coefficient regularity needed at each step is one order above the corresponding data order, and the boundary must be $C^{k+2}$ so that the flattened coefficients retain the required $W^{k+1,\\infty}$ regularity. This is [H] Theorem 4.31, [L] Theorem 5.11, [T] Corollary 10.19 and [Si] Lecture 9, Theorem 1 ([H] printed p. 116; [L] printed p. 113; [T] printed pp. 242-243; [Si] printed pp. 86-90).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, Theorem 4.31, printed p. 116 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.11, printed p. 113 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Corollary 10.19, printed pp. 242-243 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 9, Theorem 1 (boundary regularity at every order), printed pp. 86-90 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cor-smooth-weak-dirichlet-solutions-are-classical",
+        "kind": "corollary",
+        "title": "Smooth weak Dirichlet solutions are classical",
+        "statement": "Assume the Axiom of Choice (for the Sobolev embedding and the trace\ncharacterisation) and Countable Choice. Let $\\Omega\\subset\\mathbb R^n$ be a\nbounded $C^\\infty$ domain, $n\\ge2$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand suppose $a^{ij},b^i,c,f$ extend to $C^\\infty$ functions on a\nneighbourhood of $\\overline\\Omega$. If $u\\in H^1_0(\\Omega)$ is a weak\nsolution of $Lu=f$ with zero boundary values\n([[def-weak-dirichlet-solution-for-a-divergence-form-operator]]), then\n$u\\in H^m(\\Omega)$ for every $m$; $u$ agrees almost everywhere with a\nfunction $\\widetilde u\\in C^\\infty(\\overline\\Omega)$ satisfying $Lu=f$\npointwise in $\\Omega$, and $\\widetilde u|_{\\partial\\Omega}=0$. The boundary\nvalues are those of the continuous representative, consistent with the trace\ncharacterisation of [[thm-kernel-of-the-trace-is-w-one-p-zero]]; the\nstatement asserts no pointwise boundary condition for the Sobolev class\nitself.",
+        "deps": [
+          "thm-higher-order-boundary-regularity-for-dirichlet-problems",
+          "thm-higher-order-sobolev-embedding",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "strategy": "Apply [[thm-higher-order-boundary-regularity-for-dirichlet-problems]] for every $k$ with the smooth coefficients; the bootstrapping is legitimate because each step improves the data order. Then use the higher-order Sobolev embedding and Morrey's inequality on $\\Omega$ to obtain a representative with continuous derivatives of every fixed order, so the representative is $C^\\infty(\\overline\\Omega)$; the a.e. equation is then pointwise. Finally, the continuous representative has trace equal to its boundary restriction, and since $u\\in H^1_0$ has zero trace, that restriction vanishes ([[thm-kernel-of-the-trace-is-w-one-p-zero]]). This is [H] Corollary 4.32 and [L] Theorem 5.11 ([H] printed p. 116; [L] printed p. 113).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, Corollary 4.32, printed p. 116 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.11 and its proof reference, printed p. 113 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "cor-smooth-coefficients-and-boundary-make-elliptic-eigenfunctions-smooth",
+        "kind": "corollary",
+        "title": "Smooth coefficients and boundary make elliptic eigenfunctions smooth",
+        "statement": "Assume the Axiom of Choice (inherited through\n[[cor-smooth-weak-dirichlet-solutions-are-classical]]) and Countable Choice.\nLet $\\Omega\\subset\\mathbb R^n$ be a bounded $C^\\infty$ domain, $n\\ge2$, and\nlet $a^{ij},b^i,c$ extend to $C^\\infty$ functions on a neighbourhood of\n$\\overline\\Omega$, with $a$ symmetric and uniformly elliptic. If\n$(\\lambda,u)$ is a symmetric elliptic weak eigenpair\n([[def-symmetric-elliptic-weak-eigenpair]]), $a(u,v)=\\lambda(u,v)_{L^2}$ for\nall $v\\in H^1_0(\\Omega)$ with $u\\neq0$, then $u\\in H^m(\\Omega)$ for every\n$m$, and $u$ agrees almost everywhere with a function\n$\\widetilde u\\in C^\\infty(\\overline\\Omega)$ satisfying\n$L\\widetilde u=\\lambda\\widetilde u$ pointwise in $\\Omega$ and\n$\\widetilde u|_{\\partial\\Omega}=0$. This is the relocated PDE-17\nconsequence: the spectral construction needs only weak eigenfunctions, and\nsmoothness is supplied here by the regularity theory.",
+        "deps": [
+          "cor-smooth-weak-dirichlet-solutions-are-classical",
+          "thm-higher-order-boundary-regularity-for-dirichlet-problems",
+          "def-symmetric-elliptic-weak-eigenpair",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "strategy": "The weak eigenequation is the weak Dirichlet problem $Lu=\\lambda u$ with datum $\\lambda u$; start from $u\\in H^1_0\\subset L^2$ and iterate [[thm-higher-order-boundary-regularity-for-dirichlet-problems]]: $u\\in H^2$ makes $\\lambda u\\in H^2$, hence $u\\in H^4$, and so on. Apply [[cor-smooth-weak-dirichlet-solutions-are-classical]] to conclude. The statement and proof route are preserved from the PDE-17 owner resolution, which moved this corollary after the PDE-18 higher-order boundary regularity and embedding items; the item records no new spectral input ([H] Sections 4.10-4.12, printed pp. 108-116; [Si] Lectures 9-10).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Sections 4.10-4.12, printed pp. 108-116 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lectures 9-10, boundary regularity with the eigen-equation as the model application (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "rem-regularity-estimates-do-not-create-boundary-compatibility",
+        "kind": "remark",
+        "title": "Regularity estimates do not create boundary compatibility",
+        "statement": "Under the choice assumptions of the cited Sobolev trace interfaces\n(the Axiom of Choice), the global $H^2$ and higher-order boundary theorems of this page\n([[thm-global-h-two-dirichlet-regularity]],\n[[thm-higher-order-boundary-regularity-for-dirichlet-problems]]) take the\nsolution in $H^1_0(\\Omega)$, equivalently with zero trace, or apply after subtracting a lifting of the same Sobolev order as the\nregularity sought, with the resulting forcing in the required data space.\nAn $H^1$ lifting alone does not supply an $H^2$ or higher-order estimate. They are a priori estimates, not existence\nor compatibility statements: they cannot manufacture boundary regularity for\na datum that is not the trace of an $H^s$ function. On a nonsmooth domain\nwith a corner, smooth coefficients and boundary data on each open boundary\npiece do not remove the corner obstruction. In the\ninhomogeneous weak Dirichlet problem the datum must lie in the trace range\nand be lifted before the estimates apply\n([[def-weak-dirichlet-solution-for-a-divergence-form-operator]],\n[[cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting]]); the\ncompanion examples of this pair's examples page show two smooth boundary\npieces with no solution continuous on the closure, and show that the $C^2$\nboundary hypothesis itself cannot be dropped. No proof is supplied here; the\nremark records the scope boundary of the estimates.",
+        "deps": [
+          "thm-global-h-two-dirichlet-regularity",
+          "thm-higher-order-boundary-regularity-for-dirichlet-problems",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-countable-choice"
+        ],
+        "strategy": "Record the scope: the estimates quantify already-compatible solutions, and the lifting of PDE-16 is the mechanism that turns an admissible boundary datum into the zero-trace problem. Point to the B-companion counterexamples for the failure modes ([H] Section 4.12 statement hypotheses, printed pp. 114-116; [T] Example 10.1, printed p. 242).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, hypotheses of Theorems 4.30-4.31, printed pp. 114-116 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Example 10.1 and the boundary hypotheses, printed p. 242 (read in full)"
+            }
+          ]
+        },
+        "forward_refs": [
+          "cex-smooth-interior-data-do-not-repair-incompatible-dirichlet-corner-values",
+          "cex-boundary-h-two-regularity-needs-domain-regularity"
+        ],
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 458.034,
+    "id": "interior-and-boundary-sobolev-elliptic-regularity-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Interior and Boundary Sobolev Elliptic Regularity — Examples",
+    "companion": "interior-and-boundary-sobolev-elliptic-regularity",
+    "requires": [
+      "interior-and-boundary-sobolev-elliptic-regularity",
+      "conformal-mapping-branches-and-the-schwarz-lemma"
+    ],
+    "items": [
+      {
+        "id": "ex-poisson-equation-with-ltwo-data-gains-two-interior-derivatives",
+        "kind": "example",
+        "title": "Poisson's equation with $L^2$ data gains two interior derivatives",
+        "statement": "Assume the Axiom of Choice where the existence of the weak solution is\ninvoked; the regularity conclusion itself uses only Countable Choice. Let\n$\\Omega\\subset\\mathbb R^n$ be a bounded open set, let $f\\in L^2(\\Omega)$, and\nlet $u\\in H^1_0(\\Omega)$ be a weak solution of the Dirichlet problem\n$-\\Delta u=f$, that is, $a(u,v)=\\int_\\Omega f\\overline v\\,dx$ for every\n$v\\in H^1_0(\\Omega)$ with $a(u,v)=\\int_\\Omega\\nabla u\\cdot\\overline{\\nabla v}\\,dx$\n([[def-weak-dirichlet-solution-for-a-divergence-form-operator]]). Assuming the\nAxiom of Choice, existence and uniqueness of such a $u$ are supplied by\n[[thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem]] when\n$\\Omega$ is nonempty; if $\\Omega=\\varnothing$, the zero class is the unique\nweak solution directly. The verification below uses only that $u$ is a weak\nsolution. Then\n$u\\in H^2_{\\mathrm{loc}}(\\Omega)$, and for every open\n$\\Omega'\\Subset\\Omega$ there is $C=C(n,\\Omega',\\Omega)$ with\n$$\\|u\\|_{H^2(\\Omega')}\\le C\\big(\\|f\\|_{L^2(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big):$$\n$L^2$ data gain two interior derivatives for the constant-coefficient\nLaplacian, and no boundary regularity of $\\Omega$ enters the interior\nconclusion.",
+        "deps": [
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "strategy": "Instantiate the interior H^2 theorem with L=-Delta, whose coefficients are constant and uniformly elliptic. A zero-trace weak solution is a local weak solution. For each Omega' compactly contained in Omega choose Omega'' with Omega' compactly contained in Omega'' compactly contained in Omega, apply the nested-domain estimate, then bound its local data norms by the global norms. Existence is cited only for nonempty Omega and uses AC; the empty-domain solution and estimate are direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, the motivating Laplacian estimate and Theorem 4.27, printed pp. 110-114 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.6 (interior $H^2$-regularity), printed p. 108 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-piecewise-smooth-coefficient-produces-limited-regularity",
+        "kind": "example",
+        "title": "A piecewise-smooth coefficient gives an $H^2$ solution that is not twice classically differentiable",
+        "statement": "Assume Countable Choice. On $\\Omega=(-1,1)$ let\n$$a(x)=\\begin{cases}2+x,&x<0,\\\\ 2+2x,&x>0,\\end{cases}$$\na continuous, piecewise smooth coefficient with $1\\le a\\le4$ and\n$a\\in W^{1,\\infty}(-1,1)$ whose derivative jumps from $1$ to $2$ at $0$, and\ndefine $u(x)=\\int_0^x\\frac{dt}{a(t)}$, the absolutely continuous primitive\nwith $u(0)=0$. Then $u\\in H^2(-1,1)$, the flux is $au'\\equiv1$, and $u$ is the\nlocal weak solution of $-(au')'=0$ in the sense of\n[[def-local-weak-solution-for-a-divergence-form-operator]]. Explicitly\n$$u''(x)=-\\frac{a'(x)}{a(x)^2}=\\begin{cases}-\\dfrac1{(2+x)^2},&x<0,\\\\[2pt] -\\dfrac{2}{(2+2x)^2},&x>0,\\end{cases}$$\nwith one-sided limits $-1/4$ at $0^-$ and $-1/2$ at $0^+$; consequently the\none-sided difference quotients of $u'$ at $0$ have the distinct limits\n$-1/4$ and $-1/2$, the second classical derivative of $u$ at $0$ does not\nexist, and $u\\notin C^2(-1,1)$. Thus the weak $H^2$ conclusion of\n[[thm-interior-h-two-regularity-for-divergence-form-equations]] holds for\nthis Lipschitz coefficient while classical twice differentiability fails:\nweak $H^2$ regularity is genuinely weaker than $C^2$.",
+        "deps": [
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "thm-ftc-second-part",
+          "thm-chain-rule",
+          "def-countable-choice"
+        ],
+        "strategy": "Compute the primitive explicitly on each side. Its derivative 1/a is Lipschitz, so the piecewise bounded second derivative is the weak derivative and u lies in W^{2,infinity} and H^2. The flux au' is constant, which gives the local weak equation. The unequal one-sided difference quotients of u' show u is not C^2.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Lemma 10.16 and its $W^{1,\\infty}$ coefficient hypothesis, printed p. 240 (read in full)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, Theorem 4.27 and its $C^1$ coefficient hypothesis, printed p. 112 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.6, printed p. 108 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-interior-regularity-does-not-imply-boundary-regularity",
+        "kind": "counterexample",
+        "title": "Interior regularity does not imply boundary regularity",
+        "statement": "Assume Countable Choice. Interior smoothness of a weak solution automatically forces $H^2$ up to the\nboundary of its domain, so that the interior tangential and normal estimates\nsuffice at every boundary point.",
+        "deps": [
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-hk-and-hk-zero-notation",
+          "thm-slit-plane-root-branch-biholomorphism-to-a-sector",
+          "thm-c2-holomorphic-components-are-harmonic",
+          "lem-sobolev-integration-by-parts-for-dual-exponents",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-countable-choice"
+        ],
+        "strategy": "Use the principal square-root branch on the slit plane. Its imaginary part is smooth and harmonic in the slit disc, lies in H^1 by the polar integral, and is locally weakly harmonic by integration by parts on compact supports. Its radial second derivative has divergent square integral at the slit tip, so it is not H^2 up to the boundary; the domain fails the C^1 graph condition there.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Example 10.1 and the discussion of domains whose boundary is not $C^{1,1}$, printed p. 242 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.10 and its $C^1$ boundary hypothesis, printed pp. 112-113 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-boundary-h-two-regularity-needs-domain-regularity",
+        "kind": "counterexample",
+        "title": "Boundary $H^2$ regularity needs domain regularity",
+        "statement": "Assume Countable Choice. In the global $H^2$ Dirichlet theorem the bounded $C^2$ boundary hypothesis\ncan be replaced by mere Lipschitz regularity: on every bounded Lipschitz\ndomain in $\\mathbb R^2$, every zero-boundary weak solution of\n$-\\Delta u=f$ with $f\\in L^2$ lies in $H^2(\\Omega)$.\n\nThe reentrant-sector factor $v=r^{\\pi/\\omega}\\sin(\\pi\\theta/\\omega)$ is in\n$H^1(S_\\omega)\\setminus H^2(S_\\omega)$ and is locally weakly harmonic.\nMultiplying it by a smooth cutoff equal to $1$ near the vertex and $0$ near\nthe circular boundary gives a zero-boundary weak solution with $L^2$ forcing\nthat is still not in $H^2$.",
+        "deps": [
+          "thm-global-h-two-dirichlet-regularity",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "lem-sobolev-integration-by-parts-for-dual-exponents",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-chain-rule-for-total-derivatives",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "def-countable-choice"
+        ],
+        "strategy": "Use the reentrant sector harmonic factor v=r^alpha sin(alpha theta), which is in H^1 but not H^2. Multiply by a radial smooth cutoff equal to one near the vertex and supported away from the circular boundary. Cut off near the vertex and in thin angular strips at the radial edges to approximate in H^1 by C_c^∞(S_omega), proving zero trace. The cutoff solution has forcing smooth on an annular sector, hence L^2, but remains non-H^2 near the vertex; the sector is bounded Lipschitz and not C^1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Example 10.1 (the reentrant sector, $u\\notin H^2$ for angle $>\\pi$), printed p. 242 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorem 5.10 and the boundary hypothesis, printed pp. 112-113 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-h-two-estimate-needs-an-ltwo-kernel-term-without-injectivity",
+        "kind": "counterexample",
+        "title": "The $H^2$ estimate needs the $L^2$ kernel term without injectivity",
+        "statement": "For every bounded $C^2$ domain $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, and every uniformly elliptic divergence-form operator $L$ with bounded coefficients, the estimate\n$$\\|u\\|_{H^2(\\Omega)}\\le C\\|Lu\\|_{L^2(\\Omega)}$$\nholds for every weak solution $u\\in H^1_0(\\Omega)$ of the homogeneous Dirichlet problem, with $C$ depending only on the operator and domain data, even when the homogeneous Dirichlet operator has a nontrivial kernel.",
+        "deps": [
+          "thm-global-h-two-dirichlet-regularity",
+          "cor-global-h-two-estimate-without-the-ltwo-term-under-uniqueness",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator"
+        ],
+        "strategy": "On B1 subset R2 take u=1-|x|^2, A(x)=(1/4-|x|^2/8)I, b=0, c=-1. Then A is smooth uniformly elliptic, u is a nonzero H2∩H1_0 function, and -div(A grad u)=u, so Lu=0. Its positive H2 norm cannot be bounded by C||Lu||2; this directly witnesses a kernel in the current n≥2 theorem setting.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, the note after Theorem 5.10 ($L=-d^2/dx^2-1$ with $L(\\sin x)=0$), printed p. 113 (read in full)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.10, spectral series and the alternatives, printed p. 110 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 14
+      },
+      {
+        "id": "ex-bootstrapping-a-smooth-poisson-problem",
+        "kind": "example",
+        "title": "Bootstrapping a smooth Poisson problem",
+        "statement": "Assume the Axiom of Choice (inherited from the embedding theorem used below)\ntogether with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, let\n$f\\in C^\\infty(\\Omega)$, and let $u\\in H^1(\\Omega)$ be a local weak solution\nof $-\\Delta u=f$ on $\\Omega$ in the sense of\n[[def-local-weak-solution-for-a-divergence-form-operator]]; for instance,\nwhen $\\Omega$ is a bounded open set, $u$ may be the zero-trace weak Dirichlet\nsolution, whose existence and uniqueness under the Axiom of Choice are\n[[thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem]].\nIterating [[thm-interior-h-k-plus-two-elliptic-regularity]] with the\nconstant coefficients of the Laplacian gives\n$u\\in H^m_{\\mathrm{loc}}(\\Omega)$ for every $m$, hence a representative of\nclass $C^\\infty$ by [[thm-higher-order-sobolev-embedding]], and for that\nrepresentative the equation $-\\Delta u=f$ holds pointwise on $\\Omega$. No\nboundary data and no boundary regularity are used: the smoothness of $f$\nalone permits the induction to continue at every order.",
+        "deps": [
+          "thm-interior-h-k-plus-two-elliptic-regularity",
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "thm-higher-order-sobolev-embedding",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-hk-and-hk-zero-notation",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "strategy": "For each k, apply the higher interior regularity theorem to the Laplacian and smooth datum to obtain every local Sobolev order. In n>=2, apply higher-order embedding to u itself on balls at arbitrarily high orders and patch continuous representatives, which agree everywhere when equal almost everywhere. In n=1, use absolutely continuous representatives of every derivative and the fundamental theorem to identify successive classical derivatives. The a.e. equation becomes pointwise because both sides are continuous.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.11, Corollary 4.29 (smooth data give smooth interior solutions), printed p. 114 (read in full)"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, 2020, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 5, Section 5.2, Theorems 5.8-5.9 (higher and infinite interior regularity), printed pp. 111-112 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-bounded-discontinuous-elliptic-coefficients-do-not-force-h-two-regularity",
+        "kind": "counterexample",
+        "title": "Bounded discontinuous elliptic coefficients need not give $H^2$ solutions",
+        "statement": "Assume Countable Choice. Bounded measurable uniformly elliptic coefficients together with $f=0$ force\nevery $H^1$ weak solution of $-(a^{ij}D_ju)'_i=f$ into $H^2_{\\mathrm{loc}}$,\nwithout any regularity hypothesis on the coefficients.",
+        "deps": [
+          "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-hk-and-hk-zero-notation",
+          "thm-absolute-continuity-of-the-integral",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-countable-choice"
+        ],
+        "strategy": "The piecewise linear u has weak derivative 1 on the left and 1/2 on the right, while au'=1, so integration against compactly supported tests gives the zero weak equation. If u were H^2, its derivative would have an L^1_loc weak derivative; linearity would then give one for the Heaviside class, contradicted by shrinking bumps. Thus bounded measurable ellipticity does not force H^2.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.13, composite media with discontinuous coefficients and the jump conditions of the weak formulation, printed p. 120 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Lemma 10.16 and its $W^{1,\\infty}$ coefficient hypothesis, printed p. 240 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-reentrant-sector-harmonic-singularity-has-explicit-sobolev-threshold",
+        "kind": "example",
+        "title": "The reentrant sector singularity has an explicit Sobolev threshold",
+        "statement": "Assume Countable Choice. Let $\\pi<\\omega<2\\pi$, let $S_\\omega=\\{(r\\cos\\theta,r\\sin\\theta):0<r<1,\\ 0<\\theta<\\omega\\}$\nbe the reentrant sector, let $\\alpha=\\pi/\\omega\\in(0,1)$, and let\n$u(r,\\theta)=r^{\\alpha}\\sin(\\alpha\\theta)$. Then $\\Delta u=0$ in $S_\\omega$,\n$u$ vanishes on the two radial edges $\\theta=0$ and $\\theta=\\omega$, and for\nevery integer $m\\ge0$\n$$u\\in H^m(S_\\omega)\\iff m<1+\\alpha=1+\\frac{\\pi}{\\omega};$$\nin particular $u\\in H^1(S_\\omega)\\setminus H^2(S_\\omega)$ and each additional\nwhole derivative beyond $H^1$ is unavailable exactly by the deficit\n$1-\\pi/\\omega$. For noninteger $s=m+t$ with integer $m\\ge0$ and $0<t<1$, define the intrinsic Slobodeckij scale here by requiring $u\\in H^m(S_\\omega)$ and finite seminorm $\\int_{S_\\omega}\\int_{S_\\omega}\\frac{|D^\\beta u(x)-D^\\beta u(y)|^2}{|x-y|^{2+2t}}\\,dx\\,dy$ for each weak derivative with $|\\beta|=m$. With this convention, for every real $s\\ge0$, $u\\in H^s(S_\\omega)\\iff s<1+\\alpha=1+\\frac{\\pi}{\\omega}$. The integer threshold follows from polar-coordinate integrals; the fractional threshold follows from a dyadic-shell estimate and a matching scaled-pair lower bound.",
+        "deps": [
+          "cex-boundary-h-two-regularity-needs-domain-regularity",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-chain-rule-for-total-derivatives",
+          "def-countable-choice"
+        ],
+        "strategy": "For π<ω<2π, take α=π/ω and u=r^α sin(αθ) on the reentrant sector. Polar integration gives the integer Hm threshold m<1+α. For the stated intrinsic Slobodeckij scale, dyadic-shell upper estimates and a matching scaled-pair lower bound give the full real-order threshold s<1+α.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Example 10.1 and the sector computation, printed p. 242 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-higher-elliptic-regularity-cannot-exceed-the-forcing-regularity-by-more-than-two-derivatives",
+        "kind": "counterexample",
+        "title": "Higher elliptic regularity cannot gain more than two derivatives",
+        "statement": "Assume Countable Choice. Even for the constant-coefficient Laplacian in one\ndimension, $f\\in H^k_{\\mathrm{loc}}$ does not force a weak solution of\n$-u''=f$ into $H^{k+3}_{\\mathrm{loc}}$: for every integer $k\\ge0$ there is\nan $H^1$ local weak solution in $H^{k+2}((-1,1))$ whose $(k+3)$rd weak\nderivative is not locally square-integrable near an interior point.",
+        "deps": [
+          "thm-interior-h-k-plus-two-elliptic-regularity",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-countable-choice"
+        ],
+        "strategy": "For each integer k>=0 set f=|x|^{k+1/2} and u=-A|x|^{k+5/2}, A=((k+5/2)(k+3/2))^{-1}, on (-1,1). Piecewise differentiation shows f in H^k but not H^{k+1} near zero, u in H^{k+2}, and -u''=f distributionally and weakly across zero. If u were H^{k+3} near zero, then f'=-u''' would be H^k there, contradicting f not H^{k+1}.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Sections 4.11-4.12, the two-derivative gain in Theorems 4.28 and 4.31, printed pp. 114-116 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, Corollary 10.19 and its data hypothesis $f\\in H^k$, printed p. 243 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-smooth-interior-data-do-not-repair-incompatible-dirichlet-corner-values",
+        "kind": "counterexample",
+        "title": "Smooth interior data do not repair incompatible Dirichlet corner values",
+        "statement": "On the square $\\Omega=(0,1)^2$, every boundary datum whose restriction to each open side is smooth is the boundary trace of a function $u\\in C(\\overline\\Omega)$ harmonic in $\\Omega$, that is, satisfying $-\\Delta u=0$ there.",
+        "deps": [
+          "rem-regularity-estimates-do-not-create-boundary-compatibility",
+          "thm-global-h-two-dirichlet-regularity",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "thm-higher-order-sobolev-embedding",
+          "def-axiom-of-choice",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "strategy": "For the Laplace Dirichlet problem -Δu=0 on the square, prescribe constant values 1 and 0 on the two adjacent open sides meeting at (0,0), with constant values on the other sides. The unequal side limits contradict continuity at the corner; the H2 extension and embedding argument also rules out a continuous representative of any H2 class realizing those data.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Section 4.12, the zero-boundary hypotheses of Theorems 4.30-4.31 and the lifting step, printed pp. 114-116 (read in full)"
+            },
+            {
+              "title": "Leon Simon, Lectures on Partial Differential Equations (Stanford, complete 223-page author scan)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 9, compatibility of boundary data and the trace, printed pp. 90-93 (read in full)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, complete 392 pages)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 10.3, the Dirichlet data class in the boundary regularity theorems, printed pp. 240-243 (read in full)"
+            }
+          ]
+        },
+        "dependency_level": 10
+      }
+    ]
+  }
+]

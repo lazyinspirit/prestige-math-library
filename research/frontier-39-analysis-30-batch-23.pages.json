@@ -1,0 +1,704 @@
+[
+  {
+    "order": 510.017,
+    "id": "borel-weil-and-borel-weil-bott",
+    "kind": "A",
+    "category": "lie-theory",
+    "title": "Borel Weil and Borel Weil Bott",
+    "companion": "borel-weil-and-borel-weil-bott-examples",
+    "requires": [
+      "smooth-projective-serre-duality-and-flag-variety-line-bundles",
+      "weyl-character-and-multiplicity-formulas",
+      "normal-varieties-normalization-and-zariskis-main-theorem"
+    ],
+    "items": [
+      {
+        "id": "lem-sections-of-an-associated-line-bundle-as-equivariant-functions",
+        "kind": "lemma",
+        "title": "Sections of an associated line bundle as equivariant functions",
+        "statement": "Assume the Axiom of Choice. Let $G$ be the connected simply connected complex semisimple affine algebraic group with Borel $B=T\\ltimes U$ and flag variety $X=G/B$ of [[def-complex-semisimple-algebraic-group-borel-and-flag-variety]] and [[lem-semisimple-borel-root-factorization]], and let $\\mathcal L_\\lambda=G\\times^B\\mathbb C_{-\\lambda}$ be the Borel-character equivariant line bundle of [[def-borel-character-equivariant-line-bundle]]. Restriction along the $B$-torsor $G\\to X$ of [[lem-semisimple-flag-torsor-zariski-charts]] identifies the global sections of $\\mathcal L_\\lambda$ with the regular functions on $G$ satisfying $f(gb)=\\lambda(b)f(g)$: $$H^0(X,\\mathcal L_\\lambda)\\cong\\{f\\in\\mathcal O(G):f(gb)=\\lambda(b)f(g)\\text{ for all }g\\in G,\\ b\\in B\\},$$ an isomorphism natural in $\\lambda$. Under it the left translation action $(g\\cdot f)(x)=f(g^{-1}x)$ corresponds to the $G$-action on sections induced by the equivariant structure, and evaluation at the identity, $\\mathrm{ev}_1(f)=f(1)$, is a $B$-equivariant linear functional onto the fibre $\\mathbb C_{-\\lambda}$ of $\\mathcal L_\\lambda$ at $eB$.",
+        "strategy": "Construct inverse maps. A section $s$ of $\\mathcal L_\\lambda$ pulls back along the projection $\\pi:G\\to X$ to a $B$-equivariant map $\\pi^*\\mathcal L_\\lambda\\to\\mathbb C$; on the total space of the associated bundle this is a regular function $f$ on $G$ with $f(gb)=\\lambda(b)f(g)$, because the gluing relation is $(gb,v)\\sim(g,\\lambda(b)^{-1}v)$ and the section is constant along the second factor. In the other direction a regular $f$ with this functional equation descends to a section: the local trivializations supplied by [[lem-semisimple-flag-torsor-zariski-charts]] have transition functions given exactly by the same functional equation, so the local sections $U\\mapsto[\\sigma(x),f(\\sigma(x))]$ agree on overlaps. On the left, the equivariant structure transports the fibre above $x$ to the fibre above $gx$, which on functions is the stated left translation. Evaluation at $1$ reads off the fibre at $eB$ and is $B$-equivariant because $(b\\cdot f)(1)=f(b^{-1})=\\lambda(b)^{-1}f(1)$.",
+        "deps": [
+          "def-borel-character-equivariant-line-bundle",
+          "lem-semisimple-flag-torsor-zariski-charts",
+          "lem-semisimple-borel-root-factorization",
+          "def-complex-semisimple-algebraic-group-borel-and-flag-variety",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joshua Ng (Hoi Hei Jan Sum), The Borel-Weil-Bott Theorem (Chicago REU 2015)",
+              "url": "https://math.uchicago.edu/~may/REU2015/REUPapers/Ng.pdf",
+              "locator": "Sections 3-6, printed pp. 6-14: Section 3 (homogeneous vector bundles and local triviality), Section 4 (induced representations, Frobenius reciprocity), Section 5 (Borel-Weil theorem 5.3, Example 5.5 for SL2), Section 6 (Pluecker embedding)"
+            },
+            {
+              "title": "Xiong Rui, Borel-Weil-Bott (Lecture 1)",
+              "url": "https://cubicbear.github.io/doc/BorelWeil.pdf",
+              "locator": "Lecture 1, printed pp. 2-7: 1.5-1.8 (characters, associated line bundles, Borel-Weil via the G-bimodule decomposition), 1.14-1.19 (rank-one shift and induction, dot action), 1.22 (Euler-character/Weyl formula check)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-left-translation-makes-line-bundle-cohomology-a-g-module",
+        "kind": "proposition",
+        "title": "The cohomology of a Borel-character line bundle is a rational G-module",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). In the setting of [[lem-sections-of-an-associated-line-bundle-as-equivariant-functions]], the $G$-equivariant structure of $\\mathcal L_\\lambda$ induces for every $i\\ge0$ a natural linear action of $G$ on $H^i(X,\\mathcal L_\\lambda)$; for $i=0$ it is the left translation action on the function model, and for every $G$-equivariant isomorphism $\\phi:\\mathcal L_\\lambda\\to\\mathcal L_\\mu$ the induced maps $H^i(\\phi)$ are $G$-equivariant. Each $H^i(X,\\mathcal L_\\lambda)$ is a finite-dimensional rational $G$-module, meaning that its action homomorphism $G\\to\\operatorname{GL}(H^i(X,\\mathcal{L}_\\lambda))$ is a morphism of algebraic groups, and hence differentiates to a finite-dimensional $\\mathfrak g$-module. On $H^0(X,\\mathcal L_\\lambda)$ the action is left translation $(g\\cdot f)(g')=f(g^{-1}g')$ in the function model. The canonical isomorphisms $\\mathcal L_\\lambda\\otimes\\mathcal L_\\mu\\cong\\mathcal L_{\\lambda+\\mu}$ and $\\mathcal L_\\lambda^\\vee\\cong\\mathcal L_{-\\lambda}$ of [[def-borel-character-equivariant-line-bundle]] are $G$-equivariant.",
+        "strategy": "For each g, the bundle action gives Phi_g:L_lambda->a_g^*L_lambda and rho_i(g)=H^i(a_{g^{-1}}^*Phi_g) composed with pullback by a_{g^{-1}}; the corrected cocycle proves the left action and recovers left translation on H^0. To show rationality, use A(g,x)=(g,g^{-1}x) on GxX and its induced line-bundle map. A finite affine cover of projective X and its product cover compute the cohomology as O(G) tensor H^i(X,L_lambda) by the published Cech comparison and affine quasi-coherent module equivalence. The universal action gives an O(G)-linear endomorphism of this module, so its matrix coefficients are regular; the action law makes it an algebraic representation. Proper coherent cohomology gives finite dimensionality, and the tensor/dual bundle maps are equivariant.",
+        "deps": [
+          "lem-sections-of-an-associated-line-bundle-as-equivariant-functions",
+          "def-borel-character-equivariant-line-bundle",
+          "lem-semisimple-projective-orbit-flag-quotients",
+          "thm-semisimple-flag-variety-smooth-projective",
+          "cor-projective-cohomology-finite-dimensional-field",
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-cech-computes-qc-cohomology-separated-scheme-affine-cover",
+          "thm-affine-quasi-coherent-equivalence",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joshua Ng (Hoi Hei Jan Sum), The Borel-Weil-Bott Theorem (Chicago REU 2015)",
+              "url": "https://math.uchicago.edu/~may/REU2015/REUPapers/Ng.pdf",
+              "locator": "Sections 3-6, printed pp. 6-14: Section 3 (homogeneous vector bundles and local triviality), Section 4 (induced representations, Frobenius reciprocity), Section 5 (Borel-Weil theorem 5.3, Example 5.5 for SL2), Section 6 (Pluecker embedding)"
+            },
+            {
+              "title": "Xiong Rui, Borel-Weil-Bott (Lecture 1)",
+              "url": "https://cubicbear.github.io/doc/BorelWeil.pdf",
+              "locator": "Lecture 1, printed pp. 2-7: 1.5-1.8 (characters, associated line bundles, Borel-Weil via the G-bimodule decomposition), 1.14-1.19 (rank-one shift and induction, dot action), 1.22 (Euler-character/Weyl formula check)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-a-nonzero-dominant-section-is-determined-on-the-big-cell",
+        "kind": "lemma",
+        "title": "A $U^-$-invariant section is determined on the big cell",
+        "statement": "Assume the Axiom of Choice. Let $\\lambda\\in X^*(T)$ and let $f\\in H^0(X,\\mathcal L_\\lambda)$, regarded as a regular function on $G$ with $f(gb)=\\lambda(b)f(g)$. If $f$ is invariant under left translation by $U^-$ (equivalently, if $x\\cdot f=0$ for every $x$ in the negative nilradical $\\mathfrak n^-$), then $$f(u^-b)=\\lambda(b)f(1)\\qquad(u^-\\in U^-,\\ b\\in B).$$ Consequently $f$ is determined by its value $f(1)$, the space of left-$U^-$-invariant sections of $\\mathcal L_\\lambda$ has dimension at most $1$, and every nonzero such section spans the $T$-weight space of weight $-\\lambda$, that is $t\\cdot f=\\lambda(t)^{-1}f$ for all $t\\in T$.",
+        "strategy": "By [[lem-semisimple-opposite-borel-big-cell]] the multiplication map $U^-\\times B\\to G$ is an isomorphism onto a dense open subset $\\Omega$. A section that is fixed by $U^-$ satisfies $f(u^-b)=f(1\\cdot u^-b)=f(b)=\\lambda(b)f(1)$, since $f(u^-\\cdot 1)=f(1)$; so its values on the dense open $\\Omega$ are determined by $f(1)$. Two regular functions agreeing on a dense open subset of the irreducible variety $G$ agree everywhere, so $f$ is determined by $f(1)$; linearity gives dimension at most $1$. For the weight, compute in the function model: $(t\\cdot f)(1)=f(t^{-1})=\\lambda(t^{-1})f(1)=\\lambda(t)^{-1}f(1)$, so $t\\cdot f=\\lambda(t)^{-1}f$ because both sides are the unique $U^-$-invariant section with that value at $1$. The equivalence of $U^-$-invariance with annihilation by $\\mathfrak n^-$ is differentiation of the unipotent group action, $U^-$ being connected.",
+        "deps": [
+          "lem-sections-of-an-associated-line-bundle-as-equivariant-functions",
+          "prop-left-translation-makes-line-bundle-cohomology-a-g-module",
+          "lem-semisimple-opposite-borel-big-cell",
+          "lem-semisimple-borel-root-factorization",
+          "lem-semisimple-root-exponential-algebraic-subgroups",
+          "def-complex-semisimple-algebraic-group-borel-and-flag-variety",
+          "def-borel-character-equivariant-line-bundle",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "Joshua Ng (Hoi Hei Jan Sum), The Borel-Weil-Bott Theorem (Chicago REU 2015)",
+              "url": "https://math.uchicago.edu/~may/REU2015/REUPapers/Ng.pdf",
+              "locator": "Sections 3-6, printed pp. 6-14: Section 3 (homogeneous vector bundles and local triviality), Section 4 (induced representations, Frobenius reciprocity), Section 5 (Borel-Weil theorem 5.3, Example 5.5 for SL2), Section 6 (Pluecker embedding)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-the-borel-weil-section-extends-from-the-big-cell-to-the-flag-variety",
+        "kind": "lemma",
+        "title": "The dominant Borel-Weil section extends from the big cell",
+        "statement": "Assume the Axiom of Choice. Let $\\lambda$ be a dominant integral weight. Then there exists a regular function $v\\in\\mathcal O(G)$ with $v(gb)=\\lambda(b)v(g)$ for all $g\\in G$, $b\\in B$, and $v(1)=1$. Equivalently, $H^0(X,\\mathcal L_\\lambda)\\neq0$ for every dominant integral $\\lambda$.",
+        "strategy": "On the big cell $\\Omega=U^-B\\cong U^-\\times B$ of [[lem-semisimple-opposite-borel-big-cell]] define $v(u^-b)=\\lambda(b)$; this is a regular function on $\\Omega$ satisfying the functional equation and $v(1)=1$. View $v$ as a rational function on the affine variety $G$; by [[thm-principal-subvariety-codimension-one]] and the Bruhat decomposition of [[thm-flag-variety-bruhat-cell-decomposition]] and [[lem-semisimple-bruhat-double-cosets]], a pole divisor of $v$ is supported on the closures of the Bruhat cells of positive codimension, and it suffices to exclude poles along the codimension-one cells $\\overline{Bs_\\alpha B}$, $\\alpha$ simple; these are the only lower covers of the big cell by [[lem-bruhat-covers-are-reflection-covers]]. Fix $\\alpha$ and the rank-one subgroup $\\varphi_\\alpha:SL_2\\to G$ of [[lem-semisimple-rank-one-sl2-root-homomorphism]] with unipotent subgroups $U_{\\pm\\alpha}$ of [[lem-semisimple-root-exponential-algebraic-subgroups]]. Near the generic point of the cell $\\overline{Bs_\\alpha B}$, the pole order of $v$ is governed by the pullback of $v$ to the big cell of $SL_2$: in the coordinates $\\begin{pmatrix}a&b\\\\ c&d\\end{pmatrix}$ with $c\\ne0$, the function $\\varphi_\\alpha^*v$ equals $a^{\\langle\\lambda,\\alpha^\\vee\\rangle}$ (the big cell factors as $u^-(z)\\,b^-$ with $b^-=\\mathrm{diag}(e,e^{-1})$ and the first matrix entry $a=e$), which is regular exactly when the integer $\\langle\\lambda,\\alpha^\\vee\\rangle$ is nonnegative. Since $\\lambda$ is dominant, all these pairings are $\\ge0$, so $v$ has no pole along any irreducible component of $G\\setminus\\Omega$; a rational function on the affine variety $G$ whose pole divisor has no codimension-one component is regular. The identification of $H^0(X,\\mathcal L_\\lambda)$ with the functions satisfying the functional equation is [[lem-sections-of-an-associated-line-bundle-as-equivariant-functions]].",
+        "deps": [
+          "lem-sections-of-an-associated-line-bundle-as-equivariant-functions",
+          "lem-semisimple-opposite-borel-big-cell",
+          "lem-semisimple-bruhat-double-cosets",
+          "lem-semisimple-rank-one-sl2-root-homomorphism",
+          "def-borel-character-equivariant-line-bundle",
+          "lem-semisimple-minimal-parabolic-root-subgroup",
+          "lem-semisimple-root-exponential-algebraic-subgroups",
+          "lem-semisimple-borel-root-factorization",
+          "def-complex-semisimple-algebraic-group-borel-and-flag-variety",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "prop-weyl-length-equals-positive-root-inversion-number",
+          "def-length-and-longest-element-of-a-finite-weyl-group",
+          "thm-regular-local-ring-is-normal",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "cor-rational-function-no-poles-codimension-one-regular",
+          "def-normal-point-and-normal-variety",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "Xiong Rui, Borel-Weil-Bott (Lecture 1)",
+              "url": "https://cubicbear.github.io/doc/BorelWeil.pdf",
+              "locator": "Lecture 1, printed pp. 2-7: 1.5-1.8 (characters, associated line bundles, Borel-Weil via the G-bimodule decomposition), 1.14-1.19 (rank-one shift and induction, dot action), 1.22 (Euler-character/Weyl formula check)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-lowest-weight-space-is-the-nilradical-invariant-line",
+        "kind": "lemma",
+        "title": "The nilradical invariants of an irreducible module form its lowest weight line",
+        "statement": "Assume the Axiom of Choice. Let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra with Cartan subalgebra $\\mathfrak h$, fixed positive system, negative nilradical $\\mathfrak n^-$ and Weyl vector $\\rho$, and let $\\mu$ be a dominant integral weight. Then the space of $\\mathfrak n^-$-invariants of the finite-dimensional irreducible module $L(\\mu)$ is one-dimensional and equals its lowest weight space: $$\\dim L(\\mu)^{\\mathfrak n^-}=1,\\qquad L(\\mu)^{\\mathfrak n^-}=L(\\mu)_{w_0\\mu},$$ the lowest weight being $w_0\\mu$.",
+        "strategy": "Dualize: the pairing $L(\\mu)\\times L(\\mu)^*\\to\\mathbb C$ identifies $L(\\mu)^{\\mathfrak n^-}$ with the annihilator of $\\mathfrak n^-L(\\mu)^*$. By [[prop-highest-weight-of-the-dual-representation]] the dual $L(\\mu)^*$ is irreducible of highest weight $-w_0\\mu$, and by [[prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional]] its highest weight space is one-dimensional; a highest weight vector is killed by $\\mathfrak n^+$ and is nonzero, so $\\mathfrak n^-L(\\mu)^*$ has codimension one, spanned by all other weight spaces (weights of $L(\\mu)^*$ lie below $-w_0\\mu$ and each nonzero-weight-carrying vector can be raised by a positive root chain to the top). Hence $L(\\mu)^{\\mathfrak n^-}$ is the annihilator of a codimension-one subspace and is itself one-dimensional; its weight is the unique weight of $L(\\mu)$ killed by $\\mathfrak n^-$, namely the lowest weight $w_0\\mu$, because the lowest weight space is one-dimensional and $\\mathfrak n^-$-invariant while any other weight vector is moved by a negative simple root by [[lem-highest-weight-modules-have-weights-below-the-top-weight]] and [[def-highest-weight-vector-and-highest-weight-module]].",
+        "deps": [
+          "prop-highest-weight-of-the-dual-representation",
+          "prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional",
+          "lem-highest-weight-modules-have-weights-below-the-top-weight",
+          "def-highest-weight-vector-and-highest-weight-module",
+          "def-length-and-longest-element-of-a-finite-weyl-group",
+          "def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "prop-a-finite-dimensional-irreducible-module-is-generated-by-any-highest-weight-vector",
+          "prop-direct-sum-dual-hom-and-tensor-representations",
+          "def-weight-and-weight-space-of-a-lie-algebra-representation",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "Joshua Ng (Hoi Hei Jan Sum), The Borel-Weil-Bott Theorem (Chicago REU 2015)",
+              "url": "https://math.uchicago.edu/~may/REU2015/REUPapers/Ng.pdf",
+              "locator": "Sections 3-6, printed pp. 6-14: Section 3 (homogeneous vector bundles and local triviality), Section 4 (induced representations, Frobenius reciprocity), Section 5 (Borel-Weil theorem 5.3, Example 5.5 for SL2), Section 6 (Pluecker embedding)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-borel-weil",
+        "kind": "theorem",
+        "title": "Borel-Weil theorem",
+        "statement": "Assume the Axiom of Choice. Let $\\lambda\\in X^*(T)$. If $\\lambda$ is not dominant integral then $H^0(X,\\mathcal L_\\lambda)=0$. If $\\lambda$ is dominant integral then $H^0(X,\\mathcal L_\\lambda)\\cong L(\\lambda)^*$ as $\\mathfrak g$-modules, and $H^i(X,\\mathcal L_\\lambda)=0$ for every $i>0$.",
+        "strategy": "First compute $H^0$. By [[lem-sections-of-an-associated-line-bundle-as-equivariant-functions]] and [[prop-left-translation-makes-line-bundle-cohomology-a-g-module]] the space $V=H^0(X,\\mathcal L_\\lambda)$ is a finite-dimensional $\\mathfrak g$-module, so by [[thm-weyls-complete-reducibility-theorem]] and [[thm-highest-weight-classification-of-finite-dimensional-irreducible-representations]] it is a direct sum $V=\\bigoplus_j L(\\mu_j)$ of irreducibles with dominant integral highest weights $\\mu_j$. By [[lem-lowest-weight-space-is-the-nilradical-invariant-line]] each summand contributes a one-dimensional space of $\\mathfrak n^-$-invariants, so $\\dim V^{\\mathfrak n^-}$ equals the number of summands; [[lem-a-nonzero-dominant-section-is-determined-on-the-big-cell]] bounds this number by one, and [[lem-the-borel-weil-section-extends-from-the-big-cell-to-the-flag-variety]] shows it is exactly one when $\\lambda$ is dominant. In that case the nonzero $\\mathfrak n^-$-invariant section has $T$-weight $-\\lambda$ by the same lemma, while the lowest weight of $L(\\mu_1)$ is $w_0\\mu_1$; hence $w_0\\mu_1=-\\lambda$, that is $\\mu_1=-w_0\\lambda$, and $V\\cong L(\\mu_1)\\cong L(\\lambda)^*$. If $\\lambda$ were not dominant and $V\\neq0$, the same computation would make $\\mu_1=-w_0\\lambda$ dominant, hence also $\\lambda$ dominant because $-w_0$ permutes the simple roots, a contradiction; so $V=0$. For the higher cohomology when $\\lambda$ is dominant, apply the wall-crossing isomorphisms of [[lem-rank-one-cohomology-shifts-across-a-simple-wall]] along the chain of [[lem-a-regular-weight-has-a-unique-dominant-dot-translate]] that carries $\\lambda$ to the antidominant translate $w_0\\cdot\\lambda$: each simple reflection moves up one cohomological degree, and the chain has length $|\\Phi^+|=N$, so $H^i(X,\\mathcal L_\\lambda)\\cong H^{i+N}(X,\\mathcal L_{w_0\\cdot\\lambda})$ for all $i\\ge0$; for $i>0$ the target degree exceeds $N=\\dim X$, where the cohomology of a locally free sheaf vanishes by [[thm-serre-duality-smooth-projective-variety-locally-free-sheaves]]. The chain step is legal because a dominant weight pairs nonnegatively with every simple coroot, and the step count is $N$ by [[lem-a-regular-weight-has-a-unique-dominant-dot-translate]] applied to the regular weight $\\lambda+\\rho$ (regular for dominant $\\lambda$).",
+        "deps": [
+          "lem-sections-of-an-associated-line-bundle-as-equivariant-functions",
+          "prop-left-translation-makes-line-bundle-cohomology-a-g-module",
+          "lem-a-nonzero-dominant-section-is-determined-on-the-big-cell",
+          "lem-the-borel-weil-section-extends-from-the-big-cell-to-the-flag-variety",
+          "lem-lowest-weight-space-is-the-nilradical-invariant-line",
+          "lem-rank-one-cohomology-shifts-across-a-simple-wall",
+          "lem-a-regular-weight-has-a-unique-dominant-dot-translate",
+          "thm-weyls-complete-reducibility-theorem",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "prop-highest-weight-of-the-dual-representation",
+          "thm-serre-duality-smooth-projective-variety-locally-free-sheaves",
+          "thm-semisimple-flag-variety-smooth-projective",
+          "def-weyl-vector-rho",
+          "prop-weyl-vector-is-the-sum-of-fundamental-weights",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-dot-action-facets-and-single-wall-translation-data",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "Joshua Ng (Hoi Hei Jan Sum), The Borel-Weil-Bott Theorem (Chicago REU 2015)",
+              "url": "https://math.uchicago.edu/~may/REU2015/REUPapers/Ng.pdf",
+              "locator": "Sections 3-6, printed pp. 6-14: Section 3 (homogeneous vector bundles and local triviality), Section 4 (induced representations, Frobenius reciprocity), Section 5 (Borel-Weil theorem 5.3, Example 5.5 for SL2), Section 6 (Pluecker embedding)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-rank-one-cohomology-shifts-across-a-simple-wall",
+        "kind": "lemma",
+        "title": "Rank-one cohomology shifts across a simple wall",
+        "statement": "Assume the Axiom of Choice. Let $\\alpha$ be a simple root and $\\lambda\\in X^*(T)$, and put $n=\\langle\\lambda,\\alpha^\\vee\\rangle$. If $n\\ge-1$, then for every $i\\ge0$ there is a natural $G$-equivariant isomorphism $$H^i(X,\\mathcal L_\\lambda)\\cong H^{i+1}(X,\\mathcal L_{s_\\alpha\\cdot\\lambda}),$$ where $s_\\alpha\\cdot\\lambda=s_\\alpha(\\lambda+\\rho)-\\rho$. If $n=-1$ then $s_\\alpha\\cdot\\lambda=\\lambda$ and $H^i(X,\\mathcal L_\\lambda)=0$ for all $i\\ge0$. Consequently for every $\\lambda$: if $\\langle\\lambda,\\alpha^\\vee\\rangle\\ge-1$ the displayed isomorphism holds, while if $\\langle\\lambda,\\alpha^\\vee\\rangle\\le-1$ then $H^{i+1}(X,\\mathcal L_\\lambda)\\cong H^i(X,\\mathcal L_{s_\\alpha\\cdot\\lambda})$ for all $i\\ge0$.",
+        "strategy": "Let $f:X\\to X_\\alpha=G/P_\\alpha$ be the minimal-parabolic projection of [[thm-minimal-parabolic-flag-projection-is-p1-bundle]], a Zariski locally trivial $\\mathbb P^1$-bundle by [[lem-semisimple-minimal-parabolic-root-subgroup]]. By [[lem-flag-line-bundle-degree-on-minimal-parabolic-fibre]] the restriction of $\\mathcal L_\\lambda$ to every fibre has degree $n$, so for $n\\ge-1$ the relative shift theorem [[thm-relative-p1-line-bundle-cohomology-shift]] applies: $H^i(X,\\mathcal L_\\lambda)\\cong H^{i+1}(X,\\mathcal L_\\lambda\\otimes\\omega_{(X/X_\\alpha)}^{\\otimes(n+1)})$, with all maps natural and $G$-equivariant because all constructions are. By [[lem-minimal-parabolic-relative-canonical-line-bundle-root-weight]] the relative canonical bundle is $\\omega_{(X/X_\\alpha)}\\cong\\mathcal L_{-\\alpha}$, so $\\mathcal L_\\lambda\\otimes\\omega_{(X/X_\\alpha)}^{\\otimes(n+1)}\\cong\\mathcal L_{\\lambda-(n+1)\\alpha}=\\mathcal L_{s_\\alpha\\cdot\\lambda}$ using $s_\\alpha\\cdot\\lambda=\\lambda-(\\langle\\lambda,\\alpha^\\vee\\rangle+1)\\alpha$ and the tensor rule of [[def-borel-character-equivariant-line-bundle]]. The degenerate case is the $n=-1$ clause of [[lem-relative-projective-line-cohomology-and-apolarity]]: both sheaves in the apolarity isomorphism vanish, and the Leray spectral sequence of [[thm-leray-spectral-sequence-for-sheaf-cohomology]] gives $H^i(X,\\mathcal L_\\lambda)=0$ for all $i$. The 'consequently' direction is the same statement applied to $s_\\alpha\\cdot\\lambda$, whose coroot pairing is $-n-2$.",
+        "deps": [
+          "thm-relative-p1-line-bundle-cohomology-shift",
+          "lem-relative-projective-line-cohomology-and-apolarity",
+          "thm-leray-spectral-sequence-for-sheaf-cohomology",
+          "thm-minimal-parabolic-flag-projection-is-p1-bundle",
+          "lem-semisimple-minimal-parabolic-root-subgroup",
+          "lem-flag-line-bundle-degree-on-minimal-parabolic-fibre",
+          "lem-minimal-parabolic-relative-canonical-line-bundle-root-weight",
+          "prop-left-translation-makes-line-bundle-cohomology-a-g-module",
+          "def-borel-character-equivariant-line-bundle",
+          "def-complex-semisimple-algebraic-group-borel-and-flag-variety",
+          "thm-semisimple-flag-variety-smooth-projective",
+          "thm-serre-duality-smooth-projective-variety-locally-free-sheaves",
+          "def-dot-action-facets-and-single-wall-translation-data",
+          "def-root-reflections-and-the-weyl-group-action",
+          "prop-weyl-vector-is-the-sum-of-fundamental-weights",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "Xiong Rui, Borel-Weil-Bott (Lecture 1)",
+              "url": "https://cubicbear.github.io/doc/BorelWeil.pdf",
+              "locator": "Lecture 1, printed pp. 2-7: 1.5-1.8 (characters, associated line bundles, Borel-Weil via the G-bimodule decomposition), 1.14-1.19 (rank-one shift and induction, dot action), 1.22 (Euler-character/Weyl formula check)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-singular-dot-weights-have-zero-line-bundle-cohomology",
+        "kind": "lemma",
+        "title": "Singular dot weights have zero line-bundle cohomology",
+        "statement": "Assume the Axiom of Choice. Let $\\lambda\\in X^*(T)$ and suppose that $\\lambda+\\rho$ lies on a Weyl wall, that is $\\langle\\lambda+\\rho,\\beta^\\vee\\rangle=0$ for some root $\\beta$ (equivalently, $\\lambda+\\rho$ is not regular, so $\\lambda$ is not dot-regular). Equivalently, let $\\eta^+$ be the unique point of the $W$-orbit of $\\lambda+\\rho$ in the closed dominant chamber; then $\\langle\\eta^+,\\alpha_i^\\vee\\rangle=0$ for some simple root $\\alpha_i$. The dominant orbit point is unique even when the Weyl element carrying $\\lambda+\\rho$ to it is not. In this case $H^i(X,\\mathcal L_\\lambda)=0$ for every $i\\ge0$, so all cohomology of $\\mathcal L_\\lambda$ vanishes and $\\mathcal L_\\lambda$ is not the geometric realisation of an irreducible representation.",
+        "strategy": "Let $\\eta=\\lambda+\\rho$. While its current Weyl translate is not dominant, reflect across a simple wall with negative pairing; the negative-root count drops by one, so this reaches the unique dominant orbit point. Singularity is preserved, and the terminal dominant singular point has zero pairing with a simple coroot. The rank-one vanishing at that wall and the preceding cohomology shifts give $H^q(X,\\mathcal L_\\lambda)=0$ for $q\\ge m$, where $m$ is the initial negative-root count. For the remaining degrees, set $\\mu=-\\lambda-2\\rho$ and use the same chain for $-\\eta$: its count $m\\prime$ satisfies $m+m\\prime\\le|\\Phi^+|-1$ because at least one root pairing vanishes. Serre duality identifies each low-degree group of $\\mathcal L_\\lambda$ with a complementary group of $\\mathcal L_\\mu$ above $m\\prime$, which vanishes.",
+        "deps": [
+          "lem-rank-one-cohomology-shifts-across-a-simple-wall",
+          "lem-finite-weyl-closed-chambers-and-stabilizers",
+          "def-open-and-closed-weyl-chambers",
+          "def-weyl-vector-rho",
+          "def-dot-action-facets-and-single-wall-translation-data",
+          "def-root-reflections-and-the-weyl-group-action",
+          "prop-weyl-vector-is-the-sum-of-fundamental-weights",
+          "def-length-and-longest-element-of-a-finite-weyl-group",
+          "thm-serre-duality-smooth-projective-variety-locally-free-sheaves",
+          "lem-flag-variety-canonical-bundle-weight-minus-two-rho",
+          "def-borel-character-equivariant-line-bundle",
+          "thm-semisimple-flag-variety-smooth-projective",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "George Boxer and Vincent Pilloni, Notes on Higher Coleman Theory (Montreal 2020)",
+              "url": "https://www.imo.universite-paris-saclay.fr/~vincent.pilloni/montrealnotes.pdf",
+              "locator": "Lecture 1, Sections 1.1.1-1.1.6, printed pp. 2-6: line bundle conventions (1.1.1), Borel-Weil-Bott theorem 1.1 and regular/singular dichotomy (1.1.2), Cousin-complex proof survey (1.1.3-1.1.5)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-a-regular-weight-has-a-unique-dominant-dot-translate",
+        "kind": "lemma",
+        "title": "Regular weights have a unique dominant dot translate and monotone wall-crossing chains",
+        "statement": "Let $\\lambda\\in X^*(T)$ with $\\mu=\\lambda+\\rho$ regular, and put $N(\\mu)=\\#\\{\\alpha\\in\\Phi^+:\\langle\\mu,\\alpha^\\vee\\rangle<0\\}$. Then: (i) there is a unique $w\\in W$ with $w\\mu$ dominant, equivalently a unique $w$ with $w\\cdot\\lambda$ dominant, and $N(\\mu)=\\ell(w)$; (ii) if $\\alpha$ is simple with $\\langle\\mu,\\alpha^\\vee\\rangle<0$ then $N(s_\\alpha\\mu)=N(\\mu)-1$, while if $\\langle\\mu,\\alpha^\\vee\\rangle>0$ then $N(s_\\alpha\\mu)=N(\\mu)+1$; (iii) consequently there is a reduced expression $w=s_{i_1}\\cdots s_{i_{\\ell}}$ with $\\ell=N(\\mu)$ such that the partial products $w_j=s_{i_j}\\cdots s_{i_1}$ satisfy $N(w_j\\mu)=N(\\mu)-j$ and $w_j\\mu$ is regular for every $j$, and there is a reduced expression $w_0=s_{i_1}\\cdots s_{i_N}$ of the longest element such that the partial products satisfy $N(\\cdot)=j$ and end at the strictly antidominant weight $w_0\\mu$; (iv) for every $w\\in W$ one has $\\ell(w_0w)=|\\Phi^+|-\\ell(w)$. This lemma is choice-free.",
+        "strategy": "(i) A regular weight lies in a unique open chamber, and W acts simply transitively on open chambers. For the unique w with wμ in the fundamental chamber, W-invariance of pairings gives N(μ)=#{α∈Φ+: wα∈Φ−}=ℓ(w); integrality and <ρ,α_i∨>=1 transfer dominance between wμ and w·λ. (ii) A simple reflection permutes the positive roots other than its simple root, so only that root changes the sign count. (iii) Reflect a regular weight across a simple wall with negative (respectively positive) simple pairing to reduce (respectively increase) N by one; chamber uniqueness and the length count show the resulting expressions are reduced and end at the dominant or antidominant chamber. (iv) Count inversion roots of w0w to obtain ℓ(w0w)=|Φ+|−ℓ(w).",
+        "deps": [
+          "lem-finite-weyl-closed-chambers-and-stabilizers",
+          "prop-weyl-length-equals-positive-root-inversion-number",
+          "def-length-and-longest-element-of-a-finite-weyl-group",
+          "def-open-and-closed-weyl-chambers",
+          "lem-finite-weyl-positive-roots-and-simple-reflections",
+          "def-root-reflections-and-the-weyl-group-action",
+          "def-dot-action-facets-and-single-wall-translation-data",
+          "def-weyl-vector-rho",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "prop-weyl-vector-is-the-sum-of-fundamental-weights"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "George Boxer and Vincent Pilloni, Notes on Higher Coleman Theory (Montreal 2020)",
+              "url": "https://www.imo.universite-paris-saclay.fr/~vincent.pilloni/montrealnotes.pdf",
+              "locator": "Lecture 1, Sections 1.1.1-1.1.6, printed pp. 2-6: line bundle conventions (1.1.1), Borel-Weil-Bott theorem 1.1 and regular/singular dichotomy (1.1.2), Cousin-complex proof survey (1.1.3-1.1.5)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-borel-weil-bott",
+        "kind": "theorem",
+        "title": "Borel-Weil-Bott theorem",
+        "statement": "Assume the Axiom of Choice. Let $\\lambda\\in X^*(T)$. If $\\lambda+\\rho$ is not regular, then $H^i(X,\\mathcal L_\\lambda)=0$ for all $i\\ge0$. If $\\lambda+\\rho$ is regular, let $w$ be the unique element of $W$ with $w\\cdot\\lambda$ dominant; then $$H^{\\ell(w)}(X,\\mathcal L_\\lambda)\\cong L(w\\cdot\\lambda)^*,\\qquad H^i(X,\\mathcal L_\\lambda)=0\\ \\ (i\\neq\\ell(w)),$$ and these are the only nonvanishing cohomology groups of $\\mathcal L_\\lambda$.",
+        "strategy": "The singular case is [[lem-singular-dot-weights-have-zero-line-bundle-cohomology]]. In the regular case let $\\mu=\\lambda+\\rho$ and let $w$ be as in [[lem-a-regular-weight-has-a-unique-dominant-dot-translate]]; choose the reduced expression of clause (iii) and let $\\nu_j$ be the successive dot translates from $\\lambda=\\nu_0$ to $w\\cdot\\lambda=\\nu_{\\ell(w)}$, crossing the simple wall $\\alpha_{j+1}$ from the negative side, that is $\\langle\\nu_j+\\rho,\\alpha_{j+1}^\\vee\\rangle<0$. Then $\\langle\\nu_{j+1},\\alpha_{j+1}^\\vee\\rangle=-\\langle\\nu_j,\\alpha_{j+1}^\\vee\\rangle-2\\ge0\\ge-1$, so the $n\\ge-1$ clause of [[lem-rank-one-cohomology-shifts-across-a-simple-wall]] applies to $\\nu_{j+1}$ and gives the natural isomorphisms $H^i(X,\\mathcal L_{\\nu_{j+1}})\\cong H^{i+1}(X,\\mathcal L_{\\nu_j})$, equivalently $H^{i+1}(X,\\mathcal L_{\\nu_j})\\cong H^i(X,\\mathcal L_{\\nu_{j+1}})$, for all $i\\ge0$. Composing the $\\ell(w)$ isomorphisms yields $H^{i+\\ell(w)}(X,\\mathcal L_\\lambda)\\cong H^i(X,\\mathcal L_{w\\cdot\\lambda})$ for all $i\\ge0$. Since $w\\cdot\\lambda$ is dominant integral, [[thm-borel-weil]] gives $H^0(X,\\mathcal L_{w\\cdot\\lambda})\\cong L(w\\cdot\\lambda)^*$ and $H^i(X,\\mathcal L_{w\\cdot\\lambda})=0$ for $i>0$. Hence $H^{\\ell(w)}(X,\\mathcal L_\\lambda)\\cong L(w\\cdot\\lambda)^*$ and all other degrees vanish. The computation $s_\\alpha\\cdot\\nu=\\nu-(\\langle\\nu,\\alpha^\\vee\\rangle+1)\\alpha$ also shows that the shifts agree with the dot action, so the result depends only on $w$.",
+        "deps": [
+          "lem-singular-dot-weights-have-zero-line-bundle-cohomology",
+          "lem-rank-one-cohomology-shifts-across-a-simple-wall",
+          "lem-a-regular-weight-has-a-unique-dominant-dot-translate",
+          "thm-borel-weil",
+          "thm-serre-duality-smooth-projective-variety-locally-free-sheaves",
+          "lem-flag-variety-canonical-bundle-weight-minus-two-rho",
+          "def-borel-character-equivariant-line-bundle",
+          "def-dot-action-facets-and-single-wall-translation-data",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-length-and-longest-element-of-a-finite-weyl-group",
+          "prop-highest-weight-of-the-dual-representation",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "George Boxer and Vincent Pilloni, Notes on Higher Coleman Theory (Montreal 2020)",
+              "url": "https://www.imo.universite-paris-saclay.fr/~vincent.pilloni/montrealnotes.pdf",
+              "locator": "Lecture 1, Sections 1.1.1-1.1.6, printed pp. 2-6: line bundle conventions (1.1.1), Borel-Weil-Bott theorem 1.1 and regular/singular dichotomy (1.1.2), Cousin-complex proof survey (1.1.3-1.1.5)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "prop-borel-weil-bott-is-compatible-with-serre-duality",
+        "kind": "proposition",
+        "title": "Borel-Weil-Bott is compatible with Serre duality",
+        "statement": "Assume the Axiom of Choice. Let $\\lambda\\in X^*(T)$ and put $\\mu=-\\lambda-2\\rho$, so that $\\mathcal L_\\lambda^\\vee\\otimes K_X\\cong\\mathcal L_\\mu$ by [[lem-flag-variety-canonical-bundle-weight-minus-two-rho]]. Then: (i) $\\lambda+\\rho$ is regular if and only if $\\mu+\\rho=-(\\lambda+\\rho)$ is regular, and if $\\lambda+\\rho$ is regular with Weyl element $w$ (so $w(\\lambda+\\rho)$ is dominant) then the Weyl element of $\\mu$ is $u=w_0w$, with $\\ell(u)=N-\\ell(w)$, $N=|\\Phi^+|$; (ii) for regular $\\lambda$ the Serre pairing $H^i(X,\\mathcal L_\\lambda)^\\vee\\cong H^{N-i}(X,\\mathcal L_\\mu)$ at $i=\\ell(w)$ identifies $H^{\\ell(w)}(X,\\mathcal L_\\lambda)^\\vee$ with $H^{N-\\ell(w)}(X,\\mathcal L_\\mu)\\cong L(w\\cdot\\lambda)$; and the Borel-Weil-Bott descriptions $H^{\\ell(w)}(X,\\mathcal L_\\lambda)\\cong L(w\\cdot\\lambda)^*$ and $H^{\\ell(u)}(X,\\mathcal L_\\mu)\\cong L(u\\cdot\\mu)^*\\cong L(w\\cdot\\lambda)$ match under this pairing; (iii) if $\\lambda+\\rho$ is singular then all cohomology groups of both $\\mathcal L_\\lambda$ and $\\mathcal L_\\mu$ vanish.",
+        "strategy": "(i) is immediate from $\\mu+\\rho=-(\\lambda+\\rho)$: regularity is $\\pm$-invariant, and $u(\\mu+\\rho)=-w_0w(\\lambda+\\rho)$ is dominant because $w(\\lambda+\\rho)$ is dominant; uniqueness of the Weyl element comes from [[lem-a-regular-weight-has-a-unique-dominant-dot-translate]], and $\\ell(w_0w)=N-\\ell(w)$ is clause (iv) of that lemma. (ii) On the $w$-side, [[thm-borel-weil-bott]] gives $H^{\\ell(w)}(X,\\mathcal L_\\lambda)\\cong L(w\\cdot\\lambda)^*$ and on the $\\mu$-side, since $u\\cdot\\mu=u(\\mu+\\rho)-\\rho=-w_0w(\\lambda+\\rho)-\\rho=-w_0(w\\cdot\\lambda)$, it gives $H^{N-\\ell(w)}(X,\\mathcal L_\\mu)\\cong L(u\\cdot\\mu)^*=L(-w_0(w\\cdot\\lambda))^*$, and $L(-w_0\\nu)^*\\cong L(\\nu)$ by [[prop-highest-weight-of-the-dual-representation]] applied twice. Serre duality is [[thm-serre-duality-smooth-projective-variety-locally-free-sheaves]] for the locally free sheaf $\\mathcal L_\\lambda$ with $\\mathcal L_\\lambda^\\vee\\otimes\\omega_X\\cong\\mathcal L_{-\\lambda-2\\rho}$. (iii) The singular condition is preserved by $\\nu\\mapsto-\\nu$ by (i), and both vanishing statements are [[thm-borel-weil-bott]].",
+        "deps": [
+          "thm-borel-weil-bott",
+          "lem-a-regular-weight-has-a-unique-dominant-dot-translate",
+          "thm-serre-duality-smooth-projective-variety-locally-free-sheaves",
+          "lem-flag-variety-canonical-bundle-weight-minus-two-rho",
+          "def-borel-character-equivariant-line-bundle",
+          "prop-highest-weight-of-the-dual-representation",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "def-length-and-longest-element-of-a-finite-weyl-group",
+          "def-dot-action-facets-and-single-wall-translation-data",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "Xiong Rui, Borel-Weil-Bott (Lecture 1)",
+              "url": "https://cubicbear.github.io/doc/BorelWeil.pdf",
+              "locator": "Lecture 1, printed pp. 2-7: 1.5-1.8 (characters, associated line bundles, Borel-Weil via the G-bimodule decomposition), 1.14-1.19 (rank-one shift and induction, dot action), 1.22 (Euler-character/Weyl formula check)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-borel-weil-bott-euler-character-is-the-weyl-character",
+        "kind": "corollary",
+        "title": "The Borel-Weil-Bott Euler character is a signed dual Weyl character",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\mathrm{ch}$\ndenote the formal character of a finite-dimensional $\\mathfrak g$-module\n([[def-formal-character-of-a-finite-dimensional-weight-module]]) and let $A$\nbe the Weyl alternation operator with Weyl denominator\n$A(\\rho)=\\prod_{\\alpha>0}(e^{\\alpha/2}-e^{-\\alpha/2})$\n([[def-weyl-alternation-operator]], [[thm-weyl-character-formula]]). For every $\\lambda\\in X^*(T)$: if\n$\\lambda+\\rho$ is not regular then\n$\\sum_i(-1)^i\\mathrm{ch}\\,H^i(X,\\mathcal L_\\lambda)=0$; if $\\lambda+\\rho$ is\nregular with Weyl element $w$, then\n$$\\sum_i(-1)^i\\mathrm{ch}\\,H^i(X,\\mathcal L_\\lambda)=(-1)^{\\ell(w)}\\mathrm{ch}\\,L(w\\cdot\\lambda)^*=(-1)^{\\ell(w)}\\frac{A(-w_0(w\\cdot\\lambda)+\\rho)}{A(\\rho)}.$$\nEquivalently, with $\\nu=-w_0(w\\cdot\\lambda)$, which is the dominant integral\nweight of the dual module $L(w\\cdot\\lambda)^*$, the last expression is\n$(-1)^{\\ell(w)}A(\\nu+\\rho)/A(\\rho)$.",
+        "strategy": "Apply thm-borel-weil-bott and additivity of formal characters: singular shifted weights give zero; a regular shifted weight contributes only (-1)^ell(w) ch L(w dot lambda)^*. The dominant integral highest weight of this dual is nu=-w0(w dot lambda). Apply thm-weyl-character-formula at nu to get (-1)^ell(w) A(nu+rho)/A(rho). The denominator identity comes from that theorem; the half-root product follows from rho being half the sum of positive roots. Weyl invariance is not used to remove the dual.",
+        "deps": [
+          "thm-borel-weil-bott",
+          "def-formal-character-of-a-finite-dimensional-weight-module",
+          "prop-formal-characters-are-additive-and-multiplicative",
+          "def-weyl-alternation-operator",
+          "thm-weyl-character-formula",
+          "prop-highest-weight-of-the-dual-representation",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Xiong Rui, Borel-Weil-Bott (Lecture 1)",
+              "url": "https://cubicbear.github.io/doc/BorelWeil.pdf",
+              "locator": "Lecture 1, printed pp. 2-7: 1.5-1.8 (characters, associated line bundles, Borel-Weil via the G-bimodule decomposition), 1.14-1.19 (rank-one shift and induction, dot action), 1.22 (Euler-character/Weyl formula check)"
+            },
+            {
+              "title": "Joshua Ng (Hoi Hei Jan Sum), The Borel-Weil-Bott Theorem (Chicago REU 2015)",
+              "url": "https://math.uchicago.edu/~may/REU2015/REUPapers/Ng.pdf",
+              "locator": "Sections 3-6, printed pp. 6-14: Section 3 (homogeneous vector bundles and local triviality), Section 4 (induced representations, Frobenius reciprocity), Section 5 (Borel-Weil theorem 5.3, Example 5.5 for SL2), Section 6 (Pluecker embedding)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 510.018,
+    "id": "borel-weil-and-borel-weil-bott-examples",
+    "kind": "B",
+    "category": "lie-theory",
+    "title": "Borel Weil and Borel Weil Bott — Examples",
+    "companion": "borel-weil-and-borel-weil-bott",
+    "requires": [
+      "borel-weil-and-borel-weil-bott"
+    ],
+    "items": [
+      {
+        "id": "ex-the-sl2-singular-weight-has-no-cohomology",
+        "kind": "example",
+        "title": "The sl2 singular weight has no cohomology",
+        "statement": "Assume the Axiom of Choice. For $G=SL_2(\\mathbb C)$ the weight $\\lambda=-\\rho=-\\omega_1$ has $\\lambda+\\rho=0$ on the Weyl wall, and $\\mathcal L_{-\\omega_1}\\cong\\mathcal O(-1)$ on $X\\cong\\mathbb P^1$. All cohomology of $\\mathcal L_{-\\omega_1}$ vanishes: $H^0(X,\\mathcal L_{-\\omega_1})=H^1(X,\\mathcal L_{-\\omega_1})=0$. More generally the wall-crossing isomorphism $H^i(X,\\mathcal L_{-\\omega_1})\\cong H^{i+1}(X,\\mathcal L_{-\\omega_1})$ of [[lem-rank-one-cohomology-shifts-across-a-simple-wall]] together with the vanishing above degree $1$ forces every cohomology group to vanish.",
+        "strategy": "Compute the pairing: $\\langle-\\omega_1,\\alpha^\\vee\\rangle=-1$, so $s\\cdot(-\\omega_1)=-\\omega_1$ and $\\lambda+\\rho=0$; by [[thm-serre-duality-smooth-projective-variety-locally-free-sheaves]] (or [[ex-cohomology-o-d-projective-line-all-d]]) $h^0=h^1=0$ for the twist $-1$. The consistency argument: [[lem-rank-one-cohomology-shifts-across-a-simple-wall]] gives a natural isomorphism $H^i\\cong H^{i+1}$ for all $i\\ge0$; since $H^i=0$ for $i>1=\\dim X$ by the same Serre-duality item, descending from $i=1$ gives $H^1\\cong H^2=0$ and then $H^0\\cong H^1=0$. This is the sharp boundary value $n=-1$ of the rank-one shift and the smallest instance of [[lem-singular-dot-weights-have-zero-line-bundle-cohomology]].",
+        "deps": [
+          "lem-rank-one-cohomology-shifts-across-a-simple-wall",
+          "lem-singular-dot-weights-have-zero-line-bundle-cohomology",
+          "thm-borel-weil-bott",
+          "thm-minimal-parabolic-flag-projection-is-p1-bundle",
+          "lem-semisimple-minimal-parabolic-root-subgroup",
+          "lem-flag-line-bundle-degree-on-minimal-parabolic-fibre",
+          "def-projective-line-two-affine-cover-and-twisting-sheaf",
+          "thm-cohomology-projective-space-twisting-sheaves",
+          "thm-serre-duality-smooth-projective-variety-locally-free-sheaves",
+          "def-borel-character-equivariant-line-bundle",
+          "def-fundamental-weights-for-a-chosen-simple-root-system",
+          "def-weyl-vector-rho",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "Xiong Rui, Borel-Weil-Bott (Lecture 1)",
+              "url": "https://cubicbear.github.io/doc/BorelWeil.pdf",
+              "locator": "Lecture 1, printed pp. 2-7: 1.5-1.8 (characters, associated line bundles, Borel-Weil via the G-bimodule decomposition), 1.14-1.19 (rank-one shift and induction, dot action), 1.22 (Euler-character/Weyl formula check)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-borel-weil-bott-on-p1-for-sl2",
+        "kind": "example",
+        "title": "Borel-Weil-Bott on the projective line for SL2",
+        "statement": "Assume the Axiom of Choice. Let $G=SL_2(\\mathbb C)$ with upper triangular Borel $B$ and flag variety $X=G/B\\cong\\mathbb P^1$, and for $m\\in\\mathbb Z$ let $\\mathcal L_{m\\omega_1}=G\\times^B\\mathbb C_{-m\\omega_1}\\cong\\mathcal O(m)$ be the line bundles of [[ex-sl2-flag-variety-line-bundles]]. Then, with $L(m\\omega_1)$ the irreducible $\\mathfrak{sl}_2$-module of highest weight $m\\omega_1$: (i) for $m\\ge0$, $H^0(X,\\mathcal L_{m\\omega_1})\\cong L(m\\omega_1)^*$ and $H^1(X,\\mathcal L_{m\\omega_1})=0$; (ii) for $m\\le-2$, $H^1(X,\\mathcal L_{m\\omega_1})\\cong L((-m-2)\\omega_1)^*$ and $H^0(X,\\mathcal L_{m\\omega_1})=0$; (iii) for $m=-1$, $H^0(X,\\mathcal L_{-\\omega_1})=H^1(X,\\mathcal L_{-\\omega_1})=0$. The Borel-Weil-Bott degree is $0$ for $m\\ge0$, $1$ for $m\\le-2$, and the weight $m\\omega_1$ is singular exactly for $m=-1$.",
+        "strategy": "In rank one $\\rho=\\omega_1$, so $\\lambda+\\rho=(m+1)\\omega_1$ is regular exactly for $m\\ne-1$, and for $m\\ge0$ the Weyl element is $1$ while for $m\\le-2$ it is $s$ with $s\\cdot(m\\omega_1)=-(m+2)\\omega_1$. Apply [[thm-borel-weil-bott]] and use the identification with twists: (i) and (ii) are then the classical table $\\dim H^0(\\mathcal O(m))=\\max(m+1,0)$, $\\dim H^1(\\mathcal O(m))=\\max(-m-1,0)$ of [[ex-cohomology-o-d-projective-line-all-d]] together with $\\dim L(k\\omega_1)=k+1$; (iii) is [[ex-the-sl2-singular-weight-has-no-cohomology]]. The line-bundle identifications are those proved in [[ex-sl2-flag-variety-line-bundles]].",
+        "deps": [
+          "thm-borel-weil-bott",
+          "ex-the-sl2-singular-weight-has-no-cohomology",
+          "thm-minimal-parabolic-flag-projection-is-p1-bundle",
+          "lem-semisimple-minimal-parabolic-root-subgroup",
+          "lem-flag-line-bundle-degree-on-minimal-parabolic-fibre",
+          "def-projective-line-two-affine-cover-and-twisting-sheaf",
+          "thm-cohomology-projective-space-twisting-sheaves",
+          "thm-weyl-dimension-formula",
+          "def-borel-character-equivariant-line-bundle",
+          "def-special-linear-lie-algebra-sl-two",
+          "def-fundamental-weights-for-a-chosen-simple-root-system",
+          "def-weyl-vector-rho",
+          "def-length-and-longest-element-of-a-finite-weyl-group",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "Joshua Ng (Hoi Hei Jan Sum), The Borel-Weil-Bott Theorem (Chicago REU 2015)",
+              "url": "https://math.uchicago.edu/~may/REU2015/REUPapers/Ng.pdf",
+              "locator": "Sections 3-6, printed pp. 6-14: Section 3 (homogeneous vector bundles and local triviality), Section 4 (induced representations, Frobenius reciprocity), Section 5 (Borel-Weil theorem 5.3, Example 5.5 for SL2), Section 6 (Pluecker embedding)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-an-sl3-weight-with-cohomology-in-degree-one",
+        "kind": "example",
+        "title": "An sl3 weight with cohomology in degree one",
+        "statement": "Assume the Axiom of Choice. Let $G=SL_3(\\mathbb C)$ with standard Borel, simple roots $\\alpha_1,\\alpha_2$, fundamental weights $\\omega_1,\\omega_2$ and $\\rho=\\omega_1+\\omega_2$, and put $\\lambda=s_1\\cdot\\rho=\\rho-2\\alpha_1=-3\\omega_1+3\\omega_2$. Then $\\lambda+\\rho=s_1(2\\rho)$ is regular with Weyl element $w=s_1$ and $s_1\\cdot\\lambda=\\rho$, so [[thm-borel-weil-bott]] gives $H^1(X,\\mathcal L_\\lambda)\\cong L(\\rho)^*$ and $H^i(X,\\mathcal L_\\lambda)=0$ for $i\\neq1$. Since $L(\\rho)$ is the eight-dimensional adjoint representation of $\\mathfrak{sl}_3$, $H^1$ is eight-dimensional and the Euler-characteristic formula reads $\\mathrm{ch}\\,H^0-\\mathrm{ch}\\,H^1=-\\mathrm{ch}\\,L(\\rho)$.",
+        "strategy": "Compute in the $A_2$ root data: $\\rho=\\omega_1+\\omega_2$ is strictly dominant ($\\langle\\rho,\\alpha_i^\\vee\\rangle=1$), so $2\\rho$ is regular and $s_1(2\\rho)$ is again regular; $\\lambda=s_1\\cdot\\rho$ satisfies $s_1\\cdot\\lambda=\\rho$, and $\\ell(s_1)=1$. The Borel-Weil-Bott conclusion is then the statement of [[thm-borel-weil-bott]] at this weight, and the dimension is that of [[ex-the-eight-dimensional-adjoint-representation-of-sl-three]]; the dual $L(\\rho)^*$ has the same dimension and is isomorphic to $L(\\rho)$ because the adjoint representation is self-dual. The Euler-characteristic form is [[cor-borel-weil-bott-euler-character-is-the-weyl-character]].",
+        "deps": [
+          "thm-borel-weil-bott",
+          "cor-borel-weil-bott-euler-character-is-the-weyl-character",
+          "thm-weyl-dimension-formula",
+          "prop-highest-weight-of-the-dual-representation",
+          "def-length-and-longest-element-of-a-finite-weyl-group",
+          "thm-highest-weight-classification-of-finite-dimensional-irreducible-representations",
+          "prop-weyl-vector-is-the-sum-of-fundamental-weights",
+          "def-root-reflections-and-the-weyl-group-action",
+          "def-classical-complex-matrix-lie-algebras",
+          "prop-root-systems-of-the-classical-complex-lie-algebras",
+          "def-fundamental-weights-for-a-chosen-simple-root-system",
+          "def-weyl-vector-rho",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "Xiong Rui, Borel-Weil-Bott (Lecture 1)",
+              "url": "https://cubicbear.github.io/doc/BorelWeil.pdf",
+              "locator": "Lecture 1, printed pp. 2-7: 1.5-1.8 (characters, associated line bundles, Borel-Weil via the G-bimodule decomposition), 1.14-1.19 (rank-one shift and induction, dot action), 1.22 (Euler-character/Weyl formula check)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-the-top-degree-bwb-case-and-serre-duality",
+        "kind": "example",
+        "title": "The top-degree Borel-Weil-Bott case and Serre duality",
+        "statement": "Assume the Axiom of Choice. Let $G=SL_3(\\mathbb C)$ with $\\rho=\\omega_1+\\omega_2$, let $N=3=|\\Phi^+|$ and put $\\lambda=w_0\\cdot\\rho=-3\\rho$, so that $\\lambda+\\rho=-2\\rho$ is regular with Weyl element $w_0$ and $w_0\\cdot\\lambda=\\rho$. Then [[thm-borel-weil-bott]] gives $$H^3(X,\\mathcal L_{-3\\rho})\\cong L(\\rho)^*,\\qquad H^i(X,\\mathcal L_{-3\\rho})=0\\ (i\\neq3),$$ and the Serre pairing $$H^3(X,\\mathcal L_{-3\\rho})\\times H^0(X,\\mathcal L_{\\rho})\\longrightarrow H^3(X,K_X)\\cong\\mathbb C$$ is perfect; both sides are eight-dimensional. This is the $w=w_0$, top-degree case of [[prop-borel-weil-bott-is-compatible-with-serre-duality]] with $\\mu=-\\lambda-2\\rho=\\rho$ and $u=w_0w_0=1$.",
+        "strategy": "Since $\\rho$ is strictly dominant, $w_0\\rho=-\\rho$ and $\\lambda=w_0\\cdot\\rho=w_0(2\\rho)-\\rho=-3\\rho$; then $\\lambda+\\rho=-2\\rho$, $w_0(\\lambda+\\rho)=2\\rho$ is dominant, and $w_0\\cdot\\lambda=w_0(-2\\rho)-\\rho=2\\rho-\\rho=\\rho$, so the Weyl element is $w_0$ with $\\ell(w_0)=3=N$; apply [[thm-borel-weil-bott]]. For the pairing, $\\mu=-\\lambda-2\\rho=3\\rho-2\\rho=\\rho$ and [[lem-flag-variety-canonical-bundle-weight-minus-two-rho]] identifies $\\mathcal L_{-3\\rho}^\\vee\\otimes K_X\\cong\\mathcal L_{3\\rho-2\\rho}=\\mathcal L_\\rho$; [[thm-serre-duality-smooth-projective-variety-locally-free-sheaves]] gives the perfect pairing and [[prop-borel-weil-bott-is-compatible-with-serre-duality]] identifies both factors; the dimension is that of the adjoint module [[ex-the-eight-dimensional-adjoint-representation-of-sl-three]].",
+        "deps": [
+          "thm-borel-weil-bott",
+          "prop-borel-weil-bott-is-compatible-with-serre-duality",
+          "lem-flag-variety-canonical-bundle-weight-minus-two-rho",
+          "thm-serre-duality-smooth-projective-variety-locally-free-sheaves",
+          "thm-weyl-dimension-formula",
+          "prop-weyl-vector-is-the-sum-of-fundamental-weights",
+          "def-classical-complex-matrix-lie-algebras",
+          "prop-root-systems-of-the-classical-complex-lie-algebras",
+          "def-fundamental-weights-for-a-chosen-simple-root-system",
+          "def-weyl-vector-rho",
+          "def-length-and-longest-element-of-a-finite-weyl-group",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem",
+              "url": "https://www.math.harvard.edu/~lurie/papers/bwb.pdf",
+              "locator": "Complete note, pp. 1-3: Theorem 1 (equivariant line bundles), Theorem 2 (Borel-Weil with the big-cell extension and SL2 reduction), Theorem 3 (rank-one P1 shift), Lemma 4 and Theorem 5 (Borel-Weil-Bott and the Serre-duality finish)"
+            },
+            {
+              "title": "George Boxer and Vincent Pilloni, Notes on Higher Coleman Theory (Montreal 2020)",
+              "url": "https://www.imo.universite-paris-saclay.fr/~vincent.pilloni/montrealnotes.pdf",
+              "locator": "Lecture 1, Sections 1.1.1-1.1.6, printed pp. 2-6: line bundle conventions (1.1.1), Borel-Weil-Bott theorem 1.1 and regular/singular dichotomy (1.1.2), Cousin-complex proof survey (1.1.3-1.1.5)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-changing-the-line-bundle-sign-dualizes-the-borel-weil-answer",
+        "kind": "counterexample",
+        "title": "Changing the line-bundle sign changes the Borel-Weil section space",
+        "statement": "Assume the Axiom of Choice. For G=SL_2(C) and an integer m>0, the library bundle L_(m omega_1) is O(m), whereas the opposite fibre-character convention gives L_(-m omega_1)=O(-m). Their H0 spaces have dimensions m+1 and 0 respectively. The sign change dualizes the line bundle; it does not dualize the space of sections.",
+        "strategy": "Use def-borel-character-equivariant-line-bundle to identify the opposite convention with L_(-lambda), and lem-flag-line-bundle-degree-on-minimal-parabolic-fibre to identify the rank-one twists. thm-cohomology-projective-space-twisting-sheaves gives H0(O(-m))=0 for m>0; thm-borel-weil gives the nonzero dual irreducible module for L_(m omega_1). No higher-cohomology vanishing for O(-m) is asserted.",
+        "deps": [
+          "thm-borel-weil",
+          "thm-minimal-parabolic-flag-projection-is-p1-bundle",
+          "lem-semisimple-minimal-parabolic-root-subgroup",
+          "lem-flag-line-bundle-degree-on-minimal-parabolic-fibre",
+          "def-projective-line-two-affine-cover-and-twisting-sheaf",
+          "thm-cohomology-projective-space-twisting-sheaves",
+          "def-borel-character-equivariant-line-bundle",
+          "def-fundamental-weights-for-a-chosen-simple-root-system",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joshua Ng (Hoi Hei Jan Sum), The Borel-Weil-Bott Theorem (Chicago REU 2015)",
+              "url": "https://math.uchicago.edu/~may/REU2015/REUPapers/Ng.pdf",
+              "locator": "Sections 3-6, printed pp. 6-14: Section 3 (homogeneous vector bundles and local triviality), Section 4 (induced representations, Frobenius reciprocity), Section 5 (Borel-Weil theorem 5.3, Example 5.5 for SL2), Section 6 (Pluecker embedding)"
+            },
+            {
+              "title": "Xiong Rui, Borel-Weil-Bott (Lecture 1)",
+              "url": "https://cubicbear.github.io/doc/BorelWeil.pdf",
+              "locator": "Lecture 1, printed pp. 2-7: 1.5-1.8 (characters, associated line bundles, Borel-Weil via the G-bimodule decomposition), 1.14-1.19 (rank-one shift and induction, dot action), 1.22 (Euler-character/Weyl formula check)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  }
+]

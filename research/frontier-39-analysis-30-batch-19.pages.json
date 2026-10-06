@@ -1,0 +1,1574 @@
+[
+  {
+    "order": 458.047,
+    "id": "hamilton-jacobi-equations-and-viscosity-solutions",
+    "kind": "A",
+    "category": "pde",
+    "title": "Hamilton Jacobi Equations and Viscosity Solutions",
+    "companion": "hamilton-jacobi-equations-and-viscosity-solutions-examples",
+    "requires": [
+      "convex-and-semicontinuous-functions-on-rn",
+      "density-separability-and-convolution-in-lp",
+      "smooth-partitions-of-unity-and-exhaustions"
+    ],
+    "items": [
+      {
+        "id": "def-hamilton-jacobi-cauchy-problem",
+        "kind": "definition",
+        "title": "The Hamilton--Jacobi Cauchy problem and its classical solutions",
+        "statement": "Let $n\\ge1$, let $O\\subseteq\\mathbb R^n$ be nonempty and open\n([[def-metric-topology]]), let $T>0$, and let\n$H:O\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous\n([[def-metric-continuity]]). Write\n$$Z:=O\\times(0,T),\\qquad \\overline Z:=\\overline O\\times[0,T],\\qquad \\Gamma:=(O\\times\\{0\\})\\cup(\\partial O\\times[0,T])$$\nfor the open space--time cylinder, its closure in $\\mathbb R^{n+1}$, and the\nparabolic boundary. Given a continuous $u_0:O\\to\\mathbb R$, the\n**Hamilton--Jacobi Cauchy problem** is\n$$u_t+H(x,t,Du)=0\\ \\text{in }Z,\\qquad u=u_0\\ \\text{on }O\\times\\{0\\},$$\nwhere $Du$ denotes the spatial gradient and $u_t$ the time derivative of the\nunknown function ([[def-directional-and-partial-derivatives]],\n[[def-total-derivative-in-euclidean-space]]).\n\nA **classical solution** of this problem is a function\n$u\\in C^0(\\overline Z)\\cap C^1(Z)$\n([[def-ck-and-multi-index-notation-in-several-variables]]) with\n$u(x,0)=u_0(x)$ for every $x\\in O$ and\n$$u_t(x,t)+H(x,t,Du(x,t))=0\\qquad\\text{for every }(x,t)\\in Z .$$\nThe continuity requirement $u\\in C^0(\\overline Z)$ ensures continuous attainment of the initial datum and also continuity on\nthe lateral and terminal faces; no condition on the lateral face\n$\\partial O\\times[0,T]$ is imposed unless it is stated explicitly.\n\n**Stationary specialization.** Suppose that $H$ does not depend on $t$ and\nthat $v\\in C^1(O)$ satisfies $H(x,Dv(x))=0$ for every $x\\in O$; such a $v$ is\ncalled a **classical solution of the stationary Hamilton--Jacobi equation**\n$H(x,Dv)=0$. If in addition $v$ extends continuously to $\\overline O$, then\n$u(x,t):=v(x)$ is a classical solution of the Cauchy problem with datum\n$u_0:=v|_O$, because $u\\in C^0(\\overline Z)\\cap C^1(Z)$ and\n$u_t\\equiv0$ on $Z$.",
+        "deps": [
+          "def-metric-topology",
+          "def-metric-continuity",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives"
+        ],
+        "strategy": "Definition and notational contract; no proof. The item fixes (i) the open cylinder $Z=O\\times(0,T)$, its closure and its parabolic boundary, (ii) the initial face $O\\times\\{0\\}$ on which the datum is read, (iii) the Hamiltonian domain $O\\times[0,T]\\times\\mathbb R^n$ and its continuity, and (iv) the regularity class $C^0(\\overline Z)\\cap C^1(Z)$ of a classical solution, so that 'the initial datum is attained' means continuous attainment and not a mere pointwise boundary value. The stationary specialization is recorded so that the later convex-duality section can refer to the stationary equation without redefining its solution class. No choice principle occurs. S: [TR] Chapter 1 (1.1)--(1.6), printed pp. 9--13, and Chapter 2 (2.15), printed p. 64; [CIL] (0.1)--(0.3) and Section 8, printed pp. 3--5 and 49--50.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1: Cauchy problem (C), printed p. 9; stationary problem (S_lambda), printed p. 10; first-order Cauchy equation (1.1), printed p. 13. The closure regularity conventions are fixed locally."
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 8, parabolic setting (8.1)--(8.4), printed pp. 49--50; closure regularity is fixed locally."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-upper-and-lower-semicontinuous-envelopes",
+        "kind": "definition",
+        "title": "Upper and lower semicontinuous envelopes by local limsup and liminf",
+        "statement": "Let $A\\subseteq\\mathbb R^m$ be nonempty\n([[def-metric-topology]]) and let $u:A\\to\\mathbb R$. For $x\\in A$ and $r>0$\nput\n$$M_r(x):=\\sup\\{u(y):y\\in A,\\ |y-x|\\le r\\},\\qquad m_r(x):=\\inf\\{u(y):y\\in A,\\ |y-x|\\le r\\},$$\nthe supremum and infimum being taken in\n$\\overline{\\mathbb R}=\\mathbb R\\cup\\{\\pm\\infty\\}$\n([[def-extended-reals]], [[def-infimum]], [[lem-extended-reals-complete]]).\n\nThe **upper semicontinuous envelope** of $u$ is\n$$u^*(x):=\\inf_{r>0}M_r(x)=\\lim_{r\\downarrow0}\\ \\sup_{\\substack{y\\in A\\\\ |y-x|\\le r}}u(y),$$\nand the **lower semicontinuous envelope** of $u$ is\n$$u_*(x):=\\sup_{r>0}m_r(x)=\\lim_{r\\downarrow0}\\ \\inf_{\\substack{y\\in A\\\\ |y-x|\\le r}}u(y),$$\nboth with values in $\\overline{\\mathbb R}$.",
+        "deps": [
+          "def-semicontinuity-on-euclidean-subsets",
+          "def-extended-reals",
+          "def-metric-topology",
+          "def-infimum",
+          "lem-extended-reals-complete"
+        ],
+        "strategy": "Definition and notational contract; no proof. The two envelopes are defined by monotone limits of the local supremum $M_r$ and local infimum $m_r$, so no regularity of $u$ enters and no choice is needed: the limits are the values of monotone sequences in $\\overline{\\mathbb R}$ indexed by $r=1/k$. Boundedness of $u$ is recorded as the hypothesis under which the envelopes are real-valued. S: [CIL] Section 4, the display preceding Theorem 4.1, printed p. 22; [TR] Chapter 1 Section 8, the definition of semicontinuous envelopes used in Perron's method, printed p. 33.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 4, upper and lower semicontinuous envelopes, the display before Theorem 4.1, printed p. 22"
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 8, envelope notation in Perron's method, printed pp. 33--34"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-envelopes-are-the-least-semicontinuous-majorants",
+        "kind": "lemma",
+        "title": "The envelopes are the least upper and greatest lower semicontinuous functions",
+        "statement": "Let $A\\subseteq\\mathbb R^m$ be nonempty and let $u:A\\to\\mathbb R$ be bounded,\nwith envelopes $u^*,u_*$ as in\n[[def-upper-and-lower-semicontinuous-envelopes]]. Then $u^*$ is upper\nsemicontinuous on $A$, $u_*$ is lower semicontinuous on $A$, and\n$u_*\\le u\\le u^*$ pointwise. Moreover: (1) $u^*$ is the least upper\nsemicontinuous function $w:A\\to\\overline{\\mathbb R}$ with $w\\ge u$ pointwise,\nand $u^*=u$ if and only if $u$ is upper semicontinuous; (2) $u_*$ is the\ngreatest lower semicontinuous function $w:A\\to\\overline{\\mathbb R}$ with\n$w\\le u$ pointwise, and $u_*=u$ if and only if $u$ is lower semicontinuous;\n(3) $(u^*)^*=u^*$ and $(u_*)_*=u_*$. No choice principle is used.",
+        "deps": [
+          "def-upper-and-lower-semicontinuous-envelopes",
+          "def-semicontinuity-on-euclidean-subsets",
+          "def-infimum",
+          "lem-sup-epsilon",
+          "def-metric-topology"
+        ],
+        "strategy": "Upper semicontinuity of $u^*$: fix $x\\in A$ and $\\varepsilon>0$; by the definition of $u^*(x)$ as an infimum over $r$ there is $\\rho>0$ with $M_\\rho(x)\\le u^*(x)+\\varepsilon$, and every $z$ with $|z-x|<\\rho$ satisfies $M_{\\rho-|z-x|}(z)\\le M_\\rho(x)$, hence $u^*(z)\\le u^*(x)+\\varepsilon$ whenever $|z-x|$ is small: $u^*$ is upper semicontinuous (and $u\\ge u_*$, $u\\le u^*$ follow from $u(x)\\le M_r(x)$ and $m_r(x)\\le u(x)$). For (1): if $w$ is upper semicontinuous with $w\\ge u$ then for every $z$ near $x$ one has $w(z)\\ge u(z)$ and, passing to the local supremum against $w$'s own upper semicontinuity, $u^*(x)\\le w(x)$; so $u^*\\le w$ and $u^*$ is the least such majorant. Conversely, if $u$ is upper semicontinuous and $u^*>u$ at some $x$, choose $y_k\\in A$ with $y_k\\to x$ and $u(y_k)\\to u^*(x)>u(x)$, contradicting $u(x)\\ge\\limsup_{y\\to x}u(y)$; the proof for $u_*$ is the mirror image. Part (3) follows from (1) applied to the upper semicontinuous function $u^*$. The same computation shows along the way that the local-limsup envelope is itself upper semicontinuous, so no separate regularity hypothesis is needed. P: monotone localisation; the argument uses only the definitions and the least-majorant property, no compactness and no choice. S: [CIL] Section 4, the display before Theorem 4.1 and its use in the proof of Lemma 4.2, printed pp. 22--24; [TR] Chapter 1 Section 8, the upper-envelope computation in the proof of Lemma 1.25, printed pp. 33--34.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 4, the display before Theorem 4.1 and Lemma 4.2, printed pp. 22--24"
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 8, the upper-envelope computation in the proof of Lemma 1.25, printed pp. 33--34"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-viscosity-subsolution-and-supersolution",
+        "kind": "definition",
+        "title": "Viscosity subsolutions and supersolutions of a first-order equation and of the Cauchy problem",
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be nonempty open with coordinates\n$(x,t)\\in\\mathbb R^n\\times\\mathbb R$, and let\n$H:U\\times\\mathbb R^n\\to\\mathbb R$ be continuous. A function $u:U\\to\\mathbb R$\nthat is upper semicontinuous on $U$\n([[def-semicontinuity-on-euclidean-subsets]]) is a **viscosity subsolution**\nof $u_t+H(x,t,Du)=0$ in $U$ if for every $\\phi\\in C^1(U)$\n([[def-ck-and-multi-index-notation-in-several-variables]]) and every point\n$z_0\\in U$ at which $u-\\phi$ has a local maximum,\n$$\\phi_t(z_0)+H(z_0,D\\phi(z_0))\\le0 .$$\nA function $v:U\\to\\mathbb R$ that is lower semicontinuous on $U$ is a\n**viscosity supersolution** if for every $\\phi\\in C^1(U)$ and every point\n$z_0\\in U$ at which $v-\\phi$ has a local minimum,\n$$\\phi_t(z_0)+H(z_0,D\\phi(z_0))\\ge0 .$$\nA **viscosity solution** of the equation in $U$ is a function that is both a\nviscosity subsolution and a viscosity supersolution.\n\n**Cauchy problem.** Let $Z=O\\times(0,T)$ and\n$H:O\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be as in\n[[def-hamilton-jacobi-cauchy-problem]], and let $u_0:O\\to\\mathbb R$. A\n**viscosity subsolution of the Cauchy problem** is an upper semicontinuous\n$u:Z\\to\\mathbb R$ satisfying the subsolution inequality at every $z_0\\in Z$\ntogether with the relaxed initial condition\n$$\\limsup_{\\substack{(y,s)\\to(x,0)\\\\ s>0,\\ y\\in O}}u(y,s)\\le u_0(x)\\qquad\\text{for every }x\\in O ;$$\na **viscosity supersolution** $v$ satisfies the supersolution inequality at\nevery $z_0\\in Z$ together with\n$$\\liminf_{\\substack{(y,s)\\to(x,0)\\\\ s>0,\\ y\\in O}}v(y,s)\\ge u_0(x)\\qquad\\text{for every }x\\in O .$$\nA **viscosity solution of the Cauchy problem** is a function that is both a\nsubsolution and a supersolution of the Cauchy problem; a continuous solution\nof the Cauchy problem satisfies the initial data pointwise, $u(x,0)=u_0(x)$\nfor every $x\\in O$.",
+        "deps": [
+          "def-hamilton-jacobi-cauchy-problem",
+          "def-upper-and-lower-semicontinuous-envelopes",
+          "def-semicontinuity-on-euclidean-subsets",
+          "def-total-derivative-in-euclidean-space",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "strategy": "Definition and notational contract; no proof. Three points are fixed deliberately. First, the test is a local maximum of $u-\\phi$ (equivalently $u$ is touched from above by $\\phi$) for the subsolution and a local minimum for the supersolution; reversing the extremum reverses the direction of the inequality, which is exactly what makes the sign error visible (see [[cex-reversing-the-contact-extremum-reverses-the-viscosity-inequality]]). Second, the subsolution must be upper semicontinuous and the supersolution lower semicontinuous, because those are the classes in which the required maxima and minima of $u-\\phi$ exist; no continuity of $u$ is assumed and no a.e. class is used. Third, the Cauchy initial condition is the relaxed limsup/liminf condition, which for continuous functions reduces to the pointwise equality $u(x,0)=u_0(x)$. S: [CIL] Definition 2.2, Remarks 2.3 and (8.1)--(8.4), printed pp. 10--11 and 49--50; [TR] Chapter 1 equations (1.4)--(1.6) and (1.10), printed pp. 15--22; [BHJ] Section 3, definitions of viscosity sub- and supersolution, printed pp. 10--12.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Definition 2.2, Remarks 2.3, and the parabolic counterpart (8.1)--(8.4), printed pp. 10--11 and 49--50"
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Sections 1--2, equations (1.4)--(1.6) and (1.10), printed pp. 15--22"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 3, viscosity solutions: the test-function definition and its immediate consequences, printed pp. 10--12"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation",
+        "kind": "lemma",
+        "title": "Strictification of a viscosity test function by a quartic perturbation",
+        "statement": "Let $U\\subseteq\\mathbb R^m$ be open, let $v:U\\to\\mathbb R$, let\n$\\phi\\in C^1(U)$, suppose $v-\\phi$ has a local maximum at $z_0\\in U$, and fix\n$r>0$ with $\\overline B(z_0,r)\\subseteq U$ and\n$v(z)-\\phi(z)\\le v(z_0)-\\phi(z_0)$ for every $z\\in\\overline B(z_0,r)$. For\n$\\varepsilon>0$ define\n$$\\phi_\\varepsilon(z):=\\phi(z)+\\varepsilon|z-z_0|^4 .$$\nThen $\\phi_\\varepsilon\\in C^1(U)$ agrees with $\\phi$ to first order at the\ncontact,\n$$\\phi_\\varepsilon(z_0)=\\phi(z_0),\\qquad D\\phi_\\varepsilon(z_0)=D\\phi(z_0),$$\nand $v-\\phi_\\varepsilon$ has a strict maximum over $\\overline B(z_0,r)$ at\n$z_0$:\n$$v(z)-\\phi_\\varepsilon(z)<v(z_0)-\\phi_\\varepsilon(z_0)\\qquad\\text{for every }z\\in\\overline B(z_0,r)\\setminus\\{z_0\\} .$$\nThe same statement with $\\phi_\\varepsilon:=\\phi-\\varepsilon|z-z_0|^4$\nstrictifies a local minimum contact of a test function, and the first jet at\nthe contact is again unchanged. No choice principle is used.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ],
+        "strategy": "Direct computation. For $z\\in\\overline B(z_0,r)$ the local-maximum hypothesis gives $v(z)-\\phi(z)\\le v(z_0)-\\phi(z_0)$, and the quartic term is nonnegative with $|z-z_0|^4=0$ only at $z=z_0$; hence $v(z)-\\phi_\\varepsilon(z)\\le v(z_0)-\\phi(z_0)-\\varepsilon|z-z_0|^4$ with strict inequality for $z\\ne z_0$, which is the claimed strict maximum (the compact ball is needed only to have the phrase 'strict maximum over $\\overline B(z_0,r)$' well posed and is supplied by [[cor-euclidean-closed-balls-and-spheres-are-compact]] together with the extreme-value theorem for semicontinuous functions; the pointwise inequality itself needs only the hypothesis). The first jet at $z_0$ is unchanged because $z\\mapsto|z-z_0|^4$ has value $0$ and gradient $0$ at $z_0$; the minimum case is the same computation with the signs reversed. This is the standard strictification device that lets every nonstrict contact be treated as a strict one without changing the jet, so the perturbation never affects the viscosity inequalities. P: an explicit perturbation whose first jet vanishes at the contact; no choice. S: [CIL] Section 2 and Theorem 3.2, the standard strict-contact reduction, printed pp. 11--17; [BHJ] Section 3, strict maxima in the subsolution test, printed pp. 10--12.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 2 and the contact arguments of Section 3, printed pp. 11--17"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 2, Remark 2.1, printed p. 8 (quadratic strictification); the quartic calculation is proved here."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-discontinuous-viscosity-solution",
+        "kind": "definition",
+        "title": "Discontinuous viscosity solutions through the two envelopes",
+        "statement": "Let $n\\ge1$, let $O\\subseteq\\mathbb R^n$ be open, $T>0$, let\n$H:O\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous, $Z=O\\times(0,T)$,\nand let $u_0:O\\to\\mathbb R$. A locally bounded function $u:Z\\to\\mathbb R$ is a\n**viscosity solution of the Cauchy problem** if its upper semicontinuous\nenvelope $u^*$ is a viscosity subsolution and its lower semicontinuous\nenvelope $u_*$ is a viscosity supersolution in the sense of\n[[def-viscosity-subsolution-and-supersolution]], each carrying the initial\ndatum $u_0$ in the relaxed limsup/liminf sense. Both envelopes are taken over\n$Z$ as a subset of $\\mathbb R^{n+1}$\n([[def-upper-and-lower-semicontinuous-envelopes]]); the subsolution\ninequalities are imposed at every point of $Z$ and the relaxed initial\nconditions at every point of $O$.\n\nA **continuous viscosity solution** is a viscosity solution $u$ that is\ncontinuous on $Z$. For such a $u$ one has $u^*=u_*=u$\n(apply [[lem-envelopes-are-the-least-semicontinuous-majorants]] on a small\nclosed ball about each interior point, where continuity makes $u$ bounded).\nThe relaxed initial conditions give a continuous extension to the initial\nface with value $u_0$, so the definition\nspecializes to the one for continuous test functions. In the opposite\ndirection, the envelope formulation is forced whenever $u$ is not continuous:\nit keeps the subsolution inequality attached to $u^*$ and the supersolution\ninequality to $u_*$, and never asks a single discontinuous function to satisfy\nboth.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-upper-and-lower-semicontinuous-envelopes",
+          "lem-envelopes-are-the-least-semicontinuous-majorants",
+          "def-hamilton-jacobi-cauchy-problem"
+        ],
+        "strategy": "Definition and notational contract; no proof. The point of the envelope formulation is that a merely locally bounded $u$ need not be upper or lower semicontinuous, so the equation cannot be imposed on $u$ directly; instead $u^*$ carries the subsolution condition and $u_*$ the supersolution condition, and $u$ is a solution exactly when both envelopes solve their respective one-sided problems. For continuous $u$ the two roles coincide. This is the definition used for the half-relaxed limits of the later stability theorems and for the comparison and Perron statements, where the objects produced by envelopes are not known to be continuous in advance. S: [CIL] Section 4 and the construction in the proof of Theorem 4.1, printed pp. 22--25; [TR] Chapter 1 Section 8 and Remark 1.31, printed pp. 33--37; [BHJ] Section 4, stability properties, printed pp. 12--14.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 4 and the construction in the proof of Theorem 4.1, printed pp. 22--25"
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 8 and Remark 1.31, printed pp. 33--38"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-viscosity-testing-by-first-order-jets",
+        "kind": "lemma",
+        "title": "Viscosity testing by first-order jets, and closure of the jet inequality",
+        "statement": "Let $U\\subseteq\\mathbb R^{n+1}$ be open and let\n$H:U\\times\\mathbb R^n\\to\\mathbb R$ be continuous. For $w:U\\to\\mathbb R$ and\n$z_0\\in U$ define the first-order superjet and subjet\n$$D^+w(z_0):=\\{p=(p_x,p_t)\\in\\mathbb R^n\\times\\mathbb R:\\ w(z)\\le w(z_0)+\\langle p,z-z_0\\rangle+o(|z-z_0|)\\ \\ (z\\to z_0)\\},$$\n$$D^-w(z_0):=-D^+(-w)(z_0)=\\{p:\\ w(z)\\ge w(z_0)+\\langle p,z-z_0\\rangle+o(|z-z_0|)\\ (z\\to z_0)\\}.$$\nThen: (1) an upper semicontinuous $u:U\\to\\mathbb R$ is a viscosity subsolution\nof $u_t+H(x,t,Du)=0$ in $U$ if and only if\n$$p_t+H(z_0,p_x)\\le0\\qquad\\text{for all }z_0\\in U\\text{ and all }p\\in D^+u(z_0);$$\n(2) a lower semicontinuous $v$ is a viscosity supersolution if and only if\n$p_t+H(z_0,p_x)\\ge0$ for all $z_0\\in U$ and all $p\\in D^-v(z_0)$; (3) if $u$\nis such a subsolution, $z_k\\to z_0$ in $U$ with $u(z_k)\\to u(z_0)$, and\n$p_k\\in D^+u(z_k)$ with $p_k\\to p$, then $p_t+H(z_0,p_x)\\le0$; the analogous\nclosure statement holds for supersolutions and subjets. The closure statement\ndoes not assert that $p$ itself belongs to $D^+u(z_0)$; that membership may\nfail, and it is not needed. No choice principle is used.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "def-euclidean-local-extrema-and-critical-points",
+          "thm-ftc-first-part",
+          "thm-continuous-implies-integrable",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ],
+        "strategy": "Equivalence. Suppose p lies in the superjet of u at z₀. For small h, let r(h) be the positive part of u(z₀+h)−u(z₀)−⟨p,h⟩. The superjet condition says r(h)=o(|h|). Thus μ(s):=sup_{0<|h|≤s} r(h)/|h| tends to 0 as s↓0. Fix once and for all a smooth dyadic partition of unity χⱼ on 0<r<r₀, with χⱼ supported where 2^(−j−1)≤r≤2^(−j+1) and |χⱼ′|≤C2ʲ. Set aⱼ:=μ(2^(−j+2))+2^(−j) and θ(r):=r∑ⱼaⱼχⱼ(r), with θ(0)=0. Every annulus coefficient is defined by a supremum, so no sequence of choices is used. If χⱼ(r)≠0, then μ(r)≤μ(2^(−j+2))≤aⱼ; hence θ(r)≥rμ(r)≥r(h) whenever |h|=r. The dyadic derivative bound and aⱼ→0 give θ′(r)→0, while θ(r)/r→0, so h↦θ(|h|) is C¹ at 0 with derivative 0. Therefore φ(z₀+h):=u(z₀)+⟨p,h⟩+θ(|h|) is C¹, has derivative p at z₀, and is an upper test for u there. The viscosity inequality gives p_t+H(z₀,p_x)≤0. This smooth majorant is essential: a fixed quadratic need not dominate an arbitrary o(|h|) remainder. Conversely, if u−φ has a local maximum at z₀, differentiability of φ gives Dφ(z₀) in the superjet directly. The subjet equivalence is the same argument applied to −v. For the closure assertion, apply the jet inequality at z_k and pass to the limit using z_k→z₀, p_k→p, u(z_k)→u(z₀), and continuity of H; this is the closure-of-the-inequality statement, and does not assert p is in the superjet at z₀. P: a deterministic dyadic smooth majorant of the vanishing first-order remainder, followed by continuity for closure. S: [CIL] (2.1)–(2.7), Definition 2.2, Remark 2.4 and the exercise after Remark 2.3, printed pp. 9–12; [TR] Chapter 1 Sections 1–2, one-sided differentials D±, printed pp. 15–18; [BHJ] Section 2, one-sided differentials, printed pp. 6–9.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "(2.1)--(2.7), Definition 2.2 and Remark 2.4, printed pp. 9--12"
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Sections 1--2, one-sided differentials and the test-function equivalence, printed pp. 15--18"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 2, one-sided differentials, printed pp. 6--9"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "prop-classical-solutions-are-viscosity-solutions",
+        "kind": "proposition",
+        "title": "Classical solutions are viscosity solutions and differentiable viscosity solutions solve the equation pointwise",
+        "statement": "Let $O\\subseteq\\mathbb R^n$ be open, $T>0$, let\n$H:O\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous, let\n$u_0:O\\to\\mathbb R$ be continuous, and let $Z=O\\times(0,T)$.\n(1) If $u\\in C^1(Z)\\cap C^0(\\overline Z)$ satisfies\n$u_t+H(x,t,Du)=0$ pointwise on $Z$ and $u(x,0)=u_0(x)$ on $O$ (a classical\nsolution in the sense of [[def-hamilton-jacobi-cauchy-problem]]), then $u$ is a\nviscosity solution of the Cauchy problem. (2) Conversely, if $u:Z\\to\\mathbb R$\nis a continuous viscosity solution and $u$ is differentiable at a point\n$z_0\\in Z$, then\n$$u_t(z_0)+H(z_0,Du(z_0))=0 .$$\nIn particular, a viscosity solution of class $C^1(Z)$ is a classical solution\nof the equation on $Z$ (its initial trace being part of the Cauchy-problem\nnotion). No choice principle is used.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-discontinuous-viscosity-solution",
+          "def-hamilton-jacobi-cauchy-problem",
+          "def-total-derivative-in-euclidean-space",
+          "thm-fermat-for-euclidean-local-extrema",
+          "def-directional-and-partial-derivatives",
+          "lem-viscosity-testing-by-first-order-jets"
+        ],
+        "strategy": "(1) If u is C¹ and solves the equation pointwise, then at a local maximum of u−φ Fermat’s theorem gives Dφ=Du, so the subsolution test is the pointwise equation; the supersolution case is identical at a local minimum. The initial trace is the one in [[def-hamilton-jacobi-cauchy-problem]]. (2) If u is differentiable at z₀, differentiability gives u(z₀+h)−u(z₀)−⟨Du(z₀),h⟩=o(|h|). Hence Du(z₀) belongs to both first-order jets by their definitions. Apply the two equivalences in [[lem-viscosity-testing-by-first-order-jets]] to obtain both opposite viscosity inequalities. This proves the pointwise equation without claiming that a fixed |h|² term dominates an arbitrary o(|h|) remainder. P: Fermat for a C¹ contact and the jet characterization for a merely differentiable function. S: [TR] Exercise 5 and Lemma 1.11, printed pp. 18–21; [CIL] Remark 2.3 and the discussion after Definition 2.2, printed pp. 10–11; [BHJ] Section 3, consistency of viscosity and classical solutions, printed pp. 10–12.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Exercise 5, Lemma 1.11 and Theorem 1.12, printed pp. 19--22"
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Remarks 2.3 and the equivalence of the test-function and jet formulations, printed pp. 10--11"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 3, viscosity versus classical solutions, printed pp. 10--12"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-maxima-of-subsolutions-and-minima-of-supersolutions",
+        "kind": "proposition",
+        "title": "Finite maxima of subsolutions and finite minima of supersolutions",
+        "statement": "Let $n\\ge1$ and $k\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$H:U\\times\\mathbb R^n\\to\\mathbb R$ be continuous.\n(1) If $u_1,\\dots,u_k$ are viscosity subsolutions of\n$u_t+H(x,t,Du)=0$ in $U$, then $u:=\\max(u_1,\\dots,u_k)$ is a viscosity\nsubsolution in $U$. (2) If $v_1,\\dots,v_k$ are viscosity supersolutions, then\n$v:=\\min(v_1,\\dots,v_k)$ is a viscosity supersolution in $U$. (3) For the\nCauchy problem on $Z=O\\times(0,T)$ the same statements hold when all the\nfunctions carry the same continuous initial datum $u_0$ in the relaxed sense;\nthe maximum of subsolutions then also satisfies the relaxed initial condition\nfor $u_0$. The mixed operations are not asserted: a finite minimum of\nsubsolutions and a finite maximum of supersolutions need not preserve the\ncorresponding inequality when the equation has a zero-order term.\nNo choice principle is used.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-discontinuous-viscosity-solution",
+          "def-euclidean-local-extrema-and-critical-points",
+          "def-max-min",
+          "lem-finite-set-has-max"
+        ],
+        "strategy": "At a local maximum point $z_0$ of $u-\\phi$ choose an index $i$ with $u_i(z_0)=u(z_0)$ (possible because the maximum of finitely many reals is attained at some index, [[lem-finite-set-has-max]]). Since $u_i\\le u$ pointwise, for $z$ near $z_0$ we have $u_i(z)-\\phi(z)\\le u(z)-\\phi(z)\\le u(z_0)-\\phi(z_0)=u_i(z_0)-\\phi(z_0)$, so $u_i-\\phi$ also has a local maximum at $z_0$; the subsolution inequality for $u_i$ gives $\\phi_t(z_0)+H(z_0,D\\phi(z_0))\\le0$, which is the required inequality for $u$. The supersolution statement is the mirror image with minima. The initial conditions are preserved because each $u_i$ satisfies $\\limsup u_i\\le u_0$ and a finite maximum of limsups is the limsup of the maximum. The mixed cases genuinely fail without the same index argument, and the example on the companion page shows the failure for a proper equation; no envelope or supremum over an infinite family is asserted here. P: select the active index at the contact; no choice beyond the finite selection of an index. S: [CIL] Proposition 4.1(1) and the remarks preceding Lemma 4.2, printed pp. 22--23; [TR] Chapter 1 Lemma 1.25 and its discussion of the finite case, printed pp. 33--34; [BHJ] Section 4, stability under finite maxima, printed pp. 12--14.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 4, Lemma 4.2 (supremum stability), printed pp. 23--24; the finite active-index argument is proved here."
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 8, Lemma 1.25 and the finite case, printed pp. 33--34"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": [
+          "cex-minima-of-viscosity-subsolutions-need-not-be-subsolutions"
+        ]
+      },
+      {
+        "id": "thm-stability-of-viscosity-solutions-under-local-uniform-convergence",
+        "kind": "theorem",
+        "title": "Stability of viscosity sub-, super- and solutions under locally uniform convergence",
+        "statement": "Let $O\\subseteq\\mathbb R^n$ be open, $T>0$, $Z=O\\times(0,T)$, and\n$Z_0=O\\times[0,T)$. Let\n$H_k,H:O\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous with\n$H_k\\to H$ uniformly on every compact subset as $k\\to\\infty$. For each $k$,\nlet $u_k:Z_0\\to\\mathbb R$ be continuous, with $u_k$ restricted to $Z$ a\nviscosity subsolution of $(u_k)_t+H_k(x,t,Du_k)=0$ and with\n$u_k(x,0)=u_0^{(k)}(x)$. Suppose $u_0^{(k)}\\to u_0$ locally uniformly on $O$\nand $u_k\\to u$ locally uniformly on $Z_0$. Then $u$ is a viscosity subsolution\nof $u_t+H(x,t,Du)=0$ in $Z$ and its continuous initial trace is $u_0$. The\nsame statement holds for supersolutions, and combining the two, locally\nuniform limits of viscosity solutions are viscosity solutions. The conclusion\nis insensitive to the sign of the approximation: no differentiability and no\nmonotonicity of convergence is used, only local uniformity up to the initial\nface. No choice principle is used.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-discontinuous-viscosity-solution",
+          "lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation",
+          "def-hamilton-jacobi-cauchy-problem",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "def-metric-compactness"
+        ],
+        "strategy": "For the interior equation, fix φ∈C¹(Z) and a strict local maximum of u−φ at z₀; strictify without changing Dφ(z₀) using [[lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation]]. Choose a closed ball around z₀ contained in Z. Local uniform convergence on that compact ball makes u_k−φ attain maxima at points z_k that converge to z₀; the maximum values converge to u(z₀)−φ(z₀). The subsolution inequality for u_k at z_k is φ_t(z_k)+H_k(z_k,Dφ(z_k))≤0. Pass to the limit using compact-uniform convergence of H_k and continuity of φ and H to obtain φ_t(z₀)+H(z₀,Dφ(z₀))≤0. For the initial trace, local uniform convergence on compact subsets of Z₀ includes t=0, so u(x,0)=lim_k u_k(x,0)=lim_k u₀^(k)(x)=u₀(x) locally uniformly; the relaxed initial condition follows. The same proof with lower contacts gives the supersolution result. Interior convergence on Z alone does not imply this boundary conclusion; convergence up to t=0 is the stated hypothesis. P: compact maximum localisation and passage to the limit in the test inequality. S: [TR] Theorem 1.13 and its proof, printed pp. 21–22; [CIL] Section 4, stability of viscosity solutions, printed pp. 22–23; [BHJ] Section 4, stability, printed pp. 12–14.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 4, Theorem 1.13 and its proof, printed pp. 21--22"
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 6, Lemma 6.1 and Remark 6.4, printed pp. 34--35 (half-relaxed stability and its relation to local uniform convergence)"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 4, stability, printed pp. 12--14"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-half-relaxed-limits",
+        "kind": "definition",
+        "title": "Half-relaxed limits of a locally bounded family",
+        "statement": "Let $U\\subseteq\\mathbb R^m$ be open ([[def-metric-topology]]) and let\n$(u_\\varepsilon)_{\\varepsilon\\in(0,1)}$ be a family of real-valued functions on\n$U$ that is **locally bounded**: for every compact $K\\subseteq U$ there is\n$M_K<\\infty$ with $|u_\\varepsilon(y)|\\le M_K$ for all $\\varepsilon\\in(0,1)$\nand $y\\in K$. The **upper half-relaxed limit** and the **lower half-relaxed\nlimit** of the family, computed in $\\overline{\\mathbb R}$\n([[def-extended-reals]], [[def-infimum]], [[lem-sup-epsilon]]), are\n$$\\overline u(z):=\\limsup_{\\substack{\\varepsilon\\downarrow0\\\\ U\\ni y\\to z}}u_\\varepsilon(y):=\\inf_{\\delta>0}\\ \\sup\\bigl\\{u_\\varepsilon(y):0<\\varepsilon<\\delta,\\ y\\in U,\\ |y-z|<\\delta\\bigr\\},$$\n$$\\underline u(z):=\\liminf_{\\substack{\\varepsilon\\downarrow0\\\\ U\\ni y\\to z}}u_\\varepsilon(y):=\\sup_{\\delta>0}\\ \\inf\\bigl\\{u_\\varepsilon(y):0<\\varepsilon<\\delta,\\ y\\in U,\\ |y-z|<\\delta\\bigr\\}.$$\nThe quantifiers range over the index $\\varepsilon$ and the point $y$\nsimultaneously, so the limit records the behaviour of the whole family near\n$z$, not the limit of the single family of values $(u_\\varepsilon(z))_{\\varepsilon}$;\nboth envelopes are local and depend only on the germ of the family at $z$.",
+        "deps": [
+          "def-extended-reals",
+          "def-metric-topology",
+          "def-infimum",
+          "lem-sup-epsilon",
+          "lem-envelopes-are-the-least-semicontinuous-majorants",
+          "def-countable-choice"
+        ],
+        "strategy": "Definition and notational contract; no proof. The definition makes the two features required by the stability theorems explicit. First, the limsup is over the pair $(\\varepsilon,y)$ with both quantifiers active, so a value $L$ with $L>\\underline u(z)$ must be approached by an actual sequence $(\\varepsilon_j,y_j)\\to(0,z)$; this is what makes the half-relaxed limit the correct tool when the family is only locally bounded. Second, the envelopes are computed without selecting a sequence of indices, so no countable or dependent choice is used, in contrast with subsequential compactness arguments (the plan's choice ledger records this distinction for PDE-25). Upper semicontinuity of $\\overline u$ is the same monotone-localisation computation as in [[lem-envelopes-are-the-least-semicontinuous-majorants]] applied to the family indexed by $\\delta$. S: [CIL] Section 6 and the limit notions used in Theorem 6.2, printed pp. 38--40; [TR] Chapter 1 Section 4, the locally uniform stability statement, printed pp. 21--22; [BHJ] Section 4, limits of viscosity solutions, printed pp. 12--14.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 6: equation (6.1), Lemma 6.1, Remarks 6.2--6.4 and Theorem 6.5, printed pp. 34--35; these are stability background, not the explicit sin estimate."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-half-relaxed-limit-stability-for-viscosity-solutions",
+        "kind": "theorem",
+        "title": "Half-relaxed limits of sub- and supersolutions with vanishing perturbations",
+        "statement": "Let $O\\subseteq\\mathbb R^n$ be open, $T>0$, $Z=O\\times(0,T)$, let\n$H_\\varepsilon,H:O\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous for\n$\\varepsilon\\in(0,1)$, and let $(u_\\varepsilon)$ be a locally bounded family of\nreal functions on $Z$ that are upper semicontinuous in the subsolution case.\nAssume one of the two forms of the Hamiltonian condition: (a)\n$H_\\varepsilon\\to H$ uniformly on compact subsets of\n$O\\times[0,T]\\times\\mathbb R^n$; or (b) the exact limit-inferior condition:\nfor all sequences $\\varepsilon_j\\downarrow0$, $z_j\\to z\\in Z$ and\n$p_j\\to p$ one has $\\liminf_jH_{\\varepsilon_j}(z_j,p_j)\\ge H(z,p)$. Suppose\nmoreover that for every $\\phi\\in C^1(Z)$ and every local maximum point\n$z_\\varepsilon\\in Z$ of $u_\\varepsilon-\\phi$ there holds\n$$\\phi_t(z_\\varepsilon)+H_\\varepsilon(z_\\varepsilon,D\\phi(z_\\varepsilon))\\le c_\\varepsilon(z_\\varepsilon),$$\nwhere $c_\\varepsilon:Z\\to[0,\\infty)$ is locally bounded with\n$c_\\varepsilon\\to0$ locally uniformly. Then the upper half-relaxed limit\n$\\overline u$ ([[def-half-relaxed-limits]]) is a viscosity subsolution of\n$u_t+H(x,t,Du)=0$ in $Z$. If in addition\n$u_\\varepsilon(x,0)\\le u_0^{(\\varepsilon)}(x)$ in the relaxed sense with\n$u_0^{(\\varepsilon)}\\to u_0$ locally uniformly on $O$ and the family is locally\nequicontinuous up to the initial face, then $\\overline u$ carries the initial\ndatum $u_0$ in the relaxed sense. The dual statement with $\\limsup_jH_{\\varepsilon_j}(z_j,p_j)\\le H(z,p)$,\n$\\ge-c_\\varepsilon$ and the lower half-relaxed limit holds for supersolutions.\n**Choice.** Under hypothesis (a) the proof is choice-free. Under hypothesis\n(b) it extracts a sequence of near-maximisers at the relaxed limit and\ntherefore uses Countable Choice ([[def-countable-choice]]), which is declared\nas a dependency; the extraction is the only place where the principle is\nconsumed.",
+        "deps": [
+          "def-half-relaxed-limits",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-discontinuous-viscosity-solution",
+          "lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation",
+          "def-hamilton-jacobi-cauchy-problem",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "def-metric-compactness",
+          "lem-compactness-is-intrinsic",
+          "def-countable-choice"
+        ],
+        "strategy": "Fix $\\phi\\in C^1(Z)$ and a strict local maximum of $\\overline u-\\phi$ at $z_0$; strictness is arranged by [[lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation]]. By the definition of the upper half-relaxed limit and of a strict local maximum there are sequences $\\varepsilon_j\\downarrow0$, $y_j\\to z_0$ with $u_{\\varepsilon_j}(y_j)\\to\\overline u(z_0)$. For each $j$ choose a maximum point $z_j$ of $u_{\\varepsilon_j}-\\phi$ on a fixed closed ball $\\overline B(z_0,r)$; the same localisation as in [[thm-stability-of-viscosity-solutions-under-local-uniform-convergence]] gives $z_j\\to z_0$ and $u_{\\varepsilon_j}(z_j)\\to\\overline u(z_0)$ (lower bound from the competitor $y_j$, upper bound from the definition of the relaxed limit). The assumed inequality at $z_j$ gives $\\phi_t(z_j)+H_{\\varepsilon_j}(z_j,D\\phi(z_j))\\le c_{\\varepsilon_j}(z_j)$ with $c_{\\varepsilon_j}(z_j)\\to0$; passing to the limit under condition (b), which is implied by (a), yields $\\phi_t(z_0)+H(z_0,D\\phi(z_0))\\le0$. The initial condition follows by the same argument at the initial face, where local equicontinuity upgrades the relaxed limsup of a near sequence into the limsup of the data $u_0^{(\\varepsilon)}$. The vanishing perturbation $c_\\varepsilon$ is what the vanishing-viscosity theorem needs; no subsequence is selected and no choice principle is used. P: contact localisation for the relaxed envelope, then passage to the limit. S: [CIL] Section 6, Theorems 6.1--6.2 and their proofs, printed pp. 38--42; [BHJ] Section 4, stability and limits, printed pp. 12--14; [TR] Chapter 1 Section 4, printed pp. 21--22.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 6: equation (6.1), Lemma 6.1, Remarks 6.2--6.4 and Theorem 6.5, printed pp. 34--35; these are stability background, not the explicit sin estimate."
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 4, Lemma 4.1 and Theorem 4.1, printed pp. 13--14 (uniform-stability and viscous-limit background); the half-relaxed argument is proved here."
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 4, printed pp. 21--22"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "lem-doubling-variables-maximum-localisation",
+        "kind": "lemma",
+        "title": "Doubling variables: existence, relative contacts at the maximiser and localisation",
+        "statement": "Let $n\\ge1$, $T>0$, let $u:\\mathbb R^n\\times[0,T]\\to\\mathbb R$ be bounded\nabove and upper semicontinuous, and let $v:\\mathbb R^n\\times[0,T]\\to\\mathbb R$\nbe bounded below and lower semicontinuous. Fix $\\alpha,\\rho>0$ and define\n$$\\Phi(x,y,t,s):=u(x,t)-v(y,s)-\\frac{\\alpha}{2}|x-y|^2-\\frac{\\alpha}{2}|t-s|^2-\\rho\\,(|x|^2+|y|^2)$$\non $\\mathbb R^n\\times\\mathbb R^n\\times[0,T]^2$, with\n$M_{\\alpha,\\rho}:=\\sup\\Phi$. Then: (1) $M_{\\alpha,\\rho}$ is finite and\nattained, and at every maximiser $(x_\\alpha,y_\\alpha,t_\\alpha,s_\\alpha)$ the\n$C^1$ test functions\n$$\\psi_1(x,t):=\\frac{\\alpha}{2}|x-y_\\alpha|^2+\\frac{\\alpha}{2}|t-s_\\alpha|^2+\\rho|x|^2,\\qquad \\psi_2(y,s):=-\\frac{\\alpha}{2}|x_\\alpha-y|^2-\\frac{\\alpha}{2}|t_\\alpha-s|^2-\\rho|y|^2$$\nsatisfy: $u-\\psi_1$ has a local maximum at $(x_\\alpha,t_\\alpha)$ and\n$v-\\psi_2$ has a local minimum at $(y_\\alpha,s_\\alpha)$, with\n$$p_\\alpha:=D_x\\psi_1(x_\\alpha)=\\alpha(x_\\alpha-y_\\alpha)+2\\rho x_\\alpha,\\qquad q_\\alpha:=D_y\\psi_2(y_\\alpha)=\\alpha(x_\\alpha-y_\\alpha)-2\\rho y_\\alpha,\\qquad p^0_\\alpha:=\\partial_t\\psi_1(t_\\alpha)=\\partial_s\\psi_2(s_\\alpha)=\\alpha(t_\\alpha-s_\\alpha);$$\n(2) for each fixed $\\rho>0$, along any sequence of maximisers as\n$\\alpha\\to\\infty$,\n$$\\alpha\\bigl(|x_\\alpha-y_\\alpha|^2+|t_\\alpha-s_\\alpha|^2\\bigr)\\longrightarrow0,\\qquad (1+|p_\\alpha|)\\bigl(|x_\\alpha-y_\\alpha|+|t_\\alpha-s_\\alpha|\\bigr)\\longrightarrow0,\\qquad |x_\\alpha-y_\\alpha|+|t_\\alpha-s_\\alpha|\\longrightarrow0,$$\nwhile $|q_\\alpha-p_\\alpha|=2\\rho|x_\\alpha+y_\\alpha|$ is bounded by\n$2\\rho(|x_\\alpha|+|y_\\alpha|)$ and is not claimed to vanish for fixed $\\rho$;\n(3) at every maximiser\n$$\\frac{\\alpha}{2}\\bigl(|x_\\alpha-y_\\alpha|^2+|t_\\alpha-s_\\alpha|^2\\bigr)+\\rho\\bigl(|x_\\alpha|^2+|y_\\alpha|^2\\bigr)\\le\\sup u-\\inf v-M_{\\alpha,\\rho},$$\nso whenever the maximiser values $M_{\\alpha,\\rho}$ are bounded below by $m$ on\na set of parameters, the corresponding maximisers satisfy\n$\\rho(|x_\\alpha|^2+|y_\\alpha|^2)\\le\\sup u-\\inf v-m$ and\n$|q_\\alpha-p_\\alpha|\\le2\\bigl(2\\rho(\\sup u-\\inf v-m)\\bigr)^{1/2}$. No choice\nprinciple is used.",
+        "deps": [
+          "lem-viscosity-testing-by-first-order-jets",
+          "def-upper-and-lower-semicontinuous-envelopes",
+          "def-semicontinuity-on-euclidean-subsets",
+          "thm-heine-borel-rn",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "lem-sup-epsilon",
+          "def-bounded-set"
+        ],
+        "strategy": "Existence: $\\Phi$ is upper semicontinuous and bounded above by $\\sup u-\\inf v<\\infty$; the weight $-\\rho(|x|^2+|y|^2)$ tends to $-\\infty$ as $|x|+|y|\\to\\infty$, so the nonempty superlevel set $\\{\\Phi\\ge\\Phi(x_0,y_0,t_0,s_0)\\}$ is closed and bounded in $\\mathbb R^{2n}\\times[0,T]^2$, hence compact ([[thm-heine-borel-rn]]), and an upper semicontinuous function attains its maximum on a nonempty compact set ([[thm-semicontinuous-evt]]). Contacts and gradients: fixing $y=y_\\alpha$, $s=s_\\alpha$ and using that $\\Phi$ is maximal gives $u(x,t)-\\psi_1(x,t)\\le u(x_\\alpha,t_\\alpha)-\\psi_1(x_\\alpha,t_\\alpha)$ for all $(x,t)$ (the terms in $y_\\alpha,s_\\alpha$ cancel), so $u-\\psi_1$ has a local maximum at $(x_\\alpha,t_\\alpha)$; the mirror computation with $(x_\\alpha,t_\\alpha)$ fixed gives that $v-\\psi_2$ has a local minimum at $(y_\\alpha,s_\\alpha)$. The displayed $p_\\alpha,q_\\alpha,p^0_\\alpha$ are the derivatives of $\\psi_1,\\psi_2$ at the contacts. Localisation: $M_{\\alpha,\\rho}$ is nonincreasing in $\\alpha$ and bounded below by $\\Phi(0,0,0,0)$, hence converges, and evaluating $\\Phi$ with the coefficient $\\alpha/2$ at a maximiser of $\\Phi$ gives $\\frac{\\alpha}{4}(|x_\\alpha-y_\\alpha|^2+|t_\\alpha-s_\\alpha|^2)\\le M_{\\alpha/2,\\rho}-M_{\\alpha,\\rho}\\to0$; the remaining estimates follow: $|x_\\alpha-y_\\alpha|+|t_\\alpha-s_\\alpha|\\to0$, and with $|p_\\alpha|\\le\\alpha|x_\\alpha-y_\\alpha|+2\\rho|x_\\alpha|$ and $x_\\alpha$ bounded by (3), $(1+|p_\\alpha|)|x_\\alpha-y_\\alpha|\\le|x_\\alpha-y_\\alpha|+\\alpha|x_\\alpha-y_\\alpha|^2+2\\rho|x_\\alpha||x_\\alpha-y_\\alpha|\\to0$, while $|p_\\alpha||t_\\alpha-s_\\alpha|\\le\\frac{\\alpha}{2}(|x_\\alpha-y_\\alpha|^2+|t_\\alpha-s_\\alpha|^2)+2\\rho|x_\\alpha||t_\\alpha-s_\\alpha|\\to0$. Weight bound: from the definition of $M_{\\alpha,\\rho}$ and $u(x_\\alpha,t_\\alpha)\\le\\sup u$, $-v(y_\\alpha,s_\\alpha)\\le-\\inf v$, the total penalty is $u(x_\\alpha,t_\\alpha)-v(y_\\alpha,s_\\alpha)-M_{\\alpha,\\rho}\\le\\sup u-\\inf v-M_{\\alpha,\\rho}$, which is (3) and gives the stated corollaries for the ball radius and for $q_\\alpha-p_\\alpha=2\\rho(x_\\alpha+y_\\alpha)$. The two viscosity inequalities used by the comparison theorem are then obtained by applying the sub- and supersolution definitions to the contacts $\\psi_1,\\psi_2$, with strictness supplied by the terminal-time penalisation of [[lem-time-penalisation-moves-a-doubling-variables-maximum-away-from-the-terminal-boundary]]. P: coercive weight for existence, monotonicity in $\\alpha$ for localisation, and explicit $C^1$ contacts for the two tests. S: [CIL] Proposition 3.7 and Lemma 3.1, printed pp. 15--16 and 20--21, together with the parabolic doubling (8.8)--(8.10), printed pp. 51--52; [TR] Chapter 1 Section 6, Steps 1--2 of the proof of Theorem 1.19, printed pp. 27--28.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Lemma 3.1, Proposition 3.7 and the doubling scheme (8.9)--(8.10), printed pp. 15--16, 20--21 and 51--52"
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 6, proof of Theorem 1.19, Steps 1--2, printed pp. 27--28"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-time-penalisation-moves-a-doubling-variables-maximum-away-from-the-terminal-boundary",
+        "kind": "lemma",
+        "title": "Time penalisation moves a doubling-variables maximum away from the terminal boundary",
+        "statement": "Let $T>0$, $Z=\\mathbb R^n\\times(0,T)$, and let\n$H:\\mathbb R^n\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous. Suppose\n$u,v:\\mathbb R^n\\times[0,T)\\to\\mathbb R$, where $u$ is upper semicontinuous\nand bounded above, $v$ is lower semicontinuous and bounded below, and their\nrestrictions to $Z$ are respectively a viscosity subsolution and a viscosity\nsupersolution of $u_t+H(x,t,Du)=0$. For $\\eta,\\eta'>0$ put\n$\\tilde u_\\eta(x,t)=u(x,t)-\\eta/(T-t)$ and\n$\\tilde v_{\\eta'}(x,t)=v(x,t)+\\eta'/(T-t)$ for $t<T$. Then:\n(1) every $C^1$ upper contact $\\phi$ for $\\tilde u_\\eta$ at\n$z_0=(x_0,t_0)\\in Z$ satisfies\n$$\\phi_t(z_0)+H(x_0,t_0,D\\phi(z_0))\\le-\\frac{\\eta}{(T-t_0)^2}<0 ;$$\n(2) every $C^1$ lower contact $\\phi$ for $\\tilde v_{\\eta'}$ at $z_0\\in Z$\nsatisfies\n$$\\phi_t(z_0)+H(x_0,t_0,D\\phi(z_0))\\ge\\frac{\\eta'}{(T-t_0)^2}>0 ;$$\nmoreover $\\tilde u_\\eta\\to-\\infty$ and $\\tilde v_{\\eta'}\\to+\\infty$ uniformly\nin $x$ as $t\\uparrow T$; (3) for every $\\alpha,\\rho>0$, define on\n$\\mathbb R^n\\times\\mathbb R^n\\times[0,T]^2$\n$$\\Phi_{\\alpha,\\rho}(x,y,t,s)=\\tilde u_\\eta(x,t)-\\tilde v_{\\eta'}(y,s)-\\frac{\\alpha}{2}|x-y|^2-\\frac{\\alpha}{2}|t-s|^2-\\rho(|x|^2+|y|^2)$$\nwhen $t,s<T$, and set $\\Phi_{\\alpha,\\rho}=-\\infty$ when $t=T$ or $s=T$. Then\n$\\Phi_{\\alpha,\\rho}$ attains a finite maximum, and every maximiser has\n$t,s<T$. A maximum may occur on an initial face (that is, with $t=0$ or\n$s=0$). No choice principle is used.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-hamilton-jacobi-cauchy-problem",
+          "def-total-derivative-in-euclidean-space",
+          "def-semicontinuity-on-euclidean-subsets",
+          "def-extended-reals",
+          "thm-heine-borel-rn",
+          "thm-compact-iff-finite-intersection-property"
+        ],
+        "strategy": "For (1), if $\\tilde u_\\eta-\\phi$ has a local maximum at $z_0$, then $u-(\\phi+\\eta/(T-t))$ has a local maximum there. The subsolution inequality for $u$, applied to this $C^1$ test, gives $\\phi_t(z_0)+\\eta/(T-t_0)^2+H(x_0,t_0,D\\phi(z_0))\\le0$. For (2), if $\\tilde v_{\\eta'}-\\phi$ has a local minimum, then $v-(\\phi-\\eta'/(T-t))$ has a local minimum. Its time derivative is $\\phi_t-\\eta'/(T-t)^2$, so the supersolution inequality gives $\\phi_t+H\\ge\\eta'/(T-t_0)^2$. The uniform terminal limits follow from $u\\le\\sup u$ and $v\\ge\\inf v$.\nFor (3), $\\Phi_{\\alpha,\\rho}$ is upper semicontinuous on the closed time slab: at $t=0$ and $s=0$ this follows from the assumed semicontinuity of $u$ and $v$, and at a terminal face its value tends uniformly to $-\\infty$ by the bounds and the two time penalties. It is bounded above by $\\sup u-\\inf v-\\rho(|x|^2+|y|^2)$. Its value at any fixed diagonal point $(x,x,t,t)$ with $0<t<T$ is finite, so a nonempty superlevel set above a finite level is bounded in $(x,y)$, closed, and stays away from the terminal faces. Heine--Borel makes this set compact. The supremum of $\\Phi_{\\alpha,\\rho}$ on it is finite; its closed superlevel sets approaching that supremum have the finite-intersection property, so compactness gives a common point where the supremum is attained. The level is chosen below the fixed finite diagonal value, hence this is also a global maximum. The terminal faces carry value $-\\infty$, so no maximizer lies there. P: add the two explicit time-boundary penalties, then use spatial coercivity and compact superlevel sets. S: [CIL] proof of Theorem 8.2, the modification $\\tilde u=u-\\varepsilon/(T-t)$ and the dual penalty, printed p. 51; [TR] Chapter 1 Section 6, the time penalisation in the comparison proof, printed pp. 26--28.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Proof of Theorem 8.2, the strict modification $\tilde u=u-\u000barepsilon/(T-t)$ and (8.7)--(8.8), printed p. 51"
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 6, the comparison proof with the terminal-time penalisation, printed pp. 26--29"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-comparison-for-first-order-hamilton-jacobi-equations",
+        "kind": "theorem",
+        "title": "Comparison for first-order Hamilton--Jacobi equations",
+        "statement": "Comparison for first-order Hamilton--Jacobi equations, in the two settings of\nthe design. **(a) The case $O=\\mathbb R^n$.** Let $T>0$ and let\n$H:\\mathbb R^n\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous for which\nthere is $C>0$ with\n$$|H(x,t,p)-H(y,s,p)|\\le C(1+|p|)\\,(|x-y|+|t-s|),\\qquad |H(x,t,p)-H(x,t,q)|\\le C|p-q|$$\nfor all $x,y,p,q\\in\\mathbb R^n$ and $t,s\\in[0,T]$. Let $u$ be a bounded upper\nsemicontinuous viscosity subsolution and $v$ a bounded lower semicontinuous\nviscosity supersolution of the Cauchy problem in $Z=\\mathbb R^n\\times(0,T)$,\neach defined on the closed slab $\\mathbb R^n\\times[0,T)$ and satisfying the\npointwise initial inequality $u(x,0)\\le v(x,0)$ for every $x\\in\\mathbb R^n$.\nThen $u\\le v$ on $Z$. **(b) The compact-cylinder case.** Let\n$O\\subseteq\\mathbb R^n$ be bounded and open, $T>0$, and let\n$H:\\overline O\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous and\nuniformly continuous in $(x,t)$ uniformly on bounded $p$-sets: there is a\nnondecreasing modulus $\\omega:[0,\\infty)\\to[0,\\infty)$ with $\\omega(0+)=0$ such\nthat\n$$|H(x,t,p)-H(y,s,p)|\\le\\omega\\bigl((1+|p|)\\,(|x-y|+|t-s|)\\bigr)$$\nfor all $(x,t),(y,s)\\in\\overline O\\times[0,T]$ and all $p\\in\\mathbb R^n$. Let\n$u,v$ be continuous on $\\overline Z=\\overline O\\times[0,T]$, $u$ a viscosity\nsubsolution and $v$ a viscosity supersolution of $u_t+H(x,t,Du)=0$ in $Z$,\nwith $u\\le v$ on the parabolic boundary\n$\\Gamma=(O\\times\\{0\\})\\cup(\\partial O\\times[0,T])$. Then $u\\le v$ on\n$\\overline Z$. No growth hypothesis on $H$ in the momentum variable is imposed\nin this case; the modulus condition replaces it. For an $x$-independent\nautonomous Hamiltonian $H(p)$, it holds with the zero modulus. No choice\nprinciple is used.",
+        "deps": [
+          "lem-doubling-variables-maximum-localisation",
+          "lem-time-penalisation-moves-a-doubling-variables-maximum-away-from-the-terminal-boundary",
+          "lem-viscosity-testing-by-first-order-jets",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-hamilton-jacobi-cauchy-problem",
+          "def-metric-uniform-continuity",
+          "def-semicontinuity-on-euclidean-subsets",
+          "def-metric-compactness",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-compact-iff-finite-intersection-property",
+          "thm-heine-cantor-metric",
+          "lem-sup-epsilon",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ],
+        "strategy": "Assume u>v somewhere and apply the strict terminal-time penalties. In both cases, if d²=|x-y|²+|t-s|² at a maximiser, comparing the α- and α/2-penalties gives αd²≤4(M_{α/2}-M_α); monotonicity and boundedness of M_α make ΔM:=M_{α/2}-M_α→0, and δ_α:=sqrt(4ΔM/α) bounds d. In case (a), the spatial weight confines every maximiser for fixed ρ, so |q-p|≤4ρC_ρ and 2(1+|p|)d≤2δ_α+8ΔM+4ρC_ρδ_α→0, which controls the required L1 space-time distance. Upper/lower semicontinuity and the initial order exclude the initial faces uniformly by compactness; subtracting the strict contact inequalities then gives B/T²≤4C sqrt(ρK_ρ)+o_α(1). Let α→∞ and then ρ↓0 for a contradiction. In case (b), the compact cylinder and common modulus of u,v exclude the initial and lateral faces. Here p=q and 2(1+|p|)d≤2δ_α+8ΔM→0, so the modulus condition gives B/T²≤ω(2δ_α+8ΔM)→0, a contradiction. All estimates hold for every maximiser, and the compact superlevel-set/FIP arguments select none. P: strict time penalties, uniform doubling-maximum localisation, and subtraction of viscosity inequalities. S: [TR] Chapter 1 Section 6, Theorem 1.19 and its proof, printed pp. 26–29; [CIL] Theorem 8.2 and its proof, printed pp. 50–52; [BHJ] Section 5, comparison theorems, printed pp. 14–20.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 6, Theorem 1.19 and its proof, printed pp. 26--29"
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Theorem 8.2 and its proof, printed pp. 50--52"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 5, comparison theorems, printed pp. 14--20"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-uniqueness-of-bounded-uniformly-continuous-viscosity-solutions",
+        "kind": "corollary",
+        "title": "Uniqueness and sup-norm contraction for the Cauchy problem",
+        "statement": "Let $n\\ge1$, $T>0$, and let\n$H:\\mathbb R^n\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ satisfy the Lipschitz\nconditions of part (a) of\n[[thm-comparison-for-first-order-hamilton-jacobi-equations]]. (1) If $u,v$ are\nbounded viscosity solutions of the Cauchy problem in\n$Z=\\mathbb R^n\\times(0,T)$ with the same bounded continuous initial datum\n$u_0$, then $u=v$ on $Z$; in particular the classical and the Hopf--Lax\nsolutions of later sections are the unique ones in the bounded class whenever\n$H$ satisfies those conditions. (2) More generally, if $u,v$ are bounded\nviscosity solutions with initial data $u_0,v_0$, then for every $T>0$\n$$\\sup_{z\\in Z}(u-v)\\le\\max\\Bigl(0,\\ \\sup_{x\\in\\mathbb R^n}(u_0(x)-v_0(x))\\Bigr),$$\nand applying the same bound to $v-u$ gives\n$\\sup_Z|u-v|\\le\\sup_{\\mathbb R^n}|u_0-v_0|$ when the initial difference is\nbounded. In particular the solution operator is a contraction in the supremum\nnorm on the bounded initial data. No choice principle is used.",
+        "deps": [
+          "thm-comparison-for-first-order-hamilton-jacobi-equations",
+          "def-discontinuous-viscosity-solution"
+        ],
+        "strategy": "For uniqueness, use the envelope formulation of discontinuous viscosity solutions: the upper envelope of u is a bounded upper semicontinuous subsolution and the lower envelope of v is a bounded lower semicontinuous supersolution, both with the corresponding relaxed initial inequalities. Extend them at t=0 by their continuous data; the relaxed inequalities make the extensions semicontinuous on the closed slab, so comparison gives u*≤v_*. Since u≤u* and v_*≤v, this yields u≤v; exchanging u and v gives uniqueness and forces all envelopes to coincide. For general data, shift v by K=max(0,sup(u0-v0)); its lower envelope shifts by K, so comparison gives u*≤v_*+K and hence u-v≤K. Applying the same argument in the reverse order gives the sup-norm contraction. P: comparison applied to the semicontinuous envelopes, plus constant-shift invariance. S: [TR] Chapter 1 Corollary 1.20 and Section 6, printed pp. 26--29; [CIL] Section 5.B, stability with respect to data and the equation, printed pp. 34--36; [BHJ] Section 5, uniqueness consequences of comparison, printed pp. 14--20.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1, Corollary 1.20, printed pp. 26--29"
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 5.B, estimates from comparison via constant shifts, printed pp. 30--31; parabolic constant-shift estimate following Theorem 8.2, printed p. 52. The local Cauchy contraction is proved here."
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 5, uniqueness consequences of comparison, printed pp. 14--20"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-upper-semicontinuous-envelope-of-a-locally-bounded-supremum-of-subsolutions",
+        "kind": "theorem",
+        "title": "The upper envelope of a locally bounded supremum of subsolutions is a subsolution",
+        "statement": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, let\n$H:U\\times\\mathbb R^n\\to\\mathbb R$ be continuous, and let $\\mathcal F$ be a\nnonempty family of real-valued upper semicontinuous viscosity subsolutions of\n$u_t+H(x,t,Du)=0$ in $U$. Put $w(z):=\\sup_{w'\\in\\mathcal F}w'(z)$ for $z\\in U$\nand assume that $w$ is locally bounded above: $w(z)<\\infty$ for every $z\\in U$\nand $w$ is bounded above on every compact subset of $U$. Then the upper\nsemicontinuous envelope $w^*$\n([[def-upper-and-lower-semicontinuous-envelopes]]) is a viscosity subsolution\nof $u_t+H(x,t,Du)=0$ in $U$. No choice principle is used.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-upper-and-lower-semicontinuous-envelopes",
+          "lem-viscosity-testing-by-first-order-jets",
+          "lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "cor-euclidean-closed-balls-and-spheres-are-compact"
+        ],
+        "strategy": "Let $\\phi\\in C^1(U)$ and let $w^*-\\phi$ have a local maximum at $z_0$; strictify it with [[lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation]] and fix a closed ball $\\overline B(z_0,r)\\subseteq U$ on which the strict maximum is attained at $z_0$. From the definition of $w^*$ as the envelope of the supremum there are $w_j\\in\\mathcal F$ and points $y_j\\to z_0$ with $w_j(y_j)\\to w^*(z_0)$ (take a sequence approaching the supremum at points near $z_0$ and pass to the limit using local boundedness). For each $j$ let $z_j$ be a point of $\\overline B(z_0,r)$ maximising $w_j-\\psi$ with $\\psi:=\\phi+2\\delta|z-z_0|^2$, $\\delta>0$ fixed; such a point exists because $w_j-\\psi$ is upper semicontinuous on the compact ball. Comparing with the competitor $y_j$ gives $\\liminf_j w_j(z_j)\\ge w^*(z_0)$, while the defining property of the envelope and the strict contact at $z_0$ give $\\limsup_j w_j(z_j)\\le w^*(z_0)$; hence $z_j\\to z_0$ and $w_j(z_j)\\to w^*(z_0)$. Since $z_j$ is a maximum of $w_j-\\psi$, we have $D\\psi(z_j)\\in D^+w_j(z_j)$, so the subsolution inequality for $w_j$ reads $\\psi_t(z_j)+H(z_j,D\\psi(z_j))\\le0$; passing to the limit and then letting $\\delta\\downarrow0$ turns $D\\psi(z_j)=D\\phi(z_j)+4\\delta(z_j-z_0)$ into $D\\phi(z_0)$ and gives $\\phi_t(z_0)+H(z_0,D\\phi(z_0))\\le0$. This is the load-bearing half of Perron's method; it uses no choice because the near-maximisers are selected by an explicit maximisation over a compact set, not by an axiom. P: near-maximiser selection plus strict test perturbation. S: [CIL] Lemma 4.2 and Proposition 4.3, printed pp. 23--24; [TR] Chapter 1 Section 8, Lemma 1.25 and its upper-envelope discussion, printed pp. 33--34.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Lemma 4.2 and Proposition 4.3, printed pp. 23--24"
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 8, Lemma 1.25 and its upper-envelope discussion, printed pp. 33--34"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-perron-envelope-failure-of-the-supersolution-test-allows-a-local-bump",
+        "kind": "lemma",
+        "title": "Failure of the supersolution test for the lower envelope allows a local bump",
+        "statement": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, let\n$H:U\\times\\mathbb R^n\\to\\mathbb R$ be continuous, and let $w:U\\to\\mathbb R$ be\nan upper semicontinuous viscosity subsolution of $u_t+H(x,t,Du)=0$ in $U$.\nSuppose the lower semicontinuous envelope $w_*$ fails the supersolution test\nat $\\hat z\\in U$ in the following precise sense: $w_*(\\hat z)\\in\\mathbb R$ and there is $\\phi\\in C^1(U)$ such that\n$w_*-\\phi$ has a local minimum at $\\hat z$ and\n$$\\phi_t(\\hat z)+H(\\hat z,D\\phi(\\hat z))<0 .$$\nThen for every sufficiently small $\\kappa>0$ there is a viscosity subsolution\n$W_\\kappa$ of the same equation in $U$ with\n$$W_\\kappa\\ge w\\ \\text{on }U,\\qquad \\sup_U(W_\\kappa-w)>0,\\qquad W_\\kappa=w\\ \\text{on }\\{z\\in U:|z-\\hat z|\\ge\\kappa\\}.$$\nMoreover $W_\\kappa$ can be taken to be $\\max(w,\\chi)$ on a small ball around\n$\\hat z$ and $w$ outside it, where $\\chi$ is a classical subsolution with\n$\\chi(\\hat z)=w_*(\\hat z)+\\delta$ for some $\\delta>0$. No choice principle is\nused.",
+        "deps": [
+          "prop-maxima-of-subsolutions-and-minima-of-supersolutions",
+          "lem-viscosity-testing-by-first-order-jets",
+          "lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation",
+          "prop-classical-solutions-are-viscosity-solutions",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-upper-and-lower-semicontinuous-envelopes",
+          "def-total-derivative-in-euclidean-space",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "cor-euclidean-closed-balls-and-spheres-are-compact"
+        ],
+        "strategy": "Strictify the lower contact without changing its first jet: for small γ>0 put φ̃(z)=φ(z)−γ|z−ẑ|⁴. Since the contact is a local minimum of w_*−φ, on a sufficiently small closed ball B̄(ẑ,r) one has w_*(z)−φ̃(z)≥m+γ|z−ẑ|⁴, where m=w_*(ẑ)−φ(ẑ). By continuity of H and the unchanged first jet, shrink r so φ̃_t+H(z,Dφ̃)≤−c/2 throughout the ball; thus every vertical translate of φ̃ is a classical subsolution there. Choose 0<δ<γ(r/2)⁴ and define χ=φ̃+m+δ. At ẑ, χ(ẑ)=w_*(ẑ)+δ. On the annulus r/2≤|z−ẑ|≤r, the strict quartic gap gives w_*(z)−χ(z)≥γ|z−ẑ|⁴−δ>0, so χ<w there. By the definition of the lower envelope, points z_j→ẑ exist with w(z_j)→w_*(ẑ); for large j, χ(z_j)>w(z_j). Hence W=max(w,χ) in the ball and W=w outside is a well-defined strict raise that agrees with w near the outer boundary. It is a subsolution because χ and w are subsolutions and finite maxima preserve subsolutions ([[prop-maxima-of-subsolutions-and-minima-of-supersolutions]]). Choosing the ball inside the requested support proves the claim. The annulus separation comes from strict quartic contact; a non-strict quadratic lower bound alone would not separate χ from w. P: a strict test-function bump plus the finite-maximum rule. S: [CIL] Lemma 4.4 and its proof, printed pp. 24–25; [TR] Chapter 1 Section 8, the supersolution half of the Perron proof, printed pp. 34–37.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Lemma 4.4 and its proof, printed pp. 24--25"
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 8, the supersolution half of the Perron proof, printed pp. 34--37"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-viscosity-initial-trace-is-enforced-by-upper-and-lower-barriers",
+        "kind": "lemma",
+        "title": "Time-space barriers enforce the initial trace for the Cauchy problem",
+        "statement": "Let $n\\ge1$, $T>0$, $O\\subseteq\\mathbb R^n$ open, $Z=O\\times(0,T)$, let\n$H:O\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous, and let\n$u_0\\in C^1(O)$ have bounded gradient. Assume\n$C_0:=\\sup_{x\\in O,\\,0\\le t\\le T}|H(x,t,Du_0(x))|<\\infty$. Define\n$\\phi_\\pm(x,t):=u_0(x)\\pm C_0t$. Then: (1) $\\phi_-$ is a classical\nsubsolution and $\\phi_+$ a classical supersolution in $Z$, each with initial\ndatum $u_0$; (2) if $w:Z\\to\\mathbb R$ is locally bounded with\n$\\phi_-\\le w\\le\\phi_+$ on $Z$, then for every $x\\in O$ the relaxed limits\nsatisfy\n$$\\liminf_{\\substack{(y,s)\\to(x,0)\\\\ s>0}}w(y,s)\\ge u_0(x)\\ge\\limsup_{\\substack{(y,s)\\to(x,0)\\\\ s>0}}w(y,s),$$\nso both equal $u_0(x)$; (3) consequently $w$ satisfies the relaxed initial\ncondition for the Cauchy problem in both directions, and any continuous\nextension of $w$ to the initial face takes the value $u_0$ pointwise. No\nchoice principle is used.",
+        "deps": [
+          "def-hamilton-jacobi-cauchy-problem",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-fermat-for-euclidean-local-extrema"
+        ],
+        "strategy": "For (1), at every (x,t)∈Z the time derivative of φ− is −C₀ and that of φ+ is C₀, while |H(x,t,Du₀(x))|≤C₀ by the stated supremum over both x and t. Hence (φ−)_t+H(x,t,Dφ−)≤0 and (φ+)_t+H(x,t,Dφ+)≥0. For (2), φ−(y,s)=u₀(y)−C₀s≤w(y,s)≤u₀(y)+C₀s=φ+(y,s); as (y,s)→(x,0), continuity of u₀ gives both relaxed limits equal u₀(x). This is the boundary squeeze used by the Perron construction. P: explicit affine-in-time barriers and continuity of the datum. S: [TR] Chapter 1 Section 8, Theorem 1.30, printed pp. 36–37; [CIL] (8.4)(IC) and Theorem 8.2, printed pp. 49–51.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 8, Theorem 1.30, printed pp. 36--37"
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "(8.4) (IC) and Theorem 8.2, printed pp. 49--51"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-perron-method-for-hamilton-jacobi-equations",
+        "kind": "theorem",
+        "title": "Perron's method for the Cauchy problem: existence between two barriers",
+        "statement": "Let $n\\ge1$, $T>0$, let\n$H:\\mathbb R^n\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ satisfy the Lipschitz\nconditions of part (a) of\n[[thm-comparison-for-first-order-hamilton-jacobi-equations]], and let\n$u_0\\in C^1(\\mathbb R^n)$ be bounded with bounded gradient. Assume\n$C_0:=\\sup_{x\\in\\mathbb R^n,\\,0\\le t\\le T}|H(x,t,Du_0(x))|<\\infty$, and put\n$\\phi_\\pm=u_0\\pm C_0t$ as in\n[[lem-viscosity-initial-trace-is-enforced-by-upper-and-lower-barriers]]. Define\n$W(x,t)$ on $Z=\\mathbb R^n\\times(0,T)$ as the supremum of all viscosity\nsubsolutions $w$ with $\\phi_-\\le w\\le\\phi_+$ on $Z$. Then: (1) $W$ is well\ndefined and $\\phi_-\\le W\\le\\phi_+$; (2) $W^*$ is a viscosity subsolution and\n$W_*$ is a viscosity supersolution in $Z$; (3) comparison gives\n$W^*\\le W_*$, hence $W=W^*=W_*$ is continuous, solves the Cauchy problem and\ncarries datum $u_0$ in the relaxed sense; (4) $W$ is the unique viscosity\nsolution in the class lying between $\\phi_-$ and $\\phi_+$. No choice principle\nis used.",
+        "deps": [
+          "thm-upper-semicontinuous-envelope-of-a-locally-bounded-supremum-of-subsolutions",
+          "lem-perron-envelope-failure-of-the-supersolution-test-allows-a-local-bump",
+          "thm-comparison-for-first-order-hamilton-jacobi-equations",
+          "cor-uniqueness-of-bounded-uniformly-continuous-viscosity-solutions",
+          "lem-viscosity-initial-trace-is-enforced-by-upper-and-lower-barriers",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-upper-and-lower-semicontinuous-envelopes"
+        ],
+        "strategy": "Well-definedness: $\\phi_-$ itself is an admissible subsolution ([[lem-viscosity-initial-trace-is-enforced-by-upper-and-lower-barriers]]), so the defining family is nonempty, and $W$ is squeezed between the barriers, hence locally bounded above; by [[thm-upper-semicontinuous-envelope-of-a-locally-bounded-supremum-of-subsolutions]] the envelope $W^*$ is a subsolution, and $W^*\\le\\phi_+$ because the envelope of a family bounded above by $\\phi_+$ is bounded above by the (continuous) $\\phi_+$; since $W^*\\ge W$ is then itself an admissible member of the family, $W^*\\le W$ and hence $W=W^*$ is upper semicontinuous. If $W_*$ failed the supersolution test at some $\\hat z$, then [[lem-perron-envelope-failure-of-the-supersolution-test-allows-a-local-bump]] gives a subsolution $W_\\kappa\\ge W$ with strict excess at some point in its support; at a strict failure point one has $W_*(\\hat z)<\\phi_+(\\hat z)$ (otherwise $\\phi_+-\\phi$ would have a local minimum at $\\hat z$ and the supersolution test for $\\phi_+$ would give the non-strict inequality), so choose a positive vertical offset $\\delta$ with $\\chi(\\hat z)=W_*(\\hat z)+\\delta<\\phi_+(\\hat z)$ and shrink the bump ball until $\\chi\\le\\phi_+$ there, which keeps $W_\\kappa\\le\\phi_+$; it is supported in the interior of the cylinder, away from the initial face and the barriers, its initial trace is still squeezed by the barriers, and hence it is admissible, contradicting the maximality of $W$. Hence $W_*$ is a supersolution; comparison ([[thm-comparison-for-first-order-hamilton-jacobi-equations]]) applied to the bounded upper semicontinuous subsolution $W^*$ and the bounded lower semicontinuous supersolution $W_*$, whose initial data both equal $u_0$ by [[lem-viscosity-initial-trace-is-enforced-by-upper-and-lower-barriers]], gives $W^*\\le W_*$; combined with $W_*\\le W\\le W^*$ this forces $W=W^*=W_*$, so $W$ is continuous and is a viscosity solution attaining the data. Uniqueness follows from [[cor-uniqueness-of-bounded-uniformly-continuous-viscosity-solutions]]: any other solution squeezed by the barriers belongs to the defining family and is $\\le W$, while comparison with $W$ gives the reverse inequality. P: envelope subsolution + bump contradiction + comparison. S: [TR] Chapter 1 Section 8, Theorem 1.30 and Remark 1.31, printed pp. 36--38; [CIL] Theorem 4.1 and Lemma 4.4, printed pp. 22--25; [BHJ] Section 5, comparison and existence, printed pp. 14--20.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 8, Theorem 1.30 and Remark 1.31, printed pp. 36--38"
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Theorem 4.1 and Lemma 4.4, printed pp. 22--25"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "def-legendre-transform-of-a-hamiltonian",
+        "kind": "definition",
+        "title": "The Legendre transform of a finite-valued convex Hamiltonian",
+        "statement": "Let $n\\ge1$ and let $H:\\mathbb R^n\\to\\mathbb R$ be finite-valued. The\n**Legendre transform** (convex conjugate) of $H$ is the function\n$L:\\mathbb R^n\\to\\overline{\\mathbb R}$\n([[def-extended-reals]]) defined by\n$$L(v):=\\sup_{p\\in\\mathbb R^n}\\bigl(p\\cdot v-H(p)\\bigr),\\qquad v\\in\\mathbb R^n,$$\nthe supremum being taken in $\\overline{\\mathbb R}$\n([[lem-extended-reals-complete]]) and the inner product being the Euclidean one\n([[def-euclidean-inner-product]]). The value $L(v)=+\\infty$ is possible and is\nnot excluded.\n\nIn the biconjugate expressions $p\\cdot v-(+\\infty)$ the convention\n$$p\\cdot v-(+\\infty):=-\\infty$$\nis adopted, so that the supremum defining the biconjugate\n$L^*(p):=\\sup_{v\\in\\mathbb R^n}\\bigl(p\\cdot v-L(v)\\bigr)$ is an ordinary\nsupremum of a set in $\\mathbb R\\cup\\{-\\infty\\}$ when the value $+\\infty$\noccurs: every $v$ with $L(v)=+\\infty$ contributes the value $-\\infty$ and can\nbe discarded.\n\nWhen $H$ is convex\n([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), $L$ is the\nconvex conjugate used in the Hopf--Lax construction. For every finite-valued\n$H$ the transform $L$ is convex and lower semicontinuous, being the pointwise\nsupremum of the affine functions $v\\mapsto p\\cdot v-H(p)$; no superlinearity,\ndifferentiability, strict convexity, coercivity or smoothness of $H$ is\nassumed at this point. The notation $H^*$ is used interchangeably with $L$.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-extended-reals",
+          "lem-extended-reals-complete",
+          "def-euclidean-inner-product"
+        ],
+        "strategy": "Definition and notational contract; no proof. The transform is defined for every finite-valued $H$, convex or not, as the pointwise supremum of the affine functions $v\\mapsto p\\cdot v-H(p)$; convexity and lower semicontinuity of $L$ are immediate in that generality and are recorded so that they are not reproved later. The convention $p\\cdot v-(+\\infty)=-\\infty$ fixes the meaning of the biconjugate $L^*(p)=\\sup_v(p\\cdot v-L(v))$ when $L$ is not finite everywhere, and it is the convention under which the supremum defining $L^*$ is nonempty and monotone in the natural way. The transform is stated for Hamiltonians on all of $\\mathbb R^n$ and for finite-valued $H$, which is the exact class in which the biconjugacy lemma [[lem-finite-valued-convex-hamiltonian-equals-its-biconjugate]] is proved; the later Hopf--Lax regime adds superlinearity to make $L$ finite everywhere, a separate hypothesis. S: [TR] Chapter 2 Section 4, Definition 2.11 and Remark 2.12, printed p. 61; [TR] Appendix, the characterization of the Legendre transform, printed pp. 246--247; [CIL] the convex-duality discussion of Section 1, printed pp. 6--8.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2 Section 4, Definition 2.11 and Remark 2.12, printed p. 61; Appendix, the characterization of the Legendre transform, printed pp. 246--247"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-valued-convex-hamiltonian-equals-its-biconjugate",
+        "kind": "lemma",
+        "title": "A finite-valued convex Hamiltonian equals its biconjugate",
+        "statement": "Let $n\\ge1$ and let $H:\\mathbb R^n\\to\\mathbb R$ be convex\n([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), with Legendre\ntransform $L$ as in [[def-legendre-transform-of-a-hamiltonian]] and the\nconvention $p\\cdot v-(+\\infty):=-\\infty$. Then for every $p\\in\\mathbb R^n$\n$$H(p)=\\sup_{v\\in\\mathbb R^n}\\bigl(p\\cdot v-L(v)\\bigr),$$\nso that $H=L^*=H^{**}$ is the biconjugate of $H$. Equivalently, the Moreau envelopes\n$$e_\\lambda H(p):=\\inf_{q\\in\\mathbb R^n}\\Bigl\\{H(q)+\\frac{|p-q|^2}{2\\lambda}\\Bigr\\}\\qquad(\\lambda>0)$$\nsatisfy $e_\\lambda H\\le L^*\\le H$ for every $\\lambda>0$, and\n$e_\\lambda H(p)\\to H(p)$ as $\\lambda\\downarrow0$ for every $p$. No\nsuperlinearity, differentiability, smoothness, coercivity or strict convexity\nof $H$ is assumed, and no choice principle is used; in particular the\nsupporting-hyperplane route is not needed.",
+        "deps": [
+          "def-legendre-transform-of-a-hamiltonian",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-extended-reals",
+          "lem-extended-reals-complete",
+          "def-euclidean-inner-product",
+          "def-infimum",
+          "cor-convex-functions-on-open-convex-sets-are-continuous",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "strategy": "The inequality $L^*(p)\\le H(p)$ is elementary: by the definition of $L$, every $v$ satisfies $L(v)\\ge p\\cdot v-H(p)$, that is $p\\cdot v-L(v)\\le H(p)$, and taking the supremum over $v$ gives $L^*(p)\\le H(p)$ (the convention $p\\cdot v-(+\\infty)=-\\infty$ makes the same inequality vacuous when $L(v)=+\\infty$). For the reverse inequality fix $p$ and $\\lambda>0$ and put $\\varphi(q):=H(q)+|p-q|^2/(2\\lambda)$, so that $e_\\lambda H(p)=\\inf_q\\varphi(q)$. The finite convex function $H$ is continuous on $\\mathbb R^n$ ([[cor-convex-functions-on-open-convex-sets-are-continuous]]) and admits a lower affine bound: the continuous function $H$ has a finite minimum $m$ on the unit sphere ([[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]]), and convexity along the ray $q=|q|u$ with $|u|=1$ gives $H(q)\\ge|q|H(u)-(|q|-1)H(0)\\ge-(|m|+|H(0)|)|q|$ for $|q|\\ge1$. Hence $\\varphi$ is continuous and coercive, and a nonempty sublevel set of $\\varphi$ is closed and bounded, hence compact, so $\\varphi$ attains its infimum at some $q_*\\in\\mathbb R^n$. At a minimiser, minimality applied at $q_*+r(q-q_*)$ with $r\\in(0,1]$, together with the convexity inequality $H(q_*+r(q-q_*))\\le(1-r)H(q_*)+rH(q)$, gives $H(q)\\ge H(q_*)+v_*\\cdot(q-q_*)$ for every $q\\in\\mathbb R^n$, where $v_*:=(p-q_*)/\\lambda$: divide the two-point inequality by $r>0$ and let $r\\downarrow0$. Consequently $L(v_*)=\\sup_q(q\\cdot v_*-H(q))=q_*\\cdot v_*-H(q_*)$, so $$L^*(p)\\ge p\\cdot v_*-L(v_*)=(p-q_*)\\cdot v_*+H(q_*)=\\frac{|p-q_*|^2}{\\lambda}+H(q_*)\\ge H(q_*)+\\frac{|p-q_*|^2}{2\\lambda}=e_\\lambda H(p).$$ Finally $e_\\lambda H(p)\\to H(p)$ as $\\lambda\\downarrow0$: the competitor $q=p$ gives $e_\\lambda H(p)\\le H(p)$; for the lower bound fix $\\varepsilon>0$ and $\\delta>0$ with $|H(q)-H(p)|\\le\\varepsilon$ for $|q-p|\\le\\delta$ (continuity at $p$); for $r=|q-p|\\le\\delta$ one has $\\varphi(q)\\ge H(p)-\\varepsilon+r^2/(2\\lambda)$, and for $r\\ge\\delta$ two-point convexity along the ray from $p$ through $q$ gives $H(q)\\ge H(p)-(\\varepsilon/\\delta)r$, so $\\varphi(q)\\ge H(p)-(\\varepsilon/\\delta)r+r^2/(2\\lambda)$; for $\\lambda\\le\\delta^2/\\varepsilon$ the minimum of the latter expression over $r\\ge\\delta$ is at least $H(p)-\\varepsilon$, so $e_\\lambda H(p)\\ge H(p)-\\varepsilon$ for all small $\\lambda$; letting $\\lambda\\downarrow0$ and then $\\varepsilon\\downarrow0$ gives $H(p)\\le L^*(p)\\le H(p)$, hence equality. The supporting inequality is derived at the attained Moreau minimiser from convexity and compactness instead of being imported from the published subgradient theorem, which states the Axiom of Choice and Countable Choice, so no choice principle is consumed; superlinearity, differentiability, smoothness, coercivity and strict convexity of $H$ are not used. P: conjugate monotonicity plus the attained Moreau minimiser. S: [TR] Chapter 2 Theorem 2.13(ii) and Remark 2.14, printed pp. 62--63; [TR] Appendix, the characterization of the Legendre transform, printed pp. 246--247; [CIL] the convex-duality discussion of Section 1, printed pp. 6--8.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2, Theorem 2.13(ii) and Remark 2.14, printed pp. 62--63; Appendix, the characterization of the Legendre transform, printed pp. 246--247"
+            },
+            {
+              "title": "Christian Clason, Nonsmooth Analysis and Optimization, lecture notes winter 2021/22, February 18, 2022",
+              "url": "https://imsc.uni-graz.at/clason/skripte/NonsmoothNotes21.pdf",
+              "locator": "Theorem 5.1(iii), printed pp. 44--45: a proper function equals its biconjugate exactly when convex and lower semicontinuous. This is source-only orientation for the extended velocity cost; the finite-valued Hamiltonian identity has its local Moreau proof."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-hopf-lax-operator",
+        "kind": "definition",
+        "title": "The Hopf--Lax operator and the Hopf--Lax formula",
+        "statement": "Let $n\\ge1$, let $H:\\mathbb R^n\\to\\mathbb R$ be convex and superlinear,\n$$\\lim_{|p|\\to\\infty}\\frac{H(p)}{|p|}=+\\infty,$$\nlet $L$ be its Legendre transform\n([[def-legendre-transform-of-a-hamiltonian]]), and let\n$u_0:\\mathbb R^n\\to\\mathbb R$ be bounded and uniformly continuous\n([[def-metric-uniform-continuity]], [[def-bounded-set]]). For $t>0$ and\n$x\\in\\mathbb R^n$ define\n$$Q_tu_0(x):=\\inf_{y\\in\\mathbb R^n}\\Bigl\\{u_0(y)+tL\\Bigl(\\frac{x-y}{t}\\Bigr)\\Bigr\\},$$\nthe infimum being computed in $\\mathbb R\\cup\\{+\\infty\\}$\n([[def-extended-reals]], [[def-infimum]]) over the extended-real values\n$u_0(y)+tL((x-y)/t)$; the term $tL((x-y)/t)$ is $+\\infty$ exactly when\n$L((x-y)/t)=+\\infty$. Set $Q_0u_0:=u_0$.\n\nThe **Hopf--Lax operator** with Lagrangian $L$ is the family $(Q_t)_{t\\ge0}$,\nand the function $(x,t)\\mapsto Q_tu_0(x)$ is the **Hopf--Lax formula** for the\nCauchy problem $u_t+H(Du)=0$, $u(\\cdot,0)=u_0$. The infimum is an\nextended-real expression at this point: finiteness and the confinement of\nnear-minimisers are proved in [[lem-hopf-lax-infima-localise]], where\nsuperlinearity makes $L$ real-valued everywhere.",
+        "deps": [
+          "def-legendre-transform-of-a-hamiltonian",
+          "def-metric-uniform-continuity",
+          "def-bounded-set",
+          "def-extended-reals",
+          "def-infimum"
+        ],
+        "strategy": "Definition and notational contract; no proof. The definition fixes (i) the autonomous Hamiltonian $H:\\mathbb R^n\\to\\mathbb R$ convex and superlinear, (ii) the datum class: bounded and uniformly continuous $u_0$, (iii) the infimum over all $y\\in\\mathbb R^n$ of $u_0(y)+tL((x-y)/t)$ for $t>0$, read in the extended reals, and (iv) the value $Q_0u_0=u_0$. The design keeps the value $+\\infty$ visible until finiteness is proved, so no assertion of attainability or of localisation is smuggled into the definition; $L$ is written with the convention of [[def-legendre-transform-of-a-hamiltonian]] and will be seen to be real-valued under superlinearity in [[lem-hopf-lax-infima-localise]]. S: [TR] Chapter 2 Sections 5.2--5.4, Definition 2.19 and equation (2.19), printed pp. 64--68; [BHJ] Section 2 and the discussion of the Hopf--Lax formula, printed pp. 6--9; [CIL] Section 1, the Hopf--Lax representation of the source, printed pp. 6--8.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2 Section 5.4, assumptions (2.18) and Theorem 2.23, equation (2.19), printed pp. 67--68; Definition 2.19, equation (2.16), printed p. 65, is the related path value function."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-hopf-lax-infima-localise",
+        "kind": "lemma",
+        "title": "Finiteness, superlinearity of the Lagrangian and localisation of Hopf--Lax near-minimisers",
+        "statement": "Let $H:\\mathbb R^n\\to\\mathbb R$ be convex and superlinear with Legendre\ntransform $L$, and let $u_0:\\mathbb R^n\\to\\mathbb R$ be bounded and continuous.\nThen: (1) $L$ is real-valued on $\\mathbb R^n$, convex, continuous, and\nsuperlinear; (2) for every $x\\in\\mathbb R^n$ and $t>0$ the infimum defining\n$Q_tu_0(x)$ is attained, and for every $\\delta>0$ there is a finite radius\n$\\rho=\\rho(x,t,\\delta,\\|u_0\\|_\\infty)$ such that every near-minimiser $y$ with\n$$u_0(y)+tL\\Bigl(\\frac{x-y}{t}\\Bigr)\\le Q_tu_0(x)+\\delta$$\nsatisfies $|y-x|\\le\\rho$; (3) consequently $Q_tu_0$ is real-valued for every\n$x$ and every $t\\ge0$. No choice principle is used.",
+        "deps": [
+          "def-hopf-lax-operator",
+          "def-legendre-transform-of-a-hamiltonian",
+          "cor-convex-functions-on-open-convex-sets-are-continuous",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "def-metric-uniform-continuity",
+          "def-bounded-set"
+        ],
+        "strategy": "For fixed v, superlinearity of H makes p·v−H(p) tend to −∞ as |p|→∞, so the supremum defining L(v) is finite and attained on a bounded set. Convexity of L is immediate. To prove superlinearity of L, fix any a>0. For v≠0, choose p=a v/|v|; then L(v)≥a|v|−max_{|q|≤a}H(q). The maximum is finite by continuity on the compact ball. Holding a fixed and dividing by |v| gives liminf_{|v|→∞}L(v)/|v|≥a; since a is arbitrary, L(v)/|v|→∞. Continuity of the finite convex L follows from [[cor-convex-functions-on-open-convex-sets-are-continuous]]. For localisation, use the competitor y=x, so Q_tu₀(x)≤||u₀||∞+tL(0). A δ-near-minimiser therefore has tL((x−y)/t)≤2||u₀||∞+δ+tL(0); superlinearity bounds |x−y|/t, yielding the radius ρ. The objective is continuous because u₀ and L are continuous, and every near-minimiser lies in the resulting compact ball, so the infimum is attained there by the extreme-value theorem. The same estimates give finiteness. P: coercivity of L confines near-minimisers, and continuity gives attainment. S: [TR] Chapter 2 Theorem 2.13(i) and Example 2.4, printed pp. 61–62 and 68; [TR] Exercise 26 on bounded level sets, printed p. 67; [BHJ] Section 2, localisation of the infimum, printed pp. 6–9.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2, Theorem 2.13(i) and its proof, printed p. 62; attainment paragraph following (2.19), printed p. 68; Exercise 26, printed p. 67."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-hopf-lax-is-a-contraction-in-the-supremum-norm",
+        "kind": "corollary",
+        "title": "The Hopf--Lax operator is a contraction in the supremum norm",
+        "statement": "Let $H:\\mathbb R^n\\to\\mathbb R$ be convex and superlinear with Legendre transform\n$L$, and let $u_0,v_0:\\mathbb R^n\\to\\mathbb R$ be bounded. Then for every $t\\ge0$\nand every $x\\in\\mathbb R^n$\n$$\\bigl|Q_tu_0(x)-Q_tv_0(x)\\bigr|\\le\\sup_{\\mathbb R^n}|u_0-v_0|,$$\nand consequently $\\sup_{\\mathbb R^n}|Q_tu_0-Q_tv_0|\\le\\|u_0-v_0\\|_\\infty$; both\n$Q_tu_0$ and $Q_tv_0$ are real-valued (see the proof for the explicit\nfiniteness argument). No uniform continuity of the data is needed for this\nparticular estimate, and no choice principle is used.",
+        "deps": [
+          "def-hopf-lax-operator",
+          "def-legendre-transform-of-a-hamiltonian",
+          "cor-convex-functions-on-open-convex-sets-are-continuous",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "strategy": "For t=0 the statement is the identity. For t>0, the conjugate L is bounded below because L(v)≥−H(0), while the competitor y=x gives a finite upper bound; hence both infima are real. For every y, u₀(y)+tL((x−y)/t)≤v₀(y)+tL((x−y)/t)+||u₀−v₀||∞. Taking infima gives Q_tu₀(x)−Q_tv₀(x)≤||u₀−v₀||∞; exchanging u₀ and v₀ gives the reverse bound. This argument uses only boundedness of the data and does not require minimisers or uniform continuity. P: compare the two infima with the same competitor. S: [TR] Chapter 2 Section 5.4, the contraction estimate for the Hopf–Lax formula, printed pp. 67–68; [BHJ] Section 2, continuous dependence of the formula on the datum, printed pp. 6–9.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2 Section 5.4, Theorem 2.23 and formula (2.19), printed pp. 67--68. The contraction estimate is the direct termwise-infimum consequence proved here."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "cor-hopf-lax-preserves-a-modulus-of-continuity",
+        "kind": "corollary",
+        "title": "The Hopf--Lax operator preserves a modulus of continuity",
+        "statement": "Let $H:\\mathbb R^n\\to\\mathbb R$ be convex and superlinear with Legendre\ntransform $L$, and let $u_0:\\mathbb R^n\\to\\mathbb R$ be bounded and uniformly\ncontinuous with a nondecreasing modulus of continuity $\\omega$ satisfying\n$\\omega(r)\\to0$ as $r\\downarrow0$ and\n$|u_0(y)-u_0(y')|\\le\\omega(|y-y'|)$. Then for every $t\\ge0$ and all\n$x,x'\\in\\mathbb R^n$,\n$$|Q_tu_0(x)-Q_tu_0(x')|\\le\\omega(|x-x'|).$$\nThus every $Q_tu_0$ has the same modulus of continuity and the family is\nspatially equicontinuous; this is the equicontinuity input of the\ninitial-trace and vanishing-viscosity arguments. No choice principle is used.",
+        "deps": [
+          "def-hopf-lax-operator",
+          "lem-hopf-lax-infima-localise",
+          "def-metric-uniform-continuity"
+        ],
+        "strategy": "Fix $x,x'\\in\\mathbb R^n$ and $d:=x-x'$. For $t>0$ and any $y'\\in\\mathbb R^n$ put $y:=y'+d$; then $(x-y)/t=(x'-y')/t$ and $u_0(y)\\ge u_0(y')-\\omega(|d|)$, so $u_0(y)+tL((x-y)/t)\\ge u_0(y')+tL((x'-y')/t)-\\omega(|d|)$. Taking the infimum over $y'$ (finite by [[lem-hopf-lax-infima-localise]]) gives $Q_tu_0(x)\\ge Q_tu_0(x')-\\omega(|d|)$; the reverse inequality follows by symmetry, and $t=0$ is the hypothesis itself. The estimate is translation invariant because the Hamiltonian is autonomous and $L$ does not depend on $y$: this is the structural reason the formula transfers the modulus of the datum to the solution. P: translate a competitor in the infimum. S: [TR] Chapter 2 Section 5.4, the modulus-of-continuity estimate for (2.19), printed pp. 67--68; [TR] Chapter 1 Section 9, the role of a modulus of continuity in Perron and Lipschitz estimates, printed pp. 38--40; [BHJ] Section 2, the translation identity for the formula, printed pp. 6--9.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2 Section 5.4, Theorem 2.23 and formula (2.19), printed pp. 67--68. The translation estimate is proved directly here."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-hopf-lax-dynamic-programming-semigroup",
+        "kind": "theorem",
+        "title": "The Hopf--Lax operators form a semigroup (dynamic programming)",
+        "statement": "Let $H:\\mathbb R^n\\to\\mathbb R$ be convex and superlinear with Legendre\ntransform $L$, and let $u_0:\\mathbb R^n\\to\\mathbb R$ be bounded and uniformly\ncontinuous. Then for all $t,s\\ge0$ the Hopf--Lax operators of\n[[def-hopf-lax-operator]] satisfy\n$$Q_{t+s}u_0=Q_t(Q_su_0)=Q_s(Q_tu_0)\\qquad\\text{pointwise on }\\mathbb R^n,$$\nwhere the inner operators are applied to the bounded uniformly continuous\nfunction $Q_su_0$ (or $Q_tu_0$) produced by\n[[cor-hopf-lax-preserves-a-modulus-of-continuity]]. Equivalently, for all\n$t,s>0$ and $x\\in\\mathbb R^n$ the short-time variational principle holds:\n$$Q_{t+s}u_0(x)=\\inf_{z\\in\\mathbb R^n}\\Bigl\\{Q_su_0(z)+tL\\Bigl(\\frac{x-z}{t}\\Bigr)\\Bigr\\}.$$\nThe family $(Q_t)_{t\\ge0}$ is therefore a semigroup with $Q_0=\\mathrm{id}$ on\nthe bounded uniformly continuous data. No choice principle is used.",
+        "deps": [
+          "def-hopf-lax-operator",
+          "lem-hopf-lax-infima-localise",
+          "cor-hopf-lax-preserves-a-modulus-of-continuity",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets"
+        ],
+        "strategy": "Both inequalities are the two-point convexity inequality of $L$ with weights adapted to $t$ and $s$. For the inequality $Q_{t+s}u_0(x)\\le Q_t(Q_su_0)(x)$: given $y,z\\in\\mathbb R^n$, write $x-y=(x-z)+(z-y)$ and $L\\bigl(\\frac{x-y}{t+s}\\bigr)=L\\bigl(\\frac{t}{t+s}\\frac{x-z}{t}+\\frac{s}{t+s}\\frac{z-y}{s}\\bigr)\\le\\frac{t}{t+s}L\\bigl(\\frac{x-z}{t}\\bigr)+\\frac{s}{t+s}L\\bigl(\\frac{z-y}{s}\\bigr)$ by convexity of $L$; multiplying by $t+s$ and adding $u_0(y)$ gives $u_0(y)+(t+s)L((x-y)/(t+s))\\le u_0(y)+sL((z-y)/s)+tL((x-z)/t)$, and taking the infimum over $y$ and then $z$ gives the claim (the double infimum is the infimum over pairs, which is legitimate for extended-real infima). For the reverse inequality: given $y$, choose the point $z:=y+\\frac{s}{t+s}(x-y)$, for which $\\frac{z-y}{s}=\\frac{x-z}{t}=\\frac{x-y}{t+s}$; then $u_0(y)+sL((z-y)/s)+tL((x-z)/t)=u_0(y)+(t+s)L((x-y)/(t+s))$, so $Q_t(Q_su_0)(x)\\le u_0(y)+(t+s)L((x-y)/(t+s))$, and taking the infimum over $y$ gives $Q_tQ_su_0\\le Q_{t+s}u_0$. The reverse order is identical, which also yields the variational principle. The composition is legitimate because [[cor-hopf-lax-preserves-a-modulus-of-continuity]] keeps $Q_su_0$ bounded and uniformly continuous, so the inner operator is defined. P: two-point convexity plus the infimum over the plane point on the segment. S: [TR] Chapter 2 Theorem 2.21 (dynamic programming principle) and its proof, printed pp. 65--67; [BHJ] Section 2, the semigroup property of the Lagrangian formula, printed pp. 6--9; [CIL] Section 1, dynamic programming for first-order equations, printed pp. 6--8.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2, Theorem 2.21 (dynamic programming principle) and its proof, printed pp. 65--67"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-hopf-lax-minimiser-satisfies-the-characteristic-euler-relation-at-differentiability-points",
+        "kind": "lemma",
+        "title": "A Hopf--Lax minimiser satisfies the characteristic Euler relation at differentiability points",
+        "statement": "Let $H:\\mathbb R^n\\to\\mathbb R$ be convex and superlinear with Legendre\ntransform $L$, let $u_0:\\mathbb R^n\\to\\mathbb R$ be bounded and continuous, and\nlet $t>0$, $x\\in\\mathbb R^n$. Let $y$ be a minimiser of\n$\\varphi(y):=u_0(y)+tL((x-y)/t)$, which exists by\n[[lem-hopf-lax-infima-localise]], put $v:=(x-y)/t$, and set $u:=Q_tu_0$. Then:\n(1) if $u_0$ is differentiable at $y$ and $L$ is differentiable at $v$, then\n$Du_0(y)=DL(v)$; (2) if $L$ is differentiable at $v$ and $u$ is\ndifferentiable at $x$, then $Du(x)=DL(v)$. No choice principle is used.",
+        "deps": [
+          "def-hopf-lax-operator",
+          "lem-hopf-lax-infima-localise",
+          "def-total-derivative-in-euclidean-space",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "def-directional-and-partial-derivatives"
+        ],
+        "strategy": "Minimality of $y$ gives, for every $h\\in\\mathbb R^n$ small, $u_0(y)+tL(v)\\le u_0(y+h)+tL(v-h/t)$; expanding both sides by differentiability at the respective points gives $u_0(y)+tL(v)\\le u_0(y)+\\langle Du_0(y),h\\rangle+tL(v)-\\langle DL(v),h\\rangle+o(|h|)$, hence $0\\le\\langle Du_0(y)-DL(v),h\\rangle+o(|h|)$ for all small $h$; applying the inequality with $h$ and with $-h$ and dividing by $|h|$ gives $Du_0(y)=DL(v)$, which is (1). For (2), minimality at $x$ gives for every $h$ small $Q_tu_0(x+h)\\le u_0(y)+tL\\bigl(v+h/t\\bigr)=Q_tu_0(x)+\\langle DL(v),h\\rangle+o(|h|)$; since $Q_tu_0$ is differentiable at $x$, its increment is $Q_tu_0(x)+\\langle Du(x),h\\rangle+o(|h|)$, so $\\langle Du(x)-DL(v),h\\rangle\\le o(|h|)$ for all small $h$ and, dividing by $|h|$ in both directions, $Du(x)=DL(v)$. The two conclusions are the first-order optimality conditions connecting the variational and characteristic pictures; differentiability is assumed only at the points where it is used, and no global smoothness of $u_0$, $L$ or $u$ is asserted. P: expand the minimality inequality to first order in the direction of the perturbation. S: [TR] Chapter 2 Section 5.4, the characteristic relation for (2.19), printed pp. 67--68; [BHJ] Section 1, characteristics and the envelope relation, printed pp. 2--6.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2 Section 5.4, formula (2.19), printed pp. 67--68; the two differentiability-point Euler relations are proved locally."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-comparison-for-autonomous-convex-superlinear-hamiltonians",
+        "kind": "theorem",
+        "title": "Comparison for autonomous convex superlinear Hamiltonians",
+        "statement": "Let $n\\ge1$ and let $H:\\mathbb R^n\\to\\mathbb R$ be finite-valued, continuous,\nconvex and superlinear. Let $T>0$. Suppose $u$ and $v$ are bounded uniformly\ncontinuous on $\\mathbb R^n\\times[0,T]$, their restrictions to\n$Z=\\mathbb R^n\\times(0,T)$ are respectively a viscosity subsolution and a\nviscosity supersolution of $u_t+H(Du)=0$, and their continuous initial traces\nsatisfy $u(x,0)\\le v(x,0)$ for every $x\\in\\mathbb R^n$. Then $u\\le v$ on $Z$.\nNo choice principle is used.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-metric-uniform-continuity",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-heine-cantor-metric",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ],
+        "strategy": "Assume for contradiction that u(x₀,t₀)>v(x₀,t₀) at some 0<t₀<T. Choose δ,η,η′>0 so that U(x₀,t₀)−V(x₀,t₀)>3δ, where U(x,t)=u(x,t)−η/(T−t) and V(x,t)=v(x,t)+η′/(T−t); write B=η+η′. At every interior C¹ upper test φ for U, φ+η/(T−t) is an upper test for u, so φ_t+H(Dφ)≤−η/(T−t)²≤−η/T². At every lower test φ for V, φ−η′/(T−t) is a lower test for v, so φ_t+H(Dφ)≥η′/(T−t)²≥η′/T². Also U→−∞ and V→+∞ uniformly in x at t↑T.\nLet ω₀ be a bounded modulus of continuity for v(·,0). Choose P>0 with sup_{r≥0}(ω₀(r)−Pr)<B/(8T), then choose ε>0 with Pε<B/(8T), and set ψ(r)=P(√(r²+ε²)−ε). Thus ψ(r)≥Pr−Pε and the smooth radial function z↦ψ(|z|) has gradient norm at most P. Let χ(x)=√(1+|x|²). Choose ρ>0 small enough that ρ≤1, Φα(x₀,x₀,t₀,t₀)>2δ for every α, and the modulus of continuity of H on |p|≤P+1 at radius 2ρ is less than B/T². For α>0 maximize\nΦα(x,y,t,s)=U(x,t)−V(y,s)−ψ(|x−y|)−(α/2)|t−s|²−ρ(χ(x)+χ(y))\non x,y∈ℝⁿ and 0≤t,s≤T, defining Φα=−∞ on t=T or s=T. The bound on u,v, the coercive spatial term, and the terminal blow-down/up make each positive superlevel set compact; the Euclidean extreme-value theorem therefore gives a maximum. Its value is greater than 2δ by the choice of ρ. Since U−V is bounded above, α|t−s|² is bounded at maximizers; hence |t−s|→0 as α→∞. If t=0 at a sequence of maximizers, then s→0 and, using u₀≤v₀, ψ(r)≥Pr−Pε, and a time modulus ωᵥ for v, we have Φα≤sup_{r≥0}(ω₀(r)−Pr)+Pε−B/T+ωᵥ(s)<−3B/(4T)+ωᵥ(s), which is negative for large α; the case s=0 is identical using a time modulus for u. This contradicts the positive maximum, so for all sufficiently large α a maximizing point has 0<t,s<T.\nAt such a maximum, the C¹ contact gradients and time derivatives are\np=P(x−y)/√(|x−y|²+ε²)+ρDχ(x),  q=P(x−y)/√(|x−y|²+ε²)−ρDχ(y),  a=α(t−s).\nThus |p|,|q|≤P+1 and |p−q|≤2ρ. The strict viscosity inequalities give a+H(p)≤−η/T² and a+H(q)≥η′/T², hence B/T²≤H(q)−H(p). The choice of ρ makes |H(q)−H(p)|<B/T² whenever |p−q|≤2ρ. This contradiction proves u≤v on Z. The argument needs no global momentum-Lipschitz estimate; the stated finite continuous convex superlinear class includes H(p)=|p|²/2. P: bounded-gradient spatial doubling, a vanishing coercive weight, and strict terminal-time penalties, with initial faces controlled by the modulus of the ordered traces. S: [CIL] Theorem 8.3, printed pp. 51–52; [TR] Chapter 1 Section 6 and Chapter 2 around equation (2.18), printed pp. 26–29 and 66–68; [BHJ] Section 5, comparison, printed pp. 14–20.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 8, Theorem 8.2 and terminal-time penalisation in its proof, printed pp. 50--52 (bounded-domain comparison background). The whole-space bounded-gradient argument is proved here."
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 6 and Chapter 2 around equation (2.18), printed pp. 26--29 and 66--68"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 5, comparison, printed pp. 14--20"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation",
+        "kind": "theorem",
+        "title": "The Hopf--Lax formula solves the Hamilton--Jacobi Cauchy problem",
+        "statement": "Let $H:\\mathbb R^n\\to\\mathbb R$ be finite-valued, continuous, convex, and\nsuperlinear, with Legendre transform $L$, and let\n$u_0:\\mathbb R^n\\to\\mathbb R$ be bounded and uniformly continuous. Define\n$u(x,t):=Q_tu_0(x)$ by [[def-hopf-lax-operator]]. Then $u$ is a bounded\nuniformly continuous function on $\\mathbb R^n\\times[0,T]$ for every $T>0$, and:\n(1) $u$ is a viscosity solution of $u_t+H(Du)=0$ in\n$\\mathbb R^n\\times(0,\\infty)$; (2) $u$ attains the initial datum locally\nuniformly,\n$$\\sup_{x\\in K}|u(x,t)-u_0(x)|\\longrightarrow0\\qquad(t\\downarrow0)$$\nfor every compact $K\\subseteq\\mathbb R^n$; (3) $u$ is the unique bounded\nuniformly continuous viscosity solution of the Cauchy problem with datum\n$u_0$; (4) $u$ satisfies the dynamic-programming relation\n$Q_{t+s}u_0=Q_tQ_su_0$ of\n[[thm-hopf-lax-dynamic-programming-semigroup]]. No choice principle is used.",
+        "deps": [
+          "def-hopf-lax-operator",
+          "lem-hopf-lax-infima-localise",
+          "thm-hopf-lax-dynamic-programming-semigroup",
+          "lem-finite-valued-convex-hamiltonian-equals-its-biconjugate",
+          "cor-hopf-lax-preserves-a-modulus-of-continuity",
+          "cor-hopf-lax-is-a-contraction-in-the-supremum-norm",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-metric-uniform-continuity",
+          "thm-comparison-for-autonomous-convex-superlinear-hamiltonians"
+        ],
+        "strategy": "Boundedness and uniform continuity: $u$ is bounded by $\\|u_0\\|_\\infty+t\\max\\{L(0),0\\}$ together with the lower bound $\\inf L$ (finite by superlinearity) on compact time intervals, and it is uniformly continuous in $x$ with the modulus of $u_0$ by [[cor-hopf-lax-preserves-a-modulus-of-continuity]] and in $t$ because $|Q_tu_0(x)-Q_su_0(x)|\\le\\|Q_{|t-s|}u_0-u_0\\|_\\infty$ for $t,s\\ge0$, which follows from the semigroup law [[thm-hopf-lax-dynamic-programming-semigroup]] and the contraction [[cor-hopf-lax-is-a-contraction-in-the-supremum-norm]], while $\\|Q_\\tau u_0-u_0\\|_\\infty\\to0$ as $\\tau\\downarrow0$ because $Q_\\tau u_0(x)\\le u_0(x)+\\tau L(0)$ and $Q_\\tau u_0(x)\\ge\\inf_v\\{u_0(x-\\tau v)+\\tau L(v)\\}\\ge u_0(x)-\\sup_v\\{\\omega(\\tau|v|)-\\tau L(v)\\}$ with the modulus $\\omega$ of $u_0$ and the superlinearity of $L$. Subsolution: let $\\phi\\in C^1$, let $u-\\phi$ have a strict local maximum at $(x_0,t_0)$ with $t_0>0$. For small $h>0$ and each $v\\in\\mathbb R^n$ put $y:=x_0-hv$; the dynamic-programming inequality $u(x_0,t_0)\\le u(y,t_0-h)+hL(v)$ (from the variational principle of [[thm-hopf-lax-dynamic-programming-semigroup]]) and the contact inequality $u(y,t_0-h)\\le u(x_0,t_0)-\\phi(x_0,t_0)+\\phi(y,t_0-h)$ combine to $\\phi(x_0,t_0)-\\phi(x_0-hv,t_0-h)\\le hL(v)+o(h)$; dividing by $h$ and letting $h\\downarrow0$ gives $\\phi_t(x_0,t_0)+\\langle D\\phi(x_0,t_0),v\\rangle\\le L(v)$ for every $v\\in\\mathbb R^n$, and taking the supremum over $v$ and using the biconjugacy $H=L^*$ of [[lem-finite-valued-convex-hamiltonian-equals-its-biconjugate]] gives $\\phi_t+H(D\\phi(x_0,t_0))\\le0$. Supersolution: let $u-\\phi$ have a strict local minimum at $(x_0,t_0)$, $t_0>0$; let $y$ be a minimiser for $u(x_0,t_0)$ at time $t_0$ ([[lem-hopf-lax-infima-localise]]) and put $v:=(x_0-y)/t_0$. For $0<h<t_0$ put $z_h:=y+\\frac{t_0-h}{t_0}(x_0-y)$, so that $z_h\\to x_0$ and $(z_h-y)/(t_0-h)=(x_0-y)/t_0=v$. Evaluating the variational principle of [[thm-hopf-lax-dynamic-programming-semigroup]] at $(z_h,t_0-h)$ with the single competitor $y$ gives $u(z_h,t_0-h)+hL(v)\\le u_0(y)+(t_0-h)L(v)+hL(v)=u_0(y)+t_0L(v)=u(x_0,t_0)$, hence $u(x_0,t_0)-u(z_h,t_0-h)\\ge hL(v)$; the local-minimum contact at $(x_0,t_0)$ applies to the nearby point $(z_h,t_0-h)$ and gives $u(z_h,t_0-h)\\ge u(x_0,t_0)-\\phi(x_0,t_0)+\\phi(z_h,t_0-h)$. Combining, $\\phi(x_0,t_0)-\\phi(z_h,t_0-h)\\ge hL(v)$; dividing by $h$ and letting $h\\downarrow0$ along $z_h$ gives $\\phi_t(x_0,t_0)+\\langle D\\phi(x_0,t_0),v\\rangle\\ge L(v)$, and the elementary inequality $H(p)=\\sup_w(p\\cdot w-L(w))\\ge p\\cdot v-L(v)$ gives the supersolution inequality. Initial trace: the bounds $u_0(x)-\\sup_v\\{\\omega(\\tau|v|)-\\tau L(v)\\}\\le Q_\\tau u_0(x)\\le u_0(x)+\\tau L(0)$ hold uniformly in $x$, and $\\sup_v\\{\\omega(\\tau|v|)-\\tau L(v)\\}\\to0$ as $\\tau\\downarrow0$ by superlinearity of $L$; the local-uniform statement follows. Uniqueness in the stated class follows from [[thm-comparison-for-autonomous-convex-superlinear-hamiltonians]], since every finite-valued convex superlinear H in this theorem satisfies that comparison theorem’s hypotheses and the Hopf–Lax solution is bounded uniformly continuous on each closed finite-time slab. The global momentum-Lipschitz comparison case (a) is not used here; it would exclude H(p)=|p|²/2. P: the dynamic-programming inequality in both directions plus the biconjugacy. S: [TR] Chapter 2 Section 5.4, Theorem 2.23 and its proof, printed pp. 67--68, and Theorem 2.22, printed p. 67; [BHJ] Sections 2--3, the formula and its verification, printed pp. 6--12; [CIL] Section 1, the Hopf--Lax representation, printed pp. 6--8.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2 Section 5.4, assumptions (2.18), Theorem 2.23 and its complete proof, printed pp. 67--68. The direct viscosity verification is supplied here; Theorem 2.22, printed p. 67, records the related path value function result."
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Sections 2--3, first-order jets and viscosity test definitions, printed pp. 6--12 (test-function background); the Hopf--Lax verification is proved locally."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-vanishing-viscosity-convergence-for-hamilton-jacobi-equations",
+        "kind": "theorem",
+        "title": "Vanishing viscosity selects the viscosity solution",
+        "statement": "Let $n\\ge1$, $T>0$, $Z=\\mathbb R^n\\times(0,T)$, and\n$Z_0=\\mathbb R^n\\times[0,T)$. Let\n$H:\\mathbb R^n\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ satisfy the\nLipschitz conditions of part (a) of\n[[thm-comparison-for-first-order-hamilton-jacobi-equations]], let\n$u_0:\\mathbb R^n\\to\\mathbb R$ be bounded and uniformly continuous, and let\n$u_0^{(\\varepsilon)}\\to u_0$ locally uniformly on $\\mathbb R^n$. For each\n$\\varepsilon\\in(0,1)$ let $u^\\varepsilon:Z\\to\\mathbb R$ be a viscosity\nsolution of\n$$u^\\varepsilon_t+H(x,t,Du^\\varepsilon)=\\varepsilon\\Delta u^\\varepsilon\\qquad\\text{in }Z,$$\nmeaning that for every test function $\\phi\\in C^{1,2}(Z)$ the residual\n$\\phi_t+H(z,D\\phi)-\\varepsilon\\Delta\\phi$ is nonpositive at each local\nmaximum of $u^\\varepsilon-\\phi$ and nonnegative at each local minimum. Assume\nthat $u^\\varepsilon$ has initial datum $u_0^{(\\varepsilon)}$ in the relaxed\nCauchy sense. Suppose the family is uniformly bounded on $Z$ and locally\nequicontinuous up to the initial face: there is $M<\\infty$ with\n$|u^\\varepsilon(z)|\\le M$ for every $\\varepsilon\\in(0,1)$ and $z\\in Z$, and\nfor every compact $K\\subseteq Z_0$ and every $\\eta>0$ there is $\\delta>0$ such\nthat\n$$|u^\\varepsilon(z)-u^\\varepsilon(z')|<\\eta$$\nfor all $\\varepsilon\\in(0,1)$ and $z,z'\\in K\\cap Z$ with $|z-z'|<\\delta$.\nThese estimates give each $u^\\varepsilon$ a continuous trace on the initial\nface. Then $u^\\varepsilon\\to u$ locally uniformly on $Z$, where $u$ is the\nunique bounded viscosity solution of $u_t+H(x,t,Du)=0$ with datum $u_0$. Neither\nexistence of the approximants nor a compactness theorem is asserted: the\nboundedness and equicontinuity estimates are hypotheses. No choice principle is\nused.",
+        "deps": [
+          "thm-half-relaxed-limit-stability-for-viscosity-solutions",
+          "def-half-relaxed-limits",
+          "thm-comparison-for-first-order-hamilton-jacobi-equations",
+          "cor-uniqueness-of-bounded-uniformly-continuous-viscosity-solutions",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-metric-compactness",
+          "lem-compactness-is-intrinsic",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-heine-cantor-metric",
+          "lem-sup-epsilon",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "thm-multidimensional-integral-properties",
+          "cor-mean-value-theorem",
+          "thm-change-of-variables-for-compact-jordan-sets"
+        ],
+        "strategy": "Let $\\overline u$ and $\\underline u$ be the upper and lower half-relaxed limits of the family ([[def-half-relaxed-limits]]). At a local maximum of $u^\\varepsilon-\\phi$, the viscosity inequality for the viscous equation reads $\\phi_t(z,D\\phi)+H(z,D\\phi)\\le\\varepsilon\\Delta\\phi(z)$; since $\\Delta\\phi$ is bounded on the compact set carrying the contact points, the right side is a perturbation $c_\\varepsilon\\to0$ locally uniformly, and the perturbed stability theorem [[thm-half-relaxed-limit-stability-for-viscosity-solutions]] gives that $\\overline u$ is a viscosity subsolution of the limit equation; the lower relaxed limit is a supersolution by the dual statement. The initial data pass to the limit because the local equicontinuity of the family up to the initial face turns the relaxed limsup of a sequence approaching $(x,0)$ into the limsup of the data $u_0^{(\\varepsilon)}(y)$, which converges to $u_0(x)$. Comparison [[thm-comparison-for-first-order-hamilton-jacobi-equations]] applied to the bounded upper semicontinuous subsolution $\\overline u$ and the bounded lower semicontinuous supersolution $\\underline u$, whose initial data both equal $u_0$, gives $\\overline u\\le\\underline u$; since $\\underline u\\le\\overline u$ by definition, $\\overline u=\\underline u=:u$, which is therefore continuous and is the unique bounded viscosity solution ([[cor-uniqueness-of-bounded-uniformly-continuous-viscosity-solutions]]). The pointwise agreement of the two relaxed limits is equivalent to locally uniform convergence of the family: if not, there are a compact $K$, $\\delta>0$ and sequences $\\varepsilon_j\\downarrow0$, $z_j\\in K$ with $|u^{\\varepsilon_j}(z_j)-u(z_j)|\\ge\\delta$; passing to a convergent subsequence $z_j\\to z_*\\in K$ contradicts the equality of the limsup and liminf at $z_*$ and the continuity of $u$. Local boundedness of the family is what makes the relaxed limits well defined, and no sequence of indices is selected anywhere: this is the exact sense in which the theorem uses item 9 and avoids asserting compactness. P: half-relaxed limits, stability with a vanishing perturbation, comparison, and a compactness-free conversion to local uniform convergence. S: [TR] Chapter 1 Section 3, Theorem 1.9 and its proof, printed pp. 19--21, and Remark 1.10, printed p. 21; [CIL] Section 6, Theorem 6.1 and the half-relaxed limit method, printed pp. 38--42; [BHJ] Section 4, stability and the vanishing-viscosity limit, printed pp. 12--14.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 3, Theorem 1.9 and its proof, printed pp. 19--21; Remark 1.10, printed p. 21"
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 6: equation (6.1), Lemma 6.1, Remarks 6.2--6.4 and Theorem 6.5, printed pp. 34--35; these are stability background, not the explicit sin estimate."
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 4, stability and the vanishing-viscosity limit, printed pp. 12--14"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-finite-speed-of-dependence-for-lipschitz-hamiltonians",
+        "kind": "corollary",
+        "title": "Finite speed of dependence for Hamiltonians Lipschitz in momentum",
+        "statement": "Let $n\\ge1$, $T>0$, and let\n$H:\\mathbb R^n\\times[0,T]\\times\\mathbb R^n\\to\\mathbb R$ be continuous. Suppose\nthere are constants $C>0$ and $L>0$ such that, for all $x,y,p,q\\in\\mathbb R^n$\nand $t,s\\in[0,T]$,\n$$|H(x,t,p)-H(y,s,p)|\\le C(1+|p|)(|x-y|+|t-s|),\\qquad |H(x,t,p)-H(x,t,q)|\\le L|p-q|.$$\nLet $u,v:\\mathbb R^n\\times[0,T)\\to\\mathbb R$ be bounded, with $u$ upper\nsemicontinuous and $v$ lower semicontinuous; assume that $u$ is a viscosity\nsubsolution and $v$ a viscosity supersolution of $u_t+H(x,t,Du)=0$ on\n$\\mathbb R^n\\times(0,T)$. Fix $x_0\\in\\mathbb R^n$ and $R>0$. If\n$u(x,0)\\le v(x,0)$ for every $x\\in B(x_0,R)$, then\n$$u(x,t)\\le v(x,t)\\qquad\\text{for }0\\le t<\\min\\{T,R/L\\}\\text{ and }|x-x_0|<R-Lt.$$\nIn particular, if $u$ and $v$ are bounded viscosity solutions with the same\ninitial values on $B(x_0,R)$ and are also respectively lower and upper\nsemicontinuous on $\\mathbb R^n\\times[0,T)$ (so both are continuous there),\nthen $u(x,t)=v(x,t)$ on this open backward cone.\nThe cone is stated with strict spatial inequality because $B(x_0,R)$ is open\nand no continuity of the initial traces is assumed. No choice principle is\nused.",
+        "deps": [
+          "thm-comparison-for-first-order-hamilton-jacobi-equations",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-semicontinuity-on-euclidean-subsets",
+          "thm-heine-borel-rn",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "def-directional-and-partial-derivatives",
+          "lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation"
+        ],
+        "strategy": "Put $w:=u-v$, which is bounded and upper semicontinuous. First show that $w$ is a viscosity subsolution of $w_t-L|Dw|=0$. Let $\\phi\\in C^1$ touch $w$ from above at an interior point $(x_*,t_*)$. Choose $T_*$ with $t_*<T_*<T$ and restrict $u,v$ to the closed slab $\\mathbb R^n\\times[0,T_*]$. Add a positive quadratic vanishing to first order at this point, so the contact becomes strict, and choose a compact cylinder $Q\\Subset\\mathbb R^n\\times(0,T_*)$ around it on whose boundary the strictified contact is lower. Apply the $[0,T_*]$ version of the localization lemma; for fixed $\\rho>0$, maximize on $Q\\times Q$ the upper semicontinuous function\n$$F_{\\alpha,\\rho}(x,y,t,s):=u(x,t)-v(y,s)-\\phi(x,t)-\\frac\\alpha2(|x-y|^2+|t-s|^2)-\\rho(|x-x_*|^2+|y-x_*|^2).$$\nIts diagonal limiting function is $w(x,t)-\\phi(x,t)-2\\rho|x-x_*|^2$, which has a strict maximum at $(x_*,t_*)$. Thus for large $\\alpha$ the maximizing points $(x_\\alpha,y_\\alpha,t_\\alpha,s_\\alpha)$ remain interior to $Q$ (in particular below $T_*$) and converge to $(x_*,x_*,t_*,t_*)$. The localization calculation of [[lem-doubling-variables-maximum-localisation]] gives $\\alpha d_\\alpha^2\\to0$, where $d_\\alpha^2:=|x_\\alpha-y_\\alpha|^2+|t_\\alpha-s_\\alpha|^2$: if $M_\\alpha:=\\max F_{\\alpha,\\rho}$, then $M_\\alpha\\downarrow w(x_*,t_*)-\\phi(x_*,t_*)$ and $M_{\\alpha/2}\\ge M_\\alpha+\\alpha d_\\alpha^2/4$. The $C^1$ contacts for $u$ and $v$ have spatial gradients\n$$p_\\alpha=D\\phi(x_\\alpha,t_\\alpha)+\\alpha(x_\\alpha-y_\\alpha)+2\\rho(x_\\alpha-x_*),\\qquad q_\\alpha=\\alpha(x_\\alpha-y_\\alpha)-2\\rho(y_\\alpha-x_*),$$\nand both time derivatives contain the same term $\\alpha(t_\\alpha-s_\\alpha)$, the time derivative for $u$ having the additional $\\phi_t(x_\\alpha,t_\\alpha)$. The viscosity inequalities therefore give\n$$\\phi_t(x_\\alpha,t_\\alpha)\\le H(y_\\alpha,s_\\alpha,q_\\alpha)-H(x_\\alpha,t_\\alpha,p_\\alpha)\\le L|q_\\alpha-p_\\alpha|+C(1+|p_\\alpha|)(|x_\\alpha-y_\\alpha|+|t_\\alpha-s_\\alpha|).$$\nThe last term tends to zero because $\\alpha d_\\alpha^2\\to0$ and $D\\phi$ is bounded near the contact. Also $q_\\alpha-p_\\alpha=-D\\phi(x_\\alpha,t_\\alpha)-2\\rho((x_\\alpha-x_*)+(y_\\alpha-x_*))\\to-D\\phi(x_*,t_*)$. Hence $\\phi_t(x_*,t_*)-L|D\\phi(x_*,t_*)|\\le0$. In particular the difference of spatial test gradients is not discarded: it converges to the test gradient $D\\phi$ and produces the term $L|D\\phi|$.\n\nNow let $M:=\\max\\{0,\\sup_{\\mathbb R^n\\times[0,T)}w\\}$. Fix $0<\\epsilon<R$ and use the explicit nondecreasing $C^1$ cutoff $h(s)=0$ for $s\\le0$, $h(s)=3s^2-2s^3$ for $0\\le s\\le1$, and $h(s)=1$ for $s\\ge1$. Set $\\xi_\\epsilon(r):=M h((r-(R-\\epsilon))/\\epsilon)$. For $\\delta>0$ define the smooth radial barrier\n$$\\psi_{\\epsilon,\\delta}(x,t):=\\xi_\\epsilon\\bigl(\\sqrt{|x-x_0|^2+\\delta^2}+Lt\\bigr).$$\nIt is a supersolution of $\\psi_t-L|D\\psi|=0$, since $\\xi_\\epsilon'\\ge0$ and\n$$\\partial_t\\psi_{\\epsilon,\\delta}-L|D\\psi_{\\epsilon,\\delta}|=L\\xi_\\epsilon'\\left(1-\\frac{|x-x_0|}{\\sqrt{|x-x_0|^2+\\delta^2}}\\right)\\ge0.$$\nAt $t=0$, if $|x-x_0|<R$, then $w(x,0)\\le0\\le\\psi_{\\epsilon,\\delta}(x,0)$; if $|x-x_0|\\ge R$, the cutoff equals $M$, so again $w(x,0)\\le\\psi_{\\epsilon,\\delta}(x,0)$. Apply the whole-space comparison theorem [[thm-comparison-for-first-order-hamilton-jacobi-equations]] to $w$ and $\\psi_{\\epsilon,\\delta}$ for the Hamiltonian $G(p)=-L|p|$. For any point with $|x-x_0|+Lt<R$, choose $\\epsilon>0$ and then $\\delta>0$ sufficiently small that $\\sqrt{|x-x_0|^2+\\delta^2}+Lt\\le R-\\epsilon$. At that point $\\psi_{\\epsilon,\\delta}=0$, hence $w\\le0$. Applying the result in both orders gives equality for two solutions with equal initial data on the ball. The cutoff is explicit and the proof uses no choice principle. P: reduce the difference by a localized two-time doubling argument, then compare with a smooth radial cone barrier. S: [TR] Chapter 1 Section 10, Lemma 1.36, Lemma 1.37 and Theorem 1.35, printed pp. 40--42; [BHJ] Section 5, comparison and domains of dependence, printed pp. 14--20; [CIL] Section 5.B, finite speed as a consequence of comparison, printed pp. 34--36.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 10, Lemmas 1.36--1.37 and Theorem 1.35, printed pp. 40--42"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 5.1, Theorem 5.2, printed pp. 19--22 (whole-space Lipschitz comparison background); the finite-speed reduction and cone barrier are proved here."
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 5.B, estimates from comparison, printed pp. 30--31 (comparison background); the finite-speed cone is proved here following Tran Chapter 1 Section 10."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-value-functions-and-hamilton-jacobi-bellman-equations",
+        "kind": "remark",
+        "title": "Value functions and the Hamilton--Jacobi--Bellman equation: orientation only",
+        "statement": "For a controlled dynamical system $y'(\\cdot)=b(y,v)$ with running cost\n$L(y,v)$ and initial cost $u_0$, consider the **value function**\n$$u(x,t)=\\inf\\Bigl\\{\\int_0^tL\\bigl(\\gamma(s),v(s)\\bigr)\\,ds+u_0\\bigl(\\gamma(0)\\bigr):\\ \\gamma(t)=x,\\ \\gamma'=b(\\gamma,v)\\Bigr\\}$$\nover admissible controls. When hypotheses make this value finite and\ncontinuous, ensure the dynamic programming principle, and give the viscosity\ncharacterization, $u$ is a viscosity solution of the Hamilton--Jacobi--Bellman\nequation $u_t+H(x,Du)=0$ with\n$$H(x,p)=\\sup_v\\{p\\cdot b(x,v)-L(x,v)\\}.$$\nTo express the Legendre duality precisely, define the effective velocity cost\n$$\\ell(x,\\xi):=\\inf\\{L(x,v):b(x,v)=\\xi\\},$$\nwith value $+\\infty$ when the fiber is empty. Then $H(x,\\cdot)$ is the convex\nconjugate of $\\ell(x,\\cdot)$; when $\\ell(x,\\cdot)$ is proper, lower\nsemicontinuous and convex, Fenchel--Moreau gives\n$\\ell(x,\\xi)=\\sup_p\\{p\\cdot\\xi-H(x,p)\\}$\n(Clason, Theorem 5.1(iii), recorded here as source-only orientation;\n[[def-legendre-transform-of-a-hamiltonian]] fixes the conjugate notation but\ndoes not prove this extended-valued result). If comparison holds in the\nchosen solution class, the viscosity solution is unique.\n\nThe sign convention is the one of this page: velocities are integrated forward\nfrom time $0$ to time $t$, the running cost is accumulated forward, the\ninitial cost is paid at time $0$, and $H$ is convex in $p$ because it is a\nsupremum of affine functions of $p$, irrespective of convexity of the\ncontrol or velocity set. With this convention the\nHopf--Lax operator of [[def-hopf-lax-operator]] is the special case of the\nformula in which the infimum over paths has been reduced to a single infimum\nover the starting point, $u(x,t)=\\inf_y\\{u_0(y)+tL((x-y)/t)\\}$, for the\nautonomous convex superlinear case.\n\nThis remark records the interpretation only: no admissible-control framework,\nno measurable selection, no existence of optimal controls and no dynamic\nprogramming theorem for control systems is developed on this page, The stationary specialization of the displayed evolution equation is\n$H(x,Du)=0$; a separately discounted formulation leads to equations such as\n$\\lambda u+H(x,Du)=f$. The only dynamic-programming content of\nthis page is the semigroup law for the Hopf--Lax operator\n[[thm-hopf-lax-dynamic-programming-semigroup]], which is proved directly from\nthe convexity of the Lagrangian. No choice principle is used; this orientation\nis recorded so that the Cauchy problems of\n[[def-hamilton-jacobi-cauchy-problem]] can be read against their control\norigin.",
+        "deps": [
+          "def-hamilton-jacobi-cauchy-problem",
+          "def-legendre-transform-of-a-hamiltonian",
+          "def-hopf-lax-operator"
+        ],
+        "strategy": "Remark only; no proof. The dictionary between the value function and the Hamilton--Jacobi--Bellman equation is stated with the sign conventions fixed by the page: velocities are integrated forward from time $0$ to $t$, costs are nonnegative running costs plus a terminal cost at the initial time, and the Hamiltonian is the Legendre transform $\\sup_v\\{p\\cdot b(x,v)-L(x,v)\\}$ of the Lagrangian in the velocity. The remark deliberately excludes the control-theoretic machinery (admissible controls, measurable selection, dynamic programming for control systems); the only dynamic-programming content of the page is the semigroup law for the Hopf--Lax operator [[thm-hopf-lax-dynamic-programming-semigroup]], which is proved directly. This is the orientation permitted by the design; the substantive control theory is out of scope. S: [TR] Chapter 2 Sections 1--3, printed pp. 53--60; [BHJ] Sections 9--10, printed pp. 49--63.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2 Sections 1--3, printed pp. 53--60"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Sections 9--10, printed pp. 49--63"
+            },
+            {
+              "title": "Christian Clason, Nonsmooth Analysis and Optimization, lecture notes winter 2021/22, February 18, 2022",
+              "url": "https://imsc.uni-graz.at/clason/skripte/NonsmoothNotes21.pdf",
+              "locator": "Theorem 5.1(iii), printed pp. 44--45: a proper function equals its biconjugate exactly when convex and lower semicontinuous. This is source-only orientation for the extended velocity cost; the finite-valued Hamiltonian identity has its local Moreau proof."
+            }
+          ]
+        },
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 458.048,
+    "id": "hamilton-jacobi-equations-and-viscosity-solutions-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Hamilton Jacobi Equations and Viscosity Solutions — Examples",
+    "companion": "hamilton-jacobi-equations-and-viscosity-solutions",
+    "requires": [
+      "hamilton-jacobi-equations-and-viscosity-solutions",
+      "the-heat-kernel-and-the-cauchy-problem",
+      "trigonometric-and-oscillatory-examples-in-one-variable"
+    ],
+    "items": [
+      {
+        "id": "ex-eikonal-equation-as-a-viscosity-equation",
+        "kind": "example",
+        "title": "The eikonal equation as a viscosity equation at a tip",
+        "statement": "Let $n\\ge1$ and consider the eikonal equation $|Du|=1$ on $\\mathbb R^n$, i.e. the first-order equation\n$u_t+H(Du)=0$ with $H(p)=|p|-1$ read on functions independent of $t$. The\nEuclidean norm $u(x)=|x|$ is a classical solution on\n$\\mathbb R^n\\setminus\\{0\\}$, and at its tip $a=0$ it exhibits the difference between the\nsubsolution inequality $|D\\phi|\\le1$ and the reverse supersolution inequality\n$|D\\phi|\\ge1$. There is no $C^1$ test function $\\phi$ with $u-\\phi$ having a\nlocal maximum at $0$: such a contact would force $\\phi(x)\\ge\\phi(0)+|x|$ near\n$0$, hence $\\langle D\\phi(0),h\\rangle\\ge|h|$ for every direction $h$, which is\nimpossible for a linear functional. Writing $x_0$ for the coordinate indexed by $0<n$, the $C^1$ functions\n$\\phi(x)=\\varepsilon x_0$ with $0<\\varepsilon<1$ satisfy $\\phi\\le|x|$ near $0$\nwith equality at $0$, so $u-\\phi$ has a local minimum at $0$ and the\nsupersolution test would require $|D\\phi(0)|=\\varepsilon\\ge1$, which fails.\nHence $u$ is a subsolution of $|Du|=1$ but not a supersolution at the tip: it\nsatisfies the viscosity subsolution inequality $|Du|\\le1$ at the tip and is a viscosity solution of\n$|Du|=1$ on $\\mathbb R^n\\setminus\\{0\\}$.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "lem-viscosity-testing-by-first-order-jets",
+          "prop-classical-solutions-are-viscosity-solutions",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "strategy": "Verification. Away from the tip $|Du|=1$ holds classically, so the equation is satisfied there by the classical-consistency proposition [[prop-classical-solutions-are-viscosity-solutions]]. Upper contacts at $0$: if $|x|-\\phi(x)$ had a local maximum at $0$ with $\\phi\\in C^1$ and $\\phi(0)=0$, then $\\phi(x)\\ge|x|$ near $0$, so $\\langle D\\phi(0),h\\rangle\\ge|h|$ for every direction $h$; testing $h$ and $-h$ gives both $\\langle D\\phi(0),h\\rangle\\ge|h|$ and $-\\langle D\\phi(0),h\\rangle\\ge|h|$, an impossibility. So there is no upper contact and the subsolution inequality $|D\\phi(0)|\\le1$ holds vacuously; equivalently the superjet $D^+u(0)$ is empty (a linear form cannot dominate the norm). Lower contacts: for $\\phi(x)=\\varepsilon x_0$ with $\\varepsilon\\in(0,1)$ and $x_0$ the coordinate indexed by $0<n$ one has $\\phi(x)=\\varepsilon x_1\\le|x|$ near $0$ with equality at $0$, so $|x|-\\phi$ has a local minimum at $0$, and the supersolution test would require $|D\\phi(0)|=\\varepsilon\\ge1$, which fails; this single contact already shows that $u$ is not a supersolution at the tip, hence not a viscosity solution of $|Du|=1$ on any neighbourhood of $0$. The two inequalities are thus genuinely different conditions, and the direction of the cone decides which one the tip satisfies; the check is a computation with the test-function definition and [[lem-viscosity-testing-by-first-order-jets]] and needs no compactness. S: [TR] Chapter 1 Exercise 6 and Exercise 8, printed pp. 19 and 22; [BHJ] Section 3, the eikonal example at a ridge, printed pp. 10--12; [CIL] the discussion of the eikonal equation in Section 1, printed pp. 6--8.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1, Exercise 6 (the positive norm) and Exercise 8 (distance), printed p. 19. The upper/lower contact calculations are supplied here."
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 3, the eikonal example at a ridge, printed pp. 10--12"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-quadratic-hopf-lax-formula-and-moreau-envelope",
+        "kind": "example",
+        "title": "The quadratic Hopf--Lax formula as an infimal convolution",
+        "statement": "Let $n\\ge1$ and $H(p)=\\tfrac12|p|^2$. Its Legendre transform is\n$L(v)=\\tfrac12|v|^2$. For every bounded uniformly continuous\n$u_0:\\mathbb R^n\\to\\mathbb R$, the Hopf--Lax operator of\n[[def-hopf-lax-operator]] is, for $t>0$,\n$$Q_tu_0(x)=\\inf_{y\\in\\mathbb R^n}\\Bigl\\{u_0(y)+\\frac{|x-y|^2}{2t}\\Bigr\\},$$\nthe infimal convolution with the quadratic kernel $q_t(z)=|z|^2/(2t)$. The\ninfimum is attained, and for every minimiser $y$ the Euler relation\n$Du_0(y)=(x-y)/t$ holds whenever $u_0$ is differentiable at $y$\n([[lem-hopf-lax-minimiser-satisfies-the-characteristic-euler-relation-at-differentiability-points]]).\nSeparately, the quadratic datum $w_0(y)=\\tfrac12|y|^2$ is unbounded and so is\noutside the datum class in [[def-hopf-lax-operator]]. Its algebraic infimal\nconvolution\n$$I_t(x):=\\inf_{y\\in\\mathbb R^n}\\Bigl\\{\\tfrac12|y|^2+\\frac{|x-y|^2}{2t}\\Bigr\\}$$\nhas the unique minimiser $y=x/(1+t)$ and value $I_t(x)=|x|^2/(2(1+t))$; this\nseparate calculation is the Moreau envelope of the quadratic function and does\nnot apply the bounded-data Hopf--Lax theorem to $w_0$.",
+        "deps": [
+          "def-legendre-transform-of-a-hamiltonian",
+          "def-hopf-lax-operator",
+          "lem-hopf-lax-infima-localise",
+          "lem-hopf-lax-minimiser-satisfies-the-characteristic-euler-relation-at-differentiability-points"
+        ],
+        "strategy": "For fixed $v$, complete the square in $p$: $p\\cdot v-\\tfrac12|p|^2=\\tfrac12|v|^2-\\tfrac12|p-v|^2$, so the supremum is attained at $p=v$ and $L(v)=\\tfrac12|v|^2$. For bounded uniformly continuous $u_0$, substituting this Lagrangian in the definition of $Q_t$ gives the displayed infimal convolution. The infimum is attained by [[lem-hopf-lax-infima-localise]], and the conditional Euler relation is [[lem-hopf-lax-minimiser-satisfies-the-characteristic-euler-relation-at-differentiability-points]]. These claims use the stated bounded-data hypotheses. Separately, for $w_0(y)=|y|^2/2$, define $I_t$ directly by the displayed algebraic infimum; no Hopf--Lax theorem or bounded-data attainment lemma is invoked. For $t>0$, $$\\frac12|y|^2+\\frac{|x-y|^2}{2t}=\\frac{1+t}{2t}\\left|y-\\frac{x}{1+t}\\right|^2+\\frac{|x|^2}{2(1+t)}.$$ Since the square coefficient is positive, the unique minimiser is $y=x/(1+t)$ and the infimum is $|x|^2/(2(1+t))$. This direct calculation makes no assertion that the unbounded datum lies in the domain of the BUC operator. P: compute the quadratic conjugate, use the in-class Hopf--Lax suppliers only for BUC data, and evaluate the separate quadratic infimum by completing the square. S: [TR] Chapter 2 Example 2.4 and Exercise 22, printed pp. 63 and 68; [BHJ] Section 2, quadratic Lagrangians and infimal convolution, printed pp. 6--9; [CIL] Section 1, the infimal-convolution form, printed pp. 6--8.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2, Example 2.3, printed p. 62 (quadratic conjugate), and Example 2.4, printed p. 68 (quadratic Hopf--Lax). The separate unbounded quadratic datum is evaluated here."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-hopf-lax-solution-with-a-forming-corner",
+        "kind": "example",
+        "title": "A Hopf--Lax solution with a forming corner from smooth data",
+        "statement": "Let $H(p)=p^2/2$, $L(v)=v^2/2$, and $u_0(x)=e^{-x^2}-1$. Then $u_0$ is\nsmooth, bounded and uniformly continuous, with\n$p_0(y):=u_0'(y)=-2ye^{-y^2}$ and $u_0''(y)=(4y^2-2)e^{-y^2}$. The\ncharacteristic projection is $X_t(y)=y+tp_0(y)=y-2tye^{-y^2}$, and its lifted\nvalue is $Z_t(y)=u_0(y)+\\tfrac t2p_0(y)^2$. For $0\\le t<\\tfrac12$, $X_t$ is a\ndiffeomorphism of $\\mathbb R$, and $u_{\\rm cl}(X_t(y),t)=Z_t(y)$ is the\nclassical characteristic solution. At $t=\\tfrac12$, $X_t'(0)=0$; for\n$t>\\tfrac12$, putting $s_t=\\sqrt{\\log(2t)}$ gives\n$X_t(-s_t)=X_t(0)=X_t(s_t)=0$, so the characteristic projection is no longer\ninjective and its single-valued classical graph breaks down. The Hopf--Lax\nformula\n$$u(x,t)=\\inf_{y\\in\\mathbb R}\\left\\{e^{-y^2}-1+\\frac{|x-y|^2}{2t}\\right\\},\\qquad t>0,$$\nis finite, satisfies $-1\\le u(x,t)\\le0$, is uniformly continuous in $x$, and is\na viscosity solution of $u_t+\\tfrac12u_x^2=0$ with initial datum $u_0$\n([[thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation]],\n[[cor-hopf-lax-preserves-a-modulus-of-continuity]]). For each fixed\n$t>\\tfrac12$, the minimisers at $x=0$ are exactly $y=\\pm s_t$, and\n$$u(0,t)=\\frac{1+\\log(2t)}{2t}-1.$$\nFor $x>0$ sufficiently close to $0$, the unique minimiser tends to $s_t$ as\n$x\\downarrow0$; for $x<0$ sufficiently close to $0$, it tends to $-s_t$ as\n$x\\uparrow0$. Thus the one-sided spatial derivatives tend to $-s_t/t$ from the\nright and $s_t/t$ from the left, so $u(\\cdot,t)$ is continuous but has a corner\nat $x=0$.",
+        "deps": [
+          "def-hopf-lax-operator",
+          "lem-hopf-lax-infima-localise",
+          "thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation",
+          "cor-hopf-lax-preserves-a-modulus-of-continuity",
+          "def-characteristic-crossing-and-caustic-for-first-order-pde",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "thm-intermediate-value",
+          "cor-mean-value-theorem",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "lem-exponential-dominates-one-plus-x"
+        ],
+        "strategy": "Verification. Write \\(p_0=u_0'\\). The characteristic equations for \\(H(p)=p^2/2\\) give constant momentum \\(p_0(y)\\), \\(X_t(y)=y+tp_0(y)\\), and \\(Z_t(y)=u_0(y)+tp_0(y)^2/2\\). Since \\(X_t'(y)=1+t u_0''(y)=1-2te^{-y^2}+4ty^2e^{-y^2}\\ge1-2t>0\\) for \\(t<1/2\\), and \\(X_t(y)-y\\to0\\) at both ends of the line, \\(X_t\\) is a global diffeomorphism. Differentiation of \\(Z_t\\circ X_t^{-1}\\) gives \\(u_x=p_0(y)\\) and \\(u_t=-p_0(y)^2/2\\), so this is the classical solution up to the first singular characteristic time. At \\(t=1/2\\), \\(X_t'(0)=0\\). For \\(t>1/2\\), \\(s=\\sqrt{\\log(2t)}>0\\) satisfies \\(X_t(-s)=X_t(0)=X_t(s)=0\\); this proves global noninjectivity. It does not assert local noninjectivity near \\(y=0\\), where \\(X_t'(0)<0\\) and the map is locally decreasing. The Hopf--Lax minimum is attained by [[lem-hopf-lax-infima-localise]], and \\(-1\\le u\\le0\\) follows from \\(u_0\\ge-1\\), nonnegativity of the cost, and the competitor \\(y=x\\). The modulus estimate in [[cor-hopf-lax-preserves-a-modulus-of-continuity]] gives spatial uniform continuity; the viscosity-solution clause (not a uniqueness claim) of [[thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation]] applies to this convex superlinear \\(H\\) and bounded uniformly continuous datum. For the corner, set \\(g_t(y)=e^{-y^2}-1+y^2/(2t)\\). Its derivative is \\(y(1/t-2e^{-y^2})\\), so for \\(t>1/2\\) its critical points are \\(0,\\pm s\\); \\(g_t''(0)=1/t-2<0\\) and \\(g_t''(\\pm s)=2s^2/t>0\\). Since \\(g_t(y)\\to\\infty\\) and \\(g_t(\\pm s)=-1+(1+\\log(2t))/(2t)<0=g_t(0)\\), using \\(\\log r<r-1\\) for \\(r=2t>1\\), its global minimisers are exactly \\(\\pm s\\). For \\(G_t(x,y)=u_0(y)+(x-y)^2/(2t)\\), any minimiser obeys \\(|x-y|\\le\\sqrt{2t}\\), so minimisers for \\(x\\to0\\) are precompact and every cluster point is one of \\(\\pm s\\). Since \\(G_t(x,y)-G_t(x,-y)=-2xy/t\\), a minimiser cannot be negative when \\(x>0\\) or positive when \\(x<0\\); also \\(y=0\\) is not a minimiser for \\(x\\ne0\\), because \\(\\partial_yG_t(x,0)=-x/t\\ne0\\). Thus all minimisers have the sign of \\(x\\), and as \\(x\\to0\\) they converge to \\(s\\) from the right and \\(-s\\) from the left. The stationarity equation is \\(x=F_t(y):=y-2tye^{-y^2}\\), with \\(F_t'(\\pm s)=2s^2>0\\). The inverse function theorem gives a unique smooth minimising branch on each punctured side near \\(x=0\\). Along it the envelope derivative is \\(u_x=(x-y(x))/t\\), so its right and left limits are \\(-s/t\\) and \\(s/t\\), respectively. These unequal finite limits give the asserted corner. P: explicit characteristic and minimiser calculations. S: [TR] Chapter 2 Example 2.4 and Section 5.4, printed pp. 67--68; [BHJ] Section 1, characteristic crossing and caustics, printed pp. 2--6; [CIL] Section 1, viscosity solutions through characteristic crossings, printed pp. 6--8.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2, Example 2.4 and Section 5.4, printed pp. 67--68"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 1, characteristic crossing and caustics, printed pp. 2--6"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-negative-absolute-value-solves-the-eikonal-equation-in-viscosity-sense",
+        "kind": "example",
+        "title": "The negative absolute value solves the eikonal equation in the viscosity sense",
+        "statement": "Let $u(x)=-|x|$ on $\\mathbb R$. Then $|u'|=1$ for $x\\ne0$, and $u$ is a\nviscosity solution of the stationary eikonal equation $|u'|-1=0$.\nEquivalently, for any $T>0$ its evolutionary extension\n$U(x,t):=-|x|-t$ is a viscosity solution of $U_t+|U_x|=0$ on\n$\\mathbb R\\times(0,T)$ ([[def-viscosity-subsolution-and-supersolution]]). At\nevery point $x\\ne0$ the equation holds classically. At the cusp\n$(0,t_0)$, every $C^1$ upper test has $\\phi_t(0,t_0)=-1$ and satisfies\n$|\\phi_x(0,t_0)|\\le1$, so the subsolution inequality holds, and there is no\n$C^1$ test function for which $U-\\phi$ has a local minimum at $(0,t_0)$; hence\nthe supersolution test is vacuous. This is the complementary cusp to\n[[ex-eikonal-equation-as-a-viscosity-equation]], where the positive absolute\nvalue fails the supersolution test because it has lower tests with slopes of\nmodulus less than one.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "thm-fermat-for-euclidean-local-extrema",
+          "prop-classical-solutions-are-viscosity-solutions",
+          "ex-eikonal-equation-as-a-viscosity-equation"
+        ],
+        "strategy": "Away from $x=0$, $U_t=-1$ and $|U_x|=1$, so the classical equation holds; applying [[prop-classical-solutions-are-viscosity-solutions]] on the open set $\\mathbb R\\setminus\\{0\\}$ gives the viscosity inequalities there. Fix $(0,t_0)$ and a $C^1$ test $\\phi$ with $U(0,t_0)=\\phi(0,t_0)$. For either a local maximum or a local minimum of $U-\\phi$, restriction to the time line $x=0$ and Fermat's theorem give $-1-\\phi_t(0,t_0)=0$, hence $\\phi_t(0,t_0)=-1$. Put $p=\\phi_x(0,t_0)$. If $U-\\phi$ has a local maximum, then at $t=t_0$, $-|x|\\le \\phi(x,t_0)-\\phi(0,t_0)=px+o(|x|)$. Taking $x=h>0$ and $x=-h$ and dividing by $h\\downarrow0$ gives $-1\\le p\\le1$. Thus $\\phi_t+|\\phi_x|=-1+|p|\\le0$, as required for a subsolution. If $U-\\phi$ had a local minimum, the inequality instead would be $px+o(|x|)=\\phi(x,t_0)-\\phi(0,t_0)\\le-|x|$. For $x=h>0$ this forces $p\\le-1$, while for $x=-h$ it forces $p\\ge1$, a contradiction. Thus no lower-contact test exists and the supersolution condition holds vacuously. The contact signs are opposite: upper contacts give $p\\in[-1,1]$, whereas a lower contact would require a linear function to lie below $-|x|$ to first order, which is impossible. The positive cusp in [[ex-eikonal-equation-as-a-viscosity-equation]] has the complementary lower tests and therefore fails the supersolution inequality. S: [TR] Chapter 1 Exercise 6 and the discussion of nonsmooth viscosity solutions, printed pp. 19--21; [BHJ] Section 3, examples of viscosity solutions at cusps, printed pp. 10--12.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1, Exercises 6--8, printed p. 19: norm, reflection convention and distance solutions; the evolutionary lift is computed here."
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 3, examples of viscosity solutions at cusps, printed pp. 10--12"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-vanishing-viscosity-selects-the-hamilton-jacobi-solution",
+        "kind": "example",
+        "title": "Vanishing viscosity selects the Hopf--Lax solution for bounded data",
+        "statement": "Let $u_0(x)=\\sin x$ on $\\mathbb R$, a bounded uniformly continuous datum, and\nlet $H(p)=p^2/2$. For $\\varepsilon>0$ and $t>0$ define\n$$u^\\varepsilon(x,t)=-2\\varepsilon\\log\\!\\left[(4\\pi\\varepsilon t)^{-1/2}\\int_{\\mathbb R}\\exp\\!\\left(-\\frac{\\sin y+(x-y)^2/(2t)}{2\\varepsilon}\\right)\\,dy\\right],$$\nand set $u^\\varepsilon(x,0)=\\sin x$. Then $u^\\varepsilon$ is a bounded classical\nsolution for $t>0$ of\n$$u_t^\\varepsilon+\\tfrac12|u_x^\\varepsilon|^2=\\varepsilon u_{xx}^\\varepsilon,$$\nand it attains $u_0$ uniformly as $t\\downarrow0$. The Hopf--Lax function\n$$Q_tu_0(x):=\\inf_{y\\in\\mathbb R}\\Bigl\\{\\sin y+\\frac{(x-y)^2}{2t}\\Bigr\\},\\qquad Q_0u_0=u_0,$$\nis a bounded uniformly continuous viscosity solution of\n$u_t+\\tfrac12|u_x|^2=0$ with initial trace $u_0$, and for every $T<\\infty$ one\nhas\n$$\\sup_{x\\in\\mathbb R,\\ 0\\le t\\le T}|u^\\varepsilon(x,t)-Q_tu_0(x)|\\le\\max\\left\\{\\varepsilon\\log(1+T),\\ 2\\varepsilon\\log\\left(\\sqrt{\\frac{8}{\\pi\\varepsilon}}+\\sqrt2\\right)\\right\\}.$$\nBoth terms on the right tend to zero as $\\varepsilon\\downarrow0$. Thus the\nviscous solutions converge uniformly on every finite time strip. The estimate\npermits an $O(\\varepsilon|\\log\\varepsilon|)$ error and does not assert a\nuniform $O(\\varepsilon)$ rate.",
+        "deps": [
+          "def-hamilton-jacobi-cauchy-problem",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-metric-uniform-continuity",
+          "def-hopf-lax-operator",
+          "def-legendre-transform-of-a-hamiltonian",
+          "lem-hopf-lax-infima-localise",
+          "thm-hopf-lax-dynamic-programming-semigroup",
+          "def-heat-equation-heat-operator-and-cauchy-problem",
+          "def-heat-kernel",
+          "def-laplacian-of-a-c2-function",
+          "def-total-derivative-in-euclidean-space",
+          "thm-gaussian-integral",
+          "thm-substitution-for-improper-integrals",
+          "thm-dominated-convergence",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation",
+          "cor-mean-value-theorem",
+          "thm-logarithm-derivative-and-integral",
+          "thm-fermat-for-euclidean-local-extrema"
+        ],
+        "strategy": "Legendre duality gives $L(v)=\\sup_p(pv-p^2/2)=v^2/2$ by completing the square, so the displayed $Q_t$ is the Hopf-Lax operator for this Hamiltonian. Write $\\Gamma(z,s)=(4\\pi s)^{-1/2}e^{-z^2/(4s)}$ and $W^\\varepsilon(x,t)=\\int_{\\mathbb R}\\Gamma(x-y,\\varepsilon t)e^{-\\sin y/(2\\varepsilon)}dy$. The one-dimensional Gaussian integral and the substitution $z=2\\sqrt{\\varepsilon t}\\,r$ give unit mass; the same substitution and the integrable Gaussian tail show that these kernels form an approximate identity. Differentiating the explicit kernel for $t>0$ gives $\\partial_t\\Gamma(\\cdot,\\varepsilon t)=\\varepsilon\\partial_{xx}\\Gamma(\\cdot,\\varepsilon t)$; differentiation under the integral is justified on every compact positive-time interval by a polynomial-times-Gaussian integrable majorant. Hence $W_t^\\varepsilon=\\varepsilon W_{xx}^\\varepsilon$, $W^\\varepsilon>0$, and $u^\\varepsilon=-2\\varepsilon\\log W^\\varepsilon$ satisfies the viscous equation by direct differentiation. The approximate-identity estimate for the bounded uniformly continuous function $e^{-\\sin(\\cdot)/(2\\varepsilon)}$, which is bounded below by $e^{-1/(2\\varepsilon)}$, gives the uniform initial trace after taking the logarithm; averaging also gives $-1\\le u^\\varepsilon\\le1$. For the limit, set $g_{x,t}(y)=\\sin y+(x-y)^2/(2t)$ and let $m=Q_tu_0(x)$; a minimizer exists because $g_{x,t}$ is continuous and coercive. Since $g'_{x,t}(y_*)=0$ and $g''_{x,t}(y)=1/t-\\sin y\\le1+1/t$, Taylor's formula gives $g_{x,t}(y_*+r)\\le m+(1+1/t)r^2/2$. Integrating over $|r|\\le\\sqrt{\\varepsilon/(1+1/t)}$ in the Cole-Hopf integral, and using its unit-mass upper bound, yields $$e^{-m/(2\\varepsilon)}\\frac{e^{-1/4}}{\\sqrt{\\pi(1+t)}}\\le W^\\varepsilon(x,t)\\le e^{-m/(2\\varepsilon)},$$ hence $0\\le u^\\varepsilon(x,t)-Q_tu_0(x)\\le\\varepsilon(1/2+\\log(\\pi(1+t)))$, uniformly in $x$. At $t=0$ both are $u_0$. Also $u_0(x)-t/2\\le Q_tu_0(x)\\le u_0(x)$ by the 1-Lipschitz bound for sine, so $Q_tu_0$ has the required initial trace and is bounded and uniformly continuous. To verify its viscosity inequalities, use the ready Hopf-Lax dynamic-programming identity $Q_tu_0=Q_h(Q_{t-h}u_0)$: if a $C^1$ function $\\phi$ touches $Q$ from above at $(x,t)$, test the infimum with $z=x-h\\phi_x(x,t)$, use $Q\\le\\phi$ nearby, divide the resulting inequality by $h$ and let $h\\downarrow0$ to obtain $\\phi_t+|\\phi_x|^2/2\\le0$. If $\\phi$ touches $Q$ from below, choose a minimizer $y_*$ in the defining Hopf-Lax formula; the smooth function $F(x,t)=\\sin y_*+(x-y_*)^2/(2t)$ satisfies $F\\ge Q\\ge\\phi$ near the contact and equality there, so their first derivatives agree and $\\phi_t+|\\phi_x|^2/2=F_t+|F_x|^2/2=0$. This proves the supersolution inequality. No global momentum-Lipschitz hypothesis or general vanishing-viscosity theorem is used, and no uniqueness claim is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1, Theorem 1.9 and its proof, printed p. 20 (vanishing-viscosity background). The sin Cole--Hopf family and the explicit error estimate are computed here."
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 6: equation (6.1), Lemma 6.1, Remarks 6.2--6.4 and Theorem 6.5, printed pp. 34--35; these are stability background, not the explicit sin estimate."
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 4, the vanishing-viscosity limit, printed pp. 12--14"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-hopf-lax-without-convex-superlinear-coercivity",
+        "kind": "counterexample",
+        "title": "Nonconvexity can break the equation; nonsuperlinearity can limit the Lagrangian domain",
+        "statement": "**False claim:** the Hopf--Lax formula of [[def-hopf-lax-operator]] solves the\nequation for every finite superlinear Hamiltonian, and the Legendre transform\nof a finite Hamiltonian is real-valued on all of $\\mathbb R^n$.\n\nTwo separate scope boundaries occur. (a) Convexity is essential if the\nHopf--Lax formula is claimed to solve the equation for the original\nHamiltonian: for $H(p)=p^2-2|p|$ on $\\mathbb R$, which is finite and\nsuperlinear but not convex, the formula applied to $u_0\\equiv0$ produces\n$u(x,t)=t$, and at every interior point the smooth function itself is an upper\ntest whose residual $u_t+H(u_x)=1+H(0)=1>0$ violates the viscosity subsolution\ninequality ([[def-viscosity-subsolution-and-supersolution]]). (b)\nSuperlinearity is needed for the full-domain real-valued Lagrangian\nconclusion: for the finite convex Hamiltonian $H(p)=\\sqrt{1+p^2}$, which is\nnot superlinear, the Legendre transform equals $-\\sqrt{1-v^2}$ for\n$|v|\\le1$ and $+\\infty$ for $|v|>1$, so finite action is available only when\n$|x-y|\\le t$; this is exactly the full-domain finiteness conclusion of\n[[lem-hopf-lax-infima-localise]] that fails without superlinearity. The second\nclause does not show failure of the value or the solution property: for\n$u_0\\equiv0$ the formula is $Q_tu_0\\equiv-t$, whose residual is\n$-1+H(0)=0$.",
+        "deps": [
+          "def-legendre-transform-of-a-hamiltonian",
+          "def-hopf-lax-operator",
+          "lem-hopf-lax-infima-localise",
+          "def-viscosity-subsolution-and-supersolution"
+        ],
+        "strategy": "Refutation and scope calculation. (a) Split the conjugate supremum for $H(p)=p^2-2|p|$ into $p\\ge0$ and $p\\le0$. On the first half-line, $pv-H(p)=(v+2)p-p^2$, whose supremum is $(v+2)_+^2/4$; on the second, putting $q=-p\\ge0$ gives $(2-v)q-q^2$, whose supremum is $(2-v)_+^2/4$. Hence $L(v)$ is their maximum. For $|v|\\le2$ this is $(2+|v|)^2/4\\ge1$, while for $v\\ge2$ the first term is at least $4$ and for $v\\le-2$ the second is at least $4$; equality $L(0)=1$ shows $\\inf_v L(v)=1$. Since all velocities are available, the formula for $u_0=0$ is $t\\inf_vL(v)=t$. At an interior point, the test function $\\phi(x,t)=t$ touches $u(x,t)=t$ from above and below. The upper-contact residual is $\\phi_t+H(\\phi_x)=1+H(0)=1>0$, contradicting the subsolution condition in [[def-viscosity-subsolution-and-supersolution]]; hence the Hopf–Lax output is not a viscosity solution. (b) For $|v|<1$, differentiating $pv-\\sqrt{1+p^2}$ gives the maximizer $p=v/\\sqrt{1-v^2}$ and value $-\\sqrt{1-v^2}$. At $v=\\pm1$ the supremum is $0$, approached along the corresponding infinite tail; for $|v|>1$, the expression tends to $+\\infty$ along $p=\\operatorname{sgn}(v)r$, $r\\to\\infty$. Thus the stated conjugate and finite domain follow. Its minimum is $-1$ at $v=0$, so for constant datum the formula is $-t$ and has residual zero. The second clause therefore records failure of full-domain real-valuedness, not failure of attainment, localisation, or the PDE solution property. S: [TR] Chapter 2 Section 5.5 and Exercises 22–23, printed pp. 63 and 68–70; [CIL] Section 1, the hypotheses of the Hopf–Lax construction, printed pp. 6–8.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 2, Example 2.2, printed p. 61 (superlinearity versus linear growth), and assumptions (2.18), printed p. 67. The two conjugates and counterexample residuals are computed here."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-reversing-the-contact-extremum-reverses-the-viscosity-inequality",
+        "kind": "counterexample",
+        "title": "A strict subsolution can fail the supersolution lower-test condition",
+        "statement": "**False claim:** for a first-order equation $u_t+H(x,t,Du)=0$, passing the\nsubsolution test at every upper contact forces the supersolution test at every\nlower contact, so that a viscosity subsolution which is differentiable is\nautomatically a viscosity solution.\n\nThe claim fails for the equation $u_t+H(u_x)=0$ on\n$U=\\mathbb R\\times(0,\\infty)$ with $H(p)=p$\n([[def-viscosity-subsolution-and-supersolution]]): the function\n$u(x,t)=-t$ is a viscosity subsolution but not a viscosity supersolution. The\nnumerical residual $u_t+H(u_x)=-1$ is the same at upper and lower contacts;\nwhat differs is the direction of the inequality that the definition requires.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "thm-fermat-for-euclidean-local-extrema"
+        ],
+        "strategy": "Refutation by direct test. By [[def-viscosity-subsolution-and-supersolution]], subsolutions are tested at local maxima of \\(u-\\phi\\) with the inequality \\(\\phi_t+\\phi_x\\le0\\), while supersolutions are tested at local minima with \\(\\phi_t+\\phi_x\\ge0\\). For \\(u(x,t)=-t\\), an upper contact has \\(u-\\phi\\) locally maximal; since \\(u-\\phi\\) is differentiable, [[thm-fermat-for-euclidean-local-extrema]] gives \\(D\\phi=Du=(0,-1)\\), and hence residual \\(-1\\le0\\) at every upper test. Thus \\(u\\) is a viscosity subsolution. For the supersolution test choose \\(\\phi=u\\); then \\(u-\\phi\\equiv0\\) has a local minimum, but the residual is \\(-1<0\\), so the lower-test supersolution inequality fails. The example distinguishes the two required contact inequalities without claiming that the residual itself changes with contact direction. S: [TR] Chapter 1 Exercise 7, printed p. 19; [BHJ] Section 3, elementary sign checks, printed pp. 10--12.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Exercise 7, printed p. 19"
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 3, elementary sign checks, printed pp. 10--12"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-minima-of-viscosity-subsolutions-need-not-be-subsolutions",
+        "kind": "counterexample",
+        "title": "Minima of viscosity subsolutions need not be subsolutions",
+        "statement": "**False claim:** a finite minimum of finitely many viscosity subsolutions of a\nfirst-order equation is again a viscosity subsolution.\n\nTake the stationary proper equation\n$$F(x,u,u'):=u+1-(u')^2=0\\qquad\\text{on }\\Omega=(-1,1),$$\nwhose operator $F(r,p)=r+1-p^2$ is continuous and strictly increasing in $r$\n(proper), and the two affine functions $u_1(x)=1-2x$ and $u_2(x)=1+2x$. Both\nare classical subsolutions: $F(u_i,u_i')=u_i+1-4=u_i-3\\le0$ on $\\Omega$\nbecause $u_i\\le3$ there. Their pointwise minimum is $u(x)=1-2|x|$, a peak at\n$x_0=0$ with value $1$. The $C^1$ test function $\\phi\\equiv1$ satisfies\n$\\phi\\ge u$ on $\\Omega$ with equality at $0$, so $u-\\phi$ has a local maximum\nat $0$; but $F(0,u(0),\\phi'(0))=1+1-0=2>0$, so $u$ fails the subsolution test\nat the corner. Hence the finite-minimum operation is not admissible for\nsubsolutions of a proper equation, while the finite maximum of subsolutions and\nthe finite minimum of supersolutions are, by the same active-index contact\nargument as [[prop-maxima-of-subsolutions-and-minima-of-supersolutions]]:\nthe active function has the same value and the same test at the contact. The zero-order term contributes to this residual but is not essential to\nfailure of the minimum operation: for $F(p)=1-p^2$ the same two affine\nfunctions have residual $-3$, while their minimum has the upper-test\nresidual $F(0)=1>0$.",
+        "deps": [
+          "prop-maxima-of-subsolutions-and-minima-of-supersolutions",
+          "def-viscosity-subsolution-and-supersolution",
+          "lem-viscosity-testing-by-first-order-jets",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "def-euclidean-local-extrema-and-critical-points",
+          "thm-fermat-for-euclidean-local-extrema"
+        ],
+        "strategy": "Refutation by explicit touching test. The two affine functions are classical subsolutions because $F(u_i,u_i')=u_i-3\\le0$ pointwise on $\\Omega$; being $C^1$ classical subsolutions of a first-order equation, they are viscosity subsolutions in the test-function sense (the definition is the evident adaptation of [[def-viscosity-subsolution-and-supersolution]] to a proper operator $F(x,r,p)$: the inequality $F(x_0,u(x_0),D\\phi(x_0))\\le0$ is required at every local maximum of $u-\\phi$). Their pointwise minimum is $u=1-2|x|$, and $\\phi\\equiv1$ is $C^1$ with $\\phi\\ge u$ on $\\Omega$ and equality exactly at $0$, so $u-\\phi$ has a local maximum at $0$; the subsolution inequality would require $F(0,1,0)=1+1-0\\le0$, which is false. The zero-order term $u$ is what makes the corner value $u(0)=1$ enter with the wrong sign, while the two affine functions themselves have values at most $3$ and slopes $\\mp2$ with $-p^2$ terms that more than compensate: this is exactly why a proper equation can fail the mixed operation and why the maximum/minimum proposition of [[prop-maxima-of-subsolutions-and-minima-of-supersolutions]] is stated for the specific Hamilton--Jacobi operator $u_t+H(x,t,Du)$ with no zero-order term. Every step is an explicit computation of the two quadratic expressions. S: [CIL] the discussion of properness and of finite infima of supersolutions in Section 4 and Section 5, printed pp. 22--25 and 35--36; [TR] Chapter 1 Section 8, the discussion following Lemma 1.25, printed p. 33.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Introduction (0.1)--(0.3), printed p. 2 (properness); Section 4, Lemma 4.2, printed pp. 23--24 (supremum stability, with the dual infimum formulation). The two explicit affine profiles and failing test are computed here."
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 Section 8, the discussion following Lemma 1.25, printed p. 33"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-viscosity-solutions-need-not-be-unique-when-the-boundary-condition-is-not-imposed-in-a-comparison-class",
+        "kind": "counterexample",
+        "title": "The eikonal equation on an interval has many solutions when endpoint data are omitted",
+        "statement": "**False claim:** the stationary eikonal equation $|u'|=1$ on $\\Omega=(0,1)$ has\na unique viscosity solution when no boundary data are prescribed.\n\nThe functions $u_1(x)=x$, $u_2(x)=1-x$ and\n$u_3(x)=\\tfrac12-|x-\\tfrac12|=\\min\\{x,1-x\\}$ are viscosity solutions of\n$|u'|=1$ on $(0,1)$\n([[def-viscosity-subsolution-and-supersolution]],\n[[lem-viscosity-testing-by-first-order-jets]]). They are pairwise distinct, and\ntheir continuous boundary traces are respectively $(0,1)$, $(1,0)$ and\n$(0,0)$; in particular the equation without prescribed endpoint data does not\nselect a unique solution, and the examples are distinguished by their boundary\ntraces.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "lem-viscosity-testing-by-first-order-jets"
+        ],
+        "strategy": "Write $F(p)=|p|-1$ and lift each stationary profile to $U_i(x,t)=u_i(x)$ for the equation $U_t+F(U_x)=0$. At a contact with a $C^1$ test in space-time, the time derivative of the test is zero because $U_i$ is independent of time. Away from $x_0=1/2$, each profile is $C^1$ and has spatial derivative $1$ or $-1$, so both viscosity inequalities hold. At $x_0$, write $h=x-x_0$ and $u_3(x_0+h)=1/2-|h|$. If $\\phi$ is an upper test with $p=\\phi'(x_0)$, normalize $\\phi(x_0)=1/2$ and use $\\phi(x_0+h)=1/2+ph+o(|h|)$. The inequality $u_3\\le\\phi$ for $h>0$ gives $p\\ge-1$, while for $h<0$ it gives $p\\le1$. Hence every upper-test slope lies in $[-1,1]$ and $F(p)\\le0$. If $\\phi$ were a lower test, $u_3\\ge\\phi$ for $h>0$ would give $p\\le-1$, while for $h<0$ it would give $p\\ge1$; these conditions are incompatible, so no lower test exists and the supersolution condition is vacuous. For pairwise distinctness, at $x=1/4$ one has $(u_1,u_2,u_3)=(1/4,3/4,1/4)$, and at $x=3/4$ one has $(u_1,u_2,u_3)=(3/4,1/4,1/4)$; these values distinguish every pair. Also $u_1-u_2=2x-1$ changes sign. Evaluating the continuous extensions at the endpoints gives traces $(0,1)$, $(1,0)$, and $(0,0)$. Thus omitted boundary data leave multiple solutions, while the displayed candidates have different endpoint traces. P: direct test-function verification at the peak and explicit boundary evaluation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations, Bulletin of the American Mathematical Society 27 (1992), 1--67 (complete article)",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 8, Theorem 8.2, printed p. 50: comparison requires ordered initial and lateral boundary data. The three distinct stationary interval profiles are computed here."
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Sections 3--5, the eikonal equation and its nonuniqueness without boundary data, printed pp. 10--20"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-distance-to-the-boundary-is-the-viscosity-solution-of-the-unit-eikonal-dirichlet-problem",
+        "kind": "example",
+        "title": "Distance to the boundary solves the unit eikonal Dirichlet problem on the ball",
+        "statement": "Let $n\\ge1$ and let $\\Omega=B(0,1)\\subseteq\\mathbb R^n$ be the open unit ball and let\n$d(x):=1-|x|=\\operatorname{dist}(x,\\partial\\Omega)$. Then $d$ is Lipschitz with\n$|Dd|=1$ at every $x\\ne0$, continuous on $\\overline\\Omega$ with $d=0$ on\n$\\partial\\Omega$, and $d$ is a viscosity solution of the stationary eikonal\nequation with zero boundary data:\n$$|Du|=1\\ \\text{in }\\Omega,\\qquad u=0\\ \\text{on }\\partial\\Omega .$$\nAt $x\\ne0$ the equation holds classically; at the centre the function has a\npeak, every $C^1$ test function $\\phi$ with $d-\\phi$ having a local maximum at\n$0$ satisfies $|D\\phi(0)|\\le1$ (the subsolution inequality), and no $C^1$\ntest function has $d-\\phi$ locally minimal at $0$: a lower contact would require\n$\\langle D\\phi(0),h\\rangle\\le-|h|$ for all $h$, which is impossible, so no such\ncontact exists and the supersolution test is vacuous at the centre. Hence $d$\nis a viscosity solution. The example is the canonical nonsmooth\nboundary-value solution of the eikonal equation, obtained by cone comparisons\nat the centre rather than by an abstract existence theorem.",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "lem-viscosity-testing-by-first-order-jets",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-norm-and-normed-space",
+          "def-euclidean-inner-product",
+          "ex-eikonal-equation-as-a-viscosity-equation"
+        ],
+        "strategy": "Verification. For $x\\ne0$, $d$ is smooth with $Dd(x)=-x/|x|$, so $|Dd(x)|=1$ and the equation holds classically. At $x=0$: if $d-\\phi$ has a local maximum at $0$ with $\\phi(0)=1$, then $1-|x|\\le\\phi(x)\\le\\phi(0)+\\langle D\\phi(0),x\\rangle+o(|x|)=1+\\langle D\\phi(0),x\\rangle+o(|x|)$, so $\\langle D\\phi(0),x\\rangle\\ge-|x|+o(|x|)$; replacing $x$ by $-x$ gives $|\\langle D\\phi(0),x\\rangle|\\le|x|$ and hence $|D\\phi(0)|\\le1$, which is the subsolution inequality. If $d-\\phi$ had a local minimum at $0$, then $1-|x|\\ge 1+\\langle D\\phi(0),x\\rangle+o(|x|)$, i.e. $\\langle D\\phi(0),x\\rangle\\le-|x|+o(|x|)$, and testing $x$ and $-x$ forces the impossible $\\langle D\\phi(0),x\\rangle=-|x|$ for every $x$ simultaneously; so the set of lower contacts is empty and the supersolution inequality holds vacuously. The boundary values are zero by the definition of $d$. This is exactly the metric triangle inequality in the form $d(x)\\le d(y)+|x-y|$ specialised to the ball, and it is the model example of a distance solution with nonsmooth data. S: [TR] Chapter 1 Exercise 8, printed p. 22; [BHJ] Sections 3--5, the distance function as a viscosity solution, printed pp. 10--20; [CIL] Section 1, the eikonal boundary-value example, printed pp. 6--8.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton--Jacobi Equations: Theory and Applications, 2020 preliminary author manuscript of AMS Graduate Studies in Mathematics 213 (complete text)",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1, Exercise 8, printed p. 19 (distance solves the eikonal Dirichlet problem); the ball verification is supplied here."
+            },
+            {
+              "title": "Alberto Bressan, Viscosity Solutions of Hamilton--Jacobi Equations and Optimal Control Problems, complete author lecture notes, Penn State University (PDF records Fall 2019 revision)",
+              "url": "https://sites.psu.edu/bressan/files/2025/05/HJlnotes24.pdf",
+              "locator": "Section 3, Example 3.1, equations (3.7)--(3.8), printed pp. 11--12: the one-dimensional peak 1-|x| is a viscosity solution. The multidimensional ball and boundary-distance calculation are verified here."
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  }
+]

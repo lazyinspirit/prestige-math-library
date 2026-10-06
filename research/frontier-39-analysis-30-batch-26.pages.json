@@ -1,0 +1,1175 @@
+[
+  {
+    "order": 510.06503,
+    "id": "bochner-inversion-and-plancherel-on-lca-groups",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "Bochner Inversion and Plancherel on Lca Groups",
+    "companion": "bochner-inversion-and-plancherel-on-lca-groups-examples",
+    "requires": [
+      "character-groups-and-elementary-lca-duals",
+      "fourier-transform-convolution-and-approximate-identities",
+      "banach-algebras-spectrum-and-holomorphic-functional-calculus",
+      "gelfand-theory-and-commutative-c-star-algebras",
+      "radon-measures-and-the-riesz-markov-kakutani-theorem",
+      "haar-measure-existence-and-uniqueness",
+      "continuous-functional-calculus-for-self-adjoint-and-normal-operators"
+    ],
+    "items": [
+      {
+        "id": "def-fourier-transform-on-an-lca-group",
+        "kind": "definition",
+        "title": "The Fourier transform on an LCA group",
+        "deps": [
+          "def-pontryagin-dual-and-compact-open-topology",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "statement": "Let $G$ be a locally compact Hausdorff abelian group, written additively, let\n$m_G$ be a fixed left Haar measure on $G$\n([[def-left-haar-integral-and-left-haar-measure]]), and let $\\widehat G$ be\nthe Pontryagin dual with the compact-open topology\n([[def-pontryagin-dual-and-compact-open-topology]]).\n\nFor $f\\in L^1(G,m_G)$ ([[def-l-p-space-as-a-quotient-by-null-functions]],\n[[def-integrable-real-and-complex-functions-and-their-integrals]]) the\n**Fourier transform** of $f$ is the function $\\widehat f:\\widehat G\\to\\mathbb C$\ndefined at $\\gamma\\in\\widehat G$ by\n$$\\widehat f(\\gamma):=\\int_G f(x)\\,\\overline{\\gamma(x)}\\,dm_G(x).$$\n\n**Well-definedness.** The evaluation pairing $(\\gamma,x)\\mapsto\\gamma(x)$ is\njointly continuous ([[lem-character-evaluation-pairing-is-jointly-continuous]])\nand every character takes values in the unit circle\n$\\mathbb T=\\{z\\in\\mathbb C:|z|=1\\}$\n([[lem-unit-circle-is-a-compact-metrizable-topological-group]]), so for fixed\n$\\gamma$ the function $x\\mapsto\\overline{\\gamma(x)}$ is Borel measurable with\nmodulus $1$ ([[thm-composition-with-borel-functions-preserves-measurability]],\n[[lem-complex-conjugation-and-modulus-laws]]). Hence the integrand\n$x\\mapsto f(x)\\overline{\\gamma(x)}$ is Borel measurable and dominated by\n$|f|$, so the integral converges absolutely and\n$$|\\widehat f(\\gamma)|\\le\\int_G|f|\\,dm_G=\\|f\\|_1\\qquad\\text{for every }\\gamma.$$\nReplacing $f$ by an $m_G$-a.e. equal representative changes the integrand only\non an $m_G$-null set, so no value $\\widehat f(\\gamma)$ changes: the transform\nis well defined on the quotient $L^1(G,m_G)$ and not merely on representatives,\nand $f\\mapsto\\widehat f$ is a linear map $L^1(G,m_G)\\to\\ell^\\infty(\\widehat G)$\nwith $\\|\\widehat f\\|_\\infty\\le\\|f\\|_1$.\n\n**Convention.** This is the conjugate-phase convention. On $G=\\mathbb R^n$ with\nLebesgue measure, where the characters are $\\gamma_\\xi(x)=e^{2\\pi i x\\cdot\\xi}$,\nit reads $\\widehat f(\\xi)=\\int_{\\mathbb R^n}f(x)e^{-2\\pi i x\\cdot\\xi}\\,dx$.\nNo dual Haar measure is used in the definition: the compatible scale on\n$\\widehat G$ is fixed only by the compatible dual Haar normalisation proved on\nthis page.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-lca-haar-measure-is-inversion-invariant",
+        "kind": "lemma",
+        "title": "Haar measure on an abelian group is invariant under inversion",
+        "deps": [
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-radon-measure-on-an-lch-space",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-topological-group",
+          "def-locally-compact-space",
+          "def-dependent-choice",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "lem-finite-lch-partition-of-unity-near-a-compact-set",
+          "lem-positive-linear-functionals-on-c-c-are-monotone",
+          "thm-rmk-uniqueness-among-radon-measures",
+          "thm-compactness-under-continuous-maps",
+          "thm-finite-products-of-compact-spaces",
+          "cor-cauchy-reals-lub-complete"
+        ],
+        "statement": "Assume Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group\nwith a left Haar measure $m$ ([[def-left-haar-integral-and-left-haar-measure]]).\nThen\n$$m(-E)=m(E)\\qquad\\text{for every Borel set }E\\subseteq G .$$",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gert K. Pedersen, The existence and uniqueness of the Haar integral on a locally compact topological group (2000), definitions and the second proof of uniqueness, pp. 2-5",
+              "url": "https://home.agh.edu.pl/~rudol/Paradoxes/haarintegral.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "local_addition": true,
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-lca-lone-convolution-is-a-commutative-banach-star-algebra",
+        "kind": "lemma",
+        "title": "L^1 of an LCA group is a commutative Banach star algebra under convolution",
+        "deps": [
+          "thm-absolute-continuity-of-the-integral",
+          "thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation",
+          "def-fourier-transform-on-an-lca-group",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-radon-measure-on-an-lch-space",
+          "lem-lca-haar-measure-is-inversion-invariant",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "thm-rmk-uniqueness-among-radon-measures",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "thm-minkowski-integral-inequality",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "lem-translations-preserve-compactly-supported-continuous-functions",
+          "def-compactness-variants",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compactness-under-continuous-maps",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group\nwith Haar measure $m_G$, and let $A=L^1(G,m_G)$. For $f,g\\in A$ define\n$$(f*g)(x):=\\int_G f(y)\\,g(x-y)\\,dm_G(y),\\qquad f^*(x):=\\overline{f(-x)} .$$\nThen (1) for $m_G$-a.e. $x$ the integral converges absolutely and defines a\nclass in $A$ independent of the chosen representatives, with\n$$\\|f*g\\|_1\\le\\|f\\|_1\\|g\\|_1;$$\n(2) convolution is bilinear, associative and commutative, $*$ is an isometric\ninvolution with $f^{**}=f$ and $(f*g)^*=g^**f^*$, and $A$ is complete in\n$\\|\\cdot\\|_1$; hence $A$ is a commutative Banach $*$-algebra. No\n$\\sigma$-finiteness of $m_G$ is assumed: the proof reduces the two $\\sigma$-compact\nessential supports to a $\\sigma$-finite product and extends by zero. $A$ has an\nidentity exactly when $G$ is discrete, proved later on this page.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "Reduce to the $\\sigma$-compact essential supports: use Radon tightness and inner regularity to contain $\\{|f|>0\\}$, $\\{|g|>0\\}$ up to null sets in $\\sigma$-compact sets $S,T$ of $\\sigma$-finite measure; then $\\{(y,x):y\\in S,\\ x-y\\in T\\}\\subseteq S\\times(S+T)$ is $\\sigma$-finite and carried onto $S\\times T$ by the homeomorphism $(y,x)\\mapsto(y,x-y)$. Apply Tonelli/Fubini there, extend by zero, and check independence of representatives. The norm bound is Tonelli applied to $|f|\\otimes|g|$; associativity is the unique a.e. value of a triple product; completeness is Riesz-Fischer. Involution preserves the norm because inversion preserves Haar measure for abelian $G$ (pushforward is Haar, and the double pushforward forces scale $1$).",
+        "local_addition": true,
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-lca-translations-and-normalised-local-approximate-identities",
+        "kind": "lemma",
+        "title": "Translation continuity and normalised local approximate identities on an LCA group",
+        "deps": [
+          "lem-lca-lone-convolution-is-a-commutative-banach-star-algebra",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-radon-measure-on-an-lch-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "lem-translations-preserve-compactly-supported-continuous-functions",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "thm-minkowski-integral-inequality",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-compactness-under-continuous-maps",
+          "thm-finite-products-of-compact-spaces",
+          "lem-lca-haar-measure-is-inversion-invariant",
+          "thm-holder-inequality-for-integrals",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group\nwith Haar measure $m_G$ and let $1\\le p<\\infty$. Translation\n$T_xf(t):=f(t-x)$ is a linear isometry of $L^p(G,m_G)$ and $x\\mapsto T_xf$ is\nnorm-continuous for every $f$. Moreover for every identity neighbourhood $U$\nthere is a symmetric $u_U\\in C_c(G)$, $u_U\\ge0$, $u_U(-x)=u_U(x)$,\n$\\int_G u_U\\,dm_G=1$, $\\operatorname{supp}u_U\\subseteq U$, and for every\n$f\\in L^p$\n$$\\|u_U*f-f\\|_p\\to0,\\qquad \\|f*u_U-f\\|_p\\to0$$\nas the support neighbourhood shrinks, uniformly over all such kernels, with $\\|u_U*f\\|_p\\le\\|f\\|_p$ and\n$\\|f*u_U\\|_p\\le\\|f\\|_p$. More precisely, index by all admissible pairs\n$(U,u)$, ordered by reverse inclusion of $U$, and assign the kernel $u$ to\nthat pair. This directed net is a contractive two-sided approximate identity\nof $A=L^1(G,m_G)$; its convergence requires no simultaneous choice of one\nkernel for every neighbourhood, no metrisation, and no sequential compactness.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "First prove the estimate $\\|u*f-f\\|_p\\le\\sup_{x\\in\\operatorname{supp}u}\\|T_xf-f\\|_p$ for $u\\ge0$, $\\|u\\|_1=1$ by writing $u*f(x)-f(x)$ as a weighted average of the differences $f(x-y)-f(x)$. For $f\\in C_c(G)$ translate inside one compact set of finite measure and use uniform continuity; for general $f$ use $C_c$ density and the isometry property. The same estimate gives $L^1$-norm continuity of translation, which then carries the approximate-identity limit. Build $u_U$ by symmetrising and normalising a nonnegative cutoff in a smaller symmetric identity neighbourhood; every limit is directed by inclusion of identity neighbourhoods.",
+        "local_addition": true,
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations",
+        "kind": "lemma",
+        "title": "Nonzero multiplicative functionals on L^1 of an LCA group are Fourier evaluations",
+        "deps": [
+          "def-fourier-transform-on-an-lca-group",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-lca-lone-convolution-is-a-commutative-banach-star-algebra",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "def-unital-banach-algebra",
+          "def-character-and-maximal-ideal-space",
+          "thm-characters-on-a-unital-banach-algebra-are-continuous",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "thm-rmk-uniqueness-among-radon-measures",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group\nwith Haar measure $m_G$ and $A=L^1(G,m_G)$. If $h:A\\to\\mathbb C$ is a nonzero\nmultiplicative linear functional (no continuity assumed), then there exists a\nunique $\\gamma\\in\\widehat G$ such that\n$$h(f)=\\widehat f(\\gamma)=\\int_G f(x)\\overline{\\gamma(x)}\\,dm_G(x)\\qquad\\text{for all }f\\in A,$$\nand consequently $|h(f)|\\le\\|f\\|_1$; every such $h$ has norm $1$. Conversely\neach $\\gamma\\in\\widehat G$ gives such a functional.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "Extend $h$ algebraically to the unital scalar algebra $A^+=\\mathbb C\\oplus A$ (the scalar unitisation defined below) by $h^+(z,f)=z+h(f)$; the unital Banach character theorem [[thm-characters-on-a-unital-banach-algebra-are-continuous]] gives $|h(f)|\\le\\|f\\|_1$ once $A^+$ is normed to be a unital Banach algebra. Choose $f$ with $h(f)\\ne0$; the identity $T_x(f*g)=(T_xf)*g=f*(T_xg)$ shows $h(T_xf)/h(f)$ is independent of $f$, call it $a(x)$. Translation continuity, $T_{x+y}=T_xT_y$ and boundedness of $a$ give continuity, $a(x+y)=a(x)a(y)$ and $|a(x)|=1$ (apply boundedness to all integer powers). Then $\\gamma=\\overline a$ is a character in the Fourier convention. For the local approximate identity, $h(u_U)\\to1$ and $h(f*u_U)=\\int_G f(x)h(T_xu_U)\\,dm_G(x)=h(u_U)\\int_Gf(x)a(x)\\,dm_G(x)$, the integral identity being justified first on $C_c$ by finite-norm approximation of $x\\mapsto T_xu_U$ and then by $L^1$ truncation. The net limit gives $h=h_\\gamma$, and local bumps prove uniqueness of $\\gamma$.",
+        "local_addition": true,
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+        "kind": "lemma",
+        "title": "Fourier transform intertwines translation, modulation and convolution",
+        "deps": [
+          "def-fourier-transform-on-an-lca-group",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "lem-lca-lone-convolution-is-a-commutative-banach-star-algebra",
+          "lem-lca-haar-measure-is-inversion-invariant",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]).\nLet $G$ be a locally compact Hausdorff abelian group with Haar measure $m_G$.\nFor $f,g\\in L^1(G,m_G)$, $x\\in G$ and a character $\\gamma_0\\in\\widehat G$, the\nfollowing identities hold pointwise on $\\widehat G$:\n$$\\widehat{T_xf}(\\gamma)=\\overline{\\gamma(x)}\\,\\widehat f(\\gamma),\\qquad \\widehat{\\gamma_0 f}(\\gamma)=\\widehat f(\\gamma_0^{-1}\\gamma),\\qquad \\widehat{f*g}(\\gamma)=\\widehat f(\\gamma)\\widehat g(\\gamma),\\qquad \\widehat{f^*}(\\gamma)=\\overline{\\widehat f(\\gamma)},$$\nwhere $T_xf=f(\\cdot-x)$, $(\\gamma_0f)(x)=\\gamma_0(x)f(x)$ and\n$f^*(x)=\\overline{f(-x)}$. All four identities are identities of bounded\ncomplex-valued functions on $\\widehat G$; the first three are used only after\nthe transform codomain has been identified.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "Unwind the definitions and use absolute Fubini on a $\\sigma$-finite reduction of the supports, exactly as in item 1a; translation of the Haar integral gives the first identity, the substitution $x\\mapsto\\gamma_0(x)$ in the integral the second, the change of variables $(x,y)\\mapsto(x,y-x)$ (a homeomorphism with Haar-preserving pushforward for abelian $G$) the third, and the inversion invariance of Haar measure the fourth.",
+        "local_addition": true,
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-lca-lone-character-topology-is-the-compact-open-topology",
+        "kind": "lemma",
+        "title": "The character topology on L^1 of an LCA group is the compact-open topology",
+        "deps": [
+          "def-left-haar-integral-and-left-haar-measure",
+          "lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "def-compact-open-topology-for-topological-domains",
+          "lem-compact-open-character-group-operations-are-continuous",
+          "def-topology-of-pointwise-convergence",
+          "def-directed-set-and-net",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "lem-lca-lone-convolution-is-a-commutative-banach-star-algebra",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-compactness-variants",
+          "thm-compactness-under-continuous-maps",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group\nwith Haar measure $m_G$ and $A=L^1(G,m_G)$. Under the bijection\n$\\gamma\\mapsto h_\\gamma$ of\n[[lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations]],\nthe compact-open topology of $\\widehat G$ is the topology of pointwise\nevaluation on all of $A$: a net $(h_i)$ converges to $h_0$ in the topology of\npointwise convergence on $A$ if and only if the corresponding characters\nconverge to $\\gamma_0$ uniformly on every compact subset of $G$. Consequently\nthe algebraically defined character space of $A$ carries exactly the\ncompact-open topology of $\\widehat G$, and the resulting identification is a\nhomeomorphism.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "One direction is the compact/tail split: if $\\gamma_i\\to\\gamma_0$ uniformly on compacta, use $|h_{\\gamma_i}(f)-h_{\\gamma_0}(f)|\\le\\int_K|f||\\gamma_i-\\gamma_0|+\\int_{G\\setminus K}|f|$ with a compact $K$ carrying all but $\\epsilon$ of $|f|$ and note $|f|$ can be taken compactly supported first; conversely take an evaluation-convergent net $h_i\\to h_0$ and pick $f$ with $h_0(f)\\ne0$. On a compact $K\\subseteq G$ the set $\\{T_xf:x\\in K\\}$ is norm compact by translation continuity, so finitely many norm-nets plus $\\|h_i\\|\\le1$ give $h_i(T_xf)\\to h_0(T_xf)$ uniformly in $x\\in K$; the ratios of step [1c] with denominators bounded away from zero then give uniform character convergence on $K$. The argument covers arbitrary nets, since compactness of $\\{T_xf\\}$ supplies total boundedness rather than sequential compactness.",
+        "local_addition": true,
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-lca-scalar-unitization-character-space-and-spectrum",
+        "kind": "lemma",
+        "title": "Scalar unitisation of L^1 of an LCA group: characters, spectrum and identity criterion",
+        "deps": [
+          "lem-lca-lone-convolution-is-a-commutative-banach-star-algebra",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations",
+          "lem-lca-lone-character-topology-is-the-compact-open-topology",
+          "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-radon-measure-on-an-lch-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "thm-absolute-continuity-of-the-integral",
+          "thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra",
+          "thm-characters-on-a-unital-banach-algebra-are-continuous",
+          "thm-maximal-ideal-space-is-compact-hausdorff",
+          "def-gelfand-transform",
+          "def-jacobson-radical-and-semisimple-commutative-banach-algebra",
+          "thm-kernel-of-the-gelfand-transform-is-the-radical",
+          "thm-spectrum-as-character-values",
+          "thm-spectrum-is-nonempty-compact-and-norm-bounded",
+          "thm-spectral-radius-formula",
+          "def-spectral-radius",
+          "def-holomorphic-functional-calculus",
+          "thm-holomorphic-spectral-mapping",
+          "cor-normal-operator-norm-equals-spectral-radius",
+          "def-unital-banach-algebra",
+          "def-one-point-compactification",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "def-dependent-choice",
+          "def-axiom-of-choice",
+          "def-complex-l-two-inner-product",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "thm-minkowski-integral-inequality",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-lca-haar-measure-is-inversion-invariant",
+          "thm-riesz-fischer-completeness-of-l-p"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact\nHausdorff abelian group with Haar measure $m_G$, $A=L^1(G,m_G)$ and let\n$A^+=\\mathbb C\\oplus A$ with\n$$(z,f)(w,g)=(zw,\\ zg+wf+f*g),\\qquad (z,f)^*=(\\bar z,f^*),\\qquad \\|(z,f)\\|=|z|+\\|f\\|_1 .$$\nThen: (1) $A^+$ is a unital commutative complex Banach algebra (it is a Banach\n$*$-algebra with $\\|(z,f)^*\\|=\\|(z,f)\\|$), and its characters are exactly\n$q(z,f)=z$ and $h_\\gamma^+(z,f)=z+\\widehat f(\\gamma)$, $\\gamma\\in\\widehat G$;\n(2) $\\sigma_{A^+}(0,f)=\\{0\\}\\cup\\widehat f(\\widehat G)$ for every $f\\in A$;\n(3) $A$ has an identity if and only if $G$ is discrete, and then the identity\nis $m_G(\\{0\\})^{-1}\\mathbf 1_{\\{0\\}}$; (4) $\\Delta(A^+)$ is homeomorphic to\n$\\widehat G\\cup\\{q\\}$, which is the one-point compactification of $\\widehat G$\nwhen $G$ is nondiscrete, while for discrete $G$ it is\n$\\widehat G\\sqcup\\{q\\}$ with $q$ isolated; (5) $A$ is semisimple in the sense\nthat $\\widehat f\\equiv0$ implies $f=0$.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "Restrict a character of $A^+$ to the ideal $A$: if it vanishes there it is $q$; otherwise item 1c gives $h_\\gamma^+$. The general unital commutative Banach spectrum theorem [[thm-spectrum-as-character-values]] gives $\\sigma_{A^+}(0,f)=\\{0\\}\\cup\\widehat f(\\widehat G)$ because $q(0,f)=0$. For the identity criterion: a unit of $A$ cannot coexist with arbitrarily small identity neighbourhoods (test $u*\\mathbf 1_W=\\mathbf 1_W$ on a symmetric $W$ with small $L^1$ mass, as in Loomis 31D); conversely if $G$ is discrete then $\\mathbf 1_{\\{0\\}}$ is in $L^2$ and yields a unit after normalising by $m_G(\\{0\\})$. Semisimplicity: the regular representation $\\lambda:A\\to\\mathcal B(L^2(G))$ is a contractive faithful $*$-representation (test $\\lambda(f)=0$ against the local approximate identity of item 1b in $L^1\\cap L^2$); it is normal on self-adjoint elements, $\\|\\lambda(f)\\|=r(\\lambda(f))\\le\\|\\widehat f\\|_\\infty$ by spectral inclusion and [[cor-normal-operator-norm-equals-spectral-radius]], so $\\widehat f\\equiv0$ forces $f=0$. Then $\\widehat G\\cup\\{q\\}$ is compact Hausdorff by [[thm-maximal-ideal-space-is-compact-hausdorff]]; it contains $\\widehat G$ as the open subspace $\\Delta(A^+)\\setminus\\{q\\}$ by item 1d. If $q$ were isolated, choose finitely many transforms nonzero on a finite cover of the compact complement and set $b=\\sum_j f_j*f_j^*$; its transform is bounded below there, and the holomorphic functional calculus in $A^+$ produces an idempotent $e\\in A$ with transform $1$ on the complement and $q(e)=0$; semisimplicity gives $e*f=f$ for all $f$, contradicting the unit criterion. Hence for nondiscrete $G$ the space $\\widehat G\\cup\\{q\\}$ is the one-point compactification of $\\widehat G$; for discrete $G$ evaluation at the actual unit isolates $q$.",
+        "local_addition": true,
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-riemann-lebesgue-lemma-on-lca-groups",
+        "kind": "theorem",
+        "title": "Riemann-Lebesgue lemma on LCA groups",
+        "deps": [
+          "def-fourier-transform-on-an-lca-group",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations",
+          "lem-lca-lone-character-topology-is-the-compact-open-topology",
+          "lem-lca-scalar-unitization-character-space-and-spectrum",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "def-gelfand-transform",
+          "thm-maximal-ideal-space-is-compact-hausdorff",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and Dependent Choice ([[def-dependent-choice]]). Let $G$ be a locally compact Hausdorff abelian group with Haar measure $m_G$ and dual $\\widehat G$. For every $f\\in L^1(G,m_G)$ its Fourier transform satisfies\n$$\\widehat f\\in C_0(\\widehat G),\\qquad \\|\\widehat f\\|_\\infty\\le\\|f\\|_1 .$$\nThus $f\\mapsto\\widehat f$ maps $L^1(G,m_G)$ into the Banach space $C_0(\\widehat G)$, and the vanishing at infinity is uniform, not merely along sequences.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "Continuity: for $f\\in C_c(G)$ the integrand is jointly continuous and supported in a fixed compact set, so uniform convergence on compacta of characters gives continuity; general $f$ follows by $C_c$ density and the uniform bound. Vanishing at infinity: the compact spectrum of $A^+$ from item 1e and $q(0,f)=0$ show that every set $\\{\\gamma\\in\\widehat G:|\\widehat f(\\gamma)|\\ge\\epsilon\\}$ has compact closure in $\\widehat G$, because its union with $\\{q\\}$ is closed in the compact space $\\Delta(A^+)$ and misses $q$. No Pontryagin separation or biduality is used.",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-fourier-stieltjes-transforms-determine-finite-radon-measures",
+        "kind": "lemma",
+        "title": "Fourier-Stieltjes transforms determine finite Radon measures",
+        "deps": [
+          "def-fourier-transform-on-an-lca-group",
+          "lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations",
+          "lem-lca-scalar-unitization-character-space-and-spectrum",
+          "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+          "thm-riemann-lebesgue-lemma-on-lca-groups",
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-rmk-uniqueness-among-radon-measures",
+          "thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals",
+          "def-radon-measure-on-an-lch-space",
+          "def-regular-complex-borel-measure-on-an-lch-space",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-gelfand-transform",
+          "thm-maximal-ideal-space-is-compact-hausdorff",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group with dual $\\widehat G$, and let $\\mu$ be a finite regular complex Borel measure on $\\widehat G$ ([[def-regular-complex-borel-measure-on-an-lch-space]]). If the inverse transform\n$$x\\mapsto\\int_{\\widehat G}\\gamma(x)\\,d\\mu(\\gamma)$$\nvanishes for every $x\\in G$, then $\\mu=0$. Equivalently, two finite regular complex Borel measures on $\\widehat G$ with the same inverse transform are equal.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "strategy": "The Fourier-transform algebra $\\{\\widehat f:f\\in L^1(G,m_G)\\}\\subseteq C_0(\\widehat G)$ is self-adjoint, nonzero at every dual character, and separates distinct dual characters by compactly supported bumps (Urysohn cutoffs and the transform identities of item 2). Apply [[thm-complex-stone-weierstrass-self-adjoint]] to the compact character space of $A^+$ from item 1e: the algebra separates its points and its only common zero is $q$; the vanishing-at-one-point case gives uniform density of the transforms in $C_0(\\widehat G)$. For $\\mu$ with vanishing inverse transform, absolute Fubini gives $\\int_{\\widehat G}\\widehat f\\,d\\mu=0$ for every $f\\in L^1(G,m_G)$ (replace $x$ by $-x$ for the conjugate convention), hence by density $\\int h\\,d\\mu=0$ for every $h\\in C_0(\\widehat G)$, and [[thm-rmk-uniqueness-among-radon-measures]] gives $\\mu=0$. This uses no assumption that $G\\cong\\widehat{\\widehat G}$.",
+        "dependency_level": 7
+      },
+      {
+        "id": "def-positive-definite-function-on-an-abelian-group",
+        "kind": "definition",
+        "title": "Positive definite functions on an abelian group",
+        "deps": [
+          "def-group",
+          "def-complex-numbers-and-arithmetic",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "statement": "Let $G$ be an abelian group written additively ([[def-group]]) and let\n$\\phi:G\\to\\mathbb C$ be a function ([[def-complex-numbers-and-arithmetic]]).\nThen $\\phi$ is **positive definite** when for every integer $n\\ge0$, every\nfinite family $x_1,\\dots,x_n\\in G$ and all coefficients\n$c_1,\\dots,c_n\\in\\mathbb C$ one has\n$$\\sum_{j=1}^{n}\\sum_{k=1}^{n}c_j\\overline{c_k}\\,\\phi(x_j-x_k)\\ \\ge\\ 0 .$$\nThe sum for $n=0$ is the empty sum $0$, so the convention covers it; repeated\npoints $x_j=x_k$ are allowed, so the finite matrices tested are the Hermitian\nmatrices $[\\phi(x_j-x_k)]_{j,k}$. No continuity, boundedness or measurability\nis part of the definition.\n\n**Elementary consequences.** The claims below are immediate from the defining\ninequality and are recorded here for later use. Taking $n=1$, $x_1=0$ and\n$c_1=1$ gives $\\phi(0)\\ge0$. Taking $n=2$, $x_1=0$, $x_2=x$ and\n$c_1=1$, $c_2=t$ gives\n$$(1+|t|^2)\\phi(0)+\\overline{t}\\,\\phi(-x)+t\\,\\phi(x)\\ \\ge\\ 0\\qquad\\text{for every }t\\in\\mathbb C .$$\nThe left side is real and equal to its own conjugate for every $t$, so\ncomparing coefficients at $t=1$ and $t=i$ gives $\\phi(-x)=\\overline{\\phi(x)}$\n([[lem-complex-conjugation-and-modulus-laws]]); hence every tested matrix is\nHermitian. If $\\phi(x)\\ne0$, choose $t=-\\overline{\\phi(x)}/|\\phi(x)|$, so $|t|=1$ and $t\\phi(x)=-|\\phi(x)|$. The inequality becomes $2\\phi(0)-2|\\phi(x)|\\ge0$, hence $|\\phi(x)|\\le\\phi(0)$; if $\\phi(x)=0$, the same bound follows from $\\phi(0)\\ge0$. Thus a positive definite $\\phi$ satisfies\n$\\phi(0)\\ge0$, $\\phi(x)=\\overline{\\phi(-x)}$ and $|\\phi(x)|\\le\\phi(0)$ for all\n$x\\in G$.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-fourier-stieltjes-transform-of-a-positive-measure-is-positive-definite",
+        "kind": "lemma",
+        "title": "Fourier-Stieltjes transforms of positive measures are continuous positive definite",
+        "deps": [
+          "def-positive-definite-function-on-an-abelian-group",
+          "def-fourier-transform-on-an-lca-group",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "def-radon-measure-on-an-lch-space",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "statement": "Let $G$ be a locally compact Hausdorff abelian group with dual $\\widehat G$,\nand let $\\mu$ be a finite positive Radon measure on $\\widehat G$\n([[def-radon-measure-on-an-lch-space]]). Then the **Fourier-Stieltjes\ntransform**\n$$\\phi(x):=\\int_{\\widehat G}\\gamma(x)\\,d\\mu(\\gamma)$$\nis a continuous positive definite function on $G$\n([[def-positive-definite-function-on-an-abelian-group]]) with\n$\\phi(0)=\\mu(\\widehat G)=\\|\\mu\\|$. Continuity is uniform on $G$, not merely at\nthe identity.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "strategy": "Positive definiteness is immediate from linearity of the integral applied to the nonnegative finite matrix $\\sum_{j,k}c_j\\overline{c_k}\\,\\gamma(x_j-x_k)=\\bigl|\\sum_j c_j\\gamma(x_j)\\bigr|^2$. For continuity use inner regularity of the finite Radon measure: split $\\mu$ into a compact part and a tail of mass $<\\epsilon$, use joint continuity of the evaluation pairing on the compact part to get a symmetric identity neighbourhood on which all characters in the compact part move by less than $\\epsilon/\\mu(\\widehat G)$, and control the tail by $2\\cdot(\\text{tail mass})$. No sequence-based dominated convergence is used, so non-first-countable duals are covered.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core",
+        "kind": "lemma",
+        "title": "Positive definite functions give positive bounded functionals on the transform core",
+        "deps": [
+          "def-positive-definite-function-on-an-abelian-group",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "lem-lca-scalar-unitization-character-space-and-spectrum",
+          "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+          "lem-lca-lone-convolution-is-a-commutative-banach-star-algebra",
+          "lem-lca-haar-measure-is-inversion-invariant",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-spectral-radius-formula",
+          "def-spectral-radius",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "cor-weierstrass-approximation-on-a-closed-interval",
+          "thm-riemann-lebesgue-lemma-on-lca-groups",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact\nHausdorff abelian group with Haar measure $m_G$ and dual $\\widehat G$, and let\n$\\phi:G\\to\\mathbb C$ be continuous and positive definite, with $k:=\\phi(0)\\ge0$.\nDefine\n$$L_\\phi(f):=\\int_G f(x)\\,\\phi(-x)\\,dm_G(x),\\qquad f\\in L^1(G,m_G).$$\nThen $L_\\phi$ is a well-defined linear functional with $|L_\\phi(f)|\\le k\\|f\\|_1$,\nthe integrated positivity\n$$L_\\phi(f*f^*)\\ \\ge\\ 0\\qquad(f\\in L^1(G,m_G))$$\nholds, and the Cauchy-Schwarz-type bound\n$$|L_\\phi(f)|^2\\le k\\,L_\\phi(f*f^*)\\le k^2\\,\\|\\widehat f\\|_\\infty^2$$\nholds. Consequently $L_\\phi$ vanishes on $\\{f:\\widehat f=0\\}$ and descends to a\npositive linear functional $F_\\phi$ on the transform core\n$\\{\\widehat f:f\\in L^1(G,m_G)\\}\\subseteq C_0(\\widehat G)$ with\n$$|F_\\phi(h)|\\le k\\,\\|h\\|_\\infty .$$\nNo condition on the growth or integrability of $\\phi$ beyond continuity and\npositive definiteness is needed.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            }
+          ]
+        },
+        "strategy": "The finite matrix inequalities first give $\\phi(-x)=\\overline{\\phi(x)}$ and $|\\phi(x)|\\le k$. Prove the integrated positivity $L_\\phi(f*f^*)\\ge0$ by compact truncation and finite partitions using uniform continuity of $\\phi$ on compacta and then $L^1$ approximation. Cauchy-Schwarz for the positive form $[f,g]:=L_\\phi(f*g^*)$ plus the local approximate identity of item 1b gives $|L_\\phi(f)|^2\\le k\\,L_\\phi(f*f^*)$: $L_\\phi(f*u_U)\\to L_\\phi(f)$ and $L_\\phi(u_U*u_U^*)\\to k$ by continuity at $0$. Apply this estimate repeatedly to the self-adjoint $a=f*f^*$ to get $|L_\\phi(f)|\\le k\\|a^{2^{n-1}}\\|_1^{1/2^n}$ after using the initial $L^1$ bound at the final iteration; letting $n\\to\\infty$ gives $|L_\\phi(f)|\\le k\\sqrt{r_{A^+}(0,a)}=k\\|\\widehat f\\|_\\infty$, using the spectral-radius formula and the spectrum $\\sigma_{A^+}(0,a)=\\{0\\}\\cup\\widehat a(\\widehat G)$ with $\\widehat{f*f^*}=|\\widehat f|^2$ from items 1e and 2. This is the positive sup-norm bound, not merely the $L^1$ bound, and it makes the descent to the transform core well defined.",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-bochner-functional-extends-and-has-a-radon-representing-measure",
+        "kind": "lemma",
+        "title": "The Bochner functional extends and has a Radon representing measure",
+        "deps": [
+          "lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core",
+          "lem-fourier-stieltjes-transforms-determine-finite-radon-measures",
+          "thm-riemann-lebesgue-lemma-on-lca-groups",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+          "lem-lca-scalar-unitization-character-space-and-spectrum",
+          "def-fourier-transform-on-an-lca-group",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-positive-definite-function-on-an-abelian-group",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-radon-measure-on-an-lch-space",
+          "def-regular-complex-borel-measure-on-an-lch-space",
+          "lem-positive-c-zero-functionals-have-finite-regular-representing-measures",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+          "def-gelfand-transform",
+          "thm-maximal-ideal-space-is-compact-hausdorff",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group, $\\phi:G\\to\\mathbb C$ continuous positive definite with $k=\\phi(0)$, and let $F_\\phi$ be the positive functional on the transform core constructed in the preceding transform-core lemma. Then $F_\\phi$ extends uniquely to a bounded positive linear functional on $C_0(\\widehat G)$ with norm $k$, and there is a unique finite positive Radon measure $\\mu_\\phi$ on $\\widehat G$ with\n$$F_\\phi(h)=\\int_{\\widehat G}h\\,d\\mu_\\phi\\quad(h\\in C_0(\\widehat G)),\\qquad \\mu_\\phi(\\widehat G)=k .$$\nUniqueness of $\\mu_\\phi$ follows from the uniqueness theorem for Fourier-Stieltjes transforms proved earlier on this page.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            }
+          ]
+        },
+        "strategy": "The transform core is uniformly dense in $C_0(\\widehat G)$ (established in item 5 through the compact character space of $A^+$ and Stone-Weierstrass); extend $F_\\phi$ by continuity and positivity (approximate the square root of a nonnegative $C_0$ function by transforms and use $L_\\phi(f*f^*)\\ge0$). Apply the published Riesz-Markov representation theorem for bounded positive functionals on $C_0$ ([[lem-positive-c-zero-functionals-have-finite-regular-representing-measures]]). Uniqueness is item 5: two finite positive measures with the same transform of the constant-$1$ type differ by a finite complex measure with vanishing inverse transform. Finally $L_\\phi(u_U)\\to k$ and $\\widehat u_U\\to1$ uniformly on compact dual sets with $|\\widehat u_U|\\le1$ give $\\mu_\\phi(\\widehat G)=k$ by a compact/tail split.",
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-bochner-theorem-for-lca-groups",
+        "kind": "theorem",
+        "title": "Bochner's theorem for LCA groups",
+        "deps": [
+          "def-fourier-transform-on-an-lca-group",
+          "def-positive-definite-function-on-an-abelian-group",
+          "def-radon-measure-on-an-lch-space",
+          "def-regular-complex-borel-measure-on-an-lch-space",
+          "lem-fourier-stieltjes-transform-of-a-positive-measure-is-positive-definite",
+          "lem-fourier-stieltjes-transforms-determine-finite-radon-measures",
+          "lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core",
+          "lem-bochner-functional-extends-and-has-a-radon-representing-measure",
+          "lem-lca-haar-measure-is-inversion-invariant",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group with dual $\\widehat G$. A continuous function $\\phi:G\\to\\mathbb C$ is positive definite if and only if there is a unique finite positive Radon measure $\\mu$ on $\\widehat G$ with\n$$\\phi(x)=\\int_{\\widehat G}\\gamma(x)\\,d\\mu(\\gamma)\\qquad(x\\in G),$$\nand then $\\mu(\\widehat G)=\\phi(0)$. The measure is called the representing measure of $\\phi$.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "strategy": "For the converse, construct and represent the positive transform-core functional, then identify its measure with φ by testing against every C_c function and using continuity. If the resulting continuous complex-valued difference were nonzero at a point, multiply by a unit complex scalar so its real part is strictly positive on a neighborhood; a nonzero nonnegative compactly supported bump there contradicts the vanishing test integrals. Uniqueness is the Fourier-Stieltjes uniqueness theorem.",
+        "dependency_level": 9
+      },
+      {
+        "id": "cor-normalised-positive-definite-functions-correspond-to-probability-measures",
+        "kind": "corollary",
+        "title": "Normalised positive definite functions correspond to probability measures",
+        "deps": [
+          "thm-bochner-theorem-for-lca-groups",
+          "def-positive-definite-function-on-an-abelian-group",
+          "def-radon-measure-on-an-lch-space",
+          "def-probability-measure",
+          "lem-fourier-stieltjes-transform-of-a-positive-measure-is-positive-definite",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice, and let $G$ be a locally compact Hausdorff abelian group. Under Bochner's theorem [[thm-bochner-theorem-for-lca-groups]], a continuous positive definite $\\phi:G\\to\\mathbb C$ satisfies $\\phi(0)=1$ if and only if its representing finite positive Radon measure on $\\widehat G$ is a probability measure. In particular continuous positive definite functions with $\\phi(0)=1$ are exactly the Fourier-Stieltjes transforms of Radon probability measures on $\\widehat G$.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "Immediate from the mass identity $\\mu(\\widehat G)=\\phi(0)$ in item 10 and $\\mu\\ge0$; no additional argument is needed.",
+        "dependency_level": 10
+      },
+      {
+        "id": "lem-lca-positive-convolution-squares-form-an-inversion-core",
+        "kind": "lemma",
+        "title": "Positive convolution squares form a dense inversion core",
+        "deps": [
+          "lem-lca-lone-convolution-is-a-commutative-banach-star-algebra",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "def-positive-definite-function-on-an-abelian-group",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-left-haar-integral-and-left-haar-measure",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "lem-translations-preserve-compactly-supported-continuous-functions",
+          "thm-minkowski-integral-inequality",
+          "thm-compactness-under-continuous-maps",
+          "thm-finite-products-of-compact-spaces",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume Dependent Choice ([[def-dependent-choice]]).\nLet $G$ be a locally compact Hausdorff abelian group with Haar measure $m_G$.\nFor $g\\in C_c(G;\\mathbb C)$ put $\\widetilde g(x):=\\overline{g(-x)}$. Then\n$g*\\widetilde g\\in C_c(G;\\mathbb C)$ (it is continuous with compact support), it is\npositive definite, and\n$$(g*\\widetilde g)(0)=\\int_G|g(x)|^2\\,dm_G(x)\\ \\ge\\ 0 .$$\nThe complex span $E$ of $\\{g*\\widetilde g:g\\in C_c(G;\\mathbb C)\\}$ is dense in\n$L^1(G,m_G)$ and dense in $L^2(G,m_G)$. This is the inversion core of the\npage. The claim that the dual integral becomes absolutely controlled for this\ncore after a compatible scaling of the dual Haar measure is not made here; it\nbelongs to the compatible dual Haar normalisation theorem, and no proof that\nprecedes that normalisation may use it.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            }
+          ]
+        },
+        "strategy": "Continuity and compact support of $g*\\widetilde g$ follow from the uniform continuity argument of items 1a/1b (translate inside a fixed compact set). Positive definiteness is the finite square $\\sum_{j,k}c_j\\overline{c_k}(g*\\widetilde g)(x_j-x_k)=\\int_G\\bigl|\\sum_j c_j\\overline{g(x_j-y)}\\bigr|^2dm_G(y)\\ge0$. Density in $L^p$ ($p=1,2$) uses the approximate identity of item 1b: $u_U*g\\to g$ in $L^p$, $g*\\widetilde g=u_U*(g*\\widetilde g)$ lies in $E$, and $C_c(G)$ is dense in $L^p(G,m_G)$. Nothing here uses the dual measure, Bochner's theorem or biduality.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-compatible-dual-haar-normalisation",
+        "kind": "theorem",
+        "title": "Compatible dual Haar normalisation",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-left-haar-integral-and-left-haar-measure",
+          "lem-lca-haar-measure-is-inversion-invariant",
+          "def-radon-measure-on-an-lch-space",
+          "def-fourier-transform-on-an-lca-group",
+          "def-positive-definite-function-on-an-abelian-group",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-fourier-stieltjes-transforms-determine-finite-radon-measures",
+          "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+          "lem-lca-positive-convolution-squares-form-an-inversion-core",
+          "lem-lca-scalar-unitization-character-space-and-spectrum",
+          "lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations",
+          "thm-bochner-theorem-for-lca-groups",
+          "thm-riemann-lebesgue-lemma-on-lca-groups",
+          "thm-dual-of-an-lca-group-is-locally-compact-abelian",
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "thm-rmk-uniqueness-among-radon-measures",
+          "thm-uniqueness-of-left-haar-measure-up-to-scale",
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-gelfand-transform",
+          "thm-maximal-ideal-space-is-compact-hausdorff"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group with a fixed Haar measure $m_G$. Then there exists a Haar measure $m_{\\widehat G}$ on $\\widehat G$ such that for every $h$ in the complex span $E$ of $\\{g*\\widetilde g:g\\in C_c(G;\\mathbb C)\\}$ (the positive core of [[lem-lca-positive-convolution-squares-form-an-inversion-core]]),\n$$h(x)=\\int_{\\widehat G}\\widehat h(\\gamma)\\,\\gamma(x)\\,dm_{\\widehat G}(\\gamma)$$\nholds for $m_G$-almost every $x\\in G$, with $\\widehat h\\in L^1(\\widehat G,m_{\\widehat G})$; and this property determines $m_{\\widehat G}$ uniquely for the fixed $m_G$, so once $m_G$ is fixed the scale of the dual Haar measure is fixed by the requirement that Fourier inversion hold. The normalisation is reciprocal in the scaling sense: replacing $m_G$ by $c\\,m_G$ ($c>0$) forces $m_{\\widehat G}$ to be replaced by $c^{-1}m_{\\widehat G}$ if inversion is to continue to hold.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            }
+          ]
+        },
+        "strategy": "Construct the compatible measure by gluing the Bochner measures of positive convolution squares. Haar inversion invariance licenses the mixed-transform change of variables. On each generator zero set, use outer regularity and inner regularity on open neighborhoods to pass from compact null subsets to zero measure. For uniqueness among a.e. inversion scales, the inverse transform of an L1 generator is continuous by a compact-tail argument for arbitrary nets; equality a.e. with the continuous generator is therefore pointwise. The reciprocal scaling law follows by rescaling the original Haar measure.",
+        "dependency_level": 10
+      },
+      {
+        "id": "thm-lca-fourier-inversion-for-integrable-transform",
+        "kind": "theorem",
+        "title": "Fourier inversion for integrable transforms on LCA groups",
+        "deps": [
+          "thm-compatible-dual-haar-normalisation",
+          "lem-lca-positive-convolution-squares-form-an-inversion-core",
+          "def-fourier-transform-on-an-lca-group",
+          "def-left-haar-integral-and-left-haar-measure",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "def-radon-measure-on-an-lch-space",
+          "thm-dual-of-an-lca-group-is-locally-compact-abelian",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-dependent-choice",
+          "def-axiom-of-choice",
+          "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-riemann-lebesgue-lemma-on-lca-groups",
+          "thm-minkowski-integral-inequality"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group with Haar measure $m_G$ and dual $\\widehat G$ equipped with the compatible dual Haar normalisation proved earlier on this page. If $f\\in L^1(G,m_G)$ and $\\widehat f\\in L^1(\\widehat G,m_{\\widehat G})$, then\n$$\\int_{\\widehat G}\\widehat f(\\gamma)\\,\\gamma(x)\\,dm_{\\widehat G}(\\gamma)$$\nconverges absolutely for every $x\\in G$ and defines a bounded uniformly continuous function $f^\\vee\\in L^\\infty(G,m_G)$, and $f^\\vee=f$ $m_G$-almost everywhere. Consequently the class of $f$ has a unique continuous representative, namely $f^\\vee$, and at every point $x$ at which a chosen representative of $f$ is continuous one has $f^\\vee(x)=f(x)$. No pointwise statement is made at the remaining points of an arbitrary representative.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            }
+          ]
+        },
+        "strategy": "Invert real normalized convolution squares pointwise by continuity and Haar positivity; Fubini on sigma-compact essential supports identifies f*q_i with the inverse of its product transform. Compact dual tails give uniform inverse convergence; countably select admissible pairs and use an L1 subsequence to prove global almost-everywhere equality. Haar positivity gives uniqueness and continuity-point equality.",
+        "dependency_level": 11
+      },
+      {
+        "id": "lem-lca-parseval-pairing-on-the-integrable-core",
+        "kind": "lemma",
+        "title": "Parseval pairing on the integrable core",
+        "deps": [
+          "thm-lca-fourier-inversion-for-integrable-transform",
+          "thm-compatible-dual-haar-normalisation",
+          "def-fourier-transform-on-an-lca-group",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "lem-lca-lone-convolution-is-a-commutative-banach-star-algebra",
+          "lem-lca-haar-measure-is-inversion-invariant",
+          "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group with the compatible dual Haar normalisation. If $f,g\\in L^1(G,m_G)\\cap L^2(G,m_G)$ and $\\widehat f,\\widehat g\\in L^1(\\widehat G,m_{\\widehat G})$, then\n$$\\int_G f(x)\\overline{g(x)}\\,dm_G(x)=\\int_{\\widehat G}\\widehat f(\\gamma)\\overline{\\widehat g(\\gamma)}\\,dm_{\\widehat G}(\\gamma).$$\nIn particular $\\|\\widehat f\\|_2=\\|f\\|_2$ for such $f$.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply the inversion theorem (item 13) to $g$, insert the defining integral for $\\overline{g(x)}$, and exchange the two integrals by absolute Fubini (both functions are in $L^1$, so $|f|\\otimes|\\widehat g|$ is integrable over $G\\times\\widehat G$); the result is $\\int_G\\int_{\\widehat G}\\overline{\\widehat g(\\gamma)}\\,\\overline{\\gamma(x)}\\,f(x)\\,dm_{\\widehat G}(\\gamma)\\,dm_G(x)=\\int_{\\widehat G}\\overline{\\widehat g(\\gamma)}\\,\\overline{\\widehat f(\\gamma)}\\,dm_{\\widehat G}(\\gamma)$ by the defining convention of the Fourier transform. The norm identity is the case $g=f$.",
+        "dependency_level": 12
+      },
+      {
+        "id": "thm-lca-plancherel-isometric-extension",
+        "kind": "theorem",
+        "title": "Plancherel isometric extension on LCA groups",
+        "deps": [
+          "lem-lca-parseval-pairing-on-the-integrable-core",
+          "thm-lca-fourier-inversion-for-integrable-transform",
+          "thm-compatible-dual-haar-normalisation",
+          "lem-lca-positive-convolution-squares-form-an-inversion-core",
+          "lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution",
+          "lem-lca-translations-and-normalised-local-approximate-identities",
+          "lem-character-evaluation-pairing-is-jointly-continuous",
+          "def-fourier-transform-on-an-lca-group",
+          "def-positive-definite-function-on-an-abelian-group",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-compact-space",
+          "def-radon-measure-on-an-lch-space",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice and Dependent Choice. Let $G$ be a locally compact Hausdorff abelian group with Haar measure $m_G$ and dual $\\widehat G$ carrying the compatible dual Haar normalisation. The Fourier transform restricts to a linear isometry\n$$\\mathcal F_0:L^1(G,m_G)\\cap L^2(G,m_G)\\longrightarrow L^2(\\widehat G,m_{\\widehat G}),\\qquad \\mathcal F_0 f:=\\widehat f,$$\non the dense subspace $L^1\\cap L^2(G)\\subseteq L^2(G)$, and it has a unique linear isometric extension\n$$\\mathcal F:L^2(G,m_G)\\to L^2(\\widehat G,m_{\\widehat G}),\\qquad \\|\\mathcal F f\\|_2=\\|f\\|_2 .$$\nSurjectivity of $\\mathcal F$ (equivalently, unitarity) is not asserted here; the range is dense only after the biduality identification on the later Pontryagin duality pair.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)",
+              "url": "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "strategy": "Isometry on the core. For h=g*~g in the positive core, the compatible-dual supplier gives the inverse integral almost everywhere and ^h in L1. Define its inverse-integral representative H(x)=∫^h(γ)γ(x)dm(γ); finite Radon tails and uniform convergence of characters on compact dual sets prove H continuous on the full LCA topology. Since h is continuous and Haar measure is positive on nonempty opens, h=H everywhere, so h(0)=∫^h. Parseval on the integrable core then gives ||^g||²=||g||² for g∈Cc(G;C). Simultaneous L1/L2 density of complex Cc(G;C), followed by the bounded-extension theorem, supplies the unique isometric L2 extension; convergence of integral transforms identifies its restriction to L1∩L2.",
+        "dependency_level": 13
+      }
+    ]
+  },
+  {
+    "order": 510.06504,
+    "id": "bochner-inversion-and-plancherel-on-lca-groups-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "Bochner Inversion and Plancherel on Lca Groups — Examples",
+    "companion": "bochner-inversion-and-plancherel-on-lca-groups",
+    "requires": [
+      "bochner-inversion-and-plancherel-on-lca-groups",
+      "fejer-and-poisson-summability-of-fourier-series",
+      "finite-abelian-characters-for-combinatorics"
+    ],
+    "items": [
+      {
+        "id": "ex-haar-normalisations-on-the-circle-and-the-integers",
+        "kind": "example",
+        "title": "Haar normalisations on the circle and the integers",
+        "deps": [
+          "def-complex-exponential",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "lem-continuous-characters-of-the-real-line-are-exponentials",
+          "lem-circle-neighbourhood-arc-contains-no-nontrivial-subgroup",
+          "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-radon-measure-on-an-lch-space",
+          "def-fourier-transform-on-an-lca-group",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "lem-trigonometric-characters-are-orthonormal",
+          "thm-fejer-convergence-in-lp",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). With $G=\\mathbb Z$ carrying counting measure, identify $\\widehat{\\mathbb Z}$ with $\\mathbb T$ and use normalized arc measure $dm_{\\mathbb T}=dt/(2\\pi)$. Then\n$$f(n)=\\int_{\\mathbb T}\\widehat f(z)z^n\\,dm_{\\mathbb T}(z),\\qquad \\widehat f(z)=\\sum_{k\\in\\mathbb Z}f(k)z^{-k}$$\nfor every $f\\in\\ell^1(\\mathbb Z)$. With $G=\\mathbb T$ carrying normalized arc measure, identify $\\widehat{\\mathbb T}$ with $\\mathbb Z$ and use counting measure; then\n$$f(z)=\\sum_{n\\in\\mathbb Z}\\widehat f(n)z^n$$\nfor almost every $z\\in\\mathbb T$ whenever $f\\in L^1(\\mathbb T)$ and $\\widehat f\\in\\ell^1(\\mathbb Z)$. These explicit Haar pairs give the usual Fourier-series conventions.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE, chapter 1 (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf"
+            }
+          ]
+        },
+        "strategy": "Identify the duals: characters of $\\mathbb Z$ are determined by $z=\\chi(1)\\in\\mathbb T$ (discreteness makes every such map continuous), and characters of $\\mathbb T$ lift to characters $t\\mapsto e^{ist}$ of $\\mathbb R$ killing $2\\pi\\mathbb Z$, so $s\\in\\mathbb Z$ by the arc lemma; both identifications are homeomorphisms by the compact-open/pointwise agreement on discrete domains. Then apply item 12: on the compact group $\\mathbb T$ the normalised probability Haar measure is $dt/2\\pi$ (RG-18), so its dual scale is counting measure, and conversely. Verify the displayed inversion formula on a core element such as the triangular function and extend by items 12-13.",
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-haar-normalisations-on-a-finite-abelian-group-and-its-dual",
+        "kind": "example",
+        "title": "Haar normalisations on a finite abelian group and its dual",
+        "deps": [
+          "lem-duals-of-finite-products-and-discrete-direct-sums",
+          "lem-additive-characters-are-one-dimensional-complex-representations",
+          "thm-finite-abelian-groups-decompose-into-indecomposable-subgroups",
+          "cor-indecomposable-finite-abelian-groups-are-cyclic-prime-power",
+          "def-complex-exponential",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-radon-measure-on-an-lch-space",
+          "def-fourier-transform-on-an-lca-group",
+          "def-pontryagin-dual-and-compact-open-topology"
+        ],
+        "statement": "Let $G$ be a finite abelian group with its probability Haar measure $m_G(E)=|E|/|G|$ and let $\\widehat G$ be its dual group. The compatible dual Haar measure is counting measure on $\\widehat G$, so for $f:G\\to\\mathbb C$ the inversion formula is\n$$f(x)=\\sum_{\\gamma\\in\\widehat G}\\widehat f(\\gamma)\\,\\gamma(x),\\qquad \\widehat f(\\gamma)=\\frac1{|G|}\\sum_{x\\in G}f(x)\\overline{\\gamma(x)}, \\qquad\\text{i.e.}\\qquad f=\\frac1{|G|}\\sum_{\\gamma\\in\\widehat G}\\Bigl(\\sum_{x\\in G}f(x)\\overline{\\gamma(x)}\\Bigr)\\gamma .$$\nWriting $N:=|G|$, the unitary discrete Fourier transform on the counting-measure spaces is\n$$Uf(\\gamma):=N^{-1/2}\\sum_{x\\in G}f(x)\\overline{\\gamma(x)}=N^{1/2}\\widehat f(\\gamma),\\qquad f(x)=N^{-1/2}\\sum_{\\gamma\\in\\widehat G}Uf(\\gamma)\\gamma(x).$$\nThus, for the same input $f$, passage from the probability-Haar transform to the unitary DFT multiplies the output by $N^{1/2}$. The factor $N^{-1/2}$ is the coefficient in the unitary forward and inverse sums.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE, chapter 1 (author PDF)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/fourier.pdf"
+            }
+          ]
+        },
+        "strategy": "Finite cyclic decomposition gives N characters and point separation. Character orthogonality proves probability-Haar inversion with counting dual measure and fixes its scale. For the same input, U f = N^(1/2) fhat; both unitary sums have coefficient N^(-1/2), and the finite norm expansion proves counting-norm unitarity, including N=1.",
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-a-character-is-positive-definite",
+        "kind": "example",
+        "title": "A character is positive definite",
+        "deps": [
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-nonnegative-lebesgue-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-positive-definite-function-on-an-abelian-group",
+          "def-fourier-transform-on-an-lca-group",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "def-dirac-measure",
+          "def-probability-measure",
+          "def-radon-measure-on-an-lch-space",
+          "def-regular-complex-borel-measure-on-an-lch-space",
+          "lem-complex-conjugation-and-modulus-laws",
+          "prop-dirac-measure-is-a-probability-measure",
+          "lem-fourier-stieltjes-transform-of-a-positive-measure-is-positive-definite",
+          "thm-bochner-theorem-for-lca-groups",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Let $G$ be an abelian topological group and $\\gamma\\in\\widehat G$ a character. Then $\\gamma$ is positive definite, $\\gamma(0)=1$, and for every nonempty finite family the matrix $[\\gamma(x_j-x_k)]_{j,k}$ is the rank-one positive semidefinite matrix with entries $u_j\\overline{u_k}$, $u_j=\\gamma(x_j)$, since $\\gamma(x_j-x_k)=\\gamma(x_j)\\overline{\\gamma(x_k)}$. The empty test matrix has rank zero and quadratic form zero. If $G$ is locally compact Hausdorff and the Axiom of Choice and Dependent Choice are assumed, then under Bochner's theorem [[thm-bochner-theorem-for-lca-groups]], the representing probability measure of $\\gamma$ is the point mass $\\delta_\\gamma$ at $\\gamma$.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "Factor the test matrix as uu*: rank one for nonempty families, rank zero for the empty family. Its quadratic form is a squared modulus. The Dirac integral computes the character; under LCH and AC/DC, Bochner uniqueness identifies its representing probability measure.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "cex-a-continuous-function-of-modulus-at-most-one-need-not-be-positive-definite",
+        "kind": "counterexample",
+        "title": "A continuous function of modulus at most one need not be positive definite",
+        "deps": [
+          "def-positive-definite-function-on-an-abelian-group",
+          "def-continuous-map-top",
+          "def-complex-numbers-and-arithmetic"
+        ],
+        "statement": "On $G=\\mathbb R$ let $\\phi$ be the continuous trapezoid function\n$$\\phi(x)=\\begin{cases}1,&|x|\\le1,\\\\ 2-|x|,&1\\le|x|\\le2,\\\\ 0,&|x|\\ge2,\\end{cases}$$\nso that $\\phi$ is linear on $[1,2]$ and on $[-2,-1]$ and vanishes outside\n$[-2,2]$. Then $\\phi$ is continuous, $\\phi(0)=1$ and $|\\phi(x)|\\le1$ for all\n$x$, but $\\phi$ is not positive definite\n([[def-positive-definite-function-on-an-abelian-group]]): for the points\n$x_1=0,x_2=1,x_3=2$, the matrix\n$$[\\phi(x_j-x_k)]_{j,k}=\\begin{pmatrix}1&1&0\\\\1&1&1\\\\0&1&1\\end{pmatrix}$$\nhas determinant $-1<0$, so it is not positive semidefinite and the\npositive-definiteness inequality fails; explicitly, the coefficients\n$c=(1,-2,1)$ give quadratic form $-2<0$. Thus\nboundedness and continuity of a function of modulus at most one do not imply\npositive definiteness.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "strategy": "The determinant of the displayed Hermitian matrix is $1\\cdot(1-1)-1\\cdot(1-0)+0=-1$, so the matrix has a negative eigenvalue and there are $c_1,c_2,c_3$ with $\\sum_{j,k}c_j\\overline{c_k}\\phi(x_j-x_k)<0$; exhibit such coefficients explicitly if desired from the eigenvector of the negative eigenvalue. Continuity and the bounds are immediate from the definition of the indicator. This is the standard compactly supported counterexample, and no use of Bochner's theorem is needed for the refutation.",
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-lca-fourier-inversion-is-not-an-everywhere-statement-for-arbitrary-lone-functions",
+        "kind": "counterexample",
+        "title": "LCA Fourier inversion is not an everywhere statement for arbitrary L^1 functions",
+        "deps": [
+          "def-measure-null-set-and-almost-everywhere",
+          "def-fourier-transform-on-an-lca-group",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-radon-measure-on-an-lch-space",
+          "def-locally-compact-space",
+          "def-topological-group",
+          "def-hausdorff-space",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-pontryagin-dual-and-compact-open-topology"
+        ],
+        "statement": "Let $G$ be a nondiscrete locally compact Hausdorff abelian group with Haar measure $m_G$, and fix a Haar measure $m_{\\widehat G}$ on its dual. If $f\\in L^1(G,m_G)$ and $\\widehat f\\in L^1(\\widehat G,m_{\\widehat G})$, the inverse integral\n$$F_f(x):=\\int_{\\widehat G}\\widehat f(\\gamma)\\gamma(x)\\,dm_{\\widehat G}(\\gamma)$$\nis defined at every $x\\in G$ and depends only on the $L^1$ class of $f$. For every $x_0\\in G$, that class has a measurable representative whose value at $x_0$ differs from $F_f(x_0)$ and which agrees with any given representative away from $x_0$. Thus the inverse integral cannot recover an arbitrary representative pointwise.",
+        "design_row": "FR-16",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "strategy": "Pointwise modification on a null set does not change the $L^1$ class (per the equivalence-class convention) and does not change any integral, hence does not change the transform, so the inversion integral computed from the transform is a function of the class alone; evaluating a different representative at $x_0$ gives a different value whenever the representative is discontinuous at $x_0$ or simply altered there. This proves the claimed failure of an everywhere version without any new analysis.",
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 1
+      }
+    ]
+  }
+]

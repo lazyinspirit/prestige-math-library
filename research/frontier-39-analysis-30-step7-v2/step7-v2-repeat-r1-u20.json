@@ -1,0 +1,156 @@
+{
+  "run": "frontier-39-analysis-30",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "20",
+  "input_sha256": "4f91ca21b77ba02bf6d92ea5243cd78e0ee21674158fffdec4d98596ef6beea2",
+  "decisions": [
+    {
+      "id": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "9490e1684ce6e3cf610572529038f6939205fd9de168cf73822a2bad97668742",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The space-first domain is contradicted by the original time-first evaluations. For T=2, f(s)=s^2/2 and u(x,t)=x/t, the PDE holds, and x(t)=sqrt(1+t^2) solves the original swapped ODE on (0,1), yet u(t,x(t))=t/sqrt(1+t^2) has positive derivative. This is a false constancy claim. Repaired all coordinate evaluations, initial-point notation, differentiated F2 evaluations and the compact rectangle; retained the Riccati and conditional blow-up conclusions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "fd1dc85430d595db6b046dd3549f53a470ba8f4dcb919684392d7c06debc18b1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For f(p)=p^2/2+1 and U0=u0=0, L(q)=q^2/2-1 and both prescribed potentials equal -t. Hence global time-uniform boundedness in both clauses is false. The Hopf--Lax supplier guarantees boundedness on finite horizons. Both clauses now specify boundedness and uniform continuity on every finite time slab, while preserving global existence, entropy boundedness and the normalized primitive correspondence.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+      "disposition": "repaired",
+      "post_sha256": "369a43353487fdb1019137d5ee45175ff2bec50f9fcde62fbabe7413deb7df12",
+      "review_context_sha256": "04880178f3b0db1745075a5185be74eb3c6a55721a558e834d49b8be3b8411ac",
+      "reason": "Reviewed the final space-first characteristic u(x(t),t), the transport suppliers and the derivative/mixed-partial and local/maximal ODE interfaces. The chain rule gives constancy; differentiating the PDE gives p\u2032=-cp^2. Local ODE uniqueness prevents negative p from reaching zero, so reciprocal integration holds throughout its existence interval. Straight characteristics extend across interior endpoints; continuity on the correctly ordered compact rectangle forbids persistence through the Riccati pole. No choice premise or new prerequisite is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+      "disposition": "repaired",
+      "post_sha256": "0e95b30eabc2d4d45e51e6f28cf09810320e3b2fc3488073680d4dc61146330d",
+      "review_context_sha256": "3fd6c6d5032927a74f348587f8a0efdd1bf8aa2e12c9196b681d3591e05876a7",
+      "reason": "Checked the complete viscous-primitive and localization proof against its current Hopf--Lax, viscous existence/bounds/compactness, entropy contraction/trace, heat and FTC interfaces. Convexity gives min L=-f(0), so contraction yields ||V(t)+tf(0)||_infinity<=||U0||_infinity. The existing primitive bound ||a||1+T|f(0)| is valid on each finite horizon. Viscosity contacts, datum approximation and constant-tail localization retain both correspondence directions; uniqueness makes horizons compatible. CC/DC assumptions remain explicit. The owning contract and assigned manifest statements/strategies were synchronized; this is a local repair review, not an independent judgment of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-gradient-catastrophe-before-shock-formation",
+    "ex-hamilton-jacobi-primitive-of-a-burgers-solution"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "subject": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+      "stage": "7.5",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "outcome": "confirmed_fatal",
+      "disposition": "fixed",
+      "finding": "The space-first domain is contradicted by the original time-first evaluations. For T=2, f(s)=s^2/2 and u(x,t)=x/t, the PDE holds, and x(t)=sqrt(1+t^2) solves the original swapped ODE on (0,1), yet u(t,x(t))=t/sqrt(1+t^2) has positive derivative. This is a false constancy claim. Repaired all coordinate evaluations, initial-point notation, differentiated F2 evaluations and the compact rectangle; retained the Riccati and conditional blow-up conclusions.",
+      "repair": "Reviewed the final space-first characteristic u(x(t),t), the transport suppliers and the derivative/mixed-partial and local/maximal ODE interfaces. The chain rule gives constancy; differentiating the PDE gives p\u2032=-cp^2. Local ODE uniqueness prevents negative p from reaching zero, so reciprocal integration holds throughout its existence interval. Straight characteristics extend across interior endpoints; continuity on the correctly ordered compact rectangle forbids persistence through the Riccati pole. No choice premise or new prerequisite is needed.",
+      "evidence_path": "research/frontier-39-analysis-30-step7-v2/step7-v2-repeat-r1-u20.json",
+      "audit_status": "Local repair and focused checks complete; independent rejudgment belongs to the engine."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "subject": "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+      "stage": "7.5",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "outcome": "confirmed_fatal",
+      "disposition": "fixed",
+      "finding": "For f(p)=p^2/2+1 and U0=u0=0, L(q)=q^2/2-1 and both prescribed potentials equal -t. Hence global time-uniform boundedness in both clauses is false. The Hopf--Lax supplier guarantees boundedness on finite horizons. Both clauses now specify boundedness and uniform continuity on every finite time slab, while preserving global existence, entropy boundedness and the normalized primitive correspondence.",
+      "repair": "Checked the complete viscous-primitive and localization proof against its current Hopf--Lax, viscous existence/bounds/compactness, entropy contraction/trace, heat and FTC interfaces. Convexity gives min L=-f(0), so contraction yields ||V(t)+tf(0)||_infinity<=||U0||_infinity. The existing primitive bound ||a||1+T|f(0)| is valid on each finite horizon. Viscosity contacts, datum approximation and constant-tail localization retain both correspondence directions; uniqueness makes horizons compatible. CC/DC assumptions remain explicit. The owning contract and assigned manifest statements/strategies were synchronized; this is a local repair review, not an independent judgment of the repair.",
+      "evidence_path": "research/frontier-39-analysis-30-step7-v2/step7-v2-repeat-r1-u20.json",
+      "audit_status": "Local repair and focused checks complete; independent rejudgment belongs to the engine."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Both rejected original-frontier tuples are confirmed fatal logic defects and locally repaired in increasing dependency order. No new items, published repairs, outside-frontier consumers or unresolved assigned mathematics were found. No update to research/published-consumer-supplier-ledger.md is proposed because no published defect was discovered. The gradient-catastrophe consumer correction is routed to its ordinary frontier owner, without editing or claiming its closure.",
+    "Read CLAUDE.md, README.md, SCHEMA.md, WORKFLOW.md, briefs/step7-adjudicator.md and this exact generated task. Verified both items are draft frozen-frontier members. Source review: Tran, Chapter 2 section 5.4, assumptions (2.18), Theorem 2.23 and its complete straight-path/Jensen proof, manuscript pages labeled 67--68 (PDF indices 66--67). That section establishes the convex-superlinear Hopf--Lax representation and minimizer attainment; it is not used as an imported entropy/viscosity equivalence. Current local suppliers establish the finite-horizon solution class and all entropy/viscous uses.",
+    "Each completed review was followed by the prescribed review-contexts command before further supplier edits. A final characteristics reread caught residual u_t/u_x argument reversals and the rectangle order; those were corrected, the mathematical effects re-examined and new hashes captured. The later theorem has no dependency on this proposition, so its repair changes none of the proposition review context.",
+    "Shared metadata changes used step7-shared-write-lock acquire/reread/edit/check/release. Only the two assigned contract entries were regenerated. A duplicate F5/FTC citation generated from a repeated existing wikilink was deduplicated before the final strict contract pass. Only the two assigned rows of research/frontier-39-analysis-30-batch-20.pages.json were synchronized: Statement mirrors and proof strategies now describe the repaired current content. Prior risk-review records remain intact.",
+    "Final focused precheck and rendercheck both passed for the two edited item files. Strict scoped proof-contract check passed for 2/2 items with 0 errors and 0 warnings. Manifest-deps checked 44 existing metadata rows with 0 errors and no normalization. The required final batched proof-layout command checked both changed items: 14 steps, 0 defects. No judges, stamps, certificates, shared ledgers or round state were written."
+  ],
+  "downstream_findings": [
+    {
+      "supplier": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+      "id": "ex-gradient-catastrophe-before-shock-formation",
+      "path": "items/ex-gradient-catastrophe-before-shock-formation.md",
+      "route": "frontier-owner",
+      "disposition": "requires_repair",
+      "affected_use": "Example: u(t,X_t(y))=u0(y) and u_x(t,X_t(y))=u0\u2032(y)/(1+t u0\u2032(y)); Given and F1 repeat the time-first characteristic evaluations; Proof 2.1 says the solution solves the PDE on R x (0,1), but writes u(t,x)=u0(y(t,x)) and calls X_t a characteristic of F1; Proof 2.2 repeats u_x(t,X_t(y)).",
+      "invalidated_claim": "The supplier now uses u(x,t) on R x (0,T). The consumer simultaneously uses u(t,x) and that space-first domain, so its literal characteristic and gradient evaluations no longer cite the corrected proposition accurately. The arctangent characteristic construction and gradient pole computation themselves remain valid after consistent coordinate repair.",
+      "minimality": "Use one convention consistently throughout this consumer: space-first evaluations and derivatives with corresponding formulas, or explicitly time-first solution domains. Preserve the arctangent datum, catastrophe at t=1 and descending stationary entropy continuation. Do not expand beyond its direct consumers unless the consumer Statement/Definition changes. This item is in the frozen frontier but outside this unit edit scope."
+    },
+    {
+      "supplier": "thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+      "id": "ex-hamilton-jacobi-primitive-of-a-burgers-solution",
+      "path": "items/ex-hamilton-jacobi-primitive-of-a-burgers-solution.md",
+      "route": "frontier-owner",
+      "disposition": "unaffected",
+      "affected_use": "F3 states that the theorem applies to bounded Lipschitz initial primitives or compactly supported L1-intersection-Linfinity initial derivatives; Proof 4.1 uses F3 only to exclude U0(x)=x_+ and u0=1_(0,infinity) from both classes.",
+      "invalidated_claim": "None: the finite-time qualification changes the potential solution class, while both initial-data hypotheses used for this exclusion remain unchanged. The example proves its unbounded primitive and viscosity properties directly.",
+      "minimality": "No consumer item edit is needed; its independent calculation and exact data-class exclusion remain sound."
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/pde/scalar-conservation-laws-and-entropy-solutions.md",
+      "disposition": "unaffected",
+      "reason": "The page asserts coordinate-independent constancy/gradient catastrophe and the correspondence via viscous primitives and localized Hopf--Lax. It asserts no bound uniform over all positive times and no time-first characteristic evaluation."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/prop-characteristics-for-a-one-dimensional-scalar-conservation-law.md items/thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension.md",
+      "exit_code": 0,
+      "result": "2 checked, 0 failing; both direct proofs passed."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/prop-characteristics-for-a-one-dimensional-scalar-conservation-law.md items/thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension.md",
+      "exit_code": 0,
+      "result": "2 files OK; all math and YAML parsed without warnings."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/frontier-39-analysis-30-batch-20.proof-contracts.json --strict --items prop-characteristics-for-a-one-dimensional-scalar-conservation-law,thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension",
+      "exit_code": 0,
+      "result": "2/2 items checked, 0 errors, 0 warnings."
+    },
+    {
+      "command": "node tools/manifest-deps.mjs research/frontier-39-analysis-30-batch-20.pages.json",
+      "exit_code": 0,
+      "result": "44 items, 0 normalized, 0 errors."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/prop-characteristics-for-a-one-dimensional-scalar-conservation-law.md items/thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension.md",
+      "exit_code": 0,
+      "result": "2 items, 14 steps, 0 defects."
+    }
+  ]
+}

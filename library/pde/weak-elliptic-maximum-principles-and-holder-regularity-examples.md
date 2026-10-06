@@ -1,0 +1,9 @@
+---
+page: weak-elliptic-maximum-principles-and-holder-regularity-examples
+title: "Weak Elliptic Maximum Principles and Holder Regularity — Examples"
+status: draft
+items: []
+examples: ["ex-weak-and-classical-maximum-principles-agree-for-smooth-solutions", "ex-measurable-coefficients-with-a-holder-regular-weak-solution", "cex-weak-maximum-principle-needs-the-zero-order-sign", "cex-harnack-requires-nonnegativity", "ex-oscillation-decay-implies-a-holder-modulus", "cex-degenerate-ellipticity-allows-nonconstant-solutions-with-interior-zero-sets", "cex-harnack-estimate-needs-an-additive-forcing-term", "ex-essential-supremum-precedes-holder-representative-in-de-giorgi-theory", "cex-global-harnack-comparison-needs-connectedness"]
+---
+
+These companions compute, test and stress the maximum-principle and De Giorgi--Nash--Moser statements of the main page. A smooth radial eigenfunction of $-\Delta-1$ on the ball of radius $\pi$ shows that the weak maximum principle fails without the zero-order sign condition, while the quadratic subsolution on the disc exhibits the agreement of the classical and the weak principles in the smooth case, and a dyadic oscillation example reads off the Holder exponent from the oscillation ratio. The measurable-coefficient annulus example realizes a Holder-regular weak solution with a discontinuous radial derivative, showing that the De Giorgi--Nash conclusion cannot be improved to $C^1$, and the zero class of $H^1$ illustrates why the estimates control essential extrema of a class rather than the pointwise extrema of an arbitrary representative. Two Harnack counterexamples exhibit the necessity of nonnegativity and of the additive forcing term, a disconnected domain shows that the global comparison needs connectedness, and a degenerate positive-semidefinite coefficient matrix produces a nonconstant weak solution with an interior zero set, isolating uniform ellipticity as a hypothesis rather than a convenience.

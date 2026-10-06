@@ -1,0 +1,928 @@
+[
+  {
+    "order": 458.02609,
+    "id": "bmo-john-nirenberg-and-h1-duality",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "BMO, John-Nirenberg, and H1 Duality",
+    "companion": "bmo-john-nirenberg-and-h1-duality-examples",
+    "requires": [
+      "calderon-zygmund-decomposition-and-singular-integrals",
+      "real-hardy-spaces-maximal-functions-and-atoms",
+      "the-baire-principles-of-functional-analysis",
+      "orthonormal-bases-parseval-and-fourier-series"
+    ],
+    "items": [
+      {
+        "id": "def-bmo-seminorm-and-quotient-by-constants",
+        "kind": "definition",
+        "title": "BMO seminorm and the quotient by constants",
+        "statement": "Complex scalars, Lebesgue measure on $\\mathbb R^n$, and the complex $L^p$ and\ntest-function conventions of [[def-complex-lp-and-euclidean-test-function-conventions]].\nA cube is a nondegenerate axis-parallel cube ([[def-multidimensional-rectangle-and-volume]]).\nFor $b\\in L^1_{\\mathrm{loc}}(\\mathbb R^n)$ and a cube $Q$ put\n$b_Q:=|Q|^{-1}\\int_Qb$, so that $b_Q$ is the mean of $b$ over $Q$, and define\nthe $\\mathrm{BMO}$ seminorm\n$\\|b\\|_{\\mathrm{BMO}}:=\\sup_Q|Q|^{-1}\\int_Q|b-b_Q|\\in[0,\\infty]$, the supremum\nover all cubes, and\n$\\mathrm{BMO}(\\mathbb R^n):=\\{b\\in L^1_{\\mathrm{loc}}:\\|b\\|_{\\mathrm{BMO}}<\\infty\\}$.\nThe mean is optimal up to a factor of $2$ in the average:\n$|Q|^{-1}\\int_Q|b-b_Q|\\le 2\\inf_c|Q|^{-1}\\int_Q|b-c|\\le 2|Q|^{-1}\\int_Q|b-b_Q|$\nwhere the infimum is over $c\\in\\mathbb C$. Moreover $\\|b\\|_{\\mathrm{BMO}}=0$ exactly when $b$ is\nconstant almost everywhere, so the page works with the quotient\n$\\mathrm{BMO}(\\mathbb R^n)/\\mathbb C$ of equivalence classes modulo constants; a\nclass is written $b\\in\\mathrm{BMO}/\\mathbb C$ and the zero class is the class of\nthe constants. Replacing cubes by balls in the supremum defines an equivalent\nseminorm with comparison constants depending only on $n$.\n\n\nThese assertions follow directly from the averages. For every $c\\in\\mathbb C$,\n$|b_Q-c|\\le|Q|^{-1}\\int_Q|b-c|$, so the triangle inequality gives the\nfactor-$2$ upper bound; taking $c=b_Q$ gives the other inequality. For locally integrable functions $b,d$, homogeneity\nand $(b+d)_Q=b_Q+d_Q$ give the seminorm laws. If the seminorm is zero,\n$b=b_{Q_m}$ almost everywhere on each $Q_m=[-m,m]^n$, $m\\ge1$.\nThe constants agree on their positive-measure overlaps, and the exceptional\nset is the union of the explicit measurable null sets\n$Q_m\\cap\\{b\\ne b_{Q_1}\\}$, hence is null by countable additivity of Lebesgue\nmeasure. Conversely an almost-everywhere constant has zero oscillation.\nThus the quotient also identifies almost-everywhere equal representatives.\nFinally, if $E\\subseteq F$ are measurable sets of finite positive measure\nand $b\\in L^1(F)$, then\n$|E|^{-1}\\int_E|b-b_E|\\le2(|F|/|E|)|F|^{-1}\\int_F|b-b_F|$.\nEvery ball is contained in a concentric cube of comparable volume, and every\ncube is contained in a concentric ball of comparable volume. Applying this\ninequality in both directions proves the cube/ball comparison.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Definition 7.1(b), printed p. 29 (BMO seminorm $\\sup_Q|Q|^{-1}\\int_Q|f-f_Q|$)"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Definition 3.1 and the surrounding Moral, printed pp. 34-35"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4 (UCLA, Fall 2006)",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Definition 3.1 and the equivalent $\\inf_c$ formulation, printed pp. 11-12"
+            }
+          ]
+        },
+        "deps": [
+          "def-locally-integrable-function-on-r-n",
+          "def-multidimensional-rectangle-and-volume",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ],
+        "strategy": "The averaging inequality gives optimality up to factor 2, not exact L1 minimization. Homogeneity and linearity give the seminorm laws. On the explicit nested cubes [-m,m]^n, zero oscillation gives agreeing a.e. constants; the measurable countable null union gives a global a.e. constant. Comparing an enclosing ball and cube in each direction yields equivalent seminorms.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hilbert-and-riesz-transforms-are-calderon-zygmund-operators",
+        "kind": "lemma",
+        "title": "The Hilbert and Riesz transforms are Calderon-Zygmund operators",
+        "statement": "Assume Countable Choice. Let $H$ be the Hilbert transform of\n[[cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity|the line]]\nand, for $1\\le j\\le n$, let $R_j$ be the Riesz transform of\n[[def-riesz-transforms-on-euclidean-space]]. Then $H$ and each $R_j$ are\nCalderon-Zygmund operators with the kernels $k(x)=1/(\\pi x)$ and\n$K_j(x)=c_nx_j/|x|^{n+1}$: they are $L^2$-bounded with norm at most $1$, and\nfor every compactly supported $f\\in L^2$ and almost every\n$x\\notin\\operatorname{supp}f$ one has $Tf(x)=\\int k(x-y)f(y)\\,dy$ with the\nkernel of $T$. Moreover both kernels are standard $1$-Holder Calderon-Zygmund\nkernels with the published constants ($A_2'=2/\\pi$ and\n$C_n=c_n2^{n+1}(3n+4)$, respectively).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Section 3.1 (Hilbert and Riesz transforms as homogeneous singular integrals) and Definition 3.1 with Remark 3.2(b) ($Tf=W*f$ for Schwartz $f$; $L^2$ extension by density), printed pp. 6-7"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4 (UCLA, Fall 2006)",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "the kernel/localisation discussion in Section 3, printed p. 10"
+            }
+          ]
+        },
+        "deps": [
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-standard-holder-calderon-zygmund-kernel",
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "cor-riesz-transforms-are-ltwo-bounded",
+          "lem-hilbert-transform-has-signum-fourier-multiplier",
+          "lem-hilbert-transform-is-skew-adjoint-on-ltwo",
+          "def-truncated-hilbert-transform-and-principal-value",
+          "def-riesz-transforms-on-euclidean-space",
+          "lem-riesz-transform-principal-value-kernel-formula",
+          "lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds",
+          "thm-plancherel",
+          "lem-ltwo-fourier-multiplier-bound",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-countable-choice"
+        ],
+        "strategy": "Skew-adjointness: for $H$ this is the published skew-adjointness; for $R_j$ it follows from the Plancherel pairing, $\\langle R_jf,g\\rangle=\\int m_j\\widehat f\\,\\overline{\\widehat g}=\\int\\widehat f\\,\\overline{(-m_j)\\widehat g}=\\langle f,-R_jg\\rangle$, because $m_j$ is purely imaginary. Let $f\\in L^2$ be compactly supported and let $\\varphi\\in C_c^\\infty$ be supported off $\\operatorname{supp}f$; the Schwartz principal-value formulas identify $T\\varphi$ away from $\\operatorname{supp}\\varphi$ with the ordinary absolutely convergent integral $\\int k(y-x)\\varphi(x)dx$, so $\\langle Tf,\\varphi\\rangle=-\\int f\\overline{T\\varphi}=\\iint k(x-y)f(y)\\overline{\\varphi(x)}dx\\,dy$ by Fubini over the bounded disjoint supports, using oddness of the kernels. Since the pairing against all test functions supported off $\\operatorname{supp}f$ determines the $L^2$ class of $Tf$ off that support, the off-support representation holds. The kernel estimates are the published size, first-difference and cancellation bounds, which give standard $1$-Holder status with the stated constants.",
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-linfinity-embeds-continuously-into-bmo",
+        "kind": "corollary",
+        "title": "L-infinity embeds continuously into BMO modulo constants",
+        "statement": "Every $b\\in L^\\infty(\\mathbb R^n)$ lies in $\\mathrm{BMO}(\\mathbb R^n)$ with\n$\\|b\\|_{\\mathrm{BMO}}\\le2\\|b\\|_{L^\\infty}$, so the class map\n$L^\\infty(\\mathbb R^n)/\\mathbb C\\to\\mathrm{BMO}(\\mathbb R^n)/\\mathbb C$ is a\ncontinuous injection. Whether the injection is surjective is not claimed here;\nthe companion examples page records an unbounded BMO function, which exhibits\nstrictness independently.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "the sentence following Definition 7.1 ($|f|_{\\mathrm{BMO}}\\le2|f|_{L^\\infty}$), printed p. 29"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Examples 3.5(1), printed p. 37"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants"
+        ],
+        "strategy": "For every cube, $|Q|^{-1}\\int_Q|b-b_Q|\\le|Q|^{-1}\\int_Q(|b|+|b_Q|)\\le2\\|b\\|_{L^\\infty}$. Injectivity follows from the zero-seminorm characterisation in the definition item: a bounded function of zero mean oscillation is almost everywhere constant. The strictness witness is deliberately not consumed here, because this corollary may not depend on a companion B-page item; the witness is established on the companion page on its own.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically",
+        "kind": "lemma",
+        "title": "BMO averages on nested cubes grow at most logarithmically",
+        "statement": "There is $C_n<\\infty$ such that for every $b\\in\\mathrm{BMO}(\\mathbb R^n)$ and\nall cubes $Q\\subseteq R$, writing $\\ell(Q)$ for the side length,\n$|b_Q-b_R|\\le C_n\\bigl(1+\\log_2(\\ell(R)/\\ell(Q))\\bigr)\\|b\\|_{\\mathrm{BMO}}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Lemma 7.4 (nested cubes with side lengths halving: $|f_{Q_n}-f_{Q_0}|\\le2dn|f|_{\\mathrm{BMO}}$), printed p. 30"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "the telescoping consequence of Lemma 3.2 before Theorem 3.15, printed pp. 44-45"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4 (UCLA, Fall 2006)",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "the Calderon-Zygmund iteration section, printed p. 13"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "def-multidimensional-rectangle-and-volume"
+        ],
+        "strategy": "Choose m minimal with 2^m ell(Q)>=2ell(R), so the concentric dyadic enlargement contains R and has volume <4^n|R|. Telescoping mean differences gives m2^n BMO; comparison with R adds 4^n BMO, and m<2+log2(ell(R)/ell(Q)) gives the claimed constant. Q=R is treated separately.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-bmo-functions-pair-uniformly-with-hone-atoms",
+        "kind": "lemma",
+        "title": "BMO functions pair uniformly with H1 atoms",
+        "statement": "Let $b\\in\\mathrm{BMO}(\\mathbb R^n)$ and let $a$ be an $H^1$ atom supported in a\ncube $Q$, i.e. a $(1,\\infty,0)$-atom in the sense of\n[[def-hp-atom-with-moment-order]]: $a$ vanishes off $Q$, $|a|\\le|Q|^{-1}$\nalmost everywhere and $\\int a=0$. Then the integral $\\int ab$ converges\nabsolutely and $\\bigl|\\int ab\\bigr|\\le\\|b\\|_{\\mathrm{BMO}}$, with the bound\nindependent of the atom and of $Q$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "the first part of Definition 7.39 (the pairing $L_b(g)=\\int bg$ and its bound), printed p. 47"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "def-hp-atom-with-moment-order",
+          "def-locally-integrable-function-on-r-n"
+        ],
+        "strategy": "Since $\\int a=0$, subtract the mean of $b$ over the cube: $\\int ab=\\int a(b-b_Q)$. Then $\\bigl|\\int a(b-b_Q)\\bigr|\\le\\|a\\|_{L^\\infty}\\int_Q|b-b_Q|\\le |Q|^{-1}\\cdot|Q|\\cdot\\|b\\|_{\\mathrm{BMO}}=\\|b\\|_{\\mathrm{BMO}}$. Absolute convergence holds because $a$ is bounded with compact support and $b$ is locally integrable. No cancellation beyond the zero-th moment is used at $p=1$.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-john-nirenberg-stopping-cubes-have-geometric-decay",
+        "kind": "lemma",
+        "title": "John-Nirenberg stopping cubes have geometric decay",
+        "statement": "Assume Countable Choice. Let $b\\in\\mathrm{BMO}(\\mathbb R^n)$, let $Q$ be an\nall-generations dyadic cube and let $s>\\|b\\|_{\\mathrm{BMO}}$. Then there are\nfamilies of dyadic subcubes $Q^{(k)}_j\\subseteq Q$, $k\\ge1$, pairwise\ndisjoint for each fixed $k$, such that, with $Q^{(0)}_1:=Q$:\n(i) each $Q^{(k)}_j$ is contained in a unique level-$(k-1)$ stopping cube.\nIts immediate dyadic parent is contained in that stopping cube but need not\nbelong to the preceding stopping family; (ii) for every $k$,\n$\\sum_j|Q^{(k)}_j|\\le(\\|b\\|_{\\mathrm{BMO}}/s)^k|Q|$; and (iii) for every\n$k\\ge1$, $|b-b_Q|\\le k2^ns$ almost everywhere on\n$Q\\setminus\\bigcup_jQ^{(k)}_j$, and a fortiori $|b-b_Q|\\le2^{nk}s$ there, so\n$\\{x\\in Q:|b-b_Q|>2^{nk}s\\}\\subseteq\\bigcup_jQ^{(k)}_j$ up to a Lebesgue-null\nset.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Theorem 3.15 and its proof (recursive Calderon-Zygmund decomposition, bounded overlap and the $2^{nk}$ level bound), printed pp. 44-48"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Theorem 7.5, proof steps 1-4 ((A-k)-(E-k) and (7.8)), printed pp. 29-31"
+            },
+            {
+              "title": "Brooke Wilson, Math 581A Classical and Multilinear Harmonic Analysis (University of Washington, Fall 2024), lecture 18",
+              "url": "https://sites.math.washington.edu/~blwilson/581AFall2024/Lectures/lecture18.pdf",
+              "locator": "the dyadic John-Nirenberg induction, scanned pages 1-3"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "lem-maximal-dyadic-cubes-at-height-lambda",
+          "lem-calderon-zygmund-decomposition-at-height-lambda",
+          "lem-dyadic-cubes-all-generations-partition-and-nesting",
+          "def-dyadic-cube-in-rn-all-generations",
+          "thm-almost-every-point-is-a-lebesgue-point",
+          "def-countable-choice",
+          "thm-countable-union-of-countable",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions"
+        ],
+        "strategy": "Use maximal dyadic stopping at fixed s>BMO on each current stopping cube. The families are disjoint at each fixed stopping level; their immediate dyadic parents need not be stopping parents. Iterated volume ratio BMO/s gives geometric decay. Mean jumps <=2^n s and the exit bound <=s give k2^n s off level k. Countable Choice is inherited from maximal/decomposition, differentiation and countable-union suppliers.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-range-truncations-preserve-bmo-seminorm",
+        "kind": "lemma",
+        "title": "Range truncations preserve the BMO seminorm up to a constant",
+        "statement": "For every real-valued $b\\in\\mathrm{BMO}(\\mathbb R^n)$ and every $c\\in\\mathbb R$\nthe one-sided truncations satisfy\n$\\|\\max(b,c)\\|_{\\mathrm{BMO}}\\le\\tfrac32\\|b\\|_{\\mathrm{BMO}}$ and\n$\\|\\min(b,c)\\|_{\\mathrm{BMO}}\\le\\tfrac32\\|b\\|_{\\mathrm{BMO}}$; consequently for\n$-\\infty<L\\le K<\\infty$ the two-sided truncation\n$b_{[L,K]}:=\\min\\bigl(K,\\max(L,b)\\bigr)$ satisfies\n$\\|b_{[L,K]}\\|_{\\mathrm{BMO}}\\le\\tfrac94\\|b\\|_{\\mathrm{BMO}}$. For a\ncomplex-valued $b$ the componentwise truncation\n$b_M:=\\min(M,\\max(-M,\\operatorname{Re}b))+i\\min(M,\\max(-M,\\operatorname{Im}b))$\nsatisfies $|b_M|\\le|b|$, $b_M\\to b$ pointwise as $M\\to\\infty$, and\n$\\|b_M\\|_{\\mathrm{BMO}}\\le\\tfrac92\\|b\\|_{\\mathrm{BMO}}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Theorem 3.6(1) and Remark 3.7 (truncation $f_k=\\min\\{\\max\\{f,-k\\},k\\}$ with $\\|f_k\\|_*\\lesssim\\tfrac94\\|f\\|_*$), printed pp. 40-41"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Definition 7.39(3) and footnote 61 (the truncation $f^{KL}=...$ and its contract), printed pp. 46-47"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants"
+        ],
+        "strategy": "Write $\\max(b,c)=c+(b-c)^+$ and $(b-c)^+=\\tfrac12\\bigl((b-c)+|b-c|\\bigr)$, so it suffices to bound the mean oscillation of $|b-c|$. For every cube $Q$ and every constant $d$ one has $|Q|^{-1}\\int_Q\\bigl||b-c|-(|b-c|)_Q\\bigr|\\le2|Q|^{-1}\\int_Q||b-c|-d|$ (the mean is within the average deviation), and choosing $d=|b_Q-c|$ gives $||b-c|-d|\\le|b-b_Q|$, hence the oscillation of $|b-c|$ is at most $2\\|b\\|_{\\mathrm{BMO}}$; the triangle inequality for the seminorm finishes the one-sided bound, and applying it twice gives the two-sided one. The complex statement follows from $\\|\\operatorname{Re}b\\|_{\\mathrm{BMO}}\\le\\|b\\|_{\\mathrm{BMO}}$ for each part; the pointwise and domination statements are immediate from the componentwise definition.",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-calderon-zygmund-operators-map-linfinity-to-bmo",
+        "kind": "theorem",
+        "title": "Calderon-Zygmund operators map L-infinity to BMO",
+        "statement": "Assume Countable Choice. Let $T$ be a Calderon-Zygmund operator with kernel $k$\nin the sense of [[def-calderon-zygmund-kernel-and-principal-value-operator]]: $k$\nsatisfies the annular size bound with constant $A_1$ and Hormander's condition\nwith constant $A_2$, $T$ is $L^2$-bounded with norm $B$ and satisfies the\noff-support representation (3) of that definition. Assume moreover that $k$ is\nstandard $\\delta$-Holder with constant $A_2'$ for some $0<\\delta\\le1$\n([[def-standard-holder-calderon-zygmund-kernel]]). Fix\n$\\lambda_n:=1+4\\sqrt n$, chosen so that\n$|a-y|\\ge2\\sqrt n\\,\\ell(Q)\\ge2|x-a|$ whenever $x,a\\in Q$ and\n$y\\notin\\lambda_nQ$. For a cube $Q$ and a point $a\\in Q$ put, for $x\\in Q$,\n$(Tb)_Q(x):=T(b\\mathbf 1_{\\lambda_nQ})(x)+\\int_{\\mathbb R^n\\setminus\\lambda_nQ}\\bigl[k(x-y)-k(a-y)\\bigr]b(y)\\,dy$,\nwhere $\\lambda_nQ$ is the concentric cube with side length $\\lambda_n\\ell(Q)$\nand $b\\in L^\\infty(\\mathbb R^n)$. Then: (i) the tail integral converges\nabsolutely for every $x\\in Q$; (ii) for nested cubes $Q\\subseteq R$ the\ndifference $(Tb)_Q-(Tb)_R$ is almost everywhere constant on $Q$, so the\nlocalisations define a class $Tb\\in\\mathrm{BMO}(\\mathbb R^n)/\\mathbb C$; (iii)\n$\\|Tb\\|_{\\mathrm{BMO}}\\le C_{n,\\delta}(A_2'+B)\\|b\\|_{L^\\infty}$; and (iv) if in\naddition $b\\in L^2(\\mathbb R^n)$, then the class $Tb$ is the class of the $L^2$\nfunction $Tb$ defined by the operator, modulo constants.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Proposition 7.7 and (7.11) (the local/far decomposition with the kernel difference and the $L^2$ bound), printed p. 32"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4 (UCLA, Fall 2006)",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Proposition 3.4 and its proof (the localisation $Tf=T(f\\mathbf 1_{2B})+T(f\\mathbf 1_{\\mathbb R^d\\setminus2B})$ with the constant $c_B$), printed p. 12"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-standard-holder-calderon-zygmund-kernel",
+          "lem-holder-cz-kernels-satisfy-hormander-cancellation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-multidimensional-rectangle-and-volume",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-countable-choice",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions",
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences"
+        ],
+        "strategy": "Absolute convergence in (i): for $x,a\\in Q$ and $y\\notin\\lambda_nQ$ one has $|x-a|\\le\\sqrt n\\,\\ell(Q)$ and $|a-y|\\ge2\\sqrt n\\,\\ell(Q)\\ge2|x-a|$, so the standard $\\delta$-Holder bound makes the tail integrand bounded by $A_2'n^{\\delta/2}\\ell(Q)^\\delta|a-y|^{-n-\\delta}\\|b\\|_{L^\\infty}$, which is integrable over the complement. For (iii), take the constant $c=0$ (the mean-deviation bound allows any constant) and bound the two terms: the local term is controlled by Cauchy-Schwarz and the $L^2$ bound, $|Q|^{-1}\\int_Q|T(b\\mathbf 1_{\\lambda_nQ})|\\le|Q|^{-1/2}B\\|b\\|_{L^\\infty}|\\lambda_nQ|^{1/2}\\le \\lambda_n^{n/2}B\\|b\\|_{L^\\infty}$, and the tail term by the same Holder bound integrated over the complement, $|Q|^{-1}\\int_Q\\int_{\\mathbb R^n\\setminus\\lambda_nQ}|k(x-y)-k(a-y)||b(y)|\\,dy\\,dx\\le A_2'n^{\\delta/2}\\ell(Q)^\\delta\\|b\\|_{L^\\infty}\\int_{|z|\\ge2\\sqrt n\\ell(Q)}|z|^{-n-\\delta}\\,dz\\le C_n\\delta^{-1}A_2'\\|b\\|_{L^\\infty}$, so the mean oscillation of $(Tb)_Q$ is at most $C_n(\\lambda_n^{n/2}B+\\delta^{-1}A_2')\\|b\\|_{L^\\infty}$. For (ii), compute $(Tb)_R-(Tb)_Q$ on $Q$: since $b\\mathbf 1_{\\lambda_nR\\setminus\\lambda_nQ}$ is a compactly supported $L^2$ function and $T$ satisfies the off-support representation, $T(b\\mathbf 1_{\\lambda_nR})(x)=T(b\\mathbf 1_{\\lambda_nQ})(x)+\\int_{\\lambda_nR\\setminus\\lambda_nQ}k(x-y)b(y)\\,dy$ for almost every $x\\in Q$; the difference is then the sum of the absolutely convergent expressions $\\int_{\\lambda_nR\\setminus\\lambda_nQ}k(a_Q-y)b(y)dy$ and $\\int_{(\\lambda_nR)^c}\\bigl[k(a_Q-y)-k(a_R-y)\\bigr]b(y)dy$, both independent of $x$, the second bounded by Hormander's condition with $v=a_R-a_Q$. For (iv), approximate $b$ by $b_R=b\\mathbf 1_{B(0,R)}$ in $L^2$: then $Tb_R\\to Tb$ in $L^2$, hence almost everywhere on $Q$ along a subsequence; for two points $x,x'$ of that full-measure convergence set the off-support representation on $Q$ gives $Tb_R(x)-Tb_R(x')=T(b\\mathbf 1_{\\lambda_nQ})(x)-T(b\\mathbf 1_{\\lambda_nQ})(x')+\\int_{B(0,R)\\setminus\\lambda_nQ}\\bigl[k(x-y)-k(x'-y)\\bigr]b(y)\\,dy$; since $|x'-y|\\ge2\\sqrt n\\,\\ell(Q)\\ge2|x-x'|$ on $(\\lambda_nQ)^c$, the pointwise Holder bound makes the last integral converge as $R\\to\\infty$ to $\\int_{\\mathbb R^n\\setminus\\lambda_nQ}[k(x-y)-k(x'-y)]b(y)\\,dy$, while the same computation applied to $(Tb)_Q$ gives the same expression for $(Tb)_Q(x)-(Tb)_Q(x')$; hence $Tb(x)-Tb(x')=(Tb)_Q(x)-(Tb)_Q(x')$ for almost every pair, so $Tb-(Tb)_Q$ is almost everywhere constant on $Q$.",
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-hilbert-and-riesz-transforms-map-linfinity-to-bmo",
+        "kind": "corollary",
+        "title": "The Hilbert and Riesz transforms map L-infinity to BMO",
+        "statement": "Assume Countable Choice. The Hilbert transform $H$ on $\\mathbb R$ and the Riesz\ntransforms $R_1,\\dots,R_n$ on $\\mathbb R^n$ extend to bounded maps\n $L^\\infty(\\mathbb R^d)\\to\\mathrm{BMO}(\\mathbb R^d)/\\mathbb C$,\nwhere $d=1$ for $T=H$ and $d=n$ for $T=R_j$: for every\n$b\\in L^\\infty(\\mathbb R^d)$ the\nclass of $Tb$ is well defined modulo constants, agrees with the $L^2$ action of\n$T$ when $b\\in L^2$, and satisfies $\\|Tb\\|_{\\mathrm{BMO}}\\le C_d\\|b\\|_{L^\\infty}$\nwith a dimensional constant.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Proposition 7.7 (SIO mapping property), printed p. 32"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4 (UCLA, Fall 2006)",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Proposition 3.4, printed p. 12"
+            }
+          ]
+        },
+        "deps": [
+          "thm-calderon-zygmund-operators-map-linfinity-to-bmo",
+          "lem-hilbert-and-riesz-transforms-are-calderon-zygmund-operators",
+          "def-countable-choice"
+        ],
+        "strategy": "The preceding lemma verifies the Calderon-Zygmund operator contract of the mapping theorem: the kernels are standard $1$-Holder with the published constants and the operators satisfy the off-support representation with $L^2$ norm at most $1$. Applying the mapping theorem gives the bound and the agreement with the $L^2$ action.",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-john-nirenberg-exponential-inequality",
+        "kind": "theorem",
+        "title": "John-Nirenberg exponential inequality",
+        "statement": "Assume Countable Choice. There are constants $c_n,C_n\\in(0,\\infty)$ such that\nfor every $b\\in\\mathrm{BMO}(\\mathbb R^n)$, every cube $Q$ and every\n$\\lambda>0$,\n$\\bigl|\\{x\\in Q:|b(x)-b_Q|>\\lambda\\}\\bigr|\\le C_n|Q|\\exp\\bigl(-c_n\\lambda/\\|b\\|_{\\mathrm{BMO}}\\bigr)$.\nIf $\\|b\\|_{\\mathrm{BMO}}=0$ then $b$ is constant almost everywhere and the\nleft-hand side is $0$ for every $\\lambda>0$, which is the interpretation used\nthroughout.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Theorem 3.15, printed p. 44"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Theorem 7.5 (take $b=e$ in (7.8)), printed pp. 29-31"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4 (UCLA, Fall 2006)",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Proposition 3.5 for balls, printed pp. 12-13"
+            },
+            {
+              "title": "Brooke Wilson, Math 581A Classical and Multilinear Harmonic Analysis (University of Washington, Fall 2024), lecture 18",
+              "url": "https://sites.math.washington.edu/~blwilson/581AFall2024/Lectures/lecture18.pdf",
+              "locator": "the dyadic John-Nirenberg inequality, scanned page 2"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "lem-john-nirenberg-stopping-cubes-have-geometric-decay",
+          "lem-dyadic-cubes-all-generations-partition-and-nesting",
+          "def-dyadic-cube-in-rn-all-generations",
+          "def-countable-choice"
+        ],
+        "strategy": "Cover an arbitrary cube by at most 2^n cubes of one fixed dyadic generation, with comparable volume, rather than a single dyadic ancestor. Compare each mean through a common enclosing cube. Use the linear level bound k2^n s with s=2^(n+1)BMO and k=floor((lambda-B_n BMO)/(2^n s)); the geometric stopping measure then gives an exponential in lambda/BMO. Trivial measure bounds cover small levels, and zero seminorm is handled separately. Countable Choice is inherited from the stopping supplier.",
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "cor-bmo-lp-oscillation-norms-are-equivalent",
+        "kind": "corollary",
+        "title": "BMO oscillation norms in Lq are equivalent",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]).\n\nLet $1\\le q<\\infty$ and for $b\\in L^1_{\\mathrm{loc}}(\\mathbb R^n)$ put\n$\\|b\\|_{\\mathrm{BMO},q}:=\\sup_Q\\bigl(|Q|^{-1}\\int_Q|b-b_Q|^q\\bigr)^{1/q}\\in[0,\\infty]$,\nthe supremum over all cubes. Then there are constants\n$0<c_{n,q}\\le C_{n,q}<\\infty$ such that\n$c_{n,q}\\|b\\|_{\\mathrm{BMO}}\\le\\|b\\|_{\\mathrm{BMO},q}\\le C_{n,q}\\|b\\|_{\\mathrm{BMO}}$\nfor every $b\\in\\mathrm{BMO}(\\mathbb R^n)$; indeed\n$\\bigl(|Q|^{-1}\\int_Q|b-b_Q|^q\\bigr)^{1/q}\\le C_{n,q}\\|b\\|_{\\mathrm{BMO}}$ for\nevery cube $Q$. In particular every $\\mathrm{BMO}$ function lies in\n$L^q_{\\mathrm{loc}}(\\mathbb R^n)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Proposition 7.6 and (7.10), printed p. 32"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Theorem 3.28 (equivalence of $\\|\\cdot\\|_{*,p}$ and $\\|\\cdot\\|_*$), printed pp. 53-54"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4 (UCLA, Fall 2006)",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Corollary 3.6, printed p. 13"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "thm-john-nirenberg-exponential-inequality",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "strategy": "Assume Countable Choice inherited from John-Nirenberg. The q=1 lower bound is equality; for q>1 use Holder when its RHS is finite and treat infinite RHS as trivial. Layer cake and the exponential tail yield a finite gamma-type integral and the upper bound; zero seminorm gives zero oscillation. Finite cube coverings and adding the finite local mean yield local Lq integrability.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-ltwo-atoms-have-uniform-hone-quasinorm",
+        "kind": "lemma",
+        "title": "L2-normalised H1 atoms have uniformly bounded H1 norm",
+        "statement": "Assume Countable Choice. Fix an admissible kernel $\\varphi$ with\n$\\int\\varphi\\ne0$ and an auxiliary integer order\n$\\widetilde N\\ge\\max\\{N_0(n,1,\\varphi),n+1\\}$ for the grand-maximal\ncharacterisation. Let $a$ be a $(1,2)$-atom supported in a cube $Q$: $a$\nvanishes off $Q$, $\\int a=0$ and\n$\\bigl(|Q|^{-1}\\int_Q|a|^2\\bigr)^{1/2}\\le|Q|^{-1}$. Then\n$\\|a\\|_{H^1}=\\|M^0_\\varphi a\\|_{L^1}\\le C_{n,\\widetilde N,\\varphi}$, with the\nconstant independent of $Q$ and the atom.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Definition 7.34 and Proposition 7.35 (every $L^2$ atom has $|A|_{H^1}\\lesssim_n1$), printed pp. 40-41"
+            }
+          ]
+        },
+        "deps": [
+          "def-grand-maximal-test-class-of-order-n",
+          "def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution",
+          "def-real-hardy-space-by-a-radial-maximal-function",
+          "def-convolution-of-a-tempered-distribution-with-a-schwartz-function",
+          "lem-smooth-maximal-functions-of-tempered-distributions-are-borel-measurable",
+          "thm-maximal-function-characterisations-of-real-hardy-spaces",
+          "def-centered-and-uncentered-hardy-littlewood-maximal-functions",
+          "cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded",
+          "thm-centered-hardy-littlewood-maximal-function-is-borel-measurable",
+          "def-multidimensional-rectangle-and-volume",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "thm-polynomial-growth-functions-define-tempered-distributions",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "lem-sphere-and-ball-measures-scale",
+          "prop-measure-monotonicity"
+        ],
+        "strategy": "Sum the full near-ball and annular convolution estimates to bound the grand maximal function by C(n,Ntilde)M(|a|). L2 maximal boundedness and a comparable enlarged-cube volume control the near integral. Mean-zero subtraction and derivative decay for t<=r/2 or t>r/2 give ell(Q)r^(-n-1), with summable dyadic shells. Only after proving the finite grand L1 norm use the independently valid radial<=grand comparison. Constants depend on the fixed n,Ntilde,phi, never the atom or cube.",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone",
+        "kind": "lemma",
+        "title": "Mean-zero L2 functions on a cube embed continuously into H1",
+        "statement": "Assume Countable Choice, and fix the admissible kernel $\\varphi$ and auxiliary\norder $\\widetilde N$ of [[lem-ltwo-atoms-have-uniform-hone-quasinorm]]. There is\n$C_{n,\\widetilde N,\\varphi}<\\infty$ such that for every cube $Q$ and\nevery $f\\in L^2(\\mathbb R^n)$ with $\\operatorname{supp}f\\subseteq Q$ and\n$\\int_Qf=0$, the class of $f$ lies in $H^1(\\mathbb R^n)$ and\n$\\|f\\|_{H^1}\\le C_{n,\\widetilde N,\\varphi}|Q|^{1/2}\\|f\\|_{L^2}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "the inequality $\\|g\\|_{H^1}\\le c|B|^{1/2}\\|g\\|_{L^2}$ used in the proof of Theorem 7.40(b), printed p. 47"
+            }
+          ]
+        },
+        "deps": [
+          "lem-ltwo-atoms-have-uniform-hone-quasinorm",
+          "def-multidimensional-rectangle-and-volume",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-real-hardy-space-by-a-radial-maximal-function",
+          "thm-polynomial-growth-functions-define-tempered-distributions"
+        ],
+        "strategy": "If $f=0$ the claim is trivial; otherwise put $a:=f/(|Q|^{1/2}\\|f\\|_{L^2})$. Then $a$ vanishes off $Q$, $\\int a=0$ and $(|Q|^{-1}\\int_Q|a|^2)^{1/2}=|Q|^{-1}$, so it is a $(1,2)$-atom. The preceding atom lemma gives $\\|a\\|_{H^1}\\le C_{n,\\widetilde N,\\varphi}$. Homogeneity yields $\\|f\\|_{H^1}=|Q|^{1/2}\\|f\\|_{L^2}\\|a\\|_{H^1}\\le C_{n,\\widetilde N,\\varphi}|Q|^{1/2}\\|f\\|_{L^2}$.",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-finite-atomic-sums-are-dense-in-hone",
+        "kind": "lemma",
+        "title": "Finite atomic sums are dense in H1",
+        "statement": "Assume Countable Choice. The finite linear combinations of $H^1$ atoms are\ndense in $H^1(\\mathbb R^n)$: for every $f\\in H^1(\\mathbb R^n)$ and every\n$\\varepsilon>0$ there are finitely many atoms $a_1,\\dots,a_N$ and coefficients\n$\\lambda_1,\\dots,\\lambda_N$ with\n$\\bigl\\|f-\\sum_{1\\le j\\le N}\\lambda_ja_j\\bigr\\|_{H^1}<\\varepsilon$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Proposition 7.36 and the density statement in Definition 7.39(1) ('$H^1_0\\subset H^1$ is the dense subset of finite linear combinations of atoms'), printed pp. 41 and 47"
+            }
+          ]
+        },
+        "deps": [
+          "thm-atomic-characterisation-of-real-hp",
+          "lem-ellp-sums-of-hp-atoms-converge-in-tempered-distributions",
+          "def-hp-atom-with-moment-order",
+          "def-real-hardy-space-by-a-radial-maximal-function"
+        ],
+        "strategy": "The atomic characterisation gives $f=\\sum_j\\lambda_ja_j$ with $(\\lambda_j)\\in\\ell^1$ and convergence in the $H^1$ quasi-norm; the partial sums are finite atomic combinations and converge to $f$, which is the assertion.",
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-hone-functional-has-compatible-local-ltwo-representatives",
+        "kind": "lemma",
+        "title": "Bounded H1 functionals have compatible local L2 representatives",
+        "statement": "Assume Countable Choice and fix the kernel $\\varphi$ and auxiliary order\n$\\widetilde N$ of [[lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone]].\nLet $\\Lambda\\in(H^1(\\mathbb R^n))^*$ and let\n$L^2_0(Q)$ be the closed subspace of $L^2(\\mathbb R^n)$ of functions supported\nin the cube $Q$ with $\\int_Qf=0$ (equivalently, mean $0$ when $|Q|>0$).\nFor every cube $Q$ there is a unique\n$u_Q\\in L^2_0(Q)$ with $\\Lambda(f)=\\int_Qu_Qf$ for every $f\\in L^2_0(Q)$;\nmoreover $Q\\subseteq R$ implies that $u_Q-u_R$ is almost everywhere constant\non $Q$. Consequently there are a locally integrable function $u$ on\n$\\mathbb R^n$, unique up to additive constants, and for every cube $Q$ a\nconstant $c_Q$ with $u-u_Q=c_Q$ almost everywhere on $Q$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Theorem 7.40(b), construction of $F^Q$ and the subsequent gluing, printed pp. 47-48"
+            },
+            {
+              "title": "Brooke Wilson, Math 581A Classical and Multilinear Harmonic Analysis (University of Washington, Fall 2024), lecture 20",
+              "url": "https://sites.math.washington.edu/~blwilson/581AFall2024/Lectures/lecture20.pdf",
+              "locator": "the reverse inclusion and its Riesz-representation step, scanned pages 1-3"
+            }
+          ]
+        },
+        "deps": [
+          "lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone",
+          "thm-riesz-representation-for-hilbert-space",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-multidimensional-rectangle-and-volume",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions"
+        ],
+        "strategy": "The support subspace is closed and its mean functional continuous by Cauchy-Schwarz. Restrict Lambda using the fixed-kernel mean-zero embedding, apply first-variable-linear Riesz and conjugate its vector to obtain the bilinear u_Q. For nested cubes, test h=u_Q-u_R with conjugate(h-mean_Q(h))*1_Q to prove constancy. Select countably many measurable representatives, adjust constants on nested cubes, remove the null union and assign zero there; this gives the global representative and uniqueness modulo constants. Null cubes have L2_0(Q)={0}; nested compatibility on them is vacuous, and mean tests are used only when |Q|>0.",
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-linfinity-bmo-functions-dualise-hone-boundedly",
+        "kind": "lemma",
+        "title": "Bounded BMO functions dualise H1 boundedly",
+        "statement": "Assume Countable Choice, fix the $H^1$ kernel $\\varphi$ and admissible atomic\norder $\\widetilde N$ used in [[thm-atomic-characterisation-of-real-hp]]. There\nis $C_{n,\\widetilde N,\\varphi}<\\infty$ such that for every\n$b\\in L^\\infty(\\mathbb R^n)\\cap\\mathrm{BMO}(\\mathbb R^n)$ and every\n$f\\in H^1(\\mathbb R^n)$ the integral $\\int fb$ converges absolutely and\n$\\bigl|\\int fb\\bigr|\\le C_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}\\|f\\|_{H^1}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "(7.69) and the sentence following it (write $L_bf$ using the atomic decomposition, use Cauchy-Schwarz and the properties of atoms), printed p. 47"
+            }
+          ]
+        },
+        "deps": [
+          "lem-bmo-functions-pair-uniformly-with-hone-atoms",
+          "thm-atomic-characterisation-of-real-hp",
+          "lem-ellp-sums-of-hp-atoms-converge-in-tempered-distributions",
+          "def-hp-atom-with-moment-order",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "Use the atomic characterisation of $H^1$ for the fixed kernel $\\varphi$ and order $\\widetilde N$: $f=\\sum_j\\lambda_ja_j$ in $\\mathcal S'$ and in the $H^1$ norm, with $(\\lambda_j)\\in\\ell^1$ and $\\sum_j|\\lambda_j|\\le C_{n,\\widetilde N,\\varphi}\\|f\\|_{H^1}$. The partial sums obey $\\|\\sum_{j\\le N}\\lambda_ja_j\\|_{L^1}\\le\\sum_{j\\le N}|\\lambda_j|$, so the series also converges absolutely in $L^1$ to $f$; since $b$ is bounded, $\\int fb=\\sum_j\\lambda_j\\int a_jb$, absolutely. Each atom pairing is bounded by $\\|b\\|_{\\mathrm{BMO}}$, hence $|\\int fb|\\le C_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}\\|f\\|_{H^1}$.",
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-the-dual-representative-has-uniform-bmo-oscillation",
+        "kind": "lemma",
+        "title": "The dual representative has uniformly bounded BMO oscillation",
+        "statement": "Assume Countable Choice, fix the $H^1$ kernel $\\varphi$ and auxiliary order\n$\\widetilde N$ of [[lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone]],\nlet $\\Lambda\\in(H^1(\\mathbb R^n))^*$ and let $u$ be the representative of the\npreceding lemma. Then $u\\in\\mathrm{BMO}(\\mathbb R^n)$ and\n$\\|u\\|_{\\mathrm{BMO}}\\le C_{n,\\widetilde N,\\varphi}\\|\\Lambda\\|$, with the\nconstant independent of $\\Lambda$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "the closing computation of Theorem 7.40 ('show $\\sup_Q|Q|^{-1}\\int_Q|b-b_Q|\\lesssim_n|L|_{H^1\\to\\mathbb C}$') and (7.72)-(7.74), printed pp. 47-48"
+            },
+            {
+              "title": "Brooke Wilson, Math 581A Classical and Multilinear Harmonic Analysis (University of Washington, Fall 2024), lecture 20",
+              "url": "https://sites.math.washington.edu/~blwilson/581AFall2024/Lectures/lecture20.pdf",
+              "locator": "the norm bound for the representing function, scanned pages 2-3"
+            }
+          ]
+        },
+        "deps": [
+          "lem-hone-functional-has-compatible-local-ltwo-representatives",
+          "lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone",
+          "thm-riesz-representation-for-hilbert-space",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "strategy": "Fix a nondegenerate cube $Q$. Since $u-u_Q$ is constant on $Q$ and $u_Q$ has mean zero, the mean oscillation of $u$ on $Q$ is $|Q|^{-1}\\int_Q|u_Q|\\le|Q|^{-1/2}\\|u_Q\\|_{L^2(Q)}$. The mean-zero embedding bounds the restricted functional by $C_{n,\\widetilde N,\\varphi}|Q|^{1/2}\\|\\Lambda\\|$; Riesz isometry gives the same bound for $\\|u_Q\\|_{L^2(Q)}$. Thus every nondegenerate cube oscillation is at most $C_{n,\\widetilde N,\\varphi}\\|\\Lambda\\|$, which gives the BMO bound.",
+        "dependency_level": 9
+      },
+      {
+        "id": "thm-bmo-defines-a-bounded-functional-on-hone",
+        "kind": "theorem",
+        "title": "BMO classes define bounded functionals on H1",
+        "statement": "Assume the Axiom of Choice, with the fixed $H^1$ kernel $\\varphi$ and\nadmissible atomic order $\\widetilde N$ of [[thm-atomic-characterisation-of-real-hp]].\nFor every $b\\in\\mathrm{BMO}(\\mathbb R^n)$ there is a\nunique bounded linear functional $\\Lambda_b\\in(H^1(\\mathbb R^n))^*$ with\n$\\Lambda_b(a)=\\int ab$ for every $H^1$ atom $a$, and\n$\\|\\Lambda_b\\|\\le C_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}$ with the\nconstant independent of $b$. The\nmap $b\\mapsto\\Lambda_b$ is linear, annihilates constants, and therefore factors\nthrough $\\mathrm{BMO}(\\mathbb R^n)/\\mathbb C$; on every finite sum of atoms $g$\none has $\\Lambda_b(g)=\\int gb$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Definition 7.39 (the action of $b\\in\\mathrm{BMO}$ on $H^1$, including the truncation and Banach-Alaoglu step) and (7.69), printed p. 47"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "lem-range-truncations-preserve-bmo-seminorm",
+          "lem-bmo-functions-pair-uniformly-with-hone-atoms",
+          "lem-linfinity-bmo-functions-dualise-hone-boundedly",
+          "lem-finite-atomic-sums-are-dense-in-hone",
+          "def-hp-atom-with-moment-order",
+          "thm-banach-alaoglu",
+          "thm-ultrafilter-lemma",
+          "def-axiom-of-choice",
+          "thm-atomic-characterisation-of-real-hp",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-dominated-convergence",
+          "thm-compactness-via-nets-filters-and-ultrafilters",
+          "def-net-convergence-and-cluster-point",
+          "def-weak-star-topology"
+        ],
+        "strategy": "(1) Bounded case. For $b\\in L^\\infty\\cap\\mathrm{BMO}$ define $\\Lambda$ on finite atomic sums by $g\\mapsto\\int gb$; this is well defined because finite sums equal as $H^1$ elements agree almost everywhere as $L^1$ functions. The preceding lemma gives $|\\Lambda(g)|\\le C_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}\\|g\\|_{H^1}$, so $\\Lambda$ extends uniquely to a bounded functional by density. (2) For general $b$, use the componentwise truncations $b_M$: their BMO seminorm is at most $\\tfrac92\\|b\\|_{\\mathrm{BMO}}$, so the resulting functionals lie in the dual ball of radius $\\tfrac92C_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}$. Banach--Alaoglu under AC gives a weak-star cluster point, and dominated convergence on each atom identifies its values as $\\int ab$. Uniqueness follows from atom density; linearity, vanishing on constants and the finite-sum identity follow from those atom values.",
+        "dependency_level": 10
+      },
+      {
+        "id": "lem-bmo-classes-are-determined-by-their-atom-pairings",
+        "kind": "lemma",
+        "title": "BMO classes are determined by their pairings with H1 atoms",
+        "statement": "Let $b\\in\\mathrm{BMO}(\\mathbb R^n)$ and suppose $\\int ab=0$ for every $H^1$\natom $a$. Then $b$ is constant almost everywhere. Equivalently, the evaluation\nmap on atoms is injective on $\\mathrm{BMO}/\\mathbb C$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Theorem 7.40(a) (injectivity: test against $g=b-b_Q$), printed p. 47"
+            },
+            {
+              "title": "Brooke Wilson, Math 581A Classical and Multilinear Harmonic Analysis (University of Washington, Fall 2024), lecture 20",
+              "url": "https://sites.math.washington.edu/~blwilson/581AFall2024/Lectures/lecture20.pdf",
+              "locator": "the injectivity of the pairing, scanned page 1"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "def-hp-atom-with-moment-order"
+        ],
+        "strategy": "Use the explicit measurable phase h=conjugate(b-b_Q)/|b-b_Q| on its nonzero set, zero elsewhere. The bounded mean-zero test g=(h-h_Q)1_Q is an atom multiple, or zero; atom annihilation gives integral_Q |b-b_Q|=0. The BMO zero-kernel property yields a.e. constancy. Apply this to differences to get injectivity, with no local L2 or choice prerequisite.",
+        "dependency_level": 11
+      },
+      {
+        "id": "thm-real-hone-bmo-duality",
+        "kind": "theorem",
+        "title": "Real H1-BMO duality",
+        "statement": "Assume the Axiom of Choice, with the fixed $H^1$ kernel $\\varphi$ and auxiliary\norder $\\widetilde N$ used in\n[[lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone]]. The map\n$\\Phi:\\mathrm{BMO}(\\mathbb R^n)/\\mathbb C\\to(H^1(\\mathbb R^n))^*$,\n$b\\mapsto\\Lambda_b$ of the preceding theorem is a linear bijection, and there\nare constants $0<c_{n,\\widetilde N,\\varphi}\\le\nC_{n,\\widetilde N,\\varphi}<\\infty$ with\n$c_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}\\le\\|\\Lambda_b\\|\\le\nC_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}$ for every class $b$. Thus\n$(H^1(\\mathbb R^n))^*$ is isomorphic to\n$\\mathrm{BMO}(\\mathbb R^n)/\\mathbb C$ with equivalent norms.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Theorem 7.40 ((a) and (b)) and the surrounding construction, printed pp. 47-48"
+            },
+            {
+              "title": "Brooke Wilson, Math 581A Classical and Multilinear Harmonic Analysis (University of Washington, Fall 2024), lecture 21",
+              "url": "https://sites.math.washington.edu/~blwilson/581AFall2024/Lectures/lecture21.pdf",
+              "locator": "the dyadic atomic decomposition and duality template, scanned pages 1-3"
+            },
+            {
+              "title": "Brooke Wilson, Math 581A Classical and Multilinear Harmonic Analysis (University of Washington, Fall 2024), lecture 22",
+              "url": "https://sites.math.washington.edu/~blwilson/581AFall2024/Lectures/lecture22.pdf",
+              "locator": "the concluding duality step, scanned pages 1-2"
+            }
+          ]
+        },
+        "deps": [
+          "thm-bmo-defines-a-bounded-functional-on-hone",
+          "lem-hone-functional-has-compatible-local-ltwo-representatives",
+          "lem-the-dual-representative-has-uniform-bmo-oscillation",
+          "lem-bmo-classes-are-determined-by-their-atom-pairings",
+          "lem-finite-atomic-sums-are-dense-in-hone",
+          "lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "(i) $\\Phi$ is well defined and bounded by the preceding theorem, injective by the atom-pairing lemma, and factors through constants. The norm constants may depend on the fixed kernel $\\varphi$ and the auxiliary order $\\widetilde N$. (ii) Given $\\Lambda\\in(H^1)^*$, the two preceding lemmas produce $u\\in\\mathrm{BMO}$ with $\\|u\\|_{\\mathrm{BMO}}\\le C_{n,\\widetilde N,\\varphi}\\|\\Lambda\\|$ and local Riesz representatives $u_Q$ with $u-u_Q$ constant on every cube. For an H1 atom $a$ supported in $Q$, $a\\in L^2_0(Q)$, so $\\Lambda(a)=\\int_Qau_Q=\\int_Qau=\\Lambda_u(a)$; the constant disappears because $\\int a=0$. Density of finite atomic sums extends this equality to H1, proving surjectivity. (iii) Applying (ii) to $\\Lambda_b$ and using injectivity shows that the resulting BMO representative differs from $b$ by a constant, giving the reverse norm inequality with the same parameter-dependent constants.",
+        "dependency_level": 12
+      }
+    ]
+  },
+  {
+    "order": 458.0261,
+    "id": "bmo-john-nirenberg-and-h1-duality-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "BMO, John-Nirenberg, and H1 Duality — Examples",
+    "companion": "bmo-john-nirenberg-and-h1-duality",
+    "requires": [
+      "bmo-john-nirenberg-and-h1-duality"
+    ],
+    "items": [
+      {
+        "id": "ex-bmo-seminorm-is-unchanged-by-adding-a-constant",
+        "kind": "example",
+        "title": "The BMO seminorm is unchanged by adding a constant",
+        "statement": "For $b\\in L^1_{\\mathrm{loc}}(\\mathbb R^n)$ and $c\\in\\mathbb C$ one has\n$(b+c)_Q=b_Q+c$ for every cube $Q$ and hence\n$\\|b+c\\|_{\\mathrm{BMO}}=\\|b\\|_{\\mathrm{BMO}}$; so the BMO seminorm descends to\nthe quotient $\\mathrm{BMO}/\\mathbb C$ and is a norm there.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Definition 3.1 and the sentence 'The BMO norm is the smallest constant M...', printed p. 35"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants"
+        ],
+        "strategy": "Linearity of the integral gives $(b+c)_Q=b_Q+c$, so $|(b+c)-(b+c)_Q|=|b-b_Q|$; taking the supremum gives the identity, and the quotient statement is immediate from the zero-seminorm characterisation in the definition.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "rem-one-grid-dyadic-bmo-is-not-identical-to-bmo",
+        "kind": "remark",
+        "title": "Recorded: one dyadic grid is not enough for BMO",
+        "statement": "Recorded result (Mei 2003), not proved here. On the circle\n$\\mathbb T=\\mathbb R/2\\pi\\mathbb Z$, let $\\mathrm{BMO}_D(\\mathbb T)$ be the\ndyadic BMO space of one fixed dyadic grid and let\n$\\varphi\\mapsto\\varphi(\\cdot-2\\delta\\pi)$ be a translate by a shift $0<\\delta<1$ satisfying\n$d(\\delta):=\\inf_{m\\ge0,\\,k\\in\\mathbb Z}2^m|\\delta-k2^{-m}|>0$\n(for example $\\delta=1/3$). Mere non-dyadicity is insufficient for this\nrelative-distance condition. Then\n$\\|\\varphi\\|_{\\mathrm{BMO}(\\mathbb T)}\\asymp\\|\\varphi\\|_{\\mathrm{BMO}_D(\\mathbb T)}+\\|\\varphi(\\cdot-2\\delta\\pi)\\|_{\\mathrm{BMO}_D(\\mathbb T)}$\nfor all $\\varphi\\in\\mathrm{BMO}(\\mathbb T)$. Here classical BMO on the circle\nuses all arcs, with arc length measure; it is distinct from the Euclidean\ncube-based definition used by the page. Theorem 2.2 bounds the classical\nseminorm by $4/d(\\delta)$ times the maximum of the two dyadic seminorms;\nthe reverse bound follows because each dyadic arc is an arc.\nSeparately, on $\\mathbb R$ one-grid dyadic BMO is strictly larger than\nclassical BMO: Kinnunen, Examples 3.5(3)-(4), records the witness\n$f(x)=\\log|x|$ for $x<0$ and $f(x)=-\\log|x|$ for $x>0$, with $f(0)=0$.\nThus a single grid cannot replace arbitrary intervals on the line. Both\nresults are recorded here, not proved. The page works\nwith arbitrary cubes throughout and no item depends on this statement.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tao Mei, BMO is the intersection of two translates of dyadic BMO, C. R. Acad. Sci. Paris 336 (2003), 1003-1006 (arXiv:math/0304417)",
+              "url": "https://arxiv.org/pdf/math/0304417",
+              "locator": "Theorem 2.2 and its proof, printed p. 2; the relative-distance condition d(delta)>0 is defined on printed p. 1"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Examples 3.5(3)-(4), printed p. 39: the signed logarithm belongs to one-grid dyadic BMO on the line but not classical BMO"
+            },
+            {
+              "title": "Brooke Wilson, Math 581A Classical and Multilinear Harmonic Analysis (University of Washington, Fall 2024), lecture 18",
+              "url": "https://sites.math.washington.edu/~blwilson/581AFall2024/Lectures/lecture18.pdf",
+              "locator": "the dyadic BMO definition and dyadic John-Nirenberg discussion, scanned pages 1-2"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants"
+        ],
+        "strategy": "Record, without a Proof section, Mei Theorem 2.2 for circle arcs with 0<delta<1 and d(delta)>0. Separately record Kinnunen signed-logarithm strictness for one grid on the line. Keep proved_here false, the exact external-dependency record and source URLs, and do not promote the remark to a logical supplier.",
+        "proved_here": false,
+        "external_dependency": {
+          "source_url": "https://arxiv.org/pdf/math/0304417",
+          "exact_statement": "For the unit circle T, with BMO(T) the classical BMO space and BMO_D(T) the dyadic BMO space of one fixed grid, there is a suitable non-dyadic shift delta such that ||phi||_{BMO(T)} is comparable to ||phi||_{BMO_D(T)} + ||phi(. - 2 delta pi)||_{BMO_D(T)} for all phi in BMO(T) (Mei, C. R. Acad. Sci. Paris 336 (2003), abstract and Introduction).",
+          "local_proof_attempt": "None. The two-grid averaging/stopping argument of the cited paper is not reproduced; this page proves the classical cube-based duality directly and only records the distinction to prevent substituting a single dyadic grid's seminorm for the cube seminorm.",
+          "necessity": "The page and several planned suppliers use dyadic stopping arguments in proofs; the remark prevents the invalid promotion of a single-grid dyadic seminorm to the adopted cube seminorm."
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-logarithm-is-in-bmo-but-not-linfinity",
+        "kind": "example",
+        "title": "The logarithm is in BMO but not in L-infinity",
+        "statement": "Define $b:\\mathbb R^n\\to\\mathbb R$ by $b(x)=\\log|x|$ for $x\\ne0$ and $b(0)=0$\n(any finite value at the origin gives the same class). Then\n$b\\in\\mathrm{BMO}(\\mathbb R^n)$ with a seminorm depending only on $n$, and $b$\nis unbounded on every neighbourhood of $0$; in particular no bounded\nrepresentative exists, so the continuous injection\n$L^\\infty/\\mathbb C\\to\\mathrm{BMO}/\\mathbb C$ of the A page is not surjective.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Example 7.3 (log$|x|\\in$BMO; reduce by $\\log|rx|=\\log|x|+\\log r$), printed p. 30"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Examples 3.5(2), printed pp. 37-38"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4 (UCLA, Fall 2006)",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Problem 3.2, printed p. 11"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "cor-linfinity-embeds-continuously-into-bmo",
+          "def-multidimensional-rectangle-and-volume"
+        ],
+        "strategy": "Dyadic shells prove local integrability. Scaling reduces mean oscillation to unit cubes; distant cubes use a gradient bound and nearby cubes a fixed logarithm integral. Every small punctured ball is a positive-measure superlevel, whereas essential-bound superlevels are null. Thus no bounded representative exists, including after adding a constant.",
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-bmo-functions-need-not-be-globally-integrable",
+        "kind": "counterexample",
+        "title": "A BMO function need not be globally integrable",
+        "statement": "The claim refuted is the inclusion $\\mathrm{BMO}(\\mathbb R^n)\\subseteq L^1(\\mathbb R^n)$,\nequivalently the claim that every BMO function is globally integrable. The\nwitness is the function $b(x)=\\log|x|$ ($b(0)=0$) of\n[[ex-logarithm-is-in-bmo-but-not-linfinity]], which satisfies\n$\\int_{\\mathbb R^n}|b(x)|\\,dx=+\\infty$; hence\n$\\mathrm{BMO}(\\mathbb R^n)\\not\\subseteq L^1(\\mathbb R^n)$. Thus BMO membership alone does not guarantee a global Lebesgue pairing\n$\\int fb$: absolute integrability of the product $fb$ must be checked\nseparately. Such a pairing can exist even without cancellation of $f$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Examples 3.5(2) ($\\log|x|\\in$BMO with $|x|$-growth, hence no global integrability), printed pp. 37-38"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Example 7.3, printed p. 30"
+            }
+          ]
+        },
+        "deps": [
+          "def-multidimensional-rectangle-and-volume",
+          "ex-logarithm-is-in-bmo-but-not-linfinity",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "strategy": "Restrict to the region $2<|x|<R$; in polar (or one-dimensional radial) coordinates the integral of $\\log|x|$ over the annulus grows like $R^n\\log R$, so it diverges as $R\\to\\infty$ for every $n\\ge1$.",
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "ex-john-nirenberg-tail-integration",
+        "kind": "example",
+        "title": "Integrating the John-Nirenberg tail recovers the Lq oscillation bound",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]).\n\nLet $b\\in\\mathrm{BMO}(\\mathbb R^n)$, $1\\le q<\\infty$ and let $Q$ be a cube.\nUsing the layer-cake formula and the John-Nirenberg exponential bound,\n$|Q|^{-1}\\int_Q|b-b_Q|^q=q\\int_0^\\infty\\lambda^{q-1}|Q|^{-1}|\\{x\\in Q:|b(x)-b_Q|>\\lambda\\}|\\,d\\lambda\\le C_{n,q}\\|b\\|_{\\mathrm{BMO}}^q$,\nwith the zero-seminorm case giving $0$; this is the mechanism behind the\nequivalence of the $L^q$ oscillation seminorms.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis (January 11, 2022)",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "(7.10) (the layer-cake computation from the exponential bound), printed p. 32"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis (Aalto University lecture notes)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "Theorem 3.28 proof, printed pp. 53-54"
+            }
+          ]
+        },
+        "deps": [
+          "thm-john-nirenberg-exponential-inequality",
+          "cor-bmo-lp-oscillation-norms-are-equivalent",
+          "def-bmo-seminorm-and-quotient-by-constants",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "def-countable-choice"
+        ],
+        "strategy": "Assume inherited Countable Choice. Insert John-Nirenberg into layer cake and scale lambda=mu*BMO; the finite gamma-type integral gives the q-th power bound for every 1<=q<infinity. Handle zero seminorm separately without division. Taking roots/suprema supplies the per-cube mechanism for oscillation equivalence.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-lacunary-exponential-sums-belong-to-bmo",
+        "kind": "example",
+        "title": "Finite lacunary exponential sums belong to BMO",
+        "statement": "Let $0<a\\le b<\\infty$, and let $(\\xi_n)_{n\\in\\mathbb Z}$ be nonzero real\nfrequencies satisfying\n$a2^n\\le|\\xi_n|\\le b2^n$ for every $n$. Let $(c_n)_{n\\in\\mathbb Z}$ have\nfinite support and put\n$$f(x):=\\sum_{n\\in\\mathbb Z}c_ne^{2\\pi i\\xi_nx}.$$\nThen\n$$\\|f\\|_{\\mathrm{BMO}(\\mathbb R)}\\le C_{a,b,\\phi}\\Bigl(\\sum_n|c_n|^2\\Bigr)^{1/2}.$$\nMore precisely, fix a nonnegative $\\phi\\in C_c^\\infty(\\mathbb R)$ with\n$\\phi\\ge1$ on $[-\\tfrac12,\\tfrac12]$. For an interval $I$ of length $L$ and\ncentre $x_I$, set $\\phi_I(x):=\\phi((x-x_I)/L)$. There is a constant\n$c_I\\in\\mathbb C$ such that\n$$\\int_{\\mathbb R}\\phi_I(x)|f(x)-c_I|^2\\,dx \\le C_{a,b,\\phi}L\\sum_n|c_n|^2.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4 (UCLA, Fall 2006)",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Exercise Q4 (Lacunary exponential sums lie in BMO), printed pp. 26-27"
+            }
+          ]
+        },
+        "deps": [
+          "def-bmo-seminorm-and-quotient-by-constants"
+        ],
+        "strategy": "Split at the least integer n0 with 2^n0 >= |I|^{-1}. For n<n0 choose the value of the low-frequency sum at the centre of I; its weighted L2 oscillation is bounded by the geometric sum of |xi_n|^2. For n>=n0, expand the weighted square and use integration by parts in the fixed smooth bump to obtain rapid decay in L|xi_n-xi_m|. Frequency comparability gives uniformly bounded absolute row sums: finitely many nearby indices are harmless, higher indices form a geometric tail, and lower indices are bounded by r(1+c 2^r)^(-M). The Schur estimate gives the high-frequency L2 bound. The bump dominates I, so Cauchy-Schwarz and the optimal-constant BMO inequality give the claimed seminorm bound. Finite sums only; no choice principle is used.",
+        "dependency_level": 1,
+        "justified_by": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,475 @@
+{
+  "run": "frontier-39-analysis-30",
+  "phase": "initial",
+  "round": 1,
+  "unit": "6",
+  "input_sha256": "9338524b8f90ef76ff4d0d3c41b2d942e870edbc6da3d7062fa8aeac770c3e1f",
+  "decisions": [
+    {
+      "id": "def-bmo-seminorm-and-quotient-by-constants",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "0cdaa93720ce8d773b4c0bf8ddc6c7e09858ef6f38dd9f398a01420e27b51434",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For n=1, b(x)=x is locally integrable and F=union_{k>=1}[k,k+k^{-2}] has finite positive measure, but integral_F b diverges since its k-th interval contributes at least 1/k. Thus b_F was undefined. Requiring measurable E subset F with b in L1(F) defines both means and proves the estimate by triangle inequality. Balls and cubes are bounded, so the intended seminorm comparison and quotient claims remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "024d4faba7ebfb6fee2f5d752019ac9103c13e43522f49902cc6b7f0c76f0514",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.2 incorrectly used a strict inequality after multiplying a strict volume ratio by the nonnegative BMO seminorm; constants have seminorm zero, giving the false assertion 0<0. Replacing that sign by <= handles zero seminorm without division. The telescoping proof and its constant C_n=2^(n+1)+4^n are valid unchanged, so this is a nonfatal local inequality error rather than failure of the lemma.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-bmo-functions-need-not-be-globally-integrable",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "a9a53a015ff247616b6d005228c21d0dad437f446103bb0743ec9737d06f1ccf",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The asserted necessity of local interpretation or cancellation is false: b=log|x| pairs absolutely with f=exp(-|x|^2), whose integral is positive. Near zero, the logarithmic shell series is summable; at infinity, exponential decay dominates polynomial volume and logarithmic growth. The growing-cube/MCT proof still correctly refutes BMO subset L1. The repair retains that full claim and says product integrability must be checked separately, allowing pairings without cancellation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-hone-functional-has-compatible-local-ltwo-representatives",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "b14eba7feb57130367473a62c746b0ac63b56fde2908c56102e30e2c6c5a8b54",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The rectangle definition admits singleton cubes, so step 3.1 divided by |Q|=0 through mean_Q(h). This is a nonfatal omitted null case: L2_0(Q)={0} in the a.e. quotient and compatibility on Q is vacuous. Define L2_0 by zero integral, equivalent to zero mean for positive volume, and split off |Q|=0 before the test. Closedness, bounded restriction, first-variable-linear Riesz with u_Q=conjugate(y_Q), and CC gluing on [-k,k]^n then give every original representation and uniqueness claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-finite-atomic-sums-are-dense-in-hone",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "39dd2812f0d80fbf4822882b86b19d1f5378511e67cb9ac8f8f7ccd85bffa77f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The finite sum indexed j<=N includes j=0 under the natural-sequence convention, while Statement and step 2.1 supply only a_1,...,a_N and lambda_1,...,lambda_N. This is a nonfatal indexing defect: the atomic characterization supplies H1-convergent partial sums and shifting an ell1 sequence by one changes neither the total nor convergence. Explicitly reindex by j>=1 and sum over 1<=j<=N throughout; the tail tends to zero, and N>=1 gives the promised finite sum for any positive tolerance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-bmo-seminorm-and-quotient-by-constants",
+      "disposition": "repaired",
+      "post_sha256": "66ff649f1eb891755628f4235779745ac9b4316bb245302985c55f2956e53c81",
+      "review_context_sha256": "c743a131665395c13f2c5133b9abbbec1e0f6e8b4f10eb176628421052be0826",
+      "reason": "For n=1, b(x)=x is locally integrable and F=union_{k>=1}[k,k+k^{-2}] has finite positive measure, but integral_F b diverges since its k-th interval contributes at least 1/k. Thus b_F was undefined. Requiring measurable E subset F with b in L1(F) defines both means and proves the estimate by triangle inequality. Balls and cubes are bounded, so the intended seminorm comparison and quotient claims remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically",
+      "disposition": "repaired",
+      "post_sha256": "623b00926383efd8e8834965016fefc1c968f8b5cf7d1011cf0f3bfba7325198",
+      "review_context_sha256": "04771cd067b96c9ccd41078301599c8c0c4b98e08fd4422533b8b66da1f36cfc",
+      "reason": "Step 2.2 incorrectly used a strict inequality after multiplying a strict volume ratio by the nonnegative BMO seminorm; constants have seminorm zero, giving the false assertion 0<0. Replacing that sign by <= handles zero seminorm without division. The telescoping proof and its constant C_n=2^(n+1)+4^n are valid unchanged, so this is a nonfatal local inequality error rather than failure of the lemma.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-bmo-functions-need-not-be-globally-integrable",
+      "disposition": "repaired",
+      "post_sha256": "6d72b4245e89b1942f233c82978dab7943a1567d5b265d9bb2d38450549158d5",
+      "review_context_sha256": "108df5b9865b4a62c013d18d9d87149f30ef9e6f616158d10197757bae372ee8",
+      "reason": "The asserted necessity of local interpretation or cancellation is false: b=log|x| pairs absolutely with f=exp(-|x|^2), whose integral is positive. Near zero, the logarithmic shell series is summable; at infinity, exponential decay dominates polynomial volume and logarithmic growth. The growing-cube/MCT proof still correctly refutes BMO subset L1. The repair retains that full claim and says product integrability must be checked separately, allowing pairings without cancellation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-hone-functional-has-compatible-local-ltwo-representatives",
+      "disposition": "repaired",
+      "post_sha256": "85fb7a0198012f86dd325f6b97a2d208e2bf40a7ce235287a60fd51de78de757",
+      "review_context_sha256": "c2902e49cf845f758db8c365d209d8ee9f54fc207b9f2643f38fd4d2969ade67",
+      "reason": "The rectangle definition admits singleton cubes, so step 3.1 divided by |Q|=0 through mean_Q(h). This is a nonfatal omitted null case: L2_0(Q)={0} in the a.e. quotient and compatibility on Q is vacuous. Define L2_0 by zero integral, equivalent to zero mean for positive volume, and split off |Q|=0 before the test. Closedness, bounded restriction, first-variable-linear Riesz with u_Q=conjugate(y_Q), and CC gluing on [-k,k]^n then give every original representation and uniqueness claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-finite-atomic-sums-are-dense-in-hone",
+      "disposition": "repaired",
+      "post_sha256": "4570836396ab6bed8e2927cdb7257c1967f4c142a3de3572762950666a2011dd",
+      "review_context_sha256": "04bd164f8e99b966ecebc27ec071058f4ea9ad0f9a8bfce8eb75a67eda151f9d",
+      "reason": "The finite sum indexed j<=N includes j=0 under the natural-sequence convention, while Statement and step 2.1 supply only a_1,...,a_N and lambda_1,...,lambda_N. This is a nonfatal indexing defect: the atomic characterization supplies H1-convergent partial sums and shifting an ell1 sequence by one changes neither the total nor convergence. Explicitly reindex by j>=1 and sum over 1<=j<=N throughout; the tail tends to zero, and N>=1 gives the promised finite sum for any positive tolerance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cor-bmo-lp-oscillation-norms-are-equivalent",
+    "cor-linfinity-embeds-continuously-into-bmo",
+    "ex-bmo-seminorm-is-unchanged-by-adding-a-constant",
+    "ex-john-nirenberg-tail-integration",
+    "ex-lacunary-exponential-sums-belong-to-bmo",
+    "ex-logarithm-is-in-bmo-but-not-linfinity",
+    "lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically",
+    "lem-bmo-classes-are-determined-by-their-atom-pairings",
+    "lem-bmo-functions-pair-uniformly-with-hone-atoms",
+    "lem-john-nirenberg-stopping-cubes-have-geometric-decay",
+    "lem-range-truncations-preserve-bmo-seminorm",
+    "lem-the-dual-representative-has-uniform-bmo-oscillation",
+    "rem-littlewood-paley-endpoints-require-hardy-and-bmo-replacements",
+    "rem-one-grid-dyadic-bmo-is-not-identical-to-bmo",
+    "thm-bmo-defines-a-bounded-functional-on-hone",
+    "thm-calderon-zygmund-operators-map-linfinity-to-bmo",
+    "thm-john-nirenberg-exponential-inequality",
+    "thm-real-hone-bmo-duality"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "def-bmo-seminorm-and-quotient-by-constants",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "repaired",
+      "finding": "For n=1, b(x)=x is locally integrable and F=union_{k>=1}[k,k+k^{-2}] has finite positive measure, but integral_F b diverges since its k-th interval contributes at least 1/k. Thus b_F was undefined. Requiring measurable E subset F with b in L1(F) defines both means and proves the estimate by triangle inequality. Balls and cubes are bounded, so the intended seminorm comparison and quotient claims remain valid."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically",
+      "outcome": "confirmed_nonfatal",
+      "status": "repaired",
+      "finding": "Step 2.2 incorrectly used a strict inequality after multiplying a strict volume ratio by the nonnegative BMO seminorm; constants have seminorm zero, giving the false assertion 0<0. Replacing that sign by <= handles zero seminorm without division. The telescoping proof and its constant C_n=2^(n+1)+4^n are valid unchanged, so this is a nonfatal local inequality error rather than failure of the lemma."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "cex-bmo-functions-need-not-be-globally-integrable",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "repaired",
+      "finding": "The asserted necessity of local interpretation or cancellation is false: b=log|x| pairs absolutely with f=exp(-|x|^2), whose integral is positive. Near zero, the logarithmic shell series is summable; at infinity, exponential decay dominates polynomial volume and logarithmic growth. The growing-cube/MCT proof still correctly refutes BMO subset L1. The repair retains that full claim and says product integrability must be checked separately, allowing pairings without cancellation."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-hone-functional-has-compatible-local-ltwo-representatives",
+      "outcome": "confirmed_nonfatal",
+      "status": "repaired",
+      "finding": "The rectangle definition admits singleton cubes, so step 3.1 divided by |Q|=0 through mean_Q(h). This is a nonfatal omitted null case: L2_0(Q)={0} in the a.e. quotient and compatibility on Q is vacuous. Define L2_0 by zero integral, equivalent to zero mean for positive volume, and split off |Q|=0 before the test. Closedness, bounded restriction, first-variable-linear Riesz with u_Q=conjugate(y_Q), and CC gluing on [-k,k]^n then give every original representation and uniqueness claim."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-the-dual-representative-has-uniform-bmo-oscillation",
+      "supplier": "lem-hone-functional-has-compatible-local-ltwo-representatives",
+      "status": "proposed-owner-repair",
+      "finding": "F1 says mean zero on every cube, F4 and Proof 1.1/2.1 divide by |Q| without explicit nondegeneracy. Under the clarified integral-zero interface, null cubes have no defined mean. Restrict the computation and F1/F4 to nondegenerate cubes, which suffice exactly for the BMO supremum. Unassigned frontier item left untouched."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-finite-atomic-sums-are-dense-in-hone",
+      "outcome": "confirmed_nonfatal",
+      "status": "repaired",
+      "finding": "The finite sum indexed j<=N includes j=0 under the natural-sequence convention, while Statement and step 2.1 supply only a_1,...,a_N and lambda_1,...,lambda_N. This is a nonfatal indexing defect: the atomic characterization supplies H1-convergent partial sums and shifting an ell1 sequence by one changes neither the total nor convergence. Explicitly reindex by j>=1 and sum over 1<=j<=N throughout; the tail tends to zero, and N>=1 gives the promised finite sum for any positive tolerance."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-bmo-seminorm-and-quotient-by-constants",
+      "claim": "BMO seminorm, constants quotient, and cube/ball equivalence; subset oscillation estimate only for measurable finite-positive E subset F with b integrable on F.",
+      "dependencies": [
+        "def-locally-integrable-function-on-r-n",
+        "def-multidimensional-rectangle-and-volume",
+        "def-complex-lp-and-euclidean-test-function-conventions",
+        "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+      ],
+      "evidence": "Definition and actual local-integrability, rectangle and complex conventions read; direct consumer facts/references inspected. No external source was consulted; these elementary averaging arguments are familiar.",
+      "downstream_examinations": [
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "cor-bmo-lp-oscillation-norms-are-equivalent",
+          "path": "items/cor-bmo-lp-oscillation-norms-are-equivalent.md",
+          "affected_use": "**Given:** Countable Choice, $1\\le q<\\infty$, a function $b\\in L^1_{\\mathrm{loc}}(\\mathbb R^n)$, a cube $Q$, and the mean and seminorm of [[def-bmo-seminorm-and-quotient-by-constants]].\n\n[F1] The mean is $b_Q=|Q|^{-1}\\int_Qb$ and $\\|b\\|_{\\mathrm{BMO}}=\\sup_Q|Q|^{-1}\\int_Q|b-b_Q|$; the seminorm vanishes exactly on the almost-everywhere constants ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "cor-linfinity-embeds-continuously-into-bmo",
+          "path": "items/cor-linfinity-embeds-continuously-into-bmo.md",
+          "affected_use": "**Given:** A bounded function $b\\in L^\\infty(\\mathbb R^n)$ and a cube $Q$, with the cube convention, the mean $b_Q$ and the seminorm and quotient of [[def-bmo-seminorm-and-quotient-by-constants]].\n\n[F1] The mean is defined by $b_Q=|Q|^{-1}\\int_Qb$, and the seminorm is $\\|b\\|_{\\mathrm{BMO}}=\\sup_Q|Q|^{-1}\\int_Q|b-b_Q|$; the zero-seminorm class is exactly the class of functions constant almost everywhere ([[def-bmo-seminorm-and-quotient-by-constants]]).\n\n[F2] On a cube of finite volume, a bounded function is integrable and $|b_Q|\\le\\|b\\|_{L^\\infty}$ ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "ex-bmo-seminorm-is-unchanged-by-adding-a-constant",
+          "path": "items/ex-bmo-seminorm-is-unchanged-by-adding-a-constant.md",
+          "affected_use": "**Given:** $b\\in L^1_{\\mathrm{loc}}(\\mathbb R^n)$, a constant $c\\in\\mathbb C$ and a cube $Q$, with the mean, the seminorm and the quotient of [[def-bmo-seminorm-and-quotient-by-constants]].\n\n[L1] The mean is $b_Q=|Q|^{-1}\\int_Qb$, the seminorm is $\\|b\\|_{\\mathrm{BMO}}=\\sup_Q|Q|^{-1}\\int_Q|b-b_Q|$, and $\\|b\\|_{\\mathrm{BMO}}=0$ exactly when $b$ is constant almost everywhere ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "ex-john-nirenberg-tail-integration",
+          "path": "items/ex-john-nirenberg-tail-integration.md",
+          "affected_use": "**Given:** Countable Choice, $b\\in\\mathrm{BMO}(\\mathbb R^n)$, $1\\le q<\\infty$ and a cube $Q$, with the mean and seminorm of [[def-bmo-seminorm-and-quotient-by-constants]].\n\n[L2] There are $c_n,C_n\\in(0,\\infty)$ with $|\\{x\\in Q:|b-b_Q|>\\lambda\\}|\\le C_n|Q|e^{-c_n\\lambda/\\|b\\|_{\\mathrm{BMO}}}$ for every $\\lambda>0$; if $\\|b\\|_{\\mathrm{BMO}}=0$ then $b$ is constant almost everywhere and the set is null for every $\\lambda>0$ ([[thm-john-nirenberg-exponential-inequality]], [[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "ex-lacunary-exponential-sums-belong-to-bmo",
+          "path": "items/ex-lacunary-exponential-sums-belong-to-bmo.md",
+          "affected_use": "[L1] For every locally integrable $g$ and every constant $c$,\n$$|I|^{-1}\\int_I|g-g_I|\\le2|I|^{-1}\\int_I|g-c|,$$\nand the BMO seminorm is the supremum of the mean oscillations over intervals\nin dimension one ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "ex-logarithm-is-in-bmo-but-not-linfinity",
+          "path": "items/ex-logarithm-is-in-bmo-but-not-linfinity.md",
+          "affected_use": "**Given:** The function $b(x)=\\log|x|$ for $x\\ne0$ and $b(0)=0$, a cube $Q$ with centre $x_Q$ and side length $r=\\ell(Q)$, and the conventions of [[def-bmo-seminorm-and-quotient-by-constants]] and [[def-multidimensional-rectangle-and-volume]].\n\n[L1] The mean is optimal up to the factor $2$: $|Q|^{-1}\\int_Q|b-b_Q|\\le2|Q|^{-1}\\int_Q|b-c|$ for every constant $c$, and $\\|b\\|_{\\mathrm{BMO}}=\\sup_Q|Q|^{-1}\\int_Q|b-b_Q|$ ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically",
+          "path": "items/lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically.md",
+          "affected_use": "**Given:** $b\\in\\mathrm{BMO}(\\mathbb R^n)$ and cubes $Q\\subseteq R$ with side lengths $\\ell(Q)\\le\\ell(R)$, together with the mean $b_E=|E|^{-1}\\int_Eb$, the seminorm and the cube and volume conventions of [[def-bmo-seminorm-and-quotient-by-constants]] and [[def-multidimensional-rectangle-and-volume]].\n\n[F1] For every cube $E$, $|E|^{-1}\\int_E|b-b_E|\\le\\|b\\|_{\\mathrm{BMO}}$, and for cubes $E\\subseteq F$ one has $|b_E-b_F|\\le|E|^{-1}\\int_E|b-b_F|\\le(|F|/|E|)\\|b\\|_{\\mathrm{BMO}}$ ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "lem-bmo-classes-are-determined-by-their-atom-pairings",
+          "path": "items/lem-bmo-classes-are-determined-by-their-atom-pairings.md",
+          "affected_use": "[F2] $b$ is locally integrable, $b_Q=|Q|^{-1}\\int_Qb$, and the BMO seminorm vanishes exactly on the almost-everywhere constants ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "lem-bmo-functions-pair-uniformly-with-hone-atoms",
+          "path": "items/lem-bmo-functions-pair-uniformly-with-hone-atoms.md",
+          "affected_use": "[F2] $b\\in L^1_{\\mathrm{loc}}(\\mathbb R^n)$, $b_Q=|Q|^{-1}\\int_Qb$ and $|Q|^{-1}\\int_Q|b-b_Q|\\le\\|b\\|_{\\mathrm{BMO}}$ ([[def-bmo-seminorm-and-quotient-by-constants]], [[def-locally-integrable-function-on-r-n]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "lem-john-nirenberg-stopping-cubes-have-geometric-decay",
+          "path": "items/lem-john-nirenberg-stopping-cubes-have-geometric-decay.md",
+          "affected_use": "[F6] For every cube $E$, $|E|^{-1}\\int_E|b-b_E|\\le\\|b\\|_{\\mathrm{BMO}}$ ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "lem-range-truncations-preserve-bmo-seminorm",
+          "path": "items/lem-range-truncations-preserve-bmo-seminorm.md",
+          "affected_use": "**Given:** A function $b\\in\\mathrm{BMO}(\\mathbb R^n)$, a cube $Q$ and constants $c\\in\\mathbb R$, $-\\infty<L\\le K<\\infty$ and $M>0$, with the mean and seminorm of [[def-bmo-seminorm-and-quotient-by-constants]].\n\n[F1] The mean is $b_Q=|Q|^{-1}\\int_Qb$ and $\\|b\\|_{\\mathrm{BMO}}=\\sup_Q|Q|^{-1}\\int_Q|b-b_Q|$; for every constant $d$ one has $(b+d)_Q=b_Q+d$ and hence $\\|b+d\\|_{\\mathrm{BMO}}=\\|b\\|_{\\mathrm{BMO}}$ ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "rem-littlewood-paley-endpoints-require-hardy-and-bmo-replacements",
+          "path": "items/rem-littlewood-paley-endpoints-require-hardy-and-bmo-replacements.md",
+          "affected_use": "The two-sided square-function equivalence of\n[[thm-littlewood-paley-square-function-equivalence-on-lp]] is asserted only\nfor $1<p<\\infty$. It is not asserted at $p=1$ or $p=\\infty$. The classical\nlower-endpoint scale is real Hardy space $H^1(\\mathbb R^n)$\n([[def-real-hardy-space-by-a-radial-maximal-function]]); the recorded\nhomogeneous square-function characterization is\n[[rem-square-function-characterisation-of-real-hone]]. At the upper endpoint\nthe natural dual scale is BMO modulo constants\n([[def-bmo-seminorm-and-quotient-by-constants]]), by the duality\n[[thm-real-hone-bmo-duality]]. These endpoint scales do not assert an endpoint\nextension for the inhomogeneous square function of the strict-range theorem.",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "rem-one-grid-dyadic-bmo-is-not-identical-to-bmo",
+          "path": "items/rem-one-grid-dyadic-bmo-is-not-identical-to-bmo.md",
+          "affected_use": "The page uses the Euclidean cube-based seminorm of\n[[def-bmo-seminorm-and-quotient-by-constants]]. The circle comparison uses\nits own arc convention, while the recorded line witness explains the\nsingle-grid warning in the Euclidean setting. The statement is recorded rather than proved: the cited\ntwo-grid argument is not reproduced here, and no construction or estimate on\nthis page uses it. Its role is negative, to prevent the substitution of one\nfixed dyadic grid for the cube grid in the stopping arguments of the page and of\nits suppliers.\n",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "thm-bmo-defines-a-bounded-functional-on-hone",
+          "path": "items/thm-bmo-defines-a-bounded-functional-on-hone.md",
+          "affected_use": "[F6] If $b_M\\to b$ pointwise with $|b_M|\\le|b|$ and $a$ is an atom, then $\\int ab_M\\to\\int ab$ by dominated convergence, the dominating function $|a||b|$ being integrable because $a$ is bounded with compact support and $b\\in L^1_{\\mathrm{loc}}$ ([[thm-dominated-convergence]], [[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "thm-calderon-zygmund-operators-map-linfinity-to-bmo",
+          "path": "items/thm-calderon-zygmund-operators-map-linfinity-to-bmo.md",
+          "affected_use": "[F8] The seminorm is $\\|u\\|_{\\mathrm{BMO}}=\\sup_Q|Q|^{-1}\\int_Q|u-u_Q|$, and the quotient $\\mathrm{BMO}(\\mathbb R^n)/\\mathbb C$ identifies functions differing by an almost-everywhere constant ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        },
+        {
+          "supplier": "def-bmo-seminorm-and-quotient-by-constants",
+          "consumer": "thm-john-nirenberg-exponential-inequality",
+          "path": "items/thm-john-nirenberg-exponential-inequality.md",
+          "affected_use": "[F1] The seminorm is $\\|b\\|_{\\mathrm{BMO}}=\\sup_E|E|^{-1}\\int_E|b-b_E|$ and it vanishes exactly on the almost-everywhere constants ([[def-bmo-seminorm-and-quotient-by-constants]]).",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "reason": "The added L1(F) hypothesis affects only the arbitrary-set comparison. This use invokes the unchanged seminorm, means on bounded cubes/intervals, quotient kernel or local integrability; any enclosing cube/ball is bounded, so local integrability supplies the new hypothesis. No necessary item change or further propagation follows."
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Definition manifest synchronized under shared lock; its completed review hashes remain current. Assigned repairs and focused checks are complete."
+    },
+    {
+      "id": "lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically",
+      "claim": "The nested-cube logarithmic mean estimate is unchanged; only step 2.2 strictness is repaired.",
+      "evidence": "Whole proof, Definition/F1 averaging bound and F2 cube volume convention checked: dyadic enlargement contains R, m<2+log2 ratio, and all multiplications now preserve non-strict inequalities. New integrability premise of the assigned BMO supplier holds on all bounded cubes. No external source consulted.",
+      "dependencies": [
+        "def-bmo-seminorm-and-quotient-by-constants",
+        "def-multidimensional-rectangle-and-volume"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned owning manifest and contract metadata synchronized under the shared lock; focused checks passed. No further assigned item edits remain."
+    },
+    {
+      "id": "cex-bmo-functions-need-not-be-globally-integrable",
+      "claim": "BMO need not lie in global L1; global products require their own absolute-integrability check.",
+      "dependencies": [
+        "ex-logarithm-is-in-bmo-but-not-linfinity",
+        "def-multidimensional-rectangle-and-volume",
+        "thm-monotone-convergence-for-the-integral"
+      ],
+      "evidence": "Entire logarithm Verification and MCT Statement read; log BMO follows from scaling, regular-segment derivative bound and shell integrability. C_m lies in E_m with positive volume tending to infinity. The false pairing consequence also appears in owning examples-page prose and will be corrected under the shared lock. No item references this counterexample. The changed heading is Statement refuted, not an actual Statement or Definition event. No outside defect found here.",
+      "unresolved_obligations": [],
+      "next_action": "Assigned owning manifest and contract metadata synchronized under the shared lock; focused checks passed. No further assigned item edits remain."
+    },
+    {
+      "id": "lem-hone-functional-has-compatible-local-ltwo-representatives",
+      "claim": "Integral-zero local L2 representatives on all cubes; null cubes have only the zero class and vacuous a.e. compatibility.",
+      "dependencies": [
+        "lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone",
+        "thm-riesz-representation-for-hilbert-space",
+        "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+        "def-multidimensional-rectangle-and-volume",
+        "def-l-p-space-as-a-quotient-by-null-functions",
+        "def-countable-choice",
+        "cor-cauchy-schwarz-inequality-for-l-two",
+        "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions"
+      ],
+      "evidence": "Entire assigned proof and exact supplier Statements/Definitions checked. On |Q|>0 the test conjugate(h-mean_Q h)1_Q has integral zero and annihilation yields squared norm zero. Positive-volume nested exhaustion determines additive constants and a locally L2 hence locally L1 function; CC is retained. No external source was consulted; Hilbert representation and this gluing argument are familiar.",
+      "downstream_examinations": [
+        {
+          "supplier": "lem-hone-functional-has-compatible-local-ltwo-representatives",
+          "consumer": "thm-real-hone-bmo-duality",
+          "path": "items/thm-real-hone-bmo-duality.md",
+          "affected_use": "[F3] For every $\\Lambda\\in(H^1)^*$ the preceding local representatives produce a locally integrable $u$ with $u-u_Q$ constant almost everywhere on every cube $Q$, where $u_Q\\in L^2_0(Q)$ represents $\\Lambda|_{L^2_0(Q)}$, and $\\|u\\|_{\\mathrm{BMO}}\\le C_{n,\\widetilde N,\\varphi}^-\\|\\Lambda\\|$ ([[lem-hone-functional-has-compatible-local-ltwo-representatives]], [[lem-the-dual-representative-has-uniform-bmo-oscillation]]).\n\n2.1 Surjectivity. Let $\\Lambda\\in(H^1)^*$ and let $u$ be the representative of [F3], so that $\\|u\\|_{\\mathrm{BMO}}\\le C_{n,\\widetilde N,\\varphi}^-\\|\\Lambda\\|$. For an atom $a$ supported in a cube $Q$ one has $a\\in L^2_0(Q)$, hence $\\Lambda(a)=\\int_Qu_Qa=\\int_Q(u-c_Q)a=\\int ua$ because $\\int a=0$ and $u-u_Q=c_Q$ almost everywhere on $Q$; meanwhile $\\Lambda_u(a)=\\int au$ by the definition of $\\Phi$ [F1]. Thus $\\Lambda$ and $\\Lambda_u$ agree on every atom, hence on every finite atomic sum by linearity, and therefore on all of $H^1$ by density and continuity [F4]; that is, $\\Lambda=\\Phi(u)$ and $\\Phi$ is surjective. [step 1.1, F1, F3, F4]",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "invalidated_claim": "None: the local bilinear representation and compatibility used in F3/step 2.1 are unchanged.",
+          "minimality": "Atoms live on positive-volume cubes and have zero integral, so they belong to the same L2_0(Q); cancellation and density prove surjectivity as before. No repair needed."
+        },
+        {
+          "supplier": "lem-hone-functional-has-compatible-local-ltwo-representatives",
+          "consumer": "lem-the-dual-representative-has-uniform-bmo-oscillation",
+          "path": "items/lem-the-dual-representative-has-uniform-bmo-oscillation.md",
+          "affected_use": "**Given:** Countable Choice, the fixed $\\varphi,\\widetilde N$, $\\Lambda\\in(H^1(\\mathbb R^n))^*$, the locally integrable representative $u$ and the local representatives $u_Q$ of [[lem-hone-functional-has-compatible-local-ltwo-representatives]], and a cube $Q$.\n\n[F1] For every cube $Q$ the representative $u_Q\\in L^2_0(Q)$ has mean $0$ on $Q$, satisfies $\\Lambda(f)=\\int_Qu_Qf$ for $f\\in L^2_0(Q)$, and $u-u_Q$ is almost everywhere constant on $Q$ ([[lem-hone-functional-has-compatible-local-ltwo-representatives]]).\n\n[F3] Riesz representation is an isometry: the representing vector $u_Q$ of $\\Lambda|_{L^2_0(Q)}$ has $\\|u_Q\\|_{L^2}=\\|\\Lambda|_{L^2_0(Q)}\\|$, the operator norm on the subspace ([[thm-riesz-representation-for-hilbert-space]]).\n\n[F4] On the finite-measure cube $Q$, $|Q|^{-1}\\int_Q|u_Q|\\le|Q|^{-1/2}\\|u_Q\\|_{L^2}$ ([[cor-cauchy-schwarz-inequality-for-l-two]]).\n\n1.1 By [F1], $u-u_Q$ equals a constant $c$ almost everywhere on $Q$, and $u_Q$ has mean $0$ on $Q$; hence $\\operatorname{mean}_Q(u)=c$ and $u-\\operatorname{mean}_Q(u)=u_Q$ almost everywhere on $Q$. Therefore the mean oscillation of $u$ over $Q$ is $|Q|^{-1}\\int_Q|u_Q|$. [F1]\n\n1.2 By [F2] and [F3], $\\|u_Q\\|_{L^2}\\le C_{n,\\widetilde N,\\varphi}|Q|^{1/2}\\|\\Lambda\\|$. [F2, F3]\n\n2.1 Combining steps 1.1 and 1.2 with the Cauchy-Schwarz bound [F4] gives $|Q|^{-1}\\int_Q|u-\\operatorname{mean}_Q(u)|=|Q|^{-1}\\int_Q|u_Q|\\le|Q|^{-1/2}\\|u_Q\\|_{L^2}\\le C_{n,\\widetilde N,\\varphi}\\|\\Lambda\\|$ for every cube $Q$. Taking the supremum over $Q$ shows $u\\in\\mathrm{BMO}(\\mathbb R^n)$ with $\\|u\\|_{\\mathrm{BMO}}\\le C_{n,\\widetilde N,\\varphi}\\|\\Lambda\\|$. [step 1.1, step 1.2, F4] \u220e\n",
+          "disposition": "owner-repair-required",
+          "route": "frontier-owner",
+          "invalidated_claim": "F1 has mean 0 on every cube and F4/steps 1.1,2.1 divide by |Q|; these require positive volume.",
+          "minimality": "Explicitly restrict the oscillation computation to nondegenerate cubes, precisely those in the BMO supremum; replace F1 every cube by every nondegenerate cube. No weakening of the BMO conclusion or new prerequisite is required."
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned item manifest and contract synchronized under shared lock and focused checks passed. The unassigned oscillation lemma domain finding is proposed for its frontier owner."
+    },
+    {
+      "metadata_checks": "Shared lock acquired/reread/edited/checked/released for first three assigned manifest rows, nested supplier quote and proof derivations, and owning examples-page pairing prose. Strict proof-contract selection for those three items passed: 0 errors, 0 warnings, 3/3 checked. No shared ledger was edited."
+    },
+    {
+      "id": "lem-finite-atomic-sums-are-dense-in-hone",
+      "claim": "Finite sums with explicitly supplied indices 1<=j<=N approximate every H1 element; series are relabelled one-based without changing the atomic characterization.",
+      "dependencies": [
+        "thm-atomic-characterisation-of-real-hp",
+        "lem-ellp-sums-of-hp-atoms-converge-in-tempered-distributions",
+        "def-hp-atom-with-moment-order",
+        "def-real-hardy-space-by-a-radial-maximal-function"
+      ],
+      "evidence": "Supplier Statements read at p=1,s=0, fixed admissible phi, finite K>=n and a common sufficiently large grand order N. Every atomic series converges in H1, and the summation lemma supplies the ell1 tail. Zero coefficients and the zero atom handle zero input. No external source was consulted; this elementary convergence consequence is familiar.",
+      "downstream_examinations": [
+        {
+          "supplier": "lem-finite-atomic-sums-are-dense-in-hone",
+          "consumer": "thm-real-hone-bmo-duality",
+          "path": "items/thm-real-hone-bmo-duality.md",
+          "affected_use": "[F4] The finite atomic sums are dense in $H^1$ ([[lem-finite-atomic-sums-are-dense-in-hone]]), and two bounded functionals agreeing on a dense subspace agree everywhere.\n\n2.1 Surjectivity. Let $\\Lambda\\in(H^1)^*$ and let $u$ be the representative of [F3], so that $\\|u\\|_{\\mathrm{BMO}}\\le C_{n,\\widetilde N,\\varphi}^-\\|\\Lambda\\|$. For an atom $a$ supported in a cube $Q$ one has $a\\in L^2_0(Q)$, hence $\\Lambda(a)=\\int_Qu_Qa=\\int_Q(u-c_Q)a=\\int ua$ because $\\int a=0$ and $u-u_Q=c_Q$ almost everywhere on $Q$; meanwhile $\\Lambda_u(a)=\\int au$ by the definition of $\\Phi$ [F1]. Thus $\\Lambda$ and $\\Lambda_u$ agree on every atom, hence on every finite atomic sum by linearity, and therefore on all of $H^1$ by density and continuity [F4]; that is, $\\Lambda=\\Phi(u)$ and $\\Phi$ is surjective. [step 1.1, F1, F3, F4]",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "invalidated_claim": "None: density of the linear span of atoms is preserved exactly.",
+          "minimality": "The consumer uses density to extend or identify bounded functionals; it does not depend on which index labels the finitely many terms. All supplied finite sums still range over the same span."
+        },
+        {
+          "supplier": "lem-finite-atomic-sums-are-dense-in-hone",
+          "consumer": "thm-bmo-defines-a-bounded-functional-on-hone",
+          "path": "items/thm-bmo-defines-a-bounded-functional-on-hone.md",
+          "affected_use": "[F3] Every $\\ell^1$ sum of atoms lies in $H^1$: if $g=\\sum_{j\\le N}\\lambda_ja_j$ is a finite atomic sum then $\\|g\\|_{H^1}\\le C\\sum_{j\\le N}|\\lambda_j|$, and the finite atomic sums are dense in $H^1$ ([[thm-atomic-characterisation-of-real-hp]], [[lem-finite-atomic-sums-are-dense-in-hone]]).\n\n1.1 The bounded case. Let $b\\in L^\\infty\\cap\\mathrm{BMO}$ and let $F$ be the linear span of the atoms, viewed as a subspace of $H^1$ by [F3]. Every $g\\in F$ is a finite sum of bounded compactly supported atoms, hence an $L^1$ function with $g\\in H^1$, so $\\int gb$ converges absolutely and $| \\int gb|\\le C_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}\\|g\\|_{H^1}$ by [F2]. The value $\\int gb$ depends only on the element $g\\in H^1$: if two finite sums $g,g'$ represent the same element, then the locally integrable function $g-g'$ has zero regular distribution, so $g=g'$ almost everywhere by [F7] and the two integrals agree. Thus $g\\mapsto\\int gb$ is a well-defined linear functional on $F$, bounded by $C_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}$, and it extends uniquely to a bounded $\\Lambda_b\\in(H^1)^*$ by density [F3]; the extension is the unique bounded functional whose value at every atom $a$ is $\\int ab$, since two such functionals agree on $F$ and $F$ is dense. [F1, F2, F3, F7]\n\n3.1 Uniqueness and the norm bound. If $\\Lambda,\\Lambda'$ are bounded functionals with $\\Lambda(a)=\\Lambda'(a)=\\int ab$ for every atom $a$, then by linearity they agree on the span $F$ of the atoms and hence, by density [F3] and continuity, on all of $H^1$; so the functional of step 2.1 is the unique bounded functional with the required atom values, and $\\|\\Lambda\\|\\le\\tfrac92C_{n,\\widetilde N,\\varphi}\\|b\\|_{\\mathrm{BMO}}$. [step 2.1, F3]",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "invalidated_claim": "None: density of the linear span of atoms is preserved exactly.",
+          "minimality": "The consumer uses density to extend or identify bounded functionals; it does not depend on which index labels the finitely many terms. All supplied finite sums still range over the same span."
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned owning manifest and contract metadata synchronized under the shared lock; focused checks passed. No further assigned item edits remain."
+    },
+    {
+      "validation_results": [
+        {
+          "command": "node tools/proof-contract.mjs research/frontier-39-analysis-30-batch-6.proof-contracts.json --strict --items def-bmo-seminorm-and-quotient-by-constants,lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically,cex-bmo-functions-need-not-be-globally-integrable",
+          "exit_code": 0,
+          "result": "0 errors, 0 warnings, 3/3 checked"
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/frontier-39-analysis-30-batch-6.proof-contracts.json --strict --items lem-hone-functional-has-compatible-local-ltwo-representatives,lem-finite-atomic-sums-are-dense-in-hone",
+          "exit_code": 0,
+          "result": "0 errors, 0 warnings, 2/2 checked"
+        },
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-bmo-seminorm-and-quotient-by-constants.md items/lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically.md items/cex-bmo-functions-need-not-be-globally-integrable.md items/lem-hone-functional-has-compatible-local-ltwo-representatives.md items/lem-finite-atomic-sums-are-dense-in-hone.md",
+          "exit_code": 0,
+          "result": "4 proof-bearing items checked, 0 failing; definition not applicable"
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/def-bmo-seminorm-and-quotient-by-constants.md items/lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically.md items/cex-bmo-functions-need-not-be-globally-integrable.md items/lem-hone-functional-has-compatible-local-ltwo-representatives.md items/lem-finite-atomic-sums-are-dense-in-hone.md library/fourier-analysis/bmo-john-nirenberg-and-h1-duality-examples.md",
+          "exit_code": 0,
+          "result": "6 files pass actual KaTeX and renderer YAML parsing"
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/def-bmo-seminorm-and-quotient-by-constants.md items/lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically.md items/cex-bmo-functions-need-not-be-globally-integrable.md items/lem-hone-functional-has-compatible-local-ltwo-representatives.md items/lem-finite-atomic-sums-are-dense-in-hone.md",
+          "exit_code": 0,
+          "result": "5 items, 15 steps, 0 defects; run once after all final item edits"
+        }
+      ],
+      "identity_checks": "All assigned IDs belong to frozen frontier. Current itemHashGuard equals each captured post_sha256. Actual Statement/Definition changes are the BMO definition, local representation lemma, and density lemma. Native discoverDownstream agrees exactly with all 18 inventory IDs; no missing graph use. A read-only reviewMatchesCurrent check confirms all five originally captured review contexts remain current; none was refreshed.",
+      "authorship_note": "These are local mathematical repair reviews by the editor, not independent judgments or certification. No workers, judges, stamps, certificates or round-state transitions were launched.",
+      "unresolved_obligations": [],
+      "next_action": "Controller routes the unassigned oscillation-domain finding to its frontier owner, reconciles direct-consumer metadata, and performs ordinary certification after writers drain. All 18 direct consumers are in the frozen frontier; there are no outside-consumer maintenance or published-ledger findings in this unit."
+    }
+  ]
+}

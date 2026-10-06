@@ -1,0 +1,1343 @@
+[
+  {
+    "order": 458.041,
+    "id": "constrained-variational-problems-and-variational-inequalities",
+    "kind": "A",
+    "category": "pde",
+    "title": "Constrained Variational Problems and Variational Inequalities",
+    "companion": "constrained-variational-problems-and-variational-inequalities-examples",
+    "requires": [
+      "the-direct-method-and-euler-lagrange-equations",
+      "weak-elliptic-maximum-principles-and-holder-regularity"
+    ],
+    "items": [
+      {
+        "id": "thm-direct-method-on-a-weakly-closed-constraint-set",
+        "kind": "theorem",
+        "title": "The direct method on a weakly closed constraint set",
+        "statement": "Assume the ultrafilter lemma, DC and HB ([[def-ultrafilter-extension-principle]], [[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]). Let $X$ be a real reflexive Banach space ([[def-reflexive-banach-space]]), let $A\\subseteq X$ be nonempty and weakly sequentially closed ([[def-weak-convergence-of-nets-and-sequences]]), and let $I:X\\to(-\\infty,+\\infty]$ be proper, coercive on $A$ and weakly sequentially lower semicontinuous on $A$ ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]). Then $I$ attains its infimum on $A$: there is $u_0\\in A$ with $I(u_0)=\\inf_A I$. In particular, if $C\\subseteq X$ is nonempty, convex and norm closed, and the restriction $I|_C$ is proper, coercive on $C$ and weakly sequentially lower semicontinuous on $C$, then $C$ is weakly sequentially closed and the conclusion holds for $A=C$.",
+        "deps": [
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "def-reflexive-banach-space",
+          "def-ultrafilter-extension-principle",
+          "def-weak-convergence-of-nets-and-sequences",
+          "thm-norm-closed-convex-iff-weakly-closed",
+          "thm-direct-method-in-a-reflexive-banach-space"
+        ],
+        "strategy": "Apply the reflexive-space direct-method theorem to a nonempty weakly sequentially closed admissible set after checking properness, coercivity and weak sequential lower semicontinuity. For a nonempty convex norm-closed C, HB gives weak sequential closedness; the second application is made only when I restricted to C is proper, coercive and weakly sequentially lower semicontinuous. The item is the constraint form used by the eigenvalue items: each constraint set must be verified nonempty and weakly sequentially closed, since the unit sphere itself is not weakly closed. This is [T] Lemma 13.5 and Theorem 13.1, printed pp. 302-303; no convexity or smoothness of a general admissible set is claimed beyond what is stated.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            },
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-strong-ltwo-compactness-preserves-unit-normalisation",
+        "kind": "lemma",
+        "title": "Weak H^1 convergence plus Rellich preserves the L^2 unit normalisation",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a bounded open set, and let $(u_j)\\subseteq H^1_0(\\Omega)$ be norm bounded with $u_j\\rightharpoonup u$ weakly in $H^1_0(\\Omega)$ ([[def-weak-convergence-of-nets-and-sequences]], [[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]) and $\\|u_j\\|_{L^2(\\Omega)}=1$ for every $j$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). Then $u\\in H^1_0(\\Omega)$, $\\|u\\|_{L^2(\\Omega)}=1$, and some subsequence $(u_{j_k})$ converges to $u$ in $L^2(\\Omega)$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-nonnegative-test-pairings-imply-a-e-nonnegativity-for-ltwo-functions",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "thm-rellich-compactness-from-w-one-p-zero-to-lp"
+        ],
+        "strategy": "Rellich compactness ([[thm-rellich-compactness-from-w-one-p-zero-to-lp]] with p=2 on the bounded open set) supplies a subsequence converging in L^2; the L^2 limit is the weak H^1 limit u because the inclusion H^1_0 into L^2 is bounded, and the L^2 norm is continuous for the L^2 norm, so passing to the limit along the subsequence gives \\|u\\|_2=1. This is exactly the compactness repair of the weak-closure failure described in [T] Lemma 13.5 and the surrounding discussion, printed pp. 302-303; the choice principles are those inherited from the Rellich theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-banach-implicit-function-theorem-for-a-split-surjective-derivative",
+        "kind": "theorem",
+        "title": "A split surjective derivative parametrises its level set",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a real Banach space ([[def-banach-space]]), let $U\\subseteq X$ be open, let $G:U\\to\\mathbb R^m$ with $m\\ge1$ be of class $C^1$ ([[def-c-k-map-between-banach-spaces]], [[def-frechet-derivative-between-banach-spaces]]), let $u\\in U$, and suppose $DG(u):X\\to\\mathbb R^m$ is surjective. Then there is a finite-dimensional subspace $Y\\subseteq X$ such that $X=\\ker DG(u)\\oplus Y$ is a topological direct sum with $DG(u)|_Y:Y\\to\\mathbb R^m$ a bounded linear isomorphism and the coordinate projection onto $Y$ along $\\ker DG(u)$ bounded ([[def-complemented-subspace]], [[thm-complemented-subspace-iff-range-of-a-bounded-projection]]). Moreover there are an open $A\\subseteq\\ker DG(u)$ with $0\\in A$, an open $B\\subseteq Y$ with $0\\in B$, and a unique $C^1$ map $\\varphi:A\\to B$ with $\\varphi(0)=0$ and $D\\varphi(0)=0$ such that\n$$\\{\\,z\\in u+(A+B):G(z)=G(u)\\,\\}=\\{\\,u+a+\\varphi(a):a\\in A\\,\\}.$$",
+        "deps": [
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "cor-finite-dimensional-subspaces-are-closed",
+          "cor-linear-maps-with-finite-dimensional-domain-are-bounded",
+          "def-axiom-of-choice",
+          "def-banach-space",
+          "def-bounded-linear-operator",
+          "def-c-k-map-between-banach-spaces",
+          "def-complemented-subspace",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-linear-basis",
+          "def-linear-combination-and-span",
+          "def-product-norms-on-finitely-many-normed-spaces",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "lem-finite-choice",
+          "lem-standard-basis-of-f-n",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "thm-complemented-subspace-iff-range-of-a-bounded-projection",
+          "thm-continuity-characterisations-top",
+          "thm-finite-products-of-banach-spaces-are-banach",
+          "thm-implicit-function-theorem-for-banach-spaces"
+        ],
+        "strategy": "Since DG(u) is onto, choose preimages u_0,...,u_{m-1} of the standard basis vectors (finite choice, no extra AC) and let Y=span{u_0,...,u_{m-1}}; then X=ker DG(u)+Y algebraically, DG(u)|_Y is a linear bijection onto R^m, and its inverse is bounded because R^m is finite dimensional, so Y is a Banach space and the projection x->(DG(u)|_Y)^{-1}DG(u)x is bounded with kernel ker DG(u). Apply the published Banach-space implicit function theorem (whose proof is the contraction argument of [SID] Theorem 5.7) to F(a,y)=G(u+a+y)-G(u) on ker DG(u) x Y: D_YF(0,0)=DG(u)|_Y is a bounded linear isomorphism, so the level set is locally the graph of a C^1 map; differentiating G(u+a+\\varphi(a))=G(u) at a=0 gives DG(u)|_Y D\\varphi(0)=0, hence D\\varphi(0)=0. This is the design route: split first, then the sourced contraction proof.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas C. Sideris, Ordinary Differential Equations and Dynamical Systems (complete author-hosted book text)",
+              "url": "https://web.math.ucsb.edu/~sideris/pdffiles/BookPublishedComplete.pdf",
+              "locator": "Chapter 5 Section 5.4, Theorem 5.7 and its proof, printed pp. 82-85 (Banach-space implicit function theorem by the contraction argument)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-regular-banach-constraint-directions-are-realised-by-level-set-curves",
+        "kind": "lemma",
+        "title": "Regular constraint directions are realised by level-set curves",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a real Banach space, $U\\subseteq X$ open, $G:U\\to\\mathbb R^m$ of class $C^1$ ([[def-c-k-map-between-banach-spaces]], [[def-frechet-derivative-between-banach-spaces]]), $u\\in U$, and suppose $DG(u)$ is surjective, with $Y$, $A\\subseteq\\ker DG(u)$, $B\\subseteq Y$ and $\\varphi:A\\to B$ as in [[thm-banach-implicit-function-theorem-for-a-split-surjective-derivative]]. Then for every $h\\in\\ker DG(u)$ there are $\\varepsilon>0$ and a $C^1$ curve $c:(-\\varepsilon,\\varepsilon)\\to X$ with $c(0)=u$, $c'(0)=h$ and $G(c(t))=G(u)$ for every $t\\in(-\\varepsilon,\\varepsilon)$; explicitly $c(t)=u+th+\\varphi(th)$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-c-k-map-between-banach-spaces",
+          "def-frechet-derivative-between-banach-spaces",
+          "thm-banach-implicit-function-theorem-for-a-split-surjective-derivative",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
+        ],
+        "strategy": "Take the map \\varphi of the split implicit-function theorem and set c(t)=u+th+\\varphi(th) for t small; then c is C^1, lies in the level set G^{-1}(G(u)) by construction, and c'(0)=h+D\\varphi(0)h=h because D\\varphi(0)=0. This is the missing step between constrained minimality and annihilation of the tangent kernel identified in the design; the curve is smooth in the ambient Banach space and no convexity of the constraint is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas C. Sideris, Ordinary Differential Equations and Dynamical Systems (complete author-hosted book text)",
+              "url": "https://web.math.ucsb.edu/~sideris/pdffiles/BookPublishedComplete.pdf",
+              "locator": "Chapter 5 Section 5.4, Theorem 5.7 and its proof, printed pp. 82-85 (Banach-space implicit function theorem by the contraction argument)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-tangent-space-to-a-regular-level-set-is-the-kernel-of-the-constraint-derivative",
+        "kind": "lemma",
+        "title": "The tangent space of a regular level set is the kernel of the constraint derivative",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a real Banach space, let $U\\subseteq X$ be open, let $G:U\\to\\mathbb R^m$ be of class $C^1$ ([[def-c-k-map-between-banach-spaces]], [[def-frechet-derivative-between-banach-spaces]]), let $u\\in U$, and suppose $DG(u):X\\to\\mathbb R^m$ is surjective. Then the set of derivatives $\\gamma'(0)$ of $C^1$ curves $\\gamma:(-\\varepsilon,\\varepsilon)\\to X$ with $\\gamma(0)=u$ and $G\\circ\\gamma$ constant equals $\\ker DG(u)$; that is, $\\ker DG(u)$ is exactly the tangent space of the level set $G^{-1}(G(u))$ at $u$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-c-k-map-between-banach-spaces",
+          "def-frechet-derivative-between-banach-spaces",
+          "lem-regular-banach-constraint-directions-are-realised-by-level-set-curves",
+          "lem-standard-basis-of-f-n",
+          "thm-banach-implicit-function-theorem-for-a-split-surjective-derivative",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
+        ],
+        "strategy": "One inclusion is the chain rule: (G∘\\gamma)'(0)=DG(u)\\gamma'(0)=0. The other is the realisation lemma [[lem-regular-banach-constraint-directions-are-realised-by-level-set-curves]]. This isolates the geometry used by the multiplier rules; sources: [T] Section 13.3, Theorem 13.6 and its proof, printed pp. 303-304; [CV] Chapter 7, printed pp. 67-69 (finite-dimensional analogue). For m=0 use the affine curve u+th restricted to U; apply the chart supplier only when m>=1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-the-differential-annihilates-the-tangent-kernel-at-a-constrained-extremum",
+        "kind": "lemma",
+        "title": "The differential annihilates the tangent kernel at a constrained extremum",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a real Banach space, let $U\\subseteq X$ be open, let $I:U\\to\\mathbb R$ be Fréchet differentiable at $u\\in U$ ([[def-frechet-derivative-between-banach-spaces]]), and let $G:U\\to\\mathbb R^m$ be of class $C^1$ ([[def-c-k-map-between-banach-spaces]]) with $DG(u)$ surjective. If $u$ is a local minimiser or a local maximiser of $I$ on the level set $\\{G=G(u)\\}$, then $DI(u)h=0$ for every $h\\in\\ker DG(u)$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-c-k-map-between-banach-spaces",
+          "def-frechet-derivative-between-banach-spaces",
+          "lem-tangent-space-to-a-regular-level-set-is-the-kernel-of-the-constraint-derivative",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "thm-fermat-interior-extremum"
+        ],
+        "strategy": "By the tangent-space lemma write h=\\gamma'(0) for a C^1 curve in the level set; then t->I(\\gamma(t)) is differentiable at 0 with derivative DI(u)h and has a local extremum at 0. Fermat's interior extremum theorem in one variable ([S] elementary analysis item [[thm-fermat-interior-extremum]]) gives DI(u)h=0. Sources: [T] Theorem 13.6 proof, printed pp. 303-304; [CV] Chapter 7, printed pp. 67-68.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-functionals-vanishing-on-the-common-kernel-of-an-independent-family",
+        "kind": "lemma",
+        "title": "Functionals vanishing on a common kernel are combinations of an independent family",
+        "statement": "Let $X$ be a real vector space ([[def-vector-space]]), let $m\\ge1$, and let $\\psi_1,\\dots,\\psi_m\\in X^*$ be linearly independent linear functionals on $X$ ([[def-algebraic-dual-and-linear-functional]], [[def-linear-independence]]). Let $\\varphi\\in X^*$ satisfy $\\bigcap_{i=1}^m\\ker\\psi_i\\subseteq\\ker\\varphi$ ([[def-kernel-and-image-of-a-linear-map]]). Then there is a unique $\\lambda\\in\\mathbb R^m$ with $\\varphi=\\sum_{i=1}^m\\lambda_i\\psi_i$. In particular, for $m=1$: if $\\psi\\ne0$ and $\\ker\\psi\\subseteq\\ker\\varphi$, then $\\varphi=\\lambda\\psi$ for a unique $\\lambda\\in\\mathbb R$.",
+        "deps": [
+          "def-algebraic-dual-and-linear-functional",
+          "def-kernel-and-image-of-a-linear-map",
+          "def-linear-independence",
+          "def-linear-map",
+          "def-vector-space",
+          "def-vector-space-of-linear-maps",
+          "thm-linear-kernel-image-and-injectivity"
+        ],
+        "strategy": "Surjectivity of the finite-codimensional map x->(\\psi_1(x),...,\\psi_m(x)) (linear independence gives the existence of x_i with \\psi_j(x_i)=\\delta_{ij}, a finite selection) yields the factorisation \\varphi=\\lambda\\circ\\Psi, and independence makes \\lambda unique: \\lambda_i=\\varphi(x_i). Elementary linear algebra, no choice principle; stated here so that both multiplier rules have an explicit linear-algebra supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-hilbert-space-lagrange-multiplier-rule-for-one-regular-constraint",
+        "kind": "theorem",
+        "title": "The Lagrange multiplier rule for one regular constraint in Hilbert space",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]), let $U\\subseteq H$ be open, let $I:U\\to\\mathbb R$ be Fréchet differentiable at $u\\in U$, and let $G:U\\to\\mathbb R$ be of class $C^1$ with $DG(u)\\ne0$ ([[def-frechet-derivative-between-banach-spaces]]). If $u$ is a local minimiser or a local maximiser of $I$ on the level set $\\{G=G(u)\\}$, then there is a unique $\\lambda\\in\\mathbb R$ with\n$$DI(u)=\\lambda\\,DG(u).$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-hilbert-space",
+          "lem-functionals-vanishing-on-the-common-kernel-of-an-independent-family",
+          "lem-the-differential-annihilates-the-tangent-kernel-at-a-constrained-extremum"
+        ],
+        "strategy": "The extremum lemma gives ker DG(u) contained in ker DI(u), and a nonzero functional has kernel of codimension one, so the m=1 case of the linear-algebra lemma gives DI(u)=\\lambda DG(u); uniqueness of \\lambda is part of that lemma since ker DG(u) is proper. Sources: [T] Theorem 13.6 and proof, printed pp. 303-304 (there stated for Banach X with X compactly embedded in Y); [CV] Chapter 7, printed pp. 67-69.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-finite-regular-constraint-lagrange-multiplier-rule",
+        "kind": "theorem",
+        "title": "The finite regular-constraint Lagrange multiplier rule",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a real Banach space ([[def-banach-space]]), let $U\\subseteq X$ be open, let $I:U\\to\\mathbb R$ be Fréchet differentiable at $u\\in U$, and let $G=(G_1,\\dots,G_m):U\\to\\mathbb R^m$ be of class $C^1$ with $DG(u):X\\to\\mathbb R^m$ surjective ([[def-frechet-derivative-between-banach-spaces]]). If $u$ is a local minimiser or a local maximiser of $I$ on the level set $\\{G=G(u)\\}$, then there is a unique $\\lambda\\in\\mathbb R^m$ with\n$$DI(u)=\\sum_{i=1}^m\\lambda_i\\,DG_i(u).$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-banach-space",
+          "def-dual-space-of-a-normed-space",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-kernel-and-image-of-a-linear-map",
+          "def-linear-independence",
+          "lem-finite-choice",
+          "lem-standard-basis-of-f-n",
+          "lem-functionals-vanishing-on-the-common-kernel-of-an-independent-family",
+          "lem-the-differential-annihilates-the-tangent-kernel-at-a-constrained-extremum"
+        ],
+        "strategy": "The extremum lemma shows that DI(u) annihilates ker DG(u)= intersection of the kernels of the bounded functionals DG_i(u), and surjectivity of DG(u) is equivalent to the independence of (DG_1(u),...,DG_m(u)): the finite linear-algebra lemma then writes DI(u) as a unique combination. This is the Banach-level form of the multiplier rule used by [T] Theorem 13.6, printed pp. 303-304; the finite-dimensional case is [CV] Chapter 7, printed pp. 67-69. The published finite-dimensional implicit-function theorem is deliberately not used. At m=0, stationarity on X gives DI(u)=0 and the unique empty multiplier vector; apply the nonempty common-kernel supplier only when m>=1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-lagrange-multiplier-is-unique-when-constraint-gradients-are-independent",
+        "kind": "lemma",
+        "title": "The multiplier vector is unique when the constraint gradients are independent",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). In the setting of [[thm-finite-regular-constraint-lagrange-multiplier-rule]] — a real Banach space $X$ ([[def-banach-space]]), open $U\\subseteq X$, and a $C^1$ map $G=(G_1,\\dots,G_m):U\\to\\mathbb R^m$ with $DG(u):X\\to\\mathbb R^m$ surjective — if $\\lambda,\\lambda'\\in\\mathbb R^m$ satisfy $\\sum_{i=1}^m\\lambda_iDG_i(u)=\\sum_{i=1}^m\\lambda_i'DG_i(u)$ in $X^*$, then $\\lambda=\\lambda'$. Equivalently, the transpose $DG(u)^*:\\mathbb R^m\\to X^*$ ([[def-transpose-of-a-bounded-operator]], [[def-frechet-derivative-between-banach-spaces]]) is injective.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-banach-space",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-transpose-of-a-bounded-operator",
+          "lem-finite-choice",
+          "thm-finite-regular-constraint-lagrange-multiplier-rule"
+        ],
+        "strategy": "Subtract the two multiplier equations and evaluate the resulting functional on preimages x_j of the standard basis vectors of R^m, whose existence is finite choice: \\lambda_j-\\lambda'_j=0. This records the independence boundary case and shows why the surjectivity hypothesis cannot be dropped; the finite-dimensional failure is exhibited on the companion page by [[cex-dependent-equality-constraints-have-nonunique-multiplier-vectors]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-hilbert-projection-characterisation-by-a-variational-inequality",
+        "kind": "lemma",
+        "title": "The projection onto a closed convex set is characterised by a variational inequality",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]), let $K\\subseteq H$ be nonempty, closed and convex ([[def-relative-normed-convexity-and-separation]]), let $x\\in H$, and let $P_Kx$ denote the unique nearest point of $K$ to $x$, whose existence and uniqueness are supplied by [[thm-projection-onto-a-nonempty-closed-convex-set]]. Then for every $u\\in K$ one has\n$$u=P_Kx\\qquad\\Longleftrightarrow\\qquad \\langle u-x,\\,v-u\\rangle\\ge0\\quad\\text{for every }v\\in K .$$",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-real-and-complex-inner-product-space",
+          "def-relative-normed-convexity-and-separation",
+          "thm-hilbert-projection-variational-characterization",
+          "thm-projection-onto-a-nonempty-closed-convex-set"
+        ],
+        "strategy": "Expand the squared distance along the convex segment v_t=u+t(v-u) (t in [0,1]) as in the published nearest-point characterisation [[thm-hilbert-projection-variational-characterization]], which states the same equivalence with the sign convention Re<x-u,v-u><=0; here the sign is rewritten as <u-x,v-u>>=0, the convention used by the variational-inequality items of this page. The published theorem already contains the complete proof; the item exists to fix the page-local sign and the projection notation consumed by [[thm-stampacchia-variational-inequality]] and [[lem-metric-projection-onto-a-nonempty-closed-convex-set-is-nonexpansive]]. The overlap is recorded in the batch notes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nguyen Dong Yen and Bui Trong Kim, Linear operators satisfying the assumptions of some generalized Lax-Milgram theorems, Acta Mathematica Vietnamica 26(3) (2001), 407-417",
+              "url": "https://math.ac.vn/uploads/files/0103407.pdf",
+              "locator": "Section 2, Theorems 2.1-2.3 and estimate (2.4), printed pp. 408-409 (Lax-Milgram; Stampacchia variational inequality for bounded coercive bilinear forms; Lipschitz stability of the solution map)"
+            },
+            {
+              "title": "J. T. Oden and N. Kikuchi, Theory of variational inequalities with applications to problems of flow through porous media, International Journal of Engineering Science 18 (1980), 1173-1284",
+              "url": "https://jtoden.oden.utexas.edu/wp-content/uploads/2013/06/1980-001.TheoryofVariationalInequalitieswithApplicationstoProblemsofFlowThroughPorousMedia.pdf",
+              "locator": "Chapter 1 Sections 1.2-1.5, printed pp. 1180-1189 (projections onto closed convex sets; construction of the contraction T(w)=P_K(I-pA)w and its constant (3.15); Theorem 1-3.1; Hartman-Stampacchia theorem 1-4.1)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-metric-projection-onto-a-nonempty-closed-convex-set-is-nonexpansive",
+        "kind": "lemma",
+        "title": "The metric projection onto a closed convex set is nonexpansive",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]) and let $K\\subseteq H$ be nonempty, closed and convex, with metric projection $P_K:H\\to K$, the unique nearest point map of [[thm-projection-onto-a-nonempty-closed-convex-set]]. Then for all $x,y\\in H$\n$$\\|P_Kx-P_Ky\\|\\le\\|x-y\\|,$$\nand $P_K$ is firmly nonexpansive in the equivalent forms\n$$\\langle P_Kx-P_Ky,\\,x-y\\rangle\\ge\\|P_Kx-P_Ky\\|^2,\\qquad \\langle (x-P_Kx)-(y-P_Ky),\\,P_Kx-P_Ky\\rangle\\ge0 .$$",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-real-and-complex-inner-product-space",
+          "lem-hilbert-projection-characterisation-by-a-variational-inequality",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-projection-onto-a-nonempty-closed-convex-set"
+        ],
+        "strategy": "Apply the variational inequality for P_Kx at v=P_Ky and for P_Ky at v=P_Kx, add the two inequalities, and use Cauchy-Schwarz; the sum of the two left-hand sides is the firm-nonexpansiveness inequality. This is the projection property used to make the Lions-Stampacchia fixed-point map a contraction; sources: [OK] Section 1.3, printed pp. 1185-1187; [NA] Corollary 1, printed p. 20.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. T. Oden and N. Kikuchi, Theory of variational inequalities with applications to problems of flow through porous media, International Journal of Engineering Science 18 (1980), 1173-1284",
+              "url": "https://jtoden.oden.utexas.edu/wp-content/uploads/2013/06/1980-001.TheoryofVariationalInequalitieswithApplicationstoProblemsofFlowThroughPorousMedia.pdf",
+              "locator": "Chapter 1 Sections 1.2-1.5, printed pp. 1180-1189 (projections onto closed convex sets; construction of the contraction T(w)=P_K(I-pA)w and its constant (3.15); Theorem 1-3.1; Hartman-Stampacchia theorem 1-4.1)"
+            },
+            {
+              "title": "Anna Nagurney, Variational Inequalities, University of Massachusetts Amherst lecture notes (2002)",
+              "url": "https://supernet.isenberg.umass.edu/austria_lectures/fvisli.pdf",
+              "locator": "printed pp. 5-33 (variational inequality and complementarity problems; projection Theorem 2; nonexpansiveness Corollary 1; fixed-point equivalence Theorem 3; uniqueness/existence under (strict) strong monotonicity Theorems 6 and 8)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-stampacchia-variational-inequality",
+        "kind": "theorem",
+        "title": "Stampacchia's variational inequality",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]), let $K\\subseteq H$ be nonempty, closed and convex, let $a:H\\times H\\to\\mathbb R$ be a bounded coercive bilinear form with constants $M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]; no symmetry is assumed), and let $F:H\\to\\mathbb R$ be a bounded linear functional. Then there is exactly one $u\\in K$ with\n$$a(u,\\,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K .$$",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-bounded-linear-operator",
+          "def-complete-metric-space",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-lipschitz-holder-contraction",
+          "def-metric-space",
+          "def-real-and-complex-inner-product-space",
+          "lem-form-to-bounded-operator-by-hilbert-riesz",
+          "lem-hilbert-projection-characterisation-by-a-variational-inequality",
+          "lem-metric-projection-onto-a-nonempty-closed-convex-set-is-nonexpansive",
+          "thm-banach-fixed-point",
+          "thm-complete-subspace-iff-closed",
+          "thm-projection-onto-a-nonempty-closed-convex-set",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "strategy": "Represent a by a bounded operator A ([[lem-form-to-bounded-operator-by-hilbert-riesz]]) and F by a vector f ([[thm-riesz-representation-for-hilbert-space]]). For 0<p<2\\alpha/M^2 the map T(w)=P_K(w-p(Aw-f)) is a contraction of the complete metric space K with constant sqrt(1-2p\\alpha+p^2M^2), so [[thm-banach-fixed-point]] gives a unique fixed point u; the projection characterisation rewrites u=T(u) as the variational inequality, and conversely. Uniqueness of the variational inequality is the standard subtract-and-coercivity argument. Sources: [OK] Section 1.3, printed pp. 1185-1187; [YK] Theorems 2.2-2.3, printed pp. 408-409; [NA] pp. 17-33 for the finite-dimensional model.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. T. Oden and N. Kikuchi, Theory of variational inequalities with applications to problems of flow through porous media, International Journal of Engineering Science 18 (1980), 1173-1284",
+              "url": "https://jtoden.oden.utexas.edu/wp-content/uploads/2013/06/1980-001.TheoryofVariationalInequalitieswithApplicationstoProblemsofFlowThroughPorousMedia.pdf",
+              "locator": "Chapter 1 Sections 1.2-1.5, printed pp. 1180-1189 (projections onto closed convex sets; construction of the contraction T(w)=P_K(I-pA)w and its constant (3.15); Theorem 1-3.1; Hartman-Stampacchia theorem 1-4.1)"
+            },
+            {
+              "title": "Nguyen Dong Yen and Bui Trong Kim, Linear operators satisfying the assumptions of some generalized Lax-Milgram theorems, Acta Mathematica Vietnamica 26(3) (2001), 407-417",
+              "url": "https://math.ac.vn/uploads/files/0103407.pdf",
+              "locator": "Section 2, Theorems 2.1-2.3 and estimate (2.4), printed pp. 408-409 (Lax-Milgram; Stampacchia variational inequality for bounded coercive bilinear forms; Lipschitz stability of the solution map)"
+            },
+            {
+              "title": "Anna Nagurney, Variational Inequalities, University of Massachusetts Amherst lecture notes (2002)",
+              "url": "https://supernet.isenberg.umass.edu/austria_lectures/fvisli.pdf",
+              "locator": "printed pp. 5-33 (variational inequality and complementarity problems; projection Theorem 2; nonexpansiveness Corollary 1; fixed-point equivalence Theorem 3; uniqueness/existence under (strict) strong monotonicity Theorems 6 and 8)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-one-dimensional-trace-truncation-compatibility",
+        "kind": "lemma",
+        "title": "Endpoint trace commutes with Sobolev truncation on an interval",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $I=(a,b)$ with $-\\infty<a<b<\\infty$, let $1\\le p<\\infty$, and let $u\\in W^{1,p}(I;\\mathbb R)$ ([[def-sobolev-space-wkp-and-its-norm]]). Let $u^*$ be its unique absolutely continuous representative on $[a,b]$ ([[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]]) and put $Tu:=(u^*(a),u^*(b))\\in\\mathbb R^2$, ordered componentwise. Then:\n\n1. $T$ is well defined, linear and bounded, and $\\ker T=W_0^{1,p}(I)$ ([[def-wkp-zero-as-a-sobolev-closure]]).\n2. For every $k\\in\\mathbb R$ the function $(u-k)^+$ belongs to $W^{1,p}(I)$, and $T\\bigl((u-k)^+\\bigr)=(Tu-k)^+$ componentwise; moreover $(u-k)^+\\in W_0^{1,p}(I)$ if and only if $Tu\\le(k,k)$ componentwise. In particular $T(u^+)=(Tu)^+$, $T(u^-)=(Tu)^-$ and $T|u|=|Tu|$.",
+        "deps": [
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "cor-positive-negative-part-and-truncation-calculus-in-w-one-p",
+          "def-axiom-of-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-compact-support-zero-extension-in-wkp",
+          "lem-one-dimensional-sobolev-endpoint-estimate",
+          "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-dominated-convergence",
+          "thm-holder-inequality-for-integrals",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "strategy": "AC is inherited from the AC-representative, truncation-calculus and Sobolev density/extension suppliers; no additional arbitrary selection is used. Consumers invoking the lemma carry AC. Proof route: The interval has finite measure, so each constant $k$ belongs to $L^p(I)$ with norm $|k|(b-a)^{1/p}$; hence $u-k\\in W^{1,p}(I)$. The AC-representative corollary makes T well-defined and linear; the endpoint-estimate lemma with epsilon=(b-a)/2 bounds both components by C||u||_{W^{1,p}}. Every compactly supported smooth function has T=0, and continuity of T gives W_0^{1,p} subset ker T. Conversely, let Tu=0. Choose smooth chi_delta with 0<=chi_delta<=1, equal to 1 on [a+delta,b-delta], zero within delta/2 of the endpoints, and |chi_delta′|<=C/delta. The terms (1-chi_delta)u and (1-chi_delta)u′ tend to zero in L^p by dominated convergence. Near a, the AC formula and Holder yield |u^*(x)|^p <= (x-a)^{p-1} integral_a^x |u′|^p, including p=1. Hence integral_a^{a+delta}|chi_delta′ u|^p <= (C^p/p) integral_a^{a+delta}|u′|^p ->0; use the reflected estimate near b. The weak product rule now gives chi_delta u -> u in W^{1,p}. For fixed delta, chi_delta u has compact support in I. Extend by zero, approximate in W^{1,p}(R) by compactly supported smooth functions via the published density theorem, and multiply the approximants by a fixed smooth cutoff equal to 1 on supp chi_delta u and supported in I. The weak product estimate transfers convergence to W^{1,p}(I), proving chi_delta u in W_0^{1,p}(I). Closedness of this closure gives u in W_0^{1,p}(I). This proves ker T=W_0^{1,p}. On the bounded interval, u-k is Sobolev by weak linearity and the weak derivative of a constant. The published truncation calculus gives w=(u-k)^+ in W^{1,p}. Both its unique continuous AC representative w^* and the continuous function (u^*-k)^+ agree a.e.; continuity forces agreement on I and then at its endpoints. Thus Tw=(Tu-k)^+, and ker T gives w in W_0^{1,p} iff both endpoint values of u are <=k. Apply the same reasoning to -u and sum the positive and negative parts for the final identities.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (2011)",
+              "url": "https://www.math.utoronto.ca/almut/Brezis.pdf",
+              "locator": "Chapter 8, sections 8.2-8.3: one-dimensional AC representatives, absolute value/truncation and W_0^{1,p}. Existing library supplier references; no new full-text fetch claimed."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-closed-convex-obstacle-set-and-variational-inequality",
+        "kind": "definition",
+        "title": "The closed convex obstacle set and the obstacle variational inequality",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge1$, and let $\\Omega\\subseteq\\mathbb R^n$ be a bounded open set of one of the following two kinds ([[def-bounded-c-k-domain-and-boundary-charts]]).\n\n**Trace conventions.** If $n=1$, then $\\Omega=(a,b)$ is a bounded interval and $T$ is the endpoint-pair trace of [[lem-one-dimensional-trace-truncation-compatibility]], ordered componentwise. If $n\\ge2$, then $\\Omega\\subset\\mathbb R^n$ is a bounded $C^1$ domain and $T$ is the trace operator of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]]. An **obstacle** is a real function $\\psi$ with $\\psi\\in H^1(\\Omega;\\mathbb R)$ ([[def-hk-and-hk-zero-notation]], [[def-sobolev-space-wkp-and-its-norm]]) such that $T\\psi\\le0$ — componentwise at the two endpoints when $n=1$, and almost everywhere on $\\partial\\Omega$ when $n\\ge2$. By [[lem-one-dimensional-trace-truncation-compatibility]] for $n=1$ and [[lem-positive-part-of-a-zero-trace-function-has-zero-trace]] for $n\\ge2$, this boundary order condition is equivalent to $\\psi^+\\in H^1_0(\\Omega)$.\n\n**The obstacle admissible set** is\n$$K:=\\{\\,v\\in H^1_0(\\Omega;\\mathbb R):v\\ge\\psi\\text{ a.e. on }\\Omega\\,\\},$$\nwhere the inequality $v\\ge\\psi$ is imposed on almost-everywhere classes and is therefore independent of the chosen representatives ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-wkp-zero-as-a-sobolev-closure]]).\n\n**Data.** Let $a:H^1_0(\\Omega)\\times H^1_0(\\Omega)\\to\\mathbb R$ be a bounded coercive bilinear form with constants $M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]) and let $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]).\n\n**The obstacle variational inequality** is the problem: find $u\\in K$ with\n$$a(u,\\,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K .$$\n\n**Energy and reaction.** In the symmetric case the associated **energy** is $J(v):=\\tfrac12a(v,v)-F(v)$ for $v\\in H^1_0(\\Omega)$; the **reaction distribution** of a solution $u$ is the distribution on $\\Omega$ defined by\n$$\\Lambda_u(\\varphi):=a(u,\\varphi)-F(\\varphi)\\qquad(\\varphi\\in C_c^\\infty(\\Omega)),$$\nthe right-hand side being well defined because $C_c^\\infty(\\Omega)\\subseteq H^1_0(\\Omega)$ ([[def-test-function-space-d-of-an-open-set]], [[def-distribution]]).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-distribution",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-hk-and-hk-zero-notation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-test-function-space-d-of-an-open-set",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-one-dimensional-trace-truncation-compatibility",
+          "lem-positive-part-of-a-zero-trace-function-has-zero-trace",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain"
+        ],
+        "strategy": "For n=1, endpoint trace and truncation compatibility is supplied by [[lem-one-dimensional-trace-truncation-compatibility]]. For n>=2, use the published trace and zero-trace truncation definitions. The definition fixes the two conventions stressed in the design: the constraint v>=psi is an a.e. statement about Sobolev classes, and the boundary compatibility T\\psi<=0 is exactly the nonemptiness condition supplied by the truncation lemma of the weak maximum-principle page. Sources: [AN] Section 3.1, printed pp. 26-28; [T] Chapter 13 Section 13.3, printed pp. 302-305 (the general constrained principle). Only Countable Choice is used, inherited through the trace interface; the a.e. inequality is representative independent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-the-obstacle-admissible-set-is-closed-convex-and-weakly-closed",
+        "kind": "lemma",
+        "title": "The obstacle admissible set is nonempty, convex, norm closed and weakly sequentially closed",
+        "statement": "Assume Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), inherited through the truncation and trace suppliers named below. Let $n\\ge1$; when $n=1$ use a bounded interval and the endpoint trace of [[lem-one-dimensional-trace-truncation-compatibility]], and when $n\\ge2$ use a bounded $C^1$ domain with the published trace definitions ([[def-bounded-c-k-domain-and-boundary-charts]]). Let $\\psi\\in H^1(\\Omega;\\mathbb R)$ satisfy $T\\psi\\le0$ (componentwise at the endpoints for $n=1$, almost everywhere on $\\partial\\Omega$ for $n\\ge2$), so that $K=\\{v\\in H^1_0(\\Omega):v\\ge\\psi\\text{ a.e.}\\}$ is the admissible set of [[def-closed-convex-obstacle-set-and-variational-inequality]] ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]). Then $K$ is nonempty, convex, closed in the norm of $H^1_0(\\Omega)$ and weakly sequentially closed: if $(v_j)\\subseteq K$ and $v_j\\rightharpoonup v$ in $H^1_0(\\Omega)$, then $v\\in K$ ([[def-weak-convergence-of-nets-and-sequences]]).",
+        "deps": [
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "cor-positive-negative-part-and-truncation-calculus-in-w-one-p",
+          "def-axiom-of-choice",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-closed-convex-obstacle-set-and-variational-inequality",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-norm-closed-convex-sets-are-weakly-closed",
+          "lem-one-dimensional-trace-truncation-compatibility",
+          "lem-positive-part-of-a-zero-trace-function-has-zero-trace"
+        ],
+        "strategy": "For nonemptiness use the interval lemma at n=1 and the existing batch-14 zero-trace truncation lemma at n>=2. Nonemptiness: T\\psi<=0 gives \\psi^+ in H^1_0 and \\psi^+>=\\psi. Convexity is immediate. Norm closedness: a norm convergent sequence in H^1_0 has an a.e. convergent subsequence, so a limit of admissible functions is admissible. Weak sequential closedness then follows from the norm-closed-convex criterion [[lem-norm-closed-convex-sets-are-weakly-closed]]. Sources: [AN] Section 3.1, printed pp. 26-27; the a.e. order is representative independent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-existence-and-uniqueness-for-the-obstacle-problem",
+        "kind": "theorem",
+        "title": "Existence, uniqueness and energy minimality for the obstacle problem",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega$, $\\psi$, $K$, $a$ and $F$ be as in [[def-closed-convex-obstacle-set-and-variational-inequality]], with $a$ symmetric as well as bounded and coercive ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]) and $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]), and let $J(v)=\\tfrac12a(v,v)-F(v)$ be the energy. Then $J$ attains its infimum on $K$ at exactly one $u\\in K$, and $u$ is the unique solution of the obstacle variational inequality\n$$a(u,\\,v-u)\\ge F(v-u)\\qquad(v\\in K).$$\nEquivalently: $u\\in K$ minimises $J$ on $K$ if and only if $u$ solves the variational inequality.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-closed-convex-obstacle-set-and-variational-inequality",
+          "def-countable-choice",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-hk-and-hk-zero-notation",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-the-obstacle-admissible-set-is-closed-convex-and-weakly-closed",
+          "thm-stampacchia-variational-inequality"
+        ],
+        "strategy": "Existence and uniqueness of the variational inequality are [[thm-stampacchia-variational-inequality]] applied to the nonempty closed convex set K. For the equivalence compute J(v)-J(u)=\\tfrac12a(v-u,v-u)+[a(u,v-u)-F(v-u)]: the bracket is nonnegative when u solves the inequality, so u minimises; conversely, along v_t=u+t(v-u), the difference quotient of J at t=0 is a(u,v-u)-F(v-u), which must be nonnegative at a minimiser. Coercivity of a makes J strictly convex, so the minimiser is unique. Sources: [AN] Theorem 3.1, printed pp. 26-28; [OK] Section 1.3, printed pp. 1185-1187.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            },
+            {
+              "title": "J. T. Oden and N. Kikuchi, Theory of variational inequalities with applications to problems of flow through porous media, International Journal of Engineering Science 18 (1980), 1173-1284",
+              "url": "https://jtoden.oden.utexas.edu/wp-content/uploads/2013/06/1980-001.TheoryofVariationalInequalitieswithApplicationstoProblemsofFlowThroughPorousMedia.pdf",
+              "locator": "Chapter 1 Sections 1.2-1.5, printed pp. 1180-1189 (projections onto closed convex sets; construction of the contraction T(w)=P_K(I-pA)w and its constant (3.15); Theorem 1-3.1; Hartman-Stampacchia theorem 1-4.1)"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "thm-lipschitz-stability-of-strongly-monotone-variational-inequalities",
+        "kind": "theorem",
+        "title": "Lipschitz stability of strongly monotone variational inequalities",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]), let $K\\subseteq H$ be nonempty, closed and convex, let $a$ be a bounded coercive bilinear form with constants $M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F_1,F_2\\in H^*$ with the dual norm $\\|\\cdot\\|_*$ ([[def-dual-space-of-a-normed-space]], [[def-operator-norm]]). Let $u_i\\in K$ be the unique solution of the variational inequality with data $F_i$, that is, $a(u_i,v-u_i)\\ge F_i(v-u_i)$ for every $v\\in K$ ([[thm-stampacchia-variational-inequality]]). Then\n$$\\alpha\\|u_1-u_2\\|\\le\\|F_1-F_2\\|_* .$$",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-countable-choice",
+          "def-dual-space-of-a-normed-space",
+          "def-hilbert-space",
+          "def-operator-norm",
+          "thm-stampacchia-variational-inequality"
+        ],
+        "strategy": "Test the first inequality at v=u_2 and the second at v=u_1, add, and use coercivity on the left and the dual-norm estimate on the right; this is estimate (2.4) of [YK] Theorem 2.2, printed p. 408. The item extracts continuous dependence from uniqueness and is used in the notes to show that the obstacle solution depends on the data through the coercivity constant only.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nguyen Dong Yen and Bui Trong Kim, Linear operators satisfying the assumptions of some generalized Lax-Milgram theorems, Acta Mathematica Vietnamica 26(3) (2001), 407-417",
+              "url": "https://math.ac.vn/uploads/files/0103407.pdf",
+              "locator": "Section 2, Theorems 2.1-2.3 and estimate (2.4), printed pp. 408-409 (Lax-Milgram; Stampacchia variational inequality for bounded coercive bilinear forms; Lipschitz stability of the solution map)"
+            },
+            {
+              "title": "J. T. Oden and N. Kikuchi, Theory of variational inequalities with applications to problems of flow through porous media, International Journal of Engineering Science 18 (1980), 1173-1284",
+              "url": "https://jtoden.oden.utexas.edu/wp-content/uploads/2013/06/1980-001.TheoryofVariationalInequalitieswithApplicationstoProblemsofFlowThroughPorousMedia.pdf",
+              "locator": "Chapter 1 Sections 1.2-1.5, printed pp. 1180-1189 (projections onto closed convex sets; construction of the contraction T(w)=P_K(I-pA)w and its constant (3.15); Theorem 1-3.1; Hartman-Stampacchia theorem 1-4.1)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-nonnegative-test-pairings-imply-a-e-nonnegativity-for-ltwo-functions",
+        "kind": "lemma",
+        "title": "A function with nonnegative test pairings is nonnegative a.e.",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open and let $\\zeta\\in L^2(\\Omega;\\mathbb R)$ satisfy\n$$\\int_\\Omega\\zeta\\varphi\\,dx\\ge0\\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega)\\text{ with }\\varphi\\ge0 .$$\nThen $\\zeta\\ge0$ almost everywhere on $\\Omega$. Moreover, if $O\\subseteq\\Omega$ is open and $\\int_\\Omega\\zeta\\varphi\\,dx=0$ for every $\\varphi\\in C_c^\\infty(O)$, then $\\zeta=0$ almost everywhere on $O$.",
+        "deps": [
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-positive-and-negative-parts-of-a-function",
+          "def-test-function-space-d-of-an-open-set",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions",
+          "lem-relative-compact-closed-sets-have-a-positive-distance-gap",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-heine-borel-rn",
+          "thm-holder-inequality-for-integrals",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "strategy": "For \\eta in C_c^\\infty(\\Omega) with \\eta>=0, mollify the nonnegative function \\zeta^-\\eta: the mollifications are nonnegative smooth test functions supported in \\Omega for small radius and converge in L^2 to \\zeta^-\\eta; testing and passing to the limit gives -\\int(\\zeta^-)^2\\eta=0, hence \\zeta^-=0 a.e. on compact subsets, and inner regularity of Lebesgue measure removes the localisation. The second claim is the fundamental lemma applied to \\zeta restricted to O. No AC: only the published L^2 mollification convergence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-obstacle-complementarity-in-distribution-form",
+        "kind": "corollary",
+        "title": "Obstacle complementarity in distribution form",
+        "statement": "Assume Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]), let $L$ be a uniformly elliptic divergence-form operator with real $L^\\infty$ coefficients, and let $a:H^1_0(\\Omega;\\mathbb R)\\times H^1_0(\\Omega;\\mathbb R)\\to\\mathbb R$ be the symmetric, bounded and coercive real restriction of its associated form ([[def-uniformly-elliptic-divergence-form-operator]], [[def-bounded-c-k-domain-and-boundary-charts]]); let $f\\in L^2(\\Omega;\\mathbb R)$ and let $F\\in H^{-1}(\\Omega;\\mathbb R)$ be its canonical functional $F(v)=\\int_\\Omega fv$ on $H^1_0(\\Omega;\\mathbb R)$, so in particular $F(\\varphi)=\\int_\\Omega f\\varphi$ for test functions ([[def-h-minus-one-as-the-dual-of-h-one-zero]], [[def-locally-integrable-function-as-a-regular-distribution]]), let $\\psi\\in H^1(\\Omega;\\mathbb R)$ with $T\\psi\\le0$ ([[def-hk-and-hk-zero-notation]]), and let $u\\in K$ be the obstacle solution of [[thm-existence-and-uniqueness-for-the-obstacle-problem]]. For $\\varphi\\in C_c^\\infty(\\Omega)$ put\n$$\\Lambda_u(\\varphi):=a(u,\\varphi)-\\int_\\Omega f\\varphi .$$\nThen:\n\n1. $\\Lambda_u$ is a nonnegative distribution: $\\Lambda_u(\\varphi)\\ge0$ for every nonnegative test function $\\varphi$ ([[def-distribution]], [[def-test-function-space-d-of-an-open-set]]).\n2. If in addition $\\Lambda_u$ is represented by a function $\\zeta\\in L^2(\\Omega)$, that is $\\Lambda_u(\\varphi)=\\int_\\Omega\\zeta\\varphi$ for every test function, and if $u$ and $\\psi$ have continuous representatives on $\\Omega$, then $\\zeta\\ge0$ a.e., $\\zeta=0$ a.e. on the open set $\\{u>\\psi\\}$, and $(u-\\psi)\\zeta=0$ a.e. on $\\Omega$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-closed-convex-obstacle-set-and-variational-inequality",
+          "def-countable-choice",
+          "def-distribution",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-hk-and-hk-zero-notation",
+          "def-locally-integrable-function-as-a-regular-distribution",
+          "def-test-function-space-d-of-an-open-set",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-fundamental-lemma-of-the-calculus-of-variations",
+          "lem-nonnegative-test-pairings-imply-a-e-nonnegativity-for-ltwo-functions",
+          "thm-existence-and-uniqueness-for-the-obstacle-problem"
+        ],
+        "strategy": "(i) A nonnegative test function \\varphi is admissible as v=u+\\varphi, so the variational inequality gives \\Lambda_u(\\varphi)>=0. (ii) The sign transfer is the L^2 lemma; if \\varphi is supported in the open set {u>\\psi} then u\\pm\\epsilon\\varphi is admissible for small \\epsilon, so testing both signs gives \\Lambda_u(\\varphi)=0, and the fundamental lemma gives \\zeta=0 a.e. there. Since u-\\psi vanishes on the complement of {u>\\psi}, the product vanishes a.e. Source: [AN] Section 4.2, Theorem 4.2, printed pp. 36-38 (the regular model case u in W^{2,2}_loc). The product is only asserted under the stated L^2-representation and continuity hypotheses; no distribution product is defined in general (see the companion counterexample).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "cor-obstacle-reaction-is-supported-on-the-contact-set-under-measure-regularity",
+        "kind": "corollary",
+        "title": "The obstacle reaction is supported on the contact set under measure regularity",
+        "statement": "Assume Countable Choice and the Axiom of Choice, in the setting of [[cor-obstacle-complementarity-in-distribution-form]], and suppose additionally that the reaction agrees on $C_c^\\infty(\\Omega)$ with a nonnegative Radon measure $\\mu$ ([[def-radon-measure-on-an-lch-space]]): $\\Lambda_u(\\varphi)=\\int_\\Omega\\varphi\\,d\\mu$ for every test function. Assume $u$ and $\\psi$ have continuous representatives. Then $\\mu(\\{u>\\psi\\})=0$, so $\\mu$ is concentrated on the contact set $\\{u=\\psi\\}$, and $\\int_\\Omega(u-\\psi)\\,d\\mu=0$.",
+        "deps": [
+          "thm-extreme-value-metric",
+          "cor-integral-over-a-null-set-vanishes",
+          "cor-obstacle-complementarity-in-distribution-form",
+          "def-axiom-of-choice",
+          "def-closed-convex-obstacle-set-and-variational-inequality",
+          "def-countable-choice",
+          "def-distribution",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-radon-measure-on-an-lch-space",
+          "def-test-function-space-d-of-an-open-set",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "prop-measure-monotonicity",
+          "thm-existence-and-uniqueness-for-the-obstacle-problem",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "strategy": "For \\varphi in C_c^\\infty({u>\\psi}) both signs are admissible for small \\epsilon, so \\mu(\\varphi)=0; a compact set K contained in the open set {u>\\psi} is dominated by a smooth cutoff supported there (sum of finitely many bumps), so \\mu(K)=0, and inner regularity of a Radon measure on its open sets gives \\mu({u>\\psi})=0. Since u-\\psi=0 \\mu-a.e. the last integral vanishes. Source: [AN] Section 4.2 and Chapter 5, printed pp. 36-38 and 45-47; the measure formulation is the precise form of complementarity requested by the design.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "thm-lewy-stampacchia-bounds-in-the-sourced-obstacle-regularity-class",
+        "kind": "theorem",
+        "title": "Lewy–Stampacchia distribution bound for bounded-coefficient obstacle forms",
+        "statement": "Assume Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), inherited through the existence, density, truncation and sign suppliers cited below. Let $n\\ge1$ and let $\\Omega\\subseteq\\mathbb R^n$ be a bounded open set of the two kinds of [[def-closed-convex-obstacle-set-and-variational-inequality]]: a bounded interval when $n=1$, and a bounded $C^1$ domain when $n\\ge2$ ([[def-bounded-c-k-domain-and-boundary-charts]]). Let $L$ be a real symmetric uniformly elliptic divergence-form operator with bounded measurable real coefficients and coercive form $a$ ([[def-uniformly-elliptic-divergence-form-operator]]), let $f\\in L^2(\\Omega;\\mathbb R)$, and let the real obstacle $\\psi\\in H^2(\\Omega;\\mathbb R)\\cap H^1_0(\\Omega;\\mathbb R)$ ([[def-hk-and-hk-zero-notation]], [[def-sobolev-space-wkp-and-its-norm]]) satisfy the additional hypothesis that its distributional image $L\\psi$ is represented by an $L^2(\\Omega;\\mathbb R)$ function; put $h:=L\\psi-f\\in L^2(\\Omega;\\mathbb R)$. Let $u\\in K=\\{v\\in H^1_0(\\Omega;\\mathbb R):v\\ge\\psi\\}$ solve the obstacle problem ([[thm-existence-and-uniqueness-for-the-obstacle-problem]], [[def-wkp-zero-as-a-sobolev-closure]]) with reaction $\\Lambda_u(\\varphi)=a(u,\\varphi)-\\int_\\Omega f\\varphi$ on test functions ([[cor-obstacle-complementarity-in-distribution-form]], [[def-distribution]], [[def-test-function-space-d-of-an-open-set]]). Then, in the sense of distributions,\n$$0\\le\\Lambda_u\\le (L\\psi-f)^+,$$\nthat is, $\\Lambda_u$ is a nonnegative distribution bounded above by the $L^2$ function $h^+$.",
+        "deps": [
+          "cor-obstacle-complementarity-in-distribution-form",
+          "def-axiom-of-choice",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-closed-convex-obstacle-set-and-variational-inequality",
+          "def-countable-choice",
+          "def-distribution",
+          "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "def-hk-and-hk-zero-notation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-test-function-space-d-of-an-open-set",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-elliptic-form-is-well-defined-and-bounded",
+          "lem-nonnegative-test-pairings-imply-a-e-nonnegativity-for-ltwo-functions",
+          "lem-positive-part-is-an-admissible-weak-test-by-truncation",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "thm-dominated-convergence",
+          "thm-existence-and-uniqueness-for-the-obstacle-problem",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "strategy": "Direct truncation proof for the stated bounded-coefficient form; do not use the pointwise penalized-reaction estimate, which is not valid in general. Let $w=u-\\psi\\in H^1_0(\\Omega)$, $w\\ge0$, and $\\Lambda(v)=a(u,v)-\\int_\\Omega fv$. For every $q\\in H^1_0(\\Omega)$, $q\\ge0$, the variational inequality at $u+q$ gives $\\Lambda(q)\\ge0$. Testing at $\\psi$ gives $\\Lambda(w)\\le0$, hence $\\Lambda(w)=0$. For $\\delta>0$ set $m_\\delta=\\min(w/\\delta,1)$ and $\\theta_\\delta=1-m_\\delta=(1-w/\\delta)^+$. For $\\varphi\\in C_c^\\infty(\\Omega)$, $\\varphi\\ge0$, both $\\varphi m_\\delta$ and $(\\|\\varphi\\|_\\infty/\\delta)w-\\varphi m_\\delta$ are nonnegative $H^1_0$ tests; positivity and $\\Lambda(w)=0$ give $\\Lambda(\\varphi m_\\delta)=0$, hence $\\Lambda(\\varphi)=\\Lambda(\\varphi\\theta_\\delta)$. The truncation chain rule gives $D\\theta_\\delta=-\\delta^{-1}\\mathbf1_{\\{0<w<\\delta\\}}Dw$; it also gives $Dw=0$ almost everywhere on $E=\\{w=0\\}$. The distribution identity $a(\\psi,v)=\\langle L\\psi,v\\rangle$, initially for $v\\in C_c^\\infty$, extends to $v=\\varphi\\theta_\\delta\\in H^1_0$ by density in the $H^1_0$ closure and boundedness of the form. Write $Lw+h=Lu-f=\\Lambda$ and expand the form:\n$$\n\\Lambda(\\varphi)=\\int_\\Omega \\theta_\\delta a^{ij}D_jwD_i\\varphi-\\delta^{-1}\\int_{\\{0<w<\\delta\\}}\\varphi a^{ij}D_jwD_iw+\\int_\\Omega b^iD_iw\\,\\varphi\\theta_\\delta+\\int_\\Omega c w\\varphi\\theta_\\delta+\\int_\\Omega h\\varphi\\theta_\\delta.\n$$\nThe singular principal term is nonpositive by uniform ellipticity. As $\\delta\\downarrow0$, $\\theta_\\delta\\to\\mathbf1_E$ pointwise; the first principal cross term and bounded drift term tend to zero by dominated convergence, since $Dw=0$ a.e. on $E$. The bounded potential term tends to zero because $0\\le w\\theta_\\delta\\le\\delta/4$. The last term tends to $\\int_E h\\varphi$. Thus $0\\le\\Lambda(\\varphi)\\le\\int_E h\\varphi$. Positivity of $\\Lambda$ makes $h\\mathbf1_E$ have nonnegative test pairings, so [[lem-nonnegative-test-pairings-imply-a-e-nonnegativity-for-ltwo-functions]] gives $h\\ge0$ a.e. on $E$. Therefore $\\int_E h\\varphi\\le\\int_\\Omega h^+\\varphi$, proving $0\\le\\Lambda\\le h^+$ in distributions. The proof uses only the explicit $L\\psi\\in L^2$ assumption, the obstacle variational inequality, bounded coefficients, and the truncation/level-set calculus. [OU] Theorem 2.5 corroborates the lower-order-free principal-part special case under its own entropy/obstacle hypotheses; it is not used to justify the bounded lower-order terms here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanislas Ouaro and Sado Traore, Entropy solutions to the obstacle problem for nonlinear elliptic problems with variable exponent and L1-data (complete publisher-hosted article, vol. 5 no. 1, 2009, pp. 127-152; received 7 September 2007, accepted 22 November 2008)",
+              "url": "http://www.ybook.co.jp/online-p/PJO/vol5/pjov5n1p127.pdf",
+              "locator": "Section 2, Theorem 2.5 and display (2.10), printed pp. 131–132 (entropy-solution Lewy–Stampacchia inequality); §4, pp. 139–140 gives the approximation/Mosco proof. Cited as corroboration for the lower-order-free principal-part special case; the present bounded lower-order extension is proved by the local truncation calculation in the item strategy. The cited source has the additional bounded-obstacle hypothesis; it is corroboration only for the lower-order-free principal-part case."
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "lem-absolute-value-does-not-increase-dirichlet-energy-or-change-ltwo-normalisation",
+        "kind": "lemma",
+        "title": "The absolute value preserves the L^2 norm and the Dirichlet energy",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, and let $u\\in H^1_0(\\Omega;\\mathbb R)$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]). Then $|u|\\in H^1_0(\\Omega)$, $\\bigl\\||u|\\bigr\\|_{L^2(\\Omega)}=\\|u\\|_{L^2(\\Omega)}$ ([[def-l-p-space-as-a-quotient-by-null-functions]]), and\n$$\\int_\\Omega\\bigl|D|u|\\bigr|^2\\,dx=\\int_\\Omega|Du|^2\\,dx .$$\nConsequently the constrained minimisation of the Dirichlet energy on the $L^2$-unit sphere may be restricted to nonnegative competitors.",
+        "deps": [
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "cor-positive-negative-part-and-truncation-calculus-in-w-one-p",
+          "def-axiom-of-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-chain-rule",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-dominated-convergence"
+        ],
+        "strategy": "Approximate u in H^1_0 by smooth compactly supported v_j. A smooth zero-preserving regularisation Phi_eps(s)=sqrt(s^2+eps^2)-eps shows |v_j| belongs to H^1_0. Since AC implies Countable Choice, choose an almost-everywhere convergent subsequence; the absolute-value gradient formula and Du=0 a.e. on {u=0} give strong H^1 convergence of |v_j| to |u| by dominated convergence. Closedness of H^1_0 gives the result for every open domain. Pointwise absolute value preserves the L^2 norm and the gradient identity preserves energy.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-first-dirichlet-eigenfunction-by-constrained-minimisation",
+        "kind": "theorem",
+        "title": "The first Dirichlet eigenfunction by constrained minimisation",
+        "statement": "Assume the Axiom of Choice, the ultrafilter lemma, DC and HB ([[def-axiom-of-choice]], [[def-ultrafilter-extension-principle]], [[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]). Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a nonempty bounded open set, let $E(u)=\\int_\\Omega|Du|^2\\,dx$ on $H^1_0(\\Omega;\\mathbb R)$ ([[def-hk-and-hk-zero-notation]], [[def-sobolev-space-wkp-and-its-norm]], [[def-wkp-zero-as-a-sobolev-closure]]) and let $S=\\{u\\in H^1_0(\\Omega):\\|u\\|_{L^2}=1\\}$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). Then $S$ is nonempty and $E$ attains its infimum $\\lambda_1$ on $S$. Every minimiser $u_0$ is a weak eigenpair of the Dirichlet Laplacian,\n$$\\int_\\Omega Du_0\\cdot Dh\\,dx=\\lambda_1\\int_\\Omega u_0h\\,dx\\qquad(h\\in H^1_0(\\Omega)),$$\nwith $\\lambda_1=E(u_0)>0$ ([[def-symmetric-elliptic-weak-eigenpair]]); some minimiser is nonnegative, and $\\lambda_1$ coincides with the first Dirichlet eigenvalue listed in [[thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator]] for the principal Dirichlet form ([[def-ltwo-operator-associated-with-a-symmetric-elliptic-form]]), the minimisers being exactly the elements of $S\\cap E_{\\lambda_1}$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-banach-space",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-hahn-banach-extension-principle-relative",
+          "def-hk-and-hk-zero-notation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-ltwo-operator-associated-with-a-symmetric-elliptic-form",
+          "def-reflexive-banach-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-symmetric-elliptic-weak-eigenpair",
+          "def-ultrafilter-extension-principle",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-absolute-value-does-not-increase-dirichlet-energy-or-change-ltwo-normalisation",
+          "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "lem-coercivity-of-the-principal-dirichlet-form",
+          "lem-convex-norm-lower-semicontinuous-functionals-are-weakly-lower-semicontinuous",
+          "lem-dependent-choice-implies-countable-choice",
+          "lem-strong-ltwo-compactness-preserves-unit-normalisation",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-w-one-p-is-reflexive",
+          "thm-closed-subspaces-of-reflexive-spaces-are-reflexive",
+          "thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator",
+          "thm-finite-regular-constraint-lagrange-multiplier-rule",
+          "thm-hk-is-a-hilbert-space",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-rayleigh-principle-for-the-first-dirichlet-eigenvalue"
+        ],
+        "strategy": "A minimising sequence has E bounded, hence is bounded in H^1_0 by Poincare, so a subsequence converges weakly (reflexive Banach space); the L^2 normalisation survives by [[lem-strong-ltwo-compactness-preserves-unit-normalisation]], and weak lower semicontinuity of the convex continuous functional E gives the minimiser. On the level set {G=1}, G(u)=\\|u\\|_{L^2}^2, the constraint is regular (DG(u)h=2(u,h)_{L^2}\\ne0), so the Hilbert multiplier rule gives DE(u_0)=\\lambda DG(u_0), that is the weak eigenvalue equation with \\lambda=E(u_0) after testing h=u_0; positivity follows from Poincare since Du_0 cannot vanish a.e. The absolute-value lemma lets the minimiser be chosen nonnegative. The identification with the first eigenvalue of the discrete spectral theorem is the published Rayleigh principle. Sources: [T] Example 13.9, printed pp. 303-304; [CV] Chapter 7, printed pp. 67-71; [LS] Chapter 9, printed pp. 51-56.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            },
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations: Lecture Notes (arXiv:1203.2344, complete monograph)",
+              "url": "https://arxiv.org/pdf/1203.2344",
+              "locator": "Chapter 9, printed pp. 51-56 (Rayleigh principle (9.1); Poincare minimax characterization (9.2); eigenvalues as critical values of the Rayleigh quotient in Section 9.4)"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "thm-higher-eigenvalues-by-orthogonality-constrained-minimisation",
+        "kind": "theorem",
+        "title": "Higher eigenvalues by orthogonality-constrained minimisation",
+        "statement": "Assume the Axiom of Choice, the ultrafilter lemma, DC and HB ([[def-axiom-of-choice]], [[def-ultrafilter-extension-principle]], [[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]). Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a nonempty bounded open set, let $\\lambda_1\\le\\lambda_2\\le\\cdots$ and $\\{e_j\\}$ be the eigenvalues and orthonormal eigenbasis of the real Dirichlet Laplacian, supplied by [[thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator]] with $a_0(v,w)=\\int_\\Omega Dv\\cdot Dw$ ([[def-ltwo-operator-associated-with-a-symmetric-elliptic-form]], [[def-symmetric-elliptic-weak-eigenpair]], [[def-hk-and-hk-zero-notation]]), and fix $k\\ge2$. Put $S_k=\\{u\\in H^1_0(\\Omega;\\mathbb R):\\|u\\|_{L^2}=1,\\ (u,e_j)_{L^2}=0\\ \\text{for }j<k\\}$ and $E(u)=\\int_\\Omega|Du|^2$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-orthogonality-and-orthogonal-complement]]). Then $S_k$ is nonempty, $E$ attains its infimum $\\mu_k$ on $S_k$, every minimiser is a weak eigenpair with eigenvalue $\\mu_k$, and $\\mu_k=\\lambda_k$ (eigenvalues counted with multiplicity); moreover every minimiser lies in the eigenspace $E_{\\lambda_k}$ and is orthogonal in $L^2$ to $e_1,\\dots,e_{k-1}$.",
+        "deps": [
+          "cor-eigenfunctions-for-distinct-symmetric-elliptic-eigenvalues-are-ltwo-orthogonal",
+          "def-axiom-of-choice",
+          "def-banach-space",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-hahn-banach-extension-principle-relative",
+          "def-hk-and-hk-zero-notation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-ltwo-operator-associated-with-a-symmetric-elliptic-form",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-reflexive-banach-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-symmetric-elliptic-weak-eigenpair",
+          "def-ultrafilter-extension-principle",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "lem-convex-norm-lower-semicontinuous-functionals-are-weakly-lower-semicontinuous",
+          "lem-dependent-choice-implies-countable-choice",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "lem-strong-ltwo-compactness-preserves-unit-normalisation",
+          "lem-w-one-p-is-reflexive",
+          "thm-closed-subspaces-of-reflexive-spaces-are-reflexive",
+          "thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator",
+          "thm-finite-regular-constraint-lagrange-multiplier-rule",
+          "thm-hk-is-a-hilbert-space"
+        ],
+        "strategy": "S_k is nonempty because e_k lies in it. A minimising sequence is bounded in H^1_0 by Poincare, its weak limit stays in S_k by [[lem-strong-ltwo-compactness-preserves-unit-normalisation]] together with continuity of the finitely many linear constraints, and E is weakly lower semicontinuous, so a minimiser exists. The constraint map G(u)=(\\|u\\|_{L^2}^2-1,(u,e_1),...,(u,e_{k-1})) has surjective derivative, so the finite multiplier rule gives DE(u)=\\lambda DG(u); testing against e_j and using (u,e_j)=0 shows the corresponding multipliers vanish, hence the minimiser is a weak eigenpair with eigenvalue \\mu_k=E(u). For the identification \\mu_k=\\lambda_k: e_k gives \\mu_k\\le\\lambda_k; if \\mu_k<\\lambda_k then every weak eigenfunction of eigenvalue \\mu_k lies in the span of the e_j with \\lambda_j=\\mu_k, a subspace of span{e_1,...,e_{k-1}} by the eigenbasis expansion, contradicting the orthogonality of the minimiser. The reconciliation with the min-max formula is the Courant-Fischer theorem. Sources: [CV] Chapter 7, printed pp. 67-71 (Lemma 7.1, Theorem 7.2); [LS] Chapter 9, printed pp. 51-56.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations: Lecture Notes (arXiv:1203.2344, complete monograph)",
+              "url": "https://arxiv.org/pdf/1203.2344",
+              "locator": "Chapter 9, printed pp. 51-56 (Rayleigh principle (9.1); Poincare minimax characterization (9.2); eigenvalues as critical values of the Rayleigh quotient in Section 9.4)"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "rem-pointwise-and-integral-constraints-have-different-regularity-tests",
+        "kind": "remark",
+        "title": "Pointwise and integral constraints have different regularity tests",
+        "statement": "The multiplier rules of this page apply to equality constraints given by a $C^1$ map with surjective derivative and produce a multiplier equation ([[thm-finite-regular-constraint-lagrange-multiplier-rule]], [[thm-hilbert-space-lagrange-multiplier-rule-for-one-regular-constraint]]), while an obstacle constraint $u\\ge\\psi$ is a closed convex inequality constraint that does not by itself provide a differentiable multiplier field: its first-order information is the variational inequality $a(u,v-u)\\ge F(v-u)$ ([[def-closed-convex-obstacle-set-and-variational-inequality]]), and complementarity is expressed through the reaction distribution, not through a pointwise product ([[cor-obstacle-complementarity-in-distribution-form]]).\n\nTwo different regularity tests are therefore in force. The equality rule needs surjectivity of the constraint derivative at the extremum; when that test fails the multiplier equation can fail outright, as [[cex-lagrange-multiplier-rule-needs-a-regular-constraint]] records for the degenerate constraint $x^2+y^2=0$. The obstacle set has no derivative to test and instead needs regularity of the *reaction* if one wants more than the distributional inequality: both the $L^2$ representative and the measure-regularity form of complementarity are additional hypotheses ([[cor-obstacle-complementarity-in-distribution-form]], [[cor-obstacle-reaction-is-supported-on-the-contact-set-under-measure-regularity]]), not consequences of minimality alone. In particular the smooth finite-dimensional Lagrange multiplier theorem must not be applied to the obstacle set.",
+        "deps": [
+          "cor-obstacle-complementarity-in-distribution-form",
+          "cor-obstacle-reaction-is-supported-on-the-contact-set-under-measure-regularity",
+          "def-closed-convex-obstacle-set-and-variational-inequality",
+          "thm-finite-regular-constraint-lagrange-multiplier-rule",
+          "thm-hilbert-space-lagrange-multiplier-rule-for-one-regular-constraint"
+        ],
+        "strategy": "An orientation remark: it states the two regimes and points to the published degenerate-constraint counterexample and to the complementarity corollary. No new mathematics is claimed and the remark is not load-bearing.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            }
+          ]
+        },
+        "dependency_level": 12
+      }
+    ]
+  },
+  {
+    "order": 458.042,
+    "id": "constrained-variational-problems-and-variational-inequalities-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Constrained Variational Problems and Variational Inequalities - Examples",
+    "companion": "constrained-variational-problems-and-variational-inequalities",
+    "requires": [
+      "constrained-variational-problems-and-variational-inequalities"
+    ],
+    "items": [
+      {
+        "id": "ex-rayleigh-quotient-on-an-interval",
+        "kind": "example",
+        "title": "The Rayleigh quotient on an interval",
+        "statement": "Assume the Axiom of Choice, the ultrafilter lemma, DC and HB ([[def-axiom-of-choice]], [[def-ultrafilter-extension-principle]], [[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]), inherited from [[thm-first-dirichlet-eigenfunction-by-constrained-minimisation]]; the explicit computation below consumes only Countable Choice, through [[lem-sharp-dirichlet-poincare-inequality-on-an-interval]]. On $\\Omega=(0,1)$ the constrained minimisation of [[thm-first-dirichlet-eigenfunction-by-constrained-minimisation]] is explicit: a minimiser of $E(u)=\\int_0^1u'^2$ on the $L^2$-unit sphere $S\\subseteq H^1_0(0,1)$ is $u_0(x)=\\sqrt2\\,\\sin(\\pi x)$, the minimum is $\\lambda_1=\\pi^2$, and the weak eigenvalue equation is $-u_0''=\\pi^2u_0$ with $u_0(0)=u_0(1)=0$.",
+        "deps": [
+          "cor-pi-is-the-first-positive-sine-zero",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-hk-and-hk-zero-notation",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-ultrafilter-extension-principle",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "lem-sharp-dirichlet-poincare-inequality-on-an-interval",
+          "thm-chain-rule",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-first-dirichlet-eigenfunction-by-constrained-minimisation",
+          "thm-ftc-second-part",
+          "thm-linearity-of-the-integral",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "strategy": "For every $u\\in H^1_0(0,1)$ with $\\|u\\|_2=1$, [[lem-sharp-dirichlet-poincare-inequality-on-an-interval]] gives $E(u)=\\|u'\\|_2^2\\ge\\pi^2$. Its admissible equality witness is $\\phi(x)=\\sin(\\pi x)$, and $\\int_0^1\\phi^2\\,dx=1/2$ by the double-angle identity and FTC. Hence $u_0=\\sqrt2\\phi$ has norm one and energy $\\pi^2$; the helper weak identity gives its weak eigenvalue equation. [[thm-first-dirichlet-eigenfunction-by-constrained-minimisation]] identifies this attained minimum with the first eigenvalue. This proves that $u_0$ is a minimiser; no uniqueness of the normalized minimiser is asserted (its negative is also a minimiser). No complete sine basis is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations: Lecture Notes (arXiv:1203.2344, complete monograph)",
+              "url": "https://arxiv.org/pdf/1203.2344",
+              "locator": "Chapter 9, printed pp. 51-56 (Rayleigh principle (9.1); Poincare minimax characterization (9.2); eigenvalues as critical values of the Rayleigh quotient in Section 9.4)"
+            }
+          ]
+        },
+        "dependency_level": 14
+      },
+      {
+        "id": "ex-isoperimetric-integral-constraint-and-its-multiplier",
+        "kind": "example",
+        "title": "An integral constraint and its constant multiplier",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the trace and Hilbert multiplier suppliers. On $(0,1)$ minimise $J(u)=\\int_0^1u'^2\\,dx$ over $u\\in H^1_0(0,1)$ subject to the integral constraint $\\int_0^1u\\,dx=A$, where $A\\ne0$. The minimiser is $u_0(x)=6A\\,x(1-x)$ and the Lagrange multiplier of [[thm-hilbert-space-lagrange-multiplier-rule-for-one-regular-constraint]], in the convention $DJ(u)=\\lambda DG(u)$ with $G(u)=\\int_0^1u-A$, is the constant $\\lambda=24A$.",
+        "deps": [
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "thm-hk-is-a-hilbert-space",
+          "thm-holder-inequality-for-integrals",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-hk-and-hk-zero-notation",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-derivative-of-a-power",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-one-dimensional-trace-truncation-compatibility",
+          "thm-hilbert-space-lagrange-multiplier-rule-for-one-regular-constraint",
+          "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "thm-algebra-of-derivatives",
+          "thm-ftc-second-part",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "strategy": "The constraint is regular ($DG(u)v=\\int_0^1v\\ne0$ is bounded and nonzero on H^1_0(0,1)); the multiplier equation 2\\int u'v'=\\lambda\\int v gives u''=-\\lambda/2, hence u=(\\lambda/4)x(1-x) and \\int u=\\lambda/24=A, so \\lambda=24A and u=6Ax(1-x). Minimality follows from the expansion J(v)=J(u)+J(v-u) for competitors with the same integral, using u'' constant and \\int(v-u)=0. This is the isoperimetric/holonomic constraint mechanism recorded as included for PDE-22 in the plan source audit; the finite-dimensional analogue is [CV] Chapter 7, printed pp. 67-68.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-the-ltwo-unit-sphere-is-not-weakly-closed-in-an-infinite-dimensional-hilbert-space",
+        "kind": "counterexample",
+        "title": "The L^2 unit sphere is not weakly sequentially closed in infinite dimensions",
+        "statement": "**Refuted:** that the unit sphere $S=\\{u\\in H:\\|u\\|=1\\}$ of an infinite-dimensional real Hilbert space $H$ is weakly sequentially closed — equivalently, that norm closedness and norm boundedness of a subset of a Hilbert space force weak sequential closedness ([[def-weak-convergence-of-nets-and-sequences]]).\n\nThe witness works in every infinite-dimensional real Hilbert space, for instance $H=\\ell^2(\\mathbb N;\\mathbb R)$ ([[def-hilbert-space]]). There $S$ is norm closed and norm bounded, yet an orthonormal sequence $(e_j)\\subseteq S$ satisfies $e_j\\rightharpoonup0$ while $0\\notin S$, so $S$ is not weakly sequentially closed. In particular the direct method for minimisation cannot be applied to the unit sphere by weak closedness alone; the repair used for the eigenvalue problems below is the strong $L^2$ compactness of [[lem-strong-ltwo-compactness-preserves-unit-normalisation]]. By [[cor-weak-closure-of-the-unit-sphere-is-the-closed-unit-ball]] (which assumes the Hahn–Banach extension principle, available under our Axiom of Choice hypothesis through [[thm-hahn-banach-norm-preserving-extension]]) the weak closure of $S$ is exactly the closed unit ball of $H$.",
+        "deps": [
+          "cor-finite-dimensional-subspaces-are-closed",
+          "cor-weak-closure-of-the-unit-sphere-is-the-closed-unit-ball",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-linear-basis",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-weak-convergence-of-nets-and-sequences",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "lem-strong-ltwo-compactness-preserves-unit-normalisation",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-continuity-characterisations-top",
+          "thm-existence-of-a-maximal-orthonormal-family",
+          "thm-hahn-banach-norm-preserving-extension",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "strategy": "Bessel's inequality gives (e_j,y)->0 for every y in H, so e_j is weakly null, while \\|e_j\\|=1. The published corollary [[cor-weak-closure-of-the-unit-sphere-is-the-closed-unit-ball]] identifies the weak closure as the closed unit ball. This is [T] Section 13.3, printed p. 302 (the unit sphere is not weakly closed), and it motivates the normalisation-preservation lemma of the A page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2026 author manuscript; complete 392-page archived text)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Chapter 13 Section 13.3 Constraints, printed pp. 302-305 (Lemma 13.5, Theorem 13.6, Example 13.9, Problem 13.7)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-one-dimensional-obstacle-problem-and-contact-set",
+        "kind": "example",
+        "title": "A one-dimensional obstacle problem and its contact set",
+        "statement": "Assume the Axiom of Choice, which supplies Countable and Dependent Choice ([[def-axiom-of-choice]], [[thm-choice-implies-dependent-implies-countable-choice]]). Let $\\Omega=(-1,1)$, $a(u,v)=\\int_{-1}^1u_xv_x\\,dx$, $F=0$, and $\\psi(x)=\\varepsilon-\\tfrac12x^2$ with $0<\\varepsilon<\\tfrac12$. By [[lem-one-dimensional-trace-truncation-compatibility]], $T\\psi=(\\varepsilon-\\tfrac12,\\varepsilon-\\tfrac12)\\le(0,0)$. Then the obstacle solution of [[thm-existence-and-uniqueness-for-the-obstacle-problem]] on $K=\\{v\\in H^1_0(-1,1):v\\ge\\psi\\}$ is\n$$u(x)=\\begin{cases}\\varepsilon-\\tfrac12x^2,&|x|\\le t,\\\\t(1-|x|),&t\\le|x|\\le1,\\end{cases}\\qquad t=1-\\sqrt{1-2\\varepsilon}\\in(0,1).$$\nThe contact set is $\\{u=\\psi\\}=[-t,t]$, the noncontact set is $\\{|x|>t\\}$, and $u$ is the admissible competitor whose slopes match the obstacle at the free boundary points: $u'(\\pm t)=\\psi'(\\pm t)=\\mp t$.",
+        "deps": [
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice",
+          "def-closed-convex-obstacle-set-and-variational-inequality",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-hk-and-hk-zero-notation",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-one-dimensional-trace-truncation-compatibility",
+          "thm-algebra-of-derivatives",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-existence-and-uniqueness-for-the-obstacle-problem",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-integration-by-parts-for-absolutely-continuous-functions"
+        ],
+        "strategy": "The piecewise $C^1$ function belongs to $H^1$ and has zero endpoint trace, hence lies in $H^1_0$ by [[lem-one-dimensional-trace-truncation-compatibility]]. Feasibility follows from the displayed formula. For any $v\\in K$, put $q=v-u$. Then $J(v)-J(u)=\\tfrac12\\int_{-1}^1|q_x|^2+\\int_{-1}^1u_xq_x$. Integrating by parts on the contact and noncontact intervals, matched slopes cancel internal boundary terms and the endpoint traces vanish, giving $\\int u_xq_x=\\int_{-t}^t(v-\\psi)\\,dx\\ge0$. Thus $u$ minimises; uniqueness follows from strict convexity of the Dirichlet energy on $H^1_0$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "cex-obstacle-complementarity-product-needs-extra-regularity",
+        "kind": "counterexample",
+        "title": "The complementarity product needs extra regularity",
+        "statement": "**Refuted:** that for every open $\\Omega\\subseteq\\mathbb R^n$, every $u\\in H^1(\\Omega;\\mathbb R)$ and every nonnegative Radon measure $\\mu$ on $\\Omega$ ([[def-radon-measure-on-an-lch-space]], [[def-sobolev-space-wkp-and-its-norm]]) the product $u\\cdot\\mu$ is a well-defined distribution on $\\Omega$ by the formula $\\varphi\\mapsto\\int_\\Omega u\\varphi\\,d\\mu$. This is the unrestricted class-level product claim; the obstacle corollaries impose continuity or $L^2$ representation to define their products ([[cor-obstacle-complementarity-in-distribution-form]], [[cor-obstacle-reaction-is-supported-on-the-contact-set-under-measure-regularity]]).\n\nAssume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the ACL supplier. In dimension $n=2$ the function $u(x)=\\log\\log(1/|x|)$, extended by a constant outside a neighbourhood of $0$, lies in $H^1(B_{1/2}(0))$ but is unbounded near $0$, so it has no continuous representative there. For the nonnegative Radon measure $\\mu=\\delta_0$ the calculation of the pairing $\\varphi\\mapsto\\int u\\varphi\\,d\\mu$ requires a representative and returns $0\\cdot\\varphi(0)$ or $1\\cdot\\varphi(0)$ for two representatives of the same class; changing the value at the single point $0$ changes the result, so the product $u\\cdot\\mu$ is not a well-defined distribution. In contrast, the multiplication of a distribution by a smooth function is well-defined ([[def-multiplication-of-a-distribution-by-a-smooth-function]]), because a smooth multiplier carries genuine pointwise values. The Dirac measure in this witness is not asserted to be the reaction of an obstacle solution; the witness refutes multiplication by arbitrary Radon measures from the Sobolev class alone.",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-integral-over-a-null-set-vanishes",
+          "cor-obstacle-complementarity-in-distribution-form",
+          "cor-obstacle-reaction-is-supported-on-the-contact-set-under-measure-regularity",
+          "def-dirac-measure",
+          "def-distribution",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-metric-ball",
+          "def-multiplication-of-a-distribution-by-a-smooth-function",
+          "def-radon-measure-on-an-lch-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-test-function-space-d-of-an-open-set",
+          "lem-derivative-of-a-power",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-acl-characterisation-of-w-one-p",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-comparison-test-for-improper-integrals",
+          "thm-exponential-beats-every-polynomial",
+          "thm-extreme-value-metric",
+          "thm-improper-p-test-rational",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-logarithm-derivative-and-integral",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-substitution-for-improper-integrals"
+        ],
+        "strategy": "Verification: |D u(x)|=1/(|x|\\log(1/|x|)) a.e. near 0, and \\int_0^{1/2}dr/(r\\log^2(1/r))<\\infty, so u in H^1 (and in L^2) while u(x)->+\\infty as x->0; representatives of u agree only up to null sets, so the point value u(0) is not determined. The example is the standard unbounded-H^1 phenomenon and shows why complementarity must be phrased through a duality or an L^2-representation unless continuity is assumed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "cex-obstacle-admissible-set-can-be-empty-when-trace-and-obstacle-are-incompatible",
+        "kind": "counterexample",
+        "title": "The obstacle admissible set can be empty when trace and obstacle are incompatible",
+        "statement": "**Refuted:** that after omitting the trace-compatibility hypothesis $T\\psi\\le0$ from [[def-closed-convex-obstacle-set-and-variational-inequality]], the set $K_\\psi=\\{v\\in H^1_0(\\Omega;\\mathbb R):v\\ge\\psi\\text{ a.e.}\\}$ is automatically nonempty for every real $\\psi\\in H^1(\\Omega)$. The definition itself retains that hypothesis and has the admissible element $\\psi^+$; the assertion refuted here concerns arbitrary obstacle data without boundary compatibility.\n\nAssume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the trace suppliers. The witness is the interval $I=(-1,1)$ with the incompatible obstacle datum $\\psi\\equiv1$ ([[lem-one-dimensional-trace-truncation-compatibility]]). If $v\\in K$, the unique absolutely continuous representative $v^*$ satisfies $v^*\\ge1$ at every point of $[-1,1]$: a strict violation at one point would, by continuity, persist on an interval of positive measure, contradicting $v\\ge1$ almost everywhere. But $v\\in H^1_0(I)$ has zero endpoint trace, $Tv=(0,0)$, so $v^*(-1)=v^*(1)=0$, a contradiction. Hence $K=\\varnothing$, and boundary compatibility ($T\\psi\\le0$ in the sense of the definition) is necessary for nonemptiness. [The obstacle $\\psi\\equiv1$ satisfies $T\\psi=(1,1)\\not\\le(0,0)$.]",
+        "deps": [
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice",
+          "def-closed-convex-obstacle-set-and-variational-inequality",
+          "lem-one-dimensional-trace-truncation-compatibility"
+        ],
+        "strategy": "Use [[lem-one-dimensional-trace-truncation-compatibility]]. The a.e. inequality v>=1 and continuity of its absolutely continuous representative force both endpoint values to be at least one, contradicting Tv=(0,0) for v in H^1_0(I). This removes the trace compatibility hypothesis; psi=1 is arbitrary obstacle data outside the compatible Definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-dependent-equality-constraints-have-nonunique-multiplier-vectors",
+        "kind": "counterexample",
+        "title": "Dependent equality constraints have nonunique multiplier vectors",
+        "statement": "**Refuted:** that the multiplier vector produced by the Lagrange multiplier rule is unique without any independence hypothesis on the constraint derivatives — equivalently, that the conclusion of [[lem-lagrange-multiplier-is-unique-when-constraint-gradients-are-independent]] remains true when surjectivity of $DG(u)$ is dropped.\n\nThe witness is the finite-dimensional problem $X=\\mathbb R^2$, $G(x,y)=(x,2x)$ and $I(x,y)=x^2+y^2$ ([[thm-finite-regular-constraint-lagrange-multiplier-rule]], [[def-frechet-derivative-between-banach-spaces]]). On the level set $G=0$, which is the $y$-axis, the point $u=(0,0)$ is the strict global minimiser of $I$, and $DI(u)=0$, while $DG_1(u)=(1,0)$ and $DG_2(u)=(2,0)$ are linearly dependent, so $DG(u)$ is not surjective. The stationarity equation $DI(u)=\\lambda_1DG_1(u)+\\lambda_2DG_2(u)$ holds exactly for the pairs with $\\lambda_1+2\\lambda_2=0$, a one-parameter family of multiplier vectors. Hence surjectivity of $DG(u)$, equivalently independence of the constraint gradients, is what makes the multiplier unique.",
+        "deps": [
+          "def-frechet-derivative-between-banach-spaces",
+          "lem-lagrange-multiplier-is-unique-when-constraint-gradients-are-independent",
+          "thm-finite-regular-constraint-lagrange-multiplier-rule"
+        ],
+        "strategy": "Direct finite-dimensional computation: DI(0,0)=0, DG_1=(1,0), DG_2=(2,0), so the multiplier equation is the single scalar equation \\lambda_1+2\\lambda_2=0. The example tests the independence hypothesis of the multiplier rule; the finite-dimensional regular case is [CV] Chapter 7, printed pp. 67-68.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riccardo Cristoferi, Calculus of Variations: Lecture Notes, Carnegie Mellon University 2016 (complete 133-page notes)",
+              "url": "https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf",
+              "locator": "Chapter 7, printed pp. 67-71 (finite-dimensional Lagrange multipliers; variational characterization of all eigenvalues; Lemma 7.1; Courant-Fischer Theorem 7.2)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-one-dimensional-obstacle-reaction-is-supported-on-the-contact-set",
+        "kind": "example",
+        "title": "The one-dimensional obstacle reaction is supported on the contact set",
+        "statement": "Assume the Axiom of Choice and Countable Choice ([[def-axiom-of-choice]], [[def-countable-choice]]), inherited from the obstacle example. In [[ex-one-dimensional-obstacle-problem-and-contact-set]], the solution $u$ lies in $H^2(-1,1)$ with $u''=\\psi''=-1$ on $(-t,t)$ and $u''=0$ on the noncontact set $\\{t<|x|<1\\}$. The reaction distribution $\\Lambda(\\varphi)=\\int_{-1}^1u'\\varphi'\\,dx=-\\int_{-1}^1u''\\varphi\\,dx$ of [[cor-obstacle-complementarity-in-distribution-form]] equals $\\int_{-1}^1\\mathbf 1_{[-t,t]}\\varphi\\,dx$: it is represented by the nonnegative density $\\mathbf 1_{\\{u=\\psi\\}}$, has mass $2t$, and has no atom at the free boundary points $\\pm t$ because $u'$ is continuous there.",
+        "deps": [
+          "cor-integral-over-a-null-set-vanishes",
+          "cor-obstacle-complementarity-in-distribution-form",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-test-function-space-d-of-an-open-set",
+          "ex-one-dimensional-obstacle-problem-and-contact-set",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "thm-integration-by-parts-for-absolutely-continuous-functions"
+        ],
+        "strategy": "Verification: u is piecewise quadratic/linear with continuous derivative, so integration by parts against a test function gives \\Lambda(\\varphi)=\\int u'\\varphi'=-\\int u''\\varphi with u''=-1 on (-t,t) and 0 elsewhere; since u'(t^-)=u'(t^+)=-t and u'(-t^-)=u'(-t^+)=t there is no jump of u' at \\pm t and hence no boundary atom. The density is exactly the contact-set indicator and is nonnegative, illustrating [[cor-obstacle-reaction-is-supported-on-the-contact-set-under-measure-regularity]] in a case where every quantity is explicit. Source: [AN] Section 4.2, printed pp. 36-38.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, KTH lecture notes, 16 December 2015 (complete 52-page notes)",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 Section 3.1, Theorem 3.1, printed pp. 26-28 (existence and uniqueness of the obstacle minimiser); Chapter 4 Section 4.2, Theorem 4.2 with (58), printed pp. 36-38 (Euler-Lagrange/complementarity in the W^{2,2}_loc class); Chapter 5, Lemma 5.3, printed pp. 45-47 (comparison principle)"
+            }
+          ]
+        },
+        "dependency_level": 11
+      }
+    ]
+  }
+]

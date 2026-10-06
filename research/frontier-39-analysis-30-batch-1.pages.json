@@ -1,0 +1,1609 @@
+[
+  {
+    "order": 458.013,
+    "id": "heat-equation-maximum-principles-duhamel-and-smoothing",
+    "kind": "A",
+    "category": "pde",
+    "title": "Heat Equation Maximum Principles Duhamel and Smoothing",
+    "companion": "heat-equation-maximum-principles-duhamel-and-smoothing-examples",
+    "requires": [
+      "the-heat-kernel-and-the-cauchy-problem",
+      "banach-valued-integration-and-the-radon-nikodym-property",
+      "normal-families-and-montels-theorem",
+      "conformal-mapping-branches-and-the-schwarz-lemma",
+      "orthonormal-bases-parseval-and-fourier-series"
+    ],
+    "items": [
+      {
+        "id": "def-parabolic-cylinder-and-parabolic-boundary",
+        "kind": "definition",
+        "title": "Parabolic cylinder and parabolic boundary",
+        "deps": [
+          "def-heat-equation-heat-operator-and-cauchy-problem",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-metric-interior-closure-boundary",
+          "def-metric-compactness",
+          "def-metric-continuity",
+          "thm-heine-borel-rn"
+        ],
+        "statement": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a nonempty bounded open set with\nclosure $\\overline\\Omega$ and boundary $\\partial\\Omega$ in the sense of\n[[def-metric-interior-closure-boundary]], and let $T>0$. Write\n$Q:=\\Omega\\times(0,T]$ for the **space-time cylinder** and\n$$\\overline Q:=\\overline\\Omega\\times[0,T]\\subseteq\\mathbb R^{n+1}$$\nfor its closure in the space-time variable; the **final-time face** is\n$\\Omega\\times\\{T\\}$, while the **parabolic boundary** of $Q$ is\n$$\\partial_pQ:=(\\overline\\Omega\\times\\{0\\})\\cup(\\partial\\Omega\\times[0,T]).$$\nNo point of the final-time face belongs to $\\partial_pQ$: the intersections\n$\\bigl(\\Omega\\times\\{T\\}\\bigr)\\cap\\bigl(\\overline\\Omega\\times\\{0\\}\\bigr)$ and\n$\\bigl(\\Omega\\times\\{T\\}\\bigr)\\cap\\bigl(\\partial\\Omega\\times[0,T]\\bigr)$ are\nempty because $T>0$ and $\\Omega\\cap\\partial\\Omega=\\varnothing$.\n\nA function $u$ on $\\overline Q$ is of class $C^{2,1}(\\overline Q)$ if it is\ncontinuous there, is $C^2$ in $x$ and $C^1$ in $t$ on $Q$, and the functions\n$u_t$ and $D_x^\\alpha u$ for $|\\alpha|\\le2$ extend continuously to\n$\\overline Q$; the multi-index notation and the classes $C^k$ are those of\n[[def-ck-and-multi-index-notation-in-several-variables]], and at $t=T$ the time\nderivative means the left one-sided limit. The relevant operator is\n$\\partial_t-\\Delta_x$, the heat operator of\n[[def-heat-equation-heat-operator-and-cauchy-problem]], and the phrase\n\"$u_t-\\Delta u\\le0$ in $Q$\" always refers to that cylinder, with the one-sided\ninterpretation of $u_t$ on the final-time face.\n\nOn this page a **classical heat solution** means a function with the stated $C^{2,1}$ regularity satisfying the equation pointwise; no second time derivative is required. Formulas that put time first use the canonical coordinate permutation $(x,t)\\leftrightarrow(t,x)$; regularity and derivatives always refer to the named spatial and time variables. The analogous interior class has the same continuous derivatives without an up-to-boundary requirement.\n\nTwo elementary topological facts are part of the vocabulary. First,\n$\\overline Q$ is compact: $\\Omega$ is bounded, so $\\overline\\Omega$ is closed and\nbounded in $\\mathbb R^n$, hence compact ([[thm-heine-borel-rn]]); then\n$\\overline Q=\\overline\\Omega\\times[0,T]$ is closed and bounded in\n$\\mathbb R^{n+1}$, hence compact by the same theorem\n([[def-metric-compactness]]). Second, $\\partial_pQ$ is closed in\n$\\mathbb R^{n+1}$, being the union of the two closed sets\n$\\overline\\Omega\\times\\{0\\}$ and $\\partial\\Omega\\times[0,T]$; in particular it\nis a closed subset of $\\overline Q$\n([[def-metric-interior-closure-boundary]]).",
+        "strategy": "Definition and remarks: Q is half-open in time, with compact closure and closed initial/lateral parabolic boundary. T>0 and openness of Omega exclude the final spatial-interior face from that boundary. The named C^{2,1} convention is anisotropic and requires only a left time derivative at T, explicitly differing from the earlier isotropic C2 vocabulary. No boundary smoothness or connectedness is imposed; coordinate permutation is explicit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 154, definition (6.59) and the parabolic boundary $\\Gamma_T$ in (3.28), p. 55"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2, printed p. 334, definition of the parabolic boundary $P$"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 6, §6.1, printed p. 177 (maximum principle on $\\Omega\\times[0,T]$)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-negative-semidefinite-hessian-at-an-interior-local-maximum",
+        "kind": "lemma",
+        "title": "The Hessian is negative semidefinite at an interior local maximum",
+        "deps": [
+          "def-euclidean-local-extrema-and-critical-points",
+          "thm-fermat-for-euclidean-local-extrema",
+          "cor-second-order-taylor-expansion-with-the-hessian",
+          "def-hessian-and-euclidean-critical-point",
+          "def-laplacian-of-a-c2-function"
+        ],
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f\\in C^2(U)$, and let $a\\in U$ be a\nlocal maximum of $f$. Then\n$$h^{\\mathsf T}H_f(a)h\\le0\\qquad\\text{for every }h\\in\\mathbb R^n;$$\nin particular $\\nabla f(a)=0$ and $\\Delta f(a)=\\operatorname{tr}H_f(a)\\le0$.",
+        "strategy": "Statement and steps 1.1–3.1: Fermat removes the linear Taylor term. A positive directional quadratic form would exceed the local maximum for small nonzero t, so every form value is nonpositive; h=0 causes no division. Coordinate vectors then give trace<=0. n>=1 is explicit. The result is semidefiniteness, with no strict negativity or converse asserted; the secondary bibliography description no longer claims a false stronger sign.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2, printed p. 335, inequalities (25)–(26) and the surrounding maximum-principle argument"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Maximum-principle background; the exact local calculus claim is proved here from Fermat and Taylor, and the nonpositive Laplacian is also Brezis §10.2, p. 335, (25)."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-strict-subsolution-perturbation-for-the-heat-operator",
+        "kind": "lemma",
+        "title": "Strict-subsolution perturbation for the heat operator",
+        "deps": [
+          "cor-mean-value-theorem",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-directional-and-partial-derivatives",
+          "def-euclidean-inner-product",
+          "def-laplacian-of-a-c2-function",
+          "def-metric-compactness",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "lem-negative-semidefinite-hessian-at-an-interior-local-maximum",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-extreme-value-metric",
+          "thm-fermat-interior-extremum",
+          "thm-heine-borel-rn"
+        ],
+        "statement": "Let $Q=\\Omega\\times(0,T]$ be a parabolic cylinder ([[def-parabolic-cylinder-and-parabolic-boundary]]) with $\\Omega$ bounded, and let $u\\in C^{2,1}(\\overline Q)$ satisfy $u_t-\\Delta u\\le0$ in $Q$. Then:\n\n(i) for every $\\varepsilon>0$ the function $v:=u+\\varepsilon|x|^2$ is in $C^{2,1}(\\overline Q)$ and satisfies\n$$v_t-\\Delta v\\le-2n\\varepsilon<0\\qquad\\text{in }Q;$$\n\n(ii) if $w\\in C^{2,1}(\\overline Q)$ satisfies $w_t-\\Delta w<0$ in $Q$, then $\\max_{\\overline Q}w=\\max_{\\partial_pQ}w$.",
+        "strategy": "(i) For $|x|^2=\\langle x,x\\rangle$ one computes $\\partial_ix_j=\\delta_{ij}$, $\\partial_i|x|^2=2x_i$ and $\\partial_i\\partial_i|x|^2=2$ by the chain and product rules ([[thm-algebra-of-derivatives]], [[thm-chain-rule]], [[def-directional-and-partial-derivatives]]); summing over $i$ gives $\\Delta|x|^2=2n$ ([[def-laplacian-of-a-c2-function]]). Since $v_t=u_t$ and $\\Delta v=\\Delta u+2n\\varepsilon$, the claim follows by linearity.\n\n(ii) Suppose the maximum of $w$ over the compact set $\\overline Q$ ([[thm-heine-borel-rn]], [[def-metric-compactness]]) is attained at a point $P\\notin\\partial_pQ$; write $P=(x_0,t_0)$. Then $x_0\\in\\Omega$ and $0<t_0\\le T$. If $t_0<T$ then $P$ is an interior point of $Q$ in both variables, so Fermat's interior-extremum theorem in the time variable ([[thm-fermat-interior-extremum]]) gives $w_t(P)=0$, while the spatial maximum gives $w_{x_ix_j}(P)$ negative semidefinite and hence $\\Delta w(P)\\le0$ by [[lem-negative-semidefinite-hessian-at-an-interior-local-maximum]]; then $(w_t-\\Delta w)(P)\\ge0$, contradicting $w_t-\\Delta w<0$. If $t_0=T$, the left difference quotients $\\bigl(w(x_0,T)-w(x_0,T-h)\\bigr)/h$ are $\\ge0$ because $w$ is maximised at $t=T$, and by the mean value theorem ([[cor-mean-value-theorem]]) and continuity of $w_t$ up to the top face they converge to $w_t(x_0,T)$; hence $w_t(x_0,T)\\ge0$, while $\\Delta w(x_0,T)\\le0$ as before, again contradicting $w_t-\\Delta w<0$. So the maximum is attained on $\\partial_pQ$. Both parts are pointwise estimates; only finitely many points and parameters are chosen and no choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2, printed p. 335, proof of Theorem 10.6: $v=u+\u000barepsilon|x|^2$ satisfies (24) and the cases $t_0<T$, $t_0=T$"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.2.5, printed pp. 112–113: strict subsolutions and the $\u000barepsilon t$ perturbation"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§3.1, printed p. 55, proof of Theorem 3.4 (the perturbation $v_\u000barepsilon=v-\frac\u000barepsilon2(1-x)x$)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-weak-parabolic-maximum-principle",
+        "kind": "theorem",
+        "title": "Weak parabolic maximum principle",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-metric-compactness",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "lem-strict-subsolution-perturbation-for-the-heat-operator",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-of-archimedean"
+        ],
+        "statement": "Let $Q=\\Omega\\times(0,T]$ be a parabolic cylinder with $\\Omega$ bounded, and let $u\\in C^{2,1}(\\overline Q)$ satisfy $u_t-\\Delta u\\le0$ in $Q$. Then\n$$\\max_{\\overline Q}u=\\max_{\\partial_pQ}u.$$",
+        "strategy": "For $\\varepsilon>0$ put $v:=u+\\varepsilon|x|^2$. By [[lem-strict-subsolution-perturbation-for-the-heat-operator]](i) $v$ is a $C^{2,1}(\\overline Q)$ strict subsolution, and by (ii) its maximum over $\\overline Q$ is attained on $\\partial_pQ$. Since $\\Omega$ is bounded, $R^2:=\\sup_{x\\in\\overline\\Omega}|x|^2<\\infty$ ([[def-euclidean-inner-product]]). Hence\n$$\\max_{\\overline Q}u\\le\\max_{\\overline Q}v=\\max_{\\partial_pQ}v\\le\\max_{\\partial_pQ}u+\\varepsilon R^2 .$$\nThe right-hand side tends to $\\max_{\\partial_pQ}u$ as $\\varepsilon\\downarrow0$ by the Archimedean property ([[thm-of-archimedean]]), so $\\max_{\\overline Q}u\\le\\max_{\\partial_pQ}u$; the reverse inequality is immediate since $\\partial_pQ\\subseteq\\overline Q$. Both maxima exist by compactness and continuity ([[thm-heine-borel-rn]], [[def-metric-compactness]], [[thm-extreme-value-metric]]). The perturbation argument quantifies over $\\varepsilon\\in(0,1)$ and no choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2, printed pp. 334–335, Theorem 10.6 and its proof"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed pp. 55–56 and Corollary 6.16, p. 158"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.2.5, printed pp. 112–113, Theorem 3.2.3"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-heat-ball-and-its-slices",
+        "kind": "definition",
+        "title": "Heat balls and their time slices",
+        "deps": [
+          "thm-exponential-beats-every-polynomial",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "def-countable-choice",
+          "def-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "def-metric-interior-closure-boundary",
+          "def-euclidean-inner-product",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, and let $\\Gamma$ be the heat kernel of\n[[def-heat-kernel]], with $|x-y|^2=\\langle x-y,x-y\\rangle$ the Euclidean square\nof [[def-euclidean-inner-product]]. For a space-time point $P=(x,t)\\in\\mathbb R^n\\times\\mathbb R$\nand $r>0$ the **heat ball** is\n$$E_r(t,x)=E_r(P):=\\{(y,s)\\in\\mathbb R^{n+1}:s<t,\\ \\Gamma(x-y,t-s)\\ge r^{-n}\\}\\cup\\{(x,t)\\}.$$\nWrite $\\tau:=t-s$ for the time depth below the top point. Record the following\nfacts.\n\n(i) $E_r(t,x)$ is compact, and $(x,t)$ is its unique point of maximal time;\n\n(ii) for $0<\\tau<r^2/(4\\pi)$ the time slice is the closed ball\n$$\\{y:(y,t-\\tau)\\in E_r(t,x)\\}=\\overline B\\bigl(x,\\rho_n(\\tau)\\bigr),\\qquad \\rho_n(\\tau):=\\sqrt{2n\\tau\\log\\tfrac{r^2}{4\\pi\\tau}},$$\nthe slice at $\\tau=r^2/(4\\pi)$ is the single point $\\{x\\}$, and the slice is\nempty for $\\tau>r^2/(4\\pi)$; the function $\\rho_n$ is continuous on\n$(0,r^2/4\\pi)$ and $\\rho_n(\\tau)\\to0$ as $\\tau\\downarrow0$;\n\n(iii) $\\displaystyle\\sup_{0<\\tau<r^2/4\\pi}\\rho_n(\\tau)=\\frac r2\\sqrt{\\frac{2n}{\\pi e}}$,\nattained at $\\tau=r^2/(4\\pi e)$, so\n$E_r(t,x)\\subseteq\\overline B\\bigl(x,\\tfrac r2\\sqrt{2n/\\pi e}\\bigr)\\times[t-r^2/4\\pi,t]$;\n\n(iv) the boundary is\n$\\partial E_r(t,x)=\\{(y,s):s<t,\\ \\Gamma(x-y,t-s)=r^{-n}\\}\\cup\\{(x,t)\\}$, and on\nthe level set $\\Gamma=r^{-n}$ the gradient of $\\Gamma$ is nowhere zero, so that\nlevel set is a $C^\\infty$ hypersurface.",
+        "strategy": "Definition (i)–(iv) and remarks: logarithmic algebra gives closed slices, the lower singleton and no later-depth slice. Differentiating tau log(a/tau) gives maximum at a/e and radius r sqrt(n/(2 pi e)); exponential decay gives the zero-radius top limit. The set is closed and bounded. At y=x the nonzero time derivative supplies the regular level even at the lower tip; the implicit-function theorem applies below the top. The top is a nonisolated boundary point, not part of the smooth level. Spatial-first point coordinates agree with Q; n=1 is included.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 155–156, definition (6.54) and slice formula (6.55) with Figure 6.1"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1 (heat kernel and its explicit form); Chapter 6 §6.1"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-heat-ball-representation-formula",
+        "kind": "lemma",
+        "title": "Heat-ball representation formula",
+        "deps": [
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-exponential-beats-every-polynomial",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "thm-heine-cantor-metric",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-countable-choice",
+          "def-heat-ball-and-its-slices",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "def-laplacian-of-a-c2-function",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-classical-normal-derivative",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-dominated-convergence",
+          "thm-clairaut-schwarz-mixed-partials",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition"
+        ],
+        "statement": "Assume Countable Choice. Let $u$ be of class $C^{2,1}$ on a neighbourhood of the\nclosed heat ball $E:=E_r(t,x)$ of [[def-heat-ball-and-its-slices]], and put\n$f:=u_t-\\Delta u$. Then, with $\\rho_n$ the slice radius,\n$$u(x,t)=\\iint_E\\bigl(\\Gamma(x-y,t-s)-r^{-n}\\bigr)f(y,s)\\,dy\\,ds+\\frac{1}{2r^n}\\int_{t-r^2/4\\pi}^{t}\\frac{\\rho_n(t-s)}{t-s}\\int_{|y-x|=\\rho_n(t-s)}u(y,s)\\,dS(y)\\,ds,$$\nall integrals absolutely convergent. For $n=1$, the inner sphere integral is the sum over its two points; endpoint slices are irrelevant to the time integral.",
+        "strategy": "Statement and steps 1.1–5.1: convolution in all n+1 variables approximates u, ut and its spatial derivatives uniformly near the compact ball without demanding mixed derivatives. For smooth u, the truncated domain has a regular lower tip and transverse cap; div(u grad v-v grad u,uv)=v f because vs+Delta v=0. The outward lateral normal supplies the negative flux; its Gram-factor cancellation gives R/(2 r^n tau) times the sphere integral. Cap Gaussian mass tends to one while the constant subtraction tends to zero. Volume domination uses int_E Gamma<=r^2/(4 pi); lateral domination reduces to exp(-nq/2) q^(n/2), integrable at both ends. n=1 uses counting measure. Uniform approximation then proves exactly the C^{2,1} assertion. Amended F1's top-point coordinate typo from (t,x) to (x,t), closed defect f39-b1-coordinate-typing. No Statement change.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 156, Lemma 6.12 and its complete proof (integration by parts in space-time, normal derivative $\\partial\\Phi/\\partial\\nu=-\\frac{|x-y|}{2(t-s)}\\Phi$, normalisation $L_r=1$)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1.1–5.1.2 (representation formulas for the heat equation)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-submean-inequality-for-heat-subsolutions",
+        "kind": "lemma",
+        "title": "Submean inequality for heat subsolutions on heat balls",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-ball-and-its-slices",
+          "lem-heat-ball-representation-formula"
+        ],
+        "statement": "Assume Countable Choice. Let $u$ be of class $C^{2,1}$ on a neighbourhood of the\nclosed heat ball $E_r(t,x)$ of [[def-heat-ball-and-its-slices]] and suppose\n$u_t-\\Delta u\\le0$ there. Then\n$$u(x,t)\\le\\frac{1}{2r^n}\\int_{t-r^2/4\\pi}^{t}\\frac{\\rho_n(t-s)}{t-s}\\int_{|y-x|=\\rho_n(t-s)}u(y,s)\\,dS(y)\\,ds .$$\nIn particular, if $u\\le M$ on $E_r(t,x)$ then $u(x,t)\\le M$.",
+        "strategy": "Statement and steps 1.1–3.1: the representation's volume kernel is nonnegative below its measure-zero top, while f<=0, so dropping its integral gives the stated upper average. Applying the checked representation to a constant normalizes the lateral weight to one, including n=1 and negative M. The same original C^{2,1}-near-ball hypothesis is retained. Brezis is accurately described as an alternative maximum-principle proof, not as a source of this heat-ball inequality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed pp. 156–158: the submean property used in the proof of Theorem 6.15, obtained from Lemma 6.12 with $f\\le0$"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2, printed pp. 334–335, Theorem 10.6 (an alternative maximum-principle argument; the heat-ball submean inequality here is derived from the preceding representation lemma)."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-heat-ball-chains-reach-earlier-points",
+        "kind": "lemma",
+        "title": "Heat-ball chains reach earlier points",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-ball-and-its-slices",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "thm-exponential-beats-every-polynomial",
+          "def-lipschitz-holder-contraction",
+          "thm-of-archimedean",
+          "cor-archimedean-reciprocal",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "def-metric-ball",
+          "def-laplacian-of-a-c2-function",
+          "thm-natural-logarithm-laws"
+        ],
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, let\n$0<t_1<t_0\\le T<\\infty$, and let $\\gamma:[0,1]\\to\\Omega$ be a Lipschitz path\nwith compact image $K$. Then there is $\\rho>0$ such that\n$E_\\rho(P)\\subseteq\\Omega\\times(0,T]$ for every $P\\in K\\times[t_1,t_0]$, and for\nevery $s\\in[t_1,t_0)$ there are $N\\ge1$ and points\n$P_0=(\\gamma(0),t_0),P_1,\\dots,P_N=(\\gamma(1),s)$, all lying in\n$K\\times[t_1,t_0]$, with $P_{j+1}\\in E_\\rho(P_j)$ for all $0\\le j<N$.",
+        "strategy": "Statement and steps 1.1–4.1: distance to the nonempty complement is 1-Lipschitz and positive on K, so its attained minimum is positive; the whole-space case explicitly takes d=1. A fixed rho smaller than this distance and sqrt(4 pi t1) encloses every heat ball. Dividing time t0-s and the Lipschitz path into N pieces makes displacement at most L/N; the sufficient logarithmic inequality is stronger than the exact N-multiplied slice condition and holds for sufficiently large N. Constant paths, s=t1, t0=T and n=1 are included; s=t0 is excluded as stated.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 158, proof of Theorem 6.15 (\"consider the heat balls with top point on this path; by compactness finitely many cover the path\")"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1 (normalisation and scaling of the Gaussian kernel used in the slice bound)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-strong-parabolic-maximum-principle",
+        "kind": "theorem",
+        "title": "Strong parabolic maximum principle",
+        "deps": [
+          "def-countable-choice",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "def-heat-ball-and-its-slices",
+          "lem-submean-inequality-for-heat-subsolutions",
+          "lem-heat-ball-representation-formula",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "lem-heat-ball-chains-reach-earlier-points",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "def-connected-space",
+          "thm-heine-cantor-metric",
+          "def-metric-uniform-continuity",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-metric-compactness"
+        ],
+        "statement": "Assume Countable Choice. Let $Q=\\Omega\\times(0,T]$ be a parabolic cylinder\nwith $\\Omega$ bounded, let $u\\in C^{2,1}(\\overline Q)$ satisfy\n$u_t-\\Delta u\\le0$ in $Q$, and suppose the maximum $M:=\\max_{\\overline Q}u$ is\nattained at a point $(x_0,t_0)$ with $x_0\\in\\Omega$ and $0<t_0\\le T$. Let\n$\\Omega_0$ be the connected component of $\\Omega$ containing $x_0$. Then\n$$u=M\\quad\\text{on }\\Omega_0\\times(0,t_0].$$",
+        "strategy": "Statement and steps 1.1–4.1: the normalized positive lateral measure has full support in sphere-time charts (counting measure for n=1), so equality at a maximum forces equality on the lateral level and, by continuity, its lower tip. Smaller heat-ball levels fill the interior. At t=T translated balls lie in strictly positive interior time, and compact uniform continuity passes their submean inequalities to the top without an extension beyond T. The checked path-chain lemma then propagates to every earlier point of the same component; time continuity gives t0. There is no propagation to later times or other components. Corrected remaining reversed slots in F1, F3 and the translated supremum of step 1.1 to spatial-first u(y,s) and (y,s); closed defect f39-b1-strong-coordinate-typing. No Statement change.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed pp. 157–158, mean value formula (Theorem 6.13, Corollary 6.14) and Theorem 6.15 (strong maximum principle) with its complete proof"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1 (Gaussian kernel and heat-ball geometry used in the chaining)"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2 (parabolic maximum principle for classical subsolutions)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-strict-positivity-for-nontrivial-nonnegative-heat-solutions",
+        "kind": "corollary",
+        "title": "Strict positivity propagates to later interior times",
+        "deps": [
+          "def-countable-choice",
+          "thm-strong-parabolic-maximum-principle",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "def-connected-space",
+          "def-connected-component-and-quasicomponent",
+          "def-metric-continuity"
+        ],
+        "statement": "Assume Countable Choice. Let $\\Omega$ be bounded and connected and\n$u\\in C^{2,1}(\\overline\\Omega\\times[0,T])$ be a nonnegative homogeneous heat\nsolution. If $u(x_*,s_*)>0$ at an interior point with $0<s_*<T$, then\n$u(x,t)>0$ for every $x\\in\\Omega$ and $s_*<t\\le T$. The same conclusion for\nevery $0<t\\le T$ holds if the continuous initial trace is positive at some interior\npoint. Nontriviality only at a later time does not assert positivity before\nthat time.",
+        "strategy": "Statement and steps 1.1–3.1: if a later interior zero occurred, -u would attain global maximum zero on the truncated cylinder. The checked strong principle and connectedness would force u to vanish at the earlier positive point, a contradiction. A positive initial interior trace gives a positive point at a sufficiently small s*<t by continuity. The range is exactly 0<t<=T, and positivity observed later makes no assertion for earlier times or boundary values.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 158, Theorem 6.15 (strict positivity of nonnegative solutions at later times)"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (19 March 2024)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§5.3, printed pp. 89–90, Theorem 5.12(2)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-comparison-and-uniqueness-for-the-bounded-cylinder-heat-problem",
+        "kind": "corollary",
+        "title": "Comparison and uniqueness for the bounded-cylinder heat problem",
+        "deps": [
+          "def-laplacian-of-a-c2-function",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "thm-algebra-of-derivatives",
+          "thm-weak-parabolic-maximum-principle"
+        ],
+        "statement": "Let $Q=\\Omega\\times(0,T]$ be a parabolic cylinder with $\\Omega$ bounded.\n\n(i) If $u,v\\in C^{2,1}(\\overline Q)$ satisfy $u_t-\\Delta u\\le v_t-\\Delta v$ in $Q$ and $u\\le v$ on $\\partial_pQ$, then $u\\le v$ on $\\overline Q$.\n\n(ii) If $f\\in C(Q)$ and $g\\in C(\\partial_pQ)$ are real-valued, then there is at most one $u\\in C^{2,1}(\\overline Q)$ with $u_t-\\Delta u=f$ in $Q$ and $u=g$ on $\\partial_pQ$.",
+        "strategy": "(i) The operator is linear: $w:=u-v$ satisfies $w_t-\\Delta w=(u_t-\\Delta u)-(v_t-\\Delta v)\\le0$ in $Q$ ([[def-laplacian-of-a-c2-function]], [[thm-algebra-of-derivatives]]), and $w\\le0$ on $\\partial_pQ$. By the weak maximum principle [[thm-weak-parabolic-maximum-principle]], $\\max_{\\overline Q}w\\le\\max_{\\partial_pQ}w\\le0$.\n\n(ii) If $u_1,u_2$ are two solutions with the same $f$ and $g$, their difference $w$ satisfies $w_t-\\Delta w=0$ and $w=0$ on $\\partial_pQ$; part (i) applied to the pairs $(w,0)$ and $(0,w)$ gives $w\\le0$ and $w\\ge0$, so $w\\equiv0$. No choice principle beyond the weak maximum principle's suppliers is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§3.1, printed p. 56, Corollary 3.6 (comparison) and §6.3, Theorem 6.17 (uniqueness on a bounded domain)"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2, printed p. 333, Corollary 10.4"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.2.5, printed pp. 113–114, Corollaries 3.2.4–3.2.5"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-linfinity-stability-for-the-inhomogeneous-heat-equation",
+        "kind": "theorem",
+        "title": "Supremum norm stability for forced heat problems",
+        "deps": [
+          "def-countable-choice",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "cor-comparison-and-uniqueness-for-the-bounded-cylinder-heat-problem",
+          "thm-ftc-first-part",
+          "thm-continuous-implies-integrable",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "thm-heine-cantor-metric",
+          "def-metric-uniform-continuity",
+          "def-laplacian-of-a-c2-function",
+          "def-directional-and-partial-derivatives"
+        ],
+        "statement": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be nonempty, bounded and open, $T>0$, and let real\n$u,v\\in C^{2,1}(\\overline\\Omega\\times[0,T])$ solve $u_t-\\Delta u=f$,\n$v_t-\\Delta v=g$ with $f,g\\in C(\\overline\\Omega\\times[0,T])$. Put\n$a=\\|u(\\cdot,0)-v(\\cdot,0)\\|_\\infty$,\n$b_t=\\sup_{\\partial\\Omega\\times[0,t]}|u-v|$, and\n$m(s)=\\max_{\\overline\\Omega}|f(\\cdot,s)-g(\\cdot,s)|$. Then for $0<t\\le T$,\n$$\\sup_{\\overline\\Omega\\times[0,t]}|u-v|\\le\\max(a,b_t)+\\int_0^t m(s)ds,$$\nand hence also the bound with $a+b_t$ in place of the maximum.",
+        "strategy": "Statement and steps 1.1–4.1: nonempty bounded open Omega and continuous closed-cylinder forcing supply each maximum m(s); uniform continuity gives |m(s)-m(s0)|<=sup_x |(f-g)(x,s)-(f-g)(x,s0)|. FTC makes +/-[max(a,b_t)+int_0^s m] admissible C^{2,1} barriers with zero spatial Laplacian. Comparing both signs bounds the difference throughout the truncated cylinder; nonnegativity of m gives the desired supremum. The sharper max(a,b_t) and weaker a+b_t bounds are both sound; zero forcing, a=b_t=0 and t=T are included.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 159, Theorem 6.17 and estimate (6.61) (the forcing barrier with the integrated timewise supremum)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-energy-uniqueness-for-the-homogeneous-heat-equation",
+        "kind": "theorem",
+        "title": "Energy uniqueness for the homogeneous heat equation",
+        "deps": [
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "cor-first-green-identity-on-a-bounded-c-one-domain",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-monotonicity-from-the-derivative",
+          "def-laplacian-of-a-c2-function",
+          "def-countable-choice",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "thm-dominated-convergence"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $n\\ge2$, let $\\Omega\\subseteq\\mathbb R^n$ be a\nbounded $C^1$ domain (or belong to the specified finite piecewise $C^1$ class)\nof [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]], let $T>0$,\nand let $u\\in C^{2,1}(\\overline Q)$ solve $u_t-\\Delta u=0$ in\n$Q=\\Omega\\times(0,T]$ with $u=0$ on $\\partial\\Omega\\times[0,T]$ and\n$u(\\cdot,0)=0$ on $\\Omega$. Then $u\\equiv0$ on $\\overline Q$; equivalently, the\nDirichlet problem for the homogeneous heat equation is unique in this class by\nthe energy method. No backward-in-time or terminal-data uniqueness is claimed\nhere (the time-reversed function solves the backward heat equation, for which\nthe energy is nondecreasing rather than nonincreasing).",
+        "strategy": "Statement and steps 1.1–4.1: the real energy argument matches the n>=2 C1/piecewise C1 Green supplier. Compact bounded derivatives and finite-volume domain justify differentiation and endpoint continuity. Zero lateral values eliminate the Green term, E'<=0 propagates E(0)=0, and positive-volume boxes turn zero energy into pointwise zero before closure continuity. The same reasoning applies componentwise if complex-valued solutions are intended. This proves forward uniqueness only; no terminal-data argument is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.4, printed p. 161, energy computation (6.68) $\\frac{d}{dt}E(t)=\\int u\\Delta u=-\\int|\\nabla u|^2\\le0$, uniqueness and stability"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 6, §6.1, printed p. 178 (the $L^2$ energy estimate)"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2 (energy/uniqueness for the heat equation)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-forced-heat-energy-identity",
+        "kind": "lemma",
+        "title": "Energy identity for the forced Dirichlet heat equation",
+        "deps": [
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "thm-dominated-convergence",
+          "def-countable-choice",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "cor-first-green-identity-on-a-bounded-c-one-domain",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-ftc-second-part",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "thm-extreme-value-metric"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge2$ and let $\\Omega\\subset\\mathbb R^n$ be a\nbounded $C^1$ domain in the class of the first Green identity\n([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]), let $T>0$,\nand let real $u\\in C^{2,1}(\\overline\\Omega\\times[0,T])$ solve\n$u_t-\\Delta u=f$ in $\\Omega\\times(0,T]$ with $f\\in C(\\overline\\Omega\\times[0,T])$ and $u=0$ on the\nlateral boundary $\\partial\\Omega\\times[0,T]$. Then for $0<t<T$,\n$$\\frac12\\frac d{dt}\\int_\\Omega u(x,t)^2\\,dx+\\int_\\Omega|Du(x,t)|^2\\,dx=\\int_\\Omega f(x,t)u(x,t)\\,dx ,$$\nand integrating in $t$ gives the energy balance\n$$\\frac12\\int_\\Omega u(x,t_2)^2dx-\\frac12\\int_\\Omega u(x,t_1)^2dx+\\int_{t_1}^{t_2}\\!\\int_\\Omega|Du|^2\\,dx\\,dt=\\int_{t_1}^{t_2}\\!\\int_\\Omega fu\\,dx\\,dt$$\nfor $0<t_1<t_2<T$. The identity carries exactly the Countable Choice assumption\nof the Green identity supplier.",
+        "strategy": "Statement and steps 1.1–3.1: n>=2 and the bounded C1 domain match Green's exact domain class. Continuous extensions give bounded u, ut and gradient, and a containing box gives finite volume. Differentiation under the integral and Green's identity with v=u yield E'+int |Du|^2=int fu with zero lateral term. Dominated convergence makes each time integral continuous before FTC on interior t1,t2. Disconnected domains and f=0 are allowed; endpoint identities are not overclaimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.4, printed pp. 160–161, (6.67)–(6.68), with the forcing term retained"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-backward-uniqueness-for-the-heat-equation-on-a-bounded-interval",
+        "kind": "lemma",
+        "title": "Backward uniqueness for the heat equation on a bounded interval",
+        "deps": [
+          "thm-chain-rule",
+          "thm-monotonicity-from-the-derivative",
+          "def-countable-choice",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-integration-by-parts",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "cor-second-derivative-characterises-convexity",
+          "def-convex-concave-and-midpoint-convex-functions",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "thm-algebra-of-derivatives"
+        ],
+        "statement": "Assume Countable Choice. Let $T>0$, $Q=(0,\\pi)\\times(0,T]$, and say that a\nfunction $w:\\overline Q\\to\\mathbb R$ is of class $C^{4,2}(\\overline Q)$ when it\nis continuous on $\\overline Q$ and all ordered partial derivatives containing at most four $x$ derivatives and at most two $t$ derivatives exist on $Q$ and\nextend continuously to $\\overline Q$. Suppose $w\\in C^{4,2}(\\overline Q)$\nsatisfies\n$$w_t=w_{xx}\\quad\\text{in }Q,\\qquad w(0,t)=w(\\pi,t)=0\\ (0\\le t\\le T),\\qquad w(x,T)=0\\ (0\\le x\\le\\pi).$$\nThen $w\\equiv0$ on $\\overline Q$. **No hypothesis on the initial face $t=0$ is\nimposed**: the vanishing is forced by the lateral and terminal conditions alone.\nConsequently two solutions of the interval Dirichlet problem in this class with\nzero lateral data and the same terminal data coincide, and the terminal-to-initial\nmap is well defined on the class of terminal data of such solutions.",
+        "strategy": "Statement and steps 1.1–5.1: the stated ordered C^{4,2} derivatives justify differentiating the energy twice. Boundary time derivatives vanish by the time-integral identity passed to spatial endpoints. Integration by parts yields E'=-int wx^2 and E''=2 int wt^2; Cauchy–Schwarz gives E'^2<=E E''. Monotonicity and continuity reduce any positive energy, including at time zero, to an interior t0 and first later zero b. Convexity of log E with fixed s<t0 contradicts log E(t)->-infinity at b. Zero energy gives pointwise vanishing, and the difference argument proves the terminal map is well defined without initial data.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.4, printed pp. 162–163, Theorem 6.21 (backwards uniqueness) and its proof: log-convexity of the energy via $\\dot E^2\\le E\\ddot E$, the maximal positivity interval, and the endpoint limit. The scaffold removes Teschl's initial-face hypothesis and tracks the differentiability class explicitly."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-duhamel-heat-potential",
+        "kind": "definition",
+        "title": "The Duhamel heat potential",
+        "deps": [
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-holder-inequality-for-integrals",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-countable-choice",
+          "def-bochner-integrable-function",
+          "def-strongly-measurable-banach-valued-function",
+          "thm-bochner-integrability-criterion",
+          "lem-bochner-integral-norm-inequality",
+          "def-heat-evolution-of-initial-data",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-convolution-of-two-functions-on-rn",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "cor-heat-flow-is-order-preserving-and-lp-contractive",
+          "thm-young-convolution-inequality",
+          "thm-dominated-convergence"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $T>0$, $1\\le p\\le\\infty$, and let\n$f:[0,T]\\to L^p(\\mathbb R^n)$ be continuous, where $L^p$ is the quotient space\nof [[def-l-p-space-as-a-quotient-by-null-functions]]. For $0\\le t\\le T$ the\n**heat potential** of $f$ is the Bochner integral\n$$Df(t):=\\int_0^tH_{t-s}f(s)\\,ds\\ \\in\\ L^p(\\mathbb R^n),$$\nwhere $H$ is the heat evolution of [[def-heat-evolution-of-initial-data]] and\nthe integrand is the $L^p$-valued function $s\\mapsto H_{t-s}f(s)$ interpreted\nas in [[def-bochner-integrable-function]] and\n[[def-strongly-measurable-banach-valued-function]].\n\n**Well-definedness.** The target $L^p$ is Banach by [[thm-riesz-fischer-completeness-of-l-p]] under the declared Countable Choice. For $1\\le p<\\infty$ the map $s\\mapsto H_{t-s}f(s)$ is\nnorm continuous on $[0,t]$ as a composition of the continuous curve $f$ and the\nstrongly continuous heat flow [[thm-heat-cauchy-solution-for-lp-data]]; its\nrange is therefore separable. For $p=\\infty$ strong continuity at time zero is\nnot available, but the flow is norm continuous on every compact subinterval of\n$(0,\\infty)$ by the $L^1$ continuity of the positive-time kernels\n(for $a\\le\\tau\\le b$ the explicit kernels converge pointwise with a common integrable Gaussian majorant, so [[thm-dominated-convergence]] gives $L^1$ continuity, and Young gives operator-norm continuity),\nso for fixed $t$ the integrand is norm continuous on every compact subinterval\nof $[0,t)$ and may be approximated on a countable exhaustion of $[0,t)$ by\nfinite-valued mesh functions, extended by zero on the omitted tail; uniform mesh error at most $1/k$ on $[0,t-t/(k+1)]$ gives pointwise convergence at every $s<t$; the single endpoint value at $s=t$ is\nirrelevant for the integral. In both cases the integrand is strongly measurable,\nand the contraction estimate of\n[[cor-heat-flow-is-order-preserving-and-lp-contractive]] gives\n$\\|H_{t-s}f(s)\\|_p\\le\\|f(s)\\|_p$, so\n$$\\int_0^t\\|H_{t-s}f(s)\\|_p\\,ds\\le\\int_0^t\\|f(s)\\|_p\\,ds\\le T\\sup_{[0,T]}\\|f\\|_p<\\infty .$$\nThe Bochner integrability criterion [[thm-bochner-integrability-criterion]]\ntherefore makes $Df(t)$ a well-defined element of $L^p(\\mathbb R^n)$, and the\nnorm inequality for Bochner integrals\n[[lem-bochner-integral-norm-inequality]] gives the estimate\n$$\\|Df(t)\\|_p\\le\\int_0^t\\|f(s)\\|_p\\,ds .$$\n\nThe same definition is used when $f$ is merely strongly measurable with\n$\\int_0^T\\|f(s)\\|_p\\,ds<\\infty$ and $1\\le p<\\infty$: approximation by measurable finite-valued simple functions together with the contraction bound gives strong measurability of the integrand: for the $k$-th simple approximation, replace its finitely many positive-time flow curves by finite mesh functions with error at most $1/k$ on $[0,t-t/(k+1)]$, and put zero on the omitted tail. At every $s<t$ off the original null set the resulting simple functions converge to $H_{t-s}f(s)$ ([[def-strongly-measurable-banach-valued-function]],\n[[thm-dominated-convergence]]), and the criterion and estimate above apply\nverbatim.\n\nWhen $f:\\mathbb R^n\\times[0,T]\\to\\mathbb R$ is bounded and jointly continuous,\nthe **scalar heat potential** is\n$$u(t,x):=\\int_0^t\\int_{\\mathbb R^n}\\Gamma(x-y,t-s)f(y,s)\\,dy\\,ds,$$\na scalar potential defined by the convolution\n[[def-convolution-of-two-functions-on-rn]]; the inner integral is absolutely\nconvergent because $\\Gamma(\\cdot,t-s)$ has unit mass\n[[lem-heat-kernel-normalisation-scaling-and-derivatives]] and $f$ is bounded.\nWhenever the forcing also defines a Bochner integrable $L^p$-valued map, the\nscalar potential agrees with the Bochner potential almost everywhere. Indeed, for any bounded measurable test function $\\psi$ supported in a bounded set, the pairing $v\\mapsto\\int\\psi v$ is bounded on $L^p$ by [[thm-holder-inequality-for-integrals]], and it commutes with the Bochner integral ([[thm-bounded-linear-maps-commute-with-bochner-integration]]). The iterated scalar integral is absolutely integrable against $\\psi$, bounded by $T\\|f\\|_\\infty\\|\\psi\\|_1$, so Fubini ([[thm-tonelli-and-fubini-for-completed-product-measures]]) gives the same pairing for the scalar potential. Equality of all these pairings forces equality almost everywhere: on each bounded box, a positive or negative real or imaginary part of the difference on a measurable set of positive measure would give a nonzero pairing with that set's indicator.",
+        "strategy": "Definition and well-definedness: Lp completeness makes the Bochner target Banach. Contraction and positive-time L1 kernel continuity give strong measurability via finite mesh approximations on an exhaustion avoiding the null endpoint for p=infinity. Simple forcing approximations give the finite-p L1-in-time variant. Bounded supported test pairings, Holder and absolute scalar Fubini identify scalar and Bochner potentials whenever both hypotheses hold. The empty time interval and zero forcing give zero; infinity continuity at the origin is not assumed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 10, §10.1 (the heat semigroup and Duhamel's formula $u(t)=e^{tA}u_0+\\int_0^te^{(t-s)A}f(s)ds$)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "§1.1, printed p. 7, Theorem 1.2 and (1.1.20) (Duhamel's formula for bounded continuous forcing with bounded continuous first and second spatial derivatives; the proof is assigned as an exercise). The Hölder and Bochner arguments used here are local."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.2, printed pp. 152–153, formula (6.37) and the convolution representation"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-duhamel-lone-in-time-lp-forcing-estimate",
+        "kind": "theorem",
+        "title": "L1 in time estimate for Lp Duhamel forcing",
+        "deps": [
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-countable-choice",
+          "def-duhamel-heat-potential",
+          "thm-bochner-integrability-criterion",
+          "lem-bochner-integral-norm-inequality",
+          "cor-heat-flow-is-order-preserving-and-lp-contractive",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-dominated-convergence",
+          "thm-young-convolution-inequality",
+          "def-strongly-measurable-banach-valued-function"
+        ],
+        "statement": "Assume Countable Choice. Let $1\\le p\\le\\infty$, and let\n$f:[0,T]\\to L^p(\\mathbb R^n)$ be strongly measurable with\n$\\int_0^T\\|f(s)\\|_p\\,ds<\\infty$. For every $t$ the Bochner integral\n$Df(t)=\\int_0^tH_{t-s}f(s)\\,ds$ exists and satisfies\n$\\|Df(t)\\|_p\\le\\int_0^t\\|f(s)\\|_p\\,ds$. For $p=\\infty$ no strong continuity of\n$H$ at zero on all $L^\\infty$ is asserted. For merely weakly measurable\n$L^\\infty$ forcing this statement makes no existence assertion.",
+        "strategy": "Statement and steps 1.1–4.1: for finite p, strong continuity and contraction give jointly continuous operator action; finite simple forcing values are approximated by finite meshes of their heat-flow curves. For infinity, the explicit derivative kernel has bounded L1 norm on positive-time compact intervals, so the same construction works on a countable exhaustion avoiding s=t. Diagonal mesh approximants converge off the original null set and the singleton endpoint. Banach completeness and contraction then prove Bochner existence and the exact L1-time estimate. At t=0 the empty integral is zero. Merely weakly measurable infinity forcing and infinity strong continuity at zero are expressly excluded.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.2, printed pp. 152–153, (6.42)–(6.47); local Bochner proof extracts the L1 time estimate"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-whole-space-maximum-principle-under-gaussian-growth",
+        "kind": "lemma",
+        "title": "Maximum principle on the whole space under Gaussian growth",
+        "deps": [
+          "def-countable-choice",
+          "thm-weak-parabolic-maximum-principle",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "def-laplacian-of-a-c2-function",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-derivative-of-exponential",
+          "thm-exponential-addition-formula",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-beats-every-polynomial",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "thm-extreme-value-metric",
+          "thm-of-archimedean"
+        ],
+        "statement": "Assume Countable Choice. Let $T>0$, $a\\ge0$, $A<\\infty$, and let\n$u\\in C([0,T]\\times\\mathbb R^n)\\cap C^{1,2}((0,T]\\times\\mathbb R^n)$ satisfy\n$$u_t-\\Delta u\\le0,\\qquad u(t,x)\\le Ae^{a|x|^2}\\quad((t,x)\\in[0,T]\\times\\mathbb R^n).$$\nThen\n$$\\sup_{[0,T]\\times\\mathbb R^n}u\\le\\sup_{\\mathbb R^n}u(0,\\cdot).$$\n(The same statement holds for a finite union of consecutive strips of length\nless than $1/(4a)$ when $a>0$.)",
+        "strategy": "Statement and steps 1.1–4.1: the initial supremum may be infinite under Gaussian growth, and that case is explicitly immediate. For finite M, the positive barrier B=(T+delta-t)^(-n/2) exp(|x|^2/(4(T+delta-t))) satisfies Bt=Delta B and dominates the upper growth uniformly at infinity when aT<1/4. On positive-time truncated cylinders the checked bounded maximum principle applies; compact continuity sends the bottom error eta_h to zero without derivatives at zero. epsilon then tends to zero at a fixed point. Equal positive-length strips N>4aT handle every longer T and avoid degenerate last strips. a=0, negative A, n=1 and t=T are compatible; the two-sided bound is not required.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed pp. 158–159, Theorem 6.18 and its complete proof (the barrier $\\frac{\\varepsilon}{(T+\\delta-t)^{n/2}}e^{|x|^2/4(T+\\delta-t)}$)"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2, printed pp. 334–335 (the perturbation approach to the parabolic maximum principle used on the bounded cylinder)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-whole-space-heat-uniqueness-under-gaussian-growth",
+        "kind": "theorem",
+        "title": "Uniqueness for the whole-space heat equation under Gaussian growth",
+        "deps": [
+          "def-countable-choice",
+          "def-directional-and-partial-derivatives",
+          "def-laplacian-of-a-c2-function",
+          "lem-whole-space-maximum-principle-under-gaussian-growth",
+          "thm-algebra-of-derivatives",
+          "thm-of-archimedean"
+        ],
+        "statement": "Assume Countable Choice. Let $T>0$, $C<\\infty$, $a\\ge0$, and let $u\\in C([0,T]\\times\\mathbb R^n)\\cap C^{1,2}((0,T]\\times\\mathbb R^n)$ satisfy $u_t-\\Delta u=0$ on $\\mathbb R^n\\times(0,T)$, $u(0,\\cdot)=0$ and\n$$|u(t,x)|\\le Ce^{a|x|^2}\\qquad((t,x)\\in[0,T]\\times\\mathbb R^n).$$\nThen $u\\equiv0$.",
+        "strategy": "Apply [[lem-whole-space-maximum-principle-under-gaussian-growth]] to $u$: $u$ is a subsolution with $u(0,\\cdot)\\le0$, hence $u\\le0$ on $[0,T]\\times\\mathbb R^n$. Applying the same lemma to $-u$, which is again a subsolution with $(-u)(0,\\cdot)\\le0$, gives $u\\ge0$. When the strip length $T$ exceeds $1/(4a)$ the lemma is applied successively to the finitely many strips of length less than $1/(4a)$ covering $[0,T]$ (the growth hypothesis is inherited on each strip), which is the iteration referred to in the item title ([[thm-of-archimedean]] for the finiteness of the subdivision). Thus $u\\equiv0$. Two applications and a finite subdivision only; Countable Choice is inherited from the supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 159, Corollary 6.19 (uniqueness under $|u|\\le Ae^{a|x|^2}$) and its proof"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1.4, printed p. 133 (uniqueness under growth more slowly than $Ce^{a|x|^2}$)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-duhamel-principle-for-the-whole-space-heat-equation",
+        "kind": "theorem",
+        "title": "Duhamel principle for the whole-space heat equation",
+        "deps": [
+          "thm-dominated-convergence",
+          "def-countable-choice",
+          "def-duhamel-heat-potential",
+          "thm-whole-space-heat-uniqueness-under-gaussian-growth",
+          "cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions",
+          "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-uniform-derivative-limit-on-a-closed-interval",
+          "def-heat-evolution-of-initial-data",
+          "def-heat-kernel",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "thm-bochner-dominated-convergence",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "lem-bochner-integral-norm-inequality",
+          "def-laplacian-of-a-c2-function"
+        ],
+        "statement": "Assume Countable Choice. (i) **Classical case.** Let $f$ be bounded and jointly\ncontinuous on $\\mathbb R^n\\times[0,T]$, and suppose there are $C>0$ and\n$0<\\gamma\\le1$ such that $|f(x,s)-f(y,s)|\\le C|x-y|^\\gamma$ for all $x,y$ and\n$0\\le s\\le T$ (in particular smooth compactly supported forcing qualifies) and\ndefine the scalar heat potential\n$$u(t,x):=\\int_0^t\\int_{\\mathbb R^n}\\Gamma(x-y,t-s)f(y,s)\\,dy\\,ds .$$\nThen $u\\in C^{1,2}(\\mathbb R^n\\times(0,T])$, $u_t-\\Delta u=f$ on\n$\\mathbb R^n\\times(0,T)$ and $u(0,\\cdot)=0$.\n\n(ii) **Mild case.** Let $1\\le p<\\infty$ and $f\\in C([0,T];L^p(\\mathbb R^n))$.\nThen $Df\\in C([0,T];L^p(\\mathbb R^n))$, $Df(0)=0$, and $Df$ satisfies the\nforced semigroup relation\n$$Df(t)=H_{t-s}Df(s)+\\int_s^tH_{t-\\tau}f(\\tau)\\,d\\tau\\qquad(0<s<t\\le T).$$\nEvery element $w\\in C([0,T];L^p(\\mathbb R^n))$ with $w(0)=0$ satisfying this\nrelation equals $Df$. If moreover $|u(x,t)|\\le Ce^{a|x|^2}$ for a classical\nsolution $u$ with zero initial data, then $u$ is the potential of (i) uniquely\nin that growth class.",
+        "strategy": "Statement (i),(ii) and steps 1.1–4.1: scalar forcing is bounded, jointly continuous and uniformly spatially gamma-Holder with gamma>0. Zeroth and first derivative integrals have bounds M and C M tau^(-1/2); second derivatives use zero kernel mass and subtract f(x,s), giving the integrable cancellation bound C tau^(-1+gamma/2). Positive-depth cutoffs and the exact uniform derivative-limit theorem justify the spatial derivatives. The moving-endpoint time derivative is Gamma_delta*f(t-delta)+int Delta Gamma*f, which converges locally uniformly to f+Delta u, including the left endpoint convention at T. The original uncancelled second-derivative double integral is not asserted to be absolutely integrable: cancellation bounds the inner integral's value. Mild continuity uses Bochner dominated convergence for both-sided t limits; splitting and bounded-map commutation prove the relation, and contraction as s decreases to zero proves uniqueness. Classical difference uniqueness uses the stated continuous initial trace and uniform Gaussian growth. The clause only proves C^{1,2}, not full smoothness for continuous time forcing.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "§1.1, printed p. 7, Theorem 1.2 and (1.1.20) (Duhamel's formula for bounded continuous forcing with bounded continuous first and second spatial derivatives; the proof is assigned as an exercise). The Hölder and Bochner arguments used here are local."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.2, printed p. 153, Theorem 6.11 and (6.46)–(6.47): bounded continuous forcing uniformly spatially Hölder on compact time strips"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 10, §10.1 (variation of constants $u(t)=e^{tA}u_0+\\int_0^te^{(t-s)A}f(s)ds$)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-inhomogeneous-heat-cauchy-formula",
+        "kind": "theorem",
+        "title": "The inhomogeneous heat Cauchy formula",
+        "deps": [
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-dominated-convergence",
+          "def-countable-choice",
+          "def-duhamel-heat-potential",
+          "thm-duhamel-principle-for-the-whole-space-heat-equation",
+          "thm-whole-space-heat-uniqueness-under-gaussian-growth",
+          "def-heat-evolution-of-initial-data",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "thm-heat-cauchy-solution-for-bounded-continuous-data",
+          "thm-bochner-dominated-convergence",
+          "lem-bochner-integral-norm-inequality",
+          "cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions",
+          "lem-heat-kernel-semigroup-identity",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $T>0$, $1\\le p<\\infty$,\n$u_0\\in L^p(\\mathbb R^n)$ and $f\\in C([0,T];L^p(\\mathbb R^n))$. Define\n$$u(t):=H_tu_0+Df(t)=H_tu_0+\\int_0^tH_{t-s}f(s)\\,ds\\qquad(0\\le t\\le T).$$\nThen $u\\in C([0,T];L^p(\\mathbb R^n))$, $u(0)=u_0$, and $u$ satisfies the forced\nrelation\n$$u(t)=H_{t-s}u(s)+\\int_s^tH_{t-\\tau}f(\\tau)\\,d\\tau\\qquad(0<s<t\\le T);$$\nconversely every $w\\in C([0,T];L^p(\\mathbb R^n))$ with $w(0)=u_0$ satisfying this\nrelation equals $u$. If $u_0$ is bounded and uniformly continuous and $f$ is\nbounded and jointly continuous and uniformly spatially Hölder on $[0,T]$ as in\nthe Duhamel theorem, then $u$ is a classical solution of $u_t-\\Delta u=f$ with\n$u(\\cdot,0)=u_0$, and it is the unique classical solution in the Gaussian\ngrowth class. For bounded uniformly continuous $u_0$ and bounded jointly\nuniformly continuous $f$ without the Hölder assumption, the same scalar formula\nremains a bounded continuous mild solution with the forced semigroup relation\nand initial trace $u_0$; the $C^{1,2}$ upgrade is not claimed for that general\nforcing class.",
+        "strategy": "Statement and steps 1.1–3.1: finite-p strong heat continuity plus Duhamel continuity gives the mild formula and initial class; splitting and the semigroup law give its forced relation. Conversely the difference contracts against its initial limit zero. The classical clause separately assumes bounded uniformly continuous initial data and bounded continuous spatially Holder forcing, so the checked homogeneous and Duhamel suppliers yield the PDE and Gaussian-class uniqueness. For bounded uniformly continuous forcing without Holder regularity, a scalar dominated-convergence argument supplies only a bounded continuous mild solution; absolute kernel-mass estimates justify signed/complex Fubini for its relation. No unjustified C^{1,2} upgrade is made in that last clause.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "§1.1, printed p. 7, Theorem 1.2 and (1.1.20) (Duhamel's formula for bounded continuous forcing with bounded continuous first and second spatial derivatives; the proof is assigned as an exercise). The Hölder and Bochner arguments used here are local."
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 10, §10.1 (uniqueness and representation of the inhomogeneous solution)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.2, printed pp. 152–153, formula (6.48) and the representation (6.50)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-instantaneous-smoothing-of-lp-heat-flow",
+        "kind": "theorem",
+        "title": "Instantaneous smoothing of the Lp heat flow",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-lp-to-lq-heat-kernel-estimate",
+          "thm-spatial-derivative-estimates-for-heat-flow",
+          "thm-young-convolution-inequality"
+        ],
+        "statement": "Assume Countable Choice, let $n\\ge1$, $1\\le p\\le q\\le\\infty$ and let $Q$ be the Young exponent of [[thm-lp-to-lq-heat-kernel-estimate]]. For every $f\\in L^p(\\mathbb R^n)$ the integral representative\n$$u(x,t):=\\int_{\\mathbb R^n}\\Gamma(x-y,t)f(y)\\,dy$$\nis $C^\\infty$ on $\\mathbb R^n\\times(0,\\infty)$ and satisfies $u_t=\\Delta u$ there; moreover for every multi-index $\\alpha$ and every integer $m\\ge0$,\n$$D_x^\\alpha\\partial_t^mu=(\\Delta_x^mD_x^\\alpha\\Gamma_t)*f,\\qquad \\|D_x^\\alpha\\partial_t^mu(\\cdot,t)\\|_q\\le C_{n,\\alpha,m,Q}\\,t^{-\\frac{2m+|\\alpha|}{2}-\\frac n2(\\frac1p-\\frac1q)}\\|f\\|_p$$\nfor every $t>0$, with $C_{n,\\alpha,m,Q}$ the constant produced by the derivative bounds of [[lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time]] and [[thm-lp-to-lq-heat-kernel-estimate]]. No strong continuity of $H_tf$ at $t=0$ is asserted for $q=\\infty$ or $p=\\infty$.",
+        "strategy": "This assembles the positive-time smoothing statements of the heat-kernel page. The identity $\\partial_t^k\\Gamma_t=\\Delta_x^k\\Gamma_t$ holds because $\\Gamma$ solves the heat equation and is $C^\\infty$ for positive time, and the derivative pass-through lemma [[lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time]] gives $D_x^\\alpha\\partial_t^ku=(D_x^\\alpha\\partial_t^k\\Gamma_t)*f$ with the Gaussian derivative bound $|D_x^\\alpha\\partial_t^k\\Gamma(x,t)|\\le C t^{-(n+|\\alpha|+2k)/2}e^{-|x|^2/8t}$; in particular every derivative integral converges and $u$ is $C^\\infty$ with $u_t=\\Delta u$ ([[lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time]], [[lem-heat-kernel-normalisation-scaling-and-derivatives]]). The $L^q$ bound is Young's estimate [[thm-lp-to-lq-heat-kernel-estimate]] applied to the kernel $D_x^\\alpha\\partial_t^m\\Gamma_t$, whose $L^Q$ norm scales as $t^{-\\frac{2m+|\\alpha|}{2}}$, multiplied by the scaling factor $t^{-\\frac n2(\\frac1p-\\frac1q)}$; this is exactly the estimate of [[thm-spatial-derivative-estimates-for-heat-flow]] extended to time derivatives by the identity. The caveat records that positive-time smoothing does not give strong continuity at zero in the supremum norm ([[def-heat-evolution-of-initial-data]], [[def-ck-and-multi-index-notation-in-several-variables]] for the multi-index notation).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1.2, printed p. 131 (smoothing of $L^p$ data for $t>0$)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 160, Theorem 6.20 (smoothness of solutions)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "§1.1, printed pp. 5–7, the derivative estimates in the proof of Theorem 1.1"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-forced-heat-solutions-are-smooth-away-from-the-source-time-diagonal",
+        "kind": "corollary",
+        "title": "Spatial smoothing of forcing separated from the observation time",
+        "deps": [
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-bochner-integrability-criterion",
+          "thm-young-convolution-inequality",
+          "lem-heat-kernel-semigroup-identity",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "def-countable-choice",
+          "def-duhamel-heat-potential",
+          "thm-duhamel-lone-in-time-lp-forcing-estimate",
+          "thm-spatial-derivative-estimates-for-heat-flow",
+          "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-holder-inequality-for-integrals",
+          "lem-bochner-integral-norm-inequality"
+        ],
+        "statement": "Assume Countable Choice. Let $1\\le p\\le q\\le\\infty$,\n$f\\in L^1([0,T];L^p(\\mathbb R^n))$ in the Bochner sense,\n$0<\\varepsilon\\le t\\le T$, and suppose $f(s)=0$ for almost every\n$s>t-\\varepsilon$. Then the Duhamel contribution at $t$ has a spatial\n$C^\\infty$ representative, and for every multi-index $\\alpha$,\n$$D^\\alpha Df(t)=\\int_0^{t-\\varepsilon}D^\\alpha H_{t-s}f(s)\\,ds\\qquad\\text{with}\\qquad\\|D^\\alpha Df(t)\\|_q\\le C_{\\alpha,n,p,q}\\,\\varepsilon^{-\\frac{|\\alpha|}{2}-\\frac n2(\\frac1p-\\frac1q)}\\int_0^{t-\\varepsilon}\\|f(s)\\|_p\\,ds .$$\nThis asserts spatial regularity at the chosen time, not differentiability across\nan active forcing time diagonal.",
+        "strategy": "Statement and steps 1.1–3.1: take a=epsilon/2 and g=int_0^(t-epsilon) H_(t-s-a) f(s). The integrability theorem applies to cut-off forcing at t-a, and the bounded-map Bochner identity gives Df(t)=H_a g. Thus no joint representative selection is needed. The bounded derivative map Lp->Lq commutes with that integral; equality of the smooth semigroup representatives supplies the derivative identity. Since t-s>=epsilon, the derivative estimate yields the exact epsilon power. t=epsilon gives zero; p=q=infinity and alpha=0 work, with no time regularity across active forcing asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (19 March 2024)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§5.3, printed pp. 83–84, forward solution formula and regularity (Proposition 5.5)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.2, printed pp. 152–153, (6.44), (6.47)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-complex-time-heat-kernel-on-a-proper-sector",
+        "kind": "definition",
+        "title": "The complex-time heat kernel on a proper sector",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-chain-rule-for-complex-derivatives",
+          "def-countable-choice",
+          "def-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-gaussian-integral",
+          "thm-dominated-convergence",
+          "thm-identity-theorem-holomorphic-functions",
+          "def-complex-exponential",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-complex-power-from-holomorphic-logarithm-branch",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane",
+          "thm-algebra-of-complex-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-exponential-beats-every-polynomial",
+          "def-laplacian-of-a-c2-function",
+          "def-metric-compactness",
+          "thm-heine-borel-rn",
+          "thm-holomorphic-parameter-riemann-integral",
+          "cor-holomorphic-functions-are-closed-for-local-uniform-convergence",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Fix $n\\ge1$ and\n$\\theta\\in(0,\\pi/2)$ and put\n$S_\\theta:=\\{z\\in\\mathbb C\\setminus\\{0\\}:|\\arg z|<\\theta\\}$. For $z\\in S_\\theta$\nand $x\\in\\mathbb R^n$ define the **complex-time heat kernel**\n$$\\Gamma_z(x):=(4\\pi z)^{-n/2}\\exp\\Bigl(-\\frac{|x|^2}{4z}\\Bigr),$$\nwhere $(4\\pi z)^{-n/2}:=\\exp\\bigl(-\\frac n2\\operatorname{Log}(4\\pi z)\\bigr)$ with\nthe principal logarithm. This is legitimate: $z\\ne0$ and\n$\\operatorname{Re}(4\\pi z)=4\\pi|z|\\cos(\\arg z)>0$ because $|\\arg z|<\\theta<\\pi/2$,\nso $4\\pi z$ lies in the slit plane on which the principal logarithm is\nholomorphic ([[cor-principal-logarithm-is-holomorphic-on-the-slit-plane]],\n[[def-complex-power-from-holomorphic-logarithm-branch]]) and the power is the\ncomplex exponential of [[def-complex-exponential]]. Then:\n\n(i) $\\Gamma_z\\in C^\\infty(\\mathbb R^n)\\cap L^1(\\mathbb R^n)$ and\n$\\int_{\\mathbb R^n}\\Gamma_z(x)\\,dx=1$;\n\n(ii) for every $\\sigma\\in(0,\\theta)$ and every $z$ with $|\\arg z|\\le\\sigma$,\n$\\ \\|\\Gamma_z\\|_1\\le(\\cos\\sigma)^{-n/2}$;\n\n(iii) for real $z=t>0$, $\\Gamma_t$ is the heat kernel of [[def-heat-kernel]];\n\n(iv) for every fixed $x$ the map $z\\mapsto\\Gamma_z(x)$ is holomorphic on\n$S_\\theta$ with\n$\\partial_z\\Gamma_z(x)=\\bigl(-\\tfrac n{2z}+\\tfrac{|x|^2}{4z^2}\\bigr)\\Gamma_z(x)$;\n\n(v) for every compact $K\\Subset S_\\theta$ there are constants $c_K,C_K>0$ with\n$|\\Gamma_z(x)|\\le C_Ke^{-c_K|x|^2}$ and\n$|\\partial_z\\Gamma_z(x)|\\le C_K(1+|x|^2)e^{-c_K|x|^2}$ for all $z\\in K$,\n$x\\in\\mathbb R^n$.\n\nThe complex exponential is entire with derivative itself ([[thm-complex-exponential-is-entire-with-derivative-itself]]), and the complex chain rule is [[thm-chain-rule-for-complex-derivatives]]. Its modulus is $|e^w|=e^{\\operatorname{Re}w}$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]). Smoothness in (i) follows by repeated coordinate differentiation of the exponential and\npower on $\\mathbb R^n$ ([[thm-algebra-of-complex-derivatives]],\n[[thm-algebra-of-derivatives]], [[thm-chain-rule]],\n[[def-complex-differentiability-holomorphic-and-entire]]); square-integrability\nand the exponential bound in (v) follow from\n$\\operatorname{Re}(1/z)=\\cos(\\arg z)/|z|>0$ together with the compactness of\n$K$ and the growth of the exponential against polynomials\n([[thm-exponential-beats-every-polynomial]], [[thm-heine-borel-rn]],\n[[def-metric-compactness]]). The remaining assertions are justified in the\nreminders below.",
+        "strategy": "Definition (i)–(v) and all three remarks: the principal branch is legitimate on the right half-plane; the modulus integrates to (cos arg z)^(-n/2). Truncated one-dimensional Gaussian integrals are holomorphic, their tails converge locally uniformly, and the scalar identity theorem plus absolutely integrable product Fubini supplies mass one. Log(1/(4z))=-Log(4z) on this sector fixes branch cancellation. Compact parameter sets bound |z| above and away from zero and Re(1/z) away from zero. No claim at z=0 or sector angle pi/2.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roland Schnaubelt, Evolution Equations (KIT lecture notes, Chapter 2)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "§2.3, Definition 2.18 and Example 2.30 (the Laplacian generates a bounded analytic $C_0$-semigroup on $L^p(\\mathbb R^m)$, $1<p<\\infty$)"
+            },
+            {
+              "title": "Martin Hairer, An Introduction to Stochastic PDEs (lecture notes, Chapter 4)",
+              "url": "https://www.hairer.org/SPDEs.pdf",
+              "locator": "§4.3, printed pp. 46–47 (analytic semigroups: sector of analyticity and the semigroup property)"
+            },
+            {
+              "title": "Hendrik Vogt, Lp-analyticity of Schrodinger semigroups on Riemannian manifolds",
+              "url": "https://user.math.uni-bremen.de/hvogt/papers/vog02.pdf",
+              "locator": "Theorem 1 and Corollary 3, printed pp. 3–4 (analyticity of angle $\\pi/2$ from complex-time Gaussian bounds)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-complex-time-heat-kernel-is-lone-differentiable-in-its-parameter",
+        "kind": "lemma",
+        "title": "The complex-time heat kernel is L1-differentiable in its parameter",
+        "deps": [
+          "thm-ftc-second-part",
+          "thm-chain-rule-for-complex-derivatives",
+          "def-complex-time-heat-kernel-on-a-proper-sector",
+          "def-countable-choice",
+          "thm-dominated-convergence",
+          "cor-mean-value-theorem",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-algebra-of-complex-derivatives",
+          "thm-chain-rule",
+          "def-metric-compactness",
+          "thm-heine-borel-rn",
+          "cor-bolzano-weierstrass-in-rn"
+        ],
+        "statement": "Assume Countable Choice. Let $\\theta\\in(0,\\pi/2)$ and let $\\Gamma_z$ be the\ncomplex-time heat kernel of\n[[def-complex-time-heat-kernel-on-a-proper-sector]]. Then for every\n$z\\in S_\\theta$ the complex difference quotients converge in\n$L^1(\\mathbb R^n)$:\n$$\\Bigl\\|\\frac{\\Gamma_{z+h}-\\Gamma_z}{h}-\\partial_z\\Gamma_z\\Bigr\\|_1\\longrightarrow0\\qquad(h\\to0),$$\nso $z\\mapsto\\Gamma_z$ is complex differentiable on $S_\\theta$ with values in\n$L^1(\\mathbb R^n)$ and derivative $\\partial_z\\Gamma_z$. The convergence is\nuniform on compact subsets of $S_\\theta$.",
+        "strategy": "Statement and steps 1.1–3.1: componentwise FTC gives the segment integral identity and the derivative majorant on a larger compact K+. The derivative is uniformly continuous there for each x, and the compact-parameter supremum is a measurable continuous function of x, dominated by an integrable polynomial Gaussian. Dominated convergence proves both L1 differentiation and compact-uniform convergence. Amended step 2.1 to permit all 0<|h|<d instead of incorrectly requiring z+h in arbitrary K (which may be a singleton); closed defect f39-b1-compact-increment-domain. No Statement change.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roland Schnaubelt, Evolution Equations (KIT lecture notes, Chapter 2)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "§2.3 (analyticity and differentiation of the semigroup in its parameter)"
+            },
+            {
+              "title": "Martin Hairer, An Introduction to Stochastic PDEs (lecture notes, Chapter 4)",
+              "url": "https://www.hairer.org/SPDEs.pdf",
+              "locator": "§4.3, printed pp. 46–47 (the definition of analytic semigroup includes analyticity of $z\\mapsto T(z)$ in the operator norm)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-complex-time-heat-operators-form-a-bounded-holomorphic-semigroup",
+        "kind": "theorem",
+        "title": "Complex-time heat operators form a bounded holomorphic semigroup",
+        "deps": [
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-identity-theorem-holomorphic-functions",
+          "def-countable-choice",
+          "def-complex-time-heat-kernel-on-a-proper-sector",
+          "lem-complex-time-heat-kernel-is-lone-differentiable-in-its-parameter",
+          "lem-heat-kernel-semigroup-identity",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-young-convolution-inequality",
+          "def-convolution-of-two-functions-on-rn",
+          "thm-dominated-convergence",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "def-laplacian-of-a-c2-function"
+        ],
+        "statement": "Assume Countable Choice. Let $\\theta\\in(0,\\pi/2)$ and $1\\le p\\le\\infty$. For\n$z\\in S_\\theta$ and $f\\in L^p(\\mathbb R^n)$ define\n$$H_zf:=\\Gamma_z*f,$$\nthe convolution with the complex-time kernel of\n[[def-complex-time-heat-kernel-on-a-proper-sector]]. Then:\n\n(i) $H_z$ is a bounded operator on $L^p(\\mathbb R^n)$ with\n$\\|H_z\\|_{L^p\\to L^p}\\le(\\cos\\sigma)^{-n/2}$ whenever\n$|\\arg z|\\le\\sigma<\\theta$;\n\n(ii) $H_zH_w=H_{z+w}$ whenever $z,w,z+w\\in S_\\theta$;\n\n(iii) for every $f$ the map $z\\mapsto H_zf$ is complex differentiable on\n$S_\\theta$ in the norm of $L^p(\\mathbb R^n)$, with derivative\n$(\\partial_z\\Gamma_z)*f$; consequently $z\\mapsto H_z$ is holomorphic in\noperator norm on every proper subsector $S_\\sigma$, $\\sigma<\\theta$.",
+        "strategy": "Statement and steps 1.1–3.1: Young supplies boundedness for all p. The sector is an open convex cone, closed under addition. Pairing the L1 kernel difference quotients with a bounded fixed kernel gives scalar holomorphy; the real Gaussian convolution law extends first in z and then in w by two scalar identity-theorem applications on the connected sector. Iterated absolute kernels have the required Lp bound, so Fubini gives operator composition also at p=1,infinity. The L1 derivative error uniformly bounds the operator-norm error over ||f||p<=1, proving operator holomorphy. No complex translation of the spatial contour is used and z=0 is outside scope.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roland Schnaubelt, Evolution Equations (KIT lecture notes, Chapter 2)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "§2.3, Example 2.30 (analytic semigroup generated by $\\Delta$ on $L^p(\\mathbb R^m)$, $1<p<\\infty$; the angle for $p=2$ is $\\pi/2$)"
+            },
+            {
+              "title": "Hendrik Vogt, Lp-analyticity of Schrodinger semigroups on Riemannian manifolds",
+              "url": "https://user.math.uni-bremen.de/hvogt/papers/vog02.pdf",
+              "locator": "Theorem 1 and Corollary 3, printed pp. 3–4 (extrapolation to consistent analytic semigroups on $L^p$ with angle not depending on $p$, via Gaussian bounds)"
+            },
+            {
+              "title": "Martin Hairer, An Introduction to Stochastic PDEs (lecture notes, Chapter 4)",
+              "url": "https://www.hairer.org/SPDEs.pdf",
+              "locator": "§4.3, printed pp. 46–48 (analytic semigroups, semigroup property in the sector, sectorial characterisation)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "rem-the-heat-operator-family-is-an-analytic-semigroup-in-the-later-abstract-language",
+        "kind": "remark",
+        "title": "The heat operator family is an analytic semigroup in the later abstract language",
+        "deps": [
+          "thm-complex-time-heat-operators-form-a-bounded-holomorphic-semigroup",
+          "def-heat-evolution-of-initial-data",
+          "def-complex-time-heat-kernel-on-a-proper-sector",
+          "thm-heat-cauchy-solution-for-lp-data"
+        ],
+        "statement": "**Orientation only.** For $1\\le p<\\infty$, the family $z\\mapsto H_z$ constructed explicitly in\n[[thm-complex-time-heat-operators-form-a-bounded-holomorphic-semigroup]] is the\nconcrete Gaussian instance of what the library's later abstract treatment of\nanalytic semigroups will call a bounded holomorphic (analytic) $C_0$-semigroup\non a sector: bounded on every proper subsector, strongly continuous on the\npositive real axis, and multiplicative in the sector. Concretely, the kernel\nand its estimates are those of [[def-complex-time-heat-kernel-on-a-proper-sector]];\nthe sectorial bound $\\|H_z\\|_{L^p\\to L^p}\\le(\\cos\\sigma)^{-n/2}$ on\n$|\\arg z|\\le\\sigma<\\theta$ and the law $H_zH_w=H_{z+w}$ are clauses (i) and\n(ii) of that theorem, its clause (iii) gives the holomorphy in operator norm,\nand the strong continuity at the vertex along the positive axis, for\n$1\\le p<\\infty$, is that of the heat flow of\n[[def-heat-evolution-of-initial-data]] supplied by\n[[thm-heat-cauchy-solution-for-lp-data]].\n\nThis page does not use that abstract notion as a premise, does not identify the\ngenerator $\\Delta$ with an unbounded operator domain, and makes no claim about\nmaximal regularity, resolvent sectors, or the Hille–Yosida representation in\nthe abstract language. The later page is responsible for the abstract\ndefinition and for the generator theory; here only the explicit kernel family\nof [[def-complex-time-heat-kernel-on-a-proper-sector]] and its estimates are\nused.\n\nFor $p=\\infty$ the same family is bounded and operator-norm holomorphic at positive complex times, but is not a $C_0$-semigroup on all of $L^\\infty$; the vertex continuity assertion above is restricted to finite $p$. Indeed, for $f=\\mathbf1_{[0,\\infty)}$ on $\\mathbb R$, evenness and unit mass give $H_tf(0)=1/2$. Continuity of $H_tf$ makes $|H_tf(x)-1|>\\eta$ on a positive-length interval $0<x<\\delta$ for every $\\eta<1/2$; hence $\\|H_tf-f\\|_\\infty\\ge1/2$ for every $t>0$.\n\nFor finite $p$, continuity at the vertex also holds within each proper subsector. With $\\varepsilon>0$ real and $|\\arg z|\\le\\sigma$, the semigroup law gives\n$$\\|H_zf-f\\|_p\\le((\\cos\\sigma)^{-n/2}+1)\\|f-H_\\varepsilon f\\|_p+\\|H_{z+\\varepsilon}f-H_\\varepsilon f\\|_p.$$\nFor fixed $\\varepsilon$, the last term tends to zero as $z\\to0$ by positive-parameter operator holomorphy; then $\\varepsilon\\downarrow0$ controls the first term by the finite-$p$ real-time continuity cited above. This supplies the vertex continuity of the analytic $C_0$ terminology.",
+        "strategy": "All remark paragraphs: finite-p real-time strong continuity, sector multiplication and operator-norm holomorphy provide the stated concrete analytic C0 interpretation. Approximate f by H_epsilon f to get vertex continuity in every proper subsector; fixed epsilon positive-time holomorphy controls the residual. For p=infinity the half-line indicator is legitimate infinity data, and continuity near zero gives a positive-length set of norm discrepancy at least any eta<1/2, hence essential norm at least 1/2. No generator domain or abstract regularity premise is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roland Schnaubelt, Evolution Equations (KIT lecture notes, Chapter 2)",
+              "url": "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf",
+              "locator": "§2.3, Definition 2.18 and Theorem 2.25 (sectorial operators and bounded analytic semigroups)"
+            },
+            {
+              "title": "Martin Hairer, An Introduction to Stochastic PDEs (lecture notes, Chapter 4)",
+              "url": "https://www.hairer.org/SPDEs.pdf",
+              "locator": "§4.3, printed pp. 46–48 (definition and basic theory of analytic semigroups)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-ltwo-normalisation-of-sine-modes-on-the-interval",
+        "kind": "lemma",
+        "title": "L2 normalisation of the sine modes on an interval",
+        "deps": [
+          "def-countable-choice",
+          "thm-chain-rule",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-primitives-of-a-continuous-function",
+          "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions"
+        ],
+        "statement": "Assume Countable Choice. For all integers $k,l\\ge1$,\n$$\\int_0^\\pi\\sin(kx)\\sin(lx)\\,dx=\\frac\\pi2\\,\\delta_{kl}.$$\nIn particular $\\|\\sin(k\\cdot)\\|_{L^2(0,\\pi)}=\\sqrt{\\pi/2}$.",
+        "strategy": "Statement and steps 1.1–4.1: product-to-sum separates k=l (zero difference frequency) from k!=l (nonzero frequencies, possibly negative). The primitive sin(mx)/m and sine endpoint zeros evaluate every nonzero frequency; the constant frequency integrates to pi. Thus the orthogonality integral is pi/2 delta_kl and the quotient norm is sqrt(pi/2). Countable Choice is explicitly carried through the Hilbert-space dictionary only; k=l=1 is included.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§3.1, printed pp. 50–54 (sine modes $e^{-(\\pi n)^2t}\\sin(\\pi nx)$ for the thin rod and the energy functional (3.24))"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-backward-heat-solution-map-is-unbounded",
+        "kind": "theorem",
+        "title": "The backward heat solution map is unbounded",
+        "deps": [
+          "thm-chain-rule",
+          "thm-derivative-of-exponential",
+          "def-countable-choice",
+          "lem-backward-uniqueness-for-the-heat-equation-on-a-bounded-interval",
+          "lem-ltwo-normalisation-of-sine-modes-on-the-interval",
+          "def-heat-equation-heat-operator-and-cauchy-problem",
+          "def-laplacian-of-a-c2-function",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-exponential-beats-every-polynomial",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions"
+        ],
+        "statement": "Assume Countable Choice. Let $T>0$ and consider the heat equation\n$u_t=u_{xx}$ on $(0,\\pi)\\times(0,T]$ with homogeneous Dirichlet boundary data\n$u(0,t)=u(\\pi,t)=0$.\n\n**Well-definedness of the terminal-to-initial map.** If a $C^{4,2}$ function $w$\non $[0,\\pi]\\times[0,T]$ solves this problem with $w(x,T)=0$ for all $x$, then\n$w\\equiv0$\n([[lem-backward-uniqueness-for-the-heat-equation-on-a-bounded-interval]]). Hence\non the class of $C^{4,2}$ solutions the terminal data determine the solution, and\nthe map $S$ sending a terminal datum $u(\\cdot,T)$ to the initial state\n$u(\\cdot,0)$ is well defined.\n\n**Unboundedness.** For every integer $k\\ge1$ the function\n$$u_k(x,t):=e^{k^2(T-t)}\\sin(kx)$$\nis a classical solution of $u_t=u_{xx}$ on $(0,\\pi)\\times(0,T]$ with\n$u_k(0,t)=u_k(\\pi,t)=0$, initial state $u_k(\\cdot,0)=e^{k^2T}\\sin(k\\cdot)$ and\nterminal data $u_k(\\cdot,T)=\\sin(k\\cdot)$. Consequently there is no constant\n$C<\\infty$ with\n$$\\|u(\\cdot,0)\\|_{L^2(0,\\pi)}\\le C\\,\\|u(\\cdot,T)\\|_{L^2(0,\\pi)}$$\nfor all $C^{4,2}$ solutions $u$ of this problem: the solutions\n$\\tilde u_k(x,t)=e^{-k^2t}\\sin(kx)$ have terminal data\n$g_k=e^{-k^2T}\\sin(k\\cdot)$ with\n$\\|g_k\\|_2=\\sqrt{\\pi/2}\\,e^{-k^2T}\\to0$ while\n$\\|\\tilde u_k(\\cdot,0)\\|_2=\\sqrt{\\pi/2}$ for every $k$. Since\n$Sg_k=\\sin(k\\cdot)=e^{k^2T}g_k$, the terminal-to-initial map multiplies the\n$k$-th sine mode by $e^{k^2T}$ and is unbounded with respect to the\n$L^2(0,\\pi)$ norms on its domain and range: the backward heat problem on a\nbounded interval has no norm-stable solution operator, and the amplification\nfactor of the $k$-th Dirichlet mode is exactly $e^{k^2T}$.",
+        "strategy": "Statement and steps 1.1–3.1: subtracting C^{4,2} solutions invokes the fully checked backward uniqueness lemma, so the terminal map is single valued on its actual attained-data domain. The smooth modes exp(k^2(T-t)) sin(kx) have both derivatives -k^2 times the mode and zero lateral values. The decaying modes give norm ratio exp(k^2 T), terminal norms tending to zero and initial norm sqrt(pi/2). This disproves every finite inverse bound while making no existence assertion for arbitrary infinite data. T>0 and Countable Choice are explicit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1.3, printed pp. 131–132, Example 5.6 ($f_n=e^{-n}\\sin(nx)$, $u_n=e^{-n}\\sin(nx)e^{n^2t}$: loss of continuous dependence for the backward heat equation)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.2, Remark 3.2.3(c), printed p. 111–112 (the initial-value problem in the direction of negative time is ill-posed)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§3.1, printed pp. 50–54 (Dirichlet sine modes and the energy method on $(0,1)$); §6.4, printed pp. 162–163, Theorem 6.21 (backwards uniqueness, used through the local backward-uniqueness lemma)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-a-nonzero-compactly-supported-final-profile-is-not-reached-by-whole-space-heat-flow",
+        "kind": "corollary",
+        "title": "Compactly supported nonzero terminal profiles are outside the heat range",
+        "deps": [
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-countable-choice",
+          "thm-positive-time-spatial-analyticity-of-heat-kernel-solutions",
+          "thm-identity-theorem-for-real-analytic-functions-on-an-interval"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $1\\le p\\le\\infty$, $f\\in L^p(\\mathbb R^n)$\nand $t>0$, and let $u$ be the everywhere-defined representative of the heat\nevolution $H_tf$ supplied by\n[[thm-positive-time-spatial-analyticity-of-heat-kernel-solutions]]. If $u$ has\ncompact support, then $u\\equiv0$ and $H_tf=0$ as an element of\n$L^p(\\mathbb R^n)$. Consequently no nonzero compactly supported element of\n$L^p(\\mathbb R^n)$ equals $H_tf$ for any such $f$ and $t$. The same vanishing\nconclusion holds when $u$ vanishes almost everywhere outside some compact set.",
+        "strategy": "Statement and steps 1.1–6.1: the analyticity supplier gives global convergence along the fixed e1 line, so the real one-variable identity theorem applies to both components. Compact support makes a nonempty open zero interval. The box-volume supplier proves continuous versus almost-everywhere vanishing outside a compact set. Zero data, n=1, p=1 and p=infinity are covered; no injectivity of heat flow is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§5.2.2, printed p. 137 (spatial analyticity of positive-time heat flow after Proposition 5.14); the exact Lp statement used here is the published item thm-positive-time-spatial-analyticity-of-heat-kernel-solutions"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (19 March 2024)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§5.3, printed pp. 83–84 (smoothing of positive-time heat solutions)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "rem-backward-ill-posed-does-not-mean-universal-nonexistence",
+        "kind": "remark",
+        "title": "Backward ill-posedness does not mean universal nonexistence",
+        "deps": [
+          "lem-backward-uniqueness-for-the-heat-equation-on-a-bounded-interval",
+          "lem-ltwo-normalisation-of-sine-modes-on-the-interval",
+          "thm-backward-heat-solution-map-is-unbounded"
+        ],
+        "statement": "**Orientation only.** Assume Countable Choice and fix $T>0$.\n[[thm-backward-heat-solution-map-is-unbounded]] shows that the terminal-to-initial\nmap on the terminal profiles of $C^{4,2}$ interval Dirichlet heat solutions is\nunbounded with respect to the $L^2(0,\\pi)$ norms; this is a statement\nabout continuity and stability, not about existence. The terminal data\n$\\sin(k\\cdot)$, for integers $k\\ge1$, do have backward solutions (the modes $u_k$ of\n[[thm-backward-heat-solution-map-is-unbounded]]), and so does every finite sine\nsum, by finite linear combination of these solutions. More generally, whenever\na forward interval Dirichlet heat solution $u$ exists on $[0,T]$ with initial\nprofile $f$, its terminal profile $g=u(\\cdot,T)$ admits a backward extension\non that interval: the same $u$, with initial profile $f$. This range description\nasserts no existence for arbitrary initial or terminal data. The failure is therefore\nthat arbitrarily small terminal perturbations can correspond to order-one\ninitial states ([[thm-backward-heat-solution-map-is-unbounded]]), and on general\ndomains the backward solution operator need not be surjective onto any given\ndata class. No claim of universal nonexistence and no well-posedness claim is\nmade here.\n\nThe well-definedness half of the picture is also worth recording: on the $C^{4,2}$\nclass with zero lateral data the terminal data determine the solution, by\n[[lem-backward-uniqueness-for-the-heat-equation-on-a-bounded-interval]], so\nill-posedness here is exactly the failure of a uniform norm bound, with the\namplification ratio $e^{k^2T}$ of the $k$-th sine mode\n([[lem-ltwo-normalisation-of-sine-modes-on-the-interval]]) measuring that\nfailure; no further existence or regularity claim is made.",
+        "strategy": "Assume Countable Choice and T>0. On terminal profiles of C^{4,2} interval Dirichlet heat solutions, backward uniqueness supplies a well-defined inverse; explicit sine modes and their finite linear combinations supply existence examples, and the factor exp(k^2 T) gives unboundedness. Every attained forward interval terminal profile has its own forward history as a backward extension. No arbitrary-data existence is asserted; whole-space H_t is not used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1.3, printed pp. 131–132 (irreversibility and loss of continuous dependence, with the remark that backward uniqueness can still hold)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.2, Remark 3.2.3(c), printed pp. 111–112 (negative-time IVP is ill-posed)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 458.014,
+    "id": "heat-equation-maximum-principles-duhamel-and-smoothing-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Heat Equation Maximum Principles Duhamel and Smoothing — Examples",
+    "companion": "heat-equation-maximum-principles-duhamel-and-smoothing",
+    "requires": [
+      "heat-equation-maximum-principles-duhamel-and-smoothing"
+    ],
+    "items": [
+      {
+        "id": "ex-duhamel-solution-for-a-time-independent-source",
+        "kind": "example",
+        "title": "Duhamel solution for a time-independent source",
+        "deps": [
+          "def-countable-choice",
+          "def-duhamel-heat-potential",
+          "thm-duhamel-principle-for-the-whole-space-heat-equation",
+          "def-heat-evolution-of-initial-data",
+          "def-bochner-integrable-function",
+          "thm-bochner-dominated-convergence",
+          "thm-heat-cauchy-solution-for-lp-data"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $1\\le p<\\infty$, $T>0$ and let\n$f\\in L^p(\\mathbb R^n)$ be viewed as the time-independent source\n$f(x,t):=f(x)$; if $f$ is spatially Hölder continuous with compact support,\nread the classical statement below. The heat potential of\n[[def-duhamel-heat-potential]] is\n$$Df(t)=\\int_0^tH_{t-s}f\\,ds=\\int_0^tH_\\tau f\\,d\\tau,$$\nthe substitution $\\tau=t-s$ removing the time dependence. Then\n$Df\\in C([0,T];L^p(\\mathbb R^n))$, $Df(0)=0$, and in the classical compactly\nsupported case $(Df)_t-\\Delta Df=f$ on $\\mathbb R^n\\times(0,T]$. In particular\n$Df$ is the solution of the inhomogeneous Cauchy problem with zero initial data\nproduced by the Duhamel principle, and for a time-independent source the two\nrepresentations $\\int_0^tH_{t-s}f\\,ds$ and $\\int_0^tH_\\tau f\\,d\\tau$ agree.",
+        "strategy": "Example and steps 1.1–3.1: a fixed finite-p datum is a continuous forcing curve. Reflection s->t-s preserves the simple-integral measures and hence both Bochner representations agree. In the compactly supported globally Holder case the bounded jointly continuous uniform spatial-Holder hypotheses of the checked Duhamel theorem hold, and scalar/Bochner agreement from the definition supplies the representative. Positive-time derivative continuity extends the equation to T. Zero forcing and t=0 give zero; no unbounded Laplacian commutation for arbitrary Lp data is asserted. The reader changed only this item's supplier-quote contract; its pre/post item hash is identical, so its routed touch is audit enrichment. Pre/post item SHA-256 is unchanged; the reader report identifies the refreshed exact supplier quotes. Current citations and mathematical use were independently checked.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "§1.1, printed p. 7, Theorem 1.2 and (1.1.20) (Duhamel's formula for bounded continuous forcing with bounded continuous first and second spatial derivatives; the proof is assigned as an exercise). The Hölder and Bochner arguments used here are local."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.2, printed pp. 152–153, formula (6.48) with time-independent $f$"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-heat-comparison-preserves-an-interval-of-values",
+        "kind": "example",
+        "title": "Heat comparison preserves an interval of values",
+        "deps": [
+          "cor-comparison-and-uniqueness-for-the-bounded-cylinder-heat-problem",
+          "cor-heat-flow-is-order-preserving-and-lp-contractive",
+          "cor-heat-flow-preserves-mass-and-positivity",
+          "def-countable-choice",
+          "def-directional-and-partial-derivatives",
+          "def-heat-evolution-of-initial-data",
+          "def-laplacian-of-a-c2-function",
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "statement": "Assume Countable Choice. Let $Q=\\Omega\\times(0,T]$ be a parabolic cylinder with $\\Omega$ bounded, let $a\\le b$ be real constants, and let $u\\in C^{2,1}(\\overline Q)$ solve $u_t-\\Delta u=0$ in $Q$ with $a\\le u\\le b$ on the parabolic boundary $\\partial_pQ$. Then $a\\le u\\le b$ on all of $\\overline Q$. On the whole space the analogous statement is that $a\\le u_0\\le b$ almost everywhere implies $a\\le H_tu_0\\le b$ almost everywhere for every $t>0$.",
+        "strategy": "The constant functions $a$ and $b$ are solutions of the heat equation in $Q$ with the same value on all of $\\overline Q$. Apply the comparison principle of [[cor-comparison-and-uniqueness-for-the-bounded-cylinder-heat-problem]](i) to the pair $(a,u)$: $a_t-\\Delta a=0=u_t-\\Delta u$ and $a\\le u$ on $\\partial_pQ$, hence $a\\le u$ on $\\overline Q$; the same with $(u,b)$ gives $u\\le b$. The whole-space statement is the order preservation and constant preservation of the heat flow ([[cor-heat-flow-is-order-preserving-and-lp-contractive]], [[cor-heat-flow-preserves-mass-and-positivity]], [[def-heat-evolution-of-initial-data]]). No further choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§3.1, printed p. 56, Corollary 3.5 (a priori bound by boundary data) and §6.3, Corollary 6.16"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2, printed pp. 333–334, Corollary 10.4 (positivity and $L^\\infty$ bounds of semigroup solutions)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-sine-modes-decay-under-dirichlet-heat-flow",
+        "kind": "example",
+        "title": "Sine modes decay under Dirichlet heat flow",
+        "deps": [
+          "thm-chain-rule",
+          "thm-derivative-of-exponential",
+          "def-countable-choice",
+          "lem-ltwo-normalisation-of-sine-modes-on-the-interval",
+          "def-heat-equation-heat-operator-and-cauchy-problem",
+          "def-laplacian-of-a-c2-function",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions"
+        ],
+        "statement": "Assume Countable Choice. For every integer $k\\ge1$ and every $T>0$, the function\n$$u_k(x,t):=e^{-k^2t}\\sin(kx)$$\nis a classical solution of the heat equation $u_t=\\Delta u$ on\n$(0,\\pi)\\times(0,T]$ with Dirichlet data $u_k(0,t)=u_k(\\pi,t)=0$ and initial\ndata $u_k(x,0)=\\sin(kx)$; it is smooth up to $t=0$ in this one-dimensional\nsetting. Its $L^2(0,\\pi)$ norm decays at the rate of the $k$-th Dirichlet\neigenvalue,\n$$\\|u_k(\\cdot,t)\\|_2=e^{-k^2t}\\sqrt{\\pi/2}\\qquad(t\\ge0),$$\nso higher modes decay faster, and the nodal set of $u_k(\\cdot,t)$ does not\ndepend on $t$.",
+        "strategy": "Example and steps 1.1–4.1: exp(-k^2 t) sin(kx) solves the forward equation smoothly on the closed rectangle, with named spatial-first boundary and initial slots. The squared L2 norm is exp(-2k^2 t) pi/2, and the exponential never vanishes so the nodal set is {m pi/k:1<=m<=k-1}. For k=1 that set is empty. Faster decay is asserted only at positive time; Countable Choice is carried through the norm supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§3.1, printed pp. 50–54 (the sine modes $e^{-(\\pi n)^2t}\\sin(\\pi nx)$ for the thin rod and their decay)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 6, §6.1, printed pp. 177–178 (Dirichlet heat flow on a bounded interval)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-final-time-face-is-not-part-of-the-parabolic-boundary",
+        "kind": "counterexample",
+        "title": "The final-time face is not part of the parabolic boundary",
+        "deps": [
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "thm-weak-parabolic-maximum-principle",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-derivative-of-exponential",
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-mean-value-theorem",
+          "def-laplacian-of-a-c2-function",
+          "def-sine-and-cosine-by-power-series"
+        ],
+        "statement": "The claim refuted is that every supersolution $u_t-\\Delta u\\ge0$ on a bounded cylinder $Q$ satisfies $\\max_{\\overline Q}u\\le\\max_{\\partial_pQ}u$. The witness has its larger maximum at a spatially interior point of the final-time face, which is excluded from the parabolic boundary. Take $\\Omega=(0,\\pi)$ and\n$$u(x,t):=e^{t}\\sin x .$$\nThen $u_t=e^t\\sin x$ and $\\Delta u=-e^t\\sin x$, so\n$u_t-\\Delta u=2e^t\\sin x\\ge0$ in $Q$: $u$ is a supersolution. Its maximum over\nthe closed cylinder is $\\max_{\\overline Q}u=e^{T}$, attained at the interior\npoint $(\\pi/2,T)$ of the final-time face, whereas\n$$\\max_{\\partial_pQ}u=\\max\\Bigl(\\max_{[0,\\pi]}\\sin,0\\Bigr)=1<e^{T}$$\nbecause the lateral data vanish and the initial data are $\\sin x\\le1$ with\nequality at $x=\\pi/2$. So the final-time face is not part of the parabolic\nboundary, and for a supersolution the maximum over the cylinder is genuinely\nlarger than the parabolic-boundary maximum: the maximum principle is\nsign-sensitive and does not extend in the reverse direction.",
+        "strategy": "Statement refuted and steps 1.1–3.1: u=exp(t) sin x is a supersolution, with zero lateral data, parabolic-boundary maximum one and cylinder maximum exp(T)>1 at (pi/2,T). This refutes the written supersolution maximum bound. It cannot refute an equality with a boundary enlarged to include that face, which the reader reports was the original mistaken target. The current text instead distinguishes the valid supersolution minimum principle and verifies the ordinary subsolution maximum principle for -u. T>0 and the spatial slots are correct.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 158, Example 6.3 ($x^2+2t$ attains its maximum at $(T,1)$: the interior/final-time behaviour matters)"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Universitext, Springer 2011)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "§10.2, printed p. 335 (the top-face case $t_0=T$ must be treated separately in the maximum principle)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-classical-parabolic-corner-regularity-needs-compatible-initial-and-boundary-data",
+        "kind": "counterexample",
+        "title": "Incompatible initial and boundary values prevent corner continuity",
+        "deps": [
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "def-metric-continuity"
+        ],
+        "statement": "The claim refuted is that the interval Dirichlet heat problem on\n$(0,\\pi)\\times(0,T]$ with initial data $u(x,0)=1$ for $0<x<\\pi$ and lateral data\n$u(0,t)=u(\\pi,t)=0$ for $t>0$ can be solved by a function $u$ that is\ncontinuous on $[0,\\pi]\\times[0,T]$ and attains its data: no such continuous\nfunction exists, because the two prescriptions disagree at the corners.",
+        "strategy": "Statement refuted and steps 1.1–3.1: for every T>0, (1/(k+1),0) lies in the initial face and (0,T/(k+1)) lies in the lateral face. Both approach the same corner with prescribed values one and zero. Continuity contradicts those limits without any PDE existence prerequisite. The scaled lateral sequence works also when T<1; data are only imposed off the corner.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 159, problem (6.60); p. 160, Problem 6.13 explicitly imposes g restricted to boundary equals a"
+            },
+            {
+              "title": "Per Kristen Jakobsen, An Introduction to Partial Differential Equations (2019)",
+              "url": "https://arxiv.org/pdf/1901.03022",
+              "locator": "Chapter 4, printed pp. 19–21, initial and boundary conditions"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "rem-whole-space-zero-data-heat-solutions-without-growth-control",
+        "kind": "remark",
+        "title": "Tychonoff nonuniqueness: zero-data heat solutions without growth control (recorded, not proved here)",
+        "deps": [
+          "thm-whole-space-heat-uniqueness-under-gaussian-growth"
+        ],
+        "statement": "**Recorded orientation, not proved here.** The growth hypothesis in [[thm-whole-space-heat-uniqueness-under-gaussian-growth]] cannot be dropped: for the one-dimensional heat equation $u_t=u_{xx}$ there exist nonzero smooth solutions on $\\mathbb R\\times(0,\\infty)$ with $u(0,x)=0$ for all $x$. Teschl's Example 6.4 writes $u(t,x)=\\sum_{m\\ge0}\\varphi^{(m)}(t)x^{2m}/(2m)!$ with $\\varphi(t)=e^{-1/t^2}$ for $t>0$ and $\\varphi(t)=0$ for $t\\le0$; the series converges for every $x$ and solves the heat equation with vanishing initial data. Hunter's Example 5.7 records the same construction and notes that the resulting solution grows very rapidly as $|x|\\to\\infty$. Such solutions are therefore outside every Gaussian growth class and do not contradict the uniqueness theorem above; the statement of the recorded result is not proved on this page.",
+        "strategy": "Recorded, not proved here; the proof obligation is discharged externally. This remark carries no local proof, is a leaf, and no item of this page depends on it.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.4, printed p. 160, Example 6.4 (Tikhonov's nontrivial solutions vanishing at $t=0$) and Corollary 6.19 (uniqueness under $|u|\\le Ae^{a|x|^2}$)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1.4, printed p. 133, Example 5.7 ($g(t)=\\exp(-1/t^2)$ gives a nonzero solution with zero initial data)"
+            }
+          ]
+        },
+        "proved_here": false,
+        "external_dependency": {
+          "source_url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+          "exact_statement": "Hunter, Example 5.7: for u_t = u_xx, the formal series u(x,t)=sum_{n>=0} g^{(n)}(t) x^{2n}/(2n)! is a solution for smooth g; choosing g(t)=exp(-1/t^2) (all derivatives vanishing at t=0) gives a nonzero solution of the heat equation with zero initial data, growing very rapidly as |x| -> infinity. Teschl, Example 6.4, records the same construction and Corollary 6.19 records the uniqueness theorem under the Gaussian growth bound |u| <= A e^{a|x|^2}.",
+          "local_proof_attempt": "Not reconstructed here. The construction is an external existence result; no local series-convergence proof of Tikhonov's example is supplied on this page, and the growth analysis is not redone. The item is recorded as orientation only and is not a dependency target of any scaffolded item.",
+          "necessity": "Records the exact scope of the uniqueness theorem: uniqueness in the Gaussian growth class cannot be upgraded to unconditional uniqueness for the whole-space Cauchy problem, so consumers must state the growth hypothesis explicitly."
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-backward-heat-amplifies-small-high-frequency-errors",
+        "kind": "counterexample",
+        "title": "Backward heat amplifies small high-frequency errors",
+        "deps": [
+          "def-countable-choice",
+          "thm-backward-heat-solution-map-is-unbounded",
+          "lem-ltwo-normalisation-of-sine-modes-on-the-interval",
+          "thm-exponential-beats-every-polynomial",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-sine-and-cosine-derivatives",
+          "ex-sine-modes-decay-under-dirichlet-heat-flow"
+        ],
+        "statement": "Assume Countable Choice. The claim refuted is that the backward heat problem on $(0,\\pi)$ depends\ncontinuously on its terminal data in the $L^2(0,\\pi)$ norm: arbitrarily small\nterminal perturbations do not, in general, produce small perturbations of the\ninitial state.",
+        "strategy": "Statement refuted and steps 1.1–3.1: the current sine mode example and backward uniqueness/unboundedness theorem justify explicit admissible terminal pairs and a single-valued inverse on their attained-data class. The norm computation gives ||gk||2=sqrt(pi/2) exp(-k^2 T)->0 and ||Sgk||2=sqrt(pi/2), proving discontinuity at zero relative to that domain. Countable Choice and T>0 are explicit. This is failure of stability; it makes no false claim of nonexistence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1.3, printed p. 132, Example 5.6 ($f_n=e^{-n}\\sin(nx)$ with solutions $e^{-n}\\sin(nx)e^{n^2t}$)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.2, Remark 3.2.3(c), printed pp. 111–112 (ill-posedness of the IVP in the direction of negative time)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-backward-heat-exists-for-finite-dirichlet-eigenfunction-sums",
+        "kind": "example",
+        "title": "Finite sine sums admit a backward Dirichlet heat solution",
+        "deps": [
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-sine-and-cosine-derivatives",
+          "thm-derivative-of-exponential",
+          "thm-sine-cosine-zero-sets-and-fundamental-period"
+        ],
+        "statement": "For $T>0$ and a finite terminal sine sum\n$g(x)=\\sum_{k=1}^Na_k\\sin(kx)$ on $(0,\\pi)$, the function\n$$u(x,t)=\\sum_{k=1}^Na_ke^{k^2(T-t)}\\sin(kx)\\qquad(0\\le t\\le T)$$\nsolves $u_t-u_{xx}=0$, vanishes at $x=0$ and $x=\\pi$, and has $u(x,T)=g(x)$.\nEvery such finite terminal datum therefore has a classical backward extension,\nalthough its mode amplification grows without bound as $k$ increases.",
+        "strategy": "Example and steps 1.1–3.1: each summand ak exp(k^2(T-t)) sin(kx) is smooth, has time and second spatial derivatives -k^2 times itself, vanishes at x=0,pi and attains its terminal term at T. Finite summation preserves all conditions. Zero coefficients yield the zero solution, and an empty sum would do the same; the written Given chooses N>=1. No convergence or existence assertion for infinite sums is made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per Kristen Jakobsen, An Introduction to Partial Differential Equations (2019)",
+              "url": "https://arxiv.org/pdf/1901.03022",
+              "locator": "§9.1, printed pp. 109–111, (197)–(199); §10.3.2, printed pp. 144–145, (346)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§3.1, Dirichlet sine modes; §6.4, backward uniqueness"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-a-mild-heat-solution-need-not-be-classical-at-initial-time",
+        "kind": "counterexample",
+        "title": "A mild heat solution need not be classical at the initial time",
+        "deps": [
+          "thm-dominated-convergence",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-instantaneous-smoothing-of-lp-heat-flow",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "def-heat-evolution-of-initial-data",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice"
+        ],
+        "statement": "The claim refuted is that a mild $L^p$ solution of the heat equation is\nautomatically a classical solution continuous up to $t=0$, so that its\nrepresentative tends to the initial datum at the initial time pointwise.",
+        "strategy": "Statement refuted and steps 1.1–2.1: 1_[0,1] has every finite-p norm one and belongs to infinity; this repairs the reader-reported half-line finite-p error. Heat scaling gives u(0,t)=int_0^(1/sqrt(t)) Gamma(z,1), tending to 1/2. More strongly, any continuous representative of its class would equal zero on (-infinity,0) and one on (0,1), by the positive-volume interval argument, so cannot be continuous at zero. This refutes a jointly continuous extension independently of null-set conventions. Only finite-p norm convergence is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.3, printed p. 160, Theorem 6.20 (smoothness for $t>0$; no regularity is claimed at $t=0$)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1.2, printed p. 131 (smoothing for positive time and the hypothesis needed at zero)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      }
+    ]
+  }
+]

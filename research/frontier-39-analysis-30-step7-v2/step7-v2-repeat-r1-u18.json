@@ -1,0 +1,148 @@
+{
+  "run": "frontier-39-analysis-30",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "18",
+  "input_sha256": "4f91ca21b77ba02bf6d92ea5243cd78e0ee21674158fffdec4d98596ef6beea2",
+  "decisions": [
+    {
+      "id": "lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "4b977720d9e0a15c9b2f6ba9991643ca8183cde99aecf293c71348bf11347b69",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For I=[0,1], derivatives at 0 and 1 are undefined under the cited open-domain Fr\u00e9chet interface, so the Taylor coefficients need an endpoint convention. The repaired Statement defines C^(n+1) by continuous extensions of interior real-parameter derivatives, retaining closed and half-open intervals, both signs of h and every order. Zero increments, including singleton intervals, are explicitly the identity u(t)=u(t).",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves",
+      "disposition": "repaired",
+      "post_sha256": "ab1aae29ea88958ed8e5153f9cd331029d647394530d4d69e1806d0ba371a59c",
+      "review_context_sha256": "1606baa965d6cd0eb4010b85794e844d9b434e0731810ace5fdad74031b65d61",
+      "reason": "The real-parameter derivatives are defined on int(I) and uniquely extend to included endpoints for nondegenerate I. On each nonzero ordered segment, u and the polynomial-weighted u^(k) are continuous, differentiable inside, and their derivatives extend continuously, exactly meeting L1. The product rule and L2 give the integration-by-parts identity; induction gives the unchanged Taylor formula for positive and negative increments. h=0 is treated for every n before induction. Countable Choice remains the only assumed choice principle. This is a local repair review, not independent judgment of my repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-sectorial-resolvent-characterisation-of-bounded-analytic-semigroups"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "defect_id": "frontier-39-analysis-30-step7-repeat-r1-u18-endpoint-derivatives",
+      "run": "frontier-39-analysis-30",
+      "at": "2026-10-06",
+      "class": "accuracy",
+      "subclass": "undefined-notation",
+      "severity": "fatal",
+      "location": "statement",
+      "subject": "lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves",
+      "caught_at_stage": "7-adjudicate",
+      "caught_by_role": "group-alpha",
+      "disposition": "fixed",
+      "introduced_at_stage": "unknown",
+      "repair_cost": "inline-fix",
+      "adjudication_ref": [
+        {
+          "ledger": "research/frontier-39-analysis-30-step7-v2/step7-v2-repeat-r1-u18.json",
+          "model": "gpt-6.1-sol",
+          "context_sha256": "4b977720d9e0a15c9b2f6ba9991643ca8183cde99aecf293c71348bf11347b69"
+        }
+      ],
+      "item_sha256": "ab1aae29ea88958ed8e5153f9cd331029d647394530d4d69e1806d0ba371a59c",
+      "subclass_note": "The displayed Taylor coefficients include endpoint values of derivatives although the cited Fr\u00e9chet definition has an open domain. Defined C^(n+1) on nondegenerate intervals through continuous extensions of interior real-parameter derivatives; singleton and zero-increment identities need no undefined derivatives. The formula and its full closed-interval range are preserved.",
+      "evidence": [
+        {
+          "path": "items/lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves.md",
+          "anchor": "Statement"
+        },
+        {
+          "path": "items/def-frechet-derivative-between-banach-spaces.md",
+          "anchor": "Definition"
+        },
+        {
+          "path": "items/lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves.md",
+          "anchor": "Statement"
+        }
+      ],
+      "prevention": {
+        "kind": "process",
+        "ref": "Check endpoint regularity conventions against the exact open-domain derivative and closed-interval FTC interfaces before evaluating Taylor coefficients."
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim": "Taylor formula with oriented Bochner integral remainder for every integer n>=0 and ordered segment contained in I; endpoints use continuous extensions of interior derivatives.",
+    "changed_paths": [
+      "items/lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves.md",
+      "research/frontier-39-analysis-30-batch-18.proof-contracts.json",
+      "research/frontier-39-analysis-30-batch-18.pages.json"
+    ],
+    "dependencies": [
+      "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+      "lem-linearity-of-the-bochner-integral",
+      "thm-bochner-integrability-criterion",
+      "def-bochner-integrable-function",
+      "def-frechet-derivative-between-banach-spaces",
+      "lem-bochner-integral-norm-inequality",
+      "def-countable-choice"
+    ],
+    "source_reading": [
+      {
+        "url": "https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf/%40%40download/file/engel-nagel_one-parameter-semigroups.pdf",
+        "locator": "Chapter II, Section 4.a, proof of Theorem 4.6, (c) implies (a), printed p.104, equation (4.14), web lines 7945-8030",
+        "establishes": "This passage applies the integral Taylor remainder to smooth positive-time semigroup orbits. It does not establish the general closed-interval endpoint convention; that extension follows here from the supplied fundamental theorem."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves.md",
+        "exit_code": 0,
+        "result": "1 file: all math spans and YAML parse."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-39-analysis-30-batch-18.proof-contracts.json --strict --items lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked."
+      }
+    ],
+    "downstream_reviews": [
+      {
+        "id": "thm-sectorial-resolvent-characterisation-of-bounded-analytic-semigroups",
+        "path": "items/thm-sectorial-resolvent-characterisation-of-bounded-analytic-semigroups.md",
+        "affected_use": "L8 supplies Taylor expansion to proof step 1.4: T is proved C^infinity((0,infinity), B(X)) with T^(n)=A^nT, then Taylor is applied on [t-|h|,t+|h|] for |h|<rho t and rho<=1/2.",
+        "disposition": "unaffected",
+        "reason": "This compact segment lies inside the open positive-time domain where every derivative is norm-continuous. Its endpoint values are the restrictions of those derivatives, so all clarified hypotheses already hold; no consumer repair is needed.",
+        "route": "frontier owner impact lane"
+      }
+    ],
+    "page_interface": "library/pde/analytic-semigroups-and-linear-evolution-equations.md lists this lemma and describes its Taylor machinery; the formula and role are preserved, so page prose needs no repair.",
+    "published_ledger_updates": "None: the only direct item consumer is a draft frontier theorem, and no outside or published affected consumer was found by direct item/page reference search.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this native report, routes the changed Statement to the frontier owner impact lane and performs renewed independent judgment and certification after writers drain.",
+    "metadata_integration": "Acquired step7-shared-write lock, reread current owning contract and manifest, synchronized only assigned item entry and endpoint/degenerate boundaries, passed focused strict contract check, then released lock. No shared ledger was edited."
+  }
+}

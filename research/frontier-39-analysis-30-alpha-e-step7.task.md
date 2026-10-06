@@ -1,0 +1,191 @@
+# Step 7 adjudication — group **e**, run `frontier-39-analysis-30`
+
+You are the group Alpha for batches **8**, **18**, **25**: 3 A/B pair(s), 6 page(s), 90 item(s), 0 open rejection(s) over 0 item(s).
+
+This is a fresh adjudication context. The durable digest below carries the
+findings from the rejection-blind whole-group reading at step 6 without
+replaying that reader's transcript. Nothing from step 3, step 5, or another
+group is assumed.
+Everything below is
+derived from disk by `tools/step7-scope.mjs`; no line of it is a judgement
+about mathematics.
+
+## What you recorded at step 6
+
+**No step-6 digest exists for this group.** The reading half did not run or did
+not produce one, so you are meeting this mathematics for the first time with the
+rejections already in front of you. Read the pages before the verdicts anyway —
+the order matters more than where the notes came from.
+
+## Read scope, write scope
+
+**Audit and repair one item at a time. Inspect related items first only when necessary.** `items/` holds every published item and
+every item this run has built, and your sandbox is the repository root. Open
+anything a rejection touches — a published dependency, another group's page,
+a definition three levels down. Adjudicating a citation objection without
+opening the cited item is exactly what the refuter rule forbids.
+
+**You may write only inside your own group.** A `confirmed_fatal` licenses a
+repair to an item in the batches listed above. If a rejection's real defect
+lies in an item owned by another group, do not repair it: record the finding
+in `research/frontier-39-analysis-30-step7-cross-group.jsonl` as
+`{from_group, item, owning_group, finding, severity, source_rejection:{id,model,context_sha256}}`
+and adjudicate your own rejection on what is true. The source tuple is
+provenance only; it cannot license a repair to the target. The gate routes a
+stable alert to the owning group, and a finding nobody answers fails the stage.
+
+## Your pages
+
+| batch | page | kind | category | order | requires |
+|---|---|---|---|---|---|
+| 8 | `muckenhoupt-weights-and-weighted-estimates` | A | fourier-analysis | 458.02613 | `calderon-zygmund-decomposition-and-singular-integrals`, `the-lp-spaces-holder-minkowski-and-riesz-fischer`, `the-maximal-function-and-lebesgue-differentiation`, `radon-measures-and-the-riesz-markov-kakutani-theorem` |
+| 8 | `muckenhoupt-weights-and-weighted-estimates-examples` | B | fourier-analysis | 458.02614 | `muckenhoupt-weights-and-weighted-estimates` |
+| 18 | `analytic-semigroups-and-linear-evolution-equations` | A | pde | 458.045 | `strongly-continuous-semigroups-and-hille-yosida` |
+| 18 | `analytic-semigroups-and-linear-evolution-equations-examples` | B | pde | 458.046 | `analytic-semigroups-and-linear-evolution-equations`, `smooth-approximation-and-sobolev-extension` |
+| 25 | `lie-algebra-cohomology-and-kostants-nilradical-theorem` | A | lie-theory | 510.021 | `harish-chandra-isomorphism-casimir-and-central-characters`, `the-bgg-resolution`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `derived-functors`, `ext-and-balanced-resolutions`, `spectral-sequences`, `double-complexes-exact-couples-and-convergence`, `compact-lie-groups-maximal-tori-and-peter-weyl-theory`, `sheaf-cohomology-cech-cohomology-and-comparison` |
+| 25 | `lie-algebra-cohomology-and-kostants-nilradical-theorem-examples` | B | lie-theory | 510.022 | `lie-algebra-cohomology-and-kostants-nilradical-theorem` |
+
+## Your content, in full
+
+Every item you own. This is the inventory, not the mathematics — open the
+files under `items/` for that.
+
+### `muckenhoupt-weights-and-weighted-estimates` — Muckenhoupt Weights and Weighted Estimates (31 item(s))
+
+- `def-weight-and-weighted-lp-space` · definition — Weights, their associated measures, and the spaces L^p(w)
+- `def-axis-parallel-cube-averages-and-cube-maximal-functions` · definition — Axis-parallel cubes, their averages, and cube maximal functions
+- `lem-ball-and-cube-maximal-functions-are-comparable` · lemma — Ball and cube maximal functions are pointwise comparable
+- `def-muckenhoupt-a-p-and-a-one-weights` · definition — Muckenhoupt A_p and A_1 weights
+- `lem-a-one-cube-average-and-maximal-function-forms-agree` · lemma — The two defining forms of A_1 agree
+- `lem-a-p-dual-weight-and-nesting-properties` · lemma — Duality and nesting of the A_p classes
+- `lem-a-p-weighted-average-comparison-and-density-to-mass` · lemma — Weighted average comparison and the density-to-mass estimate for A_p weights
+- `lem-a-p-weights-are-doubling` · lemma — A_p weights are doubling
+- `lem-maximal-dyadic-subcubes-of-a-cube-at-a-height` · lemma — Maximal dyadic subcubes of a cube at a height
+- `lem-a-p-distribution-decay-from-maximal-cubes` · lemma — Distribution decay from maximal cubes for A_p weights
+- `thm-reverse-holder-self-improvement-for-a-p-weights` · theorem — Reverse Holder self-improvement for A_p weights
+- `cor-a-p-classes-are-open-in-the-exponent` · corollary — The A_p classes are open in the exponent
+- `def-muckenhoupt-a-infinity-class` · definition — The Muckenhoupt A_infinity class
+- `lem-weighted-maximal-weak-bound-for-a-one` · lemma — Weighted weak (1,1) bound for the maximal function under A_1
+- `def-weighted-maximal-function-relative-to-a-doubling-weight` · definition — The weighted maximal function of a doubling weight
+- `lem-weighted-maximal-function-is-weak-type-one-one` · lemma — The weighted maximal function of a doubling weight is weak (1,1)
+- `thm-hardy-littlewood-maximal-operator-characterises-a-p` · theorem — The Hardy-Littlewood maximal operator characterises A_p
+- `lem-a-infinity-weights-satisfy-power-decay` · lemma — A_infinity weights satisfy power decay
+- `lem-power-decay-weights-are-doubling` · lemma — Power decay implies doubling
+- `lem-differentiation-of-l-one-functions-for-a-doubling-weight` · lemma — Differentiation of L-one functions for a doubling weight
+- `lem-reverse-holder-from-a-distribution-estimate` · lemma — Reverse Holder from a distribution estimate for a doubling weight
+- `lem-power-decay-implies-a-p-membership` · lemma — Power decay implies membership in some A_p
+- `thm-a-infinity-power-decay-characterisation` · theorem — The A_infinity power-decay characterisation
+- `lem-maximal-dyadic-cubes-covering-a-proper-open-set` · lemma — Maximal dyadic cubes covering a proper open set
+- `lem-annulus-far-field-estimates-for-the-maximal-function` · lemma — Dyadic annulus far-field estimates for the maximal function
+- `lem-kernel-tail-integrals-of-weighted-l-p-functions-are-finite` · lemma — Kernel tail integrals of weighted L-p functions are finite
+- `lem-unweighted-good-lambda-local-estimate-for-maximal-truncations` · lemma — Unweighted local good-lambda estimate for maximal truncations
+- `lem-weighted-good-lambda-inequality-for-maximal-truncations` · lemma — Weighted good-lambda inequality for maximal truncations
+- `thm-calderon-zygmund-operators-are-bounded-on-weighted-lp` · theorem — Weighted L-p bounds for standard Calderon-Zygmund maximal truncations
+- `cor-hilbert-and-riesz-transforms-are-bounded-on-weighted-lp` · corollary — Hilbert and Riesz transforms are bounded on weighted L-p
+- `rem-weighted-endpoints-are-not-obtained-by-setting-p-equal-one` · remark — Weighted endpoints are not obtained by setting p equal to one
+
+### `muckenhoupt-weights-and-weighted-estimates-examples` — Muckenhoupt Weights and Weighted Estimates — Examples (5 item(s))
+
+- `ex-power-weight-a-p-range` · example — The A_p range of a power weight
+- `cex-power-weight-fails-at-both-a-p-endpoints` · counterexample — A power weight fails at both A_p endpoints
+- `ex-a-one-power-weight-range` · example — The A_1 range of a power weight
+- `rem-a-doubling-weight-need-not-be-a-p` · remark — A doubling weight need not lie in A_p
+- `ex-weighted-norm-of-an-interval-indicator` · example — Weighted norm of an interval indicator
+
+### `analytic-semigroups-and-linear-evolution-equations` — Analytic Semigroups and Linear Evolution Equations (27 item(s))
+
+- `lem-resolvent-identity-and-holomorphy-for-closed-operators` · lemma — Resolvent identity and holomorphy for a closed operator
+- `lem-banach-valued-cauchy-theorem-on-star-shaped-domains` · lemma — Primitive and Cauchy theorem for Banach-valued holomorphic maps on star-shaped domains
+- `thm-cauchy-integral-formula-and-cauchy-estimates-for-banach-valued-holomorphic-functions` · theorem — Cauchy integral formula and Cauchy estimates for Banach-valued holomorphic functions
+- `lem-power-series-coefficients-are-determined-by-real-values` · lemma — Banach-valued power series are determined by their real values
+- `lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves` · lemma — Taylor expansion with integral remainder for Banach-valued curves
+- `lem-generator-of-the-contour-semigroup-is-the-sectorial-operator` · lemma — The generator of the contour semigroup is the sectorial operator
+- `def-complex-sector-and-bounded-analytic-semigroup` · definition — Complex sector and bounded analytic semigroup
+- `def-sectorial-operator-with-the-semigroup-sign-convention` · definition — Sectorial operator with the semigroup sign convention
+- `lem-contour-definition-of-an-analytic-semigroup` · lemma — The Dunford contour integral defines a bounded holomorphic family on the sector
+- `lem-dunford-contour-construction-satisfies-the-semigroup-law` · lemma — The Dunford contour construction satisfies the semigroup law and strong continuity at the vertex
+- `lem-cauchy-estimates-for-an-analytic-semigroup-give-generator-power-bounds` · lemma — Cauchy estimates for an analytic semigroup give generator power bounds
+- `thm-analytic-semigroup-smoothing-estimates` · theorem — Smoothing estimates for the semigroup generated by a sectorial operator
+- `cor-analytic-semigroups-are-operator-norm-differentiable-away-from-zero` · corollary — Analytic semigroups are operator-norm differentiable away from zero
+- `thm-sectorial-resolvent-characterisation-of-bounded-analytic-semigroups` · theorem — Sectorial resolvent characterisation of bounded analytic semigroups
+- `thm-self-adjoint-nonpositive-operators-generate-bounded-analytic-semigroups` · theorem — Self-adjoint nonpositive operators generate bounded analytic semigroups
+- `cor-spectral-gap-gives-exponential-decay-of-a-self-adjoint-parabolic-semigroup` · corollary — Quadratic spectral bounds control a self-adjoint parabolic semigroup
+- `cor-dirichlet-laplacian-generates-an-analytic-heat-semigroup` · corollary — The Dirichlet Laplacian generates an analytic heat semigroup
+- `def-closed-sectorial-form-and-its-associated-operator` · definition — Closed sectorial form and its associated operator
+- `lem-sectorial-form-angle-controls-the-numerical-range-of-its-operator` · lemma — The sectorial form angle controls the numerical range of its operator
+- `lem-coercive-sectorial-form-resolvents-define-a-closed-m-sectorial-operator` · lemma — Coercive sectorial forms define closed densely defined sectorial operators
+- `thm-form-generated-sectorial-elliptic-semigroups` · theorem — Form-generated sectorial elliptic semigroups
+- `lem-analytic-duhamel-cancellation-removes-the-generator-singularity` · lemma — Analytic Duhamel cancellation removes the generator singularity
+- `lem-classical-parabolic-solution-at-time-zero-needs-the-compatibility-ax-plus-f-zero` · lemma — Compatibility at time zero for a classical parabolic solution
+- `thm-classical-regularity-for-holder-continuous-forcing-under-compatibility` · theorem — Classical regularity for Holder-continuous forcing under initial compatibility
+- `cor-abstract-parabolic-smoothing` · corollary — Abstract parabolic smoothing for mild solutions
+- `rem-abstract-generator-domain-smoothing-becomes-spatial-regularity-only-after-domain-identification` · remark — Abstract generator-domain smoothing becomes spatial regularity only after domain identification
+- `rem-real-banach-spaces-require-complexification-for-analyticity` · remark — Real Banach spaces require complexification for analyticity
+
+### `analytic-semigroups-and-linear-evolution-equations-examples` — Analytic Semigroups and Linear Evolution Equations — Examples (9 item(s))
+
+- `ex-analytic-semigroup-generated-by-a-bounded-operator` · example — The analytic semigroup generated by a bounded operator
+- `ex-analytic-dirichlet-heat-semigroup` · example — The analytic Dirichlet heat semigroup
+- `ex-sectorial-multiplication-operator` · example — The sectorial multiplication operator
+- `cex-the-translation-semigroup-is-not-analytic` · counterexample — The translation semigroup is not analytic
+- `cex-an-analytic-semigroup-need-not-be-norm-continuous-at-zero` · counterexample — An analytic semigroup need not be norm continuous at zero
+- `cex-sector-angle-changes-under-the-sign-convention` · counterexample — The sector changes under the sign convention
+- `ex-sectorial-nonselfadjoint-multiplication-generator` · example — A sectorial nonselfadjoint multiplication generator
+- `cex-a-time-discontinuous-forcing-can-block-classical-regularity-at-its-jump` · counterexample — A time-discontinuous forcing blocks classical regularity at its jump
+- `ex-abstract-smoothing-does-not-imply-a-spatial-derivative-without-a-pde-realisation` · example — Abstract smoothing does not imply a spatial derivative without a PDE realisation
+
+### `lie-algebra-cohomology-and-kostants-nilradical-theorem` — Lie Algebra Cohomology and Kostants Nilradical Theorem (13 item(s))
+
+- `prop-lie-algebra-cohomology-is-derived-invariants` · proposition — Chevalley–Eilenberg cohomology computes Ext of the trivial module
+- `prop-h-zero-is-the-invariant-subspace` · proposition — Degree-zero Lie algebra cohomology is the invariant subspace
+- `prop-a-normalizer-acts-on-lie-algebra-cohomology` · proposition — The normalizer acts on Lie algebra cohomology
+- `lem-central-actions-on-nilradical-cohomology-factor-through-harish-chandra` · lemma — Central actions on nilradical cohomology factor through the Harish–Chandra projection
+- `thm-casselman-osborne-nilradical-cohomology-constraint` · theorem — The Casselman–Osborne constraint on weights of nilradical cohomology
+- `def-inversion-set-of-a-weyl-group-element` · definition — The inversion set of a Weyl group element
+- `lem-extremal-weight-cochain-for-a-weyl-element-is-closed` · lemma — The extremal weight cochain of a Weyl element is closed and unique
+- `lem-kostant-laplacian-is-scalar-on-weight-components` · lemma — The Chevalley–Eilenberg Laplacian is scalar on weight components
+- `lem-each-kostant-extremal-harmonic-space-is-one-dimensional` · lemma — Each extremal harmonic space is one-dimensional
+- `thm-kostant-nilradical-cohomology-theorem` · theorem — Kostant's nilradical cohomology theorem
+- `cor-kostant-cohomology-in-degrees-zero-and-top` · corollary — Kostant cohomology in degrees zero and top
+- `cor-kostant-euler-character-recovers-the-weyl-numerator` · corollary — The Kostant Euler character recovers the Weyl numerator
+- `prop-kostant-n-cohomology-and-the-bgg-resolution-give-the-same-euler-class` · proposition — Kostant cohomology and BGG characters give the same Weyl numerator
+
+### `lie-algebra-cohomology-and-kostants-nilradical-theorem-examples` — Lie Algebra Cohomology and Kostants Nilradical Theorem — Examples (5 item(s))
+
+- `ex-kostant-n-cohomology-for-sl2` · example — Kostant cohomology for sl2
+- `ex-kostant-n-cohomology-for-the-trivial-sl3-module` · example — Kostant cohomology for the trivial sl3 module
+- `ex-degree-one-kostant-classes-correspond-to-simple-reflections` · example — Degree-one Kostant classes correspond to simple reflections
+- `cex-whitehead-vanishing-does-not-apply-to-the-nilpotent-radical` · counterexample — Whitehead vanishing does not apply to the nilpotent radical
+- `cex-omitting-the-exterior-root-weight-shifts-gives-the-wrong-dot-weight` · counterexample — Omitting the exterior root-weight shifts gives the wrong dot weight
+
+## Your seams
+
+Your pages depend on another group's:
+
+- `analytic-semigroups-and-linear-evolution-equations` requires `strongly-continuous-semigroups-and-hille-yosida` (group j, batch 17)
+
+Both directions are yours to check for citation fidelity: the citing text must
+state the cited proposition, not a summary of what it is for, and must not have
+changed a domain, quantifier, hypothesis, direction or conclusion.
+
+## Step-6 reader warnings
+
+None. No Step-6 reader warning targets an item you own.
+
+## Your rejections
+
+**None open at render time.** That is a real outcome, not an error: Sol
+may have passed every item you own. Verify it against
+`research/frontier-39-analysis-30-judge.jsonl` yourself before reporting nothing to do —
+a rejection recorded after this file was rendered is still yours.
+
+---
+
+# Step 7 batch adjudication, `frontier-39-analysis-30`
+
+- Follow `briefs/step7-adjudicator.md` and the engine-generated, round-bound task. It supplies the batch, exact rejections, ownership, evidence paths, and structured result schema. Do not reconstruct them from an old group task.
+- Make repairs mathematically sound and cite dependencies accurately. State important caveats when appropriate; write concisely without compromising correctness or completeness; do not repeat arguments or add unnecessary filler.
+- Decide by logical validity and repair every confirmed defect, including nonfatal defects. Identify relevant downstream consumers, including published items; escalate uncertainty and potentially defective published consumers to the owner.
+- The engine routes downstream repairs to three Sol 6.1 high owners and certifies once all writers drain. Sol rejudgment and adjudication/repair/certification repeat under `WORKFLOW.md`; new downstream work continues in the repair phase until complete. Fatal classification controls only the threshold.
+- Historical terminal receipts cannot close current rounds.
+- You may create and fully author new items only to meet genuine unsatisfied prerequisites of assigned repairs. Follow the dedicated briefs for evidence, unique IDs, registry/index and metadata inclusion, downstream repair closure, central certification, and gates. The frozen original scope never grows.
