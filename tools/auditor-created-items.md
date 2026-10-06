@@ -204,8 +204,8 @@ old manifest projection. Existing definition receipts keep their distinct basis.
 
 ## Current proof and manifest review with an unknown historical projection
 
-For a genuinely Step-3-created proof item whose Step-5 item and manifest both
-changed, `current-proof-manifest-review` supports an explicit owner review when
+For a genuinely Step-3-created proof item whose Step-5 manifest changed,
+`current-proof-manifest-review` supports an explicit owner review when
 the original manifest projection is unavailable. It is available to lemmas,
 theorems, propositions and corollaries with a current supplied proof. Definitions
 retain the separate `current-definition-manifest-review` branch. This is neither
@@ -261,3 +261,16 @@ reason, then the ordinary whole-stage `certify`. The resulting receipt retains
 Missing origins, changed baseline/home, incomplete current hashes, altered
 source/check receipts, omitted suppliers/consumers or changed mathematical
 context fail closed. Existing native write-window routes remain unchanged.
+
+When the actual item bytes are unchanged from the immutable Step-5 baseline,
+this same explicit full-review branch can cover a changed manifest (and any
+current contract maintenance). Set `current_item_unchanged: true` in the evidence.
+The tool verifies exact baseline/current raw item equality and records that
+same truthful flag in the owner receipt. A real manifest delta, genuine original
+Step-3 provenance, unchanged baseline home, completed native Step-5 context,
+all six current hashes, full proof/supplier/consumer review and actual focused
+checks remain mandatory. Historical manifest differences stay unknown; this
+neither labels them metadata-only nor attributes a current item write to a
+native worker. No artificial source edit is required. A no-delta subject cannot
+enter this branch, and ordinary contract-only, known source-reference delta,
+existing definition/special proof branches and Step-7 rules remain unchanged.

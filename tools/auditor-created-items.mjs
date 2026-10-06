@@ -336,6 +336,8 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
         'initial-step5-current-graph-lemma-manifest-review',
         'initial-step5-current-proof-manifest-review'].includes(receipt.basis)
       && receipt.historical_delta_unknown !== true)
+    || (receipt.basis === 'initial-step5-current-proof-manifest-review'
+      && receipt.current_item_unchanged !== (step5Bootstrap?.current_item_unchanged ? true : undefined))
     || !String(receipt.reason ?? '').trim() || !Number.isFinite(Date.parse(receipt.at))
     || !evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
     || sha(evidenceText) !== receipt.evidence_sha256
@@ -413,8 +415,10 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
     && before.contract_sha256 !== hashes.contract_sha256;
   const itemRepair = before.judge_sha256 !== hashes.judge_sha256
     && before.manifest_sha256 === hashes.manifest_sha256;
-  const manifestRepair = before.judge_sha256 !== hashes.judge_sha256
-    && before.manifest_sha256 !== hashes.manifest_sha256
+  const unchangedProofReview = before.item_file_sha256 === hashes.item_file_sha256
+    && step5ManifestRepairEvidence(evidenceText)?.repair_kind === 'current-proof-manifest-review';
+  const manifestRepair = before.manifest_sha256 !== hashes.manifest_sha256
+    && (before.judge_sha256 !== hashes.judge_sha256 || unchangedProofReview)
     ? step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
       { closedGraphOrigin }) : null;
   if (!contractOnly && !itemRepair && !manifestRepair) return null;
@@ -438,7 +442,9 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
   const author = eligible.find(candidate => candidate.result_file === preferred)
     ?? eligible.at(-1);
   return author ? { ...author, basis: manifestRepair ?? (itemRepair
-    ? 'initial-step5-item-repair' : 'initial-step5-contract-only') } : null;
+    ? 'initial-step5-item-repair' : 'initial-step5-contract-only'),
+    ...(unchangedProofReview && manifestRepair === 'initial-step5-current-proof-manifest-review'
+      ? { current_item_unchanged: true } : {}) } : null;
 }
 
 function step5EvidenceBindsCurrentCarriers(text, run, id, hashes) {
@@ -588,7 +594,9 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         ...(Array.isArray(fm.justified_by) ? fm.justified_by : [])])].sort();
       const contextIds = [...new Set([...suppliers, ...directConsumers])].sort();
       const context = evidence.review.context_items;
-      if (evidence.owner_authorization.owner_identity !== '/root'
+      if ((before.item_file_sha256 === hashes.item_file_sha256
+          ? evidence.current_item_unchanged !== true : evidence.current_item_unchanged === true)
+        || evidence.owner_authorization.owner_identity !== '/root'
         || CARRIER_KEYS.some(key => evidence.current_carriers?.[key] !== hashes[key])
         || evidence.review.current_proof_checked !== true || evidence.review.current_suppliers_checked !== true
         || evidence.review.current_direct_consumers_checked !== true
@@ -735,6 +743,7 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     evidence_sha256: sha(readFileSync(evidencePath, 'utf8')),
     ...(creation ? { owner_creation: creation.marker } : { author_result: authorResult }),
     ...(bootstrap ? { basis: bootstrap.basis,
+      ...(bootstrap.current_item_unchanged ? { current_item_unchanged: true } : {}),
       ...(['initial-step5-current-definition-manifest-review',
         'initial-step5-current-ball-lemma-manifest-review',
         'initial-step5-current-graph-lemma-manifest-review',

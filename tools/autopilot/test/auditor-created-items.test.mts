@@ -1749,3 +1749,51 @@ test('generic current proof review rejects absent authority/provenance, wrong ho
     assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'Insufficient evidence cannot create a bootstrap'));
   }
 });
+
+function unchangedProofManifestFixture(t: any) {
+  const f = currentProofManifestReviewFixture(t);
+  const path = join(f.root, 'research/r-step5-auditor-baseline.json');
+  const baseline = JSON.parse(readFileSync(path, 'utf8'));
+  // This fixture's Step5 boundary already contains the exact current item;
+  // only its manifest/contract projection changes after that boundary.
+  for (const key of ['guard_sha256', 'judge_sha256', 'item_file_sha256'])
+    baseline.item_carriers[f.id][key] = f.payload.current_carriers[key];
+  baseline.item_carriers[f.id].step5_subject_sha256 = hashValue({ item_sha256: baseline.item_carriers[f.id].item_file_sha256,
+    manifest_sha256: baseline.item_carriers[f.id].manifest_sha256, contract_sha256: baseline.item_carriers[f.id].contract_sha256 });
+  writeFileSync(path, JSON.stringify(baseline));
+  f.payload.current_item_unchanged = true; f.write();
+  return f;
+}
+
+test('explicit full owner proof review can certify changed manifest carriers without an artificial source edit', t => {
+  const f = unchangedProofManifestFixture(t), before = readFileSync(f.itemPath);
+  const result = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'Owner reviewed exact unchanged item and current manifest maintenance');
+  const receipt = JSON.parse(readFileSync(result.path, 'utf8'));
+  assert.equal(receipt.basis, 'initial-step5-current-proof-manifest-review');
+  assert.equal(receipt.current_item_unchanged, true);
+  assert.equal(receipt.historical_delta_unknown, true);
+  assert.equal(certifyAuditorCreatedItems(f.root, 'r', 5).items[0].origin_step, 3);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')).length, 1);
+  assert.deepEqual(readFileSync(f.itemPath), before);
+  receipt.current_item_unchanged = false; writeFileSync(result.path, JSON.stringify(receipt));
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')), /invalid owner recertification/);
+});
+
+test('unchanged-item manifest review refuses absent delta, authority, origin, source/check hashes and context', t => {
+  for (const mutate of [
+    (f: any) => { delete f.payload.current_item_unchanged; },
+    (f: any) => { f.payload.owner_authorization.owner = false; },
+    (f: any) => { f.payload.current_manifest_entry.kind = 'definition'; },
+    (f: any) => { f.payload.current_carriers.item_file_sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.review.current_proof_checked = false; },
+    (f: any) => { f.payload.review.context_items.pop(); },
+    (f: any) => { f.payload.sources[0].sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.proof_checks.precheck.sha256 = '0'.repeat(64); },
+    (f: any) => { rmSync(join(f.root, 'research/r-step3-auditor-certifications.json')); },
+    (f: any) => { rmSync(join(f.root, 'research/r-dispatch/alpha-5a-a.result.json')); },
+    (f: any) => { const p = join(f.root, 'research/r-step5-auditor-baseline.json'); const b = JSON.parse(readFileSync(p, 'utf8')); b.item_carriers[f.id] = { page: 'page-a', batch: '1', ...f.payload.current_carriers }; writeFileSync(p, JSON.stringify(b)); f.payload.baseline_manifest_sha256 = f.payload.current_manifest_sha256; },
+  ]) {
+    const f = unchangedProofManifestFixture(t); mutate(f); f.write();
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'An unchanged item needs exact full evidence and a real carrier delta'));
+  }
+});
