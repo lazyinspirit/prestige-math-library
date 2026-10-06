@@ -13,6 +13,8 @@ import { pathToFileURL } from 'node:url';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
 import { split, yaml } from './pathway-lib.mjs';
 import { historicalStep3OwnerReceipt } from './step3-owner-history.mjs';
+import { archivedProofContext, recordOwnerContextArchive } from './step5-owner-context-history.mjs';
+export { recordOwnerContextArchive } from './step5-owner-context-history.mjs';
 
 const safe = (value, what = 'value') => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error(`Invalid ${what}`);
@@ -310,7 +312,9 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
     ? readFileSync(evidencePath, 'utf8') : '';
   const liveRow = step === 5 ? inventory(root, run).find(row => row.id === id) : null;
   const step5Bootstrap = step === 5 && receipt.basis !== undefined && liveRow
-    ? bootstrapStep5Author(root, run, id, liveRow, hashes, evidenceText)
+    ? bootstrapStep5Author(root, run, id, liveRow, hashes, evidenceText, historical
+      ? { historicalContext: { marker: { path: `research/${path.split('/').at(-1)}`, sha256: sha(bytes) },
+        evidence_sha256: receipt.evidence_sha256 } } : {})
       ?? (historical ? closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText) : null)
     : null;
   if (receipt.version !== 1 || receipt.policy !== OWNER_RECERTIFICATION_POLICY
@@ -392,7 +396,7 @@ function bootstrapStep7Author(root, run, id, row, hashes) {
 // hash-bound owner receipt, not that result, attests either late repair.
 const step5BootstrapContext = new Map();
 function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
-  { closedGraphOrigin = false } = {}) {
+  { closedGraphOrigin = false, historicalContext = null } = {}) {
   const key = `${root}\0${run}`;
   if (!step5BootstrapContext.has(key)) {
     step5BootstrapContext.set(key, {
@@ -420,7 +424,7 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
   const manifestRepair = before.manifest_sha256 !== hashes.manifest_sha256
     && (before.judge_sha256 !== hashes.judge_sha256 || unchangedProofReview)
     ? step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
-      { closedGraphOrigin }) : null;
+      { closedGraphOrigin, historicalContext }) : null;
   if (!contractOnly && !itemRepair && !manifestRepair) return null;
   const baselineAt = Date.parse(baseline.at);
   const eligible = context.authors.filter(author => {
@@ -516,7 +520,7 @@ function dependencyMetadataMirrorsItem(root, id, currentEntry) {
 // it preserves the unknown historical delta and binds the current projection,
 // actual source evidence and direct consumers without inventing a preimage.
 function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
-  { closedGraphOrigin = false } = {}) {
+  { closedGraphOrigin = false, historicalContext = null } = {}) {
   const evidence = step5ManifestRepairEvidence(evidenceText);
   if (!evidence || evidence.version !== 1 || evidence.policy !== 'step5-manifest-repair-evidence-v1'
     || evidence.run !== run || evidence.step !== 5 || evidence.id !== id
@@ -605,7 +609,9 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         || ['title', 'proved_here'].some(key => currentEntry[key] !== undefined && currentEntry[key] !== fm[key])
         || !Array.isArray(context) || !sameCanonical(context.map(row => row.id), contextIds)
         || context.some(row => !/^[a-f0-9]{64}$/.test(row.guard_sha256 ?? '')
-          || row.guard_sha256 !== itemHashGuard(readFileSync(join(root, 'items', `${safe(row.id)}.md`), 'utf8')))) return null;
+          || (row.guard_sha256 !== itemHashGuard(readFileSync(join(root, 'items', `${safe(row.id)}.md`), 'utf8'))
+            && !(historicalContext && archivedProofContext(root, run, id, historicalContext.marker,
+              historicalContext.evidence_sha256, row))))) return null;
     }
     const texts = [];
     for (const source of evidence.sources) {
@@ -1160,7 +1166,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const args = process.argv.slice(2), command = args[0];
     const value = flag => { const at = args.indexOf(flag); return at < 0 ? undefined : args[at + 1]; };
     const run = value('--run'), step = Number(value('--step'));
-    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-source-archive --run RUN --step 5 --id ITEM --source research/FILE --owner-identity OWNER --reason TEXT; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT';
+    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-context-archive --run RUN --step 5 --id ITEM --certification research/JSON --context-id CONTEXT --source research/FILE --owner-identity /root --reason TEXT; owner-source-archive --run RUN --step 5 --id ITEM --source research/FILE --owner-identity OWNER --reason TEXT; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT';
     if (!run || ![5, 7, 8].includes(step)) throw Error(usage);
     const result = command === 'baseline'
       ? writeAuditorCreatedBaseline(process.cwd(), run, step)
@@ -1169,11 +1175,14 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
           ? recordOwnerCreation(process.cwd(), run, step, value('--id'), value('--evidence'))
         : command === 'owner-source-archive'
           ? recordOwnerSourceArchive(process.cwd(), run, step, value('--id'), value('--source'), value('--owner-identity'), value('--reason'))
+        : command === 'owner-context-archive'
+          ? recordOwnerContextArchive(process.cwd(), run, step, value('--id'), value('--certification'), value('--context-id'), value('--source'), value('--owner-identity'), value('--reason'))
         : command === 'owner-recertify'
           ? recordOwnerRecertification(process.cwd(), run, step, value('--id'), value('--evidence'), value('--reason'))
           : null;
     if (!result) throw Error(usage);
-    if (command === 'owner-source-archive') console.log(`step5-owner-source-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+    if (command === 'owner-context-archive') console.log(`step5-owner-context-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+    else if (command === 'owner-source-archive') console.log(`step5-owner-source-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
     else if (['owner-recertify', 'owner-create'].includes(command)) console.log(`step${step}-${command === 'owner-create' ? 'owner-creation' : 'owner-recertification'}: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
     else console.log(`step${step}-auditor-${command === 'baseline' ? 'baseline' : 'certifications'}: ${result.items.length ?? result.items} item(s) ${result.reused ? 'reused' : command === 'baseline' ? 'recorded' : 'certified'}`);
   } catch (error) {

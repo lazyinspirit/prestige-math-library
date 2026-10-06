@@ -274,3 +274,35 @@ neither labels them metadata-only nor attributes a current item write to a
 native worker. No artificial source edit is required. A no-delta subject cannot
 enter this branch, and ordinary contract-only, known source-reference delta,
 existing definition/special proof branches and Step-7 rules remain unchanged.
+
+## Historical proof-context archives
+
+A generic Step-5 current-proof recertification binds the guard hashes of its
+suppliers and direct consumers. A later legitimate edit to those context items
+must not erase the original proof review. Root may preserve retained actual
+before-file bytes using an immutable sidecar:
+
+```sh
+node tools/auditor-created-items.mjs owner-context-archive --run RUN --step 5 --id SUBJECT --certification research/RUN-step5-auditor-certifications.json --context-id CONTEXT --source research/ACTUAL-BEFORE.md --owner-identity /root --reason "Actual reason for preserving the originally reviewed context"
+```
+
+Registration requires an existing generic proof-review owner receipt bound by
+the actual certification row, its unchanged hash-bound evidence, and exactly one
+context guard for `CONTEXT` in that evidence. Retained raw bytes must have that
+item ID and guard. The command copies those bytes and the exact certification
+bytes into read-only, exclusively created `research/` archives and records a
+read-only sidecar binding run, subject, original receipt/evidence hashes,
+certification hash, context ID/guard and archived raw hash. It never rewrites the
+original certification, receipt, evidence, item or baseline. The sidecar's time
+is the present archival observation, not the historical edit or review time.
+Different existing archive bytes, outside paths, missing original links and
+any tampered binding fail closed.
+
+Only historical owner-receipt validation may use this sidecar when a live
+context guard differs. Every other original provenance, home, carrier,
+source and check requirement remains active. Ordinary current recertification
+still requires live context guards and cannot use an old context archive as
+current proof acceptance. After an actual new review, root records fresh
+current evidence and recertifies changed carriers normally. This mechanism
+preserves historical context; it creates no native result, mathematical
+judgment, creation origin or gate waiver.
