@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "run": "frontier-39-analysis-30",
+  "status": "applied_controller_stopped",
+  "prepared_at": "2026-10-06T01:21:29.147144+00:00",
+  "cause": "Native Sol61 reader and judge calls failed with provider HTTP 429 after exhausting provider retries. The engine events also record tool/judge-sweep attempts 2 and 3 exiting 3 for provider usage/rate limits.",
+  "diagnostic_evidence": [
+    {
+      "path": "research/frontier-39-analysis-30-dispatch/alpha-group-read-f.attempt-2.log",
+      "sha256": "a8a63b7d79e695ae84ccd32ed37884ac061ab0be0d067889e940127b1b538524",
+      "terminal_error": "exceeded retry limit, last status: 429 Too Many Requests",
+      "request_id": "9273587a-61cf-4fbb-8f11-b786283fb5c6"
+    },
+    {
+      "path": "research/frontier-39-analysis-30-dispatch/alpha-group-read-h.attempt-2.log",
+      "sha256": "2b02b6ef54d5ab82edb96f8dc2a7ff7e2c001fc7b59ff322a68bd65b3c6ef037",
+      "terminal_error": "exceeded retry limit, last status: 429 Too Many Requests",
+      "request_id": "803d5fda-e37f-4fe6-bbbc-d0b08d7bf149"
+    }
+  ],
+  "event_evidence": {
+    "path": ".autopilot/frontier-39-analysis-30/events.jsonl",
+    "entries_at": [
+      "2026-10-06T01:17:31.153Z",
+      "2026-10-06T01:19:58.767Z"
+    ]
+  },
+  "current_stage": "6-judge",
+  "preparation_observation": {
+    "ledger_path": "research/frontier-39-analysis-30-judge.jsonl",
+    "raw_rows": 186,
+    "notes": "Raw append-only rows observed during active execution; this count is not a judgment-currency or mathematical acceptance check."
+  },
+  "proposed_configuration": {
+    "stage_dispatch_concurrency": 3,
+    "native_judge_environment": {
+      "JUDGE_CONCURRENCY_GPT_6_1_SOL": "3"
+    },
+    "run_local_stages": "tools/autopilot/stages/frontier-39-step6-recovery.mts",
+    "run_local_config": ".autopilot/frontier-39-analysis-30/config.json"
+  },
+  "preservation": {
+    "units": [
+      "sweep",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j"
+    ],
+    "judge_lineup": "sol61",
+    "judge_effort": "high",
+    "reader_profile": "gpt-6.1-sol-high",
+    "stage_fields": "Spread the existing 6-judge stage unchanged except concurrency and the judge-sweep argv environment prefix; reuse all other stage objects. Existing retry limits, gates, completion requirements and receipt patterns remain native.",
+    "judgment_currency": "tools/judge-sweep.mjs reuses existing Boolean verdicts whose item and context hashes are current, including the prior successful rows and new successful rows. No judgment, receipt, state or content edits are part of this proposal."
+  },
+  "tradeoff": "Judge pool ceiling drops from 27 to 3; dispatch ceiling drops from 11 to 3. With a sweep occupying one dispatch, this run may run up to 3 item calls plus 2 readers. Without a sweep it may run up to 3 readers. Throughput is lower; provider pressure is lower. Other live runs retain their settings and may still contribute provider load.",
+  "activation_requirement": "Root confirms all run39 workers have drained and controller is stopped before installing the module and selecting it in run-local config. Root owns bounded native retry/start/resume controls.",
+  "retry_policy": "One recovery action using existing native bounded attempt policy; do not create a repeated owner rearm loop. If the capped native recovery exhausts with the same provider error, retain the outage as an owner-held runtime blocker.",
+  "validation": "Read-only inspection of instructions, stage/config loader, native currency and bounded retry paths, and actual failed logs. No tests or mathematical reviews were run.",
+  "applied_at": "2026-10-06T01:32:17.161105+00:00",
+  "drained_reader_groups": 9
+}
