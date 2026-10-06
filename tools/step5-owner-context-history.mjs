@@ -28,7 +28,15 @@ function payload(text) {
   return JSON.parse(block[1]);
 }
 function stem(run, id, marker, context) {
-  return `${safe(run)}-step5-owner-context-archive-${safe(id)}-${marker.sha256}-${safe(context.id)}`;
+  const legacy = `${safe(run)}-step5-owner-context-archive-${safe(id)}-${marker.sha256}-${safe(context.id)}`;
+  // Keep existing archives addressable. Long item pairs otherwise exceed the
+  // filesystem's 255-byte basename limit for the longest sidecar suffix.
+  if (Buffer.byteLength(`${legacy}.certification.json`) <= 255) return legacy;
+  const identity = { run, id, owner_recertification_sha256: marker.sha256, context_id: context.id };
+  const compact = `${run}-step5-owner-context-archive-${sha(JSON.stringify(identity))}`;
+  if (Buffer.byteLength(`${compact}.certification.json`) > 255)
+    throw Error('Run identifier is too long for an owned historical context archive');
+  return compact;
 }
 function original(root, run, id, marker, certificationLink) {
   const receipt = JSON.parse(bound(root, marker));

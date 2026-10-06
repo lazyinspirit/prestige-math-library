@@ -1670,9 +1670,9 @@ test('pre-certificate owner recertification rejects missing origin, source tampe
   }
 });
 
-function currentProofManifestReviewFixture(t: any) {
+function currentProofManifestReviewFixture(t: any, { consumerId = 'lem-proof-consumer' } = {}) {
   const f = currentDefinitionReviewFixture(t, { proofReview: true });
-  const supplier = 'lem-proof-supplier', consumer = 'lem-proof-consumer';
+  const supplier = 'lem-proof-supplier', consumer = consumerId;
   writeFileSync(join(f.root, `items/${supplier}.md`), item(supplier));
   writeFileSync(join(f.root, `items/${consumer}.md`), item(consumer).replace('justified_by: []', `justified_by: [${f.id}]`).replace('Immediate.', `Uses [[${f.id}|the exact supplier]].`));
   writeFileSync(f.itemPath, readFileSync(f.itemPath, 'utf8').replace('deps: []', `deps: [${supplier}]`));
@@ -1800,13 +1800,13 @@ test('unchanged-item manifest review refuses absent delta, authority, origin, so
 });
 
 
-function historicalProofContextFixture(t: any) {
-  const f = currentProofManifestReviewFixture(t);
+function historicalProofContextFixture(t: any, { contextId = 'lem-proof-consumer' } = {}) {
+  const f = currentProofManifestReviewFixture(t, { consumerId: contextId });
   recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
     'Root personally checked the original current proof context');
   certifyAuditorCreatedItems(f.root, 'r', 5);
   const certPath = 'research/r-step5-auditor-certifications.json';
-  const contextId = 'lem-proof-consumer', source = 'research/actual-before-consumer.md';
+  const source = 'research/actual-before-consumer.md';
   copyFileSync(join(f.root, `items/${contextId}.md`), join(f.root, source));
   writeFileSync(join(f.root, `items/${contextId}.md`),
     readFileSync(join(f.root, `items/${contextId}.md`), 'utf8') + '\nAn actual later consumer edit.\n');
@@ -1820,6 +1820,7 @@ test('exact historical context archive preserves old proof receipt, never curren
   assert.throws(() => loadAuditorCreatedCertifications(join(f.root, f.certPath)));
   const result = recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
     f.contextId, f.source, '/root', 'Preserve actual retained bytes of the originally reviewed consumer');
+  assert.match(result.path, /r-step5-owner-context-archive-lem-created-[a-f0-9]{64}-lem-proof-consumer\.json$/);
   assert.equal(result.reused, false);
   assert.equal(loadAuditorCreatedCertifications(join(f.root, f.certPath)).length, 1);
   assert.equal(readFileSync(join(f.root, f.certPath), 'utf8'), certBefore);
@@ -1828,6 +1829,29 @@ test('exact historical context archive preserves old proof receipt, never curren
     f.contextId, f.source, '/root', 'Same actual archive').reused, true);
   assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
     'Current acceptance must still reject obsolete context guards'));
+});
+
+test('long historical context identities fit NAME_MAX without weakening full identity or hash bindings', t => {
+  const f = historicalProofContextFixture(t, { contextId: `lem-proof-consumer-${'c'.repeat(160)}` });
+  const before = readFileSync(join(f.root, f.certPath));
+  const result = recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
+    f.contextId, f.source, '/root', 'Preserve exact original bytes with a long context ID');
+  const archive = JSON.parse(readFileSync(result.path, 'utf8'));
+  assert.match(result.path, /r-step5-owner-context-archive-[a-f0-9]{64}\.json$/);
+  for (const path of [result.path, archive.context.path, archive.certification.path])
+    assert.ok(Buffer.byteLength(path.split('/').at(-1)!) <= 255);
+  assert.equal(archive.id, f.id);
+  assert.equal(archive.context.id, f.contextId);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, f.certPath)).length, 1);
+  assert.deepEqual(readFileSync(join(f.root, f.certPath)), before);
+  assert.equal(recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
+    f.contextId, f.source, '/root', 'Reuse exact archive').reused, true);
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Historical archive cannot certify current changed context'));
+  chmodSync(result.path, 0o644);
+  archive.context.id = `${f.contextId}-wrong`;
+  writeFileSync(result.path, JSON.stringify(archive));
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root, f.certPath)), /Invalid historical context archive/);
 });
 
 test('historical context archive refuses false authority, wrong identity, guard and outside sources', t => {

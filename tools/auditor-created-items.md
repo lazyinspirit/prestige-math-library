@@ -298,6 +298,14 @@ is the present archival observation, not the historical edit or review time.
 Different existing archive bytes, outside paths, missing original links and
 any tampered binding fail closed.
 
+Existing archive filenames remain unchanged when their longest sidecar basename
+fits the filesystem's 255-byte limit. Longer subject/context combinations use a
+compact deterministic SHA256 stem derived from the full run, subject, original
+owner-receipt hash and context ID. The receipt retains every full identity and
+hash binding and full run prefix; shortening the filename changes no validation or
+archival authority. An oversized run identifier is refused rather than truncating
+the prefix used by scoped closeout ownership.
+
 Only historical owner-receipt validation may use this sidecar when a live
 context guard differs. Every other original provenance, home, carrier,
 source and check requirement remains active. Ordinary current recertification
