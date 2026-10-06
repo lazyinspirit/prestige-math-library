@@ -130,3 +130,29 @@ remain checked for every stage; current and future plans, units, schemas and
 runner probes retain normal checks. Missing, unreadable, mismatched or invalid
 state provides no completion exemption. Skipped or routed stages do not qualify
 as gate-passed completion for this preflight optimization.
+
+The Linux crash watchdog is explicitly scoped to one repository and existing
+run state directory. From that repository, launch one instance only:
+
+```sh
+nohup sh tools/autopilot/bin/watchdog.sh --repo "$PWD" --run RUN --state-dir .autopilot/RUN > .autopilot/RUN/watchdog.log 2>&1 &
+```
+
+All three scope arguments are mandatory; the named state directory must already
+contain that run's `state.json`. The watchdog reads `/proc` NUL-delimited argv
+and cwd, recognizes exact native controller/startup-preflight and run worker
+processes, and waits for live writers to drain before recovery. Scoped native
+worker descendants and persistent Codex session homes also prevent a duplicate
+dispatch. Unavailable process evidence fails closed. Other repositories and
+other frontier names cannot satisfy this run's controller liveness check.
+
+Recovery requires absence on two consecutive polls and a final immediate check,
+then invokes the supported `tools/tsx-run.mjs` entry with the explicit run and
+state directory. A started process remains tracked throughout startup doctor.
+The interval defaults to 60 seconds (`--interval` accepts 1–600); starts are
+bounded to five total (`--max-restarts` accepts 1–20). An unsuccessful started
+engine exit ends supervision for owner diagnosis rather than retrying a gate or
+preflight failure. A stop marker, pending native stop command, or engine-written
+completion ends supervision. The watchdog does not consume controls, clear
+blocks, issue retries, repair content, or decide any workflow transition. It
+logs only run identity and operational messages, never process argv or secrets.
