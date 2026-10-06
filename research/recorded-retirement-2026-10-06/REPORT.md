@@ -45,3 +45,7 @@ Proof-only supplier replacements preserve their original claims. Conditional Fou
 `content-policy` and `extcheck` reject active unproved markers, nonempty external-reference lists and external fallback records. `validate-plan` rejects new X/catalogue pages. Historical metadata remains readable in archives. Definitions, remarks and examples with unchanged kind and no phase proof in either carrier can record genuine one-file JSON precheck `not-applicable` results in existing-publication repair receipts; proof-bearing items still require an actual proof-format pass.
 
 See [retirement-validation.json](retirement-validation.json), [retirement-manifest.json](retirement-manifest.json), [integration.json](integration.json), and `checks/` for exact evidence.
+
+## Complete deletion requested 2026-10-07
+
+The owner subsequently requested deletion of all remaining item/page copies. `complete-deletion.json` records the removed published and draft carriers and archived copies. The original 222 retired carriers no longer have Markdown file copies in this tree; their original bytes remain in Git commit `d9f3395ff33ce4d93f5afb4e372303f6197586ff`. One additional published scope item whose ID retained the removed label was deleted from its page and plan. Stale plan statements and authoring fallback directions are reconciled to current locally supplied arguments. Earlier archive-preservation checks above describe the prior commit, not the current deletion state. Pre-edit carriers required by the 40 active published-repair receipts remain present.

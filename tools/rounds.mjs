@@ -69,9 +69,8 @@ function level(id) {
   // different claim and, for the legacy stubs, a false one.
   //
   // Measured 2026-08-06 on run `zfc`: `construction-of-the-natural-numbers` is a
-  // P stub, so it sat at level 0 — BELOW the ZFC axioms its own items depend on,
-  // and below the `not-proved-here` catalogue. Every page requiring it inherited
-  // that, which is why `order-zorn-and-the-axiom-of-choice` reported level 2,
+  // P stub, so it sat at level 0 — BELOW the ZFC axioms its own items depend on.
+  // Every page requiring it inherited that level, which is why `order-zorn-and-the-axiom-of-choice` reported level 2,
   // tied with the axioms page rather than above it. The level number therefore
   // contradicted the reading order it exists to explain.
   //
@@ -153,7 +152,7 @@ function pageState(p) {
 function pageFile(p) {
   const cats = p.category ? [p.category] : [];
   for (const c of [...cats, 'foundations', 'real-analysis', 'topology', 'abstract-algebra',
-                   'linear-algebra', 'number-theory', 'combinatorics', 'not-proved-here']) {
+                   'linear-algebra', 'number-theory', 'combinatorics']) {
     const f = join(repo, 'library', c, `${p.id}.md`);
     if (existsSync(f)) return f;
   }
@@ -176,8 +175,7 @@ function pageFile(p) {
 // category's root pairs. Cross-category dependency targets may share a wave —
 // the within-category bottom-up guarantee holds, the cross-category one does
 // not, and A6's cross-edge audit covers those edges. A BATCH is one category
-// inside a wave. The `not-proved-here` catalogue pages are excluded from scope
-// by owner instruction (they still take part in the home map). Manifests use
+// inside a wave. Manifests use
 // the same array-of-pages shape as the build's batch files, so content-policy,
 // audit-manifest, and level-coverage read them unchanged.
 //
@@ -313,7 +311,6 @@ if (has('--audit-batches')) {
   const pageEntry = (p, kind) => ({ id: p.id, kind, category: p.category, items: itemEntries([...p.items, ...p.examples]) });
   const batches = new Map(); // "wave<k>-<category>" -> pages[]
   for (const a of disk) {
-    if (a.category === 'not-proved-here') continue;      // owner exclusion
     if (a.id.endsWith(EX)) continue;                     // B pages ride with their A page
     const wave = depth.get(a.key);
     if (onlyWave !== null && Number(onlyWave) !== wave) continue;

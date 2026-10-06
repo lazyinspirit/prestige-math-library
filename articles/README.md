@@ -42,8 +42,8 @@ captions; the article text does the explaining.
    purposes is two articles.
 2. **Every mathematical claim links.** Narration and motivation may be prose; anything a
    skeptical reader could ask "says who?" about must be a wikilink into a published library
-   item, or an honest link to a recorded-not-proved (‡) remark. An article never asserts
-   mathematics the library has not checked.
+   item with a locally supplied argument or proved prerequisites. An article never
+   asserts mathematics the library has not checked.
 3. **Human voice.** No em dashes, no "not X, it's Y", no throat-clearing, no filler. British
    spelling. If a sentence can be deleted without losing a fact, delete it.
 4. **Owner audit gates publication**, exactly as for items: flip `status: published` and set

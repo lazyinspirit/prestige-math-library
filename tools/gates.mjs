@@ -101,7 +101,7 @@ const BASE = () => [
   g('precheck.mts', [], { mts: true, why: 'phase-proof format' }),
   g('depcheck.mjs', [], { why: 'ids, kinds, cycles, page/publish state' }),
   g('fwdcheck.mjs', [], { why: 'forward references' }),
-  g('extcheck.mjs', [], { why: 'the ‡ not-proved-here tier' }),
+  g('extcheck.mjs', [], { why: 'no active unproved records or external fallbacks' }),
   g('rendercheck.mjs', [], { why: 'defects visible only when rendered' }),
   g('prosecheck.mjs', [], { why: 'the prose defect class' }),
   g('citecheck.mjs', [], { required: false, why: 'mis-attribution heuristic (advisory)' }),

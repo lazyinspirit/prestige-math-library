@@ -59,7 +59,7 @@
   statement cannot be a `deps` target.
   Omit `generation` for other statement provenance.
 
-### Later material and retired external records
+### Later material
 
 - `forward_refs: [id, ...]` declares linked targets on strictly later planned
   pages. Do not repeat them in `deps` or `justified_by`. Only corollaries,
@@ -70,7 +70,7 @@
   `external_refs`, and `external_dependency` fallback records are forbidden in
   active `items/` content and new authoring manifests, including audit scope.
   A citation documents a source; it does not replace a proof. If a required
-  supplier cannot be proved, keep that branch blocked or archive its unsupported
+  supplier cannot be proved, keep that branch blocked or remove its unsupported
   content rather than creating an unproved fallback.
 - Historical archives and receipts retain their original metadata. The legacy
   `proved_here`, `external_refs`, and `external_dependency` fields remain
@@ -175,8 +175,7 @@
   each prerequisite in the same or an earlier part. Empty parts, missing pages
   or briefs, duplicate placements, orphan briefs, and out-of-order prerequisites
   are errors. Missing pathways, unplaced draft pages, singleton parts, and briefs
-  over 120 words warn. The legacy `not-proved-here` pathway exemption remains
-  readable for historical records; new unproved catalogue pages are forbidden.
+  over 120 words warn. Every active category follows these pathway rules.
 
 ## Checks
 

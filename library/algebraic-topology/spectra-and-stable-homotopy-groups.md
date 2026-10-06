@@ -18,7 +18,6 @@ items:
   - prop-the-sphere-prespectrum-homotopy-groups-are-the-stable-stems
   - def-pairing-and-unital-multiplication-of-sequential-prespectra
   - prop-a-ring-prespectrum-gives-a-graded-product-on-stable-homotopy-groups
-  - rem-positive-stable-stems-brown-representability-and-model-categorical-replacement-are-not-proved-here
 examples: []
 ---
 
