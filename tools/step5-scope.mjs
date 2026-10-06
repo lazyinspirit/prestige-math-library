@@ -1138,7 +1138,7 @@ if (command === 'check') {
         error('decisions-shape', `group ${group.label} has wrong version, run, group, or decisions array`);
         continue;
       }
-      const seen = new Set();
+      const seen = new Set(), recognizedStabilizedShares = new Set(), pendingStabilizedAmendments = [];
       const expected = new Map(owed.map((row) => [row.obligation, row]));
       for (const decision of doc.decisions) {
         if (!decision?.obligation || seen.has(decision.obligation)) {
@@ -1325,7 +1325,52 @@ if (command === 'check') {
               // repair decision retains its separate item-order anchor.
               && actualFinding.observed_sha256 === hashValue(pageRepair ? pageCarrier(observed) : observed);
           }
-          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair && !sharedReclassifiedFinding) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+          // An owner may amend a previously untouched, genuinely flagged
+          // source after reading. Stabilization creates a distinct obligation,
+          // not a second defect. Bind both exact obligations to the original
+          // typed reader-post carrier and one explicitly shared closed row.
+          const originalDecision = ['reader', 'flagged'].includes(currentDecision.route) ? currentDecision
+            : ['reader', 'flagged'].includes(prior?.route) ? prior : null;
+          const stabilizedRepair = originalDecision === currentDecision ? prior : currentDecision;
+          const originalMatch = /^(reader|refuter):([1-9]\d*):([1-9]\d*)$/.exec(originalDecision?.obligation ?? '');
+          let sharedStabilizedRepair = false;
+          if (prior && prior.id === decision.id && explicitShared && originalMatch
+            && originalDecision.route === (originalMatch[1] === 'reader' ? 'reader' : 'flagged')
+            && ['confirmed_fatal', 'confirmed_nonfatal'].includes(originalDecision.verdict)
+            && stabilizedRepair?.target?.stabilized === true && !stabilizedRepair.target.added
+            && ['touched', 'page'].includes(stabilizedRepair.route)
+            && stabilizedRepair.verdict === 'amended_repair' && stabilizedRepair.repair_confidence === 1
+            && stabilizedRepair.target.batch === originalMatch[2]
+            && stabilizedRepair.obligation === `post-reader:${originalMatch[2]}:${decision.id}`) {
+            const batch = originalMatch[2], page = stabilizedRepair.route === 'page';
+            const scope = scopes[batch] ?? readJson(scopePath(batch), 'original finding scope');
+            const finding = scope[originalMatch[1] === 'reader' ? 'reader_findings' : 'refuter_findings']
+              ?.find(row => row.obligation === originalDecision.obligation);
+            const { route: _route, ...findingTarget } = originalDecision.target ?? {};
+            const post = readJson(hashPath(batch, 'post'), 'immutable reader-post snapshot');
+            const observed = page ? post.page_hashes?.[decision.id] : post.hashes?.[decision.id];
+            const typed = page ? (scope.page_manifest_post ?? []).includes(decision.id)
+              && (post.page_manifest ?? []).includes(decision.id)
+              && ['file_sha256', 'manifest_sha256'].every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''))
+              : (scope.manifest_post ?? []).includes(decision.id) && (post.manifest ?? []).includes(decision.id)
+                && ['item_sha256', 'contract_sha256', 'manifest_sha256'].every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''));
+            const row = mine.find(row => row.defect_id === defectId);
+            const path = `research/${run}-alpha-${group.label}-5a-decisions.json`;
+            const referencesBoth = [originalDecision.obligation, stabilizedRepair.obligation].every(obligation =>
+              Array.isArray(row?.adjudication_ref) && row.adjudication_ref.some(ref => ref?.path === path && ref.obligation === obligation));
+            const actualTarget = stabilizedObligations(batch, scope).find(row => row.obligation === stabilizedRepair.obligation);
+            sharedStabilizedRepair = scope.version === 2 && scope.run === run && String(scope.batch) === batch
+              && finding?.id === decision.id && hashValue(finding) === hashValue(findingTarget)
+              && (originalMatch[1] !== 'refuter' || (scope.refuter_scope ?? []).includes(decision.id))
+              && hashSnapshotErrors(post, batch, 'post').length === 0 && typed
+              && finding.observed_sha256 === hashValue(page ? pageCarrier(observed) : observed)
+              && hashValue(actualTarget) === hashValue(stabilizedRepair.target)
+              && row?.subject === decision.id && row.caught_at_stage === '5a-adjudicate'
+              && ['fixed', 'narrowed', 'dropped'].includes(row.disposition) && referencesBoth
+              && (originalDecision.verdict === 'confirmed_fatal' ? row.severity === 'fatal' : row.severity !== 'fatal');
+          }
+          if (sharedStabilizedRepair) recognizedStabilizedShares.add(stabilizedRepair.obligation);
+          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair && !sharedReclassifiedFinding && !sharedStabilizedRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             same_defect_as: decision.same_defect_as, same_defect_evidence: decision.same_defect_evidence,
@@ -1400,9 +1445,15 @@ if (command === 'check') {
               if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)) {
                 error('decision-not-applied', `[${target.id}] reverted_change was not restored to the pre-reader state`);
               }
-              if (decision.verdict === 'amended_repair'
-                && [hashValue(preValue), hashValue(postValue)].includes(currentSha)) {
-                error('decision-not-applied', `[${target.id}] amended_repair must differ from both the pre-reader and reader-result carriers`);
+              if (decision.verdict === 'amended_repair') {
+                if (currentSha === hashValue(preValue) || currentSha === hashValue(postValue) && !target.stabilized) {
+                  error('decision-not-applied', `[${target.id}] amended_repair must differ from both the pre-reader and reader-result carriers`);
+                } else if (currentSha === hashValue(postValue) && target.stabilized) {
+                  // A genuine post-reader owner amendment may already be frozen
+                  // into pre-5a. Admit it only after exact shared-defect validation,
+                  // deferred so the finding and repair can appear in either order.
+                  pendingStabilizedAmendments.push({ obligation: decision.obligation, id: target.id });
+                }
               }
             }
             if (target?.observed_sha256 && decisionRows.some((row) => repaired.has(row.disposition))
@@ -1412,6 +1463,8 @@ if (command === 'check') {
           }
         }
       }
+      for (const row of pendingStabilizedAmendments) if (!recognizedStabilizedShares.has(row.obligation))
+        error('decision-not-applied', `[${row.id}] stabilized amended_repair equal to pre-5a requires exact shared historical defect evidence`);
       for (const [obligation, target] of expected) if (!seen.has(obligation)) {
         if (target?.direct && target.route === 'item'
           && currentAuditorCertification(target)) continue;

@@ -404,6 +404,27 @@ immutable post-reader snapshot. Existing current carrier, severity, repaired
 disposition and ledger checks still apply, in either decision iteration order.
 This is not a general duplicate-ledger exemption or source acceptance.
 
+For an existing source repaired only after the native read, stabilization instead
+creates `post-reader:BATCH:ID`. Its exact expected target must be
+`stabilized: true`, and its decision must be `amended_repair` with
+`repair_confidence: 1`. It may share the existing actual same-batch
+`reader:BATCH:K` or `refuter:BATCH:K` defect row only for the same ID, with the
+explicit same-defect link and evidence above. The gate validates the complete
+original finding against its scope and typed immutable reader-post item/page
+carrier, and the repair against the exact stabilized obligation. The one ledger
+row must have a repaired disposition (`fixed`, `narrowed`, or `dropped`), the
+proper severity, and `adjudication_ref` entries naming both exact obligations
+at the actual group decision-file path. Both decisions remain required, in
+either iteration order. The original finding, report and snapshot stay unchanged;
+no second manufactured defect row or rewritten observation is needed. Added
+helpers retain the separate existing causal-addition rule. Ordinary current
+fingerprint, stamps and gate checks still apply. When this exact owner amendment
+has already been frozen into `pre-5a`, its current carrier may equal that
+stabilized carrier only after the complete shared-finding rule succeeds. It must
+still differ from the immutable reader-post source; ordinary and unshared
+amendments retain their original source guards. This avoids demanding an
+artificial extra edit merely to recertify the already completed amendment.
+
 The same rule admits a property-typed `page:BATCH:ID` accepted/amended repair
 with confidence one and an actual same-batch refuter finding. The page must be
 in the scope's changed-page and post-page inventories and the immutable

@@ -1042,3 +1042,74 @@ test('Step5 uses validated active ledger ownership without erasing historical ro
     }
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
+
+function stabilizedSharingFixture(kind: 'reader' | 'refuter', reverse = false) {
+  const fx = fixture(), id = 'lem-ordinary-item', original = `${kind}:1:1`, amendment = `post-reader:1:${id}`;
+  const finding = { id, location: 'Statement', defect: 'false-claim', evidence: 'Exact source defect requiring the later owner amendment.', severity: 'fatal' };
+  if (kind === 'reader') writeFileSync(join(fx.root, 'research/r-reader-findings-1.json'), JSON.stringify({ batch: '1', coverage_note: 'Actual source read.', findings: [{ ...finding, subject_type: 'in-flight-item' }] }));
+  fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
+  fx.run('post-reader', '--run', 'r', '--batch', '1');
+  let scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+  writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({ batch: '1', opened: scope.refuter_scope,
+    not_opened: [], coverage_note: 'Actual source opened.', flagged: kind === 'refuter' ? [finding] : [] }));
+  fx.run('collect', '--run', 'r', '--batch', '1');
+  scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+  const snapshotPath = join(fx.root, 'research/r-step5-hash-1-post.json'), immutablePost = readFileSync(snapshotPath);
+  const itemPath = join(fx.root, `items/${id}.md`);
+  writeFileSync(itemPath, readFileSync(itemPath, 'utf8') + '\nActual later owner repair of the same historical source defect.\n');
+  fx.run('pre-5a', '--run', 'r');
+  const ledger: any = { defect_id: 'r-shared-source', run: 'r', subject: id, caught_at_stage: '5a-adjudicate', severity: 'fatal', disposition: 'fixed',
+    adjudication_ref: [original, amendment].map(obligation => ({ path: 'research/r-alpha-a-5a-decisions.json', obligation })) };
+  const source: any = { obligation: original, id, route: kind === 'reader' ? 'reader' : 'flagged', verdict: 'confirmed_fatal', defect_ids: [ledger.defect_id], evidence: 'The original source defect is genuine and now repaired.' };
+  const repair: any = { obligation: amendment, id, route: 'touched', verdict: 'amended_repair', repair_confidence: 1, defect_ids: [ledger.defect_id],
+    evidence: 'Owner amended the same current source after the native read.', same_defect_as: original,
+    same_defect_evidence: 'The later source amendment repairs exactly the original flagged statement defect without changing the historical finding.' };
+  const doc = { version: 1, run: 'r', group: 'a', decisions: reverse ? [repair, source] : [source, repair] };
+  const write = () => { writeFileSync(join(fx.root, 'research/defect-ledger.jsonl'), JSON.stringify(ledger) + '\n'); writeFileSync(join(fx.root, 'research/r-alpha-a-5a-decisions.json'), JSON.stringify(doc)); };
+  write(); fx.run('stamp', '--run', 'r');
+  return { ...fx, scope, ledger, source, repair, doc, write, snapshotPath, immutablePost };
+}
+for (const kind of ['reader', 'refuter'] as const) for (const reverse of [false, true])
+  test(`stabilized same-source ${kind} amendment shares one closed row in ${reverse ? 'repair-first' : 'finding-first'} order`, () => {
+    const f = stabilizedSharingFixture(kind, reverse);
+    try {
+      assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+      assert.deepEqual(readFileSync(f.snapshotPath), f.immutablePost);
+      assert.deepEqual(JSON.parse(readFileSync(join(f.root, 'research/r-step5-scope-1.json'), 'utf8')), f.scope);
+      assert.equal(readFileSync(join(f.root, 'research/defect-ledger.jsonl'), 'utf8').trim().split('\n').length, 1);
+    } finally { rmSync(f.root, { recursive: true, force: true }); }
+  });
+
+test('stabilized shared repair rejects wrong identities, insufficient confidence/evidence, open or unbound rows and changed original carriers', () => {
+  for (const mutate of [
+    (f: any) => { f.repair.same_defect_as = 'reader:1:999'; },
+    (f: any) => { f.repair.same_defect_evidence = 'Too short'; },
+    (f: any) => { f.repair.repair_confidence = 0.99; },
+    (f: any) => { delete f.repair.repair_confidence; },
+    (f: any) => { f.repair.verdict = 'accepted_repair'; },
+    (f: any) => { f.repair.obligation = 'post-reader:2:lem-ordinary-item'; },
+    (f: any) => { f.repair.id = 'cex-flagged-item'; },
+    (f: any) => { f.ledger.disposition = 'open'; },
+    (f: any) => { f.ledger.adjudication_ref.pop(); },
+    (f: any) => { f.ledger.adjudication_ref[0].path = 'research/r-alpha-other-5a-decisions.json'; },
+    (f: any) => { const post = JSON.parse(readFileSync(f.snapshotPath, 'utf8')); post.hashes['lem-ordinary-item'].contract_sha256 = '0'.repeat(64); writeFileSync(f.snapshotPath, JSON.stringify(post)); },
+  ]) {
+    const f = stabilizedSharingFixture('refuter');
+    try {
+      mutate(f); f.write(); f.run('stamp', '--run', 'r');
+      assert.notEqual(f.attempt('check', '--run', 'r', '--phase', 'adjudicate').status, 0);
+    } finally { rmSync(f.root, { recursive: true, force: true }); }
+  }
+});
+
+test('a stabilized amendment already frozen into pre-5a cannot waive its source guard without exact shared finding evidence', () => {
+  const f = stabilizedSharingFixture('reader');
+  try {
+    delete f.repair.same_defect_as;
+    delete f.repair.same_defect_evidence;
+    f.write(); f.run('stamp', '--run', 'r');
+    const result = f.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /stabilized amended_repair equal to pre-5a requires exact shared historical defect evidence/);
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
