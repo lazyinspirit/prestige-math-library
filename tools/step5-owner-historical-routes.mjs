@@ -105,18 +105,53 @@ export function validateOwnerHistoricalRoutes(root, run, doc) {
   }
   return routes;
 }
-export function loadOwnerHistoricalRoutes(root, run) {
-  const path = ownerHistoricalRoutesPath(root, run);
-  return existsSync(path) ? validateOwnerHistoricalRoutes(root, run, read(path)) : [];
+const supplementPrefix = run => `${safe(run)}-step5-owner-historical-inrun-routes-supplement-`;
+export const ownerHistoricalRoutesSupplementPath = (root, run, doc) =>
+  join(root, 'research', `${supplementPrefix(run)}${historicalFindingHash(doc)}.json`);
+function registryFile(root, path) {
+  if (!realpathSync(path).startsWith(realpathSync(join(root, 'research')) + '/')) throw Error('Invalid historical registry path');
+  return path;
 }
-export function recordOwnerHistoricalRoutes(root, run, evidence) {
-  const path = ownerHistoricalRoutesPath(root, run);
+function disjointRoutes(rows) {
+  const obligations = new Set(), homes = new Map();
+  for (const row of rows) {
+    if (obligations.has(row.finding.obligation)) throw Error('Overlapping historical route obligations');
+    obligations.add(row.finding.obligation);
+    for (const [id, batch] of [[row.finding.id, String(row.finding.producer_batch)], [row.finding.consumer_id, row.batch]]) {
+      if (homes.has(id) && homes.get(id) !== batch) throw Error('Conflicting historical route item homes');
+      homes.set(id, batch);
+    }
+  }
+  return rows;
+}
+export function loadOwnerHistoricalRoutes(root, run) {
+  const path = ownerHistoricalRoutesPath(root, run), prefix = supplementPrefix(run);
+  const names = readdirSync(join(root, 'research')).filter(name => name.startsWith(prefix)).sort();
+  if (!existsSync(path)) {
+    if (names.length) throw Error('Historical route supplement requires original registry');
+    return [];
+  }
+  const rows = validateOwnerHistoricalRoutes(root, run, read(registryFile(root, path)));
+  for (const name of names) {
+    if (!new RegExp(`^${prefix}[a-f0-9]{64}\\.json$`).test(name)) throw Error('Invalid historical route supplement filename');
+    const file = join(root, 'research', name), doc = read(registryFile(root, file));
+    if (file !== ownerHistoricalRoutesSupplementPath(root, run, doc)) throw Error('Historical route supplement content/hash mismatch');
+    rows.push(...validateOwnerHistoricalRoutes(root, run, doc));
+  }
+  return disjointRoutes(rows);
+}
+export function recordOwnerHistoricalRoutes(root, run, evidence, { supplement = false } = {}) {
+  const original = ownerHistoricalRoutesPath(root, run);
   const doc = JSON.parse(source(root, { path: evidence, sha256: sha(readFileSync(resolve(root, evidence))) }));
-  validateOwnerHistoricalRoutes(root, run, doc);
+  const incoming = validateOwnerHistoricalRoutes(root, run, doc);
+  const path = supplement ? ownerHistoricalRoutesSupplementPath(root, run, doc) : original;
+  if (supplement && !existsSync(original)) throw Error('Historical route supplement requires original registry');
+  const prior = loadOwnerHistoricalRoutes(root, run);
   if (existsSync(path)) {
     if (historicalFindingHash(read(path)) !== historicalFindingHash(doc)) throw Error('Refusing to replace immutable historical route registry');
     return { path, reused: true };
   }
+  disjointRoutes([...prior, ...incoming]);
   writeFileSync(path, JSON.stringify(doc, null, 2) + '\n', { flag: 'wx', mode: 0o444 });
   return { path, reused: false };
 }
@@ -124,9 +159,9 @@ if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.m
   const args = process.argv.slice(2), opt = name => args[args.indexOf(name) + 1];
   try {
     if (!['record', 'check'].includes(args[0]) || !args.includes('--run') || !args.includes('--evidence'))
-      throw Error('usage: step5-owner-historical-routes.mjs record|check --run RUN --evidence research/FILE [--root DIR]');
+      throw Error('usage: step5-owner-historical-routes.mjs record|check --run RUN --evidence research/FILE [--root DIR] [--supplement]');
     const root = resolve(args.includes('--root') ? opt('--root') : '.');
     if (args[0] === 'check') console.log(`step5-owner-historical-routes: ${validateOwnerHistoricalRoutes(root, opt('--run'), read(resolve(root, opt('--evidence')))).length} valid route(s)`);
-    else console.log(JSON.stringify(recordOwnerHistoricalRoutes(root, opt('--run'), opt('--evidence'))));
+    else console.log(JSON.stringify(recordOwnerHistoricalRoutes(root, opt('--run'), opt('--evidence'), { supplement: args.includes('--supplement') })));
   } catch (cause) { console.error(`step5-owner-historical-routes: ${cause.message}`); process.exitCode = 1; }
 }

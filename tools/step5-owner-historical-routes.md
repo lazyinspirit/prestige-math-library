@@ -87,3 +87,30 @@ findings or source bytes, a missing archived path leg, wrong homes and stale
 current proof review fail closed. This registry grants no scope expansion,
 mathematical acceptance, author attribution, fabricated observation or gate
 bypass.
+
+## Add a disjoint immutable supplement
+
+Once the original registry exists, retain its exact bytes. Another genuinely
+recovered native finding can be added only with the explicit supported option:
+
+```sh
+node tools/step5-owner-historical-routes.mjs record --run RUN --evidence research/ADDITIONAL_AUTHORIZATION.json --supplement
+```
+
+The command writes a separate immutable
+`research/RUN-step5-owner-historical-inrun-routes-supplement-SHA256.json`.
+The name binds SHA256 of recursively key-sorted compact JSON for the complete
+owner authorization, using `historicalFindingHash`. An identical existing
+supplement is reused; ordinary `record` still refuses replacement of the
+original registry. A supplement requires an existing valid original registry.
+
+Loading validates the original and every supplement with all the same exact
+native finding, raw source, actual archived YAML edge, snapshot, unique-home
+and current owner proof-guard requirements. It rejects mismatching filename
+content hashes, overlapping obligations, conflicting producer/consumer homes,
+foreign runs, changed source bytes, changed native reports, and stale current
+proof guards. Distinct genuine findings can share a producer ID; their exact
+obligations remain separate. This does not authorize unknown or reconstructed
+historical paths. Neither supplement recording nor loading changes any scope,
+finding, report, original registry, decision, ledger, mathematical source or
+workflow control.
