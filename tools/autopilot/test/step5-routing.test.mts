@@ -12,6 +12,8 @@ import { step5Stages } from '../stages/mathlib.step5.mts';
 import { holdStep5 } from '../stages/step5-hold.mts';
 import { Executor } from '../src/executor.mts';
 import { itemHashGuard } from '../../item-hash.mjs';
+import { createHash } from 'node:crypto';
+import { historicalFindingHash, recordOwnerHistoricalRoutes } from '../../step5-owner-historical-routes.mjs';
 
 const REPO = join(import.meta.dirname, '..', '..', '..');
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
@@ -964,5 +966,54 @@ for (const [kind, proof, accepted] of [
       finding.producer_carrier_at_split.contract_sha256, 'both snapshots honestly record the missing definition proof contract');
     assert.equal(finding.observation_basis, 'unbound');
     assert.equal(finding.observed_sha256, null);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('exact owner historical routes retain native reader/refuter obligations after reviewed dependency removal', () => {
+  const fx = producerRoutingFixture('r');
+  try {
+    const initialConsumer = join(fx.root, 'items/lem-ordinary-item.md');
+    writeFileSync(initialConsumer, readFileSync(initialConsumer, 'utf8').replace('---\n', '---\nid: lem-ordinary-item\n'));
+    fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
+    fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'post');
+    assert.equal(fx.report(fx.producer, 'in-run-dependency').status, 0);
+    let scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({ batch: '1', opened: scope.refuter_scope,
+      not_opened: [], coverage_note: 'Actual exact supplier opened.', flagged: [{ id: fx.producer,
+        location: 'Statement', defect: 'false-claim', evidence: 'Actual supplier counterexample.', severity: 'fatal' }] }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    const sha = (bytes: any) => createHash('sha256').update(bytes).digest('hex');
+    const link = (path: string) => ({ path, sha256: sha(readFileSync(join(fx.root, path))) });
+    const sources = scope.reader_findings[0].dependency_path.map((node: any) => {
+      const path = `research/original-${node.id}.md`;
+      writeFileSync(join(fx.root, path), readFileSync(join(fx.root, 'items', `${node.id}.md`)));
+      return { id: node.id, ...link(path) };
+    });
+    const consumerPath = join(fx.root, 'items/lem-ordinary-item.md');
+    writeFileSync(consumerPath, readFileSync(consumerPath, 'utf8').replace(`deps: [${fx.producer}]`, 'deps: []'));
+    const before = fx.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+    assert.match(before.stderr, /assigned consumer reaching/);
+    const guard = itemHashGuard(readFileSync(consumerPath, 'utf8'));
+    const findings = [...scope.reader_findings, ...scope.refuter_findings];
+    writeFileSync(join(fx.root, 'research/current-route-review.md'), `r lem-ordinary-item ${fx.producer} ${guard} ${findings.map((f: any) => f.obligation).join(' ')} actual owner review of dependency removal.`);
+    const doc = { version: 1, policy: 'owner-step5-historical-inrun-route-v1', run: 'r', step: 5,
+      owner: true, owner_identity: '/root', at: new Date().toISOString(), reason: 'Owner reviewed actual current proof and redundant dependency removal',
+      routes: findings.map((finding: any) => ({ batch: '1', obligation: finding.obligation,
+        finding_sha256: historicalFindingHash(finding), sources, reader_report: link('research/r-reader-findings-1.json'),
+        refuter_report: link('research/r-refute-1.json'), consumer_pre_snapshot: link('research/r-step5-hash-1-pre.json'),
+        consumer_post_snapshot: link('research/r-step5-hash-1-post.json'), producer_pre_snapshot: link('research/r-step5-hash-2-pre.json'),
+        review: link('research/current-route-review.md'), current_proof_review: { owner: true, removed_edges_reviewed: true,
+          no_unresolved_scope_dependency: true, consumer_guard_sha256: guard } })) };
+    writeFileSync(join(fx.root, 'research/historical-route-authorization.json'), JSON.stringify(doc));
+    recordOwnerHistoricalRoutes(fx.root, 'r', 'research/historical-route-authorization.json');
+    const after = fx.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+    assert.doesNotMatch(after.stderr, /assigned consumer reaching|producer identity\/immutable pre-reader snapshot changed|out-of-scope|findings no longer match/);
+    assert.deepEqual(JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8')).reader_findings, scope.reader_findings);
+    // This attestation cannot authorize an unrelated obligation with the same path.
+    const changed = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    changed.reader_findings[0].obligation = 'reader:1:invented';
+    writeFileSync(join(fx.root, 'research/r-step5-scope-1.json'), JSON.stringify(changed));
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /Missing exact historical scope finding/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });

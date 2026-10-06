@@ -22,6 +22,7 @@ import { step5Escalations } from './step5-escalations.mjs';
 import { step5Adjudicators } from './step5-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { loadOwnerIdMigrations } from './step5-owner-id-migrations.mjs';
+import { loadOwnerHistoricalRoutes } from './step5-owner-historical-routes.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -459,7 +460,19 @@ function findingDependencies(batch, consumers, findings, manifests = manifestIte
   const runIds = new Set(Object.values(manifests).flat()), assigned = new Set(consumers);
   if (!findings.some(row => row?.subject_type === 'in-run-dependency'
     || runIds.has(row?.id) && !assigned.has(row.id))) return new Map();
-  return inRunDependencies(batch, consumers, manifests);
+  const dependencies = inRunDependencies(batch, consumers, manifests);
+  for (const row of loadOwnerHistoricalRoutes(ROOT, run).filter(row => row.batch === String(batch))) {
+    const finding = row.finding;
+    if (!assigned.has(finding.consumer_id)) continue;
+    let route = dependencies.get(finding.id);
+    if (route?.consumers.has(finding.consumer_id) && !route.historical?.has(finding.consumer_id)) continue;
+    if (!route) { route = { producer_batch: finding.producer_batch, consumers: new Map() }; dependencies.set(finding.id, route); }
+    route.consumers.set(finding.consumer_id, finding.dependency_path.map(node => node.id));
+    route.historical ??= new Map();
+    if (!route.historical.has(finding.consumer_id)) route.historical.set(finding.consumer_id, new Map());
+    route.historical.get(finding.consumer_id).set(finding.obligation, finding);
+  }
+  return dependencies;
 }
 
 // Definition carriers are exact source/manifest evidence even when there is no
@@ -487,6 +500,9 @@ function producerCarrier(id, producer) {
 function bindInRunFinding(finding, batch, dependencies, reportError) {
   const route = dependencies.get(finding.id), path = route?.consumers.get(finding.consumer_id);
   if (!route || !path) { reportError(`${finding.obligation} must name an assigned consumer reaching another exact current-run draft producer`); return; }
+  const historicalBindings = route.historical?.get(finding.consumer_id);
+  const frozen = historicalBindings?.get(finding.obligation);
+  if (historicalBindings && !frozen) { reportError(`${finding.obligation} has no exact owner historical route authorization`); return; }
   const current = producerCarrier(finding.id, route.producer_batch);
   const prePath = hashPath(route.producer_batch, 'pre');
   const pre = readJson(prePath, `producer ${route.producer_batch} pre-reader snapshot`);
@@ -497,7 +513,7 @@ function bindInRunFinding(finding, batch, dependencies, reportError) {
     reportError(`${finding.obligation} lacks exact current/pre-reader producer fingerprints`); return;
   }
   finding.producer_batch = route.producer_batch;
-  finding.dependency_path = path.map(id => ({ id, item_sha256: sha256(readFileSync(R('items', `${id}.md`))) }));
+  finding.dependency_path = frozen ? frozen.dependency_path : path.map(id => ({ id, item_sha256: sha256(readFileSync(R('items', `${id}.md`))) }));
   finding.producer_carrier_at_split = current;
   finding.producer_pre_snapshot = {
     path: `research/${run}-step5-hash-${route.producer_batch}-pre.json`,

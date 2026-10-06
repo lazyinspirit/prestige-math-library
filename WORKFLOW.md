@@ -371,6 +371,15 @@ is explicitly `unbound`, with a null observed-carrier hash. A historical baselin
 is not relabeled as a full-byte observation, and corrected current bytes are not
 treated as the original defective source.
 
+When an actual reviewed proof repair removes a redundant historical dependency
+route, the owner may explicitly register the exact surviving native obligation
+with `tools/step5-owner-historical-routes.mjs`. Follow its
+[exact-byte source and owner-review requirements](tools/step5-owner-historical-routes.md).
+Only a complete original hash-bound YAML path, immutable report/pre-snapshot
+identity, original batch assignment and current owner proof review support this
+exception. Current producer fingerprints and ordinary adjudication remain
+mandatory; historical observations and native findings are never rewritten.
+
 Alpha decisions for this route retain `producer_batch` and `consumer_id`, decide
 the normal finding verdict and reference exactly one closed defect-ledger row.
 An unbound original observation additionally requires
