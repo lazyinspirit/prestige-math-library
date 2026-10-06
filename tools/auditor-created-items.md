@@ -201,3 +201,63 @@ The owner receipt uses basis
 `initial-step5-current-ball-lemma-manifest-review` and retains
 `historical_delta_unknown: true`, without inventing native authorship or an
 old manifest projection. Existing definition receipts keep their distinct basis.
+
+## Current proof and manifest review with an unknown historical projection
+
+For a genuinely Step-3-created proof item whose Step-5 item and manifest both
+changed, `current-proof-manifest-review` supports an explicit owner review when
+the original manifest projection is unavailable. It is available to lemmas,
+theorems, propositions and corollaries with a current supplied proof. Definitions
+retain the separate `current-definition-manifest-review` branch. This is neither
+a metadata-only classification nor a claim that a native worker authored the
+current bytes.
+
+Use the existing fenced `step5-manifest-repair` JSON, policy
+`step5-manifest-repair-evidence-v1`, with run, step 5, id, unchanged page/batch,
+`baseline_manifest_sha256`, `current_manifest_sha256`, full exact
+`current_manifest_entry`, and `current_carriers` containing all six keys:
+`guard_sha256`, `judge_sha256`, `item_file_sha256`, `manifest_sha256`,
+`contract_sha256`, `step5_subject_sha256`. Set
+`repair_kind: "current-proof-manifest-review"`, `historical_delta_unknown: true`,
+and omit `baseline_manifest_entry`.
+
+`owner_authorization` must contain `owner: true`, `owner_identity: "/root"`, and
+the actual authority reason. Hash-bound immutable research `sources` must
+collectively contain the run, item and exact authority reason and substantiate
+the actual owner review. Never fabricate source reading. The genuinely
+successful completed native Step-5 dispatch supplies only eligible stage/batch
+context; the explicit owner receipt supplies current repair evidence. Genuine
+Step-3 origin, immutable Step-5 baseline membership and unchanged home/batch
+remain required.
+
+The `review` object must affirm `current_item_and_contract_checked`,
+`current_manifest_matches_item`, `no_unresolved_defect`,
+`current_proof_suppliers_and_direct_consumers_checked`, `current_proof_checked`,
+`current_suppliers_checked`, and `current_direct_consumers_checked`. Supply
+sorted complete `suppliers` from current `deps` plus `justified_by`, and sorted
+complete `direct_consumers` from actual item dependencies, `justified_by`, and
+exact wikilinks, including display-labelled links. Supply sorted
+`context_items: [{ "id": "ACTUAL_CONTEXT_ITEM", "guard_sha256": "CURRENT_HASH" }]`
+for the complete union of suppliers and consumers. These hash bindings preserve
+the exact current mathematical context independently of verification stamps.
+Record the actual full proof, supplier and every consumer-use review; local
+checks alone do not establish those affirmations. The current manifest must
+match the current source's kind, deps, justified_by and sources, and any title
+or proved_here metadata it supplies.
+
+`proof_checks` requires hash-bound research receipts for `precheck`,
+`rendercheck` and `strict-contract`, with the same exact version/run/step/id,
+actual observation time, exit code, argv, and item/range targeting described
+for the ball-lemma branch. For this generic branch every check's
+`current_carriers` must bind all six current hashes. Each check must actually
+pass on stable content; retain failed attempts separately. None is an
+independent audit or a substitute for personal proof review.
+
+After writers drain and the owner has completed that review and those checks,
+use the ordinary `owner-recertify` command with this evidence and the actual
+reason, then the ordinary whole-stage `certify`. The resulting receipt retains
+`basis: "initial-step5-current-proof-manifest-review"` and
+`historical_delta_unknown: true`; certification preserves `origin_step: 3`.
+Missing origins, changed baseline/home, incomplete current hashes, altered
+source/check receipts, omitted suppliers/consumers or changed mathematical
+context fail closed. Existing native write-window routes remain unchanged.

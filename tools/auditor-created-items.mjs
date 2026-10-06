@@ -324,7 +324,8 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
         'initial-step5-source-metadata-repair', 'initial-step5-dependency-repair',
         'initial-step5-current-definition-manifest-review',
         'initial-step5-current-ball-lemma-manifest-review',
-        'initial-step5-current-graph-lemma-manifest-review'].includes(receipt.basis)
+        'initial-step5-current-graph-lemma-manifest-review',
+        'initial-step5-current-proof-manifest-review'].includes(receipt.basis)
       : step === 7 && ['initial-step7-item-repair',
         'initial-step7-contract-only'].includes(receipt.basis)))
     || (step === 5 && receipt.basis !== undefined
@@ -332,7 +333,8 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
         || step5Bootstrap.result_file !== receipt.author_result))
     || (['initial-step5-current-definition-manifest-review',
       'initial-step5-current-ball-lemma-manifest-review',
-        'initial-step5-current-graph-lemma-manifest-review'].includes(receipt.basis)
+        'initial-step5-current-graph-lemma-manifest-review',
+        'initial-step5-current-proof-manifest-review'].includes(receipt.basis)
       && receipt.historical_delta_unknown !== true)
     || !String(receipt.reason ?? '').trim() || !Number.isFinite(Date.parse(receipt.at))
     || !evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
@@ -504,7 +506,7 @@ function dependencyMetadataMirrorsItem(root, id, currentEntry) {
 }
 
 // Classified metadata deltas require both full hash-proven projections. An
-// explicitly owner-authorized current-definition review is a separate branch:
+// explicitly owner-authorized current-content review is a separate branch:
 // it preserves the unknown historical delta and binds the current projection,
 // actual source evidence and direct consumers without inventing a preimage.
 function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
@@ -523,6 +525,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
     || evidence.current_carriers?.contract_sha256 !== hashes.contract_sha256)
     return null;
   const definitionReview = evidence.repair_kind === 'current-definition-manifest-review';
+  const proofReview = evidence.repair_kind === 'current-proof-manifest-review';
   const ballLemmaReview = evidence.repair_kind === 'current-ball-lemma-manifest-review'
     && id === 'lem-euclidean-balls-are-bounded-c-one-domains';
   const graphLemmaReview = evidence.repair_kind === 'current-graph-lemma-manifest-review'
@@ -541,7 +544,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         || !approval.obligations.some(row => row.id === id && row.obligation === link.obligation)) return null;
     } catch { return null; }
   }
-  if (definitionReview || ballLemmaReview || graphLemmaReview) {
+  if (definitionReview || ballLemmaReview || graphLemmaReview || proofReview) {
     // Explicit owner resolution of a missing historical projection. Never call
     // this metadata-only or infer the unknown delta from a hash or mtime.
     const currentEntry = evidence.current_manifest_entry;
@@ -558,10 +561,16 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         // Same target/display-label grammar as depcheck and fwdcheck.
         const links = [...body.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)]
           .map(match => match[1].trim());
-        return (consumer.deps ?? []).includes(id) || links.includes(id);
+        if (proofReview && consumer.justified_by !== undefined && !Array.isArray(consumer.justified_by))
+          throw Error(`${file}: invalid justified_by during direct-consumer review`);
+        return (consumer.deps ?? []).includes(id) || links.includes(id)
+          || proofReview && (consumer.justified_by ?? []).includes(id);
       }).map(file => file.slice(0, -3)).sort();
     if (evidence.historical_delta_unknown !== true || evidence.baseline_manifest_entry !== undefined
-      || fm.kind !== (definitionReview ? 'definition' : 'lemma')
+      || (proofReview ? !['lemma', 'theorem', 'proposition', 'corollary'].includes(fm.kind)
+        || fm.proved_here === false || fm.provenance?.proof === 'not-supplied'
+        || !/^## Proof\s*\n\s*\S/m.test(split(itemText).body)
+        : fm.kind !== (definitionReview ? 'definition' : 'lemma'))
       || currentEntry?.kind !== fm.kind
       || evidence.owner_authorization?.owner !== true
       || !String(evidence.owner_authorization?.reason ?? '').trim()
@@ -574,6 +583,22 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         : !sameCanonical(currentEntry.deps ?? [], fm.deps ?? []))
       || !sameCanonical(currentEntry.sources, fm.sources)
       || !Array.isArray(evidence.sources) || !evidence.sources.length) return null;
+    if (proofReview) {
+      const suppliers = [...new Set([...(Array.isArray(fm.deps) ? fm.deps : []),
+        ...(Array.isArray(fm.justified_by) ? fm.justified_by : [])])].sort();
+      const contextIds = [...new Set([...suppliers, ...directConsumers])].sort();
+      const context = evidence.review.context_items;
+      if (evidence.owner_authorization.owner_identity !== '/root'
+        || CARRIER_KEYS.some(key => evidence.current_carriers?.[key] !== hashes[key])
+        || evidence.review.current_proof_checked !== true || evidence.review.current_suppliers_checked !== true
+        || evidence.review.current_direct_consumers_checked !== true
+        || !sameCanonical(evidence.review.suppliers, suppliers)
+        || !sameCanonical(currentEntry.justified_by ?? [], fm.justified_by ?? [])
+        || ['title', 'proved_here'].some(key => currentEntry[key] !== undefined && currentEntry[key] !== fm[key])
+        || !Array.isArray(context) || !sameCanonical(context.map(row => row.id), contextIds)
+        || context.some(row => !/^[a-f0-9]{64}$/.test(row.guard_sha256 ?? '')
+          || row.guard_sha256 !== itemHashGuard(readFileSync(join(root, 'items', `${safe(row.id)}.md`), 'utf8')))) return null;
+    }
     const texts = [];
     for (const source of evidence.sources) {
       try {
@@ -583,7 +608,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       } catch { return null; }
     }
     if (![run, id, evidence.owner_authorization.reason].every(value => texts.join('\n').includes(value))) return null;
-    if (ballLemmaReview || graphLemmaReview) {
+    if (ballLemmaReview || graphLemmaReview || proofReview) {
       for (const kind of ['precheck', 'rendercheck', 'strict-contract']) {
         const link = evidence.proof_checks?.[kind];
         try {
@@ -593,7 +618,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
             || check.step !== 5 || check.id !== id || check.kind !== kind
             || check.exit_code !== 0 || !Number.isFinite(Date.parse(check.observed_at))
             || !Array.isArray(check.argv)
-            || ['item_file_sha256', 'manifest_sha256', 'contract_sha256']
+            || (proofReview ? CARRIER_KEYS : ['item_file_sha256', 'manifest_sha256', 'contract_sha256'])
               .some(key => check.current_carriers?.[key] !== hashes[key])
             || (kind === 'precheck' ? !check.argv.includes('tools/precheck.mts')
                 || !check.argv.includes(`items/${id}.md`)
@@ -606,7 +631,8 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         } catch { return null; }
       }
     }
-    return definitionReview ? 'initial-step5-current-definition-manifest-review'
+    return proofReview ? 'initial-step5-current-proof-manifest-review'
+      : definitionReview ? 'initial-step5-current-definition-manifest-review'
       : graphLemmaReview ? 'initial-step5-current-graph-lemma-manifest-review'
         : 'initial-step5-current-ball-lemma-manifest-review';
   }
@@ -711,7 +737,8 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     ...(bootstrap ? { basis: bootstrap.basis,
       ...(['initial-step5-current-definition-manifest-review',
         'initial-step5-current-ball-lemma-manifest-review',
-        'initial-step5-current-graph-lemma-manifest-review'].includes(bootstrap.basis)
+        'initial-step5-current-graph-lemma-manifest-review',
+        'initial-step5-current-proof-manifest-review'].includes(bootstrap.basis)
         ? { historical_delta_unknown: true } : {}) } : {}),
     carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) };
   writeFileSync(path, `${JSON.stringify(receipt, null, 2)}\n`);

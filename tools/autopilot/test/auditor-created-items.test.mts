@@ -1339,9 +1339,9 @@ test('later native promotion validates and preserves the owner-created Step-5 or
     'research/r-step7-auditor-certifications.json')), /owner creation/);
 });
 
-function currentDefinitionReviewFixture(t: any, { ballLemma = false } = {}) {
+function currentDefinitionReviewFixture(t: any, { ballLemma = false, proofReview = false } = {}) {
   const id = ballLemma ? 'lem-euclidean-balls-are-bounded-c-one-domains' : 'lem-created';
-  const kind = ballLemma ? 'lemma' : 'definition';
+  const kind = ballLemma || proofReview ? 'lemma' : 'definition';
   const seedItem = item(id).replace('kind: lemma', `kind: ${kind}`);
   const f = carriedStep5Fixture(t, { id, seedItem, seedManifestItem: {
     id, kind, deps: [], statement: 'Old description' } });
@@ -1666,5 +1666,86 @@ test('pre-certificate owner recertification rejects missing origin, source tampe
     writeStep5Evidence(f.root, f.id, join(f.root, evidence));
     mutate(f);
     assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, evidence, 'Actual owner review'));
+  }
+});
+
+function currentProofManifestReviewFixture(t: any) {
+  const f = currentDefinitionReviewFixture(t, { proofReview: true });
+  const supplier = 'lem-proof-supplier', consumer = 'lem-proof-consumer';
+  writeFileSync(join(f.root, `items/${supplier}.md`), item(supplier));
+  writeFileSync(join(f.root, `items/${consumer}.md`), item(consumer).replace('justified_by: []', `justified_by: [${f.id}]`).replace('Immediate.', `Uses [[${f.id}|the exact supplier]].`));
+  writeFileSync(f.itemPath, readFileSync(f.itemPath, 'utf8').replace('deps: []', `deps: [${supplier}]`));
+  const pages = JSON.parse(readFileSync(f.manifestPath, 'utf8'));
+  pages[0].items.find((row: any) => row.id === f.id).deps = [supplier];
+  writeFileSync(f.manifestPath, JSON.stringify(pages));
+  const currentEntry = { ...pages[0].items.find((row: any) => row.id === f.id), __step6_page_id: 'page-a' };
+  const text = readFileSync(f.itemPath, 'utf8');
+  const current = { guard_sha256: itemHashGuard(text), judge_sha256: itemHashJudge(text), item_file_sha256: sha(text),
+    manifest_sha256: hashValue(currentEntry), contract_sha256: hashValue(JSON.parse(readFileSync(f.contractPath, 'utf8')).contracts[f.id]), step5_subject_sha256: '' };
+  current.step5_subject_sha256 = hashValue({ item_sha256: current.item_file_sha256, manifest_sha256: current.manifest_sha256, contract_sha256: current.contract_sha256 });
+  f.payload.repair_kind = 'current-proof-manifest-review';
+  f.payload.current_carriers = current; f.payload.current_manifest_entry = currentEntry;
+  f.payload.current_manifest_sha256 = current.manifest_sha256;
+  f.payload.owner_authorization.owner_identity = '/root';
+  f.payload.review = { current_item_and_contract_checked: true, current_manifest_matches_item: true,
+    no_unresolved_defect: true, current_proof_suppliers_and_direct_consumers_checked: true,
+    current_proof_checked: true, current_suppliers_checked: true, current_direct_consumers_checked: true,
+    suppliers: [supplier], direct_consumers: [consumer], context_items: [consumer, supplier].sort().map(id => ({ id,
+      guard_sha256: itemHashGuard(readFileSync(join(f.root, `items/${id}.md`), 'utf8')) })) };
+  f.payload.proof_checks = {};
+  for (const kind of ['precheck', 'rendercheck', 'strict-contract']) {
+    const argv = kind === 'precheck' ? ['node', 'tools/tsx-run.mjs', 'tools/precheck.mts', `items/${f.id}.md`]
+      : kind === 'rendercheck' ? ['node', 'tools/rendercheck.mjs', `items/${f.id}.md`]
+      : ['node', 'tools/proof-contract.mjs', 'research/r-batch-1.proof-contracts.json', '--strict', '--items', f.id];
+    const bytes = JSON.stringify({ version: 1, run: 'r', step: 5, id: f.id, kind, observed_at: new Date().toISOString(),
+      exit_code: 0, argv, current_carriers: current });
+    const path = `research/current-proof-${kind}-check.json`;
+    writeFileSync(join(f.root, path), bytes); f.payload.proof_checks[kind] = { path, sha256: sha(bytes) };
+  }
+  f.write();
+  return f;
+}
+
+test('generic current proof/manifest review preserves Stage3 origin and unknown historical delta', t => {
+  const f = currentProofManifestReviewFixture(t);
+  const result = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'Root personally reviewed current proof, actual suppliers and every direct consumer');
+  const receipt = JSON.parse(readFileSync(result.path, 'utf8'));
+  assert.equal(receipt.basis, 'initial-step5-current-proof-manifest-review');
+  assert.equal(receipt.historical_delta_unknown, true);
+  assert.equal(receipt.author_result, 'alpha-5a-a.result.json');
+  const certified = certifyAuditorCreatedItems(f.root, 'r', 5);
+  assert.equal(certified.items[0].origin_step, 3);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')).length, 1);
+  writeFileSync(join(f.root, 'items/lem-proof-supplier.md'), item('lem-proof-supplier') + '\nChanged supplier claim.\n');
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')), /invalid owner recertification/);
+});
+
+test('generic current proof review rejects absent authority/provenance, wrong homes, omitted context, source and check tamper', t => {
+  for (const mutate of [
+    (f: any) => { f.payload.owner_authorization.owner = false; },
+    (f: any) => { f.payload.owner_authorization.owner_identity = '/root/invented'; },
+    (f: any) => { f.payload.historical_delta_unknown = false; },
+    (f: any) => { f.payload.baseline_manifest_entry = f.baselineManifestEntry; },
+    (f: any) => { f.payload.batch = '2'; },
+    (f: any) => { f.payload.page = 'wrong-home'; },
+    (f: any) => { f.payload.current_carriers.guard_sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.current_carriers.judge_sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.review.current_proof_checked = false; },
+    (f: any) => { f.payload.review.current_suppliers_checked = false; },
+    (f: any) => { f.payload.review.current_direct_consumers_checked = false; },
+    (f: any) => { f.payload.review.suppliers = []; },
+    (f: any) => { f.payload.review.direct_consumers = []; },
+    (f: any) => { f.payload.review.context_items.pop(); },
+    (f: any) => { f.payload.sources[0].sha256 = '0'.repeat(64); },
+    (f: any) => { delete f.payload.proof_checks.precheck; },
+    (f: any) => { f.payload.proof_checks.rendercheck.sha256 = '0'.repeat(64); },
+    (f: any) => { const path = join(f.root, f.payload.proof_checks['strict-contract'].path); const check = JSON.parse(readFileSync(path, 'utf8')); check.exit_code = 1; const bytes = JSON.stringify(check); writeFileSync(path, bytes); f.payload.proof_checks['strict-contract'].sha256 = sha(bytes); },
+    (f: any) => { writeFileSync(join(f.root, 'items/lem-unlisted-consumer.md'), item('lem-unlisted-consumer').replace('justified_by: []', `justified_by: [${f.id}]`)); },
+    (f: any) => { rmSync(join(f.root, 'research/r-step3-auditor-certifications.json')); },
+    (f: any) => { const path = join(f.root, 'research/r-step5-auditor-baseline.json'); const baseline = JSON.parse(readFileSync(path, 'utf8')); baseline.item_carriers[f.id].page = 'wrong'; writeFileSync(path, JSON.stringify(baseline)); },
+    (f: any) => { rmSync(join(f.root, 'research/r-dispatch/alpha-5a-a.result.json')); },
+  ]) {
+    const f = currentProofManifestReviewFixture(t); mutate(f); f.write();
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'Insufficient evidence cannot create a bootstrap'));
   }
 });
