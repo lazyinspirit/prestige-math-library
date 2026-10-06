@@ -1,5 +1,7 @@
 # Combinatorics, graph theory, category theory, and homological algebra
 
+Category reconciliation (2026-10-07): The published permutation-statistics-inversions-and-eulerian-numbers A/B pair now belongs to Coxeter Groups. Its enumerative, weak-order and Bruhat-order suppliers retain their IDs and proof ownership.
+
 > ## READ FIRST — 2026-08-13 enrichment (`subjects-01`, `combinatorics` lane)
 >
 > The owner commissioned an enrichment of every prose scaffold on 2026-08-13:

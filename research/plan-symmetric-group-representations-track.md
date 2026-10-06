@@ -1,5 +1,9 @@
 # Representation theory of symmetric groups
 
+Library supplier scope (owner-authorized 2026-10-07): this Special Topics in Representation Theory scaffold may build on any published or draft content in the library. Record each supplier’s actual status and exact claim/proof; draft status alone is not grounds for duplicating a prerequisite. Unauthored planned inventories are design obligations rather than completed proofs.
+
+Category reconciliation (2026-10-07): All SYMR pages and the inherited RG-8–RG-11 pairs now belong to `special-topics-in-representation-theory`, titled **Special Topics in Representation Theory**. The current canonical plan and `symmetric-group-planning/pages.json` reflect this split. Braid Groups remains independent.
+
 Status: research-backed prose scaffold complete, 2026-09-07. This file
 proposes future pages and item identities; it does not claim that a page with an
 empty live plan inventory is published. Absolute orders are deliberately

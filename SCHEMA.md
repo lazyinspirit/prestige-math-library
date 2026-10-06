@@ -177,6 +177,12 @@
   are errors. Missing pathways, unplaced draft pages, singleton parts, and briefs
   over 120 words warn. Every active category follows these pathway rules.
 
+Track pair tables may declare a canonical category column. `validate-plan`
+checks that explicit category for both pages of each pair and their authored
+directory paths; legacy tables retain their track category. The differential
+geometry track assigns DG-25–DG-34 to Lie Theory and its remaining pairs to
+Differential Geometry under the owner-approved 2026-10-07 rehome.
+
 ## Checks
 
 - `tools/depcheck.mjs` checks IDs, dependencies, page lists, cycles, and

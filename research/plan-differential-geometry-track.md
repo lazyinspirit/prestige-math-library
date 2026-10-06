@@ -17,11 +17,12 @@ ledger. Shared page membership alone does not block unrelated future items.
 > after HA-17's final companion,
 > `grothendieck-spectral-sequences-and-computations-examples`. The obsolete
 > internal `spectral-sequences-examples` anchor is retired for this splice.
-> **Category contract (owner-authorised 2026-08-30):** every A page and every
-> B/examples page defined by this track has category `differential-geometry`.
-> Riemannian, Lie-theoretic, and symplectic strands are subjects within this
-> track, not separate library categories. The canonical plan, batch manifests,
-> and final library placement must preserve this category.
+> **Category contract (owner-authorised 2026-10-07):** DG-25–DG-34 and both
+> pages of each pair belong to `lie-theory`. Every other pair in this track
+> belongs to `differential-geometry`. The canonical category column in the pair
+> table below is executable by `validate-plan`; preserve its categories in the
+> canonical plan, future batch manifests and authored page paths. Page IDs,
+> relative DG labels, orders and mathematical supplier ownership are unchanged.
 
 ## 0. Summary for the orchestrator
 
@@ -413,47 +414,47 @@ than stale absolute orders, govern the sequence. External published and
 planned prerequisites are printed in each pair's own `requires`; this table
 shows the in-track spine that the orchestrator must preserve.
 
-| Pair | A page | B/examples page | Direct earlier DG pages |
-|---|---|---|---|
-| DG-1 | `smooth-manifolds-and-smooth-maps` | `smooth-manifolds-and-smooth-maps-examples` | — |
-| DG-2 | `smooth-partitions-of-unity-and-exhaustions` | `smooth-partitions-of-unity-and-exhaustions-examples` | DG-1 |
-| DG-3 | `tangent-cotangent-and-the-differential` | `tangent-cotangent-and-the-differential-examples` | DG-1 |
-| DG-4 | `rank-theorems-and-embedded-submanifolds` | `rank-theorems-and-embedded-submanifolds-examples` | DG-2, DG-3 |
-| DG-5 | `smooth-vector-bundles-and-sections` | `smooth-vector-bundles-and-sections-examples` | DG-2–DG-4 |
-| DG-6 | `sard-theorem-and-transversality` | `sard-theorem-and-transversality-examples` | DG-2, DG-4, DG-5 |
-| DG-7 | `whitney-embedding-tubular-neighbourhoods-and-approximation` | `whitney-embedding-tubular-neighbourhoods-and-approximation-examples` | DG-2, DG-5, DG-6 |
-| DG-8 | `euclidean-ordinary-differential-equations-with-smooth-dependence` | `euclidean-ordinary-differential-equations-with-smooth-dependence-examples` | — |
-| DG-9 | `vector-fields-flows-and-lie-derivatives` | `vector-fields-flows-and-lie-derivatives-examples` | DG-2–DG-5, DG-7, DG-8 |
-| DG-10 | `distributions-integral-manifolds-and-the-frobenius-theorem` | `distributions-integral-manifolds-and-the-frobenius-theorem-examples` | DG-3–DG-5, DG-8, DG-9 |
-| DG-11 | `tensor-fields-exterior-algebra-and-differential-forms` | `tensor-fields-exterior-algebra-and-differential-forms-examples` | DG-3, DG-5 |
-| DG-12 | `the-exterior-derivative-and-cartan-calculus` | `the-exterior-derivative-and-cartan-calculus-examples` | DG-9–DG-11; published line-integral page |
-| DG-13 | `manifolds-with-boundary-collars-and-orientations` | `manifolds-with-boundary-collars-and-orientations-examples` | DG-1–DG-6, DG-8–DG-12 |
-| DG-14 | `integration-of-forms-and-the-general-stokes-theorem` | `integration-of-forms-and-the-general-stokes-theorem-examples` | DG-2, DG-4, DG-11–DG-13 |
-| DG-15 | `the-de-rham-complex-homotopy-and-mayer-vietoris` | `the-de-rham-complex-homotopy-and-mayer-vietoris-examples` | DG-2, DG-7, DG-11, DG-12, DG-14 |
-| DG-16 | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison` | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison-examples` | DG-7, DG-13, DG-15; consumes AT-2/AT-3/AT-6 |
-| DG-17 | `the-de-rham-theorem-and-degree` | `the-de-rham-theorem-and-degree-examples` | DG-6, DG-7, DG-13–DG-16; consumes AT-6/AT-7/AT-8 |
-| DG-17M | `measurable-densities-and-radon-volume-on-manifolds` | `measurable-densities-and-radon-volume-on-manifolds-examples` | DG-2, DG-14; MT-4, MT-8, MT-9, MT-11, MT-20 |
-| DG-18 | `riemannian-metrics-length-distance-and-volume` | `riemannian-metrics-length-distance-and-volume-examples` | DG-2, DG-3, DG-5, DG-11–DG-14, DG-17M |
-| DG-19 | `connections-levi-civita-and-parallel-transport` | `connections-levi-civita-and-parallel-transport-examples` | DG-2, DG-5, DG-8, DG-9, DG-11–DG-13, DG-18 |
-| DG-20 | `geodesics-the-exponential-map-completeness-and-hopf-rinow` | `geodesics-the-exponential-map-completeness-and-hopf-rinow-examples` | DG-8, DG-9, DG-18, DG-19 |
-| DG-21 | `riemann-curvature-and-riemannian-submanifolds` | `riemann-curvature-and-riemannian-submanifolds-examples` | DG-4, DG-5, DG-11, DG-18–DG-20 |
-| DG-22 | `jacobi-fields-conjugate-points-and-the-cut-locus` | `jacobi-fields-conjugate-points-and-the-cut-locus-examples` | DG-8, DG-19–DG-21 |
-| DG-23 | `riemannian-comparison-theorems` | `riemannian-comparison-theorems-examples` | DG-18–DG-22 |
-| DG-24 | `the-gauss-bonnet-theorem-for-riemannian-surfaces` | `the-gauss-bonnet-theorem-for-riemannian-surfaces-examples` | DG-7, DG-13, DG-14, DG-18–DG-21 |
-| DG-25 | `lie-groups-invariant-fields-and-the-exponential-map` | `lie-groups-invariant-fields-and-the-exponential-map-examples` | DG-3, DG-4, DG-8–DG-12, DG-19, DG-20 |
-| DG-26 | `lie-subgroups-actions-and-homogeneous-spaces` | `lie-subgroups-actions-and-homogeneous-spaces-examples` | DG-7, DG-9, DG-10, DG-13, DG-20, DG-25 |
-| DG-27 | `lie-algebra-representations-enveloping-algebras-and-pbw` | `lie-algebra-representations-enveloping-algebras-and-pbw-examples` | DG-11, DG-25 |
-| DG-28 | `solvable-and-nilpotent-lie-algebras` | `solvable-and-nilpotent-lie-algebras-examples` | DG-27 |
-| DG-29 | `semisimple-lie-algebras-cohomology-and-levi-theory` | `semisimple-lie-algebras-cohomology-and-levi-theory-examples` | DG-26–DG-28 |
-| DG-30 | `cartan-subalgebras-and-root-space-decompositions` | `cartan-subalgebras-and-root-space-decompositions-examples` | DG-27–DG-29 |
-| DG-31 | `root-systems-dynkin-diagrams-and-cartan-killing-classification` | `root-systems-dynkin-diagrams-and-cartan-killing-classification-examples` | DG-27, DG-29, DG-30 |
-| DG-32 | `highest-weight-theory-for-complex-semisimple-lie-algebras` | `highest-weight-theory-for-complex-semisimple-lie-algebras-examples` | DG-27, DG-29–DG-31; cites RL-2/RL-7 for rehomed material |
-| DG-33 | `compact-lie-groups-maximal-tori-and-peter-weyl-theory` | `compact-lie-groups-maximal-tori-and-peter-weyl-theory-examples` | DG-18, DG-21, DG-25–DG-32; RG-18 Haar; Stone–Weierstrass and FA spine |
-| DG-34 | `real-forms-and-real-semisimple-lie-algebras` | `real-forms-and-real-semisimple-lie-algebras-examples` | DG-25–DG-33 |
-| DG-35 | `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory` | `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory-examples` | DG-2, DG-5, DG-7–DG-9, DG-11–DG-15, DG-18, DG-20; finite spectral theorem |
-| DG-36 | `hamiltonian-mechanics-and-completely-integrable-systems` | `hamiltonian-mechanics-and-completely-integrable-systems-examples` | DG-8, DG-9, DG-12, DG-15, DG-18–DG-20, DG-35 |
-| DG-37 | `moment-maps-and-symplectic-reduction` | `moment-maps-and-symplectic-reduction-examples` | DG-4, DG-26, DG-29, DG-33, DG-35, DG-36 |
-| DG-38 | `chern-weil-theory-and-characteristic-forms` | `chern-weil-theory-and-characteristic-forms-examples` | DG-12, DG-15, DG-19, DG-21, DG-25; AT vector-bundle and characteristic-class A pages |
+| Pair | A page | B/examples page | Direct earlier DG pages | Canonical category |
+|---|---|---|---|---|
+| DG-1 | `smooth-manifolds-and-smooth-maps` | `smooth-manifolds-and-smooth-maps-examples` | — | `differential-geometry` |
+| DG-2 | `smooth-partitions-of-unity-and-exhaustions` | `smooth-partitions-of-unity-and-exhaustions-examples` | DG-1 | `differential-geometry` |
+| DG-3 | `tangent-cotangent-and-the-differential` | `tangent-cotangent-and-the-differential-examples` | DG-1 | `differential-geometry` |
+| DG-4 | `rank-theorems-and-embedded-submanifolds` | `rank-theorems-and-embedded-submanifolds-examples` | DG-2, DG-3 | `differential-geometry` |
+| DG-5 | `smooth-vector-bundles-and-sections` | `smooth-vector-bundles-and-sections-examples` | DG-2–DG-4 | `differential-geometry` |
+| DG-6 | `sard-theorem-and-transversality` | `sard-theorem-and-transversality-examples` | DG-2, DG-4, DG-5 | `differential-geometry` |
+| DG-7 | `whitney-embedding-tubular-neighbourhoods-and-approximation` | `whitney-embedding-tubular-neighbourhoods-and-approximation-examples` | DG-2, DG-5, DG-6 | `differential-geometry` |
+| DG-8 | `euclidean-ordinary-differential-equations-with-smooth-dependence` | `euclidean-ordinary-differential-equations-with-smooth-dependence-examples` | — | `differential-geometry` |
+| DG-9 | `vector-fields-flows-and-lie-derivatives` | `vector-fields-flows-and-lie-derivatives-examples` | DG-2–DG-5, DG-7, DG-8 | `differential-geometry` |
+| DG-10 | `distributions-integral-manifolds-and-the-frobenius-theorem` | `distributions-integral-manifolds-and-the-frobenius-theorem-examples` | DG-3–DG-5, DG-8, DG-9 | `differential-geometry` |
+| DG-11 | `tensor-fields-exterior-algebra-and-differential-forms` | `tensor-fields-exterior-algebra-and-differential-forms-examples` | DG-3, DG-5 | `differential-geometry` |
+| DG-12 | `the-exterior-derivative-and-cartan-calculus` | `the-exterior-derivative-and-cartan-calculus-examples` | DG-9–DG-11; published line-integral page | `differential-geometry` |
+| DG-13 | `manifolds-with-boundary-collars-and-orientations` | `manifolds-with-boundary-collars-and-orientations-examples` | DG-1–DG-6, DG-8–DG-12 | `differential-geometry` |
+| DG-14 | `integration-of-forms-and-the-general-stokes-theorem` | `integration-of-forms-and-the-general-stokes-theorem-examples` | DG-2, DG-4, DG-11–DG-13 | `differential-geometry` |
+| DG-15 | `the-de-rham-complex-homotopy-and-mayer-vietoris` | `the-de-rham-complex-homotopy-and-mayer-vietoris-examples` | DG-2, DG-7, DG-11, DG-12, DG-14 | `differential-geometry` |
+| DG-16 | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison` | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison-examples` | DG-7, DG-13, DG-15; consumes AT-2/AT-3/AT-6 | `differential-geometry` |
+| DG-17 | `the-de-rham-theorem-and-degree` | `the-de-rham-theorem-and-degree-examples` | DG-6, DG-7, DG-13–DG-16; consumes AT-6/AT-7/AT-8 | `differential-geometry` |
+| DG-17M | `measurable-densities-and-radon-volume-on-manifolds` | `measurable-densities-and-radon-volume-on-manifolds-examples` | DG-2, DG-14; MT-4, MT-8, MT-9, MT-11, MT-20 | `differential-geometry` |
+| DG-18 | `riemannian-metrics-length-distance-and-volume` | `riemannian-metrics-length-distance-and-volume-examples` | DG-2, DG-3, DG-5, DG-11–DG-14, DG-17M | `differential-geometry` |
+| DG-19 | `connections-levi-civita-and-parallel-transport` | `connections-levi-civita-and-parallel-transport-examples` | DG-2, DG-5, DG-8, DG-9, DG-11–DG-13, DG-18 | `differential-geometry` |
+| DG-20 | `geodesics-the-exponential-map-completeness-and-hopf-rinow` | `geodesics-the-exponential-map-completeness-and-hopf-rinow-examples` | DG-8, DG-9, DG-18, DG-19 | `differential-geometry` |
+| DG-21 | `riemann-curvature-and-riemannian-submanifolds` | `riemann-curvature-and-riemannian-submanifolds-examples` | DG-4, DG-5, DG-11, DG-18–DG-20 | `differential-geometry` |
+| DG-22 | `jacobi-fields-conjugate-points-and-the-cut-locus` | `jacobi-fields-conjugate-points-and-the-cut-locus-examples` | DG-8, DG-19–DG-21 | `differential-geometry` |
+| DG-23 | `riemannian-comparison-theorems` | `riemannian-comparison-theorems-examples` | DG-18–DG-22 | `differential-geometry` |
+| DG-24 | `the-gauss-bonnet-theorem-for-riemannian-surfaces` | `the-gauss-bonnet-theorem-for-riemannian-surfaces-examples` | DG-7, DG-13, DG-14, DG-18–DG-21 | `differential-geometry` |
+| DG-25 | `lie-groups-invariant-fields-and-the-exponential-map` | `lie-groups-invariant-fields-and-the-exponential-map-examples` | DG-3, DG-4, DG-8–DG-12, DG-19, DG-20 | `lie-theory` |
+| DG-26 | `lie-subgroups-actions-and-homogeneous-spaces` | `lie-subgroups-actions-and-homogeneous-spaces-examples` | DG-7, DG-9, DG-10, DG-13, DG-20, DG-25 | `lie-theory` |
+| DG-27 | `lie-algebra-representations-enveloping-algebras-and-pbw` | `lie-algebra-representations-enveloping-algebras-and-pbw-examples` | DG-11, DG-25 | `lie-theory` |
+| DG-28 | `solvable-and-nilpotent-lie-algebras` | `solvable-and-nilpotent-lie-algebras-examples` | DG-27 | `lie-theory` |
+| DG-29 | `semisimple-lie-algebras-cohomology-and-levi-theory` | `semisimple-lie-algebras-cohomology-and-levi-theory-examples` | DG-26–DG-28 | `lie-theory` |
+| DG-30 | `cartan-subalgebras-and-root-space-decompositions` | `cartan-subalgebras-and-root-space-decompositions-examples` | DG-27–DG-29 | `lie-theory` |
+| DG-31 | `root-systems-dynkin-diagrams-and-cartan-killing-classification` | `root-systems-dynkin-diagrams-and-cartan-killing-classification-examples` | DG-27, DG-29, DG-30 | `lie-theory` |
+| DG-32 | `highest-weight-theory-for-complex-semisimple-lie-algebras` | `highest-weight-theory-for-complex-semisimple-lie-algebras-examples` | DG-27, DG-29–DG-31; cites RL-2/RL-7 for rehomed material | `lie-theory` |
+| DG-33 | `compact-lie-groups-maximal-tori-and-peter-weyl-theory` | `compact-lie-groups-maximal-tori-and-peter-weyl-theory-examples` | DG-18, DG-21, DG-25–DG-32; RG-18 Haar; Stone–Weierstrass and FA spine | `lie-theory` |
+| DG-34 | `real-forms-and-real-semisimple-lie-algebras` | `real-forms-and-real-semisimple-lie-algebras-examples` | DG-25–DG-33 | `lie-theory` |
+| DG-35 | `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory` | `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory-examples` | DG-2, DG-5, DG-7–DG-9, DG-11–DG-15, DG-18, DG-20; finite spectral theorem | `differential-geometry` |
+| DG-36 | `hamiltonian-mechanics-and-completely-integrable-systems` | `hamiltonian-mechanics-and-completely-integrable-systems-examples` | DG-8, DG-9, DG-12, DG-15, DG-18–DG-20, DG-35 | `differential-geometry` |
+| DG-37 | `moment-maps-and-symplectic-reduction` | `moment-maps-and-symplectic-reduction-examples` | DG-4, DG-26, DG-29, DG-33, DG-35, DG-36 | `differential-geometry` |
+| DG-38 | `chern-weil-theory-and-characteristic-forms` | `chern-weil-theory-and-characteristic-forms-examples` | DG-12, DG-15, DG-19, DG-21, DG-25; AT vector-bundle and characteristic-class A pages | `differential-geometry` |
 
 The two greenfield spines deliberately interleave where the mathematics says
 they must: DG-8 precedes flows rather than being assumed as “standard ODE,”

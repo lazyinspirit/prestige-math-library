@@ -1,5 +1,7 @@
 # Representation theory of Lie algebras track
 
+Category reconciliation (2026-10-07): the ten published foundational DG-25–DG-34 pairs now belong to `lie-theory`, alongside the advanced RL track. Their IDs, proof ownership and dependency order remain unchanged. General manifold, symplectic and characteristic-form suppliers remain in Differential Geometry.
+
 Prose scaffold, owner-commissioned 2026-08-14. Prefix **RL**. This file is the
 only deliverable of the commission: it does not edit `research/plan-spec.json`,
 author an item, publish a page, run a content gate, or assign absolute orders.

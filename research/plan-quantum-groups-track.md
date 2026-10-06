@@ -1,5 +1,9 @@
 # Quantum groups, crystal bases, and highest-weight categorification
 
+Library supplier scope (owner-authorized 2026-10-07): this Special Topics in Representation Theory scaffold may build on any published or draft content in the library. Record each supplier’s actual status and exact claim/proof; draft status alone is not grounds for duplicating a prerequisite. Unauthored planned inventories are design obligations rather than completed proofs.
+
+Category reconciliation (2026-10-07): QG-1–QG-8 now form the Quantum Groups and Crystal Bases track within `special-topics-in-representation-theory`. Canonical plan categories change; IDs, orders, mathematical scope and source gates remain unchanged. Hopf Algebras & Hecke Algebras is a separate foundational category; its new obligations do not yet replace existing suppliers.
+
 Prose scaffold, owner-authorised 2026-09-07 and reconciled against the live
 library on 2026-09-08. This is future planning: it does not author library
 items or publish mathematics. The page IDs are registered at canonical orders

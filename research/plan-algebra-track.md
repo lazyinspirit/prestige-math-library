@@ -1,5 +1,7 @@
 # Algebra track: abstract algebra and linear algebra, from the ground up
 
+Category reconciliation (2026-10-07): The published symmetric-groups-and-the-sign-homomorphism and conjugacy-and-simplicity-in-the-symmetric-groups A/B pairs now belong to Coxeter Groups. IDs, order and supplier ownership are unchanged.
+
 Prose scaffold, owner-commissioned 2026-07-27. Companion to
 `research/plan-realanalysis-pages.md` and `research/plan-topology-track.md`.
 Machine-readable half: `research/plan-spec.json` (orders 20 to 55, 68 to 93, and

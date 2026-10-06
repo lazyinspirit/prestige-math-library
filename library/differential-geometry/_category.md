@@ -22,3 +22,7 @@ countability hypotheses, and on real analysis for multivariable
 differentiation, inverse and implicit function theorems, integration and
 change of variables. Algebraic topology and geometric analysis then reuse its
 intrinsic language rather than rebuilding it inside their own tracks.
+
+Lie groups, homogeneous spaces, Lie-algebra structure theory and their
+representations now belong to Lie Theory. That category uses these general
+manifold foundations and keeps the corresponding prerequisites explicit.

@@ -1,5 +1,9 @@
 # Kazhdan--Lusztig theory, Soergel Hodge theory, and category O
 
+Library supplier scope (owner-authorized 2026-10-07): this Special Topics in Representation Theory scaffold may build on any published or draft content in the library. Record each supplier’s actual status and exact claim/proof; draft status alone is not grounds for duplicating a prerequisite. Unauthored planned inventories are design obligations rather than completed proofs.
+
+Category reconciliation (2026-10-07): KL-1–KL-8 now form the Kazhdan–Lusztig Theory track within `special-topics-in-representation-theory`. Canonical categories and `kazhdan-lusztig-planning/pages.json` reflect this change. Braid Groups remains separate and retains its Soergel/Rouquier application pages.
+
 Prose scaffold, owner-authorised 2026-09-07. This future block supplies the
 Kazhdan--Lusztig and parabolic category-O dependencies exposed by the
 symmetric-group representation audit. It authors no library item and changes

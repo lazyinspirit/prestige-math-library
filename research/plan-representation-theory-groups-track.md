@@ -1,5 +1,7 @@
 # Representation theory of groups — finite and infinite
 
+Category reconciliation (2026-10-07): RG-8–RG-11 and their examples companions now belong to `special-topics-in-representation-theory`; all other RG pairs retain `representation-theory`. This is a category change only: page identities, orders, proof obligations and supplier ownership remain unchanged.
+
 Prose scaffold, owner-commissioned 2026-08-14 (run `subjects-02`, track
 `representation-theory-groups`).  Seam authority:
 `research/subjects-02-SEAMS.md`.  This block uses the globally unused prefix

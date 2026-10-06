@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -50,6 +50,36 @@ test('the differential-geometry track fixes both A and actual companion categori
   const good = run(goodRepo);
   assert.equal(good.status, 0, good.stdout + good.stderr);
   rmSync(goodRepo, { recursive: true, force: true });
+});
+
+test('an explicit track category rehomes both A and actual companion without relaxing other pairs', () => {
+  const repo = fixture('lie-theory');
+  const specFile = join(repo, 'research', 'plan-spec.json');
+  const spec = JSON.parse(readFileSync(specFile, 'utf8'));
+  spec.pages[0].category = 'lie-theory';
+  writeFileSync(specFile, JSON.stringify(spec));
+  writeFileSync(join(repo, 'research', 'plan-differential-geometry-track.md'),
+    '| DG-25 | `track-a` | `documented-b` | — | `lie-theory` |\n');
+  const good = run(repo);
+  assert.equal(good.status, 0, good.stdout + good.stderr);
+
+  spec.pages[1].category = 'differential-geometry';
+  writeFileSync(specFile, JSON.stringify(spec));
+  const badCompanion = run(repo);
+  assert.equal(badCompanion.status, 1, badCompanion.stdout + badCompanion.stderr);
+  assert.match(badCompanion.stdout + badCompanion.stderr,
+    /\[track-category\] page actual-b: .*requires category "lie-theory"/);
+
+  spec.pages[1].category = 'lie-theory';
+  writeFileSync(specFile, JSON.stringify(spec));
+  mkdirSync(join(repo, 'library', 'differential-geometry'));
+  writeFileSync(join(repo, 'library', 'differential-geometry', 'track-a.md'),
+    '---\npage: track-a\nstatus: draft\nitems: []\nexamples: []\n---\n');
+  const badPath = run(repo);
+  assert.equal(badPath.status, 1, badPath.stdout + badPath.stderr);
+  assert.match(badPath.stdout + badPath.stderr,
+    /\[track-category-path\].*requires library\/lie-theory\/track-a.md/);
+  rmSync(repo, { recursive: true, force: true });
 });
 
 function functionalFixture(pageDirectory: string) {

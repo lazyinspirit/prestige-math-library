@@ -419,7 +419,7 @@ const pageById = new Map(pages.map((p) => [p.id, p]));
 // actual companion, and the authored file location. A correct category field
 // is not enough when the page was nested under a prerequisite subject, because
 // the renderer classifies it by the first directory below library/.
-function checkTrackCategory({ file, rowPattern, rowLabel, category }) {
+function checkTrackCategory({ file, rowPattern, rowLabel, category, categoryColumn = false }) {
   const path = join(repo, 'research', file);
   if (!existsSync(path)) return;
   const rows = [...readFileSync(path, 'utf8').matchAll(rowPattern)];
@@ -427,28 +427,31 @@ function checkTrackCategory({ file, rowPattern, rowLabel, category }) {
     if (selectedPages === null) err('track-category', `${path}: no ${rowLabel} pair rows found; category contract cannot be checked`);
     return;
   }
-  const trackPages = new Set();
+  const trackPages = new Map();
   for (const row of rows) {
-    for (const id of row.slice(1)) if (id) trackPages.add(id);
+    const expectedCategory = categoryColumn ? row[3] ?? category : category;
+    for (const id of row.slice(1, categoryColumn ? 3 : undefined))
+      if (id) trackPages.set(id, expectedCategory);
     const aPage = pageById.get(row[1]);
-    if (aPage?.companion) trackPages.add(aPage.companion);
+    if (aPage?.companion) trackPages.set(aPage.companion, expectedCategory);
   }
-  for (const id of trackPages) {
+  for (const [id, expectedCategory] of trackPages) {
     if (!selectedPage(id)) continue;
     const page = pageById.get(id);
-    if (page && page.category !== category)
-      err('track-category', `page ${id}: ${file} requires category "${category}", found "${page.category ?? '(missing)'}"`);
+    if (page && page.category !== expectedCategory)
+      err('track-category', `page ${id}: ${file} requires category "${expectedCategory}", found "${page.category ?? '(missing)'}"`);
     const location = pageLocationOf.get(id);
-    if (page && location && location.category !== category)
-      err('track-category-path', `page ${id}: ${file} requires library/${category}/${id}.md, found library/${location.file}`);
+    if (page && location && location.category !== expectedCategory)
+      err('track-category-path', `page ${id}: ${file} requires library/${expectedCategory}/${id}.md, found library/${location.file}`);
   }
 }
 
 checkTrackCategory({
   file: 'plan-differential-geometry-track.md',
-  rowPattern: /^\| DG-\d+ \| `([^`]+)` \| `([^`]+)` \|/gm,
+  rowPattern: /^\| DG-\d+[A-Z]? \| `([^`]+)` \| `([^`]+)` \|[^\n]*?\|(?: `([^`]+)` \|)?[\t ]*$/gm,
   rowLabel: 'DG',
   category: 'differential-geometry',
+  categoryColumn: true,
 });
 checkTrackCategory({
   file: 'plan-functional-analysis-track.md',
