@@ -163,6 +163,12 @@ function ownerCreation(root, run, id, marker = null) {
   return { receipt, marker: link };
 }
 
+// Share the validating origin reader; callers cannot substitute a raw receipt
+// or skip baseline exclusion, source hashes or authorized archive provenance.
+export function loadStep5OwnerCreation(root, run, id, marker = null) {
+  return ownerCreation(root, run, id, marker);
+}
+
 export function recordOwnerCreation(root, run, step, id, evidence) {
   if (Number(step) !== 5) throw Error('Owner creation supports Step 5 only');
   safe(run, 'run'); safe(id, 'item ID');

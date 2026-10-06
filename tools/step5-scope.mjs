@@ -21,6 +21,7 @@ import { itemHashGuard } from './item-hash.mjs';
 import { step5Escalations } from './step5-escalations.mjs';
 import { step5Adjudicators } from './step5-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
+import { loadOwnerIdMigrations } from './step5-owner-id-migrations.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -211,6 +212,16 @@ function pageCarrier(value, orderAnchor = null) {
   return { ...carrier, item_order: itemOrder.map(String).filter((id) => anchor.has(id)) };
 }
 
+let ownerIdMigrations = null;
+function currentItemId(id, batch = null) {
+  if (ownerIdMigrations === null) {
+    try { ownerIdMigrations = loadOwnerIdMigrations(ROOT, run); }
+    catch (cause) { fail(`step5-scope: ${cause.message}`, 1); }
+  }
+  return ownerIdMigrations.find(row => row.old_id === id
+    && (batch === null || String(row.batch) === String(batch)))?.new_id ?? id;
+}
+
 function currentDecisionCarrier(decision, target, live) {
   if (target?.subject_type === 'in-run-dependency') {
     return producerCarrier(target.id, target.producer_batch);
@@ -220,7 +231,8 @@ function currentDecisionCarrier(decision, target, live) {
     return { item_sha256: existsSync(path) ? sha256(readFileSync(path)) : null };
   }
   if (target?.route === 'page') return pageCarrier(live?.pages[decision.id], target.order_anchor);
-  if (live?.items[decision.id]) return live.items[decision.id];
+  const currentId = currentItemId(decision.id, target?.batch ?? null);
+  if (live?.items[currentId]) return live.items[currentId];
   if (live?.pages[decision.id]) return pageCarrier(live.pages[decision.id]);
   return undefined;
 }
@@ -683,7 +695,7 @@ if (command === 'split') {
     ...hashSnapshotErrors(post, batch, 'post').map((message) => `post ${message}`),
   ];
   if (snapshotErrors.length) fail(`step5-scope: batch ${batch} hash snapshot invalid: ${snapshotErrors.join('; ')}`);
-  if (!sameSet(post.manifest ?? Object.keys(post.hashes ?? {}), ids)) {
+  if (!sameSet((post.manifest ?? Object.keys(post.hashes ?? {})).map(id => currentItemId(id, batch)), ids)) {
     fail(`step5-scope: batch ${batch} post-reader hash does not match the current manifest`);
   }
   const currentPages = (manifestPages()[batch] ?? []).map((page) => page.id);
@@ -878,7 +890,7 @@ if (command === 'stamp') {
     for (const decision of doc.decisions) {
       const target = expected.get(decision.obligation);
       const batch = target?.batch ?? group.covers.find((candidate) =>
-        (manifests[candidate] ?? []).includes(decision.id)
+        (manifests[candidate] ?? []).includes(currentItemId(decision.id, candidate))
         || (pages[candidate] ?? []).some((page) => page.id === decision.id));
       const carrier = currentDecisionCarrier(decision, target, live.get(batch));
       if (carrier === undefined) fail(`group ${group.label} decision ${decision.obligation ?? '(missing)'} has no current carrier`, 1);
@@ -927,6 +939,15 @@ if (command === 'check') {
     const pre = readJson(hashPath(batch, 'pre'), `batch ${batch} pre-reader hash`);
     const post = readJson(hashPath(batch, 'post'), `batch ${batch} post-reader hash`);
     const derived = expectedSplit(pre, post);
+    // Owner migration projects historical post-reader IDs onto current
+    // carriers only. Actual reader removals remain forbidden, unchanged.
+    if (derived.removed.length) error('reader-removal', `batch ${batch} reader removed ${derived.removed.join(', ')}`);
+    const currentPostIds = derived.manifestPost.map(id => currentItemId(id, batch));
+    for (const id of currentPostIds) if (!(manifests[batch] ?? []).includes(id)) {
+      error('scope-removal', `[${id}] post-reader item removed without a valid owner representation migration`);
+    }
+    for (const id of manifests[batch] ?? []) if (!currentPostIds.includes(id)
+      && !/^(def|lem)-/.test(id)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
     for (const message of hashSnapshotErrors(pre, batch, 'pre')) error('hash-invalid', `batch ${batch} pre ${message}`);
     for (const message of hashSnapshotErrors(post, batch, 'post')) error('hash-invalid', `batch ${batch} post ${message}`);
     if (scope.version !== 2) error('scope-identity', `batch ${batch} has unsupported scope version ${scope.version}`);
@@ -1331,7 +1352,7 @@ if (command === 'check') {
         }
         if (phase === 'adjudicate') {
           const subjectBatch = target?.batch ?? group.covers.find((batch) =>
-            (manifests[batch] ?? []).includes(decision.id)
+            (manifests[batch] ?? []).includes(currentItemId(decision.id, batch))
             || (pages[batch] ?? []).some((page) => page.id === decision.id));
           const live = subjectBatch ? liveFor(subjectBatch) : null;
           const currentValue = currentDecisionCarrier(decision, target, live);
