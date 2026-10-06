@@ -22,6 +22,7 @@ import { step5Escalations } from './step5-escalations.mjs';
 import { step5Adjudicators } from './step5-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { loadOwnerIdMigrations } from './step5-owner-id-migrations.mjs';
+import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
 import { loadOwnerHistoricalRoutes } from './step5-owner-historical-routes.mjs';
 
 const argv = process.argv.slice(2);
@@ -1074,7 +1075,10 @@ if (command === 'check') {
       try { ledgerRows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line)); }
       catch (cause) { error('ledger-invalid', cause.message); }
     }
-    const mine = ledgerRows.filter((row) => row.run === run);
+    const ownershipErrors = [];
+    const activeRows = activeOwnershipRows(ledgerRows.filter(row => row.run === run), ownershipErrors);
+    for (const message of ownershipErrors) error('ledger-ownership-invalid', message);
+    const mine = activeRows.filter((row) => row.run === run);
     const earlyRows = mine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
     const referenced = new Map();
     const liveByBatch = new Map();

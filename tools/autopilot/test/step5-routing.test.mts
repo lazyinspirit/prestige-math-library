@@ -1017,3 +1017,28 @@ test('exact owner historical routes retain native reader/refuter obligations aft
     assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /Missing exact historical scope finding/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
+
+test('Step5 uses validated active ledger ownership without erasing historical rows', () => {
+  const fx = fixture();
+  try {
+    for (const label of ['pre', 'post']) fx.run('hash', '--run', 'r', '--batch', '1', '--label', label);
+    fx.run('split', '--run', 'r', '--batch', '1');
+    writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({ batch: '1', opened: [...fx.ids, 'p'], not_opened: [], coverage_note: 'read', flagged: [{ id: 'lem-ordinary-item', location: 'Statement', defect: 'false-claim', evidence: 'Original observation.', severity: 'nonfatal' }] }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    const path = join(fx.root, 'research/defect-ledger.jsonl');
+    const historical = { defect_id: 'old-defect', run: 'r', subject: 'lem-ordinary-item', caught_at_stage: '5a-adjudicate', severity: 'nonfatal', disposition: 'false-positive' };
+    const active = { ...historical, defect_id: 'active-defect', supersedes: ['old-defect'] };
+    const ledger = `${JSON.stringify(historical)}\n${JSON.stringify(active)}\n`;
+    writeFileSync(path, ledger);
+    writeFileSync(join(fx.root, 'research/r-alpha-batch-1-5a-decisions.json'), JSON.stringify({ version: 1, run: 'r', group: 'batch-1', decisions: [{ obligation: 'refuter:1:1', id: 'lem-ordinary-item', route: 'flagged', verdict: 'false_positive', evidence: 'Current review resolves the one actual finding.', defect_ids: ['active-defect'] }] }));
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    assert.equal(readFileSync(path, 'utf8'), ledger, 'historical ledger bytes remain unchanged');
+    for (const invalid of [{ ...active, supersedes: ['future'] }, { ...active, subject: 'different-item' }]) {
+      writeFileSync(path, `${JSON.stringify(historical)}\n${JSON.stringify(invalid)}\n`);
+      const failed = fx.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+      assert.notEqual(failed.status, 0);
+      assert.match(failed.stderr, /ledger-ownership-invalid/);
+    }
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
