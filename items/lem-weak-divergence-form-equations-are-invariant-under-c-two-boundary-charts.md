@@ -2,7 +2,7 @@
 id: lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts
 kind: lemma
 title: "Weak divergence-form equations are invariant under $C^2$ boundary charts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-tangent-line-conic-double-intersection
 kind: example
 title: A tangent line meets a conic with multiplicity two at one point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

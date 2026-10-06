@@ -2,7 +2,7 @@
 id: cor-energy-uniqueness-for-the-wave-cauchy-problem
 kind: corollary
 title: "Energy uniqueness for the wave Cauchy problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

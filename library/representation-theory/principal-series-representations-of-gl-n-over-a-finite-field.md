@@ -1,7 +1,7 @@
 ---
 page: principal-series-representations-of-gl-n-over-a-finite-field
 title: "Principal Series Representations of GL N over a Finite Field"
-status: draft
+status: published
 requires:
   - young-diagrams-tableaux-and-permutation-modules
   - specht-modules-and-the-irreducibles-of-the-symmetric-group

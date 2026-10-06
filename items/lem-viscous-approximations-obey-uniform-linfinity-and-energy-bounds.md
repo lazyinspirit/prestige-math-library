@@ -2,7 +2,7 @@
 id: lem-viscous-approximations-obey-uniform-linfinity-and-energy-bounds
 kind: lemma
 title: Uniform L-infinity, mass and energy bounds for the viscous approximations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

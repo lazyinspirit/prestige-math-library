@@ -2,7 +2,7 @@
 id: lem-sampling-produces-periodisation-in-frequency
 kind: lemma
 title: "Sampling at a lattice produces periodisation of the spectrum over the dual lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

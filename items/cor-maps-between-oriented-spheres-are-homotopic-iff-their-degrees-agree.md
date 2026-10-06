@@ -2,7 +2,7 @@
 id: cor-maps-between-oriented-spheres-are-homotopic-iff-their-degrees-agree
 kind: corollary
 title: Sphere self-maps are homotopic exactly when their degrees agree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

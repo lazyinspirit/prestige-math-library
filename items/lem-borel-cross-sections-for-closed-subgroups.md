@@ -2,7 +2,7 @@
 id: lem-borel-cross-sections-for-closed-subgroups
 kind: lemma
 title: Borel cross-sections for closed subgroups of second-countable locally compact Hausdorff groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

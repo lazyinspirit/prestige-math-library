@@ -2,7 +2,7 @@
 id: "thm-surgery-is-reversed-by-dual-surgery"
 kind: "theorem"
 title: "Surgery is reversed by dual surgery"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

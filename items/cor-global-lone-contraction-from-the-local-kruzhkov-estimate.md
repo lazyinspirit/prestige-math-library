@@ -2,7 +2,7 @@
 id: cor-global-lone-contraction-from-the-local-kruzhkov-estimate
 kind: corollary
 title: Global $L^1$ contraction from the local estimate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

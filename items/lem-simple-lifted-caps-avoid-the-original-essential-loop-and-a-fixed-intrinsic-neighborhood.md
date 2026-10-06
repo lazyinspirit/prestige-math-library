@@ -2,7 +2,7 @@
 id: lem-simple-lifted-caps-avoid-the-original-essential-loop-and-a-fixed-intrinsic-neighborhood
 kind: lemma
 title: Simple lifted caps avoid the original essential loop and a fixed intrinsic neighbourhood
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

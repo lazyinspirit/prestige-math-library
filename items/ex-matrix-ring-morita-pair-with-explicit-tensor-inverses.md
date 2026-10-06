@@ -2,7 +2,7 @@
 id: ex-matrix-ring-morita-pair-with-explicit-tensor-inverses
 kind: example
 title: "The matrix-ring Morita pair with explicit tensor inverses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

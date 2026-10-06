@@ -2,7 +2,7 @@
 id: lem-infinite-real-projective-space-is-a-marked-mod-two-eilenberg-maclane-space
 kind: lemma
 title: "Infinite real projective space is a marked mod-two Eilenberg–Mac Lane space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

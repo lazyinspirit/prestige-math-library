@@ -2,7 +2,7 @@
 id: cex-abelian-variety-does-not-have-good-model-over-every-base
 kind: counterexample
 title: "Not every abelian variety over a Dedekind function field extends to an abelian scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

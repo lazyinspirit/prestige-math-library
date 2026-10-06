@@ -2,7 +2,7 @@
 id: "lem-canonical-resolution-commutes-with-ambient-embeddings"
 kind: "lemma"
 title: "Canonical resolutions commute with embeddings of ambient smooth schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 11

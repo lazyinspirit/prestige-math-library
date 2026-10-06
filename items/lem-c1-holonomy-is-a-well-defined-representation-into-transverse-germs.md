@@ -2,7 +2,7 @@
 id: lem-c1-holonomy-is-a-well-defined-representation-into-transverse-germs
 kind: lemma
 title: "Holonomy of a C¹ foliation is a representation into C¹ transverse germs"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

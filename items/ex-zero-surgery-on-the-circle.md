@@ -2,7 +2,7 @@
 id: "ex-zero-surgery-on-the-circle"
 kind: "example"
 title: "Zero-surgery on the circle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

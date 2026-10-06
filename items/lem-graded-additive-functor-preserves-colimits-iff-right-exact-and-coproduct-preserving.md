@@ -2,7 +2,7 @@
 id: lem-graded-additive-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving
 kind: lemma
 title: Colimits of a graded additive functor equal right exactness plus coproduct preservation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-graded-degreewise-direct-sums-and-homogeneous-free-covers, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, def-preservation-reflection-creation-continuity-and-cocontinuity, def-left-exact-and-right-exact-functor, thm-small-colimits-from-coproducts-and-coequalizers, cor-in-a-preadditive-category-the-coequalizer-of-a-parallel-pair-is-the-cokernel-of-their-difference, thm-an-additive-functor-preserves-finite-biproducts, thm-an-additive-category-with-all-kernels-and-cokernels-has-all-finite-limits-and-colimits, def-abelian-category, def-additive-category, def-preadditive-category, def-additive-functor]

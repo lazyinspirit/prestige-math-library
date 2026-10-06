@@ -2,7 +2,7 @@
 id: lem-local-intersection-as-vanishing-order-on-smooth-curve
 kind: lemma
 title: Intersection with a smooth curve is a vanishing order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

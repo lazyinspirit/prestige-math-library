@@ -2,7 +2,7 @@
 id: def-unreduced-type-a-soergel-bimodules-and-the-trivial-polynomial-factor
 kind: definition
 title: "Unreduced type-A Soergel bimodules and the trivial polynomial factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-reduced-type-a-polynomial-ring-for-hhh, def-type-a-soergel-bimodule-for-a-simple-reflection, def-graded-ring-module-bimodule-and-internal-shift]

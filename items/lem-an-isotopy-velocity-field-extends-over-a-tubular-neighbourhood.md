@@ -2,7 +2,7 @@
 id: lem-an-isotopy-velocity-field-extends-over-a-tubular-neighbourhood
 kind: lemma
 title: "The velocity field of an isotopy extends to a neighbourhood"
-status: draft
+status: published
 origin: session
 dependency_level: 6
 provenance:

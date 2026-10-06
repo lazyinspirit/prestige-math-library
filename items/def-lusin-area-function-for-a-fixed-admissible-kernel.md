@@ -2,7 +2,7 @@
 id: def-lusin-area-function-for-a-fixed-admissible-kernel
 kind: definition
 title: "The Lusin area function for a fixed admissible kernel and aperture"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: cex-strong-continuity-does-not-imply-operator-norm-continuity
 kind: counterexample
 title: "Strong continuity does not imply operator-norm continuity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

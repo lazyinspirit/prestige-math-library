@@ -2,7 +2,7 @@
 id: rem-characteristic-class-construction-is-cited-not-rebuilt
 kind: remark
 title: "The characteristic-class construction is cited, not rebuilt"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-stiefel-whitney-classes-from-the-projective-bundle-relation", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-pontryagin-classes-by-complexification", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "thm-pontryagin-whitney-product-away-from-two", "cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion", "def-axiom-of-choice", lem-normal-pontryagin-class-is-the-rational-inverse-of-the-tangent-pontryagin-class, cor-high-normal-pontryagin-classes-obstruct-oriented-immersions]

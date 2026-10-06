@@ -2,7 +2,7 @@
 id: lem-frobenius-divisibility-gives-d-omega-equals-eta-wedge-omega
 kind: lemma
 title: "Frobenius divisibility: d omega equals eta wedge omega"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

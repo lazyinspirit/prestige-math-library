@@ -2,7 +2,7 @@
 id: lem-relative-projective-bundle-k-theory-generators
 kind: lemma
 title: "Relative projective bundles: K-theory generation by tautological twists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

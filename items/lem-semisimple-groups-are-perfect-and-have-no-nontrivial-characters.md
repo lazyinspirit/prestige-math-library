@@ -2,7 +2,7 @@
 id: lem-semisimple-groups-are-perfect-and-have-no-nontrivial-characters
 kind: lemma
 title: "Semisimple groups are perfect and have no nontrivial characters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 21

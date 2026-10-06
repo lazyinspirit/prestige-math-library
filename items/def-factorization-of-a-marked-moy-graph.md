@@ -2,7 +2,7 @@
 id: def-factorization-of-a-marked-moy-graph
 kind: definition
 title: "The factorization of a marked MOY graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

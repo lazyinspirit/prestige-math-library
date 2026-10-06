@@ -2,7 +2,7 @@
 id: def-reduced-burau-representation
 kind: definition
 title: "The reduced Burau representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

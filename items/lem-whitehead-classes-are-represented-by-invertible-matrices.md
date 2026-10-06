@@ -2,7 +2,7 @@
 id: lem-whitehead-classes-are-represented-by-invertible-matrices
 kind: lemma
 title: "Every Whitehead class is represented by an invertible matrix and conversely"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: lem-smoothing-formal-immersion-families
 kind: lemma
 title: "Smoothing continuous families of formal immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-compact-parameter-pair, def-formal-immersion-between-smooth-manifolds, def-space-of-immersions-and-space-of-formal-immersions, lem-joint-jet-continuity-and-the-weak-smooth-topology, def-weak-compact-open-smooth-topology-on-mapping-spaces, def-vector-bundle-map-over-a-smooth-base-map, def-pullback-vector-bundle-as-a-fibre-product, thm-the-pullback-fibre-product-is-a-smooth-vector-bundle, def-dual-and-hom-vector-bundles, thm-relative-whitney-approximation-for-manifold-valued-maps, def-countable-choice, thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space, thm-euclidean-tubular-neighbourhood-theorem, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, thm-differentiation-under-the-integral-sign, thm-smooth-partitions-of-unity-exist-on-manifolds, thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-extreme-value-metric, thm-heine-cantor-metric]

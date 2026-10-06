@@ -2,7 +2,7 @@
 id: cor-high-normal-stiefel-whitney-classes-obstruct-low-codimension-immersions
 kind: corollary
 title: "High normal Stiefel-Whitney classes obstruct low-codimension immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-compactness-under-continuous-maps,

@@ -2,7 +2,7 @@
 id: ex-dual-lattice-and-covolume-for-a-diagonal-scaling
 kind: example
 title: "Dual lattice and covolume for a diagonal scaling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

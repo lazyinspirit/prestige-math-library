@@ -2,7 +2,7 @@
 id: "cor-obstacle-complementarity-in-distribution-form"
 kind: "corollary"
 title: "Obstacle complementarity in distribution form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 10

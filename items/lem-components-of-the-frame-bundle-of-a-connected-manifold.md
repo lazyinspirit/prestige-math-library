@@ -2,7 +2,7 @@
 id: lem-components-of-the-frame-bundle-of-a-connected-manifold
 kind: lemma
 title: The components of the frame bundle of a connected manifold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

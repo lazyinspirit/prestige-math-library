@@ -2,7 +2,7 @@
 id: cex-finite-speed-does-not-imply-strong-huygens
 kind: counterexample
 title: "Finite speed of propagation does not imply strong Huygens"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

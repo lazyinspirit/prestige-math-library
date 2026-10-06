@@ -2,7 +2,7 @@
 id: lem-a-closed-moy-resolution-koszul-complex-computes-hochschild-homology-of-its-soergel-bimodule
 kind: lemma
 title: "A closed MOY resolution's Koszul complex computes Hochschild homology of its Soergel bimodule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [lem-the-remaining-closure-koszul-complex-is-the-diagonal-hochschild-complex, def-unreduced-type-a-soergel-bimodules-and-the-trivial-polynomial-factor, def-termwise-hochschild-homology-complex-of-a-rouquier-complex, def-reduced-khovanov-rozansky-homology, def-axiom-of-choice, cor-koszul-complex-invariant-under-invertible-generator-change, lem-koszul-complex-concatenation-tensor-isomorphism, thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex, lem-the-first-layer-relations-in-a-closed-moy-resolution-form-a-regular-sequence, def-reduced-type-a-polynomial-ring-for-hhh, def-khovanov-rozansky-complex-and-trigraded-braid-homology, lem-koszul-row-operations-and-variable-exclusion-preserve-factorization-homotopy-type]

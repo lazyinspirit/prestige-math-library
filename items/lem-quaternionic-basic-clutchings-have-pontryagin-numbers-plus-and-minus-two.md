@@ -2,7 +2,7 @@
 id: lem-quaternionic-basic-clutchings-have-pontryagin-numbers-plus-and-minus-two
 kind: lemma
 title: "Pontryagin calibration of the basic quaternionic clutchings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

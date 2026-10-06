@@ -2,7 +2,7 @@
 id: lem-admissible-square-action-has-a-distinct-leading-monomial
 kind: lemma
 title: "Admissible square actions have distinct leading monomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

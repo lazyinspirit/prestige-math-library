@@ -2,7 +2,7 @@
 id: prop-whitney-disjunction-removes-algebraically-cancelling-double-points-in-the-stable-range
 kind: proposition
 title: Whitney disjunction removes algebraically cancelling double points
-status: draft
+status: published
 origin: session
 dependency_level: 5
 provenance:

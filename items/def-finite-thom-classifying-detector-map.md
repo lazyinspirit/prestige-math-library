@@ -2,7 +2,7 @@
 id: def-finite-thom-classifying-detector-map
 kind: definition
 title: "Finite Thom classifying detector map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

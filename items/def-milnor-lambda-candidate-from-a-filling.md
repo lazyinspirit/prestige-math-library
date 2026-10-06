@@ -2,7 +2,7 @@
 id: def-milnor-lambda-candidate-from-a-filling
 kind: definition
 title: "The Milnor lambda candidate from a supplied filling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: "cor-positive-reaction-restores-coercivity-without-dirichlet-poincare"
 kind: "corollary"
 title: "A positive reaction term restores coercivity without Poincar\\'e"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 5

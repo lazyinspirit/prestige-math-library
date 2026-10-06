@@ -1,7 +1,7 @@
 ---
 page: exotic-smooth-structures-and-milnor-spheres
 title: "Exotic Smooth Structures and Milnor Spheres"
-status: draft
+status: published
 requires: [intersection-pairings-self-intersection-and-euler-classes, smooth-cobordism-relations-groups-and-rings, thom-spaces-normal-data-and-collapse-maps, the-hirzebruch-signature-theorem, the-smooth-h-cobordism-theorem, fibrations-fiber-bundles-and-homotopy-exact-sequences, hurewicz-whitehead-freudenthal-and-cw-approximation, topological-vector-bundles-and-grassmannian-classification, leray-hirsch-thom-isomorphism-and-gysin-sequences, stiefel-whitney-and-euler-classes-by-universal-constructions, chern-and-pontryagin-classes-by-splitting-and-complexification, vector-field-index-euler-characteristic-and-poincare-hopf]
 items: [def-exotic-smooth-structure-and-exotic-sphere,
         def-smooth-homotopy-sphere,

@@ -2,7 +2,7 @@
 id: thm-standard-basis-of-the-generic-type-a-hecke-algebra
 kind: theorem
 title: "The standard basis of the generic type-A Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

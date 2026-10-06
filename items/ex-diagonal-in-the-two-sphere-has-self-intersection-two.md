@@ -2,7 +2,7 @@
 id: ex-diagonal-in-the-two-sphere-has-self-intersection-two
 kind: example
 title: "The diagonal in the two-sphere has self-intersection two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [cor-diagonal-self-intersection-is-the-euler-number-of-tm, def-euclidean-spheres-and-closed-balls, def-product-orientation, def-self-intersection-number-of-an-oriented-submanifold, def-smooth-section-local-section-and-support, def-tangent-bundle-as-a-disjoint-union, lem-normal-bundle-of-the-diagonal-is-canonically-tm, lem-normal-push-off-zeros-are-self-intersection-points, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure, prop-the-diagonal-is-an-embedded-submanifold, thm-a-regular-level-set-is-an-embedded-submanifold, thm-canonical-tangent-and-cotangent-splittings-for-products, thm-self-intersection-is-the-euler-number-of-the-normal-bundle, def-axiom-of-choice, prop-tangent-space-of-a-regular-level-set-is-the-kernel]

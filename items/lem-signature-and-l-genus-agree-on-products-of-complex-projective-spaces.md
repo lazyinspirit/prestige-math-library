@@ -2,7 +2,7 @@
 id: lem-signature-and-l-genus-agree-on-products-of-complex-projective-spaces
 kind: lemma
 title: "The signature and the L-genus agree on products of complex projective spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

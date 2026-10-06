@@ -2,7 +2,7 @@
 id: thm-weak-maximum-principle-for-coercive-divergence-form-equations
 kind: theorem
 title: "Weak maximum principle for coercive divergence-form equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

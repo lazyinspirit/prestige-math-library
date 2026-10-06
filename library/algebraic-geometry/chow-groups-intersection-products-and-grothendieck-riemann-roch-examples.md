@@ -1,7 +1,7 @@
 ---
 page: chow-groups-intersection-products-and-grothendieck-riemann-roch-examples
 title: "Chow Groups, Intersection Products, and Grothendieck-Riemann-Roch — Examples"
-status: draft
+status: published
 requires:
   - chow-groups-intersection-products-and-grothendieck-riemann-roch
 items: []

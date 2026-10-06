@@ -2,7 +2,7 @@
 id: lem-fiber-and-limit-isomorphisms-force-the-base-axis-isomorphism
 kind: lemma
 title: "Fiber and limit isomorphisms force a base-axis isomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

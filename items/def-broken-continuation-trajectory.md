@@ -2,7 +2,7 @@
 id: def-broken-continuation-trajectory
 kind: definition
 title: "Broken continuation trajectories and geometric convergence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

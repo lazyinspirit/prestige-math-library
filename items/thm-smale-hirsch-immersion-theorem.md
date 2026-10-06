@@ -2,7 +2,7 @@
 id: thm-smale-hirsch-immersion-theorem
 kind: theorem
 title: "The Smale–Hirsch immersion theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["lem-parametric-immersion-extension-on-a-disk", "lem-finite-relative-homotopy-lifting-across-a-weak-equivalence", "lem-a-handle-decomposition-gives-a-relative-cw-complex", "def-compact-parameter-pair", "thm-smale-hirsch-for-open-source-manifolds", "lem-positive-codimension-thickening-reduces-closed-sources-to-the-open-case", "def-formal-immersion-between-smooth-manifolds", "def-space-of-immersions-and-space-of-formal-immersions", "def-derivative-map-from-immersions-to-formal-immersions", "def-weak-homotopy-equivalence", "def-countable-choice", "lem-formal-immersion-homotopies-extend-over-a-subcritical-handle"]

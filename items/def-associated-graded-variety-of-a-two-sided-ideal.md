@@ -2,7 +2,7 @@
 id: def-associated-graded-variety-of-a-two-sided-ideal
 kind: definition
 title: "The associated graded variety of a two-sided ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

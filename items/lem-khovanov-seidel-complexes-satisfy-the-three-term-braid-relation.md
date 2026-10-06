@@ -2,7 +2,7 @@
 id: lem-khovanov-seidel-complexes-satisfy-the-three-term-braid-relation
 kind: lemma
 title: "The three-term braid relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

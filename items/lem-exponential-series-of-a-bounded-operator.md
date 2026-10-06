@@ -2,7 +2,7 @@
 id: lem-exponential-series-of-a-bounded-operator
 kind: lemma
 title: "The exponential series of a bounded operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

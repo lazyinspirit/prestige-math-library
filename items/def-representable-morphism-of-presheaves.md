@@ -2,7 +2,7 @@
 id: def-representable-morphism-of-presheaves
 kind: definition
 title: "Representable morphisms of presheaves and fibrewise properties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

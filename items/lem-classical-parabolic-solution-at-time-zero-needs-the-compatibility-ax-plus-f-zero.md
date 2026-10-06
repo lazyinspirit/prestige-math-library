@@ -2,7 +2,7 @@
 id: lem-classical-parabolic-solution-at-time-zero-needs-the-compatibility-ax-plus-f-zero
 kind: lemma
 title: Compatibility at time zero for a classical parabolic solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-c2-saddle-function-has-c1-morse-coordinates
 kind: lemma
 title: "A C\u00b2 saddle function has C\u00b9 Morse coordinates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

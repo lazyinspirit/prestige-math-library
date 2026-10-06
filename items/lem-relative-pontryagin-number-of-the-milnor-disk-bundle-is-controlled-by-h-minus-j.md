@@ -2,7 +2,7 @@
 id: lem-relative-pontryagin-number-of-the-milnor-disk-bundle-is-controlled-by-h-minus-j
 kind: lemma
 title: "Relative Pontryagin square of the Milnor disk bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

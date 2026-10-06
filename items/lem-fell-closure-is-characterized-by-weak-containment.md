@@ -25,7 +25,7 @@ sources:
     - title: "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press 2008; author-hosted complete text)"
       url: "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf"
       locator: "Appendix F, §F.4: Theorem F.4.4 and the closure description of the Fell topology"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

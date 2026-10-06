@@ -2,7 +2,7 @@
 id: cex-reversing-the-contact-extremum-reverses-the-viscosity-inequality
 kind: counterexample
 title: A strict subsolution can fail the supersolution lower-test condition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

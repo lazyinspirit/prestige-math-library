@@ -2,7 +2,7 @@
 id: thm-index-of-a-nondegenerate-fixed-point
 kind: theorem
 title: "The index of a nondegenerate fixed point is the sign of det(I-Df)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

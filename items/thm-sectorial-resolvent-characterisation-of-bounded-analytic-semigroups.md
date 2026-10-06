@@ -2,7 +2,7 @@
 id: thm-sectorial-resolvent-characterisation-of-bounded-analytic-semigroups
 kind: theorem
 title: Sectorial resolvent characterisation of bounded analytic semigroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

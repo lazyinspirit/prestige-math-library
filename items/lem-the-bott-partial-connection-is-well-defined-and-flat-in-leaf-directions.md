@@ -2,7 +2,7 @@
 id: lem-the-bott-partial-connection-is-well-defined-and-flat-in-leaf-directions
 kind: lemma
 title: "The Bott partial connection is well defined and flat along leaves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

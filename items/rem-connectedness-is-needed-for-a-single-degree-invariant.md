@@ -2,7 +2,7 @@
 id: rem-connectedness-is-needed-for-a-single-degree-invariant
 kind: remark
 title: Connectedness is needed for a single degree invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-weighted-good-lambda-inequality-for-maximal-truncations
 kind: lemma
 title: Weighted good-lambda inequality for maximal truncations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

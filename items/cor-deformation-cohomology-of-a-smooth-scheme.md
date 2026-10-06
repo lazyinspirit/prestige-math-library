@@ -2,7 +2,7 @@
 id: "cor-deformation-cohomology-of-a-smooth-scheme"
 kind: "corollary"
 title: "Deformation cohomology of a smooth scheme: tangent, obstruction and automorphism spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 16

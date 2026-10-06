@@ -2,7 +2,7 @@
 id: lem-normal-noetherian-domain-intersection-of-height-one-localizations
 kind: lemma
 title: "A normal Noetherian domain is the intersection of its height-one localizations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

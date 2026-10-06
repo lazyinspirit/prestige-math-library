@@ -2,7 +2,7 @@
 id: lem-zero-section-gysin-and-excess-vector-subbundle
 kind: lemma
 title: "Zero-section Gysin and excess intersection for vector subbundles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

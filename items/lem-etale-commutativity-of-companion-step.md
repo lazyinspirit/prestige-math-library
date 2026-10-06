@@ -2,7 +2,7 @@
 id: "lem-etale-commutativity-of-companion-step"
 kind: "lemma"
 title: "Etale commutativity of the companion-ideal step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 12

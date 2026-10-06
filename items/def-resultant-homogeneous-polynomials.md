@@ -2,7 +2,7 @@
 id: def-resultant-homogeneous-polynomials
 kind: definition
 title: Resultant of two plane forms, viewed in one variable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

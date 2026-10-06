@@ -2,7 +2,7 @@
 id: lem-the-basepoint-evaluation-of-the-stiefel-section-space-is-a-fibration
 kind: lemma
 title: "The basepoint evaluation of the Stiefel section space is a fibration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle, def-stiefel-space-grassmannian-and-tautological-bundle, def-locally-trivial-fiber-bundle, thm-numerable-fiber-bundles-are-hurewicz-fibrations, prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, def-fiber-and-fiber-homotopy-equivalence, def-cofibration-and-homotopy-extension-property, def-compact-open-topology, def-higher-homotopy-group-by-based-cubes, prop-cubical-and-spherical-models-of-higher-homotopy-agree, prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant, def-homotopy-relative-and-path-homotopy, def-smooth-family-of-maps-and-evaluation-map, def-smooth-map-between-manifolds-with-boundary, def-cw-complex-with-closure-finiteness-and-weak-topology, lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension, lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval, thm-smooth-dependence-of-ode-solutions-on-parameters, lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots, thm-the-exponential-law]

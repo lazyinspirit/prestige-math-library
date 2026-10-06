@@ -1,7 +1,7 @@
 ---
 page: higher-dimensional-resolution-of-singularities-examples
 title: "Higher-Dimensional Resolution of Singularities \u2014 Examples"
-status: draft
+status: published
 requires: [higher-dimensional-resolution-of-singularities]
 items: []
 examples: [lem-blowup-charts-of-the-quadric-cone,

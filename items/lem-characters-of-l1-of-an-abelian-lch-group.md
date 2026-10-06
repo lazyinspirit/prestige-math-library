@@ -2,7 +2,7 @@
 id: lem-characters-of-l1-of-an-abelian-lch-group
 kind: lemma
 title: Characters of the L1 algebra of an abelian group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: "ex-one-dimensional-obstacle-problem-and-contact-set"
 kind: "example"
 title: "A one-dimensional obstacle problem and its contact set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 10

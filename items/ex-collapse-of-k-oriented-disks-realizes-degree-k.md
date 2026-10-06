@@ -2,7 +2,7 @@
 id: ex-collapse-of-k-oriented-disks-realizes-degree-k
 kind: example
 title: Collapsing $k$ oriented disks realizes degree $k$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-writhe-normalized-ribbon-trace-is-an-unframed-link-invariant
 kind: theorem
 title: "The writhe-normalized ribbon trace is an unframed link invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

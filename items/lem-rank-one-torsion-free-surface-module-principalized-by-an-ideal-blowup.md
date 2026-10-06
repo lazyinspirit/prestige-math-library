@@ -2,7 +2,7 @@
 id: lem-rank-one-torsion-free-surface-module-principalized-by-an-ideal-blowup
 kind: lemma
 title: "A rank-one surface module is principalized by an ideal blowup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-a-twice-differentiable-local-minimiser-has-nonnegative-second-variation
 kind: lemma
 title: "A twice differentiable local minimiser has nonnegative second variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

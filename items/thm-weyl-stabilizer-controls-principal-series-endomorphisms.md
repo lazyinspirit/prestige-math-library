@@ -2,7 +2,7 @@
 id: thm-weyl-stabilizer-controls-principal-series-endomorphisms
 kind: theorem
 title: "The Weyl stabiliser controls the principal series endomorphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

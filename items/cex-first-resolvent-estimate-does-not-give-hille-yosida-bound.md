@@ -2,7 +2,7 @@
 id: cex-first-resolvent-estimate-does-not-give-hille-yosida-bound
 kind: counterexample
 title: "A first resolvent estimate does not ensure the prescribed semigroup bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

@@ -2,7 +2,7 @@
 id: lem-connected-sum-of-oriented-homotopy-spheres-is-a-homotopy-sphere
 kind: lemma
 title: "Connected sum preserves oriented homotopy spheres"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

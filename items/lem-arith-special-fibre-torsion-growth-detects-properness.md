@@ -2,7 +2,7 @@
 id: lem-arith-special-fibre-torsion-growth-detects-properness
 kind: lemma
 title: "Special fibre torsion growth detects properness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

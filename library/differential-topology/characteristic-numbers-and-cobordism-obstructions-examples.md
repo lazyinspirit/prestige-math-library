@@ -1,7 +1,7 @@
 ---
 page: characteristic-numbers-and-cobordism-obstructions-examples
 title: Characteristic Numbers and Cobordism Obstructions — Examples
-status: draft
+status: published
 items: []
 examples: [ex-stiefel-whitney-number-of-real-projective-space,
             ex-pontryagin-numbers-of-complex-projective-two-space,

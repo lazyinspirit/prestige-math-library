@@ -2,7 +2,7 @@
 id: lem-nonsquare-tangent-conic-rational-surface-blowups-terminate
 kind: lemma
 title: Nonsquare tangent-conic surface singularities terminate under point blowups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 14

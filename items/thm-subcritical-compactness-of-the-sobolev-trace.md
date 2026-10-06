@@ -2,7 +2,7 @@
 id: thm-subcritical-compactness-of-the-sobolev-trace
 kind: theorem
 title: "Subcritical compactness of the Sobolev trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

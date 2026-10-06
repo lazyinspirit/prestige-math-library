@@ -2,7 +2,7 @@
 id: def-distributional-weak-solution-of-a-scalar-conservation-law
 kind: definition
 title: Distributional weak solutions of the Cauchy problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

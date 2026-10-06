@@ -2,7 +2,7 @@
 id: def-pontryagin-thom-collapse-of-a-framed-neat-cobordism
 kind: definition
 title: "Collapse of a framed neat cobordism in X times I"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

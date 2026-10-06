@@ -2,7 +2,7 @@
 id: lem-tangential-maximal-function-norm-bound
 kind: lemma
 title: "The tangential maximal function is controlled by the aperture-one nontangential maximal function in $L^p$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

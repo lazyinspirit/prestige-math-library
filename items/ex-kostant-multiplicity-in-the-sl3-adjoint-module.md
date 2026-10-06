@@ -2,7 +2,7 @@
 id: ex-kostant-multiplicity-in-the-sl3-adjoint-module
 kind: example
 title: Kostant multiplicity in the sl3 adjoint module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

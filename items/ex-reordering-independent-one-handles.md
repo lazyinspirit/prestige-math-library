@@ -2,7 +2,7 @@
 id: ex-reordering-independent-one-handles
 kind: example
 title: "Reordering independent one-handles"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [lem-handles-of-equal-index-can-be-attached-on-one-level, def-handle-decomposition-relative-to-the-incoming-boundary, lem-handle-attachments-are-relative-cell-attachments-up-to-homotopy, cor-index-zero-handles-create-components, lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism]

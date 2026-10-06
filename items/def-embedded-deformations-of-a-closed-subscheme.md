@@ -2,7 +2,7 @@
 id: "def-embedded-deformations-of-a-closed-subscheme"
 kind: "definition"
 title: "Embedded deformations of a closed subscheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 2

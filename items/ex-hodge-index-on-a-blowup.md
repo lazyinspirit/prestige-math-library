@@ -2,7 +2,7 @@
 id: ex-hodge-index-on-a-blowup
 kind: example
 title: "The Hodge index theorem on a blowup of the projective plane"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

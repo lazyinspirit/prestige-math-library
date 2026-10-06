@@ -2,7 +2,7 @@
 id: lem-stable-thom-detector-coordinates-commute-with-suspension
 kind: lemma
 title: "Stable Thom detector coordinates commute with suspension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

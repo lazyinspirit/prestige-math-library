@@ -2,7 +2,7 @@
 id: lem-regular-value-choice-does-not-change-the-framed-cobordism-class
 kind: lemma
 title: "The framed preimage class is independent of regular value and positive basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

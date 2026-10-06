@@ -2,7 +2,7 @@
 id: cor-dirichlet-laplacian-generates-an-analytic-heat-semigroup
 kind: corollary
 title: The Dirichlet Laplacian generates an analytic heat semigroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 15

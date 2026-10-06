@@ -2,7 +2,7 @@
 id: lem-collared-gluing-has-relative-excision-and-evaluation-maps
 kind: lemma
 title: "Collared gluing has relative excision and evaluation maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

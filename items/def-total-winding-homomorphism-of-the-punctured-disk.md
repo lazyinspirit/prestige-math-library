@@ -2,7 +2,7 @@
 id: def-total-winding-homomorphism-of-the-punctured-disk
 kind: definition
 title: "The total winding homomorphism of the punctured disk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

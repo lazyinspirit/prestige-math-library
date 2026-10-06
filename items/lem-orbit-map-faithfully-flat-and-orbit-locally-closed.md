@@ -2,7 +2,7 @@
 id: lem-orbit-map-faithfully-flat-and-orbit-locally-closed
 kind: lemma
 title: "Smooth orbits are locally closed and their orbit maps are faithfully flat over every field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

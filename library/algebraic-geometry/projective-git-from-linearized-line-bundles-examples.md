@@ -1,7 +1,7 @@
 ---
 page: projective-git-from-linearized-line-bundles-examples
 title: "Projective GIT from Linearized Line Bundles — Examples"
-status: draft
+status: published
 requires: [projective-git-from-linearized-line-bundles]
 items: []
 examples: [cex-semistable-locus-depends-on-linearization,

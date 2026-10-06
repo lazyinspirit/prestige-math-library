@@ -2,7 +2,7 @@
 id: def-faithful-weak-categorical-action
 kind: definition
 title: "Faithful weak action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

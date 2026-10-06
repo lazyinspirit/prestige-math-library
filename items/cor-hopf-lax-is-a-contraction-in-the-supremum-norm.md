@@ -2,7 +2,7 @@
 id: cor-hopf-lax-is-a-contraction-in-the-supremum-norm
 kind: corollary
 title: The Hopf--Lax operator is a contraction in the supremum norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

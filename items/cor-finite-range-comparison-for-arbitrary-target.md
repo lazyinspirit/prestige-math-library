@@ -2,7 +2,7 @@
 id: cor-finite-range-comparison-for-arbitrary-target
 kind: corollary
 title: "Finite-range comparison with an arbitrary simply connected target"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

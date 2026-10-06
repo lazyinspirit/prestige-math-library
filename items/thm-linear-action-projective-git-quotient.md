@@ -2,7 +2,7 @@
 id: thm-linear-action-projective-git-quotient
 kind: theorem
 title: Projective GIT quotient for a linear action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

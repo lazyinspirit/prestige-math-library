@@ -2,7 +2,7 @@
 id: "def-ext-groups-of-the-cotangent-complex"
 kind: "definition"
 title: "Ext groups of the cotangent complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 12

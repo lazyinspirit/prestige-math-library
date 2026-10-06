@@ -2,7 +2,7 @@
 id: "prop-surgery-on-a-normal-map-preserves-its-normal-bordism-class"
 kind: "proposition"
 title: "Surgery on a normal map preserves its normal bordism class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: "rem-smooth-four-dimensional-surgery-is-not-covered-by-the-high-dimensional-program"
 kind: "remark"
 title: "Smooth four-dimensional surgery is not covered by the high-dimensional program"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

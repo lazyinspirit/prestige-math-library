@@ -2,7 +2,7 @@
 id: ex-logarithm-is-in-bmo-but-not-linfinity
 kind: example
 title: "The logarithm is in BMO but not in L-infinity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

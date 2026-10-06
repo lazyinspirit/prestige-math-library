@@ -2,7 +2,7 @@
 id: thm-fractional-sobolev-inequality-on-euclidean-space
 kind: theorem
 title: "The critical fractional Sobolev inequality on $\\mathbb R^d$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

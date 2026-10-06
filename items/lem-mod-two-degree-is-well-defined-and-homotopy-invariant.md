@@ -2,7 +2,7 @@
 id: lem-mod-two-degree-is-well-defined-and-homotopy-invariant
 kind: lemma
 title: The mod-two degree is well defined and homotopy invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

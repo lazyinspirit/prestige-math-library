@@ -2,7 +2,7 @@
 id: lem-arcs-in-a-connected-submanifold-avoiding-finitely-many-double-points
 kind: lemma
 title: Arcs joining two points of a connected submanifold avoiding finitely many points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

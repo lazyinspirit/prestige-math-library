@@ -2,7 +2,7 @@
 id: lem-surface-finite-completion-factors
 kind: lemma
 title: "Surface finite completion factors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

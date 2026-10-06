@@ -2,7 +2,7 @@
 id: lem-centre-central-characters-and-descent-along-central-isogenies
 kind: lemma
 title: "Central characters and descent along a central isogeny"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 32

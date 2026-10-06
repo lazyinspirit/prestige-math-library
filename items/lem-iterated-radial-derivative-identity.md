@@ -2,7 +2,7 @@
 id: lem-iterated-radial-derivative-identity
 kind: lemma
 title: "The iterated radial-derivative identity behind the odd-dimensional reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

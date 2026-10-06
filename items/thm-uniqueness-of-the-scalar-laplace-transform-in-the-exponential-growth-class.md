@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-the-scalar-laplace-transform-in-the-exponential-growth-class
 kind: theorem
 title: "Uniqueness of the scalar Laplace transform in the exponential-growth class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

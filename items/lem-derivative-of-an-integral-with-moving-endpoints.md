@@ -2,7 +2,7 @@
 id: lem-derivative-of-an-integral-with-moving-endpoints
 kind: lemma
 title: "Differentiating an integral with moving endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-no-nowhere-zero-tangent-field-on-a-positive-even-sphere
 kind: lemma
 title: "A positive even sphere has no nowhere-zero tangent field"
-status: draft
+status: published
 origin: session
 deps: [prop-degree-is-homotopy-invariant-and-multiplicative-under-composition, prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps]
 justified_by: []

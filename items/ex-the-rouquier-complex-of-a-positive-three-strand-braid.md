@@ -2,7 +2,7 @@
 id: ex-the-rouquier-complex-of-a-positive-three-strand-braid
 kind: example
 title: "The Rouquier complex of a positive three-strand braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

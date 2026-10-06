@@ -2,7 +2,7 @@
 id: cor-subcritical-compactness-for-w-one-p-zero-on-arbitrary-bounded-open-sets
 kind: corollary
 title: "Subcritical compactness for $W^{1,p}_0$ on arbitrary bounded open sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

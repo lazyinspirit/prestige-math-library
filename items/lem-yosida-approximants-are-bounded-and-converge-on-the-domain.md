@@ -2,7 +2,7 @@
 id: lem-yosida-approximants-are-bounded-and-converge-on-the-domain
 kind: lemma
 title: "Yosida approximants are bounded and converge on the domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

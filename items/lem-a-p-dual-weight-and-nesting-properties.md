@@ -2,7 +2,7 @@
 id: lem-a-p-dual-weight-and-nesting-properties
 kind: lemma
 title: Duality and nesting of the A_p classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

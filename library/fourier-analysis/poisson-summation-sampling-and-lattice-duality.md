@@ -1,7 +1,7 @@
 ---
 page: poisson-summation-sampling-and-lattice-duality
 title: "Poisson Summation Sampling and Lattice Duality"
-status: draft
+status: published
 items: [def-full-rank-lattice-covolume-and-dual-lattice,
         def-normalized-sinc-function,
         lem-invertible-linear-substitutions-preserve-schwartz-space,

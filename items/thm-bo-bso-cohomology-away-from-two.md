@@ -2,7 +2,7 @@
 id: thm-bo-bso-cohomology-away-from-two
 kind: theorem
 title: "Cohomology of BO and BSO away from two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

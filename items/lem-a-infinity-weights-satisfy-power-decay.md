@@ -2,7 +2,7 @@
 id: lem-a-infinity-weights-satisfy-power-decay
 kind: lemma
 title: A_infinity weights satisfy power decay
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

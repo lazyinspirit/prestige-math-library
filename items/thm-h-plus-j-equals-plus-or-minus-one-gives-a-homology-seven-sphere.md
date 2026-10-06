@@ -2,7 +2,7 @@
 id: thm-h-plus-j-equals-plus-or-minus-one-gives-a-homology-seven-sphere
 kind: theorem
 title: "Euler number $\\pm1$ implies the Milnor sphere bundle is a homology seven-sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: def-sobolev-conjugate-exponent
 kind: definition
 title: "The Sobolev conjugate exponent and the scaling identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-contragredient-rational-representation
 kind: definition
 title: "Contragredient (dual) rational representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

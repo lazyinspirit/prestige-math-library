@@ -2,7 +2,7 @@
 id: def-braided-monoidal-functor-induced-intertwiner
 kind: definition
 title: "The intertwiner induced by a braided monoidal functor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: cor-nyquist-no-aliasing-condition
 kind: corollary
 title: "The Nyquist no-aliasing condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

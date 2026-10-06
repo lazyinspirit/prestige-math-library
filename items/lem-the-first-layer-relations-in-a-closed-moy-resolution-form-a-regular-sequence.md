@@ -2,7 +2,7 @@
 id: lem-the-first-layer-relations-in-a-closed-moy-resolution-form-a-regular-sequence
 kind: lemma
 title: "The first-layer relations of a closed MOY resolution form a regular sequence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [lem-setting-a-to-zero-in-a-closed-kr-factorization-gives-the-wide-edge-koszul-complex, def-unreduced-type-a-soergel-bimodules-and-the-trivial-polynomial-factor, def-regular-sequence-on-a-module, def-koszul-complex-of-a-sequence-with-coefficients, thm-regular-sequences-give-acyclic-koszul-complexes, cor-koszul-complex-resolves-a-regular-quotient]

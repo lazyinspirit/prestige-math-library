@@ -2,7 +2,7 @@
 id: lem-the-borel-weil-section-extends-from-the-big-cell-to-the-flag-variety
 kind: lemma
 title: The dominant Borel-Weil section extends from the big cell
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

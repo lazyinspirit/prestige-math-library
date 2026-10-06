@@ -2,7 +2,7 @@
 id: rem-handle-slides-are-not-handle-cancellations
 kind: remark
 title: "Handle slides are not handle cancellations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

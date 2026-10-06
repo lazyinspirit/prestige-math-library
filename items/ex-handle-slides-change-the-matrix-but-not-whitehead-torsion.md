@@ -2,7 +2,7 @@
 id: ex-handle-slides-change-the-matrix-but-not-whitehead-torsion
 kind: example
 title: "Handle slides change the matrix but not the Whitehead torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 14

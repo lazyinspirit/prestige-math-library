@@ -2,7 +2,7 @@
 id: def-piecewise-smooth-shock-and-one-sided-traces
 kind: definition
 title: Piecewise smooth shocks and one-sided traces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

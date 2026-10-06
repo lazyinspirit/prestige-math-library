@@ -2,7 +2,7 @@
 id: lem-presentation-from-surjective-etale-map
 kind: lemma
 title: "Surjective etale maps from schemes give presentations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

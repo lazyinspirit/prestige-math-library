@@ -2,7 +2,7 @@
 id: ex-right-translation-semigroup-on-lp
 kind: example
 title: "The right-translation semigroup on Lp has the weak derivative as generator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

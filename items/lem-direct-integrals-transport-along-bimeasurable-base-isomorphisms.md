@@ -2,7 +2,7 @@
 id: lem-direct-integrals-transport-along-bimeasurable-base-isomorphisms
 kind: lemma
 title: Direct integrals transport along bimeasurable base isomorphisms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-neron-model-and-mapping-property
 kind: definition
 title: "Neron models, the Neron mapping property and weak Neron models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

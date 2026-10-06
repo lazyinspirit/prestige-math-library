@@ -2,7 +2,7 @@
 id: "lem-nonnegative-test-pairings-imply-a-e-nonnegativity-for-ltwo-functions"
 kind: "lemma"
 title: "A function with nonnegative test pairings is nonnegative a.e."
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

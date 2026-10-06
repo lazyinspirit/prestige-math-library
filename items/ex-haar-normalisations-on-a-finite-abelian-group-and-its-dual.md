@@ -28,7 +28,7 @@ sources:
     url: "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
   - title: "Michael E. Taylor, Fourier Analysis, Distributions, and Concentration (course text)"
     url: "https://mtaylor.web.unc.edu/wp-content/uploads/sites/169/2018/04/fadc.pdf"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

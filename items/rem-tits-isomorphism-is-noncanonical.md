@@ -2,7 +2,7 @@
 id: rem-tits-isomorphism-is-noncanonical
 kind: remark
 title: "The Tits isomorphism is noncanonical"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

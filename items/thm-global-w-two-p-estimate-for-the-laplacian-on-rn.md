@@ -2,7 +2,7 @@
 id: thm-global-w-two-p-estimate-for-the-laplacian-on-rn
 kind: theorem
 title: Global $W^{2,p}$ estimate for the Laplacian on Euclidean space
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

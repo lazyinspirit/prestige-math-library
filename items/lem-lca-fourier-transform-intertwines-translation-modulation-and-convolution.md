@@ -30,7 +30,7 @@ sources:
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
   - title: "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C.2-C.3 (course-hosted full text)"
     url: "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

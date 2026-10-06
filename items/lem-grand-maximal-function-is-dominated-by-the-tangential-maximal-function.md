@@ -2,7 +2,7 @@
 id: lem-grand-maximal-function-is-dominated-by-the-tangential-maximal-function
 kind: lemma
 title: "The grand maximal function is pointwise dominated by a tangential maximal function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

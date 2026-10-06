@@ -2,7 +2,7 @@
 id: lem-continuation-map-of-constant-data-is-the-identity
 kind: lemma
 title: "The continuation map of constant data is the identity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

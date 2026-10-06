@@ -2,7 +2,7 @@
 id: def-abstract-root-datum-and-its-weyl-group
 kind: definition
 title: Abstract root data and their Weyl groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

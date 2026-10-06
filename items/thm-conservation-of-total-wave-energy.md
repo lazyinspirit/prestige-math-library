@@ -2,7 +2,7 @@
 id: thm-conservation-of-total-wave-energy
 kind: theorem
 title: "Conservation of total wave energy in three admissible settings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

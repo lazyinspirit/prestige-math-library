@@ -2,7 +2,7 @@
 id: lem-fundamental-class-of-a-product-of-closed-manifolds
 kind: lemma
 title: "The fundamental class of a product is the cross product of the fundamental classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-fundamental-class-of-a-compact-oriented-manifold, def-product-orientation, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure, prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary, def-singular-chain-cross-product-on-generators, lem-singular-chain-cross-product-boundary-formula, prop-singular-chain-cross-products-are-natural, def-homology-cross-product-for-tensor-complexes, lem-the-kunneth-cross-product-map-is-well-defined-and-natural, prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise, thm-top-homology-characterizes-compact-orientable-manifolds]

@@ -31,7 +31,7 @@ sources:
     url: https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro
     locator: Proof of Theorem 7.27, printed p. 140 (the residual obstruction to extending the splitting lies in
       $\pi_1(O(2(n-1)))=\mathbb Z_2$ and is killed because $\pi_1(O(n-1))\to\pi_1(O(2(n-1)))$ is onto for $n\ge3$)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

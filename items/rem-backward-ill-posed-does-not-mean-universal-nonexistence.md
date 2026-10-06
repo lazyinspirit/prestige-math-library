@@ -2,7 +2,7 @@
 id: rem-backward-ill-posed-does-not-mean-universal-nonexistence
 kind: remark
 title: Backward ill-posedness does not mean universal nonexistence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

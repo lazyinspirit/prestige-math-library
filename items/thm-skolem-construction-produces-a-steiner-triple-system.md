@@ -2,7 +2,7 @@
 id: thm-skolem-construction-produces-a-steiner-triple-system
 kind: theorem
 title: "Skolem's construction gives a Steiner triple system of order $6m+1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

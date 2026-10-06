@@ -2,7 +2,7 @@
 id: thm-sobolev-poincare-on-bounded-connected-extension-domains
 kind: theorem
 title: "Sobolev-Poincare on bounded connected extension domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

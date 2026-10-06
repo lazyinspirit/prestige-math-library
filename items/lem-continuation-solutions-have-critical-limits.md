@@ -2,7 +2,7 @@
 id: lem-continuation-solutions-have-critical-limits
 kind: lemma
 title: "Continuation solutions have critical limits and exponential decay"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

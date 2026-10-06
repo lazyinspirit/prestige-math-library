@@ -2,7 +2,7 @@
 id: lem-handle-elimination-by-trading-a-pair
 kind: lemma
 title: 'Elimination lemma: trading a handle for a handle two indices higher'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: ex-a-nowhere-zero-vector-field-on-an-odd-sphere
 kind: example
 title: "A nowhere-zero vector field on an odd sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

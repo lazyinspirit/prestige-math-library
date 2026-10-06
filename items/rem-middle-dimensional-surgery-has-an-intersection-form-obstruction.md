@@ -2,7 +2,7 @@
 id: "rem-middle-dimensional-surgery-has-an-intersection-form-obstruction"
 kind: "remark"
 title: "Middle-dimensional surgery has an intersection-form obstruction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

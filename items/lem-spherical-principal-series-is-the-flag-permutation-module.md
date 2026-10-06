@@ -2,7 +2,7 @@
 id: lem-spherical-principal-series-is-the-flag-permutation-module
 kind: lemma
 title: "The spherical principal series is the flag permutation module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

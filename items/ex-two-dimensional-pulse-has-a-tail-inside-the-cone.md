@@ -2,7 +2,7 @@
 id: ex-two-dimensional-pulse-has-a-tail-inside-the-cone
 kind: example
 title: "A two-dimensional pulse has a tail inside the cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

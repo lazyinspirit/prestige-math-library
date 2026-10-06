@@ -2,7 +2,7 @@
 id: lem-first-moment-of-the-unit-sphere-vanishes
 kind: lemma
 title: "Reflection invariance and vanishing first moment of the sphere measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

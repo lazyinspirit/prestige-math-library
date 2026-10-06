@@ -2,7 +2,7 @@
 id: def-stabilized-framed-cobordism-colimit
 kind: definition
 title: "Stabilized framed cobordism and the framed bordism group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

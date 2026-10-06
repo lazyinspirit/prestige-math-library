@@ -32,7 +32,7 @@ sources:
     url: "https://home.agh.edu.pl/~rudol/Paradoxes/haarintegral.pdf"
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand, 1953 (Harvard-hosted full scan)"
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

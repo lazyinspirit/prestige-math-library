@@ -2,7 +2,7 @@
 id: def-finite-holonomy-normal-model
 kind: definition
 title: The finite-holonomy normal model of a compact leaf
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

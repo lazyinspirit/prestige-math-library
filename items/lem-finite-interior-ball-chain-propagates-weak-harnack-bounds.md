@@ -2,7 +2,7 @@
 id: lem-finite-interior-ball-chain-propagates-weak-harnack-bounds
 kind: lemma
 title: "A finite interior ball chain propagates weak Harnack bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: thm-instantaneous-smoothing-of-lp-heat-flow
 kind: theorem
 title: Instantaneous smoothing of the Lp heat flow
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

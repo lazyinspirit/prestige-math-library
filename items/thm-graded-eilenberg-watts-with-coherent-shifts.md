@@ -2,7 +2,7 @@
 id: thm-graded-eilenberg-watts-with-coherent-shifts
 kind: theorem
 title: Graded Eilenberg-Watts theorem with coherent shifts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-coherent-shift-functors-and-transformations-form-hom-categories, lem-homogeneous-right-multiplication-reconstructs-the-graded-kernel-action, lem-homogeneous-free-presentations-prove-the-graded-comparison, lem-graded-tensor-functor-is-k-linear-right-exact-coproduct-preserving-and-shift-coherent, lem-graded-additive-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving, def-coherently-shift-compatible-functor-and-natural-transformation, def-graded-ring-module-bimodule-and-internal-shift, def-bimodule, def-left-and-right-modules, thm-unit-isomorphisms-for-module-tensor-products, def-natural-transformation, def-natural-isomorphism, def-equivalence-and-adjoint-equivalence-of-categories, def-k-linear-category-and-k-linear-functor, def-vector-space, def-field, lem-field-is-a-commutative-ring, def-functor-and-contravariant-functor, def-category]

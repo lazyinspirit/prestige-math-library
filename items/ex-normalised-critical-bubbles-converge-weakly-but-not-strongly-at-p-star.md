@@ -2,7 +2,7 @@
 id: ex-normalised-critical-bubbles-converge-weakly-but-not-strongly-at-p-star
 kind: example
 title: "Critical bubbles converge weakly but not strongly"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

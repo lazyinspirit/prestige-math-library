@@ -2,7 +2,7 @@
 id: thm-oriented-zero-dimensional-framed-bordism-is-the-integers
 kind: theorem
 title: Framed zero-dimensional bordism in an oriented manifold is the integers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

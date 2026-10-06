@@ -2,7 +2,7 @@
 id: ex-the-jones-specialization-of-a-two-strand-closure
 kind: example
 title: "The Jones specialization of a two-strand closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

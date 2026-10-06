@@ -2,7 +2,7 @@
 id: lem-interior-w-two-p-regularity-for-the-laplacian
 kind: lemma
 title: Local $W^{2,p}$ regularity of weak solutions of the Poisson equation
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

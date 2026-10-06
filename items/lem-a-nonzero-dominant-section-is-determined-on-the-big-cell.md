@@ -2,7 +2,7 @@
 id: lem-a-nonzero-dominant-section-is-determined-on-the-big-cell
 kind: lemma
 title: A $U^-$-invariant section is determined on the big cell
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

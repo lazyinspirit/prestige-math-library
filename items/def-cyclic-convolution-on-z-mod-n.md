@@ -2,7 +2,7 @@
 id: def-cyclic-convolution-on-z-mod-n
 kind: definition
 title: "The unnormalised cyclic convolution on $\\mathbb Z/N\\mathbb Z$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

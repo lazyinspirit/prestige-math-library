@@ -2,7 +2,7 @@
 id: def-transversely-oriented-codimension-one-foliation
 kind: definition
 title: Transversely oriented codimension-one foliations
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-smooth-families-and-path-components-in-the-weak-topology
 kind: lemma
 title: "Smooth families and path components in the weak topology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-compact-parameter-pair, def-space-of-immersions-and-space-of-formal-immersions, def-regular-homotopy-of-immersions, lem-smoothing-formal-immersion-families, lem-smoothing-genuine-immersion-families, lem-joint-jet-continuity-and-the-weak-smooth-topology, def-weak-compact-open-smooth-topology-on-mapping-spaces, def-compact-space, thm-the-exponential-law, def-compact-open-topology, def-smooth-family-of-maps-and-evaluation-map, def-homotopy-relative-and-path-homotopy, def-countable-choice]

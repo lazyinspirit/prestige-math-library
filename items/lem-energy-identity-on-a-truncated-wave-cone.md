@@ -2,7 +2,7 @@
 id: lem-energy-identity-on-a-truncated-wave-cone
 kind: lemma
 title: "The energy identity on a truncated wave cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

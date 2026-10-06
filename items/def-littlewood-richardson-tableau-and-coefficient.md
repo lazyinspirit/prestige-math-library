@@ -2,7 +2,7 @@
 id: def-littlewood-richardson-tableau-and-coefficient
 kind: definition
 title: Littlewood--Richardson tableaux and coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

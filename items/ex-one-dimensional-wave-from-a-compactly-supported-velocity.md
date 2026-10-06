@@ -2,7 +2,7 @@
 id: ex-one-dimensional-wave-from-a-compactly-supported-velocity
 kind: example
 title: "A compactly supported velocity datum produces an expanding interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: prop-distributional-weak-solutions-are-not-unique
 kind: proposition
 title: Distributional weak solutions of the Cauchy problem are not unique
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

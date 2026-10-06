@@ -2,7 +2,7 @@
 id: thm-smale-classification-of-sphere-immersions-in-euclidean-space
 kind: theorem
 title: "Smale's classification of sphere immersions in Euclidean space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-the-basepoint-evaluation-of-the-stiefel-section-space-is-a-fibration, lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension, lem-the-second-homotopy-group-of-so-three-vanishes, lem-formal-immersions-of-the-circle-in-the-plane-are-classified-by-the-winding-number, prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle, lem-formal-immersion-gives-the-tangent-normal-bundle-identity, def-whitney-sum-of-vector-bundles, def-stiefel-space-grassmannian-and-tautological-bundle, ex-orthogonal-and-special-orthogonal-lie-groups, cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes, thm-smale-hirsch-immersion-theorem, def-weak-homotopy-equivalence, def-formal-immersion-between-smooth-manifolds, def-space-of-immersions-and-space-of-formal-immersions, def-countable-choice, cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame, prop-tangent-space-of-a-regular-level-set-is-the-kernel]

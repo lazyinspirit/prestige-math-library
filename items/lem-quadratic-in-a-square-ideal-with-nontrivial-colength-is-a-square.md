@@ -2,7 +2,7 @@
 id: lem-quadratic-in-a-square-ideal-with-nontrivial-colength-is-a-square
 kind: lemma
 title: "Quadratics in square ideals of colength greater than one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

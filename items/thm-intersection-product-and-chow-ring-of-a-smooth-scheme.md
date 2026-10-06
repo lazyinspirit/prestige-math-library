@@ -2,7 +2,7 @@
 id: thm-intersection-product-and-chow-ring-of-a-smooth-scheme
 kind: theorem
 title: "The intersection product and Chow ring of a smooth scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 12

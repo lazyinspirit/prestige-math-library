@@ -2,7 +2,7 @@
 id: lem-paired-regular-disk-sweep-is-open-across-its-base-gluing
 kind: lemma
 title: A paired regular disk sweep is open across its base gluing
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

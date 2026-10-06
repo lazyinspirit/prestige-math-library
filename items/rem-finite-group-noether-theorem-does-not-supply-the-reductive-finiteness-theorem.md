@@ -2,7 +2,7 @@
 id: rem-finite-group-noether-theorem-does-not-supply-the-reductive-finiteness-theorem
 kind: remark
 title: The finite-group Noether theorem does not supply invariant finite generation for positive-dimensional groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

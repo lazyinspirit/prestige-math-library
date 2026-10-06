@@ -2,7 +2,7 @@
 id: rem-real-banach-spaces-require-complexification-for-analyticity
 kind: remark
 title: Real Banach spaces require complexification for analyticity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

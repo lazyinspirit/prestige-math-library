@@ -2,7 +2,7 @@
 id: lem-surface-complete-equicharacteristic-formal-fibres
 kind: lemma
 title: Surface complete equicharacteristic formal fibres
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

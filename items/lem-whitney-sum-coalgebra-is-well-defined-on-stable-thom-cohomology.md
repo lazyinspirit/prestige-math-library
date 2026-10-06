@@ -2,7 +2,7 @@
 id: lem-whitney-sum-coalgebra-is-well-defined-on-stable-thom-cohomology
 kind: lemma
 title: "Whitney sum defines the connected coalgebra on stable Thom cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

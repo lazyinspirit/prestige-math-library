@@ -2,7 +2,7 @@
 id: cex-isomorphic-hecke-classes-do-not-by-themselves-prove-homotopy-equivalent-complexes
 kind: counterexample
 title: "Equal Euler classes do not by themselves prove homotopy-equivalent complexes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

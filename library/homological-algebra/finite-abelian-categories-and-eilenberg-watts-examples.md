@@ -1,7 +1,7 @@
 ---
 page: finite-abelian-categories-and-eilenberg-watts-examples
 title: "Finite Abelian Categories and Eilenberg–Watts — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-finite-right-exact-functor-needs-no-infinite-coproduct-hypothesis, cex-finite-length-and-finite-hom-do-not-imply-finite-category, ex-dual-numbers-tensor-functor-is-right-exact-but-not-left-exact]
 ---

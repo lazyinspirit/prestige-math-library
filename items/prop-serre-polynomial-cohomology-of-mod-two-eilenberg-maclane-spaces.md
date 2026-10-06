@@ -2,7 +2,7 @@
 id: prop-serre-polynomial-cohomology-of-mod-two-eilenberg-maclane-spaces
 kind: proposition
 title: "Polynomial mod-two cohomology of Eilenberg–Mac Lane spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

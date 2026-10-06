@@ -2,7 +2,7 @@
 id: def-foliation-component-by-mutual-positive-transverse-accessibility
 kind: definition
 title: "Foliation components as mutual positive transverse-accessibility classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

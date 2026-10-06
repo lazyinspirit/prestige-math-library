@@ -2,7 +2,7 @@
 id: lem-cutoff-commutator-for-local-w-two-p-estimates
 kind: lemma
 title: The cutoff commutator in the local $W^{2,p}$ estimates
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-tangent-bundle-of-complex-projective-space-and-its-pontryagin-classes
 kind: lemma
 title: "The tangent bundle of complex projective space and its Pontryagin classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-complex-projective-bundle-and-tautological-complex-line, lem-integral-cohomology-ring-of-complex-projective-space-by-splitting, thm-integral-complex-projective-bundle-theorem, def-chern-classes-from-the-projective-bundle-relation, thm-naturality-normalization-and-whitney-sum-for-chern-classes, prop-first-chern-class-of-tensor-dual-and-conjugate-lines, def-pontryagin-classes-by-complexification, thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes, thm-top-chern-class-equals-euler-class-of-the-underlying-real-bundle, def-euler-class-by-zero-section-pullback-of-the-thom-class, cor-grassmannian-smooth-irreducible-dimension, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-pontryagin-number-of-a-closed-oriented-manifold, def-kronecker-evaluation-pairing, def-axiom-of-choice, cor-short-exact-sequences-of-vector-bundles-split-over-the-base, def-thom-class-by-fiberwise-normalization, thm-naturality-and-uniqueness-of-thom-classes, thm-excision-for-singular-cohomology, thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, def-fundamental-class-of-a-compact-oriented-manifold, thm-thom-isomorphism-for-oriented-vector-bundles, cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms, lem-complex-orientation-of-underlying-real-bundles, thm-schubert-cells-give-the-stable-grassmannian-cw-structure]

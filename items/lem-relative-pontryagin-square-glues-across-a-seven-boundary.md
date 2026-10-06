@@ -2,7 +2,7 @@
 id: lem-relative-pontryagin-square-glues-across-a-seven-boundary
 kind: lemma
 title: "The relative Pontryagin square glues across a seven-dimensional boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: thm-root-subgroups-of-a-split-reductive-group
 kind: theorem
 title: Root subgroups of a split reductive group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 24

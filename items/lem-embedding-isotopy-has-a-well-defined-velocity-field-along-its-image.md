@@ -2,7 +2,7 @@
 id: lem-embedding-isotopy-has-a-well-defined-velocity-field-along-its-image
 kind: lemma
 title: "The velocity field of an isotopy is well defined along its image"
-status: draft
+status: published
 origin: session
 dependency_level: 5
 provenance:

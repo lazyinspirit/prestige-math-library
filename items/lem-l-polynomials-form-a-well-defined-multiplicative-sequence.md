@@ -2,7 +2,7 @@
 id: lem-l-polynomials-form-a-well-defined-multiplicative-sequence
 kind: lemma
 title: "The L-polynomials are well defined and form a multiplicative, natural and stable sequence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

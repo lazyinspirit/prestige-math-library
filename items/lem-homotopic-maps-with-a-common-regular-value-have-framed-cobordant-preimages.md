@@ -2,7 +2,7 @@
 id: lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages
 kind: lemma
 title: "Homotopic maps with a common regular value have framed-cobordant preimages"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

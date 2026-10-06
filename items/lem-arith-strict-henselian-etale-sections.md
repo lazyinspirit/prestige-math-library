@@ -2,7 +2,7 @@
 id: lem-arith-strict-henselian-etale-sections
 kind: lemma
 title: "Strict henselian etale sections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

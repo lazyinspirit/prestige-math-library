@@ -2,7 +2,7 @@
 id: lem-middle-handle-pairs-with-one-geometric-intersection-cancel
 kind: lemma
 title: Middle-handle pairs with one geometric intersection cancel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 17

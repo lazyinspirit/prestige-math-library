@@ -2,7 +2,7 @@
 id: cex-a-projective-generator-need-not-be-small
 kind: counterexample
 title: "A projective generator need not be small"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

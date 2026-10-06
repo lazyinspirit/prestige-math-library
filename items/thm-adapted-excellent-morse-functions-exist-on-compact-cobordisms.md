@@ -2,7 +2,7 @@
 id: thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms
 kind: theorem
 title: "Adapted excellent Morse functions exist on compact cobordisms"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: ["def-smooth-cobordism-triad-for-morse-theory", "def-morse-function-adapted-to-a-cobordism", "lem-boundary-product-function-on-a-collared-cobordism", "lem-separating-critical-values-far-from-the-boundary", "thm-parametric-transversality", "lem-manifold-bump-for-a-compact-set-inside-an-open-set", "def-a-smooth-map-transverse-to-an-embedded-submanifold", "lem-morse-functions-are-transverse-differentials", "cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points", "thm-morse-lemma", "thm-every-smooth-manifold-admits-a-riemannian-metric", "thm-compactly-supported-vector-fields-are-complete", "def-riemannian-gradient", "def-downward-gradient-like-vector-field", "def-countable-choice"]

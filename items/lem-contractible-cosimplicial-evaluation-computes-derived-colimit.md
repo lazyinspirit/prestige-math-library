@@ -2,7 +2,7 @@
 id: lem-contractible-cosimplicial-evaluation-computes-derived-colimit
 kind: lemma
 title: "Contractible cosimplicial evaluation computes diagram derived colimits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

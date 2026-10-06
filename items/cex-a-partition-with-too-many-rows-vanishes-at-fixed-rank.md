@@ -2,7 +2,7 @@
 id: cex-a-partition-with-too-many-rows-vanishes-at-fixed-rank
 kind: counterexample
 title: A partition with too many rows vanishes at fixed rank
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

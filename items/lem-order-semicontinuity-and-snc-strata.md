@@ -2,7 +2,7 @@
 id: lem-order-semicontinuity-and-snc-strata
 kind: lemma
 title: Order functions and normal-crossings strata are upper semicontinuous
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

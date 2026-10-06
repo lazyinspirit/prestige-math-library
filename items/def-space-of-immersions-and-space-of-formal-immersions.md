@@ -2,7 +2,7 @@
 id: def-space-of-immersions-and-space-of-formal-immersions
 kind: definition
 title: "Space of immersions and space of formal immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-formal-immersion-between-smooth-manifolds, def-weak-compact-open-smooth-topology-on-mapping-spaces, def-immersion-submersion-and-constant-rank-map, def-smooth-manifold, def-product-topology, def-countable-choice]

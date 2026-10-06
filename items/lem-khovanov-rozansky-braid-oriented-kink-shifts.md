@@ -2,7 +2,7 @@
 id: lem-khovanov-rozansky-braid-oriented-kink-shifts
 kind: lemma
 title: "Oriented kink shifts for braid diagrams"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

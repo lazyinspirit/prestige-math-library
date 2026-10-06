@@ -2,7 +2,7 @@
 id: rem-simple-homotopy-and-the-vanishing-criterion-are-at-owned
 kind: remark
 title: "Simple homotopy and the vanishing criterion are owned by AT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 11

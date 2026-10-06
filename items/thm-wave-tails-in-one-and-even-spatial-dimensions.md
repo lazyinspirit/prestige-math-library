@@ -2,7 +2,7 @@
 id: thm-wave-tails-in-one-and-even-spatial-dimensions
 kind: theorem
 title: "Wave tails in one and even spatial dimensions: strong Huygens fails"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

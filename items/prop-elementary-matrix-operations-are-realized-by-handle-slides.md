@@ -2,7 +2,7 @@
 id: prop-elementary-matrix-operations-are-realized-by-handle-slides
 kind: proposition
 title: "Elementary matrix operations are realized by handle slides"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

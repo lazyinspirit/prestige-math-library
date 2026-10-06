@@ -2,7 +2,7 @@
 id: lem-normal-bundle-of-the-zero-locus-of-a-transverse-section
 kind: lemma
 title: "Normal bundle of the zero locus of a transverse section"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-a-smooth-map-transverse-to-an-embedded-submanifold, thm-transverse-preimage-theorem, def-normal-and-conormal-bundles-of-an-embedded-submanifold, thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle, prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles, def-pullback-vector-bundle-as-a-fibre-product, thm-the-pullback-fibre-product-is-a-smooth-vector-bundle, def-vector-bundle-map-over-a-smooth-base-map, prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold, prop-the-zero-section-is-a-smooth-embedding, def-embedded-submanifold-and-slice-chart, def-differential-of-a-smooth-map, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, def-countable-choice]

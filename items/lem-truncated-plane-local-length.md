@@ -2,7 +2,7 @@
 id: lem-truncated-plane-local-length
 kind: lemma
 title: Lengths of truncated plane local rings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

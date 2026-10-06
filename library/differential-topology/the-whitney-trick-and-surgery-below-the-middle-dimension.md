@@ -1,7 +1,7 @@
 ---
 page: the-whitney-trick-and-surgery-below-the-middle-dimension
 title: The Whitney Trick and Surgery Below the Middle Dimension
-status: draft
+status: published
 requires: [handle-cancellation-slides-and-elementary-moves, oriented-and-mod-two-intersection-numbers, smooth-surgery-traces-and-handle-trading, sard-theorem-and-transversality, whitney-embedding-tubular-neighbourhoods-and-approximation, relative-homology-excision-and-mayer-vietoris, orientations-poincare-lefschetz-and-alexander-duality, higher-homotopy-groups-and-cofiber-sequences, hurewicz-whitehead-freudenthal-and-cw-approximation, the-fundamental-group, riemannian-comparison-theorems, simple-homotopy-whitehead-groups-and-torsion]
 items:
 - cor-mod-two-evenness-does-not-by-itself-supply-a-whitney-move

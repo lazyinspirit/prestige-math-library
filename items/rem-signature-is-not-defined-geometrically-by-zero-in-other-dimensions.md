@@ -2,7 +2,7 @@
 id: rem-signature-is-not-defined-geometrically-by-zero-in-other-dimensions
 kind: remark
 title: "The zero extension of the signature is bookkeeping, not a geometric definition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

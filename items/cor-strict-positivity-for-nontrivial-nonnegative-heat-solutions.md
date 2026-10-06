@@ -2,7 +2,7 @@
 id: cor-strict-positivity-for-nontrivial-nonnegative-heat-solutions
 kind: corollary
 title: Strict positivity propagates to later interior times
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

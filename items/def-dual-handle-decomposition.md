@@ -2,7 +2,7 @@
 id: def-dual-handle-decomposition
 kind: definition
 title: "Dual handle decomposition"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-handle-decomposition-relative-to-the-incoming-boundary, def-attaching-a-smooth-handle-with-corner-rounding, def-k-handle-core-cocore-attaching-region-and-belt-sphere]

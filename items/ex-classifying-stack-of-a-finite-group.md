@@ -2,7 +2,7 @@
 id: ex-classifying-stack-of-a-finite-group
 kind: example
 title: "The classifying stack of a finite group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

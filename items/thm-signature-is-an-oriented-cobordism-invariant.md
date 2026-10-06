@@ -2,7 +2,7 @@
 id: thm-signature-is-an-oriented-cobordism-invariant
 kind: theorem
 title: "The signature of an oriented boundary vanishes, so the signature is an oriented cobordism invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

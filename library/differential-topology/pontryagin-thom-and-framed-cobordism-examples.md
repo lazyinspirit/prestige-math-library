@@ -1,7 +1,7 @@
 ---
 page: pontryagin-thom-and-framed-cobordism-examples
 title: "Pontryagin Thom and Framed Cobordism — Examples"
-status: draft
+status: published
 category: differential-topology
 items: []
 examples: [ex-framed-zero-manifolds-and-signed-points, ex-pontryagin-thom-map-of-the-standard-framed-equator, ex-framed-links-represent-elements-of-pi-three-of-s-two, cex-changing-a-framing-can-change-the-pontryagin-thom-class, ex-stabilizing-a-framed-submanifold-suspends-its-collapse-map]

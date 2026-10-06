@@ -2,7 +2,7 @@
 id: def-first-difference-quotient
 kind: definition
 title: "Difference quotients on a shrunken domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-locally-integrable-function-as-a-regular-distribution, def-translation-of-a-function-on-rn, def-l-p-space-as-a-quotient-by-null-functions, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, def-countable-choice]

@@ -2,7 +2,7 @@
 id: ex-kostant-n-cohomology-for-the-trivial-sl3-module
 kind: example
 title: "Kostant cohomology for the trivial sl3 module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-deck-group-of-the-holonomy-cover-is-the-holonomy-group
 kind: lemma
 title: The deck group of the holonomy cover is the holonomy group
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

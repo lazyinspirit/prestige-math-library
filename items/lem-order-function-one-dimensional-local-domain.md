@@ -2,7 +2,7 @@
 id: lem-order-function-one-dimensional-local-domain
 kind: lemma
 title: "The order function of a one-dimensional Noetherian local domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

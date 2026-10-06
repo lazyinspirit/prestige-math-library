@@ -2,7 +2,7 @@
 id: lem-euler-and-first-pontryagin-classes-of-xi-h-j
 kind: lemma
 title: "Euler and first Pontryagin classes of $\\xi_{h,j}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

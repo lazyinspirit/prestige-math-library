@@ -1,7 +1,7 @@
 ---
 page: borel-weil-and-borel-weil-bott
 title: "Borel Weil and Borel Weil Bott"
-status: draft
+status: published
 requires:
   - smooth-projective-serre-duality-and-flag-variety-line-bundles
 items:

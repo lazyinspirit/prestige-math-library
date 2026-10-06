@@ -2,7 +2,7 @@
 id: lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product
 kind: lemma
 title: "The DFT turns cyclic convolution into a scaled pointwise product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

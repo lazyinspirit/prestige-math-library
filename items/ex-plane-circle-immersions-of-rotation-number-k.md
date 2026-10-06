@@ -2,7 +2,7 @@
 id: ex-plane-circle-immersions-of-rotation-number-k
 kind: example
 title: "Plane circle immersions of rotation number k"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-rotation-number-of-an-immersed-oriented-circle-in-the-plane, thm-whitney-graustein-classification-of-plane-circle-immersions, prop-degree-of-the-power-map-on-the-circle, thm-winding-number-equals-circle-degree, def-immersion-submersion-and-constant-rank-map, def-degree-of-a-circle-loop, def-countable-choice]

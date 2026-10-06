@@ -2,7 +2,7 @@
 id: thm-good-and-geometric-quotient-on-stable-locus
 kind: theorem
 title: Good and geometric quotient on the stable locus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

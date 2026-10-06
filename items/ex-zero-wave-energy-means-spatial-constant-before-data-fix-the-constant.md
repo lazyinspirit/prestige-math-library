@@ -2,7 +2,7 @@
 id: ex-zero-wave-energy-means-spatial-constant-before-data-fix-the-constant
 kind: example
 title: "Zero wave energy means a spatial constant, fixed by the displacement datum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

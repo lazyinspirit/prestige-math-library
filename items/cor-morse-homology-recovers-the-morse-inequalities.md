@@ -2,7 +2,7 @@
 id: cor-morse-homology-recovers-the-morse-inequalities
 kind: corollary
 title: "Morse homology recovers the Morse inequalities"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-linearizations-powers-and-equivariant-section-ring
 kind: lemma
 title: Linearizations of tensor powers and the equivariant section ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

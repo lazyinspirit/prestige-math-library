@@ -2,7 +2,7 @@
 id: lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves
 kind: lemma
 title: "Fundamental theorem of calculus for Banach-valued continuous curves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

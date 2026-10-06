@@ -31,7 +31,7 @@ sources:
       Press 1965; scanned edition with searchable text layer)
     url: https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf
     locator: Remark 2 after Corollary 6.5, printed p. 70 (the dimension restriction on the cancellation theorems)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

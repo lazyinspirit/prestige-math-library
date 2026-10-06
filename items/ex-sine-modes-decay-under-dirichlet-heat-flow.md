@@ -2,7 +2,7 @@
 id: ex-sine-modes-decay-under-dirichlet-heat-flow
 kind: example
 title: Sine modes decay under Dirichlet heat flow
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

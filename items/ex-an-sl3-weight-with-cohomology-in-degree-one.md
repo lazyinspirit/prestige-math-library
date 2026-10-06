@@ -2,7 +2,7 @@
 id: ex-an-sl3-weight-with-cohomology-in-degree-one
 kind: example
 title: An sl3 weight with cohomology in degree one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

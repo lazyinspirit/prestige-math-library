@@ -2,7 +2,7 @@
 id: ex-rational-hurewicz-range-for-the-four-sphere
 kind: example
 title: "The rational Hurewicz range for the four-sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

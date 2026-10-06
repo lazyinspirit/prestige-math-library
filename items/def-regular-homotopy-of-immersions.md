@@ -2,7 +2,7 @@
 id: def-regular-homotopy-of-immersions
 kind: definition
 title: "Regular homotopy of immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-space-of-immersions-and-space-of-formal-immersions, def-compact-parameter-pair, def-smooth-family-of-maps-and-evaluation-map, def-smooth-map-between-manifolds-with-boundary, def-immersion-submersion-and-constant-rank-map, def-homotopy-relative-and-path-homotopy, def-countable-choice]

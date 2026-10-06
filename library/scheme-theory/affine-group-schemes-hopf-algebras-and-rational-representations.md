@@ -1,7 +1,7 @@
 ---
 page: "affine-group-schemes-hopf-algebras-and-rational-representations"
 title: "Affine Group Schemes, Hopf Algebras, and Rational Representations"
-status: draft
+status: published
 category: scheme-theory
 companion: affine-group-schemes-hopf-algebras-and-rational-representations-examples
 requires: ["group-schemes-of-finite-type-over-a-field",

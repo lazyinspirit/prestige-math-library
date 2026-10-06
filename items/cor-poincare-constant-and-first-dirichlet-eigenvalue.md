@@ -2,7 +2,7 @@
 id: cor-poincare-constant-and-first-dirichlet-eigenvalue
 kind: corollary
 title: "The Poincare constant is the reciprocal square root of the first Dirichlet eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

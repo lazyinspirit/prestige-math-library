@@ -2,7 +2,7 @@
 id: lem-standard-gaussian-is-determined-by-its-moments
 kind: lemma
 title: "The standard Gaussian law is determined by its moments"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

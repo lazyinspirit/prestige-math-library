@@ -2,7 +2,7 @@
 id: lem-formal-immersions-of-the-circle-in-the-plane-are-classified-by-the-winding-number
 kind: lemma
 title: "Formal immersions of the circle in the plane are classified by the winding number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle, def-rotation-number-of-an-immersed-oriented-circle-in-the-plane, def-stiefel-space-grassmannian-and-tautological-bundle, def-frame-bundle-and-associated-vector-bundle, def-local-frame-and-global-frame-of-a-vector-bundle, cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame, thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree, cor-degree-descends-to-circle-loop-classes, thm-winding-number-equals-circle-degree, cor-winding-number-classifies-loops-in-the-punctured-plane, def-weak-compact-open-smooth-topology-on-mapping-spaces]

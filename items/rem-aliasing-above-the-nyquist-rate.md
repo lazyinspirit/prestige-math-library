@@ -2,7 +2,7 @@
 id: rem-aliasing-above-the-nyquist-rate
 kind: remark
 title: "Aliasing when spectral support has positive-measure overlap with a reciprocal translate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

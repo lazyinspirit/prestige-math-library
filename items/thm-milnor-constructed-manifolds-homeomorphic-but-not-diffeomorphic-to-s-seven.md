@@ -2,7 +2,7 @@
 id: thm-milnor-constructed-manifolds-homeomorphic-but-not-diffeomorphic-to-s-seven
 kind: theorem
 title: "The Milnor sphere $M_{2,-1}$ is homeomorphic but not diffeomorphic to $S^7$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

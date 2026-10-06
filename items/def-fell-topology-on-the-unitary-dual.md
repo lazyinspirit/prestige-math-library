@@ -21,7 +21,7 @@ sources:
     - title: "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press 2008; author-hosted complete text)"
       url: "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf"
       locator: "Appendix F, §F.2: Definition F.2.1 and Proposition F.2.4"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Definition

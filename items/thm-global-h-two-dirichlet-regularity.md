@@ -2,7 +2,7 @@
 id: thm-global-h-two-dirichlet-regularity
 kind: theorem
 title: "Global $H^2$ Dirichlet regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

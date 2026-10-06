@@ -2,7 +2,7 @@
 id: lem-spectral-measure-of-a-representation-of-an-abelian-lch-group
 kind: lemma
 title: Spectral measure of a unitary representation of an abelian group, covariance, and ergodicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

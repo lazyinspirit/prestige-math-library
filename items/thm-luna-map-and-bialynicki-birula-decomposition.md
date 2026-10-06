@@ -2,7 +2,7 @@
 id: thm-luna-map-and-bialynicki-birula-decomposition
 kind: theorem
 title: The Luna map and the Bialynicki-Birula decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

@@ -1,7 +1,7 @@
 ---
 page: uncertainty-principles-for-fourier-analysis
 title: "Uncertainty Principles for Fourier Analysis"
-status: draft
+status: published
 items: [def-spatial-and-frequency-centres-and-variances,
         lem-position-derivative-commutator-estimate,
         lem-compact-support-gives-an-entire-fourier-laplace-transform,

@@ -1,7 +1,7 @@
 ---
 page: "whitehead-torsion-and-the-s-cobordism-theorem-examples"
 title: "Whitehead Torsion and the S Cobordism Theorem — Examples"
-status: draft
+status: published
 requires: [whitehead-torsion-and-the-s-cobordism-theorem, fixed-point-index-and-the-lefschetz-theorem]
 items: []
 examples: ["ex-simply-connected-h-cobordisms-have-zero-whitehead-obstruction", "ex-a-group-ring-handle-matrix-and-its-torsion-class", "ex-handle-slides-change-the-matrix-but-not-whitehead-torsion", "cex-ordinary-acyclicity-over-z-does-not-detect-group-ring-torsion"]

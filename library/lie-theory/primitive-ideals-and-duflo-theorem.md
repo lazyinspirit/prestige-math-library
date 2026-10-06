@@ -1,7 +1,7 @@
 ---
 page: primitive-ideals-and-duflo-theorem
 title: "Primitive Ideals and Duflo Theorem"
-status: draft
+status: published
 items: ["def-annihilator-ideal-of-a-lie-algebra-module", "def-primitive-ideal-of-an-enveloping-algebra", "prop-annihilators-of-simple-highest-weight-modules-are-primitive", "prop-primitive-ideals-are-prime-in-the-noncommutative-sense", "lem-dixmiers-lemma-for-countable-dimensional-algebras", "prop-a-primitive-ideal-determines-a-central-character", "def-central-reduction-of-the-enveloping-algebra", "prop-verma-annihilator-contains-the-central-character-ideal", "lem-adjoint-action-preserves-the-associated-graded-of-a-two-sided-ideal", "def-associated-graded-variety-of-a-two-sided-ideal", "prop-associated-variety-of-a-primitive-ideal-is-conical-and-g-invariant", "lem-every-central-character-of-the-enveloping-algebra-arises-from-a-weight", "cor-primitive-ideals-are-partitioned-by-dot-orbit-central-character", "lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters", "rem-highest-weights-can-have-the-same-primitive-ideal"]
 examples: []
 ---

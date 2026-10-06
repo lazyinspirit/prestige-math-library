@@ -2,7 +2,7 @@
 id: "lem-derivatives-of-a-multiple-test-blowup"
 kind: "lemma"
 title: "Derivative ideals under a multiple test blow-up"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 6

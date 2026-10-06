@@ -2,7 +2,7 @@
 id: lem-strong-lp-closed-constraints-pass-through-rellich-limits
 kind: lemma
 title: "Closed target constraints survive compact extraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

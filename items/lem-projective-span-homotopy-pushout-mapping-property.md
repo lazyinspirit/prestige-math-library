@@ -2,7 +2,7 @@
 id: lem-projective-span-homotopy-pushout-mapping-property
 kind: lemma
 title: "The projective span model computes the homotopy-pushout mapping property"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

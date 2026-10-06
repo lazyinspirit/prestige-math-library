@@ -2,7 +2,7 @@
 id: def-lie-algebra-of-a-group-scheme
 kind: definition
 title: "The Lie algebra of a group scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["def-group-scheme-over-a-field", "def-relative-cotangent-space", "thm-tangent-vectors-dual-numbers", "thm-cotangent-space-maximal-ideal-quotient", "def-dual-numbers-scheme", "def-residue-field-scheme-point", "def-vector-space"]

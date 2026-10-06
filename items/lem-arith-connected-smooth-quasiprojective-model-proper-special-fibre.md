@@ -2,7 +2,7 @@
 id: lem-arith-connected-smooth-quasiprojective-model-proper-special-fibre
 kind: lemma
 title: "Connected smooth quasiprojective model with proper special fibre is proper"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

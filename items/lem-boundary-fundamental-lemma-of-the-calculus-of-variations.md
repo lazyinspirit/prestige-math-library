@@ -2,7 +2,7 @@
 id: lem-boundary-fundamental-lemma-of-the-calculus-of-variations
 kind: lemma
 title: "The boundary fundamental lemma of the calculus of variations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: "thm-lipschitz-stability-of-strongly-monotone-variational-inequalities"
 kind: "theorem"
 title: "Lipschitz stability of strongly monotone variational inequalities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 3

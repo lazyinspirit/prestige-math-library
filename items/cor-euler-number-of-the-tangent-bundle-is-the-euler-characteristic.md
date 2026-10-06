@@ -2,7 +2,7 @@
 id: cor-euler-number-of-the-tangent-bundle-is-the-euler-characteristic
 kind: corollary
 title: "The Euler number of the tangent bundle is the Euler characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

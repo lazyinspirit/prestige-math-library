@@ -2,7 +2,7 @@
 id: lem-a-nonzero-pi-class-on-a-torus-has-a-primitive-embedded-pi-root
 kind: lemma
 title: A nonzero pi class on a torus has a primitive embedded pi root
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: cor-smooth-data-give-smooth-interior-solutions
 kind: corollary
 title: "Smooth data give smooth interior solutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

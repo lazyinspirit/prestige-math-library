@@ -2,7 +2,7 @@
 id: lem-reflection-of-an-outward-field-extends-over-the-double
 kind: lemma
 title: "The reflection of an outward field extends over the double"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

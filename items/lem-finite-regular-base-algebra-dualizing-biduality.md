@@ -2,7 +2,7 @@
 id: lem-finite-regular-base-algebra-dualizing-biduality
 kind: lemma
 title: Dualizing biduality for finite algebras over a regular base
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: cor-high-normal-pontryagin-classes-obstruct-oriented-immersions
 kind: corollary
 title: "High normal Pontryagin classes obstruct low-codimension immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-normal-stiefel-whitney-and-pontryagin-classes-of-a-closed-manifold", "lem-normal-pontryagin-class-is-the-rational-inverse-of-the-tangent-pontryagin-class", "thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes", "lem-an-immersion-into-r-n-gives-a-rank-n-minus-m-representative-of-the-stable-normal-bundle", "thm-choice-implies-dependent-implies-countable-choice", "def-axiom-of-choice", "def-pontryagin-classes-by-complexification"]

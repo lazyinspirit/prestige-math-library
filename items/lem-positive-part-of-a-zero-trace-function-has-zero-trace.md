@@ -2,7 +2,7 @@
 id: lem-positive-part-of-a-zero-trace-function-has-zero-trace
 kind: lemma
 title: "A function whose trace is at most a level has positive part in the zero-boundary space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

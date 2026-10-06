@@ -2,7 +2,7 @@
 id: ex-bmo-seminorm-is-unchanged-by-adding-a-constant
 kind: example
 title: "The BMO seminorm is unchanged by adding a constant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

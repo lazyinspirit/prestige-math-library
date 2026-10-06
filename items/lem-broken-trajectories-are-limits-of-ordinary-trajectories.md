@@ -2,7 +2,7 @@
 id: lem-broken-trajectories-are-limits-of-ordinary-trajectories
 kind: lemma
 title: "Every broken trajectory is a limit of ordinary trajectories"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-broken-morse-trajectory, def-geometric-convergence-to-a-broken-morse-trajectory, thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point, def-morse-smale-pair, thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces, thm-euclidean-implicit-function-theorem, thm-euclidean-inverse-function-theorem, thm-fundamental-theorem-on-flows]
 proof_strategy: direct

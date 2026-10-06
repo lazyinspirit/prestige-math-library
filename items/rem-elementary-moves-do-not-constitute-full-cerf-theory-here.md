@@ -2,7 +2,7 @@
 id: rem-elementary-moves-do-not-constitute-full-cerf-theory-here
 kind: remark
 title: Elementary moves do not constitute full Cerf theory here
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

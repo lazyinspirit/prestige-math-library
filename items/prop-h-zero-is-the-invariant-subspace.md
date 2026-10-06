@@ -2,7 +2,7 @@
 id: prop-h-zero-is-the-invariant-subspace
 kind: proposition
 title: "Degree-zero Lie algebra cohomology is the invariant subspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

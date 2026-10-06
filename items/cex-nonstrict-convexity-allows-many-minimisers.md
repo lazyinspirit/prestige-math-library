@@ -2,7 +2,7 @@
 id: cex-nonstrict-convexity-allows-many-minimisers
 kind: counterexample
 title: "Non-strict convexity allows many minimisers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

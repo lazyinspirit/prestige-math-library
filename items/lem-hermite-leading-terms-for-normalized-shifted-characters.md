@@ -2,7 +2,7 @@
 id: lem-hermite-leading-terms-for-normalized-shifted-characters
 kind: lemma
 title: "Hermite leading terms for normalized shifted characters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

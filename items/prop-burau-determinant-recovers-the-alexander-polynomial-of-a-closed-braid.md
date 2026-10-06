@@ -2,7 +2,7 @@
 id: prop-burau-determinant-recovers-the-alexander-polynomial-of-a-closed-braid
 kind: proposition
 title: "The Burau determinant recovers the Alexander polynomial of a closed braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

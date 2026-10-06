@@ -2,7 +2,7 @@
 id: ex-the-top-degree-bwb-case-and-serre-duality
 kind: example
 title: The top-degree Borel-Weil-Bott case and Serre duality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

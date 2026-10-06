@@ -2,7 +2,7 @@
 id: lem-euler-class-of-a-rouquier-complex-is-homotopy-invariant-and-multiplicative
 kind: lemma
 title: "Euler classes of Rouquier complexes are homotopy invariant and multiplicative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

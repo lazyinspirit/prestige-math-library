@@ -2,7 +2,7 @@
 id: lem-relative-compactness-implies-uniform-translation-continuity-in-lp
 kind: lemma
 title: "Relative compactness forces uniform translation continuity in $L^p$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

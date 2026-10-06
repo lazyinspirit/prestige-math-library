@@ -2,7 +2,7 @@
 id: lem-relative-pontryagin-square-equals-mixed-evaluation
 kind: lemma
 title: "The relative square equals the mixed evaluation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

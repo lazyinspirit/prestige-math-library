@@ -2,7 +2,7 @@
 id: lem-a-p-distribution-decay-from-maximal-cubes
 kind: lemma
 title: Distribution decay from maximal cubes for A_p weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

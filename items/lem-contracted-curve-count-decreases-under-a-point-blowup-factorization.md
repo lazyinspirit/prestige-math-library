@@ -2,7 +2,7 @@
 id: lem-contracted-curve-count-decreases-under-a-point-blowup-factorization
 kind: lemma
 title: The number of contracted curves drops by one after factoring through a point blowup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

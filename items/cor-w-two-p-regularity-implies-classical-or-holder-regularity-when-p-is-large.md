@@ -2,7 +2,7 @@
 id: cor-w-two-p-regularity-implies-classical-or-holder-regularity-when-p-is-large
 kind: corollary
 title: "$W^{2,p}$ regularity implies classical or H\"older regularity when $p$ is large"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

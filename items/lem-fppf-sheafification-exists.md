@@ -2,7 +2,7 @@
 id: lem-fppf-sheafification-exists
 kind: lemma
 title: "Sheafification exists for the fppf site"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

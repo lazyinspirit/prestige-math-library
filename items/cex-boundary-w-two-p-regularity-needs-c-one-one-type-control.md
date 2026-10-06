@@ -2,7 +2,7 @@
 id: cex-boundary-w-two-p-regularity-needs-c-one-one-type-control
 kind: counterexample
 title: Boundary $W^{2,p}$ regularity needs more than Lipschitz boundary
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

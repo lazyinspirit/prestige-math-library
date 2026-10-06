@@ -2,7 +2,7 @@
 id: lem-fppf-quotient-representability-criterion
 kind: lemma
 title: "Criterion for a scheme to represent an fppf quotient sheaf"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-axiom-of-choice, def-faithfully-flat-morphism-schemes, def-fibre-product-schemes-universal-property, def-locally-finite-presentation-morphism, def-quotient-sheaf-and-representable-quotient, lem-nonaffine-fppf-descent-of-scheme-morphisms]

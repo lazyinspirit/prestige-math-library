@@ -2,7 +2,7 @@
 id: lem-characteristic-period-annulus-has-an-orbit-or-polycycle-frontier
 kind: lemma
 title: "A center period annulus has an orbit or polycycle frontier"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

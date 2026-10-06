@@ -2,7 +2,7 @@
 id: lem-rational-normal-surface-point-blowup-normal-and-fibre-cohomology
 kind: lemma
 title: "Normality and fibre cohomology of a rational surface point blowup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

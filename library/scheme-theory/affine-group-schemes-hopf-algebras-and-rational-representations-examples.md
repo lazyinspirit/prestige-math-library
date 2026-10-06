@@ -1,7 +1,7 @@
 ---
 page: "affine-group-schemes-hopf-algebras-and-rational-representations-examples"
 title: "Affine Group Schemes, Hopf Algebras, and Rational Representations — Examples"
-status: draft
+status: published
 category: scheme-theory
 companion: affine-group-schemes-hopf-algebras-and-rational-representations
 requires: ["affine-group-schemes-hopf-algebras-and-rational-representations"]

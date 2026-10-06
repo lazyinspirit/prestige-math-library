@@ -2,7 +2,7 @@
 id: lem-holonomy-classes-form-a-groupoid-congruence
 kind: lemma
 title: "Holonomy classes form a groupoid congruence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

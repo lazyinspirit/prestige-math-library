@@ -2,7 +2,7 @@
 id: thm-littlewood-richardson-tensor-product-rule
 kind: theorem
 title: The Littlewood--Richardson tensor-product rule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

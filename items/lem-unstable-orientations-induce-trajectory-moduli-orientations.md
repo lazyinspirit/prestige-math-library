@@ -2,7 +2,7 @@
 id: lem-unstable-orientations-induce-trajectory-moduli-orientations
 kind: lemma
 title: "Unstable orientations induce orientations of the trajectory moduli spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-orientation-line-of-a-morse-critical-point, def-parametrized-morse-trajectory-space, def-transverse-smooth-maps, thm-transverse-fibre-product-theorem, prop-parametrized-morse-trajectory-space-is-a-manifold, prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold, def-product-orientation, def-oriented-smooth-manifold-and-oriented-chart, prop-pointwise-orientation-sign-of-a-local-diffeomorphism, lem-stable-and-unstable-manifolds-are-flow-invariant, thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point, thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces, thm-fundamental-theorem-on-flows, def-downward-gradient-like-vector-field, lem-time-translation-acts-freely-on-nonconstant-trajectories, thm-unparametrized-trajectory-space-is-a-smooth-manifold, lem-evaluation-on-a-regular-level-identifies-unparametrized-trajectories, def-morse-smale-pair, def-countable-choice]
 proof_strategy: direct

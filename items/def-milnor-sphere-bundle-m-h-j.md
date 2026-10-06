@@ -2,7 +2,7 @@
 id: def-milnor-sphere-bundle-m-h-j
 kind: definition
 title: "The Milnor sphere and disk bundles $M_{h,j}$ and $W_{h,j}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

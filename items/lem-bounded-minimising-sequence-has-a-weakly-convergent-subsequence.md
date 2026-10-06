@@ -2,7 +2,7 @@
 id: lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence
 kind: lemma
 title: "A bounded sequence in a reflexive Banach space has a weakly convergent subsequence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

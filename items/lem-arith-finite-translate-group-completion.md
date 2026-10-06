@@ -2,7 +2,7 @@
 id: lem-arith-finite-translate-group-completion
 kind: lemma
 title: "Finite translate completion and uniqueness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

@@ -1,7 +1,7 @@
 ---
 page: bochner-inversion-and-plancherel-on-lca-groups
 title: "Bochner Inversion and Plancherel on LCA Groups"
-status: draft
+status: published
 items: [def-fourier-transform-on-an-lca-group,
         lem-lca-haar-measure-is-inversion-invariant,
         lem-lca-lone-convolution-is-a-commutative-banach-star-algebra,

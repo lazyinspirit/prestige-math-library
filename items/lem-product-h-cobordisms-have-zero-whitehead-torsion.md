@@ -2,7 +2,7 @@
 id: lem-product-h-cobordisms-have-zero-whitehead-torsion
 kind: lemma
 title: "Product h-cobordisms have zero Whitehead torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 11

@@ -2,7 +2,7 @@
 id: lem-adjunction-formula-for-effective-divisors-on-smooth-surfaces
 kind: lemma
 title: "Adjunction formula for effective divisors on a smooth projective surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: cex-a-reeb-component-has-a-compact-boundary-leaf-with-infinite-holonomy-behaviour
 kind: counterexample
 title: "A Reeb component has a compact boundary leaf with infinite holonomy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

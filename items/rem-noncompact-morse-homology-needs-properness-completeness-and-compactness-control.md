@@ -2,7 +2,7 @@
 id: rem-noncompact-morse-homology-needs-properness-completeness-and-compactness-control
 kind: remark
 title: "Flow and compactness hypotheses for noncompact Morse homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

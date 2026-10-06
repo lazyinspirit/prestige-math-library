@@ -2,7 +2,7 @@
 id: cex-critical-levels-cannot-always-be-interchanged-across-a-connecting-trajectory
 kind: counterexample
 title: "Critical levels connected by a trajectory cannot always be interchanged"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-critical-values-of-disjoint-trajectory-closures-can-be-interchanged, def-morse-function-adapted-to-a-cobordism, def-morse-trajectory-from-p-to-q, cor-nonconstant-negative-gradient-trajectories-strictly-decrease-the-function, def-downward-gradient-like-vector-field]

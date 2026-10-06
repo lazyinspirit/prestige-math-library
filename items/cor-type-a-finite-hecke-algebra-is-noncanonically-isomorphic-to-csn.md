@@ -2,7 +2,7 @@
 id: cor-type-a-finite-hecke-algebra-is-noncanonically-isomorphic-to-csn
 kind: corollary
 title: "The finite Hecke algebra is non-canonically isomorphic to the group algebra of S_n"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

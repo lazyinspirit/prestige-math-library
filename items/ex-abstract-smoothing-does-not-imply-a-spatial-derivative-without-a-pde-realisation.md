@@ -2,7 +2,7 @@
 id: ex-abstract-smoothing-does-not-imply-a-spatial-derivative-without-a-pde-realisation
 kind: example
 title: Abstract smoothing does not imply a spatial derivative without a PDE realisation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: lem-c1-planar-hyperbolic-gradient-has-local-stable-and-unstable-curves
 kind: lemma
 title: "A C1 planar gradient at a nondegenerate saddle has local stable and unstable curves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

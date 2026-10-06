@@ -2,7 +2,7 @@
 id: cex-elliptic-fredholm-solvability-can-fail-at-an-eigenvalue
 kind: counterexample
 title: "Elliptic Fredholm solvability can fail at an eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 14

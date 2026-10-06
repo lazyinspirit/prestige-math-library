@@ -2,7 +2,7 @@
 id: lem-finite-support-families-of-finite-dimensional-vector-spaces-are-locally-finite
 kind: lemma
 title: "Finite-support families of finite-dimensional vector spaces are locally finite but not finite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

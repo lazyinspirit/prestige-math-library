@@ -2,7 +2,7 @@
 id: lem-completion-automorphisms-for-tangent-directions
 kind: lemma
 title: An automorphism of the completed local ring matching two tangent directions preserves the homogenization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

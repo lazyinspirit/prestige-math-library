@@ -2,7 +2,7 @@
 id: cex-an-intersection-of-two-primitive-ideals-need-not-be-primitive
 kind: counterexample
 title: "An intersection of two primitive ideals need not be primitive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

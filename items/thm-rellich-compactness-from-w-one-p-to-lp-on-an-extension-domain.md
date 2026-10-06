@@ -2,7 +2,7 @@
 id: thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain
 kind: theorem
 title: "Compactness of $W^{1,p}(\\Omega)\\hookrightarrow L^p(\\Omega)$ on bounded extension domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: cex-omitting-the-rho-shift-breaks-kostants-formula
 kind: counterexample
 title: Omitting the rho shift breaks Kostant's formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: prop-projective-nakayama-pairing-and-symmetric-algebra-specialization
 kind: proposition
 title: "The projective Nakayama pairing and the symmetric-algebra specialization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-algebraic-dual-and-linear-functional, def-bimodule, def-dimension, def-generated-cyclic-finitely-generated-and-free-modules, def-left-and-right-modules, def-left-and-right-nakayama-functors-by-finite-kernel-calculus, def-linear-map, def-natural-isomorphism, def-projective-module, lem-finite-module-duality-is-exact-with-commuting-bimodule-actions, lem-finite-projective-dual-basis-gives-tensor-hom-isomorphism, lem-nakayama-kernels-give-well-defined-adjoint-functors, lem-tensor-hom-adjunction-for-bimodules, prop-functoriality-of-module-tensor-products, thm-unit-isomorphisms-for-module-tensor-products]

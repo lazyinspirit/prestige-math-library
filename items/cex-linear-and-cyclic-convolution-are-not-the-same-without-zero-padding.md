@@ -2,7 +2,7 @@
 id: cex-linear-and-cyclic-convolution-are-not-the-same-without-zero-padding
 kind: counterexample
 title: "Cyclic convolution wraps a high coefficient without zero padding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

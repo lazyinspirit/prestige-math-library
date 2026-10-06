@@ -2,7 +2,7 @@
 id: cex-harnack-estimate-needs-an-additive-forcing-term
 kind: counterexample
 title: "The Harnack estimate needs an additive forcing term"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

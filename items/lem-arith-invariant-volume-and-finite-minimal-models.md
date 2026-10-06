@@ -2,7 +2,7 @@
 id: lem-arith-invariant-volume-and-finite-minimal-models
 kind: lemma
 title: "Invariant volume and finite minimal classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

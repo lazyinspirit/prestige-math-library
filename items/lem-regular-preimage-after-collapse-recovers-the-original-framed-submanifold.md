@@ -2,7 +2,7 @@
 id: lem-regular-preimage-after-collapse-recovers-the-original-framed-submanifold
 kind: lemma
 title: "The regular preimage of the collapse recovers the original framed submanifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

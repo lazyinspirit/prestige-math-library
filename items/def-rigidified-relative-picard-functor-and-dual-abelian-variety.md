@@ -2,7 +2,7 @@
 id: def-rigidified-relative-picard-functor-and-dual-abelian-variety
 kind: definition
 title: "The rigidified relative Picard functor and the dual abelian variety"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

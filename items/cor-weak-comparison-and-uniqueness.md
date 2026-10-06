@@ -2,7 +2,7 @@
 id: cor-weak-comparison-and-uniqueness
 kind: corollary
 title: "Weak comparison and uniqueness for the Dirichlet problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

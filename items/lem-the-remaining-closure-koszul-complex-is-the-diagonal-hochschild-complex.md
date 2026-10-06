@@ -2,7 +2,7 @@
 id: lem-the-remaining-closure-koszul-complex-is-the-diagonal-hochschild-complex
 kind: lemma
 title: "The remaining closure Koszul complex is the diagonal Hochschild complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [lem-the-first-layer-relations-in-a-closed-moy-resolution-form-a-regular-sequence, def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring, thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex, def-axiom-of-choice, lem-koszul-complex-concatenation-tensor-isomorphism]

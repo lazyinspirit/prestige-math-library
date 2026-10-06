@@ -2,7 +2,7 @@
 id: cex-poincare-without-mean-trace-or-zero-set-normalisation-fails
 kind: counterexample
 title: "A gradient-only Poincare estimate needs normalisation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

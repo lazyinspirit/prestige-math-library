@@ -2,7 +2,7 @@
 id: thm-continuation-composition-law-on-homology
 kind: theorem
 title: "Composition of continuation maps on homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

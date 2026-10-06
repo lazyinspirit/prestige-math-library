@@ -2,7 +2,7 @@
 id: thm-direct-method-in-a-reflexive-banach-space
 kind: theorem
 title: "The direct method in a reflexive Banach space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

@@ -40,7 +40,7 @@ sources:
     url: https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro
     locator: Theorem 7.27(i), printed p. 138 (the alternative hypothesis $n_1=2$, $n_2\ge3$ with $\pi_1(M)\cong\pi_1(M\setminus
       N_1)$)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

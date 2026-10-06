@@ -2,7 +2,7 @@
 id: thm-sphere-eversion
 kind: theorem
 title: "Sphere eversion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three, thm-smale-classification-of-sphere-immersions-in-euclidean-space, lem-the-second-homotopy-group-of-so-three-vanishes, thm-smale-hirsch-immersion-theorem, cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes, def-regular-homotopy-of-immersions, def-weak-homotopy-equivalence, def-immersion-submersion-and-constant-rank-map, def-countable-choice, thm-jordan-brouwer-separation, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, def-axiom-of-choice]

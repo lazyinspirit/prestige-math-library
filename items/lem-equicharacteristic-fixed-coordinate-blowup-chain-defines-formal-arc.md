@@ -2,7 +2,7 @@
 id: lem-equicharacteristic-fixed-coordinate-blowup-chain-defines-formal-arc
 kind: lemma
 title: A fixed-coordinate point-blowup chain defines a formal arc
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

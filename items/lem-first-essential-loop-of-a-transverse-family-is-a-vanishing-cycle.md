@@ -2,7 +2,7 @@
 id: lem-first-essential-loop-of-a-transverse-family-is-a-vanishing-cycle
 kind: lemma
 title: "The first essential loop in a transverse family is a vanishing cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: lem-spectral-measure-multiplicity-model-for-a-transitive-system
 kind: lemma
 title: Spectral multiplicity model of a transitive system of imprimitivity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

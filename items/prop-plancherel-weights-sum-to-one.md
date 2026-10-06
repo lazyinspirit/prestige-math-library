@@ -2,7 +2,7 @@
 id: prop-plancherel-weights-sum-to-one
 kind: proposition
 title: "The Plancherel weights sum to one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

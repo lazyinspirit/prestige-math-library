@@ -2,7 +2,7 @@
 id: lem-open-manifolds-admit-handle-filtrations-without-top-index-handles
 kind: lemma
 title: "Open manifolds admit handle filtrations without top-index handles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-open-manifolds-admit-exhaustions-with-no-caps, prop-dual-elimination-of-top-index-handles, def-handle-decomposition-relative-to-the-incoming-boundary, def-smooth-cobordism-triad-for-morse-theory, def-countable-choice, def-locally-connected, thm-collar-neighborhood-theorem, thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold, def-embedded-smooth-submanifold-with-boundary, def-compact-space]

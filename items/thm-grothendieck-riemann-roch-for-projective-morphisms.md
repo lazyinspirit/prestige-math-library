@@ -2,7 +2,7 @@
 id: thm-grothendieck-riemann-roch-for-projective-morphisms
 kind: theorem
 title: "Grothendieck-Riemann-Roch for projective morphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 19

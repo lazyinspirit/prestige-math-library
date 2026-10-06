@@ -2,7 +2,7 @@
 id: rem-the-p-one-difference-quotient-converse-leads-to-bv-not-w-one-one
 kind: remark
 title: "At $p=1$ bounded difference quotients need not give an $L^1$ weak derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-first-difference-quotient, thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one, def-bounded-variation-and-total-variation, lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative, def-weak-derivative-of-a-locally-integrable-function, thm-absolute-continuity-of-the-integral, lem-smooth-bump-between-concentric-euclidean-balls]

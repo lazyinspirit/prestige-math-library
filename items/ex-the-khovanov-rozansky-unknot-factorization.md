@@ -2,7 +2,7 @@
 id: ex-the-khovanov-rozansky-unknot-factorization
 kind: example
 title: "The Khovanov-Rozansky factorization of the unknot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

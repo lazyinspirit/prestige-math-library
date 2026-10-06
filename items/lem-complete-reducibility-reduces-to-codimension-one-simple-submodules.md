@@ -2,7 +2,7 @@
 id: lem-complete-reducibility-reduces-to-codimension-one-simple-submodules
 kind: lemma
 title: "Complete reducibility reduces to splitting codimension-one simple submodules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

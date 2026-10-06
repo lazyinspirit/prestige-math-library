@@ -2,7 +2,7 @@
 id: cor-graded-eilenberg-watts-respects-bicategory-coherence
 kind: corollary
 title: Graded Eilenberg-Watts respects bicategorical coherence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [cor-graded-bimodule-maps-classify-shift-compatible-transformations, lem-coherent-shift-functors-and-transformations-form-hom-categories, thm-graded-eilenberg-watts-with-coherent-shifts, lem-graded-balanced-tensor-and-shift-isomorphisms, def-graded-balanced-tensor-product-and-homogeneous-hom, thm-associativity-of-balanced-tensor-products, thm-unit-isomorphisms-for-module-tensor-products, prop-functoriality-of-module-tensor-products, thm-interchange-law-for-natural-transformations, def-bicategory-pseudofunctor-and-biequivalence, lem-bimodule-tensor-associators-and-unitors-satisfy-bicategory-coherence, def-coherently-shift-compatible-functor-and-natural-transformation, def-graded-ring-module-bimodule-and-internal-shift]

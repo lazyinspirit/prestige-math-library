@@ -2,7 +2,7 @@
 id: def-positive-transverse-accessibility-between-leaves
 kind: definition
 title: "Positive transverse accessibility between leaves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: lem-invertible-linear-substitutions-preserve-schwartz-space
 kind: lemma
 title: "Invertible linear substitutions preserve Schwartz space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

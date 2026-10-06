@@ -1,7 +1,7 @@
 ---
 page: categorical-braid-actions-and-decategorification
 title: "Categorical Braid Actions and Decategorification"
-status: draft
+status: published
 requires: [graded-quiver-algebras-and-derived-tensor-functors,
             geometric-braids-and-artin-generators,
             the-burau-representations,

@@ -2,7 +2,7 @@
 id: thm-homotopic-continuation-data-give-chain-homotopic-maps
 kind: theorem
 title: "Homotopic continuation data give chain homotopic maps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

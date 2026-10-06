@@ -2,7 +2,7 @@
 id: lem-khovanov-rozansky-complex-is-invariant-under-braid-conjugation
 kind: lemma
 title: "Invariance under braid conjugation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: def-transformation-algebra-of-a-g-space
 kind: definition
 title: The transformation (covariance) algebra $C_c(G\times X)$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

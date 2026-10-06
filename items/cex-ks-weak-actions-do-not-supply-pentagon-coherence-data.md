@@ -2,7 +2,7 @@
 id: cex-ks-weak-actions-do-not-supply-pentagon-coherence-data
 kind: counterexample
 title: "Weak actions do not supply pentagon coherence data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

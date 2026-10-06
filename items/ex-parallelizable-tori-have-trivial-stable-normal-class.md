@@ -2,7 +2,7 @@
 id: ex-parallelizable-tori-have-trivial-stable-normal-class
 kind: example
 title: "Parallelizable tori have trivial stable normal class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["prop-parallelizable-manifolds-have-no-stable-characteristic-class-obstruction-to-euclidean-immersion", "def-two-dimensional-torus", "def-torus-and-maximal-torus-in-a-compact-lie-group", "thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity", "def-local-frame-and-global-frame-of-a-vector-bundle", "cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame", "def-countable-choice", "thm-choice-implies-dependent-implies-countable-choice", "def-axiom-of-choice", prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish]

@@ -2,7 +2,7 @@
 id: lem-lca-fourier-transforms-form-a-dense-czero-algebra
 kind: lemma
 title: LCA Fourier transforms form a dense algebra in C0 of the dual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

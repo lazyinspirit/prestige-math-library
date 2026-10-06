@@ -2,7 +2,7 @@
 id: lem-c2-spherical-leaf-stability-on-a-closed-manifold-needs-only-countable-choice
 kind: lemma
 title: Spherical leaf stability on a closed manifold needs only countable choice
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

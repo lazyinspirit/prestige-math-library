@@ -2,7 +2,7 @@
 id: lem-geometric-cancellation-is-a-unit-entry-in-the-handle-matrix
 kind: lemma
 title: "Geometric cancellation is a unit entry in the handle matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

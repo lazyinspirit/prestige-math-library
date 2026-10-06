@@ -2,7 +2,7 @@
 id: lem-pontryagin-thom-converts-bordism-detection-to-a-thom-space-homotopy-problem
 kind: lemma
 title: "Pontryagin-Thom converts bordism detection to a Thom-space homotopy problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-universal-pontryagin-thom-correspondence-for-unoriented-and-oriented-bordism, lem-collapse-of-an-embedded-manifold-classifies-through-the-universal-thom-prespectrum, thm-characteristic-numbers-are-cobordism-invariants, def-thom-class-and-thom-isomorphism-interface, prop-collapse-pullback-of-the-thom-class-is-the-poincare-dual, thm-thom-isomorphism-for-oriented-vector-bundles, thm-naturality-and-uniqueness-of-thom-classes, thm-mod-two-cohomology-of-bo-n, def-stiefel-whitney-classes-from-the-projective-bundle-relation, thm-whitney-sum-formula-for-stiefel-whitney-classes, def-pontryagin-classes-by-complexification, thm-pontryagin-whitney-product-away-from-two, thm-top-chern-class-equals-euler-class-of-the-underlying-real-bundle, def-stiefel-whitney-number-of-a-closed-manifold, def-pontryagin-number-of-a-closed-oriented-manifold, prop-singular-cohomology-is-contravariantly-functorial, def-kronecker-evaluation-pairing, lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives, def-axiom-of-choice, prop-cap-product-naturality-and-projection-formula]

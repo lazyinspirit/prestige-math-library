@@ -2,7 +2,7 @@
 id: def-bruhat-double-coset-basis-of-the-finite-hecke-algebra
 kind: definition
 title: "The Bruhat double-coset basis of the finite Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

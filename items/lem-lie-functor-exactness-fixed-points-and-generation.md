@@ -2,7 +2,7 @@
 id: lem-lie-functor-exactness-fixed-points-and-generation
 kind: lemma
 title: "The Lie functor: exactness, fixed points and generation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

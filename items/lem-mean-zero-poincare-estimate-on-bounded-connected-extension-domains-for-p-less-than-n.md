@@ -2,7 +2,7 @@
 id: lem-mean-zero-poincare-estimate-on-bounded-connected-extension-domains-for-p-less-than-n
 kind: lemma
 title: "Mean-zero Poincare estimate on bounded connected extension domains below the dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

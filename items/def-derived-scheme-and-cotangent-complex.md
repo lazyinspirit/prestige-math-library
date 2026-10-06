@@ -2,7 +2,7 @@
 id: def-derived-scheme-and-cotangent-complex
 kind: definition
 title: "Derived schemes and the cotangent complex of a morphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

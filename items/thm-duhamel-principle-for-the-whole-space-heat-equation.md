@@ -2,7 +2,7 @@
 id: thm-duhamel-principle-for-the-whole-space-heat-equation
 kind: theorem
 title: Duhamel principle for the whole-space heat equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

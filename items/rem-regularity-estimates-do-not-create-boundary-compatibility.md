@@ -2,7 +2,7 @@
 id: rem-regularity-estimates-do-not-create-boundary-compatibility
 kind: remark
 title: "Regularity estimates do not create boundary compatibility"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

@@ -1,7 +1,7 @@
 ---
 page: fixed-point-index-and-the-lefschetz-theorem-examples
 title: "Fixed Point Index and the Lefschetz Theorem: Examples"
-status: draft
+status: published
 category: differential-topology
 items: []
 examples: [ex-rotations-of-the-two-sphere-and-their-lefschetz-number, ex-degree-d-map-on-a-sphere-has-lefschetz-number-one-plus-minus-d, ex-a-torus-translation-has-zero-lefschetz-number-and-no-fixed-points, ex-a-degenerate-isolated-fixed-point-with-nonzero-local-index, cex-vanishing-lefschetz-number-allows-fixed-points]

@@ -1,7 +1,7 @@
 ---
 page: group-c-star-algebras-and-the-fell-unitary-dual
 title: "Group C Star Algebras and the Fell Unitary Dual"
-status: draft
+status: published
 requires: [the-modular-function-and-l1-group-algebras, unitary-representations-positive-type-and-gns, peter-weyl-theory-for-general-compact-groups, banach-algebras-spectrum-and-holomorphic-functional-calculus, gelfand-theory-and-commutative-c-star-algebras]
 items:
   - def-integrated-form-of-a-unitary-representation

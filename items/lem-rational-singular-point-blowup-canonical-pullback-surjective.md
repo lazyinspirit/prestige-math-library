@@ -2,7 +2,7 @@
 id: lem-rational-singular-point-blowup-canonical-pullback-surjective
 kind: lemma
 title: "Canonical pullback is surjective after blowing up a rational singular point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 12

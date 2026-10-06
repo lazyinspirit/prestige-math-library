@@ -2,7 +2,7 @@
 id: lem-a-foliation-is-taut-if-and-only-if-it-has-no-dead-end-component
 kind: lemma
 title: A foliation is taut if and only if it has no dead-end component
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

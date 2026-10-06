@@ -2,7 +2,7 @@
 id: prop-primitive-vectors-of-the-induced-coordinate-module
 kind: proposition
 title: "Primitive vectors of the induced coordinate module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 31

@@ -2,7 +2,7 @@
 id: lem-resolvent-identity-and-holomorphy-for-closed-operators
 kind: lemma
 title: Resolvent identity and holomorphy for a closed operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

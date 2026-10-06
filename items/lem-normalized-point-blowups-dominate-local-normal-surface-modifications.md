@@ -2,7 +2,7 @@
 id: lem-normalized-point-blowups-dominate-local-normal-surface-modifications
 kind: lemma
 title: "Normalized point blowups dominate local normal surface modifications"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

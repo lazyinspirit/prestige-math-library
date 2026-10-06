@@ -2,7 +2,7 @@
 id: lem-standard-intertwiners-form-a-basis-of-the-principal-series-endomorphism-algebra
 kind: lemma
 title: "The standard intertwiners form a basis of the principal series endomorphism algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

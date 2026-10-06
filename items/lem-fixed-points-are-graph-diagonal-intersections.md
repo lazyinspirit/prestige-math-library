@@ -2,7 +2,7 @@
 id: lem-fixed-points-are-graph-diagonal-intersections
 kind: lemma
 title: "Fixed points are exactly the intersections of the graph with the diagonal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

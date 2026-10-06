@@ -2,7 +2,7 @@
 id: cor-signature-theorem-imposes-pontryagin-number-congruences
 kind: corollary
 title: "The signature theorem imposes divisibility constraints on Pontryagin numbers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

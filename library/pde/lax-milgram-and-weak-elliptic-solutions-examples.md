@@ -1,7 +1,7 @@
 ---
 page: lax-milgram-and-weak-elliptic-solutions-examples
 title: "Lax--Milgram and Weak Elliptic Solutions — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-weak-dirichlet-poisson-problem-on-an-interval", "ex-ltwo-forcing-defines-an-h-minus-one-functional", "ex-nonsymmetric-coercive-elliptic-form", "cex-bounded-form-without-coercivity-need-not-be-solvable", "cex-coercive-form-need-not-be-symmetric", "cex-arbitrary-ltwo-boundary-data-need-not-have-an-h-one-lifting", "cex-neumann-poisson-problem-is-not-coercive-on-all-of-h-one", "ex-complex-sesquilinear-coercivity-differs-from-bilinear-positivity", "ex-one-dimensional-form-attains-the-lax-milgram-one-over-alpha-bound", "ex-neumann-kernel-dimension-equals-the-number-of-connected-components", "cex-a-large-adverse-zero-order-term-destroys-dirichlet-coercivity"]
 ---

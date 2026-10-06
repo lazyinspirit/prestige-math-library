@@ -2,7 +2,7 @@
 id: lem-convex-entropy-condition-for-a-shock-is-the-flux-chord-inequality
 kind: lemma
 title: The convex entropy condition for a single shock is the chord condition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

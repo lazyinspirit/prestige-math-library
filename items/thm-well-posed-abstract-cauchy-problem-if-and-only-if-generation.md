@@ -2,7 +2,7 @@
 id: thm-well-posed-abstract-cauchy-problem-if-and-only-if-generation
 kind: theorem
 title: "Well-posedness of the abstract Cauchy problem is equivalent to generation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

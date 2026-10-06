@@ -2,7 +2,7 @@
 id: def-coloured-reduced-burau-matrix
 kind: definition
 title: "The coloured reduced Burau matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

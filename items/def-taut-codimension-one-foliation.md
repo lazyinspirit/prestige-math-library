@@ -2,7 +2,7 @@
 id: def-taut-codimension-one-foliation
 kind: definition
 title: Taut codimension-one foliations
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

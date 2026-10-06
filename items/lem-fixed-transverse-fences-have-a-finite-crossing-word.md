@@ -2,7 +2,7 @@
 id: lem-fixed-transverse-fences-have-a-finite-crossing-word
 kind: lemma
 title: "Fixed transverse fences and their finite crossing words"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

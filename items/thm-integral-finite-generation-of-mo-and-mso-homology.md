@@ -2,7 +2,7 @@
 id: thm-integral-finite-generation-of-mo-and-mso-homology
 kind: theorem
 title: "Integral finite generation of universal real and oriented Thom homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

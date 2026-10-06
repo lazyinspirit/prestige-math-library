@@ -2,7 +2,7 @@
 id: ex-natural-transformations-between-tensor-composites
 kind: example
 title: "Natural transformations between tensor composites are governed by bimodule maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

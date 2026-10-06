@@ -2,7 +2,7 @@
 id: ex-power-of-two-real-projective-spaces-do-not-embed-in-two-m-minus-one-space
 kind: example
 title: "Power-of-two projective spaces do not embed in twice the dimension minus one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["cor-top-normal-stiefel-whitney-and-euler-classes-vanish-for-euclidean-embeddings", "lem-stiefel-whitney-classes-of-the-tangent-bundle-of-real-projective-space", "lem-the-inverse-of-one-plus-the-generator-in-a-truncated-mod-two-polynomial-ring", "thm-mod-two-real-projective-bundle-theorem", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "def-real-projective-bundle-and-tautological-line", "lem-normal-stiefel-whitney-class-is-the-multiplicative-inverse-of-the-tangent-class", "def-axiom-of-choice"]

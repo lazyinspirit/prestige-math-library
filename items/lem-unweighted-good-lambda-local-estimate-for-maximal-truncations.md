@@ -2,7 +2,7 @@
 id: lem-unweighted-good-lambda-local-estimate-for-maximal-truncations
 kind: lemma
 title: Unweighted local good-lambda estimate for maximal truncations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

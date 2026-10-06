@@ -2,7 +2,7 @@
 id: lem-global-intersection-length-sum-local-lengths
 kind: lemma
 title: Global intersection length is the sum of the local multiplicities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

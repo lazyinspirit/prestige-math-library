@@ -2,7 +2,7 @@
 id: thm-half-relaxed-limit-stability-for-viscosity-solutions
 kind: theorem
 title: Half-relaxed limits of sub- and supersolutions with vanishing perturbations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

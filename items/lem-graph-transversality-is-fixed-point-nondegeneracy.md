@@ -2,7 +2,7 @@
 id: lem-graph-transversality-is-fixed-point-nondegeneracy
 kind: lemma
 title: "Graph-diagonal transversality is exactly fixed-point nondegeneracy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

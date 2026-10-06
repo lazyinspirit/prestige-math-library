@@ -2,7 +2,7 @@
 id: cor-sobolev-algebra-above-the-critical-index
 kind: corollary
 title: "The Sobolev space $W^{k,p}$ is an algebra above the critical index"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

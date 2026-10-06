@@ -2,7 +2,7 @@
 id: lem-a-sphere-homeomorphism-extends-over-the-disk-by-the-alexander-trick
 kind: lemma
 title: "Alexander trick: a sphere homeomorphism extends radially over the disk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

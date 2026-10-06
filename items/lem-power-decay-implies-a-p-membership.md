@@ -2,7 +2,7 @@
 id: lem-power-decay-implies-a-p-membership
 kind: lemma
 title: Power decay implies membership in some A_p
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

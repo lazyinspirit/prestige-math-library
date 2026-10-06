@@ -2,7 +2,7 @@
 id: lem-degree-zero-unit-vector-field-on-a-sphere-extends-over-the-ball
 kind: lemma
 title: "A degree-zero sphere map extends over the ball without zeros"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

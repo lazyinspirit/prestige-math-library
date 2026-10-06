@@ -2,7 +2,7 @@
 id: lem-rsk-union-bound-localizes-plancherel-profiles
 kind: lemma
 title: "The RSK union bound localizes Plancherel profiles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

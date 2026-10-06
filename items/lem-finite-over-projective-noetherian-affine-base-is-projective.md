@@ -2,7 +2,7 @@
 id: lem-finite-over-projective-noetherian-affine-base-is-projective
 kind: lemma
 title: "Finite schemes over projective schemes are projective over a Noetherian affine base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

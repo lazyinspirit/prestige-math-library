@@ -2,7 +2,7 @@
 id: lem-arith-cube-derived-square-over-dvr
 kind: lemma
 title: "Cube-derived square over DVR"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

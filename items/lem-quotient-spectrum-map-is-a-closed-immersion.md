@@ -2,7 +2,7 @@
 id: lem-quotient-spectrum-map-is-a-closed-immersion
 kind: lemma
 title: A surjective ring map induces a closed immersion of affine spectra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three
 kind: lemma
 title: "Standard and reflected two-sphere immersions have homotopic formal data in R^3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-the-second-homotopy-group-of-so-three-vanishes, lem-the-basepoint-evaluation-of-the-stiefel-section-space-is-a-fibration, prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle, lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension, def-formal-immersion-between-smooth-manifolds, def-immersion-submersion-and-constant-rank-map, def-stiefel-space-grassmannian-and-tautological-bundle, def-homotopy-relative-and-path-homotopy, def-higher-homotopy-group-by-based-cubes, def-countable-choice]

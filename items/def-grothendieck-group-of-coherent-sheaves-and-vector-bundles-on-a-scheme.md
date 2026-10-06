@@ -2,7 +2,7 @@
 id: def-grothendieck-group-of-coherent-sheaves-and-vector-bundles-on-a-scheme
 kind: definition
 title: "Grothendieck groups of coherent sheaves and of vector bundles on a scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-cancellation-formula-for-second-derivatives-of-newtonian-potentials
 kind: lemma
 title: The cancelled representation of the second derivatives of Newtonian potentials
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

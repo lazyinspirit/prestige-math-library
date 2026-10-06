@@ -2,7 +2,7 @@
 id: lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold
 kind: lemma
 title: "The complement of an oriented link is a connected smooth three-manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

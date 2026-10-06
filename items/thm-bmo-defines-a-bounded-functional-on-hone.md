@@ -2,7 +2,7 @@
 id: thm-bmo-defines-a-bounded-functional-on-hone
 kind: theorem
 title: "BMO classes define bounded functionals on H1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: lem-tangential-difference-quotient-test-function
 kind: lemma
 title: "The difference-quotient test function and its commutators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-first-difference-quotient, lem-difference-quotient-integration-by-parts, lem-cutoff-difference-quotient-commutator-estimate, thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one, lem-compact-support-zero-extension-in-wkp, def-wkp-zero-as-a-sobolev-closure, def-local-weak-solution-for-a-divergence-form-operator, def-uniformly-elliptic-divergence-form-operator, lem-elliptic-form-is-well-defined-and-bounded, lem-weak-leibniz-rule-with-a-smooth-factor, cor-c-one-change-of-variables-for-l-one-functions, def-countable-choice, thm-young-inequality-real-exponents, thm-holder-inequality-for-integrals]

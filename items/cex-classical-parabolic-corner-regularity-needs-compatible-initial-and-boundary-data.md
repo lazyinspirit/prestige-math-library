@@ -2,7 +2,7 @@
 id: cex-classical-parabolic-corner-regularity-needs-compatible-initial-and-boundary-data
 kind: counterexample
 title: Incompatible initial and boundary values prevent corner continuity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

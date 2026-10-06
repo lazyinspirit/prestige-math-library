@@ -2,7 +2,7 @@
 id: lem-a-one-handle-between-distinct-boundary-components-is-a-boundary-connected-sum
 kind: lemma
 title: "A one-handle between distinct manifold components is a boundary connected sum"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-attaching-a-smooth-handle-with-corner-rounding, def-k-handle-core-cocore-attaching-region-and-belt-sphere, thm-collar-neighborhood-theorem, lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism, def-countable-choice, def-choice-function, def-countable]

@@ -1,7 +1,7 @@
 ---
 page: the-burau-representations-examples
 title: "The Burau Representations — Examples"
-status: draft
+status: published
 requires: [the-burau-representations]
 items: []
 examples: [ex-unreduced-and-reduced-burau-matrices-for-b-three,

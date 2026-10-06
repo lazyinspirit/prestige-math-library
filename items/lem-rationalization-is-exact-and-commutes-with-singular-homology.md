@@ -2,7 +2,7 @@
 id: lem-rationalization-is-exact-and-commutes-with-singular-homology
 kind: lemma
 title: "Rationalization is exact and commutes with singular homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

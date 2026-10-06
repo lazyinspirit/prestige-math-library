@@ -2,7 +2,7 @@
 id: lem-a-system-of-imprimitivity-gives-a-representation-of-the-transformation-algebra
 kind: lemma
 title: A system of imprimitivity integrates to a nondegenerate representation of the transformation algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

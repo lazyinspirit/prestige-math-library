@@ -2,7 +2,7 @@
 id: cor-a-nonzero-compactly-supported-final-profile-is-not-reached-by-whole-space-heat-flow
 kind: corollary
 title: Compactly supported nonzero terminal profiles are outside the heat range
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-q-equals-two-torus-boundary
 kind: example
 title: "The q=2 torus boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

@@ -2,7 +2,7 @@
 id: ex-hopf-algebra-of-a-split-torus
 kind: example
 title: The Hopf algebra of a split torus and its root-of-unity subgroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-formal-hyperbolic-tangent-series
 kind: definition
 title: "The formal hyperbolic tangent series and the even series $x/\\tanh x$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

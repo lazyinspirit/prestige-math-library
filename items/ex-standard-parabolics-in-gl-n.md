@@ -2,7 +2,7 @@
 id: ex-standard-parabolics-in-gl-n
 kind: example
 title: Standard parabolics in GL_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 31

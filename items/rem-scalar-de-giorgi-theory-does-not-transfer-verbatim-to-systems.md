@@ -2,7 +2,7 @@
 id: rem-scalar-de-giorgi-theory-does-not-transfer-verbatim-to-systems
 kind: remark
 title: "Scalar De Giorgi theory does not transfer verbatim to systems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

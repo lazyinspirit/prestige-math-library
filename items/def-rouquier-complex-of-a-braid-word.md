@@ -2,7 +2,7 @@
 id: def-rouquier-complex-of-a-braid-word
 kind: definition
 title: "The Rouquier complex of a braid word"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

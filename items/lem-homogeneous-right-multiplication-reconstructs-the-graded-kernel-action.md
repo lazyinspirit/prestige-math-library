@@ -2,7 +2,7 @@
 id: lem-homogeneous-right-multiplication-reconstructs-the-graded-kernel-action
 kind: lemma
 title: Homogeneous right multiplication reconstructs the graded kernel action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-coherently-shift-compatible-functor-and-natural-transformation, lem-internal-shift-endofunctors-and-tensor-compatibility, def-graded-ring-module-bimodule-and-internal-shift, def-bimodule, def-left-and-right-modules, def-additive-functor, def-functor-and-contravariant-functor, def-k-linear-category-and-k-linear-functor, def-vector-space, def-field, lem-field-is-a-commutative-ring]

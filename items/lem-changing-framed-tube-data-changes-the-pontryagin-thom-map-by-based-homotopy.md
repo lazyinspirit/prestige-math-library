@@ -2,7 +2,7 @@
 id: lem-changing-framed-tube-data-changes-the-pontryagin-thom-map-by-based-homotopy
 kind: lemma
 title: "Tube independence of the Pontryagin-Thom map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

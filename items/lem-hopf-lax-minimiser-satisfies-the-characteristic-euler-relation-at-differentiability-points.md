@@ -2,7 +2,7 @@
 id: lem-hopf-lax-minimiser-satisfies-the-characteristic-euler-relation-at-differentiability-points
 kind: lemma
 title: A Hopf--Lax minimiser satisfies the characteristic Euler relation at differentiability points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

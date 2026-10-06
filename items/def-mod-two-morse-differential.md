@@ -2,7 +2,7 @@
 id: def-mod-two-morse-differential
 kind: definition
 title: "The mod-two Morse differential"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-mod-two-morse-chain-group, cor-index-one-trajectory-moduli-spaces-are-finite, prop-index-one-trajectory-spaces-are-zero-dimensional, def-unparametrized-morse-trajectory-moduli-space, cor-no-morse-smale-trajectories-for-nonpositive-index-drop, def-morse-smale-pair, def-nondegenerate-critical-point-nullity-index-and-coindex, def-integers-modulo-n]
 provenance:

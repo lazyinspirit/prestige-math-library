@@ -2,7 +2,7 @@
 id: cex-intersection-form-not-negative-definite-on-all-divisors
 kind: counterexample
 title: "The intersection form is not negative definite on all divisor classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

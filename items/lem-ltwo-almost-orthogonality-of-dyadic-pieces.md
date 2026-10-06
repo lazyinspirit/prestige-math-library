@@ -2,7 +2,7 @@
 id: lem-ltwo-almost-orthogonality-of-dyadic-pieces
 kind: lemma
 title: "L2 almost orthogonality of the dyadic pieces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

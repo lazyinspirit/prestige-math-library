@@ -2,7 +2,7 @@
 id: thm-kostant-weight-multiplicity-formula
 kind: theorem
 title: Kostant's weight multiplicity formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

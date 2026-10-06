@@ -2,7 +2,7 @@
 id: thm-support-dichotomy-for-free-wave-fundamental-solutions
 kind: theorem
 title: "Sphere-supported versus interior-supported free wave kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

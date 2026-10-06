@@ -2,7 +2,7 @@
 id: lem-arith-picard-representation-by-generic-quotient-and-translates
 kind: lemma
 title: "Picard representation by generic quotient and translates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

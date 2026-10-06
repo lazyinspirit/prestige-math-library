@@ -2,7 +2,7 @@
 id: def-normalized-khovanov-rozansky-homflypt-bigraded-euler-series
 kind: definition
 title: "The normalized Khovanov-Rozansky HOMFLYPT Euler series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

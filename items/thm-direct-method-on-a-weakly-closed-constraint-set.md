@@ -2,7 +2,7 @@
 id: "thm-direct-method-on-a-weakly-closed-constraint-set"
 kind: "theorem"
 title: "The direct method on a weakly closed constraint set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 4

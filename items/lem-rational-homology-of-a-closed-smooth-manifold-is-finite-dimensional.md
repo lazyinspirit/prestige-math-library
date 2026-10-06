@@ -2,7 +2,7 @@
 id: lem-rational-homology-of-a-closed-smooth-manifold-is-finite-dimensional
 kind: lemma
 title: "The rational homology of a closed smooth manifold is finite-dimensional in each degree"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

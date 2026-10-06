@@ -2,7 +2,7 @@
 id: lem-lca-transform-range-is-dense-in-ltwo-of-the-dual
 kind: lemma
 title: The Plancherel transform range is dense in L^2 of the dual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 14

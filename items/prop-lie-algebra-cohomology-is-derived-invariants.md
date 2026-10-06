@@ -2,7 +2,7 @@
 id: prop-lie-algebra-cohomology-is-derived-invariants
 kind: proposition
 title: "Chevalley–Eilenberg cohomology computes Ext of the trivial module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

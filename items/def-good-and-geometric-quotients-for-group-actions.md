@@ -2,7 +2,7 @@
 id: def-good-and-geometric-quotients-for-group-actions
 kind: definition
 title: Good and geometric quotients for group actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

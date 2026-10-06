@@ -2,7 +2,7 @@
 id: ex-fixed-trace-and-free-trace-variations-give-different-boundary-equations
 kind: example
 title: "Fixed-trace and free-trace variations give different boundary equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

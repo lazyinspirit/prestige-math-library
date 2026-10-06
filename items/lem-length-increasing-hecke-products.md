@@ -2,7 +2,7 @@
 id: lem-length-increasing-hecke-products
 kind: lemma
 title: "Length-additive products in the finite Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

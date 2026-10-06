@@ -2,7 +2,7 @@
 id: lem-cancellation-modification-can-be-supported-in-a-trajectory-neighbourhood
 kind: lemma
 title: "The cancellation modification is supported in a trajectory neighbourhood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

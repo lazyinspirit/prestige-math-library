@@ -2,7 +2,7 @@
 id: thm-lefschetz-hopf-index-formula
 kind: theorem
 title: Lefschetz-Hopf index formula
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

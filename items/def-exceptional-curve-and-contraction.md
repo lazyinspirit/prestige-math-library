@@ -2,7 +2,7 @@
 id: def-exceptional-curve-and-contraction
 kind: definition
 title: Exceptional curves of the first kind and their contractions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

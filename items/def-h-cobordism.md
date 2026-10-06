@@ -2,7 +2,7 @@
 id: def-h-cobordism
 kind: definition
 title: h-Cobordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

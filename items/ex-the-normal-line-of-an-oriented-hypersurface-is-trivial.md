@@ -2,7 +2,7 @@
 id: ex-the-normal-line-of-an-oriented-hypersurface-is-trivial
 kind: example
 title: "The normal line of an oriented hypersurface is trivial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold", "def-euclidean-spheres-and-closed-balls", "thm-a-regular-level-set-is-an-embedded-submanifold", "prop-tangent-space-of-a-regular-level-set-is-the-kernel", "prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle", "def-normal-and-conormal-bundles-of-an-embedded-submanifold", "prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components", "def-orientable-manifold", "thm-numerable-vector-bundles-admit-bundle-metrics", "cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame", "def-local-frame-and-global-frame-of-a-vector-bundle", "lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity", "def-normal-stiefel-whitney-and-pontryagin-classes-of-a-closed-manifold", "prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-choice-implies-dependent-implies-countable-choice", "def-axiom-of-choice"]

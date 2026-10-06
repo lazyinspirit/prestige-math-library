@@ -2,7 +2,7 @@
 id: rem-isolated-does-not-imply-nondegenerate
 kind: remark
 title: "Isolated fixed points need not be nondegenerate"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

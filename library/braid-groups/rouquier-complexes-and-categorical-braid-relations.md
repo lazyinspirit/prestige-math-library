@@ -1,7 +1,7 @@
 ---
 page: rouquier-complexes-and-categorical-braid-relations
 title: "Rouquier Complexes and Categorical Braid Relations"
-status: draft
+status: published
 requires: [type-a-soergel-bimodules-and-hecke-categorification,
             graded-quiver-algebras-and-derived-tensor-functors,
             categorical-braid-actions-and-decategorification,

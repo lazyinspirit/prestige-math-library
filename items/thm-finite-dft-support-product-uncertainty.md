@@ -2,7 +2,7 @@
 id: thm-finite-dft-support-product-uncertainty
 kind: theorem
 title: Finite support-product uncertainty for the unitary DFT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-changing-an-unstable-orientation-changes-two-basis-signs
 kind: example
 title: "Changing an unstable orientation changes two sets of basis signs"
-status: draft
+status: published
 origin: pipeline
 deps:
   - ex-morse-complex-of-the-circle

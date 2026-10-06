@@ -2,7 +2,7 @@
 id: lem-common-plaque-lifted-caps-admit-nested-source-disk-inclusions
 kind: lemma
 title: Common plaque lifted caps admit nested source-disk inclusions
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: lem-lp-interpolation-absorbs-lower-order-derivatives
 kind: lemma
 title: "$L^p$ interpolation absorption of first derivatives by second derivatives"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

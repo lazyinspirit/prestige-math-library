@@ -2,7 +2,7 @@
 id: lem-c2-inverses-and-scalar-return-roots
 kind: lemma
 title: "C² inverses and scalar return roots"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

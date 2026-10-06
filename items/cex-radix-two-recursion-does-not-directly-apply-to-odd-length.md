@@ -2,7 +2,7 @@
 id: cex-radix-two-recursion-does-not-directly-apply-to-odd-length
 kind: counterexample
 title: "The radix-two split fails for odd $N$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

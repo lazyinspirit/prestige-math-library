@@ -2,7 +2,7 @@
 id: thm-finite-abelian-categories-are-finite-dimensional-module-categories
 kind: theorem
 title: "Finite abelian categories admit finite-dimensional module models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-geometric-series-invertibility-in-the-completed-character-ring
 kind: lemma
 title: Geometric series are invertible in the completed character ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

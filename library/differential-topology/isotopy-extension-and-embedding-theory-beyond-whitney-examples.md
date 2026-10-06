@@ -1,7 +1,7 @@
 ---
 page: isotopy-extension-and-embedding-theory-beyond-whitney-examples
 title: Isotopy Extension and Embedding Theory Beyond Whitney — Examples
-status: draft
+status: published
 requires: [isotopy-extension-and-embedding-theory-beyond-whitney, regular-homotopy-and-sphere-eversion]
 items: []
 examples:

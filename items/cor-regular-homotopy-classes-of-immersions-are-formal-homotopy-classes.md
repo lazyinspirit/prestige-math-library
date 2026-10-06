@@ -2,7 +2,7 @@
 id: cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes
 kind: corollary
 title: "Regular homotopy classes of immersions are formal homotopy classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-finite-relative-homotopy-lifting-across-a-weak-equivalence, def-compact-parameter-pair, thm-smale-hirsch-immersion-theorem, lem-smooth-families-and-path-components-in-the-weak-topology, def-regular-homotopy-of-immersions, def-space-of-immersions-and-space-of-formal-immersions, def-weak-homotopy-equivalence, def-homotopy-relative-and-path-homotopy, def-countable-choice]

@@ -2,7 +2,7 @@
 id: "lem-p-surgery-kills-the-represented-pi-p-class-when-p-is-below-the-middle"
 kind: "lemma"
 title: "p-surgery kills the represented pi-p class below the middle dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

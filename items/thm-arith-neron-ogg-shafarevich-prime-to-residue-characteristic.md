@@ -2,7 +2,7 @@
 id: thm-arith-neron-ogg-shafarevich-prime-to-residue-characteristic
 kind: theorem
 title: "The Neron-Ogg-Shafarevich criterion in residue characteristic prime to l"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

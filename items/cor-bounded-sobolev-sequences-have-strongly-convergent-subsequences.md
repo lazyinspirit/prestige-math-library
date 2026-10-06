@@ -2,7 +2,7 @@
 id: cor-bounded-sobolev-sequences-have-strongly-convergent-subsequences
 kind: corollary
 title: "Bounded Sobolev sequences have strongly convergent subsequences with the weak limit as limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-morse-complex-is-chain-homotopy-equivalent-to-the-handle-cellular-complex
 kind: theorem
 title: "The Morse complex is chain isomorphic to the handle cellular complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-projective-representables-and-derived-colimits-of-module-diagrams
 kind: lemma
 title: "Module diagrams have projective representables and computable derived colimits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

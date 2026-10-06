@@ -2,7 +2,7 @@
 id: rem-euler-lagrange-is-necessary-not-sufficient-without-convexity
 kind: remark
 title: "Euler-Lagrange is necessary but not sufficient without convexity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

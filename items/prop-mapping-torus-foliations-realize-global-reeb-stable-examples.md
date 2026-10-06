@@ -2,7 +2,7 @@
 id: prop-mapping-torus-foliations-realize-global-reeb-stable-examples
 kind: proposition
 title: "Mapping torus foliations realize global Reeb stable examples"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

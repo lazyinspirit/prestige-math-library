@@ -1,7 +1,7 @@
 ---
 page: algebraic-group-actions-orbits-stabilizers-and-controlled-quotients
 title: "Algebraic Group Actions, Orbits, Stabilizers, and Controlled Quotients"
-status: draft
+status: published
 category: scheme-theory
 requires: [group-schemes-of-finite-type-over-a-field, affine-group-schemes-hopf-algebras-and-rational-representations, dimension-constructible-images-and-dimensions-of-fibres, fibre-products-base-change-and-scheme-theoretic-fibres, flat-smooth-and-etale-morphisms]
 items:

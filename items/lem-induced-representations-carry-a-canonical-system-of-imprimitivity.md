@@ -2,7 +2,7 @@
 id: lem-induced-representations-carry-a-canonical-system-of-imprimitivity
 kind: lemma
 title: An induced representation carries a canonical system of imprimitivity on $G/H$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

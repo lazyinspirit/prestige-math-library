@@ -2,7 +2,7 @@
 id: lem-negative-semidefinite-hessian-at-an-interior-local-maximum
 kind: lemma
 title: The Hessian is negative semidefinite at an interior local maximum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

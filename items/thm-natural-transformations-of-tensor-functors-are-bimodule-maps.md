@@ -2,7 +2,7 @@
 id: thm-natural-transformations-of-tensor-functors-are-bimodule-maps
 kind: theorem
 title: "Natural transformations between tensor functors are bimodule maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

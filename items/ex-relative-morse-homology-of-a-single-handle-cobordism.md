@@ -2,7 +2,7 @@
 id: ex-relative-morse-homology-of-a-single-handle-cobordism
 kind: example
 title: "Relative Morse homology of a single-handle cobordism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

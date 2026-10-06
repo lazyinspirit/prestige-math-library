@@ -2,7 +2,7 @@
 id: lem-compactly-generated-lca-group-with-no-open-subgroup-of-infinite-index-splits-as-compact-times-euclidean
 kind: lemma
 title: A compactly generated LCA group with no open subgroup of infinite index is Euclidean times compact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

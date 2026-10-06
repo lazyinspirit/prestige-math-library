@@ -2,7 +2,7 @@
 id: "lem-affine-deformations-obstruction-and-torsor"
 kind: "lemma"
 title: "Deformations of algebras: obstruction in degree two and torsor structure in degree one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 14

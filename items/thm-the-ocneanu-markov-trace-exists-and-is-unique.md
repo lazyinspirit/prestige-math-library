@@ -2,7 +2,7 @@
 id: thm-the-ocneanu-markov-trace-exists-and-is-unique
 kind: theorem
 title: "The Ocneanu Markov trace exists and is unique"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

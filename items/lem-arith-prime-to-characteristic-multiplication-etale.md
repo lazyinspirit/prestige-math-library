@@ -2,7 +2,7 @@
 id: lem-arith-prime-to-characteristic-multiplication-etale
 kind: lemma
 title: "Prime to characteristic multiplication is etale"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

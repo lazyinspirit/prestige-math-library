@@ -2,7 +2,7 @@
 id: lem-schwartz-dilations-preserve-schwartz-space
 kind: lemma
 title: "Dilations and their normalisations preserve Schwartz space, with scaling identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

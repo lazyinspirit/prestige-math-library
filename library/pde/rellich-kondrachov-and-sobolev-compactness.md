@@ -1,7 +1,7 @@
 ---
 page: rellich-kondrachov-and-sobolev-compactness
 title: Rellich Kondrachov and Sobolev Compactness
-status: draft
+status: published
 items: ["def-compactly-embedded-normed-spaces", "lem-translation-estimate-for-w-one-p-functions", "lem-relative-compactness-implies-uniform-translation-continuity-in-lp", "lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic", "thm-frechet-kolmogorov-compactness-criterion-in-lp", "thm-rellich-compactness-from-w-one-p-zero-to-lp", "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain", "thm-poincare-wirtinger-on-bounded-connected-extension-domains", "thm-local-lp-compactness-of-w-one-p-bounded-sequences", "cor-subcritical-compactness-for-w-one-p-zero-on-arbitrary-bounded-open-sets", "thm-rellich-kondrachov-for-p-less-than-n", "thm-rellich-kondrachov-at-the-critical-source-exponent", "thm-morrey-rellich-compactness-for-p-greater-than-n", "thm-higher-order-rellich-kondrachov", "cor-bounded-sobolev-sequences-have-strongly-convergent-subsequences", "cor-weak-h-one-convergence-plus-compactness-gives-strong-ltwo-convergence", "rem-rellich-is-a-strictly-subcritical-theorem", "lem-fractional-level-set-kernel-measure-estimate", "lem-dyadic-level-set-summability-estimate", "lem-slobodeckij-seminorm-controls-dyadic-level-sets", "thm-fractional-sobolev-inequality-on-euclidean-space", "lem-slobodeckij-mollification-approximation-rates", "thm-fractional-rellich-kondrachov-compactness-on-bounded-sets", "thm-subcritical-compactness-of-the-sobolev-trace", "cor-strong-lq-convergence-implies-strong-convergence-of-subcritical-powers", "cor-bounded-map-into-h-one-zero-followed-by-rellich-is-compact-on-ltwo", "lem-strong-lp-closed-constraints-pass-through-rellich-limits"]
 examples: []
 ---

@@ -32,7 +32,7 @@ sources:
     url: https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf
     locator: Lemma 6.12, printed p. 79 (embedding approximation for $\dim M\ge2\dim Y+1$, used here for the boundary
       spheres)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

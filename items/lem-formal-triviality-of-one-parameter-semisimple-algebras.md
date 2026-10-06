@@ -2,7 +2,7 @@
 id: lem-formal-triviality-of-one-parameter-semisimple-algebras
 kind: lemma
 title: "Triviality of finite free deformations of semisimple algebras over the power series ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

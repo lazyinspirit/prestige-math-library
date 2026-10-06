@@ -1,7 +1,7 @@
 ---
 page: morse-inequalities-and-the-handle-chain-complex-examples
 title: Morse Inequalities and the Handle Chain Complex — Examples
-status: draft
+status: published
 items: []
 examples: [ex-perfect-height-function-on-a-sphere, ex-perfect-morse-function-on-a-torus, ex-real-projective-space-shows-coefficient-dependent-perfectness, ex-cancellation-pair-contributes-a-one-plus-t-term, cex-euler-equality-alone-does-not-imply-perfectness]
 ---

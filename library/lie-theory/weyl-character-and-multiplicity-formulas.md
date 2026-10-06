@@ -1,7 +1,7 @@
 ---
 page: weyl-character-and-multiplicity-formulas
 title: Weyl Character and Multiplicity Formulas
-status: draft
+status: published
 requires: [harish-chandra-isomorphism-casimir-and-central-characters, verma-modules-and-shapovalov-forms, the-bgg-resolution]
 items: [
   def-completed-formal-character-ring-for-downward-cones,

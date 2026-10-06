@@ -2,7 +2,7 @@
 id: def-weak-action-of-a-group-on-a-category
 kind: definition
 title: "Weak action of a group on a category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

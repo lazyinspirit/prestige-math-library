@@ -2,7 +2,7 @@
 id: lem-a-closed-discrete-subset-of-a-compact-space-is-finite
 kind: lemma
 title: "A closed discrete subset of a compact space is finite"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

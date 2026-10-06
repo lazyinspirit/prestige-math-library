@@ -2,7 +2,7 @@
 id: lem-moser-iteration-for-positive-supersolutions
 kind: lemma
 title: "Moser iteration for positive supersolutions: negative-power and logarithmic comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

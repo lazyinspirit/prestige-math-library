@@ -2,7 +2,7 @@
 id: prop-products-of-complex-projective-spaces-span-rational-oriented-bordism
 kind: proposition
 title: "Products of complex projective spaces span rational oriented bordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-axiom-of-choice, lem-projective-space-products-are-linearly-independent-in-rational-oriented-bordism, lem-projective-space-products-have-triangular-characteristic-number-matrix, thm-universal-pontryagin-thom-correspondence-for-unoriented-and-oriented-bordism, thm-rational-cohomology-of-bo-and-bso-by-pontryagin-and-euler-classes, thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes, def-unoriented-and-oriented-bordism-groups, thm-cartesian-product-makes-bordism-a-graded-ring, thm-rational-hurewicz-for-highly-connected-cw-complexes, lem-rationalization-is-exact-and-commutes-with-singular-homology, def-thom-prespectrum-of-the-universal-real-and-oriented-bundles, lem-high-relative-cells-do-not-change-lower-homotopy, lem-oriented-grassmannian-has-two-lifted-schubert-cells, thm-schubert-cells-give-the-stable-grassmannian-cw-structure, lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex, cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex, def-disk-sphere-and-thom-space-of-a-metric-vector-bundle, thm-thom-isomorphism-for-oriented-vector-bundles, thm-naturality-and-uniqueness-of-thom-classes, lem-thom-disk-sphere-quotient-identifies-relative-and-reduced-cohomology, cor-cohomology-over-a-field-is-dual-to-homology-over-that-field, prop-zero-dimensional-bordism-groups]

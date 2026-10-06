@@ -2,7 +2,7 @@
 id: "cex-coercive-form-need-not-be-symmetric"
 kind: "counterexample"
 title: "A coercive form need not be symmetric"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 7

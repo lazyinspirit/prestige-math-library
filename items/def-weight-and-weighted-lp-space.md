@@ -2,7 +2,7 @@
 id: def-weight-and-weighted-lp-space
 kind: definition
 title: Weights, their associated measures, and the spaces L^p(w)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

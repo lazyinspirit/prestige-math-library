@@ -2,7 +2,7 @@
 id: def-quotient-sheaf-and-representable-quotient
 kind: definition
 title: "Quotient sheaves and representable quotients for pre-relations and group actions"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-axiom-of-choice, def-faithfully-flat-morphism-schemes, def-fibre-product-schemes-universal-property, def-group-scheme-over-a-field, def-locally-finite-presentation-morphism, def-morphism-and-closed-subgroup-scheme, def-morphism-of-schemes, def-presheaf-representable-functor-and-representation, lem-nonaffine-fppf-descent-of-scheme-morphisms]

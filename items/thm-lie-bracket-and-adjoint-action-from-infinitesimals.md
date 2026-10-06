@@ -2,7 +2,7 @@
 id: thm-lie-bracket-and-adjoint-action-from-infinitesimals
 kind: theorem
 title: "The Lie bracket from infinitesimals and the adjoint action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["def-coordinate-hopf-algebra-of-affine-group-scheme", "def-lie-algebra-over-a-field", "def-lie-algebra-of-a-group-scheme", "lem-lie-algebra-tangent-space-and-functoriality", "lem-adjoint-representation-of-an-affine-group-scheme", "lem-lie-algebra-of-the-general-linear-group", "thm-affine-group-scheme-faithful-finite-dimensional-representation", "def-derivation-of-a-lie-algebra", "def-axiom-of-choice", "def-linear-map", "thm-ring-matrix-arithmetic-laws", "def-closed-immersion-schemes", "def-linear-basis"]

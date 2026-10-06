@@ -2,7 +2,7 @@
 id: rem-regular-homotopy-allows-self-intersections-but-never-rank-drop
 kind: remark
 title: "Regular homotopy allows self-intersections but never rank drop"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-regular-homotopy-of-immersions, def-immersion-submersion-and-constant-rank-map, cor-the-immersion-and-submersion-loci-are-open, def-smooth-family-of-maps-and-evaluation-map, rem-sphere-eversion-cannot-be-an-isotopy-through-embeddings]

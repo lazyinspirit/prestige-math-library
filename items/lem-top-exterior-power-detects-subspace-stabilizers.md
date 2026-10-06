@@ -2,7 +2,7 @@
 id: lem-top-exterior-power-detects-subspace-stabilizers
 kind: lemma
 title: "The top exterior power detects stabilizers of a subspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

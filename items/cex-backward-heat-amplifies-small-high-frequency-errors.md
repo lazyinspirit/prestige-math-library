@@ -2,7 +2,7 @@
 id: cex-backward-heat-amplifies-small-high-frequency-errors
 kind: counterexample
 title: Backward heat amplifies small high-frequency errors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

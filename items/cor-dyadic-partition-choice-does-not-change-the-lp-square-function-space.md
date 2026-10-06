@@ -2,7 +2,7 @@
 id: cor-dyadic-partition-choice-does-not-change-the-lp-square-function-space
 kind: corollary
 title: "The choice of admissible dyadic partition does not change the Lp square-function space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

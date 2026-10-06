@@ -2,7 +2,7 @@
 id: thm-pontryagin-biduality
 kind: theorem
 title: 'Pontryagin biduality: the evaluation map is a topological isomorphism'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 17

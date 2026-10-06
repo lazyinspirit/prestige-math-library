@@ -2,7 +2,7 @@
 id: def-superfluous-subobject-and-projective-cover-in-an-abelian-category
 kind: definition
 title: "Superfluous subobjects and projective covers in an abelian category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

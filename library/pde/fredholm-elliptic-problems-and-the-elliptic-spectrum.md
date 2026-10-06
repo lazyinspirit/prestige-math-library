@@ -1,7 +1,7 @@
 ---
 page: "fredholm-elliptic-problems-and-the-elliptic-spectrum"
 title: "Fredholm Elliptic Problems and the Elliptic Spectrum"
-status: draft
+status: published
 items:
   - thm-garding-inequality-for-a-divergence-form-elliptic-operator
   - cor-a-sufficiently-large-shift-is-coercive

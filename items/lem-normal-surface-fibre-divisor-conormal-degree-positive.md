@@ -2,7 +2,7 @@
 id: lem-normal-surface-fibre-divisor-conormal-degree-positive
 kind: lemma
 title: "Positive conormal degree for a fibre divisor on a normal surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

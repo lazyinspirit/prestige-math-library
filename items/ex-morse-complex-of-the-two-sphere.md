@@ -2,7 +2,7 @@
 id: ex-morse-complex-of-the-two-sphere
 kind: example
 title: "The Morse complex of the two-sphere"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-every-smooth-vector-field-on-a-compact-manifold-is-complete, def-axiom-of-choice, lem-smooth-bump-between-concentric-euclidean-balls, def-downward-gradient-like-vector-field, def-mod-two-morse-differential, def-signed-morse-differential-over-the-integers, cor-no-morse-smale-trajectories-for-nonpositive-index-drop, def-morse-function-and-excellent-morse-function, def-nondegenerate-critical-point-nullity-index-and-coindex, def-morse-smale-pair, def-mod-two-morse-chain-group]
 provenance:

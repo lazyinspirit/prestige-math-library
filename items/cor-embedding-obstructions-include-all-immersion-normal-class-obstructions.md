@@ -2,7 +2,7 @@
 id: cor-embedding-obstructions-include-all-immersion-normal-class-obstructions
 kind: corollary
 title: "Embedding obstructions include all immersion normal-class obstructions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["cor-high-normal-stiefel-whitney-classes-obstruct-low-codimension-immersions", "cor-high-normal-pontryagin-classes-obstruct-oriented-immersions", "def-normal-stiefel-whitney-and-pontryagin-classes-of-a-closed-manifold", "lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity", "def-smooth-embedding", "def-immersion-submersion-and-constant-rank-map", "thm-choice-implies-dependent-implies-countable-choice", "def-axiom-of-choice", "cor-top-normal-stiefel-whitney-and-euler-classes-vanish-for-euclidean-embeddings"]

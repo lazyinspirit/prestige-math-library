@@ -2,7 +2,7 @@
 id: lem-maximal-tori-extension-conjugacy-and-derived-group
 kind: lemma
 title: Maximal tori, field extensions, normal subgroups and derived groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 18

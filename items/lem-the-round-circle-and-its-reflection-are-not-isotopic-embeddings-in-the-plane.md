@@ -2,7 +2,7 @@
 id: lem-the-round-circle-and-its-reflection-are-not-isotopic-embeddings-in-the-plane
 kind: lemma
 title: "The round circle and its reflection are not isotopic embeddings in the plane"
-status: draft
+status: published
 origin: session
 deps: [thm-isotopy-extension, prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps, prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism, def-induced-boundary-orientation, def-primary-double-point-obstruction-to-removing-self-intersections, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
 justified_by: []

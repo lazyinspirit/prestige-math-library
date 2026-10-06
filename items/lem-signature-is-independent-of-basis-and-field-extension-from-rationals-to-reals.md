@@ -2,7 +2,7 @@
 id: lem-signature-is-independent-of-basis-and-field-extension-from-rationals-to-reals
 kind: lemma
 title: "The signature is independent of the diagonalizing basis and unchanged by scalar extension from the rationals to the reals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

@@ -2,7 +2,7 @@
 id: lem-dalembert-formula-attains-both-initial-data
 kind: lemma
 title: "The d'Alembert expression attains both initial data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

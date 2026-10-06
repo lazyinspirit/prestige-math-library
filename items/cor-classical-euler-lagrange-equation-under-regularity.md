@@ -2,7 +2,7 @@
 id: cor-classical-euler-lagrange-equation-under-regularity
 kind: corollary
 title: "The classical Euler-Lagrange equation under regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

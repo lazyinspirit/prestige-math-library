@@ -2,7 +2,7 @@
 id: lem-the-normal-model-map-restricts-to-a-diffeomorphism-onto-a-saturated-neighbourhood
 kind: lemma
 title: The normal model map restricts to a diffeomorphism onto a saturated neighbourhood
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

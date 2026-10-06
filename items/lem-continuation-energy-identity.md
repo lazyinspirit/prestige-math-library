@@ -2,7 +2,7 @@
 id: lem-continuation-energy-identity
 kind: lemma
 title: "The continuation energy identity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

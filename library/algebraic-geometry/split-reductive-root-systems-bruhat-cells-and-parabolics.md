@@ -1,7 +1,7 @@
 ---
 page: split-reductive-root-systems-bruhat-cells-and-parabolics
 title: "Split Reductive Root Systems, Bruhat Cells, and Parabolics"
-status: draft
+status: published
 requires: [group-schemes-of-finite-type-over-a-field, affine-group-schemes-hopf-algebras-and-rational-representations, lie-algebras-and-infinitesimal-group-schemes, groups-of-multiplicative-type-and-arithmetic-tori, unipotent-solvable-groups-and-borel-fixed-points, algebraic-group-actions-orbits-stabilizers-and-controlled-quotients]
 items:
   - def-radical-and-unipotent-radical-of-an-algebraic-group

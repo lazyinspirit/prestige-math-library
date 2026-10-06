@@ -2,7 +2,7 @@
 id: "ex-ltwo-forcing-defines-an-h-minus-one-functional"
 kind: "example"
 title: "$L^2$ forcing defines an $H^{-1}$ functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 2

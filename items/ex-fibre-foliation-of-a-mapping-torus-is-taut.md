@@ -2,7 +2,7 @@
 id: ex-fibre-foliation-of-a-mapping-torus-is-taut
 kind: example
 title: A fibre foliation of a mapping torus is taut
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

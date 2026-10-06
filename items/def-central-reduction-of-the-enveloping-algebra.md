@@ -2,7 +2,7 @@
 id: def-central-reduction-of-the-enveloping-algebra
 kind: definition
 title: "The central reduction of the enveloping algebra at a central character"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

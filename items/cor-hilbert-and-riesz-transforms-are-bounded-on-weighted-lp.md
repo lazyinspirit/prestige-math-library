@@ -2,7 +2,7 @@
 id: cor-hilbert-and-riesz-transforms-are-bounded-on-weighted-lp
 kind: corollary
 title: Hilbert and Riesz transforms are bounded on weighted L-p
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

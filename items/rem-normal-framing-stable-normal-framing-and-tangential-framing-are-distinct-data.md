@@ -2,7 +2,7 @@
 id: rem-normal-framing-stable-normal-framing-and-tangential-framing-are-distinct-data
 kind: remark
 title: "Normal framings, stable normal framings and tangential framings are distinct data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 10

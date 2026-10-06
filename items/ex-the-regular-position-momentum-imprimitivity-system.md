@@ -2,7 +2,7 @@
 id: ex-the-regular-position-momentum-imprimitivity-system
 kind: example
 title: "The regular translation system on $L^2(\\mathbb R^n)$: position, momentum and trivial stabilizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

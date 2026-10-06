@@ -2,7 +2,7 @@
 id: lem-affine-finite-type-scheme-coordinate-ring-finitely-generated
 kind: lemma
 title: An affine scheme of finite type over a field has a finitely generated coordinate ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 0

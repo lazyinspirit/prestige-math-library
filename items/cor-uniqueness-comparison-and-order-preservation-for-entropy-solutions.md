@@ -2,7 +2,7 @@
 id: cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions
 kind: corollary
 title: Uniqueness, comparison and order preservation of entropy solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

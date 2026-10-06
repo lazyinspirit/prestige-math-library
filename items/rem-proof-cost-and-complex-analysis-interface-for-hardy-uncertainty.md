@@ -2,7 +2,7 @@
 id: rem-proof-cost-and-complex-analysis-interface-for-hardy-uncertainty
 kind: remark
 title: Proof cost and complex-analysis interface for Hardy uncertainty
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

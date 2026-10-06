@@ -2,7 +2,7 @@
 id: cex-power-weight-fails-at-both-a-p-endpoints
 kind: counterexample
 title: A power weight fails at both A_p endpoints
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

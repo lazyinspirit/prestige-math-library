@@ -2,7 +2,7 @@
 id: lem-smooth-maximal-functions-of-tempered-distributions-are-borel-measurable
 kind: lemma
 title: "Measurability and lower semicontinuity of the smooth maximal functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

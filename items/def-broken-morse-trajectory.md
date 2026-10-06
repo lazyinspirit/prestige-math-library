@@ -2,7 +2,7 @@
 id: def-broken-morse-trajectory
 kind: definition
 title: "Broken Morse trajectories"
-status: draft
+status: published
 origin: pipeline
 deps: [def-morse-smale-pair, def-parametrized-morse-trajectory-space, def-unparametrized-morse-trajectory-moduli-space, lem-broken-morse-trajectories-have-strictly-decreasing-critical-values-and-indices, cor-no-morse-smale-trajectories-for-nonpositive-index-drop, def-nondegenerate-critical-point-nullity-index-and-coindex]
 provenance:

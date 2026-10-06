@@ -2,7 +2,7 @@
 id: ex-dirichlet-heat-semigroup-from-the-laplacian
 kind: example
 title: "The Dirichlet Laplacian generates the heat semigroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

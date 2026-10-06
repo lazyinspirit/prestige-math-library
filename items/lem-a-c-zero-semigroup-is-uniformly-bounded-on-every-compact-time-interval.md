@@ -2,7 +2,7 @@
 id: lem-a-c-zero-semigroup-is-uniformly-bounded-on-every-compact-time-interval
 kind: lemma
 title: "A semigroup with continuity at zero is uniformly bounded on every compact time interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

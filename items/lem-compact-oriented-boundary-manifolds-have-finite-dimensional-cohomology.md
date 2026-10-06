@@ -2,7 +2,7 @@
 id: lem-compact-oriented-boundary-manifolds-have-finite-dimensional-cohomology
 kind: lemma
 title: "Compact oriented manifolds with boundary have finite-dimensional field cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: thm-hirzebruch-signature-theorem
 kind: theorem
 title: "The Hirzebruch signature theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

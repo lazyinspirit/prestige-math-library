@@ -2,7 +2,7 @@
 id: lem-orthogonality-of-characters-on-a-finite-cyclic-group
 kind: lemma
 title: "Orthogonality of the characters $x\\mapsto e^{2\\pi ikx/N}$ on $\\mathbb Z/N\\mathbb Z$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-low-degree-admissible-steenrod-monomials
 kind: example
 title: "Low-degree admissible Steenrod monomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

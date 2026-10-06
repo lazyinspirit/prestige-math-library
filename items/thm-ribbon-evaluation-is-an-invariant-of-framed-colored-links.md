@@ -2,7 +2,7 @@
 id: thm-ribbon-evaluation-is-an-invariant-of-framed-colored-links
 kind: theorem
 title: "The ribbon evaluation is an invariant of framed colored links"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

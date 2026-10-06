@@ -2,7 +2,7 @@
 id: lem-existence-of-a-smooth-inhomogeneous-dyadic-frequency-partition
 kind: lemma
 title: "Existence of a smooth inhomogeneous dyadic frequency partition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

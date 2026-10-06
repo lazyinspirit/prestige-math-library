@@ -2,7 +2,7 @@
 id: rem-abstract-generator-domain-smoothing-becomes-spatial-regularity-only-after-domain-identification
 kind: remark
 title: Abstract generator-domain smoothing becomes spatial regularity only after domain identification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 16

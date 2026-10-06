@@ -2,7 +2,7 @@
 id: lem-canonical-resolution-over-nonclosed-fields
 kind: lemma
 title: Canonical resolutions over non-algebraically-closed ground fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 14

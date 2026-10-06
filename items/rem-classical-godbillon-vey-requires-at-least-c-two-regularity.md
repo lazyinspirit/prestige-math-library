@@ -2,7 +2,7 @@
 id: rem-classical-godbillon-vey-requires-at-least-c-two-regularity
 kind: remark
 title: "The supplied smooth Godbillon-Vey construction does not cover merely C1 foliations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: thm-classical-regularity-for-holder-continuous-forcing-under-compatibility
 kind: theorem
 title: Classical regularity for Holder-continuous forcing under initial compatibility
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

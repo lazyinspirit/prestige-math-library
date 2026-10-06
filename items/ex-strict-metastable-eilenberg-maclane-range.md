@@ -2,7 +2,7 @@
 id: ex-strict-metastable-eilenberg-maclane-range
 kind: example
 title: "A strict metastable Eilenberg–Mac Lane range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

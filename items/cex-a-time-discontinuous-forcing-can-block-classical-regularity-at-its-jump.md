@@ -2,7 +2,7 @@
 id: cex-a-time-discontinuous-forcing-can-block-classical-regularity-at-its-jump
 kind: counterexample
 title: A time-discontinuous forcing blocks classical regularity at its jump
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

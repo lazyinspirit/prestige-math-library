@@ -2,7 +2,7 @@
 id: lem-a-compact-leaf-near-a-compact-reference-leaf-is-a-one-sheeted-collar-graph
 kind: lemma
 title: Compact leaves near a compact reference leaf are one-sheeted collar graphs
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

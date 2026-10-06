@@ -2,7 +2,7 @@
 id: thm-finite-propagation-speed-for-the-wave-equation
 kind: theorem
 title: "Finite propagation speed for the wave equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: tensor-product-multiplicities-and-littlewood-richardson
 title: Tensor Product Multiplicities and Littlewood Richardson
-status: draft
+status: published
 requires: [weyl-character-and-multiplicity-formulas, semisimple-lie-algebras-cohomology-and-levi-theory, symmetric-functions-hall-inner-product-and-schur-bases, the-branching-rule-and-the-young-graph]
 items:
   - def-tensor-product-multiplicity-for-highest-weight-modules

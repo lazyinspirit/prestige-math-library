@@ -21,7 +21,7 @@ sources:
   - title: Wolfgang Lück, A Basic Introduction to Surgery Theory (complete lecture notes, ICTP/Münster)
     url: https://him-lueck.uni-bonn.de/data/ictp.pdf
     locator: Chapter 3 §3.4, printed pp. 72-74 (the framing/normal-bundle bookkeeping for the surgery step)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

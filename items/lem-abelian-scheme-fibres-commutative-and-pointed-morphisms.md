@@ -2,7 +2,7 @@
 id: lem-abelian-scheme-fibres-commutative-and-pointed-morphisms
 kind: lemma
 title: "Fibres of abelian schemes and unit-preserving morphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

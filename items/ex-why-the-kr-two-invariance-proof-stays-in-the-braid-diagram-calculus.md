@@ -2,7 +2,7 @@
 id: ex-why-the-kr-two-invariance-proof-stays-in-the-braid-diagram-calculus
 kind: example
 title: "Why the Khovanov-Rozansky II invariance proof stays in the braid-diagram calculus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

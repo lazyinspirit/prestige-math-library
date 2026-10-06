@@ -2,7 +2,7 @@
 id: prop-tensor-product-multiplicities-are-character-structure-constants
 kind: proposition
 title: Tensor-product multiplicities are character structure constants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

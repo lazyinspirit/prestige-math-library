@@ -2,7 +2,7 @@
 id: lem-modification-lemma-for-embedded-spheres-in-a-handle-presentation
 kind: lemma
 title: 'Modification lemma: prescribed class changes by isotopy of an embedded boundary sphere'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

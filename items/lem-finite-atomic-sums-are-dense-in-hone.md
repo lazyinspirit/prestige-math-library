@@ -2,7 +2,7 @@
 id: lem-finite-atomic-sums-are-dense-in-hone
 kind: lemma
 title: "Finite atomic sums are dense in H1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

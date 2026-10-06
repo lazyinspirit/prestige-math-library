@@ -1,7 +1,7 @@
 ---
 page: matrix-factorizations-and-khovanov-rozansky-link-homology
 title: "Matrix Factorizations and Khovanov–Rozansky Link Homology"
-status: draft
+status: published
 requires: [oriented-links-braid-closures-and-markov-equivalence,
             graded-bimodules-and-tensor-functors,
             hecke-markov-traces-and-polynomial-link-invariants,

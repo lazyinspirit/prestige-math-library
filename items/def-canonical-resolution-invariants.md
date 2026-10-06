@@ -2,7 +2,7 @@
 id: "def-canonical-resolution-invariants"
 kind: "definition"
 title: "Canonical resolutions with invariants of a marked ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 5

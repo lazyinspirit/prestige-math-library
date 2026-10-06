@@ -2,7 +2,7 @@
 id: ex-oscillation-decay-implies-a-holder-modulus
 kind: example
 title: "Worked oscillation decay and its Hölder modulus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

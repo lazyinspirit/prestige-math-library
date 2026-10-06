@@ -1,7 +1,7 @@
 ---
 page: group-c-star-algebras-and-the-fell-unitary-dual-examples
 title: "Group C Star Algebras and the Fell Unitary Dual — Examples"
-status: draft
+status: published
 requires: [group-c-star-algebras-and-the-fell-unitary-dual]
 items: []
 examples:

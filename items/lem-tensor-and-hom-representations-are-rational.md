@@ -2,7 +2,7 @@
 id: lem-tensor-and-hom-representations-are-rational
 kind: lemma
 title: "Tensor products, exterior powers and Hom spaces of finite-dimensional rational representations are rational"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

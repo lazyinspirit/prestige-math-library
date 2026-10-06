@@ -2,7 +2,7 @@
 id: lem-spheres-of-adjacent-critical-levels-have-product-neighbourhoods
 kind: lemma
 title: "Spheres of adjacent critical levels have product neighbourhoods"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-morse-function-adapted-to-a-cobordism, thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point, lem-gradient-flow-identifies-the-local-and-global-attaching-regions, thm-regular-interval-diffeomorphism, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold, def-tubular-neighbourhood-of-an-embedded-submanifold, def-countable-choice]

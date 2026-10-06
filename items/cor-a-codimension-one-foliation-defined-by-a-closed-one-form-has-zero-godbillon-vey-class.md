@@ -2,7 +2,7 @@
 id: cor-a-codimension-one-foliation-defined-by-a-closed-one-form-has-zero-godbillon-vey-class
 kind: corollary
 title: "Closed defining forms have vanishing Godbillon-Vey class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

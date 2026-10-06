@@ -2,7 +2,7 @@
 id: prop-characters-of-finite-dimensional-modules-are-weyl-invariant
 kind: proposition
 title: Characters of finite-dimensional modules are Weyl-invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

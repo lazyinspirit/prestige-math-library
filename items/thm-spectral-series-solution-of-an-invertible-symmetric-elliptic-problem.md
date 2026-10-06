@@ -2,7 +2,7 @@
 id: thm-spectral-series-solution-of-an-invertible-symmetric-elliptic-problem
 kind: theorem
 title: "Spectral series solution of an invertible symmetric elliptic problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: thm-calderon-zygmund-operators-map-linfinity-to-bmo
 kind: theorem
 title: "Calderon-Zygmund operators map L-infinity to BMO"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

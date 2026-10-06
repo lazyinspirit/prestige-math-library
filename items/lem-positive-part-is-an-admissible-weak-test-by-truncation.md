@@ -2,7 +2,7 @@
 id: lem-positive-part-is-an-admissible-weak-test-by-truncation
 kind: lemma
 title: "Positive-part truncation calculus and admissible cut-off weak tests"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

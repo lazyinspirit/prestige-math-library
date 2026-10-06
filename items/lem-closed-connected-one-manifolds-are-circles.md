@@ -2,7 +2,7 @@
 id: lem-closed-connected-one-manifolds-are-circles
 kind: lemma
 title: "Nonempty closed connected 1-manifolds are circles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

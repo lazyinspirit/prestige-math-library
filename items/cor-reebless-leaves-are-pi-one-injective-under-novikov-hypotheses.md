@@ -2,7 +2,7 @@
 id: cor-reebless-leaves-are-pi-one-injective-under-novikov-hypotheses
 kind: corollary
 title: "Reebless leaves are pi-one-injective and transverse loops are essential"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

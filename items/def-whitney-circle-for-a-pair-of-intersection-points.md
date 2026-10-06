@@ -2,7 +2,7 @@
 id: def-whitney-circle-for-a-pair-of-intersection-points
 kind: definition
 title: Whitney circle for a pair of intersection points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

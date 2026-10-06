@@ -2,7 +2,7 @@
 id: lem-s-rational-map-descends-along-faithfully-flat-smooth-maps
 kind: lemma
 title: "An S-rational map defined after a faithfully flat smooth base change is defined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

@@ -1,7 +1,7 @@
 ---
 page: weak-elliptic-maximum-principles-and-holder-regularity-examples
 title: "Weak Elliptic Maximum Principles and Holder Regularity — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-weak-and-classical-maximum-principles-agree-for-smooth-solutions", "ex-measurable-coefficients-with-a-holder-regular-weak-solution", "cex-weak-maximum-principle-needs-the-zero-order-sign", "cex-harnack-requires-nonnegativity", "ex-oscillation-decay-implies-a-holder-modulus", "cex-degenerate-ellipticity-allows-nonconstant-solutions-with-interior-zero-sets", "cex-harnack-estimate-needs-an-additive-forcing-term", "ex-essential-supremum-precedes-holder-representative-in-de-giorgi-theory", "cex-global-harnack-comparison-needs-connectedness"]
 ---

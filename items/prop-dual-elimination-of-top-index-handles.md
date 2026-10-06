@@ -2,7 +2,7 @@
 id: prop-dual-elimination-of-top-index-handles
 kind: proposition
 title: "Dual elimination of top-index handles"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps: [def-smooth-cobordism-triad-for-morse-theory, def-dual-handle-decomposition, thm-handle-duality-from-negating-a-morse-function, prop-connected-cobordisms-admit-presentations-without-superfluous-zero-handles, thm-morse-functions-and-handle-decompositions-correspond, cor-index-n-handles-cap-boundary-spheres, def-countable-choice, thm-every-smooth-manifold-admits-a-riemannian-metric, thm-morse-lemma, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-compactly-supported-vector-fields-are-complete]

@@ -2,7 +2,7 @@
 id: lem-simple-reflection-double-coset-rule
 kind: lemma
 title: The simple-reflection double-coset rule and the Tits system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 28

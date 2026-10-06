@@ -2,7 +2,7 @@
 id: thm-self-indexing-morse-function-existence
 kind: theorem
 title: "Self-indexing Morse functions exist"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [thm-morse-rearrangement-by-index, lem-critical-values-of-disjoint-trajectory-closures-can-be-interchanged, lem-gradient-like-perturbation-separates-adjacent-critical-levels, lem-increasing-reparametrization-of-finitely-many-critical-levels, def-morse-function-adapted-to-a-cobordism, def-morse-function-and-excellent-morse-function, thm-morse-functions-and-handle-decompositions-correspond, thm-morse-lemma, def-downward-gradient-like-vector-field, thm-collar-neighborhood-theorem, def-countable-choice, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-compactly-supported-vector-fields-are-complete, lem-interior-slab-handle-attachment]

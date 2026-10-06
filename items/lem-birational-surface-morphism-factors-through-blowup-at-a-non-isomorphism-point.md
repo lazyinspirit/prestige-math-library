@@ -2,7 +2,7 @@
 id: lem-birational-surface-morphism-factors-through-blowup-at-a-non-isomorphism-point
 kind: lemma
 title: A birational morphism of regular surfaces factors through the blowup of a point where its inverse is undefined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

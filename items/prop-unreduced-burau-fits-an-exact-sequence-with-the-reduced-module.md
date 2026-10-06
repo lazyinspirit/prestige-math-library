@@ -2,7 +2,7 @@
 id: prop-unreduced-burau-fits-an-exact-sequence-with-the-reduced-module
 kind: proposition
 title: "The unreduced module fits an exact sequence with the reduced module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

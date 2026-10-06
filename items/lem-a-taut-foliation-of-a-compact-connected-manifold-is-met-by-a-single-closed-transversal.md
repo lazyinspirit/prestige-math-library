@@ -2,7 +2,7 @@
 id: lem-a-taut-foliation-of-a-compact-connected-manifold-is-met-by-a-single-closed-transversal
 kind: lemma
 title: "A taut foliation of a compact connected manifold has a single closed transversal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

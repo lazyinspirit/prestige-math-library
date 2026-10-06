@@ -2,7 +2,7 @@
 id: "ex-neumann-kernel-dimension-equals-the-number-of-connected-components"
 kind: "example"
 title: "The Neumann kernel is spanned by the componentwise constants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

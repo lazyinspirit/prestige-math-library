@@ -2,7 +2,7 @@
 id: def-inhomogeneous-dyadic-frequency-partition
 kind: definition
 title: "The inhomogeneous dyadic frequency partition and its Littlewood-Paley operators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

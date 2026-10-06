@@ -2,7 +2,7 @@
 id: def-framing-of-a-normal-bundle
 kind: definition
 title: "Framings of a normal bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

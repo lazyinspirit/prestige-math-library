@@ -2,7 +2,7 @@
 id: thm-compact-discrete-duality-for-lca-groups
 kind: theorem
 title: Compactness and discreteness are exchanged by duality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 18

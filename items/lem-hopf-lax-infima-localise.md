@@ -2,7 +2,7 @@
 id: lem-hopf-lax-infima-localise
 kind: lemma
 title: Finiteness, superlinearity of the Lagrangian and localisation of Hopf--Lax near-minimisers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

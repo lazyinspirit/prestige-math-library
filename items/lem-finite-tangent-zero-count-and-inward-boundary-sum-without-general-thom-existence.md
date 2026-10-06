@@ -2,7 +2,7 @@
 id: lem-finite-tangent-zero-count-and-inward-boundary-sum-without-general-thom-existence
 kind: lemma
 title: Finite tangent index count and inward boundary sum
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

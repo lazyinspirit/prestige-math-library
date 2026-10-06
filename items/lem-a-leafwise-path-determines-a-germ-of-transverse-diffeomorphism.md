@@ -2,7 +2,7 @@
 id: lem-a-leafwise-path-determines-a-germ-of-transverse-diffeomorphism
 kind: lemma
 title: "A leafwise path determines a germ of a transverse diffeomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

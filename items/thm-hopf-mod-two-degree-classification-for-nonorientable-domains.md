@@ -2,7 +2,7 @@
 id: thm-hopf-mod-two-degree-classification-for-nonorientable-domains
 kind: theorem
 title: The Hopf mod-two degree theorem for nonorientable domains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

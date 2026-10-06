@@ -2,7 +2,7 @@
 id: thm-vanishing-torsion-implies-product-cobordism
 kind: theorem
 title: "Vanishing presentation-indexed torsion implies the product cobordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 15

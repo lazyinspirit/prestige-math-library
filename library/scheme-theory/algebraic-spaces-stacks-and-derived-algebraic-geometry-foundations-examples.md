@@ -1,7 +1,7 @@
 ---
 page: algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations-examples
 title: "Algebraic Spaces, Stacks, and Derived Algebraic Geometry Foundations — Examples"
-status: draft
+status: published
 requires: [algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations]
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: thm-rouquier-complexes-form-a-coherent-braid-group-action
 kind: theorem
 title: "Rouquier complexes form a coherent braid group action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-nullhomotopy-persists-under-a-compact-transverse-deformation
 kind: lemma
 title: "A compact leafwise nullhomotopy persists under a transverse deformation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

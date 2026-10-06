@@ -2,7 +2,7 @@
 id: "thm-principalization-of-ideals"
 kind: "theorem"
 title: "Canonical principalization of ideals in characteristic zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 15

@@ -2,7 +2,7 @@
 id: lem-flat-drift-realizes-a-period-annulus-frontier-as-an-omega-limit
 kind: lemma
 title: "A flat transverse drift realizes the period-annulus frontier as an omega-limit set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

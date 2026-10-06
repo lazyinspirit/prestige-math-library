@@ -2,7 +2,7 @@
 id: lem-a-simple-vanishing-cycle-produces-a-compact-leaf
 kind: lemma
 title: "A nonzero limitwise-nullhomotopy class yields a compact boundary leaf"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

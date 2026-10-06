@@ -2,7 +2,7 @@
 id: "ex-first-order-deformations-of-a-hypersurface"
 kind: "example"
 title: "First-order deformations of a plane conic and of a quadric surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 18

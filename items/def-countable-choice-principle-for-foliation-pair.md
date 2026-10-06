@@ -2,7 +2,7 @@
 id: def-countable-choice-principle-for-foliation-pair
 kind: definition
 title: "The countable-choice principle used in the foliation pair"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

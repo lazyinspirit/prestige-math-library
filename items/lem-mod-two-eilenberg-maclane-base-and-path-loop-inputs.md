@@ -2,7 +2,7 @@
 id: lem-mod-two-eilenberg-maclane-base-and-path-loop-inputs
 kind: lemma
 title: "Local path-fibration and cohomology inputs for mod-two Eilenberg–Mac Lane induction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

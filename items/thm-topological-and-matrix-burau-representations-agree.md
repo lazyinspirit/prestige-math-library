@@ -2,7 +2,7 @@
 id: thm-topological-and-matrix-burau-representations-agree
 kind: theorem
 title: "The topological and matrix Burau representations agree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

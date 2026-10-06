@@ -2,7 +2,7 @@
 id: ex-maps-from-real-projective-n-space-to-s-n-use-mod-two-degree-when-n-is-even
 kind: example
 title: Maps from even projective space to the sphere use mod-two degree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

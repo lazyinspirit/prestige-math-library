@@ -2,7 +2,7 @@
 id: lem-length-additive-products-of-standard-intertwiners
 kind: lemma
 title: "Length-additive products of the standard intertwiners"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

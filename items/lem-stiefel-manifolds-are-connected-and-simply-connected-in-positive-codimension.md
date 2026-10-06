@@ -2,7 +2,7 @@
 id: lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension
 kind: lemma
 title: "Stiefel manifolds are connected in positive codimension and simply connected in codimension at least two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-stiefel-space-grassmannian-and-tautological-bundle, thm-numerable-fiber-bundles-are-hurewicz-fibrations, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, def-locally-trivial-fiber-bundle, def-higher-homotopy-group-by-based-cubes, prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant, thm-lower-dimensional-sphere-maps-are-based-nullhomotopic, cor-euclidean-spheres-are-path-connected, def-n-connected-space-and-n-connected-map, ex-orthogonal-and-special-orthogonal-lie-groups]

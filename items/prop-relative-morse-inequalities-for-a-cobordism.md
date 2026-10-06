@@ -2,7 +2,7 @@
 id: prop-relative-morse-inequalities-for-a-cobordism
 kind: proposition
 title: "Relative Morse inequalities for a cobordism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

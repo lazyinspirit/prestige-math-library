@@ -2,7 +2,7 @@
 id: lem-a-collar-product-region-deformation-retracts-onto-its-face
 kind: lemma
 title: "A product collar deformation retracts onto its face"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

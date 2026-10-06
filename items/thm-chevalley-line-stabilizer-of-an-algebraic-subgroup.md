@@ -2,7 +2,7 @@
 id: thm-chevalley-line-stabilizer-of-an-algebraic-subgroup
 kind: theorem
 title: "Chevalley: every closed subgroup is a line stabilizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

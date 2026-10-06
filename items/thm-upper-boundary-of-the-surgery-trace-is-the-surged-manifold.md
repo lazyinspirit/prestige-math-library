@@ -2,7 +2,7 @@
 id: "thm-upper-boundary-of-the-surgery-trace-is-the-surged-manifold"
 kind: "theorem"
 title: "The upper boundary of the surgery trace is the surgered manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

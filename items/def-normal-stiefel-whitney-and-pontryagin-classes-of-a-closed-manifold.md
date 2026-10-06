@@ -2,7 +2,7 @@
 id: def-normal-stiefel-whitney-and-pontryagin-classes-of-a-closed-manifold
 kind: definition
 title: "Normal Stiefel-Whitney and Pontryagin classes of a closed manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-stable-normal-inverse-of-the-tangent-bundle", "lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity", "lem-normal-stiefel-whitney-class-is-the-multiplicative-inverse-of-the-tangent-class", "lem-normal-pontryagin-class-is-the-rational-inverse-of-the-tangent-pontryagin-class", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "def-pontryagin-classes-by-complexification", "def-singular-cohomology-ring", "thm-choice-implies-dependent-implies-countable-choice", "def-axiom-of-choice"]

@@ -2,7 +2,7 @@
 id: thm-reeb-thurston-stability-for-codimension-one-leaves
 kind: theorem
 title: "Reeb-Thurston stability for codimension-one leaves with vanishing first real cohomology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

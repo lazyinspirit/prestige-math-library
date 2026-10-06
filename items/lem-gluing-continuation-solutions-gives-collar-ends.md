@@ -2,7 +2,7 @@
 id: lem-gluing-continuation-solutions-gives-collar-ends
 kind: lemma
 title: "Gluing continuation solutions gives collar neighbourhoods of the broken ends"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

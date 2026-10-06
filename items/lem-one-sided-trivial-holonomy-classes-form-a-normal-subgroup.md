@@ -2,7 +2,7 @@
 id: lem-one-sided-trivial-holonomy-classes-form-a-normal-subgroup
 kind: lemma
 title: "One-sided trivial-holonomy classes form a normal subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

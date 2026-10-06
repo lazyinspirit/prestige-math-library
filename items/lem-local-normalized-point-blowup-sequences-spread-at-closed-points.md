@@ -2,7 +2,7 @@
 id: lem-local-normalized-point-blowup-sequences-spread-at-closed-points
 kind: lemma
 title: "Local normalized point sequences spread at closed surface points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

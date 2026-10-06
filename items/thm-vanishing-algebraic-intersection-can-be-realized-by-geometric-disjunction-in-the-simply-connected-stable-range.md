@@ -30,7 +30,7 @@ sources:
     locator: Theorem 4.8 and its proof, printed pp. 84-85 (realizing the vanishing self-intersection of an immersion
       by an embedding when $k\ge3$)
 proof_strategy: direct
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

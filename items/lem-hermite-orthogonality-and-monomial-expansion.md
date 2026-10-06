@@ -2,7 +2,7 @@
 id: lem-hermite-orthogonality-and-monomial-expansion
 kind: lemma
 title: "Gaussian orthogonality and the monomial expansion of the Hermite polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: cor-contraction-hille-yosida-theorem
 kind: corollary
 title: "Contraction Hille-Yosida theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

@@ -29,7 +29,7 @@ sources:
     url: https://him-lueck.uni-bonn.de/data/ictp.pdf
     locator: Chapter 3 §3.4, printed pp. 72-75 (the normal map, its bundle data, and the framing of the attached
       sphere)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: thm-dirichlet-first-eigenvalue-is-monotone-under-domain-inclusion
 kind: theorem
 title: "The first Dirichlet eigenvalue is monotone under domain inclusion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

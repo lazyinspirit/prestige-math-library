@@ -2,7 +2,7 @@
 id: def-self-transverse-immersion-and-double-point-locus
 kind: definition
 title: Self-transverse immersions and the double point locus
-status: draft
+status: published
 origin: session
 dependency_level: 1
 provenance:

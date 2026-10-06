@@ -2,7 +2,7 @@
 id: cex-interior-regularity-does-not-imply-boundary-regularity
 kind: counterexample
 title: "Interior regularity does not imply boundary regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

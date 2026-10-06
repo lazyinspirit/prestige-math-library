@@ -2,7 +2,7 @@
 id: cex-critical-trace-compactness-fails-by-tangential-dilation
 kind: counterexample
 title: "Critical traces fail compactness under boundary dilation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

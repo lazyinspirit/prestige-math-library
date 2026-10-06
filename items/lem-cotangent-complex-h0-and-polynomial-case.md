@@ -2,7 +2,7 @@
 id: lem-cotangent-complex-h0-and-polynomial-case
 kind: lemma
 title: "H0 of the cotangent complex and the polynomial case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: def-groupoid-in-schemes-and-etale-equivalence-relation
 kind: definition
 title: "Groupoids in schemes, relations and etale equivalence relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

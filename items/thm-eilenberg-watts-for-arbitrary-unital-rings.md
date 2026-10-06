@@ -2,7 +2,7 @@
 id: thm-eilenberg-watts-for-arbitrary-unital-rings
 kind: theorem
 title: "Eilenberg-Watts theorem for arbitrary unital rings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

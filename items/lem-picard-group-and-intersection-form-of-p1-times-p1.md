@@ -2,7 +2,7 @@
 id: lem-picard-group-and-intersection-form-of-p1-times-p1
 kind: lemma
 title: "The Picard group and intersection form of a product of projective lines"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-cusp-line-intersection-multiplicities
 kind: example
 title: Line multiplicities at a cusp
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

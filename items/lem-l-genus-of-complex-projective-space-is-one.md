@@ -2,7 +2,7 @@
 id: lem-l-genus-of-complex-projective-space-is-one
 kind: lemma
 title: "The L-genus of complex projective space of even complex dimension is one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

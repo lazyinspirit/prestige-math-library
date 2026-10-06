@@ -2,7 +2,7 @@
 id: def-unnormalised-engineering-dft-and-conversion
 kind: definition
 title: "The unnormalised engineering DFT and its conversion to the unitary transform"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

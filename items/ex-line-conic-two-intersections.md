@@ -2,7 +2,7 @@
 id: ex-line-conic-two-intersections
 kind: example
 title: A line and a conic meet in two points counted with multiplicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

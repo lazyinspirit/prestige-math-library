@@ -2,7 +2,7 @@
 id: lem-localisation-identity-for-a-divergence-form-weak-solution
 kind: lemma
 title: "Localisation of a weak solution up to a bounded first-order term"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

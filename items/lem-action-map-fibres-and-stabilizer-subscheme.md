@@ -2,7 +2,7 @@
 id: lem-action-map-fibres-and-stabilizer-subscheme
 kind: lemma
 title: "Fibres of the orbit map and the scheme-theoretic stabilizer as a closed subgroup scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

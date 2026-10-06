@@ -2,7 +2,7 @@
 id: lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation
 kind: lemma
 title: Strictification of a viscosity test function by a quartic perturbation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

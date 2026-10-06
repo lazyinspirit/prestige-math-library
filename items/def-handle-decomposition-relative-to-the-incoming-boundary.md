@@ -2,7 +2,7 @@
 id: def-handle-decomposition-relative-to-the-incoming-boundary
 kind: definition
 title: "Handle decomposition relative to the incoming boundary"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-smooth-cobordism-triad-for-morse-theory, def-attaching-a-smooth-handle-with-corner-rounding, def-k-handle-core-cocore-attaching-region-and-belt-sphere, def-smooth-collar-of-a-manifold-boundary]

@@ -2,7 +2,7 @@
 id: cex-euler-lagrange-stationarity-does-not-imply-a-minimum
 kind: counterexample
 title: "Stationarity of the Euler-Lagrange equation does not imply a minimum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: "ex-one-surgery-on-a-three-manifold-as-framed-knot-surgery"
 kind: "example"
 title: "One-surgery on a three-manifold as framed knot surgery"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

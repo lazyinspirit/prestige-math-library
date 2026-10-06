@@ -2,7 +2,7 @@
 id: thm-rational-gorenstein-normal-surface-singularity-resolved-by-point-blowups
 kind: theorem
 title: "Rational Gorenstein normal surface singularities resolve by point blowups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 18

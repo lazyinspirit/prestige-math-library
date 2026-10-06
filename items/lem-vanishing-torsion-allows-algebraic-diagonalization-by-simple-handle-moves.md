@@ -2,7 +2,7 @@
 id: lem-vanishing-torsion-allows-algebraic-diagonalization-by-simple-handle-moves
 kind: lemma
 title: "Vanishing torsion allows algebraic diagonalization by simple handle moves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 14

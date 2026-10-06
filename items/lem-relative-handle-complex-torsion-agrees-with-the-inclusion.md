@@ -2,7 +2,7 @@
 id: lem-relative-handle-complex-torsion-agrees-with-the-inclusion
 kind: lemma
 title: "The torsion of the handle complex is the torsion of the inclusion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

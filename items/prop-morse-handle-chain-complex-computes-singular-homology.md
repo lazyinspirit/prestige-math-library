@@ -2,7 +2,7 @@
 id: prop-morse-handle-chain-complex-computes-singular-homology
 kind: proposition
 title: "The handle chain complex computes singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-transverse-complementary-spheres-have-product-charts
 kind: lemma
 title: "Transverse submanifolds have product charts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

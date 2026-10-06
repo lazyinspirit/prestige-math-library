@@ -2,7 +2,7 @@
 id: lem-a-vanishing-cycle-determines-a-nontrivial-limitwise-nullhomotopy-class
 kind: lemma
 title: "A vanishing cycle determines a nonzero limitwise-nullhomotopy class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

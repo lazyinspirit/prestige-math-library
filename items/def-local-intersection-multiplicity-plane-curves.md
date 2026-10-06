@@ -2,7 +2,7 @@
 id: def-local-intersection-multiplicity-plane-curves
 kind: definition
 title: Local intersection multiplicity of two plane curves
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

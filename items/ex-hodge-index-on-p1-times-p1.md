@@ -2,7 +2,7 @@
 id: ex-hodge-index-on-p1-times-p1
 kind: example
 title: "The Hodge index theorem on a product of projective lines"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

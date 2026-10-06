@@ -2,7 +2,7 @@
 id: lem-normal-surface-modification-uniform-principal-torsion-bound
 kind: lemma
 title: "Uniform principal torsion bound for surface modification cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

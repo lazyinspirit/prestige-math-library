@@ -2,7 +2,7 @@
 id: ex-the-three-term-rouquier-braid-equivalence-in-type-a-two
 kind: example
 title: "The three-term Rouquier braid equivalence in type A2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

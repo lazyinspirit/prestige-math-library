@@ -2,7 +2,7 @@
 id: def-weak-subsolution-and-supersolution-of-a-divergence-form-equation
 kind: definition
 title: "Weak subsolutions and supersolutions of a divergence-form equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

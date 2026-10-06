@@ -2,7 +2,7 @@
 id: lem-a-k-handle-deformation-retracts-onto-its-cocore-and-outgoing-region
 kind: lemma
 title: "The dual handle retraction onto the cocore, with the outgoing region carried onto the belt sphere"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-nakayama-kernels-give-well-defined-adjoint-functors
 kind: lemma
 title: "Nakayama kernels give well-defined adjoint functors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [cor-a-right-adjoint-preserves-ends-and-a-left-adjoint-preserves-coends, def-adjunction-by-unit-counit-and-triangle-identities, def-algebraic-dual-and-linear-functional, def-bimodule, def-end-and-coend, def-functor-and-contravariant-functor, def-k-linear-category-and-k-linear-functor, def-left-and-right-modules, def-left-and-right-nakayama-functors-by-finite-kernel-calculus, def-left-exact-and-right-exact-functor, def-linear-map, def-natural-isomorphism, def-natural-transformation, lem-finite-eilenberg-watts-kernel-end-and-coend-exist-with-explicit-universal-maps, lem-finite-module-duality-is-exact-with-commuting-bimodule-actions, lem-finite-vector-space-copowers-in-a-linear-abelian-category, lem-tensor-hom-adjunction-for-bimodules, prop-functoriality-of-module-tensor-products, thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories, thm-ends-and-coends-are-unique-up-to-unique-isomorphism, thm-every-equivalence-can-be-made-an-adjoint-equivalence, thm-unit-isomorphisms-for-module-tensor-products, thm-universal-property-of-module-tensor-products]

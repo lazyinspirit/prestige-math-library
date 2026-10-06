@@ -2,7 +2,7 @@
 id: ex-normal-class-calculation-for-real-projective-space
 kind: example
 title: "Normal-class calculation for real projective space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["thm-real-projective-space-stiefel-whitney-nonimmersion-obstruction", "lem-the-inverse-of-one-plus-the-generator-in-a-truncated-mod-two-polynomial-ring", "thm-mod-two-real-projective-bundle-theorem", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "def-real-projective-bundle-and-tautological-line", "def-normal-stiefel-whitney-and-pontryagin-classes-of-a-closed-manifold", "def-axiom-of-choice"]

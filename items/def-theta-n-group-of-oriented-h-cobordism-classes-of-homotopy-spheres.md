@@ -2,7 +2,7 @@
 id: def-theta-n-group-of-oriented-h-cobordism-classes-of-homotopy-spheres
 kind: definition
 title: "The homotopy-sphere group $\\Theta_n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

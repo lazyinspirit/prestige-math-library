@@ -2,7 +2,7 @@
 id: ex-gysin-sequence-for-a-milnor-sphere-bundle
 kind: example
 title: "The Gysin sequence for $M_{2,-1}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: lem-open-immersion-gluing-of-algebraic-spaces
 kind: lemma
 title: "Gluing algebraic spaces along open subfunctors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

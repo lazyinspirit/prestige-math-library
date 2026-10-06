@@ -2,7 +2,7 @@
 id: lem-surface-open-regular-locus
 kind: lemma
 title: Surface open regular locus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

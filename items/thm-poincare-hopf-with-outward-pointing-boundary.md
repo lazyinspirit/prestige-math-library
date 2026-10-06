@@ -2,7 +2,7 @@
 id: thm-poincare-hopf-with-outward-pointing-boundary
 kind: theorem
 title: "Poincare-Hopf with outward-pointing boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

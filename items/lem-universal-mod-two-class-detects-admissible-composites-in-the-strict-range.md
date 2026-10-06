@@ -2,7 +2,7 @@
 id: lem-universal-mod-two-class-detects-admissible-composites-in-the-strict-range
 kind: lemma
 title: "The universal mod-two class detects admissible composites in the strict range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

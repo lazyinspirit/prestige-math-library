@@ -2,7 +2,7 @@
 id: thm-bott-vanishing-for-real-pontryagin-monomials-of-a-codimension-q-foliation
 kind: theorem
 title: "Bott vanishing for real Pontryagin monomials of a foliation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

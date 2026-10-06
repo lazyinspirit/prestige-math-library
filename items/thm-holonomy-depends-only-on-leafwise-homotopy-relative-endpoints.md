@@ -2,7 +2,7 @@
 id: thm-holonomy-depends-only-on-leafwise-homotopy-relative-endpoints
 kind: theorem
 title: "Holonomy depends only on leafwise homotopy relative to endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

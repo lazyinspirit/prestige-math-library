@@ -2,7 +2,7 @@
 id: thm-stability-of-viscosity-solutions-under-local-uniform-convergence
 kind: theorem
 title: Stability of viscosity sub-, super- and solutions under locally uniform convergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

@@ -2,7 +2,7 @@
 id: ex-signature-and-p-one-of-complex-projective-two-space
 kind: example
 title: "Signature and first Pontryagin number of the complex projective plane"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

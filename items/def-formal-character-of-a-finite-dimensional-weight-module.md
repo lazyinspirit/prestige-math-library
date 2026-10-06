@@ -2,7 +2,7 @@
 id: def-formal-character-of-a-finite-dimensional-weight-module
 kind: definition
 title: The formal character of a finite-dimensional weight module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

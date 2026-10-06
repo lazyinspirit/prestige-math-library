@@ -2,7 +2,7 @@
 id: ex-wave-support-from-pure-displacement-versus-pure-velocity-data
 kind: example
 title: "Displacement data versus velocity data in one dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

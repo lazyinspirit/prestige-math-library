@@ -2,7 +2,7 @@
 id: ex-lie-algebras-of-alpha-p-mu-p-and-gl-n
 kind: example
 title: "Lie algebras of the additive, infinitesimal and general linear groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["def-axiom-of-choice", "def-lie-algebra-of-a-group-scheme", "def-lie-algebra-over-a-field", "lem-lie-algebra-tangent-space-and-functoriality", "thm-lie-bracket-and-adjoint-action-from-infinitesimals", "lem-lie-algebra-of-the-general-linear-group", "ex-additive-and-infinitesimal-group-schemes", "thm-cotangent-space-maximal-ideal-quotient", "def-relative-cotangent-space", "lem-general-linear-group-scheme-and-its-coordinate-ring"]

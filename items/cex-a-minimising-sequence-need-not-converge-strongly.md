@@ -2,7 +2,7 @@
 id: cex-a-minimising-sequence-need-not-converge-strongly
 kind: counterexample
 title: "A minimising sequence need not converge strongly"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

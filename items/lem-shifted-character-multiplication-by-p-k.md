@@ -2,7 +2,7 @@
 id: lem-shifted-character-multiplication-by-p-k
 kind: lemma
 title: "Shifted character products: exact for $p_1^\\#$ and leading terms for $p_k^\\#$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: thm-forced-three-dimensional-kirchhoff-duhamel-formula
 kind: theorem
 title: "The forced three-dimensional version as a retarded potential"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-characteristic-disk-map-can-be-put-in-generic-position-rel-boundary
 kind: lemma
 title: "Relative generic position for characteristic disk maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

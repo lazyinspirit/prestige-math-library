@@ -2,7 +2,7 @@
 id: cor-resolvent-power-estimates-for-semigroup-generators
 kind: corollary
 title: "Resolvent power estimates for semigroup generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

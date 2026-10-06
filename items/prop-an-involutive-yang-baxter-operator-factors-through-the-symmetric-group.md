@@ -2,7 +2,7 @@
 id: prop-an-involutive-yang-baxter-operator-factors-through-the-symmetric-group
 kind: proposition
 title: "An involutive Yang–Baxter operator factors through the symmetric group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

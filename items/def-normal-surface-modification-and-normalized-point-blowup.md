@@ -2,7 +2,7 @@
 id: def-normal-surface-modification-and-normalized-point-blowup
 kind: definition
 title: Normal scheme modifications and normalized point blowups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

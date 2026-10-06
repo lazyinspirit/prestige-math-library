@@ -2,7 +2,7 @@
 id: lem-surface-flat-base-change-coherent-cohomology-by-cech
 kind: lemma
 title: "Flat base change for quasi-coherent surface cohomology by \u010cech"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

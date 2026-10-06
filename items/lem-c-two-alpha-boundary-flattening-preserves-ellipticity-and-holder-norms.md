@@ -2,7 +2,7 @@
 id: lem-c-two-alpha-boundary-flattening-preserves-ellipticity-and-holder-norms
 kind: lemma
 title: "$C^{2,\\alpha}$ boundary flattening preserves the nondivergence structure, ellipticity and Hölder norms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

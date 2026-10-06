@@ -2,7 +2,7 @@
 id: ex-godbillon-vey-rescaling-calculation
 kind: example
 title: "Explicit Godbillon-Vey rescaling calculation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

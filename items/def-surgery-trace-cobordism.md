@@ -2,7 +2,7 @@
 id: "def-surgery-trace-cobordism"
 kind: "definition"
 title: "Surgery trace cobordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

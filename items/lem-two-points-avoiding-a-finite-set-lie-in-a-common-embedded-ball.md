@@ -2,7 +2,7 @@
 id: lem-two-points-avoiding-a-finite-set-lie-in-a-common-embedded-ball
 kind: lemma
 title: "Two points avoiding a finite set lie in a common embedded ball"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

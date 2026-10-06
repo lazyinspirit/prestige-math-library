@@ -2,7 +2,7 @@
 id: lem-an-infinite-cap-center-trajectory-has-recurrent-common-plaque-interior-patches
 kind: lemma
 title: "An infinite cap-center trajectory has recurrent common plaque-interior patches"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

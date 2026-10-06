@@ -2,7 +2,7 @@
 id: def-bmo-seminorm-and-quotient-by-constants
 kind: definition
 title: "BMO seminorm and the quotient by constants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-spherical-mean-of-space-dependent-data
 kind: definition
 title: "Spherical means and the weighted ball integral of space-dependent data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

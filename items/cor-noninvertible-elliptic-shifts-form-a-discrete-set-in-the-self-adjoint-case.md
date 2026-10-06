@@ -2,7 +2,7 @@
 id: cor-noninvertible-elliptic-shifts-form-a-discrete-set-in-the-self-adjoint-case
 kind: corollary
 title: "Non-invertible elliptic shifts form a discrete set in the self-adjoint case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

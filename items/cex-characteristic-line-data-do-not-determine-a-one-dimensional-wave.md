@@ -2,7 +2,7 @@
 id: cex-characteristic-line-data-do-not-determine-a-one-dimensional-wave
 kind: counterexample
 title: "Data on one characteristic line do not determine a one-dimensional wave"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

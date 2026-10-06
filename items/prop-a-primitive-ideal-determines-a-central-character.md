@@ -2,7 +2,7 @@
 id: prop-a-primitive-ideal-determines-a-central-character
 kind: proposition
 title: "A primitive ideal determines a central character"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

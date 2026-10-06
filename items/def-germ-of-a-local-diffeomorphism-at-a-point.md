@@ -2,7 +2,7 @@
 id: def-germ-of-a-local-diffeomorphism-at-a-point
 kind: definition
 title: "Germs of local diffeomorphisms at a point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

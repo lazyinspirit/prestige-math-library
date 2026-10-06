@@ -2,7 +2,7 @@
 id: thm-unoriented-thom-cohomology-away-from-two-below-2r
 kind: theorem
 title: "Unoriented Thom cohomology away from two and its strict endpoint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

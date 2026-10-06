@@ -2,7 +2,7 @@
 id: def-algebraic-cycle-and-cycle-group
 kind: definition
 title: "Algebraic cycles and the cycle group of a scheme of finite type over a field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

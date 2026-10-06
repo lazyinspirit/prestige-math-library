@@ -2,7 +2,7 @@
 id: def-real-hardy-space-by-a-radial-maximal-function
 kind: definition
 title: "The real Hardy space $H^p$ defined by a radial maximal function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

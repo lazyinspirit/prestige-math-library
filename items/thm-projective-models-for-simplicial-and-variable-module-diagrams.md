@@ -2,7 +2,7 @@
 id: thm-projective-models-for-simplicial-and-variable-module-diagrams
 kind: theorem
 title: "Projective models for simplicial and variable-module diagrams"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

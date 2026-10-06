@@ -2,7 +2,7 @@
 id: lem-universal-property-of-a-contraction
 kind: lemma
 title: "Universal property and uniqueness of a contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

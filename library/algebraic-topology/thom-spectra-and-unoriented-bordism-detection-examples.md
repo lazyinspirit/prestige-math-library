@@ -1,7 +1,7 @@
 ---
 page: "thom-spectra-and-unoriented-bordism-detection-examples"
 title: "Thom Spectra and Unoriented Bordism Detection — Examples"
-status: draft
+status: published
 items:
   []
 examples:

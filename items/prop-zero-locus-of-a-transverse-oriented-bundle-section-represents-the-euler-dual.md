@@ -2,7 +2,7 @@
 id: prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual
 kind: proposition
 title: "The zero locus of a transverse section represents the Euler dual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold, lem-normal-bundle-of-the-zero-locus-of-a-transverse-section, lem-pullback-of-the-thom-class-along-a-transverse-section, def-euler-class-by-zero-section-pullback-of-the-thom-class, thm-poincare-duality-for-oriented-topological-manifolds, def-cap-duality-map-for-an-oriented-manifold, def-fundamental-class-of-a-compact-oriented-manifold, def-relative-cap-product, prop-cap-product-naturality-and-projection-formula, def-normal-and-conormal-bundles-of-an-embedded-submanifold, def-axiom-of-choice, def-cap-product-with-cohomology-first, def-kronecker-evaluation-pairing, lem-second-countable-smooth-manifolds-have-cw-homotopy-type]

@@ -2,7 +2,7 @@
 id: lem-surface-completion-base-change-preserves-closed-fibre-local-completions
 kind: lemma
 title: "Completion base change preserves completed local rings on the closed fibre"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

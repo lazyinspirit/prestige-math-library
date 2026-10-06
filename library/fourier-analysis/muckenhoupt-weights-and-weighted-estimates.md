@@ -1,7 +1,7 @@
 ---
 page: muckenhoupt-weights-and-weighted-estimates
 title: "Muckenhoupt Weights and Weighted Estimates"
-status: draft
+status: published
 requires: [calderon-zygmund-decomposition-and-singular-integrals, the-lp-spaces-holder-minkowski-and-riesz-fischer, the-maximal-function-and-lebesgue-differentiation, radon-measures-and-the-riesz-markov-kakutani-theorem]
 items:
   - def-weight-and-weighted-lp-space

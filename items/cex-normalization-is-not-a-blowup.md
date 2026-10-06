@@ -2,7 +2,7 @@
 id: cex-normalization-is-not-a-blowup
 kind: counterexample
 title: "Normalization of a non-normal surface is not a point blowup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-reflection-at-a-dirichlet-endpoint
 kind: example
 title: "Odd reflection at a Dirichlet endpoint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

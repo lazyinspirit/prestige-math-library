@@ -2,7 +2,7 @@
 id: lem-images-of-finitely-generated-and-finite-groups-are-finitely-generated-and-finite
 kind: lemma
 title: "Images of finitely generated and of finite groups are finitely generated and finite"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

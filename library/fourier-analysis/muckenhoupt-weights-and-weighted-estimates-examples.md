@@ -1,7 +1,7 @@
 ---
 page: muckenhoupt-weights-and-weighted-estimates-examples
 title: "Muckenhoupt Weights and Weighted Estimates — Examples"
-status: draft
+status: published
 requires: [muckenhoupt-weights-and-weighted-estimates]
 items: []
 examples: [ex-power-weight-a-p-range, cex-power-weight-fails-at-both-a-p-endpoints, ex-a-one-power-weight-range, ex-weighted-norm-of-an-interval-indicator]

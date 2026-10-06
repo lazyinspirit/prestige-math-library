@@ -2,7 +2,7 @@
 id: lem-reverse-holder-from-a-distribution-estimate
 kind: lemma
 title: Reverse Holder from a distribution estimate for a doubling weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

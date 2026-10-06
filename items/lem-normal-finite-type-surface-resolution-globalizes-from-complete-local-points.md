@@ -2,7 +2,7 @@
 id: lem-normal-finite-type-surface-resolution-globalizes-from-complete-local-points
 kind: lemma
 title: "Surface resolution globalizes from complete local point resolutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

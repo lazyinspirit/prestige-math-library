@@ -2,7 +2,7 @@
 id: thm-dual-of-a-closed-subgroup-is-the-dual-quotient
 kind: theorem
 title: The dual of a closed subgroup is a quotient of the dual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 20

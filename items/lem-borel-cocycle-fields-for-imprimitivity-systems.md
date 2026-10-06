@@ -2,7 +2,7 @@
 id: lem-borel-cocycle-fields-for-imprimitivity-systems
 kind: lemma
 title: Measurable cocycle fields for a multiplicity-normalized system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

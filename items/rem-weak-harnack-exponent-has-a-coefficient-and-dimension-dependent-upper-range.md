@@ -2,7 +2,7 @@
 id: rem-weak-harnack-exponent-has-a-coefficient-and-dimension-dependent-upper-range
 kind: remark
 title: "Weak-Harnack exponent range and its dimension-dependent upper endpoint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

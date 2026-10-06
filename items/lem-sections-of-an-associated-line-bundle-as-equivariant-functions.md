@@ -2,7 +2,7 @@
 id: lem-sections-of-an-associated-line-bundle-as-equivariant-functions
 kind: lemma
 title: Sections of an associated line bundle as equivariant functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

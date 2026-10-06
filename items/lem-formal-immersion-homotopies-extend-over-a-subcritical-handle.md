@@ -2,7 +2,7 @@
 id: lem-formal-immersion-homotopies-extend-over-a-subcritical-handle
 kind: lemma
 title: "Formal-immersion homotopies extend over a subcritical handle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-formal-immersion-homotopies-extend-over-a-collar, lem-parametric-immersion-extension-on-a-disk, lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property, def-compact-parameter-pair, def-space-of-immersions-and-space-of-formal-immersions, def-formal-immersion-between-smooth-manifolds, def-k-handle-core-cocore-attaching-region-and-belt-sphere, def-attaching-a-smooth-handle-with-corner-rounding, def-hurewicz-and-serre-fibrations, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, def-weak-homotopy-equivalence, def-countable-choice]

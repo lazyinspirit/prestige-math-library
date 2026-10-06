@@ -2,7 +2,7 @@
 id: thm-intersection-multiplicity-at-least-product-multiplicities
 kind: theorem
 title: Intersection multiplicity dominates the product of multiplicities, with equality for separated tangent cones
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

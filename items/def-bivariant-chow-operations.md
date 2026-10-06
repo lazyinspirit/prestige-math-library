@@ -2,7 +2,7 @@
 id: def-bivariant-chow-operations
 kind: definition
 title: "Bivariant Chow operations and bivariant classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

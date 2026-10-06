@@ -2,7 +2,7 @@
 id: def-stable-normal-inverse-of-the-tangent-bundle
 kind: definition
 title: "Stable normal inverse of the tangent bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-smooth-manifold", "def-tangent-bundle-as-a-disjoint-union", "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle", "def-whitney-sum-of-vector-bundles", "def-vector-bundle-map-section-subbundle-and-isomorphism", "def-stable-normal-bundle-of-a-compact-smooth-manifold", "def-smooth-embedding", "def-countable-choice"]

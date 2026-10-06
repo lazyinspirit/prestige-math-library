@@ -2,7 +2,7 @@
 id: thm-negativity-for-exceptional-curves-on-smooth-surfaces
 kind: theorem
 title: "Negativity of contracted curves on regular surfaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

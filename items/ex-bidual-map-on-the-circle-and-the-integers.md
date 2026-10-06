@@ -2,7 +2,7 @@
 id: ex-bidual-map-on-the-circle-and-the-integers
 kind: example
 title: The bidual map on the circle and the integers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 18

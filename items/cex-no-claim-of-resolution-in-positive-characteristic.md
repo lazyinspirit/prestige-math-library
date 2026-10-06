@@ -2,7 +2,7 @@
 id: cex-no-claim-of-resolution-in-positive-characteristic
 kind: counterexample
 title: The maximal-contact mechanism fails in positive characteristic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

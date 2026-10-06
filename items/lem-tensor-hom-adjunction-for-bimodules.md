@@ -2,7 +2,7 @@
 id: lem-tensor-hom-adjunction-for-bimodules
 kind: lemma
 title: "Tensor-Hom adjunction for bimodules over arbitrary unital rings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

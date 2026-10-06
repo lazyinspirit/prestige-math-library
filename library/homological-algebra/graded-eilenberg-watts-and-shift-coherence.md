@@ -1,7 +1,7 @@
 ---
 page: graded-eilenberg-watts-and-shift-coherence
 title: "Graded Eilenberg–Watts and Shift Coherence"
-status: draft
+status: published
 items:
   - lem-graded-degreewise-direct-sums-and-homogeneous-free-covers
   - rem-derived-tensor-composition-and-the-enhancement-boundary

@@ -2,7 +2,7 @@
 id: def-middle-handle-intersection-matrix-of-an-h-cobordism
 kind: definition
 title: The middle-handle intersection matrix of an h-cobordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 13

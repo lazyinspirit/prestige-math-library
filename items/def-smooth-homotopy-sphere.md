@@ -2,7 +2,7 @@
 id: def-smooth-homotopy-sphere
 kind: definition
 title: "Smooth homotopy sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

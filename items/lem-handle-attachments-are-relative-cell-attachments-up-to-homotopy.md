@@ -2,7 +2,7 @@
 id: lem-handle-attachments-are-relative-cell-attachments-up-to-homotopy
 kind: lemma
 title: "Handle attachments are relative cell attachments up to homotopy"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-attaching-a-smooth-handle-with-corner-rounding, def-k-handle-core-cocore-attaching-region-and-belt-sphere, def-cell-attachment-by-a-characteristic-map, def-cofibration-and-homotopy-extension-property, thm-collar-neighborhood-theorem]

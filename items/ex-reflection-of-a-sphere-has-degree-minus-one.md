@@ -2,7 +2,7 @@
 id: ex-reflection-of-a-sphere-has-degree-minus-one
 kind: example
 title: A sphere reflection has degree minus one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 10

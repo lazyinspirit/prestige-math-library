@@ -2,7 +2,7 @@
 id: "thm-obstructions-lie-in-ext-two-cotangent-complex"
 kind: "theorem"
 title: "Obstructions to deformations lie in Ext^2 of the cotangent complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 15

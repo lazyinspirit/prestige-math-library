@@ -2,7 +2,7 @@
 id: ex-imprimitivity-for-a-finite-transitive-g-set
 kind: example
 title: Finite transitive $G$-sets recover the stabilizer-induction classification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

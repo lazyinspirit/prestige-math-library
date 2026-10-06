@@ -2,7 +2,7 @@
 id: thm-connected-graded-module-coalgebra-with-injective-unit-orbit-is-free
 kind: theorem
 title: "A connected graded module coalgebra with injective unit orbit is free"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

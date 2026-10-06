@@ -2,7 +2,7 @@
 id: "rem-nonsymmetric-lax-milgram-is-not-a-scalar-minimisation-principle"
 kind: "remark"
 title: "Nonsymmetric Lax--Milgram is not a scalar minimisation principle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 6

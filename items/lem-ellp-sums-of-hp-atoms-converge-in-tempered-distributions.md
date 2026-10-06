@@ -2,7 +2,7 @@
 id: lem-ellp-sums-of-hp-atoms-converge-in-tempered-distributions
 kind: lemma
 title: "$\\ell^p$ sums of atoms converge in $\\mathcal S'$ and in $H^p$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-reduced-burau-detects-every-power-of-delta-to-the-fourth-in-b-three
 kind: lemma
 title: "The reduced Burau representation detects every power of the fourth power of the half twist in B3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

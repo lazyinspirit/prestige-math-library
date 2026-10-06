@@ -2,7 +2,7 @@
 id: thm-invariant-ring-finite-generation-and-affine-categorical-quotient
 kind: theorem
 title: Finite generation of invariants and the affine categorical quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

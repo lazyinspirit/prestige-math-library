@@ -2,7 +2,7 @@
 id: thm-morita-equivalence-is-invertibility-of-a-bimodule
 kind: theorem
 title: "Morita equivalence is invertibility of a bimodule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

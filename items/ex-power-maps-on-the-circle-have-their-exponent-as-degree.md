@@ -2,7 +2,7 @@
 id: ex-power-maps-on-the-circle-have-their-exponent-as-degree
 kind: example
 title: Circle power maps are classified by their exponent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

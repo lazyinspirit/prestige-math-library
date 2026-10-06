@@ -2,7 +2,7 @@
 id: lem-lie-algebra-tangent-space-and-functoriality
 kind: lemma
 title: "The tangent space at the identity is a vector space, and Lie is a functor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["def-lie-algebra-of-a-group-scheme", "def-group-scheme-over-a-field", "thm-tangent-vectors-dual-numbers", "thm-cotangent-space-maximal-ideal-quotient", "lem-differentials-commute-base-change-schemes", "def-relative-cotangent-space", "def-dual-numbers-scheme", "def-tensor-product-of-modules-by-generators-and-relations", "thm-coproduct-property-of-tensor-products-of-commutative-algebras", "def-closed-immersion-schemes", "def-linear-map", "thm-hom-tensor-adjunction-for-modules", "lem-differential-of-morphism-via-cotangent-map", "def-morphism-and-closed-subgroup-scheme", "thm-fibre-products-of-schemes-exist", "def-zariski-tangent-space-point", "thm-steinitz-exchange", "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others", "def-linear-basis", "def-linear-independence", "def-linear-combination-and-span", "def-linear-isomorphism-and-invertible-linear-map"]

@@ -2,7 +2,7 @@
 id: ex-internal-shift-as-a-graded-eilenberg-watts-kernel
 kind: example
 title: The internal shift as a graded Eilenberg-Watts kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-graded-eilenberg-watts-with-coherent-shifts, lem-graded-tensor-functor-is-k-linear-right-exact-coproduct-preserving-and-shift-coherent, lem-graded-balanced-tensor-and-shift-isomorphisms, def-graded-ring-module-bimodule-and-internal-shift, lem-internal-shift-endofunctors-and-tensor-compatibility, def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization, thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility]

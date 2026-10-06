@@ -2,7 +2,7 @@
 id: lem-rank-one-hecke-quadratic-relation
 kind: lemma
 title: "The rank-one quadratic relation in the finite Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

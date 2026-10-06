@@ -2,7 +2,7 @@
 id: rem-rellich-is-a-strictly-subcritical-theorem
 kind: remark
 title: "Rellich compactness is strictly subcritical"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

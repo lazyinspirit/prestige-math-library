@@ -2,7 +2,7 @@
 id: def-boundary-middle-form-and-signature
 kind: definition
 title: "Boundary middle form and boundary signature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

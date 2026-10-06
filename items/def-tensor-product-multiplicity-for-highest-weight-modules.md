@@ -2,7 +2,7 @@
 id: def-tensor-product-multiplicity-for-highest-weight-modules
 kind: definition
 title: Tensor-product multiplicities for finite-dimensional simple modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

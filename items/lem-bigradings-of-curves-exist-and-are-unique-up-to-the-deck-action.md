@@ -2,7 +2,7 @@
 id: lem-bigradings-of-curves-exist-and-are-unique-up-to-the-deck-action
 kind: lemma
 title: "Existence and rigidity of bigradings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

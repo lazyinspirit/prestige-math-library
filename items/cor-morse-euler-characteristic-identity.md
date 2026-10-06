@@ -2,7 +2,7 @@
 id: cor-morse-euler-characteristic-identity
 kind: corollary
 title: "Morse Euler characteristic identity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

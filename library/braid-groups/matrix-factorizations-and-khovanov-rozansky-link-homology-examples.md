@@ -1,7 +1,7 @@
 ---
 page: matrix-factorizations-and-khovanov-rozansky-link-homology-examples
 title: "Matrix Factorizations and Khovanov–Rozansky Link Homology — Examples"
-status: draft
+status: published
 requires: [matrix-factorizations-and-khovanov-rozansky-link-homology]
 items: []
 examples: [ex-a-positive-crossing-factorization-complex,

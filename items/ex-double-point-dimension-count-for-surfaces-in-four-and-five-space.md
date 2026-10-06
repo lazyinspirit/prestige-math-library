@@ -2,7 +2,7 @@
 id: ex-double-point-dimension-count-for-surfaces-in-four-and-five-space
 kind: example
 title: The double point dimension count for surfaces in four- and five-space
-status: draft
+status: published
 origin: session
 dependency_level: 4
 provenance:

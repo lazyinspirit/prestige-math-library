@@ -2,7 +2,7 @@
 id: cor-center-is-morita-invariant-via-natural-endomorphisms
 kind: corollary
 title: "The center is Morita invariant, via natural endomorphisms of the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

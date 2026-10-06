@@ -2,7 +2,7 @@
 id: lem-abelian-scheme-fibrewise-constant-morphism-rigidity
 kind: lemma
 title: "Fibrewise constant morphisms from an abelian scheme factor through the base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

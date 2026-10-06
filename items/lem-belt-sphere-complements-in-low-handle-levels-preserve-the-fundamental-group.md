@@ -2,7 +2,7 @@
 id: lem-belt-sphere-complements-in-low-handle-levels-preserve-the-fundamental-group
 kind: lemma
 title: Belt-sphere complements in low handle levels preserve the fundamental group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

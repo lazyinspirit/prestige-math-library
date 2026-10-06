@@ -49,7 +49,7 @@ sources:
     - title: "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press 2008; author-hosted complete text)"
       url: "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf"
       locator: "Appendix F, §F.4: paragraph 'Conversely, any non-degenerate ∗-representation of L1(G) is of this form'"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

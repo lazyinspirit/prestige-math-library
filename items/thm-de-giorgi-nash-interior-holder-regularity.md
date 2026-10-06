@@ -2,7 +2,7 @@
 id: thm-de-giorgi-nash-interior-holder-regularity
 kind: theorem
 title: "De Giorgi-Nash interior Holder regularity for divergence-form equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

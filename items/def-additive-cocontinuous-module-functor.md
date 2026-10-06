@@ -2,7 +2,7 @@
 id: def-additive-cocontinuous-module-functor
 kind: definition
 title: "Additive cocontinuous module functors and their schematic category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: def-shifted-character-observables-and-profile-moments
 kind: definition
 title: "Shifted character observables $p_\\rho^\\#$ and profile moments $\\tilde p_k$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-plancherel-measure-on-partitions, def-russian-profile-and-sqrt-n-scaling-of-a-young-diagram, def-partition-young-diagram-and-conjugate-partition, cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients, thm-standard-polytabloid-basis, def-factorial-and-falling-factorial, thm-integration-by-parts, def-derivative, prop-basic-value-properties-of-a-complex-character, thm-continuous-implies-integrable, thm-monotone-change-of-variable-for-riemann-integrals]

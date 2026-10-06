@@ -2,7 +2,7 @@
 id: thm-dirichlet-principle-for-poisson-equation
 kind: theorem
 title: "The Dirichlet principle for the Poisson equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

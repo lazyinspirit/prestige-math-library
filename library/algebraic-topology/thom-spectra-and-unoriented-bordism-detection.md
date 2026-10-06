@@ -1,7 +1,7 @@
 ---
 page: "thom-spectra-and-unoriented-bordism-detection"
 title: "Thom Spectra and Unoriented Bordism Detection"
-status: draft
+status: published
 items:
   - def-mod-two-square-algebra-admissible-sequences-and-excess
   - lem-mod-two-eilenberg-maclane-base-and-path-loop-inputs

@@ -2,7 +2,7 @@
 id: def-roots-and-root-groups-of-a-split-reductive-group
 kind: definition
 title: Roots and root groups of a split reductive group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 22

@@ -2,7 +2,7 @@
 id: cor-nowhere-zero-section-forces-the-euler-class-to-vanish
 kind: corollary
 title: "A nowhere-zero section forces the Euler data to vanish"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-oriented-clutching-classifies-oriented-bundles-over-spheres, lem-pi-three-so-three-generated-by-the-quaternion-double-cover, cor-homology-of-spheres, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, cor-short-exact-sequences-of-vector-bundles-split-over-the-base, cor-real-line-is-universal-cover-of-circle, thm-covering-space-lifting-criterion, thm-higher-dimensional-spheres-are-simply-connected, thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric, thm-cap-product-boundary-identity, prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish, prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual, thm-self-intersection-is-the-euler-number-of-the-normal-bundle, prop-mod-two-self-intersection-needs-no-orientation, def-self-intersection-number-of-an-oriented-submanifold, def-euler-class-by-zero-section-pullback-of-the-thom-class, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, def-axiom-of-choice]

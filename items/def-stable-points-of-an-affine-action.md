@@ -2,7 +2,7 @@
 id: def-stable-points-of-an-affine-action
 kind: definition
 title: Stable points of an affine action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

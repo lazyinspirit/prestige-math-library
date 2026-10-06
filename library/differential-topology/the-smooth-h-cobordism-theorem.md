@@ -1,7 +1,7 @@
 ---
 page: the-smooth-h-cobordism-theorem
 title: The Smooth H Cobordism Theorem
-status: draft
+status: published
 requires:
   - handle-decompositions-duality-and-rearrangement
   - handle-cancellation-slides-and-elementary-moves

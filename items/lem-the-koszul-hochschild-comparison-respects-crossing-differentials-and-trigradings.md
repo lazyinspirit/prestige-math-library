@@ -2,7 +2,7 @@
 id: lem-the-koszul-hochschild-comparison-respects-crossing-differentials-and-trigradings
 kind: lemma
 title: "The Koszul-Hochschild comparison respects crossing differentials and trigradings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [lem-a-closed-moy-resolution-koszul-complex-computes-hochschild-homology-of-its-soergel-bimodule, def-chi-zero-and-chi-one-wide-edge-morphisms, def-positive-and-negative-khovanov-rozansky-crossing-complexes, def-khovanov-rozansky-complex-and-trigraded-braid-homology, def-khovanovs-hhh-rouquier-generator-complexes, def-unreduced-type-a-soergel-bimodules-and-the-trivial-polynomial-factor, lem-the-first-layer-relations-in-a-closed-moy-resolution-form-a-regular-sequence, lem-setting-a-to-zero-in-a-closed-kr-factorization-gives-the-wide-edge-koszul-complex, def-positive-and-negative-rouquier-generator-complexes, def-reduced-khovanov-rozansky-homology, def-axiom-of-choice]

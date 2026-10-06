@@ -2,7 +2,7 @@
 id: lem-arith-symmetric-homomorphism-is-a-mumford-map
 kind: lemma
 title: "Symmetric homomorphisms are Mumford maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

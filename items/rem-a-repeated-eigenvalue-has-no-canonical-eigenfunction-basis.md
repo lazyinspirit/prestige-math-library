@@ -2,7 +2,7 @@
 id: rem-a-repeated-eigenvalue-has-no-canonical-eigenfunction-basis
 kind: remark
 title: "A repeated eigenvalue has no canonical eigenfunction basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

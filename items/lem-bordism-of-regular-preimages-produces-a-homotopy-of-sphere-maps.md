@@ -2,7 +2,7 @@
 id: lem-bordism-of-regular-preimages-produces-a-homotopy-of-sphere-maps
 kind: lemma
 title: A framed cobordism of regular preimages produces a homotopy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

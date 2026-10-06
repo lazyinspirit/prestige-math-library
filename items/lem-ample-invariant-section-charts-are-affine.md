@@ -2,7 +2,7 @@
 id: lem-ample-invariant-section-charts-are-affine
 kind: lemma
 title: Nonvanishing charts of sections of an ample linearization are affine
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

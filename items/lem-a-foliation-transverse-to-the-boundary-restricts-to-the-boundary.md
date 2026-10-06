@@ -2,7 +2,7 @@
 id: lem-a-foliation-transverse-to-the-boundary-restricts-to-the-boundary
 kind: lemma
 title: "Restriction of a foliation transverse to the boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

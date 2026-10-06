@@ -2,7 +2,7 @@
 id: prop-transverse-volume-preserving-flow-implies-tautness-in-the-compact-cooriented-three-dimensional-setting
 kind: proposition
 title: A transverse volume-preserving flow implies tautness in the compact cooriented three-dimensional setting
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

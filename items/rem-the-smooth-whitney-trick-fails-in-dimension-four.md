@@ -2,7 +2,7 @@
 id: rem-the-smooth-whitney-trick-fails-in-dimension-four
 kind: remark
 title: The smooth Whitney trick fails in dimension four
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

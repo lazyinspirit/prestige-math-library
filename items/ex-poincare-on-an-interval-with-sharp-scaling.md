@@ -2,7 +2,7 @@
 id: ex-poincare-on-an-interval-with-sharp-scaling
 kind: example
 title: "Poincare on an interval: the length dependence is linear"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

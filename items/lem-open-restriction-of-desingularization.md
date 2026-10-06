@@ -2,7 +2,7 @@
 id: "lem-open-restriction-of-desingularization"
 kind: "lemma"
 title: "Open restrictions of the canonical desingularization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 19

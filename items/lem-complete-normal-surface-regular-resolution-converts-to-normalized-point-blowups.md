@@ -2,7 +2,7 @@
 id: lem-complete-normal-surface-regular-resolution-converts-to-normalized-point-blowups
 kind: lemma
 title: "A complete normal surface resolution converts to normalized point blowups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 19

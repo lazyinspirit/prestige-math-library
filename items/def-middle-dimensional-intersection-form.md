@@ -2,7 +2,7 @@
 id: def-middle-dimensional-intersection-form
 kind: definition
 title: "The middle-dimensional intersection form of a closed oriented 4k-manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

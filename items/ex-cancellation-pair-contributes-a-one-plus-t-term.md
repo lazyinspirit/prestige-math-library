@@ -2,7 +2,7 @@
 id: ex-cancellation-pair-contributes-a-one-plus-t-term
 kind: example
 title: "A created cancelling pair contributes a $(1+t)t^k$ term"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

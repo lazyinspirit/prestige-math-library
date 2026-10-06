@@ -2,7 +2,7 @@
 id: thm-kirchhoff-formula-for-the-three-dimensional-wave-equation
 kind: theorem
 title: "Kirchhoff's formula in three dimensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

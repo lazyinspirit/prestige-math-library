@@ -2,7 +2,7 @@
 id: def-arith-tate-module-and-inertia
 kind: definition
 title: "Prime-to-residue-characteristic Tate modules and inertia"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

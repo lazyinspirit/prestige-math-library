@@ -2,7 +2,7 @@
 id: def-curves-and-geometric-intersection-numbers-on-the-marked-disk
 kind: definition
 title: "Curves and geometric intersection numbers on the marked disk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

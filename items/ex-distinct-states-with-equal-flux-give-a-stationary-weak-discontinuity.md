@@ -2,7 +2,7 @@
 id: ex-distinct-states-with-equal-flux-give-a-stationary-weak-discontinuity
 kind: example
 title: Distinct states with equal flux give a stationary weak discontinuity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

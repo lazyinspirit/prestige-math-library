@@ -2,7 +2,7 @@
 id: ex-cyclic-convolution-via-the-dft
 kind: example
 title: "Cyclic convolution on $\\mathbb Z/4\\mathbb Z$ via the DFT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

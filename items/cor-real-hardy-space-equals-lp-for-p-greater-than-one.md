@@ -2,7 +2,7 @@
 id: cor-real-hardy-space-equals-lp-for-p-greater-than-one
 kind: corollary
 title: "$H^p$ equals $L^p$ with equivalent norms for $1<p<\\infty$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

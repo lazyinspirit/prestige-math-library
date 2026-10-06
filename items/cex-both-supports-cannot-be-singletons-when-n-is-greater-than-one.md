@@ -2,7 +2,7 @@
 id: cex-both-supports-cannot-be-singletons-when-n-is-greater-than-one
 kind: counterexample
 title: 'Both finite supports cannot be singletons when $N>1$'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

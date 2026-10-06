@@ -2,7 +2,7 @@
 id: thm-one-dimensional-forced-wave-duhamel-formula
 kind: theorem
 title: "The forced one-dimensional wave formula over the characteristic triangle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

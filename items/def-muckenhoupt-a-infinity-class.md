@@ -2,7 +2,7 @@
 id: def-muckenhoupt-a-infinity-class
 kind: definition
 title: The Muckenhoupt A_infinity class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

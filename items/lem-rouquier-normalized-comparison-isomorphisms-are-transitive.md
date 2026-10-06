@@ -2,7 +2,7 @@
 id: lem-rouquier-normalized-comparison-isomorphisms-are-transitive
 kind: lemma
 title: "Normalized comparison isomorphisms are transitive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

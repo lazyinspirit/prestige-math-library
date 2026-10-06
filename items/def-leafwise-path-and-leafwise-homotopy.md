@@ -2,7 +2,7 @@
 id: def-leafwise-path-and-leafwise-homotopy
 kind: definition
 title: "Leafwise paths and leafwise homotopy relative to endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

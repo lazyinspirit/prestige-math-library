@@ -2,7 +2,7 @@
 id: thm-multivariate-method-of-moments-for-a-determinate-limit
 kind: theorem
 title: "The multivariate method of moments for a determinate limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: ex-the-trivial-one-braid-hhh-grading-normalization
 kind: example
 title: "The trivial one-braid and the grading normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [thm-hhh-is-isomorphic-to-reduced-khovanov-rozansky-homflypt-homology, def-reduced-khovanov-rozansky-homology, def-khovanovs-hhh-rouquier-generator-complexes, def-termwise-hochschild-homology-complex-of-a-rouquier-complex, def-hochschild-chain-complex-of-a-bimodule, lem-the-koszul-hochschild-comparison-respects-crossing-differentials-and-trigradings, def-reduced-type-a-polynomial-ring-for-hhh, def-axiom-of-choice]

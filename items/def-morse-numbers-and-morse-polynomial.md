@@ -2,7 +2,7 @@
 id: def-morse-numbers-and-morse-polynomial
 kind: definition
 title: "Morse numbers and the Morse polynomial"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

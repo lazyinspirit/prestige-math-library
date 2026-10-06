@@ -2,7 +2,7 @@
 id: cex-vanishing-lefschetz-number-allows-fixed-points
 kind: counterexample
 title: "A vanishing Lefschetz number with canceling fixed points"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

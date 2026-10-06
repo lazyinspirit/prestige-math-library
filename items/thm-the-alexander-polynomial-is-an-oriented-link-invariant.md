@@ -2,7 +2,7 @@
 id: thm-the-alexander-polynomial-is-an-oriented-link-invariant
 kind: theorem
 title: "The Alexander polynomial is an oriented link invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

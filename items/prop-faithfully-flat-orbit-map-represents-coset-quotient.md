@@ -2,7 +2,7 @@
 id: prop-faithfully-flat-orbit-map-represents-coset-quotient
 kind: proposition
 title: "A faithfully flat orbit map represents the coset quotient sheaf"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-algebraic-group-action-and-scheme-theoretic-stabilizer, def-axiom-of-choice, def-faithfully-flat-morphism-schemes, def-locally-finite-presentation-morphism, def-morphism-and-closed-subgroup-scheme, def-quotient-sheaf-and-representable-quotient, def-scheme-theoretic-fibre, lem-action-map-fibres-and-stabilizer-subscheme, lem-fppf-quotient-representability-criterion]

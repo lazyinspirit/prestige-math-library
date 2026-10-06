@@ -2,7 +2,7 @@
 id: thm-uniqueness-in-mackey-imprimitivity
 kind: theorem
 title: Uniqueness in the imprimitivity theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

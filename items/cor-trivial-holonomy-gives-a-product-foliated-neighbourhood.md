@@ -2,7 +2,7 @@
 id: cor-trivial-holonomy-gives-a-product-foliated-neighbourhood
 kind: corollary
 title: "Trivial holonomy gives a product foliated neighbourhood"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

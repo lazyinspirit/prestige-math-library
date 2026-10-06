@@ -2,7 +2,7 @@
 id: thm-rellich-kondrachov-at-the-critical-source-exponent
 kind: theorem
 title: "Rellich--Kondrachov at the critical source exponent $p=n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

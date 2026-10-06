@@ -2,7 +2,7 @@
 id: cex-distinct-point-count-needs-multiplicity
 kind: counterexample
 title: "Counting distinct points is not enough: tangent contact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

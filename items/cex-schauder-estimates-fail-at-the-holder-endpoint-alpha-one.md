@@ -2,7 +2,7 @@
 id: cex-schauder-estimates-fail-at-the-holder-endpoint-alpha-one
 kind: counterexample
 title: The Schauder estimate fails at the H\"older endpoint $\alpha=1$
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

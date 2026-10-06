@@ -2,7 +2,7 @@
 id: cex-smooth-interior-data-do-not-repair-incompatible-dirichlet-corner-values
 kind: counterexample
 title: "Smooth interior data do not repair incompatible Dirichlet corner values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

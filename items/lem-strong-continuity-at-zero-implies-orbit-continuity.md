@@ -2,7 +2,7 @@
 id: lem-strong-continuity-at-zero-implies-orbit-continuity
 kind: lemma
 title: "Continuity at time zero implies continuity of every orbit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

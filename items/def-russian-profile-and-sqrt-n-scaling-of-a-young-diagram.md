@@ -2,7 +2,7 @@
 id: def-russian-profile-and-sqrt-n-scaling-of-a-young-diagram
 kind: definition
 title: "Continual diagrams, Russian profiles, and the $\\sqrt n$-scaling of a Young diagram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-plancherel-measure-on-partitions, def-partition-young-diagram-and-conjugate-partition, def-derivative, lem-of-abs-value, def-darboux-integral, thm-change-of-variables-for-compact-jordan-sets, lem-of-triangle-inequality]

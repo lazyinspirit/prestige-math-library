@@ -2,7 +2,7 @@
 id: cex-w-one-p-to-lq-bound-fails-for-q-greater-than-p-star-by-dilation
 kind: counterexample
 title: "The $W^{1,p}\\to L^q$ bound fails for $q>p^{*}$ by dilation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

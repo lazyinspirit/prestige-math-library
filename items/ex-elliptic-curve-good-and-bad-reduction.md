@@ -2,7 +2,7 @@
 id: ex-elliptic-curve-good-and-bad-reduction
 kind: example
 title: "An elliptic curve with good reduction and an elliptic curve with bad reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

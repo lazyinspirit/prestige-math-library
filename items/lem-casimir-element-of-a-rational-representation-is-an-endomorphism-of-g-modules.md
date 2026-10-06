@@ -2,7 +2,7 @@
 id: lem-casimir-element-of-a-rational-representation-is-an-endomorphism-of-g-modules
 kind: lemma
 title: "The Casimir element of a rational representation is an endomorphism of G-modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 22

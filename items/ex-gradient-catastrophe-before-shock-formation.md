@@ -2,7 +2,7 @@
 id: ex-gradient-catastrophe-before-shock-formation
 kind: example
 title: Gradient catastrophe before shock formation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

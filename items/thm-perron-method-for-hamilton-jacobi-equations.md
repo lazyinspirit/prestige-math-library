@@ -2,7 +2,7 @@
 id: thm-perron-method-for-hamilton-jacobi-equations
 kind: theorem
 title: 'Perron''s method for the Cauchy problem: existence between two barriers'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

@@ -2,7 +2,7 @@
 id: def-holder-spaces-c-k-alpha-and-their-scaled-norms
 kind: definition
 title: "Hölder spaces $C^{k,\\alpha}$, closure and interior scaled norms, and $C^{k,\\alpha}$ domains"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: def-joint-convergence-and-normalized-cycle-character-observables
 kind: definition
 title: "Joint convergence in distribution and the normalized cycle-character observables"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-shifted-character-observables-and-profile-moments, def-plancherel-measure-on-partitions, prop-plancherel-weights-sum-to-one, def-convergence-in-distribution-of-random-elements, def-law-or-distribution-of-a-random-element, def-multivariate-normal-law, def-axiom-of-choice]

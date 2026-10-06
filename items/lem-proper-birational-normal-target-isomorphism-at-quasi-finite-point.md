@@ -2,7 +2,7 @@
 id: lem-proper-birational-normal-target-isomorphism-at-quasi-finite-point
 kind: lemma
 title: "A proper birational map to a normal target is an isomorphism near a quasi-finite point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

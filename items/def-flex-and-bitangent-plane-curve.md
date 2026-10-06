@@ -2,7 +2,7 @@
 id: def-flex-and-bitangent-plane-curve
 kind: definition
 title: Flexes and bitangents defined by intersection multiplicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

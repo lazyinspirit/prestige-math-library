@@ -2,7 +2,7 @@
 id: thm-affine-group-scheme-faithful-finite-dimensional-representation
 kind: theorem
 title: A finitely generated affine group scheme has a faithful finite-dimensional representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-the-cyclic-cover-deformation-retracts-onto-the-lifted-flower-and-spine
 kind: lemma
 title: "The cyclic cover retracts onto the lifted flower and has a deck-equivariant spine model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

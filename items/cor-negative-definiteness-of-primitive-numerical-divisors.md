@@ -2,7 +2,7 @@
 id: cor-negative-definiteness-of-primitive-numerical-divisors
 kind: corollary
 title: "Negative definiteness of the primitive part of the Neron-Severi space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

@@ -1,7 +1,7 @@
 ---
 page: codimension-one-foliations-and-secondary-classes
 title: Codimension One Foliations, Secondary Classes and Characteristic Disk Foundations
-status: draft
+status: published
 requires: [smooth-cobordism-relations-groups-and-rings, foliation-holonomy-and-the-holonomy-groupoid, reeb-stability-and-global-foliation-constructions, distributions-integral-manifolds-and-the-frobenius-theorem, tensor-fields-exterior-algebra-and-differential-forms, the-exterior-derivative-and-cartan-calculus, integration-of-forms-and-the-general-stokes-theorem, the-de-rham-complex-homotopy-and-mayer-vietoris, chern-weil-theory-and-characteristic-forms, the-fundamental-group, singular-cohomology-and-coefficient-theorems, cup-cap-cross-products-and-cohomology-rings, orientations-poincare-lefschetz-and-alexander-duality, stiefel-whitney-and-euler-classes-by-universal-constructions, chern-and-pontryagin-classes-by-splitting-and-complexification, further-trigonometric-identities-and-inverses, the-gauss-bonnet-theorem-for-riemannian-surfaces]
 items:
 - lem-forms-annihilated-by-a-nowhere-vanishing-one-form-are-divisible-by-it

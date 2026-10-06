@@ -2,7 +2,7 @@
 id: cex-an-hone-atom-need-not-be-smooth
 kind: counterexample
 title: "An $H^1$ atom need not be smooth or continuous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

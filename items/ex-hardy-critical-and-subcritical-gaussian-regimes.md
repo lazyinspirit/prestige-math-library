@@ -2,7 +2,7 @@
 id: ex-hardy-critical-and-subcritical-gaussian-regimes
 kind: example
 title: Critical, subcritical and supercritical Gaussian regimes for Hardy's theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

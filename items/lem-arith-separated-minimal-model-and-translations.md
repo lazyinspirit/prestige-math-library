@@ -2,7 +2,7 @@
 id: lem-arith-separated-minimal-model-and-translations
 kind: lemma
 title: "Separated minimal union and translations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

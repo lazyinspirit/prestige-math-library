@@ -2,7 +2,7 @@
 id: def-gateaux-and-frechet-derivatives-of-a-functional
 kind: definition
 title: "Gateaux and Frechet derivatives of a functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

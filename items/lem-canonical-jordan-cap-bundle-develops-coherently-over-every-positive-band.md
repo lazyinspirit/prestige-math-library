@@ -2,7 +2,7 @@
 id: lem-canonical-jordan-cap-bundle-develops-coherently-over-every-positive-band
 kind: lemma
 title: The canonical Jordan cap bundle develops coherently over every positive band
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

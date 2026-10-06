@@ -1,7 +1,7 @@
 ---
 page: morse-inequalities-and-the-handle-chain-complex
 title: Morse Inequalities and the Handle Chain Complex
-status: draft
+status: published
 items: [def-morse-numbers-and-morse-polynomial, def-poincare-polynomial-over-a-field, lem-exact-sequence-dimension-inequality, lem-long-exact-sequence-of-a-triple-in-singular-homology, lem-a-collar-product-region-deformation-retracts-onto-its-face, lem-a-k-handle-deformation-retracts-onto-its-cocore-and-outgoing-region, lem-one-handle-changes-relative-homology-in-one-degree, lem-higher-index-handle-attachments-do-not-change-lower-homology, thm-morse-polynomial-identity, cor-strong-morse-inequalities, cor-weak-morse-inequalities, def-perfect-morse-function-over-a-field, cor-total-critical-point-lower-bound, prop-relative-morse-inequalities-for-a-cobordism, prop-morse-handle-chain-complex-computes-singular-homology, cor-morse-euler-characteristic-identity, lem-perfectness-is-equivalent-to-vanishing-morse-correction-polynomial, lem-handle-boundary-coefficients-are-attaching-belt-intersection-numbers, rem-morse-inequalities-depend-on-the-coefficient-field]
 examples: []
 ---

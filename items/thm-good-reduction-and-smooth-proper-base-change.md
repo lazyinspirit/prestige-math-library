@@ -2,7 +2,7 @@
 id: thm-good-reduction-and-smooth-proper-base-change
 kind: theorem
 title: "Good reduction, coherent base change, and unramified torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

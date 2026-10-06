@@ -2,7 +2,7 @@
 id: thm-solvable-subgroups-and-the-radical-as-borel-intersection
 kind: theorem
 title: Solvable subgroups, the radical, and the Borel intersection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 16

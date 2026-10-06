@@ -2,7 +2,7 @@
 id: def-companion-ideal-and-monomial-part
 kind: definition
 title: The monomial part, the non-monomial part and the companion ideal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

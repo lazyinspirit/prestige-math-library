@@ -2,7 +2,7 @@
 id: "def-square-zero-extension-and-small-extension"
 kind: "definition"
 title: "Square-zero extensions, small extensions and first-order thickenings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-signature-is-multiplicative-under-cartesian-products
 kind: theorem
 title: "The signature is multiplicative under Cartesian products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

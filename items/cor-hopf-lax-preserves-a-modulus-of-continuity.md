@@ -2,7 +2,7 @@
 id: cor-hopf-lax-preserves-a-modulus-of-continuity
 kind: corollary
 title: The Hopf--Lax operator preserves a modulus of continuity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

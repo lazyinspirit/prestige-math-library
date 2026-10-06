@@ -2,7 +2,7 @@
 id: cex-ordinary-acyclicity-over-z-does-not-detect-group-ring-torsion
 kind: counterexample
 title: "Ordinary acyclicity over Z does not detect group-ring torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: cor-global-h-two-estimate-without-the-ltwo-term-under-uniqueness
 kind: corollary
 title: "The global $H^2$ estimate without the $L^2$ term under uniqueness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

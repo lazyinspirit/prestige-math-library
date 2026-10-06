@@ -2,7 +2,7 @@
 id: def-spatial-and-frequency-centres-and-variances
 kind: definition
 title: 'Spatial and frequency centres and variances of an $L^2$ function with finite second moments'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-compatible-arbitrary-pi-fence-reduction
 kind: lemma
 title: "Compatible arbitrary pi fence reduction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

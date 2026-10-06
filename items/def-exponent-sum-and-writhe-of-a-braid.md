@@ -2,7 +2,7 @@
 id: def-exponent-sum-and-writhe-of-a-braid
 kind: definition
 title: "Exponent sum and writhe of a braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

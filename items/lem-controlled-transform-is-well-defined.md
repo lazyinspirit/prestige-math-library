@@ -2,7 +2,7 @@
 id: lem-controlled-transform-is-well-defined
 kind: lemma
 title: Controlled transforms are well defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

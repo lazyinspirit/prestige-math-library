@@ -2,7 +2,7 @@
 id: cor-poincare-wirtinger-on-convex-domains
 kind: corollary
 title: "Poincare-Wirtinger on bounded convex domains by the direct pairwise argument"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

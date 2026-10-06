@@ -2,7 +2,7 @@
 id: cex-common-component-bezout-sum-not-finite
 kind: counterexample
 title: A common component makes the intersection sum infinite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-projective-git-quotient-from-invariant-section-ring
 kind: theorem
 title: The projective GIT quotient from the invariant section ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

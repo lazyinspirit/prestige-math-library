@@ -2,7 +2,7 @@
 id: def-limitwise-nullhomotopy-subgroup-of-a-leaf
 kind: definition
 title: "Limitwise-nullhomotopy subgroup of a leaf"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

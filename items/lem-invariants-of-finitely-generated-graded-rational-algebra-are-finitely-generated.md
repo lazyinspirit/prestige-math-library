@@ -2,7 +2,7 @@
 id: lem-invariants-of-finitely-generated-graded-rational-algebra-are-finitely-generated
 kind: lemma
 title: Graded invariants of a finitely generated rational G-algebra are finitely generated
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

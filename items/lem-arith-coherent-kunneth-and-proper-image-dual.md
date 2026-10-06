@@ -2,7 +2,7 @@
 id: lem-arith-coherent-kunneth-and-proper-image-dual
 kind: lemma
 title: "Coherent Kunneth, the tangent bound and the proper-image dual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

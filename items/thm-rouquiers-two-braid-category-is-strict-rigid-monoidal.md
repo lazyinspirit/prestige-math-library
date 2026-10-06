@@ -2,7 +2,7 @@
 id: thm-rouquiers-two-braid-category-is-strict-rigid-monoidal
 kind: theorem
 title: "The two-braid category is strict rigid monoidal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

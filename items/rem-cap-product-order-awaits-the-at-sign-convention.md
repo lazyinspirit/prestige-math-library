@@ -2,7 +2,7 @@
 id: rem-cap-product-order-awaits-the-at-sign-convention
 kind: remark
 title: "The cap-product order is fixed by the AT convention, not minted here"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-geometric-intersection-equals-the-poincare-dual-cup-pairing, def-cap-product-with-cohomology-first, def-relative-cap-product, def-local-oriented-intersection-sign, thm-intersection-number-under-factor-interchange]

@@ -2,7 +2,7 @@
 id: rem-holonomy-is-a-germ-not-a-globally-defined-return-map
 kind: remark
 title: "Holonomy is a germ, not a globally defined return map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

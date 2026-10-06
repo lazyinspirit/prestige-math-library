@@ -2,7 +2,7 @@
 id: lem-a-vanishing-group-ring-coefficient-sum-pairs-off-opposite-signed-equal-labels
 kind: lemma
 title: "A vanishing group-ring coefficient sum pairs off opposite-signed equal labels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

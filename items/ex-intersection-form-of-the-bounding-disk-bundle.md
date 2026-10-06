@@ -2,7 +2,7 @@
 id: ex-intersection-form-of-the-bounding-disk-bundle
 kind: example
 title: "The middle form of the bounding disk bundle $W_{2,-1}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

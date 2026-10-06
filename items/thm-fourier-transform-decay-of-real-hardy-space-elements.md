@@ -2,7 +2,7 @@
 id: thm-fourier-transform-decay-of-real-hardy-space-elements
 kind: theorem
 title: "Fourier transform decay of real $H^p$ elements"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

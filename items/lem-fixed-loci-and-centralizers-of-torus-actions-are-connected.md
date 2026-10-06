@@ -2,7 +2,7 @@
 id: lem-fixed-loci-and-centralizers-of-torus-actions-are-connected
 kind: lemma
 title: Fixed loci and centralizers of torus actions are connected
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 14

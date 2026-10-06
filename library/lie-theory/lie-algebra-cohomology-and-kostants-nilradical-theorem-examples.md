@@ -1,7 +1,7 @@
 ---
 page: lie-algebra-cohomology-and-kostants-nilradical-theorem-examples
 title: "Lie Algebra Cohomology and Kostants Nilradical Theorem — Examples"
-status: draft
+status: published
 requires: [lie-algebra-cohomology-and-kostants-nilradical-theorem]
 items: []
 examples:

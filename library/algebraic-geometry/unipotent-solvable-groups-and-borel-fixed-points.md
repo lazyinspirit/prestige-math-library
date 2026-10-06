@@ -1,7 +1,7 @@
 ---
 page: unipotent-solvable-groups-and-borel-fixed-points
 title: "Unipotent and Solvable Groups and Borel Fixed Points"
-status: draft
+status: published
 requires:
   - group-schemes-of-finite-type-over-a-field
   - affine-group-schemes-hopf-algebras-and-rational-representations

@@ -2,7 +2,7 @@
 id: rem-isotopy-extension-needs-compact-source-or-proper-support-control
 kind: remark
 title: "Isotopy extension needs compact source or proper support control"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 provenance:

@@ -1,7 +1,7 @@
 ---
 page: graded-eilenberg-watts-and-shift-coherence-examples
 title: "Graded Eilenberg–Watts and Shift Coherence — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-degree-zero-projection-is-exact-cocontinuous-but-not-graded-tensor

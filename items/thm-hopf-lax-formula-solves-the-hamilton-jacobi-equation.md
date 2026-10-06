@@ -2,7 +2,7 @@
 id: thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation
 kind: theorem
 title: The Hopf--Lax formula solves the Hamilton--Jacobi Cauchy problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

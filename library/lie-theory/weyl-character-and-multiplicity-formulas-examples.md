@@ -1,7 +1,7 @@
 ---
 page: weyl-character-and-multiplicity-formulas-examples
 title: "Weyl Character and Multiplicity Formulas — Examples"
-status: draft
+status: published
 requires: [weyl-character-and-multiplicity-formulas]
 items: []
 examples: [

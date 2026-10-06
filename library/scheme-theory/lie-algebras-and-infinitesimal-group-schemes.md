@@ -1,7 +1,7 @@
 ---
 page: lie-algebras-and-infinitesimal-group-schemes
 title: "Lie Algebras and Infinitesimal Group Schemes"
-status: draft
+status: published
 requires: [group-schemes-of-finite-type-over-a-field,
            affine-group-schemes-hopf-algebras-and-rational-representations,
            kahler-differentials-conormal-sequences-and-infinitesimal-lifting]

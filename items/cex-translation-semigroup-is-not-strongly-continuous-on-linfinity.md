@@ -2,7 +2,7 @@
 id: cex-translation-semigroup-is-not-strongly-continuous-on-linfinity
 kind: counterexample
 title: "The translation semigroup is not strongly continuous on L-infinity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-quotient-map-etale-when-quotient-is-algebraic-space
 kind: lemma
 title: "Quotient maps of etale equivalence relations are etale surjective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

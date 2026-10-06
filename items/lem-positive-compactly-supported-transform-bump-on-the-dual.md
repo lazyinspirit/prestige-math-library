@@ -2,7 +2,7 @@
 id: lem-positive-compactly-supported-transform-bump-on-the-dual
 kind: lemma
 title: Compactly supported nonnegative transform bumps on the dual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 16

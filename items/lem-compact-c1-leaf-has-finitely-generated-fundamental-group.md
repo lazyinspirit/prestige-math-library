@@ -2,7 +2,7 @@
 id: lem-compact-c1-leaf-has-finitely-generated-fundamental-group
 kind: lemma
 title: A compact C¹ leaf has finitely generated fundamental group
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

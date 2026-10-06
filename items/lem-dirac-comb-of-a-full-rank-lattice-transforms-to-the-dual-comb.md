@@ -2,7 +2,7 @@
 id: lem-dirac-comb-of-a-full-rank-lattice-transforms-to-the-dual-comb
 kind: lemma
 title: "The Dirac comb of a full-rank lattice transforms to the dual comb"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

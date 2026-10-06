@@ -2,7 +2,7 @@
 id: cor-racah-speiser-tensor-product-algorithm
 kind: corollary
 title: The Racah--Speiser tensor-product algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

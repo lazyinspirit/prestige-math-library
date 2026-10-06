@@ -2,7 +2,7 @@
 id: prop-limit-profile-moments-are-central-binomial-coefficients
 kind: proposition
 title: "The profile moments of $\\Omega$ are central binomial coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

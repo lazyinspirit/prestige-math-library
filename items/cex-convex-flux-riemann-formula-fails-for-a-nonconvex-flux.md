@@ -2,7 +2,7 @@
 id: cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux
 kind: counterexample
 title: The convex-flux Riemann formula fails for a nonconvex flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

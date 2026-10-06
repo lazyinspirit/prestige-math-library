@@ -2,7 +2,7 @@
 id: prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle
 kind: proposition
 title: "Euclidean formal immersions are homotopy equivalent to Stiefel-bundle sections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-gauss-frame-map-of-an-immersion-into-euclidean-space, def-formal-immersion-between-smooth-manifolds, def-space-of-immersions-and-space-of-formal-immersions, def-weak-compact-open-smooth-topology-on-mapping-spaces, def-smooth-section-local-section-and-support, def-frame-bundle-and-associated-vector-bundle, def-stiefel-space-grassmannian-and-tautological-bundle, def-vector-bundle-map-over-a-smooth-base-map, def-locally-trivial-fiber-bundle, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, prop-tangent-space-of-a-regular-level-set-is-the-kernel, cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame, lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots, thm-every-smooth-manifold-admits-a-riemannian-metric, def-countable-choice, thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure, thm-the-global-differential-of-a-smooth-map-is-smooth]

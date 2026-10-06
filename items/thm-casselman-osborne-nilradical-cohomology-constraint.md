@@ -2,7 +2,7 @@
 id: thm-casselman-osborne-nilradical-cohomology-constraint
 kind: theorem
 title: "The Casselman–Osborne constraint on weights of nilradical cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

@@ -28,7 +28,7 @@ sources:
     locator: Proof of Theorem 7.27, printed pp. 139-140 (the isotopy near $\gamma_2$, after the clean disk and the
       extended framing are available)
 proof_strategy: direct
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

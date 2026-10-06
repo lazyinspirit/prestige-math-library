@@ -2,7 +2,7 @@
 id: "def-multiple-test-blowup-and-controlled-transform"
 kind: "definition"
 title: "Multiple test blow-ups, controlled transforms and resolutions of marked ideals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 3

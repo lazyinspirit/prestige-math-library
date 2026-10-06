@@ -2,7 +2,7 @@
 id: lem-whitney-decomposition-of-proper-open-subsets-of-euclidean-space
 kind: lemma
 title: "Whitney decomposition of a proper open subset of Euclidean space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

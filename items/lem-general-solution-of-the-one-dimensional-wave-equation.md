@@ -2,7 +2,7 @@
 id: lem-general-solution-of-the-one-dimensional-wave-equation
 kind: lemma
 title: "General solution of the one-dimensional wave equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

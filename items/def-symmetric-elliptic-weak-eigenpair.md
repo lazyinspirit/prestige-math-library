@@ -2,7 +2,7 @@
 id: def-symmetric-elliptic-weak-eigenpair
 kind: definition
 title: "Symmetric elliptic weak eigenpairs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-fixed-base-simplicial-cotangent-represents-derived-derivations
 kind: lemma
 title: "The fixed-base simplicial cotangent module represents derived derivations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

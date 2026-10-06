@@ -2,7 +2,7 @@
 id: ex-primitive-ideals-of-usl2-at-a-generic-central-character
 kind: example
 title: "Primitive ideals of U(sl2) at a generic central character"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

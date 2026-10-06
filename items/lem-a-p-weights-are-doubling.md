@@ -2,7 +2,7 @@
 id: lem-a-p-weights-are-doubling
 kind: lemma
 title: A_p weights are doubling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

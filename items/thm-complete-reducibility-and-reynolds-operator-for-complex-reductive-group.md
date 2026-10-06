@@ -2,7 +2,7 @@
 id: thm-complete-reducibility-and-reynolds-operator-for-complex-reductive-group
 kind: theorem
 title: Complete reducibility and the Reynolds operator for a complex reductive group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

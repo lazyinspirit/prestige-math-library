@@ -2,7 +2,7 @@
 id: lem-arith-hilbert-divisor-charts-and-picard-diagonal
 kind: lemma
 title: "Hilbert divisor charts and the Picard diagonal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

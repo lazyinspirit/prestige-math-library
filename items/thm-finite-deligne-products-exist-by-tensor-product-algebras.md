@@ -2,7 +2,7 @@
 id: thm-finite-deligne-products-exist-by-tensor-product-algebras
 kind: theorem
 title: "Finite Deligne products exist via tensor-product algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-fully-faithful-split-essentially-surjective-characterises-equivalence, def-axiom-of-choice, cor-every-module-is-a-quotient-of-a-free-module, def-abelian-category, def-algebra-over-a-commutative-ring, def-deligne-product-of-finite-linear-categories, def-dimension, def-equivalence-and-adjoint-equivalence-of-categories, def-exact-and-short-exact-sequences-of-modules, def-finite-k-linear-abelian-category, def-functor-category, def-generated-cyclic-finitely-generated-and-free-modules, def-k-linear-category-and-k-linear-functor, def-kernels-and-cokernels-as-equalizers-and-coequalizers, def-left-and-right-modules, def-left-exact-and-right-exact-functor, def-module-homomorphism-kernel-image-and-cokernel, def-natural-isomorphism, def-natural-transformation, def-product-category, lem-bilinear-right-exact-functors-are-determined-by-the-pair-of-regular-modules, prop-finite-dimensional-module-categories-are-intrinsically-finite, prop-functoriality-of-module-tensor-products, rem-category-theory-class-and-size-conventions, thm-an-additive-functor-preserves-finite-biproducts, thm-bimodule-actions-induced-on-tensor-products, thm-dimension-formula, thm-finite-abelian-categories-are-finite-dimensional-module-categories, thm-modules-over-a-ring-form-an-abelian-category, thm-tensor-product-of-algebras-over-a-commutative-ring, thm-universal-property-of-module-tensor-products]

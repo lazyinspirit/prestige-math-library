@@ -2,7 +2,7 @@
 id: ex-annihilator-of-a-closed-subgroup-of-euclidean-space
 kind: example
 title: Annihilators of closed subgroups of Euclidean space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 21

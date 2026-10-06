@@ -2,7 +2,7 @@
 id: thm-energy-uniqueness-for-homogeneous-dirichlet-waves-on-bounded-domains
 kind: theorem
 title: "Energy uniqueness for homogeneous Dirichlet waves on bounded domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

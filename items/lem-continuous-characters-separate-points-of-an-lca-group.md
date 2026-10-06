@@ -2,7 +2,7 @@
 id: lem-continuous-characters-separate-points-of-an-lca-group
 kind: lemma
 title: Continuous characters separate points of an LCA group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

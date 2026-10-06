@@ -2,7 +2,7 @@
 id: def-abelian-scheme
 kind: definition
 title: "Abelian schemes over a base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

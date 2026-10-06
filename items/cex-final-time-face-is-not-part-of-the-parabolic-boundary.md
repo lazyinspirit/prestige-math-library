@@ -2,7 +2,7 @@
 id: cex-final-time-face-is-not-part-of-the-parabolic-boundary
 kind: counterexample
 title: The final-time face is not part of the parabolic boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

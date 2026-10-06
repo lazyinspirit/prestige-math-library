@@ -2,7 +2,7 @@
 id: lem-saddle-polycycle-rounding-preserves-the-inward-transverse-family
 kind: lemma
 title: "A saddle polycycle has a smooth transverse family on either adjacent annulus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

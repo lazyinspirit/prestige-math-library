@@ -2,7 +2,7 @@
 id: thm-finite-hecke-algebra-as-convolution-corner-and-endomorphisms
 kind: theorem
 title: "The finite Hecke algebra as a convolution corner and its endomorphism interpretation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

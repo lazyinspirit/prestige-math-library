@@ -2,7 +2,7 @@
 id: thm-self-adjoint-nonpositive-operators-generate-bounded-analytic-semigroups
 kind: theorem
 title: Self-adjoint nonpositive operators generate bounded analytic semigroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

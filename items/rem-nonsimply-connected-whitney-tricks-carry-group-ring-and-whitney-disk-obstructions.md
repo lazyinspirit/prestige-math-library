@@ -2,7 +2,7 @@
 id: rem-nonsimply-connected-whitney-tricks-carry-group-ring-and-whitney-disk-obstructions
 kind: remark
 title: Non-simply-connected Whitney tricks carry group-ring and Whitney-disk obstructions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

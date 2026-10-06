@@ -2,7 +2,7 @@
 id: lem-a-compact-codimension-one-leaf-with-finite-fundamental-group-has-trivial-holonomy-when-transversely-oriented
 kind: lemma
 title: "In a transversely oriented codimension-one foliation a compact leaf with finite fundamental group has trivial holonomy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: cex-affine-bezout-misses-points-at-infinity
 kind: counterexample
 title: Bezout fails on the affine plane because points at infinity are missing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

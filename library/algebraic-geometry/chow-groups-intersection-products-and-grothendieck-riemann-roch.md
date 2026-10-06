@@ -1,7 +1,7 @@
 ---
 page: chow-groups-intersection-products-and-grothendieck-riemann-roch
 title: "Chow Groups, Intersection Products, and Grothendieck-Riemann-Roch"
-status: draft
+status: published
 requires:
   - plane-curves-local-intersection-multiplicity-and-bezout
   - schemes-subschemes-and-morphisms-locally-of-finite-type

@@ -2,7 +2,7 @@
 id: lem-metric-morse-smale-end-counts-form-chain-complexes
 kind: lemma
 title: Arbitrary metric Morse--Smale end counts form finite Morse chain complexes
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

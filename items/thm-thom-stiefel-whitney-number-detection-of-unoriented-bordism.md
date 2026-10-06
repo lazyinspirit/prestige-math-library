@@ -2,7 +2,7 @@
 id: thm-thom-stiefel-whitney-number-detection-of-unoriented-bordism
 kind: theorem
 title: "Thom's theorem: Stiefel-Whitney numbers detect unoriented bordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-pontryagin-thom-converts-bordism-detection-to-a-thom-space-homotopy-problem, thm-characteristic-numbers-are-cobordism-invariants, cor-all-relevant-characteristic-numbers-vanish-on-null-cobordant-manifolds, def-thom-prespectrum-of-the-universal-real-and-oriented-bundles, lem-stable-thom-cohomology-is-degreewise-eventually-constant, def-finite-thom-classifying-detector-map, thm-stable-unoriented-thom-homotopy-is-injectively-detected, def-stiefel-whitney-number-of-a-closed-manifold, def-null-cobordant-closed-manifold, def-unoriented-and-oriented-bordism-groups, thm-disjoint-union-makes-bordism-classes-abelian-groups, def-axiom-of-choice]

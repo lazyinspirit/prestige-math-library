@@ -2,7 +2,7 @@
 id: lem-w-one-p-is-reflexive
 kind: lemma
 title: "W^{1,p}(Omega) is reflexive for 1<p<infinity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

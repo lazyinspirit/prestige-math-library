@@ -2,7 +2,7 @@
 id: def-annihilator-ideal-of-a-lie-algebra-module
 kind: definition
 title: "The annihilator of a module over an enveloping algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

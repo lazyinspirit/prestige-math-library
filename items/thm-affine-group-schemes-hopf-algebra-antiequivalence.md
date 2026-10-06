@@ -2,7 +2,7 @@
 id: thm-affine-group-schemes-hopf-algebra-antiequivalence
 kind: theorem
 title: Affine group schemes of finite type are antiequivalent to finitely generated commutative Hopf algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: rem-bezout-needs-projective-algebraic-closure-multiplicity
 kind: remark
 title: Why Bezout needs projectivity, algebraic closure and multiplicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

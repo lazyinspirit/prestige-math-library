@@ -2,7 +2,7 @@
 id: lem-characteristic-disk-singular-images-can-be-separated-into-distinct-leaves-rel-collar
 kind: lemma
 title: "Characteristic-disk singular images can be separated into distinct leaves relative to the boundary collar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

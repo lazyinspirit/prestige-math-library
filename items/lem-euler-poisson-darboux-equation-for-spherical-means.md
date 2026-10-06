@@ -2,7 +2,7 @@
 id: lem-euler-poisson-darboux-equation-for-spherical-means
 kind: lemma
 title: "The Euler–Poisson–Darboux equation for spherical means"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

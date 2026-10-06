@@ -1,7 +1,7 @@
 ---
 page: handle-decompositions-duality-and-rearrangement-examples
 title: "Handle Decompositions Duality and Rearrangement — Examples"
-status: draft
+status: published
 requires: [handle-decompositions-duality-and-rearrangement]
 items: []
 examples: [ex-relative-handle-decomposition-of-a-cylinder, ex-dual-handle-presentations-of-a-genus-g-surface, ex-reordering-independent-one-handles, cex-critical-levels-cannot-always-be-interchanged-across-a-connecting-trajectory, ex-empty-incoming-boundary-requires-zero-handles]

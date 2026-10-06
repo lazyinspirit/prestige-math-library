@@ -2,7 +2,7 @@
 id: "lem-tangent-direction-contains-the-support"
 kind: "lemma"
 title: "The supports of a multiple test blow-up stay inside the strict transforms of a hypersurface of maximal contact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 8

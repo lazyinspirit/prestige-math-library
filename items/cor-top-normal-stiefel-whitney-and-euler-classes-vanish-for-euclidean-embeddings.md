@@ -2,7 +2,7 @@
 id: cor-top-normal-stiefel-whitney-and-euler-classes-vanish-for-euclidean-embeddings
 kind: corollary
 title: "Top normal classes vanish for Euclidean embeddings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["lem-positive-intermediate-cohomology-of-a-one-point-compactified-euclidean-space-vanishes", "def-pontryagin-thom-collapse-of-an-embedded-submanifold", "def-thom-class-and-thom-isomorphism-interface", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "lem-normal-stiefel-whitney-class-is-the-multiplicative-inverse-of-the-tangent-class", "lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity", "lem-second-countable-smooth-manifolds-have-cw-homotopy-type", "prop-singular-cohomology-is-contravariantly-functorial", "def-axiom-of-choice", "def-stiefel-whitney-classes-from-the-projective-bundle-relation"]

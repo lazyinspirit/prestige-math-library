@@ -2,7 +2,7 @@
 id: def-attaching-belt-intersection-matrix-of-adjacent-index-handles
 kind: definition
 title: "Attaching-belt intersection matrix of adjacent-index handles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

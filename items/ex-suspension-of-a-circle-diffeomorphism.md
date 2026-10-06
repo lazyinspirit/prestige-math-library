@@ -2,7 +2,7 @@
 id: ex-suspension-of-a-circle-diffeomorphism
 kind: example
 title: "The suspension of a circle diffeomorphism: leaves and return germs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

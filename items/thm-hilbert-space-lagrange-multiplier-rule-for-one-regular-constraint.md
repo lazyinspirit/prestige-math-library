@@ -2,7 +2,7 @@
 id: "thm-hilbert-space-lagrange-multiplier-rule-for-one-regular-constraint"
 kind: "theorem"
 title: "The Lagrange multiplier rule for one regular constraint in Hilbert space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 4

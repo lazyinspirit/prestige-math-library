@@ -2,7 +2,7 @@
 id: def-continuation-chain-map
 kind: definition
 title: "The continuation chain map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

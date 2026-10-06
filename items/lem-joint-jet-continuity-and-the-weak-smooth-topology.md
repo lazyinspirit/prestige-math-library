@@ -2,7 +2,7 @@
 id: lem-joint-jet-continuity-and-the-weak-smooth-topology
 kind: lemma
 title: "Joint jet continuity characterises the weak smooth topology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-weak-compact-open-smooth-topology-on-mapping-spaces, def-smooth-family-of-maps-and-evaluation-map, thm-the-exponential-law, def-compact-open-topology, def-smooth-manifold, def-compact-space, thm-compactness-agrees-with-metric-compactness, lem-continuity-is-local-and-pastes, lem-compactness-of-a-subspace-is-ambient, lem-coordinate-balls-form-a-basis-of-a-topological-manifold]

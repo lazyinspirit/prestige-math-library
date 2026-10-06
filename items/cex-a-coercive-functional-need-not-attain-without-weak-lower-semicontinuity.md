@@ -2,7 +2,7 @@
 id: cex-a-coercive-functional-need-not-attain-without-weak-lower-semicontinuity
 kind: counterexample
 title: "A coercive functional need not attain without weak lower semicontinuity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

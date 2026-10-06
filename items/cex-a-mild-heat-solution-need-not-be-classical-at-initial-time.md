@@ -2,7 +2,7 @@
 id: cex-a-mild-heat-solution-need-not-be-classical-at-initial-time
 kind: counterexample
 title: A mild heat solution need not be classical at the initial time
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

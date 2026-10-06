@@ -2,7 +2,7 @@
 id: def-perfect-morse-function-over-a-field
 kind: definition
 title: "Perfect Morse function over a field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

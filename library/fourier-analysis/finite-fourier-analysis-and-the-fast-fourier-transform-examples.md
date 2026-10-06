@@ -1,7 +1,7 @@
 ---
 page: finite-fourier-analysis-and-the-fast-fourier-transform-examples
 title: "Finite Fourier Analysis and the Fast Fourier Transform — Examples"
-status: draft
+status: published
 items: []
 examples: [cex-linear-and-cyclic-convolution-are-not-the-same-without-zero-padding,
            ex-unitary-dft-for-n-equals-one-and-two,

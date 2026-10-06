@@ -2,7 +2,7 @@
 id: def-dead-end-component
 kind: definition
 title: Dead-end components
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

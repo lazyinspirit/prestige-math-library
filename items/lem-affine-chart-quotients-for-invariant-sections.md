@@ -2,7 +2,7 @@
 id: lem-affine-chart-quotients-for-invariant-sections
 kind: lemma
 title: Affine chart quotients for invariant sections of a linear action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

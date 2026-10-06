@@ -2,7 +2,7 @@
 id: ex-a-handle-slide-realizes-an-elementary-row-operation
 kind: example
 title: "A handle slide realizes an elementary row operation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: def-algebraic-group-action-and-scheme-theoretic-stabilizer
 kind: definition
 title: "Algebraic group actions, orbit maps, orbit subschemes and scheme-theoretic stabilizers"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-fibre-product-schemes-universal-property, def-group-scheme-over-a-field, def-locally-closed-immersion, def-morphism-and-closed-subgroup-scheme, def-morphism-of-schemes, def-quotient-sheaf-and-representable-quotient, def-scheme-over-base, def-scheme-theoretic-fibre, def-scheme-theoretic-image, lem-field-valued-points-of-schemes]

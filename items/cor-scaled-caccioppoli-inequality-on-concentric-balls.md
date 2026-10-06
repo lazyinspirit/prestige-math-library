@@ -2,7 +2,7 @@
 id: cor-scaled-caccioppoli-inequality-on-concentric-balls
 kind: corollary
 title: "Scaled Caccioppoli inequality on concentric balls"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [thm-caccioppoli-inequality-for-weak-elliptic-solutions, def-local-weak-solution-for-a-divergence-form-operator, def-uniformly-elliptic-divergence-form-operator, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice]

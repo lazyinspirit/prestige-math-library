@@ -2,7 +2,7 @@
 id: lem-finite-birational-algebra-descends-from-a-flat-completion-neighbourhood
 kind: lemma
 title: "Finite birational algebras descend across a flat completion neighbourhood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

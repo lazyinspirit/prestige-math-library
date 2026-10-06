@@ -2,7 +2,7 @@
 id: "thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace"
 kind: "theorem"
 title: "Weak Neumann solvability on the mean-zero subspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 5

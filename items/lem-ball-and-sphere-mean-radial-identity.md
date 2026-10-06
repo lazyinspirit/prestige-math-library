@@ -2,7 +2,7 @@
 id: lem-ball-and-sphere-mean-radial-identity
 kind: lemma
 title: "Ball means and sphere means are related by a radial derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: cex-elliptic-eigenvalues-need-not-be-simple
 kind: counterexample
 title: "Elliptic eigenvalues need not be simple"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

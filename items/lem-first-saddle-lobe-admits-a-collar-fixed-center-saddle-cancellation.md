@@ -2,7 +2,7 @@
 id: lem-first-saddle-lobe-admits-a-collar-fixed-center-saddle-cancellation
 kind: lemma
 title: "A first saddle lobe admits a collar-fixed center-saddle cancellation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

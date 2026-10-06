@@ -2,7 +2,7 @@
 id: lem-normal-surface-trace-cokernel-dualizes-h1-and-bounds-it
 kind: lemma
 title: "Trace cokernels detect and bound normal surface H1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

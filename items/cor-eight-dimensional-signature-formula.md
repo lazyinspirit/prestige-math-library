@@ -2,7 +2,7 @@
 id: cor-eight-dimensional-signature-formula
 kind: corollary
 title: "The eight-dimensional signature formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

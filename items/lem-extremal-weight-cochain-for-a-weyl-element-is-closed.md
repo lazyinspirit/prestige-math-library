@@ -2,7 +2,7 @@
 id: lem-extremal-weight-cochain-for-a-weyl-element-is-closed
 kind: lemma
 title: "The extremal weight cochain of a Weyl element is closed and unique"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

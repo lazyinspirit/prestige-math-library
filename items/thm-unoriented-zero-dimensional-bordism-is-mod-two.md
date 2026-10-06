@@ -2,7 +2,7 @@
 id: thm-unoriented-zero-dimensional-bordism-is-mod-two
 kind: theorem
 title: Framed zero-dimensional bordism in a nonorientable manifold is mod two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

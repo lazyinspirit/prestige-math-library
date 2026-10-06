@@ -2,7 +2,7 @@
 id: lem-orientation-lines-orient-continuation-moduli-spaces
 kind: lemma
 title: "Orientation lines orient the continuation moduli spaces compatibly with gluing"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

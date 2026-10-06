@@ -2,7 +2,7 @@
 id: lem-formal-immersion-gives-the-tangent-normal-bundle-identity
 kind: lemma
 title: "Formal immersion gives the tangent normal-bundle identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-normal-bundle-of-a-formal-immersion, def-whitney-sum-of-vector-bundles, cor-every-vector-subbundle-has-a-smooth-complement, thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle, def-pullback-vector-bundle-as-a-fibre-product, def-countable-choice, thm-the-pullback-fibre-product-is-a-smooth-vector-bundle, prop-bundle-maps-over-f-are-sections-of-the-pulled-back-hom-bundle, def-quotient-vector-bundle-by-a-subbundle, prop-orthogonal-complements-of-subbundles-are-smooth-subbundles, thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric, def-normal-and-conormal-bundles-of-an-embedded-submanifold, prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle]

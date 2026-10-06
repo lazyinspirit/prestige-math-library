@@ -2,7 +2,7 @@
 id: prop-reduced-and-unreduced-burau-representations-have-the-same-kernel
 kind: proposition
 title: "The reduced and unreduced Burau representations have the same kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

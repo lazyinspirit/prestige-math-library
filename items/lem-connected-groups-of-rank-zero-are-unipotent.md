@@ -2,7 +2,7 @@
 id: lem-connected-groups-of-rank-zero-are-unipotent
 kind: lemma
 title: Connected groups of rank zero are unipotent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 20

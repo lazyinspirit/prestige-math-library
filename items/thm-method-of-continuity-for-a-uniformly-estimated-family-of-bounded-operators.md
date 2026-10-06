@@ -2,7 +2,7 @@
 id: thm-method-of-continuity-for-a-uniformly-estimated-family-of-bounded-operators
 kind: theorem
 title: The method of continuity for a uniformly estimated affine family of bounded operators
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

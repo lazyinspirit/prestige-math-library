@@ -1,7 +1,7 @@
 ---
 page: "plane-curves-local-intersection-multiplicity-and-bezout"
 title: "Plane Curves, Local Intersection Multiplicity, and Bézout"
-status: draft
+status: published
 items:
   - def-linear-system-plane-curves
   - def-plane-projective-curve

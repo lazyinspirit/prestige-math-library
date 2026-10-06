@@ -2,7 +2,7 @@
 id: rem-surface-riemann-roch-hodge-index-conventions
 kind: remark
 title: "Conventions and hypothesis bookkeeping for surface Riemann-Roch and Hodge index"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

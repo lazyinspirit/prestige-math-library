@@ -2,7 +2,7 @@
 id: lem-godbillon-vey-form-is-invariant-under-rescaling-the-defining-form
 kind: lemma
 title: "Rescaling the defining form changes the Godbillon-Vey form by an exact form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

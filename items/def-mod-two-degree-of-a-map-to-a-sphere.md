@@ -2,7 +2,7 @@
 id: def-mod-two-degree-of-a-map-to-a-sphere
 kind: definition
 title: The mod-two degree of a map to a sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

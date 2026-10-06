@@ -2,7 +2,7 @@
 id: lem-lefschetz-hopf-index-formula-for-nondegenerate-fixed-points
 kind: lemma
 title: Lefschetz-Hopf index formula for nondegenerate fixed points (orientable case)
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

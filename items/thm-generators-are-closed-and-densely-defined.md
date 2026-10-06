@@ -2,7 +2,7 @@
 id: thm-generators-are-closed-and-densely-defined
 kind: theorem
 title: "The generator is closed and densely defined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

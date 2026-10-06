@@ -2,7 +2,7 @@
 id: lem-positive-intermediate-cohomology-of-a-one-point-compactified-euclidean-space-vanishes
 kind: lemma
 title: "Positive intermediate cohomology of compactified Euclidean space vanishes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-one-point-compactification", "thm-one-point-compactification-properties", "def-euclidean-spheres-and-closed-balls", "cor-rn-is-locally-compact-and-sigma-compact", "lem-metrics-on-rn", "lem-product-topology-on-rn", "cor-heine-borel-in-the-product-topology", "cor-metrizability-and-first-countability-are-hereditary", "def-metrizable-space", "def-hausdorff-space", "thm-product-universal-property", "lem-algebra-of-continuous-real-maps-on-a-space", "def-continuous-map-top", "thm-compactness-under-continuous-maps", "def-homeomorphism-and-open-maps", "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology", "cor-homology-of-spheres", "cor-integral-cohomology-detects-adjacent-homology-torsion", "def-ext-via-a-projective-resolution-of-the-first-variable", "prop-singular-cohomology-is-contravariantly-functorial", "def-axiom-of-choice"]

@@ -2,7 +2,7 @@
 id: lem-maximal-dyadic-cubes-covering-a-proper-open-set
 kind: lemma
 title: Maximal dyadic cubes covering a proper open set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

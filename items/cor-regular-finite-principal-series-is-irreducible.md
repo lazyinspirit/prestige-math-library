@@ -2,7 +2,7 @@
 id: cor-regular-finite-principal-series-is-irreducible
 kind: corollary
 title: "Regular finite principal series are irreducible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

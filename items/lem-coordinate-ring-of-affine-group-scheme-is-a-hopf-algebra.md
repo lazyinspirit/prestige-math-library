@@ -2,7 +2,7 @@
 id: lem-coordinate-ring-of-affine-group-scheme-is-a-hopf-algebra
 kind: lemma
 title: The coordinate ring of an affine group scheme is a commutative Hopf algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 2

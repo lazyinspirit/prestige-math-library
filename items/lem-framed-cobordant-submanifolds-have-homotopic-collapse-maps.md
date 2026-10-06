@@ -2,7 +2,7 @@
 id: lem-framed-cobordant-submanifolds-have-homotopic-collapse-maps
 kind: lemma
 title: "Framed cobordant submanifolds have homotopic Pontryagin-Thom maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

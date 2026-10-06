@@ -2,7 +2,7 @@
 id: "lem-ext-of-locally-free-sheaf-via-cohomology"
 kind: "lemma"
 title: "Ext of a locally free cotangent sheaf via sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 13

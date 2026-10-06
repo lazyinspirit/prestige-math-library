@@ -2,7 +2,7 @@
 id: lem-positively-oriented-bases-are-path-connected
 kind: lemma
 title: "Positively oriented bases of an oriented vector space are path-connected"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

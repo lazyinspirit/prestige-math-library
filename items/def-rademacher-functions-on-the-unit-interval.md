@@ -2,7 +2,7 @@
 id: def-rademacher-functions-on-the-unit-interval
 kind: definition
 title: "Rademacher functions on the unit interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

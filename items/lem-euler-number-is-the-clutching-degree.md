@@ -2,7 +2,7 @@
 id: lem-euler-number-is-the-clutching-degree
 kind: lemma
 title: "Euler number of a clutched bundle as the clutching degree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: cex-finite-length-and-finite-hom-do-not-imply-finite-category
 kind: counterexample
 title: "Finite length and finite Hom do not imply a finite category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

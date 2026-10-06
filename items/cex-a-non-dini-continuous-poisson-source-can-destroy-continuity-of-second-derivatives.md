@@ -2,7 +2,7 @@
 id: cex-a-non-dini-continuous-poisson-source-can-destroy-continuity-of-second-derivatives
 kind: counterexample
 title: A non-Dini continuous Poisson source can destroy the continuity of the second derivatives
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

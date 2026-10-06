@@ -1,7 +1,7 @@
 ---
 page: handle-cancellation-slides-and-elementary-moves-examples
 title: Handle Cancellation Slides and Elementary Moves — Examples
-status: draft
+status: published
 requires: [handle-cancellation-slides-and-elementary-moves]
 items: []
 examples: [ex-cancelling-zero-one-handle-pair, ex-cancelling-one-two-handle-pair-on-a-surface, ex-a-handle-slide-realizes-an-elementary-row-operation, cex-algebraic-intersection-one-with-three-geometric-points, cex-adjacent-index-handles-with-zero-intersection-do-not-cancel]

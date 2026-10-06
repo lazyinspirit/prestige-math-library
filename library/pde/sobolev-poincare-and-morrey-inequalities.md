@@ -1,7 +1,7 @@
 ---
 page: sobolev-poincare-and-morrey-inequalities
 title: Sobolev Poincare and Morrey Inequalities
-status: draft
+status: published
 items: ["def-sobolev-conjugate-exponent", "lem-pointwise-potential-bound-for-compactly-supported-smooth-functions", "thm-gagliardo-nirenberg-sobolev-inequality-for-p-one", "thm-gagliardo-nirenberg-sobolev-inequality", "cor-sobolev-inequality-for-w-one-p-zero", "thm-poincare-inequality-on-a-ball", "thm-poincare-inequality-for-w-one-p-zero", "lem-mean-zero-poincare-estimate-on-bounded-connected-extension-domains-for-p-less-than-n", "def-john-domain-and-john-constant", "lem-john-domain-admits-bounded-overlap-ball-chains", "lem-truncated-riesz-kernel-potential-bounded-on-lp", "thm-poincare-wirtinger-on-bounded-john-domains", "thm-poincare-inequality-with-a-positive-measure-zero-set", "cor-poincare-wirtinger-on-convex-domains", "thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n", "thm-sobolev-poincare-on-bounded-connected-extension-domains", "thm-critical-sobolev-embedding-into-every-finite-lq", "lem-ball-mean-oscillation-potential-bound", "thm-morrey-inequality-for-p-greater-than-n", "thm-w-one-infinity-functions-have-lipschitz-representatives", "lem-weak-partial-derivatives-lower-sobolev-order", "thm-higher-order-sobolev-embedding", "lem-weak-product-rule-for-bounded-sobolev-functions", "cor-sobolev-algebra-above-the-critical-index", "rem-critical-sobolev-does-not-embed-in-linfinity", "rem-domain-classes-for-the-mean-zero-poincare-inequality"]
 examples: []
 ---

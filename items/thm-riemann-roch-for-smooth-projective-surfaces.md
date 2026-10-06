@@ -2,7 +2,7 @@
 id: thm-riemann-roch-for-smooth-projective-surfaces
 kind: theorem
 title: "Riemann-Roch for smooth projective surfaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

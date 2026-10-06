@@ -2,7 +2,7 @@
 id: rem-sphere-eversion-cannot-be-an-isotopy-through-embeddings
 kind: remark
 title: "Sphere eversion cannot be an isotopy through embeddings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-sphere-eversion, def-regular-homotopy-of-immersions, def-smooth-embedding, cor-an-injective-immersion-from-a-compact-manifold-is-an-embedding, def-immersion-submersion-and-constant-rank-map, def-orientable-manifold, thm-jordan-brouwer-separation, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, def-axiom-of-choice]

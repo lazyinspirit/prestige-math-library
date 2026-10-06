@@ -2,7 +2,7 @@
 id: lem-bezout-global-length-degree-product
 kind: lemma
 title: Global length of a plane complete intersection equals the degree product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

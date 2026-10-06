@@ -2,7 +2,7 @@
 id: def-morse-homology-of-a-morse-smale-pair
 kind: definition
 title: "Morse homology of a Morse--Smale pair"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

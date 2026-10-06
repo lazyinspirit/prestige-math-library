@@ -2,7 +2,7 @@
 id: lem-linearity-of-the-bochner-integral
 kind: lemma
 title: "Linearity of the Bochner integral"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

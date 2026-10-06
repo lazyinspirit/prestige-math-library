@@ -2,7 +2,7 @@
 id: def-termwise-hochschild-homology-complex-of-a-rouquier-complex
 kind: definition
 title: "The termwise Hochschild complex of a Rouquier complex and the groups HHH"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-khovanovs-hhh-rouquier-generator-complexes, def-termwise-hochschild-homology-complex-and-iterated-homology, def-hochschild-chain-complex-of-a-bimodule, def-hochschild-hyperhomology-of-a-bimodule-complex, thm-termwise-hochschild-spectral-sequence-for-a-bounded-bimodule-complex, def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization]

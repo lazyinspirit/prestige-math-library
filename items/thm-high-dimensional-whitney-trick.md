@@ -27,7 +27,7 @@ sources:
     locator: Theorem 4.8 and its proof, printed pp. 84-85 (the immersed/disjunction form for $k\ge3$, including
       the construction of $U:D^2\to M$ and the invocation of the Whitney trick)
 proof_strategy: direct
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

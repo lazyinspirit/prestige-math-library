@@ -2,7 +2,7 @@
 id: lem-local-intersection-length-finite
 kind: lemma
 title: Finite local length exactly when no common local branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

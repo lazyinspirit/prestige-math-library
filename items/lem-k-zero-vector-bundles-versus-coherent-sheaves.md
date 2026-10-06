@@ -2,7 +2,7 @@
 id: lem-k-zero-vector-bundles-versus-coherent-sheaves
 kind: lemma
 title: "Vector-bundle K-theory equals coherent K-theory on regular quasi-projective schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

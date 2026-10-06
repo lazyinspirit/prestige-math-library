@@ -2,7 +2,7 @@
 id: lem-second-countable-lch-spaces-are-standard-borel
 kind: lemma
 title: Second-countable locally compact Hausdorff spaces are Polish, and homogeneous quotients are standard Borel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

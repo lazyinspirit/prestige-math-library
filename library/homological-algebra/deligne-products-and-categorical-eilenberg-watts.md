@@ -1,7 +1,7 @@
 ---
 page: deligne-products-and-categorical-eilenberg-watts
 title: "Deligne Products and Categorical Eilenberg–Watts"
-status: draft
+status: published
 items: [lem-finite-vector-space-copowers-in-a-linear-abelian-category, def-deligne-product-of-finite-linear-categories, lem-bilinear-right-exact-functors-are-determined-by-the-pair-of-regular-modules, thm-finite-deligne-products-exist-by-tensor-product-algebras, lem-opposite-deligne-product-identifies-with-finite-bimodules, thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories, lem-finite-eilenberg-watts-kernel-end-and-coend-exist-with-explicit-universal-maps, cor-kernel-composition-and-transformations-use-balanced-tensor-products, def-left-and-right-nakayama-functors-by-finite-kernel-calculus, lem-nakayama-kernels-give-well-defined-adjoint-functors, prop-left-to-right-exact-equivalence-sends-identity-to-nakayama, prop-projective-nakayama-pairing-and-symmetric-algebra-specialization]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: cex-right-exact-module-functor-without-coproduct-preservation-is-not-tensor
 kind: counterexample
 title: "A right exact module functor without coproduct preservation is not tensor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

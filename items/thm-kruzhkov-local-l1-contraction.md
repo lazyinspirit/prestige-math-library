@@ -2,7 +2,7 @@
 id: thm-kruzhkov-local-l1-contraction
 kind: theorem
 title: Local $L^1$ contraction for two entropy solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

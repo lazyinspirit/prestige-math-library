@@ -2,7 +2,7 @@
 id: lem-quotient-of-an-lca-group-by-a-closed-subgroup-is-lca
 kind: lemma
 title: The quotient of an LCA group by a closed subgroup is LCA
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

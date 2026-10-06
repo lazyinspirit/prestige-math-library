@@ -2,7 +2,7 @@
 id: cex-morrey-compactness-loses-the-endpoint-holder-exponent
 kind: counterexample
 title: "Morrey--Rellich compactness loses the endpoint H\\\"older exponent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

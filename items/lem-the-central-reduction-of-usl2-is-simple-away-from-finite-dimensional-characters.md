@@ -2,7 +2,7 @@
 id: lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters
 kind: lemma
 title: "The central reduction of U(sl2) is simple away from the finite-dimensional central characters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-arith-affine-codimension-one-neighbourhood-and-divisors
 kind: lemma
 title: "Affine codimension-one neighbourhoods and divisors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

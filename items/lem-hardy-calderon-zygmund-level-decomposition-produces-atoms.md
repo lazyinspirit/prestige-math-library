@@ -2,7 +2,7 @@
 id: lem-hardy-calderon-zygmund-level-decomposition-produces-atoms
 kind: lemma
 title: "Level decomposition of an $H^p$ distribution produces atoms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

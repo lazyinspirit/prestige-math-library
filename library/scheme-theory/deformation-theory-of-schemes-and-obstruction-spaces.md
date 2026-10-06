@@ -1,7 +1,7 @@
 ---
 page: "deformation-theory-of-schemes-and-obstruction-spaces"
 title: "Deformation Theory of Schemes and Obstruction Spaces"
-status: draft
+status: published
 requires: [algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations,
            kahler-differentials-conormal-sequences-and-infinitesimal-lifting,
            quasi-coherent-and-coherent-sheaves-and-vector-bundles,

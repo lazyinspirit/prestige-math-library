@@ -2,7 +2,7 @@
 id: lem-opposite-deligne-product-identifies-with-finite-bimodules
 kind: lemma
 title: "The opposite Deligne product is the category of finite bimodules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-abelian-category, def-algebra-over-a-commutative-ring, def-algebraic-dual-and-linear-functional, def-bimodule, def-dimension, def-equivalence-and-adjoint-equivalence-of-categories, def-functor-category, def-k-linear-category-and-k-linear-functor, def-left-and-right-modules, def-left-exact-and-right-exact-functor, def-natural-transformation, def-opposite-category, def-opposite-ring, def-vector-space, lem-finite-module-duality-is-exact-with-commuting-bimodule-actions, prop-finite-dimensional-module-categories-are-intrinsically-finite, prop-functoriality-of-module-tensor-products, thm-finite-abelian-categories-are-finite-dimensional-module-categories, thm-finite-deligne-products-exist-by-tensor-product-algebras, thm-modules-over-a-ring-form-an-abelian-category, thm-tensor-product-of-algebras-over-a-commutative-ring, thm-universal-property-of-module-tensor-products]

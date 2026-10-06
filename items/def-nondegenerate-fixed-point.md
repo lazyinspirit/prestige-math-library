@@ -2,7 +2,7 @@
 id: def-nondegenerate-fixed-point
 kind: definition
 title: "Nondegenerate fixed point"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

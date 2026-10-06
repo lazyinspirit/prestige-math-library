@@ -2,7 +2,7 @@
 id: "lem-coercive-form-operator-is-bounded-below"
 kind: "lemma"
 title: "A coercive form operator is bounded below"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-integral-middle-cohomology-vanishing-implies-real-vanishing
 kind: lemma
 title: "Vanishing integral middle cohomology of a closed oriented seven-manifold implies real vanishing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

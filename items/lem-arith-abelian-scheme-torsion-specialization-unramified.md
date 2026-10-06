@@ -2,7 +2,7 @@
 id: lem-arith-abelian-scheme-torsion-specialization-unramified
 kind: lemma
 title: "Abelian scheme torsion specialization is unramified"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

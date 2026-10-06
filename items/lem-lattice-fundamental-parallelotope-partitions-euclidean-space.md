@@ -2,7 +2,7 @@
 id: lem-lattice-fundamental-parallelotope-partitions-euclidean-space
 kind: lemma
 title: "Fundamental parallelotopes of a lattice tile Euclidean space with covolume volume"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

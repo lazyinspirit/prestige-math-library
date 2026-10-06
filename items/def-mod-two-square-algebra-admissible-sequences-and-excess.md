@@ -2,7 +2,7 @@
 id: def-mod-two-square-algebra-admissible-sequences-and-excess
 kind: definition
 title: "The mod-two square algebra, admissible sequences, and excess"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

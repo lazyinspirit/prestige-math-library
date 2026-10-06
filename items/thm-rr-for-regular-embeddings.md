@@ -2,7 +2,7 @@
 id: thm-rr-for-regular-embeddings
 kind: theorem
 title: "Riemann-Roch for regular embeddings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 18

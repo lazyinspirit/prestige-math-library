@@ -2,7 +2,7 @@
 id: lem-a-compact-connected-one-dimensional-manifold-without-boundary-is-a-circle
 kind: lemma
 title: "A nonempty compact connected one-dimensional manifold without boundary is a circle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-copower-presentation-construction-is-left-adjoint-to-generator-hom
 kind: lemma
 title: "The copower presentation construction is left adjoint to the generator Hom functor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-graded-tensor-functor-is-k-linear-right-exact-coproduct-preserving-and-shift-coherent
 kind: lemma
 title: Graded tensor functors are k-linear, right exact, coproduct preserving and shift-coherent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-graded-balanced-tensor-product-and-homogeneous-hom, lem-graded-balanced-tensor-and-shift-isomorphisms, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, thm-universal-property-of-module-tensor-products, prop-functoriality-of-module-tensor-products, thm-bimodule-actions-induced-on-tensor-products, def-bimodule, def-left-and-right-modules, def-module-homomorphism-kernel-image-and-cokernel, def-exact-and-short-exact-sequences-of-modules, def-preservation-reflection-creation-continuity-and-cocontinuity, def-left-exact-and-right-exact-functor, def-k-linear-category-and-k-linear-functor, def-field, lem-field-is-a-commutative-ring, lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums, lem-graded-degreewise-direct-sums-and-homogeneous-free-covers, lem-internal-shift-endofunctors-and-tensor-compatibility, def-coherently-shift-compatible-functor-and-natural-transformation, lem-graded-additive-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving, lem-coherent-shift-functors-and-transformations-form-hom-categories]

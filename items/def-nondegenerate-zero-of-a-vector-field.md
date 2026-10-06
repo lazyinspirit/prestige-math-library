@@ -2,7 +2,7 @@
 id: def-nondegenerate-zero-of-a-vector-field
 kind: definition
 title: "Nondegenerate zero of a vector field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

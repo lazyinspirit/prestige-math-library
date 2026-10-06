@@ -2,7 +2,7 @@
 id: lem-arith-separated-translate-gluing
 kind: lemma
 title: "Separated translate gluing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

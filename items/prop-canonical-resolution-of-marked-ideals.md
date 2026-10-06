@@ -2,7 +2,7 @@
 id: prop-canonical-resolution-of-marked-ideals
 kind: proposition
 title: Canonical resolution of marked ideals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

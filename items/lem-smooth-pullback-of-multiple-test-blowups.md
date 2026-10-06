@@ -2,7 +2,7 @@
 id: "lem-smooth-pullback-of-multiple-test-blowups"
 kind: "lemma"
 title: "Smooth base change of multiple test blow-ups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 5

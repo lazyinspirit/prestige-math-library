@@ -2,7 +2,7 @@
 id: cor-morse-critical-point-sum-is-the-euler-characteristic
 kind: corollary
 title: "The Morse critical-point sum is the Euler characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

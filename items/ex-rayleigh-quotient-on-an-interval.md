@@ -2,7 +2,7 @@
 id: "ex-rayleigh-quotient-on-an-interval"
 kind: "example"
 title: "The Rayleigh quotient on an interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 14

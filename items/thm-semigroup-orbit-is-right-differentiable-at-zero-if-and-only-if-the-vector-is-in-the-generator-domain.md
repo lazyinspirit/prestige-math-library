@@ -2,7 +2,7 @@
 id: thm-semigroup-orbit-is-right-differentiable-at-zero-if-and-only-if-the-vector-is-in-the-generator-domain
 kind: theorem
 title: "An orbit is right differentiable at zero exactly on the generator domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

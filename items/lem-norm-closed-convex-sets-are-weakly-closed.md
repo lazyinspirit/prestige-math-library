@@ -2,7 +2,7 @@
 id: lem-norm-closed-convex-sets-are-weakly-closed
 kind: lemma
 title: "A norm-closed convex set is weakly sequentially closed"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

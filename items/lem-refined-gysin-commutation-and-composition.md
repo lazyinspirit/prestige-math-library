@@ -2,7 +2,7 @@
 id: lem-refined-gysin-commutation-and-composition
 kind: lemma
 title: "Refined Gysin operations commute and compose"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

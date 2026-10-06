@@ -2,7 +2,7 @@
 id: cor-diagonal-self-intersection-is-the-euler-number-of-tm
 kind: corollary
 title: "The diagonal self-intersection is the Euler number of the tangent bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-normal-bundle-of-the-diagonal-is-canonically-tm, thm-self-intersection-is-the-euler-number-of-the-normal-bundle, def-self-intersection-number-of-an-oriented-submanifold, def-euler-class-by-zero-section-pullback-of-the-thom-class, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure, def-product-orientation, prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold, def-axiom-of-choice, prop-the-diagonal-is-an-embedded-submanifold]

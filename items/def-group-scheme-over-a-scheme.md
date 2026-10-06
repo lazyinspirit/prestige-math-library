@@ -2,7 +2,7 @@
 id: def-group-scheme-over-a-scheme
 kind: definition
 title: "Group schemes over a base scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

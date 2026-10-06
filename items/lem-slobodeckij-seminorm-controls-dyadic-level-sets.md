@@ -2,7 +2,7 @@
 id: lem-slobodeckij-seminorm-controls-dyadic-level-sets
 kind: lemma
 title: "The Slobodeckij seminorm bounds the dyadic level-set sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

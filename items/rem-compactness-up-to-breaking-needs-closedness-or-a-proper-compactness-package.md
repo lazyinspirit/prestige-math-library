@@ -2,7 +2,7 @@
 id: rem-compactness-up-to-breaking-needs-closedness-or-a-proper-compactness-package
 kind: remark
 title: "Compactness up to breaking needs closedness or a proper compactness package"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-morse-trajectory-compactness-up-to-breaking, def-proper-smooth-function-and-compact-morse-slab, prop-proper-morse-slabs-give-complete-connecting-trajectories, rem-noncompact-flow-completeness-is-an-extra-hypothesis, cor-every-smooth-vector-field-on-a-compact-manifold-is-complete, cor-equicontinuous-families-into-a-compact-metric-target, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, def-morse-smale-pair]
 provenance:

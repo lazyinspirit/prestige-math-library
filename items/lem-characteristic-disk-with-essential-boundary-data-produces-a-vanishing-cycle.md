@@ -2,7 +2,7 @@
 id: lem-characteristic-disk-with-essential-boundary-data-produces-a-vanishing-cycle
 kind: lemma
 title: "A characteristic disk with essential boundary data produces a vanishing cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

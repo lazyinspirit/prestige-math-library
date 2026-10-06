@@ -2,7 +2,7 @@
 id: thm-gagliardo-nirenberg-sobolev-inequality
 kind: theorem
 title: "The Gagliardo-Nirenberg-Sobolev inequality for $1<p<n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

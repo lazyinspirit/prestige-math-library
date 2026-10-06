@@ -2,7 +2,7 @@
 id: lem-positive-root-strings-sum-the-freudenthal-correction
 kind: lemma
 title: Positive root strings sum the Freudenthal correction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

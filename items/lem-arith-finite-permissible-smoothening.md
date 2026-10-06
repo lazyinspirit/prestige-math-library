@@ -2,7 +2,7 @@
 id: lem-arith-finite-permissible-smoothening
 kind: lemma
 title: "Defect decrease and finite smoothening"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

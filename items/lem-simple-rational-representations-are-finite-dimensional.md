@@ -2,7 +2,7 @@
 id: lem-simple-rational-representations-are-finite-dimensional
 kind: lemma
 title: "Simple rational representations are finite-dimensional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

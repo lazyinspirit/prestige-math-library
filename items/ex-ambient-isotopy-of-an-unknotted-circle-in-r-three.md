@@ -2,7 +2,7 @@
 id: ex-ambient-isotopy-of-an-unknotted-circle-in-r-three
 kind: example
 title: "Extending a visible isotopy of an unknotted circle in $\\mathbb R^3$"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 provenance:

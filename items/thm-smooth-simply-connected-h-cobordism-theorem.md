@@ -2,7 +2,7 @@
 id: thm-smooth-simply-connected-h-cobordism-theorem
 kind: theorem
 title: The smooth simply connected h-cobordism theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 18

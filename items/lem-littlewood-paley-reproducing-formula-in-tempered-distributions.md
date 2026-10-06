@@ -2,7 +2,7 @@
 id: lem-littlewood-paley-reproducing-formula-in-tempered-distributions
 kind: lemma
 title: "The Littlewood-Paley reproducing formula in tempered distributions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

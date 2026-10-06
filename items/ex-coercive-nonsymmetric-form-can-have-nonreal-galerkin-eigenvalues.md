@@ -2,7 +2,7 @@
 id: ex-coercive-nonsymmetric-form-can-have-nonreal-galerkin-eigenvalues
 kind: example
 title: "A coercive non-symmetric form can have non-real Galerkin eigenvalues"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

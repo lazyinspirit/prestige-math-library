@@ -2,7 +2,7 @@
 id: lem-fractional-level-set-kernel-measure-estimate
 kind: lemma
 title: "The level-set kernel measure estimate for the Slobodeckij kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-product-cobordisms-have-critical-point-free-presentations
 kind: lemma
 title: "Product cobordisms have critical-point-free presentations"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-smooth-cobordism-triad-for-morse-theory, def-morse-function-adapted-to-a-cobordism, def-handle-decomposition-relative-to-the-incoming-boundary, prop-deformation-lemma-for-a-critical-point-free-slab, thm-collar-neighborhood-theorem, def-closed-sublevel-and-level-set-of-a-smooth-function, def-countable-choice]

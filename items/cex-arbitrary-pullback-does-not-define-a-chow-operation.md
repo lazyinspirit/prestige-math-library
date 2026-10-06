@@ -2,7 +2,7 @@
 id: cex-arbitrary-pullback-does-not-define-a-chow-operation
 kind: counterexample
 title: "Scheme-theoretic preimages do not define a pullback on Chow groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 12

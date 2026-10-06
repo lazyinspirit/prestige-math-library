@@ -2,7 +2,7 @@
 id: lem-local-index-is-additive-under-a-transverse-perturbation
 kind: lemma
 title: "The local index is additive under a transverse perturbation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: lem-completed-fourfold-graded-cohomology-ring-laws-and-naturality
 kind: lemma
 title: "The completed fourfold-graded cohomology ring is natural and satisfies the ring laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

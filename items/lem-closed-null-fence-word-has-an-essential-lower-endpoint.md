@@ -2,7 +2,7 @@
 id: lem-closed-null-fence-word-has-an-essential-lower-endpoint
 kind: lemma
 title: A closed null fence word has an essential lower endpoint
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

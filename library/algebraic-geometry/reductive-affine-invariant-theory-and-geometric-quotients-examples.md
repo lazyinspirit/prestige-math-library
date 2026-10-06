@@ -1,7 +1,7 @@
 ---
 page: reductive-affine-invariant-theory-and-geometric-quotients-examples
 title: "Reductive Affine Invariant Theory and Geometric Quotients — Examples"
-status: draft
+status: published
 requires: [reductive-affine-invariant-theory-and-geometric-quotients]
 items: []
 examples: [lem-invariant-polynomials-of-the-hyperbolic-gm-action-on-the-plane,

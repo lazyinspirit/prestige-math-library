@@ -2,7 +2,7 @@
 id: lem-c1-euclidean-maximal-flow-with-c2-upgrade
 kind: lemma
 title: "C\u00b9 Euclidean maximal flows, variational dependence and the finite C\u00b2 upgrade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

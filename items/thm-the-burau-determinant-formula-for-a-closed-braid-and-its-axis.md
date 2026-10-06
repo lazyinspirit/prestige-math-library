@@ -2,7 +2,7 @@
 id: thm-the-burau-determinant-formula-for-a-closed-braid-and-its-axis
 kind: theorem
 title: "The Burau determinant formula for a closed braid and its axis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: ex-john-nirenberg-tail-integration
 kind: example
 title: "Integrating the John-Nirenberg tail recovers the Lq oscillation bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

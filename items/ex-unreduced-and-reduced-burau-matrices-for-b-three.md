@@ -2,7 +2,7 @@
 id: ex-unreduced-and-reduced-burau-matrices-for-b-three
 kind: example
 title: "Unreduced and reduced Burau matrices for three strands"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

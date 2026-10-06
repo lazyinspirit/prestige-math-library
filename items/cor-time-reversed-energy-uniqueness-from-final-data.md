@@ -2,7 +2,7 @@
 id: cor-time-reversed-energy-uniqueness-from-final-data
 kind: corollary
 title: "Time-reversed energy uniqueness from final data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

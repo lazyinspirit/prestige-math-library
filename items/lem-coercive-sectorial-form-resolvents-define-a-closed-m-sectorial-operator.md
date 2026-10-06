@@ -2,7 +2,7 @@
 id: lem-coercive-sectorial-form-resolvents-define-a-closed-m-sectorial-operator
 kind: lemma
 title: Coercive sectorial forms define closed densely defined sectorial operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

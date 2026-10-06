@@ -2,7 +2,7 @@
 id: ex-additive-and-infinitesimal-group-schemes
 kind: example
 title: "Additive and infinitesimal group schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["def-axiom-of-choice", "def-group-scheme-over-a-field", "def-morphism-and-closed-subgroup-scheme", "def-closed-immersion-schemes", "thm-affine-scheme-ring-anti-equivalence", "thm-affine-fibre-product-tensor-ring", "lem-general-linear-group-scheme-and-its-coordinate-ring", "lem-hopf-ideal-kernels-and-quotients", "lem-quotient-spectrum-map-is-a-closed-immersion", "def-commutative-hopf-algebra-over-a-field", "def-polynomial-ring-over-a-commutative-ring"]

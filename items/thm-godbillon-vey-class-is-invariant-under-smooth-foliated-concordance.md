@@ -2,7 +2,7 @@
 id: thm-godbillon-vey-class-is-invariant-under-smooth-foliated-concordance
 kind: theorem
 title: "Godbillon-Vey invariance under smooth foliated concordance"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

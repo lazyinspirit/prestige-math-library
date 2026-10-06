@@ -2,7 +2,7 @@
 id: cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy
 kind: corollary
 title: "Compatible tubular neighbourhoods agree near compact sets up to ambient isotopy"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 provenance:

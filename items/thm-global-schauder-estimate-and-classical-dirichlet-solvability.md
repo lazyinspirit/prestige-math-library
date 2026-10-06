@@ -2,7 +2,7 @@
 id: thm-global-schauder-estimate-and-classical-dirichlet-solvability
 kind: theorem
 title: Global Schauder estimate and classical Dirichlet solvability by the continuity method
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

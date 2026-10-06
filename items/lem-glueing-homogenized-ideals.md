@@ -2,7 +2,7 @@
 id: lem-glueing-homogenized-ideals
 kind: lemma
 title: Glueing of homogenized ideals along etale neighbourhoods
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

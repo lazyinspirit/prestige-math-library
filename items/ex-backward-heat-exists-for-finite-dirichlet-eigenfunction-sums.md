@@ -2,7 +2,7 @@
 id: ex-backward-heat-exists-for-finite-dirichlet-eigenfunction-sums
 kind: example
 title: Finite sine sums admit a backward Dirichlet heat solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

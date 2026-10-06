@@ -2,7 +2,7 @@
 id: def-unitary-discrete-fourier-transform-on-z-mod-n
 kind: definition
 title: "The unitary discrete Fourier transform on $\\mathbb Z/N\\mathbb Z$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

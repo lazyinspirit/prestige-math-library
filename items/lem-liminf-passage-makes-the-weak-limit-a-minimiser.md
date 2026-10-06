@@ -2,7 +2,7 @@
 id: lem-liminf-passage-makes-the-weak-limit-a-minimiser
 kind: lemma
 title: "The liminf passage makes the weak limit a minimiser"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

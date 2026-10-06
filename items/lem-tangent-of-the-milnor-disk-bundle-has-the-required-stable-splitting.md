@@ -2,7 +2,7 @@
 id: lem-tangent-of-the-milnor-disk-bundle-has-the-required-stable-splitting
 kind: lemma
 title: "Stable splitting of the tangent bundle of the Milnor disk bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

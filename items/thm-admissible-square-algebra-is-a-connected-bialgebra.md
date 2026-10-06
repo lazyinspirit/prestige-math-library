@@ -2,7 +2,7 @@
 id: thm-admissible-square-algebra-is-a-connected-bialgebra
 kind: theorem
 title: "The admissible square algebra is a connected bialgebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

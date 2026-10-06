@@ -1,7 +1,7 @@
 ---
 page: intersection-pairings-self-intersection-and-euler-classes
 title: Intersection Pairings Self Intersection and Euler Classes
-status: draft
+status: published
 requires: [oriented-and-mod-two-intersection-numbers, smooth-vector-bundles-and-sections, whitney-embedding-tubular-neighbourhoods-and-approximation, manifolds-with-boundary-collars-and-orientations, cup-cap-cross-products-and-cohomology-rings, orientations-poincare-lefschetz-and-alexander-duality, leray-hirsch-thom-isomorphism-and-gysin-sequences, stiefel-whitney-and-euler-classes-by-universal-constructions, geodesics-the-exponential-map-completeness-and-hopf-rinow, chern-weil-theory-and-characteristic-forms]
 items: [def-geometric-intersection-pairing-on-a-closed-oriented-manifold, lem-geometric-intersection-descends-through-oriented-cobordism-of-cycles, lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold, lem-normal-bundle-of-the-zero-locus-of-a-transverse-section, lem-pullback-of-the-thom-class-along-a-transverse-section, prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual, thm-geometric-intersection-equals-the-poincare-dual-cup-pairing, rem-cap-product-order-awaits-the-at-sign-convention, def-self-intersection-number-of-an-oriented-submanifold, lem-normal-push-off-zeros-are-self-intersection-points, thm-self-intersection-is-the-euler-number-of-the-normal-bundle, lem-normal-bundle-of-the-diagonal-is-canonically-tm, cor-diagonal-self-intersection-is-the-euler-number-of-tm, prop-mod-two-self-intersection-needs-no-orientation, cor-nowhere-zero-section-forces-the-euler-class-to-vanish, rem-euler-class-construction-remains-owned-by-at, rem-not-every-homology-class-is-represented-by-an-embedded-submanifold-integrally]
 examples: []

@@ -2,7 +2,7 @@
 id: def-gauss-frame-map-of-an-immersion-into-euclidean-space
 kind: definition
 title: "Gauss frame map of an immersion into Euclidean space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-immersion-submersion-and-constant-rank-map, def-tangent-bundle-as-a-disjoint-union, def-differential-of-a-smooth-map, def-stiefel-space-grassmannian-and-tautological-bundle, def-frame-bundle-and-associated-vector-bundle, def-local-frame-and-global-frame-of-a-vector-bundle, def-vector-bundle-map-over-a-smooth-base-map, thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure, thm-the-global-differential-of-a-smooth-map-is-smooth, def-countable-choice]

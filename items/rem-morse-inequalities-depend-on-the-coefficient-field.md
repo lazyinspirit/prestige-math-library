@@ -2,7 +2,7 @@
 id: rem-morse-inequalities-depend-on-the-coefficient-field
 kind: remark
 title: "Morse inequalities and perfectness depend on the coefficient field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

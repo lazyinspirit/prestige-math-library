@@ -2,7 +2,7 @@
 id: cex-critical-w-one-n-does-not-embed-in-linfinity
 kind: counterexample
 title: "$W^{1,n}$ is not contained in $L^\\infty$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

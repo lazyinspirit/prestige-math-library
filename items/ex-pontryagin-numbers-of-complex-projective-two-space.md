@@ -2,7 +2,7 @@
 id: ex-pontryagin-numbers-of-complex-projective-two-space
 kind: example
 title: "Pontryagin numbers of the complex projective plane"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-tangent-bundle-of-complex-projective-space-and-its-pontryagin-classes, def-pontryagin-number-of-a-closed-oriented-manifold, prop-oriented-boundaries-have-zero-pontryagin-numbers, def-null-cobordant-closed-manifold, def-unoriented-and-oriented-bordism-groups, prop-zero-dimensional-bordism-groups, def-kronecker-evaluation-pairing, def-axiom-of-choice]

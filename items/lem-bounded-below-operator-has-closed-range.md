@@ -2,7 +2,7 @@
 id: "lem-bounded-below-operator-has-closed-range"
 kind: "lemma"
 title: "A bounded-below operator has closed range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-submean-inequality-for-heat-subsolutions
 kind: lemma
 title: Submean inequality for heat subsolutions on heat balls
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

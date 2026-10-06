@@ -2,7 +2,7 @@
 id: rem-closedness-is-needed-for-hopf-degree-classification
 kind: remark
 title: Closedness is needed for the Hopf degree classification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

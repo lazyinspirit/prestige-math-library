@@ -2,7 +2,7 @@
 id: cor-projective-plane-curves-meet
 kind: corollary
 title: Two plane projective curves meet
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

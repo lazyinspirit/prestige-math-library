@@ -2,7 +2,7 @@
 id: cor-analytic-semigroups-are-operator-norm-differentiable-away-from-zero
 kind: corollary
 title: Analytic semigroups are operator-norm differentiable away from zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

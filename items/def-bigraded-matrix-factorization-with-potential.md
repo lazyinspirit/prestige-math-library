@@ -2,7 +2,7 @@
 id: def-bigraded-matrix-factorization-with-potential
 kind: definition
 title: "Bigraded matrix factorizations with a potential"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

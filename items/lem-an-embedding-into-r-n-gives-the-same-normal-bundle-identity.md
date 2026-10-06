@@ -2,7 +2,7 @@
 id: lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity
 kind: lemma
 title: "An embedding into Euclidean space gives a rank-(n-m) stable normal inverse"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-stable-normal-inverse-of-the-tangent-bundle", "def-normal-and-conormal-bundles-of-an-embedded-submanifold", "prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle", "def-stable-normal-bundle-of-a-compact-smooth-manifold", "thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space", "def-countable-choice", "lem-pullback-of-a-trivial-smooth-vector-bundle-is-canonically-trivial", "thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure", "def-induced-tangent-bundle-chart", "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle"]

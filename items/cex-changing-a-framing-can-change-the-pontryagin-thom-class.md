@@ -2,7 +2,7 @@
 id: cex-changing-a-framing-can-change-the-pontryagin-thom-class
 kind: counterexample
 title: "A framing, not just the submanifold, determines the Pontryagin-Thom class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

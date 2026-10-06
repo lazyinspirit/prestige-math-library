@@ -2,7 +2,7 @@
 id: cex-a-normalised-cube-indicator-is-not-a-hone-atom
 kind: counterexample
 title: "A normalised cube indicator is not an $H^1$ atom"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-haar-lifts-and-borel-descent-on-a-homogeneous-space
 kind: lemma
 title: Haar null classes and Borel descent on a homogeneous space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

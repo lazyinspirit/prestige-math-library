@@ -2,7 +2,7 @@
 id: def-whitney-sum-coalgebra-on-stable-unoriented-thom-cohomology
 kind: definition
 title: "Whitney-sum coalgebra on stable unoriented Thom cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

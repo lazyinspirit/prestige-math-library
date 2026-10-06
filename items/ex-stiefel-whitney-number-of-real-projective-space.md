@@ -2,7 +2,7 @@
 id: ex-stiefel-whitney-number-of-real-projective-space
 kind: example
 title: "Stiefel-Whitney numbers of real projective space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-stiefel-whitney-number-of-a-closed-manifold, def-stiefel-whitney-classes-from-the-projective-bundle-relation, thm-naturality-of-stiefel-whitney-classes, thm-whitney-sum-formula-for-stiefel-whitney-classes, lem-mod-two-cohomology-ring-of-infinite-real-projective-space, lem-real-projective-space-cellular-homology-and-pinch-map, prop-first-stiefel-whitney-class-classifies-orientability, prop-boundaries-have-zero-stiefel-whitney-numbers, def-null-cobordant-closed-manifold, def-fundamental-class-of-a-compact-oriented-manifold, def-kronecker-evaluation-pairing, cor-cohomology-over-a-field-is-dual-to-homology-over-that-field, def-axiom-of-choice, def-complex-projective-bundle-and-tautological-complex-line, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]

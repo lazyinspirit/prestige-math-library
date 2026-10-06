@@ -2,7 +2,7 @@
 id: cex-the-reflected-sphere-embedding-is-regularly-homotopic-but-not-isotopic-to-the-standard-one
 kind: counterexample
 title: A reflected sphere embedding is regularly homotopic but not isotopic to the standard one
-status: draft
+status: published
 origin: session
 dependency_level: 14
 provenance:

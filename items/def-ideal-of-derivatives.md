@@ -2,7 +2,7 @@
 id: def-ideal-of-derivatives
 kind: definition
 title: Derivative ideals of an ideal sheaf and of a marked ideal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

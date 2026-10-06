@@ -2,7 +2,7 @@
 id: def-local-parameter-smooth-plane-curve
 kind: definition
 title: Uniformising parameters at smooth points of a plane curve
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

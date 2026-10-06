@@ -2,7 +2,7 @@
 id: cor-minuscule-tensor-product-rule
 kind: corollary
 title: Tensor product with a minuscule representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

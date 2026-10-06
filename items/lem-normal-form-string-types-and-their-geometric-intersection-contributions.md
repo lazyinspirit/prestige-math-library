@@ -2,7 +2,7 @@
 id: lem-normal-form-string-types-and-their-geometric-intersection-contributions
 kind: lemma
 title: "String types and their contributions to geometric intersection numbers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: hecke-markov-traces-and-polynomial-link-invariants
 title: "Hecke Markov Traces and Polynomial Link Invariants"
-status: draft
+status: published
 requires: [oriented-links-braid-closures-and-markov-equivalence,
            the-burau-representations,
            principal-series-representations-of-gl-n-over-a-finite-field,

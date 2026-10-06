@@ -2,7 +2,7 @@
 id: lem-oppositely-framed-points-are-framed-null-cobordant-in-pairs
 kind: lemma
 title: Oppositely framed points cancel in pairs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: cor-linfinity-maximum-bound-for-scalar-entropy-solutions
 kind: corollary
 title: The $L^\infty$ maximum bound for entropy solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

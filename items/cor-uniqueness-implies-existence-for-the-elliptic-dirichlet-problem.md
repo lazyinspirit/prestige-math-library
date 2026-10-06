@@ -2,7 +2,7 @@
 id: cor-uniqueness-implies-existence-for-the-elliptic-dirichlet-problem
 kind: corollary
 title: "Uniqueness implies existence for the elliptic Dirichlet problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

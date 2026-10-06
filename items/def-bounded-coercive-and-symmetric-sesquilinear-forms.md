@@ -2,7 +2,7 @@
 id: "def-bounded-coercive-and-symmetric-sesquilinear-forms"
 kind: "definition"
 title: "Bounded, coercive and symmetric sesquilinear forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

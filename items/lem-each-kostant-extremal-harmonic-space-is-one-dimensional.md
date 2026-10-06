@@ -2,7 +2,7 @@
 id: lem-each-kostant-extremal-harmonic-space-is-one-dimensional
 kind: lemma
 title: "Each extremal harmonic space is one-dimensional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

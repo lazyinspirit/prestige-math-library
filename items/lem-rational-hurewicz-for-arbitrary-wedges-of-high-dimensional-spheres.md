@@ -2,7 +2,7 @@
 id: lem-rational-hurewicz-for-arbitrary-wedges-of-high-dimensional-spheres
 kind: lemma
 title: "Rational Hurewicz for arbitrary wedges of high-dimensional spheres"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

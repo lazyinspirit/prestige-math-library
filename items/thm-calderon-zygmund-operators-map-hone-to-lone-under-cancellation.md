@@ -2,7 +2,7 @@
 id: thm-calderon-zygmund-operators-map-hone-to-lone-under-cancellation
 kind: theorem
 title: "Calderon-Zygmund operators map $H^1$ boundedly into $L^1$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

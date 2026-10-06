@@ -23,7 +23,7 @@ sources:
     url: https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf
     locator: Theorem 6.6 and Lemma 6.7, printed pp. 71-74 (the standard model embedding $\varphi:U\subseteq\mathbb
       R^2\to V$ extending the arcs)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

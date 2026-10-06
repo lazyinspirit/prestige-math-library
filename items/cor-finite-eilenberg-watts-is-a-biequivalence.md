@@ -2,7 +2,7 @@
 id: cor-finite-eilenberg-watts-is-a-biequivalence
 kind: corollary
 title: "Finite Eilenberg–Watts is a biequivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

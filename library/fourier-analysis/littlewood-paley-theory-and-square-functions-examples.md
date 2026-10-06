@@ -1,7 +1,7 @@
 ---
 page: littlewood-paley-theory-and-square-functions-examples
 title: "Littlewood Paley Theory and Square Functions — Examples"
-status: draft
+status: published
 requires: [littlewood-paley-theory-and-square-functions]
 items: []
 examples: [ex-square-function-of-one-frequency-localised-function,

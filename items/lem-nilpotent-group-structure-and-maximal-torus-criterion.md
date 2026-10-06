@@ -2,7 +2,7 @@
 id: lem-nilpotent-group-structure-and-maximal-torus-criterion
 kind: lemma
 title: Structure of connected nilpotent groups and the maximal-torus criterion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

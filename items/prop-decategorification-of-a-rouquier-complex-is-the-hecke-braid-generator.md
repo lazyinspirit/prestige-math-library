@@ -2,7 +2,7 @@
 id: prop-decategorification-of-a-rouquier-complex-is-the-hecke-braid-generator
 kind: proposition
 title: "Decategorification of a Rouquier complex is the Hecke braid generator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

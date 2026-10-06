@@ -2,7 +2,7 @@
 id: def-quaternionic-clutching-bundles-xi-h-j-over-s-four
 kind: definition
 title: "Quaternionic clutching bundles $\\xi_{h,j}$ over $S^4$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

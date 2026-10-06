@@ -2,7 +2,7 @@
 id: lem-heat-ball-representation-formula
 kind: lemma
 title: Heat-ball representation formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: cex-a-nontransitive-system-is-not-classified-by-one-stabilizer
 kind: counterexample
 title: A nontransitive system with two orbits is not classified by one stabilizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

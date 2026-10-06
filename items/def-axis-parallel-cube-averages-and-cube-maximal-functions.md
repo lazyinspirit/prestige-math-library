@@ -2,7 +2,7 @@
 id: def-axis-parallel-cube-averages-and-cube-maximal-functions
 kind: definition
 title: Axis-parallel cubes, their averages, and cube maximal functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

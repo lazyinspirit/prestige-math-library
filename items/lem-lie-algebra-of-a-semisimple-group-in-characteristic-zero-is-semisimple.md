@@ -2,7 +2,7 @@
 id: lem-lie-algebra-of-a-semisimple-group-in-characteristic-zero-is-semisimple
 kind: lemma
 title: "The Lie algebra of a semisimple group in characteristic zero is semisimple"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 21

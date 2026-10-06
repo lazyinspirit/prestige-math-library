@@ -2,7 +2,7 @@
 id: lem-c2-plaque-transport-and-transverse-fences-preserve-c2-regularity
 kind: lemma
 title: "C² plaque transport and finite transverse fences preserve C² regularity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

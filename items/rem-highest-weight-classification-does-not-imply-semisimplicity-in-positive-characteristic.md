@@ -2,7 +2,7 @@
 id: rem-highest-weight-classification-does-not-imply-semisimplicity-in-positive-characteristic
 kind: remark
 title: "The highest-weight classification does not imply semisimplicity in positive characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 37

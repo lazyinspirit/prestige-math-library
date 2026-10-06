@@ -2,7 +2,7 @@
 id: ex-cancelling-zero-one-handle-pair
 kind: example
 title: "A cancelling zero-one handle pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

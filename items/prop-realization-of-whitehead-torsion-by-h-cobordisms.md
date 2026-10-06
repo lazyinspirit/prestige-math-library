@@ -2,7 +2,7 @@
 id: prop-realization-of-whitehead-torsion-by-h-cobordisms
 kind: proposition
 title: Realization of prescribed Whitehead torsion by h-cobordisms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 11

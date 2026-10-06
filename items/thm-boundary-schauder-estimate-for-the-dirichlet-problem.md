@@ -2,7 +2,7 @@
 id: thm-boundary-schauder-estimate-for-the-dirichlet-problem
 kind: theorem
 title: Boundary Schauder estimate for the Dirichlet problem
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: ex-simply-connected-h-cobordisms-have-zero-whitehead-obstruction
 kind: example
 title: "Simply connected h-cobordisms have zero Whitehead obstruction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 17

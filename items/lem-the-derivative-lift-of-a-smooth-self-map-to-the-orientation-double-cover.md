@@ -2,7 +2,7 @@
 id: lem-the-derivative-lift-of-a-smooth-self-map-to-the-orientation-double-cover
 kind: lemma
 title: "A smooth local diffeomorphism lifts canonically to the orientation double cover"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

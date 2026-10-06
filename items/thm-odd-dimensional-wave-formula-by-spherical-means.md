@@ -2,7 +2,7 @@
 id: thm-odd-dimensional-wave-formula-by-spherical-means
 kind: theorem
 title: "The odd-dimensional wave formula by iterated spherical means"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

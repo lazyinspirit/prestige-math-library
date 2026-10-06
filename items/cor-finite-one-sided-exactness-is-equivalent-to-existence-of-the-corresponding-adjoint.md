@@ -2,7 +2,7 @@
 id: cor-finite-one-sided-exactness-is-equivalent-to-existence-of-the-corresponding-adjoint
 kind: corollary
 title: "Finite one-sided exactness is equivalent to the existence of the corresponding adjoint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

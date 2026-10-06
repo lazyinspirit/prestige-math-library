@@ -2,7 +2,7 @@
 id: def-inversion-set-of-a-weyl-group-element
 kind: definition
 title: "The inversion set of a Weyl group element"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

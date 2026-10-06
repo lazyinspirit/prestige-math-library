@@ -2,7 +2,7 @@
 id: cex-the-central-character-does-not-determine-the-primitive-ideal
 kind: counterexample
 title: "The central character does not determine the primitive ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

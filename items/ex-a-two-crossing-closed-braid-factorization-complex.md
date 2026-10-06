@@ -2,7 +2,7 @@
 id: ex-a-two-crossing-closed-braid-factorization-complex
 kind: example
 title: "A two-crossing closed braid factorization complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

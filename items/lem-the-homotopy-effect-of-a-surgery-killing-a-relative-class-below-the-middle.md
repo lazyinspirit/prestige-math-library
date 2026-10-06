@@ -27,7 +27,7 @@ sources:
     url: https://him-lueck.uni-bonn.de/data/ictp.pdf
     locator: Chapter 3 §3.4 and Chapter 4 introduction, printed pp. 74-79 (the surgery step and its effect on $\pi_*(f)$,
       with the middle-dimensional caveat)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

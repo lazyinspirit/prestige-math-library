@@ -2,7 +2,7 @@
 id: rem-wave-poisson-formula-is-not-the-harmonic-poisson-kernel
 kind: remark
 title: "Two different objects are called Poisson's formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

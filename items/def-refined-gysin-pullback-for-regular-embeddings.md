@@ -2,7 +2,7 @@
 id: def-refined-gysin-pullback-for-regular-embeddings
 kind: definition
 title: "Refined Gysin pullback for regular embeddings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

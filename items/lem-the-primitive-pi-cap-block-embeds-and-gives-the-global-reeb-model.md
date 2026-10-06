@@ -2,7 +2,7 @@
 id: lem-the-primitive-pi-cap-block-embeds-and-gives-the-global-reeb-model
 kind: lemma
 title: The primitive pi cap block embeds and gives the global Reeb model
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

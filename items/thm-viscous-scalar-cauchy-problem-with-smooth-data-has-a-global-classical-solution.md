@@ -2,7 +2,7 @@
 id: thm-viscous-scalar-cauchy-problem-with-smooth-data-has-a-global-classical-solution
 kind: theorem
 title: The viscous scalar Cauchy problem with smooth data has a global classical solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

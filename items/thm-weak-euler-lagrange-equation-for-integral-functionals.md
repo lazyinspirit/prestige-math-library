@@ -2,7 +2,7 @@
 id: thm-weak-euler-lagrange-equation-for-integral-functionals
 kind: theorem
 title: "The weak Euler-Lagrange equation for integral functionals with fixed trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

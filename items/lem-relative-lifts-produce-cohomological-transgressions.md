@@ -2,7 +2,7 @@
 id: lem-relative-lifts-produce-cohomological-transgressions
 kind: lemma
 title: "Relative lifts produce cohomological transgressions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

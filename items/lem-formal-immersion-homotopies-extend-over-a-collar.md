@@ -2,7 +2,7 @@
 id: lem-formal-immersion-homotopies-extend-over-a-collar
 kind: lemma
 title: "Formal-immersion homotopies extend over a collar"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-collar-neighborhood-theorem, def-smooth-collar-of-a-manifold-boundary, def-derivative-map-from-immersions-to-formal-immersions, def-weak-homotopy-equivalence, def-smooth-map-between-manifolds-with-boundary, def-space-of-immersions-and-space-of-formal-immersions, def-countable-choice]

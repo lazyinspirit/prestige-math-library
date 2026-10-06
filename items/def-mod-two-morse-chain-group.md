@@ -2,7 +2,7 @@
 id: def-mod-two-morse-chain-group
 kind: definition
 title: "The mod-two Morse chain group"
-status: draft
+status: published
 origin: pipeline
 deps: [def-downward-gradient-like-vector-field, def-morse-function-and-excellent-morse-function, def-nondegenerate-critical-point-nullity-index-and-coindex, def-integers-modulo-n, thm-z-mod-p-is-a-field, def-left-and-right-modules, def-free-module-on-a-set-and-standard-basis, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points]
 provenance:

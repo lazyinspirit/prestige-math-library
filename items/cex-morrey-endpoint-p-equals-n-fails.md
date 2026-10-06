@@ -2,7 +2,7 @@
 id: cex-morrey-endpoint-p-equals-n-fails
 kind: counterexample
 title: "Morrey's inequality has no $p=n$ endpoint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

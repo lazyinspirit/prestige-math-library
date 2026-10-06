@@ -2,7 +2,7 @@
 id: thm-cocomplete-abelian-category-with-small-projective-generator-is-a-module-category
 kind: theorem
 title: "Module reconstruction from a small projective generator with supplied copowers and cokernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

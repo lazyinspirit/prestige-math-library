@@ -2,7 +2,7 @@
 id: thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension
 kind: theorem
 title: The Hamilton--Jacobi correspondence in one dimension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

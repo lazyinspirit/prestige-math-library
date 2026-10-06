@@ -1,7 +1,7 @@
 ---
 page: "hamilton-jacobi-equations-and-viscosity-solutions-examples"
 title: "Hamilton Jacobi Equations and Viscosity Solutions — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-eikonal-equation-as-a-viscosity-equation", "ex-quadratic-hopf-lax-formula-and-moreau-envelope", "ex-hopf-lax-solution-with-a-forming-corner", "ex-negative-absolute-value-solves-the-eikonal-equation-in-viscosity-sense", "ex-vanishing-viscosity-selects-the-hamilton-jacobi-solution", "cex-hopf-lax-without-convex-superlinear-coercivity", "cex-reversing-the-contact-extremum-reverses-the-viscosity-inequality", "cex-minima-of-viscosity-subsolutions-need-not-be-subsolutions", "cex-viscosity-solutions-need-not-be-unique-when-the-boundary-condition-is-not-imposed-in-a-comparison-class", "ex-distance-to-the-boundary-is-the-viscosity-solution-of-the-unit-eikonal-dirichlet-problem"]
 ---

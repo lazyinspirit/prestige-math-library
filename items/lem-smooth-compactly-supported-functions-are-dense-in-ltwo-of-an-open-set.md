@@ -2,7 +2,7 @@
 id: lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set
 kind: lemma
 title: "Smooth compactly supported functions of an open set are dense in $L^2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

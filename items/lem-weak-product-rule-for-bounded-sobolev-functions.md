@@ -2,7 +2,7 @@
 id: lem-weak-product-rule-for-bounded-sobolev-functions
 kind: lemma
 title: "Weak product rule for bounded Sobolev functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

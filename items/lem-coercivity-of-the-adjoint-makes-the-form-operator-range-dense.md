@@ -2,7 +2,7 @@
 id: "lem-coercivity-of-the-adjoint-makes-the-form-operator-range-dense"
 kind: "lemma"
 title: "Coercivity of the adjoint makes the form-operator range dense"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 4

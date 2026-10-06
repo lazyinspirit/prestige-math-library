@@ -2,7 +2,7 @@
 id: cex-dilations-can-destroy-tightness-on-an-unbounded-domain
 kind: counterexample
 title: "Expanding bumps lose tightness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

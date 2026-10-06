@@ -2,7 +2,7 @@
 id: ex-multiplication-semigroup-and-its-generator
 kind: example
 title: "A multiplication semigroup with an unbounded generator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

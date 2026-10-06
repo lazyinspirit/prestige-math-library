@@ -2,7 +2,7 @@
 id: def-self-intersection-number-of-an-oriented-submanifold
 kind: definition
 title: "The self-intersection number of a complementary-dimensional oriented submanifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-oriented-intersection-number, thm-oriented-intersection-number-is-homotopy-invariant, thm-intersection-number-under-factor-interchange, def-tubular-neighbourhood-of-an-embedded-submanifold, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold, prop-two-tubular-neighbourhood-germs-are-isomorphic-near-the-zero-section, def-normal-and-conormal-bundles-of-an-embedded-submanifold, prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold, def-whitney-sum-of-vector-bundles, prop-the-zero-section-is-a-smooth-embedding, cor-every-closed-embedded-submanifold-has-a-smooth-neighbourhood-retraction, def-smooth-section-local-section-and-support, def-mod-two-intersection-number, def-countable-choice, lem-every-vector-in-a-fibre-extends-to-a-compactly-supported-smooth-section, thm-parametric-transversality, thm-mod-two-intersection-number-is-homotopy-invariant, thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric]

@@ -2,7 +2,7 @@
 id: thm-morse-trajectory-compactness-up-to-breaking
 kind: theorem
 title: "Compactness up to breaking of Morse trajectory spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-broken-morse-trajectory, lem-breaking-length-is-bounded-by-index-drop, def-geometric-convergence-to-a-broken-morse-trajectory, prop-compact-open-is-uniform-on-a-compact-metric-domain, thm-fundamental-theorem-on-flows, def-downward-gradient-like-vector-field, thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, thm-topological-manifolds-are-metrizable-and-paracompact, cor-equicontinuous-families-into-a-compact-metric-target, thm-metric-compactness-equivalences, lem-compact-metric-space-has-a-countable-dense-subset, def-second-countable-space, thm-every-smooth-manifold-admits-a-riemannian-metric, def-riemannian-distance-on-a-connected-manifold, thm-riemannian-distance-is-a-metric, thm-the-riemannian-distance-topology-is-the-manifold-topology, lem-local-comparison-of-a-riemannian-metric-with-the-euclidean-metric, prop-components-of-a-topological-manifold-are-open-and-at-most-countable, lem-broken-trajectories-are-limits-of-ordinary-trajectories]
 proof_strategy: direct

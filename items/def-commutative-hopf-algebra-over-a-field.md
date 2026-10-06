@@ -2,7 +2,7 @@
 id: def-commutative-hopf-algebra-over-a-field
 kind: definition
 title: Commutative Hopf algebras over a field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 0

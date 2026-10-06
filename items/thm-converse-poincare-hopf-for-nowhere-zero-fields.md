@@ -2,7 +2,7 @@
 id: thm-converse-poincare-hopf-for-nowhere-zero-fields
 kind: theorem
 title: "Converse Poincare-Hopf for nowhere-zero fields"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

@@ -1,7 +1,7 @@
 ---
 page: regular-homotopy-and-sphere-eversion
 title: Regular Homotopy and Sphere Eversion
-status: draft
+status: published
 requires:
   - formal-immersions-and-the-smale-hirsch-theorem
   - lie-groups-invariant-fields-and-the-exponential-map

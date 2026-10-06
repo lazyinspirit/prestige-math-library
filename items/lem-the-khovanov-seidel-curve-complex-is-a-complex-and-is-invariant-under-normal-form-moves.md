@@ -2,7 +2,7 @@
 id: lem-the-khovanov-seidel-curve-complex-is-a-complex-and-is-invariant-under-normal-form-moves
 kind: lemma
 title: "The curve complex is a complex and is invariant under normal-form moves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-separating-critical-values-far-from-the-boundary
 kind: lemma
 title: "Separating critical values far from the boundary"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [lem-finitely-many-critical-values-can-be-separated-locally, lem-manifold-bump-for-a-compact-set-inside-an-open-set, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, def-morse-function-and-excellent-morse-function]

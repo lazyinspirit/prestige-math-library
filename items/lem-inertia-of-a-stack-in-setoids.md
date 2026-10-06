@@ -2,7 +2,7 @@
 id: lem-inertia-of-a-stack-in-setoids
 kind: lemma
 title: "The inertia of a stack in setoids is trivial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

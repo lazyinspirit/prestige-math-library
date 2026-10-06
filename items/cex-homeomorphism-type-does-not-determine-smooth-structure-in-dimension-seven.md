@@ -2,7 +2,7 @@
 id: cex-homeomorphism-type-does-not-determine-smooth-structure-in-dimension-seven
 kind: counterexample
 title: "Homeomorphism type does not determine smooth structure in dimension seven"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

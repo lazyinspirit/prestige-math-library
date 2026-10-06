@@ -2,7 +2,7 @@
 id: ex-orientation-reversed-complex-projective-plane-has-signature-minus-one
 kind: example
 title: "The orientation-reversed projective plane has signature minus one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

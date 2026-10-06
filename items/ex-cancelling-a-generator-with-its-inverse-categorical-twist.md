@@ -2,7 +2,7 @@
 id: ex-cancelling-a-generator-with-its-inverse-categorical-twist
 kind: example
 title: "Cancelling a generator with its inverse categorical twist"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

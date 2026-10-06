@@ -2,7 +2,7 @@
 id: thm-creation-of-a-cancelling-handle-pair
 kind: theorem
 title: "Creation of a cancelling handle pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: cex-a-compact-leaf-with-infinite-fundamental-group-can-still-have-trivial-holonomy
 kind: counterexample
 title: "A compact leaf with infinite fundamental group can still have trivial holonomy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

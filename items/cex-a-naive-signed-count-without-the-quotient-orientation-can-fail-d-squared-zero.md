@@ -2,7 +2,7 @@
 id: cex-a-naive-signed-count-without-the-quotient-orientation-can-fail-d-squared-zero
 kind: counterexample
 title: "A naive signed count without the quotient orientation can fail to square to zero"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

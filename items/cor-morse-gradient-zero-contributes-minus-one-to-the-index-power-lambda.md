@@ -2,7 +2,7 @@
 id: cor-morse-gradient-zero-contributes-minus-one-to-the-index-power-lambda
 kind: corollary
 title: "A Morse gradient zero contributes $(-1)^\\lambda$ to the index"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

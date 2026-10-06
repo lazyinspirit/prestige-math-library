@@ -2,7 +2,7 @@
 id: cor-finite-fundamental-group-is-a-sufficient-not-necessary-reeb-stability-hypothesis
 kind: corollary
 title: "Finiteness of the fundamental group is sufficient, but not necessary, for Reeb stability"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

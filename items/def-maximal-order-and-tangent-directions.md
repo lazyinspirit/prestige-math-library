@@ -2,7 +2,7 @@
 id: "def-maximal-order-and-tangent-directions"
 kind: "definition"
 title: "Marked ideals of maximal order, tangent directions and transversality to the exceptional divisors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 5

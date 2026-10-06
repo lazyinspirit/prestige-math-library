@@ -2,7 +2,7 @@
 id: def-vanishing-cycle-of-a-codimension-one-foliation
 kind: definition
 title: "Vanishing cycles of a codimension-one foliation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

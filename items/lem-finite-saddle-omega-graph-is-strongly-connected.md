@@ -2,7 +2,7 @@
 id: lem-finite-saddle-omega-graph-is-strongly-connected
 kind: lemma
 title: "A finite saddle omega-graph is strongly connected and is a finite union of polycycles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

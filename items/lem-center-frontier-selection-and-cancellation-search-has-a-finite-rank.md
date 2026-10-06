@@ -2,7 +2,7 @@
 id: lem-center-frontier-selection-and-cancellation-search-has-a-finite-rank
 kind: lemma
 title: "The center-frontier selection and cancellation search has finite rank"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

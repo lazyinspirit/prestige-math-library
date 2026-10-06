@@ -2,7 +2,7 @@
 id: thm-semisimple-groups-in-characteristic-zero-are-linearly-reductive
 kind: theorem
 title: "Semisimple groups in characteristic zero are linearly reductive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 23

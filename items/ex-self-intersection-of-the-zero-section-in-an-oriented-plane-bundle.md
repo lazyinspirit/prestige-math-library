@@ -2,7 +2,7 @@
 id: ex-self-intersection-of-the-zero-section-in-an-oriented-plane-bundle
 kind: example
 title: "Self-intersection of the zero section in an oriented plane bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-self-intersection-is-the-euler-number-of-the-normal-bundle, lem-normal-push-off-zeros-are-self-intersection-points, def-self-intersection-number-of-an-oriented-submanifold, cor-nowhere-zero-section-forces-the-euler-class-to-vanish, def-euclidean-spheres-and-closed-balls, thm-a-regular-level-set-is-an-embedded-submanifold, def-tangent-bundle-as-a-disjoint-union, def-smooth-section-local-section-and-support, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components, prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold, def-axiom-of-choice, prop-the-zero-section-is-a-smooth-embedding, lem-normal-bundle-of-the-zero-locus-of-a-transverse-section, prop-tangent-space-of-a-regular-level-set-is-the-kernel]

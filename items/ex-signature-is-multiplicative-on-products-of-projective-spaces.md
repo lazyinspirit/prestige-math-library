@@ -2,7 +2,7 @@
 id: ex-signature-is-multiplicative-on-products-of-projective-spaces
 kind: example
 title: "Multiplicativity of the signature on products of projective spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

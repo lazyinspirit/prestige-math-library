@@ -2,7 +2,7 @@
 id: lem-arith-full-minimal-model-embedding
 kind: lemma
 title: "Full minimal model embedding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

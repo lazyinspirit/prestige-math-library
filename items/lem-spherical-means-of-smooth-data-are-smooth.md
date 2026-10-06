@@ -2,7 +2,7 @@
 id: lem-spherical-means-of-smooth-data-are-smooth
 kind: lemma
 title: "Smoothness, parity and zero-radius limits of spherical means"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-a-positive-crossing-factorization-complex
 kind: example
 title: "A positive crossing factorization complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

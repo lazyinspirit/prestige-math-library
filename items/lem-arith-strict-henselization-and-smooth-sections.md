@@ -2,7 +2,7 @@
 id: lem-arith-strict-henselization-and-smooth-sections
 kind: lemma
 title: "Strict henselization of a DVR and smooth sections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

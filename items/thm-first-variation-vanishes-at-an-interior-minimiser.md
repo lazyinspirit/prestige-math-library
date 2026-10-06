@@ -2,7 +2,7 @@
 id: thm-first-variation-vanishes-at-an-interior-minimiser
 kind: theorem
 title: "The first variation vanishes at an interior minimiser"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

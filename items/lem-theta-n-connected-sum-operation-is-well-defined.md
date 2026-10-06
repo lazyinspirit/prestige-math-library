@@ -2,7 +2,7 @@
 id: lem-theta-n-connected-sum-operation-is-well-defined
 kind: lemma
 title: "Connected sum descends to oriented h-cobordism classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

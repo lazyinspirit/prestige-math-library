@@ -2,7 +2,7 @@
 id: ex-cancelling-one-two-handle-pair-on-a-surface
 kind: example
 title: "A cancelling one-two handle pair on a surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

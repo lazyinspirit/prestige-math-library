@@ -2,7 +2,7 @@
 id: "thm-every-h-minus-one-functional-has-ltwo-plus-divergence-form"
 kind: "theorem"
 title: "Every $H^{-1}$ functional is an $L^2$ function plus a divergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 2

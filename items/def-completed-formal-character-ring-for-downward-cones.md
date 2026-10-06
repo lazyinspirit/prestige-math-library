@@ -2,7 +2,7 @@
 id: def-completed-formal-character-ring-for-downward-cones
 kind: definition
 title: The completed formal character ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

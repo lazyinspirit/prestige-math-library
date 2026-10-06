@@ -2,7 +2,7 @@
 id: lem-negation-scales-the-local-index-by-minus-one-to-the-dimension
 kind: lemma
 title: "Negation scales the local index by $(-1)^n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: thm-abelian-variety-dual-and-polarization
 kind: theorem
 title: "The dual abelian variety, the Poincare bundle and polarizations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

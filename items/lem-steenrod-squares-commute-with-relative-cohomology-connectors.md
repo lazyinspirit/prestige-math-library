@@ -2,7 +2,7 @@
 id: lem-steenrod-squares-commute-with-relative-cohomology-connectors
 kind: lemma
 title: "Steenrod squares commute with relative cohomology connectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: def-b-p-n-plus-one-subgroup-of-homotopy-spheres
 kind: definition
 title: "The subgroup $bP_{n+1}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

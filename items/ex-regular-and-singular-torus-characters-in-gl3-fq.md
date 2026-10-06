@@ -2,7 +2,7 @@
 id: ex-regular-and-singular-torus-characters-in-gl3-fq
 kind: example
 title: "Regular and singular torus characters in GL_3(F_q)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

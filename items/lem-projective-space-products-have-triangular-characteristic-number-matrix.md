@@ -2,7 +2,7 @@
 id: lem-projective-space-products-have-triangular-characteristic-number-matrix
 kind: lemma
 title: "Products of complex projective spaces have an invertible Pontryagin-number matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-tangent-bundle-of-complex-projective-space-and-its-pontryagin-classes, lem-characteristic-numbers-of-products-follow-the-whitney-sum-and-kunneth-formulas, lem-kronecker-pairing-is-multiplicative-under-cross-products, lem-fundamental-class-of-a-product-of-closed-manifolds, def-pontryagin-number-of-a-closed-oriented-manifold, def-kronecker-evaluation-pairing, lem-integral-cohomology-ring-of-complex-projective-space-by-splitting, thm-cartesian-product-makes-bordism-a-graded-ring, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, cor-field-kunneth-isomorphism-for-homology-of-products, def-unoriented-and-oriented-bordism-groups, thm-newtons-identities, thm-pontryagin-whitney-product-away-from-two, def-axiom-of-choice]

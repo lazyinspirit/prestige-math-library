@@ -2,7 +2,7 @@
 id: thm-mod-two-morse-differential-squares-to-zero
 kind: theorem
 title: "The mod-two Morse differential squares to zero"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-countable-choice, def-mod-two-morse-differential, def-mod-two-morse-chain-group, thm-index-two-compactification-is-a-compact-one-manifold-with-boundary, lem-breaking-length-is-bounded-by-index-drop, lem-boundary-of-a-compact-one-manifold-has-even-cardinality, cor-no-morse-smale-trajectories-for-nonpositive-index-drop, def-chain-complex-in-an-abelian-category, def-integers-modulo-n, def-morse-smale-pair]
 proof_strategy: direct

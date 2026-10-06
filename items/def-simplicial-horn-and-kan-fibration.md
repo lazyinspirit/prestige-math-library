@@ -2,7 +2,7 @@
 id: def-simplicial-horn-and-kan-fibration
 kind: definition
 title: "Simplicial horns and Kan fibrations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

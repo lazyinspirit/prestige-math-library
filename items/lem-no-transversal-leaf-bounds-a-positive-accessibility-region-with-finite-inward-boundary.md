@@ -2,7 +2,7 @@
 id: lem-no-transversal-leaf-bounds-a-positive-accessibility-region-with-finite-inward-boundary
 kind: lemma
 title: A no-transversal leaf bounds a positive accessibility region with finite inward boundary
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

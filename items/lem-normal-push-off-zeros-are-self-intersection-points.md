@@ -2,7 +2,7 @@
 id: lem-normal-push-off-zeros-are-self-intersection-points
 kind: lemma
 title: "Normal push-off zeros are the self-intersection points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-self-intersection-number-of-an-oriented-submanifold, def-local-oriented-intersection-sign, def-oriented-intersection-number, def-tubular-neighbourhood-of-an-embedded-submanifold, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold, def-normal-and-conormal-bundles-of-an-embedded-submanifold, def-differential-of-a-smooth-map, def-embedded-submanifold-and-slice-chart, prop-a-vector-bundle-section-with-surjective-vertical-differential-at-every-zero-has-a-submanifold-zero-set, cor-a-smooth-section-can-be-perturbed-transverse-to-the-zero-section, def-transverse-embedded-submanifolds, prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold]

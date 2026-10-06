@@ -2,7 +2,7 @@
 id: thm-exponential-bound-for-a-c-zero-semigroup
 kind: theorem
 title: "Exponential bound for a C0-semigroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

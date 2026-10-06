@@ -2,7 +2,7 @@
 id: def-limitwise-nullhomotopy-predicate-on-based-loops
 kind: definition
 title: "Limitwise-nullhomotopy predicate on based loops"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

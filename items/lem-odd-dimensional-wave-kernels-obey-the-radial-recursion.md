@@ -2,7 +2,7 @@
 id: lem-odd-dimensional-wave-kernels-obey-the-radial-recursion
 kind: lemma
 title: "The radial recursion between dimensions n and n+2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-positive-square-divisor-has-effective-multiple
 kind: lemma
 title: "Positive square and positive ample intersection force an effective multiple"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

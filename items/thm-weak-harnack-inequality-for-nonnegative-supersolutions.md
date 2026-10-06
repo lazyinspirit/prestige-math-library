@@ -2,7 +2,7 @@
 id: thm-weak-harnack-inequality-for-nonnegative-supersolutions
 kind: theorem
 title: "Weak Harnack inequality for nonnegative supersolutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

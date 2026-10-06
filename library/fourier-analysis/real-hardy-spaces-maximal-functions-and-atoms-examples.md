@@ -1,7 +1,7 @@
 ---
 page: real-hardy-spaces-maximal-functions-and-atoms-examples
 title: "Real Hardy Spaces Maximal Functions and Atoms — Examples"
-status: draft
+status: published
 requires: [real-hardy-spaces-maximal-functions-and-atoms]
 items: []
 examples:

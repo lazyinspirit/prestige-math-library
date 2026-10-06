@@ -2,7 +2,7 @@
 id: cex-a-four-dimensional-boundary-case-is-outside-the-smooth-h-cobordism-theorem
 kind: counterexample
 title: "A four-dimensional boundary case is outside the smooth h-cobordism theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 20

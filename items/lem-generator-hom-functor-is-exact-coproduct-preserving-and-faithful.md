@@ -2,7 +2,7 @@
 id: lem-generator-hom-functor-is-exact-coproduct-preserving-and-faithful
 kind: lemma
 title: "The Hom functor of a small projective generator is exact, coproduct-preserving, and faithful"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

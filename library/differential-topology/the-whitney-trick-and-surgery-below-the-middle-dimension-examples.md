@@ -1,7 +1,7 @@
 ---
 page: the-whitney-trick-and-surgery-below-the-middle-dimension-examples
 title: The Whitney Trick and Surgery Below the Middle Dimension — Examples
-status: draft
+status: published
 items:
 - cex-a-nontrivial-whitney-circle-in-the-fundamental-group-blocks-cancellation
 - cex-an-immersed-whitney-disk-in-a-four-manifold-does-not-give-the-smooth-trick

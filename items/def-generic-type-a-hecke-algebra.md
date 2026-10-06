@@ -2,7 +2,7 @@
 id: def-generic-type-a-hecke-algebra
 kind: definition
 title: "The generic type-A Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

@@ -2,7 +2,7 @@
 id: cex-boundary-h-two-regularity-needs-domain-regularity
 kind: counterexample
 title: "Boundary $H^2$ regularity needs domain regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

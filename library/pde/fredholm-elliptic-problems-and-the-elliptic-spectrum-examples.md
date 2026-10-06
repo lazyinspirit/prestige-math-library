@@ -1,7 +1,7 @@
 ---
 page: "fredholm-elliptic-problems-and-the-elliptic-spectrum-examples"
 title: "Fredholm Elliptic Problems and the Elliptic Spectrum — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-dirichlet-laplacian-eigenpairs-on-an-interval

@@ -2,7 +2,7 @@
 id: "cor-symmetric-lax-milgram-is-energy-minimisation"
 kind: "corollary"
 title: "Symmetric Lax--Milgram is energy minimisation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 5

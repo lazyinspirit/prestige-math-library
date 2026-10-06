@@ -2,7 +2,7 @@
 id: def-simplicial-object-and-simplicial-commutative-ring
 kind: definition
 title: "Simplicial objects, simplicial commutative rings and homotopy groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

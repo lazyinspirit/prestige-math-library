@@ -2,7 +2,7 @@
 id: "ex-nonsymmetric-coercive-elliptic-form"
 kind: "example"
 title: "A nonsymmetric coercive elliptic form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 7

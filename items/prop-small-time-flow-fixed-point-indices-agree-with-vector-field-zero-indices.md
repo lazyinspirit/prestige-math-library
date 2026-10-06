@@ -2,7 +2,7 @@
 id: prop-small-time-flow-fixed-point-indices-agree-with-vector-field-zero-indices
 kind: proposition
 title: "Small-time flow fixed point indices and vector field zero indices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

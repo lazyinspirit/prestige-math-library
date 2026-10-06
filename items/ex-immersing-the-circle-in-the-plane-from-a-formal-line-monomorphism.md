@@ -2,7 +2,7 @@
 id: ex-immersing-the-circle-in-the-plane-from-a-formal-line-monomorphism
 kind: example
 title: "Immersing the circle in the plane from a formal line monomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-formal-immersion-between-smooth-manifolds, thm-smale-hirsch-immersion-theorem, cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes, def-immersion-submersion-and-constant-rank-map, def-space-of-immersions-and-space-of-formal-immersions, def-countable-choice, def-vector-bundle-map-over-a-smooth-base-map, def-frame-bundle-and-associated-vector-bundle, def-degree-of-a-circle-loop, cor-degree-descends-to-circle-loop-classes, thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree, prop-standard-circle-loops-have-their-integer-degrees]

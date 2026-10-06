@@ -1,7 +1,7 @@
 ---
 page: yang-baxter-operators-and-quantum-braid-representations-examples
 title: "Yang–Baxter Operators and Quantum Braid Representations — Examples"
-status: draft
+status: published
 requires: [yang-baxter-operators-and-quantum-braid-representations]
 items: []
 examples: [cex-a-solution-of-yang-baxter-without-invertibility-does-not-represent-the-braid-group,

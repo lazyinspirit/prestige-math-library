@@ -2,7 +2,7 @@
 id: def-counting-inner-product-on-complex-functions-on-z-mod-n
 kind: definition
 title: "The counting inner product on $\\mathbb C^{\\mathbb Z/N\\mathbb Z}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

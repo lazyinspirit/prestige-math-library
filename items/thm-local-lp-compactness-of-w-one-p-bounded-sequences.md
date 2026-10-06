@@ -2,7 +2,7 @@
 id: thm-local-lp-compactness-of-w-one-p-bounded-sequences
 kind: theorem
 title: "Local $L^p$ compactness of $W^{1,p}_{\\mathrm{loc}}$-bounded sequences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

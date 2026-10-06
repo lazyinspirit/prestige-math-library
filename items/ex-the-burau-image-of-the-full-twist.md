@@ -2,7 +2,7 @@
 id: ex-the-burau-image-of-the-full-twist
 kind: example
 title: "The image of the full twist under the Burau representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

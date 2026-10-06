@@ -2,7 +2,7 @@
 id: thm-admissible-composites-present-the-mod-two-square-algebra
 kind: theorem
 title: "Admissible composites present the mod-two square algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

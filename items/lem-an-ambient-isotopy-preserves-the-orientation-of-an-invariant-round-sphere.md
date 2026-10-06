@@ -2,7 +2,7 @@
 id: lem-an-ambient-isotopy-preserves-the-orientation-of-an-invariant-round-sphere
 kind: lemma
 title: "An ambient isotopy preserves the orientation of an invariant round sphere"
-status: draft
+status: published
 origin: session
 dependency_level: 5
 provenance:

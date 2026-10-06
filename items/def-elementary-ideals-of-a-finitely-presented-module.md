@@ -2,7 +2,7 @@
 id: def-elementary-ideals-of-a-finitely-presented-module
 kind: definition
 title: "Elementary ideals of a finitely presented module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-bott-partial-connection-on-the-normal-bundle-of-a-foliation
 kind: definition
 title: "The Bott partial connection on the normal bundle of a foliation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

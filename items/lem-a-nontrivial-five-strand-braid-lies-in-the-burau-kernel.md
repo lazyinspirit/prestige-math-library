@@ -2,7 +2,7 @@
 id: lem-a-nontrivial-five-strand-braid-lies-in-the-burau-kernel
 kind: lemma
 title: "A nontrivial five-strand braid lies in the Burau kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

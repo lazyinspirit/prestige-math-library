@@ -2,7 +2,7 @@
 id: lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent
 kind: lemma
 title: "The local fixed point index is independent of chart, ball and neighbourhood"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

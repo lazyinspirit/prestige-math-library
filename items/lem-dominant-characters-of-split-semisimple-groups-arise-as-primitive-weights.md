@@ -2,7 +2,7 @@
 id: lem-dominant-characters-of-split-semisimple-groups-arise-as-primitive-weights
 kind: lemma
 title: "Every dominant weight of a split semisimple group is a primitive weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 33

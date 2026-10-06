@@ -2,7 +2,7 @@
 id: "def-h-minus-one-as-the-dual-of-h-one-zero"
 kind: "definition"
 title: "The negative Sobolev space $H^{-1}(\\Omega)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

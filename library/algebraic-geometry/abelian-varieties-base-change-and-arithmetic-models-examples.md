@@ -1,7 +1,7 @@
 ---
 page: abelian-varieties-base-change-and-arithmetic-models-examples
 title: "Abelian Varieties, Base Change, and Arithmetic Models — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-elliptic-curve-good-and-bad-reduction

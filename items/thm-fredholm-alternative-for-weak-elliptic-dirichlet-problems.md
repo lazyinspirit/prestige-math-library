@@ -2,7 +2,7 @@
 id: thm-fredholm-alternative-for-weak-elliptic-dirichlet-problems
 kind: theorem
 title: "The Fredholm alternative for weak elliptic Dirichlet problems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: lem-every-central-character-of-the-enveloping-algebra-arises-from-a-weight
 kind: lemma
 title: "Every central character of a semisimple enveloping algebra arises from a weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

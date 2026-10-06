@@ -2,7 +2,7 @@
 id: thm-rellich-kondrachov-for-p-less-than-n
 kind: theorem
 title: "The Rellich--Kondrachov theorem for $1\\le p<n$ on bounded extension domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

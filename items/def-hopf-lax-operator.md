@@ -2,7 +2,7 @@
 id: def-hopf-lax-operator
 kind: definition
 title: The Hopf--Lax operator and the Hopf--Lax formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-handle-trading-concentrates-an-acyclic-simply-connected-presentation-in-two-adjacent-middle-indices
 kind: lemma
 title: Trading concentrates a simply connected h-cobordism in two adjacent middle indices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 12

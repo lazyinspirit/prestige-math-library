@@ -2,7 +2,7 @@
 id: def-standard-resolution-of-a-ring-map
 kind: definition
 title: "The standard simplicial resolution of a ring map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

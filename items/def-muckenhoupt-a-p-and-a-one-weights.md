@@ -2,7 +2,7 @@
 id: def-muckenhoupt-a-p-and-a-one-weights
 kind: definition
 title: Muckenhoupt A_p and A_1 weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

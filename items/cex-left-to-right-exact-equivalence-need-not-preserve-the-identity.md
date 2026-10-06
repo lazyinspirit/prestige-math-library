@@ -2,7 +2,7 @@
 id: cex-left-to-right-exact-equivalence-need-not-preserve-the-identity
 kind: counterexample
 title: "The left-to-right exact equivalence need not preserve the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-algebra-over-a-commutative-ring, def-bimodule, def-dimension, def-field, def-generated-cyclic-finitely-generated-and-free-modules, def-left-and-right-modules, def-left-and-right-nakayama-functors-by-finite-kernel-calculus, def-linear-map, def-natural-isomorphism, def-projective-module, def-vector-space, lem-nakayama-kernels-give-well-defined-adjoint-functors, prop-functoriality-of-module-tensor-products, prop-left-to-right-exact-equivalence-sends-identity-to-nakayama, thm-universal-property-of-module-tensor-products]

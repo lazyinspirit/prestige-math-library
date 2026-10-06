@@ -2,7 +2,7 @@
 id: thm-index-of-a-nondegenerate-vector-field-zero
 kind: theorem
 title: "The index of a nondegenerate vector-field zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

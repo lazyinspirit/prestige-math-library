@@ -2,7 +2,7 @@
 id: def-categorical-and-geometric-quotients-of-classical-varieties
 kind: definition
 title: Categorical and geometric quotients of classical varieties
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: "wave-equation-representation-formulas-examples"
 title: "Wave Equation Representation Formulas — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-right-and-left-travelling-waves", "ex-one-dimensional-wave-from-a-compactly-supported-velocity", "ex-three-dimensional-radial-wave-reduces-to-one-dimension", "ex-kirchhoff-formula-for-constant-initial-velocity", "ex-two-dimensional-wave-has-an-interior-tail", "cex-wave-formula-with-sphere-area-and-ball-volume-confused", "cex-characteristic-line-data-do-not-determine-a-one-dimensional-wave", "ex-point-source-wave-front-in-three-dimensions", "ex-wave-support-from-pure-displacement-versus-pure-velocity-data"]
 ---

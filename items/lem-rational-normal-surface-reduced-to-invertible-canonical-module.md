@@ -2,7 +2,7 @@
 id: lem-rational-normal-surface-reduced-to-invertible-canonical-module
 kind: lemma
 title: Rational normal surfaces reduce to an invertible canonical module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 13

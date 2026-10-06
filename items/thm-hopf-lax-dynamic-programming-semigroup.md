@@ -2,7 +2,7 @@
 id: thm-hopf-lax-dynamic-programming-semigroup
 kind: theorem
 title: The Hopf--Lax operators form a semigroup (dynamic programming)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-yosida-resolvent-converges-strongly-to-the-identity
 kind: lemma
 title: "The Yosida resolvent converges strongly to the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

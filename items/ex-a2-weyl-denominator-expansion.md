@@ -2,7 +2,7 @@
 id: ex-a2-weyl-denominator-expansion
 kind: example
 title: The A2 Weyl denominator expansion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

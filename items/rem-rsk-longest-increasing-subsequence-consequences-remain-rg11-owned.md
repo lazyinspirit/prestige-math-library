@@ -2,7 +2,7 @@
 id: rem-rsk-longest-increasing-subsequence-consequences-remain-rg11-owned
 kind: remark
 title: "The RSK and longest-increasing-subsequence consequences remain owned by the hook-length/RSK page"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [thm-rsk-shape-of-a-uniform-random-permutation-has-plancherel-law, lem-rsk-union-bound-localizes-plancherel-profiles, thm-plancherel-young-diagrams-converge-to-the-limit-shape]

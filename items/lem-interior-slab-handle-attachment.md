@@ -2,7 +2,7 @@
 id: lem-interior-slab-handle-attachment
 kind: lemma
 title: "Interior slab handle attachment"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-smooth-cobordism-triad-for-morse-theory, def-morse-function-adapted-to-a-cobordism, thm-one-critical-point-handle-attachment, prop-simultaneous-attachment-at-a-morse-critical-value, lem-adapted-descending-field-near-a-compact-morse-band, lem-gradient-flow-identifies-the-local-and-global-attaching-regions, thm-regular-interval-diffeomorphism, def-closed-sublevel-and-level-set-of-a-smooth-function, thm-collar-neighborhood-theorem, def-attaching-a-smooth-handle-with-corner-rounding, lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism, def-countable-choice, lem-local-morse-sublevel-pair-is-a-handle-pair, lem-local-critical-value-lowering-preserves-the-upper-sublevel, lem-normalized-gradient-crosses-a-compact-regular-band-in-controlled-time]

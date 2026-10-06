@@ -2,7 +2,7 @@
 id: def-numerical-equivalence-and-neron-severi-space
 kind: definition
 title: "Numerical equivalence and the Neron-Severi space of a surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

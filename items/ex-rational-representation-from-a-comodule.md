@@ -2,7 +2,7 @@
 id: ex-rational-representation-from-a-comodule
 kind: example
 title: A rational representation of the multiplicative group from a graded comodule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 4

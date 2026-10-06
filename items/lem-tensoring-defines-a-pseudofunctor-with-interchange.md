@@ -2,7 +2,7 @@
 id: lem-tensoring-defines-a-pseudofunctor-with-interchange
 kind: lemma
 title: "Tensoring defines a schematic pseudofunctor with interchange"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

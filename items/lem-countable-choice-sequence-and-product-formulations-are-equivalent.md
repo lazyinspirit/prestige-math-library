@@ -2,7 +2,7 @@
 id: lem-countable-choice-sequence-and-product-formulations-are-equivalent
 kind: lemma
 title: "Countable choice is equivalent to nonempty countable products"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

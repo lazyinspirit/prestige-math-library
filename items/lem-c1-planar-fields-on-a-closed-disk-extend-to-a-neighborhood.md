@@ -2,7 +2,7 @@
 id: lem-c1-planar-fields-on-a-closed-disk-extend-to-a-neighborhood
 kind: lemma
 title: "C¹ planar fields on a closed disk extend to a neighbourhood"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

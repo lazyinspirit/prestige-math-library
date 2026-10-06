@@ -2,7 +2,7 @@
 id: lem-truncated-maximal-function-estimates
 kind: lemma
 title: "Truncated maximal functions: finiteness, comparison estimates and the good-set bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

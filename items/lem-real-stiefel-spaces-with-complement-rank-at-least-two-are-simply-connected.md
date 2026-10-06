@@ -2,7 +2,7 @@
 id: lem-real-stiefel-spaces-with-complement-rank-at-least-two-are-simply-connected
 kind: lemma
 title: Real Stiefel spaces with complement rank at least two are simply connected
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: lem-l-class-of-complex-projective-space
 kind: lemma
 title: "The total L-class of complex projective space is a power of $x/\\tanh x$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

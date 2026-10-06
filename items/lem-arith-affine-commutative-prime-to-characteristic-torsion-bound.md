@@ -2,7 +2,7 @@
 id: lem-arith-affine-commutative-prime-to-characteristic-torsion-bound
 kind: lemma
 title: "Prime-to-characteristic torsion bound for affine commutative groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

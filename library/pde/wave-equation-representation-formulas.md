@@ -1,7 +1,7 @@
 ---
 page: "wave-equation-representation-formulas"
 title: "Wave Equation Representation Formulas"
-status: draft
+status: published
 items: ["def-wave-equation-cauchy-data-and-wave-speed", "lem-iterated-radial-derivative-identity", "lem-radial-derivative-expansion-of-the-epd-transform", "lem-first-moment-of-the-unit-sphere-vanishes", "lem-derivative-of-an-integral-with-moving-endpoints", "def-spherical-mean-of-space-dependent-data", "lem-one-dimensional-wave-operator-factorisation", "lem-odd-dimensional-wave-kernels-obey-the-radial-recursion", "lem-ball-and-sphere-mean-radial-identity", "lem-spherical-surface-integrals-project-onto-weighted-ball-integrals", "lem-general-solution-of-the-one-dimensional-wave-equation", "lem-spherical-means-of-smooth-data-are-smooth", "lem-euler-poisson-darboux-equation-for-spherical-means", "thm-dalembert-formula", "lem-dalembert-formula-attains-both-initial-data", "cor-one-dimensional-wave-domain-of-dependence", "thm-one-dimensional-forced-wave-duhamel-formula", "thm-kirchhoff-formula-for-the-three-dimensional-wave-equation", "thm-poisson-formula-for-the-two-dimensional-wave-equation", "thm-odd-dimensional-wave-formula-by-spherical-means", "thm-even-dimensional-wave-formula-by-descent", "lem-wave-formulas-attain-the-cauchy-data", "thm-wave-duhamel-principle", "thm-forced-three-dimensional-kirchhoff-duhamel-formula", "thm-support-dichotomy-for-free-wave-fundamental-solutions", "cor-classical-wave-solutions-are-locally-determined-by-cauchy-data", "cor-time-reversal-invariance-of-the-homogeneous-wave-equation", "rem-wave-poisson-formula-is-not-the-harmonic-poisson-kernel"]
 examples: []
 ---

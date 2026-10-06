@@ -1,7 +1,7 @@
 ---
 page: the-burau-representations
 title: "The Burau Representations"
-status: draft
+status: published
 requires: [the-artin-action-on-a-free-group,
            covering-spaces-and-lifting,
            singular-chains-and-singular-homology,

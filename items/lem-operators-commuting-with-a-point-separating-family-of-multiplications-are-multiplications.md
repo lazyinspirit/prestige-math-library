@@ -41,7 +41,7 @@ sources:
     - title: "Bachir Bekka and Pierre de la Harpe, Unitary Representations of Groups, Duals, and Characters (arXiv:1912.07262v1, 16 December 2019)"
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1, §1.A (Schur's lemma as the scalar-commutant criterion); Chapter 8, §8.A (spectral calculus of self-adjoint operators)"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

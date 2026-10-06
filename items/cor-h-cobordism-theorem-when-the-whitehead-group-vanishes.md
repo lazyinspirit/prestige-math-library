@@ -2,7 +2,7 @@
 id: cor-h-cobordism-theorem-when-the-whitehead-group-vanishes
 kind: corollary
 title: "The h-cobordism theorem when the Whitehead group vanishes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 16

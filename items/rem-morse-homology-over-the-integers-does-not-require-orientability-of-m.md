@@ -2,7 +2,7 @@
 id: rem-morse-homology-over-the-integers-does-not-require-orientability-of-m
 kind: remark
 title: "Integral Morse homology does not require orientability of the manifold"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-integral-morse-differential-squares-to-zero, lem-unstable-orientations-induce-trajectory-moduli-orientations, def-orientation-line-of-a-morse-critical-point, rem-ambient-orientability-is-not-required-for-morse-smale-transversality, def-morse-smale-pair, def-orientable-manifold]
 provenance:

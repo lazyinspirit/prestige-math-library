@@ -2,7 +2,7 @@
 id: def-bicategory-pseudofunctor-and-biequivalence
 kind: definition
 title: "Bicategories, pseudofunctors, and biequivalences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

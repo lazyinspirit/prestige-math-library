@@ -2,7 +2,7 @@
 id: lem-wave-formulas-attain-the-cauchy-data
 kind: lemma
 title: "The dimension formulas attain the Cauchy data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

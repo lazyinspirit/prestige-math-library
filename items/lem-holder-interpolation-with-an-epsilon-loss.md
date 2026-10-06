@@ -2,7 +2,7 @@
 id: lem-holder-interpolation-with-an-epsilon-loss
 kind: lemma
 title: Ehrling-type Hölder and derivative interpolation with an epsilon loss
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

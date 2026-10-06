@@ -2,7 +2,7 @@
 id: def-category-fibred-in-groupoids
 kind: definition
 title: "Categories fibred in groupoids over a site"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

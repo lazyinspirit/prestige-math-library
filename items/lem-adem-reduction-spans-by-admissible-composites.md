@@ -2,7 +2,7 @@
 id: lem-adem-reduction-spans-by-admissible-composites
 kind: lemma
 title: "Adem reduction spans by admissible square composites"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: lem-null-characteristic-frontier-cap-transports-nullity-to-adjacent-annulus
 kind: lemma
 title: "A null characteristic frontier transports nullity to the adjacent annulus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

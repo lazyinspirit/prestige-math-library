@@ -2,7 +2,7 @@
 id: def-khovanov-seidel-bigraded-cover-and-bigraded-curves
 kind: definition
 title: "The Z^2 cover of the projectivized tangent bundle and bigraded curves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

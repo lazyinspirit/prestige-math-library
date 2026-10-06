@@ -2,7 +2,7 @@
 id: thm-borel-polynomial-base-from-a-transgressive-simple-fiber-system
 kind: theorem
 title: "A transgressive simple fiber system gives a polynomial base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

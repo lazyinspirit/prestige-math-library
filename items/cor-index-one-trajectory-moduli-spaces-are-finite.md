@@ -2,7 +2,7 @@
 id: cor-index-one-trajectory-moduli-spaces-are-finite
 kind: corollary
 title: "Index-one trajectory moduli spaces are finite"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, thm-choice-implies-dependent-implies-countable-choice, prop-index-one-trajectory-spaces-are-zero-dimensional, thm-unparametrized-trajectory-space-is-a-smooth-manifold, thm-morse-trajectory-compactness-up-to-breaking, lem-breaking-length-is-bounded-by-index-drop, def-broken-morse-trajectory, def-geometric-convergence-to-a-broken-morse-trajectory, thm-topological-manifolds-are-metrizable-and-paracompact, thm-metric-compactness-equivalences, def-compact-space, def-metrizable-space, def-countable-choice, def-dependent-choice, def-unparametrized-morse-trajectory-moduli-space, def-morse-smale-pair]
 proof_strategy: direct

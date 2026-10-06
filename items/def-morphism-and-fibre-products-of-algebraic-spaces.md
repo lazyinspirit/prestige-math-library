@@ -2,7 +2,7 @@
 id: def-morphism-and-fibre-products-of-algebraic-spaces
 kind: definition
 title: "Morphisms, products and fibre products of algebraic spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

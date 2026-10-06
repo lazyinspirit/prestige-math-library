@@ -2,7 +2,7 @@
 id: lem-derivative-ideals-under-etale-morphisms
 kind: lemma
 title: Etale pullback commutes with derivative ideals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

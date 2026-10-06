@@ -2,7 +2,7 @@
 id: lem-kernel-tail-integrals-of-weighted-l-p-functions-are-finite
 kind: lemma
 title: Kernel tail integrals of weighted L-p functions are finite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

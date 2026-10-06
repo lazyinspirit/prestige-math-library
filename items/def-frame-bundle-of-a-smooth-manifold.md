@@ -2,7 +2,7 @@
 id: def-frame-bundle-of-a-smooth-manifold
 kind: definition
 title: The frame bundle of a smooth manifold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

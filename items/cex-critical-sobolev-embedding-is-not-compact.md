@@ -2,7 +2,7 @@
 id: cex-critical-sobolev-embedding-is-not-compact
 kind: counterexample
 title: "The critical Sobolev embedding is not compact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

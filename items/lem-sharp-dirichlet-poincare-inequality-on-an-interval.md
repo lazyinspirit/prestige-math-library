@@ -2,7 +2,7 @@
 id: "lem-sharp-dirichlet-poincare-inequality-on-an-interval"
 kind: "lemma"
 title: "The sharp Dirichlet Poincare inequality on an interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

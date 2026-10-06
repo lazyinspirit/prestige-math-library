@@ -2,7 +2,7 @@
 id: "cex-middle-dimensional-surgery-can-change-an-intersection-form"
 kind: "counterexample"
 title: "Middle-dimensional surgery can change an intersection form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

@@ -23,7 +23,7 @@ sources:
   - title: Wolfgang Lück, A Basic Introduction to Surgery Theory (complete lecture notes, ICTP/Münster)
     url: https://him-lueck.uni-bonn.de/data/ictp.pdf
     locator: Chapter 4 §4.1, printed pp. 81-84 (signs of intersection points and the necessary condition $\lambda([f,w],[f,w])=0$)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: lem-collapse-of-an-embedded-manifold-classifies-through-the-universal-thom-prespectrum
 kind: lemma
 title: The collapse of an embedded manifold classifies through the universal Thom prespectrum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

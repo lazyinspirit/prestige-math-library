@@ -2,7 +2,7 @@
 id: lem-dual-compact-sets-give-a-neighbourhood-basis-on-the-original-lca-group
 kind: lemma
 title: Compact-open neighbourhoods on the dual give a neighbourhood basis on the group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

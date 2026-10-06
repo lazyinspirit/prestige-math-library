@@ -2,7 +2,7 @@
 id: lem-complex-algebraic-groups-are-smooth
 kind: lemma
 title: Complex affine algebraic groups are smooth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

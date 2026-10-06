@@ -2,7 +2,7 @@
 id: def-formal-immersion-between-smooth-manifolds
 kind: definition
 title: "Formal immersion between smooth manifolds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-smooth-manifold", "def-c-r-and-smooth-maps-between-smooth-manifolds", "def-tangent-bundle-as-a-disjoint-union", "def-differential-of-a-smooth-map", "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle", "def-vector-bundle-map-over-a-smooth-base-map", "def-immersion-submersion-and-constant-rank-map", "thm-the-global-differential-of-a-smooth-map-is-smooth", "def-countable-choice", "thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure", "def-induced-tangent-bundle-chart", "lem-tangent-bundle-chart-transitions-are-smooth-with-smooth-inverses"]

@@ -2,7 +2,7 @@
 id: def-upper-and-lower-semicontinuous-envelopes
 kind: definition
 title: "Upper and lower semicontinuous envelopes by local limsup and liminf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-semicontinuity-on-euclidean-subsets, def-extended-reals, def-metric-topology, def-infimum, lem-extended-reals-complete]

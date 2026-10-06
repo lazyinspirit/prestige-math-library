@@ -2,7 +2,7 @@
 id: def-local-weak-solution-for-a-divergence-form-operator
 kind: definition
 title: "Local weak solutions of a divergence-form operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-uniformly-elliptic-divergence-form-operator, lem-elliptic-form-is-well-defined-and-bounded, def-wkp-zero-as-a-sobolev-closure, def-hk-and-hk-zero-notation, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-weak-dirichlet-solution-for-a-divergence-form-operator, def-countable-choice]

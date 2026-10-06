@@ -2,7 +2,7 @@
 id: lem-character-extension-from-a-closed-subgroup-of-an-lca-group
 kind: lemma
 title: Characters of a closed subgroup extend to the ambient LCA group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 19

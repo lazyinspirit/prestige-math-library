@@ -2,7 +2,7 @@
 id: lem-rational-k-z-n-calculation-through-weak-cw-fiber-comparison
 kind: lemma
 title: "Rational cohomology of K(Z,n) through weak CW fiber comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

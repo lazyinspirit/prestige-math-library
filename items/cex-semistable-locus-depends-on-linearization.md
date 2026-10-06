@@ -2,7 +2,7 @@
 id: cex-semistable-locus-depends-on-linearization
 kind: counterexample
 title: The semistable locus depends on the linearization, not only on the sheaf
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

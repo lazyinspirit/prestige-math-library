@@ -2,7 +2,7 @@
 id: lem-a-sphere-with-a-product-neighbourhood-can-be-moved-off-a-lower-dimensional-submanifold
 kind: lemma
 title: "Moving a sphere off a lower-dimensional submanifold"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-fundamental-theorem-on-flows, def-tubular-neighbourhood-of-an-embedded-submanifold, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold, prop-the-image-of-a-lower-dimensional-c1-manifold-is-null, prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold, lem-euclidean-bump-for-a-compact-set-inside-an-open-set, thm-compactly-supported-vector-fields-are-complete, def-local-and-global-flow, def-countable-choice]

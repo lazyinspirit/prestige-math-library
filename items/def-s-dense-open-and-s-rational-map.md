@@ -2,7 +2,7 @@
 id: def-s-dense-open-and-s-rational-map
 kind: definition
 title: "S-dense open subschemes and S-rational maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

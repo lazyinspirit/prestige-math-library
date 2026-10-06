@@ -2,7 +2,7 @@
 id: thm-holder-spaces-on-bounded-domains-are-banach-spaces
 kind: theorem
 title: The closure Hölder spaces are Banach spaces
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

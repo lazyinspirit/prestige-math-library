@@ -2,7 +2,7 @@
 id: prop-classical-solutions-are-viscosity-solutions
 kind: proposition
 title: Classical solutions are viscosity solutions and differentiable viscosity solutions solve the equation pointwise
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

@@ -2,7 +2,7 @@
 id: thm-shifted-character-basis-and-weight-filtration
 kind: theorem
 title: "The shifted character observables form a basis of $A$, with the Kerov weight filtration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

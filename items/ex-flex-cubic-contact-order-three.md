@@ -2,7 +2,7 @@
 id: ex-flex-cubic-contact-order-three
 kind: example
 title: A flex of a cubic has contact order three
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

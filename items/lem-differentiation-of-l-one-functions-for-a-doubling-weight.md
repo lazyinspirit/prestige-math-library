@@ -2,7 +2,7 @@
 id: lem-differentiation-of-l-one-functions-for-a-doubling-weight
 kind: lemma
 title: Differentiation of L-one functions for a doubling weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-a-contractible-relative-group-ring-complex-with-a-pi-one-isomorphism-gives-a-homotopy-equivalence
 kind: lemma
 title: "A contractible relative group-ring complex with a pi-one isomorphism detects a homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: lem-replacement-invariant-derived-enriched-mapping-spaces
 kind: lemma
 title: "Replacement-invariant derived enriched mapping spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

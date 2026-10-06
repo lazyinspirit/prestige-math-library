@@ -2,7 +2,7 @@
 id: thm-oleinik-one-sided-entropy-condition
 kind: theorem
 title: Oleinik's one-sided estimate characterizes bounded entropy solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

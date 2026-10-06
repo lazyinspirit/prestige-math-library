@@ -2,7 +2,7 @@
 id: def-completed-fourfold-graded-cohomology-ring
 kind: definition
 title: "The completed cohomology ring in degrees divisible by four"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

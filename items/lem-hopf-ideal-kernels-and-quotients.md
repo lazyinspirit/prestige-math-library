@@ -2,7 +2,7 @@
 id: lem-hopf-ideal-kernels-and-quotients
 kind: lemma
 title: Hopf ideals, kernels and quotients of commutative Hopf algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 1

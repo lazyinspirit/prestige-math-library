@@ -2,7 +2,7 @@
 id: lem-affine-etale-equivalence-relation-quotient
 kind: lemma
 title: "The quotient of an affine etale equivalence relation is an algebraic space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

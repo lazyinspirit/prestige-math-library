@@ -2,7 +2,7 @@
 id: lem-a-transitive-quasi-invariant-borel-g-space-is-ergodic
 kind: lemma
 title: A transitive Borel $G$-space with a quasi-invariant measure class is ergodic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

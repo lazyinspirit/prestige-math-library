@@ -2,7 +2,7 @@
 id: ex-source-sink-and-saddle-indices-on-a-surface
 kind: example
 title: "Source, sink and saddle indices on a surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

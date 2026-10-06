@@ -2,7 +2,7 @@
 id: lem-normal-pontryagin-class-is-the-rational-inverse-of-the-tangent-pontryagin-class
 kind: lemma
 title: "The normal Pontryagin class is the rational inverse of the tangent Pontryagin class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-stable-normal-inverse-of-the-tangent-bundle", "def-pontryagin-classes-by-complexification", "thm-pontryagin-whitney-product-away-from-two", "thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes", "lem-second-countable-smooth-manifolds-have-cw-homotopy-type", "def-singular-cohomology-ring", "def-axiom-of-choice", cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex, thm-homotopy-invariance-of-vector-bundle-pullback, thm-naturality-normalization-and-whitney-sum-for-chern-classes, thm-singular-cohomology-is-graded-commutative]

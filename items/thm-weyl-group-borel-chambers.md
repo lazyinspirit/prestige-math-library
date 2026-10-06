@@ -2,7 +2,7 @@
 id: thm-weyl-group-borel-chambers
 kind: theorem
 title: The Weyl group, Borel subgroups and chambers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 26

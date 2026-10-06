@@ -2,7 +2,7 @@
 id: rem-the-theta-seven-calculation-consumes-stable-stems-j-and-kervaire-milnor-arithmetic
 kind: remark
 title: "Scope of the finite Milnor-sphere calculation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

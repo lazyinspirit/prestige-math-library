@@ -2,7 +2,7 @@
 id: thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n
 kind: theorem
 title: "Sobolev embedding on bounded extension domains for $p<n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

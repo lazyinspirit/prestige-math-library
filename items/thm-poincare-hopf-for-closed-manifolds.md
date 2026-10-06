@@ -2,7 +2,7 @@
 id: thm-poincare-hopf-for-closed-manifolds
 kind: theorem
 title: "Poincare-Hopf for closed manifolds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

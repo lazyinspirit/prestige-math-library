@@ -1,7 +1,7 @@
 ---
 page: smooth-surgery-traces-and-handle-trading-examples
 title: Smooth Surgery Traces and Handle Trading — Examples
-status: draft
+status: published
 items: []
 examples: [ex-zero-surgery-on-the-circle, ex-surgery-on-s-p-times-s-q-produces-a-sphere-in-the-standard-framing, ex-one-surgery-on-a-three-manifold-as-framed-knot-surgery, cex-an-embedded-sphere-with-nontrivial-normal-bundle-is-not-valid-framed-surgery-data, cex-middle-dimensional-surgery-can-change-an-intersection-form]
 ---

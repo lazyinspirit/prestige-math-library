@@ -2,7 +2,7 @@
 id: lem-every-integer-degree-is-realized-by-a-map-to-the-sphere
 kind: lemma
 title: Every integer is realized by a map to the sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

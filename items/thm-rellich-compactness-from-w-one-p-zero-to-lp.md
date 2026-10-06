@@ -2,7 +2,7 @@
 id: thm-rellich-compactness-from-w-one-p-zero-to-lp
 kind: theorem
 title: "Compactness of $W^{1,p}_0(\\Omega)\\hookrightarrow L^p(\\Omega)$ on bounded open sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

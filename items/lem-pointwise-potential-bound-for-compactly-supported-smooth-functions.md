@@ -2,7 +2,7 @@
 id: lem-pointwise-potential-bound-for-compactly-supported-smooth-functions
 kind: lemma
 title: "Pointwise potential bound for compactly supported smooth functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

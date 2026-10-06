@@ -2,7 +2,7 @@
 id: def-local-fixed-point-index
 kind: definition
 title: "Isolated fixed point and local fixed point index"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

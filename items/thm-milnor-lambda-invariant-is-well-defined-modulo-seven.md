@@ -2,7 +2,7 @@
 id: thm-milnor-lambda-invariant-is-well-defined-modulo-seven
 kind: theorem
 title: "The Milnor lambda invariant is well defined modulo seven"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

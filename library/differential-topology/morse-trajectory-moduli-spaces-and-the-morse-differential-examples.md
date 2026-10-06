@@ -1,7 +1,7 @@
 ---
 page: morse-trajectory-moduli-spaces-and-the-morse-differential-examples
 title: "Morse Trajectory Moduli Spaces and the Morse Differential — Examples"
-status: draft
+status: published
 requires: [morse-trajectory-moduli-spaces-and-the-morse-differential]
 items: []
 examples: [ex-broken-trajectories-in-an-index-two-torus-moduli-space, ex-morse-complex-of-the-circle, ex-morse-complex-of-the-two-sphere, ex-changing-an-unstable-orientation-changes-two-basis-signs, cex-a-naive-signed-count-without-the-quotient-orientation-can-fail-d-squared-zero]

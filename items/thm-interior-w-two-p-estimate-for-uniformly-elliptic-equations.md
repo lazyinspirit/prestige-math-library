@@ -2,7 +2,7 @@
 id: thm-interior-w-two-p-estimate-for-uniformly-elliptic-equations
 kind: theorem
 title: Interior $W^{2,p}$ estimate for uniformly elliptic equations with continuous coefficients
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

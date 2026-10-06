@@ -2,7 +2,7 @@
 id: lem-arith-effective-ample-pair-and-group-descent
 kind: lemma
 title: "Effective ample-pair and group descent from a strict henselization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

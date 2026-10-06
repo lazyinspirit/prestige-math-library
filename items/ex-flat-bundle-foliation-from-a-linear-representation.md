@@ -2,7 +2,7 @@
 id: ex-flat-bundle-foliation-from-a-linear-representation
 kind: example
 title: "The flat-bundle foliation from a linear representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

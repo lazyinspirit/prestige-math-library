@@ -2,7 +2,7 @@
 id: cor-total-critical-point-lower-bound
 kind: corollary
 title: "Total critical point lower bound"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

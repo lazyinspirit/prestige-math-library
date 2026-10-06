@@ -2,7 +2,7 @@
 id: lem-surface-p-basis-subfield-separation
 kind: lemma
 title: "Surface p basis subfield separation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

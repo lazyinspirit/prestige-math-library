@@ -2,7 +2,7 @@
 id: cex-harnack-requires-nonnegativity
 kind: counterexample
 title: "The Harnack inequality requires nonnegativity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

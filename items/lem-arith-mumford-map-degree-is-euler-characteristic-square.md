@@ -2,7 +2,7 @@
 id: lem-arith-mumford-map-degree-is-euler-characteristic-square
 kind: lemma
 title: "The square degree of a Mumford map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

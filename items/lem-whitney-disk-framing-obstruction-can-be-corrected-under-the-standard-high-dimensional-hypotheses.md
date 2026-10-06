@@ -25,7 +25,7 @@ sources:
       Press 1965; scanned edition with searchable text layer)
     url: https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf
     locator: Lemma 6.13 and its proof, printed pp. 80-84 (direct construction of the frame fields along the disk)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

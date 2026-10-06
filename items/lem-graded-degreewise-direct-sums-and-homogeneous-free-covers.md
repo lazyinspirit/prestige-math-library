@@ -2,7 +2,7 @@
 id: lem-graded-degreewise-direct-sums-and-homogeneous-free-covers
 kind: lemma
 title: Degreewise direct sums and homogeneous free covers in graded modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-graded-ring-module-bimodule-and-internal-shift, def-direct-sum-of-a-family-of-modules, thm-universal-property-of-module-direct-sums, def-free-module-on-a-set-and-standard-basis, thm-universal-property-of-free-modules, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, def-module-homomorphism-kernel-image-and-cokernel, def-abelian-category]

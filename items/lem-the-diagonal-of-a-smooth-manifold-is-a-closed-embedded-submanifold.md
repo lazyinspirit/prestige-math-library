@@ -2,7 +2,7 @@
 id: lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold
 kind: lemma
 title: "The diagonal of a smooth manifold is a closed embedded submanifold"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 provenance:

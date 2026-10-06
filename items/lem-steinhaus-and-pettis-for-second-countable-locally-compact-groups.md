@@ -2,7 +2,7 @@
 id: lem-steinhaus-and-pettis-for-second-countable-locally-compact-groups
 kind: lemma
 title: "Steinhaus and Pettis: Borel homomorphisms of second-countable locally compact groups are continuous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-littlewood-richardson-product-s21-times-s1
 kind: example
 title: The product s(2,1)s(1) by Pieri
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

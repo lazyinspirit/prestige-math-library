@@ -2,7 +2,7 @@
 id: thm-comparison-for-autonomous-convex-superlinear-hamiltonians
 kind: theorem
 title: Comparison for autonomous convex superlinear Hamiltonians
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

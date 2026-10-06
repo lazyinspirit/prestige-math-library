@@ -2,7 +2,7 @@
 id: prop-a-framing-identifies-the-thom-target-with-a-sphere-smash-product
 kind: proposition
 title: "A framing identifies the Thom target with a sphere smash product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

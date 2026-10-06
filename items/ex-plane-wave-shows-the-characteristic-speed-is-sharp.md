@@ -2,7 +2,7 @@
 id: ex-plane-wave-shows-the-characteristic-speed-is-sharp
 kind: example
 title: "Plane-wave support translates at the characteristic speed"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-poincare-inequality-on-a-ball
 kind: theorem
 title: "Poincare inequality on a ball"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

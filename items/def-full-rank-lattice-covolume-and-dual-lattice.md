@@ -2,7 +2,7 @@
 id: def-full-rank-lattice-covolume-and-dual-lattice
 kind: definition
 title: "Full-rank lattices, covolume, and the dual lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

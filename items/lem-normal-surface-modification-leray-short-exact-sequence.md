@@ -2,7 +2,7 @@
 id: lem-normal-surface-modification-leray-short-exact-sequence
 kind: lemma
 title: "The Leray sequence for normal surface modifications"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

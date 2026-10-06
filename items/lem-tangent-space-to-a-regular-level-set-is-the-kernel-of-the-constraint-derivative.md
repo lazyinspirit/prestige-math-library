@@ -2,7 +2,7 @@
 id: "lem-tangent-space-to-a-regular-level-set-is-the-kernel-of-the-constraint-derivative"
 kind: "lemma"
 title: "The tangent space of a regular level set is the kernel of the constraint derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-the-second-homotopy-group-of-so-three-vanishes
 kind: lemma
 title: "The second homotopy group of SO(3) vanishes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-pi-three-so-three-generated-by-the-quaternion-double-cover, thm-lower-dimensional-sphere-maps-are-based-nullhomotopic, prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant, def-higher-homotopy-group-by-based-cubes, prop-cubical-and-spherical-models-of-higher-homotopy-agree, def-stiefel-space-grassmannian-and-tautological-bundle, def-cross-product-in-r3, lem-cross-product-is-bilinear-alternating-and-orthogonal]

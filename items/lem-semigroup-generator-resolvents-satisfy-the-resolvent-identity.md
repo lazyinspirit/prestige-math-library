@@ -2,7 +2,7 @@
 id: lem-semigroup-generator-resolvents-satisfy-the-resolvent-identity
 kind: lemma
 title: "Resolvent identity for closed operators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-split-rank-one-reductive-classification
 kind: theorem
 title: Classification of split reductive groups of semisimple rank one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 23

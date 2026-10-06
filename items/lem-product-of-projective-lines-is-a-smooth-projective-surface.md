@@ -2,7 +2,7 @@
 id: lem-product-of-projective-lines-is-a-smooth-projective-surface
 kind: lemma
 title: "The product of two projective lines is an integral smooth projective surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

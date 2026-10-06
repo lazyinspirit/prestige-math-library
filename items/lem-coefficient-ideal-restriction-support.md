@@ -2,7 +2,7 @@
 id: lem-coefficient-ideal-restriction-support
 kind: lemma
 title: The coefficient ideal controls the support after restriction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

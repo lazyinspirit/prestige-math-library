@@ -2,7 +2,7 @@
 id: lem-linfinity-bmo-functions-dualise-hone-boundedly
 kind: lemma
 title: "Bounded BMO functions dualise H1 boundedly"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

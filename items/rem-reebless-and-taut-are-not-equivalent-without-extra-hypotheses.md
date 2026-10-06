@@ -2,7 +2,7 @@
 id: rem-reebless-and-taut-are-not-equivalent-without-extra-hypotheses
 kind: remark
 title: Reeblessness and tautness are not equivalent without extra hypotheses
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

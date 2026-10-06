@@ -2,7 +2,7 @@
 id: lem-radix-two-even-odd-dft-factorisation
 kind: lemma
 title: "The radix-two even/odd factorisation of the DFT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

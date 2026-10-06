@@ -2,7 +2,7 @@
 id: lem-rational-surface-local-rings-propagate-by-point-sequence-spreading
 kind: lemma
 title: "Rationality propagates to birational local surface rings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

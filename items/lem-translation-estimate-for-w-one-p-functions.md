@@ -2,7 +2,7 @@
 id: lem-translation-estimate-for-w-one-p-functions
 kind: lemma
 title: "The translation estimate for $W^{1,p}$ functions on $\\mathbb R^n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

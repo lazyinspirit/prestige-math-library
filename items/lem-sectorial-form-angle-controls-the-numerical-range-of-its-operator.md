@@ -2,7 +2,7 @@
 id: lem-sectorial-form-angle-controls-the-numerical-range-of-its-operator
 kind: lemma
 title: The sectorial form angle controls the numerical range of its operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

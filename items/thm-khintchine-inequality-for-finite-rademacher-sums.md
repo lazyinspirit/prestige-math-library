@@ -2,7 +2,7 @@
 id: thm-khintchine-inequality-for-finite-rademacher-sums
 kind: theorem
 title: "Khintchine's inequality for finite Rademacher sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

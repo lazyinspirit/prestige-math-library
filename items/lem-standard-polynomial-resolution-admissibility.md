@@ -2,7 +2,7 @@
 id: lem-standard-polynomial-resolution-admissibility
 kind: lemma
 title: "The standard polynomial resolution has an augmentation contraction and is admissible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

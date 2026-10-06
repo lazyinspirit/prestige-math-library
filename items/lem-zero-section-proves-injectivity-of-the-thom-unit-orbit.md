@@ -2,7 +2,7 @@
 id: lem-zero-section-proves-injectivity-of-the-thom-unit-orbit
 kind: lemma
 title: "The zero section proves injectivity of the Thom unit orbit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

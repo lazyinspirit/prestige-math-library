@@ -2,7 +2,7 @@
 id: lem-slobodeckij-mollification-approximation-rates
 kind: lemma
 title: "Mollification rates for compactly supported Slobodeckij functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

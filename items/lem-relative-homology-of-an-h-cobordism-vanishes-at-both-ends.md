@@ -2,7 +2,7 @@
 id: lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends
 kind: lemma
 title: "Relative homology of an h-cobordism vanishes at both ends"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

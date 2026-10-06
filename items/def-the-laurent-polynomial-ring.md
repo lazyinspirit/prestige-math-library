@@ -2,7 +2,7 @@
 id: def-the-laurent-polynomial-ring
 kind: definition
 title: "The Laurent polynomial ring as the principal localisation of Z[t] at t"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

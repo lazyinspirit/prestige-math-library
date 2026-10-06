@@ -2,7 +2,7 @@
 id: def-uniformly-elliptic-nondivergence-operator
 kind: definition
 title: Uniformly elliptic nondivergence-form operators and their frozen coefficients
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: prop-morse-cancellation-criterion-via-a-unique-connecting-orbit
 kind: proposition
 title: "Morse cancellation criterion via a unique connecting orbit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

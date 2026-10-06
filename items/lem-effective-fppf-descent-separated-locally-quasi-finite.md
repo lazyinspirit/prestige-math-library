@@ -2,7 +2,7 @@
 id: lem-effective-fppf-descent-separated-locally-quasi-finite
 kind: lemma
 title: "Effective fppf descent for separated locally quasi-finite morphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

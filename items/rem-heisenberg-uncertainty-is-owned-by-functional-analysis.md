@@ -2,7 +2,7 @@
 id: rem-heisenberg-uncertainty-is-owned-by-functional-analysis
 kind: remark
 title: The sharp Heisenberg theorem is owned by functional analysis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

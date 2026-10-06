@@ -2,7 +2,7 @@
 id: def-algebraic-space-as-fppf-sheaf
 kind: definition
 title: "Algebraic spaces over a scheme, defined as fppf sheaves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

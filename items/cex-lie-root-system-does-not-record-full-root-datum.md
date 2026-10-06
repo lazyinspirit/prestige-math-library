@@ -2,7 +2,7 @@
 id: cex-lie-root-system-does-not-record-full-root-datum
 kind: counterexample
 title: The Lie algebra and root system do not determine the root datum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 28

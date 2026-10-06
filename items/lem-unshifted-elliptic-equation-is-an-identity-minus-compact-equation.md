@@ -2,7 +2,7 @@
 id: lem-unshifted-elliptic-equation-is-an-identity-minus-compact-equation
 kind: lemma
 title: "On bounded domains, the unshifted equation is an identity-minus-compact equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: def-good-reduction-and-abelian-scheme-model
 kind: definition
 title: "Good reduction of an abelian variety over a Dedekind scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

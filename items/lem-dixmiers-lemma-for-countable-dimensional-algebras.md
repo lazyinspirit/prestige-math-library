@@ -2,7 +2,7 @@
 id: lem-dixmiers-lemma-for-countable-dimensional-algebras
 kind: lemma
 title: "Dixmier's lemma: endomorphisms of a simple module over a countable-dimensional algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

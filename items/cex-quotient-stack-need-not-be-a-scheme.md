@@ -2,7 +2,7 @@
 id: cex-quotient-stack-need-not-be-a-scheme
 kind: counterexample
 title: "A quotient stack need not be a scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

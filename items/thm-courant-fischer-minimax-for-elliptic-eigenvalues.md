@@ -2,7 +2,7 @@
 id: thm-courant-fischer-minimax-for-elliptic-eigenvalues
 kind: theorem
 title: "The Courant-Fischer min-max principle for elliptic eigenvalues"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

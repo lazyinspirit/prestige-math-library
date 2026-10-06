@@ -2,7 +2,7 @@
 id: lem-compact-leaf-control-and-compact-ambientness-give-the-required-closedness
 kind: lemma
 title: Closedness of compact leaves diffeomorphic to a finite-fundamental-group leaf
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

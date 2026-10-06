@@ -1,7 +1,7 @@
 ---
 page: the-direct-method-and-euler-lagrange-equations-examples
 title: "The Direct Method and Euler--Lagrange Equations — Examples"
-status: draft
+status: published
 items: []
 examples: ["cex-nonstrict-convexity-allows-many-minimisers", "cex-a-coercive-functional-need-not-attain-without-weak-lower-semicontinuity", "cex-a-minimising-sequence-need-not-converge-strongly", "cex-a-norm-closed-nonconvex-set-need-not-be-weakly-closed", "cex-euler-lagrange-stationarity-does-not-imply-a-minimum", "ex-one-dimensional-euler-lagrange-equation", "cex-nonconvex-gradient-energy-can-lose-weak-lower-semicontinuity", "ex-natural-neumann-condition-from-a-free-endpoint", "ex-dirichlet-energy-with-affine-boundary-data", "ex-fixed-trace-and-free-trace-variations-give-different-boundary-equations"]
 ---

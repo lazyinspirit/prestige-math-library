@@ -1,7 +1,7 @@
 ---
 page: sobolev-poincare-and-morrey-inequalities-examples
 title: "Sobolev Poincare and Morrey Inequalities — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-scaling-for-the-sobolev-conjugate", "ex-poincare-on-an-interval-with-sharp-scaling", "cex-poincare-wirtinger-needs-connectedness", "cex-poincare-without-mean-trace-or-zero-set-normalisation-fails", "cex-w-one-p-to-lq-bound-fails-for-q-greater-than-p-star-by-dilation", "cex-critical-w-one-n-does-not-embed-in-linfinity", "cex-morrey-endpoint-p-equals-n-fails", "ex-holder-representative-of-a-radial-sobolev-function", "cex-sobolev-embedding-on-an-unbounded-domain-needs-the-full-norm-or-decay"]
 ---

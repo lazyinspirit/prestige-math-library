@@ -2,7 +2,7 @@
 id: cor-spectral-gap-gives-exponential-decay-of-a-self-adjoint-parabolic-semigroup
 kind: corollary
 title: Quadratic spectral bounds control a self-adjoint parabolic semigroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 14

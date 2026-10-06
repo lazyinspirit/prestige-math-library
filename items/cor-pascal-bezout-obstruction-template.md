@@ -2,7 +2,7 @@
 id: cor-pascal-bezout-obstruction-template
 kind: corollary
 title: The component-counting obstruction template for incidence arguments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: cex-h-two-estimate-needs-an-ltwo-kernel-term-without-injectivity
 kind: counterexample
 title: "The $H^2$ estimate needs the $L^2$ kernel term without injectivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 14

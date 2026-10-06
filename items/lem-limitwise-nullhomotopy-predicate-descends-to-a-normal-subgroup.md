@@ -2,7 +2,7 @@
 id: lem-limitwise-nullhomotopy-predicate-descends-to-a-normal-subgroup
 kind: lemma
 title: "Limitwise-nullhomotopy predicate descends to a normal subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

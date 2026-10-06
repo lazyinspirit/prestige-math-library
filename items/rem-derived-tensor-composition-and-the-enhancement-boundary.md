@@ -2,7 +2,7 @@
 id: rem-derived-tensor-composition-and-the-enhancement-boundary
 kind: remark
 title: Derived tensor composition and the enhancement boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility, thm-inverse-bimodule-complexes-give-derived-tensor-equivalences, def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization, def-graded-ring-module-bimodule-and-internal-shift, lem-graded-balanced-tensor-and-shift-isomorphisms]

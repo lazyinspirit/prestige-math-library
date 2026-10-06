@@ -2,7 +2,7 @@
 id: lem-koszul-resolution-and-flat-fibre-restriction
 kind: lemma
 title: "Koszul resolutions and restriction to flat fibres"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

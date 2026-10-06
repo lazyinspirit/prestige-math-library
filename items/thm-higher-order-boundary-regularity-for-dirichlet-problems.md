@@ -2,7 +2,7 @@
 id: thm-higher-order-boundary-regularity-for-dirichlet-problems
 kind: theorem
 title: "Higher-order boundary regularity for Dirichlet problems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

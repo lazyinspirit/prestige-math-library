@@ -2,7 +2,7 @@
 id: def-foliation-tangent-to-the-boundary-of-a-manifold-with-boundary
 kind: definition
 title: "Smooth foliations tangent to the boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

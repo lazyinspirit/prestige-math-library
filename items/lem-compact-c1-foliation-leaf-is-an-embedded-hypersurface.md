@@ -2,7 +2,7 @@
 id: lem-compact-c1-foliation-leaf-is-an-embedded-hypersurface
 kind: lemma
 title: "A compact C¹ foliation leaf is an embedded hypersurface"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-subcomodules-contain-elements
 kind: lemma
 title: Every element of a comodule lies in a finite-dimensional subcomodule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 3

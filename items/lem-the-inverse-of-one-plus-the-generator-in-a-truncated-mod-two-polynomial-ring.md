@@ -2,7 +2,7 @@
 id: lem-the-inverse-of-one-plus-the-generator-in-a-truncated-mod-two-polynomial-ring
 kind: lemma
 title: "The inverse of one plus the generator in the truncated mod-two polynomial ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-polynomial-ring-over-a-commutative-ring", "def-polynomial-degree-leading-coefficient-and-monic", "def-quotient-ring", "thm-quotient-ring-multiplication-well-defined-iff-ideal", "thm-monic-polynomial-division", "lem-binomial-series-for-a-repeated-pole", "lem-binomial-coefficients-symmetric-and-unimodal", "def-formal-power-series-and-coefficient-extraction", "def-integers-modulo-n", "thm-z-mod-p-is-a-field", "def-binomial-coefficient"]

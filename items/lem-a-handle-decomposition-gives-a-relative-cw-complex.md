@@ -2,7 +2,7 @@
 id: lem-a-handle-decomposition-gives-a-relative-cw-complex
 kind: lemma
 title: "A handle decomposition gives a relative CW complex"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-handle-decomposition-relative-to-the-incoming-boundary, lem-handle-attachments-are-relative-cell-attachments-up-to-homotopy, def-cell-attachment-by-a-characteristic-map, def-skeleta-cw-subcomplex-and-relative-cw-complex, prop-relative-cw-inclusions-are-cofibrations, def-cofibration-and-homotopy-extension-property, thm-cellular-approximation-for-maps-of-cw-pairs, thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms, thm-morse-functions-and-handle-decompositions-correspond, thm-mapping-cylinder-factorization, lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts, lem-pushouts-and-products-preserve-the-cofibrations-used-here]

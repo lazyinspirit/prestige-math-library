@@ -2,7 +2,7 @@
 id: "def-degree-one-normal-map-for-the-surgery-program"
 kind: "definition"
 title: "Degree-one normal map for the surgery program"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

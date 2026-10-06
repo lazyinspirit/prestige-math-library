@@ -2,7 +2,7 @@
 id: def-weak-compact-open-smooth-topology-on-mapping-spaces
 kind: definition
 title: "The weak compact-open C-infinity topology on mapping spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-smooth-manifold, def-c-r-and-smooth-maps-between-smooth-manifolds, def-topology-basis-subbasis, def-continuous-map-top, def-compact-open-topology, def-metrizable-space, def-compact-space, thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure, def-countable-choice]

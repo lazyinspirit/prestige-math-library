@@ -2,7 +2,7 @@
 id: lem-arith-dual-isogeny-kernel-and-abelian-biduality
 kind: lemma
 title: "Dual isogenies, Cartier-dual kernels and canonical biduality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

@@ -2,7 +2,7 @@
 id: lem-the-reduced-burau-module-is-free-of-rank-n-minus-one
 kind: lemma
 title: "The reduced Burau module is free of rank n minus one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

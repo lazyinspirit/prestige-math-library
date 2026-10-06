@@ -18,7 +18,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-status: draft
+status: published
 origin: pipeline
 verification:
   judge:

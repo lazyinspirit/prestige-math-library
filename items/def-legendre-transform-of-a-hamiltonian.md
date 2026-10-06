@@ -2,7 +2,7 @@
 id: def-legendre-transform-of-a-hamiltonian
 kind: definition
 title: The Legendre transform of a finite-valued convex Hamiltonian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

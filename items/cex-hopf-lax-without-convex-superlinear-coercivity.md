@@ -2,7 +2,7 @@
 id: cex-hopf-lax-without-convex-superlinear-coercivity
 kind: counterexample
 title: Nonconvexity can break the equation; nonsuperlinearity can limit the Lagrangian domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

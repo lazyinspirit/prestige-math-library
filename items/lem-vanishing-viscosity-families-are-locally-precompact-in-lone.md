@@ -2,7 +2,7 @@
 id: lem-vanishing-viscosity-families-are-locally-precompact-in-lone
 kind: lemma
 title: Vanishing-viscosity families are locally precompact in $L^1$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

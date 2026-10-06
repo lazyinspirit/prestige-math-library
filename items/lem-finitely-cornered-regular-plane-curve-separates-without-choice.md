@@ -2,7 +2,7 @@
 id: lem-finitely-cornered-regular-plane-curve-separates-without-choice
 kind: lemma
 title: "A finitely cornered regular plane curve separates without choice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

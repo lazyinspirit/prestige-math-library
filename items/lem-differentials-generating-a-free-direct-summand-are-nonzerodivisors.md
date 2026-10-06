@@ -2,7 +2,7 @@
 id: lem-differentials-generating-a-free-direct-summand-are-nonzerodivisors
 kind: lemma
 title: "Nonzerodivisors from free differential summands in Noetherian local Q-algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["def-derivation-algebra", "def-kahler-differentials-algebra", "thm-krull-intersection-theorem", "def-local-ring", "def-noetherian-ring", "def-axiom-of-choice", "thm-local-ring-unit-characterisations", "def-jacobson-radical-of-a-ring"]

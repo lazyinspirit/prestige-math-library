@@ -2,7 +2,7 @@
 id: lem-hardy-subcritical-gaussians-show-the-threshold-is-sharp
 kind: lemma
 title: 'Subcritical Gaussians show the Hardy threshold $ab=1$ is sharp'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

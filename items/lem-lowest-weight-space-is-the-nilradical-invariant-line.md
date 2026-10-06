@@ -2,7 +2,7 @@
 id: lem-lowest-weight-space-is-the-nilradical-invariant-line
 kind: lemma
 title: The lowest weight space is the nilradical-invariant line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

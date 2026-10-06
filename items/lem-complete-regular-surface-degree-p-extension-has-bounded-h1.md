@@ -2,7 +2,7 @@
 id: lem-complete-regular-surface-degree-p-extension-has-bounded-h1
 kind: lemma
 title: "Degree-p inseparable extensions of complete regular surfaces have bounded H1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 13

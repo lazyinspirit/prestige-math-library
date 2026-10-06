@@ -2,7 +2,7 @@
 id: def-limit-of-a-gm-orbit-and-concentrator-subscheme
 kind: definition
 title: Limits of one-parameter orbits and concentrator subschemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

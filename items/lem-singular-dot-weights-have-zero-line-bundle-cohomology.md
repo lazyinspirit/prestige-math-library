@@ -2,7 +2,7 @@
 id: lem-singular-dot-weights-have-zero-line-bundle-cohomology
 kind: lemma
 title: Singular dot weights have zero line-bundle cohomology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

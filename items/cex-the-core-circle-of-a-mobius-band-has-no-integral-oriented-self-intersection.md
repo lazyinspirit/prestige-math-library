@@ -2,7 +2,7 @@
 id: cex-the-core-circle-of-a-mobius-band-has-no-integral-oriented-self-intersection
 kind: counterexample
 title: "The Mobius core circle has no integral oriented self-intersection but mod two data survives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [prop-mod-two-self-intersection-needs-no-orientation, def-self-intersection-number-of-an-oriented-submanifold, lem-normal-push-off-zeros-are-self-intersection-points, def-mod-two-intersection-number, thm-mod-two-euler-class-is-the-top-stiefel-whitney-class, prop-first-stiefel-whitney-class-classifies-orientability, def-stiefel-whitney-classes-from-the-projective-bundle-relation, def-real-projective-bundle-and-tautological-line, def-tautological-degree-one-class-on-a-real-projective-bundle, lem-tautological-degree-one-class-is-well-defined-and-fiber-generating, lem-mod-two-cohomology-ring-of-infinite-real-projective-space, def-circle-as-real-line-mod-integers, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, def-vector-bundle-chart-and-transition-function, thm-self-intersection-is-the-euler-number-of-the-normal-bundle, def-axiom-of-choice]

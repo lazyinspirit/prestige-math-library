@@ -2,7 +2,7 @@
 id: lem-john-nirenberg-stopping-cubes-have-geometric-decay
 kind: lemma
 title: "John-Nirenberg stopping cubes have geometric decay"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

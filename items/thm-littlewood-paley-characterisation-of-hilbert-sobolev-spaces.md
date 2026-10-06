@@ -2,7 +2,7 @@
 id: thm-littlewood-paley-characterisation-of-hilbert-sobolev-spaces
 kind: theorem
 title: "Littlewood-Paley characterisation of the Hilbert-Sobolev spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

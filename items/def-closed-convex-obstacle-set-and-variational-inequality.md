@@ -2,7 +2,7 @@
 id: "def-closed-convex-obstacle-set-and-variational-inequality"
 kind: "definition"
 title: "The closed convex obstacle set and the obstacle variational inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 7

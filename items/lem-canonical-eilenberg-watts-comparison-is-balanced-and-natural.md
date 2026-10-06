@@ -2,7 +2,7 @@
 id: lem-canonical-eilenberg-watts-comparison-is-balanced-and-natural
 kind: lemma
 title: "The canonical comparison to the tensor functor of $F(A)$ is balanced and natural"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

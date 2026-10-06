@@ -11,7 +11,7 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
-status: draft
+status: published
 origin: pipeline
 verification:
   judge:

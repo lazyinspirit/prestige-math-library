@@ -2,7 +2,7 @@
 id: lem-signature-is-additive-under-disjoint-union-and-orientation-reversal
 kind: lemma
 title: "The signature is additive under disjoint union and negates under orientation reversal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

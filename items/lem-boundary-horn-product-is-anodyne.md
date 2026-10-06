@@ -2,7 +2,7 @@
 id: lem-boundary-horn-product-is-anodyne
 kind: lemma
 title: "The boundary and horn product has a finite horn attachment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: cor-lefschetz-number-is-homotopy-invariant
 kind: corollary
 title: The Lefschetz number is a homotopy invariant
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

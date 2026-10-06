@@ -2,7 +2,7 @@
 id: thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one
 kind: theorem
 title: "The difference-quotient characterisation of $W^{1,p}$ for $1<p<\\infty$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-first-difference-quotient, lem-difference-quotient-integration-by-parts, lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative, def-sobolev-space-wkp-and-its-norm, def-conjugate-exponents, thm-dominated-convergence, def-countable-choice, thm-meyers-serrin-density-on-an-arbitrary-open-set, thm-jensens-integral-inequality, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, cor-c-one-change-of-variables-for-l-one-functions, thm-ftc-second-part, thm-chain-rule-for-total-derivatives, def-weak-derivative-of-a-locally-integrable-function, def-hk-and-hk-zero-notation, def-l-p-space-as-a-quotient-by-null-functions, thm-holder-inequality-for-integrals, thm-minkowski-inequality-for-integrals, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity]

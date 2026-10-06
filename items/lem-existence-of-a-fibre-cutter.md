@@ -2,7 +2,7 @@
 id: lem-existence-of-a-fibre-cutter
 kind: lemma
 title: A function cutting the components of a special fibre
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

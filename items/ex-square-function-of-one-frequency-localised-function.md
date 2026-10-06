@@ -2,7 +2,7 @@
 id: ex-square-function-of-one-frequency-localised-function
 kind: example
 title: "The square function of a low-frequency-localised function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

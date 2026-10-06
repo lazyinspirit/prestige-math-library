@@ -2,7 +2,7 @@
 id: ex-an-open-parallelizable-manifold-immerses-in-euclidean-space-of-equal-dimension
 kind: example
 title: "An open parallelizable manifold immerses in Euclidean space of equal dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-smale-hirsch-for-open-source-manifolds, rem-a-closed-n-manifold-cannot-immerse-in-r-n, def-formal-immersion-between-smooth-manifolds, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, def-local-frame-and-global-frame-of-a-vector-bundle, cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame, def-countable-choice]

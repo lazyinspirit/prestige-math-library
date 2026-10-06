@@ -2,7 +2,7 @@
 id: lem-opposite-rouquier-generator-complexes-are-homotopy-inverse
 kind: lemma
 title: "Opposite Rouquier generator complexes are homotopy inverse"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

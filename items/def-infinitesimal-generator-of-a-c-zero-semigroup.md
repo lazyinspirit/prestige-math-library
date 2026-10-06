@@ -2,7 +2,7 @@
 id: def-infinitesimal-generator-of-a-c-zero-semigroup
 kind: definition
 title: "Infinitesimal generator of a C0-semigroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

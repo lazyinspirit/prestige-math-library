@@ -2,7 +2,7 @@
 id: def-smooth-foliated-concordance
 kind: definition
 title: "Smooth foliated concordance of codimension-one foliations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

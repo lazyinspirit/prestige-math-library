@@ -2,7 +2,7 @@
 id: ex-plancherel-measure-on-partitions-of-three
 kind: example
 title: "The Plancherel measure on partitions of three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

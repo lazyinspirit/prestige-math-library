@@ -2,7 +2,7 @@
 id: rem-a-closed-n-manifold-cannot-immerse-in-r-n
 kind: remark
 title: "A nonempty closed n-manifold cannot immerse in R-n for n at least one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-immersion-submersion-and-constant-rank-map, cor-local-normal-form-for-immersions, def-diffeomorphism-and-local-diffeomorphism-of-manifolds, cor-rn-is-polygonally-connected-and-locally-path-connected, def-smooth-manifold, thm-continuous-image-of-a-compact-space-is-compact, thm-compact-subset-of-a-hausdorff-space-is-closed, def-connected-space, def-topological-manifold-without-boundary, def-compact-space, lem-compactness-of-a-subspace-is-ambient]

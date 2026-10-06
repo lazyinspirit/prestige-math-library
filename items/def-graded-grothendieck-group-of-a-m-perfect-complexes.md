@@ -2,7 +2,7 @@
 id: def-graded-grothendieck-group-of-a-m-perfect-complexes
 kind: definition
 title: "The graded Grothendieck group of A_m"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

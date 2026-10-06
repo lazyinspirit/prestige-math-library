@@ -2,7 +2,7 @@
 id: lem-lefschetz-numbers-of-the-two-lifts-sum-to-twice-the-base-lefschetz-number
 kind: lemma
 title: "The Lefschetz numbers of the two lifts sum to twice the base Lefschetz number"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

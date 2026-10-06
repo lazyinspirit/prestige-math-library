@@ -2,7 +2,7 @@
 id: cex-bmo-functions-need-not-be-globally-integrable
 kind: counterexample
 title: "A BMO function need not be globally integrable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

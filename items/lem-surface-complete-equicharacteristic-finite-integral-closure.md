@@ -2,7 +2,7 @@
 id: lem-surface-complete-equicharacteristic-finite-integral-closure
 kind: lemma
 title: "Surface complete equicharacteristic finite integral closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

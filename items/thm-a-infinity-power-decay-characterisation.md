@@ -2,7 +2,7 @@
 id: thm-a-infinity-power-decay-characterisation
 kind: theorem
 title: The A_infinity power-decay characterisation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

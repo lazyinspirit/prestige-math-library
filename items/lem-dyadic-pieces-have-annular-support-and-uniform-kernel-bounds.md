@@ -2,7 +2,7 @@
 id: lem-dyadic-pieces-have-annular-support-and-uniform-kernel-bounds
 kind: lemma
 title: "Dyadic pieces have annular Fourier support and uniformly bounded rescaled kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

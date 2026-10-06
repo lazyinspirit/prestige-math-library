@@ -2,7 +2,7 @@
 id: lem-bmo-functions-pair-uniformly-with-hone-atoms
 kind: lemma
 title: "BMO functions pair uniformly with H1 atoms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

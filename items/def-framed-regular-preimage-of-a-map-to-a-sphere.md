@@ -2,7 +2,7 @@
 id: def-framed-regular-preimage-of-a-map-to-a-sphere
 kind: definition
 title: "Framed regular preimages of a map to a sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

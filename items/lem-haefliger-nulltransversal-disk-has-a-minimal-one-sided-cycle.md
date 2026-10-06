@@ -2,7 +2,7 @@
 id: lem-haefliger-nulltransversal-disk-has-a-minimal-one-sided-cycle
 kind: lemma
 title: "A null-transversal disk has a minimal one-sided cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

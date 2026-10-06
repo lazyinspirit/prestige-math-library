@@ -2,7 +2,7 @@
 id: lem-cartan-subgroups-conjugacy-and-density
 kind: lemma
 title: "Cartan subgroups: conjugacy, density and normalizers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 15

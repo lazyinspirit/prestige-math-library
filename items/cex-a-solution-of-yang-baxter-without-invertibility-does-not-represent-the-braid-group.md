@@ -2,7 +2,7 @@
 id: cex-a-solution-of-yang-baxter-without-invertibility-does-not-represent-the-braid-group
 kind: counterexample
 title: "A non-invertible solution of the Yang–Baxter equation does not represent the braid group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

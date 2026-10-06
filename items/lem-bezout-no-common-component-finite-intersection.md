@@ -2,7 +2,7 @@
 id: lem-bezout-no-common-component-finite-intersection
 kind: lemma
 title: Curves without a common component meet finitely often
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: cor-milnor-homotopy-seven-spheres-are-homeomorphic-to-s-seven
 kind: corollary
 title: "The Milnor homotopy seven-spheres are homeomorphic to $S^7$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

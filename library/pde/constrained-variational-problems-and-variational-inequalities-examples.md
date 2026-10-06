@@ -1,7 +1,7 @@
 ---
 page: constrained-variational-problems-and-variational-inequalities-examples
 title: "Constrained Variational Problems and Variational Inequalities — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-rayleigh-quotient-on-an-interval", "ex-isoperimetric-integral-constraint-and-its-multiplier", "cex-the-ltwo-unit-sphere-is-not-weakly-closed-in-an-infinite-dimensional-hilbert-space", "ex-one-dimensional-obstacle-problem-and-contact-set", "cex-obstacle-complementarity-product-needs-extra-regularity", "cex-obstacle-admissible-set-can-be-empty-when-trace-and-obstacle-are-incompatible", "cex-dependent-equality-constraints-have-nonunique-multiplier-vectors", "ex-one-dimensional-obstacle-reaction-is-supported-on-the-contact-set"]
 ---

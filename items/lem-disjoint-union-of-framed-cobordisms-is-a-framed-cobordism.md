@@ -2,7 +2,7 @@
 id: lem-disjoint-union-of-framed-cobordisms-is-a-framed-cobordism
 kind: lemma
 title: "Disjoint unions of framed cobordisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

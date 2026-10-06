@@ -2,7 +2,7 @@
 id: def-one-variable-alexander-module-of-an-oriented-link
 kind: definition
 title: "The one-variable Alexander module of an oriented link"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

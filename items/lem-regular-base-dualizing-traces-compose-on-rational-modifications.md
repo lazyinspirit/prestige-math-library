@@ -2,7 +2,7 @@
 id: lem-regular-base-dualizing-traces-compose-on-rational-modifications
 kind: lemma
 title: Dualizing traces compose and become isomorphisms on rational modifications
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

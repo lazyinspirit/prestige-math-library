@@ -2,7 +2,7 @@
 id: ex-two-morse-functions-on-the-circle-have-isomorphic-morse-homology
 kind: example
 title: "Two Morse functions on the circle have isomorphic Morse homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

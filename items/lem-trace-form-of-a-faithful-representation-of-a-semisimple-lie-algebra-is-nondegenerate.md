@@ -2,7 +2,7 @@
 id: lem-trace-form-of-a-faithful-representation-of-a-semisimple-lie-algebra-is-nondegenerate
 kind: lemma
 title: "Trace forms of faithful representations of semisimple Lie algebras are nondegenerate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

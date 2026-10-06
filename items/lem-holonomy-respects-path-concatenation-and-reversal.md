@@ -2,7 +2,7 @@
 id: lem-holonomy-respects-path-concatenation-and-reversal
 kind: lemma
 title: "Holonomy respects path concatenation and reversal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

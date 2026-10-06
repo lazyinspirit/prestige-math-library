@@ -2,7 +2,7 @@
 id: thm-markings-do-not-change-the-khovanov-rozansky-complex
 kind: theorem
 title: "Markings do not change the Khovanov-Rozansky complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

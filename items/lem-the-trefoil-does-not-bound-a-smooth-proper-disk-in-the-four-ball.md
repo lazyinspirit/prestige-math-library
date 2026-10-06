@@ -24,7 +24,7 @@ sources:
     locator: Theorem 2 and the trefoil nonsliceness discussion motivate these local adapters; the proofs below use
       elementary double-cover homology and duality, not an imported Fox–Milnor factorization theorem. No personal
       rereading of this source is claimed in this pass.
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

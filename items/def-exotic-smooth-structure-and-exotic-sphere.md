@@ -2,7 +2,7 @@
 id: def-exotic-smooth-structure-and-exotic-sphere
 kind: definition
 title: "Exotic smooth structure and exotic sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

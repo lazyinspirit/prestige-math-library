@@ -2,7 +2,7 @@
 id: lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic
 kind: lemma
 title: "Uniformly supported families have vanishing tails"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

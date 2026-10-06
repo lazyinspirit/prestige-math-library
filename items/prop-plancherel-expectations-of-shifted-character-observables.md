@@ -2,7 +2,7 @@
 id: prop-plancherel-expectations-of-shifted-character-observables
 kind: proposition
 title: "Plancherel expectations of the shifted character observables"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

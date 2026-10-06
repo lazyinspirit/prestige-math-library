@@ -2,7 +2,7 @@
 id: lem-borel-root-group-opposition
 kind: lemma
 title: Borel subgroups and the opposition of root groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 25

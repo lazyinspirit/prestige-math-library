@@ -2,7 +2,7 @@
 id: def-khovanov-seidel-path-ideal
 kind: definition
 title: "The Khovanov-Seidel path ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

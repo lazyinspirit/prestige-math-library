@@ -2,7 +2,7 @@
 id: "lem-embedding-independence-of-desingularization"
 kind: "lemma"
 title: "Independence of the embedded desingularization from the ambient embedding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 18

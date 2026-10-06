@@ -2,7 +2,7 @@
 id: lem-finite-boundary-and-interior-partition-glues-local-h-two-estimates
 kind: lemma
 title: "A finite partition glues the local interior and boundary $H^2$ estimates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

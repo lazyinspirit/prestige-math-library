@@ -2,7 +2,7 @@
 id: rem-sphere-immersion-groups-are-at-computations-not-dt-constructions
 kind: remark
 title: "The sphere immersion groups are algebraic-topology computations, not differential-topology constructions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension, lem-the-second-homotopy-group-of-so-three-vanishes, thm-smale-classification-of-sphere-immersions-in-euclidean-space, def-higher-homotopy-group-by-based-cubes, lem-formal-immersions-of-the-circle-in-the-plane-are-classified-by-the-winding-number]

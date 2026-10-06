@@ -1,7 +1,7 @@
 ---
 page: plancherel-measure-and-asymptotic-young-diagrams-examples
 title: "Plancherel Measure and Asymptotic Young Diagrams — Examples"
-status: draft
+status: published
 requires: [plancherel-measure-and-asymptotic-young-diagrams]
 items: []
 examples:

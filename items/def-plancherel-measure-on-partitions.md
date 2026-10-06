@@ -2,7 +2,7 @@
 id: def-plancherel-measure-on-partitions
 kind: definition
 title: "The Plancherel measure on the partitions of $n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-partition-young-diagram-and-conjugate-partition, def-factorial-and-falling-factorial, thm-standard-polytabloid-basis, thm-hook-length-formula]

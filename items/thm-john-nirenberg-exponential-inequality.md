@@ -2,7 +2,7 @@
 id: thm-john-nirenberg-exponential-inequality
 kind: theorem
 title: "John-Nirenberg exponential inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

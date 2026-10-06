@@ -2,7 +2,7 @@
 id: prop-mod-two-self-intersection-needs-no-orientation
 kind: proposition
 title: "The mod two self-intersection is the top Stiefel-Whitney evaluation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual, lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold, lem-normal-bundle-of-the-zero-locus-of-a-transverse-section, lem-pullback-of-the-thom-class-along-a-transverse-section, thm-mod-two-euler-class-is-the-top-stiefel-whitney-class, def-stiefel-whitney-classes-from-the-projective-bundle-relation, prop-first-stiefel-whitney-class-classifies-orientability, thm-naturality-of-stiefel-whitney-classes, thm-whitney-sum-formula-for-stiefel-whitney-classes, def-r-oriented-vector-bundle-and-orientation-local-system, def-mod-two-intersection-number, thm-mod-two-intersection-number-is-homotopy-invariant, def-self-intersection-number-of-an-oriented-submanifold, lem-normal-push-off-zeros-are-self-intersection-points, def-euler-class-by-zero-section-pullback-of-the-thom-class, def-axiom-of-choice, def-fundamental-class-of-a-compact-oriented-manifold, lem-second-countable-smooth-manifolds-have-cw-homotopy-type]

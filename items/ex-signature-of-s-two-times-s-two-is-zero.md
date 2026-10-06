@@ -2,7 +2,7 @@
 id: ex-signature-of-s-two-times-s-two-is-zero
 kind: example
 title: "The signature of the product of two 2-spheres is zero: the hyperbolic intersection form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

@@ -1,7 +1,7 @@
 ---
 page: categorical-braid-actions-and-decategorification-examples
 title: "Categorical Braid Actions and Decategorification — Examples"
-status: draft
+status: published
 requires: [categorical-braid-actions-and-decategorification]
 items: []
 examples: [cex-ks-weak-actions-do-not-supply-pentagon-coherence-data,

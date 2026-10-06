@@ -1,7 +1,7 @@
 ---
 page: tensor-product-multiplicities-and-littlewood-richardson-examples
 title: Tensor Product Multiplicities and Littlewood Richardson — Examples
-status: draft
+status: published
 requires: [tensor-product-multiplicities-and-littlewood-richardson]
 items: []
 examples:

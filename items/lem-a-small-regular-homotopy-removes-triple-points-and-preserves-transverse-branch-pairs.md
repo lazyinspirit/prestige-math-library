@@ -29,7 +29,7 @@ sources:
       finite branch-preserving proof supplied here
     url: https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro
 justified_by: []
-status: draft
+status: published
 origin: session
 proof_strategy: direct
 dependency_level: 4

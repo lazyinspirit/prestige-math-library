@@ -2,7 +2,7 @@
 id: lem-local-generalized-poincare-bendixson-for-a-precompact-planar-orbit
 kind: lemma
 title: "Local generalized Poincare-Bendixson theorem for a precompact planar orbit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

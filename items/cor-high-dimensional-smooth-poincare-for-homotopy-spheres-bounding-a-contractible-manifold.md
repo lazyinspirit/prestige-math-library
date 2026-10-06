@@ -2,7 +2,7 @@
 id: cor-high-dimensional-smooth-poincare-for-homotopy-spheres-bounding-a-contractible-manifold
 kind: corollary
 title: Homotopy spheres of dimension at least five bounding a contractible manifold are standard spheres
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 19

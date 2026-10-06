@@ -2,7 +2,7 @@
 id: lem-regular-base-surface-cartier-curve-canonical-adjunction
 kind: lemma
 title: "Canonical adjunction for a Cartier fibre curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

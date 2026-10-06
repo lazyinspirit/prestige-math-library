@@ -2,7 +2,7 @@
 id: lem-stiefel-whitney-classes-of-the-tangent-bundle-of-real-projective-space
 kind: lemma
 title: "Stiefel-Whitney classes of the tangent bundle of real projective space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-real-projective-bundle-and-tautological-line", "def-tautological-degree-one-class-on-a-real-projective-bundle", "thm-mod-two-real-projective-bundle-theorem", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "thm-numerable-vector-bundles-admit-bundle-metrics", "cor-short-exact-sequences-of-vector-bundles-split-over-the-base", "prop-orthogonal-complements-of-subbundles-are-smooth-subbundles", "ex-real-projective-space-from-affine-charts", "def-c-r-and-smooth-maps-between-smooth-manifolds", "def-immersion-submersion-and-constant-rank-map", "cor-every-tangent-vector-is-the-velocity-of-a-smooth-curve", "def-induced-tangent-bundle-chart", "thm-coordinate-derivations-form-a-basis-of-the-tangent-space", "def-velocity-derivation-of-a-smooth-curve", "lem-second-countable-smooth-manifolds-have-cw-homotopy-type", "def-axiom-of-choice", thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle, cor-heine-borel-in-the-product-topology, thm-compactness-under-continuous-maps]

@@ -2,7 +2,7 @@
 id: lem-kostant-laplacian-is-scalar-on-weight-components
 kind: lemma
 title: "The Chevalley–Eilenberg Laplacian is scalar on weight components"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: pontryagin-duality-for-locally-compact-abelian-groups-examples
 title: "Pontryagin Duality for Locally Compact Abelian Groups — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-annihilator-of-a-closed-subgroup-of-euclidean-space,
            ex-bidual-map-on-the-circle-and-the-integers,

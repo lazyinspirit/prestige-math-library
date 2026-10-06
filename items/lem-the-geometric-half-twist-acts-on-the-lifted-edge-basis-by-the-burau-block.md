@@ -2,7 +2,7 @@
 id: lem-the-geometric-half-twist-acts-on-the-lifted-edge-basis-by-the-burau-block
 kind: lemma
 title: "The geometric half twist acts on the lifted-edge basis by the Burau block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

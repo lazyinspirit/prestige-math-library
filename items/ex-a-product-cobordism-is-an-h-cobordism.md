@@ -2,7 +2,7 @@
 id: ex-a-product-cobordism-is-an-h-cobordism
 kind: example
 title: A product cobordism is an h-cobordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

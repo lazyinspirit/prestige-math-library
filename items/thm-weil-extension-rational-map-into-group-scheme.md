@@ -2,7 +2,7 @@
 id: thm-weil-extension-rational-map-into-group-scheme
 kind: theorem
 title: "Weil's extension theorem for rational maps into smooth separated group schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

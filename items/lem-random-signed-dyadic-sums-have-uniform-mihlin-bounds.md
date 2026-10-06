@@ -2,7 +2,7 @@
 id: lem-random-signed-dyadic-sums-have-uniform-mihlin-bounds
 kind: lemma
 title: "Random signed dyadic sums have uniform Mihlin and Lp multiplier bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-intersection-multiplicity-basic-properties
 kind: theorem
 title: Symmetry, additivity and local nature of intersection multiplicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

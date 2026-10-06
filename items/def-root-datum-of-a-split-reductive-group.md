@@ -2,7 +2,7 @@
 id: def-root-datum-of-a-split-reductive-group
 kind: definition
 title: The root datum of a split reductive group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 27

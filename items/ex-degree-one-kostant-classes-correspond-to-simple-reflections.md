@@ -2,7 +2,7 @@
 id: ex-degree-one-kostant-classes-correspond-to-simple-reflections
 kind: example
 title: "Degree-one Kostant classes correspond to simple reflections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

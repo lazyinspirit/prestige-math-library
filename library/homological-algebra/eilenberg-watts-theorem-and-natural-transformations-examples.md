@@ -1,7 +1,7 @@
 ---
 page: eilenberg-watts-theorem-and-natural-transformations-examples
 title: "Eilenberg–Watts Theorem and Natural Transformations — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-natural-transformations-between-tensor-composites, ex-eilenberg-watts-recovers-extension-of-scalars, cex-right-exact-module-functor-without-coproduct-preservation-is-not-tensor, cex-coproduct-preserving-left-exact-module-functor-is-not-tensor]
 ---

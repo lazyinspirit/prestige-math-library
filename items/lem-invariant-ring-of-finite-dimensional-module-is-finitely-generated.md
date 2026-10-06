@@ -2,7 +2,7 @@
 id: lem-invariant-ring-of-finite-dimensional-module-is-finitely-generated
 kind: lemma
 title: Invariants of a finite-dimensional module are finitely generated
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

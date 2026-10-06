@@ -2,7 +2,7 @@
 id: ex-annihilator-of-the-trivial-sl2-module
 kind: example
 title: "The annihilator of the trivial sl(2)-module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

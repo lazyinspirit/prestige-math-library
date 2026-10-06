@@ -2,7 +2,7 @@
 id: lem-projective-normal-surface-modification-h1-injects-off-special-fibre
 kind: lemma
 title: H1 of a normal surface modification injects off its special fibre
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

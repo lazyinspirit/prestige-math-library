@@ -2,7 +2,7 @@
 id: lem-effective-cartier-divisor-has-no-embedded-associated-primes
 kind: lemma
 title: "Effective Cartier divisors on a regular scheme have no embedded associated points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-finite-parseval-and-plancherel
 kind: theorem
 title: "Finite Parseval and Plancherel identity for the unitary DFT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

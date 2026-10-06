@@ -2,7 +2,7 @@
 id: lem-the-laurent-polynomial-ring-is-noetherian-and-a-unique-factorisation-domain
 kind: lemma
 title: "The Laurent polynomial ring is Noetherian and a unique factorisation domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

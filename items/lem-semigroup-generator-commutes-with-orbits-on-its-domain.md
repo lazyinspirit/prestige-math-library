@@ -2,7 +2,7 @@
 id: lem-semigroup-generator-commutes-with-orbits-on-its-domain
 kind: lemma
 title: "The generator commutes with the semigroup on its domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

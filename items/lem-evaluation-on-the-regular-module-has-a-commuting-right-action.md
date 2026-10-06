@@ -2,7 +2,7 @@
 id: lem-evaluation-on-the-regular-module-has-a-commuting-right-action
 kind: lemma
 title: "$F(A)$ is a $(B,A)$-bimodule for every additive functor $F$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

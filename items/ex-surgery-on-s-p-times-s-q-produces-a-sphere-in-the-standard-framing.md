@@ -2,7 +2,7 @@
 id: "ex-surgery-on-s-p-times-s-q-produces-a-sphere-in-the-standard-framing"
 kind: "example"
 title: "Surgery on a product of spheres produces a sphere in the standard framing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

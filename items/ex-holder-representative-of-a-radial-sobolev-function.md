@@ -2,7 +2,7 @@
 id: ex-holder-representative-of-a-radial-sobolev-function
 kind: example
 title: "Radial powers approach the Morrey borderline exponent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

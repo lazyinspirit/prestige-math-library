@@ -2,7 +2,7 @@
 id: lem-a-one-cube-average-and-maximal-function-forms-agree
 kind: lemma
 title: The two defining forms of A_1 agree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

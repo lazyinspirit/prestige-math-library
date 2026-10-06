@@ -1,7 +1,7 @@
 ---
 page: finite-abelian-categories-and-eilenberg-watts
 title: "Finite Abelian Categories and Eilenberg–Watts"
-status: draft
+status: published
 items: [def-superfluous-subobject-and-projective-cover-in-an-abelian-category, lem-finite-module-duality-is-exact-with-commuting-bimodule-actions, lem-finite-support-families-of-finite-dimensional-vector-spaces-are-locally-finite, lem-projectives-covering-the-simple-objects-generate-every-finite-length-object, prop-finite-dimensional-module-categories-are-intrinsically-finite, thm-intrinsic-finite-category-hypotheses-give-a-finite-projective-generator, thm-finite-abelian-categories-are-finite-dimensional-module-categories, thm-finite-eilenberg-watts-for-right-exact-linear-functors, thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels, cor-finite-one-sided-exactness-is-equivalent-to-existence-of-the-corresponding-adjoint, cor-exact-finite-tensor-functors-have-right-projective-kernels, cor-finite-eilenberg-watts-is-a-biequivalence]
 examples: []
 ---

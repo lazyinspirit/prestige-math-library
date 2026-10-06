@@ -2,7 +2,7 @@
 id: cor-compact-support-expands-at-speed-at-most-c
 kind: corollary
 title: "Compact support expands at speed at most c"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

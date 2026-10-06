@@ -2,7 +2,7 @@
 id: "cor-vanishing-ext-one-implies-rigidity-of-deformation-classes"
 kind: "corollary"
 title: "Vanishing of the deformation tangent space forces rigidity of deformation classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: def-parabolic-subgroup-of-an-affine-algebraic-group
 kind: definition
 title: Parabolic subgroups of an affine algebraic group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

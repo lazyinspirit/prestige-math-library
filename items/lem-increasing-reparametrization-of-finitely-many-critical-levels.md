@@ -2,7 +2,7 @@
 id: lem-increasing-reparametrization-of-finitely-many-critical-levels
 kind: lemma
 title: "Increasing reparametrization of finitely many critical levels"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-fundamental-theorem-on-flows, thm-compactly-supported-vector-fields-are-complete, lem-euclidean-bump-for-a-compact-set-inside-an-open-set, thm-smooth-functions-defined-locally-can-be-glued-by-a-partition-of-unity, def-countable-choice]

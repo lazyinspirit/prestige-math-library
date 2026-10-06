@@ -2,7 +2,7 @@
 id: lem-milnor-sphere-bundles-with-euler-number-plus-or-minus-one-are-simply-connected
 kind: lemma
 title: "Milnor sphere bundles are simply connected"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

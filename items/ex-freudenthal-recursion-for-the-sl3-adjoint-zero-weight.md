@@ -2,7 +2,7 @@
 id: ex-freudenthal-recursion-for-the-sl3-adjoint-zero-weight
 kind: example
 title: Freudenthal recursion for the sl3 adjoint zero weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

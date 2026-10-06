@@ -2,7 +2,7 @@
 id: ex-hilbert-transform-of-a-hone-atom-is-integrable
 kind: example
 title: "The Hilbert transform of an $H^1$ atom is integrable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

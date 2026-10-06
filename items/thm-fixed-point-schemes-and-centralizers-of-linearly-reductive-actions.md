@@ -2,7 +2,7 @@
 id: thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions
 kind: theorem
 title: Fixed-point schemes and centralizers of linearly reductive actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

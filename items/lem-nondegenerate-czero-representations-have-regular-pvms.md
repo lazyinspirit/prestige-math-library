@@ -2,7 +2,7 @@
 id: lem-nondegenerate-czero-representations-have-regular-pvms
 kind: lemma
 title: Nondegenerate representations of C0 have regular PVMs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-chi-zero-and-chi-one-wide-edge-morphisms
 kind: definition
 title: "The wide-edge morphisms chi-zero and chi-one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

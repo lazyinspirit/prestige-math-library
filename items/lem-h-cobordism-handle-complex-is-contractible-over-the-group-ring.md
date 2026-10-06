@@ -2,7 +2,7 @@
 id: lem-h-cobordism-handle-complex-is-contractible-over-the-group-ring
 kind: lemma
 title: "The handle complex of an h-cobordism is contractible over the group ring, with an explicit contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: "lem-homogenized-ideal-properties"
 kind: "lemma"
 title: "Elementary properties of the homogenized ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: lem-top-cohomology-vanishes-above-canonical-ample-threshold
 kind: lemma
 title: "Vanishing of top cohomology past the canonical threshold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

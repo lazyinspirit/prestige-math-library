@@ -2,7 +2,7 @@
 id: thm-the-homflypt-skein-relation
 kind: theorem
 title: "The HOMFLYPT skein relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

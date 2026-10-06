@@ -2,7 +2,7 @@
 id: lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups
 kind: lemma
 title: "Finite surface normal forms, Jordan disks, and torsion control"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

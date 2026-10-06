@@ -1,7 +1,7 @@
 ---
 page: uncertainty-principles-for-fourier-analysis-examples
 title: "Uncertainty Principles for Fourier Analysis — Examples"
-status: draft
+status: published
 items: []
 examples: [cex-finite-variance-is-not-the-same-as-compact-support,
            ex-gaussian-attains-heisenberg-equality,

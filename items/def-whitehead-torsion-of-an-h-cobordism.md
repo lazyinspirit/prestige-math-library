@@ -2,7 +2,7 @@
 id: def-whitehead-torsion-of-an-h-cobordism
 kind: definition
 title: "Presentation-indexed Whitehead torsion of an h-cobordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: def-two-parameter-continuation-homotopy
 kind: definition
 title: "A regular two-parameter continuation datum"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

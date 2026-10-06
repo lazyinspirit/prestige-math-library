@@ -2,7 +2,7 @@
 id: "lem-cohomology-of-hypersurface-twists"
 kind: "lemma"
 title: "Cohomology of twists on a smooth hypersurface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 0

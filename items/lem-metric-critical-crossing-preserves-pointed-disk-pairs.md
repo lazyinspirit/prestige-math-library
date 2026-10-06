@@ -2,7 +2,7 @@
 id: lem-metric-critical-crossing-preserves-pointed-disk-pairs
 kind: lemma
 title: A metric-gradient critical crossing preserves the pointed disk pair
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

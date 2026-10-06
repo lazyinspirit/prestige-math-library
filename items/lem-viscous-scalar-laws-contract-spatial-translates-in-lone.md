@@ -2,7 +2,7 @@
 id: lem-viscous-scalar-laws-contract-spatial-translates-in-lone
 kind: lemma
 title: Viscous solutions contract spatial translates in L-one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-rank-one-connected-groups
 kind: theorem
 title: Rank-one connected groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 22

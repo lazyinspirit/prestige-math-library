@@ -1,7 +1,7 @@
 ---
 page: borel-weil-and-borel-weil-bott-examples
 title: "Borel Weil and Borel Weil Bott — Examples"
-status: draft
+status: published
 requires:
   - borel-weil-and-borel-weil-bott
 items: []

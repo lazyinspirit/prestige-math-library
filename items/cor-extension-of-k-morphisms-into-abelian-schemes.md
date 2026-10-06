@@ -2,7 +2,7 @@
 id: cor-extension-of-k-morphisms-into-abelian-schemes
 kind: corollary
 title: "K-morphisms from smooth models into abelian schemes extend uniquely"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

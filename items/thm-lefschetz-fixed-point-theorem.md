@@ -2,7 +2,7 @@
 id: thm-lefschetz-fixed-point-theorem
 kind: theorem
 title: "Lefschetz fixed point theorem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

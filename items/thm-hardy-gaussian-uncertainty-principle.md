@@ -2,7 +2,7 @@
 id: thm-hardy-gaussian-uncertainty-principle
 kind: theorem
 title: "Hardy's Gaussian uncertainty principle in $\\mathbb R^n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

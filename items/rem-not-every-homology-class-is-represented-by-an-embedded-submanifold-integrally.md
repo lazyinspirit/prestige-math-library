@@ -2,7 +2,7 @@
 id: rem-not-every-homology-class-is-represented-by-an-embedded-submanifold-integrally
 kind: remark
 title: "Not every integral homology class is represented by an embedded submanifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-geometric-intersection-equals-the-poincare-dual-cup-pairing, def-geometric-intersection-pairing-on-a-closed-oriented-manifold, def-oriented-intersection-number]

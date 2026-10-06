@@ -2,7 +2,7 @@
 id: ex-morse-complex-of-the-circle
 kind: example
 title: "The Morse complex of the circle"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-every-smooth-vector-field-on-a-compact-manifold-is-complete, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-mod-two-morse-differential, def-signed-morse-differential-over-the-integers, def-orientation-line-of-a-morse-critical-point, lem-unstable-orientations-induce-trajectory-moduli-orientations, def-unparametrized-morse-trajectory-moduli-space, cor-index-one-trajectory-moduli-spaces-are-finite, def-morse-smale-pair, def-morse-function-and-excellent-morse-function, def-nondegenerate-critical-point-nullity-index-and-coindex, def-downward-gradient-like-vector-field, lem-smooth-bump-between-concentric-euclidean-balls, thm-integral-morse-differential-squares-to-zero]
 proof_strategy: direct

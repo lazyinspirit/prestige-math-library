@@ -2,7 +2,7 @@
 id: ex-central-elements-as-natural-endomorphisms-of-the-identity
 kind: example
 title: "Central elements as natural endomorphisms of the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

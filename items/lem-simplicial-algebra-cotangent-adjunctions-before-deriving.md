@@ -2,7 +2,7 @@
 id: lem-simplicial-algebra-cotangent-adjunctions-before-deriving
 kind: lemma
 title: "The strict simplicial algebra adjunctions underlying the cotangent construction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

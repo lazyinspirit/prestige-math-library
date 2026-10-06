@@ -2,7 +2,7 @@
 id: cor-bmo-lp-oscillation-norms-are-equivalent
 kind: corollary
 title: "BMO oscillation norms in Lq are equivalent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

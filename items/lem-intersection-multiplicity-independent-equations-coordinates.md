@@ -2,7 +2,7 @@
 id: lem-intersection-multiplicity-independent-equations-coordinates
 kind: lemma
 title: Invariance of the local intersection multiplicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

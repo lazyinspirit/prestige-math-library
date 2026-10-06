@@ -1,7 +1,7 @@
 ---
 page: "wave-energy-finite-propagation-and-huygens"
 title: "Wave Energy, Finite Propagation and Huygens' Principle"
-status: draft
+status: published
 items: ["def-forward-and-backward-wave-cones-domain-of-dependence-and-influence", "def-wave-energy-and-energy-flux", "lem-integral-of-a-divergence-of-an-l-one-c-one-field-vanishes", "lem-truncated-wave-cone-geometry-and-frustum-presentation", "lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets", "lem-local-wave-energy-conservation-law", "lem-energy-identity-on-a-truncated-wave-cone", "thm-conservation-of-total-wave-energy", "thm-energy-continuous-dependence-for-the-forced-wave-equation", "cor-energy-uniqueness-for-the-wave-cauchy-problem", "thm-energy-uniqueness-for-homogeneous-dirichlet-waves-on-bounded-domains", "thm-finite-propagation-speed-for-the-wave-equation", "cor-compact-support-expands-at-speed-at-most-c", "cor-time-reversed-energy-uniqueness-from-final-data", "def-strong-huygens-principle", "thm-domain-of-dependence-and-local-uniqueness", "thm-strong-huygens-principle-in-odd-spatial-dimensions", "thm-wave-tails-in-one-and-even-spatial-dimensions", "rem-finite-propagation-is-not-huygens-principle"]
 examples: []
 ---

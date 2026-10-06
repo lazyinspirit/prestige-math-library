@@ -2,7 +2,7 @@
 id: cex-euler-equality-alone-does-not-imply-perfectness
 kind: counterexample
 title: "Euler equality alone does not imply perfectness"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

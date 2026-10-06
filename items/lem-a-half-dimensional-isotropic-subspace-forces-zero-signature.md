@@ -2,7 +2,7 @@
 id: lem-a-half-dimensional-isotropic-subspace-forces-zero-signature
 kind: lemma
 title: "A nondegenerate symmetric form with a half-dimensional isotropic subspace has zero signature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

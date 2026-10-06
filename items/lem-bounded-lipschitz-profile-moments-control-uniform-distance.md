@@ -2,7 +2,7 @@
 id: lem-bounded-lipschitz-profile-moments-control-uniform-distance
 kind: lemma
 title: "Finitely many polynomial moments control the uniform distance on bounded Lipschitz profiles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

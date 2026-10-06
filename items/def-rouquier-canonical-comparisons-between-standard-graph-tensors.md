@@ -2,7 +2,7 @@
 id: def-rouquier-canonical-comparisons-between-standard-graph-tensors
 kind: definition
 title: "Canonical comparisons between standard graph tensor products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

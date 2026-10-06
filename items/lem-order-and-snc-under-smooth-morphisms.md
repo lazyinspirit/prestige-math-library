@@ -2,7 +2,7 @@
 id: lem-order-and-snc-under-smooth-morphisms
 kind: lemma
 title: Order and simultaneous normal crossings are preserved by smooth morphisms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

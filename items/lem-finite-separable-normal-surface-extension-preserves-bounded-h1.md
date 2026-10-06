@@ -2,7 +2,7 @@
 id: lem-finite-separable-normal-surface-extension-preserves-bounded-h1
 kind: lemma
 title: "Separable finite surface extensions preserve bounded modification cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

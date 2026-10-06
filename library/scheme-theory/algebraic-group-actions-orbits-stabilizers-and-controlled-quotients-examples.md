@@ -1,7 +1,7 @@
 ---
 page: algebraic-group-actions-orbits-stabilizers-and-controlled-quotients-examples
 title: "Algebraic Group Actions, Orbits, Stabilizers, and Controlled Quotients — Examples"
-status: draft
+status: published
 category: scheme-theory
 requires: [algebraic-group-actions-orbits-stabilizers-and-controlled-quotients]
 items: []

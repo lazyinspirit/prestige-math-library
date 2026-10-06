@@ -2,7 +2,7 @@
 id: prop-gluing-two-reeb-components-gives-a-foliation-of-s-three
 kind: proposition
 title: "Gluing two Reeb components gives a foliation of the three-sphere"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

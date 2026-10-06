@@ -2,7 +2,7 @@
 id: thm-de-giorgi-local-boundedness-with-scale-correct-forcing-term
 kind: theorem
 title: "De Giorgi local boundedness with a scale-correct forcing term"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

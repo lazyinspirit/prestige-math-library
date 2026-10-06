@@ -2,7 +2,7 @@
 id: def-grand-maximal-test-class-of-order-n
 kind: definition
 title: "Grand maximal test class of order N and the grand maximal function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

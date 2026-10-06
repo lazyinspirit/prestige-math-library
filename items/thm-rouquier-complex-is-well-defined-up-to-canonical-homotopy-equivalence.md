@@ -2,7 +2,7 @@
 id: thm-rouquier-complex-is-well-defined-up-to-canonical-homotopy-equivalence
 kind: theorem
 title: "The Rouquier complex is well defined up to canonical homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

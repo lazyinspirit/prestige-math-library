@@ -2,7 +2,7 @@
 id: def-geometric-cancelling-handle-pair
 kind: definition
 title: "Geometrically cancelling adjacent handle pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-weighted-maximal-function-relative-to-a-doubling-weight
 kind: definition
 title: The weighted maximal function of a doubling weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

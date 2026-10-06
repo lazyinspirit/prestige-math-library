@@ -2,7 +2,7 @@
 id: thm-intrinsic-finite-category-hypotheses-give-a-finite-projective-generator
 kind: theorem
 title: "Intrinsic finite category hypotheses give a finite projective generator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

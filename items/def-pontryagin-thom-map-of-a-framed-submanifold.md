@@ -2,7 +2,7 @@
 id: def-pontryagin-thom-map-of-a-framed-submanifold
 kind: definition
 title: "The Pontryagin-Thom map of a framed submanifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-perron-envelope-failure-of-the-supersolution-test-allows-a-local-bump
 kind: lemma
 title: Failure of the supersolution test for the lower envelope allows a local bump
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

@@ -2,7 +2,7 @@
 id: def-thom-prespectrum-of-the-universal-real-and-oriented-bundles
 kind: definition
 title: "The Thom prespectrum of the universal real and oriented bundles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

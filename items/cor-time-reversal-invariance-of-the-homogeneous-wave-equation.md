@@ -2,7 +2,7 @@
 id: cor-time-reversal-invariance-of-the-homogeneous-wave-equation
 kind: corollary
 title: "Time reversal of the homogeneous wave equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

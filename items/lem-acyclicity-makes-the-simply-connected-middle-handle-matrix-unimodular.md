@@ -2,7 +2,7 @@
 id: lem-acyclicity-makes-the-simply-connected-middle-handle-matrix-unimodular
 kind: lemma
 title: Acyclicity makes the simply connected middle-handle matrix unimodular
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 14

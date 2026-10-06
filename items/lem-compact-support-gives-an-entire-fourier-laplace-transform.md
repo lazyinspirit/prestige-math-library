@@ -2,7 +2,7 @@
 id: lem-compact-support-gives-an-entire-fourier-laplace-transform
 kind: lemma
 title: Compact support gives an entire Fourier-Laplace transform by slices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

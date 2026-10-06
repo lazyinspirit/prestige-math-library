@@ -2,7 +2,7 @@
 id: def-half-relaxed-limits
 kind: definition
 title: Half-relaxed limits of a locally bounded family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

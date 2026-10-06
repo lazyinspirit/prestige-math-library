@@ -2,7 +2,7 @@
 id: rem-littlewood-paley-endpoints-require-hardy-and-bmo-replacements
 kind: remark
 title: "Littlewood-Paley endpoint scope and the H1-BMO dual pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

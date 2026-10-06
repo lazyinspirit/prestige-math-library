@@ -2,7 +2,7 @@
 id: def-chow-group-of-cycles-mod-rational-equivalence
 kind: definition
 title: "Rational equivalence and the Chow group of cycles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

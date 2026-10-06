@@ -2,7 +2,7 @@
 id: lem-whitney-type-ball-cover-of-a-proper-open-set
 kind: lemma
 title: "Whitney-type ball cover with disjoint small balls and bounded overlap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: surface-riemann-roch-and-the-hodge-index-theorem-examples
 title: "Surface Riemann-Roch and the Hodge Index Theorem — Examples"
-status: draft
+status: published
 requires:
   - surface-riemann-roch-and-the-hodge-index-theorem
 items:

@@ -2,7 +2,7 @@
 id: "lem-absolute-value-does-not-increase-dirichlet-energy-or-change-ltwo-normalisation"
 kind: "lemma"
 title: "The absolute value preserves the L^2 norm and the Dirichlet energy on H^1_0"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

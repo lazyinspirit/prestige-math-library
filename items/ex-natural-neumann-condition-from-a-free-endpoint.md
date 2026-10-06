@@ -2,7 +2,7 @@
 id: ex-natural-neumann-condition-from-a-free-endpoint
 kind: example
 title: "The natural Neumann condition from a free endpoint in one dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

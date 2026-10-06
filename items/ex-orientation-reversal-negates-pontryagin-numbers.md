@@ -2,7 +2,7 @@
 id: ex-orientation-reversal-negates-pontryagin-numbers
 kind: example
 title: "Orientation reversal negates Pontryagin numbers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-pontryagin-number-of-a-closed-oriented-manifold, lem-tangent-bundle-of-complex-projective-space-and-its-pontryagin-classes, def-fundamental-class-of-a-compact-oriented-manifold, def-oriented-smooth-manifold-and-oriented-chart, def-kronecker-evaluation-pairing, prop-oriented-boundaries-have-zero-pontryagin-numbers, def-stiefel-whitney-number-of-a-closed-manifold, def-pontryagin-classes-by-complexification, def-axiom-of-choice]

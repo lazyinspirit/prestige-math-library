@@ -2,7 +2,7 @@
 id: lem-integral-of-a-divergence-of-an-l-one-c-one-field-vanishes
 kind: lemma
 title: "The integral of the divergence of an integrable C1 field vanishes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

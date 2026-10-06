@@ -2,7 +2,7 @@
 id: lem-additive-cocontinuous-module-functors-form-a-category
 kind: lemma
 title: "Natural transformations of additive cocontinuous module functors are determined at the regular module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

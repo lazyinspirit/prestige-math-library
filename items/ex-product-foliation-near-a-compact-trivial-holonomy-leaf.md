@@ -2,7 +2,7 @@
 id: ex-product-foliation-near-a-compact-trivial-holonomy-leaf
 kind: example
 title: "The product foliation near a compact leaf with trivial holonomy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

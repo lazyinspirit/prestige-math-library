@@ -2,7 +2,7 @@
 id: lem-braid-mapping-classes-lift-equivariantly-to-the-burau-cover
 kind: lemma
 title: "Braid mapping classes lift equivariantly to the Burau cover"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

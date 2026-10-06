@@ -1,7 +1,7 @@
 ---
 page: plancherel-measure-and-asymptotic-young-diagrams
 title: Plancherel Measure and Asymptotic Young Diagrams
-status: draft
+status: published
 requires: [frobenius-characteristic-and-the-symmetric-group-character-dictionary,
            specht-modules-and-the-irreducibles-of-the-symmetric-group,
            the-branching-rule-and-the-young-graph,

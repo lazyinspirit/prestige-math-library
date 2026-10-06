@@ -2,7 +2,7 @@
 id: lem-bilinear-right-exact-functors-are-determined-by-the-pair-of-regular-modules
 kind: lemma
 title: "Bilinear right exact functors are determined by their value on the regular modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-axiom-of-choice, cor-every-module-is-a-quotient-of-a-free-module, def-abelian-category, def-algebra-over-a-commutative-ring, def-biproduct, def-deligne-product-of-finite-linear-categories, def-dimension, def-exact-and-short-exact-sequences-of-modules, def-generated-cyclic-finitely-generated-and-free-modules, def-k-linear-category-and-k-linear-functor, def-kernels-and-cokernels-as-equalizers-and-coequalizers, def-left-and-right-modules, def-left-exact-and-right-exact-functor, def-module-homomorphism-kernel-image-and-cokernel, def-natural-isomorphism, def-natural-transformation, def-product-category, prop-functoriality-of-module-tensor-products, thm-an-additive-functor-preserves-finite-biproducts, thm-bimodule-actions-induced-on-tensor-products, thm-modules-over-a-ring-form-an-abelian-category, thm-morphisms-between-finite-biproducts-correspond-to-matrices, thm-tensor-product-of-algebras-over-a-commutative-ring, thm-universal-property-of-module-tensor-products]

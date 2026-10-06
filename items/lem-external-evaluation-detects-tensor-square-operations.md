@@ -2,7 +2,7 @@
 id: lem-external-evaluation-detects-tensor-square-operations
 kind: lemma
 title: "External evaluation detects tensor-square operations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

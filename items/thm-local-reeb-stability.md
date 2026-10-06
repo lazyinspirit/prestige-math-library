@@ -2,7 +2,7 @@
 id: thm-local-reeb-stability
 kind: theorem
 title: Local Reeb stability for compact leaves with finite holonomy
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

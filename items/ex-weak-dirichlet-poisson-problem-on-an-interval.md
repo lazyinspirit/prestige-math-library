@@ -2,7 +2,7 @@
 id: "ex-weak-dirichlet-poisson-problem-on-an-interval"
 kind: "example"
 title: "The weak Dirichlet Poisson problem on an interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 7

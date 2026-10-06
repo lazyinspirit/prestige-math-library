@@ -40,7 +40,7 @@ sources:
       2002; complete electronic copy)
     url: https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro
     locator: Theorems 7.1-7.2, printed p. 126 (Whitney immersion and embedding theorems)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

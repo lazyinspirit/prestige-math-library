@@ -2,7 +2,7 @@
 id: lem-nonlinear-geometric-iteration-sequence-converges-to-zero
 kind: lemma
 title: "The nonlinear geometric iteration: an explicit threshold forces convergence to zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-critical-values-of-disjoint-trajectory-closures-can-be-interchanged
 kind: lemma
 title: "Critical values of disjoint trajectory closures can be interchanged"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-morse-function-adapted-to-a-cobordism, def-stable-and-unstable-sets-of-a-critical-point, def-morse-trajectory-from-p-to-q, thm-fundamental-theorem-on-flows, thm-regular-interval-diffeomorphism, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-smooth-functions-defined-locally-can-be-glued-by-a-partition-of-unity, thm-a-locally-finite-sum-of-smooth-functions-is-smooth, def-morse-function-and-excellent-morse-function, def-countable-choice, lem-increasing-reparametrization-of-finitely-many-critical-levels]

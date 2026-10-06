@@ -2,7 +2,7 @@
 id: ex-degree-d-map-on-a-sphere-has-lefschetz-number-one-plus-minus-d
 kind: example
 title: "Degree-d self-maps of a sphere have Lefschetz number 1+(-1)^n d"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

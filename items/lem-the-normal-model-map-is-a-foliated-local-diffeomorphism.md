@@ -2,7 +2,7 @@
 id: lem-the-normal-model-map-is-a-foliated-local-diffeomorphism
 kind: lemma
 title: The normal model map is a foliated local diffeomorphism
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

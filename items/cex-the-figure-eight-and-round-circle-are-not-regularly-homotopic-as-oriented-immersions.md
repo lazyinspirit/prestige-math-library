@@ -2,7 +2,7 @@
 id: cex-the-figure-eight-and-round-circle-are-not-regularly-homotopic-as-oriented-immersions
 kind: counterexample
 title: "Refuted: the figure-eight and the round circle are regularly homotopic as oriented immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

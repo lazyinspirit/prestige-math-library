@@ -2,7 +2,7 @@
 id: thm-finite-thom-detector-is-a-homotopy-isomorphism-through-2r-minus-2
 kind: theorem
 title: "The finite Thom detector is a homotopy isomorphism through 2r−2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

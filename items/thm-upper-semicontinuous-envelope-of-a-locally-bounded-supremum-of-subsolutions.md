@@ -2,7 +2,7 @@
 id: thm-upper-semicontinuous-envelope-of-a-locally-bounded-supremum-of-subsolutions
 kind: theorem
 title: "The upper envelope of a locally bounded supremum of subsolutions is a subsolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-viscosity-subsolution-and-supersolution, def-upper-and-lower-semicontinuous-envelopes, lem-viscosity-testing-by-first-order-jets, lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation, thm-euclidean-semicontinuous-extreme-value-theorem, cor-euclidean-closed-balls-and-spheres-are-compact]

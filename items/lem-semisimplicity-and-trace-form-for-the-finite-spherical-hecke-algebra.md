@@ -2,7 +2,7 @@
 id: lem-semisimplicity-and-trace-form-for-the-finite-spherical-hecke-algebra
 kind: lemma
 title: "The finite spherical Hecke algebra is semisimple with nondegenerate trace form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

@@ -2,7 +2,7 @@
 id: thm-calderon-zygmund-operators-are-bounded-on-weighted-lp
 kind: theorem
 title: Weighted L-p bounds for standard Calderon-Zygmund maximal truncations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

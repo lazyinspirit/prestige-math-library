@@ -1,7 +1,7 @@
 ---
 page: deligne-products-and-categorical-eilenberg-watts-examples
 title: "Deligne Products and Categorical Eilenberg–Watts — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-deligne-product-of-finite-vector-space-categories, cex-left-to-right-exact-equivalence-need-not-preserve-the-identity, ex-kernel-end-and-coend-distinguish-regular-and-coregular-bimodules, cex-a-deligne-kernel-need-not-be-one-external-tensor-factor]
 ---

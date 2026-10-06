@@ -1,7 +1,7 @@
 ---
 page: vanishing-cycles-novikov-and-taut-foliations-examples
 title: Vanishing Cycles, Novikov and Taut Foliations — Examples
-status: draft
+status: published
 items: []
 examples: [ex-reeb-foliation-of-s-three-is-not-taut,
         ex-fibre-foliation-of-a-mapping-torus-is-taut,

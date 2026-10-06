@@ -2,7 +2,7 @@
 id: lem-haar-regularization-of-transitive-unitary-cocycles
 kind: lemma
 title: Haar regularization of transitive unitary cocycles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

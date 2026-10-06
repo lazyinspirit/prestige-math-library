@@ -2,7 +2,7 @@
 id: cor-freudenthal-recursion-terminates-from-the-highest-weight
 kind: corollary
 title: Freudenthal recursion terminates from the highest weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

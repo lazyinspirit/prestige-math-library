@@ -2,7 +2,7 @@
 id: cex-finite-variance-is-not-the-same-as-compact-support
 kind: counterexample
 title: Finite variance is not compact support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

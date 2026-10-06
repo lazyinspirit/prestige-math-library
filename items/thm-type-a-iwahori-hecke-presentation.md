@@ -2,7 +2,7 @@
 id: thm-type-a-iwahori-hecke-presentation
 kind: theorem
 title: "The type-A Iwahori-Hecke presentation of the finite Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

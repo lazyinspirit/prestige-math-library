@@ -2,7 +2,7 @@
 id: cex-a-mild-solution-need-not-be-classical
 kind: counterexample
 title: "A mild solution need not be classical"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: ex-coordinate-circles-give-the-hyperbolic-intersection-form-on-a-torus
 kind: example
 title: "Coordinate circles give the alternating intersection matrix of a torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-geometric-intersection-equals-the-poincare-dual-cup-pairing, def-geometric-intersection-pairing-on-a-closed-oriented-manifold, def-self-intersection-number-of-an-oriented-submanifold, thm-self-intersection-is-the-euler-number-of-the-normal-bundle, def-two-dimensional-torus, def-circle-as-real-line-mod-integers, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure, def-product-orientation, thm-a-regular-level-set-is-an-embedded-submanifold, thm-canonical-tangent-and-cotangent-splittings-for-products, def-cap-duality-map-for-an-oriented-manifold, thm-intersection-number-under-factor-interchange, cor-nowhere-zero-section-forces-the-euler-class-to-vanish, def-axiom-of-choice, def-local-oriented-intersection-sign]

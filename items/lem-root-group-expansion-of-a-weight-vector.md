@@ -2,7 +2,7 @@
 id: lem-root-group-expansion-of-a-weight-vector
 kind: lemma
 title: "Expansion of a root-group translate of a weight vector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 26

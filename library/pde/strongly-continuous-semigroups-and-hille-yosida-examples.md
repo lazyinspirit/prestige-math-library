@@ -1,7 +1,7 @@
 ---
 page: "strongly-continuous-semigroups-and-hille-yosida-examples"
 title: "Strongly Continuous Semigroups and Hille Yosida — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-bounded-operator-exponential-semigroup", "ex-right-translation-semigroup-on-lp", "ex-multiplication-semigroup-and-its-generator", "ex-dirichlet-heat-semigroup-from-the-laplacian", "cex-strong-continuity-does-not-imply-operator-norm-continuity", "cex-a-mild-solution-need-not-be-classical", "cex-translation-semigroup-is-not-strongly-continuous-on-linfinity", "thm-semigroup-orbit-is-right-differentiable-at-zero-if-and-only-if-the-vector-is-in-the-generator-domain", "cor-a-semigroup-with-unbounded-generator-cannot-be-operator-norm-continuous-at-zero", "cex-first-resolvent-estimate-does-not-give-hille-yosida-bound"]
 ---

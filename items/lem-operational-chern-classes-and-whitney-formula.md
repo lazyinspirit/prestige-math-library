@@ -2,7 +2,7 @@
 id: lem-operational-chern-classes-and-whitney-formula
 kind: lemma
 title: "Operational Chern classes and the Whitney formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

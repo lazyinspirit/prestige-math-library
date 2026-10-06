@@ -2,7 +2,7 @@
 id: lem-projective-normal-surface-grauert-riemenschneider-vanishing
 kind: lemma
 title: "Grauert\u2013Riemenschneider vanishing for the required normal surface modifications"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

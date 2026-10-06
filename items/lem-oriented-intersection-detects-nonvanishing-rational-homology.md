@@ -2,7 +2,7 @@
 id: lem-oriented-intersection-detects-nonvanishing-rational-homology
 kind: lemma
 title: A co-oriented closed transversal detects nonvanishing rational homology of a compact leaf
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

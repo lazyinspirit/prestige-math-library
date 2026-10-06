@@ -2,7 +2,7 @@
 id: lem-abelian-scheme-universal-structure-sheaf-sections
 kind: lemma
 title: "Universal structure-sheaf sections of an abelian scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

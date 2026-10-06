@@ -2,7 +2,7 @@
 id: lem-character-orthogonality-on-a-lattice-fundamental-domain
 kind: lemma
 title: "Orthogonality of the lattice characters over a fundamental domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

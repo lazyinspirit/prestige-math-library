@@ -2,7 +2,7 @@
 id: def-annihilator-of-a-subgroup
 kind: definition
 title: The annihilator of a subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

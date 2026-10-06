@@ -1,7 +1,7 @@
 ---
 page: lie-algebra-cohomology-and-kostants-nilradical-theorem
 title: "Lie Algebra Cohomology and Kostants Nilradical Theorem"
-status: draft
+status: published
 requires: [harish-chandra-isomorphism-casimir-and-central-characters, the-bgg-resolution, semisimple-lie-algebras-cohomology-and-levi-theory, derived-functors, ext-and-balanced-resolutions, spectral-sequences, double-complexes-exact-couples-and-convergence, compact-lie-groups-maximal-tori-and-peter-weyl-theory]
 items:
   - prop-lie-algebra-cohomology-is-derived-invariants

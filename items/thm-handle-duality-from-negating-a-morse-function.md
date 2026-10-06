@@ -2,7 +2,7 @@
 id: thm-handle-duality-from-negating-a-morse-function
 kind: theorem
 title: "Handle duality from negating a Morse function"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-smooth-cobordism-triad-for-morse-theory, def-morse-function-adapted-to-a-cobordism, thm-morse-functions-and-handle-decompositions-correspond, def-dual-handle-decomposition, thm-morse-lemma, def-nondegenerate-critical-point-nullity-index-and-coindex, cor-unstable-disk-is-the-handle-core, cor-index-zero-handles-create-components, cor-index-n-handles-cap-boundary-spheres, def-countable-choice]

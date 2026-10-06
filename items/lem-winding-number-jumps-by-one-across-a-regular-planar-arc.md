@@ -2,7 +2,7 @@
 id: lem-winding-number-jumps-by-one-across-a-regular-planar-arc
 kind: lemma
 title: "The winding number jumps by one across a regular planar arc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: thm-smooth-s-cobordism-theorem
 kind: theorem
 title: "The smooth s-cobordism theorem: a vanishing presentation implies a product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 16

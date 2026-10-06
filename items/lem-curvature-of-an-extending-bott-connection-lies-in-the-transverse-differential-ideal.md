@@ -2,7 +2,7 @@
 id: lem-curvature-of-an-extending-bott-connection-lies-in-the-transverse-differential-ideal
 kind: lemma
 title: "Curvature of an extending Bott connection lies in the transverse differential ideal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: ex-piecewise-smooth-coefficient-produces-limited-regularity
 kind: example
 title: "A piecewise-smooth coefficient gives an $H^2$ solution that is not twice classically differentiable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

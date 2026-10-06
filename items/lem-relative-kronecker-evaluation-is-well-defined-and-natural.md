@@ -2,7 +2,7 @@
 id: lem-relative-kronecker-evaluation-is-well-defined-and-natural
 kind: lemma
 title: "Relative Kronecker evaluation is well defined, biadditive and natural"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: "lem-the-differential-annihilates-the-tangent-kernel-at-a-constrained-extremum"
 kind: "lemma"
 title: "The differential annihilates the tangent kernel at a constrained extremum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 3

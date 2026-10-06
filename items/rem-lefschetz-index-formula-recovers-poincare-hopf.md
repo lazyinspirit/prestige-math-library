@@ -2,7 +2,7 @@
 id: rem-lefschetz-index-formula-recovers-poincare-hopf
 kind: remark
 title: "The Lefschetz index formula recovers Poincare-Hopf"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

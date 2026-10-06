@@ -2,7 +2,7 @@
 id: def-normal-bundle-of-a-formal-immersion
 kind: definition
 title: "Normal bundle of a formal immersion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-formal-immersion-between-smooth-manifolds, def-quotient-vector-bundle-by-a-subbundle, thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle, def-pullback-vector-bundle-as-a-fibre-product, thm-the-pullback-fibre-product-is-a-smooth-vector-bundle, def-vector-bundle-map-over-a-smooth-base-map, thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric, prop-orthogonal-complements-of-subbundles-are-smooth-subbundles, prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle, def-normal-and-conormal-bundles-of-an-embedded-submanifold, def-countable-choice]

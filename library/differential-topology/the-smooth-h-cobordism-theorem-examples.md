@@ -1,7 +1,7 @@
 ---
 page: "the-smooth-h-cobordism-theorem-examples"
 title: "The Smooth H Cobordism Theorem — Examples"
-status: draft
+status: published
 requires: [the-smooth-h-cobordism-theorem, pontryagin-thom-and-framed-cobordism]
 items: []
 examples: ["ex-a-product-cobordism-is-an-h-cobordism", "ex-an-elementary-cancelling-handle-pair-gives-a-product-cobordism", "cex-a-homology-cobordism-need-not-be-an-h-cobordism", "cex-a-four-dimensional-boundary-case-is-outside-the-smooth-h-cobordism-theorem", "ex-the-handle-matrix-of-a-simple-acyclic-presentation"]

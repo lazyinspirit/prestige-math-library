@@ -2,7 +2,7 @@
 id: lem-cotangent-complex-resolution-independence
 kind: lemma
 title: "Independence of the cotangent complex from the chosen simplicial resolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

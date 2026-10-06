@@ -2,7 +2,7 @@
 id: cor-kostant-euler-character-recovers-the-weyl-numerator
 kind: corollary
 title: "The Kostant Euler character recovers the Weyl numerator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

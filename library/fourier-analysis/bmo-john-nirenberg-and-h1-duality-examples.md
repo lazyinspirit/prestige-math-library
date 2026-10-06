@@ -1,7 +1,7 @@
 ---
 page: bmo-john-nirenberg-and-h1-duality-examples
 title: "BMO, John-Nirenberg, and H1 Duality — Examples"
-status: draft
+status: published
 requires: [bmo-john-nirenberg-and-h1-duality]
 items: []
 examples:

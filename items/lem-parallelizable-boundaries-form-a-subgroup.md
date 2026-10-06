@@ -2,7 +2,7 @@
 id: lem-parallelizable-boundaries-form-a-subgroup
 kind: lemma
 title: "Parallelizable boundaries form a subgroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

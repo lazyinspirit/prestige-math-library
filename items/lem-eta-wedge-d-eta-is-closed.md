@@ -2,7 +2,7 @@
 id: lem-eta-wedge-d-eta-is-closed
 kind: lemma
 title: "The Godbillon-Vey form eta wedge d eta is closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-grand-maximal-function-controls-admissible-radial-and-nontangential-maximal-functions
 kind: lemma
 title: "The grand maximal function dominates every admissible radial and nontangential maximal function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

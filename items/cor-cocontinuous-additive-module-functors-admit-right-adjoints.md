@@ -2,7 +2,7 @@
 id: cor-cocontinuous-additive-module-functors-admit-right-adjoints
 kind: corollary
 title: "Additive cocontinuous module functors admit right adjoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

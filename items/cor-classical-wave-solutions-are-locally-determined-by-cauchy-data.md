@@ -2,7 +2,7 @@
 id: cor-classical-wave-solutions-are-locally-determined-by-cauchy-data
 kind: corollary
 title: "The constructed classical solutions are locally determined by the Cauchy data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: thm-pontryagin-thom-correspondence-in-fixed-codimension
 kind: theorem
 title: "The Pontryagin-Thom correspondence in fixed codimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

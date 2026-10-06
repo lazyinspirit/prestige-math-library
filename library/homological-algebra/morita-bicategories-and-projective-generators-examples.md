@@ -1,7 +1,7 @@
 ---
 page: morita-bicategories-and-projective-generators-examples
 title: "Morita Bicategories and Projective Generators — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-matrix-ring-morita-pair-with-explicit-tensor-inverses, cex-a-projective-generator-need-not-be-small, ex-central-elements-as-natural-endomorphisms-of-the-identity]
 ---

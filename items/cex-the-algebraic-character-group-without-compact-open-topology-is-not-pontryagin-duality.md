@@ -2,7 +2,7 @@
 id: cex-the-algebraic-character-group-without-compact-open-topology-is-not-pontryagin-duality
 kind: counterexample
 title: Forgetting the compact-open topology destroys Pontryagin duality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 18

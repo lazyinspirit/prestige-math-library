@@ -2,7 +2,7 @@
 id: lem-gluing-manifolds-with-boundary-along-a-boundary-diffeomorphism
 kind: lemma
 title: Gluing manifolds with boundary along a boundary diffeomorphism
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

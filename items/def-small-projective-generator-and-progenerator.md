@@ -2,7 +2,7 @@
 id: def-small-projective-generator-and-progenerator
 kind: definition
 title: "Small projective generators and progenerators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

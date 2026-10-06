@@ -2,7 +2,7 @@
 id: ex-termwise-and-total-hochschild-theories-have-different-grading-outputs
 kind: example
 title: "Termwise and total Hochschild theories have different grading outputs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-termwise-hochschild-homology-complex-of-a-rouquier-complex, def-hochschild-hyperhomology-of-a-bimodule-complex, thm-termwise-hochschild-spectral-sequence-for-a-bounded-bimodule-complex, def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring, def-hochschild-chain-complex-of-a-bimodule, thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex, def-axiom-of-choice, def-termwise-hochschild-homology-complex-and-iterated-homology]

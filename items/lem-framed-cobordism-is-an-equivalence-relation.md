@@ -2,7 +2,7 @@
 id: lem-framed-cobordism-is-an-equivalence-relation
 kind: lemma
 title: "Framed cobordism is an equivalence relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

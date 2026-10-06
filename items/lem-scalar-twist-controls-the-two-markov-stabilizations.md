@@ -2,7 +2,7 @@
 id: lem-scalar-twist-controls-the-two-markov-stabilizations
 kind: lemma
 title: "The scalar twist controls the two Markov stabilizations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

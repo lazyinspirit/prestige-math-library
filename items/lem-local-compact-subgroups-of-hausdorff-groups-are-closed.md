@@ -2,7 +2,7 @@
 id: lem-local-compact-subgroups-of-hausdorff-groups-are-closed
 kind: lemma
 title: A locally compact subgroup of a Hausdorff topological group is closed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

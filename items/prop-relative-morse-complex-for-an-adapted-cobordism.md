@@ -2,7 +2,7 @@
 id: prop-relative-morse-complex-for-an-adapted-cobordism
 kind: proposition
 title: "The relative Morse complex of an adapted cobordism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

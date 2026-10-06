@@ -2,7 +2,7 @@
 id: "lem-attaching-a-single-cell-kills-the-represented-homotopy-class"
 kind: "lemma"
 title: "Attaching a single cell kills the represented homotopy class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

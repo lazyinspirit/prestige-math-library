@@ -2,7 +2,7 @@
 id: def-regular-continuation-datum-between-morse-smale-pairs
 kind: definition
 title: "A regular continuation datum between Morse--Smale pairs"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

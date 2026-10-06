@@ -2,7 +2,7 @@
 id: lem-mixed-boundary-hyperbolic-passage-has-uniform-endpoint-derivative-bounds
 kind: lemma
 title: Mixed boundary hyperbolic passage has uniform endpoint derivative bounds
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

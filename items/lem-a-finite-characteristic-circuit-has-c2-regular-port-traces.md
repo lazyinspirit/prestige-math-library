@@ -2,7 +2,7 @@
 id: lem-a-finite-characteristic-circuit-has-c2-regular-port-traces
 kind: lemma
 title: "A finite characteristic circuit has C² regular port traces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

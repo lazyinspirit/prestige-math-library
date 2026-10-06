@@ -1,7 +1,7 @@
 ---
 page: split-reductive-root-systems-bruhat-cells-and-parabolics-examples
 title: "Split Reductive Root Systems, Bruhat Cells, and Parabolics — Examples"
-status: draft
+status: published
 requires: [split-reductive-root-systems-bruhat-cells-and-parabolics]
 items: []
 examples:

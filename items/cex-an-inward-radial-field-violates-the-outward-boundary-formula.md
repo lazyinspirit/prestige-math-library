@@ -2,7 +2,7 @@
 id: cex-an-inward-radial-field-violates-the-outward-boundary-formula
 kind: counterexample
 title: "An inward radial field violates the outward boundary formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: counterexample

@@ -2,7 +2,7 @@
 id: ex-chow-ring-of-projective-space
 kind: example
 title: "The Chow ring of projective space and Bezout degrees"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 16

@@ -1,7 +1,7 @@
 ---
 page: highest-weights-and-rational-representations-of-split-reductive-groups-examples
 title: "Highest Weights and Rational Representations of Split Reductive Groups — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-fundamental-sl2-modules-in-characteristic-p

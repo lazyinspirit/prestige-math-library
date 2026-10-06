@@ -2,7 +2,7 @@
 id: prop-maxima-of-subsolutions-and-minima-of-supersolutions
 kind: proposition
 title: Finite maxima of subsolutions and finite minima of supersolutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

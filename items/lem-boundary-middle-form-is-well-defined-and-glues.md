@@ -2,7 +2,7 @@
 id: lem-boundary-middle-form-is-well-defined-and-glues
 kind: lemma
 title: "The boundary middle form is well defined and glues"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

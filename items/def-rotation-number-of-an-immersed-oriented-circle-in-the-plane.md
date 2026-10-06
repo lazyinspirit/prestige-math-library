@@ -2,7 +2,7 @@
 id: def-rotation-number-of-an-immersed-oriented-circle-in-the-plane
 kind: definition
 title: "Rotation number of an immersed oriented circle in the plane"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-degree-of-a-circle-loop, cor-degree-descends-to-circle-loop-classes, thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree, def-immersion-submersion-and-constant-rank-map, def-tangent-bundle-as-a-disjoint-union, def-differential-of-a-smooth-map, cor-winding-number-classifies-loops-in-the-punctured-plane, thm-winding-number-equals-circle-degree, def-rotation-index-of-a-regular-closed-plane-curve, def-smooth-manifold]

@@ -2,7 +2,7 @@
 id: def-normalized-sinc-function
 kind: definition
 title: "The normalised sinc function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

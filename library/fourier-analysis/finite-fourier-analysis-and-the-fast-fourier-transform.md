@@ -1,7 +1,7 @@
 ---
 page: finite-fourier-analysis-and-the-fast-fourier-transform
 title: "Finite Fourier Analysis and the Fast Fourier Transform"
-status: draft
+status: published
 items: [def-counting-inner-product-on-complex-functions-on-z-mod-n,
         def-cyclic-convolution-on-z-mod-n,
         def-unitary-discrete-fourier-transform-on-z-mod-n,

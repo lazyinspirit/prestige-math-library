@@ -2,7 +2,7 @@
 id: lem-a-paired-immersed-cap-sweep-excludes-a-positive-closed-transversal
 kind: lemma
 title: A paired immersed cap sweep excludes a positive closed transversal
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

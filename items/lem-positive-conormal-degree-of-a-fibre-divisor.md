@@ -2,7 +2,7 @@
 id: lem-positive-conormal-degree-of-a-fibre-divisor
 kind: lemma
 title: "A divisor supported in a special fibre has positive conormal degree on some component"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

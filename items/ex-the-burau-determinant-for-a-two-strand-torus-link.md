@@ -2,7 +2,7 @@
 id: ex-the-burau-determinant-for-a-two-strand-torus-link
 kind: example
 title: "The Burau determinant for a two-strand torus link"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

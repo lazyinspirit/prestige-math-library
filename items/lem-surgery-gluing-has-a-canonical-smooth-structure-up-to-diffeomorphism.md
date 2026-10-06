@@ -2,7 +2,7 @@
 id: "lem-surgery-gluing-has-a-canonical-smooth-structure-up-to-diffeomorphism"
 kind: "lemma"
 title: "The surgery gluing has a canonical smooth structure up to diffeomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

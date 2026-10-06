@@ -2,7 +2,7 @@
 id: def-chern-classes-of-a-vector-bundle
 kind: definition
 title: "Chern classes of a vector bundle on a smooth scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 14

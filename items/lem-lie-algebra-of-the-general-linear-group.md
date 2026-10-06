@@ -2,7 +2,7 @@
 id: lem-lie-algebra-of-the-general-linear-group
 kind: lemma
 title: "The Lie algebra of the general linear group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["def-axiom-of-choice", "def-lie-algebra-of-a-group-scheme", "lem-lie-algebra-tangent-space-and-functoriality", "lem-adjoint-representation-of-an-affine-group-scheme", "lem-general-linear-group-scheme-and-its-coordinate-ring", "thm-cotangent-space-maximal-ideal-quotient", "def-relative-cotangent-space", "def-linear-basis", "thm-ring-matrix-arithmetic-laws", "cor-inverse-matrix-by-adjugate", "def-tensor-product-of-modules-by-generators-and-relations", "def-determinant-of-a-square-matrix", "def-trace-of-a-square-matrix-over-a-commutative-ring"]

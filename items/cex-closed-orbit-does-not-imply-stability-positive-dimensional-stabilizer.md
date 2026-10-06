@@ -2,7 +2,7 @@
 id: cex-closed-orbit-does-not-imply-stability-positive-dimensional-stabilizer
 kind: counterexample
 title: "A closed orbit need not be stable: the trivial multiplicative-group action on a point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

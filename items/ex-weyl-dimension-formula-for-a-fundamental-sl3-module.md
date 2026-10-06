@@ -2,7 +2,7 @@
 id: ex-weyl-dimension-formula-for-a-fundamental-sl3-module
 kind: example
 title: The Weyl dimension formula for a fundamental sl3 module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

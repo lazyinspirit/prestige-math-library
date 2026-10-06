@@ -2,7 +2,7 @@
 id: cex-rankine-hugoniot-alone-does-not-give-uniqueness
 kind: counterexample
 title: Rankine--Hugoniot alone does not give uniqueness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

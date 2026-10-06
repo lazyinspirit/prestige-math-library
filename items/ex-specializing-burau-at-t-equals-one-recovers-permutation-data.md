@@ -2,7 +2,7 @@
 id: ex-specializing-burau-at-t-equals-one-recovers-permutation-data
 kind: example
 title: "Specializing Burau at t = 1 recovers permutation data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

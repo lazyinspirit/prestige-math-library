@@ -2,7 +2,7 @@
 id: thm-poincare-wirtinger-on-bounded-john-domains
 kind: theorem
 title: "The mean-zero Poincare inequality on bounded John domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: prop-h-cobordisms-admit-adapted-ordered-handle-decompositions
 kind: proposition
 title: h-Cobordisms admit adapted ordered handle decompositions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

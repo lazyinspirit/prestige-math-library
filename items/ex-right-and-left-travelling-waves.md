@@ -2,7 +2,7 @@
 id: ex-right-and-left-travelling-waves
 kind: example
 title: "Right- and left-travelling waves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

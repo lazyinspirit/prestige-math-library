@@ -2,7 +2,7 @@
 id: ex-two-dimensional-hecke-algebra-for-gl2-fq
 kind: example
 title: "The two-dimensional Hecke algebra for GL_2(F_q)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

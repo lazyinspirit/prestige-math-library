@@ -2,7 +2,7 @@
 id: lem-handle-slides-reduce-a-unimodular-middle-handle-matrix-to-the-identity
 kind: lemma
 title: Handle slides, renumberings and reorientations reduce a unimodular middle-handle matrix to the identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 15

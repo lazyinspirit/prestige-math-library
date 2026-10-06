@@ -2,7 +2,7 @@
 id: lem-boundary-orientation-of-compactified-one-dimensional-morse-moduli
 kind: lemma
 title: "Boundary orientation of the compactified one-dimensional Morse moduli space"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, thm-index-two-compactification-is-a-compact-one-manifold-with-boundary, lem-gluing-broken-index-two-trajectories-gives-collar-ends, lem-unstable-orientations-induce-trajectory-moduli-orientations, def-product-orientation, def-induced-boundary-orientation, prop-boundary-orientation-is-independent-of-the-outward-vector-field, def-morse-smale-pair, def-downward-gradient-like-vector-field, thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point, thm-euclidean-inverse-function-theorem, thm-euclidean-implicit-function-theorem, thm-fundamental-theorem-on-flows]
 proof_strategy: direct

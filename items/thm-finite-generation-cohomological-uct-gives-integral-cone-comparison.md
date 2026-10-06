@@ -2,7 +2,7 @@
 id: thm-finite-generation-cohomological-uct-gives-integral-cone-comparison
 kind: theorem
 title: "Finite-generation cohomological UCT gives integral cone comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

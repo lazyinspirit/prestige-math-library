@@ -1,7 +1,7 @@
 ---
 page: exotic-smooth-structures-and-milnor-spheres-examples
 title: "Exotic Smooth Structures and Milnor Spheres — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-standard-seven-sphere-as-a-quaternionic-hopf-sphere-bundle,
         ex-gysin-sequence-for-a-milnor-sphere-bundle,

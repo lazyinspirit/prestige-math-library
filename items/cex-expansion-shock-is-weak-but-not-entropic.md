@@ -2,7 +2,7 @@
 id: cex-expansion-shock-is-weak-but-not-entropic
 kind: counterexample
 title: The expansion shock is weak but not entropic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

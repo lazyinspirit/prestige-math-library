@@ -2,7 +2,7 @@
 id: thm-stationarity-is-sufficient-for-a-global-minimum-of-a-convex-differentiable-functional
 kind: theorem
 title: "Stationarity is sufficient for a global minimum of a convex differentiable functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

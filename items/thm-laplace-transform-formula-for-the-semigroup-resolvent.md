@@ -2,7 +2,7 @@
 id: thm-laplace-transform-formula-for-the-semigroup-resolvent
 kind: theorem
 title: "Laplace transform formula for the resolvent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

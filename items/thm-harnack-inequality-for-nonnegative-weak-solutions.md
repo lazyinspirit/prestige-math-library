@@ -2,7 +2,7 @@
 id: thm-harnack-inequality-for-nonnegative-weak-solutions
 kind: theorem
 title: "Harnack inequality for nonnegative weak solutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

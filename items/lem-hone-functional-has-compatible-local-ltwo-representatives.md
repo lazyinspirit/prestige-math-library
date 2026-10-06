@@ -2,7 +2,7 @@
 id: lem-hone-functional-has-compatible-local-ltwo-representatives
 kind: lemma
 title: "Bounded H1 functionals have compatible local L2 representatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

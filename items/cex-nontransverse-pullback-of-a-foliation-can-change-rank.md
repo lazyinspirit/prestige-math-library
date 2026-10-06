@@ -2,7 +2,7 @@
 id: cex-nontransverse-pullback-of-a-foliation-can-change-rank
 kind: counterexample
 title: "A nontransverse pullback need not reproduce the rank of a foliation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

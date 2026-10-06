@@ -2,7 +2,7 @@
 id: lem-highest-weight-vectors-in-a-schur-tensor-product-are-lr-tableaux
 kind: lemma
 title: The admissible-tableau count equals the Littlewood--Richardson coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

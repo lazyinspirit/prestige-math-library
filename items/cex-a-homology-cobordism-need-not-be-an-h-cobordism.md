@@ -2,7 +2,7 @@
 id: cex-a-homology-cobordism-need-not-be-an-h-cobordism
 kind: counterexample
 title: A homology cobordism need not be an h-cobordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

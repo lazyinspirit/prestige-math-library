@@ -2,7 +2,7 @@
 id: lem-thom-class-of-a-disk-bundle-pairs-with-the-base-generator
 kind: lemma
 title: "The Thom class of a disk bundle pairs with the base generator to one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

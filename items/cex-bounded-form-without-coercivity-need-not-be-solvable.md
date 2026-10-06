@@ -2,7 +2,7 @@
 id: "cex-bounded-form-without-coercivity-need-not-be-solvable"
 kind: "counterexample"
 title: "A bounded form without coercivity need not be solvable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 5

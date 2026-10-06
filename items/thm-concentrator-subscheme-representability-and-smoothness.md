@@ -2,7 +2,7 @@
 id: thm-concentrator-subscheme-representability-and-smoothness
 kind: theorem
 title: Representability and smoothness of concentrator subschemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

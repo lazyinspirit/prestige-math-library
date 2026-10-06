@@ -2,7 +2,7 @@
 id: lem-stable-thom-cohomology-is-degreewise-eventually-constant
 kind: lemma
 title: "Stable universal Thom cohomology is eventually constant in every degree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

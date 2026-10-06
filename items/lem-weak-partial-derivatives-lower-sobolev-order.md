@@ -2,7 +2,7 @@
 id: lem-weak-partial-derivatives-lower-sobolev-order
 kind: lemma
 title: "Weak partial derivatives lower the Sobolev order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

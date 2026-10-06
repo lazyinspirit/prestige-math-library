@@ -2,7 +2,7 @@
 id: lem-blowup-charts-of-the-quadric-cone
 kind: lemma
 title: Blowup charts of the quadric cone at its vertex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

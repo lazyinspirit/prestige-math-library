@@ -2,7 +2,7 @@
 id: thm-stable-unoriented-thom-homotopy-is-injectively-detected
 kind: theorem
 title: "Stable unoriented Thom homotopy is injectively detected"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

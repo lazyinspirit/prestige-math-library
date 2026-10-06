@@ -2,7 +2,7 @@
 id: lem-kato-inequality-for-two-entropy-solutions
 kind: lemma
 title: The Kruzhkov doubling inequality for two entropy solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

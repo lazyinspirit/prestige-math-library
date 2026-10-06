@@ -2,7 +2,7 @@
 id: def-transitive-system-of-imprimitivity
 kind: definition
 title: Transitive systems of imprimitivity and their normalized measure class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

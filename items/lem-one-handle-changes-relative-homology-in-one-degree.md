@@ -2,7 +2,7 @@
 id: lem-one-handle-changes-relative-homology-in-one-degree
 kind: lemma
 title: "One handle changes relative homology in one degree only"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

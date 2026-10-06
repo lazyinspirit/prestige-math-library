@@ -2,7 +2,7 @@
 id: lem-cm-local-codimension-and-regular-quotient-ext-concentration
 kind: lemma
 title: "CM local codimension and Ext concentration over a regular local ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

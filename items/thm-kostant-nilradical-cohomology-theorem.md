@@ -2,7 +2,7 @@
 id: thm-kostant-nilradical-cohomology-theorem
 kind: theorem
 title: "Kostant's nilradical cohomology theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-regular-local-surface-is-rational-by-point-blowup-domination
 kind: lemma
 title: "Regular local surfaces have rational modification cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

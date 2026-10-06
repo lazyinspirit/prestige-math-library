@@ -2,7 +2,7 @@
 id: rem-real-hp-is-quasi-banach-below-one
 kind: remark
 title: "For $0<p<1$ the $H^p$ functional is a quasi-norm, and $H^p$ is a quasi-Banach space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

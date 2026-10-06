@@ -2,7 +2,7 @@
 id: lem-unitary-intertwiners-preserve-fiber-multiplicity-over-a-standard-borel-base
 kind: lemma
 title: Unitary intertwiners preserve fibre multiplicity over a standard Borel base
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

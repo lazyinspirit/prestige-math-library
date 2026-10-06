@@ -2,7 +2,7 @@
 id: thm-freudenthal-weight-multiplicity-recursion
 kind: theorem
 title: Freudenthal's weight multiplicity recursion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

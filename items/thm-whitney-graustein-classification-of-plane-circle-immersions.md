@@ -2,7 +2,7 @@
 id: thm-whitney-graustein-classification-of-plane-circle-immersions
 kind: theorem
 title: "Whitney–Graustein classification of plane circle immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-regular-homotopy-preserves-the-formal-gauss-class, lem-formal-immersions-of-the-circle-in-the-plane-are-classified-by-the-winding-number, def-rotation-number-of-an-immersed-oriented-circle-in-the-plane, cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes, thm-smale-hirsch-immersion-theorem, def-regular-homotopy-of-immersions, def-space-of-immersions-and-space-of-formal-immersions, def-weak-homotopy-equivalence, def-homotopy-relative-and-path-homotopy, def-countable-choice]

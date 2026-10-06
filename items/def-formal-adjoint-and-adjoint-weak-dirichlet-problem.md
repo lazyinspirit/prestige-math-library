@@ -2,7 +2,7 @@
 id: def-formal-adjoint-and-adjoint-weak-dirichlet-problem
 kind: definition
 title: "The formal adjoint and the adjoint weak Dirichlet problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

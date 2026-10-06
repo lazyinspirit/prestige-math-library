@@ -2,7 +2,7 @@
 id: lem-a-nullhomotopic-closed-transversal-yields-a-vanishing-cycle
 kind: lemma
 title: A null-homotopic closed transversal yields a vanishing cycle
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

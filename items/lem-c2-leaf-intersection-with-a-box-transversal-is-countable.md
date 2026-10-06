@@ -2,7 +2,7 @@
 id: lem-c2-leaf-intersection-with-a-box-transversal-is-countable
 kind: lemma
 title: A C² leaf meets a local box transversal in at most countably many points
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

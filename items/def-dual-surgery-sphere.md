@@ -2,7 +2,7 @@
 id: "def-dual-surgery-sphere"
 kind: "definition"
 title: "Dual surgery sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: cex-adjacent-index-handles-with-zero-intersection-do-not-cancel
 kind: counterexample
 title: "Adjacent-index handles with zero intersection do not cancel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-normal-surface-modification-no-derived-residue-map
 kind: lemma
 title: "No derived residue map into structure cohomology of a normal surface modification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-winding-number-is-locally-constant-via-integral-estimate
 kind: lemma
 title: "The winding number is locally constant by an integral estimate"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: thm-kerov-central-limit-theorem-for-normalized-cycle-characters
 kind: theorem
 title: "Kerov's central limit theorem for normalized cycle characters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

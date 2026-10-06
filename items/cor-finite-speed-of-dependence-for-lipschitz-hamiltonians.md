@@ -2,7 +2,7 @@
 id: cor-finite-speed-of-dependence-for-lipschitz-hamiltonians
 kind: corollary
 title: Finite speed of dependence for Hamiltonians Lipschitz in momentum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

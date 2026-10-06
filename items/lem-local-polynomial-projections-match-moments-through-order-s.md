@@ -2,7 +2,7 @@
 id: lem-local-polynomial-projections-match-moments-through-order-s
 kind: lemma
 title: "Local polynomial projections matching moments through order $s$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

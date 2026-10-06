@@ -2,7 +2,7 @@
 id: lem-regular-homotopy-preserves-the-formal-gauss-class
 kind: lemma
 title: "Regular homotopy preserves the formal Gauss class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle, def-regular-homotopy-of-immersions, lem-the-derivative-map-is-continuous, lem-smooth-families-and-path-components-in-the-weak-topology, def-space-of-immersions-and-space-of-formal-immersions, def-weak-compact-open-smooth-topology-on-mapping-spaces, def-smooth-family-of-maps-and-evaluation-map, thm-the-exponential-law, def-homotopy-relative-and-path-homotopy, def-countable-choice, lem-the-basepoint-evaluation-of-the-stiefel-section-space-is-a-fibration, lem-formal-immersions-of-the-circle-in-the-plane-are-classified-by-the-winding-number]

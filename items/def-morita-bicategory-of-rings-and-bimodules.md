@@ -2,7 +2,7 @@
 id: def-morita-bicategory-of-rings-and-bimodules
 kind: definition
 title: "The Morita bicategory of rings and bimodules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

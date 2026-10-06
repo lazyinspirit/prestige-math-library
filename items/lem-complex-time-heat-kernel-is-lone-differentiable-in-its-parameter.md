@@ -2,7 +2,7 @@
 id: lem-complex-time-heat-kernel-is-lone-differentiable-in-its-parameter
 kind: lemma
 title: The complex-time heat kernel is L1-differentiable in its parameter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

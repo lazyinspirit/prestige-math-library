@@ -2,7 +2,7 @@
 id: "cor-weak-solution-depends-continuously-on-data"
 kind: "corollary"
 title: "Weak solutions depend continuously on the data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 8

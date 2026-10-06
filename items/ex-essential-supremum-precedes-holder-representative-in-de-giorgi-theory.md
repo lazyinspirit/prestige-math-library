@@ -2,7 +2,7 @@
 id: ex-essential-supremum-precedes-holder-representative-in-de-giorgi-theory
 kind: example
 title: "The essential supremum precedes the Holder representative in De Giorgi theory"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

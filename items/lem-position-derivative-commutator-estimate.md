@@ -2,7 +2,7 @@
 id: lem-position-derivative-commutator-estimate
 kind: lemma
 title: 'The coordinate inequality $\|x_jf\|_2\|D_jf\|_2\ge\frac12\|f\|_2^2$'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

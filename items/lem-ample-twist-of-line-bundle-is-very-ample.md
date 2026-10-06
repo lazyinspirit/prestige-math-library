@@ -2,7 +2,7 @@
 id: lem-ample-twist-of-line-bundle-is-very-ample
 kind: lemma
 title: "Large ample twists of a line bundle are very ample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

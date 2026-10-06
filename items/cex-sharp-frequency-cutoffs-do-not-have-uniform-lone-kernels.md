@@ -2,7 +2,7 @@
 id: cex-sharp-frequency-cutoffs-do-not-have-uniform-lone-kernels
 kind: counterexample
 title: "Sharp frequency cutoffs have kernels that are not in L1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

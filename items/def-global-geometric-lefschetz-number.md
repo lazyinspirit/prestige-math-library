@@ -2,7 +2,7 @@
 id: def-global-geometric-lefschetz-number
 kind: definition
 title: "Geometric Lefschetz number (index sum)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

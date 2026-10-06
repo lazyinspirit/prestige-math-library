@@ -2,7 +2,7 @@
 id: cex-minima-of-viscosity-subsolutions-need-not-be-subsolutions
 kind: counterexample
 title: Minima of viscosity subsolutions need not be subsolutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

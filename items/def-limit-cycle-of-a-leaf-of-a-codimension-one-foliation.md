@@ -2,7 +2,7 @@
 id: def-limit-cycle-of-a-leaf-of-a-codimension-one-foliation
 kind: definition
 title: "Limit cycles of a leaf"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

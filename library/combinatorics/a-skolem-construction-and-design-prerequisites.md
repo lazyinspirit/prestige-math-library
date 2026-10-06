@@ -1,7 +1,7 @@
 ---
 page: a-skolem-construction-and-design-prerequisites
 title: "Skolem construction and design prerequisites"
-status: draft
+status: published
 items: [def-two-design, def-steiner-systems-and-steiner-triple-systems, thm-skolem-construction-produces-a-steiner-triple-system]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: ex-perfect-morse-function-on-a-torus
 kind: example
 title: "A Morse function on the torus is perfect over every field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

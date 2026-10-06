@@ -2,7 +2,7 @@
 id: rem-critical-sobolev-does-not-embed-in-linfinity
 kind: remark
 title: "The $p=n$ endpoint: no $L^\\infty$ or Holder embedding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

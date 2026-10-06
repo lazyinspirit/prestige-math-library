@@ -3,7 +3,7 @@ id: lem-orientation-coefficients-as-deck-eigenspaces-and-product-pairings
 kind: lemma
 title: Orientation coefficients are deck eigenspaces, with product and duality
   pairings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

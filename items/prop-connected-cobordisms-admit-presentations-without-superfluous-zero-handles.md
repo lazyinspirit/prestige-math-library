@@ -2,7 +2,7 @@
 id: prop-connected-cobordisms-admit-presentations-without-superfluous-zero-handles
 kind: proposition
 title: "Connected cobordisms admit presentations without superfluous zero handles"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [def-handle-decomposition-relative-to-the-incoming-boundary, thm-morse-functions-and-handle-decompositions-correspond, thm-self-indexing-morse-function-existence, lem-handles-of-equal-index-can-be-attached-on-one-level, cor-index-zero-handles-create-components, lem-a-one-handle-between-distinct-boundary-components-is-a-boundary-connected-sum, lem-boundary-connected-sum-with-a-disk-does-not-change-the-diffeomorphism-type, thm-collar-neighborhood-theorem, def-countable-choice, thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms]

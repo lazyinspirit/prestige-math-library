@@ -2,7 +2,7 @@
 id: def-shifted-elliptic-solution-operator
 kind: definition
 title: "The shifted elliptic solution operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

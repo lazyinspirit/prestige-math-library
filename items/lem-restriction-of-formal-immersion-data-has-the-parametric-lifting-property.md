@@ -2,7 +2,7 @@
 id: lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property
 kind: lemma
 title: "Restriction of formal-immersion data has the parametric lifting property"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-smooth-partitions-of-unity-exist-on-manifolds, thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space, thm-euclidean-tubular-neighbourhood-theorem, thm-smooth-inverse-function-theorem-on-manifolds, def-space-of-immersions-and-space-of-formal-immersions, def-weak-compact-open-smooth-topology-on-mapping-spaces, def-hurewicz-and-serre-fibrations, def-tubular-neighbourhood-of-an-embedded-submanifold, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold, thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary, def-countable-choice, prop-bundle-maps-over-f-are-sections-of-the-pulled-back-hom-bundle, def-formal-immersion-between-smooth-manifolds, def-immersion-submersion-and-constant-rank-map]

@@ -2,7 +2,7 @@
 id: lem-adjoint-action-preserves-the-associated-graded-of-a-two-sided-ideal
 kind: lemma
 title: "The adjoint action preserves the associated graded of a two-sided ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

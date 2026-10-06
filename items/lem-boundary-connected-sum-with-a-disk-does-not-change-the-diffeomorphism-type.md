@@ -2,7 +2,7 @@
 id: lem-boundary-connected-sum-with-a-disk-does-not-change-the-diffeomorphism-type
 kind: lemma
 title: "Boundary connected sum with a disk does not change the diffeomorphism type"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-smooth-collar-of-a-manifold-boundary, thm-collar-neighborhood-theorem, def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary, thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold, def-countable-choice, thm-smooth-inverse-function-theorem-on-manifolds]

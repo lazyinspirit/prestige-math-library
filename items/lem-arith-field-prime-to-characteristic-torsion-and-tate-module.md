@@ -2,7 +2,7 @@
 id: lem-arith-field-prime-to-characteristic-torsion-and-tate-module
 kind: lemma
 title: "Field prime to characteristic torsion and Tate module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

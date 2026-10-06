@@ -2,7 +2,7 @@
 id: cor-a-semigroup-with-unbounded-generator-cannot-be-operator-norm-continuous-at-zero
 kind: corollary
 title: "A semigroup with unbounded generator is not norm continuous at zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

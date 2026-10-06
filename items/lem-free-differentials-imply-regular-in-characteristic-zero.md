@@ -2,7 +2,7 @@
 id: lem-free-differentials-imply-regular-in-characteristic-zero
 kind: lemma
 title: "Free differentials imply regularity in characteristic zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["lem-differentials-generating-a-free-direct-summand-are-nonzerodivisors", "lem-ag-separable-residue-cotangent-sequence", "thm-nakayama-lemma", "thm-quotient-and-lifting-regularity-across-a-regular-element", "thm-conormal-exact-sequence-algebra", "def-embedding-dimension-and-regular-local-ring", "cor-minimal-generators-over-a-local-ring", "cor-noetherian-modules-are-hopfian", "def-finitely-generated-field-extension", "thm-ag-separating-transcendence-basis-perfect-field", "def-perfect-field", "def-kahler-differentials-algebra", "def-local-ring", "def-axiom-of-choice", "lem-differentials-localization", "cor-finite-type-algebra-over-noetherian-ring-is-noetherian", "lem-field-is-noetherian", "thm-noetherian-ring-quotients-and-localisations", "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect", "thm-dimension-at-most-embedding-dimension", "thm-krull-intersection-theorem", "def-ag-separating-transcendence-basis"]

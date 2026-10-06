@@ -2,7 +2,7 @@
 id: lem-smooth-immersion-normal-sequence-and-deformation-charts
 kind: lemma
 title: "Smooth immersions, their conormal sequence, deformation charts and smooth sections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

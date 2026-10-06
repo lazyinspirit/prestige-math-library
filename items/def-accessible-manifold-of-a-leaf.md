@@ -2,7 +2,7 @@
 id: def-accessible-manifold-of-a-leaf
 kind: definition
 title: The accessible manifold of a leaf
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

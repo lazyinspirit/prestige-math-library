@@ -1,7 +1,7 @@
 ---
 page: foliation-holonomy-and-the-holonomy-groupoid-examples
 title: Foliation Holonomy and the Holonomy Groupoid — Examples
-status: draft
+status: published
 items: []
 examples: [ex-kronecker-foliation-of-the-torus-has-trivial-leaf-holonomy,
         ex-mobius-band-central-leaf-has-reflection-holonomy,

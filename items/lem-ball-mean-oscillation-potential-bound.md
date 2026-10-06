@@ -2,7 +2,7 @@
 id: lem-ball-mean-oscillation-potential-bound
 kind: lemma
 title: "Ball-mean oscillation bound by the Riesz potential of the gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-khovanov-seidel-basic-arcs-detect-the-identity-braid
 kind: lemma
 title: "The basic arcs detect the identity braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

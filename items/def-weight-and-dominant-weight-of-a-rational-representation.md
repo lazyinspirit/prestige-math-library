@@ -2,7 +2,7 @@
 id: def-weight-and-dominant-weight-of-a-rational-representation
 kind: definition
 title: "Weights, dominant weights and the highest-weight order of a rational representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 25

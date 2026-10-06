@@ -2,7 +2,7 @@
 id: lem-boundary-restriction-image-is-lagrangian
 kind: lemma
 title: "The restriction image on a cobordism boundary is Lagrangian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

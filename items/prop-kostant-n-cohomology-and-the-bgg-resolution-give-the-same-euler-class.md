@@ -2,7 +2,7 @@
 id: prop-kostant-n-cohomology-and-the-bgg-resolution-give-the-same-euler-class
 kind: proposition
 title: "Kostant cohomology and BGG characters give the same Weyl numerator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

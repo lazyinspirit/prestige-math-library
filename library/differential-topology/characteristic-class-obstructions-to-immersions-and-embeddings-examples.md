@@ -1,7 +1,7 @@
 ---
 page: characteristic-class-obstructions-to-immersions-and-embeddings-examples
 title: Characteristic Class Obstructions to Immersions and Embeddings — Examples
-status: draft
+status: published
 requires: [characteristic-class-obstructions-to-immersions-and-embeddings, compact-lie-groups-maximal-tori-and-peter-weyl-theory]
 items: []
 examples:

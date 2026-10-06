@@ -2,7 +2,7 @@
 id: lem-framed-points-in-one-component-of-the-frame-bundle-are-framed-cobordant
 kind: lemma
 title: Framed points in one component of the frame bundle are framed cobordant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

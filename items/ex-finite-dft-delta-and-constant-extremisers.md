@@ -2,7 +2,7 @@
 id: ex-finite-dft-delta-and-constant-extremisers
 kind: example
 title: Delta and constant functions are finite DFT extremisers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

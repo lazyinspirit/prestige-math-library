@@ -2,7 +2,7 @@
 id: lem-abelian-scheme-base-change-and-products
 kind: lemma
 title: "Base change and products of abelian schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

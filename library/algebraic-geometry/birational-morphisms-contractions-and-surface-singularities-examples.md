@@ -1,7 +1,7 @@
 ---
 page: birational-morphisms-contractions-and-surface-singularities-examples
 title: "Birational Morphisms, Contractions, and Surface Singularities — Examples"
-status: draft
+status: published
 requires:
   - birational-morphisms-contractions-and-surface-singularities
 items: []

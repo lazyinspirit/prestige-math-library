@@ -2,7 +2,7 @@
 id: ex-poisson-equation-with-ltwo-data-gains-two-interior-derivatives
 kind: example
 title: "Poisson's equation with $L^2$ data gains two interior derivatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

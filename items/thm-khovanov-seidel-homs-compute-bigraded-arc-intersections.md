@@ -2,7 +2,7 @@
 id: thm-khovanov-seidel-homs-compute-bigraded-arc-intersections
 kind: theorem
 title: "Homs compute bigraded arc intersections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

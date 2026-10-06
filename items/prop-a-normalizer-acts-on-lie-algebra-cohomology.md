@@ -2,7 +2,7 @@
 id: prop-a-normalizer-acts-on-lie-algebra-cohomology
 kind: proposition
 title: "The normalizer acts on Lie algebra cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

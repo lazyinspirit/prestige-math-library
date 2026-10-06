@@ -2,7 +2,7 @@
 id: def-principal-series-module-for-finite-gl-n
 kind: definition
 title: "The principal series module for finite GL_n"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

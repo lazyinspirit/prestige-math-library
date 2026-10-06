@@ -2,7 +2,7 @@
 id: thm-finite-thom-detector-is-an-integral-homology-isomorphism-below-2r-minus-1
 kind: theorem
 title: "The finite Thom detector is an integral homology isomorphism below 2r−1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

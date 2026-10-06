@@ -2,7 +2,7 @@
 id: cor-integrable-hardy-functions-have-vanishing-moments-in-the-atomic-range
 kind: corollary
 title: "Weighted-integrable $H^p$ functions have vanishing moments in the atomic range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

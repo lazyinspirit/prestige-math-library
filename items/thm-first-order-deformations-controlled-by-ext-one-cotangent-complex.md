@@ -2,7 +2,7 @@
 id: "thm-first-order-deformations-controlled-by-ext-one-cotangent-complex"
 kind: "theorem"
 title: "First-order deformations are controlled by Ext^1 of the cotangent complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 15

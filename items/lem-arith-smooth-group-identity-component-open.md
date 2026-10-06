@@ -2,7 +2,7 @@
 id: lem-arith-smooth-group-identity-component-open
 kind: lemma
 title: "The identity model of a smooth group with abelian generic fibre"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

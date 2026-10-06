@@ -2,7 +2,7 @@
 id: lem-ltwo-atoms-have-uniform-hone-quasinorm
 kind: lemma
 title: "L2-normalised H1 atoms have uniformly bounded H1 norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

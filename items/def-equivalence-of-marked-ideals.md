@@ -2,7 +2,7 @@
 id: "def-equivalence-of-marked-ideals"
 kind: "definition"
 title: "Equivalence of marked ideals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 4

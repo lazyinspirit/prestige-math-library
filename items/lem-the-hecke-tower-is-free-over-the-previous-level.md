@@ -2,7 +2,7 @@
 id: lem-the-hecke-tower-is-free-over-the-previous-level
 kind: lemma
 title: "The Hecke tower is free over the previous level"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

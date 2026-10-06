@@ -2,7 +2,7 @@
 id: lem-surface-non-pth-power-detected-by-derivation
 kind: lemma
 title: Surface non pth power detected by derivation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

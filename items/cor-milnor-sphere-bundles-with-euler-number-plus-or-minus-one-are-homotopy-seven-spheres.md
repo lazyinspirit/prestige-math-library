@@ -2,7 +2,7 @@
 id: cor-milnor-sphere-bundles-with-euler-number-plus-or-minus-one-are-homotopy-seven-spheres
 kind: corollary
 title: "Euler number $\\pm1$ makes the Milnor sphere bundle a homotopy seven-sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

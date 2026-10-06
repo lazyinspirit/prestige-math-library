@@ -2,7 +2,7 @@
 id: thm-thurston-stability-for-c1-interval-germ-groups-are-locally-indicable
 kind: theorem
 title: "Thurston stability: groups of orientation-preserving C¹ interval germs are locally indicable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

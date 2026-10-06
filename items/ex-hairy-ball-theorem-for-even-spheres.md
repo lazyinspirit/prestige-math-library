@@ -2,7 +2,7 @@
 id: ex-hairy-ball-theorem-for-even-spheres
 kind: example
 title: "The hairy-ball theorem for even spheres"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

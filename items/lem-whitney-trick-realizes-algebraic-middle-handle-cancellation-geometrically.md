@@ -2,7 +2,7 @@
 id: lem-whitney-trick-realizes-algebraic-middle-handle-cancellation-geometrically
 kind: lemma
 title: The Whitney trick realizes algebraic middle-handle cancellation geometrically
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 16

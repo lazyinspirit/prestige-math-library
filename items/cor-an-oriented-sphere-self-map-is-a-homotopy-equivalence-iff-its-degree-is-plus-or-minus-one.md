@@ -2,7 +2,7 @@
 id: cor-an-oriented-sphere-self-map-is-a-homotopy-equivalence-iff-its-degree-is-plus-or-minus-one
 kind: corollary
 title: Sphere self-maps of degree $\pm1$ are exactly the homotopy equivalences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: ex-hopf-lax-solution-with-a-forming-corner
 kind: example
 title: A Hopf--Lax solution with a forming corner from smooth data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

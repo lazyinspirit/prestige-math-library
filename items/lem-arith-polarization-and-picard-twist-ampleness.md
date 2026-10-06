@@ -2,7 +2,7 @@
 id: lem-arith-polarization-and-picard-twist-ampleness
 kind: lemma
 title: "Polarizations and ampleness under Picard twists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

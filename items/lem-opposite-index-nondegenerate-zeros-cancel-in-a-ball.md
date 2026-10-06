@@ -2,7 +2,7 @@
 id: lem-opposite-index-nondegenerate-zeros-cancel-in-a-ball
 kind: lemma
 title: "Opposite-index nondegenerate zeros cancel in a ball"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

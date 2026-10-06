@@ -2,7 +2,7 @@
 id: lem-internal-shift-endofunctors-and-tensor-compatibility
 kind: lemma
 title: Internal shifts are autoequivalences and commute with the graded tensor product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-graded-ring-module-bimodule-and-internal-shift, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, lem-graded-balanced-tensor-and-shift-isomorphisms, def-graded-balanced-tensor-product-and-homogeneous-hom, def-bimodule, def-functor-and-contravariant-functor, def-k-linear-category-and-k-linear-functor, def-vector-space, def-field, lem-field-is-a-commutative-ring, lem-graded-degreewise-direct-sums-and-homogeneous-free-covers]

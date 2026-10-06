@@ -2,7 +2,7 @@
 id: thm-global-schauder-regularity-for-the-weak-dirichlet-laplacian
 kind: theorem
 title: Global Schauder regularity for the weak Dirichlet Laplacian
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

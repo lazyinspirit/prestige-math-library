@@ -28,7 +28,7 @@ sources:
     url: https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf
     locator: Theorem 6.6, printed p. 71 (hypotheses $s\ge3$ and, for $r\le2$, injectivity of $\pi_1(V-M')\to\pi_1(V)$);
       Lemma 6.10, printed p. 79 (loops in $V' - Y$ vs $V'-Y$ for codimension at least three)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

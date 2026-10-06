@@ -2,7 +2,7 @@
 id: lem-kronecker-pairing-is-multiplicative-under-cross-products
 kind: lemma
 title: "The Kronecker pairing is multiplicative under cross products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-kronecker-evaluation-pairing, lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives, def-singular-chain-cross-product-on-generators, lem-singular-chain-cross-product-boundary-formula, prop-singular-chain-cross-products-are-natural, def-additive-singular-cohomology-cross-product, lem-additive-singular-cohomology-cross-product-is-well-defined, def-homology-cross-product-for-tensor-complexes, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, def-singular-cup-product-on-cochains, thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses, lem-the-kunneth-cross-product-map-is-well-defined-and-natural, lem-singular-product-chain-equivalence-by-simplex-models]

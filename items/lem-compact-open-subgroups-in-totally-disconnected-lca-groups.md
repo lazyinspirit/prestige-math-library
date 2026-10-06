@@ -2,7 +2,7 @@
 id: lem-compact-open-subgroups-in-totally-disconnected-lca-groups
 kind: lemma
 title: Totally disconnected LCA groups have bases of compact open subgroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

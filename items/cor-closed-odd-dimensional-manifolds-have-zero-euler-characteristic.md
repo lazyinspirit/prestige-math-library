@@ -2,7 +2,7 @@
 id: cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic
 kind: corollary
 title: "Closed odd-dimensional manifolds have zero Euler characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

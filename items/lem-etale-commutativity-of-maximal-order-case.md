@@ -2,7 +2,7 @@
 id: "lem-etale-commutativity-of-maximal-order-case"
 kind: "lemma"
 title: "Etale commutativity of the maximal-order resolution step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 11

@@ -2,7 +2,7 @@
 id: lem-orientation-reversal-is-inverse-in-theta-n
 kind: lemma
 title: "Orientation reversal is the connected-sum inverse"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

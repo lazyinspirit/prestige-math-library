@@ -2,7 +2,7 @@
 id: cex-equal-actions-on-k-zero-do-not-imply-isomorphic-derived-autoequivalences
 kind: counterexample
 title: "Equal actions on K_0 do not imply isomorphic derived autoequivalences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 12

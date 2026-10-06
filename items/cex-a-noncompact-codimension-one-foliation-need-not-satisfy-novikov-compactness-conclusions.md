@@ -2,7 +2,7 @@
 id: cex-a-noncompact-codimension-one-foliation-need-not-satisfy-novikov-compactness-conclusions
 kind: counterexample
 title: A noncompact foliation violating Novikov's compactness conclusions
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

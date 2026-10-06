@@ -2,7 +2,7 @@
 id: def-primitive-ideal-of-an-enveloping-algebra
 kind: definition
 title: "Primitive ideals of an enveloping algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

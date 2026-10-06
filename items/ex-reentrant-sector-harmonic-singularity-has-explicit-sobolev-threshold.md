@@ -2,7 +2,7 @@
 id: ex-reentrant-sector-harmonic-singularity-has-explicit-sobolev-threshold
 kind: example
 title: "The reentrant sector singularity has an explicit Sobolev threshold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

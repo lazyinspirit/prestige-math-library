@@ -2,7 +2,7 @@
 id: thm-riemann-solver-for-strictly-convex-scalar-flux
 kind: theorem
 title: The Riemann solver for a strictly convex flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

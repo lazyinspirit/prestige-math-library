@@ -2,7 +2,7 @@
 id: rem-vanishing-primary-double-point-and-characteristic-obstructions-do-not-classify-embeddings
 kind: remark
 title: Vanishing primary and characteristic obstructions do not classify embeddings
-status: draft
+status: published
 origin: session
 dependency_level: 10
 provenance:

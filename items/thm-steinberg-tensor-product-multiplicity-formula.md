@@ -2,7 +2,7 @@
 id: thm-steinberg-tensor-product-multiplicity-formula
 kind: theorem
 title: Steinberg's tensor-product multiplicity formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

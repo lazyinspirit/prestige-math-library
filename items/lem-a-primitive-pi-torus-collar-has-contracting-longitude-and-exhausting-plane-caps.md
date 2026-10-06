@@ -2,7 +2,7 @@
 id: lem-a-primitive-pi-torus-collar-has-contracting-longitude-and-exhausting-plane-caps
 kind: lemma
 title: "A primitive pi torus collar has contracting longitude and exhausting plane caps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

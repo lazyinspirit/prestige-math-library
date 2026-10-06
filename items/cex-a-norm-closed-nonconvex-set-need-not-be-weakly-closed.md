@@ -2,7 +2,7 @@
 id: cex-a-norm-closed-nonconvex-set-need-not-be-weakly-closed
 kind: counterexample
 title: "A norm-closed nonconvex set need not be weakly closed"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

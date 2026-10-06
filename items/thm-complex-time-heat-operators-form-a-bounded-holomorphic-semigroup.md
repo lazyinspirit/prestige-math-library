@@ -2,7 +2,7 @@
 id: thm-complex-time-heat-operators-form-a-bounded-holomorphic-semigroup
 kind: theorem
 title: Complex-time heat operators form a bounded holomorphic semigroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

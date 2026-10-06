@@ -2,7 +2,7 @@
 id: "thm-finite-regular-constraint-lagrange-multiplier-rule"
 kind: "theorem"
 title: "The Lagrange multiplier rule for finitely many regular constraints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 4

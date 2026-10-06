@@ -2,7 +2,7 @@
 id: lem-central-actions-on-nilradical-cohomology-factor-through-harish-chandra
 kind: lemma
 title: "Central actions on nilradical cohomology factor through the Harish–Chandra projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

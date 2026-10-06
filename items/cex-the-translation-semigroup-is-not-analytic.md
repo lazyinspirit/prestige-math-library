@@ -2,7 +2,7 @@
 id: cex-the-translation-semigroup-is-not-analytic
 kind: counterexample
 title: The translation semigroup is not analytic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

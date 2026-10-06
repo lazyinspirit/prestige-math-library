@@ -2,7 +2,7 @@
 id: thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories
 kind: theorem
 title: "Categorical Eilenberg–Watts equivalences for finite linear categories"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-abelian-category, def-algebraic-dual-and-linear-functional, def-axiom-of-choice, def-bimodule, def-dimension, def-end-and-coend, def-equivalence-and-adjoint-equivalence-of-categories, def-k-linear-category-and-k-linear-functor, def-left-exact-and-right-exact-functor, def-natural-transformation, def-opposite-ring, lem-finite-module-duality-is-exact-with-commuting-bimodule-actions, lem-opposite-deligne-product-identifies-with-finite-bimodules, prop-functoriality-of-module-tensor-products, thm-bimodule-actions-induced-on-tensor-products, thm-finite-abelian-categories-are-finite-dimensional-module-categories, thm-finite-eilenberg-watts-for-right-exact-linear-functors, thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels, thm-tensor-product-of-algebras-over-a-commutative-ring, thm-universal-property-of-module-tensor-products]

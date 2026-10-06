@@ -2,7 +2,7 @@
 id: thm-model-structures-on-variable-simplicial-modules-and-algebras
 kind: theorem
 title: "Model structures for variable simplicial modules and algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

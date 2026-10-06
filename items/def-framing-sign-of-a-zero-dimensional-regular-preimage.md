@@ -2,7 +2,7 @@
 id: def-framing-sign-of-a-zero-dimensional-regular-preimage
 kind: definition
 title: The framing sign of a zero-dimensional regular preimage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

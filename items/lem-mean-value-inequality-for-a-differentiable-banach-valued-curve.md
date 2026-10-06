@@ -2,7 +2,7 @@
 id: lem-mean-value-inequality-for-a-differentiable-banach-valued-curve
 kind: lemma
 title: "Mean value inequality for a differentiable Banach-valued curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

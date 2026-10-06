@@ -2,7 +2,7 @@
 id: cex-a-semistandard-skew-tableau-with-nonlattice-word-is-not-lr
 kind: counterexample
 title: A semistandard tableau with non-lattice reading word is not a Littlewood--Richardson tableau
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

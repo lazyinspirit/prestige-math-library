@@ -2,7 +2,7 @@
 id: ex-a-littlewood-richardson-coefficient-greater-than-one
 kind: example
 title: A Littlewood--Richardson coefficient greater than one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

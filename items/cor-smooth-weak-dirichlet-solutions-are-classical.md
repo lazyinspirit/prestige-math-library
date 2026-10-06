@@ -2,7 +2,7 @@
 id: cor-smooth-weak-dirichlet-solutions-are-classical
 kind: corollary
 title: "Smooth weak Dirichlet solutions are classical"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

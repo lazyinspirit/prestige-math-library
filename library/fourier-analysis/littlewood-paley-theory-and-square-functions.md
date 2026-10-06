@@ -1,7 +1,7 @@
 ---
 page: littlewood-paley-theory-and-square-functions
 title: "Littlewood Paley Theory and Square Functions"
-status: draft
+status: published
 requires:
   - lacunary-fourier-series-and-sidon-sets
   - fourier-multipliers-and-sobolev-characterisations

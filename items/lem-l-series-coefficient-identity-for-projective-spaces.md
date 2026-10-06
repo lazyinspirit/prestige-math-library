@@ -2,7 +2,7 @@
 id: lem-l-series-coefficient-identity-for-projective-spaces
 kind: lemma
 title: "The coefficient identity $[z^{2k}](z/\\tanh z)^{2k+1}=1$ for every $k$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

@@ -2,7 +2,7 @@
 id: lem-characteristic-disk-center-saddle-index-count
 kind: lemma
 title: "The characteristic disk has one more center than saddle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

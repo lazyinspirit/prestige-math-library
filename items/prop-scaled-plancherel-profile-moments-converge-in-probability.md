@@ -2,7 +2,7 @@
 id: prop-scaled-plancherel-profile-moments-converge-in-probability
 kind: proposition
 title: "Scaled Plancherel profile moments converge in probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

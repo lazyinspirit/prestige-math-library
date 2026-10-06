@@ -21,7 +21,7 @@ sources:
     locator: 'Printed pp. 139–140: collared disk outside f(N), correction of one normal summand, and alteration
       of only one source sheet.'
 proof_strategy: direct
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

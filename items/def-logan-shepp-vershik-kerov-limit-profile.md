@@ -2,7 +2,7 @@
 id: def-logan-shepp-vershik-kerov-limit-profile
 kind: definition
 title: "The Logan-Shepp-Vershik-Kerov limit profile $\\Omega$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-russian-profile-and-sqrt-n-scaling-of-a-young-diagram, def-principal-inverse-sine-and-cosine, def-derivative, thm-derivative-of-an-inverse, thm-sine-and-cosine-derivatives, thm-chain-rule, thm-algebra-of-derivatives, cor-mean-value-theorem, lem-of-abs-value]

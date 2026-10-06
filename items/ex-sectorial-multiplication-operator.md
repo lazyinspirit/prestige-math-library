@@ -2,7 +2,7 @@
 id: ex-sectorial-multiplication-operator
 kind: example
 title: The sectorial multiplication operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 14

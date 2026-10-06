@@ -2,7 +2,7 @@
 id: cex-whitehead-vanishing-does-not-apply-to-the-nilpotent-radical
 kind: counterexample
 title: "Whitehead vanishing does not apply to the nilpotent radical"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

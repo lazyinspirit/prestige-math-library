@@ -2,7 +2,7 @@
 id: rem-the-outward-boundary-hypothesis-cannot-be-replaced-by-nonzero-on-the-boundary
 kind: remark
 title: "The outward boundary hypothesis cannot be replaced by nonzero on the boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

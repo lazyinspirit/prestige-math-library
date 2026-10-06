@@ -2,7 +2,7 @@
 id: lem-time-penalisation-moves-a-doubling-variables-maximum-away-from-the-terminal-boundary
 kind: lemma
 title: "Time penalisation moves a doubling-variables maximum away from the terminal boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-viscosity-subsolution-and-supersolution, def-hamilton-jacobi-cauchy-problem, def-total-derivative-in-euclidean-space, def-semicontinuity-on-euclidean-subsets, def-extended-reals, thm-heine-borel-rn, thm-compact-iff-finite-intersection-property]

@@ -2,7 +2,7 @@
 id: lem-equal-coordinate-rank-one-principal-series-of-gl2-fq
 kind: lemma
 title: "The equal-coordinate rank-one principal series of GL_2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

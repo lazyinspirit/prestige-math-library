@@ -2,7 +2,7 @@
 id: lem-dft-squares-to-reflection-and-has-fourth-power-identity
 kind: lemma
 title: "$\\mathcal F_N^2$ is reflection and $\\mathcal F_N^4$ is the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

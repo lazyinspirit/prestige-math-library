@@ -2,7 +2,7 @@
 id: lem-caccioppoli-inequality-for-truncated-subsolutions
 kind: lemma
 title: "Caccioppoli inequality for truncated subsolutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

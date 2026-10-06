@@ -2,7 +2,7 @@
 id: thm-resolution-of-normal-surface-singularities
 kind: theorem
 title: Resolution of normal surface singularities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 21

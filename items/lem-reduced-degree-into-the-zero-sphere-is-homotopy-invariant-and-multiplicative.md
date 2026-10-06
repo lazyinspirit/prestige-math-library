@@ -2,7 +2,7 @@
 id: lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative
 kind: lemma
 title: "Reduced degree into the 0-sphere is homotopy invariant and multiplicative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

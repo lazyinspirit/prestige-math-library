@@ -1,7 +1,7 @@
 ---
 page: projective-git-from-linearized-line-bundles
 title: "Projective GIT from Linearized Line Bundles"
-status: draft
+status: published
 requires: [reductive-affine-invariant-theory-and-geometric-quotients,
            quasi-coherent-and-coherent-sheaves-and-vector-bundles,
            proj-projective-schemes-twisting-sheaves-and-ampleness,

@@ -2,7 +2,7 @@
 id: lem-rho-minus-w-rho-is-a-sum-of-positive-roots
 kind: lemma
 title: The difference of the Weyl vector from its reflections is a sum of positive roots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

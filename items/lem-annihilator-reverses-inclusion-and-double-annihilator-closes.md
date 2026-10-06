@@ -2,7 +2,7 @@
 id: lem-annihilator-reverses-inclusion-and-double-annihilator-closes
 kind: lemma
 title: Annihilators reverse inclusions and the double annihilator closes the subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 18

@@ -2,7 +2,7 @@
 id: lem-adjoint-of-the-shifted-solution-operator-solves-the-adjoint-form-problem
 kind: lemma
 title: "The adjoint solution operator solves the adjoint form problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

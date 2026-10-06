@@ -2,7 +2,7 @@
 id: def-heat-ball-and-its-slices
 kind: definition
 title: Heat balls and their time slices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-geometric-convergence-to-a-broken-morse-trajectory
 kind: definition
 title: "Geometric convergence to a broken trajectory"
-status: draft
+status: published
 origin: pipeline
 deps: [def-broken-morse-trajectory, def-downward-gradient-like-vector-field, def-morse-smale-pair, def-metric-space, thm-topological-manifolds-are-metrizable-and-paracompact, def-compact-open-topology-for-topological-domains, prop-compact-open-is-uniform-on-a-compact-metric-domain, thm-fundamental-theorem-on-flows, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point, lem-evaluation-on-a-regular-level-identifies-unparametrized-trajectories, thm-unparametrized-trajectory-space-is-a-smooth-manifold, def-quotient-topology]
 justified_by: [thm-morse-trajectory-compactness-up-to-breaking]

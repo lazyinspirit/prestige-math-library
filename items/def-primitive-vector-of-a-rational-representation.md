@@ -2,7 +2,7 @@
 id: def-primitive-vector-of-a-rational-representation
 kind: definition
 title: "Primitive vectors for a Borel pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 26

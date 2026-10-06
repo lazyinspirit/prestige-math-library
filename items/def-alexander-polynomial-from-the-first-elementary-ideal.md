@@ -2,7 +2,7 @@
 id: def-alexander-polynomial-from-the-first-elementary-ideal
 kind: definition
 title: "The Alexander polynomial from the zeroth elementary ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

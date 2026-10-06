@@ -2,7 +2,7 @@
 id: lem-proper-pushforward-of-cycles-well-defined
 kind: lemma
 title: "Proper pushforward of cycles and the norm formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

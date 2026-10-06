@@ -2,7 +2,7 @@
 id: def-convex-and-strictly-convex-functionals-on-a-banach-space
 kind: definition
 title: "Convex and strictly convex functionals on a convex subset of a real vector space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-poisson-summation-under-two-sided-polynomial-decay
 kind: theorem
 title: "Poisson summation under two-sided polynomial decay"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

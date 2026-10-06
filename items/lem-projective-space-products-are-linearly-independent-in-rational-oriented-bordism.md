@@ -2,7 +2,7 @@
 id: lem-projective-space-products-are-linearly-independent-in-rational-oriented-bordism
 kind: lemma
 title: "Products of complex projective spaces are linearly independent in rational oriented bordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-projective-space-products-have-triangular-characteristic-number-matrix, thm-characteristic-numbers-are-cobordism-invariants, def-pontryagin-number-of-a-closed-oriented-manifold, def-unoriented-and-oriented-bordism-groups, thm-cartesian-product-makes-bordism-a-graded-ring, lem-characteristic-numbers-of-products-follow-the-whitney-sum-and-kunneth-formulas, def-axiom-of-choice, prop-zero-dimensional-bordism-groups]

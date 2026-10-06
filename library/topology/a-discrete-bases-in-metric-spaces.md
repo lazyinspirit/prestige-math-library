@@ -1,7 +1,7 @@
 ---
 page: a-discrete-bases-in-metric-spaces
 title: "Discrete bases in metric spaces"
-status: draft
+status: published
 items: [def-discrete-family-and-sigma-bases, lem-metric-spaces-have-sigma-discrete-open-bases]
 examples: []
 ---

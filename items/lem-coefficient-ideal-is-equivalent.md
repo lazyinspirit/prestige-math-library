@@ -2,7 +2,7 @@
 id: "lem-coefficient-ideal-is-equivalent"
 kind: "lemma"
 title: "The coefficient ideal is equivalent to the marked ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 7

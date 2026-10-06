@@ -2,7 +2,7 @@
 id: thm-linfinity-stability-for-the-inhomogeneous-heat-equation
 kind: theorem
 title: Supremum norm stability for forced heat problems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-local-wave-energy-conservation-law
 kind: lemma
 title: "The local wave-energy conservation law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

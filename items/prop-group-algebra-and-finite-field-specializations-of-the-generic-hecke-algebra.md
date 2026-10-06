@@ -2,7 +2,7 @@
 id: prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra
 kind: proposition
 title: "Group algebra and finite-field specializations of the generic Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

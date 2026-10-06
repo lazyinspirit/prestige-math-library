@@ -2,7 +2,7 @@
 id: def-weak-join-classifying-model-for-a-discrete-group
 kind: definition
 title: "Weak-join classifying model of a discrete group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

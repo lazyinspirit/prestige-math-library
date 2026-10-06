@@ -2,7 +2,7 @@
 id: prop-parallelizable-manifolds-have-no-stable-characteristic-class-obstruction-to-euclidean-immersion
 kind: proposition
 title: "Parallelizable manifolds have no stable characteristic-class obstruction to Euclidean immersion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-stable-normal-inverse-of-the-tangent-bundle", "lem-normal-stiefel-whitney-class-is-the-multiplicative-inverse-of-the-tangent-class", "lem-normal-pontryagin-class-is-the-rational-inverse-of-the-tangent-pontryagin-class", "def-normal-stiefel-whitney-and-pontryagin-classes-of-a-closed-manifold", "prop-smale-hirsch-makes-rank-reduction-sufficient-for-euclidean-immersion-in-positive-codimension", "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle", "def-whitney-sum-of-vector-bundles", "def-axiom-of-choice", "def-countable-choice", "thm-choice-implies-dependent-implies-countable-choice"]

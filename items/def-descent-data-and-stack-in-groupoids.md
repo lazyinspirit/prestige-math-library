@@ -2,7 +2,7 @@
 id: def-descent-data-and-stack-in-groupoids
 kind: definition
 title: "Descent data, prestacks and stacks in groupoids over the fppf site"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

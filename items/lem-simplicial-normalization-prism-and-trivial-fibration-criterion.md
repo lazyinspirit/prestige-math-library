@@ -2,7 +2,7 @@
 id: lem-simplicial-normalization-prism-and-trivial-fibration-criterion
 kind: lemma
 title: "Normalized simplicial chains, prism homotopies and the abelian trivial-fibration criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

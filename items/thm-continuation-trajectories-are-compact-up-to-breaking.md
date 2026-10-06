@@ -2,7 +2,7 @@
 id: thm-continuation-trajectories-are-compact-up-to-breaking
 kind: theorem
 title: "Continuation trajectories are compact up to breaking"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

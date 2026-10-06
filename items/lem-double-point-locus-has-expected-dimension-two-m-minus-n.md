@@ -2,7 +2,7 @@
 id: lem-double-point-locus-has-expected-dimension-two-m-minus-n
 kind: lemma
 title: The double point locus has the expected dimension $2m-n$
-status: draft
+status: published
 origin: session
 dependency_level: 2
 provenance:

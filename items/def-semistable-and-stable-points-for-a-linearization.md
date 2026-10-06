@@ -2,7 +2,7 @@
 id: def-semistable-and-stable-points-for-a-linearization
 kind: definition
 title: Semistable and stable points for a linearization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

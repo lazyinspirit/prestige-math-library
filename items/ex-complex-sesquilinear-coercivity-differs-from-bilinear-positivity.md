@@ -2,7 +2,7 @@
 id: "ex-complex-sesquilinear-coercivity-differs-from-bilinear-positivity"
 kind: "example"
 title: "Complex sesquilinear coercivity differs from bilinear positivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-vanishing-viscosity-convergence-for-hamilton-jacobi-equations
 kind: theorem
 title: Vanishing viscosity selects the viscosity solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

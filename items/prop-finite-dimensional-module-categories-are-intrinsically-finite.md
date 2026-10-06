@@ -2,7 +2,7 @@
 id: prop-finite-dimensional-module-categories-are-intrinsically-finite
 kind: proposition
 title: "Finite-dimensional module categories satisfy the intrinsic finiteness conditions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

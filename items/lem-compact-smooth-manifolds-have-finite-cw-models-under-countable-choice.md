@@ -2,7 +2,7 @@
 id: lem-compact-smooth-manifolds-have-finite-cw-models-under-countable-choice
 kind: lemma
 title: "Compact smooth manifolds have finite CW models under countable choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: def-reduced-khovanov-rozansky-homology
 kind: definition
 title: "The reduced Khovanov-Rozansky homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-khovanov-rozansky-complex-and-trigraded-braid-homology, def-factorization-of-a-marked-moy-graph, lem-koszul-row-operations-and-variable-exclusion-preserve-factorization-homotopy-type, def-chi-zero-and-chi-one-wide-edge-morphisms, thm-khovanov-rozansky-braid-homology-is-a-link-invariant-up-to-explicit-shift, def-axiom-of-choice]

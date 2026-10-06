@@ -2,7 +2,7 @@
 id: ex-borel-weil-bott-on-p1-for-sl2
 kind: example
 title: Borel-Weil-Bott on the projective line for SL2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

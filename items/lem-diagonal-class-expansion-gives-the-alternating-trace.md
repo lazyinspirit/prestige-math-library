@@ -2,7 +2,7 @@
 id: lem-diagonal-class-expansion-gives-the-alternating-trace
 kind: lemma
 title: The diagonal and graph classes contract to the alternating trace
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: cor-isotopic-embeddings-have-diffeomorphic-complements
 kind: corollary
 title: "Isotopic embeddings of a compact manifold have diffeomorphic complements"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 provenance:

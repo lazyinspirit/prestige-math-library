@@ -2,7 +2,7 @@
 id: lem-strict-subsolution-perturbation-for-the-heat-operator
 kind: lemma
 title: Strict-subsolution perturbation for the heat operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

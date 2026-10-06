@@ -2,7 +2,7 @@
 id: ex-distance-to-the-boundary-is-the-viscosity-solution-of-the-unit-eikonal-dirichlet-problem
 kind: example
 title: Distance to the boundary solves the unit eikonal Dirichlet problem on the ball
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

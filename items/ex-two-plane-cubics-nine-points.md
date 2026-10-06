@@ -2,7 +2,7 @@
 id: ex-two-plane-cubics-nine-points
 kind: example
 title: Two transverse cubics meet in nine points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

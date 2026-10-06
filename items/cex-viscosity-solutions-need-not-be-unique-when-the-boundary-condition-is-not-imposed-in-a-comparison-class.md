@@ -2,7 +2,7 @@
 id: cex-viscosity-solutions-need-not-be-unique-when-the-boundary-condition-is-not-imposed-in-a-comparison-class
 kind: counterexample
 title: The eikonal equation on an interval has many solutions when endpoint data are omitted
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

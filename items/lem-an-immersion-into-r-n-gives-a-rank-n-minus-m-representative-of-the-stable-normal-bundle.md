@@ -2,7 +2,7 @@
 id: lem-an-immersion-into-r-n-gives-a-rank-n-minus-m-representative-of-the-stable-normal-bundle
 kind: lemma
 title: "An immersion into R^n gives a rank-(n-m) representative of the stable normal bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-stable-normal-inverse-of-the-tangent-bundle", "def-formal-immersion-between-smooth-manifolds", "def-normal-bundle-of-a-formal-immersion", "lem-formal-immersion-gives-the-tangent-normal-bundle-identity", "def-immersion-submersion-and-constant-rank-map", "def-countable-choice", "lem-pullback-of-a-trivial-smooth-vector-bundle-is-canonically-trivial", "thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure", "def-induced-tangent-bundle-chart"]

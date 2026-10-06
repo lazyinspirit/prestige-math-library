@@ -2,7 +2,7 @@
 id: lem-dominant-characters-of-products-of-tori-and-split-semisimple-groups-arise-as-primitive-weights
 kind: lemma
 title: "Dominant characters of a torus times a split semisimple group are primitive weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 34

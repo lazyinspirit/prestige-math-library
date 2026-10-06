@@ -1,7 +1,7 @@
 ---
 page: lax-milgram-and-weak-elliptic-solutions
 title: "Lax--Milgram and Weak Elliptic Solutions"
-status: draft
+status: published
 items: ["def-bounded-coercive-and-symmetric-sesquilinear-forms", "lem-form-to-bounded-operator-by-hilbert-riesz", "lem-coercive-form-operator-is-bounded-below", "lem-bounded-below-operator-has-closed-range", "lem-adjoint-of-a-coercive-sesquilinear-form-is-coercive", "lem-coercivity-of-the-adjoint-makes-the-form-operator-range-dense", "lem-coercivity-makes-a-small-form-step-a-contraction", "thm-lax-milgram", "cor-lax-milgram-inverse-has-norm-at-most-one-over-alpha", "cor-symmetric-lax-milgram-is-energy-minimisation", "rem-nonsymmetric-lax-milgram-is-not-a-scalar-minimisation-principle", "def-h-minus-one-as-the-dual-of-h-one-zero", "lem-ltwo-and-divergence-data-embed-in-h-minus-one", "thm-every-h-minus-one-functional-has-ltwo-plus-divergence-form", "def-uniformly-elliptic-divergence-form-operator", "def-weak-dirichlet-solution-for-a-divergence-form-operator", "lem-elliptic-form-is-well-defined-and-bounded", "lem-coercivity-of-the-principal-dirichlet-form", "lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound", "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem", "thm-lax-milgram-solvability-for-coercive-divergence-form-equations", "lem-w-one-two-is-a-hilbert-space", "thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace", "cor-positive-reaction-restores-coercivity-without-dirichlet-poincare", "cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting", "lem-classical-solutions-satisfy-the-weak-formulation", "cor-weak-solution-depends-continuously-on-data", "lem-sharp-dirichlet-poincare-inequality-on-an-interval"]
 examples: []
 ---

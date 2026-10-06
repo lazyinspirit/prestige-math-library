@@ -2,7 +2,7 @@
 id: "cex-an-embedded-sphere-with-nontrivial-normal-bundle-is-not-valid-framed-surgery-data"
 kind: "counterexample"
 title: "An embedded sphere with nontrivial normal bundle is not valid framed surgery data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

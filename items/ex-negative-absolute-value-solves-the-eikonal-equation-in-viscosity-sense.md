@@ -2,7 +2,7 @@
 id: ex-negative-absolute-value-solves-the-eikonal-equation-in-viscosity-sense
 kind: example
 title: The negative absolute value solves the eikonal equation in the viscosity sense
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

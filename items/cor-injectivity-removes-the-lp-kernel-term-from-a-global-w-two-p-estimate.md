@@ -2,7 +2,7 @@
 id: cor-injectivity-removes-the-lp-kernel-term-from-a-global-w-two-p-estimate
 kind: corollary
 title: Injectivity removes the $L^p$ term from the global $W^{2,p}$ estimate
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

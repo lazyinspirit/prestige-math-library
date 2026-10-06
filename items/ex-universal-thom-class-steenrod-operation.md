@@ -2,7 +2,7 @@
 id: ex-universal-thom-class-steenrod-operation
 kind: example
 title: "A Steenrod operation on the universal Thom class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

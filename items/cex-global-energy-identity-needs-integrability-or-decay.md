@@ -2,7 +2,7 @@
 id: cex-global-energy-identity-needs-integrability-or-decay
 kind: counterexample
 title: "The local conservation law need not integrate to a finite conserved energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

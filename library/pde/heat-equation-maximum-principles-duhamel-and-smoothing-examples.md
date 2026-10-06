@@ -1,7 +1,7 @@
 ---
 page: heat-equation-maximum-principles-duhamel-and-smoothing-examples
 title: "Heat Equation Maximum Principles Duhamel and Smoothing: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-duhamel-solution-for-a-time-independent-source, ex-heat-comparison-preserves-an-interval-of-values, ex-sine-modes-decay-under-dirichlet-heat-flow, cex-final-time-face-is-not-part-of-the-parabolic-boundary, cex-classical-parabolic-corner-regularity-needs-compatible-initial-and-boundary-data, cex-backward-heat-amplifies-small-high-frequency-errors, ex-backward-heat-exists-for-finite-dirichlet-eigenfunction-sums, cex-a-mild-heat-solution-need-not-be-classical-at-initial-time]
 ---

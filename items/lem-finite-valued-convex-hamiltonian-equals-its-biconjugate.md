@@ -2,7 +2,7 @@
 id: lem-finite-valued-convex-hamiltonian-equals-its-biconjugate
 kind: lemma
 title: A finite-valued convex Hamiltonian equals its biconjugate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

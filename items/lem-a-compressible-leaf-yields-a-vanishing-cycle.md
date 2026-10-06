@@ -2,7 +2,7 @@
 id: lem-a-compressible-leaf-yields-a-vanishing-cycle
 kind: lemma
 title: A compressible leaf yields a vanishing cycle
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

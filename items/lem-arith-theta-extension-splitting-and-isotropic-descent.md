@@ -2,7 +2,7 @@
 id: lem-arith-theta-extension-splitting-and-isotropic-descent
 kind: lemma
 title: "Theta extensions, splitting and isotropic descent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

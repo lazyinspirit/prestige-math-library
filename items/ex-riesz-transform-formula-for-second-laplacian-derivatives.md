@@ -2,7 +2,7 @@
 id: ex-riesz-transform-formula-for-second-laplacian-derivatives
 kind: example
 title: The Riesz-transform formula for second derivatives of the Laplacian
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

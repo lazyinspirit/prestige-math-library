@@ -2,7 +2,7 @@
 id: lem-blowing-up-a-regular-point-is-a-contraction
 kind: lemma
 title: "Blowing up a regular point is a contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

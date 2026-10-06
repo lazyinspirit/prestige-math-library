@@ -2,7 +2,7 @@
 id: lem-k-theory-of-projective-space-and-projections
 kind: lemma
 title: "K-theory of projective space and of projective bundles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

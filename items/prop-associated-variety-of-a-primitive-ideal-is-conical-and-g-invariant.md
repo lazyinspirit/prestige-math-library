@@ -2,7 +2,7 @@
 id: prop-associated-variety-of-a-primitive-ideal-is-conical-and-g-invariant
 kind: proposition
 title: "The associated variety is a closed conical coadjoint-invariant cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

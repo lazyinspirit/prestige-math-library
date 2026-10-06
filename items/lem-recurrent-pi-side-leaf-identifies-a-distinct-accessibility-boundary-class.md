@@ -2,7 +2,7 @@
 id: lem-recurrent-pi-side-leaf-identifies-a-distinct-accessibility-boundary-class
 kind: lemma
 title: "A recurrent Pi-side leaf identifies a distinct accessibility boundary class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: lem-algebraic-cancellation-does-not-yet-give-geometric-cancellation
 kind: lemma
 title: "Algebraic cancellation does not yet give geometric cancellation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

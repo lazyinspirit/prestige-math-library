@@ -2,7 +2,7 @@
 id: lem-analytic-duhamel-cancellation-removes-the-generator-singularity
 kind: lemma
 title: Analytic Duhamel cancellation removes the generator singularity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

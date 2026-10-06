@@ -2,7 +2,7 @@
 id: lem-approximate-identities-in-schwartz-space-converge-in-tempered-distributions
 kind: lemma
 title: "Schwartz approximate identities converge in the sense of tempered distributions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

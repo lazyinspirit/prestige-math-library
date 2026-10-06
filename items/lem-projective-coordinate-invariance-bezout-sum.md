@@ -2,7 +2,7 @@
 id: lem-projective-coordinate-invariance-bezout-sum
 kind: lemma
 title: Invariance of the Bezout sum under projective coordinate changes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

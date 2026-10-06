@@ -2,7 +2,7 @@
 id: lem-fixed-point-sum-of-the-two-lifts-of-a-self-map
 kind: lemma
 title: "The two lifts of a self-map carry twice the fixed point index sum"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

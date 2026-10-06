@@ -2,7 +2,7 @@
 id: thm-poincare-wirtinger-on-bounded-connected-extension-domains
 kind: theorem
 title: "Poincare-Wirtinger on bounded connected extension domains by Rellich compactness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

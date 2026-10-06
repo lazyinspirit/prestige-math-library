@@ -2,7 +2,7 @@
 id: ex-dual-numbers-tensor-functor-is-right-exact-but-not-left-exact
 kind: example
 title: "The dual-numbers tensor functor is right exact but not left exact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

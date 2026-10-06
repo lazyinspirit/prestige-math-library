@@ -2,7 +2,7 @@
 id: rem-quotient-sheaf-versus-representing-scheme
 kind: remark
 title: "Orbit sets, fppf quotient sheaves and representing schemes are three different objects"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-axiom-of-choice, def-quotient-sheaf-and-representable-quotient, lem-fppf-quotient-representability-criterion, prop-faithfully-flat-orbit-map-represents-coset-quotient, thm-fppf-quotient-for-affine-finite-locally-free-equivalence-relation, thm-homogeneous-space-for-smooth-affine-group]

@@ -2,7 +2,7 @@
 id: ex-an-elementary-cancelling-handle-pair-gives-a-product-cobordism
 kind: example
 title: An elementary cancelling handle pair gives a product cobordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

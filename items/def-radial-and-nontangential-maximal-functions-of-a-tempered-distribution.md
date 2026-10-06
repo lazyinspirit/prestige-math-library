@@ -2,7 +2,7 @@
 id: def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution
 kind: definition
 title: "Radial and nontangential maximal functions of a tempered distribution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

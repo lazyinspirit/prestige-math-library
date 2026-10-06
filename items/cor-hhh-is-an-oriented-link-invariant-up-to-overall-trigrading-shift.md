@@ -2,7 +2,7 @@
 id: cor-hhh-is-an-oriented-link-invariant-up-to-overall-trigrading-shift
 kind: corollary
 title: "HHH is an oriented-link invariant up to an overall trigrading shift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [thm-hhh-is-isomorphic-to-reduced-khovanov-rozansky-homflypt-homology, thm-khovanov-rozansky-braid-homology-is-a-link-invariant-up-to-explicit-shift, thm-markovs-closed-braid-equivalence-theorem, def-markov-conjugation-and-stabilization-moves, def-closure-of-a-geometric-braid, def-oriented-link-in-s-three-and-ambient-isotopy, def-axiom-of-choice, lem-the-koszul-hochschild-comparison-respects-crossing-differentials-and-trigradings, def-reduced-khovanov-rozansky-homology]

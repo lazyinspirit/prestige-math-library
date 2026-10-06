@@ -2,7 +2,7 @@
 id: cor-pullback-of-the-tangent-bundle-of-euclidean-space-is-trivial
 kind: corollary
 title: "The pullback of the Euclidean tangent bundle is canonically trivial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-countable-choice", "thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure", "def-induced-tangent-bundle-chart", "lem-pullback-of-a-trivial-smooth-vector-bundle-is-canonically-trivial"]

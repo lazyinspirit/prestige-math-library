@@ -2,7 +2,7 @@
 id: lem-heat-ball-chains-reach-earlier-points
 kind: lemma
 title: Heat-ball chains reach earlier points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

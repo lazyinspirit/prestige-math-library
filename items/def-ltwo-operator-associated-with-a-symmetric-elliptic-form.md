@@ -2,7 +2,7 @@
 id: def-ltwo-operator-associated-with-a-symmetric-elliptic-form
 kind: definition
 title: "The $L^2$ operator associated with a symmetric elliptic form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

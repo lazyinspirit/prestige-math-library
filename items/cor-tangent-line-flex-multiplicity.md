@@ -2,7 +2,7 @@
 id: cor-tangent-line-flex-multiplicity
 kind: corollary
 title: Flexes are contacts of order at least three with the tangent line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: thm-weight-subgroups-of-a-torus-action
 kind: theorem
 title: Weight subgroups of a torus action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 21

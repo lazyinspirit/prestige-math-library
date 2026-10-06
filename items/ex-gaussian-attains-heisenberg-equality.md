@@ -2,7 +2,7 @@
 id: ex-gaussian-attains-heisenberg-equality
 kind: example
 title: The Gaussian attains equality in the Heisenberg inequality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

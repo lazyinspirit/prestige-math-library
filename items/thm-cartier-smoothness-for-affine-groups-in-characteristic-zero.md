@@ -2,7 +2,7 @@
 id: thm-cartier-smoothness-for-affine-groups-in-characteristic-zero
 kind: theorem
 title: "Cartier's theorem: affine group schemes in characteristic zero are smooth"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["lem-invariant-differentials-of-a-group-scheme", "thm-smoothness-over-characteristic-zero-via-free-differentials", "def-ag-geometrically-regular-algebra-and-fibre", "lem-regular-local-domain-induction", "def-group-scheme-over-a-field", "def-smooth-morphism-schemes", "def-axiom-of-choice", "def-locally-finite-type-and-finite-type-morphism", "def-polynomial-ring-over-a-commutative-ring", "def-quotient-ring", "def-principal-localisation"]

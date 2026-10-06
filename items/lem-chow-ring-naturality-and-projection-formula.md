@@ -2,7 +2,7 @@
 id: lem-chow-ring-naturality-and-projection-formula
 kind: lemma
 title: "Naturality of the Chow ring and the projection formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 13

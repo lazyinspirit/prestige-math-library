@@ -2,7 +2,7 @@
 id: cex-freezing-coefficients-cannot-absorb-a-fixed-large-oscillation-on-arbitrarily-small-balls
 kind: counterexample
 title: Freezing cannot absorb a fixed oscillation on arbitrarily small balls
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

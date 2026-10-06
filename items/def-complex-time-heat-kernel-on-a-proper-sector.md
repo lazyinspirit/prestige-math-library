@@ -2,7 +2,7 @@
 id: def-complex-time-heat-kernel-on-a-proper-sector
 kind: definition
 title: The complex-time heat kernel on a proper sector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

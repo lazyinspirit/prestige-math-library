@@ -2,7 +2,7 @@
 id: def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy
 kind: definition
 title: "Smooth isotopies, diffeotopies and ambient isotopies"
-status: draft
+status: published
 origin: session
 dependency_level: 4
 provenance:

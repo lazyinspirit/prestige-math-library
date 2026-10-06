@@ -2,7 +2,7 @@
 id: lem-area-minimal-three-sector-homoclinic-cycle-has-identity-inward-holonomy
 kind: lemma
 title: "An area-minimal three-sector homoclinic cycle has identity inward holonomy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

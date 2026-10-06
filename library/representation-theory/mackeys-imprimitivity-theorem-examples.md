@@ -1,7 +1,7 @@
 ---
 page: mackeys-imprimitivity-theorem-examples
 title: "Mackeys Imprimitivity Theorem — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-a-nontransitive-system-is-not-classified-by-one-stabilizer

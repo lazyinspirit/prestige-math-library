@@ -2,7 +2,7 @@
 id: lem-trivial-c1-holonomy-gives-a-saturated-product-neighbourhood
 kind: lemma
 title: "Trivial C¹ holonomy gives a saturated product neighbourhood"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

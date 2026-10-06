@@ -2,7 +2,7 @@
 id: lem-additive-constant-in-an-entropy-flux-does-not-change-the-entropy-inequality
 kind: lemma
 title: An additive constant in an entropy flux does not change the entropy inequality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

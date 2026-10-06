@@ -2,7 +2,7 @@
 id: def-weyl-alternation-operator
 kind: definition
 title: The Weyl alternation operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

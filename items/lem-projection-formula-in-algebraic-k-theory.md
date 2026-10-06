@@ -2,7 +2,7 @@
 id: lem-projection-formula-in-algebraic-k-theory
 kind: lemma
 title: "Projection formula for higher direct images and K-theory pushforward"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

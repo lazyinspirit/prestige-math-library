@@ -40,7 +40,7 @@ sources:
     - title: "Bachir Bekka and Pierre de la Harpe, Unitary Representations of Groups, Duals, and Characters (arXiv:1912.07262v1, 16 December 2019)"
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 8, §8.B: Example 8.B.7(1) and the explicit description of C*(Z) = C(T)"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Example

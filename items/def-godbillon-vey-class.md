@@ -2,7 +2,7 @@
 id: def-godbillon-vey-class
 kind: definition
 title: "The Godbillon-Vey class of a codimension-one foliation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

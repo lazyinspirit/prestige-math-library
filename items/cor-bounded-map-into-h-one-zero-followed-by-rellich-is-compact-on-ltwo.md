@@ -2,7 +2,7 @@
 id: cor-bounded-map-into-h-one-zero-followed-by-rellich-is-compact-on-ltwo
 kind: corollary
 title: "A bounded map into $H^1_0$ yields a compact $L^2$ operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

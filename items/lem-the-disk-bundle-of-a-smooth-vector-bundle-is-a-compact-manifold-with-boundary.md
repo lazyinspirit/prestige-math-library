@@ -2,7 +2,7 @@
 id: lem-the-disk-bundle-of-a-smooth-vector-bundle-is-a-compact-manifold-with-boundary
 kind: lemma
 title: "Disk bundles over compact bases are compact manifolds with boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-disk-sphere-and-thom-space-of-a-metric-vector-bundle, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, def-smooth-fibre-bundle-and-local-trivialization, def-cholesky-factorisation-with-positive-diagonal, def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary, lem-regular-sublevels-are-compact-manifolds-with-boundary, thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold, def-embedded-smooth-submanifold-with-boundary, def-compact-space, lem-coordinate-balls-form-a-basis-of-a-topological-manifold, lem-compactness-of-a-subspace-is-ambient, thm-extreme-value-metric, thm-heine-borel-rn, cor-local-normal-form-for-submersions]

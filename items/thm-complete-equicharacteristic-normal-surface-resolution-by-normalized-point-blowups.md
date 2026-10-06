@@ -2,7 +2,7 @@
 id: thm-complete-equicharacteristic-normal-surface-resolution-by-normalized-point-blowups
 kind: theorem
 title: "Complete equicharacteristic normal surfaces resolve by normalized point blowups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 20

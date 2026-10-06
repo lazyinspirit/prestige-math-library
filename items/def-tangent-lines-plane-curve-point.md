@@ -2,7 +2,7 @@
 id: def-tangent-lines-plane-curve-point
 kind: definition
 title: Tangent cone and tangent lines at a point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

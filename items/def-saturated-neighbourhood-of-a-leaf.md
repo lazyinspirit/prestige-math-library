@@ -2,7 +2,7 @@
 id: def-saturated-neighbourhood-of-a-leaf
 kind: definition
 title: "Saturated neighbourhoods of a leaf"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

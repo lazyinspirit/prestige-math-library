@@ -2,7 +2,7 @@
 id: ex-bounded-operator-exponential-semigroup
 kind: example
 title: "The exponential of a bounded operator is a uniformly continuous semigroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

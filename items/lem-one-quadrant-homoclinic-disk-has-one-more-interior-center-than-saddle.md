@@ -2,7 +2,7 @@
 id: lem-one-quadrant-homoclinic-disk-has-one-more-interior-center-than-saddle
 kind: lemma
 title: "A one-quadrant homoclinic disk contains a center"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

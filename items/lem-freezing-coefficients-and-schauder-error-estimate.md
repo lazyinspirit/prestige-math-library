@@ -2,7 +2,7 @@
 id: lem-freezing-coefficients-and-schauder-error-estimate
 kind: lemma
 title: Freezing coefficients makes the Schauder error absorbable on a small ball
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

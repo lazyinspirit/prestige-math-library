@@ -2,7 +2,7 @@
 id: thm-direct-method-for-convex-integral-functionals
 kind: theorem
 title: "The direct method for convex integral functionals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

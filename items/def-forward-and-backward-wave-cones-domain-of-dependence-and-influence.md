@@ -2,7 +2,7 @@
 id: def-forward-and-backward-wave-cones-domain-of-dependence-and-influence
 kind: definition
 title: "Forward and backward wave cones, domain of dependence and influence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

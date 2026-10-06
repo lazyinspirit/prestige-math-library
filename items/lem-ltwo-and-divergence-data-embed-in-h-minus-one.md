@@ -2,7 +2,7 @@
 id: "lem-ltwo-and-divergence-data-embed-in-h-minus-one"
 kind: "lemma"
 title: "$L^2$ forcing and divergence data embed in $H^{-1}$ with a quantitative bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 1

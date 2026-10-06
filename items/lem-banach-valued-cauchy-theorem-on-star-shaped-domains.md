@@ -2,7 +2,7 @@
 id: lem-banach-valued-cauchy-theorem-on-star-shaped-domains
 kind: lemma
 title: Primitive and Cauchy theorem for Banach-valued holomorphic maps on star-shaped domains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

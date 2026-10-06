@@ -2,7 +2,7 @@
 id: lem-small-projective-modules-are-exactly-finitely-generated-projective-modules
 kind: lemma
 title: "Small projective modules are exactly finitely generated projective modules; the progenerator identification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

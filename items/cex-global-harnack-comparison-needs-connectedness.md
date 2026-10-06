@@ -2,7 +2,7 @@
 id: cex-global-harnack-comparison-needs-connectedness
 kind: counterexample
 title: "The global Harnack comparison needs connectedness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 14

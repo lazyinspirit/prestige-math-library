@@ -2,7 +2,7 @@
 id: lem-finite-projective-dual-basis-gives-tensor-hom-isomorphism
 kind: lemma
 title: "The dual-basis isomorphism for a finitely generated projective bimodule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

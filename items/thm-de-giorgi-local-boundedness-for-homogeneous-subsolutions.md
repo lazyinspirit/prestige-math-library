@@ -2,7 +2,7 @@
 id: thm-de-giorgi-local-boundedness-for-homogeneous-subsolutions
 kind: theorem
 title: "De Giorgi local boundedness of homogeneous subsolutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

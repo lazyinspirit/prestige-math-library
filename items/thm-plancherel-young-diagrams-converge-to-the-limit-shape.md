@@ -2,7 +2,7 @@
 id: thm-plancherel-young-diagrams-converge-to-the-limit-shape
 kind: theorem
 title: "Plancherel Young diagrams converge to the limit shape"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

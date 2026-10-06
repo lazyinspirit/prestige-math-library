@@ -1,7 +1,7 @@
 ---
 page: rouquier-complexes-and-categorical-braid-relations-examples
 title: "Rouquier Complexes and Categorical Braid Relations — Examples"
-status: draft
+status: published
 requires: [rouquier-complexes-and-categorical-braid-relations]
 items: []
 examples: [ex-the-rouquier-complex-of-a-positive-three-strand-braid,

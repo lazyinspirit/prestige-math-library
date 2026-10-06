@@ -2,7 +2,7 @@
 id: cex-nonconvex-gradient-energy-can-lose-weak-lower-semicontinuity
 kind: counterexample
 title: "A nonconvex gradient energy can lose weak lower semicontinuity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

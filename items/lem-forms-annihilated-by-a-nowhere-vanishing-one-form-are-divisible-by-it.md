@@ -2,7 +2,7 @@
 id: lem-forms-annihilated-by-a-nowhere-vanishing-one-form-are-divisible-by-it
 kind: lemma
 title: "Divisibility by a nowhere-vanishing one-form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

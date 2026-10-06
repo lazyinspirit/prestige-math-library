@@ -2,7 +2,7 @@
 id: thm-dold-kan-equivalence-for-simplicial-modules
 kind: theorem
 title: "Dold-Kan equivalence for simplicial modules with explicit inverse"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

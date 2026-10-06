@@ -2,7 +2,7 @@
 id: def-reduced-degree-into-the-zero-sphere
 kind: definition
 title: "The reduced degree of a map into the 0-sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

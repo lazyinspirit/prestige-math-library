@@ -2,7 +2,7 @@
 id: lem-john-domain-admits-bounded-overlap-ball-chains
 kind: lemma
 title: "Bounded-overlap ball chains in a bounded John domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

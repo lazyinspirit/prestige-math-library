@@ -2,7 +2,7 @@
 id: lem-finite-holonomy-acts-on-a-small-transverse-disk
 kind: lemma
 title: Finite holonomy acts on a small transverse disk
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

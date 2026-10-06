@@ -2,7 +2,7 @@
 id: lem-pontryagin-thom-signed-preimage-count-equals-the-dg-degree
 kind: lemma
 title: The signed preimage count equals the degree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

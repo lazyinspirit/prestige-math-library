@@ -2,7 +2,7 @@
 id: ex-affine-flux-reduces-the-entropy-semigroup-to-translation
 kind: example
 title: Affine flux reduces the entropy semigroup to translation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

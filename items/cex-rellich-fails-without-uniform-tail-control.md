@@ -2,7 +2,7 @@
 id: cex-rellich-fails-without-uniform-tail-control
 kind: counterexample
 title: "The tightness hypothesis of the Fr\\'echet--Kolmogorov criterion cannot be dropped"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: "cex-the-ltwo-unit-sphere-is-not-weakly-closed-in-an-infinite-dimensional-hilbert-space"
 kind: "counterexample"
 title: "The L^2 unit sphere is not weakly sequentially closed in infinite dimensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 3

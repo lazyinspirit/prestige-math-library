@@ -2,7 +2,7 @@
 id: def-monic-probabilists-hermite-polynomials
 kind: definition
 title: "The monic probabilists' Hermite polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-standard-normal-and-normal-laws, def-moments-variance-and-covariance, def-derivative]

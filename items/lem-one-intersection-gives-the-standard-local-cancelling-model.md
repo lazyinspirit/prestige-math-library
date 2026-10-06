@@ -2,7 +2,7 @@
 id: lem-one-intersection-gives-the-standard-local-cancelling-model
 kind: lemma
 title: "One transverse intersection gives the standard local cancelling model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

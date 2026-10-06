@@ -2,7 +2,7 @@
 id: "lem-adjoint-of-a-coercive-sesquilinear-form-is-coercive"
 kind: "lemma"
 title: "The adjoint of a coercive form is coercive with the same constants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 3

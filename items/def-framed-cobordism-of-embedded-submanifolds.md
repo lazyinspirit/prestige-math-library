@@ -2,7 +2,7 @@
 id: def-framed-cobordism-of-embedded-submanifolds
 kind: definition
 title: "Framed cobordism of framed submanifolds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

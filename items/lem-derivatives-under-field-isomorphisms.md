@@ -2,7 +2,7 @@
 id: "lem-derivatives-under-field-isomorphisms"
 kind: "lemma"
 title: "Derivative ideals under semilinear ground-field isomorphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 4

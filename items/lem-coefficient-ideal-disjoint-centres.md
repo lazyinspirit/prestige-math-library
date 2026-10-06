@@ -2,7 +2,7 @@
 id: "lem-coefficient-ideal-disjoint-centres"
 kind: "lemma"
 title: "Coefficient-ideal control with centres allowed off the subvariety"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 9

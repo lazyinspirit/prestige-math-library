@@ -2,7 +2,7 @@
 id: lem-separation-of-disjoint-closed-invariant-subsets-by-an-invariant
 kind: lemma
 title: Invariants separate a stable point from a disjoint closed invariant subset
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

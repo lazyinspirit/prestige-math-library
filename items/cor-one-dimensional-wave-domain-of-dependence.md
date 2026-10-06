@@ -2,7 +2,7 @@
 id: cor-one-dimensional-wave-domain-of-dependence
 kind: corollary
 title: "The one-dimensional value depends on the characteristic interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

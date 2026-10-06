@@ -2,7 +2,7 @@
 id: cor-forced-heat-solutions-are-smooth-away-from-the-source-time-diagonal
 kind: corollary
 title: Spatial smoothing of forcing separated from the observation time
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

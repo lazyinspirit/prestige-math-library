@@ -2,7 +2,7 @@
 id: cor-hilbert-and-riesz-transforms-map-linfinity-to-bmo
 kind: corollary
 title: "The Hilbert and Riesz transforms map L-infinity to BMO"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

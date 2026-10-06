@@ -2,7 +2,7 @@
 id: lem-tensor-product-of-real-symmetric-forms-has-multiplicative-inertia
 kind: lemma
 title: "The tensor product of nondegenerate real symmetric forms has multiplicative signature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

@@ -2,7 +2,7 @@
 id: lem-a-leafwise-loop-has-a-finite-transverse-double-point-representative
 kind: lemma
 title: Finite general position for a leafwise loop
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

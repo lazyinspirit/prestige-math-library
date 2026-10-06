@@ -2,7 +2,7 @@
 id: thm-critical-sobolev-embedding-into-every-finite-lq
 kind: theorem
 title: "The critical Sobolev embedding into every finite $L^q$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-triple-cubic-rational-surface-branch-reduces-in-two-steps
 kind: lemma
 title: "A triple-cubic surface branch reduces after two successors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 17

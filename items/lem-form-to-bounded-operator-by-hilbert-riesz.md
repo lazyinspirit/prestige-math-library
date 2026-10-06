@@ -2,7 +2,7 @@
 id: "lem-form-to-bounded-operator-by-hilbert-riesz"
 kind: "lemma"
 title: "A bounded form is represented by a unique bounded operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 1

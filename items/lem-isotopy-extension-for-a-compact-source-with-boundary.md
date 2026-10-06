@@ -2,7 +2,7 @@
 id: "lem-isotopy-extension-for-a-compact-source-with-boundary"
 kind: "lemma"
 title: "Isotopy extension for a compact source with boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-bimodule-tensor-associators-and-unitors-satisfy-bicategory-coherence
 kind: lemma
 title: "The Morita data satisfy the bicategory coherence axioms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

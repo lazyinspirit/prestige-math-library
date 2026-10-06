@@ -2,7 +2,7 @@
 id: cex-nonsymmetric-elliptic-operators-need-not-have-an-orthonormal-eigenbasis
 kind: counterexample
 title: "Coercive non-symmetric forms need not have an orthonormal eigenbasis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

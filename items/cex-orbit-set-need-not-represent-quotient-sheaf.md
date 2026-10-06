@@ -2,7 +2,7 @@
 id: cex-orbit-set-need-not-represent-quotient-sheaf
 kind: counterexample
 title: "The orbit set of k-points need not be the k-points of the fppf quotient sheaf"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-algebraic-group-action-and-scheme-theoretic-stabilizer, def-axiom-of-choice, def-etale-morphism-schemes, def-fibre-product-schemes-universal-property, def-group-scheme-over-a-field, def-morphism-and-closed-subgroup-scheme, def-quotient-sheaf-and-representable-quotient, lem-action-map-fibres-and-stabilizer-subscheme, lem-closed-subgroup-scheme-valued-point-criterion, thm-affine-fibre-product-tensor-ring, thm-affine-scheme-ring-anti-equivalence, thm-etale-equivalent-flat-unramified-fp, thm-fppf-quotient-for-affine-finite-locally-free-equivalence-relation]

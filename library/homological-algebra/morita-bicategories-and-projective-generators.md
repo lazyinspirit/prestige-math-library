@@ -1,7 +1,7 @@
 ---
 page: morita-bicategories-and-projective-generators
 title: "Morita Bicategories and Projective Generators"
-status: draft
+status: published
 requires: [eilenberg-watts-theorem-and-natural-transformations, subobject-lattices-generators-and-the-grothendieck-axioms, monoidal-categories-and-monoidal-functors, noetherian-rings-and-hilbert-basis]
 items: [def-bicategory-pseudofunctor-and-biequivalence, def-center-of-a-ring, lem-endomorphism-ring-of-an-object-in-a-preadditive-category, def-small-projective-generator-and-progenerator, lem-finite-projective-dual-basis-gives-tensor-hom-isomorphism, def-morita-bicategory-of-rings-and-bimodules, lem-generator-hom-functor-is-exact-coproduct-preserving-and-faithful, lem-small-projective-modules-are-exactly-finitely-generated-projective-modules, lem-equivalences-preserve-progenerators, lem-bimodule-tensor-associators-and-unitors-satisfy-bicategory-coherence, lem-copower-presentation-construction-is-left-adjoint-to-generator-hom, lem-tensoring-defines-a-pseudofunctor-with-interchange, thm-cocomplete-abelian-category-with-small-projective-generator-is-a-module-category, thm-eilenberg-watts-biequivalence-for-module-categories, thm-morita-equivalence-is-invertibility-of-a-bimodule, cor-center-is-morita-invariant-via-natural-endomorphisms]
 examples: []

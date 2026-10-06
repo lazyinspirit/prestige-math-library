@@ -2,7 +2,7 @@
 id: lem-finite-products-and-comparison-cones-have-finite-type
 kind: lemma
 title: "Finite products and comparison cones have homological finite type"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

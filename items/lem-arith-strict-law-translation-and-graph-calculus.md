@@ -2,7 +2,7 @@
 id: lem-arith-strict-law-translation-and-graph-calculus
 kind: lemma
 title: "Strict law graph calculus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

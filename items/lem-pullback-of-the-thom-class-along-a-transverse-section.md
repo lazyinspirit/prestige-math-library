@@ -2,7 +2,7 @@
 id: lem-pullback-of-the-thom-class-along-a-transverse-section
 kind: lemma
 title: "Pullback of the Thom class along a transverse section computes the Euler class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-normal-bundle-of-the-zero-locus-of-a-transverse-section, def-thom-class-by-fiberwise-normalization, thm-naturality-and-uniqueness-of-thom-classes, def-disk-sphere-and-thom-space-of-a-metric-vector-bundle, def-euler-class-by-zero-section-pullback-of-the-thom-class, def-relative-singular-cochain-complex, thm-excision-for-singular-cohomology, thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold, def-tubular-neighbourhood-of-an-embedded-submanifold, def-smooth-section-local-section-and-support, prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components, lem-every-vector-in-a-fibre-extends-to-a-compactly-supported-smooth-section, def-r-oriented-vector-bundle-and-orientation-local-system, def-axiom-of-choice, lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space, thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric, thm-long-exact-sequence-of-a-pair-in-singular-cohomology]

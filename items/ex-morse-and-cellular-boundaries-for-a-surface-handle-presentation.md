@@ -2,7 +2,7 @@
 id: ex-morse-and-cellular-boundaries-for-a-surface-handle-presentation
 kind: example
 title: "Morse and cellular boundaries for a surface handle presentation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

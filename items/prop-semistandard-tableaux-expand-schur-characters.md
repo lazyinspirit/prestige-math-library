@@ -2,7 +2,7 @@
 id: prop-semistandard-tableaux-expand-schur-characters
 kind: proposition
 title: Semistandard tableaux expand Schur characters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

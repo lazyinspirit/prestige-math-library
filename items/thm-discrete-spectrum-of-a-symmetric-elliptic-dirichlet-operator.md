@@ -2,7 +2,7 @@
 id: thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator
 kind: theorem
 title: "Discrete spectrum of a symmetric elliptic Dirichlet operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

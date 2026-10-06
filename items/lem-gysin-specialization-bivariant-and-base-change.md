@@ -2,7 +2,7 @@
 id: lem-gysin-specialization-bivariant-and-base-change
 kind: lemma
 title: "Gysin specialization is bivariant and compatible with base change"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: lem-positively-graded-noetherian-algebra-is-finitely-generated
 kind: lemma
 title: A positively graded Noetherian algebra is finitely generated over its degree-zero part
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

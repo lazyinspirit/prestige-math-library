@@ -1,7 +1,7 @@
 ---
 page: rellich-kondrachov-and-sobolev-compactness-examples
 title: Rellich Kondrachov and Sobolev Compactness — Examples
-status: draft
+status: published
 items: []
 examples: ["cex-rellich-fails-on-rn-by-translations", "cex-rellich-fails-without-uniform-tail-control", "cex-dilations-can-destroy-tightness-on-an-unbounded-domain", "cex-high-frequency-oscillations-violate-uniform-translation-control", "cex-critical-sobolev-embedding-is-not-compact", "cex-morrey-compactness-loses-the-endpoint-holder-exponent", "cex-critical-trace-compactness-fails-by-tangential-dilation", "ex-compactness-of-a-bounded-w-one-p-sequence-on-an-interval", "ex-normalised-critical-bubbles-converge-weakly-but-not-strongly-at-p-star", "ex-strong-ltwo-convergence-preserves-a-normalisation-constraint"]
 ---

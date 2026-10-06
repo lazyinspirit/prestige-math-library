@@ -2,7 +2,7 @@
 id: "def-cotangent-complex-of-a-scheme-morphism"
 kind: "definition"
 title: "The cotangent complex of a morphism of schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 11

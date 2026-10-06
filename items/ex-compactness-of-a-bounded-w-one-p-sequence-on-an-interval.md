@@ -2,7 +2,7 @@
 id: ex-compactness-of-a-bounded-w-one-p-sequence-on-an-interval
 kind: example
 title: "Compactness of a bounded $W^{1,p}$ sequence on an interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

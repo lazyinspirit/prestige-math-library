@@ -2,7 +2,7 @@
 id: ex-resolvent-norm-blows-up-when-a-real-parameter-approaches-an-eigenvalue
 kind: example
 title: "The resolvent norm blows up at an eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

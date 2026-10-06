@@ -2,7 +2,7 @@
 id: thm-domain-of-dependence-and-local-uniqueness
 kind: theorem
 title: "Domain of dependence and local uniqueness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

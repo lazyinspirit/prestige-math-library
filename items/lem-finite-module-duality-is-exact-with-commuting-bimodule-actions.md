@@ -2,7 +2,7 @@
 id: lem-finite-module-duality-is-exact-with-commuting-bimodule-actions
 kind: lemma
 title: "Finite module duality is exact with commuting bimodule actions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

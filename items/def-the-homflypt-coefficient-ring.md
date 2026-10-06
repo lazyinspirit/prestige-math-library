@@ -2,7 +2,7 @@
 id: def-the-homflypt-coefficient-ring
 kind: definition
 title: "The HOMFLYPT coefficient ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

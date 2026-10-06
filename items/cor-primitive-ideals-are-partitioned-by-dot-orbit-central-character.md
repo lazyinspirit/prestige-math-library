@@ -2,7 +2,7 @@
 id: cor-primitive-ideals-are-partitioned-by-dot-orbit-central-character
 kind: corollary
 title: "Primitive ideals are partitioned by their dot-orbit central character"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

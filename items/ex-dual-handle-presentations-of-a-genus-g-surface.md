@@ -2,7 +2,7 @@
 id: ex-dual-handle-presentations-of-a-genus-g-surface
 kind: example
 title: "Dual handle presentations of a genus-g surface"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-dual-handle-decomposition, thm-handle-duality-from-negating-a-morse-function, thm-morse-functions-and-handle-decompositions-correspond, cor-index-zero-handles-create-components, cor-index-n-handles-cap-boundary-spheres, thm-every-smooth-manifold-admits-a-riemannian-metric, thm-morse-lemma, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-compactly-supported-vector-fields-are-complete]

@@ -2,7 +2,7 @@
 id: lem-separated-characteristic-disk-has-an-inclusion-minimal-nonidentity-simple-cycle
 kind: lemma
 title: A separated characteristic disk has a minimal nonidentity simple cycle
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

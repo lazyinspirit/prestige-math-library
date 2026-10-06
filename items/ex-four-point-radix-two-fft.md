@@ -2,7 +2,7 @@
 id: ex-four-point-radix-two-fft
 kind: example
 title: "The four-point radix-two FFT executed in full"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

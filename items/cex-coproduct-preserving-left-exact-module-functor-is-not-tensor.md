@@ -2,7 +2,7 @@
 id: cex-coproduct-preserving-left-exact-module-functor-is-not-tensor
 kind: counterexample
 title: "A coproduct-preserving left exact module functor is not tensor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

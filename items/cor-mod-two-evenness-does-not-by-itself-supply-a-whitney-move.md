@@ -2,7 +2,7 @@
 id: cor-mod-two-evenness-does-not-by-itself-supply-a-whitney-move
 kind: corollary
 title: Mod-two evenness does not by itself supply a Whitney move
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

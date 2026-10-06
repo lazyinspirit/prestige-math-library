@@ -2,7 +2,7 @@
 id: thm-interior-schauder-estimate-for-uniformly-elliptic-equations
 kind: theorem
 title: Interior Schauder estimate for uniformly elliptic equations
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-pullback-of-a-trivial-smooth-vector-bundle-is-canonically-trivial
 kind: lemma
 title: "The pullback of a trivial smooth vector bundle is canonically trivial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-smooth-vector-bundle-rank-fibre-and-trivial-bundle", "def-pullback-vector-bundle-as-a-fibre-product", "thm-the-pullback-fibre-product-is-a-smooth-vector-bundle", "def-local-frame-and-global-frame-of-a-vector-bundle", "cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame", "def-c-r-and-smooth-maps-between-smooth-manifolds"]

@@ -2,7 +2,7 @@
 id: lem-arith-strictification-of-dvr-birational-group-law
 kind: lemma
 title: "Strictification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

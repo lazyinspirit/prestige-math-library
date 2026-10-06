@@ -2,7 +2,7 @@
 id: "lem-etale-morphism-extends-to-ambient-neighbourhoods"
 kind: "lemma"
 title: "Extending an étale morphism to a smooth ambient neighbourhood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 1

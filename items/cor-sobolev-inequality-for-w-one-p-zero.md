@@ -2,7 +2,7 @@
 id: cor-sobolev-inequality-for-w-one-p-zero
 kind: corollary
 title: "The Sobolev inequality for zero-boundary Sobolev closures on open sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

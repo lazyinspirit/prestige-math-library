@@ -2,7 +2,7 @@
 id: ex-vanishing-viscosity-selects-the-hamilton-jacobi-solution
 kind: example
 title: Vanishing viscosity selects the Hopf--Lax solution for bounded data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

@@ -2,7 +2,7 @@
 id: rem-the-h-cobordism-theorem-does-not-cover-boundary-dimension-four
 kind: remark
 title: The h-cobordism theorem does not cover boundary dimension four
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 19

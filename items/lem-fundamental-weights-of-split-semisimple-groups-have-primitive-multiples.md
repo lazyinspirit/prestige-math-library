@@ -2,7 +2,7 @@
 id: lem-fundamental-weights-of-split-semisimple-groups-have-primitive-multiples
 kind: lemma
 title: "Multiples of the fundamental weights are primitive weights in the semisimple case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 32

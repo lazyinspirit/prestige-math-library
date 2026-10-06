@@ -2,7 +2,7 @@
 id: lem-a-noncompact-leaf-of-a-compact-c2-foliation-meets-a-positive-closed-transversal
 kind: lemma
 title: "A noncompact leaf of a compact C2 foliation meets a positive closed transversal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

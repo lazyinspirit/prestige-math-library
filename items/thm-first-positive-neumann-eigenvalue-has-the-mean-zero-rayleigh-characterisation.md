@@ -2,7 +2,7 @@
 id: thm-first-positive-neumann-eigenvalue-has-the-mean-zero-rayleigh-characterisation
 kind: theorem
 title: "The first positive Neumann eigenvalue has the mean-zero Rayleigh characterisation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

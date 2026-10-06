@@ -2,7 +2,7 @@
 id: cex-degenerate-ellipticity-allows-nonconstant-solutions-with-interior-zero-sets
 kind: counterexample
 title: "Degenerate ellipticity allows nonconstant solutions with interior zero sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 14

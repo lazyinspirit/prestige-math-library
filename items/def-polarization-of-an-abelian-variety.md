@@ -2,7 +2,7 @@
 id: def-polarization-of-an-abelian-variety
 kind: definition
 title: "Polarizations and the Mumford isogeny attached to an ample line bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

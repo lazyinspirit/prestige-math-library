@@ -2,7 +2,7 @@
 id: lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces
 kind: lemma
 title: Fibres of a proper birational morphism of regular surfaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-rational-gorenstein-surface-tangent-conic-and-hilbert-function
 kind: lemma
 title: "The tangent conic of a rational Gorenstein surface singularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 13

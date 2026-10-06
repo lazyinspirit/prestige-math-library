@@ -2,7 +2,7 @@
 id: thm-gagliardo-nirenberg-sobolev-inequality-for-p-one
 kind: theorem
 title: "The p=1 Gagliardo-Nirenberg-Sobolev inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

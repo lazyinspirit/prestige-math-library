@@ -2,7 +2,7 @@
 id: lem-pvm-multiplicity-model-over-a-standard-borel-space
 kind: lemma
 title: Multiplicity model of a projection-valued measure over a standard Borel base
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

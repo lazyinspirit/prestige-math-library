@@ -2,7 +2,7 @@
 id: thm-principal-structure-theorem-for-lca-groups
 kind: theorem
 title: The principal structure theorem for LCA groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

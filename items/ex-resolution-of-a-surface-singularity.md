@@ -2,7 +2,7 @@
 id: ex-resolution-of-a-surface-singularity
 kind: example
 title: Resolving the quadric cone by one blowup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 22

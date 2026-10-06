@@ -2,7 +2,7 @@
 id: "lem-hilbert-projection-characterisation-by-a-variational-inequality"
 kind: "lemma"
 title: "The projection onto a closed convex set is characterised by a variational inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

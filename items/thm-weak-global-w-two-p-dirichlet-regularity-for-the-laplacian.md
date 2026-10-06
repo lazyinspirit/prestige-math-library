@@ -2,7 +2,7 @@
 id: thm-weak-global-w-two-p-dirichlet-regularity-for-the-laplacian
 kind: theorem
 title: Weak global $W^{2,p}$ regularity for the Dirichlet Laplacian
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

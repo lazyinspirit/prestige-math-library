@@ -2,7 +2,7 @@
 id: lem-constituent-multiplicities-under-a-semisimple-endomorphism-algebra
 kind: lemma
 title: "Constituent multiplicities are dimensions of simple modules over the endomorphism algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

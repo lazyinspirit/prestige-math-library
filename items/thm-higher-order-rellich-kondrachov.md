@@ -2,7 +2,7 @@
 id: thm-higher-order-rellich-kondrachov
 kind: theorem
 title: "Higher-order Rellich--Kondrachov compactness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

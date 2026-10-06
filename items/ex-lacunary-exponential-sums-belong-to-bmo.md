@@ -2,7 +2,7 @@
 id: ex-lacunary-exponential-sums-belong-to-bmo
 kind: example
 title: "Finite lacunary exponential sums belong to BMO"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

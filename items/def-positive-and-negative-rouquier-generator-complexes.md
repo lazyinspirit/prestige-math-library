@@ -2,7 +2,7 @@
 id: def-positive-and-negative-rouquier-generator-complexes
 kind: definition
 title: "The positive and negative Rouquier generator complexes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

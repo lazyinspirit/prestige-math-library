@@ -2,7 +2,7 @@
 id: ex-characteristic-numbers-of-a-product
 kind: example
 title: "Characteristic numbers of a product of projective planes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-characteristic-numbers-of-products-follow-the-whitney-sum-and-kunneth-formulas, lem-tangent-bundle-of-complex-projective-space-and-its-pontryagin-classes, lem-projective-space-products-have-triangular-characteristic-number-matrix, def-pontryagin-number-of-a-closed-oriented-manifold, thm-cartesian-product-makes-bordism-a-graded-ring, lem-integral-cohomology-ring-of-complex-projective-space-by-splitting, def-kronecker-evaluation-pairing, def-axiom-of-choice]

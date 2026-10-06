@@ -2,7 +2,7 @@
 id: thm-finite-thom-detector-is-a-mod-two-cohomology-isomorphism-below-2r
 kind: theorem
 title: "The finite Thom detector is a mod-two cohomology isomorphism below 2r"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

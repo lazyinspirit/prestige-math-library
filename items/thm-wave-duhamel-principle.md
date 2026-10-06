@@ -2,7 +2,7 @@
 id: thm-wave-duhamel-principle
 kind: theorem
 title: "Duhamel's principle for the wave equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

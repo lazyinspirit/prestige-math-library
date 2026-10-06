@@ -2,7 +2,7 @@
 id: rem-value-functions-and-hamilton-jacobi-bellman-equations
 kind: remark
 title: 'Value functions and the Hamilton--Jacobi--Bellman equation: orientation only'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

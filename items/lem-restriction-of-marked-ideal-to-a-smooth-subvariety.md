@@ -2,7 +2,7 @@
 id: lem-restriction-of-marked-ideal-to-a-smooth-subvariety
 kind: lemma
 title: Restriction of a marked ideal to a smooth subvariety and its blow-ups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-neron-model-existence-in-stated-class
 kind: theorem
 title: "Existence of Neron models for abelian varieties over a discrete valuation ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

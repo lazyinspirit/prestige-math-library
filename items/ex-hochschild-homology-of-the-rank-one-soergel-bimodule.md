@@ -2,7 +2,7 @@
 id: ex-hochschild-homology-of-the-rank-one-soergel-bimodule
 kind: example
 title: "Hochschild homology of the rank-one Soergel bimodule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-reduced-type-a-polynomial-ring-for-hhh, def-khovanovs-hhh-rouquier-generator-complexes, def-termwise-hochschild-homology-complex-of-a-rouquier-complex, def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring, thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex, def-axiom-of-choice]

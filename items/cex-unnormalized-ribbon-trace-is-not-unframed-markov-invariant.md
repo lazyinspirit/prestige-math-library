@@ -2,7 +2,7 @@
 id: cex-unnormalized-ribbon-trace-is-not-unframed-markov-invariant
 kind: counterexample
 title: "The unnormalized ribbon trace is not an unframed Markov invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

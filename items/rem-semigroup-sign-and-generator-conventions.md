@@ -2,7 +2,7 @@
 id: rem-semigroup-sign-and-generator-conventions
 kind: remark
 title: "Semigroup sign and generator conventions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

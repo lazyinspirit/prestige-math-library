@@ -2,7 +2,7 @@
 id: lem-open-manifolds-admit-exhaustions-with-no-caps
 kind: lemma
 title: "Open manifolds admit exhaustions with no caps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-extreme-value-metric, lem-regular-sublevels-are-compact-manifolds-with-boundary, cor-local-normal-form-for-submersions, thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function, cor-regular-values-have-null-complement-and-are-dense, lem-regular-sublevels-are-compact-manifolds-with-boundary, def-closed-sublevel-and-level-set-of-a-smooth-function, def-embedded-smooth-submanifold-with-boundary, def-interior-point-boundary-point-interior-and-boundary-of-a-manifold, thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold, def-connected-space, def-connected-component-and-quasicomponent, def-locally-connected, def-smooth-manifold, def-compact-space, def-countable-choice]

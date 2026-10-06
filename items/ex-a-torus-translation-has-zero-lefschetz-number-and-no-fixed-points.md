@@ -2,7 +2,7 @@
 id: ex-a-torus-translation-has-zero-lefschetz-number-and-no-fixed-points
 kind: example
 title: "A torus translation has zero Lefschetz number and no fixed points"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

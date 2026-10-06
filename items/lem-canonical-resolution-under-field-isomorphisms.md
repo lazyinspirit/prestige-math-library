@@ -2,7 +2,7 @@
 id: "lem-canonical-resolution-under-field-isomorphisms"
 kind: "lemma"
 title: "Canonical resolution under isomorphisms of the ground field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 11

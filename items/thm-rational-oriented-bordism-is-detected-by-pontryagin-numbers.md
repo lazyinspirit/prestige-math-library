@@ -2,7 +2,7 @@
 id: thm-rational-oriented-bordism-is-detected-by-pontryagin-numbers
 kind: theorem
 title: "Rational oriented bordism is detected by Pontryagin numbers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-axiom-of-choice, prop-products-of-complex-projective-spaces-span-rational-oriented-bordism, lem-projective-space-products-have-triangular-characteristic-number-matrix, thm-characteristic-numbers-are-cobordism-invariants, lem-characteristic-numbers-of-products-follow-the-whitney-sum-and-kunneth-formulas, def-pontryagin-number-of-a-closed-oriented-manifold, def-unoriented-and-oriented-bordism-groups, thm-cartesian-product-makes-bordism-a-graded-ring, lem-rationalization-is-exact-and-commutes-with-singular-homology, prop-zero-dimensional-bordism-groups]

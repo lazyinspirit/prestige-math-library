@@ -2,7 +2,7 @@
 id: lem-bmo-classes-are-determined-by-their-atom-pairings
 kind: lemma
 title: "BMO classes are determined by their pairings with H1 atoms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

@@ -2,7 +2,7 @@
 id: def-handle-slide-of-one-k-handle-over-another
 kind: definition
 title: "Handle slide of one k handle over another"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

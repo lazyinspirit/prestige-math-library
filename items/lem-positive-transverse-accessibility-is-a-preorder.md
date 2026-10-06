@@ -2,7 +2,7 @@
 id: lem-positive-transverse-accessibility-is-a-preorder
 kind: lemma
 title: "Positive transverse accessibility is a preorder"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

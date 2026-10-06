@@ -2,7 +2,7 @@
 id: "lem-equivalence-of-powers-of-a-marked-ideal"
 kind: "lemma"
 title: "A marked ideal is equivalent to its powers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 6

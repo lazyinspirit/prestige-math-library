@@ -2,7 +2,7 @@
 id: lem-arith-rigidified-line-bundle-descent
 kind: lemma
 title: "Rigidification and effective descent of line bundles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

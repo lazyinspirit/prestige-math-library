@@ -2,7 +2,7 @@
 id: lem-units-and-powers-of-the-laurent-polynomial-ring
 kind: lemma
 title: "Units, powers and the domain property of the Laurent polynomial ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

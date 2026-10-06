@@ -2,7 +2,7 @@
 id: cor-a-proper-injective-immersion-is-an-embedding
 kind: corollary
 title: "A proper injective immersion is an embedding"
-status: draft
+status: published
 origin: session
 dependency_level: 4
 provenance:

@@ -2,7 +2,7 @@
 id: lem-arith-poincare-cohomology-at-the-identity
 kind: lemma
 title: "Poincare cohomology at the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

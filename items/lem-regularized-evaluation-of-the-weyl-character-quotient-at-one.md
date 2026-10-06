@@ -2,7 +2,7 @@
 id: lem-regularized-evaluation-of-the-weyl-character-quotient-at-one
 kind: lemma
 title: Regularized evaluation of the Weyl character quotient at one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: thm-general-finite-principal-series-endomorphism-algebra
 kind: theorem
 title: "The endomorphism algebra of a general finite principal series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

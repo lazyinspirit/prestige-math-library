@@ -2,7 +2,7 @@
 id: rem-the-heat-operator-family-is-an-analytic-semigroup-in-the-later-abstract-language
 kind: remark
 title: The heat operator family is an analytic semigroup in the later abstract language
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

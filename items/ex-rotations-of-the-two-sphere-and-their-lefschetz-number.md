@@ -2,7 +2,7 @@
 id: ex-rotations-of-the-two-sphere-and-their-lefschetz-number
 kind: example
 title: "Rotations of the two-sphere and their Lefschetz number"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

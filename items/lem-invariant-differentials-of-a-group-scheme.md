@@ -2,7 +2,7 @@
 id: lem-invariant-differentials-of-a-group-scheme
 kind: lemma
 title: "The invariant differentials of a group scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["def-group-scheme-over-a-field", "def-sheaf-relative-differentials", "lem-differentials-commute-base-change-schemes", "def-relative-cotangent-space", "thm-cotangent-space-maximal-ideal-quotient", "def-pullback-module-ringed-spaces", "thm-fibre-products-of-schemes-exist", "lem-differential-of-morphism-via-cotangent-map", "def-zariski-tangent-space-point"]

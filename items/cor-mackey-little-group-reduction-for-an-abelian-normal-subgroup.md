@@ -2,7 +2,7 @@
 id: cor-mackey-little-group-reduction-for-an-abelian-normal-subgroup
 kind: corollary
 title: Mackey little-group reduction for an abelian normal subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

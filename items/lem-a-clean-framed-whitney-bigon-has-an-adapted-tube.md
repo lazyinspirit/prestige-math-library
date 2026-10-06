@@ -2,7 +2,7 @@
 id: lem-a-clean-framed-whitney-bigon-has-an-adapted-tube
 kind: lemma
 title: A clean framed Whitney bigon has an adapted tube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

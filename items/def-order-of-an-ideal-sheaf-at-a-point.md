@@ -2,7 +2,7 @@
 id: def-order-of-an-ideal-sheaf-at-a-point
 kind: definition
 title: Order of an ideal sheaf at a point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

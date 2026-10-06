@@ -2,7 +2,7 @@
 id: prop-littlewood-richardson-coefficients-stabilize-with-rank
 kind: proposition
 title: Littlewood--Richardson coefficients stabilise with rank
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

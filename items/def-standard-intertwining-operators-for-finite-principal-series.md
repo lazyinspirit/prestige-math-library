@@ -2,7 +2,7 @@
 id: def-standard-intertwining-operators-for-finite-principal-series
 kind: definition
 title: "Standard intertwining operators for the finite principal series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

@@ -2,7 +2,7 @@
 id: def-closed-sectorial-form-and-its-associated-operator
 kind: definition
 title: Closed sectorial form and its associated operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

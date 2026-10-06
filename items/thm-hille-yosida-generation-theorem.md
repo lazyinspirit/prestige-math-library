@@ -2,7 +2,7 @@
 id: thm-hille-yosida-generation-theorem
 kind: theorem
 title: "Hille-Yosida generation theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

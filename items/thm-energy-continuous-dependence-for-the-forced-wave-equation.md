@@ -2,7 +2,7 @@
 id: thm-energy-continuous-dependence-for-the-forced-wave-equation
 kind: theorem
 title: "Energy continuous dependence for the forced wave equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: intersection-pairings-self-intersection-and-euler-classes-examples
 title: Intersection Pairings Self Intersection and Euler Classes — Examples
-status: draft
+status: published
 requires: [intersection-pairings-self-intersection-and-euler-classes]
 items: []
 examples: [ex-self-intersection-of-the-zero-section-in-an-oriented-plane-bundle, ex-diagonal-in-the-two-sphere-has-self-intersection-two, ex-coordinate-circles-give-the-hyperbolic-intersection-form-on-a-torus, cex-the-core-circle-of-a-mobius-band-has-no-integral-oriented-self-intersection]

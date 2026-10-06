@@ -2,7 +2,7 @@
 id: "cex-obstacle-complementarity-product-needs-extra-regularity"
 kind: "counterexample"
 title: "The complementarity product needs extra regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 12

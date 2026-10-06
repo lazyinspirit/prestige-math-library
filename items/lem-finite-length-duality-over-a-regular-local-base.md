@@ -2,7 +2,7 @@
 id: lem-finite-length-duality-over-a-regular-local-base
 kind: lemma
 title: "Finite-length duality over a regular local base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

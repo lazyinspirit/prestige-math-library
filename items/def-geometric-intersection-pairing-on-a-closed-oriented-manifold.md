@@ -2,7 +2,7 @@
 id: def-geometric-intersection-pairing-on-a-closed-oriented-manifold
 kind: definition
 title: "The geometric intersection pairing on a closed oriented manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-oriented-intersection-number, def-local-oriented-intersection-sign, def-transverse-complementary-dimensional-intersection-set, def-transverse-embedded-submanifolds, lem-compact-transverse-complementary-intersections-are-finite, thm-oriented-intersection-number-is-homotopy-invariant, thm-intersection-number-under-factor-interchange, def-mod-two-intersection-number, thm-mod-two-intersection-number-is-homotopy-invariant, def-countable-choice]

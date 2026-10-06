@@ -2,7 +2,7 @@
 id: lem-finite-eilenberg-watts-kernel-end-and-coend-exist-with-explicit-universal-maps
 kind: lemma
 title: "Finite Eilenberg–Watts kernels: explicit end and coend universal maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-algebraic-dual-and-linear-functional, def-bimodule, def-dinatural-transformation, def-end-and-coend, def-linear-map, def-natural-isomorphism, def-natural-transformation, def-vector-space, def-wedge-and-cowedge, lem-finite-module-duality-is-exact-with-commuting-bimodule-actions, prop-functoriality-of-module-tensor-products, thm-a-natural-transformation-induces-a-morphism-of-ends-and-of-coends, thm-bimodule-actions-induced-on-tensor-products, thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories, thm-ends-and-coends-are-unique-up-to-unique-isomorphism, thm-universal-property-of-module-tensor-products]

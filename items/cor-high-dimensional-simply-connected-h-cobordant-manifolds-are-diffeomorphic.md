@@ -2,7 +2,7 @@
 id: cor-high-dimensional-simply-connected-h-cobordant-manifolds-are-diffeomorphic
 kind: corollary
 title: High-dimensional simply connected h-cobordant manifolds are diffeomorphic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 19

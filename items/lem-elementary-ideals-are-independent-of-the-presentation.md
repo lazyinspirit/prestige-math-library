@@ -2,7 +2,7 @@
 id: lem-elementary-ideals-are-independent-of-the-presentation
 kind: lemma
 title: "Elementary ideals are independent of the presentation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

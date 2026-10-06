@@ -2,7 +2,7 @@
 id: ex-rsk-shapes-of-all-six-permutations-in-s3
 kind: example
 title: "The RSK shapes of the six permutations of $S_3$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

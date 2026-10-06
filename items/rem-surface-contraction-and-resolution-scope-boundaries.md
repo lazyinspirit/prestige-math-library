@@ -2,7 +2,7 @@
 id: rem-surface-contraction-and-resolution-scope-boundaries
 kind: remark
 title: "What this page does and does not prove about contractions and resolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 22

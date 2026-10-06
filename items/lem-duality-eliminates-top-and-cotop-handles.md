@@ -2,7 +2,7 @@
 id: lem-duality-eliminates-top-and-cotop-handles
 kind: lemma
 title: Duality eliminates the top and codimension-one handles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 11

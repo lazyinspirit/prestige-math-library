@@ -2,7 +2,7 @@
 id: prop-left-to-right-exact-equivalence-sends-identity-to-nakayama
 kind: proposition
 title: "The left-to-right exact equivalence sends the identity to the Nakayama functor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-abelian-category, def-functor-and-contravariant-functor, def-k-linear-category-and-k-linear-functor, def-left-and-right-nakayama-functors-by-finite-kernel-calculus, def-left-exact-and-right-exact-functor, def-natural-isomorphism, def-natural-transformation, lem-finite-eilenberg-watts-kernel-end-and-coend-exist-with-explicit-universal-maps, lem-nakayama-kernels-give-well-defined-adjoint-functors, thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories]

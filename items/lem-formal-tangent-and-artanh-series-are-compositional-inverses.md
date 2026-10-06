@@ -2,7 +2,7 @@
 id: lem-formal-tangent-and-artanh-series-are-compositional-inverses
 kind: lemma
 title: "The formal hyperbolic tangent and artanh series are inverse, with the artanh derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

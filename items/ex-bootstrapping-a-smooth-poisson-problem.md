@@ -2,7 +2,7 @@
 id: ex-bootstrapping-a-smooth-poisson-problem
 kind: example
 title: "Bootstrapping a smooth Poisson problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

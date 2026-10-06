@@ -2,7 +2,7 @@
 id: prop-relative-handle-chain-complex-of-a-cobordism
 kind: proposition
 title: The relative handle chain complex computes $H_*(W,M_0)$ and has the intersection matrix as its differential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

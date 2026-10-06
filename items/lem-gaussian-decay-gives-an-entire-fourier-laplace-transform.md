@@ -2,7 +2,7 @@
 id: lem-gaussian-decay-gives-an-entire-fourier-laplace-transform
 kind: lemma
 title: Gaussian decay gives an entire Fourier-Laplace transform and its growth bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

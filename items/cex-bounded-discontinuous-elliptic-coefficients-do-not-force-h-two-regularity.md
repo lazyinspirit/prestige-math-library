@@ -2,7 +2,7 @@
 id: cex-bounded-discontinuous-elliptic-coefficients-do-not-force-h-two-regularity
 kind: counterexample
 title: "Bounded discontinuous elliptic coefficients need not give $H^2$ solutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-lie-algebra-of-the-stabilizer-of-a-subspace-and-lie-stable-subspaces
 kind: lemma
 title: "Lie algebras of subspace stabilizers and Lie-stable subspaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-derivative-ideals-have-the-same-support
 kind: lemma
 title: Iterated derivative ideals preserve support in the safe characteristic range
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

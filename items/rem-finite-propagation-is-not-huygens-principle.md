@@ -2,7 +2,7 @@
 id: rem-finite-propagation-is-not-huygens-principle
 kind: remark
 title: "Finite propagation is not the Huygens principle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

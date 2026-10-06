@@ -2,7 +2,7 @@
 id: lem-arith-group-model-with-abelian-generic-fibre-quasiprojective
 kind: lemma
 title: "Divisor ampleness and quasi-projectivity of group models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

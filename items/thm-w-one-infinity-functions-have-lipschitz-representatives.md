@@ -2,7 +2,7 @@
 id: thm-w-one-infinity-functions-have-lipschitz-representatives
 kind: theorem
 title: "$W^{1,\\infty}$ functions on convex domains have Lipschitz representatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

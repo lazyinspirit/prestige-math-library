@@ -2,7 +2,7 @@
 id: lem-germs-of-local-diffeomorphisms-form-a-group
 kind: lemma
 title: "Germs of local diffeomorphisms at a point form a group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

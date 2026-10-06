@@ -2,7 +2,7 @@
 id: thm-hodge-index-theorem-ample-case
 kind: theorem
 title: "The Hodge index theorem for an ample class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

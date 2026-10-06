@@ -2,7 +2,7 @@
 id: def-parabolic-cylinder-and-parabolic-boundary
 kind: definition
 title: Parabolic cylinder and parabolic boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

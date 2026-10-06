@@ -2,7 +2,7 @@
 id: "thm-higher-eigenvalues-by-orthogonality-constrained-minimisation"
 kind: "theorem"
 title: "Higher eigenvalues by orthogonality-constrained minimisation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 11

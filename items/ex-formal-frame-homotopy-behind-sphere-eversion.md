@@ -2,7 +2,7 @@
 id: ex-formal-frame-homotopy-behind-sphere-eversion
 kind: example
 title: "The formal frame homotopy behind sphere eversion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three, lem-the-second-homotopy-group-of-so-three-vanishes, lem-pi-three-so-three-generated-by-the-quaternion-double-cover, thm-covering-space-lifting-criterion, thm-homotopy-lifting-for-covering-maps, thm-lower-dimensional-sphere-maps-are-based-nullhomotopic, def-formal-immersion-between-smooth-manifolds, def-stiefel-space-grassmannian-and-tautological-bundle, def-covering-map-and-evenly-covered-neighbourhoods, cor-euclidean-spheres-are-path-connected]

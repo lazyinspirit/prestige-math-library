@@ -2,7 +2,7 @@
 id: def-model-category-and-quillen-adjunction
 kind: definition
 title: "Model categories and Quillen adjunctions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

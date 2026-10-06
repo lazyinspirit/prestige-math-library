@@ -2,7 +2,7 @@
 id: lem-variable-base-cotensor-corner-and-path-objects
 kind: lemma
 title: "Variable-base cotensor corners and path objects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

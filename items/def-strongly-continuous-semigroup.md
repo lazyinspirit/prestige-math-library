@@ -2,7 +2,7 @@
 id: def-strongly-continuous-semigroup
 kind: definition
 title: "Strongly continuous semigroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

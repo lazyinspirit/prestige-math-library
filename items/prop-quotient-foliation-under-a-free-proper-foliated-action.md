@@ -2,7 +2,7 @@
 id: prop-quotient-foliation-under-a-free-proper-foliated-action
 kind: proposition
 title: "The quotient foliation under a free and properly discontinuous foliated action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

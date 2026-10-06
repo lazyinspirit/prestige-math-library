@@ -2,7 +2,7 @@
 id: lem-sl2-structure-and-root-coordinates
 kind: lemma
 title: Structure of SL_2 and root coordinates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 21

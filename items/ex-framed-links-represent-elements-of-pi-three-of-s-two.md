@@ -2,7 +2,7 @@
 id: ex-framed-links-represent-elements-of-pi-three-of-s-two
 kind: example
 title: "The framed unknot represents a generator of pi_3 of S^2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

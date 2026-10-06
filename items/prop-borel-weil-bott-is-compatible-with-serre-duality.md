@@ -2,7 +2,7 @@
 id: prop-borel-weil-bott-is-compatible-with-serre-duality
 kind: proposition
 title: Borel-Weil-Bott is compatible with Serre duality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

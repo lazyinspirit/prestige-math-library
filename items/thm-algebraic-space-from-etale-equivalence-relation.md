@@ -2,7 +2,7 @@
 id: thm-algebraic-space-from-etale-equivalence-relation
 kind: theorem
 title: "Quotients of schemes by etale equivalence relations are algebraic spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

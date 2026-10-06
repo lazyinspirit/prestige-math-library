@@ -2,7 +2,7 @@
 id: lem-general-linear-group-scheme-and-its-coordinate-ring
 kind: lemma
 title: The general linear group scheme and its coordinate ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 0

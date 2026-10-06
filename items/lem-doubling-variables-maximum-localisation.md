@@ -2,7 +2,7 @@
 id: lem-doubling-variables-maximum-localisation
 kind: lemma
 title: "Doubling variables: existence, relative contacts at the maximiser and localisation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [lem-viscosity-testing-by-first-order-jets, def-upper-and-lower-semicontinuous-envelopes, def-semicontinuity-on-euclidean-subsets, thm-heine-borel-rn, thm-euclidean-semicontinuous-extreme-value-theorem, lem-sup-epsilon, def-bounded-set]

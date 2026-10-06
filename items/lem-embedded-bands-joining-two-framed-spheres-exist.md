@@ -2,7 +2,7 @@
 id: lem-embedded-bands-joining-two-framed-spheres-exist
 kind: lemma
 title: Embedded bands joining two framed spheres exist
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

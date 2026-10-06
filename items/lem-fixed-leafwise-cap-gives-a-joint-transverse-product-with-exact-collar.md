@@ -2,7 +2,7 @@
 id: lem-fixed-leafwise-cap-gives-a-joint-transverse-product-with-exact-collar
 kind: lemma
 title: "A fixed leafwise cap gives a joint transverse product with exact collar data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

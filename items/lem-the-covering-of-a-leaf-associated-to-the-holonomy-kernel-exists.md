@@ -2,7 +2,7 @@
 id: lem-the-covering-of-a-leaf-associated-to-the-holonomy-kernel-exists
 kind: lemma
 title: "The covering of a leaf associated with the holonomy kernel exists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-geometric-intersection-descends-through-oriented-cobordism-of-cycles
 kind: lemma
 title: "Bordant cycles have equal intersection numbers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-geometric-intersection-pairing-on-a-closed-oriented-manifold, thm-transverse-preimage-for-manifolds-with-boundary, def-oriented-intersection-number, def-local-oriented-intersection-sign, lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count, def-induced-boundary-orientation, def-embedded-smooth-submanifold-with-boundary, def-neat-submanifold-of-a-manifold-with-boundary, thm-transversality-homotopy-theorem, def-countable-choice, cor-a-null-cobordant-cycle-has-zero-intersection-with-a-disjoint-boundary, def-smooth-map-between-manifolds-with-boundary, thm-oriented-intersection-number-is-homotopy-invariant, thm-mod-two-intersection-number-is-homotopy-invariant, thm-collar-neighborhood-theorem, thm-the-double-has-a-well-defined-smooth-structure, lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family, thm-parametric-transversality, prop-relative-transversality-preserves-a-map-on-a-closed-good-region]

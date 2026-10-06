@@ -2,7 +2,7 @@
 id: lem-viscosity-initial-trace-is-enforced-by-upper-and-lower-barriers
 kind: lemma
 title: "Time-space barriers enforce the initial trace for the Cauchy problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-hamilton-jacobi-cauchy-problem, def-viscosity-subsolution-and-supersolution, def-ck-and-multi-index-notation-in-several-variables, thm-fermat-for-euclidean-local-extrema]

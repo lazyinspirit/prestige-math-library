@@ -2,7 +2,7 @@
 id: ex-quadratic-hopf-lax-formula-and-moreau-envelope
 kind: example
 title: The quadratic Hopf--Lax formula as an infimal convolution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

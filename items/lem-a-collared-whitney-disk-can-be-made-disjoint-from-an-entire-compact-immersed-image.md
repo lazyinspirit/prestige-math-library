@@ -34,7 +34,7 @@ sources:
     locator: 'Printed pp. 139–140: collared disk outside f(N), correction of one normal summand, and alteration
       of only one source sheet.'
 justified_by: []
-status: draft
+status: published
 origin: session
 dependency_level: 1
 ---

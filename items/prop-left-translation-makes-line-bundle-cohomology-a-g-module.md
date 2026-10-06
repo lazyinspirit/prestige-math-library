@@ -2,7 +2,7 @@
 id: prop-left-translation-makes-line-bundle-cohomology-a-g-module
 kind: proposition
 title: The cohomology of a Borel-character line bundle is a rational G-module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

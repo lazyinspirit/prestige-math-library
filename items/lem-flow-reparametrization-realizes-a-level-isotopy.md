@@ -2,7 +2,7 @@
 id: lem-flow-reparametrization-realizes-a-level-isotopy
 kind: lemma
 title: "Flow reparametrization realizes a level isotopy"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-regular-interval-diffeomorphism, thm-fundamental-theorem-on-flows, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-compactly-supported-vector-fields-are-complete, prop-time-t-flow-maps-are-diffeomorphisms-between-open-domains, def-pushforward-and-pullback-of-a-vector-field-by-a-diffeomorphism, def-countable-choice]

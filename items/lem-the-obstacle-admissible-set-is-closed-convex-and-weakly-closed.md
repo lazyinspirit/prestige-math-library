@@ -2,7 +2,7 @@
 id: "lem-the-obstacle-admissible-set-is-closed-convex-and-weakly-closed"
 kind: "lemma"
 title: "The obstacle admissible set is nonempty, convex, closed and weakly closed"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 8

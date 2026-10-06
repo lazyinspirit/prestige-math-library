@@ -2,7 +2,7 @@
 id: lem-adjoint-representation-of-an-affine-group-scheme
 kind: lemma
 title: "The adjoint representation of an affine group scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["def-axiom-of-choice", "def-lie-algebra-of-a-group-scheme", "lem-lie-algebra-tangent-space-and-functoriality", "lem-general-linear-group-scheme-and-its-coordinate-ring", "thm-affine-schemes-determined-by-functor-of-points", "thm-yoneda-lemma-is-natural-in-both-variables", "def-linear-basis", "def-linear-map", "def-linear-isomorphism-and-invertible-linear-map", "def-group-scheme-over-a-field", "def-functor-of-points-affine-scheme"]

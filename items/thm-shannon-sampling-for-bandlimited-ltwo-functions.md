@@ -2,7 +2,7 @@
 id: thm-shannon-sampling-for-bandlimited-ltwo-functions
 kind: theorem
 title: "Shannon sampling for band-limited $L^2$ functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

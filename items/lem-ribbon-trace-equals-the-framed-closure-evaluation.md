@@ -2,7 +2,7 @@
 id: lem-ribbon-trace-equals-the-framed-closure-evaluation
 kind: lemma
 title: "The ribbon trace equals the framed-closure evaluation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-collapse-after-regular-preimage-is-homotopic-to-the-original-map
 kind: lemma
 title: "The collapse of a regular preimage is homotopic to the original map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

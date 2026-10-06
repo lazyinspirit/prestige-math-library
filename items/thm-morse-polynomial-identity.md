@@ -2,7 +2,7 @@
 id: thm-morse-polynomial-identity
 kind: theorem
 title: "Morse polynomial identity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

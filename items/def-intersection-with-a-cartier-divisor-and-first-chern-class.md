@@ -2,7 +2,7 @@
 id: def-intersection-with-a-cartier-divisor-and-first-chern-class
 kind: definition
 title: "Intersection with an invertible sheaf and the first Chern class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

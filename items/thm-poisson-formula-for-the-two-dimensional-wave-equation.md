@@ -2,7 +2,7 @@
 id: thm-poisson-formula-for-the-two-dimensional-wave-equation
 kind: theorem
 title: "Poisson's formula in two dimensions by descent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

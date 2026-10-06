@@ -2,7 +2,7 @@
 id: thm-hhh-is-isomorphic-to-reduced-khovanov-rozansky-homflypt-homology
 kind: theorem
 title: "HHH is isomorphic to reduced Khovanov-Rozansky homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-termwise-hochschild-homology-complex-of-a-rouquier-complex, lem-the-koszul-hochschild-comparison-respects-crossing-differentials-and-trigradings, def-reduced-khovanov-rozansky-homology, def-khovanov-rozansky-complex-and-trigraded-braid-homology, def-axiom-of-choice, lem-a-closed-moy-resolution-koszul-complex-computes-hochschild-homology-of-its-soergel-bimodule, def-khovanovs-hhh-rouquier-generator-complexes, def-positive-and-negative-khovanov-rozansky-crossing-complexes]

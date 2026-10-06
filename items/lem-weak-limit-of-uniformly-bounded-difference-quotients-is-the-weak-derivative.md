@@ -2,7 +2,7 @@
 id: lem-weak-limit-of-uniformly-bounded-difference-quotients-is-the-weak-derivative
 kind: lemma
 title: "Uniformly bounded difference quotients represent a weak derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-first-difference-quotient, lem-difference-quotient-integration-by-parts, def-weak-derivative-of-a-locally-integrable-function, def-sobolev-space-wkp-and-its-norm, def-conjugate-exponents, thm-holder-inequality-for-integrals, thm-dominated-convergence, thm-meyers-serrin-density-on-an-arbitrary-open-set, lem-euclidean-bump-for-a-compact-set-inside-an-open-set, thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity, lem-complex-lp-duality-from-real-lp-duality, def-l-p-space-as-a-quotient-by-null-functions, def-derivative, thm-mean-value-inequality, thm-chain-rule-for-total-derivatives, def-countable-choice]

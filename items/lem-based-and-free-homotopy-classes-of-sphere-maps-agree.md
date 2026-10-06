@@ -2,7 +2,7 @@
 id: lem-based-and-free-homotopy-classes-of-sphere-maps-agree
 kind: lemma
 title: "Based and free homotopy classes of maps between spheres agree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

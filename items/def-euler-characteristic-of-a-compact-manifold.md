@@ -2,7 +2,7 @@
 id: def-euler-characteristic-of-a-compact-manifold
 kind: definition
 title: "Euler characteristic of a compact manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

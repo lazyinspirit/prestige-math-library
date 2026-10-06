@@ -2,7 +2,7 @@
 id: lem-good-quotient-local-on-target
 kind: lemma
 title: Good quotients are local on the target and are categorical quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

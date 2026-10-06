@@ -2,7 +2,7 @@
 id: lem-cellular-boundary-coefficient-equals-the-morse-trajectory-count
 kind: lemma
 title: "Cellular boundary coefficients are the signed trajectory counts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

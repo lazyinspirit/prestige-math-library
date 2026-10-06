@@ -2,7 +2,7 @@
 id: lem-root-datum-combinatorics
 kind: lemma
 title: Combinatorics of a reduced root datum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

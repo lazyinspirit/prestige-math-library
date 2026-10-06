@@ -2,7 +2,7 @@
 id: lem-weak-equation-for-a-first-derivative-includes-coefficient-commutators
 kind: lemma
 title: "The differentiated weak equation with coefficient commutators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

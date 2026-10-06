@@ -2,7 +2,7 @@
 id: rem-euler-class-construction-remains-owned-by-at
 kind: remark
 title: "The Euler class construction remains owned by algebraic topology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-euler-class-by-zero-section-pullback-of-the-thom-class, def-thom-class-by-fiberwise-normalization, def-thom-euler-class-of-an-oriented-vector-bundle, thm-thom-isomorphism-for-oriented-vector-bundles, prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, thm-mod-two-euler-class-is-the-top-stiefel-whitney-class, thm-self-intersection-is-the-euler-number-of-the-normal-bundle]

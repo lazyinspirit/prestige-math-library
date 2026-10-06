@@ -2,7 +2,7 @@
 id: thm-support-measure-uncertainty-inequality
 kind: theorem
 title: 'The support-measure uncertainty inequality $|E||F|\ge1$'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

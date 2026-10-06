@@ -2,7 +2,7 @@
 id: thm-universal-pontryagin-thom-correspondence-for-unoriented-and-oriented-bordism
 kind: theorem
 title: "The universal Pontryagin-Thom correspondence for unoriented and oriented bordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-every-unoriented-and-oriented-bordism-class-is-realized-by-an-embedded-collapse, lem-collapse-of-an-embedded-manifold-classifies-through-the-universal-thom-prespectrum, def-thom-prespectrum-of-the-universal-real-and-oriented-bundles, prop-transverse-preimage-carries-a-pulled-back-normal-structure, lem-based-homotopies-transverse-to-the-zero-section-give-normal-cobordisms, thm-transversality-homotopy-theorem, thm-strong-whitney-approximation-by-transverse-maps, cor-a-smooth-section-can-be-perturbed-transverse-to-the-zero-section, thm-relative-whitney-approximation-for-manifold-valued-maps, thm-euclidean-tubular-neighbourhood-theorem, thm-homotopy-invariance-of-vector-bundle-pullback, def-stable-homotopy-groups-of-a-sequential-prespectrum, prop-maps-of-prespectra-induce-functorial-maps-on-stable-homotopy-groups, def-unoriented-and-oriented-bordism-groups, thm-disjoint-union-makes-bordism-classes-abelian-groups, def-axiom-of-choice, cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex, thm-schubert-cells-give-the-stable-grassmannian-cw-structure]

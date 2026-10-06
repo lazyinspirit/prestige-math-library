@@ -26,7 +26,7 @@ sources:
     url: https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro
     locator: 'Printed pp.195–196: surgery trace and relative-map comparison; the finite relative-cell argument is
       supplied here.'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

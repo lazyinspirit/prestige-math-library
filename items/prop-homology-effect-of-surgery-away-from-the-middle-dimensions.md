@@ -2,7 +2,7 @@
 id: "prop-homology-effect-of-surgery-away-from-the-middle-dimensions"
 kind: "proposition"
 title: "The homology effect of surgery away from the middle dimensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

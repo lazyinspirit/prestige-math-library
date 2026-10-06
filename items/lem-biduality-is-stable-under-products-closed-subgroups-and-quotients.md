@@ -2,7 +2,7 @@
 id: lem-biduality-is-stable-under-products-closed-subgroups-and-quotients
 kind: lemma
 title: Biduality commutes with products, closed subgroups and quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 21

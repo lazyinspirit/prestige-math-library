@@ -2,7 +2,7 @@
 id: "lem-cech-hypercohomology-computes-ext-of-the-cotangent-complex"
 kind: "lemma"
 title: "Cech hypercohomology of an affine cover computes Ext of the cotangent complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 13

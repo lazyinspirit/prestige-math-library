@@ -1,7 +1,7 @@
 ---
 page: "plane-curves-local-intersection-multiplicity-and-bezout-examples"
 title: "Plane Curves, Local Intersection Multiplicity, and Bézout — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-common-component-bezout-sum-not-finite

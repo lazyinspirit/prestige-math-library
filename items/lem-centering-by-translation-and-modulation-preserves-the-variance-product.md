@@ -2,7 +2,7 @@
 id: lem-centering-by-translation-and-modulation-preserves-the-variance-product
 kind: lemma
 title: Centring by translation and modulation preserves the variance product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-handle-slides-act-by-elementary-basis-change-on-handle-chains
 kind: lemma
 title: "Handle slides act by elementary basis change on handle chains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

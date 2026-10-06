@@ -2,7 +2,7 @@
 id: "thm-banach-implicit-function-theorem-for-a-split-surjective-derivative"
 kind: "theorem"
 title: "A split surjective derivative parametrises its level set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

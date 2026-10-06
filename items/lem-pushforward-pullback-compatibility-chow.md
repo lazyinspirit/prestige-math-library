@@ -2,7 +2,7 @@
 id: lem-pushforward-pullback-compatibility-chow
 kind: lemma
 title: "Proper pushforward commutes with flat pullback"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

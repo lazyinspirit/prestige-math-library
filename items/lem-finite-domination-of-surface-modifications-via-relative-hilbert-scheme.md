@@ -2,7 +2,7 @@
 id: lem-finite-domination-of-surface-modifications-via-relative-hilbert-scheme
 kind: lemma
 title: Finite domination of surface modifications by a relative Hilbert scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

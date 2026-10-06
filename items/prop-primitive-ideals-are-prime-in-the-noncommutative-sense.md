@@ -2,7 +2,7 @@
 id: prop-primitive-ideals-are-prime-in-the-noncommutative-sense
 kind: proposition
 title: "Primitive ideals are prime in the noncommutative sense"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

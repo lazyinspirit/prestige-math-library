@@ -2,7 +2,7 @@
 id: thm-a-yang-baxter-operator-gives-braid-group-representations
 kind: theorem
 title: "A Yang–Baxter operator gives braid-group representations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

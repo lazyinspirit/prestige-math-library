@@ -2,7 +2,7 @@
 id: lem-neron-model-uniqueness-etale-base-change-and-local-nature
 kind: lemma
 title: "Uniqueness, weak Neron property, etale base change and local nature of Neron models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

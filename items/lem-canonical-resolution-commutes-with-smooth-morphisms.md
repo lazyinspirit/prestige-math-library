@@ -2,7 +2,7 @@
 id: "lem-canonical-resolution-commutes-with-smooth-morphisms"
 kind: "lemma"
 title: "Canonical resolutions commute with smooth morphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 13

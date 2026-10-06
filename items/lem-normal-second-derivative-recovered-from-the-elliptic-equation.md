@@ -2,7 +2,7 @@
 id: lem-normal-second-derivative-recovered-from-the-elliptic-equation
 kind: lemma
 title: "The normal second derivative is recovered from the equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

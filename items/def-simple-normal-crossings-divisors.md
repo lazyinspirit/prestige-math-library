@@ -2,7 +2,7 @@
 id: "def-simple-normal-crossings-divisors"
 kind: "definition"
 title: "Simple normal crossings divisors and simultaneous normal crossings position"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 0

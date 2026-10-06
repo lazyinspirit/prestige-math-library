@@ -2,7 +2,7 @@
 id: cor-a-sufficiently-large-shift-is-coercive
 kind: corollary
 title: "A sufficiently large shift is coercive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

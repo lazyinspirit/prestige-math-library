@@ -2,7 +2,7 @@
 id: ex-method-of-continuity-for-a-constant-coefficient-path
 kind: example
 title: The method of continuity on a constant-coefficient one-dimensional path
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

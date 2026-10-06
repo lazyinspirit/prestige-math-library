@@ -2,7 +2,7 @@
 id: ex-weak-and-classical-maximum-principles-agree-for-smooth-solutions
 kind: example
 title: "The weak and the classical maximum principles agree on a smooth subsolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

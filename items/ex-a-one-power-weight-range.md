@@ -2,7 +2,7 @@
 id: ex-a-one-power-weight-range
 kind: example
 title: The A_1 range of a power weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

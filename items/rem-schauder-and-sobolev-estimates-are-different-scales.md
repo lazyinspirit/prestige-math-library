@@ -2,7 +2,7 @@
 id: rem-schauder-and-sobolev-estimates-are-different-scales
 kind: remark
 title: The Schauder and $W^{2,p}$ scales are different, not interchangeable
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

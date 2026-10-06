@@ -2,7 +2,7 @@
 id: lem-a-closed-smooth-manifold-has-the-homotopy-type-of-a-finite-cw-complex
 kind: lemma
 title: A closed smooth manifold has the homotopy type of a finite CW complex
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: prop-vector-field-zero-index-is-a-zero-section-intersection-number
 kind: proposition
 title: "The index of a zero is its zero-section intersection number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

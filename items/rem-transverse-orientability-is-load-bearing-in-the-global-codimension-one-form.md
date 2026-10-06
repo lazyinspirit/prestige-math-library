@@ -2,7 +2,7 @@
 id: rem-transverse-orientability-is-load-bearing-in-the-global-codimension-one-form
 kind: remark
 title: "Transverse orientability is load-bearing in the global codimension-one form"
-status: draft
+status: published
 origin: pipeline
 provenance: {"statement": "literature-derived", "proof": "not-applicable"}
 deps: ["def-countable-choice-principle-for-foliation-pair", "def-transversely-oriented-codimension-one-foliation"]

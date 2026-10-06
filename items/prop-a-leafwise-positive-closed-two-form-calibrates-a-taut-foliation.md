@@ -2,7 +2,7 @@
 id: prop-a-leafwise-positive-closed-two-form-calibrates-a-taut-foliation
 kind: proposition
 title: A leafwise positive closed two-form calibrates a taut foliation
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

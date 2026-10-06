@@ -2,7 +2,7 @@
 id: ex-blowup-of-a-smooth-point
 kind: example
 title: 'Blowing up a smooth point: charts, exceptional curve, and contraction'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-compact-stable-leaves-form-an-open-saturated-set
 kind: lemma
 title: "Compact leaves with finite holonomy form an open saturated set"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

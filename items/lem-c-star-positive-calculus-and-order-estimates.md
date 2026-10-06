@@ -31,7 +31,7 @@ sources:
     - title: "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press 2008; author-hosted complete text)"
       url: "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf"
       locator: "Appendix C, §C.5: positivity and order in a C*-algebra as used for positive type functions"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

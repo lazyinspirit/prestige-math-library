@@ -2,7 +2,7 @@
 id: ex-a-degenerate-isolated-fixed-point-with-nonzero-local-index
 kind: example
 title: "A degenerate isolated fixed point with nonzero local index"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

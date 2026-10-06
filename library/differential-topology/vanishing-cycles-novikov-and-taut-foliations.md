@@ -1,7 +1,7 @@
 ---
 page: vanishing-cycles-novikov-and-taut-foliations
 title: Vanishing Cycles, Novikov and Taut Foliations
-status: draft
+status: published
 items: [def-taut-codimension-one-foliation,
         def-dead-end-component,
         def-accessible-manifold-of-a-leaf,

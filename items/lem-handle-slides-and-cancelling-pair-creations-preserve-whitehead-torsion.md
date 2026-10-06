@@ -2,7 +2,7 @@
 id: lem-handle-slides-and-cancelling-pair-creations-preserve-whitehead-torsion
 kind: lemma
 title: "Handle slides and cancelling-pair creations preserve Whitehead torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 11

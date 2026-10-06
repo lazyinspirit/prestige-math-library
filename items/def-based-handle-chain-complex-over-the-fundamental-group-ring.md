@@ -2,7 +2,7 @@
 id: def-based-handle-chain-complex-over-the-fundamental-group-ring
 kind: definition
 title: "The based handle chain complex over the fundamental group ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

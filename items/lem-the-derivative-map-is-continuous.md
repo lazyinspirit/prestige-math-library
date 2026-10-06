@@ -2,7 +2,7 @@
 id: lem-the-derivative-map-is-continuous
 kind: lemma
 title: "The derivative map is continuous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-derivative-map-from-immersions-to-formal-immersions, def-weak-compact-open-smooth-topology-on-mapping-spaces, prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices, thm-chain-rule-for-differentials-of-smooth-maps, def-space-of-immersions-and-space-of-formal-immersions, thm-the-global-differential-of-a-smooth-map-is-smooth, def-countable-choice, lem-coordinate-balls-form-a-basis-of-a-topological-manifold, lem-compactness-of-a-subspace-is-ambient, lem-the-weak-smooth-topology-is-independent-of-the-chosen-atlas]

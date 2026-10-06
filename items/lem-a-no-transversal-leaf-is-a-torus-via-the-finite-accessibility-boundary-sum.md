@@ -2,7 +2,7 @@
 id: lem-a-no-transversal-leaf-is-a-torus-via-the-finite-accessibility-boundary-sum
 kind: lemma
 title: "A no-transversal leaf is a torus via the finite accessibility boundary sum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

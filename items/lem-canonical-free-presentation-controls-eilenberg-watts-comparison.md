@@ -2,7 +2,7 @@
 id: lem-canonical-free-presentation-controls-eilenberg-watts-comparison
 kind: lemma
 title: "Canonical free presentations force the comparison to be an isomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

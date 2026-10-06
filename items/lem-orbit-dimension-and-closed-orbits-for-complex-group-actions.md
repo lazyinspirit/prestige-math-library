@@ -2,7 +2,7 @@
 id: lem-orbit-dimension-and-closed-orbits-for-complex-group-actions
 kind: lemma
 title: Orbit dimension and closed orbits for complex group actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

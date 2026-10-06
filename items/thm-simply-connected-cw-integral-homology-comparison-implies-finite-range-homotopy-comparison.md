@@ -2,7 +2,7 @@
 id: thm-simply-connected-cw-integral-homology-comparison-implies-finite-range-homotopy-comparison
 kind: theorem
 title: "Integral homology comparison gives finite-range homotopy comparison for simply connected CW complexes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

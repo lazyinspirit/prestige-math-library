@@ -2,7 +2,7 @@
 id: ex-node-line-intersection-branches
 kind: example
 title: Lines through a node and its two branches
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

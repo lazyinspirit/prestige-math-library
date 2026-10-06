@@ -2,7 +2,7 @@
 id: def-reeb-component-in-a-cooriented-three-manifold-foliation
 kind: definition
 title: "Reeb components of a codimension-one foliation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

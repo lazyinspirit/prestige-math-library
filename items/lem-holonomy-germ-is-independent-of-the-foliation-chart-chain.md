@@ -2,7 +2,7 @@
 id: lem-holonomy-germ-is-independent-of-the-foliation-chart-chain
 kind: lemma
 title: "The holonomy germ is independent of the foliation chart chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 2

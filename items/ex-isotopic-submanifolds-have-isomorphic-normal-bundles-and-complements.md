@@ -2,7 +2,7 @@
 id: ex-isotopic-submanifolds-have-isomorphic-normal-bundles-and-complements
 kind: example
 title: "Compact isotopic submanifolds have isomorphic normal bundles and diffeomorphic complements"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 provenance:

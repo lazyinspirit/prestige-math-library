@@ -2,7 +2,7 @@
 id: thm-stable-pontryagin-thom-identifies-framed-bordism-with-stable-stems
 kind: theorem
 title: "The stable Pontryagin-Thom theorem identifies framed bordism with stable stems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

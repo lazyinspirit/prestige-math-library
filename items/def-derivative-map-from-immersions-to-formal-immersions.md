@@ -2,7 +2,7 @@
 id: def-derivative-map-from-immersions-to-formal-immersions
 kind: definition
 title: "The derivative map from immersions to formal immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-countable-choice, def-formal-immersion-between-smooth-manifolds, def-space-of-immersions-and-space-of-formal-immersions, def-differential-of-a-smooth-map, def-vector-bundle-map-over-a-smooth-base-map]

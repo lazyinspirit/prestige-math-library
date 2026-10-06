@@ -2,7 +2,7 @@
 id: thm-atomic-characterisation-of-real-hp
 kind: theorem
 title: "Atomic characterisation of real $H^p$ for $0<p\\le1$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

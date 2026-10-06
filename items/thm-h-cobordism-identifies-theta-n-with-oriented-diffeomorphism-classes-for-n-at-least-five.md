@@ -2,7 +2,7 @@
 id: thm-h-cobordism-identifies-theta-n-with-oriented-diffeomorphism-classes-for-n-at-least-five
 kind: theorem
 title: "H-cobordism of homotopy spheres equals oriented diffeomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

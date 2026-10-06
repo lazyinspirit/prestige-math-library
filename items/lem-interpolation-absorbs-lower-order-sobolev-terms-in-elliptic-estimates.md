@@ -2,7 +2,7 @@
 id: lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates
 kind: lemma
 title: "Absorption of lower-order Sobolev terms in the elliptic estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-sobolev-space-wkp-and-its-norm, def-hk-and-hk-zero-notation, def-wkp-zero-as-a-sobolev-closure, thm-young-inequality-real-exponents, lem-compact-support-zero-extension-in-wkp, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, lem-classical-derivatives-are-weak-derivatives, def-countable-choice]

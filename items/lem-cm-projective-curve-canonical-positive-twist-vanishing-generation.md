@@ -2,7 +2,7 @@
 id: lem-cm-projective-curve-canonical-positive-twist-vanishing-generation
 kind: lemma
 title: "Positive canonical twists on projective Cohen\u2013Macaulay curves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

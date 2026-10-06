@@ -2,7 +2,7 @@
 id: thm-weyl-denominator-identity
 kind: theorem
 title: The Weyl denominator identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

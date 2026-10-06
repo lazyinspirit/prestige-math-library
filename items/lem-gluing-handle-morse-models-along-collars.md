@@ -2,7 +2,7 @@
 id: lem-gluing-handle-morse-models-along-collars
 kind: lemma
 title: "Gluing handle Morse models along collars"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-handle-decomposition-relative-to-the-incoming-boundary, def-attaching-a-smooth-handle-with-corner-rounding, lem-standard-handle-admits-an-adapted-morse-function, lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism, thm-collar-neighborhood-theorem, thm-morse-lemma, def-morse-function-and-excellent-morse-function, def-downward-gradient-like-vector-field, def-countable-choice, thm-one-critical-point-handle-attachment, lem-local-morse-sublevel-pair-is-a-handle-pair, thm-regular-interval-diffeomorphism]

@@ -1,7 +1,7 @@
 ---
 page: surface-riemann-roch-and-the-hodge-index-theorem
 title: "Surface Riemann-Roch and the Hodge Index Theorem"
-status: draft
+status: published
 requires:
   - intersection-products-on-smooth-projective-surfaces
   - cartier-and-weil-divisors-line-bundles-and-picard-groups

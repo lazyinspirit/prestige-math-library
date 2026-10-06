@@ -2,7 +2,7 @@
 id: cor-exact-finite-tensor-functors-have-right-projective-kernels
 kind: corollary
 title: "Exact finite tensor functors have projective right-module kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

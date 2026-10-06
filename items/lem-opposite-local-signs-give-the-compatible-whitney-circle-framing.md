@@ -30,7 +30,7 @@ sources:
     locator: Lemma 6.13 and its proof, printed pp. 80-83 (the frame fields $E_1,\dots,E_{r-1}$ tangent to $M$ along
       $C$ and to $M'$ along $C'$, and the use of opposite intersection numbers at $p,q$)
 proof_strategy: direct
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

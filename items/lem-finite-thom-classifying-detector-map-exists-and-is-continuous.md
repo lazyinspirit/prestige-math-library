@@ -2,7 +2,7 @@
 id: lem-finite-thom-classifying-detector-map-exists-and-is-continuous
 kind: lemma
 title: "The finite Thom classifying detector map exists and is continuous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

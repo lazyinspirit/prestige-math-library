@@ -2,7 +2,7 @@
 id: lem-normal-bundle-of-the-diagonal-is-canonically-tm
 kind: lemma
 title: "The normal bundle of the diagonal is canonically the tangent bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [prop-the-diagonal-is-an-embedded-submanifold, def-normal-and-conormal-bundles-of-an-embedded-submanifold, thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle, prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles, thm-canonical-tangent-and-cotangent-splittings-for-products, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure, def-product-orientation, prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold, def-differential-of-a-smooth-map, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, def-countable-choice]

@@ -2,7 +2,7 @@
 id: thm-rational-hurewicz-for-highly-connected-cw-complexes
 kind: theorem
 title: "Rational Hurewicz for highly connected CW complexes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

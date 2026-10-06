@@ -2,7 +2,7 @@
 id: lem-local-fixed-point-index-is-invariant-under-diffeomorphism-conjugation
 kind: lemma
 title: "The local fixed point index is invariant under conjugation by a local diffeomorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: def-coordinate-hopf-algebra-of-affine-group-scheme
 kind: definition
 title: The coordinate Hopf algebra of an affine group scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 1

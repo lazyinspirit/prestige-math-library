@@ -2,7 +2,7 @@
 id: lem-backward-uniqueness-for-the-heat-equation-on-a-bounded-interval
 kind: lemma
 title: Backward uniqueness for the heat equation on a bounded interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

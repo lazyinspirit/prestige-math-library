@@ -2,7 +2,7 @@
 id: rem-compact-leaf-does-not-mean-finite-holonomy-or-finite-fundamental-group
 kind: remark
 title: "A compact leaf neither has finite holonomy nor finite fundamental group automatically"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

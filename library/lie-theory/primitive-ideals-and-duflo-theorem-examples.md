@@ -1,7 +1,7 @@
 ---
 page: primitive-ideals-and-duflo-theorem-examples
 title: "Primitive Ideals and Duflo Theorem - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-associated-variety-of-a-finite-dimensional-simple-annihilator,
            cex-an-intersection-of-two-primitive-ideals-need-not-be-primitive,

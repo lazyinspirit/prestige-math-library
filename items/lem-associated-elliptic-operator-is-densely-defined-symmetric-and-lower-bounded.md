@@ -2,7 +2,7 @@
 id: lem-associated-elliptic-operator-is-densely-defined-symmetric-and-lower-bounded
 kind: lemma
 title: "The associated elliptic operator is densely defined, symmetric and lower bounded"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

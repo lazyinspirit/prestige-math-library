@@ -2,7 +2,7 @@
 id: "thm-lax-milgram-solvability-for-coercive-divergence-form-equations"
 kind: "theorem"
 title: "Lax--Milgram solvability for coercive divergence-form equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 6

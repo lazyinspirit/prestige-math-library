@@ -2,7 +2,7 @@
 id: def-recursive-radix-two-fast-fourier-transform
 kind: definition
 title: "The recursive radix-two fast Fourier transform"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

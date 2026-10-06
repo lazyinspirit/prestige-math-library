@@ -2,7 +2,7 @@
 id: thm-plane-cubic-chord-tangent-group-law
 kind: theorem
 title: "The chord-tangent group law on a smooth short Weierstrass cubic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

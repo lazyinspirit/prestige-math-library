@@ -2,7 +2,7 @@
 id: cor-borel-weil-bott-euler-character-is-the-weyl-character
 kind: corollary
 title: The Borel-Weil-Bott Euler character is a signed dual Weyl character
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

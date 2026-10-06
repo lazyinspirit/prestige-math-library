@@ -2,7 +2,7 @@
 id: def-isolated-zero-and-local-index-of-a-vector-field
 kind: definition
 title: "Isolated zero and local index of a vector field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

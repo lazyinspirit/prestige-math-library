@@ -2,7 +2,7 @@
 id: lem-reductive-center-radical-and-semisimple-quotient
 kind: lemma
 title: Centre, radical and semisimple quotient of a reductive group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 20

@@ -1,7 +1,7 @@
 ---
 page: poisson-summation-sampling-and-lattice-duality-examples
 title: "Poisson Summation Sampling and Lattice Duality — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-dual-lattice-and-covolume-for-a-diagonal-scaling,
         ex-shannon-reconstruction-of-a-sinc-function,

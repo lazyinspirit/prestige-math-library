@@ -2,7 +2,7 @@
 id: lem-vector-field-index-is-independent-of-chart-ball-and-trivialization
 kind: lemma
 title: "The local index is independent of chart, ball and trivialization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: thm-braided-functors-intertwine-canonical-braid-actions
 kind: theorem
 title: "Braided functors intertwine canonical braid actions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

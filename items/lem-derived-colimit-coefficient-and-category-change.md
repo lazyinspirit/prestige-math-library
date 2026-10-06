@@ -2,7 +2,7 @@
 id: lem-derived-colimit-coefficient-and-category-change
 kind: lemma
 title: "Derived colimit commutes with coefficient change and admissible category change"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-trivial-and-steinberg-splitting-on-p1-fq
 kind: example
 title: "The trivial and Steinberg splitting on P^1(F_q)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

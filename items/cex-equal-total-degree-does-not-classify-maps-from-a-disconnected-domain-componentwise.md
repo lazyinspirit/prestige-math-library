@@ -2,7 +2,7 @@
 id: cex-equal-total-degree-does-not-classify-maps-from-a-disconnected-domain-componentwise
 kind: counterexample
 title: Equal total degree does not classify maps from a disconnected domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

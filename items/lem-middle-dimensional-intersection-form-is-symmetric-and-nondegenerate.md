@@ -2,7 +2,7 @@
 id: lem-middle-dimensional-intersection-form-is-symmetric-and-nondegenerate
 kind: lemma
 title: "The middle-dimensional intersection form is symmetric and nondegenerate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

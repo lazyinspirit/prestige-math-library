@@ -2,7 +2,7 @@
 id: lem-geometric-intersection-numbers-are-isotopy-invariants
 kind: lemma
 title: "Geometric intersection numbers are isotopy invariants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

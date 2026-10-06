@@ -2,7 +2,7 @@
 id: ex-continuation-across-a-birth-death-adds-an-acyclic-pair
 kind: example
 title: "Continuation across a birth--death pair adds an acyclic summand"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

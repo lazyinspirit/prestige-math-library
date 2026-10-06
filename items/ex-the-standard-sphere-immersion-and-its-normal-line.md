@@ -2,7 +2,7 @@
 id: ex-the-standard-sphere-immersion-and-its-normal-line
 kind: example
 title: "The standard sphere immersion and its normal line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-normal-bundle-of-a-formal-immersion, lem-formal-immersion-gives-the-tangent-normal-bundle-identity, def-formal-immersion-between-smooth-manifolds, def-immersion-submersion-and-constant-rank-map, def-tangent-bundle-as-a-disjoint-union, def-countable-choice, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, lem-no-nowhere-zero-tangent-field-on-a-positive-even-sphere]

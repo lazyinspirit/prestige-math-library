@@ -2,7 +2,7 @@
 id: cor-minimisers-are-classical-when-elliptic-regularity-applies
 kind: corollary
 title: "Minimisers are classical when elliptic regularity applies"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: cex-plancherel-measure-is-not-uniform-on-partitions
 kind: counterexample
 title: "The Plancherel measure is not uniform on partitions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: def-holonomy-representation-and-holonomy-group-of-a-leaf
 kind: definition
 title: "The holonomy representation and the holonomy group of a leaf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

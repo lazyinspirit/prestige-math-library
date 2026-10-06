@@ -2,7 +2,7 @@
 id: "lem-hypersurface-deformations-classified-by-equation-deformations"
 kind: "lemma"
 title: "Embedded flat deformations of a smooth hypersurface are deformations of its equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-koszul-row-operations-and-variable-exclusion-preserve-factorization-homotopy-type
 kind: lemma
 title: "Koszul row operations and variable exclusion preserve homotopy type"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

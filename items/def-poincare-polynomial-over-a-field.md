@@ -2,7 +2,7 @@
 id: def-poincare-polynomial-over-a-field
 kind: definition
 title: "Poincare polynomial of a space and of a pair over a field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: cex-an-interval-has-nonzero-euler-characteristic-despite-being-odd-dimensional
 kind: counterexample
 title: "An interval has nonzero Euler characteristic despite being odd-dimensional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: counterexample

@@ -2,7 +2,7 @@
 id: lem-surface-modification-isomorphism-in-codimension-one
 kind: lemma
 title: "A normal-surface modification is an isomorphism in codimension one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

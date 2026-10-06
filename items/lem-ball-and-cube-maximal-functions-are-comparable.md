@@ -2,7 +2,7 @@
 id: lem-ball-and-cube-maximal-functions-are-comparable
 kind: lemma
 title: Ball and cube maximal functions are pointwise comparable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

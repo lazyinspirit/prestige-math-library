@@ -2,7 +2,7 @@
 id: lem-chern-character-and-todd-class-multiplicativity
 kind: lemma
 title: "Additivity and multiplicativity of the Chern character and Todd class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 17

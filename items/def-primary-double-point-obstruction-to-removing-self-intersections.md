@@ -2,7 +2,7 @@
 id: def-primary-double-point-obstruction-to-removing-self-intersections
 kind: definition
 title: The primary double point obstruction to removing self-intersections
-status: draft
+status: published
 origin: session
 dependency_level: 2
 provenance:

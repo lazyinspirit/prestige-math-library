@@ -2,7 +2,7 @@
 id: lem-nonzero-section-vanishing-at-a-point-has-positive-degree
 kind: lemma
 title: A nonzero section vanishing at a point forces positive degree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-entropy-solution-orbits-are-strongly-continuous-in-lone
 kind: theorem
 title: Entropy solution orbits are strongly continuous in $L^1$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

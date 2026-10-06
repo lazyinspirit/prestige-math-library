@@ -2,7 +2,7 @@
 id: def-schur-module-and-schur-polynomial-character
 kind: definition
 title: Schur modules and their characters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

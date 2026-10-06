@@ -2,7 +2,7 @@
 id: thm-characteristic-numbers-are-cobordism-invariants
 kind: theorem
 title: "Characteristic numbers are cobordism invariants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-stiefel-whitney-number-of-a-closed-manifold, def-pontryagin-number-of-a-closed-oriented-manifold, prop-boundaries-have-zero-stiefel-whitney-numbers, prop-oriented-boundaries-have-zero-pontryagin-numbers, def-unoriented-smooth-cobordism-of-closed-manifolds, def-oriented-smooth-cobordism, def-null-cobordant-closed-manifold, thm-disjoint-union-makes-bordism-classes-abelian-groups, thm-cartesian-product-makes-bordism-a-graded-ring, def-axiom-of-choice]

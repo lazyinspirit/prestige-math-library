@@ -2,7 +2,7 @@
 id: thm-morse-rearrangement-by-index
 kind: theorem
 title: "Rearrangement of critical levels by index"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, def-morse-function-adapted-to-a-cobordism, lem-critical-values-of-disjoint-trajectory-closures-can-be-interchanged, lem-gradient-like-perturbation-separates-adjacent-critical-levels, def-morse-function-and-excellent-morse-function, def-countable-choice]

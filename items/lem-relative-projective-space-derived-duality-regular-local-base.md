@@ -2,7 +2,7 @@
 id: lem-relative-projective-space-derived-duality-regular-local-base
 kind: lemma
 title: "Relative derived duality on projective space over a regular local ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

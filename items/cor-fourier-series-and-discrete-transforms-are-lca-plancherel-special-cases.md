@@ -2,7 +2,7 @@
 id: cor-fourier-series-and-discrete-transforms-are-lca-plancherel-special-cases
 kind: corollary
 title: Compact and discrete transforms are the two extreme Plancherel cases
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 16

@@ -1,7 +1,7 @@
 ---
 page: "deformation-theory-of-schemes-and-obstruction-spaces-examples"
 title: "Deformation Theory of Schemes and Obstruction Spaces — Examples"
-status: draft
+status: published
 requires: [deformation-theory-of-schemes-and-obstruction-spaces]
 items: []
 examples: ["ex-first-order-deformations-of-a-hypersurface",

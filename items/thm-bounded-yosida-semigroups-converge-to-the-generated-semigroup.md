@@ -2,7 +2,7 @@
 id: thm-bounded-yosida-semigroups-converge-to-the-generated-semigroup
 kind: theorem
 title: "Bounded Yosida semigroups converge to the generated semigroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

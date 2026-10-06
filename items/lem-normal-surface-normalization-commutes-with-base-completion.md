@@ -2,7 +2,7 @@
 id: lem-normal-surface-normalization-commutes-with-base-completion
 kind: lemma
 title: "Normalization of a surface modification commutes with local-base completion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

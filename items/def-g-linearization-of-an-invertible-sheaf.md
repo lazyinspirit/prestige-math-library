@@ -2,7 +2,7 @@
 id: def-g-linearization-of-an-invertible-sheaf
 kind: definition
 title: G-linearizations of invertible sheaves on a complex G-variety
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

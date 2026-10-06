@@ -2,7 +2,7 @@
 id: ex-eilenberg-watts-recovers-extension-of-scalars
 kind: example
 title: "Eilenberg-Watts recovers extension of scalars"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

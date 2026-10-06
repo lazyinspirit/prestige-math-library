@@ -2,7 +2,7 @@
 id: ex-the-hecke-trace-skein-calculation-for-a-three-crossing-braid
 kind: example
 title: "The Hecke trace skein calculation for a three-crossing braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

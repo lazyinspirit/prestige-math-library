@@ -2,7 +2,7 @@
 id: ex-a-fibration-over-the-circle-as-a-global-stable-foliation
 kind: example
 title: "A fibration over the circle as a globally stable foliation"
-status: draft
+status: published
 origin: pipeline
 provenance: {"statement": "literature-derived", "proof": "literature-derived"}
 deps: ["prop-mapping-torus-foliations-realize-global-reeb-stable-examples", "def-two-dimensional-torus", "def-diffeomorphism-and-local-diffeomorphism-of-manifolds", "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure", "def-countable-choice-principle-for-foliation-pair", "cor-fundamental-group-of-two-dimensional-torus"]

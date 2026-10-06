@@ -2,7 +2,7 @@
 id: thm-lumer-phillips-generation-theorem
 kind: theorem
 title: "Lumer-Phillips generation theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

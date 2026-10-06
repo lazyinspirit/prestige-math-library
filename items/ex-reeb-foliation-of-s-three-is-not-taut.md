@@ -2,7 +2,7 @@
 id: ex-reeb-foliation-of-s-three-is-not-taut
 kind: example
 title: "The Reeb foliation of the three-sphere is not taut"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

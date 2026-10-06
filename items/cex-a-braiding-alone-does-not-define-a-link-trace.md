@@ -2,7 +2,7 @@
 id: cex-a-braiding-alone-does-not-define-a-link-trace
 kind: counterexample
 title: "A braiding alone does not define a link trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

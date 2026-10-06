@@ -2,7 +2,7 @@
 id: "cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting"
 kind: "corollary"
 title: "The inhomogeneous weak Dirichlet problem by a trace lifting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 7

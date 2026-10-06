@@ -2,7 +2,7 @@
 id: def-invariant-section-ring-and-projective-git-quotient
 kind: definition
 title: The invariant section ring and the projective GIT quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-rank-one-cohomology-shifts-across-a-simple-wall
 kind: lemma
 title: Rank-one cohomology shifts across a simple wall
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-bezout-uniqueness-low-degree-interpolation
 kind: theorem
 title: Curves sharing too many points share a component
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

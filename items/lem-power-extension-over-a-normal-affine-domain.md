@@ -2,7 +2,7 @@
 id: lem-power-extension-over-a-normal-affine-domain
 kind: lemma
 title: "Power extension over a normal affine domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

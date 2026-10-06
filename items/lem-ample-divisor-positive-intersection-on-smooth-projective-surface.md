@@ -2,7 +2,7 @@
 id: lem-ample-divisor-positive-intersection-on-smooth-projective-surface
 kind: lemma
 title: "Ample divisors meet nonzero effective divisors positively"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

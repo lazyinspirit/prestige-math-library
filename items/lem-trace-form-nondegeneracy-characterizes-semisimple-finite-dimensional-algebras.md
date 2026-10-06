@@ -2,7 +2,7 @@
 id: lem-trace-form-nondegeneracy-characterizes-semisimple-finite-dimensional-algebras
 kind: lemma
 title: "The trace form detects semisimplicity over the complex numbers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

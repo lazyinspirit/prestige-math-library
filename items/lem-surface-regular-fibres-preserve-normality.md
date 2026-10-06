@@ -2,7 +2,7 @@
 id: lem-surface-regular-fibres-preserve-normality
 kind: lemma
 title: "Surface regular fibres preserve normality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

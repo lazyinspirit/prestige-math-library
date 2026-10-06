@@ -2,7 +2,7 @@
 id: def-coherently-shift-compatible-functor-and-natural-transformation
 kind: definition
 title: Coherently shift-compatible functors and natural transformations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-graded-ring-module-bimodule-and-internal-shift, def-natural-transformation, def-natural-isomorphism, def-additive-functor, def-functor-and-contravariant-functor, def-k-linear-category-and-k-linear-functor, lem-internal-shift-endofunctors-and-tensor-compatibility]

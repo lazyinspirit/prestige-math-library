@@ -2,7 +2,7 @@
 id: cor-eilenberg-watts-is-an-equivalence-of-hom-categories
 kind: corollary
 title: "Eilenberg-Watts is a schematic equivalence of Hom categories"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

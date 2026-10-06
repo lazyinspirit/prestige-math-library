@@ -2,7 +2,7 @@
 id: prop-smale-hirsch-makes-rank-reduction-sufficient-for-euclidean-immersion-in-positive-codimension
 kind: proposition
 title: "Smale-Hirsch makes rank reduction sufficient for Euclidean immersion in positive codimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-stable-normal-inverse-of-the-tangent-bundle", "lem-pullback-of-a-trivial-smooth-vector-bundle-is-canonically-trivial", "def-formal-immersion-between-smooth-manifolds", "def-space-of-immersions-and-space-of-formal-immersions", "thm-smale-hirsch-immersion-theorem", "def-weak-homotopy-equivalence", "lem-an-immersion-into-r-n-gives-a-rank-n-minus-m-representative-of-the-stable-normal-bundle", "def-countable-choice", thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure, def-induced-tangent-bundle-chart]

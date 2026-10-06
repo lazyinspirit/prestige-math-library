@@ -2,7 +2,7 @@
 id: cex-real-bezout-needs-algebraic-closure
 kind: counterexample
 title: "Bezout needs algebraic closure: an imaginary conic has no real point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

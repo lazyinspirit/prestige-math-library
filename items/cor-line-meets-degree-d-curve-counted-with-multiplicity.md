@@ -2,7 +2,7 @@
 id: cor-line-meets-degree-d-curve-counted-with-multiplicity
 kind: corollary
 title: A line meets a degree-d curve in d points counted with multiplicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

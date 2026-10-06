@@ -2,7 +2,7 @@
 id: lem-the-alexander-module-of-a-link-complement-is-finitely-presented
 kind: lemma
 title: "The Alexander module of a link complement is finitely presented"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

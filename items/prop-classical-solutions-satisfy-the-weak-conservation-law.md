@@ -2,7 +2,7 @@
 id: prop-classical-solutions-satisfy-the-weak-conservation-law
 kind: proposition
 title: Classical solutions are distributional weak solutions, and conversely
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

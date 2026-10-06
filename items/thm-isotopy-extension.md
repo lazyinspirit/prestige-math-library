@@ -2,7 +2,7 @@
 id: thm-isotopy-extension
 kind: theorem
 title: "The isotopy extension theorem"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 provenance:

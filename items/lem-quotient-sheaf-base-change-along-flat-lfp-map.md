@@ -2,7 +2,7 @@
 id: lem-quotient-sheaf-base-change-along-flat-lfp-map
 kind: lemma
 title: "Flat locally finitely presented restrictions give open subquotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-morrey-rellich-compactness-for-p-greater-than-n
 kind: theorem
 title: "Morrey--Rellich compactness for $p>n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

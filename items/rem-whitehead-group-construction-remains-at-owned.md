@@ -2,7 +2,7 @@
 id: rem-whitehead-group-construction-remains-at-owned
 kind: remark
 title: "The Whitehead group construction remains AT-owned"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: thm-pontryagin-dual-of-an-lca-quotient-is-the-annihilator
 kind: theorem
 title: The dual of a quotient is the annihilator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

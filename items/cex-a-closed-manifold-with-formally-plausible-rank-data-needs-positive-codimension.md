@@ -2,7 +2,7 @@
 id: cex-a-closed-manifold-with-formally-plausible-rank-data-needs-positive-codimension
 kind: counterexample
 title: "A closed manifold with formally plausible rank data needs positive codimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [rem-a-closed-n-manifold-cannot-immerse-in-r-n, thm-smale-hirsch-immersion-theorem, def-formal-immersion-between-smooth-manifolds, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, def-local-frame-and-global-frame-of-a-vector-bundle, cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]

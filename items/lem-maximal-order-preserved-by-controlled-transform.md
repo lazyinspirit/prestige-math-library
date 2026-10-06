@@ -2,7 +2,7 @@
 id: lem-maximal-order-preserved-by-controlled-transform
 kind: lemma
 title: Controlled transforms preserve maximal order on nonempty transformed schemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

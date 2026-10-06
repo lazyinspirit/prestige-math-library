@@ -1,7 +1,7 @@
 ---
 page: highest-weights-and-rational-representations-of-split-reductive-groups
 title: "Highest Weights and Rational Representations of Split Reductive Groups"
-status: draft
+status: published
 requires: [affine-group-schemes-hopf-algebras-and-rational-representations, groups-of-multiplicative-type-and-arithmetic-tori, split-reductive-root-systems-bruhat-cells-and-parabolics]
 items:
   - lem-power-extension-over-a-normal-affine-domain

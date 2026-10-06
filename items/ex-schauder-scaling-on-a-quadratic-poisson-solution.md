@@ -2,7 +2,7 @@
 id: ex-schauder-scaling-on-a-quadratic-poisson-solution
 kind: example
 title: "The Schauder estimate on a quadratic Poisson solution: radius powers balance"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

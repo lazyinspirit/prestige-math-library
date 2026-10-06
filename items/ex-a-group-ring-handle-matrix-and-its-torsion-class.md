@@ -2,7 +2,7 @@
 id: ex-a-group-ring-handle-matrix-and-its-torsion-class
 kind: example
 title: "A group-ring handle matrix and its torsion class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 12

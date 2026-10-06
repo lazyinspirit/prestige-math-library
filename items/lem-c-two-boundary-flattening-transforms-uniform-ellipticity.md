@@ -2,7 +2,7 @@
 id: lem-c-two-boundary-flattening-transforms-uniform-ellipticity
 kind: lemma
 title: "$C^2$ flattening preserves uniform ellipticity quantitatively"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

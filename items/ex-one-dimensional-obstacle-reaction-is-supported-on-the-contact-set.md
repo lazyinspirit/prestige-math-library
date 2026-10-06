@@ -2,7 +2,7 @@
 id: "ex-one-dimensional-obstacle-reaction-is-supported-on-the-contact-set"
 kind: "example"
 title: "The one-dimensional obstacle reaction is supported on the contact set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 11

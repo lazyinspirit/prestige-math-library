@@ -2,7 +2,7 @@
 id: lem-elliptic-fredholm-range-condition-translates-to-adjoint-kernel-orthogonality
 kind: lemma
 title: "The elliptic Fredholm range condition is orthogonality to the adjoint kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

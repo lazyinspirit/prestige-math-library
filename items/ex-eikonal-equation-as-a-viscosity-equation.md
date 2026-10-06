@@ -2,7 +2,7 @@
 id: ex-eikonal-equation-as-a-viscosity-equation
 kind: example
 title: The eikonal equation as a viscosity equation at a tip
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

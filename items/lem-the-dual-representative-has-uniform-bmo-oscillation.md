@@ -2,7 +2,7 @@
 id: lem-the-dual-representative-has-uniform-bmo-oscillation
 kind: lemma
 title: "The dual representative has uniformly bounded BMO oscillation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

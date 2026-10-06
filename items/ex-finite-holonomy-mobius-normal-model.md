@@ -2,7 +2,7 @@
 id: ex-finite-holonomy-mobius-normal-model
 kind: example
 title: "The finite-holonomy normal model of the Möbius band"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

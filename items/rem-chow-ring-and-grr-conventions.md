@@ -2,7 +2,7 @@
 id: rem-chow-ring-and-grr-conventions
 kind: remark
 title: "Conventions for the Chow ring and Grothendieck-Riemann-Roch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 20

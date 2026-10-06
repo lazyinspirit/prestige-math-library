@@ -2,7 +2,7 @@
 id: cor-pontryagin-duality-is-a-contravariant-involution
 kind: corollary
 title: Dualisation is a contravariant involution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 22

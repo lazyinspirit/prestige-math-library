@@ -2,7 +2,7 @@
 id: lem-the-immersion-condition-is-open-in-the-weak-topology-for-compact-sources
 kind: lemma
 title: "For compact sources the immersion condition is open in the weak smooth topology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-weak-compact-open-smooth-topology-on-mapping-spaces, def-immersion-submersion-and-constant-rank-map, def-formal-immersion-between-smooth-manifolds, def-vector-bundle-map-over-a-smooth-base-map, prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices, thm-extreme-value-metric, def-compact-space, def-smooth-manifold, lem-coordinate-balls-form-a-basis-of-a-topological-manifold, lem-compactness-of-a-subspace-is-ambient, def-countable-choice]

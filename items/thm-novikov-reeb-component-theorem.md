@@ -2,7 +2,7 @@
 id: thm-novikov-reeb-component-theorem
 kind: theorem
 title: "Novikov's Reeb component theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

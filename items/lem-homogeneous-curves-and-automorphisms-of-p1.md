@@ -2,7 +2,7 @@
 id: lem-homogeneous-curves-and-automorphisms-of-p1
 kind: lemma
 title: Homogeneous curves and automorphisms of P^1
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 21

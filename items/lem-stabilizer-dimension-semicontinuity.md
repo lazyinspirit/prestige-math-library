@@ -2,7 +2,7 @@
 id: lem-stabilizer-dimension-semicontinuity
 kind: lemma
 title: Semicontinuity of stabilizer and orbit dimension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

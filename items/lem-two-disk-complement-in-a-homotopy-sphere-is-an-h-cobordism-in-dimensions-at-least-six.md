@@ -2,7 +2,7 @@
 id: lem-two-disk-complement-in-a-homotopy-sphere-is-an-h-cobordism-in-dimensions-at-least-six
 kind: lemma
 title: "The two-disk complement of a homotopy sphere is an h-cobordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

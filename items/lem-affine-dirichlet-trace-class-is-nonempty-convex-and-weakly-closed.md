@@ -2,7 +2,7 @@
 id: lem-affine-dirichlet-trace-class-is-nonempty-convex-and-weakly-closed
 kind: lemma
 title: "The affine Dirichlet trace class is nonempty, convex and weakly closed"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

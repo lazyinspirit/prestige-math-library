@@ -2,7 +2,7 @@
 id: "lem-cotangent-complex-truncation-and-smooth-case"
 kind: "lemma"
 title: "Truncation, differentials and the cotangent complex of a smooth morphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 12

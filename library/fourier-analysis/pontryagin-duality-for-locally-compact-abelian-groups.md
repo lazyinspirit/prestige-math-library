@@ -1,7 +1,7 @@
 ---
 page: pontryagin-duality-for-locally-compact-abelian-groups
 title: "Pontryagin Duality for Locally Compact Abelian Groups"
-status: draft
+status: published
 items: [def-annihilator-of-a-subgroup,
         lem-local-compact-subgroups-of-hausdorff-groups-are-closed,
         lem-quotient-of-an-lca-group-by-a-closed-subgroup-is-lca,

@@ -2,7 +2,7 @@
 id: cor-constituents-of-general-principal-series-for-finite-gl-n
 kind: corollary
 title: "The constituents of a general finite principal series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

@@ -2,7 +2,7 @@
 id: ex-stabilizing-a-framed-submanifold-suspends-its-collapse-map
 kind: example
 title: "Stabilizing a framed point suspends its collapse map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

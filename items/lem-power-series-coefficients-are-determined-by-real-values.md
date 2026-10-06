@@ -2,7 +2,7 @@
 id: lem-power-series-coefficients-are-determined-by-real-values
 kind: lemma
 title: Banach-valued power series are determined by their real values
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

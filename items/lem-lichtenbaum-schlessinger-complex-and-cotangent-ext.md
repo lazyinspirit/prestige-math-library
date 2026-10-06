@@ -2,7 +2,7 @@
 id: "lem-lichtenbaum-schlessinger-complex-and-cotangent-ext"
 kind: "lemma"
 title: "The Lichtenbaum-Schlessinger complex computes Ext of the cotangent complex in degrees at most two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: def-hirzebruch-l-polynomials
 kind: definition
 title: "The Hirzebruch L-polynomials and the total L-class of a real vector bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

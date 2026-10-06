@@ -2,7 +2,7 @@
 id: lem-section-ring-of-ample-line-bundle-finitely-generated
 kind: lemma
 title: The section ring of an ample invertible sheaf is finitely generated
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

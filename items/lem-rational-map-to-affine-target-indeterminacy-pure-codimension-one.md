@@ -2,7 +2,7 @@
 id: lem-rational-map-to-affine-target-indeterminacy-pure-codimension-one
 kind: lemma
 title: "Indeterminacy of a rational map into an affine scheme is of pure codimension one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

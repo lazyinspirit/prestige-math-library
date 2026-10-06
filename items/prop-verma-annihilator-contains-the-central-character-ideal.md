@@ -2,7 +2,7 @@
 id: prop-verma-annihilator-contains-the-central-character-ideal
 kind: proposition
 title: "The Verma annihilator contains the central-character ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

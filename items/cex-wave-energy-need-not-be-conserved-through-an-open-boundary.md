@@ -2,7 +2,7 @@
 id: cex-wave-energy-need-not-be-conserved-through-an-open-boundary
 kind: counterexample
 title: "Wave energy need not be conserved through an open boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-gl2-quotient-by-diagonal-torus
 kind: example
 title: "The quotient of GL2 by the diagonal torus is the complement of the diagonal in P1 x P1"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [cor-base-change-finite-type-and-products, cor-dimension-affine-and-projective-space, cor-polynomial-ring-over-a-domain-is-a-domain, def-ag-standard-smooth-algebra, def-axiom-of-choice, def-locally-closed-immersion, def-morphism-and-closed-subgroup-scheme, def-projective-bundle-scheme, def-proper-morphism, def-quotient-sheaf-and-representable-quotient, def-separated-scheme-over-base, def-smooth-morphism-schemes, lem-action-map-fibres-and-stabilizer-subscheme, lem-ag-standard-smooth-flatness, lem-base-change-locally-finite-type-presentation, lem-closed-subgroup-scheme-valued-point-criterion, lem-dimension-nonempty-open-subset, lem-field-valued-points-of-schemes, lem-flat-morphisms-stable-base-change, lem-fppf-quotient-representability-criterion, lem-general-linear-group-scheme-and-its-coordinate-ring, lem-irreducibility-criteria-and-open-subspaces, lem-orbit-map-fibres-and-stabilizer-dimension, lem-orbit-map-faithfully-flat-and-orbit-locally-closed, lem-projective-line-curve-and-divisor-basics, lem-projective-space-action-from-linear-representation, lem-separated-stable-under-base-change, lem-separated-stable-under-composition, lem-separatedness-of-open-and-closed-immersions, prop-faithfully-flat-orbit-map-represents-coset-quotient, thm-affine-nullstellensatz-correspondence, thm-ag-standard-smooth-geometric-regularity, thm-homogeneous-space-for-smooth-affine-group, thm-smooth-morphisms-stable-base-change-composition]

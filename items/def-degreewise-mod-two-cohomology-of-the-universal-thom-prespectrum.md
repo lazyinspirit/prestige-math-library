@@ -2,7 +2,7 @@
 id: def-degreewise-mod-two-cohomology-of-the-universal-thom-prespectrum
 kind: definition
 title: "Degreewise mod-two cohomology of the universal real Thom prespectrum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

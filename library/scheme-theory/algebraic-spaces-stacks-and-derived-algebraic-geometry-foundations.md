@@ -1,7 +1,7 @@
 ---
 page: algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations
 title: "Algebraic Spaces, Stacks, and Derived Algebraic Geometry Foundations"
-status: draft
+status: published
 requires: [fibre-products-base-change-and-scheme-theoretic-fibres,
            finite-proper-and-projective-morphisms,
            kahler-differentials-conormal-sequences-and-infinitesimal-lifting,

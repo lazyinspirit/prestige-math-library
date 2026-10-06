@@ -2,7 +2,7 @@
 id: def-radical-and-unipotent-radical-of-an-algebraic-group
 kind: definition
 title: Radical, unipotent radical, semisimple and reductive algebraic groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

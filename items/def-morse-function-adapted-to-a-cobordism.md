@@ -2,7 +2,7 @@
 id: def-morse-function-adapted-to-a-cobordism
 kind: definition
 title: "Morse function adapted to a cobordism"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-smooth-cobordism-triad-for-morse-theory, def-morse-function-and-excellent-morse-function, def-downward-gradient-like-vector-field, def-inward-outward-and-boundary-tangent-vectors, def-smooth-collar-of-a-manifold-boundary, def-complete-vector-field]

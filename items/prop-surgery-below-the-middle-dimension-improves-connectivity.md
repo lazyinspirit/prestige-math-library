@@ -37,7 +37,7 @@ sources:
     url: https://him-lueck.uni-bonn.de/data/ictp.pdf
     locator: Chapter 4 introduction, printed pp. 79-80 (below the middle dimension the embedding question always
       has a positive answer because of the dimension range)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

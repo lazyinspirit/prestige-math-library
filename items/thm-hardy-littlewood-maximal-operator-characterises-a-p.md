@@ -2,7 +2,7 @@
 id: thm-hardy-littlewood-maximal-operator-characterises-a-p
 kind: theorem
 title: The Hardy-Littlewood maximal operator characterises A_p
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

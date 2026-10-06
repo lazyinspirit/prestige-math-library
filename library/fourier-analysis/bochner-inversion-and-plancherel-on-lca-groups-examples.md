@@ -1,7 +1,7 @@
 ---
 page: bochner-inversion-and-plancherel-on-lca-groups-examples
 title: "Bochner Inversion and Plancherel on LCA Groups — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-gelfand-transform-of-l-one-of-an-lca-group, ex-haar-normalisations-on-the-circle-and-the-integers,
            ex-haar-normalisations-on-a-finite-abelian-group-and-its-dual,

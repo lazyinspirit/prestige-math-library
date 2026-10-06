@@ -2,7 +2,7 @@
 id: lem-a-cancelling-disk-triad-has-an-exact-c2-boundary-scalar
 kind: lemma
 title: "A cancelling disk triad has an exact C² boundary scalar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

@@ -1,7 +1,7 @@
 ---
 page: "whitehead-torsion-and-the-s-cobordism-theorem"
 title: "Whitehead Torsion and the S Cobordism Theorem"
-status: draft
+status: published
 requires: ["the-smooth-h-cobordism-theorem", "simple-homotopy-whitehead-groups-and-torsion", "local-coefficients-twisted-homology-and-duality"]
 items: [def-based-handle-chain-complex-over-the-fundamental-group-ring, lem-h-cobordism-handle-complex-is-contractible-over-the-group-ring, lem-relative-handle-complex-torsion-agrees-with-the-inclusion, def-whitehead-torsion-of-an-h-cobordism, lem-handle-slides-and-cancelling-pair-creations-preserve-whitehead-torsion, thm-whitehead-torsion-of-an-h-cobordism-is-well-defined, lem-product-h-cobordisms-have-zero-whitehead-torsion, lem-h-cobordisms-admit-two-index-normal-form-presentations, lem-group-ring-modification-lemma-for-embedded-spheres, lem-a-vanishing-group-ring-coefficient-sum-pairs-off-opposite-signed-equal-labels, lem-group-labelled-homology-lemma-realizes-group-ring-handle-bases-by-isotopy, lem-vanishing-torsion-allows-algebraic-diagonalization-by-simple-handle-moves, lem-group-labelled-whitney-tricks-realize-the-diagonalized-handle-complex, lem-a-contractible-relative-group-ring-complex-with-a-pi-one-isomorphism-gives-a-homotopy-equivalence, thm-vanishing-torsion-implies-product-cobordism, thm-smooth-s-cobordism-theorem, cor-h-cobordism-theorem-when-the-whitehead-group-vanishes, lem-whitehead-classes-are-represented-by-invertible-matrices, prop-realization-of-whitehead-torsion-by-h-cobordisms, rem-simple-homotopy-and-the-vanishing-criterion-are-at-owned, rem-whitehead-group-construction-remains-at-owned]
 examples: []

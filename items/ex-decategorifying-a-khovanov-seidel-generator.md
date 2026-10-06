@@ -2,7 +2,7 @@
 id: ex-decategorifying-a-khovanov-seidel-generator
 kind: example
 title: "Decategorifying a generator on the vertex-projective basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

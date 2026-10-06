@@ -2,7 +2,7 @@
 id: thm-littlewood-paley-square-function-equivalence-on-lp
 kind: theorem
 title: "Littlewood-Paley square-function equivalence on Lp for 1<p<infinity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

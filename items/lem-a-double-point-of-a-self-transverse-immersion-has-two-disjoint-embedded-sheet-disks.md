@@ -2,7 +2,7 @@
 id: lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks
 kind: lemma
 title: A double point has two disjoint embedded sheet disks meeting transversely
-status: draft
+status: published
 origin: session
 dependency_level: 2
 provenance:

@@ -2,7 +2,7 @@
 id: thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels
 kind: theorem
 title: "Finite left exact functors are Hom functors with dual bimodule kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

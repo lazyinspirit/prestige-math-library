@@ -2,7 +2,7 @@
 id: lem-caratheodory-composition-is-measurable
 kind: lemma
 title: "A Caratheodory integrand composed with measurable functions is measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-the-preferred-lift-of-a-half-twist-shifts-the-bigrading
 kind: lemma
 title: "The preferred lift of a half twist shifts the bigrading by chi(-1,1)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-arith-birational-group-law-from-minimal-model
 kind: lemma
 title: "Birational group law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

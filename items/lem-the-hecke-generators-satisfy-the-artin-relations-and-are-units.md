@@ -2,7 +2,7 @@
 id: lem-the-hecke-generators-satisfy-the-artin-relations-and-are-units
 kind: lemma
 title: "The Hecke generators satisfy the Artin relations and are units"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

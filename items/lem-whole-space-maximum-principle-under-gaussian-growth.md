@@ -2,7 +2,7 @@
 id: lem-whole-space-maximum-principle-under-gaussian-growth
 kind: lemma
 title: Maximum principle on the whole space under Gaussian growth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

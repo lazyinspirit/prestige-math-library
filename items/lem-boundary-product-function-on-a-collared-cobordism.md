@@ -2,7 +2,7 @@
 id: lem-boundary-product-function-on-a-collared-cobordism
 kind: lemma
 title: "Boundary product function on a collared cobordism"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-smooth-cobordism-triad-for-morse-theory, def-smooth-collar-of-a-manifold-boundary, thm-collar-neighborhood-theorem, thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary, cor-smooth-functions-and-tensor-fields-extend-locally-across-the-boundary, lem-manifold-bump-for-a-compact-set-inside-an-open-set, def-countable-choice]

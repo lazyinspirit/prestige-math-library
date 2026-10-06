@@ -2,7 +2,7 @@
 id: lem-c1-foliated-atlas-preserves-plaque-equivalence-and-transverse-orientation
 kind: lemma
 title: "C¹ foliation charts preserve plaque equivalence and transverse orientation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

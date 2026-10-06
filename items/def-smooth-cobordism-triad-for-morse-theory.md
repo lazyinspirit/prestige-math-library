@@ -2,7 +2,7 @@
 id: def-smooth-cobordism-triad-for-morse-theory
 kind: definition
 title: "Smooth cobordism triad for Morse theory"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-topological-manifold-with-boundary, def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary, def-interior-point-boundary-point-interior-and-boundary-of-a-manifold, thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold, def-embedded-smooth-submanifold-with-boundary, def-smooth-collar-of-a-manifold-boundary, thm-collar-neighborhood-theorem, def-smooth-map-between-manifolds-with-boundary, def-compact-space]

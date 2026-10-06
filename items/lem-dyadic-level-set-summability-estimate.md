@@ -2,7 +2,7 @@
 id: lem-dyadic-level-set-summability-estimate
 kind: lemma
 title: "A dyadic summability estimate for decreasing level-set sequences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-finite-normal-surface-cover-completed-local-degree-bound
 kind: lemma
 title: "Completed local degrees of finite normal surface covers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

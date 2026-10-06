@@ -2,7 +2,7 @@
 id: thm-hodge-index-theorem-for-smooth-projective-surfaces
 kind: theorem
 title: "The Hodge index theorem for smooth projective surfaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

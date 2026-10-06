@@ -2,7 +2,7 @@
 id: lem-separately-holomorphic-vanishing-on-a-real-box-is-zero
 kind: lemma
 title: Separately holomorphic functions vanishing on a real box are zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

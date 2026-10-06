@@ -2,7 +2,7 @@
 id: lem-etale-formal-local-isomorphism
 kind: lemma
 title: Étale maps induce completion isomorphisms at equal-residue points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

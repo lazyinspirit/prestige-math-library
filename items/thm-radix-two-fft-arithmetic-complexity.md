@@ -2,7 +2,7 @@
 id: thm-radix-two-fft-arithmetic-complexity
 kind: theorem
 title: "The radix-two FFT uses $O(N\\log_2N)$ complex arithmetic operations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-existence-of-schwartz-functions-with-flat-fourier-transform-at-the-origin
 kind: lemma
 title: "Schwartz functions with prescribed flatness of the Fourier transform at the origin"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-the-deck-group-of-a-covering-acts-by-a-covering-space-action
 kind: lemma
 title: "The deck group of a connected covering acts by a covering-space action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

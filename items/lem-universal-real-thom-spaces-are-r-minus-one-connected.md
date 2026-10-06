@@ -2,7 +2,7 @@
 id: lem-universal-real-thom-spaces-are-r-minus-one-connected
 kind: lemma
 title: "Universal real Thom spaces are (r−1)-connected"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

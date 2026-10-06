@@ -2,7 +2,7 @@
 id: lem-one-dimensional-wave-operator-factorisation
 kind: lemma
 title: "Factorisation of the one-dimensional wave operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

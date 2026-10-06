@@ -2,7 +2,7 @@
 id: lem-weighted-maximal-function-is-weak-type-one-one
 kind: lemma
 title: The weighted maximal function of a doubling weight is weak (1,1)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: lem-characteristic-period-annulus-has-a-smooth-product-coordinate
 kind: lemma
 title: "A C² product coordinate on a planar period annulus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

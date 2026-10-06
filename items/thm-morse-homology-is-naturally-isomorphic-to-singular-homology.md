@@ -2,7 +2,7 @@
 id: thm-morse-homology-is-naturally-isomorphic-to-singular-homology
 kind: theorem
 title: "Morse homology is naturally isomorphic to singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

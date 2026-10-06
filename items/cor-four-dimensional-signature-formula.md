@@ -2,7 +2,7 @@
 id: cor-four-dimensional-signature-formula
 kind: corollary
 title: "The four-dimensional signature formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

@@ -2,7 +2,7 @@
 id: thm-tits-deformation-for-the-type-a-hecke-algebra
 kind: theorem
 title: "Tits deformation for the type-A Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

@@ -2,7 +2,7 @@
 id: lem-compactified-unstable-manifolds-give-a-cw-decomposition
 kind: lemma
 title: "Compactified unstable manifolds give the Morse--Smale CW decomposition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

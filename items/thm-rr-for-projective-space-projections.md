@@ -2,7 +2,7 @@
 id: thm-rr-for-projective-space-projections
 kind: theorem
 title: "Riemann-Roch for projective-space projections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 18

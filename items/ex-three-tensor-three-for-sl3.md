@@ -2,7 +2,7 @@
 id: ex-three-tensor-three-for-sl3
 kind: example
 title: Three times three for sl3
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

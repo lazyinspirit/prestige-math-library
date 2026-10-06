@@ -2,7 +2,7 @@
 id: cex-changing-the-line-bundle-sign-dualizes-the-borel-weil-answer
 kind: counterexample
 title: Changing the line-bundle sign changes the Borel-Weil section space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

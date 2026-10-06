@@ -2,7 +2,7 @@
 id: lem-nested-pinched-center-frontier-has-a-strict-inner-disk-search
 kind: lemma
 title: "A nested pinched center frontier has a strict inner-disk search"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: def-normalized-shifted-character-basis-elements
 kind: definition
 title: "Normalized shifted character observables $\\eta_\\rho$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-joint-convergence-and-normalized-cycle-character-observables, def-shifted-character-observables-and-profile-moments, thm-shifted-character-basis-and-weight-filtration, prop-plancherel-expectations-of-shifted-character-observables, prop-basic-value-properties-of-a-complex-character, def-plancherel-measure-on-partitions]

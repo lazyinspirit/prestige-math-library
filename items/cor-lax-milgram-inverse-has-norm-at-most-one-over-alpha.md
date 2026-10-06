@@ -2,7 +2,7 @@
 id: "cor-lax-milgram-inverse-has-norm-at-most-one-over-alpha"
 kind: "corollary"
 title: "The Lax--Milgram solution operator has norm at most $1/\\alpha$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 5

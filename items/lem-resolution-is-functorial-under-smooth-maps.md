@@ -2,7 +2,7 @@
 id: "lem-resolution-is-functorial-under-smooth-maps"
 kind: "lemma"
 title: "Resolution of singularities is functorial under smooth morphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 21

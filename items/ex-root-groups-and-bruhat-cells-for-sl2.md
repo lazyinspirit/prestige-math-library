@@ -2,7 +2,7 @@
 id: ex-root-groups-and-bruhat-cells-for-sl2
 kind: example
 title: Root groups and Bruhat cells for SL_2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 30

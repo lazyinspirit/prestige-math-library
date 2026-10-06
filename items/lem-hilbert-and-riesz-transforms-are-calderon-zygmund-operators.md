@@ -2,7 +2,7 @@
 id: lem-hilbert-and-riesz-transforms-are-calderon-zygmund-operators
 kind: lemma
 title: "The Hilbert and Riesz transforms are Calderon-Zygmund operators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

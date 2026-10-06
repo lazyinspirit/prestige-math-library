@@ -2,7 +2,7 @@
 id: thm-finite-fourier-inversion
 kind: theorem
 title: "Finite Fourier inversion for the unitary transform on $\\mathbb Z/N\\mathbb Z$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

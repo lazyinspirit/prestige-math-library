@@ -2,7 +2,7 @@
 id: lem-normalized-surface-point-blowup-resolution-descends-from-completion
 kind: lemma
 title: "Normalized point sequences and resolutions descend from completion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

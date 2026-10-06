@@ -2,7 +2,7 @@
 id: lem-positive-characteristic-top-differentials-map-to-blown-up-canonical-module
 kind: lemma
 title: "Top differential lattices map into point-blowup canonical modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 12

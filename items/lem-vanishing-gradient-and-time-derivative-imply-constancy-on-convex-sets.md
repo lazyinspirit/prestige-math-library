@@ -2,7 +2,7 @@
 id: lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets
 kind: lemma
 title: "Vanishing gradient and time derivative force constancy on convex sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

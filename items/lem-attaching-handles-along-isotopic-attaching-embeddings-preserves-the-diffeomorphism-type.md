@@ -2,7 +2,7 @@
 id: lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type
 kind: lemma
 title: Isotopic attaching embeddings give diffeomorphic handle attachments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves
 kind: lemma
 title: Taylor expansion with integral remainder for Banach-valued curves
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

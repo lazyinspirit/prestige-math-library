@@ -1,7 +1,7 @@
 ---
 page: the-hirzebruch-signature-theorem-examples
 title: The Hirzebruch Signature Theorem — Examples
-status: draft
+status: published
 requires: [the-hirzebruch-signature-theorem]
 items: []
 examples: [ex-signature-and-p-one-of-complex-projective-two-space,

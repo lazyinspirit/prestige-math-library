@@ -2,7 +2,7 @@
 id: lem-ltwo-normalisation-of-sine-modes-on-the-interval
 kind: lemma
 title: L2 normalisation of the sine modes on an interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

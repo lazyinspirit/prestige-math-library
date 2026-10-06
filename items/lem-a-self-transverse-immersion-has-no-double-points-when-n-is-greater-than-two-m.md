@@ -2,7 +2,7 @@
 id: lem-a-self-transverse-immersion-has-no-double-points-when-n-is-greater-than-two-m
 kind: lemma
 title: A self-transverse immersion has no double points when $n>2m$
-status: draft
+status: published
 origin: session
 dependency_level: 3
 provenance:

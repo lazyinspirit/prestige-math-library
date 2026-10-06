@@ -2,7 +2,7 @@
 id: lem-projective-space-action-from-linear-representation
 kind: lemma
 title: "A linear representation induces an action on projective space with the same line stabilizers"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [cor-contravariant-yoneda-lemma, def-algebraic-group-action-and-scheme-theoretic-stabilizer, def-axiom-of-choice, def-fibre-product-schemes-universal-property, def-invertible-sheaf, def-locally-free-sheaf-finite-rank, def-projective-bundle-scheme, def-rational-representation-and-comodule-of-an-affine-group-scheme, def-scheme-theoretic-fibre, lem-action-map-fibres-and-stabilizer-subscheme, lem-dual-locally-free-and-base-change, lem-field-valued-points-of-schemes, thm-projective-bundle-represents-line-quotients]

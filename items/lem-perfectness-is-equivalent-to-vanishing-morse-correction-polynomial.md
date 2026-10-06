@@ -2,7 +2,7 @@
 id: lem-perfectness-is-equivalent-to-vanishing-morse-correction-polynomial
 kind: lemma
 title: "Perfectness, vanishing correction, and vanishing handle boundaries"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

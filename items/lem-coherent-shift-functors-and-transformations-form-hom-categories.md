@@ -2,7 +2,7 @@
 id: lem-coherent-shift-functors-and-transformations-form-hom-categories
 kind: lemma
 title: Coherently shift-compatible functors and transformations form k-linear hom categories
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-coherently-shift-compatible-functor-and-natural-transformation, lem-internal-shift-endofunctors-and-tensor-compatibility, lem-graded-degreewise-direct-sums-and-homogeneous-free-covers, def-natural-transformation, def-natural-isomorphism, def-vertical-composition-of-natural-transformations, def-horizontal-composition-and-whiskering-of-natural-transformations, def-functor-category, def-category, def-k-linear-category-and-k-linear-functor, def-vector-space, def-field, lem-field-is-a-commutative-ring, def-preservation-reflection-creation-continuity-and-cocontinuity, def-left-exact-and-right-exact-functor, thm-a-left-exact-functor-preserves-monomorphisms-and-a-right-exact-functor-preserves-epimorphisms, def-strict-two-category, thm-interchange-law-for-natural-transformations, def-graded-ring-module-bimodule-and-internal-shift]

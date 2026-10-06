@@ -2,7 +2,7 @@
 id: lem-bgg-euler-character-gives-the-weyl-numerator
 kind: lemma
 title: The BGG Euler identity gives the Weyl numerator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

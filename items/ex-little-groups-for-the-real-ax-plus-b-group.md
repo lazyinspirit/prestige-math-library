@@ -2,7 +2,7 @@
 id: ex-little-groups-for-the-real-ax-plus-b-group
 kind: example
 title: Little groups for the real $ax+b$ group and its orientation-preserving subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

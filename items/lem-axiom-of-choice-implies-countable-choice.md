@@ -2,7 +2,7 @@
 id: lem-axiom-of-choice-implies-countable-choice
 kind: lemma
 title: "The Axiom of Choice implies countable choice"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

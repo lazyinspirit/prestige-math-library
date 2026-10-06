@@ -2,7 +2,7 @@
 id: "def-coefficient-ideal"
 kind: "definition"
 title: "The coefficient ideal of a marked ideal of maximal order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 6

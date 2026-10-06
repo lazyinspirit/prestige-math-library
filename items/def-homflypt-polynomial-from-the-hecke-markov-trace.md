@@ -2,7 +2,7 @@
 id: def-homflypt-polynomial-from-the-hecke-markov-trace
 kind: definition
 title: "The HOMFLYPT polynomial from the Hecke Markov trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

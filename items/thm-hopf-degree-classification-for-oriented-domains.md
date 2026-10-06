@@ -2,7 +2,7 @@
 id: thm-hopf-degree-classification-for-oriented-domains
 kind: theorem
 title: The Hopf degree theorem for oriented domains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: lem-c2-first-integral-period-annuli-have-c2-products
 kind: lemma
 title: "A C² first-integral period annulus has a C² leaf product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

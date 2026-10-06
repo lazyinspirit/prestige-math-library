@@ -2,7 +2,7 @@
 id: lem-rank-one-hecke-parameter-for-equal-torus-characters
 kind: lemma
 title: "The rank-one Hecke parameter for equal torus characters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

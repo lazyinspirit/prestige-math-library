@@ -2,7 +2,7 @@
 id: cex-lie-algebra-does-not-detect-nonsmooth-group-scheme
 kind: counterexample
 title: "The Lie algebra does not detect nonsmooth group schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["ex-additive-and-infinitesimal-group-schemes", "ex-lie-algebras-of-alpha-p-mu-p-and-gl-n", "def-smooth-morphism-schemes", "def-ag-geometrically-regular-algebra-and-fibre", "def-regular-local-ring-geometric-point", "lem-regular-local-domain-induction", "def-ag-standard-smooth-algebra", "thm-ag-standard-smooth-geometric-regularity", "cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented", "def-locally-finite-presentation-morphism", "def-group-scheme-over-a-field", "def-axiom-of-choice", "lem-field-is-noetherian"]

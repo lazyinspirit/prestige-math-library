@@ -2,7 +2,7 @@
 id: lem-gluing-broken-index-two-trajectories-gives-collar-ends
 kind: lemma
 title: "Gluing once-broken index-two trajectories: collar ends"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-geometric-convergence-to-a-broken-morse-trajectory, def-morse-smale-pair, prop-parametrized-morse-trajectory-space-is-a-manifold, thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point, lem-evaluation-on-a-regular-level-identifies-unparametrized-trajectories, thm-fundamental-theorem-on-flows, thm-euclidean-inverse-function-theorem, thm-euclidean-implicit-function-theorem, def-broken-morse-trajectory]
 proof_strategy: direct

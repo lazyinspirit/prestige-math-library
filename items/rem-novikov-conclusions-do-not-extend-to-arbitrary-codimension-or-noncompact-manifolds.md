@@ -2,7 +2,7 @@
 id: rem-novikov-conclusions-do-not-extend-to-arbitrary-codimension-or-noncompact-manifolds
 kind: remark
 title: Novikov's conclusions do not extend to higher dimensions or noncompact manifolds
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

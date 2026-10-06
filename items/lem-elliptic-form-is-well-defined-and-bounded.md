@@ -2,7 +2,7 @@
 id: "lem-elliptic-form-is-well-defined-and-bounded"
 kind: "lemma"
 title: "The elliptic form is well defined and bounded on $H^1$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 1

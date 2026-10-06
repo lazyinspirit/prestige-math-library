@@ -2,7 +2,7 @@
 id: thm-garding-inequality-for-a-divergence-form-elliptic-operator
 kind: theorem
 title: "Garding's inequality for a divergence-form elliptic operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

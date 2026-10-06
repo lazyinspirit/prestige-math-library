@@ -2,7 +2,7 @@
 id: lem-orbit-map-fibres-and-stabilizer-dimension
 kind: lemma
 title: "Fibre dimension and orbit dimension add to the dimension of the group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

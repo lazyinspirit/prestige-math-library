@@ -2,7 +2,7 @@
 id: thm-abelian-scheme-is-the-neron-model-of-its-generic-fibre
 kind: theorem
 title: "An abelian scheme is the Neron model of its generic fibre"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

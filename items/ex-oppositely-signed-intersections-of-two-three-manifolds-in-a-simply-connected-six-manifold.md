@@ -29,7 +29,7 @@ sources:
     url: https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf
     locator: Theorem 6.6 with its Remark, printed pp. 71-72 (for $r\ge2$ connected sheets and $V$ simply connected
       the loop hypothesis is automatic)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

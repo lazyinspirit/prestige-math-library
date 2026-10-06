@@ -2,7 +2,7 @@
 id: rem-highest-weights-can-have-the-same-primitive-ideal
 kind: remark
 title: "Highest weights can have the same primitive ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

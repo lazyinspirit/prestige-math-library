@@ -2,7 +2,7 @@
 id: thm-interior-h-two-regularity-for-divergence-form-equations
 kind: theorem
 title: "Interior $H^2$ regularity for divergence-form equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

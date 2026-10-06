@@ -2,7 +2,7 @@
 id: thm-homogeneous-space-for-smooth-affine-group
 kind: theorem
 title: "Homogeneous spaces of smooth affine groups are separated schemes"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-algebraic-group-action-and-scheme-theoretic-stabilizer, def-axiom-of-choice, def-locally-closed-immersion, def-morphism-and-closed-subgroup-scheme, def-projective-bundle-scheme, def-quotient-sheaf-and-representable-quotient, def-rational-representation-and-comodule-of-an-affine-group-scheme, def-separated-morphism-schemes, def-separated-scheme-over-base, def-smooth-morphism-schemes, lem-action-map-fibres-and-stabilizer-subscheme, lem-base-change-open-closed-immersions, lem-fppf-quotient-representability-criterion, lem-orbit-map-faithfully-flat-and-orbit-locally-closed, lem-projective-space-action-from-linear-representation, lem-projective-space-diagonal-closed, lem-separatedness-of-open-and-closed-immersions, prop-faithfully-flat-orbit-map-represents-coset-quotient, lem-nonaffine-subgroup-scheme-stabilizer-of-line]

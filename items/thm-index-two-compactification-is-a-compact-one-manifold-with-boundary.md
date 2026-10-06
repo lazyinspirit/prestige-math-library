@@ -2,7 +2,7 @@
 id: thm-index-two-compactification-is-a-compact-one-manifold-with-boundary
 kind: theorem
 title: "The index-two compactification is a compact one-manifold with boundary"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-morse-trajectory-compactness-up-to-breaking, prop-index-two-trajectory-spaces-are-one-dimensional, thm-unparametrized-trajectory-space-is-a-smooth-manifold, lem-breaking-length-is-bounded-by-index-drop, cor-index-one-trajectory-moduli-spaces-are-finite, cor-no-morse-smale-trajectories-for-nonpositive-index-drop, lem-gluing-broken-index-two-trajectories-gives-collar-ends, def-broken-morse-trajectory, def-geometric-convergence-to-a-broken-morse-trajectory, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, def-topological-manifold-with-boundary, def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary, def-metric-space, def-morse-smale-pair, def-nondegenerate-critical-point-nullity-index-and-coindex]
 proof_strategy: direct

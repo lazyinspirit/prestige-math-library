@@ -2,7 +2,7 @@
 id: lem-finite-vector-space-copowers-in-a-linear-abelian-category
 kind: lemma
 title: "Finite vector-space copowers in a $k$-linear abelian category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-abelian-category, def-additive-category, def-biproduct, def-cotensor-and-tensor, def-dimension, def-functor-and-contravariant-functor, def-k-linear-category-and-k-linear-functor, def-linear-map, def-natural-isomorphism, def-natural-transformation, def-vector-space, def-yoneda-embedding, lem-yoneda-evaluation-bijection, thm-morphisms-between-finite-biproducts-correspond-to-matrices, thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism, thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]

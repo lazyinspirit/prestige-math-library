@@ -2,7 +2,7 @@
 id: lem-c1-germs-of-local-diffeomorphisms-form-a-group
 kind: lemma
 title: "C¹ germs of local diffeomorphisms form a group"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

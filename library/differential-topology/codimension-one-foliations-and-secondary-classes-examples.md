@@ -1,7 +1,7 @@
 ---
 page: codimension-one-foliations-and-secondary-classes-examples
 title: Codimension One Foliations and Secondary Classes — Examples
-status: draft
+status: published
 items: []
 examples: [ex-a-fibration-over-the-circle-has-zero-godbillon-vey-class,
         ex-godbillon-vey-rescaling-calculation]

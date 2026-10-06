@@ -2,7 +2,7 @@
 id: lem-weyl-length-parity-is-multiplicative
 kind: lemma
 title: The sign of the Weyl length is multiplicative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

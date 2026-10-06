@@ -2,7 +2,7 @@
 id: lem-arith-homogeneous-bundle-vanishing-and-mumford-surjectivity
 kind: lemma
 title: "Homogeneous bundles and Mumford surjectivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

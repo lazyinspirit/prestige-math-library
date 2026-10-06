@@ -2,7 +2,7 @@
 id: lem-handle-slides-preserve-the-relative-diffeomorphism-type
 kind: lemma
 title: "Handle slides preserve the relative diffeomorphism type"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

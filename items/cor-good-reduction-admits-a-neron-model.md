@@ -2,7 +2,7 @@
 id: cor-good-reduction-admits-a-neron-model
 kind: corollary
 title: "Good reduction supplies a Neron model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

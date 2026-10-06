@@ -2,7 +2,7 @@
 id: ex-weighted-norm-of-an-interval-indicator
 kind: example
 title: Weighted norm of an interval indicator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

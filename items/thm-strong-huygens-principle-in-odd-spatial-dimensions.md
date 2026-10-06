@@ -2,7 +2,7 @@
 id: thm-strong-huygens-principle-in-odd-spatial-dimensions
 kind: theorem
 title: "The strong Huygens principle in odd spatial dimensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

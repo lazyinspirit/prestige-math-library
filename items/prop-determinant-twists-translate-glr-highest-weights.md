@@ -2,7 +2,7 @@
 id: prop-determinant-twists-translate-glr-highest-weights
 kind: proposition
 title: Determinant twists translate GL_r highest weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

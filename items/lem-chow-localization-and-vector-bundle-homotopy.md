@@ -2,7 +2,7 @@
 id: lem-chow-localization-and-vector-bundle-homotopy
 kind: lemma
 title: "Localization sequence for Chow groups and homotopy invariance of affine space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

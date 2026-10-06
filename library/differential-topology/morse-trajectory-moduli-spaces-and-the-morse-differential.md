@@ -1,7 +1,7 @@
 ---
 page: morse-trajectory-moduli-spaces-and-the-morse-differential
 title: "Morse Trajectory Moduli Spaces and the Morse Differential"
-status: draft
+status: published
 requires: [gradient-like-vector-fields-and-morse-trajectories, stable-unstable-manifolds-and-morse-smale-transversality, connections-levi-civita-and-parallel-transport, manifolds-with-boundary-collars-and-orientations, ascoli-arzela, oriented-and-mod-two-intersection-numbers]
 items: [def-mod-two-morse-chain-group, def-broken-morse-trajectory, def-geometric-convergence-to-a-broken-morse-trajectory, lem-broken-trajectories-are-limits-of-ordinary-trajectories, thm-morse-trajectory-compactness-up-to-breaking, lem-breaking-length-is-bounded-by-index-drop, cor-index-one-trajectory-moduli-spaces-are-finite, def-mod-two-morse-differential, lem-gluing-broken-index-two-trajectories-gives-collar-ends, thm-index-two-compactification-is-a-compact-one-manifold-with-boundary, thm-mod-two-morse-differential-squares-to-zero, def-orientation-line-of-a-morse-critical-point, lem-unstable-orientations-induce-trajectory-moduli-orientations, def-signed-morse-differential-over-the-integers, lem-boundary-orientation-of-compactified-one-dimensional-morse-moduli, thm-integral-morse-differential-squares-to-zero, rem-morse-homology-over-the-integers-does-not-require-orientability-of-m, rem-compactness-up-to-breaking-needs-closedness-or-a-proper-compactness-package]
 examples: []

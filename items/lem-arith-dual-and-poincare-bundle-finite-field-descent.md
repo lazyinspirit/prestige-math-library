@@ -2,7 +2,7 @@
 id: lem-arith-dual-and-poincare-bundle-finite-field-descent
 kind: lemma
 title: "Finite-field descent of the dual and the Poincare bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

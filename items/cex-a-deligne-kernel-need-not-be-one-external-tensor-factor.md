@@ -2,7 +2,7 @@
 id: cex-a-deligne-kernel-need-not-be-one-external-tensor-factor
 kind: counterexample
 title: "A Deligne kernel need not be one external tensor factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-algebra-over-a-commutative-ring, def-algebraic-dual-and-linear-functional, def-bimodule, def-dimension, def-generated-cyclic-finitely-generated-and-free-modules, def-left-and-right-modules, def-linear-map, def-simple-module, def-vector-space, lem-opposite-deligne-product-identifies-with-finite-bimodules, thm-universal-property-of-module-tensor-products]

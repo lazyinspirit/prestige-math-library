@@ -2,7 +2,7 @@
 id: thm-interior-h-two-estimate-for-constant-coefficient-elliptic-equations
 kind: theorem
 title: "Interior $H^2$ estimate for constant-coefficient elliptic equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

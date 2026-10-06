@@ -1,7 +1,7 @@
 ---
 page: unipotent-solvable-groups-and-borel-fixed-points-examples
 title: "Unipotent and Solvable Groups and Borel Fixed Points — Examples"
-status: draft
+status: published
 requires:
   - unipotent-solvable-groups-and-borel-fixed-points
 items: []

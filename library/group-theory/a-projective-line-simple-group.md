@@ -1,7 +1,7 @@
 ---
 page: a-projective-line-simple-group
 title: "An elementary simple group on the projective line"
-status: draft
+status: published
 items: [lem-psl-two-seven-is-simple-of-order-168]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: lem-maximal-dyadic-subcubes-of-a-cube-at-a-height
 kind: lemma
 title: Maximal dyadic subcubes of a cube at a height
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

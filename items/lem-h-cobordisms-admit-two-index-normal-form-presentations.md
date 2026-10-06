@@ -2,7 +2,7 @@
 id: lem-h-cobordisms-admit-two-index-normal-form-presentations
 kind: lemma
 title: h-cobordisms admit two-index normal form presentations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 14

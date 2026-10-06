@@ -2,7 +2,7 @@
 id: ex-pontryagin-thom-map-of-the-standard-framed-equator
 kind: example
 title: "The Pontryagin-Thom map of the standard framed equator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

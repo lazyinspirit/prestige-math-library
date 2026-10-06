@@ -2,7 +2,7 @@
 id: lem-group-labelled-whitney-tricks-realize-the-diagonalized-handle-complex
 kind: lemma
 title: Group-labelled Whitney tricks realize the diagonalized handle complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 14

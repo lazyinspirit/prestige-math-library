@@ -2,7 +2,7 @@
 id: thm-frechet-kolmogorov-compactness-criterion-in-lp
 kind: theorem
 title: "The Fr\\'echet--Kolmogorov compactness criterion in $L^p(\\mathbb R^n)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

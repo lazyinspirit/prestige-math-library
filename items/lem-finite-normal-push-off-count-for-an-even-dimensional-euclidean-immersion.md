@@ -2,7 +2,7 @@
 id: lem-finite-normal-push-off-count-for-an-even-dimensional-euclidean-immersion
 kind: lemma
 title: "Finite normal push-off count for an even-dimensional Euclidean immersion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-self-transverse-immersion-and-double-point-locus", "cor-every-immersion-is-locally-an-embedding", "thm-smooth-inverse-function-theorem-on-manifolds", "thm-smooth-partitions-of-unity-exist-on-manifolds", "thm-parametric-transversality", "def-normal-bundle-of-a-formal-immersion", "lem-formal-immersion-gives-the-tangent-normal-bundle-identity", "def-oriented-intersection-number", "def-local-oriented-intersection-sign", "prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual", "def-axiom-of-choice", thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric]

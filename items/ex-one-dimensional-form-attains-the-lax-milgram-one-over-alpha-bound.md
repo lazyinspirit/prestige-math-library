@@ -2,7 +2,7 @@
 id: "ex-one-dimensional-form-attains-the-lax-milgram-one-over-alpha-bound"
 kind: "example"
 title: "A one-dimensional form attains the $1/\\alpha$ Lax--Milgram bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 6

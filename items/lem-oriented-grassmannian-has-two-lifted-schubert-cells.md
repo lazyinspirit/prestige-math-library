@@ -2,7 +2,7 @@
 id: lem-oriented-grassmannian-has-two-lifted-schubert-cells
 kind: lemma
 title: "Oriented Grassmannians have two lifted Schubert cells"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: thm-caccioppoli-inequality-for-weak-elliptic-solutions
 kind: theorem
 title: "The Caccioppoli inequality for weak elliptic solutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-local-weak-solution-for-a-divergence-form-operator, def-uniformly-elliptic-divergence-form-operator, lem-elliptic-form-is-well-defined-and-bounded, lem-weak-leibniz-rule-with-a-smooth-factor, def-wkp-zero-as-a-sobolev-closure, def-hk-and-hk-zero-notation, def-the-standard-smooth-step-function, thm-chain-rule-for-total-derivatives, thm-holder-inequality-for-integrals, thm-young-inequality-real-exponents, def-conjugate-exponents, def-countable-choice, lem-compact-support-zero-extension-in-wkp, lem-cutoff-difference-quotient-commutator-estimate]

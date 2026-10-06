@@ -2,7 +2,7 @@
 id: lem-dominant-characters-arise-as-primitive-weights-for-split-reductive-groups
 kind: lemma
 title: "Every dominant character of a split reductive group is a highest weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 35

@@ -2,7 +2,7 @@
 id: ex-hhh-of-the-positive-two-strand-torus-knot
 kind: example
 title: "The HHH of the positive two-strand torus knot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-reduced-type-a-polynomial-ring-for-hhh, def-khovanovs-hhh-rouquier-generator-complexes, def-termwise-hochschild-homology-complex-of-a-rouquier-complex, ex-hochschild-homology-of-the-rank-one-soergel-bimodule, thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex, def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring, def-axiom-of-choice, lem-the-rank-one-soergel-bimodule-square-splits, thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex]

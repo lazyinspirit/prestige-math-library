@@ -1,7 +1,7 @@
 ---
 page: "analytic-semigroups-and-linear-evolution-equations-examples"
 title: "Analytic Semigroups and Linear Evolution Equations — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-analytic-semigroup-generated-by-a-bounded-operator", "ex-analytic-dirichlet-heat-semigroup", "ex-sectorial-multiplication-operator", "cex-the-translation-semigroup-is-not-analytic", "cex-an-analytic-semigroup-need-not-be-norm-continuous-at-zero", "cex-sector-angle-changes-under-the-sign-convention", "ex-sectorial-nonselfadjoint-multiplication-generator", "cex-a-time-discontinuous-forcing-can-block-classical-regularity-at-its-jump", "ex-abstract-smoothing-does-not-imply-a-spatial-derivative-without-a-pde-realisation"]
 ---

@@ -2,7 +2,7 @@
 id: ex-empty-incoming-boundary-requires-zero-handles
 kind: example
 title: "An empty incoming boundary requires zero handles"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps: [prop-connected-cobordisms-admit-presentations-without-superfluous-zero-handles, def-handle-decomposition-relative-to-the-incoming-boundary, thm-morse-functions-and-handle-decompositions-correspond, cor-index-zero-handles-create-components, cor-index-n-handles-cap-boundary-spheres]

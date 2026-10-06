@@ -2,7 +2,7 @@
 id: "lem-coercivity-makes-a-small-form-step-a-contraction"
 kind: "lemma"
 title: "Coercivity makes a small form step a strict contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 3

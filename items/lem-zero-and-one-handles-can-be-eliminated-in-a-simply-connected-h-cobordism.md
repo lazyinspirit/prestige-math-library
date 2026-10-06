@@ -2,7 +2,7 @@
 id: lem-zero-and-one-handles-can-be-eliminated-in-a-simply-connected-h-cobordism
 kind: lemma
 title: Zero- and one-handles are eliminated in a simply connected h-cobordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 10

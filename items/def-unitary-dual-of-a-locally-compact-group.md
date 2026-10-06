@@ -27,7 +27,7 @@ sources:
     - title: "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press 2008; author-hosted complete text)"
       url: "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf"
       locator: "Appendix F, §F.2: the description of the family of equivalence classes of irreducible representations"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Definition

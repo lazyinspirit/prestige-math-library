@@ -2,7 +2,7 @@
 id: cex-weak-maximum-principle-needs-the-zero-order-sign
 kind: counterexample
 title: "The weak maximum principle needs the zero-order sign condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

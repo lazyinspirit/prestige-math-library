@@ -2,7 +2,7 @@
 id: lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field
 kind: lemma
 title: "Compactness gives a compactly supported time-dependent velocity field"
-status: draft
+status: published
 origin: session
 dependency_level: 7
 provenance:

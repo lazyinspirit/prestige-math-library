@@ -2,7 +2,7 @@
 id: ex-weyl-character-and-dimension-formulas-for-sl2
 kind: example
 title: Weyl character and dimension formulas for sl2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

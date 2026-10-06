@@ -2,7 +2,7 @@
 id: thm-reduced-burau-is-faithful-for-at-most-three-strands
 kind: theorem
 title: "The reduced Burau representation is faithful for at most three strands"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

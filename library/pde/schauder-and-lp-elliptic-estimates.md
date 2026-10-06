@@ -1,7 +1,7 @@
 ---
 page: schauder-and-lp-elliptic-estimates
 title: Schauder and $L^p$ Elliptic Estimates
-status: draft
+status: published
 items: [def-holder-spaces-c-k-alpha-and-their-scaled-norms, thm-holder-spaces-on-bounded-domains-are-banach-spaces, lem-cancellation-formula-for-second-derivatives-of-newtonian-potentials, def-uniformly-elliptic-nondivergence-operator, lem-holder-interpolation-with-an-epsilon-loss, lem-freezing-coefficients-and-schauder-error-estimate, thm-interior-schauder-estimate-for-uniformly-elliptic-equations, lem-c-two-alpha-boundary-flattening-preserves-ellipticity-and-holder-norms, thm-boundary-schauder-estimate-for-the-dirichlet-problem, thm-method-of-continuity-for-a-uniformly-estimated-family-of-bounded-operators, thm-global-w-two-p-estimate-for-the-laplacian-on-rn, lem-lp-interpolation-absorbs-lower-order-derivatives, lem-cutoff-commutator-for-local-w-two-p-estimates, lem-interior-w-two-p-regularity-for-the-laplacian, thm-interior-w-two-p-estimate-for-uniformly-elliptic-equations, thm-global-w-two-p-dirichlet-estimate, thm-global-schauder-regularity-for-the-weak-dirichlet-laplacian, thm-global-schauder-estimate-and-classical-dirichlet-solvability, cor-injectivity-removes-the-lp-kernel-term-from-a-global-w-two-p-estimate, cor-w-two-p-regularity-implies-classical-or-holder-regularity-when-p-is-large, rem-schauder-and-sobolev-estimates-are-different-scales, thm-weak-global-w-two-p-dirichlet-regularity-for-the-laplacian]
 examples: []
 ---

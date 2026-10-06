@@ -2,7 +2,7 @@
 id: thm-khovanov-rozansky-braid-homology-is-a-link-invariant-up-to-explicit-shift
 kind: theorem
 title: "Khovanov-Rozansky braid homology is an oriented link invariant up to shift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: cex-rellich-fails-on-rn-by-translations
 kind: counterexample
 title: "Rellich compactness fails on $\\mathbb R^n$ by translations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

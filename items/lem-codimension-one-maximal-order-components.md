@@ -2,7 +2,7 @@
 id: "lem-codimension-one-maximal-order-components"
 kind: "lemma"
 title: "Codimension-one components of a maximal-order support"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 6

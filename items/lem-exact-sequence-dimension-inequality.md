@@ -2,7 +2,7 @@
 id: lem-exact-sequence-dimension-inequality
 kind: lemma
 title: "Rank bookkeeping for a long exact sequence of finite-dimensional vector spaces"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

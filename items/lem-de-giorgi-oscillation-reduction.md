@@ -2,7 +2,7 @@
 id: lem-de-giorgi-oscillation-reduction
 kind: lemma
 title: "De Giorgi oscillation reduction: one half-level set is small"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

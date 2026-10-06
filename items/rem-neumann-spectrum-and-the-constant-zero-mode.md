@@ -2,7 +2,7 @@
 id: rem-neumann-spectrum-and-the-constant-zero-mode
 kind: remark
 title: "The Neumann spectrum and the constant zero mode"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

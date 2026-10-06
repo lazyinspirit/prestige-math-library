@@ -2,7 +2,7 @@
 id: thm-real-projective-space-stiefel-whitney-nonimmersion-obstruction
 kind: theorem
 title: "Real projective space Stiefel-Whitney non-immersion obstruction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["lem-stiefel-whitney-classes-of-the-tangent-bundle-of-real-projective-space", "lem-the-inverse-of-one-plus-the-generator-in-a-truncated-mod-two-polynomial-ring", "def-normal-stiefel-whitney-and-pontryagin-classes-of-a-closed-manifold", "cor-high-normal-stiefel-whitney-classes-obstruct-low-codimension-immersions", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-mod-two-real-projective-bundle-theorem", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "def-real-projective-bundle-and-tautological-line", "ex-real-projective-space-from-affine-charts", "def-axiom-of-choice", "lem-normal-stiefel-whitney-class-is-the-multiplicative-inverse-of-the-tangent-class"]

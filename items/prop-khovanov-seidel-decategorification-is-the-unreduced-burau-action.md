@@ -2,7 +2,7 @@
 id: prop-khovanov-seidel-decategorification-is-the-unreduced-burau-action
 kind: proposition
 title: "Decategorification is the unreduced Burau action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

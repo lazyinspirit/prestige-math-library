@@ -2,7 +2,7 @@
 id: thm-rayleigh-principle-for-the-first-dirichlet-eigenvalue
 kind: theorem
 title: "The Rayleigh principle for the first Dirichlet eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

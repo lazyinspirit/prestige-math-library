@@ -2,7 +2,7 @@
 id: cor-weak-h-one-convergence-plus-compactness-gives-strong-ltwo-convergence
 kind: corollary
 title: "Weak $H^1$ convergence plus compactness gives strong $L^2$ convergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

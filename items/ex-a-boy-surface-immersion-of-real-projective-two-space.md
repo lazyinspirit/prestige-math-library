@@ -2,7 +2,7 @@
 id: ex-a-boy-surface-immersion-of-real-projective-two-space
 kind: example
 title: "Boy's surface: an immersion of the real projective plane in three-space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-immersion-submersion-and-constant-rank-map, def-normal-bundle-of-a-formal-immersion, prop-first-stiefel-whitney-class-classifies-orientability, ex-real-projective-space-is-orientable-exactly-in-odd-dimension, def-real-projective-bundle-and-tautological-line, cor-an-injective-immersion-from-a-compact-manifold-is-an-embedding, def-smooth-embedding, def-orientable-manifold, cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame, thm-orientability-is-equivalent-to-a-nowhere-vanishing-top-form, def-axiom-of-choice]

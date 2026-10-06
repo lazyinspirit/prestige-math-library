@@ -2,7 +2,7 @@
 id: lem-bmo-averages-on-nested-cubes-grow-at-most-logarithmically
 kind: lemma
 title: "BMO averages on nested cubes grow at most logarithmically"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

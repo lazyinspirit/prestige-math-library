@@ -2,7 +2,7 @@
 id: "lem-derivatives-commute-with-controlled-transform"
 kind: "lemma"
 title: "Controlled derivative transforms are contained in derivatives of the controlled transform"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 5

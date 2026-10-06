@@ -2,7 +2,7 @@
 id: cor-all-relevant-characteristic-numbers-vanish-on-null-cobordant-manifolds
 kind: corollary
 title: "All characteristic numbers vanish on null-cobordant manifolds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-characteristic-numbers-are-cobordism-invariants, def-null-cobordant-closed-manifold, def-unoriented-and-oriented-bordism-groups, prop-zero-dimensional-bordism-groups, prop-boundaries-have-zero-stiefel-whitney-numbers, prop-oriented-boundaries-have-zero-pontryagin-numbers, def-stiefel-whitney-number-of-a-closed-manifold, def-pontryagin-number-of-a-closed-oriented-manifold, def-axiom-of-choice]

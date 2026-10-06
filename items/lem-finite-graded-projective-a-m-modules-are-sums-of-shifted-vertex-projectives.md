@@ -2,7 +2,7 @@
 id: lem-finite-graded-projective-a-m-modules-are-sums-of-shifted-vertex-projectives
 kind: lemma
 title: "Finite graded projectives are sums of shifted vertex projectives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

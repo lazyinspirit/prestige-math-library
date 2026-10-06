@@ -2,7 +2,7 @@
 id: ex-rankine-hugoniot-in-space-time-normal-form
 kind: example
 title: A planar discontinuity and the space--time normal form of Rankine--Hugoniot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

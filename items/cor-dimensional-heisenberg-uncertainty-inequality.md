@@ -2,7 +2,7 @@
 id: cor-dimensional-heisenberg-uncertainty-inequality
 kind: corollary
 title: The n-dimensional Heisenberg uncertainty inequality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

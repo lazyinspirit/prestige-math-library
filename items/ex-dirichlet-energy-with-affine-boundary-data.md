@@ -2,7 +2,7 @@
 id: ex-dirichlet-energy-with-affine-boundary-data
 kind: example
 title: "The harmonic affine extension minimises the Dirichlet energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

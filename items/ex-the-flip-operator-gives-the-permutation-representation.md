@@ -2,7 +2,7 @@
 id: ex-the-flip-operator-gives-the-permutation-representation
 kind: example
 title: "The flip operator gives the permutation representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-the-extended-time-dependent-field-has-a-global-time-one-flow
 kind: lemma
 title: "A compactly supported time-dependent field has a global time-one flow"
-status: draft
+status: published
 origin: session
 dependency_level: 8
 provenance:

@@ -2,7 +2,7 @@
 id: lem-relative-middle-cup-products-are-symmetric
 kind: lemma
 title: "Relative degree-four cup products are symmetric"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: lem-rational-homotopy-isomorphisms-and-an-endpoint-surjection-give-homology-isomorphisms
 kind: lemma
 title: "Rational homotopy comparison with one endpoint surjection implies homology comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

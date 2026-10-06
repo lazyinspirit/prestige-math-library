@@ -2,7 +2,7 @@
 id: def-complex-sector-and-bounded-analytic-semigroup
 kind: definition
 title: Complex sector and bounded analytic semigroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

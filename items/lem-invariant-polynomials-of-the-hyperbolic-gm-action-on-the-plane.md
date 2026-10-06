@@ -2,7 +2,7 @@
 id: lem-invariant-polynomials-of-the-hyperbolic-gm-action-on-the-plane
 kind: lemma
 title: Invariants of the hyperbolic action of the multiplicative group on the plane
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

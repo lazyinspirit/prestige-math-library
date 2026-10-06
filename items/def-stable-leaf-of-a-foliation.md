@@ -2,7 +2,7 @@
 id: def-stable-leaf-of-a-foliation
 kind: definition
 title: "Stable leaves"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

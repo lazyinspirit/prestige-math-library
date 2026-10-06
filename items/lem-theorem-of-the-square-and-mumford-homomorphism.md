@@ -2,7 +2,7 @@
 id: lem-theorem-of-the-square-and-mumford-homomorphism
 kind: lemma
 title: "The theorem of the square and the Mumford homomorphism into the Picard group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

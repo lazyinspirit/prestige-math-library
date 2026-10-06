@@ -2,7 +2,7 @@
 id: thm-symmetric-elliptic-form-operator-is-self-adjoint-with-compact-resolvent
 kind: theorem
 title: "The symmetric elliptic form operator is self-adjoint with compact resolvent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

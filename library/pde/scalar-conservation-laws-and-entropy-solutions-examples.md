@@ -1,7 +1,7 @@
 ---
 page: "scalar-conservation-laws-and-entropy-solutions-examples"
 title: "Scalar Conservation Laws and Entropy Solutions — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-burgers-shock-riemann-solution", "ex-burgers-rarefaction-riemann-solution", "ex-gradient-catastrophe-before-shock-formation", "ex-rankine-hugoniot-in-space-time-normal-form", "ex-kruzhkov-entropy-inequality-for-a-shock", "ex-hamilton-jacobi-primitive-of-a-burgers-solution", "cex-expansion-shock-is-weak-but-not-entropic", "cex-rankine-hugoniot-alone-does-not-give-uniqueness", "cex-pointwise-shock-values-do-not-affect-the-weak-solution", "cex-convex-flux-riemann-formula-fails-for-a-nonconvex-flux", "ex-distinct-states-with-equal-flux-give-a-stationary-weak-discontinuity", "ex-affine-flux-reduces-the-entropy-semigroup-to-translation", "ex-nonconvex-riemann-data-can-require-a-composite-rarefaction-shock-wave"]
 ---

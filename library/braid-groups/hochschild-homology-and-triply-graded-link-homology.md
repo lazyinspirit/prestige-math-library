@@ -1,7 +1,7 @@
 ---
 page: hochschild-homology-and-triply-graded-link-homology
 title: "Hochschild Homology and Triply-Graded Link Homology"
-status: draft
+status: published
 requires: [matrix-factorizations-and-khovanov-rozansky-link-homology,
             rouquier-complexes-and-categorical-braid-relations,
             hochschild-homology-and-diagonal-koszul-resolutions,

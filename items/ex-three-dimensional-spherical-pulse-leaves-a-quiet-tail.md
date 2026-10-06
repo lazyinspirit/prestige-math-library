@@ -2,7 +2,7 @@
 id: ex-three-dimensional-spherical-pulse-leaves-a-quiet-tail
 kind: example
 title: "A three-dimensional spherical pulse leaves a quiet interior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

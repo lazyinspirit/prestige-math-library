@@ -2,7 +2,7 @@
 id: lem-dyadic-pieces-are-uniform-mihlin-multipliers-and-lp-bounded
 kind: lemma
 title: "Dyadic pieces are uniformly Mihlin multipliers and uniformly Lp-bounded"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

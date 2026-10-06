@@ -2,7 +2,7 @@
 id: lem-two-torsion-and-uniqueness-of-plane-cubic-group-law
 kind: lemma
 title: "Two-torsion and uniqueness of the group law on a Weierstrass cubic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

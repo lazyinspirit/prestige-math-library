@@ -2,7 +2,7 @@
 id: def-total-l-class-of-a-smooth-manifold
 kind: definition
 title: "The total L-class and the L-genus of a smooth manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

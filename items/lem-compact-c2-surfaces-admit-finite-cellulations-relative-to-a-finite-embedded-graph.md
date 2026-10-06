@@ -2,7 +2,7 @@
 id: lem-compact-c2-surfaces-admit-finite-cellulations-relative-to-a-finite-embedded-graph
 kind: lemma
 title: "Finite cellulations of compact C² subsurfaces relative to an embedded graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

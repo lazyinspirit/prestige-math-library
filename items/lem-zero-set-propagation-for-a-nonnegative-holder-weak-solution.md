@@ -2,7 +2,7 @@
 id: lem-zero-set-propagation-for-a-nonnegative-holder-weak-solution
 kind: lemma
 title: "Zero-set propagation for a nonnegative Holder weak solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

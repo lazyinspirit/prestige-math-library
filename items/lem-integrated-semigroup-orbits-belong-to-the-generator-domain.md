@@ -2,7 +2,7 @@
 id: lem-integrated-semigroup-orbits-belong-to-the-generator-domain
 kind: lemma
 title: "Time integrals of semigroup orbits lie in the generator domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-degree-four-characteristic-numbers-add-under-clutching-product
 kind: lemma
 title: "Degree-four characteristic evaluations add under the clutching product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

@@ -2,7 +2,7 @@
 id: lem-the-orientable-double-cover-of-a-smooth-manifold
 kind: lemma
 title: "The orientation double cover is canonically oriented and preserves closedness"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

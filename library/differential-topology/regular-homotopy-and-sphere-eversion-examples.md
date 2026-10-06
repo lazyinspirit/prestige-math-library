@@ -1,7 +1,7 @@
 ---
 page: regular-homotopy-and-sphere-eversion-examples
 title: Regular Homotopy and Sphere Eversion — Examples
-status: draft
+status: published
 requires: [regular-homotopy-and-sphere-eversion, the-de-rham-theorem-and-degree]
 items: []
 examples: [ex-plane-circle-immersions-of-rotation-number-k,

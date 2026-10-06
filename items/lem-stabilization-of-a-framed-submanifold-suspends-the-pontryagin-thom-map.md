@@ -2,7 +2,7 @@
 id: lem-stabilization-of-a-framed-submanifold-suspends-the-pontryagin-thom-map
 kind: lemma
 title: "Stabilizing a framed submanifold suspends its Pontryagin-Thom map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

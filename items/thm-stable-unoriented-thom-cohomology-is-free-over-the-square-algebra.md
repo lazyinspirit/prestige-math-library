@@ -2,7 +2,7 @@
 id: thm-stable-unoriented-thom-cohomology-is-free-over-the-square-algebra
 kind: theorem
 title: "Stable unoriented Thom cohomology is free over the square algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: def-c1-regular-codimension-one-foliation-and-transverse-orientation
 kind: definition
 title: "C¹ codimension-one regular foliations and transverse orientation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

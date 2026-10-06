@@ -2,7 +2,7 @@
 id: lem-the-punctured-disk-is-path-connected-locally-path-connected-and-semilocally-simply-connected
 kind: lemma
 title: "The punctured disk is path-connected, locally path-connected and semilocally simply connected"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-sectorial-nonselfadjoint-multiplication-generator
 kind: example
 title: A sectorial nonselfadjoint multiplication generator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 17

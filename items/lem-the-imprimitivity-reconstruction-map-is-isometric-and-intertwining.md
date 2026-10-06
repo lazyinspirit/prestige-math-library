@@ -2,7 +2,7 @@
 id: lem-the-imprimitivity-reconstruction-map-is-isometric-and-intertwining
 kind: lemma
 title: The imprimitivity reconstruction map is isometric and intertwining
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 7

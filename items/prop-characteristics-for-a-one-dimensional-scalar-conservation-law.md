@@ -2,7 +2,7 @@
 id: prop-characteristics-for-a-one-dimensional-scalar-conservation-law
 kind: proposition
 title: Characteristics and the Riccati equation for the spatial derivative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

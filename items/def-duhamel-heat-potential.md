@@ -2,7 +2,7 @@
 id: def-duhamel-heat-potential
 kind: definition
 title: The Duhamel heat potential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-kirchhoff-formula-for-constant-initial-velocity
 kind: example
 title: "Constant initial velocity in three dimensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

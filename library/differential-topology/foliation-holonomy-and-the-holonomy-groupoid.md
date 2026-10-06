@@ -1,7 +1,7 @@
 ---
 page: foliation-holonomy-and-the-holonomy-groupoid
 title: Foliation Holonomy and the Holonomy Groupoid
-status: draft
+status: published
 items: [def-local-transversal-to-a-regular-foliation,
         def-leafwise-path-and-leafwise-homotopy,
         def-germ-of-a-local-diffeomorphism-at-a-point,

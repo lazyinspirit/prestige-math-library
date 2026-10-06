@@ -2,7 +2,7 @@
 id: thm-critical-point-free-cobordism-is-a-product-relative-to-the-incoming-boundary
 kind: theorem
 title: A cobordism with no handles is a product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 4

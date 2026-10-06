@@ -2,7 +2,7 @@
 id: lem-additive-module-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving
 kind: lemma
 title: "An additive module functor is cocontinuous exactly when it is right exact and preserves coproducts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: ex-the-standard-seven-sphere-as-a-quaternionic-hopf-sphere-bundle
 kind: example
 title: "The standard seven-sphere as the $(1,0)$ quaternionic Hopf sphere bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

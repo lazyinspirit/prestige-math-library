@@ -2,7 +2,7 @@
 id: rem-handle-decompositions-are-not-canonical
 kind: remark
 title: "Handle decompositions are not canonical"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps: [thm-morse-functions-and-handle-decompositions-correspond, thm-handle-duality-from-negating-a-morse-function, thm-morse-rearrangement-by-index, thm-self-indexing-morse-function-existence, lem-handles-of-equal-index-can-be-attached-on-one-level, prop-connected-cobordisms-admit-presentations-without-superfluous-zero-handles, prop-dual-elimination-of-top-index-handles, lem-product-cobordisms-have-critical-point-free-presentations, def-attaching-a-smooth-handle-with-corner-rounding]

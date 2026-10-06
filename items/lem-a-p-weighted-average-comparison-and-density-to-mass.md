@@ -2,7 +2,7 @@
 id: lem-a-p-weighted-average-comparison-and-density-to-mass
 kind: lemma
 title: Weighted average comparison and the density-to-mass estimate for A_p weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

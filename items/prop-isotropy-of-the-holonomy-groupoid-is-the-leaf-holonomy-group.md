@@ -2,7 +2,7 @@
 id: prop-isotropy-of-the-holonomy-groupoid-is-the-leaf-holonomy-group
 kind: proposition
 title: "The isotropy of the holonomy groupoid is the leaf holonomy group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

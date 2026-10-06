@@ -2,7 +2,7 @@
 id: def-polynomial-factorization-category-and-cotangent-diagram
 kind: definition
 title: "Bounded polynomial-factorization categories and the cotangent module diagram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-normal-projective-surface-dualizing-module-over-regular-local-base
 kind: lemma
 title: "Dualizing modules and trace pairing for normal projective surface modifications"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

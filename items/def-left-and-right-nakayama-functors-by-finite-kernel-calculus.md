@@ -2,7 +2,7 @@
 id: def-left-and-right-nakayama-functors-by-finite-kernel-calculus
 kind: definition
 title: "Left and right Nakayama functors by finite kernel calculus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-abelian-category, def-finite-k-linear-abelian-category, def-functor-and-contravariant-functor, def-k-linear-category-and-k-linear-functor, def-left-exact-and-right-exact-functor, def-natural-transformation, lem-finite-eilenberg-watts-kernel-end-and-coend-exist-with-explicit-universal-maps, thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories]

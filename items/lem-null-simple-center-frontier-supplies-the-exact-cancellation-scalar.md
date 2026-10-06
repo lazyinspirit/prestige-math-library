@@ -2,7 +2,7 @@
 id: lem-null-simple-center-frontier-supplies-the-exact-cancellation-scalar
 kind: lemma
 title: "A null simple center frontier supplies the exact cancellation scalar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

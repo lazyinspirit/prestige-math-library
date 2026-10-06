@@ -2,7 +2,7 @@
 id: lem-the-local-intersection-sign-of-the-graph-and-diagonal
 kind: lemma
 title: "The local intersection sign of graph against diagonal is sign det(I-Df)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

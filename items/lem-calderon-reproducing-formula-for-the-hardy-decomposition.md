@@ -2,7 +2,7 @@
 id: lem-calderon-reproducing-formula-for-the-hardy-decomposition
 kind: lemma
 title: "Calderon reproducing pair and the telescoping identity in $\\mathcal S'$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

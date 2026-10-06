@@ -2,7 +2,7 @@
 id: ex-kronecker-foliation-of-the-torus-has-trivial-leaf-holonomy
 kind: example
 title: "The Kronecker foliation of the torus has dense leaves and trivial leaf holonomy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

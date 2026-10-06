@@ -2,7 +2,7 @@
 id: ex-hamilton-jacobi-primitive-of-a-burgers-solution
 kind: example
 title: The Hamilton--Jacobi primitive of a Burgers solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

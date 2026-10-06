@@ -2,7 +2,7 @@
 id: cor-weak-morse-inequalities
 kind: corollary
 title: "Weak Morse inequalities"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: def-monodromy-groupoid-of-a-foliation
 kind: definition
 title: "The monodromy groupoid of a foliation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

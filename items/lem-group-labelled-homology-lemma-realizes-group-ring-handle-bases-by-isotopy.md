@@ -2,7 +2,7 @@
 id: lem-group-labelled-homology-lemma-realizes-group-ring-handle-bases-by-isotopy
 kind: lemma
 title: The group-labelled homology lemma realizes group-ring handle bases by isotopy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

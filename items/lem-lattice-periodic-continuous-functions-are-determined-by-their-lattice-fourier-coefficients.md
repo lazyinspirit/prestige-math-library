@@ -2,7 +2,7 @@
 id: lem-lattice-periodic-continuous-functions-are-determined-by-their-lattice-fourier-coefficients
 kind: lemma
 title: "Continuous lattice-periodic functions are determined by their lattice Fourier coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

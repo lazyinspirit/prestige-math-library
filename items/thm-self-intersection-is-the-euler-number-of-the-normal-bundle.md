@@ -2,7 +2,7 @@
 id: thm-self-intersection-is-the-euler-number-of-the-normal-bundle
 kind: theorem
 title: "The self-intersection number is the Euler number of the normal bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-self-intersection-number-of-an-oriented-submanifold, lem-normal-push-off-zeros-are-self-intersection-points, prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual, lem-pullback-of-the-thom-class-along-a-transverse-section, lem-normal-bundle-of-the-zero-locus-of-a-transverse-section, def-euler-class-by-zero-section-pullback-of-the-thom-class, def-kronecker-evaluation-pairing, cor-poincare-duality-gives-a-nonsingular-cup-pairing, def-cap-duality-map-for-an-oriented-manifold, def-fundamental-class-of-a-compact-oriented-manifold, thm-oriented-intersection-number-is-homotopy-invariant, thm-intersection-number-under-factor-interchange, def-local-oriented-intersection-sign, def-oriented-intersection-number, def-axiom-of-choice, prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold, prop-two-tubular-neighbourhood-germs-are-isomorphic-near-the-zero-section, thm-parametric-transversality, lem-every-vector-in-a-fibre-extends-to-a-compactly-supported-smooth-section, lem-second-countable-smooth-manifolds-have-cw-homotopy-type]

@@ -2,7 +2,7 @@
 id: lem-metastable-cohomology-of-eilenberg-maclane-spaces
 kind: lemma
 title: "Metastable cohomology of mod-two Eilenberg–Mac Lane spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

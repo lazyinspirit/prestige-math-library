@@ -2,7 +2,7 @@
 id: def-linear-system-plane-curves
 kind: definition
 title: Linear systems of plane curves and their base loci
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

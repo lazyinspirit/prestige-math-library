@@ -2,7 +2,7 @@
 id: lem-finite-etale-lifting-over-complete-dvr
 kind: lemma
 title: "Finite etale schemes over a complete local ring and splitting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

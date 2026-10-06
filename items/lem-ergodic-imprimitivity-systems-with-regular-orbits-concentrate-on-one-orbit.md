@@ -2,7 +2,7 @@
 id: lem-ergodic-imprimitivity-systems-with-regular-orbits-concentrate-on-one-orbit
 kind: lemma
 title: Ergodic systems with regular orbits concentrate on one orbit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

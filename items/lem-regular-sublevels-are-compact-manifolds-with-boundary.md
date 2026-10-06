@@ -2,7 +2,7 @@
 id: lem-regular-sublevels-are-compact-manifolds-with-boundary
 kind: lemma
 title: "Regular sublevels are compact manifolds with boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-closed-sublevel-and-level-set-of-a-smooth-function, def-critical-point-and-critical-value-of-a-smooth-function, def-morse-function-and-excellent-morse-function, cor-local-normal-form-for-submersions, def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary, def-smooth-manifold, thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold, def-compact-space]

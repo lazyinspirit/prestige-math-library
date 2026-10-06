@@ -2,7 +2,7 @@
 id: lem-an-hp-atom-has-uniform-hp-quasinorm
 kind: lemma
 title: "Atoms have uniformly bounded $H^p$ quasi-norm and uniformly bounded test pairings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

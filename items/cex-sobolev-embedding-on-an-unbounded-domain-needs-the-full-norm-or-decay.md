@@ -2,7 +2,7 @@
 id: cex-sobolev-embedding-on-an-unbounded-domain-needs-the-full-norm-or-decay
 kind: counterexample
 title: "Outward dilation defeats subcritical inclusion and homogeneous Poincare on Euclidean space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

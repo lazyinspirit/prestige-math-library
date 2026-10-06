@@ -2,7 +2,7 @@
 id: lem-handles-of-equal-index-can-be-attached-on-one-level
 kind: lemma
 title: Handles of equal index can be attached on one level
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

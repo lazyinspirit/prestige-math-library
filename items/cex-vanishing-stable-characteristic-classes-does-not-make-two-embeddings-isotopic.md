@@ -2,7 +2,7 @@
 id: cex-vanishing-stable-characteristic-classes-does-not-make-two-embeddings-isotopic
 kind: counterexample
 title: "Vanishing stable characteristic classes do not make two embeddings isotopic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

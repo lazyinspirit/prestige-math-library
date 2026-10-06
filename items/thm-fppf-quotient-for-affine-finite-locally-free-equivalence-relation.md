@@ -2,7 +2,7 @@
 id: thm-fppf-quotient-for-affine-finite-locally-free-equivalence-relation
 kind: theorem
 title: "Affine finite locally free equivalence relations have finite locally free scheme quotients"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-axiom-of-choice, def-faithfully-flat-morphism-schemes, def-quotient-sheaf-and-representable-quotient, thm-nonaffine-finite-flat-affine-equivalence-quotient]

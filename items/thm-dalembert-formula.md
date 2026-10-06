@@ -2,7 +2,7 @@
 id: thm-dalembert-formula
 kind: theorem
 title: "d'Alembert's formula and uniqueness in one dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

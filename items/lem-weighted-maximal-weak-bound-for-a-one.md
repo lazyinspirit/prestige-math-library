@@ -2,7 +2,7 @@
 id: lem-weighted-maximal-weak-bound-for-a-one
 kind: lemma
 title: Weighted weak (1,1) bound for the maximal function under A_1
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

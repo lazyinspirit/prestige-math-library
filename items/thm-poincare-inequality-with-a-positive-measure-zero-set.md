@@ -2,7 +2,7 @@
 id: thm-poincare-inequality-with-a-positive-measure-zero-set
 kind: theorem
 title: "The Poincare inequality with a positive-measure zero set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

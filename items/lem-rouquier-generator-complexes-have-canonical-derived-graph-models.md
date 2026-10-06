@@ -2,7 +2,7 @@
 id: lem-rouquier-generator-complexes-have-canonical-derived-graph-models
 kind: lemma
 title: "Rouquier generator complexes have canonical derived graph models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

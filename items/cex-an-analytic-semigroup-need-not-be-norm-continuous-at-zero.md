@@ -2,7 +2,7 @@
 id: cex-an-analytic-semigroup-need-not-be-norm-continuous-at-zero
 kind: counterexample
 title: An analytic semigroup need not be norm continuous at zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: lem-envelopes-are-the-least-semicontinuous-majorants
 kind: lemma
 title: "The envelopes are the least upper and greatest lower semicontinuous functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-upper-and-lower-semicontinuous-envelopes, def-semicontinuity-on-euclidean-subsets, def-infimum, lem-sup-epsilon, def-metric-topology]

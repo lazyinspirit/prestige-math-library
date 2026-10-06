@@ -2,7 +2,7 @@
 id: def-proper-coercive-and-weakly-lower-semicontinuous-functional
 kind: definition
 title: "Proper, coercive and weakly lower semicontinuous extended-real functionals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

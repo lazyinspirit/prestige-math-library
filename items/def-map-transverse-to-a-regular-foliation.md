@@ -2,7 +2,7 @@
 id: def-map-transverse-to-a-regular-foliation
 kind: definition
 title: "Smooth maps transverse to a regular foliation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

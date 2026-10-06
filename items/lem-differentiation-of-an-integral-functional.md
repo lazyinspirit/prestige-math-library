@@ -2,7 +2,7 @@
 id: lem-differentiation-of-an-integral-functional
 kind: lemma
 title: "Differentiation of an integral functional under growth domination"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

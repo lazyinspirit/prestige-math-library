@@ -2,7 +2,7 @@
 id: def-viscosity-subsolution-and-supersolution
 kind: definition
 title: Viscosity subsolutions and supersolutions of a first-order equation and of the Cauchy problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

@@ -2,7 +2,7 @@
 id: def-john-domain-and-john-constant
 kind: definition
 title: "John domains and the John constant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

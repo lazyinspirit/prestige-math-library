@@ -2,7 +2,7 @@
 id: lem-reynolds-operator-and-invariant-subring-properties
 kind: lemma
 title: The Reynolds operator and the ideal theory of the invariant subring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

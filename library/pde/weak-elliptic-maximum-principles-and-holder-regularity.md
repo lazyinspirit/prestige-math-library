@@ -1,7 +1,7 @@
 ---
 page: weak-elliptic-maximum-principles-and-holder-regularity
 title: "Weak Elliptic Maximum Principles and Holder Regularity"
-status: draft
+status: published
 items: ["def-weak-subsolution-and-supersolution-of-a-divergence-form-equation", "lem-positive-part-is-an-admissible-weak-test-by-truncation", "lem-positive-part-of-a-zero-trace-function-has-zero-trace", "lem-caccioppoli-inequality-for-truncated-subsolutions", "lem-sobolev-level-set-iteration-step", "lem-nonlinear-geometric-iteration-sequence-converges-to-zero", "thm-weak-maximum-principle-for-coercive-divergence-form-equations", "cor-weak-comparison-and-uniqueness", "thm-de-giorgi-local-boundedness-for-homogeneous-subsolutions", "thm-de-giorgi-local-boundedness-with-scale-correct-forcing-term", "lem-de-giorgi-oscillation-reduction", "thm-de-giorgi-nash-interior-holder-regularity", "lem-geometric-oscillation-decay-implies-a-holder-modulus", "lem-logarithmic-caccioppoli-estimate-for-positive-supersolutions", "lem-moser-iteration-for-positive-supersolutions", "thm-weak-harnack-inequality-for-nonnegative-supersolutions", "rem-weak-harnack-exponent-has-a-coefficient-and-dimension-dependent-upper-range", "thm-harnack-inequality-for-nonnegative-weak-solutions", "lem-finite-interior-ball-chain-propagates-weak-harnack-bounds", "lem-zero-set-propagation-for-a-nonnegative-holder-weak-solution", "cor-strong-maximum-principle-for-weak-elliptic-solutions", "rem-scalar-de-giorgi-theory-does-not-transfer-verbatim-to-systems"]
 examples: []
 ---

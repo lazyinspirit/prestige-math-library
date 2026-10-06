@@ -2,7 +2,7 @@
 id: ex-a-noninvolutive-one-dimensional-yang-baxter-operator
 kind: example
 title: "A non-involutive one-dimensional Yang–Baxter operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

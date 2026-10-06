@@ -2,7 +2,7 @@
 id: "lem-functionals-vanishing-on-the-common-kernel-of-an-independent-family"
 kind: "lemma"
 title: "Functionals vanishing on a common kernel are combinations of an independent family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

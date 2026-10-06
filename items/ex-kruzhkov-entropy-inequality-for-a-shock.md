@@ -2,7 +2,7 @@
 id: ex-kruzhkov-entropy-inequality-for-a-shock
 kind: example
 title: The Kruzhkov entropy inequality across a shock
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

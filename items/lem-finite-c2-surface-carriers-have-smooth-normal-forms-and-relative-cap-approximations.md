@@ -2,7 +2,7 @@
 id: lem-finite-c2-surface-carriers-have-smooth-normal-forms-and-relative-cap-approximations
 kind: lemma
 title: "Finite C2 surface carriers have smooth normal forms and relative cap approximations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-countable-choice, thm-parametrized-implicit-function-theorem-with-higher-regularity, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, thm-morse-sard-for-euclidean-maps, thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves, thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms, thm-morse-rearrangement-by-index, thm-morse-functions-and-handle-decompositions-correspond, lem-a-handle-decomposition-gives-a-relative-cw-complex, thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space, thm-euclidean-tubular-neighbourhood-theorem]

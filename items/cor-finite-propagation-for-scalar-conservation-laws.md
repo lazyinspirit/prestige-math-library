@@ -2,7 +2,7 @@
 id: cor-finite-propagation-for-scalar-conservation-laws
 kind: corollary
 title: Finite propagation for scalar conservation laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

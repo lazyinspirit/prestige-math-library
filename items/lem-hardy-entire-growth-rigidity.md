@@ -2,7 +2,7 @@
 id: lem-hardy-entire-growth-rigidity
 kind: lemma
 title: Entire rigidity under Gaussian growth and real-axis decay
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

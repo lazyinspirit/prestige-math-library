@@ -2,7 +2,7 @@
 id: ex-sobolev-weight-on-a-single-dyadic-annulus
 kind: example
 title: "The Sobolev weight on a single dyadic annulus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

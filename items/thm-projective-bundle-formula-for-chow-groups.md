@@ -2,7 +2,7 @@
 id: thm-projective-bundle-formula-for-chow-groups
 kind: theorem
 title: "The projective bundle formula for Chow groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

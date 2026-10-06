@@ -2,7 +2,7 @@
 id: lem-group-ring-modification-lemma-for-embedded-spheres
 kind: lemma
 title: "The group-ring modification lemma for embedded spheres"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 9

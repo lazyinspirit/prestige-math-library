@@ -2,7 +2,7 @@
 id: def-signed-morse-differential-over-the-integers
 kind: definition
 title: "The signed Morse differential over the integers"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-countable-choice, def-orientation-line-of-a-morse-critical-point, lem-unstable-orientations-induce-trajectory-moduli-orientations, def-unparametrized-morse-trajectory-moduli-space, cor-index-one-trajectory-moduli-spaces-are-finite, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, def-mod-two-morse-differential, def-integers, def-left-and-right-modules]
 provenance:

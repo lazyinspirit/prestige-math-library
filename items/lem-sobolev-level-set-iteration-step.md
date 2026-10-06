@@ -2,7 +2,7 @@
 id: lem-sobolev-level-set-iteration-step
 kind: lemma
 title: "Sobolev level-set step: energy decay with explicit level gap and radius loss"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

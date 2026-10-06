@@ -2,7 +2,7 @@
 id: thm-backward-heat-solution-map-is-unbounded
 kind: theorem
 title: The backward heat solution map is unbounded
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

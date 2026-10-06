@@ -2,7 +2,7 @@
 id: thm-comparison-for-first-order-hamilton-jacobi-equations
 kind: theorem
 title: Comparison for first-order Hamilton--Jacobi equations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

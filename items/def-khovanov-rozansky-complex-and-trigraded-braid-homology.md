@@ -2,7 +2,7 @@
 id: def-khovanov-rozansky-complex-and-trigraded-braid-homology
 kind: definition
 title: "The Khovanov-Rozansky complex and trigraded braid homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

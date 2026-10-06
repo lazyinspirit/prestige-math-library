@@ -2,7 +2,7 @@
 id: thm-maximal-function-characterisations-of-real-hardy-spaces
 kind: theorem
 title: "Maximal-function characterisations of real Hardy spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

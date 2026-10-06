@@ -2,7 +2,7 @@
 id: def-classical-strong-and-mild-abstract-cauchy-solutions
 kind: definition
 title: "Classical, strong and mild abstract Cauchy solutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

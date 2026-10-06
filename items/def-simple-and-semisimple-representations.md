@@ -2,7 +2,7 @@
 id: def-simple-and-semisimple-representations
 kind: definition
 title: "Simple and semisimple rational representations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

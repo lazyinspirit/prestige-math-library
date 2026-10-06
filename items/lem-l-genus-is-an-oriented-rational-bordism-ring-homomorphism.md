@@ -2,7 +2,7 @@
 id: lem-l-genus-is-an-oriented-rational-bordism-ring-homomorphism
 kind: lemma
 title: "The L-genus is an oriented rational bordism ring homomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

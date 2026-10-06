@@ -2,7 +2,7 @@
 id: thm-stable-locus-geometric-quotient
 kind: theorem
 title: The stable locus has a geometric quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

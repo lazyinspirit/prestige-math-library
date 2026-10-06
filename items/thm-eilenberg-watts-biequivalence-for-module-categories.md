@@ -2,7 +2,7 @@
 id: thm-eilenberg-watts-biequivalence-for-module-categories
 kind: theorem
 title: "Eilenberg-Watts schematic biequivalence between the Morita bicategory and module categories"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

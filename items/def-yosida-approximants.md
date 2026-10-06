@@ -2,7 +2,7 @@
 id: def-yosida-approximants
 kind: definition
 title: "Yosida approximants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

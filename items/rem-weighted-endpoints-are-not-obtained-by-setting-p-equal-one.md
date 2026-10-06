@@ -2,7 +2,7 @@
 id: rem-weighted-endpoints-are-not-obtained-by-setting-p-equal-one
 kind: remark
 title: Weighted endpoints are not obtained by setting p equal to one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

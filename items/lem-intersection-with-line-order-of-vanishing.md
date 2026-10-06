@@ -2,7 +2,7 @@
 id: lem-intersection-with-line-order-of-vanishing
 kind: lemma
 title: Intersection with a line is the order of vanishing of the restricted equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

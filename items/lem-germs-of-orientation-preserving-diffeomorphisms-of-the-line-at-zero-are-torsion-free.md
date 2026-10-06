@@ -2,7 +2,7 @@
 id: lem-germs-of-orientation-preserving-diffeomorphisms-of-the-line-at-zero-are-torsion-free
 kind: lemma
 title: "Germs of orientation-preserving diffeomorphisms of the line at zero are torsion-free"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

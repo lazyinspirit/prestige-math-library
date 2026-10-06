@@ -2,7 +2,7 @@
 id: lem-power-decay-weights-are-doubling
 kind: lemma
 title: Power decay implies doubling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

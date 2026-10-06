@@ -2,7 +2,7 @@
 id: ex-two-milnor-spheres-with-distinct-congruence-invariants
 kind: example
 title: "Two Milnor spheres with distinct congruence invariants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

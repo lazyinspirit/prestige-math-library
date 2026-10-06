@@ -2,7 +2,7 @@
 id: thm-khovanov-seidel-complexes-give-a-weak-derived-braid-action
 kind: theorem
 title: "The Khovanov-Seidel complexes give a weak derived braid action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: cex-two-nonhomotopic-leaf-loops-can-have-the-same-holonomy-germ
 kind: counterexample
 title: "Two nonhomotopic leaf loops can have the same holonomy germ"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

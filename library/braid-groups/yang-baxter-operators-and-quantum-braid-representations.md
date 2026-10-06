@@ -1,7 +1,7 @@
 ---
 page: yang-baxter-operators-and-quantum-braid-representations
 title: "Yang–Baxter Operators and Quantum Braid Representations"
-status: draft
+status: published
 requires: [braided-and-symmetric-monoidal-categories,
             duality-and-rigidity-in-monoidal-categories,
             tensor-and-fusion-categories,

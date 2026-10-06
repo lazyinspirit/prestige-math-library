@@ -1,7 +1,7 @@
 ---
 page: lie-algebras-and-infinitesimal-group-schemes-examples
 title: "Lie Algebras and Infinitesimal Group Schemes — Examples"
-status: draft
+status: published
 requires: [lie-algebras-and-infinitesimal-group-schemes]
 items: []
 examples: [ex-additive-and-infinitesimal-group-schemes,

@@ -2,7 +2,7 @@
 id: "lem-coefficient-ideal-under-smooth-morphisms"
 kind: "lemma"
 title: "The coefficient ideal commutes with smooth pullback"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 7

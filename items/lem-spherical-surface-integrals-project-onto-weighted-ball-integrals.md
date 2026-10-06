@@ -2,7 +2,7 @@
 id: lem-spherical-surface-integrals-project-onto-weighted-ball-integrals
 kind: lemma
 title: "Sphere integrals of a cylindrical function project to weighted ball integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

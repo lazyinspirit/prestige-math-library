@@ -2,7 +2,7 @@
 id: def-descent-data-for-schemes
 kind: definition
 title: "Descent data for schemes over an fppf covering"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-morse-functions-and-handle-decompositions-correspond
 kind: theorem
 title: "Morse functions and handle decompositions correspond"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-morse-function-adapted-to-a-cobordism, thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms, def-handle-decomposition-relative-to-the-incoming-boundary, lem-interior-slab-handle-attachment, lem-standard-handle-admits-an-adapted-morse-function, lem-gluing-handle-morse-models-along-collars, cor-unstable-disk-is-the-handle-core, prop-simultaneous-attachment-at-a-morse-critical-value, lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism, thm-one-critical-point-handle-attachment, def-closed-sublevel-and-level-set-of-a-smooth-function, thm-regular-interval-diffeomorphism, def-morse-function-and-excellent-morse-function, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, def-countable-choice]

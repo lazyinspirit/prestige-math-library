@@ -2,7 +2,7 @@
 id: cex-a-nonproper-noncompact-morse-function-can-lose-continuation-trajectories-at-infinity
 kind: counterexample
 title: "A noncompact continuation datum can lose its trajectories at infinity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

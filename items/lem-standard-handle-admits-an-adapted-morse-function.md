@@ -2,7 +2,7 @@
 id: lem-standard-handle-admits-an-adapted-morse-function
 kind: lemma
 title: "Standard handle admits an adapted Morse function"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-k-handle-core-cocore-attaching-region-and-belt-sphere, thm-morse-lemma, def-morse-function-and-excellent-morse-function, def-downward-gradient-like-vector-field, def-attaching-a-smooth-handle-with-corner-rounding, lem-manifold-bump-for-a-compact-set-inside-an-open-set]

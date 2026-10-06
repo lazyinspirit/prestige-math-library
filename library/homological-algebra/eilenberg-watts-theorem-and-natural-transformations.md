@@ -1,7 +1,7 @@
 ---
 page: eilenberg-watts-theorem-and-natural-transformations
 title: "Eilenberg–Watts Theorem and Natural Transformations"
-status: draft
+status: published
 items: [def-additive-cocontinuous-module-functor, lem-additive-cocontinuous-module-functors-form-a-category, lem-additive-module-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving, lem-evaluation-on-the-regular-module-has-a-commuting-right-action, lem-canonical-eilenberg-watts-comparison-is-balanced-and-natural, lem-canonical-free-presentation-controls-eilenberg-watts-comparison, thm-eilenberg-watts-for-arbitrary-unital-rings, thm-natural-transformations-of-tensor-functors-are-bimodule-maps, cor-eilenberg-watts-is-an-equivalence-of-hom-categories, cor-cocontinuous-additive-module-functors-admit-right-adjoints, cor-exact-module-tensor-functors-correspond-to-right-flat-bimodules, lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums, lem-tensor-hom-adjunction-for-bimodules]
 examples: []
 ---

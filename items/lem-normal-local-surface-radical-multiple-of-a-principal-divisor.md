@@ -2,7 +2,7 @@
 id: lem-normal-local-surface-radical-multiple-of-a-principal-divisor
 kind: lemma
 title: "Reduced Cartier multiples on a normal local surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

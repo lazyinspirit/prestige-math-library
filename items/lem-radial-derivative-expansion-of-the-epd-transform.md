@@ -2,7 +2,7 @@
 id: lem-radial-derivative-expansion-of-the-epd-transform
 kind: lemma
 title: "Radial-derivative expansion of the Euler–Poisson–Darboux transform and its zero-radius limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-proper-surface-regularity-transfers-to-and-from-completion
 kind: lemma
 title: "Regularity of a proper scheme transfers to and from local-base completion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

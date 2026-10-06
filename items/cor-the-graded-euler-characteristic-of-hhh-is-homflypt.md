@@ -2,7 +2,7 @@
 id: cor-the-graded-euler-characteristic-of-hhh-is-homflypt
 kind: corollary
 title: "The normalized graded Euler series of HHH recovers HOMFLYPT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [thm-hhh-is-isomorphic-to-reduced-khovanov-rozansky-homflypt-homology, thm-khovanov-rozansky-homology-categorifies-the-homflypt-polynomial, def-normalized-khovanov-rozansky-homflypt-bigraded-euler-series, def-reduced-khovanov-rozansky-homology, def-khovanov-rozansky-complex-and-trigraded-braid-homology, def-axiom-of-choice]

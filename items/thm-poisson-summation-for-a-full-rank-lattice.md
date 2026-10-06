@@ -2,7 +2,7 @@
 id: thm-poisson-summation-for-a-full-rank-lattice
 kind: theorem
 title: "Poisson summation for a full-rank lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

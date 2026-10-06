@@ -2,7 +2,7 @@
 id: thm-factorization-of-birational-morphisms-of-smooth-surfaces
 kind: theorem
 title: Factorization of birational morphisms of regular surfaces into point blowups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 10

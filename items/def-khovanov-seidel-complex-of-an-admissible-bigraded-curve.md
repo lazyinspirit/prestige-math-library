@@ -2,7 +2,7 @@
 id: def-khovanov-seidel-complex-of-an-admissible-bigraded-curve
 kind: definition
 title: "The complex of an admissible bigraded curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

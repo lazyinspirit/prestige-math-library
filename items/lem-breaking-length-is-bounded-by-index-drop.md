@@ -2,7 +2,7 @@
 id: lem-breaking-length-is-bounded-by-index-drop
 kind: lemma
 title: "Breaking length is bounded by the index drop"
-status: draft
+status: published
 origin: pipeline
 deps: [def-morse-smale-pair, def-broken-morse-trajectory, def-unparametrized-morse-trajectory-moduli-space, lem-broken-morse-trajectories-have-strictly-decreasing-critical-values-and-indices, cor-no-morse-smale-trajectories-for-nonpositive-index-drop, def-nondegenerate-critical-point-nullity-index-and-coindex, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points]
 proof_strategy: direct

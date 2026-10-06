@@ -2,7 +2,7 @@
 id: lem-smoothing-genuine-immersion-families
 kind: lemma
 title: "Smoothing continuous families of genuine immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-compact-parameter-pair, def-space-of-immersions-and-space-of-formal-immersions, def-immersion-submersion-and-constant-rank-map, def-regular-homotopy-of-immersions, def-smooth-map-between-manifolds-with-boundary, lem-joint-jet-continuity-and-the-weak-smooth-topology, def-weak-compact-open-smooth-topology-on-mapping-spaces, thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space, thm-euclidean-tubular-neighbourhood-theorem, def-normal-addition-map-for-a-euclidean-submanifold, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, thm-differentiation-under-the-integral-sign, thm-heine-cantor-metric, thm-extreme-value-metric, thm-smooth-partitions-of-unity-exist-on-manifolds, def-compact-space, def-countable-choice, lem-manifold-bump-for-a-compact-set-inside-an-open-set]

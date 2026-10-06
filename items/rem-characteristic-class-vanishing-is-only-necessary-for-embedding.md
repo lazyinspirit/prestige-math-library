@@ -2,7 +2,7 @@
 id: rem-characteristic-class-vanishing-is-only-necessary-for-embedding
 kind: remark
 title: "Characteristic-class vanishing is only necessary for embedding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["cor-embedding-obstructions-include-all-immersion-normal-class-obstructions", "def-smooth-embedding", "thm-isotopy-extension", "thm-choice-implies-dependent-implies-countable-choice", "def-axiom-of-choice", prop-parallelizable-manifolds-have-no-stable-characteristic-class-obstruction-to-euclidean-immersion, prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish, ex-real-projective-space-from-affine-charts, prop-tangent-space-of-a-regular-level-set-is-the-kernel, thm-cellular-boundary-is-the-incidence-degree-matrix, thm-cellular-homology-computes-singular-homology, lem-a-smooth-three-manifold-with-h-one-z-two-and-h-two-zero-does-not-embed-in-s-four, prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps, prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism, def-induced-boundary-orientation]

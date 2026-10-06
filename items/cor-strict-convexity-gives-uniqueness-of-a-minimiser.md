@@ -2,7 +2,7 @@
 id: cor-strict-convexity-gives-uniqueness-of-a-minimiser
 kind: corollary
 title: "Strict convexity gives uniqueness of a minimiser"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

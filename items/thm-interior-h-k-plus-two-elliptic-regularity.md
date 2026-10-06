@@ -2,7 +2,7 @@
 id: thm-interior-h-k-plus-two-elliptic-regularity
 kind: theorem
 title: "Interior $H^{k+2}$ elliptic regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

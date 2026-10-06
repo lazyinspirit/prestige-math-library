@@ -2,7 +2,7 @@
 id: ex-the-handle-matrix-of-a-simple-acyclic-presentation
 kind: example
 title: The handle matrix of a simple acyclic presentation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: def-hamilton-jacobi-cauchy-problem
 kind: definition
 title: The Hamilton--Jacobi Cauchy problem and its classical solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

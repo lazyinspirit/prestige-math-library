@@ -2,7 +2,7 @@
 id: lem-endomorphism-ring-of-an-object-in-a-preadditive-category
 kind: lemma
 title: "Endomorphisms of an object of a preadditive category form a ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

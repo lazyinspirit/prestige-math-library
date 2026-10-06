@@ -2,7 +2,7 @@
 id: ex-analytic-dirichlet-heat-semigroup
 kind: example
 title: The analytic Dirichlet heat semigroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 16

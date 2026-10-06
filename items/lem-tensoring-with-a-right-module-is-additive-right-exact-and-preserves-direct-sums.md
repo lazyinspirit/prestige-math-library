@@ -2,7 +2,7 @@
 id: lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums
 kind: lemma
 title: "The functor $M\\otimes_A-$ is additive, right exact, and preserves direct sums over an arbitrary unital ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

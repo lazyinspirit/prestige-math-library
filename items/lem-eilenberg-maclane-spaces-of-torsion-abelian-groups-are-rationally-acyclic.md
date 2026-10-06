@@ -2,7 +2,7 @@
 id: lem-eilenberg-maclane-spaces-of-torsion-abelian-groups-are-rationally-acyclic
 kind: lemma
 title: "Torsion Eilenberg–Mac Lane spaces are rationally acyclic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: def-c1-germ-of-a-local-diffeomorphism-at-a-point
 kind: definition
 title: "C¹ germs of local diffeomorphisms at a point"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

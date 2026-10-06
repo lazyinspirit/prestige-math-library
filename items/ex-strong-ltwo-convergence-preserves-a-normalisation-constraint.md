@@ -2,7 +2,7 @@
 id: ex-strong-ltwo-convergence-preserves-a-normalisation-constraint
 kind: example
 title: "Strong $L^2$ convergence preserves an $L^2$-normalisation constraint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-compactly-embedded-normed-spaces
 kind: definition
 title: "Compactly embedded normed spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

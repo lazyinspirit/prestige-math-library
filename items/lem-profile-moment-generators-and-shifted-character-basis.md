@@ -2,7 +2,7 @@
 id: lem-profile-moment-generators-and-shifted-character-basis
 kind: lemma
 title: "The profile-moment generators in the shifted-character basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

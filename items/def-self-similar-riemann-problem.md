@@ -2,7 +2,7 @@
 id: def-self-similar-riemann-problem
 kind: definition
 title: The self-similar Riemann problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

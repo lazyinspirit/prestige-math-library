@@ -1,7 +1,7 @@
 ---
 page: "wave-energy-finite-propagation-and-huygens-examples"
 title: "Wave Energy, Finite Propagation and Huygens' Principle — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-conserved-energy-of-a-travelling-wave-packet", "ex-plane-wave-shows-the-characteristic-speed-is-sharp", "cex-global-energy-identity-needs-integrability-or-decay", "cex-wave-energy-need-not-be-conserved-through-an-open-boundary", "ex-reflection-at-a-dirichlet-endpoint", "ex-zero-wave-energy-means-spatial-constant-before-data-fix-the-constant", "ex-three-dimensional-spherical-pulse-leaves-a-quiet-tail", "ex-two-dimensional-pulse-has-a-tail-inside-the-cone", "cex-finite-speed-does-not-imply-strong-huygens"]
 ---

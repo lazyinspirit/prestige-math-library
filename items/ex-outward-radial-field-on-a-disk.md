@@ -2,7 +2,7 @@
 id: ex-outward-radial-field-on-a-disk
 kind: example
 title: "The outward radial field on a disk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

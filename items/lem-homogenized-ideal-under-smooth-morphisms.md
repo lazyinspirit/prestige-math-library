@@ -2,7 +2,7 @@
 id: "lem-homogenized-ideal-under-smooth-morphisms"
 kind: "lemma"
 title: "Homogenization commutes with smooth pullback"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 7

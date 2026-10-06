@@ -2,7 +2,7 @@
 id: def-signature-of-a-closed-oriented-four-k-manifold
 kind: definition
 title: "The signature of a closed oriented manifold of dimension divisible by four"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

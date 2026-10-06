@@ -2,7 +2,7 @@
 id: thm-continuation-count-is-a-chain-map
 kind: theorem
 title: "The continuation count is a chain map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

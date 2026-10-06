@@ -2,7 +2,7 @@
 id: cex-an-invariant-line-need-not-have-an-invariant-complement-over-a-laurent-ring
 kind: counterexample
 title: "An invariant line need not have an invariant complement over a Laurent ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 11

@@ -2,7 +2,7 @@
 id: "lem-one-dimensional-trace-truncation-compatibility"
 kind: "lemma"
 title: "Endpoint trace commutes with Sobolev truncation on an interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 0

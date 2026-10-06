@@ -2,7 +2,7 @@
 id: thm-weyl-dimension-formula
 kind: theorem
 title: The Weyl dimension formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: thm-spherical-principal-series-constituents-of-gl-n-fq
 kind: theorem
 title: "The constituents of the spherical principal series of GL_n"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

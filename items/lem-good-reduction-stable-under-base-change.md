@@ -2,7 +2,7 @@
 id: lem-good-reduction-stable-under-base-change
 kind: lemma
 title: "Good reduction is stable under base change of the base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

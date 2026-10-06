@@ -2,7 +2,7 @@
 id: cex-algebraic-intersection-one-with-three-geometric-points
 kind: counterexample
 title: "Algebraic intersection one with three geometric points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

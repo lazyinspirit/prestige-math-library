@@ -2,7 +2,7 @@
 id: def-rational-representation-and-comodule-of-an-affine-group-scheme
 kind: definition
 title: Rational representations and comodules of an affine group scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 2

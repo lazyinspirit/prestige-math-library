@@ -2,7 +2,7 @@
 id: def-canonical-divisor-of-a-smooth-projective-surface
 kind: definition
 title: "The canonical divisor of a smooth projective surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

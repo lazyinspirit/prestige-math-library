@@ -2,7 +2,7 @@
 id: ex-perfect-height-function-on-a-sphere
 kind: example
 title: "The height function on a sphere is perfect"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

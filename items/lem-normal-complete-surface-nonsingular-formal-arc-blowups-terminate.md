@@ -2,7 +2,7 @@
 id: lem-normal-complete-surface-nonsingular-formal-arc-blowups-terminate
 kind: lemma
 title: A nonsingular formal arc on a normal Noetherian surface becomes regular
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

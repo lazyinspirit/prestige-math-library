@@ -2,7 +2,7 @@
 id: lem-disk-bundle-intersection-form-and-signature-for-xi-h-j
 kind: lemma
 title: "Middle form and signature of the Milnor disk bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

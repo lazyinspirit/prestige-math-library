@@ -1,7 +1,7 @@
 ---
 page: birational-morphisms-contractions-and-surface-singularities
 title: "Birational Morphisms, Contractions, and Surface Singularities"
-status: draft
+status: published
 requires:
   - normal-varieties-normalization-and-zariskis-main-theorem
   - finite-proper-and-projective-morphisms

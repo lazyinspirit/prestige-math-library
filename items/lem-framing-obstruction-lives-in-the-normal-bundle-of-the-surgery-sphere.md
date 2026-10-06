@@ -2,7 +2,7 @@
 id: "lem-framing-obstruction-lives-in-the-normal-bundle-of-the-surgery-sphere"
 kind: "lemma"
 title: "The framing obstruction lives in the normal bundle of the surgery sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

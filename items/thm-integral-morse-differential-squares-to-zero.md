@@ -2,7 +2,7 @@
 id: thm-integral-morse-differential-squares-to-zero
 kind: theorem
 title: "The integral Morse differential squares to zero"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-countable-choice, def-signed-morse-differential-over-the-integers, lem-boundary-orientation-of-compactified-one-dimensional-morse-moduli, thm-index-two-compactification-is-a-compact-one-manifold-with-boundary, lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count, lem-breaking-length-is-bounded-by-index-drop, def-chain-complex-in-an-abelian-category, def-integers, def-broken-morse-trajectory, def-morse-smale-pair]
 proof_strategy: direct

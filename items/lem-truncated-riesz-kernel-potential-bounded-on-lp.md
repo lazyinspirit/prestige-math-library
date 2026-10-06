@@ -2,7 +2,7 @@
 id: lem-truncated-riesz-kernel-potential-bounded-on-lp
 kind: lemma
 title: "The truncated Riesz kernel is bounded on $L^p$ of a bounded set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

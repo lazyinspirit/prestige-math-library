@@ -1,7 +1,7 @@
 ---
 page: abelian-varieties-base-change-and-arithmetic-models
 title: "Abelian Varieties, Base Change, and Arithmetic Models"
-status: draft
+status: published
 items:
   - def-group-scheme-over-a-scheme
   - lem-finite-etale-lifting-over-complete-dvr

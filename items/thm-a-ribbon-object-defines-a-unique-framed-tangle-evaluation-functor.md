@@ -2,7 +2,7 @@
 id: thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor
 kind: theorem
 title: "A ribbon object defines a unique framed-tangle evaluation functor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

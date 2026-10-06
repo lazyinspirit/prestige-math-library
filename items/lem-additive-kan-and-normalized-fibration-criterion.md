@@ -2,7 +2,7 @@
 id: lem-additive-kan-and-normalized-fibration-criterion
 kind: lemma
 title: "Additive Kan maps and the normalized fibration criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

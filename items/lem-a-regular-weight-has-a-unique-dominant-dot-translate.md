@@ -2,7 +2,7 @@
 id: lem-a-regular-weight-has-a-unique-dominant-dot-translate
 kind: lemma
 title: A regular weight has a unique dominant dot translate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

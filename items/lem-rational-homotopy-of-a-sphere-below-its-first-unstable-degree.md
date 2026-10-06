@@ -2,7 +2,7 @@
 id: lem-rational-homotopy-of-a-sphere-below-its-first-unstable-degree
 kind: lemma
 title: "Rational sphere homotopy below the first unstable degree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions
 kind: proposition
 title: "Finiteness and additivity of the Euler characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

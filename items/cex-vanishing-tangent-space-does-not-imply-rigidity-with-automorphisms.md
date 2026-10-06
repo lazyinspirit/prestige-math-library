@@ -2,7 +2,7 @@
 id: "cex-vanishing-tangent-space-does-not-imply-rigidity-with-automorphisms"
 kind: "counterexample"
 title: "Vanishing deformation tangent space does not force rigidity of the deformation groupoid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 17

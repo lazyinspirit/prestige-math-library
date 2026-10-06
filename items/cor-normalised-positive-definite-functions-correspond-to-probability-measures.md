@@ -25,7 +25,7 @@ sources:
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
   - title: "T. W. Koerner, Topological Groups (author PDF, Internet Archive snapshot of the dpmms.cam.ac.uk Topg.pdf file)"
     url: "https://web.archive.org/web/2024id_/https://www.dpmms.cam.ac.uk/~twk10/Topg.pdf"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

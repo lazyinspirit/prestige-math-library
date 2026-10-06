@@ -2,7 +2,7 @@
 id: ex-framed-zero-manifolds-and-signed-points
 kind: example
 title: "Framed zero-manifolds and signed points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

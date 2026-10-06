@@ -2,7 +2,7 @@
 id: lem-geometric-oscillation-decay-implies-a-holder-modulus
 kind: lemma
 title: "Geometric oscillation decay implies a Hölder modulus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

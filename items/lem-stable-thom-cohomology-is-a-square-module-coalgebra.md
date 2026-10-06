@@ -2,7 +2,7 @@
 id: lem-stable-thom-cohomology-is-a-square-module-coalgebra
 kind: lemma
 title: "Stable Thom cohomology is a square-module coalgebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

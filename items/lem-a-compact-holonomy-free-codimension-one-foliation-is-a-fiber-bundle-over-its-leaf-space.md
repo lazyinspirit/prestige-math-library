@@ -2,7 +2,7 @@
 id: lem-a-compact-holonomy-free-codimension-one-foliation-is-a-fiber-bundle-over-its-leaf-space
 kind: lemma
 title: A compact holonomy-free codimension-one foliation is fibered over its leaf space
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

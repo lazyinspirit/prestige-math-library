@@ -2,7 +2,7 @@
 id: ex-real-projective-space-shows-coefficient-dependent-perfectness
 kind: example
 title: "Real projective space shows coefficient-dependent perfectness"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

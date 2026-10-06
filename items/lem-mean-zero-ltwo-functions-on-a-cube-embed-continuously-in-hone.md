@@ -2,7 +2,7 @@
 id: lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone
 kind: lemma
 title: "Mean-zero L2 functions on a cube embed continuously into H1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

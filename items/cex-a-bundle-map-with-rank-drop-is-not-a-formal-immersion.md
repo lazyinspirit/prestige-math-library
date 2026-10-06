@@ -2,7 +2,7 @@
 id: cex-a-bundle-map-with-rank-drop-is-not-a-formal-immersion
 kind: counterexample
 title: "A bundle map with rank drop is not a formal immersion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-formal-immersion-between-smooth-manifolds, def-vector-bundle-map-over-a-smooth-base-map, def-smooth-vector-bundle-rank-fibre-and-trivial-bundle, def-differential-of-a-smooth-map]

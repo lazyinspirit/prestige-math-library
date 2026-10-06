@@ -2,7 +2,7 @@
 id: ex-broken-trajectories-in-an-index-two-torus-moduli-space
 kind: example
 title: "Broken trajectories in an index-two torus moduli space"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-every-smooth-vector-field-on-a-compact-manifold-is-complete, def-axiom-of-choice, lem-smooth-bump-between-concentric-euclidean-balls, def-downward-gradient-like-vector-field, def-morse-smale-pair, thm-index-two-compactification-is-a-compact-one-manifold-with-boundary, lem-gluing-broken-index-two-trajectories-gives-collar-ends, def-mod-two-morse-differential]
 proof_strategy: direct

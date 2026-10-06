@@ -2,7 +2,7 @@
 id: def-wave-equation-cauchy-data-and-wave-speed
 kind: definition
 title: "Wave equation, Cauchy data and wave speed"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-measurable-coefficients-with-a-holder-regular-weak-solution
 kind: example
 title: "Measurable coefficients with a Holder-regular weak solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

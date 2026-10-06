@@ -2,7 +2,7 @@
 id: lem-weyl-alternation-extracts-a-dominant-highest-weight-coefficient
 kind: lemma
 title: Weyl alternation extracts a dominant highest-weight coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: def-basic-arcs-admissible-curves-and-normal-form
 kind: definition
 title: "Basic arcs, admissible curves and the standard normal form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

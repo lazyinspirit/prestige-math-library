@@ -2,7 +2,7 @@
 id: thm-cauchy-integral-formula-and-cauchy-estimates-for-banach-valued-holomorphic-functions
 kind: theorem
 title: Cauchy integral formula and Cauchy estimates for Banach-valued holomorphic functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

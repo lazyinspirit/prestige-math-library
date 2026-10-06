@@ -2,7 +2,7 @@
 id: lem-cutoff-difference-quotient-commutator-estimate
 kind: lemma
 title: "The cutoff difference-quotient commutator estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-first-difference-quotient, lem-difference-quotient-integration-by-parts, thm-mean-value-inequality, thm-chain-rule-for-total-derivatives, def-translation-of-a-function-on-rn, cor-c-one-change-of-variables-for-l-one-functions, def-l-p-space-as-a-quotient-by-null-functions, def-sobolev-space-wkp-and-its-norm, def-countable-choice, lem-sobolev-integration-by-parts-for-dual-exponents, lem-weak-leibniz-rule-with-a-smooth-factor, lem-compact-support-zero-extension-in-wkp, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, lem-euclidean-bump-for-a-compact-set-inside-an-open-set]

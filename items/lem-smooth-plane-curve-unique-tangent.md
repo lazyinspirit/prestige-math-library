@@ -2,7 +2,7 @@
 id: lem-smooth-plane-curve-unique-tangent
 kind: lemma
 title: Multiplicity one characterises smooth points with a unique tangent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

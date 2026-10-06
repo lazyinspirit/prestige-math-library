@@ -2,7 +2,7 @@
 id: thm-entropy-solution-semigroup-on-lone
 kind: theorem
 title: The entropy solution semigroup on $L^1\cap L^\infty$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

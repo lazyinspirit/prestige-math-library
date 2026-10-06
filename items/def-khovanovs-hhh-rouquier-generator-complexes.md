@@ -2,7 +2,7 @@
 id: def-khovanovs-hhh-rouquier-generator-complexes
 kind: definition
 title: "Khovanov's generator complexes for the HHH construction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-reduced-type-a-polynomial-ring-for-hhh, def-unreduced-type-a-soergel-bimodules-and-the-trivial-polynomial-factor, def-positive-and-negative-rouquier-generator-complexes, def-rouquier-complex-of-a-braid-word, thm-rouquier-complex-is-well-defined-up-to-canonical-homotopy-equivalence, def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization]

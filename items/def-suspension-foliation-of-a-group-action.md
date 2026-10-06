@@ -2,7 +2,7 @@
 id: def-suspension-foliation-of-a-group-action
 kind: definition
 title: "The suspension foliation of a representation of the fundamental group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

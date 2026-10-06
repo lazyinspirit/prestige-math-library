@@ -2,7 +2,7 @@
 id: "lem-refined-giraud-maximal-contact"
 kind: "lemma"
 title: "Refined maximal-contact statement via the coefficient ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: cex-degree-zero-projection-is-exact-cocontinuous-but-not-graded-tensor
 kind: counterexample
 title: The degree-zero projection is exact and cocontinuous but not a graded tensor functor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-graded-eilenberg-watts-with-coherent-shifts, def-coherently-shift-compatible-functor-and-natural-transformation, def-graded-ring-module-bimodule-and-internal-shift, lem-internal-shift-endofunctors-and-tensor-compatibility, lem-graded-degreewise-direct-sums-and-homogeneous-free-covers, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, lem-graded-tensor-functor-is-k-linear-right-exact-coproduct-preserving-and-shift-coherent, lem-graded-additive-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving, def-left-exact-and-right-exact-functor, def-exact-functor-between-abelian-categories, def-preservation-reflection-creation-continuity-and-cocontinuity, thm-unit-isomorphisms-for-module-tensor-products, def-field, def-additive-functor, def-k-linear-category-and-k-linear-functor, thm-an-additive-functor-is-exact-exactly-when-it-preserves-kernels-and-cokernels]

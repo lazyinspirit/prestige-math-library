@@ -2,7 +2,7 @@
 id: lem-projectives-covering-the-simple-objects-generate-every-finite-length-object
 kind: lemma
 title: "Projective epimorphisms onto the simples generate every finite-length object"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

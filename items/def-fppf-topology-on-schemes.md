@@ -2,7 +2,7 @@
 id: def-fppf-topology-on-schemes
 kind: definition
 title: "Fppf coverings and the fppf site"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

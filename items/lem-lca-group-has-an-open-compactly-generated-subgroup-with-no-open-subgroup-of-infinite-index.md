@@ -2,7 +2,7 @@
 id: lem-lca-group-has-an-open-compactly-generated-subgroup-with-no-open-subgroup-of-infinite-index
 kind: lemma
 title: Every LCA group has an open compactly generated subgroup with no open subgroup of infinite index
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

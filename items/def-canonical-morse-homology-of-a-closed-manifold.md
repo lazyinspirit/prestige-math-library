@@ -2,7 +2,7 @@
 id: def-canonical-morse-homology-of-a-closed-manifold
 kind: definition
 title: "Canonical Morse homology of a closed manifold"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

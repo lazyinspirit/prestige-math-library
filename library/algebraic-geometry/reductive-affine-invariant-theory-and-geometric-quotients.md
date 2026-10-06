@@ -1,7 +1,7 @@
 ---
 page: reductive-affine-invariant-theory-and-geometric-quotients
 title: "Reductive Affine Invariant Theory and Geometric Quotients"
-status: draft
+status: published
 requires: [algebraic-group-actions-orbits-stabilizers-and-controlled-quotients,
            classical-complex-algebraic-actions-and-affine-embeddings,
            quasi-coherent-and-coherent-sheaves-and-vector-bundles,

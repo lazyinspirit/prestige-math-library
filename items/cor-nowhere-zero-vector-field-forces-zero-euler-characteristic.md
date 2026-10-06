@@ -2,7 +2,7 @@
 id: cor-nowhere-zero-vector-field-forces-zero-euler-characteristic
 kind: corollary
 title: "A nowhere-zero vector field forces zero Euler characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

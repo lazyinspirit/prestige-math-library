@@ -2,7 +2,7 @@
 id: lem-tensor-products-of-primitive-vectors
 kind: lemma
 title: "Tensor products of primitive vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 27

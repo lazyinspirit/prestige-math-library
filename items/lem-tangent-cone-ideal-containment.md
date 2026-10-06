@@ -2,7 +2,7 @@
 id: lem-tangent-cone-ideal-containment
 kind: lemma
 title: Coprime tangent cones force a power of the maximal ideal into the local ideal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 3

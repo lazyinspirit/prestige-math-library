@@ -2,7 +2,7 @@
 id: lem-surface-generic-power-series-formal-fibres
 kind: lemma
 title: Surface generic power series formal fibres
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

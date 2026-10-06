@@ -2,7 +2,7 @@
 id: lem-normal-stiefel-whitney-class-is-the-multiplicative-inverse-of-the-tangent-class
 kind: lemma
 title: "The normal Stiefel-Whitney class is the multiplicative inverse of the tangent class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: ["def-stable-normal-inverse-of-the-tangent-bundle", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "lem-second-countable-smooth-manifolds-have-cw-homotopy-type", "def-singular-cohomology-ring", "def-axiom-of-choice", thm-singular-cohomology-is-graded-commutative]

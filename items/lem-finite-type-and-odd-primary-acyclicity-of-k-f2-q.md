@@ -2,7 +2,7 @@
 id: lem-finite-type-and-odd-primary-acyclicity-of-k-f2-q
 kind: lemma
 title: "Finite type and odd-primary acyclicity of K(F₂,q)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

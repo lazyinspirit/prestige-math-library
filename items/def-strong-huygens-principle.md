@@ -2,7 +2,7 @@
 id: def-strong-huygens-principle
 kind: definition
 title: "The strong Huygens principle in the homogeneous Cauchy setting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

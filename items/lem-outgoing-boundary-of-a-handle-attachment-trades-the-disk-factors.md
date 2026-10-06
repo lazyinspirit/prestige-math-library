@@ -2,7 +2,7 @@
 id: "lem-outgoing-boundary-of-a-handle-attachment-trades-the-disk-factors"
 kind: "lemma"
 title: "The outgoing boundary of a handle attachment trades the disk factors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

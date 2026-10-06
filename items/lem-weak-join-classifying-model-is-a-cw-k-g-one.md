@@ -2,7 +2,7 @@
 id: lem-weak-join-classifying-model-is-a-cw-k-g-one
 kind: lemma
 title: "The weak-join model is a CW K(G,1)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

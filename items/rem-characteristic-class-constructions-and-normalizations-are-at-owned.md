@@ -2,7 +2,7 @@
 id: rem-characteristic-class-constructions-and-normalizations-are-at-owned
 kind: remark
 title: "Characteristic-class constructions and normalizations are owned by algebraic topology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-stiefel-whitney-classes-from-the-projective-bundle-relation, def-pontryagin-classes-by-complexification, def-thom-class-by-fiberwise-normalization, thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes, def-stiefel-whitney-number-of-a-closed-manifold, def-pontryagin-number-of-a-closed-oriented-manifold]

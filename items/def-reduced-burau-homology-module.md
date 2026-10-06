@@ -2,7 +2,7 @@
 id: def-reduced-burau-homology-module
 kind: definition
 title: "The reduced Burau homology module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

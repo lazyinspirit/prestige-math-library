@@ -2,7 +2,7 @@
 id: ex-a-fibration-over-the-circle-has-zero-godbillon-vey-class
 kind: example
 title: "A fibration over the circle has zero Godbillon-Vey class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

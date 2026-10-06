@@ -2,7 +2,7 @@
 id: lem-schwartz-periodisation-over-a-lattice-is-smooth-and-uniformly-summable
 kind: lemma
 title: "Schwartz periodisation over a lattice is smooth with locally uniformly summable derivatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

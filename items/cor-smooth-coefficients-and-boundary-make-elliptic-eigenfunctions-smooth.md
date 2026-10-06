@@ -2,7 +2,7 @@
 id: cor-smooth-coefficients-and-boundary-make-elliptic-eigenfunctions-smooth
 kind: corollary
 title: "Smooth coefficients and boundary make elliptic eigenfunctions smooth"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: cex-an-lone-function-with-nonzero-integral-is-not-in-real-hone
 kind: counterexample
 title: "A compactly supported $L^1$ function of nonzero integral is not in $H^1$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

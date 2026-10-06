@@ -2,7 +2,7 @@
 id: lem-arith-projective-weak-model-and-rational-mapping
 kind: lemma
 title: "Projective weak models and rational mapping"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

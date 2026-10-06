@@ -2,7 +2,7 @@
 id: lem-orientation-twisted-diagonal-realizes-the-lefschetz-trace
 kind: lemma
 title: The orientation-twisted diagonal realizes the Lefschetz trace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

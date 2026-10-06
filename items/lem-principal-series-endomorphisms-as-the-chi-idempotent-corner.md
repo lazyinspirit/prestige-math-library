@@ -2,7 +2,7 @@
 id: lem-principal-series-endomorphisms-as-the-chi-idempotent-corner
 kind: lemma
 title: "Principal series endomorphisms as the chi-idempotent corner"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

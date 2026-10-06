@@ -2,7 +2,7 @@
 id: lem-normalizer-action-permutes-weight-spaces
 kind: lemma
 title: "The normalizer of the torus permutes weight spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 28

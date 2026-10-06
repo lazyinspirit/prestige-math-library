@@ -2,7 +2,7 @@
 id: cex-rational-modules-need-not-be-semisimple-in-characteristic-p
 kind: counterexample
 title: "Rational modules need not be semisimple in characteristic p"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 38

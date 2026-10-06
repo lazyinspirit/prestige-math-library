@@ -2,7 +2,7 @@
 id: cex-bounded-measurable-nondivergence-coefficients-do-not-give-schauder-estimates
 kind: counterexample
 title: Bounded measurable coefficients do not give Schauder estimates
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

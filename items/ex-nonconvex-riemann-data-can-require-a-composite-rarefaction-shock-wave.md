@@ -2,7 +2,7 @@
 id: ex-nonconvex-riemann-data-can-require-a-composite-rarefaction-shock-wave
 kind: example
 title: Nonconvex Riemann data can require a composite shock--rarefaction wave
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

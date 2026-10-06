@@ -2,7 +2,7 @@
 id: lem-setting-a-to-zero-in-a-closed-kr-factorization-gives-the-wide-edge-koszul-complex
 kind: lemma
 title: "Setting a to zero in a closed KR factorization gives the layer-by-layer Koszul complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-unreduced-type-a-soergel-bimodules-and-the-trivial-polynomial-factor, def-factorization-of-a-marked-moy-graph, def-arc-and-wide-edge-khovanov-rozansky-factorizations, def-bigraded-matrix-factorization-with-potential, def-koszul-complex-of-a-sequence-with-coefficients, lem-koszul-complex-concatenation-tensor-isomorphism]

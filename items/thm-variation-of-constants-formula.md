@@ -2,7 +2,7 @@
 id: thm-variation-of-constants-formula
 kind: theorem
 title: "Variation of constants for the inhomogeneous abstract Cauchy problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

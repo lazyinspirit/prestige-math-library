@@ -2,7 +2,7 @@
 id: lem-rational-first-hurewicz-after-killing-lower-torsion-homotopy
 kind: lemma
 title: "First rational Hurewicz after killing lower torsion homotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

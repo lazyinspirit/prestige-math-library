@@ -2,7 +2,7 @@
 id: prop-pullback-foliation-under-a-transverse-map
 kind: proposition
 title: "The pullback foliation under a transverse map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

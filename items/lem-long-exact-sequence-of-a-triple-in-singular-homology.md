@@ -2,7 +2,7 @@
 id: lem-long-exact-sequence-of-a-triple-in-singular-homology
 kind: lemma
 title: "Long exact sequence of a triple in singular homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

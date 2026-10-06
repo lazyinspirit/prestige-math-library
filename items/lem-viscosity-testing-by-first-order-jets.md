@@ -2,7 +2,7 @@
 id: lem-viscosity-testing-by-first-order-jets
 kind: lemma
 title: Viscosity testing by first-order jets, and closure of the jet inequality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

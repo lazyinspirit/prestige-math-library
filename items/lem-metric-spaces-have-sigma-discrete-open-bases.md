@@ -2,7 +2,7 @@
 id: lem-metric-spaces-have-sigma-discrete-open-bases
 kind: lemma
 title: 'Under choice, metric spaces have sigma-discrete open bases'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

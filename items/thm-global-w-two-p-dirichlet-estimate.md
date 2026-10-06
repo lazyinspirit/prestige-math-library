@@ -2,7 +2,7 @@
 id: thm-global-w-two-p-dirichlet-estimate
 kind: theorem
 title: Global $W^{2,p}$ Dirichlet estimate on a $C^{1,1}$ domain
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

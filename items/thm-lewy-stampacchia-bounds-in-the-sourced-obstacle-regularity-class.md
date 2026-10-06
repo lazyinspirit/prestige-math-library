@@ -2,7 +2,7 @@
 id: "thm-lewy-stampacchia-bounds-in-the-sourced-obstacle-regularity-class"
 kind: "theorem"
 title: "Lewy–Stampacchia distribution bound for bounded-coefficient obstacle forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 11

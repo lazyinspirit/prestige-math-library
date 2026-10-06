@@ -2,7 +2,7 @@
 id: lem-psl-two-seven-is-simple-of-order-168
 kind: lemma
 title: 'PSL(2,7) is a nonabelian simple group of order 168'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

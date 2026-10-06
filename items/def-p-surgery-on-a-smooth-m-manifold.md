@@ -2,7 +2,7 @@
 id: "def-p-surgery-on-a-smooth-m-manifold"
 kind: "definition"
 title: "p-surgery on a smooth m-manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

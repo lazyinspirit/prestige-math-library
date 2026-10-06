@@ -2,7 +2,7 @@
 id: lem-graded-grothendieck-group-of-a-m-is-free-on-the-shifted-vertex-projectives
 kind: lemma
 title: "The graded Grothendieck group is free on the vertex-projective classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

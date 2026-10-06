@@ -2,7 +2,7 @@
 id: def-algebraic-stack-and-inertia
 kind: definition
 title: "Algebraic stacks and their inertia stacks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 6

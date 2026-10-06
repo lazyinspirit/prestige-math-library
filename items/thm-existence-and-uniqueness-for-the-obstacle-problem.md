@@ -2,7 +2,7 @@
 id: "thm-existence-and-uniqueness-for-the-obstacle-problem"
 kind: "theorem"
 title: "Existence and uniqueness for the obstacle problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 9

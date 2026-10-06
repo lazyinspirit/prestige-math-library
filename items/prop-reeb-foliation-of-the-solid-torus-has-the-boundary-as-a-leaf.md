@@ -2,7 +2,7 @@
 id: prop-reeb-foliation-of-the-solid-torus-has-the-boundary-as-a-leaf
 kind: proposition
 title: "The Reeb foliation of the solid torus has the boundary as a leaf"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

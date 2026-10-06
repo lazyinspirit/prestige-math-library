@@ -2,7 +2,7 @@
 id: ex-kernel-end-and-coend-distinguish-regular-and-coregular-bimodules
 kind: example
 title: "The kernel end and coend distinguish the regular and co-regular bimodules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-algebra-over-a-commutative-ring, def-algebraic-dual-and-linear-functional, def-bimodule, def-dimension, def-end-and-coend, def-generated-cyclic-finitely-generated-and-free-modules, def-left-and-right-modules, def-left-and-right-nakayama-functors-by-finite-kernel-calculus, def-linear-map, def-natural-isomorphism, def-vector-space, lem-finite-eilenberg-watts-kernel-end-and-coend-exist-with-explicit-universal-maps, lem-nakayama-kernels-give-well-defined-adjoint-functors, prop-functoriality-of-module-tensor-products, prop-left-to-right-exact-equivalence-sends-identity-to-nakayama, thm-universal-property-of-module-tensor-products]

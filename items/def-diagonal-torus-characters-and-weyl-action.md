@@ -2,7 +2,7 @@
 id: def-diagonal-torus-characters-and-weyl-action
 kind: definition
 title: "Diagonal torus characters and the Weyl action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

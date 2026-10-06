@@ -2,7 +2,7 @@
 id: thm-energy-uniqueness-for-the-homogeneous-heat-equation
 kind: theorem
 title: Energy uniqueness for the homogeneous heat equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

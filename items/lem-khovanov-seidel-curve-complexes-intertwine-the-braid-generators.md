@@ -2,7 +2,7 @@
 id: lem-khovanov-seidel-curve-complexes-intertwine-the-braid-generators
 kind: lemma
 title: "Curve complexes intertwine the braid generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

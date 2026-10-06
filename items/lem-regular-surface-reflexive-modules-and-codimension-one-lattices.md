@@ -2,7 +2,7 @@
 id: lem-regular-surface-reflexive-modules-and-codimension-one-lattices
 kind: lemma
 title: Reflexive surface modules and codimension-one lattice extension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

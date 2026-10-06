@@ -1,7 +1,7 @@
 ---
 page: mackeys-imprimitivity-theorem
 title: Mackeys Imprimitivity Theorem
-status: draft
+status: published
 items:
   - def-system-of-imprimitivity
   - def-transformation-algebra-of-a-g-space

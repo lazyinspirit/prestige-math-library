@@ -2,7 +2,7 @@
 id: lem-fixed-cap-transverse-product-glues-by-unique-transverse-flow-roots
 kind: lemma
 title: "A fixed cap product glues by unique transverse flow roots"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

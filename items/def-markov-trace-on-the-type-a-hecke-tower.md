@@ -2,7 +2,7 @@
 id: def-markov-trace-on-the-type-a-hecke-tower
 kind: definition
 title: "The Markov trace on the type-A Hecke tower"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

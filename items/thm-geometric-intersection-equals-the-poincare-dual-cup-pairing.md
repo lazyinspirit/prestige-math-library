@@ -2,7 +2,7 @@
 id: thm-geometric-intersection-equals-the-poincare-dual-cup-pairing
 kind: theorem
 title: "The geometric intersection number is the Poincare-dual cup pairing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-geometric-intersection-pairing-on-a-closed-oriented-manifold, lem-geometric-intersection-descends-through-oriented-cobordism-of-cycles, lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold, lem-normal-bundle-of-the-zero-locus-of-a-transverse-section, lem-pullback-of-the-thom-class-along-a-transverse-section, prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual, def-cap-duality-map-for-an-oriented-manifold, thm-poincare-duality-for-oriented-topological-manifolds, def-cap-product-with-cohomology-first, thm-cap-product-boundary-identity, prop-cap-product-naturality-and-projection-formula, def-relative-cap-product, def-kronecker-evaluation-pairing, cor-poincare-duality-gives-a-nonsingular-cup-pairing, thm-singular-cohomology-is-graded-commutative, thm-excision-for-singular-cohomology, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls, def-local-oriented-intersection-sign, def-oriented-intersection-number, def-thom-class-by-fiberwise-normalization, thm-naturality-and-uniqueness-of-thom-classes, def-tubular-neighbourhood-of-an-embedded-submanifold, def-fundamental-class-of-a-compact-oriented-manifold, def-axiom-of-choice, cor-homotopic-maps-induce-the-same-map-on-singular-homology, def-transverse-embedded-submanifolds, lem-compact-transverse-complementary-intersections-are-finite, lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space, thm-transversality-homotopy-theorem]

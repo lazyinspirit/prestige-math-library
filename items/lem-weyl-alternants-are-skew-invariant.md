@@ -2,7 +2,7 @@
 id: lem-weyl-alternants-are-skew-invariant
 kind: lemma
 title: Weyl alternants are skew-invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

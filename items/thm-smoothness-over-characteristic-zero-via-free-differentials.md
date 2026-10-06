@@ -2,7 +2,7 @@
 id: thm-smoothness-over-characteristic-zero-via-free-differentials
 kind: theorem
 title: "Smoothness over a characteristic-zero field via free differentials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: ["lem-free-differentials-imply-regular-in-characteristic-zero", "thm-ag-perfect-field-jacobian-regularity", "thm-ag-standard-smooth-geometric-regularity", "thm-differentials-smooth-locally-free", "def-smooth-morphism-schemes", "def-sheaf-relative-differentials", "def-locally-finite-presentation-morphism", "def-locally-finite-type-and-finite-type-morphism", "cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented", "def-ag-standard-smooth-algebra", "def-perfect-field", "def-axiom-of-choice", "lem-sheaf-differentials-affine-compatibility", "lem-field-is-noetherian", "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect"]

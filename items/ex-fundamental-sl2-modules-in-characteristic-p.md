@@ -2,7 +2,7 @@
 id: ex-fundamental-sl2-modules-in-characteristic-p
 kind: example
 title: "The simple modules of SL_2 and its fundamental representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 37

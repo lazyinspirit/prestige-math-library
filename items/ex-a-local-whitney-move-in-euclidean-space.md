@@ -25,7 +25,7 @@ sources:
       2002; complete electronic copy)
     url: https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro
     locator: Proof of Theorem 7.27, printed pp. 139-140 (the final isotopy "given on p. 74 of Milnor")
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

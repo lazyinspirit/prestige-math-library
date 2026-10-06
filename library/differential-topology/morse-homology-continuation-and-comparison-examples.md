@@ -1,7 +1,7 @@
 ---
 page: morse-homology-continuation-and-comparison-examples
 title: Morse Homology Continuation and Comparison — Examples
-status: draft
+status: published
 items: []
 examples: [ex-relative-morse-homology-of-a-single-handle-cobordism, ex-morse-and-cellular-boundaries-for-a-surface-handle-presentation, cex-a-nonproper-noncompact-morse-function-can-lose-continuation-trajectories-at-infinity, ex-continuation-across-a-birth-death-adds-an-acyclic-pair, ex-two-morse-functions-on-the-circle-have-isomorphic-morse-homology]
 ---

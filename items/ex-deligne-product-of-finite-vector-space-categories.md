@@ -2,7 +2,7 @@
 id: ex-deligne-product-of-finite-vector-space-categories
 kind: example
 title: "The Deligne product of finite vector spaces is finite vector spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-axiom-of-choice, def-abelian-category, def-algebra-over-a-commutative-ring, def-deligne-product-of-finite-linear-categories, def-dimension, def-equivalence-and-adjoint-equivalence-of-categories, def-k-linear-category-and-k-linear-functor, def-vector-space, thm-finite-deligne-products-exist-by-tensor-product-algebras, thm-tensor-product-of-algebras-over-a-commutative-ring]

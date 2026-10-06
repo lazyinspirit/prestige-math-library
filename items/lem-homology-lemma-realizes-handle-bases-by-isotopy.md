@@ -2,7 +2,7 @@
 id: lem-homology-lemma-realizes-handle-bases-by-isotopy
 kind: lemma
 title: 'Homology lemma: a handle-basis class is realized by a sphere meeting the belt sphere once'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 8

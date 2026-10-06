@@ -2,7 +2,7 @@
 id: lem-positive-codimension-thickening-reduces-closed-sources-to-the-open-case
 kind: lemma
 title: "Positive-codimension thickening reduces closed sources to the open case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-smooth-partitions-of-unity-exist-on-manifolds, thm-smale-hirsch-for-open-source-manifolds, def-normal-bundle-of-a-formal-immersion, lem-formal-immersion-gives-the-tangent-normal-bundle-identity, def-formal-immersion-between-smooth-manifolds, def-space-of-immersions-and-space-of-formal-immersions, lem-the-disk-bundle-of-a-smooth-vector-bundle-is-a-compact-manifold-with-boundary, def-whitney-sum-of-vector-bundles, cor-every-vector-subbundle-has-a-smooth-complement, thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric, thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space, thm-euclidean-tubular-neighbourhood-theorem, lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section, def-tubular-neighbourhood-of-an-embedded-submanifold, def-normal-and-conormal-bundles-of-an-embedded-submanifold, thm-euclidean-inverse-function-theorem, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, def-hurewicz-and-serre-fibrations, def-weak-homotopy-equivalence, lem-formal-immersion-homotopies-extend-over-a-collar, def-countable-choice]

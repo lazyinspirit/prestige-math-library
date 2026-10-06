@@ -2,7 +2,7 @@
 id: lem-projective-regular-local-base-coherent-duality-by-embedding
 kind: lemma
 title: "Projective coherent duality over a regular local base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

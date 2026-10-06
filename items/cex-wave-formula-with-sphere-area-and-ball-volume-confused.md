@@ -2,7 +2,7 @@
 id: cex-wave-formula-with-sphere-area-and-ball-volume-confused
 kind: counterexample
 title: "Replacing the sphere measure by the ball measure in Kirchhoff's formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 8

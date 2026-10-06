@@ -2,7 +2,7 @@
 id: lem-square-tangent-conic-blowup-singularities-controlled-by-a-cubic
 kind: lemma
 title: "A square-conic blowup has cubic-controlled singular successors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 15

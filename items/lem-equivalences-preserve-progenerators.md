@@ -2,7 +2,7 @@
 id: lem-equivalences-preserve-progenerators
 kind: lemma
 title: "Equivalences preserve small projective generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 1

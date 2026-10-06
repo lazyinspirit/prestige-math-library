@@ -2,7 +2,7 @@
 id: "lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound"
 kind: "lemma"
 title: "Testing a coercive weak solution with itself gives the energy bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 5

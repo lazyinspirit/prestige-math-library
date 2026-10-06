@@ -2,7 +2,7 @@
 id: thm-radix-two-fft-correctness
 kind: theorem
 title: "Correctness of the recursive radix-two FFT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

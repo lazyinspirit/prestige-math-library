@@ -2,7 +2,7 @@
 id: lem-difference-quotient-integration-by-parts
 kind: lemma
 title: "Difference-quotient calculus: integration by parts, product rule, commutation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps: [def-first-difference-quotient, def-translation-of-a-function-on-rn, def-weak-derivative-of-a-locally-integrable-function, def-conjugate-exponents, def-l-p-space-as-a-quotient-by-null-functions, cor-c-one-change-of-variables-for-l-one-functions, thm-holder-inequality-for-integrals, def-countable-choice]

@@ -2,7 +2,7 @@
 id: lem-index-sum-of-an-outward-field-is-the-gauss-degree
 kind: lemma
 title: "The index sum of an outward field is the Gauss degree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

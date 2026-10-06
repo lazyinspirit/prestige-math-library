@@ -2,7 +2,7 @@
 id: ex-kostant-n-cohomology-for-sl2
 kind: example
 title: "Kostant cohomology for sl2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 6

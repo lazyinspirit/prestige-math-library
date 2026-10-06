@@ -2,7 +2,7 @@
 id: lem-a-reeb-component-obstructs-tautness
 kind: lemma
 title: A Reeb component obstructs tautness
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

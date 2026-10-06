@@ -2,7 +2,7 @@
 id: lem-lifting-idempotents-in-complete-deformation-algebras
 kind: lemma
 title: "Idempotents lift through adically complete quotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

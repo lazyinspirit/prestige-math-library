@@ -2,7 +2,7 @@
 id: cor-a-p-classes-are-open-in-the-exponent
 kind: corollary
 title: The A_p classes are open in the exponent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

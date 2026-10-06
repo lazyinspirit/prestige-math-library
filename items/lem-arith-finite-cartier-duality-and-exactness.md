@@ -2,7 +2,7 @@
 id: lem-arith-finite-cartier-duality-and-exactness
 kind: lemma
 title: "Finite Cartier duality, exactness and exponent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

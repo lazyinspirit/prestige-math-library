@@ -1,7 +1,7 @@
 ---
 page: heat-equation-maximum-principles-duhamel-and-smoothing
 title: Heat Equation Maximum Principles Duhamel and Smoothing
-status: draft
+status: published
 items:
   - def-parabolic-cylinder-and-parabolic-boundary
   - lem-negative-semidefinite-hessian-at-an-interior-local-maximum

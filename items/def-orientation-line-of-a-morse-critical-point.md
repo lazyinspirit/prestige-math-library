@@ -2,7 +2,7 @@
 id: def-orientation-line-of-a-morse-critical-point
 kind: definition
 title: "The orientation line of a Morse critical point"
-status: draft
+status: published
 origin: pipeline
 deps: [def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space, def-stable-and-unstable-sets-of-a-critical-point, thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces, lem-stable-and-unstable-manifolds-are-flow-invariant, def-nondegenerate-critical-point-nullity-index-and-coindex, def-morse-smale-pair]
 provenance:

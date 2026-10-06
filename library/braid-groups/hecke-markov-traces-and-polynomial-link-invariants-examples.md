@@ -1,7 +1,7 @@
 ---
 page: hecke-markov-traces-and-polynomial-link-invariants-examples
 title: "Hecke Markov Traces and Polynomial Link Invariants — Examples"
-status: draft
+status: published
 requires: [hecke-markov-traces-and-polynomial-link-invariants]
 items: []
 examples: [ex-the-burau-determinant-for-a-two-strand-torus-link,

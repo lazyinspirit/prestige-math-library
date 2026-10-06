@@ -2,7 +2,7 @@
 id: lem-standard-levi-subgroup
 kind: lemma
 title: Standard Levi subgroups of a split reductive group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 28

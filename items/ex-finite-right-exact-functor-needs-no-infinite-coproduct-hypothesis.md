@@ -2,7 +2,7 @@
 id: ex-finite-right-exact-functor-needs-no-infinite-coproduct-hypothesis
 kind: example
 title: "A finite right exact functor needs no infinite-coproduct hypothesis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 6

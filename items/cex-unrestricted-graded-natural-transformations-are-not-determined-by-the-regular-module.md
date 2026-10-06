@@ -2,7 +2,7 @@
 id: cex-unrestricted-graded-natural-transformations-are-not-determined-by-the-regular-module
 kind: counterexample
 title: Unrestricted graded natural transformations are not determined by the regular module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [cor-graded-bimodule-maps-classify-shift-compatible-transformations, def-coherently-shift-compatible-functor-and-natural-transformation, def-graded-ring-module-bimodule-and-internal-shift, def-natural-transformation, thm-unit-isomorphisms-for-module-tensor-products, def-field]

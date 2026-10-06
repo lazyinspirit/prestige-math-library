@@ -2,7 +2,7 @@
 id: def-compact-parameter-pair
 kind: definition
 title: "Compact parameter pairs and relative families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-countable-choice, def-formal-immersion-between-smooth-manifolds, def-weak-compact-open-smooth-topology-on-mapping-spaces, def-space-of-immersions-and-space-of-formal-immersions, def-smooth-manifold, def-compact-space, def-smooth-family-of-maps-and-evaluation-map, def-homotopy-relative-and-path-homotopy, thm-the-exponential-law, def-compact-open-topology]

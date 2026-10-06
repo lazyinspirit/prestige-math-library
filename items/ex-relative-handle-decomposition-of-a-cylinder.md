@@ -2,7 +2,7 @@
 id: ex-relative-handle-decomposition-of-a-cylinder
 kind: example
 title: "The relative handle decomposition of a cylinder"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-smooth-cobordism-triad-for-morse-theory, def-handle-decomposition-relative-to-the-incoming-boundary, lem-product-cobordisms-have-critical-point-free-presentations, def-smooth-manifold, def-smooth-map-between-manifolds-with-boundary]

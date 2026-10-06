@@ -2,7 +2,7 @@
 id: ex-normalized-comparison-maps-around-a-relation-loop
 kind: example
 title: "Normalized comparison maps around a relation loop"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

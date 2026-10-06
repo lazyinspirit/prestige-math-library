@@ -2,7 +2,7 @@
 id: thm-rsk-shape-of-a-uniform-random-permutation-has-plancherel-law
 kind: theorem
 title: "The RSK shape of a uniform random permutation has the Plancherel law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 proof_strategy: direct

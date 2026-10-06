@@ -2,7 +2,7 @@
 id: lem-resultant-detects-common-projective-point
 kind: lemma
 title: The resultant detects finitely many common projective points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

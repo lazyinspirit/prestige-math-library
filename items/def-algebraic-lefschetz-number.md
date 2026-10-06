@@ -2,7 +2,7 @@
 id: def-algebraic-lefschetz-number
 kind: definition
 title: "Algebraic Lefschetz number via rational homology traces"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

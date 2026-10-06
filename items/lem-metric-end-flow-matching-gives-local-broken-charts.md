@@ -2,7 +2,7 @@
 id: lem-metric-end-flow-matching-gives-local-broken-charts
 kind: lemma
 title: Finite flow matching gives local charts at metric-end broken trajectories
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

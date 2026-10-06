@@ -2,7 +2,7 @@
 id: "cex-neumann-poisson-problem-is-not-coercive-on-all-of-h-one"
 kind: "counterexample"
 title: "The Neumann Poisson problem is not coercive on all of $H^1$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 6

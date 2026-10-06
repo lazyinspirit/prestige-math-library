@@ -2,7 +2,7 @@
 id: def-deformation-to-the-normal-cone-and-specialization
 kind: definition
 title: "Deformation to the normal cone and specialization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 5

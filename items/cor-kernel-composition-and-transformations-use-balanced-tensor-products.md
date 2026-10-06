@@ -2,7 +2,7 @@
 id: cor-kernel-composition-and-transformations-use-balanced-tensor-products
 kind: corollary
 title: "Composition of Deligne kernels is balanced tensor product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-abelian-category, def-bimodule, def-k-linear-category-and-k-linear-functor, def-left-exact-and-right-exact-functor, def-morita-bicategory-of-rings-and-bimodules, def-natural-transformation, lem-bimodule-tensor-associators-and-unitors-satisfy-bicategory-coherence, lem-finite-eilenberg-watts-kernel-end-and-coend-exist-with-explicit-universal-maps, thm-associativity-of-balanced-tensor-products, thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories, thm-natural-transformations-of-tensor-functors-are-bimodule-maps, thm-unit-isomorphisms-for-module-tensor-products]

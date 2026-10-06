@@ -2,7 +2,7 @@
 id: cor-uniqueness-of-bounded-uniformly-continuous-viscosity-solutions
 kind: corollary
 title: Uniqueness and sup-norm contraction for the Cauchy problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 deps:

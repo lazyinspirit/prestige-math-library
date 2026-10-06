@@ -2,7 +2,7 @@
 id: lem-characteristic-numbers-of-products-follow-the-whitney-sum-and-kunneth-formulas
 kind: lemma
 title: "Characteristic numbers of products satisfy the Whitney-sum and Kunneth product formulas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-kronecker-pairing-is-multiplicative-under-cross-products, lem-fundamental-class-of-a-product-of-closed-manifolds, def-stiefel-whitney-number-of-a-closed-manifold, def-pontryagin-number-of-a-closed-oriented-manifold, thm-canonical-tangent-and-cotangent-splittings-for-products, thm-whitney-sum-formula-for-stiefel-whitney-classes, thm-naturality-of-stiefel-whitney-classes, thm-pontryagin-whitney-product-away-from-two, thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, cor-field-kunneth-isomorphism-for-homology-of-products, def-kronecker-evaluation-pairing, def-pontryagin-classes-by-complexification, thm-naturality-normalization-and-whitney-sum-for-chern-classes, cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion, prop-complexification-is-conjugation-invariant, lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives, def-axiom-of-choice, thm-top-homology-characterizes-compact-orientable-manifolds, cor-cohomology-over-a-field-is-dual-to-homology-over-that-field]

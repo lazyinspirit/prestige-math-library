@@ -2,7 +2,7 @@
 id: lem-trivial-simplicial-fibration-fibres-products-and-contraction
 kind: lemma
 title: "Trivial simplicial fibrations lift monomorphisms and have contractible products of fibres"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

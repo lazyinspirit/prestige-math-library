@@ -2,7 +2,7 @@
 id: cor-strong-maximum-principle-for-weak-elliptic-solutions
 kind: corollary
 title: "Strong maximum principle for weak elliptic solutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

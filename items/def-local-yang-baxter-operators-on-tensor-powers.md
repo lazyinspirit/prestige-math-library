@@ -2,7 +2,7 @@
 id: def-local-yang-baxter-operators-on-tensor-powers
 kind: definition
 title: "Local Yang–Baxter operators on tensor powers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 1

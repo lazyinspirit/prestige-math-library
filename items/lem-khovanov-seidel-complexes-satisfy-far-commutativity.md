@@ -2,7 +2,7 @@
 id: lem-khovanov-seidel-complexes-satisfy-far-commutativity
 kind: lemma
 title: "Far commutativity of the generator complexes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

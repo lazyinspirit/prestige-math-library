@@ -2,7 +2,7 @@
 id: ex-gm-on-projective-line-with-two-linearizations
 kind: example
 title: GIT quotients of the projective line for different linearizations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 12

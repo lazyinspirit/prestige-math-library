@@ -2,7 +2,7 @@
 id: cor-eigenfunctions-for-distinct-symmetric-elliptic-eigenvalues-are-ltwo-orthogonal
 kind: corollary
 title: "Eigenfunctions for distinct symmetric elliptic eigenvalues are $L^2$-orthogonal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 9

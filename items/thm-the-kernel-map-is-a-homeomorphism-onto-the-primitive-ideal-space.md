@@ -31,7 +31,7 @@ sources:
     - title: "J. M. G. Fell, The dual spaces of C*-algebras (Transactions of the American Mathematical Society 94, 1960)"
       url: "https://www.ams.org/journals/tran/1960-094-03/S0002-9947-1960-0146681-0/S0002-9947-1960-0146681-0.pdf"
       locator: "Attribution only: the general C*-algebra duality results are not consumed; the local closure identity is proved here from the listed suppliers"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

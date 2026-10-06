@@ -2,7 +2,7 @@
 id: lem-elliptic-resolvent-identity
 kind: lemma
 title: "The elliptic resolvent identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13

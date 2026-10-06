@@ -2,7 +2,7 @@
 id: cex-pointwise-shock-values-do-not-affect-the-weak-solution
 kind: counterexample
 title: Pointwise shock values do not affect the weak solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 3

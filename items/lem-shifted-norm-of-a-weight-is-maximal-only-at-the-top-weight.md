@@ -2,7 +2,7 @@
 id: lem-shifted-norm-of-a-weight-is-maximal-only-at-the-top-weight
 kind: lemma
 title: The shifted norm of a weight is maximal only at the top weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

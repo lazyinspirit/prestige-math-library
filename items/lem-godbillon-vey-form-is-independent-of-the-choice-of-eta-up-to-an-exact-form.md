@@ -2,7 +2,7 @@
 id: lem-godbillon-vey-form-is-independent-of-the-choice-of-eta-up-to-an-exact-form
 kind: lemma
 title: "Independence of the auxiliary form eta up to exact forms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

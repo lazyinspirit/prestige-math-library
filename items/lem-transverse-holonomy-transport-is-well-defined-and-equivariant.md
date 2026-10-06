@@ -2,7 +2,7 @@
 id: lem-transverse-holonomy-transport-is-well-defined-and-equivariant
 kind: lemma
 title: Transverse holonomy transport is well defined and equivariant on the model
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

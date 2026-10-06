@@ -2,7 +2,7 @@
 id: thm-cocharacter-limit-subgroups
 kind: theorem
 title: Cocharacter limit subgroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 20

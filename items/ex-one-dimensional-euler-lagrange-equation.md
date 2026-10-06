@@ -2,7 +2,7 @@
 id: ex-one-dimensional-euler-lagrange-equation
 kind: example
 title: "The one-dimensional Euler-Lagrange equation for an energy with a potential"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

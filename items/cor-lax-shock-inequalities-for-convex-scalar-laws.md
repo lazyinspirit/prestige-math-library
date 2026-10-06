@@ -2,7 +2,7 @@
 id: cor-lax-shock-inequalities-for-convex-scalar-laws
 kind: corollary
 title: The Lax shock inequalities for convex scalar laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-contour-definition-of-an-analytic-semigroup
 kind: lemma
 title: The Dunford contour integral defines a bounded holomorphic family on the sector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 4

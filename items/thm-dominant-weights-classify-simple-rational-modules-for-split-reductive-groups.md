@@ -2,7 +2,7 @@
 id: thm-dominant-weights-classify-simple-rational-modules-for-split-reductive-groups
 kind: theorem
 title: "Dominant weights classify the simple rational representations of a split reductive group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 36

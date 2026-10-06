@@ -2,7 +2,7 @@
 id: def-hp-atom-with-moment-order
 kind: definition
 title: "$H^p$ atoms with a prescribed moment order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

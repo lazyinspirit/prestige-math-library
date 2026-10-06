@@ -2,7 +2,7 @@
 id: lem-standard-complementary-pair-fills-an-n-ball
 kind: lemma
 title: "The standard complementary pair fills a ball"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 0

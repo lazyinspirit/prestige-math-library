@@ -2,7 +2,7 @@
 id: lem-fundamental-group-label-is-the-obstruction-to-contracting-the-whitney-circle
 kind: lemma
 title: The fundamental-group label controls contractibility of the Whitney circle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 proof_strategy: direct

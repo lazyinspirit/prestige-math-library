@@ -2,7 +2,7 @@
 id: thm-form-generated-sectorial-elliptic-semigroups
 kind: theorem
 title: Form-generated sectorial elliptic semigroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 16

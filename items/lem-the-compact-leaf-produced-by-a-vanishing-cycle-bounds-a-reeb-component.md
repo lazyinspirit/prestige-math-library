@@ -2,7 +2,7 @@
 id: lem-the-compact-leaf-produced-by-a-vanishing-cycle-bounds-a-reeb-component
 kind: lemma
 title: "The compact leaf produced by a vanishing cycle bounds a Reeb component"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

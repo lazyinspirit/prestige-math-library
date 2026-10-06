@@ -2,7 +2,7 @@
 id: thm-smale-hirsch-for-open-source-manifolds
 kind: theorem
 title: "Smale–Hirsch for open source manifolds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, lem-open-manifolds-admit-handle-filtrations-without-top-index-handles, lem-formal-immersion-homotopies-extend-over-a-subcritical-handle, lem-formal-immersion-homotopies-extend-over-a-collar, lem-parametric-immersion-extension-on-a-disk, lem-smooth-families-and-path-components-in-the-weak-topology, lem-smoothing-formal-immersion-families, lem-smoothing-genuine-immersion-families, def-compact-parameter-pair, def-weak-homotopy-equivalence, def-space-of-immersions-and-space-of-formal-immersions, def-derivative-map-from-immersions-to-formal-immersions, def-smooth-manifold, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, prop-dual-elimination-of-top-index-handles, def-smooth-cobordism-triad-for-morse-theory, def-handle-decomposition-relative-to-the-incoming-boundary, def-countable-choice, thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space, thm-euclidean-tubular-neighbourhood-theorem, thm-smooth-partitions-of-unity-exist-on-manifolds, thm-every-smooth-manifold-admits-a-riemannian-metric, thm-extreme-value-metric, lem-manifold-bump-for-a-compact-set-inside-an-open-set, lem-joint-jet-continuity-and-the-weak-smooth-topology, prop-relative-cw-inclusions-are-cofibrations]

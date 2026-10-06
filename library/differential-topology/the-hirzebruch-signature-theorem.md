@@ -1,7 +1,7 @@
 ---
 page: the-hirzebruch-signature-theorem
 title: The Hirzebruch Signature Theorem
-status: draft
+status: published
 requires: [intersection-pairings-self-intersection-and-euler-classes, smooth-cobordism-relations-groups-and-rings, characteristic-numbers-and-cobordism-obstructions, cup-cap-cross-products-and-cohomology-rings, orientations-poincare-lefschetz-and-alexander-duality, stiefel-whitney-and-euler-classes-by-universal-constructions, chern-and-pontryagin-classes-by-splitting-and-complexification, finite-averaging-and-character-theory-prerequisites]
 items: [def-middle-dimensional-intersection-form,
         lem-middle-dimensional-intersection-form-is-symmetric-and-nondegenerate,

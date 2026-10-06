@@ -2,7 +2,7 @@
 id: prop-formal-characters-are-additive-and-multiplicative
 kind: proposition
 title: Formal characters are additive and multiplicative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

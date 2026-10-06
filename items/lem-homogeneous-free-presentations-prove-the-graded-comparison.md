@@ -2,7 +2,7 @@
 id: lem-homogeneous-free-presentations-prove-the-graded-comparison
 kind: lemma
 title: Homogeneous free presentations prove the graded comparison is an isomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-homogeneous-right-multiplication-reconstructs-the-graded-kernel-action, lem-graded-tensor-functor-is-k-linear-right-exact-coproduct-preserving-and-shift-coherent, lem-graded-degreewise-direct-sums-and-homogeneous-free-covers, lem-internal-shift-endofunctors-and-tensor-compatibility, lem-coherent-shift-functors-and-transformations-form-hom-categories, def-coherently-shift-compatible-functor-and-natural-transformation, def-graded-balanced-tensor-product-and-homogeneous-hom, lem-graded-balanced-tensor-and-shift-isomorphisms, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, thm-universal-property-of-module-tensor-products, prop-functoriality-of-module-tensor-products, thm-bimodule-actions-induced-on-tensor-products, def-exact-and-short-exact-sequences-of-modules, def-module-homomorphism-kernel-image-and-cokernel, thm-a-left-exact-functor-preserves-monomorphisms-and-a-right-exact-functor-preserves-epimorphisms, def-left-exact-and-right-exact-functor, def-natural-transformation, def-natural-isomorphism, lem-canonical-free-presentation-controls-eilenberg-watts-comparison]

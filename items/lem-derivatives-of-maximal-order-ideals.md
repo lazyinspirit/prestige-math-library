@@ -2,7 +2,7 @@
 id: "lem-derivatives-of-maximal-order-ideals"
 kind: "lemma"
 title: "Derivative ideals of a maximal-order marked ideal have maximal order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-40-geometry-braids-rep-27"
 dependency_level: 6

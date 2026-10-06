@@ -2,7 +2,7 @@
 id: cor-elliptic-kernel-and-cokernel-are-finite-dimensional
 kind: corollary
 title: "The elliptic kernel and cokernel are finite dimensional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 11

@@ -29,7 +29,7 @@ sources:
     - title: "Bachir Bekka and Pierre de la Harpe, Unitary Representations of Groups, Duals, and Characters (arXiv:1912.07262v1, 16 December 2019)"
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1, §1.C: Propositions 1.C.6-1.C.8"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

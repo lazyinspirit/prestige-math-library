@@ -2,7 +2,7 @@
 id: lem-convex-norm-lower-semicontinuous-functionals-are-weakly-lower-semicontinuous
 kind: lemma
 title: "A convex norm-lower-semicontinuous functional is weakly lower semicontinuous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

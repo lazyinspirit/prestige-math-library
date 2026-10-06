@@ -2,7 +2,7 @@
 id: lem-minuscule-weights-are-the-weyl-orbit
 kind: lemma
 title: Minuscule weights have exactly the Weyl orbit as their weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

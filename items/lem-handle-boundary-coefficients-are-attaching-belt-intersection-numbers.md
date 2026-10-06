@@ -2,7 +2,7 @@
 id: lem-handle-boundary-coefficients-are-attaching-belt-intersection-numbers
 kind: lemma
 title: "Handle boundary coefficients are attaching-belt intersection numbers"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

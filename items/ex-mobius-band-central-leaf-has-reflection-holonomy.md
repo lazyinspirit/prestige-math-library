@@ -2,7 +2,7 @@
 id: ex-mobius-band-central-leaf-has-reflection-holonomy
 kind: example
 title: "The Möbius band's central leaf has reflection holonomy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 7

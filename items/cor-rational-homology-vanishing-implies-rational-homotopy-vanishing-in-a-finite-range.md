@@ -2,7 +2,7 @@
 id: cor-rational-homology-vanishing-implies-rational-homotopy-vanishing-in-a-finite-range
 kind: corollary
 title: "Finite-range rational homology vanishing implies rational homotopy vanishing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

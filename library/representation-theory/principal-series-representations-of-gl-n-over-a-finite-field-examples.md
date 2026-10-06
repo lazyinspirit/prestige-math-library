@@ -1,7 +1,7 @@
 ---
 page: principal-series-representations-of-gl-n-over-a-finite-field-examples
 title: "Principal Series Representations of GL N over a Finite Field — Examples"
-status: draft
+status: published
 requires: [principal-series-representations-of-gl-n-over-a-finite-field]
 items:
   - ex-two-dimensional-hecke-algebra-for-gl2-fq

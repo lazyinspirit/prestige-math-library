@@ -2,7 +2,7 @@
 id: cex-omitting-the-exterior-root-weight-shifts-gives-the-wrong-dot-weight
 kind: counterexample
 title: "Omitting the exterior root-weight shifts gives the wrong dot weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

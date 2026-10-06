@@ -2,7 +2,7 @@
 id: cex-euler-characteristic-does-not-determine-signature
 kind: counterexample
 title: "The Euler characteristic does not determine the signature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 aliases: []

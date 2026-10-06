@@ -2,7 +2,7 @@
 id: lem-local-fixed-point-index-splits-under-perturbation
 kind: lemma
 title: An isolated fixed point splits under perturbation, preserving its index
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

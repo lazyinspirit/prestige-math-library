@@ -2,7 +2,7 @@
 id: lem-stable-squares-on-universal-thom-classes
 kind: lemma
 title: "Stable Steenrod squares on universal Thom cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: lem-range-truncations-preserve-bmo-seminorm
 kind: lemma
 title: "Range truncations preserve the BMO seminorm up to a constant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 1

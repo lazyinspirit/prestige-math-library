@@ -1,7 +1,7 @@
 ---
 page: smooth-surgery-traces-and-handle-trading
 title: Smooth Surgery Traces and Handle Trading
-status: draft
+status: published
 items: [def-framed-embedded-surgery-sphere, def-p-surgery-on-a-smooth-m-manifold, lem-isotopy-extension-for-a-compact-source-with-boundary, lem-surgery-gluing-has-a-canonical-smooth-structure-up-to-diffeomorphism, def-surgery-trace-cobordism, lem-outgoing-boundary-of-a-handle-attachment-trades-the-disk-factors, thm-upper-boundary-of-the-surgery-trace-is-the-surged-manifold, def-dual-surgery-sphere, thm-surgery-is-reversed-by-dual-surgery, lem-attaching-a-single-cell-kills-the-represented-homotopy-class, lem-p-surgery-kills-the-represented-pi-p-class-when-p-is-below-the-middle, prop-homology-effect-of-surgery-away-from-the-middle-dimensions, lem-framing-obstruction-lives-in-the-normal-bundle-of-the-surgery-sphere, def-degree-one-normal-map-for-the-surgery-program, prop-surgery-on-a-normal-map-preserves-its-normal-bordism-class, rem-middle-dimensional-surgery-has-an-intersection-form-obstruction, rem-smooth-four-dimensional-surgery-is-not-covered-by-the-high-dimensional-program]
 examples: []
 ---

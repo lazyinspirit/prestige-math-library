@@ -2,7 +2,7 @@
 id: def-deligne-product-of-finite-linear-categories
 kind: definition
 title: "The Deligne product of finite linear categories"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-abelian-category, def-equivalence-and-adjoint-equivalence-of-categories, def-finite-k-linear-abelian-category, def-functor-category, def-k-linear-category-and-k-linear-functor, def-left-exact-and-right-exact-functor, def-natural-transformation, def-product-category, lem-finite-vector-space-copowers-in-a-linear-abelian-category, rem-category-theory-class-and-size-conventions]

@@ -2,7 +2,7 @@
 id: lem-relative-cap-evaluation-identity
 kind: lemma
 title: "Relative cap and cup evaluation identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:

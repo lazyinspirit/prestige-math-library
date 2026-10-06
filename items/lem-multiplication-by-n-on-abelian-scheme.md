@@ -2,7 +2,7 @@
 id: lem-multiplication-by-n-on-abelian-scheme
 kind: lemma
 title: "Multiplication by n on an abelian scheme is finite flat, and etale for n invertible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps:

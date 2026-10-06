@@ -2,7 +2,7 @@
 id: lem-degree-p-inseparable-differential-trace-extends-on-normal-surfaces
 kind: lemma
 title: "Degree-p differential trace extends across normal surface valuations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

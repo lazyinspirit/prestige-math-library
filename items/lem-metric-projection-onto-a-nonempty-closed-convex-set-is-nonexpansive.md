@@ -2,7 +2,7 @@
 id: "lem-metric-projection-onto-a-nonempty-closed-convex-set-is-nonexpansive"
 kind: "lemma"
 title: "The metric projection onto a closed convex set is nonexpansive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 1

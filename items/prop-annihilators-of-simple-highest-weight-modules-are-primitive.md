@@ -2,7 +2,7 @@
 id: prop-annihilators-of-simple-highest-weight-modules-are-primitive
 kind: proposition
 title: "Annihilators of simple highest-weight modules are primitive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 2

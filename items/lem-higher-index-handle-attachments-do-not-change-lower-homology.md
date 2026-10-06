@@ -2,7 +2,7 @@
 id: lem-higher-index-handle-attachments-do-not-change-lower-homology
 kind: lemma
 title: "Attaching handles of index at least q preserves homology below q-1"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

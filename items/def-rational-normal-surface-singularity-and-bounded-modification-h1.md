@@ -2,7 +2,7 @@
 id: def-rational-normal-surface-singularity-and-bounded-modification-h1
 kind: definition
 title: "Rational normal surface singularities and bounded modification cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 8

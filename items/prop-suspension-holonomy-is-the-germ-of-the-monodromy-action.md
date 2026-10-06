@@ -2,7 +2,7 @@
 id: prop-suspension-holonomy-is-the-germ-of-the-monodromy-action
 kind: proposition
 title: "Suspension holonomy is the germ of the represented monodromy action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 5

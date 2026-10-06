@@ -2,7 +2,7 @@
 id: lem-the-weak-smooth-topology-is-independent-of-the-chosen-atlas
 kind: lemma
 title: "The weak smooth topology is independent of the chosen atlas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-weak-compact-open-smooth-topology-on-mapping-spaces, def-smooth-manifold, def-compact-space, thm-chain-rule-for-differentials-of-smooth-maps, thm-heine-cantor-metric, thm-compactness-agrees-with-metric-compactness, lem-coordinate-balls-form-a-basis-of-a-topological-manifold, lem-compactness-of-a-subspace-is-ambient, thm-extreme-value-metric]

@@ -2,7 +2,7 @@
 id: lem-character-and-cocharacter-lattices-of-a-split-torus
 kind: lemma
 title: Character and cocharacter lattices of a split torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

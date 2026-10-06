@@ -2,7 +2,7 @@
 id: "lem-lagrange-multiplier-is-unique-when-constraint-gradients-are-independent"
 kind: "lemma"
 title: "The multiplier vector is unique when the constraint gradients are independent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 5

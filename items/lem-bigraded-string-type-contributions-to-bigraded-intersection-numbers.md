@@ -2,7 +2,7 @@
 id: lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers
 kind: lemma
 title: "Bigraded string types and their contributions to I^{bigr}"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

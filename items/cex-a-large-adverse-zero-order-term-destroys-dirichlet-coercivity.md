@@ -2,7 +2,7 @@
 id: "cex-a-large-adverse-zero-order-term-destroys-dirichlet-coercivity"
 kind: "counterexample"
 title: "A large adverse zero-order term destroys Dirichlet coercivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-39-analysis-30"
 dependency_level: 7

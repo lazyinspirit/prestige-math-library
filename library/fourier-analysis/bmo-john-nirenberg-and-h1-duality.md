@@ -1,7 +1,7 @@
 ---
 page: bmo-john-nirenberg-and-h1-duality
 title: "BMO, John-Nirenberg, and H1 Duality"
-status: draft
+status: published
 requires: [calderon-zygmund-decomposition-and-singular-integrals, real-hardy-spaces-maximal-functions-and-atoms, the-baire-principles-of-functional-analysis, orthonormal-bases-parseval-and-fourier-series]
 items:
   - def-bmo-seminorm-and-quotient-by-constants

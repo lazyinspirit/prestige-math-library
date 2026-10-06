@@ -25,7 +25,7 @@ sources:
     url: https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro
     locator: Proof of Theorem 7.27, printed p. 140 ("change it near $\gamma_2$ using the isotopy given on p. 74
       of Milnor")
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3

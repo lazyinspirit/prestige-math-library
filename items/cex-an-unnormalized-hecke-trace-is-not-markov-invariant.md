@@ -2,7 +2,7 @@
 id: cex-an-unnormalized-hecke-trace-is-not-markov-invariant
 kind: counterexample
 title: "An unnormalized Hecke trace is not Markov invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 9

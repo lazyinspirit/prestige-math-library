@@ -2,7 +2,7 @@
 id: thm-real-hone-bmo-duality
 kind: theorem
 title: "Real H1-BMO duality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 12

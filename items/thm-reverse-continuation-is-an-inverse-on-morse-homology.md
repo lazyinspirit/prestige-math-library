@@ -2,7 +2,7 @@
 id: thm-reverse-continuation-is-an-inverse-on-morse-homology
 kind: theorem
 title: "Reverse continuation is an inverse on Morse homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

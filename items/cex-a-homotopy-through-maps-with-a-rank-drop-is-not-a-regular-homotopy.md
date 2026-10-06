@@ -2,7 +2,7 @@
 id: cex-a-homotopy-through-maps-with-a-rank-drop-is-not-a-regular-homotopy
 kind: counterexample
 title: "Refuted: a homotopy that is immersive at every earlier time is a regular homotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [def-regular-homotopy-of-immersions, def-immersion-submersion-and-constant-rank-map, cor-the-immersion-and-submersion-loci-are-open, rem-regular-homotopy-allows-self-intersections-but-never-rank-drop, def-smooth-family-of-maps-and-evaluation-map]

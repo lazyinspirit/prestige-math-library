@@ -2,7 +2,7 @@
 id: lem-shifted-elliptic-solution-operator-is-compact-on-ltwo
 kind: lemma
 title: "The shifted solution operator is compact on $L^2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

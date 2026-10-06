@@ -2,7 +2,7 @@
 id: lem-nontrivial-limitwise-nullhomotopy-class-forces-compact-boundary-leaf
 kind: lemma
 title: "A nonzero limitwise-nullhomotopy class forces a compact boundary leaf"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

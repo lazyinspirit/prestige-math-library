@@ -2,7 +2,7 @@
 id: ex-disconnected-neumann-domain-has-multiple-zero-eigenvalue
 kind: example
 title: "A disconnected Neumann domain has a multiple zero eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

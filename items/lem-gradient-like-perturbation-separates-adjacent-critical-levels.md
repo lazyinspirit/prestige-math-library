@@ -2,7 +2,7 @@
 id: lem-gradient-like-perturbation-separates-adjacent-critical-levels
 kind: lemma
 title: "Gradient-like perturbation separates adjacent critical levels"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-morse-function-adapted-to-a-cobordism, lem-spheres-of-adjacent-critical-levels-have-product-neighbourhoods, lem-a-sphere-with-a-product-neighbourhood-can-be-moved-off-a-lower-dimensional-submanifold, lem-flow-reparametrization-realizes-a-level-isotopy, def-downward-gradient-like-vector-field, thm-fundamental-theorem-on-flows, def-countable-choice, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-compactly-supported-vector-fields-are-complete]

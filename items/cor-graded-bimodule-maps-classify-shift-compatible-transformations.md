@@ -2,7 +2,7 @@
 id: cor-graded-bimodule-maps-classify-shift-compatible-transformations
 kind: corollary
 title: Graded bimodule maps classify shift-compatible transformations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [thm-graded-eilenberg-watts-with-coherent-shifts, def-coherently-shift-compatible-functor-and-natural-transformation, lem-graded-tensor-functor-is-k-linear-right-exact-coproduct-preserving-and-shift-coherent, lem-internal-shift-endofunctors-and-tensor-compatibility, def-bimodule, def-left-and-right-modules, thm-unit-isomorphisms-for-module-tensor-products, def-natural-transformation, def-natural-isomorphism]

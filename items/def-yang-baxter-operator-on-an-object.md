@@ -2,7 +2,7 @@
 id: def-yang-baxter-operator-on-an-object
 kind: definition
 title: "Yang–Baxter operators on an object"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

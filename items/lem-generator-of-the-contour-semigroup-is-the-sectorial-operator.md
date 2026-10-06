@@ -2,7 +2,7 @@
 id: lem-generator-of-the-contour-semigroup-is-the-sectorial-operator
 kind: lemma
 title: The generator of the contour semigroup is the sectorial operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 7

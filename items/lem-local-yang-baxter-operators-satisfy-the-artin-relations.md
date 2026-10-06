@@ -2,7 +2,7 @@
 id: lem-local-yang-baxter-operators-satisfy-the-artin-relations
 kind: lemma
 title: "Local Yang–Baxter operators satisfy the Artin relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 2

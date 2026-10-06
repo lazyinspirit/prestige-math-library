@@ -2,7 +2,7 @@
 id: def-reduced-type-a-polynomial-ring-for-hhh
 kind: definition
 title: "The reduced type-A polynomial ring and Soergel bimodules for the HHH construction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 deps: [def-type-a-reflection-realization-and-polynomial-ring, def-polynomial-ring-over-a-commutative-ring]

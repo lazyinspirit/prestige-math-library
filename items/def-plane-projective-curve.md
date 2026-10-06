@@ -2,7 +2,7 @@
 id: def-plane-projective-curve
 kind: definition
 title: Plane projective curves and their components
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0

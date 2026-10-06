@@ -2,7 +2,7 @@
 id: thm-global-reeb-stability-for-transversely-oriented-codimension-one-foliations
 kind: theorem
 title: "Global Reeb stability for transversely oriented codimension-one foliations"
-status: draft
+status: published
 origin: pipeline
 provenance: {"statement": "literature-derived", "proof": "literature-derived"}
 deps: ["lem-a-compact-codimension-one-leaf-with-finite-fundamental-group-has-trivial-holonomy-when-transversely-oriented", "lem-compact-stable-leaves-form-an-open-saturated-set", "lem-compact-leaf-control-and-compact-ambientness-give-the-required-closedness", "lem-a-compact-holonomy-free-codimension-one-foliation-is-a-fiber-bundle-over-its-leaf-space", "cor-finite-fundamental-group-is-a-sufficient-not-necessary-reeb-stability-hypothesis", "def-transversely-oriented-codimension-one-foliation", "def-connected-space", "def-compact-space", "def-countable-choice-principle-for-foliation-pair", "def-axiom-of-choice", "lem-axiom-of-choice-implies-countable-choice", "prop-mapping-torus-foliations-realize-global-reeb-stable-examples"]

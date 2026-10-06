@@ -2,7 +2,7 @@
 id: cor-strong-lq-convergence-implies-strong-convergence-of-subcritical-powers
 kind: corollary
 title: "Strong convergence of subcritical powers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

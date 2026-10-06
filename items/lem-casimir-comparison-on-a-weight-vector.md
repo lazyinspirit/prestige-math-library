@@ -2,7 +2,7 @@
 id: lem-casimir-comparison-on-a-weight-vector
 kind: lemma
 title: The Casimir comparison on a weight space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 0

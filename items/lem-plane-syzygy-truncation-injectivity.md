@@ -2,7 +2,7 @@
 id: lem-plane-syzygy-truncation-injectivity
 kind: lemma
 title: The truncated multiplication map is injective exactly when the tangent cones are coprime
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: cor-lefschetz-number-of-the-identity-is-the-euler-characteristic
 kind: corollary
 title: "The Lefschetz number of the identity is the Euler characteristic"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

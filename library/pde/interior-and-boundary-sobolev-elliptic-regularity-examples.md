@@ -1,7 +1,7 @@
 ---
 page: interior-and-boundary-sobolev-elliptic-regularity-examples
 title: Interior and Boundary Sobolev Elliptic Regularity — Examples
-status: draft
+status: published
 items: []
 examples: ["ex-poisson-equation-with-ltwo-data-gains-two-interior-derivatives", "ex-piecewise-smooth-coefficient-produces-limited-regularity", "cex-interior-regularity-does-not-imply-boundary-regularity", "cex-boundary-h-two-regularity-needs-domain-regularity", "cex-bounded-discontinuous-elliptic-coefficients-do-not-force-h-two-regularity", "ex-bootstrapping-a-smooth-poisson-problem", "cex-higher-elliptic-regularity-cannot-exceed-the-forcing-regularity-by-more-than-two-derivatives", "ex-reentrant-sector-harmonic-singularity-has-explicit-sobolev-threshold", "cex-smooth-interior-data-do-not-repair-incompatible-dirichlet-corner-values", "cex-h-two-estimate-needs-an-ltwo-kernel-term-without-injectivity"]
 ---

@@ -2,7 +2,7 @@
 id: lem-fundamental-path-fibration-class-has-the-normalized-relative-lift
 kind: lemma
 title: "The fundamental path-fibration class has the normalized relative lift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

@@ -2,7 +2,7 @@
 id: ex-neumann-laplacian-has-a-zero-constant-mode
 kind: example
 title: "The Neumann Laplacian has a zero constant mode"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 14

@@ -2,7 +2,7 @@
 id: cor-exact-module-tensor-functors-correspond-to-right-flat-bimodules
 kind: corollary
 title: "Exact module tensor functors correspond to right-flat bimodules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps:

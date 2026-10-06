@@ -2,7 +2,7 @@
 id: thm-whitehead-torsion-of-an-h-cobordism-is-well-defined
 kind: theorem
 title: "The Whitehead torsion of an h-cobordism is well defined for a fixed presentation and its elementary moves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 12

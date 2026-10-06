@@ -2,7 +2,7 @@
 id: rem-smale-hirsch-is-a-weak-homotopy-equivalence-not-asserted-as-an-actual-homotopy-equivalence
 kind: remark
 title: "Smale–Hirsch is a weak homotopy equivalence, not asserted as an actual homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 deps: [lem-the-immersion-condition-is-open-in-the-weak-topology-for-compact-sources, thm-smale-hirsch-immersion-theorem, thm-smale-hirsch-for-open-source-manifolds, def-weak-compact-open-smooth-topology-on-mapping-spaces, def-weak-homotopy-equivalence]

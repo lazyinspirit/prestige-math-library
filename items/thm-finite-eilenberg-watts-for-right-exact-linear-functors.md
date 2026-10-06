@@ -2,7 +2,7 @@
 id: thm-finite-eilenberg-watts-for-right-exact-linear-functors
 kind: theorem
 title: "Finite Eilenberg–Watts for right exact linear functors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 dependency_level: 3
