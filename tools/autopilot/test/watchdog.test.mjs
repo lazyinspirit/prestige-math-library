@@ -90,3 +90,16 @@ test('restart guard requires repeated absence, resets on writers, and tracks sta
   assert.throws(() => recoveryDecision(absent, memory, false, 2));
   assert.equal(recoveryDecision({ action: 'exit' }, memory, false, 2), 'exit');
 });
+
+test('exact watchdog lifecycle cannot hold its own recovery; actual scoped writers remain recognized', t => {
+  const c = fixture(t), watchdog = `${c.repo}/tools/autopilot/bin/watchdog.mjs`;
+  const argv = ['node', watchdog, '--repo', c.repo, '--run', c.run, '--state-dir', c.stateDir];
+  assert.equal(classifyProcess({ argv, cwd: c.repo }, c), null);
+  assert.equal(classifyProcess({ argv: ['node', 'tools/dispatch.mjs', '--run', c.run, '--task', watchdog], cwd: c.repo }, c), 'writer');
+  assert.equal(classifyProcess({ argv: ['node', 'tools/owner-helper.mjs', '--run', c.run], cwd: c.repo }, c), 'writer');
+  const onlyWatchdog = () => { const kind = classifyProcess({ argv, cwd: c.repo }, c); return { ...empty(), writer: kind === 'writer' ? [100] : [] }; };
+  assert.equal(observation(c, onlyWatchdog).action, 'absent');
+  const memory = { absent: false, restarts: 0 };
+  assert.equal(recoveryDecision(observation(c, onlyWatchdog), memory, false, 5), 'confirm');
+  assert.equal(recoveryDecision(observation(c, onlyWatchdog), memory, false, 5), 'start');
+});

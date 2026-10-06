@@ -48,6 +48,8 @@ export function terminalReason({ stateDir, run }) {
 /** Match exact argv tokens; never log full argv or environment. */
 export function classifyProcess({ argv, cwd, zombie, sessionHome }, { repo, run, stateDir }) {
   if (!argv?.length || !cwd || zombie || !/^(node|nodejs|codex|claude)$/.test(argv[0].split('/').pop())) return null;
+  // Only the exact watchdog entry point is supervision, not native work.
+  if (argv[1] && resolve(cwd, argv[1]) === join(repo, 'tools/autopilot/bin/watchdog.mjs')) return null;
   const index = argv.findIndex(arg => !arg.startsWith('-') && resolve(cwd, arg) === join(repo, 'tools/autopilot/bin/autopilot.mts'));
   if (index >= 0) {
     const args = argv.slice(index + 1), processRepo = option(args, 'repo');
@@ -66,6 +68,7 @@ export function classifyProcess({ argv, cwd, zombie, sessionHome }, { repo, run,
 export function scanProcesses(config, procRoot = '/proc') {
   const found = { controller: [], preflight: [], writer: [] }, parents = new Map();
   for (const pid of readdirSync(procRoot).filter(name => /^\d+$/.test(name))) {
+    if (Number(pid) === process.pid) continue;
     try {
       const root = join(procRoot, pid);
       // Processes of other users cannot be this user's native workers. Avoid

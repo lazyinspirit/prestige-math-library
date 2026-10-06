@@ -141,7 +141,9 @@ nohup sh tools/autopilot/bin/watchdog.sh --repo "$PWD" --run RUN --state-dir .au
 All three scope arguments are mandatory; the named state directory must already
 contain that run's `state.json`. The watchdog reads `/proc` NUL-delimited argv
 and cwd, recognizes exact native controller/startup-preflight and run worker
-processes, and waits for live writers to drain before recovery. Scoped native
+processes, and waits for live writers to drain before recovery. The scanner
+excludes its own PID and the exact watchdog module entry point, so supervision
+cannot hold its own recovery; genuine scoped worker tools remain recognized. Scoped native
 worker descendants and persistent Codex session homes also prevent a duplicate
 dispatch. Unavailable process evidence fails closed. Other repositories and
 other frontier names cannot satisfy this run's controller liveness check.
