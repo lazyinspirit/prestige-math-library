@@ -17,7 +17,7 @@
 // whoever produced them. That is how a step done by hand, or by a tool rather
 // than an agent, still fits the machine.
 
-import { readdirSync, existsSync, readFileSync, writeFileSync, statSync } from 'node:fs';
+import { readdirSync, existsSync, readFileSync, writeFileSync, appendFileSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
@@ -1387,7 +1387,7 @@ function pairAuthorCohort(ctx: any, unit: string): string[] {
 }
 
 /** Same briefs and model as a group dispatch; only its assigned work is narrowed. */
-export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') {
+export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final', refresh?: { id: string; reason: string; requestedAt: string }) {
   const snapshot = loadStep3(ctx.repo, ctx.run);
   const pair = snapshot.pairs.get(unit);
   if (!pair) throw Error(`Unknown Step 3 pair ${unit}`);
@@ -1398,7 +1398,7 @@ export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') 
         R(ctx, 'research', `${ctx.run}-step3b-owner-${i.id}.json`)))
     ].filter(existsSync).map(path => readFileSync(path, 'utf8')),
   ];
-  const key = createHash('sha256').update(JSON.stringify(inputs)).digest('hex').slice(0, 16);
+  const key = createHash('sha256').update(JSON.stringify(refresh ? [...inputs, { nativeRefresh: refresh.id }] : inputs)).digest('hex').slice(0, 16);
   const prefix = phase === 'scope' ? 'step3a' : 'step3b';
   const label = `${prefix}-pair-${unit}-${key}`;
   const task = `research/${ctx.run}-${label}.task.md`;
@@ -1410,6 +1410,9 @@ export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') 
     ? `- Direct in-run prerequisite pairs to inspect (they may still be unfinished): ${directPairs.length ? directPairs.join(', ') : 'none'}.\n- If an item supplier is not yet authored, flag its exact ID and consuming step in ${report}; author the assigned consumer anyway, then leave its decision escalated until the supplier and proof use are reconciled.\n`
     : '';
   writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n${authorScope}${prerequisiteNote}${itemOrder}- Write ${report}.\n`);
+  if (refresh) {
+    appendFileSync(R(ctx, task), `\n## Explicit native refresh\n\nRequest: ${refresh.id}, accepted ${refresh.requestedAt}.\nReason: ${refresh.reason}\nIndependently examine the corrected origin-sensitive suppliers named above, in supplier-before-consumer order, and their actual current proof inputs. Audit required pair pages, items, contracts and report. Preserve mathematically reviewed claims and proofs; make only necessary substantive corrections or escalate exact gaps. This is genuine fresh native author/evidence work. Do not touch files solely to change timestamps, invent creation history, or repeat unrelated settled authoring. Preserve sibling pairs in shared carriers.\n`);
+  }
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
     profile: phase === 'scope' ? DEEPSEEK_FLASH_MAX : STEP3_AUTHOR_PROFILE,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: [unit],
@@ -1641,6 +1644,7 @@ export const stages = [
     label: 'Step 3b — pair scaffold audit, repair and authoring',
     modelProfile: STEP3_AUTHOR_PROFILE,
     role: 'alpha-high',
+    refreshPlan: (ctx, unit, request) => step3PairPlan(ctx, unit, 'final', request),
     units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
     // The owner asked to author every pair in this run even when an in-run
     // supplier is unfinished. Shared-batch exclusivity remains below; final

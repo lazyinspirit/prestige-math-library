@@ -70,6 +70,23 @@ refresh every certification invalidated by that repair, and retry the same gate;
 the stage cannot transition until the repaired, recertified carrier passes.
 This does not suppress the workflow's normal first-pass dispatches.
 
+`refresh --run RUN --state-dir .autopilot/RUN --stage 3b-author --unit PAIR
+--reason TEXT` requests genuine fresh native author work for one successfully
+covered pair in the active, unclosed Step3b stage. The controller refuses foreign,
+future, closed, unowned or actively written unit/cohort requests. Old successes
+remain unchanged; only the requested unit loses effective coverage until its
+engine-started request-specific label produces a successful native result that
+started after request acceptance. The request and fixed label survive restart,
+retain bounded attempts and use ordinary capacities, adoption, cohorts, preflight
+and launch staggering. A duplicate pending request does not buy a fresh budget;
+`retry --unit PAIR` explicitly rearms failed attempts. Gates wait for refresh.
+The author uses the normal DeepSeek Flash max profile and independently examines
+the named corrected suppliers, actual current inputs and required pair artifacts
+and contracts, preserving reviewed mathematics without timestamp-only edits.
+After all writers drain, full Step3 recertification and native certification/gates
+are still required. Refresh cannot reopen a completed suffix or substitute for
+origin evidence; see [WORKFLOW.md](../../WORKFLOW.md) for the public control.
+
 Step 9 includes any run-local `deferred-pairs.json` and `deferred-items.json`
 records in its sealed evidence packet. It rejects a deferred page or item that
 is still active in the run scope, and the rendered owner report names each

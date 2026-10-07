@@ -392,6 +392,38 @@ fixes reach live gate descriptors without changing the recovery cap or stage ord
   marker and pause state but does not start a stopped controller. Run `start` again for
   an inactive controller. `report` forces a report. `retry --unit ID` limits failed
   dispatch rearming to a unit, while unfinished gate checks still rerun.
+- A completed pair in the active, unclosed `3b-author` stage can receive an
+  explicit bounded native author refresh:
+
+  ```bash
+  node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts refresh --run RUN \
+    --state-dir .autopilot/RUN --stage 3b-author --unit PAIR \
+    --reason 'Name the corrected origin-sensitive suppliers and required input audit'
+  ```
+
+  The controller validates exact run identity, stage opt-in, current boundary,
+  owned successful unit and absence of a live unit/cohort writer. Closed,
+  skipped, future and unsupported stages are refused; this control does not
+  reopen a completed suffix. Drain owner writers before requesting refresh.
+  The request preserves old result files and dispatch history, masks coverage
+  only for its named unit, and freezes a new request-specific native plan and
+  label. Duplicate pending requests retain the original identity and budget.
+  Dispatch uses the normal stage/role/global caps, adopted-worker accounting,
+  cohort exclusion, preflight and stagger. Failed attempts consume the normal
+  fixed-label attempt cap; `retry --unit PAIR` can explicitly rearm exhaustion.
+  A request remains pending through restart until its engine-started label has
+  a genuine successful native result with the exact run, role, unit and a start
+  at or after request acceptance. Old results and synthetic engine receipts
+  cannot discharge it; all stage status, completion and gate joins share that
+  rule. Step3b refresh retains the centralized DeepSeek Flash max profile.
+  Native refresh is actual fresh examination of corrected suppliers, current
+  proof inputs and required pair artifacts/contracts. Preserve reviewed claims
+  and proofs; never edit solely to touch timestamps or invent creation history.
+  It does not itself certify mathematical acceptance. After every writer drains,
+  perform the full dependency-ordered Step3 recertification and normal native
+  certification/gate pass on stable current inputs. Original provenance checks,
+  immutable baseline and successful history remain mandatory.
+
 - To pause just after a stage closes, write its exact ID to the control file:
 
   ```bash

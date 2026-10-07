@@ -19,6 +19,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, rmSync, openSync, closeSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { spawn } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 
@@ -581,6 +582,19 @@ switch (cmd) {
     if (cmd === 'resume') { try { rmSync(join(stateDir, 'stopped')); } catch { /* not stopped */ } }
     writeCommand(stateDir, cmd);
     console.log(`${cmd} requested; the engine acts on it at the next tick`);
+    break;
+  }
+
+  case 'refresh': {
+    const refreshRun = opt('run') ?? die('--run is required');
+    const stage = opt('stage') ?? die('--stage is required');
+    const unit = opt('unit') ?? die('--unit is required');
+    const reason = opt('reason') ?? die('--reason is required');
+    if (!String(reason).trim()) die('--reason must be nonempty');
+    const recorded = new State(statePath(stateDir)).data.run;
+    if (recorded !== refreshRun) die('refresh requires the exact existing run state directory');
+    writeCommand(stateDir, 'refresh', { run: refreshRun, stage, unit, reason, requestId: randomUUID() });
+    console.log(`native refresh requested for ${stage}/${unit}; the controller validates it at the next tick`);
     break;
   }
 

@@ -27,7 +27,7 @@ import { readFileSync, writeFileSync, existsSync, unlinkSync, mkdirSync } from '
 import type { Control, ControlCommand } from './types.mts';
 import { dirname, join } from 'node:path';
 
-export const COMMANDS = new Set(['pause', 'resume', 'skip', 'retry', 'stop', 'report', 'pause-at']);
+export const COMMANDS = new Set(['pause', 'resume', 'skip', 'retry', 'stop', 'report', 'pause-at', 'refresh']);
 
 export function controlPath(dir: string): string { return join(dir, 'control.json'); }
 

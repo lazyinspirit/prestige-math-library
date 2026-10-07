@@ -46,9 +46,9 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { covered, pending, stageComplete } from './coverage.mts';
+import { covered, pending, stageComplete, results } from './coverage.mts';
 import { identityPlaceholders } from './doctor.mts';
-import type { Config, Ctx, Stage, Plan, StageStatus, Snapshot, Adapter, Unit, RunningEntry, Gate, GateResult } from './types.mts';
+import type { Config, Ctx, Stage, Plan, StageStatus, Snapshot, Adapter, Unit, RunningEntry, Gate, GateResult, NativeRefresh, Control } from './types.mts';
 
 /** Default clock for an outage-refunded repair round. Long enough that a
  *  session-limit window is not hammered, short enough that a lane back at
@@ -273,6 +273,90 @@ export class Executor {
     };
   }
 
+  /** Only an engine-started request label and genuinely fresh native result
+   * can discharge a refresh. Old success remains evidence, not new coverage. */
+  nativeRefreshResult(request: NativeRefresh, stage: Stage, ctx: Ctx = this.ctx()): any | null {
+    const dispatch = this.state.dispatch(`${stage.id}:${request.plan.label}`);
+    if (!dispatch || dispatch.role !== request.plan.role || !dispatch.covers?.includes(request.unit)) return null;
+    return results(ctx.dispatchDir).find(row => {
+      const started = Date.parse(row.started_at), ended = Date.parse(row.ended_at);
+      return row.file === `${request.plan.role}-${request.plan.label}.result.json`
+        && row.run === request.run && row.role === request.plan.role && row.label === request.plan.label
+        && row.written_by !== 'autopilot' && stagePattern(stage, ctx).test(row.file)
+        && Array.isArray(row.covers) && row.covers.length === 1 && row.covers[0] === request.unit
+        && Number.isFinite(started) && Number.isFinite(ended)
+        && started >= Date.parse(request.requestedAt) && ended >= started;
+    }) ?? null;
+  }
+
+  pendingRefreshes(stage: Stage, ctx: Ctx = this.ctx()): NativeRefresh[] {
+    return (this.state.data.nativeRefreshes ?? []).filter((request: NativeRefresh) =>
+      request.stage === stage.id && !this.nativeRefreshResult(request, stage, ctx));
+  }
+
+  stageCoverage(stage: Stage, ctx: Ctx = this.ctx()): Set<Unit> {
+    const cov = covered(ctx.dispatchDir, stagePattern(stage, ctx), ctx.coversMap);
+    for (const request of this.pendingRefreshes(stage, ctx)) cov.delete(request.unit);
+    return cov;
+  }
+
+  reconcileNativeRefreshes(): void {
+    for (const request of this.state.data.nativeRefreshes ?? []) {
+      if (request.completedAt) continue;
+      const stage = this.stages.find(s => s.id === request.stage);
+      const result = stage && this.nativeRefreshResult(request, stage);
+      if (!result) continue;
+      request.completedAt = result.ended_at;
+      request.resultFile = result.file;
+      this.state.save();
+      this.bumpState();
+      this.reporter.notify('refresh-complete', `${request.stage}/${request.unit}: fresh native result ${result.label}`);
+    }
+  }
+
+  requestNativeRefresh(command: Control): void {
+    const stage = this.stages.find(s => s.id === command.stage);
+    const ctx = this.ctx();
+    if (command.run !== this.config.run || !stage || stage.id !== '3b-author' || !stage.refreshPlan
+      || !command.unit || !String(command.reason ?? '').trim()
+      || !/^[a-zA-Z0-9-]{1,80}$/.test(command.requestId ?? ''))
+      throw new Error('refresh requires exact run, opted-in 3b-author stage, unit, reason and request identity');
+    const saved = this.state.data.stages[stage.id];
+    if (!saved || saved.skipped || saved.doneAt || saved.gatesPassedAt || this.currentStage().stage?.id !== stage.id)
+      throw new Error('refresh is restricted to the active unclosed 3b-author stage');
+    const owed = (stage.units?.(ctx) ?? []).map(String);
+    if (!owed.includes(command.unit) || !this.stageCoverage(stage, ctx).has(command.unit)) {
+      if (this.pendingRefreshes(stage, ctx).some(r => r.unit === command.unit)) {
+        this.reporter.notify('refresh-pending', `${stage.id}/${command.unit}: existing request retained`);
+        return;
+      }
+      throw new Error('refresh requires a successfully covered unit owned by the active stage');
+    }
+    if ((this.state.data.nativeRefreshes ?? []).some((r: NativeRefresh) => r.id === command.requestId))
+      throw new Error('refresh request identity is already recorded');
+    const cohort = new Set([command.unit, ...(stage.exclusiveCohort?.(ctx, command.unit) ?? []).map(String)]);
+    const active = new Set([...this.inflight.values()].filter(d => d.meta.stage === stage.id)
+      .flatMap(d => d.meta.covers.map(String)));
+    for (const unit of this.adoptedUnits(stage)) active.add(unit);
+    if ([...cohort].some(unit => active.has(unit))) throw new Error('refresh refused while a unit/cohort writer is active');
+    const requestedAt = new Date(this.clock.now()).toISOString();
+    const plan = stage.refreshPlan(ctx, command.unit, { id: command.requestId, reason: command.reason, requestedAt });
+    if (plan.role !== stage.role || plan.role !== 'alpha-high' || plan.argv
+      || plan.covers?.length !== 1 || plan.covers[0] !== command.unit
+      || !stagePattern(stage, ctx).test(`${plan.role}-${plan.label}.result.json`)
+      || this.state.dispatch(`${stage.id}:${plan.label}`)
+      || existsSync(join(ctx.dispatchDir, `${plan.role}-${plan.label}.result.json`)))
+      throw new Error('refresh plan must be a new native alpha-high label covering only the requested unit');
+    plan.writeReceipt = false;
+    const problem = this.preflightPlan(stage, plan);
+    if (problem) throw new Error(`refresh plan preflight: ${problem}`);
+    const request: NativeRefresh = { id: command.requestId, run: command.run, stage: stage.id,
+      unit: command.unit, reason: command.reason, requestedAt, plan };
+    (this.state.data.nativeRefreshes ??= []).push(request);
+    this.state.save();
+    this.reporter.notify('refresh-requested', `${stage.id}/${command.unit}: ${command.reason}`);
+  }
+
   /** The first stage whose completion predicate is false. Everything before it
    *  is done; everything after has not started. Recomputed from disk on every
    *  tick, so an artifact appearing out of band (a hand-run dispatch, a manual
@@ -321,6 +405,20 @@ export class Executor {
       coversMap: ctx.coversMap,
       fallbackCount: stage.fallbackCount ?? owed.length,
     });
+
+    const refreshes = this.pendingRefreshes(stage, ctx);
+    if (refreshes.length) {
+      units.done = false;
+      if (units.mode === 'coverage') {
+        const effective = this.stageCoverage(stage, ctx);
+        units.missing = pending(owed, effective);
+        units.why = `${owed.length - units.missing.length}/${owed.length} covered; missing ${units.missing.slice(0, 8).join(', ')}${units.missing.length > 8 ? ` +${units.missing.length - 8}` : ''}`;
+      } else {
+        // Legacy result counts cannot discharge a named native refresh.
+        units.missing = [...new Set([...units.missing, ...refreshes.map(r => r.unit)])];
+      }
+      units.why += `; native refresh pending for ${refreshes.map(r => r.unit).join(', ')}`;
+    }
 
     // A RESULT IS NOT AN ARTIFACT. `ok:true` says the process exited zero; it
     // says nothing about whether the work landed where it was supposed to.
@@ -406,7 +504,7 @@ export class Executor {
     // complete when it was stamped, and re-walking them re-pays their readiness
     // hashing for a result already recorded.
     if (this.state.data.stages[stage.id]?.doneAt) return new Set(owed);
-    const cov = covered(ctx.dispatchDir, stagePattern(stage, ctx), ctx.coversMap);
+    const cov = this.stageCoverage(stage, ctx);
     // A stage running in the legacy COUNT mode declares no coverage at all, so
     // there is no per-unit answer to give. Fall back to the only thing that mode
     // supports — the stage as a whole — rather than inventing a per-unit one.
@@ -1102,6 +1200,11 @@ export class Executor {
         this.reporter.notify('skipped', `owner skipped stage ${id}`);
         break;
       }
+      case 'refresh': {
+        try { this.requestNativeRefresh(cmd); }
+        catch (error: any) { this.reporter.notify('control-error', `refresh refused: ${error.message}`); }
+        break;
+      }
       case 'retry': {
         const unit = cmd.unit ? String(cmd.unit) : null;
         let armed = 0;
@@ -1192,6 +1295,7 @@ export class Executor {
     if (this.stopped) return 'stopped';
     await this.maybeReloadStages();
     this.reconcileAdopted();
+    this.reconcileNativeRefreshes();
 
     // A spec that cannot be trusted must not drive a run. Reported every tick so
     // it cannot be missed, and nothing is dispatched until it is fixed.
@@ -1407,7 +1511,7 @@ export class Executor {
       for (const { s, st } of statuses) {
         if (st.unitsDone) continue;
         const owed = (s.units ? s.units(ctx) : []).map(String);
-        const cov = covered(ctx.dispatchDir, stagePattern(s, ctx), ctx.coversMap);
+        const cov = this.stageCoverage(s, ctx);
         const complete = this.unitsComplete(s, ctx);
         const active = new Set([...this.inflight.values()]
           .filter((d: any) => d.meta.stage === s.id)
@@ -1454,7 +1558,7 @@ export class Executor {
     { prev?: Stage | null; groupKey?: string; roleBudget?: (role: string) => number } = {}): Promise<'ok' | 'blocked'> {
     // Which units still need a successful dispatch.
     const owed = (stage.units ? stage.units(ctx) : []).map(String);
-    const cov = covered(ctx.dispatchDir, stagePattern(stage, ctx), ctx.coversMap);
+    const cov = this.stageCoverage(stage, ctx);
     let need = pending(owed, cov);
 
     // ...and, inside an overlap group, only those whose own work at the previous
@@ -1593,7 +1697,12 @@ export class Executor {
     if (need.length && slots > 0) {
       let plans;
       try {
-        plans = stage.plan(ctx, need.slice(0, slots));
+        const selected = need.slice(0, slots);
+        const refreshes = this.pendingRefreshes(stage, ctx).filter(r => selected.includes(r.unit));
+        plans = [
+          ...refreshes.map(r => r.plan),
+          ...stage.plan(ctx, selected.filter(unit => !refreshes.some(r => r.unit === unit))),
+        ];
         // Drop any plan whose own dispatch key has exhausted its attempts.
         const exhaustedPlans: any[] = [];
         plans = plans.filter((p: any) => {
@@ -1656,7 +1765,8 @@ export class Executor {
    * has a different argv and still runs on its own.
    */
   async runGroupGates(statuses: Array<{ s: Stage; st: StageStatus }>, ctx: Ctx, group: Stage[]): Promise<'ok' | 'working' | 'blocked'> {
-    if (this.inflight.size || this.liveDispatchLabels().length) return 'working';
+    if (this.inflight.size || this.liveDispatchLabels().length
+      || statuses.some(({ s }) => this.pendingRefreshes(s, ctx).length)) return 'working';
     const list: Gate[] = [];
     const owners: Stage[] = [];
     const seen = new Set<string>();

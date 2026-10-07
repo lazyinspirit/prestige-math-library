@@ -33,6 +33,7 @@ const empty = (): StateData => ({
   stage: null,
   /** dispatchKey -> { stage, role, label, covers, attempts, lastExitOk, startedAt, endedAt } */
   dispatches: {},
+  nativeRefreshes: [],
   /** stageId -> { enteredAt, gatesPassedAt, doneAt, fixRounds } */
   stages: {},
   /** append-only human-readable trail; the full record is events.jsonl */
