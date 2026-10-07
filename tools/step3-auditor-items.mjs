@@ -189,8 +189,24 @@ function successfulAuthorResults(root, run) {
   return rows;
 }
 
+// A restarted native author may adopt an unchanged draft from an interrupted
+// predecessor. Require its actual prompt to assign this exact item and home;
+// a covering batch result alone cannot adopt an arbitrary postbaseline helper.
+function assignedNativeDraft(root, run, row, id, page, writtenAt) {
+  if (writtenAt > Date.parse(row.started_at) || row.author_artifacts?.ok !== true
+    || typeof row.prompt !== 'string') return false;
+  const path = resolve(root, row.prompt), dispatch = realpathSync(join(root, 'research', `${run}-dispatch`));
+  if (!existsSync(path) || !realpathSync(path).startsWith(dispatch + sep)
+    || statSync(path).mtimeMs > Date.parse(row.started_at)) return false;
+  const prompt = readFileSync(path, 'utf8');
+  return prompt.split('\n').includes(`run: ${run}`)
+    && prompt.split('\n').includes(`label: ${row.label}`)
+    && prompt.split('\n').some(line => line.trim().match(/^\d+\. /)
+      && line.trim().replace(/^\d+\. /, '') === `${id} (${page})`);
+}
+
 // A later owner repair can recertify an item that was genuinely auditor-created
-// before the immutable baseline. The original author result remains its origin
+// after the immutable baseline. The original author result remains its origin
 // evidence; the current owner decision is a separate, hash-bound repair verdict.
 function currentOwnerRepair(s, id, dependencies, sha256) {
   const path = join(s.root, 'research', `${s.run}-step3b-owner-${safe(id)}.json`);
@@ -373,14 +389,17 @@ function certify(root, run, partial) {
       if (!author || !Number.isFinite(ended)
         || paths.some(path => statSync(path).mtimeMs > ended)) {
         // A late owner/reviewer verdict establishes currency, not creation.
-        // A genuine native own-file write window can survive a late sibling
-        // supplier without an earlier whole-closure certificate. A late own
+        // A genuine native own-file write window, or an explicitly assigned
+        // unchanged draft adopted by a successful restart, can survive a late
+        // sibling supplier without an earlier whole-closure certificate. A late own
         // proof edit/new helper cannot infer origin from an old covering result.
         const ownWrittenAt = statSync(itemPath).mtimeMs;
         const ownWindowAuthor = results.filter(row => row.label.startsWith('step3b-pair-')
           ? Boolean(pair && row.label.startsWith(`step3b-pair-${pair}-`) && row.covers.includes(pair))
           : row.covers.map(String).includes(batch)).filter(row =>
-            ownWrittenAt >= Date.parse(row.started_at) && ownWrittenAt <= Date.parse(row.ended_at))
+            ownWrittenAt <= Date.parse(row.ended_at)
+            && (ownWrittenAt >= Date.parse(row.started_at)
+              || assignedNativeDraft(root, run, row, id, value.page.id, ownWrittenAt)))
           .sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
         const originAuthorResult = prior?.author_result ?? ownWindowAuthor?.label;
         ownerRecertification = originAuthorResult

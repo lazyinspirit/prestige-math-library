@@ -140,6 +140,53 @@ test('late sibling inputs permit genuine native own-file origin; late new helper
   assert.equal(after.items[0].sha256, native.items[0].sha256);
 });
 
+test('successful native restart adopts its exact assigned unchanged draft, then preserves owner history', t => {
+  const f = fixture(t); f.native(); const id = 'lem-native';
+  const resultPath = 'research/r-dispatch/alpha-high-native.result.json';
+  const promptPath = 'research/r-dispatch/alpha-high-native.attempt-1.prompt.md';
+  const result = { ...JSON.parse(readFileSync(join(f.root, resultPath))),
+    started_at: '2025-01-01T00:00:06Z', author_artifacts: { ok: true }, prompt: promptPath };
+  f.write(resultPath, JSON.stringify(result));
+  const prompt = `run: r\nlabel: ${result.label}\n  0. ${id} (page-a)\n`;
+  const writePrompt = bytes => {
+    f.write(promptPath, bytes);
+    utimesSync(join(f.root, promptPath), new Date(result.started_at), new Date(result.started_at));
+  };
+  writePrompt(prompt);
+  f.pages[0].items.find(row => row.id === id).deps = ['lem-base']; f.manifests();
+  f.write('items/lem-base.md', `${item('lem-base')}\nLate supplier.\n`);
+  assert.throws(() => certifyAuditorItems(f.root, 'r'), /changed after its latest successful/,
+    'native draft adoption establishes origin only, never current acceptance');
+  f.decide(id, ['lem-base']);
+  for (const bad of [prompt.replace(id, 'lem-unassigned'), prompt.replace('page-a', 'page-b'),
+    prompt.replace('run: r', 'run: other'), prompt.replace(result.label, 'other-label')]) {
+    writePrompt(bad);
+    assert.throws(() => certifyAuditorItems(f.root, 'r'), /changed after its latest successful/);
+  }
+  writePrompt(prompt);
+  utimesSync(join(f.root, promptPath), new Date(result.ended_at), new Date(result.ended_at));
+  assert.throws(() => certifyAuditorItems(f.root, 'r'), /changed after its latest successful/,
+    'a retrospectively changed prompt cannot establish restart assignment');
+  writePrompt(prompt);
+  for (const bad of [{ ...result, author_artifacts: { ok: false } }, { ...result, ok: false },
+    { ...result, prompt: 'research/missing.prompt.md' }]) {
+    f.write(resultPath, JSON.stringify(bad));
+    assert.throws(() => certifyAuditorItems(f.root, 'r'), /changed after|no successful/);
+  }
+  f.write(resultPath, JSON.stringify(result));
+  const first = certifyAuditorItems(f.root, 'r').items[0];
+  assert.equal(first.author_result, result.label); assert.ok(first.owner_recertification);
+  const originalOwner = readFileSync(join(f.root, `research/r-step3b-owner-${id}.json`));
+  f.write(`items/${id}.md`, `${item(id)}\nLater owner proof edit.\n`);
+  f.decide(id, ['lem-base']);
+  const next = certifyAuditorItems(f.root, 'r').items[0];
+  assert.equal(next.author_result, first.author_result);
+  assert.deepEqual(readFileSync(join(f.root, `research/r-step3b-owner-history-${id}/${first.owner_recertification.sha256}.json`)), originalOwner);
+  f.write(`items/${id}.md`, `${item(id)}\nUnaudited own edit.\n`);
+  assert.throws(() => certifyAuditorItems(f.root, 'r'), /changed after its latest successful/);
+  assert.deepEqual(readFileSync(join(f.root, 'research/r-step3-auditor-baseline.json')), f.baselineBytes);
+});
+
 
 test('known timeline registration is immutable and checks the authored statement identity', t => {
   const f = fixture(t); f.add();

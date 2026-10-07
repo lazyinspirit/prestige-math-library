@@ -338,6 +338,15 @@ All other additions retain native provenance checks. Late sibling supplier input
 may be owner-recertified when the item's own file is still in a genuine successful
 native author write window; a new helper or later own-proof edit cannot borrow an
 old result without surviving immutable native origin evidence.
+A successful native restart may also adopt an unchanged postbaseline draft from
+an interrupted predecessor: its real prompt inside that run's dispatch directory
+must identify the exact run and successful label and explicitly assign the item
+at its current home, that prompt must predate the restart's start, its author
+artifact check must have passed, and the own file
+must predate the restart's start. The own file must still predate its end; later
+supplier inputs require the ordinary current owner repair or independent review.
+This preserves native origin and never registers owner creation or rewrites the
+baseline, author result, prompt, or prior owner history.
 
 ## Controls
 
