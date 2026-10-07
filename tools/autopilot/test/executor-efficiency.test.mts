@@ -423,6 +423,62 @@ test('an exclusiveCohort that throws blocks the stage instead of ending the run'
     'the manifest defect is named in a blocker');
 });
 
+test('exclusive cohort recovery retires only its stage blockers after the full evaluation succeeds', async () => {
+  const fx = fixture();
+  let failure: string | null = 'invalid manifest';
+  const checked: string[] = [];
+  const stages = [{
+    id: 's1', label: 'only', units: () => ['1', '2'], pattern: /^worker-/, concurrency: 1,
+    plan: () => [],
+    exclusiveCohort: (_ctx: any, unit: string) => {
+      checked.push(unit);
+      if (unit === '2' && failure) throw new Error(failure);
+      return [];
+    },
+    gates: () => [loggingGate(fx, 's1')],
+  }];
+  const { ex, notifications } = makeExecutor(fx, stages);
+  ex.state.addBlocker('s1', 'owner repair still needed', 'owner-repair');
+  const sibling = 'stage s2: reading the exclusive cohort failed — sibling manifest';
+  ex.state.addBlocker('s2', sibling);
+  const dispatch = () => ex.dispatchStage(stages[0], ex.ctx());
+  const cohortMessages = () => ex.state.data.blockers
+    .filter((b: any) => b.stage === 's1' && /reading the exclusive cohort failed/.test(b.message))
+    .map((b: any) => b.message);
+
+  assert.equal(await dispatch(), 'blocked');
+  const original = cohortMessages()[0];
+  assert.match(original, /invalid manifest/);
+  failure = 'another malformed row';
+  checked.length = 0;
+  assert.equal(await dispatch(), 'blocked');
+  assert.deepEqual(checked, ['1', '2'], 'success on the first unit cannot retire a later failure');
+  assert.ok(cohortMessages().includes(original), 'a new throw preserves the previous blocker');
+  assert.equal(cohortMessages().length, 2);
+  assert.equal(notifications.filter((n) => n.kind === 'unblocked').length, 0);
+
+  failure = null;
+  checked.length = 0;
+  ex.inflight.set('s1:running', { meta: { stage: 's1', covers: ['1', '2'] } } as any);
+  assert.equal(await dispatch(), 'ok');
+  assert.deepEqual(checked, [], 'already-running units do not read the cohort');
+  assert.equal(cohortMessages().length, 2, 'no read cannot validate the repaired manifest');
+  ex.inflight.clear();
+  cover(fx, 'worker', 'covered', ['1', '2']);
+  assert.equal(await dispatch(), 'ok');
+  assert.deepEqual(checked, [], 'an empty pending set does not read the cohort');
+  assert.equal(cohortMessages().length, 2);
+  // A fresh pending unit makes recovery observable through an actual read.
+  stages[0].units = () => ['1', '2', '3'];
+  assert.equal(await dispatch(), 'ok');
+  assert.deepEqual(checked, ['3']);
+  assert.deepEqual(cohortMessages(), []);
+  assert.deepEqual(ex.state.data.blockers.map((b: any) => b.message),
+    ['owner repair still needed', sibling]);
+  assert.ok(notifications.some((n) => n.kind === 'unblocked' && /exclusive cohort evaluation succeeded/.test(n.message)));
+  assert.deepEqual(gateRuns(fx), [], 'dispatch recovery does not run gates');
+});
+
 test('a tick that throws is recorded as a blocker and the loop keeps running', async () => {
   const fx = fixture();
   const { ex, notifications } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'never')]));

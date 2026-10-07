@@ -99,6 +99,13 @@ status reporting from delaying worker launches on a large frontier.
 Step-1 scaffold artifact checks reuse one manifest snapshot across batches in
 a status pass. Manifest, plan, coverage, and item-body changes invalidate the
 corresponding cached data; readiness receipts are read afresh for each item.
+Restarted controllers adopt live dispatches for the exact same run. Each adopted
+dispatch occupies one stage, role and global slot, including cohort dispatches
+and recovery dispatches without primary coverage. Local children are counted
+once, and other runs do not consume this run's capacity. A transient exclusive
+cohort read failure remains a blocker until a later complete evaluation includes
+an actual successful cohort read; an empty or entirely running pending set does
+not validate the input. Recovery retires only that stage's cohort-read blockers.
 Tests use temporary fixtures and fake dispatches, never live state. Do not
 install a renumbered stage table or regenerate prompts under an active run.
 Historical receipts are not migration aliases; cutover requires a fresh run
