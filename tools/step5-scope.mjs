@@ -1176,7 +1176,7 @@ if (command === 'check') {
       try { if (JSON.parse(originalRaw).run !== run) return false; } catch { return false; }
       const current = readFileSync(R(entry.current_path), 'utf8');
       if (current.split(entry.after_literal).length !== 2) return false;
-      return sha256(current.replace(entry.after_literal, entry.before_literal)) === entry.before_raw_sha256;
+      return sha256(current.replace(entry.after_literal, () => entry.before_literal)) === entry.before_raw_sha256;
     });
     const referenced = new Map();
     const contextualDefects = new Set();

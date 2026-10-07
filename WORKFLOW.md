@@ -177,7 +177,12 @@ future stages defer selection until execution and write no run state.
   against distinct carriers, requires explicit owner evidence binding the exact
   obligations, ledger row, current raw bytes and native report hashes. A prior
   repair must also reconstruct its authenticated before hash by the exact inverse
-  edit. Immutable reader/refuter observations remain unchanged.
+  edit. Treat both edit literals as raw text: inverse replacement must not
+  interpret Markdown dollar signs as JavaScript replacement tokens. A current
+  owner-provenance bundle derived after correction must state that timing and
+  hash-bind the genuine receipt, raw guards and before archive; it does not
+  establish previously unbound reader observations. Immutable reader/refuter
+  observations remain unchanged.
 
 - Step 7 freezes `research/RUN-step7-v2/frontier.json`. Its adjudication, repair,
   rejudgment and item gates cover draft IDs in that frontier. Batch adjudicators resolve

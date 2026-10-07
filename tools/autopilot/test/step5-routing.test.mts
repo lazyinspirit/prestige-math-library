@@ -184,6 +184,73 @@ function prepareSplit(fx: ReturnType<typeof fixture>) {
   fx.run('post-reader', '--run', 'r', '--batch', '1');
 }
 
+test('prior applied repairs reconstruct literal Markdown and retain provenance guards', () => {
+  const sha = (text: string) => createHash('sha256').update(text).digest('hex');
+  const canonical = (value: any): any => Array.isArray(value) ? value.map(canonical)
+    : value && typeof value === 'object'
+      ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+  const hash = (value: any) => sha(JSON.stringify(canonical(value)));
+  for (const special of [false, true]) {
+    const fx = fixture();
+    try {
+      const id = 'thm-published-dependency';
+      const header = `---\nid: ${id}\nstatus: published\ndeps: []\n---\n## Statement\n`;
+      const oldText = header + (special ? "Old $$x^2$$, prime $x'$, literal $&, and $`.\n" : 'Old statement.\n');
+      const newText = header + 'Corrected statement.\n';
+      const currentPath = `items/${id}.md`;
+      writeFileSync(join(fx.root, currentPath), newText);
+      const consumer = join(fx.root, 'items', fx.ids[0] + '.md');
+      writeFileSync(consumer, readFileSync(consumer, 'utf8').replace('deps: []', `deps: [${id}]`));
+      fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
+      fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'post');
+      writeFileSync(join(fx.root, 'research/r-reader-findings-1.json'), JSON.stringify({
+        batch: '1', coverage_note: 'Historical published claim reviewed on the already repaired carrier.',
+        findings: [{ id, subject_type: 'published-dependency', consumer_id: fx.ids[0],
+          location: 'Statement', defect: 'false-claim', evidence: 'Historical assertion was repaired before this observation.', severity: 'fatal' }],
+      }));
+      fx.run('split', '--run', 'r', '--batch', '1');
+      writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({
+        batch: '1', opened: [...fx.ids, 'p'], not_opened: [], flagged: [], coverage_note: 'All scoped subjects opened.',
+      }));
+      fx.run('collect', '--run', 'r', '--batch', '1');
+      const finding = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8')).reader_findings[0];
+      const row = { defect_id: 'r-prior-repair', run: 'r', subject: id,
+        caught_at_stage: '5a-adjudicate', severity: 'fatal', disposition: 'fixed' };
+      writeFileSync(join(fx.root, 'research/defect-ledger.jsonl'), JSON.stringify(row) + '\n');
+      writeFileSync(join(fx.root, 'research/r-alpha-a-5a-decisions.json'), JSON.stringify({
+        version: 1, run: 'r', group: 'a', decisions: [{ obligation: finding.obligation, id,
+          route: 'reader', verdict: 'confirmed_fatal', repair_confidence: 1,
+          defect_ids: [row.defect_id], evidence: 'The authorized prior correction was independently reviewed.' }],
+      }));
+      const originalPath = 'research/original-owner-repair.json';
+      const originalText = JSON.stringify({ run: 'r', before_raw_sha256: sha(oldText), after_raw_sha256: sha(newText) });
+      writeFileSync(join(fx.root, originalPath), originalText);
+      const entry = { id, obligation: finding.obligation, defect_id: row.defect_id,
+        ledger_row_sha256: hash(row), target_sha256: hash({ ...finding, route: 'reader' }),
+        current_path: currentPath, current_raw_sha256: sha(newText), before_raw_sha256: sha(oldText),
+        after_raw_sha256: sha(newText), before_literal: oldText, after_literal: newText,
+        original_owner_artifact: { path: originalPath, sha256: sha(originalText) },
+        evidence: [{ path: originalPath, sha256: sha(originalText) }],
+        reason: 'An authorized owner repair preceded this native observation; authenticated original raw hashes and the exact inverse edit bind the unchanged current carrier.' };
+      const evidencePath = join(fx.root, 'research/r-step5-owner-repair-evidence.json');
+      const save = (value: any) => writeFileSync(evidencePath, JSON.stringify({ version: 1, run: 'r', prior_applied_repairs: [value] }));
+      save(entry);
+      fx.run('stamp', '--run', 'r');
+      assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+      for (const tamper of [
+        { ...entry, before_literal: oldText + 'tampered' },
+        { ...entry, after_literal: newText + 'tampered' },
+        { ...entry, original_owner_artifact: { path: originalPath, sha256: '0'.repeat(64) } },
+      ]) {
+        save(tamper);
+        const result = fx.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+        assert.notEqual(result.status, 0);
+        assert.match(result.stdout + result.stderr, /decision-not-applied/);
+      }
+    } finally { rmSync(fx.root, { recursive: true, force: true }); }
+  }
+});
+
 test('batch decisions stamp and close independently without accepting sibling obligations', () => {
   const fx = fixture();
   try {
