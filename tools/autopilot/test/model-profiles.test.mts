@@ -78,6 +78,7 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
 test('Step 3 scopes and authors use DeepSeek while Step 5 adjudication uses Sol 6.1 high', () => {
   assert.equal(stage('3a-scope').modelProfile, MODEL_PROFILE_NAMES.deepseekFlashMax);
   const authorStage = stage('3b-author');
+  assert.equal(authorStage.modelProfile, MODEL_PROFILE_NAMES.deepseekFlashMax);
   const author = { role: 'alpha-high', job: 'authoring' };
   assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.deepseekFlashMax);
   assert.equal(selected(authorStage, {
@@ -163,12 +164,14 @@ test('all ordinary dispatcher roles default to Sol 6.1 high', () => {
 });
 
 test('Step-3 scope and authoring use DeepSeek Flash max', () => {
-  for (const [id, model] of [['3a-scope', MODELS.deepseekFlash.id], ['3b-author', MODELS.deepseekFlash.id]]) {
-    const profile = MODEL_PROFILES[stage(id).modelProfile];
-    assert.equal(profile.model, model);
-    assert.equal(profile.effort, 'max');
-    assert.equal(profile.requestedEffort, 'max');
-  }
+  const scope = MODEL_PROFILES[stage('3a-scope').modelProfile];
+  assert.equal(scope.model, MODELS.deepseekFlash.id);
+  assert.equal(scope.effort, 'max');
+  assert.equal(scope.requestedEffort, 'max');
+  const author = MODEL_PROFILES[stage('3b-author').modelProfile];
+  assert.equal(author.model, MODELS.deepseekFlash.id);
+  assert.equal(author.effort, 'max');
+  assert.equal(author.requestedEffort, 'max');
 });
 
 test('Step-7 fatal group adjudicator uses Sol 6.1 high', () => {

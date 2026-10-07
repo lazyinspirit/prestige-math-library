@@ -49,6 +49,10 @@ test('Step 3 is two barriers with the requested profiles, not a Beta loop', t =>
     assert.equal(plan.profile, profile);
     assert.ok(s.pattern(f.ctx).test(`${plan.role}-${plan.label}.result.json`));
   }
+  for (const phase of ['scope', 'final'] as const) {
+    assert.equal(step3Plan(f.ctx, { label: 'a', covers: ['1'] }, phase).profile,
+      MODEL_PROFILE_NAMES.deepseekFlashMax);
+  }
 });
 
 test('Step 3 accepts an omitted B back-reference but rejects conflicting or shared companions', t => {

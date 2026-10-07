@@ -50,6 +50,8 @@ const { step7Stages } = await import(
 
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
 const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax;
+// Pair/group author plans and their recovery fallback share this selection.
+const STEP3_AUTHOR_PROFILE = DEEPSEEK_FLASH_MAX;
 // A live engine hot-reloads this stage module but retains its first models.mjs
 // import. The new profile name must also resolve in that already-running process.
 const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
@@ -1310,7 +1312,7 @@ export function step3Plan(ctx: any, group: any, phase: 'scope' | 'final') {
   const authorScope = phase === 'final' ? step3AuthorScopeNote() : '';
   writeFileSync(R(ctx, task), `# ${prefix}: group ${group.label}\n\n- Run: ${ctx.run}\n- Batches: ${group.covers.join(', ')}\n- A pages: ${pairs.map(([id]: any) => id).join(', ')}\n- Read current manifests, coverage, prose, plan and dependency records.\n${authorScope}${itemOrder}- Write research/${ctx.run}-${prefix}-${group.label}.md.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
-    profile: DEEPSEEK_FLASH_MAX,
+    profile: phase === 'scope' ? DEEPSEEK_FLASH_MAX : STEP3_AUTHOR_PROFILE,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: group.covers,
     brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
     task, timeout: phase === 'scope' ? 10800 : 21600 };
@@ -1409,7 +1411,7 @@ export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') 
     : '';
   writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n${authorScope}${prerequisiteNote}${itemOrder}- Write ${report}.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
-    profile: DEEPSEEK_FLASH_MAX,
+    profile: phase === 'scope' ? DEEPSEEK_FLASH_MAX : STEP3_AUTHOR_PROFILE,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: [unit],
     brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
     task, timeout: phase === 'scope' ? 10800 : 21600 };
@@ -1637,7 +1639,7 @@ export const stages = [
   {
     id: '3b-author',
     label: 'Step 3b — pair scaffold audit, repair and authoring',
-    modelProfile: DEEPSEEK_FLASH_MAX,
+    modelProfile: STEP3_AUTHOR_PROFILE,
     role: 'alpha-high',
     units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
     // The owner asked to author every pair in this run even when an in-run

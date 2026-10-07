@@ -354,6 +354,11 @@ fixes reach live gate descriptors without changing the recovery cap or stage ord
   Luna registry entries preserve historical evidence; new default judges use
   the `sol61` lineup at high effort. Running workers retain their launch settings.
 
+- Step 3b authors, including pair, legacy-group and recovery author dispatches,
+  use DeepSeek V4.1 Flash at max effort (`deepseek-v4.1-flash-max`). Stage-table
+  edits reload at the next controller tick; active calls retain their original
+  launch profiles, and new calls use the reloaded selection.
+
 - A run-local stage table may reduce dispatch concurrency and set the existing
   `JUDGE_CONCURRENCY_GPT_6_1_SOL` cap for its native judge tools after a recorded
   HTTP 429 outage. Keep the model, effort, coverage and successful evidence;
