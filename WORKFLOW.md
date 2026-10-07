@@ -61,13 +61,18 @@ the battery. Its bare invocation continues to check the complete corpus.
 Depsource additionally receives `--run RUN`: validated current manifests overlay
 subject entries and current item homes before Step 4 splices the canonical plan.
 The full plan remains external supplier context. Validate-plan also receives
-`--run RUN`: page and item diagnostics concern manifest pages; reachable item,
-induced-page and declared-prerequisite cycles remain checked. External authored
+`--run RUN`: current manifest page and item objects replace the selected plan
+objects before validation. Canonical item arrays may still be empty before
+Step 4; current manifest items need not already occur there. Existing canonical
+items must have one occurrence on their exact current page, and stale selected
+plan items do not become validator subjects. Page and item diagnostics concern
+manifest pages; reachable item, induced-page and declared-prerequisite cycles
+remain checked. External authored
 suppliers use their current item files and page homes, rather than obsolete
 planned dependency records. Definition `justified_by` discharges remain forward
-well-definedness checks, not logical prerequisite edges. Missing manifest pages
-or items in the selected plan fail closed, including before authoring when item
-files need not exist yet. Missing/empty manifests,
+well-definedness checks, not logical prerequisite edges. Missing canonical
+manifest pages or current items in the overlaid selected plan fail closed,
+including before authoring when item files need not exist yet. Missing/empty manifests,
 unknown run subjects and unresolved dependencies remain failures. Pathway placement of draft pages remains advisory.
 Unrelated items and pages are context rather than formatting, audit or repair
 subjects. Bare validator commands retain their historical whole-corpus behavior.
@@ -353,6 +358,13 @@ fixes reach live gate descriptors without changing the recovery cap or stage ord
   `JUDGE_CONCURRENCY_GPT_6_1_SOL` cap for its native judge tools after a recorded
   HTTP 429 outage. Keep the model, effort, coverage and successful evidence;
   let active workers finish before a bounded native retry.
+
+- `autopilot.config.json` sets the runtime dispatch budget. `concurrency` is
+  the fallback for stages without an explicit cap; `globalConcurrency` caps
+  each controller's total in-flight dispatches, not a host-wide shared pool.
+  A machine budget below a stage's lane capacity queues pending units without
+  reducing the approved build scope. These caps do not bound subprocess
+  fan-out within a native tool.
 
 - All agent lanes use `model_auto_compact_token_limit=500000` with scope `total`.
   The dispatcher and judge pass this explicitly for isolated Codex homes;

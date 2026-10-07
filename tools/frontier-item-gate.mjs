@@ -65,7 +65,7 @@ const pathwayFiles = [...new Set(pages.map(page => `library/${page.category}/_pa
 const script = `tools/${tool}${tool === 'precheck' ? '.mts' : '.mjs'}`;
 const command = tool === 'precheck' ? ['tools/tsx-run.mjs', script] : [script];
 if (positional.has(tool)) command.push(...itemFiles, ...(tool === 'precheck' ? [] : pageFiles), ...(tool === 'prosecheck' ? pathwayFiles : []), ...toolArgs);
-else if (tool === 'validate-plan') command.push('research/plan-spec.json', '--pages-file', pageSelector, ...toolArgs);
+else if (tool === 'validate-plan') command.push('research/plan-spec.json', '--pages-file', pageSelector, '--run', run, ...toolArgs);
 else if (tool === 'pathcheck') command.push('--pages-file', pageSelector, ...toolArgs);
 else command.push('--items-file', selector, ...(tool === 'depsource' ? ['--run', run] : []), ...toolArgs);
 // JSON consumers require the validator's complete document on stdout. A banner

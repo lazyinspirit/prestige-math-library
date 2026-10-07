@@ -57,6 +57,7 @@ import { join, relative } from 'node:path';
 import { REPO } from './paths.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { frontierGateScope } from './frontier-gate-scope.mjs';
+import { readRunManifestPages } from './run-manifest-pages.mjs';
 
 const args = process.argv.slice(2);
 let selectedPages = null;
@@ -82,6 +83,7 @@ const runPositions = args.flatMap((arg, i) => arg === '--run' ? [i] : []);
 if (runPositions.length > 1) die('--run may be specified once');
 const run = argVal('--run');
 let selectedItemIds = null;
+let currentPages = null;
 if (runPositions.length) {
   if (!run || run.startsWith('--')) die('--run requires a current frontier run');
   try {
@@ -90,6 +92,7 @@ if (runPositions.length) {
       || [...selectedPages].some(id => !scope.pages.has(id))))
       die('--pages-file must exactly match the current run manifests when used with --run');
     selectedPages = scope.pages; selectedItemIds = scope.items;
+    currentPages = readRunManifestPages(repo, run);
   } catch (error) { die(`frontier gate selection: ${error.message}`); }
 }
 
@@ -169,7 +172,21 @@ const warn = (code, msg) => warns.push(`[${code}] ${msg}`);
 
 // ---------------------------------------------------------------- index
 
-const pages = [...spec.pages].sort((a, b) => a.order - b.order);
+// Validate canonical page identities before replacing only selected pages.
+// Current item inventories are authoritative before the Step 4 splice; an item
+// absent from the canonical plan is allowed, but conflicting ownership is not.
+if (currentPages) for (const page of currentPages) {
+  if (spec.pages.filter(p => p.id === page.id).length !== 1)
+    die(`frontier gate selection: page ${page.id} must occur exactly once in the plan`);
+  for (const item of page.items) {
+    const homes = spec.pages.filter(p => (p.items ?? []).some(it => it.id === item.id));
+    const occurrences = spec.pages.flatMap(p => (p.items ?? []).filter(it => it.id === item.id));
+    if (occurrences.length > 1 || (occurrences.length === 1 && homes[0].id !== page.id))
+      err('frontier-selection', `current manifest item ${item.id} has conflicting canonical ownership; when present it must occur exactly once on selected plan page ${page.id}`);
+  }
+}
+const currentPageById = new Map((currentPages ?? []).map(page => [page.id, page]));
+const pages = spec.pages.map(page => currentPageById.get(page.id) ?? page).sort((a, b) => a.order - b.order);
 const pageOfItem = new Map();   // itemId -> page
 const itemById = new Map();     // itemId -> item
 const posInPage = new Map();    // itemId -> index within its page
