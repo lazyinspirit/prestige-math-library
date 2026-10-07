@@ -25,6 +25,7 @@ import { loadOwnerIdMigrations } from './step5-owner-id-migrations.mjs';
 import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
 import { loadOwnerHistoricalRoutes } from './step5-owner-historical-routes.mjs';
 import { isCertifiedOwnerContextAddition } from './step5-owner-context-addition.mjs';
+import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step5-owner-post-reader-page-repairs.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -585,7 +586,7 @@ function reportOnlyFinding(finding, refuter = false) {
   const { observed_sha256: _observed, pre_sha256: _pre,
     producer_batch: _producer, dependency_path: _path,
     producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
-    observation_basis: _basis, ...row } = finding;
+    observation_basis: _basis, owner_page_repair: _ownerPageRepair, ...row } = finding;
   if (refuter && finding.subject_type === 'in-run-dependency') {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   }
@@ -769,6 +770,7 @@ if (command === 'split') {
   const readerFindings = normalizeFindings(Array.isArray(readerReport.findings) ? readerReport.findings : [],
     batch, readerAllowed, readerError, 'reader');
   const live = liveFingerprints(batch);
+  const ownerPages = loadOwnerPageRepairs(ROOT, run, batch);
   for (const finding of readerFindings) {
     const expectedType = derived.manifestPost.includes(finding.id) ? 'in-flight-item'
       : derived.pageManifestPost.includes(finding.id) ? 'page'
@@ -778,7 +780,8 @@ if (command === 'split') {
       && (!finding.consumer_id || !published.get(finding.id)?.has(finding.consumer_id))) {
       readerError(`${finding.obligation} must name an assigned consumer that reaches published dependency ${finding.id}`);
     }
-    if (derived.touched.includes(finding.id) || derived.pagesTouched.includes(finding.id)) {
+    const ownerPage = expectedType === 'page' ? ownerPageFindingRepair(ownerPages, batch, finding) : null;
+    if ((derived.touched.includes(finding.id) || derived.pagesTouched.includes(finding.id)) && !ownerPage) {
       readerError(`${finding.obligation} names changed carrier ${finding.id}; repaired work belongs in the touched route, not the open-findings artifact`);
     }
     if (expectedType === 'in-run-dependency') {
@@ -791,7 +794,15 @@ if (command === 'split') {
     const carrier = expectedType === 'in-flight-item' ? live.items[finding.id]
       : expectedType === 'page' ? pageCarrier(live.pages[finding.id])
         : { item_sha256: publishedText === null ? null : sha256(publishedText) };
-    finding.observed_sha256 = hashValue(carrier);
+    if (ownerPage) {
+      // The native reader did not bind an exact full-byte observation. Preserve
+      // that uncertainty; the registered before carrier is routing provenance.
+      finding.observed_sha256 = null;
+      finding.observation_basis = 'unbound';
+      finding.owner_page_repair = { ...ownerPage.binding,
+        before_carrier_sha256: hashValue(pageCarrier(ownerPage.capture_value.before_carrier)),
+        before_provenance: ownerPage.capture_value.before_provenance };
+    } else finding.observed_sha256 = hashValue(carrier);
     if (publishedText !== null) finding.pre_sha256 = itemHashGuard(publishedText);
   }
   if (readerErrors.length) fail(`step5-scope: batch ${batch} reader findings invalid: ${readerErrors.join('; ')}`, 1);
@@ -1010,6 +1021,24 @@ if (command === 'check') {
       || !sameSet(scope.untouched ?? [], derived.untouched)) {
       error('scope-stale', `batch ${batch} no longer matches its pre/post hashes`);
     }
+    // Freeze authority per page, not the registry inventory: adding another
+    // independently registered page cannot change a previously split finding.
+    let ownerPages = [];
+    try { ownerPages = loadOwnerPageRepairs(ROOT, run, batch, { requireCurrent: false }); }
+    catch (cause) { error('owner-page-authority-invalid', `batch ${batch}: ${cause.message}`); }
+    for (const finding of scope.reader_findings ?? []) {
+      const ownerPage = ownerPageFindingRepair(ownerPages, batch, finding);
+      if (!ownerPage && finding.owner_page_repair) error('owner-page-authority-invalid', `${finding.obligation} has no matching frozen page authority`);
+      if (ownerPage) {
+        const expected = { ...ownerPage.binding,
+          before_carrier_sha256: hashValue(pageCarrier(ownerPage.capture_value.before_carrier)),
+          before_provenance: ownerPage.capture_value.before_provenance };
+        if (hashValue(finding.owner_page_repair) !== hashValue(expected)
+          || finding.observed_sha256 !== null || finding.observation_basis !== 'unbound') {
+          error('owner-page-authority-stale', `${finding.obligation} changed its frozen owner-before binding or invented a reader observation`);
+        }
+      }
+    }
     if (phase !== 'split') {
       const readerPath = readerFindingsPath(batch);
       if (!existsSync(readerPath)) error('reader-findings-missing', `batch ${batch} reader findings artifact is missing`);
@@ -1038,7 +1067,7 @@ if (command === 'check') {
               continue;
             }
             if (inRun.has(finding.id)) reportError(`${finding.obligation} must retain subject_type in-run-dependency`);
-            if (!/^[a-f0-9]{64}$/.test(finding.observed_sha256 ?? '')) reportError(`${finding.obligation} has no valid observed carrier hash`);
+            if (!finding.owner_page_repair && !/^[a-f0-9]{64}$/.test(finding.observed_sha256 ?? '')) reportError(`${finding.obligation} has no valid observed carrier hash`);
             if (finding.subject_type === 'published-dependency'
               && !/^[a-f0-9]{64}$/.test(finding.pre_sha256 ?? '')) {
               reportError(`${finding.obligation} has no valid pre-repair published hash`);
@@ -1296,6 +1325,10 @@ if (command === 'check') {
         }
         if (!allowed.includes(decision.verdict)) error('decision-verdict', `${decision.obligation} has invalid verdict ${decision.verdict}`);
         if (typeof decision.evidence !== 'string' || !decision.evidence.trim()) error('decision-evidence', `${decision.obligation} has no evidence`);
+        if (target?.owner_page_repair && (decision.historical_delta_unknown !== true
+          || typeof decision.owner_resolution !== 'string' || decision.owner_resolution.trim().length < 40)) {
+          error('owner-page-observation-unbound', `${decision.obligation} needs explicit owner resolution of the unbound original reader observation`);
+        }
         const accepted = target?.direct && decision.verdict === 'accepted';
         const cleanChange = decision.verdict === 'reviewed_no_defect';
         const currentContentReview = decision.change_kind === 'current_content_review'

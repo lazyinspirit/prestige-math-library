@@ -554,6 +554,67 @@ producer and immutable baseline before permitting one ledger row to serve both
 obligations. Stamping binds decisions to the current producer item, contract and
 manifest, and Step5 closure freezes the existing routing and hash artifacts.
 
+For an exact owner page repair made after a successful native reader but before
+routing, use the page-only authority tool; do not remove the native finding or
+revert a correct repair merely to satisfy the changed-carrier guard:
+
+```sh
+node tools/step5-owner-post-reader-page-repairs.mjs capture --run RUN --batch N --page PAGE --owner /root
+node tools/step5-owner-post-reader-page-repairs.mjs check --run RUN --evidence research/AUTHORIZATION.json
+node tools/step5-owner-post-reader-page-repairs.mjs record --run RUN --evidence research/AUTHORIZATION.json
+```
+
+Capture requires the genuine successful reader result, original findings/report,
+unique manifest ownership, writer drain and before bytes exactly matching the
+immutable pre-reader page. It freezes separate before bytes and their typed page
+carrier without changing native artifacts or snapshots. A previously applied
+owner repair may supply `--before-file PATH --provenance owner-recovered-before`
+or `owner-reconstructed-before`; the exact pre hash remains mandatory. This
+records owner-before/pre-snapshot provenance, not proof that the reader observed
+those exact full bytes. A capture labeled `owner-captured-current` must equal the
+actual live page even when a before-file is supplied; recovered or reconstructed
+preimages must retain their separate provenance kinds. A page changed by the reader cannot use this default
+exception. Page-only frontmatter placement corrections are allowed after capture;
+item repairs, manifest changes and new subjects are not.
+
+The authorization JSON has version1, policy
+`owner-step5-post-reader-page-repair-v1`, run, batch, page,
+`owner_identity: "/root"`, actual review time `at`, the capture path/raw SHA256,
+`current_path`, `after_raw_sha256`, ordered nonempty unique literal
+`edits: [{before, after}]`, hash-bound `original_owner_artifact` and `review`
+references, `reviewed: true`, and a concrete reason of at least80 characters.
+The original owner artifact must contain both raw page guards; the review also
+names the run and exact page. Replaying the unique replacements against the
+frozen before bytes must produce exactly the guarded current page. `record`
+creates an exclusive read-only authority file per page; adding a different page
+cannot alter an earlier scope binding, and duplicate/replaced authority fails.
+Registration changes no finding, report, decision, ledger, snapshot, certification
+or control, and grants no mathematical acceptance.
+
+Registration also freezes a separate immutable after-repair page archive.
+Capture, record and split require the current page to equal that registered after
+carrier. Later checking validates the frozen before-to-after repair and native
+history; legitimate subsequent native Alpha amendments retain normal current
+carrier/stamp/adjudication guards and do not rewrite the authority. Relevant
+reader, exact `5a-batch-N` Alpha and numeric-batch dispatcher writers must drain
+before capture or record.
+
+The splitter retains every original `reader:N:K` obligation and the normal
+`page:N:PAGE` changed-page obligation. Its original reader observation remains
+explicitly unbound with null `observed_sha256`; a separate hash-bound
+`owner_page_repair` reference records the owner-before carrier. Scope checks
+reload that exact per-entry authority and require the frozen archives and all
+original evidence to remain bound; ordinary current-content checks govern later
+Alpha edits. Reader decisions must explicitly retain
+`historical_delta_unknown: true` and concrete `owner_resolution`; a real historical
+defect does not become a false positive just because its current page is fixed.
+Ordinary native adjudication, current-carrier checks, confidence and closed
+ledger references remain mandatory for both routes. Where the two routes share
+one actual physical defect row, the existing strict owner `shared_defects`
+evidence binds both exact obligations/targets; two independent defects remain
+two rows. No blanket permission to report already reader-repaired carriers in
+open findings is introduced.
+
 For a same-batch post-reader defect, a touched accepted/amended repair and its
 actual `refuter:BATCH:K` finding may reference the same closed ledger row.
 Both obligations remain required. The repair must have confidence one and the

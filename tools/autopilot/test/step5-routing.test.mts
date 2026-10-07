@@ -1302,3 +1302,95 @@ test('omitted native refuter class inference refuses source, scope, observation 
     } finally { rmSync(f.root, { recursive: true, force: true }); }
   }
 });
+
+// The owner may repair uneditable page prose after a successful reader but
+// before post-reader hashing. Preserve native findings; never call current
+// corrected bytes the original observation.
+function ownerPageRoutingFixture(frontmatter = false) {
+  const fx = fixture();
+  const hash = (x: string | Buffer) => createHash('sha256').update(x).digest('hex');
+  const findings = { batch:'1', coverage_note:'Genuine native fixture review.', findings:[
+    {id:'p',subject_type:'page',location:'First summary',defect:'false-claim',evidence:'The first page summary is wrong.',severity:'fatal'},
+    {id:'p',subject_type:'page',location:'Second summary',defect:'false-claim',evidence:'The second page summary is wrong.',severity:'nonfatal'},
+  ]};
+  writeFileSync(join(fx.root,'research/r-reader-findings-1.json'),JSON.stringify(findings));
+  mkdirSync(join(fx.root,'research/r-dispatch'));
+  writeFileSync(join(fx.root,'research/r-dispatch/reader-reader-1.attempt-1.result.json'),JSON.stringify({run:'r',role:'reader',label:'reader-1',ok:true,exit_code:0,process_exit_code:0,ended_at:'2020-01-01T00:00:00Z'}));
+  writeFileSync(join(fx.root,'research/r-reader-1.md'),'Native r reader reports unresolved page p claims.\n');
+  fx.run('hash','--run','r','--batch','1','--label','pre');
+  const originalFindings=readFileSync(join(fx.root,'research/r-reader-findings-1.json'));
+  const pre=readFileSync(join(fx.root,'research/r-step5-hash-1-pre.json'));
+  const pagePath='library/test/p.md', before=readFileSync(join(fx.root,pagePath),'utf8');
+  const capture = execFileSync(process.execPath,[join(REPO,'tools/step5-owner-post-reader-page-repairs.mjs'),'capture','--root',fx.root,'--run','r','--batch','1','--page','p','--owner','/root'],{encoding:'utf8'}).trim();
+  const edits = [
+    {before:'First summary.',after:'First accurate summary.'},
+    {before:'Second summary.',after:'Second accurate summary.'},
+    ...(frontmatter?[{before:'title: P\n',after:'title: P\nitems: [lem-ordinary-item, thm-touched-high-risk, cex-flagged-item]\n'}]:[]),
+  ];
+  let after=before;for(const e of edits)after=after.replace(e.before,e.after);
+  writeFileSync(join(fx.root,pagePath),after);
+  const reviewPath='research/owner-page-review.md';writeFileSync(join(fx.root,reviewPath),`Owner reviewed r page p: ${hash(before)} -> ${hash(after)} after the actual completed reader.`);
+  const reference=(path: string)=>({path,sha256:hash(readFileSync(join(fx.root,path)))});
+  const entry={version:1,policy:'owner-step5-post-reader-page-repair-v1',run:'r',batch:'1',page:'p',owner_identity:'/root',at:new Date().toISOString(),
+    capture:reference(capture),current_path:pagePath,after_raw_sha256:hash(after),reviewed:true,
+    reason:'The owner independently checked these exact two page defects and reviewed the exclusive factual repair, preserving the original native findings and source provenance.',
+    review:reference(reviewPath),original_owner_artifact:reference(reviewPath),edits};
+  writeFileSync(join(fx.root,'research/owner-page-evidence.json'),JSON.stringify(entry));
+  return {...fx,originalFindings,pre,entry};
+}
+
+test('unregistered post-reader owner page repair still rejects touched reader findings',()=>{
+ const f=ownerPageRoutingFixture();try{
+  const result=f.attempt('post-reader','--run','r','--batch','1');
+  assert.notEqual(result.status,0);assert.match(result.stderr,/names changed carrier p/);
+  assert.deepEqual(readFileSync(join(f.root,'research/r-reader-findings-1.json')),f.originalFindings);
+  assert.deepEqual(readFileSync(join(f.root,'research/r-step5-hash-1-pre.json')),f.pre);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
+for(const frontmatter of [false,true])test(`registered owner page repair preserves two reader obligations and the page route${frontmatter?' with a placement FM edit':''}`,()=>{
+ const f=ownerPageRoutingFixture(frontmatter);try{
+  execFileSync(process.execPath,[join(REPO,'tools/step5-owner-post-reader-page-repairs.mjs'),'record','--root',f.root,'--run','r','--evidence','research/owner-page-evidence.json']);
+  f.run('post-reader','--run','r','--batch','1');
+  const scope=JSON.parse(readFileSync(join(f.root,'research/r-step5-scope-1.json'),'utf8'));
+  assert.deepEqual(scope.pages_touched,['p']);assert.deepEqual(scope.reader_findings.map((x:any)=>x.obligation),['reader:1:1','reader:1:2']);
+  for(const finding of scope.reader_findings){assert.equal(finding.observed_sha256,null);assert.equal(finding.observation_basis,'unbound');assert.ok(finding.owner_page_repair.before_carrier_sha256);}
+  assert.deepEqual(readFileSync(join(f.root,'research/r-reader-findings-1.json')),f.originalFindings);
+  assert.deepEqual(readFileSync(join(f.root,'research/r-step5-hash-1-pre.json')),f.pre);
+  assert.match(f.run('check','--run','r','--phase','split'),/0 error/);
+  // A semantically harmless-looking authority rewrite must still violate its
+  // already frozen per-entry scope binding.
+  const authority=join(f.root,'research/r-step5-owner-page-1-p-authority.json');
+  const altered=JSON.parse(readFileSync(authority,'utf8'));altered.reason+=' Altered after split.';
+  execFileSync('chmod',['644',authority]);writeFileSync(authority,JSON.stringify(altered));
+  const stale=f.attempt('check','--run','r','--phase','split');assert.notEqual(stale.status,0);assert.match(stale.stdout+stale.stderr,/owner-page-authority-stale/);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
+
+test('refuter cannot spoof owner_page_repair to omit its real observed carrier hash',()=>{
+ const f=ownerPageRoutingFixture();try{
+  execFileSync(process.execPath,[join(REPO,'tools/step5-owner-post-reader-page-repairs.mjs'),'record','--root',f.root,'--run','r','--evidence','research/owner-page-evidence.json']);
+  f.run('post-reader','--run','r','--batch','1');
+  let scope=JSON.parse(readFileSync(join(f.root,'research/r-step5-scope-1.json'),'utf8'));
+  writeFileSync(join(f.root,'research/r-refute-1.json'),JSON.stringify({batch:'1',opened:scope.refuter_scope,not_opened:[],coverage_note:'Real current refuter fixture.',flagged:[{id:'p',location:'current page',defect:'false-claim',evidence:'Actual current refuter claim.',severity:'fatal'}]}));
+  f.run('collect','--run','r','--batch','1');scope=JSON.parse(readFileSync(join(f.root,'research/r-step5-scope-1.json'),'utf8'));
+  scope.refuter_findings[0].observed_sha256=null;scope.refuter_findings[0].owner_page_repair=scope.reader_findings[0].owner_page_repair;
+  writeFileSync(join(f.root,'research/r-step5-scope-1.json'),JSON.stringify(scope));
+  const r=f.attempt('check','--run','r','--phase','adjudicate');assert.notEqual(r.status,0);assert.match(r.stdout+r.stderr,/refuter:1:1 has no valid observed carrier hash/);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
+test('legitimate post-split Alpha page amendment preserves owner history and still requires ordinary adjudication',()=>{
+ const f=ownerPageRoutingFixture();try{
+  execFileSync(process.execPath,[join(REPO,'tools/step5-owner-post-reader-page-repairs.mjs'),'record','--root',f.root,'--run','r','--evidence','research/owner-page-evidence.json']);
+  f.run('post-reader','--run','r','--batch','1');
+  const scope=JSON.parse(readFileSync(join(f.root,'research/r-step5-scope-1.json'),'utf8'));
+  writeFileSync(join(f.root,'research/r-refute-1.json'),JSON.stringify({batch:'1',opened:scope.refuter_scope,not_opened:[],coverage_note:'All current subjects read.',flagged:[]}));f.run('collect','--run','r','--batch','1');
+  const after=readFileSync(join(f.root,'research/r-step5-owner-page-1-p-after.md'));
+  writeFileSync(join(f.root,'library/test/p.md'),readFileSync(join(f.root,'library/test/p.md'),'utf8')+'\nFurther actual native Alpha page amendment.\n');
+  assert.match(f.run('check','--run','r','--phase','split'),/0 error/);
+  const r=f.attempt('check','--run','r','--phase','adjudicate');assert.notEqual(r.status,0);
+  assert.doesNotMatch(r.stdout+r.stderr,/owner-page-authority-invalid|owner-page-authority-stale/);
+  assert.match(r.stdout+r.stderr,/decisions|obligation/);
+  assert.deepEqual(readFileSync(join(f.root,'research/r-step5-owner-page-1-p-after.md')),after);
+  assert.deepEqual(readFileSync(join(f.root,'research/r-reader-findings-1.json')),f.originalFindings);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
