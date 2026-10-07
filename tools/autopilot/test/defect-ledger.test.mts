@@ -11,7 +11,7 @@
 // lived only in markdown while the engine had no notion of an open fatal.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -80,6 +80,76 @@ const writeExactStep5 = (dir: string, decisions: object[]) => {
     version: 1, run: 'r9', group: 'a', decisions,
   }));
 };
+
+test('validated supersession retains historical class taxonomy without changing original bytes', () => {
+  const historical = row({ class: 'logic', subclass: 'incorrect-step', location: 'Proof 3.1' });
+  const successor = row({ defect_id: 'r9-D002', supersedes: ['r9-D001'], subclass: 'invalid-inference', location: 'proof-step 3.1' });
+  const dir = fixture([historical, successor], []);
+  const path = join(dir, 'research', 'defect-ledger.jsonl');
+  const before = readFileSync(path);
+  const result = spawnSync(process.execPath, [TOOL, 'validate', '--run', 'r9'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /2 defect row\(s\) checked, 0 error\(s\)/);
+  assert.deepEqual(readFileSync(path), before);
+});
+
+test('active and newly appended rows still reject noncanonical class labels', () => {
+  const activeDir = fixture([row({ class: 'logic' })], []);
+  const active = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: activeDir, encoding: 'utf8', timeout: 60_000 });
+  assert.notEqual(active.status, 0);
+  assert.match(active.stderr, /class "logic" outside the closed enum/);
+
+  const appendDir = fixture([row({})], []);
+  const ledger = join(appendDir, 'research', 'defect-ledger.jsonl');
+  const before = readFileSync(ledger);
+  const incoming = join(appendDir, 'incoming.json');
+  writeFileSync(incoming, JSON.stringify(row({ defect_id: 'r9-D002', class: 'logic', supersedes: ['r9-D001'] })));
+  const appended = spawnSync(process.execPath, [TOOL, 'append', '--file', incoming, '--no-render'], { cwd: appendDir, encoding: 'utf8', timeout: 60_000 });
+  assert.notEqual(appended.status, 0);
+  assert.match(appended.stderr, /class "logic" outside the closed enum/);
+  assert.deepEqual(readFileSync(ledger), before);
+});
+
+test('invalid supersedes cannot retire a noncanonical historical class', () => {
+  const cases = [
+    { successor: { supersedes: ['missing'] }, error: /not an earlier ledger row/ },
+    { successor: { supersedes: ['r9-D001'], subject: 'thm-other' }, error: /same run and subject/ },
+    { successor: { supersedes: ['r9-D001'], run: 'other' }, error: /same run and subject/ },
+    { successor: { supersedes: [] }, error: /nonempty array/ },
+    { successor: { supersedes: ['r9-D001', 'r9-D001'] }, error: /unique defect ids/ },
+  ];
+  for (const entry of cases) {
+    const dir = fixture([row({ class: 'logic' }), row({ defect_id: 'r9-D002', ...entry.successor })], []);
+    const path = join(dir, 'research', 'defect-ledger.jsonl');
+    const before = readFileSync(path);
+    const result = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, entry.error);
+    assert.match(result.stderr, /r9-D001: class "logic" outside the closed enum/);
+    assert.deepEqual(readFileSync(path), before);
+  }
+});
+
+test('retired class taxonomy does not exempt mandatory or non-taxonomy fields', () => {
+  const cases = [
+    { historical: { at: '' }, error: /missing at/ },
+    { historical: { run: '' }, error: /missing run/ },
+    { historical: { subject: '' }, error: /missing subject/ },
+    { historical: { severity: 'invented' }, error: /severity "invented" outside the closed enum/ },
+    { historical: { caught_at_stage: 'invented' }, error: /caught_at_stage "invented" outside the closed enum/ },
+    { historical: { caught_by_role: 'invented' }, error: /caught_by_role "invented" outside the closed enum/ },
+    { historical: { disposition: 'invented' }, error: /disposition "invented" outside the closed enum/ },
+    { historical: { evidence: [{ note: 'No evidence path.' }] }, error: /evidence entries need a path/ },
+  ];
+  for (const entry of cases) {
+    const historical = row({ class: 'logic', ...entry.historical });
+    const successor = row({ defect_id: 'r9-D002', run: historical.run, subject: historical.subject, supersedes: ['r9-D001'] });
+    const dir = fixture([historical, successor], []);
+    const result = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, entry.error);
+  }
+});
 
 test('a confirmed_fatal with no ledger row fails the check', () => {
   const dir = fixture([], [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }]);

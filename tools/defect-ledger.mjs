@@ -258,7 +258,7 @@ function validateRow(row, ids, opts = {}) {
   // Retain superseded taxonomy as history, with every other check intact.
   // All active ownership rows still use the unchanged closed taxonomy.
   for (const [f, dom] of Object.entries(ENUMS)) if (row[f] !== undefined
-    && !(opts.historicalTaxonomy && ['subclass', 'location'].includes(f))
+    && !(opts.historicalTaxonomy && ['class', 'subclass', 'location'].includes(f))
     && (f !== 'location' ? !dom.includes(row[f]) : !locationAllowed(row, opts))) {
     errs.push(`${row.defect_id}: ${f} "${row[f]}" outside the closed enum`);
   }

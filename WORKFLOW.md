@@ -166,7 +166,7 @@ future stages defer selection until execution and write no run state.
   validation and Step-5 ownership/open-defect checks use the shared validated
   active ownership rows; historical references remain available for provenance.
   Active rows retain the full closed ledger schema. Superseded rows retain
-  their original subclass and location labels as historical taxonomy; every
+  their original class, subclass and location labels as historical taxonomy; every
   other field check and backward same-run/subject supersedes linkage remain
   required for the selected run. New appends always require current canonical labels.
   The closed ledger schema includes the exact native `7.2-impact` stage and
