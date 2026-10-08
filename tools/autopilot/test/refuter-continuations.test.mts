@@ -4,8 +4,11 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'nod
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { refuterContinuations, refuterContinuationPattern, stages } from '../stages/mathlib.ready-pairs.mts';
+import { refuterContinuations, refuterContinuationPattern, withRefuterContinuation } from '../stages/refuter-continuations.mts';
+import { stages } from '../stages/mathlib.mts';
+import { stages as readyStages } from '../stages/mathlib.ready-pairs.mts';
 import { covered } from '../src/coverage.mts';
+import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 
 function fixture(t: any) {
   const repo = mkdtempSync(join(tmpdir(), 'refuter-continuation-'));
@@ -72,9 +75,30 @@ test('native stage changes only correction label/task and retains model, schema 
   assert.equal(plans[0].brief, 'briefs/refuter.md');
   assert.equal(plans[0].outputSchema, 'briefs/schemas/refute-report.json');
   assert.equal(plans[0].resultArtifact, 'research/r-refute-7.json');
-  assert.equal(stage.modelProfile(plans[0]), 'gpt-6-luna-max');
+  const configuredProfile = stage.modelProfile(plans[0]);
+  assert.equal(configuredProfile, stage.modelProfile(plans[1]));
+  assert.ok(typeof configuredProfile === 'string' && configuredProfile.length > 0);
+  assert.ok(Object.values(MODEL_PROFILE_NAMES).includes(configuredProfile));
   assert.equal(plans[1].label, 'refute-8');
   assert.equal(plans[1].task, 'briefs/tasks/alpha-5a-refuter.md');
   assert.deepEqual(plans.map((p: any) => p.covers), [['7'], ['8']]);
   assert.equal(stage.artifacts(f.ctx, '7'), 'research/r-refute-7.json');
+});
+
+
+test('ordinary and ready tables inherit exactly one identical opt-in route', t => {
+  const f = fixture(t); f.save(); f.write('research/r-batch-8.pages.json', []);
+  const ordinary: any = stages.find(s => s.id === '5a-refute');
+  const ready: any = readyStages.find(s => s.id === '5a-refute');
+  assert.deepEqual(ordinary.plan(f.ctx, ['7', '8']), ready.plan(f.ctx, ['7', '8']));
+  assert.equal(ordinary.pattern(f.ctx).source, ready.pattern(f.ctx).source);
+  assert.equal(stages.filter(s => s.id === '5a-refute').length, 1);
+  assert.equal(readyStages.filter(s => s.id === '5a-refute').length, 1);
+  const unrelated = { id: 'other-stage', plan: () => [] };
+  assert.equal(withRefuterContinuation(unrelated), unrelated);
+  const ordinaryDefault = { id: '5a-refute', units: () => ['7'], pattern: /^ordinary$/, plan: () => [{ role: 'refuter', label: 'refute-7' }] };
+  rmSync(join(f.repo, 'research/r-step5-refuter-continuations.json'));
+  const route = withRefuterContinuation(ordinaryDefault);
+  assert.equal(route.pattern(f.ctx), ordinaryDefault.pattern);
+  assert.deepEqual(route.plan(f.ctx, ['7']), ordinaryDefault.plan());
 });

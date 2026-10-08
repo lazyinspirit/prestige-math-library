@@ -1,7 +1,7 @@
 # One native Step-5 coverage correction
 
-The `mathlib.ready-pairs.mts` wrapper supports one opt-in, owner-reviewed fresh
-native refuter dispatch for an exact successful report whose coverage array
+The ordinary `mathlib.step5.mts` stage table supports one opt-in, owner-reviewed fresh
+native refuter dispatch through `refuter-continuations.mts` for an exact successful report whose coverage array
 contains extra prerequisite context. This does not accept mathematics or waive
 collection. Ordinary Step-5 collect and final checks still require exact scope.
 
@@ -15,7 +15,9 @@ hash, and a correction `task` path/hash. Paths for archived/report/task evidence
 must remain under the run's research prefix. The unique permitted label is
 `refute-UNIT-coverage-correction-1`.
 
-Only `5a-refute` changes. Its matcher excludes the exact old stable result and
+Only `5a-refute` changes. The ordinary table decorates that stage once; the
+ready-pairs wrapper inherits the same route without a second decorator. The
+active ordinary controller therefore sees the opt-in route directly. Its matcher excludes the exact old stable result and
 admits the exact new stable native result filename; other units and stages keep
 ordinary routing. The planner retains the ordinary refuter role, configured
 model, read-only brief, schema, canonical result artifact and timeout, changing
