@@ -36,6 +36,7 @@ import { spawnSync } from 'node:child_process';
 import { closeSync, existsSync, mkdtempSync, openSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { scopedGateArgv } from './frontier-gate-scope.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (name, fallback = null) => {
@@ -101,7 +102,8 @@ const PROBES = [
   {
     name: 'precheck',
     needs: () => existsSync('tools/precheck.mts'),
-    argv: () => ['tools/tsx-run.mjs', 'tools/precheck.mts'],
+    argv: () => scopedGateArgv({ repo: process.cwd(), run },
+      ['node', 'tools/tsx-run.mjs', 'tools/precheck.mts'], 'itemFiles')().slice(1),
     count: (out) => /(\d+)\s+checked/.exec(out)?.[1],
     unit: 'items checked',
   },

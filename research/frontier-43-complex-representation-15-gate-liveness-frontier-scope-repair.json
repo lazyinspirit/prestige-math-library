@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "run": "frontier-43-complex-representation-15",
+  "branch": "gate-liveness-frontier-scope",
+  "repair_round": 1,
+  "recorded_at": "2026-10-08T03:19:58Z",
+  "agent": "/root/gate_liveness_frontier_scope_repair",
+  "finding": "The gate-liveness precheck probe ignored --run and invoked tools/precheck.mts with no explicit files, so unrelated corpus proofs contributed to its count and errors. This violated CLAUDE section 24.",
+  "repair": "Route only the precheck argv through existing scopedGateArgv(..., itemFiles). Current strict run manifests determine exact item files at probe execution. Invalid selection produces a failed subprocess with no parseable checked count, hence unparsed and meta-gate exit 1 even with --allow-missing. No whole-corpus fallback occurs.",
+  "owned_paths": [
+    { "path": "tools/gate-liveness.mjs", "sha256": "5249423c7f0c5f17fa62dc6e4fafdf4d6ba2d47e778a01b2993b9efb15d11ea0" },
+    { "path": "tools/gate-liveness-frontier.test.mjs", "sha256": "a5f1c472a0a60c5bb3be759a04690341448b6eed83b745aa531e1468f657cd6e" },
+    { "path": "WORKFLOW.md", "sha256": "530a37b8fa34ec1a9f0d7915691807d75fafa8fc121779f279e90d8bf69788a4" }
+  ],
+  "checks": [
+    {
+      "command": "node --test tools/gate-liveness-frontier.test.mjs",
+      "exit": 0,
+      "result": "3 tests, 3 passed, 0 failed; actual normative precheck runs in temporary fixture repositories. Owned valid proof counts 1 with exit 0 despite unrelated and external supplier failing proof formatting. Invalid owned tag retains live count 1 and validator exit 1, preserving liveness-only semantics. Missing owned strategy is VACUOUS count 0 with exit 1. An owned Definition without phase proof is VACUOUS count 0 with validator exit 0. Manifest refresh changes count to 2; minimum 3 fails. Malformed JSON, non-array, empty manifests/pages, missing item file, invalid item ID, duplicate subject and absent manifest fail even with --allow-missing."
+    },
+    { "command": "node --check tools/gate-liveness.mjs", "exit": 0 },
+    { "command": "node --check tools/gate-liveness-frontier.test.mjs", "exit": 0 },
+    { "command": "git diff --check -- tools/gate-liveness.mjs tools/gate-liveness-frontier.test.mjs WORKFLOW.md", "exit": 0 }
+  ],
+  "development_errors": [
+    "Initial fixture copied nonexistent typescript-loader.mjs: ENOENT in all 3 tests. Corrected to existing typescript-loader-hooks.mjs.",
+    "Initial fixture used dependent step 1.2; normative precheck proposed phase repair and returned exit 1. Corrected the fixture to canonical dependent phase 2.1; no production checker change."
+  ],
+  "self_review": {
+    "finding": "No further production correction identified. Only precheck argv and its import changed; count regex, finite-smoke/proof-contract/coverage probes, output schema, minimum floor, subprocess capture, and exit policy are unchanged. Scope resolves during probe execution using the existing strict adapter; suppliers stay available on disk without becoming precheck subjects.",
+    "independence": "This is agent self-review and actual local fixture checking, not an independent root review or mathematical certification."
+  },
+  "status": "Patch and documentation complete; agent writers drained. Root review and scoped code/docs commit pending. No current-run full gate or whole-corpus precheck was run. No item, contract, state, stage, model, origin, or mathematical carrier was changed by this branch."
+}

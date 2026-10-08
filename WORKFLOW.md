@@ -863,6 +863,13 @@ validation uses the same selected page scope, including before scaffold item
 lists are populated; it checks the frontier's declarations without gating
 unrelated plan entries.
 
+The `gate-liveness` precheck probe uses the shared `frontier-gate-scope.mjs`
+adapter to pass exact current manifest item files. Missing, malformed, empty or
+unknown inventories fail liveness, including with `--allow-missing`; unrelated
+items and external suppliers cannot contribute to its proof count. Liveness
+still measures work performed and retains each probe's validator exit status;
+the ordinary validator gates determine whether that work passed.
+
 Step-5 closure, Step-8 impact closure and Step-9 pathway gates use the same
 frontier selectors. Step-8 impact closure keeps the cumulative `pre-author`
 to latest snapshot window and its existing receipt, with full supplier context
