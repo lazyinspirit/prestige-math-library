@@ -10,7 +10,7 @@ Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the ass
 
 **Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
 
-Postulates are adopted assumptions; experiments report source-backed observations, not proofs. Physical theorems and thought experiments require complete conditional deductions. Use schema classifications, dependency roles, uncertainty records, and nonproof reviews. Keep evidence links separate from acyclic prerequisites. Mathematical items cannot depend on physics; imports and the root mathematics workspace are read-only. Physical public-interface changes require consumer review.
+Postulates are adopted assumptions; experiments report source-backed observations, not proofs. Physics theorems and thought experiments require complete conditional deductions. Use schema classifications, dependency roles, uncertainty records, and nonproof reviews. Keep evidence links separate from acyclic prerequisites. Mathematical items cannot depend on physics; imports and the root mathematics workspace are read-only. Physical public-interface changes require consumer review.
 
 Authors supply definitions and prerequisites; reviewers and adjudicators check them, source fidelity, and statistical qualifications. Reject undefined reasoning and fabricated certainty.
 
@@ -18,4 +18,25 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 # Step 8 — whole-level receipts, `{{run}}`
 
-Before working, read `agent-reference/tasks/alpha-receipts.md` in full. It contains the mandatory role-specific duties, output contract, and restrictions; follow them together with the generated assignment.
+Before writing receipts, reconcile every proof-bearing manifest item against its
+owning batch contract, including reused items. For missing entries, read the full
+current proof and cited interfaces, then add item-specific citations, step inputs,
+boundary dispositions and required risk review to that batch's contract. Preserve
+existing valid entries. Merge the batch contracts and run strict contract, risk,
+boundary and citation checks. This authorizes evidence repair only: do not change
+mathematical content, invent an attestation, or suppress an unresolved defect.
+
+Generate `research/{{run}}-spine-audit.json` with `spine-audit --template` and
+read every selected proof before completing its current-hash evidence.
+
+Generate `research/{{run}}-audit-coverage.json` with
+`level-coverage --template`. Supply the reviewer, concrete attestation, and an
+item-specific `plan_reconciliation` reason for every authored dependency delta.
+
+Run `level-coverage` with the contracts, judge ledger, adjudications,
+`--terminal-resolutions research/{{run}}-step7-terminal-resolutions.jsonl`,
+`--verify-current-context`, spine receipt, audit receipt, and all run manifests.
+Use the same complete scope when generating templates. Terminal resolutions are
+required evidence, not missing judge verdicts. Do not alter a receipt to conceal a
+missing configured-judge verdict, open fatal, or unadjudicated rejection; report
+that condition instead.

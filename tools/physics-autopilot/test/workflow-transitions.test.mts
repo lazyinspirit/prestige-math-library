@@ -44,10 +44,11 @@ test('the production Steps 1 through 9 require owner repair, recertification and
   assert.ok(stages.every(s => /^[1-9](?:\.\d+)?[ab]?-/.test(s.id)));
 });
 
-test('pair authoring has no capacity queue within the run ceiling', () => {
+test('pair authoring retains full lane capacity within the 30-agent machine budget', () => {
   const config = JSON.parse(readFileSync(join(repo, 'physics/physics-autopilot.config.json'), 'utf8'));
   assert.equal(stage('3b-author').concurrency, MAX_RUN_BATCHES);
-  assert.ok(config.globalConcurrency >= MAX_RUN_BATCHES);
+  assert.equal(config.globalConcurrency, 30);
+  assert.equal(config.concurrency, 30);
   const dispatch = spawnSync(process.execPath, [join(repo, 'tools/physics-support/dispatch.mjs'), '--help'],
     { cwd: repo, encoding: 'utf8' });
   assert.match(dispatch.stderr, new RegExp(`alpha-high \\(workspace-write, cap ${MAX_RUN_BATCHES}\\)`));

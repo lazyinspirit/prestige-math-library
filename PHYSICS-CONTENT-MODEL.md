@@ -153,9 +153,9 @@ conditional deductions, and uncertain empirical observations.
 
 ## Concise physics agent instructions
 
-Physics worker briefs repeat the following compact instructions. Lengthy role
-duties remain mandatory in referenced `physics/agent-reference/` files. The
-500-word target applies to prompt templates, not assigned content or source text.
+Physics worker briefs prepend the following compact instructions to the current
+mathematics role and task prompts. Role duties remain inline and complete; physics
+content rules override inherited proof-only wording for postulates and experiments.
 
 Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the assigned role and scope. These rules apply to every physics framework.
 

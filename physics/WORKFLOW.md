@@ -39,7 +39,7 @@ their exact claim scope and qualifications. Reproduce the mechanical splice with
 root; it refuses to overwrite an independently changed plan.
 
 Use `frontier --next --max-pairs 10000` to list every currently eligible pair
-before the normal 30-pair run cap. Eligibility uses the engine's strictly
+before the normal 80-pair run cap. Eligibility uses the engine's strictly
 greater-than-95% same-category publication rule; cross-category supplier edges
 remain declared and require ordinary Step-1 prerequisite resolution.
 
@@ -84,7 +84,12 @@ stateless physical judges receive its concise requirements directly. Define tech
 using the appropriate mathematical structures and supply missing prerequisites
 before accepting their consumers.
 
-Physics prompt templates target at most 500 words each. Longer role duties live
-in required `agent-reference/` files linked from the corresponding prompts.
-Generated assignments and evidence/source bundles are separate from this template
-limit; preserve their complete scope and contracts.
+Physics role briefs, task templates, judge conventions, and output schemas mirror
+the current mathematics engine prompts. Role duties are inline, with physics
+content requirements prepended and tool paths routed to the private physics tools.
+Run `node tools/physics-support/sync-agent-prompts.mjs` from the repository root
+after mathematics prompt changes; add `--check` to verify alignment.
+
+`frontier --next` selects up to 80 pairs by default and `plan` enforces the same
+cap. `physics-autopilot.config.json` limits concurrent workers across all stages
+to 30 through `concurrency` and `globalConcurrency`.

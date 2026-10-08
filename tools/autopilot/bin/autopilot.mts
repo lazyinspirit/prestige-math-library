@@ -74,7 +74,8 @@ function loadConfig(): Config {
       // 115-line per-run one covering step 3 only, and five stages dispatched
       // the step-3 one to Alphas doing steps 7, 8 and 9.
       '--var', 'run={run}', '--var', 'i={unit}', '--var', 'output={artifact}'],
-    concurrency: 5,
+    concurrency: 30,
+    globalConcurrency: 30,
     maxAttempts: 2,
     reportIntervalMin: 10,
     pollSec: 30,
