@@ -2,7 +2,7 @@
 id: ex-hh-elementary-tensor-presentations-and-invariant-contractions
 kind: example
 title: "Many finite presentations of one tensor and the invariant contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -19,6 +19,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "§1, printed pp. 1–2, and §3, printed pp. 7–10: the general element of a tensor product is a finite linear combination of elementary tensors and bilinear maps descend"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

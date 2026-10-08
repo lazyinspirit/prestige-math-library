@@ -1,7 +1,7 @@
 ---
 page: a-skolem-construction-and-design-prerequisites-examples
 title: "Skolem construction and design prerequisites — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

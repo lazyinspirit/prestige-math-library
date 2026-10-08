@@ -2,7 +2,7 @@
 id: lem-restricted-regular-representation-is-weakly-contained-in-subgroup-regular-representation
 kind: lemma
 title: Restriction of the regular representation to a closed subgroup
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -51,6 +51,8 @@ sources:
     - title: "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)"
       url: "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf"
       locator: "Appendix F, Proposition F.1.10 and complete proof (printed p. 426 / PDF p. 432); Appendix A, Proposition A.4.1 (printed p. 323 / PDF p. 329); Appendix B, Theorem B.1.4 (printed p. 347 / PDF p. 353). The local proof expands the compact-quotient-support approximation and the left/right intertwiner."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

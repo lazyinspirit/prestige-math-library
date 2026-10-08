@@ -2,7 +2,7 @@
 id: thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range
 kind: theorem
 title: "The Dolbeault Laplacian has finite-dimensional kernel and closed range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 6
@@ -33,6 +33,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. VI §7, opening paragraph and (7.1)–(7.2), printed pp. 308–310: the smooth Chern Dolbeault Laplacian is elliptic and self-adjoint; the text states the Dolbeault Hodge decomposition and finite-dimensional cohomology."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

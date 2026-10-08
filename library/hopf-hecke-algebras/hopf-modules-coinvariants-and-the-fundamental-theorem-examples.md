@@ -1,7 +1,7 @@
 ---
 page: hopf-modules-coinvariants-and-the-fundamental-theorem-examples
 title: "Hopf Modules, Coinvariants, and the Fundamental Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

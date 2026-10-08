@@ -2,7 +2,7 @@
 id: lem-hh-reduced-word-independence-and-length-multiplication
 kind: lemma
 title: "Reduced-word independence of T_w and the length-multiplication rules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 5
@@ -23,6 +23,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 6.1 'Review of background material', printed pp. 174-175 (PDF pp. 182-183): the Hecke algebra over Z[q^{1/2},q^{-1/2}], the basis {T_w}, the multiplication rules T_sT_w = qT_sw + (q-1)T_w (sw<w) and T_wT_u = T_wu for additive lengths"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

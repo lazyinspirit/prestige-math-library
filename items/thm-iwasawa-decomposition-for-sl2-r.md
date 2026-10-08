@@ -2,7 +2,7 @@
 id: thm-iwasawa-decomposition-for-sl2-r
 kind: theorem
 title: Iwasawa decomposition and Haar integration formula for SL2(R)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 1
@@ -29,6 +29,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

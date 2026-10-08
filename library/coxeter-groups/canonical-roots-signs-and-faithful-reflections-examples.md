@@ -1,7 +1,7 @@
 ---
 page: canonical-roots-signs-and-faithful-reflections-examples
 title: "Canonical Roots, Signs, and Faithful Reflections — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-root-inversions-and-chambers-in-i2-5-a2-and-i2-infinity, ex-cg-indefinite-form-admits-faithful-reflection-representation, ex-cg-mixed-sign-vector-is-not-a-root]
 ---

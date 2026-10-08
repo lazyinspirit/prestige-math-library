@@ -2,7 +2,7 @@
 id: def-quasicircle
 kind: definition
 title: Quasicircles, quasidisks, quasiarcs, and quasilines
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -36,6 +36,7 @@ sources:
       locator: "§1, paragraph beginning ‘A quasi-arc, respectively quasiline, quasicircle’: quasiarcs are quasiconformal images of a line segment, quasilines of the real line, and quasicircles of the round circle; the K-prefix convention."
 dependency_level: 9
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

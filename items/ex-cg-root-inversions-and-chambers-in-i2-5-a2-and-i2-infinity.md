@@ -2,7 +2,7 @@
 id: ex-cg-root-inversions-and-chambers-in-i2-5-a2-and-i2-infinity
 kind: example
 title: "Roots, inversions and chamber images in $I_2(5)$, $A_2$ and infinite dihedral type"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 12
@@ -23,6 +23,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "S4.4, printed pp. 101-105 (Definition 4.4.1 and the root system pictures of Example 4.4.2, Lemma 4.4.3, Proposition 4.4.4, Propositions 4.4.5-4.4.6); S4.2, printed pp. 93-97 (Proposition 4.2.5, Theorem 4.2.7); read in the extracted full text; exercises excluded"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

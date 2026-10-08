@@ -2,7 +2,7 @@
 id: lem-sl2-raising-and-lowering-formulas-in-the-compact-picture
 kind: lemma
 title: Derived action and raising/lowering formulas in the compact picture
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 4
@@ -40,6 +40,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§7.4, Lemma 7.4.9 and proof, printed pp. 298–299, Lie-action derivatives in Iwasawa coordinates"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

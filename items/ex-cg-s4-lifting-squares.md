@@ -2,7 +2,7 @@
 id: ex-cg-s4-lifting-squares
 kind: example
 title: "The four lifting squares in S4"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 16
@@ -16,6 +16,7 @@ proof_strategy: direct
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

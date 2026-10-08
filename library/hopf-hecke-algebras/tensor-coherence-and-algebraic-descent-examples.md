@@ -1,7 +1,7 @@
 ---
 page: tensor-coherence-and-algebraic-descent-examples
 title: "Tensor Coherence and Algebraic Descent — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hh-elementary-tensor-presentations-and-invariant-contractions,
            ex-hh-pentagon-on-four-named-vectors,

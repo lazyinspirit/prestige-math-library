@@ -2,7 +2,7 @@
 id: ex-first-k-types-and-ladder-coefficients-in-i-epsilon-nu
 kind: example
 title: First K-types and ladder coefficients in I(epsilon, nu)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 5
@@ -24,6 +24,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
       locator: "§9.1, formulas (4)–(5), printed pp. 48–49, and §9.2 right-P model, printed p. 50; the left-action parameter convention is paired locally"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

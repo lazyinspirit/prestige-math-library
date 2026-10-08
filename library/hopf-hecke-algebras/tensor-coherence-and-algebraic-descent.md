@@ -1,7 +1,7 @@
 ---
 page: tensor-coherence-and-algebraic-descent
 title: "Tensor Coherence and Algebraic Descent"
-status: draft
+status: published
 items: [def-hh-scalar-and-tensor-conventions,
         lem-hh-tensor-coherence-on-elementary-tensors,
         lem-hh-tensor-injections-quotients-and-kernels-over-a-field,

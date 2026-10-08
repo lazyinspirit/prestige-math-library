@@ -2,7 +2,7 @@
 id: def-cg-brady-watt-ordered-spherical-root-complex
 kind: definition
 title: "The Brady-Watt ordered root complex X(c), its subcomplexes X(sigma) and X(sigma,rho), and their positive-cone realizations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 19
@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0505518"
       locator: "Section 2.5, printed pp. 22-24: the Coxeter element and its plane, used for the ambient conventions"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

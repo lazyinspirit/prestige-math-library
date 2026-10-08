@@ -2,7 +2,7 @@
 id: thm-quasicircle-characterizations
 kind: theorem
 title: Bounded turning, quasiconformal images of the circle, and quasiconformal reflections
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -48,6 +48,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §15.3.1, Definition 15.9, printed pp. 209–210: bounded-turning definition of a quasicircle; used for the intrinsic condition and source terminology."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

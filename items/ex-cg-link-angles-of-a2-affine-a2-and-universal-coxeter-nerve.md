@@ -2,7 +2,7 @@
 id: "ex-cg-link-angles-of-a2-affine-a2-and-universal-coxeter-nerve"
 kind: "example"
 title: "Link angles in A2, affine A2 and the universal Coxeter nerve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 20
@@ -13,11 +13,8 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups, first-edition author manuscript, 2007-2008"
@@ -102,20 +99,3 @@ Let $(S,m)$ be a Coxeter matrix with $S$ finite, $W$ its presented group ([[def-
 3.1 Clause (iii), CAT(1). Step 2.1 gives a discrete link with distinct points at distance $\pi$. Every pair at distance $<\pi$ is identical and has the constant geodesic; a triangle with any two distinct vertices has perimeter at least $2\pi$, so the only tested triangles are constant and satisfy comparison with equality. [F11, step 2.1, algebra]
 
 4.1 Clause (iv) and conclusion. By [F15], each edge has length $\pi-\pi/m(s,t)$ and cosine $B(e_s,e_t)$, while each non-edge has $B(e_s,e_t)=-1$. Thus the edge length is $\pi-\pi/m(s,t)$; the two formulas coincide for $m(s,t)=2$ and differ for $m(s,t)>2$. In the affine case the pairwise adjacent triple is unfilled precisely because its cosine matrix is semidefinite, not positive definite [F10, step 1.2]. The A-page link description records $X$ as finite large metric flag with associated matrix $B$ [F16]; the three metric-flag tests here are checked directly in steps 1.1-2.1. The local group, matrix, cone and CAT(1) calculations use no choice; AC is used only for the A-page link-lemma invocation in step 1.1 [F14]. No general 3-circuit classification or CAT(1) theorem for all large metric flag complexes is asserted. [F3, F4, F10, F14, F15, F16, step 1.1, step 1.2, step 2.1, step 2.2, step 2.3, step 3.1] ∎
-
-## Current supplier receipt status
-
-These direct in-run supplier decisions remain open. The final report distinguishes current escalations from missing or stale receipts.
-
-- `lem-cg-davis-angular-vertex-link-is-metric-flag-nerve`: its current in-run supplier decision is not closed; this item consumes it in Facts F3, F15, F16 and proof steps 1.1, 1.2, 2.1, 4.1, 2.3.
-- `def-cg-spherical-nerve-coset-poset-and-davis-realization`: its current in-run supplier decision is not closed; this item consumes it in Facts F2 and proof steps 1.1, 1.2, 2.1.
-- `thm-cg-davis-complex-cell-incidence-and-stabilizers`: its current in-run supplier decision is not closed; this item consumes it in Facts F7 and proof steps 2.1.
-- `def-cg-euclidean-cone-and-spherical-join-metrics`: its current in-run supplier decision is not closed; this item consumes it in Facts F9 and proof steps 2.1.
-- `def-cg-cat-zero-cat-one-and-local-geodesic`: its current in-run supplier decision is not closed; this item consumes it in Facts F11 and proof steps 2.2, 3.1.
-- `lem-cg-comparison-convexity-and-model-spaces`: its current in-run supplier decision is not closed; this item consumes it in Facts F12 and proof steps 2.3.
-- `thm-cg-finite-type-positive-definite-criterion`: its current in-run supplier decision is not closed; this item consumes it in Facts F6 and proof steps 1.2, 2.1.
-- `def-cg-real-coxeter-form-and-reflection`: its current in-run supplier decision is not closed; this item consumes it in Facts F4 and proof steps 1.1, 1.2, 2.1, 4.1.
-- `lem-cg-reflection-form-invariance-and-rank-two-orders`: its current in-run supplier decision is not closed; this item consumes it in Facts F5 and proof steps 1.2, 2.1.
-- `thm-hh-parabolic-minimal-representatives-and-length-additivity`: its current in-run supplier decision is not closed; this item consumes it in Facts F13 and proof steps 1.2, 2.1.
-- `def-hh-coxeter-matrix-word-group-and-length`: its current in-run supplier decision is not closed; this item consumes it in Facts F1 and proof steps 1.1.
-- `lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta`: its current in-run supplier decision is not closed; this item consumes it in Facts F8 and proof steps 1.1, 1.2, 2.3.

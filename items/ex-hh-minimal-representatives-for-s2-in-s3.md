@@ -2,7 +2,7 @@
 id: ex-hh-minimal-representatives-for-s2-in-s3
 kind: example
 title: "Minimal coset representatives of $S_2$ in $S_3$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 7
@@ -22,6 +22,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Proposition 2.4.4 and Corollary 2.4.5, printed pp. 39-40: unique factorization W = W^J W_J with l(w)=l(w^J)+l(w_J)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

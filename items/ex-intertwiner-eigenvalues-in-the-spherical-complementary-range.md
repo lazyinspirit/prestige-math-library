@@ -2,7 +2,7 @@
 id: ex-intertwiner-eigenvalues-in-the-spherical-complementary-range
 kind: example
 title: Intertwiner eigenvalues in the spherical complementary range
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 9
@@ -24,6 +24,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
       locator: "§9.3, printed pp. 51–52: the invariant-form positivity criterion and Theorem 9.3 list the spherical complementary range; no first K-type intertwiner multipliers are computed"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: cor-dolbeault-cohomology-of-a-compact-riemann-surface-is-finite-dimensional
 kind: corollary
 title: Dolbeault cohomology of a compact riemann surface is finite dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 8
@@ -29,6 +29,7 @@ sources:
     url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
     locator: 'Ch. 14, Theorem 14.2, printed p. 119: finite dimensionality of $H^1(X,L)$ for a line bundle on a Riemann surface'
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

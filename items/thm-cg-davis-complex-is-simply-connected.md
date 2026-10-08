@@ -2,7 +2,7 @@
 id: "thm-cg-davis-complex-is-simply-connected"
 kind: theorem
 title: "The Davis complex is simply connected"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 20
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization", "lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta", "thm-cg-davis-complex-cell-incidence-and-stabilizers", "def-hh-coxeter-matrix-word-group-and-length", "def-group-presentation", "prop-equality-of-words-in-a-presentation", "prop-normal-closure-is-products-of-conjugates", "def-free-group", "def-alphabet-words-and-reduction", "thm-reduced-words-form-the-free-group", "thm-cellular-approximation-for-maps-of-cw-pairs", "def-cw-complex-with-closure-finiteness-and-weak-topology", "def-skeleta-cw-subcomplex-and-relative-cw-complex", "def-based-loops-and-fundamental-group", "def-simply-connected", "def-induced-homomorphism-on-fundamental-groups", "thm-fundamental-group-laws", "def-path-connected", "thm-finite-simplicial-approximation-for-maps-of-pairs"]
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

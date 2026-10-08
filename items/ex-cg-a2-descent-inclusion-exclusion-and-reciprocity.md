@@ -2,7 +2,7 @@
 id: ex-cg-a2-descent-inclusion-exclusion-and-reciprocity
 kind: example
 title: "The A2 = S3 case: Steinberg inclusion-exclusion, degree product, and reciprocity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 22
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Chapter 17.1, printed p. 318, Corollary 17.1.5(i), gives the finite Steinberg identity as an independent comparison; the rank-two calculation and all needed polynomial algebra are carried out locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

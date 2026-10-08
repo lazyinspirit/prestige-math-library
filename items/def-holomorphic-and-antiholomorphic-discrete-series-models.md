@@ -2,7 +2,7 @@
 id: def-holomorphic-and-antiholomorphic-discrete-series-models
 kind: definition
 title: Holomorphic and antiholomorphic discrete-series models
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-k-finite-and-smooth-vectors-for-sl2-r
@@ -24,6 +24,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is inherited through the K/Haar and principal-series suppliers and supplies AC_omega for the nonnegative C1 change-of-variables theorem used in the norm calculations. The explicit maps and finite K-type identifications use no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

@@ -1,7 +1,7 @@
 ---
 page: short-loop-polygons-and-quantitative-energy-decrease-examples
 title: "Short Loop Polygons and Quantitative Energy Decrease — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-midpoint-iteration-on-a-spherical-triangle, ex-cg-zero-length-boundary-of-the-energy-criterion, ex-cg-equally-spaced-points-on-a-short-circle-are-stationary, ex-cg-null-homotopy-versus-short-loop-shrinkability]
 ---

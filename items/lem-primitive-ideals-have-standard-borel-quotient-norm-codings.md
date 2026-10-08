@@ -2,7 +2,7 @@
 id: lem-primitive-ideals-have-standard-borel-quotient-norm-codings
 kind: lemma
 title: "Primitive ideals have standard Borel quotient-norm codings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 3
@@ -27,6 +27,7 @@ provenance:
   proof: ai-altered
 axiom_use: "AC is explicit; inherited supplier choice and the exact local selections are identified in the Proof. No global selector of irreducible equivalence classes is asserted."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

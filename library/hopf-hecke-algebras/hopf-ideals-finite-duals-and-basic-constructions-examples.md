@@ -1,7 +1,7 @@
 ---
 page: hopf-ideals-finite-duals-and-basic-constructions-examples
 title: "Hopf Ideals, Finite Duals, and Basic Constructions — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

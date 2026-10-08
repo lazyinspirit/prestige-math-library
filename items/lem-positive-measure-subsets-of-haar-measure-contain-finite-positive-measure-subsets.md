@@ -2,7 +2,7 @@
 id: lem-positive-measure-subsets-of-haar-measure-contain-finite-positive-measure-subsets
 kind: lemma
 title: Finite Haar mass, compact detection, and integrable pairings
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 axiom_use: Assume AC for the retained torus-times-uncountable-discrete counterexample and its Haar existence/uniqueness interfaces. The equivalence and annihilation proof uses only finite regularity selections, countable subadditivity, and explicit integrable threshold sets once Haar measure is fixed.
@@ -54,6 +54,7 @@ sources:
     url: https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf
     locator: Weak-star density lemma and Hahn–Banach criterion, PDF p. 9; the source route is not valid under the present Haar convention without extra hypotheses. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion.
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

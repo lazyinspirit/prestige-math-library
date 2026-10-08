@@ -2,7 +2,7 @@
 id: ex-cg-midpoint-iteration-on-a-spherical-triangle
 kind: example
 title: "Midpoint iteration on a small equilateral spherical triangle contracts geometrically to its centre"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -23,6 +23,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bridsonhaefligerx.pdf"
       locator: "I.2.1–I.2.3 (the round sphere and its law of cosines)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-cg-positive-radical-and-affine-gram-exclusions
 kind: lemma
 title: "Positive radical, corank one, positive definiteness of proper submatrices, and domination exclusions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -18,6 +18,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Section 6.3, Lemma 6.3.5 (the $|c_i|$ argument), Definition 6.3.6 and Lemma 6.3.7 with proof (positive kernel vector and corank one), printed pp. 79-80; Section 6.8, Remark 6.8.9(ii) (proper principal submatrices), printed p. 101; Appendix C.3 (definition of domination and Lemma C.3.1 with proof), printed pp. 436-437"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-geometric-and-analytic-quasiconformality-equivalent
 kind: theorem
 title: The geometric and analytic definitions of quasiconformality agree
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 5
@@ -23,6 +23,7 @@ sources:
       url: "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5710-11511_2006_Article_BF02392634.pdf"
       locator: "§§4–5, printed pp. 114–120: extremal length and the modulus identities fixing the geometric constants."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

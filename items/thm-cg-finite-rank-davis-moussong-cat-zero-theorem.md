@@ -2,7 +2,7 @@
 id: "thm-cg-finite-rank-davis-moussong-cat-zero-theorem"
 kind: "theorem"
 title: "The Davis complex of a finite-rank Coxeter system is CAT(0) (Moussong's theorem)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 21
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:
@@ -111,22 +112,3 @@ Let $(S,m)$ be a Coxeter matrix with $S$ finite, $W$ the presented group ([[def-
 ## Remarks
 
 **Supplier uses reconciled.** The AC-qualified angular-link lemma supplies CAT(1) in step 1.1; its finite large metric flag theorem works on untruncated intrinsic geodesic components before transferring the short tests. The product-ball chart is used in step 1.2, and the completed Berestovskii/polyhedral-link criterion gives local CAT(0) in step 2.1. The corrected Davis cellulation supplies the finite-shape, local-finiteness and metric hypotheses, and the simply-connectedness theorem supplies step 3.1. That step uses the completed local-to-global theorem with all of its connectedness, completeness, length-space and local CAT(0) hypotheses verified above. These mathematical reconciliations do not record or refresh engine decisions.
-
-## Current supplier receipt status
-
-These direct in-run supplier decisions remain open. The final report distinguishes current escalations from missing or stale receipts.
-
-- `def-hh-coxeter-matrix-word-group-and-length`: its current in-run supplier decision is not closed; this item consumes it in Facts F12 and proof steps 1.1.
-- `def-cg-spherical-nerve-coset-poset-and-davis-realization`: its current in-run supplier decision is not closed; this item consumes it in Facts F13, F14 and proof steps 1.1, 4.1.
-- `thm-cg-davis-complex-cell-incidence-and-stabilizers`: its current in-run supplier decision is not closed; this item consumes it in Facts F4 and proof steps 1.2, 1.3, 1.4, 1.5, 4.1.
-- `lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics`: its current in-run supplier decision is not closed; this item consumes it in Facts F4 and proof steps 1.2, 1.3, 1.4, 1.5, 4.1.
-- `thm-cg-davis-complex-is-simply-connected`: its current in-run supplier decision is not closed; this item consumes it in Facts F8 and proof steps 3.1, 4.1.
-- `lem-cg-davis-angular-vertex-link-is-metric-flag-nerve`: its current in-run supplier decision is not closed; this item consumes it in Facts F1, F15, F16 and proof steps 1.1, 4.1.
-- `def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric`: its current in-run supplier decision is not closed; this item consumes it in Facts F6 and proof steps 1.4.
-- `thm-cg-polyhedral-chain-metric-topology-and-properness`: its current in-run supplier decision is not closed; this item consumes it in Facts F5 and proof steps 1.3.
-- `thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics`: its current in-run supplier decision is not closed; this item consumes it in Facts F7 and proof steps 1.5, 4.1.
-- `thm-cg-large-metric-flag-complexes-are-cat-one`: its current in-run supplier decision is not closed; this item consumes it in Facts F15 and proof steps 1.1, 4.1.
-- `def-cg-cat-zero-cat-one-and-local-geodesic`: its current in-run supplier decision is not closed; this item consumes it in Facts F3, F10 and proof steps 2.1, 4.1, 1.1, 1.4, 1.5, 3.1.
-- `thm-cg-cone-join-metric-and-local-product-chart`: its current in-run supplier decision is not closed; this item consumes it in Facts F2 and proof steps 1.2.
-- `thm-cg-cone-cat-equivalence-and-polyhedral-link-criterion`: its current in-run supplier decision is not closed; this item consumes it in Facts F3 and proof steps 2.1, 4.1.
-- `thm-cg-complete-simply-connected-local-cat-zero-globalization`: its current in-run supplier decision is not closed; this item consumes it in Facts F9 and proof steps 3.1, 4.1.

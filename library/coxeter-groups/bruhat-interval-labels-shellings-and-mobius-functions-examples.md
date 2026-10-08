@@ -1,7 +1,7 @@
 ---
 page: bruhat-interval-labels-shellings-and-mobius-functions-examples
 title: "Bruhat Interval Labels, Shellings, and Möbius Functions — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-s4-rank-three-interval-chain-labels-and-lex-first-chain, ex-cg-s4-rank-three-interval-mobius-from-recurrence, cex-cg-parabolic-quotient-interval-eulerian-claim-fails]
 ---

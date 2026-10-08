@@ -2,7 +2,7 @@
 id: "ex-cg-b2-davis-complex-octagon-and-boundary-circle"
 kind: "example"
 title: "The B2 Davis complex is an octagon whose boundary is the Coxeter complex circle"
-status: "draft"
+status: published
 origin: "pipeline"
 dependency_level: 20
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization", "lem-cg-spherical-coset-inclusion-and-intersection", "lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics", "thm-cg-davis-complex-cell-incidence-and-stabilizers", "lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta", "thm-cg-finite-chamber-tiling-and-coset-face-identification", "def-hh-coxeter-matrix-word-group-and-length", "thm-lagrange"]
@@ -10,7 +10,9 @@ justified_by: []
 provenance: {"statement": "ai-generated", "proof": "ai-altered"}
 proof_strategy: direct
 generation: {"role": "example"}
-verification: {"precheck": "pass"}
+verification:
+  precheck: pass
+  audited: 2026-10-08
 sources:
   references:
     - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups, author manuscript of the first edition (Princeton Univ. Press, 2008)"

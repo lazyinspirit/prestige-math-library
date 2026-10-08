@@ -2,7 +2,7 @@
 id: lem-an-lch-group-has-an-open-sigma-compact-subgroup
 kind: lemma
 title: Every locally compact Hausdorff group has an open sigma-compact subgroup
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -23,6 +23,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-hh-pentagon-on-four-named-vectors
 kind: example
 title: "The pentagon on four named vectors in $k^2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -19,6 +19,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "Theorem 5.2, printed p. 24: the associativity isomorphism $(M\\otimes N)\\otimes P\\cong M\\otimes(N\\otimes P)$ on elementary tensors"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

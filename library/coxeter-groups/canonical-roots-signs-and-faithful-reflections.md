@@ -1,7 +1,7 @@
 ---
 page: canonical-roots-signs-and-faithful-reflections
 title: "Canonical Roots, Signs, and Faithful Reflections"
-status: draft
+status: published
 items: [lem-cg-rank-two-prefix-and-chamber-length-induction, thm-cg-root-sign-and-simple-reflection-positivity, thm-cg-root-length-criterion-and-faithfulness, def-cg-geometric-inversion-set, thm-cg-root-inversion-formulas-and-strong-exchange]
 examples: []
 ---

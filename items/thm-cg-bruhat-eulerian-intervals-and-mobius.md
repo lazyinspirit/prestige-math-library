@@ -2,7 +2,7 @@
 id: thm-cg-bruhat-eulerian-intervals-and-mobius
 kind: theorem
 title: "Bruhat intervals are Eulerian: parity balance of the elements, and the Möbius function of a full interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 19
@@ -25,6 +25,7 @@ sources:
       url: "https://arxiv.org/pdf/0904.4472"
       locator: "Section 2, printed pp. 1-7: Lemma 2.1 (lifting), Theorem 2.12 (complete matching) and Corollary 2.13 (the sign formula via a sign-reversing involution), read as an independent alternative treatment of the same theorem"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

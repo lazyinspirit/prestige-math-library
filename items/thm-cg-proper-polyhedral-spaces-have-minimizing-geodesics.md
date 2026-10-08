@@ -2,7 +2,7 @@
 id: thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics
 kind: theorem
 title: "Under the Axiom of Choice, proper polyhedral spaces admit minimizing geodesics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 4
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "SS12.1, printed pp. 231-233 (piecewise Euclidean cell structure and the finite-shapes geodesic remark); Appendix I.3, printed pp. 507-508 (X_k-cell structures and the length metric)"
 verification:
+  audited: "2026-10-08"
   precheck: pending
 ---
 

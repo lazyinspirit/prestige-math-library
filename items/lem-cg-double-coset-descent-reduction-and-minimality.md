@@ -2,7 +2,7 @@
 id: lem-cg-double-coset-descent-reduction-and-minimality
 kind: lemma
 title: "Descent reduction, minimum-length elements, and the additive factorization in a double coset"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 7
@@ -17,6 +17,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

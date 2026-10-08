@@ -2,7 +2,7 @@
 id: ex-kazhdan-lusztig-bases-for-s-two-and-s-three
 kind: example
 title: The Kazhdan–Lusztig bases of $S_2$ and $S_3$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-the-hecke-bar-involution-is-well-defined, def-bruhat-interval-and-r-polynomials, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-kazhdan-lusztig-basis-multiplication-formula, lem-bruhat-order-basic-properties-for-permutations]
@@ -19,6 +19,7 @@ sources:
     url: https://arxiv.org/pdf/1212.0791
     locator: "§3.2, printed pp. 15–16; the complete section and displayed formulas were reread."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-quasiconformal-local-jacobian-energy-bound
 kind: lemma
 title: A local Jacobian and energy bound for quasiconformal homeomorphisms
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 8
@@ -22,6 +22,7 @@ sources:
     - title: "F. W. Gehring and O. Lehto, On the total differentiability of functions of a complex variable"
       locator: "Ann. Acad. Sci. Fenn. Ser. A I Math. 272 (1959), pp. 1–9; the open-map differentiability theorem used in Step 1.2. The complete original argument has not yet been recovered."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

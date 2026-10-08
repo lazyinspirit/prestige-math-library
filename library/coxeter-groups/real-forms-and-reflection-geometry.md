@@ -1,7 +1,7 @@
 ---
 page: real-forms-and-reflection-geometry
 title: "Real Forms and Reflection Geometry"
-status: draft
+status: published
 requires: [coxeter-presentations-exchange-and-reduced-word-theorems, dual-spaces-bilinear-forms-and-inertia, sine-cosine-and-the-definition-of-pi, group-homomorphisms-and-the-isomorphism-theorems]
 items: [def-cg-real-coxeter-form-and-reflection,
         lem-cg-reflection-form-invariance-and-rank-two-orders,

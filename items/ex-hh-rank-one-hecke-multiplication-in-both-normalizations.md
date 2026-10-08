@@ -2,7 +2,7 @@
 id: ex-hh-rank-one-hecke-multiplication-in-both-normalizations
 kind: example
 title: "Rank-one Hecke multiplication in both normalizations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 8
@@ -23,6 +23,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 6.1, printed p. 174: the q-normalization (T_s-q)(T_s+1)=0 for rank one"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

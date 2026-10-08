@@ -2,7 +2,7 @@
 id: def-cg-irreducible-affine-coxeter-type
 kind: definition
 title: "Irreducible affine Coxeter type: the corank-one form, the radical quotient, and the affine slice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -23,6 +23,7 @@ sources:
       url: "https://cubicbear.github.io/doc/affineNotes.pdf"
       locator: "Chapter 1, Sections 1.1-1.2 (Coxeter systems and the geometric representation) and 1.6 (finite Weyl group classification), PDF pp. 1-5; Chapter 2, Section 2.12 (affine Dynkin diagrams), PDF p. 14"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

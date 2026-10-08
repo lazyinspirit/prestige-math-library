@@ -2,7 +2,7 @@
 id: ex-cg-null-homotopy-versus-short-loop-shrinkability
 kind: example
 title: "Null-homotopy versus shrinkability through short loops on $S^2$ and on a short circle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 16
@@ -21,6 +21,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bridsonhaefligerx.pdf"
       locator: "II.4.12 (compact balls), II.4.15–II.4.17 (injectivity radius, systole, minimum embedded circle)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

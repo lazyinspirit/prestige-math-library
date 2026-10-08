@@ -20,12 +20,13 @@ sources:
   - title: 'Bruce Blackadar, Operator Algebras: Theory of C*-Algebras and von Neumann Algebras (author-hosted complete text)'
     url: https://bruceblackadar.com/Mathematics/Cycr.pdf
     locator: 'Part III, §1.5: III.1.5.1-III.1.5.5 (matrix units and uniqueness of the type I factor structure), printed pp. 247-248 (PDF pp. 255-256)'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
 axiom_use: 'AC is inherited from the type-I spatial and direct-sum suppliers; locally only a nonzero block and one unit vector are chosen. Nonzero carriers and positive multiplicities are essential: a zero amplification would not determine an irreducible class. Finite and countably infinite multiplicities are both covered.'
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

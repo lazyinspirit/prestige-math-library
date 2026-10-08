@@ -2,7 +2,7 @@
 id: lem-cg-complexification-satisfies-reflection-invariant-hypotheses
 kind: lemma
 title: "Complexifying a finite Coxeter reflection representation: faithfulness, complex reflections, and the hypotheses of the invariant-theory suppliers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: ["def-hh-coxeter-matrix-word-group-and-length","def-cg-coxeter-diagram-components-and-finite-type","def-cg-real-coxeter-form-and-reflection","lem-cg-reflection-form-invariance-and-rank-two-orders","def-cg-canonical-reflection-homomorphism","lem-cg-reflection-representation-descends-and-root-norms","def-cg-dual-chambers-and-reflection-hyperplanes","thm-cg-root-sign-and-simple-reflection-positivity","thm-cg-root-inversion-formulas-and-strong-exchange","thm-cg-root-length-criterion-and-faithfulness","thm-cg-finite-type-positive-definite-criterion","def-complexification-of-a-real-vector-space","def-complexification-of-a-real-linear-map","def-eigenvalue-eigenvector-eigenspace-and-spectrum","def-intertwiner-equivalent-and-faithful-representations","def-finite-linear-invariant-and-coinvariant-polynomial-algebras","lem-finite-reflection-invariant-generators-are-algebraically-independent","lem-reflection-basic-invariants-form-a-regular-sequence","lem-weyl-coinvariant-hilbert-series-has-order-w-dimension","thm-chevalley-shephard-todd-for-finite-weyl-groups","def-axiom-of-choice","thm-universal-property-of-module-tensor-products"]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

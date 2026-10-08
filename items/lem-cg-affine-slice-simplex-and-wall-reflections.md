@@ -2,7 +2,7 @@
 id: lem-cg-affine-slice-simplex-and-wall-reflections
 kind: lemma
 title: "The affine slice: faithful isometric action, the alcove simplex, and its facet reflections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/notes.pdf"
       locator: "Section 6.1, Example 6.1.4 (PDF pp. 33-34; the Euclidean simplicial cosine-matrix criterion, used as background only)."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

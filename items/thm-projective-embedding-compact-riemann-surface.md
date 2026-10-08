@@ -2,7 +2,7 @@
 id: thm-projective-embedding-compact-riemann-surface
 kind: theorem
 title: "Projective embedding of a compact Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -25,6 +25,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references: [{"title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81, Springer 1981), translated by Bruce Gilligan", "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf", "locator": "§§17.19–17.22, printed pp. 142–145: global generation for degree at least 2g, the projective map with allowed poles, and embedding for degree at least 2g+1"}, {"title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)", "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf", "locator": "Ch. 12, Theorems 12.2 and 12.6–12.8, printed pp. 104–107: the map from a base-point-free system, separating points and first jets, and embedding for degree at least 2g+1"}, {"title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)", "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf", "locator": "Ch. 5 §1, Proposition 5.6 and Proposition 5.7, printed pp. 50–51: the projective map and point/tangent separation criterion"}]

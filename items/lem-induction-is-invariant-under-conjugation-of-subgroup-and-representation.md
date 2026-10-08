@@ -2,7 +2,7 @@
 id: lem-induction-is-invariant-under-conjugation-of-subgroup-and-representation
 kind: lemma
 title: "Induction is invariant under conjugation of the subgroup and the representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-43-complex-representation-15"
 dependency_level: 0
@@ -19,6 +19,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

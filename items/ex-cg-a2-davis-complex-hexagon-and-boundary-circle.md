@@ -2,7 +2,7 @@
 id: "ex-cg-a2-davis-complex-hexagon-and-boundary-circle"
 kind: example
 title: "The A2 Davis complex is a hexagon whose boundary is the Coxeter complex circle"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization","lem-cg-spherical-coset-inclusion-and-intersection","lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics","thm-cg-davis-complex-cell-incidence-and-stabilizers","lem-cg-reflection-form-invariance-and-rank-two-orders","thm-hh-parabolic-minimal-representatives-and-length-additivity","thm-cg-finite-chamber-tiling-and-coset-face-identification","def-hh-coxeter-matrix-word-group-and-length","def-cg-canonical-reflection-homomorphism"]
@@ -14,6 +14,7 @@ proof_strategy: direct
 generation:
   role: example
 verification:
+  audited: "2026-10-08"
   precheck: pending
 sources:
   references:

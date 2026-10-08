@@ -1,7 +1,7 @@
 ---
 page: amenability-reiter-nets-and-folner-conditions-examples
 title: Amenability Reiter Nets and Folner Conditions — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-folner-sets-in-rn

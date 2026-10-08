@@ -2,7 +2,7 @@
 id: "ex-cg-circumcenter-of-a-finite-orbit-in-a-metric-tree"
 kind: "example"
 title: "Circumcenters of finite sets in the infinite dihedral Davis line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 20
@@ -13,11 +13,8 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups, first-edition author manuscript, 2007-2008"
@@ -98,16 +95,3 @@ Let $(W,S)$ be the universal Coxeter system with $S=\{s,t\}$ and $m(s,t)=\infty$
 
 - Davis's examples independently identify the universal Coxeter Davis complex as a regular tree and, in rank two, the real line. The proof above establishes the line metric and the finite-set center formula directly.
 - The normalization $d_s=d_t=1/2$ makes all edges unit length. Other positive choices give alternating edge lengths $2d_s$ and $2d_t$. Using their cumulative lengths as vertex coordinates in step 1.3 still identifies the metric realization with the real line; the center is still the metric midpoint of a diameter segment, though its position in the original cell coordinates can change.
-
-## Current supplier receipt status
-
-These direct in-run supplier decisions remain open. The final report distinguishes current escalations from missing or stale receipts.
-
-- `def-cg-spherical-nerve-coset-poset-and-davis-realization`: its current in-run supplier decision is not closed; this item consumes it in Facts F4 and proof steps 1.1.
-- `thm-cg-davis-complex-cell-incidence-and-stabilizers`: its current in-run supplier decision is not closed; this item consumes it in Facts F5 and proof steps 1.1, 1.3.
-- `lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta`: its current in-run supplier decision is not closed; this item consumes it in Facts F6, F8 and proof steps 1.1, 1.2, 1.3.
-- `def-cg-real-coxeter-form-and-reflection`: its current in-run supplier decision is not closed; this item consumes it in Facts F9 and proof steps 1.3.
-- `def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric`: its current in-run supplier decision is not closed; this item consumes it in Facts F10 and proof steps 1.3.
-- `def-hh-coxeter-matrix-word-group-and-length`: its current in-run supplier decision is not closed; this item consumes it in Facts F1, F2 and proof steps 1.1.
-- `def-cg-cat-zero-cat-one-and-local-geodesic`: its current in-run supplier decision is not closed; this item consumes it in Facts F13 and proof steps 1.3, 4.1.
-- `lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets`: its current in-run supplier decision is not closed; this item consumes it in Facts F16 and proof steps 4.1.

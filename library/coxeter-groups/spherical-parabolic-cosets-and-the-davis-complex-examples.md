@@ -1,7 +1,7 @@
 ---
 page: spherical-parabolic-cosets-and-the-davis-complex-examples
 title: "Spherical Parabolic Cosets and the Davis Complex — Examples"
-status: draft
+status: published
 requires: [spherical-parabolic-cosets-and-the-davis-complex, free-products-and-amalgamation, graphs-of-groups-and-bass-serre-theory]
 items: []
 examples: [ex-cg-a2-davis-complex-hexagon-and-boundary-circle, ex-cg-right-angled-cube-davis-complex, ex-cg-b2-davis-complex-octagon-and-boundary-circle, ex-cg-universal-coxeter-tree-davis-complex, ex-cg-spherical-residues-chamber-quotient-and-finite-versus-infinite]

@@ -1,7 +1,7 @@
 ---
 page: a-discrete-bases-in-metric-spaces-examples
 title: "Discrete bases in metric spaces — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

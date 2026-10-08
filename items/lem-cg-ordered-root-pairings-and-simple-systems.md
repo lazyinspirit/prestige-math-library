@@ -2,7 +2,7 @@
 id: lem-cg-ordered-root-pairings-and-simple-systems
 kind: lemma
 title: "The mu-dot-root identities, the cone separation, and the canonical simple systems of the subintervals [1, sigma]"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 18
@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0505518"
       locator: "Section 2.5, printed pp. 22-24 (the Coxeter element and its order), used only for the ambient conventions"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

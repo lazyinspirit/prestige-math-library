@@ -2,7 +2,7 @@
 id: lem-monomial-integrals-over-disc-ball-and-polydisc
 kind: lemma
 title: Weighted monomial integrals and monomial norms for the disc, ball and polydisc
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 0
@@ -41,6 +41,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

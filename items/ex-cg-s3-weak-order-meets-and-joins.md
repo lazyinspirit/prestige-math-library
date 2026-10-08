@@ -2,7 +2,7 @@
 id: ex-cg-s3-weak-order-meets-and-joins
 kind: example
 title: "All meets and joins of the right weak order of $A_2$ ($S_3$), with the left order and the inversion sets compared"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 19
@@ -27,6 +27,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

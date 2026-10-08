@@ -2,7 +2,7 @@
 id: ex-radial-stretch-quasiconformal-map
 kind: example
 title: The radial stretch is quasiconformal with K equal to max of alpha and one over alpha
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 8
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §§11.1 and 12.1, printed pp. 175–178 and 183–184: Beltrami coefficient/dilatation conventions and annular modulus distortion. The radial formulas below are computed directly."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

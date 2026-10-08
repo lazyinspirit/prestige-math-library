@@ -2,7 +2,7 @@
 id: thm-jacobi-inversion
 kind: theorem
 title: Jacobi inversion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 24
@@ -42,6 +42,7 @@ sources:
       url: "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf"
       locator: "Ch. 7 §2, Lemma 7.4: $I:\\operatorname{Div}^0(S)\\to\\operatorname{Jac}(S)$ is onto, via a local surjectivity argument and differences, printed pp. 60-61."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: def-cg-standard-affine-diagrams
 kind: definition
 title: "The standard affine diagrams A-tilde, B-tilde, C-tilde, D-tilde, E-tilde, F-tilde and G-tilde"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -20,6 +20,7 @@ sources:
       url: "https://cubicbear.github.io/doc/affineNotes.pdf"
       locator: "Chapter 2, Section 2.12 (list of untwisted affine Dynkin diagrams), PDF pp. 14-15"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

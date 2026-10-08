@@ -2,7 +2,7 @@
 id: def-iwasawa-and-minimal-parabolic-data-for-sl2-r
 kind: definition
 title: Iwasawa and minimal-parabolic data for SL2(R)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 0
@@ -35,6 +35,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2.pdf"
       locator: "Chapter VI §4, printed pp. 371–375 (Iwasawa decomposition and its uniqueness)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

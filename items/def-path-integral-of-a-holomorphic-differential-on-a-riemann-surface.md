@@ -2,7 +2,7 @@
 id: def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface
 kind: definition
 title: Path integral of a holomorphic differential on a Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 0
@@ -39,6 +39,7 @@ sources:
       url: "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf"
       locator: "Ch. 2 §20.4, 1-chains on a Riemann surface and integration of closed differentials, printed p. 161."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

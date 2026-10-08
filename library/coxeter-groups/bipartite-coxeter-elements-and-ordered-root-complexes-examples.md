@@ -1,7 +1,7 @@
 ---
 page: bipartite-coxeter-elements-and-ordered-root-complexes-examples
 title: "Bipartite Coxeter Elements and Ordered Root Complexes — Examples"
-status: draft
+status: published
 requires: [bipartite-coxeter-elements-and-ordered-root-complexes]
 items: []
 examples: [ex-cg-ordered-roots-and-mu-matrix-in-i2-5, ex-cg-ordered-roots-and-mu-matrix-in-a3, ex-cg-cone-intersection-versus-moved-space-meet-in-a3]

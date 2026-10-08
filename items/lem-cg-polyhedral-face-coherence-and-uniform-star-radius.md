@@ -2,7 +2,7 @@
 id: lem-cg-polyhedral-face-coherence-and-uniform-star-radius
 kind: lemma
 title: "Face coherence, global hat coordinates and a uniform star radius"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -21,6 +21,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf"
       locator: "Chapter 2, cells and cell complexes, pp. 13–16 (coning a cell over a triangulated boundary; compatible subdivisions)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

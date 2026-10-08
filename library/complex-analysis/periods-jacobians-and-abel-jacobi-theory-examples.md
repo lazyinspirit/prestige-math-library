@@ -1,7 +1,7 @@
 ---
 page: periods-jacobians-and-abel-jacobi-theory-examples
 title: "Periods, Jacobians, and Abel--Jacobi Theory: Examples and Counterexamples"
-status: draft
+status: published
 items:
   - ex-symplectic-homology-basis-of-a-genus-two-surface
   - ex-base-point-cancellation-for-degree-zero-divisors

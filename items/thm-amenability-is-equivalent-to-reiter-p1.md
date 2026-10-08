@@ -2,7 +2,7 @@
 id: thm-amenability-is-equivalent-to-reiter-p1
 kind: theorem
 title: Amenability is equivalent to Reiter's condition (P1)
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 proof_strategy: direct
@@ -21,6 +21,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

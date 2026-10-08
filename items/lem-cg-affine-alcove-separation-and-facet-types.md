@@ -2,7 +2,7 @@
 id: lem-cg-affine-alcove-separation-and-facet-types
 kind: lemma
 title: "Alcove separation, facet reflections, panel types, and triviality of the fundamental alcove stabilizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 3
@@ -20,6 +20,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

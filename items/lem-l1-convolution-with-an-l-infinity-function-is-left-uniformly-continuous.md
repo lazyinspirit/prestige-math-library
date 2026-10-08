@@ -2,7 +2,7 @@
 id: lem-l1-convolution-with-an-l-infinity-function-is-left-uniformly-continuous
 kind: lemma
 title: L1 convolution smooths bounded functions into UCB
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:
@@ -32,6 +32,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

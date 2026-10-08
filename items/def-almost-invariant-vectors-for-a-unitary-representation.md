@@ -2,7 +2,7 @@
 id: def-almost-invariant-vectors-for-a-unitary-representation
 kind: definition
 title: Almost invariant vectors for a unitary representation
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -25,6 +25,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "The definition, its scaling property, and the implication from almost invariant vectors to weak containment are choice-free. The locally compact Hausdorff equivalence with weak containment and the cited general-group counterexample are invoked from the published lemma under AC; the counterexample uses Tychonoff and recursive compact-stage neighbourhood selections. Consumers inherit AC when they use either assertion."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

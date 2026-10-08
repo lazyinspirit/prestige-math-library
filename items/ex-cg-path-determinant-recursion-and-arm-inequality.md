@@ -2,7 +2,7 @@
 id: ex-cg-path-determinant-recursion-and-arm-inequality
 kind: example
 title: "Path determinants $d_k=d_{k-1}-\\cos^2(\\pi/m)d_{k-2}$ and the three-arm inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -20,6 +20,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix C, formulas (C.1) and (C.2) and Table C.1 (printed pp. 435-436): det 2A = 2d_{n-1}-d_{n-2} for a final label 3 and det 2A = 2d_{n-1}-2d_{n-2} for a final label 4, with det(2A)(A_n) = n+1"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

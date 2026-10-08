@@ -2,7 +2,7 @@
 id: ex-conformal-welding-of-the-round-circle
 kind: example
 title: "The identity welding of the round circle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -35,6 +35,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §15.4, printed pp. 212–213: the connected-sum definition of welding, the two-sided disk-automorphism action, and Theorem 15.23's Möbius uniqueness for quasiconformal welding. Read in full; the library's boundary convention is stated separately."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-cg-crystallographic-finite-type-and-lattice-stability
 kind: theorem
 title: "Crystallographic finite type: the Weyl types, reduced realizations and lattice stability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -24,6 +24,7 @@ sources:
       locator: "Section 6.9 with Table 6.1, printed pp. 103-104, and Appendix C.1, Theorems C.1.2-C.1.4, printed pp. 433-438: the finite-type classification including H_3, H_4 and the dihedral types"
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

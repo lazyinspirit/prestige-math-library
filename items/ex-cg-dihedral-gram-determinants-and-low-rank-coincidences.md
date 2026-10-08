@@ -2,7 +2,7 @@
 id: ex-cg-dihedral-gram-determinants-and-low-rank-coincidences
 kind: example
 title: "Dihedral diagrams $I_2(m)$: Gram determinants, the infinite case, and the low-rank coincidences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -20,6 +20,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Classification preview, printed p. 3, and the cosine table in the proof of Theorem 5.15, printed p. 13: I2(2) = A1 x A1, I2(3) = A2, I2(4) = B2, I2(6) = G2 (the finite Weyl types)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

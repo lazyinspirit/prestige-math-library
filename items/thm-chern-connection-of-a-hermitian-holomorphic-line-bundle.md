@@ -2,7 +2,7 @@
 id: thm-chern-connection-of-a-hermitian-holomorphic-line-bundle
 kind: theorem
 title: "Chern connection of a Hermitian holomorphic line bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 2
@@ -41,6 +41,7 @@ sources:
       url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
       locator: "Ch. 1 §2, printed p. 9: holomorphic atlases, complex structures and Riemann surfaces"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

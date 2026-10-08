@@ -1,7 +1,7 @@
 ---
 page: finite-coxeter-diagrams-and-complete-classification-examples
 title: "Finite Coxeter Diagrams and Complete Classification — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-cycle-and-overlong-arm-nonpositive-witnesses, ex-cg-dihedral-gram-determinants-and-low-rank-coincidences, ex-cg-h3-and-h4-gram-determinants-and-principal-minors, ex-cg-bn-and-cn-are-the-same-coxeter-diagram, ex-cg-path-determinant-recursion-and-arm-inequality]
 ---

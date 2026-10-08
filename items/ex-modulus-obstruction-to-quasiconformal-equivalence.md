@@ -2,7 +2,7 @@
 id: ex-modulus-obstruction-to-quasiconformal-equivalence
 kind: example
 title: A modulus obstruction to quasiconformal equivalence of round annuli
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 9
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 1 §1, Lemma 1.7, printed pp. 4–5, for round-annulus modulus; Ch. 2 §2, Corollary 2.2, printed pp. 52–53, for the logarithmic annulus distortion estimate in the piecewise differentiable case."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-skew-multiplicity-module-has-littlewood-richardson-specht-decomposition-over-c
 kind: theorem
 title: "The skew multiplicity module decomposes with Littlewood–Richardson multiplicities over $\\mathbb C$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 3
@@ -29,6 +29,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

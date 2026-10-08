@@ -1,7 +1,7 @@
 ---
 page: large-spherical-metric-flags-and-the-moussong-girth-theorem-examples
 title: "Large Spherical Metric Flags and the Moussong Girth Theorem — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-cg-a-tilde-2-nerve-perimeter-two-pi-and-vanishing-gram-determinant

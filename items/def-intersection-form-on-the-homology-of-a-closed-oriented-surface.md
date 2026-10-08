@@ -2,7 +2,7 @@
 id: def-intersection-form-on-the-homology-of-a-closed-oriented-surface
 kind: definition
 title: The intersection form on the homology of a closed oriented surface
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:
@@ -28,6 +28,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-cg-interval-realized-tree-versus-vertex-graph-metric
 kind: example
 title: "An interval-realized tree and its discrete vertex metric"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 3
@@ -22,6 +22,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bridsonhaefligerx.pdf"
       locator: "I.7.11-I.7.13, printed pp. 101-102 (length metrics on cell complexes and the role of finitely many shapes)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-round-annulus-conformal-parameter-is-complete-invariant
 kind: theorem
 title: The conformal parameter of a round annulus is a complete invariant
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 4
@@ -23,6 +23,7 @@ sources:
       url: "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5710-11511_2006_Article_BF02392634.pdf"
       locator: "§4, printed p. 115, Lemma 5, for the separating-family extremal length of a round annulus."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-reiter-functions-can-be-cut-down-to-folner-sets
 kind: lemma
 title: Reiter functions can be cut down to Følner sets
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:
@@ -55,6 +55,7 @@ sources:
     url: https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf
     locator: Slides 14–18 (PDF pp. 14–18), proof that Reiter's Property implies the Følner Condition; the proof begins with compact Q containing e; this original route assumes e in Q. The full arbitrary-positive-compact-Q quantitative claim and stronger bound here are proved locally by finite-partition parity averaging, scalar left-Haar averaging and measurable coarea; no stronger source theorem is asserted.
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

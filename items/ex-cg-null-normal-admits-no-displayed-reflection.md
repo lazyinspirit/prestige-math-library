@@ -2,7 +2,7 @@
 id: ex-cg-null-normal-admits-no-displayed-reflection
 kind: example
 title: "A null normal admits no reflection of the displayed form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -22,6 +22,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "\u00a74.2, printed p. 93: (4.10)\u2013(4.14), where reflection normals are the basis vectors with $(\\alpha_s\\mid\\alpha_s)=1$, so null normals never occur"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-cg-finite-type-positive-definite-criterion
 kind: theorem
 title: "Finiteness criterion: W is finite exactly when the Coxeter form is positive definite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 13
@@ -20,6 +20,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Proposition 5.14 and the proof of its part (ii), printed pp. 12-13: 'if B(Gamma) is definite positive its orthogonal group is compact and W is a discrete subgroup of this orthogonal group, thus finite', with the discreteness neighbourhood {g : g(x) in C} for x in C"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

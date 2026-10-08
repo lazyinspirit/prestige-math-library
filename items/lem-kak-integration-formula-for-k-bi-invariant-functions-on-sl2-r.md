@@ -2,7 +2,7 @@
 id: lem-kak-integration-formula-for-k-bi-invariant-functions-on-sl2-r
 kind: lemma
 title: KAK integration formula for K-bi-invariant functions on SL2(R)
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-iwasawa-and-minimal-parabolic-data-for-sl2-r
@@ -22,6 +22,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is used for normalized Haar probability on K through the Iwasawa data and supplies AC_omega for the nonnegative C1 change-of-variables theorem. The real spectral decomposition and finite sign adjustment use no additional choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

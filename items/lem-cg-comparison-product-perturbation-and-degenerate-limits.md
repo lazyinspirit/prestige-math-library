@@ -2,7 +2,7 @@
 id: lem-cg-comparison-product-perturbation-and-degenerate-limits
 kind: lemma
 title: "Perturbation by a Euclidean regular polygon: comparison-disk bounds for degenerate comparison triangles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 13
@@ -24,6 +24,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2.15–I.2.16, printed pp. 504–505 (the CAT(0)-inequality and local geodesics)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

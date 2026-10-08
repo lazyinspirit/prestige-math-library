@@ -2,7 +2,7 @@
 id: ex-cg-s4-coset-minima-and-double-coset-decomposition
 kind: example
 title: "Left and right coset minima and a double coset decomposition in S4"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -21,6 +21,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

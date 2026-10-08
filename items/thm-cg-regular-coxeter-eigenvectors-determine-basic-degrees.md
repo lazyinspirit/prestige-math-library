@@ -2,7 +2,7 @@
 id: thm-cg-regular-coxeter-eigenvectors-determine-basic-degrees
 kind: theorem
 title: "A regular Coxeter eigenvector determines the basic degrees: the exponent-residue identification and the complete degree tables for all finite Coxeter types"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps:
@@ -40,6 +40,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

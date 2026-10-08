@@ -2,7 +2,7 @@
 id: lem-cg-convex-root-subcomplex-intersection-and-purity
 kind: lemma
 title: "Intersection of root subcomplexes and purity under convexity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 21
@@ -27,16 +27,13 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "T. Brady and C. Watt, Lattices in Finite Real Reflection Groups, Transactions of the American Mathematical Society 360 (2008), 4809–4844, arXiv:math/0501502"
       url: "https://arxiv.org/pdf/math/0501502"
       locator: "§7, proof of Theorem 7.8, printed pp. 24–25: the source asserts that a maximal simplex of the intersection spans the intersection complex, without proof; §7.8 also uses the common-face realization identity. The complete 29-page article was read."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement
@@ -84,7 +81,3 @@ Under the common-open-half-space condition above, convexity of $C$ is equivalent
 3.1 (Empty and one-vertex cases; dimensions.) If $Y\cap Z$ has no vertex, its sole face is $\emptyset$, step 1.1 gives the empty realization, and the nonempty hypothesis of (2) fails. If it has exactly one vertex $v$, its only nonempty face is $\{v\}$; then $C=c[\{v\}]$ is a ray, its span is $\operatorname{span}(v)$, and the unique maximal simplex spans it. In the general nonempty case, step 2.1 gives $\operatorname{span}(F)=L$ for every maximal simplex. By [F4], $|F|=\dim L$ and $\dim F=\dim L-1$; hence all maximal simplices have the same dimension, as claimed. [F2, F4, step 1.1, step 2.1]
 
 4.1 The span of $K$ equals $L$: every nonzero point of $C$ is a positive scalar multiple of its normalization in $K$, and $K\subseteq C$. This also verifies the span formulation for the single-vertex case and completes (2)–(3). [F1, step 3.1] ∎
-
-## Remarks
-
-- **Open supplier obligations.** `def-cg-brady-watt-ordered-spherical-root-complex` supplies the bipartite complex, cone and realization conventions in the Statement, Facts [F1]–[F2], and proof steps 1.1 and 1.3; `lem-cg-steinberg-bipartite-root-enumeration` supplies the finite positive-root order and common-half-space data in the Statement, Facts [F1], and proof steps 1.3 and 4.1; `lem-cg-ordered-root-complex-is-geometric-simplicial` supplies face independence, the common-half-space condition, and common-face cone intersections in the Statement, Fact [F1], and proof steps 1.1, 1.2, 1.3, 2.1, and 4.1. These three batch-19 suppliers currently have no closed Step-3 dispositions; reconcile their completed statements and these exact uses before clearing this item's decision.

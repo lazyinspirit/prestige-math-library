@@ -2,7 +2,7 @@
 id: def-amenable-locally-compact-group
 kind: definition
 title: Amenable locally compact group
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-hh-exchange-deletion-on-a-nonreduced-word
 kind: example
 title: "A nonreduced word deleted by its repeated prefix reflection, and an exchange step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 5
@@ -22,6 +22,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "1.6 and Proposition 1.7, printed pp. 12-13: prefix reflections, expression-independent inversion sets and exchange"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

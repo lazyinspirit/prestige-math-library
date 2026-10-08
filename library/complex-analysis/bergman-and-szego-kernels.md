@@ -1,7 +1,7 @@
 ---
 page: bergman-and-szego-kernels
 title: Bergman and Szegő Kernels
-status: draft
+status: published
 requires:
   - complex-lp-spaces-and-test-function-conventions
   - hilbert-space-geometry-and-riesz-representation

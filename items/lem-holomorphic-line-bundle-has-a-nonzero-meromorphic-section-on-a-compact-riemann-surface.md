@@ -2,7 +2,7 @@
 id: lem-holomorphic-line-bundle-has-a-nonzero-meromorphic-section-on-a-compact-riemann-surface
 kind: lemma
 title: Every holomorphic line bundle on a compact Riemann surface has a meromorphic section
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 10
@@ -30,6 +30,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 14, Theorem 14.2 and Corollaries 14.3–14.4, printed pp. 119–120: finite-dimensional line-bundle cohomology, a meromorphic section with a prescribed pole, and the conclusion that every line bundle is O(D). The proof here supplies its own analytic construction."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

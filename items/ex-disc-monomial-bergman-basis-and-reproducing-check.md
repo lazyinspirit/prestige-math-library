@@ -2,7 +2,7 @@
 id: ex-disc-monomial-bergman-basis-and-reproducing-check
 kind: example
 title: The disc Bergman kernel from its monomial basis, with a reproducing check
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 6
@@ -21,6 +21,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

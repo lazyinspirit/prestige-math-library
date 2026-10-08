@@ -2,7 +2,7 @@
 id: def-cg-dual-chambers-and-reflection-hyperplanes
 kind: definition
 title: "The dual action, chambers, faces, and root hyperplanes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 5
@@ -20,6 +20,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "\u00a74.2, printed p. 94: the contragredient pair $\\sigma,\\sigma^*$ and Proposition 4.2.3, $\\langle w(p)\\mid\\beta\\rangle=\\langle p\\mid w^{-1}(\\beta)\\rangle$; \u00a74.9, printed p. 123: the hyperplanes $H_\\beta=\\{p:\\langle p\\mid\\beta\\rangle=0\\}$ and the cone $C=\\bigcap_s H^+_{\\alpha_s}$"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

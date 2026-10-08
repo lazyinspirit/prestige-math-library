@@ -1,7 +1,7 @@
 ---
 page: direct-integral-decomposition-and-type-i-groups-examples
 title: Direct Integral Decomposition and Type I Groups — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-direct-integral-of-characters-for-the-regular-representation-of-r

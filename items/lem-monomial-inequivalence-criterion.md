@@ -2,7 +2,7 @@
 id: lem-monomial-inequivalence-criterion
 kind: lemma
 title: "Mackey-Shoda non-equivalence criterion for monomial representations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -24,6 +24,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1, §1.F: Theorem 1.F.16 (non-equivalence of monomial representations) and its complete proof, printed pp. 56-57; the adjoint computation is the one appearing in the proof of Theorem 1.F.11 on printed p. 54 and is expanded locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

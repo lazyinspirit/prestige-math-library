@@ -2,7 +2,7 @@
 id: lem-analytic-quasiconformality-implies-quadrilateral-modulus-bounds
 kind: lemma
 title: Analytic quasiconformality gives both quadrilateral modulus bounds
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 4
@@ -20,6 +20,7 @@ sources:
       url: https://www.math.stonybrook.edu/~mlyubich/book.pdf
       locator: Exercise 2.77, pp. 88–89, and Proposition 6.22, pp. 124–125, elliptic-integral rectangle map; §§11.4 and 12.1, pp. 181–184, lower area and length–area comparison. The proof here does not use the printed signed-multiplicity error or inverse-null claim.
 verification:
+  audited: "2026-10-08"
   precheck: pending
   judge:
     model: "gpt-6.1-sol"

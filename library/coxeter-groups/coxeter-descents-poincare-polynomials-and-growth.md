@@ -1,7 +1,7 @@
 ---
 page: coxeter-descents-poincare-polynomials-and-growth
 title: "Coxeter Descents, Poincaré Polynomials, and Growth"
-status: draft
+status: published
 requires: [finite-reflection-arrangements-and-spherical-coxeter-complexes, parabolic-subgroups-and-double-coset-geometry, finite-coxeter-invariants-and-coinvariant-gradings, weak-order-inversions-and-lattice-operations, permutation-statistics-inversions-and-eulerian-numbers, braided-and-symmetric-monoidal-categories]
 items: [def-cg-length-series-descent-generating-polynomial,
         lem-cg-fundamental-weight-orbit-and-schreier-distance,

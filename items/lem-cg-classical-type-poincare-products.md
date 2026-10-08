@@ -2,7 +2,7 @@
 id: lem-cg-classical-type-poincare-products
 kind: lemma
 title: "Classical Poincare products for A, B, D and I2(m) from the permutation and signed-permutation models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 19
@@ -21,6 +21,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, Table (2.50), printed pp. 155-156: the standard Euclidean positive-root and simple-root coordinates for $A_n,B_n,D_n$. The type-D simple system here is a diagram-isomorphic relabeling with a sign change; no group-order claim from the exercise problems is used."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

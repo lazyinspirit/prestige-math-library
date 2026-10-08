@@ -2,7 +2,7 @@
 id: thm-r-polynomial-recursion-and-degree-bounds
 kind: theorem
 title: The $R$-coefficient recursion, support, degree bounds and inversion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-bruhat-interval-and-r-polynomials, lem-bruhat-order-basic-properties-for-permutations, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-the-hecke-bar-involution-is-well-defined, lem-reversal-anti-involution-commutes-with-hecke-bar]
@@ -22,6 +22,7 @@ sources:
       url: "https://arxiv.org/pdf/1212.0791"
       locator: "§3.2, printed pp. 15–16; complete section read."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

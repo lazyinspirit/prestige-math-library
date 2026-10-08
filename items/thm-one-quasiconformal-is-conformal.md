@@ -2,7 +2,7 @@
 id: thm-one-quasiconformal-is-conformal
 kind: theorem
 title: Every 1-quasiconformal homeomorphism is conformal
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 6
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 2 §6, Lemma 6.3, printed p. 66: a geometrically 1-quasiconformal map is conformal; the item's analytic proof instead uses Weyl's lemma and the current Sobolev suppliers."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

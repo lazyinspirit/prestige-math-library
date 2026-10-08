@@ -2,7 +2,7 @@
 id: def-cg-artin-monoid-and-group-presentations
 kind: definition
 title: "Artin monoid and Artin group presentations, and the canonical monoid-to-group map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -21,6 +21,7 @@ sources:
     - title: "Jon McCammond, The mysterious geometry of Artin groups (Winter Braids Lecture Notes Vol. 4 (2017), Course no I, pp. 1-30)"
       url: "https://proceedings.centre-mersenne.org/item/10.5802/wbln.17.pdf"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

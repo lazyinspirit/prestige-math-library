@@ -2,7 +2,7 @@
 id: def-tempered-unitary-representation
 kind: definition
 title: Tempered unitary representations
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-weak-containment-of-unitary-representations
@@ -18,6 +18,7 @@ provenance:
   proof: not-applicable
 axiom_audit: "AC is inherited through the Haar-based regular representation and the set/Fell constructions of the unitary dual; weak containment itself adds no choice."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-the-formal-quantum-serre-half-embeds-in-the-quantum-shuffle-algebra-and-is-degreewise-free
 kind: theorem
 title: "The formal quantum Serre half embeds in the shuffle algebra and is degreewise free"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -40,6 +40,7 @@ aliases: []
 dependency_level: 5
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

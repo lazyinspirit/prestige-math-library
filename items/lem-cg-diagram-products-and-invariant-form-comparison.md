@@ -2,7 +2,7 @@
 id: lem-cg-diagram-products-and-invariant-form-comparison
 kind: lemma
 title: "Disconnected diagrams, direct products, and comparison of invariant forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 6
@@ -20,6 +20,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Proposition 5.14 and its proof, printed pp. 12-13: V is irreducible exactly when Gamma is connected, V is the direct sum of the representations of the components, and for finite W any invariant bilinear form is definite positive (via Lemmas 5.3 and 5.7)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

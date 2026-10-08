@@ -2,7 +2,7 @@
 id: ex-cg-wall-form-and-line-restrictions-of-a-plane-rotation
 kind: example
 title: "The Wall form and line restrictions of a plane rotation, and the necessity of a common upper bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: [cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, cor-trigonometric-parity-and-pythagorean-identity, def-cg-canonical-reflection-homomorphism, def-cg-coxeter-diagram-components-and-finite-type, def-cg-real-coxeter-form-and-reflection, def-cg-reflection-length-absolute-order-and-moved-space, def-hh-coxeter-matrix-word-group-and-length, def-linear-isometry-and-orthogonal-or-unitary-operator, def-pi-via-first-positive-cosine-zero, def-tangent-cotangent-secant-cosecant, lem-cg-orthogonal-wall-form-and-subspace-restriction, lem-cg-reflection-factorizations-and-independent-normals, lem-cg-reflection-form-invariance-and-rank-two-orders, lem-cg-reflection-representation-descends-and-root-norms, lem-sine-positive-and-cosine-decreasing-on-zero-two, thm-cg-carter-reflection-length-and-absolute-order, thm-cg-finite-coxeter-classification-including-h-and-dihedral, thm-cg-root-inversion-formulas-and-strong-exchange, thm-cg-root-length-criterion-and-faithfulness, thm-double-angle-and-power-reduction-identities, thm-cosine-has-a-smallest-positive-zero]
@@ -20,6 +20,7 @@ sources:
       locator: "Section 2 'Products of reflections', printed pp. 2-5: the root-system setup (i)-(iv) and Lemmas 1-5 with the proofs of Lemmas 2, 3 and 4"
 dependency_level: 18
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

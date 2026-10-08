@@ -2,7 +2,7 @@
 id: thm-normalized-quasiconformal-compactness
 kind: theorem
 title: Compactness of the normalized K-quasiconformal self-maps of the sphere
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 8
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 2 §3, Theorems 3.3–3.4, printed pp. 54–55, for modulus-based equicontinuity; Ch. 2 §5, Theorems 5.1–5.2, printed pp. 59–61, for closure under uniform convergence to a homeomorphism and continuity of quadrilateral modulus. Contextual reference only: the present proof uses spherical energy and weak Jacobians, not its conformal-parameter or four-corner argument."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

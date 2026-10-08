@@ -2,7 +2,7 @@
 id: def-beltrami-coefficient-and-maximal-dilatation
 kind: definition
 title: The Beltrami coefficient and the maximal dilatation
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 1
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §§11.1.2–11.3, printed pp. 177–181: the pointwise Beltrami coefficient, infinitesimal dilatation, and analytic definition. Equation (11.3) on p. 178 gives the correct denominator 1−|μ|; the final K-conversion on p. 181 has a sign misprint and is not used."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

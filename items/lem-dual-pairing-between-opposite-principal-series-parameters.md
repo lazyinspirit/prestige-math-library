@@ -2,7 +2,7 @@
 id: lem-dual-pairing-between-opposite-principal-series-parameters
 kind: lemma
 title: The invariant pairing between opposite principal-series parameters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 4
@@ -37,6 +37,7 @@ sources:
       url: "https://www.math.wustl.edu/~matkerr/sl2notes.pdf"
       locator: "§2, Exercise 2.3(ii), printed p. 9"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

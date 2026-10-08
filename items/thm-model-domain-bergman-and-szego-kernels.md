@@ -2,7 +2,7 @@
 id: thm-model-domain-bergman-and-szego-kernels
 kind: theorem
 title: Bergman kernels of the disc, ball and polydisc, and Szegő kernels of the disc and ball
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 5
@@ -47,6 +47,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

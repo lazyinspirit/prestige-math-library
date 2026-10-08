@@ -2,7 +2,7 @@
 id: ex-pullback-of-a-measurable-ellipse-field
 kind: example
 title: "Pullback of a measurable ellipse field under biholomorphic maps"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -33,6 +33,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §14.6, printed p. 198: measurable Beltrami differentials as conformal-structure data and their chart expressions on a quasiconformal surface; the complete section was read."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-beurling-ahlfors-extension
 kind: theorem
 title: The Beurling–Ahlfors extension theorem for circles and lines
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -32,6 +32,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 2 §8, printed pp. 78–80, Theorem 8.1: both directions of the line extension theorem; the restriction direction is proved by the modulus of a normalized annulus, and the extension direction by a hyperbolic pentagon tessellation."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

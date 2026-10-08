@@ -2,7 +2,7 @@
 id: ex-cg-circle-coxeter-complex-of-i2-5
 kind: example
 title: "The Coxeter complex of $I_2(5)$: the circle triangulated by the ten chambers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 17
@@ -21,6 +21,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Section 5, Proposition 5.4(i) (the order of s_H s_H' equals pi divided by the angle of the walls, printed p. 7) and Proposition 5.8 (printed p. 9)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

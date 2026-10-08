@@ -2,7 +2,7 @@
 id: lem-structure-sheaf-euler-characteristic-is-one-minus-genus
 kind: lemma
 title: The Euler characteristic of the structure sheaf is one minus the genus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -49,6 +49,7 @@ deps:
   - thm-universal-coefficient-theorem-for-cohomology-over-a-pid
   - thm-zero-complex-derivative-on-a-domain-implies-constant
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

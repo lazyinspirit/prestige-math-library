@@ -2,7 +2,7 @@
 id: ex-cg-a-tilde-2-nerve-perimeter-two-pi-and-vanishing-gram-determinant
 kind: example
 title: "The affine $\\widetilde A_2$ nerve: every edge exists, the Gram determinant vanishes, and the perimeter is exactly $2\\pi$"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 15
 deps:
@@ -34,6 +34,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Section 6.12, Theorem 6.12.9 (finite type and positive-definite cosine forms); Sections 7.1 and 12.1 (nerve and prescribed link metric). The affine kernel and equality computations are local here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

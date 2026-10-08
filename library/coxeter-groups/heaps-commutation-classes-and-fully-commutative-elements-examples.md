@@ -1,7 +1,7 @@
 ---
 page: heaps-commutation-classes-and-fully-commutative-elements-examples
 title: "Heaps, Commutation Classes, and Fully Commutative Elements — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-heap-of-one-three-two-in-a3,
            ex-cg-heap-of-one-two-one-in-a2-and-long-braid,

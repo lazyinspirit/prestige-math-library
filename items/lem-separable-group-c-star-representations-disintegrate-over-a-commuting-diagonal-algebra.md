@@ -2,7 +2,7 @@
 id: lem-separable-group-c-star-representations-disintegrate-over-a-commuting-diagonal-algebra
 kind: lemma
 title: "Disintegration of a separable group representation over a commuting diagonal algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -37,6 +37,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part III, §III.1.6.1-III.1.6.4, printed pp. 253-254: direct integrals, decomposable operators and the central decomposition; the measurable fibre construction is proved locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

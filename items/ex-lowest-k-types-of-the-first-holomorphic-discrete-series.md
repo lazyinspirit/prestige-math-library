@@ -2,7 +2,7 @@
 id: ex-lowest-k-types-of-the-first-holomorphic-discrete-series
 kind: example
 title: Lowest K-types of the first holomorphic discrete series
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-holomorphic-and-antiholomorphic-discrete-series-models
@@ -18,6 +18,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is inherited through the weighted model, Hilbert-space, and representation suppliers. The explicit n=2 integral and K-character calculations use no additional choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

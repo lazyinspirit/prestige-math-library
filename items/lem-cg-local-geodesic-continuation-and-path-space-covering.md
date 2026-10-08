@@ -2,7 +2,7 @@
 id: lem-cg-local-geodesic-continuation-and-path-space-covering
 kind: lemma
 title: "The space of local geodesics, its length metric, and the covering criterion for local isometries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 11
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

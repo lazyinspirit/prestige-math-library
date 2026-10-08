@@ -2,7 +2,7 @@
 id: lem-an-antipode-is-unique
 kind: lemma
 title: "Uniqueness of the antipode"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 dependency_level: 1
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

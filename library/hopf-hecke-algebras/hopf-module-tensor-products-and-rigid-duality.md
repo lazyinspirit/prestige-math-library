@@ -1,7 +1,7 @@
 ---
 page: hopf-module-tensor-products-and-rigid-duality
 title: "Hopf Module Tensor Products and Rigid Duality"
-status: draft
+status: published
 items: []
 examples: []
 ---

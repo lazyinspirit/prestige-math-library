@@ -2,7 +2,7 @@
 id: def-divisor-principal-and-canonical-divisor-riemann-surface
 kind: definition
 title: Divisors, principal divisors and canonical divisors on a Riemann surface
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

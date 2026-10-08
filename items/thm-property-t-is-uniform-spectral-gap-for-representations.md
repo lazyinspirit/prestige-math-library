@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: thm-property-t-is-uniform-spectral-gap-for-representations
 kind: theorem
 title: Property (T) is a uniform spectral gap over all representations
@@ -32,6 +32,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. The property-(T)-to-Kazhdan-pair supplier uses AC for set-sized coefficient choices and GNS/direct-sum constructions. AC implies Countable Choice through the declared theorem, which the projection and orthogonal-decomposition suppliers require in the converse. No further choice is used."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

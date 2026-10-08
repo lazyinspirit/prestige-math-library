@@ -2,7 +2,7 @@
 id: lem-dbar-solvability-criterion-for-a-smooth-zero-one-form
 kind: lemma
 title: The dbar-solvability criterion and the holomorphic-orthogonality pairing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 10
@@ -32,6 +32,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "Ch. VI §7, Theorem 7.3 and proof (7.4), printed pp. 309–310: the integration pairing H^{p,q}(X,E) × H^{n-p,n-q}(X,E*) is well defined and nondegenerate via the bundle Hodge-star map on harmonic representatives."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

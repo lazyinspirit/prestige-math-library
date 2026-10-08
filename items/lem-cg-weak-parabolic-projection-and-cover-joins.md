@@ -2,7 +2,7 @@
 id: "lem-cg-weak-parabolic-projection-and-cover-joins"
 kind: "lemma"
 title: "The weak parabolic projection, its adjoints, and the cover-join lemmas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 19
@@ -35,6 +35,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Chapter 2, Section 2.4, Proposition 2.4.4 and its proof with Corollary 2.4.5 (printed pp. 39-40)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

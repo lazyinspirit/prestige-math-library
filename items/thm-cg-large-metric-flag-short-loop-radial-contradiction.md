@@ -2,7 +2,7 @@
 id: thm-cg-large-metric-flag-short-loop-radial-contradiction
 kind: theorem
 title: "Nonshrinkable edge loops of length $<2\\pi$ have three edges, and the finite locally CAT(1) large metric flag complex is CAT(1)"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps:
@@ -40,6 +40,7 @@ sources:
       url: "https://www.bhbowditch.com/papers/bhb-catone.pdf"
       locator: "Sections 3.1.4-3.1.7 and 3.4, printed pp. 19-32 (every loop shorter than the minimal embedded-circle length is shrinkable; the minimal embedded circle is the shortest nonshrinkable loop)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

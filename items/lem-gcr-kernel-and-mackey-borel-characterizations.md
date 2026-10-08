@@ -2,7 +2,7 @@
 id: lem-gcr-kernel-and-mackey-borel-characterizations
 kind: lemma
 title: "GCR kernel and Mackey Borel characterizations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 5
@@ -34,6 +34,7 @@ provenance:
   proof: ai-altered
 axiom_use: "AC is explicit; inherited supplier choice and the exact local selections are identified in the Proof. No global selector of irreducible equivalence classes is asserted."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

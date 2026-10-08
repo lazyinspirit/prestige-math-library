@@ -2,7 +2,7 @@
 id: lem-cut-surface-and-boundary-jumps-of-primitives
 kind: lemma
 title: The cut surface, primitives of closed forms, and their boundary jumps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -37,6 +37,7 @@ sources:
       url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
       locator: "Ch. 7 §2, printed pp. 61–62: the simply connected complement, separate side copies, orientation of the 4g-gon, and the boundary-jump calculation."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

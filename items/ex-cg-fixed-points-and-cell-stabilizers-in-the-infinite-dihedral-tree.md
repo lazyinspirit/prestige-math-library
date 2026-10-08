@@ -2,7 +2,7 @@
 id: "ex-cg-fixed-points-and-cell-stabilizers-in-the-infinite-dihedral-tree"
 kind: "example"
 title: "Fixed points of finite subgroups in the infinite dihedral tree and their cell stabilizers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 23
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:
@@ -86,33 +87,3 @@ Let $(W,S)$ be the universal Coxeter system with $S=\{s,t\}$, $m(s,t)=\infty$, a
 
 - **The equality case of the stabilizer formula.** For the midpoint $m$ of a $1$-cell $(st)^kW_r$ the point $y'=0$ of $C_{\{r\}}$ lies in the relative interior of the chamber face with $w_0=1$ and $I=\{r\}$, and the formula of [[thm-cg-finite-subgroups-lie-in-spherical-parabolics]] (2) returns the full rank-one parabolic $(st)^kW_r(st)^{-k}$, which here is the two-element group $\langle w\rangle$. This is the extreme opposite to the vertex case of clause (ii), where $I=\emptyset$ and the stabilizer is trivial.
 - **Consistency with the general theorem.** The containment $\langle w\rangle=(st)^kW_r(st)^{-k}$ of step 2.1 and the containment $W\le W_S$ of step 1.4 are instances of clause (3) of [[thm-cg-finite-subgroups-lie-in-spherical-parabolics]], computed here cell by cell; the example's fixed-point calculations are proved directly.
-
-## Open supplier obligations
-
-- `def-hh-coxeter-matrix-word-group-and-length` has an earlier `accept` receipt whose current-input hash is stale. The presentation and universal property supply the setup, Fact F1 and step 1.1; its current audit is required before acceptance.
-- `def-cg-spherical-nerve-coset-poset-and-davis-realization` is escalated on changed inputs. The setup, Fact F2 and steps 1.2 and 1.4 use its spherical-coset cell description.
-- `lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta` is escalated because its upstream A1-A5 receipts remain unresolved. Facts F2-F3 and step 1.2 use its cell and Cayley-graph descriptions to identify the line.
-- `lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics` is escalated on changed inputs. The statement's finite-cell contrast, Fact F6 and step 1.4 use its finite-cell geometry.
-- `lem-cg-canonical-cell-exposed-faces-and-normal-cones` is escalated on changed inputs. Fact F6 and step 1.4 use its proof that $0$ is interior to the finite top cell.
-- `thm-cg-davis-complex-cell-incidence-and-stabilizers` is escalated on changed inputs. Facts F2 and F4 and steps 1.3, 1.4, and 2.1 use its carrier-cell, point-stabilizer, and setwise-stabilizer formulas.
-- `def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric` has an earlier `accept` receipt whose current-input hash is stale. The setup, Fact F8 and step 1.2 use its chain-metric definition.
-- `thm-cg-finite-subgroups-lie-in-spherical-parabolics` is the same-pair supplier for the comparison in clause (iii), Fact F7, and steps 2.1 and 3.1; its current item decision is not closed. The explicit rank-two computations do not depend on it, so keep this comparison provisional until that supplier's receipt and actual use are reconciled.
-- `def-cg-parabolic-quotient-and-two-sided-minima` has an earlier `accept` receipt whose current-input hash is stale. Fact F5 and step 2.1 use the standard rank-one parabolic and its conjugates.
-- `thm-cg-finite-type-positive-definite-criterion` has an earlier `accept` receipt whose current-input hash is stale. Clause (iv), Fact F6 and step 1.4 use its finiteness criterion.
-- `def-cg-real-coxeter-form-and-reflection` has an earlier `accept` receipt whose current-input hash is stale. The setup, Fact F3 and step 1.2 use $B(e_r,e_r)=1$ to obtain unit edge lengths.
-
-## Current supplier receipt status
-
-These direct in-run supplier decisions remain open. The final report distinguishes current escalations from missing or stale receipts.
-
-- `def-hh-coxeter-matrix-word-group-and-length`: its current in-run supplier decision is not closed; this item consumes it in Facts F1 and proof steps 1.1, 1.2, 2.1.
-- `def-cg-spherical-nerve-coset-poset-and-davis-realization`: its current in-run supplier decision is not closed; this item consumes it in Facts F2, F5 and proof steps 1.2, 1.3, 1.4, 2.1.
-- `thm-cg-davis-complex-cell-incidence-and-stabilizers`: its current in-run supplier decision is not closed; this item consumes it in Facts F2, F4 and proof steps 1.2, 1.3, 1.4, 2.1.
-- `lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta`: its current in-run supplier decision is not closed; this item consumes it in Facts F2, F3 and proof steps 1.2, 1.3, 1.4.
-- `lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics`: its current in-run supplier decision is not closed; this item consumes it in Facts F6 and proof steps 1.4.
-- `lem-cg-canonical-cell-exposed-faces-and-normal-cones`: its current in-run supplier decision is not closed; this item consumes it in Facts F6 and proof steps 1.4.
-- `def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric`: its current in-run supplier decision is not closed; this item consumes it in Facts F8 and proof steps 1.2.
-- `thm-cg-finite-subgroups-lie-in-spherical-parabolics`: its current in-run supplier decision is not closed; this item consumes it in Facts F7 and proof steps 2.1, 3.1.
-- `def-cg-parabolic-quotient-and-two-sided-minima`: its current in-run supplier decision is not closed; this item consumes it in Facts F5 and proof steps 2.1.
-- `thm-cg-finite-type-positive-definite-criterion`: its current in-run supplier decision is not closed; this item consumes it in Facts F6 and proof steps 1.4.
-- `def-cg-real-coxeter-form-and-reflection`: its current in-run supplier decision is not closed; this item consumes it in Facts F3 and proof steps 1.2.

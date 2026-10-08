@@ -2,7 +2,7 @@
 id: thm-kazhdan-lusztig-polynomial-recursion
 kind: theorem
 title: The Kazhdan–Lusztig polynomial descent recursion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [thm-kazhdan-lusztig-basis-multiplication-formula, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations]
@@ -22,6 +22,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "§§6.1–6.7, printed pp. 30–31; the multiplication formulas and inverse-index coefficient symmetry were read in full."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

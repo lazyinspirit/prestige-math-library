@@ -2,7 +2,7 @@
 id: lem-the-hecke-bar-involution-is-well-defined
 kind: lemma
 title: The Hecke bar involution is well defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-normalized-type-a-hecke-algebra-and-its-bar-involution, thm-standard-basis-of-the-generic-type-a-hecke-algebra]
@@ -22,6 +22,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "§2.1–2.5 (printed pp. 19–22); §3.1–3.5 (pp. 22–24); §4.1–4.9 (pp. 24–27); §5.1–5.6 (pp. 27–30); §6.1–6.8 (pp. 30–31); §7.1–7.6 (pp. 31–36); §8.1–8.9 (pp. 36–39); §10.1–10.9 (pp. 46–49)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

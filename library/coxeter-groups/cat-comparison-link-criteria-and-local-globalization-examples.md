@@ -1,7 +1,7 @@
 ---
 page: cat-comparison-link-criteria-and-local-globalization-examples
 title: "CAT Comparison, Link Criteria, and Local Globalization — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-intervals-and-metric-trees-are-cat-zero, ex-cg-unit-circle-at-the-strict-perimeter-boundary-is-cat-one, ex-cg-short-circle-fails-cat-one, ex-cg-complete-locally-cat-zero-circle-with-nontrivial-fundamental-group]
 ---

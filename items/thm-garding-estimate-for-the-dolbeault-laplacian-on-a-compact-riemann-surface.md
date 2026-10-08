@@ -2,7 +2,7 @@
 id: thm-garding-estimate-for-the-dolbeault-laplacian-on-a-compact-riemann-surface
 kind: theorem
 title: "Gårding estimates for the Dolbeault Laplacian on a compact Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 4
@@ -41,6 +41,7 @@ sources:
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: "Ch. 4 §4.11, Theorem 4.27 and Theorem 4.28, printed pp. 112–114: interior H² and higher H^{k+2} regularity for weak solutions of uniformly elliptic divergence-form equations; Theorem 4.28 refers to [9] for its detailed proof."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

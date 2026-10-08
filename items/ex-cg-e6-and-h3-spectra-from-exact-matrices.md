@@ -2,7 +2,7 @@
 id: ex-cg-e6-and-h3-spectra-from-exact-matrices
 kind: example
 title: "The exceptional spectra for E_6 and H_3 computed exactly: characteristic polynomials, cyclotomic factorisations and the resulting degree tables"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps:
@@ -39,6 +39,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

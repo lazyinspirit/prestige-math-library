@@ -2,7 +2,7 @@
 id: ex-base-point-cancellation-for-degree-zero-divisors
 kind: example
 title: Base-point cancellation for degree-zero divisors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 23
@@ -28,6 +28,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 15, $\\varphi(\\sum Q_i-P_i)(\\omega)=\\sum\\int_{P_i}^{Q_i}\\omega$ and $f(Q)=\\varphi(Q-P)$, printed p. 129."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

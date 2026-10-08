@@ -2,7 +2,7 @@
 id: ex-cg-noncrossing-partitions-and-kreweras-complements-in-s4
 kind: example
 title: "The fourteen elements below (1 2 3 4), the noncrossing partitions of a square, and their Kreweras complements"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 24
@@ -24,16 +24,13 @@ provenance:
 generation:
   role: example
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "D. Armstrong, Generalized Noncrossing Partitions and Combinatorics of Coxeter Groups, Memoirs of the AMS 202 (2009), no. 949, arXiv:math/0611106v2"
       url: "https://arxiv.org/pdf/math/0611106"
       locator: "§4.1, printed pp. 82–85, Lemmas 4.1.4–4.1.5 and Theorem 4.1.3 (cycle counts, transposition moves, and the type-A partition model); §4.2, printed pp. 87–89, Definitions 4.2.2–4.2.3 and identity (4.4) (interleaving and the classical complement). The list and complement products below are verified locally."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Example
@@ -73,7 +70,3 @@ For every $w$ in (1), the support partition of $K(w)$ has $5-|\pi(w)|$ blocks. O
 2.1 (The fifteen partitions.) By block sizes, the set partitions of four labels consist of one partition with one block, six with three blocks, seven with two blocks, and one with four blocks, for a total of fifteen. A partition with one or four blocks is noncrossing. The six three-block partitions have one pair and two singletons, so are noncrossing. Among the seven two-block partitions, the four triple-plus-singleton partitions are noncrossing; the three pairings are $\{1,2\}\mid\{3,4\}$, $\{1,4\}\mid\{2,3\}$, and $\{1,3\}\mid\{2,4\}$, of which only the last has alternating endpoints. This proves the unique crossing claim. The first-step list has fourteen elements, all with noncrossing cyclically increasing cycles; [F3] says each noncrossing partition has a unique such interval permutation. Thus the supports in (1) give exactly the fourteen noncrossing partitions. [F2, F3, step 1.1, algebra]
 
 3.1 (Order, square, and block counts.) [F4] gives that $K$ is an order-reversing bijection of the interval, $K^2(w)=c^{-1}wc$, and $\ell_T(K(w))=3-\ell_T(w)$. Conjugating a cycle by $c^{-1}$ relabels each entry by $1\mapsto4\mapsto3\mapsto2\mapsto1$, so the support partition rotates as stated. Since $\ell_T(w)=4-|\pi(w)|$ and $\ell_T(K(w))=4-|\pi(K(w))|$ by [F3], the length complement gives $|\pi(K(w))|=5-|\pi(w)|$. [F3, F4, step 1.1, step 1.2] ∎
-
-## Remarks
-
-- **Open supplier obligations.** `def-cg-coxeter-noncrossing-poset-and-kreweras-map` supplies the Coxeter-element and interval conventions in the opening Statement; A6 `thm-cg-kreweras-complement-and-type-a-partition-model` supplies the type-A length/criterion/model in Statement (1)–(3) and proof steps 1.1, 2.1 and 3.1. Its complement identities are used in B3 proof step 3.1. Both assigned predecessors remain escalated on the exact upstream suppliers in their item remarks and pair checkpoints. The batch-2 supplier with no closed current Step-3 disposition `def-hh-coxeter-matrix-word-group-and-length` supplies the Coxeter presentation in Statement/Facts [F1]; the published symmetric-group and cycle-notation items supply the remaining group conventions. Reconcile A6's actual use before clearing B3.

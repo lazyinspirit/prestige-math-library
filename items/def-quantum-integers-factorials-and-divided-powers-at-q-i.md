@@ -2,7 +2,7 @@
 id: def-quantum-integers-factorials-and-divided-powers-at-q-i
 kind: definition
 title: "Quantum integers, factorials, Gaussian binomials and divided powers at $q_i$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 dependency_level: 1
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: finite-reflection-length-and-orthogonal-moved-spaces
 title: "Finite Reflection Length and Orthogonal Moved Spaces"
-status: draft
+status: published
 requires: [finite-reflection-arrangements-and-spherical-coxeter-complexes]
 items: [def-cg-reflection-length-absolute-order-and-moved-space,
         lem-cg-orthogonal-wall-form-and-subspace-restriction,

@@ -2,7 +2,7 @@
 id: def-conformal-removable-compact-set
 kind: definition
 title: Conformal removability of compact sets
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -48,6 +48,7 @@ axiom_use: >-
   Countable Choice is included in those measure interfaces and follows from
   AC.
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

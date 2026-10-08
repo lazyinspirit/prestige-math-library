@@ -2,7 +2,7 @@
 id: ex-cg-heap-of-one-two-one-in-a2-and-long-braid
 kind: example
 title: "The heap of $s_1s_2s_1$ in type $A_2$: a convex alternating chain and two commutation classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 6
@@ -24,6 +24,7 @@ sources:
       url: "https://arxiv.org/pdf/1511.08788"
       locator: "§2.4, properties (h1)-(h2) and Proposition 2.6, PDF p. 6 (a convex alternating chain of length $m_{st}$ obstructs full commutativity)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

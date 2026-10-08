@@ -1,7 +1,7 @@
 ---
 page: spherical-simplex-metrics-angular-links-and-cones-examples
 title: "Spherical Simplex Metrics, Angular Links, and Cones — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-spherical-simplex-and-vertex-link-schur-complement,
            ex-cg-link-edge-lengths-versus-dihedral-angles,

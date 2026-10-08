@@ -2,7 +2,7 @@
 id: lem-ahlfors-extension-of-line-quasisymmetric-maps
 kind: lemma
 title: The Ahlfors-Beurling extension formula for quasisymmetric maps of the line
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -39,6 +39,7 @@ deps:
 axiom_use: Assume the Axiom of Choice for the analytic quasiconformality convention, invariance of domain, and the smooth-line gluing theorem. Countable Choice is used by the local finite-measure bound, the classical-to-weak derivative interface, and the gluing proof; AC implies Countable Choice by [[thm-choice-implies-dependent-implies-countable-choice]]. No choice is used in the formula, estimates, or properness argument.
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 dependency_level: 10
 sources:

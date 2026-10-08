@@ -2,7 +2,7 @@
 id: lem-the-weighted-area-form-is-sl2-r-invariant
 kind: lemma
 title: The weighted area form is SL2(R)-invariant
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-holomorphic-and-antiholomorphic-discrete-series-models
@@ -21,6 +21,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC supplies Countable Choice for the nonnegative change-of-variables theorem. Hilbert structure and the continuous representation notion are inherited from their declared suppliers; the Jacobian and exponent calculation use no additional choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

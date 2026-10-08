@@ -2,7 +2,7 @@
 id: lem-abel-jacobi-map-is-well-defined-and-base-point-independent
 kind: lemma
 title: The Abel-Jacobi map is well defined and its degree-zero extension is base-point independent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 22
@@ -34,6 +34,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 15, the Abel-Jacobi map and point map, and $D\\varphi_P(Q)=(\\omega_1(Q),\\dots,\\omega_g(Q))$, printed pp. 129-130."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

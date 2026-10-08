@@ -2,7 +2,7 @@
 id: lem-an-invariant-mean-produces-a-reiter-net
 kind: lemma
 title: An invariant mean produces a Reiter net
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 proof_strategy: direct
@@ -34,6 +34,8 @@ sources:
     - title: "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property (University of Sydney Honours lecture notes, 11 October 2012)"
       url: "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf"
       locator: "Slides 17–18, PDF pp. 17–18: compactness of the translated orbit, the convolution identity and the final Reiter (P1) estimate"
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

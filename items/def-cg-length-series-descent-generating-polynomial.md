@@ -2,7 +2,7 @@
 id: def-cg-length-series-descent-generating-polynomial
 kind: definition
 title: "Length generating series, descent-class series, spherical subsets, and the multivariate descent polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 7
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Chapter 17.1, printed pp. 315-316: equations (17.3)-(17.4) define the growth series $W(\\mathbf t)=\\sum_{w\\in W}t_w$ and its restriction to subsets; the text notes that $W_T(\\mathbf t)$ is a polynomial when $T$ is spherical."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

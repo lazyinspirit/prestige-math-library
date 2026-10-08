@@ -2,7 +2,7 @@
 id: ex-cg-classical-poincare-products-by-insertion
 kind: example
 title: "Poincare products for Sn, Bn and Dn by explicit insertion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 20
@@ -21,6 +21,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, Table (2.50), printed pp. 155-156, and §6, printed pp. 162-170: the Euclidean signed-permutation coordinate models; Problem 15, printed pp. 205-206, for the independent classical Weyl-group order table. The Poincare recurrences and low-rank coefficients are verified locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

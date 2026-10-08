@@ -2,7 +2,7 @@
 id: ex-compact-group-direct-integrals-are-atomic
 kind: example
 title: "Canonical compact-group decompositions are atomic Hilbert sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -28,6 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Example 1.G.1(1) and compact-group discussion, printed p.59."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

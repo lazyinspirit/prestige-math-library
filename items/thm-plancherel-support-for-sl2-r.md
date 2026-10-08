@@ -2,7 +2,7 @@
 id: thm-plancherel-support-for-sl2-r
 kind: theorem
 title: Plancherel support for SL2(R)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -67,6 +67,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It supplies normalized Haar probability on K, the measurable-field/direct-integral choices and unitary identifications, and the countable selections needed to turn the L1-dense family into smooth test functions. The local Haar conversion, Casimir and Hardy calculations use no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 proof_scope:
   local: "The native Haar/KAK scale conversion and native formal degrees; the local type-I and standard-Borel route through the classification supplier; the Plancherel Hilbert-Schmidt isometry and onto range; the carrier versus closed Fell support; the endpoint conclusions; and exclusion of spherical complementary and trivial classes."

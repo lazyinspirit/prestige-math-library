@@ -2,7 +2,7 @@
 id: thm-nondegeneracy-of-the-residue-pairing
 kind: theorem
 title: Nondegeneracy of the residue pairing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -22,6 +22,7 @@ deps:
   - def-riemannian-hodge-star
   - def-axiom-of-choice
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

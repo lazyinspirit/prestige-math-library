@@ -3,7 +3,7 @@ id: thm-generic-quantum-serre-halves-have-classical-pbw-ranks-and-a-nondegenerat
 kind: theorem
 title: Generic quantum Serre halves have classical PBW ranks and a nondegenerate Hopf
   pairing
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ aliases: []
 dependency_level: 6
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

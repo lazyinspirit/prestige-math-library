@@ -2,7 +2,7 @@
 id: lem-the-weighted-discrete-series-space-is-a-hilbert-space
 kind: lemma
 title: The weighted discrete-series space is a Hilbert space with K-type basis
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-holomorphic-and-antiholomorphic-discrete-series-models
@@ -33,6 +33,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC supplies Countable Choice for Cauchy estimates, weighted L2 completeness, and nonnegative change of variables; it also supplies the compact-group Haar and Bochner-integral setup for the K-isotypic projections. The Cayley, Taylor, and coefficient calculations use no additional choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

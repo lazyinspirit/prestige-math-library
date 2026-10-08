@@ -2,7 +2,7 @@
 id: "lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta"
 kind: lemma
 title: "The Davis complex as a CW complex: disk cells and the Cayley skeleta"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization","lem-cg-spherical-coset-inclusion-and-intersection","lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics","lem-cg-canonical-cell-exposed-faces-and-normal-cones","thm-cg-davis-complex-cell-incidence-and-stabilizers","def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric","def-hh-coxeter-matrix-word-group-and-length","thm-hh-parabolic-minimal-representatives-and-length-additivity","def-cg-real-coxeter-form-and-reflection","def-cg-canonical-reflection-homomorphism","def-cell-attachment-by-a-characteristic-map","def-cw-complex-with-closure-finiteness-and-weak-topology","def-skeleta-cw-subcomplex-and-relative-cw-complex","lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","def-homeomorphism-and-open-maps","def-cayley-graph","def-directed-labelled-cayley-graph", "thm-cg-finite-chamber-tiling-and-coset-face-identification", "lem-cg-reflection-form-invariance-and-rank-two-orders"]
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

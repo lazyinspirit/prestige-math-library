@@ -2,7 +2,7 @@
 id: "lem-cg-finite-dihedral-subsystems-and-canonical-roots"
 kind: "lemma"
 title: "Plane subsystems, their canonical generators, and the angular order of their roots"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 16
@@ -36,6 +36,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Sections 2.4, pp. 38-40 (parabolic subgroups), and 4.5, pp. 105-108 (roots and subgroups)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

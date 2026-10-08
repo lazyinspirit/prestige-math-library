@@ -2,7 +2,7 @@
 id: def-cg-crystallographic-scaling-coroot-and-lattice
 kind: definition
 title: "Crystallographic scalings: scaled simple roots, coroots and the root, coroot and weight lattices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 4
@@ -21,6 +21,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV, §7 'Integral Forms', printed pp. 266-267: Proposition 4.62 and its proof show, in the compact semisimple Lie-group setting, that algebraic integrality is equivalent to integral pairing with each simple coroot; Proposition 4.64 and its proof compute the index of the Z-span of the roots in the algebraically integral forms as the Cartan determinant. These are representation-theoretic context, not proof of the general real-form lattice criterion here."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

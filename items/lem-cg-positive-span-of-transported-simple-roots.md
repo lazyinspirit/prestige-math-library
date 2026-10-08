@@ -2,7 +2,7 @@
 id: "lem-cg-positive-span-of-transported-simple-roots"
 kind: "lemma"
 title: "A transported simple root lies in the positive span of the simple root and the inversion roots"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 13
@@ -32,6 +32,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Sections 4.2 and 4.4, pp. 93-97 and 101-105 (the reflection representation, positive roots and inversion sets)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

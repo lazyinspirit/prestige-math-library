@@ -2,7 +2,7 @@
 id: ex-hh-tensor-quotient-by-a-one-dimensional-subspace
 kind: example
 title: "The tensor quotient by a one-dimensional subspace and its kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -19,6 +19,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "§4.5–4.9, printed pp. 15–22: quotient computations $(R/I)\\otimes_RM\\cong M/IM$ and free-module tensor bases"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

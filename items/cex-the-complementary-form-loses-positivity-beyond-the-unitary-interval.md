@@ -2,7 +2,7 @@
 id: cex-the-complementary-form-loses-positivity-beyond-the-unitary-interval
 kind: counterexample
 title: The complementary form loses positivity beyond the unitary interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 9
@@ -24,6 +24,7 @@ sources:
       url: "https://www.math.wustl.edu/~matkerr/sl2notes.pdf"
       locator: '§2, unitarity list, printed p. 12: the spherical complementary range $0<|\lambda|<1$ is listed, and its construction is explicitly deferred; no outside-range coefficient witness is given'
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-cg-euler-and-skew-form-in-a3
 kind: example
 title: "The Euler and skew forms of c = s1s2s3 in A3, and the orientation of its rank-two subsystems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 18
@@ -31,6 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/0803.2722"
       locator: "Section 3, Example 3.6, printed p. 19 (the sign of omega_c on type-A roots from the order of adjacent simple generators)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

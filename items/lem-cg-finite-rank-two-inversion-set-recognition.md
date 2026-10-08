@@ -2,7 +2,7 @@
 id: "lem-cg-finite-rank-two-inversion-set-recognition"
 kind: "lemma"
 title: "Finite inversion sets are recognized by their rank-two initial or final segments"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 17
@@ -26,6 +26,7 @@ sources:
       url: "https://arxiv.org/pdf/0803.2722v3"
       locator: "Section 2.4, Lemma 2.17 and its rank-two reflection indexing (printed p. 14; Lemma 2.17 cites Pilkington for its proof); Lemma 2.25 and its complete proof (printed pp. 15-16)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

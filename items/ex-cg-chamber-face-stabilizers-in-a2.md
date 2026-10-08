@@ -2,7 +2,7 @@
 id: ex-cg-chamber-face-stabilizers-in-a2
 kind: example
 title: "Chamber faces and their stabilizers in $A_2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -23,6 +23,7 @@ sources:
       url: "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"
       locator: "Chapter 6, Section 6.5 'Dominant chambers and Tits cone', printed pp. 55-56 (Definition 6.5.1 and Theorem 6.5.2 (i)-(vi) with proof)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: thm-bergman-reproducing-projection-and-extremal
 kind: theorem
 title: Reproducing property, Bergman projection and the extremal characterization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 4
@@ -19,6 +19,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

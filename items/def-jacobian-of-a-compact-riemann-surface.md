@@ -2,7 +2,7 @@
 id: def-jacobian-of-a-compact-riemann-surface
 kind: definition
 title: The Jacobian of a compact Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 20
@@ -53,6 +53,7 @@ sources:
       url: "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf"
       locator: "Ch. 2 §21.6, printed pp. 170–171: the Jacobi variety as C^g/Per and its group and basis-presentation conventions. Forster explicitly says the complex manifold structure is not treated there; the local quotient-atlas proof here supplies it."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

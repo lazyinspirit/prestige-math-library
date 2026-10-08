@@ -1,7 +1,7 @@
 ---
 page: noncrossing-partition-lattices-and-kreweras-complements-examples
 title: "Noncrossing Partition Lattices and Kreweras Complements — Examples"
-status: draft
+status: published
 requires: [noncrossing-partition-lattices-and-kreweras-complements]
 items: []
 examples:

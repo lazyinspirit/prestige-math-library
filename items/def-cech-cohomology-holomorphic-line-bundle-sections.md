@@ -2,7 +2,7 @@
 id: def-cech-cohomology-holomorphic-line-bundle-sections
 kind: definition
 title: Cech cohomology of holomorphic sections of a line bundle on finite good covers
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -27,6 +27,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-cg-polyhedral-chain-metric-topology-and-properness
 kind: theorem
 title: "The chain metric is a metric, its topology is the weak topology, and the space is proper and complete"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.3, printed pp. 507–508 (X_k-cell structures and Proposition I.3.4); §12.1, printed pp. 231–233 (piecewise Euclidean cell structure and the finite-shapes geodesic remark)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

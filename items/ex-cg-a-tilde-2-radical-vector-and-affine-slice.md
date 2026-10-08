@@ -5,13 +5,14 @@ title: "The radical vector of A-tilde 2 and its Euclidean slice"
 provenance: {"statement": "ai-generated", "proof": "ai-altered"}
 generation: {"role": "example"}
 sources: {"references": [{"title": "M. W. Davis, The Geometry and Topology of Coxeter Groups (first-edition author manuscript, Princeton University Press, 2008; 600 PDF pages)", "url": "https://people.math.osu.edu/davis.12/davisbook.pdf", "locator": "Section 6.8, Proposition 6.8.8 and Lemma 6.8.6 with proofs, printed pp. 100-101; Appendix C, the cases $\\tilde A_n$ ($\\sum$ of rows $=0$) and Table 6.1, printed pp. 104, 436"}, {"title": "R. Xiong, Lectures on Affine Weyl Groups (complete lecture notes, October 2024; 77 PDF pages)", "url": "https://cubicbear.github.io/doc/affineNotes.pdf", "locator": "Chapter 2, Example 2.7 (the action of $W_a$ in type $A_2$ and the triangular alcove), PDF pp. 12-13"}], "scraped": []}
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 17
 deps: ["def-cg-irreducible-affine-coxeter-type","lem-cg-positive-radical-and-affine-gram-exclusions","def-cg-standard-affine-diagrams","lem-cg-affine-slice-simplex-and-wall-reflections","def-cg-real-coxeter-form-and-reflection","ex-classical-root-systems-in-euclidean-coordinates","thm-sylvesters-criterion-for-positive-definiteness","lem-cg-affine-type-crystallographic-alcove-diagrams","lem-cg-similar-euclidean-simplices-from-shared-facet-normal-gram","lem-cg-highest-root-and-fundamental-alcove"]
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: coxeter-euler-forms-and-sortable-chamber-cones-examples
 title: "Coxeter Euler Forms and Sortable Chamber Cones — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-cg-rank-two-inversion-set-violating-closure

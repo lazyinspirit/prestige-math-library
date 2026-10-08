@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: ex-a-kazhdan-pair-for-a-compact-group
 kind: example
 title: A Kazhdan pair for a compact group via Haar averaging
@@ -22,6 +22,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC as in the normalized Haar probability supplier and the preceding compact-group theorem; this example makes no additional choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: def-left-uniformly-continuous-bounded-functions-on-a-locally-compact-group
 kind: definition
 title: Left-uniformly continuous bounded functions (UCB)
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:
@@ -16,6 +16,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

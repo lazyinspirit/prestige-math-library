@@ -2,7 +2,7 @@
 id: def-hh-coxeter-matrix-word-group-and-length
 kind: definition
 title: "Coxeter matrices, the presented Coxeter group, reduced words, length, and standard parabolic subgroups"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-alphabet-words-and-reduction, def-free-group, thm-reduced-words-form-the-free-group, def-group-presentation, def-relators-relations-and-finite-presentations, prop-normal-closure-is-products-of-conjugates, thm-von-dyck, prop-equality-of-words-in-a-presentation, def-normal-closure, def-quotient-group, thm-quotient-group-universal-property, def-group-homomorphism, def-generated-subgroup, def-group, def-group-power, def-natural-numbers, thm-well-ordering-principle]
@@ -14,6 +14,7 @@ provenance:
   proof: not-applicable
 proof_strategy: definition
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

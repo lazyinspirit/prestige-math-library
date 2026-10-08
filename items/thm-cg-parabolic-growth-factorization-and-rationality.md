@@ -2,7 +2,7 @@
 id: thm-cg-parabolic-growth-factorization-and-rationality
 kind: theorem
 title: "Finite descent parabolics, parabolic factorization, the Steinberg inclusion-exclusion identity, and rational growth"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 18
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Lemma 4.7.2, printed p. 53: $W_{\\operatorname{In}(w)}$ is finite for every $w$ (the finite-descent-parabolic lemma); Chapter 17.1, printed pp. 316-318: Lemma 17.1.2 (parabolic factorization), Lemmas 17.1.3-17.1.4 (Mobius inversion and the descent-class formula), Corollary 17.1.5 (the two cases of the Steinberg identity), Corollary 17.1.6 (rationality by induction on $\\operatorname{Card}(S)$)."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

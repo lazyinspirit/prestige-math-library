@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: lem-sl-n-r-is-boundedly-generated-by-elementary-root-subgroups
 kind: lemma
 title: Bounded elementary generation of SLn(R) by transvections
@@ -17,6 +17,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

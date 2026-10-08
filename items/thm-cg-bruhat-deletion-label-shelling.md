@@ -2,7 +2,7 @@
 id: thm-cg-bruhat-deletion-label-shelling
 kind: theorem
 title: "Deletion-labeled Bruhat intervals are lexicographically shellable, with the explicit earlier/later chain comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 18
@@ -19,6 +19,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Sections 2.2 and 2.5-2.7, printed pp. 33-36, 45 and 48-55 (augmentation and lifting; quotients; deleted-position labels of maximal chains; Lemmas 2.7.2-2.7.4, Theorem 2.7.5, Corollaries 2.7.10-2.7.11 and Exercise 13), and Appendix A2.2-A2.4, printed pp. 302-305 (Möbius and shellability facts; cited, not consumed)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

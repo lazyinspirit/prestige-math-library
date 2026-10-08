@@ -1,7 +1,7 @@
 ---
 page: kazhdans-property-t-and-spectral-gap-examples
 title: "Kazhdan's Property T and Spectral Gap — Examples"
-status: draft
+status: published
 requires: [kazhdans-property-t-and-spectral-gap]
 items: []
 examples:

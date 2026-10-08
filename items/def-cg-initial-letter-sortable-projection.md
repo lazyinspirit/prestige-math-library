@@ -2,7 +2,7 @@
 id: "def-cg-initial-letter-sortable-projection"
 kind: "definition"
 title: "The recursive initial-letter sortable projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 22
@@ -32,6 +32,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Chapter 2, section 2.4 (parabolic prefixes used by the recursion)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

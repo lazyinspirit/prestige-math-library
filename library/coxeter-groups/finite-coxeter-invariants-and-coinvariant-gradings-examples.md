@@ -1,7 +1,7 @@
 ---
 page: finite-coxeter-invariants-and-coinvariant-gradings-examples
 title: "Finite Coxeter Invariants and Coinvariant Gradings — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-cg-a2-discriminant-jacobian-and-top-coinvariant-class

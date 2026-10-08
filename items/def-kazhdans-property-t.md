@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: def-kazhdans-property-t
 kind: definition
 title: Kazhdan's property (T)
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

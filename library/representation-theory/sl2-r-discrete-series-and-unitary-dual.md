@@ -1,7 +1,7 @@
 ---
 page: sl2-r-discrete-series-and-unitary-dual
 title: "SL2(R): Discrete Series and the Unitary Dual"
-status: draft
+status: published
 requires: [group-c-star-algebras-and-the-fell-unitary-dual, direct-integral-decomposition-and-type-i-groups, sl2-r-principal-and-complementary-series, harish-chandra-isomorphism-casimir-and-central-characters, verma-modules-and-shapovalov-forms]
 items:
   - def-k-finite-and-smooth-vectors-for-sl2-r

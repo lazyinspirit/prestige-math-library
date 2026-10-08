@@ -2,7 +2,7 @@
 id: def-period-pairing-and-period-lattice
 kind: definition
 title: The period pairing and the period subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 15
@@ -25,6 +25,7 @@ sources:
       url: "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf"
       locator: "Ch. 2 §§20.4 and 21.2: 1-cycles, period integrals, and the period subgroup, printed pp. 161 and 168."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

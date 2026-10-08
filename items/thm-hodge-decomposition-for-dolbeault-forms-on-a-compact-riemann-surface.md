@@ -2,7 +2,7 @@
 id: thm-hodge-decomposition-for-dolbeault-forms-on-a-compact-riemann-surface
 kind: theorem
 title: "Hodge decomposition for Dolbeault forms on a compact Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 7
@@ -41,6 +41,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. VI §3.3, (3.15)–(3.17), printed pp. 294–295: the analogous twisted de Rham decomposition assumes a flat Hermitian connection; this item does not use it for a general holomorphic line bundle."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

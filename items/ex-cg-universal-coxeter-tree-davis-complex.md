@@ -2,7 +2,7 @@
 id: "ex-cg-universal-coxeter-tree-davis-complex"
 kind: "example"
 title: "The universal Coxeter Davis complex is a tree"
-status: "draft"
+status: published
 origin: "pipeline"
 dependency_level: 20
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization", "def-hh-coxeter-matrix-word-group-and-length", "lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta", "thm-cg-davis-complex-cell-incidence-and-stabilizers", "def-free-product-of-a-family-of-groups", "def-graph-of-groups", "def-path-group-of-a-graph-of-groups", "def-fundamental-group-of-a-graph-of-groups-relative-to-a-maximal-tree", "def-bass-serre-tree-of-a-graph-of-groups"]
@@ -10,7 +10,13 @@ justified_by: []
 provenance: {"statement": "ai-generated", "proof": "ai-altered"}
 proof_strategy: direct
 generation: {"role": "example"}
-verification: {"precheck": "pass", judge: {model: "gpt-6.1-sol", verdict: pass, date: 2026-10-08}}
+verification:
+  precheck: pass
+  judge:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-08
+  audited: 2026-10-08
 sources: {"references": [{"title": "M. W. Davis, The Geometry and Topology of Coxeter Groups, author manuscript of the first edition (Princeton Univ. Press, 2008)", "url": "https://people.math.osu.edu/davis.12/davisbook.pdf", "locator": "§7.1, Example 7.1.3 (D_infinity has nerve S^0); §7.3, Example 7.3.6 (right-angled complexes are cubical); §7.4, Example 7.4.1 (the universal Coxeter Davis complex is a regular-valence tree), printed p. 132; and the Notes, p. 135"}, {"title": "R. Boyd, Homology of Coxeter and Artin groups, PhD thesis, University of Aberdeen, 2018 (with corrections)", "url": "https://www.maths.gla.ac.uk/~rboyd/Boyd%20Thesis%20with%20corrections.pdf", "locator": "§1.1, Definitions 1.1.1-1.1.2 and Remark 1.1.3 (Coxeter presentation and involution relations); §1.3 (spherical cosets and the Davis complex), printed pp. 20-21"}], "scraped": []}
 ---
 

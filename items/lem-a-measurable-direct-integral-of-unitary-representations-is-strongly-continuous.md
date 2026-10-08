@@ -2,7 +2,7 @@
 id: lem-a-measurable-direct-integral-of-unitary-representations-is-strongly-continuous
 kind: lemma
 title: A measurable direct integral of unitary representations is strongly continuous
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -36,6 +36,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1, §1.G, paragraph 'Direct integrals of representations' following Definition 1.G.4, printed p. 61 (PDF p. 60): the field-integrated action is stated to be strongly continuous, with its proof referred to Dixmier–von Neumann, Proposition 18.7.4. The dominated-convergence proof below is local."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

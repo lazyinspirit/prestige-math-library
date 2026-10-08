@@ -2,7 +2,7 @@
 id: ex-cg-g2-from-i2-six
 kind: example
 title: "G2 from I2(6): the scaled realization and its twelve roots"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -24,6 +24,7 @@ sources:
       locator: "Printed p. 3 preview of the finite irreducible Coxeter groups and the Weyl-type identification G2 := I2(6); Section 5 cosine table, printed p. 13. Both facts are independently derived in this item."
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

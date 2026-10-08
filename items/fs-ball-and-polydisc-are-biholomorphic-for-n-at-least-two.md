@@ -2,7 +2,7 @@
 id: fs-ball-and-polydisc-are-biholomorphic-for-n-at-least-two
 kind: false-statement
 title: The claim that the ball and the polydisc are biholomorphic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 11
@@ -27,6 +27,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

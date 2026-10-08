@@ -2,7 +2,7 @@
 id: ex-cg-a-tilde-1-infinity-edge-versus-finite-dihedral
 kind: example
 title: "The A-tilde 1 infinity edge, separated from finite dihedral families and from the 4-edge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 17
@@ -30,6 +30,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

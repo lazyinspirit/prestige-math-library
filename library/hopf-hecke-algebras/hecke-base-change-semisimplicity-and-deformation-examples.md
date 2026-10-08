@@ -1,7 +1,7 @@
 ---
 page: hecke-base-change-semisimplicity-and-deformation-examples
 title: "Hecke Base Change, Semisimplicity, and Deformation — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

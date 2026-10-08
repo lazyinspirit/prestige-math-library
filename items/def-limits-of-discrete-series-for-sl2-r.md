@@ -2,7 +2,7 @@
 id: def-limits-of-discrete-series-for-sl2-r
 kind: definition
 title: The two limits of discrete series
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-normalized-principal-series-i-epsilon-nu
@@ -19,6 +19,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is inherited through the normalized principal-series and compact-picture suppliers. The endpoint norm-divergence calculation and the K-type decomposition use no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

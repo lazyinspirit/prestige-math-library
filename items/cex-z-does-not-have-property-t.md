@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: cex-z-does-not-have-property-t
 kind: counterexample
 title: The integers do not have property (T)
@@ -45,6 +45,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC only for the final implication from absence of compact Kazhdan pairs to failure of property (T), through the property-(T)/Kazhdan-pair equivalence. The discrete-character construction and all finite-set displacement estimates are choice-free."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

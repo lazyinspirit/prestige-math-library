@@ -2,7 +2,7 @@
 id: ex-cg-distributive-weak-intervals-of-fully-commutative-elements
 kind: example
 title: "Two distributive right weak intervals of fully commutative elements in type $A_3$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -24,6 +24,7 @@ sources:
       url: "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf"
       locator: "§3, PDF pp. 4-5 (linear extensions furnish the products of ideals)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

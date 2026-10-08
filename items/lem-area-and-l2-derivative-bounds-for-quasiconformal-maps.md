@@ -2,7 +2,7 @@
 id: lem-area-and-l2-derivative-bounds-for-quasiconformal-maps
 kind: lemma
 title: "Area and $L^2$ derivative bounds for quasiconformal homeomorphisms"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure
@@ -41,6 +41,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 3 §4, printed pp. 95–96: Lemma 4.4 (the square area lower bound) and Corollary 4.5 (the $f_z$ estimate); total differentiability is supplied by the independently proved quadrilateral-core Remark, and the full earlier area formula supplies the retained Lusin-N clause."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 aliases: []
 ---

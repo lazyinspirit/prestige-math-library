@@ -2,7 +2,7 @@
 id: ex-cg-bn-and-cn-are-the-same-coxeter-diagram
 kind: example
 title: "$B_n$ and $C_n$ define the same Coxeter diagram and the same Coxeter group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -20,6 +20,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix C, Table C.1 (printed p. 436): det(2A)(B_n) = 2; Theorem C.1.2 and the spherical B_n path in Table 6.1 (printed p. 104). The B_n/C_n naming identification is in Michel's classification preview, printed p. 3; Davis's right-hand column instead lists the distinct Euclidean diagrams B_n~ and C_n~."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

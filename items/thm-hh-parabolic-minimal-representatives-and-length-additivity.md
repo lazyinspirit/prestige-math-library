@@ -2,7 +2,7 @@
 id: thm-hh-parabolic-minimal-representatives-and-length-additivity
 kind: theorem
 title: "Support, intrinsic parabolic presentations, minimal coset representatives and length additivity, with the type-A identification"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-hh-coxeter-matrix-word-group-and-length, def-hh-geometric-coxeter-representation-and-roots, lem-hh-dihedral-root-recurrence-and-root-sign, thm-hh-coxeter-exchange-deletion-and-faithfulness, thm-hh-matsumoto-reduced-word-theorem, def-generated-subgroup, def-coset, def-group-homomorphism, def-group-isomorphism-and-automorphism, thm-well-ordering-principle, def-natural-numbers, thm-induction-principle, def-finite-symmetric-group-and-permutation-notation, def-inversions-inversion-number-and-sign, thm-adjacent-transpositions-generate-the-symmetric-group, lem-disjoint-cycles-commute]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct, with a coset decomposition count and the one-line-notation computation of the inversion number"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-extremal-length-of-rectangle-and-annulus
 kind: example
 title: Extremal length of a rectangle and of a round annulus by hand
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 5
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 1 §6.3.1, printed pp. 121–122: Proposition 6.6 and Exercise 6.8 for the vertical and dual circular annulus families."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

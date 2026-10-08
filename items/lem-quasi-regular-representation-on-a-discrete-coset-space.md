@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: lem-quasi-regular-representation-on-a-discrete-coset-space
 kind: lemma
 title: Quasi-regular representations on discrete coset spaces
@@ -22,6 +22,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC to use the arbitrary-index Hilbert direct-sum construction of ell^2(G/H); the coset, permutation, continuity and invariant-vector arguments use no additional choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-cg-finite-parabolic-longest-element-and-opposition
 kind: theorem
 title: "The longest element as the opposition of the chamber, and longest elements of finite parabolics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 16
@@ -21,6 +21,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Section 4 (Proposition 4.6 on the longest element, printed pp. 5-6); section 5 (Lemma 5.1 and Proposition 5.4, printed pp. 6-9)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

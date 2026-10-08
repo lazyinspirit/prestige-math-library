@@ -2,7 +2,7 @@
 id: def-cg-spherical-gram-simplex-and-angular-link
 kind: definition
 title: "Spherical Gram simplices and angular links of Euclidean faces"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-cg-spherical-simplex-existence-and-link-gram-formula]
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

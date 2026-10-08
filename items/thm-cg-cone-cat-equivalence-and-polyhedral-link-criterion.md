@@ -2,7 +2,7 @@
 id: thm-cg-cone-cat-equivalence-and-polyhedral-link-criterion
 kind: theorem
 title: "Berestovskii's cone criterion and the polyhedral link criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 11
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: cases
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: cex-irreducible-multiplicity-data-is-not-canonical-outside-type-i
 kind: counterexample
 title: "Irreducible multiplicity data is not canonical outside type I"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -36,6 +36,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Example 1.G.11(1), printed pp.63\u201364; Theorem 1.G.10 is context only, not a proof dependency."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -22,12 +22,13 @@ sources:
   - title: 'Bruce Blackadar, Operator Algebras: Theory of C*-Algebras and von Neumann Algebras (author-hosted complete text)'
     url: https://bruceblackadar.com/Mathematics/Cycr.pdf
     locator: 'Part III, §1.6: III.1.6.4 (central decomposition of a von Neumann algebra and $M''=\int M_x''$), printed p. 254'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
 axiom_use: AC is inherited from disintegration, spectral and measurable-field suppliers and supplies a countable dense enumeration of G. The zero-fibre stratum is Borel because all fundamental vectors vanish there. It may have positive measure and contributes the zero algebra; factoriality is asserted only on the nonzero-fibre stratum. If the total space is zero, sigma-finiteness and the fundamental family force the nonzero-fibre stratum to be null, so only its factoriality assertion is vacuous; the algebra identities still hold. No everywhere selector or uncountable union of exceptional null sets is used.
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

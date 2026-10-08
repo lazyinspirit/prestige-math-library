@@ -2,7 +2,7 @@
 id: def-szego-kernel-smooth-bounded-domain
 kind: definition
 title: The Hardy boundary space, Szegő projection and Szegő kernel on a smoothly bounded domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 0
@@ -21,6 +21,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-hh-coxeter-exchange-deletion-and-faithfulness
 kind: theorem
 title: "Length parity, exchange, two-letter deletion, and faithfulness of the signed reflection action"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-hh-coxeter-matrix-word-group-and-length, def-hh-geometric-coxeter-representation-and-roots, lem-hh-dihedral-root-recurrence-and-root-sign, def-group-homomorphism, def-order-in-a-group, def-natural-numbers, def-divides-in-z]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

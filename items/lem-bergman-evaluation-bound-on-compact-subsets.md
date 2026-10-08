@@ -2,7 +2,7 @@
 id: lem-bergman-evaluation-bound-on-compact-subsets
 kind: lemma
 title: Sup-norm and first-derivative bounds by the $L^2$ norm on compact subsets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 1
@@ -34,6 +34,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

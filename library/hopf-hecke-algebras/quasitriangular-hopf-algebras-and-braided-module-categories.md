@@ -1,7 +1,7 @@
 ---
 page: quasitriangular-hopf-algebras-and-braided-module-categories
 title: "Quasitriangular Hopf Algebras and Braided Module Categories"
-status: draft
+status: published
 items: []
 examples: []
 ---

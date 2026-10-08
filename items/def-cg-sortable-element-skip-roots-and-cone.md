@@ -2,7 +2,7 @@
 id: "def-cg-sortable-element-skip-roots-and-cone"
 kind: "definition"
 title: "c-sortable elements, forced and unforced skips, skip roots, and the chamber cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 20
@@ -34,6 +34,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Chapter 1, section 1.4 (length conventions used in the skip positions)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
 ---
 

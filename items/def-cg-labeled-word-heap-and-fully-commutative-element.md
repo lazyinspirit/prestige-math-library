@@ -2,7 +2,7 @@
 id: def-cg-labeled-word-heap-and-fully-commutative-element
 kind: definition
 title: "Words, heaps, linear extensions, commutation classes, and fully commutative elements"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -27,6 +27,7 @@ sources:
       url: "https://www.mat.univie.ac.at/~slc/books/cartfoa.pdf"
       locator: "Chapitre premier, §2 'Construction de L(Z;C)' (words modulo adjacency), printed pp. 6-7"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

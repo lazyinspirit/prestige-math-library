@@ -2,7 +2,7 @@
 id: cor-the-unitary-dual-of-sl2-r-is-non-discrete-and-non-hausdorff-at-the-stated-limits
 kind: corollary
 title: The unitary dual of SL2(R) is non-discrete and non-Hausdorff at the stated limits
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -26,6 +26,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is assumed and inherited through the compact-picture, unitary-dual, and Fell-topology constructions. The finite coefficient-neighborhood and Casimir comparisons use no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

@@ -1,7 +1,7 @@
 ---
 page: outer-products-skew-specht-modules-and-littlewood-richardson
 title: "Outer Products, Skew Specht Modules, and Littlewood–Richardson Coefficients"
-status: draft
+status: published
 requires:
   - frobenius-characteristic-and-the-symmetric-group-character-dictionary
   - the-branching-rule-and-the-young-graph

@@ -2,7 +2,7 @@
 id: def-cg-tits-cone-and-fundamental-chamber
 kind: definition
 title: "The Tits cone, its interior, and the negative-root set of a functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 11
@@ -22,6 +22,7 @@ sources:
       url: "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"
       locator: "Chapter 6, Section 6.5 'Dominant chambers and Tits cone', printed pp. 55-56 (Definition 6.5.1 and Theorem 6.5.2 (i)-(vi) with proof)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
 ---
 

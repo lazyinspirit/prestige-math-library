@@ -2,7 +2,7 @@
 id: lem-cg-orthogonal-wall-form-and-subspace-restriction
 kind: lemma
 title: "The Wall form of an orthogonal operator, subspace restriction, and the interval structure of the orthogonal reflection-length order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: [cor-double-orthogonal-complement-and-dimension, def-adjoint-of-a-linear-map-between-inner-product-spaces, def-cg-real-coxeter-form-and-reflection, def-cg-reflection-length-absolute-order-and-moved-space, def-linear-isometry-and-orthogonal-or-unitary-operator, def-orthogonal-projection, def-real-and-complex-inner-product-space, prop-adjoint-algebra, thm-cg-finite-type-positive-definite-criterion, thm-finite-dimensional-isometry-characterisations, thm-finite-dimensional-orthogonal-decomposition, thm-rank-nullity]
@@ -20,6 +20,7 @@ sources:
       locator: "Section 2 'Products of reflections', printed pp. 2-5: the root-system setup (i)-(iv) and Lemmas 1-5 with the proofs of Lemmas 2, 3 and 4"
 dependency_level: 15
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

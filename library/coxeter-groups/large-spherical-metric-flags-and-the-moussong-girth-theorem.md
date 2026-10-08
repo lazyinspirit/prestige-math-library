@@ -1,7 +1,7 @@
 ---
 page: large-spherical-metric-flags-and-the-moussong-girth-theorem
 title: "Large Spherical Metric Flags and the Moussong Girth Theorem"
-status: draft
+status: published
 items:
   - def-cg-large-spherical-metric-flag-and-almost-negative-matrix
   - lem-cg-cat-zero-products-and-cat-one-joins

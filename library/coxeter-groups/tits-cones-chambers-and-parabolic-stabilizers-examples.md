@@ -1,7 +1,7 @@
 ---
 page: tits-cones-chambers-and-parabolic-stabilizers-examples
 title: "Tits Cones, Chambers, and Parabolic Stabilizers — Examples"
-status: draft
+status: published
 requires: [tits-cones-chambers-and-parabolic-stabilizers]
 items: []
 examples: [ex-cg-tits-cone-of-infinite-dihedral-type,

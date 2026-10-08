@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: lem-sl2-r-semidirect-r2-has-relative-property-t
 kind: lemma
 title: Relative property (T) for SL2(R) semidirect R2
@@ -62,6 +62,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It selects the set-indexed coefficient functions in Proof 1.2, supplies the GNS, spectral-measure and compact-metric subsequence interfaces, yields Countable Choice for second-countable separability and Hilbert/PVM prerequisites, and implies DC for regular-measure uniqueness in F7. The proof chooses no family from the class of representations and uses no additional choice in the rational-point or projective arguments."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: periods-jacobians-and-abel-jacobi-theory
 title: "Periods, Jacobians, and Abel--Jacobi Theory"
-status: draft
+status: published
 items:
   - lem-cellular-homology-of-the-one-polygon-surface-model
   - def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface

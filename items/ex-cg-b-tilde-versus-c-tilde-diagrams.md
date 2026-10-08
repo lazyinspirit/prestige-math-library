@@ -5,12 +5,14 @@ title: "B-tilde versus C-tilde: the n=2 coincidence and the duality behind the d
 provenance: {"statement": "ai-generated", "proof": "ai-generated"}
 generation: {"role": "example"}
 sources: {"references": [{"title": "M. W. Davis, The Geometry and Topology of Coxeter Groups (first-edition author manuscript, Princeton University Press, 2008; 600 PDF pages)", "url": "https://people.math.osu.edu/davis.12/davisbook.pdf", "locator": "Section 6.9, Table 6.1 (the rows $\\tilde B_n$, $\\tilde C_n$, $\\tilde B_2$) and Appendix B (the $\\tilde C_n$ cube tessellation, with dimension $1$ giving $\\tilde A_1$ and dimension $2$ giving $\\tilde B_2$), printed pp. 104, 432"}, {"title": "R. Xiong, Lectures on Affine Weyl Groups (complete lecture notes, October 2024; 77 PDF pages)", "url": "https://cubicbear.github.io/doc/affineNotes.pdf", "locator": "Chapter 2, Sections 2.12 and 2.15 (the $\\tilde B_n$ and $\\tilde C_n$ diagrams and the coroot lattice $\\mathbb Ze_1\\oplus\\dots\\oplus\\mathbb Ze_n$ for type $C_n$), PDF pp. 14-15"}], "scraped": []}
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 19
 deps: ["def-cg-standard-affine-diagrams","lem-cg-affine-type-crystallographic-alcove-diagrams","thm-cg-crystallographic-finite-type-and-lattice-stability","thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix","def-cg-crystallographic-scaling-coroot-and-lattice","def-cg-affine-root-hyperplane-reflection-and-alcove","lem-cg-highest-root-and-fundamental-alcove","thm-cg-affine-alcove-transitivity-presentation-and-length","ex-classical-root-systems-in-euclidean-coordinates","thm-cg-finite-coxeter-classification-including-h-and-dihedral","lem-cg-affine-reflection-identities-and-local-finiteness","thm-cg-affine-gram-classification-and-euclidean-realization","thm-hh-parabolic-minimal-representatives-and-length-additivity","def-pi-via-first-positive-cosine-zero","thm-double-angle-and-power-reduction-identities","thm-cofunction-supplementary-and-reflection-identities","thm-quarter-turn-values-and-shift-formulas","thm-sine-cosine-signs-monotonicity-and-ranges","thm-of-square-roots"]
 proof_strategy: direct
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Example

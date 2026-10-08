@@ -2,7 +2,7 @@
 id: lem-riemann-maps-of-jordan-domains-extend-homeomorphically
 kind: lemma
 title: Riemann maps of Jordan domains extend to homeomorphisms of the closures
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -39,6 +39,7 @@ deps:
 axiom_use: Full AC is used by the Riemann mapping theorem, Jordan–Schönflies, and Jordan–Brouwer separation. AC implies Countable Choice, which the extremal-length, modulus, and Lebesgue-area interfaces assume; Countable Choice also selects one short crosscut at each dyadic scale.
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: ex-cg-a2-discriminant-jacobian-and-top-coinvariant-class
 kind: example
 title: The A_2 discriminant, its Jacobian and the top coinvariant class in $\mathbb C[u,z]/(uz,u^3+z^3)$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps:
@@ -28,6 +28,7 @@ provenance:
   statement: ai-generated
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

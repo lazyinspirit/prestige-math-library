@@ -1,7 +1,7 @@
 ---
 page: finite-hopf-integrals-frobenius-duality-and-maschke
 title: "Finite Hopf Integrals, Frobenius Duality, and Maschke"
-status: draft
+status: published
 items: []
 examples: []
 ---

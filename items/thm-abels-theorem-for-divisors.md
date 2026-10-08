@@ -2,7 +2,7 @@
 id: thm-abels-theorem-for-divisors
 kind: theorem
 title: Abel's theorem for divisors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 24
@@ -41,6 +41,7 @@ sources:
       url: "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf"
       locator: "Ch. 7 §2, Propositions 7.5 and Theorem 7.6 (Clebsch), printed pp. 61-63."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

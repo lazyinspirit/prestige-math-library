@@ -2,7 +2,7 @@
 id: thm-cg-large-metric-flag-complexes-are-cat-one
 kind: theorem
 title: "Finite large metric flag complexes are CAT(1)"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 deps:
@@ -34,6 +34,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/papers/moussongdissertation.pdf"
       locator: "Chapter 1, Section 5 (girth of finite S-complexes); Chapter 2, Proposition 10.1 (the non-strict girth computation). The present proof uses its own confined-insertion and three-edge argument instead of the disputed Lemma 9.11 step."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

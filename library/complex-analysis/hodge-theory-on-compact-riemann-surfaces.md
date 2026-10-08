@@ -1,7 +1,7 @@
 ---
 page: hodge-theory-on-compact-riemann-surfaces
 title: Hodge Theory on Compact Riemann Surfaces
-status: draft
+status: published
 items:
 - def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface
 - def-hermitian-metric-and-ltwo-pairing-on-a-compact-riemann-surface

@@ -2,7 +2,7 @@
 id: def-geometric-quasiconformal-homeomorphism
 kind: definition
 title: Orientation-preserving homeomorphisms and the geometric definition of quasiconformality
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 2
@@ -23,6 +23,7 @@ sources:
       url: "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5710-11511_2006_Article_BF02392634.pdf"
       locator: "§§4–5, printed pp. 114–120: extremal length, its conformal invariance, and the modulus convention used here."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

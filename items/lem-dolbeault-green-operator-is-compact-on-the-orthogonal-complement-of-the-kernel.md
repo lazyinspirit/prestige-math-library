@@ -2,7 +2,7 @@
 id: lem-dolbeault-green-operator-is-compact-on-the-orthogonal-complement-of-the-kernel
 kind: lemma
 title: "Dolbeault green operator is compact on the orthogonal complement of the kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 5
@@ -42,6 +42,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. VI §2, (2.2), printed p. 289: the Rellich lemma states that the compact-manifold Sobolev inclusion W^{k+1}→W^k is compact. The item proves the bundle-valued compactness step chartwise from the library's local compactness theorem."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

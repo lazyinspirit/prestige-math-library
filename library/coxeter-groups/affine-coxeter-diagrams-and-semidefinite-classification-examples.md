@@ -1,7 +1,7 @@
 ---
 page: affine-coxeter-diagrams-and-semidefinite-classification-examples
 title: "Affine Coxeter Diagrams and Semidefinite Classification — Examples"
-status: draft
+status: published
 requires: [affine-coxeter-diagrams-and-semidefinite-classification, trigonometric-and-oscillatory-examples-in-one-variable]
 items: []
 examples:

@@ -1,7 +1,7 @@
 ---
 page: parabolic-subgroups-and-double-coset-geometry-examples
 title: "Parabolic Subgroups and Double Coset Geometry — Examples"
-status: draft
+status: published
 requires: [parabolic-subgroups-and-double-coset-geometry]
 items: []
 examples: [ex-cg-reflection-subgroups-parabolic-and-not,

@@ -2,7 +2,7 @@
 id: lem-opposite-symmetrizable-kac-moody-borels-are-root-degreewise-dual-lie-bialgebras
 kind: lemma
 title: "The opposite Borels of a symmetrizable Kac–Moody algebra are root-degreewise dual Lie bialgebras"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -29,6 +29,7 @@ aliases: []
 dependency_level: 2
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

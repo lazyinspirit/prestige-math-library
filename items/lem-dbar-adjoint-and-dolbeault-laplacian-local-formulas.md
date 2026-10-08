@@ -2,7 +2,7 @@
 id: lem-dbar-adjoint-and-dolbeault-laplacian-local-formulas
 kind: lemma
 title: "The Dolbeault adjoint and Laplacian: local formulas and ellipticity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 3
@@ -37,6 +37,7 @@ sources:
       url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
       locator: "Ch. 3 §4, Properties 3.25 and Lemma 3.26, printed pp. 37–38: local complex Hodge-star signs and conjugate-linearity, used through the bundle-star formulas proved in the preceding item."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

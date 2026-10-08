@@ -2,7 +2,7 @@
 id: thm-central-decomposition-into-factor-representations
 kind: theorem
 title: "Central decomposition into factor representations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part III, §III.1.6.4 (central decomposition of a von Neumann algebra on a separable Hilbert space), printed p. 254; the measurable construction is proved locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

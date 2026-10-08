@@ -2,7 +2,7 @@
 id: lem-hh-finite-matrix-and-module-preliminaries
 kind: lemma
 title: "Finite matrix and module preliminaries: right inverses, rank invariance, finite length and nilpotent trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -23,6 +23,7 @@ sources:
       url: "https://math.colorado.edu/topology/cringproject.pdf"
       locator: "§11.6, printed pp. 81–89: free modules, finite generation and modules of finite length; §13.2, printed pp. 120–131: projective and injective modules for the finite-splitting context"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-cg-similar-euclidean-simplices-from-shared-facet-normal-gram
 kind: lemma
 title: "Euclidean simplices with the same facet-normal Gram matrix are similar facet to facet"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -18,6 +18,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Section 6.8, Lemma 6.8.5 with proof (the unit facet normals determine a Euclidean simplex up to translation and homothety) and Lemma 6.8.6 with proof (the coefficients of the relation $c_0u_0+\\dots+c_nu_n=0$ are all nonzero and of one sign), printed pp. 99-100"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

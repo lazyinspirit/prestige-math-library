@@ -2,7 +2,7 @@
 id: lem-bergman-mean-value-l2-bound
 kind: lemma
 title: The mean-value $L^2$ bound for holomorphic functions on a polydisc
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 0
@@ -29,6 +29,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

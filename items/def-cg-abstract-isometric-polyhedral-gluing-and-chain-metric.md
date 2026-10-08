@@ -2,7 +2,7 @@
 id: def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric
 kind: definition
 title: "Abstract isometric polyhedral gluings and the chain metric"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -20,6 +20,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.3, printed pp. 507–508 (X_k-cell structures, the length metric as an infimum of piecewise geodesic lengths, Definition I.3.3 and Proposition I.3.4); §7.3, printed pp. 128–131 (Coxeter polytopes and the natural cell structure)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

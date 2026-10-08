@@ -2,7 +2,7 @@
 id: lem-zero-length-sets-are-removable-for-continuous-analytic-functions
 kind: lemma
 title: "Compact sets of finite length are removable for continuous analytic functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -24,6 +24,7 @@ deps:
 axiom_use: "Countable Choice is assumed for the countable selections in the finite-length square-covering argument and to use the countable subadditivity of Lebesgue outer measure in the elementary proof that a planar open disk has infinite one-dimensional Hausdorff measure. No full Choice is used; compactness extracts a finite subcover from each Hausdorff cover."
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

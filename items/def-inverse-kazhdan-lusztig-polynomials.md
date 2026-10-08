@@ -2,7 +2,7 @@
 id: def-inverse-kazhdan-lusztig-polynomials
 kind: definition
 title: Inverse Kazhdan–Lusztig polynomials
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, lem-bruhat-order-basic-properties-for-permutations]
@@ -21,6 +21,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9910117"
       locator: "§2.2, Definition 2.3 and the μ-coefficient paragraph, printed pp. 4–5; the complete relevant passage was read."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
 ---
 

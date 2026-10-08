@@ -2,7 +2,7 @@
 id: lem-circular-dilatation-quasisymmetry-and-analytic-quasiconformality
 kind: lemma
 title: Circular dilatation, quasisymmetry and the analytic definition
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 8
@@ -44,6 +44,7 @@ sources:
     url: https://doi.org/10.1017/S0027763000024272
     locator: §9 Definition8-prime, printedp179; §3 Definitions2/2-prime, printedp176; domain/orientation conventions p175. Complete ten-page paper read. It states the qualitative equivalence; §14 refers its proof elsewhere. Only this qualitative input uses the exact delegated last-resort citation authorization.
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-left-cell-equivalence-forces-equality-of-recording-tableaux-in-type-a
 kind: lemma
 title: Left equivalence forces equality of recording tableaux in type A
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [prop-same-insertion-or-recording-tableaux-imply-cell-equivalence, lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations, lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges, thm-knuth-equivalence-classes-are-insertion-tableau-fibers, thm-robinson-schensted-correspondence, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, def-star-operations-on-the-symmetric-group, def-row-insertion-and-bumping-route, lem-row-bumping-route-monotonicity, lem-robinson-schensted-recording-tableau-is-standard, def-weyl-group-and-length-for-finite-gl-n, def-young-tableau-standard-tableau-and-shape, def-partition-young-diagram-and-conjugate-partition]
@@ -19,6 +19,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9910117"
       locator: "§3.2, Definition 3.2 and Theorem 3.3, printed pp. 7–8; §3.4, the complete proof of Theorem A, printed pp. 10–11."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

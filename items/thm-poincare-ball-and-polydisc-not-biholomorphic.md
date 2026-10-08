@@ -2,7 +2,7 @@
 id: thm-poincare-ball-and-polydisc-not-biholomorphic
 kind: theorem
 title: "Poincaré's theorem: the ball and the polydisc are not biholomorphic for $m\\ge2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 10
@@ -17,6 +17,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

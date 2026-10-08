@@ -1,7 +1,7 @@
 ---
 page: beltrami-equation-and-measurable-riemann-mapping-examples
 title: 'The Beltrami Equation and Measurable Riemann Mapping: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples:
 - ex-constant-coefficients-and-affine-solutions

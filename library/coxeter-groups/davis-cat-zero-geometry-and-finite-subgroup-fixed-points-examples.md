@@ -1,7 +1,7 @@
 ---
 page: davis-cat-zero-geometry-and-finite-subgroup-fixed-points-examples
 title: "Davis CAT(0) Geometry and Finite Subgroup Fixed Points — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-circumcenter-of-a-finite-orbit-in-a-metric-tree,
            ex-cg-link-angles-of-a2-affine-a2-and-universal-coxeter-nerve,

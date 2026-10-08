@@ -2,7 +2,7 @@
 id: ex-hh-hecke-specialization-at-v-equals-one
 kind: example
 title: "Specialization of the generic Hecke algebra to the group ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 8
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0108172"
       locator: "Section 3.2, PDF p. 8: the relation (T_s-v_s)(T_s+v_s^{-1})=0 whose specialization at v_s=1 is T_s^2=1"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

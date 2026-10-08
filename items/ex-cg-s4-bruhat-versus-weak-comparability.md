@@ -2,7 +2,7 @@
 id: ex-cg-s4-bruhat-versus-weak-comparability
 kind: example
 title: "Bruhat versus weak comparability in S4"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -16,6 +16,7 @@ proof_strategy: direct
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

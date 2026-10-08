@@ -2,7 +2,7 @@
 id: lem-cg-affine-generic-gallery-paths-and-disk-moves
 kind: lemma
 title: "Generic galleries, boundary-fixed disks, and the gallery-move calculus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 11
@@ -45,6 +45,8 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Chapter 3 and §7.3, especially Proposition 7.3.4 and Lemma 7.3.5 (printed pp. 130–131/PDF pp. 145–146): Coxeter-complex galleries and the Cayley 2-complex/simple-connectivity comparison. Davis assumes the Coxeter presentation already identifies the group, so this is context only and is not used to prove the affine presentation here."
 landmark: false
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

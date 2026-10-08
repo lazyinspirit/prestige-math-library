@@ -2,7 +2,7 @@
 id: lem-cg-rank-two-prefix-and-chamber-length-induction
 kind: lemma
 title: "The rank-two half-space alternative and the chamber-length induction $(P_n)$, $(Q_n)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 7
@@ -21,6 +21,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "S1.3, printed pp. 11-13; S1.4, printed pp. 15-18 (Strong Exchange Theorem 1.4.3, Corollaries 1.4.4-1.4.6, Deletion Proposition 1.4.7); S4.2, printed pp. 93-97; S4.4, printed pp. 101-105; read in the extracted full text; exercises excluded"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

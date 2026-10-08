@@ -1,7 +1,7 @@
 ---
 page: bialgebras-convolution-and-antipode-identities
 title: "Bialgebras, Convolution, and Antipode Identities"
-status: draft
+status: published
 items: []
 examples: []
 ---

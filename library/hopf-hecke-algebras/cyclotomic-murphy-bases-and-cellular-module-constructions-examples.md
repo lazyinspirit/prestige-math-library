@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-murphy-bases-and-cellular-module-constructions-examples
 title: "Cyclotomic Murphy Bases and Cellular Module Constructions — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

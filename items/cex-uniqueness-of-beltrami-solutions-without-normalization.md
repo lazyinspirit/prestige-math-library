@@ -2,7 +2,7 @@
 id: cex-uniqueness-of-beltrami-solutions-without-normalization
 kind: counterexample
 title: "Uniqueness of Beltrami solutions fails without the three-point normalization"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-measurable-beltrami-coefficient
@@ -37,6 +37,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 3 §2, printed p. 88, Theorem 2.11: the measurable mapping theorem and normalization ambiguity; contextual only, since the printed dilatation constant has the sign error (k+1)/(k−1) and its proof invokes an unresolved Theorem ??."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

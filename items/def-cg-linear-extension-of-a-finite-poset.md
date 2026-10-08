@@ -2,7 +2,7 @@
 id: def-cg-linear-extension-of-a-finite-poset
 kind: definition
 title: "Linear extensions of a finite poset"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -21,6 +21,7 @@ sources:
       url: "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf"
       locator: "§3 'Equivalence with the Cartier-Foata monoid', PDF pp. 4-5: words are read from the linear extensions of a heap"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

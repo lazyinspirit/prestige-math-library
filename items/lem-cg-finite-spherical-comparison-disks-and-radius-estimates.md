@@ -2,7 +2,7 @@
 id: lem-cg-finite-spherical-comparison-disks-and-radius-estimates
 kind: lemma
 title: "The spherical radius estimate, the quadrilateral separation constant, and the finite midpoint-operation comparison disk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 12
@@ -24,6 +24,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2.3, printed p. 501 (the spherical law of cosines), I.2.16 (local geodesics)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

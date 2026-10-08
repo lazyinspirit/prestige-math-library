@@ -2,7 +2,7 @@
 id: "lem-cg-sortable-skips-basis-and-cover-decomposition"
 kind: "lemma"
 title: "Skip roots form a basis, negative skips are cover roots, and the cover decomposition of sortable elements"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 24
@@ -41,6 +41,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 4.4, pp. 101-105 (roots, reflections and inversion sets)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

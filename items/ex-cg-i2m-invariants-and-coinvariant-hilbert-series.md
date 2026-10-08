@@ -2,7 +2,7 @@
 id: ex-cg-i2m-invariants-and-coinvariant-hilbert-series
 kind: example
 title: "The invariants and the coinvariant Hilbert series of $I_2(m)$: an explicit computation and the noncrystallographic contrast"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: ["def-cg-coxeter-basic-degrees-and-graded-coinvariants","lem-cg-complexification-satisfies-reflection-invariant-hypotheses","def-cg-coxeter-diagram-components-and-finite-type","def-cg-real-coxeter-form-and-reflection","lem-cg-reflection-form-invariance-and-rank-two-orders","def-cg-canonical-reflection-homomorphism","lem-cg-reflection-representation-descends-and-root-norms","thm-cg-finite-type-positive-definite-criterion","thm-cg-finite-coxeter-classification-including-h-and-dihedral","def-finite-linear-invariant-and-coinvariant-polynomial-algebras","def-multivariate-polynomial-ring-by-iteration","def-polynomial-ring-over-a-commutative-ring","def-formal-derivative-of-a-polynomial","prop-formal-derivative-laws","def-jacobian-matrix-affine-algebraic-set","def-algebraically-independent-finite-tuples-over-a-field","def-roots-of-unity-in-a-field","thm-complex-nth-roots-and-roots-of-unity","thm-rank-two-root-system-classification","prop-distinct-simple-roots-have-nonpositive-inner-product","def-cartan-matrix-of-a-based-root-system","def-reduced-crystallographic-euclidean-root-system","def-weyl-group-of-a-root-system","def-sine-and-cosine-by-power-series","thm-sine-cosine-signs-monotonicity-and-ranges","thm-sine-and-cosine-addition-formulas","lem-cg-classical-coxeter-spectra-from-reflection-models","def-hh-coxeter-matrix-word-group-and-length"]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

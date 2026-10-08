@@ -1,7 +1,7 @@
 ---
 page: hecke-parabolic-induction-and-symmetrizing-traces-examples
 title: "Hecke Parabolic Induction and Symmetrizing Traces — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

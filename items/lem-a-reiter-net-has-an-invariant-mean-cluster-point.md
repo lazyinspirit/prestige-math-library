@@ -2,7 +2,7 @@
 id: lem-a-reiter-net-has-an-invariant-mean-cluster-point
 kind: lemma
 title: A Reiter net has an invariant-mean cluster point
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:
@@ -33,6 +33,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

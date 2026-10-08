@@ -35,6 +35,7 @@ parts:
     pages:
       - the-topology-of-euclidean-space
       - countability-axioms-and-cardinal-functions
+      - a-discrete-bases-in-metric-spaces
       - metrization-theorems
       - complete-metrizability-and-baire
   - part: function-spaces

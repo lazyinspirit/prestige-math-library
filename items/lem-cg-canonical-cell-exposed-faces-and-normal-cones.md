@@ -2,7 +2,7 @@
 id: "lem-cg-canonical-cell-exposed-faces-and-normal-cones"
 kind: lemma
 title: "The finite-type Coxeter cell: exposed faces and normal cones"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 16
 deps: ["def-cg-real-coxeter-form-and-reflection", "def-cg-canonical-reflection-homomorphism", "def-cg-dual-chambers-and-reflection-hyperplanes", "def-cg-geometric-inversion-set", "thm-cg-root-sign-and-simple-reflection-positivity", "thm-cg-root-inversion-formulas-and-strong-exchange", "thm-cg-root-length-criterion-and-faithfulness", "def-cg-finite-reflection-arrangement-and-spherical-chambers", "thm-cg-finite-chamber-tiling-and-coset-face-identification", "thm-cg-finite-type-positive-definite-criterion", "lem-cg-reflection-form-invariance-and-rank-two-orders", "lem-cg-spherical-coset-inclusion-and-intersection", "def-extreme-point-and-face", "lem-minimizer-face-of-a-continuous-affine-functional", "def-convex-subset-of-euclidean-space", "thm-strict-separation-of-a-point-from-a-closed-convex-set", "lem-locally-convex-closures-and-finite-compact-convex-hulls", "def-locally-convex-topological-vector-space", "def-finite-convex-cell-complex-and-linear-subdivision", "def-dimension", "def-group", "def-generated-subgroup", "def-subgroup", "def-linear-basis", "def-linear-combination-and-span", "def-linear-independence", "def-linear-subspace", "def-orthogonal-complement", "thm-dimension-of-a-linear-subspace", "thm-finite-dimensional-orthogonal-decomposition", "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"]
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

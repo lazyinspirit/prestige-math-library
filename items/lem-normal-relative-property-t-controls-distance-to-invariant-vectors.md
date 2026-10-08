@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: lem-normal-relative-property-t-controls-distance-to-invariant-vectors
 kind: lemma
 title: Normal relative property (T) controls the distance to the invariant subspace
@@ -42,6 +42,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. AC implies Countable Choice for the orthogonal-decomposition supplier, is assumed by the GNS and Hilbert-direct-sum suppliers, and selects one coefficient function from each nonempty set of candidate functions G→C in the compact-Kazhdan-pair and uniform-gap arguments. AC implies Dependent Choice for the complex C_0 dual representation and supports Mazur separation. No selection from a proper class of representations is made."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

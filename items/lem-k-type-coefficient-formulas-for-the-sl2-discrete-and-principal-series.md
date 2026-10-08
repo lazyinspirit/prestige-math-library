@@ -2,7 +2,7 @@
 id: lem-k-type-coefficient-formulas-for-the-sl2-discrete-and-principal-series
 kind: lemma
 title: Matrix-coefficient formulas and decay for the discrete and principal series
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-k-finite-and-smooth-vectors-for-sl2-r
@@ -23,6 +23,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is inherited from the weighted models, compact picture, and KAK formula. The coefficient, polynomial, and angular-integral calculations use no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

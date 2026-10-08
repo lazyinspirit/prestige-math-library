@@ -4,13 +4,14 @@ kind: "example"
 title: "An indefinite Coxeter form: infinite, but not of affine type"
 provenance: {"statement": "ai-altered", "proof": "ai-altered"}
 sources: {"references": [{"title": "M. W. Davis and G. Moussong, Notes on nonpositively curved polyhedra (Turan Workshop lecture notes, 1998/1999; 65 PDF pages)", "url": "https://people.math.osu.edu/davis.12/notes.pdf", "locator": "Section 6.1, Example 6.1.2, printed p. 33/PDF p. 33: the geometric triangle angle-sum trichotomy. This is contextual background for (iii)-(iv); no geometric realization is imported, and the matrix determinant boundary is proved locally."}, {"title": "M. W. Davis, The Geometry and Topology of Coxeter Groups (first-edition author manuscript, Princeton University Press, 2008; 600 PDF pages)", "url": "https://people.math.osu.edu/davis.12/davisbook.pdf", "locator": "Section 6.8, Theorem 6.8.12(i)-(iii), printed p. 102/PDF p. 118: the spherical/Euclidean/hyperbolic trichotomy for cosine matrices of a simplex, under the explicit hypothesis that no Coxeter label is infinity. This is background only; all labels in the present example are finite and the algebraic conclusions are proved locally."}], "scraped": []}
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 19
 deps: ["def-cg-irreducible-affine-coxeter-type","lem-cg-positive-radical-and-affine-gram-exclusions","def-cg-standard-affine-diagrams","def-cg-real-coxeter-form-and-reflection","thm-cg-finite-type-positive-definite-criterion","def-cg-coxeter-diagram-components-and-finite-type","def-definiteness-inertia-and-signature-data-over-the-reals","def-pi-via-first-positive-cosine-zero","thm-complex-nth-roots-and-roots-of-unity","thm-eulers-formula","thm-double-angle-and-power-reduction-identities","thm-sine-cosine-signs-monotonicity-and-ranges","thm-quarter-turn-values-and-shift-formulas","thm-half-angle-identities-with-sign-conditions","lem-cg-reflection-form-invariance-and-rank-two-orders","lem-cg-affine-type-crystallographic-alcove-diagrams","thm-cg-affine-gram-classification-and-euclidean-realization","thm-hh-parabolic-minimal-representatives-and-length-additivity","thm-sine-and-cosine-addition-formulas","thm-of-square-roots","lem-of-square-monotone","def-sine-and-cosine-by-power-series"]
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: amenability-reiter-nets-and-folner-conditions
 title: Amenability Reiter Nets and Folner Conditions
-status: draft
+status: published
 items:
   - def-complex-haar-l-infinity-space
   - def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group

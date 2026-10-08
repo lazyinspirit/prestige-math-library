@@ -2,7 +2,7 @@
 id: ex-cg-heap-of-one-three-two-in-a3
 kind: example
 title: "The heap of $s_1s_3s_2$ in type $A_3$: a V-shaped heap with exactly two linear extensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 6
@@ -24,6 +24,7 @@ sources:
       url: "https://arxiv.org/pdf/1511.08788"
       locator: "§2.3 and Figure 1, PDF p. 6 (general heap construction and drawings by defining chains; Figure 1 uses the rank-three graph with edge labels 4 and 5, not this type-A3 word)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

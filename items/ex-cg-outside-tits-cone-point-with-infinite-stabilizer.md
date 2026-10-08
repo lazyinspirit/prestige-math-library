@@ -2,7 +2,7 @@
 id: ex-cg-outside-tits-cone-point-with-infinite-stabilizer
 kind: example
 title: "A point outside the Tits cone with infinite stabilizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -20,6 +20,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix D.1, printed pp. 440-441 (Lemma D.1.5 and its Case 1, the infinite dihedral picture); Appendix D.2, printed pp. 442-445 (Examples D.2.1, Lemmas D.2.2-D.2.5, Theorems D.2.6-D.2.7); Chapter 6, printed pp. 90-91 (Lemma 6.6.8, whose proof is reused by Lemma D.2.5)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

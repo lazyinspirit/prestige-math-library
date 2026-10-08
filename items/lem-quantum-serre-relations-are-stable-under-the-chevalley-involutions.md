@@ -2,7 +2,7 @@
 id: lem-quantum-serre-relations-are-stable-under-the-chevalley-involutions
 kind: lemma
 title: "The Chevalley involution, bar involution, and contravariant anti-involution preserve the Drinfeld–Jimbo ideal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 dependency_level: 3
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

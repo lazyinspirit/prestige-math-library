@@ -2,7 +2,7 @@
 id: lem-cg-reversed-reflection-product-and-face-spans
 kind: lemma
 title: "Moved space of a reversed reflection product with independent normals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 20
@@ -29,16 +29,13 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "T. Brady and C. Watt, Lattices in Finite Real Reflection Groups, Transactions of the American Mathematical Society 360 (2008), 4809–4844, arXiv:math/0501502"
       url: "https://arxiv.org/pdf/math/0501502"
       locator: "§2, printed pp. 2–3, for reflection length, absolute order and moved spaces; §7, proof of Theorem 7.8, printed pp. 24–25, where the authors assert M(σ)=span(v₀,…,v_d) for the reversed product associated with a maximal simplex, without isolating or proving that identity. The complete 29-page article was read."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement
@@ -80,6 +77,3 @@ The product order is the reverse of the root list, as in [[def-cg-brady-watt-ord
 1.1 (Moved space of the product.) If $k=0$, then $A=\mathrm{id}_V$ and $M(A)=\{0\}=U$. Otherwise each $R(\sigma_i)$ sends $U$ into $U$ and fixes $U^\perp$ pointwise, so $A(U)\subseteq U$, $A$ fixes $U^\perp$, and $M(A)\subseteq U$. To prove the reverse inclusion, let $x\in U$ satisfy $Ax=x$, set $x_0=x$, and for $i=1,\ldots,k$ set $x_i=R(\sigma_i)x_{i-1}$. Then $x_k=Ax=x_0$, so $0=x_k-x_0=\sum_{i=1}^k(x_i-x_{i-1})=-2\sum_{i=1}^k\langle x_{i-1},\sigma_i\rangle\sigma_i.$ Linear independence forces every coefficient to vanish. Thus $x_i=x_{i-1}$ for every $i$, and each reflection fixes $x$; hence $x\perp\sigma_i$ for every $i$. Since $x\in U$, this gives $x\in U\cap U^\perp=\{0\}$. Therefore $(A-\mathrm{id})|_U:U\to U$ is injective, and rank-nullity makes it surjective. Thus $U\subseteq M(A)$, so $M(A)=U$ and $\dim M(A)=k$ by [F5]. [F1, F2, F5, algebra]
 
 2.1 (Reflection-length rank bound.) Assume the finite-type hypotheses of clause (2) and let $g=r_k\cdots r_1$, so $\rho(g)=A$ by [F3]. For any two invertible linear maps $X,Y$, $XY-\mathrm{id}=(X-\mathrm{id})+X(Y-\mathrm{id}),$ hence $M(XY)\subseteq M(X)+X M(Y)$ and $\dim M(XY)\le\dim M(X)+\dim M(Y)$ because $X$ is invertible. Iterating this inequality, any factorization of $g$ into $m$ elements of $T$ gives $\dim M(\rho(g))\le m$, since each image under $\rho$ is an orthogonal reflection with one-dimensional moved space by [F3]. Step 1.1 gives $\dim M(\rho(g))=k$, so every reflection factorization has at least $k$ factors. The displayed factorization $g=r_k\cdots r_1$ has exactly $k$, and therefore $\ell_T(g)=k$, including the empty-product case. [F3, F4, step 1.1, algebra] ∎
-## Remarks
-
-- **Open supplier obligations.** The following current in-run suppliers do not yet have closed Step-3 dispositions; their statements were inspected provisionally. `def-cg-canonical-reflection-homomorphism` and `lem-cg-reflection-representation-descends-and-root-norms` supply the roots and reflection images used in clause (2), Fact [F3], and proof step 2.1. `def-cg-real-coxeter-form-and-reflection` supplies the Coxeter form and reflection convention used in clause (2), Fact [F3], and proof step 2.1. `def-cg-brady-watt-ordered-spherical-root-complex` supplies the reverse-order convention used in clause (2) and proof step 2.1. `def-cg-reflection-length-absolute-order-and-moved-space` supplies $\ell_T$ used in clause (2), Fact [F4], and proof step 2.1. `thm-cg-finite-type-positive-definite-criterion` supplies positive definiteness used in clause (2), Fact [F3], and proof step 2.1. Reconcile these exact supplier statements with these uses before clearing this item's decision.

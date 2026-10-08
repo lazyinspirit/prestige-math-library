@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: lem-irreducible-c-star-representations-separate-arbitrary-c-star-algebras
 kind: lemma
 title: Irreducible representations separate arbitrary C star algebras
@@ -35,6 +35,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It supplies complex Hahn–Banach, Krein–Milman, the ultrafilter lemma required by Banach–Alaoglu, and Countable Choice for Hilbert completion and projection interfaces. No separability, Polish-space, or countability hypothesis is used."
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

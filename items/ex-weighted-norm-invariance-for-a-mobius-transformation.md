@@ -2,7 +2,7 @@
 id: ex-weighted-norm-invariance-for-a-mobius-transformation
 kind: example
 title: Weighted norm invariance for the inversion generator
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-holomorphic-and-antiholomorphic-discrete-series-models
@@ -21,6 +21,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC supplies Countable Choice for the nonnegative C1 change-of-variables theorem. The explicit inversion and exponent calculation add no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-cg-simple-and-reflection-length-of-a-long-transposition-in-s5
 kind: example
 title: "Simple and reflection lengths of a long transposition in $S_5$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: [cor-double-orthogonal-complement-and-dimension, def-cg-canonical-reflection-homomorphism, def-cg-coxeter-diagram-components-and-finite-type, def-cg-real-coxeter-form-and-reflection, def-cg-reflection-length-absolute-order-and-moved-space, def-hh-coxeter-matrix-word-group-and-length, def-inversions-inversion-number-and-sign, def-linear-isometry-and-orthogonal-or-unitary-operator, def-real-and-complex-inner-product-space, lem-cg-orthogonal-wall-form-and-subspace-restriction, lem-cg-reflection-representation-descends-and-root-norms, thm-cg-carter-reflection-length-and-absolute-order, thm-hh-parabolic-minimal-representatives-and-length-additivity, thm-quarter-turn-values-and-shift-formulas, thm-double-angle-and-power-reduction-identities, cor-trigonometric-parity-and-pythagorean-identity, thm-cosine-has-a-smallest-positive-zero, def-pi-via-first-positive-cosine-zero, lem-sine-positive-and-cosine-decreasing-on-zero-two]
@@ -20,6 +20,7 @@ sources:
       locator: "Chapter 2, Exercise 2.35 on printed p. 61 (absolute length a-l(w)=min{k: w=t_1...t_k, t_i in T}); Chapter 7, Exercise 2 on printed pp. 234-235"
 dependency_level: 18
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

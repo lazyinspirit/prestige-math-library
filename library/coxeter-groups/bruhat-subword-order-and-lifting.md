@@ -1,7 +1,7 @@
 ---
 page: bruhat-subword-order-and-lifting
 title: "Bruhat Subword Order and Lifting"
-status: draft
+status: published
 items: [def-cg-bruhat-order-by-reflection-chains, lem-cg-bruhat-right-exchange-and-augmentation, thm-cg-bruhat-subword-characterization, lem-cg-bruhat-chain-refinement-and-gradedness, thm-cg-bruhat-lifting-and-cover-criterion, thm-cg-bruhat-parabolic-projection-and-quotients]
 examples: []
 ---

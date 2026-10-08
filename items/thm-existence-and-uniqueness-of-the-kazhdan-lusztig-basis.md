@@ -2,7 +2,7 @@
 id: thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis
 kind: theorem
 title: Existence and uniqueness of the Kazhdan–Lusztig basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [thm-r-polynomial-recursion-and-degree-bounds, lem-the-hecke-bar-involution-is-well-defined, def-normalized-type-a-hecke-algebra-and-its-bar-involution, thm-standard-basis-of-the-generic-type-a-hecke-algebra, lem-reversal-anti-involution-commutes-with-hecke-bar, lem-bruhat-order-basic-properties-for-permutations]
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/1212.0791"
       locator: "Corollary 1.2(1), printed p. 5, and §3.2 including Remark 3.2, printed pp. 15–16, read in full; only the positivity conclusion uses the exact authorized original-source fallback. The full Soergel–Hodge proof is not reproduced locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

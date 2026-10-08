@@ -1,7 +1,7 @@
 ---
 page: weak-order-inversions-and-lattice-operations
 title: "Weak Order, Inversions, and Lattice Operations"
-status: draft
+status: published
 requires: [parabolic-subgroups-and-double-coset-geometry,
            finite-reflection-arrangements-and-spherical-coxeter-complexes,
            chains-antichains-sperner-and-dilworth,

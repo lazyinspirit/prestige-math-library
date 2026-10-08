@@ -2,7 +2,7 @@
 id: def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization
 kind: definition
 title: Kazhdan–Lusztig polynomials in the classical $q$-normalization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-normalized-type-a-hecke-algebra-and-its-bar-involution]
@@ -24,6 +24,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "§§5.1–5.4, printed pp. 27–30; Theorem 5.2 and its proof, and Proposition 5.4 and its proof, were read in full and translated by v_L=v^{-1}."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

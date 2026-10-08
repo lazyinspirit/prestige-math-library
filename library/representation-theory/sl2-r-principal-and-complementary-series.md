@@ -1,7 +1,7 @@
 ---
 page: sl2-r-principal-and-complementary-series
 title: "Sl2 R Principal and Complementary Series"
-status: draft
+status: published
 requires:
   - induced-unitary-representations-of-locally-compact-groups
   - mackeys-imprimitivity-theorem

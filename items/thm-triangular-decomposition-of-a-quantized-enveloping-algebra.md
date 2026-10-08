@@ -2,7 +2,7 @@
 id: thm-triangular-decomposition-of-a-quantized-enveloping-algebra
 kind: theorem
 title: Triangular decomposition of a quantized enveloping algebra
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 dependency_level: 7
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

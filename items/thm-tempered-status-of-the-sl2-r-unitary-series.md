@@ -2,7 +2,7 @@
 id: thm-tempered-status-of-the-sl2-r-unitary-series
 kind: theorem
 title: Tempered status of the SL2(R) unitary series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -27,6 +27,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is assumed through the unitary dual, regular representation, Plancherel field, and complementary-series sign-equivalence interfaces. The carrier, support, and positive-kernel arguments make no further selections."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

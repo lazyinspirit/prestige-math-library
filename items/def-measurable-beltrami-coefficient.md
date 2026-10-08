@@ -2,7 +2,7 @@
 id: def-measurable-beltrami-coefficient
 kind: definition
 title: "Measurable Beltrami coefficients and measurable conformal structures"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-complex-domain
@@ -29,6 +29,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-local-holder-cauchy-transform-estimate
 kind: lemma
 title: "The fixed-support Cauchy transform and its Hölder bounds"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-holder-spaces-c-k-alpha-and-their-scaled-norms
@@ -48,6 +48,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §14.10.1, Theorem 14.11 and its proof, and §14.10.3, printed pp. 200–201: the Cauchy transform solving the Beltrami equation and its principal-value derivative."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

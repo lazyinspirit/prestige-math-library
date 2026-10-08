@@ -2,7 +2,7 @@
 id: lem-hh-tensor-injections-quotients-and-kernels-over-a-field
 kind: lemma
 title: "Tensoring injections and the kernel of a tensor product of quotient maps over a field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -23,6 +23,7 @@ sources:
       url: "https://math.colorado.edu/topology/cringproject.pdf"
       locator: "§13.4.1–13.4.3, printed pp. 143–145: right exactness of $\\otimes$ and the sharpness of its failure to preserve injections"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

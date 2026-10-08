@@ -2,7 +2,7 @@
 id: ex-polydisc-boundary-and-the-smooth-szego-hypotheses
 kind: example
 title: The polydisc boundary is not a smooth hypersurface, so the Szegő definition does not apply
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 1
@@ -22,6 +22,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

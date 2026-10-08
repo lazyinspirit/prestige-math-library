@@ -2,7 +2,7 @@
 id: cex-cg-i2-five-is-not-crystallographic
 kind: counterexample
 title: "$I_2(5)$ admits no crystallographic scaling and no reduced crystallographic root system with that base pairing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 16
@@ -25,6 +25,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/LAG.pdf"
       locator: "Chapter I, Section 7, rank-two discussion and Proposition 7.16, printed/PDF pp. 71-73: the possible Cartan-integer pairs 0,1,2,3 for distinct simple roots"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

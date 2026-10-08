@@ -2,7 +2,7 @@
 id: def-hermitian-metric-and-ltwo-pairing-on-a-compact-riemann-surface
 kind: definition
 title: "Hermitian metric and $L^2$ pairing on a compact Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 1
@@ -58,6 +58,7 @@ sources:
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 6, printed pp. 59–60: the real Hodge star on 1-forms and the Hodge norm on a compact Riemann surface"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

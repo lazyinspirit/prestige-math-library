@@ -2,7 +2,7 @@
 id: "lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics"
 kind: lemma
 title: "Finite Coxeter orbit polytopes, face isometries and their cocycle"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization", "lem-cg-canonical-cell-exposed-faces-and-normal-cones", "def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric", "def-hh-coxeter-matrix-word-group-and-length", "thm-hh-parabolic-minimal-representatives-and-length-additivity", "thm-cg-parabolic-intersections-and-coset-factorization", "def-cg-real-coxeter-form-and-reflection", "def-cg-canonical-reflection-homomorphism", "thm-cg-finite-type-positive-definite-criterion", "lem-cg-reflection-form-invariance-and-rank-two-orders", "def-linear-subspace", "def-linear-combination-and-span", "def-linear-basis", "def-dual-family-associated-to-a-basis", "def-real-and-complex-inner-product-space", "thm-riesz-representation-in-finite-dimensions", "thm-finite-dimensional-orthogonal-decomposition", "def-orthogonal-projection", "def-isometry-and-metric-embedding", "def-linear-isometry-and-isometric-isomorphism", "def-finite-convex-cell-complex-and-linear-subdivision"]
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

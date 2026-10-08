@@ -2,7 +2,7 @@
 id: thm-littlewood-richardson-schur-product-expansion
 kind: theorem
 title: The Littlewood–Richardson rule for products of Schur functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 0
@@ -28,6 +28,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

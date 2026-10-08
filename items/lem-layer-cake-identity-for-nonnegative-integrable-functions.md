@@ -2,7 +2,7 @@
 id: lem-layer-cake-identity-for-nonnegative-integrable-functions
 kind: lemma
 title: The layer-cake identity for integrable functions
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -38,6 +38,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: "thm-cg-davis-complex-cell-incidence-and-stabilizers"
 kind: theorem
 title: "The cellulation of the Davis complex: incidence, stabilizers and the model U(W,K)"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization", "lem-cg-spherical-coset-inclusion-and-intersection", "lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics", "def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric", "lem-cg-polyhedral-face-coherence-and-uniform-star-radius", "thm-cg-polyhedral-chain-metric-topology-and-properness", "def-cg-real-coxeter-form-and-reflection", "def-cg-canonical-reflection-homomorphism", "def-hh-coxeter-matrix-word-group-and-length", "thm-hh-parabolic-minimal-representatives-and-length-additivity", "thm-cg-finite-chamber-tiling-and-coset-face-identification", "def-cg-finite-reflection-arrangement-and-spherical-chambers", "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization", "def-homeomorphism-and-open-maps", "thm-compactness-under-continuous-maps", "def-metric-compactness", "def-complete-metric-space", "def-generated-subgroup", "def-group-action", "def-orbit-and-stabilizer", "def-quotient-topology", "def-product-topology", "def-standard-topologies"]
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

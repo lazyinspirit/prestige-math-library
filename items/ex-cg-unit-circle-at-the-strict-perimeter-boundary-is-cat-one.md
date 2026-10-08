@@ -2,7 +2,7 @@
 id: ex-cg-unit-circle-at-the-strict-perimeter-boundary-is-cat-one
 kind: example
 title: "The unit circle is CAT(1) at the strict perimeter boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

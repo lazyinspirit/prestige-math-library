@@ -2,7 +2,7 @@
 id: lem-cg-local-cat-one-products-from-sine-comparison
 kind: lemma
 title: "Local CAT(1) of the $l^2$ product from a model $S^2\\times S^2$ sine-comparison calculation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -23,6 +23,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2.3, printed p. 501 (the local curvature definition), I.2.15–I.2.16 (the CAT(0) inequality and local geodesics)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

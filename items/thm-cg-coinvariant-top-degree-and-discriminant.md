@@ -2,7 +2,7 @@
 id: thm-cg-coinvariant-top-degree-and-discriminant
 kind: theorem
 title: "The total degree sum, the invariant Jacobian as the discriminant, anti-invariants, and the top coinvariant class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: ["lem-cg-basic-degrees-independent-and-coinvariant-series","def-cg-coxeter-basic-degrees-and-graded-coinvariants","lem-cg-complexification-satisfies-reflection-invariant-hypotheses","lem-cg-formal-rational-differentials-and-invariant-jacobian","def-cg-real-coxeter-form-and-reflection","def-cg-canonical-reflection-homomorphism","def-hh-coxeter-matrix-word-group-and-length","lem-cg-reflection-representation-descends-and-root-norms","lem-cg-reflection-form-invariance-and-rank-two-orders","def-cg-dual-chambers-and-reflection-hyperplanes","thm-cg-root-inversion-formulas-and-strong-exchange","thm-cg-finite-chamber-tiling-and-coset-face-identification","thm-cg-root-length-criterion-and-faithfulness","def-finite-linear-invariant-and-coinvariant-polynomial-algebras","def-graded-ring-and-graded-module","lem-weyl-coinvariant-hilbert-series-has-order-w-dimension","def-inner-product-space","def-complex-conjugate-real-imaginary-part-and-modulus","def-formal-derivative-of-a-polynomial","def-jacobian-matrix-affine-algebraic-set","def-characteristic-polynomial-of-a-matrix","cor-an-element-of-finite-order-acts-diagonalisably-over-an-algebraically-closed-field-of-characteristic-zero","def-axiom-of-choice","def-multivariate-polynomial-ring-by-iteration","thm-cg-finite-type-positive-definite-criterion", thm-determinant-multiplicative]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 axiom_use: "The Axiom of Choice is inherited exactly through the finite complex reflection invariant-theory inputs: existence of the basic family, its regular-sequence/Hilbert conclusions, and the Molien identity. The finite root geometry, Laurent expansion, divisibility arguments, and coefficient-factorial pairing are choice-free."
 sources:

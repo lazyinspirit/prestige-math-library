@@ -2,7 +2,7 @@
 id: ex-quasiconformal-composition-dilatation-bound
 kind: example
 title: Composition of two affine quasiconformal maps and the multiplicative dilatation bound
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 9
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §12.5, Proposition 12.15, printed p. 188: the product bound for compositions of quasiconformal maps."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-measurable-gram-schmidt-and-constant-field-trivializations
 kind: lemma
 title: "Measurable Gram-Schmidt and constant-field trivializations on dimension strata"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -72,6 +72,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part III §1.6.1-1.6.4, printed pp. 252-254: direct-integral architecture and central decomposition are outlined; the source explicitly refers the technical details to other texts. The measurable constructions used here are proved locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

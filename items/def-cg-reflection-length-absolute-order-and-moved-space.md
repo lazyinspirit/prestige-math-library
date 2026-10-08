@@ -2,7 +2,7 @@
 id: def-cg-reflection-length-absolute-order-and-moved-space
 kind: definition
 title: "Reflection length, the absolute order on a finite Coxeter group, and the moved and fixed spaces of an orthogonal operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: [def-cg-canonical-reflection-homomorphism, def-cg-coxeter-diagram-components-and-finite-type, def-cg-real-coxeter-form-and-reflection, def-hh-coxeter-matrix-word-group-and-length, def-kernel-and-image-of-a-linear-map, def-linear-isometry-and-orthogonal-or-unitary-operator, def-linear-map, def-real-and-complex-inner-product-space, lem-cg-reflection-representation-descends-and-root-norms, thm-cg-finite-type-positive-definite-criterion, thm-well-ordering-principle]
@@ -23,6 +23,7 @@ sources:
       locator: "Introduction and section 2 (printed pp. 1-3: reflection length, absolute order, moved and fixed spaces M(A), F(A), M(A)=F(A)^perp, the main result of [7], and notes (1)-(7)); the opening of section 3 through Note 3.5 (printed pp. 3-6); and the opening paragraphs of section 4 (printed pp. 8-9) with the A_3 intersection example"
 dependency_level: 14
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

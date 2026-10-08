@@ -2,7 +2,7 @@
 id: lem-cg-positive-definite-diagram-exclusions
 kind: lemma
 title: "Exclusions for positive definite diagrams: trees, valency, labels, chains and arms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -20,6 +20,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix C, Lemma C.3.1 (domination) and its proof (printed pp. 436-437) with the classification deductions (printed pp. 437-438): circuits, infinite labels, branch vertices, two branch vertices, multiple large labels and the surviving diagrams; Table C.1 (printed p. 436) for the determinants det(2A) of A_n, B_n, D_n, E_6, E_7, E_8, F_4, H_3, H_4"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

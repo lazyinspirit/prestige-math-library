@@ -2,7 +2,7 @@
 id: ex-cg-s4-rank-three-interval-mobius-from-recurrence
 kind: example
 title: "The Möbius value of the rank-three interval [e,c] in S4 from the recurrence, with the parity and falling-chain checks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 20
@@ -24,6 +24,7 @@ sources:
       url: "https://web.mit.edu/yufeiz/www/papers/bruhat.pdf"
       locator: "Section 4, printed pp. 5-7 (Verma's parity-balance induction and Corollary 4.3), of which the present finite computation is a special case"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

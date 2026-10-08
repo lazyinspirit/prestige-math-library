@@ -2,7 +2,7 @@
 id: lem-cg-affine-type-crystallographic-alcove-diagrams
 kind: lemma
 title: "Crystallographic alcove diagrams: the affine list realized by Weyl types A–G"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 16
@@ -54,6 +54,8 @@ sources:
     - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups, author manuscript"
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Section 6.9, Table 6.1, printed p. 104 (PDF p. 120), and Appendix C.2, Lemma C.2.2, printed pp. 435–436 (PDF pp. 451–452): the standard spherical/Euclidean diagram list and the semidefinite corank-one property of its Euclidean column. The item proves the matrix claims directly from the alcove normals and the local positive-radical lemma."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

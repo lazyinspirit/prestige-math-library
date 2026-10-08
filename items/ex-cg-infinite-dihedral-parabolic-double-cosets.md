@@ -2,7 +2,7 @@
 id: ex-cg-infinite-dihedral-parabolic-double-cosets
 kind: example
 title: "Parabolic double cosets of the infinite dihedral group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -23,6 +23,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

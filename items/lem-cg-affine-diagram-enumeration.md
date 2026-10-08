@@ -2,7 +2,7 @@
 id: lem-cg-affine-diagram-enumeration
 kind: lemma
 title: "Enumeration of the connected positive semidefinite corank-one diagrams"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 17
@@ -38,6 +38,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

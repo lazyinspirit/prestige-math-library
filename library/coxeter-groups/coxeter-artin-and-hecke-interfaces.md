@@ -1,7 +1,7 @@
 ---
 page: coxeter-artin-and-hecke-interfaces
 title: "Coxeter, Artin, and Hecke Interfaces"
-status: draft
+status: published
 requires: [coxeter-presentations-exchange-and-reduced-word-theorems,
            canonical-roots-signs-and-faithful-reflections,
            parabolic-subgroups-and-double-coset-geometry,

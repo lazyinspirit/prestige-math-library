@@ -2,7 +2,7 @@
 id: thm-square-integrability-of-sl2-r-discrete-series-matrix-coefficients
 kind: theorem
 title: Square integrability of discrete-series matrix coefficients
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -24,6 +24,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is assumed and inherited through the weighted Hilbert model, the fixed KAK Haar formula, and the L2 regular representation. The coefficient-to-function map and beta-integral computations use no additional choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

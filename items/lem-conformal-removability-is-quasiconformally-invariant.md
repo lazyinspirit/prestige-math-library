@@ -2,7 +2,7 @@
 id: lem-conformal-removability-is-quasiconformally-invariant
 kind: lemma
 title: Conformal removability is invariant under quasiconformal maps
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -38,6 +38,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §§14.1–14.5, printed pp. 195–198: the sphere measurable Riemann mapping theorem, uniqueness, and the coefficient-straightening argument; read in full."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

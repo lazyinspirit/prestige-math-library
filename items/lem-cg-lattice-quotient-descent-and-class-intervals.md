@@ -2,7 +2,7 @@
 id: lem-cg-lattice-quotient-descent-and-class-intervals
 kind: lemma
 title: "Lattice quotient descent, class intervals and monotone endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -18,6 +18,7 @@ sources:
     - title: "Nathan Reading, Lattice congruences of the weak order: algebra, combinatorics, and geometry, Triangle Lectures in Combinatorics (2019), slides on the order-theoretic characterization of a lattice congruence"
       url: "https://nreadin.math.ncsu.edu/papers/TLC.pdf"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

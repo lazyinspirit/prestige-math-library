@@ -2,7 +2,7 @@
 id: ex-cg-moved-space-intersection-is-not-a-meet-in-a3
 kind: example
 title: "A moved-space intersection in $A_3$ that is not the meet"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: [cor-double-orthogonal-complement-and-dimension, def-cg-canonical-reflection-homomorphism, def-cg-coxeter-diagram-components-and-finite-type, def-cg-real-coxeter-form-and-reflection, def-cg-reflection-length-absolute-order-and-moved-space, def-hh-coxeter-matrix-word-group-and-length, def-linear-isometry-and-orthogonal-or-unitary-operator, def-real-and-complex-inner-product-space, lem-cg-orthogonal-wall-form-and-subspace-restriction, lem-cg-reflection-factorizations-and-independent-normals, thm-cg-carter-reflection-length-and-absolute-order, thm-hh-parabolic-minimal-representatives-and-length-additivity, thm-quarter-turn-values-and-shift-formulas, thm-double-angle-and-power-reduction-identities, cor-trigonometric-parity-and-pythagorean-identity, thm-cosine-has-a-smallest-positive-zero, def-pi-via-first-positive-cosine-zero, lem-sine-positive-and-cosine-decreasing-on-zero-two]
@@ -20,6 +20,7 @@ sources:
       locator: "Section 2 'Products of reflections', printed pp. 2-5: the root-system setup (i)-(iv) and Lemmas 1-5 with the proofs of Lemmas 2, 3 and 4"
 dependency_level: 18
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

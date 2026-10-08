@@ -2,7 +2,7 @@
 id: thm-kazhdan-lusztig-basis-multiplication-formula
 kind: theorem
 title: Multiplication by a generator in the Kazhdan–Lusztig basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations, lem-reversal-anti-involution-commutes-with-hecke-bar]
@@ -22,6 +22,7 @@ sources:
       url: "https://arxiv.org/pdf/1212.0791"
       locator: "§3.2, printed pp. 15–16; complete section read."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

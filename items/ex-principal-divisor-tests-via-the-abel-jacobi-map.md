@@ -2,7 +2,7 @@
 id: ex-principal-divisor-tests-via-the-abel-jacobi-map
 kind: example
 title: Principal divisor tests via the Abel-Jacobi map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 27
@@ -37,6 +37,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 15, the meaning of $\\varphi(D)$ and the examples for the sphere, a torus and a general curve, printed pp. 128-130."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

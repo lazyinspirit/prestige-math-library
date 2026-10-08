@@ -2,7 +2,7 @@
 id: thm-zero-length-sets-and-quasicircles-are-conformally-removable
 kind: theorem
 title: Zero-length compact sets and quasicircles are conformally removable
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -48,6 +48,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 2 §7, Corollary 7.7, printed p. 76: in the section on quasiconformal removability, the quasicircle case is reduced to quasiconformal removability of the line by pre- and post-composition. This corroborates the QC-removability input only; the present proof uses the global CH-removability and QC-invariance suppliers."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

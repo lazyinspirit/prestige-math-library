@@ -2,7 +2,7 @@
 id: thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra
 kind: theorem
 title: "The Drinfeld–Jimbo formulas define a Hopf algebra"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -25,6 +25,7 @@ aliases: []
 dependency_level: 5
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

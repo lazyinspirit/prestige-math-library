@@ -2,7 +2,7 @@
 id: def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra
 kind: definition
 title: States, tracial states and faithful normal traces on a von Neumann algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -56,6 +56,7 @@ sources:
       url: "https://www.math.ucla.edu/~popa/Books/IIun.pdf"
       locator: "Chapter 2 §2.5, Proposition 2.5.8 and its proof, printed pp. 43–44 (one-based PDF pp. 49–50): for positive linear maps, normality is equivalent to WOT continuity on the unit ball"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

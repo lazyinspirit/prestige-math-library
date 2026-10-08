@@ -2,7 +2,7 @@
 id: cex-a-limit-of-discrete-series-is-not-square-integrable
 kind: counterexample
 title: A limit of discrete series is not square-integrable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -24,6 +24,7 @@ axiom_audit: Assume AC, inherited through the limit-series and fixed-Haar model
   interfaces. The coefficient calculation, radial substitution, and divergence
   argument make no additional choices.
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

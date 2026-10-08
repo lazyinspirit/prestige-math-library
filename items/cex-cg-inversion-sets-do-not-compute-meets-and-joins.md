@@ -2,7 +2,7 @@
 id: cex-cg-inversion-sets-do-not-compute-meets-and-joins
 kind: counterexample
 title: "Meets and joins are not intersection and union of inversion sets: the $A_2$ counterexample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 20
@@ -18,6 +18,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-holder-regularity-beltrami-solutions
 kind: theorem
 title: "Hölder regularity and nonvanishing Jacobian of the normalized Beltrami solution"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-measurable-beltrami-coefficient
@@ -51,6 +51,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §14.4, printed pp. 196–197: the local solution for a real-analytic coefficient by complexification, characteristics and a nonsingular first integral; contextual only, not a proof of the Hölder assertion."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

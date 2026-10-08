@@ -2,7 +2,7 @@
 id: lem-cg-classical-coxeter-spectra-from-reflection-models
 kind: lemma
 title: "The Coxeter elements of the classical types A_n, B_n, D_n and I_2(m): characteristic polynomials, orders and spectral exponents from their reflection models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: ["def-cg-bipartite-coxeter-element-and-root-recursion","def-cg-real-coxeter-form-and-reflection","lem-cg-reflection-form-invariance-and-rank-two-orders","def-cg-canonical-reflection-homomorphism","lem-cg-complexification-satisfies-reflection-invariant-hypotheses","def-cg-coxeter-diagram-components-and-finite-type","thm-cg-finite-coxeter-classification-including-h-and-dihedral","ex-classical-root-systems-in-euclidean-coordinates","def-reduced-crystallographic-euclidean-root-system","def-finite-symmetric-group-and-permutation-notation","def-characteristic-polynomial-of-a-matrix","def-determinant-of-a-square-matrix","def-diagonalisable-endomorphism","def-eigenvalue-eigenvector-eigenspace-and-spectrum","def-sine-and-cosine-by-power-series","def-complex-numbers-and-arithmetic","thm-complex-nth-roots-and-roots-of-unity","def-roots-of-unity-in-a-field","thm-eulers-formula","cor-complex-exponential-cartesian-form-modulus-and-eulers-identity","thm-complex-exponential-addition-and-real-extension","cor-an-element-of-finite-order-acts-diagonalisably-over-an-algebraically-closed-field-of-characteristic-zero", thm-leibniz-determinant-is-alternating-multilinear-and-normalized, cor-square-matrix-invertible-iff-determinant-is-a-unit, cor-determinant-is-invariant-under-similarity]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

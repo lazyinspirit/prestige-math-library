@@ -2,7 +2,7 @@
 id: def-cg-finite-lattice-congruence-and-interval-projections
 kind: definition
 title: "Finite lattice congruences, interval endpoints and descending rooted-chain labels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -23,6 +23,7 @@ sources:
     - title: "Richard P. Stanley, An Introduction to Hyperplane Arrangements, Lecture 1 §1.2 and Lecture 4 §4.1"
       url: "https://www.cis.upenn.edu/~cis6100/sp06stanley.pdf"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

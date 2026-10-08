@@ -2,7 +2,7 @@
 id: ex-cg-s4-subword-descriptions-agree
 kind: example
 title: "Two reduced expressions of one element whose subword descriptions agree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -16,6 +16,7 @@ proof_strategy: direct
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-mobius-ambiguity-in-conformal-welding
 kind: example
 title: "The Möbius ambiguity in conformal welding"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -38,6 +38,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §15.4, printed p. 213: the two-sided Möbius action on the welding homeomorphism and the corresponding normalization of welding data. Read in full."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

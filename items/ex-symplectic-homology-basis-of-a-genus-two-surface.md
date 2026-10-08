@@ -2,7 +2,7 @@
 id: ex-symplectic-homology-basis-of-a-genus-two-surface
 kind: example
 title: A symplectic homology basis of a genus-two surface
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 2
@@ -19,6 +19,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-cg-geometric-inversion-set
 kind: definition
 title: "The geometric inversion set $N(w)$ of an element of a Coxeter group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -21,6 +21,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "S4.4, printed pp. 101-105 (Definition 4.4.1 and (4.24)-(4.27)); S1.4, printed pp. 15-18; read in the extracted full text; exercises excluded"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

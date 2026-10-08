@@ -2,7 +2,7 @@
 id: thm-cg-bruhat-subword-characterization
 kind: theorem
 title: "The subword characterization of Bruhat order and its independence of the reduced expression"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 13
@@ -14,6 +14,7 @@ proof_strategy: direct
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

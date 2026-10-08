@@ -2,7 +2,7 @@
 id: lem-k-type-decomposition-of-the-sl2-principal-series
 kind: lemma
 title: K-type decomposition of the SL2(R) principal series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 3
@@ -20,6 +20,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

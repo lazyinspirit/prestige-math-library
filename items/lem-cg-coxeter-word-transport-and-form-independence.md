@@ -2,7 +2,7 @@
 id: "lem-cg-coxeter-word-transport-and-form-independence"
 kind: "lemma"
 title: "Coxeter words are commutation-connected; the Euler and skew forms depend only on the Coxeter element"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 14
@@ -39,6 +39,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 1.4, pp. 14-18 (exchange and deletion), and section 3.3, pp. 75-77 (the word property)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

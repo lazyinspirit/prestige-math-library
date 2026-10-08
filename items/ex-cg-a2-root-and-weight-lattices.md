@@ -2,7 +2,7 @@
 id: ex-cg-a2-root-and-weight-lattices
 kind: example
 title: "The $A_2$ root and weight lattices: $P/Q$ has order three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -21,6 +21,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, (2.43) and (2.50), printed pp. 150-155, for the standard A2, B2, and C2 coordinate root sets and simple roots; Chapter IV, Section 7, Propositions 4.62 and 4.64, printed pp. 266-267, for the root-lattice/index context (used here only as context; the indices below are calculated locally)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

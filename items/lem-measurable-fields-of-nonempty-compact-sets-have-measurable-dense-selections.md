@@ -2,7 +2,7 @@
 id: lem-measurable-fields-of-nonempty-compact-sets-have-measurable-dense-selections
 kind: lemma
 title: "Measurable dense selections for fields of nonempty compact sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -46,6 +46,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Appendix A.C, Theorem A.C.6, printed p. 409 (PDF p. 408): for a Borel relation with everywhere-surjective projection and a standard Borel measure, it gives a Borel selector on a conull Borel subset and refers its proof to Mackey-76, Theorem Z.2, Chapter 2, §2.2. This is comparison only; the local nested-set argument here gives selectors for every x in the compact zero-set setting."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

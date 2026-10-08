@@ -2,7 +2,7 @@
 id: lem-cg-basic-degrees-independent-and-coinvariant-series
 kind: lemma
 title: "The basic degrees are independent of the chosen family; Hilbert series of the invariants and of the coinvariant algebra; the order formula and the Molien identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: ["def-cg-coxeter-basic-degrees-and-graded-coinvariants", "lem-cg-complexification-satisfies-reflection-invariant-hypotheses", "def-hh-coxeter-matrix-word-group-and-length", "thm-cg-finite-coxeter-classification-including-h-and-dihedral", "lem-cg-diagram-products-and-invariant-form-comparison", "def-finite-linear-invariant-and-coinvariant-polynomial-algebras", "lem-finite-reflection-invariant-generators-are-algebraically-independent", "lem-reflection-basic-invariants-form-a-regular-sequence", "lem-weyl-coinvariant-hilbert-series-has-order-w-dimension", "thm-chevalley-shephard-todd-for-finite-weyl-groups", "def-multivariate-polynomial-ring-by-iteration", "def-hilbert-function-and-hilbert-series", "def-graded-ring-and-graded-module", "cor-an-element-of-finite-order-acts-diagonalisably-over-an-algebraically-closed-field-of-characteristic-zero", "def-axiom-of-choice", cor-determinant-is-invariant-under-similarity]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

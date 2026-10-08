@@ -2,7 +2,7 @@
 id: cex-cg-parabolic-quotient-interval-eulerian-claim-fails
 kind: counterexample
 title: "A parabolic quotient interval of S4 whose Möbius value is 0, so the Eulerian sign formula does not extend to quotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 20
@@ -21,6 +21,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Sections 2.5 and 2.7, printed pp. 44-55: the quotient order, the fullness hypothesis behind the quotient Möbius formula and the deleted-position labels of full intervals, of which this counterexample exhibits the boundary"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

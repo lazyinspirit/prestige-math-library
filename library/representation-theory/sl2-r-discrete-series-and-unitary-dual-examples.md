@@ -1,7 +1,7 @@
 ---
 page: sl2-r-discrete-series-and-unitary-dual-examples
 title: "SL2(R): Discrete Series and the Unitary Dual — Examples"
-status: draft
+status: published
 requires: [sl2-r-discrete-series-and-unitary-dual]
 items: []
 examples:

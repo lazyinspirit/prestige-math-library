@@ -2,7 +2,7 @@
 id: lem-complex-multinomial-theorem
 kind: lemma
 title: The multinomial theorem for finitely many complex variables
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 0
@@ -30,6 +30,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pending
   judge:
     model: "gpt-6.1-sol"

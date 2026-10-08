@@ -1,7 +1,7 @@
 ---
 page: crystallographic-root-lattices-and-weyl-group-interfaces
 title: "Crystallographic Root Lattices and Weyl Group Interfaces"
-status: draft
+status: published
 items: [def-cg-crystallographic-scaling-coroot-and-lattice, lem-cg-integer-pairings-and-allowed-dihedral-labels, thm-cg-crystallographic-finite-type-and-lattice-stability]
 examples: []
 ---

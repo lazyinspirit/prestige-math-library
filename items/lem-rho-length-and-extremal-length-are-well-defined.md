@@ -2,7 +2,7 @@
 id: lem-rho-length-and-extremal-length-are-well-defined
 kind: lemma
 title: The rho-length and the extremal length are well defined
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 1
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 1 §6.1 and Exercise 6.2, printed pp. 119–120: extremal length, change of metric, extension of a curve family, and ambient-surface independence."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

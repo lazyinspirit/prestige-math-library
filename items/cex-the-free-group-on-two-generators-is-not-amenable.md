@@ -2,7 +2,7 @@
 id: cex-the-free-group-on-two-generators-is-not-amenable
 kind: counterexample
 title: The free group on two generators is not amenable
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 proof_strategy: direct
@@ -20,6 +20,7 @@ provenance:
   proof: ai-altered
 axiom_use: No choice principle is used; the reduced-word sets and all finite mean calculations are explicit.
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

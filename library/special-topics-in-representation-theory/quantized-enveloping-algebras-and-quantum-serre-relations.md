@@ -1,7 +1,7 @@
 ---
 page: quantized-enveloping-algebras-and-quantum-serre-relations
 title: Quantized Enveloping Algebras and Quantum Serre Relations
-status: draft
+status: published
 requires:
 - kac-moody-algebras-from-generalized-cartan-matrices
 - tensor-products-of-modules

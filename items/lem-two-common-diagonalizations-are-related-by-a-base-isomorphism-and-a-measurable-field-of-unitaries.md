@@ -2,7 +2,7 @@
 id: lem-two-common-diagonalizations-are-related-by-a-base-isomorphism-and-a-measurable-field-of-unitaries
 kind: lemma
 title: "Two common diagonalizations differ by a bimeasurable base isomorphism and a measurable field of unitaries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -57,6 +57,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part III, §1.6.1–1.6.4, printed pp. 251–253: outlines measurable direct integrals and decomposable fields, explicitly referring elsewhere for technical details; it does not prove the base-isomorphism or Radon–Nikodym steps supplied locally here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

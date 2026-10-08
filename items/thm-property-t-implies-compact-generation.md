@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: thm-property-t-implies-compact-generation
 kind: theorem
 title: Property (T) implies compact generation
@@ -30,6 +30,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC for the set-indexed Hilbert direct sum of quasi-regular representations. The subgroup family is a subset of P(G); compactness gives finite subcovers, and the remaining subgroup and coset choices are finite, so no additional choice is used."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

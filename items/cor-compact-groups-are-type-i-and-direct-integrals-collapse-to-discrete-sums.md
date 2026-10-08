@@ -2,7 +2,7 @@
 id: cor-compact-groups-are-type-i-and-direct-integrals-collapse-to-discrete-sums
 kind: corollary
 title: "Compact groups are type I and their direct integrals collapse to discrete Hilbert sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -30,6 +30,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1, \u00a71.G, printed p.59; Remark 6.A.13(3), printed p.179; Proposition 6.B.14, printed pp.186\u2013187."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

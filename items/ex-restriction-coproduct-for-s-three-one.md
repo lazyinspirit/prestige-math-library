@@ -2,7 +2,7 @@
 id: ex-restriction-coproduct-for-s-three-one
 kind: example
 title: "The restriction coproduct of the character $\\chi^{(3,1)}$ of $S_4$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 3
@@ -31,6 +31,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

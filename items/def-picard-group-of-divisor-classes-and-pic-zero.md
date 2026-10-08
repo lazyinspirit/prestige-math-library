@@ -2,7 +2,7 @@
 id: def-picard-group-of-divisor-classes-and-pic-zero
 kind: definition
 title: The Picard group of divisor classes and its degree-zero part
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 11
@@ -27,6 +27,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 14, Theorem 14.1 and Corollary 14.4, printed pp. 119–120: O(D) and every line bundle being O(D); Ch. 15, ‘The Picard group,’ printed pp. 128–129: the divisor quotient and matching degree"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

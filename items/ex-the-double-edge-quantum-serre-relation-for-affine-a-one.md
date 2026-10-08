@@ -2,7 +2,7 @@
 id: ex-the-double-edge-quantum-serre-relation-for-affine-a-one
 kind: example
 title: "The double-edge Serre relation for the cyclic affine type $A_1^{(1)}$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ aliases: []
 dependency_level: 5
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

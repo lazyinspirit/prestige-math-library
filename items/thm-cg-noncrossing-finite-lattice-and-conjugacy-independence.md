@@ -2,7 +2,7 @@
 id: thm-cg-noncrossing-finite-lattice-and-conjugacy-independence
 kind: theorem
 title: "Finite noncrossing intervals are lattices, independently of the Coxeter element"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 22
@@ -37,11 +37,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "T. Brady and C. Watt, Lattices in Finite Real Reflection Groups, Transactions of the American Mathematical Society 360 (2008), 4809–4844, arXiv:math/0501502"
@@ -53,6 +48,8 @@ sources:
     - title: "H. Eriksson and K. Eriksson, Conjugacy of Coxeter Elements, Electronic Journal of Combinatorics 16(2) (2009), #R4"
       url: "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v16i2r4/pdf/"
       locator: "Introduction, Theorem 1.1, and §2 Proposition 2.3: conjugacy among Coxeter elements and the tree source/sink firing result used by the local supplier lemma. The complete 7-page article was read."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement
@@ -126,7 +123,3 @@ Now $P_\sigma\subseteq P_a\cap P_b$ by transitivity. Conversely, each $\alpha\in
 3.1 (Conjugacy and independence of $c$.) For any finite-type $W$ and Coxeter elements $c,c'$, [F11] gives $c'=wcw^{-1}$ for some $w\in W$. Conjugation maps $T$ bijectively to itself, so it preserves $\ell_T$ and $\le_T$; its inverse is conjugation by $w^{-1}$. Hence it is an order isomorphism of the two intervals. Also $\rho(wxw^{-1})-\mathrm{id}=\rho(w)(\rho(x)-\mathrm{id})\rho(w)^{-1}$, so $M(wxw^{-1})=\rho(w)M(x)$. An order isomorphism preserves greatest lower bounds and least upper bounds by their defining universal properties, and therefore is a lattice isomorphism once the bipartite interval is known to be a lattice. This proves (4) and transfers (1)–(2) to every Coxeter element in the connected case. [F1, F11, step 2.1, algebra]
 
 4.1 (Reducible systems.) If $S=\emptyset$, then $W=\{1\}$, the interval and the empty product are both one-element lattices. Otherwise use the component decomposition and interval identity [F6]. Each $W_{S_i}$ is a connected finite-type Coxeter group, so its noncrossing interval is a finite lattice by steps 1.1–1.3, 2.1, and 3.1. Componentwise meets and joins make the finite product a lattice. This proves (3) and completes the theorem. [F1, F6, step 1.1, step 1.2, step 1.3, step 2.1, step 3.1, algebra] ∎
-
-## Remarks
-
-- **Open supplier obligations.** This consumer is thm-cg-noncrossing-finite-lattice-and-conjugacy-independence. The direct in-run suppliers whose current Step-3 dispositions remain open, and their uses, are: def-cg-bipartite-coxeter-element-and-root-recursion (designated bipartite element in Statement and proof step 1.3); def-hh-coxeter-matrix-word-group-and-length (rank-one presentation in step 1.1 and the $m(s,t)=3$ relation in [F9]); thm-cg-root-sign-and-simple-reflection-positivity (the rank-one positive-root convention in step 1.1 and the norm/sign input in [F10]); lem-cg-steinberg-bipartite-root-enumeration (positive-root enumeration/global order in Statement and [F3]); def-cg-brady-watt-ordered-spherical-root-complex (root-complex, subcomplex, cone, and realization conventions in Statement and step 1.3); lem-cg-ordered-root-complex-is-geometric-simplicial (face/product criterion and independent face vertices in [F3] and step 1.3); thm-cg-root-complex-convex-cones-and-facet-induction (positive-root cone descriptions in [F4] and step 1.3); lem-cg-ordered-root-pairings-and-simple-systems ($P_\sigma$ as positive roots spanning $M(\sigma)$ and root-reflection inclusion in [F2]–[F3], steps 1.2–1.3); def-cg-real-coxeter-form-and-reflection (the m(s,t)=3 form value in [F9] and simple-root norms in [F10]); def-cg-canonical-reflection-homomorphism (the rank-two representation in [F9], rank-one reflecting involution in [F7], simple-root reflections in [F10], and moved-space conjugation formula in step 3.1); def-cg-reflection-length-absolute-order-and-moved-space and thm-cg-carter-reflection-length-and-absolute-order (reflection length, absolute order, and moved-space rigidity in [F1], steps 1.2–2.1); and def-cg-coxeter-diagram-components-and-finite-type and lem-cg-diagram-products-and-invariant-form-comparison (component decomposition in Statement and step 4.1). These suppliers have no closed current Step-3 dispositions; reconcile each completed statement with these uses and keep A5 escalated until those decisions and uses are closed. The assigned predecessors are authored but remain unresolved suppliers for this consumer: A1 supplies the once-each Coxeter-element and interval conventions in Statement and the component interval in [F6]/step 4.1; A2 supplies the moved-space identity in [F7]/step 1.1; A3 supplies the common-face cone identity and purity in [F4]/step 1.3; A4 supplies conjugacy in Statement (4)/step 3.1. Their open upstream uses are recorded in the preceding item checkpoints; keep A5 escalated until those supplier proofs and these actual uses are reconciled.

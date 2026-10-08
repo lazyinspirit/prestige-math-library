@@ -2,7 +2,7 @@
 id: lem-hh-commuting-left-right-hecke-length-operators
 kind: lemma
 title: "The commuting left and right length operators and their Hecke relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 5
@@ -20,6 +20,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0108172"
       locator: "Proposition 1.10 with its proof, PDF p. 5: l(swt)=l(w) and l(sw)=l(wt) imply sw=wt, via the exchange statement 1.7"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

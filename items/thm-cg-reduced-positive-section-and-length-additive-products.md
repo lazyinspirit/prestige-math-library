@@ -2,7 +2,7 @@
 id: thm-cg-reduced-positive-section-and-length-additive-products
 kind: theorem
 title: "The reduced positive section b_w, its length additivity, and the degree homomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 5
@@ -22,6 +22,7 @@ sources:
     - title: "Michael W. Davis, The Geometry and Topology of Coxeter Groups (Princeton University Press 2008; author's complete PDF)"
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

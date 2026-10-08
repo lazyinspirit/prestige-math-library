@@ -2,7 +2,7 @@
 id: cex-cg-artin-positive-lift-is-not-a-homomorphism
 kind: counterexample
 title: "The positive lift b_w is not a monoid homomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 6
@@ -22,6 +22,7 @@ sources:
     - title: "George Lusztig, Hecke Algebras with Unequal Parameters (revised book text, arXiv:math/0208154v2)"
       url: "https://arxiv.org/pdf/math/0208154"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

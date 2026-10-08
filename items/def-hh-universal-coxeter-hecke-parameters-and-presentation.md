@@ -2,7 +2,7 @@
 id: def-hh-universal-coxeter-hecke-parameters-and-presentation
 kind: definition
 title: "Universal parameters, the generic Coxeter Hecke algebra and generator conjugacy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -24,6 +24,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 6.1 'Review of background material', printed pp. 174-175 (PDF pp. 182-183): the Hecke algebra over Z[q^{1/2},q^{-1/2}] and the multiplication rule T_sT_w = qT_sw + (q-1)T_w for sw < w"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

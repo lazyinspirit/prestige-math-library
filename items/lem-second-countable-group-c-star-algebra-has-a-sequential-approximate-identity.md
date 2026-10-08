@@ -2,7 +2,7 @@
 id: lem-second-countable-group-c-star-algebra-has-a-sequential-approximate-identity
 kind: lemma
 title: "A sequential approximate identity concentrated near the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -41,6 +41,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part II, §II.4.1.1–II.4.1.4, printed pp. 85–86 (PDF pp. 93–94): general C*-approximate units and sequentialization for separable algebras with a dense ideal. This is general background; the normalized group kernels, support concentration, and representation convergence are proved locally here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

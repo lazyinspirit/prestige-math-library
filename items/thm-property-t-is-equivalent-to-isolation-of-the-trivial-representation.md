@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: thm-property-t-is-equivalent-to-isolation-of-the-trivial-representation
 kind: theorem
 title: Property (T) and isolation of the trivial representation in the Fell dual
@@ -41,6 +41,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It supplies the set-based unitary dual and Fell construction, representatives and Hilbert direct sums, the general C*-algebra separation lemma, and the LCH weak-containment-to-almost-invariant-vector interface. AC implies Countable Choice for the Hilbert-adjoint interface used by nondegenerate star-representations. No separability, weak-star density, or choice from a proper class of representations is used."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

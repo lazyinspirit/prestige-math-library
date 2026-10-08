@@ -2,7 +2,7 @@
 id: lem-cg-polygon-midpoint-drop-and-equality
 kind: lemma
 title: "Existence of the uniform radius, continuity of the midpoint operation, the energy drop, its equality case, and convergence of zero-limit polygons"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 11
@@ -23,6 +23,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2.15–I.2.16, printed pp. 504–505 (the CAT(0) hinged inequality and local geodesics)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

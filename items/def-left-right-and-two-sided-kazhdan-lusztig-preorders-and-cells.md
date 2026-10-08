@@ -2,7 +2,7 @@
 id: def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells
 kind: definition
 title: "$L$-, $R$- and two-sided Kazhdan–Lusztig preorders and cells"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [thm-kazhdan-lusztig-basis-multiplication-formula, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, lem-reversal-anti-involution-commutes-with-hecke-bar, def-normalized-type-a-hecke-algebra-and-its-bar-involution]
@@ -25,6 +25,7 @@ sources:
       url: "https://d-nb.info/1162953020/34"
       locator: "§§5.0–5.1, pp. 44–56; §5.3, pp. 58–62."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

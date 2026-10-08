@@ -2,7 +2,7 @@
 id: cor-picard-zero-is-the-jacobian
 kind: corollary
 title: Picard zero is the Jacobian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 25
@@ -32,6 +32,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 15, Theorem 15.4 and Corollary 15.9: $\\operatorname{Jac}(X)\\cong\\operatorname{Pic}^0(X)=\\operatorname{Div}^0(X)/(\\mathcal M^*(X))$, printed pp. 129-130."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

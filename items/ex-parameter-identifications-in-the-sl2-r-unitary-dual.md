@@ -2,7 +2,7 @@
 id: ex-parameter-identifications-in-the-sl2-r-unitary-dual
 kind: example
 title: Parameter identifications in the SL2(R) unitary dual
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -24,6 +24,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is assumed and inherited through the Iwasawa, compact-picture, K-type, and unitary-model suppliers. The parameter comparisons use the supplied Casimir and K-type data without additional choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

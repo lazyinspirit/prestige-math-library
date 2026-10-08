@@ -2,7 +2,7 @@
 id: lem-point-divisor-exact-sequence-and-euler-characteristic-step
 kind: lemma
 title: The point-divisor exact sequence and the Euler-characteristic step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -27,6 +27,7 @@ deps:
   - thm-long-exact-sequence-sheaf-cohomology
 dependency_level: 10
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

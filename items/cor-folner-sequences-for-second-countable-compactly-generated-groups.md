@@ -2,7 +2,7 @@
 id: cor-folner-sequences-for-second-countable-compactly-generated-groups
 kind: corollary
 title: Folner sequences for second countable compactly generated groups
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 proof_strategy: direct
@@ -36,6 +36,8 @@ sources:
     - title: "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 19: Reiter's Property and the Folner Condition (University of Sydney Honours lecture notes, 9 October 2012)"
       url: "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf"
       locator: "Theorem (Folner, Greenleaf), PDF p. 3: G admits an invariant mean if and only if G satisfies the Folner Condition; closing remark, PDF p. 17: it is enough to consider compact sets containing e"
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: finite-lattice-projections-and-coxeter-chain-labels
 title: "Finite Lattice Projections and Coxeter Chain Labels"
-status: draft
+status: published
 items: [def-cg-finite-lattice-congruence-and-interval-projections, lem-cg-lattice-quotient-descent-and-class-intervals, lem-cg-lexicographic-chain-shelling-and-mobius-cancellation, thm-cg-finite-lattice-interval-congruence-criterion]
 examples: []
 ---

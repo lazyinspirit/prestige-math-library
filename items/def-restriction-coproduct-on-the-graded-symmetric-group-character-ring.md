@@ -2,7 +2,7 @@
 id: def-restriction-coproduct-on-the-graded-symmetric-group-character-ring
 kind: definition
 title: "The restriction coproduct on the graded symmetric-group character ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 1
@@ -25,6 +25,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

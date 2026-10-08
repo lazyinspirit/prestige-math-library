@@ -2,7 +2,7 @@
 id: lem-inverse-of-a-quasiconformal-map-is-quasiconformal
 kind: lemma
 title: The inverse of a quasiconformal map is quasiconformal with the same dilatation
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 6
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 2 §1, printed pp. 49–51: the real-linear inverse dilatation and the Beltrami chain identity, specialized to $g=f^{-1}$."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-round-circles-are-conformally-removable
 kind: lemma
 title: Round circles and straight lines are conformally removable
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -24,6 +24,7 @@ deps:
 axiom_use: Assume the Axiom of Choice to use the analytic ACL/Sobolev convention, the 1-quasiconformal/conformal theorem, and the smooth-line gluing theorem. Countable Choice is used inside those interfaces and follows from AC by [[thm-choice-implies-dependent-implies-countable-choice]]. The Möbius and subset arguments use no choice.
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

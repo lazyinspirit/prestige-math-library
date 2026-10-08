@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: thm-sl-n-r-has-property-t-for-n-at-least-three
 kind: theorem
 title: SLn(R) has property (T) for n at least three
@@ -43,6 +43,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It supports the set-sized coefficient/GNS/PVM/probability-subsequence steps in the relative-(T) supplier, set-sized coefficient selection and Hilbert decomposition in the normal-relative supplier, and ACω required by the embedded Lie-group interface. Through AC it supplies Countable Choice for the least-norm supplier. The bounded-generation pivot choices use least available indices, and no choice is made from a proper class."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

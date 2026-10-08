@@ -2,7 +2,7 @@
 id: def-cg-cat-zero-cat-one-and-local-geodesic
 kind: definition
 title: "Comparison triangles, the CAT(0) and CAT(1) inequalities, local CAT, local geodesics and round circles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 8
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2, printed pp. 501–507 (the CAT(0) inequality, local geodesics, the truncated cone metric); Appendix I.3, printed pp. 507–510 (links, the CAT(1) circle of circumference 2π+δ)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

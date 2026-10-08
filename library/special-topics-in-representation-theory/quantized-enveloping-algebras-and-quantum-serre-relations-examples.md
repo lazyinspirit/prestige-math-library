@@ -1,7 +1,7 @@
 ---
 page: quantized-enveloping-algebras-and-quantum-serre-relations-examples
 title: Quantized Enveloping Algebras and Quantum Serre Relations — Examples
-status: draft
+status: published
 requires:
 - quantized-enveloping-algebras-and-quantum-serre-relations
 items: []

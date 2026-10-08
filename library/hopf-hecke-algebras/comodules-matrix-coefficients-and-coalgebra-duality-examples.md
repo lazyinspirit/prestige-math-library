@@ -1,7 +1,7 @@
 ---
 page: comodules-matrix-coefficients-and-coalgebra-duality-examples
 title: "Comodules, Matrix Coefficients, and Coalgebra Duality — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

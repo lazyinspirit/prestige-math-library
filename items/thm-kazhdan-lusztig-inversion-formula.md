@@ -2,7 +2,7 @@
 id: thm-kazhdan-lusztig-inversion-formula
 kind: theorem
 title: The Kazhdan–Lusztig inversion formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-inverse-kazhdan-lusztig-polynomials, thm-r-polynomial-recursion-and-degree-bounds, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, lem-bruhat-order-basic-properties-for-permutations]
@@ -19,6 +19,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "§10.1–10.2, printed pp. 46–47, and §10.7, printed p. 48; the chain definition, matrix argument, sign convention, and dual-basis calculation were read in full, including a visual check of printed p. 47."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

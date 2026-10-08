@@ -2,7 +2,7 @@
 id: lem-holomorphic-differentials-form-a-g-dimensional-space
 kind: lemma
 title: The space of holomorphic differentials and the degree of the canonical divisor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 14
@@ -36,6 +36,7 @@ sources:
       url: "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf"
       locator: "Ch. 6 §2, printed pp. 54–56: meromorphic differentials, their orders, canonical divisors and the degree convention"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

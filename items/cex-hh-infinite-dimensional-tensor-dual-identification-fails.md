@@ -2,7 +2,7 @@
 id: cex-hh-infinite-dimensional-tensor-dual-identification-fails
 kind: counterexample
 title: "An infinite-dimensional tensor-dual functional outside the image"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -22,6 +22,7 @@ sources:
       url: "https://math.colorado.edu/topology/cringproject.pdf"
       locator: "Example 13.3.17, printed pp. 139–140: the canonical Hom–tensor map is an isomorphism when its first argument is finitely generated and free"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

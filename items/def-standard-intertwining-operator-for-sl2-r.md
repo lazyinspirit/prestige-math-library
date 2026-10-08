@@ -2,7 +2,7 @@
 id: def-standard-intertwining-operator-for-sl2-r
 kind: definition
 title: The standard intertwining operator A(nu)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 4
@@ -53,6 +53,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
       locator: "§9.1, printed pp. 49–50 (the isomorphism P±(s) ≅ P±(−s))"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

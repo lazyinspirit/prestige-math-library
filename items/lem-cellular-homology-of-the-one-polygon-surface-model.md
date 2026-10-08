@@ -2,7 +2,7 @@
 id: lem-cellular-homology-of-the-one-polygon-surface-model
 kind: lemma
 title: Cellular homology of the one-polygon surface model
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 0
@@ -23,6 +23,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

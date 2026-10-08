@@ -2,7 +2,7 @@
 id: lem-cg-finite-poset-linear-extensions-and-connectivity
 kind: lemma
 title: "Linear extensions of a finite poset: existence, prescribed initial ideals, and adjacent-swap connectivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -25,6 +25,7 @@ sources:
       url: "https://www.mat.univie.ac.at/~slc/books/cartfoa.pdf"
       locator: "Chapitre premier, §1 'Rappels sur les monoides libres' and §2, printed pp. 5-7 (generation of equivalence classes)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

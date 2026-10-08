@@ -2,7 +2,7 @@
 id: lem-cg-bruhat-chain-refinement-and-gradedness
 kind: lemma
 title: "Finiteness of Bruhat intervals, the chain refinement property, and grading by length"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -14,6 +14,7 @@ proof_strategy: direct
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

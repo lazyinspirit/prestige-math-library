@@ -1,7 +1,7 @@
 ---
 page: coalgebras-counits-and-the-fundamental-coalgebra-theorem
 title: "Coalgebras, Counits, and the Fundamental Coalgebra Theorem"
-status: draft
+status: published
 items: []
 examples: []
 ---

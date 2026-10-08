@@ -2,7 +2,7 @@
 id: def-direct-integral-of-unitary-representations
 kind: definition
 title: Direct integrals of unitary representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -29,6 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1, §1.G, Definitions 1.G.3–1.G.4 and the paragraph on direct integrals of representations, printed pp. 60–61; the paragraph assumes a second-countable locally compact group for its separate strong-continuity result"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

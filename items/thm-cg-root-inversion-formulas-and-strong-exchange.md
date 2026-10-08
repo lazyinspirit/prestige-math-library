@@ -2,7 +2,7 @@
 id: thm-cg-root-inversion-formulas-and-strong-exchange
 kind: theorem
 title: "The inversion formula $|N(w)|=\\ell(w)$, the root-reflection dictionary and strong exchange"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 11
@@ -21,6 +21,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "S1.3, printed pp. 11-13; S1.4, printed pp. 15-18 (Strong Exchange Theorem 1.4.3, Corollaries 1.4.4-1.4.5); S4.4, printed pp. 101-105 (Lemma 4.4.3, Proposition 4.4.4, Propositions 4.4.5-4.4.6); read in the extracted full text; exercises excluded"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

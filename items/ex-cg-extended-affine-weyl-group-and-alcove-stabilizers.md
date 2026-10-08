@@ -2,7 +2,7 @@
 id: ex-cg-extended-affine-weyl-group-and-alcove-stabilizers
 kind: example
 title: "The extended affine Weyl group and non-trivial alcove stabilizers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 13
@@ -24,6 +24,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

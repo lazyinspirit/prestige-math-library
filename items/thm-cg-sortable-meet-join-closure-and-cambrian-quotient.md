@@ -2,7 +2,7 @@
 id: thm-cg-sortable-meet-join-closure-and-cambrian-quotient
 kind: theorem
 title: Sortable elements form a sublattice and the c-Cambrian quotient is its lattice-homomorphic image
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 28
@@ -51,6 +51,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Chapter 2, Section 2.4, Proposition 2.4.4 and Corollary 2.4.5 on parabolic prefixes (printed pp. 39-41); Chapter 3, Proposition 3.1.3, Proposition 3.1.6, Theorem 3.2.1 and Lemma 3.2.3 on weak order and finite lattices"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

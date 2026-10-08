@@ -2,7 +2,7 @@
 id: lem-monomial-bases-of-bergman-spaces-of-disc-ball-and-polydisc
 kind: lemma
 title: Monomials form complete orthogonal systems of the Bergman spaces of the disc, the ball and the polydisc
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 4
@@ -45,6 +45,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

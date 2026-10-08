@@ -33,6 +33,7 @@ parts:
       - induced-subgraphs-and-hereditary-graph-classes
       - graph-colouring
       - linear-algebra-methods-in-combinatorics
+      - a-skolem-construction-and-design-prerequisites
       - block-designs-and-finite-projective-planes
       - algebraic-and-spectral-graph-theory
   - part: ramsey-and-extremal

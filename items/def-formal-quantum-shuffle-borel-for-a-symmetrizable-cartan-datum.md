@@ -2,7 +2,7 @@
 id: def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum
 kind: definition
 title: "The formal quantum shuffle Borel and its Cartan crossed product"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -29,6 +29,7 @@ aliases: []
 dependency_level: 3
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

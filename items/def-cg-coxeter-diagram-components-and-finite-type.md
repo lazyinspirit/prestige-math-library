@@ -2,7 +2,7 @@
 id: def-cg-coxeter-diagram-components-and-finite-type
 kind: definition
 title: "Coxeter diagrams: edges, labels, components and finite type"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -20,6 +20,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Printed p. 2 (Coxeter graph definition), p. 3 (classification preview), and Section 5, printed pp. 12-15: the definition of the Coxeter graph (vertices S, an edge when the order m of ss' is > 2, labels omitted for 3, and infinity for infinite order) and the statement that finite irreducible types are A, B, D, E, F, G, H, I"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

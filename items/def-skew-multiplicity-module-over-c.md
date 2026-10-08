@@ -2,7 +2,7 @@
 id: def-skew-multiplicity-module-over-c
 kind: definition
 title: "The skew multiplicity module $K^{\\lambda/\\mu}$ over $\\mathbb C$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 2
@@ -22,6 +22,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

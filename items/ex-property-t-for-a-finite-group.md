@@ -2,7 +2,7 @@
 id: ex-property-t-for-a-finite-group
 kind: example
 title: Property (T) for finite groups via normalized counting measure
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-inner-product-induces-a-norm
@@ -52,6 +52,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It supplies normalized Haar probability and the compact-group Kazhdan-pair theorem; AC also implies Countable Choice for the Hilbert projection interface. The finite counting-measure and finite-sum computations themselves use no choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

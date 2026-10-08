@@ -2,7 +2,7 @@
 id: ex-rsk-left-right-and-two-sided-cells-in-s-three
 kind: example
 title: RSK cells in $S_3$ and $S_4$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, thm-robinson-schensted-correspondence, def-row-insertion-and-bumping-route, def-young-tableau-standard-tableau-and-shape, def-partition-young-diagram-and-conjugate-partition, def-weyl-group-and-length-for-finite-gl-n]
@@ -19,6 +19,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9910117"
       locator: "§2.1, Definition 2.1, Example 2.2, and the recording-tableau discussion (printed pp. 3–4) for the P/Q-symbol conventions; §3.1, Example 3.1 (printed p. 7) for the S3 left-cell fibers; §3.4, Proposition 3.8 and the complete proof of Theorem A (printed pp. 10–11) for the general Q-symbol classification. The displayed S3/S4 insertion outputs are computed locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

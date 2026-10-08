@@ -1,7 +1,7 @@
 ---
 page: bialgebras-convolution-and-antipode-identities-examples
 title: "Bialgebras, Convolution, and Antipode Identities — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

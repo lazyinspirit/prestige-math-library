@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: thm-property-t-is-equivalent-to-the-existence-of-a-kazhdan-pair
 kind: theorem
 title: Property (T) is equivalent to the existence of a compact Kazhdan pair
@@ -31,6 +31,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. Use AC to choose, for each compact Q and positive tolerance, a normalized diagonal coefficient from a nonempty subset of the set of functions C(G) witnessing failure of a Kazhdan pair; then use the canonical GNS construction and the set-indexed Hilbert direct sum. AC implies Countable Choice through the declared theorem, which is used by the orthogonal-decomposition and projection suppliers. No representations or Hilbert spaces are selected from a proper class."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

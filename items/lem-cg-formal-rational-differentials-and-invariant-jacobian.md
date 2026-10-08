@@ -2,7 +2,7 @@
 id: lem-cg-formal-rational-differentials-and-invariant-jacobian
 kind: lemma
 title: "Algebraicity of the coordinates over the invariant field and non-vanishing of the invariant Jacobian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: ["def-cg-coxeter-basic-degrees-and-graded-coinvariants", "lem-cg-complexification-satisfies-reflection-invariant-hypotheses", "def-cg-canonical-reflection-homomorphism", "def-finite-linear-invariant-and-coinvariant-polynomial-algebras", "lem-finite-reflection-invariant-generators-are-algebraically-independent", "lem-reflection-basic-invariants-form-a-regular-sequence", "thm-chevalley-shephard-todd-for-finite-weyl-groups", "def-polynomial-ring-over-a-commutative-ring", "def-multivariate-polynomial-ring-by-iteration", "def-formal-derivative-of-a-polynomial", "prop-formal-derivative-laws", "def-jacobian-matrix-affine-algebraic-set", "def-field-of-fractions", "def-algebraic-and-transcendental-elements", "thm-evaluation-kernel-and-minimal-polynomial", "def-axiom-of-choice", cor-square-matrix-invertible-iff-determinant-is-a-unit]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: "lem-cg-greedy-sorting-word-and-rank-two-alignment"
 kind: "lemma"
 title: "The greedy scan computes the c-sorting word; commutation, conjugation and rank-two alignment"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 17
@@ -34,6 +34,7 @@ sources:
       url: "https://arxiv.org/pdf/0803.2722"
       locator: "sections 2.6-2.7, arXiv PDF pp. 16-17 (commuting Coxeter words and the lexicographically first c-sorting subword with its block sequence); section 3, Lemma 3.3 and Lemma 3.7, arXiv PDF pp. 18-19 (Euler-form conjugation and restriction); section 4, Proposition 4.1 and the following definition of c-alignment, arXiv PDF pp. 22-23"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

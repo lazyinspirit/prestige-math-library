@@ -2,7 +2,7 @@
 id: thm-folner-criterion-for-locally-compact-groups
 kind: theorem
 title: The Følner criterion for locally compact groups
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 proof_strategy: direct
@@ -37,6 +37,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

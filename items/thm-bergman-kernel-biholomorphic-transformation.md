@@ -2,7 +2,7 @@
 id: thm-bergman-kernel-biholomorphic-transformation
 kind: theorem
 title: Transformation law of the Bergman kernel under a biholomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 5
@@ -29,6 +29,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

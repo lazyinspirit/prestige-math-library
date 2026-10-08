@@ -2,7 +2,7 @@
 id: ex-direct-integral-of-characters-for-the-regular-representation-of-r
 kind: example
 title: "The regular representation of the real line as a multiplicity-one integral of characters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -70,6 +70,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part II §§II.10.2.7–II.10.2.9, printed pp. 211–212: the abelian Fourier–Plancherel C*-algebra model and the second-countability criterion; Part III §§III.1.6.1–III.1.6.4, printed pp. 252–254: direct-integral and decomposable-field context. These passages do not supply the local Fourier-sign computation."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-snowflake-quasicircle
 kind: example
 title: "The Koch snowflake is a non-rectifiable quasicircle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -49,6 +49,7 @@ sources:
       url: "https://ghomi.math.gatech.edu/Classes/Math497C/LectureNotes1.pdf"
       locator: "Exercise 9: the Koch-side polygonal construction and the hint that its approximants have lengths tending to infinity. The exercise is not used as a proof; the retained-vertex polygonal-sum argument is given in Proof 1.2."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

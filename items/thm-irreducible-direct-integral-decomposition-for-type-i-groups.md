@@ -36,12 +36,13 @@ sources:
   - title: 'Bruce Blackadar, Operator Algebras: Theory of C*-Algebras and von Neumann Algebras (author-hosted complete text)'
     url: https://bruceblackadar.com/Mathematics/Cycr.pdf
     locator: 'Part IV, §1.5: IV.1.5.12 (type I groups have standard dual) and IV.1.5.7, printed pp. 359-361'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
 axiom_use: AC is assumed and inherited from central decomposition, measurable splitting, class coding and conditional kernels. The additional choices are countable generating algebras, conull class/intertwiner selectors, ideal dense sequences and frame choices. No representative of every dual class is chosen. Null supports are extended by zero; zero total space uses zero measure. Conditional multiplicity spaces are nonzero because their first constant coordinate has norm one; finite and infinite dimensions are treated by measurable frames.
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

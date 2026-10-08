@@ -2,7 +2,7 @@
 id: lem-cg-reflection-representation-descends-and-root-norms
 kind: lemma
 title: "Descent of the reflection representation, unit root norms, and conjugation of reflections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 4
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "\u00a71.3, printed p. 11, and Appendix A.1, printed p. 131: Proposition 1.3(a)\u2013(b) and the invariance of the form $(\\,,\\,)$ under $\\sigma(w)$"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-cg-finite-coxeter-classification-including-h-and-dihedral
 kind: theorem
 title: "Classification of finite Coxeter systems, including the H and dihedral families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -20,6 +20,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Theorem 5.15 with its two-part proof, printed pp. 13-15: the list A, B, D, E, F, G, H, I; the determinant computations det C(An)=n+1, det C(Bn)=2, det C(Dn)=4, det C(E6)=3, det C(E7)=2, det C(E8)=1, det C(F4)=1, det C(I2(m))=4(1-cos^2(pi/m)), det C(H3)=3-sqrt5, det C(H4)=(7-3sqrt5)/2; and the remark that I2(2)=A1xA1, I2(3)=A2, I2(4)=B2"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

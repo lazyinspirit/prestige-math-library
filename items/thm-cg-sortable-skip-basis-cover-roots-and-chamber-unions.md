@@ -2,7 +2,7 @@
 id: "thm-cg-sortable-skip-basis-cover-roots-and-chamber-unions"
 kind: "theorem"
 title: "Skip bases, cover roots, greatest-sortable projections, and the chamber union of each cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 26
@@ -34,6 +34,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 3.2, pp. 70-75 (the lattice property of weak order); the chamber-cone correspondence is in Reading--Speyer, Theorem 6.3"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

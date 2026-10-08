@@ -2,7 +2,7 @@
 id: def-real-projective-line-and-its-sl2-action
 kind: definition
 title: The real projective line and the action of SL2(R)
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -34,6 +34,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Choice-free. Only finite products, explicit coordinates, and one locally specified vector or point are used. The finite-product clauses of the product topology suppliers are used; their arbitrary-index Choice clauses are not. The countable-choice-dependent general-linear Lie-group example is not used."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

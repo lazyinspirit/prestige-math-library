@@ -2,7 +2,7 @@
 id: lem-positive-area-compact-sets-are-not-conformally-removable
 kind: lemma
 title: Compact sets of positive area are not conformally removable
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -29,6 +29,7 @@ deps:
 axiom_use: Assume the Axiom of Choice for the measurable Riemann mapping theorem and the local one-quasiconformal/conformal interface. Countable Choice is used by the Beltrami, weak-solution, and Borel/Lebesgue interfaces; AC implies it by [[thm-choice-implies-dependent-implies-countable-choice]].
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

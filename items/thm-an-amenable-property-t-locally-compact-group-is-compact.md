@@ -2,7 +2,7 @@
 id: thm-an-amenable-property-t-locally-compact-group-is-compact
 kind: theorem
 title: An amenable locally compact group with property (T) is compact
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-kazhdans-property-t
@@ -22,6 +22,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It is inherited from the Hulanicki-Reiter and weak-containment-to-almost-invariant-vector suppliers and the finite-Haar-volume criterion. No additional choice is used."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

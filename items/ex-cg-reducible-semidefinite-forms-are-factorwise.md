@@ -2,7 +2,7 @@
 id: ex-cg-reducible-semidefinite-forms-are-factorwise
 kind: example
 title: "Reducible positive semidefinite forms: factorwise treatment and the square alcove"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 16
@@ -19,6 +19,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/notes.pdf"
       locator: "Section 6.1, Example 6.1.3 (PDF pp. 33-34, lines 1535-1555) records the polygon angle-sum criterion and identifies the rectangle as the nonobtuse Euclidean polygon case. It is background only: the factorwise semidefinite result and square reflection group below are proved directly, without consuming the polygon-classification claim."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: spherical-parabolic-cosets-and-the-davis-complex
 title: "Spherical Parabolic Cosets and the Davis Complex"
-status: draft
+status: published
 items: [def-cg-spherical-nerve-coset-poset-and-davis-realization, lem-cg-spherical-coset-inclusion-and-intersection, lem-cg-canonical-cell-exposed-faces-and-normal-cones, lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics, thm-cg-davis-complex-cell-incidence-and-stabilizers, lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta, thm-cg-davis-complex-is-simply-connected]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: lem-hh-finite-polynomial-and-localization-constructions
 kind: lemma
 title: "Multivariate polynomial and Laurent rings over commutative rings, domains and fraction fields"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -22,6 +22,7 @@ sources:
       url: "https://math.colorado.edu/topology/cringproject.pdf"
       locator: "§13.1, printed pp. 111–119: Definitions 13.1.2–13.1.4, printed p. 112: localization of modules and rings; Example 13.1.7, printed p. 113: the quotient field of a domain; Remark 13.1.6, printed p. 113 ($\\mathbb Z[X,X^{-1}]$)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: thm-cg-parabolic-intersections-and-coset-factorization
 kind: theorem
 title: "Intersections of standard parabolics, the parabolic root subsystem, and global minimality of coset representatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 12
@@ -22,6 +22,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

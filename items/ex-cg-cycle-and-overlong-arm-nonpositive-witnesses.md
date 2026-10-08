@@ -2,7 +2,7 @@
 id: ex-cg-cycle-and-overlong-arm-nonpositive-witnesses
 kind: example
 title: "A cycle and an overlong arm: explicit non-positive witnesses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 3
@@ -20,6 +20,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix C, Lemma C.2.2 and its proof (printed pp. 435-436): the diagrams in the right-hand column of Table 6.1, including the cycle A_n~ and the three-arm diagram E_8~, are positive semidefinite of corank 1. Lemma C.2.3 (printed p. 436) concerns the distinct path diagrams Z_4 and Z_5, not star-shaped extensions."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -3,7 +3,7 @@ id: thm-quantized-sl-two-string-formulas
 kind: theorem
 title: Divided-power commutation and the simple $U_{q_i}(\mathfrak{sl}_2)$ string
   modules
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ aliases: []
 dependency_level: 8
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

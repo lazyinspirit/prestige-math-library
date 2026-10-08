@@ -2,7 +2,7 @@
 id: def-hh-scalar-and-tensor-conventions
 kind: definition
 title: "Scalars, tensor powers, the empty tensor, opposite algebras and finite sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -18,6 +18,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "§§1–3, printed pp. 1–13: elementary tensors, general tensors as finite sums, and the universal property used to fix the conventions"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

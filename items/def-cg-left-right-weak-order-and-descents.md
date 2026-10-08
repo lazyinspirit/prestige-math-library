@@ -2,7 +2,7 @@
 id: def-cg-left-right-weak-order-and-descents
 kind: definition
 title: "The right and left weak orders, intervals, covers, and meets and joins of subsets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 11
@@ -19,6 +19,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: def-relative-property-t-for-a-pair
 kind: definition
 title: Relative property (T) for a pair and relative Kazhdan pairs
@@ -17,6 +17,7 @@ provenance:
   proof: not-applicable
 axiom_audit: "No choice principle is used."
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: quasisymmetry-welding-and-conformal-removability-examples
 title: 'Quasisymmetry, Welding, and Conformal Removability: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples:
 - ex-quasisymmetric-power-map-on-the-circle

@@ -2,7 +2,7 @@
 id: lem-monomial-irreducibility-criterion
 kind: lemma
 title: "Mackey-Shoda irreducibility criterion for monomial representations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1, §1.F: Theorem 1.F.11 (irreducibility of monomial representations) with its complete proof, Corollary 1.F.13, and Corollary 1.F.15 with proof, printed pp. 54-56. The proof is expanded locally, and the twist operator of the normal-subgroup converse is reconstructed in the transversal model."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

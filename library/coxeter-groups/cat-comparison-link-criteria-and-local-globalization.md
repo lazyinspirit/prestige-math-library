@@ -1,7 +1,7 @@
 ---
 page: cat-comparison-link-criteria-and-local-globalization
 title: "CAT Comparison, Link Criteria, and Local Globalization"
-status: draft
+status: published
 items: [def-cg-cat-zero-cat-one-and-local-geodesic, def-cg-comparison-angle-and-alexandrov-angle, lem-cg-comparison-convexity-and-model-spaces, lem-cg-alexandrov-comparison-triangle-gluing, thm-cg-cone-cat-equivalence-and-polyhedral-link-criterion, lem-cg-local-geodesic-endpoint-stability, lem-cg-local-geodesic-continuation-and-path-space-covering, thm-cg-complete-simply-connected-local-cat-zero-globalization, thm-cg-compact-local-cat-one-short-circle-criterion]
 examples: []
 ---

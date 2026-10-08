@@ -2,7 +2,7 @@
 id: thm-composition-and-inverse-quasiconformal
 kind: theorem
 title: Composition and inversion of quasiconformal maps and their Beltrami coefficients
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 8
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 2 §1, printed pp. 49–51: composition of real-linear dilatations and the Beltrami composition identity."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

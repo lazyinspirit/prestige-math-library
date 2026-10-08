@@ -2,7 +2,7 @@
 id: ex-single-point-conformal-removability
 kind: example
 title: "A single point is conformally removable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -24,6 +24,7 @@ deps:
   - def-chordal-metric-riemann-sphere
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

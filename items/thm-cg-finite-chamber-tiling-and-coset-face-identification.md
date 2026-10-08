@@ -2,7 +2,7 @@
 id: thm-cg-finite-chamber-tiling-and-coset-face-identification
 kind: theorem
 title: "The finite chamber tiling, the face-stabiliser identification, and the spherical Coxeter complex as a triangulation of the sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -21,6 +21,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Section 4 (Proposition 4.6, printed pp. 5-6) and section 5 (Proposition 5.4, Proposition 5.8, printed pp. 6-9); sections 5.10-5.12 (Theorem 5.9, Tits' Lemma 5.11, printed pp. 9-12)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

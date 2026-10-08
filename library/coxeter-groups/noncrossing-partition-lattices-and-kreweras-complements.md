@@ -1,7 +1,7 @@
 ---
 page: noncrossing-partition-lattices-and-kreweras-complements
 title: "Noncrossing Partition Lattices and Kreweras Complements"
-status: draft
+status: published
 requires: [bipartite-coxeter-elements-and-ordered-root-complexes, braided-and-symmetric-monoidal-categories]
 items:
   - def-cg-coxeter-noncrossing-poset-and-kreweras-map

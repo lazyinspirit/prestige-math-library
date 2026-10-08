@@ -2,7 +2,7 @@
 id: lem-borel-relations-admit-conull-borel-uniformizations
 kind: lemma
 title: Conull Borel uniformizations and Borel versions of measured suprema
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -48,6 +48,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Appendix A.C, definition of a standard measure and Theorem A.C.6, printed p. 409 (PDF p. 408): the conull Borel selector is stated, with its proof referred to Mackey–76, Theorem Z.2, Chapter 2, §2.2. The closed-witness, completion-measurability, nested-cover and Borel-version arguments below are local."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

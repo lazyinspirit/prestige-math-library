@@ -2,7 +2,7 @@
 id: ex-hyperelliptic-canonical-divisors
 kind: example
 title: "Canonical divisors on hyperelliptic curves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -37,6 +37,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references: [{"title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)", "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf", "locator": "Ch. 13, Theorem 13.1 and the hyperelliptic canonical-map discussion, printed pp. 108–110: canonical basis, factorization onto a rational normal curve, and hyperplane canonical divisors"}, {"title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81, Springer 1981), translated by Bruce Gilligan", "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf", "locator": "§§17.12–17.15, printed pp. 139–141: canonical degree and hyperelliptic double covers"}, {"title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)", "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf", "locator": "Ch. 5 §2 and Ch. 6 §§3–4, printed pp. 52, 55–56: hyperelliptic Riemann surfaces, canonical divisors, RR and its duality reformulation"}]

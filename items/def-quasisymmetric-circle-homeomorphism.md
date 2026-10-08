@@ -2,7 +2,7 @@
 id: def-quasisymmetric-circle-homeomorphism
 kind: definition
 title: Quasisymmetric homeomorphisms of the line and circle
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -27,6 +27,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

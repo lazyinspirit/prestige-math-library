@@ -1,7 +1,7 @@
 ---
 page: coxeter-presentations-exchange-and-reduced-word-theorems-examples
 title: "Coxeter Presentations, Exchange, and Reduced Word Theorems — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hh-rank-one-reduced-words, ex-hh-finite-dihedral-reduced-words, ex-hh-exchange-deletion-on-a-nonreduced-word, ex-hh-type-a-reduced-words-and-inversions, ex-hh-minimal-representatives-for-s2-in-s3]
 ---

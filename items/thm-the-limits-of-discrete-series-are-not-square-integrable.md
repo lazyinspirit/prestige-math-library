@@ -2,7 +2,7 @@
 id: thm-the-limits-of-discrete-series-are-not-square-integrable
 kind: theorem
 title: The limits of discrete series are not square-integrable
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -19,6 +19,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is assumed and inherited through the principal-series, unitary-limit, and fixed-Haar constructions. The coefficient conjugation and radial divergence argument use no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

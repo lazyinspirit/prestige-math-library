@@ -2,7 +2,7 @@
 id: ex-cg-cambrian-quotient-of-s3-and-two-orientations
 kind: example
 title: "The c-Cambrian quotient of S3 for both orientations: fibers, endpoints and meet/join preservation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 30
@@ -22,6 +22,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

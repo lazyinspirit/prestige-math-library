@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: lem-almost-invariant-vectors-and-positive-type-functions
 kind: lemma
 title: Almost invariant vectors and normalized positive type functions
@@ -26,6 +26,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It selects one almost-invariant unit-vector witness for each compact-set/tolerance pair and is also inherited by the GNS-completion and arbitrary Hilbert direct-sum suppliers. The coefficient estimates and the reverse implication from a given net are choice-free."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

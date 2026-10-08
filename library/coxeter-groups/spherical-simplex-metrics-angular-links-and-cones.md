@@ -1,7 +1,7 @@
 ---
 page: spherical-simplex-metrics-angular-links-and-cones
 title: "Spherical Simplex Metrics, Angular Links, and Cones"
-status: draft
+status: published
 requires: [coxeter-polyhedral-gluings-and-intrinsic-metrics, real-forms-and-reflection-geometry, direct-matrix-factorisations-lu-cholesky-and-qr, simplicial-complexes-and-simplicial-homology, further-trigonometric-identities-and-inverses, hilbert-space-geometry-and-riesz-representation]
 items: [def-cg-spherical-gram-simplex-and-angular-link,
         lem-cg-spherical-simplex-existence-and-link-gram-formula,

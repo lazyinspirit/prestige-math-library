@@ -2,7 +2,7 @@
 id: ex-hh-type-a-reduced-words-and-inversions
 kind: example
 title: "Type-A reduced words and inversion numbers in $S_3$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 6
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Example 6.7.1, printed pp. 92-93: the symmetric group as the Coxeter group of type A_{n-1}"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

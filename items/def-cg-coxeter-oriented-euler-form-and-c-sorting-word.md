@@ -2,7 +2,7 @@
 id: "def-cg-coxeter-oriented-euler-form-and-c-sorting-word"
 kind: "definition"
 title: "Coxeter elements, the oriented Euler form, the skew form, and the periodic word"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 6
@@ -30,6 +30,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Chapter 1, sections 1.1-1.4 (presentations, length, reduced words, exchange)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

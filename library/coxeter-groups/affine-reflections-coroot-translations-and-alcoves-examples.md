@@ -1,7 +1,7 @@
 ---
 page: affine-reflections-coroot-translations-and-alcoves-examples
 title: "Affine Reflections, Coroot Translations, and Alcoves — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-cg-a1-affine-line-alcoves-and-translations

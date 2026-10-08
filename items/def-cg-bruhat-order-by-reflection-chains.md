@@ -2,7 +2,7 @@
 id: def-cg-bruhat-order-by-reflection-chains
 kind: definition
 title: "The Bruhat graph by length-increasing reflection chains, the Bruhat order, inversion symmetry, and reflection parity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 6
@@ -15,6 +15,7 @@ provenance:
   proof: not-applicable
 proof_strategy: definition
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

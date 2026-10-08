@@ -2,7 +2,7 @@
 id: def-normalized-principal-series-i-epsilon-nu
 kind: definition
 title: The normalized principal series I(epsilon, nu)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 1
@@ -24,6 +24,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
       locator: "§9.2, printed p. 50 (the right-covariant smooth models V±(s))"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

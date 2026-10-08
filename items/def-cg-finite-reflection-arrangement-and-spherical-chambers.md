@@ -2,7 +2,7 @@
 id: def-cg-finite-reflection-arrangement-and-spherical-chambers
 kind: definition
 title: "The finite reflection arrangement, its chambers, the spherical chamber complex, and the coset face poset"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -21,6 +21,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Section 5 (Lemma 5.1, Proposition 5.4 with the chamber bijection, printed pp. 6-9)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

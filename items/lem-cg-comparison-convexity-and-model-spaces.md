@@ -2,7 +2,7 @@
 id: lem-cg-comparison-convexity-and-model-spaces
 kind: lemma
 title: "Comparison triangles in the Euclidean plane and the round sphere, model spaces, and CAT(0) and CAT(1) consequences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 9
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2, printed pp. 501–507 (the CAT(0)-inequality, Davis I.2.15 equivalence with the hinged inequality, local geodesics I.2.16, the truncated cone metric I.2.17); Definition I.2.3 (the local curvature convention)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

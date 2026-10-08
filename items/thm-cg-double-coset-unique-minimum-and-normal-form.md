@@ -2,7 +2,7 @@
 id: thm-cg-double-coset-unique-minimum-and-normal-form
 kind: theorem
 title: "Unique minimal double coset representatives and the additive normal form u-d-v"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -18,6 +18,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

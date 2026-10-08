@@ -2,7 +2,7 @@
 id: lem-k-type-eigenvalue-recurrence-for-the-sl2-intertwiner
 kind: lemma
 title: "K-type eigenvalues of A(nu): recurrence, closed form and nonvanishing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 5
@@ -42,6 +42,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
       locator: "§9.1, formulas (4)–(5), printed pp. 48–49, and §9.2 right-P realization, printed p. 50; parameter and left-action conventions are paired locally"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

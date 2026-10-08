@@ -2,7 +2,7 @@
 id: ex-low-degree-riemann-roch-computations
 kind: example
 title: "Low-degree Riemann-Roch computations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -24,6 +24,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

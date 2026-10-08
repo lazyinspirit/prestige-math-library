@@ -2,7 +2,7 @@
 id: thm-serre-duality-compact-riemann-surfaces
 kind: theorem
 title: Serre duality on a compact Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -30,6 +30,7 @@ deps:
   - thm-local-maximum-modulus-principle
   - thm-identity-theorem-holomorphic-functions
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

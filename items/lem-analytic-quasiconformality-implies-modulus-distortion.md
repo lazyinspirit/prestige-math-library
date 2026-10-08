@@ -2,7 +2,7 @@
 id: lem-analytic-quasiconformality-implies-modulus-distortion
 kind: lemma
 title: An analytically quasiconformal homeomorphism distorts quadrilateral moduli by at most K
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 7
@@ -22,6 +22,7 @@ sources:
     - title: "F. W. Gehring and O. Lehto, On the total differentiability of functions of a complex variable"
       locator: "Ann. Acad. Sci. Fenn. Ser. A I Math. 272 (1959), pp. 1–9; The original was not read; the complete local differentiability proof is supplied by the earlier quadrilateral core."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

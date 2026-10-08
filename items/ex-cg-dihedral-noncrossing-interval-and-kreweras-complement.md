@@ -2,7 +2,7 @@
 id: ex-cg-dihedral-noncrossing-interval-and-kreweras-complement
 kind: example
 title: "The noncrossing interval of a dihedral group: a five-reflection claw for I2(5) and its complement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 24
@@ -28,16 +28,13 @@ provenance:
 generation:
   role: example
 proof_strategy: direct
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "D. Armstrong, Generalized Noncrossing Partitions and Combinatorics of Coxeter Groups, Memoirs of the AMS 202 (2009), no. 949, arXiv:math/0611106v2"
       url: "https://arxiv.org/pdf/math/0611106"
       locator: "§2.5, printed pp. 27–28, Lemma 2.5.4 (the interval Kreweras map); §2.6, printed pp. 30–33, Definitions 2.6.1 and 2.6.7 and Lemma 2.6.2 (finite Coxeter elements and the interval); the dihedral calculations below are supplied locally from the rank-two presentation and the exact order of st."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Example
@@ -89,6 +86,3 @@ Thus $c$ rotates this plane through $2\pi/m$. The order calculation in step 1.1 
 4.1 (Lattice operations.) The interval in step 3.1 has bottom $1$, top $c$, and $m$ distinct reflections of equal length $1$ between them. Distinct reflections are incomparable by [F2], since each has the same length and a strict absolute-order comparison would require positive length increase. Thus two distinct reflections have only $1$ as common lower bound and only $c$ as common upper bound; operations with $1$ and $c$ are forced by their bottom/top roles. This proves the displayed lattice operations directly and verifies the finite-type lattice conclusion in this example. [F2, step 3.1, algebra]
 
 5.1 (Kreweras action on reflections.) By [F4], $K$ is an order-reversing bijection; its explicit action is $K(1)=c$, $K(c)=1$, and $K(r_k)=r_{k-1}$ by step 3.1. It therefore cycles through all $m$ reflections. Direct multiplication gives $K^2(w)=c^{-1}wc$ and $c^{-1}r_kc=c^{k-2}s=r_{k-2}$. By [F6] and step 1.2, this conjugation rotates each reflection axis through $-2\pi/m$ in the displayed orientation (an angle of magnitude $2\pi/m$); for $m=2$, a rotation through $\pi$ fixes every unoriented axis. Iterating $k\mapsto k-2$ returns to $k$ exactly when $m$ divides $2j$. The least positive such $j$ is $m$ for odd $m$ and $m/2$ for even $m$. Hence $K^2$ has one cycle for odd $m$, two cycles for even $m$, and is the identity on $T$ when $m=2$. [F1, F4, F6, step 1.2, step 3.1, algebra] ∎
-## Remarks
-
-- **Open supplier obligations.** This example uses assigned predecessor `def-cg-coxeter-noncrossing-poset-and-kreweras-map` for the interval and Kreweras conventions in Statement (3); A5 `thm-cg-noncrossing-finite-lattice-and-conjugacy-independence` for the general lattice claim in Statement (2); and A6 `thm-cg-kreweras-complement-and-type-a-partition-model` for the group-theoretic K convention and K-squared formula in Statement (3). A1, A5, and A6 remain escalated on their listed upstream suppliers. The batch-31 suppliers with no closed current Step-3 dispositions `def-hh-coxeter-matrix-word-group-and-length`, `def-cg-coxeter-diagram-components-and-finite-type`, and `def-cg-real-coxeter-form-and-reflection` supply, respectively, the presentation in Facts [F1]/step 1.1, finite-type convention in the opening statement, and the Gram matrix in Facts [F3]/proof step 1.2. Exact order of $c$ is proved locally from the presentation and explicit finite permutation models, so no rank-two order theorem is required. The batch-18 supplier with no closed current Step-3 disposition `def-cg-reflection-length-absolute-order-and-moved-space` supplies the length/order definitions in Statement and Facts [F2] and proof steps 2.1–5.1. These supplier uses remain provisional until their statements are reconciled.

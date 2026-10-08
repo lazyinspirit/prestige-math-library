@@ -2,7 +2,7 @@
 id: thm-cg-bruhat-lifting-and-cover-criterion
 kind: theorem
 title: "The lifting property in all four descent cases, the cover criterion, reflection deletion, and directedness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -14,6 +14,7 @@ proof_strategy: direct
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

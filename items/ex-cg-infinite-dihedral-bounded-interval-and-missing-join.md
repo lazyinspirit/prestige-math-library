@@ -2,7 +2,7 @@
 id: ex-cg-infinite-dihedral-bounded-interval-and-missing-join
 kind: example
 title: "Infinite dihedral type: lower intervals are chains, but the two atoms have no upper bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 19
@@ -20,6 +20,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

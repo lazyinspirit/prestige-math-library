@@ -2,7 +2,7 @@
 id: cex-orientation-reversing-homeomorphism-is-quasiconformal
 kind: counterexample
 title: An orientation-reversing homeomorphism need not be quasiconformal
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 3
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §12.5, printed p. 188: QC1–QC2 explicitly begin with an orientation-preserving homeomorphism and define QC2 by quasi-invariance of quadrilateral and annulus moduli."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

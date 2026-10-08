@@ -2,7 +2,7 @@
 id: lem-cg-bounded-weak-order-join-construction
 kind: lemma
 title: "Binary meets, meets of arbitrary nonempty subsets, and joins of bounded subsets in weak order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -21,6 +21,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

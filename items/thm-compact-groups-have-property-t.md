@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: thm-compact-groups-have-property-t
 kind: theorem
 title: Compact groups have property (T) by Haar averaging
@@ -39,6 +39,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It is used for the normalized Haar probability and to choose, for each n, a finite subcover together with sample points, forming a sequence of Bochner simple approximants. Compactness gives each finite subcover and finite choice supplies its sample points. The averaging and invariance arguments make no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

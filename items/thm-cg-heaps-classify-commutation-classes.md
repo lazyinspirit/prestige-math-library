@@ -2,7 +2,7 @@
 id: thm-cg-heaps-classify-commutation-classes
 kind: theorem
 title: "Labeled linear extensions of a heap are exactly the words in its commutativity class, and heaps classify commutativity classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -25,6 +25,7 @@ sources:
       url: "https://www.mat.univie.ac.at/~slc/books/cartfoa.pdf"
       locator: "Chapitre premier, §§2-3, printed pp. 6-9 (equivalence classes of words and their canonical decomposition)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-a-topological-invariant-mean-yields-norm-approximately-invariant-densities
 kind: lemma
 title: A topological invariant mean yields norm-approximately invariant densities
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 proof_strategy: direct
@@ -60,6 +60,8 @@ sources:
     - title: "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property (University of Sydney Honours lecture notes, 11 October 2012)"
       url: "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf"
       locator: "Slides 15–17, PDF pp. 15–17: the passages on weak convergence of defects, product-space convexity, norm closure, and uniformity on norm-compact sets; its p. 15 all-means weak-star-density assertion is explicitly not used"
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

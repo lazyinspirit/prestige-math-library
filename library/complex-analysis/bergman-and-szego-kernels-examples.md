@@ -1,7 +1,7 @@
 ---
 page: bergman-and-szego-kernels-examples
 title: "Bergman and Szegő Kernels: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-disc-monomial-bergman-basis-and-reproducing-check,
            ex-ball-monomial-norms-and-model-kernels,

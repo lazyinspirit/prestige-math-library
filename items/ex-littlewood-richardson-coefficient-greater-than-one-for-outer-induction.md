@@ -2,7 +2,7 @@
 id: ex-littlewood-richardson-coefficient-greater-than-one-for-outer-induction
 kind: example
 title: "An outer-induction multiplicity greater than one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 2
@@ -30,6 +30,8 @@ sources:
     - title: "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978"
       url: "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
       locator: "§16 Theorem 16.4, printed pp. 60–64: the outer-product multiplicity rule supplied locally by thm-outer-littlewood-richardson-rule."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

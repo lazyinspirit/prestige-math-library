@@ -2,7 +2,7 @@
 id: def-conformal-welding-of-a-jordan-curve
 kind: definition
 title: The welding homeomorphism of a Jordan curve
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 10
@@ -38,6 +38,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §15.4, printed pp. 212–214: component Riemann maps, transit map, orientation, and two-sided automorphism/Möbius actions; read in full."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-smooth-arcs-and-circles-are-removable-for-quasiconformal-maps
 kind: lemma
 title: Compact subsets of lines and round circles are removable for quasiconformal maps
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 9
@@ -51,6 +51,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 3 §4, printed pp. 94–96, area/Jacobian estimate and derivative energy consequence used through [[lem-quasiconformal-local-jacobian-energy-bound]]. The separate proof of a.e. differentiability on pp. 94–95 has an unresolved maximum argument and is not used here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

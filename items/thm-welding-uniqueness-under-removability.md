@@ -2,7 +2,7 @@
 id: thm-welding-uniqueness-under-removability
 kind: theorem
 title: Welding uniqueness for conformally removable curves
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -38,6 +38,7 @@ sources:
       url: "https://annals.math.princeton.edu/wp-content/uploads/annals-v166-n3-p01.pdf"
       locator: "§1, printed pp. 613–614: the introduction states that the curve-to-welding map is not generally one-to-one and then describes flexible curves sharing a welding. This is a caution against unconditional uniqueness, not evidence for the removable-curve implication proved here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

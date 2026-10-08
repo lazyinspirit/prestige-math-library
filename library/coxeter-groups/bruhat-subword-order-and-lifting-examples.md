@@ -1,7 +1,7 @@
 ---
 page: bruhat-subword-order-and-lifting-examples
 title: "Bruhat Subword Order and Lifting — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-s4-bruhat-versus-weak-comparability, ex-cg-s4-subword-descriptions-agree, ex-cg-s4-lifting-squares, ex-cg-s4-subwords-and-covers]
 ---

@@ -2,7 +2,7 @@
 id: def-cg-coxeter-basic-degrees-and-graded-coinvariants
 kind: definition
 title: "Basic degrees, exponents, and the graded coinvariant algebra of a finite Coxeter system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: ["def-cg-coxeter-diagram-components-and-finite-type", "def-cg-real-coxeter-form-and-reflection", "def-cg-canonical-reflection-homomorphism", "lem-cg-complexification-satisfies-reflection-invariant-hypotheses", "def-finite-linear-invariant-and-coinvariant-polynomial-algebras", "lem-finite-reflection-invariant-generators-are-algebraically-independent", "lem-reflection-basic-invariants-form-a-regular-sequence", "thm-chevalley-shephard-todd-for-finite-weyl-groups", "def-multivariate-polynomial-ring-by-iteration", "def-graded-ring-and-graded-module", "def-axiom-of-choice"]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   precheck: n/a
 sources:
   references:

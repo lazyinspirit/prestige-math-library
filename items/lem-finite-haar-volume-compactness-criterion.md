@@ -2,7 +2,7 @@
 id: lem-finite-haar-volume-compactness-criterion
 kind: lemma
 title: Compactness, finite Haar volume and invariant vectors in the regular representation
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -33,6 +33,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume full AC. The regular-representation and L2-density suppliers use AC (including their DC/CC prerequisites); the proof uses AC to choose a successor for each finite history of disjoint translates. No weaker choice principle is asserted to suffice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

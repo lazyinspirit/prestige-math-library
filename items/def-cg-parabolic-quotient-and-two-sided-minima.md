@@ -2,7 +2,7 @@
 id: def-cg-parabolic-quotient-and-two-sided-minima
 kind: definition
 title: "Standard parabolic subgroups, descent-free one- and two-sided representatives, parabolic and reflection subgroups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 6
@@ -16,6 +16,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

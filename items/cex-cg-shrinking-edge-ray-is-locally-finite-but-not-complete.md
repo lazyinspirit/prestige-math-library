@@ -2,7 +2,7 @@
 id: cex-cg-shrinking-edge-ray-is-locally-finite-but-not-complete
 kind: counterexample
 title: "A locally finite shrinking-edge ray is not complete"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 3
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix A.1, Definition A.1.9 and following local-finiteness paragraph, printed p. 404 (PDF zero-based page 419); Appendix I.3, printed pp. 507-508 (the printed completeness claim whose clause local finiteness is refuted here)"
 verification:
+  audited: "2026-10-08"
   precheck: pending
   judge:
     model: "gpt-6.1-sol"

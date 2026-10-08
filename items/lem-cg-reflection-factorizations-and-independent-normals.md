@@ -2,7 +2,7 @@
 id: lem-cg-reflection-factorizations-and-independent-normals
 kind: lemma
 title: "Root normals inside the moved space, factorizations into reflections, and independent normals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: [cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-cg-canonical-reflection-homomorphism, def-cg-coxeter-diagram-components-and-finite-type, def-cg-finite-reflection-arrangement-and-spherical-chambers, def-cg-real-coxeter-form-and-reflection, def-cg-reflection-length-absolute-order-and-moved-space, def-dimension, def-hh-coxeter-matrix-word-group-and-length, def-linear-basis, def-linear-combination-and-span, def-linear-independence, def-linear-subspace, lem-cg-orthogonal-wall-form-and-subspace-restriction, lem-cg-reflection-form-invariance-and-rank-two-orders, lem-cg-reflection-representation-descends-and-root-norms, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, thm-cg-finite-chamber-tiling-and-coset-face-identification, thm-cg-finite-type-positive-definite-criterion, thm-cg-root-inversion-formulas-and-strong-exchange, thm-cg-root-length-criterion-and-faithfulness, thm-dimension-of-a-linear-subspace]
@@ -23,6 +23,7 @@ sources:
       locator: "Chapter 2, Exercise 2.35 on printed p. 61 (absolute length a-l(w)=min{k: w=t_1...t_k, t_i in T}); Chapter 7, Exercise 2 on printed pp. 234-235"
 dependency_level: 16
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: generic-coxeter-hecke-algebras-and-the-standard-basis-examples
 title: "Generic Coxeter Hecke Algebras and the Standard Basis — Examples"
-status: draft
+status: published
 requires: [generic-coxeter-hecke-algebras-and-the-standard-basis, the-group-algebra-and-representations]
 items: []
 examples: [ex-hh-unequal-parameter-dihedral-consistency,

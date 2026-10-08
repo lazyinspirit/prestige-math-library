@@ -1,7 +1,7 @@
 ---
 page: sortable-projections-and-finite-cambrian-lattices-examples
 title: "Sortable Projections and Finite Cambrian Lattices — Examples"
-status: draft
+status: published
 requires:
   - sortable-projections-and-finite-cambrian-lattices
 items: []

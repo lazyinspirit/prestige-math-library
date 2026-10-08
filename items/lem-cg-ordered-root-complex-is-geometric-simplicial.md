@@ -2,7 +2,7 @@
 id: lem-cg-ordered-root-complex-is-geometric-simplicial
 kind: lemma
 title: "The factorization criterion, linear independence of the faces, and the geometric simplicial structure of X(sigma)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 20
@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0505518"
       locator: "Section 2.5, printed pp. 22-24, for the ambient conventions"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

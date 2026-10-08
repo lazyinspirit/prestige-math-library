@@ -2,7 +2,7 @@
 id: thm-cech-dolbeault-comparison-for-line-bundles-on-compact-surfaces
 kind: theorem
 title: Cech--Dolbeault comparison for holomorphic line bundles on a compact Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 3
@@ -32,6 +32,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pending
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-cg-minimum-nonshrinkable-loop-and-radial-vertex-insertion
 kind: lemma
 title: "Minimum nonshrinkable loops, radial vertex cones, and the excursion of length $\\pi$"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 16
 deps:
@@ -53,6 +53,7 @@ sources:
       url: "https://arxiv.org/pdf/2205.07791"
       locator: "Section 3, Lemma 3.10 and its explicit counterexample to Moussong's Lemma 9.11; retained as a warning only, not as proof support"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

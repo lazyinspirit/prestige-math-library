@@ -2,7 +2,7 @@
 id: "ex-cg-spherical-residues-chamber-quotient-and-finite-versus-infinite"
 kind: example
 title: "Residues, the compact chamber quotient, and the finite Coxeter sphere versus the contractible Davis cell"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 20
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization", "lem-cg-spherical-coset-inclusion-and-intersection", "lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics", "thm-cg-davis-complex-cell-incidence-and-stabilizers", "lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta", "thm-cg-finite-chamber-tiling-and-coset-face-identification", "def-hh-coxeter-matrix-word-group-and-length", "def-barycentric-subdivision-of-an-abstract-simplicial-complex", "def-simplicial-subcomplex-star-closure-and-link", "def-cg-real-coxeter-form-and-reflection", "lem-cg-reflection-form-invariance-and-rank-two-orders", "def-cg-canonical-reflection-homomorphism", "lem-cg-canonical-cell-exposed-faces-and-normal-cones"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

@@ -1,7 +1,7 @@
 ---
 page: kazhdan-lusztig-bases-polynomials-and-cells-examples
 title: "Kazhdan–Lusztig Bases, Polynomials, and Cells — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-kazhdan-lusztig-bases-for-s-two-and-s-three, ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval, ex-rsk-left-right-and-two-sided-cells-in-s-three]
 ---

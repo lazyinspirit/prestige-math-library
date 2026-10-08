@@ -2,7 +2,7 @@
 id: def-knuth-and-dual-knuth-equivalence-for-permutations
 kind: definition
 title: Knuth and dual Knuth equivalence for permutations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-weyl-group-and-length-for-finite-gl-n, def-finite-symmetric-group-and-permutation-notation, def-row-insertion-and-bumping-route]
@@ -24,6 +24,7 @@ sources:
       url: "https://d-nb.info/1162953020/34"
       locator: "§2.2 (pp. 13–14: the Hecke algebra); §5.0–5.1 (pp. 44–56: Definition 5.1, Lemmas 5.2–5.3, Corollaries 5.7, 5.9, 5.11, Theorem 5.12); §5.3 (pp. 58–62: Lemma 5.29, Theorems 5.30–5.32, Corollary 5.33)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

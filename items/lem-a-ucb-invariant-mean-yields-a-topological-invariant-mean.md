@@ -2,7 +2,7 @@
 id: lem-a-ucb-invariant-mean-yields-a-topological-invariant-mean
 kind: lemma
 title: A UCB-invariant mean yields a topological invariant mean
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:
@@ -38,6 +38,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-verma-sign-sum-over-bruhat-intervals
 kind: lemma
 title: Verma's sign identity over Bruhat intervals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [thm-r-polynomial-recursion-and-degree-bounds, lem-bruhat-order-basic-properties-for-permutations]
@@ -19,6 +19,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "§4.8, printed p. 27; the proposition and its complete lowest-degree extraction proof were read. The split case uses L=length."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

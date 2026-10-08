@@ -2,7 +2,7 @@
 id: cex-sl2-r-complementary-series-destroys-property-t
 kind: counterexample
 title: The spherical complementary series destroys property (T) for SL2(R)
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-sl2-r-does-not-have-property-t
@@ -20,6 +20,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC, inherited from the in-run SL2(R) principal/complementary-series and property-(T) suppliers. No further choice is used."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

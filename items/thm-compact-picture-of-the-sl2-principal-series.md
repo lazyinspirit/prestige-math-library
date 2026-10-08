@@ -2,7 +2,7 @@
 id: thm-compact-picture-of-the-sl2-principal-series
 kind: theorem
 title: The compact picture of the SL2(R) principal series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 2
@@ -33,6 +33,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

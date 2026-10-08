@@ -2,7 +2,7 @@
 id: lem-cg-metric-target-length-reparametrization-and-lower-semicontinuity
 kind: lemma
 title: "Length in a metric target: lower semicontinuity and arc-length reparametrization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 3
@@ -17,6 +17,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bridsonhaefligerx.pdf"
       locator: "I.1.18-I.1.20, printed pp. 11-13 (length as the supremum of polygonal sums, the chord bound, invariance under monotone reparametrization, the arclength function, its continuity, the unique unit-speed reparametrization and lower semicontinuity under uniform convergence)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

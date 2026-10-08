@@ -2,7 +2,7 @@
 id: lem-weak-solution-of-a-degree-zero-divisor-and-logarithmic-derivative-identity
 kind: lemma
 title: Weak solutions of a degree-zero divisor and the logarithmic-derivative identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 1
@@ -43,6 +43,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 15, Lemmas 15.10 and 15.12, printed pp. 131-133: smooth solutions of (f)=D and $\\int_X\\frac{df}{f}\\wedge\\omega=2\\pi i\\int_C\\omega$."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

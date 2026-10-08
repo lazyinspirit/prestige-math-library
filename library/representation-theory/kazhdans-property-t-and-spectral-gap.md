@@ -1,7 +1,7 @@
 ---
 page: kazhdans-property-t-and-spectral-gap
 title: "Kazhdan's Property T and Spectral Gap"
-status: draft
+status: published
 requires: [unitary-representations-positive-type-and-gns, group-c-star-algebras-and-the-fell-unitary-dual, amenability-reiter-nets-and-folner-conditions, sl2-r-principal-and-complementary-series]
 items:
   - lem-irreducible-c-star-representations-separate-arbitrary-c-star-algebras

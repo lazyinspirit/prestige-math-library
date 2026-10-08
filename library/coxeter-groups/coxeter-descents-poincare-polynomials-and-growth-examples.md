@@ -1,7 +1,7 @@
 ---
 page: coxeter-descents-poincare-polynomials-and-growth-examples
 title: "Coxeter Descents, Poincaré Polynomials, and Growth — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-classical-poincare-products-by-insertion,
            ex-cg-a2-descent-inclusion-exclusion-and-reciprocity,

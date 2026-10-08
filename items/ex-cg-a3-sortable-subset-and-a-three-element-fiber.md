@@ -2,7 +2,7 @@
 id: ex-cg-a3-sortable-subset-and-a-three-element-fiber
 kind: example
 title: The c-sortable subset of A3 for c = s1s2s3, a three-element fiber, and the upper endpoint map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 30
@@ -24,6 +24,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

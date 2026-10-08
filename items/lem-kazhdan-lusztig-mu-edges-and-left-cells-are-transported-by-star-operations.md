@@ -2,7 +2,7 @@
 id: lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations
 kind: lemma
 title: "$\\mu$-edges and left equivalence are transported by star operations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges, def-star-operations-on-the-symmetric-group, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, thm-kazhdan-lusztig-basis-multiplication-formula, thm-kazhdan-lusztig-polynomial-recursion, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations]
@@ -22,6 +22,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9910117"
       locator: "§3.2, Definition 3.2 and Lemma 3.4, printed pp. 7–8; §3.3, Propositions 3.6–3.7, printed p. 9."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

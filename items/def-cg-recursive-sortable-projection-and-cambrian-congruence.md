@@ -2,7 +2,7 @@
 id: def-cg-recursive-sortable-projection-and-cambrian-congruence
 kind: definition
 title: The sortable projection kernel and the c-Cambrian quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 27
@@ -29,6 +29,7 @@ sources:
     - title: "A. Bjorner and F. Brenti, Combinatorics of Coxeter Groups, Graduate Texts in Mathematics 231, Springer 2005"
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

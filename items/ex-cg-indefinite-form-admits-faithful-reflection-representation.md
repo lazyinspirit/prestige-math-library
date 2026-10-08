@@ -2,7 +2,7 @@
 id: ex-cg-indefinite-form-admits-faithful-reflection-representation
 kind: example
 title: "An indefinite Coxeter form with a faithful canonical reflection representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -23,6 +23,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "S4.2, printed pp. 93-97 (Propositions 4.2.1 and 4.2.5, Theorem 4.2.7); S4.4, printed pp. 101-105 (Definition 4.4.1, Lemma 4.4.3, Proposition 4.4.4); read in the extracted full text; exercises excluded"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

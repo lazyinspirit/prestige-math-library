@@ -1,7 +1,7 @@
 ---
 page: sortable-projections-and-finite-cambrian-lattices
 title: "Sortable Projections and Finite Cambrian Lattices"
-status: draft
+status: published
 requires:
   - coxeter-euler-forms-and-sortable-chamber-cones
   - finite-lattice-projections-and-coxeter-chain-labels

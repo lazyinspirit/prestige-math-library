@@ -2,7 +2,7 @@
 id: cor-local-integrability-beltrami-structures
 kind: corollary
 title: "Local integrability of measurable conformal structures"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-measurable-beltrami-coefficient
@@ -40,6 +40,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 3 §2, printed p. 88, Theorem 2.11: measurable mapping theorem context only; the printed constant has the sign error (k+1)/(k−1), and its proof invokes an unresolved Theorem ??, so it is not used as proof."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

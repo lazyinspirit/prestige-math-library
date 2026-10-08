@@ -1,7 +1,7 @@
 ---
 page: heaps-commutation-classes-and-fully-commutative-elements
 title: "Heaps, Commutation Classes, and Fully Commutative Elements"
-status: draft
+status: published
 items: [def-cg-linear-extension-of-a-finite-poset,
         lem-cg-finite-poset-linear-extensions-and-connectivity,
         def-cg-labeled-word-heap-and-fully-commutative-element,

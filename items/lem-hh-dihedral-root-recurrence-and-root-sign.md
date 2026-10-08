@@ -2,7 +2,7 @@
 id: lem-hh-dihedral-root-recurrence-and-root-sign
 kind: lemma
 title: "The rank-two block computation, exact dihedral orders, the signed reflection action, and ambient reducedness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-hh-coxeter-matrix-word-group-and-length, def-hh-geometric-coxeter-representation-and-roots, def-linear-map, def-linear-basis, def-linear-subspace, def-linear-combination-and-span, def-internal-direct-sum, def-dimension, thm-dimension-of-a-linear-subspace, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-characteristic-polynomial-of-an-operator, thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent, cor-distinct-characteristic-roots-imply-diagonalisability, def-order-in-a-group, def-group, def-group-power, def-roots-of-unity-in-a-field, prop-the-roots-of-unity-in-a-field-form-a-finite-cyclic-group, def-divides-in-z, def-natural-numbers, def-coordinate-column-and-matrix-of-a-linear-map, def-characteristic-polynomial-of-a-matrix, lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients, thm-unique-coordinates-with-respect-to-an-ordered-basis, lem-direct-sum-criterion]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

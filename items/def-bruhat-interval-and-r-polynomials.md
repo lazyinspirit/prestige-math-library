@@ -2,7 +2,7 @@
 id: def-bruhat-interval-and-r-polynomials
 kind: definition
 title: Bruhat intervals and the $R$-coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-the-hecke-bar-involution-is-well-defined, lem-bruhat-order-basic-properties-for-permutations, def-bruhat-order-on-the-symmetric-group]
@@ -24,6 +24,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9910117"
       locator: "§§2.1–2.2 (printed pp. 3–7: RSK, Kazhdan–Lusztig polynomials, and cells, including Lemma 2.7); §§3.1–3.3 (pp. 7–9: Knuth relations, Lemma 3.4, Propositions 3.5–3.7); §3.4 (pp. 10–11: Proposition 3.8 and the complete proof of Theorem A)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
 ---
 

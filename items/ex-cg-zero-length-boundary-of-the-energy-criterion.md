@@ -2,7 +2,7 @@
 id: ex-cg-zero-length-boundary-of-the-energy-criterion
 kind: example
 title: "The zero-length boundary: constant tuples, collapsed edges and the degeneracy of the energy decrement at $L=0$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 16
@@ -21,6 +21,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bridsonhaefligerx.pdf"
       locator: "II.1.4(2)–(3) (degenerate geodesics and midpoint conventions)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

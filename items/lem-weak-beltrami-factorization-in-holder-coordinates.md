@@ -2,7 +2,7 @@
 id: lem-weak-beltrami-factorization-in-holder-coordinates
 kind: lemma
 title: "Weak solutions factor holomorphically in Hölder coordinates"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-mean-value-theorem
@@ -62,6 +62,7 @@ sources:
       url: "https://ems.press/content/serial-article-files/16835"
       locator: "§2.4, printed pp. 1552–1554: differentiation of an autonomous nonlinear Beltrami equation in its gradient variable and comparison with a linear constant-coefficient system; contextual only, not the weak pullback proof here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

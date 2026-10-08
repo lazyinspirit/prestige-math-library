@@ -2,7 +2,7 @@
 id: lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges
 kind: lemma
 title: Star operations are Knuth moves and preserve the relevant cells
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-star-operations-on-the-symmetric-group, thm-kazhdan-lusztig-basis-multiplication-formula, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, thm-knuth-equivalence-classes-are-insertion-tableau-fibers, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations]
@@ -25,6 +25,7 @@ sources:
       url: "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf"
       locator: "§6, equations (6.6)–(6.7), Theorem 6 and its canonical-row-word proof, printed pp. 722–724."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

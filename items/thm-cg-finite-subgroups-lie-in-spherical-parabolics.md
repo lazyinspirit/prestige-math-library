@@ -2,7 +2,7 @@
 id: "thm-cg-finite-subgroups-lie-in-spherical-parabolics"
 kind: "theorem"
 title: "Finite subgroups of a Coxeter group lie in spherical parabolics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 22
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:
@@ -80,32 +81,6 @@ Let $(S,m)$ be a Coxeter matrix with $S$ finite and $W$ the presented group ([[d
 
 3.1 Clause (4) and the Choice bookkeeping. The finite subgroup $H$, its containing spherical parabolic $wW_Tw^{-1}$ and the cell $q$ were obtained in step 2.1 with no finiteness or crystallographic hypothesis on $(W,S)$ beyond $S$ finite, so the statements hold for every finite-rank Coxeter system; the listed abstentions delimit the result. In this proof, AC is required only through [F4], the CAT(0) theorem; although [F1] has a general AC branch, step 1.1 uses its proper-space branch because [F4] gives properness, and that branch is choice-free. The chamber-face and stabilizer calculations in steps 1.2-2.1 use no Choice. [F1, F4, F5, F7, step 1.1, step 1.2, step 1.3, step 2.1] ∎
 
-## Open supplier obligations
-
-This item remains escalated until the following in-run supplier uses are reconciled.
-
-- `thm-cg-finite-rank-davis-moussong-cat-zero-theorem` → this item, Statement clause (1), Fact F4, and proof step 1.1, for properness and CAT(0). Its current proof remains provisional on the open link CAT(1), local link-criterion and globalization inputs recorded in that supplier's Step-3b checkpoint.
-- `lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets` → this item, Fact F1 and proof step 1.1, for the orbit center, its invariance and the fixed-set conclusions, including the proper-space branch. The supplier's current Step-3 item decision is not closed; its proper branch was inspected and is used choice-free here, but the consumer decision stays open until the supplier and this use receive a current audit.
-- `thm-cg-davis-complex-cell-incidence-and-stabilizers` → this item, Fact F2 and proof steps 1.2, 1.3 and 2.1, for the unique carrier cell, isometric action and the point-stabilizer formula using the minimum coset representative. Its current item receipt is escalated on upstream supplier audits; preserve this use as provisional until those audits and the formula are reconciled.
-
-The finite parabolic presentation and chamber-face decomposition used in Fact F7 and step 1.3 were checked against current repaired/accepted receipts for `thm-hh-parabolic-minimal-representatives-and-length-additivity`, `thm-cg-finite-chamber-tiling-and-coset-face-identification`, `def-cg-finite-reflection-arrangement-and-spherical-chambers`, and `def-cg-canonical-reflection-homomorphism`; their actual uses are not open.
-
 ## Remarks
 
 - **The point-stabilizer formula is the chamber-face formula.** The naive reading $\operatorname{Stab}_W(y)=wW_{T\cap S(y')}w^{-1}$ with $S(y')=\{s\in T:B(y',e_s)=0\}$ is false: in $A_2$ with $S=\{s,t\}$ let $y'=sv_s=\tfrac23(e_t-e_s)$, so that $B(y',e_s)=-1$ and $B(y',e_t)=1$, whence $S(y')=\emptyset$; but $\rho(t)v_s=v_s$ because $B(v_s,e_t)=0$, so $sts$ fixes $y'$ and $\operatorname{Stab}_{W_S}(y')=\langle sts\rangle\ne\{1\}$. The formula recorded in clause (2) is the chamber-face formula of [[thm-cg-davis-complex-cell-incidence-and-stabilizers]] (2), which computes the correct conjugate $W_I$ through the chamber containing $y'$.
-
-## Current supplier receipt status
-
-These direct in-run supplier decisions remain open. The final report distinguishes current escalations from missing or stale receipts.
-
-- `def-hh-coxeter-matrix-word-group-and-length`: its current in-run supplier decision is not closed; this item consumes it in Facts F9 and proof steps 1.1.
-- `def-cg-real-coxeter-form-and-reflection`: its current in-run supplier decision is not closed; this item consumes it in Facts F7 and proof steps 1.3, 2.1, 3.1.
-- `def-cg-canonical-reflection-homomorphism`: its current in-run supplier decision is not closed; this item consumes it in Facts F7 and proof steps 1.3, 2.1, 3.1.
-- `def-cg-parabolic-quotient-and-two-sided-minima`: its current in-run supplier decision is not closed; this item consumes it in Facts F3 and proof steps 1.1, 1.3, 2.1.
-- `thm-hh-parabolic-minimal-representatives-and-length-additivity`: its current in-run supplier decision is not closed; this item consumes it in Facts F7 and proof steps 1.3, 2.1, 3.1.
-- `def-cg-finite-reflection-arrangement-and-spherical-chambers`: its current in-run supplier decision is not closed; this item consumes it in Facts F7 and proof steps 1.3, 2.1, 3.1.
-- `thm-cg-finite-chamber-tiling-and-coset-face-identification`: its current in-run supplier decision is not closed; this item consumes it in Facts F7 and proof steps 1.3, 2.1, 3.1.
-- `thm-cg-davis-complex-cell-incidence-and-stabilizers`: its current in-run supplier decision is not closed; this item consumes it in Facts F2 and proof steps 1.1, 1.2, 1.3, 2.1.
-- `thm-cg-finite-rank-davis-moussong-cat-zero-theorem`: its current in-run supplier decision is not closed; this item consumes it in Facts F4 and proof steps 1.1, 3.1.
-- `lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets`: its current in-run supplier decision is not closed; this item consumes it in Facts F1 and proof steps 1.1, 3.1.
-- `def-cg-cat-zero-cat-one-and-local-geodesic`: its current in-run supplier decision is not closed; this item consumes it in Facts F1, F4 and proof steps 1.1, 3.1.

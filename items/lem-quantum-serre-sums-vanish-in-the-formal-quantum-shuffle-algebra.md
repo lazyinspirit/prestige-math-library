@@ -3,7 +3,7 @@ id: lem-quantum-serre-sums-vanish-in-the-formal-quantum-shuffle-algebra
 kind: lemma
 title: The quantum Serre sums vanish in the shuffle algebra, and the opposite Serre
   ideal annihilates the shuffle half
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 dependency_level: 4
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

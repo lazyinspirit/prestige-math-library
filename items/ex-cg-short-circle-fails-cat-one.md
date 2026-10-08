@@ -2,7 +2,7 @@
 id: ex-cg-short-circle-fails-cat-one
 kind: example
 title: "A circle of circumference $\\ell<2\\pi$ fails CAT(1)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

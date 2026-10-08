@@ -2,7 +2,7 @@
 id: lem-trace-of-a-holomorphic-one-form-under-a-nonconstant-map-to-the-sphere
 kind: lemma
 title: Trace of a holomorphic differential along a nonconstant map to the sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 14
@@ -50,6 +50,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 15, proof in one direction of Abel's theorem, printed p. 129: the trace differential on P^1 is holomorphic and zero; the local root-of-unity cancellation is also described."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -22,12 +22,13 @@ sources:
   - title: 'Bruce Blackadar, Operator Algebras: Theory of C*-Algebras and von Neumann Algebras (author-hosted complete text)'
     url: https://bruceblackadar.com/Mathematics/Cycr.pdf
     locator: 'Part III, §1.6: III.1.6.4-III.1.6.5 (transport and uniqueness of central decompositions), printed pp. 254-255'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
 axiom_use: AC is inherited from central decomposition and spatialization and supplies the countable dense choice used in the common-null-set argument. Discarding zero fibre strata is permitted by the definition of central decomposition; null total spaces use empty conull bases. The group is second countable, and strong continuity is essential for extending from the countable dense set. The Radon–Nikodym weight affects norms and measure normalization but cancels from intertwining because it is scalar.
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: affine-reflections-coroot-translations-and-alcoves
 title: "Affine Reflections, Coroot Translations, and Alcoves"
-status: draft
+status: published
 items:
   - def-cg-affine-root-hyperplane-reflection-and-alcove
   - lem-cg-affine-reflection-identities-and-local-finiteness

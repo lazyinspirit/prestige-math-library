@@ -1,7 +1,7 @@
 ---
 page: hopf-modules-coinvariants-and-the-fundamental-theorem
 title: "Hopf Modules, Coinvariants, and the Fundamental Theorem"
-status: draft
+status: published
 items: []
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: lem-measurable-von-neumann-algebra-fields-have-measurable-commutants-and-centers
 kind: lemma
 title: "Measurable fields of von Neumann algebras have measurable commutants and centers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -42,6 +42,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part III, §III.1.6.1-III.1.6.4, printed pp. 252-254: direct-integral architecture and decomposition theory. The technical measurable constructions are supplied locally; this source explicitly outlines rather than proves them."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

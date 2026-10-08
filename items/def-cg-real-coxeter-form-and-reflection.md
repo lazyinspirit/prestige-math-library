@@ -2,7 +2,7 @@
 id: def-cg-real-coxeter-form-and-reflection
 kind: definition
 title: "The real Coxeter form, its radical, reflections, and form-preserving maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "\u00a71.1, printed p. 10, and Appendix A.1, printed p. 131: the Coxeter matrix convention $m_{s,s}=1$, $m_{s,s'}\\ge2$, and the invariant form $(e_s,e_{s'})=-\\cos\\frac{\\pi}{m_{s,s'}}$"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

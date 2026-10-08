@@ -2,7 +2,7 @@
 id: def-factor-representation-and-primary-representation
 kind: definition
 title: Factor (primary) representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -29,6 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Introduction, printed pp. 12–13 (factoriality as scalar center of π(G)″); Chapter 6, §6.A.b, Definition 6.A.7 and Example 6.A.8, printed pp. 176–177 (factorial/primary terminology and irreducible case); Chapter 7, §7.A, Proposition 7.A.1, printed pp. 213–214 (ICC regular factor); Appendix A.E, Definition A.E.3, printed p. 412 (ICC); Appendix A.K, Definition A.K.2, printed p. 422 (a von Neumann algebra is a factor exactly when its center is scalar)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

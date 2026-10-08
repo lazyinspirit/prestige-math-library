@@ -2,7 +2,7 @@
 id: "lem-cg-sortable-recursion-output-and-initial-choice-independence"
 kind: "lemma"
 title: "The recursive projection is well defined, sortable-valued, below w, idempotent, descent-detecting and parabolic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 23
@@ -38,6 +38,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Chapter 2, sections 2.4-2.5 (parabolic structure and interval translation)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

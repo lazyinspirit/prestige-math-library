@@ -2,7 +2,7 @@
 id: def-maximal-dbar-operator-and-hilbert-adjoint-on-a-compact-riemann-surface
 kind: definition
 title: "The maximal Dolbeault operator and its Hilbert adjoint on a compact Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 2
@@ -56,6 +56,7 @@ sources:
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 6, printed pp. 65–67: the formal adjoint of d, the Hodge Laplacian, and the energy characterization of harmonic forms"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

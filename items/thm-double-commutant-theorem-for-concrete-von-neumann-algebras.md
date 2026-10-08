@@ -2,7 +2,7 @@
 id: thm-double-commutant-theorem-for-concrete-von-neumann-algebras
 kind: theorem
 title: The double commutant theorem for concrete von Neumann algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -34,6 +34,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Appendix A.K, Theorem A.K.1, printed p. 423 (PDF page 422): states the bicommutant and closure equivalences and the generated-algebra conclusion, referring its proof to Dixmier-von Neumann, Chapter I, §3, no. 4."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-veronese-linear-system-on-the-riemann-sphere
 kind: example
 title: The Veronese linear system on the Riemann sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 provenance:
@@ -22,6 +22,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

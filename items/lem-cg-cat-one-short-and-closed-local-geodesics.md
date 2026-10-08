@@ -2,7 +2,7 @@
 id: lem-cg-cat-one-short-and-closed-local-geodesics
 kind: lemma
 title: "Short local geodesics in a CAT(1) space are geodesics, and closed local geodesics have length at least $2\\pi$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -23,6 +23,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2.15–I.2.16, printed pp. 504–505 (the CAT(0)-inequality I.2.15 and local geodesics I.2.16)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

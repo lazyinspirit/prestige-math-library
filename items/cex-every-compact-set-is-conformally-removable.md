@@ -2,7 +2,7 @@
 id: cex-every-compact-set-is-conformally-removable
 kind: counterexample
 title: Not every compact set is conformally removable
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -56,6 +56,7 @@ sources:
       url: "https://www.acadsci.fi/mathematica/Vol19/bishop.pdf"
       locator: "Theorem 2, printed p. 324, and its construction in §§3–4, printed pp. 330–334: for each gauge h(t)=o(t), the construction yields a non-Möbius sphere homeomorphism conformal off a Jordan curve Γ with Λ_h(Γ)=0. Taking h(t)=t² gives a nonremovable Jordan curve of zero area. Exact original-source existence input under the owner-recorded last-resort authorization; its conformal approximation/filling and limiting-boundary injectivity construction is not reproduced locally. All 16 pages, printed pp. 323–338, read in full; gauge definition printed p. 326."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

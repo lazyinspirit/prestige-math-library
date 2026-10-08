@@ -2,7 +2,7 @@
 id: ex-cg-h3-and-h4-gram-determinants-and-principal-minors
 kind: example
 title: "Gram determinants and principal minors of the non-crystallographic types $H_3$ and $H_4$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -20,6 +20,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Computation of det C(H3) = 3 - sqrt5 and det C(H4) = (7-3sqrt5)/2 from det C(I2(5)) = (5-sqrt5)/2, printed p. 14 (PDF page 14). Michel's C here is the scaled Cartan matrix, so these are det(2C) in this item's cosine-matrix convention."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

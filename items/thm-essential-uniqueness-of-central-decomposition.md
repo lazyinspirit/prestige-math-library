@@ -2,7 +2,7 @@
 id: thm-essential-uniqueness-of-central-decomposition
 kind: theorem
 title: "Essential uniqueness of the central decomposition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -27,6 +27,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part III, §III.1.6.4 (central decomposition and fibre commutant identities; the spatialization and uniqueness proof is local), printed p. 254."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

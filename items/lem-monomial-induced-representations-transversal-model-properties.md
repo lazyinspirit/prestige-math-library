@@ -2,7 +2,7 @@
 id: lem-monomial-induced-representations-transversal-model-properties
 kind: lemma
 title: Matrix-coefficient properties of the transversal model of a monomial representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part II §10.2.11, printed pp. 212–213, briefly mentions the open-subgroup group-C*-algebra embedding by induction and says the construction details are omitted; §§10.3.19–10.3.20, printed pp. 219–220, concern cocycle conjugacy of actions. Context only; neither passage proves the transversal-model lemma."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

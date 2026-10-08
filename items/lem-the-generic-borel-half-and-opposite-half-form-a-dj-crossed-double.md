@@ -2,7 +2,7 @@
 id: lem-the-generic-borel-half-and-opposite-half-form-a-dj-crossed-double
 kind: lemma
 title: The generic quantum halves form a Drinfeld–Jimbo crossed double
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ aliases: []
 dependency_level: 4
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

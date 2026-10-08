@@ -2,7 +2,7 @@
 id: thm-riemann-roch-compact-riemann-surfaces
 kind: theorem
 title: The Riemann-Roch theorem on a compact Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -26,6 +26,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

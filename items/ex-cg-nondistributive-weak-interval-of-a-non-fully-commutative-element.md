@@ -2,7 +2,7 @@
 id: ex-cg-nondistributive-weak-interval-of-a-non-fully-commutative-element
 kind: example
 title: "The right weak interval below the longest element of $A_2$ is not distributive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -24,6 +24,7 @@ sources:
       url: "https://arxiv.org/pdf/1511.08788"
       locator: "§2.4, Proposition 2.6 condition (h2), PDF p. 6 (the distinct-label alternating chain obstruction in this $A_2$ example)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

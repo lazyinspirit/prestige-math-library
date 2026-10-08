@@ -2,7 +2,7 @@
 id: lem-local-postcomposition-chain-rule-for-w-one-two
 kind: lemma
 title: "A local Sobolev chain rule for C^1 postcomposition"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -33,6 +33,7 @@ sources:
       url: "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
       locator: "Chapter 1 §1.8, Theorem 1.21, printed pp. 19–20: smooth functions are dense in W^{k,p}(Ω) for 1 ≤ p < ∞; this is the approximation input, while the local composition chain rule is proved here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

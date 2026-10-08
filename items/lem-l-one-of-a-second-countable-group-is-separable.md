@@ -2,7 +2,7 @@
 id: lem-l-one-of-a-second-countable-group-is-separable
 kind: lemma
 title: "L1 of a second-countable locally compact group is separable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -64,6 +64,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part II, §10.1.1, printed p. 205, states Radon regularity, finiteness on compact sets, and density of Cc(G) in L1(G); §10.1.3, printed p. 206, again records Cc(G) as dense in L1(G). The countable-density construction is proved locally here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

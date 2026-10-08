@@ -1,7 +1,7 @@
 ---
 page: finite-coxeter-diagrams-and-complete-classification
 title: "Finite Coxeter Diagrams and Complete Classification"
-status: draft
+status: published
 items: [def-cg-coxeter-diagram-components-and-finite-type, lem-cg-positive-definite-diagram-exclusions, lem-cg-diagram-products-and-invariant-form-comparison, thm-cg-finite-type-positive-definite-criterion, thm-cg-finite-coxeter-classification-including-h-and-dihedral]
 examples: []
 ---

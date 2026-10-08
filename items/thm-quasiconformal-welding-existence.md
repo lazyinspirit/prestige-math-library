@@ -2,7 +2,7 @@
 id: thm-quasiconformal-welding-existence
 kind: theorem
 title: Every quasisymmetric circle homeomorphism is a conformal welding
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -43,6 +43,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §15.4, Theorem 15.23 and proof, printed pp. 212–214, equations (15.3)–(15.7): Ahlfors–Beurling extension, measurable conformal structure, MRMT uniformization, independence from the extension, two-sided Möbius action, and recovery of the welding maps. The source uses the inverse boundary convention to this library; the item mirrors the coefficient construction to match [[def-conformal-welding-of-a-jordan-curve]]. The source's broader uniqueness argument for arbitrary weldings is not used. Read in full."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

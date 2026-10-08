@@ -2,7 +2,7 @@
 id: ex-cg-equally-spaced-points-on-a-short-circle-are-stationary
 kind: example
 title: "Equally spaced points on a metric circle: stationary energy and the equality case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 16
@@ -21,6 +21,7 @@ sources:
       url: "https://www.bhbowditch.com/papers/bhb-catone.pdf"
       locator: "§3.3.1–3.3.6, printed pp. 20–23 (stationary polygons and the equality case); §3.1.4–3.1.7 (short closed local geodesics are nonshrinkable)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

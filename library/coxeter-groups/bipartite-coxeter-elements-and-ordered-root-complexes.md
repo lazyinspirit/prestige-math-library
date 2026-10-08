@@ -1,7 +1,7 @@
 ---
 page: bipartite-coxeter-elements-and-ordered-root-complexes
 title: "Bipartite Coxeter Elements and Ordered Root Complexes"
-status: draft
+status: published
 requires: [finite-reflection-length-and-orthogonal-moved-spaces, finite-lattice-projections-and-coxeter-chain-labels, spherical-simplex-metrics-angular-links-and-cones]
 items: [def-cg-bipartite-coxeter-element-and-root-recursion, lem-cg-steinberg-bipartite-root-enumeration, lem-cg-ordered-root-pairings-and-simple-systems, def-cg-brady-watt-ordered-spherical-root-complex, lem-cg-ordered-root-complex-is-geometric-simplicial, thm-cg-root-complex-convex-cones-and-facet-induction]
 examples: []

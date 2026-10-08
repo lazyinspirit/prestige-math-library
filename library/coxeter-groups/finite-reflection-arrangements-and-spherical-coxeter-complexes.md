@@ -1,7 +1,7 @@
 ---
 page: finite-reflection-arrangements-and-spherical-coxeter-complexes
 title: "Finite Reflection Arrangements and Spherical Coxeter Complexes"
-status: draft
+status: published
 items: [def-cg-finite-reflection-arrangement-and-spherical-chambers, thm-cg-finite-chamber-tiling-and-coset-face-identification, thm-cg-finite-parabolic-longest-element-and-opposition]
 examples: []
 ---

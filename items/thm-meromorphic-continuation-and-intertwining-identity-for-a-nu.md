@@ -2,7 +2,7 @@
 id: thm-meromorphic-continuation-and-intertwining-identity-for-a-nu
 kind: theorem
 title: Meromorphic continuation and intertwining identity for A(nu)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 6
@@ -50,6 +50,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§7.4, Proposition 7.4.3(3) (statement p. 294, discussion pp. 301–302) and Exercise 7.4.12 (p. 302): unitary-character equivalence, with construction of the inverse-character intertwiner left as an exercise"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-punctured-disc-versus-finite-annulus-modulus
 kind: example
 title: The punctured disc has infinite conformal parameter, unlike every finite annulus
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 5
@@ -20,6 +20,7 @@ sources:
       url: "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5710-11511_2006_Article_BF02392634.pdf"
       locator: "§§4–5, printed pp. 115 and 119–121: the extremal-length computation for separating annular families and conformal invariance."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

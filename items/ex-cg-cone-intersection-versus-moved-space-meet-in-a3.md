@@ -2,7 +2,7 @@
 id: ex-cg-cone-intersection-versus-moved-space-meet-in-a3
 kind: example
 title: "In A3 the moved spaces meet in a line, while the root complexes have no common nonempty face"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 22
@@ -18,6 +18,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0501502"
       locator: "Section 4 discussion preceding Definition 4.1, printed pp. 9-10: the source's A3 example uses gamma=(1 2 3 4), alpha=(1 3)gamma=(1 2)(3 4), and beta=(2 4)gamma=(1 4)(2 3). That is a comparison example with different gamma and beta; all data for the bipartite model below are recomputed locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

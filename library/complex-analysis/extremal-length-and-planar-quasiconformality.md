@@ -1,7 +1,7 @@
 ---
 page: extremal-length-and-planar-quasiconformality
 title: Extremal Length and Planar Quasiconformality
-status: draft
+status: published
 items:
 - def-acl-sobolev-quasiconformal-homeomorphism
 - def-extremal-length-and-curve-family-modulus

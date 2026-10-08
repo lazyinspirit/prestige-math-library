@@ -1,7 +1,7 @@
 ---
 page: davis-cat-zero-geometry-and-finite-subgroup-fixed-points
 title: "Davis CAT(0) Geometry and Finite Subgroup Fixed Points"
-status: draft
+status: published
 items: [lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets,
         lem-cg-davis-angular-vertex-link-is-metric-flag-nerve,
         thm-cg-finite-rank-davis-moussong-cat-zero-theorem,

@@ -2,7 +2,7 @@
 id: ex-piecewise-affine-approximations
 kind: example
 title: "Piecewise-affine approximation of a measurable coefficient"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-borel-and-lebesgue-measurable-function-on-rn
@@ -38,6 +38,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 3 §§1–2, printed pp. 85–88: affine maps between labelled triangles and the statement of Theorem 2.1; the theorem's printed proof is blank, so the source is context only."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-character-ring-of-a-direct-product-is-the-tensor-product
 kind: lemma
 title: "The character ring of a direct product is the tensor product of the factor character rings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-43-complex-representation-15"
 dependency_level: 0
@@ -26,6 +26,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

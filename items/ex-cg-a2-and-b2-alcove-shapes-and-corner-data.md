@@ -2,7 +2,7 @@
 id: ex-cg-a2-and-b2-alcove-shapes-and-corner-data
 kind: example
 title: "The $A_2$ and $B_2$ fundamental alcoves: coordinates, corner vectors, and facet types"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 13
@@ -20,6 +20,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

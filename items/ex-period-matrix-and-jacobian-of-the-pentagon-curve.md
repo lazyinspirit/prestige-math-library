@@ -2,7 +2,7 @@
 id: ex-period-matrix-and-jacobian-of-the-pentagon-curve
 kind: example
 title: Period matrix and Jacobian of the pentagon curve
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 26
@@ -60,6 +60,7 @@ sources:
       url: "https://zr9558.com/wp-content/uploads/2013/11/complex_analysis-stein-shakarchi.pdf"
       locator: "Ch. 8 §§4.1–4.4, printed pp. 231–245: singular-exponent boundary calculation, Schwarz–Christoffel formula and the distinction between mapping the boundary and proving conformality. The special regular-pentagon formula and its univalence are proved locally here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

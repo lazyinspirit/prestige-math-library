@@ -2,7 +2,7 @@
 id: lem-hh-regular-module-detects-linear-and-tensor-identities
 kind: lemma
 title: "The left regular module and its tensor powers detect linear and tensor identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -22,6 +22,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "Theorem 3.3, printed p. 10, and Remark 4.17, printed p. 19: spanning by elementary tensors and testing equalities of additive maps on them"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

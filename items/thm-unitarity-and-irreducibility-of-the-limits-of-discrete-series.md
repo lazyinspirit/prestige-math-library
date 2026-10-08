@@ -2,7 +2,7 @@
 id: thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series
 kind: theorem
 title: Unitarity and irreducibility of the limits of discrete series
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-limits-of-discrete-series-for-sl2-r
@@ -18,6 +18,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is inherited through the compact-picture unitary representation and compact-group isotypic projections. The ladder and invariant-subspace argument uses no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

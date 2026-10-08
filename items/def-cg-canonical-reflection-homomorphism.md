@@ -2,7 +2,7 @@
 id: def-cg-canonical-reflection-homomorphism
 kind: definition
 title: "The canonical reflection homomorphism, roots, reflections, and the positive cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 3
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "\u00a71.3, printed p. 11: Proposition 1.3(a), the unique homomorphism $\\sigma:W\\to\\mathrm{GL}(E)$ with $\\sigma(s)=\\sigma_s$"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

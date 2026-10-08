@@ -2,7 +2,7 @@
 id: thm-cg-complete-simply-connected-local-cat-zero-globalization
 kind: theorem
 title: "Complete, simply connected, locally CAT(0) length spaces are CAT(0)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 12
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

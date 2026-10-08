@@ -2,7 +2,7 @@
 id: ex-cg-b2-c2-dual-realizations-and-lattices
 kind: example
 title: "The two realizations of $I_2(4)$: $B_2$ and $C_2$ with their lattices and duality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -21,6 +21,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, (2.43) and (2.50), printed pp. 150 and 155, for the standard B2/C2 coordinate root sets; Chapter IV, Section 7, Proposition 4.64, printed p. 267, for index context only (the indices here are calculated locally)."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

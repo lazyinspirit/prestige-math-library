@@ -2,7 +2,7 @@
 id: lem-cg-dual-action-and-chamber-faces-exist
 kind: lemma
 title: "The dual action, the faces, and the rank-two chamber tiling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 6
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "\u00a71.3, printed p. 11: exact order $m$ of $\\sigma_s\\sigma_{s'}$; Appendix A.1, printed p. 131, for the reflection matrices and invariant symmetric form"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

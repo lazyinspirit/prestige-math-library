@@ -2,7 +2,7 @@
 id: "thm-equivalent-characterizations-of-second-countable-type-i-groups"
 kind: "theorem"
 title: "Equivalent characterizations of second-countable type I groups"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-43-complex-representation-15"
 dependency_level: 7
@@ -12,6 +12,7 @@ deps: ["lem-separable-group-c-star-type-i-and-smooth-dual-criteria", "def-type-i
 provenance: {"statement": "literature-derived", "proof": "ai-altered"}
 sources: {"references": [{"title": "Bachir Bekka and Pierre de la Harpe, Unitary Representations of Groups, Duals, and Characters (arXiv:1912.07262v1, 16 December 2019; author-hosted complete book draft)", "url": "https://arxiv.org/pdf/1912.07262", "locator": "Chapter 8, §8.F: Theorem 8.F.3 and its references (Glimm; Dixmier Chapter 9), printed pp. 256-258"}, {"title": "Bruce Blackadar, Operator Algebras: Theory of C*-Algebras and von Neumann Algebras (author-hosted complete text)", "url": "https://bruceblackadar.com/Mathematics/Cycr.pdf", "locator": "Part IV, §1.5: IV.1.5.7 and IV.1.5.12, printed pp. 359-361 (PDF pp. 367-369)"}]}
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

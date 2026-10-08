@@ -2,7 +2,7 @@
 id: ex-cg-ordered-roots-and-mu-matrix-in-i2-5
 kind: example
 title: "Ordered roots and the mu-dot-root matrix in I2(5)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 19
@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0505518"
       locator: "Example 2.2, Figure 1 (the pentagon) and Section 2.5, printed pp. 4 and 22-24"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

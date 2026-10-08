@@ -2,7 +2,7 @@
 id: lem-cg-convex-chains-consecutive-in-a-linear-extension
 kind: lemma
 title: "A convex chain (in particular a covering pair) of a finite poset occurs consecutively in some linear extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -25,6 +25,7 @@ sources:
       url: "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf"
       locator: "§3, PDF pp. 4-5 (linear extensions read the words of a heap)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

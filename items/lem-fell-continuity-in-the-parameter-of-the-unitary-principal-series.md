@@ -2,7 +2,7 @@
 id: lem-fell-continuity-in-the-parameter-of-the-unitary-principal-series
 kind: lemma
 title: Fell continuity of the unitary principal series in the parameter
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -24,6 +24,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is inherited through normalized induction, the unitary dual and Hilbert direct sums. The compact-uniform cocycle estimate and coefficient approximation use no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

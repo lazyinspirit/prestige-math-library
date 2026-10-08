@@ -2,7 +2,7 @@
 id: lem-cg-steinberg-bipartite-root-enumeration
 kind: lemma
 title: "The Coxeter plane, ordered-root enumeration, and invertibility of rho(c) - id"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 17
@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0505518"
       locator: "Section 2.5, printed pp. 22-24 with Figures 2.5-2.7: the bipartition of the Coxeter diagram, the Coxeter element c, the invariant plane of c, the order h and the eigenvalue shape e^{2 m pi i/h}; Examples 2.17-2.18 for A3 and B3"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

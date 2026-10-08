@@ -2,7 +2,7 @@
 id: ex-cg-reflection-subgroups-parabolic-and-not
 kind: example
 title: "Reflection subgroups that are parabolic but not standard, and one that is not parabolic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 7
@@ -19,6 +19,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

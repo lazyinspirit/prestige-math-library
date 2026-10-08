@@ -2,7 +2,7 @@
 id: ex-flat-torus-dolbeault-harmonic-representatives
 kind: example
 title: Flat torus dolbeault harmonic representatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 10
@@ -40,6 +40,7 @@ sources:
     url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
     locator: 'Ch. VI §7, (7.1)–(7.2), printed p. 309: smooth Dolbeault decomposition and harmonic-representative isomorphism; (7.3)–(7.4), printed p. 310: Serre duality and conjugate-linear bundle-star comparison. The explicit torus and sphere computations are supplied locally. Ch. VI §4, (4.5), printed p. 297: the compact complex torus and metrics with constant coefficients.'
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

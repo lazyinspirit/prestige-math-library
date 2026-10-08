@@ -2,7 +2,7 @@
 id: def-cg-large-spherical-metric-flag-and-almost-negative-matrix
 kind: definition
 title: "Finite large spherical complexes, their almost-negative matrices, the metric flag condition, and links"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps:
@@ -33,6 +33,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/papers/moussongdissertation.pdf"
       locator: "Chapter 1, Sections 4–5 (local geodesics and girth of finite S-complexes); Chapter 2, Sections 7–8 (almost-negative matrices and their nerves)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

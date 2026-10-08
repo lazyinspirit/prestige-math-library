@@ -2,7 +2,7 @@
 id: cex-cg-rank-two-inversion-set-violating-closure
 kind: counterexample
 title: "A set of two reflections of A2 that fails both closure and the segment criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 18
@@ -29,6 +29,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Chapter 4, Section 4.4, printed pp. 101-102 (root definition, positive/negative roots and unit normalization); corroborative background only"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

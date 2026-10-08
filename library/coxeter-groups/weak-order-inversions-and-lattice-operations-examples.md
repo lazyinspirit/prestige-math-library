@@ -1,7 +1,7 @@
 ---
 page: weak-order-inversions-and-lattice-operations-examples
 title: "Weak Order, Inversions, and Lattice Operations — Examples"
-status: draft
+status: published
 requires: [weak-order-inversions-and-lattice-operations]
 items: []
 examples: [ex-cg-s3-weak-order-meets-and-joins,

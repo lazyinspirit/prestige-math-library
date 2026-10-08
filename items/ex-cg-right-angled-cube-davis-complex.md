@@ -2,7 +2,7 @@
 id: "ex-cg-right-angled-cube-davis-complex"
 kind: example
 title: "The right-angled cube Davis complex and its boundary 2-sphere"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization", "lem-cg-spherical-coset-inclusion-and-intersection", "lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics", "thm-cg-davis-complex-cell-incidence-and-stabilizers", "def-cg-coxeter-diagram-components-and-finite-type", "lem-cg-diagram-products-and-invariant-form-comparison", "def-cg-real-coxeter-form-and-reflection", "lem-cg-reflection-form-invariance-and-rank-two-orders", "def-cg-canonical-reflection-homomorphism", "thm-hh-parabolic-minimal-representatives-and-length-additivity", "def-generated-subgroup", "def-coset", "def-euler-characteristic-of-a-finite-cw-complex", "thm-cg-finite-chamber-tiling-and-coset-face-identification", "def-hh-coxeter-matrix-word-group-and-length", "thm-lagrange"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

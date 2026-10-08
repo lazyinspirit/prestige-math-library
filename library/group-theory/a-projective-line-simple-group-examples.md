@@ -1,7 +1,7 @@
 ---
 page: a-projective-line-simple-group-examples
 title: "An elementary simple group on the projective line — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

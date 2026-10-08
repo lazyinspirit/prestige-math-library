@@ -2,7 +2,7 @@
 id: lem-bruhat-order-basic-properties-for-permutations
 kind: lemma
 title: Basic properties of the Bruhat order on $S_n$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-bruhat-order-on-the-symmetric-group, def-bruhat-order-on-a-finite-weyl-group, def-finite-symmetric-group-and-permutation-notation, def-weyl-group-and-length-for-finite-gl-n, def-finite-weyl-root-system-lattice-and-chamber-conventions]
@@ -22,6 +22,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "§2.1–2.5, printed pp. 19–22: the strong Bruhat order by reflection chains, Proposition 2.4 (reduced subwords), and Corollary 2.5 (lifting)."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

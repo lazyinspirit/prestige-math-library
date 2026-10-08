@@ -2,7 +2,7 @@
 id: ex-cg-infinite-dihedral-degeneration-versus-davis-complex
 kind: example
 title: "Infinite dihedral type: the chamber system is a line, not a sphere; the contractible model is deferred"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -21,6 +21,7 @@ sources:
       url: "https://webusers.imj-prg.fr/~jean.michel/papiers/cox.pdf"
       locator: "Section 5, Proposition 5.4(i) (the order of s_H s_H' equals pi divided by the angle of the walls, printed p. 7) and Proposition 5.8 (printed p. 9)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -1,13 +1,13 @@
 ---
 name: hopf-hecke-algebras
 title: "Hopf Algebras & Hecke Algebras"
-status: draft
+status: published
 ---
 
 Hopf algebras describe symmetries that act coherently on tensor products and
 finite dual representations. Hecke algebras deform reflection-group relations
 and organize families of representations with controlled bases and traces.
-This draft collection develops both theories from their elementary algebraic
+This collection develops both theories from their elementary algebraic
 constructions, beginning with tensor descent, quotient universal properties,
 finite duality and coherence. Coalgebras and comodules lead to bialgebras,
 convolution and antipodes; quotient and finite-dual constructions then lead

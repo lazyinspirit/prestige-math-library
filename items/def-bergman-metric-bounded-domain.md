@@ -2,7 +2,7 @@
 id: def-bergman-metric-bounded-domain
 kind: definition
 title: The Bergman metric form on a bounded domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 6
@@ -17,6 +17,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

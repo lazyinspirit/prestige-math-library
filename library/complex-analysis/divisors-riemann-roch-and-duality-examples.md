@@ -1,7 +1,7 @@
 ---
 page: divisors-riemann-roch-and-duality-examples
 title: "Divisors, Riemann--Roch, and Duality: Examples and Counterexamples"
-status: draft
+status: published
 items:
   - ex-veronese-linear-system-on-the-riemann-sphere
   - ex-divisors-and-riemann-roch-on-the-riemann-sphere-and-the-torus

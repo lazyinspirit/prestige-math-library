@@ -2,7 +2,7 @@
 id: thm-cg-finite-poincare-exponent-product-and-reciprocity
 kind: theorem
 title: "The Poincare polynomial as a product of q-integers of the basic degrees, with longest-element reciprocity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 21
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Lemma 17.1.1, printed p. 316: the finite Poincare reciprocity identity, used as an independent comparison; the bijection proof is given locally."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-pure-state-excision-and-essential-orbit-density
 kind: lemma
 title: "Pure-state excision and density of faithful essential vector-state orbits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 2
@@ -23,6 +23,7 @@ provenance:
   proof: ai-altered
 axiom_use: "AC is explicit; inherited supplier choice and the exact local selections are identified in the Proof. No global selector of irreducible equivalence classes is asserted."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-nondegenerate-local-holder-beltrami-coordinates
 kind: lemma
 title: "Nondegenerate local Hölder coordinates for a Hölder coefficient"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-mean-value-theorem
@@ -41,6 +41,7 @@ sources:
       url: "https://ems.press/content/serial-article-files/16835"
       locator: "§§2.1–2.4, printed pp. 1545–1554: autonomous estimates, the disk Riemann–Hilbert problem, freezing and Schauder estimates; read in full as context. This item instead proves a fixed-support C^{k,alpha} contraction from its local Cauchy-transform supplier and imports no global Beurling L^p theorem."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

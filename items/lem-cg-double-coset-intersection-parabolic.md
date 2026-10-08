@@ -2,7 +2,7 @@
 id: lem-cg-double-coset-intersection-parabolic
 kind: lemma
 title: "The parabolic intersection W_I cap dW_Jd inverse for d in ^IW^J"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 13
@@ -22,6 +22,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

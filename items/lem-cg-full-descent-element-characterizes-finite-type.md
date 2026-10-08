@@ -2,7 +2,7 @@
 id: lem-cg-full-descent-element-characterizes-finite-type
 kind: lemma
 title: "An element with full left descent makes the Coxeter group finite and is the longest element"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 17
@@ -25,6 +25,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-cg-weak-order-meet-semilattice-and-finite-lattice
 kind: theorem
 title: "Weak order is a meet-semilattice, finite Coxeter groups are lattices, and joins of simple reflections exist exactly for finite parabolics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 18
@@ -23,6 +23,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

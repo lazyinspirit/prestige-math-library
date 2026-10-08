@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-hecke-quotients-and-ariki-koike-pbw-examples
 title: "Cyclotomic Hecke Quotients and Ariki–Koike PBW — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

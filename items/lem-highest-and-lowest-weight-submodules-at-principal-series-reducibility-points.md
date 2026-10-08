@@ -2,7 +2,7 @@
 id: lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points
 kind: lemma
 title: Highest- and lowest-weight submodules at the exceptional parameters
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-k-finite-and-smooth-vectors-for-sl2-r
@@ -25,6 +25,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC supplies the normalized Haar probability on K used for algebraic K-weight projection and is inherited through the compact-picture and K-type suppliers. The finite-dimensional classification input adds no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

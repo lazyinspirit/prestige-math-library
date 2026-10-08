@@ -2,7 +2,7 @@
 id: thm-harmonic-star-duality-for-line-bundle-valued-dolbeault-cohomology
 kind: theorem
 title: Harmonic star duality for line bundle valued dolbeault cohomology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 9
@@ -40,6 +40,7 @@ sources:
     url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
     locator: 'Ch. 6 §4, Theorem 6.7 and its proof, printed pp. 56-57: Serre duality as a nondegenerate pairing between meromorphic differentials and $H^1(D)$ via residues, quoted here only as the independent classical shape of the duality'
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

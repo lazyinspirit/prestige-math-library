@@ -2,7 +2,7 @@
 id: thm-hh-generic-coxeter-hecke-standard-basis
 kind: theorem
 title: "The standard basis of the generic Hecke algebra and base change"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 6
@@ -23,6 +23,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 6.1, printed pp. 174-175: the basis {T_w} of the Hecke algebra over Z[q^{1/2},q^{-1/2}]"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

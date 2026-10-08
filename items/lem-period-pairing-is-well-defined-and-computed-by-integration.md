@@ -2,7 +2,7 @@
 id: lem-period-pairing-is-well-defined-and-computed-by-integration
 kind: lemma
 title: The period pairing is well defined and computed by integration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 16
@@ -49,6 +49,7 @@ sources:
       url: http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf
       locator: "Ch. 2 §20.4, printed pp. 161–162, chains, cycles, homology and integration of closed differentials"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

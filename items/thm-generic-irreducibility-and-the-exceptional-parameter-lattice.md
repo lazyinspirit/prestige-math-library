@@ -2,7 +2,7 @@
 id: thm-generic-irreducibility-and-the-exceptional-parameter-lattice
 kind: theorem
 title: Generic irreducibility and the exceptional parameter lattice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 6
@@ -63,6 +63,7 @@ sources:
       locator: §7.4, Proposition 7.4.3(2), statement printed p. 294 and proof pp. 297–301; unitary-character
         irreducibility criterion as a unitary-axis cross-check
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

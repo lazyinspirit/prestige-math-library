@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: lem-sl2-r-has-no-invariant-probability-on-the-projective-line
 kind: lemma
 title: No invariant projective-line probability for two unipotents with distinct fixed lines
@@ -16,6 +16,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Choice-free. Only two nonzero vectors are selected to form a basis; the finite choice is provable without an axiom of choice. The measure argument uses countable additivity and an explicit enumeration of integer intervals."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-cg-cone-join-metric-and-local-product-chart
 kind: theorem
 title: "The cone and join metrics and the local product chart of a polyhedral gluing"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-closed-witness-codings-and-measured-projections
 kind: lemma
 title: "Closed witness codings and completion measurability of Borel projections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -60,6 +60,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Appendix A.C, Theorem A.C.6, printed p. 409 (PDF p. 408): the von Neumann selection theorem is stated for a standard Borel measure and its proof is explicitly referred to Mackey–76, Theorem Z.2, Chapter 2, §2.2. The closed-witness and measured-projection arguments below are local proofs, not attributed to Bekka–de la Harpe."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

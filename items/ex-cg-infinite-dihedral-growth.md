@@ -2,7 +2,7 @@
 id: ex-cg-infinite-dihedral-growth
 kind: example
 title: "Infinite dihedral growth, the infinite Steinberg identity, and the failure of polynomial reciprocity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 22
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Chapter 17.1, printed pp. 317-318, Corollaries 17.1.5(ii) and 17.1.6: the infinite Steinberg identity and rationality by rank induction; Chapter 4.7, printed p. 53, Lemma 4.7.2: every right descent parabolic is finite, which implies that no element has all descents when $W$ is infinite. These are independent comparisons."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

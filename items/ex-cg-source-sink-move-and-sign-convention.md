@@ -2,7 +2,7 @@
 id: "ex-cg-source-sink-move-and-sign-convention"
 kind: "example"
 title: "A source–sink move in A3: transporting the Euler and skew forms by an initial letter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 18
@@ -32,6 +32,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 1.4, pp. 14-18 (reduced expressions); the source-sink form transport is Reading--Speyer, Lemmas 3.3 and 3.8"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

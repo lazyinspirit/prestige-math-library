@@ -2,7 +2,7 @@
 id: thm-cg-carter-reflection-length-and-absolute-order
 kind: theorem
 title: "Carter's reflection-length formula, the absolute order on a finite Coxeter group, and moved-space rigidity under a common upper bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: [def-cg-canonical-reflection-homomorphism, def-cg-coxeter-diagram-components-and-finite-type, def-cg-real-coxeter-form-and-reflection, def-cg-reflection-length-absolute-order-and-moved-space, def-graded-poset-and-rank, def-hh-coxeter-matrix-word-group-and-length, def-partial-order, lem-cg-orthogonal-wall-form-and-subspace-restriction, lem-cg-reflection-factorizations-and-independent-normals, thm-cg-finite-coxeter-classification-including-h-and-dihedral, thm-cg-finite-type-positive-definite-criterion]
@@ -20,6 +20,7 @@ sources:
       locator: "Introduction and section 2 (printed pp. 1-3: reflection length, absolute order, moved and fixed spaces M(A), F(A), M(A)=F(A)^perp, the main result of [7], and notes (1)-(7)); the opening of section 3 through Note 3.5 (printed pp. 3-6); and the opening paragraphs of section 4 (printed pp. 8-9) with the A_3 intersection example"
 dependency_level: 17
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

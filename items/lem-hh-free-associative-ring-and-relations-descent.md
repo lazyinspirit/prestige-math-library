@@ -2,7 +2,7 @@
 id: lem-hh-free-associative-ring-and-relations-descent
 kind: lemma
 title: "The free associative R-algebra on a set and descent of relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -22,6 +22,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "Theorem 3.3, printed p. 10: spanning sets of tensor products (the elementary-tensor spanning used for the word-basis multiplication)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: cor-compact-riemann-surface-has-meromorphic-function
 kind: corollary
 title: Every compact Riemann surface admits a nonconstant meromorphic function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -22,6 +22,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

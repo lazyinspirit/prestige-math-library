@@ -2,7 +2,7 @@
 id: thm-smooth-function-module-sheaves-are-acyclic
 kind: theorem
 title: Sheaves of smooth-function modules are cohomologically acyclic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 provenance:
@@ -38,6 +38,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pending
   judge:
     model: "gpt-6.1-sol"

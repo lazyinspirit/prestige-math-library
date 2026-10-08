@@ -2,7 +2,7 @@
 id: thm-symplectic-period-formula-for-wedge-integrals
 kind: theorem
 title: The symplectic period formula for integrals of wedge products
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -58,6 +58,7 @@ sources:
       url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
       locator: "Ch. 3 §3, Proposition 3.19 and Corollary 3.20, printed pp. 34–35: the alternating integral pairing in a dual curve basis and its nondegeneracy."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

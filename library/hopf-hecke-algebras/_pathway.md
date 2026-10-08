@@ -1,6 +1,6 @@
 ---
 category: hopf-hecke-algebras
-status: draft
+status: published
 parts:
   - part: foundations
     title: "Tensor and Coalgebra Foundations"

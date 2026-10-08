@@ -2,7 +2,7 @@
 id: ex-cg-ordered-roots-and-mu-matrix-in-a3
 kind: example
 title: "Ordered roots and the mu-dot-root matrix in A3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 21
@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0505518"
       locator: "Example 2.17 and Figure 2.6 in Section 2.5, printed pp. 22-23, for the A3 Coxeter-plane context, not the root order used here"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

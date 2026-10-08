@@ -2,7 +2,7 @@
 id: def-drinfeld-jimbo-quantized-enveloping-algebra
 kind: definition
 title: "The Drinfeld-Jimbo quantized enveloping algebra by generators and relations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ aliases: []
 dependency_level: 2
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

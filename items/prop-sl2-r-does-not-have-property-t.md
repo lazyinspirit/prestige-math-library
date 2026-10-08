@@ -2,7 +2,7 @@
 id: prop-sl2-r-does-not-have-property-t
 kind: proposition
 title: SL2(R) does not have property (T)
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-kazhdans-property-t
@@ -21,6 +21,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC as in the normalized principal-series and complementary-series model and Hilbert direct-sum interfaces. The parameter sequence is explicit; no additional choice is used."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

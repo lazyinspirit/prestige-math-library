@@ -2,7 +2,7 @@
 id: ex-divisors-and-riemann-roch-on-the-riemann-sphere-and-the-torus
 kind: example
 title: "Divisors and Riemann-Roch on the Riemann sphere and on a complex torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -28,6 +28,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: hecke-symmetries-and-generic-quantum-schur-weyl-duality
 title: "Hecke Symmetries and Generic Quantum Schur–Weyl Duality"
-status: draft
+status: published
 items: []
 examples: []
 ---

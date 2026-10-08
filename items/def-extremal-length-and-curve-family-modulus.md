@@ -2,7 +2,7 @@
 id: def-extremal-length-and-curve-family-modulus
 kind: definition
 title: Extremal length and the curve-family modulus of a path family
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 0
@@ -24,6 +24,7 @@ sources:
       url: "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5710-11511_2006_Article_BF02392634.pdf"
       locator: "§4, printed pp. 114–115: extremal length of a family of rectifiable curves and the rectangle and separating-family computations."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

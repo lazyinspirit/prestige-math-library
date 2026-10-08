@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: thm-property-t-passes-to-quotients
 kind: theorem
 title: Property (T) passes to Hausdorff quotients
@@ -30,6 +30,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC as in the dispatched statement. This proof uses no choice principle: quotient representatives are used only by existential instantiation, and compact images and quotient maps are handled directly."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

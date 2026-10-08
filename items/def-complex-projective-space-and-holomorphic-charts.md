@@ -2,7 +2,7 @@
 id: def-complex-projective-space-and-holomorphic-charts
 kind: definition
 title: Complex projective space and its holomorphic charts
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: n/a
 sources:
   references:

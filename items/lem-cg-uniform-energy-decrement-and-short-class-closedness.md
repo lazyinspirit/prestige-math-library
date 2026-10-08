@@ -2,7 +2,7 @@
 id: lem-cg-uniform-energy-decrement-and-short-class-closedness
 kind: lemma
 title: "The uniform energy decrement on the basin, bounded iteration, and the closedness of the basin inside the short polygon space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 14
@@ -24,6 +24,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2.15–I.2.16, printed pp. 504–505"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

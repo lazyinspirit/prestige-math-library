@@ -2,7 +2,7 @@
 id: lem-cg-exceptional-coxeter-spectra-from-exact-certificates
 kind: lemma
 title: "The six exceptional Coxeter spectra: characteristic polynomials, orders and spectral exponents from exact matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 deps: [cor-an-element-of-finite-order-acts-diagonalisably-over-an-algebraically-closed-field-of-characteristic-zero, cor-trigonometric-parity-and-pythagorean-identity, def-cg-bipartite-coxeter-element-and-root-recursion, def-cg-canonical-reflection-homomorphism, def-cg-coxeter-diagram-components-and-finite-type, def-cg-real-coxeter-form-and-reflection, def-characteristic-polynomial-of-a-matrix, def-complex-numbers-and-arithmetic, def-cyclotomic-polynomial, def-determinant-of-a-square-matrix, def-formal-derivative-of-a-polynomial, def-matrix-minors-cofactors-and-adjugate, def-natural-numbers, def-roots-of-unity-in-a-field, def-sine-and-cosine-by-power-series, def-trace-of-a-square-matrix-over-a-commutative-ring, lem-cg-complexification-satisfies-reflection-invariant-hypotheses, lem-cg-reflection-form-invariance-and-rank-two-orders, lem-cg-reflection-representation-descends-and-root-norms, lem-cg-steinberg-bipartite-root-enumeration, lem-derivative-of-det-i-minus-xa, lem-of-square-monotone, lem-viete-finite-cosine-product-and-nested-radicals, prop-formal-derivative-laws, thm-adjugate-identity-over-a-commutative-ring, thm-cg-finite-coxeter-classification-including-h-and-dihedral, thm-cg-finite-type-positive-definite-criterion, thm-cofunction-supplementary-and-reflection-identities, thm-complex-nth-roots-and-roots-of-unity, thm-double-angle-and-power-reduction-identities, thm-eulers-formula, thm-induction-principle, thm-of-square-roots, thm-product-to-sum-and-sum-to-product-identities, thm-quarter-turn-values-and-shift-formulas, thm-sine-and-cosine-addition-formulas, thm-sine-cosine-signs-monotonicity-and-ranges, thm-the-roots-of-the-cyclotomic-polynomial-are-the-primitive-roots-of-unity, cor-square-matrix-invertible-iff-determinant-is-a-unit, cor-determinant-is-invariant-under-similarity]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

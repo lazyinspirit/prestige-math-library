@@ -1,7 +1,7 @@
 ---
 page: tits-cones-chambers-and-parabolic-stabilizers
 title: "Tits Cones, Chambers, and Parabolic Stabilizers"
-status: draft
+status: published
 requires: [canonical-roots-signs-and-faithful-reflections, hilbert-space-geometry-and-riesz-representation]
 items: [def-cg-tits-cone-and-fundamental-chamber,
         thm-cg-tits-cone-finite-negativity-and-convexity,

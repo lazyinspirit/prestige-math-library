@@ -1,7 +1,7 @@
 ---
 page: quasitriangular-hopf-algebras-and-braided-module-categories-examples
 title: "Quasitriangular Hopf Algebras and Braided Module Categories — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

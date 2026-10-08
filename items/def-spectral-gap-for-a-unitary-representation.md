@@ -2,7 +2,7 @@
 id: def-spectral-gap-for-a-unitary-representation
 kind: definition
 title: Spectral gap for a unitary representation
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -21,6 +21,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "The invariant-vector subspace, its orthogonal complement, and the weak-containment definition are choice-free. The displacement characterization is invoked only for LCH groups under the explicit Axiom of Choice hypothesis of the published weak-containment lemma. No countable-choice projection or orthogonal-decomposition result is used."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

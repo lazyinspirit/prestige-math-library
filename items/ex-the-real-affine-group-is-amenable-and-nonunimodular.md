@@ -2,7 +2,7 @@
 id: ex-the-real-affine-group-is-amenable-and-nonunimodular
 kind: example
 title: The real affine group is amenable and nonunimodular
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 proof_strategy: direct
@@ -46,6 +46,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

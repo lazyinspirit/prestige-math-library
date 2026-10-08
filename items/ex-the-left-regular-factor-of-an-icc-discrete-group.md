@@ -2,7 +2,7 @@
 id: ex-the-left-regular-factor-of-an-icc-discrete-group
 kind: example
 title: "The left regular factor of an ICC discrete group is a non-type-I factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Proposition 7.A.1, printed pp.213–214; Proposition 7.A.3, printed p.215; Proposition 6.B.14, printed pp.186\u2013187."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

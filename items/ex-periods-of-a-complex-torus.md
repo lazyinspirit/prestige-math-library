@@ -2,7 +2,7 @@
 id: ex-periods-of-a-complex-torus
 kind: example
 title: Periods of a complex torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 26
@@ -38,6 +38,7 @@ sources:
       url: "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf"
       locator: "Ch. 2 §20.8 (application to doubly periodic functions: the Abel condition $\\sum a_k\\equiv\\sum b_k$ mod $\\Gamma$), printed pp. 165-166."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

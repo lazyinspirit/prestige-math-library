@@ -2,7 +2,7 @@
 id: lem-k-finite-vectors-are-dense-and-stable-under-the-derived-action
 kind: lemma
 title: Smooth and K-finite vectors are dense and stable under the derived action
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-k-finite-and-smooth-vectors-for-sl2-r
@@ -29,6 +29,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is used through the Haar/Riesz integrated form, compact-group isotypic projections and discrete decomposition, and AC_omega in the automatic-smoothness supplier; the explicit local smooth bump construction adds no choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

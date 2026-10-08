@@ -2,7 +2,7 @@
 id: lem-hh-tensor-coherence-on-elementary-tensors
 kind: lemma
 title: "Associator naturality, pentagon, unit triangle and symmetry hexagons on elementary tensors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -19,6 +19,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "Theorems 5.1–5.3, printed pp. 23–26: symmetry, associativity and distributivity isomorphisms and their elementary-tensor computations"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

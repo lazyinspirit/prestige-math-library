@@ -2,7 +2,7 @@
 id: ex-cg-quadratic-hecke-normalizations-s-equals-q-t
 kind: example
 title: "Quadratic Hecke normalizations: S=qT with Q=q^2, the opposite-sign form, and the Soergel-calculus and Kazhdan-Lusztig conversions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 11
@@ -22,6 +22,7 @@ sources:
     - title: "Ben Elias and Geordie Williamson, Soergel calculus (arXiv:1309.0865v1)"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,5 +1,5 @@
 ---
-status: draft
+status: published
 id: def-kazhdan-pair-and-kazhdan-constant
 kind: definition
 title: Kazhdan pairs, Kazhdan sets and Kazhdan constants
@@ -23,6 +23,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

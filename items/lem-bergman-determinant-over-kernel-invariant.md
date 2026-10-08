@@ -2,7 +2,7 @@
 id: lem-bergman-determinant-over-kernel-invariant
 kind: lemma
 title: "The determinant quotient $\\det g_\\Omega/K_\\Omega$ is a biholomorphic invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 8
@@ -24,6 +24,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

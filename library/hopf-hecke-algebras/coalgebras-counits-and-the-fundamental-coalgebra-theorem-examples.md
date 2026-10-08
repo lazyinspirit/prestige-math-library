@@ -1,7 +1,7 @@
 ---
 page: coalgebras-counits-and-the-fundamental-coalgebra-theorem-examples
 title: "Coalgebras, Counits, and the Fundamental Coalgebra Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

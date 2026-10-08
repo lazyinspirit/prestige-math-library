@@ -2,7 +2,7 @@
 id: def-type-i-factor-representation-and-type-i-group
 kind: definition
 title: Type I factor representations and type I groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -28,6 +28,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part III, III.1.5.1-III.1.5.3 (printed pp. 247-248; PDF pp. 255-256): matrix units and the spatial structure of type-I factors."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

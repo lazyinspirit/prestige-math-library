@@ -2,7 +2,7 @@
 id: lem-cg-hecke-and-lie-seam-contract-compatibility
 kind: lemma
 title: "Hecke and Lie seam contract compatibility: the Artin-to-Hecke map, normalization conversions, root-length matching, and the reflection-faithfulness boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -24,6 +24,7 @@ sources:
     - title: "Michael W. Davis, The Geometry and Topology of Coxeter Groups (Princeton University Press 2008; author's complete PDF)"
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

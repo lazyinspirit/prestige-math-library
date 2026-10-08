@@ -2,7 +2,7 @@
 id: lem-cg-bowditch-quantitative-short-loop-control
 kind: lemma
 title: "Polygon transfer, the basin as the shrinkable class, and the short-loop criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -24,6 +24,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2.8, printed pp. 502–503 (the $\\kappa>0$ criterion)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

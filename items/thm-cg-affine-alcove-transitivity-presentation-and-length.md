@@ -2,7 +2,7 @@
 id: thm-cg-affine-alcove-transitivity-presentation-and-length
 kind: theorem
 title: "Alcove transitivity, the affine Coxeter presentation, and the length function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 12
@@ -46,6 +46,8 @@ sources:
       url: "https://web.math.ucsb.edu/~jon.mccammond/papers/McCammond-item-47.pdf"
       locator: "§1.3, Definitions 1.9–1.11 and Remark 1.12 give affine Euclidean, wall and alcove terminology under an already specified affine Coxeter group. This is terminology context only; no presentation or length proof is imported."
 landmark: false
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

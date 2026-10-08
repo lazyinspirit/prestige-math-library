@@ -2,7 +2,7 @@
 id: def-compactly-generated-locally-compact-group
 kind: definition
 title: Compactly generated locally compact groups
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -19,6 +19,7 @@ provenance:
   proof: ai-altered
 axiom_audit: choice-free
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

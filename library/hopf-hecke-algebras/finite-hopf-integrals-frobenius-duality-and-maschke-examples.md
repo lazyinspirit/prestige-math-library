@@ -1,7 +1,7 @@
 ---
 page: finite-hopf-integrals-frobenius-duality-and-maschke-examples
 title: "Finite Hopf Integrals, Frobenius Duality, and Maschke — Examples"
-status: draft
+status: published
 items: []
 examples: []
 ---

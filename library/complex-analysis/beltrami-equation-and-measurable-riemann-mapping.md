@@ -1,7 +1,7 @@
 ---
 page: beltrami-equation-and-measurable-riemann-mapping
 title: The Beltrami Equation and Measurable Riemann Mapping
-status: draft
+status: published
 items:
 - def-measurable-beltrami-coefficient
 - lem-local-postcomposition-chain-rule-for-w-one-two

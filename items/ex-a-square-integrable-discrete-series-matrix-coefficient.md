@@ -2,7 +2,7 @@
 id: ex-a-square-integrable-discrete-series-matrix-coefficient
 kind: example
 title: A square-integrable discrete-series matrix coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -20,6 +20,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC, inherited through the discrete-series and fixed-Haar model interfaces. The radial substitution and convergence argument make no additional choices."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

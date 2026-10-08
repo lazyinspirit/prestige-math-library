@@ -2,7 +2,7 @@
 id: ex-cg-reflection-matrices-in-positive-lorentzian-and-radical-planes
 kind: example
 title: "Reflection matrices in a positive plane, a Lorentzian plane, and a plane with radical"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 3
@@ -22,6 +22,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "\u00a74.2, printed pp. 93\u201397: equations (4.10)\u2013(4.14) and the remark that the form is generally not symmetric unless symmetrically weighted; (4.21) for the standard symmetric case"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

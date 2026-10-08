@@ -1,7 +1,7 @@
 ---
 page: sl2-r-principal-and-complementary-series-examples
 title: "Sl2 R Principal and Complementary Series — Examples"
-status: draft
+status: published
 requires:
   - sl2-r-principal-and-complementary-series
 items: []

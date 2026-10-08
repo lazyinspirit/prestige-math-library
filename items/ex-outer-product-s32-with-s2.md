@@ -2,7 +2,7 @@
 id: ex-outer-product-s32-with-s2
 kind: example
 title: "The outer product of $S^{(3,2)}$ and $S^{(2)}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 3
@@ -26,6 +26,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

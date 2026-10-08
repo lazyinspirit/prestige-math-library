@@ -2,7 +2,7 @@
 id: lem-faithful-essential-pure-state-orbits-obstruct-countable-separation
 kind: lemma
 title: "Faithful essential pure-state orbits obstruct countable separation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 3
@@ -30,6 +30,7 @@ provenance:
   proof: ai-altered
 axiom_use: "AC is explicit; inherited supplier choice and the exact local selections are identified in the Proof. No global selector of irreducible equivalence classes is asserted."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

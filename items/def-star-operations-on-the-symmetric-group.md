@@ -2,7 +2,7 @@
 id: def-star-operations-on-the-symmetric-group
 kind: definition
 title: Star operations on strings of adjacent simple reflections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-knuth-and-dual-knuth-equivalence-for-permutations, def-weyl-group-and-length-for-finite-gl-n]
@@ -24,6 +24,7 @@ sources:
       url: "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf"
       locator: "§6, equations (6.6)–(6.7), printed p. 723: the two strict three-letter Knuth moves used in the type-A description."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

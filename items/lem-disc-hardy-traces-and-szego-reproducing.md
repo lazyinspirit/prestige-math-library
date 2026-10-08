@@ -2,12 +2,13 @@
 id: lem-disc-hardy-traces-and-szego-reproducing
 kind: lemma
 title: The disc trace space is the Hardy boundary space and the Szegő family reproduces $H^2$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 1
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

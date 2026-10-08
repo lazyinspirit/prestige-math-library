@@ -2,7 +2,7 @@
 id: def-cg-euclidean-cone-and-spherical-join-metrics
 kind: definition
 title: "The angular path metric, the Euclidean cone and spherical joins"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-cg-cone-join-metric-and-local-product-chart]
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

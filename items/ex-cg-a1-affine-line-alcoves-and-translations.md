@@ -2,7 +2,7 @@
 id: ex-cg-a1-affine-line-alcoves-and-translations
 kind: example
 title: "The $A_1$ affine line: alcoves, translations, and the root versus coroot lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 4
@@ -20,6 +20,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

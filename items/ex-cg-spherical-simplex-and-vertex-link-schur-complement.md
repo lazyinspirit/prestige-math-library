@@ -2,7 +2,7 @@
 id: ex-cg-spherical-simplex-and-vertex-link-schur-complement
 kind: example
 title: "A spherical simplex from a Gram matrix and its vertex-link Schur complement"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

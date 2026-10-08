@@ -2,7 +2,7 @@
 id: ex-quasisymmetric-power-map-on-the-circle
 kind: example
 title: Power maps, endpoint distortion, and a non-Möbius quasisymmetric circle map
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -46,6 +46,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §15.1.1, printed p. 207, Exercise 15.1(i)–(ii): the exercise states that positive power maps on [0,1] are quasisymmetric and that matching a power map to the identity across the endpoint can destroy quasisymmetry, but supplies no proof. The present item gives the adjacent-interval ratios and the circle endpoint calculation in full."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

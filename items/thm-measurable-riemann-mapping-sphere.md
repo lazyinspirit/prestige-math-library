@@ -2,7 +2,7 @@
 id: thm-measurable-riemann-mapping-sphere
 kind: theorem
 title: "The measurable Riemann mapping theorem on the sphere"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-measurable-beltrami-coefficient
@@ -80,6 +80,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 3 §2, printed pp. 85–88, and §6, Theorem 6.1, printed pp. 103–105: mapping-theorem outline and weak convergence of dilatations; the printed proof of Theorem 2.1 is blank, Theorem 2.11 has a sign typo in K, and Theorem 6.1 uses an unproved nonvanishing-derivative input, so these passages are context rather than proof for the coefficient-nondegeneracy step supplied locally below."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

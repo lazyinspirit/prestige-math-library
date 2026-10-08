@@ -2,7 +2,7 @@
 id: prop-same-insertion-or-recording-tableaux-imply-cell-equivalence
 kind: proposition
 title: Equal insertion or recording tableaux imply right or left equivalence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, thm-knuth-equivalence-classes-are-insertion-tableau-fibers, def-star-operations-on-the-symmetric-group, lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges, cor-rsk-symmetry-under-inversion]
@@ -19,6 +19,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9910117"
       locator: "§3.2, Definition 3.2 and Theorem 3.3, printed pp. 7–8; §3.4, Proposition 3.8 with its complete proof, printed p. 10. The proof here uses the completed local Knuth-fiber and star-cell suppliers."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

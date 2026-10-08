@@ -2,7 +2,7 @@
 id: lem-smooth-beltrami-coefficients-admit-quasiconformal-solutions
 kind: lemma
 title: "Smooth Beltrami coefficients admit quasiconformal solutions"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-measurable-beltrami-coefficient
@@ -51,6 +51,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §14.2, printed p. 196: local solutions form a holomorphic atlas by conformal transition maps, and uniformization of the resulting sphere complex structure gives a global solution; the transition and regularity details are proved directly here."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

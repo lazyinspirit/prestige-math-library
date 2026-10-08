@@ -2,7 +2,7 @@
 id: lem-cg-spherical-simplex-existence-and-link-gram-formula
 kind: lemma
 title: "Gram realisations, radial normalisation, finite spherical complexes and link Gram formulas"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 axiom_use: "In clause (iii), AC selects a sequence of near-minimizing chains and supplies the Choice hypothesis of the proper-target Ascoli theorem. Clauses (i), (ii), (iv), (v), and the component convention of (vi) are choice-free."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

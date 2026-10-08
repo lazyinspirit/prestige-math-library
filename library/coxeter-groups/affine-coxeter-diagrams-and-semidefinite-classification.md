@@ -1,7 +1,7 @@
 ---
 page: affine-coxeter-diagrams-and-semidefinite-classification
 title: "Affine Coxeter Diagrams and Semidefinite Classification"
-status: draft
+status: published
 requires: [finite-coxeter-diagrams-and-complete-classification, affine-reflections-coroot-translations-and-alcoves]
 items:
   - lem-cg-similar-euclidean-simplices-from-shared-facet-normal-gram

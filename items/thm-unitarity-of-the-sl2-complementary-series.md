@@ -2,7 +2,7 @@
 id: thm-unitarity-of-the-sl2-complementary-series
 kind: theorem
 title: Unitarity of the complementary series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 8
@@ -42,6 +42,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§7.4, Lemma 7.4.20 and Proposition 7.4.21, printed pp. 310–312: the necessary range and positive-parameter form construction; the infinitesimal skew-adjointness check is left as an exercise, irreducibility is only sketched, and the negative-parameter form is initially defined only on a dense subspace. Exercise 7.4.22, printed p. 313, asks for the no-odd-series proof."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

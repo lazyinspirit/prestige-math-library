@@ -2,7 +2,7 @@
 id: lem-degree-one-holomorphic-map-of-compact-riemann-surfaces-is-an-isomorphism
 kind: lemma
 title: A degree-one holomorphic map of compact Riemann surfaces is an isomorphism
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 0
@@ -18,6 +18,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

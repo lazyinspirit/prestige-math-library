@@ -2,7 +2,7 @@
 id: lem-cg-cat-zero-products-and-cat-one-joins
 kind: lemma
 title: "Products of CAT(0) spaces, joins of CAT(1) spaces, and round spheres"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:
@@ -38,6 +38,7 @@ sources:
       url: "https://msp.org/pjm/1995/171-1/pjm-v171-n1-p04-s.pdf"
       locator: "2.1-2.2 (the (NP) and link conditions), 3.6.3 (the join $L_1*L_2$ and its cone), the $\\kappa>0$ link criterion cited there"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: ex-cg-s4-rank-three-interval-chain-labels-and-lex-first-chain
 kind: example
 title: "All maximal chains of a rank-three interval in S4, their deleted-position labels, and the lexicographically first chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 19
@@ -21,6 +21,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 2.7 and Example 2.7.1, printed pp. 48-50: the induced label of a maximal chain and the four labelled chains of S3, which this example instantiates for a rank-three interval of S4"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

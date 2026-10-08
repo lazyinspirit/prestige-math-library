@@ -2,7 +2,7 @@
 id: thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux
 kind: theorem
 title: Kazhdan–Lusztig cells of type A are classified by RSK tableaux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [lem-left-cell-equivalence-forces-equality-of-recording-tableaux-in-type-a, prop-same-insertion-or-recording-tableaux-imply-cell-equivalence, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, cor-rsk-symmetry-under-inversion, thm-robinson-schensted-correspondence, thm-kazhdan-lusztig-basis-multiplication-formula, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-the-hecke-bar-involution-is-well-defined]
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9910117"
       locator: "§3.4, Proposition 3.8 and the complete proof of Theorem A, printed pp. 10–11."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

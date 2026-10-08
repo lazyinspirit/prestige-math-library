@@ -2,7 +2,7 @@
 id: ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval
 kind: example
 title: The $R$- and Kazhdan–Lusztig recursions on a small singular interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -34,6 +34,7 @@ sources:
       url: "https://arxiv.org/pdf/1212.0791"
       locator: "§3.2, printed pp. 15–16; the complete section and displayed formulas were reread."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

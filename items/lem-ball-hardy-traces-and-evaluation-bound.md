@@ -2,7 +2,7 @@
 id: lem-ball-hardy-traces-and-evaluation-bound
 kind: lemma
 title: Polynomial traces, monomial basis and bounded evaluation for the ball Hardy space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 2
@@ -55,6 +55,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

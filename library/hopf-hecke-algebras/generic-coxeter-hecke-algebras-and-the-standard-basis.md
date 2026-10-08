@@ -1,7 +1,7 @@
 ---
 page: generic-coxeter-hecke-algebras-and-the-standard-basis
 title: "Generic Coxeter Hecke Algebras and the Standard Basis"
-status: draft
+status: published
 items: [def-hh-universal-coxeter-hecke-parameters-and-presentation,
         lem-hh-commuting-left-right-hecke-length-operators,
         lem-hh-reduced-word-independence-and-length-multiplication,

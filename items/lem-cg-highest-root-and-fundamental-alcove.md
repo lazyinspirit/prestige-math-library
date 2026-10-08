@@ -2,7 +2,7 @@
 id: lem-cg-highest-root-and-fundamental-alcove
 kind: lemma
 title: "Highest-root dominance and the fundamental alcove"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -37,6 +37,8 @@ sources:
     - title: "A. W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., digital edition"
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, §12, Problem 8, printed p. 204: asks for the nonnegative-pairing dominance property of the largest root. It is an exercise, not a supplied proof; the proof used here is the complete published local argument in [[prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system]] (especially steps 2.1, 3.1, and 6.1)."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

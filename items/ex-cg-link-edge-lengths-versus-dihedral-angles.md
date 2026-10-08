@@ -2,7 +2,7 @@
 id: ex-cg-link-edge-lengths-versus-dihedral-angles
 kind: example
 title: "Link edge lengths versus dihedral mirror angles in type I_2(m)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

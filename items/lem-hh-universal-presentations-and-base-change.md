@@ -2,7 +2,7 @@
 id: lem-hh-universal-presentations-and-base-change
 kind: lemma
 title: "Presentation base change and transport of explicit bases to commutative specializations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 1
@@ -25,6 +25,7 @@ sources:
       url: "https://math.berkeley.edu/~gbergman/245/3.4.pdf"
       locator: "§4.2–4.3 printed pp. 44–52 and §9.3 printed pp. 371–379: imposing relations and presentations via the left universal construction"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

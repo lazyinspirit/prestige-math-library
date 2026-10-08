@@ -2,7 +2,7 @@
 id: def-abel-jacobi-map
 kind: definition
 title: The Abel-Jacobi map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 21
@@ -35,6 +35,7 @@ sources:
       url: "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf"
       locator: "Ch. 2 §21.6, printed pp. 170-171: the map $\\Phi:\\operatorname{Div}^0(X)\\to\\operatorname{Jac}(X)$ sending $D$ to the class of $(\\int_c\\omega_1,\\dots,\\int_c\\omega_g)$ for a chain $c$ with $\\partial c=D$, determined by $D$ modulo the period lattice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: crystallographic-root-lattices-and-weyl-group-interfaces-examples
 title: "Crystallographic Root Lattices and Weyl Group Interfaces — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-a2-root-and-weight-lattices, ex-cg-b2-c2-dual-realizations-and-lattices, ex-cg-g2-from-i2-six, cex-cg-i2-five-is-not-crystallographic]
 ---

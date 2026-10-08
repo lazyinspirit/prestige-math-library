@@ -1,7 +1,7 @@
 ---
 page: real-forms-and-reflection-geometry-examples
 title: "Real Forms and Reflection Geometry — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-null-normal-admits-no-displayed-reflection,
            ex-cg-finite-dihedral-rotation-and-infinite-unipotent-rank-two-product,

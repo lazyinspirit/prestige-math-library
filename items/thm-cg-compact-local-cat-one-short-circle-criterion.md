@@ -2,7 +2,7 @@
 id: thm-cg-compact-local-cat-one-short-circle-criterion
 kind: theorem
 title: "Compact geodesic locally CAT(1) spaces are CAT(1) exactly when they contain no short circle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 12
@@ -15,6 +15,7 @@ provenance:
 proof_strategy: direct
 axiom_use: "AC supplies the Arzela-Ascoli subsequences used for continuity of unique short geodesics and for the minimizing digons, and the countable selection of near-minimal digons. Finite chart choices need only finite choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

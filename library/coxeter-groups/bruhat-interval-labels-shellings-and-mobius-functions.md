@@ -1,7 +1,7 @@
 ---
 page: bruhat-interval-labels-shellings-and-mobius-functions
 title: "Bruhat Interval Labels, Shellings, and Möbius Functions"
-status: draft
+status: published
 items: [def-cg-deletion-chain-labels-and-shelling, lem-cg-bruhat-increasing-chain-and-local-descent-replacement, thm-cg-bruhat-deletion-label-shelling, thm-cg-bruhat-eulerian-intervals-and-mobius]
 examples: []
 ---

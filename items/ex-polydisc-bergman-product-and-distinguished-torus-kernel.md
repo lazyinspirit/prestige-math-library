@@ -2,7 +2,7 @@
 id: ex-polydisc-bergman-product-and-distinguished-torus-kernel
 kind: example
 title: The polydisc Bergman product and the different distinguished-torus Hardy kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 6
@@ -27,6 +27,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

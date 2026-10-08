@@ -1,7 +1,7 @@
 ---
 page: finite-coxeter-invariants-and-coinvariant-gradings
 title: "Finite Coxeter Invariants and Coinvariant Gradings"
-status: draft
+status: published
 requires: [finite-coxeter-diagrams-and-complete-classification, finite-weyl-invariants-bruhat-and-kostant-harmonics, relations-functions-and-quotients, bipartite-coxeter-elements-and-ordered-root-complexes, complexification-realification-and-real-structures, reductive-affine-invariant-theory-and-geometric-quotients]
 items:
   - lem-cg-complexification-satisfies-reflection-invariant-hypotheses

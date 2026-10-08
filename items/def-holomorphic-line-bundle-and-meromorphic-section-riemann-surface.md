@@ -2,7 +2,7 @@
 id: def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface
 kind: definition
 title: "Holomorphic line bundles and meromorphic sections on a Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 0
@@ -50,6 +50,7 @@ sources:
       url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
       locator: "Ch. 3 §4, printed pp. 36–37: local form types and the Cauchy–Riemann criterion d-bar f=0 for holomorphy"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

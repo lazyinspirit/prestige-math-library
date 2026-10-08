@@ -2,7 +2,7 @@
 id: cex-unsymmetrized-q-parameters-break-the-cartan-normalization
 kind: counterexample
 title: Unsymmetrized parameters break the coproduct of the Serre ideal
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 dependency_level: 5
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

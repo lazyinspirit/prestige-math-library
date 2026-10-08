@@ -2,7 +2,7 @@
 id: def-cg-coxeter-nerve-and-moussong-metric
 kind: definition
 title: "The Coxeter nerve and its Moussong metric"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps:
@@ -42,6 +42,7 @@ sources:
       url: "https://msp.org/pjm/1995/171-1/pjm-v171-n1-p04-s.pdf"
       locator: "§2.3.2 (realization of a spherical simplex from a positive-definite cosine matrix)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

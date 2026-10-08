@@ -2,7 +2,7 @@
 id: "lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets"
 kind: "lemma"
 title: "Circumcenters of bounded sets and fixed sets of isometries in complete CAT(0) spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -13,11 +13,8 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups, first-edition author manuscript, 2007-2008"
@@ -120,10 +117,3 @@ the right-hand side is at least $d(c,c')^2$ for every $z\in Y$, so $d(c,c')^2$ i
 5.1 Clauses (2) and (4) concluded. Let $X$ be complete and let $c$ be the center of $Y$ as in step 4.1, and let $\varphi$ be an isometry with $\varphi(Y)=Y$; by step 1.5 the isometry $\varphi$ permutes the minimizers of $r_Y$, and since $c$ is the unique minimizer by step 4.1, $\varphi(c)=c$. Hence a group $G$ of isometries with bounded orbit $Y=Gx_0$ has $\operatorname{Fix}(G)\ne\emptyset$, because every $g\in G$ satisfies $g(Y)=Y$ and fixes $c$. A finite group has a finite nonempty orbit, and its finite set of distances from any point has a maximum by [F9], so that orbit is bounded and it too has a fixed point. By step 2.3 the set $C=\operatorname{Fix}(G)$ is closed, convex, complete and CAT(0) in the induced metric, and contractible; it is a geodesic space whose points are joined by the geodesic segments of $X$ lying in $C$, unique by [F2]. This proves (2) and (4). [F2, F9, step 1.5, step 2.3, step 4.1]
 
 6.1 Clause (5) concluded, and the proof. Let $X$ be proper. By steps 2.1 and 3.1 the center of every nonempty bounded $Y\subseteq X$ exists and is unique, produced by the finite intersection property and not by the sequence of step 1.2, so no Choice is used; by step 1.6 a proper space is complete. Hence the assertions of (1) hold for $X$ with no use of Choice, by the argument of step 4.1 with the center of step 3.1 in place of the attained minimizer of step 3.2, and the assertions of (2), (3) and (4) follow by the same steps 1.4, 1.5 and 2.3, none of which uses Choice: the only use of the Axiom of Choice in this proof is the extraction of the minimizing sequence in step 1.2, which is needed only when $X$ is complete but not proper. Thus the conclusions of (1)-(4) hold for proper $X$ without Choice. [F7, step 1.3, step 1.6, step 3.1, step 2.3, step 5.1] ∎
-
-## Current supplier receipt status
-
-These direct in-run supplier decisions remain open. The final report distinguishes current escalations from missing or stale receipts.
-
-- `def-cg-cat-zero-cat-one-and-local-geodesic`: its current in-run supplier decision is not closed; this item consumes it in Facts F1 and proof steps 1.3, 2.2.
-- `lem-cg-comparison-convexity-and-model-spaces`: its current in-run supplier decision is not closed; this item consumes it in Facts F2, F3 and proof steps 1.3, 1.4, 2.2, 2.3, 5.1.

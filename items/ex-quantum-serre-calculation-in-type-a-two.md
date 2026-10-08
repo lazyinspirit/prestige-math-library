@@ -2,7 +2,7 @@
 id: ex-quantum-serre-calculation-in-type-a-two
 kind: example
 title: "The quasiprimitive Serre element in type $A_2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ aliases: []
 dependency_level: 5
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

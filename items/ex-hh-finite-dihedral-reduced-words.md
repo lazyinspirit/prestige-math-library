@@ -2,7 +2,7 @@
 id: ex-hh-finite-dihedral-reduced-words
 kind: example
 title: "Reduced words and lengths in a finite dihedral group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 4
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Section 3.1, printed pp. 26-29: the explicit structure and normal form of a finite dihedral group"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

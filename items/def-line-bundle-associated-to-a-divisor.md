@@ -2,7 +2,7 @@
 id: def-line-bundle-associated-to-a-divisor
 kind: definition
 title: The holomorphic line bundle associated to a divisor
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -23,6 +23,7 @@ deps:
 aliases: []
 landmark: false
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

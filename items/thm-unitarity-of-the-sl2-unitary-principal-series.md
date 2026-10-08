@@ -2,7 +2,7 @@
 id: thm-unitarity-of-the-sl2-unitary-principal-series
 kind: theorem
 title: Unitarity of the unitary principal series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 7
@@ -33,6 +33,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§7.4, Proposition 7.4.3(1), proof, and Lemma 7.4.7, printed pp. 294–297: the right-covariant Hilbert model's Jacobian and unitarity; strong continuity is left as an exercise"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

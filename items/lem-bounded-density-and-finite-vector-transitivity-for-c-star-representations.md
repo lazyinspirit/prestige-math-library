@@ -2,7 +2,7 @@
 id: lem-bounded-density-and-finite-vector-transitivity-for-c-star-representations
 kind: lemma
 title: Bounded density and finite-vector transitivity for C*-representations
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -73,6 +73,7 @@ sources:
       url: "https://ifarah.mathstats.yorku.ca/files/2025/12/standcstar-errata.pdf"
       locator: "PDF p. 3: correction to Lemma 3.4.3, proof line 3; the local proof uses the explicit factor-3 self-adjoint extension and does not use that matrix-completion lemma."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 ## Statement

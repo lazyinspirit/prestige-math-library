@@ -2,7 +2,7 @@
 id: ex-hh-unequal-parameter-dihedral-consistency
 kind: example
 title: "Unequal parameters in the dihedral cases: the odd-edge obstruction and the even-edge freedom"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 7
@@ -20,6 +20,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0108172"
       locator: "Section 3.1, PDF p. 8: the constraint L(s)=L(s') for finite odd m(s,s') on weight functions"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

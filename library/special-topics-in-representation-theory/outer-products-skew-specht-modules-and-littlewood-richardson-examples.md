@@ -1,7 +1,7 @@
 ---
 page: outer-products-skew-specht-modules-and-littlewood-richardson-examples
 title: "Outer Products, Skew Specht Modules, and Littlewood–Richardson Coefficients — Examples"
-status: draft
+status: published
 requires:
   - outer-products-skew-specht-modules-and-littlewood-richardson
 items: []

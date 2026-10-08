@@ -23,12 +23,13 @@ sources:
   - title: 'Bruce Blackadar, Operator Algebras: Theory of C*-Algebras and von Neumann Algebras (author-hosted complete text)'
     url: https://bruceblackadar.com/Mathematics/Cycr.pdf
     locator: 'Part III, III.1.5.1-III.1.5.5, printed pp. 247-248 (PDF pp. 255-256): spatial type-I factor and matrix-unit orientation; the measurable selection is proved by the new local supplier, not by this passage.'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
 axiom_use: AC is inherited from the spatial, Gram–Schmidt and conull uniformization suppliers; the extra selections are countably many Borel versions, near-supremum projections and partial isometries. Every selection is conull rather than everywhere on the original base. Zero fibres are excluded by hypothesis; zero residuals are handled by q_n=u_n=0. Finite multiplicity terminates, while infinite multiplicity uses norm-convergent square-summable series. The empty or null base makes all claims vacuous.
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

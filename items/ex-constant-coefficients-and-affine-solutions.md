@@ -2,7 +2,7 @@
 id: ex-constant-coefficients-and-affine-solutions
 kind: example
 title: "Constant coefficients and their affine solutions"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-measurable-beltrami-coefficient
@@ -40,6 +40,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §14.1, printed p. 196: solutions differ by conformal postcomposition; read in full."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

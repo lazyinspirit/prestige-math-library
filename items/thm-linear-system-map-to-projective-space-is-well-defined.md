@@ -2,7 +2,7 @@
 id: thm-linear-system-map-to-projective-space-is-well-defined
 kind: theorem
 title: The map defined by a base-point-free linear system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 provenance:
@@ -20,6 +20,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

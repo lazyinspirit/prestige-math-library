@@ -2,7 +2,7 @@
 id: lem-l1-probability-densities-are-weak-star-dense-in-the-mean-set
 kind: lemma
 title: Probability-density approximation of continuous tests and topological means
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:
@@ -73,6 +73,7 @@ sources:
     url: https://arxiv.org/pdf/0705.3432v5
     locator: 'Introduction, printed p. 1, after equation (1): for an invariant mean, approximation by normal L1 states yields an asymptotically invariant net; this does not prove density in the full set of all means. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion.'
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

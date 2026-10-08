@@ -2,7 +2,7 @@
 id: lem-cg-reflection-form-invariance-and-rank-two-orders
 kind: lemma
 title: "Reflections: involutivity, form invariance, fixed hyperplane, and exact rank-two order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "\u00a71.3, printed p. 11: Proposition 1.3 and its proof, with the characteristic polynomial $X^2-2\\cos\\frac{2\\pi}{m}X+1$ and the order-$m$ conclusion"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

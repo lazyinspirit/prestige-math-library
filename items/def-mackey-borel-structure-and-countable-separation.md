@@ -2,7 +2,7 @@
 id: def-mackey-borel-structure-and-countable-separation
 kind: definition
 title: Mackey Borel structure and countable separation of the unitary dual
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -49,6 +49,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 6, §6.C.b, Definitions 6.C.4–6.C.5 and Remark 6.C.6(2), printed pp. 195–196 (PDF pp. 194–195; comparison only—the source also cites Dixmier for Polishness, which this item does not assert); Appendix A.B, printed p. 404 (PDF p. 403)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

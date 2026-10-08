@@ -2,7 +2,7 @@
 id: def-measurable-field-of-von-neumann-algebras
 kind: definition
 title: Measurable fields of von Neumann algebras and their direct integrals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -32,6 +32,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1, §1.I, Definition 1.I.1 (measurable fields) and Definition 1.I.4 with Example 1.I.5 (direct integral and diagonal algebra), printed pp. 69–70"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

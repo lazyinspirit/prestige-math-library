@@ -2,7 +2,7 @@
 id: thm-irreducibility-and-k-types-of-the-discrete-series
 kind: theorem
 title: Irreducibility and K-types of the discrete series
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-k-finite-and-smooth-vectors-for-sl2-r
@@ -18,6 +18,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "AC is inherited through the weighted model and Hilbert/K-type suppliers. The invariant-subspace argument and ladder calculations use no further choice."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

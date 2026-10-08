@@ -2,7 +2,7 @@
 id: cor-cg-coxeter-nerve-is-cat-one-and-has-girth-at-least-two-pi
 kind: corollary
 title: "The Coxeter nerve is CAT(1), and its girth and the girths of all its links are at least $2\\pi$"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps:
@@ -39,6 +39,7 @@ sources:
       url: "https://msp.org/pjm/1995/171-1/pjm-v171-n1-p04-s.pdf"
       locator: "2.8-2.10 (Gromov's and Moussong's lemmas: largeness of all-right and of metric flag complexes with simplices of size $>\\pi/2$)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-second-countable-group-c-star-algebra-is-separable-with-a-countable-dense-star-subalgebra
 kind: lemma
 title: "The full group C star algebra of a second-countable group is separable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -46,6 +46,7 @@ sources:
       url: "https://bruceblackadar.com/Mathematics/Cycr.pdf"
       locator: "Part II, §II.10.2.9, printed p. 212 (PDF p. 220): states that C*(G) is separable iff G is second countable, without proof. This item proves the forward direction locally and constructs the countable dense star-subalgebra."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

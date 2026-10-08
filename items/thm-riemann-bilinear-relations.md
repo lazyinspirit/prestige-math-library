@@ -2,7 +2,7 @@
 id: thm-riemann-bilinear-relations
 kind: theorem
 title: The Riemann bilinear relations and the period lattice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 19
@@ -39,6 +39,7 @@ sources:
       url: "https://ebooks.karbust.me/Mathematics/Otto%20Forster%20-%20Lectures%20on%20Riemann%20Surfaces%20%281981%29%20%5B978-1-4612-5961-9%5D.pdf"
       locator: "Ch. 2, Theorem 21.4 and full proof (a)–(c), printed pp. 168–170: an alternative proof that the period subgroup is a lattice, using a local Jacobi map, Abel's theorem, the residue theorem, and a real-linear spanning argument."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

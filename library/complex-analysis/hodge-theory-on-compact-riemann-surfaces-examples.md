@@ -1,7 +1,7 @@
 ---
 page: hodge-theory-on-compact-riemann-surfaces-examples
 title: 'Hodge Theory on Compact Riemann Surfaces: Examples and Counterexamples'
-status: draft
+status: published
 items:
 - ex-nonharmonic-exact-dbar-form
 - ex-one-dimensional-constant-zero-mode-of-dolbeault-laplacian

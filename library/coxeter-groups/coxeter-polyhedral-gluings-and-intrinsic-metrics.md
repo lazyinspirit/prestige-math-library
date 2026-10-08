@@ -1,7 +1,7 @@
 ---
 page: coxeter-polyhedral-gluings-and-intrinsic-metrics
 title: "Coxeter Polyhedral Gluings and Intrinsic Metrics"
-status: draft
+status: published
 requires: [metric-spaces, compactness-in-metric-spaces,
            simplicial-complexes-and-simplicial-homology,
            simplicial-subdivision-and-simplicial-approximation,

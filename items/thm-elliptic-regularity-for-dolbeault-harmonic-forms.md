@@ -2,7 +2,7 @@
 id: thm-elliptic-regularity-for-dolbeault-harmonic-forms
 kind: theorem
 title: "Elliptic regularity for Dolbeault harmonic forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 5
@@ -35,6 +35,7 @@ sources:
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: "Ch. 4 §4.11, Theorem 4.28 and Corollary 4.29, printed p. 114: higher interior Sobolev regularity and smoothness for smooth coefficients and data. Theorem 4.28 refers to [9] for its detailed proof; this item uses the library's fully proved interior theorem and smooth-data corollary."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

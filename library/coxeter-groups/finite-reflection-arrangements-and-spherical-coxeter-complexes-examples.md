@@ -1,7 +1,7 @@
 ---
 page: finite-reflection-arrangements-and-spherical-coxeter-complexes-examples
 title: "Finite Reflection Arrangements and Spherical Coxeter Complexes — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-circle-coxeter-complex-of-i2-5, ex-cg-sphere-coxeter-complex-of-a3-and-a-parabolic-residue, ex-cg-infinite-dihedral-degeneration-versus-davis-complex]
 ---

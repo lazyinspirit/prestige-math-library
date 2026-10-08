@@ -2,7 +2,7 @@
 id: thm-bergman-basis-expansion-and-closedness
 kind: theorem
 title: "$A^2(\\Omega)$ is closed, and the Bergman kernel is the sum over any complete orthonormal system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 3
@@ -39,6 +39,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

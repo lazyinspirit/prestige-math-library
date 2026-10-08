@@ -2,7 +2,7 @@
 id: lem-hh-coefficient-extension-and-finite-tensor-separation
 kind: lemma
 title: "Coefficient separation for an independent family of vectors, with explicit Choice assumptions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -20,6 +20,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "Theorem 4.15, printed pp. 18–19: uniqueness of coefficients in a tensor product with a free factor"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

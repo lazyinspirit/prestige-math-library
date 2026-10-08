@@ -2,7 +2,7 @@
 id: "ex-cg-skips-and-cone-walls-for-a-sorting-word-in-a3"
 kind: "example"
 title: "All skips and the cone walls of the sortable element s1s2 in A3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 26
@@ -37,6 +37,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 4.4, pp. 101-105 (roots and inversion sets; corroborative background)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

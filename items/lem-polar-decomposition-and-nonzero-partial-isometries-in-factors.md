@@ -2,7 +2,7 @@
 id: lem-polar-decomposition-and-nonzero-partial-isometries-in-factors
 kind: lemma
 title: Polar decomposition inside a von Neumann algebra and nonzero partial isometries between nonzero projections in a factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -45,6 +45,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Appendix A.K, Definition A.K.2 and Definitions A.K.5–A.K.6, printed pp. 423–424, for factor-center, support-projection and central-support terminology. These passages do not prove polar decomposition or the general nonzero-corner claim."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 ## Statement

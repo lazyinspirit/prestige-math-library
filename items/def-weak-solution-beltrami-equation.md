@@ -2,7 +2,7 @@
 id: def-weak-solution-beltrami-equation
 kind: definition
 title: "Weak solutions of the Beltrami equation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-measurable-beltrami-coefficient
@@ -41,6 +41,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 3 §1, printed p. 85: affine complex dilatation; Ch. 3 §6, printed pp. 103–105: weak derivatives and the almost-everywhere Beltrami equation in the convergence-of-dilatations proof."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

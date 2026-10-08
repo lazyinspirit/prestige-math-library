@@ -2,7 +2,7 @@
 id: ex-cg-root-versus-coroot-translation-lattices
 kind: example
 title: "Root versus coroot translation lattices: A2, B2 and two conventions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -20,6 +20,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

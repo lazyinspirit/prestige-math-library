@@ -1,7 +1,7 @@
 ---
 page: divisors-riemann-roch-and-duality
 title: "Divisors, Riemann--Roch, and Duality"
-status: draft
+status: published
 items:
   - def-divisor-principal-and-canonical-divisor-riemann-surface
   - thm-smooth-function-module-sheaves-are-acyclic

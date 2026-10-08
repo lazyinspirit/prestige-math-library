@@ -2,7 +2,7 @@
 id: thm-extremal-length-conformal-invariance-and-monotonicity
 kind: theorem
 title: Conformal invariance, monotonicity, and the series and parallel laws for extremal length
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 2
@@ -23,6 +23,7 @@ sources:
       url: "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5710-11511_2006_Article_BF02392634.pdf"
       locator: "§4, printed p. 115: Lemmas 1–3 for overflow monotonicity, the series inequality, and the parallel harmonic-sum law."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

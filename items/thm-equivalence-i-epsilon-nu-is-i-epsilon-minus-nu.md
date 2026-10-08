@@ -2,7 +2,7 @@
 id: thm-equivalence-i-epsilon-nu-is-i-epsilon-minus-nu
 kind: theorem
 title: Parameter-sign equivalence and its exceptional failures for SL2(R)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 8
@@ -34,6 +34,7 @@ sources:
       url: "https://www.math.wustl.edu/~matkerr/sl2notes.pdf"
       locator: "§2, Exercise 2.8(iii), printed p. 12: the integral intertwiner is nonzero and an isomorphism away from the reducibility lattice"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-amenability-is-stable-under-closed-subgroups-quotients-and-extensions
 kind: theorem
 title: Amenability is stable under closed subgroups, quotients and extensions
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 proof_strategy: direct
@@ -41,6 +41,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

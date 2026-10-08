@@ -2,7 +2,7 @@
 id: lem-hh-hecke-anti-involution-bar-and-normalization
 kind: lemma
 title: "The reversal anti-involution, generator invertibility, the bar operator and the multiplicative normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 7
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0511548"
       locator: "Section 4 and Subsection 4.1, printed/PDF pp. 15-16: the generic algebra over A = Z[v,v^{-1}] with parameters v^{2L(s)} and free basis {T_w}, and the specialization H_{k,xi} = k (x)_A H"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

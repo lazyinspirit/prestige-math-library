@@ -1,7 +1,7 @@
 ---
 page: direct-integral-decomposition-and-type-i-groups
 title: Direct Integral Decomposition and Type I Groups
-status: draft
+status: published
 requires:
   - unitary-representations-positive-type-and-gns
   - group-c-star-algebras-and-the-fell-unitary-dual

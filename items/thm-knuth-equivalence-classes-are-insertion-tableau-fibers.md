@@ -2,7 +2,7 @@
 id: thm-knuth-equivalence-classes-are-insertion-tableau-fibers
 kind: theorem
 title: Knuth classes are the fibers of the insertion tableau
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-knuth-and-dual-knuth-equivalence-for-permutations, thm-robinson-schensted-correspondence, cor-rsk-symmetry-under-inversion, def-row-insertion-and-bumping-route, lem-row-bumping-route-monotonicity]
@@ -25,6 +25,7 @@ sources:
       url: "https://d-nb.info/1162953020/34"
       locator: "§5.3, printed pp. 58–62: Lemma 5.29 and the RSK type-A cell route; retained from the scaffold bibliography."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

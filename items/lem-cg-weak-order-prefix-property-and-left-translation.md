@@ -2,7 +2,7 @@
 id: lem-cg-weak-order-prefix-property-and-left-translation
 kind: lemma
 title: "The length identity, the prefix property, left translation, and interval translation for weak order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 12
@@ -17,6 +17,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

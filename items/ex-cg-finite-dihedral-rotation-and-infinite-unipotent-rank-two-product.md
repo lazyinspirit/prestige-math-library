@@ -2,7 +2,7 @@
 id: ex-cg-finite-dihedral-rotation-and-infinite-unipotent-rank-two-product
 kind: example
 title: "The finite dihedral rotation and the infinite unipotent rank-two product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 3
@@ -25,6 +25,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "\u00a71.3, printed p. 11: $\\Phi(e_s)=(4\\cos^2\\frac{\\pi}{m}-1)e_s+2\\cos\\frac{\\pi}{m}e_{s'}$ and $(\\varphi-1)^2=0$ for $m=\\infty$"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

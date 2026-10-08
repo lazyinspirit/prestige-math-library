@@ -2,7 +2,7 @@
 id: thm-cg-root-length-criterion-and-faithfulness
 kind: theorem
 title: "The root-length criterion and faithfulness of the canonical reflection representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 9
@@ -21,6 +21,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "S4.2, printed pp. 93-97 (Propositions 4.2.1 and 4.2.5, Theorem 4.2.7); S4.4, printed pp. 101-105 (Lemma 4.4.3, Proposition 4.4.4); read in the extracted full text; exercises excluded"
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

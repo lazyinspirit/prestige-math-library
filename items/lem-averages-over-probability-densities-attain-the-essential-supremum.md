@@ -2,7 +2,7 @@
 id: lem-averages-over-probability-densities-attain-the-essential-supremum
 kind: lemma
 title: Probability-density averages and locally detectable upper essential values
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:
@@ -51,6 +51,7 @@ sources:
     url: https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf
     locator: Density of L1(G)_{1,+} in the set of means, PDF p. 9 (the Hahn–Banach separation argument). The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion.
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

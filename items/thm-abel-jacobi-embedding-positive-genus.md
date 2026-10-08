@@ -2,7 +2,7 @@
 id: thm-abel-jacobi-embedding-positive-genus
 kind: theorem
 title: The Abel-Jacobi map embeds a positive-genus surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 25
@@ -43,6 +43,7 @@ sources:
       url: "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf"
       locator: "Ch. 7 §2, Corollary 7.7: for genus one the point map $I_o:S\\to\\operatorname{Jac}(S)$ is an isomorphism, printed p. 61."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

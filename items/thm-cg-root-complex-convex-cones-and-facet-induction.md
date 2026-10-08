@@ -2,7 +2,7 @@
 id: thm-cg-root-complex-convex-cones-and-facet-induction
 kind: theorem
 title: "The separating-root lemma, the exact facet halfspaces of the added cones, and the spherical convexity of |X(sigma)|"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 21
@@ -27,6 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0505518"
       locator: "Section 2.5, printed pp. 22-24, for the ambient Coxeter-element conventions"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

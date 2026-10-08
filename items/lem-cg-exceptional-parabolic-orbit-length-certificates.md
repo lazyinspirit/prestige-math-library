@@ -2,7 +2,7 @@
 id: lem-cg-exceptional-parabolic-orbit-length-certificates
 kind: lemma
 title: "Exceptional parabolic-orbit length certificates for E6, E7, E8, F4, H3 and H4"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 20
@@ -19,6 +19,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Example 7.1.6, printed p. 205: the normal-form-tree computation of the F4 quotient polynomial W^{S\\setminus\\{s_4\\}}(q)=1+q+q^2+q^3+2(q^4+\\cdots+q^{11})+q^{12}+q^{13}+q^{14}+q^{15}=[8]_q(1+q^4+q^8), used as an independent comparison with the exact certificate. The local certificate proves all six cases."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-c-star-state-gns-purity-and-polish-state-space
 kind: lemma
 title: "C star state GNS construction, purity and Polish pure-state spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -54,6 +54,7 @@ sources:
       url: "https://ifarah.mathstats.yorku.ca/files/2025/12/standcstar-errata.pdf"
       locator: "PDF p. 4, correction note on Proposition 3.6.5, proof of (1) implies (2): no mathematical error is identified, but the note supplies the omitted norm-additivity-to-convex-decomposition explanation proved locally in step 2.3."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

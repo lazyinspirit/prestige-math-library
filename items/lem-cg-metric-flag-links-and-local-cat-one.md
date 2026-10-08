@@ -2,7 +2,7 @@
 id: lem-cg-metric-flag-links-and-local-cat-one
 kind: lemma
 title: "Face links of large metric flag complexes, and the inductive local CAT(1) criterion"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:
@@ -36,6 +36,7 @@ sources:
       url: "https://msp.org/pjm/1995/171-1/pjm-v171-n1-p04-s.pdf"
       locator: "2.4.1 (links of faces of simplices of size $>\\pi/2$ again have size $>\\pi/2$) and 2.10.1 (the link criterion in the nonacute case)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

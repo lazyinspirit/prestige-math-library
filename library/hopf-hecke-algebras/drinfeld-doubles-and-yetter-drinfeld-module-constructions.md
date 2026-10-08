@@ -1,7 +1,7 @@
 ---
 page: drinfeld-doubles-and-yetter-drinfeld-module-constructions
 title: "Drinfeld Doubles and Yetter–Drinfeld Module Constructions"
-status: draft
+status: published
 items: []
 examples: []
 ---

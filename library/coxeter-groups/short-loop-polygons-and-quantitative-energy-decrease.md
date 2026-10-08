@@ -1,7 +1,7 @@
 ---
 page: short-loop-polygons-and-quantitative-energy-decrease
 title: "Short Loop Polygons and Quantitative Energy Decrease"
-status: draft
+status: published
 items: [def-cg-short-loop-homotopy-and-nonshrinkability, def-cg-cyclic-small-mesh-polygon-and-midpoint-energy, lem-cg-polygon-midpoint-drop-and-equality, lem-cg-local-cat-one-products-from-sine-comparison, lem-cg-finite-spherical-comparison-disks-and-radius-estimates, lem-cg-comparison-product-perturbation-and-degenerate-limits, lem-cg-uniform-energy-decrement-and-short-class-closedness, lem-cg-cat-one-short-and-closed-local-geodesics, lem-cg-bowditch-quantitative-short-loop-control]
 examples: []
 ---

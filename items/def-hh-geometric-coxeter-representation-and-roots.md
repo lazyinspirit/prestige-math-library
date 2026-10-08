@@ -2,7 +2,7 @@
 id: def-hh-geometric-coxeter-representation-and-roots
 kind: definition
 title: "The geometric representation on the simple-root basis over a common splitting field, and the root set"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-hh-coxeter-matrix-word-group-and-length, def-rationals, thm-rat-field, def-polynomial-ring-over-a-commutative-ring, def-polynomials-that-split-and-splitting-fields, thm-splitting-fields-exist-for-nonzero-polynomials, cor-splitting-fields-exist-for-finite-families, thm-polynomial-degree-of-a-product-over-a-domain, thm-polynomial-ring-over-a-field-is-a-ufd, def-ring-characteristic, thm-characteristic-of-a-field-is-zero-or-prime, thm-prime-subfield-classification, def-roots-of-unity-in-a-field, prop-the-roots-of-unity-in-a-field-form-a-finite-cyclic-group, thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity, def-vector-space, def-linear-basis, def-linear-map, def-linear-isomorphism-and-invertible-linear-map, lem-composition-and-identity-linear-maps]
@@ -14,6 +14,7 @@ provenance:
   proof: not-applicable
 proof_strategy: definition
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

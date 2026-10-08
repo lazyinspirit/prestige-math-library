@@ -2,7 +2,7 @@
 id: def-cg-comparison-angle-and-alexandrov-angle
 kind: definition
 title: "Comparison angles of hinges, model triangle angles, and the Alexandrov upper angle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 9
@@ -18,6 +18,7 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bridsonhaefligerx.pdf"
       locator: "I.1.12–I.1.13, printed p. 9 (comparison angles and the Alexandrov upper angle); I.2.13–I.2.15, printed pp. 24–25 (model cosine laws and spherical comparison angles)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

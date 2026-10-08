@@ -2,7 +2,7 @@
 id: lem-nonsingular-principal-minor-of-the-symmetrized-cartan-matrix
 kind: lemma
 title: "A nonsingular principal minor of the symmetrized Cartan matrix of size the rank"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ aliases: []
 dependency_level: 0
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

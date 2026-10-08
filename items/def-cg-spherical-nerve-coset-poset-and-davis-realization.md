@@ -2,7 +2,7 @@
 id: "def-cg-spherical-nerve-coset-poset-and-davis-realization"
 kind: definition
 title: "Spherical subsets, the nerve, the poset of spherical cosets, and the Davis realization"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps: ["def-hh-coxeter-matrix-word-group-and-length", "def-cg-parabolic-quotient-and-two-sided-minima", "def-generated-subgroup", "def-coset", "def-group", "lem-finite-coset-partition", "def-abstract-simplicial-complex", "def-face-poset-and-order-complex", "def-geometric-realization-of-an-abstract-simplicial-complex", "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization", "thm-hh-parabolic-minimal-representatives-and-length-additivity"]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

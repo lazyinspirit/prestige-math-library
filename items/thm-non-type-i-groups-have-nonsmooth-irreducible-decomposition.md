@@ -2,7 +2,7 @@
 id: "thm-non-type-i-groups-have-nonsmooth-irreducible-decomposition"
 kind: "theorem"
 title: "Non-type-I groups have non-smooth irreducible disintegration"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-43-complex-representation-15"
 dependency_level: 9
@@ -12,6 +12,7 @@ deps: ["def-axiom-of-choice", "def-direct-integral-of-a-measurable-hilbert-field
 provenance: {"statement": "literature-derived", "proof": "ai-altered"}
 sources: {"references": [{"title": "Bachir Bekka and Pierre de la Harpe, Unitary Representations of Groups, Duals, and Characters (arXiv:1912.07262v1, 16 December 2019; author-hosted complete book draft)", "url": "https://arxiv.org/pdf/1912.07262", "locator": "Chapter 1, §1.G: Theorem 1.G.10 (Dixmier) and the discussion of non-uniqueness of irreducible decompositions, printed pp. 62-63; Chapter 8, §8.F: Glimm theorem, printed pp. 256-259"}, {"title": "Bruce Blackadar, Operator Algebras: Theory of C*-Algebras and von Neumann Algebras (author-hosted complete text)", "url": "https://bruceblackadar.com/Mathematics/Cycr.pdf", "locator": "Part IV, §1.5: IV.1.5.1 and IV.1.5.12, printed pp. 358-361"}, {"title": "Jacques Dixmier, Utilisation des facteurs hyperfinis dans la theorie des C*-algebres, C.R.Acad.Sci.Paris258(1964),4184–4187", "url": "http://cm2vivi2002.free.fr/JD-biblio/JD-454.pdf", "locator": "Corollaire2 printed4185–4186; all4original scanned pages read. Exact owner-authorized cited fact; its proof imports Glimm1961 supported construction, so that construction is not represented as locally proved."}]}
 verification:
+  audited: "2026-10-08"
   precheck: pass
 proof_scope: {"local": "nonsmoothness, n=2 specialization, group/algebra transfer, field measurability and central-decomposition boundary", "owner_authorized_original_citation": {"authority": "research/frontier-43-complex-representation-15-conditional-glimm-citation-authorization.json", "fact": "Dixmier1964 Corollaire2 pairwise disjoint standard-Borel irreducible-integral witnesses, n=2", "original_full_text_read": true, "local_justification_supplied": false, "source_sha256": "20ac10522b8e5c69f6ee0e13068382beb1730b7fbcff09f9549f6ca09b2ba2f5"}}
 ---

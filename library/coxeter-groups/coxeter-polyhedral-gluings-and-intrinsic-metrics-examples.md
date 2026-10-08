@@ -1,7 +1,7 @@
 ---
 page: coxeter-polyhedral-gluings-and-intrinsic-metrics-examples
 title: "Coxeter Polyhedral Gluings and Intrinsic Metrics — Examples"
-status: draft
+status: published
 requires: [coxeter-polyhedral-gluings-and-intrinsic-metrics,
            areas-of-elementary-plane-figures]
 items: []

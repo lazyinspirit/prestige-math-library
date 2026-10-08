@@ -2,7 +2,7 @@
 id: lem-coproduct-preserves-the-positive-and-negative-quantum-serre-ideals
 kind: lemma
 title: "The coproduct preserves the positive and negative quantum Serre ideals"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -23,6 +23,7 @@ aliases: []
 dependency_level: 4
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

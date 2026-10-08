@@ -2,7 +2,7 @@
 id: def-cg-cyclic-small-mesh-polygon-and-midpoint-energy
 kind: definition
 title: "Uniform local radii, cyclic small-mesh polygons, mesh, length, energy, the midpoint operation and the zero-limit basin"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 10
@@ -23,6 +23,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Appendix I.2.6–I.2.19, printed pp. 502–507 (local geodesics I.2.16, the cone on a CAT(1)-space I.2.17–I.2.18)"
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

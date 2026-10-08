@@ -2,7 +2,7 @@
 id: thm-residue-pairing-for-line-bundle-cohomology
 kind: theorem
 title: The residue pairing for line-bundle cohomology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
@@ -39,6 +39,8 @@ sources:
     - title: Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 11, Pairings, printed pp. 95–96: the product map O_{−D}⊗Ω_D→Ω, the trace Res on H^1(X,Ω), and the induced functional φ(ξ)=Res(ξω)."
+verification:
+  audited: "2026-10-08"
 ---
 
 ## Statement

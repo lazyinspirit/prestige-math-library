@@ -2,7 +2,7 @@
 id: ex-cg-interval-congruence-criterion-on-a-chain-and-a-diamond
 kind: example
 title: "The interval criterion checked on a three-element chain and a diamond"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 3
@@ -20,6 +20,7 @@ sources:
     - title: "Nathan Reading, Lattice congruences of the weak order: algebra, combinatorics, and geometry, Triangle Lectures in Combinatorics (2019), slides on the order-theoretic characterization of a lattice congruence"
       url: "https://nreadin.math.ncsu.edu/papers/TLC.pdf"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-cg-all-right-triangle-versus-disconnected-universal-coxeter-nerve
 kind: example
 title: "The all-right triangle must be filled; the disconnected universal-Coxeter nerve is CAT(1) vacuously"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -35,6 +35,7 @@ sources:
       url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
       locator: "Chapter 7.3 and Chapter 12 (right-angled Coxeter systems and their nerve; the free product of $\\mathbb Z/2$'s)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

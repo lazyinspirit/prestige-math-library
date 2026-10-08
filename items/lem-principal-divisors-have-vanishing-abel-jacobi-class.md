@@ -2,7 +2,7 @@
 id: lem-principal-divisors-have-vanishing-abel-jacobi-class
 kind: lemma
 title: Principal divisors have vanishing Abel-Jacobi class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 23
@@ -36,6 +36,7 @@ sources:
       url: "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf"
       locator: "Ch. 7 §2, proof of Proposition 7.5 (Abel): D=f*(0)-f*(infinity) and I(D)=0, printed p. 61."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

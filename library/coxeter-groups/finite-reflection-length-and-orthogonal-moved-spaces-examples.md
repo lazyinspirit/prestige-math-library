@@ -1,7 +1,7 @@
 ---
 page: finite-reflection-length-and-orthogonal-moved-spaces-examples
 title: "Finite Reflection Length and Orthogonal Moved Spaces — Examples"
-status: draft
+status: published
 requires: [finite-reflection-length-and-orthogonal-moved-spaces]
 items: []
 examples: [ex-cg-simple-and-reflection-length-of-a-long-transposition-in-s5,

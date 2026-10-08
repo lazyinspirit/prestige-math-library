@@ -2,7 +2,7 @@
 id: lem-separable-group-c-star-type-i-and-smooth-dual-criteria
 kind: lemma
 title: "Glimm criteria for separable C star algebras and type I groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -58,6 +58,7 @@ sources:
       url: "https://ifarah.mathstats.yorku.ca/files/2022/07/2019_Book_CombinatorialSetTheoryOfC-alge.pdf"
       locator: "Component proofs for the locally proved H2 directions (GNS purity, excision, essential orbit density, primitive coding and analytic separation) as recorded in the H2 alternative document."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

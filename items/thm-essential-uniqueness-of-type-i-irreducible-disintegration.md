@@ -19,12 +19,13 @@ sources:
   - title: 'Bruce Blackadar, Operator Algebras: Theory of C*-Algebras and von Neumann Algebras (author-hosted complete text)'
     url: https://bruceblackadar.com/Mathematics/Cycr.pdf
     locator: 'Part IV, §1.5: IV.1.5.12 and the multiplicity discussion, printed pp. 360-361'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 proof_strategy: direct
 axiom_use: 'AC is inherited from existence, central transport and multiplicity uniqueness. No new selector is needed: the transport field already exists, and equality of its actual class labels forces the base map to be the identity. The zero representation forces both measures to be zero. One-point, atomic and non-atomic supports, as well as finite or infinite multiplicities, use the same fibrewise argument.'
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

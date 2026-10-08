@@ -2,7 +2,7 @@
 id: thm-classification-of-the-irreducible-unitary-dual-of-sl2-r
 kind: theorem
 title: Classification of the irreducible unitary dual of SL2(R)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 10
@@ -49,6 +49,7 @@ provenance:
   proof: ai-altered
 axiom_audit: "Assume AC. It is used through the group C*-algebra and normalized Haar measure on K, the compact K-type decomposition, and countable phase choices in the model intertwiners. No choice-free branch is asserted."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

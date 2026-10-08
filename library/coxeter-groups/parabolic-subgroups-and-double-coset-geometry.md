@@ -1,7 +1,7 @@
 ---
 page: parabolic-subgroups-and-double-coset-geometry
 title: "Parabolic Subgroups and Double Coset Geometry"
-status: draft
+status: published
 requires: [coxeter-presentations-exchange-and-reduced-word-theorems,
            canonical-roots-signs-and-faithful-reflections]
 items: [def-cg-parabolic-quotient-and-two-sided-minima,

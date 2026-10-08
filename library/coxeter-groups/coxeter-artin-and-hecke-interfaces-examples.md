@@ -1,7 +1,7 @@
 ---
 page: coxeter-artin-and-hecke-interfaces-examples
 title: "Coxeter, Artin, and Hecke Interfaces — Examples"
-status: draft
+status: published
 requires: [coxeter-artin-and-hecke-interfaces]
 items: [ex-cg-type-a-artin-projection-and-positive-lifts,
         cex-cg-artin-positive-lift-is-not-a-homomorphism,

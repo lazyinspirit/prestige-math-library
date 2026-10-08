@@ -2,7 +2,7 @@
 id: lem-k-finite-vectors-detect-nonzero-closed-invariant-subspaces
 kind: lemma
 title: K-finite vectors detect nonzero closed invariant subspaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 5
@@ -33,6 +33,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
       locator: "Proposition 5.4 and Example 5.5, printed pp. 29–30; §5.2, Proposition 5.10 and Exercise 5.11, printed pp. 30–31. These give the smooth/K-finite module facts; the local L² extension and K-type detection are proved here."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-cg-integer-pairings-and-allowed-dihedral-labels
 kind: lemma
 title: "Cartan-number products, allowed edge labels, tree scalings and reflection stability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 9
@@ -24,6 +24,7 @@ sources:
       locator: "Section 5, the cosine table for m=2,3,4,5,6 (printed p. 13): -cos(pi/m) and cos^2(pi/m) values 0, 1/4, 1/2, (3+sqrt5)/8, 3/4 used in the label restriction"
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

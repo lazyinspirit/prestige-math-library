@@ -1,7 +1,7 @@
 ---
 page: coxeter-presentations-exchange-and-reduced-word-theorems
 title: "Coxeter Presentations, Exchange, and Reduced Word Theorems"
-status: draft
+status: published
 items: [def-hh-coxeter-matrix-word-group-and-length, def-hh-geometric-coxeter-representation-and-roots, lem-hh-dihedral-root-recurrence-and-root-sign, thm-hh-coxeter-exchange-deletion-and-faithfulness, thm-hh-matsumoto-reduced-word-theorem, thm-hh-parabolic-minimal-representatives-and-length-additivity]
 examples: []
 ---

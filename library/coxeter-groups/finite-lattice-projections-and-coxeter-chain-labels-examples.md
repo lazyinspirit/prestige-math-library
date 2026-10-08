@@ -1,7 +1,7 @@
 ---
 page: finite-lattice-projections-and-coxeter-chain-labels-examples
 title: "Finite Lattice Projections and Coxeter Chain Labels — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cg-rank-three-chain-labeling-and-order-complex-facets, cex-cg-interval-partition-with-nonmonotone-endpoints-is-not-a-congruence, ex-cg-interval-congruence-criterion-on-a-chain-and-a-diamond]
 ---

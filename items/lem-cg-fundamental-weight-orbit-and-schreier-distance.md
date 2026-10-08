@@ -2,7 +2,7 @@
 id: lem-cg-fundamental-weight-orbit-and-schreier-distance
 kind: lemma
 title: "The orbit of a dual fundamental functional: stabilizer, minimal coset length, Schreier distance, and the quotient formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 13
@@ -21,6 +21,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Chapter 2.4, printed pp. 39-40: Proposition 2.4.4 and Corollary 2.4.5 give the unique length-additive decomposition $w=w^Jw_J$, the descent-free characterization of $W^J$, and the unique minimal representative of each coset $wW_J$."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

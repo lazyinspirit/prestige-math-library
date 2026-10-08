@@ -2,7 +2,7 @@
 id: "lem-cg-spherical-coset-inclusion-and-intersection"
 kind: lemma
 title: "Equality, inclusion and intersection of spherical cosets, and the quotient poset"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps: ["def-cg-spherical-nerve-coset-poset-and-davis-realization", "thm-hh-parabolic-minimal-representatives-and-length-additivity", "thm-cg-parabolic-intersections-and-coset-factorization", "def-coset", "def-subgroup", "def-group", "lem-coset-membership-and-equality"]
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

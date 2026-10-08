@@ -2,7 +2,7 @@
 id: ex-affine-quasiconformal-ellipse-map
 kind: example
 title: The affine ellipse map and its Beltrami coefficient
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 8
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §11.1, printed pp. 175–178: the ellipse field and maximal dilatation of an orientation-preserving real-linear map."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

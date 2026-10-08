@@ -2,7 +2,7 @@
 id: lem-reversal-anti-involution-commutes-with-hecke-bar
 kind: lemma
 title: Reversal anti-involution commutes with the Hecke bar
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps: [def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-the-hecke-bar-involution-is-well-defined]
@@ -19,6 +19,7 @@ sources:
       url: "https://arxiv.org/pdf/1212.0791"
       locator: "§3.2, printed pp. 15–16: the anti-involution fixing v and sending H_x to H_{x^{-1}}, alongside the bar formula; complete section read."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

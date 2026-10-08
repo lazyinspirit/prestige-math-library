@@ -2,7 +2,7 @@
 id: thm-cg-fully-commutative-forbidden-chain-criterion
 kind: theorem
 title: "Fully commutative elements: the braid-factor criterion and the forbidden-chain heap criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 5
@@ -22,6 +22,7 @@ sources:
       url: "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf"
       locator: "§3, PDF pp. 4-5 (words in a commutation class are read from linear extensions)"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

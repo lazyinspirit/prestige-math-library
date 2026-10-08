@@ -2,7 +2,7 @@
 id: ex-normalization-by-mobius-maps
 kind: example
 title: "Normalization of a solution by a Möbius postcomposition"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-measurable-beltrami-coefficient
@@ -43,6 +43,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 3 §2, printed p. 88: the measurable Riemann mapping theorem and its Möbius normalization ambiguity; read in full."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

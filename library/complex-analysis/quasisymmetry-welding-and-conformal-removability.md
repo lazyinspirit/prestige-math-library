@@ -1,7 +1,7 @@
 ---
 page: quasisymmetry-welding-and-conformal-removability
 title: Quasisymmetry, Welding, and Conformal Removability
-status: draft
+status: published
 items:
 - def-quasisymmetric-circle-homeomorphism
 - lem-quasiconformal-local-jacobian-energy-bound

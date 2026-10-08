@@ -2,7 +2,7 @@
 id: ex-abel-image-in-its-jacobian
 kind: example
 title: The Abel image in its Jacobian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 27
@@ -32,6 +32,7 @@ sources:
       url: "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf"
       locator: "Ch. 7 §2, the point map $I^p_o$, Corollary 7.7 and the discussion after Theorem 7.6, printed pp. 60-63."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

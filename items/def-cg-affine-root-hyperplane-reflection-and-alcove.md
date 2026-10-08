@@ -2,7 +2,7 @@
 id: def-cg-affine-root-hyperplane-reflection-and-alcove
 kind: definition
 title: "Affine root hyperplanes, coroot translations, alcoves, and the affine reflection group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 0
@@ -29,6 +29,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

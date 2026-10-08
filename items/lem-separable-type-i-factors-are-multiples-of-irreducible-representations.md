@@ -2,7 +2,7 @@
 id: lem-separable-type-i-factors-are-multiples-of-irreducible-representations
 kind: lemma
 title: "A separable type I factor is a multiple of an irreducible representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -37,6 +37,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 6, §6.B.c: Proposition 6.B.14 and its proof, printed pp. 186-187, deriving the factor-representation/multiple-of-irreducible equivalence from the preceding results."
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

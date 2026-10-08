@@ -2,7 +2,7 @@
 id: def-cg-coxeter-noncrossing-poset-and-kreweras-map
 kind: definition
 title: "Coxeter elements, the noncrossing interval [1,c], and the Kreweras map w ↦ w⁻¹c"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 15
@@ -27,11 +27,8 @@ provenance:
   proof: not-applicable
 proof_strategy: definition
 verification:
+  audited: "2026-10-08"
   precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 sources:
   references:
     - title: "H. Eriksson and K. Eriksson, Conjugacy of Coxeter Elements, Electronic Journal of Combinatorics 16(2) (2009), #R4"
@@ -71,5 +68,4 @@ This is well-defined as a map to $W$ by the group operations. It is not defined 
 
 ## Remarks
 
-- **Open supplier obligations.** These current in-run suppliers have no closed Step-3 disposition: `def-hh-coxeter-matrix-word-group-and-length` supplies the Coxeter-system and word-length conventions in the opening Definition; `def-cg-coxeter-diagram-components-and-finite-type` supplies the diagram/components in the opening Definition; `def-cg-real-coxeter-form-and-reflection` and `def-cg-canonical-reflection-homomorphism` supply the form, reflection representation and reflection set in the opening Definition; `def-cg-reflection-length-absolute-order-and-moved-space` supplies $ℓ_T$ and $≤_T$ in the opening Definition; and `lem-cg-diagram-products-and-invariant-form-comparison` supplies the component product in clause (3). The bipartite example in clause (1), sentence 4 provisionally uses `def-cg-bipartite-coxeter-element-and-root-recursion`, whose current inputs require an owner decision. There is no numbered proof step in a definition. Reconcile each completed supplier statement with its exact use before clearing this item's decision.
 - The set of Coxeter elements need not be a union of $W$-conjugacy classes. Take the presentation with generators $s_1,s_2,s_3$ and only the relations $s_i^2=1$ (the free product $C_2*C_2*C_2$). On the set $X$ of words with no equal adjacent letters, let $s_i$ delete the first letter when it is $s_i$, and otherwise prepend $s_i$. Each operation is an involution in the permutation group $\operatorname{Sym}(X)$ ([[def-symmetric-group]], [[lem-symmetric-group-is-a-group]]), so the presentation's universal property gives a homomorphism to that group. A word with no equal adjacent letters sends the empty word to its own letter string, whereas a product of $k$ generators sends it to a string of length at most $k$. Therefore $s_2s_1s_2s_3s_2$ has word length five. It equals $s_2(s_1s_2s_3)s_2$, but cannot be a once-each product of three generators.

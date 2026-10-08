@@ -2,7 +2,7 @@
 id: cor-complementary-series-converge-to-the-trivial-representation
 kind: corollary
 title: The spherical complementary series converge to the trivial representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 9
@@ -41,6 +41,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§7.4, Lemma 7.4.20 and Proposition 7.4.21, printed pp. 310–312, and Exercise 7.4.22, printed p. 313: the complementary-form range and construction sketch, with no boundary coefficient-limit or Fell-convergence argument"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

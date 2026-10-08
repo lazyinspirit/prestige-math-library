@@ -2,7 +2,7 @@
 id: ex-hh-finite-coevaluation-in-two-bases
 kind: example
 title: "Finite coevaluation computed in two bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -19,6 +19,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf"
       locator: "Theorem 5.9 and Example 5.11, printed pp. 30–31: dual bases and the Hom–tensor correspondence in the finite-free case"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

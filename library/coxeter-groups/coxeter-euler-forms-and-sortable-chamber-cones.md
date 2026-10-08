@@ -1,7 +1,7 @@
 ---
 page: coxeter-euler-forms-and-sortable-chamber-cones
 title: "Coxeter Euler Forms and Sortable Chamber Cones"
-status: draft
+status: published
 items:
   - def-cg-coxeter-oriented-euler-form-and-c-sorting-word
   - lem-cg-positive-span-of-transported-simple-roots

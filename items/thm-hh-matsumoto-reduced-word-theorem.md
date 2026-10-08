@@ -2,7 +2,7 @@
 id: thm-hh-matsumoto-reduced-word-theorem
 kind: theorem
 title: "Matsumoto's theorem: braid connectivity of reduced expressions, with singleton detection in dihedral subgroups"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-hh-coxeter-matrix-word-group-and-length, def-hh-geometric-coxeter-representation-and-roots, lem-hh-dihedral-root-recurrence-and-root-sign, thm-hh-coxeter-exchange-deletion-and-faithfulness, def-natural-numbers, thm-induction-principle, def-linear-map, def-linear-subspace]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "strong induction on the length via exchange, the signed reflection action and the dihedral subgroup"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

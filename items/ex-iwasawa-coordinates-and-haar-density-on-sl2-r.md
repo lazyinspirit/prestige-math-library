@@ -2,7 +2,7 @@
 id: ex-iwasawa-coordinates-and-haar-density-on-sl2-r
 kind: example
 title: Iwasawa coordinates and Haar density on SL2(R)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 dependency_level: 2
@@ -19,6 +19,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

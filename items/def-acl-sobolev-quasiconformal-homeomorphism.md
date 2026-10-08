@@ -2,7 +2,7 @@
 id: def-acl-sobolev-quasiconformal-homeomorphism
 kind: definition
 title: The ACL and Sobolev analytic definition of quasiconformality
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 0
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf"
       locator: "Ch. 2 §1, printed pp. 47–50, for the Beltrami coefficient and dilatation; Ch. 3 §4, equation (4.1), for |f_{\\bar z}| ≤ k|f_z| and k=(K−1)/(K+1). The Cantor-function example's derivative sentence is corrected here: ∂_z f=1 and ∂_{\\bar z}f=0 a.e."
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

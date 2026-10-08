@@ -2,7 +2,7 @@
 id: lem-cg-weak-order-is-a-graded-partial-order
 kind: lemma
 title: "Weak order is a partial order with finite graded intervals; covers and the inversion-set criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 13
@@ -24,6 +24,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

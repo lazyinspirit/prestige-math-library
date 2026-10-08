@@ -2,7 +2,7 @@
 id: def-bialgebra-counit-and-antipode
 kind: definition
 title: "Bialgebras, counits and antipodes over a commutative ring"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps:
 aliases: []
 dependency_level: 0
 verification:
+  audited: "2026-10-08"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

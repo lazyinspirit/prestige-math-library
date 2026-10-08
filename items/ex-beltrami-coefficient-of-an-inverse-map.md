@@ -2,7 +2,7 @@
 id: ex-beltrami-coefficient-of-an-inverse-map
 kind: example
 title: The Beltrami coefficient of the inverse of an affine quasiconformal map
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 dependency_level: 9
@@ -20,6 +20,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 2 §11.1, printed pp. 175–178, and §12.5, printed p. 188: linear Beltrami coefficients and Proposition 12.15 for inverse dilatation."
 verification:
+  audited: "2026-10-08"
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: ex-cg-disconnected-universal-coxeter-nerve-and-angular-truncation
 kind: example
 title: "The disconnected universal-Coxeter nerve and the angular truncation convention"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

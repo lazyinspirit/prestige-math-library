@@ -2,7 +2,7 @@
 id: thm-cg-root-sign-and-simple-reflection-positivity
 kind: theorem
 title: "Root sign coherence and the action of simple reflections on positive roots"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 8
@@ -21,6 +21,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "S4.2, printed pp. 93-97; S4.4, printed pp. 101-105 (Definition 4.4.1, Lemma 4.4.3, Proposition 4.4.4); read in the extracted full text; exercises excluded"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

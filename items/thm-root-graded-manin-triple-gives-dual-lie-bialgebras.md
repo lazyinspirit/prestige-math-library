@@ -2,7 +2,7 @@
 id: thm-root-graded-manin-triple-gives-dual-lie-bialgebras
 kind: theorem
 title: "A root-graded Manin triple gives dual Lie bialgebras"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 dependency_level: 1
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

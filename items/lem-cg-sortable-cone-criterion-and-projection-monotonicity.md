@@ -2,7 +2,7 @@
 id: "lem-cg-sortable-cone-criterion-and-projection-monotonicity"
 kind: "lemma"
 title: "The cone criterion, monotonicity of the projection, and the greatest sortable element below w"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "frontier-42-coxeter-32"
 dependency_level: 25
@@ -43,6 +43,7 @@ sources:
       url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
       locator: "Section 3.2, pp. 70-75 (the lattice property of weak order); the cone argument is in Reading--Speyer, Proposition 6.11 and Theorem 6.3"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

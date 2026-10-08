@@ -2,7 +2,7 @@
 id: def-commensurator-unitary-character-and-monomial-induced-representation
 kind: definition
 title: Commensurator, unitary characters and monomial induced representations in the transversal model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
 deps:
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1, §1.F, Definition 1.F.1 and Construction 1.F.4(2), printed pp. 47–49; the open-subgroup continuity argument, printed pp. 48–49; Chapter 1, Theorem 1.F.11 and Appendix A.E, Definitions A.E.5 and Proposition A.E.6, printed pp. 54–55 and 412–413"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

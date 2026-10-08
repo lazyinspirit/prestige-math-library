@@ -2,7 +2,7 @@
 id: def-k-finite-and-smooth-vectors-for-sl2-r
 kind: definition
 title: Smooth and K-finite vectors for SL2(R), and the (g,K)-module
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-iwasawa-and-minimal-parabolic-data-for-sl2-r
@@ -24,6 +24,7 @@ provenance:
 axiom_audit: "AC is inherited from the Iwasawa supplier's normalized Haar measure on K; its consequence AC_omega is used by the one-parameter-subgroup and tangent-bracket suppliers. These definitions add no further choice."
 proof_strategy: direct
 verification:
+  audited: "2026-10-08"
   precheck: pass
 sources:
   references:

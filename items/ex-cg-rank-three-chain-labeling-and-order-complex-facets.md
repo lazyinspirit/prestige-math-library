@@ -2,7 +2,7 @@
 id: ex-cg-rank-three-chain-labeling-and-order-complex-facets
 kind: example
 title: "A rank-three chain labeling translated into facets of the order complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-42-coxeter-32
 dependency_level: 2
@@ -20,6 +20,7 @@ sources:
     - title: "Michelle L. Wachs, Poset topology: tools and applications, PCMI lecture notes, Lecture 3 §§3.1–3.4"
       url: "https://arxiv.org/pdf/math/0602226"
 verification:
+  audited: "2026-10-08"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
