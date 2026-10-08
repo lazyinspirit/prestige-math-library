@@ -155,6 +155,21 @@ function assertSame(actual, expected, label) {
   if (JSON.stringify(actual) !== JSON.stringify(expected)) throw Error('closeout: ' + label + ' preservation mismatch');
 }
 
+// Preserve the exact validated bytes, mode and entry kind. Diagnostics expose
+// only metadata, so a concurrent writer can be identified without leaking prose.
+export function assertOwnedWorkingPreserved(root, expected, label) {
+  const actual = expected.map(row => fileState(root, row.path));
+  const changed = actual.flatMap((row, index) => {
+    const before = expected[index];
+    if (JSON.stringify(row) === JSON.stringify(before)) return [];
+    const { path, ...afterState } = row;
+    const beforeState = { ...before };
+    delete beforeState.path;
+    return [{ path, before: beforeState, after: afterState }];
+  });
+  if (changed.length) throw Error('closeout: ' + label + ' preservation mismatch: ' + JSON.stringify(changed));
+}
+
 function verifyReviewedHook(root, reviewedHook, hookDir) {
   if (!reviewedHook) return;
   const full = join(hookDir, inertHook.name);
@@ -456,8 +471,7 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
     const stagedPaths = scope.paths.filter(path => path === receipt || scope.inventory.includes(path));
     const input = pathsInput(stagedPaths);
     checkedMutation(() => git(root, ['add', '--all', '--pathspec-from-file=-', '--pathspec-file-nul'], { env, input }));
-    assertSame(scope.paths.filter(path => path !== receipt).map(path => fileState(root, path)),
-      ownedBefore.filter(row => row.path !== receipt), 'validated owned working bytes');
+    assertOwnedWorkingPreserved(root, ownedBefore.filter(row => row.path !== receipt), 'validated owned working bytes');
     if (!readFileSync(join(root, receipt)).equals(writtenReceipt)) throw Error('closeout: final receipt changed before commit');
     assertSame(preservation(root, run, scope), before, 'pre-commit outside');
     if (textGit(root, ['rev-parse', 'HEAD']) !== beforeHead) throw Error('closeout: HEAD changed before commit');
@@ -473,8 +487,7 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
         + scope.paths.length + ' exact paths; unrelated staged/working files preserved; no push or publication.'], { env, input });
       committed = true;
     });
-    assertSame(scope.paths.filter(path => path !== receipt).map(path => fileState(root, path)),
-      ownedBefore.filter(row => row.path !== receipt), 'committed owned working bytes');
+    assertOwnedWorkingPreserved(root, ownedBefore.filter(row => row.path !== receipt), 'committed owned working bytes');
     if (!readFileSync(join(root, receipt)).equals(writtenReceipt)) throw Error('closeout: final receipt changed during commit');
     assertSame(preservation(root, run, scope), before, 'post-commit outside');
     // Integrate only the new owned entries into the real index. Never reset
