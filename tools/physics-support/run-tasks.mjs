@@ -277,7 +277,10 @@ const templateDir = R('briefs/tasks');
 for (const f of readdirSync(templateDir).filter((x) => x.endsWith('.md') && x !== 'README.md')) {
   const name = f.replace(/\.md$/, '');
   const dest = R('research', `${run}-${name}.task.md`);
-  const body = render(readFileSync(join(templateDir, f), 'utf8'));
+  const ownerInstruction = hasOwnerDirection
+    ? `# Owner scope and authoring direction\n\nRead \`${ownerDirectionRel}\` before working. It is binding and overrides stale task or design text.\n\n`
+    : '';
+  const body = ownerInstruction + render(readFileSync(join(templateDir, f), 'utf8'));
   writeFileSync(dest, body);
   written.push(`research/${run}-${name}.task.md`);
 }

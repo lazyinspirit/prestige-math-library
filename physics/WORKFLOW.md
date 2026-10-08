@@ -93,3 +93,8 @@ after mathematics prompt changes; add `--check` to verify alignment.
 `frontier --next` selects up to 80 pairs by default and `plan` enforces the same
 cap. `physics-autopilot.config.json` limits concurrent workers across all stages
 to 30 through `concurrency` and `globalConcurrency`.
+
+Run-specific `research/RUN-owner-authoring-direction.md` is binding on drift,
+scaffolding, review, and authoring workers. Create it before planning or run
+`refresh-tasks --run RUN --force` before dispatch so every generated stage task
+names it; preserve the approved pair scope and exact supplier obligations.
