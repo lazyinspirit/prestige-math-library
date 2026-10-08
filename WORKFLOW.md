@@ -908,7 +908,16 @@ research changes in another run's namespace only when that run's nonempty scope
 ledger was already sealed and remains an unchanged physical file. A filename
 prefix alone grants no exemption. Readiness physical inputs and relevant shared
 projections, plus exact reporter evidence inputs, remain protected across run
-namespaces. Any exemption also requires a successful current native readiness
+namespaces. Foreign selected mathematical content may also change when its
+scope ledger and batch manifests were already sealed and remain unchanged
+physical files. Only owed manifest pages with strict native IDs and categories
+grant ownership of their canonical item and page paths; changed or newly added
+manifests cannot grant ownership during reporting. Unregistered mathematical
+paths remain exact baseline inputs. Selected foreign authoring may create or
+update regular mathematical files; deletions, symbolic links and parent-link
+aliases never gain selected-content exemptions. Own content and prerequisite suppliers
+remain protected even when another run also selects them. Any exemption also
+requires a successful current native readiness
 verification. The canonical shared plan, defect ledger and published supplier
 ledger may use their explicitly recorded native readiness projections under
 the same verification, provided the changed carrier is not an exact raw

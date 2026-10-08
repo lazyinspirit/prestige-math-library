@@ -304,22 +304,58 @@ const tree = () => Object.fromEntries(files().sort().map((rel) => [rel,
 
 // Ownership comes from an unchanged ledger already sealed by this report,
 // never from a newly invented filename prefix or mutable runtime state.
-function scopedResearchChanges(receipt, now, changed) {
+function scopedChanges(receipt, now, changed) {
   const namespaces = [];
+  const selectedContent = new Set();
+  const slug = value => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
+  const unchangedFile = path => Object.hasOwn(receipt.protected_tree, path)
+    && now[path] === receipt.protected_tree[path] && lstatSync(join(root, path)).isFile();
   for (const [path, hash] of Object.entries(receipt.protected_tree)) {
     const owner = /^research\/([a-z0-9]+(?:-[a-z0-9]+)*)-scope-ledger\.json$/.exec(path)?.[1];
     if (!owner || owner === run || now[path] !== hash) continue;
     if (!lstatSync(join(root, path)).isFile()) continue;
     let ledger;
     try { ledger = JSON.parse(readFileSync(join(root, path), 'utf8')); } catch { continue; }
-    if (ledger.run === owner && Array.isArray(ledger.pages) && ledger.pages.length)
-      namespaces.push(`research/${owner}-`);
+    if (ledger.run !== owner || !Array.isArray(ledger.pages) || !ledger.pages.length) continue;
+    namespaces.push(`research/${owner}-`);
+    const owedPages = ledger.pages.filter(row => slug(row?.id));
+    // A stable registered frontier, not mutable content or a filename guess,
+    // establishes ownership of concurrent foreign mathematical authoring.
+    for (const manifest of Object.keys(receipt.protected_tree)) {
+      const batch = /^(\d+)\.pages\.json$/.exec(manifest.slice(`research/${owner}-batch-`.length))?.[1];
+      if (!manifest.startsWith(`research/${owner}-batch-`)
+        || !batch
+        || !unchangedFile(manifest)) continue;
+      let pages;
+      try { pages = JSON.parse(readFileSync(join(root, manifest), 'utf8')); } catch { continue; }
+      if (!Array.isArray(pages)) continue;
+      for (const page of pages) {
+        if (!slug(page?.id) || !owedPages.some(row => row.id === page.id
+          && (row.batch == null || String(row.batch) === batch)) || !slug(page.category)
+          || !Array.isArray(page.items)) continue;
+        const ids = page.items.map(item => typeof item === 'string' ? item : item?.id);
+        if (ids.some(id => typeof id !== 'string' || !/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id))) continue;
+        selectedContent.add(`library/${page.category}/${page.id}.md`);
+        for (const id of ids) selectedContent.add(`items/${id}.md`);
+      }
+    }
   }
   // Only these canonical carriers have shared workflow ownership. Projected
   // external sources and run-local records retain the exact report baseline.
   const sharedCarriers = new Set(['research/plan-spec.json', 'research/defect-ledger.jsonl',
     'research/published-consumer-supplier-ledger.md']);
+  const physicalSelectedContent = path => {
+    const parts = path.split('/');
+    for (let index = 1; index <= parts.length; index++) {
+      let stat;
+      try { stat = lstatSync(join(root, ...parts.slice(0, index))); }
+      catch (error) { if (error.code === 'ENOENT') return false; throw error; }
+      if (stat.isSymbolicLink() || (index < parts.length ? !stat.isDirectory() : !stat.isFile())) return false;
+    }
+    return true;
+  };
   const candidates = changed.filter(path => sharedCarriers.has(path)
+    || (selectedContent.has(path) && physicalSelectedContent(path))
     || namespaces.some(prefix => path.startsWith(prefix)));
   if (!candidates.length) return new Set();
 
@@ -358,10 +394,10 @@ if (command === 'check') {
   const now = tree();
   const paths = new Set([...Object.keys(receipt.protected_tree), ...Object.keys(now)]);
   const changed = [...paths].filter((path) => receipt.protected_tree[path] !== now[path]).sort();
-  const scoped = scopedResearchChanges(receipt, now, changed);
+  const scoped = scopedChanges(receipt, now, changed);
   const unexpected = changed.filter(path => !scoped.has(path));
   if (unexpected.length) die(`step9-report-tree-changed: ${unexpected.join(', ')}`);
-  console.log(`step9-report-integrity: ${Object.keys(now).filter(path => !scoped.has(path)).length} protected file(s) unchanged; ${scoped.size} unrelated scoped research change(s)`);
+  console.log(`step9-report-integrity: ${Object.keys(now).filter(path => !scoped.has(path)).length} protected file(s) unchanged; ${scoped.size} unrelated scoped change(s)`);
   process.exit(0);
 }
 

@@ -23,6 +23,9 @@ function fixture(options: { reference?: boolean; reporterInput?: boolean } = {})
   put('library/algebra/owned-page.md', '---\npage: owned-page\nstatus: draft\nitems: [thm-owned]\n---\nOwned page.\n');
   put('research/demo-scope-ledger.json', { run: 'demo', pages: [{ id: 'owned-page' }] });
   put('research/foreign-scope-ledger.json', { run: 'foreign', pages: [{ id: 'foreign-page' }] });
+  put('research/foreign-batch-1.pages.json', [{ id: 'foreign-page', category: 'algebra', items: ['thm-foreign'] }]);
+  put('items/thm-foreign.md', '---\nid: thm-foreign\nkind: theorem\nstatus: draft\n---\nForeign proof.\n');
+  put('library/algebra/foreign-page.md', '---\npage: foreign-page\nstatus: draft\nitems: [thm-foreign]\n---\nForeign page.\n');
   put('research/demo-batch-1.pages.json', [{ id: 'owned-page', items: ['thm-owned'] }]);
   put('research/plan-spec.json', { pages: [{ id: 'owned-page', items: ['thm-owned'] }] });
   put('research/defect-ledger.jsonl', '');
@@ -52,7 +55,7 @@ test('report accepts genuine foreign research changes without rewriting its v1 b
   f.put('research/foreign-supervision.md', 'updated foreign supervision');
   let result = f.check();
   assert.equal(result.status, 0, result.stderr);
-  assert.match(result.stdout, /3 unrelated scoped research change\(s\)/);
+  assert.match(result.stdout, /3 unrelated scoped change\(s\)/);
   assert.deepEqual(readFileSync(join(f.root, 'research/demo-step9-report-integrity.json')), baseline);
   // Additions and deletions are allowed only inside the same authenticated namespace.
   f.put('research/foreign-new-note.md', 'new unrelated note');
@@ -223,4 +226,101 @@ test('a projected external supporting carrier keeps its full report baseline', t
   const result = f.check();
   assert.equal(result.status, 1);
   assert.match(result.stderr, /step9-report-tree-changed.*shared-root-record.md/);
+});
+
+test('report accepts concurrent selected foreign item and page authoring on sealed ownership', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  const baseline = readFileSync(join(f.root, 'research/demo-step9-report-integrity.json'));
+  f.put('items/thm-foreign.md', '---\nid: thm-foreign\nkind: theorem\nstatus: draft\n---\nUpdated foreign proof.\n');
+  f.put('library/algebra/foreign-page.md', '---\npage: foreign-page\nstatus: draft\nitems: [thm-foreign]\n---\nUpdated foreign page.\n');
+  const result = f.check();
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(readFileSync(join(f.root, 'research/demo-step9-report-integrity.json')), baseline);
+});
+
+test('a foreign selected supplier remains protected by the owning run prerequisite seal', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('items/thm-owned.md', '---\nid: thm-owned\nkind: theorem\nstatus: draft\ndeps: [thm-foreign]\n---\nOwned proof using its supplier.\n');
+  assert.equal(command(f.root, 'publication-ready.mjs', '--write').status, 0);
+  assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
+  f.put('items/thm-foreign.md', '---\nid: thm-foreign\nkind: theorem\nstatus: draft\n---\nChanged consumed foreign proof.\n');
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /step9-report-tree-changed.*items\/thm-foreign.md/);
+});
+
+test('registered foreign selected items still require current native readiness', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  const path = 'research/demo-publication-readiness.json';
+  const readiness = JSON.parse(readFileSync(join(f.root, path), 'utf8'));
+  f.put(path, { ...readiness, protected_tree_sha256: 'stale' });
+  assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
+  f.put('items/thm-foreign.md', 'Updated foreign proof.\n');
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /native readiness verification failed/);
+});
+
+test('items without registered foreign ownership remain exact report inputs', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('items/thm-unregistered.md', 'Unregistered proof.\n');
+  assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
+  f.put('items/thm-unregistered.md', 'Changed unregistered proof.\n');
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /step9-report-tree-changed.*items\/thm-unregistered.md/);
+});
+
+test('mutating a foreign manifest cannot grant new ownership during reporting', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/foreign-batch-1.pages.json', [{ id: 'foreign-page', category: 'algebra', items: ['thm-foreign', 'thm-forged'] }]);
+  f.put('items/thm-forged.md', 'Forged ownership proof.\n');
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /step9-report-tree-changed.*items\/thm-forged.md/);
+});
+
+test('a sealed foreign manifest may select only its own owed pages with strict paths', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/foreign-batch-1.pages.json', [
+    { id: 'unowed-page', category: 'algebra', items: ['thm-unowed'] },
+    { id: 'foreign-page', category: '../algebra', items: ['thm-unsafe'] },
+  ]);
+  assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
+  f.put('items/thm-unowed.md', 'Unowed proof.\n');
+  f.put('items/thm-unsafe.md', 'Unsafe carrier claim.\n');
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /items\/thm-unowed.md/);
+  assert.match(result.stderr, /items\/thm-unsafe.md/);
+});
+
+for (const target of ['thm-owned.md', 'missing-item.md'])
+  test(`a foreign selected mathematical file cannot become a symbolic link to ${target}`, t => {
+    const f = fixture();
+    t.after(() => rmSync(f.root, { recursive: true, force: true }));
+    unlinkSync(join(f.root, 'items/thm-foreign.md'));
+    symlinkSync(target, join(f.root, 'items/thm-foreign.md'));
+    const result = f.check();
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /step9-report-tree-changed.*items\/thm-foreign.md/);
+  });
+
+test('foreign selected authoring may create regular files but deletions remain strict', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  unlinkSync(join(f.root, 'items/thm-foreign.md'));
+  const deletion = f.check();
+  assert.equal(deletion.status, 1);
+  assert.match(deletion.stderr, /step9-report-tree-changed.*items\/thm-foreign.md/);
+  assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
+  f.put('items/thm-foreign.md', '---\nid: thm-foreign\nkind: theorem\nstatus: draft\n---\nNew foreign proof.\n');
+  const creation = f.check();
+  assert.equal(creation.status, 0, creation.stderr);
 });
