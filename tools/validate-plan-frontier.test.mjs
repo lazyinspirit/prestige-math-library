@@ -43,7 +43,7 @@ test('manifest page diagnostics exclude unrelated broken pages, but bare checks 
   f.pages.push({ id: 'unrelated', order: 4, kind: 'A', category: 'test', requires: ['missing-page'], items: [{ id: 'wrong-id', kind: 'lemma', deps: ['lem-missing'] }] });
   const scoped = f.run();
   assert.equal(scoped.status, 0, output(scoped));
-  assert.match(scoped.stdout, /2 page subjects/);
+  assert.match(scoped.stdout, /scope: 2 selected pages;/);
   const bare = f.run(false);
   assert.equal(bare.status, 1, output(bare));
   assert.match(bare.stdout, /\[requires-resolve\]/);

@@ -12,7 +12,7 @@ function fixture(t) {
   const repo = mkdtempSync(join(tmpdir(), 'frontier-gates-test-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   for (const dir of ['tools', 'items', 'research', 'library/test']) mkdirSync(join(repo, dir), { recursive: true });
-  for (const file of ['extcheck.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'run-manifest-pages.mjs', 'depcheck.mjs', 'facts-block.mjs', 'published-repair-policy.mjs', 'item-hash.mjs'])
+  for (const file of ['extcheck.mjs', 'content-policy-lib.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'run-manifest-pages.mjs', 'depcheck.mjs', 'facts-block.mjs', 'published-repair-policy.mjs', 'item-hash.mjs'])
     copyFileSync(join(tools, file), join(repo, 'tools', file));
   const write = (path, text) => writeFileSync(join(repo, path), text);
   const item = (id, deps = '[]', extra = '') => `---\nid: ${id}\nkind: theorem\nstatus: draft\ndeps: ${deps}\n${extra}---\n`;
@@ -43,7 +43,7 @@ test('extcheck excludes unrelated shape defects while including selected defects
   f.write('items/thm-selected.md', f.item('thm-selected', '[]', 'external_refs: [thm-absent]\n'));
   const result = f.run('extcheck', ['--items-file', 'items.json', '--json']);
   assert.equal(result.status, 1);
-  assert.deepEqual(JSON.parse(result.stdout).errors.map(e => e.code), ['external-dangling']);
+  assert.deepEqual(JSON.parse(result.stdout).errors.map(e => e.code), ['external-refs-retired', 'external-dangling']);
 });
 
 test('depsource limits subjects but still resolves suppliers outside selection', t => {
