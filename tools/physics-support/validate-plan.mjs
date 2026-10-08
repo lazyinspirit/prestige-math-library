@@ -2,7 +2,8 @@
 // validate-plan.mjs — mechanical circularity + ordering validator for the
 // planned page stack. Run BEFORE authoring a single item.
 //
-//   node validate-plan.mjs plan-spec.json [--repo DIR]   # --repo defaults to this checkout
+//   node validate-plan.mjs plan-spec.json [--repo DIR] [--pages-file FILE] [--run RUN]
+// --run selects current manifest subjects; all suppliers remain graph context.
 //
 // Guarantees checked (each a hard error unless marked WARN):
 //   1. resolve       every dep resolves to a planned item or an item already in items/
@@ -55,15 +56,54 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { REPO } from './paths.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { frontierGateScope } from './frontier-gate-scope.mjs';
+import { readRunManifestPages } from './run-manifest-pages.mjs';
 
 const args = process.argv.slice(2);
-const specPath = args.find((a) => !a.startsWith('--'));
+let selectedPages = null;
+const selectionFlags = args.flatMap((arg, i) => arg === '--pages-file' ? [i] : []);
+if (selectionFlags.length > 1) die('--pages-file may be specified once');
+if (selectionFlags.length) {
+  const i = selectionFlags[0], path = args[i + 1];
+  if (!path || path.startsWith('--')) die('--pages-file requires a JSON file path');
+  let ids;
+  try { ids = JSON.parse(readFileSync(path, 'utf8')); }
+  catch (error) { die(`cannot read page selection ${path}: ${error.message}`); }
+  if (!Array.isArray(ids) || !ids.length || ids.some(id => typeof id !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)))
+    die('page selection must be a nonempty JSON array of page IDs');
+  if (new Set(ids).size !== ids.length) die('page selection contains duplicate IDs');
+  selectedPages = new Set(ids);
+  args.splice(i, 2);
+}
+const selectedPage = id => selectedPages === null || selectedPages.has(id);
+const valueFlags = new Set(['--repo', '--max-items', '--rehomed', '--run']);
+const specPath = args.find((a, i) => !a.startsWith('--') && !valueFlags.has(args[i - 1]));
 const repo = argVal('--repo') ?? REPO;
+const runPositions = args.flatMap((arg, i) => arg === '--run' ? [i] : []);
+if (runPositions.length > 1) die('--run may be specified once');
+const run = argVal('--run');
+let selectedItemIds = null;
+let currentPages = null;
+if (runPositions.length) {
+  if (!run || run.startsWith('--')) die('--run requires a current frontier run');
+  try {
+    // Planning writes nonempty page manifests with empty item arrays; the
+    // scaffold later supplies inventories. This gate checks page declarations
+    // at both phases, while mathematical item gates require populated arrays.
+    const scope = frontierGateScope({ repo, run }, { requireItemFiles: false, allowEmptyItems: true });
+    if (selectedPages !== null && (selectedPages.size !== scope.pages.size
+      || [...selectedPages].some(id => !scope.pages.has(id))))
+      die('--pages-file must exactly match the current run manifests when used with --run');
+    selectedPages = scope.pages; selectedItemIds = scope.items;
+    currentPages = readRunManifestPages(repo, run, { allowEmptyItems: true });
+  } catch (error) { die(`frontier gate selection: ${error.message}`); }
+}
+
 // The owner raised the default to 100 on 2026-09-26. A run-specific override
 // still needs a recorded scope decision.
 const maxItems = Number(argVal('--max-items') ?? 100);
 const SET_THEORY_DEFERRED_PAGE = 'deferred-set-theory-beyond-choice';
-if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE]');
+if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE] [--pages-file FILE] [--run RUN]');
 
 // --rehomed: the owner-approved RE-HOME receipt (see the `dup-id` note below).
 // Absent, nothing changes: every clash between a planned id and an already
@@ -105,6 +145,7 @@ const importedIds = new Set((existsSync(join(repo, 'research/math-imports.json')
 const existing = new Set();
 const canonicalExisting = new Map();
 const existingItemEdges = new Map();
+const existingPrerequisiteEdges = new Map();
 try {
   for (const f of readdirSync(join(repo, 'items'))) {
     if (!f.endsWith('.md')) continue;
@@ -112,6 +153,7 @@ try {
     existing.add(id);
     canonicalExisting.set(id, id);
     const src = readFileSync(join(repo, 'items', f), 'utf8');
+    existingPrerequisiteEdges.set(id, frontmatterList(src, 'deps'));
     existingItemEdges.set(id, [
       ...frontmatterList(src, 'deps'),
       ...frontmatterList(src, 'justified_by'),
@@ -135,20 +177,38 @@ const warn = (code, msg) => warns.push(`[${code}] ${msg}`);
 
 // ---------------------------------------------------------------- index
 
-const pages = [...spec.pages].sort((a, b) => a.order - b.order);
+// Validate canonical page identities before replacing only selected pages.
+// Current item inventories are authoritative before the Step 4 splice; an item
+// absent from the canonical plan is allowed, but conflicting ownership is not.
+if (currentPages) for (const page of currentPages) {
+  if (spec.pages.filter(p => p.id === page.id).length !== 1)
+    die(`frontier gate selection: page ${page.id} must occur exactly once in the plan`);
+  for (const item of page.items) {
+    const homes = spec.pages.filter(p => (p.items ?? []).some(it => it.id === item.id));
+    const occurrences = spec.pages.flatMap(p => (p.items ?? []).filter(it => it.id === item.id));
+    if (occurrences.length > 1 || (occurrences.length === 1 && homes[0].id !== page.id))
+      err('frontier-selection', `current manifest item ${item.id} has conflicting canonical ownership; when present it must occur exactly once on selected plan page ${page.id}`);
+  }
+}
+const currentPageById = new Map((currentPages ?? []).map(page => [page.id, page]));
+const pages = spec.pages.map(page => currentPageById.get(page.id) ?? page).sort((a, b) => a.order - b.order);
 const pageOfItem = new Map();   // itemId -> page
 const itemById = new Map();     // itemId -> item
 const posInPage = new Map();    // itemId -> index within its page
+for (const id of selectedPages ?? []) if (!pages.some(p => p.id === id))
+  err('focus-page-unknown', `--pages-file names unknown page "${id}"`);
+if (run) for (const id of selectedPages)
+  if (pages.filter(p => p.id === id).length !== 1)
+    die(`frontier gate selection: page ${id} must occur exactly once in the plan`);
 
 for (const p of pages) {
   // "P" = a page ALREADY PUBLISHED in the repo, declared here only so the new
   // stack can name it as a prerequisite. It has no companion and no item list.
-  // 'X' = a page that RECORDS results this library does not prove (SCHEMA §3
-  // proved_here). It has no companion, no item ceiling, and no prerequisites:
-  // it states, it does not derive, so anything may depend on it.
-  if (!['A', 'B', 'P', 'X'].includes(p.kind)) err('kind', `page ${p.id}: kind must be "A", "B", "P" or "X"`);
-  p.items.forEach((it, i) => {
-    if (itemById.has(it.id)) err('dup-id', `${it.id} declared on both ${pageOfItem.get(it.id).id} and ${p.id}`);
+  // Preserve physics catalogue compatibility; scope still selects only run pages.
+  if (selectedPage(p.id) && !['A', 'B', 'P', 'X'].includes(p.kind))
+    err('kind', `page ${p.id}: kind must be "A", "B", "P" or "X"`);
+  (selectedPages === null ? p.items : (p.items ?? [])).forEach((it, i) => {
+    if (itemById.has(it.id) && (selectedPage(p.id) || selectedPage(pageOfItem.get(it.id).id))) err('dup-id', `${it.id} declared on both ${pageOfItem.get(it.id).id} and ${p.id}`);
     // An id that already exists in items/ is only a violation if it is HOMED on a
     // different page. Once a planned page starts being authored its items exist on
     // disk, and flagging those would make the validator fail for the rest of the
@@ -159,16 +219,21 @@ for (const p of pages) {
     posInPage.set(it.id, i);
 
     const want = PREFIX_OF_KIND[it.kind];
-    if (!want) err('prefix', `${it.id}: unknown kind "${it.kind}"`);
-    else if (!it.id.startsWith(want + '-')) err('prefix', `${it.id}: kind ${it.kind} requires prefix "${want}-"`);
+    if (selectedPage(p.id) && !want) err('prefix', `${it.id}: unknown kind "${it.kind}"`);
+    else if (selectedPage(p.id) && !it.id.startsWith(want + '-')) err('prefix', `${it.id}: kind ${it.kind} requires prefix "${want}-"`);
   });
 }
+
+if (selectedItemIds) for (const id of selectedItemIds)
+  if (!itemById.has(id) || !selectedPages.has(pageOfItem.get(id).id))
+    err('frontier-selection', `current manifest item ${id} is absent from the selected plan pages`);
 
 const pageOrder = new Map(pages.map((p, i) => [p.id, i]));
 
 // ---------------------------------------------------------------- checks 1,4,5,6,7
 
 for (const p of pages) {
+  if (!selectedPage(p.id)) continue;
   for (const it of p.items) {
     for (const d of it.deps ?? []) {
       if (existing.has(d)) continue;                      // satisfied by published content
@@ -231,7 +296,7 @@ try {
 } catch { /* ignore */ }
 
 for (const p of pages)
-  for (const it of p.items)
+  if (selectedPage(p.id)) for (const it of p.items)
     for (const d of it.deps ?? [])
       if (existing.has(d) && !publishedPageItems.has(d) && !itemById.has(d))
         warn('orphan', `${it.id} depends on existing item ${d}, which is on NO page — it will be silently dropped from page-level Prerequisites`);
@@ -253,7 +318,7 @@ for (const p of pages)
 const kindOfPage = new Map(pages.map((p) => [p.id, p.kind]));
 const isBPage = (pid) => (kindOfPage.get(pid) ?? (pid.endsWith('-examples') ? 'B' : 'A')) === 'B';
 for (const p of pages)
-  for (const it of p.items)
+  if (selectedPage(p.id)) for (const it of p.items)
     for (const d of it.deps ?? []) {
       if (!existing.has(d)) continue;               // planned deps: handled above
       const home = homePageOf.get(d);
@@ -279,6 +344,7 @@ for (const p of pages)
 // naming the wrong origin is exactly how this would quietly stop protecting
 // anything.
 for (const [id, pid] of existingClash) {
+  if (!selectedPage(pid)) continue;
   const home = homePageOf.get(id);                 // the page in library/ that actually lists it
   if (home && home !== pid) {
     const move = rehomed.get(id);
@@ -313,24 +379,56 @@ function sccs(nodes, succ) {
   return out;
 }
 
-const itemSucc = (id) => (itemById.get(id)?.deps ?? []).filter((d) => itemById.has(d));
-for (const comp of sccs([...itemById.keys()], itemSucc)) {
+const canonicalItem = id => itemById.has(id) ? id : (canonicalExisting.get(id) ?? id);
+// Selected items retain both approved scaffold and actual authored edges.
+// Outside suppliers use their actual authored deps when available.
+const prerequisiteEdges = id => selectedPage(pageOfItem.get(id)?.id)
+  ? [...new Set([...(itemById.get(id)?.deps ?? []), ...(existingPrerequisiteEdges.get(id) ?? [])])]
+  : (existingPrerequisiteEdges.get(id) ?? itemById.get(id)?.deps ?? []);
+const itemSucc = selectedPages === null
+  ? id => (itemById.get(id)?.deps ?? []).filter(d => itemById.has(d))
+  : id => prerequisiteEdges(id).map(canonicalItem).filter(d => itemById.has(d) || existing.has(d));
+function reachableContext(roots, succ) {
+  const context = new Map(roots), queue = [...context.keys()];
+  for (let i = 0; i < queue.length; i++) for (const next of succ(queue[i]))
+    if (!context.has(next)) { context.set(next, context.get(queue[i])); queue.push(next); }
+  return context;
+}
+const scopedItems = pages.filter(p => selectedPage(p.id)).flatMap(p =>
+  (p.items ?? []).map(it => [it.id, p.id]));
+const itemContext = reachableContext(scopedItems, itemSucc);
+const itemRoots = selectedPages === null ? [...itemById.keys()] : [...itemContext.keys()];
+if (selectedPages !== null) for (const [id, root] of itemContext) {
+  const local = selectedPage(pageOfItem.get(id)?.id);
+  for (const dep of prerequisiteEdges(id))
+    if (!(local && (itemById.get(id)?.deps ?? []).includes(dep))
+      && !itemById.has(canonicalItem(dep)) && !existing.has(canonicalItem(dep)))
+      err('resolve', `page ${root}: prerequisite ${id} depends on "${dep}", which is neither planned nor in items/`);
+}
+for (const comp of sccs(itemRoots, itemSucc)) {
   const selfLoop = comp.length === 1 && itemSucc(comp[0]).includes(comp[0]);
-  if (comp.length > 1 || selfLoop) err('item-cycle', `dependency cycle among items: ${comp.join(' -> ')}`);
+  if (comp.length > 1 || selfLoop) err('item-cycle', `${selectedPages === null ? '' : `page ${itemContext.get(comp[0])}: prerequisite `}dependency cycle among items: ${comp.join(' -> ')}`);
 }
 
 // ---------------------------------------------------------------- check 3: page cycles
 
 const pageSucc = (pid) => {
-  const p = pages.find((x) => x.id === pid), out = new Set();
-  for (const it of p.items) for (const d of it.deps ?? []) {
-    const dp = pageOfItem.get(d);
-    if (dp && dp.id !== pid) out.add(dp.id);
+  const p = pages.find(x => x.id === pid), out = new Set();
+  const plannedItems = (p?.items ?? []).map(it => it.id);
+  const roots = selectedPages === null ? plannedItems
+    : selectedPage(pid) ? [...new Set([...plannedItems, ...(itemsOnHomePage.get(pid) ?? [])])]
+    : (itemsOnHomePage.get(pid) ?? plannedItems);
+  for (const id of roots) {
+    const deps = selectedPages === null ? itemById.get(id)?.deps ?? [] : itemSucc(id);
+    for (const dep of deps) {
+      const home = pageOfItem.get(dep)?.id ?? (selectedPages === null ? undefined : homePageOf.get(dep));
+      if (home && home !== pid) out.add(home);
+    }
   }
   return [...out];
 };
-for (const comp of sccs(pages.map((p) => p.id), pageSucc))
-  if (comp.length > 1) err('page-cycle', `dependency cycle among pages: ${comp.join(' -> ')}`);
+const pageRoots = selectedPages === null ? pages.map(p => p.id)
+  : [...selectedPages].filter(id => pages.some(p => p.id === id));
 
 // ------------------------------------------- checks 12-17: declared page prereqs
 
@@ -346,7 +444,7 @@ function checkTrackCategory({ file, rowPattern, rowLabel, category }) {
   if (!existsSync(path)) return;
   const rows = [...readFileSync(path, 'utf8').matchAll(rowPattern)];
   if (!rows.length) {
-    err('track-category', `${path}: no ${rowLabel} pair rows found; category contract cannot be checked`);
+    if (selectedPages === null) err('track-category', `${path}: no ${rowLabel} pair rows found; category contract cannot be checked`);
     return;
   }
   const trackPages = new Set();
@@ -356,6 +454,7 @@ function checkTrackCategory({ file, rowPattern, rowLabel, category }) {
     if (aPage?.companion) trackPages.add(aPage.companion);
   }
   for (const id of trackPages) {
+    if (!selectedPage(id)) continue;
     const page = pageById.get(id);
     if (page && page.category !== category)
       err('track-category', `page ${id}: ${file} requires category "${category}", found "${page.category ?? '(missing)'}"`);
@@ -378,16 +477,22 @@ checkTrackCategory({
   category: 'functional-analysis',
 });
 
-for (const p of pages)
-  for (const r of p.requires ?? []) {
-    if (!pageById.has(r)) { err('requires-resolve', `page ${p.id} requires "${r}", which is not a declared page`); continue; }
-    if (pageOrder.get(r) >= pageOrder.get(p.id))
-      err('prereq-order', `page ${p.id} (order ${p.order}) requires ${r} (order ${pageById.get(r).order}) — a prerequisite must come STRICTLY earlier`);
-  }
+const reqSucc = pid => (pageById.get(pid)?.requires ?? []).filter(r => pageById.has(r));
+const dependencyPageSucc = pid => [...new Set([...reqSucc(pid), ...pageSucc(pid)])];
+const prerequisiteContext = reachableContext(pageRoots.map(id => [id, id]), dependencyPageSucc);
+const prerequisitePageRoots = selectedPages === null ? pageRoots : [...prerequisiteContext.keys()];
+for (const comp of sccs(prerequisitePageRoots, pageSucc))
+  if (comp.length > 1) err('page-cycle', `${selectedPages === null ? '' : `page ${prerequisiteContext.get(comp[0])}: prerequisite `}dependency cycle among pages: ${comp.join(' -> ')}`);
 
-const reqSucc = (pid) => (pageById.get(pid)?.requires ?? []).filter((r) => pageById.has(r));
-for (const comp of sccs(pages.map((p) => p.id), reqSucc))
-  if (comp.length > 1) err('requires-cycle', `cycle among declared page prerequisites: ${comp.join(' -> ')}`);
+for (const p of pages)
+  if (selectedPages === null || prerequisiteContext.has(p.id)) for (const r of p.requires ?? []) {
+    const context = selectedPages === null || selectedPage(p.id) ? '' : `page ${prerequisiteContext.get(p.id)}: prerequisite `;
+    if (!pageById.has(r)) { err('requires-resolve', `${context}page ${p.id} requires "${r}", which is not a declared page`); continue; }
+    if (pageOrder.get(r) >= pageOrder.get(p.id))
+      err('prereq-order', `${context}page ${p.id} (order ${p.order}) requires ${r} (order ${pageById.get(r).order}) — a prerequisite must come STRICTLY earlier`);
+  }
+for (const comp of sccs(prerequisitePageRoots, reqSucc))
+  if (comp.length > 1) err('requires-cycle', `${selectedPages === null ? '' : `page ${prerequisiteContext.get(comp[0])}: prerequisite `}cycle among declared page prerequisites: ${comp.join(' -> ')}`);
 
 /** transitive closure of declared `requires`, memoised. */
 const closureCache = new Map();
@@ -427,6 +532,7 @@ function deferredItemPath(id, visiting = new Set()) {
 }
 
 for (const p of pages) {
+  if (!selectedPage(p.id)) continue;
   if ((p.forwardRefs ?? []).length && p.kind !== 'B')
     err('forward-whitelist', `page ${p.id} declares forwardRefs but is not a B page; only examples pages are leaves`);
   const closure = reqClosure(p.id);
@@ -463,6 +569,7 @@ for (const p of pages) {
 // ---------------------------------------------------------------- checks 10, 11
 
 for (const p of pages) {
+  if (!selectedPage(p.id)) continue;
   if (p.kind === 'A' && p.items.length > maxItems)
     err('size', `page ${p.id} has ${p.items.length} items, over the ${maxItems}-item ceiling: SPLIT it into two or more A pages, each with its own B companion. Do NOT drop results to fit — the owner's rule (2026-08-11) is that every prerequisite a theorem needs gets built, and splitting is how that stays readable.`);
   if (p.kind === 'A') {
@@ -472,16 +579,17 @@ for (const p of pages) {
   }
 }
 for (const p of pages)
-  if (p.kind === 'B' && !pages.some((q) => q.kind === 'A' && q.companion === p.id))
+  if (selectedPage(p.id) && p.kind === 'B' && !pages.some((q) => q.kind === 'A' && q.companion === p.id))
     err('companion', `B page ${p.id} is not the companion of any A page`);
 
 // ---------------------------------------------------------------- report
 
-const totalItems = [...itemById.keys()].length;
-const nOf = (k) => pages.filter((p) => p.kind === k).length;
-const withItems = pages.filter((p) => p.items.length > 0).length;
-console.log(`plan: ${pages.length} pages (${nOf('A')} A + ${nOf('B')} B + ${nOf('P')} already published), ${totalItems} new items, ${existing.size} existing ids available`);
-const planned = pages.filter((p) => p.kind !== 'P');
+const reportedPages = pages.filter(p => selectedPage(p.id));
+const totalItems = selectedPages === null ? itemById.size : new Set(scopedItems.map(([id]) => id)).size;
+const nOf = (k) => reportedPages.filter((p) => p.kind === k).length;
+const withItems = reportedPages.filter((p) => p.items.length > 0).length;
+console.log(`plan: ${reportedPages.length} pages (${nOf('A')} A + ${nOf('B')} B + ${nOf('P')} already published), ${totalItems} new items, ${existing.size} existing ids available`);
+const planned = reportedPages.filter((p) => p.kind !== 'P');
 console.log(`item lists written for ${withItems}/${planned.length} planned pages — the rest are validated at PAGE level only`);
 if (authored) console.log(`${authored}/${totalItems} planned items already authored into items/`);
 // Print what the receipt actually licensed. A waiver nobody can see is a waiver
@@ -490,8 +598,9 @@ for (const note of rehomeNote) console.log(`  [rehome] ${note}`);
 
 // declared reading order. `*` marks a page whose item list is not written yet, so
 // its item-level dependencies have not been checked (nothing to check).
+if (selectedPages !== null) console.log(`scope: ${reportedPages.length} selected pages; full plan/items retained for identity and prerequisite context; ${itemContext.size} prerequisite items, ${prerequisiteContext.size} prerequisite pages`);
 console.log('\nreading order and declared page prerequisites:');
-for (const p of pages) {
+for (const p of reportedPages) {
   const pre = (p.requires ?? []).slice().sort((a, b) => pageOrder.get(a) - pageOrder.get(b));
   const mark = p.items.length ? ' ' : '*';
   console.log(`  ${String(p.order).padStart(4)}${mark} ${p.id.padEnd(52)} ${String(p.items.length).padStart(3)} items  <- ${pre.join(', ') || '(none)'}`);

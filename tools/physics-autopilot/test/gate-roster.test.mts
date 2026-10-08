@@ -71,11 +71,9 @@ test('prosecheck and depsource run at every repo-wide gate point', async () => {
   const ctx = { run: 'frontier-14', repo: REPO };
   for (const id of ['3b-author', '5b-cross', '8-scope', '9-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
-    const tools = st.gates(ctx)
-      .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
-      .map((argv: string[]) => argv.find((a) => a.startsWith('tools/')));
-    for (const tool of ['tools/physics-support/prosecheck.mjs', 'tools/physics-support/depsource.mjs']) {
-      assert.ok(tools.includes(tool), `${id} does not run ${tool}`);
+    for (const tool of ['prosecheck', 'depsource']) {
+      const gate = st.gates(ctx).find((g: any) => g.id === tool);
+      assert.deepEqual(gate.argv.slice(0, 7), ['node', 'tools/physics-support/frontier-item-gate.mjs', '--run', ctx.run, '--tool', tool, '--']);
     }
   }
 });

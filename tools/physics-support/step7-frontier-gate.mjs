@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { validateFrontier } from './step7-rounds.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 
-const ITEM = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*';
+const ITEM = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem|post|pthm|exp|texp)-[a-z0-9]+(?:-[a-z0-9]+)*';
 const itemId = new RegExp(`^${ITEM}$`);
 const itemFile = new RegExp(`^(?:.*?/)?items/(${ITEM})\\.md:`);
 const native = new Set(['precheck', 'rendercheck', 'prosecheck']);
@@ -103,6 +103,10 @@ export function frontierGateBattery(ctx, gates) {
     const argv = typeof gate.argv === 'function' ? gate.argv() : gate.argv;
     if (gate.id === 'defect-ledger') return { ...gate, argv: [...argv, '--frontier', path], projectResult: preserveRaw };
     if (native.has(gate.id)) {
+      // Current-manifest adapters already supply their own nonempty selection.
+      // Positional paths after -- would become unsupported wrapper flags.
+      if (argv.some(arg => typeof arg === 'string' && /(?:^|\/)frontier-item-gate\.mjs$/.test(arg)))
+        return { ...gate, argv, projectResult: preserveRaw };
       const files = gateScope.ids.map(id => `items/${id}.md`);
       return { ...gate, argv: [...argv, ...files], needs: [...(typeof gate.needs === 'function' ? gate.needs() : gate.needs ?? []), ...files], projectResult: preserveRaw };
     }

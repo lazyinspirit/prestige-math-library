@@ -26,24 +26,57 @@ export function markdownFiles(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? markdownFiles(join(dir, e.name)) : e.name.endsWith('.md') ? [join(dir, e.name)] : []);
 }
 
-export function validatePhysicsContent({ items, pages = [], importedIds = new Set(), requireBodies = true }) {
+export function validatePhysicsContent({ items, pages = [], importedIds = new Set(), requireBodies = true, selectedItems = null, selectedPages = null }) {
   const errors = [];
-  const error = (code, id, message) => errors.push({ code, id, message });
+  const graphContext = new Set();
+  const structural = new Set(['edge-shape', 'edge-unresolved', 'math-physics-dependency', 'item-cycle', 'item-frontmatter-invalid', 'domain-required', 'physical-kind-domain', 'mathematical-kind-domain', 'role-supplier', 'mathematical-role']);
+  const error = (code, id, message) => {
+    const subject = selectedItems === null || selectedItems.has(id) || selectedPages?.has(id);
+    if (subject || (structural.has(code) && graphContext.has(id))) errors.push({ code, id, message });
+  };
+  const identityIssues = [];
   const byId = new Map();
   const aliases = new Map();
   for (const item of items) {
-    if (!text(item.id) || byId.has(item.id)) error('item-id', item.id, 'missing or duplicate item id');
+    if (!text(item.id) || byId.has(item.id)) identityIssues.push({ code: 'item-id', id: item.id, message: 'missing or duplicate item id' });
     byId.set(item.id, item);
-    for (const alias of item.aliases ?? []) {
-      if (aliases.has(alias)) error('alias-duplicate', item.id, `duplicate alias ${alias}`);
+    if (item.aliases !== undefined && !strings(item.aliases)) identityIssues.push({ code: 'alias-shape', id: item.id, message: 'aliases must be an array of ids' });
+    for (const alias of Array.isArray(item.aliases) ? item.aliases : []) {
+      if (aliases.has(alias)) identityIssues.push({ code: 'alias-duplicate', id: item.id, alias, message: `duplicate alias ${alias}` });
       aliases.set(alias, item.id);
     }
   }
-  for (const alias of aliases.keys()) if (byId.has(alias) && !(importedIds.has(alias) && importedIds.has(aliases.get(alias)))) error('alias-id-collision', alias, 'alias collides with an item id');
+  for (const alias of aliases.keys()) if (byId.has(alias) && !(importedIds.has(alias) && importedIds.has(aliases.get(alias)))) identityIssues.push({ code: 'alias-id-collision', id: alias, alias, message: 'alias collides with an item id' });
   const resolve = id => byId.get(id) ?? byId.get(aliases.get(id));
   const domain = item => item.domain ?? (importedIds.has(item.id) ? 'mathematics' : undefined);
+  const roots = selectedItems === null ? items : items.filter(item => selectedItems.has(item.id));
+  const queue = [...roots];
+  for (let index = 0; index < queue.length; index++) {
+    const item = queue[index];
+    if (graphContext.has(item.id)) continue;
+    graphContext.add(item.id);
+    for (const field of ['deps', 'justified_by']) for (const id of Array.isArray(item[field]) ? item[field] : []) {
+      const supplier = resolve(id); if (supplier) queue.push(supplier);
+    }
+  }
+  // Resolve the relevant closure before diagnosing index ambiguity. Indexes
+  // remain complete, but unrelated duplicate IDs/aliases are not gate subjects.
+  const usedReferences = new Set();
+  for (const item of items) if (graphContext.has(item.id)) {
+    for (const field of ['deps', 'justified_by', 'forward_refs', 'external_refs'])
+      for (const id of Array.isArray(item[field]) ? item[field] : []) usedReferences.add(id);
+    for (const ids of Object.values(item.relations ?? {}))
+      for (const id of Array.isArray(ids) ? ids : []) usedReferences.add(id);
+  }
+  for (const issue of identityIssues) if (selectedItems === null
+    || (['item-id', 'alias-shape'].includes(issue.code) ? graphContext.has(issue.id) : usedReferences.has(issue.alias)))
+    errors.push({ code: issue.code, id: issue.id, message: issue.message });
+  for (const id of selectedItems ?? []) if (!byId.has(id)) error('focus-item-unknown', id, 'selected item does not exist');
+
   const empirical = new Map();
   for (const item of items) {
+    if (!graphContext.has(item.id)) continue;
+    if (item.frontmatterError) error('item-frontmatter-invalid', item.id, item.frontmatterError);
     const d = domain(item);
     if (!['mathematics', 'physics'].includes(d)) error('domain-required', item.id, 'domain must be mathematics or physics; only recorded imports may omit it');
     if (!PREFIXES[item.kind] || !item.id?.startsWith(`${PREFIXES[item.kind]}-`)) error('kind-prefix', item.id, `invalid kind or prefix: ${item.kind}`);
@@ -51,16 +84,16 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
     if (['theorem', 'lemma', 'proposition', 'corollary'].includes(item.kind) && d !== 'mathematics') error('mathematical-kind-domain', item.id, 'use physics-theorem or thought-experiment for physical conclusions');
     for (const field of ['deps', 'justified_by', 'forward_refs', 'external_refs']) {
       if (item[field] !== undefined && !strings(item[field])) { error('edge-shape', item.id, `${field} must be an array of ids`); continue; }
-      for (const id of item[field] ?? []) {
+      for (const id of Array.isArray(item[field]) ? item[field] : []) {
         const supplier = resolve(id);
         if (!supplier) { error('edge-unresolved', item.id, `${field}: ${id}`); continue; }
         if (d === 'mathematics' && domain(supplier) === 'physics' && ['deps', 'justified_by', 'forward_refs'].includes(field)) error('math-physics-dependency', item.id, `${field} may not use physical supplier ${id}`);
       }
     }
-    const roles = item.dependency_roles ?? {};
-    if (!object(roles)) error('dependency-roles-shape', item.id, 'dependency_roles must be a mapping');
-    for (const id of Object.keys(roles)) if (!(item.deps ?? []).includes(id)) error('dependency-role-extra', item.id, `${id} is not in deps`);
-    for (const id of item.deps ?? []) {
+    const roles = object(item.dependency_roles) ? item.dependency_roles : {};
+    if (item.dependency_roles !== undefined && !object(item.dependency_roles)) error('dependency-roles-shape', item.id, 'dependency_roles must be a mapping');
+    for (const id of Object.keys(roles)) if (!(Array.isArray(item.deps) ? item.deps : []).includes(id)) error('dependency-role-extra', item.id, `${id} is not in deps`);
+    for (const id of Array.isArray(item.deps) ? item.deps : []) {
       const supplier = resolve(id); if (!supplier) continue;
       const role = roles[id];
       if (!importedIds.has(item.id) && !DEPENDENCY_ROLES.has(role)) error('dependency-role-required', item.id, `declare dependency_roles.${id}`);
@@ -87,7 +120,7 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
         if (field === 'replicates' && item.kind !== 'experiment') error('relation-consumer', item.id, 'only an experiment replicates an experiment');
       }
     }
-    if (!requireBodies || importedIds.has(item.id)) continue;
+    if (!requireBodies || importedIds.has(item.id) || (selectedItems !== null && !selectedItems.has(item.id))) continue;
     if (d === 'physics' && !text(item.physical_scope)) error('physical-scope', item.id, 'state physical_scope explicitly');
     if (PHYSICS_KINDS.has(item.kind)) {
       if (!referenceUrls(item).some(url => /^https?:\/\//.test(url))) error('physics-source', item.id, 'physical items require an HTTP(S) source reference');
@@ -118,20 +151,20 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
     if (active.has(item.id)) { error('item-cycle', item.id, [...path, item.id].join(' -> ')); return; }
     if (done.has(item.id)) return;
     active.add(item.id);
-    for (const id of item.deps ?? []) { const supplier = resolve(id); if (supplier) visit(supplier, [...path, item.id]); }
+    for (const id of Array.isArray(item.deps) ? item.deps : []) { const supplier = resolve(id); if (supplier) visit(supplier, [...path, item.id]); }
     active.delete(item.id); done.add(item.id);
   }
-  for (const item of items) visit(item);
+  for (const item of roots) visit(item);
   // Carry empirical qualifications through established-result chains.
   function empiricalClosure(item, seen = new Set()) {
     if (seen.has(item.id)) return new Set(); seen.add(item.id);
     const result = new Set(empirical.get(item.id) ?? []);
-    for (const id of item.deps ?? []) if (item.dependency_roles?.[id] === 'physical-result') {
+    for (const id of Array.isArray(item.deps) ? item.deps : []) if (item.dependency_roles?.[id] === 'physical-result') {
       const supplier = resolve(id); if (supplier) for (const e of empiricalClosure(supplier, seen)) result.add(e);
     }
     return result;
   }
-  for (const item of items) if (requireBodies && PHYSICAL_PROOF_KINDS.has(item.kind)) {
+  for (const item of items) if (requireBodies && (selectedItems === null || selectedItems.has(item.id)) && PHYSICAL_PROOF_KINDS.has(item.kind)) {
     const rows = item.empirical_premises ?? [];
     if (!Array.isArray(rows)) { error('empirical-premises-shape', item.id, 'empirical_premises must be an array'); continue; }
     const needed = empiricalClosure(item);
@@ -142,6 +175,7 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
     for (const row of rows) if (!needed.has(resolve(row.experiment)?.id)) error('empirical-premise-extra', item.id, 'empirical_premises must correspond to actual empirical dependencies');
   }
   for (const page of pages) {
+    if (selectedPages !== null && !selectedPages.has(page.id ?? page.page)) continue;
     const library = page.library;
     if (!['mathematics', 'physics'].includes(library)) error('page-library', page.id ?? page.page, 'page/category requires library: mathematics or physics');
     for (const id of [...(page.items ?? []), ...(page.examples ?? [])].map(v => typeof v === 'string' ? v : v.id)) {
@@ -153,30 +187,48 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
   return errors;
 }
 
-export function loadPhysicsRepository(root, plan = null) {
+export function loadPhysicsRepository(root, plan = null, selectedPages = null) {
   const imports = existsSync(join(root, 'research/math-imports.json')) ? JSON.parse(readFileSync(join(root, 'research/math-imports.json'), 'utf8')) : { files: [] };
   const importedIds = new Set(imports.files.filter(f => f.path.startsWith('items/')).map(f => basename(f.path, '.md')));
-  const items = markdownFiles(join(root, 'items')).map(readItem);
-  const pages = markdownFiles(join(root, 'library')).filter(f => !basename(f).startsWith('_')).map(file => {
-    const row = readItem(file);
+  const items = markdownFiles(join(root, 'items')).map(file => {
+    try { return readItem(file); }
+    catch (error) { return { id: basename(file, '.md'), deps: [], body: '', file, frontmatterError: error.message }; }
+  });
+  const pages = markdownFiles(join(root, 'library')).filter(f => !basename(f).startsWith('_') && (selectedPages === null || selectedPages.has(basename(f, '.md')))).map(file => {
+    let row;
+    try { row = readItem(file); }
+    catch (error) {
+      if (selectedPages === null || selectedPages.has(basename(file, '.md'))) throw error;
+      return null;
+    }
     const categoryFile = join(root, 'library', file.slice(join(root, 'library').length + 1).split('/')[0], '_category.md');
     const imported = imports.files.some(f => join(root, f.path) === file);
     const library = imported ? 'mathematics' : existsSync(categoryFile) ? readItem(categoryFile).library : undefined;
-    if (row.library && library && row.library !== library) throw Error(`page/category library mismatch: ${file}`);
+    if ((selectedPages === null || selectedPages.has(row.id ?? row.page)) && row.library && library && row.library !== library) throw Error(`page/category library mismatch: ${file}`);
     return { ...row, library: row.library ?? library };
-  });
+  }).filter(Boolean);
   if (plan) {
     for (const page of plan.pages ?? []) {
       const categoryFile = join(root, 'library', page.category ?? '', '_category.md');
-      if (existsSync(categoryFile)) {
+      if ((selectedPages === null || selectedPages.has(page.id)) && existsSync(categoryFile)) {
         const categoryLibrary = readItem(categoryFile).library;
-        if (categoryLibrary && page.library && categoryLibrary !== page.library) throw Error(`planned page/category library mismatch: ${page.id}`);
+        if ((selectedPages === null || selectedPages.has(page.id)) && categoryLibrary && page.library && categoryLibrary !== page.library) throw Error(`planned page/category library mismatch: ${page.id}`);
       }
       pages.push({ ...page, library: page.library ?? (page.kind === 'P' ? pages.find(p => p.page === page.id)?.library : undefined) });
       for (const item of page.items ?? []) {
         const existing = items.find(i => i.id === item.id);
         if (!existing) items.push(item);
-        else if (item.domain && existing.domain && item.domain !== existing.domain) throw Error(`planned/authored domain mismatch: ${item.id}`);
+        else {
+          if ((selectedPages === null || selectedPages.has(page.id)) && item.domain && existing.domain && item.domain !== existing.domain)
+            throw Error(`planned/authored domain mismatch: ${item.id}`);
+          if (selectedPages?.has(page.id)) {
+            if (item.kind && existing.kind && item.kind !== existing.kind) throw Error(`planned/authored kind mismatch: ${item.id}`);
+            if (existing.deps !== undefined && !Array.isArray(existing.deps)) throw Error(`invalid authored deps: ${item.id}`);
+            const deps = [...new Set([...(Array.isArray(existing.deps) ? existing.deps : []), ...(item.deps ?? [])])];
+            const dependency_roles = { ...(existing.dependency_roles ?? {}), ...(item.dependency_roles ?? {}) };
+            items[items.indexOf(existing)] = { ...existing, ...item, deps, dependency_roles };
+          }
+        }
       }
     }
   }

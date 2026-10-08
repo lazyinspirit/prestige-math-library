@@ -3,7 +3,13 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
-import { frontierGateBattery } from '../../physics-support/step7-frontier-gate.mjs';
+// The live controller must load a repaired frontier adapter along with this
+// versioned stage module, rather than retain its original static ESM import.
+const FRONTIER_GATE_URL = new URL('../../physics-support/step7-frontier-gate.mjs', import.meta.url);
+const FRONTIER_GATE_STAT = statSync(FRONTIER_GATE_URL);
+const { frontierGateBattery } = await import(
+  `${FRONTIER_GATE_URL.href}?v=${FRONTIER_GATE_STAT.mtimeMs}:${FRONTIER_GATE_STAT.size}`
+);
 
 // The live controller has already cached the workflow's original ESM exports.
 // Version this composed dependency as the root stage loader does for Step 7.

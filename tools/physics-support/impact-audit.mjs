@@ -24,9 +24,11 @@ import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemSurfaceHash, shortHash } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { logicalConsumers } from './impact-scope.mjs';
+import { parseItemScope, includesItem, unknownItems } from './item-scope.mjs';
 
 const REPO = (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot));
-const argv = process.argv.slice(2);
+const itemScope = parseItemScope(process.argv.slice(2));
+const argv = itemScope.args;
 const asJson = argv.includes('--json');
 const touchesPath = option('--touches');
 const fromLabel = option('--from');
@@ -82,7 +84,7 @@ if (!before.surfaces || !after.surfaces) {
   die('selected snapshots predate public-surface fingerprints; take a fresh baseline and post-repair snapshot with touchlog.mjs');
 }
 
-const changed = [...new Set([...Object.keys(before.surfaces), ...Object.keys(after.surfaces)])]
+const surfaceChanges = [...new Set([...Object.keys(before.surfaces), ...Object.keys(after.surfaces)])]
   .filter((id) => before.surfaces[id] !== after.surfaces[id]).sort();
 
 const items = new Map();
@@ -104,6 +106,8 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
   for (const alias of list(fm, 'aliases')) aliases.set(alias, id);
 }
 const resolve = (id) => items.has(id) ? id : aliases.get(id);
+const unknown = unknownItems(itemScope, items.keys());
+if (unknown.length) die(`item selection contains unknown item IDs: ${unknown.join(', ')}`);
 
 const reverseDeps = new Map();
 const directCitations = new Map();
@@ -133,19 +137,22 @@ for (const item of items.values()) {
 }
 
 const impacts = [];
-for (const source of changed) {
+for (const source of surfaceChanges) {
   const logical = logicalConsumers(reverseDeps, source, { directBoundary });
   const citations = directCitations.get(source) ?? new Map();
   const required = new Set([...logical, ...citations.keys()]);
   required.delete(source);
+  const scopedRequired = [...required].filter(id => includesItem(itemScope, id)).sort();
+  if (!includesItem(itemScope, source) && !scopedRequired.length) continue;
   impacts.push({
     source,
     source_exists: items.has(source),
-    logical_consumers: [...logical].sort(),
-    direct_citation_consumers: [...citations].map(([id, channels]) => ({ id, via: [...channels].sort() })).sort((a, b) => a.id.localeCompare(b.id)),
-    required_review: [...required].sort(),
+    logical_consumers: [...logical].filter(id => includesItem(itemScope, id)).sort(),
+    direct_citation_consumers: [...citations].filter(([id]) => includesItem(itemScope, id)).map(([id, channels]) => ({ id, via: [...channels].sort() })).sort((a, b) => a.id.localeCompare(b.id)),
+    required_review: scopedRequired,
   });
 }
+const changed = impacts.map(impact => impact.source);
 const required = [...new Set(impacts.flatMap((impact) => impact.required_review))].sort();
 
 const template = {
@@ -224,6 +231,7 @@ if (receiptPath) {
         if (!entry || typeof entry.id !== 'string') { error('receipt-disposition-shape', `${receiptPath}: every disposition needs an item id`); continue; }
         if (dispositions.has(entry.id)) error('receipt-disposition-duplicate', `${receiptPath}: duplicate disposition for ${entry.id}`);
         dispositions.set(entry.id, entry);
+        if (!required.includes(entry.id)) continue;
         if (!['still-licensed', 'repaired', 'not-load-bearing'].includes(entry.status)) {
           error('receipt-disposition-status', `${receiptPath}: ${entry.id} has an invalid or unresolved status`);
         }

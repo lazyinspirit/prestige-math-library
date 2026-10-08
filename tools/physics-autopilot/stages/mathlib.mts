@@ -260,46 +260,25 @@ const alphaCohort = (ctx: any, u: string): string[] =>
   alphaGroups(ctx).find((g: any) => g.covers.map(String).includes(String(u)))?.covers.map(String) ?? [String(u)];
 
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
-const extGate = () => gate('extcheck', ['node', 'tools/physics-support/extcheck.mjs']);
+const frontierItemGate = (ctx: any, id: string, tool: string, args: string[] = [], extra: any = {}) =>
+  gate(id, ['node', 'tools/physics-support/frontier-item-gate.mjs', '--run', ctx.run, '--tool', tool, '--', ...args], extra);
+const extGate = (ctx: any) => frontierItemGate(ctx, 'extcheck', 'extcheck');
 
-/** Gates that apply to the whole repository, re-run at several stages because
- *  authoring and repair both change items on disk.
- *
- *  `pendingAuditOk` belongs only to a bounded pre-certification window. The
- *  caller must first validate the exact published-repair handoff; every other
- *  repo-wide checkpoint keeps `published-unaudited` fatal. */
+/** Item subjects belong only to the current frontier. Validators may load
+ * external suppliers to resolve prerequisites, but unrelated items cannot hold
+ * a frontier gate. The wrapper derives its exact scope from live manifests. */
 const repoWide = (ctx, { pendingAuditOk = false }: { pendingAuditOk?: boolean } = {}) => [
-  gate('precheck', ['node', 'tools/physics-support/tsx-run.mjs', 'tools/physics-support/precheck.mts'], {
+  frontierItemGate(ctx, 'precheck', 'precheck', [], {
     liveness: { pattern: /(\d+)\s+checked/.source, min: 1, unit: 'items checked' },
   }),
-  gate('depcheck', ['node', 'tools/physics-support/depcheck.mjs', ...(pendingAuditOk ? ['--pending-audit-ok'] : [])]),
-  gate('fwdcheck', ['node', 'tools/physics-support/fwdcheck.mjs', '--quiet']),
-  extGate(),
-  gate('rendercheck', ['node', 'tools/physics-support/rendercheck.mjs']),
-  // gates.mjs listed these two as gates of record at steps 3/5/8/9 and
-  // 2/3/5/9; this table — the only one that runs — carried neither.
-  // prosecheck is the positional-claim class LEVELS.md calls "where 100% of
-  // this library's found defects live"; depsource is dep-to-page resolution.
-  // (citecheck stays advisory by design: it cannot exit nonzero, and an
-  // always-green gate is noise, not checking — readers run it by hand.)
-  gate('prosecheck', ['node', 'tools/physics-support/prosecheck.mjs']),
-  gate('depsource', ['node', 'tools/physics-support/depsource.mjs']),
-  // The category pages render an AUTHORED reading order (library/<cat>/_pathway.md),
-  // so nothing mechanical keeps it covering the corpus as levels land. This is
-  // that guarantee: a published page in no part fails here. `pathway-sync` runs
-  // in 9-pathway-sync-v2, ahead of the report Alpha, so the usual case is already
-  // repaired by the time this reads it.
-  gate('pathcheck', ['node', 'tools/physics-support/pathcheck.mjs']),
-  // Scope loss is invisible to every gate that reads current state, and the
-  // add/delete authority briefs/alpha.md grants runs through step 8 — so the
-  // planning scope ledger is re-checked at every repo-wide gate point, not only
-  // through step 3 (where it stopped when a scaffolded pair vanished anyway).
+  frontierItemGate(ctx, 'depcheck', 'depcheck', pendingAuditOk ? ['--pending-audit-ok'] : []),
+  frontierItemGate(ctx, 'fwdcheck', 'fwdcheck', ['--quiet']),
+  extGate(ctx),
+  frontierItemGate(ctx, 'rendercheck', 'rendercheck'),
+  frontierItemGate(ctx, 'prosecheck', 'prosecheck'),
+  frontierItemGate(ctx, 'depsource', 'depsource'),
+  frontierItemGate(ctx, 'pathcheck', 'pathcheck'),
   scopeGate(ctx),
-  // The judge sweep and level-coverage both expand pages into items — the
-  // sweep via plan-spec.json (spliced at step 4), closure via the batch
-  // manifests. An item an Alpha adds to a manifest after step 4 diverges the
-  // two scopes: it escapes the sweep or hard-stops closure. Verify fails on
-  // any divergence; the licensed remedy is splice-plan --batch <i> --update.
   gate('splice-verify', ['node', 'tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--verify']),
 ];
 
@@ -350,7 +329,7 @@ const policyItemGate = (ctx) => gate('content-policy-items', ['node', 'tools/phy
   liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
 });
 
-const planGate = () => gate('validate-plan', ['node', 'tools/physics-support/validate-plan.mjs', 'research/plan-spec.json']);
+const planGate = (ctx: any) => frontierItemGate(ctx, 'validate-plan', 'validate-plan');
 
 /** The Step 1 drift review's teeth. The review is the `drift` unit of stage 1;
  *  this is what makes its report load-bearing rather than decorative. Fails on
@@ -475,7 +454,7 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
   // newest snapshot and add `pending` rows for new consumers. The pendings
   // keep the gate red, which correctly routes the RESIDUAL to the
   // impact-close Alpha — refreshing is mechanical, dispositioning is not.
-  'impact-receipt': (ctx) => ['tools/physics-support/impact-audit.mjs',
+  'impact-receipt': (ctx) => ['tools/physics-support/frontier-item-gate.mjs', '--run', ctx.run, '--tool', 'impact-audit', '--',
     '--touches', join(ctx.repo, touchesPath(ctx)),
     '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
     '--direct-boundary',
@@ -729,7 +708,7 @@ const sameUrl = (a: string, b: string) => {
 export const isEdgeDecision = async ({ ctx, failure }: any): Promise<boolean> => {
   if (failure?.id !== 'validate-plan') return false;
   const { spawnSync } = await import('node:child_process');
-  const v = spawnSync('node', ['tools/physics-support/validate-plan.mjs', 'research/plan-spec.json'],
+  const v = spawnSync('node', ['tools/physics-support/frontier-item-gate.mjs', '--run', ctx.run, '--tool', 'validate-plan'],
     { cwd: ctx.repo, encoding: 'utf8' });
   return /undeclared-prereq/.test(`${v.stdout ?? ''}${v.stderr ?? ''}`);
 };
@@ -1149,7 +1128,7 @@ const contractGates = (ctx, { reviewed = false }: { reviewed?: boolean } = {}) =
 
 /** Current author gates for verified continuations, without invented Step-3 work. */
 export const authoredContentGates = (ctx: any) => [
-  ...repoWide(ctx), planGate(), policyItemGate(ctx),
+  ...repoWide(ctx), planGate(ctx), policyItemGate(ctx),
   ...contractGates(ctx, { reviewed: false }),
 ];
 
@@ -1226,7 +1205,7 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['env', 'JUDGE_LINEUP=
  *  confirmed "0 changed" over the whole level (hence `5a-baseline` before
  *  5b). A second live `post-5a -> current` gate closes the lead Alpha's later
  *  edits before Step 5 ends. */
-const impactGate = (ctx) => gate('impact-audit', ['node', 'tools/physics-support/impact-audit.mjs',
+const impactGate = (ctx) => frontierItemGate(ctx, 'impact-audit', 'impact-audit', [
   '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', 'post-5a',
   '--direct-boundary',
   '--receipt', `research/${ctx.run}-impact.json`,
@@ -1469,7 +1448,7 @@ export const stages = [
       timeout: 7200,
     }],
     gates: (ctx: any) => [
-      gate('drift-review', ['node', 'tools/physics-support/drift-review-check.mjs', '--run', ctx.run, '--before-apply']), planGate(),
+      gate('drift-review', ['node', 'tools/physics-support/drift-review-check.mjs', '--run', ctx.run, '--before-apply']), planGate(ctx),
     ],
     onHold: holdStep1,
   },
@@ -1483,7 +1462,7 @@ export const stages = [
       role: 'tool', label: 'drift-apply', job: 'bookkeeping-mechanical', covers: ['all'],
       argv: ['node', 'tools/physics-support/drift-apply.mjs', '--run', ctx.run], timeout: 600,
     }],
-    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate()],
+    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate(ctx)],
     onHold: holdStep1,
   },
   {
@@ -1514,7 +1493,11 @@ export const stages = [
       gate('item-dependency-levels', ['node', 'tools/physics-support/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       gate('step1-dependency-ledger', ['node', 'tools/physics-support/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run, '--require-reviewed']),
       scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }),
-      ...policyGates(ctx), planGate(), extGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
+      ...policyGates(ctx), planGate(ctx),
+      // Scaffold subjects exist only in manifests. Check their available external
+      // provenance now; body/audit checks run on authored carriers in Step 3.
+      frontierItemGate(ctx, 'extcheck', 'extcheck', ['--manifest-only']),
+      urlGate(ctx), backingGate(ctx), fetchGate(ctx),
     ],
     onHold: holdStep1,
   },
@@ -1652,7 +1635,7 @@ export const stages = [
       // Authored IDs exist before Step 4 splices them into the plan. Scaffold
       // mint checks would reject those IDs; item mode below checks their content.
       ...coverageGates(ctx, { requireDestination: true }),
-      extGate(), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
+      extGate(ctx), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
       // A source already fetched and stamped can be cited while its live URL
       // is temporarily unavailable. Step 5b checks URL liveness and backing
       // after independent review; a dead link does not hold Step 3 authoring.
@@ -1706,7 +1689,7 @@ export const stages = [
       // No liveness floor: vacuity is impossible here — an absent artifact
       // (the splice never ran) is exit 2, its own hard failure.
       gate('splice-refusals', ['node', 'tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--refusals-gate']),
-      scopeGate(ctx), planGate()],
+      scopeGate(ctx), planGate(ctx)],
     maxFixRounds: 3,
     // Round shape: a refusal failure (or the stalemate synthetic, which on
     // this stage IS the withheld-splice shape) first re-runs the splice
@@ -1796,7 +1779,7 @@ export const stages = [
 
   // Direct review follows Step 3 authoring and the mechanical Step 4 barrier.
   ...step5Stages({
-    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
+    gate, planGate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
   }),
 
@@ -2204,7 +2187,7 @@ export const stages = [
       auditorCreatedGate(ctx, 8),
       manifestDepsGate(ctx),
       gate('splice-verify', ['node', 'tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--verify']),
-      gate('impact-receipt', ['node', 'tools/physics-support/impact-audit.mjs',
+      frontierItemGate(ctx, 'impact-receipt', 'impact-audit', [
         '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
         '--direct-boundary',
         '--receipt', `research/${ctx.run}-impact.json`]),
@@ -2455,7 +2438,7 @@ export const stages = [
     pattern: resultPattern('tool', 'pathway-sync-v2'), concurrency: 1,
     plan: (ctx) => [{ role: 'tool', label: 'pathway-sync-v2', job: 'bookkeeping-mechanical',
       covers: ['all'], argv: ['node', 'tools/physics-support/pathway-sync.mjs', '--run', ctx.run] }],
-    gates: (ctx) => [gate('pathcheck', ['node', 'tools/physics-support/pathcheck.mjs']), closureGate(ctx)],
+    gates: (ctx) => [frontierItemGate(ctx, 'pathcheck', 'pathcheck'), closureGate(ctx)],
   },
   {
     id: '9-pathway-seed-v2', label: 'pathway prose obligations', units: () => ['all'],
@@ -2477,7 +2460,7 @@ export const stages = [
       task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }],
     gates: (ctx) => [
       gate('pathway-closure', ['node', 'tools/physics-support/pathway-closure.mjs', 'check', '--run', ctx.run]),
-      gate('pathcheck', ['node', 'tools/physics-support/pathcheck.mjs']), gate('prosecheck', ['node', 'tools/physics-support/prosecheck.mjs']), closureGate(ctx),
+      frontierItemGate(ctx, 'pathcheck', 'pathcheck'), frontierItemGate(ctx, 'prosecheck', 'prosecheck'), closureGate(ctx),
     ],
   },
   {
@@ -2673,7 +2656,7 @@ for (const stage of stages) {
   const existing = stage.gates;
   delete stage.gatesWaived;
   stage.gates = (ctx: any) => [
-    gate('physics-content', ['node', 'tools/physics-support/physics-check.mjs', ...(stage.id.startsWith('1') || stage.id.startsWith('2') ? ['--plan', 'research/plan-spec.json'] : [])]),
+    gate('physics-content', ['node', 'tools/physics-support/physics-check.mjs', '--run', ctx.run, ...(stage.id.startsWith('1') || stage.id.startsWith('2') ? ['--plan', 'research/plan-spec.json'] : [])]),
     ...(typeof existing === 'function' ? existing(ctx) : existing ?? []),
   ];
 }

@@ -126,3 +126,35 @@ test('real planning entrypoint preserves physics library and kind metadata', t =
 // Node's fs namespace keeps fixture construction readable without affecting live paths.
 import * as fixtureFs from 'node:fs';
 function requireForFixture() { return fixtureFs; }
+
+test('frontier physics excludes unrelated malformed metadata and disconnected cycles', () => {
+ const items = [post(), physical(), { id: 'pthm-outside', kind: 'wrong', domain: 'wrong', aliases: 42, deps: ['pthm-other'] }, { id: 'pthm-other', deps: ['pthm-outside'] }];
+ assert.ok(check(items).length);
+ assert.deepEqual(check(items, { selectedItems: new Set(['pthm-result']), selectedPages: new Set() }), []);
+});
+test('frontier physics retains reachable supplier cycles, missing edges and boundaries', () => {
+ const supplier = { ...math(), deps: ['post-state'], dependency_roles: { 'post-state': 'physical-assumption' } };
+ const consumer = { ...physical(), deps: ['thm-math'], dependency_roles: { 'thm-math': 'mathematical-premise' } };
+ const scope = { selectedItems: new Set(['pthm-result']), selectedPages: new Set() };
+ assert.ok(check([post(), supplier, consumer], scope).some(e => e.code === 'math-physics-dependency'));
+ assert.ok(check([{ ...supplier, deps: ['pthm-result'] }, consumer], scope).some(e => e.code === 'item-cycle'));
+ const wrong = { ...post(), id: 'post-wrong', kind: 'experiment' };
+ assert.ok(check([{ ...physical(), deps: [wrong.id], dependency_roles: { [wrong.id]: 'physical-assumption' } }, wrong], scope).some(e => e.code === 'role-supplier'));
+ assert.ok(check([consumer], scope).some(e => e.code === 'edge-unresolved'));
+});
+test('frontier physics page hygiene is selected independently from supplier context', () => {
+ const items = [post(), physical()];
+ const pages = [{ id: 'selected', library: 'physics', items: ['pthm-result'] }, { id: 'outside', library: 'wrong', items: ['pthm-absent'] }];
+ assert.deepEqual(check(items, { pages, selectedItems: new Set(['pthm-result']), selectedPages: new Set(['selected']) }), []);
+ assert.ok(check(items, { pages, selectedItems: new Set(['pthm-result']), selectedPages: new Set(['outside']) }).some(e => e.code === 'page-item-missing'));
+});
+test('frontier physics rejects reached duplicate suppliers and used ambiguous aliases only', () => {
+ const consumer = { ...physical(), deps: ['thm-math'], dependency_roles: { 'thm-math': 'mathematical-premise' } };
+ const scope = { selectedItems: new Set(['pthm-result']), selectedPages: new Set() };
+ assert.ok(check([consumer, math(), math()], scope).some(e => e.code === 'item-id'));
+ const suppliers = [{ ...math(), aliases: ['shared'] }, { ...math(), id: 'thm-second', aliases: ['shared'] }];
+ const aliasConsumer = { ...consumer, deps: ['shared'], dependency_roles: { shared: 'mathematical-premise' } };
+ assert.ok(check([aliasConsumer, ...suppliers], scope).some(e => e.code === 'alias-duplicate'));
+ assert.deepEqual(check([consumer, math(), { ...math(), id: 'thm-disconnected' }, { ...math(), id: 'thm-disconnected' }], scope), []);
+ assert.deepEqual(check([consumer, math(), { ...math(), id: 'thm-disconnected-a', aliases: ['unused'] }, { ...math(), id: 'thm-disconnected-b', aliases: ['unused'] }], scope), []);
+});

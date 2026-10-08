@@ -98,3 +98,15 @@ Run-specific `research/RUN-owner-authoring-direction.md` is binding on drift,
 scaffolding, review, and authoring workers. Create it before planning or run
 `refresh-tasks --run RUN --force` before dispatch so every generated stage task
 names it; preserve the approved pair scope and exact supplier obligations.
+
+Item and page gates select only the current run's manifests through the private
+`frontier-item-gate.mjs` wrapper. Suppliers remain graph context; unrelated
+imported mathematics is not a formatting, audit, or repair subject. Plan gates
+also overlay current manifests before the Step-4 splice. Missing, malformed,
+duplicate, empty, or unknown selections fail closed. During planning only,
+nonempty page manifests may have empty item arrays; item gates require populated
+inventories and resolve their subjects against authored carriers. Scaffold
+content policy checks dependency structure before item carriers exist. The scoped
+external-item gate uses strict manifest mode at Step 1 for recorded-unproved,
+external-reference, and fallback provenance metadata, then validates full authored
+carriers after authoring.

@@ -72,8 +72,12 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
+import { readRunManifestPages } from './run-manifest-pages.mjs';
+import { referenceUrls } from './content-policy-lib.mjs';
 
-const args = process.argv.slice(2);
+const itemScope = parseItemScope(process.argv.slice(2));
+const args = itemScope.args;
 const argVal = (flag) => {
   const i = args.indexOf(flag);
   return i >= 0 ? args[i + 1] : undefined;
@@ -82,6 +86,17 @@ const REPO = argVal('--repo') ?? (process.env.PHYSICS_REPO ?? (physicsExistsSync
 const asJson = process.argv.includes('--json');
 const quiet = process.argv.includes('--quiet');
 const writeLedger = process.argv.includes('--ledger');
+
+if (itemScope.selected !== null && writeLedger) throw Error('--ledger cannot be combined with --items-file');
+
+const scaffold = args.includes('--manifest-only');
+if (scaffold && (itemScope.selected === null || args.filter(arg => arg === '--run').length !== 1))
+  throw Error('--manifest-only requires --run and a nonempty --items-file scope');
+if (!scaffold && args.includes('--run')) throw Error('--run requires --manifest-only');
+const currentPages = scaffold ? readRunManifestPages(REPO, argVal('--run')) : [];
+const currentItems = currentPages.flatMap(page => page.items);
+if (scaffold && (currentItems.length !== itemScope.selected.size || currentItems.some(item => !itemScope.selected.has(item.id))))
+  throw Error('scaffold selection must exactly match the current run manifests');
 
 const errors = [];
 const warns = [];
@@ -132,7 +147,29 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   });
   for (const a of list(fm, 'aliases')) aliasTo.set(a, id);
 }
+// Plans are the only current subjects before authored carriers exist.
+for (const entry of currentItems) {
+  if (entry.external_refs !== undefined && !Array.isArray(entry.external_refs))
+    err('external-shape', `${entry.id}: external_refs must be an array`);
+  const refs = referenceUrls(entry);
+  const provedHere = entry.proved_here !== false && entry.proved_here !== 'false';
+  const record = entry.external_dependency;
+  if (provedHere && record !== undefined) err('external-on-proved', `${entry.id}: external_dependency requires proved_here: false`);
+  if (!provedHere) {
+    for (const key of ['source_url', 'exact_statement', 'local_proof_attempt', 'necessity'])
+      if (typeof record?.[key] !== 'string' || !record[key].trim()) err('external-record-missing', `${entry.id}: external_dependency.${key} is required`);
+    if (record?.source_url && !/^https?:\/\//.test(record.source_url)) err('external-source-url', `${entry.id}: source_url must be HTTP(S)`);
+    if (record?.source_url && !refs.includes(record.source_url)) err('external-source-reference', `${entry.id}: source_url must match a sources.references URL`);
+  }
+  items.set(entry.id, { id: entry.id, file: `research/${argVal('--run')}#${entry.id}`, kind: entry.kind,
+    status: entry.status ?? 'draft', deps: entry.deps, justified: entry.justified_by ?? [], forward: entry.forward_refs ?? [],
+    externalRefs: Array.isArray(entry.external_refs) ? entry.external_refs : [], provedHere,
+    precheck: entry.verification?.precheck, hasJudge: !!entry.verification?.judge, hasRefs: refs.length > 0,
+    body: '', loadBearing: '', scaffold: true });
+}
 const resolve = (x) => (items.has(x) ? x : aliasTo.get(x));
+for (const id of unknownItems(itemScope, items.keys()))
+  err('focus-item-unknown', `--items-file names unknown item ${id}`);
 
 // ------------------------------------- Set Theory bootstrapping hard boundary
 //
@@ -169,6 +206,10 @@ try {
 } catch { /* depcheck owns missing/malformed page diagnostics */ }
 try {
   const plan = JSON.parse(readFileSync(join(REPO, 'research/plan-spec.json'), 'utf8'));
+  if (scaffold) {
+    const current = new Map(currentPages.map(page => [page.id, page]));
+    plan.pages = plan.pages.map(page => current.get(page.id) ?? page);
+  }
   const pageById = new Map((plan.pages ?? []).map((page) => [page.id, page]));
   for (const page of plan.pages ?? [])
     for (const entry of [...(page.items ?? []), ...(page.examples ?? [])]) {
@@ -238,6 +279,7 @@ function deferredPath(id) {
 }
 
 for (const id of [...foundationsItems].sort()) {
+  if (!includesItem(itemScope, id)) continue;
   const path = deferredPath(id);
   if (path)
     err('foundations-deferred-dependency', `${items.get(id)?.file ?? `research/plan-spec.json#${id}`}: Foundations dependency path reaches Set Theory recorded-not-proved material: ${path.join(' -> ')}`);
@@ -246,12 +288,13 @@ for (const id of [...foundationsItems].sort()) {
 // -------------------------------------------------------- shape of an unproved item
 
 for (const it of items.values()) {
+  if (!includesItem(itemScope, it.id)) continue;
   if (it.provedHere) continue;
   if (!['remark', 'postulate', 'experiment'].includes(it.kind))
     err('unproved-kind', `${it.file}: proved_here false but kind is "${it.kind}"; it states rather than establishes, so it must be a remark`);
   if (/\n## (Proof|Refutation)\b/.test(it.body))
     err('unproved-has-proof', `${it.file}: proved_here false but the body has a Proof or Refutation section`);
-  if (it.precheck !== 'n/a')
+  if (!it.scaffold && it.precheck !== 'n/a')
     err('unproved-precheck', `${it.file}: proved_here false but verification.precheck is "${it.precheck ?? 'unset'}"; must be n/a`);
   if (!it.hasRefs)
     err('unproved-uncited', `${it.file}: proved_here false but sources.references is empty; an unproved statement MUST carry a citation`);
@@ -262,6 +305,7 @@ for (const it of items.values()) {
 // ------------------------------------------------- shape of an external_refs entry
 
 for (const it of items.values()) {
+  if (!includesItem(itemScope, it.id)) continue;
   const deps = new Set(it.deps.map(resolve));
   for (const ref of it.externalRefs) {
     const r = resolve(ref);
@@ -270,7 +314,7 @@ for (const it of items.values()) {
       err('external-not-unproved', `${it.file}: external_refs names "${ref}", which this library DOES prove; the field records mentions of recorded-not-proved results only`);
     if (deps.has(r))
       err('external-in-deps', `${it.file}: "${ref}" is in both deps and external_refs; a logical dependency already seeds the marker, so remove it from external_refs`);
-    if (!it.body.includes('[[' + ref))
+    if (!it.scaffold && !it.body.includes('[[' + ref))
       err('external-unused', `${it.file}: external_refs names "${ref}" but the body never links it, so the declaration marks the item for nothing the reader can see`);
   }
 }
@@ -334,6 +378,7 @@ for (const it of items.values()) {
 }
 
 for (const [id, how] of rests) {
+  if (!includesItem(itemScope, id)) continue;
   const it = items.get(id);
   if (it.status === 'published' && it.provedHere)
     warn('unproved-on-published', `${it.file} is PUBLISHED and rests (${how}) on material not proved in this library`);
@@ -341,8 +386,8 @@ for (const [id, how] of rests) {
 
 // ---------------------------------------------------------------- the ledger
 
-const unproved = [...items.values()].filter((i) => !i.provedHere).map((i) => i.id).sort();
-const consequences = [...rests].filter(([id]) => items.get(id).provedHere).sort();
+const unproved = [...items.values()].filter((i) => includesItem(itemScope, i.id) && !i.provedHere).map((i) => i.id).sort();
+const consequences = [...rests].filter(([id]) => includesItem(itemScope, id) && items.get(id).provedHere).sort();
 
 if (writeLedger) {
   const lines = [
@@ -371,7 +416,7 @@ if (writeLedger) {
 
 // ---------------------------------------------------------------------- report
 
-const summary = { items: items.size, unproved: unproved.length, consequences: consequences.length, errors: errors.length, warnings: warns.length };
+const summary = { items: items.size, scope: itemScope.selected === null ? 'full' : 'focused-items', checked_items: itemScope.selected === null ? items.size : itemScope.selected.size, unproved: unproved.length, consequences: consequences.length, errors: errors.length, warnings: warns.length };
 
 if (asJson) {
   console.log(JSON.stringify({ summary, unproved, consequences, errors, warns }, null, 2));
