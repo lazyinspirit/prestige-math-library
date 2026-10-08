@@ -1,0 +1,22 @@
+# Exact shape-invariance repair round one
+
+Root authorized the single original-source forward implication in `research/frontier-43-complex-representation-15-kl-shape-citation-authorization.json`, after the bounded original-source/local-alternative assessment. The classification Statement is unchanged. F5 now states only Geck Corollary5.6(c)'s forward implication; unsupported stronger HHS tableau dominance is removed. Step1.2 proves coefficient-ring inversion u=v^-1, quadratic/braid compatibility, inverse algebra assignments, bar/standard-product agreement, triangular-basis identification by local uniqueness, and zero/nonzero elementary coefficient/finite-chain correspondence. All remaining classification directions and counting remain local; no Murphy/leading-matrix theorem is asserted as locally proved.
+
+The exact additional declared suppliers are the existing normalized algebra, bar-involution and triangular KL-basis theorem. These provide only the newly explicit normalization checks; computed dependency level remains11. The current example consumes unchanged F2:all three fiber conclusions in step2.1,only Q-fibers in step2.2,and Q-fiber separation in step3.1. Its30 S3/S4 RSK pairs were recomputed independently with zero mismatches. The example Statement/tables/Proof are unchanged; only exact-use Remarks were added. A-page prose and batch7 manifest/contracts/coverage mirror the source boundary. Geck's complete PDF and precise read boundary are recorded; existing HHS evidence is retained as an unused stronger alternative, not a local supplier.
+
+Final local checks all passed:2items/10steps proof-layout0defects;2proofs precheck0failures;2items+1page render0errors/0warnings;strict contracts25/25;content25items;coverage2pages/62results;manifest-deps25items0normalized/0errors;source-fetch14/14verified/resolved;focused25-item depcheck0errors/0warnings with full relevant prerequisite context. Exact commands and outputs are in JSON files here. `unchanged-claims.json` verifies both subject/consumer Statement byte sequences equal the saved pre-edit carriers. These checks are not independent audits or item acceptance. No decisions,runtime,global plan,ledger,origin,publication or mtime-control writes occurred.
+
+## Newly confirmed independent local supplier finding
+
+The current recording-tableau converse supplier `lem-left-cell-equivalence-forces-equality-of-recording-tableaux-in-type-a`, step1.3, asserts that the column-superstandard descent set determines a standard tableau without stating the essential fixed-shape hypothesis. Counterexample:n=5,lambda=(3,2),P_lambda=[135|24],D_lambda={1,3},whereas U=[135|2|4] has shape(3,1,1) and the same descent set. Its actual step4.1 use does have shape(U)=lambda from step3.1,so no promised final claim needs weakening. The intermediate proof must state that fixed-shape premise and use it:earlier completed columns cannot grow beyond their final sizes;among admissible addable nodes strictly below the current last row,the next row of the same column is the only possibility. At each non-descent block boundary,the only admissible node in a row at most the last filled column height is the top of the next column. This gives a complete finite induction with the actual premise.
+
+This newly confirmed subject was reported to root for exact write-scope coordination; it has not been edited or accepted in this branch. It is a separate concrete proof repair,not an unchanged repetition of shape citation work. Classification full local-supplier closure remains conditional on that surgical correction. The current shape-citation repair is complete and drained.
+
+Current raw hashes:
+
+- `items/thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux.md`: `3d393e36cb2d74fc46209de687d817ba07da85ce2356714cdcb8155b7c8461a4`
+- `items/ex-rsk-left-right-and-two-sided-cells-in-s-three.md`: `e05b8caf68b9b633f4fa44b2575de49cc4a434d4b0916231af4dfd3cf41168ef`
+- `research/frontier-43-complex-representation-15-batch-7.pages.json`: `72ad69c94e5d313e4435c0a0c86505838445373d4acad7350b502573d113759e`
+- `research/frontier-43-complex-representation-15-batch-7.coverage.json`: `c6f41778988dc5ab927dfdd2f9b52fbc708ab468b5d78a32f1f5c660fa63ee2c`
+- `research/frontier-43-complex-representation-15-batch-7.proof-contracts.json`: `18ec282adff24911dfd51b05fe91f35b3a4cc94d9210aa58f9747442eaa79893`
+- `library/special-topics-in-representation-theory/kazhdan-lusztig-bases-polynomials-and-cells.md`: `71f26f7b527cad53575417b773c5ad4f43c2fbaa4ada264ae2b0fb8aeb533212`

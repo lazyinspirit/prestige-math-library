@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "type": "local-mathematical-repair-evidence",
+  "id": "thm-beta-gamma-identity",
+  "run": "frontier-43-complex-representation-15",
+  "recorded_at": "2026-10-07T17:15:25.900689+00:00",
+  "finding": "The original step 3.1 established only Gamma(p+q)B(p,q)=Gamma(p)Gamma(q), then identified this as the quotient statement without establishing Gamma(p+q) != 0. The initial concern numbered this division step 2.1, but the current original carrier has it in step 3.1.",
+  "correction": "Retain the cross-multiplied identity as step 3.1. New step 4.1 proves Gamma nonvanishing on the right half-plane: assuming Gamma(z)=0, use B(z,1)=1/z and the q-holomorphy already proved in step 3.1 to get B(z,q) != 0 for real q in an interval near 1. Step 2.1 forces Gamma(z+q)=0 on that interval; holomorphy and the identity theorem force Gamma identically zero, contradicting the direct integral evaluation Gamma(1)=1. Divide only after this proof.",
+  "before_file": "research/frontier-43-complex-representation-15-beta-gamma-before.md",
+  "before_raw_sha256": "1c6f2d3403246f8b9e342ca8792d1a6950f89ba11a786d4e2f4c092162f33210",
+  "pre_sha256": "80f319d067e1ca117101551cad4bef1eb8f15ce87528ea1e82a94d63dbb13230",
+  "content_sha256": "89d35e25dea3fd2dddecc1cc47470041b9c76a3e248095cd24138248a03b5c17",
+  "current_raw_sha256": "a421e0512f9ebfddf1798690a174c1cd72e34812cfcbebff28bf48779494825e",
+  "statement_changed": false,
+  "definition_changed": false,
+  "dependencies_changed": false,
+  "verification_changed": false,
+  "rejected_supplier_edge": {
+    "supplier": "cor-gamma-function-has-no-zeros",
+    "cycle": [
+      "thm-beta-gamma-identity",
+      "cor-gamma-function-has-no-zeros",
+      "thm-gamma-weierstrass-product",
+      "thm-euler-limit-formula-for-gamma",
+      "thm-beta-gamma-identity"
+    ]
+  },
+  "dependency_review": {
+    "beta_gamma_closure_items": 892,
+    "beta_gamma_closure_acyclic": true,
+    "existing_supplier_closures_exclude_beta_gamma": {
+      "thm-euler-gamma-function-is-holomorphic": 751,
+      "thm-identity-theorem-holomorphic-functions": 709,
+      "thm-holomorphic-parameter-riemann-integral": 712,
+      "thm-weierstrass-convergence-holomorphic-functions": 707
+    }
+  },
+  "ownership_review": "Inspected live frontier-43 state: SL2 principal-series dispatch 53a5d4127531038f is active. Its task lists only 20 native pair IDs; published beta-gamma is absent. Both beta-gamma and no-zeros files were clean in git status before write. Root assigned exclusive published-item repair scope; no shared runtime, control, plan or ledger edits were made.",
+  "local_checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-beta-gamma-identity.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 4 steps, 0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-beta-gamma-identity.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/thm-beta-gamma-identity.md",
+            "item_id": "thm-beta-gamma-identity",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-beta-gamma-identity.md --json",
+      "exit_code": 0,
+      "output": {
+        "errors": [],
+        "warnings": [],
+        "checked": 1
+      }
+    }
+  ],
+  "review": "Reviewed the added contradiction argument after editing; all translated zero points lie inside the right half-plane, with an interior accumulation point, and Beta(z,1) is nonzero because Re z > 0. The continuity used follows explicitly from already proved q-holomorphy. No newly added dependency or downstream statement change. No unresolved mathematical uncertainty found in this focused correction. This is local repair review, not independent whole-item audit.",
+  "integration_pending": "Root owns serial canonical published-consumer-supplier ledger update and replacement of stale verification stamps with any required bound published repair receipt."
+}

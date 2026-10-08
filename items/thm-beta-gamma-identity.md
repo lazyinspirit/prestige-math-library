@@ -21,12 +21,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
+  repair: research/frontier-43-complex-representation-15-beta-gamma-recorded-repair.json
 sources:
   scraped: []
   references:
@@ -69,4 +64,6 @@ $$B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.$$
 
 2.1 The function $$H_{q_0}(p):=\Gamma(p+q_0)B(p,q_0)-\Gamma(p)\Gamma(q_0)$$ is holomorphic on $\operatorname{Re}p>0$ by step 1.1 and [L5]. If $p>0$ is real, then [L1] and [L2] identify the complex and real formulas, so $H_{q_0}(p)=0$. The positive real axis has an accumulation point in the right half-plane, so [L3] gives $H_{q_0}\equiv0$. Thus $$\Gamma(p+q_0)B(p,q_0)=\Gamma(p)\Gamma(q_0)\qquad(\operatorname{Re}p>0,\ q_0>0\text{ real}).$$ [step 1.1, L1, L2, L3, L5]
 
-3.1 Now fix $p$ with $\operatorname{Re}p>0$. Repeating step 1.1 with the roles of $p$ and $q$ reversed shows that $q\mapsto B(p,q)$ is holomorphic on $\operatorname{Re}q>0$. Therefore $$K_p(q):=\Gamma(p+q)B(p,q)-\Gamma(p)\Gamma(q)$$ is holomorphic on $\operatorname{Re}q>0$ by [L5]. Step 2.1 shows $K_p(q)=0$ for every positive real $q$, so [L3] gives $K_p\equiv0$. This is exactly the displayed identity. [step 2.1, L3, L5, L6, L7] ∎
+3.1 Now fix $p$ with $\operatorname{Re}p>0$. Repeating step 1.1 with the roles of $p$ and $q$ reversed shows that $q\mapsto B(p,q)$ is holomorphic on $\operatorname{Re}q>0$. Therefore $$K_p(q):=\Gamma(p+q)B(p,q)-\Gamma(p)\Gamma(q)$$ is holomorphic on $\operatorname{Re}q>0$ by [L5]. Step 2.1 shows $K_p(q)=0$ for every positive real $q$, so [L3] gives $K_p\equiv0$. Thus $\Gamma(p+q)B(p,q)=\Gamma(p)\Gamma(q)$ for all parameters in the stated half-planes. [step 2.1, L3, L5, L6, L7]
+
+4.1 To justify division, suppose $\Gamma(z)=0$ for some $\operatorname{Re}z>0$. By [L7], $B(z,1)=\int_0^1t^{z-1}\,dt=1/z\ne0$, since $t^z\to0$ as $t\downarrow0$. Step 3.1 makes $q\mapsto B(z,q)$ holomorphic, hence continuous at $1$, so $B(z,q)\ne0$ for every real $q$ in some interval about $1$ contained in $(0,\infty)$. Step 2.1 then gives $\Gamma(z+q)=0$ throughout that interval. Its translated interval has an accumulation point in the right half-plane, so [L3] and [L5] force $\Gamma$ to vanish identically there, contradicting $\Gamma(1)=\int_0^\infty e^{-t}\,dt=1$ from [L7]. Thus Gamma has no zeros in the right half-plane; in particular $\Gamma(p+q)\ne0$, and division of step 3.1 gives the stated identity. [step 2.1, step 3.1, L3, L5, L7, algebra] ∎

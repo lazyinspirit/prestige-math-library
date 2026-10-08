@@ -1,0 +1,11 @@
+---
+page: kazhdan-lusztig-bases-polynomials-and-cells
+title: "Kazhdan–Lusztig Bases, Polynomials, and Cells"
+status: draft
+items: [def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-the-hecke-bar-involution-is-well-defined, lem-bruhat-order-basic-properties-for-permutations, def-bruhat-interval-and-r-polynomials, lem-reversal-anti-involution-commutes-with-hecke-bar, thm-r-polynomial-recursion-and-degree-bounds, lem-verma-sign-sum-over-bruhat-intervals, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-kazhdan-lusztig-basis-multiplication-formula, thm-kazhdan-lusztig-polynomial-recursion, def-inverse-kazhdan-lusztig-polynomials, thm-kazhdan-lusztig-inversion-formula, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, def-knuth-and-dual-knuth-equivalence-for-permutations, thm-knuth-equivalence-classes-are-insertion-tableau-fibers, def-star-operations-on-the-symmetric-group, lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges, lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations, prop-same-insertion-or-recording-tableaux-imply-cell-equivalence, lem-left-cell-equivalence-forces-equality-of-recording-tableaux-in-type-a, thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux]
+examples: []
+---
+
+This page develops the equal-parameter Hecke algebra of the symmetric group in the normalization $q=v^{-2}$ and $H_w=v^{\ell(w)}T_w$. It begins with Bruhat order, the bar involution and its reversal symmetry, then constructs the Kazhdan–Lusztig basis and its classical polynomial normalization. The multiplication formula, the two polynomial recursions, and the inverse-basis identity provide the algebraic tools used later.
+
+The final part identifies the type-A cells through Robinson–Schensted. Knuth and dual Knuth moves preserve the insertion and recording tableaux; rank-two star operations transport the Kazhdan–Lusztig graph and left-cell relations. The resulting classification states that left cells are the $Q$-fibers, right cells are the $P$-fibers, and two-sided cells are the common-shape fibers. The concrete calculations are collected on [[kazhdan-lusztig-bases-polynomials-and-cells-examples]].

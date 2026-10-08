@@ -1,0 +1,7 @@
+# Root local published-repair addendum after native Step5b
+
+The native Step5b report and successful dispatch remain unchanged. Its two retained A-P cosmetic maintenance findings are now closed by the same Codex owners on genuine pre-edit claims and before carriers: inversion Proof2.1 nonzero notation, and spectral Proof4.1 tombstone/Boundary heading. Both original Statements and dependencies are unchanged; their actual local precheck/render/proof-layout checks pass, and recordedPublishedRepair validates both canonical ledger blocks/receipts. No new audit, judge, publication approval or downstream interface repair is claimed.
+
+Two new fixed/nonfatal append-only rows supersede the original nonfatal-recorded findings; original observations and native reports remain historical evidence. Normal current Step5 carrier stamps bind the repaired published sources. Current human ledger index entries are resolved.
+
+The native impact receipt is preserved before root maintenance in research/frontier-43-complex-representation-15-step5b-owner-published-local-repair/native-impact-before-history-rebinding.json. Sixty historical review references now point to byte-exact archived Alpha1/2 decisions with the same original SHA256; no mathematical evidence, disposition, supplier use or current owned carrier is changed. This avoids falsely binding the old review to later cosmetic closure metadata. The native edge verdicts remain untouched. Engine-owned closure gates and later Steps6–9 remain due.

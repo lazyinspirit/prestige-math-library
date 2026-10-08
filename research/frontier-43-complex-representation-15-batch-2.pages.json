@@ -1,0 +1,1553 @@
+[
+  {
+    "order": 1234,
+    "id": "amenability-reiter-nets-and-folner-conditions",
+    "kind": "A",
+    "category": "representation-theory",
+    "title": "Amenability Reiter Nets and Folner Conditions",
+    "companion": "amenability-reiter-nets-and-folner-conditions-examples",
+    "requires": [
+      "haar-measure-existence-and-uniqueness",
+      "the-modular-function-and-l1-group-algebras",
+      "unitary-representations-positive-type-and-gns",
+      "group-c-star-algebras-and-the-fell-unitary-dual",
+      "the-analytic-hahn-banach-theorem",
+      "geometric-hahn-banach-and-convex-separation",
+      "banach-alaoglu-goldstine-and-krein-milman",
+      "amenable-groups-and-folner-criteria",
+      "induced-unitary-representations-of-locally-compact-groups"
+    ],
+    "items": [
+      {
+        "id": "def-complex-haar-l-infinity-space",
+        "kind": "definition",
+        "title": "Complex $L^\\infty$ space of a locally compact group",
+        "deps": [
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-measure-space",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "def-left-haar-integral-and-left-haar-measure"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $G$ be a locally compact Hausdorff group with fixed left Haar measure $\\mu$\n([[def-left-haar-integral-and-left-haar-measure]]). Use the complex-valued\nmeasurability convention and modulus from\n[[def-complex-haar-lp-spaces-and-compactly-supported-functions]]. For a Borel\nmeasurable $f:G\\to\\mathbb C$, set\n$$\\|f\\|_{\\infty,\\mu}:=\\inf\\{t>0:\\mu(\\{x\\in G:|f(x)|>t\\})=0\\},$$\nwith infimum $+\\infty$ when the set of such $t$ is empty. Let\n$\\mathcal L^\\infty(G,\\mu;\\mathbb C)$ be the complex measurable functions with\nfinite $\\|f\\|_{\\infty,\\mu}$, identify $f\\sim g$ when $f=g$ $\\mu$-almost\neverywhere, and write\n$$L^\\infty(G,\\mu;\\mathbb C):=\\{[f]:f\\in\\mathcal L^\\infty(G,\\mu;\\mathbb C)\\}.$$\nAddition and complex scalar multiplication are $[f]+[g]=[f+g]$ and\n$\\alpha[f]=[\\alpha f]$, and the norm is $\\|[f]\\|_\\infty:=\\|f\\|_{\\infty,\\mu}$.\nThis is the complex $L^\\infty$ space used on the amenability page; its\nfunctions are equivalence classes, not chosen representatives.",
+        "strategy": "Representatives differing almost everywhere give the same pointwise operations and essential supremum. Real and imaginary parts of sums and complex scalar multiples remain measurable. The essential-supremum threshold sets give closure under addition and scalar multiplication, the triangle inequality by |f+g|<=|f|+|g| and homogeneity by scaling. If the essential supremum is zero, each set {|f|>1/n} is null; their countable union is null and f vanishes outside it. This proves the class operations are well-defined and the displayed quantity is a norm. No use of Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Measure, Integration & Real Analysis",
+              "url": "https://measure.axler.net/MIRA.pdf",
+              "locator": "§7A, Definitions 7.1 and 7.3 (printed pp. 194–195); §7B, Definitions 7.15–7.18 (printed pp. 202–204)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+        "kind": "definition",
+        "title": "Left-invariant means on $L^\\infty$ of a locally compact group",
+        "deps": [
+          "def-complex-haar-l-infinity-space",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-group",
+          "def-topological-group",
+          "def-borel-sigma-algebra",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-of-square-roots",
+          "lem-of-abs-value",
+          "lem-of-square-monotone",
+          "lem-of-square-positive"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $G$ be a locally compact Hausdorff group with fixed left Haar measure $\\mu$.\nWrite $L^\\infty(G):=L^\\infty(G,\\mu;\\mathbb C)$ for the complex a.e.-class\nspace of [[def-complex-haar-l-infinity-space]]. For $g\\in G$ define the left\ntranslate by\n$$L_gf(x):=f(g^{-1}x).$$\nIt is well defined on classes and isometric, and $L_{g_1}L_{g_2}=L_{g_1g_2}$.\n\nFor a bounded complex-linear functional, write\n$\\|m\\|:=\\sup\\{|m(f)|:\\|f\\|_\\infty\\le1\\}$ for its operator norm.\n\nA **mean** on $L^\\infty(G)$ is a complex-linear functional\n$m:L^\\infty(G)\\to\\mathbb C$ such that $m(f)\\ge0$ whenever $f\\ge0$ and\n$m(1_G)=1$, where $1_G$ is the class of the constant-one function. It is\n**left invariant** if $m(L_gf)=m(f)$ for every $g\\in G$ and\n$f\\in L^\\infty(G)$. Every mean has operator norm one and satisfies\n$$|m(f)|\\le m(|f|)\\le\\|f\\|_\\infty.$$\nEquivalently, a mean is a positive complex-linear functional of norm one.",
+        "strategy": "Left translation maps Borel functions to Borel functions. If two representatives agree off a null set, their translates agree off its left translate, which is null; and each superlevel set of |L_g f| is the left translate of the corresponding superlevel set of |f|. Thus L_g is well defined and isometric, with the stated group law. For a positive complex-linear m, write each real-valued class u as u_+-u_- to see m(u) is real. For f with m(f) nonzero, choose alpha=conjugate(m(f))/|m(f)|; then m(Re(alpha f))=|m(f)| and Re(alpha f)<=|f|, so |m(f)|<=m(|f|). The essential-supremum definition gives |f|<=(||f||infinity+epsilon)1 almost everywhere; positivity yields m(|f|)<=(||f||infinity+epsilon)m(1). Let epsilon decrease to zero. Since ||1||infinity=1, taking the unit-ball supremum gives ||m||=m(1), so positive norm-one functionals are exactly means. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Definition G.1.2 and Remark G.1.3 (printed pp. 447–448); the local proof gives the complex-functional modulus estimate explicitly"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 19: Reiter's Property and the Folner Condition",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf",
+              "locator": "Invariant mean and amenability definitions (PDF p. 2); mean on L-infinity and unit-ball norm bound (PDF p. 9); the notes state the real-valued case"
+            },
+            {
+              "title": "Matthew Daws and Volker Runde, Reiter's properties (P1) and (P2) for locally compact quantum groups, arXiv:0705.3432v5",
+              "url": "https://arxiv.org/pdf/0705.3432v5",
+              "locator": "Introduction, printed p. 1: amenability as an invariant state on complex L-infinity and the associated weak-star approximation"
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "def-amenable-locally-compact-group",
+        "kind": "definition",
+        "title": "Amenable locally compact group",
+        "deps": [
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group"
+        ],
+        "dependency_level": 2,
+        "statement": "A locally compact Hausdorff group $G$ is **amenable** if there exists a\nleft-invariant mean $m$ on $L^\\infty(G)$, using the fixed left Haar measure\nand the translation action from\n[[def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group]]. Thus\n$m$ is a positive complex-linear functional with $m(1_G)=1$ and\n$m(L_gf)=m(f)$ for every $g\\in G$ and $f\\in L^\\infty(G)$.\n\nThis definition imposes no countability, discreteness, compactness, or\nunimodularity assumption. It does not depend on the normalization of Haar\nmeasure: replacing $\\mu$ by $c\\mu$ for $c>0$ preserves exactly the same null\nsets, so it gives the same almost-everywhere classes and essential-supremum\nnorm on $L^\\infty(G)$. The mean and its left-invariance condition are therefore\nunchanged.",
+        "strategy": "Definition item. Normalization independence follows because replacing Haar measure by $c\\mu$ for $c>0$ preserves exactly the same null sets; the almost-everywhere classes and essential-supremum norm on $L^\\infty(G)$ are unchanged. Thus positivity, normalization, and left invariance of a mean are unchanged. No choice principle is used. Examples and existence results are treated later on this page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, §G.1, Definition G.1.4 and Remark G.1.6 (printed pp. 448–449); G.1.4 defines amenability using an invariant mean on UCB(G)"
+            },
+            {
+              "title": "Matthew Daws and Volker Runde, Reiter's properties (P1) and (P2) for locally compact quantum groups, arXiv:0705.3432v5",
+              "url": "https://arxiv.org/pdf/0705.3432v5",
+              "locator": "Introduction, printed p. 1: amenability of a locally compact group defined by a left-invariant state on complex L-infinity(G)"
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "def-reiter-condition-p1",
+        "kind": "definition",
+        "title": "Reiter's condition (P1)",
+        "deps": [
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-left-haar-integral-and-left-haar-measure",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "def-measure-preserving-transformation-and-system",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-directed-set-and-net"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $G$ be a locally compact Hausdorff group with fixed left Haar measure\n$\\mu$, and put\n$$\\mathcal P:=\\{f\\in L^1(G):f\\ge0,\\ \\|f\\|_1=1\\},$$\nwhere $f\\ge0$ means that the class has a real-valued representative that is\nnonnegative almost everywhere. For $g\\in G$ define\n$(L_gf)(x):=f(g^{-1}x)$ on almost-everywhere classes. For compact\n$Q\\subseteq G$ and $f\\in\\mathcal P$, set\n$$\\Delta_Q(f):=\\sup\\bigl(\\{0\\}\\cup\\{\\|L_gf-f\\|_1:g\\in Q\\}\\bigr).$$\nThen $0\\le\\Delta_Q(f)\\le2$, and $\\Delta_\\varnothing(f)=0$. The group $G$\nsatisfies **Reiter's condition (P1)** if for every compact $Q\\subseteq G$\nand every $\\varepsilon>0$ there is $f\\in\\mathcal P$ with\n$\\Delta_Q(f)\\le\\varepsilon$.\n\nEquivalently, there is a net $(f_i)_{i\\in I}$ in $\\mathcal P$ with its\ninherited $L^1$-norm topology such that for\nevery compact $Q$ and every $\\varepsilon>0$ some $i_0\\in I$ satisfies\n$\\Delta_Q(f_i)\\le\\varepsilon$ for all $i\\succeq i_0$; this is uniform\nconvergence to zero on compact subsets. The set $\\mathcal P$ is convex and\n$L_g\\mathcal P=\\mathcal P$ for every $g\\in G$. Only left translates are\nused, the measure $\\mu$ is fixed, and no compactness assumption on $G$ is\nmade.",
+        "strategy": "For each left translation, the map x -> g^{-1}x is Borel and preserves Haar measure, so composition is well-defined on L1 classes, preserves nonnegativity and L1 norm, and its inverse is L_{g^{-1}}. Linearity of the integral proves convexity of P. The net equivalence uses the directed preorder of all witness triples (Q,epsilon,f), ordered by test-set inclusion and decreasing epsilon; every pair has a common upper witness by applying the condition to the union compact set and minimum tolerance. Each index contains its own witness, so no global choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Theorem G.3.1(iii), including the definition of L^1(G)_{1,+} (printed pp. 453–454)"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 19: Reiter's Property and the Følner Condition",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf",
+              "locator": "Definition of Reiter's Property and L^1(G)_{1,+} (PDF p. 11, file page indexed 10)"
+            },
+            {
+              "title": "Matthew Daws and Volker Runde, Reiter's properties (P1) and (P2) for locally compact quantum groups, arXiv:0705.3432v5",
+              "url": "https://arxiv.org/pdf/0705.3432v5",
+              "locator": "Section 1, printed p. 2: Reiter's property (P_p), specialized to p=1"
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "def-left-folner-net-for-a-locally-compact-group",
+        "kind": "definition",
+        "title": "Left Følner nets for locally compact groups",
+        "deps": [
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-directed-set-and-net"
+        ],
+        "dependency_level": 0,
+        "statement": "Fix a left Haar measure $\\mu$ on a locally compact Hausdorff group $G$. For\na Borel set $F\\subseteq G$ with $0<\\mu(F)<\\infty$ and a compact set\n$Q\\subseteq G$, put\n$$\\Delta_Q(F):=\\sup\\bigl(\\{0\\}\\cup\\{\\mu(gF\\mathbin\\triangle F)/\\mu(F):g\\in Q\\}\\bigr).$$\nThe value is $0$ when $Q=\\varnothing$. The group $G$ satisfies the **left\nFølner condition** if for every compact $Q\\subseteq G$ and every\n$\\varepsilon>0$ there is such a set $F$ with $\\Delta_Q(F)\\le\\varepsilon$.\n\nA **left Følner net** is a net $(F_i)_{i\\in I}$ of Borel sets with\n$0<\\mu(F_i)<\\infty$ such that for every compact $Q\\subseteq G$ and every\n$\\varepsilon>0$ there is $i_0\\in I$ for which\n$\\Delta_Q(F_i)\\le\\varepsilon$ whenever $i\\succeq i_0$. This is uniform\nconvergence to zero on compact subsets. The left Følner condition holds if\nand only if a left Følner net exists. In the single-set condition it is\nequivalent to test only compact sets containing the identity. Only left\ntranslates $gF$ occur.",
+        "strategy": "The ratio is finite and at most two by left invariance and subadditivity, and including zero defines the empty-test value. A compact test Q can be enlarged to Q union {e}. A net gives a witness for each fixed (Q,epsilon). Conversely, index by all triples (Q,epsilon,F) in which F is a witness, ordered by inclusion of Q and decreasing epsilon. This is a directed preorder: for any two indices the union test set and the smaller positive tolerance have a witness by the assumed condition. The third coordinate gives a net satisfying the compact-uniform estimates. Because witnesses are themselves indices, no simultaneous choice function or Choice principle is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Theorem G.5.1(ii), the Borel-set Følner condition (printed pp. 466–468); Remark G.5.3 on Følner sequences (printed p. 469)"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 19: Reiter's Property and the Følner Condition",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf",
+              "locator": "Theorem (Følner, Greenleaf) and Følner-condition discussion (PDF pp. 2–3); the notes use left translates and uniform compact-set estimates"
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "def-left-uniformly-continuous-bounded-functions-on-a-locally-compact-group",
+        "kind": "definition",
+        "title": "Left-uniformly continuous bounded functions (UCB)",
+        "deps": [
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-complex-haar-l-infinity-space",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $B_b(G;\\mathbb C)$ be the actual bounded complex-valued functions on a\nlocally compact Hausdorff group $G$, with\n$\\|\\varphi\\|_{\\sup}:=\\sup_{y\\in G}|\\varphi(y)|$. For $x\\in G$ set\n$(L_x\\varphi)(y):=\\varphi(x^{-1}y)$. Define\n$$\\mathrm{UCB}(G):=\\{\\varphi\\in B_b(G;\\mathbb C):\\|L_x\\varphi-\\varphi\\|_{\\sup}\\longrightarrow0\\text{ as }x\\longrightarrow e\\}.$$\nThese are actual functions, not chosen representatives of equivalence\nclasses. They are continuous and form a closed translation-invariant subspace\nof $B_b(G;\\mathbb C)$. The left translation action\n$G\\times\\mathrm{UCB}(G)\\to\\mathrm{UCB}(G)$ is jointly continuous in the\nsup-norm topology. For any fixed left Haar measure $\\mu$, the class map\n$\\varphi\\mapsto[\\varphi]$ embeds $\\mathrm{UCB}(G)$ isometrically into the\ncomplex $L^\\infty(G,\\mu)$ space. In particular, a UCB function that vanishes\n$\\mu$-almost everywhere vanishes everywhere.",
+        "strategy": "UCB consists of actual bounded functions whose left-translation orbit is continuous at the identity in the sup norm. Pointwise continuity follows by evaluating the translate at a fixed point. Linearity follows from the norm estimates; closedness follows from uniform limits. The group law and continuity of conjugation give translation invariance, and the estimate ||L_x phi-L_x0 phi0||sup <= ||phi-phi0||sup+||L_(x0^-1 x)phi0-phi0||sup gives joint continuity. For each continuous bounded phi, every strict sublevel below sup|phi| has a nonempty open superlevel set; full Haar support makes its measure positive. Hence sup norm equals essential-supremum norm, so the class map into complex L-infinity is an isometric injection. All of these arguments are choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, §G.1: definition of UCB(G) as a closed translation-invariant subspace of bounded functions and the orbit-map characterization (printed p. 448)"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "Definition of UCB(G) as an L-infinity-class orbit-continuity subspace and its invariance under the G-action (PDF pp. 5–6, file pages indexed 4–5)"
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "lem-an-lch-group-has-an-open-sigma-compact-subgroup",
+        "kind": "lemma",
+        "title": "Every locally compact Hausdorff group has an open sigma-compact subgroup",
+        "deps": [
+          "def-group",
+          "def-topological-group",
+          "def-hausdorff-space",
+          "def-locally-compact-space",
+          "def-neighbourhood-top",
+          "def-compact-space",
+          "def-natural-numbers",
+          "lem-group-inverse-laws",
+          "thm-induction-principle",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compactness-under-continuous-maps",
+          "lem-topological-group-translations-and-inversion"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $G$ be a locally compact Hausdorff topological group and let $K$ be a\ncompact neighbourhood of its identity $e$. Set $U:=KK^{-1}$ and, for\n$n\\in\\mathbb N$, let $U^n$ be the set of products of $n$ elements of $U$, with\n$U^0:=\\{e\\}$. Then $H:=\\bigcup_{n\\in\\mathbb N}U^n$ is an open subgroup of $G$\nand a countable union of compact subsets. Here a topological space is\n**sigma-compact** when it is a countable union of compact subsets. In\nparticular, every locally compact Hausdorff group has an open sigma-compact\nsubgroup. No axiom of choice is used.",
+        "strategy": "Given a compact neighborhood K of e, form U=KK^{-1}. Inversion and multiplication are continuous, so U is compact; e in K implies K subset U, and the group inverse law makes U symmetric. The union H of finite powers of U is a subgroup. Induction, finite-product compactness and continuity of multiplication show each power is compact, hence H is sigma-compact. An open neighborhood V of e contained in K lies in H; H is the union of the open left translates hV, so it is open. The argument is choice-free; the finite-product compactness supplier uses only finite choice in ZF.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Chapter 1, §1.3, proof of Theorem 1.3.1 (printed pp. 41–42); Chapter 3, §3.2 opening remark (printed p. 152)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-positive-measure-subsets-of-haar-measure-contain-finite-positive-measure-subsets",
+        "kind": "lemma",
+        "title": "Finite Haar mass, compact detection, and integrable pairings",
+        "deps": [
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-borel-sigma-algebra",
+          "def-radon-measure-on-an-lch-space",
+          "cor-existence-of-left-and-right-haar-measures",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-standard-topologies",
+          "def-product-topology",
+          "def-group",
+          "def-topological-group",
+          "def-locally-compact-space",
+          "def-compact-space",
+          "def-hausdorff-space",
+          "thm-finite-products-of-compact-spaces",
+          "lem-products-preserve-t0-t1-and-hausdorff",
+          "thm-compactness-under-continuous-maps",
+          "thm-uniqueness-of-left-haar-measure-up-to-scale",
+          "thm-r-uncountable",
+          "def-axiom-of-choice",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume AC ([[def-axiom-of-choice]]). Let $G$ be an arbitrary locally compact Hausdorff group with its fixed left Haar measure $\\mu$ under [[def-left-haar-integral-and-left-haar-measure]], and let $A\\subseteq G$ be Borel. The following are equivalent:\n\n1. $A$ contains a Borel $B$ with $0<\\mu(B)<\\infty$.\n2. Some compact $K\\subseteq G$ has $\\mu(A\\cap K)>0$.\n3. Some nonnegative $f\\in L^1(G)$ has $\\int_A f\\,d\\mu>0$.\n\nCall $A$ **locally null** when $\\mu(A\\cap K)=0$ for every compact $K$. Thus a locally null Borel set is annihilated by every $L^1$ pairing, even though it need not be globally $\\mu$-null. Positive global Haar measure alone does not imply these equivalent conditions; the counterexample in Remarks retains the original scaffold's obstruction. No sigma-compactness, semifiniteness or locally-null quotient convention is assumed.",
+        "strategy": "Prove the corrected arbitrary-LCH claim locally, keeping global-null Haar conventions and retaining original counterexamples in Remarks. Finite positive mass is detected by compact intersections and by L1 threshold sets; derive finite-measure regularity from outer regularity and open inner approximation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Donald L. Cohn, Measure Theory, 2nd ed., §7.2",
+              "url": "https://math.bme.hu/~pitrik/2023_24_2/Measure_Cohn.pdf",
+              "locator": "§7.2, printed p. 190 (PDF p. 207): regularity requires compact finiteness, outer regularity on measurable sets, and compact inner approximation only for open sets. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            },
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§2.5, pp. 63–64, normalized Haar integral on the circle. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            },
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.3 and Exercise G.6.2, printed pp. 453 and 471–472: intended weak-star-density route; Exercise G.6.2 gives no proof or semifiniteness qualification. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            },
+            {
+              "title": "Nicolas Bourbaki, Integration I (Chapters 1–6), Chapter V and Historical Notes on Haar measure",
+              "url": "https://link.springer.com/book/10.1007/978-3-642-59312-3",
+              "locator": "Original scaffold pointer for the Haar regularity/semifiniteness route; not used as evidence under the repository's explicit Radon convention. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property (University of Sydney Honours lecture notes, 11 October 2012)",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "Weak-star density lemma and Hahn–Banach criterion, PDF p. 9; the source route is not valid under the present Haar convention without extra hypotheses. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            }
+          ]
+        },
+        "axiom_use": "Assume AC for the retained torus-times-uncountable-discrete counterexample and its Haar existence/uniqueness interfaces. The equivalence and annihilation proof uses only finite regularity selections, countable subadditivity, and explicit integrable threshold sets once Haar measure is fixed."
+      },
+      {
+        "id": "lem-averages-over-probability-densities-attain-the-essential-supremum",
+        "kind": "lemma",
+        "title": "Probability-density averages and locally detectable upper essential values",
+        "deps": [
+          "lem-positive-measure-subsets-of-haar-measure-contain-finite-positive-measure-subsets",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-complex-haar-l-infinity-space",
+          "def-left-haar-integral-and-left-haar-measure",
+          "lem-counting-measure-on-a-discrete-group",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-standard-topologies",
+          "def-product-topology",
+          "def-borel-sigma-algebra",
+          "def-hausdorff-space",
+          "def-group",
+          "def-topological-group",
+          "def-compact-space",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compactness-under-continuous-maps",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-uniqueness-of-left-haar-measure-up-to-scale",
+          "def-nonnegative-lebesgue-integral",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "cor-archimedean-reciprocal",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "def-axiom-of-choice",
+          "lem-complex-haar-l1-and-l2-are-complete-and-cc-dense",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume AC ([[def-axiom-of-choice]]). Let $G$ be an arbitrary LCH group with fixed left Haar measure $\\mu$, and put $\\mathcal P=\\{f\\in L^1(G):f\\ge0,\\ \\|f\\|_1=1\\}$. For a real global-$L^\\infty$ class $h$, choose a bounded Borel representative and define its **locally detectable upper essential value** by\n$$\\beta(h):=\\inf\\{t\\in\\mathbb R:\\mu(K\\cap\\{h>t\\})=0\\text{ for every compact }K\\subseteq G\\}.$$\nThis is a finite real number independent of that representative, and\n$$\\sup_{f\\in\\mathcal P}\\int_Gfh\\,d\\mu=\\beta(h).$$\nFor complex $h\\in L^\\infty(G)$ and $\\alpha\\in\\mathbb C$, the exact support-function formula is\n$$\\sup_{f\\in\\mathcal P}\\operatorname{Re}\\left(\\alpha\\int_Gfh\\,d\\mu\\right)=\\beta(\\operatorname{Re}(\\alpha h)).$$\nFor every real bounded continuous $h$, one has $\\beta(h)=\\sup_{x\\in G}h(x)$. All $L^\\infty$ classes here retain the global-null convention of [[def-complex-haar-l-infinity-space]]; locally null functions are not identified with zero. The original global-norm formula and its naive global-essential-upper-value repair fail as explained in Remarks.",
+        "strategy": "Prove the corrected arbitrary-LCH claim locally, keeping global-null Haar conventions and retaining original counterexamples in Remarks. Use locally detectable superlevels for lower bounds and nonnegative Cc approximants for upper bounds; complex support values are signed real parts, and continuous values equal sup_G.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Exercise G.6.2, printed p. 472 (PDF p. 478), the weak-star density of L1(G) probability densities in all means. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "Density of L1(G)_{1,+} in the set of means, PDF p. 9 (the Hahn–Banach separation argument). The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            }
+          ]
+        },
+        "axiom_use": "Assume AC through Cc density when choosing the L1 approximants, and through the Haar and choice interfaces of the retained counterexamples. The support-value estimates and compact superlevel witnesses use no additional choice."
+      },
+      {
+        "id": "lem-l1-convolution-with-an-l-infinity-function-is-left-uniformly-continuous",
+        "kind": "lemma",
+        "title": "L1 convolution smooths bounded functions into UCB",
+        "deps": [
+          "def-left-uniformly-continuous-bounded-functions-on-a-locally-compact-group",
+          "def-complex-haar-l-infinity-space",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-topological-group",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "lem-haar-change-of-variables-under-inversion",
+          "lem-haar-translations-are-strongly-continuous-on-lp-one-and-two",
+          "def-convolution-on-cc-and-l1-of-a-group",
+          "lem-complex-haar-l1-and-l2-are-complete-and-cc-dense",
+          "lem-convolution-preserves-cc-and-is-associative",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compactness-under-continuous-maps",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "def-borel-sigma-algebra",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "thm-integral-triangle-inequality",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume AC. Let $G$ be a locally compact Hausdorff group with fixed left Haar\nmeasure $\\mu$, and set $L_gf(x):=f(g^{-1}x)$. For $f,b\\in L^1(G)$ and\n$\\varphi\\in L^\\infty(G)$, define\n$$\n(f*\\varphi)(x):=\\int_G f(y)\\varphi(y^{-1}x)\\,d\\mu(y)\\qquad(x\\in G).\n$$\nThis formula defines an actual bounded continuous function independent of the\nrepresentatives, with\n$$\\|f*\\varphi\\|_{\\sup}\\le\\|f\\|_1\\|\\varphi\\|_\\infty.$$\nIt belongs to $\\mathrm{UCB}(G)$ and satisfies\n$$\\|L_g(f*\\varphi)-f*\\varphi\\|_{\\sup}\\le\\|L_gf-f\\|_1\\|\\varphi\\|_\\infty$$\nfor every $g\\in G$, as well as $L_g(f*\\varphi)=(L_gf)*\\varphi$. The operation\nis bilinear in $f$ and $\\varphi$. With the extended $L^1$ convolution of\n[[def-convolution-on-cc-and-l1-of-a-group]], it also satisfies\n$$ (f*b)*\\varphi=f*(b*\\varphi)\\qquad(f,b\\in L^1(G)). $$",
+        "strategy": "Define the pointwise L1-L-infinity convolution using Borel representatives and prove representative independence from inversion and left invariance. Estimate its sup norm and left-translation defect directly. For associativity with a Borel bounded function, first use compactly supported L1 factors and a finite Borel partition to approximate the continuous kernel b(y^{-1}z) uniformly on compact parameter sets; Fubini then applies to finite sums of product-measurable functions on finite-measure compact restrictions. Extend to arbitrary L1 factors by Cc density and the convolution and smoothing norm bounds. This proves the actual-function UCB claim and the associativity identity without global sigma-finiteness or product-Borel assumptions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, §G.3, printed p. 453 (the convolution of an L1 function and an L-infinity function lies in UCB)"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "UCB smoothing lemma, PDF p. 13 (the slide labelled 10, stating f*phi is in UCB)"
+            }
+          ]
+        },
+        "axiom_use": "AC is used through the published strong-continuity and L1-convolution suppliers, whose Cc-density/completeness arguments assume it; the finite partition in the compact-support argument uses only finite choice."
+      },
+      {
+        "id": "lem-a-ucb-invariant-mean-yields-a-topological-invariant-mean",
+        "kind": "lemma",
+        "title": "A UCB-invariant mean yields a topological invariant mean",
+        "deps": [
+          "def-left-uniformly-continuous-bounded-functions-on-a-locally-compact-group",
+          "lem-l1-convolution-with-an-l-infinity-function-is-left-uniformly-continuous",
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "def-reiter-condition-p1",
+          "thm-l1-group-algebras-have-a-contractively-bounded-approximate-identity",
+          "def-axiom-of-choice",
+          "lem-complex-haar-l1-and-l2-are-complete-and-cc-dense",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-complex-haar-l-infinity-space",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "def-convolution-on-cc-and-l1-of-a-group",
+          "lem-l1-convolution-norm-inequality",
+          "lem-convolution-preserves-cc-and-is-associative",
+          "def-compactly-supported-convolution-on-a-group",
+          "lem-compactly-supported-kernels-admit-commuting-radon-integrals",
+          "def-compact-space",
+          "def-hausdorff-space",
+          "def-borel-sigma-algebra",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "lem-finite-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume AC. Let $G$ be a locally compact Hausdorff group with fixed left Haar\nmeasure $\\mu$, and let $m$ be a left-invariant mean on the actual-function\nspace $\\mathrm{UCB}(G)$ of [[def-left-uniformly-continuous-bounded-functions-on-a-locally-compact-group]]. Thus $m$ is a positive complex-linear functional with $m(1_G)=1$ and $m(L_g\\psi)=m(\\psi)$ for every $g\\in G$ and $\\psi\\in\\mathrm{UCB}(G)$. Fix $f_0\\in\\mathcal P$ for $\\mathcal P$ of [[def-reiter-condition-p1]], and define\n$$\\widetilde m(\\varphi):=m(f_0*\\varphi)\\qquad(\\varphi\\in L^\\infty(G)),$$\nwhere $*$ is the pointwise $L^1$-to-$L^\\infty$ smoothing of\n[[lem-l1-convolution-with-an-l-infinity-function-is-left-uniformly-continuous]].\nThen $\\widetilde m$ is a mean on $L^\\infty(G)$ and is topologically invariant:\n$$\\widetilde m(f*\\varphi)=\\widetilde m(\\varphi)\\qquad(f\\in\\mathcal P,\\ \\varphi\\in L^\\infty(G)).$$",
+        "strategy": "First prove the integration mean has norm one. Use a finite Borel partition of a compact set to approximate the continuous UCB translation orbit uniformly; the L1 tail is small by Cc density. This gives m(f*psi)=m(psi) for f in P and psi in UCB without Bochner measurability. Apply this identity to psi=e_U*phi and use the right-L1 approximate-identity estimate ||(f*e_U)*phi-f*phi||sup <= ||f*e_U-f||1 ||phi||infinity to show m(f*phi) is independent of f in P. Prove P is closed under L1 convolution by nonnegative Cc approximations, compact-support Fubini, continuity of extended convolution, and closedness of the nonnegative cone. Then m-tilde(phi)=m(f0*phi) is a mean, and associativity plus P closure make it topologically invariant. Topological invariance follows from associativity, probability-convolution closure and kernel independence: m((f0*f)*phi)=m(f0*phi). Every argument of the UCB mean is smoothed; the mean is never evaluated on an arbitrary unsmoothed L-infinity input.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, §G.3, complete proof of Theorem G.3.1, implication (i) to (ii), printed pp. 453–454"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "Slides 11–14, files pp. 11–14: the UCB convolution identity, approximate-identity comparison, and construction of the topological invariant mean"
+            }
+          ]
+        },
+        "axiom_use": "AC is inherited through Cc density, the extended L1 convolution, and the published positive probability approximate-identity net. Finite compact partitions use only finite choice; no global Bochner measurability or separability is used."
+      },
+      {
+        "id": "lem-l1-probability-densities-are-weak-star-dense-in-the-mean-set",
+        "kind": "lemma",
+        "title": "Probability-density approximation of continuous tests and topological means",
+        "deps": [
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "def-complex-haar-l-infinity-space",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-radon-measure-on-an-lch-space",
+          "cor-existence-of-left-and-right-haar-measures",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-standard-topologies",
+          "def-product-topology",
+          "def-borel-sigma-algebra",
+          "def-group",
+          "def-topological-group",
+          "def-compact-space",
+          "def-hausdorff-space",
+          "thm-finite-products-of-compact-spaces",
+          "lem-products-preserve-t0-t1-and-hausdorff",
+          "thm-compactness-under-continuous-maps",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-uniqueness-of-left-haar-measure-up-to-scale",
+          "thm-r-uncountable",
+          "def-ultrafilter",
+          "def-filter",
+          "thm-ultrafilter-lemma",
+          "thm-compactness-via-nets-filters-and-ultrafilters",
+          "thm-heine-borel-rn",
+          "def-dual-space-of-a-normed-space",
+          "def-weak-star-topology",
+          "def-measure-null-set-and-almost-everywhere",
+          "thm-countable-union-of-null-is-null",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "def-axiom-of-choice",
+          "thm-separation-of-disjoint-convex-sets-one-open",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "lem-complex-haar-l1-and-l2-are-complete-and-cc-dense",
+          "lem-l1-convolution-with-an-l-infinity-function-is-left-uniformly-continuous",
+          "def-convolution-on-cc-and-l1-of-a-group",
+          "lem-haar-change-of-variables-under-inversion",
+          "lem-right-translation-scales-left-haar-measure",
+          "thm-the-modular-function-is-a-continuous-homomorphism",
+          "lem-compactly-supported-kernels-admit-commuting-radon-integrals",
+          "lem-a-ucb-invariant-mean-yields-a-topological-invariant-mean",
+          "def-directed-set-and-net",
+          "lem-positive-measure-subsets-of-haar-measure-contain-finite-positive-measure-subsets",
+          "lem-averages-over-probability-densities-attain-the-essential-supremum"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume AC ([[def-axiom-of-choice]]). Let $G$ be an arbitrary LCH group with fixed left Haar measure $\\mu$, let $\\mathcal P=\\{f\\in L^1(G):f\\ge0,\\ \\|f\\|_1=1\\}$ and let $M$ be the means on the global-null $L^\\infty(G)$ of [[def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group]]. Then:\n\n1. Every $m\\in M$, finite list of bounded continuous functions $\\psi_1,\\ldots,\\psi_k$ and $\\varepsilon>0$ admit $f\\in\\mathcal P\\cap C_c(G)$ with $|\\int f\\psi_j\\,d\\mu-m([\\psi_j])|<\\varepsilon$ for all $j$.\n2. If $m$ is **topologically invariant**, meaning $m(p*\\varphi)=m(\\varphi)$ for every $p\\in\\mathcal P$ and $\\varphi\\in L^\\infty(G)$ using the smoothing of [[lem-l1-convolution-with-an-l-infinity-function-is-left-uniformly-continuous]], then $m$ is in the weak-star closure of $\\mathcal P$: every finite list of global $L^\\infty$ classes can be approximated simultaneously by their probability-density integrals.\n\nHere $\\mathcal P$ embeds into $L^\\infty(G)^*$ by integration. Full weak-star density in ALL means is false under the existing Haar/global-null conventions; the original counterexample remains in Remarks. No countability or semifiniteness of $G$ is imposed.",
+        "strategy": "Prove the corrected arbitrary-LCH claim locally, keeping global-null Haar conventions and retaining original counterexamples in Remarks. Open-ball separation with an explicit strict margin and continuous support values give finite-test witnesses; normalize Cc approximants, form a witness-indexed net and apply a fixed Cc smoothing kernel with a locally proved compact-support adjoint identity to approximate topological means on all L∞ classes.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Exercise G.6.2, printed p. 472 (PDF p. 478), asks for weak-star density of L1(G) probability densities in all means. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "Weak-star density lemma and Hahn–Banach criterion, PDF p. 9 (slide page indexed 8). The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            },
+            {
+              "title": "Matthew Daws and Volker Runde, Reiter's properties (P1) and (P2) for locally compact quantum groups, arXiv:0705.3432v5",
+              "url": "https://arxiv.org/pdf/0705.3432v5",
+              "locator": "Introduction, printed p. 1, after equation (1): for an invariant mean, approximation by normal L1 states yields an asymptotically invariant net; this does not prove density in the full set of all means. The repaired finite-detectability/local-support/continuous-test-and-topological-mean claim is a local correction under the explicit global-null Haar convention; this source pointer does not certify the false original scaffold assertion."
+            }
+          ]
+        },
+        "axiom_use": "Assume AC through separation, Cc density, smoothing and convolution closure, and for the ultrafilter extending the co-countable filter in the retained counterexample. The approximation net is witness-indexed and requires no global witness selector."
+      },
+      {
+        "id": "lem-a-topological-invariant-mean-yields-norm-approximately-invariant-densities",
+        "kind": "lemma",
+        "title": "A topological invariant mean yields norm-approximately invariant densities",
+        "deps": [
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "def-reiter-condition-p1",
+          "thm-mazur-weak-and-norm-closure-of-convex-sets",
+          "def-weak-star-convergence",
+          "def-axiom-of-choice",
+          "lem-an-lch-group-has-an-open-sigma-compact-subgroup",
+          "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+          "lem-complex-haar-l1-and-l2-are-complete-and-cc-dense",
+          "thm-monotone-convergence-for-the-integral",
+          "lem-haar-change-of-variables-under-inversion",
+          "lem-l1-convolution-with-an-l-infinity-function-is-left-uniformly-continuous",
+          "lem-a-ucb-invariant-mean-yields-a-topological-invariant-mean",
+          "def-convolution-on-cc-and-l1-of-a-group",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "thm-separation-of-disjoint-convex-sets-one-open",
+          "def-weak-topology-on-a-normed-space",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-directed-set-and-net",
+          "def-compact-space",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "lem-compactly-supported-kernels-admit-commuting-radon-integrals",
+          "lem-right-translation-scales-left-haar-measure",
+          "thm-the-modular-function-is-a-continuous-homomorphism",
+          "def-modular-function-of-a-locally-compact-group",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compactness-under-continuous-maps",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-haar-l-infinity-space",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-topological-group",
+          "def-borel-sigma-algebra",
+          "def-dual-space-of-a-normed-space",
+          "def-radon-measure-on-an-lch-space"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume AC. Let $G$ be a locally compact Hausdorff group with fixed left Haar\nmeasure $\\mu$, and let $\\widetilde m$ be a topological invariant mean on\n$L^\\infty(G)$: a positive complex-linear functional with\n$\\widetilde m(1_G)=1$ and\n$\\widetilde m(f*\\varphi)=\\widetilde m(\\varphi)$ for every\n$f\\in\\mathcal P$ and $\\varphi\\in L^\\infty(G)$, where $\\mathcal P$ is the\nset of probability densities from [[def-reiter-condition-p1]]. The product\n$f*\\varphi$ is the $L^1$–$L^\\infty$ smoothing of\n[[lem-l1-convolution-with-an-l-infinity-function-is-left-uniformly-continuous]];\nproducts of two $L^1$ classes below use the extended convolution of\n[[def-convolution-on-cc-and-l1-of-a-group]].\nThen there is a net $(g_j)\\subseteq\\mathcal P$ such that\n$\\lVert f*g_j-g_j\\rVert_1\\to0$ for every $f\\in\\mathcal P$. The convergence\nis uniform on norm-compact subsets of $\\mathcal P$: for every norm-compact\n$C\\subseteq\\mathcal P$ and every $\\delta>0$ there is $j_0$ such that\n$\\sup_{f\\in C}\\lVert f*g_j-g_j\\rVert_1<\\delta$ whenever $j\\succeq j_0$.",
+        "strategy": "Prove finite-test density of probability densities against bounded continuous functions by placing the mean-value tuple in the closed convex hull of point values, using strict separation, then approximating point evaluations by normalized indicators of relatively compact open neighborhoods. Build a witness-indexed net approximating the mean on all bounded continuous tests. Prove every bounded complex functional on L1 is represented by a bounded Borel function: restrict to each clopen sigma-compact coset, use sigma-finite real L1 duality for real and imaginary parts, approximate local densities on compact exhaustions by Cc functions, clip them uniformly, glue continuous approximants across the clopen cosets, take a Borel pointwise limit, and extend the pairing from global Cc by density; do not take an uncountable union of null sets. Discharge zero inputs before compact-support modular suprema. Establish the adjoint convolution pairing first for Cc inputs and continuous tests by compact Radon integration, extend bounded Borel tests by Cc L1 approximation on the compact product support and modular bounds, then extend L1 inputs by norm continuity. Smooth the continuous-test net with one fixed probability density p via g_i=p^sharp*b_i; the adjoint identity and topological invariance give weak-star convergence of g_i to the given mean on all L-infinity tests. Hence each convolution defect tends weakly to zero in L1 by the full dual representation. Apply Mazur to finite products for finite-test norm approximation, index witnesses by finite tests and tolerances, and use a finite norm net to obtain uniformity on norm-compact subsets.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.3, proof of Theorem G.3.1 (ii) to (iii), printed pp. 454–455: the passages on weak convergence of defects, the convex-set/Mazur closure argument, and uniformity on norm-compact sets; its p. 454 all-means weak-star-density assertion is explicitly not used"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property (University of Sydney Honours lecture notes, 11 October 2012)",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "Slides 15–17, PDF pp. 15–17: the passages on weak convergence of defects, product-space convexity, norm closure, and uniformity on norm-compact sets; its p. 15 all-means weak-star-density assertion is explicitly not used"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is used through Hahn–Banach separation and Mazur's theorem, sigma-finite L1 duality on the clopen sigma-compact cosets, Cc density, and the earlier convolution-closure proof, as well as choices of coset representatives, local densities, and approximants. The nets themselves are witness-indexed and require no global choice function; no separate DC assumption is used."
+      },
+      {
+        "id": "lem-an-invariant-mean-produces-a-reiter-net",
+        "kind": "lemma",
+        "title": "An invariant mean produces a Reiter net",
+        "deps": [
+          "def-reiter-condition-p1",
+          "lem-a-ucb-invariant-mean-yields-a-topological-invariant-mean",
+          "lem-a-topological-invariant-mean-yields-norm-approximately-invariant-densities",
+          "lem-haar-translations-are-strongly-continuous-on-lp-one-and-two",
+          "def-convolution-on-cc-and-l1-of-a-group",
+          "lem-complex-haar-l1-and-l2-are-complete-and-cc-dense",
+          "def-compact-space",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "def-axiom-of-choice",
+          "def-amenable-locally-compact-group",
+          "def-left-uniformly-continuous-bounded-functions-on-a-locally-compact-group",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-compactly-supported-convolution-on-a-group",
+          "thm-compactness-under-continuous-maps",
+          "lem-translations-preserve-compactly-supported-continuous-functions"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume AC. Suppose $G$ admits a left-invariant mean on $\\mathrm{UCB}(G)$; this holds in particular when $G$ is amenable in the sense of [[def-amenable-locally-compact-group]]. Then $G$ satisfies Reiter's condition (P1) ([[def-reiter-condition-p1]]). Consequently every amenable locally compact group satisfies (P1).",
+        "strategy": "First convert a left-invariant mean on actual UCB(G) to a topological invariant mean and use the preceding norm-approximation result to obtain a probability-density net uniform on norm-compact subsets of P. For a compact Q, adjoin e, fix f in P, and use strong continuity to make {L_x f : x in Q union {e}} a compact subset of P. Prove locally that extended L1 convolution is left-equivariant, first by the Cc formula and left Haar substitution, then by Cc density and the L1 convolution bound. Choose one net index that controls the whole orbit, set g=f*g_j, and use convolution closure of P to obtain the compact Reiter estimate. An amenable L-infinity mean restricts through the UCB class embedding, giving the final consequence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, §G.3, closing paragraphs of the proof of Theorem G.3.1 (ii) to (iii), printed p. 455: strong continuity makes the translate orbit compact, followed by smoothing and the Reiter estimate"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property (University of Sydney Honours lecture notes, 11 October 2012)",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "Slides 17–18, PDF pp. 17–18: compactness of the translated orbit, the convolution identity and the final Reiter (P1) estimate"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is inherited through the UCB smoothing, norm-approximation, strong-continuity and Cc-density suppliers. The compact-orbit estimate and convolution equivariance add no further choice; no separate dependent-choice assumption is used."
+      },
+      {
+        "id": "lem-a-reiter-net-has-an-invariant-mean-cluster-point",
+        "kind": "lemma",
+        "title": "A Reiter net has an invariant-mean cluster point",
+        "deps": [
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "def-amenable-locally-compact-group",
+          "def-reiter-condition-p1",
+          "def-complex-haar-l-infinity-space",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-dual-space-of-a-normed-space",
+          "def-weak-star-topology",
+          "def-directed-set-and-net",
+          "def-net-convergence-and-cluster-point",
+          "thm-banach-alaoglu",
+          "thm-ultrafilter-lemma",
+          "thm-compactness-via-nets-filters-and-ultrafilters",
+          "thm-net-cluster-point-iff-convergent-subnet",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "def-measure-preserving-transformation-and-system"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume the ultrafilter lemma. Let $G$ be a locally compact Hausdorff group with\nfixed left Haar measure $\\mu$, and let $(f_i)_{i\\in I}$ be a Reiter net on $G$\nas in [[def-reiter-condition-p1]]. Define\n$$\\lambda_{f_i}(\\varphi):=\\int_G f_i\\varphi\\,d\\mu\\qquad(\\varphi\\in L^\\infty(G)).$$\nThen $(\\lambda_{f_i})$ has a weak-star cluster point $m$ in\n$L^\\infty(G)^*$. Every such cluster point is a left-invariant mean on\n$L^\\infty(G)$, so Reiter's condition (P1) implies that $G$ is amenable\n([[def-amenable-locally-compact-group]]).",
+        "strategy": "For each Reiter density define the integration functional on complex L-infinity. Essential bounds make each pairing integrable and give norm at most one. Banach–Alaoglu under the ultrafilter lemma puts the net in a weak-star compact dual ball, so it has a cluster point and each cluster point is the limit of a subnet. Positivity and evaluation at 1 pass to subnet limits. For any fixed g and phi, left-Haar substitution gives lambda_f(L_g phi)=lambda_{L_(g^{-1)}f}(phi); the Reiter estimate on {g^{-1}} makes the defect tend to zero, and weak-star convergence along the subnet gives invariance. The equivalent net formulation of P1 then yields amenability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Theorem G.3.1, implication (iv) to (v), printed pp. 454–455; a weak-star limit point of Reiter densities is invariant"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 19: Reiter's Property and the Folner Condition",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf",
+              "locator": "The L1-to-L-infinity-dual pairing by integration, slides 5–7, file pp. 5–7; the cluster-point assertion is not attributed to these slides"
+            },
+            {
+              "title": "Matthew Daws and Volker Runde, Reiter's properties (P1) and (P2) for locally compact quantum groups, arXiv:0705.3432v5",
+              "url": "https://arxiv.org/pdf/0705.3432v5",
+              "locator": "Introduction, printed p. 1, after equation (1): each weak-star accumulation point of an asymptotically invariant L1 probability net is a left-invariant mean"
+            }
+          ]
+        },
+        "axiom_use": "Assume the ultrafilter lemma, used through Banach–Alaoglu for weak-star compactness of the dual unit ball and through the compactness characterization for cluster points. No further choice principle is used; the separate theorem deriving the ultrafilter lemma from AC is not assumed here."
+      },
+      {
+        "id": "thm-amenability-is-equivalent-to-reiter-p1",
+        "kind": "theorem",
+        "title": "Amenability is equivalent to Reiter's condition (P1)",
+        "deps": [
+          "lem-an-invariant-mean-produces-a-reiter-net",
+          "lem-a-reiter-net-has-an-invariant-mean-cluster-point",
+          "def-amenable-locally-compact-group",
+          "def-reiter-condition-p1",
+          "def-axiom-of-choice",
+          "def-left-uniformly-continuous-bounded-functions-on-a-locally-compact-group",
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "thm-ultrafilter-lemma",
+          "def-left-haar-integral-and-left-haar-measure"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume AC. Let $G$ be a locally compact Hausdorff group. Then $G$ is amenable ([[def-amenable-locally-compact-group]]) if and only if $G$ satisfies Reiter's condition (P1) ([[def-reiter-condition-p1]]): for every compact $Q\\subseteq G$ and every $\\varepsilon>0$ there is $f\\in L^1(G)$ with $f\\ge0$, $\\lVert f\\rVert_1=1$ and $\\Delta_Q(f)\\le\\varepsilon$, with $\\Delta_Q$ as defined in\n[[def-reiter-condition-p1]] (including $\\Delta_\\varnothing(f)=0$). The equivalence is proved through invariant means on $L^\\infty(G)$, so it is stated for a fixed left Haar measure but does not depend on its normalization.",
+        "strategy": "Assume AC. If G is amenable, restrict its L-infinity mean through the UCB class embedding to obtain a left-invariant mean on actual UCB(G); the invariant-mean-to-Reiter supplier gives (P1). Conversely, (P1) gives a Reiter net by its net formulation; AC supplies the ultrafilter lemma, and the Reiter-net cluster-point supplier gives a left-invariant mean on L-infinity(G). This is amenability. The all-means weak-star-density route from the literature is not used; both directions use the local bridge items. Rescaling Haar measure by c>0 identifies the probability densities via f↦c^{-1}f and preserves every translation defect, while amenability is normalization independent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.3, Theorem G.3.1, equivalence of amenability (i), Reiter (P1) (iii), and invariant means (v), printed pp. 452–456; the local proof uses the assigned UCB/Reiter and cluster-point bridges"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property (University of Sydney Honours lecture notes, 11 October 2012)",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "Slides 11–17, PDF pp. 11–17: the amenability/invariant-mean to Reiter (P1) direction; the Reiter-to-amenability direction here uses the local cluster-point lemma"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is used through the amenability-to-Reiter bridge and through the ultrafilter lemma required for the Reiter-net cluster point. No separate dependent-choice assumption is made."
+      },
+      {
+        "id": "lem-folner-nets-give-reiter-nets",
+        "kind": "lemma",
+        "title": "Følner nets give Reiter nets",
+        "deps": [
+          "def-left-folner-net-for-a-locally-compact-group",
+          "def-reiter-condition-p1",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $G$ be a locally compact Hausdorff group with fixed left Haar measure\n$\\mu$, and let $F\\subseteq G$ be Borel with $0<\\mu(F)<\\infty$. The class\n$$f_F:=\\mu(F)^{-1}\\mathbf 1_F\\in L^1(G)$$\nbelongs to $\\mathcal P$ from [[def-reiter-condition-p1]], and for every\n$x\\in G$,\n$$\\|L_xf_F-f_F\\|_1=\\frac{\\mu(xF\\mathbin\\triangle F)}{\\mu(F)}.$$\nConsequently, every left Følner net $(F_i)$ gives a Reiter net\n$(f_{F_i})$. In particular, the left Følner condition implies Reiter's\ncondition (P1).",
+        "strategy": "For a Borel set F of positive finite Haar measure, the indicator is a nonnegative simple function, so its L1 norm is its measure and f_F=mu(F)^(-1)1_F belongs to P. The left translate of 1_F is 1_(xF); its difference from 1_F has modulus 1 exactly on xF symmetric-difference F, giving the exact norm ratio by the integral of a simple indicator. The same estimates give the Reiter net and single-set condition, with no global choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, §G.5, first paragraph of the proof of Theorem G.5.1 (printed p. 467): normalized characteristic functions of Følner sets satisfy the Reiter estimates"
+            },
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Theorem G.3.1(iii), definition of Reiter's Property (P1) and $L^1(G)_{1,+}$ (printed pp. 453–454)"
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "lem-layer-cake-identity-for-nonnegative-integrable-functions",
+        "kind": "lemma",
+        "title": "The layer-cake identity for integrable functions",
+        "deps": [
+          "def-measure-space",
+          "def-measure",
+          "def-sigma-algebra",
+          "def-measurable-function-between-measurable-spaces",
+          "def-borel-sigma-algebra",
+          "def-interval",
+          "def-calligraphic-l-p-on-a-measure-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "def-natural-numbers",
+          "cor-archimedean-reciprocal",
+          "thm-rationals-countable",
+          "lem-subset-of-countable",
+          "lem-q-and-irrationals-dense-r",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume the Axiom of Countable Choice. Let $(X,\\mathcal A,\\mu)$ be any measure\nspace, and let $f,g\\in L^1(X)$ be nonnegative integrable functions with fixed\npointwise nonnegative measurable representatives. For $t>0$ put\n$E_t:=\\{x\\in X:f(x)\\ge t\\}$ and $E'_t:=\\{x\\in X:g(x)\\ge t\\}$, and let $dt$\ndenote Lebesgue measure on the level parameter. Then\n$$\\lVert f-g\\rVert_1=\\int_0^\\infty\\mu(E_t\\mathbin\\triangle E'_t)\\,dt,$$\nand in particular\n$$\\lVert f\\rVert_1=\\int_0^\\infty\\mu(E_t)\\,dt.$$\nNo $\\sigma$-finiteness of $\\mu$ is required: both integrands are supported on\n$S:=\\{x:f(x)+g(x)>0\\}$, which is $\\sigma$-finite.",
+        "strategy": "Assume AC_omega only to use the library Lebesgue measure on R as a countably additive sigma-finite measure. Set h=f+g and S={h>0}; the Chebyshev-Markov inequality shows S is a countable union of finite-measure level sets, so the restricted measure on S is sigma-finite and f=g=0 outside S. For each f, the product set {(x,t):x in S, 0<t<=f(x)} is measurable: it is the countable intersection over m>=1 of the countable unions over positive rationals q of (S intersect {f>q}) times (0,q+1/m]. Rationals are countable and dense. Its symmetric difference with the corresponding set for g has sections E_t triangle E'_t and, at each x, a t-section of Lebesgue measure |f(x)-g(x)|. Tonelli on the sigma-finite product S times R then gives the identity. Setting g=0 gives the norm formula. The source proofs leave the support sigma-finiteness reduction implicit; this strategy supplies it explicitly. No full AC or DC.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Lemma G.5.2 and proof (printed pp. 467–468)"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 19: Reiter's Property and the Følner Condition",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf",
+              "locator": "Slides 12–13 (PDF pp. 12–13), layer-cake identity and Fubini argument"
+            }
+          ]
+        },
+        "axiom_use": "Assumes only the Axiom of Countable Choice (ACω), to use the library's Carathéodory Lebesgue measure on the level parameter as a countably additive sigma-finite measure. No full Axiom of Choice or Dependent Choice is used."
+      },
+      {
+        "id": "lem-reiter-functions-can-be-cut-down-to-folner-sets",
+        "kind": "lemma",
+        "title": "Reiter functions can be cut down to Følner sets",
+        "deps": [
+          "def-reiter-condition-p1",
+          "def-left-folner-net-for-a-locally-compact-group",
+          "lem-layer-cake-identity-for-nonnegative-integrable-functions",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-left-haar-integral-and-left-haar-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-lebesgue-measure-is-a-radon-measure-on-rn",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "cor-rn-is-locally-compact-and-sigma-compact",
+          "lem-metrics-on-rn",
+          "thm-metric-hausdorff-separation",
+          "thm-uniqueness-of-left-haar-measure-up-to-scale",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-heine-borel-r",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-topological-group",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compactness-under-continuous-maps",
+          "lem-haar-translations-are-strongly-continuous-on-lp-one-and-two",
+          "lem-complex-haar-l1-and-l2-are-complete-and-cc-dense",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "def-borel-sigma-algebra",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "def-compact-space",
+          "def-locally-compact-space",
+          "def-radon-measure-on-an-lch-space"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume AC. Let $G$ be a locally\ncompact Hausdorff group with fixed left Haar measure $\\mu$, let $Q\\subseteq G$\nbe compact with $\\mu(Q)>0$, let $\\varepsilon>0$, and let $f\\in L^1(G)$ satisfy\n$f\\ge0$, $\\lVert f\\rVert_1=1$ and\n$$\\sup_{x\\in Q^2}\\lVert L_xf-f\\rVert_1\\le\\frac{\\varepsilon\\mu(Q)}{2\\mu(Q^2)},$$\nwhere $Q^2:=\\{xy:x,y\\in Q\\}$. Then there is a Borel set $U\\subseteq G$ with\n$0<\\mu(U)<\\infty$ and\n$$\\sup_{x\\in Q}\\frac{\\mu(xU\\mathbin\\triangle U)}{\\mu(U)}\\le2\\varepsilon.$$\nConsequently Reiter's condition (P1) implies the left Følner condition: for\nevery compact $Q$ and every $\\varepsilon>0$ a Borel set $U$ with\n$0<\\mu(U)<\\infty$ and\n$$\\sup_{x\\in Q}\\frac{\\mu(xU\\mathbin\\triangle U)}{\\mu(U)}\\le2\\varepsilon$$\nexists.\nThe supremum over an empty compact test set in the consequent is taken to be $0$.",
+        "strategy": "Average the compact L1 orbit of the single given density using finite Borel partitions, then parity-symmetrize h=(f+g)/2 to obtain Q defect≤3δ/2 and Q² defect≤2δ. For each finite-positive U integrate d_x(U)≤d_a(U)+d_xa(U) over a∈Q using xQ⊂Q², yielding uniform Q control by C_Q(U)+C_Q²(U). Strict-superlevel dyadic right-step continuity gives product measurability without global product-Borel assumptions. Layercake/Tonelli and weighted selection give one level with boundary≤δ(3/2+2r)≤7ε/4<2ε; δ=0 is included. For P1, enlarge an arbitrary target by a compact identity neighborhood and request the necessary fresh data. The source e∈Q route is documented but not used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Theorem G.5.1, proof of (P1) implies Følner's Property, printed pp. 468–469; the proof begins with a compact Q containing e; this original route assumes e in Q. The full arbitrary-positive-compact-Q quantitative claim and stronger bound here are proved locally by finite-partition parity averaging, scalar left-Haar averaging and measurable coarea; no stronger source theorem is asserted."
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 19: Reiter's Property and the Følner Condition",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf",
+              "locator": "Slides 14–18 (PDF pp. 14–18), proof that Reiter's Property implies the Følner Condition; the proof begins with compact Q containing e; this original route assumes e in Q. The full arbitrary-positive-compact-Q quantitative claim and stronger bound here are proved locally by finite-partition parity averaging, scalar left-Haar averaging and measurable coarea; no stronger source theorem is asserted."
+            }
+          ]
+        },
+        "axiom_use": "Assume full AC. It supports the complete L1 and translation-continuity suppliers and supplies Countable Choice for the layer-cake/Lebesgue-level measure interface. It selects countably many finite compact-orbit partitions. All averaging is through finite Borel partitions in L1; no global Bochner measurability, sigma compactness or semifinitization is assumed."
+      },
+      {
+        "id": "thm-folner-criterion-for-locally-compact-groups",
+        "kind": "theorem",
+        "title": "The Følner criterion for locally compact groups",
+        "deps": [
+          "thm-amenability-is-equivalent-to-reiter-p1",
+          "lem-folner-nets-give-reiter-nets",
+          "def-left-folner-net-for-a-locally-compact-group",
+          "def-amenable-locally-compact-group",
+          "def-reiter-condition-p1",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-left-haar-integral-and-left-haar-measure",
+          "lem-layer-cake-identity-for-nonnegative-integrable-functions",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-haar-translations-are-strongly-continuous-on-lp-one-and-two",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-locally-compact-space",
+          "def-topological-group",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compactness-under-continuous-maps",
+          "def-hausdorff-space",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "def-borel-sigma-algebra",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
+        ],
+        "dependency_level": 7,
+        "statement": "Assume AC. Let $G$ be a locally compact Hausdorff group with fixed left Haar measure $\\mu$. Then $G$ is amenable ([[def-amenable-locally-compact-group]]) if and only if it satisfies the left Følner condition ([[def-left-folner-net-for-a-locally-compact-group]]): for every compact $Q\\subseteq G$ and every $\\varepsilon>0$ there is a Borel set $F\\subseteq G$ with $0<\\mu(F)<\\infty$ and $\\Delta_Q(F)\\le\\varepsilon$. Equivalently, $G$ admits a left Følner net. Borel sets suffice for $F$.",
+        "strategy": "Assume AC. Amenability implies Reiter (P1) by the preceding equivalence theorem. For the Reiter-to-Følner direction, enlarge an arbitrary compact target Q to P=Q union C, where C is a compact identity neighbourhood, and let K=P^2. Then P has finite positive Haar measure, contains e, and K is compact. Choose f in the Reiter probabilities with sup_{x in K} ||L_x f-f||_1 <= eta mu(P)/(4 mu(K)), where eta=epsilon/2. For E_t={f>=t}, layer cake and Tonelli on K times (0,infinity), with product measurability proved by increasing dyadic levels, give an average normalized boundary r(t) whose mu(E_t)-weighted integral is at most eta mu(P)/4. Since integral mu(E_t) dt=1, choose t with 0<mu(E_t)<infinity and r(t)<eta mu(P)/2. The good set A={x in K: mu(xE_t triangle E_t)/mu(E_t)<=eta} then has complement of measure <mu(P)/2. For each x in P, xP is contained in xK intersect K and has measure mu(P), so xA intersect A has positive measure. Thus x=a_1 a_2^{-1} for a_1,a_2 in A; the symmetric-difference triangle inequality and left invariance give mu(xE_t triangle E_t)<=2 eta mu(E_t)=epsilon mu(E_t). The set E_t is the required Borel Følner witness. Conversely, normalized indicators turn Følner sets into Reiter probabilities, and Reiter (P1) implies amenability. This proves the full LCH criterion without using the separate, independently proved stronger cutdown lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.5, Theorem G.5.1 and its complete proof (printed pp. 466–469); the Reiter-to-Følner extraction starts with an identity-containing compact set"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 19: Reiter's Property and the Følner Condition",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf",
+              "locator": "Slides 14–18, PDF pp. 14–18: the Reiter-to-Følner extraction and its identity-containing compact test-set hypothesis"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is used through the amenability/Reiter equivalence, strong L1 translation continuity, and to supply ACω for the layer-cake supplier. No separate Dependent Choice assumption is added."
+      },
+      {
+        "id": "cor-folner-sequences-for-second-countable-compactly-generated-groups",
+        "kind": "corollary",
+        "title": "Folner sequences for second countable compactly generated groups",
+        "deps": [
+          "thm-folner-criterion-for-locally-compact-groups",
+          "def-amenable-locally-compact-group",
+          "def-left-folner-net-for-a-locally-compact-group",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "def-compact-space",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "def-topological-group",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compactness-under-continuous-maps",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume AC. Let $G$ be an amenable second countable compactly generated locally compact Hausdorff group ([[def-amenable-locally-compact-group]], [[def-locally-compact-space]], [[def-hausdorff-space]]) with fixed left Haar measure $\\mu$ ([[def-left-haar-integral-and-left-haar-measure]]), and let $S\\subseteq G$ be a compact generating set ([[def-compact-space]], [[def-topological-group]]) with $S=S^{-1}$ containing $e$ and a nonempty open set. Then there is a sequence $(F_n)_{n\\ge0}$ of Borel sets with $0<\\mu(F_n)<\\infty$ such that for every compact $Q\\subseteq G$\n$$\\lim_{n\\to\\infty}\\Delta_Q(F_n)=0,\\qquad\\Delta_Q(F):=\\sup\\bigl(\\{0\\}\\cup\\{\\mu(xF\\mathbin\\triangle F)/\\mu(F):x\\in Q\\}\\bigr).$$\nThus $\\Delta_\\varnothing(F)=0$.\nSuch a sequence is a **Følner sequence** for $G$. Conversely, a locally compact Hausdorff group with such a sequence satisfies the left Følner condition ([[def-left-folner-net-for-a-locally-compact-group]]) and hence is amenable, so for such a group amenability is equivalent to the existence of a Følner sequence. Only compact generation, not second countability, is used by the construction.",
+        "strategy": "Repaired scaffold route. Put $K_n:=S^n$: the n-fold multiplication map is continuous on the compact product $S\\times\\cdots\\times S$, so $K_n$ is compact and $K_n\\subseteq K_{n+1}$. From the nonempty open $U\\subseteq S=S^{-1}$ the open set $W=U\\cdot U^{-1}$ contains $e$ and lies in $S^2$, so $S^m\\subseteq\\operatorname{int}(S^{m+2})$ for every $m$; the open sets $\\operatorname{int}(K_{2n})$ increase and cover $G$, so every compact $Q$ lies in $K_n$ for all large $n$. Apply the Folner criterion ([[thm-folner-criterion-for-locally-compact-groups]]) to the compact set $K_{n+1}$ at tolerance $1/(n+1)$ and select one witness $F_n$ per $n\\ge0$ using ACω; then $\\Delta_Q(F_n)\\le\\Delta_{K_{n+1}}(F_n)\\le1/(n+1)\\to0$, so $(F_n)$ is a Folner sequence. Conversely a Folner sequence gives the left Folner condition and hence amenability by the criterion. The scaffold statement's hypothesis list omitted amenability, which is necessary: the second countable compactly generated group $F_2$ is not amenable and has no Folner sequence. The amenability hypothesis is restored from the source's Remark G.5.3 (amenability is equivalent to the existence of a Folner sequence for compactly generated G); only compact generation, not second countability, enters the construction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Remark G.5.3 (printed p. 469): for compactly generated G, amenability is equivalent to the existence of a Følner sequence; the compact exhaustion used here is the argument in the proof of Proposition F.1.7 (printed pp. 424-425). Both passages were read in the complete author-hosted PDF."
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 19: Reiter's Property and the Folner Condition (University of Sydney Honours lecture notes, 9 October 2012)",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture19_2012_Reiter.pdf",
+              "locator": "Theorem (Folner, Greenleaf), PDF p. 3: G admits an invariant mean if and only if G satisfies the Folner Condition; closing remark, PDF p. 17: it is enough to consider compact sets containing e"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is inherited through the Folner criterion, and it supplies ACω for the countable selection of the sequence (F_n) from the nonempty witness families. The exhaustion and limit arguments use only finite choice and ZF algebra."
+      },
+      {
+        "id": "thm-hulanicki-weak-containment-criterion-for-amenability",
+        "kind": "theorem",
+        "title": "The Hulanicki–Reiter weak containment criterion for amenability",
+        "deps": [
+          "thm-amenability-is-equivalent-to-reiter-p1",
+          "def-amenable-locally-compact-group",
+          "def-reiter-condition-p1",
+          "def-weak-containment-of-unitary-representations",
+          "lem-weak-containment-of-the-trivial-representation-and-almost-invariant-vectors",
+          "def-left-and-right-regular-unitary-representations",
+          "thm-regular-representations-are-unitary-and-strongly-continuous",
+          "def-matrix-coefficient-of-a-unitary-representation",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-complex-l-two-inner-product",
+          "def-real-and-complex-inner-product-space",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-strongly-continuous-unitary-representation",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 7,
+        "statement": "Assume AC. Let $G$ be a locally compact Hausdorff group with fixed left Haar measure $\\mu$. Let $1_G$ be the trivial unitary representation on $\\mathbb C$ with its standard inner product, given by $1_G(g)z=z$, and let $\\lambda_G$ be the left regular representation on $L^2(G)$ ([[def-left-and-right-regular-unitary-representations]], [[thm-regular-representations-are-unitary-and-strongly-continuous]]). Then $G$ is amenable ([[def-amenable-locally-compact-group]]) if and only if $1_G\\prec\\lambda_G$ ([[def-weak-containment-of-unitary-representations]]). Equivalently, $G$ is amenable if and only if $\\lambda_G$ almost has invariant unit vectors: for every compact $Q\\subseteq G$ and every $\\varepsilon>0$ there is a unit vector $\\xi\\in L^2(G)$ with $\\sup_{x\\in Q}\\lVert\\lambda_G(x)\\xi-\\xi\\rVert_2<\\varepsilon$.",
+        "strategy": "Assume AC. Amenability yields Reiter (P1). For any compact Q and epsilon, choose a probability density f with defect at most epsilon^2/2 and set g=sqrt(f); the scalar square-root estimate gives an almost-invariant unit vector for lambda_G. If lambda_G has almost-invariant unit vectors, their normalized coefficients approximate each constant coefficient of 1_G, so 1_G is weakly contained in lambda_G. Conversely 1_G weakly contained in lambda_G gives almost-invariant unit vectors by the local lemma. For such a unit vector xi, f=|xi|^2 is a Reiter probability: the pointwise reverse-triangle bound on squared moduli, Cauchy-Schwarz, and unitarity give ||L_x f-f||_1<=2||lambda_G(x)xi-xi||_2. Reiter (P1) then gives amenability; the weak-containment lemma supplies the equivalent vector formulation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.3, Theorem G.3.2 (Hulanicki-Reiter) and its complete proof (printed pp. 456–457)"
+            },
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix F.1, Corollary F.1.5 and proof (printed pp. 423–424)"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 20: Invariant Mean implies Reiter's Property",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture20_2012_InvMeanImpliesReiter.pdf",
+              "locator": "Slides 17–18 (PDF pp. 17–18), translating Reiter's property into almost-invariant $L^2$ vectors"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is used through the amenability/Reiter equivalence, the strongly-continuous regular-representation supplier, and the weak-containment to almost-invariant-vector lemma. The square-root, coefficient, and Cauchy–Schwarz estimates add no choice use."
+      },
+      {
+        "id": "lem-markov-kakutani-fixed-point-theorem-for-abelian-affine-actions",
+        "kind": "lemma",
+        "title": "The Markov-Kakutani fixed point theorem for abelian affine actions",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-hahn-banach-dominated-extension",
+          "def-hahn-banach-extension-principle-relative",
+          "def-group",
+          "def-topological-group",
+          "def-continuous-map-top",
+          "def-vector-space",
+          "def-topological-vector-space-for-local-convexity",
+          "def-locally-convex-topological-vector-space",
+          "def-hausdorff-space",
+          "def-subspace-topology-top",
+          "def-compact-space",
+          "thm-compact-iff-fip",
+          "thm-compactness-under-continuous-maps",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-locally-convex-continuous-dual-separates-points",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-natural-numbers",
+          "thm-recursion",
+          "thm-induction-principle",
+          "lem-of-naturals-positive",
+          "lem-of-inverse-positive",
+          "cor-archimedean-reciprocal"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume the Axiom of Choice. Let $G$ be an abelian topological group, and let\n$X$ be a nonempty compact convex subset of a Hausdorff locally convex real or\ncomplex topological vector space $V$. Suppose $G$ acts continuously on $X$;\nwrite $gx$ for the action, with $e x=x$ and $(gh)x=g(hx)$. Each action map is\naffine in the finite-combination sense: for $x_0,\\dots,x_n\\in X$ and real\n$t_i\\ge0$ with $\\sum_{i=0}^n t_i=1$,\n$$g\\left(\\sum_{i=0}^n t_i x_i\\right)=\\sum_{i=0}^n t_i(gx_i).$$\nThen there exists $x_0\\in X$ with $gx_0=x_0$ for every $g\\in G$.",
+        "strategy": "Assume AC only to obtain the real Hahn-Banach extension principle by the Zorn-based dominated-extension theorem; the averages, compact finite-intersection argument, and estimates use no choice. For each $g$ and $n\\ge0$, form the affine continuous averaging map $A_n(g)x=(n+1)^{-1}\\sum_{i=0}^n g^ix$. Their pairwise commutation follows by expanding the finite double averages and using that $G$ is abelian. Let $\\Gamma$ be the monoid they generate, including the identity. The nonempty compact closed images $\\gamma(X)$ have the finite intersection property, so choose $x_0$ in their intersection. Fix $g$ and suppose $v=x_0-gx_0\\ne0$. Hahn-Banach dual separation supplies a continuous linear functional whose real part $\\psi$ is nonzero on $v$; compactness bounds $|\\psi|$ on $X$ by $C$. For each $n$, membership $x_0\\in A_n(g)(X)$ and telescoping give $|\\psi(v)|\\le2C/(n+1)$. The reciprocal Archimedean property forces $\\psi(v)=0$, contradiction. Thus each $g$ fixes $x_0$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G, Theorem G.2.1 and complete proof (printed pp. 450–451); the source states locally convex, while this item spells out Hausdorffness because the library defines it separately and the proof uses continuous-dual separation"
+            }
+          ]
+        },
+        "axiom_use": "Full AC is used only through the Zorn-based real Hahn-Banach dominated extension theorem to supply the HB hypothesis for the final continuous-dual separation of x_0 and gx_0. The averages, finite-intersection argument, and estimates use no choice."
+      },
+      {
+        "id": "lem-a-group-with-the-fixed-point-property-is-amenable",
+        "kind": "lemma",
+        "title": "The fixed point property implies amenability",
+        "deps": [
+          "def-left-uniformly-continuous-bounded-functions-on-a-locally-compact-group",
+          "lem-an-invariant-mean-produces-a-reiter-net",
+          "lem-a-reiter-net-has-an-invariant-mean-cluster-point",
+          "def-amenable-locally-compact-group",
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "def-locally-convex-topological-vector-space",
+          "thm-banach-alaoglu",
+          "def-weak-star-topology",
+          "def-axiom-of-choice",
+          "thm-ultrafilter-lemma",
+          "def-dual-space-of-a-normed-space",
+          "def-topological-vector-space-for-local-convexity",
+          "def-compact-space",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-reiter-condition-p1"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume AC. Let $G$ be a locally compact Hausdorff group with the fixed point\nproperty: every continuous affine action of $G$ on a nonempty compact convex\nsubset of a Hausdorff locally convex topological vector space has a fixed point. Then\n$G$ is amenable ([[def-amenable-locally-compact-group]]).",
+        "strategy": "Let X=UCB(G) and put E=X* with the weak-star topology. Construct M, the set of positive complex-linear unital functionals on X. Show M is nonempty, convex, weak-star closed and contained in the dual unit ball by proving every mean has norm at most one. The weak-star topology makes E a Hausdorff locally convex topological vector space, since distinct functionals are separated by evaluations. AC implies the ultrafilter lemma, so Banach–Alaoglu makes the dual ball compact and then M compact. Define (g·m)(psi)=m(L_{g^{-1}}psi); verify this is an affine action on M and prove joint continuity using norm continuity of UCB translation orbits and weak-star evaluations. Apply the fixed point property to obtain a left-invariant UCB mean. Apply the UCB-to-Reiter lemma and the Reiter-net cluster-point lemma; AC supplies the ultrafilter lemma required by both compactness steps, yielding an invariant mean on L-infinity and amenability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.1, Remark G.1.6 and Theorem G.1.7, fixed-point property implication (ii) to amenability (printed pp. 448–449; author-hosted PDF pp. 454–455)"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is used through the ultrafilter lemma for Banach–Alaoglu compactness of the weak-star dual ball and for the Reiter-net cluster-point result; the state-space construction and fixed-point action use no further choice."
+      },
+      {
+        "id": "prop-compact-and-locally-compact-abelian-groups-are-amenable",
+        "kind": "proposition",
+        "title": "Compact and locally compact abelian groups are amenable",
+        "deps": [
+          "def-amenable-locally-compact-group",
+          "lem-markov-kakutani-fixed-point-theorem-for-abelian-affine-actions",
+          "lem-a-group-with-the-fixed-point-property-is-amenable",
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "cor-existence-of-left-and-right-haar-measures",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-complex-haar-l-infinity-space",
+          "def-locally-compact-space",
+          "def-axiom-of-choice",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "def-measure-preserving-transformation-and-system",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-continuous-preimages-of-borel-sets-are-borel"
+        ],
+        "dependency_level": 7,
+        "statement": "Assume AC. (1) Every compact locally compact Hausdorff group is amenable.\n(2) Every locally compact Hausdorff abelian group is amenable. No countability,\nmetrizability or unimodularity hypothesis is imposed.",
+        "strategy": "(1) Under AC choose a left Haar measure ν on K; since K is nonempty open and compact, Haar positivity and compact finiteness give 0<ν(K)<∞. Rescale μ=ν/ν(K), so μ is a normalized left Haar probability. For every φ∈L∞(K,μ;C), essential boundedness and μ(K)=1 imply φ∈L1; almost-everywhere equality preserves the integral, so m(φ)=∫K φ dμ is well-defined. Linearity, positivity, the estimate |m(φ)|≤||φ||∞ and m(1K)=1 make m a mean. Each left translation T_g(x)=g^-1x is Borel and measure-preserving; integral invariance gives m(L_gφ)=m(φ), so K is amenable. (2) Let G be LCH and abelian. The Hausdorff Markov–Kakutani theorem ([[lem-markov-kakutani-fixed-point-theorem-for-abelian-affine-actions]]) gives the fixed-point property for continuous affine actions on nonempty compact convex subsets of Hausdorff locally convex spaces. The fixed-point-property-to-amenability lemma ([[lem-a-group-with-the-fixed-point-property-is-amenable]]) then gives amenability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.1, Example G.1.5 (compact groups), and Appendix G.2, Theorem G.2.1 (Markov–Kakutani), printed pp. 448–451; the local proof gives the integral mean and follows the fixed-point route"
+            },
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.1, Theorem G.1.7, fixed-point property implies amenability, printed pp. 448–450"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. Part (1) uses it through left Haar measure existence and then normalizes by the positive finite measure of the compact group; part (2) uses it through Markov–Kakutani and the fixed-point-property-to-amenability lemma. The rescaling, integral and invariance calculations use no further choice."
+      },
+      {
+        "id": "lem-restricted-regular-representation-is-weakly-contained-in-subgroup-regular-representation",
+        "kind": "lemma",
+        "title": "Restriction of the regular representation to a closed subgroup",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-topological-group",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "def-neighbourhood-top",
+          "def-subspace-topology-top",
+          "def-compact-space",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "def-product-topology",
+          "def-borel-sigma-algebra",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "thm-compactness-under-continuous-maps",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-locally-compact-hausdorff-basics",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-existence-of-rho-functions-and-quasi-invariant-measures-on-g-mod-h",
+          "thm-weil-quotient-integration-formula-with-rho-function",
+          "def-rho-function-for-a-closed-subgroup",
+          "lem-closed-subgroup-quotient-averaging-and-compact-lifts",
+          "lem-compactly-supported-kernels-admit-commuting-radon-integrals",
+          "lem-haar-change-of-variables-under-inversion",
+          "lem-complex-haar-l1-and-l2-are-complete-and-cc-dense",
+          "def-left-and-right-regular-unitary-representations",
+          "thm-regular-representations-are-unitary-and-strongly-continuous",
+          "thm-the-modular-function-is-a-continuous-homomorphism",
+          "thm-nth-roots-exist",
+          "def-weak-containment-of-unitary-representations",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume AC. Let $G$ be a locally compact Hausdorff group and let $H\\leq G$ be\nclosed. Fix left Haar measures on $G$ and $H$. Then the restriction of the left\nregular representation of $G$ to $H$ is weakly contained in the left regular\nrepresentation of $H$:\n$$\\lambda_G|_H\\prec\\lambda_H,$$\nwhere weak containment means uniform approximation of each diagonal coefficient\non every compact subset of $H$ by finite sums of diagonal coefficients.",
+        "strategy": "Fix f in C_c(G), let r and mu be the rho-function and Radon quotient measure, and set a_x(h)=[Delta_G((xh)^(-1))/r(xh)]^(1/2) f((xh)^(-1)). Its support is compact in H. The coefficient B(xH,k)=<R_H(k)a_x,a_x> is independent of the representative by left Haar invariance, is jointly continuous by compact-kernel integration, and vanishes outside the compact quotient image of supp(f)^(-1). Inversion and the Weil formula give <lambda_G(k)f,f>=integral_(G/H)B(q,k)dmu(q). For compact Q in H, joint continuity and compactness give a finite Borel partition of the compact support on which B(q,.) oscillates uniformly by less than delta; the weighted sum with vectors sqrt(mu(E_j))a_(x_j) approximates the integral within delta mu(T). The inversion intertwiner Jb(h)=Delta_H(h)^(-1/2)b(h^(-1)) carries these right-regular coefficients to left-regular coefficients. Finally approximate arbitrary xi in L2(G) by f in C_c(G); unitarity and Cauchy-Schwarz make the coefficient error uniform on Q. AC is explicit and no measurable section or direct integral is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix F, Proposition F.1.10 and complete proof (printed p. 426 / PDF p. 432); Appendix A, Proposition A.4.1 (printed p. 323 / PDF p. 329); Appendix B, Theorem B.1.4 (printed p. 347 / PDF p. 353). The local proof expands the compact-quotient-support approximation and the left/right intertwiner."
+            }
+          ]
+        },
+        "axiom_use": "Assume full AC. It supplies the rho-function and Radon quotient measure and discharges the choice hypotheses of the Weil, quotient, kernel, inversion, regular-representation and C_c-density suppliers. The proof makes only finite choices when forming its partition and choosing quotient lifts; it uses no measurable section, direct integral, countability hypothesis, or stronger choice principle."
+      },
+      {
+        "id": "thm-amenability-is-stable-under-closed-subgroups-quotients-and-extensions",
+        "kind": "theorem",
+        "title": "Amenability is stable under closed subgroups, quotients and extensions",
+        "deps": [
+          "def-amenable-locally-compact-group",
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "def-left-uniformly-continuous-bounded-functions-on-a-locally-compact-group",
+          "def-quotient-topology",
+          "def-quotient-group",
+          "def-normal-subgroup",
+          "def-product-topology",
+          "def-topological-group",
+          "def-subspace-topology-top",
+          "def-continuous-map-top",
+          "lem-open-or-closed-surjection-is-quotient",
+          "thm-quotient-universal-property",
+          "thm-quotient-group-laws",
+          "thm-locally-compact-hausdorff-basics",
+          "thm-compactness-under-continuous-maps",
+          "cor-existence-of-left-and-right-haar-measures",
+          "lem-closed-subgroup-quotient-averaging-and-compact-lifts",
+          "lem-an-invariant-mean-produces-a-reiter-net",
+          "thm-amenability-is-equivalent-to-reiter-p1",
+          "lem-restricted-regular-representation-is-weakly-contained-in-subgroup-regular-representation",
+          "thm-hulanicki-weak-containment-criterion-for-amenability",
+          "def-weak-containment-of-unitary-representations",
+          "def-left-and-right-regular-unitary-representations",
+          "thm-regular-representations-are-unitary-and-strongly-continuous",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume AC. Let $G$ be a locally compact Hausdorff group. (i) If $G$ is\namenable, every closed subgroup $H\\leq G$ is amenable. (ii) If $G$ is\namenable and $N\\trianglelefteq G$ is closed normal, the Hausdorff quotient\n$G/N$ is amenable. (iii) If $N\\trianglelefteq G$ is closed normal and both\n$N$ and $G/N$ are amenable, then $G$ is amenable.",
+        "strategy": "For closed subgroups, restrict the coefficient approximations from the Hulanicki criterion and use the assigned restricted-regular-representation lemma plus transitivity. Prove first that a closed-normal quotient with quotient topology is a topological LCH group. For quotient inheritance, pull back actual UCB functions and restrict the L-infinity mean. For extensions, set phi_g(h)=phi(gh), prove the conjugation estimate placing phi_g in UCB(N), average it with an N-invariant mean, descend through the open quotient map, verify quotient UCB by the exact sup-defect equality, and use the UCB-to-Reiter and Reiter-to-amenability suppliers. No global section is chosen.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.2, Proposition G.2.2(i)-(ii) and complete proof (printed p. 451); Appendix G.3, Corollary G.3.4 and Appendix F.1, Proposition F.1.10 with proof (printed pp. 426, 457). The local proof expands quotient pullback, gives a direct UCB-mean averaging proof of the extension clause, and uses the assigned restricted-regular-representation supplier."
+            }
+          ]
+        },
+        "axiom_use": "Assume full AC. It supplies left Haar measures for the finitely many LCH groups involved and is inherited through the UCB-to-Reiter and Hulanicki suppliers. The weak-containment, quotient, and mean calculations introduce no dependent- choice or global-section assumption."
+      }
+    ]
+  },
+  {
+    "order": 1235,
+    "id": "amenability-reiter-nets-and-folner-conditions-examples",
+    "kind": "B",
+    "category": "representation-theory",
+    "title": "Amenability Reiter Nets and Folner Conditions — Examples",
+    "companion": "amenability-reiter-nets-and-folner-conditions",
+    "requires": [
+      "amenability-reiter-nets-and-folner-conditions"
+    ],
+    "items": [
+      {
+        "id": "ex-folner-sets-in-rn",
+        "kind": "example",
+        "title": "Følner sets in $\\mathbb R^n$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-is-a-radon-measure-on-rn",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-measure",
+          "prop-measure-monotonicity",
+          "def-left-haar-integral-and-left-haar-measure",
+          "cor-rn-is-locally-compact-and-sigma-compact",
+          "lem-metrics-on-rn",
+          "def-topological-group",
+          "thm-metric-hausdorff-separation",
+          "thm-compact-subset-is-closed-and-bounded",
+          "def-metric-bounded-diameter",
+          "def-metric-ball",
+          "def-directed-set-and-net",
+          "def-left-folner-net-for-a-locally-compact-group",
+          "thm-binomial-theorem",
+          "def-binomial-coefficient",
+          "def-canonical-natural",
+          "def-integer-power",
+          "def-finite-sum",
+          "def-real-order",
+          "thm-folner-criterion-for-locally-compact-groups"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume AC. Let $n\\ge1$, let $G=\\mathbb R^n$ be the additive group with its\nEuclidean topology, and let $\\lambda_n$ be Lebesgue measure. Then $\\lambda_n$\nis a left Haar measure on $G$. For every compact $Q\\subseteq\\mathbb R^n$,\nchoose $R\\ge0$ such that $Q\\subseteq[-R,R]^n$, and for $t>0$ put\n$C_t:=[-t,t]^n$. Then\n$$\\Delta_Q(C_t)=\\sup\\Bigl(\\{0\\}\\cup\\Bigl\\{\\frac{\\lambda_n((x+C_t)\\mathbin\\triangle C_t)}{\\lambda_n(C_t)}:x\\in Q\\Bigr\\}\\Bigr)\\le2\\bigl((1+R/t)^n-1\\bigr)\\xrightarrow[t\\to\\infty]{}0,$$\nwhere $\\Delta_Q$ is the left Følner defect of\n[[def-left-folner-net-for-a-locally-compact-group]]. In particular\n$(C_t)_{t>0}$ is a left Følner net, $G$ satisfies the left Følner condition,\nand $\\mathbb R^n$ is amenable by\n[[thm-folner-criterion-for-locally-compact-groups]].",
+        "strategy": "Under AC_omega, the Lebesgue measurable sets form a sigma-algebra, Lebesgue measure is complete and Radon, and translation invariance plus the box formula give positive finite measure to each C_t; hence it is left Haar. For compact Q obtain R>=0 by compactness implying Euclidean boundedness. For each x in Q, reduce the symmetric difference to twice one one-sided difference using equal finite measures; that one-sided difference lies in the expanded outer box minus C_t. Its measure gives exactly the displayed bound. The binomial theorem gives an explicit T(Q,epsilon) after which the ratio is at most epsilon, so the directed family t>0 is a left Folner net. Invoke the AC-dependent Folner criterion for amenability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.5, Theorem G.5.1 and complete proof (printed pp. 466-469) gives the general locally compact Følner criterion; Example G.5.4 (printed p. 469) treats intervals in Z only. The explicit R^n cube estimate is proved locally here."
+            },
+            {
+              "title": "Jose Manuel Garcia Garrido, An Introduction to Amenable Groups (author-hosted lecture notes, University of Duesseldorf)",
+              "url": "https://www.math.uni-duesseldorf.de/~garrido/amenable.pdf",
+              "locator": "Section 3.1, Definition 3.1 and Example 3.5: the discrete Følner condition and intervals in Z; this supplies context only, not the Euclidean cube estimate, which is proved locally."
+            }
+          ]
+        },
+        "axiom_use": "Assume full AC. It supplies AC_omega for the Lebesgue box-volume and Radon suppliers and is required by the Følner criterion's Reiter-to-amenability implication. The cubes and their directed net are explicit; no additional dependent-choice assumption is introduced."
+      },
+      {
+        "id": "ex-compact-groups-have-a-constant-reiter-net",
+        "kind": "example",
+        "title": "Compact groups have a constant Reiter net",
+        "deps": [
+          "cor-existence-of-left-and-right-haar-measures",
+          "lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets",
+          "def-complex-haar-lp-spaces-and-compactly-supported-functions",
+          "def-complex-haar-l-infinity-space",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-measure-preserving-transformation-and-system",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "def-reiter-condition-p1",
+          "thm-amenability-is-equivalent-to-reiter-p1",
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "def-amenable-locally-compact-group",
+          "def-directed-set-and-net",
+          "prop-compact-and-locally-compact-abelian-groups-are-amenable",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume AC. Let $K$ be a compact locally compact Hausdorff group. Choose a left\nHaar measure $\\nu$ on $K$ and put $\\mu:=\\nu/\\nu(K)$; the denominator is positive\nand finite, so $\\mu$ is a normalized Haar probability. Let\n$f:=\\mathbf 1_K\\in L^1(K)$. Then\n$f\\ge0$, $\\lVert f\\rVert_1=1$, and $L_xf=f$ for every $x\\in K$, because\n$L_x\\mathbf 1_K=\\mathbf 1_{xK}=\\mathbf 1_K$. Hence the constant net\n$f_i:=f$ satisfies Reiter's condition (P1) exactly, with\n$\\Delta_Q(f)=0$ for every compact $Q\\subseteq K$,\nand $K$ is amenable by [[thm-amenability-is-equivalent-to-reiter-p1]]. This is\nthe strongest possible form of approximate invariance: the approximating\ndensities do not vary with the tolerance.",
+        "strategy": "Under AC choose a left Haar measure on the compact group. Since the whole group is nonempty, open and compact, its Haar measure is finite and positive; rescaling by that value gives a normalized Haar probability. The density 1_K then has L1 norm one and is fixed exactly by every left translation, so the singleton constant net satisfies (P1) with zero defect on every compact test. Reiter equivalence gives amenability. The same normalized-Haar integral directly defines an invariant mean on complex L-infinity classes, explicitly checking the compact-group clause of the earlier compact/abelian amenability proposition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.1, Example G.1.5 (printed p. 448), identifies normalized Haar probability as the invariant mean on C(K); Appendix G.3, Theorem G.3.1(iii) (printed pp. 452-453), states Reiter (P1). The item locally verifies the complex L-infinity mean on equivalence classes."
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is used through left Haar measure existence, normalization by the positive finite measure of the compact group, and the Reiter-to-amenability equivalence. The constant net and integral invariance calculation add no further choice or dependent-choice use."
+      },
+      {
+        "id": "ex-the-real-affine-group-is-amenable-and-nonunimodular",
+        "kind": "example",
+        "title": "The real affine group is amenable and nonunimodular",
+        "deps": [
+          "def-amenable-locally-compact-group",
+          "lem-markov-kakutani-fixed-point-theorem-for-abelian-affine-actions",
+          "lem-a-group-with-the-fixed-point-property-is-amenable",
+          "def-modular-function-of-a-locally-compact-group",
+          "lem-right-translation-scales-left-haar-measure",
+          "def-unimodular-locally-compact-group",
+          "def-normal-subgroup",
+          "def-continuous-map-top",
+          "def-axiom-of-choice",
+          "def-group",
+          "def-topological-group",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "cor-rn-is-locally-compact-and-sigma-compact",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "def-subspace-topology-top",
+          "def-product-topology",
+          "thm-product-universal-property",
+          "lem-algebra-of-continuous-real-maps-on-a-space",
+          "cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-left-haar-integral-and-left-haar-measure",
+          "def-countable-choice",
+          "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds",
+          "def-density-bundle-and-smooth-density",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "dependency_level": 7,
+        "statement": "Assume AC. Let\n$$G:=\\{(a,b):a>0,\\ b\\in\\mathbb R\\}$$\nwith multiplication\n$$(a,b)(a',b')=(aa',ab'+b)$$\nand the topology inherited from $\\mathbb R^2$. Then $G$ is a locally compact\nHausdorff topological group and is amenable. The measure\n$$d\\mu_L(a,b)=a^{-2}\\,da\\,db$$\nis a left Haar measure for which the library's modular convention gives\n$$\\Delta_G(a,b)=a^{-1}.$$\nIn particular, $G$ is nonunimodular, so amenability does not imply\nunimodularity.",
+        "strategy": "Prove the fixed-point property directly: apply Markov–Kakutani to N=R and then to H=R_{>0} on the N-fixed compact convex set, and invoke the fixed-point-property-to-amenability result. Define the positive smooth density a^(-2)|da db|, prove it is nonzero Radon under AC_omega, compute the left-translation Jacobian to verify left Haar invariance, then compute the inverse-right-translation change-of-variables scalar to obtain Delta(a,b)=a^(-1) under the library convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.2, Proposition G.2.2(ii) and its complete fixed-point proof (printed pp. 451–452); Appendix G.2, Theorem G.2.1 and its complete averaging proof (printed pp. 450–451)"
+            },
+            {
+              "title": "Amjad Saleh M. Alghamdi, Representation Theory for the Group SL2(R), PhD thesis, University of Leeds (2021)",
+              "url": "https://etheses.whiterose.ac.uk/id/eprint/30665/1/Alghamdi%20ASM%20Mathematics%20PhD%202021.pdf",
+              "locator": "Chapter 3, §3.1 and §3.3 (printed pp. 15–17/PDF pp. 23–25): affine group law, N⋊A decomposition, left Haar density a^(-2) da db, and the complete left-translation Jacobian calculation; the modular convention is independently recomputed here"
+            },
+            {
+              "title": "Gerald B. Folland, Real Analysis, 2nd ed.",
+              "url": "https://djvu.online/file/NPF4BEtSuqdFA",
+              "locator": "Theorem 2.47, change of variables for C^1 diffeomorphisms; Theorem 7.8, regularity of locally finite Borel measures on second-countable locally compact spaces"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is used through both applications of the Markov–Kakutani fixed-point theorem and through the fixed-point-property-to-amenability supplier. AC supplies AC_omega for the positive-density Radon and change-of- variables suppliers, and the left-Haar/modular-function suppliers also assume AC. No dependent-choice principle is used."
+      },
+      {
+        "id": "cex-the-free-group-on-two-generators-is-not-amenable",
+        "kind": "counterexample",
+        "title": "The free group on two generators is not amenable",
+        "deps": [
+          "def-amenable-locally-compact-group",
+          "def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group",
+          "lem-counting-measure-on-a-discrete-group",
+          "def-complex-haar-l-infinity-space",
+          "def-standard-topologies",
+          "def-free-group",
+          "thm-reduced-words-form-the-free-group",
+          "thm-free-group-of-rank-two-is-nonamenable"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $F_2=\\langle a,b\\rangle$ be the free group on two generators with the\n discrete topology, and let $\\mu$ be counting measure, a left Haar measure by\n[[lem-counting-measure-on-a-discrete-group]]. Then $F_2$ is not amenable: there\nis no left-invariant mean on $L^\\infty(F_2,\\mu)$ in the sense of\n[[def-amenable-locally-compact-group]]. The direct proof below also establishes\nthe published discrete nonamenability claim [[thm-free-group-of-rank-two-is-nonamenable]].",
+        "strategy": "Because the topology is discrete, $\\mu$ is counting measure, every function on $F_2$ is $\\mu$-measurable and the only $\\mu$-null set is $\\varnothing$; hence $L^\\infty(F_2,\\mu)=\\ell^\\infty(F_2)$ literally, and a left-invariant mean in the sense of [[def-left-invariant-mean-on-l-infinity-of-a-locally-compact-group]] is exactly a left-invariant mean on $\\ell^\\infty(F_2)$ in the discrete sense of [[def-left-invariant-mean-and-amenable-group]]. Suppose such an $m$ exists. For a subset $A\\subseteq F_2$ write $m(A):=m(\\mathbf 1_A)$. Let $A$ be the set of reduced words beginning with a nonzero power of $a$ (including the empty word convention is immaterial); every element of $F_2$ is either in $A$ or of the form $a w$ with $w\\in A$ wait, more precisely $F_2=A\\sqcup aA$: a reduced word not beginning with a nonzero power of $a$ either is empty or begins with a nonzero power of $b$, and then its image under multiplication by $a$ on the left begins with $a$, so it lies in $A$; conversely $aA\\subseteq F_2$. Hence $1=m(F_2)=m(A)+m(aA)=2m(A)$ by left invariance, so $m(A)=1/2$. On the other hand $A,bA,b^2A$ are pairwise disjoint subsets of $F_2$ (their elements begin with a nonzero power of $a$, of $b$, and of $b$ respectively, with the $b$-leading sets distinguished by the second letter), so $1=m(F_2)\\ge m(A)+m(bA)+m(b^2A)=3m(A)=3/2$, a contradiction. Therefore no left-invariant mean exists and $F_2$ is not amenable.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bachir Bekka, Pierre de la Harpe and Alain Valette, Kazhdan's Property (T) (Cambridge University Press, 2008; author-hosted complete text)",
+              "url": "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf",
+              "locator": "Appendix G.2, Example G.2.4(ii), printed p. 452: the reduced-word invariant-mean contradiction"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 23: Unitary Representations and Amenability",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture23_2012_Unitary.pdf",
+              "locator": "Slide 2, PDF p. 2: the corollary that a discrete group containing a rank-two free subgroup is nonamenable; corroborates the conclusion, while the proof is given here"
+            },
+            {
+              "title": "Anne Thomas, The Banach-Tarski Paradox and Amenability, Lecture 3: Free Groups",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/amenability/Lecture3_2012_FreeGroups.pdf",
+              "locator": "Slides 7–13, PDF pp. 7–13: reduced words and the rank-two free group model"
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used; the reduced-word sets and all finite mean calculations are explicit."
+      }
+    ]
+  }
+]

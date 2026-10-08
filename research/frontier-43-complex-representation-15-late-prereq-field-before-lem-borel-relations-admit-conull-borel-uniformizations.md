@@ -1,0 +1,117 @@
+---
+id: lem-borel-relations-admit-conull-borel-uniformizations
+kind: lemma
+title: Conull Borel uniformizations and Borel versions of measured suprema
+status: draft
+origin: pipeline
+pipeline_run: frontier-43-complex-representation-15
+deps:
+  - lem-closed-witness-codings-and-measured-projections
+  - def-standard-borel-space
+  - def-polish-space
+  - lem-cantor-and-baire-sequence-coding
+  - lem-polish-closed-products-and-baire-parametrization
+  - def-product-topology
+  - def-metric-space
+  - def-metric-ball
+  - def-metric-topology
+  - def-complete-metric-space
+  - def-separable-space
+  - lem-countable-iff-surjection-from-n
+  - lem-subset-of-countable
+  - thm-rationals-countable
+  - lem-rat-embeds-dense
+  - thm-n-cross-n-countable
+  - thm-well-ordering-principle
+  - thm-recursion
+  - def-natural-number-coding-of-finite-sequences
+  - def-measurable-function-between-measurable-spaces
+  - thm-continuous-preimages-of-borel-sets-are-borel
+  - def-completion-of-a-measure-space
+  - lem-completion-domain-is-a-sigma-algebra
+  - def-finite-sigma-finite-and-semifinite-measures
+  - thm-finite-and-countable-subadditivity-of-measures
+  - def-borel-sigma-algebra
+  - cor-cauchy-reals-lub-complete
+  - def-countable-choice
+  - thm-choice-implies-dependent-implies-countable-choice
+  - def-axiom-of-choice
+justified_by: []
+aliases: []
+dependency_level: 1
+proof_strategy: direct
+axiom_use: "Assume AC, as used by the closed-witness projection and Polish-product suppliers. AC implies Countable Choice, the hypothesis for the completion-domain sigma-algebra. This proof also uses AC to choose Borel representatives for countably many completion-measurable prefix and rational-superlevel sets, a witness sequence in each fixed nonempty closed fibre, and the countably many outputs to be restricted to a common conull set. The least-child recursion itself is canonical; no selector on every point of the original base is claimed."
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Bachir Bekka and Pierre de la Harpe, Unitary Representations of Groups, Duals, and Characters (complete book draft)"
+      url: "https://arxiv.org/pdf/1912.07262"
+      locator: "Appendix A.C, definition of a standard measure and Theorem A.C.6, printed p. 409 (PDF p. 408): the conull Borel selector is stated, with its proof referred to Mackey–76, Theorem Z.2, Chapter 2, §2.2. The closed-witness, completion-measurability, nested-cover and Borel-version arguments below are local."
+verification:
+  precheck: n/a
+---
+
+## Statement
+
+Assume AC. Let $(X,\mathcal B,\mu)$ be a sigma-finite standard-Borel measure space and let $Y$ be a standard Borel space. If $R\subseteq X\times Y$ is Borel and every vertical section $R_x:=\{y\in Y:(x,y)\in R\}$ is nonempty, then there is a Borel conull set $X_0\subseteq X$ and a Borel map $s:X_0\to Y$ such that $(x,s(x))\in R$ for every $x\in X_0$. For any such $R$ and any bounded real-valued Borel function $\varphi:X\times Y\to\mathbb R$, define
+$$m_{R,\varphi}(x):=\sup\{\varphi(x,y):y\in R_x\}.$$
+For every rational $q$, the strict superlevel set $\{x:m_{R,\varphi}(x)>q\}$ is measurable in the completion of $\mu$, and there are a Borel function $\widetilde m:X\to\mathbb R$ and a Borel null set $N$ such that $\widetilde m=m_{R,\varphi}$ on $X\setminus N$. For any countable family of relations and scalar functions of these forms on the same measured base, the selectors and Borel versions may be restricted to one common Borel conull subset of $X$. A selector on every point of the original $X$ is not asserted.
+
+## Facts & Assumptions
+
+**Given:** AC, a sigma-finite standard-Borel measured space $X$, a standard Borel space $Y$, a Borel relation with nonempty vertical sections, and, for the scalar assertion, a bounded real Borel function on $X\times Y$.
+
+[F1] A standard Borel space is Borel-isomorphic to a Polish presentation ([[def-standard-borel-space]]).
+
+[F2] A measure is sigma-finite when its space is a countable union of finite-measure Borel sets ([[def-finite-sigma-finite-and-semifinite-measures]]). Under AC, every Borel relation between standard Borel spaces has a closed witness in the product with $\mathbb N^{\mathbb N}$; projections of Borel relations under a sigma-finite Borel measure are completion-measurable and agree with Borel sets outside Borel null sets ([[lem-closed-witness-codings-and-measured-projections]], [[def-axiom-of-choice]]). Every nonempty subset of $\mathbb N$ has a least element ([[thm-well-ordering-principle]]).
+
+[F3] The completion domain consists of Borel sets modified by subsets of Borel null sets and is a sigma-algebra under Countable Choice; AC supplies Countable Choice ([[def-completion-of-a-measure-space]], [[lem-completion-domain-is-a-sigma-algebra]], [[def-countable-choice]], [[thm-choice-implies-dependent-implies-countable-choice]], [[def-axiom-of-choice]]).
+
+[F4] Borel sets are the sigma-algebra generated by open sets, so open sets and countable unions of Borel sets are Borel ([[def-borel-sigma-algebra]]).
+
+[F5] A Polish space has a countable dense subset; a nonempty at-most-countable set admits a sequence enumeration. The positive rationals are countable and dense in the reals, and $\mathbb N^2$ is in bijection with $\mathbb N$ ([[def-separable-space]], [[lem-countable-iff-surjection-from-n]], [[lem-subset-of-countable]], [[thm-rationals-countable]], [[lem-rat-embeds-dense]], [[thm-n-cross-n-countable]]).
+
+[F6] A recursively specified successor rule defines a sequence ([[thm-recursion]]).
+
+[F7] The witness space $\mathbb N^{\mathbb N}$ is Polish ([[lem-cantor-and-baire-sequence-coding]]). Open and closed metric balls and Cauchy convergence are as in [[def-metric-space]], [[def-metric-ball]], [[def-metric-topology]], and [[def-complete-metric-space]]. A Polish metric is separable and complete ([[def-polish-space]]).
+
+[F8] A bounded nonempty real set has a supremum, and rationals lie between any two distinct reals ([[cor-cauchy-reals-lub-complete]], [[lem-rat-embeds-dense]]).
+
+[F9] A map is Borel when inverse images of Borel sets are Borel, and continuous maps have Borel preimages ([[def-measurable-function-between-measurable-spaces]], [[thm-continuous-preimages-of-borel-sets-are-borel]]).
+
+[F10] AC supplies a choice function for any family of nonempty sets, and AC implies Countable Choice ([[def-axiom-of-choice]], [[thm-choice-implies-dependent-implies-countable-choice]], [[def-countable-choice]]).
+
+
+[F12] A countable union of Borel null sets is Borel and null ([[def-borel-sigma-algebra]], [[thm-finite-and-countable-subadditivity-of-measures]]).
+
+[F13] Finite sequences of naturals have an injective natural-number code, and finite or countable subsets of $\mathbb N$ remain at most countable ([[def-natural-number-coding-of-finite-sequences]], [[lem-subset-of-countable]]).
+
+[F14] Basic open rectangles form a basis for the product topology; under AC finite products of Polish spaces are Polish in that topology ([[def-product-topology]], [[def-polish-space]], [[lem-polish-closed-products-and-baire-parametrization]], [[def-axiom-of-choice]]).
+
+## Proof
+
+**Proof technique:** closed witnesses, a nested countable open cover, and completion-measurable least-prefix cells.
+
+1.1 If $X=\varnothing$, take $X_0=\varnothing$; all selector assertions are vacuous and any bounded scalar function has the zero Borel version agreeing on $X_0$. Otherwise choose Polish presentations of $X$ and $Y$ by [F1] and transport $R$ to those presentations. Let $W=\mathbb N^{\mathbb N}$ and $Z:=Y\times W$. Since $X$ is nonempty and every $R_x$ is nonempty, $Y$ and $Z$ are nonempty. By [F7,F14], $Z$ is Polish, so choose a compatible complete metric $d$ on $Z$. By [F2], $R$ is the projection of a closed witness in $(X\times Y)\times W$. The coordinate reassociation $((x,y),w)\mapsto(x,(y,w))$ is a homeomorphism because both product topologies have bases of open rectangles [F14]; transporting the witness gives a closed $F\subseteq X\times Z$ with $\operatorname{proj}_{X\times Y}(F)=R$. Every fibre $F_x:=\{z:(x,z)\in F\}$ is nonempty because every $R_x$ is nonempty. [F1,F2,F7,F10,F14]
+
+1.2 Fix a bounded real Borel function $\varphi$ and a relation $R$ as in the statement. The bounded set $\{\varphi(x,y):(x,y)\in R\}$ is nonempty for every $x$, so its supremum $m(x)$ exists by [F8]. For every rational $q$, the set $\{x:m(x)>q\}$ equals $\operatorname{proj}_X(R\cap\varphi^{-1}((q,\infty)))$: a supremum exceeds $q$ exactly when some value exceeds $q$. The relation inside this projection is Borel by [F9], so [F2] makes every strict rational superlevel set completion-measurable. By the completion description [F3], AC [F10] chooses Borel representatives $B_q$ and Borel null sets $N_q$ for all rational $q$. [F2,F3,F8,F9,F10]
+
+2.1 Fix a countable dense sequence $(a_i)_{i\in\mathbb N}$ in $Z$, an enumeration $(r_j)_{j\in\mathbb N}$ of the positive rationals, and a bijection $\beta:\mathbb N^2\to\mathbb N$ using [F5]. Set $U_\varnothing=Z$. For every finite word $s$ of length $n$ and every pair $(i,j)$, define $U_{s^\frown\beta(i,j)}=B(a_i,r_j)$ if the closed ball $\overline B(a_i,r_j)$ is contained in $U_s$ and $r_j<2^{-(n+2)}$, and define it to be empty otherwise. Recursion [F6] defines this family. The children cover each $U_s$: for $z\in U_s$, choose $\varepsilon>0$ with $B(z,\varepsilon)\subseteq U_s$, then choose $a_i$ close enough to $z$ and a positive rational $r_j$ with $d(a_i,z)<r_j<\min\{\varepsilon-d(a_i,z),2^{-(n+2)}\}$ by [F5]. The triangle inequality puts $\overline B(a_i,r_j)$ inside $U_s$ and $z$ inside the child ball. Each child lies in its parent and has diameter at most $2r_j<2^{-(n+1)}$. [F5,F6,F7,step 1.1]
+
+2.2 Remove the Borel null union $N_\varphi:=\bigcup_{q\in\mathbb Q}N_q$ and put $X_\varphi=X\setminus N_\varphi$. On $X_\varphi$, $x\in B_q$ iff $m(x)>q$. Define $\widetilde m(x):=\sup\{q\in\mathbb Q:x\in B_q\}$ on $X_\varphi$ and $\widetilde m(x):=0$ off $X_\varphi$. The rational density [F5,F8] gives $\widetilde m=m$ on $X_\varphi$. For each real $a$, $\{\widetilde m>a\}$ is the union of $X_\varphi\cap B_q$ over rationals $q>a$, together with $X\setminus X_\varphi$ when $0>a$; hence it is Borel. Also $\{\widetilde m<b\}=\bigcup_{q\in\mathbb Q,\,q<b}(X\setminus\{\widetilde m>q\})$ is Borel. Rational open intervals form a basis by [F5], so $\widetilde m$ is Borel by [F4,F9]. [F4,F5,F8,F9,F12,step 1.2]
+
+3.1 For each finite word $s$, let $P_s:=\operatorname{proj}_X(F\cap(X\times U_s))$. The set inside the projection is Borel, so [F2] makes $P_s$ completion-measurable and gives a Borel representative outside a Borel null set. Since $F$ projects onto $R$ and every section $R_x$ is nonempty, $P_\varnothing=X$. The child-cover property in step 2.1 gives $P_s=\bigcup_kP_{s^\frown k}$. [F2,F4,F10,step 2.1]
+
+4.1 Define completion-measurable prefix cells by $C_\varnothing=X$ and $C_{s^\frown k}:=C_s\cap P_{s^\frown k}\setminus\bigcup_{j<k}P_{s^\frown j}$; these select the least child containing $x$ and partition each parent cell, using the least-element property in [F2]. By [F3], the completion domain is a sigma-algebra, so every $C_s$ is completion-measurable. AC [F10] chooses a Borel set $B_s$ and Borel null set $N_s$ with $C_s\triangle B_s\subseteq N_s$ for each finite word $s$. The finite-sequence codes [F13] index these exceptional sets by naturals, using the empty set for unused codes; the countable-union fact [F12] makes $N:=\bigcup_sN_s$ Borel and null. Put $X_0:=X\setminus N$. On $X_0$, membership in every prefix cell agrees with membership in its Borel representative, and at each length those representatives partition $X_0$. [F2,F3,F10,F12,F13,step 3.1]
+
+5.1 For $x\in X_0$ and $n\ge1$, let $s_n(x)$ be its unique selected word of length $n$ and let $c_n(x)$ be the centre of $U_{s_n(x)}$. Each $c_n$ is Borel because it is constant on the countable Borel partition $\{B_s\cap X_0:|s|=n\}$: preimages of Borel sets are unions of the corresponding Borel cells by [F4,F9,F13]. The selected balls are nested and their diameters tend to zero, so $(c_n(x))_{n\ge1}$ is Cauchy; let $z(x)\in Z$ be its limit by completeness [F7]. Since $x\in P_{s_n(x)}$, each $F_x\cap U_{s_n(x)}$ is nonempty. AC [F10] chooses a point $w_n$ in each such set for this fixed $x$; then $d(w_n,c_n(x))\le 2r_{s_n(x)}\to0$, so $w_n\to z(x)$. The fibre $F_x$ is closed: if $z\notin F_x$, the open complement of $F$ contains a basic product rectangle $U\times V$ around $(x,z)$, and $V$ is disjoint from $F_x$. Thus $z(x)\in F_x$. [F4,F7,F9,F10,F13,F14,step 4.1]
+
+6.1 The limit map $z:X_0\to Z$ is Borel. For a fixed nonempty closed $C\subseteq Z$ and $m\ge1$, put $V_m:=\bigcup_{y\in C}B(y,1/m)$ and $E_{n,m}:=\{x\in X_0:c_n(x)\in V_m\}$ for $n\ge1$. The set $V_m$ is open; each $E_{n,m}$ is Borel because $c_n$ is constant on a countable Borel partition. Since $c_n(x)\to z(x)$ and $C$ is closed, $z(x)\in C$ exactly when, for every $m$, $c_n(x)\in V_m$ eventually: if $z(x)\notin C$, choose $\varepsilon>0$ with $B(z(x),\varepsilon)\cap C=\varnothing$, then choose $m$ with $1/m<\varepsilon/2$ and take $n$ large enough that $d(c_n(x),z(x))<\varepsilon/2$ and $c_n(x)\in V_m$. Membership in $V_m$ gives $y\in C$ with $d(c_n(x),y)<1/m$, so the triangle inequality puts $y$ inside $B(z(x),\varepsilon)$, a contradiction. Thus $z^{-1}(C)=\bigcap_{m\ge1}\bigcup_{N\ge1}\bigcap_{n\ge N}E_{n,m}$ is Borel. The empty closed set has empty preimage, and closed-set preimages being Borel implies Borel measurability by [F4,F9]. Project $z(x)$ to $Y$ and undo the chosen Polish presentation. The projection is continuous, hence Borel by [F9], so this gives a Borel selector $s:X_0\to Y$ and $(x,s(x))\in R$ by the defining property of $F$. [F1,F4,F7,F9,step 5.1]
+
+7.1 For countably many relations and bounded Borel functions on the same base, repeat steps 4.1–6.1 for each relation and step 2.2 for each scalar function, then remove the union of their Borel null exceptions. The indices are countable: finite prefixes have the codes in [F13], rational levels are countable by [F5], and pairs of natural indices are coded by [F5]. AC [F10] supplies the countable family of representatives; the union is Borel and null by [F12]. Restrict each selector and each Borel version to this common Borel conull set. [F4,F5,F10,F12,F13,step 2.2,step 4.1,step 5.1,step 6.1] ∎
+
+## Source qualifications
+
+Bekka–de la Harpe, Appendix A.C, defines a standard measure as a sigma-finite measure with a conull Borel subset that is standard Borel, then states Theorem A.C.6 for a Borel relation with everywhere-surjective projection and concludes a Borel selector on a conull Borel subset. The passage explicitly refers its proof to Mackey–76, Theorem Z.2, Chapter 2, §2.2. The proof here does not attribute a proof to Bekka–de la Harpe: it uses the separately authored local closed-witness/projection result, constructs nested Borel-ball choices after Borelizing their completion-measurable prefix cells, and proves the scalar Borel-version clause directly.

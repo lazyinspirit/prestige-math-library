@@ -1,0 +1,1781 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-multiplicity-of-a-type-i-factor-representation-is-well-defined",
+    "lem-central-diagonal-disintegration-has-factor-fibers",
+    "lem-type-i-factor-fields-admit-measurable-irreducible-multiplicity-splittings",
+    "lem-central-spectral-models-transport-and-intertwiners-disintegrate",
+    "lem-separable-group-c-star-representations-disintegrate-over-a-commuting-diagonal-algebra",
+    "lem-measurable-von-neumann-algebra-fields-have-measurable-commutants-and-centers",
+    "lem-two-common-diagonalizations-are-related-by-a-base-isomorphism-and-a-measurable-field-of-unitaries",
+    "thm-essential-uniqueness-of-central-decomposition"
+  ],
+  "contracts": {
+    "lem-multiplicity-of-a-type-i-factor-representation-is-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-separable-type-i-factors-are-multiples-of-irreducible-representations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be a concrete type-I factor on a nonzero separable complex Hilbert space $H$. There is a finite or countably infinite exhaustive orthogonal family $(p_i)$ of minimal projections in $M$, equivalent to a fixed $p=p_{i_0}$, and partial isometries $t_i$ in $M$ with $t_i^*t_i=p$ and $t_it_i^*=p_i$. Put $E=\\ell^2(I)$, $L=pH$. The unitary $W:E\\otimes L\\to H$, $W(\\delta_i\\otimes\\eta)=t_i\\eta$, satisfies $W^*MW=B(E)\\otimes I_L$ and $W^*M'W=I_E\\otimes B(L)$. If $\\pi$ is a strongly continuous unitary representation of a topological group $G$ on $H$ and $\\pi(G)''=M$, there is a strongly continuous irreducible representation $\\sigma$ on $E$ with $W^*\\pi(g)W=\\sigma(g)\\otimes I_L$, so $\\pi$ is $\\dim(L)$ copies of $\\sigma$. Equivalently $N=M'$ is type I; a minimal $q$ in $N$ has invariant irreducible carrier $K=qH$, and an exhaustive orthogonal family $(q_i)$ of equivalent minimal projections in $N$ with $u_i^*u_i=q_i$ and $u_iu_i^*=q$ gives a unitary $V:H\\to K^{\\oplus m}$, $V\\xi=(u_i\\xi)$, $m=\\text{number of }q_i$, intertwining $\\pi$ with $m$ copies of $\\pi|K$. The space $pH$ for a minimal $p$ in $M$ is the multiplicity space, not the irreducible carrier. In the direct-sum realization used here, the operators $\\rho(A)(\\eta_i)_{i\\in I}:=(\\sum_{j\\in I}A_{ij}\\eta_j)_{i\\in I}$ for $A=(A_{ij})\\in B(E)$ constitute the algebra written $B(E)\\otimes I_L$, and $(I\\star S)(\\eta_i)_{i\\in I}:=(S\\eta_i)_{i\\in I}$ for $S\\in B(L)$ constitutes $I_E\\otimes B(L)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-type-i-factor-representation-and-type-i-group",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a nonzero separable complex Hilbert space and let $M\\subseteq\\mathcal B(H)$ be a concrete factor von Neumann algebra ([[def-factor-representation-and-primary-representation]]). A nonzero projection $p\\in M$ is **minimal**, or **abelian**, when $pMp=\\mathbb Cp$. The factor $M$ is of **type I** when it contains a nonzero minimal projection. A strongly continuous unitary representation $\\pi$ of a topological group $G$ on a nonzero separable Hilbert space is a **type I factor representation** when its generated von Neumann algebra $\\pi(G)''$ is a factor of type I; and a factor representation is of type I when it is a multiple of an irreducible representation (equivalently, by [[lem-separable-type-i-factors-are-multiples-of-irreducible-representations]], when $\\pi(G)''$ contains a nonzero minimal projection). The group $G$ is **type I** when every factor representation of $G$ on a separable Hilbert space is of type I. The two descriptions of a type I factor representation agree: for a strongly continuous unitary representation $\\pi$ on nonzero separable $H$ with $M=\\pi(G)''$ a factor, $M$ contains a nonzero minimal projection if and only if there is an irreducible representation $\\sigma$ of $G$ and $m\\in\\{1,2,\\dots,\\infty\\}$ with $\\pi\\cong\\sigma^{\\oplus m}$ ([[lem-separable-type-i-factors-are-multiples-of-irreducible-representations]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-schurs-lemma-for-unitary-representations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC). Let $\\pi$ on a nonzero complex Hilbert space\n$H$ and $\\rho$ on a nonzero complex Hilbert space $K$ be irreducible strongly\ncontinuous unitary representations of the same topological group $G$. Every\nbounded self-intertwiner of $\\pi$ is a scalar multiple of $I_H$. If a nonzero\nbounded intertwiner $T:H\\to K$ satisfies $T\\pi(g)=\\rho(g)T$ for every $g\\in G$,\nthen $\\pi$ and $\\rho$ are unitarily equivalent. Consequently, inequivalent\nirreducible representations have no nonzero bounded intertwiner.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-direct-sum-of-unitary-representations",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $I$ be a set and let $(H_i)_{i\\in I}$ be a family of complex Hilbert spaces ([[def-hilbert-space]]). A family $v=(v_i)_{i\\in I}$ with $v_i\\in H_i$ for every $i$ is **square summable** when\n$$\\sum_{i\\in I}\\|v_i\\|^2<+\\infty$$\nin the finite-subset-supremum convention of [[def-square-summable-family-on-an-arbitrary-index-set]]: the sum is the supremum of the finite subsums $\\sum_{i\\in F}\\|v_i\\|^2$ over finite $F\\subseteq I$. The **Hilbert direct sum** $\\widehat\\bigoplus_{i\\in I}H_i$ is the set of all square-summable families, equipped with componentwise addition and scalar multiplication and with the pairing\n$$\\langle v,w\\rangle:=\\sum_{i\\in I}\\langle v_i,w_i\\rangle ,$$\nthe scalar family on the right being summed as a finite-subset net in the sense of [[def-square-summable-family-on-an-arbitrary-index-set]]. By [[thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set]] and [[lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums]] the resulting space is a complex Hilbert space whose norm is $\\|v\\|=\\bigl(\\sum_{i\\in I}\\|v_i\\|^2\\bigr)^{1/2}$, and the canonical maps $H_j\\to\\widehat\\bigoplus_iH_i$ extending a vector by zero are linear isometries ([[def-linear-isometry-and-orthogonal-or-unitary-operator]]) with pairwise orthogonal closed images ([[def-orthogonality-and-orthogonal-complement]]) whose closed linear span is the whole space.\n\n**The pairing is well defined.** For square-summable $v,w$ and every finite $F\\subseteq I$ the finite Cauchy\u2013Schwarz inequality applied to the scalar lists $(\\|v_i\\|)_{i\\in F}$, $(\\|w_i\\|)_{i\\in F}$ gives\n$$\\sum_{i\\in F}|\\langle v_i,w_i\\rangle|\\le\\sum_{i\\in F}\\|v_i\\|\\,\\|w_i\\|\\le\\Bigl(\\sum_{i\\in F}\\|v_i\\|^2\\Bigr)^{1/2}\\Bigl(\\sum_{i\\in F}\\|w_i\\|^2\\Bigr)^{1/2}\\le\\|v\\|\\,\\|w\\| ,$$\nso the family $(\\langle v_i,w_i\\rangle)_{i\\in I}$ is absolutely summable and its finite-subset net converges to a scalar $\\langle v,w\\rangle$ with $|\\langle v,w\\rangle|\\le\\|v\\|\\,\\|w\\|$; this is the scalar summation theory of [[def-square-summable-family-on-an-arbitrary-index-set]]. Componentwise sesquilinearity, conjugate symmetry and positive definiteness pass to the finite-subset net by linearity of the scalar sum, so the pairing is an inner product. For completeness let $(v^{(n)})_{n\\ge1}$ be a Cauchy sequence and let $K$ be a bound for it; for each $i$ the components satisfy $\\|v^{(n)}_i-v^{(m)}_i\\|\\le\\|v^{(n)}-v^{(m)}\\|$, so they converge to some $v_i\\in H_i$, and for every finite $F$ the limit relation $\\sum_{i\\in F}\\|v_i\\|^2=\\lim_n\\sum_{i\\in F}\\|v^{(n)}_i\\|^2\\le K^2$ shows that $v=(v_i)$ is square summable; then $\\|v^{(n)}-v\\|^2=\\sup_F\\lim_m\\sum_{i\\in F}\\|v^{(n)}_i-v^{(m)}_i\\|^2$ is eventually below any prescribed $\\varepsilon^2$, so $v^{(n)}\\to v$ and $\\widehat\\bigoplus_iH_i$ is complete. Both arguments are choice-free beyond the completeness of the factors.\n\n**Strongly continuous unitary representations.** Suppose now that $K$ is a topological group and that each $H_i$ carries a strongly continuous unitary representation $\\pi_i$ of $K$ ([[def-strongly-continuous-unitary-representation]]). The **Hilbert direct sum of the representations**, still written $\\widehat\\bigoplus_i\\pi_i$, acts componentwise,\n$$\\Bigl(\\widehat\\bigoplus_i\\pi_i\\Bigr)(k)\\,(v_i)_{i\\in I}:=(\\pi_i(k)v_i)_{i\\in I},$$\nwhich is again a square-summable family because every $\\pi_i(k)$ is isometric, and which is a group homomorphism into the unitary group of the sum by componentwise computation. To see strong continuity let $v\\in\\widehat\\bigoplus H_i$ and $\\varepsilon>0$; choose a finite $F\\subseteq I$ with $\\sum_{i\\notin F}\\|v_i\\|^2<\\varepsilon^2/16$, possible by the tail-control property of the finite-subset-supremum convention, and, if $F=\\varnothing$, take $U=K$, since the tail estimate alone is less than $\\varepsilon/2$. Otherwise, for each $i\\in F$ choose a neighbourhood $U_i$ of the identity with $\\|\\pi_i(k)v_i-v_i\\|<\\varepsilon/(2|F|)$ for $k\\in U_i$, which is possible by the finitely many strong continuity assumptions; then $U=\\bigcap_{i\\in F}U_i$ is an identity neighbourhood and, using unitarity of each $\\pi_i(k)$ to bound the tail of $\\pi(k)v-v$ by twice the square root of the tail of $v$,\n$$\\Bigl\\|\\Bigl(\\widehat\\bigoplus_i\\pi_i\\Bigr)(k)v-v\\Bigr\\|\\le\\sum_{i\\in F}\\|\\pi_i(k)v_i-v_i\\|+2\\Bigl(\\sum_{i\\notin F}\\|v_i\\|^2\\Bigr)^{1/2}<\\varepsilon$$\nfor every $k\\in U$. Hence $\\widehat\\bigoplus_i\\pi_i$ is a strongly continuous unitary representation of $K$.\n\n**Direct sums of subrepresentations.** A strongly continuous unitary representation $\\pi$ of $K$ on a complex Hilbert space $H$ is the **Hilbert direct sum of a family of subrepresentations** $(H_i,\\pi_i)_{i\\in I}$ when the $H_i$ are pairwise orthogonal closed $\\pi(K)$-invariant subspaces of $H$ whose closed linear span is $H$ and $\\pi|_{H_i}=\\pi_i$ for every $i$. In that case the canonical map\n$$\\widehat\\bigoplus_{i\\in I}H_i\\longrightarrow H,\\qquad (v_i)_{i\\in I}\\mapsto\\sum_{i\\in I}v_i ,$$\nis well defined by [[lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums]], which makes the finite-subset net of the partial sums converge with squared norm $\\sum_i\\|v_i\\|^2$; it is a linear isometry by orthogonality, its image is closed because $\\widehat\\bigoplus_iH_i$ is complete, and the image contains every $H_i$ and hence has closed linear span $H$, so the map is a unitary intertwiner. Conversely, if this canonical map is a unitary intertwiner for some pairwise orthogonal closed subspaces $H_i$ with closed linear span $H$ that are $\\pi(K)$-invariant, then $\\pi$ is the Hilbert direct sum of the subrepresentations $(H_i,\\pi|_{H_i})$. The Axiom of Choice ([[def-axiom-of-choice]]) is declared for this development because the decomposition theorems select representatives in unitary-equivalence classes and apply the cited Hilbert-space suppliers; the construction of the direct sum and the verifications above use no choice beyond their inputs.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Let $T:K^{\\oplus m}\\to(K')^{\\oplus m'}$ be a unitary equivalence. Its coordinate blocks $T_{ji}:K\\to K'$ intertwine $\\sigma$ and $\\sigma'$. Some block is nonzero: otherwise $T$ vanishes on every coordinate inclusion and hence on the dense finite-coordinate vectors, contradicting unitarity on the nonzero domain. Fix such a block $A$. By",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Apply $S^{-1}$ in each target coordinate to obtain a unitary $R:K^{\\oplus m}\\to K^{\\oplus m'}$ intertwining the two amplifications of $\\sigma$. Every block of $R$ is $v_{ji}I_K$ by",
+          "inputs": [
+            "F2",
+            "F1",
+            "F3",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the type-I spatial and direct-sum suppliers; locally only a nonzero block and one unit vector are chosen. Nonzero carriers and positive multiplicities are essential: a zero amplification would not determine an irreducible class. Finite and countably infinite multiplicities are both covered."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the type-I spatial and direct-sum suppliers; locally only a nonzero block and one unit vector are chosen. Nonzero carriers and positive multiplicities are essential: a zero amplification would not determine an irreducible class. Finite and countably infinite multiplicities are both covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the type-I spatial and direct-sum suppliers; locally only a nonzero block and one unit vector are chosen. Nonzero carriers and positive multiplicities are essential: a zero amplification would not determine an irreducible class. Finite and countably infinite multiplicities are both covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the type-I spatial and direct-sum suppliers; locally only a nonzero block and one unit vector are chosen. Nonzero carriers and positive multiplicities are essential: a zero amplification would not determine an irreducible class. Finite and countably infinite multiplicities are both covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the type-I spatial and direct-sum suppliers; locally only a nonzero block and one unit vector are chosen. Nonzero carriers and positive multiplicities are essential: a zero amplification would not determine an irreducible class. Finite and countably infinite multiplicities are both covered."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    },
+    "lem-central-diagonal-disintegration-has-factor-fibers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-separable-group-c-star-representations-disintegrate-over-a-commuting-diagonal-algebra",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a second-countable locally compact Hausdorff group, $(\\pi,H)$ a separable strongly continuous unitary representation, $A\\subseteq\\pi(G)'$ an abelian concrete von Neumann algebra, $(X,\\mathcal B,\\mu)$ a sigma-finite standard-Borel space with a measurable Hilbert field $(H_x,e_n(x))$ and direct integral $\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$, and $U:H\\to\\mathcal H$ a unitary operator with $UAU^{-1}=\\mathcal D$, the algebra of diagonalisable operators. Then there exist a measurable field $(\\pi_x)_{x\\in X}$ of strongly continuous unitary representations of $G$ on the fibres, defined for every $x$ by an arbitrary choice on a null set, such that for every $g\\in G$ $$U\\pi(g)U^{-1}=\\int_X^\\oplus\\pi_x(g)\\,d\\mu(x),$$ and the field $x\\mapsto\\pi_x(G)''$ of von Neumann algebras generated by the fibres is a measurable field in the sense of [[def-measurable-field-of-von-neumann-algebras]]; moreover $\\pi_x$ is nondegenerate for $\\mu$-almost every $x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-measurable-von-neumann-algebra-fields-have-measurable-commutants-and-centers",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(M_x)_{x\\in X}$ be a measurable field of unital von Neumann algebras on a measurable Hilbert field $(H_x)$ with countable fundamental family over a sigma-finite standard-Borel measure space $(X,\\mathcal B,\\mu)$, all fibres separable. Write $\\mathcal M:=\\int_X^\\oplus M_x\\,d\\mu(x)$ for the direct integral. Then: (1) on a common conull Borel stratum there are WOT-dense countable measurable sections of the unit balls of $M_x$, $M_x'$ and $Z(M_x)$; in particular the commutant field $x\\mapsto M_x'$ and the centre field $x\\mapsto Z(M_x)=M_x\\cap M_x'$ are measurable fields of von Neumann algebras; (2) $\\mathcal M$ is a concrete von Neumann algebra on $\\int_X^\\oplus H_x\\,d\\mu(x)$; (3) $\\mathcal M'=\\int_X^\\oplus M_x'\\,d\\mu(x)$; (4) $Z(\\mathcal M)=\\int_X^\\oplus Z(M_x)\\,d\\mu(x)$; and if two measurable fields of unital von Neumann algebras have the same direct integral, then they coincide almost everywhere.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-field-of-von-neumann-algebras",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space ([[def-standard-borel-space]], [[def-finite-sigma-finite-and-semifinite-measures]]) and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with a countable fundamental family ([[def-measurable-hilbert-field-from-a-countable-fundamental-family]]). Write $\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ for its direct-integral Hilbert space ([[def-direct-integral-of-a-measurable-hilbert-field]], [[thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces]]). For every $x$, let $M_x\\subseteq\\mathcal B(H_x)$ be a unital concrete von Neumann algebra ([[def-von-neumann-algebra-and-commutant]]). The field $x\\mapsto M_x$ is **measurable** if there is a sequence $(T^{(k)})_{k\\ge1}$ of weakly measurable operator fields ([[def-measurable-and-decomposable-operator-fields]]) such that\n\n$$M_x=W^*\\bigl(T_x^{(1)},T_x^{(2)},\\ldots\\bigr)$$\n\nfor $\\mu$-almost every $x$, where $W^*$ denotes the weak-operator closure of the unital $*$-algebra generated by the listed operators.\n\nFor a measurable field $x\\mapsto M_x$, define its **direct integral** to be the set\n\n$$\\int_X^\\oplus M_x\\,d\\mu(x):=\\left\\{\\int_X^\\oplus T_x\\,d\\mu(x):\\ (T_x)_{x\\in X}\\text{ is weakly measurable and essentially bounded, and }T_x\\in M_x\\text{ for }\\mu\\text{-almost every }x\\right\\}\\subseteq\\mathcal B(\\mathcal H),$$\n\nwhere each induced operator is supplied by [[thm-measurable-essentially-bounded-operator-fields-act-decomposably]]. Define the **diagonal algebra** by\n\n$$\\mathcal D:=\\{M_f:f\\in L^\\infty(X,\\mu),\\ (M_f\\xi)(x)=f(x)\\xi(x)\\},$$\n\nusing the complex $L^\\infty$ convention of [[def-complex-lp-and-euclidean-test-function-conventions]]. Then\n\n$$\\mathcal D\\subseteq\\int_X^\\oplus M_x\\,d\\mu(x).$$\n\nThe fibres may be zero-dimensional: when $H_x=\\{0\\}$, unitality means $M_x=\\{0\\}$ and $I_{H_x}=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-double-commutant-theorem-for-concrete-von-neumann-algebras",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let $M\\subseteq\\mathcal B(H)$ be a unital $*$-subalgebra closed in the weak operator topology. Then $M''=M$, and $M$ is also closed in the strong operator topology. Consequently the concrete von Neumann algebras of [[def-von-neumann-algebra-and-commutant]] are exactly the unital $*$-subalgebras that are closed in either of these topologies. For an arbitrary set $\\mathcal S\\subseteq\\mathcal B(H)$ one has $W^*(\\mathcal S)''=W^*(\\mathcal S)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-multiplicity-model-for-separable-abelian-von-neumann-algebras",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mathcal A\\subseteq\\mathcal B(H)$ be an abelian concrete\nvon Neumann algebra on a nonzero separable complex Hilbert space $H$. There\nexist a bounded self-adjoint operator $S\\in\\mathcal A$ with\n$\\mathcal A=W^*(S)$, a nonempty compact set $K=\\sigma(S)\\subseteq\\mathbb R$,\na nonzero finite regular Borel measure $\\mu$ on $K$, and a Borel function\n$$m:K\\longrightarrow\\{1,2,3,\\ldots\\}\\cup\\{\\infty\\}$$\n(whose values are immaterial on a $\\mu$-null set) such that, for the measurable\nfield $H_t=\\mathbb C^{m(t)}$ when $m(t)<\\infty$ and $H_t=\\ell^2(\\mathbb N)$\nwhen $m(t)=\\infty$, there is a unitary\n$$U:H\\longrightarrow\\int_K^\\oplus H_t\\,d\\mu(t)$$\nwith\n$$USU^{-1}=M_t,\\qquad U\\mathcal A U^{-1}=\\{M_f:f\\in L^\\infty(K,\\mu)\\}.$$\nFor this fixed generator $S$, every such spectral model has the same measure\nclass on $K$ and the same multiplicity function $\\mu$-almost everywhere.\nChanging $S$ can change the spectral coordinate and is not part of the\nuniqueness assertion. Inner products are linear in their first variable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Since $\\mathcal D=Z(M)$, $\\mathcal D\\subseteq M\\subseteq\\mathcal D'$. Put $\\mathcal A=\\int_X^\\oplus M_x\\,d\\mu$. By",
+          "inputs": [
+            "F2",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Apply",
+          "inputs": [
+            "F2",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from disintegration, spectral and measurable-field suppliers and supplies a countable dense enumeration of G. Null or zero fibres contribute the zero algebra and may be discarded when interpreting the nonzero factor-representation convention. A zero total space has only the vacuous almost-everywhere claims. No everywhere selector or uncountable union of exceptional null sets is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from disintegration, spectral and measurable-field suppliers and supplies a countable dense enumeration of G. Null or zero fibres contribute the zero algebra and may be discarded when interpreting the nonzero factor-representation convention. A zero total space has only the vacuous almost-everywhere claims. No everywhere selector or uncountable union of exceptional null sets is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from disintegration, spectral and measurable-field suppliers and supplies a countable dense enumeration of G. Null or zero fibres contribute the zero algebra and may be discarded when interpreting the nonzero factor-representation convention. A zero total space has only the vacuous almost-everywhere claims. No everywhere selector or uncountable union of exceptional null sets is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from disintegration, spectral and measurable-field suppliers and supplies a countable dense enumeration of G. Null or zero fibres contribute the zero algebra and may be discarded when interpreting the nonzero factor-representation convention. A zero total space has only the vacuous almost-everywhere claims. No everywhere selector or uncountable union of exceptional null sets is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from disintegration, spectral and measurable-field suppliers and supplies a countable dense enumeration of G. Null or zero fibres contribute the zero algebra and may be discarded when interpreting the nonzero factor-representation convention. A zero total space has only the vacuous almost-everywhere claims. No everywhere selector or uncountable union of exceptional null sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    },
+    "lem-type-i-factor-fields-admit-measurable-irreducible-multiplicity-splittings": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-measurable-von-neumann-algebra-fields-have-measurable-commutants-and-centers",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(M_x)_{x\\in X}$ be a measurable field of unital von Neumann algebras on a measurable Hilbert field $(H_x)$ with countable fundamental family over a sigma-finite standard-Borel measure space $(X,\\mathcal B,\\mu)$, all fibres separable. Write $\\mathcal M:=\\int_X^\\oplus M_x\\,d\\mu(x)$ for the direct integral. Then: (1) on a common conull Borel stratum there are WOT-dense countable measurable sections of the unit balls of $M_x$, $M_x'$ and $Z(M_x)$; in particular the commutant field $x\\mapsto M_x'$ and the centre field $x\\mapsto Z(M_x)=M_x\\cap M_x'$ are measurable fields of von Neumann algebras; (2) $\\mathcal M$ is a concrete von Neumann algebra on $\\int_X^\\oplus H_x\\,d\\mu(x)$; (3) $\\mathcal M'=\\int_X^\\oplus M_x'\\,d\\mu(x)$; (4) $Z(\\mathcal M)=\\int_X^\\oplus Z(M_x)\\,d\\mu(x)$; and if two measurable fields of unital von Neumann algebras have the same direct integral, then they coincide almost everywhere.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-measurable-gram-schmidt-and-constant-field-trivializations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with countable fundamental family. Then: (1) there are measurable sections $f_n$ such that for every $x$ the nonzero $f_n(x)$ form a complete orthonormal system in $H_x$, and $x\\mapsto\\langle\\xi(x),f_n(x)\\rangle$ is Borel for every measurable section $\\xi$; (2) for each $p\\in\\{1,2,\\ldots\\}\\cup\\{\\infty\\}$, the dimension stratum $X_p:=\\{x:\\dim H_x=p\\}$ is Borel, and for every fixed separable Hilbert space $K_p$ of dimension $p$ there are unitaries $U_x:H_x\\to K_p$ on $X_p$ such that $\\xi$ is a measurable section on $X_p$ if and only if $x\\mapsto U_x\\xi(x)$ is a Borel map; explicitly, $U_x\\xi$ has coordinates $\\langle\\xi(x),f_n(x)\\rangle$ after deleting zero frame vectors; (3) weakly measurable operator fields have Borel transported matrix coefficients on each $X_p$, and uniformly bounded transported fields are Borel maps into their weak-operator-topology balls; (4) for every countable family of measurable sections $\\xi_k$, the pointwise closed spans $S_x:=\\overline{\\operatorname{span}}\\{\\xi_k(x):k\\ge1\\}$ form a measurable closed Hilbert subfield, and its direct integral is the closed linear span in $\\int_X^\\oplus H_x\\,d\\mu(x)$ of all square-integrable localizations $f\\mathbf1_E\\xi_k$, where $E=D_j\\cap\\{x:\\|\\xi_k(x)\\|\\le r\\}$, $(D_j)$ is any countable finite-measure cover of $X$, $r\\in\\mathbb R$ with $r\\ge1$, and $f$ is any bounded Borel scalar function supported in $E$. The zero-dimensional stratum is Borel as the complement of the positive and infinite-dimensional strata.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measurable-field-of-von-neumann-algebras",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space ([[def-standard-borel-space]], [[def-finite-sigma-finite-and-semifinite-measures]]) and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with a countable fundamental family ([[def-measurable-hilbert-field-from-a-countable-fundamental-family]]). Write $\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ for its direct-integral Hilbert space ([[def-direct-integral-of-a-measurable-hilbert-field]], [[thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces]]). For every $x$, let $M_x\\subseteq\\mathcal B(H_x)$ be a unital concrete von Neumann algebra ([[def-von-neumann-algebra-and-commutant]]). The field $x\\mapsto M_x$ is **measurable** if there is a sequence $(T^{(k)})_{k\\ge1}$ of weakly measurable operator fields ([[def-measurable-and-decomposable-operator-fields]]) such that\n\n$$M_x=W^*\\bigl(T_x^{(1)},T_x^{(2)},\\ldots\\bigr)$$\n\nfor $\\mu$-almost every $x$, where $W^*$ denotes the weak-operator closure of the unital $*$-algebra generated by the listed operators.\n\nFor a measurable field $x\\mapsto M_x$, define its **direct integral** to be the set\n\n$$\\int_X^\\oplus M_x\\,d\\mu(x):=\\left\\{\\int_X^\\oplus T_x\\,d\\mu(x):\\ (T_x)_{x\\in X}\\text{ is weakly measurable and essentially bounded, and }T_x\\in M_x\\text{ for }\\mu\\text{-almost every }x\\right\\}\\subseteq\\mathcal B(\\mathcal H),$$\n\nwhere each induced operator is supplied by [[thm-measurable-essentially-bounded-operator-fields-act-decomposably]]. Define the **diagonal algebra** by\n\n$$\\mathcal D:=\\{M_f:f\\in L^\\infty(X,\\mu),\\ (M_f\\xi)(x)=f(x)\\xi(x)\\},$$\n\nusing the complex $L^\\infty$ convention of [[def-complex-lp-and-euclidean-test-function-conventions]]. Then\n\n$$\\mathcal D\\subseteq\\int_X^\\oplus M_x\\,d\\mu(x).$$\n\nThe fibres may be zero-dimensional: when $H_x=\\{0\\}$, unitality means $M_x=\\{0\\}$ and $I_{H_x}=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-borel-relations-admit-conull-borel-uniformizations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space and let $Y$ be a standard Borel space. If $R\\subseteq X\\times Y$ is Borel and every vertical section $R_x:=\\{y\\in Y:(x,y)\\in R\\}$ is nonempty, then there is a Borel conull set $X_0\\subseteq X$ and a Borel map $s:X_0\\to Y$ such that $(x,s(x))\\in R$ for every $x\\in X_0$. For any such $R$ and any bounded real-valued Borel function $\\varphi:X\\times Y\\to\\mathbb R$, define\n$$m_{R,\\varphi}(x):=\\sup\\{\\varphi(x,y):y\\in R_x\\}.$$\nFor every rational $q$, the strict superlevel set $\\{x:m_{R,\\varphi}(x)>q\\}$ is measurable in the completion of $\\mu$, and there are a Borel function $\\widetilde m:X\\to\\mathbb R$ and a Borel null set $N$ such that $\\widetilde m=m_{R,\\varphi}$ on $X\\setminus N$. For any countable family of relations and scalar functions of these forms on the same measured base, the selectors and Borel versions may be restricted to one common Borel conull subset of $X$. A selector on every point of the original $X$ is not asserted.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-separable-type-i-factors-are-multiples-of-irreducible-representations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be a concrete type-I factor on a nonzero separable complex Hilbert space $H$. There is a finite or countably infinite exhaustive orthogonal family $(p_i)$ of minimal projections in $M$, equivalent to a fixed $p=p_{i_0}$, and partial isometries $t_i$ in $M$ with $t_i^*t_i=p$ and $t_it_i^*=p_i$. Put $E=\\ell^2(I)$, $L=pH$. The unitary $W:E\\otimes L\\to H$, $W(\\delta_i\\otimes\\eta)=t_i\\eta$, satisfies $W^*MW=B(E)\\otimes I_L$ and $W^*M'W=I_E\\otimes B(L)$. If $\\pi$ is a strongly continuous unitary representation of a topological group $G$ on $H$ and $\\pi(G)''=M$, there is a strongly continuous irreducible representation $\\sigma$ on $E$ with $W^*\\pi(g)W=\\sigma(g)\\otimes I_L$, so $\\pi$ is $\\dim(L)$ copies of $\\sigma$. Equivalently $N=M'$ is type I; a minimal $q$ in $N$ has invariant irreducible carrier $K=qH$, and an exhaustive orthogonal family $(q_i)$ of equivalent minimal projections in $N$ with $u_i^*u_i=q_i$ and $u_iu_i^*=q$ gives a unitary $V:H\\to K^{\\oplus m}$, $V\\xi=(u_i\\xi)$, $m=\\text{number of }q_i$, intertwining $\\pi$ with $m$ copies of $\\pi|K$. The space $pH$ for a minimal $p$ in $M$ is the multiplicity space, not the irreducible carrier. In the direct-sum realization used here, the operators $\\rho(A)(\\eta_i)_{i\\in I}:=(\\sum_{j\\in I}A_{ij}\\eta_j)_{i\\in I}$ for $A=(A_{ij})\\in B(E)$ constitute the algebra written $B(E)\\otimes I_L$, and $(I\\star S)(\\eta_i)_{i\\in I}:=(S\\eta_i)_{i\\in I}$ for $S\\in B(L)$ constitutes $I_E\\otimes B(L)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-multiplicity-of-a-type-i-factor-representation-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a topological group, let $\\sigma,\\sigma'$ be irreducible strongly continuous unitary representations on nonzero separable Hilbert spaces $K,K'$, and let $m,m'\\in\\{1,2,\\dots,\\infty\\}$. If $\\sigma^{\\oplus m}\\cong(\\sigma')^{\\oplus m'}$, then $\\sigma\\cong\\sigma'$ and $m=m'$. Consequently, if $\\pi$ is a factor representation of $G$ whose generated von Neumann algebra is a type I factor, then the irreducible representation $\\sigma$ and the multiplicity $m$ in any decomposition $\\pi\\cong\\sigma^{\\oplus m}$ are determined up to unitary equivalence by $\\pi$ alone.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Discard the initial Borel null exceptions and trivialize on the countably many positive-dimension strata by",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The relation defining nonzero minimal $q\\in N_x$ is Borel: impose $q=q^*=q^2$, $q\\ne0$, commutation with the countable generators of $M_x$, and for every $j$ impose $q a_j(x)q=\\varphi_x(q a_j(x)q)q/\\varphi_x(q)$. These are countably many coefficient equations using the Borel operations of step 1.1. For fixed $q$, compression is WOT-continuous and the scalar functional is WOT-continuous on bounded sets; density of the $a_j$ therefore makes these equations equivalent to $qN_xq=\\mathbb Cq$. They characterize minimality. For any Borel residual projection $r(x)\\in N_x$, add $q\\le r(x)$. If $r\\ne0$,",
+          "inputs": [
+            "1.1",
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Set $r_0=I$. Inductively, on $\\{r_{n-1}\\ne0\\}$ let $s_n(x)$ be the supremum of $\\varphi_x(q)$ over the minimal projections in step 2.1 below $r_{n-1}$. The functional is bounded real on projections, so",
+          "inputs": [
+            "2.1",
+            "F2",
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Let $K_x=q_1(x)H_x$, with fundamental sections $q_1f_k$;",
+          "inputs": [
+            "F1",
+            "F3",
+            "1.1",
+            "F2",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Define $V_x\\xi=(u_n(x)\\xi)_{n\\le m(x)}$ and $\\sigma_x(g)=\\pi_x(g)|K_x$. Then $\\sum_n\\|u_n\\xi\\|^2=\\sum_n\\|q_n\\xi\\|^2=\\|\\xi\\|^2$, and $u_i u_j^*=\\delta_{ij}q_1$, so the inverse is the norm-convergent series $V_x^{-1}(\\eta_n)=\\sum_nu_n^*\\eta_n$. This proves unitarity including the infinite case. Fundamental coefficients and pointwise norm limits make both fields measurable. Each $u_n$ belongs to the actual commutant $\\pi_x(G)'$, so the amplification identity holds for every $g$ at each retained $x$. Restriction preserves strong continuity, and",
+          "inputs": [
+            "F3",
+            "F1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the spatial, Gram\u2013Schmidt and conull uniformization suppliers; the extra selections are countably many Borel versions, near-supremum projections and partial isometries. Every selection is conull rather than everywhere on the original base. Zero fibres are excluded by hypothesis; zero residuals are handled by q_n=u_n=0. Finite multiplicity terminates, while infinite multiplicity uses norm-convergent square-summable series. The empty or null base makes all claims vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the spatial, Gram\u2013Schmidt and conull uniformization suppliers; the extra selections are countably many Borel versions, near-supremum projections and partial isometries. Every selection is conull rather than everywhere on the original base. Zero fibres are excluded by hypothesis; zero residuals are handled by q_n=u_n=0. Finite multiplicity terminates, while infinite multiplicity uses norm-convergent square-summable series. The empty or null base makes all claims vacuous."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the spatial, Gram\u2013Schmidt and conull uniformization suppliers; the extra selections are countably many Borel versions, near-supremum projections and partial isometries. Every selection is conull rather than everywhere on the original base. Zero fibres are excluded by hypothesis; zero residuals are handled by q_n=u_n=0. Finite multiplicity terminates, while infinite multiplicity uses norm-convergent square-summable series. The empty or null base makes all claims vacuous."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the spatial, Gram\u2013Schmidt and conull uniformization suppliers; the extra selections are countably many Borel versions, near-supremum projections and partial isometries. Every selection is conull rather than everywhere on the original base. Zero fibres are excluded by hypothesis; zero residuals are handled by q_n=u_n=0. Finite multiplicity terminates, while infinite multiplicity uses norm-convergent square-summable series. The empty or null base makes all claims vacuous."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from the spatial, Gram\u2013Schmidt and conull uniformization suppliers; the extra selections are countably many Borel versions, near-supremum projections and partial isometries. Every selection is conull rather than everywhere on the original base. Zero fibres are excluded by hypothesis; zero residuals are handled by q_n=u_n=0. Finite multiplicity terminates, while infinite multiplicity uses norm-convergent square-summable series. The empty or null base makes all claims vacuous."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    },
+    "lem-central-spectral-models-transport-and-intertwiners-disintegrate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-central-decomposition-into-factor-representations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a second-countable locally compact Hausdorff group and let $(\\pi,H)$ be a strongly continuous unitary representation of $G$ on a separable Hilbert space $H\\neq\\{0\\}$. Then there exist a sigma-finite standard-Borel measure space $(X,\\mathcal B,\\mu)$, a measurable Hilbert field $(H_x,e_n(x))$ with $H_x\\neq\\{0\\}$ for $\\mu$-almost every $x$, a measurable field $(\\pi_x)$ of strongly continuous unitary representations of $G$ on the fibres, with $\\pi_x$ a factor representation for almost every $x$, and a unitary $$U:H\\longrightarrow\\int_X^\\oplus H_x\\,d\\mu(x)$$ such that (1) $U\\pi(g)U^{-1}=\\int_X^\\oplus\\pi_x(g)\\,d\\mu(x)$ for every $g\\in G$; (2) $UZ(\\pi(G)'')U^{-1}=\\mathcal D$, the algebra of diagonalisable operators; (3) $U\\pi(G)''U^{-1}=\\int_X^\\oplus\\pi_x(G)''\\,d\\mu(x)$ and $U\\pi(G)'U^{-1}=\\int_X^\\oplus\\pi_x(G)'\\,d\\mu(x)$. Such a decomposition is called a **central decomposition** of $\\pi$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-two-common-diagonalizations-are-related-by-a-base-isomorphism-and-a-measurable-field-of-unitaries",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(X,\\mathcal B_X,\\mu)$ and $(Y,\\mathcal B_Y,\\nu)$ be sigma-finite standard-Borel measure spaces, let $(H_x)$ and $(K_y)$ be measurable complex Hilbert fields with countable fundamental families and all fibres nonzero, and put\n$$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x),\\qquad \\mathcal K=\\int_Y^\\oplus K_y\\,d\\nu(y).$$\nLet $\\mathcal D_X$ and $\\mathcal D_Y$ be the respective algebras of scalar multiplication operators. If a unitary $W:\\mathcal H\\to\\mathcal K$ satisfies $W\\mathcal D_XW^{-1}=\\mathcal D_Y$, then there are conull Borel sets $X_0\\subseteq X$, $Y_0\\subseteq Y$, a bimeasurable bijection $c:X_0\\to Y_0$, and a measurable field of unitaries $u_x:H_x\\to K_{c(x)}$ such that $\\lambda:=c_*(\\mu|_{X_0})$ is equivalent to $\\nu|_{Y_0}$. If $r=d\\lambda/d(\\nu|_{Y_0})$ and $J:\\int_{Y_0}^\\oplus K_y\\,d\\lambda(y)\\to\\int_{Y_0}^\\oplus K_y\\,d\\nu(y)$ is the square-root Radon\u2013Nikodym unitary $(J\\eta)(y)=\\sqrt{r(y)}\\,\\eta(y)$, then\n$$\\bigl(J^{-1}W\\xi\\bigr)_{c(x)}=u_x\\xi_x\\qquad\\text{for }\\mu\\text{-almost every }x\\in X_0.$$\nThe diagonal-model identity is preserved, $WI_{\\mathcal H}W^{-1}=I_{\\mathcal K}$, and the implementing base map and fibre field are unique up to null-set modification.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-direct-integrals-transport-along-bimeasurable-base-isomorphisms",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\mathcal B_X,\\mu)$ and $(Y,\\mathcal B_Y,\\nu)$ be\n$\\sigma$-finite standard Borel measure spaces, let $c:X\\to Y$ be a\nbimeasurable bijection with $\\nu=c_*\\mu$, and let $(H_y)_{y\\in Y}$ be a\nmeasurable complex Hilbert field over $(Y,\\nu)$ with direct integral\n$\\int_Y^\\oplus H_y\\,d\\nu(y)$. Then $x\\mapsto H_{c(x)}$ is a measurable Hilbert\nfield over $(X,\\mu)$ with the pulled-back fundamental family, and pullback of\nsections $\\xi\\mapsto\\xi\\circ c$ is a unitary\n$$c^*:\\int_Y^\\oplus H_y\\,d\\nu(y)\\longrightarrow\\int_X^\\oplus H_{c(x)}\\,d\\mu(x)$$\nthat intertwines multiplication by $f\\in L^\\infty(Y,\\nu)$ with multiplication\nby $f\\circ c$. A decomposable operator field $(T_y)$ over $Y$ corresponds to\nthe decomposable field $x\\mapsto T_{c(x)}$ over $X$ with the same essential\nnorm and the same fibrewise adjoint and product identities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-decomposable-operators-are-the-commutant-of-diagonal-multiplication",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure\nspace, let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with\na countable fundamental family, and set\n$$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x),$$\nwith the direct-integral Hilbert-space structure. For each\n$f\\in L^\\infty(X,\\mu)$ let $M_f\\in\\mathcal B(\\mathcal H)$ act by scalar\nmultiplication, and put $\\mathcal D=\\{M_f:f\\in L^\\infty(X,\\mu)\\}$. Then\n$$\\mathcal D'=\\{S\\in\\mathcal B(\\mathcal H): S\\text{ is decomposable}\\},$$\nwhere decomposable has the meaning in\n[[def-measurable-and-decomposable-operator-fields]]. For a fixed $S$, any\nweakly measurable essentially bounded field inducing $S$ is unique up to a\n$\\mu$-null set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-separable-group-c-star-representations-disintegrate-over-a-commuting-diagonal-algebra",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a second-countable locally compact Hausdorff group, $(\\pi,H)$ a separable strongly continuous unitary representation, $A\\subseteq\\pi(G)'$ an abelian concrete von Neumann algebra, $(X,\\mathcal B,\\mu)$ a sigma-finite standard-Borel space with a measurable Hilbert field $(H_x,e_n(x))$ and direct integral $\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$, and $U:H\\to\\mathcal H$ a unitary operator with $UAU^{-1}=\\mathcal D$, the algebra of diagonalisable operators. Then there exist a measurable field $(\\pi_x)_{x\\in X}$ of strongly continuous unitary representations of $G$ on the fibres, defined for every $x$ by an arbitrary choice on a null set, such that for every $g\\in G$ $$U\\pi(g)U^{-1}=\\int_X^\\oplus\\pi_x(g)\\,d\\mu(x),$$ and the field $x\\mapsto\\pi_x(G)''$ of von Neumann algebras generated by the fibres is a measurable field in the sense of [[def-measurable-field-of-von-neumann-algebras]]; moreover $\\pi_x$ is nondegenerate for $\\mu$-almost every $x$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Write $\\Pi_X(g)=U\\pi(g)U^{-1}$ and $\\Pi_Y(g)=V\\pi(g)V^{-1}$. The unitary $W=VU^{-1}$ satisfies $W\\mathcal D_XW^{-1}=\\mathcal D_Y$ by",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For every fixed $g$, $W\\Pi_X(g)=\\Pi_Y(g)W$. Using the formula of step 1.1, transport to one base and cancel $J$;",
+          "inputs": [
+            "1.1",
+            "F3",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from central decomposition and spatialization and supplies the countable dense choice used in the common-null-set argument. Discarding zero fibre strata is permitted by the definition of central decomposition; null total spaces use empty conull bases. The group is second countable, and strong continuity is essential for extending from the countable dense set. The Radon\u2013Nikodym weight affects norms and measure normalization but cancels from intertwining because it is scalar."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from central decomposition and spatialization and supplies the countable dense choice used in the common-null-set argument. Discarding zero fibre strata is permitted by the definition of central decomposition; null total spaces use empty conull bases. The group is second countable, and strong continuity is essential for extending from the countable dense set. The Radon\u2013Nikodym weight affects norms and measure normalization but cancels from intertwining because it is scalar."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from central decomposition and spatialization and supplies the countable dense choice used in the common-null-set argument. Discarding zero fibre strata is permitted by the definition of central decomposition; null total spaces use empty conull bases. The group is second countable, and strong continuity is essential for extending from the countable dense set. The Radon\u2013Nikodym weight affects norms and measure normalization but cancels from intertwining because it is scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from central decomposition and spatialization and supplies the countable dense choice used in the common-null-set argument. Discarding zero fibre strata is permitted by the definition of central decomposition; null total spaces use empty conull bases. The group is second countable, and strong continuity is essential for extending from the countable dense set. The Radon\u2013Nikodym weight affects norms and measure normalization but cancels from intertwining because it is scalar."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is inherited from central decomposition and spatialization and supplies the countable dense choice used in the common-null-set argument. Discarding zero fibre strata is permitted by the definition of central decomposition; null total spaces use empty conull bases. The group is second countable, and strong continuity is essential for extending from the countable dense set. The Radon\u2013Nikodym weight affects norms and measure normalization but cancels from intertwining because it is scalar."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    },
+    "lem-separable-group-c-star-representations-disintegrate-over-a-commuting-diagonal-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-direct-integral-of-unitary-representations",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $G$ be a locally compact Hausdorff group, let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space ([[def-standard-borel-space]], [[def-finite-sigma-finite-and-semifinite-measures]]), and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with a countable fundamental family ([[def-measurable-hilbert-field-from-a-countable-fundamental-family]]). Write $\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ for its direct-integral Hilbert space ([[def-direct-integral-of-a-measurable-hilbert-field]], [[thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces]]). A **measurable field of unitary representations of $G$** over this field is a family $(\\pi_x)_{x\\in X}$ such that each $\\pi_x:G\\to U(H_x)$ is strongly continuous ([[def-strongly-continuous-unitary-representation]]) and, for each fixed $g\\in G$, the operator field $x\\mapsto\\pi_x(g)$ is weakly measurable ([[def-measurable-and-decomposable-operator-fields]]). The identities $\\pi_x(gh)=\\pi_x(g)\\pi_x(h)$ and $\\pi_x(e)=I_{H_x}$ are required for every $x\\in X$ and all $g,h\\in G$. For each $g\\in G$ define\n$$\\pi(g)=\\int_X^\\oplus\\pi_x(g)\\,d\\mu(x)\\in\\mathcal B(\\mathcal H).$$\nBy [[thm-measurable-essentially-bounded-operator-fields-act-decomposably]], these operators define a group homomorphism $G\\to U(\\mathcal H)$. This operator family is called the **direct integral** of the field and written $\\pi=\\int_X^\\oplus\\pi_x\\,d\\mu(x)$. The homomorphism and unitarity are proved below; strong continuity is not asserted by this definition. Changing the field on a $\\mu$-null set does not change any induced operator $\\pi(g)$.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measurable-field-of-von-neumann-algebras",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space ([[def-standard-borel-space]], [[def-finite-sigma-finite-and-semifinite-measures]]) and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with a countable fundamental family ([[def-measurable-hilbert-field-from-a-countable-fundamental-family]]). Write $\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ for its direct-integral Hilbert space ([[def-direct-integral-of-a-measurable-hilbert-field]], [[thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces]]). For every $x$, let $M_x\\subseteq\\mathcal B(H_x)$ be a unital concrete von Neumann algebra ([[def-von-neumann-algebra-and-commutant]]). The field $x\\mapsto M_x$ is **measurable** if there is a sequence $(T^{(k)})_{k\\ge1}$ of weakly measurable operator fields ([[def-measurable-and-decomposable-operator-fields]]) such that\n\n$$M_x=W^*\\bigl(T_x^{(1)},T_x^{(2)},\\ldots\\bigr)$$\n\nfor $\\mu$-almost every $x$, where $W^*$ denotes the weak-operator closure of the unital $*$-algebra generated by the listed operators.\n\nFor a measurable field $x\\mapsto M_x$, define its **direct integral** to be the set\n\n$$\\int_X^\\oplus M_x\\,d\\mu(x):=\\left\\{\\int_X^\\oplus T_x\\,d\\mu(x):\\ (T_x)_{x\\in X}\\text{ is weakly measurable and essentially bounded, and }T_x\\in M_x\\text{ for }\\mu\\text{-almost every }x\\right\\}\\subseteq\\mathcal B(\\mathcal H),$$\n\nwhere each induced operator is supplied by [[thm-measurable-essentially-bounded-operator-fields-act-decomposably]]. Define the **diagonal algebra** by\n\n$$\\mathcal D:=\\{M_f:f\\in L^\\infty(X,\\mu),\\ (M_f\\xi)(x)=f(x)\\xi(x)\\},$$\n\nusing the complex $L^\\infty$ convention of [[def-complex-lp-and-euclidean-test-function-conventions]]. Then\n\n$$\\mathcal D\\subseteq\\int_X^\\oplus M_x\\,d\\mu(x).$$\n\nThe fibres may be zero-dimensional: when $H_x=\\{0\\}$, unitality means $M_x=\\{0\\}$ and $I_{H_x}=0$.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measurable-and-decomposable-operator-fields",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu;H_x,e_n(x))$ be the measurable Hilbert field of\n[[def-measurable-hilbert-field-from-a-countable-fundamental-family]], and let\n$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ be the direct-integral inner-product\nspace of [[def-direct-integral-of-a-measurable-hilbert-field]]. The inner\nproducts are linear in their first variables. An **operator field** is a family\n$(T_x)_{x\\in X}$ with $T_x\\in\\mathcal B(H_x)$ for every $x$.\n\nThe field is **weakly measurable** when every fundamental matrix coefficient\n$x\\longmapsto\\langle T_xe_n(x),e_m(x)\\rangle$ is measurable. As proved below,\nthis is equivalent to measurability of\n$x\\mapsto\\langle T_x\\xi(x),\\eta(x)\\rangle$ for every pair of measurable\nsections $\\xi,\\eta$. The proof obtains this equivalence from pointwise\nboundedness of each $T_x$, so the equivalence also holds when the field is\nessentially bounded.\n\nFor a weakly measurable operator field, the operator-norm function\n$x\\mapsto\\|T_x\\|$ is measurable. Such a field is\n**essentially bounded** when\n$\\operatorname*{ess\\,sup}_{x\\in X}\\|T_x\\|<\\infty$, with essential supremum\ntaken with respect to $\\mu$.\n\nA bounded operator $S\\in\\mathcal B(\\mathcal H)$ is **decomposable** if there\nis a weakly measurable, essentially bounded operator field $(T_x)$ such that\nfor every square-integrable measurable section $\\xi$, the pointwise section\n$(T\\xi)(x):=T_x\\xi(x)$ is again square-integrable and\n$S[\\xi]=[T\\xi]$. The square-integrability and class equality are part of this\ndefinition; the next theorem proves that every weakly measurable essentially\nbounded field indeed has this action. Operator fields are identified when\nequal off a measurable $\\mu$-null set.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-decomposable-operators-are-the-commutant-of-diagonal-multiplication",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure\nspace, let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with\na countable fundamental family, and set\n$$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x),$$\nwith the direct-integral Hilbert-space structure. For each\n$f\\in L^\\infty(X,\\mu)$ let $M_f\\in\\mathcal B(\\mathcal H)$ act by scalar\nmultiplication, and put $\\mathcal D=\\{M_f:f\\in L^\\infty(X,\\mu)\\}$. Then\n$$\\mathcal D'=\\{S\\in\\mathcal B(\\mathcal H): S\\text{ is decomposable}\\},$$\nwhere decomposable has the meaning in\n[[def-measurable-and-decomposable-operator-fields]]. For a fixed $S$, any\nweakly measurable essentially bounded field inducing $S$ is unique up to a\n$\\mu$-null set.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-and-decomposable-operator-fields",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu;H_x,e_n(x))$ be the measurable Hilbert field of\n[[def-measurable-hilbert-field-from-a-countable-fundamental-family]], and let\n$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ be the direct-integral inner-product\nspace of [[def-direct-integral-of-a-measurable-hilbert-field]]. The inner\nproducts are linear in their first variables. An **operator field** is a family\n$(T_x)_{x\\in X}$ with $T_x\\in\\mathcal B(H_x)$ for every $x$.\n\nThe field is **weakly measurable** when every fundamental matrix coefficient\n$x\\longmapsto\\langle T_xe_n(x),e_m(x)\\rangle$ is measurable. As proved below,\nthis is equivalent to measurability of\n$x\\mapsto\\langle T_x\\xi(x),\\eta(x)\\rangle$ for every pair of measurable\nsections $\\xi,\\eta$. The proof obtains this equivalence from pointwise\nboundedness of each $T_x$, so the equivalence also holds when the field is\nessentially bounded.\n\nFor a weakly measurable operator field, the operator-norm function\n$x\\mapsto\\|T_x\\|$ is measurable. Such a field is\n**essentially bounded** when\n$\\operatorname*{ess\\,sup}_{x\\in X}\\|T_x\\|<\\infty$, with essential supremum\ntaken with respect to $\\mu$.\n\nA bounded operator $S\\in\\mathcal B(\\mathcal H)$ is **decomposable** if there\nis a weakly measurable, essentially bounded operator field $(T_x)$ such that\nfor every square-integrable measurable section $\\xi$, the pointwise section\n$(T\\xi)(x):=T_x\\xi(x)$ is again square-integrable and\n$S[\\xi]=[T\\xi]$. The square-integrability and class equality are part of this\ndefinition; the next theorem proves that every weakly measurable essentially\nbounded field indeed has this action. Operator fields are identified when\nequal off a measurable $\\mu$-null set.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nondegenerate-representations-of-c-star-g-are-unitary-representations-of-g",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be an LCH group. Every strongly continuous\nunitary representation of $G$ extends uniquely to a nondegenerate\nstar-representation of the full group C\\*-algebra $C^*(G)$, and every\nnondegenerate star-representation of $C^*(G)$ pulls back to a nondegenerate\nstar-representation along the canonical dense-image map $L^1(G)\\to C^*(G)$\n([[def-full-group-c-star-algebra]],\n[[def-nondegenerate-star-representation-of-a-banach-star-algebra]]).\nConsequently the correspondence of\n[[thm-unitary-representations-and-nondegenerate-l1-star-representations-correspond]]\nupgrades to a bijection between unitary representations of $G$ and\nnondegenerate star-representations of $C^*(G)$ that respects unitary\nequivalence, and a representation is irreducible on one side exactly when its\ncounterpart is irreducible on the other.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-unitary-representations-and-nondegenerate-l1-star-representations-correspond",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be an LCH group. The assignment\n$\\pi\\mapsto\\sigma_\\pi$, $\\sigma_\\pi(f):=\\pi(f)$, from strongly continuous\nunitary representations of $G$ to star-representations of the Banach\n$\\ast$-algebra $L^1(G)$\n([[def-strongly-continuous-unitary-representation]],\n[[def-integrated-form-of-a-unitary-representation]],\n[[def-nondegenerate-star-representation-of-a-banach-star-algebra]]) is a\nbijection, respecting unitary equivalence, between unitary representations of\n$G$ up to unitary equivalence and nondegenerate star-representations of\n$L^1(G)$ up to equivalence: every unitary representation has a nondegenerate\nintegrated form, every nondegenerate star-representation is the integrated\nform of a unique unitary representation, and a unitary intertwines two\nrepresentations if and only if it intertwines their integrated forms.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integrated-form-of-a-unitary-representation",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $G$ be an LCH group with a fixed left Haar\nmeasure, let $(\\pi,H)$ be a strongly continuous unitary representation of $G$\n([[def-strongly-continuous-unitary-representation]],\n[[def-hilbert-space]]), and let $f\\in L^1(G)$ with its norm $\\|\\cdot\\|_1$\n([[def-complex-haar-lp-spaces-and-compactly-supported-functions]]). The\n**integrated form** of $\\pi$ at $f$ is the operator\n$\\pi(f)\\in\\mathcal B(H)$ ([[def-bounded-linear-operator]]) characterised by\nthe weak integral identity\n$$\\langle\\pi(f)\\xi,\\eta\\rangle=\\int_G f(g)\\,\\langle\\pi(g)\\xi,\\eta\\rangle\\,dg\\qquad(\\xi,\\eta\\in H).$$\nThe integral is a Haar integral over the fixed measure, and the right-hand\nside is the pairing convention of the Hilbert space, linear in the first\nargument and conjugate-linear in the second.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-second-countable-group-c-star-algebra-is-separable-with-a-countable-dense-star-subalgebra",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $G$ be a second-countable locally compact Hausdorff group, let\n$q:L^1(G)\\to C^*(G)$ be the canonical map, and let\n$\\mathbb Q(i)=\\{a+ib:a,b\\in\\mathbb Q\\}$. Then $C^*(G)$ is separable. More\nprecisely, there are a countable dense set $S\\subseteq L^1(G)$ and a countable\nset $D\\subseteq C^*(G)$ such that $q(S)\\subseteq D$, $D$ is closed under\naddition, multiplication, adjunction, and multiplication by elements of\n$\\mathbb Q(i)$, and the $\\mathbb Q(i)$-linear span of $D$ is norm-dense in\n$C^*(G)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-second-countable-group-c-star-algebra-has-a-sequential-approximate-identity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a second-countable locally compact\nHausdorff group with a fixed left Haar measure $\\mu$. There is a sequence\n$(u_n)_{n\\ge1}\\subseteq C_c(G)$ such that $u_n\\ge0$, $\\int_Gu_n\\,d\\mu=1$,\nand for every identity neighbourhood $U$ there is $n_0$ with\n$\\operatorname{supp}u_n\\subseteq U$ for every $n\\ge n_0$. It is a two-sided\napproximate identity in $L^1(G)$:\n$$\\|f*u_n-f\\|_1\\longrightarrow0\\quad\\hbox{and}\\quad\\|u_n*f-f\\|_1\\longrightarrow0\\qquad(f\\in L^1(G)).$$\nIf $q:L^1(G)\\to C^*(G)$ is the canonical dense-image map and $\\rho$ is any\nnondegenerate star-representation of $C^*(G)$ on a Hilbert space $H$, then\n$$\\rho(q(u_n))\\longrightarrow I_H\\quad\\hbox{in the strong operator topology}.$$\nWe write $\\rho(u_n)$ for $\\rho(q(u_n))$ when the canonical map is understood.\nThe sequential construction and the representation limit are proved locally;\nthe cited literature passages supply only the stated C*-algebraic context.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-measurable-gram-schmidt-and-constant-field-trivializations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with countable fundamental family. Then: (1) there are measurable sections $f_n$ such that for every $x$ the nonzero $f_n(x)$ form a complete orthonormal system in $H_x$, and $x\\mapsto\\langle\\xi(x),f_n(x)\\rangle$ is Borel for every measurable section $\\xi$; (2) for each $p\\in\\{1,2,\\ldots\\}\\cup\\{\\infty\\}$, the dimension stratum $X_p:=\\{x:\\dim H_x=p\\}$ is Borel, and for every fixed separable Hilbert space $K_p$ of dimension $p$ there are unitaries $U_x:H_x\\to K_p$ on $X_p$ such that $\\xi$ is a measurable section on $X_p$ if and only if $x\\mapsto U_x\\xi(x)$ is a Borel map; explicitly, $U_x\\xi$ has coordinates $\\langle\\xi(x),f_n(x)\\rangle$ after deleting zero frame vectors; (3) weakly measurable operator fields have Borel transported matrix coefficients on each $X_p$, and uniformly bounded transported fields are Borel maps into their weak-operator-topology balls; (4) for every countable family of measurable sections $\\xi_k$, the pointwise closed spans $S_x:=\\overline{\\operatorname{span}}\\{\\xi_k(x):k\\ge1\\}$ form a measurable closed Hilbert subfield, and its direct integral is the closed linear span in $\\int_X^\\oplus H_x\\,d\\mu(x)$ of all square-integrable localizations $f\\mathbf1_E\\xi_k$, where $E=D_j\\cap\\{x:\\|\\xi_k(x)\\|\\le r\\}$, $(D_j)$ is any countable finite-measure cover of $X$, $r\\in\\mathbb R$ with $r\\ge1$, and $f$ is any bounded Borel scalar function supported in $E$. The zero-dimensional stratum is Borel as the complement of the positive and infinite-dimensional strata.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Replacing $\\pi$ by the unitarily equivalent representation $U\\pi U^{-1}$ and $A$ by $\\mathcal D$ does not change any assertion, so assume $H=\\mathcal H$ and $A=\\mathcal D$; then $\\pi(G)\\subseteq\\mathcal D'$, hence $\\pi(a)\\in\\mathcal D'$ for every $a$ in the unitisation of $C^*(G)$ because $\\mathcal D'$ is a weak-operator-closed algebra, and the extension of $\\pi$ to a nondegenerate star-representation of $C^*(G)$ is given by",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Choose a countable norm-dense $\\mathbb Q(i)$-star-subalgebra $(a_k)$ of $C^*(G)$ by",
+          "inputs": [
+            "F4",
+            "F2",
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Let $N_0$ be a conull Borel set meeting the countably many conull sets on which the relations $T_{k+l}(x)=T_k(x)+T_l(x)$ (for rational scalars), $T_{kl}(x)=T_k(x)T_l(x)$ and $T_{k^*}(x)=T_k(x)^*$ hold; such a set exists because each relation holds almost everywhere by the uniqueness in",
+          "inputs": [
+            "F2",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Use measurable Gram\u2013Schmidt",
+          "inputs": [
+            "F7",
+            "F6",
+            "F5",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "On the conull set of step 4.1, apply the fibrewise correspondence",
+          "inputs": [
+            "4.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "Fix $g\\in G$. The integrated operators $\\rho_x(gu_n)=\\pi_x(gu_n)$ are measurable by step 3.1 and uniformly contractive. On every nondegenerate fibre, the support condition of",
+          "inputs": [
+            "3.1",
+            "F5",
+            "F6",
+            "5.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-7.1",
+          "step": "7.1",
+          "claim": "The field of generated von Neumann algebras is measurable: for almost every $x$, $\\pi_x(G)''$ is generated by the operators $\\pi_x(a_k)=\\rho_x(a_k)=T_k(x)$, which are weakly measurable fields bounded by $\\|a_k\\|$, so the sequence $(T_k)$ satisfies the defining condition of a measurable field of von Neumann algebras in",
+          "inputs": [
+            "F1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the direct-integral, decomposable-operator, group-C*-algebra and approximate-identity suppliers; it is used to choose the countable dense rational-*-subalgebra, the diagonal subsequences extracting almost-everywhere convergence, and the arbitrary definition of the fibre representations on the null set. No operator is disintegrated over the uncountable index G: the fibre fields are defined from the countably many a_k and the sequential approximate identity, and the unique extensions are canonical."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the direct-integral, decomposable-operator, group-C*-algebra and approximate-identity suppliers; it is used to choose the countable dense rational-*-subalgebra, the diagonal subsequences extracting almost-everywhere convergence, and the arbitrary definition of the fibre representations on the null set. No operator is disintegrated over the uncountable index G: the fibre fields are defined from the countably many a_k and the sequential approximate identity, and the unique extensions are canonical."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the direct-integral, decomposable-operator, group-C*-algebra and approximate-identity suppliers; it is used to choose the countable dense rational-*-subalgebra, the diagonal subsequences extracting almost-everywhere convergence, and the arbitrary definition of the fibre representations on the null set. No operator is disintegrated over the uncountable index G: the fibre fields are defined from the countably many a_k and the sequential approximate identity, and the unique extensions are canonical."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the direct-integral, decomposable-operator, group-C*-algebra and approximate-identity suppliers; it is used to choose the countable dense rational-*-subalgebra, the diagonal subsequences extracting almost-everywhere convergence, and the arbitrary definition of the fibre representations on the null set. No operator is disintegrated over the uncountable index G: the fibre fields are defined from the countably many a_k and the sequential approximate identity, and the unique extensions are canonical."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the direct-integral, decomposable-operator, group-C*-algebra and approximate-identity suppliers; it is used to choose the countable dense rational-*-subalgebra, the diagonal subsequences extracting almost-everywhere convergence, and the arbitrary definition of the fibre representations on the null set. No operator is disintegrated over the uncountable index G: the fibre fields are defined from the countably many a_k and the sequential approximate identity, and the unique extensions are canonical."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    },
+    "lem-measurable-von-neumann-algebra-fields-have-measurable-commutants-and-centers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurable-field-of-von-neumann-algebras",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space ([[def-standard-borel-space]], [[def-finite-sigma-finite-and-semifinite-measures]]) and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with a countable fundamental family ([[def-measurable-hilbert-field-from-a-countable-fundamental-family]]). Write $\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ for its direct-integral Hilbert space ([[def-direct-integral-of-a-measurable-hilbert-field]], [[thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces]]). For every $x$, let $M_x\\subseteq\\mathcal B(H_x)$ be a unital concrete von Neumann algebra ([[def-von-neumann-algebra-and-commutant]]). The field $x\\mapsto M_x$ is **measurable** if there is a sequence $(T^{(k)})_{k\\ge1}$ of weakly measurable operator fields ([[def-measurable-and-decomposable-operator-fields]]) such that\n\n$$M_x=W^*\\bigl(T_x^{(1)},T_x^{(2)},\\ldots\\bigr)$$\n\nfor $\\mu$-almost every $x$, where $W^*$ denotes the weak-operator closure of the unital $*$-algebra generated by the listed operators.\n\nFor a measurable field $x\\mapsto M_x$, define its **direct integral** to be the set\n\n$$\\int_X^\\oplus M_x\\,d\\mu(x):=\\left\\{\\int_X^\\oplus T_x\\,d\\mu(x):\\ (T_x)_{x\\in X}\\text{ is weakly measurable and essentially bounded, and }T_x\\in M_x\\text{ for }\\mu\\text{-almost every }x\\right\\}\\subseteq\\mathcal B(\\mathcal H),$$\n\nwhere each induced operator is supplied by [[thm-measurable-essentially-bounded-operator-fields-act-decomposably]]. Define the **diagonal algebra** by\n\n$$\\mathcal D:=\\{M_f:f\\in L^\\infty(X,\\mu),\\ (M_f\\xi)(x)=f(x)\\xi(x)\\},$$\n\nusing the complex $L^\\infty$ convention of [[def-complex-lp-and-euclidean-test-function-conventions]]. Then\n\n$$\\mathcal D\\subseteq\\int_X^\\oplus M_x\\,d\\mu(x).$$\n\nThe fibres may be zero-dimensional: when $H_x=\\{0\\}$, unitality means $M_x=\\{0\\}$ and $I_{H_x}=0$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-direct-integral-of-a-measurable-hilbert-field",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu)$ carry a measurable complex Hilbert field\n$(H_x,e_n(x))_{x\\in X}$ as in\n[[def-measurable-hilbert-field-from-a-countable-fundamental-family]], with\ninner products linear in the first variable. Write $\\mathscr M(H)$ for its\nmeasurable sections. Define the square-integrable section space\n$$\\mathscr M_2(H):=\\left\\{\\xi\\in\\mathscr M(H):\\int_X\\|\\xi(x)\\|_{H_x}^{2}\\,d\\mu(x)<\\infty\\right\\}.$$\nThe integrand is a nonnegative measurable function: the section lemma\n[[lem-measurable-sections-have-measurable-pointwise-inner-products]] makes\n$x\\mapsto\\|\\xi(x)\\|$ measurable, and composition with $t\\mapsto t^2$ preserves\nmeasurability by\n[[thm-composition-with-borel-functions-preserves-measurability]], whose\nmeasurability convention is inverse-image measurability\n[[def-measurable-function-between-measurable-spaces]]. Its integral\nis the nonnegative Lebesgue integral\n[[def-nonnegative-lebesgue-integral]].\n\nFor $\\xi,\\eta\\in\\mathscr M(H)$, put $\\xi\\sim_\\mu\\eta$ when there is a Borel\n$\\mu$-null set $N$ such that $\\xi(x)=\\eta(x)$ for every $x\\notin N$, using the\nnoncomplete-base convention of the field definition. The **direct integral**\nis the quotient set\n$$\n\\int_X^{\\oplus}H_x\\,d\\mu(x):=\\mathscr M_2(H)/{\\sim_\\mu}.\n$$\nWrite $[\\xi]$ for the class of $\\xi$. Addition and scalar multiplication are\ninduced by pointwise fibre operations, and the inner product is\n$$\\langle[\\xi],[\\eta]\\rangle:=\\int_X\\langle\\xi(x),\\eta(x)\\rangle_{H_x}\\,d\\mu(x).$$\n\n**The admissible sections form a vector space.** Measurability of pointwise\nlinear combinations follows from the section lemma. If $a=\\|\\xi(x)\\|$ and\n$b=\\|\\eta(x)\\|$, fibrewise expansion gives\n$$\\|\\xi(x)+\\eta(x)\\|^2=a^2+b^2+2\\operatorname{Re}\\langle\\xi(x),\\eta(x)\\rangle\\le a^2+b^2+2ab\\le2(a^2+b^2).$$\nby Cauchy\u2013Schwarz, $\\operatorname{Re}z\\le|z|$ for complex $z$, and\n$2ab\\le a^2+b^2$ (since $(a-b)^2\\ge0$). The real-part bound follows from\n$|u+iv|=\\sqrt{u^2+v^2}$ and $u^2+v^2\\ge u^2$ when $u>0$; it is immediate\nwhen $u\\le0$, and taking nonnegative square roots gives $u\\le|u+iv|$ in the\npositive case. The modulus and conjugation laws are recorded in\n[[lem-complex-conjugation-and-modulus-laws]].\nBy monotonicity, positive homogeneity, and additivity of the nonnegative\nintegral ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]],\n[[cor-additivity-of-the-nonnegative-lebesgue-integral]]), the integral of the\nsquared norm of a sum is finite whenever those of $\\xi$ and $\\eta$ are finite;\nthe comparison function $a^2+b^2$ is measurable by Borel composition\n[[thm-composition-with-borel-functions-preserves-measurability]] and\nmeasurable arithmetic [[thm-arithmetic-and-lattice-operations-preserve-measurability]].\nFor $c\\ne0$,\n$\\|c\\xi(x)\\|^2=|c|^2\\|\\xi(x)\\|^2$ and positive homogeneity keeps its\nintegral finite; for $c=0$ the zero function has integral zero. Hence\n$\\mathscr M_2(H)$ is a complex vector space.\nThe pointwise bound uses\n[[thm-cauchy-schwarz-in-an-inner-product-space]] and the norm and scalar\nconventions of [[def-real-and-complex-inner-product-space]].\n\n**The quotient and its operations are well-defined.** The empty set is a Borel\nnull set by the $m=0$ clause of\n[[thm-finite-and-countable-subadditivity-of-measures]], so $\\sim_\\mu$ is\nreflexive; it is symmetric by equality, and it is transitive because two Borel\nnull witnesses have a null union by the same finite-subadditivity theorem. This\nuses the definition of almost-everywhere equality\n[[def-measure-null-set-and-almost-everywhere]]. If $\\xi\\sim_\\mu\\xi'$\nand $\\eta\\sim_\\mu\\eta'$, then outside the union of their two witnesses the\npointwise sums agree, and so do the pointwise scalar multiples. The same finite\nunion argument shows that these operations do not depend on representatives.\n\n**The displayed pairing is finite.** By the section lemma,\n$h(x)=\\langle\\xi(x),\\eta(x)\\rangle$ is measurable. The modulus $|h|$ is\nmeasurable by Borel composition with the complex modulus. The measurable\nreal-valued functions $f(x)=\\|\\xi(x)\\|$ and $g(x)=\\|\\eta(x)\\|$ belong to\n$\\mathcal L^2(\\mu)$ by the definition of that space\n[[def-calligraphic-l-p-on-a-measure-space]]. Fibrewise Cauchy\u2013Schwarz and then\nthe scalar $L^2$ Cauchy\u2013Schwarz inequality\n[[cor-cauchy-schwarz-inequality-for-l-two]] give\n$$\\int_X|h(x)|\\,d\\mu(x)\\le\\int_X f(x)g(x)\\,d\\mu(x)\\le\\|f\\|_2\\|g\\|_2<\\infty.$$\nSince $f,g\\ge0$, the scalar theorem's $|fg|$ is $fg$. Here $fg$ is measurable by\n[[thm-arithmetic-and-lattice-operations-preserve-measurability]], and the first\ninequality uses monotonicity of the nonnegative integral\n[[prop-order-and-scalar-rules-for-the-nonnegative-integral]].\nThus $h$ is an integrable complex function by\n[[def-integrable-real-and-complex-functions-and-their-integrals]]. More\nexplicitly, write $h=u+iv$. The real coordinate projections are Borel, so\n$u$ and $v$ are measurable, and $|u|,|v|\\le |h|$ makes both real functions\nintegrable. Their classes, rather than a class of the complex function $h$,\nbelong to the real space $L^1(\\mu)$ of\n[[def-l-p-space-as-a-quotient-by-null-functions]]. The complex integral here\nmeans precisely $\\int h=\\int u+i\\int v$.\n\n**The pairing does not depend on representatives.** If $\\xi\\sim_\\mu\\xi'$ and\n$\\eta\\sim_\\mu\\eta'$, their pairings agree outside the union of the two null\nwitnesses. Both pairings are integrable by the preceding estimate. Their real parts agree almost everywhere, as do their imaginary parts.\nApplying [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]\nseparately to these real $L^1$ classes, with $A=X$, gives equality of both\ncomponent integrals and hence of the complex integrals.\n\n**The quotient is an inner-product space.** Fibrewise linearity in the first\nvariable passes through the integral by real linearity in\n[[thm-linearity-of-the-lebesgue-integral-on-l-one]], applied to the integrable\nreal and imaginary parts. Indeed, if $h=u+iv$ and $c=a+ib$, then\n$ch=(au-bv)+i(av+bu)$, so real linearity gives\n$\\int ch=c\\int h$. For two integrable pairings $h=u+iv$ and $k=s+it$,\n$h+k=(u+s)+i(v+t)$ gives $\\int(h+k)=\\int h+\\int k$ in the same way;\nall these real components are integrable by real linearity. Their complex\ncombinations are integrable since $|ch|=|c||h|$ and\n$|h+k|\\le |h|+|k|$, using nonnegative integral monotonicity and additivity.\nFibrewise conjugate\nsymmetry passes through it as well: for integrable $h=u+iv$, the definition\ngives $\\int\\overline h=\\int u-i\\int v=\\overline{\\int h}$; integrability of\n$\\overline h$ follows from $|\\overline h|=|h|$\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] and\n[[lem-complex-conjugation-and-modulus-laws]]. Conjugate symmetry\nand first-variable linearity give conjugate-linearity in the second variable.\nFor every class,\n$$\\langle[\\xi],[\\xi]\\rangle=\\int_X\\|\\xi(x)\\|^2\\,d\\mu(x)\\ge0.$$\nThis value is zero exactly when $\\|\\xi(x)\\|^2=0$ almost everywhere, by\n[[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]. Fibrewise positive\ndefiniteness says this is exactly when $\\xi(x)=0$ off a Borel null set, that is,\nwhen $[\\xi]=[0]$. Therefore the pairing is positive definite. These arguments\nuse the ordinary complex inner-product axioms\n[[def-real-and-complex-inner-product-space]] and the integral convention above;\nthey do not use any form of the axiom of choice.\n\nNo completion is part of this definition. The next theorem proves that this\ninner-product space is complete under its induced norm.\n\n**Boundary cases.** If $X=\\varnothing$, or if every fibre is zero-dimensional,\nthere is only the zero section and the quotient is the zero inner-product\nspace. If $\\mu(X)=0$, then $X$ itself is a Borel null set, so every two\nsquare-integrable sections are equivalent and the quotient is again zero.\nFor a one-point base $X=\\{x_0\\}$ with $\\mu(\\{x_0\\})=m>0$ and\n$H_{x_0}=\\mathbb C$, take $e_1(x_0)=1$ and $e_n(x_0)=0$ for $n\\ge2$.\nEvery section has the form $\\xi_z(x_0)=z$ and\n$$\\langle[\\xi_z],[\\xi_w]\\rangle=m z\\overline w.$$\nThe direct integral is one-dimensional, with norm $\\sqrt m\\,|z|$. If instead\n$m=0$, the preceding zero-measure calculation applies.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-measurable-essentially-bounded-operator-fields-act-decomposably",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\mathcal B,\\mu)$ and $(H_x,e_n(x))_{x\\in X}$ be a\nmeasurable complex Hilbert field with countable fundamental family, over the\nsigma-finite standard-Borel base of\n[[def-measurable-hilbert-field-from-a-countable-fundamental-family]]. Put\n$$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x),$$\nthe Hilbert space of [[thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces]].\nEvery weakly measurable essentially bounded field\n$(T_x)_{x\\in X}$ from [[def-measurable-and-decomposable-operator-fields]]\ninduces a well-defined bounded operator\n$$T=\\int_X^\\oplus T_x\\,d\\mu(x)\\in\\mathcal B(\\mathcal H),$$\ngiven on classes by $T[\\xi]=[x\\mapsto T_x\\xi(x)]$,\nand\n$$\\|T\\|=\\operatorname*{ess\\,sup}_{x\\in X}\\|T_x\\|.$$\nFor two such fields $T$ and $S$, the adjoint field $(T_x^*)$ and product\nfield $(T_xS_x)$ are weakly measurable and essentially bounded. Their induced\noperators are respectively $T^*$ and $TS$. All inner products are linear in\ntheir first variable.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-decomposable-operators-are-the-commutant-of-diagonal-multiplication",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure\nspace, let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with\na countable fundamental family, and set\n$$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x),$$\nwith the direct-integral Hilbert-space structure. For each\n$f\\in L^\\infty(X,\\mu)$ let $M_f\\in\\mathcal B(\\mathcal H)$ act by scalar\nmultiplication, and put $\\mathcal D=\\{M_f:f\\in L^\\infty(X,\\mu)\\}$. Then\n$$\\mathcal D'=\\{S\\in\\mathcal B(\\mathcal H): S\\text{ is decomposable}\\},$$\nwhere decomposable has the meaning in\n[[def-measurable-and-decomposable-operator-fields]]. For a fixed $S$, any\nweakly measurable essentially bounded field inducing $S$ is unique up to a\n$\\mu$-null set.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-and-decomposable-operator-fields",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu;H_x,e_n(x))$ be the measurable Hilbert field of\n[[def-measurable-hilbert-field-from-a-countable-fundamental-family]], and let\n$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ be the direct-integral inner-product\nspace of [[def-direct-integral-of-a-measurable-hilbert-field]]. The inner\nproducts are linear in their first variables. An **operator field** is a family\n$(T_x)_{x\\in X}$ with $T_x\\in\\mathcal B(H_x)$ for every $x$.\n\nThe field is **weakly measurable** when every fundamental matrix coefficient\n$x\\longmapsto\\langle T_xe_n(x),e_m(x)\\rangle$ is measurable. As proved below,\nthis is equivalent to measurability of\n$x\\mapsto\\langle T_x\\xi(x),\\eta(x)\\rangle$ for every pair of measurable\nsections $\\xi,\\eta$. The proof obtains this equivalence from pointwise\nboundedness of each $T_x$, so the equivalence also holds when the field is\nessentially bounded.\n\nFor a weakly measurable operator field, the operator-norm function\n$x\\mapsto\\|T_x\\|$ is measurable. Such a field is\n**essentially bounded** when\n$\\operatorname*{ess\\,sup}_{x\\in X}\\|T_x\\|<\\infty$, with essential supremum\ntaken with respect to $\\mu$.\n\nA bounded operator $S\\in\\mathcal B(\\mathcal H)$ is **decomposable** if there\nis a weakly measurable, essentially bounded operator field $(T_x)$ such that\nfor every square-integrable measurable section $\\xi$, the pointwise section\n$(T\\xi)(x):=T_x\\xi(x)$ is again square-integrable and\n$S[\\xi]=[T\\xi]$. The square-integrability and class equality are part of this\ndefinition; the next theorem proves that every weakly measurable essentially\nbounded field indeed has this action. Operator fields are identified when\nequal off a measurable $\\mu$-null set.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-gram-schmidt-and-constant-field-trivializations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with countable fundamental family. Then: (1) there are measurable sections $f_n$ such that for every $x$ the nonzero $f_n(x)$ form a complete orthonormal system in $H_x$, and $x\\mapsto\\langle\\xi(x),f_n(x)\\rangle$ is Borel for every measurable section $\\xi$; (2) for each $p\\in\\{1,2,\\ldots\\}\\cup\\{\\infty\\}$, the dimension stratum $X_p:=\\{x:\\dim H_x=p\\}$ is Borel, and for every fixed separable Hilbert space $K_p$ of dimension $p$ there are unitaries $U_x:H_x\\to K_p$ on $X_p$ such that $\\xi$ is a measurable section on $X_p$ if and only if $x\\mapsto U_x\\xi(x)$ is a Borel map; explicitly, $U_x\\xi$ has coordinates $\\langle\\xi(x),f_n(x)\\rangle$ after deleting zero frame vectors; (3) weakly measurable operator fields have Borel transported matrix coefficients on each $X_p$, and uniformly bounded transported fields are Borel maps into their weak-operator-topology balls; (4) for every countable family of measurable sections $\\xi_k$, the pointwise closed spans $S_x:=\\overline{\\operatorname{span}}\\{\\xi_k(x):k\\ge1\\}$ form a measurable closed Hilbert subfield, and its direct integral is the closed linear span in $\\int_X^\\oplus H_x\\,d\\mu(x)$ of all square-integrable localizations $f\\mathbf1_E\\xi_k$, where $E=D_j\\cap\\{x:\\|\\xi_k(x)\\|\\le r\\}$, $(D_j)$ is any countable finite-measure cover of $X$, $r\\in\\mathbb R$ with $r\\ge1$, and $f$ is any bounded Borel scalar function supported in $E$. The zero-dimensional stratum is Borel as the complement of the positive and infinite-dimensional strata.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-measurable-fields-of-nonempty-compact-sets-have-measurable-dense-selections",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(X,\\mathcal A,\\mu)$ be a standard Borel space with a sigma-finite measure ([[def-standard-borel-space]], [[def-measure-space]], [[def-finite-sigma-finite-and-semifinite-measures]]). Let $(K,d)$ be a nonempty compact metric space ([[def-compact-space]], [[def-topological-space]], [[def-metric-space]], [[def-metric-topology]]) with a fixed dense sequence $(k_m)_{m\\ge1}$, and give $K$ its Borel sigma-algebra ([[def-borel-sigma-algebra]]). Suppose $g:X\\times K\\to[0,\\infty)$ has measurable sections $x\\mapsto g(x,k)$ for each fixed $k$, continuous sections $k\\mapsto g(x,k)$ for each fixed $x$, and nonempty zero sets $C_x:=\\{k\\in K:g(x,k)=0\\}$ for every $x$. Then: (1) there is a sequence of measurable maps $s_j:X\\to K$ such that $s_j(x)\\in C_x$ for all $x,j$ and $(s_j(x))_{j\\ge1}$ is dense in $C_x$ for every $x$; (2) for every $k\\in K$, the function $x\\mapsto d(k,C_x):=\\inf_{c\\in C_x}d(k,c)$ is measurable; and (3) for every open $U\\subseteq K$, the hit set $\\{x:C_x\\cap U\\ne\\varnothing\\}$ is measurable.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-borel-relations-admit-conull-borel-uniformizations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space and let $Y$ be a standard Borel space. If $R\\subseteq X\\times Y$ is Borel and every vertical section $R_x:=\\{y\\in Y:(x,y)\\in R\\}$ is nonempty, then there is a Borel conull set $X_0\\subseteq X$ and a Borel map $s:X_0\\to Y$ such that $(x,s(x))\\in R$ for every $x\\in X_0$. For any such $R$ and any bounded real-valued Borel function $\\varphi:X\\times Y\\to\\mathbb R$, define\n$$m_{R,\\varphi}(x):=\\sup\\{\\varphi(x,y):y\\in R_x\\}.$$\nFor every rational $q$, the strict superlevel set $\\{x:m_{R,\\varphi}(x)>q\\}$ is measurable in the completion of $\\mu$, and there are a Borel function $\\widetilde m:X\\to\\mathbb R$ and a Borel null set $N$ such that $\\widetilde m=m_{R,\\varphi}$ on $X\\setminus N$. For any countable family of relations and scalar functions of these forms on the same measured base, the selectors and Borel versions may be restricted to one common Borel conull subset of $X$. A selector on every point of the original $X$ is not asserted.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-strong-and-weak-operator-topologies",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be normed spaces over the same field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. On $\\mathcal B(X,Y)$, the bounded scalar-linear operators of [[def-space-of-bounded-linear-operators]], define:\n\n- The **strong operator topology** (SOT) is the initial topology of all maps $T\\mapsto Tx$ to normed $Y$, for $x\\in X$.\n- The **weak operator topology** (WOT) is the initial topology of all scalar maps $T\\mapsto f(Tx)$, for $x\\in X$ and $f\\in Y^*$.\n\nThese topologies exist by [[def-initial-and-final-topology]]. Equivalently WOT is initial for $T\\mapsto Tx$ with the weak topology on $Y$ from [[def-weak-topology-on-a-normed-space]]. At $T$, basic neighborhoods impose finitely many inequalities $\\|(S-T)x_j\\|<\\varepsilon$ for SOT, or $|f_j((S-T)x_j)|<\\varepsilon$ for WOT, with $\\varepsilon>0$. Empty lists give the whole operator space.\n\nFor a net of bounded operators with specified limit $T\\in\\mathcal B(X,Y)$, SOT convergence means $\\|(T_i-T)x\\|\\to0$ for every fixed $x$, and WOT convergence means $f(T_ix)\\to f(Tx)$ for every fixed $x,f$. Both equivalences follow by testing one coordinate and then using a common upper bound for the finitely many eventual indices in a basic neighborhood. No uniformity in $x$ is part of either definition. These are choice-free constructions, also when one space is zero and the operator space is a singleton.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-banach-alaoglu",
+          "source_section": "Statement",
+          "quote": "**Assume the ultrafilter lemma.**  If $X$ is a real or complex normed space,\nthen its closed dual unit ball $B_{X^*}$ is compact in the weak-star topology\n$\\sigma(X^*,X)$.  Completeness of $X$ is not required.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-double-commutant-theorem-for-concrete-von-neumann-algebras",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let $M\\subseteq\\mathcal B(H)$ be a unital $*$-subalgebra closed in the weak operator topology. Then $M''=M$, and $M$ is also closed in the strong operator topology. Consequently the concrete von Neumann algebras of [[def-von-neumann-algebra-and-commutant]] are exactly the unital $*$-subalgebras that are closed in either of these topologies. For an arbitrary set $\\mathcal S\\subseteq\\mathcal B(H)$ one has $W^*(\\mathcal S)''=W^*(\\mathcal S)$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-measurable-hilbert-field-from-a-countable-fundamental-family",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu)$ be a standard-Borel space with a sigma-finite measure\non its Borel sigma-algebra; the measure is not assumed complete. A **measurable\ncomplex Hilbert field with countable fundamental family** consists of a\nseparable complex Hilbert space $H_x$ for each $x\\in X$ and a sequence of\nvectors $e_n(x)\\in H_x$ ($n\\in\\mathbb N$) such that\n$$x\\longmapsto\\langle e_n(x),e_m(x)\\rangle_{H_x}$$\nis Borel measurable for every $n,m$, and the complex-linear span of\n$\\{e_n(x):n\\in\\mathbb N\\}$ is dense in $H_x$ for every $x$. The fibres may be\nzero-dimensional; no positive lower bound on their dimensions is imposed. The\ninner product is linear in its first variable, as in the library's complex\ninner-product convention.\n\nA section is a choice of a vector $\\xi(x)\\in H_x$ for each $x$. It is a\n**measurable section** when all its fundamental coefficients\n$$x\\longmapsto\\langle\\xi(x),e_n(x)\\rangle_{H_x},\\qquad n\\in\\mathbb N,$$\nare Borel measurable complex functions. Each $e_n$ is itself measurable by\nthe Gram-coefficient condition. Pointwise sums and multiplication by a\nmeasurable complex scalar function are taken in the corresponding fibres.\n\nTwo measurable sections are identified **almost everywhere** when there is a\nBorel null set $N$ such that they agree at every $x\\notin N$. This formulation\nworks on the given, possibly noncomplete, measure space and does not silently\nadjoin arbitrary subsets of null sets to $\\mathcal B$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-von-neumann-algebra-and-commutant",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $H$ be a complex Hilbert space and let $\\mathcal B(H)$ denote\nits bounded linear operators. Applying AC to a family indexed by the natural numbers\nsupplies Countable Choice, the hypothesis of\n[[thm-hilbert-adjoint-properties]], which provides adjoints on $\\mathcal B(H)$.\nA **concrete von Neumann algebra** on $H$ is a\nunital $*$-subalgebra $\\mathcal A\\subseteq\\mathcal B(H)$ that is closed in the\nweak operator topology (WOT). Here unital means $I_H\\in\\mathcal A$; the zero\nHilbert space is allowed, with $I_H=0$ and sole unital algebra $\\{0\\}$. This is\nthe only use of AC in this definition.\n\nFor any set $\\mathcal S\\subseteq\\mathcal B(H)$, its **commutant** and\n**double commutant** are\n$$\\mathcal S':=\\{T\\in\\mathcal B(H):TS=ST\\text{ for every }S\\in\\mathcal S\\},\\qquad \\mathcal S'':=(\\mathcal S')'.$$\nCommutants are taken inside $\\mathcal B(H)$. The **von Neumann algebra\ngenerated by $\\mathcal S$** is\n$$W^*(\\mathcal S):=\\overline{\\operatorname{Alg}^*(\\mathcal S\\cup\\{I_H\\})}^{\\,\\mathrm{WOT}},$$\nthe WOT closure in $\\mathcal B(H)$ of the unital $*$-algebra generated by\n$\\mathcal S$. No bicommutant theorem is part of these definitions.\n\nTwo elementary properties will be used. For fixed $S\\in\\mathcal B(H)$,\n$$\\langle TS\\xi,\\eta\\rangle=\\langle T(S\\xi),\\eta\\rangle,\\qquad \\langle ST\\xi,\\eta\\rangle=\\langle T\\xi,S^*\\eta\\rangle$$\nare WOT-continuous matrix coefficients as functions of $T$. Thus each equation\n$TS=ST$ defines a WOT-closed set, and so $\\mathcal S'$ is WOT-closed. If\n$\\mathcal S$ is self-adjoint, then $\\mathcal S'$ is a unital $*$-subalgebra:\nproducts preserve commutation with every $S$, and taking adjoints of $TS=ST$\ngives $ST^*=T^*S$. These facts do not identify $W^*(\\mathcal S)$ with\n$\\mathcal S''$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The dimension strata $X_p=\\{x:\\dim H_x=p\\}$, $p\\in\\{1,2,\\dots\\}\\cup\\{\\infty\\}$, are Borel by",
+          "inputs": [
+            "F3",
+            "F1",
+            "F7"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Let $B$ be the WOT unit ball of $\\mathcal B(K_p)$ with the metric $d(T,S):=\\sum_{a,b}2^{-(a+b)}\\min(1,|\\langle(T-S)f_a,f_b\\rangle|)$ attached to a fixed orthonormal basis $(f_a)$ of $K_p$; then $B$ is a compact metric space. Enumerate only the finite matrices with rational-complex entries and operator norm at most $1$, extended by zero on the remaining coordinates. This is a countable subset of $B$ and is WOT-dense: finite-coordinate compressions $P_nTP_n$ of a contraction $T$ converge strongly to $T$; for any positive rational $\\varepsilon<1$, the finite matrix $(1-\\varepsilon)P_nTP_n$ has norm at most $1-\\varepsilon$ and can be approximated in finite-dimensional operator norm by rational-complex matrices within any tolerance less than $\\varepsilon$, all still of norm at most $1$. Taking the compression size to infinity and the shrinkage and tolerances to zero proves the asserted WOT density.",
+          "inputs": [
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "step": "1.3",
+          "claim": "The direct integral $\\mathcal M$ is a unital $*$-subalgebra of $\\mathcal B(\\mathcal H)$ containing the diagonal algebra $\\mathcal D$: sums, products and adjoints of induced operators are induced by the pointwise sums, products and adjoints of essentially bounded weakly measurable fields by",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Explicitly adjoin adjoints to the defining sequence: set $R_{2k-1}(x)=T^{(k)}_x$ and $R_{2k}(x)=(T^{(k)}_x)^*$, so $M_x=W^*(R_j(x):j\\ge1)$ and the family is adjoint-closed. The transported generators $S_j(x):=U_xR_j(x)U_x^*$ are weakly measurable by",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "We claim $(\\mathcal M)'\\subseteq\\int_X^\\oplus M_x'\\,d\\mu(x)$. Let $T\\in(\\mathcal M)'$; since $\\mathcal D\\subseteq\\mathcal M$, the operator $T$ commutes with $\\mathcal D$ and hence is decomposable, $T=\\int_X^\\oplus T_x\\,d\\mu(x)$ for a weakly measurable essentially bounded field $(T_x)$, by",
+          "inputs": [
+            "F2",
+            "2.1",
+            "1.3"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Define $g(x,T):=\\sum_{k,a,b}w_{k,a,b}\\min(1,|\\langle(TS_k^{b}(x)-S_k^{b}(x)T)f_a,f_b\\rangle|)$ with positive summable weights $w_{k,a,b}$. For fixed $T$ the map $x\\mapsto g(x,T)$ is measurable, a countable sum of measurable functions by step 1.2; for fixed $x$ the map $T\\mapsto g(x,T)$ is continuous, being the uniform limit of the weighted partial sums of continuous functions; and $g(x,T)=0$ exactly when $T$ commutes with every $S_k^{b}(x)$, that is, exactly when $T\\in (M_x^t)'$ and $\\|T\\|\\le1$, by step 2.1. The zero sets $C_x=(M_x^t)'_1$ are nonempty, since the identity belongs to them, and compact.",
+          "inputs": [
+            "1.2",
+            "2.1",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Applying",
+          "inputs": [
+            "F4",
+            "F1",
+            "3.2"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Repeating steps 3.2\u20134.1 for the simultaneous commutator equations of the fields $S_k^{b}$ and $B_j$ yields measurable dense sections of the unit ball of the centre $Z(M_x^t)=(M_x^t)\\cap(M_x^t)'$; repeating them for the commutator equations of the fields $B_j$ alone yields measurable dense sections of the unit ball of $M_x^t$, because the commutant of the WOT-closed unital algebra generated by the $B_j$ is exactly $\\{T:TB_j=B_jT\\text{ for all }j\\}$; and by",
+          "inputs": [
+            "3.2",
+            "4.1",
+            "F5",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "Transporting back by the unitaries $U_x$, and taking the union over the countably many dimension strata inside one common conull set, we obtain the promised WOT-dense countable measurable sections of the unit balls of $M_x$, $M_x'$ and $Z(M_x)$ on a common conull Borel stratum, and the fields $x\\mapsto M_x'$, $x\\mapsto Z(M_x)$ satisfy the measurability condition of",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "5.1"
+          ]
+        },
+        {
+          "id": "derive-7.1",
+          "step": "7.1",
+          "claim": "Therefore $(\\mathcal M)'=\\int_X^\\oplus M_x'\\,d\\mu(x)$, and, since $x\\mapsto M_x'$ is again a measurable field of von Neumann algebras by step 6.1, the same identity applies to it: $(\\mathcal M)''=\\int_X^\\oplus (M_x')'\\,d\\mu(x)=\\int_X^\\oplus M_x\\,d\\mu(x)=\\mathcal M$, where the middle equality is the fibre double commutant theorem of",
+          "inputs": [
+            "6.1",
+            "F6",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-8.1",
+          "step": "8.1",
+          "claim": "For the centre: by",
+          "inputs": [
+            "F2",
+            "7.1"
+          ]
+        },
+        {
+          "id": "derive-9.1",
+          "step": "9.1",
+          "claim": "Finally let $(N_x)$ be a measurable field of unital von Neumann algebras with $\\int_X^\\oplus N_x\\,d\\mu(x)=\\int_X^\\oplus M_x\\,d\\mu(x)$. For each $k$, the operator $\\int_X^\\oplus S_k^{b}(x)\\,d\\mu(x)$ belongs to $\\int_X^\\oplus N_x\\,d\\mu(x)$, so by the almost-everywhere uniqueness of decomposable representatives its field agrees almost everywhere with an $N_x$-valued essentially bounded weakly measurable field; thus $S_k^{b}(x)\\in N_x$ for almost every $x$. Intersecting the countably many conull sets and taking weak-operator closures of the generated algebras gives $M_x\\subseteq N_x$ almost everywhere; the symmetric argument gives $N_x\\subseteq M_x$ almost everywhere, so the two fields coincide almost everywhere.",
+          "inputs": [
+            "F2",
+            "8.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited by the measurable-selection, uniformization, direct-integral and decomposable-field suppliers; it also supplies the fixed orthonormal bases and dense operator sequences used on the dimension strata and the countable defining sequences of the generated von Neumann algebras. The selector applications are choice-free once their measurable input and compact target are fixed, and no global selector on the base is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited by the measurable-selection, uniformization, direct-integral and decomposable-field suppliers; it also supplies the fixed orthonormal bases and dense operator sequences used on the dimension strata and the countable defining sequences of the generated von Neumann algebras. The selector applications are choice-free once their measurable input and compact target are fixed, and no global selector on the base is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited by the measurable-selection, uniformization, direct-integral and decomposable-field suppliers; it also supplies the fixed orthonormal bases and dense operator sequences used on the dimension strata and the countable defining sequences of the generated von Neumann algebras. The selector applications are choice-free once their measurable input and compact target are fixed, and no global selector on the base is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited by the measurable-selection, uniformization, direct-integral and decomposable-field suppliers; it also supplies the fixed orthonormal bases and dense operator sequences used on the dimension strata and the countable defining sequences of the generated von Neumann algebras. The selector applications are choice-free once their measurable input and compact target are fixed, and no global selector on the base is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited by the measurable-selection, uniformization, direct-integral and decomposable-field suppliers; it also supplies the fixed orthonormal bases and dense operator sequences used on the dimension strata and the countable defining sequences of the generated von Neumann algebras. The selector applications are choice-free once their measurable input and compact target are fixed, and no global selector on the base is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    },
+    "lem-two-common-diagonalizations-are-related-by-a-base-isomorphism-and-a-measurable-field-of-unitaries": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-standard-borel-spaces-admit-bimeasurable-real-codings",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every standard-Borel space $(E,\\mathcal S)$ is measurably isomorphic to a Borel subset of $[0,1]$, including $E=\\varnothing$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every standard-Borel space $(E,\\mathcal S)$ has a countable algebra $\\mathcal A$ which generates $\\mathcal S$, separates points, and determines finite measures: if finite measures $\\mu,\\nu$ agree on $\\mathcal A$, then $\\mu=\\nu$. In particular it determines probability measures.",
+          "uses": [
+            "4.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measurable-hilbert-field-from-a-countable-fundamental-family",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu)$ be a standard-Borel space with a sigma-finite measure\non its Borel sigma-algebra; the measure is not assumed complete. A **measurable\ncomplex Hilbert field with countable fundamental family** consists of a\nseparable complex Hilbert space $H_x$ for each $x\\in X$ and a sequence of\nvectors $e_n(x)\\in H_x$ ($n\\in\\mathbb N$) such that\n$$x\\longmapsto\\langle e_n(x),e_m(x)\\rangle_{H_x}$$\nis Borel measurable for every $n,m$, and the complex-linear span of\n$\\{e_n(x):n\\in\\mathbb N\\}$ is dense in $H_x$ for every $x$. The fibres may be\nzero-dimensional; no positive lower bound on their dimensions is imposed. The\ninner product is linear in its first variable, as in the library's complex\ninner-product convention.\n\nA section is a choice of a vector $\\xi(x)\\in H_x$ for each $x$. It is a\n**measurable section** when all its fundamental coefficients\n$$x\\longmapsto\\langle\\xi(x),e_n(x)\\rangle_{H_x},\\qquad n\\in\\mathbb N,$$\nare Borel measurable complex functions. Each $e_n$ is itself measurable by\nthe Gram-coefficient condition. Pointwise sums and multiplication by a\nmeasurable complex scalar function are taken in the corresponding fibres.\n\nTwo measurable sections are identified **almost everywhere** when there is a\nBorel null set $N$ such that they agree at every $x\\notin N$. This formulation\nworks on the given, possibly noncomplete, measure space and does not silently\nadjoin arbitrary subsets of null sets to $\\mathcal B$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-direct-integral-of-a-measurable-hilbert-field",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu)$ carry a measurable complex Hilbert field\n$(H_x,e_n(x))_{x\\in X}$ as in\n[[def-measurable-hilbert-field-from-a-countable-fundamental-family]], with\ninner products linear in the first variable. Write $\\mathscr M(H)$ for its\nmeasurable sections. Define the square-integrable section space\n$$\\mathscr M_2(H):=\\left\\{\\xi\\in\\mathscr M(H):\\int_X\\|\\xi(x)\\|_{H_x}^{2}\\,d\\mu(x)<\\infty\\right\\}.$$\nThe integrand is a nonnegative measurable function: the section lemma\n[[lem-measurable-sections-have-measurable-pointwise-inner-products]] makes\n$x\\mapsto\\|\\xi(x)\\|$ measurable, and composition with $t\\mapsto t^2$ preserves\nmeasurability by\n[[thm-composition-with-borel-functions-preserves-measurability]], whose\nmeasurability convention is inverse-image measurability\n[[def-measurable-function-between-measurable-spaces]]. Its integral\nis the nonnegative Lebesgue integral\n[[def-nonnegative-lebesgue-integral]].\n\nFor $\\xi,\\eta\\in\\mathscr M(H)$, put $\\xi\\sim_\\mu\\eta$ when there is a Borel\n$\\mu$-null set $N$ such that $\\xi(x)=\\eta(x)$ for every $x\\notin N$, using the\nnoncomplete-base convention of the field definition. The **direct integral**\nis the quotient set\n$$\n\\int_X^{\\oplus}H_x\\,d\\mu(x):=\\mathscr M_2(H)/{\\sim_\\mu}.\n$$\nWrite $[\\xi]$ for the class of $\\xi$. Addition and scalar multiplication are\ninduced by pointwise fibre operations, and the inner product is\n$$\\langle[\\xi],[\\eta]\\rangle:=\\int_X\\langle\\xi(x),\\eta(x)\\rangle_{H_x}\\,d\\mu(x).$$\n\n**The admissible sections form a vector space.** Measurability of pointwise\nlinear combinations follows from the section lemma. If $a=\\|\\xi(x)\\|$ and\n$b=\\|\\eta(x)\\|$, fibrewise expansion gives\n$$\\|\\xi(x)+\\eta(x)\\|^2=a^2+b^2+2\\operatorname{Re}\\langle\\xi(x),\\eta(x)\\rangle\\le a^2+b^2+2ab\\le2(a^2+b^2).$$\nby Cauchy\u2013Schwarz, $\\operatorname{Re}z\\le|z|$ for complex $z$, and\n$2ab\\le a^2+b^2$ (since $(a-b)^2\\ge0$). The real-part bound follows from\n$|u+iv|=\\sqrt{u^2+v^2}$ and $u^2+v^2\\ge u^2$ when $u>0$; it is immediate\nwhen $u\\le0$, and taking nonnegative square roots gives $u\\le|u+iv|$ in the\npositive case. The modulus and conjugation laws are recorded in\n[[lem-complex-conjugation-and-modulus-laws]].\nBy monotonicity, positive homogeneity, and additivity of the nonnegative\nintegral ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]],\n[[cor-additivity-of-the-nonnegative-lebesgue-integral]]), the integral of the\nsquared norm of a sum is finite whenever those of $\\xi$ and $\\eta$ are finite;\nthe comparison function $a^2+b^2$ is measurable by Borel composition\n[[thm-composition-with-borel-functions-preserves-measurability]] and\nmeasurable arithmetic [[thm-arithmetic-and-lattice-operations-preserve-measurability]].\nFor $c\\ne0$,\n$\\|c\\xi(x)\\|^2=|c|^2\\|\\xi(x)\\|^2$ and positive homogeneity keeps its\nintegral finite; for $c=0$ the zero function has integral zero. Hence\n$\\mathscr M_2(H)$ is a complex vector space.\nThe pointwise bound uses\n[[thm-cauchy-schwarz-in-an-inner-product-space]] and the norm and scalar\nconventions of [[def-real-and-complex-inner-product-space]].\n\n**The quotient and its operations are well-defined.** The empty set is a Borel\nnull set by the $m=0$ clause of\n[[thm-finite-and-countable-subadditivity-of-measures]], so $\\sim_\\mu$ is\nreflexive; it is symmetric by equality, and it is transitive because two Borel\nnull witnesses have a null union by the same finite-subadditivity theorem. This\nuses the definition of almost-everywhere equality\n[[def-measure-null-set-and-almost-everywhere]]. If $\\xi\\sim_\\mu\\xi'$\nand $\\eta\\sim_\\mu\\eta'$, then outside the union of their two witnesses the\npointwise sums agree, and so do the pointwise scalar multiples. The same finite\nunion argument shows that these operations do not depend on representatives.\n\n**The displayed pairing is finite.** By the section lemma,\n$h(x)=\\langle\\xi(x),\\eta(x)\\rangle$ is measurable. The modulus $|h|$ is\nmeasurable by Borel composition with the complex modulus. The measurable\nreal-valued functions $f(x)=\\|\\xi(x)\\|$ and $g(x)=\\|\\eta(x)\\|$ belong to\n$\\mathcal L^2(\\mu)$ by the definition of that space\n[[def-calligraphic-l-p-on-a-measure-space]]. Fibrewise Cauchy\u2013Schwarz and then\nthe scalar $L^2$ Cauchy\u2013Schwarz inequality\n[[cor-cauchy-schwarz-inequality-for-l-two]] give\n$$\\int_X|h(x)|\\,d\\mu(x)\\le\\int_X f(x)g(x)\\,d\\mu(x)\\le\\|f\\|_2\\|g\\|_2<\\infty.$$\nSince $f,g\\ge0$, the scalar theorem's $|fg|$ is $fg$. Here $fg$ is measurable by\n[[thm-arithmetic-and-lattice-operations-preserve-measurability]], and the first\ninequality uses monotonicity of the nonnegative integral\n[[prop-order-and-scalar-rules-for-the-nonnegative-integral]].\nThus $h$ is an integrable complex function by\n[[def-integrable-real-and-complex-functions-and-their-integrals]]. More\nexplicitly, write $h=u+iv$. The real coordinate projections are Borel, so\n$u$ and $v$ are measurable, and $|u|,|v|\\le |h|$ makes both real functions\nintegrable. Their classes, rather than a class of the complex function $h$,\nbelong to the real space $L^1(\\mu)$ of\n[[def-l-p-space-as-a-quotient-by-null-functions]]. The complex integral here\nmeans precisely $\\int h=\\int u+i\\int v$.\n\n**The pairing does not depend on representatives.** If $\\xi\\sim_\\mu\\xi'$ and\n$\\eta\\sim_\\mu\\eta'$, their pairings agree outside the union of the two null\nwitnesses. Both pairings are integrable by the preceding estimate. Their real parts agree almost everywhere, as do their imaginary parts.\nApplying [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]\nseparately to these real $L^1$ classes, with $A=X$, gives equality of both\ncomponent integrals and hence of the complex integrals.\n\n**The quotient is an inner-product space.** Fibrewise linearity in the first\nvariable passes through the integral by real linearity in\n[[thm-linearity-of-the-lebesgue-integral-on-l-one]], applied to the integrable\nreal and imaginary parts. Indeed, if $h=u+iv$ and $c=a+ib$, then\n$ch=(au-bv)+i(av+bu)$, so real linearity gives\n$\\int ch=c\\int h$. For two integrable pairings $h=u+iv$ and $k=s+it$,\n$h+k=(u+s)+i(v+t)$ gives $\\int(h+k)=\\int h+\\int k$ in the same way;\nall these real components are integrable by real linearity. Their complex\ncombinations are integrable since $|ch|=|c||h|$ and\n$|h+k|\\le |h|+|k|$, using nonnegative integral monotonicity and additivity.\nFibrewise conjugate\nsymmetry passes through it as well: for integrable $h=u+iv$, the definition\ngives $\\int\\overline h=\\int u-i\\int v=\\overline{\\int h}$; integrability of\n$\\overline h$ follows from $|\\overline h|=|h|$\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] and\n[[lem-complex-conjugation-and-modulus-laws]]. Conjugate symmetry\nand first-variable linearity give conjugate-linearity in the second variable.\nFor every class,\n$$\\langle[\\xi],[\\xi]\\rangle=\\int_X\\|\\xi(x)\\|^2\\,d\\mu(x)\\ge0.$$\nThis value is zero exactly when $\\|\\xi(x)\\|^2=0$ almost everywhere, by\n[[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]. Fibrewise positive\ndefiniteness says this is exactly when $\\xi(x)=0$ off a Borel null set, that is,\nwhen $[\\xi]=[0]$. Therefore the pairing is positive definite. These arguments\nuse the ordinary complex inner-product axioms\n[[def-real-and-complex-inner-product-space]] and the integral convention above;\nthey do not use any form of the axiom of choice.\n\nNo completion is part of this definition. The next theorem proves that this\ninner-product space is complete under its induced norm.\n\n**Boundary cases.** If $X=\\varnothing$, or if every fibre is zero-dimensional,\nthere is only the zero section and the quotient is the zero inner-product\nspace. If $\\mu(X)=0$, then $X$ itself is a Borel null set, so every two\nsquare-integrable sections are equivalent and the quotient is again zero.\nFor a one-point base $X=\\{x_0\\}$ with $\\mu(\\{x_0\\})=m>0$ and\n$H_{x_0}=\\mathbb C$, take $e_1(x_0)=1$ and $e_n(x_0)=0$ for $n\\ge2$.\nEvery section has the form $\\xi_z(x_0)=z$ and\n$$\\langle[\\xi_z],[\\xi_w]\\rangle=m z\\overline w.$$\nThe direct integral is one-dimensional, with norm $\\sqrt m\\,|z|$. If instead\n$m=0$, the preceding zero-measure calculation applies.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-decomposable-operators-are-the-commutant-of-diagonal-multiplication",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure\nspace, let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with\na countable fundamental family, and set\n$$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x),$$\nwith the direct-integral Hilbert-space structure. For each\n$f\\in L^\\infty(X,\\mu)$ let $M_f\\in\\mathcal B(\\mathcal H)$ act by scalar\nmultiplication, and put $\\mathcal D=\\{M_f:f\\in L^\\infty(X,\\mu)\\}$. Then\n$$\\mathcal D'=\\{S\\in\\mathcal B(\\mathcal H): S\\text{ is decomposable}\\},$$\nwhere decomposable has the meaning in\n[[def-measurable-and-decomposable-operator-fields]]. For a fixed $S$, any\nweakly measurable essentially bounded field inducing $S$ is unique up to a\n$\\mu$-null set.",
+          "uses": [
+            "2.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-direct-integrals-transport-along-bimeasurable-base-isomorphisms",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\mathcal B_X,\\mu)$ and $(Y,\\mathcal B_Y,\\nu)$ be\n$\\sigma$-finite standard Borel measure spaces, let $c:X\\to Y$ be a\nbimeasurable bijection with $\\nu=c_*\\mu$, and let $(H_y)_{y\\in Y}$ be a\nmeasurable complex Hilbert field over $(Y,\\nu)$ with direct integral\n$\\int_Y^\\oplus H_y\\,d\\nu(y)$. Then $x\\mapsto H_{c(x)}$ is a measurable Hilbert\nfield over $(X,\\mu)$ with the pulled-back fundamental family, and pullback of\nsections $\\xi\\mapsto\\xi\\circ c$ is a unitary\n$$c^*:\\int_Y^\\oplus H_y\\,d\\nu(y)\\longrightarrow\\int_X^\\oplus H_{c(x)}\\,d\\mu(x)$$\nthat intertwines multiplication by $f\\in L^\\infty(Y,\\nu)$ with multiplication\nby $f\\circ c$. A decomposable operator field $(T_y)$ over $Y$ corresponds to\nthe decomposable field $x\\mapsto T_{c(x)}$ over $X$ with the same essential\nnorm and the same fibrewise adjoint and product identities.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-measurable-gram-schmidt-and-constant-field-trivializations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with countable fundamental family. Then: (1) there are measurable sections $f_n$ such that for every $x$ the nonzero $f_n(x)$ form a complete orthonormal system in $H_x$, and $x\\mapsto\\langle\\xi(x),f_n(x)\\rangle$ is Borel for every measurable section $\\xi$; (2) for each $p\\in\\{1,2,\\ldots\\}\\cup\\{\\infty\\}$, the dimension stratum $X_p:=\\{x:\\dim H_x=p\\}$ is Borel, and for every fixed separable Hilbert space $K_p$ of dimension $p$ there are unitaries $U_x:H_x\\to K_p$ on $X_p$ such that $\\xi$ is a measurable section on $X_p$ if and only if $x\\mapsto U_x\\xi(x)$ is a Borel map; explicitly, $U_x\\xi$ has coordinates $\\langle\\xi(x),f_n(x)\\rangle$ after deleting zero frame vectors; (3) weakly measurable operator fields have Borel transported matrix coefficients on each $X_p$, and uniformly bounded transported fields are Borel maps into their weak-operator-topology balls; (4) for every countable family of measurable sections $\\xi_k$, the pointwise closed spans $S_x:=\\overline{\\operatorname{span}}\\{\\xi_k(x):k\\ge1\\}$ form a measurable closed Hilbert subfield, and its direct integral is the closed linear span in $\\int_X^\\oplus H_x\\,d\\mu(x)$ of all square-integrable localizations $f\\mathbf1_E\\xi_k$, where $E=D_j\\cap\\{x:\\|\\xi_k(x)\\|\\le r\\}$, $(D_j)$ is any countable finite-measure cover of $X$, $r\\in\\mathbb R$ with $r\\ge1$, and $f$ is any bounded Borel scalar function supported in $E$. The zero-dimensional stratum is Borel as the complement of the positive and infinite-dimensional strata.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-measurable-and-decomposable-operator-fields",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu;H_x,e_n(x))$ be the measurable Hilbert field of\n[[def-measurable-hilbert-field-from-a-countable-fundamental-family]], and let\n$\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ be the direct-integral inner-product\nspace of [[def-direct-integral-of-a-measurable-hilbert-field]]. The inner\nproducts are linear in their first variables. An **operator field** is a family\n$(T_x)_{x\\in X}$ with $T_x\\in\\mathcal B(H_x)$ for every $x$.\n\nThe field is **weakly measurable** when every fundamental matrix coefficient\n$x\\longmapsto\\langle T_xe_n(x),e_m(x)\\rangle$ is measurable. As proved below,\nthis is equivalent to measurability of\n$x\\mapsto\\langle T_x\\xi(x),\\eta(x)\\rangle$ for every pair of measurable\nsections $\\xi,\\eta$. The proof obtains this equivalence from pointwise\nboundedness of each $T_x$, so the equivalence also holds when the field is\nessentially bounded.\n\nFor a weakly measurable operator field, the operator-norm function\n$x\\mapsto\\|T_x\\|$ is measurable. Such a field is\n**essentially bounded** when\n$\\operatorname*{ess\\,sup}_{x\\in X}\\|T_x\\|<\\infty$, with essential supremum\ntaken with respect to $\\mu$.\n\nA bounded operator $S\\in\\mathcal B(\\mathcal H)$ is **decomposable** if there\nis a weakly measurable, essentially bounded operator field $(T_x)$ such that\nfor every square-integrable measurable section $\\xi$, the pointwise section\n$(T\\xi)(x):=T_x\\xi(x)$ is again square-integrable and\n$S[\\xi]=[T\\xi]$. The square-integrability and class equality are part of this\ndefinition; the next theorem proves that every weakly measurable essentially\nbounded field indeed has this action. Operator fields are identified when\nequal off a measurable $\\mu$-null set.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-reciprocal-rule-for-equivalent-sigma-finite-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ and $\\nu$ be equivalent sigma-finite positive measures on the same measurable space. Then\n$$\\frac{d\\nu}{d\\mu}\\frac{d\\mu}{d\\nu}=1\\qquad\\nu\\text{-almost everywhere,}$$\nand therefore also $\\mu$-almost everywhere.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-integration-against-a-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure and let $\\nu$ be a signed measure or a finite complex measure with $\\nu\\ll\\mu$. If $h$ is a representative of $d\\nu/d\\mu$, then\n$$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nMore generally, if\n$$g=\\sum_{j=1}^m c_j\\mathbf 1_{E_j}$$\nis the canonical disjoint representation of a simple measurable function and $|\\nu|(E_j)<+\\infty$ for every $j$, then\n$$\\int g\\,d\\nu=\\sum_{j=1}^m c_j\\int_{E_j} h\\,d\\mu.$$\nIn particular, whenever the Lebesgue integral of $gh$ is defined, one has\n$$\\int g\\,d\\nu=\\int gh\\,d\\mu.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-real-numbers",
+          "source_section": "Definition",
+          "quote": "The **real numbers** are the quotient ring\n\n$$\\mathbb{R} := \\mathcal{C} / \\mathcal{N}$$\n\nof the ring of Cauchy sequences ([[thm-cauchy-ring]]) by the ideal of null\nsequences ([[lem-null-ideal]]). The class of $(a_n)$ is written\n$[(a_n)]$. Each rational $q$ maps to the class $\\hat q$ of the constant\nsequence $(q, q, q, \\dots)$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.\n\n- $u \\in F$ is an **upper bound** of $S$ if $s \\le u$ for all $s \\in S$; $S$ is\n  **bounded above** if it has an upper bound.\n- $u \\in F$ is a **least upper bound** (or **supremum**, $\\sup S$) of $S$ if $u$\n  is an upper bound of $S$ and $u \\le u'$ for every upper bound $u'$ of $S$.\n\n$F$ is a **complete ordered field** (equivalently, $F$ has the\n**least-upper-bound property**, or is **Dedekind complete**) if every nonempty\n$S \\subseteq F$ that is bounded above has a least upper bound in $F$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-measurable-sections-have-measurable-pointwise-inner-products",
+          "source_section": "Statement",
+          "quote": "Let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with\ncountable fundamental family, with the inner product linear in its first\nvariable. For a section $\\xi$, the following are equivalent:\n\n1. every coefficient $x\\mapsto\\langle\\xi(x),e_n(x)\\rangle$ is measurable;\n2. $x\\mapsto\\langle\\xi(x),\\eta(x)\\rangle$ is measurable for every measurable\n   section $\\eta$.\n\nFor such sections, $x\\mapsto\\|\\xi(x)\\|$ and\n$x\\mapsto\\langle\\xi(x),\\eta(x)\\rangle$ are measurable. Measurable sections\nare closed under measurable scalar combinations and under pointwise norm\nlimits.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-seven-generators-of-the-borel-sigma-algebra-on-r",
+          "source_section": "Statement",
+          "quote": "Each of the following families generates $\\mathcal B(\\mathbb R)$:\n\n1. all open subsets of $\\mathbb R$;\n2. all closed subsets of $\\mathbb R$;\n3. all open intervals $(a,b)$ with $a<b$;\n4. all rational open intervals $(p,q)$ with $p,q\\in\\mathbb Q$ and $p<q$;\n5. all half-open intervals $(a,b]$ with $a<b$;\n6. all open right rays $(a,\\infty)$;\n7. all rational open right rays $(q,\\infty)$ with $q\\in\\mathbb Q$.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-complex-lp-and-euclidean-test-function-conventions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A finite-valued function $f=u+iv:X\\to\\mathbb C$ is **measurable** when $u,v$ are real measurable functions. Write\n$$N_p(f)=\\begin{cases}\\left(\\int_X|f|^p\\,d\\mu\\right)^{1/p},&\\displaystyle\\int_X|f|^p\\,d\\mu<\\infty,\\\\+\\infty,&\\displaystyle\\int_X|f|^p\\,d\\mu=+\\infty,\\end{cases}\\quad(1\\le p<\\infty),\\qquad N_\\infty(f)=\\inf\\{M\\in[0,\\infty]:|f|\\le M\\text{ a.e.}\\}.$$\nThe finite case uses the real power; the infinite case is assigned directly,\nso $N_p(f)$ is defined for every measurable finite-valued complex $f$.\nThe infimum of the empty set of finite bounds is $\\infty$; equivalently allow $M=\\infty$. Define $\\mathcal L^p(\\mu;\\mathbb C)=\\{f:f\\text{ measurable},N_p(f)<\\infty\\}$ and its **set quotient** $L^p(\\mu;\\mathbb C)=\\mathcal L^p/\\!\\sim$, where $f\\sim g$ means $f=g$ a.e. This extends [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-essential-supremum-with-respect-to-a-measure]]. Norm and vector-space assertions are established separately.\n\nHere $|u+iv|=\\sqrt{u^2+v^2}$ and $\\overline{u+iv}=u-iv$ as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. These operations preserve measurability: $u^2+v^2$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and\n$$\\{|f|>a\\}=\\begin{cases}\\{u^2+v^2>a^2\\},&a\\ge0,\\\\X,&a<0.\\end{cases}$$\nThus [[thm-threshold-characterisations-of-real-and-extended-real-measurability]] applies. For $g=a+ib$, the formulas $fg=(ua-vb)+i(ub+va)$ and $\\overline f=u-iv$ prove the remaining claims by real arithmetic closure. Nonnegative powers are measurable because $\\{r^t>b\\}=\\{r>b^{1/t}\\}$ for $r\\ge0,t>0,b\\ge0$, with the negative thresholds automatic.\n\nA **finite simple** complex function has finite range and measurable fibers. Its **finite-measure support** condition is $\\mu(\\{s\\ne0\\})<\\infty$. This concerns the nonzero set, not compactness of its closure. The zero function is an admissible finite simple function, including when $X=\\varnothing$ or $\\mu(X)=0$.\n\nIntegration is componentwise: for integrable $f=u+iv$,\n$$\\int f\\,d\\mu=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$\nThis is the earlier convention of [[def-integrable-real-and-complex-functions-and-their-integrals]] and [[def-l-one-of-a-measure]]. The inequalities $|u|,|v|\\le|f|\\le|u|+|v|$ show that integrability of the modulus and integrability of both components are equivalent.\n\nFor $n\\ge1$, define complex $C_c(\\mathbb R^n)$, $C_0(\\mathbb R^n)$ and $C_c^\\infty(\\mathbb R^n)$ by requiring both components to lie in the corresponding real spaces ([[def-c-c-and-c-c-infinity-on-rn]], [[def-c-zero-on-rn]]). Derivatives are componentwise, with the multi-index and all-ordered-partials conventions of [[def-ck-and-multi-index-notation-in-several-variables]]. The union of the two compact component supports is compact. A measurable complex $f$ is **locally integrable** for Lebesgue measure if $\\int_K|f|<\\infty$ on every compact $K$. The component inequalities give the equivalent componentwise condition. By [[thm-heine-borel-rn]], closed bounded balls are compact and each compact set is bounded. Hence compact integrability implies integrability on every bounded open ball by restriction from its closure; conversely each compact set is contained in a bounded open ball. These prove both directions of the ball formulation.\n\nFor a topological $X$ with Borel sets contained in $\\mathcal A$, define\n$$\\operatorname{ess\\,supp}_\\mu f=X\\setminus\\bigcup\\{U:U\\text{ open and }f=0\\text{ a.e. on }U\\}.$$\nChanging $f$ on one measurable null set preserves the zero-a.e. property on every $U$, since the union of that set and the old exceptional set is null. Thus essential support depends only on the a.e. class. Ordinary support means $\\overline{\\{f\\ne0\\}}$ and can change with the representative.\n\nFor the following illustration assume [[def-countable-choice]]. For $f=\\mathbf1_{\\mathbb Q}$ on $\\mathbb R$, [[prop-countable-subsets-of-rn-are-lebesgue-null]] gives $f=0$ Lebesgue-a.e.; therefore $N_\\infty(f)=0$ and $\\operatorname{ess\\,supp}f=\\varnothing$, since $U=\\mathbb R$ occurs in the union. But [[lem-q-and-irrationals-dense-r]] gives $\\overline{\\{f\\ne0\\}}=\\mathbb R$. For the Dirac probability measure at zero ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]), the bound $1$ holds everywhere and every $0\\le M<1$ fails on $\\{0\\}$, of measure one. Thus $N_{\\infty,\\delta_0}(f)=1$.\n\nThe raw $L^2$ pairing convention is $\\langle f,g\\rangle=\\int f\\overline g$, linear in the first variable. Its integrability and class invariance are obligations of the later pairing items. **Bilinear tests** instead use $\\int fs$, with no conjugation of $s$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-radon-nikodym-derivative",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure.\n\n1. If $\\nu$ is a signed measure satisfying the hypothesis of [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]] and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of measurable real-valued functions $f$ satisfying the measurable-set integral formula in that theorem.\n2. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $\\nu$ is a finite complex measure and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of complex $L^1(\\mu)$ functions $h$ satisfying\n   $$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A),$$\n   as given by [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]].\n\nIn both cases the derivative is not a distinguished pointwise function: it is determined only up to $\\mu$-almost-everywhere equality in the sense of [[def-measure-null-set-and-almost-everywhere]].",
+          "uses": [
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "For either field, if $A$ is a Borel set of positive measure, sigma-finiteness and the nonzero-fibre condition give a countable cover of $A$ by sets $E\\cap\\{1/k\\le\\|e_n(x)\\|\\le k\\}$, where $E$ has finite measure and $(e_n)$ is the fundamental family. Some such set has positive measure by",
+          "inputs": [
+            "F14",
+            "F3",
+            "F12"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "In the non-null case put $\\Theta(S)=WSW^{-1}$. Every diagonal projection is $M_f$ for a bounded Borel representative $f$ by",
+          "inputs": [
+            "F5",
+            "F16",
+            "1.1",
+            "F4",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Choose bimeasurable codes $h_X:X\\to B_X\\subseteq[0,1]$ and $h_Y:Y\\to B_Y\\subseteq[0,1]$ by",
+          "inputs": [
+            "F1",
+            "F13",
+            "F15",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Let $\\mathcal A_X,\\mathcal A_Y$ be countable separating Borel algebras from",
+          "inputs": [
+            "F2",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "For every Borel $B\\subseteq Y_0$, the identities in step 4.1 give $\\mu(c^{-1}(B))=0$ exactly when $\\nu(B)=0$, so $\\lambda=c_*(\\mu|_{X_0})$ is equivalent to $\\nu|_{Y_0}$. It is sigma-finite because the images under the bimeasurable bijection $c$ of a finite-measure cover of $X_0$ are Borel and have finite $\\lambda$-measure. On indicators the conjugation identity is $WM_{\\mathbf1_{c^{-1}(B)}}W^{-1}=M_{\\mathbf1_B}$, so linearity proves it for simple functions. For any $g\\in L^\\infty(Y_0,\\lambda)$,",
+          "inputs": [
+            "4.1",
+            "F16",
+            "F14"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "Sigma-finiteness of $\\lambda$ and $\\nu|_{Y_0}$ and",
+          "inputs": [
+            "F14",
+            "F17",
+            "F9",
+            "F18",
+            "F19",
+            "F10",
+            "F11",
+            "F20",
+            "F13",
+            "F12",
+            "5.1"
+          ]
+        },
+        {
+          "id": "derive-7.1",
+          "step": "7.1",
+          "claim": "Transport the field $(H_x)$ from $(X_0,\\mu)$ to $(Y_0,\\lambda)$ along $d:Y_0\\to X_0$ by",
+          "inputs": [
+            "F6",
+            "4.1",
+            "6.1",
+            "F7",
+            "5.1"
+          ]
+        },
+        {
+          "id": "derive-8.1",
+          "step": "8.1",
+          "claim": "Apply",
+          "inputs": [
+            "F5",
+            "7.1",
+            "F8",
+            "F7",
+            "5.1",
+            "6.1",
+            "F2",
+            "F17",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC. It is inherited from the measurable-field, standard-Borel coding, transport, projection-algebra, Gram\u2013Schmidt, Radon\u2013Nikodym, and decomposable-commutant suppliers. Locally, AC selects the countably many Borel representatives of the rational-cut projections. No uncountable family of points or fibre vectors is selected."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC. It is inherited from the measurable-field, standard-Borel coding, transport, projection-algebra, Gram\u2013Schmidt, Radon\u2013Nikodym, and decomposable-commutant suppliers. Locally, AC selects the countably many Borel representatives of the rational-cut projections. No uncountable family of points or fibre vectors is selected."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC. It is inherited from the measurable-field, standard-Borel coding, transport, projection-algebra, Gram\u2013Schmidt, Radon\u2013Nikodym, and decomposable-commutant suppliers. Locally, AC selects the countably many Borel representatives of the rational-cut projections. No uncountable family of points or fibre vectors is selected."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC. It is inherited from the measurable-field, standard-Borel coding, transport, projection-algebra, Gram\u2013Schmidt, Radon\u2013Nikodym, and decomposable-commutant suppliers. Locally, AC selects the countably many Borel representatives of the rational-cut projections. No uncountable family of points or fibre vectors is selected."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC. It is inherited from the measurable-field, standard-Borel coding, transport, projection-algebra, Gram\u2013Schmidt, Radon\u2013Nikodym, and decomposable-commutant suppliers. Locally, AC selects the countably many Borel representatives of the rational-cut projections. No uncountable family of points or fibre vectors is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    },
+    "thm-essential-uniqueness-of-central-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-central-spectral-models-transport-and-intertwiners-disintegrate",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a second-countable locally compact group and $(\\pi,H)$ a separable strongly continuous unitary representation with two central decompositions $U:H\\to\\int_X^\\oplus H_x\\,d\\mu(x)$, $\\pi\\cong\\int^\\oplus\\pi_x\\,d\\mu$, and $V:H\\to\\int_Y^\\oplus K_y\\,d\\nu(y)$, $\\pi\\cong\\int^\\oplus\\sigma_y\\,d\\nu$, in the sense of [[thm-central-decomposition-into-factor-representations]]. Then there exist conull Borel sets $X_0\\subseteq X$, $Y_0\\subseteq Y$, a bimeasurable bijection $c:X_0\\to Y_0$ with $c_*(\\mu|_{X_0})$ equivalent to $\\nu|_{Y_0}$, and a field of unitaries $u_x:H_x\\to K_{c(x)}$ that is measurable over $X_0$ and satisfies $$u_x\\pi_x(g)u_x^{-1}=\\sigma_{c(x)}(g)\\qquad\\text{for every }g\\in G\\text{ and }\\mu\\text{-almost every }x\\in X_0.$$ Consequently the two central decompositions determine the same base modulo null sets and null-set modification, and the fibre representations are unitarily equivalent almost everywhere through a measurable field.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-central-decomposition-into-factor-representations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a second-countable locally compact Hausdorff group and let $(\\pi,H)$ be a strongly continuous unitary representation of $G$ on a separable Hilbert space $H\\neq\\{0\\}$. Then there exist a sigma-finite standard-Borel measure space $(X,\\mathcal B,\\mu)$, a measurable Hilbert field $(H_x,e_n(x))$ with $H_x\\neq\\{0\\}$ for $\\mu$-almost every $x$, a measurable field $(\\pi_x)$ of strongly continuous unitary representations of $G$ on the fibres, with $\\pi_x$ a factor representation for almost every $x$, and a unitary $$U:H\\longrightarrow\\int_X^\\oplus H_x\\,d\\mu(x)$$ such that (1) $U\\pi(g)U^{-1}=\\int_X^\\oplus\\pi_x(g)\\,d\\mu(x)$ for every $g\\in G$; (2) $UZ(\\pi(G)'')U^{-1}=\\mathcal D$, the algebra of diagonalisable operators; (3) $U\\pi(G)''U^{-1}=\\int_X^\\oplus\\pi_x(G)''\\,d\\mu(x)$ and $U\\pi(G)'U^{-1}=\\int_X^\\oplus\\pi_x(G)'\\,d\\mu(x)$. Such a decomposition is called a **central decomposition** of $\\pi$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-factor-representation-and-primary-representation",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). Let $G$ be a topological group and let $(\\pi,H)$ be a strongly continuous unitary representation on a nonzero Hilbert space $H$ ([[def-strongly-continuous-unitary-representation]], [[def-hilbert-space]]). Set $M:=\\pi(G)''\\subseteq\\mathcal B(H)$, the concrete double commutant defined in [[def-von-neumann-algebra-and-commutant]], and set $Z(M):=M\\cap M'$. The representation $\\pi$ is **factorial**, or **primary**, when $Z(M)=\\mathbb C I_H$. It is a **factor representation** when $M$ is a factor, meaning $M\\cap M'=\\mathbb C I_H$. The commutants satisfy $\\pi(G)'=(\\pi(G)'')'$ by their definitions, and irreducibility implies factoriality. The converse fails: for every nontrivial ICC discrete group $\\Gamma$ (meaning every nonidentity conjugacy class is infinite), its left regular representation is factorial but not irreducible. Such groups exist, for example the finitary symmetric group on a countably infinite set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Both $(X,\\mu,\\pi_x,U)$ and $(Y,\\nu,\\sigma_y,V)$ are central decompositions of the same $\\pi$, so the hypotheses of the transport lemma",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The measure-class statement $c_*(\\mu|_{X_0})\\sim\\nu|_{Y_0}$ is part of",
+          "inputs": [
+            "F1",
+            "1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Invariance: if $(X',\\mu',\\pi'_x,U')$ is a third central decomposition of $\\pi$, applying step 1.1 to the pairs $(X,Y)$ and $(Y,X')$ gives bimeasurable base isomorphisms whose composition is again bimeasurable and preserves measure classes, and the corresponding measurable fields of unitaries compose fibrewise; hence the relation \"is related to by a bimeasurable base isomorphism and a measurable field of fibre unitaries\" is an equivalence relation on central decompositions of $\\pi$, and the measure class of the base together with the measurable field of unitary equivalence classes of the fibre factor representations is an invariant of $\\pi$.",
+          "inputs": [
+            "1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The literal parametrisation by the quasi-dual $QD(G)$ is outside the present claim. The transport result identifies the two standard-Borel bases and supplies measurable fibre unitaries without assigning quasi-dual labels.",
+          "inputs": [
+            "F1",
+            "F2",
+            "2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the central-decomposition and transport suppliers; this theorem adds no selection of its own beyond the transport data c and u_x supplied by those results."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the central-decomposition and transport suppliers; this theorem adds no selection of its own beyond the transport data c and u_x supplied by those results."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the central-decomposition and transport suppliers; this theorem adds no selection of its own beyond the transport data c and u_x supplied by those results."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the central-decomposition and transport suppliers; this theorem adds no selection of its own beyond the transport data c and u_x supplied by those results."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is the stated hypothesis and is inherited from the central-decomposition and transport suppliers; this theorem adds no selection of its own beyond the transport data c and u_x supplied by those results."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    }
+  }
+}

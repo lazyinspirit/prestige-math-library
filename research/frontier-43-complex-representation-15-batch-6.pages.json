@@ -1,0 +1,1015 @@
+[
+  {
+    "order": 1524,
+    "id": "quantized-enveloping-algebras-and-quantum-serre-relations",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Quantized Enveloping Algebras and Quantum Serre Relations",
+    "companion": "quantized-enveloping-algebras-and-quantum-serre-relations-examples",
+    "requires": [
+      "kac-moody-algebras-from-generalized-cartan-matrices",
+      "tensor-products-of-modules",
+      "permutation-statistics-inversions-and-eulerian-numbers",
+      "harish-chandra-isomorphism-casimir-and-central-characters",
+      "free-groups-and-presentations",
+      "the-burau-representations"
+    ],
+    "items": [
+      {
+        "id": "def-bialgebra-counit-and-antipode",
+        "kind": "definition",
+        "title": "Bialgebras, counits and antipodes over a commutative ring",
+        "deps": [
+          "def-algebra-over-a-commutative-ring",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring"
+        ],
+        "statement": "Let $R$ be a commutative ring. A **bialgebra over $R$** is a unital associative $R$-algebra $(A,m,\\eta)$ ([[def-algebra-over-a-commutative-ring]]) together with $R$-algebra homomorphisms $\\Delta:A\\to A\\otimes_R A$ (the **coproduct**) and $\\varepsilon:A\\to R$ (the **counit**) such that $\\Delta$ is coassociative and the counit axioms hold:\n\n$$(\\Delta\\otimes\\operatorname{id}_A)\\Delta=(\\operatorname{id}_A\\otimes\\Delta)\\Delta,\\qquad (\\varepsilon\\otimes\\operatorname{id}_A)\\Delta=\\operatorname{id}_A=(\\operatorname{id}_A\\otimes\\varepsilon)\\Delta.$$\n\nThe counit equations use the canonical identifications $R\\otimes_R A\\cong A\\cong A\\otimes_R R$. The target $A\\otimes_R A$ has the $R$-algebra structure of [[thm-tensor-product-of-algebras-over-a-commutative-ring]].\n\nA **Hopf algebra over $R$** is a bialgebra $(A,m,\\eta,\\Delta,\\varepsilon)$ together with an $R$-linear **antipode** $S:A\\to A$ satisfying both convolution-inverse equations\n\n$$m(S\\otimes\\operatorname{id}_A)\\Delta=\\eta\\circ\\varepsilon=m(\\operatorname{id}_A\\otimes S)\\Delta,$$\n\nwhere $(\\eta\\circ\\varepsilon)(a)=\\varepsilon(a)1_A$. We do not assume that $S$ is invertible, involutive or multiplicative. Throughout, $\\Delta$ and $\\varepsilon$ are algebra homomorphisms, and the displayed order of the antipode factors is our convention.",
+        "strategy": "A definition item. The target $A\\otimes_R A$ is an $R$-algebra by [[thm-tensor-product-of-algebras-over-a-commutative-ring]], so that the algebra-homomorphism condition on $\\Delta$ is meaningful. The counit equations use the canonical tensor-unit identifications; $\\eta\\circ\\varepsilon$ is the $R$-linear map $a\\mapsto\\varepsilon(a)1_A$. All axioms are equalities of $R$-linear maps. The definition asserts neither existence nor uniqueness of an antipode; uniqueness is [[lem-an-antipode-is-unique]]. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof and Mykola Semenyakin, A Brief Introduction to Quantum Groups (lecture notes, arXiv:2106.05252v3)",
+              "url": "https://arxiv.org/pdf/2106.05252v3",
+              "locator": "§2.1, Definition 2.1 and preceding paragraphs, printed pp. 3–4: Hopf algebra structure maps and axioms; the text allows commutative-ring coefficients and notes that antipode invertibility is not implied."
+            },
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 3, §3.2.3, printed pp. 27–28: coalgebras, counit and bialgebra compatibility; Ch. 13, §13.1.1, printed p. 297: Hopf algebra and antipode equations."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-lie-bialgebra-and-root-graded-manin-triple",
+        "kind": "definition",
+        "title": "Lie bialgebras, degreewise duality, and root-graded Manin triples",
+        "deps": [
+          "def-exterior-algebra-of-a-vector-space",
+          "def-field",
+          "def-lie-algebra-over-a-field",
+          "def-ring-characteristic"
+        ],
+        "statement": "Let $k$ be a field of characteristic $0$. A **Lie bialgebra** is a Lie algebra\n$\\mathfrak a$ over $k$ together with a linear map\n$\\delta_{\\mathfrak a}:\\mathfrak a\\to\\Lambda^2\\mathfrak a$ such that\n\n$$\\operatorname{Alt}(\\delta_{\\mathfrak a}\\otimes\\operatorname{id})\\delta_{\\mathfrak a}=0$$\n\nand $\\delta_{\\mathfrak a}([x,y])=[x,\\delta_{\\mathfrak a}(y)]-[y,\\delta_{\\mathfrak a}(x)]$ for all $x,y\\in\\mathfrak a$. The bracket action on $\\Lambda^2\\mathfrak a$ is\n$[x,u\\wedge v]=[x,u]\\wedge v+u\\wedge[x,v]$.\n\nLet $Q$ be an additive abelian group. Suppose $\\mathfrak a=\\bigoplus_{\\alpha\\in Q}\\mathfrak a_\\alpha$ and\n$\\mathfrak c=\\bigoplus_{\\alpha\\in Q}\\mathfrak c_\\alpha$ are $Q$-graded vector\nspaces with finite-dimensional graded pieces, and suppose that, within each space separately, only finitely many pairs of nonzero graded pieces have degrees summing to any fixed degree.\nA pairing between them is\n**degreewise perfect** if $\\mathfrak a_\\alpha$ pairs perfectly with\n$\\mathfrak c_{-\\alpha}$ and all other degree pairs are orthogonal. It then\nidentifies $\\mathfrak c$ with the restricted graded dual\n$\\mathfrak a^{\\mathrm{gr}\\prime}:=\\bigoplus_{\\alpha\\in Q}\\mathfrak a_\\alpha^*$.\nThe induced pairing on exterior powers is the determinant pairing:\n$\\langle x_1\\wedge\\cdots\\wedge x_m,y_1\\wedge\\cdots\\wedge y_m\\rangle=\\det(\\langle x_i,y_j\\rangle)_{i,j=1}^m$.\n\nFor the Lie bialgebra duality below, require both brackets to preserve degree:\n$[\\mathfrak a_\\alpha,\\mathfrak a_\\beta]\\subseteq\\mathfrak a_{\\alpha+\\beta}$ and\n$[\\mathfrak c_\\alpha,\\mathfrak c_\\beta]\\subseteq\\mathfrak c_{\\alpha+\\beta}$.\nTwo such Lie bialgebras are **dual** when these pairings are degreewise\nperfect and their cobrackets are transposes of the opposite brackets:\n$\\langle\\delta_{\\mathfrak a}(x),y\\wedge z\\rangle=\\langle x,[y,z]\\rangle$\nand\n$\\langle x\\wedge x',\\delta_{\\mathfrak c}(y)\\rangle=\\langle[x,x'],y\\rangle$.\nFor $x\\in\\mathfrak a_\\gamma$, degree preservation and orthogonality make\n$\\langle x,[\\mathfrak c_\\alpha,\\mathfrak c_\\beta]\\rangle$ vanish unless\n$\\alpha+\\beta=-\\gamma$. There are only finitely many such nonzero pairs,\nand their finite-dimensional perfect pairings identify the transpose with a\nunique element of $(\\Lambda^2\\mathfrak a)_\\gamma$ under the determinant pairing.\nThe same argument applies with the two algebras exchanged, and linear extension\nhandles arbitrary elements. Thus the transposes lie in the ordinary exterior\nsquares rather than formal infinite sums.\n\nA **root-graded Manin triple** is a $Q$-graded Lie algebra\n$\\mathfrak d=\\bigoplus_{\\alpha\\in Q}\\mathfrak d_\\alpha$ with finite-dimensional\ngraded pieces, a symmetric invariant bilinear form $B$ pairing\n$\\mathfrak d_\\alpha$ perfectly with $\\mathfrak d_{-\\alpha}$ and satisfying\n$B(\\mathfrak d_\\alpha,\\mathfrak d_\\beta)=0$ whenever $\\alpha+\\beta\\ne0$, and graded Lie\nsubalgebras $\\mathfrak d_+$ and $\\mathfrak d_-$ such that\n$\\mathfrak d=\\mathfrak d_+\\oplus\\mathfrak d_-$ as a vector space and\n$B(\\mathfrak d_+,\\mathfrak d_+)=B(\\mathfrak d_-,\\mathfrak d_-)=0$. The cross pairing is degreewise perfect: a vector in $(\\mathfrak d_+)_\\alpha$ annihilating $(\\mathfrak d_-)_{-\\alpha}$ also annihilates $(\\mathfrak d_+)_{-\\alpha}$ by isotropy, so it is zero by perfectness on the double. The same argument applies with the two halves exchanged, and finite dimensionality gives perfectness of the cross pairing. All other degree pairs are orthogonal by the condition on $B$. Require finite degree decompositions within each of $\\mathfrak d_+$ and $\\mathfrak d_-$ separately, as above; a triple satisfying this requirement is called **locally finite**. No finite-decomposition condition is imposed on the whole double. This permits opposite Borels with infinitely many roots, since each Borel has support in one root cone. The finite-dimensional Manin-triple definition is the\nspecial case with finitely many nonzero graded pieces.",
+        "strategy": "Definition with an explicit degree-preserving bracket requirement. Orthogonality restricts the transpose of a homogeneous input to finitely many opposite-degree pairs; the determinant pairing on their finite-dimensional exterior components gives its unique ordinary exterior-square representative. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 10, Definition 10.1.1.1, printed p. 228: Lie bialgebra axioms; §10.4.1.4–10.4.1.8, printed pp. 242–244: Drinfeld double, invariant pairing, and the two dual bialgebra structures; §10.4.2.1–10.4.2.2, printed pp. 244–245, and Exercise 10(c), printed p. 251: Borel example and its double."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-symmetrizable-cartan-datum-for-a-quantum-group",
+        "kind": "definition",
+        "title": "Symmetrizable Cartan data for quantum groups",
+        "deps": [
+          "def-generalized-cartan-matrix",
+          "def-symmetrizable-generalized-cartan-matrix",
+          "def-realization-of-a-generalized-cartan-matrix",
+          "prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism",
+          "def-kac-moody-root-lattice-height-and-positive-cone",
+          "def-free-abelian-group"
+        ],
+        "statement": "A **symmetrizable Cartan datum for a quantum group** consists of a finite nonempty index set $I=\\{1,\\ldots,n\\}$, a symmetrizable generalized Cartan matrix $A=(a_{ij})_{i,j\\in I}$ ([[def-generalized-cartan-matrix]], [[def-symmetrizable-generalized-cartan-matrix]]) and a chosen diagonal symmetrizer $D=\\operatorname{diag}(d_1,\\ldots,d_n)$ with $d_i\\in\\mathbb Z_{>0}$ and $d_i a_{ij}=d_j a_{ji}$ for all $i,j$; free abelian groups $P^\\vee$ and $P$ ([[def-free-abelian-group]]) with an integer-valued bilinear pairing $\\langle\\cdot,\\cdot\\rangle:P\\times P^\\vee\\to\\mathbb Z$; simple coroots $h_i\\in P^\\vee$ that are linearly independent in $P^\\vee\\otimes_{\\mathbb Z}\\mathbb Q$; and simple roots $\\alpha_i\\in P$ that freely generate the root lattice $Q=\\bigoplus_{i\\in I}\\mathbb Z\\alpha_i\\subseteq P$ ([[def-kac-moody-root-lattice-height-and-positive-cone]]) and satisfy $\\langle\\alpha_j,h_i\\rangle=a_{ij}$ for all $i,j$ ([[def-realization-of-a-generalized-cartan-matrix]], [[prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism]]).\n\nThe index set is finite and $A$ need not be nonsingular. We do not require the simple coroots to span $P^\\vee\\otimes_{\\mathbb Z}\\mathbb Q$, and the pairing is not required to be perfect; choosing $P$ and $P^\\vee$ is part of the datum, not something determined by the matrix alone.\n\nWe fix an indeterminate $q$ over $\\mathbb Q$, work over $\\mathbb Q(q)$, and set $q_i=q^{d_i}$. For $h\\in P^\\vee$, $\\langle\\alpha_i,h\\rangle\\in\\mathbb Z$ is the exponent in $q^{\\langle\\alpha_i,h\\rangle}$. We use the row convention $\\langle\\alpha_j,h_i\\rangle=a_{ij}$ throughout. No fundamental weights with prescribed values on all $h_i$ are part of this definition.",
+        "strategy": "A definition item. The matrix has finite nonempty index set and the generalized Cartan conditions by [[def-generalized-cartan-matrix]]. A positive-integer symmetrizer can be chosen by [[def-symmetrizable-generalized-cartan-matrix]]. The pairings have the same row convention as [[def-realization-of-a-generalized-cartan-matrix]]; the independent simple roots give the direct-sum root lattice in [[def-kac-moody-root-lattice-height-and-positive-cone]]. The minimal-realization proposition supplies independent root and coroot families by finite-dimensional linear algebra, with no use of arbitrary choice. The weight and coweight lattices and their integer pairing are part of the specified datum; they need not form a perfect pairing. Since $q$ is an indeterminate, $q_i$ and $q_i-q_i^{-1}$ are nonzero in $\\mathbb Q(q)$. No fundamental weights are assumed, and no choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 10, §10.4.2.2, printed p. 245: roots, coroots, generalized Cartan matrix, integer symmetrizer and minimal Cartan-space dimension; §10.4.2.6, printed p. 246: a singular affine example."
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed pp. 3–4, Definition 1.1 and surrounding conventions: the co-weight lattice, weight lattice, simple roots/coroots, integer symmetrizer and q_i; the additional nondegenerate-form and fundamental-weight assumptions later in §1 are not used here."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonsingular-principal-minor-of-the-symmetrized-cartan-matrix",
+        "kind": "lemma",
+        "title": "A nonsingular principal minor of the symmetrized Cartan matrix of size the rank",
+        "deps": [
+          "def-symmetrizable-generalized-cartan-matrix",
+          "def-determinant-of-a-square-matrix",
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "lem-schur-complement-congruence-and-determinant",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "lem-matrix-rank-detected-by-nonzero-minors",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-ring-matrix-arithmetic-laws"
+        ],
+        "statement": "Let $n\\ge1$ and let $B=(b_{ij})$ be a real symmetric $n\\times n$ matrix of rank $r$. For $J\\subseteq\\{1,\\ldots,n\\}$, write $B_J=(b_{ij})_{i,j\\in J}$ for its principal submatrix. Use the convention that the empty matrix has determinant $1$ and is invertible. There is a subset $J$ with $|J|=r$ for which $B_J$ is nonsingular.\n\nIf in addition $A$ is a real $n\\times n$ matrix and $D=\\operatorname{diag}(d_1,\\ldots,d_n)$ has $d_i>0$ with $B=DA$, then for the same $J$,\n\n$$\\det B_J=\\Bigl(\\prod_{i\\in J}d_i\\Bigr)\\det A_J.$$\n\nThus $A_J$ is also nonsingular and has size $r$, and $|\\{1,\\ldots,n\\}\\setminus J|=n-r$. In particular, if $A$ is symmetrizable and has corank one, then $B=DA$ has corank one and the conclusion gives a nonsingular $(n-1)\\times(n-1)$ principal submatrix.",
+        "strategy": "Set det of the empty matrix to 1 and handle rank zero separately. For positive rank, a nonzero real symmetric matrix has either a nonzero diagonal entry or a nonzero two-by-two principal determinant. Choose a maximal principal index set J with det(B_J) nonzero. The Schur-complement determinant formula shows that adjoining one index gives zero diagonal residual; adjoining two gives a symmetric two-by-two residual with zero diagonal and determinant minus a square, so its off-diagonal is also zero. Thus the full residual vanishes and B factors through a |J|-dimensional space: its rank is at most |J|. Its nonzero |J|-rowed principal minor makes the rank at least |J|, proving |J|=rank(B). If B=DA with D positive diagonal, B_J=D_J A_J and determinant multiplicativity gives det(B_J)=(prod_{i in J} d_i)det(A_J), so A_J is nonsingular. A corank-one symmetrizable matrix has the corresponding n-1 block. The cited Gabber–Kac example is the positive-semidefinite corank-one case; this local principal-minor proof does not require semidefiniteness. No choice principle is used; all selections are from finite families.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 10, §10.4.2.6, printed p. 246: the Gabber–Kac block description in the positive-semidefinite corank-one case."
+            },
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21–64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§1.1, printed p. 22: the standing nondegeneracy assumption on an r-by-r principal block of a rank-r symmetrizable Cartan matrix; §2.1, printed p. 31: use of the extra n−r Cartan coordinates."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+        "kind": "definition",
+        "title": "Quantum integers, factorials, Gaussian binomials and divided powers at $q_i$",
+        "deps": [
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-q-integer-q-factorial-and-q-multinomial"
+        ],
+        "statement": "Let $(I,A,D,P,P^{\\vee},q)$ be a symmetrizable Cartan datum for a quantum group ([[def-symmetrizable-cartan-datum-for-a-quantum-group]]) and put $q_i=q^{d_i}$. For $m\\in\\mathbb N$, define the **$q_i$-integer**\n\n$$[m]_i:=\\frac{q_i^m-q_i^{-m}}{q_i-q_i^{-1}},\\qquad [0]_i:=0,$$\n\nand the **$q_i$-factorial**\n\n$$[m]_i!:=\\prod_{k=1}^m[k]_i,\\qquad [0]_i!:=1.$$\n\nFor $0\\le r\\le m$, define the **Gaussian binomial** $\\binom{m}{r}_i:=[m]_i!/([r]_i![m-r]_i!)$, and set it to $0$ when $r<0$ or $r>m$. In the published one-parameter convention, write $\\binom{m}{r}_t:=\\binom{m}{r,m-r}_t$ for the two-part $q$-multinomial coefficient of [[def-q-integer-q-factorial-and-q-multinomial]].\n\nFor an element $x$ of a unital $\\mathbb Q(q)$-algebra and $m\\ge0$, define its **divided power at $q_i$** by $x^{(m)}:=x^m/[m]_i!$, so $x^{(0)}=1$ and $x^{(1)}=x$.\n\nThe symmetric convention and the published asymmetric convention are related, for $m\\ge0$ and $0\\le r\\le m$, by\n\n$$[m]_i=q_i^{-(m-1)}[m]_{q_i^2},\\qquad \\binom{m}{r}_i=q_i^{-r(m-r)}\\binom{m}{r}_{q_i^2}.$$\n\nIn particular $[m]_i$ is invariant under $q_i\\mapsto q_i^{-1}$. These quantities depend on the symmetrizer only through $q_i=q^{d_i}$.",
+        "strategy": "A definition with two convention-conversion identities. From q_i^m−q_i^{-m}=q_i^{-(m-1)}(q_i^{2m}−1) and q_i−q_i^{-1}=q_i^{-1}(q_i^2−1), obtain [m]_i=q_i^{-(m-1)}[m]_{q_i^2}. Multiplication gives [m]_i!=q_i^{-m(m-1)/2}[m]_{q_i^2}!, and division of the three factorials yields the Gaussian shift exponent −r(m−r). For m=0 the empty-product convention handles the identities; for 0≤r≤m every denominator is a nonzero element of Q(q) because q is indeterminate and each d_i>0 ([[def-symmetrizable-cartan-datum-for-a-quantum-group]]). Thus divided powers are defined, with the stated zero and unit cases. The symmetric q-integer and its factorial quotients are invariant under q_i↦q_i^{-1}. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 5, display (1.1): the definitions of [n]_i, [n]_i! and the Gaussian binomial with q_i=q^{s_i}; display (1.5): the divided powers."
+            },
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21–64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§1.1, printed p. 22, display (1): the symmetric q-integers [k]_q=(q^k−q^{−k})/(q−q^{−1}) and Gaussian binomials used for the quantum Serre relations."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-a-two-sided-coideal-in-an-enveloping-algebra-is-generated-by-its-primitive-part",
+        "kind": "lemma",
+        "title": "An augmented coideal ideal of an enveloping algebra is generated by its primitive part",
+        "deps": [
+          "cor-every-vector-space-has-a-basis",
+          "def-axiom-of-choice",
+          "def-bialgebra-counit-and-antipode",
+          "def-field",
+          "def-generated-and-principal-ideals",
+          "def-lie-algebra-over-a-field",
+          "def-pbw-filtration-on-the-universal-enveloping-algebra",
+          "def-quotient-vector-space-and-canonical-projection",
+          "def-ring-characteristic",
+          "def-symmetric-algebra-of-a-vector-space",
+          "def-universal-enveloping-algebra",
+          "rem-hopf-algebra-structure-on-the-enveloping-algebra",
+          "thm-every-independent-set-extends-to-a-basis",
+          "thm-poincare-birkhoff-witt",
+          "thm-quotient-ring-universal-property",
+          "thm-universal-property-of-the-symmetric-algebra",
+          "thm-well-ordering-theorem"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $k$ be a field of\ncharacteristic $0$ ([[def-field]], [[def-ring-characteristic]]) and let\n$\\mathfrak l$ be a Lie algebra over $k$ ([[def-lie-algebra-over-a-field]]).\nEquip its universal enveloping algebra $U(\\mathfrak l)$ with the standard\ncocommutative Hopf structure\n([[rem-hopf-algebra-structure-on-the-enveloping-algebra]]), with coproduct\n$\\Delta(x)=x\\otimes1+1\\otimes x$ for $x\\in\\mathfrak l$ and counit\n$\\varepsilon(x)=0$. If $J\\trianglelefteq U(\\mathfrak l)$ is a two-sided ideal\nsuch that\n\n$$\\Delta(J)\\subseteq J\\otimes U(\\mathfrak l)+U(\\mathfrak l)\\otimes J,\\qquad J\\subseteq\\ker\\varepsilon,$$\n\nthen $\\mathfrak j:=J\\cap\\mathfrak l$ is a Lie ideal and\n$J=U(\\mathfrak l)\\mathfrak j=\\mathfrak jU(\\mathfrak l)$. Thus $J$ is uniquely\ndetermined by $\\mathfrak j$ among two-sided ideals satisfying both displayed\nconditions.",
+        "strategy": "induction",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21-64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§2.1, Proposition 2.1 and Lemma 2.4, printed pp. 32–33: the printed coideal-only statement omits ε(J)=0; the local item adds that necessary condition and removes the unrestricted largest-ideal clause."
+            },
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 3, §3.2.2-3.2.3, printed pp. 26-28: PBW and the standard (primitive) coproduct on an enveloping algebra, the filtration used in the induction"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-an-antipode-is-unique",
+        "kind": "lemma",
+        "title": "Uniqueness of the antipode",
+        "deps": [
+          "def-bialgebra-counit-and-antipode"
+        ],
+        "statement": "Let $(A,m,\\eta,\\Delta,\\varepsilon)$ be a bialgebra over a commutative ring $R$ ([[def-bialgebra-counit-and-antipode]]) and let $S,S':A\\to A$ be antipodes. Then $S=S'$. Thus a bialgebra admits at most one Hopf algebra structure with its fixed multiplication, unit, coproduct and counit. Every antipode also satisfies $S(1_A)=1_A$.",
+        "strategy": "For R-linear maps f,g:A→A define f∗g=m(f⊗g)Δ. Coassociativity of Δ and associativity of m make ∗ associative. The two counit equations make e=η∘ε its two-sided unit. Both antipodes are two-sided convolution inverses to id_A; if S,S' are two such inverses, S=S∗e=S∗(id∗S')=(S∗id)∗S'=e∗S'=S'. Finally, Δ(1_A)=1_A⊗1_A and ε(1_A)=1_R, so evaluating either antipode equation at 1_A gives S(1_A)=1_A. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof and Mykola Semenyakin, A Brief Introduction to Quantum Groups (lecture notes, arXiv:2106.05252v3)",
+              "url": "https://arxiv.org/pdf/2106.05252v3",
+              "locator": "§2.2.1, Proposition 2.2(iv), printed p. 4: the counit and antipode are uniquely determined by the coproduct."
+            },
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 12, Remark 12.1.2.3, printed p. 274: the antipode is unique because it is an inverse in the convolution monoid."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-root-graded-manin-triple-gives-dual-lie-bialgebras",
+        "kind": "theorem",
+        "title": "A root-graded Manin triple gives dual Lie bialgebras",
+        "deps": [
+          "def-exterior-algebra-of-a-vector-space",
+          "def-field",
+          "def-lie-algebra-over-a-field",
+          "def-lie-bialgebra-and-root-graded-manin-triple",
+          "def-ring-characteristic"
+        ],
+        "statement": "Let $k$ be a field of characteristic $0$, and let\n$(\\mathfrak d,\\mathfrak d_+,\\mathfrak d_-;B)$ be a locally finite\nroot-graded Manin triple in the sense of\n[[def-lie-bialgebra-and-root-graded-manin-triple]]. Define\n$\\delta_+:\\mathfrak d_+\\to\\Lambda^2\\mathfrak d_+$ and\n$\\delta_-:\\mathfrak d_-\\to\\Lambda^2\\mathfrak d_-$ by transposing the\nopposite brackets under the degreewise perfect pairing induced by $B$:\n\n$$\\langle\\delta_+(x),y\\wedge z\\rangle=B(x,[y,z]),\\qquad\\langle u\\wedge v,\\delta_-(y)\\rangle=B([u,v],y).$$\n\nThen these maps are well defined and make $\\mathfrak d_+$ and\n$\\mathfrak d_-$ dual Lie bialgebras.",
+        "strategy": "The complete local argument is the numbered proof in items/thm-root-graded-manin-triple-gives-dual-lie-bialgebras.md. **Proof technique:** Transpose the bracket and use the Jacobi identity in the double.\n\n1.1 By [F1], for each homogeneous $x\\in\\mathfrak d_+$ only finitely many opposite-degree pairs of components of $\\mathfrak d_-$ can bracket to a degree paired with $x$. The perfect pairings therefore give a unique finite sum $\\delta_+(x)\\in\\Lambda^2\\mathfrak d_+$ satisfying the first transpose identity; the same construction defines $\\delta_-$, and both maps are linear and preserve total root degree. [F1, construct]\n\n1.2 Choose dual bases $e_i$ and $f^a$ in the finitely many homogeneous pieces involved in a fixed calculation, and write $[e_i,e_j]=\\sum_k c^k_{ij}e_k$ and $[f^a,f^b]=\\sum_k d_k^{ab}f^k$. Invariance gives $B([e_i,f^a],f^k)=B(e_i,[f^a,f^k])=d_i^{ak}$ and $B([e_i,f^a],e_k)=B(f^a,[e_k,e_i])=-c^a_{ik}$; since the two subalgebras are isotropic and pair perfectly, these identities determine $[e_i,f^a]=\\sum_k(d_i^{ak}e_k-c^a_{ik}f^k)$. For each fixed input pair, grading restricts these sums to two fixed finite-dimensional pieces, so they are finite by [F1]. [F1, algebra]\n\n2.1 Pair $\\operatorname{Alt}(\\delta_+\\otimes\\operatorname{id})\\delta_+(x)$ with $y\\wedge z\\wedge w$ in the opposite subalgebra. By the defining transpose identity, the result is $B(x,[y,[z,w]]+[z,[w,y]]+[w,[y,z]])=0$ by Jacobi in $\\mathfrak d_-$. Degreewise perfectness makes the co-Jacobi expression zero; the identical argument with signs exchanged proves co-Jacobi for $\\delta_-$. [F1, F2, step 1.1, algebra]\n\n3.1 Jacobi in $\\mathfrak d$ for $e_i,e_j,f^a$, paired with $f^b$, gives $\\sum_k c^k_{ij}d_k^{ab}=\\sum_k(c^a_{ik}d_j^{kb}+c^b_{ik}d_j^{ak}-c^a_{jk}d_i^{kb}-c^b_{jk}d_i^{ak})$. By the transpose definition, this is exactly the coefficient identity for $\\delta_+([e_i,e_j])=[e_i,\\delta_+(e_j)]-[e_j,\\delta_+(e_i)]$. Interchanging $+$ and $-$ and using Jacobi for $e_i,f^a,f^b$ proves the cocycle identity for $\\delta_-$. Since the homogeneous bases were arbitrary and the pairings are perfect, both cocycle identities hold for all elements. Together with step 2.1, this proves that the two transposed maps are dual Lie bialgebra structures. [F1, F2, step 1.1, step 1.2, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 10, §10.4.1.4–10.4.1.8, printed pp. 242–244: the Drinfeld double bracket is characterized by the two subalgebras and invariant pairing, and carries the two dual Lie bialgebra structures. The proof below checks the root-graded finite-piece version directly."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-drinfeld-jimbo-quantized-enveloping-algebra",
+        "kind": "definition",
+        "title": "The Drinfeld-Jimbo quantized enveloping algebra by generators and relations",
+        "deps": [
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-kac-moody-root-lattice-height-and-positive-cone",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "def-tensor-algebra-of-a-vector-space",
+          "thm-universal-property-of-the-tensor-algebra",
+          "def-generated-and-principal-ideals",
+          "def-quotient-ring",
+          "thm-quotient-ring-universal-property"
+        ],
+        "statement": "Let $(I,A,D,P,P^{\\vee},q)$ be a symmetrizable Cartan datum for a quantum group ([[def-symmetrizable-cartan-datum-for-a-quantum-group]]) and put $q_i=q^{d_i}$. Write $K_i:=K_{d_i h_i}$ and $K_i^{-1}:=K_{-d_i h_i}$. Let $V$ be the $\\mathbb Q(q)$-vector space with basis the symbols $\\{E_i,F_i\\}_{i\\in I}\\cup\\{K_h\\}_{h\\in P^{\\vee}}$, and let $T:=T(V)$ be its free unital associative $\\mathbb Q(q)$-algebra ([[def-tensor-algebra-of-a-vector-space]], [[thm-universal-property-of-the-tensor-algebra]]). Let $I_{\\mathrm{DJ}}$ be the two-sided ideal of $T$ generated by ([[def-generated-and-principal-ideals]]) the following relations:\n\n$$K_0-1,\\qquad K_hK_{h'}-K_{h+h'}\\qquad(h,h'\\in P^{\\vee});$$\n\n$$K_hE_i-q^{\\langle\\alpha_i,h\\rangle}E_iK_h,\\qquad K_hF_i-q^{-\\langle\\alpha_i,h\\rangle}F_iK_h\\qquad(h\\in P^{\\vee},\\ i\\in I);$$\n\n$$E_iF_j-F_jE_i-\\delta_{ij}\\frac{K_i-K_i^{-1}}{q_i-q_i^{-1}}\\qquad(i,j\\in I);$$\n\n$$\\mathrm{Serre}^+_{ij}:=\\sum_{r=0}^{1-a_{ij}}(-1)^r\\binom{1-a_{ij}}{r}_iE_i^{1-a_{ij}-r}E_jE_i^r,\\qquad \\mathrm{Serre}^-_{ij}:=\\sum_{r=0}^{1-a_{ij}}(-1)^r\\binom{1-a_{ij}}{r}_iF_i^{1-a_{ij}-r}F_jF_i^r\\qquad(i\\ne j),$$\n\nwhere the Gaussian binomials are those of [[def-quantum-integers-factorials-and-divided-powers-at-q-i]]. The **Drinfeld-Jimbo quantized enveloping algebra** is\n\n$$U_q(\\mathfrak g):=T/I_{\\mathrm{DJ}}$$\n\n([[def-quotient-ring]]), with $E_i,F_i,K_h$ denoting the images of the generators. In this quotient, $K_i^{-1}$ is the two-sided inverse of $K_i$.\n\nIt is graded by the root lattice $Q=\\bigoplus_{i\\in I}\\mathbb Z\\alpha_i$ ([[def-kac-moody-root-lattice-height-and-positive-cone]]), with $\\deg E_i=\\alpha_i$, $\\deg F_i=-\\alpha_i$ and $\\deg K_h=0$; thus $U_q(\\mathfrak g)=\\bigoplus_{\\beta\\in Q}U_q(\\mathfrak g)[\\beta]$.\n\nFor every unital associative $\\mathbb Q(q)$-algebra $B$, any assignment of elements $E_i',F_i',K_h'\\in B$ satisfying these relations extends uniquely to a $\\mathbb Q(q)$-algebra homomorphism $U_q(\\mathfrak g)\\to B$ ([[thm-quotient-ring-universal-property]]).",
+        "strategy": "Apply the tensor-algebra universal property to the generator symbols and quotient by the two-sided ideal generated by the toral, action, mixed, and both Serre families. The toral relations make K_{-h} the two-sided inverse of K_h. Each relation is homogeneous for deg(E_i)=alpha_i, deg(F_i)=−alpha_i, deg(K_h)=0, so the generated ideal is homogeneous and the quotient inherits the root-lattice direct-sum grading. Any assignment satisfying the relations extends to T, kills the ideal, and factors uniquely through U_q(g) by the quotient universal property. This definition asserts no nonvanishing or independence of the generators. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 5, Definition 1.2 and displays (1.4)–(1.5): generators e_i,f_i,q^h, the toral action and commutator relations, and both quantum Serre sums with q_i=q^{s_i}."
+            },
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, Definition 13.1.3.12, printed p. 309: the Drinfeld-Jimbo presentation, toral and mixed relations, and positive and negative Serre elements."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-opposite-symmetrizable-kac-moody-borels-are-root-degreewise-dual-lie-bialgebras",
+        "kind": "lemma",
+        "title": "The opposite Borels of a symmetrizable Kac–Moody algebra are root-degreewise dual Lie bialgebras",
+        "deps": [
+          "def-exterior-algebra-of-a-vector-space",
+          "def-kac-moody-algebra-associated-to-a-gcm",
+          "def-kac-moody-root-lattice-height-and-positive-cone",
+          "def-lie-algebra-over-a-field",
+          "def-lie-bialgebra-and-root-graded-manin-triple",
+          "def-realization-of-a-generalized-cartan-matrix",
+          "def-symmetric-algebra-of-a-vector-space",
+          "def-symmetrizable-generalized-cartan-matrix",
+          "def-universal-enveloping-algebra",
+          "lem-nonsingular-principal-minor-of-the-symmetrized-cartan-matrix",
+          "lem-pbw-for-countably-presented-kac-moody-lie-algebras",
+          "prop-contragredient-algebra-has-a-triangular-decomposition",
+          "prop-kac-moody-root-spaces-are-finite-dimensional",
+          "thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra",
+          "thm-pbw-symmetrization-is-a-vector-space-isomorphism-in-characteristic-zero",
+          "thm-root-graded-manin-triple-gives-dual-lie-bialgebras",
+          "thm-serre-presentation-of-a-kac-moody-algebra"
+        ],
+        "statement": "Let $A=(a_{ij})_{i,j\\in I}$ be a finite symmetrizable generalized Cartan\nmatrix over $\\mathbb C$, with positive symmetrizer\n$D=\\operatorname{diag}(d_i)$ and rank $r$. Let $\\mathfrak g=\\mathfrak g(A)$\nbe defined from a minimal realization, with triangular decomposition\n$\\mathfrak g=\\mathfrak n^-\\oplus\\mathfrak h\\oplus\\mathfrak n^+$ and Borels\n$\\mathfrak b^\\pm=\\mathfrak h\\oplus\\mathfrak n^\\pm$. Use the invariant form\n$B=(\\cdot|\\cdot)$ normalized by\n$(h_i|h)=\\alpha_i(h)/d_i$ and $(e_i|f_j)=\\delta_{ij}/d_i$.\n\n(i) **Root-degreewise enveloping-algebra duality.** The form pairs\n$\\mathfrak g_\\alpha$ and $\\mathfrak g_{-\\alpha}$ perfectly. It induces a\ncanonical degreewise perfect vector-space pairing on $U(\\mathfrak n^+)$ and\n$U(\\mathfrak n^-)$ by PBW symmetrization. Each fixed root-degree component is\nfinite-dimensional, and the pairing identifies\n$U(\\mathfrak n^-)\\cong (U(\\mathfrak n^+))^{\\mathrm{gr}\\prime}$, the restricted\ngraded dual; the reverse identification holds as well. This is a vector-space\npairing, not a Hopf pairing for the standard primitive coproducts.\n\n(ii) **Dual Borel Lie bialgebras.** Let $J\\subseteq I$ be such that the\nprincipal block $A_J$ is nonsingular, with $|J|=r$; such a set is supplied by\n[[lem-nonsingular-principal-minor-of-the-symmetrized-cartan-matrix]]. Choose\ncomplementary Cartan coordinates $D_j$ for $j\\in I\\setminus J$ with\n$\\alpha_i(D_j)=\\delta_{ij}$. In the quadratic Lie algebra\n$\\mathfrak d:=\\mathfrak g\\oplus\\mathfrak h$, with form\n$B_{\\mathfrak d}((x,a),(y,b))=\\tfrac12((x|y)-(a|b))$, the maps\n$\\iota_+(h+x_+)=(h+x_+,h)$ and\n$\\iota_-(h+x_-)=(h+x_-,-h)$ embed the Borels as complementary isotropic\nsubalgebras. Thus they form a root-graded Manin triple. The cross pairing is\n$ (h|h')+\\tfrac12(x_+|x_-)$ on $h+x_+$ and $h'+x_-$; its transpose brackets define\ndual Lie bialgebra structures on $\\mathfrak b^+$ and $\\mathfrak b^-$. Both cobrackets vanish on $\\mathfrak h$, and the positive cobracket satisfies $\\delta^+(e_i)=d_i e_i\\wedge h_i$. The enveloping-algebra vector-space pairing in (i) retains the original invariant-form normalization; it is independent of this rescaled Manin pairing.",
+        "strategy": "The complete local argument is the numbered proof in items/lem-opposite-symmetrizable-kac-moody-borels-are-root-degreewise-dual-lie-bialgebras.md. **Proof technique:** PBW symmetrization and the root-graded Manin double.\n\n1.1 Put $H=\\operatorname{span}\\{h_i:i\\in I\\}$ and define $\\rho:\\mathfrak h\\to\\mathbb C^I$ by $\\rho(x)=(\\alpha_i(x))_{i\\in I}$. By [F1], $\\rho$ is onto and $\\rho(H)=\\operatorname{im}(A^{\\mathsf T})$ of dimension $r$. For the set $J$ in [F4], projection of this image to $\\mathbb C^J$ is an isomorphism: it is surjective because its restriction to the $J$-coordinate subspace has matrix $A_J^{\\mathsf T}$, and both spaces have dimension $r$. Hence $\\operatorname{im}(A^{\\mathsf T})\\cap\\mathbb C^{I\\setminus J}=0$. For each $j\\notin J$, choose $D_j$ with $\\rho(D_j)$ the $j$th coordinate vector. Their span intersects $H$ trivially, and its dimension $|I\\setminus J|=|I|-r$ makes it a complement to $H$; the form normalization gives $(h_i|D_j)=\\delta_{ij}/d_i$. If $r=|I|$ this is the empty complementary family and $\\mathfrak h=H$. [F1, F4, construct]\n\n1.2 By [F3], the invariant form has perfect opposite-root pairings and is nondegenerate on the Cartan subalgebra. Also $\\mathfrak n^\\pm$ are positively and negatively root-graded, respectively. [F2, F3, given]\n\n1.3 For fixed $\\beta=\\sum_i m_i\\alpha_i\\in Q_+$, the degree-$\\beta$ words in the finite simple-generator tensor algebra are finite in number, so the separate Serre presentations [F2] make $U(\\mathfrak n^+)[\\beta]$ finite-dimensional; the same argument applies to $U(\\mathfrak n^-)[-\\beta]$. The height-zero component is $\\mathbb C1$ on both sides. [F2, given, algebra]\n\n1.4 Each half is countably spanned by its finite bracket words. Enumerating those words by length and lexicographic order and retaining the first vectors outside the preceding span gives a countable ordered basis; applying [F5] provides the PBW basis and the symmetrization isomorphism for both halves. This construction uses no choice principle. [F2, F5, construct]\n\n1.5 For $v_1,\\ldots,v_m\\in\\mathfrak n^+$ and $w_1,\\ldots,w_\\ell\\in\\mathfrak n^-$, define a pairing on the symmetric algebras to be zero when $m\\ne\\ell$, and when $m=\\ell$ put $\\langle v_1\\cdots v_m,w_1\\cdots w_m\\rangle_S=\\frac1{m!}\\sum_{\\sigma\\in S_m}\\prod_{t=1}^m(v_t|w_{\\sigma(t)})$, with the empty products paired as $1$. It is well defined under permutations of each list. [F3, given, construct]\n\n1.6 In a fixed root degree $\\beta$ and symmetric length $m$, only finitely many tuples of positive roots sum to $\\beta$. The tensor-product pairings on each such tuple are perfect by [F3]; averaging over $S_m$ identifies coinvariants with invariants because $m!\\ne0$ in $\\mathbb C$, so the induced pairing on $S^m(\\mathfrak n^+)[\\beta]\\times S^m(\\mathfrak n^-)[-\\beta]$ is perfect. Summing over the finitely many lengths $0\\le m\\le\\operatorname{ht}(\\beta)$ gives a perfect pairing on the full symmetric-algebra root components. [F3, given, algebra]\n\n1.7 Let $\\mathfrak h_0$ be a second copy of $\\mathfrak h$ and define $B_{\\mathfrak d}((x,a),(y,b))=\\tfrac12((x|y)-(a|b))$ on $\\mathfrak d=\\mathfrak g\\oplus\\mathfrak h_0$ with the componentwise bracket. Jacobi holds componentwise, and [F3] makes this form invariant, symmetric and nondegenerate. The maps $\\iota_+$ and $\\iota_-$ in (ii) are Lie homomorphisms because $\\mathfrak h$ is abelian and the bracket of two Borel elements has zero Cartan component. Their images are complementary: the positive and negative root components split by the triangular decomposition, and the two Cartan copies split into diagonal and antidiagonal subspaces. Each image is isotropic, since the invariant form is orthogonal between the Cartan and nonzero root spaces and vanishes on pairs of positive roots or on pairs of negative roots. The cross pairing is $ (h|h')+\\tfrac12(x_+|x_-)$; it is degreewise perfect by [F3]. Within either Borel, a degree has only finitely many decompositions into degrees in its root cone, and all pieces are finite-dimensional. Thus these images satisfy the same-side finiteness required of the root-graded Manin triple; the whole double need not have finite decompositions. [F2, F3, given, algebra]\n\n2.1 Transport the invariant-form symmetric-power pairing of steps 1.5–1.6 through the PBW symmetrization isomorphisms of step 1.4. They preserve root degree, so they give a perfect pairing of $U(\\mathfrak n^+)[\\beta]$ with $U(\\mathfrak n^-)[-\\beta]$ for every $\\beta\\in Q_+$. Taking the direct sum of these finite-dimensional dualities gives the restricted graded-dual isomorphism in (i), in both directions; at $\\beta=0$ it is the pairing $\\langle1,1\\rangle=1$. [F5, step 1.3, step 1.4, step 1.5, step 1.6, algebra]\n\n3.1 By [F6], the transposed brackets give dual Lie bialgebra structures on the two Borel copies. For $h\\in\\mathfrak h$, every bracket of two elements of $\\mathfrak b^-$ has either negative root degree or is zero in degree zero, so its cross pairing with $\\iota_+(h)$ vanishes; hence $\\delta^+(h)=0$. The same argument gives $\\delta^-(h)=0$. For a Cartan vector $h$, the determinant pairing gives $\\langle e_i\\wedge h_i,f_i\\wedge h\\rangle=\\alpha_i(h)/(2d_i^2)$, whereas $\\langle e_i,[f_i,h]\\rangle=\\alpha_i(h)/(2d_i)$. There are no other possible degree decompositions of the simple root except its simple-root and Cartan parts. Hence transposition gives $\\delta^+(e_i)=d_i e_i\\wedge h_i$, proving (ii) with the normalization used by the formal shuffle coproduct. [F3, F6, step 1.7, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 10, §10.4.2.1–10.4.2.2, printed pp. 244–245: the upper/lower Borel pairing in sl(2) and the Kac–Moody setup; §10.4.1.4–10.4.1.8, printed pp. 242–244, and Exercise 10(c), printed p. 251: the double construction and its g⊕h realization. The proof below gives the root-graded construction explicitly."
+            },
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21–64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§1.1, printed p. 22: the nonsingular rank-sized principal block and complementary Cartan coordinates; §2.1, printed pp. 35–36, Lemma 2.10: the graded-dual Borel argument uses the nondegenerate invariant pairing between opposite Borels."
+            },
+            {
+              "title": "A. Kleshchev, Lectures on Infinite Dimensional Lie Algebras",
+              "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf",
+              "locator": "Lemma 2.2.1 and Theorem 2.2.3, printed pp. 28–32: the invariant form, perfect opposite-root-space pairings, and Cartan normalization."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-quantum-pascal-recurrence-and-gaussian-integrality",
+        "kind": "lemma",
+        "title": "The quantum Pascal recurrences, the Gauss product formula and Gaussian integrality",
+        "deps": [
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-the-laurent-polynomial-ring"
+        ],
+        "statement": "Fix a symmetrizable Cartan datum and $i\\in I$, and use the conventions of [[def-quantum-integers-factorials-and-divided-powers-at-q-i]]. Write $C_{m,r}:=\\binom{m}{r}_i$, with $C_{m,r}=0$ when $r<0$ or $r>m$.\n\n(i) **Pascal recurrences.** For $m\\ge1$ and every integer $r$,\n\n$$C_{m,r}=q_i^{-r}C_{m-1,r}+q_i^{m-r}C_{m-1,r-1}=q_i^rC_{m-1,r}+q_i^{r-m}C_{m-1,r-1}.$$\n\n(ii) **Symmetry.** For $0\\le r\\le m$, $C_{m,r}=C_{m,m-r}$.\n\n(iii) **Gauss product formula.** For every $N\\ge0$, in the polynomial ring $\\mathbb Q(q)[z]$,\n\n$$\\prod_{j=0}^{N-1}(1+q_i^{2j}z)=\\sum_{r=0}^{N}q_i^{r(N-1)}C_{N,r}z^r.$$\n\nConsequently, for $N\\ge1$,\n\n$$\\sum_{r=0}^{N}(-1)^rq_i^{r(N-1)}C_{N,r}=0.$$\n\n(iv) **Integrality.** For $0\\le r\\le m$,\n\n$$C_{m,r}\\in q_i^{-r(m-r)}\\mathbb Z[q_i^2]\\subseteq\\mathbb Z[q_i^{\\pm1}].$$\n\nThus every Gaussian quotient is a Laurent polynomial in $q_i$ with integer coefficients, and the Pascal recurrences hold in that Laurent polynomial ring.",
+        "strategy": "Starting from the factorial quotient, derive the first Pascal recurrence using [m]_i=q_i^{-r}[m−r]_i+q_i^{m−r}[r]_i; derive the second from symmetry. For integrality, set G_{m,r}=q_i^{r(m−r)}C_{m,r}; the recurrence becomes G_{m,r}=G_{m−1,r}+q_i^{2(m−r)}G_{m−1,r−1}, and induction from G_{m,0}=G_{m,m}=1 gives G in Z[q_i²]. For the Gauss product, multiply the formula at N−1 by (1+q_i^{2(N−1)}z), compare coefficients using the first recurrence, and evaluate at z=−1 for the alternating identity. The cases N=0, r=0, r=m, and out-of-range r use the empty-product and zero conventions. Since q_i=q^{d_i} with d_i>0 and q indeterminate, evaluation of Z[t^{±1}] at t=q_i is injective; all identities therefore hold in the stated subrings. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 5, display (1.1): the Gaussian quotient convention for q_i=q^{s_i}."
+            },
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21–64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§2.1, printed p. 32, Lemma 2.3 proof: the shuffle verification invokes q-binomial identities proved by induction; the identities are proved locally here."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum",
+        "kind": "definition",
+        "title": "The formal quantum shuffle Borel and its Cartan crossed product",
+        "deps": [
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-realization-of-a-generalized-cartan-matrix",
+          "lem-nonsingular-principal-minor-of-the-symmetrized-cartan-matrix",
+          "def-formal-power-series-and-coefficient-extraction",
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "def-formal-exponential-logarithm-and-powers",
+          "def-tensor-algebra-of-a-vector-space",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "lem-quantum-pascal-recurrence-and-gaussian-integrality",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "def-bialgebra-counit-and-antipode",
+          "def-generated-and-principal-ideals",
+          "def-quotient-ring",
+          "thm-quotient-ring-universal-property",
+          "def-principal-ideal-domain",
+          "thm-formal-power-series-unit-criterion",
+          "cor-submodules-of-finite-free-pid-modules-are-free"
+        ],
+        "statement": "Let $(I,A,D,P,P^{\\vee},q)$ be a symmetrizable Cartan datum ([[def-symmetrizable-cartan-datum-for-a-quantum-group]]), $n=|I|$, and $r=\\operatorname{rank}A$. Choose $J\\subseteq I$ with $|J|=r$ and $\\det(A_J)\\ne0$, as supplied by [[lem-nonsingular-principal-minor-of-the-symmetrized-cartan-matrix]]. Work over $R=\\mathbb C\\llbracket\\hbar\\rrbracket$ with $q=e^{\\hbar}$ and $q_i=e^{d_i\\hbar}$.\n\n(a) **Word space and shuffle product.** Let $V=\\bigoplus_{i\\in I}\\mathbb C v_i$ with $\\deg v_i=\\epsilon_i\\in\\mathbb N^I$. Set $\\mathrm{Sh}(V)=\\bigoplus_{k\\ge0}V^{\\otimes k}\\llbracket\\hbar\\rrbracket$ and denote $z_1\\otimes\\cdots\\otimes z_k$ by $[z_1|\\cdots|z_k]$. For homogeneous letters, let $\\Sigma_{k,l}$ consist of permutations $\\sigma$ mapping original positions to output positions, with $\\sigma(1)<\\cdots<\\sigma(k)$ and $\\sigma(k+1)<\\cdots<\\sigma(k+l)$. Define\n\n$$[z_1|\\cdots|z_k]\\,[z_{k+1}|\\cdots|z_{k+l}]=\\sum_{\\sigma\\in\\Sigma_{k,l}}q^{-\\sum_{i<j,\\,\\sigma(i)>\\sigma(j)}\\langle\\deg z_i,\\deg z_j\\rangle}[z_{\\sigma^{-1}(1)}|\\cdots|z_{\\sigma^{-1}(k+l)}],\\qquad \\langle\\epsilon_i,\\epsilon_j\\rangle=d_i a_{ij}.$$\n\nThis product is associative and makes $\\mathrm{Sh}(V)$ an $\\mathbb N^I$-graded algebra; every color-degree component is a finite free $R$-module. Write $\\langle V\\rangle$ for the subalgebra generated by the one-letter words $[v_i]$.\n\n(b) **Cartan derivations and crossed products.** Define $R$-linear derivations on letters by $h_i^V(v_j)=a_{ij}v_j$ and $D_j^V(v_i)=\\delta_{ij}v_i$ for $j\\in I\\setminus J$, and extend them to words by summing their action over positions. They extend as commuting derivations of $\\mathrm{Sh}(V)$ and preserve $\\langle V\\rangle$. Let $\\mathcal C$ consist of $n$ commuting symbols $H_i$ corresponding to $h_i^V$ and $n-r$ commuting symbols $D_j$ corresponding to $D_j^V$. Put $A_C:=\\varprojlim_N R[\\mathcal C]/\\hbar^N R[\\mathcal C]\\cong\\mathbb C[\\mathcal C]\\llbracket\\hbar\\rrbracket$, so each coefficient of $\\hbar^m$ is a finite Cartan polynomial. The Cartan crossed-product modules are\n\n$$\\mathcal V:=\\langle V\\rangle\\otimes_R A_C,\\qquad \\mathcal S:=\\mathrm{Sh}(V)\\otimes_R A_C.$$\n\nThe Cartan symbols are independent polynomial generators; the operators $h_i^V,D_j^V$ describe their commutators and are not their images under a Cartan inclusion. The Cartan coefficient algebra $A_C$ is $\\hbar$-adically complete; no algebraic-freeness claim is made for the crossed products. Their products extend the products of the two factors and obey $X_s x-xX_s=\\delta_s(x)$ for the corresponding derivation $\\delta_s$. Equivalently, for multi-indices $\\alpha,\\beta$,\n\n$$ (xX^\\alpha)(yX^\\beta)=\\sum_{0\\le t\\le\\alpha}\\binom{\\alpha}{t}x\\,\\delta^t(y)X^{\\alpha+\\beta-t},$$\n\nwhere $\\binom{\\alpha}{t}=\\prod_s\\binom{\\alpha_s}{t_s}$ and $\\delta^t=\\prod_s\\delta_s^{t_s}$. The $r$ coroot directions indexed by $J$ are linearly independent because $A_J$ is nonsingular, and the remaining $n-r$ directions supplement the minimal realization of dimension $2n-r$ ([[def-realization-of-a-generalized-cartan-matrix]]); the number of Cartan symbols is $n+(n-r)=2n-r$.\n\n(c) **$\\hbar$-adic Hopf structure and conditional Serre map.** In the commutative formal Cartan factor, define $\\exp(\\hbar Z)=\\sum_{m\\ge0}\\hbar^m Z^m/m!$ for each Cartan polynomial $Z$; every coefficient is a finite polynomial, so this is an element of $A_C$. Write $\\widehat\\otimes_R$ for the **color-degreewise $\\hbar$-adically completed tensor product**: for each total color degree $\\gamma$, complete $\\bigoplus_{\\alpha+\\beta=\\gamma}\\mathcal S[\\alpha]\\otimes_R\\mathcal S[\\beta]$ in the $\\hbar$-adic topology, then take the direct sum over $\\gamma$; use the same convention for $\\mathcal V$ and for iterated tensor products. There are finitely many splittings of each $\\gamma\\in\\mathbb N^I$. The algebras are complete in each color degree, and multiplication extends on these degreewise completed tensors. Their direct sums are not asserted to be complete for limits with unbounded color support. These formulas make $\\mathcal S$ a topological Hopf $R$-algebra: $\\Delta:\\mathcal S\\to\\mathcal S\\widehat\\otimes_R\\mathcal S$ and $\\varepsilon:\\mathcal S\\to R$ are continuous algebra maps, $\\Delta$ is coassociative with both counit identities, and the continuous antipode satisfies both convolution-inverse equations.\n\n$$\\Delta_{\\mathcal S}(X_s)=X_s\\otimes1+1\\otimes X_s,\\qquad \\Delta_{\\mathcal S}([v_{i_1}|\\cdots|v_{i_m}])=\\sum_{k=0}^{m}[v_{i_1}|\\cdots|v_{i_k}]\\otimes\\exp\\!\\Bigl(\\hbar\\sum_{t\\le k}d_{i_t}H_{i_t}\\Bigr)[v_{i_{k+1}}|\\cdots|v_{i_m}].$$\n\nThe counit sends every nonempty word and every $X_s$ to $0$ and sends $1$ to $1$. The antipode is the common convolution inverse constructed recursively in word length and Cartan-polynomial degree. The same structure maps make $\\mathcal V$ a topological Hopf subalgebra.\n\nLet $E_R:=\\bigoplus_{i\\in I}Re_i$ and $T_R(E_R):=\\bigoplus_{k\\ge0}E_R^{\\otimes_R k}$ be its tensor algebra with concatenation; every assignment of the $e_i$ to a unital $R$-algebra extends uniquely by wordwise multiplication. Let $U_{\\hbar}\\mathfrak n^+$ be the quotient of $T_R(E_R)$ by the two-sided ideal generated by\n\n$$\\sum_{s=0}^{1-a_{ij}}(-1)^s\\binom{1-a_{ij}}{s}_{q_i}e_i^{1-a_{ij}-s}e_je_i^s=0\\qquad(i\\ne j),$$\n\nwhere the symmetric Gaussian coefficients are evaluated at $q_i=e^{d_i\\hbar}$. Let $U_{\\hbar}\\mathfrak b^+$ be the crossed product of this quotient with the commuting Cartan symbols $H_i,D_j$, using the multiplication rule of part (b) for the induced derivations and acting by $[H_i,e_j]=a_{ij}e_j$ and $[D_j,e_i]=\\delta_{ij}e_i$. If the quantum Serre sums vanish in $\\langle V\\rangle$, then $H_i\\mapsto H_i$, $D_j\\mapsto D_j$, and $e_i\\mapsto[v_i]$, with the first two images the independent target Cartan symbols in $A_C$ define an algebra homomorphism $p_{\\hbar}:U_{\\hbar}\\mathfrak b^+\\to\\mathcal V$. This definition makes no assertion that the Serre-vanishing condition holds or that $p_{\\hbar}$ is injective. All formal exponentials are interpreted $\\hbar$-adically, and tensor completions are taken color-degreewise as specified above; no limit with unbounded color support is placed in either direct-sum algebra.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21–64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§2.1, printed pp. 30–32: the quantum shuffle product, graded word spaces, Cartan derivations and crossed-product multiplication, and the stated Hopf coproduct; all associativity, Hopf, counit and antipode verifications are supplied locally here."
+            },
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.2.5–13.1.2.6, printed pp. 303–304: the formal positive Borel and its Hopf coproduct in the $H_i$ convention with an explicit factor $1/2$; the shuffle item instead follows Enriquez's convention and proves its formula locally."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-positive-negative-and-toral-quantum-subalgebras",
+        "kind": "definition",
+        "title": "Positive, negative and toral quantum subalgebras and their root gradings",
+        "deps": [
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "thm-first-isomorphism-theorem-rings"
+        ],
+        "statement": "Let $U_q(\\mathfrak g)$ be the Drinfeld–Jimbo algebra of [[def-drinfeld-jimbo-quantized-enveloping-algebra]] with its root-lattice grading $U_q(\\mathfrak g)=\\bigoplus_{\\beta\\in Q}U_q(\\mathfrak g)[\\beta]$. Define\n\n$$U_q^+:=\\langle E_i\\ :\\ i\\in I\\rangle,\\qquad U_q^-:=\\langle F_i\\ :\\ i\\in I\\rangle,\\qquad U_q^0:=\\langle K_h\\ :\\ h\\in P^{\\vee}\\rangle,$$\n\nthe $\\mathbb Q(q)$-subalgebras generated by the indicated images, and let $Q_+=\\bigoplus_i\\mathbb Z_{\\ge0}\\alpha_i$. Then\n\n$$U_q^\\pm=\\bigoplus_{\\beta\\in Q_+}U_q^\\pm[\\pm\\beta],\\qquad U_q^+[\\beta]:=U_q(\\mathfrak g)[\\beta]\\cap U_q^+,\\quad U_q^-[ -\\beta]:=U_q(\\mathfrak g)[-\\beta]\\cap U_q^-.$$\n\nThe degree-zero component $U_q(\\mathfrak g)[0]$ contains $U_q^0$, and for every $x\\in U_q(\\mathfrak g)[\\beta]$ and $h\\in P^{\\vee}$,\n\n$$K_hxK_h^{-1}=q^{\\beta(h)}x.$$\n\nThus each $K_h\\in U_q^0$ acts by conjugation on the degree-$\\beta$ component as the scalar $q^{\\beta(h)}$. The elements $K_h$ span $U_q^0$ and satisfy $K_hK_{h'}=K_{h+h'}$ with $K_0=1$; hence $U_q^0$ is a quotient of the group algebra $\\mathbb Q(q)[P^{\\vee}]$. The subalgebras $U_q^\\pm$ are spanned by finite monomials in the $E_i$ and $F_i$, respectively. Define the nonnegative and nonpositive product spans by\n\n$$U_q^{\\ge0}:=\\operatorname{span}_{\\mathbb Q(q)}(U_q^0U_q^+),\\qquad U_q^{\\le0}:=\\operatorname{span}_{\\mathbb Q(q)}(U_q^-U_q^0).$$\n\nThis definition asserts no linear independence of these spanning families and no injectivity of the natural maps; those claims belong to [[thm-triangular-decomposition-of-a-quantized-enveloping-algebra]].",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 6, immediately after (1.6): 'Let $U_q^+(g)$ (resp. $U_q^-(g)$) be the subalgebra of $U_q(g)$ generated by the elements $e_i$ (resp. $f_i$), and let $U_q^0(g)$ be the subalgebra generated by $q^h$; then we have the triangular decomposition (1.7)'"
+            },
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, printed pp. 307-308: the root grading $\\deg E_i=\\epsilon_i$, $\\deg F_i=-\\epsilon_i$ and the toral elements $K_i=q_i^{H_i}$"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-q-binomial-expansion-for-q-commuting-elements",
+        "kind": "lemma",
+        "title": "The quantum binomial expansion for $q$-commuting elements",
+        "deps": [
+          "lem-quantum-pascal-recurrence-and-gaussian-integrality",
+          "def-q-integer-q-factorial-and-q-multinomial",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i"
+        ],
+        "statement": "Let $t$ be an indeterminate over $\\mathbb Q$, and let $A$ be a unital associative $\\mathbb Q(t)$-algebra. For $N\\ge0$ and $0\\le r\\le N$, set\n\n$$B_{N,r}(t):=\\frac{[N]_t!}{[r]_t![N-r]_t!},\\qquad [m]_t:=1+t+\\cdots+t^{m-1},\\quad [m]_t!:=\\prod_{k=1}^m[k]_t,\\quad [0]_t:=0,\\quad [0]_t!:=1,$$\n\nand set $B_{N,r}(t)=0$ when $r<0$ or $r>N$. If $x,y\\in A$ satisfy $yx=txy$, then for every $N\\ge0$,\n\n$$ (x+y)^N=\\sum_{r=0}^{N}B_{N,r}(t)x^ry^{N-r}.$$\n\nFor a symmetrizable Cartan datum and $i\\in I$, any unital $\\mathbb Q(q)$-algebra can be viewed as a $\\mathbb Q(t)$-algebra via $t\\mapsto q_i^2$. In that algebra, if $yx=q_i^2xy$, then\n\n$$ (x+y)^N=\\sum_{r=0}^{N}q_i^{r(N-r)}\\binom{N}{r}_i x^ry^{N-r},$$\n\nusing the symmetric Gaussian binomials of [[def-quantum-integers-factorials-and-divided-powers-at-q-i]]. If instead $yx=t^{-1}xy$, the same expansion has coefficients $B_{N,r}(t^{-1})=t^{-r(N-r)}B_{N,r}(t)$.",
+        "strategy": "Use the symmetric Pascal recurrence and the conversion C_{N,r}=q_i^{-r(N-r)}B_{N,r}(q_i²) to show that B_{N,r}(q_i²) obeys B_{N,r}=B_{N−1,r}+(q_i²)^{N−r}B_{N−1,r−1}; injectivity of t↦q_i² gives this recurrence for the generic asymmetric Gaussian quotient. Induct on N in (x+y)^N=(x+y)^{N−1}(x+y), using y^a x=t^a xy^a, to collect the coefficient of x^r y^{N−r}. The conversion then gives the q_i-symmetric coefficient. For t^{-1}, [k]_{t^{-1}}=t^{-(k−1)}[k]_t and the factorial quotient gives B_{N,r}(t^{-1})=t^{-r(N−r)}B_{N,r}(t). All expansions are finite; no ordinary commutative binomial theorem or choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, printed pp. 307–308, displays (13.1.3.8)–(13.1.3.9): quantum Serre elements and their q-binomial coefficients; the subsequent quasiprimivity proof invokes q-binomial identities."
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 5, display (1.1): Gaussian binomial conventions for q_i=q^{s_i}."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-quantum-serre-relations-are-stable-under-the-chevalley-involutions",
+        "kind": "lemma",
+        "title": "The Chevalley involution, the bar involution and the contravariant anti-involution preserve the defining ideal",
+        "deps": [
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "thm-universal-property-of-the-tensor-algebra"
+        ],
+        "statement": "Let $T$ and $I_{\\mathrm{DJ}}$ be the free algebra and defining ideal of [[def-drinfeld-jimbo-quantized-enveloping-algebra]]. Define $\\omega$ on generators by $E_i\\mapsto-F_i$, $F_i\\mapsto-E_i$, $K_h\\mapsto K_{-h}$, fixing $\\mathbb Q(q)$; define $\\psi$ by $E_i\\mapsto E_i$, $F_i\\mapsto F_i$, $K_h\\mapsto K_{-h}$ with $q\\mapsto q^{-1}$ on coefficients; and define $\\tau$ by $E_i\\mapsto F_i$, $F_i\\mapsto E_i$, $K_h\\mapsto K_{-h}$ with $q\\mapsto q^{-1}$ on coefficients and reversed word order. Then all three preserve $I_{\\mathrm{DJ}}$ and descend to involutions; $\\omega$ is a $\\mathbb Q(q)$-algebra automorphism, $\\psi$ a semilinear algebra automorphism, and $\\tau$ a semilinear anti-involution. On Serre sums, $\\omega(\\mathrm{Serre}^{\\pm}_{ij})=(-1)^{a_{ij}}\\mathrm{Serre}^{\\mp}_{ij}$, $\\psi$ fixes them, and $\\tau(\\mathrm{Serre}^{\\pm}_{ij})=(-1)^{1-a_{ij}}\\mathrm{Serre}^{\\mp}_{ij}$.",
+        "strategy": "Extend the three generator assignments to the free algebra and check each relation family. The toral action images are relations at $-h$ up to scalar; the mixed commutator maps to the swapped $(j,i)$ relation (with sign for $\\omega$), while the $q_i$-ratio is invariant under coefficient inversion. The Chevalley map contributes $m+1$ minus signs to the Serre sum; the anti-map reverses factors and reindexes $r\\mapsto m-r$; the symmetric Gaussian coefficients are inversion-invariant. The original scaffold's claim that $\\omega$ fixes the mixed commutator and its exponent for the $\\psi$ toral image are corrected in the item.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, printed pp. 307–310: the Serre elements and their role in the defining Hopf ideal; all three involutions and their actions on the free presentation are checked locally here."
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed pp. 5–6, Definition 1.2 and display (1.4): toral and mixed relations and both quantum Serre sums with the symmetric q_i Gaussian convention."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-coproduct-preserves-the-positive-and-negative-quantum-serre-ideals",
+        "kind": "lemma",
+        "title": "The coproduct preserves the positive and negative quantum Serre ideals",
+        "deps": [
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "def-tensor-algebra-of-a-vector-space",
+          "thm-universal-property-of-the-tensor-algebra",
+          "def-generated-and-principal-ideals",
+          "def-quotient-ring",
+          "thm-quotient-ring-universal-property",
+          "lem-quantum-pascal-recurrence-and-gaussian-integrality",
+          "lem-q-binomial-expansion-for-q-commuting-elements",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring"
+        ],
+        "statement": "Let $(I,A,D,P,P^{\\vee},q)$ be a symmetrizable Cartan datum, use the notation $q_i$, $K_h$ and $K_i=K_{d_i h_i}$ of [[def-drinfeld-jimbo-quantized-enveloping-algebra]], and put $m_{ij}=1-a_{ij}$ for $i\\ne j$. Let $T^+$ and $T^-$ be the free $\\mathbb Q(q)$-algebras on the symbols $E_i,K_h$ and $F_i,K_h$, respectively. Let $R^+$ and $R^-$ be the two-sided ideals generated by $K_0-1$, $K_hK_{h'}-K_{h+h'}$, and respectively $K_hE_i-q^{\\langle\\alpha_i,h\\rangle}E_iK_h$ or $K_hF_i-q^{-\\langle\\alpha_i,h\\rangle}F_iK_h$. Define the toral-action algebras $B^+=T^+/R^+$ and $B^-=T^-/R^-$, and let $J^+$ and $J^-$ be their two-sided ideals generated by the images of the corresponding Drinfeld–Jimbo Serre elements.\n\nThe generator assignments\n\n$$\\Delta_+(K_h)=K_h\\otimes K_h,\\qquad \\Delta_+(E_i)=E_i\\otimes K_i^{-1}+1\\otimes E_i,\\qquad \\Delta_-(K_h)=K_h\\otimes K_h,\\qquad \\Delta_-(F_i)=F_i\\otimes1+K_i\\otimes F_i$$\n\ndefine algebra homomorphisms $B^\\pm\\to B^\\pm\\otimes_{\\mathbb Q(q)}B^\\pm$. For every $i\\ne j$, the Serre elements are quasiprimitive:\n\n$$\\Delta_+(\\mathrm{Serre}^+_{ij})=\\mathrm{Serre}^+_{ij}\\otimes K_i^{-m_{ij}}K_j^{-1}+1\\otimes\\mathrm{Serre}^+_{ij},\\qquad \\Delta_-(\\mathrm{Serre}^-_{ij})=\\mathrm{Serre}^-_{ij}\\otimes1+K_i^{m_{ij}}K_j\\otimes\\mathrm{Serre}^-_{ij}.$$\n\nConsequently $\\Delta_\\pm(J^\\pm)\\subseteq J^\\pm\\otimes B^\\pm+B^\\pm\\otimes J^\\pm$. The canonical maps $B^\\pm\\to U_q(\\mathfrak g)$ send the displayed coproducts of the Serre elements to zero in $U_q(\\mathfrak g)\\otimes U_q(\\mathfrak g)$; thus these formulas provide the Serre-family part of the check that the Drinfeld–Jimbo coproduct descends.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, Remark 13.1.3.7, Lemma 13.1.3.9 and Corollary 13.1.3.10, printed pp. 307–309: the toral-action-only positive Borel, positive Serre quasiprimitivity and the resulting Serre Hopf ideal; the source points to Jantzen for the q-binomial computation rather than giving it. Its coproduct convention is E_i⊗K_i, while the local proof below follows the E_i⊗K_i^{-1} convention of JKK display (1.6)."
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed pp. 5–6, Definition 1.2, quantum Serre sums and display (1.6): the symmetric Gaussian convention and the coproduct formulas used here; relation preservation is asserted there without proof."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-quantum-serre-sums-vanish-in-the-formal-quantum-shuffle-algebra",
+        "kind": "lemma",
+        "title": "The quantum Serre sums vanish in the shuffle algebra, and the opposite Serre ideal annihilates the shuffle half",
+        "deps": [
+          "def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum",
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "lem-q-binomial-expansion-for-q-commuting-elements",
+          "lem-quantum-pascal-recurrence-and-gaussian-integrality"
+        ],
+        "statement": "Let $\\mathrm{Sh}(V)$, $\\langle V\\rangle$ and $U_\\hbar\\mathfrak n^+$ be as in [[def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum]].\n\n(i) In $\\langle V\\rangle\\subseteq\\mathrm{Sh}(V)$ the Serre sums vanish: for all $i\\ne j$,\n$$\\sum_{s=0}^{1-a_{ij}}(-1)^s\\binom{1-a_{ij}}{s}_{q_i}[v_i]^{*(1-a_{ij}-s)}*[v_j]*[v_i]^{*s}=0,$$\nwhere $*$ is the shuffle product of [[def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum]].\n\n(ii) Let $V^*=\\bigoplus_i\\mathbb C\\xi_i$ be the dual space with $\\langle\\xi_i,v_j\\rangle=d_i^{-1}\\delta_{ij}$, let $T(V^*)=\\bigoplus_{k\\ge0}(V^*)^{\\otimes k}\\llbracket\\hbar\\rrbracket$ be the tensor algebra on $V^*$ with concatenation product, graded by $\\deg\\xi_i=-\\epsilon_i$, and let $\\Delta:T(V^*)\\to T(V^*)\\otimes_R T(V^*)$ be the braided coproduct with $\\Delta(\\xi_i)=\\xi_i\\otimes1+1\\otimes\\xi_i$, the target carrying the braided product $(u\\otimes v)(u'\\otimes v')=q^{-\\langle\\deg u',\\deg v\\rangle}uu'\\otimes vv'$. Let $J_-\\trianglelefteq T(V^*)$ be the two-sided ideal generated by the negative Serre elements $\\sum_{s=0}^{1-a_{ij}}(-1)^s\\binom{1-a_{ij}}{s}_{q_i}\\xi_i^{1-a_{ij}-s}\\xi_j\\xi_i^s$, $i\\ne j$. Let\n$$\\langle\\cdot,\\cdot\\rangle_{\\mathrm{Sh}(V)\\times T(V^*)}:\\mathrm{Sh}(V)\\times T(V^*)\\to\\mathbb C((\\hbar)),\\qquad \\langle[v_{i_1}|\\cdots|v_{i_k}],\\xi_{j_1}\\cdots\\xi_{j_l}\\rangle=\\delta_{kl}\\,\\hbar^{-k}\\prod_{t=1}^{k}\\langle v_{i_t},\\xi_{j_t}\\rangle,$$\nbe the wordwise pairing, extended bilinearly from the tensor-word bases. Then $J_-$ annihilates the shuffle half $\\langle V\\rangle$:\n$$\\langle x,y\\rangle=0\\qquad\\text{for every }x\\in\\langle V\\rangle,\\ y\\in J_-,$$\nequivalently the wordwise pairing descends to a bilinear pairing $\\langle V\\rangle\\times\\bigl(T(V^*)/J_-\\bigr)\\to\\mathbb C((\\hbar))$. The twisted product on $T(V^*)\\otimes_R T(V^*)$ is used only in the definition of the braided coproduct, and no claim is made about the radical of the pairing on all of $\\mathrm{Sh}(V)$ (see the note after the proof).",
+        "strategy": "The complete local argument is the numbered proof in items/lem-quantum-serre-sums-vanish-in-the-formal-quantum-shuffle-algebra.md. **Proof technique:** Write $*$ for the shuffle product and expand the positive Serre expression one word at a time. Then compute the pairing of a shuffle product with the negative Serre element by an explicit permutation count, and compare it with the vanishing alternating sum just obtained.\n\n1.1 Put $N=1-a_{ij}$, $x=[v_i]$, $y=[v_j]$, $t=q_i^{-2}$, and $B_{m,r}(t)=0$ outside $0\\le r\\le m$. Let $W_m=[v_i|\\cdots|v_i]$ (with $m$ letters), and let $w_p$ be the word with $p$ copies of $v_i$, then $v_j$, then $N-p$ copies of $v_i$ (omitting a zero-length block). Repeatedly shuffling one $x$ into a block of $m$ equal $x$-letters gives $x^{*m}=A_m W_m$, where $A_m=q_i^{-m(m-1)/2}[m]_i!$: the insertion weights sum to $1+q_i^{-2}+\\cdots+q_i^{-2m}=q_i^{-m}[m+1]_i$. In a three-block shuffle $W_a*y*W_b$, with $a+b=N$, fix $w_p$, and let $u$ (respectively $v$) count the $b$-block letters before (respectively after) $y$, so $u+v=b$. The prefix interleavings contribute $B_{p,u}(t)$, the suffix interleavings contribute $B_{N-p,v}(t)$, the $u$ letters before $y$ cross $y$ and the $N-p-v$ letters after it, and each of those $u$ letters crosses those $N-p-v$ suffix $x$-letters; therefore $\\operatorname{coeff}_{w_p}(W_a*y*W_b)=\\sum_{u+v=b}B_{p,u}(t)B_{N-p,v}(t)q_i^{-a_{ij}(u+N-p-v)-2u(N-p-v)}$. [F1, F2, F3, F5, given, algebra]\n\n1.2 The pairing is diagonal in the tensor-word bases: for tensor words $u=[v_{i_1}|\\cdots|v_{i_k}]$ and $v=\\xi_{j_1}\\cdots\\xi_{j_l}$ the defining formula gives $\\langle u,v\\rangle=\\delta_{kl}\\delta_{i_1j_1}\\cdots\\delta_{i_kj_k}\\hbar^{-k}\\prod_td_{i_t}^{-1}$, and $\\prod_td_{i_t}^{-1}$ depends only on $u$. Consequently, for $x=\\sum_wx_w[w]$ and tensor words $y,y'$ with letter-sequences $u,u'$, both sides of $\\langle x,yy'\\rangle=\\sum_{k\\ge0}\\langle x_{\\le k},y\\rangle\\langle x_{>k},y'\\rangle$ equal $x_{uu'}\\hbar^{-(|u|+|u'|)}\\bigl(\\prod_{s\\in u}d_s^{-1}\\bigr)\\bigl(\\prod_{s\\in u'}d_s^{-1}\\bigr)$: the left side because only the word $uu'$ has nonzero pairing with $yy'$, the right side because only the cut $k=|u|$ contributes, the product in $T(V^*)$ being concatenation and the cut coproduct of the word $[u]$ being $\\Delta([u])=\\sum_k[u_{\\le k}]\\otimes[u_{>k}]$. Extending by bilinearity, this adjunction rule holds for all $x\\in\\mathrm{Sh}(V)$ and all $y,y'\\in T(V^*)$. [F5, F6, given, algebra]\n\n1.3 For homogeneous one-letter words $[x_1],\\ldots,[x_m]\\in V$ put $w(a,b):=\\langle\\deg x_a,\\deg x_b\\rangle$. Then $[x_1]*\\cdots*[x_m]=\\sum_{\\sigma\\in S_m}q^{-\\sum_{a<b,\\ \\sigma(a)>\\sigma(b)}w(a,b)}[x_{\\sigma^{-1}(1)}|\\cdots|x_{\\sigma^{-1}(m)}]$. Here $\\sigma$ maps each original letter position to its output position, consistently with [F5]. For $m=1$ this is the identity. If it holds for $m-1$, write the product as $([x_1]*\\cdots*[x_{m-1}])*[x_m]$; inserting $[x_m]$ into the $k$-th position of a word $[x_{\\sigma^{-1}(1)}|\\cdots|x_{\\sigma^{-1}(m-1)}]$ multiplies its coefficient by $q^{-\\sum_{a<m,\\ \\sigma(a)\\ge k}w(a,m)}$, exactly the sum of the weights of the pairs $(a,m)$ inverted by the resulting permutation, so the block formula reproduces the displayed expansion; the map $(\\sigma,k)\\mapsto$ the resulting permutation is a bijection onto $S_m$. [F5, given, algebra]\n\n2.1 In the coefficient of $w_p$ in $\\sum_{s=0}^{N}(-1)^sC_{N,s}x^{*(N-s)}*y*x^{*s}$, set $Q=N-p$, write $u+v=s$, and use $A_{N-s}A_sC_{N,s}=q_i^{-((N-s)(N-s-1)+s(s-1))/2}[N]_i!$ and $-a_{ij}=N-1$. The coefficient simplifies to $[N]_i!q_i^{-N(N-1)/2+(N-1)Q}\\bigl(\\sum_{u=0}^{p}(-1)^uB_{p,u}(t)q_i^{u(2p-1)-u^2}\\bigr)\\bigl(\\sum_{v=0}^{Q}(-1)^vB_{Q,v}(t)q_i^{v-v^2}\\bigr)$. The quotient definition gives $B_{m,r}(t)=B_{m-1,r}(t)+t^{m-r}B_{m-1,r-1}(t)$; induction then yields $\\sum_{r=0}^{m}(-1)^rt^{r(r-1)/2}B_{m,r}(t)z^r=\\prod_{j=0}^{m-1}(1-zt^j)$. Thus the first factor in parentheses is $\\prod_{j=0}^{p-1}(1-q_i^{2p-2-2j})$ and vanishes when $p>0$; the second is $\\prod_{j=0}^{Q-1}(1-q_i^{-2j})$ and vanishes when $Q>0$. Since $p+Q=N\\ge1$, at least one factor vanishes for every $p=0,\\ldots,N$. These words exhaust the color degree $N\\epsilon_i+\\epsilon_j$, proving part (i). [F1, F2, F3, F4, F5, step 1.1, algebra]\n\n2.2 Fix $i\\ne j$ and $N=1-a_{ij}$, and put $w(i,i)=2d_i$, $w(i,j)=w(j,i)=d_ia_{ij}$; these are the values $\\langle\\deg v_a,\\deg v_b\\rangle$, and $w$ is symmetric by [F1]. Let $z:=\\sum_{p=0}^{N}(-1)^pC_{N,p}\\xi_i^p\\xi_j\\xi_i^{N-p}$; since $C_{N,N-p}=C_{N,p}$, the element $z$ differs from the printed Serre generator $\\sum_s(-1)^sC_{N,s}\\xi_i^{N-s}\\xi_j\\xi_i^s$ by the global sign $(-1)^N$, so the two generate the same two-sided ideal. For $t\\in\\{0,\\ldots,N\\}$ let $\\zeta_t:=[v_i]^{*t}*[v_j]*[v_i]^{*(N-t)}$, and for $p\\in\\{0,\\ldots,N\\}$ let $w_p$ be the tensor word with $p$ letters $v_i$, then $v_j$, then $N-p$ letters $v_i$. By [F6] and steps 1.2 and 1.3, $\\langle\\zeta_t,z\\rangle=\\hbar^{-(N+1)}d_i^{-N}d_j^{-1}\\sum_{p=0}^{N}(-1)^pC_{N,p}M(t,p)$, where $M(t,p):=\\sum_{\\sigma\\in S_{N+1},\\ \\sigma(t+1)=p+1}q^{-\\sum_{a<b,\\ \\sigma(a)>\\sigma(b)}W(a,b)}$ and $W(a,b)$ is the weight $w$ of the letters at positions $a,b$ of the sequence $(i^t,j,i^{N-t})$. Then $M(t,p)=M(p,t)$: the map $\\sigma\\mapsto\\sigma^{-1}$ is a bijection from the permutations with $\\sigma(t+1)=p+1$ onto those with $\\tau(p+1)=t+1$, and it preserves the exponent, because the inversion pairs of $\\sigma$ correspond to those of $\\tau=\\sigma^{-1}$ with the same pair of letters: if $c=\\sigma(b)<d=\\sigma(a)$ for an inverted pair $a<b$, then $\\tau(c)=b>a=\\tau(d)$, and the weight of the pair $\\{a,b\\}$ equals the weight of the letter pair at the positions $d,c$ of the transposed sequence $(i^p,j,i^{N-p})$, since $\\sigma$ carries the position $t+1$ of $j$ onto the position $p+1$, so the letter at position $\\sigma(x)$ of the transposed sequence is the letter at position $x$ of the original sequence for every $x$. [F5, F6, step 1.3, algebra]\n\n2.3 The cut coproduct is an algebra map from $\\mathrm{Sh}(V)$ to its tensor square with product $(u\\otimes v)(u'\\otimes v')=q^{-\\langle\\deg u',\\deg v\\rangle}(u*u')\\otimes(v*v')$. Indeed a shuffle followed by a cut consists uniquely of shuffles of the two prefixes and two suffixes; its cross-cut inversions contribute $q^{-\\langle\\deg u_-,\\deg v_+\\rangle}$, exactly the scalar in this tensor product. On a letter the coproduct is primitive, so it sends every product of letters into $\\langle V\\rangle\\otimes_R\\langle V\\rangle$. Write this finite sum as $\\Delta(x)=\\sum_a x_a'\\otimes x_a''$ with $x_a',x_a''\\in\\langle V\\rangle$; individual prefixes of ambient tensor words need not themselves belong to the generated half. If $y$ annihilates $\\langle V\\rangle$, step 1.2 gives $\\langle x,yu\\rangle=\\sum_a\\langle x_a',y\\rangle\\langle x_a'',u\\rangle=0$ and likewise $\\langle x,uy\\rangle=0$. Thus $\\langle V\\rangle^\\perp$ is a two-sided ideal. [F5, step 1.2, algebra]\n\n3.1 By part (i) the element $\\zeta:=\\sum_{s=0}^{N}(-1)^sC_{N,s}\\zeta_{N-s}$ is zero in $\\langle V\\rangle\\subseteq\\mathrm{Sh}(V)$, so all of its tensor-word coefficients vanish. By step 1.3 the coefficient of $w_p$ in $\\zeta_{N-s}$ is $M(N-s,p)$, hence $\\sum_s(-1)^sC_{N,s}M(N-s,p)=0$ for every $p$. Substituting $t=N-s$ and using $C_{N,N-t}=C_{N,t}$ (so that $(-1)^{N-t}$ is the global factor $(-1)^N$) gives $\\sum_t(-1)^tC_{N,t}M(t,p)=0$ for every $p$; by the symmetry of step 2.2 this is $\\sum_p(-1)^pC_{N,p}M(t,p)=0$ for every $t$. Hence step 2.2 gives $\\langle\\zeta_t,z\\rangle=0$ for every $t$. [F3, step 1.3, step 2.2, algebra]\n\n4.1 A shuffle product $[x_1]*\\cdots*[x_m]$ of one-letter words is homogeneous of color degree $\\deg x_1+\\cdots+\\deg x_m$, and $\\langle V\\rangle$ is generated by the one-letter words, so every $x\\in\\langle V\\rangle$ is a finite sum of such products. Unless the letters are exactly $N$ copies of $v_i$ and one copy of $v_j$, their color degree differs from that of $z$, so the diagonal pairing vanishes. In the remaining case the letter weights agree with the two-letter computation of step 2.2, and step 3.1 gives $\\langle[x_1]*\\cdots*[x_m],z\\rangle=0$. By linearity $\\langle x,z\\rangle=0$ for every $x\\in\\langle V\\rangle$, that is, $z\\in\\langle V\\rangle^\\perp$. Consequently every Serre generator lies in the two-sided ideal $\\langle V\\rangle^\\perp$ of step 2.3, and hence so does the ideal $J_-$ they generate: $\\langle\\langle V\\rangle,J_-\\rangle=0$. This is the stated annihilation and the asserted descent of the wordwise pairing. [step 2.2, step 3.1, step 2.3, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21–64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§2.1, printed p.32, Lemma 2.3 proof: shuffle Serre assertion citing Rosso Lemma 14. §2.2, printed p.37, formula (28): diagonal word pairing; the printed single hbar^-1 prefactor and full-Sh radical clause do not satisfy the claimed interface. The item proves the generated-half annihilation with multiplicative word weight hbar^-k locally."
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 5, display (1.1): symmetric q_i-integers and Gaussian binomials used in the Serre sum."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-the-generic-borel-half-and-opposite-half-form-a-dj-crossed-double",
+        "kind": "lemma",
+        "title": "The generic quantum halves form a Drinfeld–Jimbo crossed double",
+        "deps": [
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "def-positive-negative-and-toral-quantum-subalgebras",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "lem-quantum-pascal-recurrence-and-gaussian-integrality",
+          "thm-right-exactness-of-tensor-products",
+          "thm-universal-property-of-the-tensor-algebra",
+          "thm-quotient-ring-universal-property"
+        ],
+        "statement": "Fix a finite symmetrizable Cartan datum over $k=\\mathbb Q(q)$, with $q_i=q^{d_i}$ and $K_i=K_{d_i h_i}$. Let $A^+$ and $A^-$ be the independently presented $k$-algebras on $e_i$ and $f_i$, respectively, modulo their separate symmetric quantum Serre relations, and let $C=k[P^\\vee]$ have basis $K_h$, $h\\in P^\\vee$. Then the vector space\n$$D=A^-\\otimes_k C\\otimes_k A^+$$\ncarries a unique associative unital algebra structure in which $a_-\\otimes K_h\\otimes a_+$ equals the product of the three embedded factors, the factors retain their algebra structures, and\n$$K_h e_i=q^{\\alpha_i(h)}e_iK_h,\\qquad K_h f_i=q^{-\\alpha_i(h)}f_iK_h,\\qquad [e_i,f_j]=\\delta_{ij}\\frac{K_i-K_i^{-1}}{q_i-q_i^{-1}}.$$\nThis is the Drinfeld–Jimbo crossed double. Its normal-factor multiplication map to the presented algebra $U_q(\\mathfrak g)$ of [[def-drinfeld-jimbo-quantized-enveloping-algebra]] is an algebra isomorphism, whose inverse sends $E_i,F_i,K_h$ to the indicated factor generators. Thus all three abstract factor maps are injective; their images are the subalgebras of [[def-positive-negative-and-toral-quantum-subalgebras]].\n\nIn the presentation $\\widetilde U$ obtained by omitting both Serre families, the halves $T^\\pm$ are free, the toral factor is $C$, and multiplication identifies $\\widetilde U=T^-\\otimes C\\otimes T^+$. Every Serre element satisfies\n$$[F_k,S^+_{ij}]=[E_k,S^-_{ij}]=0.$$\nWriting $I^\\pm\\trianglelefteq T^\\pm$ for the separate Serre ideals, the full Serre ideal of $\\widetilde U$ is exactly\n$$I^-\\otimes C\\otimes T^+ + T^-\\otimes C\\otimes I^+.$$\nNo nonsingularity of the Cartan matrix and no choice principle is required.",
+        "strategy": "The complete local argument is the numbered proof in items/lem-the-generic-borel-half-and-opposite-half-form-a-dj-crossed-double.md. 1.1 Put $c_i=(K_i-K_i^{-1})/(q_i-q_i^{-1})$. In the free Serre-free presentation reduce $E_iF_j$ to $F_jE_i+\\delta_{ij}c_i$, $E_iK_h$ to $q^{-\\alpha_i(h)}K_hE_i$, $K_hF_j$ to $q^{-\\alpha_j(h)}F_jK_h$, $K_hK_g$ to $K_{h+g}$, and $K_0$ to $1$. For each monomial use the lexicographic triple consisting of the number of $E/F$ letters, the number of inverted type pairs for $F<K<E$, and the number of toral letters. Every resulting term decreases this triple: the mixed correction decreases the first coordinate, the other mixed or crossing terms decrease inversions, and toral merging or deletion decreases inversions or the final coordinate. Each rule has finitely many outputs, so the finitely branching reduction tree terminates; an infinite tree of arbitrarily deep descendants would give an infinite decreasing path by choosing its first such child at each stage. The irreducible words are precisely $F_{i_1}\\cdots F_{i_a}K_h E_{j_1}\\cdots E_{j_b}$, with $K_0$ interpreted as the empty toral factor. [F1, F2, construct]\n\n1.2 Fix $i\\ne j$, set $t=q_i$, $a=a_{ij}$, $N=1-a$, and $C_s=\\binom Ns_i$, so $S^+_{ij}=\\sum_s(-1)^s C_s E_i^{N-s}E_jE_i^s$. Expanding the commutator in each position and moving toral factors to the right gives $[F_i,E_i^m]=-[m]_i E_i^{m-1}(t^{m-1}K_i-t^{-(m-1)}K_i^{-1})/(t-t^{-1})$ for $m\\ge1$: the two geometric sums are $\\sum_{r=0}^{m-1}t^{\\pm2r}=t^{\\pm(m-1)}[m]_i$. For $k\\ne i,j$, the commutator $[F_k,S^+_{ij}]$ is zero because every letter commutes with $F_k$. For $k=j$, only the $E_j$ contributes, and moving $K_j$ past the last $s$ copies of $E_i$ gives $$[F_j,S^+_{ij}]=-\\frac{E_i^N}{q_j-q_j^{-1}}\\left(\\left(\\sum_s(-1)^s C_s t^{as}\\right)K_j-\\left(\\sum_s(-1)^s C_s t^{-as}\\right)K_j^{-1}\\right)=0.$$ The crossing uses $q_j^{a_{ji}}=t^a$ from [F2], and both sums vanish by [F3] because $a=1-N$. [F1, F2, F3, algebra]\n\n2.1 The overlapping reductions are $K_hK_gK_l$, $E_iK_hK_g$, $K_hK_gF_j$, and $E_iK_hF_j$, together with deletion of $K_0$ against an adjacent crossing or toral product. The first three give respectively $K_{h+g+l}$, $q^{-\\alpha_i(h+g)}K_{h+g}E_i$, and $q^{-\\alpha_j(h+g)}F_jK_{h+g}$ along both routes. In the fourth, the two routes give the common term $q^{-\\alpha_i(h)-\\alpha_j(h)}F_jK_hE_i$ and corrections $\\delta_{ij}q^{-\\alpha_i(h)}K_hc_i$ and $\\delta_{ij}q^{-\\alpha_j(h)}c_iK_h$; they agree since the toral elements commute and $i=j$ whenever the correction is present. The zero-index cases and a toral sum $h+g=0$ agree by character additivity and $\\alpha_i(0)=0$. There is no overlapping pair of $EF$ rules, since its shared letter would have to be both $E$ and $F$. Disjoint reductions commute by distributivity. Inducting on the decreasing triple in step 1.1, these joined first reductions therefore have the same final normal form in every word context. The linear normal-form map kills each relation multiplied on the left and right by arbitrary words, while every word minus its normal form lies in the relation ideal. It consequently induces inverse linear maps between $\\widetilde U$ and the freely based normal-word space. This proves the full Serre-free tensor decomposition, including injectivity on arbitrary finite sums. [F1, F2, step 1.1, algebra]\n\n2.2 For $k=i$, expand in the left and right $E_i$ blocks using step 1.2. The left-block term with $s=r$ and right-block term with $s=r+1$ both have positive word $E_i^{N-1-r}E_jE_i^r$. In the left-block term, the exponent after moving $K_i$ to the right is $N-r-1+a+2r=r$, since $N-1+a=0$; the inverse toral exponent is $-r$. The right-block term has those same exponents. Thus $$[F_i,S^+_{ij}]=-\\frac1{t-t^{-1}}\\sum_{r=0}^{N-1}(-1)^r\\left(C_r[N-r]_i-C_{r+1}[r+1]_i\\right)E_i^{N-1-r}E_jE_i^r(t^rK_i-t^{-r}K_i^{-1})=0.$$ The coefficient identity is [F3], including both endpoints. The assignment $\\omega(E_i)=F_i$, $\\omega(F_i)=E_i$, $\\omega(K_h)=K_{-h}$ is an involutive algebra map of the Serre-free presentation: toral actions reverse their signs, and both the mixed commutator and $c_i$ change sign. Applying it proves $[E_k,S^-_{ij}]=0$. Toral conjugation of either Serre generator is scalar, since its color degree is homogeneous. [F1, F2, F3, step 1.2, algebra]\n\n3.1 In the normal-word space put $X=I^- C T^++T^- C I^+$. It contains the Serre generators and is a two-sided ideal. Same-side multiplication and toral multiplication preserve its two summands, using homogeneous toral conjugation. For the remaining crossed multiplications, expanding $[F_k,w]$ for a positive word $w$ yields positive-word/toral terms, and expanding $[E_k,w]$ for a negative word yields negative-word/toral terms, by the mixed relation. If $w=u S^+_{ij}v$, the Leibniz rule gives $[F_k,w]=[F_k,u]S^+_{ij}v+uS^+_{ij}[F_k,v]$ because the middle commutator vanishes by steps 1.2 and 2.2. Moving the resulting toral factors past the homogeneous Serre sum preserves its ideal. Hence $[F_k,I^+]\\subseteq C I^+$, and similarly $[E_k,I^-]\\subseteq I^-C$. When moving a crossed generator through an arbitrary normal product, these inclusions show that every term still belongs to $X$; multiplication in the other half only multiplies the existing ideal factor. This checks closure under all $E_k,F_k,K_h$ on both sides. Conversely each summand of $X$ lies in the ambient two-sided Serre ideal, by its definition. Therefore $X$ equals that ideal, with the exact tensor-factor description claimed. [F1, F2, step 2.1, step 1.2, step 2.2, algebra]\n\n4.1 By [F4], the tensor quotient $(T^-/I^-)\\otimes C\\otimes(T^+/I^+)$ is the quotient of $T^-\\otimes C\\otimes T^+$ by precisely $X$. Steps 2.1 and 3.1 therefore identify it linearly with $\\widetilde U/X=U_q(\\mathfrak g)$, proving genuine tensor injectivity. Transport the associative quotient multiplication to this tensor space to define $D$. Its factor products, normal-factor products and cross-relations are as stated, and the factor embeddings are injective because $1$ survives both homogeneous positive-height Serre ideals. Conversely any multiplication with those properties is determined by repeatedly using the crossing rules to rewrite a product of two normal tensors; these rules terminate by step 1.1. Thus the algebra structure is unique. Its generator map to $U_q(\\mathfrak g)$ and its inverse respect the defining relations by [F1] and the factor Serre relations, so are mutually inverse algebra homomorphisms. Their factor images are exactly [F5]. This proves all assertions. [F1, F4, F5, step 1.1, step 2.1, step 3.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21-64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§2.3, printed p.38: double algebra on the tensor factors with the toral and mixed cross-relations. The local proof establishes the tensor decomposition without assuming that construction."
+            },
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch.13, Lemma 13.1.3.21 and Theorem 13.1.3.22, printed pp.309–310: opposite-generator annihilation of Serre elements and the factor-ideal identity. The local proof supplies the Serre-free normal-form argument and both finite commutator calculations."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra",
+        "kind": "theorem",
+        "title": "The Drinfeld–Jimbo formulas define a Hopf algebra",
+        "deps": [
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "def-bialgebra-counit-and-antipode",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "thm-universal-property-of-the-tensor-algebra",
+          "def-generated-and-principal-ideals",
+          "def-quotient-ring",
+          "thm-quotient-ring-universal-property",
+          "thm-right-exactness-of-tensor-products",
+          "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "lem-coproduct-preserves-the-positive-and-negative-quantum-serre-ideals",
+          "lem-an-antipode-is-unique"
+        ],
+        "statement": "Let $T$ and $I_{\\mathrm{DJ}}$ be the free $\\mathbb Q(q)$-algebra and defining ideal of [[def-drinfeld-jimbo-quantized-enveloping-algebra]], and write $K_i=K_{d_i h_i}$. Let $\\Delta:T\\to T\\otimes_{\\mathbb Q(q)}T$ and $\\varepsilon:T\\to\\mathbb Q(q)$ be the algebra homomorphisms determined by\n\n$$\\Delta(K_h)=K_h\\otimes K_h,\\quad \\Delta(E_i)=E_i\\otimes K_i^{-1}+1\\otimes E_i,\\quad \\Delta(F_i)=F_i\\otimes1+K_i\\otimes F_i,\\quad \\varepsilon(K_h)=1,\\quad\\varepsilon(E_i)=\\varepsilon(F_i)=0.$$\n\nLet $S:T\\to T$ be the $\\mathbb Q(q)$-linear algebra anti-homomorphism determined by\n\n$$S(K_h)=K_{-h},\\qquad S(E_i)=-E_iK_i,\\qquad S(F_i)=-K_i^{-1}F_i.$$\n\nThen\n\n$$\\Delta(I_{\\mathrm{DJ}})\\subseteq I_{\\mathrm{DJ}}\\otimes T+T\\otimes I_{\\mathrm{DJ}},\\qquad \\varepsilon(I_{\\mathrm{DJ}})=0,\\qquad S(I_{\\mathrm{DJ}})\\subseteq I_{\\mathrm{DJ}}.$$\n\nHence these maps descend to $U_q(\\mathfrak g)=T/I_{\\mathrm{DJ}}$ and make it a Hopf algebra over $\\mathbb Q(q)$ ([[def-bialgebra-counit-and-antipode]]): $\\Delta$ is coassociative, $\\varepsilon$ is a counit, and\n\n$$m(S\\otimes\\operatorname{id})\\Delta=\\eta\\circ\\varepsilon=m(\\operatorname{id}\\otimes S)\\Delta.$$\n\nThe antipode $S$ is unique for this multiplication, unit, coproduct and counit ([[lem-an-antipode-is-unique]]), and its square satisfies\n\n$$S^2(E_i)=q_i^{-2}E_i,\\qquad S^2(F_i)=q_i^{2}F_i,\\qquad S^2(K_h)=K_h.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 6, display (1.6): the exact coproduct, counit and antipode convention used here; the paper asserts the Hopf structure without verifying relation preservation."
+            },
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, Lemma 13.1.3.9, Corollary 13.1.3.10 and Definition 13.1.3.12, printed pp. 308–309: positive Serre quasiprimitivity and the Hopf ideal, and the presentation/Hopf formulas in a different coproduct convention; the convention-sensitive relation calculations are proved locally."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-the-formal-quantum-serre-half-embeds-in-the-quantum-shuffle-algebra-and-is-degreewise-free",
+        "kind": "theorem",
+        "title": "The formal quantum Serre half embeds in the shuffle algebra and is degreewise free",
+        "deps": [
+          "def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum",
+          "lem-quantum-serre-sums-vanish-in-the-formal-quantum-shuffle-algebra",
+          "lem-a-two-sided-coideal-in-an-enveloping-algebra-is-generated-by-its-primitive-part",
+          "lem-opposite-symmetrizable-kac-moody-borels-are-root-degreewise-dual-lie-bialgebras",
+          "def-generalized-cartan-matrix",
+          "thm-serre-presentation-of-a-kac-moody-algebra",
+          "def-axiom-of-choice",
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-formal-power-series-and-coefficient-extraction",
+          "def-formal-exponential-logarithm-and-powers",
+          "thm-formal-power-series-unit-criterion",
+          "lem-formal-order-laws",
+          "def-principal-ideal-domain",
+          "cor-torsion-splits-from-the-free-part-over-a-pid",
+          "thm-invariant-factor-decomposition-over-a-pid",
+          "cor-submodules-of-finite-free-pid-modules-are-free",
+          "def-determinant-of-a-square-matrix",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "thm-rank-nullity",
+          "thm-right-exactness-of-tensor-products",
+          "def-field-of-fractions",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds",
+          "thm-universal-property-of-the-field-of-fractions",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "lem-quantum-pascal-recurrence-and-gaussian-integrality",
+          "def-universal-enveloping-algebra",
+          "thm-universal-property-of-the-universal-enveloping-algebra",
+          "rem-hopf-algebra-structure-on-the-enveloping-algebra"
+        ],
+        "statement": "Let $U_\\hbar\\mathfrak n^+$, $\\mathcal V$, $\\langle V\\rangle$, and $p_\\hbar:U_\\hbar\\mathfrak b^+\\to\\mathcal V$ be as in [[def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum]], with $R=\\mathbb C\\llbracket\\hbar\\rrbracket$ and $q=e^\\hbar$, and let $U\\mathfrak n^+$ be the positive half of the Kac–Moody algebra. Assume AC; it is used only to apply the two-sided coideal lemma in step 3.1. For an indeterminate $q'$, let $U_{q'}\\mathfrak n^+$ be the algebra over $\\mathbb C(q')$ with the same generators and positive quantum Serre relations, with $q_i'=q'^{d_i}$. Then:\n\n(i) The composite $U_\\hbar\\mathfrak n^+\\to U_\\hbar\\mathfrak b^+\\xrightarrow{p_\\hbar}\\mathcal V$ is an isomorphism of $R$-algebras onto $\\langle V\\rangle$. In particular, $U_\\hbar\\mathfrak n^+$ is a free $R$-module and each root-graded component $U_\\hbar\\mathfrak n^+[\\alpha]$ is a finite-rank free $R$-module.\n\n(ii) The classical limit is the classical half: $U_\\hbar\\mathfrak n^+/\\hbar U_\\hbar\\mathfrak n^+\\cong U\\mathfrak n^+$ as $\\mathbb N^I$-graded algebras, by $e_i\\mapsto\\bar e_i$.\n\n(iii) For every $\\alpha\\in Q_+$,\n$$\\operatorname{rank}_{R}U_\\hbar\\mathfrak n^+[\\alpha]=\\dim_{\\mathbb C}U\\mathfrak n^+[\\alpha]=\\dim_{\\mathbb C(q')}U_{q'}\\mathfrak n^+[\\alpha].$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21–64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§1.1, Theorem 1.1 and Corollary 1.1, printed pp. 22–23; §2.1, Lemmas 2.1–2.11 and proof of Theorem 1.1, printed pp. 30–37; Appendix A, Lemma A1, printed p. 62. The proof below locally verifies the classical Hopf reduction and the finite-module argument, and does not assume the quantum algebra map is Hopf."
+            },
+            {
+              "title": "K. Conrad, Modules over a PID",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/modulesoverPID.pdf",
+              "locator": "§2, Theorem 2.2 and its proof, PDF pp. 2–3: submodules of finite-rank free PID modules are finite-rank free."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-generic-quantum-serre-halves-have-classical-pbw-ranks-and-a-nondegenerate-hopf-pairing",
+        "kind": "theorem",
+        "title": "Generic quantum Serre halves have classical PBW ranks and a nondegenerate Hopf pairing",
+        "deps": [
+          "thm-the-formal-quantum-serre-half-embeds-in-the-quantum-shuffle-algebra-and-is-degreewise-free",
+          "lem-quantum-serre-sums-vanish-in-the-formal-quantum-shuffle-algebra",
+          "def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum",
+          "def-axiom-of-choice",
+          "def-field-of-fractions",
+          "def-restriction-and-extension-of-scalars",
+          "lem-pbw-for-countably-presented-kac-moody-lie-algebras",
+          "lem-quantum-pascal-recurrence-and-gaussian-integrality",
+          "thm-right-exactness-of-tensor-products"
+        ],
+        "statement": "Let $R=\\mathbb C\\llbracket\\hbar\\rrbracket$, $K=\\mathbb C((\\hbar))$, $q=e^\\hbar$, and $q_i=e^{d_i\\hbar}$ for a finite symmetrizable Cartan datum. Let $H^+=U_\\hbar\\mathfrak n^+$, $\\langle V\\rangle$ and the shuffle product be as in [[def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum]], and put $H^-=T(V^*)/J_-$ using [[lem-quantum-serre-sums-vanish-in-the-formal-quantum-shuffle-algebra]]. Assume AC ([[def-axiom-of-choice]]), used only through the formal embedding theorem. For an indeterminate $z$, let $H_z^\\pm$ be the algebras over $\\mathbb C(z)$ presented by the separate symmetric quantum Serre relations, with parameters $z_i=z^{d_i}$.\n\n(i) Each $H^\\pm[\\pm\\alpha]$ is finite free over $R$, and\n$$\\operatorname{rank}_R H^\\pm[\\pm\\alpha]=\\dim_{\\mathbb C}U(\\mathfrak n^\\pm)[\\pm\\alpha]=\\dim_{\\mathbb C(z)}H_z^\\pm[\\pm\\alpha].$$\nEvery family of homogeneous lifts of a basis of the classical component is an $R$-basis. Likewise, homogeneous word expressions with coefficients rational in $z$, regular at $z=1$, which reduce to a classical component basis form a basis of the corresponding generic component. In particular, for a supplied ordered homogeneous basis of $\\mathfrak n^\\pm$, ordered monomials in any such regular lifts form a generic PBW basis.\n\n(ii) Both formal halves are graded braided Hopf algebras. Their generators are primitive, their counits kill positive height, and their tensor squares use\n$$ (u\\otimes v)(u'\\otimes v')=q^{-\\langle\\deg u',\\deg v\\rangle}uu'\\otimes vv',\\qquad \\langle\\epsilon_i,\\epsilon_j\\rangle=d_i a_{ij},$$\nwith negative degrees for $H^-$. The word pairing restricts and descends to a nondegenerate $K$-valued pairing $H^+\\times H^-$ with $\\langle e_i,f_j\\rangle=\\delta_{ij}/(\\hbar d_i)$ and $\\langle1,1\\rangle=1$. It is zero on unequal opposite degrees and satisfies the braided Hopf adjunctions\n$$\\langle x,yy'\\rangle=\\sum\\langle x_{(1)},y\\rangle\\langle x_{(2)},y'\\rangle,\\qquad\\langle xx',y\\rangle=\\sum\\langle x,y_{(1)}\\rangle\\langle x',y_{(2)}\\rangle.$$\nThe generic halves have the same braided Hopf structures and a nondegenerate $\\mathbb C(z)$-valued pairing normalized by $\\langle e_i,f_j\\rangle_z=\\delta_{ij}/(z_i-z_i^{-1})$. Thus opposite graded components are dual. All generic assertions also hold for the corresponding $\\mathbb Q(z)$-presentations and their rational pairing, with the PBW lift clause using bases of the rational classical Serre form.",
+        "strategy": "The complete local argument is the numbered proof in items/thm-generic-quantum-serre-halves-have-classical-pbw-ranks-and-a-nondegenerate-hopf-pairing.md. 1.1 The identification of free generators $e_i\\mapsto f_i$ carries the positive Serre presentation onto the negative one, reversing degrees; the same holds classically and generically. Thus [F1] gives all three rank equalities and finite freeness on both sides. In a fixed finite free component, lifts of a classical basis have a coordinate matrix whose reduction is invertible over $\\mathbb C$, so its determinant has nonzero constant term and is an $R$-unit. The adjugate identity makes this matrix invertible over $R$, proving the formal lift assertion. [F1, F3, algebra]\n\n1.2 Give the free positive tensor algebra the primitive-generator coproduct into its scalar-braided tensor square. Its map to $\\langle V\\rangle$ commutes with the cut coproduct: both are algebra maps by [F2] and agree on each letter. By [F1] its kernel is precisely the positive Serre ideal. Hence the composite of the tensor coproduct with the two quotient maps kills that ideal, and [F5] gives its coideal inclusion and descended coproduct. The same presentation identification gives the negative coproduct. Coassociativity and counit follow on primitive generators and hence on the generated algebras. The color-height grading is connected, so the reduced coproduct of a positive-height homogeneous element has both factors of strictly smaller height. The recursion $S(x)=-x-\\sum S(x')x''$ and its right-handed counterpart provide left and right convolution inverses by height induction; associativity of convolution makes them equal. Thus both quotients are braided Hopf algebras. [F1, F2, F3, F5, algebra]\n\n2.1 The substitution $z\\mapsto e^\\hbar$ embeds $\\mathbb C(z)$ into $K$: a nonzero polynomial is $(z-1)^m p(z)$ with $p(1)\\ne0$, and its value is the nonzero product $(e^\\hbar-1)^m p(e^\\hbar)$ in the domain $R$; fractions then embed by [F6]. In each color degree the generic and formal quotients after extension to $K$ have the same finite word presentation, since the Serre coefficients specialize as in [F3]. A regular rational lift of a classical component basis therefore gives the formal basis of step 1.1 and, after field extension, a generic basis. Applying this degree by degree to the ordered monomials of [F4] proves the PBW monomial clause. [F1, F3, F4, F5, F6, step 1.1, algebra]\n\n2.2 By [F2], the diagonal pairing restricts to $\\langle V\\rangle\\times H^-$, and [F1] identifies the first factor with $H^+$. The cut adjunction is the wordwise concatenation identity. For the other adjunction, the coefficient of a word $w$ in a shuffle $u*v$ equals the coefficient of $u\\otimes v$ in the primitive braided tensor coproduct of $w$: both sum over the assignments of letters to the two blocks with inversion scalar $q^{-\\langle\\deg u',\\deg v\\rangle}$. The degree form is symmetric by [F3], and the diagonal generator weights multiply in the same way on both sides. Thus both adjunctions hold on free representatives, and step 1.2 and the descended pairing make them adjunctions on the quotient coproducts themselves. The empty word gives $\\langle1,1\\rangle=1$ and all positive-degree counit pairings vanish. [F1, F2, F3, step 1.2, algebra]\n\n2.3 Fix $\\alpha\\in Q_+$. If an element of $H^+[\\alpha]\\otimes_R K$ pairs to zero with every negative class, its realization in the shuffle word space pairs to zero with every negative tensor word, since all those words map to quotient classes. The diagonal word pairing has zero left annihilator, so that realization is zero. The realization remains injective after extension to $K$ by [F1] and [F5]. The opposite components have equal finite dimension by step 1.1; an injective map from one into the other's dual is consequently bijective. Thus both annihilators vanish. For nonhomogeneous elements, separate the finitely many homogeneous components, proving the asserted nondegeneracy. [F1, F2, F5, step 1.1, algebra]\n\n3.1 Define the generic word pairing using shuffle coefficients and matching-word weights $\\prod_t(z_{i_t}-z_{i_t}^{-1})^{-1}$. These are rational functions, and under $z=e^\\hbar$ their ratio to the formal pairing in a fixed color degree $\\alpha$ is $\\prod_i u_i^{\\alpha_i}$, where $u_i=\\hbar d_i/(e^{d_i\\hbar}-e^{-d_i\\hbar})$ is an $R$-unit with constant term $1/2$. This color-multiplicative rescaling preserves the two adjunctions and nondegeneracy. The specialized generic pairing therefore kills the Serre ideals and is nondegenerate by steps 2.2–2.3; the field embedding of step 2.1 implies the same descent and invertible pairing matrices over $\\mathbb C(z)$. Likewise, coassociativity, coideal inclusions and the coproduct formulas descend generically: in each finite degree their errors vanish after the injective field extension, and the antipode recursion applies there as well. All generic presentations and word pairing coefficients lie in $\\mathbb Q(z)$, so the same injective extension to $K$ proves the statements over that field. This establishes the full braided Hopf pairing with the rational normalization needed for the Drinfeld–Jimbo commutator. [F3, F5, step 2.1, step 1.2, step 2.2, step 2.3, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21–64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§1.1, printed pp.22–24, Theorem 1.2 and Corollaries 1.2–1.3; equation (3) has generator value (1/hbar)d_i^{-1}. §2.2, printed p.37: word pairing and annihilator argument, with the printed defects corrected in the local Serre supplier. The local proof supplies full braided coproduct descent and the rational generic normalization explicitly."
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed pp.5–6, displays (1.4)–(1.7): symmetric Serre presentation, full Hopf formulas and the stated triangular-decomposition interface. The braided half coproducts and their descents are proved locally."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-triangular-decomposition-of-a-quantized-enveloping-algebra",
+        "kind": "theorem",
+        "title": "Triangular decomposition of a quantized enveloping algebra",
+        "deps": [
+          "lem-the-generic-borel-half-and-opposite-half-form-a-dj-crossed-double",
+          "thm-generic-quantum-serre-halves-have-classical-pbw-ranks-and-a-nondegenerate-hopf-pairing",
+          "def-positive-negative-and-toral-quantum-subalgebras",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Let $U_q(\\mathfrak g)$ be the Drinfeld–Jimbo algebra of a finite symmetrizable Cartan datum, over $k=\\mathbb Q(q)$, and let $U_q^-,U_q^0,U_q^+$ be its generated subalgebras of [[def-positive-negative-and-toral-quantum-subalgebras]].\n\n(i) Multiplication is a vector-space isomorphism\n$$m:U_q^-\\otimes_k U_q^0\\otimes_k U_q^+\\longrightarrow U_q(\\mathfrak g),\\qquad x_-\\otimes x_0\\otimes x_+\\longmapsto x_-x_0x_+.$$\nProducts $b_-K_h b_+$, with $b_\\pm$ ranging over supplied bases of the two halves and $h\\in P^\\vee$, form a basis of $U_q(\\mathfrak g)$. Arbitrary simple-generator words span the halves; their Serre relations preclude claiming their independence.\n\n(ii) The halves are exactly the algebras presented by their separate Serre relations, and $U_q^0\\cong k[P^\\vee]$. Thus all three abstract factor maps are injective and the $K_h$ are linearly independent.\n\n(iii) For every $\\beta\\in Q$, the total root grading satisfies\n$$U_q(\\mathfrak g)[\\beta]\\cong\\bigoplus_{\\alpha,\\gamma\\in Q_+,\\,\\alpha-\\gamma=\\beta} U_q^-[-\\gamma]\\otimes_k U_q^0\\otimes_k U_q^+[\\alpha].$$\nIn particular degree zero contains all equal-positive/negative-degree summands, including $F_iE_i$; it is not just the toral subalgebra. As a left $U_q^0$-module this component is free, with rank equal to the possibly infinite sum of the products of the two half-component dimensions. Under AC ([[def-axiom-of-choice]]), the half-component dimensions are their classical PBW ranks, and products of the generic PBW bases of [[thm-generic-quantum-serre-halves-have-classical-pbw-ranks-and-a-nondegenerate-hopf-pairing]] with the toral basis give a PBW basis of the whole algebra. AC enters only through that supplier's formal-embedding proof; (i), (ii) and the graded tensor decomposition are choice-free.",
+        "strategy": "The complete local argument is the numbered proof in items/thm-triangular-decomposition-of-a-quantized-enveloping-algebra.md. 1.1 By [F1], the algebra $U_q(\\mathfrak g)$ is identified with the tensor space of the independently presented factors, and their injective images are $U_q^-,U_q^0,U_q^+$. Under these identifications the multiplication map $m$ is exactly the normal-factor isomorphism in [F1]. This proves (i) and (ii) without any additional assumption about a quotient presentation's freeness. For supplied factor bases, finite bilinear expansions show that their pure tensors span the tensor product; coordinate functionals on the supplied bases separate the coefficients of every finite sum of those tensors. Thus their pure tensors, and hence their images $b_-K_hb_+$, are a basis. [F1, algebra]\n\n2.1 The normal-factor isomorphism preserves total root degree by [F2], so the degree-$\\beta$ tensor subspace is precisely the direct sum over $\\alpha-\\gamma=\\beta$ displayed in (iii). Every algebra element uses finitely many such summands. The equal-degree summands at $\\beta=0$ include $F_i\\otimes1\\otimes E_i$; both factors are nonzero because their simple-root component presentations have no Serre relations. Their independence from $1\\otimes C\\otimes1$ follows from the tensor decomposition. Hence $U_q(\\mathfrak g)[0]$ contains these additional summands and is not just $U_q^0$. [F1, F2, step 1.1, algebra]\n\n3.1 Homogeneous bases of the halves can be obtained by enumerating their words and retaining the first vectors outside the previous span, without choice. For homogeneous half basis vectors $b_-$ of degree $-\\gamma$ and $b_+$ of degree $\\alpha$, the map $C\\to U_q(\\mathfrak g)$ sending $c$ to $cb_-b_+$ identifies a free left toral copy: moving $K_h$ past $b_-$ multiplies $b_-K_hb_+$ by the nonzero scalar $q^{-\\gamma(h)}$. Step 1.1 therefore identifies the fixed total-degree component with the direct sum of these free left toral copies. Its rank is the sum of the products of the two component dimensions, which may be infinite. With the stated AC hypothesis, [F3] identifies those finite half dimensions with the classical PBW ranks and supplies the generic ordered-monomial bases; inserting their products into step 1.1 gives the asserted full PBW basis. This completes all claims with the exact total grading. [F1, F2, F3, step 1.1, step 2.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, Theorem 13.1.3.22 (Quantum triangular decomposition) with its proof by the commuting square and the ideal identity (13.1.3.23), printed pp. 309-310; Lemma 13.1.3.21 is the annihilation input."
+            },
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21-64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§2.1-2.3, printed pp. 30-41: the shuffle realization of the Serre-free crossed product, the identification $U_\\hbar\\mathfrak n^+/\\hbar U_\\hbar\\mathfrak n^+\\cong U\\mathfrak n^+$, and the double presentation used for the triangular decomposition."
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-quantized-sl-two-string-formulas",
+        "kind": "theorem",
+        "title": "Divided-power commutation and the simple $U_{q_i}(\\mathfrak{sl}_2)$ string modules",
+        "deps": [
+          "thm-triangular-decomposition-of-a-quantized-enveloping-algebra",
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "def-positive-negative-and-toral-quantum-subalgebras",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "thm-quotient-ring-universal-property"
+        ],
+        "statement": "Fix a symmetrizable Cartan datum $(I,A,D,P,P^{\\vee},q)$, an index $i\\in I$, and put $q_i=q^{d_i}$. Let $U_q(\\mathfrak g)$ be the Drinfeld–Jimbo algebra and let $A_i$ be the subalgebra generated by $E_i,F_i,K_i^{\\pm1}$ ([[def-drinfeld-jimbo-quantized-enveloping-algebra]], [[def-positive-negative-and-toral-quantum-subalgebras]]); write $x^{(m)}:=x^m/[m]_i!$ for the divided powers of [[def-quantum-integers-factorials-and-divided-powers-at-q-i]].\n\n(i) The assignment $e\\mapsto E_i$, $f\\mapsto F_i$, $k\\mapsto K_i$, $k^{-1}\\mapsto K_i^{-1}$ defines an algebra isomorphism from the standard rank-one algebra $\\mathbb A$ over $\\mathbb Q(q)$, presented by $e,f,k^{\\pm1}$ with $kek^{-1}=q_i^2e$, $kfk^{-1}=q_i^{-2}f$ and $[e,f]=(k-k^{-1})/(q_i-q_i^{-1})$ onto $A_i$; the images of the monomials $F_i^aK_i^mE_i^b$ ($a,b\\ge0$, $m\\in\\mathbb Z$) are linearly independent in $U_q(\\mathfrak g)$, being images of the PBW monomials of the triangular decomposition ([[thm-triangular-decomposition-of-a-quantized-enveloping-algebra]]).\n\n(ii) For all $a,b\\ge0$, $K_iE_i^{(a)}K_i^{-1}=q_i^{2a}E_i^{(a)}$ and $K_iF_i^{(b)}K_i^{-1}=q_i^{-2b}F_i^{(b)}$, and for $b\\ge1$ the divided powers satisfy the exact commutation formula\n$$E_iF_i^{(b)}=F_i^{(b)}E_i+\\frac{F_i^{(b-1)}}{q_i^{b}-q_i^{-b}}\\sum_{s=0}^{b-1}\\bigl(q_i^{-2s}K_i-q_i^{2s}K_i^{-1}\\bigr);$$\niterating it computes $E_i^{(a)}F_i^{(b)}$ as a finite sum of monomials $F_i^{(b-t)}K_i^{m}E_i^{(a-t)}$ ($0\\le t\\le\\min(a,b)$) with coefficients in $\\mathbb Q(q)$.\n\n(iii) For every $N\\ge0$ there is a simple $A_i$-module $L_i(N)$ of dimension $N+1$: it is the quotient of the cyclic module $\\widetilde M(N):=A_i/\\bigl(A_iE_i+A_i(K_i-q_i^N)\\bigr)$ by the submodule generated by $F_i^{(N+1)}w_N$, where $w_N$ is the image of $1$, with basis the images $v_t$ of $F_i^{(t)}w_N$, $0\\le t\\le N$, on which $K_iv_t=q_i^{N-2t}v_t$, $F_iv_t=[t+1]_iv_{t+1}$ and $E_iv_t=[N-t+1]_iv_{t-1}$ (with $v_{-1}=v_{N+1}=0$); $L_i(N)$ is the unique simple $A_i$-module generated by a vector $v\\ne0$ with $E_iv=0$, $K_iv=q_i^Nv$ and $F_i^{N+1}v=0$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 12, §12.2.1-12.2.3, printed pp. 275-281: the $U_q\\mathfrak{sl}_2$ relations, the strings $F^{(m)}v$ and the finite-dimensional modules; Ch. 13, §13.1.4, printed p. 310: divided powers $E_i^{[n]}=E_i^n/[n]_{q_i}!$."
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 5, display (1.5): the divided powers $e_i^{(n)}=e_i^n/[n]_i!$, $f_i^{(n)}=f_i^n/[n]_i!$."
+            }
+          ]
+        },
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 1525,
+    "id": "quantized-enveloping-algebras-and-quantum-serre-relations-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Quantized Enveloping Algebras and Quantum Serre Relations — Examples",
+    "companion": "quantized-enveloping-algebras-and-quantum-serre-relations",
+    "requires": [
+      "quantized-enveloping-algebras-and-quantum-serre-relations"
+    ],
+    "items": [
+      {
+        "id": "cex-unsymmetrized-q-parameters-break-the-cartan-normalization",
+        "kind": "counterexample",
+        "title": "Unsymmetrized parameters break the coproduct of the Serre ideal",
+        "deps": [
+          "lem-coproduct-preserves-the-positive-and-negative-quantum-serre-ideals",
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i"
+        ],
+        "statement": "The following assertion is false: for every generalized Cartan matrix and every assignment of node parameters $q_i$, the standard Drinfeld–Jimbo coproduct formulas descend to the full node-toral presentation, including its mixed and Serre relations, with $K_i E_jK_i^{-1}=q_i^{a_{ij}}E_j$.\n\nTake $A=\\begin{pmatrix}2&-1\\\\-2&2\\end{pmatrix}$, whose standard symmetrizer is $\\operatorname{diag}(2,1)$, but assign $q_1=q_2=q$, with $q$ indeterminate. Precisely, let $B$ be the $\\mathbb Q(q)$-algebra on $E_1,E_2,F_1,F_2,K_1^{\\pm1},K_2^{\\pm1}$, with commuting invertible toral generators, relations\n$$K_iE_jK_i^{-1}=q^{a_{ij}}E_j,\\quad K_iF_jK_i^{-1}=q^{-a_{ij}}F_j,\\quad [E_i,F_j]=\\delta_{ij}\\frac{K_i-K_i^{-1}}{q-q^{-1}},$$\nand both symmetric quantum Serre families with the common parameter $q$. This explicitly changed parameter assignment is the test presentation, not the symmetrized algebra of [[def-drinfeld-jimbo-quantized-enveloping-algebra]]. Put $S=E_1^2E_2-[2]_qE_1E_2E_1+E_2E_1^2=0$ in $B$.\n\nThe assignments $\\Delta(E_i)=E_i\\otimes K_i^{-1}+1\\otimes E_i$, $\\Delta(F_i)=F_i\\otimes1+K_i\\otimes F_i$, $\\Delta(K_i)=K_i\\otimes K_i$ fail to define an algebra map $B\\to B\\otimes B$. In an explicit representation of $B$ below, the proposed image of $S$ acts on $v_0\\otimes v_1$ by\n$$q^{-2}(1-q)(1+q^2)v_2\\otimes v_2\\ne0.$$\nThus the previously detected positive-Borel defect survives in the full quotient. The same proposed formulas already fail the off-diagonal mixed relation $[E_1,F_2]=0$.",
+        "strategy": "The complete local argument is the numbered proof in items/cex-unsymmetrized-q-parameters-break-the-cartan-normalization.md. 1.1 On a four-dimensional $\\mathbb Q(q)$-space with basis $v_0,v_1,v_2,v_3$, let $K_1$ have eigenvalues $(1,q^{-1},q,1)$ and $K_2$ have eigenvalues $(q^{-1},q,q^{-1},q)$. Define $E_1v_1=v_2$, $F_1v_2=v_1$, $E_2v_0=v_1$, $E_2v_2=v_3$, $F_2v_1=v_0$, $F_2v_3=v_2$, and make all other $E/F$ actions zero. Both toral operators are commuting and invertible. An $E_1$ arrow changes the pair of toral exponents by $(2,-2)$ and each $E_2$ arrow changes it by $(-1,2)$; the $F$ arrows reverse these changes. Hence all toral-action relations hold. [given, construct]\n\n2.1 The diagonal entries of $[E_1,F_1]$ are $(0,-1,1,0)$, and those of $[E_2,F_2]$ are $(-1,1,-1,1)$. Each toral exponent is $0$ or $\\pm1$, so these are precisely the entries of $(K_i-K_i^{-1})/(q-q^{-1})$. For each off-diagonal pair, both operator products $E_1F_2,F_2E_1$ and $E_2F_1,F_1E_2$ are zero: none of their two-arrow sequences is composable on a basis vector. Thus all four mixed relations hold. [step 1.1, algebra]\n\n2.2 On its tensor square put $D_i=E_i\\otimes K_i^{-1}+1\\otimes E_i$. Direct computation gives $D_1(v_0\\otimes v_1)=v_0\\otimes v_2$ and $D_2(v_0\\otimes v_1)=q^{-1}v_1\\otimes v_1$. Also $D_1(v_1\\otimes v_1)=qv_2\\otimes v_1+v_1\\otimes v_2$, so $D_1^2D_2(v_0\\otimes v_1)=(1+q^{-2})v_2\\otimes v_2$. Applying $D_2$ to $v_0\\otimes v_2$ gives $qv_1\\otimes v_2+v_0\\otimes v_3$, whose $D_1$ image is $v_2\\otimes v_2$; thus $D_1D_2D_1(v_0\\otimes v_1)=v_2\\otimes v_2$. Finally $D_1^2(v_0\\otimes v_1)=0$, so the last Serre term contributes zero. [F2, step 1.1, algebra]\n\n3.1 All four squares $E_1^2,E_2^2,F_1^2,F_2^2$ are zero. The compositions $E_1E_2E_1$ and $F_1F_2F_1$ are zero as well: after the first color-1 arrow, the color-2 arrow either vanishes or leads to a vector on which the final color-1 arrow vanishes. These identities give both length-three Serre relations $S^\\pm_{12}=0$. Every term of $S^\\pm_{21}$ contains a square or cube of the color-2 operator, since its four words are $X_2^3X_1$, $X_2^2X_1X_2$, $X_2X_1X_2^2$, and $X_1X_2^3$. Hence both length-four Serre relations vanish too. Steps 1.1 and 2.1 and these checks verify every defining relation of $B$, so the free-generator assignment factors through a representation of the full quotient. [F1, step 1.1, step 2.1, algebra]\n\n4.1 By [F1] and step 2.2, the proposed coproduct image of $S$ acts as $(1+q^{-2}-q-q^{-1})v_2\\otimes v_2=q^{-2}(1-q)(1+q^2)v_2\\otimes v_2$, which is nonzero over $\\mathbb Q(q)$. Since $S=0$ in the full represented algebra $B$, this contradicts the relation preservation required of a coproduct algebra map $B\\to B\\otimes B$. Independently, expanding the off-diagonal mixed commutator gives $[\\Delta(E_1),\\Delta(F_2)]=(q-1)K_2E_1\\otimes F_2K_1^{-1}$: the cross scalar is $q_1^{a_{12}}q_2^{-a_{21}}-1=q-1$. Its action on $v_1\\otimes v_1$ is $(q-1)v_2\\otimes v_0\\ne0$. Thus both the full Serre and mixed-relation failures are detected without an assumption of triangular decomposition. [F1, F2, F3, step 1.1, step 3.1, step 2.2, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21-64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§1.1, printed p. 22: the symmetrizer relation d_i a_ij=d_j a_ji, which identifies the compatibility condition absent from the test assignment."
+            },
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, Lemma 13.1.3.9 and Corollary 13.1.3.10, printed pp. 308-309: the positive toral-action Borel and the normalized Serre coideal statement."
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed pp. 5-6, Definition 1.2 and display (1.6): the standard symmetrized parameters and coproduct convention."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-quantum-serre-calculation-in-type-a-two",
+        "kind": "example",
+        "title": "The quasiprimitive Serre element in type $A_2$",
+        "deps": [
+          "lem-coproduct-preserves-the-positive-and-negative-quantum-serre-ideals",
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "lem-q-binomial-expansion-for-q-commuting-elements",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "thm-serre-presentation-of-a-kac-moody-algebra"
+        ],
+        "statement": "In the Drinfeld-Jimbo algebra of type $A_2$ (the Cartan datum $I=\\{1,2\\}$, $A=\\begin{pmatrix}2&-1\\\\-1&2\\end{pmatrix}$, $d_1=d_2=1$, so $q_1=q_2=q$) the Serre elements\n$$\\mathrm{Serre}^+_{12}=E_1^2E_2-[2]_qE_1E_2E_1+E_2E_1^2,\\qquad \\mathrm{Serre}^-_{12}=F_1^2F_2-[2]_qF_1F_2F_1+F_2F_1^2,\\qquad [2]_q=q+q^{-1},$$\nare quasiprimitive with explicit grouplike factors:\n$$\\Delta(\\mathrm{Serre}^+_{12})=\\mathrm{Serre}^+_{12}\\otimes K_1^{-2}K_2^{-1}+1\\otimes\\mathrm{Serre}^+_{12},\\qquad \\Delta(\\mathrm{Serre}^-_{12})=\\mathrm{Serre}^-_{12}\\otimes1+K_1^{2}K_2\\otimes\\mathrm{Serre}^-_{12}.$$\nIn particular every mixed bidegree term in the expansion of $\\Delta(\\mathrm{Serre}^\\pm_{12})$ cancels, and at $q=1$ the positive relation degenerates to the classical Serre relation $[E_1,[E_1,E_2]]=\\mathrm{ad}(e_1)^2e_2=0$ of $A_2$.",
+        "strategy": "For A2, write the three-letter positive Serre polynomial and use the toral crossing rules to enumerate the left/right choices in its coproduct. The six mixed tensor-word coefficients are, in bidegree (2,1), 1+q^{-2}-[2]_q q^{-1}, q^2-[2]_q q+1, -[2]_q+q+q^{-1}, and, in bidegree (1,2), q^{-1}+q-[2]_q, 1-[2]_q q+q^2, -[2]_q q^{-1}+q^{-2}+1; each is zero for [2]_q=q+q^{-1}. The all-left/all-right terms give the positive quasiprimitive formula. The negative formula is the A2 instance of the preceding coproduct/Serre lemma. At q=1, the polynomial Serre expression equals [e1,[e1,e2]] and vanishes by the classical A2 Serre relation; this is not an assertion that the whole Q(q)-algebra specializes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, Lemma 13.1.3.9 and its remark on Jantzen's $q$-binomial computation, printed p. 308"
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 5, display (1.4): the Serre sums and their Gaussian coefficients"
+            },
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21-64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§1.1, printed p. 22, display (1): the symmetric Gaussian binomials used in the Serre relations"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-the-double-edge-quantum-serre-relation-for-affine-a-one",
+        "kind": "example",
+        "title": "The double-edge Serre relation for the cyclic affine type $A_1^{(1)}$",
+        "deps": [
+          "lem-coproduct-preserves-the-positive-and-negative-quantum-serre-ideals",
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "def-symmetrizable-cartan-datum-for-a-quantum-group",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "lem-q-binomial-expansion-for-q-commuting-elements",
+          "lem-quantum-pascal-recurrence-and-gaussian-integrality",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "thm-serre-presentation-of-a-kac-moody-algebra"
+        ],
+        "statement": "For the double edge $a_{12}=a_{21}=-2$ (the Cartan matrix $\\begin{pmatrix}2&-2\\\\-2&2\\end{pmatrix}$ of the cyclic affine type $A_1^{(1)}$, with $d_1=d_2=1$) the quantum Serre relation has $m=1-a_{12}=3$:\n$$\\mathrm{Serre}^+_{12}=E_1^3E_2-[3]_qE_1^2E_2E_1+[3]_qE_1E_2E_1^2-E_2E_1^3,\\qquad [3]_q=q^{2}+1+q^{-2},$$\nand it is quasiprimitive: $\\Delta(\\mathrm{Serre}^+_{12})=\\mathrm{Serre}^+_{12}\\otimes K_1^{-3}K_2^{-1}+1\\otimes\\mathrm{Serre}^+_{12}$, while $\\Delta(\\mathrm{Serre}^-_{12})=\\mathrm{Serre}^-_{12}\\otimes1+K_1^{3}K_2\\otimes\\mathrm{Serre}^-_{12}$. The coefficients satisfy the alternating Gaussian identity $\\sum_{r=0}^{3}(-1)^{r}q^{2r}\\binom{3}{r}_q=0$ of [[lem-quantum-pascal-recurrence-and-gaussian-integrality]], and at $q=1$ the positive relation becomes the cubic classical Serre relation $\\mathrm{ad}(e_1)^3e_2=0$ of the affine type $A_1^{(1)}$ (the $e=2$ double-edge case).",
+        "strategy": "For A1^(1), enumerate the left/right choices in each four-letter positive Serre word. The toral crossing factor for a left E_i before a right E_j is q^{-2} if i=j and q^2 if i!=j. Group the mixed terms into four words in each bidegree (3,1), (2,2), and (1,3); the item gives every coefficient. Substitution [3]_q=q^2+1+q^{-2} makes all twelve vanish, with the (1,3) endpoint coefficient also the N=3 alternating Gaussian identity. The extreme splits give the two positive terms. The negative formula is the specialization of the preceding general toral-action Borel lemma. At q=1 the polynomial Serre expression is ad(e1)^3 e2 and vanishes by the classical Serre presentation; this does not assert that the whole Q(q)-algebra specializes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 13, §13.1.3, the Serre elements and Lemma 13.1.3.9, printed pp. 307-308 (the general $1-a_{ij}$ case, used here with $a_{12}=-2$)"
+            },
+            {
+              "title": "Benjamin Enriquez, PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras, Journal of Lie Theory 13 (2003), 21-64",
+              "url": "https://www.heldermann-verlag.de/jlt/jlt13/enrila.pdf",
+              "locator": "§1.1, printed p. 22, display (1): the Serre relations with the Gaussian binomials and the general $1-a_{ij}$ range"
+            },
+            {
+              "title": "Kyeonghoon Jeong, Seok-Jin Kang and Masaki Kashiwara, Crystal Bases for Quantum Generalized Kac-Moody Algebras, arXiv:math/0305390",
+              "url": "https://arxiv.org/pdf/math/0305390",
+              "locator": "§1, printed p. 5, display (1.4)"
+            },
+            {
+              "title": "Alexander Kleshchev, Lectures on Infinite Dimensional Lie Algebras",
+              "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN1.pdf",
+              "locator": "Part I, Example 1.5.4, printed p. 25: the affine A_1^(1) Cartan matrix; §1.1.1, display (1.6), printed p. 4: the classical Serre relation used at q=1."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-quantized-sl-two-relations-coproduct-and-antipode",
+        "kind": "example",
+        "title": "Coproduct, antipode and $q$-binomial expansion in $U_q(\\mathfrak{sl}_2)$",
+        "deps": [
+          "thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra",
+          "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "lem-q-binomial-expansion-for-q-commuting-elements",
+          "def-quantum-integers-factorials-and-divided-powers-at-q-i",
+          "def-the-laurent-polynomial-ring",
+          "def-endomorphism-ring-of-a-module",
+          "def-algebraic-dual-and-linear-functional"
+        ],
+        "statement": "In the rank-one Drinfeld–Jimbo algebra $U_q(\\mathfrak{sl}_2)$ (the Cartan datum $I=\\{1\\}$, $A=(2)$, $d_1=1$, $P^\\vee=\\mathbb Z h_1$, $P=\\mathbb Z\\alpha_1$, $\\langle\\alpha_1,h_1\\rangle=2$, so $q_1=q$ and $K=K_{h_1}$) with generators $E,F,K^{\\pm1}$ and relations $KEK^{-1}=q^{2}E$, $KFK^{-1}=q^{-2}F$, $EF-FE=(K-K^{-1})/(q-q^{-1})$:\n\n(i) the coproduct, counit and antipode of [[thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra]] are $\\Delta(E)=E\\otimes K^{-1}+1\\otimes E$, $\\Delta(F)=F\\otimes1+K\\otimes F$, $\\Delta(K^{\\pm1})=K^{\\pm1}\\otimes K^{\\pm1}$, $\\varepsilon(E)=\\varepsilon(F)=0$, $\\varepsilon(K)=1$, $S(E)=-EK$, $S(F)=-K^{-1}F$, $S(K)=K^{-1}$;\n\n(ii) for every $n\\ge0$ the $q$-binomial expansion holds: $\\Delta(E^{n})=\\sum_{r=0}^{n}q^{r(n-r)}\\binom{n}{r}_qE^{r}\\otimes K^{-r}E^{n-r}$; and both antipode identities hold on the generators: $m(S\\otimes\\operatorname{id})\\Delta(E)=-E+E=0$ and $m(\\operatorname{id}\\otimes S)\\Delta(E)=EK-EK=0$, with the same two computations for $F$ and the trivial $K^{\\pm1}$ checks;\n\n(iii) $S^{2}(E)=q^{-2}E$ and $S^{2}(F)=q^{2}F$; since $E\\ne0$ and $K\\ne1$ in $U_q(\\mathfrak{sl}_2)$ -- proved below by the oscillator model -- the antipode is not an involution;\n\n(iv) the coproduct is not cocommutative: $\\Delta(E)-\\tau\\Delta(E)=E\\otimes(K^{-1}-1)+(1-K^{-1})\\otimes E\\ne0$, where $\\tau$ is the tensor flip.\n\nAll four computations use no choice principle. The nonvanishing statements in (iii) and (iv) are proved by an explicit representation of $U_q(\\mathfrak{sl}_2)$ on the Laurent polynomial ring, independently of triangular decomposition.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Borcherds, Mark Haiman, Theo Johnson-Freyd, Nicolai Reshetikhin and Vera Serganova, Berkeley Lectures on Lie Groups and Quantum Groups (book-length lecture notes, last updated 18 January 2024)",
+              "url": "https://categorified.net/LieQuantumGroups.pdf",
+              "locator": "Ch. 12, §12.1-12.2, printed pp. 274-281: the $U_q\\mathfrak{sl}_2$ relations, coproduct, counit and antipode, and the remark $S^2\\ne\\mathrm{id}$; Ch. 13 §13.1.3, printed pp. 308-309, for the same formulas in the higher-rank convention."
+            },
+            {
+              "title": "Pavel Etingof and Mykola Semenyakin, A Brief Introduction to Quantum Groups (lecture notes, CMSA Math Science Literature Lecture Series, 2020)",
+              "url": "https://arxiv.org/abs/2106.05252",
+              "locator": "§2.2.2, Example 2.3(iv), printed p.5: the quantum sl2 Hopf formulas and S^2 different from the identity, in the source's toral convention. The local verification follows the inverse-K positive coproduct convention fixed by the Drinfeld–Jimbo item."
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  }
+]

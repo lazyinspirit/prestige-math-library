@@ -1833,18 +1833,45 @@ in weak-containment comparisons but is not a point of $\widehat G$.
 **A page:** `direct-integral-decomposition-and-type-i-groups`
 
 **Requires:** RG-20 and RG-25; the measure-theory disintegration pages and the
-functional-analysis spectral/von-Neumann-algebra interfaces cited in §2.  Work
+functional-analysis spectral/von-Neumann-algebra interfaces cited in §2;
+`conditional-distributions-and-regular-conditional-probability` (582) for
+regrouping disintegrations; RG-24 Mackey imprimitivity (1228), whose closure
+includes induced representations (1226), for the existing transported-base
+and free-group witness uses; `pontryagin-duality-for-locally-compact-abelian-groups`
+(1210), whose closure includes LCA Fourier/Plancherel (1208), for the existing
+abelian regular-representation example. Work
 with standard measure spaces, measurable fields with countable fundamental
 families, separable Hilbert spaces and second-countable locally compact groups.
 
-**S-5 non-load-bearing supplier note.** No adequate measure-class/direct-
-integral disintegration supplier is commissioned in this reconciliation; the
-existing probability disintegration interface is insufficient for measurable
-Hilbert fields and factor decomposition. Until that supplier is authored, the
-decomposition/uniqueness rows below remain sourced, non-load-bearing leaves and
-must be emitted with `proved_here: false`; no later RG proof may cite them as
-established.
-
+**Local decomposition supplier obligation.** The published
+`measurable-hilbert-fields-and-direct-integral-operators` A page satisfies
+the generic FA interface in §15.6. The former S-5 unproved fallback is
+withdrawn. Before the central/factor/type-I consumers, prove the local
+representation-field reconstruction, measurable commutant/center fields,
+factor-fibre identification, central-base spatialization and intertwiner
+transport, measurable type-I multiplicity splitting, and exact Glimm
+criteria specified in
+`research/frontier-43-complex-representation-15-representation-drift-resolution.md`.
+The FA spectral theorem has fixed-generator uniqueness; it supplies neither
+these group-specific conclusions nor the needed measurable selectors.
+Retain every approved claim and hold genuinely unresolved branches. For this
+run only, the owner's last-resort citation instruction accepts the exact
+Glimm implication “for a separable C*-algebra, factor type I implies GCR”
+as an inline cited fact. Cite Glimm, *Type I C*-algebras*, Annals of Mathematics
+73 (1961), 572–612, https://doi.org/10.2307/1970319; record that this
+implication is not locally justified and the original full text was not read.
+The exact authority is `research/frontier-43-complex-representation-15-conditional-glimm-citation-authorization.json`.
+All other criteria directions use the seven complete alternative-H2 local
+supplier routes; all consumers still require their own local proofs.
+No standalone unproved fallback or synthetic source-fetch evidence is
+authorized.
+The strong non-type-I witness is retained: take n=2 in Dixmier,
+*Utilisation des facteurs hyperfinis dans la théorie des C*-algèbres*,
+C.R.Acad.Sci.Paris258(1964),4184–4187, Corollaire2 pp4185–4186.
+The full original note was read; its proof imports the missing Glimm
+construction. This exact C*-algebra fact is also covered by the owner's
+last-resort citation instruction, with specialization and group transfer
+proved locally. Nonsmoothness alone does not prove this stronger witness.
 **Source backing read:** Bekka–de la Harpe, Chapter 1 §§1.G–1.I,
 pp. 52–66, Chapters 6–7, pp. 169–230, and Chapter 8 §§8.B–8.D,
 pp. 242–260; Bekka–de la Harpe–Valette, Appendix F §F.5, pp. 413–417.
@@ -1884,8 +1911,8 @@ irreducible representatives is asserted.
 
 **A page:** `amenability-reiter-nets-and-folner-conditions`
 
-**Requires:** RG-18–RG-20 and RG-25; the group-theory amenability page for the
-discrete-group specialization.  Assume locally compact Hausdorff throughout;
+**Requires:** RG-18–RG-20, RG-23 (induced representations, order 1226), and RG-25;
+the group-theory amenability page for the discrete-group specialization.  Assume locally compact Hausdorff throughout;
 state second-countability or $\sigma$-compactness separately where a sequence,
 rather than a net, is used.
 
@@ -1917,6 +1944,16 @@ exhaustion.  The weak-star compactness used to obtain a mean and the separation
 argument used to obtain Reiter functions are recorded in the choice ledger.
 Left Haar measure and left translates are used consistently, so nonunimodular
 amenable examples are not accidentally excluded.
+
+For closed-subgroup stability in arbitrary locally compact Hausdorff groups,
+prove `lem-restricted-regular-representation-is-weakly-contained-in-subgroup-regular-representation`
+from RG-23’s rho-function, Weil formula and Bruhat-function suppliers.
+Use compactly supported continuous vectors and finite quotient partitions to
+approximate restricted regular coefficients uniformly on compact subsets;
+no second-countability or global measurable section is assumed. The exact
+proof and UCB/topological-mean/convolution corrections are recorded in
+`research/frontier-43-complex-representation-15-amenability-subgroup-resolution.md`
+and the stable batch-2 integration receipt.
 
 **B page:** `amenability-reiter-nets-and-folner-conditions-examples`
 
@@ -1993,6 +2030,7 @@ Property (T)*, Lecture I §§I–III, pp. 1–12.
 | `def-kazhdans-property-t` (definition) | $G$ has property (T) when every unitary representation with almost invariant vectors has a nonzero invariant vector. | States the requested rigidity property. | literature-derived | not-applicable |
 | `def-kazhdan-pair-and-kazhdan-constant` (definition) | Define a compact Kazhdan set $Q$, tolerance $\varepsilon$, and the associated displacement constant. | Quantifies the gap used in applications. | literature-derived | not-applicable |
 | `thm-property-t-is-equivalent-to-the-existence-of-a-kazhdan-pair` (theorem) | In the source's locally compact hypotheses, property (T) is equivalent to a compact Kazhdan pair. | Replaces a universal qualitative condition by one uniform test. | literature-derived | literature-derived |
+| `lem-irreducible-c-star-representations-separate-arbitrary-c-star-algebras` (lemma) | Nondegenerate irreducible representations separate every C*-algebra, including nonunital and nonseparable algebras. | Gives the local norm-attaining pure-state/GNS argument used by the isolation criterion, without countability assumptions. | literature-derived | ai-altered |
 | `thm-property-t-is-equivalent-to-isolation-of-the-trivial-representation` (theorem) | $G$ has property (T) iff the trivial class is isolated in the Fell topology on $\widehat G$. | Connects rigidity to the topology built in RG-25. | literature-derived | literature-derived |
 | `lem-almost-invariant-vectors-and-positive-type-functions` (lemma) | Almost invariant unit vectors yield normalized positive-type functions converging to $1$ uniformly on compact sets, and the GNS converse holds. | Gives the coefficient formulation used in proofs. | literature-derived | literature-derived |
 | `thm-property-t-implies-compact-generation` (theorem) | A locally compact group with property (T) is compactly generated. | Records a major structural consequence and its needed topology. | literature-derived | literature-derived |
@@ -2001,17 +2039,31 @@ Property (T)*, Lecture I §§I–III, pp. 1–12.
 | `thm-an-amenable-property-t-locally-compact-group-is-compact` (theorem) | Under the source's locally compact hypotheses, simultaneous amenability and property (T) force compactness. | Locates the opposition between Følner approximation and spectral gap. | literature-derived | literature-derived |
 | `def-spectral-gap-for-a-unitary-representation` (definition) | A representation has spectral gap when its restriction to the orthogonal complement of invariant vectors does not weakly contain the trivial representation. | States the representation-level form used by ergodic applications. | literature-derived | not-applicable |
 | `thm-property-t-is-uniform-spectral-gap-for-representations` (theorem) | Property (T) is equivalent to a uniform compact-set displacement bound on every representation's noninvariant subspace. | Makes the slogan precise. | literature-derived | literature-derived |
-| `thm-sl-n-r-has-property-t-for-n-at-least-three` (theorem) | $SL_n(\mathbb R)$ has property (T) for $n\ge3$. | Supplies a principal noncompact example and contrasts RG-28; it is statement-only and never a dependency target. | literature-derived | not-supplied |
+| `thm-sl-n-r-has-property-t-for-n-at-least-three` (theorem) | $SL_n(\mathbb R)$ has property (T) for $n\ge3$. | Supplies a principal noncompact example and contrasts RG-28; prove it by the local relative-(T) and real elementary-generation route. | literature-derived | literature-derived |
 | `prop-sl2-r-does-not-have-property-t` (proposition) | The RG-28 complementary series approaches the trivial representation in Fell topology. | Uses the preceding case study to exhibit failure in real rank one. | literature-derived | literature-derived |
 
 **Hard proof plan.**  Translate between almost invariant vectors, positive-type
-functions and Fell neighborhoods using RG-20/RG-25.  Extract a compact Kazhdan
+functions and Fell neighborhoods using RG-20/RG-25. For isolation implies
+(T), prove the general local irreducible-separation supplier above, then use
+the ideal I of elements killed by all nontrivial irreducibles. Isolation
+and the published Fell/kernel closure criterion give chi(I) nonzero;
+separation makes chi|I injective, hence I=Cp with p a central projection.
+An almost-invariant representation must have pi(p) nonzero, and the actual
+group/C*-algebra correspondence identifies its range as invariant. The
+exact arbitrary-LCH proof, source and one bounded review/correction pass
+are in `research/frontier-43-complex-representation-15-property-t-isolation-resolution.md`.
+This route uses neither the unbuilt pure-positive-type convex-density
+interface nor finite-dimensional splitting.  Extract a compact Kazhdan
 set without assuming compact generation, then derive compact generation as a
 consequence.  For amenable plus (T), combine Hulanicki weak containment with
 isolation of the trivial representation to force it into the regular
-representation and hence finite Haar volume.  The higher-rank example is
-explicitly statement-only (`not-supplied`) and is never load-bearing; its full
-proof needs the later higher-rank machinery of the cited monograph. The
+representation and hence finite Haar volume.  The higher-rank example requires four local suppliers: the projective-line
+invariant-probability obstruction, relative (T) for SL2(R) semidirect R²,
+quantitative normal-subgroup invariant-vector control, and bounded real
+Gaussian elimination. Their precise interfaces, PVM/probability/projection
+dependencies and full route are in the representation drift resolution.
+Author these suppliers before the theorem; no statement-only exception is
+permitted by the active schema. The
 $SL_2(\mathbb R)$ failure now cites the already preceding RG-28 supplier.
 
 **B page:** `kazhdans-property-t-and-spectral-gap-examples`
@@ -2025,53 +2077,47 @@ $SL_2(\mathbb R)$ failure now cites the already preceding RG-28 supplier.
 
 ### RG-30 — $SL_2(\mathbb R)$: discrete series and the unitary dual
 
-**A page:** `sl2-r-discrete-series-and-unitary-dual`
+**A page:** sl2-r-discrete-series-and-unitary-dual
 
-**Requires:** RG-25, RG-26, and RG-28, plus `RL-n` for highest/lowest weight
-$\mathfrak{sl}_2$ modules.
+**Requires:** RG-25, RG-26, and RG-28, plus RL-n for highest/lowest weight $\mathfrak{sl}_2$ modules.
 
-**Source backing read:** Lang, Chapters VII and X, pp. 89–126 and
-pp. 179–190, together with Chapter IX, pp. 163–177; Kerr, §§1–2,
-pp. 1–12, and §5, pp. 19–21; Kowalski, Chapter 7 §§7.3–7.4,
-pp. 297–317.
+**Source backing read:** Kowalski, Chapter 7 §§7.3–7.4, pp. 297–317; Kerr, §§1–2, pp. 1–12, and §5, pp. 19–21; Etingof, Lecture 9. Hochs (19 pages) and Frahm (28 pages) were fully read for the SL(2,R) Plancherel source audit and normalization comparison. Their Plancherel derivations import character and Weyl-integration inputs. Harish-Chandra, PNAS 38(4) (1952), 337–342, DOI 10.1073/pnas.38.4.337, is the owner-authorized citation for the exact original inversion identity only; its original text is unread and is not counted as a read source.
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `def-k-finite-and-smooth-vectors-for-sl2-r` (definition) | Define smooth and $K$-finite vectors and the resulting $(\mathfrak g,K)$-module. | Specifies the algebraic core on which the RL classification acts. | literature-derived | not-applicable |
-| `lem-k-finite-vectors-are-dense-and-stable-under-the-derived-action` (lemma) | The $K$-finite smooth vectors are dense and stable under $U(\mathfrak{sl}_2)$ with compatible $K$-action. | Justifies passage between group and Harish–Chandra modules. | literature-derived | literature-derived |
-| `lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points` (lemma) | At each exceptional parameter, vanishing ladder coefficients cut out the stated highest- or lowest-weight submodule and finite-dimensional quotient. | Extracts discrete-series candidates from RG-28. | literature-derived | literature-derived |
-| `def-holomorphic-and-antiholomorphic-discrete-series-models` (definition) | Define $D_n^+$ and $D_n^-$ in the weighted holomorphic/antiholomorphic upper-half-plane model for the source's integer range. | Gives concrete globalizations of the two ladder directions. | literature-derived | not-applicable |
-| `lem-the-weighted-area-form-is-sl2-r-invariant` (lemma) | The automorphy factor and hyperbolic Jacobian preserve the discrete-series norm. | Proves the geometric model is unitary. | literature-derived | literature-derived |
-| `thm-irreducibility-and-k-types-of-the-discrete-series` (theorem) | Each $D_n^\pm$ is irreducible, with one-sided multiplicity-one $K$-type ladder beginning at its extremal weight. | Identifies the representations and their parity. | literature-derived | literature-derived |
-| `thm-square-integrability-of-sl2-r-discrete-series-matrix-coefficients` (theorem) | Nonzero $K$-finite coefficients of $D_n^\pm$ are square-integrable modulo the finite center, in fact on $G$ under the source normalization. | Explains the term “discrete series” and their regular-spectrum occurrence. | literature-derived | literature-derived |
-| `def-limits-of-discrete-series-for-sl2-r` (definition) | Define the two endpoint highest/lowest weight representations at the limiting ladder parameter. | Includes the unitary boundary cases often lost in a coarse list. | literature-derived | not-applicable |
-| `thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series` (theorem) | The two limit representations are unitary and irreducible but not square-integrable. | Separates limit from genuine discrete series. | literature-derived | literature-derived |
-| `def-tempered-unitary-representation` (definition) | A unitary representation is tempered when it is weakly contained in the left regular representation. | Connects the classification to RG-25 and Plancherel support. | literature-derived | not-applicable |
-| `thm-tempered-status-of-the-sl2-r-unitary-series` (theorem) | Unitary principal, discrete and limit series are tempered; nontrivial complementary series and the trivial representation are not. | Organizes the dual by regular weak containment. | literature-derived | literature-derived |
-| `thm-classification-of-the-irreducible-unitary-dual-of-sl2-r` (theorem) | Every irreducible unitary representation of $SL_2(\mathbb R)$ is, up to the stated parameter identifications and exceptional splittings, trivial, principal, complementary, discrete or a limit of discrete series. | Completes the requested worked noncompact theory. | literature-derived | literature-derived |
-| `thm-plancherel-support-for-sl2-r` (theorem) | The regular representation disintegrates over the unitary principal series together with the discrete series, with the source's measures/formal degrees; complementary and trivial classes have zero Plancherel support. | Connects the concrete dual to RG-26's direct-integral theory. | literature-derived | literature-derived |
-| `cor-the-unitary-dual-of-sl2-r-is-non-discrete-and-non-hausdorff-at-the-stated-limits` (corollary) | The source's parameter convergence and exceptional splittings describe the indicated Fell-topology limit behavior. | Gives a concrete topology rather than only a classification list. | literature-derived | literature-derived |
+| def-k-finite-and-smooth-vectors-for-sl2-r (definition) | Define smooth and $K$-finite vectors, the $(\mathfrak g,K)$-module, and the run's explicit Casimir normalization. | Fixes the domain and constants for the derived-action arguments. | literature-derived | not-applicable |
+| lem-k-finite-vectors-are-dense-and-stable-under-the-derived-action (lemma) | Smooth $K$-finite vectors are dense and stable under $U(\mathfrak{sl}_2)$ with compatible $K$-action. | Supplies the algebraic core for the direct unitary-string classification. | literature-derived | literature-derived |
+| lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points (lemma) | Exceptional ladder zeros give the stated highest/lowest submodules and endpoint splitting. | Identifies the discrete and limit-series constituents. | literature-derived | literature-derived |
+| def-holomorphic-and-antiholomorphic-discrete-series-models (definition) | Define $D_n^+$ and $D_n^-$ in the weighted holomorphic/antiholomorphic model. | Supplies actual global models for the two ladder directions. | literature-derived | not-applicable |
+| lem-the-weighted-discrete-series-space-is-a-hilbert-space-with-k-type-basis (lemma) | The weighted model is complete and has the stated one-sided $K$-type basis. | Makes the discrete-series model a genuine Hilbert representation. | literature-derived | literature-derived |
+| lem-the-weighted-area-form-is-sl2-r-invariant (lemma) | The weighted area form is invariant under the $SL_2(\mathbb R)$ action. | Verifies unitarity of the geometric discrete-series models. | literature-derived | literature-derived |
+| thm-irreducibility-and-k-types-of-the-discrete-series (theorem) | Each $D_n^\pm$ is irreducible with its multiplicity-one one-sided $K$-type ladder. | Identifies the positive discrete-series classes. | literature-derived | literature-derived |
+| def-limits-of-discrete-series-for-sl2-r (definition) | Define the two endpoint highest/lowest weight representations. | Keeps the boundary classes separate from square-integrable discrete series. | literature-derived | not-applicable |
+| lem-kak-integration-formula-for-k-bi-invariant-functions-on-sl2-r (lemma) | Compute the KAK Haar Jacobian for the fixed native Haar, with constant $2\pi$. | Calibrates the native Plancherel constants. | literature-derived | literature-derived |
+| lem-k-type-coefficient-formulas-for-the-sl2-discrete-and-principal-series (lemma) | Compute the normalized matrix coefficients and their parameter decay. | Supplies concrete coefficient calculations for Plancherel and the examples. | literature-derived | literature-derived |
+| thm-square-integrability-of-sl2-r-discrete-series-matrix-coefficients (theorem) | The nonzero $K$-finite coefficients of $D_n^\pm$, $n\ge2$, are square-integrable on $G$. | Establishes the discrete-series atoms and formal-degree interpretation. | literature-derived | literature-derived |
+| thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series (theorem) | Both endpoint representations are unitary and irreducible but not square-integrable. | Establishes the two boundary classes. | literature-derived | literature-derived |
+| thm-the-limits-of-discrete-series-are-not-square-integrable (theorem) | The endpoint coefficient has divergent square integral. | Distinguishes limits from genuine discrete series. | literature-derived | literature-derived |
+| def-tempered-unitary-representation (definition) | A unitary representation is tempered when it is weakly contained in the left regular representation. | Connects the dual to the reduced spectrum. | literature-derived | not-applicable |
+| lem-fell-continuity-in-the-parameter-of-the-unitary-principal-series (lemma) | The compact-picture family is coefficient-continuous; at odd parameter zero the two irreducible limits, not the reducible induced representation, are Fell limits. | Supplies the closed-support endpoint argument without treating $I_{1,0}$ as a dual point. | literature-derived | literature-derived |
+| thm-classification-of-the-irreducible-unitary-dual-of-sl2-r (theorem) | Classify all irreducibles, exclude reducible $I_{1,0}$ from the principal list, and prove the local GCR/type-I consequence. | Closes the full unitary dual and the measurable type-I setting without admissibility/globalization citations. | literature-derived | literature-derived |
+| thm-plancherel-support-for-sl2-r (theorem) | Under $dg=e^t dx\,dt\,dk$, the native inversion is $4\pi f(e)=\sum_{n\ge2}(n-1)\Theta_n(f)+\frac14\int_{\mathbb R}\Theta_{0,i\nu}(f)\nu\tanh(\pi\nu/2)d\nu+\frac14\int_{\mathbb R}\Theta_{1,i\nu}(f)\nu\coth(\pi\nu/2)d\nu$; the support includes the Fell endpoint limits but gives no endpoint atom. | Combines the exact citation-only original inversion identity with local Haar conversion, transform range, and support proofs. | literature-derived | literature-derived |
+| thm-tempered-status-of-the-sl2-r-unitary-series (theorem) | Principal, discrete, and limit classes are tempered; nontrivial spherical complementary classes and the trivial class are not. The odd zero parameter is read through its two irreducible limits. | Organizes the classified dual by weak containment, with no zero-mass inference. | literature-derived | literature-derived |
+| cor-the-unitary-dual-of-sl2-r-is-non-discrete-and-non-hausdorff-at-the-stated-limits (corollary) | The parameter families and exceptional splittings give the stated Fell-limit behavior. | Records the concrete topology of the dual. | literature-derived | literature-derived |
 
-**Hard proof plan.**  Pass from each reducible principal-series
-Harish–Chandra module to its extremal-weight submodules, then globalize them in
-the upper-half-plane models and check the norm by a Jacobian computation.
-Compute coefficient decay to separate discrete from limit series.  Prove the
-classification by the Casimir/lowest-$K$-type alternatives cited from Lang and
-Kerr, keeping reducible endpoint constituents separate.  Finally identify
-tempered classes by weak containment and compare with Lang's Plancherel
-formula.  No choice of an actual representative for every point of the dual is
-made.
+**Hard proof plan.** Use the local $K$-character corner to prove every irreducible integrated image contains $\mathcal K(H)$; the local GCR criterion then gives type I and the standard dual Borel structure without using the owner-cited reverse Glimm implication. Classify unitary representations directly from the normalized $W,E_+,E_-$ ladder, positivity of squared coefficients, and the actual principal, complementary, discrete, and limit models. The run's Casimir scalar is $(\nu^2-1)/8$; the corresponding ladder scalar is $(q-1)/8$. The odd $I_{1,0}$ is reducible and contributes the two separate classes $D_1^\pm$.
 
-**B page:** `sl2-r-discrete-series-and-unitary-dual-examples`
+For Plancherel, cite only Harish-Chandra's original full $C_c^\infty$ trace-inversion identity, its source Haar normalization, principal density, and discrete degrees; the original paper is unread. The local KAK calculation gives native $c_0=2\pi$ and $dg=2dg_H$, so native degrees are $(n-1)/(4\pi)$ and the redundant-real-parameter densities are $\nu\tanh(\pi\nu/2)/(16\pi)$ and $\nu\coth(\pi\nu/2)/(16\pi)$. Prove the Hilbert-Schmidt transform is onto using the RG-26 central/irreducible suppliers, and distinguish the continuous carrier from its closed Fell support. The spherical exclusion uses the local Hardy positive-kernel test with $-\Omega-1/8$ and a $K$-spherical corner; no zero-Plancherel-mass argument is used.
+
+**B page:** sl2-r-discrete-series-and-unitary-dual-examples
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `ex-lowest-k-types-of-the-first-holomorphic-discrete-series` (example) | Compute the first holomorphic model's extremal vector and one-sided $K$-type ladder. | Checks the indexing of $D_n^+$. | literature-derived | literature-derived |
-| `ex-weighted-norm-invariance-for-a-mobius-transformation` (example) | Verify the discrete-series norm under the inversion generator. | Finite-checks the automorphy/Jacobian calculation. | literature-derived | literature-derived |
-| `ex-a-square-integrable-discrete-series-matrix-coefficient` (example) | Evaluate the source's extremal coefficient and its $G$-integral. | Demonstrates square integrability concretely. | literature-derived | literature-derived |
-| `cex-a-limit-of-discrete-series-is-not-square-integrable` (counterexample) | Compute the endpoint decay and the divergent Haar integral. | Shows why the limits require their own class. | literature-derived | literature-derived |
-| `ex-parameter-identifications-in-the-sl2-r-unitary-dual` (example) | Tabulate $\nu\sim-\nu$, parity, endpoints and discrete constituents in the adopted convention. | Prevents double counting in the final classification. | literature-derived | literature-derived |
-
+| ex-lowest-k-types-of-the-first-holomorphic-discrete-series (example) | Compute the first holomorphic model's extremal vector and one-sided $K$-type ladder. | Checks the indexing of $D_n^+$. | literature-derived | literature-derived |
+| ex-weighted-norm-invariance-for-a-mobius-transformation (example) | Verify the discrete-series norm under the inversion generator. | Finite-checks the automorphy/Jacobian calculation. | literature-derived | literature-derived |
+| ex-a-square-integrable-discrete-series-matrix-coefficient (example) | Evaluate the normalized extremal coefficient and its $G$-integral. | Demonstrates square integrability concretely. | literature-derived | literature-derived |
+| cex-a-limit-of-discrete-series-is-not-square-integrable (counterexample) | Compute endpoint decay and the divergent Haar integral. | Shows why the limits require their own class. | literature-derived | literature-derived |
+| ex-parameter-identifications-in-the-sl2-r-unitary-dual (example) | Tabulate $\nu\sim-\nu$, parity, endpoints, and discrete constituents. | Prevents double counting in the classification. | literature-derived | literature-derived |
 ---
 
 ## 6. Dependency-closure and well-definedness audit
@@ -2208,7 +2254,7 @@ parameters of $SL_2(\mathbb R)$.
 | Peter–Weyl | “Peter–Weyl” on RG-22 means arbitrary compact Hausdorff groups.  The pre-existing DG page retains the compact-Lie/maximal-torus/Weyl-integration package. |
 | Fell topology | Defined by compact-uniform coefficient approximation.  The primitive-ideal kernel map is not declared a homeomorphism until the type-I hypotheses are present. |
 | type I | A group is type I when every factor representation is type I/equivalently its full group $C^*$-algebra is type I under the cited hypotheses.  “Every representation is a direct integral of irreducibles” alone is not used as a definition. |
-| amenability and Følner handedness | Left-invariant means, left Haar measure and left translates throughout.  Reiter convergence is uniform on compact sets; nets are primary.  This permits amenable nonunimodular groups. |
+| amenability and Følner handedness | RG-23 supplies the general-LCH regular-restriction proof for closed-subgroup stability. Left-invariant means, left Haar measure and left translates throughout.  Reiter convergence is uniform on compact sets; nets are primary.  This permits amenable nonunimodular groups. |
 | property (T) | Almost invariance is uniform on compact subsets, not merely on each element.  A Kazhdan set is compact, not silently finite; finite sets are available for discrete finitely generated examples. |
 | $SL_2(\mathbb R)$ parameters | $I_{\varepsilon,\nu}$ is normalized induction from $MAN$, $\varepsilon\in\{0,1\}$ fixes central parity, the unitary principal axis is $\nu\in i\mathbb R$, and the spherical complementary interval is $|\nu|<1$.  Lang/Kerr parameters are translated before endpoint or reducibility claims. |
 
@@ -2301,7 +2347,7 @@ counted as coverage merely because a second treatment repeats it.
 | [Mackey, “Imprimitivity for Representations of Locally Compact Groups I”](https://pmc.ncbi.nlm.nih.gov/articles/PMC1063076/) | complete article, pp. 537–545 | systems of imprimitivity, transitive reconstruction and uniqueness: RG-24/H1–H5. |
 | [Paterson, *Amenability*](https://openlibrary.org/books/OL2038124M/Amenability) | Chapter 1, pp. 25–50; Chapter 4, pp. 125–194 | invariant means; locally compact amenability; Reiter conditions; Følner conditions; closure properties: RG-27/H1–H5. |
 | [Breuillard, *PCMI Lecture Notes on Property (T)*](https://www.math.utah.edu/pcmi12/lecture_notes/breuillard.pdf) | Lecture I §§I–III, pp. 1–12 | almost invariant vectors, Kazhdan pairs, spectral gap and basic examples: RG-29/H1–H5. |
-| [Lang, *$SL_2(\mathbb R)$*](https://link.springer.com/book/10.1007/978-1-4612-5142-2) | Chapters I–III, pp. 1–49; Chapter VII, pp. 89–126; Chapter IX, pp. 163–177; Chapter X, pp. 179–190 | general/compact/induced pictures; derived action; Plancherel; discrete series: RG-28/H1–H5; RG-30/H1–H5. |
+| [Lang, *$SL_2(\mathbb R)$*](https://link.springer.com/book/10.1007/978-1-4612-5142-2) | Chapters I–III, pp. 1–49; Chapters VII, IX, X were prospective for RG-30 but not read in this run | General/compact/induced pictures for RG-28; RG-30 does not count Lang as a read proof source or Plancherel derivation. |
 | [Kerr, *Notes on Representation Theory of $SL_2(\mathbb R)$*](https://www.math.wustl.edu/~matkerr/sl2notes.pdf) | §§1–2, pp. 1–12; §5, pp. 19–21 | principal series, $K$-types, ladder formulas, reducibility, unitary classification/tempered discussion: RG-28/H2–H5; RG-30/H1–H4. |
 
 The canonical Isaacs Schur-index chapters were identified but not entered in
@@ -2345,7 +2391,7 @@ cross-checked conventions.  URLs are in §10.
 | RG-27 | Bekka–de la Harpe–Valette App. G §§G.1–G.5, pp. 420–445 | Paterson Ch. 1 and Ch. 4, pp. 25–50, 125–194 | — |
 | RG-28 | Kowalski Ch. 7 §§7.2–7.4, pp. 292–317 | Lang Chs. I–III,VII, pp. 1–49, 89–126 | Kerr §§1–2, pp. 1–12 |
 | RG-29 | Bekka–de la Harpe–Valette Ch. 1 §§1.1–1.4, pp. 27–49 | Breuillard Lecture I §§I–III, pp. 1–12 | — |
-| RG-30 | Lang Chs. VII,IX,X, pp. 89–126, 163–190 | Kerr §§1–2 and §5, pp. 1–12, 19–21 | Kowalski Ch. 7 §§7.3–7.4, pp. 297–317 |
+| RG-30 | Kowalski Ch. 7 §§7.3–7.4, pp. 297–317 | Kerr §§1–2 and §5, pp. 1–12, 19–21 | Etingof Lecture 9; Hochs and Frahm full-text Plancherel audit; Harish-Chandra original citation only, unread |
 
 Every pair therefore has at least two independent full treatments.  The
 inaccessible Isaacs file and publisher previews remain uncounted; Zheng closed
@@ -2511,11 +2557,11 @@ this crosswalk.
 | RG-29/H3 | Breuillard II–III, compact groups, amenability and spectral gap | included | `thm-compact-groups-have-property-t`; `thm-an-amenable-property-t-locally-compact-group-is-compact`; `def-spectral-gap-for-a-unitary-representation`; `thm-property-t-is-uniform-spectral-gap-for-representations` |
 | RG-29/H4 | Bekka–de la Harpe–Valette §1.4, higher-rank and rank-one examples | included | `thm-sl-n-r-has-property-t-for-n-at-least-three`; `prop-sl2-r-does-not-have-property-t`; `ex-a-kazhdan-pair-for-a-compact-group` |
 | RG-29/H5 | Breuillard, finite/abelian/complementary-series boundary examples | included | `ex-property-t-for-a-finite-group`; `cex-z-does-not-have-property-t`; `cex-sl2-r-complementary-series-destroys-property-t` |
-| RG-30/H1 | Kerr §§1–2/Lang Ch. VII, $K$-finite vectors and extremal-weight submodules | included | `def-k-finite-and-smooth-vectors-for-sl2-r`; `lem-k-finite-vectors-are-dense-and-stable-under-the-derived-action`; `lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points`; `def-holomorphic-and-antiholomorphic-discrete-series-models` |
-| RG-30/H2 | Lang Ch. X, discrete-series models, $K$-types and square integrability | included | `lem-the-weighted-area-form-is-sl2-r-invariant`; `thm-irreducibility-and-k-types-of-the-discrete-series`; `thm-square-integrability-of-sl2-r-discrete-series-matrix-coefficients`; `def-limits-of-discrete-series-for-sl2-r` |
-| RG-30/H3 | Kerr §5/Kowalski §7.4, limits, temperedness and unitary classification | included | `thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series`; `def-tempered-unitary-representation`; `thm-tempered-status-of-the-sl2-r-unitary-series`; `thm-classification-of-the-irreducible-unitary-dual-of-sl2-r` |
-| RG-30/H4 | Lang Chs. IX–X, Plancherel support and Fell-limit topology | included | `thm-plancherel-support-for-sl2-r`; `cor-the-unitary-dual-of-sl2-r-is-non-discrete-and-non-hausdorff-at-the-stated-limits`; `ex-lowest-k-types-of-the-first-holomorphic-discrete-series`; `ex-weighted-norm-invariance-for-a-mobius-transformation` |
-| RG-30/H5 | Lang/Kerr, coefficient decay and parameter-identification calculations | included | `ex-a-square-integrable-discrete-series-matrix-coefficient`; `cex-a-limit-of-discrete-series-is-not-square-integrable`; `ex-parameter-identifications-in-the-sl2-r-unitary-dual` |
+| RG-30/H1 | Kerr §§1–2 and Kowalski §7.3, $K$-finite vectors and extremal-weight submodules | included | def-k-finite-and-smooth-vectors-for-sl2-r; lem-k-finite-vectors-are-dense-and-stable-under-the-derived-action; lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points; def-holomorphic-and-antiholomorphic-discrete-series-models |
+| RG-30/H2 | Kowalski §7.4 and Etingof Lecture 9, discrete-series models and K-types | included | lem-the-weighted-discrete-series-space-is-a-hilbert-space-with-k-type-basis; lem-the-weighted-area-form-is-sl2-r-invariant; thm-irreducibility-and-k-types-of-the-discrete-series; thm-square-integrability-of-sl2-r-discrete-series-matrix-coefficients |
+| RG-30/H3 | Kerr §5/Kowalski §7.4, limits and unitary classification | included | thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series; thm-classification-of-the-irreducible-unitary-dual-of-sl2-r; def-tempered-unitary-representation; thm-tempered-status-of-the-sl2-r-unitary-series |
+| RG-30/H4 | Hochs §2/Frahm SL(2,R) example, explicit Plancherel expression and limit non-atom | included | thm-plancherel-support-for-sl2-r; lem-fell-continuity-in-the-parameter-of-the-unitary-principal-series; cor-the-unitary-dual-of-sl2-r-is-non-discrete-and-non-hausdorff-at-the-stated-limits. The audited alternative derivations import character and Weyl inputs; the original inversion is cited to unread Harish-Chandra under the exact owner authority. |
+| RG-30/H5 | Kowalski/Kerr, coefficient decay and parameter identification | included | ex-a-square-integrable-discrete-series-matrix-coefficient; cex-a-limit-of-discrete-series-is-not-square-integrable; ex-parameter-identifications-in-the-sl2-r-unitary-dual |
 
 ## 13. Deliberately not decomposed
 
@@ -2587,12 +2633,13 @@ commissioned route.
 | Breuillard Lecture I, relative property (T) | deferred | Relative (T), lattices and semidirect-product criteria require their own subgroup/ergodic development; RG-29 establishes the group property requested. |
 | Bekka–de la Harpe–Valette §1.4, lattice inheritance and cohomological criteria | deferred | These require invariant measures on quotients and first cohomology of unitary representations beyond the current spectral-gap page. |
 | Lang Chapters I–III, finite-dimensional nonunitary $SL_2(\mathbb R)$ representations | deferred | Their Lie-algebra classification is owned by RL; RG-28 uses only the Iwasawa/induced models. |
-| Lang Chapter IX, explicit Plancherel density derivation | inline | Its conclusion and formal degrees are part of `thm-plancherel-support-for-sl2-r`; reproducing every transform calculation would turn the concrete case study into a general Plancherel track. |
-| Lang Chapter X, distribution characters of the discrete series | deferred | Harish–Chandra character distributions require distribution theory and are explicitly outside the one-group unitary classification requested. |
+| Hochs §2 and Frahm SL(2,R) Plancherel example | included | Their displayed formula and endpoint non-atom conclusion are included as corroboration in thm-plancherel-support-for-sl2-r; the bounded source audit found that the rank-one derivation imports character and Weyl formulas, so the exact inversion identity is cited to the unread original Harish-Chandra source under the owner authorization. |
 | Kerr's note that complementary series are not treated there | out-of-scope | It is not promoted into evidence; Lang and Kowalski are the two proof treatments for complementary unitarity. |
 | compact-Lie maximal tori and Weyl integration | deferred | The differential-geometry page owns them; general compact Peter–Weyl on RG-22 uses neither. |
 | Pontryagin duality, Bochner's theorem and LCA Plancherel | deferred | FR owns these abelian results.  RG cites them only when specializing noncommutative constructions. |
 | abstract $\mathfrak{sl}_2$ highest/lowest-weight classification | deferred | RL owns the Lie-algebra statements; RG-28/RG-30 consume them through `RL-n` and prove the group-globalization facts. |
+
+The RG-30 Harish-Chandra citation is bibliographic only: the original body was not read, and it is not counted as a full-text treatment, fetched source, or coverage-harvest row. The exact authority is recorded in this run’s citation-authorization JSON.
 
 ## 14. Verified measurements from this finished file
 
@@ -2732,8 +2779,8 @@ the three displayed A ids, never their companions.  This table replaces all
 | `induced-unitary-representations-of-locally-compact-groups` | Haar, modular/$L^1$, and GNS A pages; `partitions-of-unity-and-paracompactness`; `radon-measures-and-the-riesz-markov-kakutani-theorem`; `the-radon-nikodym-theorem-and-lebesgue-decomposition`; `banach-valued-integration-and-the-radon-nikodym-property` |
 | `mackeys-imprimitivity-theorem` | GNS A; locally compact induction A; `spectral-measures-and-borel-functional-calculus`; the future FA measurable-Hilbert-field A in §15.6 |
 | `group-c-star-algebras-and-the-fell-unitary-dual` | modular/$L^1$ A; GNS A; Peter--Weyl A; `banach-algebras-spectrum-and-holomorphic-functional-calculus`; `gelfand-theory-and-commutative-c-star-algebras` |
-| `direct-integral-decomposition-and-type-i-groups` | GNS A; group-$C^*$ A; the future FA measurable-Hilbert-field A in §15.6 |
-| `amenability-reiter-nets-and-folner-conditions` | Haar, modular/$L^1$, and GNS A pages; group-$C^*$ A; `the-analytic-hahn-banach-theorem`; `geometric-hahn-banach-and-convex-separation`; `banach-alaoglu-goldstine-and-krein-milman` |
+| `direct-integral-decomposition-and-type-i-groups` | GNS A; group-$C^*$ A; the future FA measurable-Hilbert-field A in §15.6; `conditional-distributions-and-regular-conditional-probability`; `mackeys-imprimitivity-theorem`; `pontryagin-duality-for-locally-compact-abelian-groups` |
+| `amenability-reiter-nets-and-folner-conditions` | Haar, modular/$L^1$, and GNS A pages; induced-representation A (1226); group-$C^*$ A; `amenable-groups-and-folner-criteria`; `the-analytic-hahn-banach-theorem`; `geometric-hahn-banach-and-convex-separation`; `banach-alaoglu-goldstine-and-krein-milman` |
 | `sl2-r-principal-and-complementary-series` | locally compact induction A; Mackey A; group-$C^*$ A; `harish-chandra-isomorphism-casimir-and-central-characters`; `verma-modules-and-shapovalov-forms` |
 | `kazhdans-property-t-and-spectral-gap` | GNS A; group-$C^*$ A; locally compact amenability A; principal/complementary-series A |
 | `sl2-r-discrete-series-and-unitary-dual` | group-$C^*$ A; direct-integral/type-I A; principal/complementary-series A; `harish-chandra-isomorphism-casimir-and-central-characters`; `verma-modules-and-shapovalov-forms` |
@@ -2869,15 +2916,14 @@ The planned proof repairs are binding:
   new rank-one averaging lemmas.  The old proposed argument using a compact
   integrated convolution operator in an arbitrary irreducible representation
   is invalid; only convolution on $L^2(K)$ is known Hilbert--Schmidt there.
-- RG-26's S-5 `proved_here: false` fallback is withdrawn.  RG-24 and RG-26 are
-  build-held until the generic FA supplier in §15.6 is published.  Once it is
-  available, every central/factor/type-I decomposition row must have a local
-  proof from that supplier and the full sources; no later item may cite a
-  recorded version.  Consequently RG-30 is also held until RG-26 is proved.
-- RG-29's higher-rank `thm-sl-n-r-has-property-t-for-n-at-least-three` may
-  remain a `not-supplied` orientation leaf only if it has zero consumers.  It
-  cannot justify any example, false statement, or later theorem.  The proved
-  property-(T) spine does not use it.
+- RG-26's S-5 fallback is withdrawn. The generic FA supplier in §15.6 is
+  now published; every central/factor/type-I row still requires its actual
+  local proof and necessary measurable/Borel suppliers. RG-30 consumes only
+  proved rows. The representation drift resolution records the outstanding
+  full Glimm/source obligation without certifying completion.
+- RG-29's higher-rank `thm-sl-n-r-has-property-t-for-n-at-least-three`
+  requires a full proof by the local relative-(T)/bounded real generation
+  route above. A zero-consumer unproved leaf is not authorized.
 
 ### 15.6 Cross-category ownership and exact amendments owed
 

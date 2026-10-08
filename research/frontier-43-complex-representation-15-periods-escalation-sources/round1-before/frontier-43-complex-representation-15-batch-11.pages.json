@@ -1,0 +1,1440 @@
+[
+  {
+    "order": 1614,
+    "id": "periods-jacobians-and-abel-jacobi-theory",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "Periods, Jacobians, and Abel--Jacobi Theory",
+    "companion": "periods-jacobians-and-abel-jacobi-theory-examples",
+    "requires": [
+      "cw-complexes-and-cellular-homology",
+      "cup-cap-cross-products-and-cohomology-rings",
+      "orientations-poincare-lefschetz-and-alexander-duality",
+      "the-de-rham-theorem-and-degree",
+      "hilbert-space-geometry-and-riesz-representation",
+      "divisors-riemann-roch-and-duality",
+      "classification-of-compact-connected-surfaces"
+    ],
+    "items": [
+      {
+        "id": "lem-cellular-homology-of-the-one-polygon-surface-model",
+        "kind": "lemma",
+        "title": "Cellular homology of the one-polygon surface model",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-polygonal-normal-form-for-compact-connected-surfaces",
+          "thm-classification-of-compact-connected-surfaces",
+          "def-polygonal-schema-and-edge-pairing",
+          "def-oriented-cellular-chain-group",
+          "def-cellular-boundary-from-three-consecutive-skeleta",
+          "def-incidence-number-of-two-cw-cells",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "lem-the-cellular-boundary-squares-to-zero",
+          "def-cellular-homology",
+          "thm-cellular-homology-computes-singular-homology",
+          "def-euler-characteristic-of-a-finite-cw-complex"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact connected oriented topological surface of genus $g\\geq0$. The Axiom of Choice is used only to invoke the polygonal normal form and surface classification ([[thm-polygonal-normal-form-for-compact-connected-surfaces]], [[thm-classification-of-compact-connected-surfaces]]) and identify the standard one-polygon model $\\Sigma_g$ with $X$. For $g=0$, $\\Sigma_0$ is the paired sphere digon with boundary word $aa^{-1}$; for $g\\geq1$, $\\Sigma_g$ is the $4g$-gon with boundary word $\\prod_{i=1}^g a_i b_i a_i^{-1}b_i^{-1}$ ([[def-polygonal-schema-and-edge-pairing]]). In the associated cellular chain complex with integral coefficients:\n\n1. If $g\\geq1$, there is one $0$-cell, $2g$ oriented $1$-cells $e_1,\\ldots,e_{2g}$ corresponding in order to $a_1,b_1,\\ldots,a_g,b_g$, and one $2$-cell, with $\\partial_1=\\partial_2=0$. Thus $H_1(X;\\mathbb Z)\\cong\\mathbb Z^{2g}$, freely based by the side-loop classes, while $H_0(X;\\mathbb Z)\\cong H_2(X;\\mathbb Z)\\cong\\mathbb Z$ and $H_q(X;\\mathbb Z)=0$ for $q\\geq3$.\n2. If $g=0$, the digon has two $0$-cells $v_0,v_1$, one oriented $1$-cell $e$ from $v_0$ to $v_1$, and one $2$-cell. Its differentials are $\\partial_1 e=v_1-v_0$ and $\\partial_2=0$, so $H_1(X;\\mathbb Z)=0$, $H_0(X;\\mathbb Z)\\cong H_2(X;\\mathbb Z)\\cong\\mathbb Z$, and $H_q(X;\\mathbb Z)=0$ for $q\\geq3$.\n3. The Euler characteristic of the displayed cell structure is $2-2g$ in both cases.\n\nFor $g\\geq1$, subdividing one loop $1$-cell by inserting a vertex and replacing it by two oriented edges leaves $H_1$ free of rank $2g$: the subdivided side class is represented by the sum of the two new edge classes, together with the other side-loop classes.",
+        "strategy": "Use AC only to invoke the normal form and classification; count the polygonal cells by endpoint identifications, compute the cellular differentials by incidence degrees and exponent sums, handle the sphere digon separately, and read off singular homology. Check the one-edge subdivision directly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Section 2.2, cellular boundary formula and Example 2.36, printed pp. 140\u2013141"
+            },
+            {
+              "title": "Jean Gallier and Dianna Xu, A Guide to the Classification Theorem for Compact Surfaces",
+              "url": "https://www.cis.upenn.edu/~jean/surfclassif-root.pdf",
+              "locator": "Chapter 6 \u00a76.1, Definition 6.2 and Figure 6.4(a), printed pp. 80\u201382"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-intersection-form-on-the-homology-of-a-closed-oriented-surface",
+        "kind": "definition",
+        "title": "The intersection form on the homology of a closed oriented surface",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-cellular-homology-of-the-one-polygon-surface-model",
+          "thm-classification-of-compact-connected-surfaces",
+          "thm-topological-classification-compact-riemann-surfaces",
+          "def-topological-manifold-without-boundary",
+          "def-r-orientation-of-a-topological-manifold",
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "cor-poincare-duality-gives-a-nonsingular-cup-pairing",
+          "def-cap-duality-map-for-an-oriented-manifold",
+          "def-cap-product-with-cohomology-first",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-singular-cohomology-ring",
+          "def-singular-cup-product-on-cochains",
+          "def-kronecker-evaluation-pairing",
+          "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
+          "thm-singular-cohomology-is-graded-commutative",
+          "def-geometric-intersection-pairing-on-a-closed-oriented-manifold",
+          "thm-geometric-intersection-equals-the-poincare-dual-cup-pairing"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), as required by the classification, Poincar\u00e9-duality, and geometric-intersection interfaces used here. Let $X$ be a nonempty compact connected oriented topological $2$-manifold without boundary ([[def-topological-manifold-without-boundary]], [[def-r-orientation-of-a-topological-manifold]]), with $H_1(X;\\mathbb Z)$ free of finite rank. For the standard surfaces on this page, the rank condition follows from [[lem-cellular-homology-of-the-one-polygon-surface-model]]; for a general compact connected orientable surface it follows from [[thm-classification-of-compact-connected-surfaces]] and the same cellular computation. A compact Riemann surface has the orientation determined by its complex structure ([[thm-topological-classification-compact-riemann-surfaces]]).",
+        "strategy": "Define the integral form by transporting the top-degree cup pairing through Poincar\u00e9 duality. The cup, evaluation, and orientation properties follow from the cited duality and cohomology suppliers; geometric intersection is used only for smooth transverse representatives.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology (author-hosted PDF)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf",
+              "locator": "Section 3.3, Theorem 3.30 and Example 3.31, printed pp. 241\u2013242; Poincar\u00e9 duality and the genus-g surface basis"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Chapter 3 \u00a73, Proposition 3.19 and Corollary 3.20, printed pp. 33\u201334; the alternating de Rham pairing and the intersection behavior of dual curve bases"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-symplectic-homology-basis-compact-riemann-surface",
+        "kind": "theorem",
+        "title": "A symplectic homology basis of a compact Riemann surface",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-genus-and-euler-characteristic-compact-riemann-surface",
+          "def-intersection-form-on-the-homology-of-a-closed-oriented-surface",
+          "def-geometric-intersection-pairing-on-a-closed-oriented-manifold",
+          "def-kronecker-evaluation-pairing",
+          "lem-cellular-homology-of-the-one-polygon-surface-model",
+          "lem-integral-surface-cup-pairing-from-the-oriented-polygon",
+          "thm-classification-of-compact-connected-surfaces",
+          "thm-geometric-intersection-equals-the-poincare-dual-cup-pairing",
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "thm-polygonal-normal-form-for-compact-connected-surfaces",
+          "thm-topological-classification-compact-riemann-surfaces",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "def-riemann-surface-and-holomorphic-atlas",
+          "cor-holomorphic-functions-are-real-analytic-and-smooth"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), used through the polygonal normal form, the classification, the integral universal coefficient theorem, Poincar\u00e9 duality, and the geometric-intersection theorem. Let $X$ be a compact connected Riemann surface of genus $g$ with its canonical orientation ([[thm-topological-classification-compact-riemann-surfaces]], [[def-genus-and-euler-characteristic-compact-riemann-surface]]). Choose an orientation-compatible one-polygon normal form; for $g=0$ it is the sphere digon, and for $g\\geq1$ its boundary word is $\\prod_{i=1}^g a_i b_i a_i^{-1}b_i^{-1}$ ([[thm-polygonal-normal-form-for-compact-connected-surfaces]], [[thm-classification-of-compact-connected-surfaces]]). Let $e_1,e_2,\\ldots,e_{2g}$ be the homology classes of its ordered side loops $a_1,b_1,\\ldots,a_g,b_g$. Then:\n\n1. **Rank and basis.** $H_1(X;\\mathbb Z)$ is free of rank $2g$, with basis $e_1,\\ldots,e_{2g}$; for $g=0$ it is zero ([[lem-cellular-homology-of-the-one-polygon-surface-model]]).\n2. **Standard intersection matrix.** In the ordered basis $(a_1,b_1,\\ldots,a_g,b_g)$ the intersection matrix is\n$$\\bigl(\\langle e_p,e_q\\rangle_X\\bigr)_{p,q}=\\operatorname{diag}(J_2,\\ldots,J_2),\\qquad J_2=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix},$$\nequivalently $\\langle a_i,a_j\\rangle_X=\\langle b_i,b_j\\rangle_X=0$ and $\\langle a_i,b_j\\rangle_X=\\delta_{ij}$. Its determinant is $1$ (including the empty matrix convention at $g=0$), so the intersection form is unimodular. In the evaluation-dual basis of $H^1(X;\\mathbb Z)$, the cup pairing has the same matrix and is unimodular.\n3. **Symplectic basis.** The side-loop classes form a symplectic basis: a $\\mathbb Z$-basis with the pairings in (2).\n4. **Geometric meaning.** For any two smooth closed oriented embedded-curve representatives of classes $e_p,e_q$ that are transverse, their signed geometric intersection number is $\\langle e_p,e_q\\rangle_X$ ([[def-geometric-intersection-pairing-on-a-closed-oriented-manifold]], [[thm-geometric-intersection-equals-the-poincare-dual-cup-pairing]]).\n\nReversing the surface orientation negates all intersection entries; replacing each $b_i$ by $-b_i$ restores the displayed symplectic basis convention.",
+        "strategy": "Choose an AC-enabled orientation-compatible one-polygon model. The cellular calculation gives the ordered side-loop basis and rank. Since H_0 is Z, the AC-stated UCT evaluation map identifies H^1 with the integral dual of H_1 and gives its dual basis. The polygon cup-pairing calculation has matrix J. Cap-cup adjunction makes the Poincare-duality map D have coordinate rows J, so D^{-1} has columns J; substitution in the defining intersection pairing gives J^T J J=J and determinant one. Handle g=0 separately with H_1=H^1=0 and the empty determinant convention. For the geometric clause, the Riemann surface atlas is smooth and the geometric-intersection theorem applies conditionally to smooth embedded transverse representatives.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology (author-hosted PDF)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Example 3.7, pp. 207-208 (the cup-pairing computation on the polygon), and the intersection form on a closed oriented surface, pp. 249-252"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, 'The symplectic form on $H_1$': the basis $(a_i,b_i)$ with $a_i\\cdot b_j=\\delta_{ij}$, printed p. 135"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 3 \u00a73, Proposition 3.19: the cohomology basis dual to the loops has standard products, printed p. 34"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-holomorphic-differentials-form-a-g-dimensional-space",
+        "kind": "lemma",
+        "title": "The space of holomorphic differentials and the degree of the canonical divisor",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bigraded-complex-differential-forms",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-genus-and-euler-characteristic-compact-riemann-surface",
+          "def-line-bundle-associated-to-a-divisor",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-wirtinger-derivatives",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-d-dbar-decomposition-and-identities",
+          "thm-isolated-zeros-holomorphic-function",
+          "thm-riemann-roch-compact-riemann-surfaces"
+        ],
+        "statement": "Assume the full Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact connected Riemann surface of topological genus $g$ ([[def-genus-and-euler-characteristic-compact-riemann-surface]]) and let $\\Omega(X)$ be its complex vector space of holomorphic differentials ([[def-meromorphic-differential-on-a-riemann-surface]]). The Riemann\u2013Roch theorem supplies a nonzero meromorphic differential; for any such $\\eta$, put $K:=(\\eta)$ and define $\\ell(K):=\\dim_{\\mathbb C}H^0(X,\\mathcal O_X(K))$. Then:\n\n1. $\\dim_{\\mathbb C}\\Omega(X)=\\ell(K)=g$; hence $\\Omega(X)=0$ for $g=0$ and $\\Omega(X)\\ne0$ for $g\\ge1$ ([[thm-riemann-roch-compact-riemann-surfaces]], [[def-line-bundle-associated-to-a-divisor]]).\n2. Every nonzero $\\omega\\in\\Omega(X)$ has effective divisor $(\\omega)$ of degree $2g-2$, so it has exactly $2g-2$ zeros counted with multiplicity. In particular, for $g=1$ a nonzero holomorphic differential has no zeros, and for $g=0$ there is no nonzero holomorphic differential ([[thm-riemann-roch-compact-riemann-surfaces]], [[def-divisor-principal-and-canonical-divisor-riemann-surface]]).\n3. If $\\omega\\ne0$, its zeros are isolated and its zero set is finite ([[thm-isolated-zeros-holomorphic-function]], [[def-meromorphic-differential-on-a-riemann-surface]]).\n4. Every holomorphic differential is closed: $d\\omega=0$ ([[thm-d-dbar-decomposition-and-identities]], [[def-bigraded-complex-differential-forms]], [[def-wirtinger-derivatives]], [[thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann]]).\n\nFull AC enters through the genus and Riemann\u2013Roch interfaces used for the dimension and canonical-degree claims; the local zero and closedness arguments use no choice.",
+        "strategy": "Apply the intrinsic Riemann\u2013Roch formula at the zero and canonical divisors to obtain dim \u03a9=g and deg K=2g\u22122; use the divisor of a holomorphic differential for its zero count, then check the local exterior-derivative calculation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81, Springer 1981), translated by Bruce Gilligan",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2 \u00a716.9, printed pp. 129\u2013130: divisor Riemann\u2013Roch; \u00a717.10, printed p. 138: dim H^0(X, \u03a9)=g; \u00a717.12, printed pp. 139\u2013140: every canonical divisor has degree 2g\u22122"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026), Chapter 6",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Corollary 6.5, printed p. 56: dim \u03a9(X)\u2264g; Theorem 6.9, printed pp. 57\u201358: every nonzero meromorphic form has degree 2g\u22122, proved using Riemann\u2013Hurwitz"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026), Chapter 15",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Theorem 15.1 and proof, printed pp. 127\u2013128: its period image is a full lattice of rank 2g, which implies dim \u03a9(X)=g"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 6 \u00a72, printed pp. 54\u201356: meromorphic differentials, their local orders, canonical divisors and the degree convention"
+            }
+          ]
+        },
+        "dependency_level": 14
+      },
+      {
+        "id": "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+        "kind": "definition",
+        "title": "Path integral of a holomorphic differential on a Riemann surface",
+        "deps": [
+          "def-riemann-surface-and-holomorphic-atlas",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "thm-taylor-expansion-holomorphic-function",
+          "cor-complex-analytic-functions-have-local-primitives",
+          "thm-zero-complex-derivative-on-a-domain-implies-constant",
+          "def-complex-domain",
+          "thm-continuous-image-of-a-connected-space",
+          "thm-lebesgue-number-lemma",
+          "thm-heine-borel-rn",
+          "lem-finite-choice",
+          "thm-chain-rule-for-complex-derivatives",
+          "def-piecewise-c1-path-operations-and-oriented-reparametrizations",
+          "thm-complex-numbers-are-the-real-coordinate-plane",
+          "cor-holomorphic-functions-are-real-analytic-and-smooth",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+          "def-complex-contours-reversal-concatenation-and-closedness",
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+          "thm-fundamental-theorem-for-complex-line-integrals"
+        ],
+        "statement": "Let $X$ be a Riemann surface, let $\\omega$ be a holomorphic differential on\n$X$, and let $\\gamma:[a,b]\\to X$ be a continuous path. In a holomorphic chart\n$z:U\\to D$, write $\\omega=h(z)\\,dz$. A **local primitive** of $\\omega$ on a\ncoordinate disk $U$ is a holomorphic function $H_U:U\\to\\mathbb C$ of the form\n$H_U=G\\circ z$, where $G'=h$ on $D$. For any finite subdivision\n$a=t_0<\\cdots<t_N=b$ and local primitives $H_j$ defined on coordinate disks\n$U_j$ with $\\gamma([t_{j-1},t_j])\\subseteq U_j$, set\n$$\\int_\\gamma\\omega:=\\sum_{j=1}^N\\bigl(H_j(\\gamma(t_j))-H_j(\\gamma(t_{j-1}))\\bigr).$$\nFor $a=b$ define the integral to be zero. The value is independent of the\nsubdivision, charts, and local primitives, and is called the **path integral**\nof $\\omega$ along $\\gamma$.\n\nThe path integral is additive under concatenation, changes sign under path\nreversal, is zero on a constant path, and is $\\mathbb C$-linear in $\\omega$.\nWhen $\\gamma$ is piecewise $C^1$, it agrees in every chart with the usual\ncomplex contour integral of the local coefficient $h(z)\\,dz$. Continuous paths\nare included so that the topological side loops of a polygonal homology model\ncan be integrated without assuming that a chosen topological representative\nis already piecewise smooth.",
+        "strategy": "Define the integral by endpoint differences of local primitives; prove independence of charts and subdivision and recover the usual contour integral for piecewise-C1 paths.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a71, the period homomorphism e:H_1(S)->\u03a9(S)^* and path integrals of holomorphic 1-forms, printed p. 59."
+            },
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2 \u00a720.4, 1-chains on a Riemann surface and integration of closed differentials, printed p. 161."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-period-pairing-and-period-lattice",
+        "kind": "definition",
+        "title": "The period pairing and the period lattice",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "lem-holomorphic-differentials-form-a-g-dimensional-space",
+          "thm-symplectic-homology-basis-compact-riemann-surface"
+        ],
+        "statement": "Assume full AC ([[def-axiom-of-choice]]), used for the symplectic basis and\n$\\dim_{\\mathbb C}\\Omega(X)=g$ interfaces below. Let $X$ be a compact connected\nRiemann surface of genus $g$, with a symplectic basis\n$a_1,b_1,\\ldots,a_g,b_g$ of $H_1(X;\\mathbb Z)$ supplied by the paired side\nloops of a one-polygon normal form\n([[thm-symplectic-homology-basis-compact-riemann-surface]]). Write\n$A_1,B_1,\\ldots,A_g,B_g$ for those fixed continuous closed side-loop\nrepresentatives on $X$. The path integral of a holomorphic differential along\neach such path is defined by\n[[def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface]].\n\nFor $\\omega\\in\\Omega(X)$, the **period pairing** on this fixed basis and its\nchosen representatives is\n$$P\\!\\left(\\sum_{i=1}^g(m_i a_i+n_i b_i),\\omega\\right):=\\sum_{i=1}^g\\left(m_i\\int_{A_i}\\omega+n_i\\int_{B_i}\\omega\\right),\\qquad m_i,n_i\\in\\mathbb Z.$$\nThe symplectic basis makes the coordinates $m_i,n_i$ unique. Thus $P$ is\nadditive in its homology-class argument and $\\mathbb C$-linear in $\\omega$.\nThis definition uses the fixed polygon representatives; representative- and\nbasis-independence are separate claims.\n\nDefine $e:H_1(X;\\mathbb Z)\\to\\Omega(X)^*$ by\n$e(\\gamma)(\\omega):=P(\\gamma,\\omega)$, and let\n$$\\Lambda:=e(H_1(X;\\mathbb Z))\\subseteq\\Omega(X)^*.$$\nThis is the **period subgroup**, generated by the $2g$ period vectors\n$e(a_1),e(b_1),\\ldots,e(a_g),e(b_g)$. The later bilinear-relations result\nestablishes when this subgroup is a full lattice; discreteness and fullness are\nnot asserted here. Since $\\dim_{\\mathbb C}\\Omega(X)=g$, after choosing a\n$\\mathbb C$-basis $\\omega_1,\\ldots,\\omega_g$ of $\\Omega(X)$ the **period\nmatrix** is the $g\\times2g$ matrix whose columns are the coordinates of those\nperiod vectors. For $g=0$, both bases are empty, $P=0$, $\\Lambda=\\{0\\}$, and\nthe period matrix is the empty $0\\times0$ matrix.",
+        "strategy": "Define the period pairing on the fixed symplectic basis using path integrals of its polygon loops, then form the induced homomorphism, period subgroup and period matrix.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a71, the homomorphism $e:H_1(S)\\to\\Omega(S)^{*}$, $e(\\gamma)(\\omega)=\\int_\\gamma\\omega$ and the period lattice, printed p. 59"
+            },
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, \u00a7\u00a720.4 and 21.2: 1-chains, their boundaries, and the period lattice $\\operatorname{Per}(\\omega_1,\\dots,\\omega_g)$, printed pp. 161-168"
+            }
+          ]
+        },
+        "dependency_level": 15
+      },
+      {
+        "id": "lem-period-pairing-is-well-defined-and-computed-by-integration",
+        "kind": "lemma",
+        "title": "The period pairing is well defined and computed by integration",
+        "deps": [
+          "cor-complex-analytic-functions-have-local-primitives",
+          "cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology",
+          "cor-holomorphic-functions-are-real-analytic-and-smooth",
+          "def-axiom-of-choice",
+          "def-bigraded-complex-differential-forms",
+          "def-countable-choice",
+          "def-cover-small-singular-chain-subcomplex",
+          "def-de-rham-cohomology",
+          "def-de-rham-integration-cochain-map",
+          "def-kronecker-evaluation-pairing",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "def-period-pairing-and-period-lattice",
+          "def-riemann-surface-and-holomorphic-atlas",
+          "def-singular-chain-complex-and-singular-homology",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-cohomology-with-coefficients",
+          "def-smooth-manifold",
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision",
+          "lem-finite-choice",
+          "lem-holomorphic-differentials-form-a-g-dimensional-space",
+          "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
+          "thm-barycentric-subdivision-is-a-chain-map",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-complex-numbers-are-the-real-coordinate-plane",
+          "thm-symplectic-homology-basis-compact-riemann-surface"
+        ],
+        "statement": "Assume the full Axiom of Choice ([[def-axiom-of-choice]]), used for the symplectic basis and through countable choice in the de Rham comparison. Let $X$, $a_i,b_i$ and the period pairing $P$ be as in [[def-period-pairing-and-period-lattice]], with fixed continuous side-loop representatives $A_i,B_i$. For a continuous singular $1$-chain $c=\\sum_j n_j\\sigma_j$, define $\\int_c\\omega:=\\sum_j n_j\\int_{\\sigma_j}\\omega$ using the local-primitive path integral of [[def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface]]. Then:\n\n1. For every $\\gamma\\in H_1(X;\\mathbb Z)$, every continuous singular cycle $c$ representing $\\gamma$, and every $\\omega\\in\\Omega(X)$, $P(\\gamma,\\omega)=\\int_c\\omega$. If $c$ is piecewise $C^1$, this is the usual contour integral. Thus the value is independent of the cycle representative and of the chosen symplectic basis.\n2. For every continuous singular $2$-chain $\\beta$, $\\int_{\\partial\\beta}\\omega=0$. Hence integration against $\\omega$ defines a homomorphism on singular homology.\n3. $P$ is additive in $\\gamma$ and $\\mathbb C$-linear in $\\omega$. If $g\\ge1$, write $v=(a_1,b_1,\\ldots,a_g,b_g)^{\\mathsf T}$ and $p(\\omega)=(P(v_i,\\omega))_{i=1}^{2g}$. For a symplectic change of basis $v'=Uv$, with $U\\in\\mathrm{GL}_{2g}(\\mathbb Z)$ and $UJU^{\\mathsf T}=J$ for $J=\\operatorname{diag}(J_2,\\ldots,J_2)$ and $J_2=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$, the new period vector is $p'(\\omega)=Up(\\omega)$.\n4. Let $J_X:H^1_{\\mathrm{dR}}(X;\\mathbb R)\\to H^1(X;\\mathbb R)$ be the real de Rham comparison of [[cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology]]. For $\\omega=\\alpha+i\\beta$ with real $1$-forms $\\alpha=\\operatorname{Re}\\omega$ and $\\beta=\\operatorname{Im}\\omega$, the complexified comparison satisfies\n$$P(\\gamma,\\omega)=\\langle J_X[\\alpha],\\gamma\\rangle+i\\langle J_X[\\beta],\\gamma\\rangle,$$\nwhere each bracket on the right is the real Kronecker pairing.\n\nFor $g=0$, $H_1(X;\\mathbb Z)=0$, so $P=0$ and the period vector and basis-change statement are empty. Full AC is also sufficient for the countable-choice hypothesis in the de Rham comparison ([[thm-choice-implies-dependent-implies-countable-choice]], [[def-countable-choice]]).",
+        "strategy": "Define integration as a continuous singular cochain, prove it vanishes on boundaries by subdividing into primitive disks, identify it with the fixed-basis period homomorphism, and then compare its real and imaginary parts with de Rham integration.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a71, Proposition\u2013Definition 7.1, printed p. 59, for the period homomorphism; Ch. 7 \u00a72, printed p. 60, for the path-period ambiguity formula"
+            },
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2 \u00a720.4, printed pp. 161\u2013162, chains, cycles, homology and integration of closed differentials"
+            }
+          ]
+        },
+        "dependency_level": 16
+      },
+      {
+        "id": "lem-cut-surface-and-boundary-jumps-of-primitives",
+        "kind": "lemma",
+        "title": "The cut surface, primitives of closed forms, and their boundary jumps",
+        "deps": [
+          "cor-closed-differential-forms-are-locally-exact",
+          "cor-complex-analytic-functions-have-local-primitives",
+          "def-axiom-of-choice",
+          "def-bigraded-complex-differential-forms",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-period-pairing-and-period-lattice",
+          "def-polygonal-schema-and-edge-pairing",
+          "def-quotient-topology",
+          "def-simply-connected",
+          "def-smooth-differential-k-form",
+          "lem-cellular-homology-of-the-one-polygon-surface-model",
+          "lem-finite-choice",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "thm-complex-numbers-are-the-real-coordinate-plane",
+          "thm-heine-borel-rn",
+          "thm-lebesgue-number-lemma",
+          "thm-symplectic-homology-basis-compact-riemann-surface"
+        ],
+        "statement": "Assume full AC ([[def-axiom-of-choice]]), used to obtain the one-polygon\nsymplectic side-loop data. Let $X$ be a compact connected Riemann surface of\ngenus $g\\ge1$ with the symplectic basis $a_1,b_1,\\ldots,a_g,b_g$ supplied by\n[[thm-symplectic-homology-basis-compact-riemann-surface]], and let\n$A_i,B_i:[0,1]\\to X$ be its fixed continuous side-loop representatives. The\nstandard one-polygon schema has a closed polygon disk $D$ and quotient map\n$q:D\\to X$ ([[def-polygonal-schema-and-edge-pairing]]). Let\n$C:=\\bigcup_i(\\operatorname{im}A_i\\cup\\operatorname{im}B_i)$ and\n$F:=X\\setminus C$. Define $\\widehat F:=D$, the cut-open completion before\nthe side identifications; it is not the closure of $F$ in $X$. Then:\n\n1. **Cut geometry.** $q$ restricts to a homeomorphism from the polygon interior\n   $D^\\circ$ onto $F$. Thus $F$ is open and simply connected\n   ([[def-simply-connected]]). The boundary of\n   $\\widehat F$ retains separate copies $A_i^+,A_i^-,B_i^+,B_i^-$ of each\n   paired side, in the boundary word\n   $\\prod_{i=1}^g a_i b_i a_i^{-1}b_i^{-1}$.\n2. **Primitives.** For every closed smooth complex $1$-form $\\alpha$ on $X$ and\n   base point $x_0\\in F$, define integrals along continuous paths by local\n   primitive endpoint differences. The function\n   $$f(x):=\\int_{x_0}^{x}\\alpha\\qquad(x\\in F),$$\n   taken along any continuous path in $F$, is well defined and smooth, with\n   $df=\\alpha|_F$. If $\\alpha$ is holomorphic, then $f$ is holomorphic.\n3. **Boundary jumps.** Label the positive-exponent occurrence in each pair of\n   sides by $+$ and the inverse-exponent occurrence by $-$; parameterize both\n   copies in the orientation of the corresponding side loop. The function $f$\n   extends continuously to each separate boundary copy of $\\widehat F$. Write\n   $\\Pi_\\alpha(a_i):=\\int_{A_i}\\alpha$ and\n   $\\Pi_\\alpha(b_i):=\\int_{B_i}\\alpha$ for the local-primitive path integrals.\n   Then, as equalities of functions on the parameterized side loops,\n   $$f|_{A_i^-}-f|_{A_i^+}=\\Pi_\\alpha(b_i),\\qquad f|_{B_i^-}-f|_{B_i^+}=-\\Pi_\\alpha(a_i).$$\n   When $\\alpha\\in\\Omega(X)$, these are respectively\n   $P(b_i,\\alpha)$ and $-P(a_i,\\alpha)$ for the period pairing of\n   [[def-period-pairing-and-period-lattice]].\n\nThe analytic construction of local path integrals and the jump calculation use\nno choice principle; only the selected polygonal symplectic data uses full AC.\n",
+        "strategy": "Represent the cut-open completion by the closed polygon before side identifications, so its interior is the open simply connected complement. Define integrals of arbitrary closed smooth complex forms along continuous paths by local primitive increments; prove homotopy invariance by a finite subdivision of a homotopy square. Extend the primitive to separate boundary copies and compute each jump from the oriented commutator word, with the negative sign on the b-cut jump under positive/inverse occurrence labels. Identify these local path integrals with P only for holomorphic differentials.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, proof of Theorem 15.13, printed pp. 134\u2013135: the cut complement, boundary word, and primitive jumps; the source writes \u2202F=\u03a3(a_i+b_i\u2032\u2212a_i\u2032\u2212b_i) and f|a_i\u2032\u2212f|a_i=\u03b1(b_i), f|b_i\u2032\u2212f|b_i=\u03b1(a_i)."
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a72, printed pp. 61\u201362: the simply connected complement, separate side copies, orientation of the 4g-gon, and the boundary-jump calculation."
+            }
+          ]
+        },
+        "dependency_level": 17
+      },
+      {
+        "id": "thm-symplectic-period-formula-for-wedge-integrals",
+        "kind": "theorem",
+        "title": "The symplectic period formula for integrals of wedge products",
+        "deps": [
+          "cor-closed-differential-forms-are-locally-exact",
+          "cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology",
+          "cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero",
+          "cor-poincare-duality-gives-a-nonsingular-cup-pairing",
+          "def-axiom-of-choice",
+          "def-bigraded-complex-differential-forms",
+          "def-countable-choice",
+          "def-de-rham-cohomology",
+          "def-de-rham-integration-cochain-map",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold",
+          "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "def-kronecker-evaluation-pairing",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-period-pairing-and-period-lattice",
+          "def-singular-chain-complex-and-singular-homology",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-cohomology-with-coefficients",
+          "def-singular-cup-product-on-cochains",
+          "def-smooth-differential-k-form",
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "def-smooth-singular-simplex",
+          "def-wedge-product-of-differential-forms",
+          "lem-cut-surface-and-boundary-jumps-of-primitives",
+          "lem-de-rham-integration-respects-wedge-and-cup-in-cohomology",
+          "lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision",
+          "lem-finite-choice",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
+          "prop-integration-of-top-forms-by-finite-parametrizations",
+          "thm-barycentric-subdivision-is-a-chain-map",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-de-rham-integration-is-a-cochain-map",
+          "thm-excision-for-singular-homology",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "thm-smooth-singular-chains-compute-singular-homology",
+          "thm-symplectic-homology-basis-compact-riemann-surface",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), used for the selected\nsymplectic basis and, through dependent choice, the countable-choice\nde Rham comparison. Let $X$ be a compact connected Riemann surface of genus\n$g\\ge1$, oriented by its complex structure, and let\n$a_1,b_1,\\ldots,a_g,b_g$ be the ordered symplectic homology basis with its\nfixed continuous side-loop representatives from\n[[thm-symplectic-homology-basis-compact-riemann-surface]]. For a closed smooth\ncomplex $1$-form $\\alpha$, let $\\Pi_\\alpha(a_i)$ and $\\Pi_\\alpha(b_i)$ be the\nlocal-primitive path integrals along those representatives, as in\n[[lem-cut-surface-and-boundary-jumps-of-primitives]]. Set\n$$S(\\alpha,\\beta):=\\sum_{i=1}^{g}\\Bigl(\\Pi_\\alpha(a_i)\\Pi_\\beta(b_i)-\\Pi_\\alpha(b_i)\\Pi_\\beta(a_i)\\Bigr).$$\nWrite $H^1_{\\mathrm dR}(X;\\mathbb C)$ for the complexification\n$H^1_{\\mathrm dR}(X;\\mathbb R)\\otimes_{\\mathbb R}\\mathbb C$, identified with\nclosed complex $1$-forms modulo exact complex $1$-forms. Then:\n\n1. **Wedge-period formula.** For all closed smooth complex $1$-forms\n   $\\alpha,\\beta$,\n   $$\\int_X\\alpha\\wedge\\beta=S(\\alpha,\\beta).$$\n2. **Descent and nondegeneracy.** The sum $S$ depends only on the de Rham\n   classes, is complex-bilinear and alternating, and induces a nondegenerate\n   pairing on $H^1_{\\mathrm dR}(X;\\mathbb C)$. For every degree $k$, let\n   $J_X^k:H^k_{\\mathrm dR}(X;\\mathbb R)\\to H^k(X;\\mathbb R)$ be the real\n   de Rham comparison and put\n   $\\mathcal J_X^k:=J_X^k\\otimes_{\\mathbb R}\\operatorname{id}_{\\mathbb C}$.\n   Under this comparison the pairing is the Poincar\u00e9-dual cup pairing,\n   evaluated as\n   $\\langle \\mathcal J_X^1[\\alpha]\\smile \\mathcal J_X^1[\\beta],[X]\\rangle$ with the\n   cohomology-first and complex-orientation conventions of\n   [[cor-poincare-duality-gives-a-nonsingular-cup-pairing]].\n3. **Holomorphic isotropy.** If $\\omega,\\eta\\in\\Omega(X)$, then\n   $\\omega\\wedge\\eta=0$ pointwise and\n   $S(\\omega,\\eta)=0$. For holomorphic differentials $\\Pi_\\omega=P(-,\\omega)$,\n   with $P$ as in [[def-period-pairing-and-period-lattice]].",
+        "strategy": "Construct the continuous local-primitive period cocycle and identify it with de Rham comparison coordinates. Prove top-degree evaluation on the fundamental class by oriented chart rectangles, then use integration-wedge/cup compatibility and the symplectic cup matrix; holomorphic forms wedge to zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, Theorem 15.13 and its proof, printed pp. 134\u2013135: the cut-surface boundary formula and period sign; used here as a check on the cohomological proof."
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 3 \u00a73, Proposition 3.19 and Corollary 3.20, printed pp. 34\u201335: the alternating integral pairing in a dual curve basis and its nondegeneracy."
+            }
+          ]
+        },
+        "dependency_level": 18
+      },
+      {
+        "id": "thm-riemann-bilinear-relations",
+        "kind": "theorem",
+        "title": "The Riemann bilinear relations and the period lattice",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bigraded-complex-differential-forms",
+          "def-dimension",
+          "def-full-rank-lattice-covolume-and-dual-lattice",
+          "def-linear-map",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-period-pairing-and-period-lattice",
+          "def-vector-space",
+          "lem-cut-surface-and-boundary-jumps-of-primitives",
+          "lem-holomorphic-differentials-form-a-g-dimensional-space",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "prop-positive-compactly-supported-top-forms-have-positive-integral",
+          "thm-complex-numbers-are-the-real-coordinate-plane",
+          "thm-invertible-matrix-theorem",
+          "thm-symplectic-homology-basis-compact-riemann-surface",
+          "thm-symplectic-period-formula-for-wedge-integrals"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), as required by the\nsymplectic-basis, holomorphic-dimension, and wedge-period suppliers. Let $X$ be a\ncompact connected Riemann surface of genus $g$, with its complex orientation,\nthe fixed one-polygon symplectic basis $a_1,b_1,\\ldots,a_g,b_g$ of\n$H_1(X;\\mathbb Z)$, and the fixed continuous side-loop representatives\n$A_i,B_i$ supplied by\n[[thm-symplectic-homology-basis-compact-riemann-surface]]. Let\n$\\Omega(X)=\\Omega^1(X)$ be the $g$-dimensional complex vector space of\nholomorphic differentials ([[lem-holomorphic-differentials-form-a-g-dimensional-space]]),\nand let $P$ be the period pairing on this basis from\n[[def-period-pairing-and-period-lattice]]. For closed smooth complex $1$-forms\nwhen $g\\ge1$, write $\\Pi_\\alpha$ and\n$$S(\\alpha,\\beta):=\\sum_{i=1}^g\\bigl(\\Pi_\\alpha(a_i)\\Pi_\\beta(b_i)-\\Pi_\\alpha(b_i)\\Pi_\\beta(a_i)\\bigr)$$\nas in [[lem-cut-surface-and-boundary-jumps-of-primitives]] and\n[[thm-symplectic-period-formula-for-wedge-integrals]]. For $g=0$ this sum is\nempty. For a holomorphic $\\omega$, the period lemma identifies\n$\\Pi_\\omega(\\gamma)=P(\\gamma,\\omega)$.\n\n1. **Normalized basis.** The $\\mathbb C$-linear map\n   $$\\mathcal A: \\Omega(X)\\longrightarrow\\mathbb C^g,\n   \\qquad \\omega\\longmapsto(P(a_1,\\omega),\\ldots,P(a_g,\\omega))$$\n   is an isomorphism. Thus there is a unique basis\n   $\\omega_1,\\ldots,\\omega_g$ with $P(a_i,\\omega_j)=\\delta_{ij}$. The\n   **period matrix** in this normalization is the $g\\times g$ matrix\n   $\\Pi_{ij}:=P(b_i,\\omega_j)$.\n2. **First bilinear relation.** $\\Pi$ is symmetric if and only if\n   $S(\\omega,\\eta)=0$ for every pair of holomorphic differentials\n   $\\omega,\\eta\\in\\Omega(X)$.\n3. **Second bilinear relation.** $\\operatorname{Im}\\Pi$ is positive definite\n   if and only if\n   $$iS(\\omega,\\bar\\omega)=i\\int_X\\omega\\wedge\\bar\\omega>0$$\n   for every nonzero holomorphic differential $\\omega$. Here $\\bar\\omega$ is\n   its conjugate smooth $(0,1)$-form.\n4. **Period lattice.** The homomorphism\n   $$e:H_1(X;\\mathbb Z)\\longrightarrow\\Omega(X)^*,\n   \\qquad e(\\gamma)(\\omega):=P(\\gamma,\\omega),$$\n   is injective. Its image $\\Lambda$ is the full lattice generated over\n   $\\mathbb Z$ by the $2g$ real-linearly independent vectors\n   $e(a_1),e(b_1),\\ldots,e(a_g),e(b_g)$. In the coordinates on $\\Omega(X)^*$\n   dual to the normalized basis,\n   $$\\Lambda=\\mathbb Z^g+\\Pi\\mathbb Z^g\\subseteq\\mathbb C^g,$$\n   and $\\Omega(X)^*/\\Lambda$ is a compact real $2g$-torus. For $g=0$, all\nbases and matrices here are empty, $\\Omega(X)=H_1(X;\\mathbb Z)=0$, and we\nuse the rank-zero lattice convention $\\Lambda=\\{0\\}$ in the zero vector\nspace; the quotient is a point. Positive definiteness of the empty matrix is\nunderstood by the usual quadratic-form condition on nonzero vectors, which is\nvacuous in dimension zero.\n",
+        "strategy": "For genus zero, use the zero-dimensional conventions and the empty symplectic basis. For positive genus, prove injectivity of the a-period map directly: zero a-periods force the symplectic pairing of a holomorphic form with its conjugate to vanish, while the local area density has positive integral for every nonzero form. Finite-dimensional linear algebra gives the normalized basis. Apply the wedge-period formula to holomorphic pairs for symmetry and to a form with its conjugate for positivity, deriving the row/column formulas explicitly. Finally, in normalized coordinates compute each cycle's period vector as m+\u03a0^T n; symmetry and positive definiteness show that the 2g vectors form a real basis, so their integer span is the full period lattice and the quotient is compact.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, Theorem 15.13, printed pp. 134\u2013135, for the wedge-period formula; Theorems 15.18\u201315.19 and their proofs, printed pp. 140\u2013141, for normalized holomorphic differentials, symmetry, and positivity. The source period-matrix index convention is transposed relative to the one used here; symmetry identifies the matrices."
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a71, Proposition-Definition 7.1 and proof, printed pp. 59\u201360: the period homomorphism maps H_1(S) onto a full lattice in \u03a9(S)^*, with real-linear independence proved through conjugation and the Hodge splitting. This is an alternative argument, not a supplier used in the local proof."
+            },
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (Graduate Texts in Mathematics 81, Springer, English translation)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, Theorem 21.4 and full proof (a)\u2013(c), printed pp. 168\u2013170: an alternative proof that the period subgroup is a lattice, using a local Jacobi map, Abel\u2019s theorem, the residue theorem, and a real-linear spanning argument."
+            }
+          ]
+        },
+        "dependency_level": 19
+      },
+      {
+        "id": "def-jacobian-of-a-compact-riemann-surface",
+        "kind": "definition",
+        "title": "The Jacobian of a compact Riemann surface",
+        "deps": [
+          "cor-quotient-of-an-abelian-group-is-abelian",
+          "cor-subgroups-of-abelian-groups-are-normal",
+          "def-algebraic-dual-and-linear-functional",
+          "def-axiom-of-choice",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-complex-lattice-and-complex-torus",
+          "def-covering-space-action",
+          "def-deck-transformation-and-deck-group",
+          "def-full-rank-lattice-covolume-and-dual-lattice",
+          "def-homeomorphism-and-open-maps",
+          "def-holomorphic-map-and-complex-jacobian",
+          "def-path-connected",
+          "def-period-pairing-and-period-lattice",
+          "def-quotient-group",
+          "def-quotient-topology",
+          "def-vector-space",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "lem-full-lattice-fundamental-domain-and-bounded-points",
+          "lem-holomorphic-differentials-form-a-g-dimensional-space",
+          "lem-product-topology-on-rn",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-complex-torus-quotient-is-well-defined",
+          "thm-compactness-under-continuous-maps",
+          "thm-heine-borel-rn",
+          "thm-orbit-map-of-a-covering-space-action-is-a-covering",
+          "thm-path-connected-implies-connected",
+          "thm-rational-points-and-boxes-in-rn",
+          "thm-quotient-group-laws",
+          "thm-riemann-bilinear-relations"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the period,\ndimension, and bilinear-relations suppliers. Let $X$ be a compact\nconnected Riemann surface of genus $g$, let $\\Omega(X)$ be its $g$-dimensional\ncomplex vector space of holomorphic differentials, and let\n$$e:H_1(X;\\mathbb Z)\\longrightarrow\\Omega(X)^*,\\qquad e(\\gamma)(\\omega):=P(\\gamma,\\omega),\\qquad \\Lambda:=e(H_1(X;\\mathbb Z))$$\nbe the period homomorphism and period subgroup of\n[[def-period-pairing-and-period-lattice]]. By\n[[thm-riemann-bilinear-relations]], $e$ is injective and $\\Lambda$ is a full\nlattice in the real vector space underlying $\\Omega(X)^*$. For $g=0$ both\nspaces are zero and we use the rank-zero lattice convention $\\Lambda=\\{0\\}$.\n\nThe **Jacobian** of $X$ is the quotient set and additive quotient group\n$$\\operatorname{Jac}(X):=\\Omega(X)^*/\\Lambda=\\{[\\xi]:=\\xi+\\Lambda\\mid \\xi\\in\\Omega(X)^*\\},$$\nwith $[\\xi]+[\\eta]:=[\\xi+\\eta]$, identity $[0]$, and the quotient topology\nof the projection $\\pi:\\Omega(X)^*\\to\\operatorname{Jac}(X)$. Give\n$\\Omega(X)^*$ its finite-dimensional Euclidean topology: in any complex basis it\nis identified with $\\mathbb C^g$, and invertible complex-linear changes of basis\nare Euclidean homeomorphisms.\n\nFor $g\\ge1$, let $\\omega_1,\\ldots,\\omega_g$ be the normalized basis of\n[[thm-riemann-bilinear-relations]]. Evaluation on this basis identifies\n$\\Omega(X)^*$ with $\\mathbb C^g$ and identifies $\\Lambda$ with\n$$\\mathbb Z^g+\\Pi\\mathbb Z^g,$$\nwhere $\\Pi_{ij}=P(b_i,\\omega_j)$ and $\\operatorname{Im}\\Pi$ is positive\ndefinite. The quotient has the complex atlas whose charts are local inverses\nof injective restrictions of $\\pi$ to sufficiently small open balls in\n$\\mathbb C^g$; their transition maps are locally translations by lattice\nvectors.\nThus $\\operatorname{Jac}(X)$ is a compact connected complex torus of complex\ndimension $g$, and $\\pi$ is a holomorphic covering map whose deck group is the\ntranslation action of $\\Lambda$. For $g=0$, $\\operatorname{Jac}(X)$ is the\none-point, zero-dimensional torus.\n\nThe quotient, its group structure, topology, and complex atlas depend only on\n$X$ and the intrinsic period homomorphism, not on the chosen symplectic basis\nor complex basis of $\\Omega(X)$. A different complex basis presents the same\nquotient as $\\mathbb C^g/\\Lambda'$ by the induced complex-linear coordinate\nisomorphism. When $g=1$, this is the quotient torus of\n[[def-complex-lattice-and-complex-torus]] and\n[[thm-complex-torus-quotient-is-well-defined]].",
+        "strategy": "Define the intrinsic period subgroup and form its additive quotient group with the quotient topology. Use the normalized period basis to identify the dual with C^g and the image with a full real lattice. A compact fundamental parallelotope proves compactness, bounded lattice intersections separate distinct cosets, and sufficiently small balls give an evenly covered local atlas with holomorphic translation transitions. Treat genus zero and the one-dimensional case explicitly, and show basis changes induce the same quotient presentation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Proposition-Definition 7.1 (Jacobi), printed p. 59: $\\Omega(S)^{*}/e(H_1(S))$ is a complex torus, called the Jacobian of $S$"
+            },
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, \u00a721.6: the Jacobi variety $\\operatorname{Jac}(X)=\\mathbb C^{g}/\\operatorname{Per}(\\omega_1,\\dots,\\omega_g)$ and the remark that it is a compact complex $g$-torus, independent of the basis up to isomorphism, printed pp. 170-171"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, $\\operatorname{Jac}(X)=\\Omega(X)^{*}/H_1(X,\\mathbb Z)$ and Theorem 15.1 that the image is a lattice, printed pp. 127-128"
+            }
+          ]
+        },
+        "dependency_level": 20
+      },
+      {
+        "id": "def-abel-jacobi-map",
+        "kind": "definition",
+        "title": "The Abel-Jacobi map",
+        "deps": [
+          "cor-complex-analytic-functions-have-local-primitives",
+          "def-axiom-of-choice",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-holomorphic-map-and-complex-jacobian",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "def-period-pairing-and-period-lattice",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "thm-componentwise-holomorphy-in-several-complex-variables"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the Jacobian\ndefinition. Let $X$ be a compact connected Riemann surface of genus $g$ with\nJacobian $\\operatorname{Jac}(X)=\\Omega(X)^*/\\Lambda$ and quotient projection\n$\\pi:\\Omega(X)^*\\to\\operatorname{Jac}(X)$\n([[def-jacobian-of-a-compact-riemann-surface]]), and let $p_0\\in X$ be a base\npoint.\n\n**Point map.** For $p\\in X$ choose a path $\\gamma$ in $X$ from $p_0$ to $p$ and set\n$$u_{p_0}(p):=\\Bigl[\\omega\\mapsto\\int_\\gamma\\omega\\Bigr]\\in\\operatorname{Jac}(X),$$\nwhere $[\\xi]=\\xi+\\Lambda$ denotes the class modulo the period lattice and\n$\\int_\\gamma\\omega$ is the path integral of the holomorphic differential\n([[def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface]]). The\nvalue is independent of the path: if $\\gamma,\\gamma'$ are two paths from $p_0$ to\n$p$, then the closed curve $\\gamma*\\gamma'^{-1}$ is a continuous singular cycle\nand\n$$\\int_\\gamma\\omega-\\int_{\\gamma'}\\omega=\\int_{\\gamma*\\gamma'^{-1}}\\omega=P\\bigl([\\gamma*\\gamma'^{-1}],\\omega\\bigr)=e\\bigl([\\gamma*\\gamma'^{-1}]\\bigr)(\\omega)$$\nfor every $\\omega\\in\\Omega(X)$ ([[def-period-pairing-and-period-lattice]],\n[[lem-period-pairing-is-well-defined-and-computed-by-integration]]), so the two\nfunctionals differ by the element $e([\\gamma*\\gamma'^{-1}])\\in\\Lambda$ of the\nperiod lattice. The resulting map $u_{p_0}:X\\to\\operatorname{Jac}(X)$ is the\n**Abel-Jacobi map** of $X$ with base point $p_0$. It is **holomorphic** in the\natlas of the Jacobian definition, in the following explicit sense: for every\n$q\\in X$ there are an open neighbourhood $U$ of $q$ and a holomorphic map\n$\\xi:U\\to\\Omega(X)^*$ with $\\pi\\circ\\xi=u_{p_0}|_U$. It satisfies the addition\nrule\n$$u_{p_0}(q)-u_{p_0}(p)=\\Bigl[\\omega\\mapsto\\int_p^q\\omega\\Bigr]$$\nfor all $p,q\\in X$, where the integral is taken along any path from $p$ to $q$.\n\n**Divisors.** Writing points as degree-one divisors, extend $u_{p_0}$ by\nlinearity: for $D=\\sum_pn_p[p]\\in\\operatorname{Div}(X)$ set\n$$u_{p_0}(D):=\\sum_pn_p\\,u_{p_0}(p)\\in\\operatorname{Jac}(X);$$\nthe sum is finite because divisors on a compact Riemann surface have finite\nsupport ([[def-divisor-principal-and-canonical-divisor-riemann-surface]]). For\n$\\deg D=0$ the class $u(D)$ is independent of the base point $p_0$: the addition\nrule gives $u_{q_0}(p)=u_{p_0}(p)-u_{p_0}(q_0)$ for every $p$, so replacing\n$p_0$ by $q_0$ adds $-\\bigl(\\sum_pn_p\\bigr)u_{p_0}(q_0)=0$ whenever\n$\\sum_pn_p=\\deg D=0$. Hence on the subgroup\n$\\operatorname{Div}^0(X)$ of degree-zero divisors the notation $u(D)$ is\nbase-point free, $u:\\operatorname{Div}^0(X)\\to\\operatorname{Jac}(X)$ is a group\nhomomorphism, and\n$$u\\bigl((q)-(p)\\bigr)=\\Bigl[\\omega\\mapsto\\int_p^q\\omega\\Bigr].$$\nBase-point dependence for divisors of nonzero degree is recorded explicitly:\nfor $\\deg D\\ne0$ the class $u_{p_0}(D)$ depends on $p_0$ whenever\n$u_{p_0}(q_0)\\ne0$, by the shift displayed above.",
+        "strategy": "The definition is the standard integration of the holomorphic differentials along paths. Well-definedness modulo periods is the statement that the ambiguity of the path is a cycle and the difference of the integrals is the period of that cycle, which is the well-definedness lemma for the period pairing; note that this is exactly where the lattice nature of $\\Lambda$ matters, since the value is taken in the quotient by $\\Lambda$. Holomorphy in local coordinates is the fundamental theorem of calculus: near a point $q$ with a coordinate $z$, a holomorphic differential has a local primitive $f$ with $df=\\omega$, so each component $\\omega\\mapsto u_{p_0}(p)(\\omega)$ is represented modulo constants by $f(p)$ and is holomorphic; the addition rule is additivity of contour integrals under concatenation. The divisor extension is a finite sum and the base-point cancellation is the computation displayed in the statement, using that the degree is the sum of the coefficients; additivity of the extension makes $u$ a homomorphism on $\\operatorname{Div}^0(X)$. No new choice principle is used; the Axiom of Choice is carried from the Jacobian definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a72, Lemma 7.2 and Corollary 7.3: the point map $I^q_p$ and its extension $I:\\operatorname{Div}^0(S)\\to\\operatorname{Jac}(S)$, printed pp. 60-61"
+            },
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, \u00a721.6: the map $\\Phi:\\operatorname{Div}^0(X)\\to\\operatorname{Jac}(X)$, $D\\mapsto[\\bigl(\\int_c\\omega_1,\\dots,\\int_c\\omega_g\\bigr)]$ for a chain $c$ with $\\partial c=D$, printed p. 171"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, the Abel-Jacobi map $\\varphi:\\operatorname{Div}^0(X)\\to\\operatorname{Jac}(X)$ and the point map $f(Q)=\\varphi(Q-P)$, printed p. 129"
+            }
+          ]
+        },
+        "dependency_level": 21
+      },
+      {
+        "id": "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+        "kind": "lemma",
+        "title": "The Abel-Jacobi map is well defined and base-point independent",
+        "deps": [
+          "cor-complex-analytic-functions-have-local-primitives",
+          "def-abel-jacobi-map",
+          "def-axiom-of-choice",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-holomorphic-map-and-complex-jacobian",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "def-period-pairing-and-period-lattice",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "thm-componentwise-holomorphy-in-several-complex-variables"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) inherited from the\nJacobian definition. Let $X$ be a compact connected Riemann surface, let\n$p_0\\in X$ and let $u=u_{p_0}:X\\to\\operatorname{Jac}(X)$ be the Abel-Jacobi map\nof [[def-abel-jacobi-map]]. Then:\n\n1. **Path independence.** For any two paths $\\gamma,\\gamma'$ from $p_0$ to $p$\nthe functionals $\\omega\\mapsto\\int_\\gamma\\omega$ and\n$\\omega\\mapsto\\int_{\\gamma'}\\omega$ differ by an element of the period lattice\n$\\Lambda$, namely by $P([\\gamma*\\gamma'^{-1}],\\cdot)=e([\\gamma*\\gamma'^{-1}])$,\nwith $*$ concatenation and $\\gamma'^{-1}$ the reversal\n([[def-period-pairing-and-period-lattice]],\n[[lem-period-pairing-is-well-defined-and-computed-by-integration]]). Hence $u$\nis well defined.\n2. **Derivative.** $u$ is holomorphic in the atlas of the Jacobian definition;\nin a holomorphic chart $z$ at $p$ and a holomorphic lift $\\xi$ of $u$ near $p$,\nthe derivative of $\\xi$ at $z(p)$ is the linear map\n$$\\mathbb C\\longrightarrow\\mathbb C^g\\cong\\Omega(X)^*,\\qquad 1\\longmapsto\\bigl(\\omega_1(\\partial_z),\\ldots,\\omega_g(\\partial_z)\\bigr),$$\nwhere $\\omega_1,\\ldots,\\omega_g$ is the basis of $\\Omega(X)$ used by the Jacobian\ndefinition and $\\omega_i(\\partial_z)$ is the local coefficient of $\\omega_i$ in\nthe chart $z$. This derivative is nonzero (equivalently, injective) if and only\nif some holomorphic differential does not vanish at $p$\n([[cor-complex-analytic-functions-have-local-primitives]]).\n3. **Base-point independence and additivity on degree zero.** For degree-zero\ndivisors $D=\\sum_pn_p[p]$ the class\n$\\sum_pn_p\\,u_{p_0}(p)$ is independent of $p_0$, and\n$u:\\operatorname{Div}^0(X)\\to\\operatorname{Jac}(X)$ is a group homomorphism.\nMoreover $u((q)-(p))+u((r)-(q))=u((r)-(p))$ for all $p,q,r\\in X$, and\n$u(D_1+D_2)=u(D_1)+u(D_2)$ for degree-zero divisors $D_1,D_2$\n([[def-divisor-principal-and-canonical-divisor-riemann-surface]]).\n4. **Cocycle form.** For each $\\omega\\in\\Omega(X)$ the function\n$x\\mapsto u(x)(\\omega)$ is locally a primitive of $\\omega$, in the sense that\nnear each point it coincides with a local primitive of $\\omega$ up to an additive\nconstant modulo $\\Lambda_\\omega$, where $\\Lambda_\\omega\\subseteq\\mathbb C$ is\nthe image of $\\Lambda$ under evaluation at $\\omega$. Consequently, along any\npath $\\gamma$ from $p$ to $q$,\n$$u(q)(\\omega)-u(p)(\\omega)=\\int_\\gamma\\omega \\quad\\text{in }\\mathbb C/\\Lambda_\\omega .$$",
+        "strategy": "Clause 1: the concatenation $\\gamma*\\gamma'^{-1}$ is a closed piecewise smooth curve, hence a cycle representing a class in $H_1(X;\\mathbb Z)$; additivity and reversal of contour integrals give $\\int_\\gamma\\omega-\\int_{\\gamma'}\\omega=\\oint_{\\gamma*\\gamma'^{-1}}\\omega=P([\\gamma*\\gamma'^{-1}],\\omega)$, which lies in $\\Lambda$ by definition of the period pairing, and clause 1 of the well-definedness lemma identifies the two functionals' difference with that period. Clause 2: locally, choose a chart and a local primitive $f$ of $\\omega$; then the functional is represented by $f(\\cdot)$ up to a lattice constant, which is holomorphic, and the derivative in the direction $\\partial_z$ is the value of the coefficient of $\\omega$, i.e. evaluation at $p$. Clause 3: replacing $p_0$ by $q_0$ changes $u_{p_0}(p)$ by the constant $-u_{q_0}(p_0)$ (modulo $\\Lambda$), and the total change in the sum is $\\bigl(\\sum_pn_p\\bigr)u_{q_0}(p_0)=0$ for degree zero; additivity is the additivity of the finite sum. Clause 4 is the same local fact as clause 2, read on the quotient. All choice assumptions are inherited; the argument itself performs no selection.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a72, the computation $\\tilde I_{\\gamma'}-\\tilde I_\\gamma=e([\\gamma*\\gamma'])$ and Lemma 7.2 (holomorphy of $q\\mapsto I^q_o$), printed p. 60"
+            },
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, \u00a721.6: $\\Phi(D)$ is determined by $D$ up to a period and $\\Phi$ is a homomorphism, printed p. 171"
+            }
+          ]
+        },
+        "dependency_level": 22
+      },
+      {
+        "id": "lem-weak-solution-of-a-degree-zero-divisor-and-logarithmic-derivative-identity",
+        "kind": "lemma",
+        "title": "Weak solutions of a degree-zero divisor and the logarithmic-derivative identity",
+        "deps": [
+          "cor-closed-differential-forms-are-locally-exact",
+          "cor-complex-analytic-functions-have-local-primitives",
+          "cor-holomorphic-logarithm-has-the-logarithmic-derivative",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane",
+          "cor-residue-theorem-circle",
+          "def-axiom-of-choice",
+          "def-bigraded-complex-differential-forms",
+          "def-complex-contours-reversal-concatenation-and-closedness",
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-integral-of-an-oriented-chart-supported-top-form",
+          "def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold",
+          "def-logarithmic-derivative-meromorphic-function",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-meromorphic-function-complex-domain",
+          "def-smooth-differential-k-form",
+          "def-wirtinger-derivatives",
+          "def-wedge-product-of-differential-forms",
+          "lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff",
+          "lem-stokes-for-piecewise-smooth-surface-regions",
+          "lem-logarithmic-derivative-order-residue",
+          "thm-d-dbar-decomposition-and-identities",
+          "thm-residue-theorem-compact-riemann-surface"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the\nsmooth-partition interfaces used to glue the local constructions. Let $X$ be a\ncompact connected Riemann surface and let\n$D=\\sum_{j=1}^{k}\\bigl(Q_j-P_j\\bigr)$ be a divisor of degree zero written as a\nsum of point differences\n([[def-divisor-principal-and-canonical-divisor-riemann-surface]]); let\n$c=\\sum_{j=1}^{k}\\gamma_j$ be a $1$-chain of continuous curves $\\gamma_j$\nfrom $P_j$ to $Q_j$, so that $\\partial c=D$ in the sense that the boundary of\n$\\gamma_j$ is $Q_j-P_j$ as a divisor. Then:\n\n1. **Weak solution.** There exists a **weak solution** of $D$, i.e. a function\n$f$ on $X$ that is smooth on $X\\setminus|D|$ and extends across $|D|$ with the\nlocal behaviour\n$$f=z^{-n_p}h\\ \\ \\text{near a pole }p\\ (n_p=-D(p)>0),\\qquad f=z^{n_p}h\\ \\ \\text{near a zero }p\\ (n_p=D(p)>0),$$\nwith $h$ smooth and nowhere vanishing near $p$.\n2. **Logarithmic-derivative identity.** For every closed smooth complex\n$1$-form $\\omega$ on $X$,\n$$\\frac{1}{2\\pi i}\\int_X\\frac{df}{f}\\wedge\\omega=\\int_c\\omega .$$\nFor every holomorphic $\\omega\\in\\Omega(X)$ this is the same as\n$\\frac{1}{2\\pi i}\\int_X\\frac{\\bar\\partial f}{f}\\wedge\\omega=\\int_c\\omega$,\nwhere $\\bar\\partial f/f=\\bar\\partial\\log f$ is smooth even at the points of\n$|D|$ ([[def-bigraded-complex-differential-forms]],\n[[def-wirtinger-derivatives]],\n[[thm-d-dbar-decomposition-and-identities]]).\n3. **Uniqueness up to a smooth factor.** If $f$ and $g$ are two weak solutions\nof the same divisor $D$, then the quotient $g/f$ is smooth and nowhere\nvanishing on $X$; the construction therefore produces a weak solution unique up\nto multiplication by such a factor.",
+        "strategy": "The construction is Forster's proof of Lemma 20.5, reproduced locally and glued by a partition of unity. First suppose the whole chain lies in one coordinate disk $V$ with coordinate $z$ and endpoints $a\\ne b$; the function $\\log\\frac{z-b}{z-a}$ has a single-valued branch on the annulus $r<|z|<1$ avoiding the short curve joining the endpoints, and a cutoff $\\psi$ equal to $1$ near the curve and $0$ near $\\partial V$ turns $f_0:=\\exp(\\psi\\log\\frac{z-b}{z-a})$ into a function on $V\\setminus\\{a\\}$ that has a simple pole at $a$, a simple zero at $b$ and is identically $1$ near $\\partial V$, hence extends by $1$ to a weak solution of $b-a$ on all of $X$. For a general smooth curve, cut it into finitely many short arcs contained in coordinate disks and multiply the local weak solutions; products of weak solutions are weak solutions and divisors add, which yields a weak solution of $D$ after covering all pieces. The integral identity is Forster's Lemma 20.3 and its application in 20.5: with $\\omega$ closed, $df/f\\wedge\\omega=d(\\log f\\,\\omega)$ away from $X\\setminus V$ and on the annulus, where $\\log f$ is a single-valued branch; Stokes on $X$ minus the cut (a piecewise smooth region with corners) collects the two boundary values, whose difference is $2\\pi i$ along the curve, giving exactly $2\\pi i\\int_\\gamma\\omega$; for several arcs the identities add because the logarithmic derivatives add. On holomorphic $\\omega$ the $(1,0)$-part of $df/f$ contributes nothing to the wedge, so $df/f\\wedge\\omega=\\bar\\partial f/f\\wedge\\omega$. Uniqueness up to a factor with vanishing $\\bar\\partial$ is the observation that two weak solutions of the same $D$ differ by a smooth nowhere-vanishing function. The argument uses the $1$-variable logarithm and partition of unity; the Axiom of Choice is carried from the inherited smooth-partition interface.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, \u00a7\u00a720.1-20.5: weak solutions, Lemma 20.3 and Lemma 20.5 with the identity $\\int_c\\omega=\\frac{1}{2\\pi i}\\int_X\\frac{df}{f}\\wedge\\omega$, printed pp. 159-163"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, Lemma 15.10 and Corollary 15.11 (smooth solutions with $\\frac{1}{2\\pi i}\\int_X(\\partial f/f)\\wedge\\omega=\\sum_i\\int_{\\gamma_i}\\omega$) and Lemma 15.12, printed pp. 131-133"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-dbar-solvability-criterion-for-a-smooth-zero-one-form",
+        "kind": "lemma",
+        "title": "The dbar-solvability criterion and the holomorphic-orthogonality pairing",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bigraded-complex-differential-forms",
+          "def-hermitian-metric-and-ltwo-pairing-on-a-compact-riemann-surface",
+          "def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "thm-general-stokes-theorem",
+          "thm-harmonic-star-duality-for-line-bundle-valued-dolbeault-cohomology"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), in particular its countable-choice consequence used to choose compatible Hermitian metrics. Let $X$ be a compact connected Riemann surface, let $\\Omega^{0,1}(X)$ be the space of smooth $(0,1)$-forms, let $\\Omega^{0,0}(X)=C^\\infty(X,\\mathbb C)$, and define the global Dolbeault group of the trivial holomorphic line bundle by\n$$H^{0,1}(X,\\mathcal O_X):=\\Omega^{0,1}(X)\\big/\\bar\\partial\\Omega^{0,0}(X).$$\nEvery smooth $(0,1)$-form is $\\bar\\partial$-closed because there are no $(0,2)$-forms on a Riemann surface. Let $K=\\Lambda^{1,0}T^*X$ and let $\\Omega(X)=H^0(X,K)$ be the space of holomorphic differentials ([[def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface]], [[def-meromorphic-differential-on-a-riemann-surface]]). For $\\theta\\in\\Omega^{0,1}(X)$, the following are equivalent:\n\n1. $\\theta=\\bar\\partial g$ for some smooth $g:X\\to\\mathbb C$.\n2. Its Dolbeault class $[\\theta]\\in H^{0,1}(X,\\mathcal O_X)$ is zero.\n3. $\\displaystyle\\int_X\\theta\\wedge\\omega=0$ for every $\\omega\\in\\Omega(X)$.\n\nThe pairing\n$$B:H^{0,1}(X,\\mathcal O_X)\\times H^0(X,K)\\longrightarrow\\mathbb C,\\qquad B([\\theta],\\omega)=\\int_X\\theta\\wedge\\omega$$\nis well defined and induces the complex-linear isomorphism $H^{0,1}(X,\\mathcal O_X)\\cong H^0(X,K)^*$. The quotient definition gives the equivalence of (1) and (2); Stokes' theorem makes $B$ well defined; harmonic-star duality gives the isomorphism, hence the equivalence of (2) and (3) ([[thm-harmonic-star-duality-for-line-bundle-valued-dolbeault-cohomology]], [[thm-general-stokes-theorem]]).",
+        "strategy": "Define the global Dolbeault quotient on X, prove the integration pairing is unchanged by adding a global dbar-exact form using d(g omega)=dbar g wedge omega and Stokes, then apply harmonic-star duality to the trivial line bundle. The quotient gives (1) iff (2); pairing exactness gives (1) implies (3); the isomorphism makes (3) imply (2), hence (1).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, \u00a720.7, printed pp. 163\u2013164: the vanishing of all holomorphic-differential pairings is the exact obstruction to solving the dbar equation in the Abel criterion; read through the sufficiency proof and its conclusion."
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 8, Theorem 8.10 and proof, printed pp. 80\u201382: the Dolbeault quotient H^{0,1}(X) is dual to \u03a9(X); and Ch. 15, \u201cFrom smooth to holomorphic,\u201d printed pp. 132\u2013133: a global dbar equation is solvable exactly when its class vanishes, equivalently when all holomorphic-differential pairings vanish."
+            },
+            {
+              "title": "Jean-Pierre Demailly, Complex Analytic and Differential Geometry (author manuscript, Universite Grenoble Alpes)",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf",
+              "locator": "Ch. VI \u00a77, Theorem 7.3 and proof (7.4), printed pp. 309\u2013310: the integration pairing H^{p,q}(X,E) \u00d7 H^{n-p,n-q}(X,E*) is well defined and nondegenerate via the bundle Hodge-star map on harmonic representatives."
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "lem-holomorphic-line-bundle-has-a-nonzero-meromorphic-section-on-a-compact-riemann-surface",
+        "kind": "lemma",
+        "title": "Every holomorphic line bundle on a compact Riemann surface has a meromorphic section",
+        "deps": [
+          "cor-dolbeault-cohomology-of-a-compact-riemann-surface-is-finite-dimensional",
+          "def-axiom-of-choice",
+          "def-bigraded-complex-differential-forms",
+          "def-hermitian-metric-and-ltwo-pairing-on-a-compact-riemann-surface",
+          "def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface",
+          "def-riemann-surface-and-holomorphic-atlas",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-harmonic-star-duality-for-line-bundle-valued-dolbeault-cohomology"
+        ],
+        "statement": "Assume the full Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact connected Riemann surface, let $E\\to X$ be a holomorphic line bundle, and let $p\\in X$. Then there is a global meromorphic section $s$ of $E$ that is holomorphic on $X\\setminus\\{p\\}$ and has a pole at $p$.",
+        "strategy": "Use the harmonic-star pairing to choose a nonzero finite linear combination of local principal parts whose dbar obstruction vanishes; solve the resulting global dbar equation and add the smooth correction to obtain a meromorphic section with a pole at a prescribed point.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81, Springer 1981), translated by Bruce Gilligan",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 3 \u00a7\u00a729.15\u201329.18, printed pp. 225\u2013226: meromorphic sections of vector bundles, existence of a global meromorphic section for every line bundle on a compact surface, and the divisor-line-bundle correspondence. The local proof here gives the vector-bundle construction explicitly using harmonic-star duality."
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 14, Theorem 14.2 and Corollaries 14.3\u201314.4, printed pp. 119\u2013120: finite-dimensional line-bundle cohomology, a meromorphic section with a prescribed pole, and the conclusion that every line bundle is O(D). The proof here supplies its own analytic construction."
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "lem-trace-of-a-holomorphic-one-form-under-a-nonconstant-map-to-the-sphere",
+        "kind": "lemma",
+        "title": "Trace of a holomorphic differential along a nonconstant map to the sphere",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-riemann-surface-and-holomorphic-atlas",
+          "def-genus-and-euler-characteristic-compact-riemann-surface",
+          "def-line-bundle-associated-to-a-divisor",
+          "def-holomorphic-and-meromorphic-map-of-riemann-surfaces",
+          "def-riemann-sphere-holomorphic-charts",
+          "rem-riemann-sphere-one-point-compactification",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-compactness-under-continuous-maps",
+          "thm-heine-borel-rn",
+          "cor-complex-differentiability-implies-continuity",
+          "def-compact-space",
+          "thm-proper-holomorphic-map-riemann-surfaces-has-degree",
+          "thm-local-normal-form-holomorphic-map-riemann-surfaces",
+          "def-ramification-index-and-branch-value",
+          "def-isolated-singularity-types",
+          "thm-zero-order-factorization-holomorphic-function",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "thm-identity-theorem-holomorphic-functions",
+          "thm-liouville-bounded-entire-function",
+          "thm-taylor-expansion-holomorphic-function",
+          "thm-riemann-roch-compact-riemann-surfaces",
+          "def-smooth-differential-k-form",
+          "prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges",
+          "def-smooth-singular-simplex",
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "thm-path-lifting-for-covering-maps"
+        ],
+        "statement": "The conclusion and its main proof are choice-free. Full AC is used only in the\nsupplementary Riemann\u2013Roch check at step 4.1, which confirms the same\n$\\Omega(\\widehat{\\mathbb C})=0$ consequence\n([[def-axiom-of-choice]]). Let $X$ be a compact connected Riemann surface and\nlet $F:X\\to\\widehat{\\mathbb C}$ be a nonconstant holomorphic map. It is proper,\nso it has a positive degree $n=\\deg F$, and its finite branch-value set is\ndenoted by $R$ ([[def-riemann-surface-and-holomorphic-atlas]],\n[[def-holomorphic-and-meromorphic-map-of-riemann-surfaces]],\n[[rem-riemann-sphere-one-point-compactification]],\n[[thm-proper-holomorphic-map-riemann-surfaces-has-degree]]).\n\nFor every holomorphic differential $\\omega$ on $X$, the following hold.\n\n1. **Trace differential.** On a disk $V\\subseteq\\widehat{\\mathbb C}\\setminus R$\n   that is evenly covered by inverse branches\n   $\\varphi_1,\\ldots,\\varphi_n:V\\to X$, define\n   $$F_*\\omega\\big|_V:=\\sum_{j=1}^n\\varphi_j^*\\omega.$$\n   These local holomorphic differentials agree on overlaps and extend uniquely\n   to a holomorphic differential on all of $\\widehat{\\mathbb C}$.\n2. **Vanishing.** The extended differential is zero.\n3. **Transfer-chain integral.** Let $\\gamma$ be a finite smooth singular\n   $1$-chain in $\\widehat{\\mathbb C}\\setminus R$. For each smooth path simplex\n   $\\sigma$ in it and each point $x$ over its initial endpoint, lift $\\sigma$\n   through the covering $F:X\\setminus F^{-1}(R)\\to\\widehat{\\mathbb C}\\setminus R$\n   starting at $x$. The sum of these $n$ lifted simplices, extended linearly,\n   is the **transfer chain** $\\operatorname{Tr}_F(\\gamma)$. Then\n   $$\\int_{\\operatorname{Tr}_F(\\gamma)}\\omega=\\int_\\gamma F_*\\omega=0.$$\n   The sum counts lifted paths with multiplicity; it does not assert that the\n   inverse image of a closed curve is a disjoint union of embedded circles.\n4. **Boundary and principal divisor.** If $\\gamma$ is a smooth path simplex\n   from a regular value $b$ to a regular value $a$, then\n   $$\\partial\\operatorname{Tr}_F(\\gamma)=F^*(a)-F^*(b)=\\operatorname{div}(m_{a,b}\\circ F).$$\n   Here $F^*(c):=\\sum_{F(x)=c}e_x(F)[x]$. For $g=m_{a,b}\\circ F$,\n   $\\operatorname{div}(g)$ is the finite formal sum of its local zero orders and\n   negative pole orders: in a coordinate $z$ at $x$, $g=z^r u$ with\n   $u(0)\\ne0$ contributes $r[x]$; the support is finite because it lies in the\n   two finite fibres over $a$ and $b$\n   ([[def-isolated-singularity-types]],\n   [[thm-zero-order-factorization-holomorphic-function]]).\n   For distinct $a,b$, take\n   $$m_{a,b}(z)=\\begin{cases}(z-a)/(z-b),&a,b\\in\\mathbb C,\\\\ 1/(z-b),&a=\\infty,\\ b\\in\\mathbb C,\\\\ z-a,&a\\in\\mathbb C,\\ b=\\infty;\\end{cases}$$\n   and set $m_{a,a}=1$. Thus the divisor claim also applies when either\n   endpoint is $\\infty$. Integrals of complex forms are taken componentwise.",
+        "strategy": "Sum inverse-branch pullbacks on the unramified locus, use the local power model and root-of-unity cancellation at branch values, prove sphere vanishing by Liouville, and lift paths to establish transfer-chain integrals and divisor boundaries; record the AC Riemann\u2013Roch check separately.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, proof of Theorem 20.7(b): the trace $\\operatorname{Trace}(\\omega)$ on $\\mathbb P^1$, its holomorphic continuation and $\\operatorname{Trace}(\\omega)=0$ since $\\Omega(\\mathbb P^1)=0$, printed p. 164"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, 'Proof in one direction' of Abel's theorem: $\\int_C\\omega=\\int_0^\\infty f_*(\\omega)=0$ since $f_*(\\omega)=0$ is a holomorphic 1-form on $\\mathbb P^1$, printed p. 129"
+            }
+          ]
+        },
+        "dependency_level": 14
+      },
+      {
+        "id": "lem-principal-divisors-have-vanishing-abel-jacobi-class",
+        "kind": "lemma",
+        "title": "Principal divisors have vanishing Abel-Jacobi class",
+        "deps": [
+          "def-abel-jacobi-map",
+          "def-axiom-of-choice",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-holomorphic-and-meromorphic-map-of-riemann-surfaces",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "def-ramification-index-and-branch-value",
+          "def-riemann-sphere-holomorphic-charts",
+          "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+          "lem-trace-of-a-holomorphic-one-form-under-a-nonconstant-map-to-the-sphere",
+          "thm-local-normal-form-holomorphic-map-riemann-surfaces",
+          "thm-path-lifting-for-covering-maps",
+          "thm-proper-holomorphic-map-riemann-surfaces-has-degree"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the\nJacobian definition in the final conclusion. Let $X$ be a compact connected\nRiemann surface and let $f\\ne0$ be a nonconstant meromorphic function on $X$\nwith principal divisor $(f)=\\sum_pn_p[p]$ of degree zero\n([[def-divisor-principal-and-canonical-divisor-riemann-surface]]); regard $f$\nas a holomorphic map $f:X\\to\\widehat{\\mathbb C}$ of degree $n\\ge1$\n([[def-holomorphic-and-meromorphic-map-of-riemann-surfaces]],\n[[thm-proper-holomorphic-map-riemann-surfaces-has-degree]]). Let\n$R\\subseteq\\widehat{\\mathbb C}$ be the finite set of branch values of $f$ and\nlet $\\gamma$ be a piecewise smooth curve from $\\infty$ to $0$ whose interior\navoids $R$. Then the preimage $c:=f^{-1}(\\gamma)$, counted with the $n$ inverse\nbranches, is a $1$-chain with\n$$\\partial c=f^{*}(0)-f^{*}(\\infty)=(f),$$\nand $$\\int_c\\omega=0\\qquad\\text{for every }\\omega\\in\\Omega(X).$$\nConsequently the period functional of the divisor $(f)$ vanishes and\n$u((f))=0$ in $\\operatorname{Jac}(X)$, where\n$u:\\operatorname{Div}^0(X)\\to\\operatorname{Jac}(X)$ is the Abel-Jacobi\nhomomorphism of [[def-abel-jacobi-map]]. If $f$ is a nonzero constant then\n$(f)=0$ and the conclusion is immediate.",
+        "strategy": "Over each regular value the fibre of $f$ has $n$ distinct points (with trivial ramification), so the preimage of the open curve $\\gamma\\setminus\\{\\infty,0\\}$ is a disjoint union of $n$ smooth curves each mapped biholomorphically onto $\\gamma$; near a zero $q$ of $f$ of order $e$, the local normal form $f=w^{e}$ shows that exactly $e$ of these curves end at $q$, and near a pole exactly $e$ end there, with the orientations induced by $\\gamma$. Hence the boundary of the chain is the weighted divisor $f^{*}(0)-f^{*}(\\infty)=(f)$, where $f^{*}(0)=\\sum_{q:f(q)=0}e_q(f)q$ and similarly for $\\infty$. The trace lemma identifies the integral over the preimage chain with the integral of the trace form: $\\int_{f^{-1}(\\gamma)}\\omega=\\int_\\gamma f_*\\omega$, and $f_*\\omega=0$ because it is a holomorphic differential on the sphere and $\\Omega(\\widehat{\\mathbb C})=0$. Therefore the functional $\\omega\\mapsto\\int_c\\omega$ is identically zero; since $u(D)$ for $D=\\partial c$ is represented by this functional modulo the period lattice, it vanishes in $\\operatorname{Jac}(X)$. The case of constant nonzero $f$ has zero divisor. No new choice principle is used beyond the inherited Riemann-Roch interface.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, proof of Theorem 20.7(b): $c=c_1+\\dots+c_n$ over a curve $\\gamma$ from $\\infty$ to $0$, $\\partial c=D$ and $\\int_c\\omega=\\int_\\gamma\\operatorname{Trace}(\\omega)=0$, printed p. 164"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, 'Proof in one direction' of Abel's theorem: $C=f^{-1}([0,\\infty])$ and $\\int_C\\omega=\\int_0^\\infty f_*(\\omega)=0$, printed p. 129"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Proposition 7.5 (Abel), printed pp. 60-61"
+            }
+          ]
+        },
+        "dependency_level": 23
+      },
+      {
+        "id": "thm-abels-theorem-for-divisors",
+        "kind": "theorem",
+        "title": "Abel's theorem for divisors",
+        "deps": [
+          "def-abel-jacobi-map",
+          "def-axiom-of-choice",
+          "def-bigraded-complex-differential-forms",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-holomorphic-and-meromorphic-map-of-riemann-surfaces",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "def-period-pairing-and-period-lattice",
+          "def-riemann-surface-and-holomorphic-atlas",
+          "def-wirtinger-derivatives",
+          "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+          "lem-dbar-solvability-criterion-for-a-smooth-zero-one-form",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "lem-principal-divisors-have-vanishing-abel-jacobi-class",
+          "lem-weak-solution-of-a-degree-zero-divisor-and-logarithmic-derivative-identity",
+          "thm-connected-and-locally-path-connected-implies-path-connected",
+          "thm-d-dbar-decomposition-and-identities"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) inherited from the Hodge,\nRiemann-Roch and de Rham machinery. Let $X$ be a compact connected Riemann\nsurface and let $D\\in\\operatorname{Div}^0(X)$ be a divisor of degree zero. Then\n$$D\\text{ is a principal divisor}\\quad\\Longleftrightarrow\\quad u(D)=0\\ \\text{ in }\\ \\operatorname{Jac}(X),$$\nwhere $u:\\operatorname{Div}^0(X)\\to\\operatorname{Jac}(X)$ is the Abel-Jacobi\nhomomorphism of [[def-abel-jacobi-map]]. Equivalently, the kernel of $u$ is\nexactly the subgroup of principal divisors\n([[def-divisor-principal-and-canonical-divisor-riemann-surface]]).",
+        "strategy": "The implication $\\Rightarrow$ is [[lem-principal-divisors-have-vanishing-abel-jacobi-class]]. For $\\Leftarrow$, choose a $1$-chain $c$ with $\\partial c=D$: write $D=\\sum_{j=1}^{k}(Q_j-P_j)$ and let $\\gamma_j$ be a path from $P_j$ to $Q_j$, which exists because $X$ is connected; set $c=\\sum_j\\gamma_j$. Then $u(D)$ is represented by the functional $\\omega\\mapsto\\int_c\\omega$ taken modulo the period lattice $\\Lambda$. By hypothesis this functional lies in $\\Lambda$, so there is a cycle $\\alpha\\in Z_1(X)$ with $\\int_{c}\\omega=\\int_\\alpha\\omega$ for all $\\omega\\in\\Omega(X)$ (this is the definition of the period lattice as the image of $H_1$ together with the agreement of the period pairing with integration over cycles); replacing $c$ by $c-\\alpha$ gives a chain $c'$ with $\\partial c'=D$ and $\\int_{c'}\\omega=0$ for every holomorphic $\\omega$. Apply the weak-solution lemma to obtain a weak solution $f$ of $D$ with $\\frac{1}{2\\pi i}\\int_X\\frac{\\bar\\partial f}{f}\\wedge\\omega=\\int_{c'}\\omega=0$ for every $\\omega\\in\\Omega(X)$. By the $\\bar\\partial$-solvability criterion the form $\\frac{\\bar\\partial f}{f}$ is $\\bar\\partial$-exact: there is a smooth $g$ with $\\bar\\partial g=\\frac{\\bar\\partial f}{f}$. Then $F:=f\\,e^{-g}$ is a weak solution of $D$ with $\\bar\\partial F=e^{-g}(\\bar\\partial f-f\\,\\bar\\partial g)=0$, so $F$ is holomorphic on the complement of $|D|$ and, at the points of $|D|$, has the prescribed zero or pole of finite order with a smooth nowhere-vanishing factor; hence $F$ extends to a meromorphic function on $X$ with $(F)=D$. Therefore $D$ is principal. The Axiom of Choice is inherited from the analytic suppliers; the argument itself uses no selection.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, Theorem 20.7 and its proof (both directions), printed pp. 163-165"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, Theorem 15.5 (Abel's theorem), proof I (the $\\partial$-equation) and proof I', printed pp. 129-133; proof II via reciprocity, pp. 136-138"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a72, Proposition 7.5, Theorem 7.6 (Clebsch) and Lemmas 7.8-7.9, printed pp. 60-63"
+            }
+          ]
+        },
+        "dependency_level": 24
+      },
+      {
+        "id": "lem-holomorphic-differentials-separate-generic-points",
+        "kind": "lemma",
+        "title": "Holomorphic differentials separate generic points",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-genus-and-euler-characteristic-compact-riemann-surface",
+          "def-holomorphic-and-meromorphic-map-of-riemann-surfaces",
+          "def-line-bundle-associated-to-a-divisor",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-riemann-surface-and-holomorphic-atlas",
+          "lem-degree-one-holomorphic-map-of-compact-riemann-surfaces-is-an-isomorphism",
+          "lem-holomorphic-differentials-form-a-g-dimensional-space",
+          "thm-proper-holomorphic-map-riemann-surfaces-has-degree",
+          "thm-riemann-roch-compact-riemann-surfaces"
+        ],
+        "statement": "Assume the full Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact connected Riemann surface of genus $g\\ge1$ and let $\\Omega(X)$ be its $g$-dimensional complex vector space of holomorphic differentials ([[def-genus-and-euler-characteristic-compact-riemann-surface]], [[def-meromorphic-differential-on-a-riemann-surface]], [[lem-holomorphic-differentials-form-a-g-dimensional-space]]). Write $K_X$ for the canonical holomorphic line bundle, and let $K$ be any canonical divisor. Then:\n\n1. For every $p\\in X$, evaluation $\\operatorname{ev}_p:\\Omega(X)\\to (K_X)_p$, $\\omega\\mapsto\\omega(p)$, is nonzero. Equivalently, $\\ell(K-p)=g-1$ ([[def-line-bundle-associated-to-a-divisor]], [[thm-riemann-roch-compact-riemann-surfaces]]).\n2. There are $g$ distinct points $a_1,\\ldots,a_g\\in X$ for which the combined evaluation map\n$$\\operatorname{Ev}_{(a_1,\\ldots,a_g)}:\\Omega(X)\\longrightarrow\\bigoplus_{j=1}^g(K_X)_{a_j},\\qquad \\omega\\longmapsto(\\omega(a_1),\\ldots,\\omega(a_g)),$$\nis an isomorphism. Equivalently, the only holomorphic differential vanishing at all the $a_j$ is zero.\n3. More generally, if $0\\le k\\le g$ and $a_1,\\ldots,a_k$ are distinct points for which the combined evaluation map to $\\bigoplus_{j=1}^k(K_X)_{a_j}$ is surjective, then they can be extended by $g-k$ further distinct points so that the combined evaluation map is an isomorphism. Surjectivity is the frame-independent meaning of independent evaluations; in chosen nonzero local frames these are the corresponding maps into $\\mathbb C^k$ and $\\mathbb C^g$.\n\nHere $\\ell(D):=\\dim_{\\mathbb C}L(D)$ is the Riemann\u2013Roch dimension for a divisor $D$ ([[def-divisor-principal-and-canonical-divisor-riemann-surface]]). Full AC is inherited through the Riemann\u2013Roch and differential-dimension suppliers; the finite induction below makes only finitely many selections.",
+        "strategy": "Use Riemann\u2013Roch to compute the dimension of the vanishing subspace at one point, prove l(p)=1 by excluding degree-one maps to the sphere, and inductively add points that lower the common-kernel dimension by one.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, Lemma 21.3 and proof: a holomorphic differential vanishing at g selected points is zero, printed p. 168"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, proof of Theorem 15.8: for generic point tuples the evaluation determinant is nonzero, printed p. 130"
+            }
+          ]
+        },
+        "dependency_level": 15
+      },
+      {
+        "id": "thm-jacobi-inversion",
+        "kind": "theorem",
+        "title": "Jacobi inversion",
+        "deps": [
+          "cor-complex-analytic-functions-have-local-primitives",
+          "def-abel-jacobi-map",
+          "def-algebraic-dual-and-linear-functional",
+          "def-axiom-of-choice",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-holomorphic-function-in-several-complex-variables",
+          "def-holomorphic-map-and-complex-jacobian",
+          "def-linear-map",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "def-vector-space",
+          "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+          "lem-holomorphic-differentials-form-a-g-dimensional-space",
+          "lem-holomorphic-differentials-separate-generic-points",
+          "thm-componentwise-holomorphy-in-several-complex-variables",
+          "thm-holomorphic-inverse-function-theorem-several-variables",
+          "thm-riemann-roch-compact-riemann-surfaces"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) inherited from\nRiemann-Roch and the Jacobian definition. Let $X$ be a compact connected\nRiemann surface and let $u:\\operatorname{Div}^0(X)\\to\\operatorname{Jac}(X)$ be\nthe Abel-Jacobi homomorphism ([[def-abel-jacobi-map]]). Then $u$ is surjective:\nevery point of the Jacobian is represented by a divisor of degree zero.\n\nMore precisely, let $a_1,\\ldots,a_g$ be the $g$ points of\n[[lem-holomorphic-differentials-separate-generic-points]] and let\n$V_1,\\ldots,V_g$ be simply connected coordinate neighbourhoods of them; then for\nevery $\\xi\\in\\Omega(X)^{*}$ there exist an integer $N\\ge1$ and points\n$x_j\\in V_j$ such that\n$$\\xi=N\\cdot\\sum_{j=1}^{g}\\Bigl[\\omega\\mapsto\\int_{a_j}^{x_j}\\omega\\Bigr]\\quad\\text{in }\\Omega(X)^{*},$$\nso that $\\xi$ is the period functional of the degree-zero divisor\n$D=N\\cdot\\sum_{j=1}^{g}\\bigl(x_j-a_j\\bigr)$ and $u(D)=[\\xi]$ in\n$\\operatorname{Jac}(X)$.\n\nIn particular the map $X^{g}\\to\\operatorname{Jac}(X)$,\n$(x_1,\\ldots,x_g)\\mapsto\\sum_{j=1}^{g}\\bigl(u(x_j)-u(a_j)\\bigr)$, is\nsurjective; it is invariant under permutation of the coordinates, so it\ndescends to any quotient of $X^{g}$ that identifies permuted tuples, in\nparticular to the $g$-fold symmetric product when the latter is formed as that\nquotient, and the descended map is surjective as well.",
+        "strategy": "Choose local coordinates $z_j$ on $V_j$ and local primitives $f_{ij}$ of $\\omega_i$ on $V_j$ with $f_{ij}(a_j)=0$ (possible because a holomorphic differential has a primitive on a simply connected coordinate disk, [[cor-complex-analytic-functions-have-local-primitives]]); this makes the local period map $$F:V_1\\times\\dots\\times V_g\\to\\mathbb C^{g}\\cong\\Omega(X)^{*},\\qquad F(x_1,\\dots,x_g)=\\Bigl(\\sum_j f_{1j}(z_j(x_j)),\\dots,\\sum_j f_{gj}(z_j(x_j))\\Bigr),$$ holomorphic in the several-variables sense ([[def-holomorphic-function-in-several-complex-variables]]), and its Jacobian matrix at $x=(x_1,\\dots,x_g)$ is $(\\varphi_{ij}(z_j))$ where $\\varphi_{ij}$ is the coefficient of $\\omega_i$ in the chart $z_j$; at $x=a$ this is the matrix $(\\omega_i(a_j))$, invertible by the separation lemma. The holomorphic inverse function theorem ([[thm-holomorphic-inverse-function-theorem]]) therefore makes $F$ a biholomorphism from a neighbourhood of $a$ onto a neighbourhood $U$ of $0$ in $\\Omega(X)^{*}$. Now let $\\xi\\in\\Omega(X)^{*}$ be arbitrary; since $U$ is a neighbourhood of the origin, there is $N\\ge1$ with $\\frac1N\\xi\\in U$, so $\\frac1N\\xi=F(x)$ for some $x$, and $\\xi=N F(x)$. The functional $F(x)=\\sum_j\\bigl[\\omega\\mapsto\\int_{a_j}^{x_j}\\omega\\bigr]$ is represented by the $1$-chain $c_x=\\sum_j\\gamma_j$ of paths $\\gamma_j$ from $a_j$ to $x_j$ inside $V_j$, whose boundary is the divisor $D_x=\\sum_j(x_j-a_j)$ of degree zero; hence $N F(x)$ is represented by $Nc_x$, with boundary $N D_x$, and $u(N D_x)=[N F(x)]=[\\xi]$. Thus $u$ is surjective, and the displayed factorized representative shows the map on the $g$-fold product is onto. The symmetric product statement follows because the map on $X^{g}$ factors through the symmetric product. No new choice principle is used; the Axiom of Choice is inherited from Riemann-Roch.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, Theorem 21.7 (Jacobi inversion) and its proof: local surjectivity of $F$, then $\\xi=N\\cdot F(x)$, printed pp. 170-171"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, Theorem 15.8 (Jacobi): the map $X^{g}\\to\\operatorname{Jac}(X)$ is surjective because $\\det d\\varphi(Q_1,\\dots,Q_g)=0$ iff some $\\omega$ vanishes at all $Q_i$, and this fails generically, printed p. 130"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a72, Lemma 7.4: the homomorphism $I:\\operatorname{Div}^0(S)\\to\\operatorname{Jac}(S)$ is onto (image contains an open set, then differences generate), printed pp. 60-61"
+            }
+          ]
+        },
+        "dependency_level": 23
+      },
+      {
+        "id": "def-picard-group-of-divisor-classes-and-pic-zero",
+        "kind": "definition",
+        "title": "The Picard group of divisor classes and its degree-zero part",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface",
+          "def-line-bundle-associated-to-a-divisor",
+          "lem-holomorphic-line-bundle-has-a-nonzero-meromorphic-section-on-a-compact-riemann-surface"
+        ],
+        "statement": "Assume the full Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact connected Riemann surface and let $\\operatorname{Div}(X)$ be its group of divisors ([[def-divisor-principal-and-canonical-divisor-riemann-surface]]). Let $\\operatorname{Prin}(X):=\\{(f): f\\in\\mathcal M(X)^*\\}$ be the subgroup of principal divisors. Divisors are linearly equivalent when $D\\sim D'$ iff $D-D'\\in\\operatorname{Prin}(X)$. The quotient\n$$\\operatorname{Pic}(X):=\\operatorname{Div}(X)/\\operatorname{Prin}(X)$$\nis the **Picard group** of divisor classes. Since principal divisors have degree zero, degree descends to a homomorphism $\\deg:\\operatorname{Pic}(X)\\to\\mathbb Z$, and\n$$\\operatorname{Pic}^0(X):=\\ker(\\deg)=\\operatorname{Div}^0(X)/\\operatorname{Prin}(X),\\qquad \\operatorname{Div}^0(X):=\\ker(\\deg:\\operatorname{Div}(X)\\to\\mathbb Z),$$\nis the subgroup of degree-zero divisor classes. The map $[D]\\mapsto[\\mathcal O(D)]$ is a canonical group isomorphism from $\\operatorname{Pic}(X)$ to the isomorphism classes of holomorphic line bundles on $X$ under tensor product ([[def-line-bundle-associated-to-a-divisor]], [[def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface]], [[lem-holomorphic-line-bundle-has-a-nonzero-meromorphic-section-on-a-compact-riemann-surface]]). In particular, $\\mathcal O(D)\\cong\\mathcal O(D')$ iff $D\\sim D'$, and $\\operatorname{Pic}^0(X)$ corresponds exactly to degree-zero line bundles, with $\\deg(\\mathcal O(D)):=\\deg D$. Full AC is used through the meromorphic-section existence lemma for surjectivity; the construction of $\\mathcal O(D)$ on compact $X$ uses a finite cover.",
+        "strategy": "Prove the divisor-class quotient and degree-zero kernel from the principal-divisor laws; construct the canonical map to line-bundle classes, prove injectivity by comparing canonical meromorphic sections, and prove surjectivity with the new meromorphic-section lemma and local frame maps.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81, Springer 1981), translated by Bruce Gilligan",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2 \u00a721.6, printed pp. 170\u2013171: Pic(X)=Div(X)/Div_p(X) and Pic^0(X)=Div^0(X)/Div_p(X); Ch. 3 \u00a729.18, printed pp. 226\u2013227: the divisor-line-bundle correspondence"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 14, Theorem 14.1 and Corollary 14.4, printed pp. 119\u2013120: O(D) and every line bundle being O(D); Ch. 15, \u201cThe Picard group,\u201d printed pp. 128\u2013129: the divisor quotient and matching degree"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "cor-picard-zero-is-the-jacobian",
+        "kind": "corollary",
+        "title": "Picard zero is the Jacobian",
+        "deps": [
+          "def-abel-jacobi-map",
+          "def-axiom-of-choice",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "def-picard-group-of-divisor-classes-and-pic-zero",
+          "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+          "thm-abels-theorem-for-divisors",
+          "thm-first-isomorphism-theorem-groups",
+          "thm-jacobi-inversion"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact\nconnected Riemann surface. Then the Abel-Jacobi homomorphism\n$u:\\operatorname{Div}^0(X)\\to\\operatorname{Jac}(X)$ induces a canonical\nisomorphism of abelian groups\n$$\\operatorname{Pic}^0(X)=\\operatorname{Div}^0(X)/\\!\\sim\\;\\xrightarrow{\\ \\cong\\ }\\;\\operatorname{Jac}(X),$$\nwhere $\\operatorname{Pic}^0(X)$ is the group of degree-zero divisor classes\n([[def-picard-group-of-divisor-classes-and-pic-zero]]) and\n$\\operatorname{Jac}(X)=\\Omega(X)^{*}/\\Lambda$ is the Jacobian\n([[def-jacobian-of-a-compact-riemann-surface]]). The isomorphism is canonical:\nit depends only on $X$ and on the Abel-Jacobi construction, and in particular on\nno choice of base point, symplectic basis or basis of $\\Omega(X)$.\nEquivalently, in the line-bundle reading, degree-zero holomorphic line bundles\non $X$ are classified up to isomorphism by their Abel-Jacobi class in\n$\\operatorname{Jac}(X)$.",
+        "strategy": "The kernel of $u$ on $\\operatorname{Div}^0(X)$ is exactly the subgroup of principal divisors by Abel's theorem, and $u$ is surjective by Jacobi inversion; $u$ is a group homomorphism on degree-zero divisors by the well-definedness lemma and is base-point free there. The first isomorphism theorem for groups therefore identifies the quotient $\\operatorname{Div}^0(X)/\\!\\sim$ with the image $\\operatorname{Jac}(X)$. Canonicity follows because every ingredient ($H_1$, the period pairing modulo it, and the quotient by principal divisors) is attached to $X$ alone; the definition of the Jacobian as a quotient by the period lattice makes the isomorphism independent of bases. The line-bundle form is the identification of divisor classes with line-bundle isomorphism classes recorded in the Picard-group definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, \u00a721.6-21.7: the injective map $j:\\operatorname{Pic}^0(X)\\to\\operatorname{Jac}(X)$ from Abel's theorem and its bijectivity (Jacobi inversion), printed pp. 170-171"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, Theorem 15.4 and Corollary 15.9: $\\operatorname{Jac}(X)\\cong\\operatorname{Pic}^0(X)=\\operatorname{Div}^0(X)/(\\mathcal M^{*}(X))$, printed pp. 129-130"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a72, Theorems 7.4 and 7.6: the Abel-Jacobi map $I:\\operatorname{Pic}^0(S)\\to\\operatorname{Jac}(S)$ is an isomorphism, printed pp. 60-63"
+            }
+          ]
+        },
+        "dependency_level": 25
+      },
+      {
+        "id": "lem-degree-one-holomorphic-map-of-compact-riemann-surfaces-is-an-isomorphism",
+        "kind": "lemma",
+        "title": "A degree-one holomorphic map of compact Riemann surfaces is an isomorphism",
+        "deps": [
+          "thm-proper-holomorphic-map-riemann-surfaces-has-degree",
+          "thm-local-normal-form-holomorphic-map-riemann-surfaces",
+          "def-ramification-index-and-branch-value",
+          "def-biholomorphic-map",
+          "def-holomorphic-and-meromorphic-map-of-riemann-surfaces",
+          "def-riemann-surface-and-holomorphic-atlas",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed"
+        ],
+        "statement": "Let $f:X\\to Y$ be a nonconstant holomorphic map between compact connected Riemann surfaces ([[def-holomorphic-and-meromorphic-map-of-riemann-surfaces]], [[def-riemann-surface-and-holomorphic-atlas]]). Then $f$ is proper and has a degree $d$ as in [[thm-proper-holomorphic-map-riemann-surfaces-has-degree]]. If $d=1$, then $f$ is bijective and its set-theoretic inverse $g:Y\\to X$ is holomorphic. Thus $g\\circ f=\\mathrm{id}_X$ and $f\\circ g=\\mathrm{id}_Y$, so $f$ is an isomorphism of Riemann surfaces.",
+        "strategy": "Prove f is proper from compactness of X and Hausdorffness of Y. The proper-map degree theorem gives each fibre as a positive weighted count; degree one forces a singleton unramified fibre. The local power-map form then gives holomorphic local inverses, which agree with the global set-theoretic inverse.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Chapter 15, proof of Theorem 15.7, printed p. 130, where a degree-one map to the sphere is used"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Chapter 7 \u00a72, proof of Corollary 7.7, printed p. 61, where the degree-one isomorphism criterion is invoked for the Abel map"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-abel-jacobi-embedding-positive-genus",
+        "kind": "theorem",
+        "title": "The Abel-Jacobi map embeds a positive-genus surface",
+        "deps": [
+          "cor-complex-analytic-functions-have-local-primitives",
+          "def-abel-jacobi-map",
+          "def-axiom-of-choice",
+          "def-biholomorphic-map",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-holomorphic-function-in-several-complex-variables",
+          "def-holomorphic-map-and-complex-jacobian",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "def-linear-map",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+          "lem-degree-one-holomorphic-map-of-compact-riemann-surfaces-is-an-isomorphism",
+          "lem-holomorphic-differentials-separate-generic-points",
+          "thm-abels-theorem-for-divisors",
+          "thm-continuous-bijection-from-a-compact-space-has-continuous-inverse",
+          "thm-holomorphic-inverse-function-theorem-several-variables",
+          "thm-jacobi-inversion",
+          "thm-proper-holomorphic-map-riemann-surfaces-has-degree"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) inherited from the Jacobian\nconstruction. Let $X$ be a compact connected Riemann surface of genus $g\\ge1$\nand let $u=u_{p_0}:X\\to\\operatorname{Jac}(X)$ be the Abel-Jacobi map with base\npoint $p_0$ ([[def-abel-jacobi-map]]). Then:\n\n1. **Injectivity.** $u$ is injective. Consequently, for $g=1$, $u$ is a\nbiholomorphism $X\\to\\operatorname{Jac}(X)$ onto the one-dimensional torus\n$\\operatorname{Jac}(X)$.\n2. **Immersivity.** $u$ is a holomorphic immersion: in a holomorphic chart $z$\nat $p$ and a holomorphic lift $\\xi$ of $u$, the derivative of $\\xi$ at $p$ is\nnonzero, because some holomorphic differential does not vanish at $p$\n([[lem-holomorphic-differentials-separate-generic-points]]).\n3. **Embedding.** $u$ is a closed topological embedding: it is a homeomorphism\nof the compact space $X$ onto its image, and every point of the image has a\nchart of the complex torus $\\operatorname{Jac}(X)$ in which the image of a\nneighbourhood of the corresponding point of $X$ is the graph of a holomorphic\nmap; in this sense $u(X)$ is a compact one-dimensional complex submanifold of\nthe complex torus $\\operatorname{Jac}(X)$.\n4. **Generation.** The subgroup of $\\operatorname{Jac}(X)$ generated by the\nimage of $X$ (equivalently, by the differences\n$u(p)-u(q)$, $p,q\\in X$) is all of $\\operatorname{Jac}(X)$, by Jacobi inversion.",
+        "strategy": "Injectivity: if $u(p)=u(q)$ with $p\\ne q$, then $u((q)-(p))=0$ and Abel's theorem makes $(q)-(p)$ principal, so there is a meromorphic function with divisor $(q)-(p)$; as a map to the sphere it has degree $1$ (its zero count and pole count are both $1$), hence by the degree-one lemma it is an isomorphism $X\\cong\\widehat{\\mathbb C}$, forcing $g=0$, contrary to $g\\ge1$. Immersivity: by the well-definedness lemma the derivative of $u$ at $p$ is the evaluation map $\\Omega(X)\\to T_p^{*}X$, and its injectivity is exactly $\\ell(K-p)=g-1$, which holds for all $p$ when $g\\ge1$ (a nonzero holomorphic differential vanishing at $p$ would form the space $H^0(K-p)$, whose dimension is $g-1$ by the separation lemma, so the evaluation is nonzero). Embedding: an injective immersion from a compact space into a Hausdorff space is an embedding, and the cited corollary applies; the image is a compact complex submanifold. Generation: the subgroup generated by the curve $u(X)$ contains all differences $u(p)-u(q)$, hence the image of $\\operatorname{Div}^0(X)$ under $u$, which is $\\operatorname{Jac}(X)$ by Jacobi inversion. For $g=1$: $X$ is a compact connected Riemann surface and $u$ is an injective holomorphic map; both source and target are one-dimensional connected compact complex manifolds, so an injective holomorphic map is a biholomorphism onto a closed one-dimensional complex submanifold, which must be the whole connected torus. No new choice principle is used; the Axiom of Choice is inherited from Riemann-Roch.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, Theorem 15.7: for genus $g\\ge1$ the map $\\varphi_P:X\\to\\operatorname{Jac}(X)$ is a smooth embedding, printed p. 130"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a72, Corollary 7.7 and the discussion of $I^p_o$; compactness and injectivity of the point map for $g\\ge1$"
+            },
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, \u00a721.8: the maps $\\psi:X^{g}\\to\\operatorname{Jac}(X)$ and $X\\to\\operatorname{Jac}(X)$ and the injectivity of the point map, printed pp. 171-172"
+            }
+          ]
+        },
+        "dependency_level": 25
+      }
+    ]
+  },
+  {
+    "order": 1615,
+    "id": "periods-jacobians-and-abel-jacobi-theory-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "Periods, Jacobians, and Abel--Jacobi Theory: Examples and Counterexamples",
+    "companion": "periods-jacobians-and-abel-jacobi-theory",
+    "requires": [
+      "periods-jacobians-and-abel-jacobi-theory"
+    ],
+    "items": [
+      {
+        "id": "ex-periods-of-a-complex-torus",
+        "kind": "example",
+        "title": "Periods of a complex torus",
+        "deps": [
+          "def-complex-lattice-and-complex-torus",
+          "thm-complex-torus-quotient-is-well-defined",
+          "def-elliptic-function-for-a-lattice",
+          "def-period-pairing-and-period-lattice",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "lem-holomorphic-differentials-form-a-g-dimensional-space",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "def-abel-jacobi-map",
+          "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+          "thm-abel-jacobi-embedding-positive-genus",
+          "cor-picard-zero-is-the-jacobian",
+          "def-genus-and-euler-characteristic-compact-riemann-surface",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let\n$\\Lambda=\\mathbb Z\\omega_1+\\mathbb Z\\omega_2\\subseteq\\mathbb C$ be a full\nlattice with oriented basis and let $X=\\mathbb C/\\Lambda$ be the associated\ncomplex torus with quotient map $q:\\mathbb C\\to X$\n([[def-complex-lattice-and-complex-torus]],\n[[thm-complex-torus-quotient-is-well-defined]]). Then:\n\n1. The translation-invariant differential $dz$ descends to a nowhere-vanishing\nholomorphic differential on $X$; $\\Omega(X)=\\mathbb C\\cdot dz$, so $X$ has genus\n$1$, $\\ell(K)=1$ and $\\deg K=0$\n([[lem-holomorphic-differentials-form-a-g-dimensional-space]],\n[[def-elliptic-function-for-a-lattice]]).\n2. With $\\pi_1,\\pi_2$ the loops $t\\mapsto[t\\omega_1]$, $t\\mapsto[t\\omega_2]$,\nthe periods of $dz$ are $P(\\pi_1,dz)=\\omega_1$ and $P(\\pi_2,dz)=\\omega_2$\n([[def-period-pairing-and-period-lattice]],\n[[def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface]]).\nUnder the isomorphism $\\Omega(X)^*\\cong\\mathbb C$,\n$\\alpha\\mapsto\\alpha(dz)$, the period lattice is exactly $\\Lambda$, and\n$$\\operatorname{Jac}(X)=\\mathbb C/\\Lambda=X .$$\n3. For every base point $p_0\\in X$ the point Abel-Jacobi map\n$u_{p_0}:X\\to\\operatorname{Jac}(X)=X$ is a biholomorphism, and for $D\\in\\operatorname{Div}^0(X)$\none has $u(D)=0$ if and only if $D$ is principal; equivalently\n$\\operatorname{Pic}^0(X)\\cong X$ canonically\n([[thm-abel-jacobi-embedding-positive-genus]],\n[[cor-picard-zero-is-the-jacobian]]). In particular, for points $p,q\\in X$ the\nclass of the divisor $(q)-(p)$ is the class of $q-p$ in $\\mathbb C/\\Lambda$.",
+        "strategy": "The quotient $\\mathbb C/\\Lambda$ is a compact Riemann surface with holomorphic covering map $\\pi$ by the quotient theorem. The translation-invariant $dz$ descends to a nowhere-vanishing holomorphic differential; since $\\Omega(X)\\ne0$ and a nonzero holomorphic differential has exactly $2g-2$ zeros, $g=1$, $\\Omega(X)=\\mathbb C\\,dz$, $\\ell(K)=1$ and $\\deg K=0$. The loops $\\pi_1,\\pi_2$ lift to the straight paths $t\\mapsto t\\omega_j$ on $[0,1]$, so the path integral of $dz$ along them is $\\omega_j$; the period subgroup is exactly $\\Lambda$, and under $\\Omega(X)^*\\cong\\mathbb C$ the period lattice is $\\Lambda$, giving $\\operatorname{Jac}(X)=\\mathbb C/\\Lambda=X$. The point map is then translation by $-p_0$, $u_{p_0}(p)=p-p_0$, a biholomorphism: $u(D)=0$ holds exactly when the group sum of $D$ vanishes, which by the canonical $\\operatorname{Pic}^0(X)\\cong\\operatorname{Jac}(X)$ (kernel of $u$ equal to the principal divisors) is exactly principality, and $u((q)-(p))$ is the class of $q-p$. Full AC is inherited from the Jacobian and classification interfaces; only the given lattice basis is selected.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a72, Corollary 7.7: for genus one the point map $I_o:S\\to\\operatorname{Jac}(S)$ is an isomorphism, printed p. 61; Ch. 1 \u00a72 for the complex torus"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, the remark that for a complex torus the periods of a 1-form are its two periods $(a,b)$ and $\\int_X|\\omega|^2=(i/2)(a\\bar b-\\bar ab)$, printed p. 136"
+            }
+          ]
+        },
+        "dependency_level": 26
+      },
+      {
+        "id": "ex-symplectic-homology-basis-of-a-genus-two-surface",
+        "kind": "example",
+        "title": "A symplectic homology basis of a genus-two surface",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-polygonal-schema-and-edge-pairing",
+          "def-intersection-form-on-the-homology-of-a-closed-oriented-surface",
+          "def-kronecker-evaluation-pairing",
+          "lem-cellular-homology-of-the-one-polygon-surface-model",
+          "lem-integral-surface-cup-pairing-from-the-oriented-polygon",
+          "thm-classification-of-compact-connected-surfaces",
+          "thm-polygonal-normal-form-for-compact-connected-surfaces"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) through the polygonal normal form, surface classification, integral cup-pairing, and Poincar\u00e9-duality interfaces. Let $\\Sigma_2$ be the quotient of an oriented octagon with boundary word $a_1b_1a_1^{-1}b_1^{-1}a_2b_2a_2^{-1}b_2^{-1}$, the standard genus-two model ([[thm-polygonal-normal-form-for-compact-connected-surfaces]], [[thm-classification-of-compact-connected-surfaces]], [[def-polygonal-schema-and-edge-pairing]]). Let $e_1=[a_1],e_2=[b_1],e_3=[a_2],e_4=[b_2]$. Then:\n\n1. $H_1(\\Sigma_2;\\mathbb Z)=\\mathbb Z^4$ with basis $e_1,e_2,e_3,e_4$ ([[lem-cellular-homology-of-the-one-polygon-surface-model]]).\n2. In this ordered basis, the intersection matrix of [[def-intersection-form-on-the-homology-of-a-closed-oriented-surface]] is\n$$\\begin{pmatrix}0&1&0&0\\\\-1&0&0&0\\\\0&0&0&1\\\\0&0&-1&0\\end{pmatrix}.$$\nEquivalently, $a_i\\cdot b_j=\\delta_{ij}$, $b_i\\cdot a_j=-\\delta_{ij}$, and all same-type products vanish. Its determinant is $1$, so this is a symplectic basis and the form is unimodular.\n3. The endpoint cases are consistent: at genus $0$ the paired digon has $H_1=0$ and the empty intersection matrix; at genus $1$ the commutator square has $H_1\\cong\\mathbb Z^2$ and matrix $J_2=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$ ([[thm-polygonal-normal-form-for-compact-connected-surfaces]], [[thm-classification-of-compact-connected-surfaces]], [[lem-cellular-homology-of-the-one-polygon-surface-model]], [[lem-integral-surface-cup-pairing-from-the-oriented-polygon]]).",
+        "strategy": "Compute the octagon quotient\u2019s single vertex and four paired edges, then identify its two-handle genus by the normal form/classification suppliers. The cellular computation gives H_1=Z^4 with the four side classes. The integral polygon cup lemma gives matrix J=diag(J_2,J_2) in the evaluation-dual H^1 basis. Cap-cup adjunction yields D(x_p)=sum_q J_pq e_q and D^{-1}(e_q)=sum_p J_pq x_p; substitution gives the homology intersection matrix J^T J J=J, hence determinant one. The same cellular, cup and intersection suppliers give the digon (zero) and square (J_2) endpoints. This is a topological-surface calculation, so it does not invoke the Riemann-surface-only symplectic theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology (author-hosted PDF)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Example 2.3 and the octagon model of the genus-two surface; Example 3.7 for the cup-pairing fan computation, pp. 207-208"
+            },
+            {
+              "title": "Gallier and Xu, A Guide to the Classification Theorem for Compact Surfaces",
+              "url": "https://www.cis.upenn.edu/~jean/surfclassif-root.pdf",
+              "locator": "Chapter 6, the genus-two normal form and its cell count, printed pp. 92-96"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-period-matrix-and-jacobian-of-the-pentagon-curve",
+        "kind": "example",
+        "title": "Period matrix and Jacobian of the pentagon curve",
+        "deps": [
+          "def-abel-jacobi-map",
+          "def-axiom-of-choice",
+          "def-complex-lattice-and-complex-torus",
+          "def-full-rank-lattice-covolume-and-dual-lattice",
+          "def-genus-and-euler-characteristic-compact-riemann-surface",
+          "def-holomorphic-and-meromorphic-map-of-riemann-surfaces",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "def-linear-map",
+          "def-meromorphic-differential-on-a-riemann-surface",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface",
+          "def-period-pairing-and-period-lattice",
+          "def-ramification-index-and-branch-value",
+          "def-riemann-sphere-holomorphic-charts",
+          "def-vector-space",
+          "lem-holomorphic-differentials-form-a-g-dimensional-space",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "thm-invertible-matrix-theorem",
+          "thm-jacobi-inversion",
+          "thm-local-normal-form-holomorphic-map-riemann-surfaces",
+          "thm-proper-holomorphic-map-riemann-surfaces-has-degree",
+          "thm-riemann-bilinear-relations",
+          "thm-symplectic-homology-basis-compact-riemann-surface"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact\nconnected Riemann surface of genus $2$ admitting an automorphism $T$ of order\n$5$, with $H_1(X;\\mathbb Z)$ a free rank-one module over\n$A:=\\mathbb Z[T]/(1+T+T^2+T^3+T^4)$ generated by a class $C$, and suppose there\nis a degree-five quotient map $y:X\\to\\widehat{\\mathbb C}$ whose fibres are the\n$T$-orbits (for instance the smooth genus-two curve obtained by gluing two\nregular pentagons, equivalently a smooth projective model of $y^2=x^5-1$, for\nwhich $T$ is induced by the rotation of the pentagons). Then:\n\n1. The eigenvalues of $T^{*}$ on $\\Omega(X)\\cong\\mathbb C^2$\n([[lem-holomorphic-differentials-form-a-g-dimensional-space]]) are primitive\nfifth roots of unity; after replacing $T$ by a power and choosing the basis,\nthere is a basis $\\omega_1,\\omega_2$ of $\\Omega(X)$ with\n$T^{*}\\omega_i=\\zeta^{i}\\omega_i$ for $\\zeta=e^{2\\pi i/5}$ and\n$P(C,\\omega_i)=1$, $i=1,2$\n([[def-period-pairing-and-period-lattice]]).\n2. On the cycle $T^{k}C$ one has $P(T^{k}C,\\omega_i)=\\zeta^{ki}$, so the period\nlattice is the rank-four lattice\n$$\\Lambda=\\bigl\\{\\bigl(p(\\zeta),p(\\zeta^2)\\bigr):p\\in\\mathbb Z[T]\\bigr\\} =\\bigl\\{(a,\\sigma(a)):a\\in\\mathbb Z[\\zeta]\\bigr\\}\\subseteq\\mathbb C^2,$$\n$\\sigma$ the Galois conjugation $\\zeta\\mapsto\\zeta^{2}$, and\n$\\operatorname{Jac}(X)=\\mathbb C^{2}/\\Lambda$\n([[def-jacobian-of-a-compact-riemann-surface]]).\n3. The period vectors of the four cycles $C,TC,T^2C,T^3C$ are the four columns\n$(1,1),(\\zeta,\\zeta^2),(\\zeta^2,\\zeta^4),(\\zeta^3,\\zeta)$, which generate\n$\\Lambda$; they are $\\mathbb R$-linearly independent, because a real relation\n$\\sum_kx_k(\\zeta^k,\\zeta^{2k})=0$ gives $\\sum_kx_k\\zeta^{jk}=0$ for\n$j=1,2,3,4$ (using conjugation for $j=3,4$) and the Vandermonde matrix\n$(\\zeta^{jk})_{1\\le j\\le4,\\,0\\le k\\le3}$ is invertible. Hence $\\Lambda$ is a\nfull lattice in $\\mathbb C^2\\cong\\mathbb R^4$ of covolume $|\\det M|>0$, so the\nperiod torus is compact ([[def-full-rank-lattice-covolume-and-dual-lattice]],\n[[thm-riemann-bilinear-relations]]).\n4. Every point of $\\operatorname{Jac}(X)$ is represented by a degree-zero\ndivisor and $\\operatorname{Pic}^0(X)\\cong\\operatorname{Jac}(X)$\n([[thm-jacobi-inversion]]).",
+        "strategy": "The automorphism $T$ acts on $H_1(X;\\mathbb Z)$ and hence on $\\Omega(X)$; since $T$ has order $5$ and $X$ is not the quotient of a torus, the eigenvalues of $T^{*}$ on the two-dimensional space $\\Omega(X)$ are primitive fifth roots: the alternative, a fixed eigenvector with eigenvalue $1$, would give a $T$-invariant holomorphic differential and then a quotient map $X\\to\\mathbb P^1$ of degree $5$ commuting with $T$ (equivalently, the curve would be a cyclic cover of the sphere with too few differentials), while the characteristic polynomial of the integral matrix $T_*$ forces the eigenvalues to be $\\zeta^1,\\zeta^2$ after replacing $T$ by a power; scaling the eigenbasis makes $P(C,\\omega_i)=1$. Since $T_*C$ is represented by $C$ with the $T$-action and periods are natural under automorphisms, $P(T^{k}C,\\omega_i)=P(C,(T^{k})^{*}\\omega_i)=\\zeta^{ki}P(C,\\omega_i)=\\zeta^{ki}$; as $H_1$ is the free rank-one $A$-module generated by $C$ with $A^{\\times}$ the fifth roots of unity and $T^4+\\dots+1=0$, the period lattice is exactly the image of $\\mathbb Z[\\zeta]$ under $p\\mapsto(p(\\zeta),p(\\zeta^2))$, a rank-four lattice in $\\mathbb C^2$ because the two embeddings $\\zeta\\mapsto\\zeta,\\zeta^2$ are independent over $\\mathbb Q$ and the resulting $4\\times 4$ real matrix is invertible. The four period vectors are exactly the images under $p\\mapsto(p(\\zeta),p(\\zeta^2))$ of the $\\mathbb Z$-basis $1,\\zeta,\\zeta^2,\\zeta^3$ of $\\mathbb Z[\\zeta]$, and their $\\mathbb R$-independence is the Vandermonde computation displayed in (3): if $\\sum_kx_k\\zeta^{jk}=0$ for $j=1,2,3,4$ with real $x_k$, the invertible Vandermonde matrix $(\\zeta^{jk})$ forces $x=0$ over $\\mathbb R$. The final clause is the general theory applied to this $X$. The construction is the pentagon example of McMullen Ch. 15; the same computation is classically attributed to the curve $y^2=x^5-1$ with complex multiplication by $\\mathbb Z[\\zeta]$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, 'Example: the pentagon' and Theorem 15.3: $\\operatorname{Jac}(y^2=x^5-1)\\cong\\mathbb C^2/\\mathbb Z[(\\zeta,\\zeta^2)]$, printed p. 128"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a71-2: the period lattice and the Jacobian; the Torelli discussion, printed pp. 59-60"
+            }
+          ]
+        },
+        "dependency_level": 24
+      },
+      {
+        "id": "ex-base-point-cancellation-for-degree-zero-divisors",
+        "kind": "example",
+        "title": "Base-point cancellation for degree-zero divisors",
+        "deps": [
+          "def-abel-jacobi-map",
+          "lem-holomorphic-differentials-separate-generic-points",
+          "def-axiom-of-choice",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+          "lem-period-pairing-is-well-defined-and-computed-by-integration",
+          "def-path-integral-of-a-holomorphic-differential-on-a-riemann-surface"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact\nconnected Riemann surface, let $D=\\sum_pn_p\\,p$ be a divisor of degree zero and\nlet $p_0,q_0\\in X$ be two base points with point maps $u_{p_0},u_{q_0}$\n([[def-abel-jacobi-map]]). Then in $\\operatorname{Jac}(X)$\n$$\\sum_pn_p\\,u_{p_0}(p)=\\sum_pn_p\\,u_{q_0}(p),$$\nso the class $u(D)$ is well defined without a base point; and for all $p,q\\in X$\nand all paths $\\gamma$ from $p$ to $q$,\n$$u((q)-(p))=\\Bigl[\\omega\\mapsto\\int_\\gamma\\omega\\Bigr],\\qquad u((q)-(p))+u((r)-(q))=u((r)-(p)).$$\nIn degree $1$ the base point does matter: for a single point $p$ one has\n$$u_{p_0}(p)-u_{q_0}(p)=-u_{q_0}(p_0),$$\nwhich is nonzero in general: when $g\\ge1$ the map $u_{q_0}$ is an immersion, hence nonconstant, so $u_{q_0}(p_0)\\ne0$ for suitable $p_0\\ne q_0$.",
+        "strategy": "Changing the base point from $p_0$ to $q_0$ changes every point class by the same constant: the addition rule gives $u_{p_0}(p)=u_{q_0}(p)-u_{q_0}(p_0)$ for every $p$, so the total change in $\\sum_pn_pu_{p_0}(p)$ is the constant $(\\sum_pn_p)\\cdot(-u_{q_0}(p_0))=0$ because $\\deg D=0$. The formula for $u((q)-(p))$ is the definition of the divisor extension together with the addition rule $u_{p_0}(q)-u_{p_0}(p)=\\int_p^q\\omega$; additivity for three points follows by concatenating paths from $p$ to $q$ and $q$ to $r$, the period ambiguity cancelling in the quotient. The final sentence records the degenerate case: a nonzero degree-one divisor class shifts by the base-point term, which is why the theory is stated on $\\operatorname{Div}^0(X)$. All of this is inherited from the Abel-Jacobi construction; no choice is performed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a72, Corollary 7.3: $I(D)=\\sum_pn_pI^p_o$ for $D=\\sum n_p(p)$ of degree zero and the base-point independence, printed p. 61"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, $\\varphi(\\sum Q_i-P_i)(\\omega)=\\sum\\int_{P_i}^{Q_i}\\omega$ and $f(Q)=\\varphi(Q-P)$, printed p. 129"
+            }
+          ]
+        },
+        "dependency_level": 23
+      },
+      {
+        "id": "ex-principal-divisor-tests-via-the-abel-jacobi-map",
+        "kind": "example",
+        "title": "Principal divisor tests via the Abel-Jacobi map",
+        "deps": [
+          "def-abel-jacobi-map",
+          "def-axiom-of-choice",
+          "def-complex-lattice-and-complex-torus",
+          "def-divisor-principal-and-canonical-divisor-riemann-surface",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "def-genus-and-euler-characteristic-compact-riemann-surface",
+          "def-riemann-sphere-holomorphic-charts",
+          "def-weierstrass-elliptic-p-function",
+          "ex-periods-of-a-complex-torus",
+          "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+          "lem-degree-one-holomorphic-map-of-compact-riemann-surfaces-is-an-isomorphism",
+          "lem-holomorphic-differentials-form-a-g-dimensional-space",
+          "thm-abels-theorem-for-divisors",
+          "thm-elliptic-function-divisor-laws",
+          "thm-meromorphic-functions-riemann-sphere-are-rational",
+          "thm-proper-holomorphic-map-riemann-surfaces-has-degree",
+          "thm-weierstrass-p-normal-convergence-and-periodicity"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]).\n\n1. **Sphere.** For $X=\\widehat{\\mathbb C}$ one has $g=0$, $\\Omega(X)=0$ and\n$\\operatorname{Jac}(X)=0$\n([[def-riemann-sphere-holomorphic-charts]],\n[[lem-holomorphic-differentials-form-a-g-dimensional-space]],\n[[def-jacobian-of-a-compact-riemann-surface]]). Every degree-zero divisor on\n$\\widehat{\\mathbb C}$ is principal, since meromorphic functions on the sphere\nare rational ([[thm-meromorphic-functions-riemann-sphere-are-rational]]); hence\nthe Abel-Jacobi criterion of [[thm-abels-theorem-for-divisors]] is satisfied by\nall of them, and $u(D)=0$ for every\n$D\\in\\operatorname{Div}^0(\\widehat{\\mathbb C})$. Explicitly,\n$\\bigl((a)-(b)\\bigr)=\\operatorname{div}\\bigl(\\tfrac{z-a}{z-b}\\bigr)$ for\n$a,b\\in\\mathbb C$.\n2. **Torus, one point.** Let $X=\\mathbb C/\\Lambda$ be a complex torus and\n$p,q\\in X$ ([[ex-periods-of-a-complex-torus]]). Then\n$u((q)-(p))=q-p$ in the identification $\\operatorname{Jac}(X)=X=\\mathbb C/\\Lambda$;\nhence $(q)-(p)$ is principal if and only if $q=p$, because a meromorphic\nfunction on a torus with a single simple pole and zero would be a degree-one map\nto the sphere, which is impossible for genus one\n([[lem-degree-one-holomorphic-map-of-compact-riemann-surfaces-is-an-isomorphism]],\n[[thm-proper-holomorphic-map-riemann-surfaces-has-degree]]).\n3. **Torus, symmetric pairs.** For $p,q\\in X$ with $2p,2q\\notin\\Lambda$ and\n$q\\not\\equiv\\pm p$, the function\n$$F(z)=\\frac{\\wp(z)-\\wp(q)}{\\wp(z)-\\wp(p)}$$\nis a nonconstant meromorphic function on the torus with divisor\n$(q)+(-q)-(p)-(-p)$\n([[def-weierstrass-elliptic-p-function]],\n[[thm-weierstrass-p-normal-convergence-and-periodicity]],\n[[thm-elliptic-function-divisor-laws]]); correspondingly\n$u\\bigl((q)+(-q)-(p)-(-p)\\bigr)=0$, since\n$q+(-q)-p-(-p)=0$ in the group $\\mathbb C/\\Lambda$.\n4. **Non-principal examples.** On a torus, any divisor of the form $(q)-(p)$\nwith $q-p\\notin\\Lambda$ has $u\\ne0$, so it is not principal. On a curve of\ngenus $g\\ge2$ and for distinct points $p\\ne q$ the divisor $(q)-(p)$ has\n$u\\ne0$: a vanishing class would make $(q)-(p)$ principal by the criterion,\nhence produce a holomorphic map $X\\to\\widehat{\\mathbb C}$ of degree one and an\nisomorphism $X\\cong\\widehat{\\mathbb C}$, contradicting genus $g\\ge2$\n([[lem-degree-one-holomorphic-map-of-compact-riemann-surfaces-is-an-isomorphism]]).",
+        "strategy": "Clause 1: the sphere has no nonzero holomorphic differentials because $g=0$ forces $\\Omega=0$; the Jacobian is the quotient of the zero space, hence trivial; rational functions have prescribed zeros and poles with the correct degrees, so every degree-zero divisor on the sphere is principal, and the criterion is vacuous. Clause 2: the Abel-Jacobi class of $(q)-(p)$ is the integral of $dz$ along a path from $p$ to $q$, i.e. the class of $q-p$ in $\\mathbb C/\\Lambda$; a principal $(q)-(p)$ would give a meromorphic function with a single simple pole, hence a degree-one map to the sphere and an isomorphism $X\\cong\\widehat{\\mathbb C}$, contradicting genus one. Clause 3: the Weierstrass $\\wp$-function has a double pole at $0$ and is even with period lattice $\\Lambda$; $\\wp(z)-\\wp(p)$ has simple zeros at $\\pm p$ exactly when $2p\\notin\\Lambda$ and its only pole is a double pole at $0$, and likewise for $q$. In the quotient $F$ the two double poles cancel, each of the four points $\\pm q,\\pm p$ is a simple zero or simple pole according to the numerator and denominator, and under the stated hypotheses $q\\not\\equiv\\pm p$ no cancellation occurs, so $(F)=(q)+(-q)-(p)-(-p)$; the Abel-Jacobi class vanishes because the divisor is principal, consistent with the criterion. Clause 4: the criterion says that a degree-zero divisor is principal exactly when its Abel-Jacobi class vanishes; on the torus the class is the group sum, which is nonzero for $q-p\\notin\\Lambda$, and on a curve of genus at least two the class $(q)-(p)$ with $p\\ne q$ vanishes only if a meromorphic function with divisor $(q)-(p)$ exists, i.e. a degree-one map, which is impossible by the degree-one lemma. The Axiom of Choice is inherited from the general theory.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl Otto Forster, Lectures on Riemann Surfaces (GTM 81)",
+              "url": "http://ronan.terpereau.perso.math.cnrs.fr/Master_Class_2023_Dijon/FORSTER_Lectures%20on%20Riemann%20Surfaces.pdf",
+              "locator": "Ch. 2, \u00a720.8 (application to doubly periodic functions: the Abel condition $\\sum a_k\\equiv\\sum b_k$ mod $\\Gamma$) and Theorem 20.7, printed pp. 165-166"
+            },
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, the meaning of $\\varphi(D)=0$ and the elliptic-function examples, printed p. 129"
+            }
+          ]
+        },
+        "dependency_level": 27
+      },
+      {
+        "id": "ex-abel-image-in-its-jacobian",
+        "kind": "example",
+        "title": "The Abel image in its Jacobian",
+        "deps": [
+          "cor-picard-zero-is-the-jacobian",
+          "def-abel-jacobi-map",
+          "def-axiom-of-choice",
+          "def-biholomorphic-map",
+          "def-genus-and-euler-characteristic-compact-riemann-surface",
+          "def-jacobian-of-a-compact-riemann-surface",
+          "ex-period-matrix-and-jacobian-of-the-pentagon-curve",
+          "ex-periods-of-a-complex-torus",
+          "lem-abel-jacobi-map-is-well-defined-and-base-point-independent",
+          "thm-abel-jacobi-embedding-positive-genus",
+          "thm-abels-theorem-for-divisors",
+          "thm-jacobi-inversion"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact\nconnected Riemann surface of genus $g\\ge1$, let $p_0\\in X$ and let\n$u=u_{p_0}:X\\to\\operatorname{Jac}(X)$ be the Abel-Jacobi map\n([[def-abel-jacobi-map]]). Then:\n\n1. The image $u(X)$ is a compact subset of the complex torus\n$\\operatorname{Jac}(X)$ with a one-dimensional complex-graph chart at each of\nits points, and $u$ is a homeomorphism of $X$ onto $u(X)$; for $g\\ge2$ the\nimage has complex dimension one inside the $g$-dimensional torus, so it is\nneither open nor a complex subtorus\n([[thm-abel-jacobi-embedding-positive-genus]]).\n2. The subgroup of $\\operatorname{Jac}(X)$ generated by\n$u(X)-u(p_0)=\\{u(p)-u(p_0):p\\in X\\}$ is all of $\\operatorname{Jac}(X)$: every\nclass $u((q)-(p))$ is a difference of two image points, every degree-zero\ndivisor is a finite sum of such classes, and Jacobi inversion gives the whole\ngroup ([[thm-jacobi-inversion]]).\n3. For $g=1$ the image is the whole torus: $u:X\\to\\operatorname{Jac}(X)$ is a\nbiholomorphism ([[ex-periods-of-a-complex-torus]]). For the genus-two pentagon\ncurve, $X$ embeds as a compact curve generating the two-dimensional torus\n$\\operatorname{Jac}(X)=\\mathbb C^2/\\Lambda$ of\n[[ex-period-matrix-and-jacobian-of-the-pentagon-curve]].\n4. The map is a bijection onto its image with holomorphic inverse: $u(p)=u(q)$\nimplies $p=q$ by the embedding theorem, and the inverse is holomorphic because\n$u$ is locally biholomorphic onto its image.",
+        "strategy": "The embedding theorem supplies the injective immersion, its closed image and the complex submanifold structure, and also that the image generates the group: every element of $\\operatorname{Jac}(X)$ is the image of a degree-zero divisor, which is a finite $\\mathbb Z$-combination of point differences, i.e. a finite combination of elements of $u(X)-u(p_0)$; this uses only the definition of $u$ on divisors. In dimension one the image of an injective holomorphic map of compact connected one-dimensional complex manifolds is open and closed, hence all of the connected torus, and injectivity makes the inverse holomorphic, so $u$ is a biholomorphism; this is the classical statement that a genus-one curve is its own Jacobian. The dimension obstruction for $g\\ge2$ is the rank comparison: a compact complex submanifold of dimension one in a torus of dimension $g\\ge2$ has empty interior and is not a subgroup (a compact complex subtorus has dimension at least one and is a group; a curve through the origin is not a group, since for instance it does not contain a neighborhood of the origin). Finiteness of the intersection with translates follows from injectivity. No choice is performed; the Axiom of Choice is inherited from the general theory.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Curtis T. McMullen, Riemann Surfaces, Harvard Math 213b course notes (2026)",
+              "url": "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf",
+              "locator": "Ch. 15, Theorem 15.7 (the point map is a smooth embedding) and the discussion of $X\\hookrightarrow\\operatorname{Jac}(X)$, printed p. 130"
+            },
+            {
+              "title": "Eduard Looijenga, Riemann Surfaces (2007 author lecture notes)",
+              "url": "https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf",
+              "locator": "Ch. 7 \u00a71-2, the Jacobian and the embedding of $S$ into it, printed pp. 59-61"
+            }
+          ]
+        },
+        "dependency_level": 27
+      }
+    ]
+  }
+]

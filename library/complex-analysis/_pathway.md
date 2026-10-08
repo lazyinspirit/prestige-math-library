@@ -41,13 +41,20 @@ parts:
       - the-riemann-mapping-theorem
       - simply-connected-plane-domains
       - green-functions-harmonic-measure-and-conformal-invariance
+      - bergman-and-szego-kernels
       - analytic-continuation-and-monodromy
       - riemann-surfaces-branched-maps-and-differentials
+      - extremal-length-and-planar-quasiconformality
       - hyperbolic-riemann-surfaces-and-uniformization
       - elliptic-functions-and-complex-tori
       - nevanlinna-second-main-theorem-and-defects
       - logarithmic-potential-capacity-and-riesz-decomposition
+      - hodge-theory-on-compact-riemann-surfaces
       - level-one-modular-forms-and-the-j-invariant
+      - quasisymmetry-welding-and-conformal-removability
+      - periods-jacobians-and-abel-jacobi-theory
+      - divisors-riemann-roch-and-duality
+      - beltrami-equation-and-measurable-riemann-mapping
 ---
 
 ## holomorphic-functions
@@ -62,15 +69,15 @@ term, and its derivatives recover its coefficients.
 
 Contour integration, Goursat and Cauchy turn local holomorphy into analyticity,
 residues and zero-pole counting; Poisson, Dirichlet, subharmonic, Green and
-capacity add boundary values and conformal covariance. Fatou limits, Blaschke
-products and inner-outer factorisation give analytic Hardy spaces and
-Smirnov-Nevanlinna classes their canonical form; Hartogs, pseudoconvexity and
-Hörmander solve $\bar\partial$: Dolbeault vanishing, Levi problem, extension;
-Runge-Mittag-Leffler, Weierstrass, Gamma and hypersurfaces serve approximation,
-principal parts, special functions; Poisson-Jensen yields Nevanlinna's two main
-theorems with defects; Montel, Schwarz-Pick, Bloch-Schottky-Picard and Riemann
-mapping close the conformal side; simply-connected domains globalise germs by
-monodromy; Riemann surfaces, branched covers, uniformization follow; elliptic
-functions and modular forms give the valence formula, discriminant and
-j-invariant classification of tori; the zeta page applies Euler products,
-continuation, functional equation.
+capacity add boundary values and conformal covariance; Fatou, Blaschke and
+inner-outer factorisation give Hardy spaces their canonical form, while Bergman
+and Szegő kernels add reproducing kernels and invariant metrics. Hartogs,
+pseudoconvexity and Hörmander solve $\bar\partial$; on compact surfaces Hodge
+decomposition, divisors, Riemann–Roch and Abel–Jacobi turn periods and Jacobians
+into invariants. Runge-Mittag-Leffler, Weierstrass, Gamma and hypersurfaces
+serve approximation; Poisson-Jensen yields Nevanlinna theory; Montel,
+Schwarz-Pick, Bloch-Schottky-Picard, Riemann mapping, extremal length,
+quasiconformality, Beltrami solutions, measurable Riemann mapping, welding and
+removability close the conformal side; monodromy and uniformization globalise;
+elliptic functions and modular forms classify tori; the zeta page applies Euler
+products, continuation, functional equation.

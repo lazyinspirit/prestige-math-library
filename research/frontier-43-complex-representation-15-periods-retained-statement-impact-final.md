@@ -1,0 +1,11 @@
+# Final retained Periods Statement-impact review
+
+The final fresh native carriers require no mathematical correction caused by the changed A4/A11 global-versus-cover statements or A12 metric binding. All 22 retained subjects are present and their numbered proofs/verifications were read for this impact question. Current actual dependencies reach those suppliers for 21 subjects; the weak-solution lemma no longer has such a path. None directly depends on A4, A11, or A12.
+
+Supplier-first review confirms the global comparison now supplies the cover-independent cohomology uses in finiteness, point-divisor induction and the genus calculation. The intrinsic residue pairing supplies nondegeneracy and Serre duality with auxiliary metrics chosen under full AC. Their consumers retain the unchanged Riemann–Roch interface: finite dimensions, the intrinsic identity, unconditional nonzero meromorphic differential, classical identity, and zero-divisor values. Old supplied-good-cover clauses remain available; no Periods consumer was found to use them without their hypotheses.
+
+The four actual RR gateways are the holomorphic-dimension lemma (F15/1.1, F1/2.1–3.1), trace lemma (F12/4.1, supplementary under AC), generic evaluation lemma (F2/1.1,2.1), and Jacobi inversion (F6/1.3, degree-g existence inequality). Subsequent period, lattice, Jacobian, Abel-Jacobi and example arguments retain their dimension/canonical-order/evaluation inputs. The JSON records every current chain and exact contract snapshot.
+
+A separate Jacobi-inversion finding was sent to the continuing Periods owner: missing genus-zero proof case, principal-divisor invariance used in step 1.3 without its earlier vanishing/Abel supplier, and that step’s sharper surjectivity conclusion before u-surjectivity is established. These are not effects of an altered RR supplier Statement. The Periods owner retains the actual consumer correction and stale annotation/contract reconciliation; this reviewer made no overlapping item or shared-carrier edits.
+
+Only these distinct evidence files were written. Raw hashes describe the report-time snapshot during the other owner’s reconciliation, not final certification. This is a focused Statement-impact review, not a general mathematical audit or workflow gate. The capped RR reconciliation branch stays closed. Writes are drained.

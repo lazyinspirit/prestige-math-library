@@ -1,0 +1,1262 @@
+[
+  {
+    "order": 1626,
+    "id": "bergman-and-szego-kernels",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "Bergman and Szeg\u0151 Kernels",
+    "companion": "bergman-and-szego-kernels-examples",
+    "requires": [
+      "complex-lp-spaces-and-test-function-conventions",
+      "hilbert-space-geometry-and-riesz-representation",
+      "orthonormal-bases-parseval-and-fourier-series",
+      "the-dbar-complex-and-integral-solutions",
+      "hormander-estimates-and-the-levi-problem",
+      "harmonic-hardy-classes-and-fatou-boundary-limits",
+      "analytic-hardy-spaces-and-canonical-factorisation"
+    ],
+    "items": [
+      {
+        "id": "lem-bergman-mean-value-l2-bound",
+        "kind": "lemma",
+        "title": "The mean-value $L^2$ bound for holomorphic functions on a polydisc",
+        "deps": [
+          "def-holomorphic-function-in-several-complex-variables",
+          "cor-complex-differentiability-implies-continuity",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "cor-holomorphic-mean-value-property",
+          "rem-complex-euclidean-space-dictionary",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $m\\ge1$, let $\\Omega\\subseteq\\mathbb C^m$ be open, let $a\\in\\Omega$, and let $\\mathbf r=(r_0,\\ldots,r_{m-1})$ be a polyradius with each $r_k>0$ such that $\\overline\\Delta_{\\mathbf r}(a)\\subseteq\\Omega$. If $f$ is holomorphic on $\\Omega$, then\n\n$$|f(a)|^2\\le\\frac{1}{\\lambda_{2m}(\\Delta_{\\mathbf r}(a))}\\int_{\\Delta_{\\mathbf r}(a)}|f|^2\\,d\\lambda_{2m},\\qquad \\lambda_{2m}(\\Delta_{\\mathbf r}(a))=\\pi^m\\prod_{k<m}r_k^2,$$\n\nwhere $\\lambda_{2m}$ is Lebesgue measure under $\\mathbb C^m\\cong\\mathbb R^{2m}$. In particular, for a common radius $r$ the coefficient is $(\\pi r^2)^{-m}$.",
+        "strategy": "In one variable, the holomorphic circle-mean equality implies the square-mean inequality by integrating |g-g(b)|\u00b2. Polar coordinates convert this to the disk L\u00b2 estimate. Iterate that estimate over coordinate slices and use Tonelli and product-measure agreement. AC\u03c9 is used through the polar and product-Lebesgue measure suppliers.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a71.2, Exercise 1.2.10, printed p. 26 (PDF p. 25): the mean-value formula over a polydisc centered at its center; the text poses this as an exercise and gives no proof, which is supplied locally here."
+            },
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed p. 1 (PDF p. 1): the opening subharmonic mean-value inequality for |f|\u00b2 on Euclidean balls; this independently supports the one-variable local estimate, while the polydisc product step is proved here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-bergman-evaluation-bound-on-compact-subsets",
+        "kind": "lemma",
+        "title": "Sup-norm and first-derivative bounds by the $L^2$ norm on compact subsets",
+        "deps": [
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "cor-holomorphic-functions-in-several-variables-are-smooth",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-metric-ball",
+          "def-metric-continuity",
+          "def-metric-space",
+          "def-metric-topology",
+          "lem-bergman-mean-value-l2-bound",
+          "lem-compactness-is-intrinsic",
+          "lem-distance-to-set-is-lipschitz",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "prop-algebra-of-holomorphic-functions-in-several-variables",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-cauchy-estimates-on-a-polydisc",
+          "thm-complex-plane-is-complete",
+          "thm-extreme-value-metric",
+          "thm-fatou-lemma",
+          "thm-locally-uniform-limit-of-holomorphic-functions-in-several-variables"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $m\\ge1$, let $\\Omega\\subseteq\\mathbb C^m$ be open, and let $K\\subseteq\\Omega$ be nonempty and compact. There are finite constants $C_K$ and $C_{K,\\alpha}$ for every multi-index $\\alpha$ with $|\\alpha|\\le1$ such that every holomorphic $f\\in L^2(\\Omega)$ satisfies\n\n$$\\sup_{z\\in K}|f(z)|\\le C_K\\|f\\|_{L^2(\\Omega)},\\qquad \\sup_{z\\in K}|\\partial_z^\\alpha f(z)|\\le C_{K,\\alpha}\\|f\\|_{L^2(\\Omega)}.$$\n\nMoreover, if a sequence of holomorphic $L^2(\\Omega)$ functions $(f_n)$ converges in $L^2(\\Omega)$ to an equivalence class $g$, then $g$ has a holomorphic representative $F$ and $f_n\\to F$, $\\partial_z^\\alpha f_n\\to\\partial_z^\\alpha F$ uniformly on $K$ for every $|\\alpha|\\le1$.",
+        "strategy": "Choose one uniform polydisc radius on the compact set using distance to the domain complement, with a separate fixed-radius case for the full complex space. The mean-value L\u00b2 bound controls the distinguished-boundary supremum, and Cauchy estimates give values and first derivatives. An L\u00b2-convergent holomorphic sequence is locally uniformly Cauchy by the value bound; local uniform limits give holomorphy and derivative convergence, and Fatou identifies its L\u00b2 class with the limit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Lemma 5.2.1 and its proof, printed p. 161: the compact-set sup bound and A\u00b2-closure argument; the first-derivative estimates and arbitrary-open-set edge cases are proved locally here."
+            },
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed p. 1 (PDF p. 1): the point-evaluation estimate from the |f|\u00b2 submean inequality and the resulting compact-set sup bound; the local proof below needs only openness."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-bergman-space-and-kernel",
+        "kind": "definition",
+        "title": "The Bergman space $A^2(\\Omega)$ and the Bergman kernel",
+        "deps": [
+          "cor-holomorphic-functions-in-several-variables-are-smooth",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-complex-l-two-inner-product",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-holomorphic-function-in-several-complex-variables",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-trace-sigma-algebra",
+          "lem-bergman-evaluation-bound-on-compact-subsets",
+          "lem-bergman-mean-value-l2-bound",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "prop-algebra-of-holomorphic-functions-in-several-variables",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-borel-sigma-algebra-of-a-subspace-is-the-trace",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-trace-is-a-sigma-algebra"
+        ],
+        "statement": "Assume AC\u03c9, let m\u22651, and let \u03a9\u2282C^m be a nonempty open set with Lebesgue measure \u03bb\u03a9 induced by \u03bb2m under the real coordinate dictionary. Define A\u00b2(\u03a9) as the L\u00b2 classes with a holomorphic representative. The representative is unique, and the preceding compact evaluation lemma shows A\u00b2(\u03a9) is a closed complex subspace of L\u00b2(\u03a9), hence a Hilbert space for the first-variable-linear integral pairing. Point evaluation has a unique Riesz representer k_w, and K\u03a9(z,w):=k_w(z) is the Bergman kernel. For \u03a9=C^m, the preceding mean-value estimate gives A\u00b2(\u03a9)={0} and K\u03a9\u22610; no positivity is asserted for general unbounded \u03a9.",
+        "strategy": "Use the earlier compact evaluation lemma both to identify holomorphic functions with their L\u00b2 classes and to prove closedness: an L\u00b2-convergent sequence of holomorphic functions has a holomorphic representative, while AC\u03c9 supplies a sequence approximating any point in the closure. The complex L\u00b2 pairing makes the closed subspace a Hilbert space; bounded point evaluation and Riesz then define k_w and K\u03a9(z,w)=k_w(z) in the first-variable-linear convention. For \u03a9=C^m, apply the earlier polydisc mean-value inequality at each fixed point with radius R and let R tend to infinity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, printed pp. 160\u2013162 (PDF pp. 159\u2013161): the A\u00b2 definition, full proof of Lemma 5.2.1 (compact evaluation bounds and closedness), the Riesz/kernel construction, and Exercise 5.2.2(a)/Example 5.2.4 on A\u00b2(C^m). The exercise is not proved there; the local mean-value proof is supplied here. The displayed conjugation in K_U(z,\u03b6\u0304)=overline(k_z(\u03b6)) agrees with the first-variable-linear convention used below."
+            },
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 1\u20132: the L\u00b2 holomorphic space, bounded evaluation, and the unique Riesz element K\u03a9(\u00b7,w) with f(w)=\u27e8f,K\u03a9(\u00b7,w)\u27e9. This is the first-variable-linear kernel convention used here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-bergman-basis-expansion-and-closedness",
+        "kind": "theorem",
+        "title": "$A^2(\\Omega)$ is closed, and the Bergman kernel is the sum over any complete orthonormal system",
+        "deps": [
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "def-banach-space",
+          "def-bergman-space-and-kernel",
+          "def-countable",
+          "def-countable-choice",
+          "def-holomorphic-function-in-several-complex-variables",
+          "def-metric-ball",
+          "def-metric-compactness",
+          "def-metric-space",
+          "def-metric-topology",
+          "def-norm-and-normed-space",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-real-and-complex-inner-product-space",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "def-total-derivative-in-euclidean-space",
+          "lem-bergman-evaluation-bound-on-compact-subsets",
+          "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "prop-algebra-of-holomorphic-functions-in-several-variables",
+          "prop-holomorphic-functions-are-continuous-and-separately-holomorphic",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-complex-plane-is-complete",
+          "thm-compactness-under-continuous-maps",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-locally-uniform-limit-of-holomorphic-functions-in-several-variables",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), let $m\\ge1$, and let $\\Omega\\subseteq\\mathbb C^m$ be a nonempty open set. The Bergman space $A^2(\\Omega)$ of [[def-bergman-space-and-kernel]] is a closed complex linear subspace of $L^2(\\Omega)$.\n\nLet $(e_j)_{j\\in J}$ be any complete orthonormal system of $A^2(\\Omega)$, when one exists. For arbitrary $J$, interpret each sum as the net of finite subsum values ordered by inclusion. Then for all $z,w\\in\\Omega$,\n$$K_\\Omega(z,w)=\\sum_{j\\in J}e_j(z)\\overline{e_j(w)}.$$\nFor every pair of nonempty compact sets $K,L\\subseteq\\Omega$ and every $\\varepsilon>0$, there is a finite $F_0\\subseteq J$ such that for every finite $G\\subseteq J\\setminus F_0$,\n$$\\sup_{(z,w)\\in K\\times L}\\sum_{j\\in G}|e_j(z)\\overline{e_j(w)}|<\\varepsilon.$$\nThus the series converges absolutely and uniformly on compact subsets of $\\Omega\\times\\Omega$ with its Euclidean product metric and is independent of the chosen complete orthonormal system; an empty compact set gives a vacuous uniform-convergence claim. The kernel is holomorphic in $z$, antiholomorphic in $w$, and $K_\\Omega(w,z)=\\overline{K_\\Omega(z,w)}$.",
+        "strategy": "Closedness is cited from the preceding Bergman-space definition. For fixed w, expand its Riesz section by the finite-subset Fourier net and use the compact evaluation estimate for local uniform convergence in z. First-derivative evaluation bounds and the Banach-valued mean-value inequality make w \u21a6 k_w norm-continuous. Continuous images of compact sets are compact, so Fourier projections converge uniformly on the section images. A finite cover of each compact image upgrades pointwise Fourier convergence to uniform norm convergence. Finite Cauchy\u2013Schwarz and orthogonal projection tails then give the absolute compact-uniform double expansion. Countable coefficient support reduces holomorphy in z to locally uniform convergence of holomorphic finite sums; Riesz symmetry gives antiholomorphy in w and basis independence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Lemma 5.2.1 (printed p. 161), Proposition 5.2.2 (printed p. 162), and Proposition 5.2.5 with its proof (printed pp. 163\u2013164): compact evaluation, kernel symmetry/holomorphy, and the complete-orthonormal-system expansion with compact-uniform convergence."
+            },
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 1\u20133: closedness of H\u00b2(\u03a9), Riesz kernel sections, and the expansion formula. On printed p. 3 the source says \u201corthonormal system\u201d without explicitly qualifying completeness; this item states completeness and proves the formula locally from the complete-family Fourier theorem."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-bergman-reproducing-projection-and-extremal",
+        "kind": "theorem",
+        "title": "Reproducing property, Bergman projection and the extremal characterization",
+        "deps": [
+          "def-bergman-space-and-kernel",
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+          "thm-bergman-basis-expansion-and-closedness",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-orthogonal-decomposition-by-a-closed-subspace"
+        ],
+        "statement": "Assume AC\u03c9, m\u22651 and nonempty open \u03a9\u2282C\u1d50. For k_w=K_\u03a9(\u00b7,w), the Riesz formula reproduces every f\u2208A\u00b2(\u03a9). The orthogonal projection P:L\u00b2(\u03a9)\u2192A\u00b2(\u03a9) is linear, self-adjoint and contractive, fixes A\u00b2, and satisfies Pf(w)=\u27e8f,k_w\u27e9=\u222b\u03a9 f(z) overline(K_\u03a9(z,w)) d\u03bb_\u03a9(z). Also K_\u03a9(w,w)=\u2016k_w\u2016\u00b2=sup{|f(w)|\u00b2 : f\u2208A\u00b2(\u03a9), \u2016f\u2016\u22641}, and |f(w)|\u00b2\u2264K_\u03a9(w,w)\u2016f\u2016\u00b2. If k_w\u22600 the maximizers are exactly \u03bbk_w/\u2016k_w\u2016 with |\u03bb|=1; if k_w=0 every function in the unit ball attains the zero supremum.",
+        "strategy": "1. Use the Riesz representer in the Bergman definition for reproduction. 2. The preceding theorem makes A\u00b2 closed in L\u00b2; orthogonal decomposition defines its Hilbert projection, the projection lemma gives its operator properties, and orthogonality of f\u2212Pf to the kernel section yields Pf(w)=\u27e8f,k_w\u27e9. 3. Riesz gives K(w,w)=\u2016k_w\u2016\u00b2; Cauchy\u2013Schwarz gives the upper bound, the normalized section attains it when nonzero, and the equality case gives all unimodular multiples. When k_w=0 all evaluations vanish, so the unit ball is the full maximizing set.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 1\u20134: the Riesz representer and reproducing identity (pp. 1\u20132), followed by the diagonal extremal formula K_\u03a9(w,w)=\u2016K_\u03a9(\u00b7,w)\u2016\u00b2=sup{|f(w)|\u00b2:\u2016f\u2016\u22641} (p. 4). B\u0142ocki assumes bounded domains throughout this section unless stated otherwise; the local Hilbert-space proof here applies to the library\u2019s general nonempty open domains."
+            },
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, the Bergman kernel definition and reproducing identity (5.1), printed p. 162, and Exercise 5.2.5, printed p. 164, which gives the uniqueness characterization but no proof."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-bergman-kernel-smoothness-and-positive-diagonal",
+        "kind": "lemma",
+        "title": "Smoothness of the Bergman kernel and positivity of its diagonal on bounded domains",
+        "deps": [
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "cor-holomorphic-functions-in-several-variables-are-smooth",
+          "def-bergman-space-and-kernel",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-l-two-inner-product",
+          "def-countable-choice",
+          "def-integer-power",
+          "def-metric-ball",
+          "def-metric-bounded-diameter",
+          "def-metric-space",
+          "def-metric-topology",
+          "def-natural-logarithm",
+          "lem-bergman-evaluation-bound-on-compact-subsets",
+          "lem-derivative-of-a-power",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "prop-measure-monotonicity",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-algebra-of-continuous-functions",
+          "thm-algebra-of-derivatives",
+          "thm-bergman-reproducing-projection-and-extremal",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-locally-bounded-separate-holomorphy",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws"
+        ],
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $m\\ge1$ and let $\\Omega\\subseteq\\mathbb C^m$ be a nonempty open set. Then $K_\\Omega\\in C^\\infty(\\Omega\\times\\Omega)$ and $z\\mapsto K_\\Omega(z,z)$ is $C^\\infty$ on $\\Omega$. If $\\Omega$ is bounded, its Lebesgue measure satisfies $0<\\lambda_\\Omega(\\Omega)<\\infty$, and for every $z\\in\\Omega$,  $$K_\\Omega(z,z)\\ge\\frac{1}{\\lambda_\\Omega(\\Omega)}>0.$$  In particular, on a bounded domain $z\\mapsto\\log K_\\Omega(z,z)$ is $C^\\infty$.",
+        "strategy": "1. The Riesz-section identity gives separate holomorphy and conjugate symmetry. Compact evaluation bounds and Cauchy\u2013Schwarz make the kernel locally bounded, so locally bounded separate holomorphy gives joint holomorphy. Smooth composition with conjugation and the diagonal yields real C\u221e regularity. 2. For a bounded nonempty open \u03a9, an interior ball and a containing ball show its Lebesgue measure is finite and positive. The normalized constant function and diagonal extremal identity give $K_\u03a9(z,z)\u22651/\u03bb_\u03a9(\u03a9)$; the natural logarithm derivative and negative-power formulas give smoothness of the logarithmic potential.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed p. 2: $K_\\Omega$ holomorphic in $z$, antiholomorphic in $w$, and $K_\\Omega\\in C^\\infty(\\Omega\\times\\Omega)$"
+            },
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Exercise 5.2.4(a), printed p. 164: for bounded $U$, $K_U(z,\\bar z)>0$"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-bergman-kernel-biholomorphic-transformation",
+        "kind": "theorem",
+        "title": "Transformation law of the Bergman kernel under a biholomorphism",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "cor-complex-jacobian-determinant-is-multiplicative",
+          "cor-holomorphic-functions-in-several-variables-are-smooth",
+          "def-bergman-space-and-kernel",
+          "def-biholomorphic-map-several-complex-variables",
+          "def-bounded-linear-operator",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-holomorphic-map-and-complex-jacobian",
+          "lem-real-jacobian-determinant-of-a-complex-linear-map",
+          "rem-complex-euclidean-space-dictionary",
+          "prop-algebra-of-holomorphic-functions-in-several-variables",
+          "thm-bergman-reproducing-projection-and-extremal",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-chain-rule-for-holomorphic-maps-in-several-variables",
+          "thm-componentwise-holomorphy-in-several-complex-variables"
+        ],
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $m\\ge1$, let $\\Omega,\\Omega'\\subseteq\\mathbb C^m$ be domains, and let $F:\\Omega\\to\\Omega'$ be a biholomorphism. Write $J_F(z):=\\det_{\\mathbb C}DF(z)$. Then $J_F(z)\\ne0$ for every $z\\in\\Omega$, and  $$K_\\Omega(z,w)=J_F(z)\\,K_{\\Omega'}(F(z),F(w))\\,\\overline{J_F(w)}\\qquad(z,w\\in\\Omega).$$  The pullback $U_F:A^2(\\Omega')\\to A^2(\\Omega)$, defined on the unique holomorphic representatives by $U_Fg:=(g\\circ F)J_F$, is a unitary isomorphism (a surjective linear isometry), with  $$U_F^*K_\\Omega(\\cdot,z)=\\overline{J_F(z)}K_{\\Omega'}(\\cdot,F(z)).$$",
+        "strategy": "Prove the weighted pullback is a unitary map by real change of variables and the complex Jacobian identity; use reproducing and adjoint identities to derive the kernel law.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 2\u20133, display (1.2): $K_\\Omega(z,w)=K_D(F(z),F(w))\\operatorname{Jac}F(z)\\overline{\\operatorname{Jac}F(w)}$"
+            },
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Exercise 5.2.7, printed p. 164: the transformation law under a biholomorphism"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-bergman-metric-bounded-domain",
+        "kind": "definition",
+        "title": "The Bergman metric form on a bounded domain",
+        "deps": [
+          "def-bergman-space-and-kernel",
+          "def-countable-choice",
+          "def-levi-form-and-strict-plurisubharmonicity",
+          "lem-bergman-kernel-smoothness-and-positive-diagonal"
+        ],
+        "justified_by": [],
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), let $m\\ge1$, and let $\\Omega\\subseteq\\mathbb C^m$\nbe a bounded domain, meaning a nonempty connected open set. Use the\nfirst-variable-linear Bergman kernel $K_\\Omega$ of\n[[def-bergman-space-and-kernel]]. By\n[[lem-bergman-kernel-smoothness-and-positive-diagonal]],\n$$u_\\Omega(z):=\\log K_\\Omega(z,z)$$\nis a real-valued $C^\\infty$ function on $\\Omega$.\n\nUsing the one-based coordinate aliases for the library's zero-based\ncoordinates from [[def-levi-form-and-strict-plurisubharmonicity]], define the\n**Bergman metric form** at $z\\in\\Omega$ by the Hermitian form\n$$g_\\Omega(z)(X,Y):=\\sum_{j,k=1}^m\\frac{\\partial^2 u_\\Omega}{\\partial z_j\\partial\\overline z_k}(z)X_j\\overline{Y_k},\\qquad X,Y\\in\\mathbb C^m.$$\nIts associated quadratic form is\n$$B^2_\\Omega(z;X):=g_\\Omega(z)(X,X),$$\nthe Levi form of $u_\\Omega$ at $z$; write its matrix as\n$g_\\Omega(z)=(g_{j\\bar k}(z))$. The pair $(\\Omega,g_\\Omega)$ is the Bergman\n(pseudo-)metric. This definition does not assert positive definiteness; the\nseparate positivity theorem on this page proves it for bounded domains.",
+        "strategy": "Define the Hermitian form as the Levi form of the smooth real potential log K_\u03a9(z,z), whose smoothness and positive diagonal are supplied by the preceding lemma. The definition permits a pseudo-metric; positive definiteness is established separately.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed p. 4 (PDF p. 3): definition of B\u00b2_\u03a9(z;X) as the Levi form of log K_\u03a9(z,z), with its displayed coordinate expression. The surrounding \u00a71 assumes bounded domains; the local smoothness and positivity supplier establishes that log K_\u03a9(z,z) is defined and smooth for every bounded domain in this library's conventions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-complex-hessian-domination-at-a-common-minimum",
+        "kind": "lemma",
+        "title": "The complex Hessian of a $C^2$ function dominates that of a minorant at a common minimum",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-levi-form-and-strict-plurisubharmonicity",
+          "def-wirtinger-operators-in-several-complex-variables",
+          "lem-negative-semidefinite-hessian-at-an-interior-local-maximum",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-continuous-partial-derivatives-imply-total-differentiability"
+        ],
+        "statement": "Let $m\\ge1$, let $U\\subseteq\\mathbb C^m$ be open, let $u,v\\in C^2(U,\\mathbb R)$, and let $a\\in U$. If $u\\ge v$ on a neighbourhood of $a$ and $u(a)=v(a)$, then for every $X\\in\\mathbb C^m$\\n\\n$$\\sum_{j,k=1}^m\\frac{\\partial^2u}{\\partial z_j\\partial\\overline z_k}(a)X_j\\overline{X_k}\\ \\ge\\ \\sum_{j,k=1}^m\\frac{\\partial^2v}{\\partial z_j\\partial\\overline z_k}(a)X_j\\overline{X_k}.$$\\n\\nHere $C^2$ is interpreted in the real coordinates of [[rem-complex-euclidean-space-dictionary]], and the one-based complex-coordinate aliases and Wirtinger derivatives are those of [[def-levi-form-and-strict-plurisubharmonicity]].",
+        "strategy": "Put $w=u-v$. For $X=0$ the claim is immediate. For $X\\ne0$, restrict $w$ to the affine complex line $\\Phi(\\lambda)=w(a+\\lambda X)$ on a small disc about $0$. The common-minimum hypothesis makes $-\\Phi$ have a local maximum, so the real Hessian test gives $\\Phi_{ss}(0)+\\Phi_{tt}(0)\\ge0$. The Wirtinger definitions, the chain rule, and equality of mixed partials give $$\\Phi_{ss}(0)+\\Phi_{tt}(0)=4\\sum_{j,k}w_{z_j\\bar z_k}(a)X_j\\overline{X_k},$$ which is the claimed comparison. No plurisubharmonicity assumption is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a72.4, Proposition 2.4.9 (PDF p. 85): the proof restricts a C^2 function to affine complex lines and identifies the line Laplacian with the Levi form; the common-minimum comparison is proved locally here from the real Hessian maximum test."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-bergman-metric-positivity-and-biholomorphic-invariance",
+        "kind": "theorem",
+        "title": "The Bergman metric is positive definite on bounded domains and biholomorphically invariant",
+        "deps": [
+          "cor-holomorphic-functions-in-several-variables-are-smooth",
+          "def-bergman-metric-bounded-domain",
+          "def-bergman-space-and-kernel",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-holomorphic-function-in-several-complex-variables",
+          "def-holomorphic-map-and-complex-jacobian",
+          "def-levi-form-and-strict-plurisubharmonicity",
+          "def-wirtinger-operators-in-several-complex-variables",
+          "lem-bergman-evaluation-bound-on-compact-subsets",
+          "lem-bergman-kernel-smoothness-and-positive-diagonal",
+          "lem-complex-hessian-domination-at-a-common-minimum",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-bergman-basis-expansion-and-closedness",
+          "thm-bergman-kernel-biholomorphic-transformation",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-chain-rule-for-holomorphic-maps-in-several-variables",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and let $m\\ge1$. Let $\\Omega\\subseteq\\mathbb C^m$ be a bounded domain with Bergman kernel $K_\\Omega$, Bergman metric form $g_\\Omega$, and quadratic form $B^2_\\Omega(z;X)=g_\\Omega(z)(X,X)$ as in [[def-bergman-metric-bounded-domain]], and use the one-based coordinate aliases of [[def-levi-form-and-strict-plurisubharmonicity]].\n\n1. For every $z\\in\\Omega$ and every $X\\in\\mathbb C^m\\setminus\\{0\\}$,\n   $$B^2_\\Omega(z;X)=\\frac{1}{K_\\Omega(z,z)}\\sup\\bigl\\{|\\partial_Xf(z)|^2:\\ f\\in A^2(\\Omega),\\ \\|f\\|_{L^2}\\le1,\\ f(z)=0\\bigr\\},$$\n   where $\\partial_Xf=\\sum_{j=1}^mX_j\\frac{\\partial f}{\\partial z_j}$. The supremum is finite, positive, and attained. In particular $B^2_\\Omega(z;X)>0$, so the Hermitian form $g_\\Omega(z)$ is positive definite.\n\n2. If $F:\\Omega\\to\\Omega'$ is a biholomorphism of bounded domains, then for all $z\\in\\Omega$ and all $X,Y\\in\\mathbb C^m$,\n   $$g_\\Omega(z)(X,Y)=g_{\\Omega'}(F(z))\\bigl(DF(z)X,\\,DF(z)Y\\bigr).$$\n   Equivalently, $B^2_\\Omega(z;X)=B^2_{\\Omega'}(F(z);DF(z)X)$ for every $X$.",
+        "strategy": "Part 1: the reduced subspace H'={f(z)=0} carries the Riesz representer h_zeta of evaluation and the reduced kernel E=K(zeta,zeta)-|K(z,zeta)|^2/K(z,z); the Hessian-domination lemma bounds the derivative functional by L_E, an explicit second-order computation gives L_E=K(z,z)B^2, and a Cauchy argument with g_tau=h_{z+tauX}/tau identifies the Riesz representer of f->d_Xf(z), giving the supremum identity. Part 2: the unitary pullback U_F and the chain rule transport the supremum identity along a biholomorphism; the Hermitian version follows by polarization.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 4\u20135, Theorem 1.1 and its proof: $B_\\Omega(z;X)=\\frac1{K_\\Omega(z,z)}\\sup\\{|f_X(z)|:f\\in H^2,\\|f\\|\\le1,f(z)=0\\}$ and strict positivity; printed p. 5: $B_\\Omega(z;X)=B_D(F(z);F'(z)X)$"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-bergman-determinant-over-kernel-invariant",
+        "kind": "lemma",
+        "title": "$\\det g_\\Omega/K_\\Omega$ is a biholomorphic invariant of the Bergman geometry",
+        "deps": [
+          "def-bergman-metric-bounded-domain",
+          "def-countable-choice",
+          "def-determinant-of-a-square-matrix",
+          "def-levi-form-and-strict-plurisubharmonicity",
+          "def-matrices-over-a-commutative-ring",
+          "def-ring-matrix-product-identity-and-transpose",
+          "lem-bergman-kernel-smoothness-and-positive-diagonal",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-bergman-kernel-biholomorphic-transformation",
+          "thm-bergman-metric-positivity-and-biholomorphic-invariance",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-transpose"
+        ],
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\Omega,\\Omega'\\subseteq\\mathbb C^m$ be bounded domains, let $F:\\Omega\\to\\Omega'$ be a biholomorphism with complex Jacobian $DF(z)$, and let $g_\\Omega(z)$ be the matrix of the Bergman metric form in the one-based coordinate aliases of [[def-levi-form-and-strict-plurisubharmonicity]]. Then, for every $z\\in\\Omega$,\n\n$$\\det g_\\Omega(z)=|\\det DF(z)|^2\\det g_{\\Omega'}(F(z)),\\qquad K_\\Omega(z,z)=|\\det DF(z)|^2K_{\\Omega'}(F(z),F(z)),$$\n\nand consequently\n\n$$\\frac{\\det g_\\Omega(z)}{K_\\Omega(z,z)}=\\frac{\\det g_{\\Omega'}(F(z))}{K_{\\Omega'}(F(z),F(z))}\\qquad(z\\in\\Omega).$$\n\nIf each quotient is constant on its domain, then the two constants are equal. (For $m\\ge2$ these quotients are the invariants that distinguish the ball metric from the polydisc metric, but constancy is not claimed here.)",
+        "strategy": "The metric invariance theorem gives g_Omega(z)=conj(J)^T g_Omega'(F(z))J in matrices; conjugation commutes with the Leibniz determinant and transposition is determinant-neutral, so multiplicativity yields det g_Omega=|det J|^2 det g_Omega'. The kernel law gives the diagonal identity, and division yields the invariant quotient. The unused scaffold edges to the generic determinant definition were supplemented by the transpose, multiplicativity and conjugation suppliers actually used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 2\u20135: the transformation laws (1.2) and $B_\\Omega(z;X)=B_D(F(z);F'(z)X)$ from which the determinant quotient is read off"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-szego-kernel-smooth-bounded-domain",
+        "kind": "definition",
+        "title": "The Hardy boundary space, Szeg\u0151 projection and Szeg\u0151 kernel on a smoothly bounded domain",
+        "deps": [
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-holomorphic-function-in-several-complex-variables",
+          "def-hilbert-orthogonal-projection",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "def-complex-l-two-inner-product",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $m\\ge1$, let $\\Omega\\subset\\mathbb C^m$ be a nonempty bounded connected open set with $C^1$ boundary ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]), let $dS$ be its boundary surface measure ([[def-surface-integral-on-a-compact-c-one-hypersurface]]), and fix a normalization $\\sigma=c\\,dS$ with $c>0$. Give $L^2(\\partial\\Omega,\\sigma;\\mathbb C)$ the first-variable-linear pairing from [[def-complex-l-two-inner-product]]. For $f\\in\\mathcal O(\\Omega)\\cap C(\\overline\\Omega)$, its boundary trace $\\operatorname{tr}_\\sigma f:=[f|_{\\partial\\Omega}]$ is an $L^2$ class because $\\partial\\Omega$ is compact and $\\sigma$ is finite. Set\n\n$$\\mathcal T(\\Omega,\\sigma):=\\{\\operatorname{tr}_\\sigma f:f\\in\\mathcal O(\\Omega)\\cap C(\\overline\\Omega)\\},\\qquad H^2(\\partial\\Omega,\\sigma):=\\overline{\\mathcal T(\\Omega,\\sigma)}^{\\,L^2(\\sigma)}.$$\n\nThe space $\\mathcal T(\\Omega,\\sigma)$ is linear, and $H^2(\\partial\\Omega,\\sigma)$ is a closed linear subspace of the Hilbert space $L^2(\\partial\\Omega,\\sigma;\\mathbb C)$ by [F1]. The **Szeg\u0151 projection** is the orthogonal projection\n\n$$P_\\sigma:L^2(\\partial\\Omega,\\sigma;\\mathbb C)\\longrightarrow H^2(\\partial\\Omega,\\sigma),$$\n\nwhich exists by [F2].\n\nCall $(\\Omega,\\sigma)$ **Szeg\u0151-regular** if, for every $w\\in\\Omega$, the rule $\\operatorname{tr}_\\sigma f\\mapsto f(w)$ is well-defined and bounded on $\\mathcal T(\\Omega,\\sigma)$ in the $L^2$ norm, and its unique continuous extension $E_w:H^2(\\partial\\Omega,\\sigma)\\to\\mathbb C$ has the property that $z\\mapsto E_z(h)$ is holomorphic on $\\Omega$ for every $h\\in H^2(\\partial\\Omega,\\sigma)$. Boundedness and density make each $E_w$ unique. By [F3], there is a unique $S_w\\in H^2(\\partial\\Omega,\\sigma)$ such that\n\n$$E_w(h)=\\langle h,S_w\\rangle_{L^2(\\sigma)}\\qquad(h\\in H^2(\\partial\\Omega,\\sigma)).$$\n\nFor a Szeg\u0151-regular pair define its **Szeg\u0151 kernel** by $S_\\sigma(z,w):=E_z(S_w)$. Then $E_w(h)=\\langle h,S_w\\rangle$ is the reproducing identity, $S_\\sigma(z,w)=\\langle S_w,S_z\\rangle$, and conjugate symmetry of the inner product gives $S_\\sigma(w,z)=\\overline{S_\\sigma(z,w)}$. The regularity condition makes the kernel holomorphic in $z$; conjugate symmetry makes it antiholomorphic in $w$. The $\\mathrm{AC}_\\omega$ assumption is used through the Hilbert-space, projection and Riesz suppliers in [F1]\u2013[F3]; no stronger choice principle is asserted. No Szeg\u0151 construction is claimed for boundaries that are not $C^1$ hypersurfaces, including the polydisc when $m\\ge2$.",
+        "strategy": "The proof verifies the closed-subspace Hilbert structure, the orthogonal projection, and the Riesz representers under AC\u03c9. The explicit Szeg\u0151-regularity condition supplies bounded evaluations and holomorphic dependence; no general-domain trace theorem is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.3, printed pp. 165\u2013166 (PDF pp. 164\u2013165): closure of the boundary traces of holomorphic functions continuous on the closure, the Hardy space, evaluation through the Poisson integral, and the Szeg\u0151 kernel. The text explicitly presents an overview without proving the details; this item states the bounded-evaluation and holomorphic-extension conditions it needs."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-monomial-integrals-over-disc-ball-and-polydisc",
+        "kind": "lemma",
+        "title": "Weighted monomial integrals and monomial norms for the disc, ball and polydisc",
+        "deps": [
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-borel-sigma-algebra",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-complex-integer-powers",
+          "def-countable-choice",
+          "def-factorial-and-falling-factorial",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-measurable-function-between-measurable-spaces",
+          "def-real-beta-integral",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "cor-real-gamma-positive-integer-values",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-induction-principle",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "thm-nth-roots-exist",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-real-beta-gamma-identity",
+          "thm-real-beta-integral-convergence",
+          "thm-substitution-for-improper-integrals",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $m\\ge1$, and let $\\lambda_{2m}$ be Lebesgue measure under $\\mathbb C^m\\cong\\mathbb R^{2m}$. For every $\\alpha\\in\\mathbb N^m$ and every integer $s\\ge0$,\n\n$$\\int_{\\mathbb B^m}|z^\\alpha|^2(1-|z|^2)^s\\,d\\lambda_{2m}(z)=\\frac{\\pi^m\\alpha!\\,s!}{(m+s+|\\alpha|)!}.$$\n\nIn particular,\n\n$$\\int_{\\mathbb B^m}|z^\\alpha|^2\\,d\\lambda_{2m}(z)=\\frac{\\pi^m\\alpha!}{(m+|\\alpha|)!},\\qquad \\lambda_{2m}(\\mathbb B^m)=\\frac{\\pi^m}{m!}.$$\n\nFor the unit polydisc and the one-dimensional disc,\n\n$$\\int_{\\mathbb D^m}|z^\\alpha|^2\\,d\\lambda_{2m}(z)=\\frac{\\pi^m}{\\prod_{j<m}(\\alpha_j+1)},\\qquad \\lambda_{2m}(\\mathbb D^m)=\\pi^m,$$\n\nand for every integer $k\\ge0$,\n\n$$\\int_{\\mathbb D}|z|^{2k}\\,d\\lambda_2(z)=\\frac{\\pi}{k+1}.$$",
+        "strategy": "For the weighted disc integral, use polar coordinates and the substitution $t=(r/\\rho)^2$, then evaluate $B(k+1,s+1)$ through the Beta-Gamma identity and integer Gamma values. For the ball, use the one-dimensional formula as the base case and slice $\\mathbb B^m$ into a disc over $\\mathbb B^{m-1}$; Tonelli, product-Lebesgue agreement and induction give the weighted formula. For the polydisc, Tonelli factors the integral into the one-variable disc integrals. The unweighted formulas and volumes follow by setting exponents and weights to zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Exercise 5.2.9, printed p. 164 (PDF p. 164): asks for the complete orthogonal monomial system on the ball and points to coordinatewise polar integration; the exact norm constant is said to require the Beta function, which is evaluated locally here."
+            },
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed p. 3 (PDF p. 3): records the unit-ball volume $\\lambda(B)=\\pi^m/m!$ and poses the orthonormal monomial system as an exercise; the volume and monomial integrals are derived locally here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-monomial-bases-of-bergman-spaces-of-disc-ball-and-polydisc",
+        "kind": "lemma",
+        "title": "Monomials form complete orthogonal systems of the Bergman spaces of the disc, the ball and the polydisc",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-continuous-functions-are-borel-measurable",
+          "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-bergman-space-and-kernel",
+          "def-borel-sigma-algebra",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-integer-powers",
+          "def-countable-choice",
+          "def-holomorphic-function-in-several-complex-variables",
+          "def-measure-preserving-transformation-and-system",
+          "def-metric-compactness",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-monomial-integrals-over-disc-ball-and-polydisc",
+          "prop-algebra-of-holomorphic-functions-in-several-variables",
+          "prop-holomorphic-functions-are-continuous-and-separately-holomorphic",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-bergman-basis-expansion-and-closedness",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "thm-dominated-convergence",
+          "thm-heine-borel-rn",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "thm-power-series-expansion-in-several-complex-variables"
+        ],
+        "statement": "Assume AC\u03c9 and m\u22651. The monomials are pairwise orthogonal in A\u00b2(D), A\u00b2(B\u1d50), and A\u00b2(D\u1d50), with squared norms \u03c0/(k+1), \u03c0\u1d50\u03b1!/(m+|\u03b1|)!, and \u03c0\u1d50/\u220f_{j<m}(\u03b1\u2c7c+1), respectively; their normalized families are complete orthonormal systems. Equivalently, only the zero function in each space is orthogonal to every monomial.",
+        "strategy": "Orthogonality: for distinct multi-indices, rotate a coordinate by a root of \u22121 chosen from the nonzero exponent difference; this preserves the domain, each dilate, and Lebesgue measure, so the off-diagonal moment equals its negative. Completeness: on each compact dilate, cover by finitely many centered polydiscs compactly inside the domain, giving uniform convergence of common Taylor box sums; integrate those sums against each conjugate monomial on a smaller dilate, use rotation to kill off-diagonal moments, then use dominated convergence as the dilates exhaust the domain to force every Taylor coefficient to vanish.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Exercise 5.2.9 (printed p. 164): asks for a complete orthonormal monomial system in A\u00b2(B\u207f), gives the coordinatewise polar-integral hint, and notes that the exact norm constants require the Beta function. The proof derives the disc and polydisc cases from the preceding monomial-integral lemma and supplies completeness for all three domains."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sphere-and-torus-monomial-integrals",
+        "kind": "lemma",
+        "title": "Monomial integrals on the sphere and orthonormality on the distinguished torus",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-continuous-functions-are-borel-measurable",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-borel-sigma-algebra",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-integer-powers",
+          "def-countable-choice",
+          "def-measure-preserving-transformation-and-system",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-monomial-integrals-over-disc-ball-and-polydisc",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-numbers-form-a-field",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-induction-principle",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $m\\ge1$, let $\\sigma$ be the polar surface measure on $S^{2m-1}\\subseteq\\mathbb C^m\\cong\\mathbb R^{2m}$, and set $\\sigma_1:=\\sigma/\\sigma(S^{2m-1})$. For all multi-indices $\\alpha,\\beta\\in\\mathbb N^m$, $$\\int_{S^{2m-1}}\\zeta^\\alpha\\overline{\\zeta^\\beta}\\,d\\sigma_1=\\delta_{\\alpha\\beta}\\frac{(m-1)!\\,\\alpha!}{(m-1+|\\alpha|)!},\\qquad \\int_{S^{2m-1}}|\\zeta^\\alpha|^2\\,d\\sigma=\\frac{2\\pi^m\\alpha!}{(m-1+|\\alpha|)!},$$ where $\\delta_{\\alpha\\beta}=1$ if $\\alpha=\\beta$ and $0$ otherwise. On the distinguished torus $\\mathbb T^m$ with product normalized Haar measure $m_{\\mathbb T^m}$, $$\\int_{\\mathbb T^m}\\zeta^\\alpha\\overline{\\zeta^\\beta}\\,dm_{\\mathbb T^m}=\\delta_{\\alpha\\beta}$.",
+        "strategy": "Apply polar coordinates to the unit ball and to the diagonal monomial integrand. The preceding ball-moment lemma gives the diagonal spherical moment, and polar coordinates applied to the ball indicator give the total polar surface mass. For off-diagonal terms, coordinate rotations multiply the monomial product by a phase chosen to be -1; on the sphere, invariance follows from the conical definition of polar surface measure and real linear change of variables, while on the distinguished torus it follows from normalized Haar translation invariance. All uses of choice are through the declared AC\u03c9 suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.3, Exercise 5.3.1, printed p. 165 (PDF p. 164): asks for monomials to be a complete orthogonal system in the ball Hardy space. The source gives no proof; this item proves the spherical moments and orthogonality but does not assert completeness."
+            },
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed p. 3 (PDF p. 3): records the unit-ball volume $\\lambda(B)=\\pi^m/m!$ and poses orthonormal monomials for the interior Bergman space as an exercise. The volume is independently obtained from the preceding local ball integral; this source does not prove the sphere moment formula."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-disc-hardy-traces-and-szego-reproducing",
+        "kind": "lemma",
+        "title": "The disc trace space is the Hardy boundary space and the Szeg\u0151 family reproduces $H^2$",
+        "deps": [
+          "cor-complex-differentiability-implies-continuity",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "cor-hardy-one-cauchy-representation",
+          "def-analytic-hardy-space-disc",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-complex-metric-convergence-and-continuity",
+          "def-countable-choice",
+          "def-szego-kernel-smooth-bounded-domain",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-hardy-radial-means-are-monotone",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-complex-plane-is-complete",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "thm-extreme-value-metric",
+          "thm-fatou-boundary-theorem-analytic-hardy-spaces",
+          "thm-fatou-lemma",
+          "thm-locally-uniform-limit-of-holomorphic-functions-in-several-variables",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\mathbb D\\subset\\mathbb C$ be the unit disc and $m$ normalized Haar measure on $\\mathbb T=\\partial\\mathbb D$. The traces of functions holomorphic on a neighbourhood of $\\overline{\\mathbb D}$ are dense in $H^2(\\partial\\mathbb D,m)$, and the boundary-value range $\\{f^*:f\\in H^2(\\mathbb D)\\}$ is closed in $L^2(\\mathbb T,m)$; $f\\mapsto f^*$ is an isometric isomorphism $H^2(\\mathbb D)\\to H^2(\\partial\\mathbb D,m)$. For every $w\\in\\mathbb D$, evaluation is bounded, $S_w(\\zeta):=1/(1-\\overline w\\zeta)$ belongs to $H^2(\\partial\\mathbb D,m)$, and $f(w)=\\int_{\\mathbb T}f^*(\\zeta)\\overline{S_w(\\zeta)}\\,dm(\\zeta)$ with $|f(w)|\\le\\|f\\|_{H^2}/(1-|w|)$. Consequently $(\\mathbb D,m)$ is Szeg\u0151-regular with kernel $S(z,w)=1/(1-z\\overline w)$.",
+        "strategy": "Fatou's theorem supplies the isometric boundary map and radial convergence, while holomorphic dilates give density. To prove the boundary-value range closed, Cauchy representation and Cauchy\u2013Schwarz make an L\u00b2-convergent trace sequence locally uniformly Cauchy; its holomorphic limit belongs to H\u00b2 and convergence in H\u00b2 follows from Fatou's lemma, identifying the limit trace. For the kernel, s_w(z)=1/(1-\\bar w z) is holomorphic on a neighbourhood of the closed disc; normalized-Haar measure gives ||S_w||\u2082\u2264(1-|w|)\u207b\u00b9, and the H\u00b9 Cauchy representation identifies the unique Riesz representer. AC\u03c9 is carried through the named Hardy, torus, L\u00b2-Hilbert and Riesz/Szeg\u0151 interfaces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Example 5.2.3, printed pp. 162\u2013163: Cauchy's formula for functions continuous on the closed disc and its conversion to the Szeg\u0151 integrand against arc length; \u00a75.3, printed pp. 165\u2013166: the boundary-trace closure, Riesz evaluation construction, and Example 5.3.1's arc-length kernel $1/(2\\pi(1-z\\bar\\zeta))$. The source explicitly omits details; the $H^2$ trace-range, closedness, boundedness and regularity arguments are proved locally here. Since $dm=ds/(2\\pi)$, the normalized-Haar kernel is $1/(1-z\\bar w)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-ball-hardy-traces-and-evaluation-bound",
+        "kind": "lemma",
+        "title": "Polynomial traces, monomial basis and bounded evaluation for the ball Hardy space",
+        "deps": [
+          "cor-cauchy-estimates-taylor-coefficients",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "cor-uniqueness-of-complex-power-series-coefficients",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-complex-l-two-inner-product",
+          "def-countable-choice",
+          "def-factorial-and-falling-factorial",
+          "def-holomorphic-function-in-several-complex-variables",
+          "def-integer-power",
+          "def-metric-ball",
+          "def-metric-compactness",
+          "def-metric-space",
+          "def-metric-topology",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-path-connected",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-szego-kernel-smooth-bounded-domain",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-derivative-of-a-power",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-sphere-and-torus-monomial-integrals",
+          "prop-holomorphic-functions-are-continuous-and-separately-holomorphic",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-absolute-convergence-of-complex-series",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-euclidean-implicit-function-theorem",
+          "thm-extreme-value-metric",
+          "thm-geometric-series",
+          "thm-heine-cantor-metric",
+          "thm-locally-uniform-limit-of-holomorphic-functions-in-several-variables",
+          "thm-metric-open-set-algebra",
+          "thm-multinomial-theorem",
+          "thm-path-connected-implies-connected",
+          "thm-power-series-expansion-in-several-complex-variables",
+          "thm-ratio-test",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-taylor-expansion-holomorphic-function"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. Let $m\\ge1$, let $\\mathbb B^m\\subseteq\\mathbb C^m$ be the unit ball, $S=\\partial\\mathbb B^m$, and $\\sigma$ the normalized polar surface measure on $S$.\n1. Every function holomorphic on a neighbourhood of the closed ball is the uniform limit there of its Taylor polynomials at $0$. More generally, polynomial traces are dense in the trace subspace and hence in $H^2(S,\\sigma)$.\n2. For every $\\alpha\\in\\mathbb N^m$, $\\|\\zeta^\\alpha\\|^2=(m-1)!\\alpha!/(m-1+|\\alpha|)!$, and the normalized monomial traces form a complete orthonormal system of $H^2(S,\\sigma)$.\n3. For every $0<r<1$, set $C_r=\\left(\\sum_{k\\ge0}\\frac{(m-1+k)!}{(m-1)!k!}r^{2k}\\right)^{1/2}<\\infty$. Every polynomial $p$ satisfies $\\sup_{|z|\\le r}|p(z)|\\le C_r\\|p\\|_{L^2(S,\\sigma)}$.\n4. Every element of $H^2(S,\\sigma)$ has a unique holomorphic extension to $\\mathbb B^m$, given by any locally uniform limit of trace-generators whose boundary traces converge in $L^2(S,\\sigma)$. Evaluation is well-defined and bounded on the trace subspace, has a unique Riesz representer on $H^2$, and $(\\mathbb B^m,\\sigma)$ is Szeg\u0151-regular.",
+        "strategy": "1. Cover the closed ball by finitely many balls whose doubled closed balls lie in the holomorphy neighbourhood, then apply one-variable Cauchy coefficient estimates to $t\\mapsto g(tz)$ to obtain uniform convergence of homogeneous Taylor polynomials. 2. Approximate every function continuous on the closed ball by radial dilations and then polynomials; combine this density with the sphere moments for the complete orthonormal system. 3. Apply finite Cauchy\u2013Schwarz, regroup by degree with the multinomial theorem, and use the exact coefficient series whose successive ratio tends to $r^2<1$. 4. The evaluation bound passes from polynomial approximants to all trace-generators and makes each trace-convergent sequence locally uniformly Cauchy; its holomorphic limit is the unique extension, and Riesz represents each bounded evaluation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.3, printed pp. 165\u2013166: the closure of the restrictions as the Hardy space, the Poisson integral as extension, and Exercises 5.3.1/5.3.3 for the monomial system and the ball Szeg\u0151 kernel"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-complex-multinomial-theorem",
+        "kind": "lemma",
+        "title": "The multinomial theorem for finitely many complex variables",
+        "deps": [
+          "def-canonical-natural",
+          "def-complex-integer-powers",
+          "def-factorial-and-falling-factorial",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-monoid-finite-product",
+          "def-multinomial-coefficient",
+          "def-nat-addition",
+          "def-nat-multiplication",
+          "def-nat-order",
+          "def-semigroup-and-monoid",
+          "lem-binomial-theorem-over-complex-numbers",
+          "lem-nat-mult-cancellative",
+          "lem-power-laws",
+          "thm-binomial-closed-formula",
+          "thm-complex-numbers-form-a-field",
+          "thm-induction-principle",
+          "thm-multinomial-theorem",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "statement": "Let $m,n\\in\\mathbb N$, let $\\mathcal W(n,m)$ and $\\binom n\\alpha$ be as in [[def-multinomial-coefficient]], and let $z_0,\\ldots,z_{m-1}\\in\\mathbb C$. Write $\\iota_{\\mathbb C}:\\mathbb N\\to\\mathbb C$ for the canonical natural of [[def-canonical-natural]]. Then  $$\\left(\\sum_{i<m}z_i\\right)^n=\\sum_{\\alpha\\in\\mathcal W(n,m)}\\iota_{\\mathbb C}\\!\\left(\\binom n\\alpha\\right)\\prod_{i<m}z_i^{\\alpha_i}.$$  For every $\\alpha\\in\\mathcal W(n,m)$, the same coefficient satisfies $$\\iota_{\\mathbb C}\\!\\left(\\binom n\\alpha\\right)\\prod_{i<m}\\iota_{\\mathbb C}(\\alpha_i!)=\\iota_{\\mathbb C}(n!).$$ The sum on the right is the finite sum in the additive commutative monoid of $\\mathbb C$; the statement includes $m=0$ and $n=0$.",
+        "strategy": "Induct on the number of variables with the complex binomial theorem; identify coefficients using factorial formulas and canonical natural arithmetic, then reindex a finite sum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Richard P. Stanley, Enumerative Combinatorics, Volume 1, second edition",
+              "url": "https://math.mit.edu/~rstan/ec/ec1.pdf",
+              "locator": "\u00a71.2, printed pp. 26\u201327 (PDF pp. 26\u201327): multinomial coefficient factorial formula (1.23) and the multinomial theorem statement following (1.24), whose proof Stanley leaves to the reader."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-model-domain-bergman-and-szego-kernels",
+        "kind": "theorem",
+        "title": "Bergman kernels of the disc, ball and polydisc, and Szeg\u0151 kernels of the disc and ball",
+        "deps": [
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-bergman-space-and-kernel",
+          "def-binomial-coefficient",
+          "def-canonical-natural",
+          "def-complex-integer-powers",
+          "def-complex-series-power-series-and-absolute-convergence",
+          "def-countable-choice",
+          "def-factorial-and-falling-factorial",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-multinomial-coefficient",
+          "def-series",
+          "def-szego-kernel-smooth-bounded-domain",
+          "lem-ball-hardy-traces-and-evaluation-bound",
+          "lem-cauchy-product-of-absolutely-convergent-complex-series",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-complex-multinomial-theorem",
+          "lem-disc-hardy-traces-and-szego-reproducing",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-geometric-sequence-null",
+          "lem-monomial-bases-of-bergman-spaces-of-disc-ball-and-polydisc",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "lem-of-naturals-positive",
+          "lem-power-laws",
+          "prop-standard-coordinate-inner-products",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-absolute-convergence-of-complex-series",
+          "thm-bergman-basis-expansion-and-closedness",
+          "thm-bergman-reproducing-projection-and-extremal",
+          "thm-binomial-closed-formula",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-complex-numbers-form-a-field",
+          "thm-geometric-series",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-induction-principle",
+          "thm-pascals-rule"
+        ],
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), let $m\\ge1$, and use Lebesgue measure on $\\mathbb C^m\\cong\\mathbb R^{2m}$ with the first-variable-linear pairing. Write $\\langle z,w\\rangle:=\\sum_{j<m}z_j\\overline{w_j}$ for the standard Hermitian inner product. Then\n\n$$K_{\\mathbb D}(z,w)=\\frac{1}{\\pi(1-z\\overline w)^2},\\qquad K_{\\mathbb D^m}(z,w)=\\frac{1}{\\pi^m}\\prod_{j<m}\\frac{1}{(1-z_j\\overline{w_j})^2},\\qquad K_{\\mathbb B^m}(z,w)=\\frac{m!}{\\pi^m(1-\\langle z,w\\rangle)^{m+1}}.$$\n\nLet $\\mu_{\\mathbb T}$ be normalized Haar measure on $\\mathbb T=\\partial\\mathbb D$, and let $\\sigma_m$ be normalized polar surface measure on $S^{2m-1}=\\partial\\mathbb B^m$. The pairs $(\\mathbb D,\\mu_{\\mathbb T})$ and $(\\mathbb B^m,\\sigma_m)$ are Szeg\u0151-regular, with kernels\n\n$$S_{\\mathbb D}(z,w)=\\frac{1}{1-z\\overline w},\\qquad S_{\\mathbb B^m}(z,w)=\\frac{1}{(1-\\langle z,w\\rangle)^m}.$$\n\nEach displayed Bergman kernel reproduces the corresponding $A^2$ space and is the unique such kernel. Each displayed Szeg\u0151 kernel reproduces the corresponding boundary Hardy space and is its unique Riesz kernel. No smooth-boundary Szeg\u0151 construction is asserted for the polydisc.",
+        "strategy": "Use the complete Bergman monomial systems and exact Hardy boundary monomials. Prove the complex geometric series and its binomial coefficient generalization locally. Group the disc, polydisc and ball Bergman expansions by finite total-degree shells; use the complex multinomial coefficient and factorial identities for the ball. For the ball Szeg\u0151 kernel, expand the bounded-evaluation Riesz section in the complete boundary monomials, then evaluate its finite degree shells. The normalized-Haar disc Szeg\u0151 formula is supplied by the disc Hardy trace lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 2\u20134: the disc kernel via automorphism, the ball kernel, the complete orthonormal-system expansion, and the product formula on product domains. B\u0142ocki assumes bounded domains throughout \u00a71; all three model domains here are bounded."
+            },
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Example 5.2.3 and Exercises 5.2.8\u20135.2.10, printed pp. 162\u2013165; \u00a75.3, Example 5.3.1 and Exercise 5.3.3, printed pp. 165\u2013166. The exercises ask for the polydisc, ball, and ball Szeg\u0151 formulas without proofs; Example 5.3.1 uses arc-length measure."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-bergman-metric-determinants-of-ball-and-polydisc",
+        "kind": "lemma",
+        "title": "Determinants and kernel quotients of the model Bergman metrics",
+        "deps": [
+          "def-bergman-metric-bounded-domain",
+          "def-countable-choice",
+          "def-factorial-and-falling-factorial",
+          "def-matrix-minors-cofactors-and-adjugate",
+          "def-natural-logarithm",
+          "def-wirtinger-operators-in-several-complex-variables",
+          "lem-bergman-determinant-over-kernel-invariant",
+          "lem-bergman-kernel-smoothness-and-positive-diagonal",
+          "lem-determinant-rank-one-update-over-a-commutative-ring",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-logarithm-derivative-and-integral",
+          "thm-model-domain-bergman-and-szego-kernels",
+          "thm-natural-logarithm-laws"
+        ],
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), let $m\\ge1$, and use the one-based coordinate aliases of [[def-bergman-metric-bounded-domain]]. For the unit ball and the unit polydisc in $\\mathbb C^m$,\n\n$$\\det g_{\\mathbb B^m}(z)=\\frac{(m+1)^m}{(1-|z|^2)^{m+1}},\\qquad \\det g_{\\mathbb D^m}(z)=2^m\\prod_{j=1}^m\\frac{1}{(1-|z_j|^2)^2}.$$\n\nConsequently the invariant quotients are the constants\n\n$$\\frac{\\det g_{\\mathbb B^m}}{K_{\\mathbb B^m}}=\\frac{(m+1)^m\\pi^m}{m!},\\qquad \\frac{\\det g_{\\mathbb D^m}}{K_{\\mathbb D^m}}=2^m\\pi^m,$$\n\nand these constants are distinct for every $m\\ge2$.",
+        "strategy": "Differentiate the explicit model kernels: the ball metric matrix is (m+1)((1-|z|^2)I+zbar z^T)/(1-|z|^2)^2 and the polydisc metric matrix is diagonal with entries 2/(1-|z_j|^2)^2. The ball determinant uses the rank-one update with adj((1-|z|^2)I)=(1-|z|^2)^{m-1}I; the polydisc determinant is the diagonal product. Dividing by the model kernel diagonals gives the invariant constants, compared by pairing factors of (m+1)^m/(2^m m!).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 3\u20136: the model kernels and their Bergman metrics, with the curvature computation along a complex line"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-poincare-ball-and-polydisc-not-biholomorphic",
+        "kind": "theorem",
+        "title": "Poincar\u00e9's theorem: the ball and the polydisc are not biholomorphic for $m\\ge2$",
+        "deps": [
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-biholomorphic-map-several-complex-variables",
+          "def-countable-choice",
+          "lem-bergman-determinant-over-kernel-invariant",
+          "lem-bergman-metric-determinants-of-ball-and-polydisc"
+        ],
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). For every $m\\ge2$ the unit ball $\\mathbb B^m$ and the unit polydisc $\\mathbb D^m$ in $\\mathbb C^m$ are not biholomorphic. (For $m=1$ both are the unit disc.)",
+        "strategy": "Suppose a biholomorphism existed. The invariant quotient det g/K of the previous lemma transports along it; the model-determinant lemma identifies the quotients with the constants (m+1)^m pi^m/m! and 2^m pi^m, which differ for m>=2. Contradiction. The m=1 coincidence is recorded. The scaffold's unused direct edges to the positivity theorem and model-kernel theorem were removed; both are consumed through the two level-9 suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a71.4 'Inequivalence of ball and polydisc', printed pp. 32\u201333: Theorem 1.4.4 (no proper holomorphic map $\\mathbb D^2\\to\\mathbb B^2$), the Poincar\u00e9/Cartan attribution, and the inequivalence statement"
+            },
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 2\u20135: the transformation law (1.2), the model kernels, and the invariance of the Bergman metric used to compare the two domains"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 1627,
+    "id": "bergman-and-szego-kernels-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "Bergman and Szeg\u0151 Kernels: Examples and Counterexamples",
+    "companion": "bergman-and-szego-kernels",
+    "requires": [
+      "bergman-and-szego-kernels"
+    ],
+    "items": [
+      {
+        "id": "ex-disc-monomial-bergman-basis-and-reproducing-check",
+        "kind": "example",
+        "title": "The disc Bergman kernel from its monomial basis, with a reproducing check",
+        "deps": [
+          "def-bergman-space-and-kernel",
+          "def-complex-integer-powers",
+          "def-countable-choice",
+          "lem-monomial-bases-of-bergman-spaces-of-disc-ball-and-polydisc",
+          "lem-monomial-integrals-over-disc-ball-and-polydisc",
+          "thm-bergman-basis-expansion-and-closedness",
+          "thm-bergman-reproducing-projection-and-extremal",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-model-domain-bergman-and-szego-kernels"
+        ],
+        "statement": "In $A^2(\\mathbb D)$ with Lebesgue area measure the functions\n$e_k(z)=\\sqrt{(k+1)/\\pi}\\,z^k$, $k\\ge0$, form a complete orthonormal system,\nand\n\n$$K_{\\mathbb D}(z,w)=\\sum_{k\\ge0}\\frac{k+1}{\\pi}z^k\\overline w^k=\\frac{1}{\\pi(1-z\\overline w)^2}.$$\n\nThe reproducing property is checked directly on the monomials: for every\n$k\\ge0$ and $w\\in\\mathbb D$,\n\n$$\\int_{\\mathbb D}e_k(z)\\overline{K_{\\mathbb D}(z,w)}\\,d\\lambda(z)=e_k(w).$$",
+        "strategy": "The monomial system and its exact norms are the monomial-basis suppliers; the complete-orthonormal-system expansion identifies the kernel series with the disc Bergman kernel and yields the displayed closed form. The reproducing integral is computed on the truncated Fourier sums of conj(K_D(.,w)) and passed to the limit by continuity of the pairing (Cauchy-Schwarz), giving e_k(w) for each monomial. No termwise-differentiation or geometric-series summation is needed; the corresponding scaffold dependencies were removed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Example 5.2.3 and Exercise 5.2.9, printed pp. 162\u2013164"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-ball-monomial-norms-and-model-kernels",
+        "kind": "example",
+        "title": "Ball monomial norms, Bergman and Szeg\u0151 kernels of the ball",
+        "deps": [
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-bergman-space-and-kernel",
+          "def-complex-integer-powers",
+          "def-complex-l-two-inner-product",
+          "def-countable-choice",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-factorial-and-falling-factorial",
+          "def-szego-kernel-smooth-bounded-domain",
+          "lem-ball-hardy-traces-and-evaluation-bound",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-monomial-bases-of-bergman-spaces-of-disc-ball-and-polydisc",
+          "lem-monomial-integrals-over-disc-ball-and-polydisc",
+          "lem-sphere-and-torus-monomial-integrals",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-model-domain-bergman-and-szego-kernels",
+          "rem-complex-euclidean-space-dictionary"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and let $m\\ge1$.\nFor $\\alpha\\in\\mathbb N^m$, use $|\\alpha|:=\\sum_{j<m}\\alpha_j$,\n$\\alpha!:=\\prod_{j<m}\\alpha_j!$, and $z^\\alpha:=\\prod_{j<m}z_j^{\\alpha_j}$.\nWrite $c_\\alpha:=\\frac{\\pi^m\\alpha!}{(m+|\\alpha|)!}$ and\n$e_\\alpha(z):=\\frac{z^\\alpha}{\\sqrt{c_\\alpha}}$.\nThe family $(e_\\alpha)_{\\alpha\\in\\mathbb N^m}$ is a complete orthonormal\nsystem of $A^2(\\mathbb B^m)$. With normalized polar surface measure $\\sigma_1$\non $S^{2m-1}=\\partial\\mathbb B^m$, put\n$w_\\alpha:=\\frac{(m-1)!\\alpha!}{(m-1+|\\alpha|)!}$ and\n$e^\\partial_\\alpha(\\zeta):=\\frac{\\zeta^\\alpha}{\\sqrt{w_\\alpha}}$.\nThe $e^\\partial_\\alpha$ form a complete orthonormal system in the ball Hardy\nspace $H^2(S^{2m-1},\\sigma_1)$. The corresponding kernels are\n$$K_{\\mathbb B^m}(z,w)=\\frac{m!}{\\pi^m(1-\\langle z,w\\rangle)^{m+1}},\\qquad S_{\\mathbb B^m}(z,w)=\\frac{1}{(1-\\langle z,w\\rangle)^m}.$$\nFor each $\\alpha$ their reproducing identities hold on $e_\\alpha$ and\n$e^\\partial_\\alpha$, respectively; completeness and bounded evaluation extend\nthese checks to the corresponding spaces.",
+        "strategy": "Substitute the exact monomial norms and sum the multinomial series $\\sum_\\alpha\\frac{(m+|\\alpha|)!}{m!\\alpha!}\\zeta^\\alpha=(1-\\langle\\zeta,\\cdot\\rangle)^{-(m+1)}$ and $\\sum_\\alpha\\frac{(m-1+|\\alpha|)!}{(m-1)!\\alpha!}\\zeta^\\alpha=(1-\\cdot)^{-m}$; the termwise reproducing checks use the monomial integral values and the expansion lemma. The example displays the two boundary normalizations side by side.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Exercises 5.2.9 and 5.2.10, printed pp. 164\u2013165; \u00a75.3, Exercises 5.3.1 and 5.3.3, printed pp. 165\u2013166"
+            },
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed p. 3: $K_B(z,w)=\\frac{n!}{\\pi^n(1-\\langle z,w\\rangle)^{n+1}}$ and Exercise 1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-half-plane-bergman-kernel-by-mobius-transport",
+        "kind": "example",
+        "title": "The upper half-plane Bergman kernel by biholomorphic transport",
+        "deps": [
+          "def-biholomorphic-map-several-complex-variables",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-mobius-transformation",
+          "def-unit-disc-upper-half-plane-and-blaschke-factor",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-bergman-kernel-biholomorphic-transformation",
+          "thm-complex-numbers-form-a-field",
+          "thm-mobius-transformations-biholomorphic-sphere",
+          "thm-model-domain-bergman-and-szego-kernels"
+        ],
+        "statement": "Let $\\mathbb H=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ and let\n$\\varphi:\\mathbb H\\to\\mathbb D$, $\\varphi(z)=\\frac{z-i}{z+i}$, be the M\u00f6bius\nbiholomorphism. Then\n\n$$K_{\\mathbb H}(z,w)=\\frac{-1}{\\pi(z-\\overline w)^2},$$\n\nand in particular $K_{\\mathbb H}(z,z)=\\frac{1}{4\\pi(\\operatorname{Im}z)^2}$;\nthe reproducing property and the diagonal positivity are transported from the\ndisc.",
+        "strategy": "The Cayley map is a Mobius map with nonzero determinant, and its half-plane/disc mapping property and inverse are checked locally by the elementary modulus identity |z-i|^2-|z+i|^2=-4 Im z. The disc kernel is then transported by the biholomorphic transformation law and simplified to -1/(pi(z-wbar)^2), with the diagonal specialization. Removed the unused scaffold dependence on the disc-automorphism theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed pp. 2\u20133: the automorphism transport formula (1.2) that produces the model kernels"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-bergman-versus-szego-normalization-on-the-disc",
+        "kind": "example",
+        "title": "Bergman versus Szeg\u0151 normalization on the disc",
+        "deps": [
+          "def-analytic-hardy-space-disc",
+          "def-bergman-space-and-kernel",
+          "def-countable-choice",
+          "def-szego-kernel-smooth-bounded-domain",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-model-domain-bergman-and-szego-kernels"
+        ],
+        "statement": "Let $\\mathbb D\\subseteq\\mathbb C$ be the unit disc with Lebesgue area measure\n$\\lambda_2$, and let $\\mathbb T=\\partial\\mathbb D$ carry the normalized Haar\nprobability $m$ of [[def-the-one-dimensional-torus-and-normalized-haar-integral]].\nThe diagonal Bergman and Szeg\u0151 kernels of\n[[thm-model-domain-bergman-and-szego-kernels]] are\n\n$$K_{\\mathbb D}(z,z)=\\frac{1}{\\pi(1-|z|^2)^2},\\qquad S_{\\mathbb D}(z,z)=\\frac{1}{1-|z|^2},\\qquad z\\in\\mathbb D,$$\n\nthe first relative to Lebesgue area measure on $\\mathbb D$ and the second\nrelative to $m$. In particular $K_{\\mathbb D}(0,0)=1/\\pi$ while\n$S_{\\mathbb D}(0,0)=1$. The two kernels are reproducing kernels of different\nHilbert spaces \u2014 $A^2(\\mathbb D)$ for the area pairing, and the disc Hardy\nspace of boundary traces for the Haar pairing \u2014 and their boundary blow-up\nexponents are $2$ and $1$: the two normalizations are comparable only after the\nmeasure is declared.",
+        "strategy": "Read off the diagonal values from the model-kernel theorem and display the different measures with the exponents $2$ and $1$; the boundary blow-up difference follows from the explicit formulas and shows that the two normalizations are not interchangeable.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Example 5.2.3 and \u00a75.3, Example 5.3.1, printed pp. 162\u2013166, where the two kernels are computed against the area and the arc-length measures"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-square-integrable-entire-functions-vanish",
+        "kind": "example",
+        "title": "An unbounded domain with trivial Bergman space",
+        "deps": [
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-bergman-space-and-kernel",
+          "def-countable-choice",
+          "lem-bergman-mean-value-l2-bound",
+          "lem-monomial-integrals-over-disc-ball-and-polydisc",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and let $m\\ge1$. The preceding definition [[def-bergman-space-and-kernel]] gives $A^2(\\mathbb C^m)=\\{0\\}$ and $K_{\\mathbb C^m}\\equiv0$. Also, $A^2(\\mathbb D\\times\\mathbb C)=\\{0\\}$ and $K_{\\mathbb D\\times\\mathbb C}\\equiv0$. Thus neither unbounded domain has a nontrivial Bergman kernel, and the kernel-derived Bergman metric is unavailable there because $\\log K(z,z)=\\log0$ is undefined. In contrast, the bounded unit disc has $K_{\\mathbb D}(0,0)>0$.",
+        "strategy": "Use the preceding Bergman-space definition for A\u00b2(C^m)={0} and its zero kernel. For a point (z,w) in D\u00d7C, choose a fixed positive radius \u03c1=(1\u2212|z|)/2 in the disc coordinate and an arbitrary radius R in the entire coordinate. The polydisc mean-value L\u00b2 estimate and monotonicity bound |f(z,w)|\u00b2 by a constant times R\u207b\u00b2\u2016f\u2016\u00b2, so letting R tend to infinity kills each value without Fubini or Liouville. The zero space then has zero Riesz kernel. To verify the disc contrast, use the monomial integral supplier to put 1 in A\u00b2(D); its nonzero evaluation at 0 forces K_D(0,0)>0.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Exercise 5.2.2(a,b) and Example 5.2.4, printed pp. 161\u2013163: the exercises state that A\u00b2(\u2102\u207f) and A\u00b2(\ud835\udd3b\u00d7\u2102) are trivial, and the example records K_{\u2102\u207f}\u22610. The exercise supplies no proof; the local argument proves the product-domain case from the polydisc mean bound and proves the nonzero disc-kernel contrast from the constant function."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-polydisc-bergman-product-and-distinguished-torus-kernel",
+        "kind": "example",
+        "title": "The polydisc Bergman product and the different distinguished-torus Hardy kernel",
+        "deps": [
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-countable-choice",
+          "def-szego-kernel-smooth-bounded-domain",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "ex-polydisc-boundary-and-the-smooth-szego-hypotheses",
+          "lem-cauchy-product-of-absolutely-convergent-complex-series",
+          "lem-monomial-bases-of-bergman-spaces-of-disc-ball-and-polydisc",
+          "lem-sphere-and-torus-monomial-integrals",
+          "thm-bergman-basis-expansion-and-closedness",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-geometric-series",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-model-domain-bergman-and-szego-kernels"
+        ],
+        "statement": "The Bergman kernel of the polydisc is the product of disc kernels,\n\n$$K_{\\mathbb D^m}(z,w)=\\prod_{j<m}K_{\\mathbb D}(z_j,w_j)=\\frac{1}{\\pi^m}\\prod_{j<m}\\frac{1}{(1-z_j\\overline{w_j})^2}.$$\n\nIf instead one uses the **distinguished torus** $\\mathbb T^m$ with product\nnormalized Haar measure as the boundary, the monomials are orthonormal and the\ncorresponding reproducing kernel is\n\n$$\\Sigma(z,w)=\\sum_{\\alpha\\in\\mathbb N^m}z^\\alpha\\overline{w^\\alpha}=\\prod_{j<m}\\frac{1}{1-z_j\\overline{w_j}},$$\n\na different construction from the surface-measure Szeg\u0151 kernel: it uses a\ndifferent boundary and a different measure, has the reciprocal power $1$ in\nplace of $2$, and lives on the distinguished boundary of a product rather than\non a smooth hypersurface.",
+        "strategy": "The polydisc Bergman product is derived from the complete orthonormal polydisc monomial system and repeated Cauchy products of the one-variable geometric series. The distinguished-torus construction is defined locally as the closed span of the torus monomials in L^2(T^m, product Haar), and its kernel is checked by the reproducing identity against that closed span. The comparison records the different reciprocal powers and cites the polydisc's nonsmooth boundary.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a75.2, Exercise 5.2.8, printed p. 164: the polydisc Bergman kernel as a product; \u00a75.3, printed pp. 165\u2013166: the Hardy boundary space is constructed for a smooth boundary"
+            },
+            {
+              "title": "Zbigniew B\u0142ocki, The Bergman Kernel and Metric (lecture notes)",
+              "url": "https://gamma.im.uj.edu.pl/~blocki/publ/ln/bergman.pdf",
+              "locator": "\u00a71, printed p. 4: the product formula $K_{\\Omega_1\\times\\Omega_2}((z_1,z_2),(w_1,w_2))=K_{\\Omega_1}(z_1,w_1)K_{\\Omega_2}(z_2,w_2)$"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-polydisc-boundary-and-the-smooth-szego-hypotheses",
+        "kind": "example",
+        "title": "The polydisc boundary is not a smooth hypersurface, so the Szeg\u0151 definition does not apply",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-countable-choice",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-szego-kernel-smooth-bounded-domain",
+          "def-total-derivative-in-euclidean-space",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-exponential-is-entire-with-derivative-itself"
+        ],
+        "statement": "Assume AC\u03c9 and let m\u22652. At p=(1,\u2026,1), for every coordinate j the polydisc boundary contains a unit-circle curve with velocity i e_j and a one-sided radial curve with right velocity \u2212e_j. These 2m real-linearly independent velocities cannot lie in the (2m\u22121)-dimensional tangent space of a C\u00b9 boundary graph, so \u2202D^m is not a C\u00b9 hypersurface. The distinguished torus T^m is a proper subset of \u2202D^m, witnessed by (1,0,1,\u2026,1). Therefore the library\u2019s bounded-C\u00b9 surface-measure Szeg\u0151 definition does not apply to D^m.",
+        "strategy": "At the corner p=(1,\u2026,1), vary each coordinate first along its unit circle and then radially inward while keeping all other coordinates equal to 1; for m\u22652 both curves stay in the topological boundary, and their velocities give a real basis of C^m. A C\u00b9 graph chart forces the velocities of every (one-sided, when needed) differentiable boundary curve through p into a single (2m\u22121)-dimensional tangent space, which is impossible. The point (1,0,1,\u2026,1) witnesses that the distinguished torus is proper. The library\u2019s definition requires a C\u00b9 boundary and associated surface measure, so the failed boundary hypothesis rules out that particular construction.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a71.1, printed pp. 16\u201317 (PDF pp. 15\u201316): the polydisc Cauchy formula and distinguished boundary; \u00a75.3, printed pp. 165\u2013166 (PDF pp. 164\u2013165): the Hardy boundary space and Szeg\u0151 construction are introduced for bounded domains with smooth boundary, and the text explicitly omits details. The C\u00b9 obstruction here is proved locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-ball-and-polydisc-are-biholomorphic-for-n-at-least-two",
+        "kind": "false-statement",
+        "title": "The claim that the ball and the polydisc are biholomorphic",
+        "deps": [
+          "cor-triangle-inequality-for-inner-product-norm",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "def-based-loops-and-fundamental-group",
+          "def-biholomorphic-map-several-complex-variables",
+          "def-countable-choice",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-path-connected",
+          "def-simply-connected",
+          "lem-bergman-determinant-over-kernel-invariant",
+          "lem-bergman-metric-determinants-of-ball-and-polydisc",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-vector-operations-are-continuous-in-a-normed-space",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-fundamental-group-laws",
+          "thm-poincare-ball-and-polydisc-not-biholomorphic"
+        ],
+        "statement": "**False claim.** For every $m\\ge2$ the unit ball $\\mathbb B^m$ and the unit polydisc $\\mathbb D^m$ in $\\mathbb C^m$ are biholomorphic; more generally, any two bounded simply connected domains in $\\mathbb C^m$, $m\\ge2$, are biholomorphic.",
+        "strategy": "Refutation: B^m and D^m are bounded convex nonempty subsets of R^{2m}; a straight-line homotopy of any loop to a basepoint and the segment paths show convex sets are simply connected, so the pair satisfies the hypothesis of the general clause. Poincare's theorem excludes a biholomorphism for m>=2, refuting both clauses; the invariant quotient displays the obstruction. The statement is the scaffold false claim, preserved verbatim.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "Ji\u0159\u00ed Lebl, Tasty Bits of Several Complex Variables (book)",
+              "url": "https://www.jirka.org/scv/scv.pdf",
+              "locator": "\u00a71.4 'Inequivalence of ball and polydisc', printed pp. 32\u201333: $\\mathbb B^n$ and $\\mathbb D^n$ are not biholomorphically equivalent, with the Poincar\u00e9/Cartan attribution"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,765 @@
+[
+  {
+    "order": 1562,
+    "id": "outer-products-skew-specht-modules-and-littlewood-richardson",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Outer Products, Skew Specht Modules, and Littlewood–Richardson Coefficients",
+    "companion": "outer-products-skew-specht-modules-and-littlewood-richardson-examples",
+    "requires": [
+      "frobenius-characteristic-and-the-symmetric-group-character-dictionary",
+      "the-branching-rule-and-the-young-graph",
+      "tensor-product-multiplicities-and-littlewood-richardson",
+      "tensor-products-of-modules"
+    ],
+    "items": [
+      {
+        "id": "def-graded-bialgebra-and-hopf-algebra",
+        "kind": "definition",
+        "title": "Graded coalgebras, bialgebras and Hopf algebras over a commutative ring",
+        "deps": [
+          "def-algebra-over-a-commutative-ring",
+          "def-graded-ring-and-graded-module",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "thm-symmetry-and-associativity-over-a-commutative-ring"
+        ],
+        "justified_by": [],
+        "statement": "Let $k$ be a commutative ring, let $H=\\bigoplus_{n\\ge0}H_n$ be a nonnegatively graded $k$-module ([[def-graded-ring-and-graded-module]]), and suppose $H$ carries a multiplication $m:H\\otimes_kH\\to H$ and unit $u:k\\to H$ making it a graded $k$-algebra with $H_iH_j\\subseteq H_{i+j}$ ([[def-algebra-over-a-commutative-ring]]). A **graded coalgebra structure** on $H$ is a $k$-linear **comultiplication** $\\Delta:H\\to H\\otimes_kH$ of degree $0$, i.e. $\\Delta(H_n)\\subseteq\\bigoplus_{a+b=n}H_a\\otimes_kH_b$, together with a $k$-linear **counit** $\\varepsilon:H\\to k$ vanishing on $H_n$ for every $n\\ge1$, such that, with tensor products over $k$ ([[def-tensor-product-of-modules-by-generators-and-relations]]) and the canonical identifications $k\\otimes_kH\\cong H\\cong H\\otimes_kk$, $$(\\mathrm{id}\\otimes\\Delta)\\Delta=(\\Delta\\otimes\\mathrm{id})\\Delta,\\qquad(\\varepsilon\\otimes\\mathrm{id})\\Delta=\\mathrm{id}=(\\mathrm{id}\\otimes\\varepsilon)\\Delta.$$ If $H$ is simultaneously a graded algebra and a graded coalgebra and $\\Delta$ and $\\varepsilon$ are $k$-algebra homomorphisms — equivalently $m$ and $u$ are morphisms of graded coalgebras, where $H\\otimes_kH$ carries the tensor-product algebra structure ([[thm-tensor-product-of-algebras-over-a-commutative-ring]], [[thm-symmetry-and-associativity-over-a-commutative-ring]]) — then $(H,m,u,\\Delta,\\varepsilon)$ is a **graded bialgebra**; it is **connected** when $H_0=k\\cdot1_H$. The **convolution product** of two $k$-linear maps $f,g:H\\to H$ is $f*g:=m(f\\otimes g)\\Delta$, and a **graded bialgebra has the structure of an associative $k$-algebra on $\\operatorname{Hom}_k(H,H)$** with this product and unit $u\\varepsilon$: associativity follows from associativity of $m$ and coassociativity of $\\Delta$, and $u\\varepsilon$ is neutral by the counit identities. An **antipode** for $(H,m,u,\\Delta,\\varepsilon)$ is a $k$-linear map $S:H\\to H$ with $$m(S\\otimes\\mathrm{id})\\Delta=u\\varepsilon=m(\\mathrm{id}\\otimes S)\\Delta;$$ a graded bialgebra equipped with an antipode is a **Hopf algebra**. Over a field, these notions specialize to the classical ones once commutativity is imposed; no commutativity of $H$, no field hypothesis and no choice principle are used here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Darij Grinberg and Victor Reiner, Hopf Algebras in Combinatorics (complete author-hosted lecture-notes book, 2020)",
+              "url": "https://www.cip.ifi.lmu.de/~grinberg/algebra/HopfComb.pdf",
+              "locator": "§1.1–1.4, printed pp. 6–25: algebras, coalgebras, bialgebras, convolution, antipodes and Hopf algebras; Proposition 1.4.16 (a connected graded bialgebra has a unique antipode). §2.1–2.4, printed pp. 40–56: Λ as a Hopf algebra, its comultiplication, its antipode and the involution ω. §4.3, printed p. 117: bialgebra and double cosets."
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (complete university-hosted PDF)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5 Example 25, printed pp. 91–93 (diagonal coproduct and counit on Λ); §5 (5.1)–(5.12) and (5.16)–(5.17), printed pp. 69–74 (skew Schur functions, tableau expansion and Pieri rules); Chapter I §7 (7.1)–(7.6), printed pp. 112–116 (the ring R, the characteristic map and its multiplicativity), and Example 26, printed p. 134 (the comultiplication δf=Σ_{p+q=n} f↓_{S_p×S_q}); Chapter I §9 (9.1)–(9.7) with the Littlewood–Robinson algorithm, printed pp. 142–148 (statement of the LR rule, the bijection (9.4), reversibility (9.5), tableau preservation (9.6) and the decreasing-row lemma (9.7))"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-character-ring-of-a-direct-product-is-the-tensor-product",
+        "kind": "lemma",
+        "title": "The character ring of a direct product is the tensor product of the factor character rings",
+        "deps": [
+          "def-virtual-character-and-character-ring-of-a-finite-group",
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group",
+          "def-tensor-product-of-complex-representations",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "def-standard-inner-product-on-complex-class-functions",
+          "thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions",
+          "thm-gallagher-correspondence-for-an-extendible-character",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-tensor-product-basis-from-bases",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "def-character-of-a-complex-representation"
+        ],
+        "justified_by": [],
+        "statement": "Let $G,H$ be finite groups. For finite-dimensional complex representations $V$ of $G$ and $W$ of $H$, their external tensor product is the representation of $G\\times H$ on $V\\otimes_{\\mathbb C}W$ with $(g,h)\\cdot(v\\otimes w):=gv\\otimes hw$. Its character satisfies $\\chi_{V\\boxtimes W}(g,h)=\\chi_V(g)\\chi_W(h)$ ([[def-external-direct-product-of-groups]], [[thm-external-direct-product-is-a-group]], [[def-tensor-product-of-complex-representations]], [[thm-characters-of-direct-sums-tensor-products-and-duals]], [[def-character-of-a-complex-representation]]). Extend this operation $\\mathbb Z$-bilinearly from irreducible characters to $R(G)\\times R(H)$, using their irreducible-character bases ([[def-virtual-character-and-character-ring-of-a-finite-group]], [[thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions]]). Then:\n\n(i) the induced map $R(G)\\otimes_{\\mathbb Z}R(H)\\to R(G\\times H)$, $\\chi\\otimes\\psi\\mapsto\\chi\\boxtimes\\psi$, is an isomorphism of rings, carries $1\\otimes1$ to the trivial character, and satisfies $(\\chi\\boxtimes\\psi)(\\chi'\\boxtimes\\psi')=(\\chi\\chi')\\boxtimes(\\psi\\psi')$ for all $\\chi,\\chi'\\in R(G)$, $\\psi,\\psi'\\in R(H)$;\n\n(ii) as $\\chi$ and $\\psi$ range over the irreducible characters, the elements $\\chi\\boxtimes\\psi$ are pairwise distinct and form an orthonormal $\\mathbb Z$-basis of $R(G\\times H)$; in particular every honest character of $G\\times H$ is a nonnegative integral combination of the $\\chi\\boxtimes\\psi$. No choice principle is used.",
+        "strategy": "(1) For each irreducible pair, pull the representations back along the coordinate projections and tensor them; the tensor-product character identity gives the displayed pointwise formula, and the irreducible-character bases define its bilinear extension to virtual characters. (2) Orthonormality follows by factorizing the finite inner-product sum over $G\\times H$ into the two sums for $G$ and $H$ ([[def-standard-inner-product-on-complex-class-functions]]). (3) For an irreducible $G\\times H$-module, restrict to $G\\times\\{1\\}$ and use Maschke to take an irreducible constituent $\\chi$. Conjugation by $(g,h)$ acts on $G\\times\\{1\\}$ by inner conjugation by $g$, so $\\chi$ is invariant and its inertia is all of $G\\times H$. Its extension $(g,h)\\mapsto S(g)$ and Gallagher's theorem ([[thm-gallagher-correspondence-for-an-extendible-character]]) show that the irreducibles above $\\chi$ are exactly $\\chi\\boxtimes\\psi$ for irreducible $\\psi$ of $H$, with no repetitions. Every irreducible product-group module has an irreducible constituent on restriction to $G\\times\\{1\\}$, so these exhaust the irreducibles. (4) Maschke gives nonnegative integral decomposition for every honest character; hence the external products are an orthonormal basis of $R(G\\times H)$. The irreducible-pair tensors form a basis of the source tensor product ([[thm-tensor-product-basis-from-bases]]), and the pointwise product formula plus $1\\boxtimes1=1$ proves the asserted unital ring isomorphism ([[thm-tensor-product-of-algebras-over-a-commutative-ring]]). The argument also covers a trivial factor, whose only irreducible is the trivial character. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory (complete author-hosted textbook, 294 pp.)",
+              "url": "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf",
+              "locator": "§4.1 Corollary 4.1.4 and the preceding direct-product character-table example, printed p. 52."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-induction-is-invariant-under-conjugation-of-subgroup-and-representation",
+        "kind": "lemma",
+        "title": "Induction is invariant under conjugation of the subgroup and the representation",
+        "deps": [
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "def-conjugate-representation-and-conjugate-character",
+          "def-induced-character-of-a-complex-representation",
+          "def-subgroup",
+          "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "def-virtual-character-and-character-ring-of-a-finite-group"
+        ],
+        "justified_by": [],
+        "statement": "Let $G$ be a finite group, $H\\le G$, $s\\in G$ and $K:=sHs^{-1}$, and let $W$ be a finite-dimensional complex $H$-module with character $\\chi$; let ${}^sW$ be the conjugate $K$-module with $(shs^{-1})\\cdot w:=h\\cdot w$ and character ${}^s\\chi$ ([[def-conjugate-representation-and-conjugate-character]], [[def-subgroup]], [[def-finite-dimensional-representation-of-a-group-over-a-field]]). Then $$\\Phi:\\operatorname{Ind}_H^GW\\longrightarrow\\operatorname{Ind}_K^G({}^sW),\\qquad\\Phi(f)(x):=f(xs),$$ is an isomorphism of complex $G$-modules with inverse $\\Psi(\\varphi)(x):=\\varphi(xs^{-1})$ ([[def-induced-r-linear-g-module-by-h-covariant-functions]]); in particular $\\operatorname{Ind}_K^G({}^s\\chi)=\\operatorname{Ind}_H^G\\chi$ in $R(G)$ ([[def-induced-character-of-a-complex-representation]], [[def-virtual-character-and-character-ring-of-a-finite-group]]). No choice principle is used.",
+        "strategy": "Work on the covariant-function model of induction, where $f(gh)=h^{-1}\\cdot f(g)$ for $g\\in G$, $h\\in H$ and $(x\\cdot f)(g)=f(x^{-1}g)$ ([[def-induced-r-linear-g-module-by-h-covariant-functions]]). For $f\\in\\operatorname{Ind}_H^GW$ and $k=shs^{-1}\\in K$ with $h\\in H$, $\\Phi(f)(xk)=f(xks)=f(xsh)=h^{-1}\\cdot f(xs)=k^{-1}\\cdot\\Phi(f)(x)$, the last action being that of ${}^sW$, because $(shs^{-1})\\cdot w=h\\cdot w$ ([[def-conjugate-representation-and-conjugate-character]]); hence $\\Phi(f)$ satisfies the covariance condition and lies in $\\operatorname{Ind}_K^G({}^sW)$. For $x_0\\in G$, $\\Phi(x_0\\cdot f)(x)=f(x_0^{-1}xs)=\\Phi(f)(x_0^{-1}x)=(x_0\\cdot\\Phi(f))(x)$, so $\\Phi$ is $G$-equivariant; similarly $\\Psi(\\varphi)(xh)=\\varphi(xhs^{-1})=\\varphi((xs^{-1})(shs^{-1}))=h^{-1}\\cdot\\varphi(xs^{-1})=h^{-1}\\cdot\\Psi(\\varphi)(x)$ shows $\\Psi(\\varphi)\\in\\operatorname{Ind}_H^GW$, and $\\Psi$ is $G$-equivariant by the same computation. Substituting the displayed formulas gives $\\Psi(\\Phi(f))=f$ and $\\Phi(\\Psi(\\varphi))=\\varphi$, so $\\Phi$ is an isomorphism of $G$-modules. Taking characters, the induced characters agree because the inducing modules are isomorphic, so $\\operatorname{Ind}_K^G({}^s\\chi)=\\operatorname{Ind}_H^G\\chi$ in $R(G)$. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory (complete author-hosted textbook, 294 pp.)",
+              "url": "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf",
+              "locator": "§5.2, printed pp. 76–77: the conjugate-representation convention and the action of conjugate subgroups on the subspaces of an induced module."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-induction-commutes-with-an-external-tensor-factor",
+        "kind": "lemma",
+        "title": "Induction commutes with an external tensor factor",
+        "deps": [
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "rem-induced-representation-agrees-with-the-tensor-product-model",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-universal-property-of-module-tensor-products",
+          "def-bimodule",
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group",
+          "def-subgroup",
+          "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "def-group-ring",
+          "thm-group-ring-is-a-unital-algebra-with-basis-g",
+          "def-tensor-product-of-complex-representations",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "def-induced-character-of-a-complex-representation",
+          "def-virtual-character-and-character-ring-of-a-finite-group"
+        ],
+        "justified_by": [],
+        "statement": "Let $C\\le P$ and $D\\le Q$ be subgroups of finite groups, let $X$ be a finite-dimensional complex $C$-module and $Y$ a finite-dimensional complex $D$-module, and let $X\\boxtimes Y$ be the external tensor product, a $(C\\times D)$-module ([[def-subgroup]], [[def-external-direct-product-of-groups]], [[thm-external-direct-product-is-a-group]], [[def-finite-dimensional-representation-of-a-group-over-a-field]], [[def-tensor-product-of-complex-representations]]). Then:\n\n(i) there is a natural isomorphism of complex $(P\\times Q)$-modules\n$$\n\\operatorname{Ind}_{C\\times D}^{P\\times Q}(X\\boxtimes Y)\\cong\\bigl(\\operatorname{Ind}_C^PX\\bigr)\\boxtimes\\bigl(\\operatorname{Ind}_D^QY\\bigr);\n$$\non characters, $\\operatorname{Ind}_{C\\times D}^{P\\times Q}(\\chi\\boxtimes\\psi)=(\\operatorname{Ind}_C^P\\chi)\\boxtimes(\\operatorname{Ind}_D^Q\\psi)$ in $R(P\\times Q)$ ([[def-induced-character-of-a-complex-representation]], [[def-virtual-character-and-character-ring-of-a-finite-group]]);\n\n(ii) in the case $D=Q$ this reads $\\operatorname{Ind}_{C\\times Q}^{P\\times Q}(X\\boxtimes Y)\\cong(\\operatorname{Ind}_C^PX)\\boxtimes Y$, and the further case $C=P$, $D=Q$ gives $\\operatorname{Ind}_P^PX\\cong X$. No choice principle is used.",
+        "strategy": "Since $C\\times D\\le P\\times Q$ and all groups are finite, the tensor-product model applies to each induced module ([[rem-induced-representation-agrees-with-the-tensor-product-model]], with $R=\\mathbb C$). Group rings have their canonical group-element bases ([[def-group-ring]], [[thm-group-ring-is-a-unital-algebra-with-basis-g]]). Define on generators $\\Phi([(p,q)]\\otimes(x\\otimes y)):=([p]\\otimes x)\\otimes([q]\\otimes y)$. For $(c,d)\\in C\\times D$, balancing holds since both $\\Phi([(pc,qd)]\\otimes(x\\otimes y))$ and $\\Phi([(p,q)]\\otimes(cx\\otimes dy))$ equal $([p]\\otimes cx)\\otimes([q]\\otimes dy)$; hence the universal property gives a map over $\\mathbb C[C\\times D]$ ([[def-bimodule]], [[thm-universal-property-of-module-tensor-products]]). Define the reverse map by $([p]\\otimes x)\\otimes([q]\\otimes y)\\mapsto[(p,q)]\\otimes(x\\otimes y)$. Its well-definedness under the $C$ and $D$ relations follows respectively from $(pc,q)=(p,q)(c,1)$ and $(p,qd)=(p,q)(1,d)$; the two maps are inverses on pure-tensor generators. They are $(P\\times Q)$-equivariant by the componentwise left action and natural in module homomorphisms. The tensor-model identifications prove (i); specializing $D=Q$ and then $C=P$ proves (ii). Taking characters gives the displayed identity by the external-tensor character formula ([[thm-characters-of-direct-sums-tensor-products-and-duals]], [[def-induced-character-of-a-complex-representation]]). No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory (complete author-hosted textbook, 294 pp.)",
+              "url": "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf",
+              "locator": "§4.3 Proposition 4.3.2, printed pp. 55–56: the tensor-product model of induction, with its direct-sum proof."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-littlewood-richardson-schur-product-expansion",
+        "kind": "theorem",
+        "title": "The Littlewood–Richardson rule for products of Schur functions, by the Littlewood–Robinson bijection",
+        "deps": [
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-skew-schur-function-by-hall-adjointness",
+          "thm-skew-jacobi-trudi-and-tableau-expansion",
+          "def-hall-inner-product-on-symmetric-functions",
+          "def-monomial-symmetric-polynomials",
+          "thm-monomial-symmetric-functions-form-the-integral-stable-basis",
+          "thm-schur-functions-form-an-orthonormal-integral-basis",
+          "lem-kostka-change-of-basis-is-dominance-unitriangular",
+          "def-power-sum-and-complete-homogeneous-symmetric-polynomials",
+          "def-stable-schur-function-by-bialternants",
+          "thm-elementary-and-complete-families-freely-generate-the-stable-ring",
+          "def-stable-graded-ring-of-symmetric-functions",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "justified_by": [],
+        "statement": "Let $c^\\lambda_{\\mu\\nu}$ be the Littlewood–Richardson coefficient of the inherited definition, the number of Littlewood–Richardson tableaux of shape $\\lambda/\\mu$ and content $\\nu$ ([[def-littlewood-richardson-tableau-and-coefficient]], [[def-skew-diagram-and-semistandard-skew-tableau]], [[def-semistandard-tableau-and-kostka-number]], [[def-partition-young-diagram-and-conjugate-partition]]). Then for all partitions $\\mu,\\nu$ $$s_\\mu s_\\nu=\\sum_{\\lambda}c^\\lambda_{\\mu\\nu}\\,s_\\lambda\\qquad\\text{in }\\Lambda,$$ the sum being over the finitely many $\\lambda\\supseteq\\mu$ with $|\\lambda|=|\\mu|+|\\nu|$ and zero terms omitted; equivalently, for all partitions $\\lambda\\supseteq\\mu$, $$s_{\\lambda/\\mu}=\\sum_{\\nu}c^\\lambda_{\\mu\\nu}\\,s_\\nu.$$ No choice principle is used.",
+        "strategy": "Use van Leeuwen's fully proved Robinson correspondence, with the library's Semitic (top-to-bottom, right-to-left) reading order. First, group the skew tableau generating function by monomial content and use Hall duality to get |Tab(λ/μ,π)| = ⟨s_{λ/μ},h_π⟩. For the bijection, repeatedly apply the raising operations e_i to reach the lattice-word LR normal form L, and independently rectify by inward jeu de taquin to a straight semistandard tableau P. Van Leeuwen, Theorem 3.3.1 and Corollaries 3.3.3–3.3.4, proves the two normal forms commute and determine the input uniquely; reversing the same finite operations gives every pair (L,P), with shape(P)=content(L) and content(P)=content(T). Thus |Tab(λ/μ,π)| = Σ_ν c^λ_{μν}K_{νπ}. Since h_π=Σ_ν K_{νπ}s_ν and the Schur basis is orthonormal, equality of pairings with all h_π gives s_{λ/μ}=Σ_ν c^λ_{μν}s_ν. Hall adjointness then identifies the coefficient of s_λ in s_μs_ν with c^λ_{μν}. The empty case is handled directly; impossible containment/size/content cases have coefficient zero by definition. Every operation is finite; fix a deterministic valid reading order and deterministic slide/raising choices, with confluence making normal forms independent of these choices. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (complete university-hosted PDF)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5 Example 25, printed pp. 91–93 (diagonal coproduct and counit on Λ); §5 (5.1)–(5.12) and (5.16)–(5.17), printed pp. 69–74 (skew Schur functions, tableau expansion and Pieri rules); Chapter I §7 (7.1)–(7.6), printed pp. 112–116 (the ring R, the characteristic map and its multiplicativity), and Example 26, printed p. 134 (the comultiplication δf=Σ_{p+q=n} f↓_{S_p×S_q}); Chapter I §9 (9.1)–(9.7) with the Littlewood–Robinson algorithm, printed pp. 142–148 (statement of the LR rule, the bijection (9.4), reversibility (9.5), tableau preservation (9.6) and the decreasing-row lemma (9.7))"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978 (complete PDF)",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf",
+              "locator": "§14 Example 14.5, printed pp. 52–53 (the computation [3,2][2]=[5,2]+[4,3]+[4,2,1]+[3,3,1]+[3,2,2]); §16 Theorem 16.4 with Lemma 16.3, printed pp. 60–64 (the Littlewood–Richardson rule in outer-product form)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-outer-induction-makes-the-graded-representation-group-a-commutative-ring",
+        "kind": "theorem",
+        "title": "Outer induction makes the graded symmetric-group representation group a commutative graded ring",
+        "deps": [
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "def-graded-ordinary-representation-ring-of-symmetric-groups",
+          "def-induced-character-of-a-complex-representation",
+          "thm-transitivity-of-induction-for-finite-groups",
+          "lem-induction-commutes-with-an-external-tensor-factor",
+          "lem-induction-is-invariant-under-conjugation-of-subgroup-and-representation",
+          "def-external-direct-product-of-groups",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-group-homomorphism",
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "thm-external-direct-product-is-a-group",
+          "def-subgroup"
+        ],
+        "justified_by": [],
+        "statement": "Let $f\\in R(S_m)$, $g\\in R(S_n)$, $h\\in R(S_r)$, and let $\\circ$ be the outer induction product of [[def-outer-induction-product-for-symmetric-group-characters]] on the graded abelian group $R_S=\\bigoplus_{n\\ge0}R(S_n)$ ([[def-graded-ordinary-representation-ring-of-symmetric-groups]]). Then:\n\n(i) $f\\circ g\\in R(S_{m+n})$, and $\\circ$ is $\\mathbb Z$-bilinear and distributive over addition;\n\n(ii) associativity: $(f\\circ g)\\circ h=f\\circ(g\\circ h)$ in $R(S_{m+n+r})$;\n\n(iii) commutativity: $f\\circ g=g\\circ f$ in $R(S_{m+n})$;\n\n(iv) unitality: for the trivial character $e$ of $S_0$, $e\\circ f=f=f\\circ e$.\n\nConsequently $R_S$ is a commutative graded $\\mathbb Z$-algebra with unit $e$ and degree-$n$ part $R(S_n)$. No choice principle is used.",
+        "strategy": "(1) Reconcile the global zero-based S_n realization with the one-based block realization in the published outer-product definition by the explicit relabeling beta_t(i)=i+1; check that it transports block embeddings and the covariant-function induction model. (2) For associativity, use the common subgroup preserving three consecutive blocks, identify both parenthesized external-product characters by their values on triples, and apply the external-factor induction lemma and induction transitivity; extend from honest to virtual characters by finite bilinearity. (3) For commutativity, give the explicit permutation s_{m,n}(i)=n+i and s_{m,n}(m+j)=j, verify it conjugates the ordered block subgroups and swaps their coordinates, then apply conjugation invariance of induction. (4) Handle the empty block unit by the identity of induction from S_n to itself. All constructions are explicit and choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, (7.1)–(7.3), printed pp. 112–114: the outer induction product on R=⊕R(S_n) and its commutative graded ring structure"
+            },
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory (complete author-hosted textbook, 294 pp.)",
+              "url": "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf",
+              "locator": "§4.3 Proposition 4.3.2 and Lemma 4.3.7: induction with an external tensor factor and transitivity; §5.2, printed pp. 76–77: conjugation of induced representations"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-restriction-coproduct-on-the-graded-symmetric-group-character-ring",
+        "kind": "definition",
+        "title": "The restriction coproduct on the graded symmetric-group character ring",
+        "deps": [
+          "def-graded-ordinary-representation-ring-of-symmetric-groups",
+          "def-sign-representation-and-restriction-of-a-representation",
+          "lem-character-ring-of-a-direct-product-is-the-tensor-product",
+          "def-virtual-character-and-character-ring-of-a-finite-group",
+          "def-external-direct-product-of-groups",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-subgroup",
+          "thm-external-direct-product-is-a-group",
+          "def-group-homomorphism",
+          "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "def-character-of-a-complex-representation",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "thm-characters-of-direct-sums-tensor-products-and-duals"
+        ],
+        "justified_by": [],
+        "statement": "Let n=a+b, and embed S_a×S_b into S_n by letting the first factor permute {0,…,a−1} and the second permute {a,…,n−1}; write this embedding as iota_{a,b} and its image as H_{a,b}. For f∈R(S_n), restriction to H_{a,b} and pullback by iota_{a,b} is in R(S_a×S_b); the external-product isomorphism Φ_{a,b}:R(S_a)⊗_Z R(S_b)→R(S_a×S_b), χ⊗ψ↦χ⊠ψ, therefore defines a unique Δ_{a,b}(f) with Φ_{a,b}(Δ_{a,b}(f))=f∘iota_{a,b}. Define Δ(f)=Σ_{a=0}^n Δ_{a,n−a}(f) for homogeneous f∈R(S_n), extending Z-linearly to R_S. It is degree zero and each value is a finite sum; Δ_{0,n}(f)=1⊗f and Δ_{n,0}(f)=f⊗1. The flip τ(x⊗y)=y⊗x satisfies τΔ=Δ: the ordered block subgroups are conjugate by the block swap ρ_{a,b}(i)=b+i for i<a and ρ_{a,b}(a+j)=j, and f is a class function, so Φ_{b,a}(Δ_{b,a}(f)) agrees with Φ_{b,a}(τΔ_{a,b}(f)); injectivity of Φ gives the identity componentwise. No form of the axiom of choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, Example 26, printed p. 134: the comultiplication on the graded symmetric-group character ring defined by restriction to S_p×S_q"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-connected-graded-bialgebra-has-a-recursive-antipode",
+        "kind": "lemma",
+        "title": "A connected graded bialgebra has a unique antipode, given by the reduced-coproduct recursion",
+        "deps": [
+          "def-graded-bialgebra-and-hopf-algebra",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-universal-property-of-module-tensor-products",
+          "thm-associativity-of-balanced-tensor-products"
+        ],
+        "justified_by": [],
+        "statement": "Let $k$ be a commutative ring and let $H=\\bigoplus_{n\\ge0}H_n$ be a connected graded bialgebra over $k$ ([[def-graded-bialgebra-and-hopf-algebra]]), with multiplication $m$, unit $u$, comultiplication $\\Delta$ and counit $\\varepsilon$, so that $H_0=k\\cdot1_H$. Then there is a unique $k$-linear map $S:H\\to H$ with $$m(S\\otimes\\mathrm{id})\\Delta=u\\varepsilon=m(\\mathrm{id}\\otimes S)\\Delta,$$ so that $H$ is a graded Hopf algebra with antipode $S$. Moreover $S$ preserves the grading, $S(H_n)\\subseteq H_n$, and is computed on homogeneous $x\\in H_n$ with $n\\ge1$ by the recursion $$S(x)=-x-\\sum_iS(x_i')x_i'',\\qquad\\text{where}\\quad \\Delta(x)=x\\otimes1+1\\otimes x+\\sum_ix_i'\\otimes x_i''\\ \\text{ with }\\ \\deg x_i',\\deg x_i''\\ge1,$$ the right-hand side involving only elements of degree $<n$. No choice principle is used.",
+        "strategy": "(1) For positive degree, use grading and the counit identities to split off x⊗1 and 1⊗x, leaving a reduced coproduct in positive bidegrees. (2) Define left and right antipode candidates by induction, applying the induced tensor maps to the reduced coproduct itself so the recursion is independent of any elementary-tensor expression. (3) Verify the two convolution inverse identities separately. (4) Coassociativity, associativity, and the canonical tensor associator make convolution associative with unit uε; a left and a right inverse coincide, any two-sided inverse is unique, and induction shows the common map preserves degree. The argument uses no field property and no choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Darij Grinberg and Victor Reiner, Hopf Algebras in Combinatorics (complete author-hosted lecture-notes book, 2020)",
+              "url": "https://www.cip.ifi.lmu.de/~grinberg/algebra/HopfComb.pdf",
+              "locator": "The convention before Chapter 1 states that k usually denotes a commutative ring, and Chapter 1 §1 says the notes work over arbitrary commutative rings; §1.4, Proposition 1.4.16 and its complete proof give the connected graded antipode recursion."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-outer-littlewood-richardson-rule",
+        "kind": "theorem",
+        "title": "The outer Littlewood–Richardson rule",
+        "deps": [
+          "thm-littlewood-richardson-schur-product-expansion",
+          "lem-frobenius-characteristic-preserves-outer-products",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "lem-frobenius-characteristic-is-an-isometry",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "thm-complex-representations-are-determined-by-their-characters",
+          "thm-complex-specht-modules-are-irreducible",
+          "cor-distinct-specht-modules-are-inequivalent",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "def-tensor-product-of-complex-representations",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "def-induced-character-of-a-complex-representation",
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-group-homomorphism",
+          "def-frobenius-characteristic-map"
+        ],
+        "justified_by": [],
+        "statement": "Let $\\mu\\vdash m$, $\\nu\\vdash n$, and let $S^\\mu$, $S^\\nu$ be the complex Specht modules ([[def-column-antisymmetrizer-polytabloid-and-specht-module]], [[thm-complex-specht-modules-are-irreducible]]); let $S^\\mu\\boxtimes S^\\nu$ be their external tensor product, a complex $S_m\\times S_n$-module ([[def-tensor-product-of-complex-representations]]). Then, as complex $S_{m+n}$-modules, $$\\operatorname{Ind}_{S_m\\times S_n}^{S_{m+n}}\\bigl(S^\\mu\\boxtimes S^\\nu\\bigr)\\cong\\bigoplus_{\\lambda\\vdash m+n}\\bigl(S^\\lambda\\bigr)^{\\oplus c^\\lambda_{\\mu\\nu}},$$ where $c^\\lambda_{\\mu\\nu}$ is the Littlewood–Richardson coefficient, the number of Littlewood–Richardson tableaux of shape $\\lambda/\\mu$ and content $\\nu$ ([[def-littlewood-richardson-tableau-and-coefficient]]); equivalently, the character $\\chi^\\mu\\circ\\chi^\\nu$ of the induced module satisfies $\\operatorname{ch}(\\chi^\\mu\\circ\\chi^\\nu)=s_\\mu s_\\nu=\\sum_\\lambda c^\\lambda_{\\mu\\nu}s_\\lambda$. The multiplicity of $S^\\lambda$ in the induced module is therefore exactly $c^\\lambda_{\\mu\\nu}$. This is the outer induction product, not the same-rank tensor (Kronecker) product. No choice principle is used.",
+        "strategy": "(1) Reconcile the global zero-based S_n realization with the one-based outer-product blocks by the explicit shift i↦i+1; show the shift transports the block inclusion, induced covariant-function model, Specht convention, and cycle-type characteristic. (2) Apply the Schur-product expansion, characteristic multiplicativity, and the Specht-to-Schur identity; use injectivity of the characteristic to get equality of characters. (3) Identify the right-hand side as the character of the finite direct sum of Specht modules, use equality of characters to obtain a module isomorphism, then irreducibility and inequivalence give the stated multiplicities. The outer-vs-Kronecker boundary remains explicit; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, (7.2)–(7.5), printed pp. 113–114: the characteristic map, outer-product multiplicativity, and ch(χ^λ)=s_λ"
+            },
+            {
+              "title": "M. A. A. van Leeuwen, The Littlewood-Richardson rule, and related combinatorics",
+              "url": "https://arxiv.org/pdf/math/9908099",
+              "locator": "§§3.1–3.3, printed pp. 14–19: the Robinson correspondence giving the Schur product expansion used by the local supplier"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf",
+              "locator": "§16 Theorem 16.4, printed pp. 60–64: the Littlewood–Richardson rule in outer-product form"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "prop-restriction-coproduct-is-schur-skewing",
+        "kind": "proposition",
+        "title": "The restriction coproduct is Schur skewing",
+        "deps": [
+          "def-graded-ordinary-representation-ring-of-symmetric-groups",
+          "def-restriction-coproduct-on-the-graded-symmetric-group-character-ring",
+          "def-stable-graded-ring-of-symmetric-functions",
+          "def-skew-schur-function-by-hall-adjointness",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "lem-character-ring-of-a-direct-product-is-the-tensor-product",
+          "cor-frobenius-reciprocity-for-complex-characters",
+          "thm-outer-littlewood-richardson-rule",
+          "thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "thm-littlewood-richardson-schur-product-expansion",
+          "thm-schur-functions-form-an-orthonormal-integral-basis",
+          "thm-tensor-product-basis-from-bases"
+        ],
+        "justified_by": [],
+        "statement": "Let $R_S=\\bigoplus_{n\\ge0}R(S_n)$ be the graded ordinary representation ring ([[def-graded-ordinary-representation-ring-of-symmetric-groups]]) and let $\\Delta$ be its restriction coproduct using the ordered block embeddings $\\iota_{a,b}:S_a\\times S_b\\to S_{a+b}$ and components $\\Delta_{a,b}$ ([[def-restriction-coproduct-on-the-graded-symmetric-group-character-ring]]). Let $\\operatorname{ch}:R_S\\to\\Lambda$ be the degreewise Frobenius characteristic, which sends $\\chi^\\lambda$ to $s_\\lambda$ and maps the irreducible-character basis to the Schur basis ([[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]]). Define the $\\mathbb Z$-linear map $\\Delta_\\Lambda:\\Lambda\\to\\Lambda\\otimes_{\\mathbb Z}\\Lambda$ on the Schur basis by\n\n$$\\Delta_\\Lambda(s_\\lambda):=\\sum_{\\mu\\subseteq\\lambda}s_\\mu\\otimes s_{\\lambda/\\mu},$$\n\nwhere $s_{\\lambda/\\mu}$ is the skew Schur function ([[def-skew-schur-function-by-hall-adjointness]]). This defines a map because the Schur functions form a $\\mathbb Z$-basis degree by degree ([[thm-schur-functions-form-an-orthonormal-integral-basis]]) and each displayed sum is finite. Then\n\n$$(\\operatorname{ch}\\otimes\\operatorname{ch})\\,\\Delta(f)=\\Delta_\\Lambda(\\operatorname{ch}(f))\\qquad(f\\in R_S).$$\n\nEquivalently, for every $\\lambda\\vdash n$ and $a+b=n$,\n\n$$\\iota_{a,b}^{*}\\!\\left(\\operatorname{Res}^{S_n}_{H_{a,b}}\\chi^\\lambda\\right)=\\sum_{\\substack{\\mu\\vdash a\\\\\\nu\\vdash b}}c^\\lambda_{\\mu\\nu}\\,\\chi^\\mu\\boxtimes\\chi^\\nu,$$\n\nwhere $H_{a,b}=\\iota_{a,b}(S_a\\times S_b)$ and $c^\\lambda_{\\mu\\nu}$ is the Littlewood–Richardson coefficient ([[def-littlewood-richardson-tableau-and-coefficient]]). In particular, $c^\\lambda_{\\mu\\nu}=0$ unless $\\mu\\subseteq\\lambda$ and $|\\lambda|=|\\mu|+|\\nu|$. No choice principle is used.",
+        "strategy": "(1) For fixed $\\lambda\\vdash n$ and $a+b=n$, the external products $\\chi^\\mu\\boxtimes\\chi^\\nu$ form an orthonormal basis of the restricted character ring. Their coefficient in the restriction is, by Frobenius reciprocity, the multiplicity of $\\chi^\\lambda$ in the induced outer product; the outer Littlewood–Richardson theorem makes it $c^\\lambda_{\\mu\\nu}$. Apply the inverse external-product isomorphism to obtain the $(a,b)$-component of $\\Delta(\\chi^\\lambda)$.\n\n(2) The skew Littlewood–Richardson expansion rewrites $\\sum_{\\mu\\subseteq\\lambda}s_\\mu\\otimes s_{\\lambda/\\mu}$ as $\\sum_{a+b=n}\\sum_{\\mu\\vdash a,\\nu\\vdash b}c^\\lambda_{\\mu\\nu}s_\\mu\\otimes s_\\nu$. The Frobenius characteristic sends each $\\chi^\\eta$ to $s_\\eta$, so the restriction formula gives the coproduct identity. Conversely, the characteristic tensor map sends tensor-product bases bijectively to tensor-product Schur bases, and the external-product map is an isomorphism; hence the identity recovers each restriction component. Extend linearly over the algebraic direct sum. The empty partition, zero coefficients, unit endpoints, finite sums, and choice-free basis extension are handled explicitly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (complete university-hosted PDF)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5 Example 25, printed pp. 91–93 (diagonal coproduct and counit on Λ); §5 (5.1)–(5.12) and (5.16)–(5.17), printed pp. 69–74 (skew Schur functions, tableau expansion and Pieri rules); Chapter I §7 (7.1)–(7.6), printed pp. 112–116 (the ring R, the characteristic map and its multiplicativity), and Example 26, printed p. 134 (the comultiplication δf=Σ_{p+q=n} f↓_{S_p×S_q}); Chapter I §9 (9.1)–(9.7) with the Littlewood–Robinson algorithm, printed pp. 142–148 (statement of the LR rule, the bijection (9.4), reversibility (9.5), tableau preservation (9.6) and the decreasing-row lemma (9.7))"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-outer-pieri-rules-for-trivial-and-sign-factors",
+        "kind": "corollary",
+        "title": "Outer Pieri rules for a trivial or sign factor",
+        "deps": [
+          "thm-outer-littlewood-richardson-rule",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "def-row-and-column-stabilizers-of-a-tableau",
+          "def-trivial-regular-and-permutation-representations",
+          "def-sign-representation-and-restriction-of-a-representation",
+          "thm-sign-is-a-homomorphism"
+        ],
+        "justified_by": [],
+        "statement": "Let $\\mu\\vdash m$ and let $S^\\mu$, $S^{(r)}$, $S^{(1^r)}$ be complex Specht modules; recall that $S^{(r)}$ affords the trivial character of $S_r$ and $S^{(1^r)}$ the sign character ([[def-column-antisymmetrizer-polytabloid-and-specht-module]]). Then $$\\operatorname{Ind}_{S_m\\times S_r}^{S_{m+r}}\\bigl(S^\\mu\\boxtimes S^{(r)}\\bigr)\\cong\\bigoplus_{\\lambda}S^\\lambda,$$ the sum over the partitions $\\lambda\\vdash m+r$ with $\\lambda\\supseteq\\mu$ such that $\\lambda/\\mu$ is a **horizontal $r$-strip** (no two of the added nodes in the same column), each summand occurring with multiplicity one; and $$\\operatorname{Ind}_{S_m\\times S_r}^{S_{m+r}}\\bigl(S^\\mu\\boxtimes S^{(1^r)}\\bigr)\\cong\\bigoplus_{\\lambda}S^\\lambda,$$ the sum over the $\\lambda\\vdash m+r$ with $\\lambda\\supseteq\\mu$ such that $\\lambda/\\mu$ is a **vertical $r$-strip** (no two of the added nodes in the same row), again with multiplicity one. No choice principle is used.",
+        "strategy": "(1) Check from the polytabloid definition that the one-row Specht module is trivial and the one-column Specht module is sign. (2) Specialize the outer Littlewood–Richardson rule: content (r) yields the unique all-1 filling exactly for horizontal strips; content (1^r) forces the lattice word 1,2,…,r, which gives a unique filling exactly for vertical strips. (3) Handle the empty factor r=0 explicitly. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5, equations (5.16)–(5.17), printed pp. 73–74: the horizontal- and vertical-strip Pieri rules"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-littlewood-richardson-coefficients-have-conjugation-symmetry",
+        "kind": "corollary",
+        "title": "Conjugation and exchange symmetries of the Littlewood–Richardson coefficients",
+        "deps": [
+          "thm-littlewood-richardson-schur-product-expansion",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "prop-omega-conjugates-schur-functions",
+          "thm-schur-functions-form-an-orthonormal-integral-basis",
+          "def-stable-graded-ring-of-symmetric-functions",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "justified_by": [],
+        "statement": "For all partitions $\\lambda,\\mu,\\nu$, with primes denoting conjugate partitions, $$c^\\lambda_{\\mu\\nu}=c^\\lambda_{\\nu\\mu}\\qquad\\text{and}\\qquad c^\\lambda_{\\mu\\nu}=c^{\\lambda'}_{\\mu'\\nu'},$$ where both sides are the Littlewood–Richardson coefficients of [[def-littlewood-richardson-tableau-and-coefficient]]. No choice principle is used.",
+        "strategy": "(1) Exchange symmetry. Multiplication in $\\Lambda$ is commutative ([[def-stable-graded-ring-of-symmetric-functions]]), so $s_\\mu s_\\nu=s_\\nu s_\\mu$; expanding both sides by [[thm-littlewood-richardson-schur-product-expansion]] and comparing coefficients in the Schur basis ([[thm-schur-functions-form-an-orthonormal-integral-basis]]) gives $c^\\lambda_{\\mu\\nu}=c^\\lambda_{\\nu\\mu}$.\n\n(2) Conjugation symmetry. The stable involution $\\omega$ is a ring homomorphism with $\\omega(s_\\eta)=s_{\\eta'}$ ([[prop-omega-conjugates-schur-functions]]). Applying it to $s_\\mu s_\\nu=\\sum_\\lambda c^\\lambda_{\\mu\\nu}s_\\lambda$ gives $s_{\\mu'}s_{\\nu'}=\\sum_\\lambda c^\\lambda_{\\mu\\nu}s_{\\lambda'}=\\sum_\\eta c^{\\eta'}_{\\mu\\nu}s_\\eta$; since conjugation is an involution and preserves size ([[def-partition-young-diagram-and-conjugate-partition]]), reindex by $\\eta=\\lambda'$. The defining expansion $s_{\\mu'}s_{\\nu'}=\\sum_\\eta c^\\eta_{\\mu'\\nu'}s_\\eta$ and uniqueness of Schur coefficients then give $c^{\\lambda'}_{\\mu'\\nu'}=c^\\lambda_{\\mu\\nu}$. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (complete university-hosted PDF)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §2 equations (2.6)–(2.13), printed pp. 21–24 (the involution ω, its inverse-series definition, and its action on power sums); §3 equation (3.8), printed p. 42 (ω(s_λ)=s_{λ′})."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-skew-multiplicity-module-over-c",
+        "kind": "definition",
+        "title": "The skew multiplicity module $K^{\\lambda/\\mu}$ over $\\mathbb C$",
+        "deps": [
+          "def-restriction-coproduct-on-the-graded-symmetric-group-character-ring",
+          "def-sign-representation-and-restriction-of-a-representation",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-hom-groups-and-induced-hom-maps",
+          "prop-intertwiner-space-is-a-vector-space-and-endomorphisms-form-a-k-algebra",
+          "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "def-young-tableau-standard-tableau-and-shape",
+          "def-group-ring",
+          "thm-group-actions-and-group-ring-modules-correspond"
+        ],
+        "justified_by": [
+          "thm-skew-multiplicity-module-has-littlewood-richardson-specht-decomposition-over-c"
+        ],
+        "statement": "Let $\\mu\\subseteq\\lambda$ be partitions, $m:=|\\mu|$, $r:=|\\lambda|-m$, so that $S^\\mu$ is a complex $S_m$-module ([[def-column-antisymmetrizer-polytabloid-and-specht-module]]) and $\\operatorname{Res}_{S_m\\times S_r}^{S_{m+r}}S^\\lambda$ is a complex $(S_m\\times S_r)$-module ([[def-sign-representation-and-restriction-of-a-representation]], [[def-external-direct-product-of-groups]], [[def-finite-dimensional-representation-of-a-group-over-a-field]]). The **skew multiplicity module** is the complex vector space $$K^{\\lambda/\\mu}:=\\operatorname{Hom}_{\\mathbb C[S_m]}\\bigl(S^\\mu,\\operatorname{Res}_{S_m\\times S_r}^{S_{m+r}}S^\\lambda\\bigr)$$ of $\\mathbb C[S_m]$-module homomorphisms ([[def-hom-groups-and-induced-hom-maps]], [[def-subrepresentation-quotient-representation-and-intertwiner]], [[prop-intertwiner-space-is-a-vector-space-and-endomorphisms-form-a-k-algebra]]). For $\\tau\\in S_r$ and $\\varphi\\in K^{\\lambda/\\mu}$ define $(\\tau\\cdot\\varphi)(v):=\\tau\\cdot\\varphi(v)$, using the $S_r$-action on the restricted target. Because every element of $S_m$ commutes with every element of $S_r$ inside $S_m\\times S_r$, the map $\\tau\\cdot\\varphi$ is again $\\mathbb C[S_m]$-linear: $(\\tau\\cdot\\varphi)(\\sigma v)=\\tau\\sigma\\varphi(v)=\\sigma\\tau\\varphi(v)=\\sigma(\\tau\\cdot\\varphi)(v)$ for $\\sigma\\in S_m$. This makes $K^{\\lambda/\\mu}$ a finite-dimensional complex $S_r$-module. The definition realizes the skew object as an intertwiner space; no skew polytabloid filtration over an arbitrary field is asserted. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, Example 3, printed pp. 116–117: restriction of a Specht character to a product subgroup and the corresponding skew Schur characteristic"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "strategy": "Use the block subgroup and ordered factor identification from the restriction-coproduct definition. Pull back the restricted Specht module to S_m×S_r, convert its group action and S^mu to C[S_m]-modules, and define K as their Hom space. The Hom space is finite-dimensional because it is a subspace of a finite-dimensional linear-map space. Define S_r by postcomposition; the two coordinate subgroup actions commute, so postcomposition preserves intertwiners and satisfies the group law. Include m=0 and r=0, and make no arbitrary-field skew-polytabloid claim."
+      },
+      {
+        "id": "thm-skew-multiplicity-module-has-littlewood-richardson-specht-decomposition-over-c",
+        "kind": "theorem",
+        "title": "The skew multiplicity module decomposes with Littlewood–Richardson multiplicities over $\\mathbb C$",
+        "deps": [
+          "def-skew-multiplicity-module-over-c",
+          "prop-restriction-coproduct-is-schur-skewing",
+          "thm-littlewood-richardson-schur-product-expansion",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product",
+          "thm-hom-tensor-adjunction-for-modules",
+          "thm-character-inner-product-computes-intertwiner-dimension",
+          "def-frobenius-characteristic-map",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "thm-complex-specht-modules-are-irreducible",
+          "cor-distinct-specht-modules-are-inequivalent",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group",
+          "lem-character-ring-of-a-direct-product-is-the-tensor-product"
+        ],
+        "justified_by": [],
+        "statement": "Let $\\mu\\subseteq\\lambda$, $m=|\\mu|$, $r=|\\lambda|-m$, and let $K^{\\lambda/\\mu}$ be the skew multiplicity module of [[def-skew-multiplicity-module-over-c]]. Then, as a complex $S_r$-module,\n\n$$K^{\\lambda/\\mu}\\cong\\bigoplus_{\\nu\\vdash r}\\bigl(S^\\nu\\bigr)^{\\oplus c^\\lambda_{\\mu\\nu}},$$\n\nwhere $c^\\lambda_{\\mu\\nu}$ is the Littlewood–Richardson coefficient; the Specht modules and their irreducibility are as in [[def-column-antisymmetrizer-polytabloid-and-specht-module]], [[thm-complex-specht-modules-are-irreducible]], and [[cor-distinct-specht-modules-are-inequivalent]]. Thus the multiplicity of $S^\\nu$ in $K^{\\lambda/\\mu}$ is $c^\\lambda_{\\mu\\nu}$, and its Frobenius characteristic is the skew Schur function $s_{\\lambda/\\mu}=\\sum_{\\nu\\vdash r}c^\\lambda_{\\mu\\nu}s_\\nu$ ([[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]], [[thm-littlewood-richardson-schur-product-expansion]]). No choice principle is used.",
+        "strategy": "(1) Use Maschke and the complete Specht classification to decompose the finite-dimensional skew multiplicity module; identify each Specht multiplicity with an intertwiner dimension. (2) Apply the C-linear Hom-tensor adjunction with R=C, check the S_m- and S_r-linearity conditions explicitly, and flip the tensor factors to obtain the S_m×S_r intertwiner space. (3) The character inner product computes that Hom dimension; the restriction coproduct formula gives c^lambda_{mu nu}. (4) Match all multiplicities and apply Frobenius characteristic to the Specht decomposition; the local Littlewood–Richardson skew expansion gives s_{lambda/mu}. Treat the empty and zero-size endpoints directly; all sums are finite and no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press, 1995",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, Example 3, printed pp. 116–117: the skew character defined by s_{lambda/mu} and the restriction of chi^lambda to S_m×S_r. The multiplicity-module identification is proved locally."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-outer-induction-and-restriction-form-a-graded-hopf-algebra",
+        "kind": "theorem",
+        "title": "Outer induction and restriction make the symmetric-group character ring a graded Hopf algebra",
+        "deps": [
+          "thm-outer-induction-makes-the-graded-representation-group-a-commutative-ring",
+          "def-restriction-coproduct-on-the-graded-symmetric-group-character-ring",
+          "def-graded-bialgebra-and-hopf-algebra",
+          "lem-connected-graded-bialgebra-has-a-recursive-antipode",
+          "prop-restriction-coproduct-is-schur-skewing",
+          "thm-mackey-double-coset-formula-for-restricting-an-induced-character",
+          "lem-induction-commutes-with-an-external-tensor-factor",
+          "def-conjugate-representation-and-conjugate-character",
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group",
+          "lem-character-ring-of-a-direct-product-is-the-tensor-product",
+          "thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism",
+          "thm-skew-jacobi-trudi-and-tableau-expansion",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-skew-schur-function-by-hall-adjointness",
+          "def-graded-ordinary-representation-ring-of-symmetric-groups",
+          "def-virtual-character-and-character-ring-of-a-finite-group",
+          "def-stable-graded-ring-of-symmetric-functions",
+          "def-power-sum-and-complete-homogeneous-symmetric-polynomials",
+          "thm-elementary-and-complete-families-freely-generate-the-stable-ring",
+          "prop-elementary-and-complete-generating-series-identity",
+          "prop-omega-conjugates-schur-functions",
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-group-homomorphism",
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "justified_by": [],
+        "statement": "Let $R_S=\\bigoplus_{n\\ge0}R(S_n)$ be the graded commutative ring of [[thm-outer-induction-makes-the-graded-representation-group-a-commutative-ring]], with outer product $\\circ$, unit the trivial character $e$ of $S_0$ (so $R(S_0)=\\mathbb Z\\cdot1$), and let $\\Delta$ be the restriction coproduct of [[def-restriction-coproduct-on-the-graded-symmetric-group-character-ring]]. Let $\\varepsilon:R_S\\to\\mathbb Z$ be the augmentation defined by $\\varepsilon(f)=f(1)$ on $R(S_0)$ and $\\varepsilon|_{R(S_n)}=0$ for $n\\ge1$ ([[def-graded-ordinary-representation-ring-of-symmetric-groups]], [[def-virtual-character-and-character-ring-of-a-finite-group]]). Then:\n\n(i) $(R_S,\\circ,e,\\Delta,\\varepsilon)$ is a connected graded bialgebra over $\\mathbb Z$ ([[def-graded-bialgebra-and-hopf-algebra]]): $\\Delta$ and $\\varepsilon$ are $\\mathbb Z$-algebra homomorphisms and satisfy coassociativity and the counit identities;\n\n(ii) by [[lem-connected-graded-bialgebra-has-a-recursive-antipode]], $R_S$ has a unique antipode and is a graded Hopf algebra, with the antipode computed by the reduced-coproduct recursion;\n\n(iii) the Frobenius characteristic is an isomorphism of graded Hopf algebras from $R_S$ onto $\\Lambda$ equipped with the diagonal coproduct $\\Delta_\\Lambda f=f(x,y)$, multiplication of symmetric functions, counit the constant term, and antipode $S(f)=(-1)^n\\omega(f)$ for $f\\in\\Lambda^n$. No choice principle is used.",
+        "strategy": "(1) Identify the zero-based and one-based symmetric-group models by the explicit shift i↦i+1, including the induced covariant-function models. (2) Compare iterated restrictions along the same triple-block embedding and use the endpoint components for coassociativity and counitality. (3) For honest characters, apply Mackey to induction from S_m×S_n to S_{m+n}; classify K\\S_N/H by the 2×2 intersection-size matrices, construct one canonical representative for each, identify the four-factor intersection, and regroup its conjugate input. The external-factor induction identity then identifies each Mackey term with one term of Δχ·Δψ; sum over all matrices and extend bilinearly. Check Δ(e)=e⊗e and multiplicativity of the degree-zero augmentation. (4) Connectedness and the recursive-antipode lemma give the Hopf structure. (5) Prove the diagonal coproduct formula locally by splitting semistandard tableaux according to the ordered alphabets X<Y; compare with the restriction coproduct under ch. (6) Prove SΛ(h_n)=(-1)^n e_n from the complete/elementary generating-series identity and free generation by h_n, then transport the unique antipode through ch. All matrices, sums, alphabets, and inductions are finite; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Darij Grinberg and Victor Reiner, Hopf Algebras in Combinatorics (complete author-hosted lecture-notes book, 2020)",
+              "url": "https://www.cip.ifi.lmu.de/~grinberg/algebra/HopfComb.pdf",
+              "locator": "Chapter 1 §1.4, Proposition 1.4.16 (connected graded antipode), printed pp. 20–21; Chapter 2 §2.3, Proposition 2.3.6 (symmetric-function coproduct and skew-Schur expansion), printed pp. 52–53, and §2.4, Proposition 2.4.1, Definition 2.4.2 and Proposition 2.4.3 (the antipode and involution $\\omega$), printed pp. 54–56; Chapter 4 §4.1, Theorem 4.1.7 (Mackey formula), printed pp. 111–112, and §4.3, equations (4.3.1)–(4.3.3), Definition 4.3.4, Proposition 4.3.7(a) and its following Mackey calculation for the symmetric-group tower, printed pp. 119–123."
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (complete university-hosted PDF)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5 Example 25, printed pp. 91–93 (diagonal coproduct and counit on Λ); §5 (5.1)–(5.12) and (5.16)–(5.17), printed pp. 69–74 (skew Schur functions, tableau expansion and Pieri rules); Chapter I §7 (7.1)–(7.6), printed pp. 112–116 (the ring R, the characteristic map and its multiplicativity), and Example 26, printed p. 134 (the comultiplication δf=Σ_{p+q=n} f↓_{S_p×S_q}); Chapter I §9 (9.1)–(9.7) with the Littlewood–Robinson algorithm, printed pp. 142–148 (statement of the LR rule, the bijection (9.4), reversibility (9.5), tableau preservation (9.6) and the decreasing-row lemma (9.7))"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 1565,
+    "id": "outer-products-skew-specht-modules-and-littlewood-richardson-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Outer Products, Skew Specht Modules, and Littlewood–Richardson Coefficients — Examples",
+    "companion": "outer-products-skew-specht-modules-and-littlewood-richardson",
+    "requires": [
+      "outer-products-skew-specht-modules-and-littlewood-richardson"
+    ],
+    "items": [
+      {
+        "id": "ex-outer-product-s32-with-s2",
+        "kind": "example",
+        "title": "The outer product of $S^{(3,2)}$ and $S^{(2)}$",
+        "deps": [
+          "cor-outer-pieri-rules-for-trivial-and-sign-factors",
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "thm-standard-polytabloid-basis",
+          "def-young-tableau-standard-tableau-and-shape",
+          "cor-dimension-of-an-induced-finite-dimensional-representation",
+          "cor-tensor-products-of-finite-free-modules-and-dimension",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-group-homomorphism",
+          "def-induced-r-linear-g-module-by-h-covariant-functions"
+        ],
+        "justified_by": [],
+        "statement": "As complex $S_7$-modules,\n\n$$\\operatorname{Ind}_{S_5\\times S_2}^{S_7}\\bigl(S^{(3,2)}\\boxtimes S^{(2)}\\bigr)\\cong S^{(5,2)}\\oplus S^{(4,3)}\\oplus S^{(4,2,1)}\\oplus S^{(3,3,1)}\\oplus S^{(3,2,2)}.$$\n\nThe five summands are the shapes obtained from $(3,2)$ by adding a horizontal $2$-strip: the added node pairs lie in columns $\\{4,5\\}$, $\\{3,4\\}$, $\\{1,4\\}$, $\\{1,3\\}$, and $\\{1,2\\}$, respectively. The dimension check is $[S_7:S_5\\times S_2]\\cdot\\dim S^{(3,2)}\\cdot\\dim S^{(2)}=21\\cdot5\\cdot1=105=14+14+35+21+21$. This is the classical computation $[3,2][2]=[5,2]+[4,3]+[4,2,1]+[3,3,1]+[3,2,2]$.",
+        "strategy": "(1) Relabel one-based and zero-based symmetric-group models explicitly, including induced-function and Specht-module actions. (2) Use the outer Pieri rule for the trivial S_2 factor. (3) Enumerate every partition of 7 containing (3,2) and test its two added columns. (4) Compute all input and output Specht dimensions from the hook formula and count the induction index by identifying left cosets with two-element subsets. Compare both sides; the James example is an independent check.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf",
+              "locator": "§14, Example 14.5, printed pp. 52–53: the explicit computation [3,2][2]=[5,2]+[4,3]+[4,2,1]+[3,3,1]+[3,2,2]."
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press, 1995",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5, equations (5.16)–(5.17), printed pp. 73–74: the horizontal-strip Pieri rule used through cor-outer-pieri-rules-for-trivial-and-sign-factors."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-littlewood-richardson-coefficient-greater-than-one-for-outer-induction",
+        "kind": "example",
+        "title": "An outer-induction multiplicity greater than one",
+        "deps": [
+          "thm-outer-littlewood-richardson-rule",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "thm-standard-polytabloid-basis",
+          "def-young-tableau-standard-tableau-and-shape",
+          "cor-dimension-of-an-induced-finite-dimensional-representation",
+          "thm-tensor-product-basis-from-bases",
+          "def-finite-symmetric-group-and-permutation-notation"
+        ],
+        "justified_by": [],
+        "statement": "Let $\\mu=(2,1)$ and $\\nu=(3,1)$. Then, as a complex $S_7$-module,\n\n$$\\operatorname{Ind}_{S_3\\times S_4}^{S_7}\\bigl(S^{(2,1)}\\boxtimes S^{(3,1)}\\bigr)\\cong S^{(5,2)}\\oplus S^{(5,1,1)}\\oplus S^{(4,3)}\\oplus\\bigl(S^{(4,2,1)}\\bigr)^{\\oplus2}\\oplus S^{(4,1,1,1)}\\oplus S^{(3,3,1)}\\oplus S^{(3,2,2)}\\oplus S^{(3,2,1,1)}.$$\n\nThe multiplicity of $S^{(4,2,1)}$ is $c^{(4,2,1)}_{(2,1),(3,1)}=2$, realized by the two LR tableaux of shape $(4,2,1)/(2,1)$ and content $(3,1)$ with their single entry $2$ at $(2,2)$ and $(3,1)$, respectively; their reading words are $1,1,2,1$ and $1,1,1,2$. The dimension check is\n\n$$[S_7:S_3\\times S_4]\\cdot\\dim S^{(2,1)}\\cdot\\dim S^{(3,1)}=35\\cdot2\\cdot3=210=14+15+14+2\\cdot35+20+21+21+35.$$",
+        "strategy": "(1) List every partition of 7 containing $\\mu=(2,1)$. Each skew shape has four boxes and content $(3,1)$, so a filling is determined by the unique box containing 2. Check the row and column inequalities to enumerate semistandard positions; among them, the LR condition holds exactly when at least one 1 is read before the 2. This gives the coefficient list $0,1,1,1,2,1,1,1,1,0,0,0,0$ for the containing shapes, with zero for the two non-containing partitions.\n\n(2) Apply the outer LR theorem to obtain the displayed induced-module decomposition. Use the removable-corner recurrence for standard-tableau counts and the standard polytabloid basis for each input and summand dimension. The outer subgroup stabilizes a fixed 3-subset, so its index is the number $\\binom73=35$ of such subsets; the induced-module dimension is therefore $35\\cdot2\\cdot3=210$, equal to the dimension sum of the displayed constituents. All enumerations are finite.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (complete university-hosted PDF)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5 Example 25, printed pp. 91–93 (diagonal coproduct and counit on Λ); §5 (5.1)–(5.12) and (5.16)–(5.17), printed pp. 69–74 (skew Schur functions, tableau expansion and Pieri rules); Chapter I §7 (7.1)–(7.6), printed pp. 112–116 (the ring R, the characteristic map and its multiplicativity), and Example 26, printed p. 134 (the comultiplication δf=Σ_{p+q=n} f↓_{S_p×S_q}); Chapter I §9 (9.1)–(9.7) with the Littlewood–Robinson algorithm, printed pp. 142–148 (statement of the LR rule, the bijection (9.4), reversibility (9.5), tableau preservation (9.6) and the decreasing-row lemma (9.7))"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978 (complete PDF)",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf",
+              "locator": "§14 Example 14.5, printed pp. 52–53 (the computation [3,2][2]=[5,2]+[4,3]+[4,2,1]+[3,3,1]+[3,2,2]); §16 Theorem 16.4 with Lemma 16.3, printed pp. 60–64 (the Littlewood–Richardson rule in outer-product form)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-outer-multiplicity-is-not-the-semistandard-tableau-count",
+        "kind": "counterexample",
+        "title": "The outer multiplicity is not the number of semistandard skew tableaux",
+        "generation": {
+          "role": "counterexample"
+        },
+        "deps": [
+          "thm-outer-littlewood-richardson-rule",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "justified_by": [],
+        "statement": "The claim refuted is that for all partitions $\\lambda\\supseteq\\mu$ and $\\nu$ with $|\\lambda|=|\\mu|+|\\nu|$, the multiplicity of $S^\\lambda$ in the outer induction of $S^\\mu\\boxtimes S^\\nu$ equals the number of semistandard skew tableaux of shape $\\lambda/\\mu$ and content $\\nu$. This example has three such semistandard tableaux but outer multiplicity two.",
+        "strategy": "Counterexample: take $\\lambda=(4,2,1)$, $\\mu=(2,1)$, $\\nu=(3,1)$. The skew diagram has cells $(1,3),(1,4),(2,2),(3,1)$ and content $(3,1)$ forces three 1s and one 2. A 2 in $(1,3)$ is impossible because the box to its right would need a second 2. The other three placements are semistandard, giving 3 tableaux. Their reading words are $2111$, $1121$, and $1112$; the first fails the lattice condition and the latter two pass. Thus there are 2 LR tableaux, so $c^{(4,2,1)}_{(2,1),(3,1)}=2$ and the outer multiplicity is 2, not the semistandard count 3.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (complete university-hosted PDF)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5 Example 25, printed pp. 91–93 (diagonal coproduct and counit on Λ); §5 (5.1)–(5.12) and (5.16)–(5.17), printed pp. 69–74 (skew Schur functions, tableau expansion and Pieri rules); Chapter I §7 (7.1)–(7.6), printed pp. 112–116 (the ring R, the characteristic map and its multiplicativity), and Example 26, printed p. 134 (the comultiplication δf=Σ_{p+q=n} f↓_{S_p×S_q}); Chapter I §9 (9.1)–(9.7) with the Littlewood–Robinson algorithm, printed pp. 142–148 (statement of the LR rule, the bijection (9.4), reversibility (9.5), tableau preservation (9.6) and the decreasing-row lemma (9.7))"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978 (complete PDF)",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf",
+              "locator": "§14 Example 14.5, printed pp. 52–53 (the computation [3,2][2]=[5,2]+[4,3]+[4,2,1]+[3,3,1]+[3,2,2]); §16 Theorem 16.4 with Lemma 16.3, printed pp. 60–64 (the Littlewood–Richardson rule in outer-product form)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-restriction-coproduct-for-s-three-one",
+        "kind": "example",
+        "title": "The restriction coproduct of the character $\\chi^{(3,1)}$ of $S_4$",
+        "deps": [
+          "prop-restriction-coproduct-is-schur-skewing",
+          "def-restriction-coproduct-on-the-graded-symmetric-group-character-ring",
+          "thm-littlewood-richardson-schur-product-expansion",
+          "def-skew-schur-function-by-hall-adjointness",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-skew-diagram-and-semistandard-skew-tableau",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "thm-standard-polytabloid-basis",
+          "def-young-tableau-standard-tableau-and-shape",
+          "def-character-of-a-complex-representation",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "lem-character-ring-of-a-direct-product-is-the-tensor-product",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-stable-schur-function-by-bialternants",
+          "thm-schur-functions-form-an-orthonormal-integral-basis"
+        ],
+        "justified_by": [],
+        "statement": "In $S_4$, the restriction coproduct of the irreducible character $\\chi^{(3,1)}$ ([[def-restriction-coproduct-on-the-graded-symmetric-group-character-ring]]) has the five bidegree components $$1\\otimes\\chi^{(3,1)},\\qquad \\chi^{(1)}\\otimes\\bigl(\\chi^{(3)}+\\chi^{(2,1)}\\bigr),\\qquad \\chi^{(2)}\\otimes\\bigl(\\chi^{(2)}+\\chi^{(1,1)}\\bigr)+\\chi^{(1,1)}\\otimes\\chi^{(2)},\\qquad \\bigl(\\chi^{(3)}+\\chi^{(2,1)}\\bigr)\\otimes\\chi^{(1)},\\qquad \\chi^{(3,1)}\\otimes1$$ in bidegrees $(0,4),(1,3),(2,2),(3,1),(4,0)$. This matches the skew Schur expansion $\\Delta_\\Lambda(s_{(3,1)})=\\sum_{\\mu\\subseteq(3,1)}s_\\mu\\otimes s_{(3,1)/\\mu}$ ([[prop-restriction-coproduct-is-schur-skewing]], [[def-skew-schur-function-by-hall-adjointness]]) with $s_{(3,1)/(1)}=s_{(3)}+s_{(2,1)}$, $s_{(3,1)/(2)}=s_{(2)}+s_{(1,1)}$, $s_{(3,1)/(1,1)}=s_{(2)}$ and $s_{(3,1)/(3)}=s_{(1)}=s_{(3,1)/(2,1)}$ ([[thm-skew-jacobi-trudi-and-tableau-expansion]]). Every component has value $3=\\chi^{(3,1)}(1)$ at the identity, as $\\operatorname{Res}_{S_a\\times S_{4-a}}\\chi^{(3,1)}(1,1)=3$ ([[def-character-of-a-complex-representation]]).",
+        "strategy": "(1) By [[prop-restriction-coproduct-is-schur-skewing]], the multiplicity of $\\chi^\\mu\\boxtimes\\chi^\\nu$ in $\\operatorname{Res}_{S_a\\times S_{4-a}}\\chi^{(3,1)}$ is $c^{(3,1)}_{\\mu\\nu}$ for $\\mu\\vdash a$, $\\nu\\vdash4-a$ ([[def-littlewood-richardson-tableau-and-coefficient]]). (2) The relevant coefficients follow from the skew expansions $s_{(3,1)/(1)}=s_{(3)}+s_{(2,1)}$, $s_{(3,1)/(2)}=s_{(2)}+s_{(1,1)}$, $s_{(3,1)/(1,1)}=s_{(2)}$, $s_{(3,1)/(3)}=s_{(1)}$ and $s_{(3,1)/(2,1)}=s_{(1)}$ ([[thm-skew-jacobi-trudi-and-tableau-expansion]], [[thm-littlewood-richardson-schur-product-expansion]]), which for $a=0,1,2,3,4$ give exactly the five displayed components: $\\Delta_{0,4}=1\\otimes\\chi^{(3,1)}$; $\\Delta_{1,3}=\\chi^{(1)}\\otimes(\\chi^{(3)}+\\chi^{(2,1)})$; $\\Delta_{2,2}=\\chi^{(2)}\\otimes(\\chi^{(2)}+\\chi^{(1,1)})+\\chi^{(1,1)}\\otimes\\chi^{(2)}$; $\\Delta_{3,1}=(\\chi^{(3)}+\\chi^{(2,1)})\\otimes\\chi^{(1)}$; $\\Delta_{4,0}=\\chi^{(3,1)}\\otimes1$. (3) Each component is a character of $S_a\\times S_{4-a}$ with value $\\dim\\chi^{(3,1)}=3$ at the identity, since restriction does not change values and $\\chi^{(3,1)}(1)=3$; this is the stated consistency check.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (complete university-hosted PDF)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5 Example 25, printed pp. 91–93 (diagonal coproduct and counit on Λ); §5 (5.1)–(5.12) and (5.16)–(5.17), printed pp. 69–74 (skew Schur functions, tableau expansion and Pieri rules); Chapter I §7 (7.1)–(7.6), printed pp. 112–116 (the ring R, the characteristic map and its multiplicativity), and Example 26, printed p. 134 (the comultiplication δf=Σ_{p+q=n} f↓_{S_p×S_q}); Chapter I §9 (9.1)–(9.7) with the Littlewood–Robinson algorithm, printed pp. 142–148 (statement of the LR rule, the bijection (9.4), reversibility (9.5), tableau preservation (9.6) and the decreasing-row lemma (9.7))"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  }
+]

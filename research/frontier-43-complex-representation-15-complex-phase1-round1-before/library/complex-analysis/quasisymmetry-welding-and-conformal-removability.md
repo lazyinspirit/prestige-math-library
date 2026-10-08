@@ -1,0 +1,17 @@
+---
+page: quasisymmetry-welding-and-conformal-removability
+title: "Quasisymmetry, Welding, and Conformal Removability"
+status: draft
+items: [def-quasisymmetric-circle-homeomorphism, lem-quasiconformal-local-jacobian-energy-bound, lem-smooth-arcs-and-circles-are-removable-for-quasiconformal-maps, lem-ahlfors-extension-of-line-quasisymmetric-maps, thm-beurling-ahlfors-extension, def-quasicircle, lem-riemann-maps-of-jordan-domains-extend-homeomorphically, thm-quasicircle-characterizations, def-conformal-removable-compact-set, lem-zero-length-sets-are-removable-for-continuous-analytic-functions, lem-round-circles-are-conformally-removable, lem-positive-area-compact-sets-are-not-conformally-removable, lem-conformal-removability-is-quasiconformally-invariant, thm-zero-length-sets-and-quasicircles-are-conformally-removable, def-conformal-welding-of-a-jordan-curve, thm-quasiconformal-welding-existence, thm-welding-uniqueness-under-removability]
+examples: []
+---
+
+Quasisymmetry controls the relative lengths of adjacent arcs uniformly across the circle; it allows distortion while retaining a precise three-point geometry. The Beurling–Ahlfors extension turns this boundary control into a quasiconformal map of the plane, and its circle version lets boundary maps be extended across either complementary component. [[def-quasisymmetric-circle-homeomorphism]] [[thm-beurling-ahlfors-extension]]
+
+A Jordan curve is a quasicircle when it is the quasiconformal image of a round circle. The characterizations on this page connect that analytic definition to bounded turning and to quasiconformal reflection. The Jordan-domain boundary theorem supplies the homeomorphic extensions of the Riemann maps needed to compare the two sides. [[def-quasicircle]] [[thm-quasicircle-characterizations]] [[lem-riemann-maps-of-jordan-domains-extend-homeomorphically]]
+
+Conformal welding records how the boundary parameterizations of two complementary domains fit together. With the convention used here, the circle map is $h=f^{-1}\circ g$ on the common boundary. Every quasisymmetric circle homeomorphism has a welding whose curve is a quasicircle; Möbius postcomposition leaves the welding map unchanged. [[def-conformal-welding-of-a-jordan-curve]] [[thm-quasiconformal-welding-existence]]
+
+Conformal removability asks whether every sphere homeomorphism conformal off a compact set must be Möbius. Round circles provide the base case, and quasiconformal invariance carries removability to their quasiconformal images. Sets of finite one-dimensional Hausdorff measure are also covered by the analytic removability argument, while positive-area compact sets are not removable. These are sufficient families: the results assert no converse or Hausdorff-dimension threshold. [[def-conformal-removable-compact-set]] [[lem-round-circles-are-conformally-removable]] [[lem-conformal-removability-is-quasiconformally-invariant]] [[lem-zero-length-sets-are-removable-for-continuous-analytic-functions]] [[lem-positive-area-compact-sets-are-not-conformally-removable]] [[thm-zero-length-sets-and-quasicircles-are-conformally-removable]]
+
+Welding existence and welding-curve uniqueness are different questions. The existence theorem applies to every quasisymmetric map, while uniqueness of the curve requires removability of the first welding boundary; no unconditional uniqueness is claimed. The examples page tests this distinction on the circle, on fractal quasicircles, and on nonremovable compact sets. [[thm-welding-uniqueness-under-removability]]

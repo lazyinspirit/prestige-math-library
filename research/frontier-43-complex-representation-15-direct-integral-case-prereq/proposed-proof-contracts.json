@@ -1,0 +1,852 @@
+{
+  "version": 1,
+  "scope": [
+    "cor-compact-groups-are-type-i-and-direct-integrals-collapse-to-discrete-sums",
+    "ex-compact-group-direct-integrals-are-atomic",
+    "ex-the-left-regular-factor-of-an-icc-discrete-group",
+    "cex-irreducible-multiplicity-data-is-not-canonical-outside-type-i"
+  ],
+  "contracts": {
+    "cor-compact-groups-are-type-i-and-direct-integrals-collapse-to-discrete-sums": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-arbitrary-unitary-representations-of-compact-groups-decompose-discretely",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a compact Hausdorff group and let $\\pi:K\\to U(H)$ be a strongly continuous unitary representation on a complex Hilbert space $H$. For $\\sigma\\in\\widehat K$ let $H_{(\\sigma)}$ be the closed span of all closed $\\pi(K)$-invariant subspaces of $H$ on which $\\pi$ restricts to a representation unitarily equivalent to $\\sigma$; equivalently $H_{(\\sigma)}=\\operatorname{range}(P_\\sigma)$ for the isotypic projection of [[def-compact-group-isotypic-projection]] ([[thm-isotypic-projections-are-mutually-orthogonal-equivariant-projections]]). Then:\n\n1. $H=\\widehat\\bigoplus_{\\sigma\\in\\widehat K}H_{(\\sigma)}$ is a Hilbert direct sum of pairwise orthogonal closed invariant subspaces ([[def-hilbert-direct-sum-of-unitary-representations]]);\n2. each nonzero $H_{(\\sigma)}$ is a (possibly infinite) Hilbert direct sum of copies of the finite-dimensional irreducible $\\sigma$; in particular every irreducible strongly continuous unitary representation of $K$ is finite dimensional;\n3. the projections $P_\\sigma$ are the orthogonal projections onto the summands $H_{(\\sigma)}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-unitary-dual-of-a-compact-group",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $K$ be a compact Hausdorff topological group. Two strongly continuous unitary representations $\\pi$ on $H$ and $\\sigma$ on $H'$ of $K$ are **unitarily equivalent** when there is a unitary intertwiner between them, that is, a bijective linear isometry $U:H\\to H'$ with $U\\pi(k)=\\sigma(k)U$ for every $k\\in K$ ([[def-strongly-continuous-unitary-representation]]). The **unitary dual** (dual object) $\\widehat K$ is the set of unitary equivalence classes of irreducible strongly continuous unitary representations of $K$.\n\nBy [[thm-continuous-irreducible-unitary-representations-of-compact-groups-are-finite-dimensional]], under the Axiom of Choice ([[def-axiom-of-choice]]) every irreducible strongly continuous unitary representation of $K$ has finite-dimensional carrier: the carrier admits an ordered basis of finite length $d$, its dimension $d_\\pi:=\\dim_{\\mathbb C}H_\\pi\\ge1$ ([[def-dimension]]), and every class contains a representative whose carrier is $\\mathbb C^d$ ([[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]] realizes the carrier as $\\mathbb C^d$ through an orthonormal basis). Consequently $\\widehat K$ is a set: it is the union over $d\\ge1$ of the set of unitary equivalence classes of irreducible representations on the fixed carrier $\\mathbb C^d$, and equivalence on a fixed carrier is a relation on the set of group homomorphisms $K\\to U(d)$.\n\n**Standing conventions.** When a statement uses a representative $\\pi$ of a class in $\\widehat K$, or an orthonormal basis of its carrier, such choices are licensed by the Axiom of Choice ([[def-axiom-of-choice]]) and every assertion made this way must be invariant under unitary equivalence; the normalized coefficient family of [[def-normalized-irreducible-matrix-coefficient-basis]] is the first instance. Irreducibility is understood in the sense of [[def-strongly-continuous-unitary-representation]], so every class in $\\widehat K$ has nonzero carrier and $d_\\pi\\ge1$. No topology is placed on $\\widehat K$ and no countability of $\\widehat K$ is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-hilbert-direct-sum-of-unitary-representations",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $I$ be a set and let $(H_i)_{i\\in I}$ be a family of complex Hilbert spaces ([[def-hilbert-space]]). A family $v=(v_i)_{i\\in I}$ with $v_i\\in H_i$ for every $i$ is **square summable** when\n$$\\sum_{i\\in I}\\|v_i\\|^2<+\\infty$$\nin the finite-subset-supremum convention of [[def-square-summable-family-on-an-arbitrary-index-set]]: the sum is the supremum of the finite subsums $\\sum_{i\\in F}\\|v_i\\|^2$ over finite $F\\subseteq I$. The **Hilbert direct sum** $\\widehat\\bigoplus_{i\\in I}H_i$ is the set of all square-summable families, equipped with componentwise addition and scalar multiplication and with the pairing\n$$\\langle v,w\\rangle:=\\sum_{i\\in I}\\langle v_i,w_i\\rangle ,$$\nthe scalar family on the right being summed as a finite-subset net in the sense of [[def-square-summable-family-on-an-arbitrary-index-set]]. By [[thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set]] and [[lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums]] the resulting space is a complex Hilbert space whose norm is $\\|v\\|=\\bigl(\\sum_{i\\in I}\\|v_i\\|^2\\bigr)^{1/2}$, and the canonical maps $H_j\\to\\widehat\\bigoplus_iH_i$ extending a vector by zero are linear isometries ([[def-linear-isometry-and-orthogonal-or-unitary-operator]]) with pairwise orthogonal closed images ([[def-orthogonality-and-orthogonal-complement]]) whose closed linear span is the whole space.\n\n**The pairing is well defined.** For square-summable $v,w$ and every finite $F\\subseteq I$ the finite Cauchy–Schwarz inequality applied to the scalar lists $(\\|v_i\\|)_{i\\in F}$, $(\\|w_i\\|)_{i\\in F}$ gives\n$$\\sum_{i\\in F}|\\langle v_i,w_i\\rangle|\\le\\sum_{i\\in F}\\|v_i\\|\\,\\|w_i\\|\\le\\Bigl(\\sum_{i\\in F}\\|v_i\\|^2\\Bigr)^{1/2}\\Bigl(\\sum_{i\\in F}\\|w_i\\|^2\\Bigr)^{1/2}\\le\\|v\\|\\,\\|w\\| ,$$\nso the family $(\\langle v_i,w_i\\rangle)_{i\\in I}$ is absolutely summable and its finite-subset net converges to a scalar $\\langle v,w\\rangle$ with $|\\langle v,w\\rangle|\\le\\|v\\|\\,\\|w\\|$; this is the scalar summation theory of [[def-square-summable-family-on-an-arbitrary-index-set]]. Componentwise sesquilinearity, conjugate symmetry and positive definiteness pass to the finite-subset net by linearity of the scalar sum, so the pairing is an inner product. For completeness let $(v^{(n)})_{n\\ge1}$ be a Cauchy sequence and let $K$ be a bound for it; for each $i$ the components satisfy $\\|v^{(n)}_i-v^{(m)}_i\\|\\le\\|v^{(n)}-v^{(m)}\\|$, so they converge to some $v_i\\in H_i$, and for every finite $F$ the limit relation $\\sum_{i\\in F}\\|v_i\\|^2=\\lim_n\\sum_{i\\in F}\\|v^{(n)}_i\\|^2\\le K^2$ shows that $v=(v_i)$ is square summable; then $\\|v^{(n)}-v\\|^2=\\sup_F\\lim_m\\sum_{i\\in F}\\|v^{(n)}_i-v^{(m)}_i\\|^2$ is eventually below any prescribed $\\varepsilon^2$, so $v^{(n)}\\to v$ and $\\widehat\\bigoplus_iH_i$ is complete. Both arguments are choice-free beyond the completeness of the factors.\n\n**Strongly continuous unitary representations.** Suppose now that $K$ is a topological group and that each $H_i$ carries a strongly continuous unitary representation $\\pi_i$ of $K$ ([[def-strongly-continuous-unitary-representation]]). The **Hilbert direct sum of the representations**, still written $\\widehat\\bigoplus_i\\pi_i$, acts componentwise,\n$$\\Bigl(\\widehat\\bigoplus_i\\pi_i\\Bigr)(k)\\,(v_i)_{i\\in I}:=(\\pi_i(k)v_i)_{i\\in I},$$\nwhich is again a square-summable family because every $\\pi_i(k)$ is isometric, and which is a group homomorphism into the unitary group of the sum by componentwise computation. To see strong continuity let $v\\in\\widehat\\bigoplus H_i$ and $\\varepsilon>0$; choose a finite $F\\subseteq I$ with $\\sum_{i\\notin F}\\|v_i\\|^2<\\varepsilon^2/16$, possible by the tail-control property of the finite-subset-supremum convention, and, if $F=\\varnothing$, take $U=K$, since the tail estimate alone is less than $\\varepsilon/2$. Otherwise, for each $i\\in F$ choose a neighbourhood $U_i$ of the identity with $\\|\\pi_i(k)v_i-v_i\\|<\\varepsilon/(2|F|)$ for $k\\in U_i$, which is possible by the finitely many strong continuity assumptions; then $U=\\bigcap_{i\\in F}U_i$ is an identity neighbourhood and, using unitarity of each $\\pi_i(k)$ to bound the tail of $\\pi(k)v-v$ by twice the square root of the tail of $v$,\n$$\\Bigl\\|\\Bigl(\\widehat\\bigoplus_i\\pi_i\\Bigr)(k)v-v\\Bigr\\|\\le\\sum_{i\\in F}\\|\\pi_i(k)v_i-v_i\\|+2\\Bigl(\\sum_{i\\notin F}\\|v_i\\|^2\\Bigr)^{1/2}<\\varepsilon$$\nfor every $k\\in U$. Hence $\\widehat\\bigoplus_i\\pi_i$ is a strongly continuous unitary representation of $K$.\n\n**Direct sums of subrepresentations.** A strongly continuous unitary representation $\\pi$ of $K$ on a complex Hilbert space $H$ is the **Hilbert direct sum of a family of subrepresentations** $(H_i,\\pi_i)_{i\\in I}$ when the $H_i$ are pairwise orthogonal closed $\\pi(K)$-invariant subspaces of $H$ whose closed linear span is $H$ and $\\pi|_{H_i}=\\pi_i$ for every $i$. In that case the canonical map\n$$\\widehat\\bigoplus_{i\\in I}H_i\\longrightarrow H,\\qquad (v_i)_{i\\in I}\\mapsto\\sum_{i\\in I}v_i ,$$\nis well defined by [[lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums]], which makes the finite-subset net of the partial sums converge with squared norm $\\sum_i\\|v_i\\|^2$; it is a linear isometry by orthogonality, its image is closed because $\\widehat\\bigoplus_iH_i$ is complete, and the image contains every $H_i$ and hence has closed linear span $H$, so the map is a unitary intertwiner. Conversely, if this canonical map is a unitary intertwiner for some pairwise orthogonal closed subspaces $H_i$ with closed linear span $H$ that are $\\pi(K)$-invariant, then $\\pi$ is the Hilbert direct sum of the subrepresentations $(H_i,\\pi|_{H_i})$. The Axiom of Choice ([[def-axiom-of-choice]]) is declared for this development because the decomposition theorems select representatives in unitary-equivalence classes and apply the cited Hilbert-space suppliers; the construction of the direct sum and the verifications above use no choice beyond their inputs.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-schurs-lemma-for-unitary-representations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC). Let $\\pi$ on a nonzero complex Hilbert space\n$H$ and $\\rho$ on a nonzero complex Hilbert space $K$ be irreducible strongly\ncontinuous unitary representations of the same topological group $G$. Every\nbounded self-intertwiner of $\\pi$ is a scalar multiple of $I_H$. If a nonzero\nbounded intertwiner $T:H\\to K$ satisfies $T\\pi(g)=\\rho(g)T$ for every $g\\in G$,\nthen $\\pi$ and $\\rho$ are unitarily equivalent. Consequently, inequivalent\nirreducible representations have no nonzero bounded intertwiner.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-von-neumann-algebra-and-commutant",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $H$ be a complex Hilbert space and let $\\mathcal B(H)$ denote\nits bounded linear operators. Applying AC to a family indexed by the natural numbers\nsupplies Countable Choice, the hypothesis of\n[[thm-hilbert-adjoint-properties]], which provides adjoints on $\\mathcal B(H)$.\nA **concrete von Neumann algebra** on $H$ is a\nunital $*$-subalgebra $\\mathcal A\\subseteq\\mathcal B(H)$ that is closed in the\nweak operator topology (WOT). Here unital means $I_H\\in\\mathcal A$; the zero\nHilbert space is allowed, with $I_H=0$ and sole unital algebra $\\{0\\}$. This is\nthe only use of AC in this definition.\n\nFor any set $\\mathcal S\\subseteq\\mathcal B(H)$, its **commutant** and\n**double commutant** are\n$$\\mathcal S':=\\{T\\in\\mathcal B(H):TS=ST\\text{ for every }S\\in\\mathcal S\\},\\qquad \\mathcal S'':=(\\mathcal S')'.$$\nCommutants are taken inside $\\mathcal B(H)$. The **von Neumann algebra\ngenerated by $\\mathcal S$** is\n$$W^*(\\mathcal S):=\\overline{\\operatorname{Alg}^*(\\mathcal S\\cup\\{I_H\\})}^{\\,\\mathrm{WOT}},$$\nthe WOT closure in $\\mathcal B(H)$ of the unital $*$-algebra generated by\n$\\mathcal S$. No bicommutant theorem is part of these definitions.\n\nTwo elementary properties will be used. For fixed $S\\in\\mathcal B(H)$,\n$$\\langle TS\\xi,\\eta\\rangle=\\langle T(S\\xi),\\eta\\rangle,\\qquad \\langle ST\\xi,\\eta\\rangle=\\langle T\\xi,S^*\\eta\\rangle$$\nare WOT-continuous matrix coefficients as functions of $T$. Thus each equation\n$TS=ST$ defines a WOT-closed set, and so $\\mathcal S'$ is WOT-closed. If\n$\\mathcal S$ is self-adjoint, then $\\mathcal S'$ is a unital $*$-subalgebra:\nproducts preserve commutation with every $S$, and taking adjoints of $TS=ST$\ngives $ST^*=T^*S$. These facts do not identify $W^*(\\mathcal S)$ with\n$\\mathcal S''$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-double-commutant-theorem-for-concrete-von-neumann-algebras",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let $M\\subseteq\\mathcal B(H)$ be a unital $*$-subalgebra closed in the weak operator topology. Then $M''=M$, and $M$ is also closed in the strong operator topology. Consequently the concrete von Neumann algebras of [[def-von-neumann-algebra-and-commutant]] are exactly the unital $*$-subalgebras that are closed in either of these topologies. For an arbitrary set $\\mathcal S\\subseteq\\mathcal B(H)$ one has $W^*(\\mathcal S)''=W^*(\\mathcal S)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-factor-representation-and-primary-representation",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). Let $G$ be a topological group and let $(\\pi,H)$ be a strongly continuous unitary representation on a nonzero Hilbert space $H$ ([[def-strongly-continuous-unitary-representation]], [[def-hilbert-space]]). Set $M:=\\pi(G)''\\subseteq\\mathcal B(H)$, the concrete double commutant defined in [[def-von-neumann-algebra-and-commutant]], and set $Z(M):=M\\cap M'$. The representation $\\pi$ is **factorial**, or **primary**, when $Z(M)=\\mathbb C I_H$. It is a **factor representation** when $M$ is a factor, meaning $M\\cap M'=\\mathbb C I_H$. The commutants satisfy $\\pi(G)'=(\\pi(G)'')'$ by their definitions, and irreducibility implies factoriality. The converse fails: for every nontrivial ICC discrete group $\\Gamma$ (meaning every nonidentity conjugacy class is infinite), its left regular representation is factorial but not irreducible. Such groups exist, for example the finitary symmetric group on a countably infinite set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-separable-type-i-factors-are-multiples-of-irreducible-representations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be a concrete type-I factor on a nonzero separable complex Hilbert space $H$. There is a finite or countably infinite exhaustive orthogonal family $(p_i)$ of minimal projections in $M$, equivalent to a fixed $p=p_{i_0}$, and partial isometries $t_i$ in $M$ with $t_i^*t_i=p$ and $t_it_i^*=p_i$. Put $E=\\ell^2(I)$, $L=pH$. The unitary $W:E\\otimes L\\to H$, $W(\\delta_i\\otimes\\eta)=t_i\\eta$, satisfies $W^*MW=B(E)\\otimes I_L$ and $W^*M'W=I_E\\otimes B(L)$. If $\\pi$ is a strongly continuous unitary representation of a topological group $G$ on $H$ and $\\pi(G)''=M$, there is a strongly continuous irreducible representation $\\sigma$ on $E$ with $W^*\\pi(g)W=\\sigma(g)\\otimes I_L$, so $\\pi$ is $\\dim(L)$ copies of $\\sigma$. Equivalently $N=M'$ is type I; a minimal $q$ in $N$ has invariant irreducible carrier $K=qH$, and an exhaustive orthogonal family $(q_i)$ of equivalent minimal projections in $N$ with $u_i^*u_i=q_i$ and $u_iu_i^*=q$ gives a unitary $V:H\\to K^{\\oplus m}$, $V\\xi=(u_i\\xi)$, $m=\\text{number of }q_i$, intertwining $\\pi$ with $m$ copies of $\\pi|K$. The space $pH$ for a minimal $p$ in $M$ is the multiplicity space, not the irreducible carrier. In the direct-sum realization used here, the operators $\\rho(A)(\\eta_i)_{i\\in I}:=(\\sum_{j\\in I}A_{ij}\\eta_j)_{i\\in I}$ for $A=(A_{ij})\\in B(E)$ constitute the algebra written $B(E)\\otimes I_L$, and $(I\\star S)(\\eta_i)_{i\\in I}:=(S\\eta_i)_{i\\in I}$ for $S\\in B(L)$ constitutes $I_E\\otimes B(L)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-type-i-factor-representation-and-type-i-group",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a nonzero separable complex Hilbert space and let $M\\subseteq\\mathcal B(H)$ be a concrete factor von Neumann algebra ([[def-factor-representation-and-primary-representation]]). A nonzero projection $p\\in M$ is **minimal**, or **abelian**, when $pMp=\\mathbb Cp$. The factor $M$ is of **type I** when it contains a nonzero minimal projection. A strongly continuous unitary representation $\\pi$ of a topological group $G$ on a nonzero separable Hilbert space is a **type I factor representation** when its generated von Neumann algebra $\\pi(G)''$ is a factor of type I; and a factor representation is of type I when it is a multiple of an irreducible representation (equivalently, by [[lem-separable-type-i-factors-are-multiples-of-irreducible-representations]], when $\\pi(G)''$ contains a nonzero minimal projection). The group $G$ is **type I** when every factor representation of $G$ on a separable Hilbert space is of type I. The two descriptions of a type I factor representation agree: for a strongly continuous unitary representation $\\pi$ on nonzero separable $H$ with $M=\\pi(G)''$ a factor, $M$ contains a nonzero minimal projection if and only if there is an irreducible representation $\\sigma$ of $G$ and $m\\in\\{1,2,\\dots,\\infty\\}$ with $\\pi\\cong\\sigma^{\\oplus m}$ ([[lem-separable-type-i-factors-are-multiples-of-irreducible-representations]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-regular-representation-peter-weyl-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $K$ be a compact Hausdorff group with normalized Haar probability $\\mu$ and let $\\lambda,\\rho$ be the left and right regular unitary representations of $K$ on $L^2(K,\\mu;\\mathbb C)$ ([[def-left-and-right-regular-unitary-representations]]; $K$ is unimodular so $\\Delta_K\\equiv1$). For $\\pi\\in\\widehat K$ let $M_\\pi\\subseteq C(K)$ be the span of all matrix coefficients of $\\pi$ ([[def-matrix-coefficient-of-a-unitary-representation]]). For the fixed representative $\\pi$ of its class, with fixed orthonormal basis $e^\\pi_1,\\dots,e^\\pi_{d_\\pi}$, let $J_\\pi:H_\\pi\\to H_\\pi$ be the coordinate conjugation $J_\\pi\\bigl(\\sum_ia_ie^\\pi_i\\bigr)=\\sum_i\\overline{a_i}e^\\pi_i$, and define the **conjugate representation** $\\overline\\pi(k):=J_\\pi\\pi(k)J_\\pi$. Then:\n\n1. $M_\\pi$ is finite dimensional of dimension $d_\\pi^2$ and is the closed span of the block $\\{u^\\pi_{ij}\\}_{i,j}$ of [[def-normalized-irreducible-matrix-coefficient-basis]]; distinct $M_\\pi,M_\\sigma$ are orthogonal, and $L^2(K)=\\widehat\\bigoplus_{\\pi\\in\\widehat K}M_\\pi$ ([[def-hilbert-direct-sum-of-unitary-representations]]).\n2. The two-sided action on coefficients is $\\rho(g)c^\\pi_{v,w}=c^\\pi_{\\pi(g)v,w}$ and $\\lambda(g)c^\\pi_{v,w}=c^\\pi_{v,\\pi(g)w}$ for all $g\\in K$ and $v,w$. Consequently $\\rho|_{M_\\pi}\\cong d_\\pi\\,\\pi$ and $\\lambda|_{M_\\pi}\\cong d_\\pi\\,\\overline\\pi$ as unitary representations.\n3. Hence $\\rho\\cong\\widehat\\bigoplus_{\\pi\\in\\widehat K}d_\\pi\\,\\pi$ and $\\lambda\\cong\\widehat\\bigoplus_{\\pi\\in\\widehat K}d_\\pi\\,\\overline\\pi$; the assignment $\\pi\\mapsto\\overline\\pi$ induces a bijection of $\\widehat K$ with $d_{\\overline\\pi}=d_\\pi$, so also $\\lambda\\cong\\widehat\\bigoplus_{\\pi\\in\\widehat K}d_\\pi\\,\\pi$: the left regular representation is the Hilbert direct sum of $d_\\pi$ copies of $\\pi$, and on each coefficient block the right action is on the input-vector factor $H_\\pi$, while the left action is on its conjugate factor.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable** if some at most countable subset $D\\subseteq X$ is dense in $X$ ([[def-dense-top]], [[def-countable]]). Equivalently, every nonempty open subset of $X$ meets $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] to express $H$ as an orthogonal Hilbert sum of nonzero finite-dimensional irreducible copies. Choose a unit vector in each copy. Distinct chosen vectors have distance $\\sqrt2$, so the open balls of radius $1/3$ about them are pairwise disjoint. A countable dense subset of $H$ meets each ball; assigning its first point in each ball injects the copies into $\\mathbb N$. Thus there are at most countably many copies, hence at most countably many occurring classes and each multiplicity is finite positive or countably infinite. Grouping equal classes in the Hilbert sum gives the displayed decomposition with canonical isotypic subspaces. For $H=0$ take the empty sum.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $P_\\alpha$ be the orthogonal projection onto $H_\\alpha$. This subspace reduces $\\pi(K)$, so $P_\\alpha\\in\\pi(K)'$. If $T\\in\\pi(K)'$ and $V$ is an irreducible copy of class $\\alpha$, the map $T|_V$ intertwines. By [F2], $(T|_V)^*(T|_V)$ is a nonnegative scalar on $V$; if that scalar is zero its image is zero, and otherwise its image is a closed irreducible copy of the same class. Hence $T(V)\\subseteq H_\\alpha$, and boundedness gives $T(H_\\alpha)\\subseteq H_\\alpha$. The same holds for $T^*\\in\\pi(K)'$, so $H_\\alpha$ reduces $T$ and $P_\\alpha T=TP_\\alpha$. Consequently $P_\\alpha\\in\\pi(K)''\\cap\\pi(K)'$, the centre in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\pi$ is a nonzero factor representation, each nonzero $P_\\alpha$ is a scalar projection, hence equals $I$. Orthogonality makes exactly one class occur. Therefore $\\pi$ is a multiple of that finite-dimensional irreducible, and [F4] makes it type I; this holds for every separable factor representation, so $K$ is type I. The regular multiplicities are [F5]. The countable isotypic Hilbert sum itself is an atomic counting-measure integral: square-integrability is exactly square-summability of its components. This proves all claims without imposing atomicity on an initially supplied parameter space.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero representation has empty I in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero representation is explicitly allowed in the Statement and step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that exactly one isotypic class occurs in a nonzero factor."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Finite multiplicities and countably infinite multiplicities are both covered in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval endpoint parameters; circle characters are all covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use AC for representatives and vectors; the Statement assumes it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "locally-reviewed",
+        "scope": "Focused mathematical repair of four original missing prerequisite carriers, not an independent full-item audit."
+      }
+    },
+    "ex-compact-group-direct-integrals-are-atomic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-compact-groups-are-type-i-and-direct-integrals-collapse-to-discrete-sums",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a compact second-countable group. Every nonzero factor representation of $K$ on a separable complex Hilbert space is a multiple of one finite-dimensional irreducible representation; consequently $K$ is type I. Every strongly continuous unitary representation $(\\pi,H)$ on a separable complex Hilbert space has the canonical isotypic decomposition\n$$\\pi\\cong\\bigoplus_{\\alpha\\in I}m_\\alpha\\pi_\\alpha,\\qquad m_\\alpha\\in\\{1,2,\\ldots,\\infty\\},$$\nwhere $I\\subseteq\\widehat K$ is at most countable, the representatives $\\pi_\\alpha$ are finite dimensional, and $\\infty$ denotes countably infinite multiplicity. The sum is the completed orthogonal Hilbert sum, with $I=\\varnothing$ allowed when $H=0$. In the left regular representation the multiplicity of each irreducible is its dimension. Thus compact-group representations admit atomic direct-integral models; this concerns the canonical isotypic decomposition, not the atomicity of every redundant parameter measure.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-unitary-dual-of-a-compact-group",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $K$ be a compact Hausdorff topological group. Two strongly continuous unitary representations $\\pi$ on $H$ and $\\sigma$ on $H'$ of $K$ are **unitarily equivalent** when there is a unitary intertwiner between them, that is, a bijective linear isometry $U:H\\to H'$ with $U\\pi(k)=\\sigma(k)U$ for every $k\\in K$ ([[def-strongly-continuous-unitary-representation]]). The **unitary dual** (dual object) $\\widehat K$ is the set of unitary equivalence classes of irreducible strongly continuous unitary representations of $K$.\n\nBy [[thm-continuous-irreducible-unitary-representations-of-compact-groups-are-finite-dimensional]], under the Axiom of Choice ([[def-axiom-of-choice]]) every irreducible strongly continuous unitary representation of $K$ has finite-dimensional carrier: the carrier admits an ordered basis of finite length $d$, its dimension $d_\\pi:=\\dim_{\\mathbb C}H_\\pi\\ge1$ ([[def-dimension]]), and every class contains a representative whose carrier is $\\mathbb C^d$ ([[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]] realizes the carrier as $\\mathbb C^d$ through an orthonormal basis). Consequently $\\widehat K$ is a set: it is the union over $d\\ge1$ of the set of unitary equivalence classes of irreducible representations on the fixed carrier $\\mathbb C^d$, and equivalence on a fixed carrier is a relation on the set of group homomorphisms $K\\to U(d)$.\n\n**Standing conventions.** When a statement uses a representative $\\pi$ of a class in $\\widehat K$, or an orthonormal basis of its carrier, such choices are licensed by the Axiom of Choice ([[def-axiom-of-choice]]) and every assertion made this way must be invariant under unitary equivalence; the normalized coefficient family of [[def-normalized-irreducible-matrix-coefficient-basis]] is the first instance. Irreducibility is understood in the sense of [[def-strongly-continuous-unitary-representation]], so every class in $\\widehat K$ has nonzero carrier and $d_\\pi\\ge1$. No topology is placed on $\\widehat K$ and no countability of $\\widehat K$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-regular-representation-peter-weyl-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $K$ be a compact Hausdorff group with normalized Haar probability $\\mu$ and let $\\lambda,\\rho$ be the left and right regular unitary representations of $K$ on $L^2(K,\\mu;\\mathbb C)$ ([[def-left-and-right-regular-unitary-representations]]; $K$ is unimodular so $\\Delta_K\\equiv1$). For $\\pi\\in\\widehat K$ let $M_\\pi\\subseteq C(K)$ be the span of all matrix coefficients of $\\pi$ ([[def-matrix-coefficient-of-a-unitary-representation]]). For the fixed representative $\\pi$ of its class, with fixed orthonormal basis $e^\\pi_1,\\dots,e^\\pi_{d_\\pi}$, let $J_\\pi:H_\\pi\\to H_\\pi$ be the coordinate conjugation $J_\\pi\\bigl(\\sum_ia_ie^\\pi_i\\bigr)=\\sum_i\\overline{a_i}e^\\pi_i$, and define the **conjugate representation** $\\overline\\pi(k):=J_\\pi\\pi(k)J_\\pi$. Then:\n\n1. $M_\\pi$ is finite dimensional of dimension $d_\\pi^2$ and is the closed span of the block $\\{u^\\pi_{ij}\\}_{i,j}$ of [[def-normalized-irreducible-matrix-coefficient-basis]]; distinct $M_\\pi,M_\\sigma$ are orthogonal, and $L^2(K)=\\widehat\\bigoplus_{\\pi\\in\\widehat K}M_\\pi$ ([[def-hilbert-direct-sum-of-unitary-representations]]).\n2. The two-sided action on coefficients is $\\rho(g)c^\\pi_{v,w}=c^\\pi_{\\pi(g)v,w}$ and $\\lambda(g)c^\\pi_{v,w}=c^\\pi_{v,\\pi(g)w}$ for all $g\\in K$ and $v,w$. Consequently $\\rho|_{M_\\pi}\\cong d_\\pi\\,\\pi$ and $\\lambda|_{M_\\pi}\\cong d_\\pi\\,\\overline\\pi$ as unitary representations.\n3. Hence $\\rho\\cong\\widehat\\bigoplus_{\\pi\\in\\widehat K}d_\\pi\\,\\pi$ and $\\lambda\\cong\\widehat\\bigoplus_{\\pi\\in\\widehat K}d_\\pi\\,\\overline\\pi$; the assignment $\\pi\\mapsto\\overline\\pi$ induces a bijection of $\\widehat K$ with $d_{\\overline\\pi}=d_\\pi$, so also $\\lambda\\cong\\widehat\\bigoplus_{\\pi\\in\\widehat K}d_\\pi\\,\\pi$: the left regular representation is the Hilbert direct sum of $d_\\pi$ copies of $\\pi$, and on each coefficient block the right action is on the input-vector factor $H_\\pi$, while the left action is on its conjugate factor.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $(X,\\mathcal A,\\mu)$ be a sigma-finite measure space with countably\ngenerated sigma-algebra, and let $1 \\le p < \\infty$. Then $L^p(\\mu)$ is\nseparable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measurable-hilbert-field-from-a-countable-fundamental-family",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu)$ be a standard-Borel space with a sigma-finite measure\non its Borel sigma-algebra; the measure is not assumed complete. A **measurable\ncomplex Hilbert field with countable fundamental family** consists of a\nseparable complex Hilbert space $H_x$ for each $x\\in X$ and a sequence of\nvectors $e_n(x)\\in H_x$ ($n\\in\\mathbb N$) such that\n$$x\\longmapsto\\langle e_n(x),e_m(x)\\rangle_{H_x}$$\nis Borel measurable for every $n,m$, and the complex-linear span of\n$\\{e_n(x):n\\in\\mathbb N\\}$ is dense in $H_x$ for every $x$. The fibres may be\nzero-dimensional; no positive lower bound on their dimensions is imposed. The\ninner product is linear in its first variable, as in the library's complex\ninner-product convention.\n\nA section is a choice of a vector $\\xi(x)\\in H_x$ for each $x$. It is a\n**measurable section** when all its fundamental coefficients\n$$x\\longmapsto\\langle\\xi(x),e_n(x)\\rangle_{H_x},\\qquad n\\in\\mathbb N,$$\nare Borel measurable complex functions. Each $e_n$ is itself measurable by\nthe Gram-coefficient condition. Pointwise sums and multiplication by a\nmeasurable complex scalar function are taken in the corresponding fibres.\n\nTwo measurable sections are identified **almost everywhere** when there is a\nBorel null set $N$ such that they agree at every $x\\notin N$. This formulation\nworks on the given, possibly noncomplete, measure space and does not silently\nadjoin arbitrary subsets of null sets to $\\mathcal B$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-direct-integral-of-a-measurable-hilbert-field",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu)$ carry a measurable complex Hilbert field\n$(H_x,e_n(x))_{x\\in X}$ as in\n[[def-measurable-hilbert-field-from-a-countable-fundamental-family]], with\ninner products linear in the first variable. Write $\\mathscr M(H)$ for its\nmeasurable sections. Define the square-integrable section space\n$$\\mathscr M_2(H):=\\left\\{\\xi\\in\\mathscr M(H):\\int_X\\|\\xi(x)\\|_{H_x}^{2}\\,d\\mu(x)<\\infty\\right\\}.$$\nThe integrand is a nonnegative measurable function: the section lemma\n[[lem-measurable-sections-have-measurable-pointwise-inner-products]] makes\n$x\\mapsto\\|\\xi(x)\\|$ measurable, and composition with $t\\mapsto t^2$ preserves\nmeasurability by\n[[thm-composition-with-borel-functions-preserves-measurability]], whose\nmeasurability convention is inverse-image measurability\n[[def-measurable-function-between-measurable-spaces]]. Its integral\nis the nonnegative Lebesgue integral\n[[def-nonnegative-lebesgue-integral]].\n\nFor $\\xi,\\eta\\in\\mathscr M(H)$, put $\\xi\\sim_\\mu\\eta$ when there is a Borel\n$\\mu$-null set $N$ such that $\\xi(x)=\\eta(x)$ for every $x\\notin N$, using the\nnoncomplete-base convention of the field definition. The **direct integral**\nis the quotient set\n$$\n\\int_X^{\\oplus}H_x\\,d\\mu(x):=\\mathscr M_2(H)/{\\sim_\\mu}.\n$$\nWrite $[\\xi]$ for the class of $\\xi$. Addition and scalar multiplication are\ninduced by pointwise fibre operations, and the inner product is\n$$\\langle[\\xi],[\\eta]\\rangle:=\\int_X\\langle\\xi(x),\\eta(x)\\rangle_{H_x}\\,d\\mu(x).$$\n\n**The admissible sections form a vector space.** Measurability of pointwise\nlinear combinations follows from the section lemma. If $a=\\|\\xi(x)\\|$ and\n$b=\\|\\eta(x)\\|$, fibrewise expansion gives\n$$\\|\\xi(x)+\\eta(x)\\|^2=a^2+b^2+2\\operatorname{Re}\\langle\\xi(x),\\eta(x)\\rangle\\le a^2+b^2+2ab\\le2(a^2+b^2).$$\nby Cauchy–Schwarz, $\\operatorname{Re}z\\le|z|$ for complex $z$, and\n$2ab\\le a^2+b^2$ (since $(a-b)^2\\ge0$). The real-part bound follows from\n$|u+iv|=\\sqrt{u^2+v^2}$ and $u^2+v^2\\ge u^2$ when $u>0$; it is immediate\nwhen $u\\le0$, and taking nonnegative square roots gives $u\\le|u+iv|$ in the\npositive case. The modulus and conjugation laws are recorded in\n[[lem-complex-conjugation-and-modulus-laws]].\nBy monotonicity, positive homogeneity, and additivity of the nonnegative\nintegral ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]],\n[[cor-additivity-of-the-nonnegative-lebesgue-integral]]), the integral of the\nsquared norm of a sum is finite whenever those of $\\xi$ and $\\eta$ are finite;\nthe comparison function $a^2+b^2$ is measurable by Borel composition\n[[thm-composition-with-borel-functions-preserves-measurability]] and\nmeasurable arithmetic [[thm-arithmetic-and-lattice-operations-preserve-measurability]].\nFor $c\\ne0$,\n$\\|c\\xi(x)\\|^2=|c|^2\\|\\xi(x)\\|^2$ and positive homogeneity keeps its\nintegral finite; for $c=0$ the zero function has integral zero. Hence\n$\\mathscr M_2(H)$ is a complex vector space.\nThe pointwise bound uses\n[[thm-cauchy-schwarz-in-an-inner-product-space]] and the norm and scalar\nconventions of [[def-real-and-complex-inner-product-space]].\n\n**The quotient and its operations are well-defined.** The empty set is a Borel\nnull set by the $m=0$ clause of\n[[thm-finite-and-countable-subadditivity-of-measures]], so $\\sim_\\mu$ is\nreflexive; it is symmetric by equality, and it is transitive because two Borel\nnull witnesses have a null union by the same finite-subadditivity theorem. This\nuses the definition of almost-everywhere equality\n[[def-measure-null-set-and-almost-everywhere]]. If $\\xi\\sim_\\mu\\xi'$\nand $\\eta\\sim_\\mu\\eta'$, then outside the union of their two witnesses the\npointwise sums agree, and so do the pointwise scalar multiples. The same finite\nunion argument shows that these operations do not depend on representatives.\n\n**The displayed pairing is finite.** By the section lemma,\n$h(x)=\\langle\\xi(x),\\eta(x)\\rangle$ is measurable. The modulus $|h|$ is\nmeasurable by Borel composition with the complex modulus. The measurable\nreal-valued functions $f(x)=\\|\\xi(x)\\|$ and $g(x)=\\|\\eta(x)\\|$ belong to\n$\\mathcal L^2(\\mu)$ by the definition of that space\n[[def-calligraphic-l-p-on-a-measure-space]]. Fibrewise Cauchy–Schwarz and then\nthe scalar $L^2$ Cauchy–Schwarz inequality\n[[cor-cauchy-schwarz-inequality-for-l-two]] give\n$$\\int_X|h(x)|\\,d\\mu(x)\\le\\int_X f(x)g(x)\\,d\\mu(x)\\le\\|f\\|_2\\|g\\|_2<\\infty.$$\nSince $f,g\\ge0$, the scalar theorem's $|fg|$ is $fg$. Here $fg$ is measurable by\n[[thm-arithmetic-and-lattice-operations-preserve-measurability]], and the first\ninequality uses monotonicity of the nonnegative integral\n[[prop-order-and-scalar-rules-for-the-nonnegative-integral]].\nThus $h$ is an integrable complex function by\n[[def-integrable-real-and-complex-functions-and-their-integrals]]. More\nexplicitly, write $h=u+iv$. The real coordinate projections are Borel, so\n$u$ and $v$ are measurable, and $|u|,|v|\\le |h|$ makes both real functions\nintegrable. Their classes, rather than a class of the complex function $h$,\nbelong to the real space $L^1(\\mu)$ of\n[[def-l-p-space-as-a-quotient-by-null-functions]]. The complex integral here\nmeans precisely $\\int h=\\int u+i\\int v$.\n\n**The pairing does not depend on representatives.** If $\\xi\\sim_\\mu\\xi'$ and\n$\\eta\\sim_\\mu\\eta'$, their pairings agree outside the union of the two null\nwitnesses. Both pairings are integrable by the preceding estimate. Their real parts agree almost everywhere, as do their imaginary parts.\nApplying [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]\nseparately to these real $L^1$ classes, with $A=X$, gives equality of both\ncomponent integrals and hence of the complex integrals.\n\n**The quotient is an inner-product space.** Fibrewise linearity in the first\nvariable passes through the integral by real linearity in\n[[thm-linearity-of-the-lebesgue-integral-on-l-one]], applied to the integrable\nreal and imaginary parts. Indeed, if $h=u+iv$ and $c=a+ib$, then\n$ch=(au-bv)+i(av+bu)$, so real linearity gives\n$\\int ch=c\\int h$. For two integrable pairings $h=u+iv$ and $k=s+it$,\n$h+k=(u+s)+i(v+t)$ gives $\\int(h+k)=\\int h+\\int k$ in the same way;\nall these real components are integrable by real linearity. Their complex\ncombinations are integrable since $|ch|=|c||h|$ and\n$|h+k|\\le |h|+|k|$, using nonnegative integral monotonicity and additivity.\nFibrewise conjugate\nsymmetry passes through it as well: for integrable $h=u+iv$, the definition\ngives $\\int\\overline h=\\int u-i\\int v=\\overline{\\int h}$; integrability of\n$\\overline h$ follows from $|\\overline h|=|h|$\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] and\n[[lem-complex-conjugation-and-modulus-laws]]. Conjugate symmetry\nand first-variable linearity give conjugate-linearity in the second variable.\nFor every class,\n$$\\langle[\\xi],[\\xi]\\rangle=\\int_X\\|\\xi(x)\\|^2\\,d\\mu(x)\\ge0.$$\nThis value is zero exactly when $\\|\\xi(x)\\|^2=0$ almost everywhere, by\n[[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]. Fibrewise positive\ndefiniteness says this is exactly when $\\xi(x)=0$ off a Borel null set, that is,\nwhen $[\\xi]=[0]$. Therefore the pairing is positive definite. These arguments\nuse the ordinary complex inner-product axioms\n[[def-real-and-complex-inner-product-space]] and the integral convention above;\nthey do not use any form of the axiom of choice.\n\nNo completion is part of this definition. The next theorem proves that this\ninner-product space is complete under its induced norm.\n\n**Boundary cases.** If $X=\\varnothing$, or if every fibre is zero-dimensional,\nthere is only the zero section and the quotient is the zero inner-product\nspace. If $\\mu(X)=0$, then $X$ itself is a Borel null set, so every two\nsquare-integrable sections are equivalent and the quotient is again zero.\nFor a one-point base $X=\\{x_0\\}$ with $\\mu(\\{x_0\\})=m>0$ and\n$H_{x_0}=\\mathbb C$, take $e_1(x_0)=1$ and $e_n(x_0)=0$ for $n\\ge2$.\nEvery section has the form $\\xi_z(x_0)=z$ and\n$$\\langle[\\xi_z],[\\xi_w]\\rangle=m z\\overline w.$$\nThe direct integral is one-dimensional, with norm $\\sqrt m\\,|z|$. If instead\n$m=0$, the preceding zero-measure calculation applies.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-direct-integral-of-unitary-representations",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $G$ be a locally compact Hausdorff group, let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space ([[def-standard-borel-space]], [[def-finite-sigma-finite-and-semifinite-measures]]), and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with a countable fundamental family ([[def-measurable-hilbert-field-from-a-countable-fundamental-family]]). Write $\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ for its direct-integral Hilbert space ([[def-direct-integral-of-a-measurable-hilbert-field]], [[thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces]]). A **measurable field of unitary representations of $G$** over this field is a family $(\\pi_x)_{x\\in X}$ such that each $\\pi_x:G\\to U(H_x)$ is strongly continuous ([[def-strongly-continuous-unitary-representation]]) and, for each fixed $g\\in G$, the operator field $x\\mapsto\\pi_x(g)$ is weakly measurable ([[def-measurable-and-decomposable-operator-fields]]). The identities $\\pi_x(gh)=\\pi_x(g)\\pi_x(h)$ and $\\pi_x(e)=I_{H_x}$ are required for every $x\\in X$ and all $g,h\\in G$. For each $g\\in G$ define\n$$\\pi(g)=\\int_X^\\oplus\\pi_x(g)\\,d\\mu(x)\\in\\mathcal B(\\mathcal H).$$\nBy [[thm-measurable-essentially-bounded-operator-fields-act-decomposably]], these operators define a group homomorphism $G\\to U(\\mathcal H)$. This operator family is called the **direct integral** of the field and written $\\pi=\\int_X^\\oplus\\pi_x\\,d\\mu(x)$. The homomorphism and unitarity are proved below; strong continuity is not asserted by this definition. Changing the field on a $\\mu$-null set does not change any induced operator $\\pi(g)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-direct-sum-of-unitary-representations",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $I$ be a set and let $(H_i)_{i\\in I}$ be a family of complex Hilbert spaces ([[def-hilbert-space]]). A family $v=(v_i)_{i\\in I}$ with $v_i\\in H_i$ for every $i$ is **square summable** when\n$$\\sum_{i\\in I}\\|v_i\\|^2<+\\infty$$\nin the finite-subset-supremum convention of [[def-square-summable-family-on-an-arbitrary-index-set]]: the sum is the supremum of the finite subsums $\\sum_{i\\in F}\\|v_i\\|^2$ over finite $F\\subseteq I$. The **Hilbert direct sum** $\\widehat\\bigoplus_{i\\in I}H_i$ is the set of all square-summable families, equipped with componentwise addition and scalar multiplication and with the pairing\n$$\\langle v,w\\rangle:=\\sum_{i\\in I}\\langle v_i,w_i\\rangle ,$$\nthe scalar family on the right being summed as a finite-subset net in the sense of [[def-square-summable-family-on-an-arbitrary-index-set]]. By [[thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set]] and [[lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums]] the resulting space is a complex Hilbert space whose norm is $\\|v\\|=\\bigl(\\sum_{i\\in I}\\|v_i\\|^2\\bigr)^{1/2}$, and the canonical maps $H_j\\to\\widehat\\bigoplus_iH_i$ extending a vector by zero are linear isometries ([[def-linear-isometry-and-orthogonal-or-unitary-operator]]) with pairwise orthogonal closed images ([[def-orthogonality-and-orthogonal-complement]]) whose closed linear span is the whole space.\n\n**The pairing is well defined.** For square-summable $v,w$ and every finite $F\\subseteq I$ the finite Cauchy–Schwarz inequality applied to the scalar lists $(\\|v_i\\|)_{i\\in F}$, $(\\|w_i\\|)_{i\\in F}$ gives\n$$\\sum_{i\\in F}|\\langle v_i,w_i\\rangle|\\le\\sum_{i\\in F}\\|v_i\\|\\,\\|w_i\\|\\le\\Bigl(\\sum_{i\\in F}\\|v_i\\|^2\\Bigr)^{1/2}\\Bigl(\\sum_{i\\in F}\\|w_i\\|^2\\Bigr)^{1/2}\\le\\|v\\|\\,\\|w\\| ,$$\nso the family $(\\langle v_i,w_i\\rangle)_{i\\in I}$ is absolutely summable and its finite-subset net converges to a scalar $\\langle v,w\\rangle$ with $|\\langle v,w\\rangle|\\le\\|v\\|\\,\\|w\\|$; this is the scalar summation theory of [[def-square-summable-family-on-an-arbitrary-index-set]]. Componentwise sesquilinearity, conjugate symmetry and positive definiteness pass to the finite-subset net by linearity of the scalar sum, so the pairing is an inner product. For completeness let $(v^{(n)})_{n\\ge1}$ be a Cauchy sequence and let $K$ be a bound for it; for each $i$ the components satisfy $\\|v^{(n)}_i-v^{(m)}_i\\|\\le\\|v^{(n)}-v^{(m)}\\|$, so they converge to some $v_i\\in H_i$, and for every finite $F$ the limit relation $\\sum_{i\\in F}\\|v_i\\|^2=\\lim_n\\sum_{i\\in F}\\|v^{(n)}_i\\|^2\\le K^2$ shows that $v=(v_i)$ is square summable; then $\\|v^{(n)}-v\\|^2=\\sup_F\\lim_m\\sum_{i\\in F}\\|v^{(n)}_i-v^{(m)}_i\\|^2$ is eventually below any prescribed $\\varepsilon^2$, so $v^{(n)}\\to v$ and $\\widehat\\bigoplus_iH_i$ is complete. Both arguments are choice-free beyond the completeness of the factors.\n\n**Strongly continuous unitary representations.** Suppose now that $K$ is a topological group and that each $H_i$ carries a strongly continuous unitary representation $\\pi_i$ of $K$ ([[def-strongly-continuous-unitary-representation]]). The **Hilbert direct sum of the representations**, still written $\\widehat\\bigoplus_i\\pi_i$, acts componentwise,\n$$\\Bigl(\\widehat\\bigoplus_i\\pi_i\\Bigr)(k)\\,(v_i)_{i\\in I}:=(\\pi_i(k)v_i)_{i\\in I},$$\nwhich is again a square-summable family because every $\\pi_i(k)$ is isometric, and which is a group homomorphism into the unitary group of the sum by componentwise computation. To see strong continuity let $v\\in\\widehat\\bigoplus H_i$ and $\\varepsilon>0$; choose a finite $F\\subseteq I$ with $\\sum_{i\\notin F}\\|v_i\\|^2<\\varepsilon^2/16$, possible by the tail-control property of the finite-subset-supremum convention, and, if $F=\\varnothing$, take $U=K$, since the tail estimate alone is less than $\\varepsilon/2$. Otherwise, for each $i\\in F$ choose a neighbourhood $U_i$ of the identity with $\\|\\pi_i(k)v_i-v_i\\|<\\varepsilon/(2|F|)$ for $k\\in U_i$, which is possible by the finitely many strong continuity assumptions; then $U=\\bigcap_{i\\in F}U_i$ is an identity neighbourhood and, using unitarity of each $\\pi_i(k)$ to bound the tail of $\\pi(k)v-v$ by twice the square root of the tail of $v$,\n$$\\Bigl\\|\\Bigl(\\widehat\\bigoplus_i\\pi_i\\Bigr)(k)v-v\\Bigr\\|\\le\\sum_{i\\in F}\\|\\pi_i(k)v_i-v_i\\|+2\\Bigl(\\sum_{i\\notin F}\\|v_i\\|^2\\Bigr)^{1/2}<\\varepsilon$$\nfor every $k\\in U$. Hence $\\widehat\\bigoplus_i\\pi_i$ is a strongly continuous unitary representation of $K$.\n\n**Direct sums of subrepresentations.** A strongly continuous unitary representation $\\pi$ of $K$ on a complex Hilbert space $H$ is the **Hilbert direct sum of a family of subrepresentations** $(H_i,\\pi_i)_{i\\in I}$ when the $H_i$ are pairwise orthogonal closed $\\pi(K)$-invariant subspaces of $H$ whose closed linear span is $H$ and $\\pi|_{H_i}=\\pi_i$ for every $i$. In that case the canonical map\n$$\\widehat\\bigoplus_{i\\in I}H_i\\longrightarrow H,\\qquad (v_i)_{i\\in I}\\mapsto\\sum_{i\\in I}v_i ,$$\nis well defined by [[lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums]], which makes the finite-subset net of the partial sums converge with squared norm $\\sum_i\\|v_i\\|^2$; it is a linear isometry by orthogonality, its image is closed because $\\widehat\\bigoplus_iH_i$ is complete, and the image contains every $H_i$ and hence has closed linear span $H$, so the map is a unitary intertwiner. Conversely, if this canonical map is a unitary intertwiner for some pairwise orthogonal closed subspaces $H_i$ with closed linear span $H$ that are $\\pi(K)$-invariant, then $\\pi$ is the Hilbert direct sum of the subrepresentations $(H_i,\\pi|_{H_i})$. The Axiom of Choice ([[def-axiom-of-choice]]) is declared for this development because the decomposition theorems select representatives in unitary-equivalence classes and apply the cited Hilbert-space suppliers; the construction of the direct sum and the verifications above use no choice beyond their inputs.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A countable open base generates the Borel sigma-algebra of $K$, and normalized Haar measure is finite. By [F3] real $L^2(K)$ has a countable dense subset $D$; the set $D+iD$ is countable and dense in complex $L^2(K)$, since real and imaginary parts can be approximated separately. Choose a unit vector in each nonzero Peter--Weyl coefficient block [F2]. These vectors are orthogonal, so pairwise disjoint balls of radius $1/3$ each meet a countable dense set. Assigning the first dense point in each ball proves that $\\widehat K$ is at most countable.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use [F1] to choose the representatives and multiplicity spaces stated above. The countable dual with discrete metric is complete and separable, hence standard Borel, and its counting measure is sigma-finite. Choose an orthonormal basis in each nonzero separable fibre and enumerate all pairs consisting of an atom and a basis vector. The section associated with a pair equals that vector at its atom and zero elsewhere. Their Gram coefficients are measurable and their values span densely at each atom, so they form a countable fundamental family in [F4]; if all fibres are zero, use a sequence of zero sections. Every section is measurable because every scalar function on a countable discrete space is measurable. For fixed $k\\in K$, all matrix coefficients of the fibre action are likewise measurable.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Counting integration gives $\\|\\xi\\|^2=\\sum_{\\alpha\\in\\widehat K}\\|\\xi(\\alpha)\\|^2$, and its only null subset is empty. Thus the direct integral is exactly the completed Hilbert direct sum, with precisely the isotypic action of [F1]. This action is strongly continuous: approximate a vector by its finitely many nonzero coordinates, use continuity on those coordinates, and bound the remaining displacement by twice the tail norm. The regular multiplicity assertion follows from [F1], including its conjugate-class reindexing convention.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Zero fibres outside I and an empty representation are covered in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 supplies zero sections if every fibre is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies each counting atom with one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles both finite and infinite-dimensional separable fibres."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval endpoint parameters; circle characters are all covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 select unit vectors and bases under the assumed AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "locally-reviewed",
+        "scope": "Focused mathematical repair of four original missing prerequisite carriers, not an independent full-item audit."
+      }
+    },
+    "ex-the-left-regular-factor-of-an-icc-discrete-group": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-left-and-right-regular-unitary-representations",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $G$ be an LCH group with a fixed left Haar measure $\\mu$, let\n$\\Delta_G$ be the modular function of $G$\n([[def-modular-function-of-a-locally-compact-group]]), and let $L^2(G)$ be the\ncomplex space $L^2(G,\\mu;\\mathbb C)$ with norm $\\|\\cdot\\|_2$ and inner product\n$\\langle\\xi,\\eta\\rangle=\\int_G\\xi\\overline{\\eta}\\,d\\mu$\n([[def-complex-haar-lp-spaces-and-compactly-supported-functions]],\n[[def-complex-l-two-inner-product]]). For $g\\in G$ and $\\xi\\in L^2(G)$ define\nclasses by\n$$\\lambda(g)\\xi(x):=\\xi(g^{-1}x),\\qquad \\rho(g)\\xi(x):=\\Delta_G(g)^{1/2}\\xi(xg)\\qquad(x\\in G).$$\nThe assignment $\\lambda$ is the **left regular representation** of $G$ and\n$\\rho$ is the (modularly corrected) **right regular representation**.\n\n**Well-definedness and basic properties.** Both formulas are representative\nindependent: for a Borel set $E$ left invariance gives $\\mu(g^{-1}E)=\\mu(E)$\nand the right-translation scaling\n$\\int_GF(xg)\\,d\\mu(x)=c(g)\\int_GF\\,d\\mu(x)$ with $c(g)=\\Delta_G(g^{-1})>0$\n([[def-left-haar-integral-and-left-haar-measure]],\n[[lem-right-translation-scales-left-haar-measure]]) gives $\\mu(Eg)=0$ exactly\nwhen $\\mu(E)=0$; hence $\\xi=\\xi'$ a.e. implies $\\lambda(g)\\xi=\\lambda(g)\\xi'$\na.e. and $\\rho(g)\\xi=\\rho(g)\\xi'$ a.e. Both formulas are complex-linear in\n$\\xi$ pointwise, and both preserve the norm,\n$$\\|\\lambda(g)\\xi\\|_2=\\|\\xi\\|_2,\\qquad \\|\\rho(g)\\xi\\|_2^2=\\int_G\\Delta_G(g)|\\xi(xg)|^2\\,d\\mu(x) =\\Delta_G(g)\\Delta_G(g^{-1})\\|\\xi\\|_2^2=\\|\\xi\\|_2^2,$$\nusing $\\Delta_G(g)\\Delta_G(g^{-1})=1$\n([[thm-the-modular-function-is-a-continuous-homomorphism]]); so each\n$\\lambda(g)$ and $\\rho(g)$ is a linear isometry of $L^2(G)$. The group laws\nhold: $\\lambda(e)=\\rho(e)=\\mathrm{id}$,\n$\\lambda(g)\\lambda(h)=\\lambda(gh)$ and $\\rho(g)\\rho(h)=\\rho(gh)$ because\n$\\Delta_G$ is multiplicative and $\\Delta_G>0$, and consequently\n$\\lambda(g)^{-1}=\\lambda(g^{-1})$ and $\\rho(g)^{-1}=\\rho(g^{-1})$. Each\n$\\lambda(g)$ and $\\rho(g)$ is therefore an invertible linear isometry of the\nHilbert space $L^2(G)$ ([[def-hilbert-space]]), and $g\\mapsto\\lambda(g)$,\n$g\\mapsto\\rho(g)$ are group homomorphisms from $G$ into the group of such\noperators.\n\n**Unitary representations.** In the terminology of\n[[def-continuous-and-unitary-representation-of-a-compact-lie-group]], a\nrepresentation of $G$ on a complex Hilbert space $H$ is a group homomorphism\n$\\pi:G\\to U(H)$ into the group $U(H)$ of unitary operators on $H$ satisfying **strong continuity**: $g\\mapsto\\pi(g)\\xi$ is continuous at $e$ for every\n$\\xi\\in H$ (equivalently at every point of $G$). On an infinite-dimensional\n$H$, *unitary operator* means an invertible linear isometry, so that the\ninvertible isometries $\\lambda(g),\\rho(g)$ above are its unitary operators;\nthis is the usage of\n[[def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group]],\nand the finite-dimensional normal form recorded in\n[[def-linear-isometry-and-orthogonal-or-unitary-operator]] is not used here.\nThe strong continuity of both homomorphisms follows from\n[[lem-haar-translations-are-strongly-continuous-on-lp-one-and-two]]:\nits $p=2$ left translate is exactly $\\lambda(g)$, and its modular right\ntranslate is exactly $\\rho(g)$. Its AC hypothesis is assumed here. Thus\nboth assignments are unitary representations in this terminology.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-regular-representations-are-unitary-and-strongly-continuous",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $G$ be an LCH group with a fixed left Haar measure $\\mu$, and let\n$\\lambda,\\rho$ be the left and right regular representations on $L^2(G)$\n([[def-left-and-right-regular-unitary-representations]]). Then $\\lambda$ and\n$\\rho$ are strongly continuous unitary representations of $G$ on the Hilbert\nspace $L^2(G)$, and $\\lambda$ is faithful: $\\lambda(g)=\\mathrm{id}$ implies\n$g=e$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-von-neumann-algebra-and-commutant",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $H$ be a complex Hilbert space and let $\\mathcal B(H)$ denote\nits bounded linear operators. Applying AC to a family indexed by the natural numbers\nsupplies Countable Choice, the hypothesis of\n[[thm-hilbert-adjoint-properties]], which provides adjoints on $\\mathcal B(H)$.\nA **concrete von Neumann algebra** on $H$ is a\nunital $*$-subalgebra $\\mathcal A\\subseteq\\mathcal B(H)$ that is closed in the\nweak operator topology (WOT). Here unital means $I_H\\in\\mathcal A$; the zero\nHilbert space is allowed, with $I_H=0$ and sole unital algebra $\\{0\\}$. This is\nthe only use of AC in this definition.\n\nFor any set $\\mathcal S\\subseteq\\mathcal B(H)$, its **commutant** and\n**double commutant** are\n$$\\mathcal S':=\\{T\\in\\mathcal B(H):TS=ST\\text{ for every }S\\in\\mathcal S\\},\\qquad \\mathcal S'':=(\\mathcal S')'.$$\nCommutants are taken inside $\\mathcal B(H)$. The **von Neumann algebra\ngenerated by $\\mathcal S$** is\n$$W^*(\\mathcal S):=\\overline{\\operatorname{Alg}^*(\\mathcal S\\cup\\{I_H\\})}^{\\,\\mathrm{WOT}},$$\nthe WOT closure in $\\mathcal B(H)$ of the unital $*$-algebra generated by\n$\\mathcal S$. No bicommutant theorem is part of these definitions.\n\nTwo elementary properties will be used. For fixed $S\\in\\mathcal B(H)$,\n$$\\langle TS\\xi,\\eta\\rangle=\\langle T(S\\xi),\\eta\\rangle,\\qquad \\langle ST\\xi,\\eta\\rangle=\\langle T\\xi,S^*\\eta\\rangle$$\nare WOT-continuous matrix coefficients as functions of $T$. Thus each equation\n$TS=ST$ defines a WOT-closed set, and so $\\mathcal S'$ is WOT-closed. If\n$\\mathcal S$ is self-adjoint, then $\\mathcal S'$ is a unital $*$-subalgebra:\nproducts preserve commutation with every $S$, and taking adjoints of $TS=ST$\ngives $ST^*=T^*S$. These facts do not identify $W^*(\\mathcal S)$ with\n$\\mathcal S''$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-double-commutant-theorem-for-concrete-von-neumann-algebras",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let $M\\subseteq\\mathcal B(H)$ be a unital $*$-subalgebra closed in the weak operator topology. Then $M''=M$, and $M$ is also closed in the strong operator topology. Consequently the concrete von Neumann algebras of [[def-von-neumann-algebra-and-commutant]] are exactly the unital $*$-subalgebras that are closed in either of these topologies. For an arbitrary set $\\mathcal S\\subseteq\\mathcal B(H)$ one has $W^*(\\mathcal S)''=W^*(\\mathcal S)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra on a complex Hilbert space $H$ ([[def-von-neumann-algebra-and-commutant]], [[def-space-of-bounded-linear-operators]]). A complex-linear functional $\\tau:M\\to\\mathbb C$ is **positive** if $\\tau(P)\\in[0,+\\infty)$ for every positive operator $P\\in M$ ([[def-self-adjoint-positive-unitary-and-normal-operator]]), a **state** if it is positive and $\\tau(I_H)=1$, **normal** if its restriction to the operator-norm unit ball of $M$ is continuous for the relative weak-operator topology ([[def-strong-and-weak-operator-topologies]], [[def-operator-norm]]), **tracial** if $\\tau(ST)=\\tau(TS)$ for all $S,T\\in M$, and **faithful** if $\\tau(T^*T)=0$ implies $T=0$. A **faithful normal tracial state** is a positive normalized trace that is both normal and faithful. In particular, $(M,\\tau)$ is a **finite tracial von Neumann algebra** when $\\tau$ is a faithful normal tracial state. If $H=\\{0\\}$ then $M=\\{0\\}$ and has no state, since $I_H=0$.\n\nFor a nonzero finite-dimensional complex Hilbert space $K$, the normalized matrix trace $\\operatorname{tr}_K/\\dim K$ is a faithful normal tracial state on $\\mathcal B(K)$, and it is the unique tracial state.\n\nFor a discrete group $\\Gamma$ equipped with the discrete topology, let $H_\\Gamma=\\ell^2(\\Gamma,\\mathbb C)$, whose Hilbert-space structure under AC is established in the proof. Define the left and right regular operators by\n$$\n(\\lambda_\\Gamma(g)f)(h)=f(g^{-1}h),\\qquad (\\rho_\\Gamma(g)f)(h)=f(hg)\\qquad(g,h\\in\\Gamma).\n$$\nPut $L(\\Gamma):=W^*(\\lambda_\\Gamma(\\Gamma))$ using the concrete generated von Neumann algebra of [[def-von-neumann-algebra-and-commutant]]. Then\n$$\n\\tau_\\Gamma(T):=\\langle T\\delta_e,\\delta_e\\rangle\\qquad(T\\in L(\\Gamma))\n$$\nis a faithful normal tracial state on $L(\\Gamma)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-factor-representation-and-primary-representation",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). Let $G$ be a topological group and let $(\\pi,H)$ be a strongly continuous unitary representation on a nonzero Hilbert space $H$ ([[def-strongly-continuous-unitary-representation]], [[def-hilbert-space]]). Set $M:=\\pi(G)''\\subseteq\\mathcal B(H)$, the concrete double commutant defined in [[def-von-neumann-algebra-and-commutant]], and set $Z(M):=M\\cap M'$. The representation $\\pi$ is **factorial**, or **primary**, when $Z(M)=\\mathbb C I_H$. It is a **factor representation** when $M$ is a factor, meaning $M\\cap M'=\\mathbb C I_H$. The commutants satisfy $\\pi(G)'=(\\pi(G)'')'$ by their definitions, and irreducibility implies factoriality. The converse fails: for every nontrivial ICC discrete group $\\Gamma$ (meaning every nonidentity conjugacy class is infinite), its left regular representation is factorial but not irreducible. Such groups exist, for example the finitary symmetric group on a countably infinite set.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-separable-type-i-factors-are-multiples-of-irreducible-representations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be a concrete type-I factor on a nonzero separable complex Hilbert space $H$. There is a finite or countably infinite exhaustive orthogonal family $(p_i)$ of minimal projections in $M$, equivalent to a fixed $p=p_{i_0}$, and partial isometries $t_i$ in $M$ with $t_i^*t_i=p$ and $t_it_i^*=p_i$. Put $E=\\ell^2(I)$, $L=pH$. The unitary $W:E\\otimes L\\to H$, $W(\\delta_i\\otimes\\eta)=t_i\\eta$, satisfies $W^*MW=B(E)\\otimes I_L$ and $W^*M'W=I_E\\otimes B(L)$. If $\\pi$ is a strongly continuous unitary representation of a topological group $G$ on $H$ and $\\pi(G)''=M$, there is a strongly continuous irreducible representation $\\sigma$ on $E$ with $W^*\\pi(g)W=\\sigma(g)\\otimes I_L$, so $\\pi$ is $\\dim(L)$ copies of $\\sigma$. Equivalently $N=M'$ is type I; a minimal $q$ in $N$ has invariant irreducible carrier $K=qH$, and an exhaustive orthogonal family $(q_i)$ of equivalent minimal projections in $N$ with $u_i^*u_i=q_i$ and $u_iu_i^*=q$ gives a unitary $V:H\\to K^{\\oplus m}$, $V\\xi=(u_i\\xi)$, $m=\\text{number of }q_i$, intertwining $\\pi$ with $m$ copies of $\\pi|K$. The space $pH$ for a minimal $p$ in $M$ is the multiplicity space, not the irreducible carrier. In the direct-sum realization used here, the operators $\\rho(A)(\\eta_i)_{i\\in I}:=(\\sum_{j\\in I}A_{ij}\\eta_j)_{i\\in I}$ for $A=(A_{ij})\\in B(E)$ constitute the algebra written $B(E)\\otimes I_L$, and $(I\\star S)(\\eta_i)_{i\\in I}:=(S\\eta_i)_{i\\in I}$ for $S\\in B(L)$ constitutes $I_E\\otimes B(L)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-self-commensurating-cyclic-subgroups-and-trivial-conjugate-intersections-in-the-free-group-of-rank-two",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $F=\\langle a,b\\rangle$ be the free group on\n$a,b$, given the discrete topology, and let $A=\\langle a\\rangle$ and\n$B=\\langle b\\rangle$. Then $F=A*B$ is the free product of two infinite cyclic\ngroups,\n$\\operatorname{Comm}_F(A)=A$ and $\\operatorname{Comm}_F(B)=B$, and for every\n$g\\in F$,\n$$g^{-1}Bg\\cap A=\\{e\\}\\quad\\text{and}\\quad g^{-1}Ag\\cap B=\\{e\\}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vector functional $\\tau$ is positive and unital, since $\\tau(T^*T)=\\|T\\delta_e\\|^2$ and $\\|\\delta_e\\|=1$, and is WOT-continuous, hence normal. On generators, $\\tau(\\lambda(g)\\lambda(h))=\\mathbf1_{gh=e}=\\mathbf1_{hg=e}=\\tau(\\lambda(h)\\lambda(g))$. Bilinearity proves the trace identity on their linear span. For fixed $A$ in that span, approximate $B\\in M$ in WOT and use separate multiplication continuity to obtain $\\tau(AB)=\\tau(BA)$; then fix this $B$ and approximate arbitrary $A\\in M$, proving traciality on $M$. Every $T\\in M$ commutes with $\\rho(\\Gamma)$ by [F1,F2]. If $\\tau(T^*T)=0$, then $T\\delta_e=0$ and $T\\delta_g=T\\rho(g^{-1})\\delta_e=\\rho(g^{-1})T\\delta_e=0$ for all $g$, so $T=0$ on a dense basis. Thus $\\tau$ is faithful. The operators $\\lambda(g)$ are linearly independent: applying a finite linear relation to $\\delta_e$ gives the corresponding relation among the distinct basis vectors $\\delta_g$. Hence $M$ is infinite dimensional.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $T\\in Z(M)$ and write $T\\delta_e=\\sum_gc_g\\delta_g$. For $s\\in\\Gamma$ the unitary $C_s=\\lambda(s)\\rho(s)$ fixes $\\delta_e$ and sends $\\delta_g$ to $\\delta_{sgs^{-1}}$. Centrality and [F1,F2] imply that $T$ commutes with both factors of $C_s$, so $C_sT\\delta_e=T\\delta_e$. Thus $c_g$ is constant on each conjugacy class. An $\\ell^2$ sequence cannot have a nonzero constant value on an infinite set, so ICC gives $T\\delta_e=c_e\\delta_e$. Commutation with $\\rho$ then gives $T\\delta_g=c_e\\delta_g$ for every $g$. Therefore $T=c_eI$, proving the factor assertion.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $M$ were type I, [F4] would give the spatial algebra $\\mathcal B(E)\\otimes I_L$. Finite-dimensional $E$ would make $M$ finite dimensional. If $E$ is infinite dimensional and separable, choose a countable orthonormal basis and the isometries $V_1,V_2$ onto its even and odd basis subspaces. Their range projections $p,q$ are orthogonal. Transferring $V_i\\otimes I_L$ to $M$, traciality gives $\\tau(p)=\\tau(V_1^*V_1)=1$ and $\\tau(q)=1$, while positivity and $p+q\\le I$ give $2=\\tau(p+q)\\le1$, a contradiction. Thus $M$ is not type I and [F4] excludes an irreducible multiple. In particular $\\lambda$ is not irreducible. Its one-point integral is a central factor decomposition, since diagonal operators on that point are $\\mathbb CI=Z(M)$; any central diagonal model must have a one-atom measure algebra on its effective support, because its diagonal algebra is scalar. The fibre therefore remains this non-irreducible factor, rather than an irreducible.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For completeness, $F_2$ is countable by its finite reduced words and infinite by the powers of $a$. If $w\\notin A$, all conjugates $a^nwa^{-n}$ are distinct: equality at two different integers would make $w$ commute with a nonzero power $a^k$. Then $A\\cap w^{-1}Aw$ contains $\\langle a^k\\rangle$, of finite index in both infinite cyclic groups, contradicting $\\operatorname{Comm}_{F_2}(A)=A$ from [F5]. If $w\\in A\\setminus\\{e\\}$, then $w\\notin B$ by [F5], and the same argument with $b$ gives infinitely many conjugates. Thus $F_2$ is ICC. The finite-support permutation group is a countable union of finite permutation groups and is infinite. For a nonidentity permutation with finite moved support $S$, move $S$ to infinitely many pairwise disjoint blocks of the same size by finite permutations. Its conjugates then have distinct moved supports and are distinct, proving ICC. Both examples therefore satisfy all conclusions above.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim requires a countably infinite group and uses a nonzero regular Hilbert space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The regular Hilbert space has the nonzero identity basis vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves tau(I)=1; step 3.1 gives the one-point central model."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example excludes finite groups, and step 3.1 treats both finite and infinite candidate type I carriers."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval endpoint parameters; circle characters are all covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses a countable basis under AC; step 4.1 constructs finite permutations explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "locally-reviewed",
+        "scope": "Focused mathematical repair of four original missing prerequisite carriers, not an independent full-item audit."
+      }
+    },
+    "cex-irreducible-multiplicity-data-is-not-canonical-outside-type-i": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-self-commensurating-cyclic-subgroups-and-trivial-conjugate-intersections-in-the-free-group-of-rank-two",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $F=\\langle a,b\\rangle$ be the free group on\n$a,b$, given the discrete topology, and let $A=\\langle a\\rangle$ and\n$B=\\langle b\\rangle$. Then $F=A*B$ is the free product of two infinite cyclic\ngroups,\n$\\operatorname{Comm}_F(A)=A$ and $\\operatorname{Comm}_F(B)=B$, and for every\n$g\\in F$,\n$$g^{-1}Bg\\cap A=\\{e\\}\\quad\\text{and}\\quad g^{-1}Ag\\cap B=\\{e\\}.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-commensurator-unitary-character-and-monomial-induced-representation",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a topological group and $H\\leq G$ an open subgroup. The **commensurator** of $H$ is\n$$\\operatorname{Comm}_G(H)=\\{g\\in G:[H:H\\cap g^{-1}Hg]<\\infty\\text{ and }[g^{-1}Hg:H\\cap g^{-1}Hg]<\\infty\\}.$$\nA **unitary character** of $H$ is a continuous homomorphism $\\chi:H\\to\\mathbb T$, where $\\mathbb T=\\{z\\in\\mathbb C:|z|=1\\}$. Choose a right transversal $T\\subseteq G$ for the left cosets of $H$, so $G=\\bigsqcup_{t\\in T}Ht$, and choose it with $e\\in T$. For each $t\\in T$ and $g\\in G$, there are unique $\\alpha(t,g)\\in H$ and $t\\cdot g\\in T$ such that $tg=\\alpha(t,g)(t\\cdot g)$. The **monomial induced representation** $\\operatorname{Ind}_H^G\\chi$ acts on $\\ell^2(T)$ by\n$$\\bigl(\\pi(g)f\\bigr)(t)=\\chi\\bigl(\\alpha(t,g)\\bigr)f(t\\cdot g).$$\nThis is a strongly continuous unitary representation, and $\\delta_e$ is cyclic. If $G$ is locally compact, this transversal model is unitarily equivalent to the quotient covariant-function model of [[def-covariant-function-model-of-unitary-induction]] and hence is the standard unitary induction of $\\chi$ from $H$ ([[thm-unitary-induction-from-a-closed-subgroup]]). When $G$ is second-countable, $H\\backslash G$ is countable and the transversal model is separable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-monomial-induced-representations-transversal-model-properties",
+          "source_section": "Statement",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). Let $G$ be a topological group. For\n$i\\in\\{1,2\\}$, let $H_i\\le G$ be open, let $\\chi_i:H_i\\to\\mathbb T$ be a\nunitary character, and let $T_i$ be a right transversal for the left cosets\n$H_i\\backslash G$ with $e\\in T_i$. Write the unique factorization\n$tg=\\alpha_i(t,g)(t\\cdot_i g)$ from\n[[def-commensurator-unitary-character-and-monomial-induced-representation]],\nand let $\\pi_i$ be its transversal representation on $\\ell^2(T_i)$. A bounded\nintertwiner is a bounded linear map\n$S:\\ell^2(T_1)\\to\\ell^2(T_2)$ ([[def-hilbert-space]],\n[[def-bounded-linear-operator]]) satisfying\n$S\\pi_1(g)=\\pi_2(g)S$ for every $g\\in G$. Put $f:=S\\delta_e\\in\\ell^2(T_2)$,\nwhere $\\delta_e$ is the distinguished basis vector. Then:\n\n1. $f=0$ if and only if $S=0$.\n2. If $\\pi_1=\\pi_2$ on the same Hilbert space, then $f$ is a scalar multiple\n   of $\\delta_e$ if and only if $S$ is a scalar operator.\n3. For every $t\\in T_2$ and $h\\in H_1$,\n   $\\chi_2(\\alpha_2(t,h))f(t\\cdot_2h)=\\chi_1(h)f(t)$.\n4. If $t\\in T_2$ has an infinite $H_1$-orbit under $t\\cdot_2h$, then $f(t)=0$.\n5. If $t\\in T_2$ and $h\\in H_1$ satisfy $f(t)\\ne0$ and $t\\cdot_2h=t$,\n   then $tht^{-1}\\in H_2$ and $\\chi_1(h)=\\chi_2(tht^{-1})$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-monomial-irreducibility-criterion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a topological group, $H\\le G$ an open subgroup and $\\chi$ a unitary character of $H$. Assume that for every $g\\in\\operatorname{Comm}_G(H)\\setminus H$ the restrictions of $\\chi$ and of $\\chi^g$ to the subgroup $H\\cap g^{-1}Hg$ do not coincide, where $\\chi^g(h):=\\chi(ghg^{-1})$. Then $\\operatorname{Ind}_H^G\\chi$ is irreducible. In particular, if $H$ is open and $\\operatorname{Comm}_G(H)=H$, then $\\operatorname{Ind}_H^G\\chi$ is irreducible for every unitary character $\\chi$ of $H$; and if $N$ is an open normal subgroup and $\\chi$ a unitary character of $N$, then $\\operatorname{Ind}_N^G\\chi$ is irreducible if and only if $\\chi^g\\neq\\chi$ for every $g\\in G\\setminus N$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-monomial-inequivalence-criterion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a topological group, $H_1,H_2\\le G$ open subgroups and $\\chi_1,\\chi_2$ unitary characters of $H_1,H_2$. Assume that for every $g\\in G$ such that $g^{-1}H_2g\\cap H_1$ has finite index in both $g^{-1}H_2g$ and $H_1$, the restrictions of $\\chi_2^g$ and $\\chi_1$ to $g^{-1}H_2g\\cap H_1$ do not coincide. Then $\\operatorname{Ind}_{H_1}^G\\chi_1$ and $\\operatorname{Ind}_{H_2}^G\\chi_2$ are not equivalent. In particular, if $g^{-1}H_2g\\cap H_1$ has infinite index in $H_1$ for every $g\\in G$ (for instance if it is trivial and $H_1$ is infinite), then the two monomial representations are inequivalent whenever $H_1\\neq H_2$ up to the stated intersection pattern.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measurable-hilbert-field-from-a-countable-fundamental-family",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu)$ be a standard-Borel space with a sigma-finite measure\non its Borel sigma-algebra; the measure is not assumed complete. A **measurable\ncomplex Hilbert field with countable fundamental family** consists of a\nseparable complex Hilbert space $H_x$ for each $x\\in X$ and a sequence of\nvectors $e_n(x)\\in H_x$ ($n\\in\\mathbb N$) such that\n$$x\\longmapsto\\langle e_n(x),e_m(x)\\rangle_{H_x}$$\nis Borel measurable for every $n,m$, and the complex-linear span of\n$\\{e_n(x):n\\in\\mathbb N\\}$ is dense in $H_x$ for every $x$. The fibres may be\nzero-dimensional; no positive lower bound on their dimensions is imposed. The\ninner product is linear in its first variable, as in the library's complex\ninner-product convention.\n\nA section is a choice of a vector $\\xi(x)\\in H_x$ for each $x$. It is a\n**measurable section** when all its fundamental coefficients\n$$x\\longmapsto\\langle\\xi(x),e_n(x)\\rangle_{H_x},\\qquad n\\in\\mathbb N,$$\nare Borel measurable complex functions. Each $e_n$ is itself measurable by\nthe Gram-coefficient condition. Pointwise sums and multiplication by a\nmeasurable complex scalar function are taken in the corresponding fibres.\n\nTwo measurable sections are identified **almost everywhere** when there is a\nBorel null set $N$ such that they agree at every $x\\notin N$. This formulation\nworks on the given, possibly noncomplete, measure space and does not silently\nadjoin arbitrary subsets of null sets to $\\mathcal B$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-direct-integral-of-a-measurable-hilbert-field",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal B,\\mu)$ carry a measurable complex Hilbert field\n$(H_x,e_n(x))_{x\\in X}$ as in\n[[def-measurable-hilbert-field-from-a-countable-fundamental-family]], with\ninner products linear in the first variable. Write $\\mathscr M(H)$ for its\nmeasurable sections. Define the square-integrable section space\n$$\\mathscr M_2(H):=\\left\\{\\xi\\in\\mathscr M(H):\\int_X\\|\\xi(x)\\|_{H_x}^{2}\\,d\\mu(x)<\\infty\\right\\}.$$\nThe integrand is a nonnegative measurable function: the section lemma\n[[lem-measurable-sections-have-measurable-pointwise-inner-products]] makes\n$x\\mapsto\\|\\xi(x)\\|$ measurable, and composition with $t\\mapsto t^2$ preserves\nmeasurability by\n[[thm-composition-with-borel-functions-preserves-measurability]], whose\nmeasurability convention is inverse-image measurability\n[[def-measurable-function-between-measurable-spaces]]. Its integral\nis the nonnegative Lebesgue integral\n[[def-nonnegative-lebesgue-integral]].\n\nFor $\\xi,\\eta\\in\\mathscr M(H)$, put $\\xi\\sim_\\mu\\eta$ when there is a Borel\n$\\mu$-null set $N$ such that $\\xi(x)=\\eta(x)$ for every $x\\notin N$, using the\nnoncomplete-base convention of the field definition. The **direct integral**\nis the quotient set\n$$\n\\int_X^{\\oplus}H_x\\,d\\mu(x):=\\mathscr M_2(H)/{\\sim_\\mu}.\n$$\nWrite $[\\xi]$ for the class of $\\xi$. Addition and scalar multiplication are\ninduced by pointwise fibre operations, and the inner product is\n$$\\langle[\\xi],[\\eta]\\rangle:=\\int_X\\langle\\xi(x),\\eta(x)\\rangle_{H_x}\\,d\\mu(x).$$\n\n**The admissible sections form a vector space.** Measurability of pointwise\nlinear combinations follows from the section lemma. If $a=\\|\\xi(x)\\|$ and\n$b=\\|\\eta(x)\\|$, fibrewise expansion gives\n$$\\|\\xi(x)+\\eta(x)\\|^2=a^2+b^2+2\\operatorname{Re}\\langle\\xi(x),\\eta(x)\\rangle\\le a^2+b^2+2ab\\le2(a^2+b^2).$$\nby Cauchy–Schwarz, $\\operatorname{Re}z\\le|z|$ for complex $z$, and\n$2ab\\le a^2+b^2$ (since $(a-b)^2\\ge0$). The real-part bound follows from\n$|u+iv|=\\sqrt{u^2+v^2}$ and $u^2+v^2\\ge u^2$ when $u>0$; it is immediate\nwhen $u\\le0$, and taking nonnegative square roots gives $u\\le|u+iv|$ in the\npositive case. The modulus and conjugation laws are recorded in\n[[lem-complex-conjugation-and-modulus-laws]].\nBy monotonicity, positive homogeneity, and additivity of the nonnegative\nintegral ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]],\n[[cor-additivity-of-the-nonnegative-lebesgue-integral]]), the integral of the\nsquared norm of a sum is finite whenever those of $\\xi$ and $\\eta$ are finite;\nthe comparison function $a^2+b^2$ is measurable by Borel composition\n[[thm-composition-with-borel-functions-preserves-measurability]] and\nmeasurable arithmetic [[thm-arithmetic-and-lattice-operations-preserve-measurability]].\nFor $c\\ne0$,\n$\\|c\\xi(x)\\|^2=|c|^2\\|\\xi(x)\\|^2$ and positive homogeneity keeps its\nintegral finite; for $c=0$ the zero function has integral zero. Hence\n$\\mathscr M_2(H)$ is a complex vector space.\nThe pointwise bound uses\n[[thm-cauchy-schwarz-in-an-inner-product-space]] and the norm and scalar\nconventions of [[def-real-and-complex-inner-product-space]].\n\n**The quotient and its operations are well-defined.** The empty set is a Borel\nnull set by the $m=0$ clause of\n[[thm-finite-and-countable-subadditivity-of-measures]], so $\\sim_\\mu$ is\nreflexive; it is symmetric by equality, and it is transitive because two Borel\nnull witnesses have a null union by the same finite-subadditivity theorem. This\nuses the definition of almost-everywhere equality\n[[def-measure-null-set-and-almost-everywhere]]. If $\\xi\\sim_\\mu\\xi'$\nand $\\eta\\sim_\\mu\\eta'$, then outside the union of their two witnesses the\npointwise sums agree, and so do the pointwise scalar multiples. The same finite\nunion argument shows that these operations do not depend on representatives.\n\n**The displayed pairing is finite.** By the section lemma,\n$h(x)=\\langle\\xi(x),\\eta(x)\\rangle$ is measurable. The modulus $|h|$ is\nmeasurable by Borel composition with the complex modulus. The measurable\nreal-valued functions $f(x)=\\|\\xi(x)\\|$ and $g(x)=\\|\\eta(x)\\|$ belong to\n$\\mathcal L^2(\\mu)$ by the definition of that space\n[[def-calligraphic-l-p-on-a-measure-space]]. Fibrewise Cauchy–Schwarz and then\nthe scalar $L^2$ Cauchy–Schwarz inequality\n[[cor-cauchy-schwarz-inequality-for-l-two]] give\n$$\\int_X|h(x)|\\,d\\mu(x)\\le\\int_X f(x)g(x)\\,d\\mu(x)\\le\\|f\\|_2\\|g\\|_2<\\infty.$$\nSince $f,g\\ge0$, the scalar theorem's $|fg|$ is $fg$. Here $fg$ is measurable by\n[[thm-arithmetic-and-lattice-operations-preserve-measurability]], and the first\ninequality uses monotonicity of the nonnegative integral\n[[prop-order-and-scalar-rules-for-the-nonnegative-integral]].\nThus $h$ is an integrable complex function by\n[[def-integrable-real-and-complex-functions-and-their-integrals]]. More\nexplicitly, write $h=u+iv$. The real coordinate projections are Borel, so\n$u$ and $v$ are measurable, and $|u|,|v|\\le |h|$ makes both real functions\nintegrable. Their classes, rather than a class of the complex function $h$,\nbelong to the real space $L^1(\\mu)$ of\n[[def-l-p-space-as-a-quotient-by-null-functions]]. The complex integral here\nmeans precisely $\\int h=\\int u+i\\int v$.\n\n**The pairing does not depend on representatives.** If $\\xi\\sim_\\mu\\xi'$ and\n$\\eta\\sim_\\mu\\eta'$, their pairings agree outside the union of the two null\nwitnesses. Both pairings are integrable by the preceding estimate. Their real parts agree almost everywhere, as do their imaginary parts.\nApplying [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]\nseparately to these real $L^1$ classes, with $A=X$, gives equality of both\ncomponent integrals and hence of the complex integrals.\n\n**The quotient is an inner-product space.** Fibrewise linearity in the first\nvariable passes through the integral by real linearity in\n[[thm-linearity-of-the-lebesgue-integral-on-l-one]], applied to the integrable\nreal and imaginary parts. Indeed, if $h=u+iv$ and $c=a+ib$, then\n$ch=(au-bv)+i(av+bu)$, so real linearity gives\n$\\int ch=c\\int h$. For two integrable pairings $h=u+iv$ and $k=s+it$,\n$h+k=(u+s)+i(v+t)$ gives $\\int(h+k)=\\int h+\\int k$ in the same way;\nall these real components are integrable by real linearity. Their complex\ncombinations are integrable since $|ch|=|c||h|$ and\n$|h+k|\\le |h|+|k|$, using nonnegative integral monotonicity and additivity.\nFibrewise conjugate\nsymmetry passes through it as well: for integrable $h=u+iv$, the definition\ngives $\\int\\overline h=\\int u-i\\int v=\\overline{\\int h}$; integrability of\n$\\overline h$ follows from $|\\overline h|=|h|$\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] and\n[[lem-complex-conjugation-and-modulus-laws]]. Conjugate symmetry\nand first-variable linearity give conjugate-linearity in the second variable.\nFor every class,\n$$\\langle[\\xi],[\\xi]\\rangle=\\int_X\\|\\xi(x)\\|^2\\,d\\mu(x)\\ge0.$$\nThis value is zero exactly when $\\|\\xi(x)\\|^2=0$ almost everywhere, by\n[[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]. Fibrewise positive\ndefiniteness says this is exactly when $\\xi(x)=0$ off a Borel null set, that is,\nwhen $[\\xi]=[0]$. Therefore the pairing is positive definite. These arguments\nuse the ordinary complex inner-product axioms\n[[def-real-and-complex-inner-product-space]] and the integral convention above;\nthey do not use any form of the axiom of choice.\n\nNo completion is part of this definition. The next theorem proves that this\ninner-product space is complete under its induced norm.\n\n**Boundary cases.** If $X=\\varnothing$, or if every fibre is zero-dimensional,\nthere is only the zero section and the quotient is the zero inner-product\nspace. If $\\mu(X)=0$, then $X$ itself is a Borel null set, so every two\nsquare-integrable sections are equivalent and the quotient is again zero.\nFor a one-point base $X=\\{x_0\\}$ with $\\mu(\\{x_0\\})=m>0$ and\n$H_{x_0}=\\mathbb C$, take $e_1(x_0)=1$ and $e_n(x_0)=0$ for $n\\ge2$.\nEvery section has the form $\\xi_z(x_0)=z$ and\n$$\\langle[\\xi_z],[\\xi_w]\\rangle=m z\\overline w.$$\nThe direct integral is one-dimensional, with norm $\\sqrt m\\,|z|$. If instead\n$m=0$, the preceding zero-measure calculation applies.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-direct-integral-of-unitary-representations",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $G$ be a locally compact Hausdorff group, let $(X,\\mathcal B,\\mu)$ be a sigma-finite standard-Borel measure space ([[def-standard-borel-space]], [[def-finite-sigma-finite-and-semifinite-measures]]), and let $(H_x,e_n(x))_{x\\in X}$ be a measurable complex Hilbert field with a countable fundamental family ([[def-measurable-hilbert-field-from-a-countable-fundamental-family]]). Write $\\mathcal H=\\int_X^\\oplus H_x\\,d\\mu(x)$ for its direct-integral Hilbert space ([[def-direct-integral-of-a-measurable-hilbert-field]], [[thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces]]). A **measurable field of unitary representations of $G$** over this field is a family $(\\pi_x)_{x\\in X}$ such that each $\\pi_x:G\\to U(H_x)$ is strongly continuous ([[def-strongly-continuous-unitary-representation]]) and, for each fixed $g\\in G$, the operator field $x\\mapsto\\pi_x(g)$ is weakly measurable ([[def-measurable-and-decomposable-operator-fields]]). The identities $\\pi_x(gh)=\\pi_x(g)\\pi_x(h)$ and $\\pi_x(e)=I_{H_x}$ are required for every $x\\in X$ and all $g,h\\in G$. For each $g\\in G$ define\n$$\\pi(g)=\\int_X^\\oplus\\pi_x(g)\\,d\\mu(x)\\in\\mathcal B(\\mathcal H).$$\nBy [[thm-measurable-essentially-bounded-operator-fields-act-decomposably]], these operators define a group homomorphism $G\\to U(\\mathcal H)$. This operator family is called the **direct integral** of the field and written $\\pi=\\int_X^\\oplus\\pi_x\\,d\\mu(x)$. The homomorphism and unitarity are proved below; strong continuity is not asserted by this definition. Changing the field on a $\\mu$-null set does not change any induced operator $\\pi(g)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Lebesgue measure on $\\mathbb R^n$ is written\n$\\lambda_n$ ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]), and\n$\\mathbb Z\\subseteq\\mathbb R$ is the copy of the integers\n([[def-integers]]).\n\n**The torus.** Let $q:\\mathbb R\\to\\mathbb T:=\\mathbb R/\\mathbb Z$ be the\ncanonical projection of the quotient of the additive group $\\mathbb R$ by its\nsubgroup $\\mathbb Z$, carrying the quotient topology\n([[def-quotient-topology]], [[def-topological-space]]); we write\n$[t]:=q(t)=t+\\mathbb Z$. Thus $[s]=[t]$ exactly when $s-t\\in\\mathbb Z$. The map\n$q$ is continuous ([[def-continuous-map-top]]), and $\\mathbb T$ is a compact\nHausdorff space homeomorphic to the Euclidean unit circle.\n\n**Fundamental domain.** Every class has exactly one representative in $[0,1)$:\nfor $t\\in\\mathbb R$ the integer part $n=\\lfloor t\\rfloor$ satisfies\n$n\\le t<n+1$, so $t-n\\in[0,1)$ represents $[t]$ ([[lem-integer-part]]); and if\n$s,t\\in[0,1)$ satisfy $s-t\\in\\mathbb Z$, then $|s-t|<1$ forces $s=t$.\nConsequently the map $[0,1)\\to\\mathbb T$, $t\\mapsto[t]$, is a bijection.\n\n**Topological checks.** The closed interval $[0,1]$ is compact by [[thm-heine-borel-r]] and maps onto $\\mathbb T$, so the quotient is compact by [[thm-compactness-under-continuous-maps]]. The map $t\\mapsto(\\cos 2\\pi t,\\sin 2\\pi t)$ is continuous by [[thm-sine-and-cosine-derivatives]] and [[cor-differentiable-implies-continuous]], and is constant on quotient fibres by [[thm-sine-cosine-zero-sets-and-fundamental-period]]. It induces a continuous map $\\varphi:\\mathbb T\\to S^1$ by [[thm-quotient-universal-property]]. The bijection of $[0,2\\pi)$ with the circle in [[thm-sine-and-cosine-parametrize-the-unit-circle]], together with the unique representatives in $[0,1)$, makes $\\varphi$ bijective. The Euclidean circle is Hausdorff by [[thm-metric-hausdorff-separation]], so the compact-to-Hausdorff clause of [[thm-compactness-under-continuous-maps]] makes $\\varphi$ a homeomorphism. In particular $\\mathbb T$ is Hausdorff.\n\nThe map $q$ is open: for an open $U\\subseteq\\mathbb R$, its saturation $q^{-1}[q[U]]=\\bigcup_{k\\in\\mathbb Z}(U+k)$ is open. The images under $q$ of rational-endpoint open intervals form a countable base: if $q(t)\\in V$ with $V$ open, choose such an interval containing $t$ and contained in $q^{-1}[V]$. Its image is an open neighbourhood contained in $V$.\n\n**The measure.** For a Borel set $E\\in\\mathcal B(\\mathbb T)$\n([[def-borel-sigma-algebra]]) the preimage $q^{-1}[E]$ is a Borel subset of\n$\\mathbb R$, because $q$ is continuous\n([[thm-continuous-preimages-of-borel-sets-are-borel]]), hence Lebesgue\nmeasurable ([[thm-borel-sets-are-lebesgue-measurable]]). Define\n\n$$m_{\\mathbb T}(E):=\\lambda_1\\bigl(q^{-1}[E]\\cap[0,1)\\bigr) ,$$\n\nthe value at $q^{-1}[E]$ of the same-ambient restriction of $\\lambda_1$ to $[0,1)$\n([[def-restriction-of-a-measure]]).\n\nThis is a measure on $\\mathcal B(\\mathbb T)$ by [[prop-restriction-is-a-measure]]:\nthe assignment $E\\mapsto\\lambda_1(q^{-1}[E]\\cap[0,1))$ is the composition of the\nrestriction measure with the inverse image along $q$, and inverse images preserve\nthe empty set, complements and countable unions, while countable additivity is\nthat of $\\lambda_1$. It is a **probability measure**:\n$m_{\\mathbb T}(\\mathbb T)=\\lambda_1([0,1))=1$\n([[thm-lebesgue-measure-of-a-box-of-every-kind]]). Thus\n$(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T})$ is a probability measure space\n([[def-measure-space]], [[def-measure]]).\n\n**The integral.** For a Borel measurable $F:\\mathbb T\\to[0,+\\infty]$, define\n\n$$\\int_{\\mathbb T}F\\,dm_{\\mathbb T}:=\\int_{[0,1)}F\\circ q\\,d\\lambda_1 .$$\n\nThe defining integral is meaningful because $F\\circ q$ is Borel\n([[thm-composition-with-borel-functions-preserves-measurability]],\n[[thm-continuous-preimages-of-borel-sets-are-borel]]). The assignment agrees with\n$E\\mapsto m_{\\mathbb T}(E)$ on indicators, and it is additive and homogeneous on\nfinite nonnegative simple functions; for a sequence $0\\le F_0\\le F_1\\le\\cdots$\nwith $F_n\\uparrow F$ pointwise the identity passes to the limit because\n$F_n\\circ q\\uparrow F\\circ q$ and monotone convergence holds for $\\lambda_1$\n([[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]],\n[[thm-monotone-convergence-for-the-integral]]). For real or complex integrable\n$F$ the integral is defined by decomposition into nonnegative parts or into real\nand imaginary parts, and it is linear\n([[def-integrable-real-and-complex-functions-and-their-integrals]],\n[[thm-linearity-of-the-lebesgue-integral-on-l-one]]). In particular\n$\\int_{\\mathbb T}1\\,dm_{\\mathbb T}=1$, and the same formula holds with $[0,1)$\nreplaced by any half-open interval $[a,a+1)$ or $(a,a+1]$, by the periodicity of\n$q^{-1}[E]$ and the translation invariance of $\\lambda_1$\n([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]).\n\n**Translation invariance.** For $y\\in\\mathbb R$ the map\n$\\tau_y:\\mathbb T\\to\\mathbb T$, $\\tau_y([t]):=[t+y]$, is well defined (if\n$s-t\\in\\mathbb Z$ then $(s+y)-(t+y)\\in\\mathbb Z$) and continuous, because it is\ninduced by the continuous map $t\\mapsto q(t+y)$ from $\\mathbb R$ to $\\mathbb T$. This composite is constant on the fibres of $q$, since $q(t)=q(s)$ implies $q(t+y)=q(s+y)$ ([[thm-quotient-universal-property]]). It preserves\n$m_{\\mathbb T}$: write $y=n+r$ with $n=\\lfloor y\\rfloor$ and $r\\in[0,1)$, put\n$A:=q^{-1}[E]$ and use that $A-n=A$ and that\n$A\\cap[0,1)=\\bigl(A\\cap[0,r)\\bigr)\\cup\\bigl(A\\cap[r,1)\\bigr)$ while\n$A\\cap[r,r+1)=\\bigl(A\\cap[r,1)\\bigr)\\cup\\bigl((A\\cap[0,r))+1\\bigr)$, so that\n\n$$m_{\\mathbb T}(\\tau_y^{-1}E)=\\lambda_1\\bigl((A-y)\\cap[0,1)\\bigr)=\\lambda_1\\bigl(A\\cap[r,r+1)\\bigr)=\\lambda_1\\bigl(A\\cap[0,1)\\bigr)=m_{\\mathbb T}(E),$$\n\nthe middle equality by translation invariance of $\\lambda_1$. Hence\n$(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T},\\tau_y)$ is a measure-preserving\nsystem for every $y$, and the published integral-invariance theorem gives\n$\\int_{\\mathbb T}F\\circ\\tau_y\\,dm_{\\mathbb T}=\\int_{\\mathbb T}F\\,dm_{\\mathbb T}$\nfor every measurable $F\\ge0$ and every integrable $F$\n([[def-measure-preserving-transformation-and-system]],\n[[thm-integrals-are-invariant-under-measure-preserving-maps]]). This is the\n**normalized Haar integral** of $\\mathbb T$; abstract Haar theory is not\ninvoked.\n\n**The finite torus.** For a natural $n\\ge1$ put\n$\\mathbb T^n:=\\mathbb R^n/\\mathbb Z^n$ with the quotient topology of the\ncanonical projection $q_n$, and define\n\n$$m_{\\mathbb T^n}(E):=\\lambda_n\\bigl(q_n^{-1}[E]\\cap[0,1)^n\\bigr),\\qquad \\int_{\\mathbb T^n}F\\,dm_{\\mathbb T^n}:=\\int_{[0,1)^n}F\\circ q_n\\,d\\lambda_n .$$\n\nCoordinatewise integer parts give unique representatives in $[0,1)^n$, and the continuous quotient map sends the compact cube $[0,1]^n$ onto $\\mathbb T^n$. Compactness of the cube follows from [[thm-heine-borel-r]] and [[thm-finite-products-of-compact-spaces]], and compactness of its image follows from [[thm-compactness-under-continuous-maps]]. Preimages of Borel sets are Borel; disjoint preimages and countable additivity make the displayed set function a measure, and the box formula gives total mass one. The integral identity follows from indicators, increasing simple approximation and decomposition exactly as in one dimension. For translation invariance, discard the integer parts of the translation vector, split each coordinate of $[0,1)^n$ at its fractional part, and translate the resulting $2^n$ disjoint half-open boxes by integer vectors to partition the translated cube. The periodic preimage set is unchanged by these integer vectors; finite additivity and Lebesgue translation invariance give the same measure. Applying the indicator identity, simple approximation and decomposition gives the integral formula on any translated cube. The coordinate projections induce a continuous bijection\n$\\Phi:\\mathbb T^n\\to(\\mathbb R/\\mathbb Z)^n$ by the universal property. Its\ndomain is compact by the preceding check, while its codomain is a finite\nproduct of Hausdorff spaces and hence Hausdorff ([[lem-products-preserve-t0-t1-and-hausdorff]]); the continuous-bijection\ntheorem therefore makes $\\Phi$ a homeomorphism. Thus $\\mathbb T^n$ carries the\nfinite product topology ([[def-product-topology]],\n[[thm-finite-products-of-compact-spaces]],\n[[thm-compactness-under-continuous-maps]]), and its characters\n$x\\mapsto\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, are defined on this compact\nHausdorff space: replacing representatives by integer vectors leaves the exponential unchanged by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and the trigonometric period. Finite products of the countable base above form a countable rectangular base. Hence every product-open set is a countable union of Borel rectangles. Conversely coordinate projections are continuous, so Borel rectangles are Borel in the product. Thus the product Borel sigma-algebra equals the Borel sigma-algebra of $\\mathbb T^n$. On a product $A_0\\times\\cdots\\times A_{n-1}$ of Borel subsets\nof the factors, the defining fundamental-domain formula and repeated application of [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]] give\n$m_{\\mathbb T^n}(A_0\\times\\cdots\\times A_{n-1})=\\prod_jm_{\\mathbb T}(A_j)$, so\n$m_{\\mathbb T^n}$ agrees on every measurable rectangle with the product measure\n$m_{\\mathbb T}\\times\\cdots\\times m_{\\mathbb T}$\n([[def-product-measure-on-sigma-finite-spaces]]); both are probability measures,\nand uniqueness of the product measure on sigma-finite spaces identifies them\non the entire Borel sigma-algebra\n([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\nFubini's theorem then computes iterated integrals of $L^1$ functions on\n$\\mathbb T^n$\n([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-trigonometric-characters-are-orthonormal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). The family of\ncharacters $(e_k)_{k\\in\\mathbb Z}$ of\n[[def-fourier-coefficients-and-trigonometric-polynomials]] is orthonormal in the\ncomplex Hilbert space $L^2(\\mathbb T;\\mathbb C)$\n([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]],\n[[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]):\n\n$$\\langle e_k,e_l\\rangle=\\int_{\\mathbb T}e_k\\overline{e_l}\\,dm_{\\mathbb T} =\\begin{cases}1,&k=l,\\\\0,&k\\ne l.\\end{cases}$$\n\nMoreover the coefficient pairing of a trigonometric polynomial computes its\ncoefficients: if $p=\\sum_{k\\in F}c_ke_k$ and $j\\in F$, then\n$\\widehat p(j)=c_j$, and $\\widehat p(j)=0$ for $j\\notin F$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). The characters\n$(e_k)_{k\\in\\mathbb Z}$ form an orthonormal basis of the complex Hilbert space\n$L^2(\\mathbb T;\\mathbb C)$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]],\n[[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]): they are\northonormal and their closed linear span is all of $L^2(\\mathbb T;\\mathbb C)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-uniqueness-of-the-cyclic-gns-representation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $G$ be a topological group. For $j=1,2$, let\n$H_j$ be a complex Hilbert space, let $\\pi_j:G\\to U(H_j)$ be a strongly\ncontinuous unitary representation, and let $\\xi_j\\in H_j$ be cyclic. Suppose\ntheir diagonal coefficients agree:\n$$\n\\langle\\pi_1(g)\\xi_1,\\xi_1\\rangle=\\langle\\pi_2(g)\\xi_2,\\xi_2\\rangle\\qquad(g\\in G).\n$$\nThen there is a unique unitary intertwiner $U:H_1\\to H_2$ such that\n$U\\xi_1=\\xi_2$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-left-and-right-regular-unitary-representations",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $G$ be an LCH group with a fixed left Haar measure $\\mu$, let\n$\\Delta_G$ be the modular function of $G$\n([[def-modular-function-of-a-locally-compact-group]]), and let $L^2(G)$ be the\ncomplex space $L^2(G,\\mu;\\mathbb C)$ with norm $\\|\\cdot\\|_2$ and inner product\n$\\langle\\xi,\\eta\\rangle=\\int_G\\xi\\overline{\\eta}\\,d\\mu$\n([[def-complex-haar-lp-spaces-and-compactly-supported-functions]],\n[[def-complex-l-two-inner-product]]). For $g\\in G$ and $\\xi\\in L^2(G)$ define\nclasses by\n$$\\lambda(g)\\xi(x):=\\xi(g^{-1}x),\\qquad \\rho(g)\\xi(x):=\\Delta_G(g)^{1/2}\\xi(xg)\\qquad(x\\in G).$$\nThe assignment $\\lambda$ is the **left regular representation** of $G$ and\n$\\rho$ is the (modularly corrected) **right regular representation**.\n\n**Well-definedness and basic properties.** Both formulas are representative\nindependent: for a Borel set $E$ left invariance gives $\\mu(g^{-1}E)=\\mu(E)$\nand the right-translation scaling\n$\\int_GF(xg)\\,d\\mu(x)=c(g)\\int_GF\\,d\\mu(x)$ with $c(g)=\\Delta_G(g^{-1})>0$\n([[def-left-haar-integral-and-left-haar-measure]],\n[[lem-right-translation-scales-left-haar-measure]]) gives $\\mu(Eg)=0$ exactly\nwhen $\\mu(E)=0$; hence $\\xi=\\xi'$ a.e. implies $\\lambda(g)\\xi=\\lambda(g)\\xi'$\na.e. and $\\rho(g)\\xi=\\rho(g)\\xi'$ a.e. Both formulas are complex-linear in\n$\\xi$ pointwise, and both preserve the norm,\n$$\\|\\lambda(g)\\xi\\|_2=\\|\\xi\\|_2,\\qquad \\|\\rho(g)\\xi\\|_2^2=\\int_G\\Delta_G(g)|\\xi(xg)|^2\\,d\\mu(x) =\\Delta_G(g)\\Delta_G(g^{-1})\\|\\xi\\|_2^2=\\|\\xi\\|_2^2,$$\nusing $\\Delta_G(g)\\Delta_G(g^{-1})=1$\n([[thm-the-modular-function-is-a-continuous-homomorphism]]); so each\n$\\lambda(g)$ and $\\rho(g)$ is a linear isometry of $L^2(G)$. The group laws\nhold: $\\lambda(e)=\\rho(e)=\\mathrm{id}$,\n$\\lambda(g)\\lambda(h)=\\lambda(gh)$ and $\\rho(g)\\rho(h)=\\rho(gh)$ because\n$\\Delta_G$ is multiplicative and $\\Delta_G>0$, and consequently\n$\\lambda(g)^{-1}=\\lambda(g^{-1})$ and $\\rho(g)^{-1}=\\rho(g^{-1})$. Each\n$\\lambda(g)$ and $\\rho(g)$ is therefore an invertible linear isometry of the\nHilbert space $L^2(G)$ ([[def-hilbert-space]]), and $g\\mapsto\\lambda(g)$,\n$g\\mapsto\\rho(g)$ are group homomorphisms from $G$ into the group of such\noperators.\n\n**Unitary representations.** In the terminology of\n[[def-continuous-and-unitary-representation-of-a-compact-lie-group]], a\nrepresentation of $G$ on a complex Hilbert space $H$ is a group homomorphism\n$\\pi:G\\to U(H)$ into the group $U(H)$ of unitary operators on $H$ satisfying **strong continuity**: $g\\mapsto\\pi(g)\\xi$ is continuous at $e$ for every\n$\\xi\\in H$ (equivalently at every point of $G$). On an infinite-dimensional\n$H$, *unitary operator* means an invertible linear isometry, so that the\ninvertible isometries $\\lambda(g),\\rho(g)$ above are its unitary operators;\nthis is the usage of\n[[def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group]],\nand the finite-dimensional normal form recorded in\n[[def-linear-isometry-and-orthogonal-or-unitary-operator]] is not used here.\nThe strong continuity of both homomorphisms follows from\n[[lem-haar-translations-are-strongly-continuous-on-lp-one-and-two]]:\nits $p=2$ left translate is exactly $\\lambda(g)$, and its modular right\ntranslate is exactly $\\rho(g)$. Its AC hypothesis is assumed here. Thus\nboth assignments are unitary representations in this terminology.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-regular-representations-are-unitary-and-strongly-continuous",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $G$ be an LCH group with a fixed left Haar measure $\\mu$, and let\n$\\lambda,\\rho$ be the left and right regular representations on $L^2(G)$\n([[def-left-and-right-regular-unitary-representations]]). Then $\\lambda$ and\n$\\rho$ are strongly continuous unitary representations of $G$ on the Hilbert\nspace $L^2(G)$, and $\\lambda$ is faithful: $\\lambda(g)=\\mathrm{id}$ implies\n$g=e$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "ex-the-left-regular-factor-of-an-icc-discrete-group",
+          "source_section": "Example",
+          "quote": "Assume the Axiom of Choice. Let $\\Gamma$ be a countably infinite group in which every nonidentity conjugacy class is infinite (ICC), for instance the free group on two generators or the group of finitely supported permutations of $\\mathbb N$. Let $\\lambda_\\Gamma$ be the left regular representation on $\\ell^2(\\Gamma)$ and $L(\\Gamma):=W^*(\\lambda_\\Gamma(\\Gamma))\\subseteq\\mathcal B(\\ell^2(\\Gamma))$. Then: (1) $\\tau(T):=\\langle T\\delta_e,\\delta_e\\rangle$ is a faithful normal tracial state on $L(\\Gamma)$ with $\\tau(I)=1$, and $L(\\Gamma)$ is infinite dimensional; (2) $L(\\Gamma)$ is a factor, i.e. $Z(L(\\Gamma))=\\mathbb CI$; (3) $L(\\Gamma)$ is not a type I factor, hence $\\lambda_\\Gamma$ is a factor representation that is not a multiple of an irreducible representation. Thus the canonical central decomposition of $\\lambda_\\Gamma$ has a single non-irreducible factor fibre, exhibiting that factor representations need not be irreducible and that the type I hypothesis in the irreducible disintegration theorem is essential.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-type-i-factor-representation-and-type-i-group",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a nonzero separable complex Hilbert space and let $M\\subseteq\\mathcal B(H)$ be a concrete factor von Neumann algebra ([[def-factor-representation-and-primary-representation]]). A nonzero projection $p\\in M$ is **minimal**, or **abelian**, when $pMp=\\mathbb Cp$. The factor $M$ is of **type I** when it contains a nonzero minimal projection. A strongly continuous unitary representation $\\pi$ of a topological group $G$ on a nonzero separable Hilbert space is a **type I factor representation** when its generated von Neumann algebra $\\pi(G)''$ is a factor of type I; and a factor representation is of type I when it is a multiple of an irreducible representation (equivalently, by [[lem-separable-type-i-factors-are-multiples-of-irreducible-representations]], when $\\pi(G)''$ contains a nonzero minimal projection). The group $G$ is **type I** when every factor representation of $G$ on a separable Hilbert space is of type I. The two descriptions of a type I factor representation agree: for a strongly continuous unitary representation $\\pi$ on nonzero separable $H$ with $M=\\pi(G)''$ a factor, $M$ contains a nonzero minimal projection if and only if there is an irreducible representation $\\sigma$ of $G$ and $m\\in\\{1,2,\\dots,\\infty\\}$ with $\\pi\\cong\\sigma^{\\oplus m}$ ([[lem-separable-type-i-factors-are-multiples-of-irreducible-representations]]).",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A character of $A$ is uniquely determined by $z=\\chi(a)\\in\\{z\\in\\mathbb C:|z|=1\\}$, with $\\chi(a^n)=z^n$. This identifies $\\widehat A$ with the torus: compact subsets of the discrete cyclic group are finite, so its compact-open character topology is exactly the topology of this evaluation. Transport normalized torus Haar measure to $\\widehat A$; do the same for $B$ and $\\psi(b)$. These are standard-Borel probability parameter spaces. A transversal $T$ of $A\\backslash F$ is countable. Realize all $\\pi_z=\\operatorname{Ind}_A^F\\chi_z$ on the fixed space $\\ell^2(T)$ as in [F2]. For fixed $g$ every basis matrix coefficient is zero or a monomial $z^n$, hence continuous in $z$. Thus [F4] defines $\\Pi_A=\\int_{\\widehat A}^{\\oplus}\\pi_z\\,d\\mu(z)$ on $L^2(\\widehat A;\\ell^2(T))$. The pointwise group law is exact for every parameter; since $F$ is discrete, the integrated unitary representation is automatically strongly continuous.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The constant section $\\xi(z)=\\delta_e$ is a unit vector. Its diagonal coefficient at $g$ is the integral of the coefficient in [F2]: it is zero if $g\\notin A$, and if $g=a^n$ it is $\\int z^n\\,d\\mu(z)=\\mathbf1_{n=0}$. Hence it equals $\\mathbf1_{g=e}$. Crucially, $\\xi$ is cyclic for the entire integral. Indeed, for every $t\\in T$ and $n\\in\\mathbb Z$, the group law and [F2] give $\\Pi_A(t^{-1}a^n)\\xi(z)=z^n\\delta_t$. The span of these orbit vectors contains every finite sum of Fourier polynomials times coset basis vectors. Such sums are dense: the squared norm is the sum of the scalar-coordinate squared $L^2$ norms, so truncating the countable coset coordinates makes the tail arbitrarily small, and [F5] approximates each of the finitely many remaining coordinates by Fourier polynomials. This proves global cyclicity, without inferring it from fibrewise cyclicity.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The regular representation and $(\\Pi_A,\\xi)$ now have the same diagonal coefficient and cyclic unit vectors, so [F6] gives $\\lambda_F\\cong\\Pi_A$. Repeating steps 1.1 and 2.1 with $B$ gives $\\lambda_F\\cong\\int_{\\widehat A}^{\\oplus}\\operatorname{Ind}_A^F\\chi\\,d\\mu(\\chi)\\cong\\int_{\\widehat B}^{\\oplus}\\operatorname{Ind}_B^F\\psi\\,d\\nu(\\psi)$. Both measures are normalized Haar probabilities.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By self-commensuration in [F1], [F3] makes every fibre in both integrals irreducible. Every intersection $g^{-1}Bg\\cap A$ is trivial, hence has infinite index in the infinite group $A$. The cross-family inequivalence hypothesis is therefore vacuous, and [F3] gives $\\operatorname{Ind}_A^F\\chi\\not\\cong\\operatorname{Ind}_B^F\\psi$ for every pair of parameters. Within one family, distinct characters also give inequivalent fibres: if the intersection $g^{-1}Ag\\cap A$ has finite index in both groups, self-commensuration forces $g\\in A$; conjugation then fixes every character of the abelian $A$, and different characters differ on $A$. The same inequivalence criterion applies, and similarly for $B$. Thus each model has multiplicity one on its own irreducible classes, and the two sets of classes are disjoint.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "No removal of null parameter sets, change of measure within its class, or parameter identification can match the irreducible fibres of these two probability models: every cross pair is inequivalent by step 4.1. This refutes canonical irreducible measure-class/multiplicity data. No standard-Borel structure on the full dual $\\widehat F$ is being assumed; the two models already use standard-Borel circles and disjoint images among irreducible classes. Moreover [F7] proves that $F$ is not type I. In this example the central factor datum remains the one-point non-irreducible regular factor of [F7]; the two irreducible disintegrations are not central diagonalizations. Hence the uniqueness appropriate to central factor decompositions cannot be transferred to irreducible multiplicity data outside type I.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim requires a countably infinite group and uses a nonzero regular Hilbert space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero Fourier exponents as the coefficient at identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives a unit vector and step 4.1 gives multiplicity one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 includes every circle character, including the trivial one."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval endpoint parameters; circle characters are all covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a transversal under AC; countable Fourier density is justified in F5."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "locally-reviewed",
+        "scope": "Focused mathematical repair of four original missing prerequisite carriers, not an independent full-item audit."
+      }
+    }
+  }
+}

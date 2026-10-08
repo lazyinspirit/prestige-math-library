@@ -12,6 +12,10 @@ deps:
   - def-matrix-coefficient-of-a-unitary-representation
   - def-strongly-continuous-unitary-representation
   - def-compact-space
+  - def-product-topology
+  - def-initial-and-final-topology
+  - def-hausdorff-space
+  - lem-compactness-of-a-subspace-is-ambient
   - thm-cauchy-schwarz-in-an-inner-product-space
   - def-axiom-of-choice
   - cor-heine-borel-in-the-product-topology
@@ -21,12 +25,10 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-axiom_audit: "Assume AC, inherited from the normalized-coefficient approximation lemma; the elementary estimate relating the coefficient to the invariant-vector defect is choice-free."
+axiom_audit: "Assume AC, inherited from the normalized-coefficient approximation lemma. The counterexample uses AC through Tychonoff and for the recursive stage-neighbourhood and escaping-point selections. The elementary coefficient estimates and rank-one sign operators are choice-free."
 verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+  precheck: pass
+  repair: research/frontier-43-complex-representation-15-compact-stage-product-published-repair/receipt.json
 sources:
   references:
     - title: "Helge Gloeckner, Ralf Gramlich and Tobias Hartnick, Final Group Topologies, Kac-Moody Groups and Pontryagin Duality, arXiv:math/0603537v3"
@@ -79,7 +81,17 @@ $\xi\in H$ with $\sup_{g\in Q}\|\pi(g)\xi-\xi\|<\epsilon$.
 
 ## Remarks
 
-The LCH hypothesis cannot be dropped for the finite-sum coefficient definition of weak containment used here. Let $K_k=\{(g_d)_{d\ge1}\in\prod_{d\ge1}U(d):\operatorname{rank}(g_d-I)\le k\text{ for every }d\}$. The group $U(d)$ is closed and bounded in $\mathbb C^{d^2}\cong\mathbb R^{2d^2}$, since $g^*g=I$ is a closed condition and each entry has modulus at most one; it is therefore compact by [[cor-heine-borel-in-the-product-topology]]. Each complex rank condition is closed: the real matrix of a complex-linear map has twice its complex rank (its image is the realification of the complex image), so use the vanishing of all $(2k+1)$-minors of the real matrix, by [[lem-matrix-rank-detected-by-nonzero-minors]]; the condition is vacuous when $k\ge d$. Thus every $K_k$ is compact by [[thm-tychonoff]]. Put $G=\bigcup_{k\ge1}K_k$ with the final topology of this increasing compact sequence. It is Hausdorff, since that topology contains the ambient product topology. The finite-product theorem for these direct limits (Gloeckner--Gramlich--Hartnick, Proposition 4.7, printed pp. 12--13) identifies $G\times G$ with $\varinjlim(K_k\times K_k)$. Indeed every compact Hausdorff stage is a $k_\omega$ space, using its constant compact exhaustion. Coordinatewise multiplication restricts continuously to $K_k\times K_k\to K_{2k}$ because $gg'-I=(g-I)+g(g'-I)$ and ranks are subadditive; inversion preserves $K_k$ because $g^{-1}-I=-g^{-1}(g-I)$. Thus $G$ is a Hausdorff topological group.
+The LCH hypothesis cannot be dropped for the finite-sum coefficient definition of weak containment used here. Let $K_k=\{(g_d)_{d\ge1}\in\prod_{d\ge1}U(d):\operatorname{rank}(g_d-I)\le k\text{ for every }d\}$. The group $U(d)$ is closed and bounded in $\mathbb C^{d^2}\cong\mathbb R^{2d^2}$, since $g^*g=I$ is a closed condition and each entry has modulus at most one; it is therefore compact by [[cor-heine-borel-in-the-product-topology]]. Each complex rank condition is closed: the real matrix of a complex-linear map has twice its complex rank (its image is the realification of the complex image), so use the vanishing of all $(2k+1)$-minors of the real matrix, by [[lem-matrix-rank-detected-by-nonzero-minors]]; the condition is vacuous when $k\ge d$. Thus every $K_k$ is compact by [[thm-tychonoff]]. Put $G=\bigcup_{k\ge1}K_k$ with the final topology of this increasing compact sequence. It is Hausdorff, since that topology contains the ambient product topology. Each $K_k$ has its original compact Hausdorff topology as a subspace of $G$: final-open sets restrict to original-open sets, and ambient-open sets are final-open. The following local argument identifies the product topology on $G\times G$ with the final topology of the stage products.
+
+First, in a compact Hausdorff space $T$, every compact $C\subseteq O$ with $O$ open has a compact neighbourhood $A$ such that $C\subseteq\operatorname{int}_T A\subseteq A\subseteq O$. Here compact subsets are closed: for $t\notin C$, separate $t$ from each point of $C$ by disjoint open sets and take a finite subcover of $C$; intersecting the finitely many neighbourhoods of $t$ gives a neighbourhood disjoint from $C$. Closed subsets of $T$ are compact by adjoining their open complement to a cover. For $c\in O$, separate $c$ from each point of the compact closed set $T\setminus O$ and take a finite subcover of that set; the resulting intersection $N_c$ of neighbourhoods of $c$ has closure inside $O$, since it misses an open set containing $T\setminus O$. If the complement is empty take $N_c=T$. A finite collection of these $N_c$ covers $C$, and the union of their closures is the required $A$. These ambient-cover uses are justified by [[lem-compactness-of-a-subspace-is-ambient]], and the separation property is [[def-hausdorff-space]].
+
+Second, if $C,D$ are nonempty compact subsets of spaces $T,S$ and $C\times D\subseteq W$ with $W$ product-open, there are open $P\supseteq C$, $Q\supseteq D$ with $P\times Q\subseteq W$. For each $c\in C$, choose rectangles $P_{c,d}\times Q_{c,d}\subseteq W$ about $(c,d)$; finitely many $Q_{c,d}$ cover $D$. Their corresponding $P_{c,d}$ have intersection $P_c$, and their union is $Q_c$, so $P_c\times Q_c\subseteq W$ and $Q_c\supseteq D$. Finitely many $P_c$ cover $C$; their union $P$ and the intersection of their corresponding $Q_c$ give the claim. This uses the rectangle basis of [[def-product-topology]].
+
+Now let $X=\bigcup_n K_n$, $Y=\bigcup_n L_n$ be increasing unions of compact Hausdorff spaces with inclusions inducing the original stage topologies, each union carrying the final topology ([[def-initial-and-final-topology]]). Suppose $W\subseteq X\times Y$ has open trace on every $K_n\times L_n$, and fix $(a,b)\in W$, in some stage $n_0$. A rectangle about $(a,b)$ in that trace and the first paragraph give compact neighbourhoods $A_{n_0}\subseteq K_{n_0}$, $B_{n_0}\subseteq L_{n_0}$ with $A_{n_0}\times B_{n_0}\subseteq W$. Inductively regard $A_n,B_n$ as compact subsets of the next stages. Apply the second paragraph to their product in $W\cap(K_{n+1}\times L_{n+1})$, then shrink the resulting factor neighbourhoods by the first paragraph to obtain compact $A_{n+1},B_{n+1}$ with $A_n\subseteq\operatorname{int}_{K_{n+1}}A_{n+1}$, $B_n\subseteq\operatorname{int}_{L_{n+1}}B_{n+1}$ and $A_{n+1}\times B_{n+1}\subseteq W$. AC supplies these recursive selections. Put $U=\bigcup_{n\ge n_0}\operatorname{int}_{K_n}A_n$ and $V=\bigcup_{n\ge n_0}\operatorname{int}_{L_n}B_n$. For every $m$,
+$$U\cap K_m=\bigcup_{n\ge\max(m,n_0)}\bigl(\operatorname{int}_{K_n}A_n\cap K_m\bigr).$$
+Earlier terms are absorbed by later interiors, and each displayed term is open in $K_m$ by the subspace inclusions. Hence $U$ is final-open; the same proof applies to $V$. They contain $a,b$, and $U\times V\subseteq W$ by moving both factors to the larger of their stage indices. Thus $W$ is product-open. Conversely product-open sets have open stage traces because the stage inclusions are continuous. This proves the required equality of topologies, in particular for $X=Y=G$ and $L_n=K_n$, without importing the proof of Gloeckner--Gramlich--Hartnick Proposition 4.7.
+
+Coordinatewise multiplication restricts continuously to $K_k\times K_k\to K_{2k}$ because $gg'-I=(g-I)+g(g'-I)$ and ranks are subadditive; inversion preserves $K_k$ because $g^{-1}-I=-g^{-1}(g-I)$. Thus $G$ is a Hausdorff topological group.
 
 Every compact subset of $G$ lies in one $K_k$. Otherwise choose distinct points $x_n$ of that compact subset outside $K_n$. Every subset of $\{x_n:n\ge1\}$ has finite, hence closed, intersection with each $K_k$, so is closed in the final topology. This would give an infinite closed discrete subspace of a compact Hausdorff space, a contradiction. The representation $\rho=\widehat\bigoplus_{d\ge1}\mathbb C^d$ with coordinatewise standard action is strongly continuous: each orbit map is continuous in the ambient product topology by truncating its square-summable tail, hence in the finer final topology ([[def-hilbert-direct-sum-of-unitary-representations]]).
 

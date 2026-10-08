@@ -1,0 +1,623 @@
+{
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "def-c-star-algebra",
+      "source_section": "Definition",
+      "quote": "A **possibly nonunital complex Banach algebra** is a complex vector space $A$\nequipped with an associative complex-bilinear multiplication\n$A \\times A \\to A$ ([[def-bounded-bilinear-map]] for the bilinearity convention)\nand a norm under which $A$ is a Banach space ([[def-banach-space]],\n[[rem-real-and-complex-normed-space-convention]]), such that the norm is\n**submultiplicative**:\n\n$$\\|ab\\| \\le \\|a\\|\\,\\|b\\| \\qquad (a,b \\in A).$$\n\nNo multiplicative identity is assumed, and no real-algebra or unital\nconvention is imported from elsewhere.\n\nA **complex C\\*-algebra** is a possibly nonunital complex Banach algebra $A$\nequipped with an **involution** $A \\to A$, $a \\mapsto a^*$, which is\nconjugate-linear ([[def-complex-conjugate-real-imaginary-part-and-modulus]]) and\nsatisfies\n\n$$(a^*)^* = a, \\qquad (ab)^* = b^*a^*, \\qquad \\|a^*a\\| = \\|a\\|^2 \\qquad (a,b \\in A).$$\n\nThe last identity is the **C\\*-identity**. Two immediate consequences are worth\nrecording, and both are proved from the displayed axioms alone:\n\n- **the involution is isometric**: $\\|a^*\\| = \\|a\\|$. Indeed $\\|a\\|^2 = \\|a^*a\\| \\le \\|a^*\\|\\,\\|a\\|$ gives $\\|a\\| \\le \\|a^*\\|$ when $a \\ne 0$, and applying this inequality to $a^*$ and using $(a^*)^* = a$ gives $\\|a^*\\| \\le \\|a\\|$; the case $a = 0$ is trivial;\n- **no norm-uniqueness assertion is part of this definition**: such a theorem\n  needs additional hypotheses and proof, and does not follow merely by naming\n  the displayed C\\*-identity.\n\nLet $A$ and $B$ be complex C\\*-algebras. A **bounded star-homomorphism**, or\nbounded $*$-homomorphism, is a bounded complex-linear map\n$\\varphi : A \\to B$ ([[def-bounded-linear-operator]]) satisfying\n\n$$\\varphi(ab) = \\varphi(a)\\varphi(b), \\qquad \\varphi(a^*) = \\varphi(a)^* \\qquad (a,b \\in A).$$\n\nA star-homomorphism is **not** required to be unital, and it is not required\nthat a unit be present or preserved; when $A$ and $B$ both happen to be unital,\n$\\varphi$ is called **unital** if $\\varphi(1_A) = 1_B$. The bounded nonunital\nstar-homomorphisms are the arrows of the locally compact duality theorem on this\npage ([[thm-locally-compact-gelfand-duality]]), with properness imposed there\nthrough [[def-approximate-unit-and-proper-c-star-morphism]].",
+      "uses": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.4",
+        "2.6",
+        "4.1",
+        "6.1"
+      ]
+    },
+    {
+      "fact": "F1",
+      "source": "lem-c-star-positive-calculus-and-order-estimates",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Choice. Let $A$ be a complex C\\*-algebra, and let $B$ be\n$A$ itself when $A$ is unital and the minimal unitization $A^+$ otherwise;\nspectra of elements of $A$ are computed in $B$\n([[thm-minimal-c-star-unitization]],\n[[def-spectrum-and-resolvent-set-in-a-banach-algebra]]). Then:\n\n1. every self-adjoint $h\\in B$ has real spectrum and a continuous functional\n   calculus: for every $f\\in C(\\sigma(h))$ there is an element\n   $f(h)\\in C^*(1,h)\\subseteq B$ with $\\|f(h)\\|=\\sup_{\\lambda\\in\\sigma(h)}|f(\\lambda)|$\n   and $\\sigma(f(h))=f(\\sigma(h))$, the assignment $f\\mapsto f(h)$ is a unital\n   $\\ast$-homomorphism extending the polynomial calculus;\n2. the algebraically positive elements $a^*a$ $(a\\in B)$ are exactly the\n   self-adjoint elements with nonnegative spectrum: with\n   $P=\\{h=h^*:\\sigma(h)\\subseteq[0,\\infty)\\}$ one has $P=\\{a^*a:a\\in B\\}$, and\n   $P$ is a closed convex cone with $P\\cap(-P)=\\{0\\}$;\n3. writing $a\\le b$ for $b-a\\in P$, conjugation preserves positivity and order,\n   $x^*ax\\in P$ whenever $a\\in P$, and $0\\le a\\le b$ implies\n   $\\|a\\|\\le\\|b\\|$;\n4. every star-homomorphism between C\\*-algebras is contractive; a unital\n   star-homomorphism $\\varphi$ is natural for the calculus on normal elements,\n   $\\varphi(f(a))=f(\\varphi(a))$; and if $f$ vanishes at $0$ while $h$ lies in\n   a nonunital $A$, then $f(h)\\in A$.",
+      "uses": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.4",
+        "2.6",
+        "4.1",
+        "6.1"
+      ]
+    },
+    {
+      "fact": "F1",
+      "source": "thm-minimal-c-star-unitization",
+      "source_section": "Statement",
+      "quote": "Assume AC ([[def-axiom-of-choice]]). Let $A$ be a nonzero C\\*-algebra ([[def-c-star-algebra]]) that is **genuinely\nnonunital**, that is, not unital. With $A^+ = A \\oplus \\mathbb C$ the algebraic\nunitization ([[def-algebraic-unitization-of-a-star-algebra]]), define for\n$(a,\\lambda) \\in A^+$ the operator $L_a + \\lambda I \\in \\mathcal B(A)$, where\n$L_a(b) := ab$, and put\n\n$$\\|(a,\\lambda)\\|_{A^+} \\;:=\\; \\|L_a + \\lambda I\\|_{\\mathcal B(A)}.$$\n\nThen:\n\n1. this is a C\\*-algebra norm on $A^+$ extending the norm of $A$, and $A^+$\n   becomes a unital C\\*-algebra in which $A$ is a closed two-sided $\\ast$-ideal\n   of codimension one;\n2. **uniqueness over $A$**: if $\\|\\cdot\\|'$ is any C\\*-algebra norm on the same\n   algebra $A^+$ with the same involution whose restriction to $A$ is the given\n   norm of $A$, then $\\|\\cdot\\|' = \\|\\cdot\\|_{A^+}$;\n3. if $A = \\{0\\}$ is the zero algebra then $A^+ = \\mathbb C$ with its usual\n   structure and norm.",
+      "uses": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.4",
+        "2.6",
+        "4.1",
+        "6.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "def-state-on-a-c-star-algebra",
+      "source_section": "Definition",
+      "quote": "Let $A$ be a complex C\\*-algebra ([[def-c-star-algebra]]) and recall that\npositivity in $A$ is the algebraic condition $a=b^*b$, without spectral\nhypotheses ([[def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra]]).\nA linear functional $\\omega:A\\to\\mathbb C$ is **positive** if\n$$\\omega(a^*a)\\ge0\\qquad\\text{for every }a\\in A,$$\nand a **state** if in addition $\\|\\omega\\|=1$, the norm being the operator\nnorm of the bounded linear functional on $A$.",
+      "uses": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.3",
+        "2.6",
+        "3.1",
+        "3.2",
+        "4.1",
+        "5.1",
+        "6.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "lem-c-star-algebras-and-closed-ideals-have-positive-contractive-approximate-units",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Choice. Every C\\*-algebra $A$ has a two-sided approximate\nunit consisting of positive contractions: a net $(u_\\lambda)$ with\n$0\\le u_\\lambda\\le1$, $\\|u_\\lambda\\|\\le1$ and $u_\\lambda a\\to a$,\n$au_\\lambda\\to a$ in norm for every $a\\in A$. Every closed two-sided ideal\n$J$ of a C\\*-algebra is self-adjoint and has such an approximate unit contained\nin $J$.",
+      "uses": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.3",
+        "2.6",
+        "3.1",
+        "3.2",
+        "4.1",
+        "5.1",
+        "6.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-axiom-of-choice",
+      "source_section": "Definition",
+      "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-countable-choice",
+      "source_section": "Definition",
+      "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "thm-completion-of-an-inner-product-space-is-hilbert",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product space and let $(\\widehat X,\\kappa)$ be its norm completion ([[def-completion-of-a-normed-space]]). Then $\\widehat X$ carries a unique inner product that extends the given one along $\\kappa$ and whose induced length is the completion norm; with it $\\widehat X$ is a Hilbert space, and the extension is unique among inner products that extend the given pairing and induce the completion norm.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-hilbert-space",
+      "source_section": "Definition",
+      "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness \u2014 the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-real-and-complex-inner-product-space",
+      "source_section": "Definition",
+      "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-space-of-bounded-linear-operators",
+      "source_section": "Definition",
+      "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field. Write\n\n$$\\mathcal B(X,Y) := \\{T:X\\to Y : T \\text{ is a bounded linear operator}\\}.$$\n\nThis is a subspace of the vector space $\\mathcal L(X,Y)$ of\n[[def-vector-space-of-linear-maps]], with the same pointwise operations:\n\n$$(S+T)(x) := Sx+Tx,\\qquad (\\lambda T)(x) := \\lambda\\,Tx.$$\n\nIf $X=Y$, write\n\n$$\\mathcal B(X) := \\mathcal B(X,X).$$",
+      "uses": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-operator-norm",
+      "source_section": "Definition",
+      "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "thm-riesz-representation-for-hilbert-space",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space and let $f$ be a bounded linear functional on $H$ ([[def-dual-space-of-a-normed-space]]). Then there is a unique $y\\in H$ with\n\n$$f(x)=\\langle x,y\\rangle\\qquad\\text{for every }x\\in H,$$\n\nand $\\|f\\|=\\|y\\|$, where $\\|f\\|$ is the dual norm ([[def-operator-norm]]). Under the first-variable-linear convention the representing vector depends conjugate-linearly and isometrically on $f$: if $f_i$ is represented by $y_i$ and $a,b$ are scalars, then $af_1+bf_2$ is represented by $\\overline a\\,y_1+\\overline b\\,y_2$.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-hilbert-space-adjoint",
+      "source_section": "Definition",
+      "quote": "Assume the Axiom of Countable Choice. Let $H$ and $K$ be real or complex Hilbert spaces and let $T\\in\\mathcal B(H,K)$ be a bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). For fixed $y\\in K$ the map\n\n$$x\\longmapsto\\langle Tx,y\\rangle_K$$\n\nis a bounded linear functional on $H$: it is linear in $x$ because $T$ is linear and the pairing is linear in its first argument, and $|\\langle Tx,y\\rangle_K|\\le\\|Tx\\|\\,\\|y\\|\\le\\|T\\|\\,\\|x\\|\\,\\|y\\|$ by Cauchy\u2013Schwarz and the operator-norm inequality ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-operator-norm]]). By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with\n\n$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$\n\nThe **Hilbert adjoint** of $T$ is the map\n\n$$T^*:K\\longrightarrow H,\\qquad y\\longmapsto T^*y .$$\n\nIt is the unique map $K\\to H$ satisfying the displayed identity, since two such maps have $\\langle x,(T^*_1-T^*_2)y\\rangle=0$ for all $x$ and hence $(T^*_1-T^*_2)y=0$ by positive definiteness.\n\n**The dictionary with the Banach transpose.** Write $R_H:H\\to H^*$ and $R_K:K\\to K^*$ for the Riesz maps $R_H(x)=\\langle\\,\\cdot\\,,x\\rangle_H$ and $R_K(y)=\\langle\\,\\cdot\\,,y\\rangle_K$, and let $T'\\in\\mathcal B(K^*,H^*)$ be the transpose of $T$, $(T'g)(x)=g(Tx)$ ([[def-transpose-of-a-bounded-operator]]). Then for all $y\\in K$ and $x\\in H$,\n\n$$\\bigl(R_H(T^*y)\\bigr)(x)=\\langle x,T^*y\\rangle_H=\\langle Tx,y\\rangle_K=(R_Ky)(Tx)=\\bigl(T'(R_Ky)\\bigr)(x),$$\n\nso $R_H\\,T^*=T'\\,R_K$. The Hilbert adjoint is thus the Banach transpose conjugated by the Riesz identifications of $H$ and $K$ with their duals; it is a different operator from $T'$ whenever the Riesz maps are conjugate-linear.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "thm-ultrafilter-lemma",
+      "source_section": "Statement",
+      "quote": "**Assume the Axiom of Choice** ([[def-axiom-of-choice]]). Let $X$ be a set and let\n$\\mathcal{F}_0$ be a filter on $X$ ([[def-filter]]). Then there is an ultrafilter\n$\\mathcal{U}$ on $X$ ([[def-ultrafilter]]) with $\\mathcal{F}_0 \\subseteq \\mathcal{U}$.\n\nThe hypothesis is spent exactly once, through Zorn's lemma at step 4.1; the rest\nof the argument is a theorem of ZF.\n\nIn particular, every set that carries a filter carries an ultrafilter. The proof\nuses Zorn's lemma ([[thm-zorn]]) and therefore the Axiom of Choice. That some\nchoice principle is unavoidable here, if ZF is consistent, is an external\nindependence result, not proved in this library; see the remarks below.",
+      "uses": [
+        "1.4",
+        "2.5"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "def-weak-star-topology",
+      "source_section": "Definition",
+      "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$. For a normed $X$ with continuous dual $X^*$ from [[def-dual-space-of-a-normed-space]], the **weak-star topology** $\\sigma(X^*,X)$ is the [[def-initial-and-final-topology|initial topology]] of all evaluations $f\\mapsto f(x)$ into $\\mathbb K$ with its usual topology. At $f_0$, a neighbourhood basis consists of $$U(f_0;x_1,\\ldots,x_n;\\varepsilon)=\\{f\\in X^*: |(f-f_0)(x_j)|<\\varepsilon\\ (1\\le j\\le n)\\},$$ where $n$ is finite and $\\varepsilon>0$. For $n=0$ the set is all of $X^*$. Finite intersections of inverse images of scalar open sets form the initial-topology basis; at the given point, finitely many disks can be refined using their smallest positive radius. Weak-star closure means closure in this topology, not merely sequential closure.",
+      "uses": [
+        "1.4",
+        "2.5"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "thm-banach-alaoglu",
+      "source_section": "Statement",
+      "quote": "**Assume the ultrafilter lemma.**  If $X$ is a real or complex normed space,\nthen its closed dual unit ball $B_{X^*}$ is compact in the weak-star topology\n$\\sigma(X^*,X)$.  Completeness of $X$ is not required.",
+      "uses": [
+        "1.4",
+        "2.5"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "def-separable-space",
+      "source_section": "Definition",
+      "quote": "A topological space $X$ is **separable** if some at most countable subset $D\\subseteq X$ is dense in $X$ ([[def-dense-top]], [[def-countable]]). Equivalently, every nonempty open subset of $X$ meets $D$.",
+      "uses": [
+        "1.4",
+        "2.5"
+      ]
+    },
+    {
+      "fact": "F5",
+      "source": "thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Countable Choice. If $(X,d)$ is a complete metric space and $Y\\subseteq X$ is $G_\\delta$ in $X$, then the subspace $Y$ is completely metrizable.",
+      "uses": [
+        "3.2"
+      ]
+    },
+    {
+      "fact": "F5",
+      "source": "prop-polish-space-countability-conventions-agree",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Countable Choice. For a completely metrizable space, separability is equivalent to second countability. Thus either countability convention gives the same notion of Polish space.",
+      "uses": [
+        "3.2"
+      ]
+    },
+    {
+      "fact": "F5",
+      "source": "def-polish-space",
+      "source_section": "Definition",
+      "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+      "uses": [
+        "3.2"
+      ]
+    },
+    {
+      "fact": "F6",
+      "source": "thm-minimal-c-star-unitization",
+      "source_section": "Statement",
+      "quote": "Assume AC ([[def-axiom-of-choice]]). Let $A$ be a nonzero C\\*-algebra ([[def-c-star-algebra]]) that is **genuinely\nnonunital**, that is, not unital. With $A^+ = A \\oplus \\mathbb C$ the algebraic\nunitization ([[def-algebraic-unitization-of-a-star-algebra]]), define for\n$(a,\\lambda) \\in A^+$ the operator $L_a + \\lambda I \\in \\mathcal B(A)$, where\n$L_a(b) := ab$, and put\n\n$$\\|(a,\\lambda)\\|_{A^+} \\;:=\\; \\|L_a + \\lambda I\\|_{\\mathcal B(A)}.$$\n\nThen:\n\n1. this is a C\\*-algebra norm on $A^+$ extending the norm of $A$, and $A^+$\n   becomes a unital C\\*-algebra in which $A$ is a closed two-sided $\\ast$-ideal\n   of codimension one;\n2. **uniqueness over $A$**: if $\\|\\cdot\\|'$ is any C\\*-algebra norm on the same\n   algebra $A^+$ with the same involution whose restriction to $A$ is the given\n   norm of $A$, then $\\|\\cdot\\|' = \\|\\cdot\\|_{A^+}$;\n3. if $A = \\{0\\}$ is the zero algebra then $A^+ = \\mathbb C$ with its usual\n   structure and norm.",
+      "uses": [
+        "1.3",
+        "2.1",
+        "3.2"
+      ]
+    },
+    {
+      "fact": "F7",
+      "source": "def-topological-group",
+      "source_section": "Definition",
+      "quote": "A **topological group** is a group $G$ ([[def-group]]) with a topology such that multiplication $m:G\\times G\\to G$, $m(x,y)=xy$, and inversion $\\iota:G\\to G$, $\\iota(x)=x^{-1}$, are continuous ([[def-continuous-map-top]]) for the product topology ([[def-product-topology]]).",
+      "uses": [
+        "2.4"
+      ]
+    },
+    {
+      "fact": "F7",
+      "source": "def-strongly-continuous-unitary-representation",
+      "source_section": "Definition",
+      "quote": "Let $G$ be a topological group and $H$ a complex Hilbert space. A\n**unitary representation** of $G$ on $H$ is a group homomorphism\n$\\pi:G\\to U(H)$, where $U(H)$ is the group of bijective complex-linear\nisometries of $H$, such that the orbit map $g\\mapsto\\pi(g)v$ is norm-continuous\nfor every $v\\in H$. This condition is **strong continuity**. A closed linear\nsubspace $M\\subseteq H$ is **invariant** if $\\pi(g)M=M$ for every $g\\in G$.\nThe representation is **irreducible** if $H\\ne\\{0\\}$ and its only closed\ninvariant linear subspaces are $\\{0\\}$ and $H$.\n\nFor unitary representations $\\pi$ on $H$ and $\\rho$ on $K$, a **bounded\nintertwiner** is a bounded linear operator $T:H\\to K$ satisfying\n$$T\\pi(g)=\\rho(g)T\\qquad(g\\in G).$$\nThe representations are **unitarily equivalent** if there is a unitary\nintertwiner between them. The **commutant** of $\\pi$ is\n$$\\pi(G)'=\\{T\\in\\mathcal B(H):T\\pi(g)=\\pi(g)T\\text{ for every }g\\in G\\}.$$",
+      "uses": [
+        "2.4"
+      ]
+    },
+    {
+      "fact": "F7",
+      "source": "thm-schurs-lemma-for-unitary-representations",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Choice (AC). Let $\\pi$ on a nonzero complex Hilbert space\n$H$ and $\\rho$ on a nonzero complex Hilbert space $K$ be irreducible strongly\ncontinuous unitary representations of the same topological group $G$. Every\nbounded self-intertwiner of $\\pi$ is a scalar multiple of $I_H$. If a nonzero\nbounded intertwiner $T:H\\to K$ satisfies $T\\pi(g)=\\rho(g)T$ for every $g\\in G$,\nthen $\\pi$ and $\\rho$ are unitarily equivalent. Consequently, inequivalent\nirreducible representations have no nonzero bounded intertwiner.",
+      "uses": [
+        "2.4"
+      ]
+    },
+    {
+      "fact": "F7",
+      "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition\n\n$$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$\n\nso that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+      "uses": [
+        "2.4"
+      ]
+    },
+    {
+      "fact": "F8",
+      "source": "thm-commutative-gelfand-naimark",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $A$ be a nonzero\nunital commutative complex C\\*-algebra\n([[def-c-star-algebra]], [[def-unital-banach-algebra]]). Then the Gelfand\ntransform\n\n$$\\Gamma : A \\to C(\\Delta(A)), \\qquad \\Gamma(a) = \\hat a,\\quad \\hat a(\\chi) = \\chi(a),$$\n\nis an **isometric unital $\\ast$-isomorphism onto** $C(\\Delta(A))$: $\\Gamma$ is a\nunital complex-algebra homomorphism satisfying\n$\\Gamma(a^*) = \\overline{\\Gamma(a)}$ and $\\|\\Gamma(a)\\|_\\infty = \\|a\\|$ for every\n$a \\in A$, and $\\Gamma(A) = C(\\Delta(A))$.",
+      "uses": [
+        "2.6"
+      ]
+    },
+    {
+      "fact": "F8",
+      "source": "thm-complex-hahn-banach-norm-preserving-extension",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Choice. Let $X$ be a complex normed space, let $M \\subseteq X$ be a linear subspace, and\nlet $f_0:M \\to \\mathbb{C}$ be a bounded complex linear functional. Then there\nexists a bounded complex linear functional $F:X \\to \\mathbb{C}$ such that\n$F|_M=f_0$ and $\\|F\\|=\\|f_0\\|$.",
+      "uses": [
+        "2.6"
+      ]
+    },
+    {
+      "fact": "F8",
+      "source": "thm-krein-milman-existence-of-extreme-points",
+      "source_section": "Statement",
+      "quote": "**Assume the Axiom of Choice.**  Every nonempty compact convex subset $K$ of a\nlocally convex Hausdorff real or complex topological vector space has an\nextreme point.",
+      "uses": [
+        "2.6"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "derivation-1.1",
+      "claim": "The left-kernel quotient carries the stated positive-definite inner product, and its completion is a Hilbert space.",
+      "step": "1.1",
+      "inputs": [
+        "F2",
+        "F3"
+      ]
+    },
+    {
+      "id": "derivation-1.2",
+      "claim": "Left multiplication defines a well-defined contractive *-representation on the completed GNS space.",
+      "step": "1.2",
+      "inputs": [
+        "F1",
+        "F3"
+      ]
+    },
+    {
+      "id": "derivation-1.3",
+      "claim": "The unitized state and its GNS construction identify with the nonunital quotient completion and give a unit cyclic vector and a nondegenerate representation.",
+      "step": "1.3",
+      "inputs": [
+        "F2",
+        "step 1.1",
+        "step 1.2",
+        "F1",
+        "F3",
+        "F6"
+      ]
+    },
+    {
+      "id": "derivation-1.4",
+      "claim": "The unital state space is compact, and it is metrizable and completely metrizable when the algebra is separable.",
+      "step": "1.4",
+      "inputs": [
+        "F1",
+        "F2",
+        "F4"
+      ]
+    },
+    {
+      "id": "derivation-2.1",
+      "claim": "Matching cyclic-vector inner products gives the unique unitary equivalence of GNS triples.",
+      "step": "2.1",
+      "inputs": [
+        "F1",
+        "F2",
+        "F3",
+        "F6",
+        "step 1.1",
+        "step 1.2",
+        "step 1.3"
+      ]
+    },
+    {
+      "id": "derivation-2.2",
+      "claim": "A countable dense subset of the algebra yields a countable dense subset of the cyclic Hilbert space.",
+      "step": "2.2",
+      "inputs": [
+        "step 1.3",
+        "F1",
+        "F3"
+      ]
+    },
+    {
+      "id": "derivation-2.3",
+      "claim": "Every bounded positive subfunctional dominated by the state defines a bounded positive form on cyclic vectors.",
+      "step": "2.3",
+      "inputs": [
+        "F2",
+        "F3",
+        "step 1.2",
+        "step 1.3"
+      ]
+    },
+    {
+      "id": "derivation-2.4",
+      "claim": "The GNS representation is irreducible exactly when its commutant is scalar.",
+      "step": "2.4",
+      "inputs": [
+        "F7",
+        "F1",
+        "step 1.2"
+      ]
+    },
+    {
+      "id": "derivation-2.5",
+      "claim": "Nonextreme states form a countable union of compact midpoint images, so pure states are G_delta.",
+      "step": "2.5",
+      "inputs": [
+        "F4",
+        "step 1.4"
+      ]
+    },
+    {
+      "id": "derivation-2.6",
+      "claim": "Every nonzero positive element has a pure state attaining its norm.",
+      "step": "2.6",
+      "inputs": [
+        "F2",
+        "step 1.4",
+        "F8",
+        "F1"
+      ]
+    },
+    {
+      "id": "derivation-3.1",
+      "claim": "Riesz represents the dominated form by a unique positive contraction in the commutant and recovers the subfunctional.",
+      "step": "3.1",
+      "inputs": [
+        "step 1.3",
+        "F2",
+        "F3",
+        "step 2.3"
+      ]
+    },
+    {
+      "id": "derivation-3.2",
+      "claim": "The pure-state space is Polish for separable algebras, and the nonunital state and pure-state correspondences with the minimal unitization are homeomorphisms on the stated subsets.",
+      "step": "3.2",
+      "inputs": [
+        "F5",
+        "step 2.5",
+        "step 1.3",
+        "F2",
+        "F6"
+      ]
+    },
+    {
+      "id": "derivation-4.1",
+      "claim": "Every commutant positive contraction gives a bounded dominated positive functional, and the assignments preserve and reflect order.",
+      "step": "4.1",
+      "inputs": [
+        "F1",
+        "F2",
+        "F3",
+        "step 1.3",
+        "step 2.3",
+        "step 3.1"
+      ]
+    },
+    {
+      "id": "derivation-5.1",
+      "claim": "Pure states are exactly those whose positive dominated subfunctionals are scalar multiples, hence exactly those with irreducible GNS representation.",
+      "step": "5.1",
+      "inputs": [
+        "step 1.3",
+        "step 2.3",
+        "step 3.1",
+        "step 4.1",
+        "step 2.4",
+        "F2"
+      ]
+    },
+    {
+      "id": "derivation-6.1",
+      "claim": "Every nonzero closed two-sided ideal is omitted by the kernel of an irreducible GNS representation.",
+      "step": "6.1",
+      "inputs": [
+        "step 3.2",
+        "F2",
+        "step 2.6",
+        "step 2.4",
+        "step 5.1",
+        "F1"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "status": "checked",
+      "evidence": "For the zero algebra there is no norm-one state, so state-relative GNS claims are vacuous; the empty state space in step 1.4 is compact and the empty pure-state space in steps 2.5 and 3.2 is Polish.",
+      "case": "empty"
+    },
+    {
+      "status": "checked",
+      "evidence": "Step 5.1 treats the dominated-functional endpoints psi=0 and psi=phi explicitly; step 4.1 sends the operator endpoints T=0 and T=I to 0 and phi.",
+      "case": "zero"
+    },
+    {
+      "status": "checked",
+      "evidence": "For A=C and phi(z)=z, L_phi=0, H_phi=C, pi_phi(z)=zI, and xi_phi=1 by steps 1.1-1.3; this state and its one-dimensional representation are pure and irreducible by steps 2.4 and 5.1.",
+      "case": "one"
+    },
+    {
+      "status": "checked",
+      "evidence": "Step 1.3 shows pi_phi(1)=I in the unital case and strong convergence of the approximate-unit operators to I in the nonunital case, so every GNS representation is nondegenerate.",
+      "case": "degenerate"
+    },
+    {
+      "status": "checked",
+      "evidence": "Step 5.1 handles psi=0 and psi=phi when converting subfunctionals to states; step 3.2 separately handles restriction norm s=0, s=1, and 0<s<1.",
+      "case": "endpoints"
+    },
+    {
+      "status": "checked",
+      "evidence": "AC is an explicit hypothesis; step 2.6 constructs a nonempty norm-attaining face by Hahn-Banach and takes an extreme point by Krein-Milman, while steps 1.3, 1.4, 2.4 and 3.2 identify the unitization, ultrafilter, Schur, and countable-choice uses.",
+      "case": "nonempty-choice"
+    },
+    {
+      "status": "checked",
+      "evidence": "If phi is pure, step 5.1 makes every positive contraction in the commutant scalar; step 2.4 then uses reducing projections to prove irreducibility.",
+      "case": "iff-forward"
+    },
+    {
+      "status": "checked",
+      "evidence": "If the GNS representation is irreducible, step 2.4 gives scalar commutant by Schur; steps 2.3, 3.1, 4.1 and 5.1 then show phi is pure.",
+      "case": "iff-reverse"
+    }
+  ],
+  "risk": "high",
+  "external_sources": [
+    {
+      "source": "Ilijas Farah, Combinatorial Set Theory of C*-algebras (2019), Proposition 1.10.3, printed p. 35",
+      "excerpt": "The source constructs the GNS quotient completion and identifies the nonunital GNS space with the unitized construction by approximate-unit convergence.",
+      "use": "Compared with step 1.3; positivity and normalization of the extension, density of A in the unitized GNS space, cyclicity, and nondegeneracy are proved locally.",
+      "quote": "and we have H\u03d5 = H\u03d5\u0303."
+    },
+    {
+      "source": "Ilijas Farah, Combinatorial Set Theory of C*-algebras (2019), Lemma 3.6.4 and Proposition 3.6.5, printed pp. 104\u2013105",
+      "excerpt": "The source gives the dominated-state-subfunctional/commutant correspondence and purity/irreducibility criterion; it does not state the correspondence for every bounded positive subfunctional.",
+      "use": "Compared with steps 2.3\u20135.1; the item proves all bounded positive subfunctionals locally and supplies norm-additivity before normalizing.",
+      "quote": "There is an order-isomorphism between X and Y"
+    },
+    {
+      "source": "Ilijas Farah, Combinatorial Set Theory of C*-algebras (2019), Lemma 1.7.6(3)\u2013(4), printed pp. 27\u201328",
+      "excerpt": "The source proves state extension from a C*-subalgebra and existence of a state norming a positive element; the item obtains a pure norming state from its nonempty compact face.",
+      "use": "Compared with steps 1.3 and 2.6; the local proof establishes positivity of the Hahn\u2013Banach extension and applies the declared Krein\u2013Milman theorem."
+    },
+    {
+      "source": "Ilijas Farah, Combinatorial Set Theory of C*-algebras Errata (author-maintained, 13 December 2025), PDF p. 4, note on Proposition 3.6.5 (1) implies (2)",
+      "excerpt": "The author reports no mathematical error and adds an explanatory route from positive-functional norm additivity to a convex decomposition of normalized states.",
+      "use": "Step 5.1 explicitly proves norm additivity along a common approximate unit and writes the resulting convex decomposition.",
+      "quote": "No errors here, but an additional line of explanation could be helpful."
+    }
+  ],
+  "finite_smoke": [
+    {
+      "check": "gns-cyclic-c2-boundaries",
+      "asserts": "The GNS representation is irreducible exactly when $\\phi$ is pure."
+    }
+  ]
+}

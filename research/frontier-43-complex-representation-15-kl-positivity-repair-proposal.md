@@ -1,0 +1,87 @@
+# KL positivity and star-transport repair proposal
+
+Run: `frontier-43-complex-representation-15`. Reviewer/repair owner: Codex delegated agent `kl_positivity_scope_repair`. Preparation only; no active item, manifest, contract, decision, direction, shared plan or ledger has been edited. This is round-zero mathematical preparation for at most two focused correction rounds after the root confirms a stable writer window. Current author ownership is preserved.
+
+## Confirmed positivity boundary
+
+The Statement of `thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis` promises coefficientwise nonnegativity for every permutation in every S_n. Its Proof establishes existence, uniqueness, triangularity, bar-duality, basis, degree, leading coefficient, parity and inverse-index symmetry; its final Remarks expressly admits that nonnegativity remains unproved. Taking the positive-degree part of an anti-invariant Laurent polynomial selects exponents, not positive integer coefficients. Neither that construction nor the signed descent recursion proves nonnegativity. Finite computations through S_5 in the immutable Step-1 readiness record do not prove the all-n statement.
+
+The approved scaffold carries this true stronger claim. The immutable design `research/plan-kazhdan-lusztig-track.md`, KL-1 table and hard-gate checklist, instead places positivity at KL-2, after Soergel Hodge theory; its exact planned supplier is `cor-positivity-of-kazhdan-lusztig-polynomials-and-structure-constants`. The Step3a pair report reproduces that scope discrepancy. This proposal does not delete the promised claim, infer a new citation exception, or treat the Step-1 ready decision as a proof.
+
+The smallest residual assertion is:
+
+> For all n and y <= w in S_n, the unique triangular bar-fixed coefficient p_{y,w} belongs to Z_{>=0}[v]. Equivalently, with d=ell(w)-ell(y), P_{y,w}(q)=v^{-d}p_{y,w}(v) and q=v^{-2}, every coefficient of P_{y,w} is a nonnegative integer.
+
+All remaining clauses of the current basis theorem have a local argument. The existing support/degree/parity clauses imply p_{y,w}=v^d P_{y,w}(v^{-2}); therefore positivity in either normalization implies the other without any new mathematical assumption. The d=0 case is already 1, and n=1 is trivial.
+
+## Full-text source assessment
+
+Isolated fetches are in `research/frontier-43-complex-representation-15-kl-positivity-source-evidence/`. PDFs and extracted text are evidence caches, not active proof suppliers.
+
+1. Lusztig, *Hecke Algebras with Unequal Parameters*, arXiv:math/0208154v2. Fetched the full PDF. Read §§5.1–5.6, including the complete construction/uniqueness proof of Theorem 5.2 and both parts of Proposition 5.4, also independently compared the pre-existing extracted text `/tmp/hh11-codex-lusztig.txt`. These establish precisely the triangular basis, degree/parity and inversion symmetry after the parameter inversion. No positivity conclusion is present in these passages.
+2. Elias–Williamson, *The Hodge theory of Soergel bimodules*, arXiv:1212.0791v2. Fetched full 45-page PDF. Read introduction §§1–1.2.5 (including induction hypotheses and all implications), complete §3.2, full Theorem 4.1 proof and Corollary 4.3, and the final hard-Lefschetz proof Theorem 6.21. I have not independently re-established every technical lemma in §§3–6 or certified the entire 45-page proof locally. Printed p.5, Corollary 1.2(1), states exactly: if underline H_x=sum_{y<=x}h_{y,x}H_y, then h_{y,x} is in Z_{>=0}[v]. Printed p.15, Remark 3.2, gives h_{y,x}=v^{ell(x)-ell(y)}P_{y,x}(v^{-2}), with exactly our normalization. The corollary follows from Theorem 1.1, ch(B_x)=underline H_x, and the nonnegative graded ranks defining ch. These exact original proved passages give an authoritative positivity source with no normalization uncertainty.
+3. Original Weyl-group positivity source: D. Kazhdan and G. Lusztig, *Schubert varieties and Poincare duality*, Proc. Sympos. Pure Math. XXXVI (1980), pp.185–203. EW introduction printed p.2 explicitly attributes the local intersection-cohomology interpretation and finite/affine Weyl-group positivity to this paper; its bibliography gives the complete citation. Retrieval attempts at `https://math.mit.edu/~gyuri/papers/KL2.pdf` and `https://math.mit.edu/~gyuri/papers.html` returned 404; `https://www.math.mit.edu/~gyuri/` failed DNS; `https://www.ams.org/books/pspum/036/573434/573434.pdf` returned 403. The original 1980 full text has NOT been read here; no theorem number or exact printed formula is asserted from it. These are four distinct recovery attempts, and the original citation is bibliographic evidence only. EW Corollary 1.2(1) is the full-text original proof source actually available/read for the required assertion.
+4. Ariki, *Robinson–Schensted correspondence and left cells*, arXiv:math/9910117. Fetched full PDF. Read complete §§2.5–2.7, §§3.2–3.3, and the relevant beginning of §3.4. Its Proposition 3.6 points to classical KL Theorem 4.2 for star mu-transport; it does not supply coefficientwise positivity. Its Proposition 3.7 proves cell-equivalence transport, whereas the current local lemma promises the stronger full preorder transport.
+
+5. Jensen, *p-Kazhdan-Lusztig Theory*, full dissertation PDF fetched. Read printed pp.18 (Theorem 3.1 and Definition 3.2), 21–23 (Proposition 3.10 and its complete proof, including (vii)), and 49–51 (the coefficient-comparison conclusion and Corollary 5.9). The eventual-equality proof uses finitely many local intersection forms and characteristic-zero ranks; its characteristic-zero basis identification is Theorem 3.1, explicitly EW’s Soergel conjecture. Thus F6’s logical boundary is now verified in full source passages, rather than inferred from the subject’s depth. Corollary 5.9 is a genuine proved transport result in that framework; the defect is its missing local machinery/supplier, not a false source claim.
+
+Fetched PDF SHA-256 values: EW `01039f543cdd06f13ed72d56899077a239e3d1d4b43d77f69aa448d792932ddf`; Lusztig `6329366ceac9317cb3883c4cc8a807ff1e974fb96135e2bb5653677f1702fc1e`; Ariki `461c3e0c172ba2721cdbd2e6cb39340befaf9c36691e27bee929a598b593ec7c`; Jensen `0148961ec36db8581c64798ee2b447746bc9ebe0d7e817f085018a485ac94861`.
+
+No citation-only fallback is activated. The existing owner direction names exact Glimm/Dixmier/Harish-Chandra exceptions and does not grant a KL positivity exception. The user's earlier last-resort original-source instruction is reported for the root to interpret against the actual current delegated authority; it has not been silently converted into an active exception.
+
+## Existing suppliers and feasible routes
+
+`thm-split-grothendieck-group-of-the-soergel-category-is-the-type-a-hecke-algebra` is published. Its Statement gives a split K_0/Hecke isomorphism and its local character supplier gives a triangular indecomposable basis. It does not prove that indecomposable characters lie in H_w+sum vZ[v]H_y: coefficients can be nonnegative Laurent polynomials before the required positive-degree bound is known. The missing identification is ch(B_w)=underline H_w, not mere existence of a categorification or nonnegative filtration ranks. A character-isomorphism theorem alone cannot close it.
+
+A local Soergel route would require the complete simultaneous S/HL/HR induction of EW, together with real scalar-extension comparison, invariant forms, local-form detection and embedding, deformation, Rouquier linearity/signs and weak Lefschetz. The immutable KL-2 design already lists these substantial missing local items and depends on KL-1. Adding its final positivity corollary to this KL-1 theorem's deps would form a page-level cycle and make its intended triangular-basis input circular. Refactoring algebraic existence into a separate supplier followed by the entire KL-2 block before positivity is mathematically possible, but is a substantial rebuild of selected scope, not a focused finite repair or an already-proved supplier.
+
+The original geometric route needs the local intersection-cohomology identification of all P_{y,w}, purity/parity and the relevant sheaf/weight or decomposition machinery. Published finite-field flags/Bruhat cells alone do not establish that identification; cell counts compute different data. A category-O multiplicity at q=1 would yield only values P(1), which cannot imply coefficientwise positivity; graded/Koszul identification would again be a new substantial theorem. Restricting to S_5 or smooth intervals would weaken the approved all-n claim and is not proposed.
+
+Thus the finite local route for positivity is not presently closed. Preserve the theorem's existing locally proved clauses and keep this exact positivity branch held unless the root establishes a specific authorized treatment of the available original proof source or authorizes the substantial supplier rebuild. No new local theorem can honestly be labelled proved merely by copying EW's corollary.
+
+## Actual positivity consumers
+
+Current dependency graph, parsed from actual YAML rather than keyword hits, has nine direct consumers:
+
+- `def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization`: coefficient, support, degree, parity and inverse symmetry; expressly disclaims use of positivity.
+- `def-inverse-kazhdan-lusztig-polynomials`: unitriangular basis/transition matrix.
+- `thm-kazhdan-lusztig-basis-multiplication-formula`: triangular bar-fixed basis, cover coefficient and mu definition.
+- `thm-kazhdan-lusztig-polynomial-recursion`: multiplication and inverse-index symmetry.
+- `thm-kazhdan-lusztig-inversion-formula`: P=R bar(P), triangularity and inverse symmetry.
+- `def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells`: basis and multiplication, inverse-index symmetry; explicitly no positivity.
+- `lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges`: cover coefficient 1 and multiplication.
+- `lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations`: basis, parity, covers and multiplication; explicitly no positivity.
+- `ex-kazhdan-lusztig-bases-for-s-two-and-s-three`: exact finite displayed coefficients.
+
+Its indirect closure consists of `prop-same-insertion-or-recording-tableaux-imply-cell-equivalence`, `lem-left-cell-equivalence-forces-equality-of-recording-tableaux-in-type-a`, `thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux`, `ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval`, and `ex-rsk-left-right-and-two-sided-cells-in-s-three`. No actual proof in this closure has been found to infer a sign from coefficientwise positivity. Current supplier-scope caveats correctly distinguish their actual uses, while workflow item acceptance remains held by the unresolved supplier. Preserving the Statement and completing its proof would require only current-use reconciliation and removal of obsolete caveats, not mathematical weakening of any consumer.
+
+## Independent confirmed star-transport defect and complete focused route
+
+Subject: `lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations`.
+
+Current F6 imports two assertions from Jensen: eventual equality of p-canonical and KL bases, and generator-coefficient transport under stars (Corollary 5.9). Step 1.3 chooses a prime where all bases agree in finite S_n and uses those assertions essentially to establish equality of generator coefficients. Neither a definition of the p-canonical basis nor a proved local supplier for either imported assertion is in the item's dependency list. This is an exact local proof-boundary defect, independently of whether Jensen's mathematical assertions are true. It is not a claim that all uses of deep sources are defective. The current Statement's full preorder iff is retained.
+
+An elementary local replacement needs no positivity, p-canonical basis, Soergel character theorem or new later supplier. Here is the complete argument to integrate in place of F6 and step 1.3 after the stable writer window:
+
+Let C_w=underline H_w and lambda=v+v^{-1}. Let I_s be the A-span of C_w with ws<w, and define I_t similarly. The current preorder Definition proves that right descents decrease along every elementary left step: if C_z has nonzero coefficient in C_u C_w, then R(w) is contained in R(z). Consequently I_s and I_t are stable under multiplication on the left by each simple C_u, and hence left ideals: C_u=H_u+v and the H_u together with A generate H. Their intersection J is the A-span of elements having both descents, because the C_w form a basis. Thus I_s/J has the basis [C_x], x in D_{ij}, and I_t/J has the basis [C_z], z in D_{ji}.
+
+Right multiplication by C_t sends I_s into I_t: every term of the right multiplication formula has a t-descent. It sends J into J because C_w C_t=lambda C_w for a both-descent index. Therefore it induces an H-linear map f:I_s/J -> I_t/J.
+
+For x in D_{ij}, the right ascent formula reads C_x C_t=C_{xt}+sum_{z<x,zt<z}mu(z,x)C_z. A correction index that survives modulo J has zs>z. For completeness, the exact mixed-descent identity follows by comparing standard-basis coefficients in C_x H_s=v^{-1}C_x: if zs>z and xs<x, then p_{z,x}=v p_{zs,x}. If zs=x, this gives p_{z,x}=v and mu(z,x)=1; if zs<x, p_{zs,x} is in vZ[v], so p_{z,x} is in v^2Z[v] and mu(z,x)=0; if zs is not below x, both vanish by support. Since xs<x, this identity gives mu(z,x)=0 unless zs=x; in that exceptional case z=xs is a Bruhat cover and the coefficient is 1. Inspect the six-element rank-two coset, with shortest representative r:
+
+- x=rs: xt=rst lies in D_{ji}, and xs=r has no t-descent. Thus f([C_x])=[C_{rst}]=[C_{x*}].
+- x=rts: xt=rtst is the top element with both descents, while xs=rt lies in D_{ji}. Thus f([C_x])=[C_{rt}]=[C_{x*}].
+
+Every other correction either vanishes or is killed by J. Exchanging s,t gives the H-linear map g:I_t/J -> I_s/J induced by right multiplication by C_s, and exactly the same table gives g([C_{x*}])=[C_x]. Hence f and g are inverse based H-module isomorphisms. For every simple u, H-linearity and comparison in the quotient bases give the exact equality
+
+> coefficient of C_z in C_u C_x = coefficient of C_{z*} in C_u C_{x*}, for all x,z in D_{ij}.
+
+This equality holds even if a transformed input changes its left u-descent; no modular source condition has to be checked. For a finite left-step chain whose endpoints lie in D_{ij}, right-descent monotonicity traps the {s,t}-descent set of every intermediate index between the equal singleton endpoint sets, so every intermediate index lies in D_{ij}. In particular J is an absorbing left ideal: a left generator edge entering the both-descents subspace cannot return to D_{ij}. A chain also cannot lose its s-descent. Thus the trapping assertion covers full-preorder chains, not just chains inside a presumed cell. This uses nonzero coefficients and their supports only; it uses no sign or positivity assumption. The equality transports every step. Applying the inverse map proves the preorder iff. The already local right-preorder proof uses x~_R x*, transitivity and involutivity, and remains unchanged. Existing two-case mu coefficient calculations remain the proof of part (a), ordered before the final conclusion. This route supplies part (b) in full and removes exactly F6 and its unproved modular imports.
+
+Actual star-transport consumers are `lem-left-cell-equivalence-forces-equality-of-recording-tableaux-in-type-a` (transported Knuth paths, F2 and its main proof), `thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux` (direct transport supplier and the recording-tableau converse), and transitively `ex-rsk-left-right-and-two-sided-cells-in-s-three`. The existing Statement will stay identical, so propagation is actual-use reconciliation, not a changed interface. The elementary quotient argument uses only already declared suppliers and preserves the all-preorder claim.
+
+## Knuth Definition context and bounded integration
+
+`def-knuth-and-dual-knuth-equivalence-for-permutations` has `justified_by: [thm-knuth-equivalence-classes-are-insertion-tableau-fibers]`; the theorem depends on that Definition and proves preservation/fiber characterization by local row-bumping and canonical-row-word arguments. It is not a backwards prerequisite edge: SCHEMA explicitly permits such well-definedness discharges. The Definition itself proves reflexivity/symmetry/transitivity and defers its extra tableau-equality assertion through this declared discharge. I read both current carriers; no extra write scope for them is assumed. Their eventual evidence should bind the actual completed theorem, not treat the mere justified_by declaration as proof completion.
+
+Requested future writer-window authority should name the basis theorem/precise positivity resolution separately from the star-transport lemma. For the star lemma, round one can make the above concise replacement, remove obsolete Jensen proof-use metadata, mirror actual unchanged claims/deps/route in authorized contracts/manifests and review its actual consumers in dependency order. Run explicit-path proof-layout and relevant checks only after the final edit. A second round addresses only a concrete independent confirmed residual finding. If positivity lacks an authorized complete supplier or source treatment, keep its branch held and do not repeat unchanged construction/computations or invent a passing certification.

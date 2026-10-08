@@ -1,0 +1,1377 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-closed-witness-codings-and-measured-projections",
+    "lem-borel-relations-admit-conull-borel-uniformizations"
+  ],
+  "contracts": {
+    "lem-closed-witness-codings-and-measured-projections": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable** if some at most countable subset $D\\subseteq X$ is dense in $X$ ([[def-dense-top]], [[def-countable]]). Equivalently, every nonempty open subset of $X$ meets $D$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\n$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).\n\nA subset $A \\subseteq X$ is called **complete** when the metric subspace\n$(A, d_A)$ is complete ([[def-isometry-and-metric-embedding]]); as always, the\nmetric is part of the data, and $d_A$ is the restriction of $d$ to $A \\times A$.\n\n**The limit is unique when it exists**, since limits in a metric space are unique\n([[lem-metric-limits-unique]]), so a complete space assigns to each of its Cauchy\nsequences one point and not a set of points.\n\n**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the\ntopology of $d$.** Both quantifiers in the definition are about the metric: the\nCauchy condition is stated with distances, and so is convergence. Two metrics on\nthe same set can have the same open sets while exactly one of them is complete,\nwhich is the content of [[fs-completeness-is-a-topological-property]] and its\nwitness. Read the word *complete* as an abbreviation for *complete with respect\nto this metric*, always.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-topologies",
+          "source_section": "Definition",
+          "quote": "Throughout, a topology is as in [[def-topological-space]], and *finite*,\n*at most countable* and *uncountable* are as in [[def-countable]], so that\n\"countable\" always means \"at most countable\" and every finite set is countable.\nLet $X$ be a set. The six families below are topologies on $X$; that each really\nsatisfies (T1), (T2) and (T3) is discharged in full after the list.\n\n1. **Discrete topology.** $\\mathcal{T}_{\\mathrm{disc}} := \\mathcal{P}(X)$: every\n   subset is open, hence every subset is closed, hence every subset is clopen.\n2. **Indiscrete topology.** $\\mathcal{T}_{\\mathrm{ind}} := \\{\\varnothing, X\\}$.\n   Its closed sets are again $\\varnothing$ and $X$.\n3. **Cofinite topology.**\n   $\\mathcal{T}_{\\mathrm{cof}} := \\{\\varnothing\\} \\cup \\{\\, U \\subseteq X : X \\setminus U \\text{ is finite} \\,\\}$.\n   Its closed sets are $X$ together with the finite subsets of $X$.\n4. **Cocountable topology.**\n   $\\mathcal{T}_{\\mathrm{coc}} := \\{\\varnothing\\} \\cup \\{\\, U \\subseteq X : X \\setminus U \\text{ is at most countable} \\,\\}$.\n   Its closed sets are $X$ together with the at most countable subsets of $X$.\n5. **Particular-point topology.** Fix $p \\in X$ and put\n   $\\mathcal{T}_p := \\{\\varnothing\\} \\cup \\{\\, U \\subseteq X : p \\in U \\,\\}$: the\n   open sets are $\\varnothing$ and the sets containing $p$. Its closed sets are\n   $X$ together with the sets **not** containing $p$.\n6. **Sierpinski topology.** On a two-point set $S = \\{a, b\\}$ with $a \\ne b$,\n   $\\mathcal{T}_{\\mathrm{Sier}} := \\{\\varnothing, \\{b\\}, S\\}$. The pair\n   $(S, \\mathcal{T}_{\\mathrm{Sier}})$ is **Sierpinski space**; $b$ is its open\n   point and $a$ its closed point. This is exactly the particular-point topology\n   of item 5 on a two-point set with particular point $b$, listed separately\n   because it is quoted so often.\n\n**Two elementary facts about finite sets are used below, and both are proved\nhere.**\n\n*(i) A subset of a finite set is finite.* Let $F \\approx n$ with $n \\in \\mathbb{N}$\n([[def-equinumerous]], [[def-natural-numbers]]), witnessed by a bijection\n$\\varphi : F \\to n$, and let $B \\subseteq F$. Then $\\varphi$ restricts to a\nbijection of $B$ onto $\\varphi[B] \\subseteq n$\n([[def-injection-surjection-bijection]]). Every element of the von Neumann natural\n$n$ is a natural number strictly smaller than $n$\n([[lem-nat-order-is-membership]]), so $\\varphi[B]$ is a subset of $\\mathbb{N}$\nbounded above by $n$, hence finite by the sharper form of\n[[lem-subset-of-countable]] (\"a subset $S \\subseteq \\mathbb{N}$ is finite if it is\nbounded above\"). Since $\\approx$ is symmetric and transitive, $B$ is finite.\n\n*(ii) A union of two finite sets is finite.* First, if $H$ is finite and $g$ is\nany object then $H \\cup \\{g\\}$ is finite: if $g \\in H$ there is nothing to prove,\nand otherwise a bijection $u : H \\to k$ extends to a bijection\n$H \\cup \\{g\\} \\to k \\cup \\{k\\} = \\sigma(k)$ by setting $u(g) := k$, which is\ninjective because $k \\notin k$ ([[lem-nat-transitive-irreflexive]]). Now fix a\nfinite set $F$ and argue by induction ([[thm-induction-principle]]) on\n$m \\in \\mathbb{N}$ over the statement \"for every $G$ with $G \\approx m$, the union\n$F \\cup G$ is finite\". At $m = 0$ we have $G = \\varnothing$ and $F \\cup G = F$. At\n$m = \\sigma(j)$, a bijection $\\psi : G \\to \\sigma(j)$ gives $g := \\psi^{-1}(j)$\nand $G' := G \\setminus \\{g\\} \\approx j$ (restrict $\\psi$), so\n$F \\cup G = (F \\cup G') \\cup \\{g\\}$ is finite by the induction hypothesis and the\nprevious sentence.\n\n**Discharge of the topology axioms.**\n\n*Discrete.* Every subset of $X$ lies in $\\mathcal{P}(X)$, so (T1), (T2) and (T3)\nhold with nothing to check.\n\n*Indiscrete.* (T1) is the definition. For (T2), a subfamily of\n$\\{\\varnothing, X\\}$ has union $\\varnothing$ (if it is empty or $\\{\\varnothing\\}$)\nor $X$ (otherwise). For (T3), $\\varnothing \\cap A = \\varnothing$ and\n$X \\cap X = X$.\n\n*Cofinite.* (T1): $\\varnothing$ is listed, and $X \\setminus X = \\varnothing$ is\nfinite. (T2): let $\\mathcal{S} \\subseteq \\mathcal{T}_{\\mathrm{cof}}$. If every\nmember is $\\varnothing$ the union is $\\varnothing$. Otherwise fix\n$U_0 \\in \\mathcal{S}$ with $U_0 \\ne \\varnothing$; then\n$X \\setminus \\bigcup \\mathcal{S} \\subseteq X \\setminus U_0$, which is finite, so\nthe left side is finite by (i). (T3): for nonempty $U, V$ with finite\ncomplements, $X \\setminus (U \\cap V) = (X \\setminus U) \\cup (X \\setminus V)$ is\nfinite by (ii); and if either of $U, V$ is empty so is $U \\cap V$. The closed sets\nare the complements of the open ones, that is $X = X \\setminus \\varnothing$\ntogether with the finite sets.\n\n*Cocountable.* Identical to the cofinite case with \"at most countable\" in place of\n\"finite\": (i) is replaced by [[lem-subset-of-countable]] itself, and (ii) by the\nstatement that a union of two at most countable sets is at most countable, which\nis the two-set instance of [[thm-countable-union-of-countable]] applied to the\nfamily $A_0 := U, A_1 := V, A_k := \\varnothing$ for $k \\ge 2$.\n\n*Particular point.* (T1): $\\varnothing$ is listed and $p \\in X$. (T2): a\nsubfamily whose members are all $\\varnothing$ has union $\\varnothing$; otherwise\nsome member contains $p$, hence so does the union. (T3): if $U$ and $V$ both\ncontain $p$ then so does $U \\cap V$; and if either is $\\varnothing$ then so is the\nintersection.\n\n*Sierpinski.* The special case $X = \\{a,b\\}$, $p = b$ of the previous paragraph:\nthe sets containing $b$ are $\\{b\\}$ and $S$, so\n$\\mathcal{T}_b = \\{\\varnothing, \\{b\\}, S\\} = \\mathcal{T}_{\\mathrm{Sier}}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "**The product set.** Let $I$ be a set and let $X_i$ be a set for each $i \\in I$.\nThe **product** is\n\n$$\\prod_{i \\in I} X_i \\;:=\\; \\Big\\{\\, x : x \\text{ is a function with domain } I \\text{ and } x(i) \\in X_i \\text{ for every } i \\in I \\,\\Big\\},$$\n\nand we write $x_i := x(i)$, the $i$-th **coordinate** of $x$. Two elements of the\nproduct are equal exactly when they agree at every index, functions being equal\nwhen they have the same domain and the same values. For $j \\in I$ the $j$-th\n**projection** is\n\n$$\\pi_j : \\prod_{i \\in I} X_i \\to X_j, \\qquad \\pi_j(x) := x_j .$$\n\n**Notation for a finite product.** For $I = n$ a natural number, which is the set\n$\\{0, 1, \\dots, n-1\\}$ of its predecessors, an element of $\\prod_{k<n} X_k$ is a\nfunction on $n$ and we write it $(x_0, \\dots, x_{n-1})$. In particular $I = 2$\ngives the **binary product**, written $X \\times Y$ for $\\prod_{i<2} X_i$ with\n$X_0 = X$ and $X_1 = Y$, whose elements are written $(u,v)$ for the function\n$0 \\mapsto u$, $1 \\mapsto v$. This is the only meaning the symbol $X \\times Y$\ncarries on this page.\n\n**Two facts about when the product is nonempty, stated because they are used and\nbecause they cost something.** If some $X_{i_0}$ is empty then the product is\nempty, since no function can take a value in $X_{i_0}$. Conversely, suppose every\n$X_i$ is nonempty.\n\n- For $I = n$ a natural number, the product is nonempty, and this is a theorem of\n  ZF: [[lem-finite-choice]] applied to the function $i \\mapsto X_i$ on $n$\n  supplies a choice function $g$ for the family of values, and\n  $x(i) := g(X_i)$ defines a member of $\\prod_{k<n} X_k$.\n- For an arbitrary $I$ the assertion \"$\\prod_{i \\in I} X_i \\ne \\varnothing$\n  whenever every $X_i$ is nonempty\" **is** the Axiom of Choice: it is the\n  formulation recorded in [[def-axiom-of-choice]], and the choice function of\n  [[def-choice-function]] is exactly a point of the product of a family by\n  itself. Every use of it below is flagged at the step that spends it.\n\n**The box topology.** Now let each $X_i$ carry a topology $\\mathcal{T}_i$\n([[def-topological-space]]). Put\n\n$$\\mathcal{R} \\;:=\\; \\Big\\{\\, \\prod_{i \\in I} U_i \\;:\\; U_i \\in \\mathcal{T}_i \\text{ for every } i \\in I \\,\\Big\\},$$\n\nthe family of **boxes**. $\\mathcal{R}$ is a basis for a topology\n([[thm-basis-criterion]]): it contains $\\prod_i X_i$, so it covers the product,\nand it is closed under binary intersections, since\n\n$$\\Big(\\prod_i U_i\\Big) \\cap \\Big(\\prod_i V_i\\Big) = \\prod_i (U_i \\cap V_i)$$\n\nand each $U_i \\cap V_i$ is open by (T3). The topology it generates is the **box\ntopology** $\\mathcal{T}^{\\square}$, and $\\mathcal{R}$ is a basis for it\n([[def-topology-basis-subbasis]]).\n\n**The product topology.** The **product topology** $\\mathcal{T}^{\\Pi}$ on\n$\\prod_i X_i$ is the initial topology of the family of projections\n$(\\pi_i)_{i \\in I}$ ([[def-initial-and-final-topology]]): the topology generated\nby the subbasis\n\n$$\\mathcal{G} \\;:=\\; \\{\\, \\pi_i^{-1}[U] : i \\in I,\\ U \\in \\mathcal{T}_i \\,\\}, \\qquad \\pi_i^{-1}[U] = \\prod_{j \\in I} W_j \\ \\text{ with } W_i = U \\text{ and } W_j = X_j \\text{ for } j \\ne i .$$\n\nBy [[thm-basis-criterion]] the finite intersections of members of $\\mathcal{G}$\nform a basis for $\\mathcal{T}^{\\Pi}$, and those finite intersections are exactly\nthe boxes with all but finitely many factors unrestricted:\n\n$$\\mathcal{R}^{\\Pi} \\;=\\; \\Big\\{\\, \\prod_{i \\in I} U_i \\;:\\; U_i \\in \\mathcal{T}_i \\text{ for every } i, \\text{ and } U_i = X_i \\text{ for all but finitely many } i \\,\\Big\\}.$$\n\nIndeed the intersection of $\\pi_{i_1}^{-1}[U_1], \\dots, \\pi_{i_n}^{-1}[U_n]$ is\nthe box whose factor at $i$ is the intersection of those $U_m$ with $i_m = i$ and\nis $X_i$ when no $i_m$ equals $i$; and the intersection of no members is the\nwhole product, the box with every factor $X_i$. Conversely a box with\n$U_i = X_i$ off a finite set is such an intersection. Members of\n$\\mathcal{R}^{\\Pi}$ are called **basic product-open** sets, and members of\n$\\mathcal{R}$ **boxes**. So $\\mathcal{R}^{\\Pi} \\subseteq \\mathcal{R}$, with\nequality when $I$ is a natural number.\n\n**The empty product.** For $I = \\varnothing$ there is exactly one function with\ndomain $\\varnothing$, the empty function, so $\\prod_{i \\in \\varnothing} X_i$ is a\none-point set. A one-point set carries exactly one topology, namely\n$\\{\\varnothing, \\{\\varnothing\\}\\}$, since a topology must contain the empty set\nand the whole set and there is nothing else to contain\n([[def-topological-space]]); so the box topology and the product topology agree\nthere, and both equal the discrete topology and the indiscrete topology\n([[def-standard-topologies]]), which coincide on a one-point set. There are no\nprojections to speak of, and the initial topology of the empty family is indeed\nthe indiscrete one ([[def-initial-and-final-topology]]).\n\n**Convention.** Unless the box topology is named explicitly, $\\prod_i X_i$ always\ncarries the product topology in this library. That is not a matter of taste: the\nproduct topology is the one with the characteristic property of the next item,\nand the box topology has no such property.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-topology-basis-subbasis",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]).\n\nA family $\\mathcal{B} \\subseteq \\mathcal{T}$ is a **basis for $\\mathcal{T}$** if\nevery open set is a union of members of $\\mathcal{B}$: for every\n$U \\in \\mathcal{T}$ there is $\\mathcal{B}_U \\subseteq \\mathcal{B}$ with\n$U = \\bigcup \\mathcal{B}_U$. Equivalently, and this is the form used in proofs,\n\n$$\\text{for every } U \\in \\mathcal{T} \\text{ and every } x \\in U \\text{ there is } B \\in \\mathcal{B} \\text{ with } x \\in B \\subseteq U .$$\n\n*The two forms say the same thing.* If every open $U$ is such a union and\n$x \\in U$, then $x$ lies in one of the sets united, which is a member of\n$\\mathcal{B}$ inside $U$. Conversely, if the displayed condition holds then\n$U = \\bigcup \\{\\, B \\in \\mathcal{B} : B \\subseteq U \\,\\}$, since each such $B$ is\ncontained in $U$ and each $x \\in U$ lies in one of them. Note that\n$\\bigcup \\varnothing = \\varnothing$, so the empty open set is covered by the empty\nsubfamily and needs no member of $\\mathcal{B}$. The members of a basis are called\n**basic open sets**.\n\n**The topology generated by a family.** Let $\\mathcal{S} \\subseteq \\mathcal{P}(X)$\nbe *any* family of subsets of $X$. Then\n\n$$\\langle \\mathcal{S} \\rangle := \\bigcap \\{\\, \\mathcal{T}' : \\mathcal{T}' \\text{ is a topology on } X \\text{ with } \\mathcal{S} \\subseteq \\mathcal{T}' \\,\\}$$\n\nis a topology on $X$, it contains $\\mathcal{S}$, and it is contained in every\ntopology on $X$ that contains $\\mathcal{S}$. It is called the **topology\ngenerated by $\\mathcal{S}$**, and $\\mathcal{S}$ is a **subbasis** for a topology\n$\\mathcal{T}$ when $\\mathcal{T} = \\langle \\mathcal{S} \\rangle$.\n\n*This is well posed, and the obligation is discharged here.* The collection being\nintersected is nonempty, because $\\mathcal{P}(X)$ is a topology on $X$ containing\n$\\mathcal{S}$; so the intersection is an intersection of a nonempty family of\nsubsets of $\\mathcal{P}(X)$ and is a set. It is a topology: $\\varnothing$ and $X$\nlie in every topology on $X$, hence in the intersection, which is (T1); if\n$\\mathcal{S}' \\subseteq \\langle \\mathcal{S} \\rangle$ then $\\mathcal{S}'$ is a\nsubfamily of each $\\mathcal{T}'$ in the collection, so $\\bigcup \\mathcal{S}'$ lies\nin each $\\mathcal{T}'$ and hence in the intersection, which is (T2); and the same\nargument with $U \\cap V$ gives (T3). It contains $\\mathcal{S}$ because every\n$\\mathcal{T}'$ in the collection does, and it is contained in each such\n$\\mathcal{T}'$ because an intersection is contained in each of its members. So\n$\\langle \\mathcal{S} \\rangle$ is the coarsest topology on $X$ containing\n$\\mathcal{S}$ ([[def-topological-space]]), and in particular it is uniquely\ndetermined by $\\mathcal{S}$.\n\n**Neither notion is intrinsic to the family alone.** \"$\\mathcal{B}$ is a basis\nfor $\\mathcal{T}$\" and \"$\\mathcal{S}$ is a subbasis for $\\mathcal{T}$\" are\nrelations between a family and a topology, not properties of the family. The\nquestion of which families are a basis *for some* topology, and how the topology\ngenerated by a subbasis is computed from it, is settled by the next item.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-n-cross-n-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{N} \\times \\mathbb{N} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the\nplane of pairs of naturals is countably infinite ([[def-countable]]).\n\nThe bijection is exhibited, not merely asserted to exist. Define $2^m$ by\nrecursion on $m$ ([[thm-recursion]]) by $2^0 = 1$ and $2^{\\sigma(m)} = 2^m + 2^m$,\nand set\n\n$$J(m,n) = 2^m \\cdot \\sigma(n + n), \\qquad \\text{that is} \\qquad J(m,n) = 2^m(2n+1).$$\n\nThen $J$ is a bijection from $\\mathbb{N} \\times \\mathbb{N}$ onto\n$\\mathbb{N} \\setminus \\{0\\}$, and $\\sigma$ is a bijection from $\\mathbb{N}$ onto\n$\\mathbb{N} \\setminus \\{0\\}$, so $\\sigma^{-1} \\circ J$ is a bijection\n$\\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$. What makes $J$ bijective is the\ndecomposition of a nonzero natural into a power of two times an odd number,\nexistence and uniqueness both.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-product-of-countable",
+          "source_section": "Statement",
+          "quote": "If $A$ and $B$ are at most countable ([[def-countable]]) then so is\n$A \\times B$.\n\n**No choice principle is used**: the two enumerations are given, and the\nenumeration of the product is written down from them.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "source_section": "Statement",
+          "quote": "Every finite product of standard Borel spaces, with its finite product sigma-algebra, is standard Borel.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-powers-of-countable-sets-are-countable",
+          "source_section": "Statement",
+          "quote": "If $C$ is at most countable and $m\\in\\mathbb N$, then the finite product $C^m=\\prod_{i<m}C$ is at most countable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-countable-union-of-countable",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). Let\n$(A_n)_{n \\in \\mathbb{N}}$ be a family of at most countable sets\n([[def-countable]]) indexed by $\\mathbb{N}$. Then\n\n$$U = \\bigcup_{n \\in \\mathbb{N}} A_n$$\n\nis at most countable.\n\n**The hypothesis $\\mathrm{AC}_\\omega$ is not decoration and it is not removable.**\nIt is spent at exactly one step, step 3.1 below, where one surjection\n$\\mathbb{N} \\to A_n$ is selected for every $n$ at once. Each $A_n$ has such\nsurjections, in general many of them, and the countability assumption provides no\nrule for singling one out. Without some choice principle the theorem is not\navailable at all: ZF alone does not prove it, **conditionally on the consistency\nof ZF**, as recorded among this page's false statements and discussed in the\nremarks below, where that item is named and linked. The\nconsistency hypothesis is not a formality and cannot be dropped: the separation\nrests on an external independence result that this library quotes rather than\nproves, and it cannot be stated without it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-countable-iff-surjection-from-n",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a nonempty set. Then $A$ is at most countable ([[def-countable]]) if\nand only if there is a surjection $s : \\mathbb{N} \\to A$\n([[def-injection-surjection-bijection]]).\n\nMoreover, from any such surjection an injection $A \\to \\mathbb{N}$ is obtained\nexplicitly, without any choice, by\n\n$$j(a) := \\min\\{\\, k \\in \\mathbb{N} : s(k) = a \\,\\}.$$\n\nThis is the working form of countability used everywhere below: to prove a\nnonempty set countable it suffices to list its elements, repetitions and all.\n\n**No choice principle is used.** The backward direction is where an appeal to\nchoice would be natural (\"for each $a$ pick some $k$ with $s(k) = a$\") and it is\navoided outright, because $\\min$ is canonical: every nonempty set of naturals has\na *least* element ([[thm-well-ordering-principle]]), so $j(a)$ is determined by\n$a$ and $s$ alone.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "Write $\\mathbb{Q}_{\\mathbb{R}}$ for the image of $\\mathbb{Q}$ in $\\mathbb{R}$\nunder the canonical embedding $q \\mapsto \\hat q$ ([[lem-rat-embeds-dense]]), the\nset usually written $\\mathbb{Q}$ once the identification is made, and put\n$X := \\mathbb{R} \\setminus \\mathbb{Q}_{\\mathbb{R}}$ for the irrationals. Then:\n\n1. $\\mathbb{Q}_{\\mathbb{R}}$ is dense in $\\mathbb{R}$, that is,\n   $\\overline{\\mathbb{Q}_{\\mathbb{R}}} = \\mathbb{R}$ ([[def-limit-point-r]]);\n2. $X$ is dense in $\\mathbb{R}$;\n3. every nonempty open subset of $\\mathbb{R}$ is uncountable\n   ([[def-countable]]).\n\nClaim 2 is not a symmetry of claim 1: the rationals are dense because they are\n*constructed* to approximate, whereas the irrationals are dense because there are\ntoo many points in any interval for a countable set to exhaust it, which is why\nclaim 3 is proved alongside and used for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.4",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.4",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-space",
+          "source_section": "Definition",
+          "quote": "A **measure space** is a triple $(X,\\mathcal A,\\mu)$ in which $X$ is a set, $\\mathcal A$ is a sigma-algebra on $X$, and $\\mu$ is a measure on $(X,\\mathcal A)$ ([[def-measure]]). The members of $\\mathcal A$ are the **measurable sets** of the space.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.4",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.4",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.4",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-measure-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure on $(X,\\mathcal A)$. If $A,B\\in\\mathcal A$ and $A\\subseteq B$, then $\\mu(A)\\le\\mu(B)$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.4",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.4",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-infimum-property",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a\ngreatest lower bound in $\\mathbb{R}$ ([[def-infimum]]), and it is given by\n\n$$\\inf S = -\\sup(-S), \\qquad \\text{where } -S = \\{-s : s \\in S\\}.$$\n\nIn particular the complete ordered field $\\mathbb{R}$ has the\ngreatest-lower-bound property, which is therefore not an extra axiom: it is a\nconsequence of the least-upper-bound property.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.4",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-completion-of-a-measure-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. Its **completion domain** is\n\n$$\\overline{\\mathcal A}:=\\{E\\subseteq X: E=A\\cup N\\text{ for some }A,Z\\in\\mathcal A\\text{ and }N\\subseteq Z\\text{ with }\\mu(Z)=0\\}.$$\n\nFor a displayed representation $E=A\\cup N$, define the proposed **completed set function** by\n\n$$\\overline\\mu(E):=\\mu(A).$$\n\nThe value must not depend on the representation. That obligation is discharged by [[lem-completed-measure-is-well-defined]], and [[lem-completion-domain-is-a-sigma-algebra]] proves, under the Axiom of Countable Choice ([[def-countable-choice]]), that $\\overline{\\mathcal A}$ is a sigma-algebra. Thus the definite phrases **completion sigma-algebra** and **completed measure** are used only with those two results in force. Under the same choice hypothesis, [[thm-completion-of-a-measure-space]] proves that $\\overline\\mu$ is the unique complete extension on this domain.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-completed-measure-is-well-defined",
+          "source_section": "Statement",
+          "quote": "If $E=A\\cup N=B\\cup M$ are two representations in the completion domain, with $N\\subseteq Z$, $M\\subseteq W$, and $Z,W$ measurable null sets, then $\\mu(A)=\\mu(B)$. Consequently $\\overline\\mu(E):=\\mu(A)$ is well defined.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-completion-domain-is-a-sigma-algebra",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every measure space $(X,\\mathcal A,\\mu)$, the completion domain $\\overline{\\mathcal A}$ of [[def-completion-of-a-measure-space]] is a sigma-algebra on $X$ containing $\\mathcal A$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-completion-of-a-measure-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $(X,\\mathcal A,\\mu)$ be a measure space, and let $(X,\\overline{\\mathcal A},\\overline\\mu)$ be its completion construction. Then $\\overline\\mu$ is a complete measure on $\\overline{\\mathcal A}$ extending $\\mu$. It is the unique complete measure on $\\overline{\\mathcal A}$ that extends $\\mu$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.4",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-metric-nonnegativity",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and let $p : X \\times X \\to \\mathbb{R}$ satisfy the reflexivity\naxiom (M1') $p(x,x) = 0$ and the symmetry axiom (M2) $p(x,y) = p(y,x)$ of\n[[def-metric-space]]. Then:\n\n1. If $p$ satisfies the triangle inequality (M3), then $p(x,y) \\ge 0$ for all\n   $x, y \\in X$.\n2. If $p$ satisfies the strong triangle inequality (M3'), then\n   $p(x,y) \\ge 0$ for all $x, y \\in X$.\n\nIn particular every metric, every pseudometric and every ultrametric\n([[def-metric-space]]) takes only nonnegative values. Nonnegativity is therefore\na theorem about the axiom list this library uses, not a fourth axiom, and no\nstatement on this page needs to assume it separately.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-bounded-diameter",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let\n$A, B \\subseteq X$.\n\n**Bounded subset.** $A$ is **bounded** if $A = \\emptyset$ or there are $x_0 \\in X$\nand a real $r > 0$ with $A \\subseteq B(x_0, r)$ ([[def-metric-ball]]). The space\n$(X,d)$ is a **bounded metric space** if $X$ is a bounded subset of itself.\n\n**Diameter, for nonempty bounded $A$ only.** Suppose $A$ is nonempty and\nbounded, and put\n\n$$D(A) := \\{\\, d(a,b) : a, b \\in A \\,\\} \\subseteq \\mathbb{R}.$$\n\nThen $D(A)$ is nonempty, since $A$ is, and it is bounded above: fixing $x_0$ and\n$r$ with $A \\subseteq B(x_0,r)$, every $a, b \\in A$ satisfy\n$d(a,b) \\le d(a,x_0) + d(x_0,b) < r + r$ by the triangle inequality, symmetry\n([[def-metric-space]]) and addition of inequalities ([[lem-of-add-order]],\n[[def-ordered-field]]), so $r + r$ is an upper bound of $D(A)$\n([[def-bounded-set]]). Hence $D(A)$ has a least upper bound in $\\mathbb{R}$ by\nthe least-upper-bound property ([[def-complete-ordered-field]]), and that bound\nis unique ([[lem-sup-unique]]). Define\n\n$$\\operatorname{diam}(A) := \\sup D(A).$$\n\n**Distance from a point to a set, for nonempty $A$ only.** Let $x \\in X$ and let\n$A$ be nonempty, and put $E(x,A) := \\{\\, d(x,a) : a \\in A \\,\\}$. Then $E(x,A)$ is\nnonempty and bounded below by $0$, since a metric is nonnegative\n([[lem-metric-nonnegativity]], [[def-bounded-set]]), so it has a greatest lower\nbound ([[thm-infimum-property]], [[def-infimum]]), unique by [[lem-sup-unique]].\nDefine\n\n$$d(x,A) := \\inf E(x,A).$$\n\n**Distance between two sets, for nonempty $A$ and $B$ only.** Put\n$E(A,B) := \\{\\, d(a,b) : a \\in A,\\ b \\in B \\,\\}$, again nonempty and bounded\nbelow by $0$, and define\n\n$$d(A,B) := \\inf E(A,B).$$\n\n**Every one of the three scope restrictions is load bearing.** In this library\n$\\sup$ and $\\inf$ denote real numbers and are written only after existence has\nbeen established; the extended real line is introduced on a later page and is\nnot used for the suprema and infima taken here, and no convention\n$\\sup \\emptyset = -\\infty$ is in force in this development\n([[rem-sup-conventions]]). Accordingly:\n\n- $\\operatorname{diam}(A)$ is defined exactly when $A$ is nonempty **and**\n  bounded. It is not defined for $A = \\emptyset$, and it is not defined, not even\n  as an infinite value, for an unbounded $A$.\n- $d(x,A)$ is defined exactly when $A \\ne \\emptyset$, and $d(A,B)$ exactly when\n  both $A$ and $B$ are nonempty. No boundedness is needed for these two, because\n  $0$ is always a lower bound.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-interior-closure-boundary-top",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]), let\n$A \\subseteq X$ and let $x \\in X$. Neighbourhoods are as in\n[[def-neighbourhood-top]], so a neighbourhood need not be open.\n\n- The **interior** of $A$ is\n  $\\operatorname{int}(A) := \\bigcup \\{\\, U \\in \\mathcal{T} : U \\subseteq A \\,\\}$.\n- The **closure** of $A$ is\n  $\\overline{A} := \\bigcap \\{\\, F \\subseteq X : F \\text{ closed and } A \\subseteq F \\,\\}$.\n- The **exterior** of $A$ is $\\operatorname{ext}(A) := \\operatorname{int}(X \\setminus A)$.\n- The **boundary** of $A$ is $\\partial A := \\overline{A} \\setminus \\operatorname{int}(A)$.\n- $x$ is a **limit point** (accumulation point) of $A$ if every neighbourhood $N$\n  of $x$ satisfies $N \\cap (A \\setminus \\{x\\}) \\ne \\varnothing$. The set of limit\n  points of $A$ is the **derived set** $A'$.\n- $x$ is an **isolated point of $A$** if $x \\in A$ and some neighbourhood $N$ of\n  $x$ satisfies $N \\cap A = \\{x\\}$.\n\n**Both operators are well posed, and the two names are justified rather than\nasserted.** The interior is a union of open sets, hence open by (T2), it is\ncontained in $A$, and it contains every open $U \\subseteq A$: so\n$\\operatorname{int}(A)$ is *the largest open subset of $A$*. The family being\nintersected in the definition of $\\overline{A}$ is nonempty, since $X$ is closed\nand contains $A$, so the intersection is a set; it is closed by (C2) of\n[[def-topological-space]], it contains $A$, and it is contained in every closed\n$F \\supseteq A$: so $\\overline{A}$ is *the smallest closed superset of $A$*. In\nparticular\n\n$$\\operatorname{int}(A) \\subseteq A \\subseteq \\overline{A},$$\n\nand $A$ is open if and only if $A = \\operatorname{int}(A)$, and closed if and\nonly if $A = \\overline{A}$, in each case because one inclusion is automatic and\nthe other says exactly that $A$ belongs to the family in question.\n\n**Interior and closure are exchanged by complementation.** For every\n$A \\subseteq X$,\n\n$$X \\setminus \\operatorname{int}(A) = \\overline{X \\setminus A}, \\qquad X \\setminus \\overline{A} = \\operatorname{int}(X \\setminus A) = \\operatorname{ext}(A).$$\n\nIndeed $U \\mapsto X \\setminus U$ is a bijection between the open subsets of $A$\nand the closed supersets of $X \\setminus A$, and it turns unions into\nintersections ([[def-topological-space]]); applying complementation to the first\nidentity gives the second. So $\\operatorname{ext}(A) = X \\setminus \\overline{A}$,\nand every statement about interiors has a mirror statement about closures.\n\n**The pointwise description of the interior.** $x \\in \\operatorname{int}(A)$ if\nand only if $A$ is a neighbourhood of $x$. If $x \\in \\operatorname{int}(A)$ then\n$\\operatorname{int}(A)$ is an open set with $x \\in \\operatorname{int}(A) \\subseteq A$;\nconversely a neighbourhood relation $x \\in U \\subseteq A$ with $U$ open puts $x$\nin the union defining $\\operatorname{int}(A)$. The corresponding description of\nthe closure is proved as the next item, because it is the statement that does the\nwork in every later proof.\n\n**$X$ is the disjoint union of the three regions.** Since\n$\\operatorname{int}(A) \\subseteq \\overline{A}$, the three sets\n$\\operatorname{int}(A)$, $\\partial A = \\overline{A} \\setminus \\operatorname{int}(A)$\nand $\\operatorname{ext}(A) = X \\setminus \\overline{A}$ are pairwise disjoint and\ntheir union is $X$. This is recorded again, with the identities for interior and\nclosure of unions and intersections, in the lemma two items below.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Give $\\mathbb N$ the discrete topology and write $W=\\mathbb N^{\\mathbb N}$ with its product topology. Define $d_W(f,g)=0$ if $f=g$, and $d_W(f,g)=2^{-k}$ if $k$ is the first coordinate where they differ. If $k$ is the first coordinate where $f$ and $h$ differ, at least one of $f,g$ or $g,h$ differs at a coordinate no later than $k$; hence $d_W(f,h)\\le\\max\\{d_W(f,g),d_W(g,h)\\}$, so $d_W$ is an ultrametric. For $m\\ge1$, the prefix cylinder $C_m(f)=\\{g:g(i)=f(i)\\text{ for }i<m\\}$ is the metric ball $B(f,2^{-(m-1)})$. Every product-basic neighborhood of $f$ contains a sufficiently long prefix cylinder, and every metric ball is a union of prefix cylinders: around a point $g\\ne f$ in the ball, fixing through the first coordinate where $g$ differs from $f$ stays inside the ball; around $f$, choose $m$ with $2^{-m}$ smaller than its radius. Thus $d_W$ induces the product topology. A Cauchy sequence eventually stabilizes at every coordinate, and the stabilized function is its limit, so $d_W$ is complete. By",
+          "inputs": [
+            "F2",
+            "F4",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "If $P,Q$ are Polish and nonempty, choose complete compatible metrics and countable dense sets. Truncate each metric at $1$; balls of radius less than $1$ are unchanged, and a Cauchy sequence for the truncated metric is Cauchy in the original metric at every tolerance less than $1$, so truncation preserves topology and completeness. Sum the two truncated metrics on $P\\times Q$. A Cauchy sequence for the sum is Cauchy in each coordinate, and the two limits give its product-metric limit. The sum metric induces the product topology: a sum-metric ball is contained in the product of coordinate balls of the same radius, while the product of coordinate balls of radius $\\varepsilon/2$ lies in the sum-metric ball of radius $\\varepsilon$. The product of countable dense sets is countable and dense, so $P\\times Q$ is Polish. Enumerate each countable dense set and the positive rationals (obtained from an enumeration of $\\mathbb Q$ by replacing nonpositive values by $1$). In each factor, balls centered at dense points with positive rational radii form a countable base: given $x\\in U$ open, choose $\\delta>0$ with $B(x,\\delta)\\subseteq U$, a dense center $p$ with $d(x,p)<\\delta/4$, and a rational $r$ with $d(x,p)<r<\\delta-d(x,p)$; then $x\\in B(p,r)\\subseteq U$. Product rectangles form a countable base. Enumerating that base, each product-open set is the countable union of its rectangles contained in it, hence belongs to the product sigma-algebra. Conversely, for open $V\\subseteq Q$, the class of $A\\subseteq P$ with $A\\times V$ product-Borel is a sigma-algebra containing every open $A$, because open rectangles are product-open; thus it contains every Borel $A$. For each such Borel $A$, the class of $B\\subseteq Q$ with $A\\times B$ product-Borel is a sigma-algebra containing every open $V$ by the preceding sentence. Thus all Borel rectangles are product-Borel, and the product Borel sigma-algebra equals the product sigma-algebra. The product of two Polish presentations therefore gives a measurable isomorphism with the product Polish presentation, proving the finite-product standard-Borel claim in",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "step": "1.3",
+          "claim": "Let $\\mu$ be a finite Borel measure on Polish $X$. For any $E\\subseteq X$ put $a(E)=\\inf\\{\\mu(B):B\\text{ Borel},\\ E\\subseteq B\\}$; the family is nonempty since it contains $X$, and its values are bounded between $0$ and $\\mu(X)$. By the infimum property and AC, choose Borel $B_n\\supseteq E$ with $\\mu(B_n)<a(E)+1/n$. Then $H=\\bigcap_nB_n$ is Borel, contains $E$, and satisfies $\\mu(H)=a(E)$: monotonicity gives $\\mu(H)\\le\\mu(B_n)<a(E)+1/n$ for every $n$, hence $\\mu(H)\\le a(E)$ as $1/n\\to0$, while the definition of $a(E)$ gives the reverse inequality. If $D\\supseteq E$ is Borel, then $H\\cap D$ is another Borel superset of $E$, so $\\mu(H\\cap D)\\ge a(E)=\\mu(H)$; monotonicity gives equality, and finite additivity yields $\\mu(H\\setminus D)=0$. Thus every set has a Borel envelope $H$ with this null-difference property.",
+          "inputs": [
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-1.4",
+          "step": "1.4",
+          "claim": "Let $Z$ be a nonempty Polish space and choose a bounded complete compatible metric $d$ and a countable dense set $D$. Since $D$ is nonempty at most countable, fix a surjection $q:\\mathbb N\\to D$. Let $r_0:\\mathbb N\\to\\mathbb Q$ be a surjection and define $r(j)=r_0(j)$ if $r_0(j)>0$ and $r(j)=1$ otherwise; then $r$ surjects onto $\\mathbb Q_{>0}$. Pair the indices $(i,j)$ by a fixed bijection $\\mathbb N\\times\\mathbb N\\cong\\mathbb N$. For a nonempty open $U\\subseteq Z$ and depth $n$, declare $(i,j)$ admissible when $\\bar B(q_i,r_j)\\subseteq U$ and $\\operatorname{diam}(B(q_i,r_j))\\le1/(n+1)$. Each open ball is open: for $x\\in B(q_i,r_j)$, the positive radius $r_j-d(q_i,x)$ gives a ball around $x$ contained in it by the triangle inequality. Each closed ball is closed: if $d(q_i,x)>r_j$, the positive radius $d(q_i,x)-r_j$ gives a ball around $x$ disjoint from it by the reverse triangle inequality; hence the closure of the open ball lies in the closed ball. These balls cover $U$: given $z\\in U$, choose $\\delta>0$ with $B(z,\\delta)\\subseteq U$, then choose $q_i$ with $d(z,q_i)<\\min(\\delta/4,1/(8n+8))$ and a rational radius $r_j$ with $d(z,q_i)<r_j<\\min(\\delta-d(z,q_i),1/(2n+2))$. The strict upper bound puts the closed ball inside $B(z,\\delta)$, and any two points in $B(q_i,r_j)$ are at distance less than $2r_j<1/(n+1)$ by the triangle inequality. For each child index $k$, use its paired code to set $U_{s^\\frown k}=B(q_i,r_j)$ when the decoded pair is admissible, and set it empty otherwise. The children cover each nonempty parent; empty parents have only empty children. Thus closures lie inside parents and child diameters tend to zero with depth.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Every closed subspace $C$ of a Polish space $Z$ is Polish. Restrict a compatible complete metric to $C$: a Cauchy sequence in $C$ converges in $Z$ by completeness, and closedness puts its limit in $C$. A countable base of $Z$ is given by the dense-centre rational balls constructed in step 1.2, so its intersections with $C$ form a countable base of $C$. If $C$ is nonempty, AC supplies one point in each nonempty basic intersection. These countably many points are dense, since every nonempty open subset of $C$ contains a nonempty basic intersection. Thus $C$ is separable and completely metrizable; the empty subspace is Polish with its empty metric and dense set.",
+          "inputs": [
+            "1.2",
+            "F1",
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Every nonempty Polish space $Z$ is a continuous image of $W$. Use the bounded complete metric and dense-centre rational-ball candidates of step 1.4, but index only admissible children. For each nonempty open parent $U_s$ at depth $n$, its set of admissible paired indices is infinite: choose a dense centre in $U_s$ and a positive margin whose closed ball lies inside $U_s$; infinitely many distinct positive rational radii below that margin and $1/(2n+2)$ are admissible. Enumerate the admissible indices increasingly, using the least element and then the least index greater than its predecessor. Define $U_{s^\\frown k}$ by the $k$th admissible pair, starting with $U_\\varnothing=Z$. Every child is nonempty, its closure is contained in its parent, the children cover the parent by step 1.4, and diameters at depth $n\\ge1$ are at most $1/n$. For any branch $f\\in W$, the centres of $U_{f|n}$ form a Cauchy sequence because all later centres lie in each earlier ball; let $p(f)$ be its complete-metric limit. The limit lies in every $U_{f|n}$, since the closure of the next ball is contained in that ball. A common prefix of length $n$ therefore places two image points in one ball of diameter at most $1/n$, proving continuity of $p$ in the prefix-cylinder topology. For each fixed $z\\in Z$, recursively take the least child containing $z$, possible because the children cover each parent. Its branch centres converge to $z$, so $p$ is onto. The limit and least-child constructions require no choice indexed by the branches; only the initial metric/dense enumeration and the inherited countable choices are used.",
+          "inputs": [
+            "1.4",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-2.3",
+          "step": "2.3",
+          "claim": "For Polish $P$, call $A\\subseteq P$ closed-coded if $A=\\operatorname{proj}_P(C)$ for some closed $C\\subseteq P\\times W$. Closed $A$ is closed-coded by $A\\times W$. If $A_n=\\operatorname{proj}_P(C_n)$, code $\\bigcup_n A_n$ by the closed set of $(x,w)$ for which $(x,w_{\\ge1})\\in C_{w(0)}$, where $w_{\\ge1}(k)=w(k+1)$. It is closed because each first-coordinate slice is clopen and the corresponding tail condition is closed.",
+          "inputs": [
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-2.4",
+          "step": "2.4",
+          "claim": "Let $(A_s)_{s\\in\\mathbb N^{<\\mathbb N}}$ be a decreasing Borel scheme, and let $E_s$ be the union of branch intersections over branches extending $s$. Then $E_s\\subseteq A_s$ and $E_s=\\bigcup_k E_{s^\\frown k}$. AC chooses a Borel envelope $H_s$ from step 1.3 for each finite word $s$. Define $B_s=A_s\\cap\\bigcap_{t\\preceq s}H_t$. Then $B_s$ is Borel, $E_s\\subseteq B_s\\subseteq H_s$, and $B_s\\setminus D$ is null for every Borel $D\\supseteq E_s$. In particular $C_s=B_s\\setminus\\bigcup_k B_{s^\\frown k}$ is Borel null, since the child union contains $E_s$. For each natural-number code, let $C_m$ be the exceptional set for its unique decoded word if it is a valid code, and otherwise let $C_m=\\varnothing$; then $C=\\bigcup_m C_m$ is Borel and null by countable subadditivity. If $x\\in B_\\varnothing\\setminus C$, then at every node containing $x$ some child also contains $x$; recursion taking the least such child yields a branch $f$ with $x\\in A_{f|n}$ for all $n$. Conversely every branch point lies in $B_\\varnothing$. Thus $B_\\varnothing\\setminus C\\subseteq E_\\varnothing\\subseteq B_\\varnothing$, so $E_\\varnothing=(B_\\varnothing\\setminus C)\\cup(E_\\varnothing\\cap C)$ belongs to the completion and differs from a Borel set only inside the Borel null set $C$.",
+          "inputs": [
+            "1.3",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "If $A_n=\\operatorname{proj}_P(C_n)$, use $W^{\\mathbb N}\\cong W$ to define the closed set of $(x,(w_n))$ satisfying $(x,w_n)\\in C_n$ for every $n$. Its projection is $\\bigcap_n A_n$: one inclusion is immediate, and for the other AC chooses one witness $w_n$ for each $n$. Thus closed-coded sets are closed under countable unions and intersections. If $U\\subseteq P$ is open and $P\\setminus U\\ne\\varnothing$, set $F=P\\setminus U$ and define $d(x,F)=\\inf\\{d(x,y):y\\in F\\}$. The triangle inequality gives $|d(x,F)-d(x',F)|\\le d(x,x')$, so each set $\\{x:d(x,F)\\ge1/n\\}$ is closed. Each $x\\in U$ has positive distance from $F$, so these sets cover $U$; if $x\\in F$, its distance is $0$. For $U=P$ the assertion is immediate. The class of sets whose members and complements are closed-coded is therefore a sigma-algebra containing all open sets. Every Borel subset of $P$ is closed-coded.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "1.1",
+            "2.3"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "If $Z=\\varnothing$ or $F=\\varnothing$, its projection is empty and the branch scheme with all terms empty has empty branch union. Otherwise use the tree from step 1.4 and put $A_s=\\overline{\\operatorname{proj}_X(F\\cap(X\\times U_s))}$, a closed decreasing scheme on $X$. Its branch union is exactly $\\operatorname{proj}_X(F)$. If $(x,z)\\in F$, recursively choose the least child at each depth containing $z$, which exists because the children cover their parent; this gives a branch with $z\\in U_{f|n}$, hence $x\\in A_{f|n}$ for every $n$. Conversely, if $x$ lies in a branch intersection, then every open ball around $x$ meets $\\operatorname{proj}_X(F\\cap(X\\times U_{f|n}))$: otherwise its closed complement would be a closed superset of that projection omitting $x$, contrary to the definition of $A_{f|n}$. For each $n\\ge1$ choose $x_n$ within $1/(n+1)$ of $x$ and $z_n\\in U_{f|n}$ with $(x_n,z_n)\\in F$. For $m\\ge n\\ge1$, both $z_m,z_n\\in U_{f|n}$, whose diameter is at most $1/n$ by step 1.4, so $(z_n)_{n\\ge1}$ is Cauchy; completeness gives $z_n\\to z$. Since $x_n\\to x$ and $F$ is closed in the product topology, $(x,z)\\in F$. Step 2.4 therefore gives completion-measurability and a Borel version for the projection of every closed $F$ under a finite Borel measure.",
+          "inputs": [
+            "1.4",
+            "2.4",
+            "F1",
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For sigma-finite $\\mu$, choose a Borel cover $(E_n)$ by finite-measure sets and make it disjoint by $D_n=E_n\\setminus\\bigcup_{k<n}E_k$. For each $n$, $\\mu_n(A)=\\mu(A\\cap D_n)$ is a finite Borel measure by countable additivity. For each Borel relation $R$, its piece $R\\cap(D_n\\times Y)$ is Borel; step 3.1 gives it a closed witness, and step 3.2 gives a finite-measure Borel version for its projection under $\\mu_n$. For a branch union $S$ of a decreasing scheme $(A_s)$, the piece $S\\cap D_n$ is the branch union of the Borel scheme $(A_s\\cap D_n)$, so step 2.4 gives the same finite-measure conclusion. In either case intersect each Borel version and its Borel null exceptional set with $D_n$, obtaining $G_n,C_n\\subseteq D_n$ with $G_n\\setminus C_n\\subseteq S_n\\subseteq G_n$ and $\\mu(C_n)=0$. Countable subadditivity shows that $G=\\bigcup_nG_n$ is Borel, $C=\\bigcup_nC_n$ is Borel null, and $G\\setminus C\\subseteq S\\subseteq G$; therefore $S$ is measurable in the completion and agrees with $G$ off $C$. By",
+          "inputs": [
+            "3.1",
+            "3.2",
+            "2.4",
+            "F4",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is explicit. Its local uses are countable selections: one witness for each set in a closed-coded intersection, an approximating Borel superset at each positive integer, one Borel envelope for each finite-sequence node, and one approximating point-pair for each stage of a closed-projection limit. AC implies Countable Choice ([[def-countable-choice]]), which is also assumed by the measure-completion suppliers. The least-child branch uses the well-order of the naturals and recursion; fixed candidate-pair indices and coordinate pairings use no choice. Countable Choice also supplies the finite-word enumeration and a point from each nonempty basic open intersection in a closed subspace. Baire parametrization uses the least admissible child recursion and no branch-indexed choice. No uncountable family is selected locally."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is explicit. Its local uses are countable selections: one witness for each set in a closed-coded intersection, an approximating Borel superset at each positive integer, one Borel envelope for each finite-sequence node, and one approximating point-pair for each stage of a closed-projection limit. AC implies Countable Choice ([[def-countable-choice]]), which is also assumed by the measure-completion suppliers. The least-child branch uses the well-order of the naturals and recursion; fixed candidate-pair indices and coordinate pairings use no choice. Countable Choice also supplies the finite-word enumeration and a point from each nonempty basic open intersection in a closed subspace. Baire parametrization uses the least admissible child recursion and no branch-indexed choice. No uncountable family is selected locally."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is explicit. Its local uses are countable selections: one witness for each set in a closed-coded intersection, an approximating Borel superset at each positive integer, one Borel envelope for each finite-sequence node, and one approximating point-pair for each stage of a closed-projection limit. AC implies Countable Choice ([[def-countable-choice]]), which is also assumed by the measure-completion suppliers. The least-child branch uses the well-order of the naturals and recursion; fixed candidate-pair indices and coordinate pairings use no choice. Countable Choice also supplies the finite-word enumeration and a point from each nonempty basic open intersection in a closed subspace. Baire parametrization uses the least admissible child recursion and no branch-indexed choice. No uncountable family is selected locally."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is explicit. Its local uses are countable selections: one witness for each set in a closed-coded intersection, an approximating Borel superset at each positive integer, one Borel envelope for each finite-sequence node, and one approximating point-pair for each stage of a closed-projection limit. AC implies Countable Choice ([[def-countable-choice]]), which is also assumed by the measure-completion suppliers. The least-child branch uses the well-order of the naturals and recursion; fixed candidate-pair indices and coordinate pairings use no choice. Countable Choice also supplies the finite-word enumeration and a point from each nonempty basic open intersection in a closed subspace. Baire parametrization uses the least admissible child recursion and no branch-indexed choice. No uncountable family is selected locally."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: AC is explicit. Its local uses are countable selections: one witness for each set in a closed-coded intersection, an approximating Borel superset at each positive integer, one Borel envelope for each finite-sequence node, and one approximating point-pair for each stage of a closed-projection limit. AC implies Countable Choice ([[def-countable-choice]]), which is also assumed by the measure-completion suppliers. The least-child branch uses the well-order of the naturals and recursion; fixed candidate-pair indices and coordinate pairings use no choice. Countable Choice also supplies the finite-word enumeration and a point from each nonempty basic open intersection in a closed subspace. Baire parametrization uses the least admissible child recursion and no branch-indexed choice. No uncountable family is selected locally."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    },
+    "lem-borel-relations-admit-conull-borel-uniformizations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-closed-witness-codings-and-measured-projections",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ and $Y$ be standard Borel spaces with Polish presentations ([[def-standard-borel-space]], [[def-polish-space]]), and use their finite-product standard Borel structure ([[lem-finite-products-of-standard-borel-spaces-are-standard-borel]]). Every Borel relation $R\\subseteq X\\times Y$ is the projection onto $X\\times Y$ of a closed set $F\\subseteq X\\times Y\\times\\mathbb N^{\\mathbb N}$. If $\\mu$ is a sigma-finite Borel measure on $X$, then the projection onto $X$ of every Borel subset of $X\\times Y$ is measurable in the completion of $\\mu$ and differs from a Borel subset only inside a Borel $\\mu$-null set. More generally, if $(A_s)_{s\\in\\mathbb N^{<\\mathbb N}}$ is a decreasing Borel scheme on $X$, meaning $A_t\\subseteq A_s$ whenever $s$ is an initial segment of $t$, then its branch union $\\bigcup_{f\\in\\mathbb N^{\\mathbb N}}\\bigcap_n A_{f|n}$ has the same completion-measurability and Borel-version property. No global Borel selector is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-completion-of-a-measure-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. Its **completion domain** is\n\n$$\\overline{\\mathcal A}:=\\{E\\subseteq X: E=A\\cup N\\text{ for some }A,Z\\in\\mathcal A\\text{ and }N\\subseteq Z\\text{ with }\\mu(Z)=0\\}.$$\n\nFor a displayed representation $E=A\\cup N$, define the proposed **completed set function** by\n\n$$\\overline\\mu(E):=\\mu(A).$$\n\nThe value must not depend on the representation. That obligation is discharged by [[lem-completed-measure-is-well-defined]], and [[lem-completion-domain-is-a-sigma-algebra]] proves, under the Axiom of Countable Choice ([[def-countable-choice]]), that $\\overline{\\mathcal A}$ is a sigma-algebra. Thus the definite phrases **completion sigma-algebra** and **completed measure** are used only with those two results in force. Under the same choice hypothesis, [[thm-completion-of-a-measure-space]] proves that $\\overline\\mu$ is the unique complete extension on this domain.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-completion-domain-is-a-sigma-algebra",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every measure space $(X,\\mathcal A,\\mu)$, the completion domain $\\overline{\\mathcal A}$ of [[def-completion-of-a-measure-space]] is a sigma-algebra on $X$ containing $\\mathcal A$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "2.2",
+            "3.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable** if some at most countable subset $D\\subseteq X$ is dense in $X$ ([[def-dense-top]], [[def-countable]]). Equivalently, every nonempty open subset of $X$ meets $D$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-countable-iff-surjection-from-n",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a nonempty set. Then $A$ is at most countable ([[def-countable]]) if\nand only if there is a surjection $s : \\mathbb{N} \\to A$\n([[def-injection-surjection-bijection]]).\n\nMoreover, from any such surjection an injection $A \\to \\mathbb{N}$ is obtained\nexplicitly, without any choice, by\n\n$$j(a) := \\min\\{\\, k \\in \\mathbb{N} : s(k) = a \\,\\}.$$\n\nThis is the working form of countability used everywhere below: to prove a\nnonempty set countable it suffices to list its elements, repetitions and all.\n\n**No choice principle is used.** The backward direction is where an appeal to\nchoice would be natural (\"for each $a$ pick some $k$ with $s(k) = a$\") and it is\navoided outright, because $\\min$ is canonical: every nonempty set of naturals has\na *least* element ([[thm-well-ordering-principle]]), so $j(a)$ is determined by\n$a$ and $s$ alone.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-subset-of-countable",
+          "source_section": "Statement",
+          "quote": "Let $A$ be at most countable ([[def-countable]]) and let $B \\subseteq A$. Then\n$B$ is at most countable.\n\nThe proof establishes the sharper statement about subsets of $\\mathbb{N}$ from\nwhich this follows: **a subset $S \\subseteq \\mathbb{N}$ is finite if it is\nbounded above, and countably infinite if it is not.**\n\n**No choice principle is used.** This is the point of the lemma rather than a\nfootnote to it. The enumeration of an unbounded $S \\subseteq \\mathbb{N}$ is built\nby always taking the *least* element of $S$ above the previous one, and the least\nelement of a nonempty set of naturals is canonical\n([[thm-well-ordering-principle]]): it is determined by $S$, not selected from it.\nReplacing \"least\" by \"some\" would turn the construction into an appeal to\ndependent choice.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "2.1",
+            "2.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-n-cross-n-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{N} \\times \\mathbb{N} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the\nplane of pairs of naturals is countably infinite ([[def-countable]]).\n\nThe bijection is exhibited, not merely asserted to exist. Define $2^m$ by\nrecursion on $m$ ([[thm-recursion]]) by $2^0 = 1$ and $2^{\\sigma(m)} = 2^m + 2^m$,\nand set\n\n$$J(m,n) = 2^m \\cdot \\sigma(n + n), \\qquad \\text{that is} \\qquad J(m,n) = 2^m(2n+1).$$\n\nThen $J$ is a bijection from $\\mathbb{N} \\times \\mathbb{N}$ onto\n$\\mathbb{N} \\setminus \\{0\\}$, and $\\sigma$ is a bijection from $\\mathbb{N}$ onto\n$\\mathbb{N} \\setminus \\{0\\}$, so $\\sigma^{-1} \\circ J$ is a bijection\n$\\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$. What makes $J$ bijective is the\ndecomposition of a nonzero natural into a power of two times an odd number,\nexistence and uniqueness both.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-closed-witness-codings-and-measured-projections",
+          "source_section": "Remark",
+          "quote": "Under AC, finite words in the naturals are at most countable and admit a sequence enumeration with injective least-preimage indices. The Baire space $W=\\mathbb N^{\\mathbb N}$ is Polish, and $W^{\\mathbb N}$ is homeomorphic to $W$ by coordinate pairing. Finite products and closed subspaces of Polish spaces are Polish. Every nonempty Polish space is a continuous image of $W$. These interfaces are proved locally in the Proof: finite-word countability and Baire coding in step1.1, products in step1.2, closed subspaces in step2.1, and continuous surjection in step2.2. No assertion is made that the empty Polish space is an image of the nonempty Baire space.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\n$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).\n\nA subset $A \\subseteq X$ is called **complete** when the metric subspace\n$(A, d_A)$ is complete ([[def-isometry-and-metric-embedding]]); as always, the\nmetric is part of the data, and $d_A$ is the restriction of $d$ to $A \\times A$.\n\n**The limit is unique when it exists**, since limits in a metric space are unique\n([[lem-metric-limits-unique]]), so a complete space assigns to each of its Cauchy\nsequences one point and not a set of points.\n\n**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the\ntopology of $d$.** Both quantifiers in the definition are about the metric: the\nCauchy condition is stated with distances, and so is convergence. Two metrics on\nthe same set can have the same open sets while exactly one of them is complete,\nwhich is the content of [[fs-completeness-is-a-topological-property]] and its\nwitness. Read the word *complete* as an abbreviation for *complete with respect\nto this metric*, always.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "2.2",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "2.2",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-closed-witness-codings-and-measured-projections",
+          "source_section": "Remark",
+          "quote": "Under AC, finite words in the naturals are at most countable and admit a sequence enumeration with injective least-preimage indices. The Baire space $W=\\mathbb N^{\\mathbb N}$ is Polish, and $W^{\\mathbb N}$ is homeomorphic to $W$ by coordinate pairing. Finite products and closed subspaces of Polish spaces are Polish. Every nonempty Polish space is a continuous image of $W$. These interfaces are proved locally in the Proof: finite-word countability and Baire coding in step1.1, products in step1.2, closed subspaces in step2.1, and continuous surjection in step2.2. No assertion is made that the empty Polish space is an image of the nonempty Baire space.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-subset-of-countable",
+          "source_section": "Statement",
+          "quote": "Let $A$ be at most countable ([[def-countable]]) and let $B \\subseteq A$. Then\n$B$ is at most countable.\n\nThe proof establishes the sharper statement about subsets of $\\mathbb{N}$ from\nwhich this follows: **a subset $S \\subseteq \\mathbb{N}$ is finite if it is\nbounded above, and countably infinite if it is not.**\n\n**No choice principle is used.** This is the point of the lemma rather than a\nfootnote to it. The enumeration of an unbounded $S \\subseteq \\mathbb{N}$ is built\nby always taking the *least* element of $S$ above the previous one, and the least\nelement of a nonempty set of naturals is canonical\n([[thm-well-ordering-principle]]): it is determined by $S$, not selected from it.\nReplacing \"least\" by \"some\" would turn the construction into an appeal to\ndependent choice.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "**The product set.** Let $I$ be a set and let $X_i$ be a set for each $i \\in I$.\nThe **product** is\n\n$$\\prod_{i \\in I} X_i \\;:=\\; \\Big\\{\\, x : x \\text{ is a function with domain } I \\text{ and } x(i) \\in X_i \\text{ for every } i \\in I \\,\\Big\\},$$\n\nand we write $x_i := x(i)$, the $i$-th **coordinate** of $x$. Two elements of the\nproduct are equal exactly when they agree at every index, functions being equal\nwhen they have the same domain and the same values. For $j \\in I$ the $j$-th\n**projection** is\n\n$$\\pi_j : \\prod_{i \\in I} X_i \\to X_j, \\qquad \\pi_j(x) := x_j .$$\n\n**Notation for a finite product.** For $I = n$ a natural number, which is the set\n$\\{0, 1, \\dots, n-1\\}$ of its predecessors, an element of $\\prod_{k<n} X_k$ is a\nfunction on $n$ and we write it $(x_0, \\dots, x_{n-1})$. In particular $I = 2$\ngives the **binary product**, written $X \\times Y$ for $\\prod_{i<2} X_i$ with\n$X_0 = X$ and $X_1 = Y$, whose elements are written $(u,v)$ for the function\n$0 \\mapsto u$, $1 \\mapsto v$. This is the only meaning the symbol $X \\times Y$\ncarries on this page.\n\n**Two facts about when the product is nonempty, stated because they are used and\nbecause they cost something.** If some $X_{i_0}$ is empty then the product is\nempty, since no function can take a value in $X_{i_0}$. Conversely, suppose every\n$X_i$ is nonempty.\n\n- For $I = n$ a natural number, the product is nonempty, and this is a theorem of\n  ZF: [[lem-finite-choice]] applied to the function $i \\mapsto X_i$ on $n$\n  supplies a choice function $g$ for the family of values, and\n  $x(i) := g(X_i)$ defines a member of $\\prod_{k<n} X_k$.\n- For an arbitrary $I$ the assertion \"$\\prod_{i \\in I} X_i \\ne \\varnothing$\n  whenever every $X_i$ is nonempty\" **is** the Axiom of Choice: it is the\n  formulation recorded in [[def-axiom-of-choice]], and the choice function of\n  [[def-choice-function]] is exactly a point of the product of a family by\n  itself. Every use of it below is flagged at the step that spends it.\n\n**The box topology.** Now let each $X_i$ carry a topology $\\mathcal{T}_i$\n([[def-topological-space]]). Put\n\n$$\\mathcal{R} \\;:=\\; \\Big\\{\\, \\prod_{i \\in I} U_i \\;:\\; U_i \\in \\mathcal{T}_i \\text{ for every } i \\in I \\,\\Big\\},$$\n\nthe family of **boxes**. $\\mathcal{R}$ is a basis for a topology\n([[thm-basis-criterion]]): it contains $\\prod_i X_i$, so it covers the product,\nand it is closed under binary intersections, since\n\n$$\\Big(\\prod_i U_i\\Big) \\cap \\Big(\\prod_i V_i\\Big) = \\prod_i (U_i \\cap V_i)$$\n\nand each $U_i \\cap V_i$ is open by (T3). The topology it generates is the **box\ntopology** $\\mathcal{T}^{\\square}$, and $\\mathcal{R}$ is a basis for it\n([[def-topology-basis-subbasis]]).\n\n**The product topology.** The **product topology** $\\mathcal{T}^{\\Pi}$ on\n$\\prod_i X_i$ is the initial topology of the family of projections\n$(\\pi_i)_{i \\in I}$ ([[def-initial-and-final-topology]]): the topology generated\nby the subbasis\n\n$$\\mathcal{G} \\;:=\\; \\{\\, \\pi_i^{-1}[U] : i \\in I,\\ U \\in \\mathcal{T}_i \\,\\}, \\qquad \\pi_i^{-1}[U] = \\prod_{j \\in I} W_j \\ \\text{ with } W_i = U \\text{ and } W_j = X_j \\text{ for } j \\ne i .$$\n\nBy [[thm-basis-criterion]] the finite intersections of members of $\\mathcal{G}$\nform a basis for $\\mathcal{T}^{\\Pi}$, and those finite intersections are exactly\nthe boxes with all but finitely many factors unrestricted:\n\n$$\\mathcal{R}^{\\Pi} \\;=\\; \\Big\\{\\, \\prod_{i \\in I} U_i \\;:\\; U_i \\in \\mathcal{T}_i \\text{ for every } i, \\text{ and } U_i = X_i \\text{ for all but finitely many } i \\,\\Big\\}.$$\n\nIndeed the intersection of $\\pi_{i_1}^{-1}[U_1], \\dots, \\pi_{i_n}^{-1}[U_n]$ is\nthe box whose factor at $i$ is the intersection of those $U_m$ with $i_m = i$ and\nis $X_i$ when no $i_m$ equals $i$; and the intersection of no members is the\nwhole product, the box with every factor $X_i$. Conversely a box with\n$U_i = X_i$ off a finite set is such an intersection. Members of\n$\\mathcal{R}^{\\Pi}$ are called **basic product-open** sets, and members of\n$\\mathcal{R}$ **boxes**. So $\\mathcal{R}^{\\Pi} \\subseteq \\mathcal{R}$, with\nequality when $I$ is a natural number.\n\n**The empty product.** For $I = \\varnothing$ there is exactly one function with\ndomain $\\varnothing$, the empty function, so $\\prod_{i \\in \\varnothing} X_i$ is a\none-point set. A one-point set carries exactly one topology, namely\n$\\{\\varnothing, \\{\\varnothing\\}\\}$, since a topology must contain the empty set\nand the whole set and there is nothing else to contain\n([[def-topological-space]]); so the box topology and the product topology agree\nthere, and both equal the discrete topology and the indiscrete topology\n([[def-standard-topologies]]), which coincide on a one-point set. There are no\nprojections to speak of, and the initial topology of the empty family is indeed\nthe indiscrete one ([[def-initial-and-final-topology]]).\n\n**Convention.** Unless the box topology is named explicitly, $\\prod_i X_i$ always\ncarries the product topology in this library. That is not a matter of taste: the\nproduct topology is the one with the characteristic property of the next item,\nand the box topology has no such property.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-closed-witness-codings-and-measured-projections",
+          "source_section": "Remark",
+          "quote": "Under AC, finite words in the naturals are at most countable and admit a sequence enumeration with injective least-preimage indices. The Baire space $W=\\mathbb N^{\\mathbb N}$ is Polish, and $W^{\\mathbb N}$ is homeomorphic to $W$ by coordinate pairing. Finite products and closed subspaces of Polish spaces are Polish. Every nonempty Polish space is a continuous image of $W$. These interfaces are proved locally in the Proof: finite-word countability and Baire coding in step1.1, products in step1.2, closed subspaces in step2.1, and continuous surjection in step2.2. No assertion is made that the empty Polish space is an image of the nonempty Baire space.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "If $X=\\varnothing$, take $X_0=\\varnothing$; all selector assertions are vacuous and any bounded scalar function has the zero Borel version agreeing on $X_0$. Otherwise choose Polish presentations of $X$ and $Y$ by",
+          "inputs": [
+            "F1",
+            "F7",
+            "F14",
+            "F2",
+            "F10"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Fix a bounded real Borel function $\\varphi$ and a relation $R$ as in the statement. The bounded set $\\{\\varphi(x,y):(x,y)\\in R\\}$ is nonempty for every $x$, so its supremum $m(x)$ exists by",
+          "inputs": [
+            "F8",
+            "F9",
+            "F2",
+            "F3",
+            "F10"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Fix a countable dense sequence $(a_i)_{i\\in\\mathbb N}$ in $Z$, an enumeration $(r_j)_{j\\in\\mathbb N}$ of the positive rationals, and a bijection $\\beta:\\mathbb N^2\\to\\mathbb N$ using",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Remove the Borel null union $N_\\varphi:=\\bigcup_{q\\in\\mathbb Q}N_q$ and put $X_\\varphi=X\\setminus N_\\varphi$. On $X_\\varphi$, $x\\in B_q$ iff $m(x)>q$. Define $\\widetilde m(x):=\\sup\\{q\\in\\mathbb Q:x\\in B_q\\}$ on $X_\\varphi$ and $\\widetilde m(x):=0$ off $X_\\varphi$. The rational density",
+          "inputs": [
+            "F5",
+            "F8",
+            "F4",
+            "F9",
+            "F12",
+            "1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "For each finite word $s$, let $P_s:=\\operatorname{proj}_X(F\\cap(X\\times U_s))$. The set inside the projection is Borel, so",
+          "inputs": [
+            "F2",
+            "2.1",
+            "F4",
+            "F10"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Define completion-measurable prefix cells by $C_\\varnothing=X$ and $C_{s^\\frown k}:=C_s\\cap P_{s^\\frown k}\\setminus\\bigcup_{j<k}P_{s^\\frown j}$; these select the least child containing $x$ and partition each parent cell, using the least-element property in",
+          "inputs": [
+            "F2",
+            "F3",
+            "F10",
+            "F13",
+            "F12",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "For $x\\in X_0$ and $n\\ge1$, let $s_n(x)$ be its unique selected word of length $n$ and let $c_n(x)$ be the centre of $U_{s_n(x)}$. Each $c_n$ is Borel because it is constant on the countable Borel partition $\\{B_s\\cap X_0:|s|=n\\}$: preimages of Borel sets are unions of the corresponding Borel cells by",
+          "inputs": [
+            "F4",
+            "F9",
+            "F13",
+            "F7",
+            "F10",
+            "F14",
+            "4.1"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "The limit map $z:X_0\\to Z$ is Borel. For a fixed nonempty closed $C\\subseteq Z$ and $m\\ge1$, put $V_m:=\\bigcup_{y\\in C}B(y,1/m)$ and $E_{n,m}:=\\{x\\in X_0:c_n(x)\\in V_m\\}$ for $n\\ge1$. The set $V_m$ is open; each $E_{n,m}$ is Borel because $c_n$ is constant on a countable Borel partition. Since $c_n(x)\\to z(x)$ and $C$ is closed, $z(x)\\in C$ exactly when, for every $m$, $c_n(x)\\in V_m$ eventually: if $z(x)\\notin C$, choose $\\varepsilon>0$ with $B(z(x),\\varepsilon)\\cap C=\\varnothing$, then choose $m$ with $1/m<\\varepsilon/2$ and take $n$ large enough that $d(c_n(x),z(x))<\\varepsilon/2$ and $c_n(x)\\in V_m$. Membership in $V_m$ gives $y\\in C$ with $d(c_n(x),y)<1/m$, so the triangle inequality puts $y$ inside $B(z(x),\\varepsilon)$, a contradiction. Thus $z^{-1}(C)=\\bigcap_{m\\ge1}\\bigcup_{N\\ge1}\\bigcap_{n\\ge N}E_{n,m}$ is Borel. The empty closed set has empty preimage, and closed-set preimages being Borel implies Borel measurability by",
+          "inputs": [
+            "F4",
+            "F9",
+            "F1",
+            "F7",
+            "5.1"
+          ]
+        },
+        {
+          "id": "derive-7.1",
+          "step": "7.1",
+          "claim": "For countably many relations and bounded Borel functions on the same base, repeat steps 4.1\u20136.1 for each relation and step 2.2 for each scalar function, then remove the union of their Borel null exceptions. The indices are countable: finite prefixes have the injective indices in",
+          "inputs": [
+            "4.1",
+            "6.1",
+            "2.2",
+            "F13",
+            "F5",
+            "F10",
+            "F12",
+            "F4",
+            "5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC, as used by the local closed-witness, Baire coding and Polish-product supplier. AC implies Countable Choice, the hypothesis for the completion-domain sigma-algebra. This proof also uses AC to choose Borel representatives for countably many completion-measurable prefix and rational-superlevel sets, a witness sequence in each fixed nonempty closed fibre, and the countably many outputs to be restricted to a common conull set. The least-child recursion itself is canonical; no selector on every point of the original base is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC, as used by the local closed-witness, Baire coding and Polish-product supplier. AC implies Countable Choice, the hypothesis for the completion-domain sigma-algebra. This proof also uses AC to choose Borel representatives for countably many completion-measurable prefix and rational-superlevel sets, a witness sequence in each fixed nonempty closed fibre, and the countably many outputs to be restricted to a common conull set. The least-child recursion itself is canonical; no selector on every point of the original base is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC, as used by the local closed-witness, Baire coding and Polish-product supplier. AC implies Countable Choice, the hypothesis for the completion-domain sigma-algebra. This proof also uses AC to choose Borel representatives for countably many completion-measurable prefix and rational-superlevel sets, a witness sequence in each fixed nonempty closed fibre, and the countably many outputs to be restricted to a common conull set. The least-child recursion itself is canonical; no selector on every point of the original base is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC, as used by the local closed-witness, Baire coding and Polish-product supplier. AC implies Countable Choice, the hypothesis for the completion-domain sigma-algebra. This proof also uses AC to choose Borel representatives for countably many completion-measurable prefix and rational-superlevel sets, a witness sequence in each fixed nonempty closed fibre, and the countably many outputs to be restricted to a common conull set. The least-child recursion itself is canonical; no selector on every point of the original base is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Boundary and source qualifications: Assume AC, as used by the local closed-witness, Baire coding and Polish-product supplier. AC implies Countable Choice, the hypothesis for the completion-domain sigma-algebra. This proof also uses AC to choose Borel representatives for countably many completion-measurable prefix and rational-superlevel sets, a witness sequence in each fixed nonempty closed fibre, and the countably many outputs to be restricted to a common conull set. The least-child recursion itself is canonical; no selector on every point of the original base is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no interval endpoint or biconditional parametrization."
+        }
+      ]
+    }
+  }
+}

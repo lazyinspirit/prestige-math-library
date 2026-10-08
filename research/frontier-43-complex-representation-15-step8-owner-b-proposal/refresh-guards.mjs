@@ -1,0 +1,14 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {itemHashGuard,itemHashJudge} from '../../tools/item-hash.mjs';
+const base='research/frontier-43-complex-representation-15-step8-owner-b-proposal';
+const canonical=x=>Array.isArray(x)?`[${x.map(canonical).join(',')}]`:x&&typeof x==='object'?`{${Object.keys(x).sort().map(k=>`${JSON.stringify(k)}:${canonical(x[k])}`).join(',')}}`:JSON.stringify(x);
+const hash=x=>createHash('sha256').update(x).digest('hex');
+const paths=['research/plan-spec.json','research/frontier-43-complex-representation-15-batch-2.pages.json','research/frontier-43-complex-representation-15-batch-4.pages.json','library/group-theory/amenable-groups-and-folner-criteria.md','library/group-theory/amenable-groups-and-folner-criteria-examples.md','library/representation-theory/amenability-reiter-nets-and-folner-conditions.md','library/representation-theory/amenability-reiter-nets-and-folner-conditions-examples.md','items/thm-subexponential-growth-implies-amenability.md','items/thm-hulanicki-weak-containment-criterion-for-amenability.md','items/thm-an-amenable-property-t-locally-compact-group-is-compact.md','items/cex-the-free-group-on-two-generators-is-not-amenable.md'];
+const guards=paths.map(path=>{const raw=readFileSync(path,'utf8');return {path,raw_sha256:hash(raw),...(path.endsWith('.json')?{canonical_sha256:hash(canonical(JSON.parse(raw)))}:{}),...(path.startsWith('items/')?{guard_sha256:itemHashGuard(raw),judge_sha256:itemHashJudge(raw)}:{})};});
+const proposal=JSON.parse(readFileSync(`${base}/resolutions.json`));
+const source= ['thomas-lecture19.txt','garrido-amenability.txt','breuillard-lecture1.txt'].map(name=>({path:`${base}/source-evidence/${name}`,raw_sha256:hash(readFileSync(`${base}/source-evidence/${name}`))}));
+const checks=proposal.guards.map(g=>{const raw=readFileSync(g.path);return {path:g.path,raw_guard_matches:hash(raw)===g.raw_sha256,canonical_guard_matches:hash(canonical(JSON.parse(raw)))===g.canonical_sha256};});
+writeFileSync(`${base}/current-evidence-guards.json`,JSON.stringify({version:1,run:proposal.run,group:'b',captured_at:new Date().toISOString(),writer_drain_evidence:"Root message confirms native run paused at 8-close and nothing running; refresh after that confirmation.",metadata_guards_rechecked:checks,evidence_guards:guards,source_evidence:source,writer_drain_confirmed_by_root:true},null,2)+'\n');
+if(checks.some(x=>!x.raw_guard_matches||!x.canonical_guard_matches))throw Error('Metadata guard mismatch; regenerate from fresh before inputs');
+console.log(JSON.stringify({metadata_guard_checks:checks.length,evidence_guards:guards.length,all_metadata_guard_matches:true,writer_drain_confirmed_by_root:true}));

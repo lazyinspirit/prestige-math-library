@@ -1,0 +1,24 @@
+# Historical Property T and Amenability escalation reconciliation
+
+Evidence-only snapshot completed at **2026-10-08T02:03:38.332Z**. Exactly ten historical subjects were selected by intersecting the current escalation inventory with the existing batch-2 and batch-4 manifests. Each current canonical content hash matches its previously recorded completed repair. The companion JSON records the exact current raw hashes and read times, historical review/owner paths, original finding, completed mathematical remedy, actual supplier mappings, historical local checks and a null remaining mathematical gap for every subject.
+
+| Historical subject | Finished finding closure |
+|---|---|
+| `lem-normal-relative-property-t-controls-distance-to-invariant-vectors` | Full compact-generator gap proved by canonical GNS coefficients, compact Hausdorff coefficient image, finite-variation DCT and Mazur/direct-sum contradiction; no extra neighborhood or topological hypothesis. |
+| `thm-sl-n-r-has-property-t-for-n-at-least-three` | Exact second quantitative supplier estimate reconciled at F3/Proof3.1; stale final-clause caveat removed after supplier closure. |
+| `cor-folner-sequences-for-second-countable-compactly-generated-groups` | False universal existence replaced by the sound amenability iff full promised sequence; native neighborhood/cofinal proof reviewed, actual n≥2m threshold and empty-test defect convention corrected. |
+| `thm-an-amenable-property-t-locally-compact-group-is-compact` | Finished arbitrary-LCH Hulanicki and mean route reconciled at F1/Proof1.1; regular invariant vector and finite-Haar-volume criterion close the unchanged claim. |
+| `lem-positive-measure-subsets-of-haar-measure-contain-finite-positive-measure-subsets` | Rich true finite-positive subset/compact detectability/positive L1 pairing equivalence proved; original non-semifinite counterexample retained. |
+| `lem-averages-over-probability-densities-attain-the-essential-supremum` | Signed local beta support, complex real-part/phase formula and continuous-test supremum proved; both original false-formula counterexamples retained. |
+| `lem-l1-probability-densities-are-weak-star-dense-in-the-mean-set` | Continuous-test density for every mean and full global-L∞ density for topological means proved by Cc witnesses and explicit smoothing/adjoint pairing; arbitrary-mean counterexample retained. |
+| `lem-reiter-functions-can-be-cut-down-to-folner-sets` | Full original single-f/arbitrary-positive-compact-Q/2epsilon claim proved by parity smoothing and integrated d_x≤d_a+d_xa/coarea selection, with derived 7epsilon/4 bound; zero-defect and arbitrary-target consequent covered. |
+| `prop-sl2-r-does-not-have-property-t` | Stable complementary weighted K-line and compact coefficient interfaces reconciled; one cofinal-sequence Hilbert direct sum has almost invariant vectors and no fixed vector. |
+| `cex-sl2-r-complementary-series-destroys-property-t` | Exact weighted nontrivial K-line, parameter-family coefficient/Fell convergence and repaired A-page direct-sum witness reconciled. |
+
+The JSON additionally binds the completed supporting UCB-to-topological-mean domain repair. Proof4.1 uses kernel independence and closure/associativity, keeping every mean argument in UCB; it never evaluates a UCB mean on an arbitrary unsmoothed L∞ function. The independently proved Day/Reiter/Hulanicki route continues to use that smoothing branch, rather than the formerly false all-means density assertion.
+
+This reconciliation reads the final repair addenda, not their superseded preparation-era holds. The normal-gap branch's two focused rounds remain consumed. The original Følner/cutdown and other branch caps are unchanged; no new mathematical round, source reread, repeated repair loop or proof audit was initiated. Existing owner decisions are recorded as read-only historical evidence, with their original bindings preserved; no current acceptance or certification is inferred merely from their `repaired` field.
+
+All ten current subjects match the completed canonical repair hashes, and the supporting UCB carrier also matches. No unresolved mathematical result remains in these ten exact historical findings. This does **not** certify every recursive supplier, another pair, the full run, or future native bytes. The parent must perform the final dependency-ordered **384-item pass after all resumed native writers drain**. Raw hashes below are explicitly point-in-time, not frozen receipts.
+
+The complete machine-readable artifact is `research/frontier-43-complex-representation-15-property-t-amenability-escalation-reconciliation.json`. No item, shared inventory, manifest, page, contract, coverage, decision, runtime or certification file was edited. These two distinct evidence artifacts are drained and ready for parent integration.

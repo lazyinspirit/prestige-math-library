@@ -22,7 +22,7 @@ sources:
       url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
       locator: "§§30A–30B, printed pp. 115–118"
 verification:
-  audited: 2026-09-27
+  repair: research/frontier-43-complex-representation-15-haar-inversion-local-repair/receipt.json
   precheck: pass
 ---
 
@@ -70,7 +70,7 @@ For such a complex function both sides are absolutely integrable.
 
 1.3 Identify the density on Borel sets. Put $w(x)=\Delta_G(x^{-1})>0$ and $\eta(E)=\int_Ew\,d\mu$. This is a nonzero Borel measure by [F9], finite on compact sets since $w$ is continuous. To prove outer regularity, only $\eta(E)<\infty$ needs consideration. Partition $E$ into $E_n=E\cap\{2^n\le w<2^{n+1}\}$ for $n\in\mathbb Z$. Then $\mu(E_n)\le2^{-n}\eta(E)<\infty$. Given $\epsilon>0$, choose positive $\epsilon_n$ with $\sum_n\epsilon_n<\epsilon$. Outer regularity of $\mu$ and [A1] give open $O_n\supseteq E_n$ contained in $\{w<2^{n+2}\}$ with $\mu(O_n\setminus E_n)<2^{-n-2}\epsilon_n$. Their union $O$ contains $E$ and satisfies $\eta(O\setminus E)\le\sum_n2^{n+2}\mu(O_n\setminus E_n)<\epsilon$. Thus $\eta(E)=\inf_{O\supseteq E\text{ open}}\eta(O)$; if $\eta(E)=\infty$ the equality is automatic. [A1, F2, F6, F7, F9]. [F9, A1, F2, F6, F7]
 
-2.1 For an open $U$, the functions $s_m=2^{-m}\sum_{k=1}^{m2^m}\mathbf1_{U\cap\{w>k2^{-m}\}}$ increase to $w\mathbf1_U$. For each finite sum, inner regularity of $\mu$ on its open level sets lets one approximate its integral from below using compact subsets of these sets. Their finite union $K\subseteq U$ is compact, and $\eta(K)$ is at least the sum of their weighted measures, since their weighted indicators sum to at most $w\mathbf1_K$. This holds also for arbitrarily large finite lower bounds if one of the open sets has infinite measure. Monotone convergence [F9] gives $\eta(U)=\sup_{K\subseteq U\text{ compact}}\eta(K)$. Therefore $\eta$ is Radon. By [F9] its $C_c$ integrals are $P$, so [F4] identifies $\eta=\sigma$ on all Borel sets. In particular $\sigma e0$ and $\int f\,d\sigma=\int fw\,d\mu$ for every nonnegative Borel $f$. [F4, F6, F9, step 1.2, step 1.3]. [F9, F4, F6, step 1.2, step 1.3]
+2.1 For an open $U$, the functions $s_m=2^{-m}\sum_{k=1}^{m2^m}\mathbf1_{U\cap\{w>k2^{-m}\}}$ increase to $w\mathbf1_U$. For each finite sum, inner regularity of $\mu$ on its open level sets lets one approximate its integral from below using compact subsets of these sets. Their finite union $K\subseteq U$ is compact, and $\eta(K)$ is at least the sum of their weighted measures, since their weighted indicators sum to at most $w\mathbf1_K$. This holds also for arbitrarily large finite lower bounds if one of the open sets has infinite measure. Monotone convergence [F9] gives $\eta(U)=\sup_{K\subseteq U\text{ compact}}\eta(K)$. Therefore $\eta$ is Radon. By [F9] its $C_c$ integrals are $P$, so [F4] identifies $\eta=\sigma$ on all Borel sets. In particular $\sigma\ne0$ and $\int f\,d\sigma=\int fw\,d\mu$ for every nonnegative Borel $f$. [F4, F6, F9, step 1.2, step 1.3]. [F9, F4, F6, step 1.2, step 1.3]
 
 2.2 $\nu(E):=\mu(E^{-1})$ is a right Haar measure: by step 1.1 applied to the homeomorphism $\theta(x)=x^{-1}$ it is Radon and nonzero, and for Borel $E$ and $a\in G$, $\nu(Ea)=\mu((Ea)^{-1})=\mu(a^{-1}E^{-1})=\mu(E^{-1})=\nu(E)$ by left invariance of $\mu$ and $(Ea)^{-1}=a^{-1}E^{-1}$. [F6, step 1.1]. [F6, step 1.1]
 

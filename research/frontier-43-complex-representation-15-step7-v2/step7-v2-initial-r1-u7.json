@@ -1,0 +1,195 @@
+{
+  "run": "frontier-43-complex-representation-15",
+  "phase": "initial",
+  "round": 1,
+  "unit": "7",
+  "input_sha256": "213f49668fe9a1811f00252dbb37991fb060239cf233142dbaebe75405f52be9",
+  "decisions": [
+    {
+      "id": "lem-bruhat-order-basic-properties-for-permutations",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "fbdce8b8d41a29e7b35f36adc2a22ab8c924133e13efbdec072a4a8f294a0f89",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Statement (e) falsely asserts its decomposition for noncomparable endpoints: in S_2, y=(0 1), w=id give [y,w]=empty, no eligible cover, and right side {y}. This is a logical falsehood, not a citation defect. Retained finiteness for all intervals and made only the decomposition conditional on y<=w; Proof 5.1 now explicitly uses y in [y,w].",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-bruhat-order-basic-properties-for-permutations",
+      "disposition": "repaired",
+      "post_sha256": "d845d2210f66a831fa42531ac6f386fe8cf8085e88a5358a971f0ea6fc4bc672",
+      "review_context_sha256": "6ad898292a1ac2df57494ad91f2bc9c141246ea1b634308e583b1a24174afcd1",
+      "reason": "Added y≤w only to the interval-cover decomposition, preserving every finite interval and all type-A order, grading, inverse, subword and lifting claims. With y in [y,w], every other point has a first saturated cover and transitivity gives both set inclusions; y=w gives a singleton with empty cover union. Checked the complete local rank-window/paired-descent induction and the finite-Weyl subword supplier proof; the proof dependencies suffice and no AC is required. Owning manifest and contract mirror the correction. This is local review of the repair, not an independent audit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-bruhat-interval-and-r-polynomials",
+    "def-inverse-kazhdan-lusztig-polynomials",
+    "ex-kazhdan-lusztig-bases-for-s-two-and-s-three",
+    "ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval",
+    "lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges",
+    "lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations",
+    "lem-verma-sign-sum-over-bruhat-intervals",
+    "thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis",
+    "thm-kazhdan-lusztig-basis-multiplication-formula",
+    "thm-kazhdan-lusztig-inversion-formula",
+    "thm-kazhdan-lusztig-polynomial-recursion",
+    "thm-r-polynomial-recursion-and-degree-bounds"
+  ],
+  "downstream_reviews": [
+    {
+      "id": "def-bruhat-interval-and-r-polynomials",
+      "path": "items/def-bruhat-interval-and-r-polynomials.md",
+      "affected_use": "Let $n\\ge1$ and $y,w\\in S_n$. The **Bruhat interval** $[y,w]:=\\{z\\in S_n:y\\le z\\le w\\}$ is finite, with Bruhat order as in [[lem-bruhat-order-basic-properties-for-permutations]] and [[def-bruhat-order-on-the-symmetric-group]]. The rank-order definition uses the zero-based model of $S_n$, while $H_v(n)$ uses the one-based model; throughout, identify them by the order-preserving shift $i\\mapsto i+1$ on inputs and values.",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "def-inverse-kazhdan-lusztig-polynomials",
+      "path": "items/def-inverse-kazhdan-lusztig-polynomials.md",
+      "affected_use": "For $x,w\\in S_n$ set $$q'_{x,w}:=\\sum_{m\\ge0}(-1)^m\\sum_{x=z_0<z_1<\\cdots<z_m=w}p_{z_0,z_1}p_{z_1,z_2}\\cdots p_{z_{m-1},z_m}\\in A,$$ where the inner sum is over strictly increasing Bruhat chains from $x$ to $w$, the $m=0$ chain occurs only when $x=w$, and $p_{u,v}$ are the coefficients of the Kazhdan–Lusztig basis ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]). Every chain lies in a finite Bruhat interval by [[lem-bruhat-order-basic-properties-for-permutations]], so the sum is finite. If $x\\not\\le w$ there are no chains; if $x=w$, the empty chain gives $q'_{w,w}=1$. If $x<w$, each chain has at least one factor $p_{u,v}\\in v\\mathbb Z[v]$ with $u<v$, so $q'_{x,w}\\in v\\mathbb Z[v]$.",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "ex-kazhdan-lusztig-bases-for-s-two-and-s-three",
+      "path": "items/ex-kazhdan-lusztig-bases-for-s-two-and-s-three.md",
+      "affected_use": "[F6] Bruhat order has the reduced-subword characterization and is graded by inversion length ([[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval",
+      "path": "items/ex-r-polynomial-and-kl-recursions-on-a-small-bruhat-interval.md",
+      "affected_use": "[F1] Bruhat order is graded by inversion length, has the reduced-subword characterization and prefix-rank criterion, and satisfies the lifting implication: if $y\\le z$, $sy>y$, and $sz<z$, then $y\\le sz$ ([[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges",
+      "path": "items/lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges.md",
+      "affected_use": "[F8] Bruhat order on $S_n$ has the reduced-subword characterization and is graded by inversion length ([[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations",
+      "path": "items/lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations.md",
+      "affected_use": "[F5] Every Bruhat cover $a\\lessdot b$ has $p_{a,b}=v$ and hence $\\mu(a,b)=1$; Bruhat order is graded, has the simple-reflection lifting properties, and is inversion invariant ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]], [[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]], [[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "lem-verma-sign-sum-over-bruhat-intervals",
+      "path": "items/lem-verma-sign-sum-over-bruhat-intervals.md",
+      "affected_use": "[F3] Bruhat order on $S_n$ is graded by $\\ell$ and has finite intervals; in particular $x<z$ implies $\\ell(x)<\\ell(z)$ ([[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis",
+      "path": "items/thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis.md",
+      "affected_use": "[F5] Bruhat order on $S_n$ is a finite graded order, strict inequalities raise length, and inversion preserves the order ([[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "thm-kazhdan-lusztig-basis-multiplication-formula",
+      "path": "items/thm-kazhdan-lusztig-basis-multiplication-formula.md",
+      "affected_use": "[F4] Bruhat order has the reduced-subword characterization and left lifting properties, and is preserved by inversion ([[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "thm-kazhdan-lusztig-inversion-formula",
+      "path": "items/thm-kazhdan-lusztig-inversion-formula.md",
+      "affected_use": "[F3] Bruhat intervals in $S_n$ are finite ([[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "thm-kazhdan-lusztig-polynomial-recursion",
+      "path": "items/thm-kazhdan-lusztig-polynomial-recursion.md",
+      "affected_use": "[F5] Bruhat order is graded by $\\ell$, simple reflections change length by one, inversion preserves Bruhat order and length, and Bruhat comparison is characterized by reduced subwords; in particular $[\\mathrm{id},s]=\\{\\mathrm{id},s\\}$ for a simple reflection ([[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    },
+    {
+      "id": "thm-r-polynomial-recursion-and-degree-bounds",
+      "path": "items/thm-r-polynomial-recursion-and-degree-bounds.md",
+      "affected_use": "[F3] Bruhat order is graded by $\\ell$, has the reduced-subword characterization, and satisfies the two lifting implications in part (d) below ([[lem-bruhat-order-basic-properties-for-permutations]]).",
+      "disposition": "unaffected",
+      "reason": "The consumed finite-interval, gradedness, subword, inversion or lifting clause is unchanged; this use does not invoke the unqualified interval-cover decomposition."
+    }
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-bruhat-order-basic-properties-for-permutations",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "disposition": "fixed",
+      "reason": "Statement (e) falsely asserts its decomposition for noncomparable endpoints: in S_2, y=(0 1), w=id give [y,w]=empty, no eligible cover, and right side {y}. This is a logical falsehood, not a citation defect. Retained finiteness for all intervals and made only the decomposition conditional on y<=w; Proof 5.1 now explicitly uses y in [y,w].",
+      "evidence_path": "research/frontier-43-complex-representation-15-step7-v2/step7-v2-initial-r1-u7.json",
+      "source_urls": [],
+      "familiar": true,
+      "uncertain": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "Rank inequalities on zero-based S_n, transported to one-based inversion length and type-A strong Bruhat order. Parts (a)-(d) unchanged; all intervals finite; cover-union identity now requires y<=w.",
+    "local_sources_read": [
+      "items/def-bruhat-order-on-the-symmetric-group.md: Definition",
+      "items/def-bruhat-order-on-a-finite-weyl-group.md: Definition, Facts & Assumptions and complete Proof 1.1-5.1",
+      "items/def-finite-symmetric-group-and-permutation-notation.md: Definition",
+      "items/def-weyl-group-and-length-for-finite-gl-n.md: Definition",
+      "items/def-finite-weyl-root-system-lattice-and-chamber-conventions.md: Definition"
+    ],
+    "mathematical_checks": "Checked type-A reflections and inversion length, cover rank windows, paired descent rank lifting, decreasing induction and prefixed reduced subwords, inverse-transposed ranks, both lifting implications, and the finite first-cover interval decomposition. No AC is used. This is local adjudication and repair, not independent review of the repair.",
+    "interface_change": "Exact Statement edit replaces the conjunction asserting the decomposition for every [y,w] with an explicit if y<=w clause. The twelve direct item consumers and owning page were examined; no consumer calls the erroneous unconditional decomposition. All twelve are draft frozen-frontier subjects; no outside or published consumer was found. The page summary introduces Bruhat order without asserting the interval decomposition and requires no change.",
+    "published_ledger_updates": "None: no published mathematical defect or outside-frontier affected use was found.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-bruhat-order-basic-properties-for-permutations.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 checked proof, 0 failed; direct strategy pass"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-bruhat-order-basic-properties-for-permutations.md --json",
+        "exit_code": 0,
+        "result": "1 checked file; no errors or warnings"
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /tmp/step7-u7-items.json --json",
+        "exit_code": 0,
+        "result": "Focused assigned item and its home page; 0 errors and 0 warnings; prerequisite graph closure checked."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-43-complex-representation-15-batch-7.proof-contracts.json --strict --items lem-bruhat-order-basic-properties-for-permutations --json",
+        "exit_code": 0,
+        "result": "Assigned contract checked; ok=true, 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-bruhat-order-basic-properties-for-permutations.md",
+        "exit_code": 0,
+        "result": "1 item, 6 numbered steps, 0 defects."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this evidence and routes ordinary frontier consumer reviews; no local worker, rejudge, certificate, stamp or round transition was launched.",
+    "exact_edit_verification": {
+      "recovered_before_raw_sha256": "b2150dbf503cbfe74bc8668a78d64d59da2058d1fab15859dbe1c5ebef41d430",
+      "assigned_before_guard": "08d11c02f098954f07d5fcf485491fdf53d73f5e5cfa2a50405a037ce197af6f",
+      "description": "Inverting exactly the Statement (e) qualifier and the Proof 5.1 hypothesis sentence recovers the rejected carrier raw SHA-256. All other item bytes are preserved."
+    }
+  }
+}

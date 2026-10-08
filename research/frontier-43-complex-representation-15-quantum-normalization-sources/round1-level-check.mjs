@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import {dependencyLevels,runPages} from '../../tools/item-dependency-levels.mjs';
+const run='frontier-43-complex-representation-15';
+const own=JSON.parse(fs.readFileSync('research/'+run+'-batch-6.pages.json','utf8'));
+const all=runPages(process.cwd(),run);
+const out=dependencyLevels(all,{validateLabels:false});
+const ids=own.flatMap(p=>p.items.map(i=>i.id));
+const errors=own.flatMap(p=>p.items.filter(i=>i.dependency_level!==out.levels.get(i.id)).map(i=>i.id+': label '+i.dependency_level+' != computed '+out.levels.get(i.id)));
+for(const e of out.errors)if(ids.some(id=>e.includes(id)))errors.push(e);
+console.log(JSON.stringify({scope:ids,checked:ids.length,errors,max_level:Math.max(...ids.map(id=>out.levels.get(id)))},null,2));
+process.exitCode=errors.length?1:0;

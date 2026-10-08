@@ -4144,7 +4144,10 @@ used here; otherwise none.
 ## CA-QC-2. The Beltrami Equation and Measurable Riemann Mapping
 
 Proposed id `beltrami-equation-and-measurable-riemann-mapping`. `requires`:
-CA-QC-1, FA-8--FA-10 for weak compactness, and the PDE-11 Sobolev interface.
+CA-QC-1, FA-8--FA-10 for weak compactness, the PDE-11 Sobolev interface,
+and `schauder-and-lp-elliptic-estimates` for Hölder completeness and its
+Newtonian-potential prerequisite closure. The latter page supplies no
+first-order Beltrami theorem by itself; the local suppliers below must be proved.
 
 | id | kind | one-line statement |
 |---|---|---|
@@ -4152,6 +4155,9 @@ CA-QC-1, FA-8--FA-10 for weak compactness, and the PDE-11 Sobolev interface.
 | `def-weak-solution-beltrami-equation` | def | A $W^{1,2}_{\rm loc}$ map solves $f_{\bar z}=\mu f_z$ in distributions; the definition is representative- and chart-independent. |
 | `thm-measurable-riemann-mapping-sphere` | thm | Every such $\mu$ on $\widehat{\mathbb C}$ has an orientation-preserving quasiconformal solution, unique after fixing $0,1,\infty$. |
 | `cor-local-integrability-beltrami-structures` | cor | Every measurable conformal structure on a plane domain has local quasiconformal coordinates. |
+| `lem-local-holder-cauchy-transform-estimate` | lem | For fixed compact support, $Tq=-4\partial_zNq$ has $\partial_{\bar z}Tq=q$, $Sq=\partial_zTq$, and $\|Sq\|_{C^{k,\alpha}(\mathbb C)}\le C_{k,\alpha}\|q\|_{C^{k,\alpha}(\mathbb C)}$; all derivative identities and the fixed-support norm bounds are proved from the Newtonian potential. |
+| `lem-nondegenerate-local-holder-beltrami-coordinates` | lem | Every $C^{k,\alpha}$ coefficient with $|\mu|<1$ has local $C^{k+1,\alpha}$ Beltrami coordinates with positive Jacobian, obtained by affine freezing, rescaling, cutoff, and a small Hölder-norm contraction. |
+| `lem-weak-beltrami-factorization-in-holder-coordinates` | lem | Every $W^{1,2}_{\rm loc}$ solution factors locally as $h\circ\Phi$ in those coordinates with $h$ holomorphic, and consequently has a $C^{k+1,\alpha}$ representative; injectivity is not required for regularity. |
 | `thm-holder-regularity-beltrami-solutions` | thm | If $\mu\in C^{k,\alpha}_{\mathrm{loc}}$ with $k\ge0$ and $0<\alpha<1$, then the normalized solution is a local $C^{k+1,\alpha}$ diffeomorphism; the theorem makes no unspecified Sobolev bootstrap claim. |
 
 Companion: constant coefficients and affine solutions; piecewise-affine
@@ -4167,6 +4173,32 @@ approximation/normalized-compactness route and prove passage
 of dilatations to the limit. If a future build instead chooses the Beurling
 transform, it must first supply its $L^p$ bounds and invertibility of
 $I-\mu S$; “standard singular integral theory” is not a proof.
+
+Regularity authoring direction (owner resolution, run
+`frontier-43-complex-representation-15`): place the three displayed local
+lemmas, in their displayed dependency order, on this A page immediately
+before `thm-holder-regularity-beltrami-solutions`. The measurable existence
+theorem retains its approximation/compactness proof. The local Cauchy
+operator used only for regular coefficients requires the explicitly proved
+fixed-support Hölder bound above, not an assumed global $L^p$ Beurling bound
+or a measurable-coefficient inversion. Freeze $\mu(p)$ using
+$w=z+\mu(p)\bar z$; the transformed coefficient is
+$\nu(w)=(\mu(z)-\mu(p))/(1-\overline{\mu(p)}\mu(z))$, with
+$z$ the affine inverse. Rescale and cut off this vanishing coefficient on a
+fixed disk so its full $C^{k,\alpha}$ norm tends to zero. Solve
+$q=\nu(1+Sq)$ in the closed fixed-support Hölder space and set
+$\phi=\mathrm{id}+Tq$. Smallness controls $D\phi-I$, yielding a genuine
+local diffeomorphism before any weak solution is used. Pull weak solutions
+back through this chart using the published Sobolev change-of-coordinate
+lemma, then apply Laplacian Weyl to obtain a holomorphic factor. For the
+normalized homeomorphic solution this factor is injective, hence has
+nowhere-zero derivative, giving $J_f=|h'\circ\Phi|^2J_\Phi>0$.
+The inverse has the same Hölder order by the inverse derivative identity
+and induction. Exact dependencies, norm details and source-retrieval
+evidence are recorded in
+`research/frontier-43-complex-representation-15-beltrami-step1-resolution.md`.
+This is a complete authoring plan, not a claim that the local lemmas already
+have authored or independently accepted proofs.
 
 Forward references: CA-QC-3 consumes this pair but is not used here; otherwise
 none.
@@ -5430,7 +5462,7 @@ direct A requirements below supersede the informal ranges above.
 | CA-RS-3 `periods-jacobians-and-abel-jacobi-theory` | CA-RS-2; `cw-complexes-and-cellular-homology`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `the-de-rham-theorem-and-degree`; `hilbert-space-geometry-and-riesz-representation`; topology's compact-surface-classification page |
 | CA-RS-4 `hyperbolic-riemann-surfaces-and-uniformization` | CA-RS-1; CA-HM-1; `conformal-mapping-branches-and-the-schwarz-lemma`; `the-riemann-mapping-theorem`; `covering-spaces-and-lifting`; `classification-of-covering-spaces`; `harmonic-functions-and-mean-values-in-rn` |
 | CA-QC-1 `extremal-length-and-planar-quasiconformality` | `conformal-mapping-branches-and-the-schwarz-lemma`; `normal-families-and-montels-theorem`; CA-PT-1; `complex-lp-spaces-and-test-function-conventions`; `weak-derivatives-and-sobolev-spaces`; `smooth-approximation-and-sobolev-extension`; `harmonic-functions-and-mean-values-in-rn` |
-| CA-QC-2 `beltrami-equation-and-measurable-riemann-mapping` | CA-QC-1; `weak-and-weak-star-topologies`; `banach-alaoglu-goldstine-and-krein-milman`; `reflexivity-and-eberlein-smulian`; `weak-derivatives-and-sobolev-spaces`; `smooth-approximation-and-sobolev-extension` |
+| CA-QC-2 `beltrami-equation-and-measurable-riemann-mapping` | CA-QC-1; `weak-and-weak-star-topologies`; `banach-alaoglu-goldstine-and-krein-milman`; `reflexivity-and-eberlein-smulian`; `weak-derivatives-and-sobolev-spaces`; `smooth-approximation-and-sobolev-extension`; `schauder-and-lp-elliptic-estimates` |
 | CA-QC-3 `quasisymmetry-welding-and-conformal-removability` | CA-QC-2; `the-riemann-mapping-theorem`; CA-PT-1; `hausdorff-measure-and-hausdorff-dimension` |
 | SC-5 `the-dbar-complex-and-integral-solutions` | `holomorphic-functions-of-several-variables`; `the-hartogs-phenomena`; `holomorphic-inverse-and-weierstrass-preparation`; `domains-of-holomorphy-and-pseudoconvexity`; `tensor-fields-exterior-algebra-and-differential-forms`; `the-exterior-derivative-and-cartan-calculus`; `integration-of-forms-and-the-general-stokes-theorem`; `distributions-test-functions-and-differentiation` |
 | SC-6 `hormander-estimates-and-the-levi-problem` | SC-5; `domains-of-holomorphy-and-pseudoconvexity`; `complex-lp-spaces-and-test-function-conventions`; `hilbert-space-geometry-and-riesz-representation`; `weak-and-weak-star-topologies`; `reflexivity-and-eberlein-smulian`; `unbounded-self-adjoint-operators-and-stones-theorem`; `weak-derivatives-and-sobolev-spaces`; `smooth-approximation-and-sobolev-extension` |

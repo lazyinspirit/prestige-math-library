@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "run": "frontier-43-complex-representation-15",
+  "scope": "Private proposal validation only; no native gate or shared carrier write",
+  "checks": [
+    {
+      "command": "node tools/defect-ledger.mjs validate --run frontier-43-complex-representation-15 --ledger research/frontier-43-complex-representation-15-step5-stabilized-carrier-review/selected-ledger-validation.jsonl",
+      "exit": 0,
+      "output": "defect-ledger: 5 defect row(s) checked, 0 error(s)"
+    },
+    {
+      "command": "Inline node --input-type=module guard check against review.json and proposed-decisions.json",
+      "exit": 0,
+      "output": "PASS: 142 exact current-carrier decisions;115 risk-only+24 unchanged-item enrichments+1 bibliographic+2 repairs. Original refuter3 and reader/refuter12 observations match actual immutable post carriers. Sources remain current. No native gate/check performed.",
+      "checks": [
+        "Every bound native source/report/dispatch/contract/manifest/snapshot raw hash remains current.",
+        "Each proposed subject_sha256 matches canonical hashValue of its recorded current carrier; target identity and added:false are correct; no duplicate obligations occur.",
+        "Every reviewed_no_defect proposal has metadata/audit_enrichment and empty defect_ids; both amended repairs have confidence1 and exact same-defect links.",
+        "refuter:3:1 observed_sha256 equals the immutable post item/contract/manifest triple digest.",
+        "reader:12:1 and refuter:12:1 observed_sha256 equal the immutable post page file/manifest digest, excluding item_order as required by the native schema."
+      ]
+    }
+  ],
+  "development_errors": [
+    "Attempted help at nonexistent tools/validate-defect-ledger.mjs produced MODULE_NOT_FOUND. Located the actual tools/defect-ledger.mjs validate CLI; its selected-history/new-row validation passed.",
+    "Private proposal generation initially marked the page target added:true by testing its page ID against item inventory. Self-review corrected added:false before handoff, matching stabilizedObligations' item-addition membership semantics. No shared decision or native snapshot was changed."
+  ],
+  "proposal_sha256": "027b1a9ccb75edc8c8162065a7575ed582517e14b5b2451ddcc47f403e60b976",
+  "review_sha256": "962fadaefcb48b7904a2a8b66e97cb4c7a0143780fa782158133dc1f0cda6f32",
+  "pending": "Root merges the proposals and guarded original decision-reference changes, appends only the two new ledger rows through the official tool, then performs normal native stamping and full adjudication gates after writers drain. These private checks do not claim gate acceptance."
+}

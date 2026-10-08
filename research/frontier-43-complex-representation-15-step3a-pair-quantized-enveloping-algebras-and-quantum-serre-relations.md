@@ -1,0 +1,371 @@
+# Step 3a dispatch report — `quantized-enveloping-algebras-and-quantum-serre-relations`
+
+- Run: `frontier-43-complex-representation-15` (batch 6, orders 1524/1525,
+  category `special-topics-in-representation-theory`; design label QG-1 of the
+  Quantum Groups and Crystal Bases track).
+- Pair: A `quantized-enveloping-algebras-and-quantum-serre-relations`
+  (21 items: 6 definitions, 10 lemmas, 5 theorems; dependency levels 0–15),
+  B `quantized-enveloping-algebras-and-quantum-serre-relations-examples`
+  (4 items: 3 examples, 1 counterexample; levels 7 and 16).
+- Role: alpha scope review of this pair only. No scaffold was edited; this
+  report and the `record-scope` receipt are the only outputs. This is not an
+  item approval, not a proof audit, and not an owner record.
+- Decision: **`sufficient`** for the pair's promised scope (all design ids
+  present, source coverage adequate after the record repair flagged in §3,
+  no confirmed unmet prerequisite; two clarification-level prerequisite
+  findings and non-blocking owner observations in §4–§5).
+- Date: 2026-10-07.
+
+## 1. Inputs read
+
+- Manifest: `research/frontier-43-complex-representation-15-batch-6.pages.json`
+  (both pages, all 25 items with statements, strategies, kinds, deps and
+  levels); coverage: `…-batch-6.coverage.json`; notes: `…-batch-6.notes.md`
+  (Step-1 reconciliation and the scaffold's own correction list); dependency
+  record: `…-batch-6.cross-batch-dependencies.json` (`[]`); scope ledger
+  `…-scope-ledger.json` (both pages owed, batch 6); gate page list
+  `…-frontier-gate-pages.json` (both pages selected).
+- Design/prose: `research/plan-quantum-groups-track.md` §QG-1 (lines 49–85,
+  the 20-item proposed inventory and its proof joints), the QG-1 companion
+  sentence (lines 82–85), and the B inventory `### QG-1 examples` (lines
+  256–262); `research/quantum-groups-planning/pages.json` and
+  `proposed-items.json` (design records); `research/plan-spec.json` rows
+  1524/1525 (ids, orders, titles, kind, category, companion and the five
+  `requires` — all identical to the manifest; both plan `items` arrays are
+  empty, so the batch manifest is the inventory of record pre-splice).
+- Owner/run records: `…-owner-authoring-direction.md` (no batch-6 clause; the
+  cross-cutting prohibitions on `proved_here: false`, `not-supplied`,
+  `external_refs` and external-dependency substitutes are respected — 0 hits
+  in the manifest), `…-alpha-step1-drift.md` lines 76–78 (the drift-applied
+  `free-groups-and-presentations` edge, reproduced in plan-spec and manifest),
+  and the 25 current `research/…-step1-<id>.json` readiness records (all
+  reader `ready`, 25/25).
+- Sources: all four coverage sources re-fetched live from this environment
+  and their bodies inspected; see §3 for the one record defect found.
+
+## 2. Design ∶ scaffold comparison (scope only)
+
+All 20 design QG-1 rows are present with their designed ids and kinds, in the
+design's proof order; the scaffold adds exactly one local support item, which
+the design text itself asks for.
+
+| design row (QG-1, lines 53–75) | manifest item | kind |
+|---|---|---|
+| root-datum-faithful symmetrizable Cartan datum, `q_i=q^{d_i}` | `def-symmetrizable-cartan-datum-for-a-quantum-group` | definition |
+| `[n]_i`, Gaussian coefficients, divided powers, published-convention reconciliation | `def-quantum-integers-factorials-and-divided-powers-at-q-i` | definition |
+| q-Pascal recurrences and Gaussian integrality | `lem-quantum-pascal-recurrence-and-gaussian-integrality` | lemma |
+| Gaussian expansion of `(x+y)^n` for `yx=txy` | `lem-q-binomial-expansion-for-q-commuting-elements` | lemma |
+| bialgebra and Hopf algebra over a commutative ring | `def-bialgebra-counit-and-antipode` | definition |
+| antipode uniqueness as a convolution inverse | `lem-an-antipode-is-unique` | lemma |
+| Drinfeld–Jimbo presentation incl. both quantum Serre sums | `def-drinfeld-jimbo-quantized-enveloping-algebra` | definition |
+| bar, Chevalley and contravariant anti-involution on all relations | `lem-quantum-serre-relations-are-stable-under-the-chevalley-involutions` | lemma |
+| coproduct expansion of the Serre sums, bidegree cancellation | `lem-coproduct-preserves-the-positive-and-negative-quantum-serre-ideals` | lemma |
+| fixed coproduct convention, Hopf axioms verified on generators | `thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra` | theorem |
+| `U_q^+`, `U_q^-`, `U_q^0` and root gradings | `def-positive-negative-and-toral-quantum-subalgebras` | definition |
+| formal shuffle Borel incl. the `DA` principal minor | `def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum` (+ split-out `lem-nonsingular-principal-minor-of-the-symmetrized-cartan-matrix`) | definition (+ lemma) |
+| Serre sums vanish in the shuffle algebra; opposite ideal in the pairing radical | `lem-quantum-serre-sums-vanish-in-the-formal-quantum-shuffle-algebra` | lemma |
+| two-sided coideal generated by its primitive part | `lem-a-two-sided-coideal-in-an-enveloping-algebra-is-generated-by-its-primitive-part` | lemma |
+| dual Borels (Deodhar–Gabber–Kac input) | `lem-opposite-symmetrizable-kac-moody-borels-are-root-degreewise-dual-lie-bialgebras` | lemma |
+| formal embedding, freeness, classical limit | `thm-the-formal-quantum-serre-half-embeds-in-the-quantum-shuffle-algebra-and-is-degreewise-free` | theorem |
+| generic PBW ranks and nondegenerate braided Hopf pairing | `thm-generic-quantum-serre-halves-have-classical-pbw-ranks-and-a-nondegenerate-hopf-pairing` | theorem |
+| crossed double and inverse maps | `lem-the-generic-borel-half-and-opposite-half-form-a-dj-crossed-double` | lemma |
+| triangular decomposition `U_q^-⊗U_q^0⊗U_q^+ → U_q(g)` | `thm-triangular-decomposition-of-a-quantized-enveloping-algebra` | theorem |
+| divided-power commutation formula and simple `U_{q_i}(sl_2)`-modules | `thm-quantized-sl-two-string-formulas` | theorem |
+
+The one addition (`lem-nonsingular-principal-minor…`) is the matrix fact the
+design folds into the shuffle-Borel row ("prove that the symmetric matrix `DA`
+has a nonsingular `r`-by-`r` principal minor … use it to choose the extended
+Cartan coordinates"); it is scaffolded separately so that it precedes both of
+its consumers (`def-formal-quantum-shuffle-borel…` and
+`lem-opposite-…-dual-lie-bialgebras`), and both consumers are inside the pair.
+That split is recorded in the batch notes (item 2 of "Design / plan
+reconciliation") and is not a scope expansion.
+
+The four designed B items are present with the designed ids and kinds:
+`ex-quantized-sl-two-relations-coproduct-and-antipode`,
+`ex-quantum-serre-calculation-in-type-a-two`,
+`ex-the-double-edge-quantum-serre-relation-for-affine-a-one`,
+`cex-unsymmetrized-q-parameters-break-the-cartan-normalization` — exactly the
+"explicit `U_q(sl_2)`, type `A_2`, `e=2` cyclic Cartan calculation and
+unsymmetrized-parameter counterexample" of design lines 84–85 and 256–262.
+
+Conventions announced by the design are all visible in the manifest: ordinary
+symmetrizable generalized Cartan datum with no imaginary simples; `q`
+transcendental and everything over `Q(q)` before specialization; singular `A`
+allowed (`def-symmetrizable-cartan-datum…` says so explicitly, which the
+`e=2` affine case needs); the formal part over `C[[ℏ]]` with `q=e^ℏ`; and no
+root-of-unity phenomena (the coverage's `out-of-scope` row for
+`Rep(U_q sl(2))` at a root of unity gives the design's reason).
+
+## 3. Source coverage
+
+All four coverage sources were re-fetched live from this environment on
+2026-10-07 and have their stamps reproduced byte-for-byte:
+
+| source | bytes | sha256-16 | pages | reproduced |
+|---|---|---|---|---|
+| Borcherds–Haiman–Johnson-Freyd–Reshetikhin–Serganova, *Berkeley Lectures on Lie Groups and Quantum Groups* | 2 118 866 | `ffeb74a5a0304b6f` | 364 | yes, and the body is the cited book |
+| Enriquez, *PBW and Duality Theorems for Quantum Groups and Quantum Current Algebras* | 436 680 | `00731481131cc731` | 44 | yes, body matches title |
+| Jeong–Kang–Kashiwara, *Crystal Bases for Quantum Generalized Kac–Moody Algebras* | 503 316 | `f873e27305536ded` | 60 | yes, body matches title |
+| Etingof–Semenyakin, *A Brief Introduction to Quantum Groups* (recorded CMSA URL) | 595 075 | `61a1445f50d7ef09` | **162** (recorded 43) | **no — see the defect below** |
+
+What I read in the three clean sources (complete relevant passages):
+
+- Berkeley Ch. 13 §13.1.3, printed pp. 308–309 (PDF pages 321–322):
+  the quantized Serre elements `Serre^{\pm}_{ij}` with
+  `\binom{1-a_{ij}}{s}_{q_i}` (13.1.3.8–13.1.3.9), the quasiprimitivity of
+  `Serre^+_{ij}` with grouplike factors (Lemma 13.1.3.9), the Hopf ideal
+  (Corollary 13.1.3.10), the full presentation with `K_i`,
+  `K_iE_j=q^{b_{ij}}E_jK_i`, `[E_i,F_j]=δ_{ij}(K_i-K_i^{-1})/(q_i-q_i^{-1})`
+  and both Serre sums (Definition 13.1.3.12), and the quantum triangular
+  decomposition `U_qn^-⊗U_qh⊗U_qn^+ ≅ U_qg` (Theorem 13.1.3.22). These back
+  the definition, the Serre-stability/coproduct items, the Hopf theorem and
+  the triangular decomposition. Berkeley Ch. 12 Remark 12.1.2.3 (printed
+  p. 274) states "The antipode is unique if it exists" — the citation for
+  `lem-an-antipode-is-unique`; Ch. 12 §12.2.1, Theorem 12.2.1.5 (printed
+  p. 276) gives the `(n+1)`-dimensional irreducibles `V_{n,ϵ}` of `U_qsl(2)`
+  for `q` not a root of unity with the `[k]_q` actions — the backing for
+  `thm-quantized-sl-two-string-formulas` and the `sl_2` example.
+- Enriquez §1.1, printed pp. 22–24 (PDF pages 1–3): the Serre presentation
+  display (1), Theorem 1.1 (freeness and `U_ℏn^+/ℏ ≅ Un^+`), Corollary 1.1
+  (`p_ℏ` is an isomorphism onto `⟨V⟩ ⊆ Sh(V)`), the braided pairing with
+  normalisation `⟨e_i,f_{i'}⟩=ℏ^{1-d_i}δ_{ii'}` and both adjunction rules,
+  Theorem 1.2 (nondegeneracy) and Corollary 1.2 (generic transfer). §2.1,
+  printed p. 31 (PDF page 10): the shuffle algebra, the crossed products
+  `V` and `S` with the `2n-r` derivation symbols, the formula
+  `Δ_V([v_{i_1}|…|v_{i_m}]) = Σ_k [v_{i_1}|…|v_{i_k}] ⊗ exp(ℏΣ_{j≤k} d_{i_j}h^V_{i_j})[v_{i_{k+1}}|…|v_{i_m}]`
+  and the statement that `S` is a Hopf `C[[ℏ]]`-algebra with completed tensor
+  products. These back the shuffle-Borel, pairing-rank and formal-embedding
+  items.
+- JKK §1, printed pp. 5–6 (PDF pages 4–5): the `q_i`, `[n]_i`, Gaussian
+  input-symmetric binomials and divided powers (1.1), Definition 1.2 with
+  `K_i=q^{s_ih_i}`, the relations (1.4), the coproduct/antipode formulas
+  (1.6) — `Δ(e_i)=e_i⊗K_i^{-1}+1⊗e_i`, `Δ(f_i)=f_i⊗1+K_i⊗f_i`,
+  `S(e_i)=-e_iK_i`, `S(f_i)=-K_i^{-1}f_i` — and the triangular decomposition
+  (1.7). The manifest's conventions are exactly JKK's, so the presentation,
+  Hopf and triangular-decomposition claims carry an independent check of the
+  convention-sensitive signs.
+
+The coverage file carries 44 harvested rows with dispositions (30 `included`,
+6 `inline`, 4 `deferred`, 4 `out-of-scope`); `coverage-checklist
+--require-destination` passes with 0 errors/0 warnings, and the four
+`deferred` destinations (`divided-powers-integral-forms-and-quantum-highest-weights`,
+`quantum-affine-type-a-and-level-one-fock-space`) resolve in `plan-spec.json`.
+The four `out-of-scope` rows each carry a source-grounded reason. The coverage
+file carries the A page only; that is the A-only variant used by 9 of this
+run's 15 batches (batches 3, 4, 6, 8, 11–15), and every B item nevertheless
+carries 2–3 source references in the manifest.
+
+**Defect found — fourth source record (confirmed, record-level).** The
+recorded URL `https://cmsa.fas.harvard.edu/media/Etinghof_skoltechlect2-1.pdf`
+no longer serves Etingof–Semenyakin, *A Brief Introduction to Quantum
+Groups*. Re-fetched from this environment it returns 595 075 bytes,
+sha256-16 `61a1445f50d7ef09` — i.e. the recorded stamp reproduces exactly —
+but the body is a different 162-page document, Pavel Etingof,
+*Representations of Lie Groups* (server `last-modified: 2025-11-20`), which
+contains **zero** occurrences of "Hopf", "antipode" or "coproduct"; the
+recorded "pages: 43" also does not match the served file. So the stamp
+certifies the wrong file and cannot back the five items that cite this
+source (`def-bialgebra-counit-and-antipode`, `lem-an-antipode-is-unique`,
+`thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra`,
+`thm-quantized-sl-two-string-formulas`,
+`ex-quantized-sl-two-relations-coproduct-and-antipode`). The intended notes
+exist in a stable, verified form as arXiv:2106.05252v3 (43 pages, 568 929
+bytes, sha256-16 `a106a2a908277850`), and I verified the cited content there:
+Definition 2.1 and Proposition 2.2(iv) on printed p. 4, Example 2.3(iv) with
+`S(e)=-eK^{-1}`, `S(f)=-Kf`, `S(K)=K^{-1}` and Remark 2.4 (`S²≠id`) on
+printed p. 5, and the `L_m=M_m/M_{-m-2}` exercise as §2.7 *Problems*,
+exercise (12), on printed p. 11 (exercise (7), well-definedness of `U_q(sl_2)`,
+on p. 10; exercise (11), the Verma/PBW computation, on p. 11). The manifest
+locator "§3.5, printed pp. 17–20, Exercise (12)" and the coverage row
+"§3.5, exercises (7),(11),(12) (printed pp. 10–11)" are therefore wrong about
+the section (§3.5 is "`U_q(sl_2)` at a root of unity", pp. 17–20; the quoted
+exercises are §2.7), and the manifest's p. 5 for Proposition 2.2(iv) is off
+by one (p. 4). Recommendation for the owner/Step 3b: re-point the source to
+the stable arXiv URL (or a re-hosted CMSA copy if found), re-stamp, and
+correct the locators to §2.1–2.2 (pp. 3–5) and §2.7 *Problems* (pp. 9–11,
+exercises (7), (11), (12)). This is a record repair, not a scope change:
+every one of the five affected items also cites Berkeley, JKK or Enriquez
+for the same claim, and I read those passages (§ above), so no claim is left
+with a single defective source.
+
+## 4. Dependency and unmet-prerequisite checks
+
+The pair declares 101 dependency edges: 56 in-batch (all inside these two
+pages; no B item supplies any item, so the B leaf rule holds) and 45 to
+external suppliers. The 57 distinct suppliers are 36 published items — every
+one present on disk with `status: published` — and the pair's own 21
+in-scaffold items. There are 0 missing ids, 0 non-published suppliers, 0
+cross-batch edges (`…-batch-6.cross-batch-dependencies.json` is `[]`), 0
+cycles/forward references (`item-dependency-levels` labels are 0–15 on the A
+page and 7/16 on the B page, in level order), and 0 dangling `[[…]]`
+wikilinks (the only unmatched patterns are `[[\hbar]]` inside `C[[ℏ]]`, a
+LaTeX artifact, not links). All five page-level `requires`
+(`kac-moody-algebras-from-generalized-cartan-matrices`,
+`tensor-products-of-modules`,
+`permutation-statistics-inversions-and-eulerian-numbers`,
+`harish-chandra-isomorphism-casimir-and-central-characters`,
+`free-groups-and-presentations`) are published library pages, and the fifth
+is the drift-applied edge for `def-free-abelian-group`. No other page or item
+of this run consumes the pair (`requires` reverse scan: only its own B page);
+the published library has no item or page mentioning any of the 25 new ids,
+so there is no duplication and no published consumer to affect. The future
+QG-2…QG-8 pages are outside this run; the interfaces they are designed to
+take (presentation, Hopf structure, triangular decomposition, half-PBW and
+the braided pairing, the anti-involution, the rank-one string modules) are
+all stated here.
+
+**Confirmed omissions of the pair's own promised content: none.** No design
+row is missing, weakened in subject, or moved; no merger or enrichment is
+required by the subject.
+
+**Flagged potential prerequisites (owner decision requested; no scaffold
+edit made by this review):**
+
+1. **`Lie bialgebra`/`Manin triple` used without any defining item.**
+   Consuming item:
+   `lem-opposite-symmetrizable-kac-moody-borels-are-root-degreewise-dual-lie-bialgebras`,
+   whose statement ends "… is a Manin triple, so `𝔟⁺` and `𝔟⁻` are dual Lie
+   bialgebras". Required prerequisite claim and hypotheses: a definition of
+   Lie bialgebra (a Lie algebra with a cobracket satisfying co-Jacobi and the
+   cocycle condition dual to the bracket) and of Manin triple; at minimum the
+   co-Jacobi and cocycle compatibility must be stated on this page, since the
+   lemma only displays the cobracket and the pairing identity. Evidence for
+   absence: recursive grep over the 26 211 item files in `items/` finds 0
+   occurrences of "Manin", "cobracket" or "Lie bialgebra"; among the run's
+   15 batch manifests these words occur only inside this one item's statement
+   and strategy. Confirmed absence; uncertain only whether the owner treats
+   the source's shorthand as acceptable jargon. Recommendation: inline the
+   two definitions/characterisations in this lemma, or scaffold a short
+   definition item immediately before it (the coverage already assigns
+   Berkeley Ch. 10 §10.4.2's Lie-bialgebra material to this lemma).
+2. **`exp(ℏΣ d_i h_i^V)` in the shuffle coproduct.** Consuming item:
+   `def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum`,
+   whose Δ_S formula is the source's formula (verified above in Enriquez
+   p. 31). Required prerequisite claim: the ℏ-adic exponential of a
+   topologically nilpotent element/endomorphism of the completed
+   (noncommutative) shuffle algebra. Evidence: the published
+   `def-formal-exponential-logarithm-and-powers` defines `exp(u)` only for
+   `u∈xR[[x]]` over a *commutative* `Q`-algebra, so it is not literally the
+   supplier used, and no scaffolded item defines the substitution into a
+   completed noncommutative algebra. Uncertain whether this needs a new item:
+   on each finite-dimensional graded component the series is coefficientwise
+   ℏ-adically well defined, and the item can say so in one clause.
+   Recommendation: add that interpretation clause (citing
+   `def-summable-family-of-formal-series` / `def-formal-exponential-logarithm-and-powers`
+   where applicable) or a small local definition; no subject-matter addition
+   is implied.
+
+**Interface note (in-scaffold supplier, currently unlinked).** The
+degree-by-degree existence of the shuffle antipode used in the strategy of
+`def-formal-quantum-shuffle-borel…` ("Sh(V) is connected graded with
+degree-zero component `C[[ℏ]]`") is exactly the content of batch 8's
+`def-graded-bialgebra-and-hopf-algebra` +
+`lem-connected-graded-bialgebra-has-a-recursive-antipode` (commutative ring
+`k`, `H_0=k·1`; `k=C[[ℏ]]` instantiates on the word-length grading). Batch 6
+declares no cross-batch edge and the batch notes assert the completed formal
+setting "is not the graded case". For 3b: either add the cross-batch
+dependency and record it in `…-batch-6.cross-batch-dependencies.json`, or
+keep the inline recursion argument and reconcile that sentence in the notes;
+the mathematics is available either way.
+
+## 5. Minor observations for the owner and Step 3b (no decision change)
+
+1. `def-formal-quantum-shuffle-borel…` says "the `1+n+(n-r)=2n-r` symbols";
+   `1+n+(n-r)=2n-r+1`, while the seeded symbols are `n+(n-r)=2n-r`,
+   matching `dim 𝔥` for a minimal realization. The displayed arithmetic
+   should be corrected to `n+(n-r)`.
+2. `thm-triangular-decomposition-of-a-quantized-enveloping-algebra` (iii)
+   contains the broken macro `β_++eta_-` (should be
+   `β_++\beta_-`) and the phrase "`≤ … with equality when β=0 term-by-term`",
+   which is weaker and less clear than the isomorphism it follows from:
+   graded dimensions multiply, `U_q^0` is concentrated in degree 0, so the
+   identity `dim U_q(g)[β]=Σ_{β_++β_-=β} dim U𝔫⁺[β_+]·dim U𝔫⁻[β_-]`
+   holds for every `β`. 3b should restate (iii) exactly or drop it.
+3. `thm-generic-quantum-serre-halves…` has a duplicated `\mathbb` in
+   `$\mathbb \mathbb C((\hbar))$`. Cosmetic.
+4. The two numerical checks reported in `…-batch-6.notes.md` corrections
+   2–3 (rank-two quasiprimitivity; the `B₂` unsymmetrized failure) are
+   scaffold-level symbolic expansions, not Step-3 proof acceptance; the
+   corresponding claims (`lem-coproduct-preserves…`, `thm-the-drinfeld-jimbo-formulas…`,
+   `cex-unsymmetrized-q-parameters-break-the-cartan-normalization`) are
+   item-level obligations for 3b and later gates. Listed so that no reader
+   treats the notes' appendix as completed verification.
+5. The general `def-bialgebra-counit-and-antipode` (batch 6) and the graded
+   `def-graded-bialgebra-and-hopf-algebra` (batch 8) both define
+   bialgebra/Hopf axioms in this run, under different designs (general vs
+   connected graded). No edge exists either way; the designs assign them
+   separately, so this is a future-consolidation note for the owner, not a
+   scope defect.
+
+## 6. Scope judgement
+
+**`sufficient`.** The planned definitions, results and examples adequately
+cover the intended subject:
+
+- design coverage is item-for-item: all 20 QG-1 rows are present with the
+  designed ids, kinds and proof order, the single added item is the
+  design-requested matrix fact with in-pair consumers only, and all four B
+  witnesses (explicit `U_q(sl_2)`, type `A_2`, the `e=2` double-edge affine
+  `A_1^{(1)}` calculation, and the unsymmetrized-parameter counterexample)
+  are present;
+- the subject a page titled "Quantized Enveloping Algebras and Quantum Serre
+  Relations" owes — the full Drinfeld–Jimbo presentation with both Serre
+  sums, the Hopf structure with its uniqueness, the triangular decomposition
+  with half-PBW and grading, and the Serre-relation computations — is
+  completely promised, with the convention-sensitive statements matching
+  JKK (1.4)–(1.7) and Berkeley Definition 13.1.3.12 / Theorem 13.1.3.22;
+- source coverage rests on three verified complete treatments (Berkeley,
+  Enriquez, JKK) that carry every load-bearing claim I checked; the fourth
+  source's record is defective at the URL/locator level (§3) but every
+  affected claim is independently backed, so the repair is record-level and
+  does not change the scope decision; the coverage checklist passes with 0
+  errors/0 warnings and all deferrals point to later plan pages;
+- prerequisites are published and earlier; the in-batch graph is acyclic and
+  leaves-only from the B page; no other run page or published item consumes
+  the pair yet, and the interfaces designed for the future QG-2…QG-8 pages
+  are stated here;
+- no omitted result requires enrichment or a pair merger. The two potential
+  prerequisites flagged in §4 (Lie bialgebra/Manin-triple definitions; the
+  ℏ-adic `exp` reading) and the source-record repair are refinements of
+  existing promised content, and their recommended actions are recorded
+  above for the owner's decision; per the dispatch they are flagged, not
+  decided, here.
+
+This decision certifies scope only. It certifies no statement and no proof,
+and no item of this pair has been approved by this review.
+
+## 7. Evidence index
+
+- Design: `research/plan-quantum-groups-track.md` lines 49–85 (QG-1 A rows
+  and companion sentence) and 251–262 (QG-1 B inventory); §0 lines 27–36
+  (standing conventions).
+- Plan: `research/plan-spec.json` orders 1524/1525 (verified equal to the
+  manifest in id, title, kind, category, companion and `requires`).
+- Batch inputs: `research/frontier-43-complex-representation-15-batch-6.pages.json`,
+  `…-batch-6.coverage.json`, `…-batch-6.notes.md`,
+  `…-batch-6.cross-batch-dependencies.json` (`[]`),
+  `…-scope-ledger.json`, `…-frontier-gate-pages.json`,
+  `research/quantum-groups-planning/{pages,proposed-items}.json`.
+- Step-1 status: 25/25 current reader `ready` records
+  (`research/frontier-43-complex-representation-15-step1-<id>.json`);
+  drift review `…-alpha-step1-drift.md` lines 76–78.
+- Owner records: `…-owner-authoring-direction.md` (no batch-6 clause);
+  no owner scope receipt exists for this page (checked absent).
+- Sources fetched to `/tmp`: `berkeley.pdf` (2 118 866 B,
+  `ffeb74a5a0304b6f`, 364 pp.), `enriquez.pdf` (436 680 B,
+  `00731481131cc731`, 44 pp.), `jkk.pdf` (503 316 B, `f873e27305536ded`,
+  60 pp.), `etingof.pdf` (CMSA URL, 595 075 B, `61a1445f50d7ef09`, 162 pp.,
+  wrong document), `etingof-arxiv.pdf` (arXiv:2106.05252v3, 568 929 B,
+  `a106a2a908277850`, 43 pp., correct document); pages read: Berkeley PDF
+  258–260, 277, 286, 289, 321–322; Enriquez PDF 1–3, 9–11; JKK PDF 3–5; Etingof-arXiv
+  PDF 3–4, 9–10, 21–22.
+- Checks run: stamp reproduction (bytes + sha256-16) on all four sources;
+  `coverage-checklist --require-destination` (1 page, 44 rows, 0/0);
+  dependency resolution over `items/` + all 15 run manifests (101 edges,
+  0 unresolved); `[[…]]` link resolution; reverse `requires`/dep scan for
+  consumers; recursive grep for the pair's 25 ids and for
+  `Manin`/`cobracket`/`Lie bialgebra` over `items/`; step-1 readiness scan;
+  `prereq` page status check for all five `requires`.
+- Not done (out of role): no proof-level verification of the items, no item
+  decisions, no scaffold/manifest/coverage/design edits, no owner records.
