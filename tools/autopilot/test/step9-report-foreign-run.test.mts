@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync, symlinkSync, unlinkSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
+import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 
 const repo = new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
@@ -51,7 +52,7 @@ test('report accepts genuine foreign research changes without rewriting its v1 b
   f.put('research/foreign-supervision.md', 'updated foreign supervision');
   let result = f.check();
   assert.equal(result.status, 0, result.stderr);
-  assert.match(result.stdout, /3 unrelated foreign research change\(s\)/);
+  assert.match(result.stdout, /3 unrelated scoped research change\(s\)/);
   assert.deepEqual(readFileSync(join(f.root, 'research/demo-step9-report-integrity.json')), baseline);
   // Additions and deletions are allowed only inside the same authenticated namespace.
   f.put('research/foreign-new-note.md', 'new unrelated note');
@@ -133,4 +134,93 @@ test('a sealed prefix with mismatched ownership metadata grants no exemption', t
   const result = f.check();
   assert.equal(result.status, 1);
   assert.match(result.stderr, /step9-report-tree-changed.*foreign-supervision.md/);
+});
+
+for (const path of ['research/plan-spec.json', 'research/published-consumer-supplier-ledger.md', 'research/defect-ledger.jsonl'])
+  test(`report accepts unrelated canonical shared projection changes in ${path}`, t => {
+    const f = fixture();
+    t.after(() => rmSync(f.root, { recursive: true, force: true }));
+    const baseline = readFileSync(join(f.root, 'research/demo-step9-report-integrity.json'));
+    if (path.endsWith('plan-spec.json')) {
+      const plan = JSON.parse(readFileSync(join(f.root, path), 'utf8'));
+      f.put(path, { ...plan, pages: [...plan.pages, { id: 'foreign-page', items: ['thm-unrelated'] }] });
+    } else if (path.endsWith('.jsonl')) f.put(path, JSON.stringify({ run: 'foreign', subject: 'thm-unrelated' }) + '\n');
+    else f.put(path, '| foreign | thm-unrelated | unrelated maintenance |\n');
+    const result = f.check();
+    assert.equal(result.status, 0, result.stderr);
+    assert.deepEqual(readFileSync(join(f.root, 'research/demo-step9-report-integrity.json')), baseline);
+  });
+
+test('report blocks relevant published supplier ledger projection changes', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/published-consumer-supplier-ledger.md', '| foreign | thm-owned | relevant maintenance |\n');
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /native readiness verification failed/);
+});
+
+test('shared projection exemption cannot waive an exact raw reporter ledger binding', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/demo-step9-evidence.json', { version: 2, run: 'demo', input_sha256: {
+    'research/defect-ledger.jsonl': createHash('sha256').update('').digest('hex'),
+  } });
+  assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
+  f.put('research/defect-ledger.jsonl', JSON.stringify({ run: 'foreign', subject: 'thm-unrelated' }) + '\n');
+  assert.equal(command(f.root, 'publication-ready.mjs', '--verify').status, 0);
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /step9-report-tree-changed.*defect-ledger.jsonl/);
+});
+
+test('shared carriers require an explicit native projection selection', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  const path = 'research/demo-publication-readiness.json';
+  const readiness = JSON.parse(readFileSync(join(f.root, path), 'utf8'));
+  f.put(path, { ...readiness, protected_tree_projections: readiness.protected_tree_projections.filter((p: string) => p !== 'research/plan-spec.json') });
+  assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
+  f.put('research/plan-spec.json', { pages: [{ id: 'owned-page', items: ['thm-owned'] }], foreignMetadata: true });
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /step9-report-tree-changed.*plan-spec.json/);
+});
+
+test('malformed unrelated shared ledger rows still fail the native verifier', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/defect-ledger.jsonl', 'not valid JSON\n');
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /native readiness verification failed/);
+});
+
+test('shared projection carrier cannot be replaced by a link to identical bytes', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  const path = join(f.root, 'research/plan-spec.json');
+  // Runtime is excluded from the full report tree; this isolates native
+  // projection type protection rather than an extra-file baseline failure.
+  mkdirSync(join(f.root, '.autopilot'));
+  writeFileSync(join(f.root, '.autopilot/plan.json'), readFileSync(path));
+  unlinkSync(path);
+  symlinkSync('../.autopilot/plan.json', path);
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /native readiness verification failed/);
+});
+
+test('a projected external supporting carrier keeps its full report baseline', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/shared-root-record.md', 'demo current run record\n\nunrelated historic note\n');
+  f.put('research/demo-touches.json', { source: 'research/shared-root-record.md' });
+  assert.equal(command(f.root, 'publication-ready.mjs', '--write').status, 0);
+  assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
+  f.put('research/shared-root-record.md', 'demo current run record\n\nchanged unrelated historic note\n');
+  assert.equal(command(f.root, 'publication-ready.mjs', '--verify').status, 0);
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /step9-report-tree-changed.*shared-root-record.md/);
 });

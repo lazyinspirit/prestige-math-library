@@ -304,7 +304,7 @@ const tree = () => Object.fromEntries(files().sort().map((rel) => [rel,
 
 // Ownership comes from an unchanged ledger already sealed by this report,
 // never from a newly invented filename prefix or mutable runtime state.
-function foreignResearchChanges(receipt, now, changed) {
+function scopedResearchChanges(receipt, now, changed) {
   const namespaces = [];
   for (const [path, hash] of Object.entries(receipt.protected_tree)) {
     const owner = /^research\/([a-z0-9]+(?:-[a-z0-9]+)*)-scope-ledger\.json$/.exec(path)?.[1];
@@ -315,7 +315,12 @@ function foreignResearchChanges(receipt, now, changed) {
     if (ledger.run === owner && Array.isArray(ledger.pages) && ledger.pages.length)
       namespaces.push(`research/${owner}-`);
   }
-  const candidates = changed.filter(path => namespaces.some(prefix => path.startsWith(prefix)));
+  // Only these canonical carriers have shared workflow ownership. Projected
+  // external sources and run-local records retain the exact report baseline.
+  const sharedCarriers = new Set(['research/plan-spec.json', 'research/defect-ledger.jsonl',
+    'research/published-consumer-supplier-ledger.md']);
+  const candidates = changed.filter(path => sharedCarriers.has(path)
+    || namespaces.some(prefix => path.startsWith(prefix)));
   if (!candidates.length) return new Set();
 
   const readiness = readJson(join(research, `${run}-publication-readiness.json`));
@@ -325,9 +330,11 @@ function foreignResearchChanges(receipt, now, changed) {
     || evidence.version !== 2 || evidence.run !== run || !evidence.input_sha256
     || typeof evidence.input_sha256 !== 'object' || Array.isArray(evidence.input_sha256))
     die('step9-report-foreign-scope: missing scoped readiness or exact reporter input bindings');
-  const protectedInputs = new Set([...readiness.protected_tree_paths, ...readiness.protected_tree_projections,
-    ...Object.keys(evidence.input_sha256)]);
-  const outside = candidates.filter(path => !protectedInputs.has(path));
+  const physicalInputs = new Set(readiness.protected_tree_paths);
+  const projections = new Set(readiness.protected_tree_projections);
+  const reporterInputs = new Set(Object.keys(evidence.input_sha256));
+  const outside = candidates.filter(path => !physicalInputs.has(path) && !reporterInputs.has(path)
+    && (sharedCarriers.has(path) ? projections.has(path) : !projections.has(path)));
   if (!outside.length) return new Set();
   // Reuse the native closure selection and projection logic. In particular,
   // a foreign-prefixed source actually consumed by this run is still sealed.
@@ -351,10 +358,10 @@ if (command === 'check') {
   const now = tree();
   const paths = new Set([...Object.keys(receipt.protected_tree), ...Object.keys(now)]);
   const changed = [...paths].filter((path) => receipt.protected_tree[path] !== now[path]).sort();
-  const foreign = foreignResearchChanges(receipt, now, changed);
-  const unexpected = changed.filter(path => !foreign.has(path));
+  const scoped = scopedResearchChanges(receipt, now, changed);
+  const unexpected = changed.filter(path => !scoped.has(path));
   if (unexpected.length) die(`step9-report-tree-changed: ${unexpected.join(', ')}`);
-  console.log(`step9-report-integrity: ${Object.keys(now).filter(path => !foreign.has(path)).length} protected file(s) unchanged; ${foreign.size} unrelated foreign research change(s)`);
+  console.log(`step9-report-integrity: ${Object.keys(now).filter(path => !scoped.has(path)).length} protected file(s) unchanged; ${scoped.size} unrelated scoped research change(s)`);
   process.exit(0);
 }
 

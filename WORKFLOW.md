@@ -909,7 +909,13 @@ ledger was already sealed and remains an unchanged physical file. A filename
 prefix alone grants no exemption. Readiness physical inputs and relevant shared
 projections, plus exact reporter evidence inputs, remain protected across run
 namespaces. Any exemption also requires a successful current native readiness
-verification; every other tree difference still fails. The read-only reporter
+verification. The canonical shared plan, defect ledger and published supplier
+ledger may use their explicitly recorded native readiness projections under
+the same verification, provided the changed carrier is not an exact raw
+reporter evidence input. Relevant projection changes, malformed ledger rows and
+physical/link substitutions still fail. This does not exempt projected external
+source archives or run records, or alter commit ownership. Every other tree
+difference still fails. The read-only reporter
 sandbox remains unchanged. A correction to this boundary requires normal
 mechanical readiness creation and its complete gate battery, evidence creation
 and verification, then a new report snapshot and verification, on paused,
@@ -967,7 +973,9 @@ owned entries in the real index. The existing final dispatch receipt records
 hashes and counts of the outside staged entries (including flags), outside HEAD
 entries, and outside working bytes and modes. Successful return and subsequent
 `run-commit --check` verify preservation and that every owned artifact is
-committed and current. Unrelated staged changes may remain staged. The receipt
+committed and current. Unrelated staged changes may remain staged. An owned-working
+preservation failure identifies each changed path and its before/after kind,
+mode and SHA-256 without printing file contents; it remains a hard refusal. The receipt
 records a precommit baseline; it does not claim a postcommit check happened before
 the commit. No new late evidence file is created outside the dispatch directory.
 
