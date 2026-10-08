@@ -110,3 +110,25 @@ content policy checks dependency structure before item carriers exist. The scope
 external-item gate uses strict manifest mode at Step 1 for recorded-unproved,
 external-reference, and fallback provenance metadata, then validates full authored
 carriers after authoring.
+
+Native physics-content gates also scope original-source drift to the current
+run. All pinned local snapshots retain their byte hashes, mathematical
+classification, and publication checks. Relevant original suppliers remain
+hash-bound through actual authored edges, current scaffold edges, definition
+discharges, used aliases, and prerequisite/home pages. Unrelated original
+updates cannot hold the run; used identity ambiguity, changed supplier homes,
+relevant raw drift, missing originals, and publication withdrawals remain fatal.
+Standalone mathematics-import verification still checks every original. This
+selection never refreshes imports or changes the pinned receipt.
+
+Original-source scope traverses logical `deps` and definition `justified_by`
+discharges. Nonlogical `forward_refs`/`external_refs` on an imported supplier do
+not extend that prerequisite closure or require unpublished original context to
+be imported. References declared by owned frontier items retain their direct
+identity, original-source, and home checks without recursively acquiring the
+referenced item's proof-supplier cone.
+
+The physics-content validator follows the same distinction: a nonlogical pointer
+on a pinned import may resolve in the original mathematics library, including
+an original alias, without creating a local item. Owned references and logical
+or definition-discharge edges cannot use that original-only context.

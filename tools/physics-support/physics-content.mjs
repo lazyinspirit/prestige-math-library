@@ -26,7 +26,7 @@ export function markdownFiles(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? markdownFiles(join(dir, e.name)) : e.name.endsWith('.md') ? [join(dir, e.name)] : []);
 }
 
-export function validatePhysicsContent({ items, pages = [], importedIds = new Set(), requireBodies = true, selectedItems = null, selectedPages = null }) {
+export function validatePhysicsContent({ items, pages = [], importedIds = new Set(), requireBodies = true, selectedItems = null, selectedPages = null, importedReferenceContext = null }) {
   const errors = [];
   const graphContext = new Set();
   const structural = new Set(['edge-shape', 'edge-unresolved', 'math-physics-dependency', 'item-cycle', 'item-frontmatter-invalid', 'domain-required', 'physical-kind-domain', 'mathematical-kind-domain', 'role-supplier', 'mathematical-role']);
@@ -85,7 +85,11 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
     for (const field of ['deps', 'justified_by', 'forward_refs', 'external_refs']) {
       if (item[field] !== undefined && !strings(item[field])) { error('edge-shape', item.id, `${field} must be an array of ids`); continue; }
       for (const id of Array.isArray(item[field]) ? item[field] : []) {
-        const supplier = resolve(id);
+        // Imported nonlogical pointers may resolve in their original library
+        // without introducing a local item or a mathematical premise. Owned
+        // pointers and every logical/discharge edge still resolve locally.
+        const supplier = resolve(id) ?? (importedIds.has(item.id) && ['forward_refs', 'external_refs'].includes(field)
+          ? importedReferenceContext?.(item.id, id) : null);
         if (!supplier) { error('edge-unresolved', item.id, `${field}: ${id}`); continue; }
         if (d === 'mathematics' && domain(supplier) === 'physics' && ['deps', 'justified_by', 'forward_refs'].includes(field)) error('math-physics-dependency', item.id, `${field} may not use physical supplier ${id}`);
       }
@@ -232,5 +236,20 @@ export function loadPhysicsRepository(root, plan = null, selectedPages = null) {
       }
     }
   }
-  return { items, pages, importedIds };
+  let originalItems = null;
+  const importedReferenceContext = (consumer, token) => {
+    if (!importedIds.has(consumer) || !imports.source_root || !/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(token)) return null;
+    const path = join(imports.source_root, 'items', `${token}.md`);
+    if (existsSync(path)) {
+      const original = readItem(path);
+      return original.id === token ? { ...original, domain: original.domain ?? 'mathematics' } : null;
+    }
+    // Aliases are original-context identities too. Inspect only to resolve an
+    // actual imported pointer; none of these rows enters the local item graph.
+    originalItems ??= markdownFiles(join(imports.source_root, 'items')).map(readItem);
+    const matches = originalItems.filter(item => Array.isArray(item.aliases) && item.aliases.includes(token));
+    if (matches.length > 1) throw Error(`ambiguous imported nonlogical original reference ${token}`);
+    return matches.length ? { ...matches[0], domain: matches[0].domain ?? 'mathematics' } : null;
+  };
+  return { items, pages, importedIds, importedReferenceContext };
 }

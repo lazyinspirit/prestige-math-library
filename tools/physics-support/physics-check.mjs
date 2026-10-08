@@ -8,7 +8,7 @@ import { readRunManifestPages } from './run-manifest-pages.mjs';
 const args = process.argv.slice(2), value = name => args[args.indexOf(name) + 1];
 const root = args.includes('--root') ? resolve(value('--root')) : REPO;
 try {
-  verifyMathematicsImports(root);
+  verifyMathematicsImports(root, args.includes('--run') ? { run: value('--run'), planning: args.includes('--plan') } : {});
   const scope = args.includes('--run') ? frontierGateScope({ repo: root, run: value('--run') }, { requireItemFiles: !args.includes('--plan'), allowEmptyItems: args.includes('--plan') }) : null;
   let plan = args.includes('--plan') ? JSON.parse(readFileSync(resolve(root, value('--plan')), 'utf8')) : null;
   if (scope && plan) {

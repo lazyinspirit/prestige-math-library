@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { markdownFiles, readItem, PHYSICS_KINDS } from './physics-content.mjs';
 import { REPO } from './paths.mjs';
+import { frontierMathematicsImportScope } from './frontier-import-scope.mjs';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 export function importMathematics(root, sourceRoot) {
   root = resolve(root); sourceRoot = resolve(sourceRoot);
@@ -50,23 +51,40 @@ export function importMathematics(root, sourceRoot) {
   writeFileSync(ignorePath, base + '\n\n' + marker + '\n' + files.map(f => '/' + f.path).join('\n') + '\n# END mathematical imports\n');
   return receipt;
 }
-export function verifyMathematicsImports(root) {
+export function verifyMathematicsImports(root, { run = null, planning = false } = {}) {
+  if (run !== null && !/^[a-zA-Z0-9_-]+$/.test(run ?? '')) throw Error('invalid current import frontier run');
+  if (planning && !run) throw Error('planning import selection requires --run');
   const receiptPath = join(root, 'research/math-imports.json');
   if (!existsSync(receiptPath)) throw Error('missing math import receipt; run physics init before planning');
   const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
   if (receipt.version !== 1 || !Array.isArray(receipt.files) || typeof receipt.source_root !== 'string' || resolve(receipt.source_root) === resolve(root)) throw Error('invalid math import receipt');
-  for (const file of markdownFiles(join(receipt.source_root, 'items'))) {
-    const item = readItem(file);
-    if (PHYSICS_KINDS.has(item.kind) || item.domain === 'physics') throw Error(`physical item in mathematics source: ${file}`);
-  }
+  // Every local snapshot remains hash-bound, classified and published, even
+  // when its original source has no consequence for the current frontier.
   const seen = new Set();
   for (const file of receipt.files) {
-    if (!(file.path === 'research/b-leaf-legacy-allowlist.json' || /^(items|library)\/[\w./-]+\.md$/.test(file.path)) || file.path.split('/').includes('..') || seen.has(file.path)) throw Error('invalid or duplicate import path');
+    if (!(file.path === 'research/b-leaf-legacy-allowlist.json' || /^(items|library)\/[\w./-]+\.md$/.test(file.path)) || file.path.split('/').includes('..') || seen.has(file.path)
+      || !/^[a-f0-9]{64}$/.test(file.sha256 ?? '')) throw Error('invalid or duplicate import path');
     seen.add(file.path);
-    for (const base of [root, receipt.source_root]) if (hash(readFileSync(join(base, file.path))) !== file.sha256) throw Error(`mathematics import changed: ${file.path}; reconcile and re-import before a new run`);
+    if (hash(readFileSync(join(root, file.path))) !== file.sha256)
+      throw Error(`mathematics import changed: ${file.path}; reconcile and re-import before a new run`);
     if (file.path.startsWith('items/')) {
       const item = readItem(join(root, file.path));
       if (item.status !== 'published' || PHYSICS_KINDS.has(item.kind) || item.domain === 'physics') throw Error(`not a published mathematical supplier: ${file.path}`);
+    }
+  }
+  const originals = markdownFiles(join(receipt.source_root, 'items')).map(readItem);
+  for (const item of originals) if (PHYSICS_KINDS.has(item.kind) || item.domain === 'physics')
+    throw Error(`physical item in mathematics source: ${item.file}`);
+  const sourcePages = run ? markdownFiles(join(receipt.source_root, 'library'))
+    .filter(file => !file.split('/').at(-1).startsWith('_')).map(file => ({ ...readItem(file), path: relative(receipt.source_root, file) })) : [];
+  const scope = run ? frontierMathematicsImportScope(root, run, { planning, receipt, originals: { items: originals, pages: sourcePages } }) : null;
+  for (const file of receipt.files) if (scope === null || scope.paths.has(file.path)) {
+    if (!existsSync(join(receipt.source_root, file.path))) throw Error(`missing mathematics source original: ${file.path}`);
+    if (hash(readFileSync(join(receipt.source_root, file.path))) !== file.sha256)
+      throw Error(`mathematics import changed: ${file.path}; reconcile and re-import before a new run`);
+    if (file.path.startsWith('items/')) {
+      const item = readItem(join(receipt.source_root, file.path));
+      if (item.status !== 'published') throw Error(`mathematics source publication withdrawn: ${file.path}`);
     }
   }
   return receipt.files.length;

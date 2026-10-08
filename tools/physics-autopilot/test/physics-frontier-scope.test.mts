@@ -28,7 +28,7 @@ test('native physics gate excludes malformed outside carriers and preserves curr
  f.pages[0].items[0].deps = ['pthm-outside'] as never[];
  f.save('research/run-test-batch-1.pages.json', f.pages);
  const reachable = f.run(['--plan', 'research/plan-spec.json']);
- assert.notEqual(reachable.status, 0); assert.match(reachable.stdout + reachable.stderr, /item-frontmatter-invalid|edge-unresolved/);
+ assert.notEqual(reachable.status, 0); assert.match(reachable.stdout + reachable.stderr, /item-frontmatter-invalid|edge-unresolved|invalid prerequisite carrier/);
 });
 test('native physics gate fails closed for empty item scopes, missing carriers and pages', t => {
  const f = fixture(t);
