@@ -99,14 +99,20 @@ export function frontierGateBattery(ctx, gates) {
   const allIds = readdirSync(join(ctx.repo, 'items')).filter(name => name.endsWith('.md')).map(name => name.slice(0, -3));
   const preserveRaw = result => ({ ...result, output: `${result.stdout}${result.stderr}`,
     rawOutput: `${result.stdout}${result.stderr}`, rawCode: result.code });
-  return gates.map(gate => {
+  return gates.map(originalGate => {
+    // Global checks share this frozen review context; current-manifest native
+    // wrappers below retain their broader explicit subject selection.
+    const gate = { ...originalGate, ownerReviewItems: [...gateScope.ids],
+      ownerReviewInputs: [...(originalGate.ownerReviewInputs ?? []), path] };
     const argv = typeof gate.argv === 'function' ? gate.argv() : gate.argv;
+    if (argv.some(arg => typeof arg === 'string' && /(?:^|\/)frontier-item-gate\.mjs$/.test(arg)))
+      gate.ownerReviewItems = undefined;
     if (gate.id === 'defect-ledger') return { ...gate, argv: [...argv, '--frontier', path], projectResult: preserveRaw };
     if (native.has(gate.id)) {
       // Current-manifest adapters already supply their own nonempty selection.
       // Positional paths after -- would become unsupported wrapper flags.
       if (argv.some(arg => typeof arg === 'string' && /(?:^|\/)frontier-item-gate\.mjs$/.test(arg)))
-        return { ...gate, argv, projectResult: preserveRaw };
+        return { ...gate, ownerReviewItems: undefined, argv, projectResult: preserveRaw };
       const files = gateScope.ids.map(id => `items/${id}.md`);
       return { ...gate, argv: [...argv, ...files], needs: [...(typeof gate.needs === 'function' ? gate.needs() : gate.needs ?? []), ...files], projectResult: preserveRaw };
     }

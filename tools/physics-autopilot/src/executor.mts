@@ -55,6 +55,7 @@ import type { Config, Ctx, Stage, Plan, StageStatus, Snapshot, Adapter, Unit, Ru
  *  half past recovers the run before anyone notices it paused. */
 const OUTAGE_BACKOFF_MS = 20 * 60_000;
 import { runGates } from './gates.mts';
+import { authorizeOwnerGate } from './owner-gate-recertification.mjs';
 import { takeCommand } from './control.mts';
 import { humanDuration } from './reporter.mts';
 import { assertCognitive } from './roles.mts';
@@ -1636,7 +1637,7 @@ export class Executor {
    */
   async runGroupGates(statuses: Array<{ s: Stage; st: StageStatus }>, ctx: Ctx, group: Stage[]): Promise<'ok' | 'working' | 'blocked'> {
     if (this.inflight.size || this.liveDispatchLabels().length) return 'working';
-    const list: Gate[] = [];
+    let list: Gate[] = [];
     const owners: Stage[] = [];
     const seen = new Set<string>();
     let n = 0;
@@ -1690,6 +1691,21 @@ export class Executor {
       });
       if (last && !last.ok && last.version === this.stateVersion && last.dirFp === dirFp
         && !backoffDue) return 'blocked';
+      if (this.config.ownerGateRecertification) {
+        const authorization = authorizeOwnerGate({ ctx, gates: list,
+          stages: statuses.map(({ s }) => s.id),
+          writers: [...this.inflight.keys(), ...this.liveDispatchLabels()] });
+        if (!authorization.ok) {
+          const message = `Pre-gate owner hold: ${authorization.why}`;
+          if (this.state.addBlocker(group[0].id, message, `owner-pre-gate:${groupKey}`))
+            this.reporter.notify('blocked', message, { stage: group[0].id });
+          this.reporter.report(this.snapshot(), { force: true });
+          return 'blocked';
+        }
+        this.state.data.blockers = this.state.data.blockers.filter((b: any) => b.key !== `owner-pre-gate:${groupKey}`);
+        list = authorization.gates;
+        this.reporter.event('owner-gate-authorized', { ok: true, attempt: authorization.attempt });
+      }
       const versionAtStart = this.stateVersion;
       this.reporter.notify('gates', `${where}: running ${list.length} gate(s)`);
       const { ok, results } = await runGates(list, { cwd: ctx.repo, signal: this.signal, logger: () => {} });

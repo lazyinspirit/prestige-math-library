@@ -82,6 +82,9 @@ export interface Gate {
   /** A gate reporting success over an empty scope is not a gate that passed. */
   liveness?: Liveness;
   required?: boolean;
+  /** Native adapter's actual subject scope for owner pre-gate review. */
+  ownerReviewItems?: string[];
+  ownerReviewInputs?: string[];
   /** Optional strict scope projection. Complete raw evidence remains on the result. */
   projectResult?: (result: { code: number | null; stdout: string; stderr: string }) => any;
 }
@@ -252,6 +255,8 @@ export interface Config {
    *  own lane caps, which are the real constraint. */
   globalConcurrency?: number;
   maxAttempts?: number;
+  /** Production entrypoint always enables the one-attempt owner review hold. */
+  ownerGateRecertification?: boolean;
   /** Production gate disposition. `owner` escalates immediately without
    * invoking a stage repair hook or spending any repair budget.
    * `owner-recertify` additionally requires repair and recertification of

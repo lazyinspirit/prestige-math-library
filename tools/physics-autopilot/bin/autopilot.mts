@@ -102,6 +102,8 @@ function loadConfig(): Config {
     base.run = local.run;
     base.stages = resolve(repo, local.stages);
   }
+  // Mandatory production boundary; configuration cannot waive owner review.
+  base.ownerGateRecertification = true;
   base.repo = repo;
   base.stateDir = stateDir;
   return base;

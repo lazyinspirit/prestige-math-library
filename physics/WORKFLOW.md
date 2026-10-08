@@ -132,3 +132,73 @@ The physics-content validator follows the same distinction: a nonlogical pointer
 on a pinned import may resolve in the original mathematics library, including
 an original alias, without creating a local item. Owned references and logical
 or definition-discharge edges cannot use that original-only context.
+
+Every production native gate join now holds **before** attempting its complete
+battery, after all native and adopted writers drain. `pause-at` remains a stop
+after a stage and cannot replace this boundary. The controller writes
+`STATE_DIR/owner-gate-request.json`; the owner performs a fresh mathematical
+review against its current snapshot, then writes
+`STATE_DIR/owner-gate-receipt.json`. The engine validates and consumes that
+receipt once. A failed battery, ordinary retry, changed input, or controller
+crash after consumption requires a new attempt request and fresh review. The
+engine retains its normal full failure diagnostics, repair routing, and gate
+history. This control neither dispatches reviewers nor proves mathematics.
+
+The request records the actual current manifest frontier, supplier-before-consumer
+item order, item carrier and manifest hashes, scoped supplier/current original
+hashes, native gate input files, and the exact complete resolved battery.
+Step-7 adapters retain their frozen subject selection; current-manifest native
+wrappers retain their current selection, and review covers their union. Outside
+suppliers remain prerequisite context. Pre-author claims bind their manifest
+and an absent carrier explicitly; plan-only gates require explicit plan review.
+An item gate cannot authorize an empty subject selection. Runtime reports,
+observer logs, and authorization requests are not mathematical inputs.
+
+An owner receipt has this shape (every requested item must appear once, in the
+request's order):
+
+```json
+{
+  "version": 1,
+  "attempt": "COPY_CURRENT_REQUEST_ATTEMPT",
+  "snapshotSha256": "COPY_CURRENT_REQUEST_SNAPSHOT_HASH",
+  "reviewer": "owner identity",
+  "writersDrained": true,
+  "writerScopes": [],
+  "reviewStartedAt": "ISO timestamp at or after request.createdAt",
+  "reviewedAt": "ISO timestamp after the review",
+  "items": [
+    {
+      "id": "def-example",
+      "carrierSha256": "CURRENT_REQUEST_ITEM_HASH_OR_NULL",
+      "manifestSha256": "CURRENT_REQUEST_MANIFEST_CLAIM_HASH_OR_NULL",
+      "verdict": "sound",
+      "review": "Current mathematical argument, qualifications and supplier checks.",
+      "evidence": [{ "path": "research/current-review.md", "sha256": "CURRENT_FILE_SHA256" }]
+    }
+  ]
+}
+```
+
+For plan-only gates, also supply `planReview` describing the current plan review.
+Evidence paths resolve against the physics workspace (absolute paths are also
+accepted). Each item needs actual current review evidence; an old unchanged
+certificate, an omitted item, an empty explanation, or a partial frontier cannot
+satisfy the receipt. The owner must drain external repair writers and attest no
+writer scopes remain. Native writers are checked independently by the engine.
+The engine rehashes the entire selected snapshot after validating all receipt
+rows and evidence, then archives the consumed request and receipt under
+`STATE_DIR/owner-gate-history/ATTEMPT.json` before starting the battery. Never
+copy verdicts into a new attempt without the required current review.
+
+Logical dependency order uses `deps`. Definition discharges through
+`justified_by` remain current, hash-bound prerequisite context and may point to
+a lemma whose logical dependencies include the definition. Their context
+traversal is cycle-safe; genuine logical dependency cycles still hold the gate.
+Before authoring, a selected local supplier page's actual manifest and absent
+carrier are bound explicitly. Missing external prerequisite pages remain fatal.
+Native comma-separated and glob path arguments, implicit run-local readiness and
+certification inputs, and the current Step-7 certification's transitive evidence
+are also bound. Resolved descriptors authorize and execute the same battery,
+including its advisory remainder. Durable consumed history prevents authorization
+replay even if the controller crashes before replacing the request file.
