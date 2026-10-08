@@ -4,6 +4,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { itemHashGuard } from './item-hash.mjs';
 
 const sha = (text) => createHash('sha256').update(text).digest('hex');
@@ -13,6 +14,24 @@ const hasPriorPublicationAudit = (text) => {
   const block = /^verification:[ \t]*\r?\n((?:[ \t]+[^\n]*\n?)*)/m.exec(frontmatter(text))?.[1] ?? '';
   return /^ {2}audited:[ \t]*\S/m.test(block) || /^ {2}verified:[ \t]*(?:\S|$)/m.test(block);
 };
+
+// Authenticate an existing publication without inventing a historical audit.
+// An immutable ancestor must contain the exact archived carrier before its
+// repair ownership claim; a judge marker alone establishes nothing here.
+function hasCommittedPriorPublication(root, id, before, commit, claimedAt) {
+  if (!/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(commit ?? '')
+    || !/^[a-zA-Z0-9_-]+$/.test(id)) return false;
+  const git = (args) => spawnSync('git', ['--no-replace-objects', '-C', root, ...args],
+    { maxBuffer: 16 * 1024 * 1024 });
+  const metadata = git(['show', '--no-patch', '--format=%H%n%ct', commit]);
+  if (metadata.status !== 0) return false;
+  const [object, timestamp, ...extra] = metadata.stdout.toString('utf8').trim().split('\n');
+  if (object !== commit || extra.length || !/^\d+$/.test(timestamp)
+    || Number(timestamp) * 1000 > Date.parse(claimedAt)) return false;
+  if (git(['merge-base', '--is-ancestor', commit, 'HEAD']).status !== 0) return false;
+  const carrier = git(['show', `${commit}:items/${id}.md`]);
+  return carrier.status === 0 && carrier.stdout.equals(Buffer.from(before, 'utf8'));
+}
 
 export function isPublishedItem(root, id) {
   const path = join(root, 'items', `${id}.md`);
@@ -60,7 +79,7 @@ export function recordedPublishedRepair(root, id, text, receiptPath) {
     if (receipt.content_sha256 !== current) return fail('local repair receipt is stale');
     const before = readResearch(receipt.before_file);
     if (field(before, 'id') !== id || field(before, 'status') !== 'published'
-      || field(before, 'proved_here') === 'false' || !hasPriorPublicationAudit(before)
+      || field(before, 'proved_here') === 'false'
       || sha(before) !== receipt.before_raw_sha256
       || itemHashGuard(before) !== receipt.pre_sha256 || receipt.pre_sha256 === current)
       return fail('pre-edit published carrier does not match the repair');
@@ -71,6 +90,9 @@ export function recordedPublishedRepair(root, id, text, receiptPath) {
     if (claimsForItem.length !== 1 || claim.version !== 1 || claim.run !== receipt.run
       || claim.group !== receipt.group || claim.pre_sha256 !== receipt.pre_sha256
       || !Number.isFinite(Date.parse(claim.claimed_at))) return fail('missing or mismatched pre-edit ownership claim');
+    if (!hasPriorPublicationAudit(before)
+      && !hasCommittedPriorPublication(root, id, before, receipt.prior_publication_commit, claim.claimed_at))
+      return fail('pre-edit carrier lacks an audit or authenticated prior publication');
     if (!/^[a-zA-Z0-9:_-]+$/.test(receipt.ledger_marker ?? '')) return fail('invalid ledger marker');
     const ledger = readResearch('research/published-consumer-supplier-ledger.md');
     const start = `<!-- local-published-repair:${receipt.ledger_marker}:begin -->`;

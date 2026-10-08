@@ -239,6 +239,16 @@ future stages defer selection until execution and write no run state.
 - Published repairs use `research/published-consumer-supplier-ledger.md` for
   mathematical defects. They have no item gate, rejudge or adjudication obligation.
   Their changed Statements or Definitions still require direct-consumer review.
+  A recorded local repair preserves the genuine published before carrier and
+  binds its raw and mathematical hashes, unique pre-edit ownership claim,
+  current ledger evidence and successful local checks. A prior carrier without
+  an `audited` or `verified` entry may instead use the receipt's
+  `prior_publication_commit`: a full Git commit ID that is an ancestor of HEAD,
+  has a committer timestamp no later than the ownership claim and contains
+  exactly those published before bytes at `items/<id>.md`. Git replacement
+  objects are ignored. This records
+  existing publication, not an independent audit or authority to publish a draft;
+  a judge marker alone is insufficient.
   Operational dispatch and retry history belongs in run records, not that ledger.
   Step 9 commits on main; new content stays draft. Publication status changes
   and pushing are owner acts.
