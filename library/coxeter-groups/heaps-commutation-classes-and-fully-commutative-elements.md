@@ -2,26 +2,20 @@
 page: heaps-commutation-classes-and-fully-commutative-elements
 title: "Heaps, Commutation Classes, and Fully Commutative Elements"
 status: draft
-items: []
+items: [def-cg-linear-extension-of-a-finite-poset,
+        lem-cg-finite-poset-linear-extensions-and-connectivity,
+        def-cg-labeled-word-heap-and-fully-commutative-element,
+        lem-cg-convex-chains-consecutive-in-a-linear-extension,
+        thm-cg-heaps-classify-commutation-classes,
+        thm-cg-fully-commutative-forbidden-chain-criterion,
+        thm-cg-fully-commutative-weak-intervals-are-distributive]
 examples: []
 ---
 
-Commutation classes admit a finite poset model. Fully commutative elements are exactly those for which no full noncommuting braid can appear; proving a heap word reduced requires both cancellation and braid control.
+Fix a finite Coxeter matrix and its presented group with length function, and let commutation of adjacent commuting generators be the only rewriting admitted between words. Commutation classes then admit a finite poset model: the heap of a word records each position and orders two positions when they are forced, and its labeled linear extensions are exactly the words in the commutation class. This is proved from a choice-free theory of finite posets: linear extensions exist, a prescribed order ideal can be made an initial segment, any two linear extensions are connected by adjacent interchanges of incomparable elements, and a convex chain — in particular a covering pair — occurs consecutively in some linear extension.
 
-This is a prose scaffold for future local item authoring. Its empty item lists do not assert proof completion. Every construction below is a named supplier contract; definitions are justified by the separately named existence, descent or uniqueness proofs before any application consumes their properties. Source reading supports the selected proof route and is not a substitute for a library proof.
+With the heap classification in hand, full commutativity has two equivalent forms. The braid-factor form forbids a full alternating factor of length $m(u,v)\ge3$ in a reduced word; the heap form forbids the corresponding convex alternating chains and covering pairs carrying equal labels. The heap statement does not assume that the word is reduced: reducedness is a consequence of the two forbidden-configuration conditions, via the Tits deletion route through Matsumoto's theorem. Pairs with $m(u,v)=\infty$ impose no condition.
 
-## Ordered construction and proof contracts
+The resulting invariant has an order-theoretic payoff. For a fully commutative element, the right weak order interval below it is isomorphic to the lattice of order ideals of its heap; meets and joins correspond to intersection and union of ideals, so the interval is a finite distributive lattice. Only the right weak interval is identified, and nothing is claimed for elements that are not fully commutative.
 
-**def-cg-labeled-word-heap-and-fully-commutative-element.** For word s1...sk take positions ordered by transitive closure of i<j with equal or noncommuting labels. Define labeled heap isomorphism, linear extension and fully commutative w as all reduced words connected by commuting adjacent commuting generators alone.
-
-Definition justification: `thm-cg-heaps-classify-commutation-classes`.
-
-**thm-cg-heaps-classify-commutation-classes.** Prove adjacent incomparable swaps connect all linear extensions by moving their first differing entry to the front inductively. Such swaps correspond exactly to commuting letters; hence labeled heaps classify word commutation classes, preserving multiplicities and equality-label order. First prove finite precedence relations have a linear extension by removing minimal positions. A convex chain can be made contiguous by contracting it to one vertex, proving acyclicity and expanding a linear extension; same-label covers can likewise be made adjacent.
-
-**thm-cg-fully-commutative-forbidden-chain-criterion.** Matsumoto implies w fully commutative iff no reduced word contains a braid of length m_st≥3. Heap criterion excludes convex alternating s,t chains of length m_st and covering equal labels. Prove that a heap satisfying these restrictions yields a reduced word by the Tits deletion algorithm: any first noncommuting braid or cancellation would produce precisely a forbidden heap pattern, so the criterion does not silently assume reducedness.
-
-**thm-cg-fully-commutative-weak-intervals-are-distributive.** For a fully commutative w prove lower right weak interval corresponds to order ideals of its heap: prefixes give ideals and every ideal extends to a linear extension. Show ideal determines its group element using the single commutation class and prove inverse injectivity; inclusion gives weak order. Meet and join are intersection and union of ideals. Do not identify full Bruhat intervals with this ideal lattice.
-
-## Prerequisites and reading
-
-Required earlier pages: [[weak-order-inversions-and-lattice-operations]], [[coxeter-presentations-exchange-and-reduced-word-theorems]], [[finite-lattice-projections-and-coxeter-chain-labels]], [[chains-antichains-sperner-and-dilworth]]. The companion [[heaps-commutation-classes-and-fully-commutative-elements-examples]] tests these constructions and conventions. Exact item dependencies and source reading limits are recorded in `research/coxeter-scaffold/inventory.json` and `research/plan-coxeter-groups-track.md`.
+The page uses the presented Coxeter group and its reduced-word calculus from [[coxeter-presentations-exchange-and-reduced-word-theorems]], the right weak order and its prefix and cover properties from [[weak-order-inversions-and-lattice-operations]], and the finite order-ideal lattice from [[chains-antichains-sperner-and-dilworth]]. The interval theorem constructs its distributive structure through the heap's order ideals. The companion [[heaps-commutation-classes-and-fully-commutative-elements-examples]] works the two smallest heaps and contrasts distributive with nondistributive weak intervals.

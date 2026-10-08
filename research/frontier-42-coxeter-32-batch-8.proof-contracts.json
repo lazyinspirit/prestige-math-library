@@ -1,0 +1,1940 @@
+{
+  "version": 1,
+  "scope": [
+    "def-cg-spherical-gram-simplex-and-angular-link",
+    "ex-cg-link-edge-lengths-versus-dihedral-angles",
+    "lem-cg-spherical-simplex-existence-and-link-gram-formula",
+    "def-cg-euclidean-cone-and-spherical-join-metrics",
+    "ex-cg-spherical-simplex-and-vertex-link-schur-complement",
+    "thm-cg-cone-join-metric-and-local-product-chart",
+    "ex-cg-disconnected-universal-coxeter-nerve-and-angular-truncation"
+  ],
+  "contracts": {
+    "def-cg-spherical-gram-simplex-and-angular-link": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition restricts angular links to nonempty faces; the earlier polyhedral definition does include the empty face. A top-dimensional face has empty normal link. The simplicial correspondence is asserted only in the simplicial case, with general cofaces carrying polyhedral normal link cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Constant defining inequalities are discarded without changing a nonempty cell. All retained gradients are nonzero; in dimension zero none remain and the tangent cone is the zero space. For F=C, U(F)=V and N_FC={0}, so the normal link is empty. The n=0 Gram simplex is a point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the first non-degenerate simplex is $n=1$, an arc between two unit vectors, and the first non-degenerate angular link is the link of a vertex of a polygon, an arc (a vertex has $U(F)=\\{0\\}$, so its normal link and its point link coincide); both are instances of the displayed constructions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: nothing beyond the positive definiteness of $C$ is assumed for the Gram simplex, and for a face $F$ of positive dimension the normal cone $N_FC=T_FC\\cap U(F)^{\\perp}$ is a proper pointed subcone of the tangent cone $T_FC$, which has lineality $U(F)=\\bigcap_{j\\in I(F)}\\ker\\langle\\cdot,n_j\\rangle$; the two descriptions of $T_FC$ and the independence of $p$ are proved in [[lem-cg-spherical-simplex-existence-and-link-gram-formula]] (v)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition attaches objects to a Gram matrix and to a face with its normals; no parameter runs over a closed interval whose endpoint values could differ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: No choice principle is used: deleting constant inequalities is canonical, retained inward normals have nonzero gradients, and the Cholesky factor is unique."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a construction, not an equivalence; the word 'equivalently' between the two descriptions of $T_FC$ is a proved identity of sets, deferred to the justifier, not a claim of the definition.",
+          "reviewed": {
+            "upheld": true,
+            "by": "step3b-author-pair-spherical-simplex-metrics-angular-links-and-cones",
+            "reason": "No biconditional is asserted by this Definition: the iff token triggering the detector occurs only inside the cited theorem id thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique (and in the item deps line), while the word 'equivalently' introduces the proved identity of the two descriptions of the tangent cone, deferred to lem-cg-spherical-simplex-existence-and-link-gram-formula (v)."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Same as iff-forward: no if-and-only-if statement is made; the vertex-wise identifications of cell links along an isometric gluing are part of the construction of $\\operatorname{Lk}_X(F)$, with well-definedness proved in the justifier.",
+          "reviewed": {
+            "upheld": true,
+            "by": "step3b-author-pair-spherical-simplex-metrics-angular-links-and-cones",
+            "reason": "No biconditional is asserted by this Definition: the iff token triggering the detector occurs only inside the cited theorem id thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique (and in the item deps line), while the word 'equivalently' introduces the proved identity of the two descriptions of the tangent cone, deferred to lem-cg-spherical-simplex-existence-and-link-gram-formula (v)."
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Reviewed Definition and all ten declared supplier interfaces. Cholesky rows are a well-typed construction for n=0 as well as n>0. Discarding constant inequalities preserves every nonempty cell and makes all normalizations defined; redundant nonconstant active hyperplanes need not be facets. Tangent inequalities annihilate U(F); full faces have N={0} and empty normal link, while vertex links use U={0}. Angular arccos uses unit vectors and has domain [-1,1]. The simplicial coface correspondence is qualified; general gluings retain polyhedral links and auxiliary infinity between components. Both tangent descriptions follow by active/inactive inequalities and closure. No arbitrary Choice is introduced. Reader corrections preserve the intended content and are accepted."
+      }
+    },
+    "ex-cg-link-edge-lengths-versus-dihedral-angles": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-spherical-gram-simplex-and-angular-link",
+          "source_section": "Definition",
+          "quote": "The **tangent cone** of $C$ at $F$ is $$T_FC:=\\{\\xi\\in V:\\langle\\xi,n_j\\rangle\\ge0\\text{ for all }j\\in I(F)\\},$$ equivalently the closure of $\\{\\lambda(x-p):x\\in C,\\ \\lambda\\ge0\\}$ for any (hence every) $p$ in the relative interior of $F$, and the **normal cone** of $F$ in $C$ is $$N_FC:=T_FC\\cap U(F)^{\\perp},\\qquad U(F)^{\\perp}=\\{\\xi\\in V:\\langle\\xi,u\\rangle=0\\text{ for all }u\\in U(F)\\};$$ the **angular link** of $F$ in $C$ is the set of unit inward directions *normal to $F$*, $$\\operatorname{Lk}_C(F):=N_FC\\cap S(V),\\qquad S(V)=\\{\\xi\\in V:|\\xi|=1\\},$$ and the **angular distance** of $\\xi,\\eta\\in\\operatorname{Lk}_C(F)$ is $d_{\\mathrm{ang}}(\\xi,\\eta):=\\arccos\\langle\\xi,\\eta\\rangle$, the principal inverse cosine ([[def-principal-inverse-sine-and-cosine]]); equivalently it is the intrinsic path metric of the round unit sphere restricted to the link, a metric of diameter at most $\\pi$ ([[def-metric-space]]; proved in [[lem-cg-spherical-simplex-existence-and-link-gram-formula]](v), using that $N_FC$ is a convex cone).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-principal-inverse-sine-and-cosine",
+          "source_section": "Definition",
+          "quote": "Their principal inverses are denoted $$\\arcsin:[-1,1]\\to[-\\pi/2,\\pi/2],\\qquad\\arccos:[-1,1]\\to[0,\\pi],$$ and are characterised by $$\\sin(\\arcsin y)=y,\\qquad\\cos(\\arccos y)=y\\qquad(-1\\le y\\le1).$$ The chosen target intervals are part of the notation: without them, inverse sine and inverse cosine would be multivalued relations rather than functions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "A **real** or **complex inner-product space** is an $\\mathbb F$-vector space $V$ together with an inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense of [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$, $$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$ **Conjugate-linearity in the second argument.** Conjugate symmetry together with linearity in the first argument gives, for all $w\\in V$, $$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$ **Induced length.** The **induced length**, or inner-product norm, of $v$ is $$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$ which is exactly the published [[def-inner-product-norm]]: positive definiteness makes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square root, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and $\\langle v,v\\rangle=\\|v\\|^2$. **The convention on this page.** Every inner-product space below is real or complex in this sense, the pairing is linear in the first argument and conjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$ In particular, $$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$ $$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cg-real-coxeter-form-and-reflection",
+          "source_section": "Definition",
+          "quote": "**(2) The Coxeter form.** For finite $m(s,t)$ put $c(s,t):=\\cos(\\pi/m(s,t))$ ([[def-sine-and-cosine-by-power-series]], [[def-pi-via-first-positive-cosine-zero]]) and for $m(s,t)=\\infty$ put $c(s,t):=1$; then $c(s,t)=c(t,s)$ and $c(s,s)=\\cos\\pi=-1$. The **Coxeter form** $B$ is the unique symmetric bilinear form on $V$ with $B(e_s,e_t)=-c(s,t)$ for all $s,t\\in S$; in particular $B(e_s,e_s)=1$ and $B(e_s,e_t)=-\\cos(\\pi/m(s,t))$ for finite $m(s,t)$, while $B(e_s,e_t)=-1$ when $m(s,t)=\\infty$ ([[def-bilinear-symmetric-skew-and-alternating-forms]], [[thm-bilinear-forms-correspond-to-linear-maps-into-the-dual]]). **No positive definiteness, definiteness or nondegeneracy of $B$ is presumed**: $\\operatorname{rad}(B):=\\{u:B(u,v)=0\\text{ for all }v\\in V\\}$ may be nonzero ([[def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form]]), and the form may be indefinite ([[def-definiteness-inertia-and-signature-data-over-the-reals]]). A linear map $g:V\\to V$ is **$B$-preserving** when $B(gu,gw)=B(u,w)$ for all $u,w\\in V$.\n\n**(3) Reflections.** For $a\\in V$ with $B(a,a)\\ne0$ define the **reflection with normal $a$** by $$r_a(v):=v-\\frac{2B(v,a)}{B(a,a)}a .$$ The definition asserts neither that $r_a$ is linear or an involution nor that $\\ker B(-,a)=\\{v:B(v,a)=0\\}$ is a hyperplane; these are proved in [[lem-cg-reflection-form-invariance-and-rank-two-orders]]. When $B(a,a)=0$ the symbol $r_a$ is not defined.",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-cg-reflection-form-invariance-and-rank-two-orders",
+          "source_section": "Statement",
+          "quote": "**(3) The rank-two plane.** Let $s\\ne t$ in $S$, put $P:=\\mathbb Re_s+\\mathbb Re_t$ and $c:=c(s,t)$ as in [[def-cg-real-coxeter-form-and-reflection]] (so $c=1$ when $m(s,t)=\\infty$). Then:\n\n(i) $B|_P$ has Gram matrix $\\begin{pmatrix}1&-c\\\\-c&1\\end{pmatrix}$; for finite $m$ it is positive definite, with $B(x_se_s+x_te_t,\\,x_se_s+x_te_t)=(x_s-cx_t)^2+\\sin^2(\\pi/m)\\,x_t^2$; for $m=\\infty$ it is positive semidefinite, i.e. $B(x,x)\\ge0$ for all $x\\in P$, with radical $\\mathbb R(e_s+e_t)$.\n\n(ii) $r_s$ and $r_t$ fix every element of $P^\\perp=\\{v\\in V:B(v,e_s)=B(v,e_t)=0\\}$ pointwise; and if $m<\\infty$ then $V=P\\oplus P^\\perp$.\n\n(iii) The product $A:=r_sr_t$ has, in the ordered basis $(e_s,e_t)$ of $P$, the matrix $A=\\begin{pmatrix}4c^2-1&-2c\\\\2c&-1\\end{pmatrix}$, of determinant $1$.\n\n(iv) If $m<\\infty$ then $\\operatorname{tr}A=2\\cos(2\\pi/m)$, $A^m=\\mathrm{id}_V$, and $A^k\\ne\\mathrm{id}_V$ for $0<k<m$. If $m=\\infty$ then $A=\\mathrm{id}_P+N$ on $P$ for some $N$ with $N\\ne0$ and $N^2=0$; hence $(r_sr_t)^k|_P=\\mathrm{id}_P+kN$ for every $k\\in\\mathbb Z$, so $r_sr_t$ has infinite order on $V$.",
+          "uses": [
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$ Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "Interior angle.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "Inward normals.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "The mirror lines.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The link at a vertex.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "The mirror angle.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "The product.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "The link Gram matrix.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one vertex of the nonempty regular $2m$-gon; no empty set, empty face or empty family occurs, and the angular link of a vertex is a nonempty arc."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3: the denominator $\\sqrt{B(v_s,v_s)\\,B(v_t,v_t)}=1-c^2$ is nonzero for every $m\\ge2$, and the product $r_sr_t$ is not the identity, since $\\operatorname{tr}A=2\\cos(2\\pi/m)<2$ for $m\\ge3$ and $A=-\\mathrm{id}$ on $P$ for $m=2$; the link Gram matrix has zero off-diagonal entry exactly in the square case $m=2$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and the hypothesis $m\\ge2$: the excluded value $m=1$ would make $P_m$ a degenerate closed segment; the first case $m=2$ is the square, treated in step 3.1 ($p=-1$, $q=0$) and in the Remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3: $c=\\cos(\\pi/m)<1$ for $m\\ge2$, so $\\det\\begin{pmatrix}1&-c\\\\-c&1\\end{pmatrix}=1-c^2>0$ and $B|_P$ is nondegenerate; the degenerate limit $c=1$ (i.e. $m=\\infty$) is excluded by the hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 derives the vertex angle from explicit unit edge directions using trigonometric identities. The link angle pi-pi/m and mirror angle pi/m sum to pi and are supplementary. For m=2 both equal pi/2; for m>=3 they differ. Step 3.1 fixes the rotation angle only up to orientation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are explicitly given or its unique existence is cited: the vertices $v_j$, the directions $u_\\pm$, the normals $n_\\pm$, and the $B$-orthonormal basis of step 3.1 whose existence is [F6]; nothing is selected from a family of nonempty sets without a rule."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves numerical equalities and identities (interior angle, mirror angle, link Gram matrix); it states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Same as iff-forward: the final sentence 'they are not interchangeable' records the distinctness of two numbers, not a converse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Read all seven verification steps and each cited supplier interface; independently reviewed the rank-two form/reflection proof. At v0 the edge directions (-sin a,+/-cos a) have dot product -cos(pi/m); the inward normals have dot product cos(pi/m). Mirror residuals have norm squared 1-c^2>0 and pairing c(1-c^2). Determinant-one orthogonal 2x2 matrices with the stated trace are rotations by +/-2pi/m; m=2 gives -I and equal pi/2 angles. Supplementary is the correct term for the two angles summing to pi. No arbitrary Choice, vanishing denominator, or endpoint failure. Accepted reader corrections."
+      }
+    },
+    "lem-cg-spherical-simplex-existence-and-link-gram-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$ where $L$ is lower triangular and every diagonal entry of $L$ is a positive real number.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "$A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and positive real diagonal. 2.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-principal-inverse-sine-and-cosine",
+          "source_section": "Definition",
+          "quote": "Likewise, cosine is continuous and strictly decreasing on $[0,\\pi]$, with endpoint values $1$ and $-1$, so its restricted image is $[-1,1]$ ([[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]], [[thm-quarter-turn-values-and-shift-formulas]], [[thm-intermediate-value]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "A **real** or **complex inner-product space** is an $\\mathbb F$-vector space $V$ together with an inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense of [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$, $$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$ **Conjugate-linearity in the second argument.** Conjugate symmetry together with linearity in the first argument gives, for all $w\\in V$, $$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$ **Induced length.** The **induced length**, or inner-product norm, of $v$ is $$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$ which is exactly the published [[def-inner-product-norm]]: positive definiteness makes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square root, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and $\\langle v,v\\rangle=\\|v\\|^2$. **The convention on this page.** Every inner-product space below is real or complex in this sense, the pairing is linear in the first argument and conjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then $$V=W\\oplus W^\\perp.$$ Thus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with $$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$ Equivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which $f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals the average rate of change across the whole interval. **Continuity on the closed interval cannot be dropped.** Differentiability at every point of $(a,b)$ alone does not suffice: a function on $[0,1]$, differentiable at every point of $(0,1)$ with derivative constantly $1$, for which no $c$ works, is exhibited later on this page as a false statement, and the companion page works the same witness out in full.",
+          "uses": [
+            "1.3",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-sin-x-over-x-limit",
+          "source_section": "Statement",
+          "quote": "$$\\lim_{x\\to0}\\frac{\\sin x}{x}=1.$$",
+          "uses": [
+            "1.3",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$ Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.3",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "source_section": "Statement",
+          "quote": "Consequently $\\cos$ is strictly decreasing on $[0,2]$.",
+          "uses": [
+            "1.3",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$ In particular, $$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.3",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$ $$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.3",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.3",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$.",
+          "uses": [
+            "1.3",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be continuous on the closed bounded interval $[a,b]$ ([[def-interval]], [[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy $$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$ Then there is $c \\in [a,b]$ with $f(c) = y$. **The construction is canonical, so no choice principle is used.** The bisection below tests the left half first and takes the right half only when the left one has been ruled out, so the passage from one interval to the next is a *function* of that interval, and [[thm-recursion]] applies with nothing selected.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-convex-cell-complex-and-linear-subdivision",
+          "source_section": "Definition",
+          "quote": "A **compact convex polyhedral cell** is a nonempty bounded set in a finite-dimensional Euclidean affine subspace given by finitely many affine inequalities $\\ell_i(x)\\geq0$.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-abstract-simplicial-complex",
+          "source_section": "Definition",
+          "quote": "An **abstract simplicial complex** is a pair $(V,K)$ consisting of a set $V$ of vertices and a family $K$ of finite subsets of $V$ such that: 1.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-closed-subset-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]], [[def-metric-space]]) and let $F \\subseteq X$ be closed in $X$ ([[def-metric-topology]]).",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization",
+          "source_section": "Statement",
+          "quote": "If $K$ is a finite abstract simplicial complex, then its geometric realization $|K|$ is compact and Hausdorff.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric",
+          "source_section": "Definition",
+          "quote": "The elements of $P$ are called **faces**, $p\\le q$ is read \"$p$ is a face of $q$\", and $\\varnothing$ is the **empty face**. **Isometric polyhedral gluing.** An *isometric polyhedral gluing of shape $P$* consists of the following data. **(i) Cells and face isometries.** For every $p\\in P\\setminus\\{\\varnothing\\}$ a nonempty compact convex polyhedral cell $C_p$ in a finite-dimensional Euclidean affine space, and for every pair $p\\le q$ of nonempty faces a nonempty face $F_{p,q}$ of $C_q$ together with an affine isometry $h_{p,q}$ from the affine span of $C_p$ onto the affine span of $F_{p,q}$ ([[def-isometry-and-metric-embedding]]) which carries $C_p$ onto $F_{p,q}$, subject to: - $h_{p,p}=\\operatorname{id}_{C_p}$ for every $p$; - the *cocycle condition* $h_{q,r}\\circ h_{p,q}=h_{p,r}$ whenever $p\\le q\\le r$; - for every $q$ the assignment $p\\mapsto F_{p,q}=h_{p,q}(C_p)$ is an isomorphism of posets from $P_{\\le q}\\setminus\\{\\varnothing\\}$ onto the set of nonempty faces of $C_q$, ordered by inclusion. **(ii) Quotient and intersection condition.** Let $X$ be the quotient of the disjoint union $\\bigsqcup_{p\\in P\\setminus\\{\\varnothing\\}}C_p$ by the equivalence relation generated by $x\\sim h_{p,q}(x)$ for $x\\in C_p$ and $p\\le q$, and let $\\iota_p\\colon C_p\\to X$ denote the quotient map.",
+          "uses": [
+            "2.4",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-cg-metric-target-length-reparametrization-and-lower-semicontinuity",
+          "source_section": "Statement",
+          "quote": "**(i) Lower semicontinuity.** If $\\gamma_k,\\gamma\\colon[a,b]\\to X$ are paths with $\\sup_{t\\in[a,b]}d(\\gamma_k(t),\\gamma(t))\\to0$ (uniform convergence, [[def-topology-of-uniform-convergence]]), then $L(\\gamma)\\le\\liminf_{k\\to\\infty}L(\\gamma_k)$, the limit inferior being taken in $[0,\\infty]$ ([[def-limsup-and-liminf-of-nonnegative-extended-sequences]]).\n\n**(ii) Arc-length parametrization.** If $\\gamma$ is continuous ([[def-metric-continuity]]) and rectifiable, with $L:=L(\\gamma)<\\infty$, then $s(t):=L(\\gamma|_{[a,t]})$ defines a continuous nondecreasing surjection $s\\colon[a,b]\\to[0,L]$ with $s(a)=0$ and $s(b)=L$; there is a unique map $\\bar\\gamma\\colon[0,L]\\to X$ with $\\gamma=\\bar\\gamma\\circ s$; and $\\bar\\gamma$ is $1$-Lipschitz with $L(\\bar\\gamma|_{[r,q]})=q-r$ for all $0\\le r\\le q\\le L$. If $L=0$ then $\\gamma$ is constant, $[0,L]=\\{0\\}$, and $\\bar\\gamma$ is that constant.\n\n**(iii) Equicontinuity of bounded arc-length families.** Call a path $\\gamma\\colon[a,b]\\to X$ **arc-length parametrized** when $L(\\gamma)<\\infty$ and\n$$L(\\gamma|_{[s,t]})=\\frac{t-s}{b-a}\\,L(\\gamma)\\qquad\\text{for all } a\\le s\\le t\\le b .$$\nIf $M<\\infty$ and the paths $\\gamma_k\\colon[0,1]\\to X$ are arc-length parametrized with $L(\\gamma_k)\\le M$ for every $k$, then each $\\gamma_k$ is $M$-Lipschitz and the family $(\\gamma_k)$ is equicontinuous and uniformly equicontinuous ([[def-equicontinuity]]).",
+          "uses": [
+            "2.4",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cg-polyhedral-chain-metric-topology-and-properness",
+          "source_section": "Statement",
+          "quote": "Then: **(1) Well-definedness and metric.** The length of a chain does not depend on the cells chosen to measure its steps, every two points of $X$ are joined by a chain, and $d\\colon X\\times X\\to[0,\\infty)$ is a metric on $X$: for all $x,y,z\\in X$, $d(x,x)=0$, $d(x,y)=d(y,x)$, $d(x,y)>0$ whenever $x\\ne y$, and $d(x,z)\\le d(x,y)+d(y,z)$ ([[def-metric-space]]). **(2) Topology.** The metric topology of $d$ ([[def-metric-topology]]) coincides with the weak topology of the gluing: a subset of $X$ is open in the metric topology if and only if its trace on every closed cell is relatively open. **(3) Properness and completeness.** Every closed $d$-bounded subset of $X$ is compact ([[def-metric-compactness]]); in particular $(X,d)$ is complete ([[def-complete-metric-space]]) and every closed ball is compact.",
+          "uses": [
+            "2.4",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics",
+          "source_section": "Statement",
+          "quote": "Let $X$ be an isometric polyhedral gluing with standing hypotheses (H1)-(H3) of [[def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric]], so that $(X,d)$ is a proper metric space by [[thm-cg-polyhedral-chain-metric-topology-and-properness]].",
+          "uses": [
+            "2.4",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Choice.** Let $X$ be a nonempty compact metric space, let $Y$ be a proper metric space, and let $(f_k)_{k\\in\\mathbb N}$ be an equicontinuous sequence in $C(X,Y)$. If $\\{f_k(x):k\\in\\mathbb N\\}$ is bounded for every $x\\in X$, then some subsequence converges uniformly to a member of $C(X,Y)$.",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-bilipschitz-embedding-and-bilipschitz-equivalence",
+          "source_section": "Definition",
+          "quote": "The map $f$ is a **bilipschitz embedding** if there is a real $L \\ge 1$ such that\n\n$$L^{-1} d_X(x,x') \\le d_Y(f(x),f(x')) \\le L\\,d_X(x,x') \\qquad \\text{for all } x,x' \\in X.$$",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-geodesic-and-geodesic-metric-space",
+          "source_section": "Definition",
+          "quote": "A **geodesic segment** from $x$ to $y$ is a map\n$$\\gamma : [0,\\ell] \\to X$$\nfor some real $\\ell \\ge 0$ such that\n\n$$\\gamma(0)=x,\\qquad \\gamma(\\ell)=y,\\qquad d(\\gamma(s),\\gamma(t)) = |s-t| \\text{ for all } s,t \\in [0,\\ell].$$",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-metric-compactness",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open sets as in [[def-metric-topology]] and balls as in [[def-metric-ball]]. - An **open cover** of $(X,d)$ is a family $\\mathcal{U}$ of open subsets of $X$ with $X = \\bigcup \\mathcal{U}$, where $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$. - A **subcover** of $\\mathcal{U}$ is a subfamily $\\mathcal{V} \\subseteq \\mathcal{U}$ that is itself an open cover. - A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\emptyset$ or there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and harmless. - $(X,d)$ is **compact** when every open cover of it has a finite subcover: for every open cover $\\mathcal{U}$, either $X = \\emptyset$ and the empty subfamily covers it, or there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $$X = U_0 \\cup \\dots \\cup U_n .$$ - A subset $A \\subseteq X$ is a **compact subset** of $X$ when the metric subspace $(A, d_A)$ is a compact metric space, $d_A$ being the restriction of $d$ to $A \\times A$ ([[def-isometry-and-metric-embedding]]). **Compactness of a subset is defined intrinsically, and only intrinsically.** The last clause speaks about the subspace $(A,d_A)$ and its own open sets, not about families of open subsets of the ambient $X$.",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "A **metric** on $X$ is a function $d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$: - **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$. - **(M2) Symmetry.** $d(x,y) = d(y,x)$. - **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-pointwise-uniform-and-uniformly-cauchy-convergence",
+          "source_section": "Definition",
+          "quote": "The sequence $(f_k)$ **converges uniformly** to $f$ on $X$ when\n\n$$(\\forall \\varepsilon>0)(\\exists N\\in\\mathbb{N})(\\forall k\\ge N)(\\forall x\\in X)\\quad |f_k(x)-f(x)|<\\varepsilon,$$\n\nwhere $\\varepsilon$ ranges over the positive reals. Here one index $N$ serves\nevery point of $X$.",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-upper-bound",
+          "source_section": "Definition",
+          "quote": "An element $u \\in P$ is an **upper bound** of $S$ if $s \\le u$ for every $s \\in S$.",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$** ([[def-metric-space]]).",
+          "uses": [
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "Gram realisation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "The two tangent-cone descriptions.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "The angular distance is a metric.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The hemisphere functional.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Schur complements.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d-2.3",
+          "claim": "The intrinsic path metric of a link.",
+          "step": "2.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.3",
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d-2.4",
+          "claim": "Links of gluings.",
+          "step": "2.4",
+          "inputs": [
+            "step 1.2",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Radial coordinates.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-3.2",
+          "claim": "Iterated links and face compatibility.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "Lipschitz estimates and the chord bound.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F9",
+            "F3",
+            "F2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d-4.2",
+          "claim": "The finite spherical complex and the descent map.",
+          "step": "4.2",
+          "inputs": [
+            "step 1.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "d-4.3",
+          "claim": "The link of a face of a finite spherical complex.",
+          "step": "4.3",
+          "inputs": [
+            "step 3.2",
+            "step 2.2",
+            "step 2.4"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "Bi-Lipschitz equivalence of the model and its spherical simplex.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "F8"
+          ]
+        },
+        {
+          "id": "d-6.1",
+          "claim": "The radial map is bi-Lipschitz for the chain metrics.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "step 4.2"
+          ]
+        },
+        {
+          "id": "d-7.1",
+          "claim": "The metric, topology, properness and completeness of $X$.",
+          "step": "7.1",
+          "inputs": [
+            "F7",
+            "step 6.1",
+            "step 4.2",
+            "F6"
+          ]
+        },
+        {
+          "id": "d-8.1",
+          "claim": "Minimizing geodesics (AC).",
+          "step": "8.1",
+          "inputs": [
+            "step 2.3",
+            "step 7.1",
+            "F5",
+            "F8",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-9.1",
+          "claim": "The $+\\infty$ convention.",
+          "step": "9.1",
+          "inputs": [
+            "step 4.3",
+            "step 7.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Clause (iii) and steps 6.1–7.1 include the empty complex X=Y=empty, with no maximum over an empty collection required. Clause (iv) and step 3.2 give an empty normal link for a full face, including the vertex link when n=0; no positive-dimensional Gram formula is applied to an empty complement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows $\\varphi>0$ on $K(C)\\setminus\\{0\\}$, step 4.1 defines $m_0=\\min_{z\\in\\Delta(C)}|z|>0$ and divides by it, and step 2.2 verifies $|c_{i0}|<1$ so that every Schur entry $c^{\\mathrm{lk}}_{ij}$ is defined; the zero-radius case of the cone is not a point of $(0,\\infty)\\times L$. Clause (v) quantifies the arc over unit directions in N_FC intersect S(V), excluding the cone zero vector; step 2.3 proves the corrected domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 with $n=0$ gives $C=(1)$, $L=(1)$ and the single-point simplex $\\Sigma(C)$; step 3.2 with a one-vertex set $A$ recovers the vertex link, and clause (iv)'s formula with $n=1$ produces the $1\\times1$ matrix $c^{\\mathrm{lk}}_{11}=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 6.1–7.1 apply metric and bi-Lipschitz claims only within components. Across distinct components, no chain exists and the distance is auxiliary infinity; step 9.1 retains this convention for face links. Constant inequality rows do not define normals."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.3 covers coincident link directions by the constant path and distinct directions by the shorter great-circle arc; the normal cone is pointed, so its distinct unit directions are never antipodal. Step 4.1 proves chord comparison on the ambient sphere, including angle pi, where round=(pi/2) chord."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Clause (iii) assumes AC for minimizing geodesics: step 8.1 selects one near-minimizing chain for each positive integer and invokes the AC-dependent proper-target Ascoli theorem. All metric/topology claims and clauses (i), (ii), (iv), (v), (vi) are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states constructions, estimates and implications ('hence', 'if $\\dots$ then'), not an if-and-only-if claim; the 'equivalently' in clause (iii) is the definition of the chain metric by two infima, proved as an equality in step 7.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Same as iff-forward: no converse direction is asserted; the uniqueness assertions of clause (i) are uniqueness of the isometry and of the barycentric coordinates, not a converse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Read all 17 proof steps, every cited dependency interface, current length/geodesic/chain-metric/star supplier proofs and all citation and boundary records. Verified Gram uniqueness; phi positivity and both inverse radial formulas; positive attained m0; explicit radial and round/chord Lipschitz constants; chain infima and metric/topology/proper/completeness componentwise, including the empty complex. Rechecked Schur positivity, normalized residual directions, full-face/n=0 empty links and order-independent perpendicular projection. The active-gradient kernel is U(F); the normal cone is pointed and its unit section is intrinsically convex. Amended clause (v) to quantify great-circle arcs over unit directions, excluding zero. The local Ascoli proof assumes AC for chains and subsequences and uses the correct length squeeze and arclength endpoint triangle. All consumer uses of the amended clause concern unit links; none requires zero-vector arcs. No unmet prerequisite remains."
+      }
+    },
+    "def-cg-euclidean-cone-and-spherical-join-metrics": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition (3): $C(\\emptyset)=\\{o\\}$ is a one-point space; Definition (5): $L*\\emptyset:=L$, $\\emptyset*L:=L$, $\\emptyset*\\emptyset:=\\emptyset$, and $d_\\pi$ on an empty link is the empty family of distances, with no metric value asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The apex is supplied separately from (0,infinity) times L; pairs (0,x) are notation for it only, not additional points. The extended path distance vanishes exactly on the diagonal."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A one-point link has a Euclidean ray as its cone. Joining a nonempty link with a point gives the spherical cone with join parameter in [0,pi/2], with distances governed by the cosine formula; it is not the unbounded Euclidean cone of clause (3). The convention L*empty=L is a separate empty-factor case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition (4): links that are not $D_\\pi$-geodesic (for instance a truncated circle) are deliberately admitted, and the convention prescribes exactly which comparisons are permitted; Definition (1) allows $d_{\\mathrm{path}}=+\\infty$ between distinct components."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition (5): the parameter $\\theta$ runs over $[0,\\pi/2]$ and its endpoint values $\\theta=0$, $\\theta=\\pi/2$ are precisely the identifications $(x,y,0)\\sim(x,y',0)$ and $(x,y,\\pi/2)\\sim(x',y,\\pi/2)$ that collapse the join to $L_1$ and $L_2$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition fixes notation for a given extended metric and names the apex $o$ explicitly; it selects nothing from a family of nonempty sets, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed: the clauses record a construction and conventions, and every equivalance (metric axioms of $d_\\pi$, of the cone and of the join; the product-cone isometry) is deferred to [[thm-cg-cone-join-metric-and-local-product-chart]]."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Same as iff-forward: the definition asserts no if-and-only-if statement and defers all metric properties to its justifier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Reviewed all five construction clauses and every cited interface, with Bridson-Haefliger I.5.6-5.16 (printed pp.59-64) as source evidence. Extended path distance is expressly auxiliary and enters cosine only after truncation. Cone uses a separate apex, including C(empty)={o}; nonnegative root is defined from the law of cosines. Join coefficients bound the cosine in [-1,1], endpoint representatives collapse the unused coordinate, and separate empty-factor conventions make product-cone identities consistent. D_pi-geodesic and short-perimeter tests remain hypotheses/conventions deferred to the justifier. Current item bytes equal both pre and post; the item construction has no defect. The reader repaired a false contract singleton-boundary identification: a join with a point is a bounded spherical cone, not the Euclidean cone (S0*{p} is an interval of length pi, whereas C(S0) is the line). Accept that mathematical contract correction."
+      }
+    },
+    "ex-cg-spherical-simplex-and-vertex-link-schur-complement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$ where $L$ is lower triangular and every diagonal entry of $L$ is a positive real number.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "$A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and positive real diagonal. 2.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$.",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "A **real** or **complex inner-product space** is an $\\mathbb F$-vector space $V$ together with an inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense of [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$, $$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$ **Conjugate-linearity in the second argument.** Conjugate symmetry together with linearity in the first argument gives, for all $w\\in V$, $$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$ **Induced length.** The **induced length**, or inner-product norm, of $v$ is $$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$ which is exactly the published [[def-inner-product-norm]]: positive definiteness makes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square root, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and $\\langle v,v\\rangle=\\|v\\|^2$. **The convention on this page.** Every inner-product space below is real or complex in this sense, the pairing is linear in the first argument and conjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cg-spherical-simplex-existence-and-link-gram-formula",
+          "source_section": "Statement",
+          "quote": "**(iv) Vertex and face links by Schur complements.** The normal link of a nonempty spherical face spanned by vertices indexed by $A$ consists of the unit tangent directions perpendicular to $P_A:=\\operatorname{span}\\{u_a:a\\in A\\}$ that point into $\\Sigma(C)$ at a relative interior point of the face. For $n\\ge1$ and $1\\le i\\le n$ put $v_i:=(u_i-c_{i0}u_0)/\\sqrt{1-c_{i0}^{2}}\\in u_0^\\perp\\cap S^n$. The link of the vertex $u_0$ in $\\Sigma(C)$ is the spherical simplex with vertices $v_1,\\dots,v_n$, and its Gram matrix is\n$$c^{\\mathrm{lk}}_{ij}=\\frac{c_{ij}-c_{i0}c_{j0}}{\\sqrt{(1-c_{i0}^{2})(1-c_{j0}^{2})}}\\qquad(1\\le i,j\\le n),$$\nwhich is positive definite: the projection formula follows by expanding $v_i\\cdot v_j$, and positivity follows from the positive definiteness of the unnormalised Schur complement $(c_{ij}-c_{i0}c_{j0})_{i,j\\ge1}$, whose quadratic form is $w^{T}Cw>0$ for the nonzero vector $w=(-x_1c_{10}-\\cdots-x_nc_{n0},\\,x_1,\\dots,x_n)$. Iterating the formula over the vertices of a face of $\\Sigma(C)$ gives the link of that face; the result is independent of the order of iteration, and the link of a face of a link is the link of a higher face. If no vertices remain, the link is empty; in particular the vertex link for $n=0$ is empty. More generally, for a nonempty proper vertex set $A$, let $C_A=(c_{ab})_{a,b\\in A}$, $b_i=(c_{ai})_{a\\in A}$ and $w_i:=u_i-\\sum_{a\\in A}(C_A^{-1}b_i)_a u_a$ for $i\\notin A$. These are the orthogonal projections onto $P_A^\\perp$, with $z_{ij}:=\\langle w_i,w_j\\rangle=c_{ij}-b_i^TC_A^{-1}b_j$; the face-link Gram matrix is $z_{ij}/\\sqrt{z_{ii}z_{jj}}$.",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space, $$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$ with equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-spherical-gram-simplex-and-angular-link",
+          "source_section": "Definition",
+          "quote": "The **tangent cone** of $C$ at $F$ is $$T_FC:=\\{\\xi\\in V:\\langle\\xi,n_j\\rangle\\ge0\\text{ for all }j\\in I(F)\\},$$ equivalently the closure of $\\{\\lambda(x-p):x\\in C,\\ \\lambda\\ge0\\}$ for any (hence every) $p$ in the relative interior of $F$, and the **normal cone** of $F$ in $C$ is $$N_FC:=T_FC\\cap U(F)^{\\perp},\\qquad U(F)^{\\perp}=\\{\\xi\\in V:\\langle\\xi,u\\rangle=0\\text{ for all }u\\in U(F)\\};$$ the **angular link** of $F$ in $C$ is the set of unit inward directions *normal to $F$*, $$\\operatorname{Lk}_C(F):=N_FC\\cap S(V),\\qquad S(V)=\\{\\xi\\in V:|\\xi|=1\\},$$ and the **angular distance** of $\\xi,\\eta\\in\\operatorname{Lk}_C(F)$ is $d_{\\mathrm{ang}}(\\xi,\\eta):=\\arccos\\langle\\xi,\\eta\\rangle$, the principal inverse cosine ([[def-principal-inverse-sine-and-cosine]]); equivalently it is the intrinsic path metric of the round unit sphere restricted to the link, a metric of diameter at most $\\pi$ ([[def-metric-space]]; proved in [[lem-cg-spherical-simplex-existence-and-link-gram-formula]](v), using that $N_FC$ is a convex cone).",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-principal-inverse-sine-and-cosine",
+          "source_section": "Definition",
+          "quote": "Likewise, cosine is continuous and strictly decreasing on $[0,\\pi]$, with endpoint values $1$ and $-1$, so its restricted image is $[-1,1]$ ([[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]], [[thm-quarter-turn-values-and-shift-formulas]], [[thm-intermediate-value]]).",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cg-spherical-simplex-existence-and-link-gram-formula",
+          "source_section": "Statement",
+          "quote": "**(i) Existence and uniqueness of the Gram realisation.** The vectors $u_i$ are unit vectors with $u_i\\cdot u_j=c_{ij}$, they are linearly independent and span $\\mathbb R^{n+1}$, and every other family $u_i'$ of unit vectors in a Euclidean space with $u_i'\\cdot u_j'=c_{ij}$ is the image of $(u_0,\\dots,u_n)$ under a linear isometry of $\\mathbb R^{n+1}$ onto the span of the $u_i'$. Hence $\\Sigma(C)$ is well-defined up to an isometry of $S^n$ mapping vertices to vertices.\n\n**(ii) Hemisphere, radial coordinates and bi-Lipschitz comparison.** The linear functional $\\varphi$ determined by $\\varphi(u_i)=1$ for all $i$ satisfies $\\varphi\\bigl(\\sum_i\\lambda_iu_i\\bigr)=\\sum_i\\lambda_i$; consequently $\\varphi>0$ on $K(C)\\setminus\\{0\\}$ and $\\Sigma(C)$ is contained in the open hemisphere $\\{x\\in S^n:\\varphi(x)>0\\}$. Radial normalisation $\\rho(x):=x/|x|$ restricts to a bijection $\\Delta(C)\\to\\Sigma(C)$, where $\\Delta(C):=\\{\\sum_i\\lambda_iu_i:\\lambda_i\\ge0,\\ \\sum_i\\lambda_i=1\\}$, with inverse $y\\mapsto y/\\varphi(y)$; every point of $\\Sigma(C)$ therefore has unique barycentric ray coordinates $\\lambda_i\\ge0$ with $\\sum_i\\lambda_i=1$. Moreover $\\rho$ and $\\rho^{-1}$ satisfy the explicit Lipschitz estimates $|\\rho(x)-\\rho(y)|\\le\\frac{2}{\\min_{z\\in\\Delta(C)}|z|}|x-y|$ and $|\\rho^{-1}(y)-\\rho^{-1}(y')|\\le(1+\\lVert\\varphi\\rVert)|y-y'|$, proved directly from the formulas without differentiability; here $\\lVert\\varphi\\rVert=|w|$ for the unique coordinate vector $w$ with $\\varphi(x)=w\\cdot x$. Hence the round metric $d_{\\mathrm{ang}}(\\xi,\\eta)=\\arccos\\langle\\xi,\\eta\\rangle$ on $\\Sigma(C)$ is bi-Lipschitz equivalent to the Euclidean metric of the compact convex cell $\\Delta(C)$ carried by $\\rho$ (on a subset of the unit sphere the round distance and the chord distance satisfy $\\text{chord}\\le\\text{round}\\le\\frac{\\pi}{2}\\,\\text{chord}$).\n\n**(iii) Finite spherical complexes.** Let $K$ be a finite abstract simplicial complex ([[def-abstract-simplicial-complex]]) whose nonempty simplices $\\sigma$ carry positive-definite Gram matrices $C_\\sigma$ of diagonal $1$, compatible with faces. Form $X:=|K|_C$ by gluing the spherical simplices $\\Sigma(C_\\sigma)$ along their vertex-wise face identifications. On each component define the **chain metric** $d$ as the infimum of $\\sum_i d_{p_i}(x_{i-1},x_i)$ over finite chains in common cells, with $d_p$ the angular metric of that cell; equivalently it is the infimum of lengths of continuous paths. Between different components this infimum is $+\\infty$, auxiliary notation rather than a metric value ([[def-metric-space]]). The inverse cellwise radial maps descend to a homeomorphism $X\\to Y$, where $Y$ is the Euclidean gluing with cells $\\Delta(C_\\sigma)$; it is bi-Lipschitz on every component. Each component of $X$ is a compact proper complete length space whose metric topology is the weak topology, and $X$ is a finite disjoint union of these components. For the empty complex, $X=Y=\\emptyset$. *Under the Axiom of Choice* ([[def-axiom-of-choice]]), every two points in a component are joined by a minimizing geodesic of length $d(x,y)$, in particular every pair at distance $<\\pi$. The proper-target argument is written locally below, using [[lem-cg-metric-target-length-reparametrization-and-lower-semicontinuity]] and [[cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets]]; compare [[thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics]].\n\n**(iv) Vertex and face links by Schur complements.** The normal link of a nonempty spherical face spanned by vertices indexed by $A$ consists of the unit tangent directions perpendicular to $P_A:=\\operatorname{span}\\{u_a:a\\in A\\}$ that point into $\\Sigma(C)$ at a relative interior point of the face. For $n\\ge1$ and $1\\le i\\le n$ put $v_i:=(u_i-c_{i0}u_0)/\\sqrt{1-c_{i0}^{2}}\\in u_0^\\perp\\cap S^n$. The link of the vertex $u_0$ in $\\Sigma(C)$ is the spherical simplex with vertices $v_1,\\dots,v_n$, and its Gram matrix is\n$$c^{\\mathrm{lk}}_{ij}=\\frac{c_{ij}-c_{i0}c_{j0}}{\\sqrt{(1-c_{i0}^{2})(1-c_{j0}^{2})}}\\qquad(1\\le i,j\\le n),$$\nwhich is positive definite: the projection formula follows by expanding $v_i\\cdot v_j$, and positivity follows from the positive definiteness of the unnormalised Schur complement $(c_{ij}-c_{i0}c_{j0})_{i,j\\ge1}$, whose quadratic form is $w^{T}Cw>0$ for the nonzero vector $w=(-x_1c_{10}-\\cdots-x_nc_{n0},\\,x_1,\\dots,x_n)$. Iterating the formula over the vertices of a face of $\\Sigma(C)$ gives the link of that face; the result is independent of the order of iteration, and the link of a face of a link is the link of a higher face. If no vertices remain, the link is empty; in particular the vertex link for $n=0$ is empty. More generally, for a nonempty proper vertex set $A$, let $C_A=(c_{ab})_{a,b\\in A}$, $b_i=(c_{ai})_{a\\in A}$ and $w_i:=u_i-\\sum_{a\\in A}(C_A^{-1}b_i)_a u_a$ for $i\\notin A$. These are the orthogonal projections onto $P_A^\\perp$, with $z_{ij}:=\\langle w_i,w_j\\rangle=c_{ij}-b_i^TC_A^{-1}b_j$; the face-link Gram matrix is $z_{ij}/\\sqrt{z_{ii}z_{jj}}$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The quadratic form.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The Gram realisation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "The hemisphere functional.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-3.2",
+          "claim": "The vertex link.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-3.3",
+          "claim": "The face link by projection.",
+          "step": "3.3",
+          "inputs": [
+            "step 2.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "The two-step Schur value.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.2",
+            "step 3.3",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "Order independence and conclusion.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.3",
+            "step 4.1",
+            "F3",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example has four fixed vertices. Its vertex link is a triangle and the link of the nonempty edge {u_0,u_1} is an arc. No empty face or empty projection complement is needed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: $x^{T}Cx=(1-c)\\|x\\|^2+c(\\sum_ix_i)^2>0$ for $x\\ne0$ with $1-c=c=\\tfrac12$; step 3.2 verifies the link quadratic form is positive for $y\\ne0$, and step 4.1 computes the positive two-step Schur value $\\tfrac14$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.2 produces the $3\\times3$ vertex-link matrix and step 3.3 the $2\\times2$ face-link ($n=1$ spherical simplex, an arc of angular length $\\arccos\\tfrac14$); the rank-one case of the Schur formula is the iterated block of step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.3 has equal projections onto span(u_0,u_1), Pu_2=Pu_3, but distinct residual normal directions: their squared norms are 2/3 and their inner product is 1/6, giving cosine 1/4. Clause (iii) specifies off-diagonal entries 1/3; diagonal entries remain 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter of the example runs over an interval: $c=\\tfrac12$ and the four vertices are fixed, and the iterated Schur computation of step 4.1 involves no limiting value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every object is computed from the given matrix: the Cholesky factor is unique by [F1], the functional $\\varphi$ is exhibited as the pairing with $w=\\tfrac25(u_0+u_1+u_2+u_3)$ in step 3.1, and the projections come from the explicit inverse Gram matrix in step 3.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts equalities of quadratic forms, matrices and numbers; the agreement of the projection and Schur computations in step 5.1 is an equality of one matrix, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Same as iff-forward: no converse direction is stated anywhere in the example."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Reviewed seven verification steps and all cited interfaces. C=(1/2)I+(1/2)11^T is positive definite; w=(2/5)sum u_i pairs to 1 with each vertex. Vertex residuals have off-diagonal cosine 1/3 and diagonal 1. Inverse two-vertex Gram gives Pu2=Pu3=(u0+u1)/3, projection norm squared 1/3, residual squared norm 2/3 and pairing 1/6, hence cosine 1/4; the iterated Schur calculation agrees and the final determinant is 15/16>0. Corrected off-diagonal qualification and vertex-to-vertex distance wording are accepted. Fixed matrix avoids empty/zero denominators; all choice is finite and no arbitrary AC is used."
+      }
+    },
+    "thm-cg-cone-join-metric-and-local-product-chart": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-euclidean-cone-and-spherical-join-metrics",
+          "source_section": "Definition",
+          "quote": "**(1) Angular path metric.** Let $L$ be a set with an **extended metric** $d_{\\mathrm{path}}:L\\times L\\to[0,\\infty]$, symmetric, vanishing exactly on the diagonal and satisfying the triangle inequality in the extended reals.",
+          "uses": [
+            "1.1",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.2",
+            "4.3",
+            "4.4",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-principal-inverse-sine-and-cosine",
+          "source_section": "Definition",
+          "quote": "Sine is differentiable, hence continuous, and strictly increasing on $[-\\pi/2,\\pi/2]$; its endpoint values are $-1$ and $1$ ([[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-quarter-turn-values-and-shift-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]]).",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.2",
+            "4.3",
+            "4.4",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$ These are real power series in the sense of [[def-real-power-series-and-radius-of-convergence]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.2",
+            "4.3",
+            "4.4",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$ $$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.2",
+            "4.3",
+            "4.4",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.2",
+            "4.3",
+            "4.4",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]).",
+          "uses": [
+            "1.3",
+            "1.4",
+            "4.3",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$** ([[def-metric-space]]).",
+          "uses": [
+            "1.3",
+            "1.4",
+            "4.3",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric",
+          "source_section": "Definition",
+          "quote": "The elements of $P$ are called **faces**, $p\\le q$ is read \"$p$ is a face of $q$\", and $\\varnothing$ is the **empty face**. **Isometric polyhedral gluing.** An *isometric polyhedral gluing of shape $P$* consists of the following data. **(i) Cells and face isometries.** For every $p\\in P\\setminus\\{\\varnothing\\}$ a nonempty compact convex polyhedral cell $C_p$ in a finite-dimensional Euclidean affine space, and for every pair $p\\le q$ of nonempty faces a nonempty face $F_{p,q}$ of $C_q$ together with an affine isometry $h_{p,q}$ from the affine span of $C_p$ onto the affine span of $F_{p,q}$ ([[def-isometry-and-metric-embedding]]) which carries $C_p$ onto $F_{p,q}$, subject to: - $h_{p,p}=\\operatorname{id}_{C_p}$ for every $p$; - the *cocycle condition* $h_{q,r}\\circ h_{p,q}=h_{p,r}$ whenever $p\\le q\\le r$; - for every $q$ the assignment $p\\mapsto F_{p,q}=h_{p,q}(C_p)$ is an isomorphism of posets from $P_{\\le q}\\setminus\\{\\varnothing\\}$ onto the set of nonempty faces of $C_q$, ordered by inclusion. **(ii) Quotient and intersection condition.** Let $X$ be the quotient of the disjoint union $\\bigsqcup_{p\\in P\\setminus\\{\\varnothing\\}}C_p$ by the equivalence relation generated by $x\\sim h_{p,q}(x)$ for $x\\in C_p$ and $p\\le q$, and let $\\iota_p\\colon C_p\\to X$ denote the quotient map.",
+          "uses": [
+            "1.6",
+            "4.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cg-polyhedral-face-coherence-and-uniform-star-radius",
+          "source_section": "Statement",
+          "quote": "Let $X$ be an isometric polyhedral gluing with standing hypotheses (H1)-(H3) of [[def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric]], with chain metric candidate $d$, maximal dimension $D$ and finite model list.",
+          "uses": [
+            "1.6",
+            "4.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "source_section": "Statement",
+          "quote": "Every finite convex cell complex has a compatible finite simplicial triangulation.",
+          "uses": [
+            "1.6",
+            "4.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cg-polyhedral-chain-metric-topology-and-properness",
+          "source_section": "Statement",
+          "quote": "Then: **(1) Well-definedness and metric.** The length of a chain does not depend on the cells chosen to measure its steps, every two points of $X$ are joined by a chain, and $d\\colon X\\times X\\to[0,\\infty)$ is a metric on $X$: for all $x,y,z\\in X$, $d(x,x)=0$, $d(x,y)=d(y,x)$, $d(x,y)>0$ whenever $x\\ne y$, and $d(x,z)\\le d(x,y)+d(y,z)$ ([[def-metric-space]]). **(2) Topology.** The metric topology of $d$ ([[def-metric-topology]]) coincides with the weak topology of the gluing: a subset of $X$ is open in the metric topology if and only if its trace on every closed cell is relatively open. **(3) Properness and completeness.** Every closed $d$-bounded subset of $X$ is compact ([[def-metric-compactness]]); in particular $(X,d)$ is complete ([[def-complete-metric-space]]) and every closed ball is compact.",
+          "uses": [
+            "1.6",
+            "4.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-geodesic-and-geodesic-metric-space",
+          "source_section": "Definition",
+          "quote": "The metric space $X$ is **geodesic** if every two points of $X$ are joined by a geodesic segment.",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "When only one metric is in play we write $X$ for $(X,d)$; when several are, the metric is always named. **The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so $d(x,y)$ is an honest element of the complete ordered field and every inequality above is an inequality there.",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "step": "1.1",
+          "claim": "Truncation.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "step": "1.2",
+          "claim": "Cone basics.",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "step": "1.3",
+          "claim": "The cone triangle inequality, first case.",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-1.4",
+          "step": "1.4",
+          "claim": "Development of a minimizing segment.",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-1.5",
+          "step": "1.5",
+          "claim": "The join: descent and first properties.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-1.6",
+          "step": "1.6",
+          "claim": "Localisation and radial coordinates.",
+          "inputs": [
+            "F4"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "step": "2.1",
+          "claim": "Triples and antipodal pairs.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "step": "2.2",
+          "claim": "The cone triangle inequality, second case.",
+          "inputs": [
+            "step 1.2",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-2.3",
+          "step": "2.3",
+          "claim": "The product-cone isometry.",
+          "inputs": [
+            "step 1.2",
+            "step 1.5",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "step": "3.1",
+          "claim": "The cone is a metric.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "step": "4.1",
+          "claim": "The apex paths.",
+          "inputs": [
+            "step 1.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d-4.2",
+          "step": "4.2",
+          "claim": "The join is a metric space.",
+          "inputs": [
+            "step 1.5",
+            "step 3.1",
+            "step 2.3",
+            "F2",
+            "F5",
+            "C2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d-4.3",
+          "step": "4.3",
+          "claim": "The cone over a sphere.",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-4.4",
+          "step": "4.4",
+          "claim": "The tangent-cone metric and the cone formula.",
+          "inputs": [
+            "step 3.1",
+            "step 1.6",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "step": "5.1",
+          "claim": "Geodesic space.",
+          "inputs": [
+            "step 1.4",
+            "step 4.1",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-5.2",
+          "step": "5.2",
+          "claim": "Associativity, faces and spheres.",
+          "inputs": [
+            "step 2.3",
+            "step 4.2",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-6.1",
+          "step": "6.1",
+          "claim": "Containment in the ball.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 2.2",
+            "step 5.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-7.1",
+          "step": "7.1",
+          "claim": "The face product and its angular link.",
+          "inputs": [
+            "step 2.3",
+            "step 4.2",
+            "step 4.3",
+            "step 5.2",
+            "step 4.4",
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 gives $C(\\emptyset)=\\{o\\}$ a point and the trivial values $d_C(o,o)=0$; step 1.5 fixes the conventions $L*\\emptyset:=L$, $\\emptyset*L:=L$, $\\emptyset*\\emptyset:=\\emptyset$ and observes that the quotient of $L_1\\times L_2\\times[0,\\pi/2]$ is empty when a factor is empty, so the conventions are part of the construction rather than consequences of it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: a radius $r=0$ is the apex, with $d_C(o,(r,x))=r$ and $|r-s|\\le d_C\\le r+s$; step 1.5 analyses $G=1$, forcing $\\theta=\\theta'$ and coincident appearing coordinates; step 4.3 uses $C(S^{-1})=\\{o\\}=\\mathbb R^{0}$ for $k=0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.3 with $k=1$ identifies $C(S^0)$ with $\\mathbb R$; step 4.2 with $\\sin A+\\sin B=0$ and $(A,B)=(0,0)$ gives $C=A+B=0$; step 5.2's sphere identity $S^{m-1}*S^{n-1}\\cong S^{m+n-1}$ includes the join of two zero-spheres, each containing two points ($m=n=1$)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 treat angular distance pi by a minimizing through-apex path, including distinct components. Step 2.1 proves that no such side belongs to a triple of perimeter strictly below 2pi. Step 1.4 includes angle zero via the collapsed ray. Clause (4) and step 1.6 place the ball in X_p, whose connected subgluing satisfies (H1)-(H3); two isolated cells have separate singleton metric components."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.5 checks both collapsed join endpoints; step 2.3 handles zero factor radii and the common apex. In step 4.2, A+B>=pi is handled directly by C<=pi; for A+B<pi the optimized intermediate radius lies on the comparison chord, with A=B=0 handled separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement of clause (2) uses the $D_\\pi$-geodesic hypothesis, under which a minimizing segment is given rather than selected; the construction consumes no choice principle, and the Ascoli corollary that does consume AC is applied only in the companion lemma [[lem-cg-spherical-simplex-existence-and-link-gram-formula]] (iii), not here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no if-and-only-if statement: clause (1) records agreements of tests, clause (2) concludes geodesicness of the cone from the $D_\\pi$-geodesic hypothesis one-way, and clause (3)'s map is a single isometry rather than an equivalence of conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Same as iff-forward: in particular the converse of clause (2) (geodesicness of the cone implying the $D_\\pi$-geodesic property of the link) is not asserted, and no other candidate bidirectional claim occurs."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Reviewed all 18 proof steps and the 16 citation records against actual supplier interfaces, including independently reviewed gluing/star/chain-metric/spherical-simplex proofs. BH I.5.6-5.16 and complete I.7.14-7.17 (pp.102-105) checked. Cone triangle cases use monotone cosine or strict large-angle lower bounds; product-cone algebra and optimizing radius s*=sin(A+B)/(sin A+sin B) establish the join angular triangle without a circular inference. Checked collapsed coordinates, empty factors, R=0, angle 0/pi, arbitrary minimizing-geodesic radius containment and k=0/k=1. Finite incident cells give positive radial chart radius; developed chain comparisons prove separation and preserve metric balls and lengths; orthogonal face/normal products are valid. Corrected refuter defect by specifying the connected component metric ball X_p, preserving disconnected-gluing coverage. Corrected the one-boundary row: S0 has two points and S0*S0 is S1. No AC is used; geodesic input is D_pi-geodesic. No unmet prerequisite remains."
+      }
+    },
+    "ex-cg-disconnected-universal-coxeter-nerve-and-angular-truncation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-spherical-gram-simplex-and-angular-link",
+          "source_section": "Definition",
+          "quote": "Define the **positive cone on the vertices** and the **spherical simplex** $$K(C):=\\Bigl\\{\\sum_i\\lambda_iu_i:\\lambda_i\\ge0\\Bigr\\},\\qquad \\Sigma(C):=K(C)\\cap S^n,$$ where $S^n=\\{x\\in\\mathbb R^{n+1}:|x|=1\\}$ is the unit sphere ([[def-real-and-complex-inner-product-space]], [[cor-inner-product-induces-a-norm]], [[def-euclidean-spheres-and-closed-balls]]); the **vertices** of $\\Sigma(C)$ are $u_0,\\dots,u_n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cg-spherical-simplex-existence-and-link-gram-formula",
+          "source_section": "Statement",
+          "quote": "**(iii) Finite spherical complexes.** Let $K$ be a finite abstract simplicial complex ([[def-abstract-simplicial-complex]]) whose nonempty simplices $\\sigma$ carry positive-definite Gram matrices $C_\\sigma$ of diagonal $1$, compatible with faces. Form $X:=|K|_C$ by gluing the spherical simplices $\\Sigma(C_\\sigma)$ along their vertex-wise face identifications. On each component define the **chain metric** $d$ as the infimum of $\\sum_i d_{p_i}(x_{i-1},x_i)$ over finite chains in common cells, with $d_p$ the angular metric of that cell; equivalently it is the infimum of lengths of continuous paths. Between different components this infimum is $+\\infty$, auxiliary notation rather than a metric value ([[def-metric-space]]). The inverse cellwise radial maps descend to a homeomorphism $X\\to Y$, where $Y$ is the Euclidean gluing with cells $\\Delta(C_\\sigma)$; it is bi-Lipschitz on every component. Each component of $X$ is a compact proper complete length space whose metric topology is the weak topology, and $X$ is a finite disjoint union of these components. For the empty complex, $X=Y=\\emptyset$. *Under the Axiom of Choice* ([[def-axiom-of-choice]]), every two points in a component are joined by a minimizing geodesic of length $d(x,y)$, in particular every pair at distance $<\\pi$. The proper-target argument is written locally below, using [[lem-cg-metric-target-length-reparametrization-and-lower-semicontinuity]] and [[cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets]]; compare [[thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-euclidean-cone-and-spherical-join-metrics",
+          "source_section": "Definition",
+          "quote": "The infinite value of $d_{\\mathrm{path}}$ is never an ordinary metric value, and the cone receives only $d_\\pi$. **(4) Angular CAT(1) convention.** A link $L$ is **$D_\\pi$-geodesic** if every pair of points at distance $<\\pi$ is joined by a minimizing segment.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cg-cone-join-metric-and-local-product-chart",
+          "source_section": "Statement",
+          "quote": "If $d_\\pi(x,y)<\\pi$ and $x,y$ are joined in $L$ by a minimizing segment, then the development of that segment into the planar sector of angle $d_\\pi(x,y)$ is a minimizing geodesic of $C(L)$ from $(r,x)$ to $(s,y)$ of length $d_C\\bigl((r,x),(s,y)\\bigr)$; if in addition $L$ is $D_\\pi$-geodesic, then $C(L)$ is a geodesic space and every minimizing geodesic joining two points of $C(L)$ is contained in the closed ball of radius $\\max\\{r,s\\}$ about $o$ ([[def-geodesic-and-geodesic-metric-space]]). **(3) Join, cone and product cone.** Clause (5) of [[def-cg-euclidean-cone-and-spherical-join-metrics]] defines a metric on $L_1*L_2$ (descent to the quotient, symmetry and the triangle inequality included) of diameter at most $\\pi$; $L_1$ and $L_2$ sit in $L_1*L_2$ as the classes with $\\theta=0$ and $\\theta=\\pi/2$, and the conventions $L*\\emptyset=L$, $\\emptyset*\\emptyset=\\emptyset$ are consistent with the construction.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "A **metric** on $X$ is a function $d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$: - **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$. - **(M2) Symmetry.** $d(x,y) = d(y,x)$. - **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-geodesic-and-geodesic-metric-space",
+          "source_section": "Definition",
+          "quote": "The metric space $X$ is **geodesic** if every two points of $X$ are joined by a geodesic segment.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$ In particular, $$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-connected-subsets-of-the-line",
+          "source_section": "Statement",
+          "quote": "Then $E$ is a connected subset of $\\mathbb{R}$ ([[def-connected-space]]) if and only if $E$ is **order-convex** ([[def-interval]], [[def-order-topology-on-a-linearly-ordered-set]]), that is $$x, z \\in E \\text{ and } x \\le w \\le z \\;\\Longrightarrow\\; w \\in E .$$ In particular each of the nine interval forms of [[def-interval]] is connected, and so are $\\varnothing$ and every singleton. **What has to be checked, and it is not the mathematics.** The characterisation itself is the published [[thm-connected-subsets-of-r-are-intervals]], which is stated for the connectedness of [[def-connected-r]] — a condition phrased with the open sets of [[def-open-and-closed-in-r]] and the closure of [[def-interior-closure-boundary-r]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-connected-space",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]). - A **separation** of $X$ is an ordered pair $(U, V)$ of **open**, **nonempty**, **disjoint** subsets of $X$ with $U \\cup V = X$. - $X$ is **disconnected** when a separation of $X$ exists, and **connected** when none does. - A subset $A \\subseteq X$ is a **connected subset** of $X$ when the space $(A, \\mathcal{T}_A)$ is connected, $\\mathcal{T}_A$ being the subspace topology ([[def-subspace-topology-top]]). \"Disconnected subset\" is read the same way.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-continuous-image-of-a-connected-space",
+          "source_section": "Statement",
+          "quote": "Note the direction — a continuous **image** of a connected space is connected, while a continuous **preimage** need not be, since a constant map from a disconnected space is continuous.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "**The presented group.** Let $R\\subseteq F(S)$ be the set of relators\n$$R:=\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s,t\\in S,\\ m(s,t)<\\infty\\},$$\nwhere $F(S)$ is the free group on $S$ ([[def-free-group]], [[thm-reduced-words-form-the-free-group]]) and $(st)^k$ is the $k$-fold product ([[def-group-power]]), and let $N:=\\langle\\!\\langle R\\rangle\\!\\rangle_{F(S)}$ be the normal closure of $R$ in $F(S)$ ([[def-normal-closure]], [[prop-normal-closure-is-products-of-conjugates]]). Define\n$$W:=F(S)/N,$$\nand write $s$ (as well as $sN$) for the image of $s\\in S$ in $W$ ([[def-quotient-group]], [[def-group]]).\n\n**Universal property.** For every group $G$ and every map $f:S\\to G$ with $f(s)^2=1$ for all $s\\in S$ and $(f(s)f(t))^{m(s,t)}=1$ in $G$ for all $s\\ne t$ with $m(s,t)<\\infty$, there is a unique group homomorphism $\\varphi:W\\to G$ with $\\varphi(s)=f(s)$ for all $s\\in S$ ([[def-group-homomorphism]], [[thm-quotient-group-universal-property]], [[thm-von-dyck]], [[def-group-presentation]], [[def-relators-relations-and-finite-presentations]], [[prop-equality-of-words-in-a-presentation]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-symmetric-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **permutation** of $X$ is a bijection $f : X \\to X$\n([[def-injection-surjection-bijection]]). The **symmetric group of $X$** is the\nset of all permutations of $X$,\n\n$$\\operatorname{Sym}(X) \\;:=\\; \\{\\, f : X \\to X \\;:\\; f \\text{ is a bijection} \\,\\},$$\n\nequipped with **composition** as its operation,\n\n$$(f \\circ g)(x) \\;=\\; f(g(x)) \\qquad (x \\in X),$$\n\nand with the identity map $\\mathrm{id}_X$, given by $\\mathrm{id}_X(x) = x$, as\ndistinguished element.\n\nComposition of two bijections of $X$ is again a bijection of $X$\n([[def-injection-surjection-bijection]]), so $\\operatorname{Sym}(X)$ is closed\nunder $\\circ$ and $\\circ$ is a binary operation on it\n([[def-binary-operation]]); and $\\mathrm{id}_X$ is a bijection of $X$, so it is an\nelement of $\\operatorname{Sym}(X)$, and it is a two-sided identity for\ncomposition ([[def-identity-element]]) because\n$f \\circ \\mathrm{id}_X = f = \\mathrm{id}_X \\circ f$ holds pointwise for every\n$f$. That $(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ is a group is\n[[lem-symmetric-group-is-a-group]].\n\n**Cycle notation for a finite list of distinct points.** For distinct elements\n$x_0, x_1, \\dots, x_{k-1}$ of $X$ with $k \\ge 2$, the symbol\n$(x_0\\,x_1\\,\\cdots\\,x_{k-1})$ denotes the permutation sending $x_i$ to\n$x_{i+1}$ for $i < k-1$, sending $x_{k-1}$ to $x_0$, and fixing every element of\n$X$ outside $\\{x_0,\\dots,x_{k-1}\\}$. It is a bijection, because the map\ndescribed sends the set $\\{x_0,\\dots,x_{k-1}\\}$ onto itself by a rule with an\nevident inverse (send each $x_{i+1}$ back to $x_i$ and $x_0$ back to $x_{k-1}$)\nand fixes the complement pointwise. A **transposition** is such a symbol with\n$k = 2$, that is $(a\\,b)$ with $a \\ne b$: it exchanges $a$ and $b$ and fixes\neverything else, and it satisfies $(a\\,b) \\circ (a\\,b) = \\mathrm{id}_X$.\n\nA product of cycle symbols means their composite, so $(a\\,b)(c\\,d)$ is\n$(a\\,b) \\circ (c\\,d)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-symmetric-group-is-a-group",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the triple\n$(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ of [[def-symmetric-group]] is a\ngroup ([[def-group]]); the inverse of a permutation $f$ is its inverse function\n$f^{-1}$.\n\nIf $X$ contains three distinct elements $a$, $b$, $c$, then\n$\\operatorname{Sym}(X)$ is not abelian: the transpositions $\\tau = (a\\,b)$ and\n$\\rho = (b\\,c)$ satisfy $\\tau \\circ \\rho \\ne \\rho \\circ \\tau$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The nerve and its path distance.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The truncated metric.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "The cone distances.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "The rays meet only at the apex.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "The through-apex geodesic and geodesic space.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "d-6.1",
+          "claim": "The truncation value is forced.",
+          "step": "6.1",
+          "inputs": [
+            "step 4.1",
+            "step 5.1",
+            "F3",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: between distinct points there is no two-term chain, which is exactly the case of an empty set of admissible chains, recorded as $d_{\\mathrm{path}}=+\\infty$; step 2.1 shows the truncation sends that value to the honest metric value $\\pi$. Fact F8 requires the connected subset to be nonempty before concluding singleton; the empty connected subset is allowed by def-connected-space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 uses a constant geodesic [0,0] to L for identical link points. For cone geodesics, the radius-zero value at time r is the separately supplied apex o, never a pair (0,x)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The hypothesis $n\\ge2$ is assumed, and the excluded value $n=1$ is covered by the same computations: the single-point link has the ray $[0,\\infty)$ as its cone, which is step 3.1 with $x=y$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1 shows a truncation value $\\theta<\\pi$ is inconsistent with the star geometry, so the degenerate value $\\theta=\\pi$ is forced; the discrete extended metric is itself degenerate (all off-diagonal values infinite) and is exactly what the truncation repairs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 use cone angles zero and pi: on the same ray the distance is |r-s|; angle pi across distinct rays gives r+s, realized through the apex. Step 6.1 excludes the replacement angle zero for distinct rays, since equal positive radii would have zero distance and violate separation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 gives explicit involutions on the real line and an infinite-order translation to verify the nerve, using the presentation universal property; no Choice is used. The constant link segments and radial cone paths are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts the equalities $d_\\pi=\\pi$, $d_C=r+s$ and a classification of geodesics; it states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Same as iff-forward: the 'forced value' argument of step 6.1 is the one-way deduction that only $\\pi$ is consistent, and no converse direction is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-8",
+        "notes": "Read all six verification steps and every cited dependency interface. The explicit involutions -u and 2-u satisfy all universal-Coxeter relators, and their product translates by -2; distinct powers force every two-generator parabolic infinite. Singletons are finite, so exactly the claimed discrete nerve remains. Truncation gives pi off-diagonal; cone distances are |r-s| on a ray and r+s across rays. Open-ray projection of a continuous interval image forces apex passage; constant same-point segments and the explicitly typed apex prove the D_pi/geodesic cases. For replacement theta in (0,pi), branch separation follows from the positive chord lower bound, and a geodesic through the apex would have length r+s, contradicting its shorter chord; theta=0 fails separation. Amended Fact F8 to require a nonempty connected subset, because the empty subset is also connected; this retains the nonempty path-image application. No AC or unsupported spherical-subgroup theorem is used."
+      }
+    }
+  }
+}

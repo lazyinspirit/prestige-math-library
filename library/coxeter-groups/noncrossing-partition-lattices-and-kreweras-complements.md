@@ -2,26 +2,29 @@
 page: noncrossing-partition-lattices-and-kreweras-complements
 title: "Noncrossing Partition Lattices and Kreweras Complements"
 status: draft
-items: []
+requires: [bipartite-coxeter-elements-and-ordered-root-complexes, braided-and-symmetric-monoidal-categories]
+items:
+  - def-cg-coxeter-noncrossing-poset-and-kreweras-map
+  - lem-cg-reversed-reflection-product-and-face-spans
+  - lem-cg-convex-root-subcomplex-intersection-and-purity
+  - lem-cg-coxeter-elements-are-conjugate-via-source-sink-moves
+  - thm-cg-noncrossing-finite-lattice-and-conjugacy-independence
+  - thm-cg-kreweras-complement-and-type-a-partition-model
 examples: []
 ---
 
-Noncrossing partitions are first the absolute interval [1,c]. Its lattice property is a theorem about convex root complexes, not a formal consequence of being an interval or of intersecting moved subspaces.
+For a finite-type Coxeter system and a chosen Coxeter element $c$, the noncrossing poset is the absolute-order interval $[1,c]$. The page proves its finite lattice structure from the ordered positive-root complex, then transports that structure between Coxeter elements and identifies the type-A set-partition model.
 
-This is a prose scaffold for future local item authoring. Its empty item lists do not assert proof completion. Every construction below is a named supplier contract; definitions are justified by the separately named existence, descent or uniqueness proofs before any application consumes their properties. Source reading supports the selected proof route and is not a substitute for a library proof.
+## Definitions and conventions
 
-## Ordered construction and proof contracts
+[[def-cg-coxeter-noncrossing-poset-and-kreweras-map]] defines the Coxeter-element convention, the interval $\operatorname{NC}(W,c)$, the Kreweras map $K(w)=w^{-1}c$, and the componentwise convention for reducible systems.
 
-**def-cg-coxeter-noncrossing-poset-and-kreweras-map.** Define NC(W,c)=[1,c] in absolute order and K(w)=w^-1c. For reducible W use component products. State dependence on chosen c before proving transport by conjugation.
+## Root geometry and conjugacy
 
-Definition justification: `thm-cg-noncrossing-finite-lattice-and-conjugacy-independence`.
+[[lem-cg-reversed-reflection-product-and-face-spans]] proves the moved-space identity for a reversed product of independent reflection normals. [[lem-cg-convex-root-subcomplex-intersection-and-purity]] proves the common-face intersection and purity facts used by the lattice argument. [[lem-cg-coxeter-elements-are-conjugate-via-source-sink-moves]] proves conjugacy of Coxeter elements when the finite diagram components are trees.
 
-**lem-cg-convex-root-subcomplex-intersection-and-purity.** For two geometric subcomplexes of X(c), prove realization intersection equals their subcomplex intersection by unique simplex carriers. If intersection realization is convex, show every maximal simplex has full dimension in its linear span: otherwise approach a point of a larger carrier from a lower-dimensional maximal face and use convex segments to contradict finite carrier maximality. Treat empty intersection as identity and zero-dimensional intersections separately.
+## Lattice and complement
 
-**thm-cg-noncrossing-finite-lattice-and-conjugacy-independence.** Intersect X(a),X(b). From convexity/purity choose a full-span simplex and reverse its ordered root reflections to obtain σ≤_Tc; its moved space is the span of the intersection complex. Since σ,a,b share upper bound c, Wall restriction proves σ≤a,b and Pσ=Pa∩Pb. All common lower bounds have contained reflection sets and hence lie below σ. Finite NC therefore has meets and joins (meet of common uppers). Prove all Coxeter elements in a finite tree diagram conjugate via source-sink moves, transporting the lattice; do not silently restrict the theorem to one bipartite c.
+[[thm-cg-noncrossing-finite-lattice-and-conjugacy-independence]] proves meets, joins, reducible product structure, and independence of the lattice isomorphism type from the chosen finite-type Coxeter element. [[thm-cg-kreweras-complement-and-type-a-partition-model]] proves the group-theoretic Kreweras identities for every finite type and the cycle and noncrossing-partition model in type A. The type-A criterion is proved in both directions; no general Catalan-count product is asserted.
 
-**thm-cg-kreweras-complement-and-type-a-partition-model.** Prove K order-reversing by length equalities, K²(w)=c^-1wc and hence bijective. In type A, reflection length n-number of cycles and cyclic ordering imply w≤c iff its cycles form noncrossing blocks with oriented cycles; prove crossing obstruction and converse factorization. This gives the set-partition model, not an unproved Catalan-cardinality product for all types.
-
-## Prerequisites and reading
-
-Required earlier pages: [[bipartite-coxeter-elements-and-ordered-root-complexes]]. The companion [[noncrossing-partition-lattices-and-kreweras-complements-examples]] tests these constructions and conventions. Exact item dependencies and source reading limits are recorded in `research/coxeter-scaffold/inventory.json` and `research/plan-coxeter-groups-track.md`.
+The earlier [[braided-and-symmetric-monoidal-categories]] supplies the symmetric-group Coxeter presentation used to identify the type-A model.

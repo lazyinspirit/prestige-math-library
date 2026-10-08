@@ -1,0 +1,109 @@
+{
+  "run": "frontier-42-coxeter-32",
+  "phase": "initial",
+  "round": 1,
+  "unit": "31",
+  "input_sha256": "ce87a1bc88a8f056e771220d400256d1be4d20fe7e966bd5434d1ad410d4a79e",
+  "decisions": [
+    {
+      "id": "thm-cg-kreweras-complement-and-type-a-partition-model",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "d5a0ff912df68598e3957edfbfca041ad4697f0fe0f7f0be5f675efa0a127efb",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed a fatal logic gap in step 1.4: for the noncrossing partition {1,8}|{2,7}|{3,4,5,6}, the block {2,7} wraps in the gap's induced cyclic order but is not consecutive on the original circle. The induction neither excludes this wrap nor handles a one-block induced gap under its at-least-two-block premise. Step 3.1 needs an original-circle consecutive block, so the converse criterion and the subsequent partition model lacked this prerequisite. Replaced the induction with a minimal-linear-span argument; no theorem statement was weakened.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/math/0611106"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-cg-kreweras-complement-and-type-a-partition-model",
+      "disposition": "repaired",
+      "post_sha256": "710a2814414c11ecc3b762397e25a119595fc9b7587ba3c4fdda21f27a18b30d",
+      "review_context_sha256": "4857f8097d0b08a920fb75893f8d035a18ca311ddfe1c8cb75e089e18cc449f0",
+      "reason": "Repaired step 1.4 and its owning contract derivation. A singleton is already consecutive; otherwise minimize max(B)-min(B). For a missing label x between successive b<b' in B, a label y of its block outside (b,b') yields alternating endpoints and crossing chords. Thus that entire block lies inside (b,b'), contradicting minimal span. This proves original-circle consecutiveness and licenses step 3.1. Checked all eleven proof steps and all twelve actual dependency interfaces: the reversed independent unit simple-root list licenses length(c)=rank; conjugation-invariant length gives K closure and reversal; transposition split/join gives the cycle formula, the two-direction interval criterion, and refinement. In contraction, c=c'' gamma_B and w=gamma_B w'' give the stated conjugate residual and length sum. Region-boundary succession is alpha^-1(i+1), compatible white blocks lie in one cell, crossing chords give the discrete meet, and transitivity of alpha q=c gives the indiscrete join. Rank zero and N=1,2 remain covered, with no Choice. The Statement is byte-for-byte unchanged, so there is no downstream propagation. This is a local author repair review, not independent review of that repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/math/0611106"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "run": "frontier-42-coxeter-32",
+      "class": "accuracy",
+      "subclass": "invalid-inference",
+      "severity": "fatal",
+      "location": "proof-step",
+      "caught_at_stage": "7-adjudicate",
+      "caught_by_role": "group-alpha",
+      "disposition": "fixed",
+      "description": "Confirmed a fatal logic gap in step 1.4: for the noncrossing partition {1,8}|{2,7}|{3,4,5,6}, the block {2,7} wraps in the gap's induced cyclic order but is not consecutive on the original circle. The induction neither excludes this wrap nor handles a one-block induced gap under its at-least-two-block premise. Step 3.1 needs an original-circle consecutive block, so the converse criterion and the subsequent partition model lacked this prerequisite. Replaced the induction with a minimal-linear-span argument; no theorem statement was weakened.",
+      "repair": "Replace the induced-cyclic-order induction by minimal span in the original linear label order; synchronize only derivation 1.4.",
+      "adjudication_ref": [
+        "research/frontier-42-coxeter-32-step7-v2/step7-v2-initial-r1-u31.json"
+      ],
+      "post_sha256": "710a2814414c11ecc3b762397e25a119595fc9b7587ba3c4fdda21f27a18b30d",
+      "defect_id": "frontier-42-coxeter-32-step7-initial-r1-u31-interval-block",
+      "subject": "thm-cg-kreweras-complement-and-type-a-partition-model",
+      "at": "2026-10-08T01:35:54.407Z",
+      "evidence": [
+        {
+          "path": "research/frontier-42-coxeter-32-step7-v2/step7-v2-initial-r1-u31.json",
+          "note": "Native initial round 1 unit 31 mathematical finding, completed local repair, exact review guard and focused checks."
+        }
+      ]
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/thm-cg-kreweras-complement-and-type-a-partition-model.md",
+      "research/frontier-42-coxeter-32-batch-31.proof-contracts.json"
+    ],
+    "exact_scope": "Only proof paragraph 1.4 and its contract claim changed; all Statement/Definition sections, dependencies, source metadata, and prior independent-review evidence were preserved. No new prerequisites, outside consumer discoveries, or published-ledger proposals.",
+    "source_review": {
+      "url": "https://arxiv.org/pdf/math/0611106",
+      "locators": "Armstrong, printed p.28, Definition 2.5.3 and complete Lemma 2.5.4 argument; printed pp.83–84, Theorem 4.1.3, Lemmas 4.1.4–4.1.5 and their complete textual arguments; printed pp.87–88, Definitions 4.2.2–4.2.3 and equation (4.4) with its explanation.",
+      "qualification": "The source describes cycle splitting and asserts that every noncrossing partition is obtainable; it does not supply the new minimal-span argument. That prerequisite is proved locally. The source explanation of (4.4) is supplemented by the item local boundary-tracing proof, rather than treated as a substitute for proof."
+    },
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-42-coxeter-32-batch-31.proof-contracts.json --strict --items thm-cg-kreweras-complement-and-type-a-partition-model",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-cg-kreweras-complement-and-type-a-partition-model.md",
+        "exit_code": 0,
+        "result": "PASS (direct); 1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-cg-kreweras-complement-and-type-a-partition-model.md",
+        "exit_code": 0,
+        "result": "OK — 1 file; all mathematics parses in KaTeX and frontmatter parses in renderer YAML."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-cg-kreweras-complement-and-type-a-partition-model.md",
+        "exit_code": 0,
+        "result": "1 item, 11 steps, 0 defects."
+      },
+      {
+        "command": "Local report identity, rejected-tuple coverage, current itemHashGuard and frozen Statement hash comparison",
+        "exit_code": 0,
+        "result": "Exact input digest and tuple coverage verified; post guard unchanged since review; Statement hash equals frozen 720a847fc79136d4a61dc9d0fdffd44aaaee34dcfe9dbe35b041d9ee9ba191db."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Assigned repair and local checks are complete. Controller collects the evidence and owns independent rejudgment and certification."
+  }
+}

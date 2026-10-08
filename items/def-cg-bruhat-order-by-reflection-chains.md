@@ -1,0 +1,58 @@
+---
+id: def-cg-bruhat-order-by-reflection-chains
+kind: definition
+title: "The Bruhat graph by length-increasing reflection chains, the Bruhat order, inversion symmetry, and reflection parity"
+status: draft
+origin: pipeline
+pipeline_run: frontier-42-coxeter-32
+dependency_level: 6
+deps: [def-hh-coxeter-matrix-word-group-and-length, def-cg-canonical-reflection-homomorphism, thm-hh-coxeter-exchange-deletion-and-faithfulness, thm-hh-parabolic-minimal-representatives-and-length-additivity, def-group, def-natural-numbers]
+justified_by: [thm-cg-bruhat-subword-characterization]
+aliases: []
+landmark: false
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+proof_strategy: definition
+verification:
+  precheck: n/a
+  judge:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-08
+sources:
+  references:
+    - title: "Anders Bjorner and Francesco Brenti, Combinatorics of Coxeter Groups (Graduate Texts in Mathematics 231, Springer 2005; author-hosted complete PDF)"
+      url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
+      locator: "Section 2.1, printed pp. 27-28: Definition 2.1.1 (the Bruhat graph via $u^{-1}w=t\\in T$ with $\\ell(u)<\\ell(w)$ and the reflexive transitive closure) and its three immediate observations (strict length increase; $u<ut\\iff\\ell(u)<\\ell(ut)$; $1\\le w$); read in the extracted full text"
+    - title: "Carl Marberg, MATH 6150F Coxeter systems and Iwahori-Hecke algebras, Lecture 11: More about Bruhat order (HKUST, Spring 2017)"
+      url: "https://www.math.hkust.edu.hk/~emarberg/teaching/2017/Math6150F/lectures/11_Math6150F_Spring2017.pdf"
+      locator: "Lecture 11, printed p. 1: the Bruhat order as the transitive closure of the relations $w<wt$ for $t\\in T$, the remark $ws<w\\iff\\ell(ws)<\\ell(w)$ for $s\\in S$, and minimality of the identity"
+    - title: "Grant T. Barkley, Bruhat order and applications, Lecture 3 (CMND lecture notes, author-hosted)"
+      url: "https://gtbarkley.org/cmnd/Lecture3Notes.pdf"
+      locator: "Lecture 3, printed p. 1: the Bruhat graph (Definition 1.1), the observation that $u\\le v\\iff u^{-1}\\le v^{-1}$, and the statement of the strong exchange, exchange and deletion properties used freely below"
+---
+
+## Definition
+
+Let $(S,m)$ be a Coxeter matrix ([[def-hh-coxeter-matrix-word-group-and-length]]), let $W$ be the presented group with length function $\ell$ and identity $1$ ([[def-hh-coxeter-matrix-word-group-and-length]]), and let
+$$T=\{wsw^{-1}:w\in W,\ s\in S\}$$
+be its set of reflections ([[def-cg-canonical-reflection-homomorphism]] (2)).
+
+**(1) The Bruhat graph and the Bruhat order.** For $u,v\in W$ write $u\to v$ if $v=ut$ for some $t\in T$ with $\ell(v)>\ell(u)$. The directed graph on $W$ with these edges is the **Bruhat graph** of $(W,S)$. Define $u\le v$ if there exist $u_0,\dots,u_k\in W$ with $u=u_0\to u_1\to\cdots\to u_k=v$; the empty chain ($k=0$) is allowed, so $u\le u$ for every $u$. This relation is the **Bruhat order** on $W$. Both $\to$ and $\le$ are predicates on $W\times W$ defined from the length function of [[def-hh-coxeter-matrix-word-group-and-length]], and chains in the definition of $\le$ are finite sequences of elements of $W$, so both relations are well defined; every object below is a subset or a predicate on the fixed group $W$, and no choice principle is used anywhere in this definition.
+
+**(2) Partial order and the identity.** $\le$ is a partial order on $W$: it is reflexive and transitive by construction (an empty chain, and concatenation of chains), and it is antisymmetric because $\ell$ strictly increases along every edge, so a chain from $u$ to $v$ containing at least one edge satisfies $\ell(u)<\ell(v)$ ([[def-natural-numbers]]). Consequently $u\le v$ together with $\ell(u)=\ell(v)$ forces $u=v$, and every $u<v$ (that is, $u\le v$ and $u\ne v$) satisfies $\ell(u)<\ell(v)$. Moreover $1\le w$ for every $w\in W$: for a reduced expression $w=s_1\cdots s_k$ and $w_j:=s_1\cdots s_j$ one has $\ell(w_j)=j$ (a shorter expression for the prefix $s_1\cdots s_j$, substituted into $s_1\cdots s_k$, would be a word of length $<k$ for $w$), so $w_{j-1}\to w_j$ because $w_{j-1}^{-1}w_j=s_j=1\cdot s_j\cdot 1^{-1}\in T$ and $\ell(w_j)=j>\ell(w_{j-1})=j-1$ ([[def-group]]).
+
+**(3) Inversion and left multiplication.** For all $u,v\in W$ one has $u\le v$ if and only if $u^{-1}\le v^{-1}$. More precisely, a chain $u=u_0\to\cdots\to u_k=v$ with $u_{j+1}=u_jt_j$, $t_j\in T$, inverts to the chain $u^{-1}=u_0^{-1}\to\cdots\to u_k^{-1}=v^{-1}$, because
+$$u_{j+1}^{-1}=t_ju_j^{-1}=u_j^{-1}\,(u_jt_ju_j^{-1})$$
+with $u_jt_ju_j^{-1}\in T$ and $\ell(u_{j+1}^{-1})=\ell(u_{j+1})>\ell(u_j)=\ell(u_j^{-1})$; here $\ell(x)=\ell(x^{-1})$ holds because reversing a reduced expression of $x$ gives a reduced expression of $x^{-1}$ ([[thm-hh-parabolic-minimal-representatives-and-length-additivity]] (3)). Consequently the order is also generated by left multiplication by reflections: if $x\in W$, $t\in T$ and $\ell(tx)>\ell(x)$, then $x\to tx$, since $x^{-1}(tx)=x^{-1}tx\in T$ and $T$ is closed under conjugation ([[def-group]]).
+
+**(4) Reflection parity.** If $x\in W$ and $t\in T$ then $\ell(xt)\equiv\ell(x)+1\pmod 2$, so $\ell(xt)\ne\ell(x)$; in particular $x\to xt$ if and only if $\ell(xt)>\ell(x)$, and for each pair $(x,t)$ exactly one of the relations $x\to xt$, $xt\to x$ holds. Indeed [[thm-hh-coxeter-exchange-deletion-and-faithfulness]] (1) supplies the sign character $\operatorname{sgn}:W\to\{\pm1\}$ with $\operatorname{sgn}(s)=-1$ for all $s\in S$ and $\operatorname{sgn}(x)=(-1)^{\ell(x)}$ for all $x\in W$; as $\operatorname{sgn}$ is a homomorphism into the abelian group $\{\pm1\}$ ([[def-group]]) one has $\operatorname{sgn}(wsw^{-1})=\operatorname{sgn}(s)=-1$ for every $w\in W$ and $s\in S$, so $\operatorname{sgn}(t)=-1$ for every $t\in T$, and then $\operatorname{sgn}(xt)=-\operatorname{sgn}(x)$ gives the asserted congruence.
+
+The **interval** $[u,v]:=\{x\in W:u\le x\le v\}$ and the statement that $\ell$ is a rank function are introduced only after the saturated-chain results of [[lem-cg-bruhat-chain-refinement-and-gradedness]]. The subword description of $\le$ used throughout this page is the theorem [[thm-cg-bruhat-subword-characterization]], the recorded justifier of this definition; no subword assertion is made here.
+
+## Remarks
+
+No form of the Axiom of Choice is used: every object is a subset, a subgroup or a predicate on the fixed group $W$, lengths lie in $\mathbb N$ ([[def-natural-numbers]]), and the only arguments invoked above are the sign character, prefix reduction and inversion of reduced words.
+
+The definition deliberately asserts no finiteness of $W$, no longest element, and no interval finiteness; intervals and chain structure are treated in [[lem-cg-bruhat-chain-refinement-and-gradedness]], and the order-theoretic description by subwords in [[thm-cg-bruhat-subword-characterization]].

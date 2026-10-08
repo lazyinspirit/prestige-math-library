@@ -14,7 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-17
+  repair: research/frontier-42-coxeter-32-codex-step6-a-external-definitions/thm-matrix-rings-over-division-rings-are-semisimple.receipt.json
 sources:
   scraped: []
   references:
@@ -41,7 +41,7 @@ These operations make a ring $M_n(D)$, and this ring is semisimple. More precise
 
 [L4] Finite sums in a commutative monoid are independent of the chosen enumeration, and the empty sum is $0$. ([[def-finite-sum-in-a-commutative-monoid]]).
 
-[L5] A left $R$-module $M$ is simple if $M\ne0$ and its only submodules are $0$ and $M$. Equivalently, $M$ has no proper nonzero submodule. ([[def-simple-module]]).
+[L5] A left $R$-module $M$ is simple if $M\ne0$ and its only submodules are $0$ and $M$. Equivalently, $M\ne0$ and $M$ has no proper nonzero submodule. ([[def-simple-module]]).
 
 ## Proof
 

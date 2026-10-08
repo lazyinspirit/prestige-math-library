@@ -1,0 +1,455 @@
+[
+  {
+    "order": 1772,
+    "id": "heaps-commutation-classes-and-fully-commutative-elements",
+    "kind": "A",
+    "category": "coxeter-groups",
+    "title": "Heaps, Commutation Classes, and Fully Commutative Elements",
+    "companion": "heaps-commutation-classes-and-fully-commutative-elements-examples",
+    "requires": [
+      "weak-order-inversions-and-lattice-operations",
+      "coxeter-presentations-exchange-and-reduced-word-theorems",
+      "finite-lattice-projections-and-coxeter-chain-labels",
+      "chains-antichains-sperner-and-dilworth"
+    ],
+    "items": [
+      {
+        "id": "def-cg-linear-extension-of-a-finite-poset",
+        "kind": "definition",
+        "title": "Linear extensions of a finite poset",
+        "deps": [
+          "def-partial-order",
+          "def-chain"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $(P,\\preceq)$ be a finite poset and write $x\\prec y$ for $x\\preceq y$ with $x\\ne y$, the strict order of [[def-partial-order]]. A **linear extension** of $P$ is a tuple $\\pi=(x_1,\\dots,x_n)$ that lists every element of $P$ exactly once and is such that $x\\prec y$ implies that $x$ occurs before $y$ in $\\pi$: that is, $x=x_i$ and $y=x_j$ with $i<j$.\n\nEquivalently, a linear extension is the strict total order $x_1\\sqsubset x_2\\sqsubset\\cdots\\sqsubset x_n$ on the underlying set of $P$ determined by the listing, which extends $\\prec$; with respect to it the whole set $P$ is a chain ([[def-chain]]). For $x\\in P$ the index $i$ with $x=x_i$ is the **position** of $x$ in $\\pi$. Since a linear extension is a listing without repetitions, it has exactly $n$ entries and every element of $P$ occurs exactly once; the empty poset has the empty linear extension $()$.\n\nNothing else is asserted here: in particular it is not part of the definition that a linear extension exists. For every finite poset existence is proved in [[lem-cg-finite-poset-linear-extensions-and-connectivity]], which also shows that a prescribed order ideal can be made the initial segment of a linear extension and that any two linear extensions are connected by adjacent interchanges of incomparable elements.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "§1.2, PDF pp. 4-5: the heap of a word is a poset on its positions, and its linear extensions are the listings used to read off words"
+            },
+            {
+              "title": "C. Krattenthaler, The theory of heaps and the Cartier-Foata monoid, appendix to the electronic reedition of P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements (2006)",
+              "url": "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf",
+              "locator": "§3 'Equivalence with the Cartier-Foata monoid', PDF pp. 4-5: words are read from the linear extensions of a heap"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "A definition item. The tuple condition and the equivalent strict total order are recorded; the definition asserts no existence claim, and the well-definedness obligations (existence of linear extensions, prescribed initial segments and adjacent-swap connectivity) are supplied by [[lem-cg-finite-poset-linear-extensions-and-connectivity]], which is the declared justifier. No Choice is used: all objects are finite listings.",
+        "justified_by": [
+          "lem-cg-finite-poset-linear-extensions-and-connectivity"
+        ]
+      },
+      {
+        "id": "def-cg-labeled-word-heap-and-fully-commutative-element",
+        "kind": "definition",
+        "title": "Words, heaps, linear extensions, commutation classes, and fully commutative elements",
+        "deps": [
+          "def-hh-coxeter-matrix-word-group-and-length",
+          "def-partial-order",
+          "def-cg-linear-extension-of-a-finite-poset"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $(S,m)$ be a finite Coxeter matrix and let $W$ be the group presented by it, with length $\\ell$ and set $\\mathcal R(w)$ of reduced expressions, so that $m(s,t)$ is the order of $st$ in $W$ ([[def-hh-coxeter-matrix-word-group-and-length]]).\n\n**(1) Words.** A **word** in $S$ is a finite sequence $s=(s_1,\\dots,s_k)$ with $s_i\\in S$. Its **length** is $k$, it **represents** the element $s_1\\cdots s_k\\in W$, and concatenation of words represents the product of the represented elements. A word is **reduced** when it is a reduced expression of the element it represents, so $\\mathcal R(w)$ is the set of all reduced words representing $w$.\n\n**(2) The heap of a word.** Let $s=(s_1,\\dots,s_k)$ be a word and put $[k]=\\{1,\\dots,k\\}$. Write $i\\prec_s j$ when $i<j$ and either $s_i=s_j$ or $m(s_i,s_j)\\ge3$ (including $m(s_i,s_j)=\\infty$); thus $i\\prec_s j$ exactly when $i<j$ and the pair $s_i,s_j$ is not a commuting pair, i.e. $m(s_i,s_j)\\ne2$. Let $\\preceq_s$ be the reflexive transitive closure of $\\prec_s$. Every relation $\\prec_s$ has $i<j$, so $\\preceq_s$ is contained in the usual order of the positions and is antisymmetric; hence $\\preceq_s$ is a partial order on $[k]$ ([[def-partial-order]]). The **heap** of $s$ is the labeled poset $P_s:=([k],\\preceq_s)$ in which the position $i$ carries the label $s_i$. Elements of a heap with the same label are pairwise comparable: if $i<j$ and $s_i=s_j$, then $i\\prec_s j$.\n\n**(3) Labeled heaps and labeled isomorphism.** A **labeled poset** is a triple $(P,\\preceq,\\lambda)$ in which $(P,\\preceq)$ is a finite poset and $\\lambda:P\\to S$ is a map. Two labeled posets $(P,\\preceq,\\lambda)$ and $(P',\\preceq',\\lambda')$ are **isomorphic** when there is a bijection $\\varphi:P\\to P'$ with $x\\preceq y\\iff\\varphi(x)\\preceq'\\varphi(y)$ for all $x,y\\in P$ and $\\lambda'(\\varphi(x))=\\lambda(x)$ for all $x\\in P$. A labeled poset is a **heap** (for $(S,m)$) when it is isomorphic to $P_s$ for some word $s$.\n\n**(4) Linear extensions.** Let a linear extension of a finite poset be as in [[def-cg-linear-extension-of-a-finite-poset]]. For a word $s$ of length $k$, the **labeled linear extensions** of $P_s$ are the words\n$$L(P_s,s):=\\{(s_{x_1},\\dots,s_{x_k}):(x_1,\\dots,x_k)\\text{ is a linear extension of }P_s\\}.$$\n\n**(5) Commutativity classes.** Two words $s,s'$ of the same length are **commutation-equivalent**, written $s\\sim s'$, when $s'$ is obtained from $s$ by finitely many interchanges of two adjacent letters $s_i,s_{i+1}$ with $m(s_i,s_{i+1})=2$. This is an equivalence relation on words: it is generated by the single interchanges, which are involutions, and it is by construction closed under composition. The **commutativity class** of $s$ is $C(s):=\\{s':s'\\sim s\\}$. Commutation-equivalent words have the same length, the same multiplicity of every letter, and represent the same element of $W$: an interchange of adjacent letters with $m(s_i,s_{i+1})=2$ changes neither the length nor the multiplicities, and the represented element is unchanged because $st=ts$ in $W$ whenever $m(s,t)=2$; indeed, $s^2=t^2=1$ and $(st)^2=1$ imply $st=(st)^{-1}=t^{-1}s^{-1}=ts$ ([[def-hh-coxeter-matrix-word-group-and-length]]).\n\n**(6) Fully commutative elements.** An element $w\\in W$ is **fully commutative** when all its reduced words lie in a single commutativity class, that is, when $\\mathcal R(w)=C(s)$ for one (equivalently, every) $s\\in\\mathcal R(w)$.\n\n**(7) Abstentions and conventions.** The heap is defined for an arbitrary, not necessarily reduced, word. Nothing is asserted here about the relation between $\\mathcal R(w)$ and $L(P_s,s)$, about invariance of $P_s$ under commutation, or about which elements are fully commutative; those are the content of [[thm-cg-heaps-classify-commutation-classes]] and [[thm-cg-fully-commutative-forbidden-chain-criterion]]. All data are finite and no Choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "Definition of commutativity classes and of fully commutative elements in §1.1, PDF pp. 3-4 (typescript pp. 3-4 of the manuscript)"
+            },
+            {
+              "title": "P. Nadeau, On the length of fully commutative elements, arXiv:1511.08788",
+              "url": "https://arxiv.org/pdf/1511.08788",
+              "locator": "Definition 2.3 (fully commutative elements) and the commutation-class notation $\\mathcal C_\\Gamma(w)$, §2.2, PDF pp. 4-5"
+            },
+            {
+              "title": "C. Krattenthaler, The theory of heaps and the Cartier-Foata monoid, appendix to the electronic reedition of P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements (2006)",
+              "url": "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf",
+              "locator": "Definition 2.2 (heap) and the equivalence relation $\\sim$ on words, §§2-3, PDF pp. 2-5"
+            },
+            {
+              "title": "P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements, Lecture Notes in Mathematics 85, Springer 1969; 2005 TeX reproduction with three appendices, electronic reedition 2006",
+              "url": "https://www.mat.univie.ac.at/~slc/books/cartfoa.pdf",
+              "locator": "Chapitre premier, §2 'Construction de $L(Z;C)$' (words modulo $C$-adjacency), printed pp. 6-7"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "A definition item. (1)-(2) Positions are a finite set and $\\preceq_s$ is the reflexive transitive closure of an antisymmetric relation contained in the position order, hence a partial order; the same-label comparability is the relation $i\\prec_s j$ for $i<j$, $s_i=s_j$. (3)-(4) Labeled isomorphism, heaps and linear extensions are recorded exactly as used by [[thm-cg-heaps-classify-commutation-classes]] and [[thm-cg-fully-commutative-weak-intervals-are-distributive]]; the proofs that the abstract invariant is well behaved (a bijection between commutation classes and labeled heaps) are deliberately not part of this item. (5) Commutation-equivalence is generated by transpositions of adjacent commuting letters, so it preserves length and label multiplicities, and the represented element is unchanged because a word $u\\,s\\,t\\,v$ with $m(s,t)=2$ and $u\\,t\\,s\\,v$ represent the same element of $W$. (6) The definition of full commutativity is the unravelling of \"the reduced words form a single commutation class\" used by the two theorem consumers. (7) The abstentions mark exactly which structural claims later items must prove before a consumer may use them; no Choice is used because all lists, positions and words involved are finite.",
+        "justified_by": [
+          "thm-cg-heaps-classify-commutation-classes"
+        ]
+      },
+      {
+        "id": "lem-cg-finite-poset-linear-extensions-and-connectivity",
+        "kind": "lemma",
+        "title": "Linear extensions of a finite poset: existence, prescribed initial ideals, and adjacent-swap connectivity",
+        "deps": [
+          "def-partial-order",
+          "def-maximal-element",
+          "def-lattice-distributive-lattice-and-order-ideal",
+          "def-cg-linear-extension-of-a-finite-poset"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $(P,\\preceq)$ be a finite poset ([[def-partial-order]], [[def-maximal-element]]), let linear extensions be as in [[def-cg-linear-extension-of-a-finite-poset]], and let $I\\subseteq P$ be an order ideal, i.e. $y\\in I$ and $x\\preceq y$ imply $x\\in I$ ([[def-lattice-distributive-lattice-and-order-ideal]]).\n\n**(1) Minimal elements.** If $P\\ne\\varnothing$, then $P$ contains an element minimal in $P$ ([[def-maximal-element]]): if no element of $P$ were minimal, then, $P$ being finite, one could assign to each $x\\in P$ an element strictly below $x$ and iterate, producing an infinite strictly decreasing sequence in $P$, whose terms are pairwise distinct by transitivity.\n\n**(2) Initial ideals.** Every finite poset has a linear extension, and more precisely: for every order ideal $I$ of $P$ and every linear extension $\\sigma=(x_1,\\dots,x_m)$ of the induced poset $(I,\\preceq|_{I\\times I})$, the sequence $\\sigma$ can be extended to a linear extension $\\pi=(x_1,\\dots,x_m,y_1,\\dots,y_{n-m})$ of $P$; in particular $\\{x_1,\\dots,x_m\\}=I$ is the set of the first $m$ entries of $\\pi$. Dually, every linear extension of the induced poset on $P\\setminus I$ can be appended to $\\sigma$ to give a linear extension of $P$.\n\n**(3) Adjacent-swap connectivity.** If $\\pi$ and $\\sigma$ are linear extensions of $P$, then $\\sigma$ is obtained from $\\pi$ by finitely many interchanges of two consecutive entries that are incomparable in $P$; that is, one can pass from $\\pi$ to $\\sigma$ by repeatedly swapping adjacent entries $x,y$ with neither $x\\preceq y$ nor $y\\preceq x$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "Proof of Proposition 1.2, PDF pp. 5-6 (maximal-element induction); the contiguity assertion in the proof of Proposition 2.3, PDF p. 9 (the contraction argument is supplied locally here)"
+            },
+            {
+              "title": "C. Krattenthaler, The theory of heaps and the Cartier-Foata monoid, appendix to the electronic reedition of P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements (2006)",
+              "url": "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf",
+              "locator": "§3 'Equivalence with the Cartier-Foata monoid', PDF pp. 4-5 (words read from linear extensions)"
+            },
+            {
+              "title": "P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements, Lecture Notes in Mathematics 85, Springer 1969; 2005 TeX reproduction with three appendices, electronic reedition 2006",
+              "url": "https://www.mat.univie.ac.at/~slc/books/cartfoa.pdf",
+              "locator": "Chapitre premier, §1 'Rappels sur les monoides libres' and §2, printed pp. 5-7 (generation of equivalence classes)"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "All three clauses are finite arguments and use no Choice. (1) Suppose no minimal element exists. Fix a listing $P=\\{p_1,\\dots,p_n\\}$ of the finite set $P$; define $x_0=p_1$ and, having $x_k$, let $j$ be the least index with $p_j\\prec x_k$ (nonempty by hypothesis) and put $x_{k+1}=p_j$. This recursion is well defined using only the order of $\\mathbb N$, and $x_0\\succ x_1\\succ\\cdots$ is an infinite strictly decreasing sequence; by transitivity $x_i\\ne x_j$ for $i\\ne j$, contradicting finiteness of $P$. (2) Let $\\sigma=(x_1,\\dots,x_m)$ be a linear extension of $I$. For $i=1,\\dots,m$ put $R_i=P\\setminus\\{x_1,\\dots,x_{i-1}\\}$ and note $x_i\\in R_i$. If $y\\in R_i$ and $y\\prec x_i$, then $y\\in I$ is impossible because $\\sigma$ is a linear extension of $I$ and would place $y$ before $x_i$, while $y\\notin I$ is impossible because $I$ is an order ideal containing $x_i$. Hence $x_i$ is minimal in $R_i$, and removing the elements $x_1,\\dots,x_m$ in this order is legitimate. Now repeat the following on the remaining set $R$: if $R\\ne\\varnothing$, remove a minimal element of the induced poset on $R$, which exists by (1). The resulting ordering is a linear extension of $P$: if $x\\prec y$ and $y$ were removed before $x$, then at the moment of removing $y$ the element $x$ still lies in the remaining set and is strictly below $y$, contradicting minimality of $y$ there. This also shows that appending a linear extension of the induced poset on $P\\setminus I$ gives a linear extension of $P$, and the dual statement follows by replacing $\\preceq$ with its opposite order. (3) Induct on $n=|P|$. Let $m$ be the last entry of $\\pi$; then $m$ is maximal in $P$, and every entry after $m$ in $\\sigma$ is incomparable with $m$: if $y$ were strictly below $m$, then $y$ would occur before $m$ in the linear extension $\\sigma$; if $y$ were strictly above $m$, then $m$ would not be maximal. Interchanging $m$ successively with the entries to its right moves $m$ to the last position, producing a linear extension $\\sigma'$ of $P$ whose last entry is $m$ and which is obtained from $\\sigma$ by adjacent swaps of incomparable elements. The truncations of $\\pi$ and $\\sigma'$ to $P\\setminus\\{m\\}$ are linear extensions of the induced poset, so by induction they are connected by adjacent incomparable swaps; performing the same swaps inside $\\pi$ and then moving $m$ to the end connects $\\pi$ to $\\sigma'$, hence to $\\sigma$ after reversing the swaps used above."
+      },
+      {
+        "id": "lem-cg-convex-chains-consecutive-in-a-linear-extension",
+        "kind": "lemma",
+        "title": "A convex chain (in particular a covering pair) of a finite poset occurs consecutively in some linear extension",
+        "deps": [
+          "lem-cg-finite-poset-linear-extensions-and-connectivity",
+          "def-partial-order",
+          "def-chain",
+          "def-graded-poset-and-rank",
+          "def-cg-linear-extension-of-a-finite-poset"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $(P,\\preceq)$ be a finite poset ([[def-partial-order]]) and let $C\\subseteq P$ be a nonempty convex chain, meaning that $C$ is a chain ([[def-chain]]) and that $x,z\\in C$ and $x\\preceq y\\preceq z$ imply $y\\in C$. Then there is a linear extension of $P$ ([[def-cg-linear-extension-of-a-finite-poset]]) in which the elements of $C$ occur consecutively. In particular, for every covering pair $x\\lessdot y$ of $P$ ([[def-graded-poset-and-rank]]) there is a linear extension of $P$ in which $x$ and $y$ are consecutive.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "Proposition 2.3 and its proof, PDF pp. 9-10 ('For any convex chain (or covering relation) of a poset P, there exist linear extensions in which the members of the chain appear consecutively')"
+            },
+            {
+              "title": "P. Nadeau, On the length of fully commutative elements, arXiv:1511.08788",
+              "url": "https://arxiv.org/pdf/1511.08788",
+              "locator": "Definition of convexity in §2.4, PDF p. 6; the local proof of chain contiguity is supplied here"
+            },
+            {
+              "title": "C. Krattenthaler, The theory of heaps and the Cartier-Foata monoid, appendix to the electronic reedition of P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements (2006)",
+              "url": "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf",
+              "locator": "§3, PDF pp. 4-5 (linear extensions read the words of a heap)"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "Write $C=\\{c_1\\prec c_2\\prec\\cdots\\prec c_m\\}$ (the elements of a chain are totally ordered) and contract $C$ to a single new element $\\ast$. Form $Q:=(P\\setminus C)\\cup\\{\\ast\\}$ with the relations: $x\\preceq_Q y$ for $x,y\\in P\\setminus C$ with $x\\preceq y$; $x\\preceq_Q\\ast$ when $x\\preceq c$ for some $c\\in C$; and $\\ast\\preceq_Q y$ when $c\\preceq y$ for some $c\\in C$. Transitivity and reflexivity of $\\preceq_Q$ follow from those of $\\preceq$. For antisymmetry, a cycle in $Q$ must involve $\\ast$ (a cycle inside $P\\setminus C$ is already a cycle of $P$); such a cycle yields $x,y\\in P\\setminus C$ with $x\\preceq c$, $c'\\preceq y$ and $y\\preceq x$ for some $c,c'\\in C$. Then $c'\\preceq y\\preceq x\\preceq c$ in $P$, so $c'\\preceq x\\preceq c$ with $c',c\\in C$; convexity of $C$ forces $x\\in C$, a contradiction. Hence $Q$ is a finite poset. By clause (2) of [[lem-cg-finite-poset-linear-extensions-and-connectivity]] the poset $Q$ has a linear extension; replacing the entry $\\ast$ by the block $c_1,\\dots,c_m$ yields a linear extension of $P$: an element $x\\prec c$ (resp. $c\\prec x$) is sent to $\\ast$ in $Q$ on the correct side, so no relation is violated across the inserted block, and the order among the $c_i$ is respected. This is the required linear extension, and $C$ is consecutive in it. A covering pair is a two-element convex chain, so the final clause follows."
+      },
+      {
+        "id": "thm-cg-heaps-classify-commutation-classes",
+        "kind": "theorem",
+        "title": "Labeled linear extensions of a heap are exactly the words in its commutativity class, and heaps classify commutativity classes",
+        "deps": [
+          "def-cg-labeled-word-heap-and-fully-commutative-element",
+          "lem-cg-finite-poset-linear-extensions-and-connectivity",
+          "def-hh-coxeter-matrix-word-group-and-length",
+          "def-partial-order"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $(S,m)$, $W$, $\\ell$ be as in [[def-hh-coxeter-matrix-word-group-and-length]] and let heaps, labeled isomorphisms, labeled linear extensions $L(P_s,s)$ and commutativity classes $C(s)$ be as in [[def-cg-labeled-word-heap-and-fully-commutative-element]].\n\n**(1) Linear extensions are the commutativity class.** For every word $s$ in $S$,\n$$L(P_s,s)=C(s).$$\n\n**(2) Multiplicities and injectivity.** Let $s=(s_1,\\dots,s_k)$. For each $u\\in S$ the positions $i$ with $s_i=u$ form a chain in $P_s$, so a linear extension of $P_s$ is determined by its labeled word; hence the map from linear extensions of $P_s$ to words is injective and the number of words in $C(s)$ equals the number of linear extensions of $P_s$. In particular $C(s)$ is finite, all its members have length $k$, and for each $u$ each member contains exactly as many occurrences of $u$ as $s$ does.\n\n**(3) Labeled heaps are a complete invariant.** For words $s,s'$ one has $s\\sim s'$ if and only if there is a labeled poset isomorphism $P_s\\to P_{s'}$; the isomorphism carries the $j$-th occurrence of $u$ in $s$ to the $j$-th occurrence of $u$ in $s'$. Consequently the assignment $s\\mapsto P_s$ induces a bijection between commutativity classes of words and labeled heaps up to labeled isomorphism, whose inverse sends a labeled heap to the set of its labeled linear extensions.\n\n**(4) Heaps of reduced words.** If $w\\in W$ and $s,s'\\in\\mathcal R(w)$ satisfy $s\\sim s'$, then $P_s$ and $P_{s'}$ are isomorphic labeled posets. Hence, if $w$ is fully commutative, all reduced words of $w$ have pairwise isomorphic heaps, and the heap $P_w$ of $w$ is well defined up to labeled isomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "Proposition 1.2 and the following invariance remark, PDF pp. 5-6; §1.1 immediately preceding Proposition 1.1 for the decomposition of R(w) into commutativity classes, PDF p. 4"
+            },
+            {
+              "title": "C. Krattenthaler, The theory of heaps and the Cartier-Foata monoid, appendix to the electronic reedition of P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements (2006)",
+              "url": "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf",
+              "locator": "§3, PDF pp. 4-5: heaps correspond to equivalence classes of words modulo commuting interchanges, the inverse being given by linear extensions"
+            },
+            {
+              "title": "P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements, Lecture Notes in Mathematics 85, Springer 1969; 2005 TeX reproduction with three appendices, electronic reedition 2006",
+              "url": "https://www.mat.univie.ac.at/~slc/books/cartfoa.pdf",
+              "locator": "Chapitre premier, §§2-3, printed pp. 6-9 (equivalence classes of words and their canonical decomposition)"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "(1) In one direction, let $\\pi$ be a linear extension of $P_s$ with labeled word $s'$, and interchange two adjacent letters of $s'$ that commute: the corresponding adjacent entries of $\\pi$ are incomparable in $P_s$ (a relation between consecutive positions is generated by a noncommuting or equal pair, so commuting adjacent letters give no relation between them), so the interchange yields another linear extension; since $s\\in L(P_s,s)$, the whole class $C(s)$ is contained in $L(P_s,s)$. In the other direction, let $\\pi,\\sigma$ be linear extensions of $P_s$. By clause (3) of [[lem-cg-finite-poset-linear-extensions-and-connectivity]] $\\sigma$ is obtained from $\\pi$ by adjacent interchanges of incomparable entries, and incomparable entries of $P_s$ have distinct commuting labels; transporting the corresponding adjacent commuting interchanges to the labeled words gives $s'\\sim s$ for each labeled word $s'\\in L(P_s,s)$. (2) If $i<j$ and $s_i=s_j$, then $i\\prec_s j$ by definition, so same-label positions are comparable; a bijection of the position set preserving the word order must therefore send the $j$-th position of each label to the $j$-th position of that label. The remaining assertions follow from (1). (3) If $s\\sim s'$, it suffices to treat one adjacent interchange of commuting positions $i,i+1$, since mapping each occurrence of a letter to the corresponding occurrence and keeping all other positions shows that the exchanged word has the same heap up to a transposition of two incomparable positions. Conversely, if $\\varphi:P_s\\to P_{s'}$ is a labeled isomorphism, then reading the positions of $P_{s'}$ in the word order of $s'$ and transporting them through $\\varphi^{-1}$ presents the word $s'$ as a labeled linear extension of $P_s$, so $s'\\in C(s)$ by (1). (4) Immediate from (3) and the definition of full commutativity in [[def-cg-labeled-word-heap-and-fully-commutative-element]]. No Choice is used: linear extensions of a finite poset are handled by the finite arguments of [[lem-cg-finite-poset-linear-extensions-and-connectivity]]."
+      },
+      {
+        "id": "thm-cg-fully-commutative-forbidden-chain-criterion",
+        "kind": "theorem",
+        "title": "Fully commutative elements: the braid-factor criterion and the forbidden-chain heap criterion",
+        "deps": [
+          "def-cg-labeled-word-heap-and-fully-commutative-element",
+          "lem-cg-convex-chains-consecutive-in-a-linear-extension",
+          "thm-cg-heaps-classify-commutation-classes",
+          "thm-hh-matsumoto-reduced-word-theorem",
+          "def-hh-coxeter-matrix-word-group-and-length"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $(S,m)$, $W$, $\\ell$ and words be as in [[def-hh-coxeter-matrix-word-group-and-length]], and let heaps, linear extensions and commutativity classes be as in [[def-cg-labeled-word-heap-and-fully-commutative-element]]. For a finite alternating word $\\langle u,v\\rangle_q=(u,v,u,v,\\dots)$ of length $q$ and a word $s$, say that $\\langle u,v\\rangle_q$ **occurs as a contiguous factor** of $s$ when $s$ contains $q$ consecutive letters equal to $\\langle u,v\\rangle_q$.\n\n**(1) Braid-factor criterion.** For $w\\in W$ the following are equivalent: (a) $w$ is fully commutative; (b) no reduced word of $w$ contains $\\langle u,v\\rangle_{m(u,v)}$ as a contiguous factor for any distinct $u,v\\in S$ with $3\\le m(u,v)<\\infty$.\n\n**(2) Heap criterion.** Let $s$ be a word with heap $P_s$ and let $w:=s_1\\cdots s_k\\in W$ be the element it represents. Consider the conditions:\n(a) $P_s$ contains no convex chain $i_1\\prec\\cdots\\prec i_m$ of length $m=m(u,v)$ whose labels alternate between distinct $u,v\\in S$, for any pair with $3\\le m(u,v)<\\infty$;\n(b) $P_s$ contains no covering pair $i\\lessdot j$ with $s_i=s_j$;\n(c) $s$ is reduced and $w$ is fully commutative.\nThen (a) and (b) **together** are equivalent to (c): if $s$ is reduced and $w$ is fully commutative, then (a) and (b) both hold; conversely, if (a) and (b) both hold, then $s$ is reduced and $w$ is fully commutative. When these hold, $P_s$ is the heap of $w$, i.e. it is isomorphic to $P_{s'}$ for every $s'\\in\\mathcal R(w)$.\n\n**(3) Reformulation.** Clause (2) says in particular that the heap $P_s$ of an arbitrary word is the heap of a fully commutative element if and only if it avoids the two forbidden configurations (a) and (b); the reducedness of $s$ is a consequence, not a hypothesis.\n\n**(4) Caveat.** Only the finite alternating chains of clause (2)(a) are excluded; no condition is imposed for pairs with $m(u,v)=\\infty$, and clause (1)(b) likewise quantifies only over pairs with $3\\le m(u,v)<\\infty$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "Proposition 1.1 (braid-factor criterion), PDF p. 4, and Proposition 2.3 with its proof (forbidden convex chains and covering equal labels), PDF pp. 9-10: the criterion is the conjunction of (a) and (b) equivalent to (c)"
+            },
+            {
+              "title": "C. Krattenthaler, The theory of heaps and the Cartier-Foata monoid, appendix to the electronic reedition of P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements (2006)",
+              "url": "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf",
+              "locator": "§3, PDF pp. 4-5 (words in a commutation class are read from linear extensions)"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "(1) (a)$\\Rightarrow$(b): suppose $s\\in\\mathcal R(w)$ contains the contiguous factor $F=\\langle u,v\\rangle_m$ with $m=m(u,v)\\in[3,\\infty)$; the braid relation replaces $F$ by $\\langle v,u\\rangle_m$ and produces another reduced word $s^\\ast\\in\\mathcal R(w)$. Delete from a word all letters outside $\\{u,v\\}$: this projection is unchanged by interchanging adjacent commuting letters, because any such interchange either involves no letter of $\\{u,v\\}$ or one letter of $\\{u,v\\}$ and a commuting letter outside it; on the other hand the projections of $s$ and $s^\\ast$ differ at the position of the replaced factor, since $u\\ne v$. Hence $s^\\ast\\notin C(s)$, so $\\mathcal R(w)$ is not a single commutativity class. (b)$\\Rightarrow$(a): if $w$ is not fully commutative, take $s\\in\\mathcal R(w)$ and $s'\\in\\mathcal R(w)\\setminus C(s)$. By [[thm-hh-matsumoto-reduced-word-theorem]] (1) $s'$ is obtained from $s$ by a sequence of braid moves; the first move in such a sequence that leaves $C(s)$ is applied to a word $q\\in C(s)$ and is not a commutation, hence replaces a contiguous factor $\\langle x,y\\rangle_m$ with $x\\ne y$, $m=m(x,y)\\ge3$; in particular $q$, a reduced word of $w$, contains the forbidden factor.\n(2) (c)$\\Rightarrow$(a): if $P_s$ had such a convex chain $C$ and $w$ were fully commutative with $s$ reduced, then [[lem-cg-convex-chains-consecutive-in-a-linear-extension]] would give a linear extension of $P_s$ whose labeled word $s''$ has $C$ as consecutive entries, so $s''$ contains $\\langle u,v\\rangle_m$ as a contiguous factor; by [[thm-cg-heaps-classify-commutation-classes]] (1) $s''\\in C(s)=\\mathcal R(w)$, contradicting (1)(b). (c)$\\Rightarrow$(b): a covering pair $i\\lessdot j$ with $s_i=s_j$ is a two-element convex chain, so some linear extension has $i,j$ consecutive; its labeled word lies in $C(s)=\\mathcal R(w)$ and has two consecutive equal letters, and deleting those two letters expresses $w$ with $k-2$ letters, contradicting reducedness of $s$. (a),(b)$\\Rightarrow$(c): first, the braid class $H$ of $s$ (all words obtained by braid moves) equals $C(s)$. Otherwise choose a sequence of braid moves from $s$ to a word outside $C(s)$ with the fewest moves; its last move is applied to a word $q\\in C(s)$ and leaves $C(s)$, so it is not a commutation and replaces a contiguous alternating factor $\\langle x,y\\rangle_m$, $m\\ge3$, of $q$. Since $q\\in C(s)$, the heaps $P_q$ and $P_s$ are isomorphic by [[thm-cg-heaps-classify-commutation-classes]] (3); the positions of that factor form a chain in $P_q$ (consecutive letters are not a commuting pair) and are convex in it (a position strictly between two positions of a contiguous factor is itself a position of the factor, and relations of the heap imply the position order), so $P_q$ contains a convex alternating chain of length $m$. Condition (a) is invariant under labeled isomorphism, so $P_s$ would contain such a chain too, contradicting (a). Next, $s$ is reduced: if not, [[thm-hh-matsumoto-reduced-word-theorem]] (2) (M-reducedness) provides a sequence of braid moves from $s$ to a word $u$ containing a consecutive equal pair; then $u\\in H=C(s)$, so by [[thm-cg-heaps-classify-commutation-classes]] (3) $P_u$ is isomorphic to $P_s$ and contains the covering pair formed by those two consecutive equal positions, contradicting (b). Finally, with $s$ reduced, every word braid-equivalent to $s$ is reduced and represents $w$; by [[thm-hh-matsumoto-reduced-word-theorem]] (1) every reduced word of $w$ is braid-equivalent to $s$, so $\\mathcal R(w)\\subseteq H(s)=C(s)$, and since both sets consist of words representing $w$ of length $k=\\ell(w)$ we have $\\mathcal R(w)=C(s)$: $w$ is fully commutative and $P_s$ is its heap by [[thm-cg-heaps-classify-commutation-classes]] (4). (4) If $m(u,v)=\\infty$ the braid relation imposes no relation and there is no finite length to forbid, in agreement with the absence of a relator in [[def-hh-coxeter-matrix-word-group-and-length]]. No Choice is used."
+      },
+      {
+        "id": "thm-cg-fully-commutative-weak-intervals-are-distributive",
+        "kind": "theorem",
+        "title": "The right weak order interval below a fully commutative element is the lattice of order ideals of its heap",
+        "deps": [
+          "def-cg-labeled-word-heap-and-fully-commutative-element",
+          "lem-cg-finite-poset-linear-extensions-and-connectivity",
+          "thm-cg-heaps-classify-commutation-classes",
+          "def-cg-left-right-weak-order-and-descents",
+          "lem-cg-weak-order-prefix-property-and-left-translation",
+          "lem-cg-weak-order-is-a-graded-partial-order",
+          "lem-order-ideals-form-a-distributive-lattice",
+          "def-lattice-distributive-lattice-and-order-ideal",
+          "def-hh-coxeter-matrix-word-group-and-length",
+          "def-cg-linear-extension-of-a-finite-poset"
+        ],
+        "dependency_level": 14,
+        "statement": "Let $(S,m)$, $W$, $\\ell$ be as in [[def-hh-coxeter-matrix-word-group-and-length]], let $\\le_R$ be the right weak order with intervals $[u,v]_R$ and covers $\\lessdot_R$ ([[def-cg-left-right-weak-order-and-descents]], [[lem-cg-weak-order-is-a-graded-partial-order]]), and let fully commutative elements, reduced words and heaps be as in [[def-cg-labeled-word-heap-and-fully-commutative-element]] and [[thm-cg-heaps-classify-commutation-classes]]. Let $w\\in W$ be fully commutative, let $s=(s_1,\\dots,s_k)\\in\\mathcal R(w)$, and let $P:=P_s$ be the heap of $w$, with lattice of order ideals $J(P)$ ([[def-lattice-distributive-lattice-and-order-ideal]], [[lem-order-ideals-form-a-distributive-lattice]]).\n\n**(1) The ideal of an element of the interval.** For $u\\in S$ write $C_u=\\{i:s_i=u\\}$, a chain in $P$, with elements $u(1)\\prec u(2)\\prec\\cdots\\prec u(n_u)$, and for a word $s'$ let $\\nu(u,s')$ be the number of occurrences of $u$ in $s'$. If $x\\le_R w$ and $s'\\in\\mathcal R(x)$, then $\\nu(u,s')\\le n_u$ for all $u$, and $$I(s'):=\\{u(1),\\dots,u(\\nu(u,s')):u\\in S\\}\\subseteq P$$ is an order ideal of $P$; it does not depend on the choice of $s'\\in\\mathcal R(x)$. Writing $I(x)$ for this common ideal, one has $\\ell(x)=|I(x)|$, $I(1)=\\varnothing$ and $I(w)=P$.\n\n**(2) Order isomorphism.** The map $x\\mapsto I(x)$ is an order isomorphism from $[1,w]_R$ onto $J(P)$ ordered by inclusion.\n\n**(3) Lattice structure.** Consequently $[1,w]_R$, as a subposet of $(W,\\le_R)$, is a finite distributive lattice: for all $x,y\\le_R w$ the meet $x\\wedge y$ and the join $x\\vee y$ exist in $[1,w]_R$ and satisfy $$I(x\\wedge y)=I(x)\\cap I(y),\\qquad I(x\\vee y)=I(x)\\cup I(y);$$ the least element is $1$ and the greatest element is $w$.\n\n**(4) Caveats.** This identifies the right weak order interval $[1,w]_R$ with $J(P)$, for a fully commutative $w$; no identification of the Bruhat order interval below $w$ with $J(P)$ is made, and no claim is made about the intervals of elements that are not fully commutative.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "Lemma 2.1 and Theorem 2.2 (a) if and only if (c), PDF pp. 7-8; the interval-translation Proposition 1.3 is used only through the prefix property of the in-run weak-order items"
+            },
+            {
+              "title": "C. Krattenthaler, The theory of heaps and the Cartier-Foata monoid, appendix to the electronic reedition of P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements (2006)",
+              "url": "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf",
+              "locator": "§3, PDF pp. 4-5 (linear extensions and words)"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "Throughout, [[lem-cg-weak-order-prefix-property-and-left-translation]] (1)-(2) gives $x\\le_R w\\iff\\ell(w)=\\ell(x)+\\ell(x^{-1}w)$ and the reduced-prefix description of the order, and [[thm-cg-heaps-classify-commutation-classes]] (1) gives $\\mathcal R(w)=L(P,s)$ because $w$ is fully commutative.\n(1) If $x\\le_R w$ and $s'\\in\\mathcal R(x)$, concatenate $s'$ with a reduced word of $x^{-1}w$: the result has length $\\ell(x)+\\ell(x^{-1}w)=\\ell(w)$ and represents $w$, hence is a reduced word of $w$, i.e. an element of $L(P,s)$. Thus $s'$ is an initial segment of a labeled linear extension of $P$; in particular its occurrences match the first $\\nu(u,s')$ elements of each chain $C_u$, so $\\nu(u,s')\\le n_u$ and $I(s')$, the set of positions occurring in that initial segment, is an order ideal of $P$ (a prefix of a linear extension is closed downward). If $s''\\in\\mathcal R(x)$ and $u\\in S$, complete $s'$ to a reduced word $s'u'$ of $w$; then $s''u'$ also has length $\\ell(w)$ and represents $w$, hence is a reduced word of $w$ and an element of $L(P,s)$, hence is a permutation of the labeling $s$ of $P$; comparing multiplicities gives $\\nu(u,s')=\\nu(u,s'')$. So $I(x):=I(s')$ is well defined, and $\\ell(x)=|s'|=\\sum_u\\nu(u,s')=|I(x)|$; the identities for $1$ and $w$ are immediate.\n(2) The map is order-preserving: if $x\\lessdot_R xs$ with $s\\in S$, choose $s'\\in\\mathcal R(x)$; then $s's$ is a reduced word of $xs$, so $I(x)\\subseteq I(xs)$, and general comparability follows along weakened chains by [[lem-cg-weak-order-is-a-graded-partial-order]] (2)-(3). For the inverse, let $I\\in J(P)$ and choose a linear extension of $P$ whose first $|I|$ entries are exactly $I$, which exists by [[lem-cg-finite-poset-linear-extensions-and-connectivity]] (2). Let $s_I$ be the labeled word of that initial segment and $x_I$ its product in $W$; the full word of the extension lies in $L(P,s)=\\mathcal R(w)$; a prefix of a reduced word is reduced (a shorter expression for the prefix would shorten the whole word), so $s_I$ is reduced, and $x_I\\le_R w$ by the prefix property. Moreover $I(s_I)=I$. Every labeled linear extension of the ideal $I$ arises from a word whose heap is the labeled poset $I$: any two elements of $I$ with equal or noncommuting labels are comparable in $P$, hence in $I$, and conversely every relation of $I$ is a relation of $P$ whose witnessing path between elements of $I$ stays inside $I$ because $I$ is downward closed; hence [[thm-cg-heaps-classify-commutation-classes]] (1) applied to that word shows that all labeled linear extensions of $I$ are commutation-equivalent and represent the same element. Therefore $x_I$ depends only on $I$, and defining $\\psi(I):=x_I$ gives $\\psi(I(x))=x$ for every $x\\le_R w$, because any $s'\\in\\mathcal R(x)$ is a labeled linear extension of $I(x)$; and $I(\\psi(I))=I$, because the initial segment $s_I$ of a linear extension produces $I(s_I)=I$ by the same counting as in (1). Hence $\\psi$ is a two-sided inverse of $x\\mapsto I(x)$. It is order-preserving: if $I\\subseteq J$ are ideals, apply clause (2) of [[lem-cg-finite-poset-linear-extensions-and-connectivity]] twice to obtain a linear extension of $P$ whose first $|J|$ entries are $J$ and whose first $|I|$ entries are $I$; the word for $I$ is then a prefix of the word for $J$, so by the prefix property $\\psi(I)\\le_R\\psi(J)$. An order-preserving bijection whose inverse is order-preserving is an order isomorphism.\n(3) $J(P)$ is a lattice with meets and joins given by intersection and union, and it is distributive ([[lem-order-ideals-form-a-distributive-lattice]]); an order isomorphism onto it makes $[1,w]_R$ a lattice in which meets and joins correspond, and the containing set $[1,w]_R$ is finite of size $\\ell(w)+1$ by [[lem-cg-weak-order-is-a-graded-partial-order]] (3). No Choice is used: all linear extensions and ideals involved are finite constructions."
+      }
+    ]
+  },
+  {
+    "order": 1773,
+    "id": "heaps-commutation-classes-and-fully-commutative-elements-examples",
+    "kind": "B",
+    "category": "coxeter-groups",
+    "title": "Heaps, Commutation Classes, and Fully Commutative Elements — Examples",
+    "companion": "heaps-commutation-classes-and-fully-commutative-elements",
+    "requires": [
+      "heaps-commutation-classes-and-fully-commutative-elements"
+    ],
+    "items": [
+      {
+        "id": "ex-cg-heap-of-one-three-two-in-a3",
+        "kind": "example",
+        "title": "The heap of $s_1s_3s_2$ in type $A_3$: a V-shaped heap with exactly two linear extensions",
+        "deps": [
+          "def-cg-labeled-word-heap-and-fully-commutative-element",
+          "thm-cg-heaps-classify-commutation-classes",
+          "thm-cg-fully-commutative-forbidden-chain-criterion",
+          "def-hh-coxeter-matrix-word-group-and-length",
+          "def-graded-poset-and-rank",
+          "lem-order-ideals-form-a-distributive-lattice"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $S=\\{s_1,s_2,s_3\\}$ with $m(s_1,s_2)=m(s_2,s_3)=3$ and $m(s_1,s_3)=2$, the Coxeter matrix of type $A_3$ ([[def-hh-coxeter-matrix-word-group-and-length]]), let $W$ be the presented group and let $w:=s_1s_3s_2\\in W$. Then:\n\n**(1)** The heap $P$ of the word $(s_1,s_3,s_2)$ has elements $1,2,3$ with $1\\prec3$, $2\\prec3$ and no relation between $1$ and $2$; its covering pairs are $1\\lessdot3$ and $2\\lessdot3$, with labels $s_1,s_2$ and $s_3,s_2$.\n\n**(2)** $P$ satisfies both conditions of [[thm-cg-fully-commutative-forbidden-chain-criterion]] (2): its chains have at most two elements, so it has no convex alternating chain of length $m(s_1,s_2)=m(s_2,s_3)=3$, and its covering pairs have distinct labels. Hence the word is reduced, $w$ is fully commutative and $P$ is the heap $P_w$ of $w$; in particular $\\ell(w)=3$.\n\n**(3)** The linear extensions of $P$ are exactly $(1,2,3)$ and $(2,1,3)$, and the corresponding labeled linear extensions are the words $s_1s_3s_2$ and $s_3s_1s_2$. By [[thm-cg-heaps-classify-commutation-classes]] (1) these are exactly the members of the commutativity class $C((s_1,s_3,s_2))=\\mathcal R(w)$: the two reduced words of $w$ differ by the commute $s_1s_3=s_3s_1$.\n\n**(4)** The order ideals of $P$ are $\\varnothing$, $\\{1\\}$, $\\{2\\}$, $\\{1,2\\}$ and $\\{1,2,3\\}$; they form a five-element distributive lattice under inclusion.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "The worked commutation-class and heap formalism of §§1.1-1.2, PDF pp. 4-5; the type-$A$ Coxeter matrix conventions are those of the defining item"
+            },
+            {
+              "title": "P. Nadeau, On the length of fully commutative elements, arXiv:1511.08788",
+              "url": "https://arxiv.org/pdf/1511.08788",
+              "locator": "§2.3 and Figure 1, PDF p. 6 (general heap construction and drawings by defining chains; Figure 1 uses the rank-three graph with edge labels 4 and 5, not this type-A3 word)"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "Direct verification. (1) By the definition of the heap ([[def-cg-labeled-word-heap-and-fully-commutative-element]] (2)), positions $1,2$ carry labels $s_1,s_3$ with $m(s_1,s_3)=2$ and are incomparable; $1\\prec3$ because $m(s_1,s_2)=3$ and the labels of positions $1,3$ are $s_1,s_2$; $2\\prec3$ because $m(s_3,s_2)=3$. There are only three elements, so $1\\lessdot3$ and $2\\lessdot3$ are the covering pairs ([[def-graded-poset-and-rank]]), with the stated labels. (2) A chain in $P$ has at most two elements, so the forbidden convex chain of length $m\\ge3$ cannot occur; the covering pairs carry distinct labels, so (b) holds; [[thm-cg-fully-commutative-forbidden-chain-criterion]] (2) gives reducedness, full commutativity and $P=P_w$, and $|P|=3$ gives $\\ell(w)=3$. (3) A bijection from $P=\\{1,2,3\\}$ to a linear order is a linear extension exactly when $3$ is last, since $1,2$ are incomparable to each other; this gives $(1,2,3)$ and $(2,1,3)$ and no others, with labeled words $s_1s_3s_2$ and $s_3s_1s_2$. [[thm-cg-heaps-classify-commutation-classes]] (1) identifies these with $C(s)$, and since the word is reduced and $w$ is fully commutative, $C(s)=\\mathcal R(w)$. The two words differ by interchanging the adjacent commuting letters $s_1,s_3$ ([[def-hh-coxeter-matrix-word-group-and-length]]). (4) The listed subsets are exactly the subsets $I$ with $3\\in I\\Rightarrow1,2\\in I$; union and intersection of such sets have the same property, giving the five-element distributive lattice, in agreement with [[lem-order-ideals-form-a-distributive-lattice]].",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cg-heap-of-one-two-one-in-a2-and-long-braid",
+        "kind": "example",
+        "title": "The heap of $s_1s_2s_1$ in type $A_2$: a convex alternating chain and two commutation classes",
+        "deps": [
+          "def-cg-labeled-word-heap-and-fully-commutative-element",
+          "thm-cg-heaps-classify-commutation-classes",
+          "thm-cg-fully-commutative-forbidden-chain-criterion",
+          "thm-hh-matsumoto-reduced-word-theorem",
+          "def-hh-coxeter-matrix-word-group-and-length",
+          "def-graded-poset-and-rank"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $S=\\{s_1,s_2\\}$ with $m(s_1,s_2)=3$, the Coxeter matrix of type $A_2$, let $W$ be the presented group and let $w_0:=s_1s_2s_1\\in W$. Then:\n\n**(1)** The heap $P$ of the word $(s_1,s_2,s_1)$ is the chain $1\\prec2\\prec3$ with labels $s_1,s_2,s_1$.\n\n**(2)** $(1,2,3)$ is a convex chain of length $3=m(s_1,s_2)$ in $P$ whose labels alternate between $s_1$ and $s_2$, so condition (a) of [[thm-cg-fully-commutative-forbidden-chain-criterion]] (2) fails for $P$. Its covering pairs are $1\\lessdot2$ and $2\\lessdot3$, whose labels are distinct, so condition (b) holds: here it is the failure of (a), not of (b), that is relevant, and correspondingly the reduced word $s_1s_2s_1$ contains the contiguous braid factor $\\langle s_1,s_2\\rangle_3$, so clause (1) of the same theorem shows that $w_0$ is not fully commutative. In particular $P$ is not the heap of any fully commutative element.\n\n**(3)** The reduced words of $w_0$ are exactly $s_1s_2s_1$ and $s_2s_1s_2$: both are reduced of length $3$, they are related by the braid relation, and they lie in different commutativity classes, since neither contains two adjacent commuting letters and thus $C(s_1s_2s_1)=\\{s_1s_2s_1\\}$ and $C(s_2s_1s_2)=\\{s_2s_1s_2\\}$. This exhibits explicitly the failure of full commutativity detected in (2).\n\n**(4)** The heap $P$ has four order ideals: $\\varnothing$, $\\{1\\}$, $\\{1,2\\}$, $\\{1,2,3\\}$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "Proposition 1.1 and Figure 1(a), PDF pp. 4 and 9: the weak order of the dihedral group of order $2m$, $m\\ge3$, is not distributive, and reduced words of a non-fully-commutative element fall into at least two commutativity classes"
+            },
+            {
+              "title": "P. Nadeau, On the length of fully commutative elements, arXiv:1511.08788",
+              "url": "https://arxiv.org/pdf/1511.08788",
+              "locator": "§2.4, properties (h1)-(h2) and Proposition 2.6, PDF p. 6 (a convex alternating chain of length $m_{st}$ obstructs full commutativity)"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "Direct verification. (1) Consecutive positions carry the noncommuting pairs $s_1,s_2$ and $s_2,s_1$, so $1\\prec2$ and $2\\prec3$; the equal-label pair $1,3$ gives $1\\prec3$ as well, so the three positions form a chain, and the relations make it the only possible order. The labels of $1,2,3$ are $s_1,s_2,s_1$. (2) The whole chain $1\\prec2\\prec3$ is convex (it exhausts the three elements of $P$ and has no elements outside it) and has length $3=m(s_1,s_2)$ with alternating labels $s_1,s_2,s_1$, so (a) fails; the covering pairs are $1\\lessdot2$ and $2\\lessdot3$, since no element lies strictly between consecutive positions $1,2$ or $2,3$, and their labels are distinct, so (b) holds. Non-full-commutativity follows from clause (1) of [[thm-cg-fully-commutative-forbidden-chain-criterion]] applied to the reduced word $s_1s_2s_1$, which contains the full braid factor $\\langle s_1,s_2\\rangle_3$. Reducedness and the reduced words: by [[thm-hh-matsumoto-reduced-word-theorem]] (3) the alternating words of length $q\\le m=3$ in the dihedral subgroup $\\langle s_1,s_2\\rangle$ are reduced in $W$, so $s_1s_2s_1$ and $s_2s_1s_2$ are reduced of length $3$; they represent the same element by the braid relation, and by [[thm-hh-matsumoto-reduced-word-theorem]] (1) every reduced word of $w_0$ is braid-equivalent to $s_1s_2s_1$, and the set of braid-equivalent words of length $3$ here is exactly these two. Neither word has an adjacent commuting pair, so each is its own commutativity class ([[def-cg-labeled-word-heap-and-fully-commutative-element]] (5)); hence $\\mathcal R(w_0)$ is the union of the two distinct classes $\\{s_1s_2s_1\\}$ and $\\{s_2s_1s_2\\}$, so $w_0$ is not fully commutative. (4) The order ideals of a three-element chain are its four prefixes.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cg-distributive-weak-intervals-of-fully-commutative-elements",
+        "kind": "example",
+        "title": "Two distributive right weak intervals of fully commutative elements in type $A_3$",
+        "deps": [
+          "def-cg-labeled-word-heap-and-fully-commutative-element",
+          "thm-cg-heaps-classify-commutation-classes",
+          "thm-cg-fully-commutative-weak-intervals-are-distributive",
+          "thm-cg-fully-commutative-forbidden-chain-criterion",
+          "lem-cg-weak-order-prefix-property-and-left-translation",
+          "def-cg-left-right-weak-order-and-descents",
+          "thm-hh-coxeter-exchange-deletion-and-faithfulness",
+          "def-hh-coxeter-matrix-word-group-and-length"
+        ],
+        "dependency_level": 15,
+        "statement": "Let $S=\\{s_1,s_2,s_3\\}$ with $m(s_1,s_2)=m(s_2,s_3)=3$ and $m(s_1,s_3)=2$ (type $A_3$), let $W$ be the presented group, and let $\\le_R$ be the right weak order ([[def-cg-left-right-weak-order-and-descents]]).\n\n**(1) A Boolean interval.** For $u:=s_1s_3$ the heap $P_u$ is the two-element antichain with labels $s_1,s_3$; its order ideals are the four subsets of $\\{1,2\\}$, forming a Boolean lattice, and the right weak interval $[1,u]_R=\\{\\,1,\\,s_1,\\,s_3,\\,u\\,\\}$ is a four-element distributive lattice, with $s_1\\wedge s_3=1$ and $s_1\\vee s_3=u$. The map of [[thm-cg-fully-commutative-weak-intervals-are-distributive]] sends $1,s_1,s_3,u$ to $\\varnothing,\\{1\\},\\{2\\},\\{1,2\\}$.\n\n**(2) A five-element interval.** For $w:=s_1s_3s_2$ the heap $P_w$ is the V-shaped poset with relations $1\\prec3$ and $2\\prec3$, whose five order ideals are $\\varnothing,\\{1\\},\\{2\\},\\{1,2\\},\\{1,2,3\\}$. The right weak interval $[1,w]_R$ consists of the five elements $1,s_1,s_3,s_1s_3,w$, and it is a distributive lattice isomorphic to $J(P_w)$: the three elements $s_1,s_3,s_1s_3$ are exactly the products of the nonempty proper ideals $\\{1\\},\\{2\\},\\{1,2\\}$, while $w$ is the product of $P_w$. Here $s_1\\wedge s_3=1$, $s_1\\vee s_3=s_1s_3$, and $s_1s_3\\vee s_1=s_1s_3$, in agreement with intersection and union of the corresponding ideals.\n\n**(3)** Both intervals are finite and distributive, illustrating [[thm-cg-fully-commutative-weak-intervals-are-distributive]] (2)-(3); the first has a non-chain heap while the second's heap is not a chain either, so the distributivity is not merely the chain case.\n",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "Lemma 2.1 and Theorem 2.2, PDF pp. 7-8 (the interval is isomorphic to the distributive lattice $J(P)$)"
+            },
+            {
+              "title": "C. Krattenthaler, The theory of heaps and the Cartier-Foata monoid, appendix to the electronic reedition of P. Cartier and D. Foata, Problemes combinatoires de commutation et rearrangements (2006)",
+              "url": "https://www.mat.univie.ac.at/~kratt/artikel/heaps.pdf",
+              "locator": "§3, PDF pp. 4-5 (linear extensions furnish the products of ideals)"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "Direct finite verification. (1) In type $A_3$ the letters $s_1,s_3$ commute, so the heap of the word $(s_1,s_3)$ is the two-element antichain; the word is reduced and the element $u=s_1s_3=s_3s_1$ is fully commutative, its reduced words being exactly $s_1s_3$ and $s_3s_1$ ([[thm-cg-heaps-classify-commutation-classes]] (1)). The right weak order on $[1,u]_R$ is determined by the prefix property ([[def-cg-left-right-weak-order-and-descents]], [[lem-cg-weak-order-prefix-property-and-left-translation]]): its elements are the products of prefixes of the reduced word $s_1s_3$, namely $1,s_1,u$, together with $s_3$ (from the other reduced word), and the comparabilities are $1\\le_R s_1\\le_R u$, $1\\le_R s_3\\le_R u$, with $s_1,s_3$ incomparable and $s_1\\wedge s_3=1$, $s_1\\vee s_3=u$; this is the Boolean lattice on two generators. [[thm-cg-fully-commutative-weak-intervals-are-distributive]] (2)-(3) matches it with $J(P_u)$, whose four ideals are $\\varnothing,\\{1\\},\\{2\\},\\{1,2\\}$. (2) The products of the order ideals of $P_w$ computed in step 1.1 are $1$, $s_1$, $s_3$, $s_1s_3$ and $w$, each read from a linear extension of the ideal; these are five distinct elements of $W$ of lengths $0,1,1,2,3$; they all lie in $[1,w]_R$ by the prefix property, and [[thm-cg-fully-commutative-weak-intervals-are-distributive]] (2) identifies $[1,w]_R$ with $J(P_w)$, which has exactly five elements, so these are all of $[1,w]_R$. The order relations follow from the prefix property: $s_1\\le_R w$ (prefix of $s_1s_3s_2$), $s_3\\le_R w$ (prefix of the reduced word $s_3s_1s_2$), $s_1s_3\\le_R w$ (prefix of $s_1s_3s_2$), and $s_1\\le_R s_1s_3$, $s_3\\le_R s_1s_3$, $s_1s_3\\le_R w$; the meets and joins displayed are then read off from the ideal lattice under intersection and union ([[lem-order-ideals-form-a-distributive-lattice]]) via the order isomorphism of [[thm-cg-fully-commutative-weak-intervals-are-distributive]] (2). (3) The heaps are the two-element antichain and the V-shaped poset computed in step 1.1, neither of which is a chain.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cg-nondistributive-weak-interval-of-a-non-fully-commutative-element",
+        "kind": "example",
+        "title": "The right weak interval below the longest element of $A_2$ is not distributive",
+        "deps": [
+          "def-cg-labeled-word-heap-and-fully-commutative-element",
+          "thm-cg-fully-commutative-forbidden-chain-criterion",
+          "thm-cg-fully-commutative-weak-intervals-are-distributive",
+          "def-cg-left-right-weak-order-and-descents",
+          "lem-cg-weak-order-prefix-property-and-left-translation",
+          "lem-cg-weak-order-is-a-graded-partial-order",
+          "def-lattice-distributive-lattice-and-order-ideal",
+          "thm-hh-matsumoto-reduced-word-theorem",
+          "def-hh-coxeter-matrix-word-group-and-length"
+        ],
+        "dependency_level": 15,
+        "statement": "Let $S=\\{s_1,s_2\\}$ with $m(s_1,s_2)=3$ (type $A_2$), let $W$ be the presented group, let $w_0:=s_1s_2s_1$, and let $\\le_R$ be the right weak order ([[def-cg-left-right-weak-order-and-descents]]).\n\n**(1)** $[1,w_0]_R=W=\\{1,s_1,s_2,s_1s_2,s_2s_1,w_0\\}$, with cover relations $1\\lessdot s_1$, $1\\lessdot s_2$, $s_1\\lessdot s_1s_2$, $s_2\\lessdot s_2s_1$, $s_1s_2\\lessdot w_0$, $s_2s_1\\lessdot w_0$; the middle elements $s_1s_2$ and $s_2s_1$ are incomparable, and so are $s_1,s_2s_1$ and $s_2,s_1s_2$.\n\n**(2)** The subposet $\\{1,\\,s_1,\\,s_1s_2,\\,s_2s_1,\\,w_0\\}$ is a pentagon: $1<s_1<s_1s_2<w_0$ and $1<s_2s_1<w_0$, with $s_1,s_1s_2$ incomparable to $s_2s_1$.\n\n**(3)** $[1,w_0]_R$ is not distributive: with $u=s_1$, $v=s_1s_2$ and $d=s_2s_1$ one has $u\\vee d=w_0$ (the only common upper bound of $s_1$ and $s_2s_1$), hence $$v\\wedge(u\\vee d)=v\\wedge w_0=v=s_1s_2,$$ while $$(v\\wedge u)\\vee(v\\wedge d)=u\\vee1=s_1,$$ and $s_1\\ne s_1s_2$.\n\n**(4)** The element $w_0$ is not fully commutative, since the reduced word $s_1s_2s_1$ contains the contiguous braid factor $\\langle s_1,s_2\\rangle_3$; so this interval is a non-distributive weak interval below a non-fully-commutative element. The example does not prove the converse of [[thm-cg-fully-commutative-weak-intervals-are-distributive]]; it verifies non-distributivity of this single interval directly.\n\n",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. R. Stembridge, On the Fully Commutative Elements of Coxeter Groups, author manuscript (March 1995, minor revisions September 1995); published in J. Algebraic Combin. 5 (1996), 353-385",
+              "url": "https://dept.math.lsa.umich.edu/~jrs/papers/FC.pdf",
+              "locator": "Proposition 1.1 and the proof of Theorem 2.2, PDF pp. 4-5 and 8-9; Figure 1(a) illustrates the dihedral case $m=4$, while the $A_2$ case $m=3$ is computed locally here"
+            },
+            {
+              "title": "P. Nadeau, On the length of fully commutative elements, arXiv:1511.08788",
+              "url": "https://arxiv.org/pdf/1511.08788",
+              "locator": "§2.4, Proposition 2.6 condition (h2), PDF p. 6 (the distinct-label alternating chain obstruction in this $A_2$ example)"
+            }
+          ],
+          "scraped": []
+        },
+        "strategy": "(1) Derive the six-element dihedral group and reduced-word lengths directly from the order-six Coxeter presentation. (2) Use the prefix and cover suppliers to compute the full right weak interval and its pentagon subposet. (3) Compute the meet and join witnesses and show the distributive identity fails. (4) Use the local reduced word and braid criterion to establish that w0 is not fully commutative.",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

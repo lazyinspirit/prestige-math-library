@@ -14,7 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-17
+  repair: research/frontier-42-coxeter-32-codex-step6-a-external-definitions/thm-schurs-lemma-for-modules.receipt.json
 sources:
   scraped: []
   references:
@@ -31,7 +31,7 @@ A nonzero homomorphism between simple modules is an isomorphism. Consequently th
 
 **Given:** The hypotheses and objects in the Statement.
 
-[L1] A left $R$-module $M$ is simple if $M\ne0$ and its only submodules are $0$ and $M$. Equivalently, $M$ has no proper nonzero submodule. ([[def-simple-module]]).
+[L1] A left $R$-module $M$ is simple if $M\ne0$ and its only submodules are $0$ and $M$. Equivalently, $M\ne0$ and $M$ has no proper nonzero submodule. ([[def-simple-module]]).
 
 [L2] For a left $R$-module $M$, define $$\operatorname{End}_R(M):=\operatorname{Hom}_R(M,M).$$ Addition is pointwise and multiplication is composition, $(fg)(m):=f(g(m))$. The ring laws and the identity endomorphism are established in prop-endomorphisms-form-a-ring. ([[def-endomorphism-ring-of-a-module]]).
 

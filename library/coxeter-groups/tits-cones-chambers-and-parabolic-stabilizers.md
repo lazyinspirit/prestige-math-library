@@ -2,26 +2,43 @@
 page: tits-cones-chambers-and-parabolic-stabilizers
 title: "Tits Cones, Chambers, and Parabolic Stabilizers"
 status: draft
-items: []
+requires: [canonical-roots-signs-and-faithful-reflections, hilbert-space-geometry-and-riesz-representation]
+items: [def-cg-tits-cone-and-fundamental-chamber,
+        thm-cg-tits-cone-finite-negativity-and-convexity,
+        thm-cg-dual-chamber-intersections-and-point-stabilizers,
+        thm-cg-tits-cone-interior-and-local-finiteness]
 examples: []
 ---
 
-Chambers live naturally in the dual space. Their union is the Tits cone; its topology and face stabilizers must be established before the geometric realization becomes a tool for infinite Coxeter groups.
+Chambers of a Coxeter group live in the dual space. For the contragredient
+action of $\rho(W)$ on $V^*$ and the closed chamber
+$C=\{f:f(e_s)\ge0\ \text{for all}\ s\}$,
+[[def-cg-tits-cone-and-fundamental-chamber]] fixes the chamber system
+$wC$, the **Tits cone** $U=\bigcup_{w\in W}wC$, its ordinary
+finite-dimensional interior $U^\circ$ for the coordinate metric
+$d(f,g)=\max_s|f(e_s)-g(e_s)|$ when $S\ne\emptyset$ (and $d(0,0)=0$ in empty rank), and the negative-root set
+$\operatorname{Neg}(f)$; the union definition deliberately asserts neither
+convexity nor local finiteness.
 
-This is a prose scaffold for future local item authoring. Its empty item lists do not assert proof completion. Every construction below is a named supplier contract; definitions are justified by the separately named existence, descent or uniqueness proofs before any application consumes their properties. Source reading supports the selected proof route and is not a substitute for a library proof.
-
-## Ordered construction and proof contracts
-
-**def-cg-tits-cone-and-fundamental-chamber.** Define U=⋃w wC and U° as its ordinary finite-dimensional interior. Define the negative-root set of f∈V*. The union definition asserts neither convexity nor local finiteness; root-sign control supplies those next.
-
-Definition justification: `thm-cg-tits-cone-finite-negativity-and-convexity`.
-
-**thm-cg-tits-cone-finite-negativity-and-convexity.** Prove f∈U iff only finitely many positive roots satisfy f(a)<0. Starting with a negative simple coordinate, reflecting decreases that finite set by one; termination lands in C. A finite union bounds negative roots of (1-t)f+tg, proving convexity. Prove the chamber reduction step and endpoint t=0,1 explicitly.
-
-**thm-cg-dual-chamber-intersections-and-point-stabilizers.** For f,g∈C with wf=g show f=g and w∈W_I where I={s:f(e_s)=0}, by reducing a left descent and applying root inequalities. Hence C meets each U-orbit once and stabilizer of f is exactly W_I. Give the more general intersection rule wC∩C using the same argument, not a faithful-action shortcut.
-
-**thm-cg-tits-cone-interior-and-local-finiteness.** For f∈C with zero-coordinate set I prove f∈U° iff W_I finite. In the finite case glue its finitely many incident chamber sectors to a neighborhood using the rank-two halfspace/face intersection rules. In the infinite case Φ_I,+ is infinite since inversion cardinalities equal unbounded lengths. Perturb f by arbitrarily small negative coordinates on I; every parabolic positive root then evaluates negatively, so the finite-negativity criterion excludes each perturbation from U. Finite spherical-face charts give locally finitely many chambers and walls in U°; a finite subcover handles compact subsets. Do not claim local finiteness on the whole boundary.
-
-## Prerequisites and reading
-
-Required earlier pages: [[canonical-roots-signs-and-faithful-reflections]]. The companion [[tits-cones-chambers-and-parabolic-stabilizers-examples]] tests these constructions and conventions. Exact item dependencies and source reading limits are recorded in `research/coxeter-scaffold/inventory.json` and `research/plan-coxeter-groups-track.md`.
+The three theorems make the union usable. [[thm-cg-tits-cone-finite-negativity-and-convexity]]
+proves the criterion $f\in U\iff\operatorname{Neg}(f)$ finite, the one-letter
+reduction $\operatorname{Neg}(s\cdot f)=r_s(\operatorname{Neg}(f)\setminus\{e_s\})$
+when $f(e_s)<0$, with its termination in $C$, the inversion-set bounds
+$\operatorname{Neg}(f)\subseteq N(w)$ and
+$|\operatorname{Neg}(f)|\le\ell(w)$ whenever $w\cdot f\in C$, and convexity of $U$ under nonnegative
+scalings and convex combinations. [[thm-cg-dual-chamber-intersections-and-point-stabilizers]]
+shows that a point of $U$ has exactly one representative in the fundamental
+chamber, identifies $\operatorname{Stab}_W(f)$ for $f\in C$ with the parabolic
+$W_{S(f)}$, conjugates this formula along $U$, and computes the general
+intersection $wC\cap C$ by the same left-descent argument.
+[[thm-cg-tits-cone-interior-and-local-finiteness]] proves
+$f\in U^\circ\iff W_{S(f)}$ finite for $f\in C$, that $U^\circ$ is the union of
+the $W$-translates of the spherical faces $C^f$, that every point of $U^\circ$
+has a neighborhood meeting only finitely many chambers and walls (hence so does
+every compact subset), and that points with infinite parabolic stabilizer are
+approached from outside $U$ by the explicit perturbations $f-t\,\delta_I$; no
+local finiteness is claimed on the boundary. All four items are choice-free.
+The finite-dimensional Riesz representation used in the local-finiteness argument is [[thm-riesz-representation-in-finite-dimensions]]; the inner-product conventions are fixed by [[def-real-and-complex-inner-product-space]] on [[hilbert-space-geometry-and-riesz-representation]].
+The compact-subset conclusion uses [[lem-compactness-is-intrinsic]] to pass from intrinsic compactness to an ambient ball cover, formed from all suitable balls so that no choice of radii is needed.
+The companion [[tits-cones-chambers-and-parabolic-stabilizers-examples]] tests
+these constructions in the infinite dihedral, $A_2$ and product types.

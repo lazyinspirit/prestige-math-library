@@ -2,12 +2,40 @@
 page: coxeter-polyhedral-gluings-and-intrinsic-metrics-examples
 title: "Coxeter Polyhedral Gluings and Intrinsic Metrics — Examples"
 status: draft
+requires: [coxeter-polyhedral-gluings-and-intrinsic-metrics,
+           areas-of-elementary-plane-figures]
 items: []
-examples: []
+examples: [ex-cg-hexagonal-a2-cell-and-graph-distance,
+           ex-cg-interval-realized-tree-versus-vertex-graph-metric,
+           cex-cg-shrinking-edge-ray-is-locally-finite-but-not-complete]
 ---
 
-This draft companion is a dependency leaf. Its exercises and examples use only the theory of [[coxeter-polyhedral-gluings-and-intrinsic-metrics]] and that page’s established prerequisite closure; no other theory page may depend on a supplier homed here.
+This companion is a dependency leaf: its entries use the theory of
+[[coxeter-polyhedral-gluings-and-intrinsic-metrics]], together with the
+elementary plane-geometry and inner-product material collected on
+[[areas-of-elementary-plane-figures]], and no other page depends on a supplier
+homed here.
 
-Compare an interval-realized tree with its discrete vertex metric. Exhibit the shrinking-edge ray showing local finiteness alone does not imply completeness. Construct the hexagonal A2 cell with its barycentric triangulation and compare Euclidean cell metric with graph distance.
+The hexagonal example [[ex-cg-hexagonal-a2-cell-and-graph-distance]] realizes
+the $A_2$ Coxeter cell as the regular hexagon of side $1$, identifies the chain
+metric of the single-cell gluing with the Euclidean metric, computes the twelve
+barycentric triangles and the exact constants $L=4/\sqrt3$ and
+$\delta=\sqrt3/24$ of the star lemma, and compares the intrinsic distances
+$1,\sqrt3,2$ between the vertices with the graph distances $1,2,3$ of the
+hexagonal $1$-skeleton. The comparison shows that the graph metric is not the
+metric induced by the cell.
 
-Each eventual example will state all hypotheses and verify the claimed calculation. A counterexample identifies the precise dropped hypothesis; a drawing or symbolic calculation alone does not certify a general theorem. Items remain unassigned until the theory suppliers have complete local proofs.
+The tree example [[ex-cg-interval-realized-tree-versus-vertex-graph-metric]]
+glues unit intervals along a finite tree and proves by induction that the chain
+metric restricts on the vertices to the graph path metric, that every two
+points are joined by exactly one geodesic segment, and that the vertex metric
+is not geodesic; with prescribed edge lengths $\ell_e>0$ the vertex distances
+become the weighted path lengths, which agree with the unweighted graph metric
+only when every $\ell_e=1$.
+
+The counterexample [[cex-cg-shrinking-edge-ray-is-locally-finite-but-not-complete]]
+exhibits the shrinking-edge ray: compact convex cells of lengths $2^{-n}$ glued
+end to end give a connected, locally finite gluing isometric to $[0,2)$, whose
+far endpoints form a Cauchy sequence without a limit. The dropped hypothesis is
+finiteness of the number of isometry classes of cells, and the space is also not
+proper.

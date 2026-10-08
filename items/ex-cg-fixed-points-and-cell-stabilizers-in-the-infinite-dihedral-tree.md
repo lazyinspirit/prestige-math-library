@@ -1,0 +1,118 @@
+---
+id: "ex-cg-fixed-points-and-cell-stabilizers-in-the-infinite-dihedral-tree"
+kind: "example"
+title: "Fixed points of finite subgroups in the infinite dihedral tree and their cell stabilizers"
+status: draft
+origin: pipeline
+pipeline_run: frontier-42-coxeter-32
+dependency_level: 23
+deps: ["def-hh-coxeter-matrix-word-group-and-length", "def-cg-spherical-nerve-coset-poset-and-davis-realization", "thm-cg-davis-complex-cell-incidence-and-stabilizers", "lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta", "lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics", "lem-cg-canonical-cell-exposed-faces-and-normal-cones", "def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric", "thm-cg-finite-subgroups-lie-in-spherical-parabolics", "def-cg-parabolic-quotient-and-two-sided-minima", "thm-cg-finite-type-positive-definite-criterion", "def-cg-real-coxeter-form-and-reflection", "def-generated-subgroup", "thm-normal-form-for-free-products", "def-free-product-of-a-family-of-groups", "def-axiom-of-choice"]
+aliases: []
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups, first-edition author manuscript, 2007-2008"
+      url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
+      locator: "Proposition 7.3.4, printed pp. 130-131 (spherical-coset cells, Coxeter polytopes and the Cayley 1-skeleton); Example 7.4.1, printed p. 132 (the universal case is a regular k-valent tree with interval cells; this is a summary, and the rank-two line identification is proved locally); Example 7.4.5, printed p. 133 (when the nerve is S^0, W=D_infinity and Sigma is a real line cellulated by equal intervals); §12.1, printed p. 231 (a 1-cell labelled s has length 2d_s); Theorem 12.3.4(i) and its proof on printed p. 236 (finite subgroups lie in isotropy subgroups, which are spherical parabolics); §13.2, printed pp. 260-262 (spherical parabolics and finite-subgroup fixed sets)."
+    - title: "M. W. Davis, The geometry and topology of Coxeter groups, MSC lecture slides (Tsinghua University, 2013)"
+      url: "https://people.math.osu.edu/davis.12/papers/Davis-MSC.pdf"
+      locator: "PDF pp. 12-15, Theorem 2.19(iii),(iv),(vi),(ix): the 0-skeleton is W, the 1-skeleton the Cayley graph, cells are intervals in the right-angled case, and every isotropy subgroup is conjugate to a spherical special subgroup. Entire 19-page document opened."
+    - title: "M. R. Bridson and A. Haefliger, Metric Spaces of Non-Positive Curvature, Grundlehren der mathematischen Wissenschaften 319, Springer 1999"
+      url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bridsonhaefligerx.pdf"
+      locator: "Chapter II.2, PDF pp. 200-201 (printed pp. 178-179): Proposition 2.7 and the complete proof of Corollary 2.8(1), quoted for comparison with the direct computation. Chapter II.6, §6.3, PDF p. 251 (elliptic means an isometry has a fixed point), and §6.6(3), PDF p. 253 (defines an R-tree as a geodesic CAT(kappa) space for all kappa and poses semisimplicity as an exercise); neither supplies the explicit rank-two line calculation here."
+  scraped: []
+---
+## Example
+
+Let $(W,S)$ be the universal Coxeter system with $S=\{s,t\}$, $m(s,t)=\infty$, and presentation $W=\langle s,t\mid s^2=t^2=1\rangle$ ([[def-hh-coxeter-matrix-word-group-and-length]]); Fact F1 identifies it with $C_2\ast C_2=D_\infty$. Let $\Sigma$ be its Davis complex with $d_s=d_t=1/2$ and the chain metric of [[def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric]]. By [[def-cg-spherical-nerve-coset-poset-and-davis-realization]] (1) and [[lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta]] (3),(4), its cells are the vertices $wW_\emptyset=\{w\}$ and the edges $wW_{\{s\}}=\{w,ws\}$, $wW_{\{t\}}=\{w,wt\}$, its $1$-skeleton is the Cayley graph, and each edge has length $1$ because $B(e_r,e_r)=1$ and $2d_r=1$ ([[def-cg-real-coxeter-form-and-reflection]] (2)). The example identifies this cellulation with the unit-edge metric line and computes its finite-subgroup fixed points. **Assume the Axiom of Choice only for contextual comparison with the general finite-subgroup theorem** ([[def-axiom-of-choice]], [[thm-cg-finite-subgroups-lie-in-spherical-parabolics]]); the explicit group, line, midpoint and cell calculations do not use Choice.
+
+**(i) Elements and finite subgroups.** Every element of $W$ is a reduced syllable word in the two order-two factors. A word of odd length is a conjugate of $s$ or $t$ (a reflection) and has order $2$; a word of even length $2j>0$ is conjugate to $(st)^j$ (a translation) and has infinite order ([[thm-normal-form-for-free-products]], [[def-free-product-of-a-family-of-groups]]). Any two distinct reflections have a nonidentity even-length reduced product, hence a translation of infinite order. Therefore every finite subgroup of $W$ is either $\{1\}$ or a two-element subgroup generated by a reflection.
+
+**(ii) Vertices have trivial stabilizers.** For every $w\in W$ the point stabilizer of the vertex $w$ is the stabilizer of the $0$-cell $wW_\emptyset$, namely $wW_\emptyset w^{-1}=\{1\}$ ([[thm-cg-davis-complex-cell-incidence-and-stabilizers]] (2) with $T=\emptyset$). No nontrivial finite subgroup can therefore fix a vertex: a finite subgroup fixing a vertex would be contained in the stabilizer of that cell, which is trivial.
+
+**(iii) Reflections fix edge midpoints, with parabolic stabilizer.** Every conjugate reflection can be written $w=(st)^kr(st)^{-k}$ for some $k\in\mathbb Z$ and $r\in\{s,t\}$; this is proved from the normal forms in the verification. Then $w$ swaps the endpoints of the edge $q:=(st)^kW_r$ and fixes its midpoint $m$. Let $\dot q$ be the minimum-length representative of $q$; the carrier cell of $m$ is this $1$-cell, and its cell coordinate is $y'=0\in C_{\{r\}}$, in the relative interior of the chamber face with $w_0=1$ and $I=\{r\}$. The point-stabilizer formula of [[thm-cg-davis-complex-cell-incidence-and-stabilizers]] (2) gives $$\operatorname{Stab}_W(m)=(\dot q)W_r(\dot q)^{-1}=(st)^kW_r(st)^{-k}=\langle w\rangle,$$ since $\dot q\in (st)^kW_r$ and conjugation by an element of the subgroup $W_r$ preserves $W_r$ ([[def-cg-parabolic-quotient-and-two-sided-minima]] (1), [[def-generated-subgroup]]). Under AC, this is the equality case of the general point-stabilizer formula in [[thm-cg-finite-subgroups-lie-in-spherical-parabolics]] (2), with $T=\{r\}$, $w_0=1$ and $I=\{r\}$ for $y'=0$; the finite subgroup $\langle w\rangle$ is the rank-one spherical parabolic $(st)^kW_r(st)^{-k}$ and the setwise stabilizer of its carrier cell.
+
+**(iv) Finite-type contrast.** If instead $(W,S)$ is finite, for example $S=\{s,t\}$ with $m(s,t)=3$, then $\Sigma$ is the single Coxeter cell $C_S$ ([[lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics]] (1) with $S\in\mathbb S$, [[thm-cg-davis-complex-cell-incidence-and-stabilizers]] (2)), and the point $0\in C_S$, which lies in the interior of the top cell, is fixed by the whole finite group $W$: with $T=S$, $w_0=1$ and $I=S$, the point-stabilizer formula gives $\operatorname{Stab}_W(0)=W_S=W$, the spherical parabolic of full rank; here $S$ is spherical because $W$ is finite ([[thm-cg-finite-type-positive-definite-criterion]] (1)), and the rank-two finite group is dihedral of order $2m$ ([[lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta]], proof step 6.1). Thus the rank-one case (iii) and the top-rank finite case are the two extremes of the same containment statement.
+
+**(v) Scope.** Only the universal rank-two line and the finite rank-two hexagon are computed. No general claim is made here about fixed sets of infinite subgroups or the number of conjugacy classes of finite subgroups in other Coxeter groups.
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice, the universal Coxeter system $(W,S)$ with $S=\{s,t\}$ and $m(s,t)=\infty$, and its Davis complex $\Sigma$ with the distances $d_s=d_t=1/2$.
+
+
+[F1] The presentation of $W$ with relations $s^2=t^2=1$ is isomorphic to the free product $C_2*C_2$: the presentation property gives a map to the free product, the free-product property gives a map back, and their composites fix the generators, so are identities ([[def-hh-coxeter-matrix-word-group-and-length]], [[def-free-product-of-a-family-of-groups]]). The free-product normal form then gives unique reduced syllable words $g_1\cdots g_k$ with $g_i\in\{s,t\}$ and $g_i\ne g_{i+1}$; the empty word is $1$, no nonempty reduced word is $1$, and $st$ has infinite order ([[thm-normal-form-for-free-products]]).
+
+[F2] By [F1], the spherical subsets of $(W,S)$ are exactly $\emptyset,\{s\},\{t\}$; the Davis cells are vertices $wW_\emptyset=\{w\}$ and intervals $wW_{\{s\}}$, $wW_{\{t\}}$; every point lies in the relative interior of exactly one cell ([[def-cg-spherical-nerve-coset-poset-and-davis-realization]] (1), [[thm-cg-davis-complex-cell-incidence-and-stabilizers]] (1),(2), [[lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta]] (3),(4)).
+
+[F3] The $1$-skeleton of $\Sigma$ is the Cayley graph $\operatorname{Cay}(W,\{s,t\})$; a rank-one Coxeter cell is the interval $[-d_re_r,d_re_r]$, and $B(e_r,e_r)=1$, so its length is $2d_r=1$ ([[lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta]] (3),(4), [[def-cg-real-coxeter-form-and-reflection]] (2)).
+
+[F4] Point stabilizers: if $q=wW_T$ has minimum-length representative $\dot q$ and a point $y$ in the relative interior of its cell has coordinate $y'$ in the relative interior of $w_0C^T_I$, then $\operatorname{Stab}_W(y)=(\dot q w_0)W_I(\dot q w_0)^{-1}$; the setwise stabilizer of the cell is $wW_Tw^{-1}$. In particular the vertex $w$ has stabilizer $\{1\}$ and the left action on vertices is free ([[thm-cg-davis-complex-cell-incidence-and-stabilizers]] (2)).
+
+[F5] For $T\subseteq S$, $W_T=\langle r:r\in T\rangle$ is finite exactly when $T$ is spherical, $W_r=\{1,r\}$ for $r\in\{s,t\}$, and conjugates of finite standard parabolics are spherical parabolics ([[def-cg-parabolic-quotient-and-two-sided-minima]] (1), [[def-generated-subgroup]], [[def-cg-spherical-nerve-coset-poset-and-davis-realization]] (1), [F1]).
+
+[F6] $W$ is finite exactly when $B$ is positive definite; for a rank-two system with finite $m$, $W_{\{s,t\}}$ is dihedral of order $2m$ (proved in [[lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta]], step 6.1); and in finite type the cell $C_S=\operatorname{conv}(W_Sx_S)$ is compact and convex with $0$ in its interior ([[thm-cg-finite-type-positive-definite-criterion]] (1), [[lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics]] (1), [[lem-cg-canonical-cell-exposed-faces-and-normal-cones]] (5)).
+
+[F7] Under AC, every finite subgroup of a finite-rank Coxeter group has a fixed point on its Davis complex, point stabilizers are spherical parabolics, and the subgroup is contained in the spherical parabolic carried by the fixed point's carrier cell ([[thm-cg-finite-subgroups-lie-in-spherical-parabolics]] (1)-(3), [[def-axiom-of-choice]]). This is used only to compare the explicit rank-one calculation with the general theorem, not as a premise of the proof.
+
+[F8] The chain metric is the infimum of lengths of finite chains whose consecutive points lie in one common cell ([[def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric]]).
+
+[F9] The Axiom of Choice: every family of nonempty sets has a choice function ([[def-axiom-of-choice]]).
+
+## Verification
+
+**Given:** The Axiom of Choice, the universal Coxeter system $(W,S)$ with $S=\{s,t\}$, $m(s,t)=\infty$, the Davis complex $\Sigma$ with $d_s=d_t=1/2$, and a conjugate reflection $w\in W$.
+
+**Proof technique:** direct.
+
+1.1 Clause (i). By [F1] every element has a unique reduced syllable word. A word of length $1$ is a generator and is an involution. If an odd reduced word $w=g_1\cdots g_k$ has $k\ge3$, then $g_k=g_1$ and $g_1wg_1=g_2\cdots g_{k-1}$ is a shorter odd reduced word. Induction shows that $w$ is conjugate to $s$ or $t$, so has order $2$. If $k=0$, $w=1$. If $k=2j>0$, the word is $(st)^j$ or $(ts)^j=t(st)^jt$; [F1] says $st$ has infinite order, so every such word has infinite order. Thus every element is the identity, a reflection, or an infinite-order translation. If $\rho_1\ne\rho_2$ are reflections, then $\rho_1\rho_2\ne1$ and its reduced syllable word is obtained from a concatenation of two odd-length words by cancelling equal adjacent pairs. The resulting word is nonempty and has positive even length, so it is a translation of infinite order by the preceding classification. A finite subgroup therefore contains no translation and at most one reflection, so it is trivial or has order two generated by a reflection. [F1, algebra]
+
+1.2 The line structure. By [F2] the only spherical subsets are $\emptyset,\{s\},\{t\}$, so there are only vertices and edges, and by [F3] the $1$-skeleton is $G=\operatorname{Cay}(W,\{s,t\})$. Let $p:=st$ and, for $n\in\mathbb Z$, set $v_{2n}:=p^n$ and $v_{2n+1}:=p^ns$. The normal forms of [F1] show these vertices are distinct and exhaust $W$: even reduced words are $p^n$; odd words starting with $s$ are $p^ns$ for $n\ge0$, and odd words starting with $t$ are $p^ns=(ts)^{-n-1}t$ for $n<0$. Consecutive vertices differ by right multiplication by $s$ and $t$, respectively, so this indexes the Cayley graph as a bi-infinite line. Send $v_k$ to $k$ and extend linearly over each edge. Each edge has length $1$ by [F3]. For any cell chain, the sum of its cellwise lengths is at least the absolute difference of the endpoint coordinates by the triangle inequality on $\mathbb R$; conversely, the finite line segment between two points is a finite chain of edge subsegments with length equal to that coordinate difference. Thus [F8] gives the chain metric as the usual metric on $\mathbb R$, and $\Sigma$ is a metric line. Every isometry of this line is either a translation or a reflection: after writing $f(0)=c$, one has $f(1)=c+1$ or $c-1$, and the distances to these two points determine $f(x)$ uniquely as $c+x$ or $c-x$. Therefore a nonidentity involution is a reflection with exactly one fixed point. The action on vertices is free by [F4]. [F1, F2, F3, F4, F8, algebra]
+
+1.3 Clause (ii). Let $w\in W$. By [F2] the vertex $w$ is the $0$-cell $wW_\emptyset$, whose relative interior is $\{w\}$; by [F4] applied with $q=wW_\emptyset$ and $T=\emptyset$, $\operatorname{Stab}_W(w)=\{1\}$. A finite subgroup fixing a vertex $v$ lies in $\operatorname{Stab}_W(v)=\{1\}$, so it is trivial. [F2, F4]
+
+1.4 Clause (iv). Assume now that $(W,S)$ is finite with $S=\{s,t\}$ and $m(s,t)=3$. Then $B$ is positive definite by [F6], $S$ is spherical and $W=W_S$, so every spherical coset is contained in $W_S=W$ and indexes a face of the single top cell $C_S$ by [[thm-cg-davis-complex-cell-incidence-and-stabilizers]] (1),(2). Hence $\Sigma=C_S$; the universal-system description in [F2] is not used in this finite case. The point $0$ lies in the interior of $C_S$ by [F6], so in the top-cell chart it has $w_0=1$ and $I=S$; the point-stabilizer formula of [F4] gives $\operatorname{Stab}_W(0)=W_S=W$. Here $W$ is dihedral of order $2m=6$ by [F6], and $W=W_S$ is a spherical parabolic of full rank. [F4, F6]
+
+2.1 Clause (iii). Let $w$ be a nonidentity reflection. By step 1.1 it is an involution; by step 1.2 its action on the line is a reflection with a unique fixed point $m$. By step 1.3 no nontrivial element fixes a vertex, so $m$ lies in the interior of an edge. The edge enumeration in step 1.2 writes its carrier as $q=p^kW_r$ for some $k\in\mathbb Z$, $r\in\{s,t\}$, with endpoints $a=p^k$ and $b=p^kr$. The reflection swaps these endpoints, so $w a=b$ and $w=ba^{-1}=p^krp^{-k}$. In the $\dot q$-chart the midpoint has coordinate $0\in C_{\{r\}}$, in the chamber face $w_0=1$, $I=\{r\}$. The formula of [F4] gives $\operatorname{Stab}_W(m)=(\dot q)W_r(\dot q)^{-1}$. Since $\dot q\in p^kW_r$, this is $p^kW_rp^{-k}=\{1,w\}=\langle w\rangle$; it is the setwise stabilizer of the carrier edge and a conjugate of the rank-one spherical parabolic $W_r$ by [F5]. Under AC, this is the equality case of the general point-stabilizer formula [F7]; the explicit computation here does not rely on that theorem. [F1, F4, F5, F7, step 1.1, step 1.2, step 1.3]
+
+3.1 Clause (v) and the Choice bookkeeping. Steps 1.1-1.4 and 2.1 compute the two examples: the finite subgroups of the universal rank-two group are trivial or generated by one reflection, each nontrivial finite subgroup fixing the midpoint of a $1$-cell with stabilizer the conjugate spherical parabolic $p^kW_rp^{-k}$; in the finite rank-two case the whole group fixes the interior point $0$ of the top cell, with stabilizer $W_S=W$. These are the rank-one and top-rank extremes of the containment statement in [F7]. The normal-form, line, midpoint and cell calculations are choice-free. AC is assumed only for the comparison with [F7], and no conclusion of that general theorem is used in the explicit proof. No assertion is made about infinite subgroups, higher-rank trees or the number of conjugacy classes of finite subgroups in general. [F7, F9, step 1.1, step 1.2, step 1.3, step 1.4, step 2.1] ∎
+
+## Remarks
+
+- **The equality case of the stabilizer formula.** For the midpoint $m$ of a $1$-cell $(st)^kW_r$ the point $y'=0$ of $C_{\{r\}}$ lies in the relative interior of the chamber face with $w_0=1$ and $I=\{r\}$, and the formula of [[thm-cg-finite-subgroups-lie-in-spherical-parabolics]] (2) returns the full rank-one parabolic $(st)^kW_r(st)^{-k}$, which here is the two-element group $\langle w\rangle$. This is the extreme opposite to the vertex case of clause (ii), where $I=\emptyset$ and the stabilizer is trivial.
+- **Consistency with the general theorem.** The containment $\langle w\rangle=(st)^kW_r(st)^{-k}$ of step 2.1 and the containment $W\le W_S$ of step 1.4 are instances of clause (3) of [[thm-cg-finite-subgroups-lie-in-spherical-parabolics]], computed here cell by cell; the example's fixed-point calculations are proved directly.
+
+## Open supplier obligations
+
+- `def-hh-coxeter-matrix-word-group-and-length` has an earlier `accept` receipt whose current-input hash is stale. The presentation and universal property supply the setup, Fact F1 and step 1.1; its current audit is required before acceptance.
+- `def-cg-spherical-nerve-coset-poset-and-davis-realization` is escalated on changed inputs. The setup, Fact F2 and steps 1.2 and 1.4 use its spherical-coset cell description.
+- `lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta` is escalated because its upstream A1-A5 receipts remain unresolved. Facts F2-F3 and step 1.2 use its cell and Cayley-graph descriptions to identify the line.
+- `lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics` is escalated on changed inputs. The statement's finite-cell contrast, Fact F6 and step 1.4 use its finite-cell geometry.
+- `lem-cg-canonical-cell-exposed-faces-and-normal-cones` is escalated on changed inputs. Fact F6 and step 1.4 use its proof that $0$ is interior to the finite top cell.
+- `thm-cg-davis-complex-cell-incidence-and-stabilizers` is escalated on changed inputs. Facts F2 and F4 and steps 1.3, 1.4, and 2.1 use its carrier-cell, point-stabilizer, and setwise-stabilizer formulas.
+- `def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric` has an earlier `accept` receipt whose current-input hash is stale. The setup, Fact F8 and step 1.2 use its chain-metric definition.
+- `thm-cg-finite-subgroups-lie-in-spherical-parabolics` is the same-pair supplier for the comparison in clause (iii), Fact F7, and steps 2.1 and 3.1; its current item decision is not closed. The explicit rank-two computations do not depend on it, so keep this comparison provisional until that supplier's receipt and actual use are reconciled.
+- `def-cg-parabolic-quotient-and-two-sided-minima` has an earlier `accept` receipt whose current-input hash is stale. Fact F5 and step 2.1 use the standard rank-one parabolic and its conjugates.
+- `thm-cg-finite-type-positive-definite-criterion` has an earlier `accept` receipt whose current-input hash is stale. Clause (iv), Fact F6 and step 1.4 use its finiteness criterion.
+- `def-cg-real-coxeter-form-and-reflection` has an earlier `accept` receipt whose current-input hash is stale. The setup, Fact F3 and step 1.2 use $B(e_r,e_r)=1$ to obtain unit edge lengths.
+
+## Current supplier receipt status
+
+These direct in-run supplier decisions remain open. The final report distinguishes current escalations from missing or stale receipts.
+
+- `def-hh-coxeter-matrix-word-group-and-length`: its current in-run supplier decision is not closed; this item consumes it in Facts F1 and proof steps 1.1, 1.2, 2.1.
+- `def-cg-spherical-nerve-coset-poset-and-davis-realization`: its current in-run supplier decision is not closed; this item consumes it in Facts F2, F5 and proof steps 1.2, 1.3, 1.4, 2.1.
+- `thm-cg-davis-complex-cell-incidence-and-stabilizers`: its current in-run supplier decision is not closed; this item consumes it in Facts F2, F4 and proof steps 1.2, 1.3, 1.4, 2.1.
+- `lem-cg-davis-cellulation-cw-structure-and-cayley-skeleta`: its current in-run supplier decision is not closed; this item consumes it in Facts F2, F3 and proof steps 1.2, 1.3, 1.4.
+- `lem-cg-finite-coxeter-orbit-polytopes-and-face-metrics`: its current in-run supplier decision is not closed; this item consumes it in Facts F6 and proof steps 1.4.
+- `lem-cg-canonical-cell-exposed-faces-and-normal-cones`: its current in-run supplier decision is not closed; this item consumes it in Facts F6 and proof steps 1.4.
+- `def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric`: its current in-run supplier decision is not closed; this item consumes it in Facts F8 and proof steps 1.2.
+- `thm-cg-finite-subgroups-lie-in-spherical-parabolics`: its current in-run supplier decision is not closed; this item consumes it in Facts F7 and proof steps 2.1, 3.1.
+- `def-cg-parabolic-quotient-and-two-sided-minima`: its current in-run supplier decision is not closed; this item consumes it in Facts F5 and proof steps 2.1.
+- `thm-cg-finite-type-positive-definite-criterion`: its current in-run supplier decision is not closed; this item consumes it in Facts F6 and proof steps 1.4.
+- `def-cg-real-coxeter-form-and-reflection`: its current in-run supplier decision is not closed; this item consumes it in Facts F3 and proof steps 1.2.

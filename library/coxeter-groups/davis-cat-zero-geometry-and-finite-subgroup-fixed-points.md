@@ -2,23 +2,28 @@
 page: davis-cat-zero-geometry-and-finite-subgroup-fixed-points
 title: "Davis CAT(0) Geometry and Finite Subgroup Fixed Points"
 status: draft
-items: []
+items: [lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets,
+        lem-cg-davis-angular-vertex-link-is-metric-flag-nerve,
+        thm-cg-finite-rank-davis-moussong-cat-zero-theorem,
+        thm-cg-finite-subgroups-lie-in-spherical-parabolics]
 examples: []
 ---
 
-All geometric ingredients are now local suppliers: coherent Euclidean Coxeter cells, complete geodesic metric, large metric-flag links and simple connectivity. Their assembly proves the general finite-rank Davis CAT(0) theorem, including infinite and noncrystallographic Coxeter systems.
+For a finite-rank Coxeter system, the Davis complex is built from its spherical-coset cells with their piecewise Euclidean metrics. The authored arguments on this page connect the metric geometry of those cells to finite-subgroup fixed points: first compute the spherical links, then assemble the local CAT(0) and global CAT(0) results, and finally place each finite subgroup inside the parabolic stabilizer of a fixed point's carrier cell.
 
-This is a prose scaffold for future local item authoring. Its empty item lists do not assert proof completion. Every construction below is a named supplier contract; definitions are justified by the separately named existence, descent or uniqueness proofs before any application consumes their properties. Source reading supports the selected proof route and is not a substitute for a library proof.
+The bounded-set center lemma is independent of the Coxeter construction: completeness and CAT(0) give a unique center, isometries preserving the set fix it, and common fixed sets are closed and convex, and are contractible when nonempty. Its proper-space branch proves the same conclusions without Choice. The Davis link lemma computes the spherical metric from the Coxeter form and identifies the finite links as large metric flag complexes. The CAT(0) theorem combines that link geometry with the local product charts, complete polyhedral metric and simple connectivity. The finite-subgroup theorem then uses orbit centers and the point-stabilizer formula in the carrier cell.
 
-## Ordered construction and proof contracts
+## Items
 
-**lem-cg-davis-angular-vertex-link-is-metric-flag-nerve.** Compute link edge length pi-pi/m_st from the orbit-polytope face geometry. Its cosine Gram matrix is the canonical B, so positive-definite finite-type criterion implies exactly the spherical subsets are faces. Higher links match Schur complements and face charts. Hence the finite vertex link is large metric flag, with disconnected conventions intact.
+[[lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets]] proves existence and uniqueness of centers for nonempty bounded sets in complete CAT(0) spaces, invariance under set-preserving isometries, and the structure of common fixed sets. Proper spaces use a choice-free compactness argument.
 
-**thm-cg-finite-rank-davis-moussong-cat-zero-theorem.** The metric-flag theorem makes each vertex link CAT(1); supplied charts give local CAT(0). Finite shapes+local finite incidence give complete geodesic metric and the prior presentation argument gives simple connectivity. Apply the locally CAT(0) globalization supplier, carrying its AC dependence from proper-target geodesic construction, to obtain CAT(0) and continuous geodesic contraction.
+[[lem-cg-davis-angular-vertex-link-is-metric-flag-nerve]] computes the vertex-link edge lengths and cosine Gram matrices, identifies higher links with face links, and proves the large metric-flag description. Its general CAT(1) clause depends on the finite metric-flag theorem.
 
-**lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets.** For a bounded finite orbit define radius function r(x)=max_g d(x,gx0). The squared midpoint inequality makes a minimizing sequence Cauchy; completeness yields a unique minimizing circumcenter. Isometries permuting the orbit fix it. Each fixed-point set is closed and convex by uniqueness of geodesics, hence any nonempty intersection has a continuous geodesic contraction. State finite/bounded and complete hypotheses explicitly.
+[[thm-cg-finite-rank-davis-moussong-cat-zero-theorem]] assembles the local link and cone criteria, the intrinsic polyhedral metric, and simple connectivity to obtain the CAT(0) geometry and geodesic contraction of the finite-rank Davis complex.
 
-**thm-cg-finite-subgroups-lie-in-spherical-parabolics.** Every finite subgroup has a fixed point by the circumcenter lemma; its point stabilizer lies in the finite stabilizer of the unique smallest carrier cell, a conjugate W_T. Thus every finite subgroup lies in a spherical parabolic. Give the alternative Tits-cone averaging proof as comparison, not as an unsupported supplier. Do not append automaticity, flat torus or Moussong hyperbolicity without their own prerequisite closure.
+[[thm-cg-finite-subgroups-lie-in-spherical-parabolics]] gives every finite subgroup a fixed point by its orbit center and identifies the point stabilizer in a minimum-representative cell chart. The subgroup is therefore contained in the spherical parabolic that setwise stabilizes the carrier cell.
+
+The CAT(1) link route, globalization inputs, and Davis cell-incidence prerequisites are still being reconciled in the current frontier run. The corresponding item proofs state their exact conditional supplier uses; source reading alone is not treated as a substitute for those proofs.
 
 ## Prerequisites and reading
 

@@ -1,0 +1,486 @@
+[
+  {
+    "order": 1754,
+    "id": "bipartite-coxeter-elements-and-ordered-root-complexes",
+    "kind": "A",
+    "category": "coxeter-groups",
+    "title": "Bipartite Coxeter Elements and Ordered Root Complexes",
+    "companion": "bipartite-coxeter-elements-and-ordered-root-complexes-examples",
+    "requires": [
+      "finite-reflection-length-and-orthogonal-moved-spaces",
+      "finite-lattice-projections-and-coxeter-chain-labels",
+      "spherical-simplex-metrics-angular-links-and-cones"
+    ],
+    "items": [
+      {
+        "id": "def-cg-bipartite-coxeter-element-and-root-recursion",
+        "kind": "definition",
+        "title": "The bipartite Coxeter element, its ordered prefix roots, and the conditional vector map mu(a) = -2(c-1)^{-1}a",
+        "deps": [
+          "def-hh-coxeter-matrix-word-group-and-length",
+          "def-cg-coxeter-diagram-components-and-finite-type",
+          "lem-cg-positive-definite-diagram-exclusions",
+          "lem-cg-diagram-products-and-invariant-form-comparison",
+          "def-bipartite-graph",
+          "thm-bipartite-iff-no-odd-cycle",
+          "thm-cg-finite-type-positive-definite-criterion",
+          "def-cg-real-coxeter-form-and-reflection",
+          "def-cg-canonical-reflection-homomorphism",
+          "lem-cg-reflection-representation-descends-and-root-norms",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "def-generated-subgroup"
+        ],
+        "justified_by": [
+          "lem-cg-steinberg-bipartite-root-enumeration"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Brady and Colum Watt, Lattices in finite real reflection groups (arXiv:math/0501502, 29-page PDF)",
+              "url": "https://arxiv.org/pdf/math/0501502",
+              "locator": "Section 3 'Roots of W and vertices on the Petrie polygon', printed pp. 3-8: the two orthogonal classes and gamma=R_1...R_n (p. 3); the cyclic alpha/R indexing and rho_i formulas, dual beta basis with cyclic indexing and mu_i (pp. 3-4); and Lemma 3.9's conditional map mu(sigma)=-2(gamma-I)^(-1)sigma (pp. 7-8)"
+            },
+            {
+              "title": "Robert Steinberg, Finite reflection groups, Transactions of the American Mathematical Society 91 (1959) 493-504 (AMS free digital archive, 10-page PDF)",
+              "url": "https://www.ams.org/journals/tran/1959-091-03/S0002-9947-1959-0106428-2/S0002-9947-1959-0106428-2.pdf",
+              "locator": "Sections 3-5, printed pp. 495-499: the two-class ordering of the walls W_1,...,W_n of a fundamental chamber (3.1), the associated reflections R_1,...,R_n, the k-th reflecting hyperplane R_1...R_{k-1}W_k (4.7) and reflection R_1...R_{k-1}R_kR_{k-1}...R_1 (4.8) for k = 1,...,nh/2, and the Petrie polygon vertices (Theorem 5.1(1))"
+            },
+            {
+              "title": "Bill Casselman, Essays on Coxeter groups: Coxeter elements in finite Coxeter groups (author-hosted PDF, 12 pages)",
+              "url": "https://www.math.ubc.ca/~cass/research/pdf/Element.pdf",
+              "locator": "Sections 1, 2 and 3.1-3.7, printed pp. 1-2 and 6-8: a finite irreducible Coxeter system whose Coxeter graph is a tree, the partition of the generators into two commuting sets, the distinguished Coxeter element, the matrices x, y, gamma in simple-root coordinates and the identity 2I + gamma + gamma^{-1} = 4(I-A)^2 (Lemma 3.3)"
+            },
+            {
+              "title": "Sergey Fomin and Nathan Reading, Root systems and generalized associahedra, IAS/Park City Mathematics Series lecture notes (arXiv:math/0505518)",
+              "url": "https://arxiv.org/pdf/math/0505518",
+              "locator": "Section 2.5 'Coxeter element and Coxeter number', printed pp. 22-24 with Figures 2.5-2.7: 'The underlying graph of the Coxeter diagram for a finite Coxeter group has no cycles. Hence it is bipartite', the well-defined element c = (product over I+) (product over I-), Example 2.16 for A5 and the Coxeter plane of c"
+            }
+          ]
+        },
+        "dependency_level": 14,
+        "statement": "For the irreducible case, let $(W,S)$ be a finite-type Coxeter system with $S$ finite of cardinality $n\\ge1$, length function $\\ell$, Coxeter diagram $\\Gamma$ and standard parabolics $W_T=\\langle s:s\\in T\\rangle$ ([[def-hh-coxeter-matrix-word-group-and-length]], [[def-cg-coxeter-diagram-components-and-finite-type]], [[def-generated-subgroup]]); let $V=\\mathbb R^S$, let $B$ be the Coxeter form with $B(e_s,e_s)=1$ ([[def-cg-real-coxeter-form-and-reflection]], [[lem-cg-reflection-representation-descends-and-root-norms]] (3)), and let $\\rho:W\\to\\mathrm{GL}(V)$, $\\Phi=\\{\\rho(w)e_s\\}$ and $T=\\{wsw^{-1}\\}$ be the canonical reflection representation, the root system and the reflection set ([[def-cg-canonical-reflection-homomorphism]]); assume $\\Gamma$ is connected, equivalently $(W,S)$ is irreducible ([[def-cg-coxeter-diagram-components-and-finite-type]]). The form $B$ is positive definite ([[thm-cg-finite-type-positive-definite-criterion]]). Write $\\alpha_s:=e_s$ for the simple roots and $r_a$ for the reflection with normal $a$. Clause (5) separately specifies the componentwise extension to reducible finite-type systems.",
+        "strategy": "The irreducible construction uses the tree two-colouring and Coxeter commutation relations; the B-dual vectors are constructed by inverting the positive-definite Gram matrix. Prefix vectors are roots by the canonical reflection action. The map is introduced conditionally using c_V = rho(c), while invertibility and mu(rho_i) = mu_i remain for its recorded justifier. Reducible systems are handled componentwise with lcm orders. No Choice is used.",
+        "proof_strategy": "definition of the bipartite Coxeter element, its prefix roots, dual vertices and the conditional map mu, with explicit rank-one and reducible conventions"
+      },
+      {
+        "id": "lem-cg-steinberg-bipartite-root-enumeration",
+        "kind": "lemma",
+        "title": "The Coxeter plane, ordered-root enumeration, and invertibility of rho(c) - id",
+        "deps": [
+          "def-cg-bipartite-coxeter-element-and-root-recursion",
+          "def-cg-coxeter-diagram-components-and-finite-type",
+          "lem-cg-diagram-products-and-invariant-form-comparison",
+          "thm-cg-finite-type-positive-definite-criterion",
+          "def-cg-real-coxeter-form-and-reflection",
+          "def-cg-canonical-reflection-homomorphism",
+          "lem-cg-reflection-representation-descends-and-root-norms",
+          "def-cg-finite-reflection-arrangement-and-spherical-chambers",
+          "thm-cg-finite-chamber-tiling-and-coset-face-identification",
+          "thm-cg-finite-parabolic-longest-element-and-opposition",
+          "thm-cg-root-sign-and-simple-reflection-positivity",
+          "thm-cg-root-length-criterion-and-faithfulness",
+          "thm-cg-root-inversion-formulas-and-strong-exchange",
+          "def-euclidean-inner-product",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "thm-componentwise-limits-and-continuity",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Brady and Colum Watt, Lattices in finite real reflection groups (arXiv:math/0501502, 29-page PDF)",
+              "url": "https://arxiv.org/pdf/math/0501502",
+              "locator": "Section 3 (Theorems 3.2 and 3.7, Corollaries 3.3 and 3.8, Note 3.1, Note 3.4, Note 3.5, Lemma 3.9) with proofs, printed pp. 4-8, together with the section 2 recollections M(A) = F(A)^perp and the prefix form of the reflection order"
+            },
+            {
+              "title": "Robert Steinberg, Finite reflection groups, Transactions of the American Mathematical Society 91 (1959) 493-504 (AMS free digital archive, 10-page PDF)",
+              "url": "https://www.ams.org/journals/tran/1959-091-03/S0002-9947-1959-0106428-2/S0002-9947-1959-0106428-2.pdf",
+              "locator": "Theorem 4.2 with proof, Corollaries 4.3-4.6, printed pp. 496-499 (the line L of the largest characteristic value, the fundamental region of the dihedral subgroup on L, its order 2h, the angle pi/h and the count nh/2 of reflecting hyperplanes); Lemma 6.2 and Theorem 6.3 with proof, printed pp. 499-501; Theorem 5.1(1) printed p. 499 on Petrie polygon vertices"
+            },
+            {
+              "title": "Bill Casselman, Essays on Coxeter groups: Coxeter elements in finite Coxeter groups (author-hosted PDF, 12 pages)",
+              "url": "https://www.math.ubc.ca/~cass/research/pdf/Element.pdf",
+              "locator": "Sections 3 and 4, printed pp. 6-10: Proposition 3.2 (no Coxeter element has eigenvalue 1), Lemma 3.3 and its proof (2I + gamma + gamma^{-1} = 4(I-A)^2 for a bipartite Coxeter element), Propositions 3.4 and 3.7 (matching of eigenvalues of gamma and A), Lemmas 3.8-3.10 (the extreme eigenvector is simple and positive by Perron-Frobenius) and Theorem 3.11 with the sector argument yielding the rotation angle 2 pi/h"
+            },
+            {
+              "title": "Sergey Fomin and Nathan Reading, Root systems and generalized associahedra, IAS/Park City Mathematics Series lecture notes (arXiv:math/0505518)",
+              "url": "https://arxiv.org/pdf/math/0505518",
+              "locator": "Section 2.5, printed pp. 22-24 with Figures 2.5-2.7: the bipartition of the Coxeter diagram, the Coxeter element c, the invariant plane of c, the order h and the eigenvalue shape e^{2 m pi i/h}; Examples 2.17-2.18 for A3 and B3"
+            }
+          ]
+        },
+        "dependency_level": 17,
+        "statement": "Let $(W,S)$ be an irreducible finite-type Coxeter system with $|S|=n\\ge2$, with bipartition $J\\sqcup K=S$ and data $\\alpha_1,\\dots,\\alpha_n$, $s_1,\\dots,s_n$, $a,b,c=ab$, $h=\\operatorname{ord}(c)$, $\\beta_i,\\rho_i,\\mu_i$ and conditional map $\\mu$ as in [[def-cg-bipartite-coxeter-element-and-root-recursion]]. Put $r:=|J|$, so $J=\\{s_1,\\dots,s_r\\}$ and $K=\\{s_{r+1},\\dots,s_n\\}$. Let $C_V:=\\rho(c)\\in\\mathrm{GL}(V)$ denote the linear action of $c$, let $\\mathcal C$ be the primal chamber in $V$ and $\\mathcal C^\\circ$ its interior, and let $H_\\alpha=\\{x\\in V:B(x,\\alpha)=0\\}$ be the root hyperplanes ([[def-cg-real-coxeter-form-and-reflection]], [[def-cg-canonical-reflection-homomorphism]], [[def-cg-finite-reflection-arrangement-and-spherical-chambers]]). Write $w_0$ for the longest element ([[thm-cg-finite-parabolic-longest-element-and-opposition]]). Then:",
+        "strategy": "Maximize q(x)=x^T 2(I-B)x on the coordinate unit sphere, prove a positive eigenvector, and construct its invariant two-plane. Compute the chamber sector and use its dihedral orbit and stabilizers to count root hyperplanes and order the cyclic roots. The positive half-turn word is w0; the complementary reduced suffix gives the negative roots. The equation (rho(c)-I) beta_i=-2 rho_i proves invertibility by bases. Treat rank one and reducible systems separately; no Choice is used.",
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "lem-cg-ordered-root-pairings-and-simple-systems",
+        "kind": "lemma",
+        "title": "The mu-dot-root identities, the cone separation, and the canonical simple systems of the subintervals [1, sigma]",
+        "deps": [
+          "def-cg-bipartite-coxeter-element-and-root-recursion",
+          "lem-cg-steinberg-bipartite-root-enumeration",
+          "def-cg-real-coxeter-form-and-reflection",
+          "lem-cg-reflection-representation-descends-and-root-norms",
+          "lem-cg-reflection-form-invariance-and-rank-two-orders",
+          "thm-cg-root-sign-and-simple-reflection-positivity",
+          "thm-cg-root-inversion-formulas-and-strong-exchange",
+          "def-cg-reflection-length-absolute-order-and-moved-space",
+          "lem-cg-orthogonal-wall-form-and-subspace-restriction",
+          "lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces",
+          "def-cg-finite-reflection-arrangement-and-spherical-chambers",
+          "thm-cg-finite-chamber-tiling-and-coset-face-identification",
+          "lem-cg-reflection-factorizations-and-independent-normals",
+          "thm-cg-carter-reflection-length-and-absolute-order"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Brady and Colum Watt, Lattices in finite real reflection groups (arXiv:math/0501502, 29-page PDF)",
+              "url": "https://arxiv.org/pdf/math/0501502",
+              "locator": "Section 3 (Theorem 3.2, Corollaries 3.3 and 3.8, Note 3.4, Theorem 3.7 with its proof) printed pp. 4-7, and sections 5 and 6 (Theorems 5.1 and 5.4, Lemmas 5.5 and 5.6, Note 5.2, Definition 6.1, Propositions 6.2 and 6.11, Corollaries 6.3, 6.8 and 6.12, Lemma 6.10) printed pp. 10-18"
+            },
+            {
+              "title": "Robert Steinberg, Finite reflection groups, Transactions of the American Mathematical Society 91 (1959) 493-504 (AMS free digital archive, 10-page PDF)",
+              "url": "https://www.ams.org/journals/tran/1959-091-03/S0002-9947-1959-0106428-2/S0002-9947-1959-0106428-2.pdf",
+              "locator": "Corollary 4.6 and its proof (the reflecting hyperplanes R_1...R_{k-1}W_k for k = 1,...,nh/2) printed pp. 497-498, and the sign discussion following 4.6 identifying the second half of the rho-sequence with the negative roots"
+            },
+            {
+              "title": "Bill Casselman, Essays on Coxeter groups: Coxeter elements in finite Coxeter groups (author-hosted PDF, 12 pages)",
+              "url": "https://www.math.ubc.ca/~cass/research/pdf/Element.pdf",
+              "locator": "Lemmas 3.1 and 3.8, Propositions 3.4, 3.7 and 3.2, printed pp. 6-8 (the eigenvalue/eigenvector matching and the positivity of the extreme eigenvector), which identifies the plane and the ordering used throughout"
+            },
+            {
+              "title": "Sergey Fomin and Nathan Reading, Root systems and generalized associahedra, IAS/Park City Mathematics Series lecture notes (arXiv:math/0505518)",
+              "url": "https://arxiv.org/pdf/math/0505518",
+              "locator": "Section 2.5, printed pp. 22-24 (the Coxeter element and its order), used only for the ambient conventions"
+            }
+          ]
+        },
+        "dependency_level": 18,
+        "statement": "Let $(W,S)$ be an irreducible Coxeter system of finite type with $S$ finite of cardinality $n\\ge2$, with the data $\\alpha_i$, $\\beta_i$, $s_i$, $R_i$, $a$, $b$, $c$, $h$, $(\\rho_i)$, $(\\mu_i)$ and the linear map $\\mu$ of [[def-cg-bipartite-coxeter-element-and-root-recursion]], and assume the conclusions of [[lem-cg-steinberg-bipartite-root-enumeration]] (so that $\\Phi_+=\\{\\rho_1,\\dots,\\rho_{nh/2}\\}$ and $\\mu(\\rho_i)=\\mu_i$). Let $\\ell_T$, $\\le_T$, $M$, $F$ be reflection length, absolute order and the moved and fixed spaces, and let $P_\\sigma:=\\{\\alpha\\in\\Phi_+:t_\\alpha\\le_T\\sigma\\}$ for $\\sigma\\le_Tc$, where $t_\\alpha\\in T$ is the reflection with normal $\\alpha$ ([[thm-cg-root-inversion-formulas-and-strong-exchange]] (1), [[def-cg-reflection-length-absolute-order-and-moved-space]], [[thm-cg-carter-reflection-length-and-absolute-order]]). Then:\n\n**(1) The basic identities.** For every $i\\ge1$: $(c-\\mathrm{id})\\mu_i=-2\\rho_i$, $\\mu_i\\cdot\\rho_i=1$, and $\\mu_i\\in F(R(\\rho_i)c)$, i.e. $R(\\rho_i)c\\,\\mu_i=\\mu_i$; moreover $F(R(\\rho_i)c)$ is one dimensional and $\\mu_i$ is its unique vector satisfying $\\mu_i\\cdot\\rho_i=1$.\n\n**(2) Sign and vanishing identities.** (a) $\\mu_i\\cdot\\rho_j=-\\mu_{j+n}\\cdot\\rho_i$ for all $i,j\\ge1$; (b) $\\mu_i\\cdot\\rho_j\\ge0$ whenever $1\\le i\\le j\\le nh/2$; (c) $\\mu_{i+t}\\cdot\\rho_i=0$ for $1\\le t\\le n-1$ and all $i\\ge1$; (d) $\\mu_j\\cdot\\rho_i\\le0$ whenever $1\\le i<j\\le nh/2$.\n\n**(3) Separation from earlier cones.** If $1\\le i_1<i_2<\\dots<i_m<k\\le nh/2$, then $\\rho_k$ is not a nonnegative linear combination of $\\rho_{i_1},\\dots,\\rho_{i_m}$.\n\n**(4) Canonical simple systems of the subintervals.** Fix $\\sigma\\le_Tc$ with $\\sigma\\ne1$, put $k:=\\ell_T(\\sigma)=\\dim M(\\sigma)$ and write $P_\\sigma=\\{\\tau_1<\\tau_2<\\dots<\\tau_t\\}$ in the global $\\rho$-order. Then:\n\n(i) $P_\\sigma$ is the set of positive roots of the reflection subgroup $W_\\sigma:=\\{w\\in W:M(w)\\subseteq M(\\sigma)\\}$, and it contains a **simple system** $\\Delta=\\{\\delta_1,\\dots,\\delta_k\\}$: every root of $P_\\sigma$ is a nonnegative linear combination of the $\\delta$'s and $\\delta_1,\\dots,\\delta_k$ are linearly independent; moreover $\\delta_k=\\tau_t$ and, recursively, $\\delta_i$ is the last root of $P_\\sigma$ lying in $M(\\sigma R(\\delta_k)R(\\delta_{k-1})\\cdots R(\\delta_{i+1}))$; equivalently $\\delta_i$ is the first root of $P_\\sigma$ in $M(R(\\delta_{i-1})\\cdots R(\\delta_1)\\sigma)$, with the product empty for $i=1$, so in particular $\\delta_1=\\tau_1$.\n\n(ii) $\\varepsilon_i:=R(\\delta_1)R(\\delta_2)\\cdots R(\\delta_{i-1})\\delta_i$ is a positive root for each $i$, and\n\n$$\\sigma=R(\\varepsilon_k)R(\\varepsilon_{k-1})\\cdots R(\\varepsilon_1),\\qquad \\sigma=R(\\varepsilon_i)\\,R(\\delta_1)\\cdots R(\\delta_{i-1})R(\\delta_{i+1})\\cdots R(\\delta_k).$$\n\n(iii) Let $\\mathcal S_\\sigma:=\\operatorname{cone}\\{\\delta_1,\\dots,\\delta_k\\}\\cap S(M(\\sigma))$ be the spherical simplex, where $S(M(\\sigma))=\\{x\\in M(\\sigma):B(x,x)=1\\}$. Its closed spherical wall opposite $\\delta_i$ is\n$$\\operatorname{cone}\\{\\delta_j:j\\ne i\\}\\cap S(M(\\sigma))=\\mathcal S_\\sigma\\cap \\mu(\\varepsilon_i)^\\perp,$$\nand its supporting hyperplane in $M(\\sigma)$ is $M(\\sigma)\\cap\\mu(\\varepsilon_i)^\\perp$.\n\n(iv) If $i<j$ and $\\varepsilon_i>\\varepsilon_j$ in the global order, then $\\varepsilon_i\\cdot\\varepsilon_j=0$, so $R(\\varepsilon_i)$ and $R(\\varepsilon_j)$ commute; the reordering $\\theta_1<\\theta_2<\\dots<\\theta_k$ of $\\varepsilon_1,\\dots,\\varepsilon_k$ in the global order satisfies $\\sigma=R(\\theta_k)R(\\theta_{k-1})\\cdots R(\\theta_1)$ and is lexicographically first among all increasing $k$-tuples $\\eta_1<\\cdots<\\eta_k$ in $P_\\sigma$ for which $R(\\eta_k)\\cdots R(\\eta_1)\\le_Tc$ and $\\ell_T(R(\\eta_k)\\cdots R(\\eta_1))=k$.\n\n(v) If $\\ell_T(\\sigma)=2$ then $\\{\\tau_1,\\tau_t\\}$ is a simple system of $P_\\sigma$, the only factorizations of $\\sigma$ as a product of two reflections in $W$ are $\\sigma=R(\\tau_1)R(\\tau_t)=R(\\tau_2)R(\\tau_1)=\\dots=R(\\tau_t)R(\\tau_{t-1})$, and $\\tau_1\\cdot\\tau_t\\le0$ while $\\tau_i\\cdot\\tau_{i+1}\\ge0$ for $1\\le i<t$; dually, for distinct positive roots $\\rho_i,\\rho_j$ with $R(\\rho_i)R(\\rho_j)\\le_Tc$ one has: if $i<j$ then $\\rho_i\\cdot\\rho_j\\le0$, and if $i>j$ then $\\rho_i\\cdot\\rho_j\\ge0$.\n\n(vi) Whenever $\\tau_{i_1}<\\dots<\\tau_{i_k}$ is an increasing tuple of roots of $P_\\sigma$ for which $R(\\tau_{i_k})\\cdots R(\\tau_{i_1})\\le_Tc$ and $\\ell_T(R(\\tau_{i_k})\\cdots R(\\tau_{i_1}))=k$, one has $\\tau_{i_j}\\ge\\theta_j$ for every $j=1,\\dots,k$.\n\nNo Choice is used.",
+        "strategy": "(1)-(3) are derived from the cyclic mu/rho identities, root signs and the separating pairing. For (4)(i), identify W_sigma as the pointwise stabilizer of M(sigma)^perp, use a generic point and the finite parabolic chamber theorem to obtain its positive-root simple system, then peel the last root with the normal C mu(delta_k); the first-root characterization follows by applying the same chamber argument to tail parabolics. For (4)(ii)-(iii), use reduced parabolic prefixes, conjugation and the dual-basis wall calculation. A rank-two dihedral calculation proves (4)(v); a proved pairing/absolute-order criterion handles subtuples, commuting reorders and lexicographic minimality in (4)(iv),(vi).",
+        "proof_strategy": "explicit dual-basis recursion for the mu_i-dot-rho_j identities and sign patterns, cone separation, and the reverse-selection construction of the canonical simple system together with the epsilon/theta reordering and lex-first simplex data"
+      },
+      {
+        "id": "def-cg-brady-watt-ordered-spherical-root-complex",
+        "kind": "definition",
+        "title": "The Brady-Watt ordered root complex X(c), its subcomplexes X(sigma) and X(sigma,rho), and their positive-cone realizations",
+        "deps": [
+          "def-cg-bipartite-coxeter-element-and-root-recursion",
+          "lem-cg-steinberg-bipartite-root-enumeration",
+          "lem-cg-ordered-root-pairings-and-simple-systems",
+          "def-abstract-simplicial-complex"
+        ],
+        "justified_by": [
+          "thm-cg-root-complex-convex-cones-and-facet-induction"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Brady and Colum Watt, Lattices in finite real reflection groups (arXiv:math/0501502, 29-page PDF)",
+              "url": "https://arxiv.org/pdf/math/0501502",
+              "locator": "Section 4 (Definition 4.1, Note 4.2 and the A3 discussion preceding it) printed pp. 9-10, and section 5 (the definition of X(sigma), the ordering of P and the set of vertices of the Petrie polygon) printed pp. 10-11"
+            },
+            {
+              "title": "Robert Steinberg, Finite reflection groups, Transactions of the American Mathematical Society 91 (1959) 493-504 (AMS free digital archive, 10-page PDF)",
+              "url": "https://www.ams.org/journals/tran/1959-091-03/S0002-9947-1959-0106428-2/S0002-9947-1959-0106428-2.pdf",
+              "locator": "Corollary 4.6, printed pp. 497-498, where the reflecting hyperplanes (equivalently the positive roots) are indexed by k = 1,...,nh/2 in the order in which a line of the Coxeter plane meets them"
+            },
+            {
+              "title": "Bill Casselman, Essays on Coxeter groups: Coxeter elements in finite Coxeter groups (author-hosted PDF, 12 pages)",
+              "url": "https://www.math.ubc.ca/~cass/research/pdf/Element.pdf",
+              "locator": "Section 4 'Geometry of the Coxeter plane', printed pp. 9-10: the plane Pi, its reflection lines and the rays spanning the region between consecutive lines"
+            },
+            {
+              "title": "Sergey Fomin and Nathan Reading, Root systems and generalized associahedra, IAS/Park City Mathematics Series lecture notes (arXiv:math/0505518)",
+              "url": "https://arxiv.org/pdf/math/0505518",
+              "locator": "Section 2.5, printed pp. 22-24: the Coxeter element and its plane, used for the ambient conventions"
+            }
+          ]
+        },
+        "dependency_level": 19,
+        "statement": "Let $(W,S)$ be an irreducible Coxeter system of finite type with $S$ finite, $n:=|S|\\ge1$, and let $\\alpha_i$, $R_i$, $c$, $h$, $(\\rho_i)$, $(\\mu_i)$, $\\mu$, $\\Phi_+$, $\\le_T$, $M$ and $t_\\alpha$ be as in [[def-cg-bipartite-coxeter-element-and-root-recursion]], [[lem-cg-steinberg-bipartite-root-enumeration]] and [[lem-cg-ordered-root-pairings-and-simple-systems]], so $\\Phi_+=\\{\\rho_1<\\rho_2<\\dots<\\rho_{nh/2}\\}$ in the global order. Write $R(\\alpha)$ for the reflection with normal $\\alpha$ and $S^{n-1}:=\\{x\\in V:B(x,x)=1\\}$.\n\n**(1) The complex $X(c)$.** Its vertex set is $\\Phi_+$. For $1\\le i<j\\le nh/2$, join $\\rho_i$ to $\\rho_j$ by an edge exactly when $R(\\rho_j)R(\\rho_i)\\le_Tc$. Let $X(c)$ contain the empty simplex and every finite nonempty set of vertices whose every two-element subset is an edge. Thus $X(c)$ is the abstract simplicial complex ([[def-abstract-simplicial-complex]]) determined by this ordered edge relation.\n\n**(2) The subcomplexes $X(\\sigma)$.** For $\\sigma\\le_Tc$, put $P_\\sigma:=\\{\\alpha\\in\\Phi_+:t_\\alpha\\le_T\\sigma\\}$ and let $X(\\sigma)$ be the full subcomplex of $X(c)$ on the vertex set $P_\\sigma$. For a positive root $\\rho$ in the global order, let $X(\\sigma,\\rho)$ be the full subcomplex on vertices in $P_\\sigma\\cap M(\\sigma)$ that are less than or equal to $\\rho$; thus $X(\\sigma,\\tau_i)$ has vertex set $\\{\\tau_1,\\dots,\\tau_i\\}$ when $P_\\sigma=\\{\\tau_1<\\dots<\\tau_t\\}$.\n\n**(3) Positive cones and realizations.** Every vertex is a unit vector. For a finite set $F$ of vertices define\n$$c[F]:=\\Bigl\\{\\sum_{v\\in F}\\lambda_vv:\\lambda_v\\ge0\\Bigr\\},\\qquad c[\\emptyset]:=\\{0\\}.$$\nFor a subcomplex $Y$ put $c[Y]:=\\bigcup_{F\\in Y}c[F]$ and $|Y|:=c[Y]\\cap S^{n-1}$, its positive-cone realization in the unit sphere. For $\\sigma\\le_Tc$ and a positive root $\\rho$, write\n$$Y(\\sigma,\\rho):=c[\\{\\tau\\in P_\\sigma\\cap M(\\sigma):\\tau\\le\\rho\\}].$$\n\n**(4) Abstentions.** This definition does not assert that $c[F]$ is nondegenerate for each simplex $F$, that $|F|$ is a spherical simplex, that the cone realization embeds $X(c)$ or any $X(\\sigma)$, or that these realizations are convex or have dimension $\\ell_T(\\sigma)-1$. It also does not assert an equivalence between higher simplex membership and a single full-tuple product condition. No Choice is used.",
+        "strategy": "Define X(c) from the ordered pairwise edge relation R(rho_j)R(rho_i) <=_T c for i<j, with faces the finite vertex sets whose every pair is an edge; include the empty face and all singletons so this is an abstract simplicial complex by construction. Define X(sigma) and X(sigma,rho) as full subcomplexes, and define c[F], c[Y], and the spherical cone realization with c[empty]=0. Do not assert the whole-tuple product criterion, nondegenerate spherical faces, embedding, convexity, or dimension here; the separate item contracts supply those results.",
+        "proof_strategy": "definition of the ordered root complex, its subcomplexes and its positive-cone and sphere realisations"
+      },
+      {
+        "id": "lem-cg-ordered-root-complex-is-geometric-simplicial",
+        "kind": "lemma",
+        "title": "The factorization criterion, linear independence of the faces, and the geometric simplicial structure of X(sigma)",
+        "deps": [
+          "def-cg-brady-watt-ordered-spherical-root-complex",
+          "lem-cg-ordered-root-pairings-and-simple-systems",
+          "lem-cg-steinberg-bipartite-root-enumeration",
+          "def-cg-bipartite-coxeter-element-and-root-recursion",
+          "def-cg-real-coxeter-form-and-reflection",
+          "def-cg-canonical-reflection-homomorphism",
+          "def-cg-finite-reflection-arrangement-and-spherical-chambers",
+          "thm-cg-root-sign-and-simple-reflection-positivity",
+          "thm-cg-root-inversion-formulas-and-strong-exchange",
+          "def-cg-reflection-length-absolute-order-and-moved-space",
+          "lem-cg-orthogonal-wall-form-and-subspace-restriction",
+          "thm-cg-carter-reflection-length-and-absolute-order",
+          "def-abstract-simplicial-complex",
+          "def-geometric-realization-of-an-abstract-simplicial-complex",
+          "def-cg-spherical-gram-simplex-and-angular-link",
+          "lem-cg-spherical-simplex-existence-and-link-gram-formula",
+          "def-linear-basis",
+          "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-metric-hausdorff-separation",
+          "def-compact-space",
+          "def-continuous-map-top",
+          "thm-continuity-characterisations-top"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Brady and Colum Watt, Lattices in finite real reflection groups (arXiv:math/0501502, 29-page PDF)",
+              "url": "https://arxiv.org/pdf/math/0501502",
+              "locator": "Lemma 3.9 with proof, Note 4.2, Theorem 7.4 with proof and Corollary 7.5, printed pp. 8-10 and 21-22; the identity R(rho_i)...R(rho_{i+n-1}) = gamma^{-1} of Note 3.1, printed p. 4"
+            },
+            {
+              "title": "Robert Steinberg, Finite reflection groups, Transactions of the American Mathematical Society 91 (1959) 493-504 (AMS free digital archive, 10-page PDF)",
+              "url": "https://www.ams.org/journals/tran/1959-091-03/S0002-9947-1959-0106428-2/S0002-9947-1959-0106428-2.pdf",
+              "locator": "Corollary 4.6 (the reflecting hyperplanes and their order along the Coxeter line), printed pp. 497-498"
+            },
+            {
+              "title": "Bill Casselman, Essays on Coxeter groups: Coxeter elements in finite Coxeter groups (author-hosted PDF, 12 pages)",
+              "url": "https://www.math.ubc.ca/~cass/research/pdf/Element.pdf",
+              "locator": "Sections 3.8-4, printed pp. 8-10: the reflection structure of the Coxeter plane and the region between consecutive reflection lines"
+            },
+            {
+              "title": "Sergey Fomin and Nathan Reading, Root systems and generalized associahedra, IAS/Park City Mathematics Series lecture notes (arXiv:math/0505518)",
+              "url": "https://arxiv.org/pdf/math/0505518",
+              "locator": "Section 2.5, printed pp. 22-24, for the ambient conventions"
+            }
+          ]
+        },
+        "dependency_level": 20,
+        "statement": "With the notation of [[def-cg-brady-watt-ordered-spherical-root-complex]] and the conclusions of [[lem-cg-ordered-root-pairings-and-simple-systems]]:\n\n**(1) Factorization criterion.** For any strictly increasing tuple $a_1<a_2<\\dots<a_k$ of roots in $\\Phi_+$, including the empty tuple when $k=0$,\n$$\\ell_T\\bigl(R(a_1)R(a_2)\\cdots R(a_k)c\\bigr)=n-k\\iff \\mu(a_i)\\cdot a_j=0\\quad\\text{for every }i>j.$$\n\n**(2) Linear independence and spherical simplices.** If $F=\\{a_1<\\dots<a_k\\}$ is a nonempty simplex of $X(c)$, then $a_1,\\dots,a_k$ are linearly independent and lie in a common open halfspace, namely $\\{x:B(x,f)>0\\}$ for every $f\\in\\mathcal C^\\circ$. Thus $c[F]$ is a pointed simplicial cone and $|F|:=c[F]\\cap S^{n-1}$ is a spherical simplex of dimension $k-1$. The empty face has $c[\\emptyset]=\\{0\\}$ and $|\\emptyset|=\\emptyset$. For any increasing tuple of positive roots, its set is a simplex of $X(c)$ if and only if its reverse product $R(a_k)\\cdots R(a_1)$ lies below $c$ in absolute order and has reflection length $k$.\n\n**(3) The complex structure and its dimension.** For every $\\sigma\\le_Tc$, the full subcomplex $X(\\sigma)$ is a finite simplicial complex of dimension $\\ell_T(\\sigma)-1$; in particular $X(1)=\\{\\emptyset\\}$ has dimension $-1$. Each $X(\\sigma,\\rho)$ is a simplicial complex. If $P_\\sigma=\\{\\tau_1<\\dots<\\tau_t\\}$, then\n$$X(\\sigma,\\tau_i)\\subseteq X(\\sigma,\\tau_{i+1})\\quad(1\\le i<t),$$\nand the simplices of $X(\\sigma,\\tau_{i+1})$ not already in $X(\\sigma,\\tau_i)$ are exactly the cones $B\\cup\\{\\tau_{i+1}\\}$ over faces $B$ of $X(\\sigma,\\tau_i)$ whose vertices all lie in $\\mu(\\tau_{i+1})^\\perp$. The empty face is allowed as a base, giving the new singleton vertex.\n\n**(4) Geometric intersections are common faces.** For any two faces $F,F'$ of $X(\\sigma)$,\n$$c[F]\\cap c[F']=c[F\\cap F'].$$\nConsequently, the normalized cone map from the ordinary geometric realization of $X(\\sigma)$ to $S^{n-1}$ is an embedding onto $|X(\\sigma)|$, and this image is a finite union of spherical simplices that pairwise meet in common faces. No Choice is used.",
+        "strategy": "Prove the ordered factorization criterion in both directions using Carter length, pair-subword cancellation, fixed-space vectors and orthogonal restriction; derive clique faces and their dimensions; then induct on the inclusive root-prefix complexes to prove the cone intersections and the normalized geometric embedding.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-cg-root-complex-convex-cones-and-facet-induction",
+        "kind": "theorem",
+        "title": "The separating-root lemma, the exact facet halfspaces of the added cones, and the spherical convexity of |X(sigma)|",
+        "deps": [
+          "lem-cg-ordered-root-complex-is-geometric-simplicial",
+          "lem-cg-ordered-root-pairings-and-simple-systems",
+          "lem-cg-steinberg-bipartite-root-enumeration",
+          "def-cg-brady-watt-ordered-spherical-root-complex",
+          "def-cg-bipartite-coxeter-element-and-root-recursion",
+          "def-cg-real-coxeter-form-and-reflection",
+          "thm-cg-root-sign-and-simple-reflection-positivity",
+          "thm-cg-root-inversion-formulas-and-strong-exchange",
+          "def-cg-geometric-inversion-set",
+          "def-cg-reflection-length-absolute-order-and-moved-space",
+          "lem-cg-orthogonal-wall-form-and-subspace-restriction",
+          "thm-cg-carter-reflection-length-and-absolute-order",
+          "def-abstract-simplicial-complex",
+          "def-real-and-complex-inner-product-space",
+          "thm-rank-nullity"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Brady and Colum Watt, Lattices in finite real reflection groups (arXiv:math/0501502, 29-page PDF)",
+              "url": "https://arxiv.org/pdf/math/0501502",
+              "locator": "Section 7, printed pp. 20-24: Propositions 7.1-7.2, Definition 7.3, Theorems 7.4 and 7.6 with proof, and Corollary 7.7; supporting sign and pairing facts from \u00a7\u00a73, 5 and 6, printed pp. 4-18"
+            },
+            {
+              "title": "Robert Steinberg, Finite reflection groups, Transactions of the American Mathematical Society 91 (1959) 493-504 (AMS free digital archive, 10-page PDF)",
+              "url": "https://www.ams.org/journals/tran/1959-091-03/S0002-9947-1959-0106428-2/S0002-9947-1959-0106428-2.pdf",
+              "locator": "Corollary 4.6 and the sign discussion following it, printed pp. 497-498, used through the global order of the reflecting hyperplanes"
+            },
+            {
+              "title": "Bill Casselman, Essays on Coxeter groups: Coxeter elements in finite Coxeter groups (author-hosted PDF, 12 pages)",
+              "url": "https://www.math.ubc.ca/~cass/research/pdf/Element.pdf",
+              "locator": "Sections 4-5, printed pp. 9-11: the Coxeter plane, its reflection lines and root projections, for ambient geometric conventions"
+            },
+            {
+              "title": "Sergey Fomin and Nathan Reading, Root systems and generalized associahedra, IAS/Park City Mathematics Series lecture notes (arXiv:math/0505518)",
+              "url": "https://arxiv.org/pdf/math/0505518",
+              "locator": "Section 2.5, printed pp. 22-24, for the ambient Coxeter-element conventions"
+            }
+          ]
+        },
+        "dependency_level": 21,
+        "statement": "With the notation of [[def-cg-brady-watt-ordered-spherical-root-complex]], [[lem-cg-steinberg-bipartite-root-enumeration]] and [[lem-cg-ordered-root-pairings-and-simple-systems]], fix $\\sigma\\le_Tc$, $\\sigma\\ne1$, put $k=\\ell_T(\\sigma)$, and write $P_\\sigma=\\{\\tau_1<\\dots<\\tau_t\\}$. If $n=1$, set $P_\\sigma=\\{\\tau_1\\}$ and $\\theta_1=\\tau_1$; if $n\\ge2$, write $\\theta_1<\\dots<\\theta_k$ as in (4)(iv) of [[lem-cg-ordered-root-pairings-and-simple-systems]]. For $\\tau\\in P_\\sigma$ define\n$$\\mu(\\tau)^\\pm:=\\{x\\in V:\\ \\pm B(x,\\mu(\\tau))\\ge0\\},\\qquad c[P_\\sigma]:=\\left\\{\\sum_{\\tau\\in P_\\sigma}\\lambda_\\tau\\tau:\\lambda_\\tau\\ge0\\right\\}.$$\nFor $\\theta_k\\le\\tau_i\\le\\tau_t$ put\n$$Z(\\sigma,\\tau_i):=M(\\sigma)\\cap\\bigcap_{j=1}^{k}\\mu(\\theta_j)^+\\cap\\bigcap_{j=i+1}^{t}\\mu(\\tau_j)^-.$$\nThen:\n\n**(1) The separating-root lemma.** If $\\tau_a,\\tau_s\\in P_\\sigma$ satisfy $\\tau_a\\ge\\theta_k$, $\\tau_s<\\tau_a$, $\\tau_s\\notin\\{\\theta_1,\\dots,\\theta_k\\}$ and $B(\\tau_a,\\mu(\\tau_s))=0$, there are $\\tau_b,\\tau_c\\in P_\\sigma$ with $\\tau_b,\\tau_c<\\tau_a$, $B(\\tau_b,\\mu(\\tau_a))=B(\\tau_c,\\mu(\\tau_a))=0$, and\n$$B(\\tau_b,\\mu(\\tau_s))>0>B(\\tau_c,\\mu(\\tau_s)).$$\n\n**(2) The facet induction.** For every index $i$ with $\\theta_k\\le\\tau_i\\le\\tau_t$,\n$$c[X(\\sigma,\\tau_i)]=Y(\\sigma,\\tau_i)=Z(\\sigma,\\tau_i).$$\nThe cone is full-dimensional in $M(\\sigma)$, closed and convex. Every facet is contained in one of the hyperplanes $M(\\sigma)\\cap\\mu(\\theta_j)^\\perp$ $(1\\le j\\le k)$ or $M(\\sigma)\\cap\\mu(\\tau_j)^\\perp$ $(j>i)$. Some listed halfspaces may be redundant; only nonredundant active inequalities support facets. This includes rank one and the empty base at the start of the rank induction.\n\n**(3) Spherical convexity and intersection.**\n$$|X(\\sigma)|=S^{n-1}\\cap c[X(\\sigma)]=S^{n-1}\\cap M(\\sigma)\\cap\\bigcap_{j=1}^{k}\\mu(\\theta_j)^+=S^{n-1}\\cap c[P_\\sigma].$$\nThis set is spherically convex: the shorter great-circle arc between any two of its points lies in it. For $\\alpha,\\beta\\le_Tc$,\n$$|X(\\alpha)\\cap X(\\beta)|=|X(\\alpha)|\\cap|X(\\beta)|,$$\nusing the common-face cone intersections of [[lem-cg-ordered-root-complex-is-geometric-simplicial]] (4).\n\n**(4) Limits.** This theorem asserts nothing about $M(\\alpha)\\cap M(\\beta)$ for arbitrary $\\alpha,\\beta\\le_Tc$, the lattice property of $[1,c]$, or $X(\\sigma)$ for $\\sigma\\not\\le_Tc$. No Choice is used.",
+        "strategy": "Identify interval inversion roots with the parabolic inversion formula; prove the second separator by projecting the mu vector to the moved space and tracking fixed spaces in absolute order; then induct on rank and root prefix. Transport each active facet normal by nu = mu(b) - B(mu(b),a)mu(a) = mu(R(a)b), exclude forbidden early roots with the separator, and compare exact facet halfspaces. End with the root cone, shorter great-circle arcs, and common-face intersections. All inductions are finite and no Choice is used.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 1755,
+    "id": "bipartite-coxeter-elements-and-ordered-root-complexes-examples",
+    "kind": "B",
+    "category": "coxeter-groups",
+    "title": "Bipartite Coxeter Elements and Ordered Root Complexes - Examples",
+    "companion": "bipartite-coxeter-elements-and-ordered-root-complexes",
+    "requires": [
+      "bipartite-coxeter-elements-and-ordered-root-complexes"
+    ],
+    "items": [
+      {
+        "id": "ex-cg-ordered-roots-and-mu-matrix-in-i2-5",
+        "kind": "example",
+        "title": "Ordered roots and the mu-dot-root matrix in I2(5)",
+        "deps": [
+          "def-cg-bipartite-coxeter-element-and-root-recursion",
+          "lem-cg-steinberg-bipartite-root-enumeration",
+          "lem-cg-ordered-root-pairings-and-simple-systems",
+          "def-cg-real-coxeter-form-and-reflection",
+          "lem-cg-reflection-form-invariance-and-rank-two-orders",
+          "def-cg-canonical-reflection-homomorphism",
+          "lem-cg-reflection-representation-descends-and-root-norms",
+          "thm-cg-finite-parabolic-longest-element-and-opposition",
+          "def-hh-coxeter-matrix-word-group-and-length"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Brady and Colum Watt, Lattices in finite real reflection groups (arXiv:math/0501502, 29-page PDF)",
+              "url": "https://arxiv.org/pdf/math/0501502",
+              "locator": "Section 3, Example 3.6 and its rho_i, mu_i and mu_i.rho_j tables printed pp. 5-7, used as a comparison for the independently recomputed rank-two formulas"
+            },
+            {
+              "title": "Robert Steinberg, Finite reflection groups, Transactions of the American Mathematical Society 91 (1959) 493-504 (AMS free digital archive, 10-page PDF)",
+              "url": "https://www.ams.org/journals/tran/1959-091-03/S0002-9947-1959-0106428-2/S0002-9947-1959-0106428-2.pdf",
+              "locator": "Corollary 4.6 and the reflections 4.8, printed pp. 497-498, specialized to n = 2 and h = 5"
+            },
+            {
+              "title": "Bill Casselman, Essays on Coxeter groups: Coxeter elements in finite Coxeter groups (author-hosted PDF, 12 pages)",
+              "url": "https://www.math.ubc.ca/~cass/research/pdf/Element.pdf",
+              "locator": "Sections 2 and 3.1-3.7, printed pp. 5-8, and Section 4, printed pp. 9-10, specialized to the dihedral case"
+            },
+            {
+              "title": "Sergey Fomin and Nathan Reading, Root systems and generalized associahedra, IAS/Park City Mathematics Series lecture notes (arXiv:math/0505518)",
+              "url": "https://arxiv.org/pdf/math/0505518",
+              "locator": "Example 2.2, Figure 1 (the pentagon) and Section 2.5, printed pp. 4 and 22-24"
+            }
+          ]
+        },
+        "dependency_level": 19,
+        "statement": "Let $S=\\{s_1,s_2\\}$ with $m(s_1,s_2)=5$, so $W=I_2(5)$ is dihedral of order $10$. Let $\\alpha_i=e_{s_i}$ and\n$$B(\\alpha_1,\\alpha_1)=B(\\alpha_2,\\alpha_2)=1,\\qquad B(\\alpha_1,\\alpha_2)=-\\frac{\\varphi}{2},\\qquad \\varphi:=2\\cos(\\pi/5)=\\frac{1+\\sqrt5}{2}.$$\nTake the bipartition $J=\\{s_1\\}$, $K=\\{s_2\\}$, put $c=s_1s_2$, and let $C_V:=\\rho(c)$. For $\\rho_i,\\mu_i,\\beta_i$ use the conventions of [[def-cg-bipartite-coxeter-element-and-root-recursion]]. Then:\n\n**(i)** $h=5$, $\\Phi_+=\\{\\rho_1,\\dots,\\rho_5\\}$, where\n$$\\rho_1=\\alpha_1,\\quad \\rho_2=\\alpha_2+\\varphi\\alpha_1,\\quad \\rho_3=\\varphi(\\alpha_1+\\alpha_2),\\quad \\rho_4=\\alpha_1+\\varphi\\alpha_2,\\quad \\rho_5=\\alpha_2.$$\nEach $\\rho_i$ has $B$-norm $1$, $C_V\\rho_i=\\rho_{i+2}$ for all $i\\ge1$, and $\\rho_{i+5}=-\\rho_i$.\n\n**(ii)** The dual basis and subsequent $\\mu$-vectors are\n$$\\mu_1=\\beta_1=\\frac{4\\alpha_1+2\\varphi\\alpha_2}{3-\\varphi},\\qquad \\mu_2=\\beta_2=\\frac{2\\varphi\\alpha_1+4\\alpha_2}{3-\\varphi},$$\n$$\\mu_3=\\mu_1-2\\rho_1,\\qquad \\mu_4=\\mu_2-2\\rho_2,\\qquad \\mu_5=\\mu_3-2\\rho_3.$$\nThe matrix $\\bigl(\\mu_i\\cdot\\rho_j\\bigr)_{1\\le i,j\\le5}$ is\n$$\\begin{pmatrix}1&\\varphi&\\varphi&1&0\\\\ 0&1&\\varphi&\\varphi&1\\\\ -1&0&1&\\varphi&\\varphi\\\\ -\\varphi&-1&0&1&\\varphi\\\\ -\\varphi&-\\varphi&-1&0&1\\end{pmatrix}.$$\n\n**(iii)** The sign assertions of [[lem-cg-ordered-root-pairings-and-simple-systems]] (2) hold for this matrix: entries on and above the diagonal are nonnegative, entries strictly below it are nonpositive, and the entries one step below the diagonal vanish. The cyclicity $\\mu_{i+2}\\cdot\\rho_{j+2}=\\mu_i\\cdot\\rho_j$ holds for all $i,j\\ge1$.\n\n**(iv)** The longest element is $w_0=c^2s_1=(s_1s_2)^2s_1$. The displayed word is a reduced $S$-expression of Coxeter length $\\ell(w_0)=5=nh/2$ and its prefix roots are $\\rho_1,\\dots,\\rho_5$. The vector $p=(1,1)$ is a positive eigenvector of $A=2(I-B)$ with eigenvalue $\\lambda=\\varphi=2\\cos(\\pi/5)$, and the Coxeter plane is $V$ itself.\n\nNo Choice is used; all computations are finite and rank two.",
+        "strategy": "Compute the exact dihedral action and root orbit from the rank-two Gram matrix; invert the Gram matrix for the dual basis; use the cyclic and mu recursions to list the first five mu-vectors; multiply M^T G R for all pairings; then apply the odd-h longest-word formula and compute the rank-two adjacency eigenpair.",
+        "proof_strategy": "direct",
+        "axiom_use": "No Choice is used; everything is a finite computation in the two-dimensional Euclidean plane and the cited rank-two suppliers."
+      },
+      {
+        "id": "ex-cg-ordered-roots-and-mu-matrix-in-a3",
+        "kind": "example",
+        "title": "Ordered roots and the mu-dot-root matrix in A3",
+        "deps": [
+          "def-cg-bipartite-coxeter-element-and-root-recursion",
+          "lem-cg-steinberg-bipartite-root-enumeration",
+          "lem-cg-ordered-root-pairings-and-simple-systems",
+          "def-cg-real-coxeter-form-and-reflection",
+          "lem-cg-reflection-representation-descends-and-root-norms",
+          "def-cg-reflection-length-absolute-order-and-moved-space",
+          "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "lem-cg-ordered-root-complex-is-geometric-simplicial"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Brady and Colum Watt, Lattices in finite real reflection groups (arXiv:math/0501502, 29-page PDF)",
+              "url": "https://arxiv.org/pdf/math/0501502",
+              "locator": "Section 3, printed pp. 4-7, for the general prefix-root and dual-vertex recursions; Example 6.14, printed pp. 19-20, was checked as a comparison only: it uses c=(1 2 3 4) and a different simple-system order/global root order from this example. All displayed A3 data here are recomputed in the stated bipartite order."
+            },
+            {
+              "title": "Robert Steinberg, Finite reflection groups, Transactions of the American Mathematical Society 91 (1959) 493-504 (AMS free digital archive, 10-page PDF)",
+              "url": "https://www.ams.org/journals/tran/1959-091-03/S0002-9947-1959-0106428-2/S0002-9947-1959-0106428-2.pdf",
+              "locator": "Corollary 4.6 and Theorem 5.1, printed pp. 497-499, for the general positive-root enumeration and longest-word conventions"
+            },
+            {
+              "title": "Bill Casselman, Essays on Coxeter groups: Coxeter elements in finite Coxeter groups (author-hosted PDF, 12 pages)",
+              "url": "https://www.math.ubc.ca/~cass/research/pdf/Element.pdf",
+              "locator": "Sections 3.1-3.7 and 4, printed pp. 6-10, for the Coxeter-plane conventions; the present A3 permutation and root calculations are independent"
+            },
+            {
+              "title": "Sergey Fomin and Nathan Reading, Root systems and generalized associahedra, IAS/Park City Mathematics Series lecture notes (arXiv:math/0505518)",
+              "url": "https://arxiv.org/pdf/math/0505518",
+              "locator": "Example 2.17 and Figure 2.6 in Section 2.5, printed pp. 22-23, for the A3 Coxeter-plane context, not the root order used here"
+            }
+          ]
+        },
+        "dependency_level": 21,
+        "statement": "Work in the standard realization of $A_3=S_4$. Let $E_1,dots,E_4$ be the coordinate vectors, put $V_0:=\\{x\\in\\mathbb R^4:\\sum_i x_i=0\\}$, and use $B(x,y):=\\tfrac12\\sum_i x_i y_i$. Put $\\sigma_1:=E_1-E_2$, $\\sigma_2:=E_3-E_4$, $\\sigma_3:=E_2-E_3$ and let $s_1=(1\\ 2)$, $s_2=(3\\ 4)$, $s_3=(2\\ 3)$ be their reflections. Thus $J=\\{s_1,s_2\\}$, $K=\\{s_3\\}$, and $c=s_1s_2s_3$. For $i<j$, write $(i\\ j)$ for the positive root $E_i-E_j$. Multiplication of permutations is right to left. Let $\\ell$ be Coxeter word length and $\\ell_T$ reflection length. Then:\n\n**(i) Ordered roots.** One has $c=(1\\ 2\\ 4\\ 3)$, $h=4$, and\n$$\\rho_1=(1\\ 2),\\quad \\rho_2=(3\\ 4),\\quad \\rho_3=(1\\ 4),\\quad \\rho_4=(2\\ 4),\\quad \\rho_5=(1\\ 3),\\quad \\rho_6=(2\\ 3).$$\nIn the simple-root basis these are $\\sigma_1,\\sigma_2,\\sigma_1+\\sigma_2+\\sigma_3,\\sigma_2+\\sigma_3,\\sigma_1+\\sigma_3,\\sigma_3$. Hence $\\Phi_+=\\{\\rho_1,\\dots,\\rho_6\\}$, $|\\Phi_+|=\\ell(w_0)=nh/2=6$, and $\\rho_{i+3}=C_V\\rho_i$ for $i\\ge1$, where $C_V=\\rho(c)$.\n\n**(ii) The $\\mu$-root matrix.** The matrix $(B(\\mu_i,\\rho_j))_{1\\le i,j\\le6}$ is\n$$\\begin{pmatrix}1&0&1&0&1&0\\\\0&1&1&1&0&0\\\\0&0&1&1&1&1\\\\-1&0&0&1&0&1\\\\0&-1&0&0&1&1\\\\-1&-1&-1&0&0&1\\end{pmatrix}.$$\nIts diagonal and upper-triangular entries are nonnegative, its strictly lower-triangular entries are nonpositive, and the first two subdiagonals vanish, as in [[lem-cg-ordered-root-pairings-and-simple-systems]] (2)(b)-(d).\n\n**(iii) The longest word and the second half.** The longest element is $w_0=c^2=(1\\ 4)(2\\ 3)$ and $(s_1s_2s_3)^2$ is a reduced expression of length $6=nh/2$, with prefix roots $\\rho_1,\\dots,\\rho_6$. The prefix roots of $(s_1s_2s_3)^4$ are $\\rho_1,\\dots,\\rho_{12}$, and\n$$\\rho_7,\\dots,\\rho_{12}=-\\rho_2,-\\rho_1,-\\rho_3,-\\rho_5,-\\rho_4,-\\rho_6,$$\nso the second half is $-\\Phi_+$.\n\n**(iv) One factorization-criterion instance.** For the pair $(\\rho_1,\\rho_2)$,\n$$\\ell_T\\bigl(R(\\rho_1)R(\\rho_2)c\\bigr)=1=n-2\\quad\\Longleftrightarrow\\quad B(\\mu(\\rho_2),\\rho_1)=0.$$\n\nNo Choice is used.",
+        "strategy": "Compute in the standard A3=S4 model with B equal to half the Euclidean form. Use the exact Gram inverse for the dual basis, the cyclic prefix recursion for roots and mu-vectors, and exact rational pairings for the 6-by-6 matrix. Check the longest word and second-half roots by the explicit 4-cycle, and evaluate the item-20 factorization criterion for the displayed pair. No Choice is used.",
+        "proof_strategy": "direct",
+        "axiom_use": "No Choice is used; the A3 model is the standard finite permutation representation and Carter's reflection length is the cycle count."
+      },
+      {
+        "id": "ex-cg-cone-intersection-versus-moved-space-meet-in-a3",
+        "kind": "example",
+        "title": "In A3 the moved spaces meet in a line, while the root complexes have no common nonempty face",
+        "deps": [
+          "ex-cg-ordered-roots-and-mu-matrix-in-a3",
+          "def-cg-real-coxeter-form-and-reflection",
+          "def-cg-reflection-length-absolute-order-and-moved-space",
+          "def-cg-brady-watt-ordered-spherical-root-complex",
+          "lem-cg-ordered-root-complex-is-geometric-simplicial",
+          "thm-cg-root-inversion-formulas-and-strong-exchange"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Brady and Colum Watt, Lattices in finite real reflection groups (arXiv:math/0501502, 29-page PDF)",
+              "url": "https://arxiv.org/pdf/math/0501502",
+              "locator": "Section 4 discussion preceding Definition 4.1, printed pp. 9-10: the source's A3 example uses gamma=(1 2 3 4), alpha=(1 3)gamma=(1 2)(3 4), and beta=(2 4)gamma=(1 4)(2 3). That is a comparison example with different gamma and beta; all data for the bipartite model below are recomputed locally."
+            }
+          ]
+        },
+        "dependency_level": 22,
+        "statement": "Use the standard $A_3=S_4$ model, simple roots, and bipartite Coxeter element $c=(1\\ 2\\ 4\\ 3)$ of [[ex-cg-ordered-roots-and-mu-matrix-in-a3]]. Put\n$$\\alpha:=(1\\ 2)(3\\ 4)=(1\\ 4)c=R(\\rho_3)c,\\qquad \\beta:=(1\\ 3)(2\\ 4)=(2\\ 3)c=R(\\rho_6)c.$$\nThen:\n\n**(i)** $\\alpha,\\beta\\le_Tc$ and $\\ell_T(\\alpha)=\\ell_T(\\beta)=2$. Their lower intervals are exactly\n$$[1,\\alpha]_T=\\{1,(1\\ 2),(3\\ 4),\\alpha\\},\\qquad [1,\\beta]_T=\\{1,(1\\ 3),(2\\ 4),\\beta\\}.$$\nThus their only common lower bound is $1$, so their meet in $[1,c]_T$ is $1$.\n\n**(ii)** $P_\\alpha=\\{\\rho_1,\\rho_2\\}$ and $P_\\beta=\\{\\rho_4,\\rho_5\\}$. The complexes are the edges $X(\\alpha)=\\langle\\rho_1,\\rho_2\\rangle$ and $X(\\beta)=\\langle\\rho_4,\\rho_5\\rangle$. Their only common face is the empty face, so $X(\\alpha)\\cap X(\\beta)=\\{\\emptyset\\}$, their spherical realizations are disjoint, and\n$$c[X(\\alpha)]\\cap c[X(\\beta)]=c[\\emptyset]=\\{0\\}.$$\n\n**(iii)** The moved spaces are $M(\\alpha)=\\mathrm{span}\\{E_1-E_2,E_3-E_4\\}$ and $M(\\beta)=\\mathrm{span}\\{E_1-E_3,E_2-E_4\\}$, both two dimensional, and\n$$M(\\alpha)\\cap M(\\beta)=\\mathbb R\\,(E_1-E_2-E_3+E_4).$$\nThis line contains no root: every root has exactly two nonzero coordinates, whereas every nonzero vector on the displayed line has four. In the standard Euclidean norm the displayed generator has norm $2$, while every root has norm $\\sqrt2$. Hence $M(\\alpha)\\cap M(\\beta)$ strictly contains $M(1)=\\{0\\}$ and is not the moved space of any common lower bound.\n\n**(iv)** The common upper bound is $c=(1\\ 4)\\alpha=\\beta(1\\ 4)$. Thus this example has disjoint positive-root cones and a nonzero moved-space intersection; intersecting moved spaces does not compute the meet in the absolute interval.\n\nNo Choice is used.",
+        "strategy": "Compute alpha, beta and c as explicit S4 permutations, enumerate their lower reflections, and correct the shared empty-face case. Derive the root complexes and cone intersection, then solve the moved-space intersection and show its line has four-coordinate support and contains no A3 root. All work is finite and no Choice is used.",
+        "proof_strategy": "direct",
+        "axiom_use": "No Choice is used; the computations are finite and in the standard permutation representation."
+      }
+    ]
+  }
+]

@@ -2,26 +2,27 @@
 page: weak-order-inversions-and-lattice-operations
 title: "Weak Order, Inversions, and Lattice Operations"
 status: draft
-items: []
+requires: [parabolic-subgroups-and-double-coset-geometry,
+           finite-reflection-arrangements-and-spherical-coxeter-complexes,
+           chains-antichains-sperner-and-dilworth,
+           incidence-algebras-and-mobius-inversion]
+items: [def-cg-left-right-weak-order-and-descents,
+        lem-cg-weak-order-prefix-property-and-left-translation,
+        lem-cg-weak-order-is-a-graded-partial-order,
+        lem-cg-bounded-weak-order-join-construction,
+        lem-cg-full-descent-element-characterizes-finite-type,
+        thm-cg-weak-order-meet-semilattice-and-finite-lattice]
 examples: []
 ---
 
-Weak order extends a reduced expression by simple generators without cancellation. Finite Coxeter weak order is a lattice; infinite weak order generally has meets but need not have joins without an upper bound.
+Let $(W,S)$ be a Coxeter system of finite rank, with length function $\ell$. The right and left weak orders are the length-additive relations $u\le_R v$ when $v=ux$ and $\ell(v)=\ell(u)+\ell(x)$, and $u\le_L v$ when $v=xu$ with the same length equality. The descent sets $D_L(w)$ and $D_R(w)$ record the simple generators that lower length on the left and right.
 
-This is a prose scaffold for future local item authoring. Its empty item lists do not assert proof completion. Every construction below is a named supplier contract; definitions are justified by the separately named existence, descent or uniqueness proofs before any application consumes their properties. Source reading supports the selected proof route and is not a substitute for a library proof.
+The prefix and translation properties make these relations computable from reduced words. In right weak order, $u\le_R v$ exactly when some reduced expression of $v$ begins with a reduced expression of $u$. If $s$ is a left descent of both $u$ and $v$, then $u\le_R v$ exactly when $su\le_R sv$; comparable intervals translate to lower intervals by left multiplication.
 
-## Ordered construction and proof contracts
+Both weak orders are partial orders with minimum $1$. A cover is exactly a multiplication by one simple generator that raises length by one; every comparison is a chain of covers, and each interval is finite and graded by length. The inversion sets characterize the orders: $u\le_R v$ if and only if $N(u^{-1})\subseteq N(v^{-1})$, while $u\le_L v$ if and only if $N(u)\subseteq N(v)$. The corresponding simple-root tests identify left and right descents.
 
-**def-cg-left-right-weak-order-and-descents.** Define u≤_R v by v=ux and ℓ(v)=ℓ(u)+ℓ(x), left weak order analogously, and descent sets D_L,D_R. Define meet/join by their universal bound properties, not by a formula assumed to work.
+Every nonempty subset of either weak order has a meet. A nonempty subset has a join exactly when it is bounded above, and then its join is the meet of its upper bounds. The meet construction uses a finite descent in length, so no Axiom of Choice is needed. No general lattice property is asserted for infinite Coxeter groups.
 
-Definition justification: `lem-cg-weak-order-is-a-graded-partial-order`.
+When $W$ is finite, both weak orders are lattices with minimum $1$ and maximum $w_0$. Their empty-set values are $\bigwedge\varnothing=w_0$ and $\bigvee\varnothing=1$. More generally, for $J\subseteq S$, the parabolic subgroup $W_J$ is finite exactly when $J$ has an upper bound, equivalently when its join exists; in that case $\bigvee J=w_0(J)$ in both orders. For $J=\varnothing$, this gives $w_0(J)=1$.
 
-**lem-cg-weak-order-is-a-graded-partial-order.** Prove reflexivity, antisymmetry and transitivity from lengths, and cover relation v=us with one-length rise. Derive the correctly oriented inclusion criterion N(u^-1)⊆N(v^-1), proving its converse by a descent induction; root-set inclusion is not used unproved as the definition.
-
-**lem-cg-bounded-weak-order-join-construction.** Choose z of maximal length among common right-weak lower bounds of x,y, a finite set. If s is a common initial simple letter but not a left descent of z, write reduced x=z x′ and y=z y′. Left exchange for sx and sy cannot delete a letter of the z prefix (that would make s a descent of z), so deletes a suffix letter in each. Therefore sz is a reduced common lower bound longer than z, contradiction. For any nonidentity common bound w choose an initial s of w; s also descends z,x,y. By induction on length(x), z′=meet(sx,sy) exists. Left-multiplication interval isomorphisms give sw,sz≤z′ and sz′≤x,y. Maximality of z yields length(sz′)≤length(z), whence z′=sz and w≤z. Thus z is the meet. For arbitrary nonempty sets repeatedly meet a failing member; each failure strictly lowers integer length, so only finitely many choices occur. For bounded nonempty sets meet all upper bounds; each original member is below that meet by its universal property, so it is the join.
-
-**thm-cg-weak-order-meet-semilattice-and-finite-lattice.** A finite-rank Coxeter group has finite lower intervals, so the preceding construction proves all finite nonempty meets. In finite W use its proved longest element as a common upper bound, deriving joins. For infinite W assert joins only for bounded sets and prove the obstruction in infinite dihedral type; there is no implicit completeness claim.
-
-## Prerequisites and reading
-
-Required earlier pages: [[parabolic-subgroups-and-double-coset-geometry]], [[finite-reflection-arrangements-and-spherical-coxeter-complexes]], [[chains-antichains-sperner-and-dilworth]], [[incidence-algebras-and-mobius-inversion]]. The companion [[weak-order-inversions-and-lattice-operations-examples]] tests these constructions and conventions. Exact item dependencies and source reading limits are recorded in `research/coxeter-scaffold/inventory.json` and `research/plan-coxeter-groups-track.md`.
+The root criterion also detects finiteness: if $w\in W_J$ and every $s\in J$ lowers $w$ on the left, then $W_J$ is finite and $w=w_0(J)$. This argument applies without a definiteness assumption on the Coxeter form. The companion page gives the complete $A_2$ lattice table, the infinite-dihedral obstruction, and the counterexample to computing meets and joins by intersecting and uniting inversion sets.

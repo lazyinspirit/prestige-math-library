@@ -2,12 +2,24 @@
 page: noncrossing-partition-lattices-and-kreweras-complements-examples
 title: "Noncrossing Partition Lattices and Kreweras Complements — Examples"
 status: draft
+requires: [noncrossing-partition-lattices-and-kreweras-complements]
 items: []
-examples: []
+examples:
+  - ex-cg-noncrossing-partitions-and-kreweras-complements-in-s4
+  - ex-cg-dihedral-noncrossing-interval-and-kreweras-complement
+  - ex-cg-crossing-interval-and-non-lattice-absolute-order
 ---
 
-This draft companion is a dependency leaf. Its exercises and examples use only the theory of [[noncrossing-partition-lattices-and-kreweras-complements]] and that page’s established prerequisite closure; no other theory page may depend on a supplier homed here.
+These examples use the definitions and theorems on [[noncrossing-partition-lattices-and-kreweras-complements]]. They verify finite instances and exhibit the limits of the noncrossing-lattice theorem.
 
-Identify NC(Sn) with ordinary noncrossing set partitions by cycle supports and planar crossings, prove both directions, and compute Kreweras complements. Include a noncrystallographic dihedral example and contrasting arbitrary absolute interval.
+## Type A calculation
 
-Each eventual example will state all hypotheses and verify the claimed calculation. A counterexample identifies the precise dropped hypothesis; a drawing or symbolic calculation alone does not certify a general theorem. Items remain unassigned until the theory suppliers have complete local proofs.
+[[ex-cg-noncrossing-partitions-and-kreweras-complements-in-s4]] lists the fourteen elements below the 4-cycle in absolute order, identifies the unique crossing partition, and computes every Kreweras value.
+
+## Dihedral calculation
+
+[[ex-cg-dihedral-noncrossing-interval-and-kreweras-complement]] proves the interval and complement formulas for the rank-two Coxeter group $I_2(m)$, including the noncrystallographic case $m=5$.
+
+## Contrasting interval
+
+[[ex-cg-crossing-interval-and-non-lattice-absolute-order]] shows that a crossing permutation can have a Boolean interval below it and that the entire absolute order of $S_3$ has no greatest element. It distinguishes these claims from the finite Coxeter noncrossing interval theorem.

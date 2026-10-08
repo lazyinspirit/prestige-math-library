@@ -1,0 +1,43 @@
+---
+id: def-cg-finite-lattice-congruence-and-interval-projections
+kind: definition
+title: "Finite lattice congruences, interval endpoints and descending rooted-chain labels"
+status: draft
+origin: pipeline
+pipeline_run: frontier-42-coxeter-32
+dependency_level: 0
+deps: [def-partial-order, def-chain, def-equivalence-relation, def-lattice-distributive-lattice-and-order-ideal, def-graded-poset-and-rank, def-poset-interval-and-finiteness-conditions]
+justified_by: [thm-cg-finite-lattice-interval-congruence-criterion]
+aliases: []
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "Nathan Reading, Lattice congruences of the weak order: algebra, combinatorics, and geometry, Triangle Lectures in Combinatorics (2019), slides on the order-theoretic characterization of a lattice congruence"
+      url: "https://nreadin.math.ncsu.edu/papers/TLC.pdf"
+    - title: "Michelle L. Wachs, Poset topology: tools and applications, PCMI lecture notes, Lecture 3 §§3.1–3.4"
+      url: "https://arxiv.org/pdf/math/0602226"
+    - title: "Anders Björner and Francesco Brenti, Combinatorics of Coxeter Groups (GTM 231), §2.7 and Appendix A2.2–A2.4"
+      url: "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
+    - title: "Richard P. Stanley, An Introduction to Hyperplane Arrangements, Lecture 1 §1.2 and Lecture 4 §4.1"
+      url: "https://www.cis.upenn.edu/~cis6100/sp06stanley.pdf"
+verification:
+  precheck: n/a
+  judge:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-08
+---
+
+## Definition
+
+Let $L$ be a finite lattice ([[def-lattice-distributive-lattice-and-order-ideal]]) with meet $\wedge$ and join $\vee$, and let $P$ be a finite graded poset ([[def-graded-poset-and-rank]]) with rank function $\rho$ ([[def-partial-order]]).
+
+**(1) Lattice congruences and projected endpoints.** An equivalence relation $\theta$ on $L$ is a **lattice congruence** if $x\equiv_\theta x'$ and $y\equiv_\theta y'$ imply $x\wedge y\equiv_\theta x'\wedge y'$ and $x\vee y\equiv_\theta x'\vee y'$. For $x\in L$ write $[x]_\theta$ for the **class** of $x$. On classes this defines the **proposed quotient operations** $[x]_\theta\vee[y]_\theta:=[x\vee y]_\theta$ and $[x]_\theta\wedge[y]_\theta:=[x\wedge y]_\theta$; the **proposed lower endpoint** $\pi_\downarrow(x)$ and **upper endpoint** $\pi_\uparrow(x)$ of a class are its least and greatest members. The definition asserts neither that the quotient operations are independent of representatives nor that endpoints exist; both are proved in [[lem-cg-lattice-quotient-descent-and-class-intervals]].
+
+**(2) Descending rooted-chain labels.** Let $x\le y$ in $P$, let $[x,y]=\{z\in P:x\le z\le y\}$ be the closed interval ([[def-poset-interval-and-finiteness-conditions]]) and put $\rho(x,y):=\rho(y)-\rho(x)$. A **descending rooted-chain labeling of $[x,y]$ with values in a linearly ordered set $(\Lambda,<)$** assigns to every pair $(c,v\lessdot w)$ consisting of a descending chain $c=(y=z_0\gtrdot z_1\gtrdot\cdots\gtrdot z_j=w)$ in $[x,y]$ and a cover $v\lessdot w$ ([[def-graded-poset-and-rank]]) a label $\lambda(c;v\lessdot w)\in\Lambda$; the label may depend on the chain $c$ *above* $w$, not only on the cover. A **maximal chain** of $[x,y]$ is a chain of the form $y=m_0\gtrdot m_1\gtrdot\cdots\gtrdot m_n=x$ with $n=\rho(x,y)$ (equivalently: a chain of $[x,y]$ contained in no larger chain of $[x,y]$); note $|m|=n+1$ for every maximal chain $m$ of $[x,y]$. Its **label word** is the $n$-tuple $\lambda(m)=(\lambda_1(m),\dots,\lambda_n(m))$ with $\lambda_i(m):=\lambda(m_0\gtrdot\cdots\gtrdot m_{i-1};\,m_i\lessdot m_{i-1})$: as one descends the chain, each step is labeled relative to the chain already traversed above it. Given $x\le v\le w\le y$ and a descending chain $c$ from $y$ to $w$, the **rooted interval** $([v,w],c)$ carries the labeling induced by keeping the root chain fixed: a maximal chain $v=w_0\lessdot w_1\lessdot\cdots\lessdot w_k=w$ of $[v,w]$ has label word whose $i$-th entry is the label of its $i$-th step counted from the top, the cover $w_{k-i}\lessdot w_{k-i+1}$, paired with the root chain $c$ extended by $w_{k-1}\gtrdot\cdots\gtrdot w_{k-i+1}$ (an empty extension when $i=1$), that is, $\lambda(c+w_{k-1}\gtrdot\cdots\gtrdot w_{k-i+1};\,w_{k-i}\lessdot w_{k-i+1})$. An **ordinary edge labeling** is the special case in which $\lambda(c;v\lessdot w)$ does not depend on $c$.
+
+**(3) Increasing and falling chains, descents, lexicographic order.** A maximal chain $m$ of $[x,y]$ is **increasing** if $\lambda_1(m)<\lambda_2(m)<\cdots<\lambda_n(m)$; it is **falling** if $\lambda_1(m)\ge\lambda_2(m)\ge\cdots\ge\lambda_n(m)$ and **strictly falling** if $\lambda_1(m)>\lambda_2(m)>\cdots>\lambda_n(m)$. Its **descent set** is $D(m):=\{i\in\{1,\dots,n-1\}:\lambda_i(m)>\lambda_{i+1}(m)\}$, so that $m$ is strictly falling exactly when $D(m)=\{1,\dots,n-1\}$. Label words are compared **lexicographically**: $\lambda(m')\prec\lambda(m)$ if at the least index $i$ with $\lambda_i(m')\ne\lambda_i(m)$ one has $\lambda_i(m')<\lambda_i(m)$.
+
+**(4) No-tie and lex-increasing hypotheses.** The labeling satisfies the **no-tie condition** (N) if in every rooted interval $([v,w],c)$ of $[x,y]$ the labels of any maximal chain of $[v,w]$ are pairwise distinct; then falling and strictly falling coincide on each maximal chain. It satisfies the **lex-increasing property** (L) if in every rooted interval $([v,w],c)$ of $[x,y]$ there is exactly one increasing maximal chain, and its label word is lexicographically first among the label words of all maximal chains of $([v,w],c)$. The rank-zero and rank-one cases give (L) its expected vacuous meaning: a rank-zero interval has one maximal chain, consisting of its single element and having an empty label word, and a rank-one interval has a single chain whose one-term label word is increasing.

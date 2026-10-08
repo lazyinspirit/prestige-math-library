@@ -2,28 +2,76 @@
 page: coxeter-polyhedral-gluings-and-intrinsic-metrics
 title: "Coxeter Polyhedral Gluings and Intrinsic Metrics"
 status: draft
-items: []
+requires: [metric-spaces, compactness-in-metric-spaces,
+           simplicial-complexes-and-simplicial-homology,
+           simplicial-subdivision-and-simplicial-approximation,
+           ascoli-arzela, cayley-graphs-word-metrics-and-quasi-isometry,
+           relations-functions-and-quotients,
+           measures-and-their-basic-properties]
+items: [def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric,
+        lem-cg-polyhedral-face-coherence-and-uniform-star-radius,
+        thm-cg-polyhedral-chain-metric-topology-and-properness,
+        lem-cg-metric-target-length-reparametrization-and-lower-semicontinuity,
+        thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics]
 examples: []
 ---
 
-The repository already supplies metric axioms, simplicial realization, stars, faces and compatible finite convex triangulations. Only the missing bridge from abstract Coxeter cell gluings to a genuine intrinsic complete geodesic metric is developed here.
+This page builds the metric foundation of the Davis-complex tower: from an
+abstract gluing of compact convex polyhedral cells it produces a genuine
+intrinsic metric, compares that metric with the weak cell topology, and proves
+properness, completeness and the existence of minimizing geodesics. The
+companion [[coxeter-polyhedral-gluings-and-intrinsic-metrics-examples]] checks
+the construction on a hexagonal $A_2$ cell, on an interval-realized tree and on
+a shrinking-edge ray.
 
-This is a prose scaffold for future local item authoring. Its empty item lists do not assert proof completion. Every construction below is a named supplier contract; definitions are justified by the separately named existence, descent or uniqueness proofs before any application consumes their properties. Source reading supports the selected proof route and is not a substitute for a library proof.
+The definition [[def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric]]
+fixes the data: a shape poset whose principal down-sets are face posets of
+compact convex polyhedral cells, cells with affine face isometries satisfying
+the cocycle and intersection conditions, the quotient space with its weak
+topology, chains that step inside single cells, and the chain metric candidate
+$d$ as the infimum of chain lengths. The standing hypotheses are connectedness
+(H1), local finiteness (H2) and finitely many isometry classes of cells (H3),
+declared before any metric claim. The definition asserts only that $d$ is
+symmetric and satisfies the triangle inequality, and it records explicitly that
+$d$ need not restrict to the Euclidean metric of a single cell: a chain may
+leave a cell and return with smaller total length.
 
-## Ordered construction and proof contracts
+The star lemma
+[[lem-cg-polyhedral-face-coherence-and-uniform-star-radius]] triangulates the
+finitely many model cells compatibly by barycentric subdivisions, reads the
+triangulation as the order complex of the face poset, and produces global hat
+coordinates $\lambda_v$ with one uniform Lipschitz constant $L$ computed from
+the finitely many model simplices. The barycentric coordinates of a point sum
+to $1$ over at most $D+1$ carrier vertices, so some $\lambda_v$ is at least
+$1/(D+1)$ there, and every ball of radius $\delta=1/(2L(D+1))$ lies in the open
+star of a vertex; closed stars are finite compact cell unions. This is the
+uniform star-cover radius the later arguments consume, and it is derived from
+coordinates rather than from any point-to-face distance bound.
 
-**def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric.** Specify compact convex Euclidean model cells with common-face isometric attaching maps satisfying the cocycle/intersection condition. Import their published face and triangulation definitions. Define chain length as sum of within-cell Euclidean segments and d as the infimum over finite chains; declare connected, locally finite and finite-shape assumptions before metric claims.
+The theorem [[thm-cg-polyhedral-chain-metric-topology-and-properness]] then
+proves that under (H1)-(H3) the chain metric is a metric inducing the weak
+topology, that every closed bounded subset is compact, and that the space is
+complete; no bound on the number of cells at a vertex is needed beyond local
+finiteness. The example
+[[cex-cg-shrinking-edge-ray-is-locally-finite-but-not-complete]] shows that the
+finite-shapes hypothesis cannot be dropped: intervals of lengths $2^{-n}$ glued
+end to end form a connected locally finite gluing isometric to the half-open
+interval $[0,2)$, which is incomplete. Two further results complete the page:
+the arbitrary-metric length lemma
+[[lem-cg-metric-target-length-reparametrization-and-lower-semicontinuity]]
+(lower semicontinuity under uniform convergence, arc-length reparametrization
+and equicontinuity of bounded arc-length families), and, under the Axiom of
+Choice, the geodesic theorem
+[[thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics]], which applies
+the proper-target Ascoli theorem to near-minimizing chain parametrizations and
+extracts a minimizing geodesic. The Axiom of Choice supplies the countable selection of near-minimizing
+chains and realizing paths, as well as the Ascoli subsequence theorem, and is
+declared in the geodesic statement.
 
-Definition justification: `thm-cg-polyhedral-chain-metric-topology-and-properness`.
-
-**lem-cg-polyhedral-face-coherence-and-uniform-star-radius.** Choose compatible barycentric triangulations of the finite Euclidean model list. Dimension is uniformly bounded by D. Each vertex hat coordinate λ_v, extended by zero outside its closed star, is piecewise affine with a uniform Lipschitz constant L from finitely many model simplices; integrate its slope bound along every finite cell chain to obtain |λ_v(x)-λ_v(y)|≤L d(x,y). Carrier uniqueness follows the intersection/gluing rules and unique barycentric coordinates. At each x some λ_v(x)≥1/(D+1), so every ball of radius δ=1/(2L(D+1)) lies in v’s open star; handle zero-dimensional connected components separately. This uniform star-cover radius is derived from coordinates, not from a false positive lower bound for arbitrary point-to-face distances. Local finite incidence makes each such closed star a finite compact cell union.
-
-**thm-cg-polyhedral-chain-metric-topology-and-properness.** The chain infimum is a pseudometric; the coordinate Lipschitz estimates force d(x,y)=0 to imply equality of all barycentric coordinates, hence x=y. Finite-star compactness gives agreement between d topology and locally finite weak realization topology. Any chain of length≤R+1 can be partitioned into at most ceil((R+1)/δ)+1 pieces of length<δ, each lying in a selected vertex star. Consecutive selected stars intersect, and locally finite incidence gives finite branching of their adjacency graph. Thus a bounded ball is contained in finitely many finite closed stars; its closure is closed in that compact union, hence compact and complete. No bound on valence is required. Local finiteness alone fails without finite shapes, as the shrinking-edge ray shows.
-
-**lem-cg-metric-target-length-reparametrization-and-lower-semicontinuity.** Define length by supremum over finite partitions with existing metric d. Prove lower semicontinuity under uniform convergence by fixing a partition and then taking its supremum. A rectifiable path factors through cumulative-length fibers (constant when length increment zero); extend to an arc-length Lipschitz parametrization on the completed image interval, treating constant paths separately. Existing Euclidean-target versions are not cited as arbitrary-metric theorems.
-
-**thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics.** Use 1-Lipschitz arc-length near-minimizers in a compact closed ball and the published proper-target metric Ascoli theorem to obtain a uniformly convergent subsequence. Length lower semicontinuity gives a minimizer, and arc-length reparametrization gives an isometric real-interval geodesic. Carry AC exactly from the Ascoli subsequence supplier; no hidden arbitrary-basis or metric selection is added.
-
-## Prerequisites and reading
-
-Required earlier pages: [[metric-spaces]], [[compactness-in-metric-spaces]], [[simplicial-complexes-and-simplicial-homology]], [[simplicial-subdivision-and-simplicial-approximation]], [[ascoli-arzela]], [[cayley-graphs-word-metrics-and-quasi-isometry]], [[relations-functions-and-quotients]]. The companion [[coxeter-polyhedral-gluings-and-intrinsic-metrics-examples]] tests these constructions and conventions. Exact item dependencies and source reading limits are recorded in `research/coxeter-scaffold/inventory.json` and `research/plan-coxeter-groups-track.md`.
+The construction here is the metric half of the Davis cellulation: the cells
+are the Coxeter cells of the finite parabolics and the gluings are the face
+identifications of the Davis complex. Applying these results requires checking
+(H1)-(H3) for that cellulation; under those hypotheses they supply its intrinsic
+metric, topology and properness, and under the declared Choice assumption they
+also supply the geodesics used by the later CAT(0) and Moussong arguments. The companion page records the comparisons
+between the intrinsic metric and the discrete metrics on the $1$-skeleton.

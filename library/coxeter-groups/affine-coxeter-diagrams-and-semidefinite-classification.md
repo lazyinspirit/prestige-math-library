@@ -2,24 +2,62 @@
 page: affine-coxeter-diagrams-and-semidefinite-classification
 title: "Affine Coxeter Diagrams and Semidefinite Classification"
 status: draft
-items: []
+requires: [finite-coxeter-diagrams-and-complete-classification, affine-reflections-coroot-translations-and-alcoves]
+items:
+  - lem-cg-similar-euclidean-simplices-from-shared-facet-normal-gram
+  - def-cg-irreducible-affine-coxeter-type
+  - lem-cg-positive-radical-and-affine-gram-exclusions
+  - def-cg-standard-affine-diagrams
+  - lem-cg-affine-slice-simplex-and-wall-reflections
+  - lem-cg-affine-type-crystallographic-alcove-diagrams
+  - lem-cg-affine-diagram-enumeration
+  - thm-cg-affine-gram-classification-and-euclidean-realization
 examples: []
 ---
 
-Affine type requires an irreducible positive-semidefinite Gram form of corank one, together with its resulting Euclidean chamber geometry. Twisted Lie labels and extended affine groups are distinct conventions.
+This page defines affine form type by the canonical Coxeter form: the diagram is
+connected and the form is positive semidefinite of corank one. It proves the
+positive-radical and proper-submatrix properties, classifies the standard affine
+diagrams, and constructs the associated Euclidean simplex reflection action.
+The crystallographic alcove model is matched by a facet-preserving similarity.
+An infinite Coxeter group is not automatically of affine form type; twisted
+Lie-theoretic diagrams and extended affine Weyl groups are separate conventions.
 
-This is a prose scaffold for future local item authoring. Its empty item lists do not assert proof completion. Every construction below is a named supplier contract; definitions are justified by the separately named existence, descent or uniqueness proofs before any application consumes their properties. Source reading supports the selected proof route and is not a substitute for a library proof.
+The items below are in current dependency order. The simplex-similarity result
+uses only published prerequisites and supplies the geometric comparison needed
+later in the classification.
 
-## Ordered construction and proof contracts
+## Items
 
-**def-cg-irreducible-affine-coxeter-type.** For connected finite-rank matrix define affine form type as canonical B positive semidefinite of corank one; do not define every infinite Coxeter group as affine. Define its radical quotient Euclidean space and affine slice using a positive radical vector.
+- [[lem-cg-similar-euclidean-simplices-from-shared-facet-normal-gram]] proves
+  that bounded Euclidean simplices with the same inward-unit-normal Gram matrix
+  are similar with labelled facets matched, so their facet-reflection groups
+  are conjugate.
 
-Definition justification: `thm-cg-affine-gram-classification-and-euclidean-realization`.
+- [[def-cg-irreducible-affine-coxeter-type]] defines affine form type and the
+  radical quotient and affine slice.
 
-**lem-cg-positive-radical-and-affine-gram-exclusions.** For connected positive-semidefinite B with nonzero kernel take x in the kernel. Nonpositive off-diagonal entries imply B(|x|,|x|)≤B(x,x)=0; semidefiniteness makes |x| a kernel vector. A zero coordinate propagates zeros through each negative edge, contradiction. Thus its coordinates are strictly positive; subtract a maximal multiple of this vector from any independent kernel vector to force a zero coordinate, proving corank one. A proper singular principal submatrix would extend a kernel vector by zeros, contradiction, so every proper principal submatrix is positive definite. Use the earlier determinant exclusions and determinant-zero arm/path recurrences to enumerate extended affine diagrams, separating rank-two infinity. No Perron–Frobenius theorem is presumed.
+- [[lem-cg-positive-radical-and-affine-gram-exclusions]] proves the positive
+  radical ray, corank one, positive definiteness of proper principal submatrices,
+  finiteness of proper standard parabolics, and the local domination exclusions.
 
-**thm-cg-affine-gram-classification-and-euclidean-realization.** Verify all affine families A-tilde_n(n≥1), B-tilde_n(n≥3), C-tilde_n(n≥2), D-tilde_n(n≥4), E-tilde6/7/8,F-tilde4,G-tilde2, with low-rank coincidences explicitly identified. Construct the Euclidean affine slice of dual U and its reflecting walls from the positive radical vector; match the crystallographic alcove constructions (duality conventions stated), proving equivalence of form type and Euclidean simplex Coxeter action. Do not use Kac–Moody classification as an elementary prerequisite.
+- [[def-cg-standard-affine-diagrams]] records the standard affine list and its
+  low-rank naming conventions.
 
-## Prerequisites and reading
+- [[lem-cg-affine-slice-simplex-and-wall-reflections]] constructs the faithful
+  Euclidean slice action, simplex, facet reflections, and closed-face
+  intersection rule.
 
-Required earlier pages: [[finite-coxeter-diagrams-and-complete-classification]], [[affine-reflections-coroot-translations-and-alcoves]]. The companion [[affine-coxeter-diagrams-and-semidefinite-classification-examples]] tests these constructions and conventions. Exact item dependencies and source reading limits are recorded in `research/coxeter-scaffold/inventory.json` and `research/plan-coxeter-groups-track.md`.
+- [[lem-cg-affine-type-crystallographic-alcove-diagrams]] computes the
+  crystallographic highest-root data, affine facet Gram matrices, and standard
+  affine realizations.
+- [[lem-cg-affine-diagram-enumeration]] completes the connected semidefinite
+  corank-one diagram enumeration.
+- [[thm-cg-affine-gram-classification-and-euclidean-realization]] assembles the
+  classification, Euclidean realization, fundamental-domain properties, and
+  conventions for coroot and coweight translation groups.
+
+The page requires the finite Coxeter classification and the affine
+reflection/coroot-translation theory. Its companion page tests the low-rank,
+reducible, and indefinite cases. No Kac–Moody classification or twisted
+Lie-theoretic diagram classification is asserted here.

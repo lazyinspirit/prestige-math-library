@@ -1,0 +1,1504 @@
+{
+  "version": 1,
+  "level": "frontier-42-coxeter-32",
+  "scope": [
+    "def-cg-deletion-chain-labels-and-shelling",
+    "lem-cg-bruhat-increasing-chain-and-local-descent-replacement",
+    "thm-cg-bruhat-deletion-label-shelling",
+    "thm-cg-bruhat-eulerian-intervals-and-mobius",
+    "ex-cg-s4-rank-three-interval-chain-labels-and-lex-first-chain",
+    "ex-cg-s4-rank-three-interval-mobius-from-recurrence",
+    "cex-cg-parabolic-quotient-interval-eulerian-claim-fails"
+  ],
+  "contracts": {
+    "def-cg-deletion-chain-labels-and-shelling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition (2) writes x_j as the increasing-position product over P_j. If x_j=1 then reducedness forces |P_j|=0, and the empty product is 1 under def-hh-coxeter-matrix-word-group-and-length. For u=v the chain has no deletion steps and its label word is empty. Neither case asks for a label from an empty P_j."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition (2): at rank zero the recursion performs no deletion and the label word is the empty tuple; the rooted-interval convention of (3) is stated only for a<b, so no empty deletion is requested."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-valued parameter occurs; a rank-one interval appears only through the reading of the increasing convention recorded in (4), which is quoted from the rooted-chain labeling framework instead of being asserted here."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition (3) records the degenerate feature that matters: the labelling is induced by one fixed reduced expression of v, and no comparison between labels produced by different fixed expressions is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition (1) runs maximal chains from v down to u; Definition (4) excludes both endpoints in the open interval and names the maximal chains of (u,v) as the facets of its order complex."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition (2): the position deleted at each step is unique by the cover criterion, and the fixed expression and the interval are part of the data, so nothing is selected from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The literal iff in Definition (4) is mprime prec m :iff lambda(mprime) prec lambda(m), defining the chain order from its label words. It asserts no implication from this order to shellability: the closing paragraph explicitly defers (N),(L) and the shelling theorem to thm-cg-bruhat-deletion-label-shelling.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/boundary_gate_repair",
+            "reason": "The literal iff in Definition (4) is mprime prec m :iff lambda(mprime) prec lambda(m), defining the chain order from its label words. It asserts no implication from this order to shellability: the closing paragraph explicitly defers (N),(L) and the shelling theorem to thm-cg-bruhat-deletion-label-shelling.",
+            "item_sha256": "d230b3947b853a99c1161ca93138b7bd816aa35067a837efef7a95c71853cebf",
+            "row_sha256": "ae8aeb5eea5d0d9c8d620c571a529b2d76ca28b3969722d40793f94f5d0681f5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse reading of mprime prec m :iff lambda(mprime) prec lambda(m) in clause (4) is the same definition of lexicographic chain comparison, not a converse shelling theorem. The earlier-facet criterion defines shelling and is not claimed for the deletion-label order in this item.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/boundary_gate_repair",
+            "reason": "The reverse reading of mprime prec m :iff lambda(mprime) prec lambda(m) in clause (4) is the same definition of lexicographic chain comparison, not a converse shelling theorem. The earlier-facet criterion defines shelling and is not claimed for the deletion-label order in this item.",
+            "item_sha256": "d230b3947b853a99c1161ca93138b7bd816aa35067a837efef7a95c71853cebf",
+            "row_sha256": "717bd7abcff55d684853606a878cda40d4cdbc9461a091db31099dceb62fba47"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Reviewed Definition (1)-(5) and all thirteen direct prerequisite interfaces. Gradedness supplies finite chains of length ell(v)-ell(u); cover/reflection deletion (3) gives a unique reduced single-position deletion. Retained original positions determine rooted labels, are distinct, and are compared only within one fixed word. Shelling is defined by the earlier-facet criterion, not assumed; (N)/(L) are deferred to the recorded justifier. At u=v the singleton chain has an empty label word; at a cover the one-term word is vacuously increasing/falling. Order-complex empty-face and Mobius diagonal/recurrence conventions agree with the local suppliers. Finite deterministic deletions use no AC. Reader/refuter list no finding; current raw bytes equal both snapshots. No defect found."
+      }
+    },
+    "lem-cg-bruhat-increasing-chain-and-local-descent-replacement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-deletion-chain-labels-and-shelling",
+          "source_section": "Definition",
+          "quote": "the cover $x_j\\gtrdot x_{j+1}$ determines a unique position $\\lambda_{j+1}(m)\\in P_j$ with $x_{j+1}=\\prod_{p\\in P_j\\setminus\\{\\lambda_{j+1}(m)\\}}s_p$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-cg-finite-lattice-congruence-and-interval-projections",
+          "source_section": "Definition",
+          "quote": "A maximal chain $m$ of $[x,y]$ is **increasing** if $\\lambda_1(m)<\\lambda_2(m)<\\cdots<\\lambda_n(m)$; it is **falling** if $\\lambda_1(m)\\ge\\lambda_2(m)\\ge\\cdots\\ge\\lambda_n(m)$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "Let $R\\subseteq F(S)$ be the set of relators $$R:=\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s,t\\in S,\\ m(s,t)<\\infty\\},$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "for every $x \\in G$ there is $y \\in G$ with $y * x = e = x * y$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cg-deletion-chain-labels-and-shelling",
+          "source_section": "Definition",
+          "quote": "a label is determined by the chain above its step and need not be a function of that step alone",
+          "uses": [
+            "1.3",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cg-bruhat-lifting-and-cover-criterion",
+          "source_section": "Statement",
+          "quote": "Then $v_i=vt_i$ and $v_i<v$; moreover $v_i$ is covered by $v$ if and only if $\\ell(v_i)=q-1$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cg-bruhat-lifting-and-cover-criterion",
+          "source_section": "Statement",
+          "quote": "For $u\\le v$ the following are equivalent: (i) $u$ is covered by $v$; (ii) $\\ell(v)=\\ell(u)+1$; (iii) $u=vt$ for some reflection $t\\in T$ with $\\ell(vt)=\\ell(v)-1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-cg-bruhat-right-exchange-and-augmentation",
+          "source_section": "Statement",
+          "quote": "Then $ut$ is the product of the word obtained from $s_1\\cdots s_q$ by deleting only the letters at the positions $i_1,\\dots,i_{k-1}$; that word has length $q-k+1=\\ell(u)+1$, and it is a reduced expression of $ut$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cg-bruhat-subword-characterization",
+          "source_section": "Statement",
+          "quote": "and the indices may be chosen with $k=\\ell(u)$, so that $s_{i_1}\\cdots s_{i_k}$ is then a reduced expression of $u$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-cg-bruhat-chain-refinement-and-gradedness",
+          "source_section": "Statement",
+          "quote": "Every maximal chain in $[u,v]$ has exactly $\\ell(v)-\\ell(u)$ strict steps, that is, $\\ell(v)-\\ell(u)+1$ elements; hence $[u,v]$ is a graded poset with rank function $x\\mapsto\\ell(x)-\\ell(u)$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "4.1",
+            "6.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-cg-bruhat-order-by-reflection-chains",
+          "source_section": "Definition",
+          "quote": "For all $u,v\\in W$ one has $u\\le v$ if and only if $u^{-1}\\le v^{-1}$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "By inversion ($w\\mapsto w^{-1}$ preserves lengths and interchanges the two coset families $\\{W_Ja\\}$ and $\\{aW_J\\}$), every left coset $aW_J:=\\{au:u\\in W_J\\}$ has a unique minimal element $d$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Cancellation identity.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F11",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Rank-two intervals have an increasing chain.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Lexicographic minimality of prefix and suffix.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At most one increasing chain.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The falling chain by inversion.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At most one falling chain.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The rank-two diamond.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "F1",
+            "F10",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Rank-two lexicographic base case and overlapping-prefix/suffix induction for ranks at least three.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "step 1.3",
+            "step 2.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Local descent replacement.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "step 4.1",
+            "F2",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 and step 5.1 both dispose of rank k<=1 as vacuous: a rank-zero interval has one maximal chain, consisting of its single element and having an empty label word and a rank-one interval has a single maximal chain, so uniqueness and lexicographic minimality hold without argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 is applied only with a deleted set P of size k>=1 and a position j>max P, so no empty deleted set occurs; the rank-zero interval is handled by the vacuity clause of step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 5.1 handle ranks zero and one directly. Step 4.1 proves the diamond and i<j<=p; step 5.1 uses it as the rank-two base before overlapping prefix/suffix words at ranks at least three."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 and step 3.1 handle the mirrored configuration: inverting exchanges first and last deleted positions, which is exactly where a comparison of last positions alone would break down."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 replaces only the element m_e in the segment, so both endpoints of the rooted interval are kept and the identity k' cap m = m minus {m_e} is the endpoint bookkeeping of the replacement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses the last deleted position d_2 minimally in a nonempty finite collection of deleted pairs. Steps 1.3 and 5.1 use a minimum of the finite nonempty maximal-chain set. Step 6.1 uses the unique increasing chain with the original root c extended by the prefix."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no biconditional at top level: clauses (i)-(iv) are separate statements about the labelling, and the only equivalence-like identification is the explicit comparison of label words."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is claimed; the diamond clause (ii) states both words and both chains as facts, not as an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Read all nine steps and exact F1-F11 supplier statements, with augmentation and subword proofs, inversion/length proof, cover criterion, and gradedness. Cancellation 1.1 only applies at k>=1 and j>max P. Equal final deleted positions imply the same penultimate vertex; induction gives increasing uniqueness. Reversal mirrors each retained original position, producing and uniquely characterizing the falling rank-two chain. The diamond has exactly two middle vertices and i<j<=p. Step 5.1 now proves the rank-two lexicographic base explicitly, then uses overlapping increasing prefix/suffix words only at k>=3. Replacement 6.1 keeps c plus the prefix, changes one middle vertex, and uses the first differing label; lower labels need not stay fixed. Ranks 0/1 are vacuous, finite minima require no AC. Reader repairs are mathematically sound; refuter has no finding. Bj\u00f6rner-Brenti Lemmas 2.7.2-2.7.4, printed pp.49-50, were read in full. Current item hash equals post-reader snapshot."
+      }
+    },
+    "thm-cg-bruhat-deletion-label-shelling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-deletion-chain-labels-and-shelling",
+          "source_section": "Definition",
+          "quote": "Its entries are pairwise distinct, because $P_0\\supsetneq P_1\\supsetneq\\cdots\\supsetneq P_k$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-cg-bruhat-order-by-reflection-chains",
+          "source_section": "Definition",
+          "quote": "Consequently $u\\le v$ together with $\\ell(u)=\\ell(v)$ forces $u=v$, and every $u<v$ (that is, $u\\le v$ and $u\\ne v$) satisfies $\\ell(u)<\\ell(v)$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cg-deletion-chain-labels-and-shelling",
+          "source_section": "Definition",
+          "quote": "Labels compared inside one rooted interval therefore belong to the one ordered set $\\{1,\\dots,q\\}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-deletion-chain-labels-and-shelling",
+          "source_section": "Definition",
+          "quote": "The order is a **shelling** of $K$, and $K$ is **shellable**, if for all $i<k$ there are $j<k$ and a vertex $x\\in F_k$ with $F_i\\cap F_k\\subseteq F_j\\cap F_k=F_k\\setminus\\{x\\}$",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cg-deletion-chain-labels-and-shelling",
+          "source_section": "Definition",
+          "quote": "The facets of the order complex $\\Delta([u,v])$ of $[u,v]$ are the maximal chains of $[u,v]$, and those of $\\Delta((u,v))$ are the maximal chains of the open interval $(u,v)$",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-face-poset-and-order-complex",
+          "source_section": "Definition",
+          "quote": "For a poset $(P,\\leq)$, its **order complex** $\\Delta P$ has vertex set $P$ and faces all finite chains in $P$, including the empty chain.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-abstract-simplicial-complex",
+          "source_section": "Definition",
+          "quote": "An **abstract simplicial complex** is a pair $(V,K)$ consisting of a set $V$ of vertices and a family $K$ of finite subsets of $V$ such that:",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-cg-bruhat-increasing-chain-and-local-descent-replacement",
+          "source_section": "Statement",
+          "quote": "$([a,b],c)$ has exactly one increasing maximal chain, and it is the lexicographically first maximal chain of $([a,b],c)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-cg-bruhat-increasing-chain-and-local-descent-replacement",
+          "source_section": "Statement",
+          "quote": "If $\\ell(b)-\\ell(a)=2$, then $[a,b]$ has exactly four elements, and its two maximal chains have label words $(i,j)$ and $(p,m)$ with $i<j$, $m<p$ and $i<j\\le p$; the first word is increasing and the second is falling.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-cg-lexicographic-chain-shelling-and-mobius-cancellation",
+          "source_section": "Statement",
+          "quote": "For all maximal chains $m',m$ of $[x,y]$ with $\\lambda(m')\\prec\\lambda(m)$ there is a maximal chain $k$ of $[x,y]$ with $\\lambda(k)\\prec\\lambda(m)$, $m'\\cap m\\subseteq k\\cap m$ and $|k\\cap m|=|m|-1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-cg-bruhat-chain-refinement-and-gradedness",
+          "source_section": "Statement",
+          "quote": "Every maximal chain in $[u,v]$ has exactly $\\ell(v)-\\ell(u)$ strict steps, that is, $\\ell(v)-\\ell(u)+1$ elements; hence $[u,v]$ is a graded poset with rank function $x\\mapsto\\ell(x)-\\ell(u)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-graded-poset-and-rank",
+          "source_section": "Definition",
+          "quote": "An element $y$ **covers** $x$ if $x<y$ and there is no $z\\in P$ with $x<z<y$. A **rank function** is a map $\\rho:P\\to\\mathbb N$ such that every minimal element has rank $0$ and",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-cg-lexicographic-chain-shelling-and-mobius-cancellation",
+          "source_section": "Statement",
+          "quote": "Removing the two endpoints $x,y$ from all chains, the same order is a shelling of the order complex $\\Delta((x,y))$ of the open interval, whose facets are the maximal chains of $(x,y)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Conditions (N) and (L).",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The label word determines the chain.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Small ranks.",
+          "step": "1.3",
+          "inputs": [
+            "F10",
+            "F3",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Earlier/later chain comparison.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F7",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Endpoint extension gives the facet bijection; removing two common endpoints preserves the codimension-one criterion with both sizes reduced by two.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.3: for u=v or n=1 the open interval is empty, the order complex has the single facet the empty simplex, and the shelling condition is vacuous; this is the empty case of the shelling claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof contains no division and no zero-valued parameter; the rank-zero case u=v is the empty-interval case recorded under empty, handled explicitly in step 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 covers rank-one intervals: the open interval is empty and the unique facet order is a shelling, which is the unit-rank case of clause (iv)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 treats n=2, the smallest non-vacuous case: the open interval is a two-element antichain and its order complex is two disjoint vertices, shellable in either order."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 handles n<=1 separately. For n>=2, E={u,v} has two elements and lies in every maximal-chain intersection; the removed vertex is interior and |F_k cap F_m|=|k cap m|-2=|m|-3=|F_m|-1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the label word determines its chain, so the lexicographic facet order is linear; step 2.1 instantiates the abstract replacement lemma rather than re-selecting a chain, and no family of nonempty sets is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem's claim is not a biconditional: clause (i) records two properties, clause (ii) an existence statement, and clause (iii) a shelling conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; the equivalence between the pairwise criterion and the abstract lemma is used as a supplier instance, not as a biconditional claim of this item."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Read five current proof steps and all direct supplier interfaces. Unique deletion gives distinct labels and injective chain words. Finite gradedness and the reviewed chain lemma give (N)/(L) at every root; ranks 0/1 have a single chain. Abstract comparison is invoked with exactly those hypotheses. Endpoint extension is a bijection between open facets and closed maximal chains; for n>=2 both common endpoints are removed, so intersection and facet sizes each drop by two and codimension one is preserved. The removed vertex is interior. Empty open intervals have the singleton empty facet; the rank-two diamond gives two incomparable vertices shellable in either order. Explicit n=ell(v)-ell(u) and u<=v make the rank-zero clause meaningful. No AC or topology result is imported. Reader notation, endpoint scope and cardinality repairs are accepted; refuter has no finding. Bj\u00f6rner-Brenti Theorem2.7.5 printed p.51 and local abstract shelling proof checked. Current raw hash equals post-reader snapshot."
+      }
+    },
+    "thm-cg-bruhat-eulerian-intervals-and-mobius": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cg-bruhat-lifting-and-cover-criterion",
+          "source_section": "Statement",
+          "quote": "(a) if $\\ell(vs)<\\ell(v)$ and $\\ell(us)>\\ell(u)$, then $us\\le v$ and $u\\le vs$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-cg-bruhat-deletion-label-shelling",
+          "source_section": "Statement",
+          "quote": "On every rooted interval of $[u,v]$ the labeling satisfies the no-tie condition (N) and the lex-increasing property (L)",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-cg-bruhat-chain-refinement-and-gradedness",
+          "source_section": "Statement",
+          "quote": "Every maximal chain in $[u,v]$ has exactly $\\ell(v)-\\ell(u)$ strict steps",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-cg-bruhat-order-by-reflection-chains",
+          "source_section": "Definition",
+          "quote": "Consequently $u\\le v$ together with $\\ell(u)=\\ell(v)$ forces $u=v$, and every $u<v$ (that is, $u\\le v$ and $u\\ne v$) satisfies $\\ell(u)<\\ell(v)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "**(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-cg-bruhat-parabolic-projection-and-quotients",
+          "source_section": "Statement",
+          "quote": "so $k=\\ell(w)-\\ell(u)$ and every maximal chain in $[u,w]^I:=[u,w]\\cap W^I$ has exactly $\\ell(w)-\\ell(u)$ steps: the subposet $W^I$ is graded by $\\ell$, and $[u,w]^I$ is finite.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hh-coxeter-exchange-deletion-and-faithfulness",
+          "source_section": "Statement",
+          "quote": "Consequently, for all $w\\in W$ and $s\\in S$, $$\\ell(sw)=\\ell(w)\\pm1,\\qquad \\ell(ws)=\\ell(w)\\pm1,$$ with $\\ell(sw)\\equiv\\ell(w)+1\\pmod2$ and $\\ell(ws)\\equiv\\ell(w)+1\\pmod2$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "A word $(s_1,\\dots,s_k)$ in $S$ is a **reduced expression** of $w$ when $w=s_1\\cdots s_k$ and $k=\\ell(w)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "Let $R\\subseteq F(S)$ be the set of relators $$R:=\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s,t\\in S,\\ m(s,t)<\\infty\\},$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-cg-bruhat-chain-refinement-and-gradedness",
+          "source_section": "Statement",
+          "quote": "$[u,v]$ is finite; more precisely, for every reduced expression $v=s_1\\cdots s_q$ there is an injection $[u,v]\\to\\{0,1\\}^q$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-poset-mobius-recurrence",
+          "source_section": "Statement",
+          "quote": "For a locally finite poset $P$ and $x\\le y$, $$\\mu_P(x,x)=1,$$ and, when $x<y$, $$\\sum_{x\\le z\\le y}\\mu_P(x,z)=0,\\qquad \\sum_{x\\le z\\le y}\\mu_P(z,y)=0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-poset-mobius-recurrence",
+          "source_section": "Statement",
+          "quote": "Either recurrence together with the diagonal values uniquely determines $\\mu_P$ interval by interval.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a finite set. Then there is **exactly one** $n \\in \\mathbb{N}$ with $A \\approx n$, and we write $$\\lvert A\\rvert := \\text{that } n,$$ the **cardinality**, or number of elements, of $A$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-cg-lexicographic-chain-shelling-and-mobius-cancellation",
+          "source_section": "Statement",
+          "quote": "For every rooted interval $([v,w],c)$ of $[x,y]$, with $\\mu$ the M\u00f6bius function of the poset $[v,w]$ ([[def-poset-mobius-function]]),",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Case 1: the lifting-paired involution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F13",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Case 2: the reduction to the strip $[u',v']$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F12",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induction yields the alternating sum; multiplication by (-1)^ell(v) gives the top-normalized form, with diagonal right-hand side one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The M\u00f6bius function.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The falling-chain count. By [F10] the deleted-position labeling satisfies (N) and (L) on every rooted interval of $[u,v]$, and by [F11] and [F5] the interval $[u,v]$ is finite and graded; hence the falling-chain formula [F9] applies to the rooted interval $([u,v],(v))$, whose root consists of the single vertex $v$ and has zero edges, and gives $\\mu(u,v)=(-1)^{\\ell(v)-\\ell(u)}\\cdot\\#\\{\\text{strictly falling maximal chains of }[u,v]\\}$. Comparing with step 3.1 shows that $[u,v]$ has exactly one strictly falling maximal chain, and conversely the count one reproduces (ii); this is (iii).",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F9",
+            "F10",
+            "F11",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Scope.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "F1",
+            "F14",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1: the base case a=b of the induction has the single term (-1)^l(a), and step 1.1 pairs every element of [u,v] for u<v; the empty interval case a>b never occurs because the induction ranges over comparable pairs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No division occurs anywhere in the proof: the alternating sums are integer combinations of signs, and the vanishing of the sum for u<v is the conclusion rather than a denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the rank-one pairs {z,zs} with l(z)=0 and l(zs)=1; the induction of step 2.1 starts from the one-element interval a=b, which is exactly the unit case of the cancellation formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 decides explicitly whether u<=v' or not; in both sub-cases u'=v' is excluded by the length computation, so the degenerate identification of the two refined endpoints is handled."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 apply the lifting cases at the top endpoint v and split on the sign of l(us) at the bottom endpoint u; the interval endpoints themselves are never summed twice because [u,v] is decomposed as [u',v] minus the strip B."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 selects the last letter of a reduced expression of v, a determinate choice, and uses the fixed involution z->zs; the sums range over the finite interval [u,v], so no choice function is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional: clause (i) gives two equivalent formulations of one equality, which is recorded as an equivalent form rather than an if-and-only-if claim of the theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted; the comparison between (ii) and (iii) is a consistency statement about two computed expressions, not a converse of a conditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Read all six proof steps and exact F1-F14 interfaces. The simple-descent pairing is a fixed-point-free involution of the full finite interval. In the common-descent case the strip B lies in [us,vs]; if u<=vs subtract [u,vs], otherwise B is [us,vs]. Each smaller interval is comparable with distinct endpoints: us<vs by length and u=vs would imply us=v against descent. Induction on endpoint-length sum is legitimate, including diagonal cases. Multiplication by (-1)^ell(v), rather than the previous factor, yields top-normalized signs with diagonal value one. The same bottom-normalized sign function satisfies the finite Mobius recurrence uniquely. The rooted (N)/(L) falling formula then gives exactly one falling chain, including the singleton rank-zero chain and one-cover rank-one case, in both directions of the stated equivalence. Quotient grading is not fullness and is not used to transfer parity. No AC. Reader sign repair accepted and refuter has no finding; current bytes match post-reader. Local lifting/parabolic and abstract chain-shelling proofs reviewed. Bj\u00f6rner-Brenti Corollaries2.7.10-11 and Zhao section4 checked, including Zhao printed inconsistent nonzero sum; Jones Theorem2.12/Corollary2.13 consulted only as an unused alternative, not certified recursively."
+      }
+    },
+    "ex-cg-s4-rank-three-interval-chain-labels-and-lex-first-chain": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cg-bruhat-lifting-and-cover-criterion",
+          "source_section": "Statement",
+          "quote": "Then $v_i=vt_i$ and $v_i<v$; moreover $v_i$ is covered by $v$ if and only if $\\ell(v_i)=q-1$, that is, if and only if the word $s_1\\cdots\\widehat{s_i}\\cdots s_q$ is reduced.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-cg-bruhat-deletion-label-shelling",
+          "source_section": "Statement",
+          "quote": "For all maximal chains $m',m$ of $[u,v]$ with $\\lambda(m')\\prec\\lambda(m)$ there is a maximal chain $k$ of $[u,v]$ with $\\lambda(k)\\prec\\lambda(m)$, $m'\\cap m\\subseteq k\\cap m$ and $|k\\cap m|=|m|-1$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-cg-bruhat-chain-refinement-and-gradedness",
+          "source_section": "Statement",
+          "quote": "Every maximal chain in $[u,v]$ has exactly $\\ell(v)-\\ell(u)$ strict steps, that is, $\\ell(v)-\\ell(u)+1$ elements; hence $[u,v]$ is a graded poset with rank function $x\\mapsto\\ell(x)-\\ell(u)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cg-bruhat-subword-characterization",
+          "source_section": "Statement",
+          "quote": "and the indices may be chosen with $k=\\ell(u)$, so that $s_{i_1}\\cdots s_{i_k}$ is then a reduced expression of $u$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "Then $s_i\\mapsto(i\\ i+1)$ extends to an isomorphism $W\\to S_n$ (the letters $1,\\dots,n$ carry the library's symmetric group by the order-preserving identification with $\\{0,\\dots,n-1\\}$, under which $(i\\ i+1)$ is the adjacent transposition $(i-1\\ i)$), and for every $w\\in W$, $$\\ell(w)=\\operatorname{inv}\\bigl(\\varphi(w)\\bigr),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-symmetric-group-and-permutation-notation",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, so that $n=\\{0,1,\\dots,n-1\\}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cg-deletion-chain-labels-and-shelling",
+          "source_section": "Definition",
+          "quote": "the cover $x_j\\gtrdot x_{j+1}$ determines a unique position $\\lambda_{j+1}(m)\\in P_j$ with $x_{j+1}=\\prod_{p\\in P_j\\setminus\\{\\lambda_{j+1}(m)\\}}s_p$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cg-finite-lattice-congruence-and-interval-projections",
+          "source_section": "Definition",
+          "quote": "A maximal chain $m$ of $[x,y]$ is **increasing** if $\\lambda_1(m)<\\lambda_2(m)<\\cdots<\\lambda_n(m)$; it is **falling** if $\\lambda_1(m)\\ge\\lambda_2(m)\\ge\\cdots\\ge\\lambda_n(m)$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-cg-bruhat-increasing-chain-and-local-descent-replacement",
+          "source_section": "Statement",
+          "quote": "$([a,b],c)$ has exactly one increasing maximal chain, and it is the lexicographically first maximal chain of $([a,b],c)$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-cg-bruhat-increasing-chain-and-local-descent-replacement",
+          "source_section": "Statement",
+          "quote": "If $\\ell(b)-\\ell(a)=2$, then $[a,b]$ has exactly four elements, and its two maximal chains have label words $(i,j)$ and $(p,m)$ with $i<j$, $m<p$ and $i<j\\le p$; the first word is increasing and the second is falling.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-cg-bruhat-increasing-chain-and-local-descent-replacement",
+          "source_section": "Statement",
+          "quote": "Then $k':=m_0\\gtrdot\\cdots\\gtrdot m_{e-1}\\gtrdot y\\gtrdot m_{e+1}\\gtrdot\\cdots\\gtrdot m_k$ is a maximal chain of $([a,b],c)$ with $\\lambda(k')\\prec\\lambda(m)$ and $k'\\cap m=m\\setminus\\{m_e\\}$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The eight elements.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The covers and the six maximal chains.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F11",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The label words.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The lexicographically first chain.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The local descent replacement.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F10",
+            "F8",
+            "F9"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the interval [e,c] with e<c in S4 and lists its elements; no union, product or indexed family is formed, and the empty subword already occurs as the product 1234."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 lists the length-zero element 1234 and verifies that each displayed word is reduced of its length; the cover list of step 1.2 begins with the three covers of the atoms over 1234."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the three length-one covers s greaterdot e through the cover criterion, and step 2.1 checks that the second and third labels are single deleted positions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The interval is a genuine rank-three interval in S4; no degenerate parameter regime (rank zero, collapsed chain or repeated label) is part of this example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 keeps the endpoints 2341 and 1234 of the chain and changes only the middle element, which is the explicit instance of k' cap m = m minus {m_e}."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 selects the lexicographically first chain by comparing the six displayed words of step 2.1, a determinate comparison on a finite listed set; no family of nonempty sets is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional; it lists the six chains, identifies the unique increasing one and exhibits the replacement, all as independent computations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is claimed; uniqueness of the increasing chain is quoted from the supplier and confirmed against the displayed list rather than proved as a converse here."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Read Example(i)-(iv), all five verification steps, F1-F11 and exact direct dependencies. Right multiplication swaps adjacent positions under composition sigma(tau(i)); the order-preserving shift from 0..3 to 1..4 preserves inversion counts and Coxeter generators. Independently enumerated all 8 subword products of s1s2s3 and their inversion ranks, all 12 covers via subword containment and rank difference, and all 6 recursive deleted-position chain words. Words are exactly the permutations of (1,2,3); unique increasing/falling words are (1,2,3)/(3,2,1). The descent replacement at position2 fixes root 2341>1342, retains original positions2,3, changes1324 to1243, and gives the exact intersection of size3. The empty subword and rank-one covers are included; no collapsed/repeated-label or AC case is asserted. Reader/refuter no findings; current bytes match both snapshots. No defect found. Bj\u00f6rner-Brenti deleted-position example and current local suppliers checked."
+      }
+    },
+    "ex-cg-s4-rank-three-interval-mobius-from-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cg-bruhat-subword-characterization",
+          "source_section": "Statement",
+          "quote": "and the indices may be chosen with $k=\\ell(u)$, so that $s_{i_1}\\cdots s_{i_k}$ is then a reduced expression of $u$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-cg-lexicographic-chain-shelling-and-mobius-cancellation",
+          "source_section": "Statement",
+          "quote": "For every rooted interval $([v,w],c)$ of $[x,y]$, with $\\mu$ the M\u00f6bius function of the poset $[v,w]$ ([[def-poset-mobius-function]]),",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a finite set. Then there is **exactly one** $n \\in \\mathbb{N}$ with $A \\approx n$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-cg-bruhat-chain-refinement-and-gradedness",
+          "source_section": "Statement",
+          "quote": "Every maximal chain in $[u,v]$ has exactly $\\ell(v)-\\ell(u)$ strict steps",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cg-bruhat-lifting-and-cover-criterion",
+          "source_section": "Statement",
+          "quote": "Then $v_i=vt_i$ and $v_i<v$; moreover $v_i$ is covered by $v$ if and only if $\\ell(v_i)=q-1$, that is, if and only if the word $s_1\\cdots\\widehat{s_i}\\cdots s_q$ is reduced.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "Then $s_i\\mapsto(i\\ i+1)$ extends to an isomorphism $W\\to S_n$ (the letters $1,\\dots,n$ carry the library's symmetric group by the order-preserving identification with $\\{0,\\dots,n-1\\}$, under which $(i\\ i+1)$ is the adjacent transposition $(i-1\\ i)$), and for every $w\\in W$, $$\\ell(w)=\\operatorname{inv}\\bigl(\\varphi(w)\\bigr),$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-poset-mobius-recurrence",
+          "source_section": "Statement",
+          "quote": "Equivalently, off the diagonal, $$\\mu_P(x,y)=-\\sum_{x\\le z<y}\\mu_P(x,z)=-\\sum_{x<z\\le y}\\mu_P(z,y).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cg-deletion-chain-labels-and-shelling",
+          "source_section": "Definition",
+          "quote": "the cover $x_j\\gtrdot x_{j+1}$ determines a unique position $\\lambda_{j+1}(m)\\in P_j$ with $x_{j+1}=\\prod_{p\\in P_j\\setminus\\{\\lambda_{j+1}(m)\\}}s_p$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cg-finite-lattice-congruence-and-interval-projections",
+          "source_section": "Definition",
+          "quote": "A maximal chain $m$ of $[x,y]$ is **increasing** if $\\lambda_1(m)<\\lambda_2(m)<\\cdots<\\lambda_n(m)$; it is **falling** if $\\lambda_1(m)\\ge\\lambda_2(m)\\ge\\cdots\\ge\\lambda_n(m)$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cg-bruhat-eulerian-intervals-and-mobius",
+          "source_section": "Statement",
+          "quote": "**(ii) M\u00f6bius function of a full interval.** $\\mu(u,v)=(-1)^{\\ell(v)-\\ell(u)}$, where $\\mu$ is the M\u00f6bius function of the interval",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cg-bruhat-eulerian-intervals-and-mobius",
+          "source_section": "Statement",
+          "quote": "equivalently, if $u<v$ then $[u,v]$ contains equally many elements of even and of odd length",
+          "uses": [
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-cg-bruhat-deletion-label-shelling",
+          "source_section": "Statement",
+          "quote": "On every rooted interval of $[u,v]$ the labeling satisfies the no-tie condition (N) and the lex-increasing property (L)",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The eight elements and the twelve covers.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F12",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The atoms.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Parity balance.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F11",
+            "F3",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The rank-two elements.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The top value.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The falling-chain check.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "F10",
+            "F12",
+            "F5",
+            "F6",
+            "F7",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Conclusion.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.2",
+            "step 4.1",
+            "step 5.1",
+            "F10",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 evaluates the alternating sum over the finite interval [e,c] exactly as 4-4=0; the rank-zero value mu(1234,1234)=1 is the starting point of the recursion in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 computes the parity sum as 4-4=0. Step 3.1 gives each rank-two M\u00f6bius value as one, not zero; step 4.1 gives the top value -1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the single-step intervals above the bottom: each atom covers 1234 with nothing strictly between, giving mu=-1, and the rank-one case of the recurrence is the only place a one-step interval occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that the word s1s2s3 is reduced and that its eight subword products are distinct one-line forms, so the possible degeneracy of a non-injective enumeration does not occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 5.1 compute the top value after all values strictly below the top, and the bottom 1234 is fixed as the base of the recursion, which is the endpoint discipline of the recurrence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 reads the six label words from the fixed cover diagram of step 1.1 and compares the six displayed words; nothing is selected from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional; it computes one value from the recurrence and checks it against two independent statements of the theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; agreement between the recurrence value and the falling-chain formula is reported as a consistency check, not as an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Read Example(i)-(iii), all seven verification steps and exact F1-F12 supplier interfaces. Independently enumerated the 8 reduced subword products and 12 covers, then computed bottom1, each atom-1, each rank-two value1 and top-1 by the actual finite recurrence. A rank-two element covers its two atoms, as the corrected Example now says. Parity counts are4even/4odd, not a zero rank-two Mobius contribution. Recursive original-position labels give exactly6 words with a single falling word(3,2,1), so the finite graded (N)/(L) supplier applies. Both endpoint values, empty subword, one-cover recursions and possible duplicate subwords are addressed. The phrase count-one clause of F7 refers to the same cited theorem iii; countone also follows directly from sign formula F7 and falling formula F10, so there is no unsupported inference. No AC. Reader cover-direction/false-boundary repairs accepted, contract numbering agrees, refuter no findings and current bytes equal post-reader snapshot. Bj\u00f6rner-Brenti parity/full-interval corollaries and Zhao Corollary4.3 checked."
+      }
+    },
+    "cex-cg-parabolic-quotient-interval-eulerian-claim-fails": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-parabolic-quotient-and-two-sided-minima",
+          "source_section": "Definition",
+          "quote": "$$W^I:=\\{w\\in W:\\ell(ws)>\\ell(w)\\text{ for all }s\\in I\\}=\\{w\\in W:D_R(w)\\cap I=\\emptyset\\},$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cg-bruhat-subword-characterization",
+          "source_section": "Statement",
+          "quote": "and the indices may be chosen with $k=\\ell(u)$, so that $s_{i_1}\\cdots s_{i_k}$ is then a reduced expression of $u$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cg-bruhat-parabolic-projection-and-quotients",
+          "source_section": "Statement",
+          "quote": "The subword criterion of [[thm-cg-bruhat-subword-characterization]] applies verbatim, since the order on $W^I$ is by definition the restriction of the order on $W$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cg-bruhat-subword-characterization",
+          "source_section": "Statement",
+          "quote": "and the indices may be chosen with $k=\\ell(u)$, so that $s_{i_1}\\cdots s_{i_k}$ is then a reduced expression of $u$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "Then $s_i\\mapsto(i\\ i+1)$ extends to an isomorphism $W\\to S_n$ (the letters $1,\\dots,n$ carry the library's symmetric group by the order-preserving identification with $\\{0,\\dots,n-1\\}$, under which $(i\\ i+1)$ is the adjacent transposition $(i-1\\ i)$), and for every $w\\in W$, $$\\ell(w)=\\operatorname{inv}\\bigl(\\varphi(w)\\bigr),$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-poset-mobius-recurrence",
+          "source_section": "Statement",
+          "quote": "Equivalently, off the diagonal, $$\\mu_P(x,y)=-\\sum_{x\\le z<y}\\mu_P(x,z)=-\\sum_{x<z\\le y}\\mu_P(z,y).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cg-bruhat-eulerian-intervals-and-mobius",
+          "source_section": "Statement",
+          "quote": "**(ii) M\u00f6bius function of a full interval.** $\\mu(u,v)=(-1)^{\\ell(v)-\\ell(u)}$, where $\\mu$ is the M\u00f6bius function of the interval",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cg-bruhat-parabolic-projection-and-quotients",
+          "source_section": "Statement",
+          "quote": "The subword criterion of [[thm-cg-bruhat-subword-characterization]] applies verbatim, since the order on $W^I$ is by definition the restriction of the order on $W$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cg-bruhat-eulerian-intervals-and-mobius",
+          "source_section": "Statement",
+          "quote": "It is not asserted for intervals of a proper parabolic quotient $W^I$ ([[thm-cg-bruhat-parabolic-projection-and-quotients]]): there the fullness of the interval is an additional hypothesis",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The quotient interval.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The covers.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The fullness failure.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The M\u00f6bius values.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The refutation.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.2",
+            "step 3.1",
+            "F4",
+            "F6",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample exhibits a six-element quotient interval and its two failures; no union or indexed family is formed, and the refuted universal claim is falsified by the two displayed values alone."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1: the computed value mu(1234,3412)=0 is the witness, compared with (-1)^4=1, so the zero value is the substance of the counterexample rather than an excluded boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: the atom 1324 is the unique element of length one in W^I, it covers the bottom, and its value mu=-1 enters the later recursions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 exhibits the fullness failure by a concrete element 1432 that lies in the full interval but not in the quotient, which is exactly the non-degenerate case excluded by the theorem's scope clause."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 identify the bottom 1234 and the top 3412 of the quotient interval, and the recursion of step 3.1 runs from the bottom to the top."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the recurrence over the six displayed elements of an explicitly listed finite quotient; no selection from a family of nonempty sets is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional; it refutes one universal claim and identifies the single dropped hypothesis that repairs it."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is asserted; the true statement used for the comparison is the full-interval sign formula quoted as a fact."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Read the refuted universal claim, all five counterexample steps and exact F1-F7 interfaces. Independently tested all24 permutations for no right descents at s1,s3: exactly1234,1324,1423,2314,2413,3412, ranks0,1,2,2,3,4. Subword containment verifies all6 displayed covers and greatest3412, with no extra covers by quotient gradedness. Recurrence in the induced quotient gives bottom1, atom-1, then0,0,0,0; top0 differs from (-1)^4=1. Word s2s1s3s2 is reduced with value3412; positions1,3,4 give1432 of length3, which has right s3 descent to1423 of length2, so fullness really fails. TypeA supplier F4 supplies the 1..4 letter transport to the published0..3 convention. Empty subword, atom and zero-valued witness included. Refuted claim is universal over I and comparable endpoints, and this single finite witness suffices; no converse or AC is asserted. Local quotient definition/projection proof and full-interval sign supplier checked; Bj\u00f6rner-Brenti fullness and Corollary2.7.10 p.53 consulted. Reader/refuter no findings; current bytes match both snapshots. No defect found."
+      }
+    }
+  }
+}

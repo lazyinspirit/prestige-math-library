@@ -2,24 +2,22 @@
 page: crystallographic-root-lattices-and-weyl-group-interfaces
 title: "Crystallographic Root Lattices and Weyl Group Interfaces"
 status: draft
-items: []
+items: [def-cg-crystallographic-scaling-coroot-and-lattice, lem-cg-integer-pairings-and-allowed-dihedral-labels, thm-cg-crystallographic-finite-type-and-lattice-stability]
 examples: []
 ---
 
-Crystallographic structure is additional arithmetic data. Root lengths and integral coroot pairings identify which finite Coxeter systems arise as Weyl groups while preserving the distinction between a Lie root system and an arbitrary real reflection system.
+Crystallographic structure adds arithmetic data to a finite reflection system. A positive scaling of the simple normals determines coroots and Cartan integers; requiring those integers to be integral constrains the root lengths and the finite rank-two labels. This page develops the root and weight lattices, constructs compatible scalings on trees, and connects the resulting root systems with their Weyl groups.
 
-This is a prose scaffold for future local item authoring. Its empty item lists do not assert proof completion. Every construction below is a named supplier contract; definitions are justified by the separately named existence, descent or uniqueness proofs before any application consumes their properties. Source reading supports the selected proof route and is not a substitute for a library proof.
+The three items are ordered so that the scaling conventions precede the integrality lemma, which in turn supplies the finite-type theorem.
 
-## Ordered construction and proof contracts
+## Development
 
-**def-cg-crystallographic-scaling-coroot-and-lattice.** For positive-definite finite Coxeter geometry choose scaled simple roots a_s=c_s e_s. Define a_s∨=2a_s/B(a_s,a_s), integrality of B(a_t,a_s∨), root lattice Q and coroot lattice Q∨ as integer spans; weight lattice is the dual lattice under the specified pairing. This property declaration does not promise a scale for H or all I2(m).
+**Scaling and lattices.** `def-cg-crystallographic-scaling-coroot-and-lattice` defines the scaled roots and coroots, Cartan entries, crystallographic condition, and root, coroot and weight lattices. The definition does not assume positive definiteness or promise a scaling for every dihedral label.
 
-Definition justification: `thm-cg-crystallographic-finite-type-and-lattice-stability`.
+**Integer pairings and labels.** `lem-cg-integer-pairings-and-allowed-dihedral-labels` computes the Cartan products, restricts finite positive-definite crystallographic labels to 2, 3, 4 and 6, gives tree scalings, and proves lattice and root-coroot pairing stability.
 
-**lem-cg-integer-pairings-and-allowed-dihedral-labels.** Compute a_st a_ts=4cos²(pi/m_st) and use integer negativity and positive definiteness to obtain products 0,1,2,3, hence labels 2,3,4,6. On a tree choose root-length ratios along edges and verify the resulting integral matrices. Establish stability r_s(Q)=Q and r_s(Q∨)=Q∨ by the explicit reflection formula.
+**Finite type and lattice stability.** `thm-cg-crystallographic-finite-type-and-lattice-stability` relates the finite Coxeter types to crystallographic realizations, proves the root-system and Weyl-group claims, and records how the length choices at a 4- or 6-edge transpose the Cartan matrix.
 
-**thm-cg-crystallographic-finite-type-and-lattice-stability.** Combine the complete finite diagram list and allowed labels: precisely A,B,D,E,F4 and I2(6) (G2), with dual B/C length choices and products, admit reduced crystallographic realizations. Reuse the published root-system/base and Weyl-group results only after checking finiteness, spanning, reducedness and integrality; they do not prove arbitrary Coxeter root positivity.
+## Prerequisites
 
-## Prerequisites and reading
-
-Required earlier pages: [[finite-coxeter-diagrams-and-complete-classification]], [[root-systems-dynkin-diagrams-and-cartan-killing-classification]]. The companion [[crystallographic-root-lattices-and-weyl-group-interfaces-examples]] tests these constructions and conventions. Exact item dependencies and source reading limits are recorded in `research/coxeter-scaffold/inventory.json` and `research/plan-coxeter-groups-track.md`.
+The finite Coxeter classification and the published root-system classification are earlier prerequisites. The companion [[crystallographic-root-lattices-and-weyl-group-interfaces-examples]] gives explicit A2, B2/C2 and G2 realizations and the I2(5) obstruction.

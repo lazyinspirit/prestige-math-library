@@ -2,28 +2,48 @@
 page: large-spherical-metric-flags-and-the-moussong-girth-theorem
 title: "Large Spherical Metric Flags and the Moussong Girth Theorem"
 status: draft
-items: []
+items:
+  - def-cg-large-spherical-metric-flag-and-almost-negative-matrix
+  - lem-cg-cat-zero-products-and-cat-one-joins
+  - lem-cg-metric-flag-links-and-local-cat-one
+  - def-cg-coxeter-nerve-and-moussong-metric
+  - lem-cg-minimum-nonshrinkable-loop-and-radial-vertex-insertion
+  - thm-cg-large-metric-flag-short-loop-radial-contradiction
+  - thm-cg-large-metric-flag-complexes-are-cat-one
+  - cor-cg-coxeter-nerve-is-cat-one-and-has-girth-at-least-two-pi
 examples: []
 ---
 
-The nerve need not be an ordinary flag complex. Its spherical edges are at least pi/2, and positive definiteness is the exact face test. The selected complete proof uses Bowditch quantitative short-loop control plus the Bridson–Haefliger compact systole theorem and Davis radial insertion, avoiding a defective step in an alternative Moussong suspension proof.
+A finite piecewise spherical complex is **large** here when each simplex has Gram off-diagonal entries at most zero, equivalently when each edge has length at least $\pi/2$. It is **metric flag** when a pairwise adjacent vertex set spans a simplex exactly when its prescribed cosine matrix is positive definite. This metric criterion allows cliques that are not filled when their Gram matrix is singular or indefinite.
 
-This is a prose scaffold for future local item authoring. Its empty item lists do not assert proof completion. Every construction below is a named supplier contract; definitions are justified by the separately named existence, descent or uniqueness proofs before any application consumes their properties. Source reading supports the selected proof route and is not a substitute for a library proof.
+The page's authored chain connects that local matrix condition to the CAT(1) property and to the Coxeter nerve. Its proofs use compact untruncated components, confined radial insertion, and dimension induction. The page remains draft pending the build's independent review and publication controls.
 
-## Ordered construction and proof contracts
+## Large spherical metric flags
 
-**def-cg-large-spherical-metric-flag-and-almost-negative-matrix.** Define a finite piecewise spherical complex with each simplex Gram off-diagonal≤0 (all edges≥pi/2). Metric flag means any pairwise adjacent vertex set spans a simplex exactly when its cosine Gram matrix is positive definite. Define the associated almost-negative matrix and link via Schur complement; no unrestricted small-edge flag theorem is promised.
+[[def-cg-large-spherical-metric-flag-and-almost-negative-matrix]] fixes the edge-length convention, the almost-negative matrix with value $-1$ on nonedges, the positive-definite metric-flag test, and the Schur-complement description of face links. It does not assert CAT(1) curvature.
 
-Definition justification: `thm-cg-large-metric-flag-complexes-are-cat-one`.
+[[lem-cg-cat-zero-products-and-cat-one-joins]] proves the CAT(0) product and CAT(1) spherical-join facts used by the local models. [[lem-cg-metric-flag-links-and-local-cat-one]] proves that face links remain large metric flag complexes, identifies the local spherical-cone charts, and states the curvature step conditionally on CAT(1) for all smaller-dimensional links.
 
-**lem-cg-metric-flag-links-and-local-cat-one.** Prove every face link is a finite large metric-flag complex: normalized Schur complement preserves nonpositive off-diagonal entries and positive-definite face tests. State the local-curvature implication CONDITIONALLY: if all large metric-flag complexes of dimension<d are CAT(1), then the angular links of a d-dimensional one are CAT(1), so supplied cone/product charts make it locally CAT(1). This is the inductive helper, not an unconditional lemma secretly consuming the later theorem. Prove the dimension-zero base: distinct isolated vertices have truncated angular distancepi and there are no sub-pi paths; empty links are vacuous and have point cones. Use componentwise intrinsic metrics for compact geodesic arguments and prove that all perimeter<2pi comparisons agree with the real truncated metric. The final global theorem closes this dimension induction using the next two conditional helpers.
+[[def-cg-coxeter-nerve-and-moussong-metric]] constructs the nerve from the positive-definite principal submatrices of the Coxeter cosine form. It distinguishes prescribed one-cell lengths from global chain distances and defines the finite truncated angular metric across disconnected components.
 
-**lem-cg-minimum-nonshrinkable-loop-and-radial-vertex-insertion.** Assume a finite large metric-flag complex is locally CAT(1) and fails global CAT(1). The compact systole theorem gives m<2pi realized by an embedded circle; quantitative short-loop control makes smaller loops shrinkable and this circle nonshrinkable. Minimum nonshrinkable loops are locally geodesic since a strict local shortening preserves their short class and contradicts m. Establish radius-pi/2 cone charts inside vertex stars by first-exit radial distance; no other vertex lies in the open ball and all points lie in some such ball by 1=Σa_i B(x,v_i). For a star-cone excursion, develop its local geodesic into a hemisphere: it has antipodal equatorial endpoints and length pi, then rotation to the two meridians through the center gives a constant-length homotopy preserving old vertices. A loop wholly inside an open cone contracts radially with nonincreasing length (the radial factor and sin(tr)/sin(r) are≤1), so the initial embedded minimum circle has a genuine excursion with distinct endpoints and a positive-length complementary arc; hence m>pi. The minimum-circle injectivity-radius proof gives r=m/2, so local geodesics of length<pi/2 are uniquely minimizing. There is at most one excursion for each vertex, since m<2pi. Maximize distinct visited vertices among minimum loops (at most three since vertex distances≥pi/2). To force an outgoing ray to be an edge, choose a maximal continuation inside a simplex containing its initial support; at its opposite face a different support vertex w has positive pairing, so the loop enters w’s open cone. If w is absent, insert it. If w is already visited, its unique excursion contains the ray’s entry and its passage through w; the subarc from that entry to w has length<pi/2 and is the unique short local geodesic, by the minimal-circle injectivity radius r=m/2>pi/2. The convex spherical simplex radial segment to w is another such local geodesic, hence they agree; local continuation then identifies the ray from the original vertex with its edge to w. Supply the nonskeletal support/first-exit, hemisphere development and short-geodesic uniqueness details. This uses minimal systole rather than an unproved globally convex star.
+## The short-loop route
 
-**thm-cg-large-metric-flag-short-loop-radial-contradiction.** A nonsrinkable local geodesic edge loop of length<2pi has exactly3 edges: fewer are immediate backtracks, and4 or more have length≥2pi. For its three side lengths in [pi/2,pi), perimeter<2pi implies positive-definite cosine Gram matrix (verify the sine-product determinant formula and triangle inequalities). Metric flag fills its spherical triangle, whose corner angles<pi contradict local geodesicity of the boundary. Therefore no minimum nonshrinkable circle exists and the compact locally CAT(1) complex is CAT(1). Disconnected components are treated separately with infinite angular intercomponent convention.
+For a finite large metric flag complex that is locally CAT(1) and not CAT(1), the short-loop supplier applies to its compact untruncated geodesic components and gives an attained minimum nonshrinkable circle under AC. The radial-insertion lemma reduces a minimum loop chosen to maximize vertex visits to a locally geodesic loop in the 1-skeleton with at most three vertices. Its proof establishes the CAT(1) vertex link from a small local chart, develops only the actual excursion trace, and inserts its centre by a constant-length homotopy inside that trace cone. The first-exit and tangent-direction arguments then force the loop to follow edges in [[lem-cg-minimum-nonshrinkable-loop-and-radial-vertex-insertion]].
 
-**thm-cg-large-metric-flag-complexes-are-cat-one.** Prove by dimension induction the precise finite large-simplex CAT(1) theorem. Dimension zero is the supplied discrete angular convention. At dimension d the inherited-link lemma and the already proved theorem in strictly smaller dimensions give local CAT(1); finite spherical metric compactness and minimizing paths are supplied. If global CAT(1) failed, the compact short-circle criterion and quantitative short-class theorem give a shortest nonshrinkable circle; radial insertion and the triangle-Gram contradiction, each conditional on local CAT(1), exclude it. Thus the induction closes without an ordinary dependency cycle. Treat disconnected components separately. The local-contract chain is proof-design closure, not certification that future item proofs are authored.
+[[thm-cg-large-metric-flag-short-loop-radial-contradiction]] proves the short edge-loop count, the three-edge Gram determinant calculation, and the corner shortening. Together with the minimum-loop reduction, these steps prove that a finite locally CAT(1) large metric flag complex is CAT(1).
 
-## Prerequisites and reading
+## Coxeter nerve and CAT(1)
 
-Required earlier pages: [[cat-comparison-link-criteria-and-local-globalization]], [[finite-coxeter-diagrams-and-complete-classification]], [[short-loop-polygons-and-quantitative-energy-decrease]]. The companion [[large-spherical-metric-flags-and-the-moussong-girth-theorem-examples]] tests these constructions and conventions. Exact item dependencies and source reading limits are recorded in `research/coxeter-scaffold/inventory.json` and `research/plan-coxeter-groups-track.md`.
+[[thm-cg-large-metric-flag-complexes-are-cat-one]] supplies the zero-dimensional base, the component reduction, and the dimension-induction link step. The short-loop contradiction theorem closes the induction and gives CAT(1) in every finite dimension.
+
+[[cor-cg-coxeter-nerve-is-cat-one-and-has-girth-at-least-two-pi]] uses the finite-type/positive-definite dictionary to identify the nerve as a large metric flag complex and then transfers CAT(1) and girth conclusions to all face links. The induction theorem yields these conclusions. Its AC assumption is explicit and propagates from finite spherical minimizing geodesics and the Bowditch short-loop argument.
+
+The proof route does not consume Moussong's Lemma 9.11. Möller gives a counterexample to that lemma in its stated generality; the repair for the hyperbolicity criterion remains outside this page's claims. This page asserts no Coxeter-group hyperbolicity theorem.
+
+## Companion examples
+
+The companion [[large-spherical-metric-flags-and-the-moussong-girth-theorem-examples]] gives two explicit calculations: the affine $\widetilde A_2$ nerve and the contrast between a filled all-right triangle and a disconnected universal-Coxeter nerve. Their local matrix and metric conclusions are checked directly.
+
+## Prerequisites
+
+The required earlier pages are [[cat-comparison-link-criteria-and-local-globalization]], [[finite-coxeter-diagrams-and-complete-classification]], and [[short-loop-polygons-and-quantitative-energy-decrease]]. Dependency evidence and source locators are recorded in the batch manifest and coverage file.

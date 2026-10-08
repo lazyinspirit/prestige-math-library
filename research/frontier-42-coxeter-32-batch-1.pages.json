@@ -1,0 +1,582 @@
+[
+  {
+    "order": 1688,
+    "id": "tensor-coherence-and-algebraic-descent",
+    "kind": "A",
+    "category": "hopf-hecke-algebras",
+    "title": "Tensor Coherence and Algebraic Descent",
+    "companion": "tensor-coherence-and-algebraic-descent-examples",
+    "requires": [
+      "tensor-products-of-modules",
+      "modules-and-module-homomorphisms",
+      "ideals-and-quotient-rings",
+      "dual-spaces-bilinear-forms-and-inertia",
+      "linear-independence-bases-and-dimension",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "chain-conditions-and-semisimple-modules",
+      "relations-functions-and-quotients"
+    ],
+    "items": [
+      {
+        "id": "def-hh-scalar-and-tensor-conventions",
+        "kind": "definition",
+        "title": "Scalars, tensor powers, the empty tensor, opposite algebras and finite sums",
+        "deps": [
+          "def-field",
+          "def-vector-space",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-universal-property-of-module-tensor-products",
+          "thm-commutative-ring-module-structure-on-a-tensor-product",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "def-algebra-over-a-commutative-ring",
+          "def-opposite-ring",
+          "def-finite-sum-in-a-commutative-monoid"
+        ],
+        "statement": "Fix the following conventions, used on this page and by the later Hopf and Hecke pages.\n\n- $k$ is a field ([[def-field]]) and every vector space is a $k$-vector space ([[def-vector-space]]); $\\otimes$ means $\\otimes_k$.\n- $V\\otimes W$ is the tensor product of [[def-tensor-product-of-modules-by-generators-and-relations]], with the $k$-vector-space structure of [[thm-commutative-ring-module-structure-on-a-tensor-product]] and unit and universal property as in [[thm-universal-property-of-module-tensor-products]]. Every element of $V\\otimes W$ is a finite sum of elementary tensors $v\\otimes w$.\n- Tensor powers are left-associated: $V^{\\otimes 0}:=k$, $V^{\\otimes 1}:=V$ and $V^{\\otimes n}:=(V^{\\otimes(n-1)})\\otimes V$ for $n\\ge2$. The empty tensor $k$ is identified with the tensor unit through the isomorphisms of [[thm-unit-isomorphisms-for-module-tensor-products]].\n- For an algebra $A$ over a commutative ring ([[def-algebra-over-a-commutative-ring]]) the opposite algebra $A^{\\mathrm{op}}$ has the same underlying set and structure map and product $a\\cdot b:=ba$ ([[def-opposite-ring]]).\n- Finite sums $\\sum_{i\\in I}x_i$ follow [[def-finite-sum-in-a-commutative-monoid]]; an empty sum is $0$.\n\nParentheses in iterated tensor products may be dropped only after [[lem-hh-tensor-coherence-on-elementary-tensors]] has been proved.",
+        "strategy": "A conventions item: every displayed symbol names an already constructed published object, and the only substantive assertions are that $V\\otimes W$ is a $k$-vector space and that elementary tensors span it, which are the cited published statements. The left-associated recursion is a definition by recursion on $n$, so no existence proof is owed; the well-definedness obligations that the conventions create for consumers (associativity and unit coherence of iterated tensor products) are discharged by [[lem-hh-tensor-coherence-on-elementary-tensors]], which is the recorded justifier of this definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "\u00a7\u00a71\u20133, printed pp. 1\u201313: elementary tensors, general tensors as finite sums, and the universal property used to fix the conventions"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-hh-tensor-coherence-on-elementary-tensors"
+        ]
+      },
+      {
+        "id": "lem-hh-tensor-coherence-on-elementary-tensors",
+        "kind": "lemma",
+        "title": "Associator naturality, pentagon, unit triangle and symmetry hexagons on elementary tensors",
+        "deps": [
+          "def-hh-scalar-and-tensor-conventions",
+          "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "prop-functoriality-of-module-tensor-products",
+          "def-tensor-product-of-modules-by-generators-and-relations"
+        ],
+        "statement": "Let $k$ be a field and let $L,M,N,X$ be $k$-vector spaces. Write $\\alpha_{A,B,C}:(A\\otimes B)\\otimes C\\to A\\otimes(B\\otimes C)$ for the associators of [[thm-symmetry-and-associativity-over-a-commutative-ring]], $\\sigma_{A,B}$ for its symmetries, and $\\lambda,\\rho$ for the unit isomorphisms of [[thm-unit-isomorphisms-for-module-tensor-products]].\n\n1. **Naturality.** $\\alpha$ and $\\sigma$ are natural in all variables: for linear maps the usual squares commute; the unit isomorphisms are natural as well.\n2. **Pentagon.** $(\\mathrm{id}_L\\otimes\\alpha_{M,N,X})\\circ\\alpha_{L,M\\otimes N,X}\\circ(\\alpha_{L,M,N}\\otimes\\mathrm{id}_X)=\\alpha_{L,M,N\\otimes X}\\circ\\alpha_{L\\otimes M,N,X}$ as maps $((L\\otimes M)\\otimes N)\\otimes X\\to L\\otimes(M\\otimes(N\\otimes X))$.\n3. **Unit triangle.** $(\\mathrm{id}_M\\otimes\\lambda_N)\\circ\\alpha_{M,k,N}=\\rho_M\\otimes\\mathrm{id}_N$ as maps $(M\\otimes k)\\otimes N\\to M\\otimes N$.\n4. **First symmetry hexagon.** $\\alpha_{L,N,M}\\circ(\\sigma_{N,L}\\otimes\\mathrm{id}_M)\\circ\\alpha^{-1}_{N,L,M}\\circ\\sigma_{L\\otimes M,N}=(\\mathrm{id}_L\\otimes\\sigma_{M,N})\\circ\\alpha_{L,M,N}$ as maps $((L\\otimes M)\\otimes N)\\to L\\otimes(N\\otimes M)$.\n5. **Second symmetry hexagon.** $\\alpha^{-1}_{N,L,M}\\circ\\sigma_{L\\otimes M,N}\\circ\\alpha^{-1}_{L,M,N}=(\\sigma_{L,N}\\otimes\\mathrm{id}_M)\\circ\\alpha^{-1}_{L,N,M}\\circ(\\mathrm{id}_L\\otimes\\sigma_{M,N})$ as maps $L\\otimes(M\\otimes N)\\to(N\\otimes L)\\otimes M$.\n\nAll five identities are equalities of $k$-linear maps between iterated tensor products.",
+        "strategy": "Check every identity on elementary tensors and extend by linearity. For the pentagon both composites send an elementary tensor $((l\\otimes m)\\otimes n)\\otimes x$ to $l\\otimes(m\\otimes(n\\otimes x))$; the unit triangle sends $(m\\otimes c)\\otimes n$ to $m\\otimes(cn)=cm\\otimes n$ on both sides; the first hexagon sends $((l\\otimes m)\\otimes n)$ to $l\\otimes(n\\otimes m)$ along both routes, and the second sends $l\\otimes(m\\otimes n)$ to $(n\\otimes l)\\otimes m$ along both routes. Naturality squares are checked on elementary tensors, where functoriality of $\\otimes$ ([[prop-functoriality-of-module-tensor-products]]) computes both composites. Both sides of each diagram are $k$-linear maps on a tensor power, and elementary tensors span it ([[def-tensor-product-of-modules-by-generators-and-relations]]), so agreement on elementary tensors proves each identity. No general monoidal coherence theorem is invoked.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorems 5.1\u20135.3, printed pp. 23\u201326: symmetry, associativity and distributivity isomorphisms and their elementary-tensor computations"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hh-tensor-injections-quotients-and-kernels-over-a-field",
+        "kind": "lemma",
+        "title": "Tensoring injections and the kernel of a tensor product of quotient maps over a field",
+        "deps": [
+          "def-hh-scalar-and-tensor-conventions",
+          "def-axiom-of-choice",
+          "cor-a-linear-subspace-has-a-complement",
+          "def-linear-subspace",
+          "def-internal-direct-sum",
+          "def-quotient-module",
+          "def-kernel-and-image-of-a-linear-map",
+          "prop-functoriality-of-module-tensor-products",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "thm-second-isomorphism-theorem-modules"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $k$ be a field, let $f:V\\to V'$ be an injective linear map and let $W$ be a $k$-vector space. Then $f\\otimes\\mathrm{id}_W:V\\otimes W\\to V'\\otimes W$ is injective. Moreover, if $U\\subseteq V$ and $Z\\subseteq W$ are subspaces and $p:V\\to V/U$, $q:W\\to W/Z$ are the quotient maps, then, viewing $U\\otimes W$ and $V\\otimes Z$ as subspaces of $V\\otimes W$ through the injections of the first part and the inclusions $U\\subseteq V$, $Z\\subseteq W$,\n$$\\ker(p\\otimes q)=U\\otimes W+V\\otimes Z .$$",
+        "strategy": "1.1 Injectivity: by [[cor-a-linear-subspace-has-a-complement]] write $V'=f(V)\\oplus C$ and define the linear map $g:V'\\to V$ by $g(f(v))=v$ and $g(C)=0$. Functoriality ([[prop-functoriality-of-module-tensor-products]]) gives $(g\\otimes\\mathrm{id}_W)\\circ(f\\otimes\\mathrm{id}_W)=(g\\circ f)\\otimes\\mathrm{id}_W=\\mathrm{id}_{V\\otimes W}$, so $f\\otimes\\mathrm{id}_W$ is injective.\n2.1 Kernel: write $V=U\\oplus V_1$ and $W=Z\\oplus W_1$ as direct sums of linear subspaces. Then $V/U\\cong V_1$ and $W/Z\\cong W_1$ by [[thm-second-isomorphism-theorem-modules]] applied to the first inclusions.\n3.1 Distributivity of $\\otimes$ over direct sums ([[thm-tensor-products-commute-with-arbitrary-direct-sums]]) and the unit isomorphisms give $$V\\otimes W\\cong(U\\otimes W)\\oplus(V_1\\otimes Z)\\oplus(V_1\\otimes W_1),$$ where the first summand groups $U\\otimes W=U\\otimes Z\\oplus U\\otimes W_1$ via the unit isomorphisms; under this identification $p\\otimes q$ is zero on $U\\otimes W$, zero on $V_1\\otimes Z$ and the canonical isomorphism $V_1\\otimes W_1\\to(V/U)\\otimes(W/Z)$ on the last summand.\n4.1 Hence $\\ker(p\\otimes q)=U\\otimes W\\oplus V_1\\otimes Z$ inside the decomposition. Since the image of $U\\otimes Z\\to V\\otimes W$ lies in the image of $U\\otimes W\\to V\\otimes W$ (both are induced by the inclusions $U\\subseteq V$, $Z\\subseteq W$), $U\\otimes W+V\\otimes Z=U\\otimes W\\oplus V_1\\otimes Z$, which is the kernel.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 4.15, printed pp. 18\u201319: unique tensor coefficients with a free factor; Remark 4.17, printed p. 19, and Theorem 5.17 and Corollary 5.18, printed p. 34: the distinction between injectivity on elementary tensors and on all tensors"
+            },
+            {
+              "title": "The CRing Project, open-source commutative algebra text (2016 PDF; Chapter 13)",
+              "url": "https://math.colorado.edu/topology/cringproject.pdf",
+              "locator": "\u00a713.4.1\u201313.4.3, printed pp. 143\u2013145: right exactness of $\\otimes$ and the sharpness of its failure to preserve injections"
+            }
+          ]
+        },
+        "axiom_use": "AC is consumed exactly through [[cor-a-linear-subspace-has-a-complement]], for the complement of the image of $f$ and for complements of $U$ in $V$ and of $Z$ in $W$ (written $V=U\\oplus V_1$ and $W=Z\\oplus W_1$); no other choice is made."
+      },
+      {
+        "id": "lem-hh-coefficient-extension-and-finite-tensor-separation",
+        "kind": "lemma",
+        "title": "Coefficient separation for an independent family of vectors, with explicit Choice assumptions",
+        "deps": [
+          "def-hh-scalar-and-tensor-conventions",
+          "lem-hh-tensor-injections-quotients-and-kernels-over-a-field",
+          "def-axiom-of-choice",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "prop-functoriality-of-module-tensor-products",
+          "def-linear-combination-and-span"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $v_1,\\dots,v_n\\in V$ be linearly independent vectors in a $k$-vector space $V$ and let $w_1,\\dots,w_n\\in W$ satisfy $\\sum_{i=1}^n v_i\\otimes w_i=0$ in $V\\otimes W$. Then $w_i=0$ for every $i$; equivalently, the linear map $W^n\\to V\\otimes W$, $(w_i)\\mapsto\\sum_iv_i\\otimes w_i$, is injective.\n\nIf $V$ is finite-dimensional the same conclusion is proved without the Axiom of Choice.",
+        "strategy": "Assume AC and set $V_0=\\mathrm{span}(v_1,\\dots,v_n)$. By [[lem-hh-tensor-injections-quotients-and-kernels-over-a-field]] the inclusion $V_0\\hookrightarrow V$ tensored with $\\mathrm{id}_W$ is injective, so $\\sum_iv_i\\otimes w_i=0$ already in $V_0\\otimes W$. Extend the independent list $(v_i)$ to a basis of $V_0$ ([[thm-dimension-of-a-linear-subspace]], no choice needed in finite dimension) and let $\\varphi_i:V_0\\to k$ be the coordinate functionals with $\\varphi_i(v_j)=\\delta_{ij}$ ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). The maps $\\varphi_i\\otimes\\mathrm{id}_W$ are well defined by [[prop-functoriality-of-module-tensor-products]], and applying them to the relation gives $0=(\\varphi_i\\otimes\\mathrm{id}_W)(\\sum_jv_j\\otimes w_j)=\\sum_j\\delta_{ij}w_j=w_i$. When $V$ is finite-dimensional, extend the list directly to a basis of $V$ instead and repeat the contraction; no complement selection, and hence no AC, is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 4.15, printed pp. 18\u201319: uniqueness of coefficients in a tensor product with a free factor"
+            }
+          ]
+        },
+        "axiom_use": "In infinite dimension AC enters only through the injection lemma [[lem-hh-tensor-injections-quotients-and-kernels-over-a-field]], applied to the inclusion of the span of the independent list; the finite-dimensional case uses only the choice-free basis extension and is choice-free."
+      },
+      {
+        "id": "lem-hh-finite-tensor-duality-and-canonical-coevaluation",
+        "kind": "lemma",
+        "title": "Finite tensor duality and basis-independent coevaluation",
+        "deps": [
+          "def-hh-scalar-and-tensor-conventions",
+          "def-algebraic-dual-and-linear-functional",
+          "def-dual-family-associated-to-a-basis",
+          "thm-dual-family-is-a-basis-in-finite-dimension",
+          "thm-tensor-product-basis-from-bases",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "thm-hom-from-a-finite-dimensional-space-as-a-tensor-product",
+          "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "thm-unit-isomorphisms-for-module-tensor-products"
+        ],
+        "statement": "Let $V,W$ be finite-dimensional $k$-vector spaces.\n\n1. The bilinear map $V^*\\times W^*\\to(V\\otimes W)^*$, $(f,g)\\mapsto[v\\otimes w\\mapsto f(v)g(w)]$, induces an isomorphism $V^*\\otimes W^*\\to(V\\otimes W)^*$. For ordered bases $(v_1,\\dots,v_m)$ of $V$, $(w_1,\\dots,w_n)$ of $W$ with dual bases $(v_i^*)$, $(w_j^*)$, the image of $v_i^*\\otimes w_j^*$ is the dual basis vector of $v_i\\otimes w_j$ in the product basis of $V\\otimes W$.\n2. For every ordered basis $(v_1,\\dots,v_n)$ of $V$ the element $\\sum_{i=1}^nv_i^*\\otimes v_i\\in V^*\\otimes V$ is independent of the basis and corresponds to $\\mathrm{id}_V$ under the isomorphism $V^*\\otimes V\\to\\operatorname{Hom}(V,V)$, $f\\otimes v\\mapsto[x\\mapsto f(x)v]$ ([[thm-hom-from-a-finite-dimensional-space-as-a-tensor-product]]). Its image under $\\sigma_{V^*,V}$ is the corresponding element $\\sum_iv_i\\otimes v_i^*$ of $V\\otimes V^*$.\n3. The evaluation $\\mathrm{ev}:V^*\\otimes V\\to k$, $f\\otimes v\\mapsto f(v)$, and the coevaluation $\\mathrm{coev}:k\\to V\\otimes V^*$, $1\\mapsto\\sum_iv_i\\otimes v_i^*$, are independent of the basis and satisfy $(\\mathrm{id}_V\\otimes\\mathrm{ev})\\circ\\alpha_{V,V^*,V}\\circ(\\mathrm{coev}\\otimes\\mathrm{id}_V)=\\mathrm{id}_V$ and $(\\mathrm{ev}\\otimes\\mathrm{id}_{V^*})\\circ\\alpha^{-1}_{V^*,V,V^*}\\circ(\\mathrm{id}_{V^*}\\otimes\\mathrm{coev})=\\mathrm{id}_{V^*}$, the unit isomorphisms $k\\otimes V\\cong V$, $V\\otimes k\\cong V$ being understood.",
+        "strategy": "1.1 The product basis theorem ([[thm-tensor-product-basis-from-bases]]) makes $(v_i\\otimes w_j)$ a basis of $V\\otimes W$, so linear functionals on $V\\otimes W$ are determined by their values on it. The element $v_i^*\\otimes w_j^*$ maps to the functional with value $\\delta_{(i,j),(k,l)}$ on $v_k\\otimes w_l$, i.e. to the dual basis vector of the product basis; by [[thm-dual-family-is-a-basis-in-finite-dimension]] these dual vectors form a basis of $(V\\otimes W)^*$, so the induced linear map is an isomorphism.\n2.1 Let $T$ be the image of $\\sum_iv_i^*\\otimes v_i$; then $T(u)=\\sum_iv_i^*(u)v_i=u$ for every $u$ ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]), so $T=\\mathrm{id}_V$; since the defining isomorphism is injective and $\\mathrm{id}_V$ does not depend on the basis, neither does the element.\n3.1 Evaluate the composites on a basis: $x\\mapsto\\sum_iv_i^*(x)v_i=x$ and $f\\mapsto\\sum_if(v_i)v_i^*=f$; each composite is linear, so evaluation on a basis proves the identity. The displayed associator and unit maps use the elementary-tensor formulas of [[thm-symmetry-and-associativity-over-a-commutative-ring]] and [[thm-unit-isomorphisms-for-module-tensor-products]]; no general coherence result is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 5.9 and Example 5.11, printed pp. 30\u201331: the Hom\u2013tensor map $M^\\vee\\otimes N\\to\\operatorname{Hom}(M,N)$ and its finite-free isomorphism"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hh-free-associative-ring-and-relations-descent",
+        "kind": "lemma",
+        "title": "The free associative R-algebra on a set and descent of relations",
+        "deps": [
+          "def-algebra-over-a-commutative-ring",
+          "def-commutative-ring",
+          "def-ring-homomorphism",
+          "def-free-module-on-a-set-and-standard-basis",
+          "thm-universal-property-of-free-modules",
+          "thm-universal-property-of-module-tensor-products",
+          "def-left-right-and-two-sided-ideal",
+          "def-generated-and-principal-ideals",
+          "def-quotient-ring",
+          "thm-quotient-ring-universal-property",
+          "def-tensor-algebra-of-a-vector-space",
+          "thm-universal-property-of-the-tensor-algebra",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-natural-numbers",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-nat-add-associative",
+          "lem-nat-add-commutative",
+          "lem-nat-add-identity",
+          "lem-nat-add-cancellative",
+          "lem-nat-order-is-membership",
+          "thm-nat-linear-order",
+          "lem-nat-order-add-compatible"
+        ],
+        "statement": "Let $R$ be a commutative ring and $S$ a set. There is a unital associative $R$-algebra $R\\langle S\\rangle$, the **free associative $R$-algebra on $S$**, whose underlying $R$-module is free on the set of finite words in $S$ (including the empty word), with product given on words by concatenation and extended $R$-bilinearly.\n\n1. **Universal property.** For every $R$-algebra $A$ ([[def-algebra-over-a-commutative-ring]]) and every map $S\\to A$ there is a unique unital $R$-algebra homomorphism $R\\langle S\\rangle\\to A$ extending it. When $R=k$ is a field and $S$ indexes a basis of a vector space $V$, $R\\langle S\\rangle$ reproduces the published tensor algebra $T(V)$ ([[def-tensor-algebra-of-a-vector-space]], [[thm-universal-property-of-the-tensor-algebra]]).\n2. **Two-sided ideal description.** For $E\\subseteq R\\langle S\\rangle$ the two-sided ideal $(E)$ ([[def-generated-and-principal-ideals]]) is the set of finite sums $\\sum_sa_se_sb_s$ with $a_s,b_s\\in R\\langle S\\rangle$ and $e_s\\in E$.\n3. **Quotient universal property.** If $\\varphi:R\\langle S\\rangle\\to A$ is an $R$-algebra homomorphism killing $E$, then $\\varphi$ factors uniquely through the quotient $R\\langle S\\rangle/(E)$ ([[thm-quotient-ring-universal-property]]); the quotient is the presented $R$-algebra with generators $S$ and relations $E$.",
+        "strategy": "1.1 Words: define a word in $S$ to be a function $n\\to S$ for some natural number $n$ ([[def-the-set-of-functions-from-one-set-to-another]], [[def-natural-numbers]]); the empty word is the unique function $0\\to S$. Concatenation is defined by the obvious case split on the two lengths and is associative with the empty word as neutral, because addition of natural numbers is associative with $0$ as neutral.\n2.1 Let $F=R^{(\\text{words})}$ be the free $R$-module on the word set ([[def-free-module-on-a-set-and-standard-basis]]). The rule $(\\sum a_ww,\\sum b_vv)\\mapsto\\sum a_wb_v\\,wv$ on basis words is $R$-bilinear, so by [[thm-universal-property-of-module-tensor-products]] it descends to a linear map $F\\otimes_RF\\to F$; associativity and the unit are checked on basis words and extended by bilinearity, using [[lem-finite-sum-reindexing-and-fubini]] for the finite sums. This makes $R\\langle S\\rangle:=F$ a unital associative $R$-algebra with central structure map.\n3.1 Universal property: given $\\varphi_0:S\\to A$, set $\\widehat\\varphi(s_1\\cdots s_n)=\\varphi_0(s_1)\\cdots\\varphi_0(s_n)$ and $\\widehat\\varphi(\\text{empty})=1_A$, extended $R$-linearly through the free basis ([[thm-universal-property-of-free-modules]]). Multiplicativity is associativity in $A$, and the map is the unique extension on the spanning word basis.\n4.1 The displayed set of finite sums is a two-sided ideal containing $E$ and lies in every two-sided ideal containing $E$ (both inclusions close under left and right multiplication); the quotient then inherits its structure map $R\\to R\\langle S\\rangle/(E)$, and [[thm-quotient-ring-universal-property]] gives the stated factorisation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "George M. Bergman, An Invitation to General Algebra and Universal Constructions (Springer Universitext; author's revised PDF v3.4, April 30, 2020)",
+              "url": "https://math.berkeley.edu/~gbergman/245/3.4.pdf",
+              "locator": "\u00a73.4 printed pp. 34\u201341 (classical word construction), \u00a74.10 printed pp. 74\u201381 (monoids and free monoids), \u00a74.12 printed pp. 83\u201391 (rings and free commutative rings), \u00a79.1\u20139.3 printed pp. 360\u2013379 (free algebras in a variety and left universal constructions)"
+            },
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 3.3, printed p. 10: spanning sets of tensor products (the elementary-tensor spanning used for the word-basis multiplication)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hh-universal-presentations-and-base-change",
+        "kind": "lemma",
+        "title": "Presentation base change and transport of explicit bases to commutative specializations",
+        "deps": [
+          "lem-hh-free-associative-ring-and-relations-descent",
+          "def-algebra-over-a-commutative-ring",
+          "def-restriction-and-extension-of-scalars",
+          "thm-universal-property-of-module-tensor-products",
+          "thm-right-exactness-of-tensor-products",
+          "thm-tensor-product-basis-from-bases",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "def-quotient-ring",
+          "thm-quotient-ring-universal-property",
+          "def-free-module-on-a-set-and-standard-basis",
+          "thm-universal-property-of-free-modules"
+        ],
+        "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, let $X$ be a set and let $R\\langle X\\rangle$ be the free $R$-algebra on $X$ ([[lem-hh-free-associative-ring-and-relations-descent]]).\n\n1. There is a unique $S$-algebra isomorphism $S\\otimes_RR\\langle X\\rangle\\to S\\langle X\\rangle$ with $s\\otimes x_{i_1}\\cdots x_{i_n}\\mapsto s\\,x_{i_1}\\cdots x_{i_n}$ on words; its inverse sends a word to $1\\otimes$ that word.\n2. If $I\\subseteq R\\langle X\\rangle$ is a two-sided ideal, then there is a unique $S$-algebra isomorphism $S\\otimes_R\\bigl(R\\langle X\\rangle/I\\bigr)\\cong(S\\otimes_RR\\langle X\\rangle)/\\operatorname{im}(S\\otimes_RI)$, sending $s\\otimes(y+I)$ to $(s\\otimes y)+\\operatorname{im}(S\\otimes_RI)$, the image ideal being generated by the images of the relations. No flatness or freeness of $S$ over $R$ is assumed.\n3. If an $R$-algebra $A$ is free as an $R$-module with basis $(a_i)$, then $S\\otimes_RA$ is a free $S$-module with basis $(1\\otimes a_i)$. Consequently an explicitly constructed basis isomorphism of a presentation may be tensored with $S$ to give a basis in every commutative specialization.",
+        "strategy": "1.1 The assignment $s\\otimes w\\mapsto s\\,w$ is well defined on the tensor product by [[thm-universal-property-of-module-tensor-products]] applied to the $R$-balanced map $(s,w)\\mapsto sw$; it is an $S$-algebra homomorphism by [[thm-tensor-product-of-algebras-over-a-commutative-ring]] and multiplicativity of word concatenation. The word basis map $w\\mapsto1\\otimes w$ is an $S$-algebra homomorphism by the universal property of $S\\langle X\\rangle$; the two composites fix all words and hence are identities.\n2.1 Tensoring the exact sequence $I\\to R\\langle X\\rangle\\to R\\langle X\\rangle/I\\to0$ with $S$ over $R$ and applying [[thm-right-exactness-of-tensor-products]] identifies $S\\otimes_R(R\\langle X\\rangle/I)$ with the quotient of $S\\otimes_RR\\langle X\\rangle$ by the image of $S\\otimes_RI$; combine with part 1.\n3.1 Apply [[thm-tensor-product-basis-from-bases]] to the free $R$-modules $S$ (basis $(1_S)$) and $A$ (basis $(a_i)$).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 6.7 and Example 6.8, printed p. 37: free-module base change; Example 6.9, printed p. 38: polynomial-module base change"
+            },
+            {
+              "title": "The CRing Project, open-source commutative algebra text (2016 PDF; Chapter 13)",
+              "url": "https://math.colorado.edu/topology/cringproject.pdf",
+              "locator": "Proposition 13.3.13, printed p. 137: base-change adjunction; Propositions 13.3.19\u201313.3.20, printed pp. 141\u2013142: tensor products as coproducts of commutative algebras; Proposition 13.4.1, printed pp. 143\u2013144: right exactness"
+            },
+            {
+              "title": "George M. Bergman, An Invitation to General Algebra and Universal Constructions (Springer Universitext; author's revised PDF v3.4, April 30, 2020)",
+              "url": "https://math.berkeley.edu/~gbergman/245/3.4.pdf",
+              "locator": "\u00a74.2\u20134.3 printed pp. 44\u201352 and \u00a79.3 printed pp. 371\u2013379: imposing relations and presentations via the left universal construction"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hh-finite-polynomial-and-localization-constructions",
+        "kind": "lemma",
+        "title": "Multivariate polynomial and Laurent rings over commutative rings, domains and fraction fields",
+        "deps": [
+          "def-polynomial-ring-over-a-commutative-ring",
+          "thm-polynomial-ring-is-a-commutative-ring",
+          "thm-universal-property-of-a-polynomial-ring",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "def-free-module-on-a-set-and-standard-basis",
+          "thm-universal-property-of-free-modules",
+          "lem-finite-sum-reindexing-and-fubini",
+          "def-zero-divisor-and-integral-domain",
+          "def-commutative-ring",
+          "def-field",
+          "def-ring-homomorphism",
+          "def-equivalence-relation",
+          "def-algebra-over-a-commutative-ring",
+          "thm-int-ordered-ring",
+          "def-group-power",
+          "lem-group-power-laws",
+          "lem-ring-units-form-a-group"
+        ],
+        "statement": "Let $R$ be a commutative ring and $n\\ge0$.\n\n1. **Multivariate polynomial ring.** The ring $R[x_1,\\dots,x_n]$ of [[def-multivariate-polynomial-ring-by-iteration]] is a commutative $R$-algebra, free as an $R$-module on the monomials $x^\\alpha=x_1^{\\alpha_1}\\cdots x_n^{\\alpha_n}$ ($\\alpha\\in\\mathbb N^n$), and for every commutative $R$-algebra $A$ and elements $a_1,\\dots,a_n\\in A$ there is a unique $R$-algebra homomorphism $R[x_1,\\dots,x_n]\\to A$ with $x_i\\mapsto a_i$. If $R$ is an integral domain, so is $R[x_1,\\dots,x_n]$.\n2. **Laurent polynomial ring.** The set $\\Lambda_{R,n}$ of finitely supported functions $\\mathbb Z^n\\to R$ with coefficientwise addition and convolution $(ab)_\\gamma=\\sum_{\\alpha+\\beta=\\gamma}a_\\alpha b_\\beta$ (summed only over the finite supports of $a$ and $b$) is a commutative $R$-algebra, free as an $R$-module on the monomials $x^\\alpha$ ($\\alpha\\in\\mathbb Z^n$); each $x_i$ is a unit. For every commutative $R$-algebra $A$ and units $u_1,\\dots,u_n\\in A$ there is a unique $R$-algebra homomorphism $\\Lambda_{R,n}\\to A$ with $x_i\\mapsto u_i$. If $R$ is an integral domain, so is $\\Lambda_{R,n}$; no domain assertion is made over a ring with zero divisors. Only finitely many variables are used; in applications to Coxeter systems with a finite generator set, $W$ may nevertheless be infinite.\n3. **Fraction field.** If $R$ is an integral domain, then on pairs $(f,g)$ with $f,g\\in\\Lambda_{R,n}$ and $g\\ne0$, the relation $(f,g)\\sim(f',g')$ iff $fg'=f'g$ is an equivalence relation compatible with $(f,g)+(f',g'):=(fg'+f'g,gg')$ and $(f,g)(f',g'):=(ff',gg')$, and the quotient $K(\\Lambda_{R,n})$ is a field containing $\\Lambda_{R,n}$ through $f\\mapsto[(f,1)]$. The same construction gives the fraction field of $R[x_1,\\dots,x_n]$.",
+        "strategy": "1.1 Induct on $n$ on the iterated construction ([[def-multivariate-polynomial-ring-by-iteration]]): the case $n=0$ is $R$, and the successor step adjoins one polynomial indeterminate using the coefficient-sequence representation of [[def-polynomial-ring-over-a-commutative-ring]] and its universal property ([[thm-universal-property-of-a-polynomial-ring]]); the monomial basis and the universal property follow by induction, and domain inheritance is [[cor-multivariate-polynomial-ring-over-a-domain-is-a-domain]].\n2.1 Well-definedness of convolution: finitely supported $a,b$ have bounded supports, so every coefficient of $ab$ is a finite sum ([[lem-finite-sum-reindexing-and-fubini]]); the ring axioms are verified coefficientwise exactly as for the univariate polynomial ring ([[thm-polynomial-ring-is-a-commutative-ring]]), now over the group $\\mathbb Z^n$. The monomials are visibly an $R$-basis ([[def-free-module-on-a-set-and-standard-basis]]), and substitution of finite sums gives the universal property for units ([[thm-universal-property-of-a-polynomial-ring]] iterated).\n2.2 Domain: order $\\mathbb Z^n$ by a linear order compatible with addition and compare leading coefficients of nonzero $a,b$: the product has nonzero leading coefficient $\\operatorname{lc}(a)\\operatorname{lc}(b)$ because $R$ is a domain ([[def-zero-divisor-and-integral-domain]]).\n3.1 The relation is reflexive, symmetric, and transitive (transitivity uses $gg'\\ne0$ and cancellation in the domain); the class of $(f,1)$ is nonzero exactly when $f\\ne0$, so $f\\mapsto[(f,1)]$ is injective; addition and multiplication are well defined and satisfy the field axioms because the domain has no zero divisors ([[def-equivalence-relation]], [[def-zero-divisor-and-integral-domain]]).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "George M. Bergman, An Invitation to General Algebra and Universal Constructions (Springer Universitext; author's revised PDF v3.4, April 30, 2020)",
+              "url": "https://math.berkeley.edu/~gbergman/245/3.4.pdf",
+              "locator": "\u00a74.12 printed pp. 83\u201391: free commutative rings are polynomial rings and the monoid-ring construction"
+            },
+            {
+              "title": "The CRing Project, open-source commutative algebra text (2016 PDF; Chapter 13)",
+              "url": "https://math.colorado.edu/topology/cringproject.pdf",
+              "locator": "\u00a713.1, printed pp. 111\u2013119: Definitions 13.1.2\u201313.1.4, printed p. 112: localization of modules and rings; Example 13.1.7, printed p. 113: the quotient field of a domain; Remark 13.1.6, printed p. 113 ($\\mathbb Z[X,X^{-1}]$)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hh-finite-matrix-and-module-preliminaries",
+        "kind": "lemma",
+        "title": "Finite matrix and module preliminaries: right inverses, rank invariance, finite length and nilpotent trace",
+        "deps": [
+          "def-left-and-right-modules",
+          "def-submodule",
+          "def-quotient-module",
+          "def-simple-module",
+          "def-semisimple-module",
+          "def-composition-series-and-length-of-a-module",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-endomorphism-ring-of-a-module",
+          "def-dimension",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "def-linear-map",
+          "def-linear-basis",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+          "def-matrix-space",
+          "def-matrices-over-a-commutative-ring",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-multiplicative",
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "def-trace-of-a-square-matrix",
+          "def-trace-of-an-endomorphism",
+          "def-free-module-on-a-set-and-standard-basis",
+          "def-ring-matrix-product-identity-and-transpose",
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "lem-finite-choice",
+          "def-algebra-over-a-commutative-ring",
+          "def-subfield",
+          "lem-restriction-of-scalars",
+          "def-function-space",
+          "def-coordinate-column-and-matrix-of-a-linear-map"
+        ],
+        "statement": "Let $k$ be a field.\n\n1. Let $R$ be a commutative ring, $M$ a free $R$-module of finite rank $n$ with basis $(e_0,\\dots,e_{n-1})$, and let $v_0,\\dots,v_{n-1}\\in M$ span $M$. Then the coordinate matrix $A$ of $(v_0,\\dots,v_{n-1})$ in the basis $(e_i)$ has a right inverse, $\\det(A)$ is a unit of $R$, and $(v_0,\\dots,v_{n-1})$ is a basis of $M$. The determinant is formed for $n\\ge1$; for $n=0$ the module is the zero module and the empty family is its basis, with no determinant clause.\n2. If $F\\subseteq E$ is a field extension and $A\\in M_{m\\times n}(F)$, then the rank of $A$ over $F$ equals its rank over $E$.\n3. Let $B$ be a finite-dimensional $k$-algebra and $N$ a finite-dimensional left $B$-module. A proper submodule has strictly smaller $k$-dimension, a maximal proper submodule of a nonzero finite-dimensional module exists by maximal dimension (no arbitrary Choice), and iterating produces a finite composition series of $N$ ([[def-composition-series-and-length-of-a-module]]); in particular $N$ has finite length.\n4. If $S_1,\\dots,S_m$ are simple $B$-modules and $N\\subseteq S_1\\oplus\\cdots\\oplus S_m$ is a submodule, then $N$ is isomorphic to a direct sum of a subfamily of the $S_i$, and $N$ has a complement in $S_1\\oplus\\cdots\\oplus S_m$.\n5. If $T:N\\to N$ is $k$-linear with $T^r=0$ for some $r\\ge1$, then $\\operatorname{tr}(T)=0$ ([[def-trace-of-an-endomorphism]]).",
+        "strategy": "1.1 Write $v_j=\\sum_ia_{ij}e_i$ and let $A=(a_{ij})$ be the coordinate matrix, so $A$ represents the linear map $R^n\\to R^n$ whose image is $M$. Spanning gives, for each standard basis vector $e_i$, a preimage $b_i$ with $Ab_i=e_i$ (finitely many choices); $B=(b_1,\\dots,b_n)$ satisfies $AB=I_n$. Hence $\\det(A)\\det(B)=1$ ([[thm-determinant-multiplicative]]), so $\\det(A)$ is a unit and [[cor-square-matrix-invertible-iff-determinant-is-a-unit]] (via [[thm-adjugate-identity-over-a-commutative-ring]]) makes $A$ invertible; the columns of an invertible coordinate matrix are a basis.\n2.1 An $F$-basis of the row space remains $E$-linearly independent in the $E$-row space (expand an $E$-dependence in an $F$-basis of the span of its coefficients) and remains $E$-spanning, since $E$-combinations of the rows are $E$-combinations of the $F$-basis; so the row ranks agree, and [[cor-matrix-rank-equals-the-rank-of-its-linear-map]] identifies them with the ranks.\n3.1 A strict inclusion of submodules is a strict inclusion of subspaces, so it strictly decreases $\\dim_k$; among the proper submodules of a nonzero finite-dimensional module, one of maximal $k$-dimension is maximal proper and is selected by a finite minimization over the natural numbers ([[thm-dimension-of-a-linear-subspace]]); repeating on the successive quotients terminates after $\\dim_k$ steps and yields a composition series.\n4.1 Induct on $m$. For $m\\le1$ the claim is clear. Write $N\\subseteq S\\oplus M$ with $M=S_2\\oplus\\cdots\\oplus S_m$. If $N\\cap S\\ne0$, then $N\\cap S=S$, and every $n=s+u\\in N$ has $u=n-s\\in N\\cap M$, so $N=S\\oplus(N\\cap M)$. If $N\\cap S=0$, the projection $N\\to M$ is injective and its image is a submodule of $M$, hence by induction isomorphic to a direct sum of a subfamily and complemented in $M$ by some $K$. The projection is then an isomorphism $N\\to\\pi(N)$ and $N$ is the graph of a linear map over $\\pi(N)$, so $N\\oplus(S\\oplus K)=S\\oplus M$. No Choice is used, since each step is a finite induction.\n5.1 Take the filtration $0\\subseteq\\ker T\\subseteq\\ker T^2\\subseteq\\cdots\\subseteq\\ker T^r=N$ and extend bases of $\\ker T^i$ successively to bases of $\\ker T^{i+1}$ ([[thm-dimension-of-a-linear-subspace]] applies without Choice in finite dimension; [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). In the resulting ordered basis, $T$ maps the $i$-th block into the span of the earlier blocks, so its matrix is strictly upper triangular; hence the sum of diagonal entries \u2014 the trace ([[def-trace-of-a-square-matrix]], [[def-trace-of-an-endomorphism]]) \u2014 is $0$. ",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 5.9 and Example 5.11, printed pp. 30\u201331: finite-free Hom\u2013tensor duality; Theorem 5.14, printed pp. 32\u201333: comparison of tensor rank and linear-map rank"
+            },
+            {
+              "title": "The CRing Project, open-source commutative algebra text (2016 PDF; Chapter 13)",
+              "url": "https://math.colorado.edu/topology/cringproject.pdf",
+              "locator": "\u00a711.6, printed pp. 81\u201389: free modules, finite generation and modules of finite length; \u00a713.2, printed pp. 120\u2013131: projective and injective modules for the finite-splitting context"
+            }
+          ]
+        },
+        "axiom_use": "No arbitrary Choice: every selection is made from a finite list or by maximal finite dimension."
+      },
+      {
+        "id": "lem-hh-regular-module-detects-linear-and-tensor-identities",
+        "kind": "lemma",
+        "title": "The left regular module and its tensor powers detect linear and tensor identities",
+        "deps": [
+          "def-algebra-over-a-commutative-ring",
+          "def-left-and-right-modules",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-universal-property-of-module-tensor-products",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "thm-right-exactness-of-tensor-products",
+          "def-quotient-ring",
+          "thm-quotient-ring-universal-property"
+        ],
+        "statement": "Let $R$ be a commutative ring and let $A$ be a unital $R$-algebra ([[def-algebra-over-a-commutative-ring]]), with $A$ regarded as its left regular module.\n\n1. For $a,b\\in A$ one has $a=b$ if and only if $a\\cdot1_A=b\\cdot1_A$.\n2. For $n\\ge1$ the tensor power $A^{\\otimes n}$ is a left $A$-module via $a\\cdot(a_1\\otimes\\cdots\\otimes a_n)=(aa_1)\\otimes\\cdots\\otimes a_n$. If $a\\cdot z=b\\cdot z$ for all $z\\in A^{\\otimes n}$, then $a=b$; in particular the single element $1_A^{\\otimes n}$ detects equality. The analogous statement holds for the right regular structure. The empty tensor power $A^{\\otimes0}=R$ carries no canonical left $A$-module structure here, so no $n=0$ case is claimed.\n3. For $n\\ge1$, if $f,g:A^{\\times n}\\to M$ are $R$-multilinear and agree on every $n$-tuple, then the $R$-linear maps $A^{\\otimes n}\\to M$ they induce ([[cor-finite-iterated-tensor-products-represent-multilinear-maps]]) agree; conversely, agreement of the induced maps gives agreement on all pure tensors $a_1\\otimes\\cdots\\otimes a_n$.\n4. Descent warning: if $\\pi:A\\to A/I$ is a quotient of $R$-algebras ([[thm-quotient-ring-universal-property]]), the induced map $A^{\\otimes n}\\to(A/I)^{\\otimes n}$ is surjective, but an identity between $R$-linear maps out of $(A/I)^{\\otimes n}$ may be checked on images of pure tensors of $A$ only after those maps have been shown to be well defined on the quotient; surjectivity alone is not descent.",
+        "strategy": "1.1 Evaluate at $1_A$.\n2.1 Evaluate at $1_A^{\\otimes n}$, using $1_A\\cdot1_A=1_A$; the right-handed statement is the mirror computation.\n3.1 Both statements are the universal property of the tensor power ([[thm-universal-property-of-module-tensor-products]] iterated, [[cor-finite-iterated-tensor-products-represent-multilinear-maps]]): multilinear maps out of $A^{\\times n}$ correspond to linear maps out of $A^{\\otimes n}$, and pure tensors span $A^{\\otimes n}$ ([[def-tensor-product-of-modules-by-generators-and-relations]]), so agreement of linear maps on pure tensors suffices.\n4.1 The induced map is a composite of tensor products of the surjection $\\pi$ and is surjective by [[thm-right-exactness-of-tensor-products]]. A map out of the quotient exists only through the quotient universal property, and its value on a class must be independent of the chosen representative; that is the descent obligation the warning records.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "George M. Bergman, An Invitation to General Algebra and Universal Constructions (Springer Universitext; author's revised PDF v3.4, April 30, 2020)",
+              "url": "https://math.berkeley.edu/~gbergman/245/3.4.pdf",
+              "locator": "\u00a79.1\u20139.3, printed pp. 360\u2013379: generating algebras from below and left universal constructions"
+            },
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 3.3, printed p. 10, and Remark 4.17, printed p. 19: spanning by elementary tensors and testing equalities of additive maps on them"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 1689,
+    "id": "tensor-coherence-and-algebraic-descent-examples",
+    "kind": "B",
+    "category": "hopf-hecke-algebras",
+    "title": "Tensor Coherence and Algebraic Descent \u2014 Examples",
+    "companion": "tensor-coherence-and-algebraic-descent",
+    "requires": [
+      "tensor-coherence-and-algebraic-descent"
+    ],
+    "items": [
+      {
+        "id": "ex-hh-elementary-tensor-presentations-and-invariant-contractions",
+        "kind": "example",
+        "title": "Many finite presentations of one tensor and the invariant contraction",
+        "deps": [
+          "def-hh-scalar-and-tensor-conventions",
+          "def-balanced-and-bilinear-maps",
+          "thm-universal-property-of-module-tensor-products",
+          "prop-elementary-tensor-formulas-descend-exactly-when-balanced",
+          "thm-tensor-product-basis-from-bases"
+        ],
+        "statement": "Let $k$ be a field of characteristic $\\ne2$. Work in $V=W=k^2$ with $u=(1,0)$, $v=(0,1)$, $u'=(2,0)$ and $v'=(0,\\tfrac12)$. Then $u\\otimes v=u'\\otimes v'$ in $k^2\\otimes k^2$, although $(u,v)\\ne(u',v')$. Consequently every $k$-bilinear form $B:k^2\\times k^2\\to k$ with $B(u,v)=1$ gives the value $1$ on **every** finite presentation of that tensor: if $\\sum_lx_l\\otimes y_l=u\\otimes v$ then $\\sum_lB(x_l,y_l)=1$. The contraction of a bilinear form against a tensor is therefore independent of the presentation.",
+        "strategy": "$u'=2u$ and $v'=\\tfrac12v$, so $u'\\otimes v'=2u\\otimes\\tfrac12v=u\\otimes v$ by bilinearity of the elementary tensor. The bilinear form descends to the unique linear functional $\\overline B$ on $k^2\\otimes k^2$ with $\\overline B(x\\otimes y)=B(x,y)$ ([[thm-universal-property-of-module-tensor-products]], [[prop-elementary-tensor-formulas-descend-exactly-when-balanced]]), and $\\overline B(\\sum_lx_l\\otimes y_l)=\\sum_lB(x_l,y_l)$ depends only on $\\sum_lx_l\\otimes y_l$, not on the presentation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "\u00a71, printed pp. 1\u20132, and \u00a73, printed pp. 7\u201310: the general element of a tensor product is a finite linear combination of elementary tensors and bilinear maps descend"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hh-pentagon-on-four-named-vectors",
+        "kind": "example",
+        "title": "The pentagon on four named vectors in $k^2$",
+        "deps": [
+          "def-hh-scalar-and-tensor-conventions",
+          "lem-hh-tensor-coherence-on-elementary-tensors",
+          "thm-symmetry-and-associativity-over-a-commutative-ring"
+        ],
+        "statement": "Let $e_1,e_2$ be the standard basis of $k^2$ and put $l=e_1$, $m=e_1+e_2$, $n=2e_2$, $x=e_1-e_2$. Then in $k^2\\otimes k^2\\otimes k^2\\otimes k^2$ the pentagon of [[lem-hh-tensor-coherence-on-elementary-tensors]] holds on $((l\\otimes m)\\otimes n)\\otimes x$: the two composites $(\\mathrm{id}\\otimes\\alpha)\\circ\\alpha\\circ(\\alpha\\otimes\\mathrm{id})$ and $\\alpha\\circ\\alpha$ both send that element to $l\\otimes(m\\otimes(n\\otimes x))$, i.e. to $e_1\\otimes((e_1+e_2)\\otimes(2e_2\\otimes(e_1-e_2)))$.",
+        "strategy": "Expand $l\\otimes m=e_1\\otimes e_1+e_1\\otimes e_2$ and follow the two composites of the pentagon on the single elementary tensor $((l\\otimes m)\\otimes n)\\otimes x$; the first associator moves the bracket right past $n$, the remaining moves place it past $x$, and both routes produce $l\\otimes(m\\otimes(n\\otimes x))$. This is one explicit element of the general identity proved in [[lem-hh-tensor-coherence-on-elementary-tensors]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 5.2, printed p. 24: the associativity isomorphism $(M\\otimes N)\\otimes P\\cong M\\otimes(N\\otimes P)$ on elementary tensors"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hh-tensor-quotient-by-a-one-dimensional-subspace",
+        "kind": "example",
+        "title": "The tensor quotient by a one-dimensional subspace and its kernel",
+        "deps": [
+          "def-hh-scalar-and-tensor-conventions",
+          "lem-hh-tensor-injections-quotients-and-kernels-over-a-field",
+          "thm-tensor-product-basis-from-bases"
+        ],
+        "statement": "Let $V=k^2$ with standard basis $e_1,e_2$, let $U=ke_1\\subseteq V$, let $W=k^2$ with standard basis $f_1,f_2$ and let $Z=kf_2\\subseteq W$. Then $\\ker(p\\otimes q)=\\operatorname{span}\\{e_1\\otimes f_1,\\,e_1\\otimes f_2,\\,e_2\\otimes f_2\\}=U\\otimes W+V\\otimes Z$ inside $V\\otimes W$, and $p\\otimes q$ sends the basis tensor $e_2\\otimes f_1$ to a basis element of $(V/U)\\otimes(W/Z)\\cong k\\otimes k\\cong k$; in particular $p\\otimes q$ is surjective and $\\dim\\ker(p\\otimes q)=\\dim U\\dim W+\\dim V\\dim Z-\\dim U\\dim Z=3$, as predicted by [[lem-hh-tensor-injections-quotients-and-kernels-over-a-field]].",
+        "strategy": "$(e_i\\otimes f_j)$ is the product basis of $V\\otimes W$ ([[thm-tensor-product-basis-from-bases]]). The quotient map $p$ kills $e_1$ and fixes the class of $e_2$; $q$ kills $f_2$ and fixes the class of $f_1$; hence $p\\otimes q$ kills exactly the three basis tensors $e_1\\otimes f_1,e_1\\otimes f_2,e_2\\otimes f_2$ and is injective on the span of $e_2\\otimes f_1$. The killed span is $U\\otimes W+V\\otimes Z$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "\u00a74.5\u20134.9, printed pp. 15\u201322: quotient computations $(R/I)\\otimes_RM\\cong M/IM$ and free-module tensor bases"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hh-finite-coevaluation-in-two-bases",
+        "kind": "example",
+        "title": "Finite coevaluation computed in two bases",
+        "deps": [
+          "def-hh-scalar-and-tensor-conventions",
+          "lem-hh-finite-tensor-duality-and-canonical-coevaluation",
+          "def-dual-family-associated-to-a-basis",
+          "thm-dual-family-is-a-basis-in-finite-dimension"
+        ],
+        "statement": "Let $V=k^2$ with standard basis $e_1,e_2$, and let $k$ have characteristic $\\ne2$. For the second basis $b_1=e_1+e_2$, $b_2=e_1-e_2$ with dual basis $b_1^*=\\tfrac12(e_1^*+e_2^*)$, $b_2^*=\\tfrac12(e_1^*-e_2^*)$, the elements $\\sum_ie_i\\otimes e_i^*$ and $\\sum_jb_j\\otimes b_j^*$ of $V\\otimes V^*$ are equal. Hence the coevaluation $\\mathrm{coev}:k\\to V\\otimes V^*$ of [[lem-hh-finite-tensor-duality-and-canonical-coevaluation]] is computed by the same element in both bases, and the zigzag identities hold in both.",
+        "strategy": "Expand $\\sum_jb_j\\otimes b_j^*=\\tfrac12\\bigl((e_1+e_2)\\otimes(e_1^*+e_2^*)+(e_1-e_2)\\otimes(e_1^*-e_2^*)\\bigr)$ and cancel the cross terms, using characteristic $\\ne2$: the result is $e_1\\otimes e_1^*+e_2\\otimes e_2^*$. This is the basis-independence asserted in [[lem-hh-finite-tensor-duality-and-canonical-coevaluation]], here checked on a second explicit basis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 5.9 and Example 5.11, printed pp. 30\u201331: dual bases and the Hom\u2013tensor correspondence in the finite-free case"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-hh-infinite-dimensional-tensor-dual-identification-fails",
+        "kind": "counterexample",
+        "title": "An infinite-dimensional tensor-dual functional outside the image",
+        "deps": [
+          "def-hh-scalar-and-tensor-conventions",
+          "lem-hh-finite-tensor-duality-and-canonical-coevaluation",
+          "def-free-module-on-a-set-and-standard-basis",
+          "thm-tensor-product-basis-from-bases",
+          "def-linear-independence",
+          "def-linear-basis",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "thm-universal-property-of-free-modules",
+          "def-algebraic-dual-and-linear-functional"
+        ],
+        "statement": "The finitely proved identification of [[lem-hh-finite-tensor-duality-and-canonical-coevaluation]], read without its finite-dimensional hypothesis, would say that the canonical map $V^*\\otimes V^*\\to(V\\otimes V)^*$, $f\\otimes g\\mapsto[v\\otimes w\\mapsto f(v)g(w)]$, is surjective for every $k$-vector space $V$.",
+        "strategy": "For any $V$, apply the tensor universal property twice to the bilinear rule $(f,g)\\mapsto[v\\otimes w\\mapsto f(v)g(w)]$ to construct the canonical map, without a finite-dimensional assumption ([[def-hh-scalar-and-tensor-conventions]]). $(e_i\\otimes e_j)$ is a basis of $V\\otimes V$ ([[thm-tensor-product-basis-from-bases]]), so $L$ is well defined. Suppose $L=\\sum_{s=1}^mf_s\\otimes g_s$. For each $j$ the functional $v\\mapsto L(v\\otimes e_j)$ equals the coordinate functional $e_j^*$ (because $L(e_i\\otimes e_j)=\\delta_{ij}$), and it also equals $\\sum_sg_s(e_j)f_s$. Thus the infinite independent family $(e_j^*)_{j\\in I}$ ([[def-linear-independence]], [[def-linear-basis]]) lies in the finite-dimensional span of $f_1,\\dots,f_m$, contradicting [[cor-independent-set-is-no-larger-than-a-finite-spanning-set]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Keith Conrad, Tensor products (University of Connecticut expository notes, 60 pp.)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/tensorprod.pdf",
+              "locator": "Theorem 5.9, printed p. 30, and Remark 5.10 and Example 5.11, printed p. 31: finite-free Hom\u2013tensor duality and a warning that the canonical map can fail outside the finite-free case"
+            },
+            {
+              "title": "The CRing Project, open-source commutative algebra text (2016 PDF; Chapter 13)",
+              "url": "https://math.colorado.edu/topology/cringproject.pdf",
+              "locator": "Example 13.3.17, printed pp. 139\u2013140: the canonical Hom\u2013tensor map is an isomorphism when its first argument is finitely generated and free"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

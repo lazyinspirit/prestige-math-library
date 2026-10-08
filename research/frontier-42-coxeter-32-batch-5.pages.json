@@ -1,0 +1,272 @@
+[
+  {
+    "order": 1726,
+    "id": "finite-lattice-projections-and-coxeter-chain-labels",
+    "kind": "A",
+    "category": "coxeter-groups",
+    "title": "Finite Lattice Projections and Coxeter Chain Labels",
+    "companion": "finite-lattice-projections-and-coxeter-chain-labels-examples",
+    "requires": [
+      "order-zorn-and-the-axiom-of-choice",
+      "simplicial-subdivision-and-simplicial-approximation",
+      "relations-functions-and-quotients",
+      "chains-antichains-sperner-and-dilworth",
+      "incidence-algebras-and-mobius-inversion"
+    ],
+    "items": [
+      {
+        "id": "def-cg-finite-lattice-congruence-and-interval-projections",
+        "kind": "definition",
+        "title": "Finite lattice congruences, interval endpoints and descending rooted-chain labels",
+        "deps": [
+          "def-partial-order",
+          "def-chain",
+          "def-equivalence-relation",
+          "def-lattice-distributive-lattice-and-order-ideal",
+          "def-graded-poset-and-rank",
+          "def-poset-interval-and-finiteness-conditions"
+        ],
+        "statement": "Let $L$ be a finite lattice ([[def-lattice-distributive-lattice-and-order-ideal]]) with meet $\\wedge$ and join $\\vee$, and let $P$ be a finite graded poset ([[def-graded-poset-and-rank]]) with rank function $\\rho$ ([[def-partial-order]]).\n\n**(1) Lattice congruences and projected endpoints.** An equivalence relation $\\theta$ on $L$ is a **lattice congruence** if $x\\equiv_\\theta x'$ and $y\\equiv_\\theta y'$ imply $x\\wedge y\\equiv_\\theta x'\\wedge y'$ and $x\\vee y\\equiv_\\theta x'\\vee y'$. For $x\\in L$ write $[x]_\\theta$ for the **class** of $x$. On classes this defines the **proposed quotient operations** $[x]_\\theta\\vee[y]_\\theta:=[x\\vee y]_\\theta$ and $[x]_\\theta\\wedge[y]_\\theta:=[x\\wedge y]_\\theta$; the **proposed lower endpoint** $\\pi_\\downarrow(x)$ and **upper endpoint** $\\pi_\\uparrow(x)$ of a class are its least and greatest members. The definition asserts neither that the quotient operations are independent of representatives nor that endpoints exist; both are proved in [[lem-cg-lattice-quotient-descent-and-class-intervals]].\n\n**(2) Descending rooted-chain labels.** Let $x\\le y$ in $P$, let $[x,y]=\\{z\\in P:x\\le z\\le y\\}$ be the closed interval ([[def-poset-interval-and-finiteness-conditions]]) and put $\\rho(x,y):=\\rho(y)-\\rho(x)$. A **descending rooted-chain labeling of $[x,y]$ with values in a linearly ordered set $(\\Lambda,<)$** assigns to every pair $(c,v\\lessdot w)$ consisting of a descending chain $c=(y=z_0\\gtrdot z_1\\gtrdot\\cdots\\gtrdot z_j=w)$ in $[x,y]$ and a cover $v\\lessdot w$ ([[def-graded-poset-and-rank]]) a label $\\lambda(c;v\\lessdot w)\\in\\Lambda$; the label may depend on the chain $c$ *above* $w$, not only on the cover. A **maximal chain** of $[x,y]$ is a chain of the form $y=m_0\\gtrdot m_1\\gtrdot\\cdots\\gtrdot m_n=x$ with $n=\\rho(x,y)$ (equivalently: a chain of $[x,y]$ contained in no larger chain of $[x,y]$); note $|m|=n+1$ for every maximal chain $m$ of $[x,y]$. Its **label word** is the $n$-tuple $\\lambda(m)=(\\lambda_1(m),\\dots,\\lambda_n(m))$ with $\\lambda_i(m):=\\lambda(m_0\\gtrdot\\cdots\\gtrdot m_{i-1};\\,m_i\\lessdot m_{i-1})$: as one descends the chain, each step is labeled relative to the chain already traversed above it. Given $x\\le v\\le w\\le y$ and a descending chain $c$ from $y$ to $w$, the **rooted interval** $([v,w],c)$ carries the labeling induced by keeping the root chain fixed: a maximal chain $v=w_0\\lessdot w_1\\lessdot\\cdots\\lessdot w_k=w$ of $[v,w]$ has label word whose $i$-th entry is the label of its $i$-th step counted from the top, the cover $w_{k-i}\\lessdot w_{k-i+1}$, paired with the root chain $c$ extended by $w_{k-1}\\gtrdot\\cdots\\gtrdot w_{k-i+1}$ (an empty extension when $i=1$), that is, $\\lambda(c+w_{k-1}\\gtrdot\\cdots\\gtrdot w_{k-i+1};\\,w_{k-i}\\lessdot w_{k-i+1})$. An **ordinary edge labeling** is the special case in which $\\lambda(c;v\\lessdot w)$ does not depend on $c$.\n\n**(3) Increasing and falling chains, descents, lexicographic order.** A maximal chain $m$ of $[x,y]$ is **increasing** if $\\lambda_1(m)<\\lambda_2(m)<\\cdots<\\lambda_n(m)$; it is **falling** if $\\lambda_1(m)\\ge\\lambda_2(m)\\ge\\cdots\\ge\\lambda_n(m)$ and **strictly falling** if $\\lambda_1(m)>\\lambda_2(m)>\\cdots>\\lambda_n(m)$. Its **descent set** is $D(m):=\\{i\\in\\{1,\\dots,n-1\\}:\\lambda_i(m)>\\lambda_{i+1}(m)\\}$, so that $m$ is strictly falling exactly when $D(m)=\\{1,\\dots,n-1\\}$. Label words are compared **lexicographically**: $\\lambda(m')\\prec\\lambda(m)$ if at the least index $i$ with $\\lambda_i(m')\\ne\\lambda_i(m)$ one has $\\lambda_i(m')<\\lambda_i(m)$.\n\n**(4) No-tie and lex-increasing hypotheses.** The labeling satisfies the **no-tie condition** (N) if in every rooted interval $([v,w],c)$ of $[x,y]$ the labels of any maximal chain of $[v,w]$ are pairwise distinct; then falling and strictly falling coincide on each maximal chain. It satisfies the **lex-increasing property** (L) if in every rooted interval $([v,w],c)$ of $[x,y]$ there is exactly one increasing maximal chain, and its label word is lexicographically first among the label words of all maximal chains of $([v,w],c)$. The rank-zero and rank-one cases give (L) its expected vacuous meaning: a rank-zero interval has one maximal chain, consisting of its single element and having an empty label word, and a rank-one interval has a single chain whose one-term label word is increasing.",
+        "strategy": "This is a property definition, not a claim. The lattice congruence notion and the quotient operations are the standard ones (Reading slides; the quotient formulas and endpoint maps are the objects of the next two items). The rooted-chain labeling is the dual chain-lexicographic (CL) labeling of Bj\u00f6rner\u2013Wachs as used for Bruhat intervals (Wachs \u00a73.3, Definition 3.3.1; Bj\u00f6rner\u2013Brenti \u00a72.7 deletion labels); reading the labels down from the top rather than up from the bottom is the dual convention, and the ordinary edge-labeling special case is Definition 3.2.1 (EL-labeling) of Wachs and Definition 4.11 (E-labeling) of Stanley. The no-tie condition is the distinct-label convention requested for the falling-chain formula. No existence claim is made here; see [[thm-cg-finite-lattice-interval-congruence-criterion]] for the well-definedness target recorded in justified_by.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nathan Reading, Lattice congruences of the weak order: algebra, combinatorics, and geometry, Triangle Lectures in Combinatorics (2019), slides on the order-theoretic characterization of a lattice congruence",
+              "url": "https://nreadin.math.ncsu.edu/papers/TLC.pdf"
+            },
+            {
+              "title": "Michelle L. Wachs, Poset topology: tools and applications, PCMI lecture notes, Lecture 3 \u00a7\u00a73.1\u20133.4",
+              "url": "https://arxiv.org/pdf/math/0602226"
+            },
+            {
+              "title": "Anders Bj\u00f6rner and Francesco Brenti, Combinatorics of Coxeter Groups (GTM 231), \u00a72.7 and Appendix A2.2\u2013A2.4",
+              "url": "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
+            },
+            {
+              "title": "Richard P. Stanley, An Introduction to Hyperplane Arrangements, Lecture 1 \u00a71.2 and Lecture 4 \u00a74.1",
+              "url": "https://www.cis.upenn.edu/~cis6100/sp06stanley.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "thm-cg-finite-lattice-interval-congruence-criterion"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-cg-lattice-quotient-descent-and-class-intervals",
+        "kind": "lemma",
+        "title": "Lattice quotient descent, class intervals and monotone endpoints",
+        "deps": [
+          "def-cg-finite-lattice-congruence-and-interval-projections",
+          "def-lattice-distributive-lattice-and-order-ideal",
+          "def-poset-interval-and-finiteness-conditions",
+          "def-finite-cardinality",
+          "thm-subset-of-a-finite-set",
+          "def-equivalence-relation",
+          "lem-equivalence-classes-partition",
+          "def-partial-order"
+        ],
+        "statement": "Let $L$ be a finite lattice, let $\\theta$ be a lattice congruence on $L$ ([[def-cg-finite-lattice-congruence-and-interval-projections]]) and let $[x]_\\theta$ be the class of $x\\in L$. Then:\n\n(i) **(closure)** each class is closed under meet and join: $x\\equiv_\\theta y$ implies $x\\wedge y\\equiv_\\theta y$ and $x\\vee y\\equiv_\\theta y$; consequently each class is closed under the meet and the join of any nonempty finite subfamily of its members;\n\n(ii) **(endpoints)** each class has a least member $\\pi_\\downarrow(x)$ and a greatest member $\\pi_\\uparrow(x)$, both lying in the class, and the class is the interval between them, $[x]_\\theta=\\{z\\in L:\\pi_\\downarrow(x)\\le z\\le\\pi_\\uparrow(x)\\}$ ([[def-poset-interval-and-finiteness-conditions]]);\n\n(iii) **(quotient lattice)** the proposed quotient operations are independent of the chosen representatives, and with them the set of classes is a lattice $L/\\theta$ whose order is given by $[x]_\\theta\\le[y]_\\theta$ if and only if $x\\vee y\\equiv_\\theta y$; the projection $x\\mapsto[x]_\\theta$ preserves meets and joins;\n\n(iv) **(monotonicity)** the endpoint maps $\\pi_\\downarrow:L\\to L$ and $\\pi_\\uparrow:L\\to L$ are order-preserving.\n\nFiniteness is used exactly in (ii): the meet and the join of all members of a class are finite iterated meets and joins, formed over a listing of the finite nonempty class ([[def-finite-cardinality]], [[thm-subset-of-a-finite-set]]). No choice principle is used anywhere: the class is listed by a bijection with a natural number, and the binary meet and join are applied along that listing.",
+        "strategy": "(i) From $x\\equiv_\\theta y$, congruentiality gives $x\\wedge y\\equiv_\\theta y\\wedge y=y$ and $x\\vee y\\equiv_\\theta y\\vee y=y$; iterate over a listing of the finite subfamily.\n\n(ii) Since $L$ is finite, a class is finite ([[thm-subset-of-a-finite-set]]); by (i) the iterated meet $m$ of all its members lies in it and is below each of them, so $m=\\pi_\\downarrow(x)$; dually for $\\pi_\\uparrow(x)$. For the interval identity: the class lies in $[\\pi_\\downarrow(x),\\pi_\\uparrow(x)]$ by definition of the endpoints, and conversely if $m\\le z\\le M$ with $m,M$ in the class then $z=z\\wedge M\\equiv_\\theta M\\wedge M=M$, so $z$ lies in the class.\n\n(iii) If $x\\equiv x'$ and $y\\equiv y'$ then congruentiality gives $x\\vee y\\equiv x'\\vee y'$ and $x\\wedge y\\equiv x'\\wedge y'$, so the operations on classes are well defined; commutativity, associativity, idempotence and absorption pass to classes through representatives, so they define a lattice with the stated order, and the projection is a surjective lattice homomorphism. (The classes, not the quotient map, are the elements; no choice of representatives is made in the definition of the operations.)\n\n(iv) If $x\\le y$ then $\\pi_\\uparrow(x)\\vee\\pi_\\uparrow(y)\\equiv x\\vee y=y\\equiv\\pi_\\uparrow(y)$, so $\\pi_\\uparrow(x)\\vee\\pi_\\uparrow(y)$ is an element of the class of $y$ that is at least its greatest member, hence equals $\\pi_\\uparrow(y)$ and $\\pi_\\uparrow(x)\\le\\pi_\\uparrow(y)$; dually $\\pi_\\downarrow(x)\\wedge\\pi_\\downarrow(y)\\equiv x\\wedge y=x\\equiv\\pi_\\downarrow(x)$ and $\\pi_\\downarrow(x)\\wedge\\pi_\\downarrow(y)$ is an element of the class of $x$ that is at most its least member, so it equals $\\pi_\\downarrow(x)$ and $\\pi_\\downarrow(x)\\le\\pi_\\downarrow(y)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nathan Reading, Lattice congruences of the weak order: algebra, combinatorics, and geometry, Triangle Lectures in Combinatorics (2019), slides on the order-theoretic characterization of a lattice congruence",
+              "url": "https://nreadin.math.ncsu.edu/papers/TLC.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-cg-finite-lattice-interval-congruence-criterion",
+        "kind": "theorem",
+        "title": "The interval criterion for a lattice congruence: interval classes with monotone endpoints",
+        "deps": [
+          "def-cg-finite-lattice-congruence-and-interval-projections",
+          "lem-cg-lattice-quotient-descent-and-class-intervals",
+          "def-lattice-distributive-lattice-and-order-ideal",
+          "def-poset-interval-and-finiteness-conditions",
+          "def-equivalence-relation",
+          "lem-equivalence-classes-partition",
+          "def-partial-order"
+        ],
+        "statement": "Let $L$ be a finite lattice and let $\\theta$ be an equivalence relation on $L$ whose classes are intervals: for every $x\\in L$ there are elements $d(x)\\le u(x)$ of the class $[x]_\\theta$ with $[x]_\\theta=\\{z\\in L:d(x)\\le z\\le u(x)\\}$ ([[def-cg-finite-lattice-congruence-and-interval-projections]], [[def-poset-interval-and-finiteness-conditions]]). Then $\\theta$ is a lattice congruence if and only if the endpoint maps $d:L\\to L$ and $u:L\\to L$ are order-preserving. Explicitly:\n\n(i) **(necessity)** if $\\theta$ is a lattice congruence then $d$ and $u$ are order-preserving; this is [[lem-cg-lattice-quotient-descent-and-class-intervals]](iv), with $d=\\pi_\\downarrow$ and $u=\\pi_\\uparrow$;\n\n(ii) **(sufficiency)** if $d$ and $u$ are order-preserving then $x\\equiv_\\theta y$ implies $x\\vee z\\equiv_\\theta y\\vee z$ and $x\\wedge z\\equiv_\\theta y\\wedge z$ for every $z\\in L$; hence $\\theta$ is a lattice congruence, and the quotient operations of [[def-cg-finite-lattice-congruence-and-interval-projections]] are well defined.",
+        "strategy": "(ii) Reduce equivalent elements to comparable ones. If $x\\equiv y$ then $d(x)=d(y)\\le x\\wedge y\\le x\\le u(x)=u(y)$, so the meet $x\\wedge y$ lies in the class of $x$, and symmetrically in the class of $y$; this uses only the interval hypothesis, not yet congruentiality. Hence it suffices to prove the claim for comparable pairs $x\\le y$ with $x\\equiv y$: the comparable case applied to $(x\\wedge y,x)$ and to $(x\\wedge y,y)$, combined by transitivity of $\\equiv$, gives $x\\vee z\\equiv y\\vee z$ and $x\\wedge z\\equiv y\\wedge z$ for arbitrary equivalent $x,y$.\n\nJoins: for arbitrary $z$, monotonicity of $u$ at $x\\le x\\vee z$ gives $y\\le u(y)=u(x)\\le u(x\\vee z)$, and $z\\le x\\vee z\\le u(x\\vee z)$, hence $x\\vee z\\le y\\vee z\\le u(x\\vee z)$; since the class of $x\\vee z$ is exactly the interval $[d(x\\vee z),u(x\\vee z)]$, this gives $x\\vee z\\equiv y\\vee z$.\n\nMeets: apply the same computation in the dual lattice, where the class of $w$ is the interval with lower endpoint $u(w)$ and upper endpoint $d(w)$; the join computation there is the meet computation here, and it yields $x\\wedge z\\equiv y\\wedge z$ from $d(y\\wedge z)\\le x\\wedge z\\le y\\wedge z$ together with monotonicity of $d$ (equivalently, verify directly that $d(y\\wedge z)\\le d(x)=d(y)\\le x$, $d(y\\wedge z)\\le d(z)\\le z$, and $x\\wedge z\\le y\\wedge z$, so both $x\\wedge z$ and $y\\wedge z$ lie in the class of $y\\wedge z$).\n\nFor general equivalent $x,y$, apply the comparable case to the pairs $x\\wedge y\\le x$ and $x\\wedge y\\le y$, which are equivalent pairs, and combine by transitivity of $\\equiv$. Necessity is step (i); the quotient operation formulas are then those of [[lem-cg-lattice-quotient-descent-and-class-intervals]](iii).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nathan Reading, Lattice congruences of the weak order: algebra, combinatorics, and geometry, Triangle Lectures in Combinatorics (2019), slides on the order-theoretic characterization of a lattice congruence",
+              "url": "https://nreadin.math.ncsu.edu/papers/TLC.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-cg-lexicographic-chain-shelling-and-mobius-cancellation",
+        "kind": "lemma",
+        "title": "Lexicographic chain shelling and the falling-chain M\u00f6bius formula",
+        "deps": [
+          "def-cg-finite-lattice-congruence-and-interval-projections",
+          "def-graded-poset-and-rank",
+          "def-poset-interval-and-finiteness-conditions",
+          "def-face-poset-and-order-complex",
+          "def-poset-mobius-function",
+          "lem-poset-mobius-recurrence",
+          "def-boolean-lattice-and-levels",
+          "thm-mobius-function-of-a-boolean-lattice",
+          "cor-mobius-inversion-for-finite-posets",
+          "thm-subset-of-a-finite-set",
+          "thm-induction-principle"
+        ],
+        "statement": "Let $P$ be a finite graded poset, let $x\\le y$ in $P$, and let $[x,y]$ carry a descending rooted-chain labeling with values in a linearly ordered set that satisfies the no-tie condition (N) and the lex-increasing property (L) on every rooted interval ([[def-cg-finite-lattice-congruence-and-interval-projections]]). Write $n:=\\rho(x,y)$; for a maximal chain $m$ of $[x,y]$ write $\\lambda(m)$ for its label word and $D(m)\\subseteq\\{1,\\dots,n-1\\}$ for its descent set, and identify $m$ with its vertex set, so that $|m|=n+1$.\n\n(i) **(lexicographic shelling)** For all maximal chains $m',m$ of $[x,y]$ with $\\lambda(m')\\prec\\lambda(m)$ there is a maximal chain $k$ of $[x,y]$ with $\\lambda(k)\\prec\\lambda(m)$, $m'\\cap m\\subseteq k\\cap m$ and $|k\\cap m|=|m|-1$. Equivalently, ordered by label words, the maximal chains of $[x,y]$ satisfy the pairwise facet criterion for a shelling of the order complex $\\Delta([x,y])$ ([[def-face-poset-and-order-complex]]): its facets are the maximal chains, and for facets $C_{m'}$ preceding $C_m$ the chain $k$ above gives $C_{m'}\\cap C_m\\subseteq C_k\\cap C_m$ and $|C_k\\cap C_m|=|C_m|-1$. Removing the two endpoints $x,y$ from all chains, the same order is a shelling of the order complex $\\Delta((x,y))$ of the open interval, whose facets are the maximal chains of $(x,y)$.\n\n(ii) **(falling-chain M\u00f6bius formula)** For every rooted interval $([v,w],c)$ of $[x,y]$, with $\\mu$ the M\u00f6bius function of the poset $[v,w]$ ([[def-poset-mobius-function]]),\n\n$$\\mu(v,w)=(-1)^{\\rho(v,w)}\\cdot\\#\\{\\text{maximal chains of }[v,w]\\text{ whose label word is strictly falling}\\},$$\n\nand under (N) 'falling' may replace 'strictly falling'. Conventions: if $v=w$ (rank $0$) then $\\mu(v,v)=1$ and the singleton maximal chain $\\{v\\}$ has an empty label word and is vacuously falling; if $\\rho(v,w)=1$ then the open interval $(v,w)$ is empty, the single maximal chain of $[v,w]$ is vacuously falling and the formula gives $\\mu(v,w)=-1$.",
+        "strategy": "(i) Follow the first-divergence, first-reunion argument for the lex order (Bj\u00f6rner\u2013Brenti, proof of Theorem 2.7.5, adapted from deletion-labeled Bruhat intervals to an abstract graded interval). Let $m,m'$ be maximal chains of $[x,y]$ with $\\lambda(m')\\prec\\lambda(m)$. Let $d$ be the greatest index with $m_i=m'_i$ for all $i\\le d$ and let $g>d$ be the least index with $m_g=m'_g$; these exist because $m_0=m'_0=y$ and $m_n=m'_n=x$, and $g-d\\ge2$. The subchain $m_d\\gtrdot\\cdots\\gtrdot m_g$ is not the increasing chain of the rooted interval $([m_g,m_d],c)$, where $c$ is the part of $m$ above $m_d$: otherwise (L) would force $\\lambda(m)\\prec\\lambda(m')$. By (L) the rooted interval has a unique increasing chain, so the label word of $m$ has a descent $\\lambda_e(m)>\\lambda_{e+1}(m)$ with $d<e<g$. Replace the two-step segment $m_{e-1}\\gtrdot m_e\\gtrdot m_{e+1}$ by the increasing maximal chain of the rooted rank-two interval $([m_{e+1},m_{e-1}],c')$, where $c'=m_0\\gtrdot\\cdots\\gtrdot m_{e-1}$ is the part of $m$ above $m_{e-1}$ (the root chain of a rooted interval ends at its top $m_{e-1}$); this chain has the form $m_{e-1}\\gtrdot y'\\gtrdot m_{e+1}$ with $y'\\ne m_e$ because the segment of $m$ is not increasing. Its two-entry label word is lexicographically smaller than the two-entry word $(\\lambda_e(m),\\lambda_{e+1}(m))$ of the segment, and the words of $k$ and $m$ agree in positions $1,\\dots,e-1$ because the root chain above $m_{e-1}$ is the same, so the first differing position of the two full words is $e$ or $e+1$ and therefore setting $k:=m_0\\gtrdot\\cdots\\gtrdot m_{e-1}\\gtrdot y'\\gtrdot m_{e+1}\\gtrdot\\cdots\\gtrdot m_n$ gives $\\lambda(k)\\prec\\lambda(m)$, $k\\cap m=m\\setminus\\{m_e\\}$ and hence $m'\\cap m\\subseteq k\\cap m$ (all elements of $m'\\cap m$ have indices $\\le d$ or $\\ge g$) and $|k\\cap m|=|m|-1$. Deleting $x,y$ from all chains preserves both conditions because $x,y\\in k\\cap m$.\n\n(ii) Fix the rooted interval $([v,w],c)$ and put $k=\\rho(v,w)$. Write $k-S:=\\{k-s:s\\in S\\}$, let $f(T)$ be the number of maximal chains $m$ of $[v,w]$ with $D(m)\\subseteq T$ for $T\\subseteq\\{1,\\dots,k-1\\}$, and for $S\\subseteq\\{1,\\dots,k-1\\}$ let $\\alpha(S)$ be the number of chains $w=y_0>y_1>\\cdots>y_t=v$ in $[v,w]$ (not necessarily saturated; $>$ is the strict order, so the single step $t=1$ with no intermediate element is allowed) whose rank set $\\{\\rho(y_i)-\\rho(v):1\\le i\\le t-1\\}$ equals $S$. Claim: $\\alpha(S)=f(k-S)$ for every $S$. Construction: given such a chain, refine it segment by segment from the top, replacing the segment $[y_i,y_{i-1}]$ by the unique increasing maximal chain of that rooted interval, whose root is the original root $c$ extended by the already-constructed chain from $w$ to the upper endpoint $y_{i-1}$; the word is increasing inside each segment, so a descent can occur only at a junction $y_i$, at word position $k-(\\rho(y_i)-\\rho(v))$, whence $D(m)\\subseteq k-S$. Conversely, given a maximal chain with $D(m)\\subseteq k-S$, keep its elements $m_j$ with $k-j\\in S$: each segment between consecutive kept elements has no internal descent, hence by (N) a strictly increasing word, hence by (L) is the increasing chain of its rooted interval, so refining the kept chain returns $m$, and the kept chain has rank set exactly $S$. The two constructions are inverse, proving the claim.\n\nDefine $\\beta(S):=\\sum_{T\\subseteq S}(-1)^{|S-T|}\\alpha(T)$. The involution $T\\mapsto k-T$ fixes $\\{1,\\dots,k-1\\}$, so the claim gives $\\beta(\\{1,\\dots,k-1\\})=\\sum_{T}(-1)^{k-1-|T|}f(k-T)=\\sum_{U}(-1)^{k-1-|U|}f(U)$ with $U:=k-T$; Boolean M\u00f6bius inversion ([[thm-mobius-function-of-a-boolean-lattice]], [[cor-mobius-inversion-for-finite-posets]]) identifies this sum with $\\#\\{m:D(m)=\\{1,\\dots,k-1\\}\\}$, exactly the number of strictly falling maximal chains of $[v,w]$.\n\nEvaluate: $\\beta(\\{1,\\dots,k-1\\})=\\sum_{T}(-1)^{k-1-|T|}\\alpha(T)=\\sum_{t\\ge1}\\sum_{\\text{chains }w=y_0>y_1>\\cdots>y_t=v}(-1)^{k-t}=(-1)^k\\sum_{t\\ge1}(-1)^t c_t$, where $c_t$ is the number of chains with $t$ steps from $w$ to $v$. Philip Hall's chain-sum identity $\\mu(v,w)=\\sum_{t\\ge1}(-1)^t c_t$ (Stanley Lecture 4, Lemma 4.4) is proved directly from the published recurrence [[lem-poset-mobius-recurrence]] by strong induction on interval cardinality: if $A(v,w):=\\sum_{t\\ge1}(-1)^t c_t(v,w)$, splitting at the first vertex $z$ below $w$ gives $A(v,w)=-1-\\sum_{v<z<w}A(v,z)=-\\sum_{v\\le z<w}\\mu(v,z)=\\mu(v,w)$. Every sum is finite, and the induction uses proper subintervals. Hence $\\beta(\\{1,\\dots,k-1\\})=(-1)^k\\mu(v,w)$, which is the displayed formula. The derivation applies for $k\\ge1$. For $k=0$ the singleton maximal chain has an empty falling label word and $\\mu(v,v)=1$; for $k=1$ the unique one-edge maximal chain is falling and $\\mu(v,w)=-1$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Anders Bj\u00f6rner and Francesco Brenti, Combinatorics of Coxeter Groups (GTM 231), \u00a72.7 and Appendix A2.2\u2013A2.4",
+              "url": "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
+            },
+            {
+              "title": "Richard P. Stanley, An Introduction to Hyperplane Arrangements, Lecture 1 \u00a71.2 and Lecture 4 \u00a74.1",
+              "url": "https://www.cis.upenn.edu/~cis6100/sp06stanley.pdf"
+            },
+            {
+              "title": "Michelle L. Wachs, Poset topology: tools and applications, PCMI lecture notes, Lecture 3 \u00a7\u00a73.1\u20133.4",
+              "url": "https://arxiv.org/pdf/math/0602226"
+            }
+          ]
+        },
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 1727,
+    "id": "finite-lattice-projections-and-coxeter-chain-labels-examples",
+    "kind": "B",
+    "category": "coxeter-groups",
+    "title": "Finite Lattice Projections and Coxeter Chain Labels \u2014 Examples",
+    "companion": "finite-lattice-projections-and-coxeter-chain-labels",
+    "requires": [
+      "finite-lattice-projections-and-coxeter-chain-labels"
+    ],
+    "items": [
+      {
+        "id": "ex-cg-interval-congruence-criterion-on-a-chain-and-a-diamond",
+        "kind": "example",
+        "title": "The interval criterion checked on a three-element chain and a diamond",
+        "deps": [
+          "thm-cg-finite-lattice-interval-congruence-criterion",
+          "lem-cg-lattice-quotient-descent-and-class-intervals",
+          "def-cg-finite-lattice-congruence-and-interval-projections",
+          "def-lattice-distributive-lattice-and-order-ideal",
+          "def-boolean-lattice-and-levels",
+          "def-poset-interval-and-finiteness-conditions",
+          "def-chain",
+          "lem-equivalence-classes-partition"
+        ],
+        "statement": "On the three-element chain $C=\\{0<a<1\\}$ and on the diamond $D=\\{0<a,b<1\\}$ (finite lattices under the induced order; $D\\cong B(\\{a,b\\})$, [[def-boolean-lattice-and-levels]]), list every partition of the underlying set whose classes are intervals $[d(x),u(x)]$ with endpoints in the class, apply the interval criterion ([[thm-cg-finite-lattice-interval-congruence-criterion]]) to each partition, and identify the quotient lattice ([[lem-cg-lattice-quotient-descent-and-class-intervals]]) of each surviving partition.\n\nOn $C$ there are exactly four interval partitions, namely $\\{0\\}|\\{a\\}|\\{1\\}$, $\\{0,a\\}|\\{1\\}$, $\\{0\\}|\\{a,1\\}$ and $\\{0,a,1\\}$, and all four are lattice congruences: the endpoint maps are order-preserving in each case, and the quotients are $C$ itself, two two-element chains, and the one-element lattice. On $D$ there are exactly eight interval partitions, namely $\\{0\\}|\\{a\\}|\\{b\\}|\\{1\\}$, $\\{0,a\\}|\\{b\\}|\\{1\\}$, $\\{0,b\\}|\\{a\\}|\\{1\\}$, $\\{0\\}|\\{a\\}|\\{b,1\\}$, $\\{0\\}|\\{b\\}|\\{a,1\\}$, $\\{0,a\\}|\\{b,1\\}$, $\\{0,b\\}|\\{a,1\\}$ and $\\{0,a,b,1\\}$; exactly four of them satisfy the criterion, namely the discrete partition, $\\{0,a\\}|\\{b,1\\}$, $\\{0,b\\}|\\{a,1\\}$ and the all-one partition, and these are exactly the lattice congruences of $D$: the other four fail with an explicit violation, for example $\\{0,a\\}|\\{b\\}|\\{1\\}$ has $u(0)=a$, $u(b)=b$ and $0\\le b$ but $a\\not\\le b$. The two 2+2 congruences have quotient the two-element chain; the quotient of the discrete partition is $D$ and the quotient of the all-one partition is the one-element lattice, so the congruence lattice of $D$ has exactly four elements.",
+        "strategy": "Direct finite verification. On $C$: the four listed partitions are all the partitions into intervals (there are no other intervals); for each, compute $d$ and $u$ from the class membership and check $x\\le y\\Rightarrow d(x)\\le d(y)$ and $u(x)\\le u(y)$, then check congruentiality for all triples by hand. On $D$: the interval partitions are exactly the eight listed (classes of size two must be one of $[0,a],[0,b],[a,1],[b,1]$); for each, compute the endpoint maps and check monotonicity on the six comparable pairs; the four with monotone endpoints are the four congruences, and for each of the other four the response records the explicit violating pair of comparable elements and, independently, two equivalent elements and a $z$ for which $\\vee$ or $\\wedge$ fails to respect $\\equiv$. Quotients are read off from the class operations $[x]\\vee[y]=[x\\vee y]$, $[x]\\wedge[y]=[x\\wedge y]$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered",
+          "generation": {
+            "role": "example"
+          }
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nathan Reading, Lattice congruences of the weak order: algebra, combinatorics, and geometry, Triangle Lectures in Combinatorics (2019), slides on the order-theoretic characterization of a lattice congruence",
+              "url": "https://nreadin.math.ncsu.edu/papers/TLC.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-cg-interval-partition-with-nonmonotone-endpoints-is-not-a-congruence",
+        "kind": "counterexample",
+        "title": "A partition into intervals with non-monotone endpoints need not be a lattice congruence",
+        "deps": [
+          "thm-cg-finite-lattice-interval-congruence-criterion",
+          "def-cg-finite-lattice-congruence-and-interval-projections",
+          "def-lattice-distributive-lattice-and-order-ideal",
+          "def-poset-interval-and-finiteness-conditions",
+          "def-boolean-lattice-and-levels",
+          "lem-equivalence-classes-partition"
+        ],
+        "statement": "**Statement refuted:** every partition of a finite lattice into intervals (each class of the form $[d(x),u(x)]$ with endpoints in the class) is a lattice congruence.\n\n**Counterexample.** In the diamond $D=\\{0<a,b<1\\}$ take the partition into the intervals $\\{0,a\\}=[0,a]$, $\\{b\\}=[b,b]$ and $\\{1\\}=[1,1]$. It is a partition into intervals, but it is not a lattice congruence: $0\\equiv a$ and $b\\equiv b$, while $0\\vee b=b$ and $a\\vee b=1$, so $b\\not\\equiv 1$. In terms of the criterion ([[thm-cg-finite-lattice-interval-congruence-criterion]]) the upper endpoint map fails to be order-preserving: $0\\le b$, but $u(0)=a\\not\\le b=u(b)$. Thus the monotonicity hypothesis cannot be dropped, and the four-congruence count of [[ex-cg-interval-congruence-criterion-on-a-chain-and-a-diamond]] is a genuine restriction.",
+        "strategy": "Verify the three classes are intervals with the displayed endpoints; then check the congruence property directly: $0\\equiv a$, $b\\equiv b$, but $0\\vee b=b$ while $a\\vee b=1$, and $b$, $1$ lie in different classes. Verify the monotonicity failure of the upper endpoint map on the comparable pair $0\\le b$. Both computations are finite and recorded in the companion example [[ex-cg-interval-congruence-criterion-on-a-chain-and-a-diamond]].",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered",
+          "generation": {
+            "role": "counterexample"
+          }
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nathan Reading, Lattice congruences of the weak order: algebra, combinatorics, and geometry, Triangle Lectures in Combinatorics (2019), slides on the order-theoretic characterization of a lattice congruence",
+              "url": "https://nreadin.math.ncsu.edu/papers/TLC.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-cg-rank-three-chain-labeling-and-order-complex-facets",
+        "kind": "example",
+        "title": "A rank-three chain labeling translated into facets of the order complex",
+        "deps": [
+          "lem-cg-lexicographic-chain-shelling-and-mobius-cancellation",
+          "def-cg-finite-lattice-congruence-and-interval-projections",
+          "def-boolean-lattice-and-levels",
+          "def-graded-poset-and-rank",
+          "def-face-poset-and-order-complex",
+          "def-poset-mobius-function",
+          "lem-poset-mobius-recurrence"
+        ],
+        "statement": "Label each cover $S\\lessdot S\\cup\\{i\\}$ of the Boolean lattice $B_3=B(\\{1,2,3\\})$ ([[def-boolean-lattice-and-levels]], [[def-graded-poset-and-rank]]) by the added element $i\\in\\{1,2,3\\}$. This is an ordinary edge labeling ([[def-cg-finite-lattice-congruence-and-interval-projections]]), hence in particular a descending rooted-chain labeling, and it satisfies the no-tie condition and the lex-increasing property on every rooted interval of $[\\varnothing,\\{1,2,3\\}]$.\n\nThe rank-three interval $[\\varnothing,\\{1,2,3\\}]$ has exactly six maximal chains, with label words (read from the top) $(1,2,3),(1,3,2),(2,1,3),(2,3,1),(3,1,2),(3,2,1)$; the unique increasing word is $(1,2,3)$, so the increasing chain is $\\{1,2,3\\}\\gtrdot\\{2,3\\}\\gtrdot\\{3\\}\\gtrdot\\varnothing$, and the unique strictly falling chain is $\\{1,2,3\\}\\gtrdot\\{1,2\\}\\gtrdot\\{1\\}\\gtrdot\\varnothing$ with word $(3,2,1)$. The facets of the order complex $\\Delta((\\varnothing,\\{1,2,3\\}))$ ([[def-face-poset-and-order-complex]]) are the six maximal chains of the open interval, namely the two-element chains $\\{2,3\\}\\supset\\{3\\}$, $\\{2,3\\}\\supset\\{2\\}$, $\\{1,3\\}\\supset\\{3\\}$, $\\{1,3\\}\\supset\\{1\\}$, $\\{1,2\\}\\supset\\{2\\}$ and $\\{1,2\\}\\supset\\{1\\}$ in the order induced by the label words above. The falling-chain formula of [[lem-cg-lexicographic-chain-shelling-and-mobius-cancellation]] gives $\\mu(\\varnothing,\\{1,2,3\\})=(-1)^3\\cdot1=-1$, which agrees with the M\u00f6bius recurrence on $B_3$ ([[def-poset-mobius-function]], [[lem-poset-mobius-recurrence]]). The example also exhibits one replacement step of the shelling: for $m'$ with word $(1,3,2)$ and $m$ with word $(2,1,3)$ one has $\\lambda(m')\\prec\\lambda(m)$, and the chain $k$ with word $(1,2,3)$ satisfies $\\lambda(k)\\prec\\lambda(m)$, $m'\\cap m\\subseteq k\\cap m$ and $|k\\cap m|=3=|m|-1$; the replaced two-step segment is $\\{1,2,3\\}\\gtrdot\\{1,3\\}\\gtrdot\\{3\\}$ of $m$, with first-divergence and first-reunion analysis as in the proof of the shelling lemma.",
+        "strategy": "Verification of the finite claims. (1) The labeling is root-independent, so every rooted interval carries the same labeling as the interval itself; hence (N) holds because the three labels of a maximal chain add three distinct elements. (2) For an interval $[S,T]$, the maximal chains correspond to the orders in which the elements of $T\\setminus S$ may be added, and the label word read from the top is the reverse of the elimination order; the unique increasing word is obtained by deleting the elements of $T\\setminus S$ in increasing order, and it is lexicographically first. Enumerate the six maximal chains of $[\\varnothing,\\{1,2,3\\}]$ with their words and descent sets: $(1,2,3)$ has no descent, $(1,3,2)$ and $(2,1,3)$ and $(2,3,1)$ and $(3,1,2)$ have exactly one descent, and $(3,2,1)$ has two descents; hence exactly one strictly falling chain. (3) The six facets of the open interval's order complex are the two-element chains above, ordered by their parent words; check the pairwise facet criterion on each pair and record the replacement $k$ for the pair with words $(1,3,2)\\prec(2,1,3)$, namely the chain with word $(1,2,3)$. (4) Compute $\\mu(\\varnothing,\\{1,2,3\\})$ from the recurrence: $\\mu(\\varnothing,\\{i\\})=-1$ for each $i$, $\\mu(\\varnothing,\\{i,j\\})=1$ for each two-element subset, and $\\mu(\\varnothing,\\{1,2,3\\})=-[1+3(-1)+3(1)]=-1$, matching the formula.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard P. Stanley, An Introduction to Hyperplane Arrangements, Lecture 1 \u00a71.2 and Lecture 4 \u00a74.1",
+              "url": "https://www.cis.upenn.edu/~cis6100/sp06stanley.pdf"
+            },
+            {
+              "title": "Michelle L. Wachs, Poset topology: tools and applications, PCMI lecture notes, Lecture 3 \u00a7\u00a73.1\u20133.4",
+              "url": "https://arxiv.org/pdf/math/0602226"
+            }
+          ]
+        },
+        "dependency_level": 2
+      }
+    ]
+  }
+]

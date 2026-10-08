@@ -2,36 +2,25 @@
 page: tensor-coherence-and-algebraic-descent
 title: "Tensor Coherence and Algebraic Descent"
 status: draft
-items: []
+items: [def-hh-scalar-and-tensor-conventions,
+        lem-hh-tensor-coherence-on-elementary-tensors,
+        lem-hh-tensor-injections-quotients-and-kernels-over-a-field,
+        lem-hh-coefficient-extension-and-finite-tensor-separation,
+        lem-hh-finite-tensor-duality-and-canonical-coevaluation,
+        lem-hh-free-associative-ring-and-relations-descent,
+        lem-hh-universal-presentations-and-base-change,
+        lem-hh-finite-polynomial-and-localization-constructions,
+        lem-hh-finite-matrix-and-module-preliminaries,
+        lem-hh-regular-module-detects-linear-and-tensor-identities]
 examples: []
 ---
 
-A formula involving tensors becomes mathematics only after it descends from a multilinear map. The opening page proves the coherence and descent tools that later sources usually suppress. Scalars are a field k for the Hopf branch; the Hecke branch will explicitly introduce its universal commutative coefficient rings. No infinite tensor expansion or implicit completion is permitted.
+The page fixes the tensor conventions shared by the Hopf and Hecke branches: $k$ is a field, $\otimes$ means $\otimes_k$ over $k$-vector spaces, tensor powers are left-associated with the empty tensor $k$, and parentheses in iterated tensor powers may be dropped only after the coherence lemma below has been proved. It then supplies the coherence, duality and descent facts that the construction pages of these branches consume.
 
-This is a prose scaffold for future item authoring. The constructions and results below are explicit proof obligations; an empty item list does not certify that they have been proved in the library. The source-grounded contracts and prerequisite audit are recorded in `research/plan-hopf-hecke-algebras-track.md`.
+Coherence is proved concretely rather than invoked from a general monoidal theorem: the associator, the symmetry and the unit isomorphisms satisfy naturality, the pentagon, the unit triangle and both symmetry hexagons, each verified on elementary tensors and extended to all linear maps by the spanning property of the tensor product. Finite tensor duality identifies $V^*\otimes W^*$ with $(V\otimes W)^*$ through the product dual basis and exhibits the basis-independent coevaluation element $\sum_iv_i\otimes v_i^*$ together with both zigzag identities; no surjectivity is asserted in infinite dimension, and the companion page's counterexample shows that the finite-dimensional hypothesis is necessary.
 
-## Construction and proof obligations
+The Choice assumptions are recorded explicitly. The injection lemma and the kernel computation for a tensor product of quotient maps assume the Axiom of Choice through [[cor-a-linear-subspace-has-a-complement]], and coefficient separation for a finite independent family inherits that assumption in infinite ambient dimension while remaining choice-free in finite dimension, where the independent list is extended to a basis.
 
-**def-hh-scalar-and-tensor-conventions.** Fix algebraic tensors, left-associated tensor powers, the empty tensor k, opposite algebra, and finite-sum notation. These use the published tensor and algebra definitions; parentheses are removed only after the next coherence lemma.
-
-**lem-hh-tensor-coherence-on-elementary-tensors.** Verify associator naturality, the pentagon, unit triangle and symmetry hexagon on pure tensors; spanning then proves each diagram. This is a concrete proof for vector spaces, not an appeal to general coherence.
-
-**lem-hh-tensor-injections-quotients-and-kernels-over-a-field.** Prove tensoring an injection is injective and ker(p⊗q)=U⊗W+V⊗Z for quotient maps p:V→V/U,q:W→W/Z. Extend finite bases locally; arbitrary complements use explicit AC and def-axiom-of-choice.
-
-**lem-hh-coefficient-extension-and-finite-tensor-separation.** Assuming AC only for infinite ambient spaces, extend a given finite independent family to a basis and extend its coordinate maps by zero on the complement. For Σv_i⊗w_i with the v_i independent, contraction by these maps recovers each w_i, proving evaluation separation. In finite ambient dimension ordinary finite basis extension suffices without AC. This is the exact infinite-dual/rational-coaction justifier and records where Choice enters.
-
-**lem-hh-finite-tensor-duality-and-canonical-coevaluation.** Construct V*⊗W*→(V⊗W)*, prove it is an isomorphism for finite dimensions by product dual bases, and identify Σv_i⊗v_i* with id_V independently of basis. Infinite full-dual surjectivity is not claimed.
-
-**lem-hh-free-associative-ring-and-relations-descent.** Construct R⟨S⟩ as the free R-module on finite words for commutative R, including the empty word; concatenation is associative. Prove its universal property, two-sided generated-ideal description and quotient algebra universal property. This extends the published field tensor-algebra supplier to Hecke coefficient rings.
-
-**lem-hh-universal-presentations-and-base-change.** Prove presentation base change by explicit mutually inverse generator maps: S⊗R R⟨X⟩ identifies with S⟨X⟩ on the word bases, and (S⊗R A)/(image S⊗R I) identifies with S⊗R(A/I) by its balanced-map universal property. This proves the needed right exactness locally without flatness. Tensor an explicitly proved universal basis isomorphism and its inverse to transport the basis to every commutative specialization.
-
-**lem-hh-finite-polynomial-and-localization-constructions.** Construct multivariate polynomial and Laurent rings from finitely supported monomials over a commutative coefficient ring. Prove the universal properties by substitution of finite sums. When the coefficient ring is a domain (in particular Z or Q), ordered exponent leading terms prove the polynomial/Laurent rings are domains; construct their fraction fields from equivalence classes of numerator/denominator pairs and check operations. No domain assertion is made over a ring with zero divisors. Only finitely many variables are needed: the Coxeter generator set is finite even when W is infinite.
-
-**lem-hh-finite-matrix-and-module-preliminaries.** Supply Gaussian elimination, determinant/adjugate identities, and invariance of finite matrix rank under field extension by minors. A square spanning family in a finite free module has a coordinate matrix with a right inverse, hence unit determinant and is a basis. For finite-dimensional algebra modules, strict submodule chains reduce vector dimension; choose a maximal proper submodule by maximal finite dimension to build a finite composition series. Prove a submodule of a finite direct sum of simples splits by induction on the number of summands, without arbitrary Choice. A nilpotent endomorphism has trace zero using its kernel filtration and a finite adapted basis. These finite facts supply HH-14 and later density/dimension arguments without silently appealing to Wedderburn or infinite module decomposition. The published module/simple/semisimple definitions supply terminology; their arbitrary-module complement theorem is not used. The finite splitting proof writes a submodule of S⊕M either as S⊕(N∩M), or as a graph over its projected, inductively split image in M.
-
-**lem-hh-regular-module-detects-linear-and-tensor-identities.** Prove faithful left-regular evaluation at 1 and its tensor powers detect equality of algebra elements. A multilinear identity checked on spanning pure tensors holds globally; a quotient identity requires prior descent.
-
-## Reading and applications
+The descent half constructs the free associative $R$-algebra $R\langle S\rangle$ on the words in $S$ with concatenation as product, proves its universal property and the two-sided-ideal description of a generated relation ideal, and identifies the quotient as the presented algebra. Base change along a commutative ring homomorphism is proved by explicit mutually inverse generator maps, with the image ideal of a relation ideal carrying the corresponding quotient presentation and no flatness hypothesis; free bases transport along any commutative specialization. Polynomial and Laurent rings are built from finitely supported monomials, their universal properties by substitution, and their fraction fields over domains from numerator-denominator pairs. Finite matrix and module preliminaries supply the right-inverse determinant argument, invariance of finite matrix rank under field extension, finite composition series, the splitting of a submodule of a finite direct sum of simple modules without arbitrary Choice, and the vanishing trace of a nilpotent endomorphism. The regular-module detection principle closes the page: evaluation at $1$ and at $1^{\otimes n}$ detects equality of algebra elements, multilinear identities are checked on pure tensors, and a quotient identity requires the descent that the recorded warning makes explicit.
 
 Prerequisite pages: [[tensor-products-of-modules]], [[modules-and-module-homomorphisms]], [[ideals-and-quotient-rings]], [[dual-spaces-bilinear-forms-and-inertia]], [[linear-independence-bases-and-dimension]], [[linear-maps-rank-nullity-and-quotient-spaces]], [[chain-conditions-and-semisimple-modules]], [[relations-functions-and-quotients]]. The companion [[tensor-coherence-and-algebraic-descent-examples]] develops the calculations and failures needed to test these constructions.

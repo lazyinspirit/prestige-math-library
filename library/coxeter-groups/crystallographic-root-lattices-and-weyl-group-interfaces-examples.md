@@ -3,11 +3,11 @@ page: crystallographic-root-lattices-and-weyl-group-interfaces-examples
 title: "Crystallographic Root Lattices and Weyl Group Interfaces — Examples"
 status: draft
 items: []
-examples: []
+examples: [ex-cg-a2-root-and-weight-lattices, ex-cg-b2-c2-dual-realizations-and-lattices, ex-cg-g2-from-i2-six, cex-cg-i2-five-is-not-crystallographic]
 ---
 
-This draft companion is a dependency leaf. Its exercises and examples use only the theory of [[crystallographic-root-lattices-and-weyl-group-interfaces]] and that page’s established prerequisite closure; no other theory page may depend on a supplier homed here.
+This companion is a dependency leaf. Its examples use the theory of [[crystallographic-root-lattices-and-weyl-group-interfaces]] and that page’s established prerequisite closure; no other theory page depends on an item homed here.
 
-Compare B2/C2 lattices and coroots, derive G2 from I2(6), and show that I2(5) admits no reduced crystallographic root system with those simple reflections. Record the different root and weight lattices for A2.
+The A2 example computes the root and weight lattices and their index. The B2/C2 example compares their dual realizations and lattices. The G2 example constructs the twelve-root system from I2(6), while the I2(5) counterexample proves that no crystallographic scaling gives its simple-root pairing.
 
-Each eventual example will state all hypotheses and verify the claimed calculation. A counterexample identifies the precise dropped hypothesis; a drawing or symbolic calculation alone does not certify a general theorem. Items remain unassigned until the theory suppliers have complete local proofs.
+Each item gives its hypotheses and verifies the calculations locally. The counterexample isolates the label-5 obstruction; no diagram or symbolic output substitutes for the proof.

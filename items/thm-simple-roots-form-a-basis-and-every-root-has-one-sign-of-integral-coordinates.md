@@ -10,11 +10,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
+  precheck: pass
+  repair: research/frontier-42-coxeter-32-codex-simple-root-local-repair/receipt.json
 sources:
   references:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter II"
@@ -58,6 +55,6 @@ for negative roots.
 
 1.2 Distinct simple roots $\alpha,\beta$ satisfy $(\alpha,\beta)\le0$. Indeed, if $(\alpha,\beta)>0$ then $\alpha-\beta\in\Phi$ by [L3]; this root is positive or negative, and if it is positive then $\alpha=(\alpha-\beta)+\beta$ is a nontrivial sum of two positive roots, while if it is negative then $\beta=(\beta-\alpha)+\alpha$ is a nontrivial sum of two positive roots, contradicting the simplicity of $\alpha$ or of $\beta$. [L2, L3, algebra]
 
-2.1 The simple roots are linearly independent. Suppose $\sum_{i\in I}c_i\alpha_i=\sum_{j\in J}c_j\alpha_j$ with disjoint nonempty index sets and all $c_i,c_j>0$; this is the shape of every nontrivial real linear relation, after moving negative coefficients to the other side. The common vector $\gamma=\sum_{i\in I}c_i\alpha_i$ is nonzero, so $(\gamma,\gamma)>0$; on the other hand, expanding one side against the other gives $(\gamma,\gamma)=\sum_{i\in I,j\in J}c_ic_j(\alpha_i,\alpha_j)\le0$, because $I\cap J=\varnothing$ and distinct simple roots have nonpositive inner product by step 1.2. This contradiction shows all coefficients vanish, so $\Delta$ is linearly independent. [L1, step 1.2, algebra]
+2.1 The simple roots are linearly independent. For coefficients $c_i\ge0$ with at least one $c_i>0$, a combination $\sum_i c_i\alpha_i$ of simple roots satisfies $(v,\sum_i c_i\alpha_i)=\sum_i c_i(v,\alpha_i)>0$ by [L2], so it cannot vanish; negating also excludes a nonzero relation with all coefficients nonpositive. Thus any nontrivial real linear relation can be written $\sum_{i\in I}c_i\alpha_i=\sum_{j\in J}c_j\alpha_j$ with disjoint nonempty index sets and all $c_i,c_j>0$. Its common vector $\gamma=\sum_{i\in I}c_i\alpha_i$ satisfies $(v,\gamma)>0$, hence $\gamma\ne0$ and $(\gamma,\gamma)>0$. On the other hand, expanding one side against the other gives $(\gamma,\gamma)=\sum_{i\in I,j\in J}c_ic_j(\alpha_i,\alpha_j)\le0$, since distinct simple roots have nonpositive inner product by step 1.2. This contradiction proves linear independence. [L1, L2, step 1.2, algebra]
 
 3.1 The simple roots span $E$: every root is a simple-root combination by step 1.1 or its negative, and $\Phi$ spans $E$. Together with step 2.1 the set $\Delta$ is a basis of $E$, and with step 1.1 every root is an integral combination whose coefficients all have the sign of the root. Uniqueness of the coefficients is basis uniqueness, and no choice-theoretic input is used. [L1, step 1.1, step 2.1, algebra] ∎

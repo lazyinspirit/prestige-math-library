@@ -3,11 +3,11 @@ page: bruhat-subword-order-and-lifting-examples
 title: "Bruhat Subword Order and Lifting — Examples"
 status: draft
 items: []
-examples: []
+examples: [ex-cg-s4-bruhat-versus-weak-comparability, ex-cg-s4-subword-descriptions-agree, ex-cg-s4-lifting-squares, ex-cg-s4-subwords-and-covers]
 ---
 
-This draft companion is a dependency leaf. Its exercises and examples use only the theory of [[bruhat-subword-order-and-lifting]] and that page’s established prerequisite closure; no other theory page may depend on a supplier homed here.
+This companion is a dependency leaf: its examples use only the theory of [[bruhat-subword-order-and-lifting]] and that page's prerequisite closure, and no other page or item depends on them. All four computations are exhaustive and choice-free evaluations in the symmetric group $S_4$, with $\ell$ the inversion number.
 
-Compute subwords, reflection covers and lifting squares in S4. Contrast weak and Bruhat comparability, and give two expressions of the same element whose subword descriptions must agree.
+[[ex-cg-s4-subwords-and-covers]] multiplies out the $64$ subwords of the standard reduced word $s_1s_2s_3s_1s_2s_1$ of the longest element $w_0=4321$, showing that they realize exactly the $24$ elements of $S_4=[1,w_0]$ and that a single element may arise from several position sets, and it computes all six single-letter deletions, of which exactly three are covers of $w_0$. [[ex-cg-s4-lifting-squares]] exhibits one instance of each of the four descent/ascent cases of the lifting property, certifying the positive comparisons by subword witnesses and showing by equal-length incomparability that the companion comparisons in two of the cases genuinely fail. [[ex-cg-s4-bruhat-versus-weak-comparability]] separates Bruhat from weak comparability: the right- and left-weak relations defined by length-increasing simple multiplications are contained in Bruhat order, but $2143\le2341$ in Bruhat order with neither weak comparison holding, already in rank three. [[ex-cg-s4-subword-descriptions-agree]] checks expression independence on the element $2431$, whose two reduced expressions $s_1s_2s_3s_2$ and $s_1s_3s_2s_3$ have $16$ subwords each, both realizing the same $12$-element interval below $2431$, with the element $s_2$ described at different positions in the two expressions.
 
-Each eventual example will state all hypotheses and verify the claimed calculation. A counterexample identifies the precise dropped hypothesis; a drawing or symbolic calculation alone does not certify a general theorem. Items remain unassigned until the theory suppliers have complete local proofs.
+The results tested here are proved on the theory page: the subword criterion of [[thm-cg-bruhat-subword-characterization]], the interval and grading statements of [[lem-cg-bruhat-chain-refinement-and-gradedness]], and the lifting, cover and reflection-deletion statements of [[thm-cg-bruhat-lifting-and-cover-criterion]]. The examples are evidence within their computed scope and do not replace those proofs.

@@ -1,0 +1,19 @@
+# step3b: A/B pair sortable-projections-and-finite-cambrian-lattices
+
+- Run: frontier-42-coxeter-32
+- A page: sortable-projections-and-finite-cambrian-lattices
+- B page: sortable-projections-and-finite-cambrian-lattices-examples
+- Batches: 32
+- Own only this pair; preserve other pairs in shared batch files.
+- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.
+- Read current manifests, coverage, prose, plan and dependency records.
+- Audit scaffolds for authoring readiness: hypotheses, sources, direct suppliers and proof route. Author every assigned item, including consumers with flagged unfinished suppliers; reconcile their actual proof uses and clear all required Step-3 gates before handoff. Thorough independent mathematical audit and systematic defect repair follow in Steps 5–8.
+- Direct in-run prerequisite pairs to inspect (they may still be unfinished): coxeter-euler-forms-and-sortable-chamber-cones, finite-lattice-projections-and-coxeter-chain-labels.
+- If an item supplier is not yet authored, flag its exact ID and consuming step in research/frontier-42-coxeter-32-step3b-pair-sortable-projections-and-finite-cambrian-lattices.md; author the assigned consumer anyway, then leave its decision escalated until the supplier and proof use are reconciled.
+- Audit and author in this exact dependency-level order (lower first; ties by page order and item ID):
+  28. def-cg-recursive-sortable-projection-and-cambrian-congruence (sortable-projections-and-finite-cambrian-lattices)
+  29. thm-cg-sortable-meet-join-closure-and-cambrian-quotient (sortable-projections-and-finite-cambrian-lattices)
+  30. thm-cg-sortable-projection-greatest-element-and-interval-fibers (sortable-projections-and-finite-cambrian-lattices)
+  31. ex-cg-a3-sortable-subset-and-a-three-element-fiber (sortable-projections-and-finite-cambrian-lattices-examples)
+  31. ex-cg-cambrian-quotient-of-s3-and-two-orientations (sortable-projections-and-finite-cambrian-lattices-examples)
+- Write research/frontier-42-coxeter-32-step3b-pair-sortable-projections-and-finite-cambrian-lattices.md.

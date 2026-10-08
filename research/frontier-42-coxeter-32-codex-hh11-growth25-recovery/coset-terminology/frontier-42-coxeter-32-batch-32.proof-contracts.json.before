@@ -1,0 +1,1486 @@
+{
+  "version": 1,
+  "level": 30,
+  "scope": [
+    "def-cg-recursive-sortable-projection-and-cambrian-congruence",
+    "thm-cg-sortable-meet-join-closure-and-cambrian-quotient",
+    "thm-cg-sortable-projection-greatest-element-and-interval-fibers",
+    "ex-cg-a3-sortable-subset-and-a-three-element-fiber",
+    "ex-cg-cambrian-quotient-of-s3-and-two-orientations"
+  ],
+  "contracts": {
+    "thm-cg-sortable-projection-greatest-element-and-interval-fibers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-recursive-sortable-projection-and-cambrian-congruence",
+          "source_section": "Definition",
+          "quote": "$$x\\sim_c y:\\iff \\pi_c(x)=\\pi_c(y),$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cg-finite-lattice-congruence-and-interval-projections",
+          "source_section": "Definition",
+          "quote": "On classes this defines the **proposed quotient operations** $[x]_\\theta\\vee[y]_\\theta:=[x\\vee y]_\\theta$ and $[x]_\\theta\\wedge[y]_\\theta:=[x\\wedge y]_\\theta$;",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cg-initial-letter-sortable-projection",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c=s_1\\cdots s_n$ a reduced Coxeter word with initial letter $s:=s_1$, and write $\\langle s\\rangle:=S\\setminus\\{s\\}$; recall that $sc:=s_2\\cdots s_n$ is a reduced Coxeter word for the Coxeter element $sc$ of the parabolic $W_{\\langle s\\rangle}$ and that $scs:=s_2\\cdots s_ns_1$ is a reduced Coxeter word for the conjugate Coxeter element $scs$ of $W$ ([[lem-cg-coxeter-word-transport-and-form-independence]] (2)). For $w\\in W$ the **sortable projection** $\\pi_c(w)$ is defined recursively by\n$$\\pi_c(w):=\\begin{cases}1&\\text{if }w=1,\\\\ s\\cdot\\pi_{scs}(sw)&\\text{if }\\ell(sw)<\\ell(w),\\\\ \\pi_{sc}(w_{\\langle s\\rangle})&\\text{if }\\ell(sw)>\\ell(w),\\end{cases}$$\nwhere $w_{\\langle s\\rangle}$ is the $W_{\\langle s\\rangle}$-prefix of $w$ in the length-additive decomposition of [[lem-cg-weak-parabolic-projection-and-cover-joins]] (the maximal $W_{\\langle s\\rangle}$-factor). The recursion is well founded by the lexicographic measure (rank of the ambient parabolic, length of the current element): in the second branch the length strictly decreases, in the third the rank strictly decreases. That the recursion is independent of the initial-letter choices at every step, that $\\pi_c(w)$ is always $c$-sortable, and that it is the greatest $c$-sortable element below $w$, are not part of this definition; they are proved in [[lem-cg-sortable-recursion-output-and-initial-choice-independence]] and [[lem-cg-sortable-cone-criterion-and-projection-monotonicity]]. Nothing about monotonicity, idempotence or fibers is asserted here. No Choice is used.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-sortable-element-skip-roots-and-cone",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type with $S$ finite, with root system\n$\\Phi=\\Phi_+\\sqcup\\Phi_-$ and the identification $V\\cong V^\\ast$ by $B$ of\n[[def-cg-finite-reflection-arrangement-and-spherical-chambers]], and let\n$c=s_1\\cdots s_n$ be a reduced Coxeter word with periodic word $c^\\infty$ as in\n[[def-cg-coxeter-oriented-euler-form-and-c-sorting-word]]; the block sequence of\nthe $c^\\infty$-sorting word is well defined by\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] (2).\n\n**(1) c-sortable elements.** An element $v\\in W$ is $c$**-sortable** when the\nblock sequence $(T_1,T_2,\\dots)$ of its $c^\\infty$-sorting word is weakly\ndecreasing under inclusion: $T_1\\supseteq T_2\\supseteq\\cdots$ (with the sequence\nread up to its last nonempty set). By\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] (2) this condition is\nindependent of the chosen reduced Coxeter word for $c$.\n\n**(2) Skips and forcedness.** Fix a $c$-sorting word $a_1\\cdots a_k$ of $v$ (so\n$a_1,\\dots,a_k$ are the letters of the sorting word in order and\n$k=\\ell(v)$), and let $r\\in S$. The **leftmost unselected occurrence of $r$** is\nthe least position of $c^\\infty$ carrying $r$ which is not among the selected\npositions; it exists because the sorting word is finite and infinitely many\noccurrences of $r$ follow it. If $i$ is the number of selected letters preceding\nthat position, the sorting word is said to **skip $r$ in the $(i+1)$-st\nposition**, with associated reflection $t:=a_1\\cdots a_ir\\,a_i\\cdots a_1$. The\nskip is **forced** when the word $a_1\\cdots a_ir$ is not reduced, and\n**unforced** otherwise; write $t\\in fsc(v)$ in the forced case and\n$t\\in ufs_c(v)$ in the unforced case, and set\n$\\mathcal A_c(v):=\\{-\\beta_t:t\\in fsc(v)\\}$ and\n$\\mathcal B_c(v):=\\{\\beta_t:t\\in ufs_c(v)\\}$. By the definition of the sorting word,\nthe leftmost unselected occurrence of $r$ is determined by the pair $(c,v)$, and\nthe reflection $t$ depends only on that occurrence.\n\n**(3) Skip roots.** For $r\\in S$ the **skip root** is\n$$C^r_c(v):=\\rho(a_1\\cdots a_i)\\,e_r=\\pm\\beta_t,$$\nwith the sign rule\n$$C^r_c(v)=-\\beta_t\\iff r\\text{ is a forced skip of }v,\\qquad C^r_c(v)=+\\beta_t\\iff r\\text{ is an unforced skip of }v,$$\nwhere $\\beta_t$ is the positive root of $t$ and $t$ is the reflection attached to\nthe leftmost unselected occurrence of $r$ as in (2). Equivalently $C^r_c(v)$ is\nthe recursively defined root of Reading--Speyer section 5: with $s$ initial in\n$c$, $C^r_c(v)=e_s$ if $v\\not\\ge_Rs$ and $r=s$;\n$C^r_c(v)=C^r_{sc}(v)$ if $v\\not\\ge_Rs$ and $r\\ne s$; and\n$C^r_c(v)=\\rho(s)\\,C^r_{scs}(sv)$ if $v\\ge_Rs$. That the two descriptions agree,\nthat the recursion terminates by induction on the pair (rank, length), and that\n$C^r_c(v)$ is independent of the chosen reduced Coxeter word for $c$ are proved\nin [[lem-cg-sortable-skips-basis-and-cover-decomposition]] (1),(2); the sign rule\ndisplayed above is part of (1) and is not asserted here.\n\n**(4) The cone.** For $c$-sortable $v$ put\n$$\\mathrm{Cone}_c(v):=\\{x\\in V:B(x,C^r_c(v))\\ge0\\text{ for every }r\\in S\\},$$\nthe intersection of the closed half-spaces with inward normals the skip roots,\nunder the identification $V\\cong V^\\ast$ by $B$. Nothing beyond this definition\nis asserted here; that $\\mathrm{Cone}_c(v)$ is a full-dimensional simplicial\ncone, that its walls are the root hyperplanes of all its skip roots, and\nthat it is a union of chambers is proved in the later items of this page.\n\n**(5) Abstentions.** Nothing about the projection $\\pi_c$, greatest sortable\nelements, chamber unions, monotonicity, the traditional Cambrian congruence or\nnoncrossing partitions is asserted here, and no finiteness of $W$ beyond the\nfinite-type hypothesis of this page is used. No Choice is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-coxeter-oriented-euler-form-and-c-sorting-word",
+          "source_section": "Definition",
+          "quote": "The **block sequence** of an admissible position set is the sequence $T_1,T_2,\\dots$ in which $T_j\\subseteq S$ is the set of letters of the subword occurring between the $(j-1)$-st and the $j$-th divider; it is read up to the last nonempty set.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cg-weak-parabolic-projection-and-cover-joins",
+          "source_section": "Statement",
+          "quote": "**(1) Inversion set of the prefix.** For every $w\\in W$,\n\n$$N(w_J^{-1})=N(w^{-1})\\cap\\Phi_{J,+}.$$\n\nConsequently $w_J$ is the greatest element of $W_J$ below $w$ in $\\le_R$, the map $w\\mapsto w_J$ is order-preserving, and for every $v\\in W_J$ one has $v\\le_R w$ if and only if $v\\le_R w_J$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cg-finite-parabolic-longest-element-and-opposition",
+          "source_section": "Statement",
+          "quote": "(ii) $\\ell(w_0)=|N(w_0)|=|\\Phi_+|=|T|$, and $\\rho(w_0)\\Phi_+=\\Phi_-$;\n\n(iii) $\\ell(w_0w)=\\ell(w_0)-\\ell(w)$ and $\\ell(ww_0)=\\ell(w_0)-\\ell(w)$ for every $w\\in W$; consequently $\\ell(w_0)=\\max\\{\\ell(w):w\\in W\\}$ and $w_0$ is the unique element of that length (the element of longest length);\n\n(iv) $w_0^2=1$;\n\n(v) $w_0Sw_0^{-1}=S$, and there is a permutation $\\sigma$ of $S$ with $\\rho(w_0)e_s=-e_{\\sigma(s)}$, equivalently $w_0sw_0=\\sigma(s)$, for every $s\\in S$.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cg-left-right-weak-order-and-descents",
+          "source_section": "Definition",
+          "quote": "u\\le_R v\\iff v=ux\\text{ for some }x\\in W\\text{ with }\\ell(v)=\\ell(u)+\\ell(x),",
+          "uses": [
+            "1.1",
+            "1.4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-cg-weak-order-is-a-graded-partial-order",
+          "source_section": "Statement",
+          "quote": "$$u\\le_R v\\iff N(u^{-1})\\subseteq N(v^{-1}),\\qquad u\\le_L v\\iff N(u)\\subseteq N(v);$$",
+          "uses": [
+            "1.1",
+            "1.4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-cg-geometric-inversion-set",
+          "source_section": "Definition",
+          "quote": "$$N(w):=\\{\\alpha\\in\\Phi_+:\\rho(w)\\alpha\\in\\Phi_-\\}=\\Phi_+\\cap\\rho(w)^{-1}\\Phi_-.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cg-weak-order-meet-semilattice-and-finite-lattice",
+          "source_section": "Statement",
+          "quote": "If $W$ is finite, then $(W,\\le_R)$ and $(W,\\le_L)$ are lattices with minimum $1$ and maximum $w_0$;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-cg-sortable-recursion-output-and-initial-choice-independence",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a Coxeter element with the recursive map $\\pi_c$ of [[def-cg-initial-letter-sortable-projection]]. Then:\n\n**(1) Well-definedness.** For every $w\\in W$ the recursion defines the same element $\\pi_c(w)$ for every choice of initial letters in the successive steps; hence $\\pi_c$ is a well-defined map $W\\to W$.\n\n**(2) Output and comparison.** For every $w$, $\\pi_c(w)$ is $c$-sortable and $\\pi_c(w)\\le_R w$ ([[def-cg-left-right-weak-order-and-descents]]), with equality if and only if $w$ is $c$-sortable.\n\n**(3) Idempotence.** $\\pi_c(\\pi_c(w))=\\pi_c(w)$ for every $w\\in W$.\n\n**(4) Descent detection.** If $s$ is initial in $c$, then $w\\ge_R s$ if and only if $\\pi_c(w)\\ge_R s$.\n\n**(5) Parabolic restriction.** If $J\\subseteq S$, $w\\in W_J$ and $c'$ is the restriction of $c$ to $W_J$, then $\\pi_c(w)=\\pi_{c'}(w)$.\n\n**(6) The mixed identity.** For two distinct initial letters $s\\ne s'$ of $c$ (which commute) and any $w$ with $w\\not\\ge_R s$, the parabolic prefixes satisfy $(sw)_{\\langle s'\\rangle}=s(w_{\\langle s'\\rangle})$, where $\\langle s'\\rangle=S\\setminus\\{s'\\}$. This is the identity used in (1) when exactly one of the two initial letters is below $w$.",
+          "uses": [
+            "1.4",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-cg-uniform-omega-positive-and-aligned-sortability",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a Coxeter element, and $w\\in W$\nwith reduced word $a_1\\cdots a_k$ and reflection sequence $t_1,\\dots,t_k$,\n$t_i=a_1\\cdots a_{i-1}a_ia_{i-1}\\cdots a_1$, with positive roots $\\beta_i$\n([[thm-cg-root-inversion-formulas-and-strong-exchange]] (2)). Let $\\omega_c$ and $c$-alignment be as in\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] and $c$-sortability as in\n[[def-cg-sortable-element-skip-roots-and-cone]].\n\n**(1) Characterization.** The following are equivalent:\n\n(i) $\\omega_c(\\beta_i,\\beta_j)\\ge0$ for all $i\\le j$, with strict inequality unless $t_i$ and $t_j$ commute;\n\n(ii) $w$ is $c$-sortable and $a_1\\cdots a_k$ can be converted into a $c$-sorting word for $w$ by a sequence of transpositions of adjacent commuting letters.\n\n**(2) Sortable equals aligned.** $w$ is $c$-sortable if and only if $w$ is\n$c$-aligned; and if $w$ is $c$-sortable then $w$ is $c$-aligned with respect to\nevery generalized noncommutative rank-two parabolic subgroup of $W$.\n\n**(3) Parabolic restriction.** If $v$ is $c$-sortable, $J\\subseteq S$ and $v_J$ is\nthe $W_J$-prefix of $v$ ([[lem-cg-weak-parabolic-projection-and-cover-joins]] (1)), then $v_J$ is\n$c'$-sortable, where $c'$ is the restriction of $c$ to $W_J$. Conversely, if\n$u\\in W_J$ is $c'$-sortable then $u$ is $c$-sortable as an element of $W$. No\nAxiom of Choice is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cg-sortable-skip-basis-cover-roots-and-chamber-unions",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a reduced Coxeter word, $\\pi_c$ the sortable projection of [[def-cg-initial-letter-sortable-projection]], $C^r_c(v)$ and $\\mathrm{Cone}_c(v)$ the skip roots and cone of a $c$-sortable element $v$, and let $wC$ denote the closed chambers of the finite reflection arrangement ([[def-cg-sortable-element-skip-roots-and-cone]], [[thm-cg-finite-chamber-tiling-and-coset-face-identification]]). Put $\\mathrm{Cov}(v):=\\{t_\\alpha:\\alpha\\in\\operatorname{cov}(v)\\}$ for its cover reflections, with $\\operatorname{cov}(v)$ the positive-root set of [[lem-cg-weak-parabolic-projection-and-cover-joins]] (4). Then:\n\n**(1) The projection.** $\\pi_c\\colon W\\to W$ is well defined, independent of all initial-letter choices, takes values in the $c$-sortable elements, is idempotent and order preserving, and $\\pi_c(w)$ is the unique greatest $c$-sortable element below $w$ in the right weak order, for every $w\\in W$.\n\n**(2) Skip basis and cover roots.** For every $c$-sortable $v$, $C_c(v)=\\{C^r_c(v):r\\in S\\}$ is a basis of $V$, independent of the reduced Coxeter word for $c$, and its negative elements are exactly the negatives of the positive roots of the cover reflections:\n$$\\{C\\in C_c(v):C\\in\\Phi_-\\}=\\{-\\beta_t:t\\in\\mathrm{Cov}(v)\\}.$$\nIn particular the number of negative skip roots of $v$ equals $|\\mathrm{Cov}(v)|$, the number of elements covered by $v$ in the weak order.\n\n**(3) Chamber unions.** For every $c$-sortable $v$,\n$$\\mathrm{Cone}_c(v)=\\bigcup_{w\\in W:\\ \\pi_c(w)=v} wC,$$\nthe union of exactly those closed chambers of the finite reflection arrangement whose group element projects to $v$. Consequently the fibers of $\\pi_c$ are unions of chambers.\n\n**(4) Parabolic compatibility and abstentions.** $\\pi_{c|_J}(w_J)=\\pi_c(w)_J$ for every $J\\subseteq S$ and $w\\in W$, where $w_J$ is the $W_J$-prefix. Neither the traditional Cambrian congruence (the least lattice congruence forcing the oriented rank-two contractions) nor the noncrossing-partition bijection is used or asserted here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-cg-sortable-skips-basis-and-cover-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a Coxeter element, and $v\\in W$ $c$-sortable, with $c$-sorting word $a_1\\cdots a_k$, skip roots $C^r_c(v)$, forced and unforced skip sets $fsc(v),ufs_c(v)$, and $\\mathcal A_c(v),\\mathcal B_c(v)$ as in [[def-cg-sortable-element-skip-roots-and-cone]]; write $\\beta_t$ for the positive root of a reflection $t$, and $\\mathrm{Cov}(v):=\\{t_\\alpha:\\alpha\\in\\operatorname{cov}(v)\\}$ for its cover reflections, where $\\operatorname{cov}(v)$ is the positive-root set of [[lem-cg-weak-parabolic-projection-and-cover-joins]] (4). Then:\n\n**(1) Values and signs of the skip roots.** For every $r\\in S$ the leftmost unselected occurrence of $r$ determines a skip in a position $i+1$ with $t=a_1\\cdots a_ir\\,a_i\\cdots a_1$, and $C^r_c(v)=\\pm\\beta_t$; moreover\n$$C^r_c(v)=-\\beta_t\\iff t\\in fsc(v),\\qquad C^r_c(v)=+\\beta_t\\iff t\\in ufs_c(v).$$\n\n**(2) The basis.** $C_c(v)=\\{C^r_c(v):r\\in S\\}$ is a basis of $V$, and each $C^r_c(v)$ is independent of the chosen reduced Coxeter word for $c$ and of the choices in the recursion, so the skip roots are well defined.\n\n**(3) Negative skips are cover roots.** $\\mathcal A_c(v)=\\{-\\beta_t:t\\in\\mathrm{Cov}(v)\\}$ and $\\mathcal B_c(v)=\\{\\beta_t:t\\in ufs_c(v)\\}$ with $ufs_c(v)$ the unforced skip reflections; in particular $fsc(v)=\\mathrm{Cov}(v)$ and $|fsc(v)|=|\\mathrm{Cov}(v)|$.\n\n**(4) Euler orthogonality.** Order the simple generators $r_1,\\dots,r_n$ by the first appearance of $r_i$ in the complement of the selected positions of $c^\\infty$. Then $E_c(C^{r_i}_c(v),C^{r_j}_c(v))=0$ for all $i<j$.\n\n**(5) Terminal covers and cover decompositions.** (i) If $s$ is final in $c$ and $v\\ge_Rs$, then $s$ is a cover reflection of $v$ (equivalently $s\\in\\mathrm{Cov}(v)$). (ii) If $s$ is final in $c$, $v$ is $c$-sortable and $v\\ge_Rs$, then\n$$v=s\\vee v_{\\langle s\\rangle},\\qquad \\mathrm{Cov}(v)=\\{s\\}\\cup\\mathrm{Cov}(v_{\\langle s\\rangle}),\\qquad ufs_c(v)=ufs_{cs}(v_{\\langle s\\rangle}),$$\nwhere $v_{\\langle s\\rangle}$ is the $W_{\\langle s\\rangle}$-prefix and $cs$ the restriction of $c$ to $W_{\\langle s\\rangle}$ (the reduced word in $W_{\\langle s\\rangle}$ obtained from a reduced word for $c$ by deleting the final letter). (iii) If $s$ is initial in $c$ and $s\\in\\mathrm{Cov}(v)$, then the same identities hold, with the last replaced by\n$$ufs_c(v)=\\{sts:t\\in ufs_{sc}(v_{\\langle s\\rangle})\\},$$\nwhere $sc$ is the restriction of $c$ to $W_{\\langle s\\rangle}$ (obtained by deleting the initial letter).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-cg-sortable-cone-criterion-and-projection-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a Coxeter element, $\\pi_c$ the projection of [[def-cg-initial-letter-sortable-projection]], $C^r_c(v)$ and $\\mathrm{Cone}_c(v)$ the skip roots and cone of [[def-cg-sortable-element-skip-roots-and-cone]], and let $wC$ denote the closed chambers of the finite reflection arrangement ([[thm-cg-finite-chamber-tiling-and-coset-face-identification]] (1),(2)) under the identification $V\\cong V^\\ast$.\n\n**(1) Cone criterion for comparable pairs.** If $v$ is $c$-sortable and $v\\le_Rw$, then\n$$\\pi_c(w)=v\\iff wC\\subseteq\\mathrm{Cone}_c(v).$$\n\n**(2) Monotonicity.** $\\pi_c$ is order preserving: $x\\le_R y$ implies $\\pi_c(x)\\le_R\\pi_c(y)$.\n\n**(3) Greatest sortable below, and full cone criterion.** For every $w\\in W$ the element $\\pi_c(w)$ is the unique greatest $c$-sortable element below $w$ in $\\le_R$; and for every $c$-sortable $v$,\n$$\\pi_c(w)=v\\iff wC\\subseteq\\mathrm{Cone}_c(v).$$\nConsequently each fiber of $\\pi_c$ is a union of chambers and each cone is a union of closed chambers (assembled in [[thm-cg-sortable-skip-basis-cover-roots-and-chamber-unions]]).\n\n**(4) Parabolic compatibility.** For $J\\subseteq S$, with $c'$ the restriction of $c$ and $w_J$ the $W_J$-prefix,\n$$\\pi_{c'}(w_J)=\\pi_c(w)_J$$\nfor every $w\\in W$.",
+          "uses": [
+            "1.4",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-cg-sortable-meet-join-closure-and-cambrian-quotient",
+          "source_section": "Statement",
+          "quote": "Every nonempty set $A$ of $c$-sortable elements has a join $\\bigvee A$ in $W$, and $\\bigvee A$ is $c$-sortable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-cg-lattice-quotient-descent-and-class-intervals",
+          "source_section": "Statement",
+          "quote": "the proposed quotient operations are independent of the chosen representatives, and with them the set of classes is a lattice $L/\\theta$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-cg-finite-lattice-interval-congruence-criterion",
+          "source_section": "Statement",
+          "quote": "if $d$ and $u$ are order-preserving then $x\\equiv_\\theta y$ implies $x\\vee z\\equiv_\\theta y\\vee z$ and $x\\wedge z\\equiv_\\theta y\\wedge z$ for every $z\\in L$; hence $\\theta$ is a lattice congruence",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-cg-finite-parabolic-longest-element-and-opposition",
+          "source_section": "Statement",
+          "quote": "Then $W_I$ has a unique longest element $w_0(I)$: it is the unique $u\\in W_I$ with $\\ell(uw)=\\ell(u)-\\ell(w)$ for every $w\\in W_I$, and it satisfies $w_0(I)^2=1",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-cg-sortable-meet-join-closure-and-cambrian-quotient",
+          "source_section": "Statement",
+          "quote": "$\\sim_c$ is a lattice congruence of $W$, and the map $W/{\\sim_c}\\to\\pi_c(W)",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "def-cg-recursive-sortable-projection-and-cambrian-congruence",
+          "source_section": "Definition",
+          "quote": "$$x\\sim_c y:\\iff \\pi_c(x)=\\pi_c(y),$$",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "parabolic-prefix-opposition",
+          "claim": "Establish $(ww_0)_J=w_Jw_0(J)$ by identifying the inverse inversion sets of both elements in $W_J$.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F17"
+          ]
+        },
+        {
+          "id": "terminal-lower-projection-formula",
+          "claim": "Prove the final-letter formula for $\\pi_c(w)$ using a sortable join below $w$ and the greatest-sortable-below property.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F10",
+            "F11",
+            "F12",
+            "F14"
+          ]
+        },
+        {
+          "id": "induction-invariant",
+          "claim": "Set up rank and length induction for comparable pairs with equal lower projections, including the rank-zero base.",
+          "step": "1.3",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "longest-element-upper-projection",
+          "claim": "Show $u_c=\tau\\pi_{c^{-1}}\tau$ is monotone, extensive and idempotent.",
+          "step": "1.4",
+          "inputs": [
+            "F5",
+            "F6",
+            "F9",
+            "F13"
+          ]
+        },
+        {
+          "id": "upper-projection-recursions",
+          "claim": "Derive both displayed upper-projection recursions from the lower recursions, the terminal formula and the longest-element anti-isomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F8",
+            "F17",
+            "step 1.1",
+            "step 1.2",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "comparable-fiber-induction",
+          "claim": "Prove equal lower projections give equal upper projections for comparable pairs by descent, mixed-case exclusion and rank reduction.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6",
+            "F9",
+            "step 1.3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "fiber-equivalence-and-composites",
+          "claim": "Extend the forward implication to arbitrary pairs, use the inverse Coxeter element for the converse, and prove both projection-composite identities.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F9",
+            "step 1.4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "closed-interval-fibers",
+          "claim": "Show each projection fiber equals the interval between its lower and upper endpoints and both endpoint maps are monotone.",
+          "step": "5.1",
+          "inputs": [
+            "F9",
+            "F13",
+            "step 1.4",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "congruence-and-quotient",
+          "claim": "Apply the finite-lattice interval criterion and identify the resulting relation and quotient with the previously defined sortable quotient.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F15",
+            "F16",
+            "F18",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.3 treats the rank-zero Coxeter system explicitly: $W=\\{1\\}$ and the projection fiber is the singleton interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 1.4 use the length-zero case without assuming a positive length; the projection and upper-projection identities follow from the stated idempotence and composition formulas."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.1 include rank one: the reduced parabolic $W_J$ is trivial, so the rank-reduced formulas have their base value."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite Coxeter group order, inversion sets, parabolic prefixes, and lattice operations; it introduces no bilinear-form inversion, limit, or degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 5.1 prove $\\pi_c(u_c(w))=\\pi_c(w)$ and characterize membership at both closed-interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No element is selected from an arbitrary nonempty family. The proof is a finite induction with uniquely determined lattice operations; AC is not used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves $\\pi_c(x)=\\pi_c(y)\\Rightarrow u_c(x)=u_c(y)$ by reducing to comparable pairs in step 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 applies the forward implication to $c^{-1}$ and the longest-element involution to prove $u_c(x)=u_c(y)\\Rightarrow\\pi_c(x)=\\pi_c(y)."
+        }
+      ]
+    },
+    "ex-cg-a3-sortable-subset-and-a-three-element-fiber": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "Then $s_i\\mapsto(i\\ i+1)$ extends to an isomorphism $W\\to S_n$ (the letters $1,\\dots,n$ carry the library's symmetric group by the order-preserving identification with $\\{0,\\dots,n-1\\}$, under which $(i\\ i+1)$ is the adjacent transposition $(i-1\\ i)$), and for every $w\\in W$,\n$$\\ell(w)=\\operatorname{inv}\\bigl(\\varphi(w)\\bigr),$$\nthe inversion number of the corresponding permutation ([[def-inversions-inversion-number-and-sign]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "1.7",
+            "1.8",
+            "1.10",
+            "1.12"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-symmetric-group-and-permutation-notation",
+          "source_section": "Definition",
+          "quote": "$$(\\sigma\\tau)(i):=(\\sigma\\circ\\tau)(i)=\\sigma(\\tau(i))\\qquad(i\\in n),$$ so that in a product the right-hand factor acts first.",
+          "uses": [
+            "1.1",
+            "1.10"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-coxeter-oriented-euler-form-and-c-sorting-word",
+          "source_section": "Definition",
+          "quote": "The $c^\\infty$**-sorting word** of $w$ is the lexicographically earliest admissible position set for $w$: least first position, then least second position, and so on. The **block sequence** of an admissible position set is the sequence $T_1,T_2,\\dots$ in which $T_j\\subseteq S$ is the set of letters of the subword occurring between the $(j-1)$-st and the $j$-th divider; it is read up to the last nonempty set.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.5",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cg-greedy-sorting-word-and-rank-two-alignment",
+          "source_section": "Statement",
+          "quote": "at a position with letter $u$, select the position exactly when $u\\in D_L(r)$, i.e. $\\ell(ur)<\\ell(r)$, and then replace $r$ by $ur$. Then the scan selects exactly $\\ell(w)$ positions; after the selected positions have been processed (or immediately if there are none), the remainder is $1$; the selected letters form a reduced word for $w$; and the selected position set is exactly the $c^\\infty$-sorting word of $w$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.5",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cg-sortable-element-skip-roots-and-cone",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type with $S$ finite, with root system\n$\\Phi=\\Phi_+\\sqcup\\Phi_-$ and the identification $V\\cong V^\\ast$ by $B$ of\n[[def-cg-finite-reflection-arrangement-and-spherical-chambers]], and let\n$c=s_1\\cdots s_n$ be a reduced Coxeter word with periodic word $c^\\infty$ as in\n[[def-cg-coxeter-oriented-euler-form-and-c-sorting-word]]; the block sequence of\nthe $c^\\infty$-sorting word is well defined by\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] (2).\n\n**(1) c-sortable elements.** An element $v\\in W$ is $c$**-sortable** when the\nblock sequence $(T_1,T_2,\\dots)$ of its $c^\\infty$-sorting word is weakly\ndecreasing under inclusion: $T_1\\supseteq T_2\\supseteq\\cdots$ (with the sequence\nread up to its last nonempty set). By\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] (2) this condition is\nindependent of the chosen reduced Coxeter word for $c$.\n\n**(2) Skips and forcedness.** Fix a $c$-sorting word $a_1\\cdots a_k$ of $v$ (so\n$a_1,\\dots,a_k$ are the letters of the sorting word in order and\n$k=\\ell(v)$), and let $r\\in S$. The **leftmost unselected occurrence of $r$** is\nthe least position of $c^\\infty$ carrying $r$ which is not among the selected\npositions; it exists because the sorting word is finite and infinitely many\noccurrences of $r$ follow it. If $i$ is the number of selected letters preceding\nthat position, the sorting word is said to **skip $r$ in the $(i+1)$-st\nposition**, with associated reflection $t:=a_1\\cdots a_ir\\,a_i\\cdots a_1$. The\nskip is **forced** when the word $a_1\\cdots a_ir$ is not reduced, and\n**unforced** otherwise; write $t\\in fsc(v)$ in the forced case and\n$t\\in ufs_c(v)$ in the unforced case, and set\n$\\mathcal A_c(v):=\\{-\\beta_t:t\\in fsc(v)\\}$ and\n$\\mathcal B_c(v):=\\{\\beta_t:t\\in ufs_c(v)\\}$. By the definition of the sorting word,\nthe leftmost unselected occurrence of $r$ is determined by the pair $(c,v)$, and\nthe reflection $t$ depends only on that occurrence.\n\n**(3) Skip roots.** For $r\\in S$ the **skip root** is\n$$C^r_c(v):=\\rho(a_1\\cdots a_i)\\,e_r=\\pm\\beta_t,$$\nwith the sign rule\n$$C^r_c(v)=-\\beta_t\\iff r\\text{ is a forced skip of }v,\\qquad C^r_c(v)=+\\beta_t\\iff r\\text{ is an unforced skip of }v,$$\nwhere $\\beta_t$ is the positive root of $t$ and $t$ is the reflection attached to\nthe leftmost unselected occurrence of $r$ as in (2). Equivalently $C^r_c(v)$ is\nthe recursively defined root of Reading--Speyer section 5: with $s$ initial in\n$c$, $C^r_c(v)=e_s$ if $v\\not\\ge_Rs$ and $r=s$;\n$C^r_c(v)=C^r_{sc}(v)$ if $v\\not\\ge_Rs$ and $r\\ne s$; and\n$C^r_c(v)=\\rho(s)\\,C^r_{scs}(sv)$ if $v\\ge_Rs$. That the two descriptions agree,\nthat the recursion terminates by induction on the pair (rank, length), and that\n$C^r_c(v)$ is independent of the chosen reduced Coxeter word for $c$ are proved\nin [[lem-cg-sortable-skips-basis-and-cover-decomposition]] (1),(2); the sign rule\ndisplayed above is part of (1) and is not asserted here.\n\n**(4) The cone.** For $c$-sortable $v$ put\n$$\\mathrm{Cone}_c(v):=\\{x\\in V:B(x,C^r_c(v))\\ge0\\text{ for every }r\\in S\\},$$\nthe intersection of the closed half-spaces with inward normals the skip roots,\nunder the identification $V\\cong V^\\ast$ by $B$. Nothing beyond this definition\nis asserted here; that $\\mathrm{Cone}_c(v)$ is a full-dimensional simplicial\ncone, that its walls are the root hyperplanes of all its skip roots, and\nthat it is a union of chambers is proved in the later items of this page.\n\n**(5) Abstentions.** Nothing about the projection $\\pi_c$, greatest sortable\nelements, chamber unions, monotonicity, the traditional Cambrian congruence or\nnoncrossing partitions is asserted here, and no finiteness of $W$ beyond the\nfinite-type hypothesis of this page is used. No Choice is used.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "1.7",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cg-initial-letter-sortable-projection",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c=s_1\\cdots s_n$ a reduced Coxeter word with initial letter $s:=s_1$, and write $\\langle s\\rangle:=S\\setminus\\{s\\}$; recall that $sc:=s_2\\cdots s_n$ is a reduced Coxeter word for the Coxeter element $sc$ of the parabolic $W_{\\langle s\\rangle}$ and that $scs:=s_2\\cdots s_ns_1$ is a reduced Coxeter word for the conjugate Coxeter element $scs$ of $W$ ([[lem-cg-coxeter-word-transport-and-form-independence]] (2)). For $w\\in W$ the **sortable projection** $\\pi_c(w)$ is defined recursively by\n$$\\pi_c(w):=\\begin{cases}1&\\text{if }w=1,\\\\ s\\cdot\\pi_{scs}(sw)&\\text{if }\\ell(sw)<\\ell(w),\\\\ \\pi_{sc}(w_{\\langle s\\rangle})&\\text{if }\\ell(sw)>\\ell(w),\\end{cases}$$\nwhere $w_{\\langle s\\rangle}$ is the $W_{\\langle s\\rangle}$-prefix of $w$ in the length-additive decomposition of [[lem-cg-weak-parabolic-projection-and-cover-joins]] (the maximal $W_{\\langle s\\rangle}$-factor). The recursion is well founded by the lexicographic measure (rank of the ambient parabolic, length of the current element): in the second branch the length strictly decreases, in the third the rank strictly decreases. That the recursion is independent of the initial-letter choices at every step, that $\\pi_c(w)$ is always $c$-sortable, and that it is the greatest $c$-sortable element below $w$, are not part of this definition; they are proved in [[lem-cg-sortable-recursion-output-and-initial-choice-independence]] and [[lem-cg-sortable-cone-criterion-and-projection-monotonicity]]. Nothing about monotonicity, idempotence or fibers is asserted here. No Choice is used.",
+          "uses": [
+            "1.8",
+            "1.12"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-cg-left-right-weak-order-and-descents",
+          "source_section": "Definition",
+          "quote": "$$u\\le_R v\\iff v=ux\\text{ for some }x\\in W\\text{ with }\\ell(v)=\\ell(u)+\\ell(x),$$",
+          "uses": [
+            "1.9",
+            "1.10",
+            "1.11"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cg-weak-order-meet-semilattice-and-finite-lattice",
+          "source_section": "Statement",
+          "quote": "If $W$ is finite, then $(W,\\le_R)$ and $(W,\\le_L)$ are lattices with minimum $1$ and maximum $w_0$; that is, every subset of $W$ has a meet and a join, and for the empty subset $$\\bigwedge\\varnothing=w_0,\\qquad \\bigvee\\varnothing=1.$$",
+          "uses": [
+            "1.9",
+            "1.10",
+            "1.11"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cg-sortable-projection-greatest-element-and-interval-fibers",
+          "source_section": "Statement",
+          "quote": "Consequently every $\\sim_c$-fiber is the closed interval $$[w]_c=\\{y\\in W:\\pi_c(w)\\le_Ry\\le_Ru_c(w)\\}$$ with lower endpoint $\\pi_c(w)$ and upper endpoint $u_c(w)$: no fiber has a gap, both endpoint maps are order preserving",
+          "uses": [
+            "1.9"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-cg-sortable-meet-join-closure-and-cambrian-quotient",
+          "source_section": "Statement",
+          "quote": "For all $x,y\\in W$, $$\\pi_c(x\\wedge y)=\\pi_c(x)\\wedge\\pi_c(y),\\qquad \\pi_c(x\\vee y)=\\pi_c(x)\\vee\\pi_c(y).$$",
+          "uses": [
+            "1.11"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "a3-model-and-scan-notation",
+          "claim": "Fix the standard permutation and sorting-scan notation used in the exhaustive tables.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "c-scan-first-half",
+          "claim": "Compute the first twelve c-sorting position sets and block sequences by the greedy scan.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "c-scan-second-half",
+          "claim": "Compute the remaining twelve c-sorting position sets and block sequences.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "c-sortable-classification",
+          "claim": "Read off the weakly decreasing rows and the strict inclusion failures, proving the fourteen-element c-sortable list.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cprime-scan-first-half",
+          "claim": "Compute the first twelve c'-sorting position sets and block sequences.",
+          "step": "1.5",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cprime-scan-second-half",
+          "claim": "Compute the remaining twelve c'-sorting position sets and block sequences.",
+          "step": "1.6",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cprime-sortable-classification",
+          "claim": "Classify the weakly decreasing c'-rows and verify the ten strict failures.",
+          "step": "1.7",
+          "inputs": [
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "c-projection-fibers",
+          "claim": "Apply the initial-letter recursion to all 24 elements and verify the exhaustive c-projection fiber table.",
+          "step": "1.8",
+          "inputs": [
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fiber-interval-endpoints",
+          "claim": "Check the nontrivial fiber chains in right weak order and identify their upper endpoints and closed intervals.",
+          "step": "1.9",
+          "inputs": [
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sample-meet-and-join",
+          "claim": "Compute the meet by common reduced prefixes and the join by enumerating the complete upper interval of the chosen pair.",
+          "step": "1.10",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sample-homomorphism-equalities",
+          "claim": "Verify the displayed meet and join preservation equalities for the chosen pair.",
+          "step": "1.11",
+          "inputs": [
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cprime-projection-fibers",
+          "claim": "Apply the initial-letter recursion to all 24 elements and verify the exhaustive c'-projection fibers, including the five-element s2 fiber.",
+          "step": "1.12",
+          "inputs": [
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-orientation-comparison",
+          "claim": "Compare the two sortable counts and the selected fibers, and record the finite computation's Choice status.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity row has the empty sorting position set in steps 1.2 and 1.5, and its projection fibers are the singleton {e} in steps 1.8 and 1.12."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For w=e, the greedy scan selects no positions and the identity is the singleton fiber in both orientation tables (steps 1.2, 1.5, 1.8 and 1.12)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The tables explicitly include each simple generator s1, s2 and s3 for both c and c' (steps 1.2 and 1.5), with their projection fibers listed in steps 1.8 and 1.12."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes the nondegenerate finite Coxeter system of type A3 and uses no variable form, limiting process or degenerating parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.9 checks the lower and upper endpoints of each nonsingleton fiber as a right-weak-order interval; steps 1.8 and 1.12 list the projection fiber endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All groups, scans and fibers are explicitly finite and enumerated. No element is selected from an arbitrary nonempty family, and no Choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "For c, step 1.4 identifies every weakly decreasing sorting-word block sequence in the exhaustive table; the sortable definition F5 then gives sortability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "For c, step 1.4 checks all ten other rows and exhibits a strict inclusion failure in each, so every sortable row in the finite table has weakly decreasing blocks by F5."
+        }
+      ]
+    },
+    "ex-cg-cambrian-quotient-of-s3-and-two-orientations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-coxeter-oriented-euler-form-and-c-sorting-word",
+          "source_section": "Definition",
+          "quote": "The $c^\\infty$**-sorting word** of $w$ is the lexicographically earliest admissible position set for $w$: least first position, then least second position, and so on. The **block sequence** of an admissible position set is the sequence $T_1,T_2,\\dots$ in which $T_j\\subseteq S$ is the set of letters of the subword occurring between the $(j-1)$-st and the $j$-th divider; it is read up to the last nonempty set.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cg-sortable-element-skip-roots-and-cone",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type with $S$ finite, with root system\n$\\Phi=\\Phi_+\\sqcup\\Phi_-$ and the identification $V\\cong V^\\ast$ by $B$ of\n[[def-cg-finite-reflection-arrangement-and-spherical-chambers]], and let\n$c=s_1\\cdots s_n$ be a reduced Coxeter word with periodic word $c^\\infty$ as in\n[[def-cg-coxeter-oriented-euler-form-and-c-sorting-word]]; the block sequence of\nthe $c^\\infty$-sorting word is well defined by\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] (2).\n\n**(1) c-sortable elements.** An element $v\\in W$ is $c$**-sortable** when the\nblock sequence $(T_1,T_2,\\dots)$ of its $c^\\infty$-sorting word is weakly\ndecreasing under inclusion: $T_1\\supseteq T_2\\supseteq\\cdots$ (with the sequence\nread up to its last nonempty set). By\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] (2) this condition is\nindependent of the chosen reduced Coxeter word for $c$.\n\n**(2) Skips and forcedness.** Fix a $c$-sorting word $a_1\\cdots a_k$ of $v$ (so\n$a_1,\\dots,a_k$ are the letters of the sorting word in order and\n$k=\\ell(v)$), and let $r\\in S$. The **leftmost unselected occurrence of $r$** is\nthe least position of $c^\\infty$ carrying $r$ which is not among the selected\npositions; it exists because the sorting word is finite and infinitely many\noccurrences of $r$ follow it. If $i$ is the number of selected letters preceding\nthat position, the sorting word is said to **skip $r$ in the $(i+1)$-st\nposition**, with associated reflection $t:=a_1\\cdots a_ir\\,a_i\\cdots a_1$. The\nskip is **forced** when the word $a_1\\cdots a_ir$ is not reduced, and\n**unforced** otherwise; write $t\\in fsc(v)$ in the forced case and\n$t\\in ufs_c(v)$ in the unforced case, and set\n$\\mathcal A_c(v):=\\{-\\beta_t:t\\in fsc(v)\\}$ and\n$\\mathcal B_c(v):=\\{\\beta_t:t\\in ufs_c(v)\\}$. By the definition of the sorting word,\nthe leftmost unselected occurrence of $r$ is determined by the pair $(c,v)$, and\nthe reflection $t$ depends only on that occurrence.\n\n**(3) Skip roots.** For $r\\in S$ the **skip root** is\n$$C^r_c(v):=\\rho(a_1\\cdots a_i)\\,e_r=\\pm\\beta_t,$$\nwith the sign rule\n$$C^r_c(v)=-\\beta_t\\iff r\\text{ is a forced skip of }v,\\qquad C^r_c(v)=+\\beta_t\\iff r\\text{ is an unforced skip of }v,$$\nwhere $\\beta_t$ is the positive root of $t$ and $t$ is the reflection attached to\nthe leftmost unselected occurrence of $r$ as in (2). Equivalently $C^r_c(v)$ is\nthe recursively defined root of Reading--Speyer section 5: with $s$ initial in\n$c$, $C^r_c(v)=e_s$ if $v\\not\\ge_Rs$ and $r=s$;\n$C^r_c(v)=C^r_{sc}(v)$ if $v\\not\\ge_Rs$ and $r\\ne s$; and\n$C^r_c(v)=\\rho(s)\\,C^r_{scs}(sv)$ if $v\\ge_Rs$. That the two descriptions agree,\nthat the recursion terminates by induction on the pair (rank, length), and that\n$C^r_c(v)$ is independent of the chosen reduced Coxeter word for $c$ are proved\nin [[lem-cg-sortable-skips-basis-and-cover-decomposition]] (1),(2); the sign rule\ndisplayed above is part of (1) and is not asserted here.\n\n**(4) The cone.** For $c$-sortable $v$ put\n$$\\mathrm{Cone}_c(v):=\\{x\\in V:B(x,C^r_c(v))\\ge0\\text{ for every }r\\in S\\},$$\nthe intersection of the closed half-spaces with inward normals the skip roots,\nunder the identification $V\\cong V^\\ast$ by $B$. Nothing beyond this definition\nis asserted here; that $\\mathrm{Cone}_c(v)$ is a full-dimensional simplicial\ncone, that its walls are the root hyperplanes of all its skip roots, and\nthat it is a union of chambers is proved in the later items of this page.\n\n**(5) Abstentions.** Nothing about the projection $\\pi_c$, greatest sortable\nelements, chamber unions, monotonicity, the traditional Cambrian congruence or\nnoncrossing partitions is asserted here, and no finiteness of $W$ beyond the\nfinite-type hypothesis of this page is used. No Choice is used.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-initial-letter-sortable-projection",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c=s_1\\cdots s_n$ a reduced Coxeter word with initial letter $s:=s_1$, and write $\\langle s\\rangle:=S\\setminus\\{s\\}$; recall that $sc:=s_2\\cdots s_n$ is a reduced Coxeter word for the Coxeter element $sc$ of the parabolic $W_{\\langle s\\rangle}$ and that $scs:=s_2\\cdots s_ns_1$ is a reduced Coxeter word for the conjugate Coxeter element $scs$ of $W$ ([[lem-cg-coxeter-word-transport-and-form-independence]] (2)). For $w\\in W$ the **sortable projection** $\\pi_c(w)$ is defined recursively by\n$$\\pi_c(w):=\\begin{cases}1&\\text{if }w=1,\\\\ s\\cdot\\pi_{scs}(sw)&\\text{if }\\ell(sw)<\\ell(w),\\\\ \\pi_{sc}(w_{\\langle s\\rangle})&\\text{if }\\ell(sw)>\\ell(w),\\end{cases}$$\nwhere $w_{\\langle s\\rangle}$ is the $W_{\\langle s\\rangle}$-prefix of $w$ in the length-additive decomposition of [[lem-cg-weak-parabolic-projection-and-cover-joins]] (the maximal $W_{\\langle s\\rangle}$-factor). The recursion is well founded by the lexicographic measure (rank of the ambient parabolic, length of the current element): in the second branch the length strictly decreases, in the third the rank strictly decreases. That the recursion is independent of the initial-letter choices at every step, that $\\pi_c(w)$ is always $c$-sortable, and that it is the greatest $c$-sortable element below $w$, are not part of this definition; they are proved in [[lem-cg-sortable-recursion-output-and-initial-choice-independence]] and [[lem-cg-sortable-cone-criterion-and-projection-monotonicity]]. Nothing about monotonicity, idempotence or fibers is asserted here. No Choice is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cg-left-right-weak-order-and-descents",
+          "source_section": "Definition",
+          "quote": "$$u\\le_R v\\iff v=ux\\text{ for some }x\\in W\\text{ with }\\ell(v)=\\ell(u)+\\ell(x),$$",
+          "uses": [
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cg-left-right-weak-order-and-descents",
+          "source_section": "Definition",
+          "quote": "it is a **right join** (least upper bound) if it is a right upper bound and\n$z\\le_R y$ for every right upper bound $y$ of $A$. Dually, $z$ is a **right\nlower bound** if $z\\le_R a$ for every $a\\in A$, and a **right meet** (greatest\nlower bound) if it is a right lower bound and $u\\le_R z$ for every right lower\nbound $u$ of $A$.",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cg-weak-order-meet-semilattice-and-finite-lattice",
+          "source_section": "Statement",
+          "quote": "If $W$ is finite, then $(W,\\le_R)$ and $(W,\\le_L)$ are lattices with minimum $1$ and maximum $w_0$;",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cg-sortable-projection-greatest-element-and-interval-fibers",
+          "source_section": "Statement",
+          "quote": "$$u_c\\colon W\\to W,\\qquad u_c(w):=\\pi_{c^{-1}}(ww_0)\\,w_0,$$",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cg-sortable-projection-greatest-element-and-interval-fibers",
+          "source_section": "Statement",
+          "quote": "$$\\pi_c(x)=\\pi_c(y)\\iff u_c(x)=u_c(y),\\qquad \\pi_c(u_c(w))=\\pi_c(w),\\qquad u_c(\\pi_c(w))=u_c(w).$$\nConsequently every $\\sim_c$-fiber is the closed interval\n$$[w]_c=\\{y\\in W:\\pi_c(w)\\le_Ry\\le_Ru_c(w)\\}$$\nwith lower endpoint $\\pi_c(w)$ and upper endpoint $u_c(w)$: no fiber has a gap, both endpoint maps are order preserving,",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-cg-sortable-meet-join-closure-and-cambrian-quotient",
+          "source_section": "Statement",
+          "quote": "For all $x,y\\in W$,\n\n$$\\pi_c(x\\wedge y)=\\pi_c(x)\\wedge\\pi_c(y),\\qquad \\pi_c(x\\vee y)=\\pi_c(x)\\vee\\pi_c(y).$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-cg-recursive-sortable-projection-and-cambrian-congruence",
+          "source_section": "Definition",
+          "quote": "**(1) Sortable equivalence and quotient order.** Define the **sortable equivalence** $\\sim_c$ on $W$ by\n\n$$x\\sim_c y:\\iff \\pi_c(x)=\\pi_c(y),$$\n\nwrite $[x]_c:=\\{y\\in W:\\pi_c(y)=\\pi_c(x)\\}$ for the $\\sim_c$-class of $x$ and $W/{\\sim_c}:=\\{[x]_c:x\\in W\\}$, and let $p_c\\colon W\\to W/{\\sim_c}$, $p_c(x):=[x]_c$, be the quotient map. The **sortable quotient order** on $W/{\\sim_c}$ is\n\n$$[x]_c\\le_c[y]_c:\\iff \\pi_c(x)\\le_R\\pi_c(y).$$\n\nThis is independent of the chosen representatives because each class has a single $\\pi_c$-image; it is the order induced by $\\le_R$ on the image of $\\pi_c$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "a2-presentation-and-lengths",
+          "claim": "Reduce the A2 presentation to six distinct elements and compute their lengths and left descents.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "c-sortable-scan",
+          "claim": "Compute the six c-sorting words and their block sequences, then classify the sortable elements.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "opposite-sortable-scan",
+          "claim": "Compute the six c'-sorting words and their block sequences, then classify the sortable elements.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "projection-tables",
+          "claim": "Apply the initial-letter recursion in both orientations and record every projection value.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "weak-order-operation-tables",
+          "claim": "Derive the six-element weak-order Hasse diagram and its meet and join tables.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "quotient-fibers",
+          "claim": "Group the projection values into the kernel classes and identify the induced quotient orders.",
+          "step": "3.1",
+          "inputs": [
+            "F10",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "projection-homomorphism-check",
+          "claim": "Use the operation tables and the single nontrivial fiber to check preservation for all 36 operand pairs.",
+          "step": "3.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F9",
+            "F10",
+            "algebra",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "upper-projection-values",
+          "claim": "Compute both upper-projection maps from the longest-element formula and the two projection tables.",
+          "step": "3.3",
+          "inputs": [
+            "F7",
+            "algebra",
+            "step 2.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "interval-and-endpoint-checks",
+          "claim": "Verify both nontrivial fibers are intervals and check the endpoint map properties from the finite tables.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F8",
+            "F10",
+            "algebra",
+            "step 2.1",
+            "step 3.1",
+            "step 2.2",
+            "step 3.3"
+          ]
+        },
+        {
+          "id": "orientation-comparison-and-choice",
+          "claim": "Compare sortable counts and fibers for the two orientations and record the Choice status.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 1.3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity has the empty sorting word in steps 1.2 and 1.3 and singleton projection fiber in steps 2.1 and 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 records ell(e)=0; the recursion base and projection tables in step 2.1 give pi_c(e)=pi_c'(e)=e."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.3 list both simple generators, their length-one sorting words, and their sortable status in each orientation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes the nondegenerate finite A2 Coxeter system and contains no variable form or degenerating parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.3-4.1 compute the upper endpoints and check each nontrivial fiber is the interval [s2,s2s1] or [s1,s1s2], with the other fibers singleton."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The group has six explicitly enumerated elements and all projection and order cases are finite; no arbitrary choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.2-1.3 apply the decreasing-block criterion to every sorting word and identify each sortable element."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2-1.3 show the only nonsortable word in each orientation has a strict block-inclusion failure; the remaining five have decreasing blocks."
+        }
+      ]
+    },
+    "def-cg-recursive-sortable-projection-and-cambrian-congruence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a definition, not a theorem about an empty subset; the proposed operations are binary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-length calculation or zero object is proved by this definition; it only names maps and relations."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definitions apply pointwise to all elements and do not require a separate rank-one case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No form inversion, limiting parameter or degeneracy argument appears in this order-theoretic definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition explicitly does not assert interval fibers or endpoint existence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No element is selected from an arbitrary nonempty family; the definition states that no Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition (1) defines the kernel relation by the displayed equivalence between equal projection images and x~_c y."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition (1) uses the same biconditional as the definition of x~_c y, so the reverse implication is definitional."
+        }
+      ]
+    },
+    "thm-cg-sortable-meet-join-closure-and-cambrian-quotient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-recursive-sortable-projection-and-cambrian-congruence",
+          "source_section": "Definition",
+          "quote": "**(1) Sortable equivalence and quotient order.** Define the **sortable equivalence** $\\sim_c$ on $W$ by\n\n$$x\\sim_c y:\\iff \\pi_c(x)=\\pi_c(y),$$\n\nwrite $[x]_c:=\\{y\\in W:\\pi_c(y)=\\pi_c(x)\\}$ for the $\\sim_c$-class of $x$ and $W/{\\sim_c}:=\\{[x]_c:x\\in W\\}$, and let $p_c\\colon W\\to W/{\\sim_c}$, $p_c(x):=[x]_c$, be the quotient map. The **sortable quotient order** on $W/{\\sim_c}$ is\n\n$$[x]_c\\le_c[y]_c:\\iff \\pi_c(x)\\le_R\\pi_c(y).$$\n\nThis is independent of the chosen representatives because each class has a single $\\pi_c$-image; it is the order induced by $\\le_R$ on the image of $\\pi_c$.\n\n**(2) Proposed quotient operations.** On classes define\n\n$$[x]_c\\vee[y]_c:=[x\\vee y]_c,\\qquad [x]_c\\wedge[y]_c:=[x\\wedge y]_c,$$\n\nthe **proposed quotient operations** of [[def-cg-finite-lattice-congruence-and-interval-projections]] (1) specialized to the weak-order lattice $W$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cg-initial-letter-sortable-projection",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c=s_1\\cdots s_n$ a reduced Coxeter word with initial letter $s:=s_1$, and write $\\langle s\\rangle:=S\\setminus\\{s\\}$; recall that $sc:=s_2\\cdots s_n$ is a reduced Coxeter word for the Coxeter element $sc$ of the parabolic $W_{\\langle s\\rangle}$ and that $scs:=s_2\\cdots s_ns_1$ is a reduced Coxeter word for the conjugate Coxeter element $scs$ of $W$ ([[lem-cg-coxeter-word-transport-and-form-independence]] (2)). For $w\\in W$ the **sortable projection** $\\pi_c(w)$ is defined recursively by\n$$\\pi_c(w):=\\begin{cases}1&\\text{if }w=1,\\\\ s\\cdot\\pi_{scs}(sw)&\\text{if }\\ell(sw)<\\ell(w),\\\\ \\pi_{sc}(w_{\\langle s\\rangle})&\\text{if }\\ell(sw)>\\ell(w),\\end{cases}$$\nwhere $w_{\\langle s\\rangle}$ is the $W_{\\langle s\\rangle}$-prefix of $w$ in the length-additive decomposition of [[lem-cg-weak-parabolic-projection-and-cover-joins]] (the maximal $W_{\\langle s\\rangle}$-factor). The recursion is well founded by the lexicographic measure (rank of the ambient parabolic, length of the current element): in the second branch the length strictly decreases, in the third the rank strictly decreases. That the recursion is independent of the initial-letter choices at every step, that $\\pi_c(w)$ is always $c$-sortable, and that it is the greatest $c$-sortable element below $w$, are not part of this definition; they are proved in [[lem-cg-sortable-recursion-output-and-initial-choice-independence]] and [[lem-cg-sortable-cone-criterion-and-projection-monotonicity]]. Nothing about monotonicity, idempotence or fibers is asserted here. No Choice is used.",
+          "uses": [
+            "2.4",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-coxeter-oriented-euler-form-and-c-sorting-word",
+          "source_section": "Definition",
+          "quote": "**(3) The periodic word and admissible position sets.** Fix a reduced Coxeter word $s_1\\cdots s_n$ for $c$ and form the half-infinite periodic word\n$$c^\\infty:=s_1\\cdots s_n\\,|\\,s_1\\cdots s_n\\,|\\,\\cdots,$$\nwhere the symbols $|$ are inert dividers after every block of $n$ letters and are ignored when subwords are evaluated. A **position set** for $c^\\infty$ is a finite strictly increasing sequence of positions $i_1<\\cdots<i_k$; its **value** is $s_{i_1}\\cdots s_{i_k}\\in W$, and it is **admissible for $w\\in W$** when its value is $w$ and $k=\\ell(w)$, equivalently when its letters form a reduced expression of $w$. The $c^\\infty$**-sorting word** of $w$ is the lexicographically earliest admissible position set for $w$: least first position, then least second position, and so on. The **block sequence** of an admissible position set is the sequence $T_1,T_2,\\dots$ in which $T_j\\subseteq S$ is the set of letters of the subword occurring between the $(j-1)$-st and the $j$-th divider; it is read up to the last nonempty set.",
+          "uses": [
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-sortable-element-skip-roots-and-cone",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type with $S$ finite, with root system\n$\\Phi=\\Phi_+\\sqcup\\Phi_-$ and the identification $V\\cong V^\\ast$ by $B$ of\n[[def-cg-finite-reflection-arrangement-and-spherical-chambers]], and let\n$c=s_1\\cdots s_n$ be a reduced Coxeter word with periodic word $c^\\infty$ as in\n[[def-cg-coxeter-oriented-euler-form-and-c-sorting-word]]; the block sequence of\nthe $c^\\infty$-sorting word is well defined by\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] (2).\n\n**(1) c-sortable elements.** An element $v\\in W$ is $c$**-sortable** when the\nblock sequence $(T_1,T_2,\\dots)$ of its $c^\\infty$-sorting word is weakly\ndecreasing under inclusion: $T_1\\supseteq T_2\\supseteq\\cdots$ (with the sequence\nread up to its last nonempty set). By\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] (2) this condition is\nindependent of the chosen reduced Coxeter word for $c$.\n\n**(2) Skips and forcedness.** Fix a $c$-sorting word $a_1\\cdots a_k$ of $v$ (so\n$a_1,\\dots,a_k$ are the letters of the sorting word in order and\n$k=\\ell(v)$), and let $r\\in S$. The **leftmost unselected occurrence of $r$** is\nthe least position of $c^\\infty$ carrying $r$ which is not among the selected\npositions; it exists because the sorting word is finite and infinitely many\noccurrences of $r$ follow it. If $i$ is the number of selected letters preceding\nthat position, the sorting word is said to **skip $r$ in the $(i+1)$-st\nposition**, with associated reflection $t:=a_1\\cdots a_ir\\,a_i\\cdots a_1$. The\nskip is **forced** when the word $a_1\\cdots a_ir$ is not reduced, and\n**unforced** otherwise; write $t\\in fsc(v)$ in the forced case and\n$t\\in ufs_c(v)$ in the unforced case, and set\n$\\mathcal A_c(v):=\\{-\\beta_t:t\\in fsc(v)\\}$ and\n$\\mathcal B_c(v):=\\{\\beta_t:t\\in ufs_c(v)\\}$. By the definition of the sorting word,\nthe leftmost unselected occurrence of $r$ is determined by the pair $(c,v)$, and\nthe reflection $t$ depends only on that occurrence.\n\n**(3) Skip roots.** For $r\\in S$ the **skip root** is\n$$C^r_c(v):=\\rho(a_1\\cdots a_i)\\,e_r=\\pm\\beta_t,$$\nwith the sign rule\n$$C^r_c(v)=-\\beta_t\\iff r\\text{ is a forced skip of }v,\\qquad C^r_c(v)=+\\beta_t\\iff r\\text{ is an unforced skip of }v,$$\nwhere $\\beta_t$ is the positive root of $t$ and $t$ is the reflection attached to\nthe leftmost unselected occurrence of $r$ as in (2). Equivalently $C^r_c(v)$ is\nthe recursively defined root of Reading--Speyer section 5: with $s$ initial in\n$c$, $C^r_c(v)=e_s$ if $v\\not\\ge_Rs$ and $r=s$;\n$C^r_c(v)=C^r_{sc}(v)$ if $v\\not\\ge_Rs$ and $r\\ne s$; and\n$C^r_c(v)=\\rho(s)\\,C^r_{scs}(sv)$ if $v\\ge_Rs$. That the two descriptions agree,\nthat the recursion terminates by induction on the pair (rank, length), and that\n$C^r_c(v)$ is independent of the chosen reduced Coxeter word for $c$ are proved\nin [[lem-cg-sortable-skips-basis-and-cover-decomposition]] (1),(2); the sign rule\ndisplayed above is part of (1) and is not asserted here.\n\n**(4) The cone.** For $c$-sortable $v$ put\n$$\\mathrm{Cone}_c(v):=\\{x\\in V:B(x,C^r_c(v))\\ge0\\text{ for every }r\\in S\\},$$\nthe intersection of the closed half-spaces with inward normals the skip roots,\nunder the identification $V\\cong V^\\ast$ by $B$. Nothing beyond this definition\nis asserted here; that $\\mathrm{Cone}_c(v)$ is a full-dimensional simplicial\ncone, that its walls are the root hyperplanes of all its skip roots, and\nthat it is a union of chambers is proved in the later items of this page.\n\n**(5) Abstentions.** Nothing about the projection $\\pi_c$, greatest sortable\nelements, chamber unions, monotonicity, the traditional Cambrian congruence or\nnoncrossing partitions is asserted here, and no finiteness of $W$ beyond the\nfinite-type hypothesis of this page is used. No Choice is used.",
+          "uses": [
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cg-sortable-skip-basis-cover-roots-and-chamber-unions",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a reduced Coxeter word, $\\pi_c$ the sortable projection of [[def-cg-initial-letter-sortable-projection]], $C^r_c(v)$ and $\\mathrm{Cone}_c(v)$ the skip roots and cone of a $c$-sortable element $v$, and let $wC$ denote the closed chambers of the finite reflection arrangement ([[def-cg-sortable-element-skip-roots-and-cone]], [[thm-cg-finite-chamber-tiling-and-coset-face-identification]]). Put $\\mathrm{Cov}(v):=\\{t_\\alpha:\\alpha\\in\\operatorname{cov}(v)\\}$ for its cover reflections, with $\\operatorname{cov}(v)$ the positive-root set of [[lem-cg-weak-parabolic-projection-and-cover-joins]] (4). Then:\n\n**(1) The projection.** $\\pi_c\\colon W\\to W$ is well defined, independent of all initial-letter choices, takes values in the $c$-sortable elements, is idempotent and order preserving, and $\\pi_c(w)$ is the unique greatest $c$-sortable element below $w$ in the right weak order, for every $w\\in W$.\n\n**(2) Skip basis and cover roots.** For every $c$-sortable $v$, $C_c(v)=\\{C^r_c(v):r\\in S\\}$ is a basis of $V$, independent of the reduced Coxeter word for $c$, and its negative elements are exactly the negatives of the positive roots of the cover reflections:\n$$\\{C\\in C_c(v):C\\in\\Phi_-\\}=\\{-\\beta_t:t\\in\\mathrm{Cov}(v)\\}.$$\nIn particular the number of negative skip roots of $v$ equals $|\\mathrm{Cov}(v)|$, the number of elements covered by $v$ in the weak order.\n\n**(3) Chamber unions.** For every $c$-sortable $v$,\n$$\\mathrm{Cone}_c(v)=\\bigcup_{w\\in W:\\ \\pi_c(w)=v} wC,$$\nthe union of exactly those closed chambers of the finite reflection arrangement whose group element projects to $v$. Consequently the fibers of $\\pi_c$ are unions of chambers.\n\n**(4) Parabolic compatibility and abstentions.** $\\pi_{c|_J}(w_J)=\\pi_c(w)_J$ for every $J\\subseteq S$ and $w\\in W$, where $w_J$ is the $W_J$-prefix. Neither the traditional Cambrian congruence (the least lattice congruence forcing the oriented rank-two contractions) nor the noncrossing-partition bijection is used or asserted here.",
+          "uses": [
+            "2.1",
+            "2.3",
+            "2.5",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-cg-sortable-recursion-output-and-initial-choice-independence",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a Coxeter element with the recursive map $\\pi_c$ of [[def-cg-initial-letter-sortable-projection]]. Then:\n\n**(1) Well-definedness.** For every $w\\in W$ the recursion defines the same element $\\pi_c(w)$ for every choice of initial letters in the successive steps; hence $\\pi_c$ is a well-defined map $W\\to W$.\n\n**(2) Output and comparison.** For every $w$, $\\pi_c(w)$ is $c$-sortable and $\\pi_c(w)\\le_R w$ ([[def-cg-left-right-weak-order-and-descents]]), with equality if and only if $w$ is $c$-sortable.\n\n**(3) Idempotence.** $\\pi_c(\\pi_c(w))=\\pi_c(w)$ for every $w\\in W$.\n\n**(4) Descent detection.** If $s$ is initial in $c$, then $w\\ge_R s$ if and only if $\\pi_c(w)\\ge_R s$.\n\n**(5) Parabolic restriction.** If $J\\subseteq S$, $w\\in W_J$ and $c'$ is the restriction of $c$ to $W_J$, then $\\pi_c(w)=\\pi_{c'}(w)$.\n\n**(6) The mixed identity.** For two distinct initial letters $s\\ne s'$ of $c$ (which commute) and any $w$ with $w\\not\\ge_R s$, the parabolic prefixes satisfy $(sw)_{\\langle s'\\rangle}=s(w_{\\langle s'\\rangle})$, where $\\langle s'\\rangle=S\\setminus\\{s'\\}$. This is the identity used in (1) when exactly one of the two initial letters is below $w$.",
+          "uses": [
+            "2.1",
+            "2.3",
+            "2.4",
+            "2.5",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-cg-uniform-omega-positive-and-aligned-sortability",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a Coxeter element, and $w\\in W$\nwith reduced word $a_1\\cdots a_k$ and reflection sequence $t_1,\\dots,t_k$,\n$t_i=a_1\\cdots a_{i-1}a_ia_{i-1}\\cdots a_1$, with positive roots $\\beta_i$\n([[thm-cg-root-inversion-formulas-and-strong-exchange]] (2)). Let $\\omega_c$ and $c$-alignment be as in\n[[lem-cg-greedy-sorting-word-and-rank-two-alignment]] and $c$-sortability as in\n[[def-cg-sortable-element-skip-roots-and-cone]].\n\n**(1) Characterization.** The following are equivalent:\n\n(i) $\\omega_c(\\beta_i,\\beta_j)\\ge0$ for all $i\\le j$, with strict inequality unless $t_i$ and $t_j$ commute;\n\n(ii) $w$ is $c$-sortable and $a_1\\cdots a_k$ can be converted into a $c$-sorting word for $w$ by a sequence of transpositions of adjacent commuting letters.\n\n**(2) Sortable equals aligned.** $w$ is $c$-sortable if and only if $w$ is\n$c$-aligned; and if $w$ is $c$-sortable then $w$ is $c$-aligned with respect to\nevery generalized noncommutative rank-two parabolic subgroup of $W$.\n\n**(3) Parabolic restriction.** If $v$ is $c$-sortable, $J\\subseteq S$ and $v_J$ is\nthe $W_J$-prefix of $v$ ([[lem-cg-weak-parabolic-projection-and-cover-joins]] (1)), then $v_J$ is\n$c'$-sortable, where $c'$ is the restriction of $c$ to $W_J$. Conversely, if\n$u\\in W_J$ is $c'$-sortable then $u$ is $c$-sortable as an element of $W$. No\nAxiom of Choice is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-cg-greedy-sorting-word-and-rank-two-alignment",
+          "source_section": "Statement",
+          "quote": "(ii) $w\\in W$ is $c$**-aligned with respect to $W'$** when either $\\omega_c$ restricts to zero on $\\Phi\\cap P$ and $N(w^{-1})\\cap(\\Phi\\cap P)$ is empty or a singleton, or $\\omega_c(\\beta_{u_1},\\beta_{u_m})>0$ and $N(w^{-1})\\cap(\\Phi\\cap P)$ is empty, the singleton $\\{\\beta_{u_m}\\}$, or an initial segment $\\{\\beta_{u_1},\\dots,\\beta_{u_k}\\}$; and $w$ is $c$**-aligned** when it is $c$-aligned with respect to every noncommutative generalized rank-two parabolic subgroup of $W$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-cg-finite-rank-two-inversion-set-recognition",
+          "source_section": "Statement",
+          "quote": "**(1) Recognition.** The following are equivalent:\n\n(i) $I=N(w)$ for some $w\\in W$;\n\n(ii) for every noncommutative generalized rank-two parabolic subgroup $W_P$, the intersection $I\\cap\\Phi_P^+$ is empty, an initial segment, or a final segment.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-cg-geometric-inversion-set",
+          "source_section": "Definition",
+          "quote": "$$N(w):=\\{\\alpha\\in\\Phi_+:\\rho(w)\\alpha\\in\\Phi_-\\}=\\Phi_+\\cap\\rho(w)^{-1}\\Phi_-.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-cg-weak-order-is-a-graded-partial-order",
+          "source_section": "Statement",
+          "quote": "\nLet $(S,m)$ be a finite Coxeter matrix, $W$ the presented group with length\n$\\ell$, descent sets $D_L,D_R$, weak orders $\\le_R,\\le_L$ and intervals\n$[u,v]_R,[u,v]_L$ as in [[def-cg-left-right-weak-order-and-descents]], with\ninversion sets $N(w)=\\{\\alpha\\in\\Phi_+:\\rho(w)\\alpha\\in\\Phi_-\\}$ and the\nrecursion of [[def-cg-geometric-inversion-set]] (2). Then:\n\n**(1) Partial orders.** $\\le_R$ and $\\le_L$ are partial orders on $W$, both\nwith minimum $1$; $u\\le_R v$ and $\\ell(u)=\\ell(v)$ imply $u=v$; and inversion\n$w\\mapsto w^{-1}$ is an order isomorphism $(W,\\le_R)\\to(W,\\le_L)$, i.e.\n$u\\le_R v\\iff u^{-1}\\le_L v^{-1}$.\n\n**(2) Covers.** For all $u,v\\in W$,\n\n$$u\\lessdot_R v\\iff v=us\\text{ for some }s\\in S\\text{ with }\\ell(v)=\\ell(u)+1,\\qquad u\\lessdot_L v\\iff v=su\\text{ for some }s\\in S\\text{ with }\\ell(v)=\\ell(u)+1.$$\n\nMoreover $u\\le_R v$ if and only if there is a chain\n$u=u_0\\lessdot_R u_1\\lessdot_R\\cdots\\lessdot_R u_m=v$, and then necessarily\n$m=\\ell(v)-\\ell(u)$; the same holds in $\\le_L$.\n\n**(3) Intervals are finite and graded.** For every $k\\ge0$ the ball\n$\\{w\\in W:\\ell(w)\\le k\\}$ is finite, with at most $1+|S|+\\cdots+|S|^k$\nelements. Consequently, whenever $u\\le_R v$, the interval $[u,v]_R$ is finite\nand $x\\mapsto\\ell(x)-\\ell(u)$ is a rank function on it in the sense of\n[[def-graded-poset-and-rank]]; in particular every maximal chain in $[u,v]_R$\nhas exactly $\\ell(v)-\\ell(u)+1$ elements, and if $u^{-1}v=s'_1\\cdots s'_m$ is\na reduced expression then\n$u\\lessdot_R us'_1\\lessdot_R\\cdots\\lessdot_R u s'_1\\cdots s'_m=v$ is such a\nmaximal chain. The same statements hold for $\\le_L$.\n\n**(4) Inversion-set criterion.** For all $u,v\\in W$,\n\n$$u\\le_R v\\iff N(u^{-1})\\subseteq N(v^{-1}),\\qquad u\\le_L v\\iff N(u)\\subseteq N(v);$$\n\nmoreover $|N(w^{-1})|=|N(w)|=\\ell(w)$ for every $w$. Equivalently,\n$w\\mapsto N(w^{-1})$ embeds $(W,\\le_R)$ into the lattice of subsets of\n$\\Phi_+$ as an order-preserving and length-preserving map. The criterion is\nnot the definition of $\\le_R$; it is derived from\n[[def-cg-left-right-weak-order-and-descents]].\n\n**(5) Descents and roots.** For all $w\\in W$ and $s\\in S$,\n\n$$s\\in D_L(w)\\iff e_s\\in N(w^{-1})\\iff\\rho(w^{-1})e_s\\in\\Phi_-,\\qquad s\\in D_R(w)\\iff e_s\\in N(w)\\iff\\rho(w)e_s\\in\\Phi_-.$$\n\nNo Choice is used.\n",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cg-root-inversion-formulas-and-strong-exchange",
+          "source_section": "Statement",
+          "quote": "**(1) The root-reflection dictionary.** For $\\alpha\\in\\Phi$ choose $w\\in W$, $s\\in S$ with $\\alpha=\\rho(w)e_s$ and put $t_\\alpha:=wsw^{-1}\\in T$. Then:\n(i) $t_\\alpha$ is independent of the chosen representation of $\\alpha$;\n(ii) $\\rho(t_\\alpha)=r_\\alpha$, the reflection with normal $\\alpha$; and $t_{\\rho(w)\\alpha}=w\\,t_\\alpha\\,w^{-1}$ for all $w\\in W$, $\\alpha\\in\\Phi$;\n(iii) $t_{-\\alpha}=t_\\alpha$, and for $\\alpha,\\beta\\in\\Phi$ one has $t_\\alpha=t_\\beta$ if and only if $\\alpha=\\pm\\beta$;\n(iv) the induced map $\\{\\pm\\alpha:\\alpha\\in\\Phi\\}\\to T$ is a bijection; so is the map $\\Phi_+\\to T$, $\\alpha\\mapsto t_\\alpha$.\n\n**(2) Inversion formula.** For every $w\\in W$ one has $|N(w)|=\\ell(w)$ (with $N$ as in [[def-cg-geometric-inversion-set]]); and for every reduced expression $w=s_1\\cdots s_n$,\n$$N(w)=\\bigl\\{\\rho(s_{i+1}\\cdots s_n)^{-1}e_{s_i}:1\\le i\\le n\\bigr\\},\\qquad N(w^{-1})=\\bigl\\{\\rho(s_1\\cdots s_{i-1})e_{s_i}:1\\le i\\le n\\bigr\\},$$\nthe displayed elements being pairwise distinct positive roots.",
+          "uses": [
+            "1.3",
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-cg-weak-order-meet-semilattice-and-finite-lattice",
+          "source_section": "Statement",
+          "quote": "**(2) Finite Coxeter groups are lattices.** If $W$ is finite, then\n$(W,\\le_R)$ and $(W,\\le_L)$ are lattices with minimum $1$ and maximum $w_0$;\nthat is, every subset of $W$ has a meet and a join, and for the empty subset\n\n$$\\bigwedge\\varnothing=w_0,\\qquad \\bigvee\\varnothing=1.$$\n\nMoreover $w\\le_R w_0$ for every $w\\in W$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-cg-weak-parabolic-projection-and-cover-joins",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, with $S$ finite; finite type means $W$ is finite ([[def-cg-coxeter-diagram-components-and-finite-type]] (4)). Use the right and left weak orders, covers, meets and joins of [[def-cg-left-right-weak-order-and-descents]], and the inversion sets $N(w)=\\{\\alpha\\in\\Phi_+:\\rho(w)\\alpha\\in\\Phi_-\\}$ of [[def-cg-geometric-inversion-set]]. For $J\\subseteq S$, write $w=w_Jd$ for the unique length-additive factorization with $w_J\\in W_J$ and $d\\in{}^JW$ the minimal representative of the left coset $W_Jw$ ([[thm-hh-parabolic-minimal-representatives-and-length-additivity]] (3), [[def-cg-parabolic-quotient-and-two-sided-minima]] (2)); call $w_J$ the $W_J$-prefix of $w$. Put $\\Phi_{J,+}:=\\Phi_J\\cap\\Phi_+$, where $\\Phi_J=\\Phi\\cap V_J$ and $V_J=\\operatorname{span}\\{e_s:s\\in J\\}$ ([[thm-cg-parabolic-intersections-and-coset-factorization]] (2)). Let $w_0$ and $w_0(J)$ be the longest elements of $W$ and $W_J$, respectively ([[thm-cg-finite-parabolic-longest-element-and-opposition]]).\n\n**(1) Inversion set of the prefix.** For every $w\\in W$,\n\n$$N(w_J^{-1})=N(w^{-1})\\cap\\Phi_{J,+}.$$\n\nConsequently $w_J$ is the greatest element of $W_J$ below $w$ in $\\le_R$, the map $w\\mapsto w_J$ is order-preserving, and for every $v\\in W_J$ one has $v\\le_R w$ if and only if $v\\le_R w_J$.\n\n**(2) The largest lift.** For every $z\\in W_J$, the largest element $x\\in W$ with $x_J=z$ is\n\n$$x=z\\,w_0(J)\\,w_0.$$\n\nIt satisfies $\\ell(x)=\\ell(z)+\\ell(w_0)-\\ell(w_0(J))$, and\n\n$$N(x^{-1})=N(z^{-1})\\cup(\\Phi_+\\setminus\\Phi_{J,+}).$$\n\nFor every $y\\in W$, $y\\le_R x$ if and only if $y_J\\le_R z$.\n\n**(3) Meet and join preservation.** For all $x,y\\in W$,\n\n$$(x\\wedge y)_J=x_J\\wedge y_J,\\qquad (x\\vee y)_J=x_J\\vee y_J.$$\n\nThus $w\\mapsto w_J$ is a surjective lattice homomorphism from the finite weak order on $W$ to the induced weak order on $W_J$.\n\n**(4) Cover-join lemmas.** For $w\\in W$ define its set of cover roots by\n\n$$\\operatorname{cov}(w):=\\{\\alpha\\in N(w^{-1}):t_\\alpha w=ws\\text{ and }\\ell(ws)=\\ell(w)-1\\text{ for some }s\\in S\\}.$$\n\nFor $s\\in S$ put $J:=S\\setminus\\{s\\}$. Then:\n\n(i) if $e_s\\in\\operatorname{cov}(w)$ and $t_\\alpha\\in W_J$ for every $\\alpha\\in\\operatorname{cov}(w)\\setminus\\{e_s\\}$, then $w=s\\vee w_J$;\n\n(ii) if $y\\in W_J$, then $\\operatorname{cov}(s\\vee y)=\\operatorname{cov}(y)\\cup\\{e_s\\}$.\n\nNo Axiom of Choice (AC) is used.",
+          "uses": [
+            "2.2",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-cg-left-right-weak-order-and-descents",
+          "source_section": "Definition",
+          "quote": "$$u\\le_R v\\iff v=ux\\text{ for some }x\\in W\\text{ with }\\ell(v)=\\ell(u)+\\ell(x),$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-cg-parabolic-quotient-and-two-sided-minima",
+          "source_section": "Definition",
+          "quote": "each of $\\ell(sw)-\\ell(w)$ and $\\ell(ws)-\\ell(w)$ lies in $\\{\\pm1\\}$\n([[thm-hh-coxeter-exchange-deletion-and-faithfulness]] (1)).",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-cg-finite-lattice-congruence-and-interval-projections",
+          "source_section": "Definition",
+          "quote": "**(1) Lattice congruences and projected endpoints.** An equivalence relation $\\theta$ on $L$ is a **lattice congruence** if $x\\equiv_\\theta x'$ and $y\\equiv_\\theta y'$ imply $x\\wedge y\\equiv_\\theta x'\\wedge y'$ and $x\\vee y\\equiv_\\theta x'\\vee y'$. For $x\\in L$ write $[x]_\\theta$ for the **class** of $x$. On classes this defines the **proposed quotient operations** $[x]_\\theta\\vee[y]_\\theta:=[x\\vee y]_\\theta$ and $[x]_\\theta\\wedge[y]_\\theta:=[x\\wedge y]_\\theta$; the **proposed lower endpoint** $\\pi_\\downarrow(x)$ and **upper endpoint** $\\pi_\\uparrow(x)$ of a class are its least and greatest members. The definition asserts neither that the quotient operations are independent of representatives nor that endpoints exist; both are proved in [[lem-cg-lattice-quotient-descent-and-class-intervals]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-cg-finite-reflection-arrangement-and-spherical-chambers",
+          "source_section": "Definition",
+          "quote": "Since $W$ is finite, $B$ is positive definite\n([[thm-cg-finite-type-positive-definite-criterion]], clause (1),\n[[lem-cg-diagram-products-and-invariant-form-comparison]], clause (4)); hence\n$b:V\\to V^*$, $b(v):=B(v,\\cdot)$, is a linear isomorphism with\n$b(\\rho(w)v)=w\\cdot b(v)$ for all $w\\in W$ and $v\\in V$, because $B$ is $\\rho$-invariant\n([[lem-cg-reflection-representation-descends-and-root-norms]],\n[[def-linear-isomorphism-and-invertible-linear-map]]). **Identify $V$ with $V^*$ by $b$ only\nnow**, and transfer $C$, $C^\\circ$ and the $H_\\alpha$ along $b^{-1}$; with the same letters\n\n$$C=\\{v\\in V:B(v,e_s)\\ge0\\text{ for every }s\\in S\\},\\qquad C^\\circ=\\{v\\in V:B(v,e_s)>0\\text{ for every }s\\in S\\},\\qquad H_\\alpha=\\{v\\in V:B(v,\\alpha)=0\\}.$$\n\nGive $V$ the metric topology of the inner product $B$\n([[def-real-and-complex-inner-product-space]], [[def-metric-space]],\n[[def-metric-topology]]); it is canonical because $B$ is determined by $(W,S)$, and $b$ is an\nisometry for $B$ and its transferred form, so topological notions may be moved across the\nidentification.\n\n**(1) The finite reflection arrangement.** Put\n$$\\mathcal A:=\\{H_\\alpha:\\alpha\\in\\Phi\\}.$$\nEach $\\alpha\\in\\Phi$ satisfies $B(\\alpha,\\alpha)=1\\ne0$\n([[lem-cg-reflection-representation-descends-and-root-norms]], clause (3)), so $H_\\alpha$ is\nthe kernel of the nonzero linear functional $B(\\cdot,\\alpha)$ and in particular contains $0$;\n$\\mathcal A$ is finite because $\\Phi$ is the image of the finite set $W\\times S$ under\n$(w,s)\\mapsto\\rho(w)e_s$; and $\\mathcal A$ is permuted by $\\rho(W)$, since\n$\\rho(w)H_\\alpha=H_{\\rho(w)\\alpha}$ for all $w\\in W$, $\\alpha\\in\\Phi$ (the form $B$ is\n$\\rho$-invariant). A **chamber** of $\\mathcal A$ is a connected component of\n$V\\setminus\\bigcup_{\\alpha\\in\\Phi}H_\\alpha$, and a **closed chamber** is the closure of a\nchamber ([[def-connected-space]], [[def-connected-component-and-quasicomponent]],\n[[def-metric-topology]]). For $I\\subseteq S$ put\n$$\\overline{C_I}:=\\{v\\in C:B(v,e_s)=0\\text{ for }s\\in I\\},\\qquad C_I:=\\{v\\in C:B(v,e_s)=0\\text{ for }s\\in I\\text{ and }B(v,e_s)>0\\text{ for }s\\notin I\\},$$\nthe **closed face** and the **open face** of $C$ of type $I$; for $w\\in W$ put\n$wC:=\\rho(w)C$, $w\\overline{C_I}:=\\rho(w)\\overline{C_I}$ and $wC_I:=\\rho(w)C_I$.",
+          "uses": [
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-cg-finite-chamber-tiling-and-coset-face-identification",
+          "source_section": "Statement",
+          "quote": "**(1) The chamber tiling.** $U=V^*$, and under the identification of the definition\n$V=\\bigcup_{w\\in W}wC$; moreover\n$$V\\setminus\\bigcup_{\\alpha\\in\\Phi}H_\\alpha=\\bigsqcup_{w\\in W}wC^\\circ,$$\nthe connected components of $V\\setminus\\bigcup_\\alpha H_\\alpha$ are exactly the sets\n$wC^\\circ$ $(w\\in W)$ with closures $\\overline{wC^\\circ}=wC$, so the closed chambers of\n$\\mathcal A$ are exactly the sets $wC$; the map $w\\mapsto wC^\\circ$ is a bijection from $W$\nonto the set of chambers, distinct closed chambers have disjoint interiors, and every\n$W$-orbit in $V$ meets $C$ in exactly one point.",
+          "uses": [
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-cg-root-sign-and-simple-reflection-positivity",
+          "source_section": "Statement",
+          "quote": "**(2) Roots have a sign.** Every root $\\alpha\\in\\Phi$ lies in $V_+\\setminus\\{0\\}$ or in $-V_+\\setminus\\{0\\}$, and not in both. Hence, with\n$$\\Phi_+:=\\Phi\\cap V_+,\\qquad \\Phi_-:=\\Phi\\cap(-V_+),$$\none has $\\Phi=\\Phi_+\\sqcup\\Phi_-$, $\\Phi_-=-\\Phi_+$, $e_s\\in\\Phi_+$ for every $s\\in S$, and for every $w\\in W$ and $s\\in S$\n$$\\rho(w)e_s\\in\\Phi_+\\iff w^{-1}C^\\circ\\subseteq B_s,\\qquad \\rho(w)e_s\\in\\Phi_-\\iff w^{-1}C^\\circ\\subseteq sB_s.$$\nIn particular $f(\\alpha)>0$ for all $f\\in C^\\circ$ when $\\alpha\\in\\Phi_+$, and $f(\\alpha)<0$ for all $f\\in C^\\circ$ when $\\alpha\\in\\Phi_-$.",
+          "uses": [
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "lem-cg-sortable-cone-criterion-and-projection-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a Coxeter element, $\\pi_c$ the projection of [[def-cg-initial-letter-sortable-projection]], $C^r_c(v)$ and $\\mathrm{Cone}_c(v)$ the skip roots and cone of [[def-cg-sortable-element-skip-roots-and-cone]], and let $wC$ denote the closed chambers of the finite reflection arrangement ([[thm-cg-finite-chamber-tiling-and-coset-face-identification]] (1),(2)) under the identification $V\\cong V^\\ast$.\n\n**(1) Cone criterion for comparable pairs.** If $v$ is $c$-sortable and $v\\le_Rw$, then\n$$\\pi_c(w)=v\\iff wC\\subseteq\\mathrm{Cone}_c(v).$$\n\n**(2) Monotonicity.** $\\pi_c$ is order preserving: $x\\le_R y$ implies $\\pi_c(x)\\le_R\\pi_c(y)$.\n\n**(3) Greatest sortable below, and full cone criterion.** For every $w\\in W$ the element $\\pi_c(w)$ is the unique greatest $c$-sortable element below $w$ in $\\le_R$; and for every $c$-sortable $v$,\n$$\\pi_c(w)=v\\iff wC\\subseteq\\mathrm{Cone}_c(v).$$\nConsequently each fiber of $\\pi_c$ is a union of chambers and each cone is a union of closed chambers (assembled in [[thm-cg-sortable-skip-basis-cover-roots-and-chamber-unions]]).\n\n**(4) Parabolic compatibility.** For $J\\subseteq S$, with $c'$ the restriction of $c$ and $w_J$ the $W_J$-prefix,\n$$\\pi_{c'}(w_J)=\\pi_c(w)_J$$\nfor every $w\\in W$.",
+          "uses": [
+            "2.5",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "lem-cg-sortable-skips-basis-and-cover-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $(W,S)$ be a Coxeter system of finite type, $c$ a Coxeter element, and $v\\in W$ $c$-sortable, with $c$-sorting word $a_1\\cdots a_k$, skip roots $C^r_c(v)$, forced and unforced skip sets $fsc(v),ufs_c(v)$, and $\\mathcal A_c(v),\\mathcal B_c(v)$ as in [[def-cg-sortable-element-skip-roots-and-cone]]; write $\\beta_t$ for the positive root of a reflection $t$, and $\\mathrm{Cov}(v):=\\{t_\\alpha:\\alpha\\in\\operatorname{cov}(v)\\}$ for its cover reflections, where $\\operatorname{cov}(v)$ is the positive-root set of [[lem-cg-weak-parabolic-projection-and-cover-joins]] (4). Then:\n\n**(1) Values and signs of the skip roots.** For every $r\\in S$ the leftmost unselected occurrence of $r$ determines a skip in a position $i+1$ with $t=a_1\\cdots a_ir\\,a_i\\cdots a_1$, and $C^r_c(v)=\\pm\\beta_t$; moreover\n$$C^r_c(v)=-\\beta_t\\iff t\\in fsc(v),\\qquad C^r_c(v)=+\\beta_t\\iff t\\in ufs_c(v).$$\n\n**(2) The basis.** $C_c(v)=\\{C^r_c(v):r\\in S\\}$ is a basis of $V$, and each $C^r_c(v)$ is independent of the chosen reduced Coxeter word for $c$ and of the choices in the recursion, so the skip roots are well defined.\n\n**(3) Negative skips are cover roots.** $\\mathcal A_c(v)=\\{-\\beta_t:t\\in\\mathrm{Cov}(v)\\}$ and $\\mathcal B_c(v)=\\{\\beta_t:t\\in ufs_c(v)\\}$ with $ufs_c(v)$ the unforced skip reflections; in particular $fsc(v)=\\mathrm{Cov}(v)$ and $|fsc(v)|=|\\mathrm{Cov}(v)|$.\n\n**(4) Euler orthogonality.** Order the simple generators $r_1,\\dots,r_n$ by the first appearance of $r_i$ in the complement of the selected positions of $c^\\infty$. Then $E_c(C^{r_i}_c(v),C^{r_j}_c(v))=0$ for all $i<j$.\n\n**(5) Terminal covers and cover decompositions.** (i) If $s$ is final in $c$ and $v\\ge_Rs$, then $s$ is a cover reflection of $v$ (equivalently $s\\in\\mathrm{Cov}(v)$). (ii) If $s$ is final in $c$, $v$ is $c$-sortable and $v\\ge_Rs$, then\n$$v=s\\vee v_{\\langle s\\rangle},\\qquad \\mathrm{Cov}(v)=\\{s\\}\\cup\\mathrm{Cov}(v_{\\langle s\\rangle}),\\qquad ufs_c(v)=ufs_{cs}(v_{\\langle s\\rangle}),$$\nwhere $v_{\\langle s\\rangle}$ is the $W_{\\langle s\\rangle}$-prefix and $cs$ the restriction of $c$ to $W_{\\langle s\\rangle}$ (the reduced word in $W_{\\langle s\\rangle}$ obtained from a reduced word for $c$ by deleting the final letter). (iii) If $s$ is initial in $c$ and $s\\in\\mathrm{Cov}(v)$, then the same identities hold, with the last replaced by\n$$ufs_c(v)=\\{sts:t\\in ufs_{sc}(v_{\\langle s\\rangle})\\},$$\nwhere $sc$ is the restriction of $c$ to $W_{\\langle s\\rangle}$ (obtained by deleting the initial letter).",
+          "uses": [
+            "2.5",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "$$R:=\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s,t\\in S,\\ m(s,t)<\\infty\\},$$",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-cg-canonical-reflection-homomorphism",
+          "source_section": "Definition",
+          "quote": "**(1)** Write $\\mathrm{GL}(V)$ for the group of invertible linear maps $V\\to V$, the unit group of the monoid of linear endomorphisms under composition ([[def-linear-isomorphism-and-invertible-linear-map]], [[def-vector-space-of-linear-maps]], [[lem-composition-and-identity-linear-maps]], [[lem-monoid-units-form-a-group]]). The **canonical reflection homomorphism** is the group homomorphism $\\rho:W\\to\\mathrm{GL}(V)$ ([[def-group-homomorphism]]) that satisfies $\\rho(s)=r_s$ for every $s\\in S$; its existence and uniqueness are established by [[lem-cg-reflection-representation-descends-and-root-norms]], which is this definition's recorded justifier. For $w\\in W$ and $v\\in V$ write $\\rho(w)v$ for the image.",
+          "uses": [
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-cg-real-coxeter-form-and-reflection",
+          "source_section": "Definition",
+          "quote": "$$r_a(v):=v-\\frac{2B(v,a)}{B(a,a)}a .$$",
+          "uses": [
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-cg-finite-reflection-arrangement-and-spherical-chambers",
+          "source_section": "Definition",
+          "quote": "$\\mathcal A$ is permuted by $\\rho(W)$, since\n$\\rho(w)H_\\alpha=H_{\\rho(w)\\alpha}$ for all $w\\in W$, $\\alpha\\in\\Phi$ (the form $B$ is\n$\\rho$-invariant).",
+          "uses": [
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "lem-cg-weak-parabolic-projection-and-cover-joins",
+          "source_section": "Statement",
+          "quote": "**(4) Cover-join lemmas.** For $w\\in W$ define its set of cover roots by\n\n$$\\operatorname{cov}(w):=\\{\\alpha\\in N(w^{-1}):t_\\alpha w=ws\\text{ and }\\ell(ws)=\\ell(w)-1\\text{ for some }s\\in S\\}.$$\n\nFor $s\\in S$ put $J:=S\\setminus\\{s\\}$. Then:\n\n(i) if $e_s\\in\\operatorname{cov}(w)$ and $t_\\alpha\\in W_J$ for every $\\alpha\\in\\operatorname{cov}(w)\\setminus\\{e_s\\}$, then $w=s\\vee w_J$;\n\n(ii) if $y\\in W_J$, then $\\operatorname{cov}(s\\vee y)=\\operatorname{cov}(y)\\cup\\{e_s\\}$.\n\nNo Axiom of Choice (AC) is used.",
+          "uses": [
+            "2.5",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sortable-meet-by-rank-two-inversion-intersection",
+          "claim": "Intersect inverse inversion sets, verify rank-two recognition, and prove the result is the greatest common lower bound and remains sortable.",
+          "step": "1.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "left-multiplication-order-isomorphism",
+          "claim": "Show left multiplication by the initial generator is an order isomorphism from its non-above set onto the principal filter above it.",
+          "step": "1.2",
+          "inputs": [
+            "F14",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "crossing-cover-is-a-generator-reflection",
+          "claim": "Identify the single new inversion root at a cover crossing the principal filter and prove the cover reflection is the initial generator.",
+          "step": "1.3",
+          "inputs": [
+            "F10",
+            "F11",
+            "F14",
+            "F20",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "join-induction-base",
+          "claim": "Set up lexicographic induction on rank and join length with explicit zero-rank and zero-length bases.",
+          "step": "1.4",
+          "inputs": [
+            "base",
+            "ih"
+          ]
+        },
+        {
+          "id": "sortable-join-closure",
+          "claim": "Use greatest-sortable-below and monotonicity to show the join of nonempty sortable elements is sortable.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F12",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "initial-filter-join-translation",
+          "claim": "Prove the join formula after left multiplying two elements outside the initial-generator filter.",
+          "step": "2.2",
+          "inputs": [
+            "F13",
+            "F14",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "meet-preservation",
+          "claim": "Establish both inequalities for projection of a binary meet, using sortable meet closure and greatest-sortable-below.",
+          "step": "2.3",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "both-below-parabolic-join",
+          "claim": "Reduce join preservation in the both-below case to the lower-rank parabolic using the prefix join identity.",
+          "step": "2.4",
+          "inputs": [
+            "F2",
+            "F5",
+            "F13",
+            "step 1.4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cover-wall-and-negative-skip",
+          "claim": "Across the first simple-filter crossing, prove s is a cover reflection of s join y; a facet point avoiding finitely many proper root-hyperplane intersections identifies the inward skip root as -e_s, hence s lies in the reflection set Cov(q), permitting initial cover decomposition.",
+          "step": "2.5",
+          "inputs": [
+            "F3",
+            "F5",
+            "F4",
+            "F10",
+            "F11",
+            "F16",
+            "F17",
+            "F18",
+            "F19",
+            "F21",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "both-above-join-induction",
+          "claim": "Reduce the both-above case to the both-below formula via left multiplication and the rank/length induction hypothesis.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F14",
+            "F20",
+            "step 1.4",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "initial-generator-join-formula",
+          "claim": "Use sortable cover decomposition, parabolic compatibility and prefix join preservation to establish the initial-letter join formula.",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "F13",
+            "F18",
+            "F19",
+            "step 2.5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mixed-case-induction",
+          "claim": "Reduce the mixed case to the both-above case and the initial-generator join formula.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 1.4",
+            "step 3.1",
+            "step 3.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quotient-lattice-isomorphism-and-choice",
+          "claim": "Identify the quotient with the sortable sublattice, prove kernel congruence and operation independence, and record Choice use.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F15",
+            "step 2.3",
+            "step 2.4",
+            "step 3.1",
+            "step 4.1",
+            "discharge-induction",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem asserts closure for nonempty sets A only; no empty meet or join claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.4 treats ell(x join y)=0 explicitly and gives the identity base."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.2 handle the rank-one parabolic generated by the initial simple reflection."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes finite Coxeter type and uses no degenerating form or limiting parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This theorem proves sortable closure, projection homomorphism and the quotient lattice; interval endpoints are deferred to the separate fiber theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the unique element recognized by the inversion-set criterion, and step 5.1 records that all sets and inductions are finite; no arbitrary family member is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies each rank-two trace condition for the intersection I before applying the recognition implication of Fact F8."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves no biconditional theorem; it uses rank-two inversion recognition only from the verified trace condition to the existence of an inversion set."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1480 @@
+{
+  "version": 1,
+  "batch": "10",
+  "scope": [
+    "def-cg-parabolic-quotient-and-two-sided-minima",
+    "lem-cg-double-coset-descent-reduction-and-minimality",
+    "ex-cg-reflection-subgroups-parabolic-and-not",
+    "thm-cg-parabolic-intersections-and-coset-factorization",
+    "lem-cg-double-coset-intersection-parabolic",
+    "thm-cg-double-coset-unique-minimum-and-normal-form",
+    "ex-cg-infinite-dihedral-parabolic-double-cosets",
+    "ex-cg-s4-coset-minima-and-double-coset-decomposition"
+  ],
+  "contracts": {
+    "def-cg-parabolic-quotient-and-two-sided-minima": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition itself fixes the empty index set: (1) states $W_\\emptyset=\\{1\\}$ and (3) states ${}^\\emptyset W^J=W^J$, ${}^IW^\\emptyset={}^IW$ and ${}^\\emptyset W^\\emptyset=W$, so the empty-parameter instances are named in the Definition and no separate obligation remains."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero length is disposed of in the Definition: the quoted clauses of [[thm-hh-parabolic-minimal-representatives-and-length-additivity]] give $\\ell(1)=0$ and $D_L(1)=D_R(1)=\\emptyset$, so the identity lies in $W^I$ and ${}^IW$ for every $I$; the Definition asserts nothing further about length-zero elements."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition names the unit and singleton-generator cases: $W_\\emptyset=\\{1\\}$ is the trivial subgroup, $W_I\\cap S=I$ records the length-one generators, and the factorizations of (2) become $w=1\\cdot w$ resp. $w=w\\cdot1$ when the parabolic factor is trivial."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition is stated for an arbitrary finite Coxeter matrix; the degenerate instances $S=\\emptyset$ (then $W=\\{1\\}$) and $I=\\emptyset$ are covered by $W_\\emptyset=\\{1\\}$ and the trivial quotients of (3). No positivity, faithfulness or nondegeneracy is asserted, those hypotheses being carried by the geometric items of this page."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition fixes notation, subgroups and subsets of the fixed group $W$; no interval, chain or ordered parameter family occurs in it, so there is no endpoint case to dispose of."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No selection principle is used in the Definition: $W_I$, $W^I$, ${}^IW$ and ${}^IW^J$ are subsets of the fixed group $W$ cut out by predicates, and the two quoted factorizations return the unique minimal element of a coset ([[thm-hh-parabolic-minimal-representatives-and-length-additivity]] (3)), which is determined by the data rather than chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward directions of the biconditionals in the Definition: $w\\in W_I\\Rightarrow S(w)\\subseteq I$ is part of the quoted clause of (1), and $w\\in{}^IW^J\\Rightarrow D_L(w)\\cap I=D_R(w)\\cap J=\\emptyset$ is the display in (3)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse directions in the Definition: $S(w)\\subseteq I\\Rightarrow w\\in W_I$ is the same quoted clause of (1), and $D_L(w)\\cap I=D_R(w)\\cap J=\\emptyset\\Rightarrow w\\in{}^IW^J$ is the sentence of (3) saying that the members of ${}^IW^J$ are exactly the elements with no left descent in $I$ and no right descent in $J$."
+        }
+      ]
+    },
+    "lem-cg-double-coset-descent-reduction-and-minimality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hh-coxeter-exchange-deletion-and-faithfulness",
+          "source_section": "Statement",
+          "quote": "Consequently, for all $w\\in W$ and $s\\in S$,\n$$\\ell(sw)=\\ell(w)\\pm1,\\qquad \\ell(ws)=\\ell(w)\\pm1,$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "$$\\ell(w):=\\min\\{k\\in\\mathbb{N}:\\ \\text{there exist }s_1,\\dots,s_k\\in S\\text{ with }w=s_1\\cdots s_k\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-parabolic-quotient-and-two-sided-minima",
+          "source_section": "Definition",
+          "quote": "$${}^IW^J:={}^IW\\cap W^J=\\{w\\in W:\\ell(sw)>\\ell(w)\\text{ for all }s\\in I\\ \\text{ and }\\ \\ell(ws)>\\ell(w)\\text{ for all }s\\in J\\};$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "$$W_J=\\langle J\\rangle=\\{w\\in W:S(w)\\subseteq J\\}.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-hh-coxeter-exchange-deletion-and-faithfulness",
+          "source_section": "Statement",
+          "quote": "Hence repeated deletion of two letters transforms every word into a reduced expression for the same element, and a word is reduced if and only if it cannot be shortened by deleting two letters.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "$(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Descent reduction: if $x\\in\\Omega(d)$ and $\\ell(sx)<\\ell(x)$ for $s\\in I$ then $sx\\in\\Omega(d)$, and symmetrically for $xs$ with $s\\in J$; each replacement lowers $\\ell$ by exactly $1$, so the process from $d$ performs at most $\\ell(d)$ replacements and stops at an $x$ with $\\ell(sx)>\\ell(x)$ for all $s\\in I$ and $\\ell(xs)>\\ell(x)$ for all $s\\in J$, i.e. $x\\in\\Omega(d)\\cap{}^IW^J$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Middle-block argument: for $m$ a minimum-length element of $\\Omega=W_IwW_J$ and $x=ama'$ with fixed reduced words $A,M,A'$, a value-preserving two-letter deletion can never remove a letter of $M$ (both letters in $M$ would give a shorter word for $m$; one letter in $M$ would give an element of $W_IxW_J$ of length $<\\ell(m)$), so reduction ends at a reduced word $A_0MA'_0$ and exhibits $x=a_0ma'_0$ with $\\ell(x)=\\ell(a_0)+\\ell(m)+\\ell(a'_0)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A minimum-length element $m$ of $\\Omega=W_IwW_J$ has no left descent in $I$ and no right descent in $J$, since a descent would produce a shorter element of $\\Omega$; hence $m\\in{}^IW^J$, so every double coset has a minimum and (with step 1.1) contains an element of ${}^IW^J$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every element $d\\in{}^IW^J$ is a minimum of its own double coset: applying step 1.2 to a minimum $m$ of $\\Omega(d)$ gives $d=a_0ma'_0$ with $\\ell(d)=\\ell(a_0)+\\ell(m)+\\ell(a'_0)$; a nontrivial $a_0$ (or $a'_0$) would yield a descent in $I$ (or $J$) shortening $d$, contradicting $d\\in{}^IW^J$; hence $a_0=a'_0=1$ and $d=m$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Minimality, equality case, uniqueness and additivity: for $d\\in{}^IW^J$ and $x\\in\\Omega(d)$, step 1.2 with $m:=d$ gives $x=udv$ and $\\ell(x)=\\ell(u)+\\ell(d)+\\ell(v)\\ge\\ell(d)$ with equality iff $u=v=1$; two elements of ${}^IW^J$ in one double coset coincide, and an element of minimum length in $W_IwW_J$ lies in ${}^IW^J$ by step 2.1.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 is formulated for the middle block of any reduced word and step 3.1 concludes $a_0=a'_0=1$; the case $x=m$, i.e. empty outer blocks, is the instance $A_0$ and $A'_0$ empty, already covered there."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: if $\\ell(d)=0$ then $d=1$ and the process performs no replacement, terminating at $1\\in{}^IW^J$; the equality case of step 4.1 uses that $\\ell(u)=0$ iff $u=1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the case of a factor of length $\\ge1$ ($a_0\\ne1$ or $a'_0\\ne1$) and rules it out, so the length-one instance $\\ell(d)=1$ is covered by the same contradiction through a first letter $s\\in I$ of a reduced word of $a_0$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 and step 1.1 are stated for arbitrary subsets $I,J\\subseteq S$; the fully degenerate case $I=J=\\emptyset$ gives ${}^IW^J=W$ and singleton double cosets, for which the minimum returned in step 2.1 is the element itself."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma quantifies over arbitrary $d\\in W$ and arbitrary subsets $I,J\\subseteq S$; neither the statement nor the proof contains an interval, chain or ordered parameter family with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the argument is choice-free: each replacement is the least descent in the finite set $S$, the minimum of a double coset is the least element of the nonempty set of natural numbers $\\{\\ell(x):x\\in\\Omega\\}$ by [F4], and the deletion pair is the lexicographically least admissible pair."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the forward direction of $\\ell(x)=\\ell(d)\\iff x=d$ in (2): additivity gives $\\ell(x)=\\ell(u)+\\ell(d)+\\ell(v)$, so equality forces $\\ell(u)=\\ell(v)=0$, hence $u=v=1$ and $x=d$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1: conversely $u=v=1$ gives $x=d$ and $\\ell(x)=\\ell(d)$, and any $x$ of minimum length in $W_IwW_J$ lies in ${}^IW^J$ by step 2.1."
+        }
+      ]
+    },
+    "ex-cg-reflection-subgroups-parabolic-and-not": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "Then $s_i\\mapsto(i\\ i+1)$ extends to an isomorphism $W\\to S_n$ (the letters $1,\\dots,n$ carry the library's symmetric group by the order-preserving identification with $\\{0,\\dots,n-1\\}$, under which $(i\\ i+1)$ is the adjacent transposition $(i-1\\ i)$), and for every $w\\in W$,\n$$\\ell(w)=\\operatorname{inv}\\bigl(\\varphi(w)\\bigr),$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cg-parabolic-quotient-and-two-sided-minima",
+          "source_section": "Definition",
+          "quote": "A subgroup $H\\le W$ is a **parabolic subgroup** of $(W,S)$ if\n\n$$H=wW_Iw^{-1}\\qquad\\text{for some }w\\in W,\\ I\\subseteq S;$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hh-dihedral-root-recurrence-and-root-sign",
+          "source_section": "Statement",
+          "quote": "If $m<\\infty$ and $q\\le m$, or if $m=\\infty$ and $q\\ge1$, then $\\ell(w_q)=q$, every word in $S$ representing $w_q$ has length at least $q$, and $w_1,\\dots,w_q$ are pairwise distinct.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cg-canonical-reflection-homomorphism",
+          "source_section": "Definition",
+          "quote": "The set of **reflections** of $W$ is $T:=\\{wsw^{-1}:w\\in W,\\ s\\in S\\}\\subset W$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "For every group $G$ and every map $f:S\\to G$ with $f(s)^2=1$ for all $s\\in S$ and $(f(s)f(t))^{m(s,t)}=1$ in $G$ for all $s\\ne t$ with $m(s,t)<\\infty$, there is a unique group homomorphism $\\varphi:W\\to G$ with $\\varphi(s)=f(s)$ for all $s\\in S$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "Condition (H2) is not imposed for groups because it follows: a group homomorphism automatically satisfies $f(e) = e'$ and $f(x^{-1}) = f(x)^{-1}$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "$H=\\langle(1\\,3),(2\\,4)\\rangle=\\{1234,1432,3214,3412\\}$ has order $4$; $(1\\,3)=s_2s_1s_2$ and $(2\\,4)=s_2s_3s_2$, so $H=s_2W_{\\{s_1,s_3\\}}s_2$ is parabolic; and $(2\\,4)=w(1\\,3)w^{-1}$ for $w=2143$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In $W=\\langle s,t\\rangle$ with $m(s,t)=\\infty$: normal form $W=\\{u^k\\}\\cup\\{u^ks\\}$; $tst=u^{-2}s$ is a reflection; $\\langle s,tst\\rangle=\\langle s,u^2\\rangle=S_0$ by closure of $S_0$; the parity homomorphism $\\varphi:W\\to\\mathbb Z/2$ ($s\\mapsto0$, $t\\mapsto1$) identifies $S_0$ as $\\ker\\varphi$, so $H'$ has index $2$ and is infinite.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$H$ is not standard: the eight standard parabolics $W_J=\\{w:S(w)\\subseteq J\\}$ of $S_4$ are listed with orders $1,2,2,2,6,6,4,24$; the only order-$4$ one, $W_{\\{s_1,s_3\\}}$, does not contain $3214\\in H$, so $H\\ne W_J$ for every $J$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "$H'$ is not parabolic: the parabolic subgroups of the infinite dihedral group are $\\{1\\}$, the $\\{1,r\\}$ with $r\\in T$, and $W$; $H'$ contains $s\\ne1$, is infinite and has index $2$ so $H'\\ne W$, hence is none of them.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The three classes are distinct: every standard parabolic is parabolic and every parabolic is a reflection subgroup, with both inclusions strict, witnessed by $H$ (parabolic, not standard) and $H'$ (reflection subgroup, not parabolic).",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 includes $1=u^0$ and the case $k\\ge0$ of the normal form $W=\\{u^k\\}\\cup\\{u^ks\\}$; step 2.1 lists $W_\\emptyset=\\{1234\\}$ among the standard parabolics of $S_4$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: $u^0=1$ has length $0$ and $\\langle s,u^2\\rangle$ contains $u^0s=s$; step 3.1 contains the trivial subgroup on both sides of the strict inclusion chain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the length-one elements $s=u^0s$ and $t=u^{-1}s$ of $W$, and steps 2.1-2.2 count the order-two parabolics $W_{\\{s_i\\}}$ and $\\{1,r\\}$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Part (ii) uses the degenerate edge $m(s,t)=\\infty$: step 1.2 handles it through the normal form and [F3], and no finite-dihedral order $m<\\infty$ is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example computes the finite group $S_4$ and the infinite dihedral group; it contains no interval or ordered parameter family with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No Choice is used: $H$ and $H'$ are generated by explicit finite sets, and the decomposition $W=\\{u^k\\}\\cup\\{u^ks\\}$ in step 1.2 is a normal form distinguished by the parity homomorphism."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the forward direction of the description of $H'$: every element of $\\langle s,u^2\\rangle$ lies in $S_0=\\{u^{2k}\\}\\cup\\{u^{2k}s\\}$, hence in the kernel of the parity homomorphism, which has index $2$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 also proves the reverse direction: $S_0$ is closed under multiplication and contains $s$ and $u^2$, so $S_0=\\langle s,u^2\\rangle$ and the kernel of $\\varphi$ equals $S_0=H'$."
+        }
+      ]
+    },
+    "thm-cg-parabolic-intersections-and-coset-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "Every left coset $W_J a:=\\{ua:u\\in W_J\\}$ ($a\\in W$, [[def-coset]]) has a unique element $d$ of minimal length; it is characterized by $\\ell(sd)>\\ell(d)$ for all $s\\in J$, and it satisfies\n$$\\ell(ud)=\\ell(u)+\\ell(d)\\qquad\\text{for all }u\\in W_J .$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cg-parabolic-quotient-and-two-sided-minima",
+          "source_section": "Definition",
+          "quote": "$$W^I:=\\{w\\in W:\\ell(ws)>\\ell(w)\\text{ for all }s\\in I\\}=\\{w\\in W:D_R(w)\\cap I=\\emptyset\\},$$\n\n$${}^IW:=\\{w\\in W:\\ell(sw)>\\ell(w)\\text{ for all }s\\in I\\}=\\{w\\in W:D_L(w)\\cap I=\\emptyset\\}.$$",
+          "uses": [
+            "1.1",
+            "1.4",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-real-coxeter-form-and-reflection",
+          "source_section": "Definition",
+          "quote": "in particular $B(e_s,e_s)=1$ and $B(e_s,e_t)=-\\cos(\\pi/m(s,t))$ for finite $m(s,t)$, while $B(e_s,e_t)=-1$ when $m(s,t)=\\infty$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cg-canonical-reflection-homomorphism",
+          "source_section": "Definition",
+          "quote": "The set of **reflections** of $W$ is $T:=\\{wsw^{-1}:w\\in W,\\ s\\in S\\}\\subset W$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cg-real-coxeter-form-and-reflection",
+          "source_section": "Definition",
+          "quote": "$$r_a(v):=v-\\frac{2B(v,a)}{B(a,a)}a .$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cg-reflection-representation-descends-and-root-norms",
+          "source_section": "Statement",
+          "quote": "For every $w\\in W$ and $s\\in S$, $B(\\rho(w)e_s,\\rho(w)e_s)=1$; hence every root $\\alpha\\in\\Phi$ satisfies $B(\\alpha,\\alpha)=1\\ne0$ and $r_\\alpha$ is defined.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cg-root-sign-and-simple-reflection-positivity",
+          "source_section": "Statement",
+          "quote": "Every root $\\alpha\\in\\Phi$ lies in $V_+\\setminus\\{0\\}$ or in $-V_+\\setminus\\{0\\}$, and not in both. Hence, with\n$$\\Phi_+:=\\Phi\\cap V_+,\\qquad \\Phi_-:=\\Phi\\cap(-V_+),$$\none has $\\Phi=\\Phi_+\\sqcup\\Phi_-$, $\\Phi_-=-\\Phi_+$, $e_s\\in\\Phi_+$ for every $s\\in S$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cg-root-length-criterion-and-faithfulness",
+          "source_section": "Statement",
+          "quote": "$$\\ell(ws)>\\ell(w)\\iff\\rho(w)e_s\\in\\Phi_+,\\qquad \\ell(ws)<\\ell(w)\\iff\\rho(w)e_s\\in\\Phi_-.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cg-root-inversion-formulas-and-strong-exchange",
+          "source_section": "Statement",
+          "quote": "For $\\alpha\\in\\Phi$ choose $w\\in W$, $s\\in S$ with $\\alpha=\\rho(w)e_s$ and put $t_\\alpha:=wsw^{-1}\\in T$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-hh-coxeter-exchange-deletion-and-faithfulness",
+          "source_section": "Statement",
+          "quote": "Consequently, for all $w\\in W$ and $s\\in S$,\n$$\\ell(sw)=\\ell(w)\\pm1,\\qquad \\ell(ws)=\\ell(w)\\pm1,$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "$$\\ell(w):=\\min\\{k\\in\\mathbb{N}:\\ \\text{there exist }s_1,\\dots,s_k\\in S\\text{ with }w=s_1\\cdots s_k\\}.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "$(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-generated-subgroup",
+          "source_section": "Definition",
+          "quote": "It contains $S$, being an intersection of sets each containing $S$, and it is contained in every subgroup of $G$ that contains $S$; so it is the **smallest**\nsubgroup of $G$ containing $S$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "It contains $S$, being an intersection of sets each of which contains $S$, and it\nis contained in every linear subspace of $V$ that contains $S$. So it is the\n**smallest** linear subspace of $V$ containing $S$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "$W_I\\cap W_J=W_{I\\cap J}$ for all subsets $I,J$, via $w\\in W_I\\iff S(w)\\subseteq I$ and the same for $J$, including $I\\cap J=\\emptyset$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $s\\in I$ the reflection formula gives $\\rho(s)e_s=-e_s$ and $\\rho(s)e_t=e_t-2B(e_t,e_s)e_s$ for $t\\in I$, hence $\\rho(s)V_I=V_I$ and, multiplying along a generating word, $\\rho(w)V_I=V_I$ for all $w\\in W_I$; therefore $\\Phi_I\\subseteq\\Phi\\cap V_I$, and for $I=\\emptyset$ both sides are empty because $V_\\emptyset=\\{0\\}$ contains no root.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Setup of the converse and the base case: for $\\varphi\\in\\Phi\\cap V_I$ one may assume $\\varphi\\in\\Phi_+$, so $\\varphi=\\sum_{r\\in I}\\lambda_re_r$ with $\\lambda_r>0$, and $t:=t_\\varphi$ has $B(\\varphi,\\varphi)=1$; if $\\ell(t)=1$ then $t=s_r$ and the dictionary forces $\\varphi=e_r$ with $r\\in I$, so $t\\in W_I$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For $d\\in W^I$ one has $\\ell(du)=\\ell(d)+\\ell(u)$ for all $u\\in W_I$: $d$ is the minimal representative of the right coset $dW_I$ by its descent characterization.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induction step for $n=\\ell(t)\\ge2$: unit norm gives some $r\\in I$ with $B(\\varphi,e_r)>0$; then $|\\operatorname{supp}\\varphi|\\ge2$, the root $\\rho(t)e_{s_r}$ has negative coefficients outside $e_r$ and lies in $\\Phi_-$, while $\\psi=\\rho(s_r)\\varphi$ lies in $\\Phi_+\\cap V_I$; the criterion and parity give $\\ell(s_rt)=\\ell(t)-1$ and $\\ell(s_rt s_r)=\\ell(t)-2$, so $t_\\psi=s_rt s_r\\in W_I$ by induction and $t=s_rt_\\psi s_r\\in W_I$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "$W^I=\\{d:\\ell(d)\\le\\ell(dv)\\text{ for all }v\\in W_I\\}$ and the mirrored description of ${}^IW$: the forward direction is additivity, the converse follows because $\\ell(ds)\\ne\\ell(d)$ for $s\\in I$; inversion transfers the statement to left cosets.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F8",
+            "F9",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Converse containment $\\Phi\\cap V_I\\subseteq\\Phi_I$: strong induction on the reflection length proves $t_\\varphi\\in W_I$ for every $\\varphi\\in\\Phi_+\\cap V_I$ (steps 1.3 and 2.1); then strong exchange applied to a reduced expression of $t_\\varphi$ inside $W_I$ exhibits $\\varphi=\\rho(w)e_s$ with $w\\in W_I$, $s\\in I$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "step 1.3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Each coset has a unique element of the transversal and it is the unique minimum: for $d\\in W^I$ every $x=du$ with $u\\in W_I$ has $\\ell(x)=\\ell(d)+\\ell(u)\\ge\\ell(d)$ with equality iff $u=1$, and two elements of $W^I$ in one coset coincide; the left-handed assertions follow by inversion.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9",
+            "step 1.4",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Conclusion: $\\Phi_I=\\Phi\\cap V_I$ is the displayed set of real linear combinations, $\\Phi_I=\\Phi_I^+\\sqcup\\Phi_I^-$, and the reflections in $W_I$ are exactly the $t_\\alpha$ with $\\alpha\\in\\Phi_I^+$; with steps 1.1 and 3.2 this proves (1), (2) and (3), with no Axiom of Choice.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "F11",
+            "step 1.1",
+            "step 1.2",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles $I\\cap J=\\emptyset$ with $W_\\emptyset=\\{1\\}$; step 1.2 handles $I=\\emptyset$, where $V_\\emptyset=\\{0\\}$ and $\\Phi_\\emptyset=\\emptyset$; step 3.2 covers empty $W_I$ through the trivial factorization $x=d$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.2 use $\\ell(u)=0\\iff u=1$ and the case $d=1$ of $\\ell(x)=\\ell(d)+\\ell(u)$; step 2.1 begins at the length-$1$ base case handled in step 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 disposes of $\\ell(t)=1$ by exhibiting $t=s_r$ with $r\\in I$; step 2.1 treats $n\\ge2$ and reduces the length by two each time."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Only $B(\\alpha,\\alpha)=1$ for roots is used, never nondegeneracy or positivity of $B$: step 2.1 divides only by $B(\\varphi,\\varphi)=1$, so degenerate and indefinite Coxeter forms are covered; the note after step 4.1 records this."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem quantifies over arbitrary subsets $I,J\\subseteq S$ and arbitrary $w\\in W$; it contains no interval, chain or ordered family with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 selects the least index $r$ with $B(\\varphi,e_r)>0$ (a nonempty finite set), step 3.1 uses the unique strong-exchange index, and step 3.2 works with the unique minimal representative; no arbitrary choice occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 proves $d\\in W^I\\Rightarrow\\ell(d)\\le\\ell(dv)$ for all $v\\in W_I$ by additivity, and step 3.2 proves that the unique transversal element is the unique minimum in the forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 proves the converse: $\\ell(d)\\le\\ell(dv)$ for all $v\\in W_I$ forces $\\ell(ds)>\\ell(d)$ for $s\\in I$; step 3.2 identifies any second minimal transversal element with $d$."
+        }
+      ]
+    },
+    "lem-cg-double-coset-intersection-parabolic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cg-parabolic-quotient-and-two-sided-minima",
+          "source_section": "Definition",
+          "quote": "$${}^IW^J:={}^IW\\cap W^J=\\{w\\in W:\\ell(sw)>\\ell(w)\\text{ for all }s\\in I\\ \\text{ and }\\ \\ell(ws)>\\ell(w)\\text{ for all }s\\in J\\};$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "$$W_J=\\langle J\\rangle=\\{w\\in W:S(w)\\subseteq J\\}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cg-double-coset-descent-reduction-and-minimality",
+          "source_section": "Statement",
+          "quote": "**(3) Additive factorization.** Let $d\\in{}^IW^J$ and $x\\in\\Omega(d)$. Then\nthere exist $u\\in W_I$ and $v\\in W_J$ with\n\n$$x=udv,\\qquad \\ell(x)=\\ell(u)+\\ell(d)+\\ell(v).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cg-root-inversion-formulas-and-strong-exchange",
+          "source_section": "Statement",
+          "quote": "Let $w\\in W$ and $t\\in T$ satisfy $\\ell(tw)<\\ell(w)$, and let $w=s_1\\cdots s_n$ be a reduced expression. Then there is a unique $i\\in\\{1,\\dots,n\\}$ with\n$$tw=s_1\\cdots\\widehat{s_i}\\cdots s_n,\\qquad t=r_i:=s_1\\cdots s_{i-1}s_is_{i-1}\\cdots s_1;$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cg-root-inversion-formulas-and-strong-exchange",
+          "source_section": "Statement",
+          "quote": "For $\\alpha\\in\\Phi$ choose $w\\in W$, $s\\in S$ with $\\alpha=\\rho(w)e_s$ and put $t_\\alpha:=wsw^{-1}\\in T$.",
+          "uses": [
+            "1.3",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cg-root-length-criterion-and-faithfulness",
+          "source_section": "Statement",
+          "quote": "$$\\ell(ws)>\\ell(w)\\iff\\rho(w)e_s\\in\\Phi_+,\\qquad \\ell(ws)<\\ell(w)\\iff\\rho(w)e_s\\in\\Phi_-.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-cg-canonical-reflection-homomorphism",
+          "source_section": "Definition",
+          "quote": "The set of **reflections** of $W$ is $T:=\\{wsw^{-1}:w\\in W,\\ s\\in S\\}\\subset W$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cg-parabolic-intersections-and-coset-factorization",
+          "source_section": "Statement",
+          "quote": "consequently\n\n$$\\Phi_I=\\Phi\\cap V_I=\\{\\alpha\\in\\Phi:\\alpha\\text{ is a real linear combination of the simple roots }e_s,\\ s\\in I\\}.$$\n\nMoreover $\\Phi_I=\\Phi_I^+\\sqcup\\Phi_I^-$ with\n$\\Phi_I^\\pm:=\\Phi_I\\cap\\Phi^\\pm=\\Phi^\\pm\\cap V_I$, and the reflections lying in\n$W_I$ are exactly the elements $t_\\alpha\\in T$ with $\\alpha\\in\\Phi_I^+$ in the\nroot-reflection dictionary of\n[[thm-cg-root-inversion-formulas-and-strong-exchange]] (1).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "$$\\ell(w):=\\min\\{k\\in\\mathbb{N}:\\ \\text{there exist }s_1,\\dots,s_k\\in S\\text{ with }w=s_1\\cdots s_k\\}.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "$(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "$W_K\\subseteq W_I\\cap dW_Jd^{-1}$: for $s\\in K$, $s=d(d^{-1}sd)d^{-1}$ with $d^{-1}sd\\in J$; conjugation by $d$ gives $d^{-1}W_Kd=W_{d^{-1}Kd}$ with $d^{-1}Kd\\subseteq J$, and conjugating the pending equality will give the mirrored form.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Key step: for $y\\in W_I\\cap dW_Jd^{-1}$ with reduced expression $y=s_1\\cdots s_p$, $p\\ge1$, and $\\tilde y=d^{-1}yd$ of length $p$, strong exchange applied to the reduced word (a reduced word for $d$) followed by $\\tilde y$ and the reflection $s_1$ either deletes a letter of $d$ - impossible because it exhibits an element $d_i=(s_2\\cdots s_p)d\\tilde y^{-1}\\in W_IdW_J$ of length $<\\ell(d)$ - or exhibits $d^{-1}s_1d$ as a conjugate in $W_J$ of a letter of $J$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $s\\in I$ the element $z=d^{-1}sd$ is a reflection with root $\\rho(d)^{-1}e_s$, and that root lies in $\\Phi_+$: $\\ell(sd)>\\ell(d)$ translates by inversion into the root-length criterion applied to $d^{-1}$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $d^{-1}sd\\in W_J$ for $s\\in I$ then the length computation of step 1.2 with $(y,\\tilde y)$ replaced by $(s,z)$ gives $\\ell(z)=\\ell(s)=1$, so $z\\in W_J\\cap S=J$; applied to the first letter of step 1.2 this gives $s_1\\in K$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "$z=d^{-1}sd$ has root $\\varphi=\\rho(d)^{-1}e_s$ and $z\\in J$ iff $\\varphi=e_j$ for some $j\\in J$, by the root-reflection dictionary and positivity of roots.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Iterating step 2.1 along the reduced expression of $y\\in W_I\\cap dW_Jd^{-1}$ gives $d^{-1}s_id\\in J$, hence $s_i\\in K$, for every $i$ (the case $p=0$, $y=1$, is trivial); thus $y\\in W_K$, and with step 1.1 this proves (1),(2) and the conjugation identities.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Conclusion of (3): if $z=d^{-1}sd\\in W_J$ then step 2.1 gives $\\ell(z)=1$, so $z\\in J$ and $\\varphi=e_j$ is simple; a non-simple positive combination $e_j+e_{j'}$ would be the root of a reflection of $W_J$ of length $>1$, impossible for $z$ of length $1$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F8",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 disposes of $p=0$ ($y=1\\in W_K$); step 1.1 covers $K=\\emptyset$, where $W_K=\\{1\\}$ is contained in $W_I\\cap dW_Jd^{-1}$ and the equality has the same trivial content."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 computes $\\ell(y')=p-1$ down to $0$ and terminates when the reduced word is empty; step 1.2 uses $\\ell(d_i)<\\ell(d)$, i.e. the case of a strictly shorter middle word, as its contradiction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is exactly the length-one case: $\\ell(d^{-1}sd)=1$ forces $d^{-1}sd\\in J$; steps 1.3 and 2.2 record the corresponding simple root $e_j$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "$I,J\\subseteq S$ are arbitrary, including $K=I\\cap dJd^{-1}=\\emptyset$; no nondegeneracy of the form $B$ is used anywhere, and step 1.3 invokes the root-length criterion, which holds for every finite Coxeter matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma quantifies over arbitrary subsets $I,J$ and a fixed $d\\in{}^IW^J$; no interval or ordered family with endpoints occurs in it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No Choice is used: the strong-exchange index in step 1.2 is unique, the letter $\\tilde y_j$ is determined by it, and step 2.1 iterates a deterministic argument along a fixed reduced expression."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 proves the forward direction of $z\\in J\\iff\\varphi=e_j$: if $z=j=t_{e_j}$ then $t_\\varphi=t_{e_j}$ forces $\\varphi=\\pm e_j$, hence $\\varphi=e_j$ by positivity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 also proves the reverse direction: if $\\varphi=e_j$ with $j\\in J$ then $z=t_{e_j}=j\\in J$."
+        }
+      ]
+    },
+    "thm-cg-double-coset-unique-minimum-and-normal-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "Every left coset $W_J a:=\\{ua:u\\in W_J\\}$ ($a\\in W$, [[def-coset]]) has a unique element $d$ of minimal length; it is characterized by $\\ell(sd)>\\ell(d)$ for all $s\\in J$, and it satisfies\n$$\\ell(ud)=\\ell(u)+\\ell(d)\\qquad\\text{for all }u\\in W_J .$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cg-double-coset-intersection-parabolic",
+          "source_section": "Statement",
+          "quote": "**(1) The intersection.** $W_I\\cap dW_Jd^{-1}=W_K$. Conjugating by $d$ gives\n\n$$d^{-1}W_Kd=W_{d^{-1}Kd},\\qquad d^{-1}Kd=\\{d^{-1}sd:s\\in K\\}\\subseteq J,$$\n\nand equivalently $W_J\\cap d^{-1}W_Id=W_{d^{-1}Kd}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cg-double-coset-descent-reduction-and-minimality",
+          "source_section": "Statement",
+          "quote": "**(2) Elements of ${}^IW^J$ have minimum length.** Let $d\\in{}^IW^J$. Then\n\n$$\\ell(d)\\le\\ell(x)\\quad\\text{for every }x\\in\\Omega(d),\\qquad\\text{and}\\qquad \\ell(x)=\\ell(d)\\iff x=d.$$\n\nConsequently every double coset $W_IwW_J$ contains exactly one element of\n${}^IW^J$, and it is the unique element of minimum length of that double coset;\nconversely, every element of minimum length in its double coset $W_IxW_J$ lies\nin ${}^IW^J$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "$$\\ell(w):=\\min\\{k\\in\\mathbb{N}:\\ \\text{there exist }s_1,\\dots,s_k\\in S\\text{ with }w=s_1\\cdots s_k\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "$(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Existence of the normal form: from $x=adc$ factor $a=u_0z$ inside $W_I$, put $z'=d^{-1}zd\\in W_J$ and $v=z'c$, so $x=u_0d(z'c)=u_0dv$ with $u_0\\in W_I^K$, $v\\in W_J$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Uniqueness of the representation: $udv=u'dv'$ implies $u^{-1}u'=dv(v')^{-1}d^{-1}\\in W_I\\cap dW_Jd^{-1}=W_K$, so $u'=uz$ with $z\\in W_K$; both $u,u'$ are minimal representatives of right cosets modulo $W_K$, so $u=u'$, and cancellation gives $v=v'$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Additivity: $\\ell(z)=\\ell(z')$ because $zd=dz'$ and both factorizations are additive; the subadditivity chain $\\ell(x)\\le\\ell(u_0)+\\ell(d)+\\ell(v)\\le\\ell(u_0)+\\ell(d)+\\ell(z')+\\ell(c)=\\ell(x)$ is an equality chain, so $\\ell(u_0dv)=\\ell(u_0)+\\ell(d)+\\ell(v)$ and $\\ell(v)=\\ell(z')+\\ell(c)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The map $W_I^K\\times W_J\\to W_IdW_J$, $(u,v)\\mapsto udv$, is surjective by step 1.1 and injective by step 1.2, hence a bijection, giving $|W_IdW_J|=|W_I^K|\\cdot|W_J|$; when $W_I$ is finite the factorization $W_I^K\\times W_K\\to W_I$ gives $|W_I^K|=|W_I|/|W_K|$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Uniqueness of the minimum: two elements $d,d'$ of ${}^IW^J$ in a common double coset both have the minimum length, and the normal form applied with base point $d$ gives $d'=udv$ with $\\ell(d')=\\ell(u)+\\ell(d)+\\ell(v)$, so $u=v=1$ and $d'=d$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The normal form and the necessity of the restriction: every $x$ has a unique representation $udv$ with $u\\in W_I^K$, $v\\in W_J$, and every such product lies in the double coset; for arbitrary $u=u_0z$ one has $udv=u_0d(z'v)$ with $z'\\ne1$ whenever $z\\ne1$, so dropping the restriction destroys uniqueness.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 factors $a=u_0z$; the case $z=1$ (equivalently $K$ empty, $W_K=\\{1\\}$) reduces the normal form to $W_I^K=W_I$ and $x=adv$, which is the instance $u_0=a$, $z'=1$ of the same computation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 computes $|W_I^K|=|W_I|/|W_K|$ and step 3.1 uses $\\ell(u)+\\ell(v)=0\\Rightarrow u=v=1$; the zero-length case $x=d$ is the representation $u=v=1$ of step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the case of one nontrivial factor $z$ or $c$ through the conjugation $z'=d^{-1}zd$; step 3.1 handles $W_I^K$ or $W_J$ trivial by the same unique-factorization argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "$I,J$ are arbitrary subsets and nothing is assumed about the form $B$; the degenerate case $W_I$ or $W_J$ trivial (including $K=\\emptyset$ or $K=I$) is handled uniformly by $W_I^K$ and $W_K$ in steps 1.1 and 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is stated for fixed subsets $I,J$ and $d\\in{}^IW^J$; it contains no interval, chain or ordered parameter family with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No Choice is used: step 1.1 uses the unique factorization of $u$ in the Coxeter system $(W_I,I)$ and the unique element $z'$, and step 3.1 uses the minimum-length property rather than selecting an arbitrary representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the forward direction of the unique-minimum statement: two elements of ${}^IW^J$ in one double coset satisfy $d'=udv$ with $\\ell(d')=\\ell(u)+\\ell(d)+\\ell(v)$, hence are equal."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 combined with step 3.1 proves the reverse direction: the minimum of $W_IdW_J$ is an element of ${}^IW^J$ (by [F3]) and the normal form applies to it, so minimum and transversal element coincide."
+        }
+      ]
+    },
+    "ex-cg-infinite-dihedral-parabolic-double-cosets": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hh-dihedral-root-recurrence-and-root-sign",
+          "source_section": "Statement",
+          "quote": "If $m<\\infty$ and $q\\le m$, or if $m=\\infty$ and $q\\ge1$, then $\\ell(w_q)=q$, every word in $S$ representing $w_q$ has length at least $q$, and $w_1,\\dots,w_q$ are pairwise distinct.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cg-parabolic-quotient-and-two-sided-minima",
+          "source_section": "Definition",
+          "quote": "$$W^I:=\\{w\\in W:\\ell(ws)>\\ell(w)\\text{ for all }s\\in I\\}=\\{w\\in W:D_R(w)\\cap I=\\emptyset\\},$$\n\n$${}^IW:=\\{w\\in W:\\ell(sw)>\\ell(w)\\text{ for all }s\\in I\\}=\\{w\\in W:D_L(w)\\cap I=\\emptyset\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-canonical-reflection-homomorphism",
+          "source_section": "Definition",
+          "quote": "The set of **reflections** of $W$ is $T:=\\{wsw^{-1}:w\\in W,\\ s\\in S\\}\\subset W$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cg-double-coset-unique-minimum-and-normal-form",
+          "source_section": "Statement",
+          "quote": "**(1) Unique minimum.** Two elements of ${}^IW^J$ lie in a common double coset\n$W_IwW_J$ only if they are equal. Hence, by\n[[lem-cg-double-coset-descent-reduction-and-minimality]] (1),(2), every double\ncoset $W_IwW_J$ contains exactly one element of ${}^IW^J$, namely its unique\nelement of minimum length; in particular $d$ is uniquely determined by the\ndouble coset $W_IdW_J$.\n\n**(2) The additive normal form.** Every $x\\in W_IdW_J$ has a unique\nrepresentation\n\n$$x=u\\,d\\,v\\qquad\\text{with }u\\in W_I^K,\\ v\\in W_J,$$\n\nand every product $udv$ with $u\\in W_I^K$, $v\\in W_J$ lies in $W_IdW_J$. Thus\n\n$$W_I^K\\times W_J\\to W_IdW_J,\\qquad (u,v)\\mapsto udv$$\n\nis a bijection, and for all $u\\in W_I^K$ and $v\\in W_J$\n\n$$\\ell(udv)=\\ell(u)+\\ell(d)+\\ell(v).$$\n\n**(3) The size of a double coset.** $|W_IdW_J|=|W_I^K|\\cdot|W_J|$; and if $W_I$\nis finite then $|W_IdW_J|=|W_I|\\,|W_J|/|W_K|$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "$$W_J=\\langle J\\rangle=\\{w\\in W:S(w)\\subseteq J\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "For every group $G$ and every map $f:S\\to G$ with $f(s)^2=1$ for all $s\\in S$ and $(f(s)f(t))^{m(s,t)}=1$ in $G$ for all $s\\ne t$ with $m(s,t)<\\infty$, there is a unique group homomorphism $\\varphi:W\\to G$ with $\\varphi(s)=f(s)$ for all $s\\in S$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "Condition (H2) is not imposed for groups because it follows: a group homomorphism automatically satisfies $f(e) = e'$ and $f(x^{-1}) = f(x)^{-1}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cg-parabolic-intersections-and-coset-factorization",
+          "source_section": "Statement",
+          "quote": "**(1) Intersections.** For all $I,J\\subseteq S$,\n\n$$W_I\\cap W_J=W_{I\\cap J}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The parabolic subgroups of $W$ are exactly $\\{1\\}$, the order-two subgroups $\\{1,r\\}$ with $r\\in T$, and $W$; $W_I\\cap W_J=\\{1\\}$, and $W_I$, $W_J$ are not conjugate, by the parity homomorphism $\\varphi:W\\to\\mathbb Z/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Normal form $W=\\{u^m\\}\\cup\\{u^ms\\}$ with the two families disjoint; the case-by-case comparison of reduced alternating forms gives ${}^IW=\\{u^m:m\\le0\\}\\cup\\{u^ms:m\\le-1\\}$ and $W^J=\\{u^m:m\\le0\\}\\cup\\{u^ms:m\\ge0\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $d_k=(ts)^k=u^{-k}$ the double coset is $W_I(ts)^kW_J=\\{u^{-k},u^ks,u^{-(k+1)}s,u^{k+1}\\}$ with lengths $2k,2k+1,2k+1,2k+2$, pairwise distinct, so its minimum is $d_k\\in{}^IW^J$ and by [F4] it is the unique minimum.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Intersecting the two lists of step 1.2 gives ${}^IW^J=\\{u^m:m\\le0\\}=\\{u^{-k}:k\\ge0\\}=\\{(ts)^k:k\\ge0\\}$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "$d_k^{-1}sd_k=u^{2k}s\\notin\\{1,t\\}$, so $K=\\emptyset$, $W_I^K=W_I$ and $|W_I(ts)^kW_J|=4$; the four families $u^{-k}$, $u^{k+1}$, $u^ks$, $u^{-(k+1)}s$ partition the two normal-form families, so the double cosets $W_I(ts)^kW_J$, $k\\ge0$, partition $W$, the first being $\\{1,s,t,st\\}$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 includes $k=0$ with $(ts)^0=1$ in ${}^IW^J$, and step 3.1 obtains the first block $W_IW_J=\\{1,s,t,st\\}$; the empty word normal form $u^0=1$ is used in step 1.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 uses $\\ell(u^m)=2|m|$, in particular $\\ell(1)=0$; step 3.1's partition includes $u^0$ and $u^0s$ in the first block, i.e. the zero-index entries of both families."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the order-two parabolics $\\{1,s\\}$, $\\{1,t\\}$ and the rank-one subgroups $\\{1,r\\}$; step 1.2 computes the length-one elements $s=u^0s$ and $t=u^{-1}s$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The edge $m(s,t)=\\infty$ is the degenerate case, handled in step 1.2 by the normal form and [F1]; no finite dihedral order $m<\\infty$ is used anywhere."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example works in a fixed infinite dihedral group; it contains no interval or ordered parameter family with endpoints, the index $k\\ge0$ being an unbounded family without an upper endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No Choice is used: step 1.2 uses the alternating normal form, step 2.2 is a set intersection of the two explicit lists, and step 2.1 identifies the unique minimum by comparing four lengths."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the forward direction of the list descriptions: each element $u^m$ with $m\\ge1$ has a descent $s$, and each $u^ms$ with $m\\le-1$ has a descent $t$, so they are excluded from ${}^IW$ and $W^J$ respectively."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 also proves the reverse direction element by element: for the surviving indices $s\\,u^m$ and $u^ms\\,s$ are alternating words of length exceeding $\\ell$, so no descent occurs and the elements lie in ${}^IW$ respectively $W^J$."
+        }
+      ]
+    },
+    "ex-cg-s4-coset-minima-and-double-coset-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "Then $s_i\\mapsto(i\\ i+1)$ extends to an isomorphism $W\\to S_n$ (the letters $1,\\dots,n$ carry the library's symmetric group by the order-preserving identification with $\\{0,\\dots,n-1\\}$, under which $(i\\ i+1)$ is the adjacent transposition $(i-1\\ i)$), and for every $w\\in W$,\n$$\\ell(w)=\\operatorname{inv}\\bigl(\\varphi(w)\\bigr),$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cg-parabolic-quotient-and-two-sided-minima",
+          "source_section": "Definition",
+          "quote": "$${}^IW^J:={}^IW\\cap W^J=\\{w\\in W:\\ell(sw)>\\ell(w)\\text{ for all }s\\in I\\ \\text{ and }\\ \\ell(ws)>\\ell(w)\\text{ for all }s\\in J\\};$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cg-parabolic-intersections-and-coset-factorization",
+          "source_section": "Statement",
+          "quote": "**(1) Intersections.** For all $I,J\\subseteq S$,\n\n$$W_I\\cap W_J=W_{I\\cap J}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cg-double-coset-unique-minimum-and-normal-form",
+          "source_section": "Statement",
+          "quote": "**(1) Unique minimum.** Two elements of ${}^IW^J$ lie in a common double coset\n$W_IwW_J$ only if they are equal. Hence, by\n[[lem-cg-double-coset-descent-reduction-and-minimality]] (1),(2), every double\ncoset $W_IwW_J$ contains exactly one element of ${}^IW^J$, namely its unique\nelement of minimum length; in particular $d$ is uniquely determined by the\ndouble coset $W_IdW_J$.\n\n**(2) The additive normal form.** Every $x\\in W_IdW_J$ has a unique\nrepresentation\n\n$$x=u\\,d\\,v\\qquad\\text{with }u\\in W_I^K,\\ v\\in W_J,$$\n\nand every product $udv$ with $u\\in W_I^K$, $v\\in W_J$ lies in $W_IdW_J$. Thus\n\n$$W_I^K\\times W_J\\to W_IdW_J,\\qquad (u,v)\\mapsto udv$$\n\nis a bijection, and for all $u\\in W_I^K$ and $v\\in W_J$\n\n$$\\ell(udv)=\\ell(u)+\\ell(d)+\\ell(v).$$\n\n**(3) The size of a double coset.** $|W_IdW_J|=|W_I^K|\\cdot|W_J|$; and if $W_I$\nis finite then $|W_IdW_J|=|W_I|\\,|W_J|/|W_K|$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-cg-double-coset-intersection-parabolic",
+          "source_section": "Statement",
+          "quote": "**(1) The intersection.** $W_I\\cap dW_Jd^{-1}=W_K$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "By inversion ($w\\mapsto w^{-1}$ preserves lengths and interchanges the two coset families $\\{W_Ja\\}$ and $\\{aW_J\\}$), every right coset $aW_J:=\\{au:u\\in W_J\\}$ has a unique minimal element $d$, characterized by $\\ell(ds)>\\ell(d)$ for all $s\\in J$ and satisfying $\\ell(du)=\\ell(d)+\\ell(u)$ for all $u\\in W_J$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "$W_I=\\langle s_1,s_2\\rangle$ consists of the permutations with $w(4)=4$ and $W_J$ of those with $w(1)=1$, both of order $6$; their intersection is $\\{1234,1324\\}=W_{\\{s_2\\}}=W_{I\\cap J}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "*The quotients and the two double cosets.* Right multiplication by $s_i$ swaps the entries of the one-line form in positions $i$ and $i+1$, so it changes the inversion number by $\\pm1$, and decreases it exactly when those two entries are in decreasing order, that is when $w(i)>w(i+1)$; by [F1] the same holds for $\\ell$. Left multiplication by $s_i$ swaps the values $i$ and $i+1$ wherever they occur, so it decreases the inversion number exactly when the value $i$ occurs after the value $i+1$, that is when $w^{-1}(i)>w^{-1}(i+1)$. Hence $w\\in W^J$ iff $w(2)<w(3)$ and $w(3)<w(4)$, which for the $24$ permutations gives $W^J=\\{1234,2134,3124,4123\\}$, and $w\\in{}^IW$ iff $w^{-1}(1)<w^{-1}(2)$ and $w^{-1}(2)<w^{-1}(3)$, which gives ${}^IW=\\{1234,1243,1423,4123\\}$. Intersecting, ${}^IW^J=\\{1234,4123\\}$. By [F4] each double coset contains exactly one element of ${}^IW^J$, so the two double cosets $W_I\\,1234\\,W_J$ and $W_I\\,4123\\,W_J$ are distinct and their union is all of $S_4$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $I=\\{s_1\\}$, $J=\\{s_3\\}$: ${}^IW^J$ has the seven listed elements, the seven double cosets have sizes $4,4,4,4,4,2,2$, $K=\\emptyset$ for the first five minima and $K=\\{s_1\\}$ for $d=3412,4312$, with $W_I3412W_J=\\{3412,3421\\}$ and $W_I4123W_J=\\{4123,4132,4213,4231\\}$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The double cosets of $1234$ and $4123$ have orders $18$ and $6$; for $d=1234$ one has $K=\\{s_2\\}$ and $W_I^K=\\{1234,2134,3124\\}$, for $d=4123$ one has $d^{-1}s_1d=s_2$, $d^{-1}s_2d=s_3$, $K=\\{s_1,s_2\\}$ and $W_I^K=\\{1234\\}$, matching $|W_I^K|\\cdot|W_J|$ and the finite formula.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "*Coset minima and the normal form of $2143$.* Let $w=2143$, of length $2$ by [F1]. Multiplying the six elements of $W_I$ into $w$ gives $W_Iw=\\{1243,1342,2143,2341,3142,3241\\}$, whose element of least length is $1243=s_3$, of length $1$, and this is the unique element of ${}^IW$ in the left coset by step 1.2; multiplying the six elements of $W_J$ on the right gives $wW_J=\\{2134,2143,2314,2341,2413,2431\\}$, whose element of least length is $2134=s_1$, of length $1$, the unique element of $W^J$ in the right coset by step 1.2. Since $2143=2134\\cdot1243$ and $2134\\in W_I$, $1243\\in W_J$, the element $2143$ lies in the double coset of $d=1234$, whose minimum is $1234$ by step 2.1; the representation in the normal form of [F4] for $K=\\{s_2\\}$ is $2143=2134\\cdot1234\\cdot1243$, with $2134\\in W_I^K=\\{1234,2134,3124\\}$ by step 2.1 and $1243\\in W_J$, and the lengths add: $\\ell(2134)+\\ell(1234)+\\ell(1243)=1+0+1=2=\\ell(2143)$, in agreement with [F4] and [F6]. This completes the example.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.3 includes ${}^IW^J\\ni1234$ and the trivial double coset element $1$; step 2.1 lists $1234$ as the minimum of the double coset of order $18$, i.e. the case of an empty descent set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies $K=\\{s_1,s_2\\}$ for $d=4123$ with $W_I^K=\\{1234\\}$ of size $|W_K|^{-1}$; step 3.1 uses $\\ell(1234)=0$ in the additive length $1+0+1=2$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 treats the rank-one parabolics $W_I=\\{1234,2134\\}$, $W_J=\\{1234,1243\\}$; step 3.1 exhibits coset minima of length $1$ on both sides."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the degenerate commutation relation $m(s_1,s_3)=2$ of the type-$A_3$ matrix; step 1.3 computes with $K=\\emptyset$, the degenerate intercoset where $W_K=\\{1\\}$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is a finite computation in $S_4$; it quantifies over no interval or ordered family with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All computations in steps 1.1-3.1 are exhaustive listings of the $24$ permutations and of finite cosets; no selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the forward direction of the descent criteria used: $\\ell(ws_i)<\\ell(w)$ precisely when the swapped entries are in decreasing order, hence $w\\in W^J\\Rightarrow w(2)<w(3)$, $w(3)<w(4)$, and dually for ${}^IW$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 also proves that $w(2)<w(3)$, $w(3)<w(4)$ imply $\\ell(ws_2)>\\ell(w)$, $\\ell(ws_3)>\\ell(w)$, hence $w\\in W^J$, and dually for ${}^IW$."
+        }
+      ]
+    }
+  }
+}

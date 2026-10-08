@@ -1,0 +1,129 @@
+---
+id: "lem-cg-complete-cat-zero-circumcenters-and-convex-fixed-sets"
+kind: "lemma"
+title: "Circumcenters of bounded sets and fixed sets of isometries in complete CAT(0) spaces"
+status: draft
+origin: pipeline
+pipeline_run: frontier-42-coxeter-32
+dependency_level: 10
+deps: [def-cg-cat-zero-cat-one-and-local-geodesic, lem-cg-comparison-convexity-and-model-spaces, def-geodesic-and-geodesic-metric-space, def-metric-space, def-metric-continuity, def-metric-topology, def-metric-convergence, def-cauchy-in-metric, def-complete-metric-space, thm-complete-subspace-iff-closed, def-metric-compactness, def-finite-intersection-property, thm-compact-iff-finite-intersection-property, def-isometry-and-metric-embedding, def-upper-bound, def-metric-ball, def-axiom-of-choice, def-real-numbers, cor-cauchy-reals-lub-complete, def-infimum, thm-infimum-property, lem-inf-epsilon, lem-sup-epsilon, lem-finite-set-has-max, cor-archimedean-reciprocal, thm-well-ordering-principle, def-nullhomotopic-map-and-contractible-space, cor-contractible-iff-identity-nullhomotopic]
+aliases: []
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+proof_strategy: direct
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-08
+sources:
+  references:
+    - title: "M. W. Davis, The Geometry and Topology of Coxeter Groups, first-edition author manuscript, 2007-2008"
+      url: "https://people.math.osu.edu/davis.12/davisbook.pdf"
+      locator: "Appendix I.2, printed pp. 499-505: Theorem I.2.5 (uniqueness of geodesics), Theorem I.2.6 (geodesic contraction), Proposition I.2.10 and its full minimizing-sequence proof (printed pp. 502-503), Theorem I.2.11 and Proposition I.2.12 (bounded-orbit fixed point and convex fixed set, printed p. 503), and Lemma I.2.15 (squared CAT(0) inequality, printed p. 504). The cited Appendix I.2 arguments were read in full."
+    - title: "M. R. Bridson and A. Haefliger, Metric Spaces of Non-Positive Curvature, Grundlehren der mathematischen Wissenschaften 319, Springer 1999"
+      url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bridsonhaefligerx.pdf"
+      locator: "Chapter II.2, Proposition 2.7 and its proof (PDF pp. 200-201, printed pp. 178-179): a bounded set of radius < D_kappa/2 in a complete CAT(kappa) space has a unique center; at kappa=0 the radius restriction is vacuous. Corollary 2.8(1) and its proof (PDF p. 201, printed p. 179): a finite group or a group with a bounded orbit has a nonempty convex fixed-point set. These complete arguments were read."
+    - title: "M. W. Davis and G. Moussong, Notes on nonpositively curved polyhedra, Turan Workshop notes (1998/1999)"
+      url: "https://people.math.osu.edu/davis.12/notes.pdf"
+      locator: "Section 1.5, printed pp. 10-11: the stated uniqueness and endpoint continuity of CAT(0) geodesics, geodesic contraction, and convexity of the distance function. The convexity proof is only sketched there and left to the reader; this item does not rely on it as a proof."
+    - title: "M. W. Davis, The geometry and topology of Coxeter groups, MSC lecture slides (Tsinghua University, 2013)"
+      url: "https://people.math.osu.edu/davis.12/papers/Davis-MSC.pdf"
+      locator: "PDF p. 14, Theorem 2.19(vii),(viii): the Davis complex is CAT(0) and hence contractible, the application motivating this abstract lemma; no step of this lemma depends on that Coxeter-specific conclusion."
+---
+
+## Statement
+
+Let $X$ be a CAT(0) space ([[def-cg-cat-zero-cat-one-and-local-geodesic]] (3)) and let $Y\subseteq X$ be a nonempty subset that is **bounded**, meaning that $Y\subseteq\overline B(x_0,R)$ for some $x_0\in X$ and $R>0$ ([[def-metric-ball]]); thus $X$ is nonempty throughout. The radius function
+$$r_Y\colon X\to[0,\infty),\qquad r_Y(x):=\sup\{\,d(x,y):y\in Y\,\}$$
+is finite-valued ([[def-upper-bound]], [[def-metric-space]], [[cor-cauchy-reals-lub-complete]], [[lem-sup-epsilon]]). The infimum $a:=\inf_X r_Y$ exists by [[thm-infimum-property]] and has the approximation property of [[lem-inf-epsilon]]. **Assume the Axiom of Choice** ([[def-axiom-of-choice]]); it is used in clause (1) exactly to extract a minimizing sequence for $r_Y$, and clause (5) records that in the proper case no Choice is needed.
+
+**(1) The center of a bounded set (complete case).** If $X$ is complete ([[def-complete-metric-space]]) then $r_Y$ is continuous and its infimum $a:=\inf_X r_Y$ is attained at a unique point $c\in X$, the **center** of $Y$; moreover $a$ equals the radius of $Y$, the infimum of the numbers $r>0$ with $Y\subseteq\overline B(x,r)$ for some $x\in X$, and $d(c,y)\le a$ for every $y\in Y$. For finite $Y$ the supremum defining $r_Y$ is a maximum ([[lem-finite-set-has-max]]).
+
+**(2) Isometric invariance.** If an isometry $\varphi$ of $X$ satisfies $\varphi(Y)=Y$ ([[def-isometry-and-metric-embedding]]) then $r_Y\circ\varphi=r_Y$, hence $\varphi$ permutes the set of minimizers of $r_Y$ and, whenever the center of (1) exists, fixes it: $\varphi(c)=c$. In particular, if $G$ is a group of isometries of a complete CAT(0) space with a bounded orbit $Y=Gx_0$, then every $g\in G$ fixes the center $c$ of $Y$, so $G$ has a nonempty fixed set; every finite group of isometries has a bounded orbit (because $X\ne\emptyset$) and hence a fixed point.
+
+**(3) Fixed sets are closed and convex.** For every isometry $\varphi$ of $X$ the fixed set $\operatorname{Fix}(\varphi)$ is closed ([[def-metric-topology]]) and convex -- convex meaning that it contains, with any two of its points, every geodesic segment of $X$ joining them ([[def-geodesic-and-geodesic-metric-space]]) -- and for every family $(\varphi_i)_{i\in I}$ of isometries the common fixed set $C=\bigcap_{i\in I}\operatorname{Fix}(\varphi_i)$ is closed and convex. If $C\ne\emptyset$, then $C$ with the induced metric is a CAT(0) space: it is convex, so the unique geodesic segment of $X$ between two of its points lies in $C$ and the comparison inequality is inherited; if in addition $X$ is complete then $C$ is complete ([[thm-complete-subspace-iff-closed]]), being a closed subset of the complete space $X$. For every $p\in C$ the geodesic contraction
+$$H\colon C\times[0,1]\to C,\qquad H_t(x):=\text{the point of }[p,x]\text{ at distance }t\,d(p,x)\text{ from }p,$$
+is well defined and continuous, satisfies $H_0\equiv p$, $H_1=\operatorname{id}_C$ and $d(H_t(x),H_t(y))\le t\,d(x,y)$ for all $x,y\in C$; in particular $C$ is contractible ([[lem-cg-comparison-convexity-and-model-spaces]] (iv)(a),(b), [[cor-contractible-iff-identity-nullhomotopic]], [[def-nullhomotopic-map-and-contractible-space]]).
+
+**(4) Finite subgroups of isometries.** If $G$ is a finite group acting on a complete CAT(0) space $X$ by isometries, or more generally a group of isometries of a complete CAT(0) space with a bounded orbit, then $\operatorname{Fix}(G)=C$ is nonempty by (1),(2), and by (3) it is closed, convex, complete and CAT(0) in the induced metric and contractible. In particular $C$ is a geodesic space and every two of its points are joined by a unique geodesic of $X$ lying in $C$.
+
+**(5) Choice-free proper case.** If $X$ is proper -- every closed bounded subset is compact ([[def-metric-compactness]]) -- then for every nonempty bounded $Y$ the center of (1) exists and is unique without the Axiom of Choice: for $x_0\in X$ the set $K:=\{x\in X:r_Y(x)\le r_Y(x_0)\}$ is closed and bounded, hence compact, $a=\inf_K r_Y$, and the sets $K_n:=\{x\in K:r_Y(x)\le a+1/n\}$ ($n\ge1$) form a family of closed subsets of the compact space $K$ with the finite intersection property, so $\bigcap_nK_n\ne\emptyset$ by the compactness criterion for such families ([[def-finite-intersection-property]]); any point of the intersection is a minimizer, and (6) gives uniqueness. Consequently, if $X$ is proper, then the conclusions of (1)-(4) hold with no use of Choice.
+
+**(6) The midpoint inequality and uniqueness.** Let $y,y'\in X$, let $m$ be the midpoint of a geodesic segment $[y,y']$ and let $z\in X$. Then
+$$d(z,m)^2\le\tfrac12\bigl(d(z,y)^2+d(z,y')^2\bigr)-\tfrac14d(y,y')^2$$
+([[lem-cg-comparison-convexity-and-model-spaces]] (iv)(d)). Consequently two minimizers $c,c'$ of $r_Y$, both of value $a$, satisfy for $m$ the midpoint of $[c,c']$ and every $z\in Y$
+$$d(c,c')^2\le2\bigl(d(z,c)^2+d(z,c')^2\bigr)-4d(z,m)^2\le4a^2-4d(z,m)^2;$$
+the right-hand side is at least $d(c,c')^2$ for every $z\in Y$, so $d(c,c')^2$ is at most its infimum over $z\in Y$, which is $4a^2-4r_Y(m)^2$ by the supremum approximation property ([[lem-sup-epsilon]]); since $r_Y(m)\ge a$, this gives $d(c,c')^2\le0$. Hence the center is unique; and in (5) the point of $\bigcap_nK_n$ has $r_Y=a$, so by the same computation it is the unique minimizer.
+
+**(7) Scope.** The completeness hypothesis must remain: `CAT(0)' alone does not give the center, and the statement is not asserted for unbounded $Y$ or for non-isometric group actions. No statement about $G$ beyond (2)-(4) is made.
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice, a CAT(0) space $X$, a nonempty bounded subset $Y\subseteq X$ with $Y\subseteq\overline B(x_0,R)$; in (5) the space $X$ is also proper.
+
+[F1] $X$ is geodesic, and the CAT(0) comparison inequality holds for every geodesic triangle of $X$: a metric space $X$ is **CAT(0)** if it is geodesic and for every geodesic triangle in $X$ and all points $x,y$ of that triangle, $d(x,y)\le d_2(\bar x,\bar y)$ ([[def-cg-cat-zero-cat-one-and-local-geodesic]]).
+
+[F2] In a CAT(0) space geodesic segments between two points are unique and vary continuously with their endpoints, so the point of $[p,x]$ depends continuously on the pair; if $\gamma,\delta$ are geodesics with a common initial point and proportional parametrizations, then $d(\gamma(t),\delta(t))\le(1-t)d(\gamma(0),\delta(0))+t\,d(\gamma(1),\delta(1))$ for $t\in[0,1]$ ([[lem-cg-comparison-convexity-and-model-spaces]]).
+
+[F3] For every pair $y,y'$ in a CAT(0) space, every midpoint $m$ of a geodesic segment $[y,y']$ and every $z$ satisfy the midpoint inequality $d(z,m)^2\le\tfrac12(d(z,y)^2+d(z,y')^2)-\tfrac14d(y,y')^2$ ([[lem-cg-comparison-convexity-and-model-spaces]]).
+
+[F4] In ZF, without a choice axiom: if $(X,d)$ is complete and $A$ is closed in $(X,d)$, then the subspace $(A,d_A)$ is complete ([[thm-complete-subspace-iff-closed]]).
+
+[F5] A metric space is compact if and only if every family of its closed subsets with the finite intersection property has nonempty intersection ([[thm-compact-iff-finite-intersection-property]]).
+
+[F6] A subset $A$ of a metric space $X$ is a compact subset of $X$ when the metric subspace $(A,d_A)$ is a compact metric space, $d_A$ being the restriction of $d$ to $A\times A$ ([[def-metric-compactness]]). Accordingly **proper** means, as in clause (5), that every closed bounded subset of $X$ is a compact subset in this sense.
+
+[F7] The Axiom of Choice: every family of nonempty sets has a choice function ([[def-axiom-of-choice]]).
+
+[F8] The real numbers used as metric values are the Cauchy-sequence reals and have the least-upper-bound property ([[def-real-numbers]], [[cor-cauchy-reals-lub-complete]]). Every nonempty bounded-below subset of $\mathbb R$ has an infimum ([[thm-infimum-property]]); the epsilon characterisations of supremum and infimum supply values arbitrarily close to those bounds ([[lem-sup-epsilon]], [[lem-inf-epsilon]]).
+
+[F9] Every nonempty finite subset of $\mathbb R$ has a maximum and a minimum ([[lem-finite-set-has-max]]).
+
+[F10] For every real $\varepsilon>0$ some natural $n\ge1$ satisfies $1/n<\varepsilon$ ([[cor-archimedean-reciprocal]]); in particular $1/(n+1)\to0$ and $2/n\to0$.
+
+[F11] Every nonempty subset of $\mathbb N$ has a least element ([[thm-well-ordering-principle]]).
+
+
+## Proof
+
+**Given:** The Axiom of Choice, a CAT(0) space $X$, and a nonempty bounded subset $Y\subseteq X$ with $Y\subseteq\overline B(x_0,R)$; in clause (5), $X$ is also proper.
+
+**Proof technique:** direct.
+
+1.1 For every $x\in X$ and $y\in Y$, the triangle inequality gives $d(x,y)\le d(x,x_0)+d(x_0,y)\le d(x,x_0)+R$. The nonempty set of distances defining $r_Y(x)$ is therefore bounded above, so [F8] gives its finite supremum and $r_Y(x)\le d(x,x_0)+R$. If $Y$ is finite, the nonempty finite image $\{d(x,y):y\in Y\}$ has a maximum by [F9], so its supremum is attained for every $x$. Also $|d(x,y)-d(x',y)|\le d(x,x')$ for every $y\in Y$, so taking suprema in both directions gives $|r_Y(x)-r_Y(x')|\le d(x,x')$ ([[def-metric-space]], [[def-upper-bound]]); hence $r_Y$ is continuous ([[def-metric-continuity]]). The range $\{r_Y(x):x\in X\}$ is nonempty because $Y\ne\emptyset$ implies $X\ne\emptyset$, and it is bounded below by $0$, so [F8] gives $a:=\inf_Xr_Y$ and $0\le a\le r_Y(x_0)$. For fixed $x$ and $r>0$, $Y\subseteq\overline B(x,r)$ iff $r_Y(x)\le r$ ([[def-metric-ball]]); thus $r_Y(x)$ is the infimum of the admissible positive radii at $x$, since every such radius is at least $r_Y(x)$ and every $r_Y(x)+\varepsilon$ ($\varepsilon>0$) is admissible. Let $\mathcal R:=\{r>0:\exists x\in X,\ Y\subseteq\overline B(x,r)\}$. For every $r\in\mathcal R$, $a\le r_Y(x)\le r$ for its witnessing $x$, so $a$ is a lower bound of $\mathcal R$. Conversely, for $\varepsilon>0$, [F8] gives $x$ with $r_Y(x)<a+\varepsilon/2$; then $r:=r_Y(x)+\varepsilon/2>0$ is admissible and $r<a+\varepsilon$. Hence $\inf\mathcal R=a$, the radius of $Y$. [F8, F9, given, algebra]
+
+1.2 Assume the Axiom of Choice. For each $n\in\mathbb N$, the set $A_n:=\{x\in X:r_Y(x)<a+1/(n+1)\}$ is nonempty by the infimum approximation property [F8]; a choice function for $(A_n)_{n\in\mathbb N}$ yields a sequence $(x_n)_{n\in\mathbb N}$ with $r_Y(x_n)<a+1/(n+1)$ for every $n$. [F7, F8, choose]
+
+1.3 Midpoint inequality and uniqueness (clause (6)). Let $y,y'\in X$, let $m$ be a midpoint of a geodesic segment $[y,y']$ and let $z\in X$; [F3] gives the stated inequality. For any $q\in X$ put $r:=r_Y(q)$. The nonnegative distances $d(z,q)$, $z\in Y$, have supremum $r$, and their squares have supremum $r^2$: if $r=0$ they all vanish; if $r>0$, for any $\varepsilon>0$ use [F8] to find $z$ with $r-\delta<d(z,q)\le r$, where $\delta:=\varepsilon/(2r+1)$, and then $0\le r^2-d(z,q)^2<2r\delta<\varepsilon$. Now let $c,c'$ be minimizers with value $a$, and let $m$ be the midpoint of their unique geodesic segment, which exists by [F1] and [F2]. For every $z\in Y$, [F3] gives $d(c,c')^2\le2(d(z,c)^2+d(z,c')^2)-4d(z,m)^2\le4a^2-4d(z,m)^2$. The infimum over $z\in Y$ of the last right-hand side is $4a^2-4r_Y(m)^2$ by the square-supremum fact just proved; since $r_Y(m)\ge a$, this gives $d(c,c')^2\le0$. Thus $c=c'$, so any minimizer is unique. [F1, F2, F3, F8, algebra]
+
+1.4 Fixed sets (clause (3), first part). Let $\varphi$ be an isometry of $X$ ([[def-isometry-and-metric-embedding]]). If $\varphi(x)\ne x$, put $\delta:=d(\varphi(x),x)/3>0$. For every $x'$ with $d(x,x')<\delta$, the reverse triangle inequality and isometry property give $d(\varphi(x'),x')\ge d(\varphi(x),x)-d(\varphi(x),\varphi(x'))-d(x,x')=d(\varphi(x),x)-2d(x,x')>0$. Thus a ball about each point outside $\operatorname{Fix}(\varphi)$ lies in its complement, which is open by [[def-metric-topology]]; hence the fixed set is closed. The same argument applies to $C=\bigcap_i\operatorname{Fix}(\varphi_i)$: if $x\notin C$, some $i$ has $\varphi_i(x)\ne x$, and the ball just constructed avoids $C$; if the family is empty then $C=X$. Now if $x,y\in\operatorname{Fix}(\varphi)$ and $\gamma$ is a geodesic segment from $x$ to $y$ ([[def-geodesic-and-geodesic-metric-space]]), then $\varphi\circ\gamma$ is another geodesic from $x$ to $y$, so it equals $\gamma$ by uniqueness [F2]; hence $\operatorname{Fix}(\varphi)$ is convex. Every common fixed set is an intersection of convex sets and is therefore convex. [F2, given]
+
+1.5 Isometric invariance (clause (2), first part). Let $\varphi$ be an isometry of $X$ with $\varphi(Y)=Y$ ([[def-isometry-and-metric-embedding]]). Then $\varphi^{-1}(Y)=Y$, so for every $x\in X$ the substitution $z:=\varphi^{-1}(y)$ gives $r_Y(\varphi(x))=\sup\{d(\varphi(x),y):y\in Y\}=\sup\{d(x,\varphi^{-1}(y)):y\in Y\}=\sup\{d(x,z):z\in Y\}=r_Y(x)$; hence $\varphi$ maps the set of minimizers of $r_Y$ onto itself. [given, algebra]
+
+1.6 Proper spaces are complete. Let $(z_n)_{n\in\mathbb N}$ be a Cauchy sequence in a proper space $X$ ([[def-cauchy-in-metric]]). For each $k\ge1$, the Cauchy condition makes the set of indices $N$ satisfying $d(z_m,z_n)\le1/k$ for all $m,n\ge N$ nonempty; let $N_k$ be its least member, which exists by [F11] and requires no choice. Then $N_k\le N_j$ for $k\le j$. Every closed ball $\bar B(q,r)$ is closed: if $d(q,x)>r$, the radius $\delta:=(d(q,x)-r)/2>0$ gives $d(q,x')\ge d(q,x)-d(x,x')>r$ whenever $d(x,x')<\delta$, so the complement is open ([[def-metric-topology]], [[def-metric-ball]]). Hence the closed balls $G_k:=\bar B(z_{N_k},1/k)$ and $E:=\bar B(z_{N_1},2)$ are closed and bounded, thus compact by properness [F6]. Each $G_k$ lies in $E$: $d(z_{N_k},z_{N_1})\le1$, so $d(x,z_{N_1})\le d(x,z_{N_k})+d(z_{N_k},z_{N_1})\le2$ for $x\in G_k$. The sets $G_k\cap E=\{x\in E:d(z_{N_k},x)\le1/k\}$ are closed in $(E,d)$ by the same ball argument and have the finite intersection property: the empty finite intersection is $E$, which contains $z_{N_1}$, and for any nonempty finite subfamily, if $K$ is its largest index then $z_{N_K}\in G_k\cap E$ for every index $k\le K$. By [F5] applied in $(E,d)$ there is $p\in\bigcap_{k\ge1}G_k$. For $n\ge N_k$, $d(p,z_n)\le d(p,z_{N_k})+d(z_{N_k},z_n)\le2/k$; given any rational $\varepsilon>0$, [F10] supplies $k$ with $2/k<\varepsilon$, so $z_n\to p$ ([[def-metric-convergence]]) and $X$ is complete ([[def-complete-metric-space]]). [F5, F6, F10, F11, algebra]
+
+2.1 Proper case, compactness (clause (5), first part). Assume now that $X$ is proper, and fix $x_0\in X$. For any real $b$, the sublevel set $\{x:r_Y(x)\le b\}$ is closed: if $r_Y(x)>b$, continuity from step 1.1 gives $\delta>0$ such that $d(x,x')<\delta$ implies $|r_Y(x')-r_Y(x)|<(r_Y(x)-b)/2$, and then $r_Y(x')>b$; its complement is therefore open ([[def-metric-topology]]). In particular $K:=\{x\in X:r_Y(x)\le r_Y(x_0)\}$ is closed. It is bounded: for a fixed $y_0\in Y$, every $x\in K$ satisfies $d(x,y_0)\le r_Y(x)\le r_Y(x_0)$, so $K\subseteq\overline B(y_0,r_Y(x_0)+1)$ ([[def-metric-ball]]). Hence $K$ is compact by properness [F6]. If $r_Y(x_0)=a$, then $x_0\in K$ and $\inf_Kr_Y=a$. If $r_Y(x_0)>a$, then for every $\varepsilon>0$ put $\eta:=\min\{\varepsilon,r_Y(x_0)-a\}>0$; by the infimum approximation property [F8] there is $x\in X$ with $r_Y(x)<a+\eta\le r_Y(x_0)$ and $r_Y(x)<a+\varepsilon$, so $x\in K$. Thus $\inf_Kr_Y\le a+\varepsilon$ for every $\varepsilon>0$, while $a\le\inf_Kr_Y$ since $K\subseteq X$; hence $a=\inf_Kr_Y$. [F6, F8, F9, given]
+
+2.2 The minimizing sequence is Cauchy (clause (1), first part). For $m,n\in\mathbb N$, let $m_{mn}$ be the midpoint of the unique geodesic from $x_m$ to $x_n$ ([F1], [F2]). Applying [F3] to each $z\in Y$ and using the square-supremum fact from step 1.3 gives $r_Y(m_{mn})^2\le\tfrac12(r_Y(x_m)^2+r_Y(x_n)^2)-\tfrac14d(x_m,x_n)^2$. Hence $d(x_m,x_n)^2\le2(r_Y(x_m)^2+r_Y(x_n)^2)-4r_Y(m_{mn})^2\le2\bigl((a+1/(m+1))^2+(a+1/(n+1))^2\bigr)-4a^2$, since $r_Y(m_{mn})\ge a$ and step 1.2 bounds the selected radii. The final expression tends to $0$ as $m,n\to\infty$ by [F10], so $(x_n)$ is Cauchy ([[def-cauchy-in-metric]]). [F1, F2, F3, F10, step 1.2, step 1.3, algebra]
+
+2.3 The fixed set is CAT(0) and carries a contraction (clause (3), second part). Let $C\ne\emptyset$ be the common fixed set of a family of isometries. By convexity from step 1.4, the unique geodesic of $X$ between two points of $C$ lies in $C$ ([[def-cg-cat-zero-cat-one-and-local-geodesic]], [[def-geodesic-and-geodesic-metric-space]]), so $C$ with the induced metric is geodesic and inherits the CAT(0) comparison inequality; if $X$ is complete, then $C$ is closed by step 1.4 and complete by [F4]. For $p\in C$, define $H_t(x)$ to be the point at fraction $t$ of the unique geodesic from $p$ to $x$. Convexity makes $H_t(x)\in C$, and $H_0$ is constant at $p$ while $H_1=\operatorname{id}_C$. For $x,y\in C$ and $s,t\in[0,1]$, [F2] gives $d(H_t(x),H_t(y))\le t\,d(x,y)$ and the geodesic parametrization gives $d(H_t(y),H_s(y))=|t-s|d(p,y)$; therefore $d(H_t(x),H_s(y))\le t\,d(x,y)+|t-s|d(p,y)$, which proves joint continuity at every $(x,t)$. Thus $H$ is a homotopy from the constant map at $p$ to the identity, and $C$ is contractible by [[cor-contractible-iff-identity-nullhomotopic]] and [[def-nullhomotopic-map-and-contractible-space]]. [F2, F4, step 1.4]
+
+3.1 Proper case, the center without Choice (clause (5), second part). In the notation of step 2.1, the sets $K_n:=\{x\in K:r_Y(x)\le a+1/n\}$, $n\ge1$, are closed subsets of compact $K$ by the sublevel-set argument of step 2.1, and are nested. Each is nonempty because $a=\inf_Kr_Y$; the empty finite intersection is $K$, which contains $x_0$, and any nonempty finite intersection is the set with the largest index in it. Thus $(K_n)$ has the finite intersection property ([[def-finite-intersection-property]]). By [F5] there is $c\in\bigcap_{n\ge1}K_n$. If $r_Y(c)>a$, choose $n$ with $1/n<r_Y(c)-a$ using [F10]; then $r_Y(c)\le a+1/n<r_Y(c)$, a contradiction. Since $r_Y(c)\ge a$, we get $r_Y(c)=a$, and step 1.3 gives uniqueness. The family $(K_n)$ is defined by a formula, so this proper-space argument uses no choice principle. [F5, F10, step 1.3, step 2.1]
+
+3.2 Attainment in the complete case (clause (1), second part). If $X$ is complete, the Cauchy sequence $(x_n)$ from step 2.2 converges to some $c\in X$ ([[def-complete-metric-space]], [[def-metric-convergence]]); continuity of $r_Y$ from step 1.1 gives $r_Y(c)=\lim_nr_Y(x_n)=a$, because $a\le r_Y(x_n)<a+1/(n+1)$ and [F10] makes the error tend to $0$. Thus the infimum is attained. [F10, step 1.1, step 2.2, given]
+
+4.1 Clause (1) concluded. Assume $X$ complete; let $c$ be the point of step 3.2 and $a$ the infimum. Then $d(c,y)\le r_Y(c)=a$ for every $y\in Y$; step 1.1 identifies $a$ with the radius of $Y$. If $Y$ is finite, its nonempty finite image under $y\mapsto d(c,y)$ has a maximum by [F9], so the supremum defining $r_Y(c)$ is that maximum; uniqueness follows from step 1.3. This proves (1). [F9, step 1.1, step 1.3, step 3.2, algebra]
+
+5.1 Clauses (2) and (4) concluded. Let $X$ be complete and let $c$ be the center of $Y$ as in step 4.1, and let $\varphi$ be an isometry with $\varphi(Y)=Y$; by step 1.5 the isometry $\varphi$ permutes the minimizers of $r_Y$, and since $c$ is the unique minimizer by step 4.1, $\varphi(c)=c$. Hence a group $G$ of isometries with bounded orbit $Y=Gx_0$ has $\operatorname{Fix}(G)\ne\emptyset$, because every $g\in G$ satisfies $g(Y)=Y$ and fixes $c$. A finite group has a finite nonempty orbit, and its finite set of distances from any point has a maximum by [F9], so that orbit is bounded and it too has a fixed point. By step 2.3 the set $C=\operatorname{Fix}(G)$ is closed, convex, complete and CAT(0) in the induced metric, and contractible; it is a geodesic space whose points are joined by the geodesic segments of $X$ lying in $C$, unique by [F2]. This proves (2) and (4). [F2, F9, step 1.5, step 2.3, step 4.1]
+
+6.1 Clause (5) concluded, and the proof. Let $X$ be proper. By steps 2.1 and 3.1 the center of every nonempty bounded $Y\subseteq X$ exists and is unique, produced by the finite intersection property and not by the sequence of step 1.2, so no Choice is used; by step 1.6 a proper space is complete. Hence the assertions of (1) hold for $X$ with no use of Choice, by the argument of step 4.1 with the center of step 3.1 in place of the attained minimizer of step 3.2, and the assertions of (2), (3) and (4) follow by the same steps 1.4, 1.5 and 2.3, none of which uses Choice: the only use of the Axiom of Choice in this proof is the extraction of the minimizing sequence in step 1.2, which is needed only when $X$ is complete but not proper. Thus the conclusions of (1)-(4) hold for proper $X$ without Choice. [F7, step 1.3, step 1.6, step 3.1, step 2.3, step 5.1] ∎
+
+## Current supplier receipt status
+
+These direct in-run supplier decisions remain open. The final report distinguishes current escalations from missing or stale receipts.
+
+- `def-cg-cat-zero-cat-one-and-local-geodesic`: its current in-run supplier decision is not closed; this item consumes it in Facts F1 and proof steps 1.3, 2.2.
+- `lem-cg-comparison-convexity-and-model-spaces`: its current in-run supplier decision is not closed; this item consumes it in Facts F2, F3 and proof steps 1.3, 1.4, 2.2, 2.3, 5.1.

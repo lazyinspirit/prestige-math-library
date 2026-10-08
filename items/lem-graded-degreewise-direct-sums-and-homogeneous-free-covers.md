@@ -14,10 +14,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
+  precheck: pass
+  repair: research/frontier-42-coxeter-32-codex-step6-a-external-definitions/lem-graded-degreewise-direct-sums-and-homogeneous-free-covers.receipt.json
 sources:
   references:
     - title: "Roozbeh Hazrat, Graded Rings and Graded Grothendieck Groups (arXiv:1405.5071), §1.2.2 shift of modules (1.16), printed p.34; §1.2.6 graded tensor product (1.21)-(1.23), printed pp.40-41; §2.3 Definitions 2.3.3-2.3.4, Theorem 2.3.7 with its proof, Theorem 2.3.8, Example 2.3.9, printed pp.118-123"
@@ -78,7 +76,7 @@ assembly $f$ with $f\circ\jmath_i=f_i$, given by $f((m_i))=\sum_if_i(m_i)$
 ([[thm-universal-property-of-module-direct-sums]]).
 
 [L4] For a unital ring $R$ and a set $X$ the free left $R$-module on $X$ is $R^{(X)}=\bigoplus_{x\in X}R$,
-with standard basis inclusion $x\mapsto e_x$, and a family $(b_x)$ is a basis when every element is
+with standard indexed basis family $(e_x)_{x\in X}$ and canonical map $x\mapsto e_x$, and a family $(b_x)$ is a basis when every element is
 uniquely a finite $R$-linear combination of the $b_x$
 ([[def-free-module-on-a-set-and-standard-basis]]).
 

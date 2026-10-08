@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "run": "frontier-42-coxeter-32",
+  "recorded_at": "2026-10-08T03:51:05.685007+00:00",
+  "commit": "9322daa95",
+  "write_scope": [
+    "tools/run-commit-scope.mjs",
+    "tools/run-commit-preservation.test.mjs"
+  ],
+  "finding": {
+    "first_native_failure": "2026-10-08T03:39:00.262Z: validated owned working bytes preservation mismatch",
+    "confirmed_cause": "One or more owned working state records changed during closeout. The original assertion omitted path diagnostics, so the exact first changed path is not recoverable from that failure output.",
+    "corroboration": "At independent inspection, research/plan-spec.json was the only owned protected path differing from the refreshed report snapshot. Current native readiness/evidence verification passed per report-guard reviewer, demonstrating the owned semantic projection remained current. Plan raw mtime was 2026-10-08T03:39:00.922Z; subsequent native attempts failed plan raw report integrity.",
+    "excluded_claim": "No proof of a tool rewrite bug. The existing tool writes only its final receipt before the assertion and performs temp-index Git add; no plan serializer or working-tree restore is present."
+  },
+  "repair": "Keep documented whole-file ownership and all strict path/kind/mode/SHA-256 comparisons. Add metadata-only per-path before/after diagnostics to precommit and postcommit owned working preservation refusals.",
+  "verification": {
+    "focused_command": "node --test tools/run-commit-preservation.test.mjs",
+    "tests": 6,
+    "pass": 6,
+    "cases": [
+      "unchanged bytes with foreign staged and working state",
+      "owned bytes changed without exposing file contents",
+      "mode-only change",
+      "deletion and creation",
+      "file replaced by symlink with identical target contents",
+      "dangling symlink target-byte change"
+    ],
+    "syntax_checks": true,
+    "diff_check": true,
+    "actual_unrelated_index_entries_preserved": 116220,
+    "index_comparison": "mode/blob/stage rows identical across exact two-file local code commit",
+    "native_closeout": "Not attempted by helper; root owns full native stable readiness/evidence/baseline/render refresh and retry."
+  },
+  "drained": true,
+  "published_or_pushed": false
+}

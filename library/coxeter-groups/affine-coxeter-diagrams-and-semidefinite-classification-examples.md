@@ -2,12 +2,37 @@
 page: affine-coxeter-diagrams-and-semidefinite-classification-examples
 title: "Affine Coxeter Diagrams and Semidefinite Classification — Examples"
 status: draft
+requires: [affine-coxeter-diagrams-and-semidefinite-classification, trigonometric-and-oscillatory-examples-in-one-variable]
 items: []
-examples: []
+examples:
+  - ex-cg-reducible-semidefinite-forms-are-factorwise
+  - ex-cg-a-tilde-1-infinity-edge-versus-finite-dihedral
+  - ex-cg-a-tilde-2-radical-vector-and-affine-slice
+  - ex-cg-b-tilde-versus-c-tilde-diagrams
+  - ex-cg-indefinite-coxeter-form-is-not-affine
 ---
 
-This draft companion is a dependency leaf. Its exercises and examples use only the theory of [[affine-coxeter-diagrams-and-semidefinite-classification]] and that page’s established prerequisite closure; no other theory page may depend on a supplier homed here.
+This companion page is a dependency leaf. Each example uses the theory on
+[[affine-coxeter-diagrams-and-semidefinite-classification]] and its established
+prerequisite closure. The earlier [[trigonometric-and-oscillatory-examples-in-one-variable]] supplies the Lipschitz estimate for cosine used in the finite-dihedral comparison. No theory page depends on examples homed here.
 
-Calculate the radical vector of A-tilde2, distinguish A-tilde1 with its infinity edge, and compare B-tilde/C-tilde diagrams. Show a semidefinite reducible form needs factorwise treatment and an indefinite Coxeter form is not affine.
+## Examples
 
-Each eventual example will state all hypotheses and verify the claimed calculation. A counterexample identifies the precise dropped hypothesis; a drawing or symbolic calculation alone does not certify a general theorem. Items remain unassigned until the theory suppliers have complete local proofs.
+The examples are listed in current dependency order:
+
+- [[ex-cg-reducible-semidefinite-forms-are-factorwise]] shows that a
+  reducible semidefinite form and its radical split factorwise.
+- [[ex-cg-a-tilde-1-infinity-edge-versus-finite-dihedral]] separates the
+  infinite-dihedral infinity edge from finite dihedral labels.
+- [[ex-cg-a-tilde-2-radical-vector-and-affine-slice]] computes the
+  $\tilde A_2$ radical vector and its Euclidean affine slice.
+- [[ex-cg-b-tilde-versus-c-tilde-diagrams]] compares the $\tilde B_n$ and
+  $\tilde C_n$ diagrams, kernel vectors, translation lattices, and abstract
+  affine groups.
+- [[ex-cg-indefinite-coxeter-form-is-not-affine]] gives a nondegenerate
+  indefinite $(3,3,5)$ form whose Coxeter group is infinite but not affine;
+  it also proves the algebraic angle-sum determinant boundary for finite
+  triangle diagrams without constructing a hyperbolic realization.
+
+Each item states its hypotheses and checks its calculations locally. The page
+makes no hyperbolic realization claim.

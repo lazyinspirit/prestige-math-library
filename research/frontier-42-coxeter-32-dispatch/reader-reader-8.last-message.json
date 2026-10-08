@@ -1,0 +1,42 @@
+{
+  "batch": "8",
+  "findings": [
+    {
+      "id": "thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "lem-cg-spherical-simplex-existence-and-link-gram-formula",
+      "observed_source": {
+        "snapshot": "pre",
+        "item_sha256": "45bb8cf45d8f1438ed66e91423f61ed14598489c941b5a42819c612ff13f6cce"
+      },
+      "location": "Immutable pre-reader source: Facts & Assumptions [F10], line 54, and Proof step 5.1, line 68.",
+      "defect": "false-claim",
+      "evidence": "The observed source identifies liminf a_k with sup_N inf_{k>=N} a_k, then claims liminf a_k <= inf_{k>=N} a_k. The inequality is reversed; for a_k=1-1/(k+1), liminf is 1 while every tail infimum is smaller. Step 5.1 uses this false inequality to bound the limiting path length. The opened cited definition def-limsup-and-liminf-of-nonnegative-extended-sequences gives the supremum formula, not that inequality. Required repair: use the eventual upper bounds L(gamma_{n_k}) <= R+epsilon to bound every tail infimum and hence their supremum, then let epsilon decrease to zero. Batch 6 has since corrected [F10] and step 5.1; this retains the actual historical observation, not a claim about corrected current bytes. The SHA-256 captured from the defective source exactly matches its immutable batch-6 pre-reader snapshot.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-cg-proper-polyhedral-spaces-have-minimizing-geodesics",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "lem-cg-spherical-simplex-existence-and-link-gram-formula",
+      "observed_source": {
+        "snapshot": "pre",
+        "item_sha256": "45bb8cf45d8f1438ed66e91423f61ed14598489c941b5a42819c612ff13f6cce"
+      },
+      "location": "Immutable pre-reader source: Proof step 2.1, line 62, and step 4.1, line 66 (the assertion that Ascoli is the only use of Choice).",
+      "defect": "false-claim",
+      "evidence": "Step 2.1 passes from existence of a near-minimizing chain for each positive integer to a selected sequence of such chains without a specified selection rule, while step 4.1 says its Ascoli invocation is the only use of Choice in the item. Selecting that sequence also uses countable choice. AC is already assumed, so the theorem has sufficient hypotheses, but its exact-use assertion is false. Required repair: invoke the stated AC hypothesis for the countable family of nonempty near-minimizing-chain sets as well as for Ascoli. Batch 6 has since made both corrections. The original source was read and its captured raw SHA-256 matches the immutable pre-reader snapshot; corrected current bytes are not the observed defect.",
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-cg-metric-target-length-reparametrization-and-lower-semicontinuity",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "lem-cg-spherical-simplex-existence-and-link-gram-formula",
+      "observed_source": null,
+      "location": "Originally observed Proof step 1.1, the branch L(gamma|_[a,v])=+infinity, sentence asserting that adjoining w preserves a partition sum.",
+      "defect": "false-claim",
+      "evidence": "The observed text said every partition of [a,v] extends by w to a partition of [a,w] with the same sum. Adjoining w adds d(gamma(v),gamma(w)), which need not vanish. The intended lower-bound conclusion follows immediately by nonnegativity, with an extended sum no smaller rather than equal. Batch 6 has since corrected the sentence to sum no smaller, since the added chord is nonnegative. The earlier complete source was opened, but its raw hash was not captured at observation, so this historical finding is unbound; the stored pre-reader baseline is not asserted to prove that the reader observed those exact bytes.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Both assigned pages and all seven item bodies were read; all 47 original direct external dependency interfaces were opened, including seven complete current-run supplier bodies (five proofs and two definitions). Additional source interfaces needed by the repairs and the relevant Bridson-Haefliger cone/join/local-chart arguments were opened. Six assigned items, the A-page summary, and affected batch-8 proof contracts were repaired. Reflow and precheck pass on the changed items; strict contracts pass for all seven; rendering passes on all seven items and both pages; the final batched proof-layout check reports 55 steps and zero defects. Foundational published proofs were not recursively audited. The three findings are historical supplier defects corrected by batch 6 during this review; two bind the actual observed pre-reader SHA-256, and the length-lemma observation remains unbound because its old raw hash was not captured. No current defect in the reviewed assigned mathematics remains; historical findings still require lead disposition."
+}
