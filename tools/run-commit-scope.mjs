@@ -142,14 +142,63 @@ function workingEntries(root, run, owns) {
   walk(root);
   return rows.sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
 }
-function preservation(root, run, scope) {
-  const index = indexEntries(root).filter(row => !scope.owns(row.path));
-  const tree = treeEntries(root).filter(row => !scope.owns(row.path));
+export function captureOutsidePreservation(root, run, scope) {
   return {
-    outside_index: digest(index),
-    outside_head: digest(tree),
-    outside_working: digest(workingEntries(root, run, scope.owns)),
+    outside_index: indexEntries(root).filter(row => !scope.owns(row.path)),
+    outside_head: treeEntries(root).filter(row => !scope.owns(row.path)),
+    outside_working: workingEntries(root, run, scope.owns),
   };
+}
+const preservationDigests = state => Object.fromEntries(Object.entries(state).map(([key, rows]) => [key, digest(rows)]));
+
+export function assertOutsidePreservationSame(actual, expected, label) {
+  const before = preservationDigests(expected), after = preservationDigests(actual);
+  if (JSON.stringify(after) === JSON.stringify(before)) return;
+  const changes = {};
+  for (const key of Object.keys(expected)) {
+    if (JSON.stringify(after[key]) === JSON.stringify(before[key])) continue;
+    const oldRows = new Map(expected[key].map(row => [row.path, row]));
+    const newRows = new Map(actual[key].map(row => [row.path, row]));
+    changes[key] = [...new Set([...oldRows.keys(), ...newRows.keys()])].sort().flatMap(path => {
+      const oldRow = oldRows.get(path) ?? null, newRow = newRows.get(path) ?? null;
+      if (JSON.stringify(oldRow) === JSON.stringify(newRow)) return [];
+      return [{ path, before: oldRow, after: newRow }];
+    });
+  }
+  throw Error('closeout: ' + label + ' preservation mismatch: ' + JSON.stringify({ before, after, changes }));
+}
+
+// Read-only inspection uses precisely the native closeout selectors. It does
+// not validate workflow gates or grant authority to change the captured state.
+export function inspectOutsidePreservation(root, run) {
+  const receipt = 'research/' + run + '-dispatch/tool-close-step9-v2.result.json';
+  return captureOutsidePreservation(root, run, loadScope(root, run, receipt, [], true));
+}
+
+export function assertCurrentOutsidePreserved(root, run, scope, expected, label) {
+  const actual = captureOutsidePreservation(root, run, scope);
+  try { assertOutsidePreservationSame(actual, expected, label); }
+  catch (error) {
+    // Preserve complete metadata if the controller abbreviates tool stderr.
+    // Existing physical runtime directories only; diagnostic failure never
+    // replaces or weakens the original preservation refusal.
+    const runtime = join(root, '.autopilot', run);
+    let evidence = '';
+    try {
+      if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(run)) throw Error('unsafe runtime run');
+      for (const dir of [join(root, '.autopilot'), runtime]) {
+        if (!lstatSync(dir).isDirectory()) throw Error('runtime directory is absent or not physical');
+      }
+      const path = join(runtime, 'run-commit-preservation-failure-' + Date.now() + '-' + process.pid + '.json');
+      writeFileSync(path, JSON.stringify({ version: 1, run, label, recorded_at: new Date().toISOString(),
+        before: preservationDigests(expected), after: preservationDigests(actual),
+        diagnostic: error.message }, null, 2) + '\n', { flag: 'wx' });
+      evidence = '; complete metadata: ' + path;
+    } catch (diagnosticError) {
+      evidence = '; runtime diagnostic unavailable: ' + diagnosticError.message;
+    }
+    throw Error(error.message + evidence);
+  }
 }
 function assertSame(actual, expected, label) {
   if (JSON.stringify(actual) !== JSON.stringify(expected)) throw Error('closeout: ' + label + ' preservation mismatch');
@@ -420,7 +469,8 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
   refuseGitSideEffects(root, inspectionPaths, scope.reviewedHook);
   refuseCrossScopeRenames(root, scope);
   workflowChecks(root, run, proofLayoutAlreadyChecked);
-  const before = preservation(root, run, scope);
+  const outsideBefore = captureOutsidePreservation(root, run, scope);
+  const before = preservationDigests(outsideBefore);
   if (previous) {
     if (previous.closeout_scope.policy_sha256 !== scope.policySha256
       || previous.closeout_scope.context_sha256 !== scope.contextSha256) throw Error('closeout: recorded policy/scope context changed');
@@ -473,7 +523,7 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
     checkedMutation(() => git(root, ['add', '--all', '--pathspec-from-file=-', '--pathspec-file-nul'], { env, input }));
     assertOwnedWorkingPreserved(root, ownedBefore.filter(row => row.path !== receipt), 'validated owned working bytes');
     if (!readFileSync(join(root, receipt)).equals(writtenReceipt)) throw Error('closeout: final receipt changed before commit');
-    assertSame(preservation(root, run, scope), before, 'pre-commit outside');
+    assertCurrentOutsidePreserved(root, run, scope, outsideBefore, 'pre-commit outside');
     if (textGit(root, ['rev-parse', 'HEAD']) !== beforeHead) throw Error('closeout: HEAD changed before commit');
     onMain();
     const preCommitScope = loadScope(root, run, receipt, scope.paths);
@@ -489,7 +539,7 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
     });
     assertOwnedWorkingPreserved(root, ownedBefore.filter(row => row.path !== receipt), 'committed owned working bytes');
     if (!readFileSync(join(root, receipt)).equals(writtenReceipt)) throw Error('closeout: final receipt changed during commit');
-    assertSame(preservation(root, run, scope), before, 'post-commit outside');
+    assertCurrentOutsidePreserved(root, run, scope, outsideBefore, 'post-commit outside');
     // Integrate only the new owned entries into the real index. Never reset
     // or checkout the repository; unrelated staged blobs and flags survive.
     const head = new Map(treeEntries(root).map(row => [row.path, row]));
@@ -499,7 +549,7 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
       return ['0 ' + zero + '\t' + path, ...(row ? [row.mode + ' ' + row.oid + '\t' + path] : [])];
     });
     checkedMutation(() => git(root, ['update-index', '-z', '--index-info'], { input: pathsInput(rows) }));
-    assertSame(preservation(root, run, scope), before, 'final outside');
+    assertCurrentOutsidePreserved(root, run, scope, outsideBefore, 'final outside');
     const finalScope = loadScope(root, run, receipt, scope.paths);
     if (finalScope.policySha256 !== scope.policySha256 || finalScope.contextSha256 !== scope.contextSha256) {
       throw Error('closeout: scope changed during commit');

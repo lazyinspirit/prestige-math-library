@@ -1,12 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { chmodSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync,
+import { chmodSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, readdirSync,
   rmSync, symlinkSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { sha256 } from './step9-lib.mjs';
-import { assertOwnedWorkingPreserved } from './run-commit-scope.mjs';
+import { assertOwnedWorkingPreserved, assertOutsidePreservationSame, assertCurrentOutsidePreserved,
+  captureOutsidePreservation } from './run-commit-scope.mjs';
 
 function state(root, path) {
   const full = join(root, path);
@@ -136,4 +137,157 @@ test('dangling symlink target-byte mutation refuses without following the target
   assert.equal(changed.after.sha256, sha256('absent-new-target'));
   assert.notEqual(changed.before.sha256, changed.after.sha256);
   f.assertForeign();
+});
+
+const capture = f => captureOutsidePreservation(f.root, 'fixture', { owns: path => path === 'owned.md' });
+function outsideRefusal(f, before) {
+  let error;
+  try { assertOutsidePreservationSame(capture(f), before, 'pre-commit outside'); }
+  catch (caught) { error = caught; }
+  assert.ok(error, 'changed outside state must refuse closeout');
+  const prefix = 'closeout: pre-commit outside preservation mismatch: ';
+  assert.ok(error.message.startsWith(prefix));
+  return JSON.parse(error.message.slice(prefix.length));
+}
+
+test('native outside selectors preserve foreign staged/working differences and exclude owned bytes', t => {
+  const f = fixture(t), before = capture(f);
+  writeFileSync(join(f.root, 'owned.md'), 'new owned bytes');
+  assertOutsidePreservationSame(capture(f), before, 'pre-commit outside');
+  assert.ok(!before.outside_working.some(row => row.path === 'owned.md'));
+  f.assertForeign();
+});
+
+test('foreign working-byte mutation reports only outside_working and exact before/after path hashes', t => {
+  const f = fixture(t), before = capture(f);
+  writeFileSync(join(f.root, 'foreign.md'), 'private changed foreign text');
+  const result = outsideRefusal(f, before);
+  assert.deepEqual(Object.keys(result.changes), ['outside_working']);
+  const [change] = result.changes.outside_working;
+  assert.equal(change.path, 'foreign.md');
+  assert.deepEqual(change.before, before.outside_working.find(row => row.path === 'foreign.md'));
+  assert.equal(change.after.sha256, sha256('private changed foreign text'));
+  assert.ok(!JSON.stringify(result).includes('private changed foreign text'));
+});
+
+test('foreign staged blob mutation reports outside_index without changing working bytes', t => {
+  const f = fixture(t), before = capture(f), working = state(f.root, 'foreign.md');
+  const oid = f.git(['hash-object', 'owned.md']).trim();
+  f.git(['update-index', '--cacheinfo', '100755,' + oid + ',foreign.md']);
+  const result = outsideRefusal(f, before);
+  assert.deepEqual(Object.keys(result.changes), ['outside_index']);
+  assert.equal(result.changes.outside_index[0].path, 'foreign.md');
+  assert.equal(result.changes.outside_index[0].after.oid, oid);
+  assert.deepEqual(state(f.root, 'foreign.md'), working);
+});
+
+test('foreign index flag mutation remains a refusal even when staged blob/mode stay identical', t => {
+  const f = fixture(t), before = capture(f);
+  f.git(['update-index', '--assume-unchanged', '--', 'foreign.md']);
+  const result = outsideRefusal(f, before), [change] = result.changes.outside_index;
+  assert.deepEqual(Object.keys(result.changes), ['outside_index']);
+  assert.equal(change.path, 'foreign.md');
+  assert.equal(change.before.oid, change.after.oid);
+  assert.equal(change.before.mode, change.after.mode);
+  assert.notEqual(change.before.flags, change.after.flags);
+});
+
+test('foreign HEAD mutation identifies the exact changed tree entry', t => {
+  const f = fixture(t), before = capture(f);
+  f.git(['commit', '-m', 'fixture foreign staged change']);
+  const result = outsideRefusal(f, before);
+  assert.deepEqual(Object.keys(result.changes), ['outside_head']);
+  assert.equal(result.changes.outside_head[0].path, 'foreign.md');
+  assert.notEqual(result.changes.outside_head[0].before.oid, result.changes.outside_head[0].after.oid);
+});
+
+test('foreign creation/deletion, mode change and symlink substitution all retain exact outside diagnostics', t => {
+  const f = fixture(t), before = capture(f);
+  unlinkSync(join(f.root, 'foreign.md'));
+  symlinkSync('absent-private-target', join(f.root, 'foreign.md'));
+  writeFileSync(join(f.root, 'new-outside.md'), 'private new outside bytes');
+  chmodSync(join(f.root, 'new-outside.md'), 0o700);
+  const result = outsideRefusal(f, before);
+  assert.deepEqual(Object.keys(result.changes), ['outside_working']);
+  assert.deepEqual(result.changes.outside_working.map(row => row.path), ['foreign.md', 'new-outside.md']);
+  assert.equal(result.changes.outside_working[0].after.kind, 'symlink');
+  assert.equal(result.changes.outside_working[0].after.sha256, sha256('absent-private-target'));
+  assert.equal(result.changes.outside_working[1].before, null);
+  assert.equal(result.changes.outside_working[1].after.mode, 0o700);
+  assert.ok(!JSON.stringify(result).includes('private new outside bytes'));
+});
+
+test('foreign ignored operational log append remains protected, without a new exemption', t => {
+  const f = fixture(t);
+  writeFileSync(join(f.root, '.gitignore'), '*.log\n');
+  mkdirSync(join(f.root, 'research', 'foreign-run-dispatch'), { recursive: true });
+  const path = 'research/foreign-run-dispatch/worker.log';
+  writeFileSync(join(f.root, path), 'before log');
+  const before = capture(f);
+  writeFileSync(join(f.root, path), 'before log\nnew log record');
+  const result = outsideRefusal(f, before);
+  assert.deepEqual(Object.keys(result.changes), ['outside_working']);
+  assert.equal(result.changes.outside_working[0].path, path);
+});
+
+test('foreign mode-only mutation and deletion report their exact outside working states', t => {
+  const f = fixture(t), before = capture(f);
+  chmodSync(join(f.root, 'foreign.md'), 0o644);
+  let result = outsideRefusal(f, before), change = result.changes.outside_working[0];
+  assert.deepEqual(Object.keys(result.changes), ['outside_working']);
+  assert.equal(change.before.sha256, change.after.sha256);
+  assert.equal(change.after.mode, 0o644);
+  unlinkSync(join(f.root, 'foreign.md'));
+  result = outsideRefusal(f, before);
+  change = result.changes.outside_working[0];
+  assert.equal(change.path, 'foreign.md');
+  assert.equal(change.after, null);
+});
+
+test('complete failure metadata survives in physical runtime directories without changing receipt/index/HEAD', t => {
+  const f = fixture(t);
+  mkdirSync(join(f.root, '.autopilot', 'fixture'), { recursive: true });
+  const before = capture(f);
+  const indexBefore = f.git(['ls-files', '--stage']), headBefore = f.git(['rev-parse', 'HEAD']);
+  writeFileSync(join(f.root, 'foreign.md'), 'private concurrent outside bytes');
+  assert.throws(() => assertCurrentOutsidePreserved(f.root, 'fixture', { owns: p => p === 'owned.md' }, before,
+    'pre-commit outside'), /pre-commit outside preservation mismatch:.*complete metadata:/);
+  const names = readdirSync(join(f.root, '.autopilot', 'fixture'));
+  assert.equal(names.length, 1);
+  const record = JSON.parse(readFileSync(join(f.root, '.autopilot', 'fixture', names[0])));
+  assert.equal(record.label, 'pre-commit outside');
+  assert.ok(!record.diagnostic.includes('private concurrent outside bytes'));
+  const comparison = JSON.parse(record.diagnostic.slice(record.diagnostic.indexOf(': {') + 2));
+  assert.equal(comparison.changes.outside_working[0].path, 'foreign.md');
+  assert.equal(comparison.changes.outside_working[0].after.sha256, sha256('private concurrent outside bytes'));
+  assert.equal(f.git(['ls-files', '--stage']), indexBefore);
+  assert.equal(f.git(['rev-parse', 'HEAD']), headBefore);
+});
+
+for (const alias of ['runtime-parent', 'runtime-run']) {
+  test('aliased ' + alias + ' cannot redirect diagnostic writes or override preservation refusal', t => {
+    const f = fixture(t), target = join(f.root, 'diagnostic-target');
+    mkdirSync(target);
+    if (alias === 'runtime-parent') {
+      mkdirSync(join(target, 'fixture'));
+      symlinkSync(target, join(f.root, '.autopilot'));
+    } else {
+      mkdirSync(join(f.root, '.autopilot'));
+      symlinkSync(target, join(f.root, '.autopilot', 'fixture'));
+    }
+    const before = capture(f);
+    writeFileSync(join(f.root, 'foreign.md'), 'concurrent bytes');
+    assert.throws(() => assertCurrentOutsidePreserved(f.root, 'fixture', { owns: p => p === 'owned.md' }, before,
+      'pre-commit outside'), /pre-commit outside preservation mismatch:.*runtime diagnostic unavailable:/);
+    assert.deepEqual(readdirSync(target), alias === 'runtime-parent' ? ['fixture'] : []);
+    if (alias === 'runtime-parent') assert.deepEqual(readdirSync(join(target, 'fixture')), []);
+  });
+}
+
+test('absent runtime directories leave original preservation refusal intact and are never created', t => {
+  const f = fixture(t), before = capture(f);
+  writeFileSync(join(f.root, 'foreign.md'), 'concurrent bytes');
+  assert.throws(() => assertCurrentOutsidePreserved(f.root, 'fixture', { owns: p => p === 'owned.md' }, before,
+    'pre-commit outside'), /pre-commit outside preservation mismatch:.*runtime diagnostic unavailable:/);
+  assert.ok(!readdirSync(f.root).includes('.autopilot'));
 });

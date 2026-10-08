@@ -984,7 +984,11 @@ entries, and outside working bytes and modes. Successful return and subsequent
 `run-commit --check` verify preservation and that every owned artifact is
 committed and current. Unrelated staged changes may remain staged. An owned-working
 preservation failure identifies each changed path and its before/after kind,
-mode and SHA-256 without printing file contents; it remains a hard refusal. The receipt
+mode and SHA-256 without printing file contents; it remains a hard refusal.
+Outside-preservation failures likewise identify the exact index, HEAD or working
+category and changed paths with before/after metadata. Complete failure metadata
+is retained in an existing physical `.autopilot/RUN/` directory when available;
+an unavailable runtime diagnostic never weakens the refusal. The receipt
 records a precommit baseline; it does not claim a postcommit check happened before
 the commit. No new late evidence file is created outside the dispatch directory.
 
