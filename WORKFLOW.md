@@ -903,6 +903,21 @@ paths. Dangling links are included without changing them. Changes to this hashin
 rule require normal readiness refresh and its complete gate battery, followed by
 a new report snapshot; old receipts are not rewritten as historical evidence.
 
+The report keeps its complete version-1 tree snapshot. Its check may disregard
+research changes in another run's namespace only when that run's nonempty scope
+ledger was already sealed and remains an unchanged physical file. A filename
+prefix alone grants no exemption. Readiness physical inputs and relevant shared
+projections, plus exact reporter evidence inputs, remain protected across run
+namespaces. Any exemption also requires a successful current native readiness
+verification; every other tree difference still fails. The read-only reporter
+sandbox remains unchanged. A correction to this boundary requires normal
+mechanical readiness creation and its complete gate battery, evidence creation
+and verification, then a new report snapshot and verification, on paused,
+drained inputs. Preserve previous receipts and actual worker successes as
+history; this refresh does not authorize resetting engine state or inventing
+dispatch completion. Check the existing response against current evidence
+before rendering it again.
+
 `tools/run-commit.mjs` retains its existing whole-tree behavior for runs without
 a closeout scope policy. To preserve unrelated staged changes and working files,
 the owner may create `research/RUN-closeout-scope.json` **before** Step 9 seals

@@ -302,6 +302,43 @@ function files(dir = root, out = []) {
 const tree = () => Object.fromEntries(files().sort().map((rel) => [rel,
   protectedEntryHash(join(root, rel))]));
 
+// Ownership comes from an unchanged ledger already sealed by this report,
+// never from a newly invented filename prefix or mutable runtime state.
+function foreignResearchChanges(receipt, now, changed) {
+  const namespaces = [];
+  for (const [path, hash] of Object.entries(receipt.protected_tree)) {
+    const owner = /^research\/([a-z0-9]+(?:-[a-z0-9]+)*)-scope-ledger\.json$/.exec(path)?.[1];
+    if (!owner || owner === run || now[path] !== hash) continue;
+    if (!lstatSync(join(root, path)).isFile()) continue;
+    let ledger;
+    try { ledger = JSON.parse(readFileSync(join(root, path), 'utf8')); } catch { continue; }
+    if (ledger.run === owner && Array.isArray(ledger.pages) && ledger.pages.length)
+      namespaces.push(`research/${owner}-`);
+  }
+  const candidates = changed.filter(path => namespaces.some(prefix => path.startsWith(prefix)));
+  if (!candidates.length) return new Set();
+
+  const readiness = readJson(join(research, `${run}-publication-readiness.json`));
+  const evidence = readJson(evidencePath);
+  if (readiness.schema !== 2 || readiness.run !== run || readiness.protected_tree_scope !== 'frontier-prerequisite-context-v1'
+    || !Array.isArray(readiness.protected_tree_paths) || !Array.isArray(readiness.protected_tree_projections)
+    || evidence.version !== 2 || evidence.run !== run || !evidence.input_sha256
+    || typeof evidence.input_sha256 !== 'object' || Array.isArray(evidence.input_sha256))
+    die('step9-report-foreign-scope: missing scoped readiness or exact reporter input bindings');
+  const protectedInputs = new Set([...readiness.protected_tree_paths, ...readiness.protected_tree_projections,
+    ...Object.keys(evidence.input_sha256)]);
+  const outside = candidates.filter(path => !protectedInputs.has(path));
+  if (!outside.length) return new Set();
+  // Reuse the native closure selection and projection logic. In particular,
+  // a foreign-prefixed source actually consumed by this run is still sealed.
+  const verification = spawnSync(process.execPath, [join(dirname(fileURLToPath(import.meta.url)), 'publication-ready.mjs'),
+    '--run', run, '--root', root, '--verify'], { cwd: root, encoding: 'utf8' });
+  if (verification.error || verification.status !== 0)
+    die(`step9-report-foreign-scope: native readiness verification failed: ${verification.error?.message
+      ?? (verification.stderr || verification.stdout).trim()}`);
+  return new Set(outside);
+}
+
 if (command === 'snapshot') {
   writeFileSync(integrityPath, `${JSON.stringify({ version: 1, run, protected_tree: tree() }, null, 2)}\n`);
   console.log(`step9-report-integrity: snapshotted ${Object.keys(readJson(integrityPath).protected_tree).length} protected file(s)`);
@@ -314,8 +351,10 @@ if (command === 'check') {
   const now = tree();
   const paths = new Set([...Object.keys(receipt.protected_tree), ...Object.keys(now)]);
   const changed = [...paths].filter((path) => receipt.protected_tree[path] !== now[path]).sort();
-  if (changed.length) die(`step9-report-tree-changed: ${changed.join(', ')}`);
-  console.log(`step9-report-integrity: ${Object.keys(now).length} protected file(s) unchanged`);
+  const foreign = foreignResearchChanges(receipt, now, changed);
+  const unexpected = changed.filter(path => !foreign.has(path));
+  if (unexpected.length) die(`step9-report-tree-changed: ${unexpected.join(', ')}`);
+  console.log(`step9-report-integrity: ${Object.keys(now).filter(path => !foreign.has(path)).length} protected file(s) unchanged; ${foreign.size} unrelated foreign research change(s)`);
   process.exit(0);
 }
 
