@@ -9,7 +9,9 @@ const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const itemId = /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const hash = text => createHash('sha256').update(text).digest('hex');
 
-export function frontierGateScope(ctx, { requireItemFiles = true } = {}) {
+// Plan validation precedes scaffolding and may explicitly select pages whose
+// item arrays are still empty. Item validators retain the strict default.
+export function frontierGateScope(ctx, { requireItemFiles = true, allowEmptyItems = false } = {}) {
   if (!/^[a-zA-Z0-9_-]+$/.test(ctx.run ?? '')) throw Error('Invalid frontier run');
   const dir = join(ctx.repo, 'research');
   const manifests = readdirSync(dir).filter(name =>
@@ -22,7 +24,7 @@ export function frontierGateScope(ctx, { requireItemFiles = true } = {}) {
     for (const page of rows) {
       if (!slug.test(page?.id ?? '') || !slug.test(page?.category ?? '') || pages.has(page.id))
         throw Error(`Invalid or duplicate frontier page in ${name}`);
-      if (!Array.isArray(page.items) || !page.items.length) throw Error(`Empty frontier page ${page.id}`);
+      if (!Array.isArray(page.items) || (!allowEmptyItems && !page.items.length)) throw Error(`Empty or invalid frontier page inventory ${page.id}`);
       pages.add(page.id);
       const pageFile = `library/${page.category}/${page.id}.md`;
       pageFiles.push(pageFile);

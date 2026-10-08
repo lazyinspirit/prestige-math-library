@@ -4,7 +4,9 @@ import { join } from 'node:path';
 
 const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const itemId = /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/;
-export function readRunManifestPages(root, run) {
+// Only page-plan validation opts into the pre-scaffold empty item lifecycle.
+// Supplier/item evidence readers require populated inventories by default.
+export function readRunManifestPages(root, run, { allowEmptyItems = false } = {}) {
   if (!/^[a-zA-Z0-9_-]+$/.test(run ?? '')) throw Error('Invalid --run identity');
   const files = readdirSync(join(root, 'research')).filter(file => new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(file)).sort();
   if (!files.length) throw Error(`No current manifests for run ${run}`);
@@ -14,7 +16,7 @@ export function readRunManifestPages(root, run) {
     if (!Array.isArray(rows) || !rows.length) throw Error(`Empty or invalid manifest ${file}`);
     for (const page of rows) {
       if (!slug.test(page?.id ?? '') || !slug.test(page?.category ?? '') || !['A', 'B'].includes(page.kind)
-        || !Number.isFinite(page.order) || pageIds.has(page.id) || !Array.isArray(page.items) || !page.items.length)
+        || !Number.isFinite(page.order) || pageIds.has(page.id) || !Array.isArray(page.items) || (!allowEmptyItems && !page.items.length))
         throw Error(`Invalid or empty current page in ${file}`);
       pageIds.add(page.id);
       for (const item of page.items) {

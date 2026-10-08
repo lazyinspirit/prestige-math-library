@@ -862,6 +862,13 @@ select the run's pages and retain their prerequisite placements as context. Plan
 validation uses the same selected page scope, including before scaffold item
 lists are populated; it checks the frontier's declarations without gating
 unrelated plan entries.
+Only plan validation opts into empty item arrays in the current manifest
+readers. Its page selection must still be nonempty, structurally valid, exactly
+match any supplied page selector, and occur uniquely in the canonical plan;
+declared prerequisites and their reachable cycles remain checked. A passing
+page-plan gate does not certify item inventory or mathematical content. Item
+gates, supplier evidence readers and liveness retain their populated-inventory
+requirements throughout the later workflow.
 
 The `gate-liveness` precheck probe uses the shared `frontier-gate-scope.mjs`
 adapter to pass exact current manifest item files. Missing, malformed, empty or

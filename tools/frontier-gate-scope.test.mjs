@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { frontierGateScope, scopedGateArgv } from './frontier-gate-scope.mjs';
+import { readRunManifestPages } from './run-manifest-pages.mjs';
 import { APP_DIR } from './paths.mjs';
 
 const tools = new URL('.', import.meta.url).pathname;
@@ -107,6 +108,26 @@ test('manifest selection refreshes current inventories and fails closed without 
     const result = spawnSync(argv[0], argv.slice(1), { encoding: 'utf8' });
     assert.equal(result.status, 1);
     assert.match(result.stderr, /frontier gate selection/);
+  }
+});
+
+test('page planning alone opts into empty item arrays without relaxing reader defaults', t => {
+  const f = fixture(t), ctx = { repo: f.repo, run: 'run-test' };
+  const path = 'research/run-test-batch-1.pages.json';
+  const page = { id: 'selected', category: 'test', kind: 'A', order: 1, items: [] };
+  f.write(path, JSON.stringify([page]));
+  assert.throws(() => frontierGateScope(ctx), /Empty/);
+  assert.throws(() => frontierGateScope(ctx, { requireItemFiles: false }), /Empty/);
+  assert.throws(() => readRunManifestPages(f.repo, ctx.run), /empty/);
+  const planned = frontierGateScope(ctx, { requireItemFiles: false, allowEmptyItems: true });
+  assert.deepEqual([...planned.pages], ['selected']);
+  assert.equal(planned.items.size, 0);
+  assert.deepEqual(readRunManifestPages(f.repo, ctx.run, { allowEmptyItems: true }), [page]);
+  // An empty array is allowed for planning; absent or malformed arrays are not.
+  for (const items of [undefined, null, {}]) {
+    f.write(path, JSON.stringify([{ ...page, items }]));
+    assert.throws(() => frontierGateScope(ctx, { allowEmptyItems: true }), /invalid/);
+    assert.throws(() => readRunManifestPages(f.repo, ctx.run, { allowEmptyItems: true }), /Invalid/);
   }
 });
 

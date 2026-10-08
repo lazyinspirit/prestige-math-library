@@ -164,14 +164,67 @@ test('native wrapper validates unspliced manifest subjects against empty canonic
   assert.match(output(missing), /\[undeclared-prereq\] page selected .*supplier/);
 });
 
-test('native wrapper rejects populated page selectors with empty manifest item scopes', t => {
+test('native wrapper validates planned pages before scaffold inventories exist', t => {
   const f = fixture(t); f.save();
+  // Fresh planning deliberately leaves every selected manifest item array
+  // empty, even if canonical pages still have stale prior item inventories.
   writeFileSync(join(f.repo, 'research/run-test-batch-1.pages.json'), JSON.stringify([
     { ...f.pages[1], items: [] }, { ...f.pages[2], items: [] },
   ]));
   const r = f.gate();
-  assert.equal(r.status, 2, output(r));
-  assert.match(output(r), /Empty frontier page/);
+  assert.equal(r.status, 0, output(r));
+  assert.match(output(r), /0 item\(s\), 2 frontier page\(s\)/);
+  assert.match(output(r), /scope: 2 selected pages;/);
+});
+
+test('empty planned inventories retain declared-prerequisite failures', t => {
+  const f = fixture(t);
+  f.pages[1].items = []; f.pages[2].items = [];
+  f.pages[1].requires.push('missing-page'); f.save();
+  const missing = f.gate();
+  assert.equal(missing.status, 1, output(missing));
+  assert.match(output(missing), /\[requires-resolve\]/);
+  f.pages[1].requires = ['selected-examples']; f.save();
+  const cycle = f.gate();
+  assert.equal(cycle.status, 1, output(cycle));
+  assert.match(output(cycle), /\[requires-cycle\]/);
+});
+
+test('planned page selection remains nonempty, strict and canonical with empty items', t => {
+  const f = fixture(t); f.save();
+  const valid = [{ ...f.pages[1], items: [] }, { ...f.pages[2], items: [] }];
+  const invalid = [
+    [],
+    [{ ...valid[0], items: undefined }],
+    [{ ...valid[0], items: {} }],
+    [valid[0], valid[0]],
+    [{ ...valid[0], category: '../test' }],
+    [{ ...valid[0], kind: 'P' }],
+    [{ ...valid[0], order: undefined }],
+    [{ ...valid[0], id: 'absent' }],
+  ];
+  for (const rows of invalid) {
+    writeFileSync(join(f.repo, 'research/run-test-batch-1.pages.json'), JSON.stringify(rows));
+    const r = f.gate();
+    assert.notEqual(r.status, 0, output(r));
+  }
+  writeFileSync(join(f.repo, 'research/run-test-batch-1.pages.json'), JSON.stringify(valid));
+  writeFileSync(join(f.repo, 'pages.json'), JSON.stringify(['selected']));
+  const mismatch = spawnSync(process.execPath, [tool, 'research/plan-spec.json', '--repo', f.repo, '--run', 'run-test', '--pages-file', 'pages.json'], { cwd: f.repo, encoding: 'utf8' });
+  assert.equal(mismatch.status, 2, output(mismatch));
+  assert.match(output(mismatch), /must exactly match/);
+});
+
+test('native mathematical item gates reject planned empty inventories', t => {
+  const f = fixture(t); f.save();
+  writeFileSync(join(f.repo, 'research/run-test-batch-1.pages.json'), JSON.stringify([
+    { ...f.pages[1], items: [] }, { ...f.pages[2], items: [] },
+  ]));
+  for (const name of ['precheck', 'rendercheck', 'prosecheck', 'depcheck', 'fwdcheck', 'extcheck', 'depsource']) {
+    const r = spawnSync(process.execPath, ['tools/frontier-item-gate.mjs', '--run', 'run-test', '--tool', name], { cwd: f.repo, encoding: 'utf8' });
+    assert.notEqual(r.status, 0, output(r));
+    assert.match(output(r), /no valid populated item scope/);
+  }
 });
 
 test('native wrapper retains selected undeclared prerequisites and external supplier context', t => {

@@ -87,12 +87,15 @@ let currentPages = null;
 if (runPositions.length) {
   if (!run || run.startsWith('--')) die('--run requires a current frontier run');
   try {
-    const scope = frontierGateScope({ repo, run }, { requireItemFiles: false });
+    // Planning writes nonempty page manifests with empty item arrays; the
+    // scaffold later supplies inventories. This gate checks page declarations
+    // at both phases, while mathematical item gates require populated arrays.
+    const scope = frontierGateScope({ repo, run }, { requireItemFiles: false, allowEmptyItems: true });
     if (selectedPages !== null && (selectedPages.size !== scope.pages.size
       || [...selectedPages].some(id => !scope.pages.has(id))))
       die('--pages-file must exactly match the current run manifests when used with --run');
     selectedPages = scope.pages; selectedItemIds = scope.items;
-    currentPages = readRunManifestPages(repo, run);
+    currentPages = readRunManifestPages(repo, run, { allowEmptyItems: true });
   } catch (error) { die(`frontier gate selection: ${error.message}`); }
 }
 
