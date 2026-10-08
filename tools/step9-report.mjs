@@ -52,6 +52,8 @@ const canonical = (value) => {
   if (value && typeof value === 'object') return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical(value[key])}`).join(',')}}`;
   return JSON.stringify(value);
 };
+const defectProjection = (rows) => ({ kind: 'run-defect-history-v1', run,
+  sha256: sha256(canonical(rows.filter(row => row.run === run))) });
 
 function countBy(rows, key) {
   const out = {};
@@ -212,10 +214,10 @@ function buildEvidence() {
     else configuredSetStats.mixed++;
   }
   const adjudications = jsonLines(paths.adjudications);
-  const inputs = Object.fromEntries([...Object.values(paths), ...Object.values(deferralPaths).filter(existsSync)]
+  const inputs = Object.fromEntries([...Object.values(paths).filter(path => path !== paths.defects), ...Object.values(deferralPaths).filter(existsSync)]
     .map((path) => [relative(root, path), sha256(readFileSync(path))]));
   const result = {
-    version: 2,
+    version: 3,
     run,
     readiness: {
       verdict: readiness.verdict,
@@ -263,6 +265,10 @@ function buildEvidence() {
       categories: [...new Set((pathway.briefs ?? []).map((row) => row.category).filter(Boolean))].sort(),
     },
     input_sha256: inputs,
+    // Keep the complete canonical owning-run history, including every field
+    // and superseded observation, without binding other frontiers' appends.
+    // Native readiness separately seals relevant outside-subject context.
+    input_projections: { [relative(root, paths.defects)]: defectProjection(defects) },
   };
   return { ...result, evidence_sha256: sha256(canonical(result)) };
 }
@@ -340,10 +346,6 @@ function scopedChanges(receipt, now, changed) {
       }
     }
   }
-  // Only these canonical carriers have shared workflow ownership. Projected
-  // external sources and run-local records retain the exact report baseline.
-  const sharedCarriers = new Set(['research/plan-spec.json', 'research/defect-ledger.jsonl',
-    'research/published-consumer-supplier-ledger.md']);
   const physicalSelectedContent = path => {
     const parts = path.split('/');
     for (let index = 1; index <= parts.length; index++) {
@@ -354,23 +356,37 @@ function scopedChanges(receipt, now, changed) {
     }
     return true;
   };
-  const candidates = changed.filter(path => sharedCarriers.has(path)
+  const readiness = readJson(join(research, `${run}-publication-readiness.json`));
+  // Derived index names are semantic receipts, never physical path ownership.
+  const projections = new Set((Array.isArray(readiness.protected_tree_projections)
+    ? readiness.protected_tree_projections : []).filter(path => typeof path === 'string' && !path.includes('#')));
+  const candidates = changed.filter(path => projections.has(path)
     || (selectedContent.has(path) && physicalSelectedContent(path))
     || namespaces.some(prefix => path.startsWith(prefix)));
   if (!candidates.length) return new Set();
 
-  const readiness = readJson(join(research, `${run}-publication-readiness.json`));
   const evidence = readJson(evidencePath);
   if (readiness.schema !== 2 || readiness.run !== run || readiness.protected_tree_scope !== 'frontier-prerequisite-context-v1'
     || !Array.isArray(readiness.protected_tree_paths) || !Array.isArray(readiness.protected_tree_projections)
-    || evidence.version !== 2 || evidence.run !== run || !evidence.input_sha256
+    || ![2, 3].includes(evidence.version) || evidence.run !== run || !evidence.input_sha256
     || typeof evidence.input_sha256 !== 'object' || Array.isArray(evidence.input_sha256))
     die('step9-report-foreign-scope: missing scoped readiness or exact reporter input bindings');
   const physicalInputs = new Set(readiness.protected_tree_paths);
-  const projections = new Set(readiness.protected_tree_projections);
   const reporterInputs = new Set(Object.keys(evidence.input_sha256));
-  const outside = candidates.filter(path => !physicalInputs.has(path) && !reporterInputs.has(path)
-    && (sharedCarriers.has(path) ? projections.has(path) : !projections.has(path)));
+  if (evidence.version === 3) {
+    const projected = evidence.input_projections;
+    const path = 'research/defect-ledger.jsonl';
+    const binding = projected?.[path];
+    if (!projected || typeof projected !== 'object' || Array.isArray(projected)
+      || Object.keys(projected).length !== 1 || !binding || typeof binding !== 'object'
+      || Array.isArray(binding) || Object.keys(binding).sort().join(',') !== 'kind,run,sha256'
+      || binding.kind !== 'run-defect-history-v1' || binding.run !== run
+      || typeof binding.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(binding.sha256))
+      die('step9-report-projection-shape: invalid version-3 reporter input projection');
+    if (canonical(binding) !== canonical(defectProjection(jsonLines(join(root, path)))))
+      die('step9-report-projection-stale: owning-run defect history changed');
+  }
+  const outside = candidates.filter(path => !physicalInputs.has(path) && !reporterInputs.has(path));
   if (!outside.length) return new Set();
   // Reuse the native closure selection and projection logic. In particular,
   // a foreign-prefixed source actually consumed by this run is still sealed.

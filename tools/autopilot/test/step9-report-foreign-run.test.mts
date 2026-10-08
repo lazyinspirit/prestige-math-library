@@ -5,6 +5,8 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
+import { pathToFileURL } from 'node:url';
+import { writeProofLayout } from '../../proof-layout.mjs';
 
 const repo = new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const command = (root: string, tool: string, ...args: string[]) => spawnSync(process.execPath,
@@ -214,7 +216,7 @@ test('shared projection carrier cannot be replaced by a link to identical bytes'
   assert.match(result.stderr, /native readiness verification failed/);
 });
 
-test('a projected external supporting carrier keeps its full report baseline', t => {
+test('a projected external supporting carrier accepts only unchanged native semantic records', t => {
   const f = fixture();
   t.after(() => rmSync(f.root, { recursive: true, force: true }));
   f.put('research/shared-root-record.md', 'demo current run record\n\nunrelated historic note\n');
@@ -223,9 +225,12 @@ test('a projected external supporting carrier keeps its full report baseline', t
   assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
   f.put('research/shared-root-record.md', 'demo current run record\n\nchanged unrelated historic note\n');
   assert.equal(command(f.root, 'publication-ready.mjs', '--verify').status, 0);
-  const result = f.check();
+  let result = f.check();
+  assert.equal(result.status, 0, result.stderr);
+  f.put('research/shared-root-record.md', 'demo changed consumed run record\n\nchanged unrelated historic note\n');
+  result = f.check();
   assert.equal(result.status, 1);
-  assert.match(result.stderr, /step9-report-tree-changed.*shared-root-record.md/);
+  assert.match(result.stderr, /native readiness verification failed/);
 });
 
 test('report accepts concurrent selected foreign item and page authoring on sealed ownership', t => {
@@ -323,4 +328,107 @@ test('foreign selected authoring may create regular files but deletions remain s
   f.put('items/thm-foreign.md', '---\nid: thm-foreign\nkind: theorem\nstatus: draft\n---\nNew foreign proof.\n');
   const creation = f.check();
   assert.equal(creation.status, 0, creation.stderr);
+});
+
+const ownDefect = { defect_id: 'demo-D001', run: 'demo', at: '2026-01-01T00:00:00.000Z', severity: 'fatal', subject: 'thm-owned',
+  class: 'accuracy', subclass: 'invalid-inference', location: 'proof-step', disposition: 'fixed',
+  caught_at_stage: '7-adjudicate', caught_by_role: 'judge-terra', repair_cost: 'repair+rejudge' };
+
+function evidenceFixture() {
+  const f = fixture();
+  f.put('tools/defect-ledger.mjs', `import ${JSON.stringify(pathToFileURL(join(repo, 'tools/defect-ledger.mjs')).href)};\n`);
+  f.put('items/thm-owned.md', '---\nid: thm-owned\nkind: theorem\nstatus: draft\n---\n## Proof\n\n1.1 A fixture premise. [given]\n\n1.2 Its fixture conclusion. [step 1.1] ∎\n');
+  f.put('research/demo-scope-ledger.json', { run: 'demo', pages: [{ id: 'owned-page', kind: 'A', batch: '1' }] });
+  f.put('research/demo-judge-closure.json', { run: 'demo', judge_lineup: 'sol', closed: true,
+    scope: 1, verdicts_complete: 1, needs_rejudge: [], unadjudicated: [], open_fatal: [] });
+  f.put('research/demo-judge.jsonl', JSON.stringify({ id: 'thm-owned', model: 'gpt-6-sol', context_sha256: 'context', item_sha256: 'item', keep: true }) + '\n');
+  f.put('research/demo-judge-adjudications.jsonl', '');
+  f.put('research/defect-ledger.jsonl', JSON.stringify(ownDefect) + '\n');
+  f.put('research/DEFECT-LEDGER.md', 'demo own generated summary\n\nforeign unrelated summary\n');
+  f.put('research/demo-touches.json', { snapshots: [{ label: 'baseline', hashes: { 'thm-owned':
+    createHash('sha256').update(readFileSync(join(f.root, 'items/thm-owned.md'))).digest('hex') } }], summary: 'research/DEFECT-LEDGER.md' });
+  writeProofLayout('demo', f.root);
+  let result = command(f.root, 'publication-ready.mjs', '--write');
+  assert.equal(result.status, 0, result.stderr);
+  result = command(f.root, 'step9-report.mjs', 'evidence');
+  assert.equal(result.status, 0, result.stderr);
+  result = command(f.root, 'step9-report.mjs', 'snapshot');
+  assert.equal(result.status, 0, result.stderr);
+  return f;
+}
+
+test('native v3 evidence remains exact across unrelated defect appends and global summary updates', t => {
+  const f = evidenceFixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  const path = join(f.root, 'research/demo-step9-evidence.json');
+  const original = readFileSync(path);
+  const evidence = JSON.parse(original.toString());
+  assert.equal(evidence.version, 3);
+  assert.equal(Object.hasOwn(evidence.input_sha256, 'research/defect-ledger.jsonl'), false);
+  assert.equal(evidence.input_projections['research/defect-ledger.jsonl'].kind, 'run-defect-history-v1');
+  f.put('research/defect-ledger.jsonl', [ownDefect, { ...ownDefect, defect_id: 'foreign-D001', run: 'foreign', subject: 'thm-foreign' }].map(row => JSON.stringify(row)).join('\n') + '\n');
+  f.put('research/DEFECT-LEDGER.md', 'demo own generated summary\n\nforeign changed generated summary\n');
+  let result = command(f.root, 'step9-report.mjs', 'check-evidence');
+  assert.equal(result.status, 0, result.stderr);
+  result = f.check();
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(readFileSync(path), original);
+});
+
+for (const [label, change] of [
+  ['own fatal metadata', { ...ownDefect, repair_cost: 'replacement' }],
+  ['own supersession', { ...ownDefect, supersedes: ['demo-missing'] }],
+] as const) test(`native v3 evidence and report guard reject ${label}`, t => {
+  const f = evidenceFixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/defect-ledger.jsonl', JSON.stringify(change) + '\n');
+  assert.equal(command(f.root, 'step9-report.mjs', 'check-evidence').status, 1);
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /step9-report-projection-stale/);
+});
+
+test('native relevant outside-subject rows remain protected beyond v3 own-run evidence', t => {
+  const f = evidenceFixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/defect-ledger.jsonl', [ownDefect, { ...ownDefect, defect_id: 'foreign-D001', run: 'foreign' }].map(row => JSON.stringify(row)).join('\n') + '\n');
+  assert.equal(command(f.root, 'step9-report.mjs', 'check-evidence').status, 0);
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /native readiness verification failed/);
+});
+
+test('malformed global JSON remains fatal with v3 projected reporter inputs', t => {
+  const f = evidenceFixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/defect-ledger.jsonl', JSON.stringify(ownDefect) + '\nmalformed foreign JSON\n');
+  assert.equal(command(f.root, 'step9-report.mjs', 'check-evidence').status, 1);
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /invalid JSON/);
+});
+
+for (const [label, projected] of [
+  ['wrong path', { 'research/foreign-supervision.md': { kind: 'run-defect-history-v1', run: 'demo', sha256: 'a'.repeat(64) } }],
+  ['wrong kind', { 'research/defect-ledger.jsonl': { kind: 'all-records', run: 'demo', sha256: 'a'.repeat(64) } }],
+  ['wrong run', { 'research/defect-ledger.jsonl': { kind: 'run-defect-history-v1', run: 'foreign', sha256: 'a'.repeat(64) } }],
+  ['invalid hash', { 'research/defect-ledger.jsonl': { kind: 'run-defect-history-v1', run: 'demo', sha256: 'invalid' } }],
+] as const) test(`v3 projection shape rejects ${label}`, t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('research/demo-step9-evidence.json', { version: 3, run: 'demo', input_sha256: {}, input_projections: projected });
+  assert.equal(command(f.root, 'step9-report.mjs', 'snapshot').status, 0);
+  f.put('research/foreign-supervision.md', 'legitimate foreign update');
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /step9-report-projection-shape/);
+});
+
+test('derived native index names never grant physical path ownership', t => {
+  const f = fixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  f.put('items#relevant-identity-claims', 'physical filename impersonating a semantic index');
+  const result = f.check();
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /step9-report-tree-changed.*items#relevant-identity-claims/);
 });

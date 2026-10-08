@@ -891,7 +891,17 @@ their publication audit or formatting is not a gate on this run.
 ## Scoped closeout with unrelated work present
 
 Step-9 evidence validates the canonical defect-ledger history and supersession
-links before checking active fatal obligations. Validly superseded observations
+links with the existing owning-run validator before checking active fatal
+obligations, and parses every global JSON row. It does not add taxonomy repair
+duties for unrelated historical runs. Version-3 evidence binds the complete
+canonical owning-run defect rows separately in `input_projections`, retaining
+every field, order and superseded observation. Its `research/defect-ledger.jsonl`
+entry contains `kind: "run-defect-history-v1"`, the owning `run`, and `sha256`
+of those canonical ordered rows. Other reporter inputs retain
+exact raw hashes. Native readiness independently protects relevant outside-run
+defect subjects. Version-2 historical evidence keeps its raw global-ledger
+binding until genuine native evidence creation and validation refresh it; old
+receipts are never rewritten. Validly superseded observations
 remain visible in the fatal-defect table, labelled historical with their current
 owner; they do not become current blockers. Active open or incomplete fatal
 rows and invalid ownership links still fail evidence generation.
@@ -917,14 +927,15 @@ paths remain exact baseline inputs. Selected foreign authoring may create or
 update regular mathematical files; deletions, symbolic links and parent-link
 aliases never gain selected-content exemptions. Own content and prerequisite suppliers
 remain protected even when another run also selects them. Any exemption also
-requires a successful current native readiness
-verification. The canonical shared plan, defect ledger and published supplier
-ledger may use their explicitly recorded native readiness projections under
-the same verification, provided the changed carrier is not an exact raw
-reporter evidence input. Relevant projection changes, malformed ledger rows and
-physical/link substitutions still fail. This does not exempt projected external
-source archives or run records, or alter commit ownership. Every other tree
-difference still fails. The read-only reporter
+requires a successful current native readiness verification. Physical carriers
+with explicitly recorded native readiness projections, including external
+evidence records and generated shared summaries, may change outside their
+consumed semantic projection, provided they are not physical readiness inputs
+or exact raw reporter inputs. Declared version-3 reporter projections must have
+the supported path, kind, owning run and current canonical hash. Relevant
+projection changes, malformed global JSON and physical/link substitutions
+still fail. Derived index names grant no physical path ownership. This changes
+neither commit ownership nor the read-only reporter
 sandbox remains unchanged. A correction to this boundary requires normal
 mechanical readiness creation and its complete gate battery, evidence creation
 and verification, then a new report snapshot and verification, on paused,
