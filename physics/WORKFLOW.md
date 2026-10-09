@@ -135,11 +135,12 @@ or definition-discharge edges cannot use that original-only context.
 
 Every production native gate join holds **before** attempting its complete
 battery, after all native and adopted writers drain. `pause-at` remains a stop
-after a stage and cannot replace this boundary. Under CLAUDE.md rule 6, this
+after a stage and cannot replace this boundary. Under CLAUDE.md rule 7, this
 pre-gate recertification checks **formatting and metadata only**, in one
 supplier-before-consumer pass. It requires no detailed mathematics or physics
 review, mathematical soundness verdict, or proof/source-reading attestation.
-The native mathematical, physical, source, and independent review gates still
+Only an item that fails a gate and its downstream consumers receive focused
+mathematical or physical checking. The native mathematical, physical, source, and independent review gates still
 run their complete battery and retain their ordinary acceptance duties.
 
 The controller writes `STATE_DIR/owner-gate-request.json`; the owner checks the
