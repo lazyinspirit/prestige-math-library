@@ -33,6 +33,8 @@ Step1 scaffold batches declare their same-stage in-run prerequisites to the
 executor. Their consumers wait for artifact-complete, stable transitive
 suppliers. Scaffold snapshots are cached by the controller's stable configuration
 identity and repository/run, so fresh context objects reuse parsed inventories.
+Prerequisite scheduling uses that same guarded snapshot across the batch graph,
+instead of reparsing the full plan for each batch's requirements.
 Plan, manifest and coverage mtime/ctime/size changes rebuild the snapshot;
 published and in-run item-body changes invalidate parsed dependency inputs.
 Readiness records are read afresh on every artifact check. This cache changes

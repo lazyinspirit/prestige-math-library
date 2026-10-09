@@ -75,7 +75,7 @@ export function batches(ctx: any): string[] {
 
 /** Direct prerequisite batches induced by in-run page requirements. */
 function batchDependencies(ctx: any, unit: string): string[] {
-  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const { snapshot } = scaffoldSnapshot(ctx);
   const batchForPage = new Map<string, string>();
   for (const page of snapshot.pages) batchForPage.set(page.id, String(page.batch));
   const out = new Set<string>();

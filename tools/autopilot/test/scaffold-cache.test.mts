@@ -66,3 +66,24 @@ test('readiness records are read afresh even when the structural snapshot is reu
   assert.equal(scaffoldSnapshot(f.ctx()), cached);
   assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
 });
+
+test('prerequisite scheduling reuses guarded pages and observes changed requirements', t => {
+  const f = fixture(t);
+  const later = [
+    { id: 'later', kind: 'A', companion: 'later-examples', order: 3, requires: ['main'], items: [] },
+    { id: 'later-examples', kind: 'B', companion: 'later', order: 4, requires: ['later'], items: [] },
+  ];
+  f.put('demo-batch-2.pages.json', later);
+  f.put('plan-spec.json', { pages: [...f.pages, ...later] });
+  const cached = scaffoldSnapshot(f.ctx()), pages = cached.snapshot.pages;
+  let reads = 0;
+  Object.defineProperty(cached.snapshot, 'pages', { get() { reads++; return pages; } });
+  const prerequisites = (stages.find(s => s.id === '1-scaffold') as any).unitPrerequisites;
+  assert.deepEqual(prerequisites(f.ctx(), '2'), ['1']);
+  assert.deepEqual(prerequisites(f.ctx(), '2'), ['1']);
+  assert.ok(reads >= 2, 'scheduling must read the retained snapshot rather than reparsing');
+  later[0].requires = [];
+  f.put('demo-batch-2.pages.json', later);
+  assert.deepEqual(prerequisites(f.ctx(), '2'), []);
+  assert.notEqual(scaffoldSnapshot(f.ctx()), cached);
+});
