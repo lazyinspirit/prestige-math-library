@@ -15,5 +15,5 @@ and scope changes require the owner. `drift-minted` and `drift-rescoped`
 record only explicitly authorized amendments. Do not edit content or manifests.
 
 Run `node tools/drift-review-check.mjs --run {{run}} --before-apply` and
-`node tools/validate-plan.mjs research/plan-spec.json`. Report blockers;
+`node tools/validate-plan.mjs research/plan-spec.json --run {{run}}`. Report blockers;
 the engine owns materialization.

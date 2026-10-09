@@ -185,6 +185,7 @@ export function syncManifestsPreservingItems(repo, run) {
  *  index 1 would repoint every batch number the covers map and the dispatched
  *  labels already use. */
 export function writeManifests(repo, run, batchGroups, { force = false, startAt = 1 } = {}) {
+  if (!Number.isInteger(startAt) || startAt < 1) throw new Error('startAt must be a positive batch number');
   const spec = loadPlan(repo);
   const byId = new Map(spec.pages.map((p) => [p.id, p]));
   if (!force && startAt === 1) {
@@ -196,6 +197,10 @@ export function writeManifests(repo, run, batchGroups, { force = false, startAt 
     }
   }
   const written = [];
+  if (!force) for (let i = 0; i < batchGroups.length; i++) {
+    const target = join(repo, 'research', `${run}-batch-${startAt + i}.pages.json`);
+    if (existsSync(target)) throw new Error(`refusing to replace existing manifest ${target}; append must use fresh batch numbers`);
+  }
   batchGroups.forEach((group, i) => {
     const entries = [];
     for (const a of group) {
@@ -213,7 +218,7 @@ export function writeManifests(repo, run, batchGroups, { force = false, startAt 
     }
     const batch = startAt + i;
     const path = join(repo, 'research', `${run}-batch-${batch}.pages.json`);
-    writeFileSync(path, JSON.stringify(entries, null, 2) + '\n');
+    writeFileSync(path, JSON.stringify(entries, null, 2) + '\n', { flag: force ? 'w' : 'wx' });
     written.push({ batch, path, pages: entries.map((e) => e.id) });
   });
   return written;

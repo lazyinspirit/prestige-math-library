@@ -47,6 +47,37 @@
   `research/*RESUME.md` files do not establish live status; check the state directory
   and Git history.
 
+### Extend an unclosed Step-1 frontier
+
+When the owner authorizes necessary new pairs in the same run, stop and drain its
+controller and target writers, leaving the matching state paused in Step 1. Add
+the approved pairs to the canonical plan and provide their actual designs first.
+Then use explicit new A-page IDs:
+
+```bash
+node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts plan --append --run RUN --state-dir .autopilot/RUN --pairs A_ID,A_ID --allow-in-run-dependencies
+```
+
+Append requires completed original drift/apply stages, an unclosed scaffold stage,
+disjoint A/B identities, combined buildability and at most 80 total pairs. It
+rejects `--force` and `--allow-unbuildable`. It allocates fresh batch numbers,
+preserves all existing manifest bytes and state, archives preimages under
+`research/RUN-frontier-append-N/`, and regenerates the ledger, covers and tasks.
+Historical drift inputs and receipts retain their original scope.
+
+On normal restart, native generation-specific `1-append-drift-N` and
+`1-append-apply-N` stages run before scaffolding. The new review covers only the
+appended pairs and uses a fresh `drift-review-append-N` label; an old review cannot
+satisfy it. Review gates check the full run plan and a persisted, nonempty new-page
+selection so planned item declarations are checked before the new inventories
+are scaffolded. After genuine successful review, the native apply tool merges the
+attributed reports and runs normal metadata SYNC over the full frontier,
+preserving every item array and batch identity while updating approved plan
+orders and prerequisites. Scoped drift, plan and ledger gates must pass before
+Beta work resumes. No state or gate stamp is edited by append. If interrupted,
+inspect the archived transaction and its lock before recovery; do not replace
+populated manifests or manufacture review receipts.
+
 ## Supervise and clear gates
 
 The engine derives validator subjects from the current run's nonempty batch

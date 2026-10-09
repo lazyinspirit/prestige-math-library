@@ -86,7 +86,9 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   const notes: any[] = [];
   const ok: any[] = [];
 
-  const mod = await import(stagesPath);
+  const imported = await import(stagesPath);
+  const mod = { ...imported, stages: typeof imported.stagesForRun === 'function'
+    ? imported.stagesForRun({ repo, run }) : imported.stages };
   // Plans may depend on artifacts produced by earlier stages. `doctor` asks
   // them only for command descriptors, before those artifacts exist.
   const ctx = { run, repo, dispatchDir: join(repo, 'research', `${run}-dispatch`), config, doctor: true };
@@ -204,6 +206,16 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   const placeheld = new Set<string>();
   const listed = runTasks('--list');
   const promptFiles = String(listed.stdout ?? '').split('\n').map((s) => s.trim()).filter(Boolean);
+  // Runtime append stages have generation-specific tasks outside the static
+  // source enumeration used by run-tasks. Include their actual declared plans.
+  for (const st of mod.stages.filter((s: any) => /^1-append-drift-\d+$/.test(s.id))) {
+    for (const p of st.plan?.(ctx, planUnits.get(st) ?? []) ?? []) {
+      for (const file of [p.brief, ...(p.task ?? [])].filter(Boolean)) {
+        if (!promptFiles.includes(file)) promptFiles.push(file);
+        if (!existsSync(join(repo, file))) problems.push(`${st.id}: no brief/task exists — ${file}`);
+      }
+    }
+  }
   for (const c of promptFiles) {
     const f = join(repo, c);
     if (!existsSync(f)) continue;

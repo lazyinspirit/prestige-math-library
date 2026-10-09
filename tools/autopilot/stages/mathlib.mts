@@ -33,6 +33,7 @@ import { step1Decision } from '../../step1-decisions.mjs';
 import { dependencyLevels, orderedItems } from '../../item-dependency-levels.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { holdStep1 } from './step1-hold.mts';
+import { appendStages } from '../src/frontier-append.mts';
 import { yaml } from '../../pathway-lib.mjs';
 
 // Version the composed Step-5 module independently. The executor watches both
@@ -2665,4 +2666,5 @@ for (const stage of stages) {
 }
 
 export const workflowRevision = 'batch-step7-rounds-v3-proof-layout';
-export default { stages, batches, alphaGroups, workflowRevision };
+export const stagesForRun = (ctx: any) => appendStages(stages, ctx);
+export default { stages, stagesForRun, batches, alphaGroups, workflowRevision };

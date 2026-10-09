@@ -234,7 +234,8 @@ export class Executor {
     this.stagesFingerprint = fingerprint;
     try {
       const mod = await import(`${pathToFileURL(this.stagesPath).href}?v=${encodeURIComponent(fingerprint)}`);
-      const problems = validateStages(mod.stages, this.ctx());
+      const nextStages = typeof mod.stagesForRun === 'function' ? mod.stagesForRun(this.ctx()) : mod.stages;
+      const problems = validateStages(nextStages, this.ctx());
       if (problems.length) {
         this.reporter.notify('stages-reload-refused',
           `edited stage table failed validation and was NOT loaded:\n${formatProblems(problems)}`);
@@ -245,14 +246,14 @@ export class Executor {
       // stage before anything already gate-complete: currentStage() would skip
       // the completed successor without rerunning the new predecessor. Compare
       // every completed prefix to the table currently driving this process.
-      const changedPrefix = completedPrefixProblem(this.stages, mod.stages, this.state.data.stages);
+      const changedPrefix = completedPrefixProblem(this.stages, nextStages, this.state.data.stages);
       if (changedPrefix) {
         this.reporter.notify('stages-reload-refused',
           `edited stage table changes the immutable completed prefix ending at ${changedPrefix}; `
           + 'record an explicit migration instead of making durable gate evidence skip new work');
         return;
       }
-      this.stages = mod.stages;
+      this.stages = nextStages;
       this.specProblems = [];
       this.bumpState();
       this.reporter.notify('stages-reloaded', `stage table reloaded from ${this.stagesPath}`);

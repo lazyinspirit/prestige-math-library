@@ -3,6 +3,17 @@
 A deterministic TypeScript engine. Read the repository's WORKFLOW.md for its
 operating contract and CLAUDE.md for agent instructions.
 
+To add owner-approved prerequisite pairs to an unfinished Step-1 run, stop and
+drain its controller/workers while it is paused, then run `plan --append --run RUN
+--state-dir .autopilot/RUN --pairs A_ID,A_ID --allow-in-run-dependencies`. The
+canonical plan and real designs must already contain the new pairs. The guarded
+append preserves existing populated inventories and batch numbers, enforces the
+80-pair combined cap, and archives all overwritten planning metadata. Run-aware
+stage factories add fresh scoped drift/apply stages before scaffolding without
+changing old completion stamps. Reviewed apply uses the normal metadata SYNC
+while preserving all item arrays; old reports remain attributable in archived
+preimages. See WORKFLOW.md for restart and interrupted-transaction requirements.
+
 - stages/mathlib.mts: Steps1–4, 6, 8–9, shared gates and scoped recovery.
 - stages/mathlib.step5.mts: independent reader/refuter pass, routed group adjudication, cross-group audit and closure.
 - stages/mathlib.step7.mts: batch adjudication, three-owner impact repair, stable certification and both explicit repeat loops.

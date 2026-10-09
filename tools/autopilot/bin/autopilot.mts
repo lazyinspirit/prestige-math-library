@@ -36,6 +36,7 @@ import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
 import { recoverStep8 } from '../src/step8-recovery.mts';
 import { reopenStep5 } from '../src/step5-reopen.mts';
+import { appendFrontier, assertNoAppendTransaction } from '../src/frontier-append.mts';
 import type { Config } from '../src/types.mts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -153,6 +154,7 @@ function writeDriftArtifacts(run: string, pages: string[], allowInRunDependencie
     '  - `VERDICT: drift-blocked — exact prerequisite and required owner action`.',
     '  - Only for explicitly authorized plan changes: `VERDICT: drift-minted — PAGE_ID (order N)` or `VERDICT: drift-rescoped — build PAGE_ID (order N) instead`.',
     '- Write only the plan and report. The mechanical stage updates manifests and scope records.',
+    `- Run node tools/validate-plan.mjs research/plan-spec.json --run ${run}; never substitute whole-corpus validation for this frontier.`,
   ].join('\n') + '\n');
   console.log(`\nwrote ${evPath.replace(repo + '/', '')}`);
   console.log(`wrote ${taskPath.replace(repo + '/', '')}  <- the drift review; stage 1 dispatches it as the \`drift\` unit`);
@@ -212,7 +214,8 @@ async function buildExecutor(run?: string) {
       process.exit(0);
     });
   }
-  return new Executor({ config, stages: mod.stages, adapter, state, reporter, signal: controller.signal });
+  const stageTable = typeof mod.stagesForRun === 'function' ? mod.stagesForRun({ repo, run: config.run }) : mod.stages;
+  return new Executor({ config, stages: stageTable, adapter, state, reporter, signal: controller.signal });
 }
 
 switch (cmd) {
@@ -305,6 +308,17 @@ switch (cmd) {
   case 'plan': {
     const run = opt('run') ?? die('--run is required');
     const pairsArg = opt('pairs');
+    if (has('append')) {
+      if (has('force') || has('allow-unbuildable') || (opt('cap') && Number(opt('cap')) !== 1))
+        die('plan --append refuses --force, --allow-unbuildable and non-unit batch caps');
+      if (!pairsArg || ['next', 'wave1'].includes(pairsArg)) die('plan --append requires an explicit new A-page CSV');
+      const entry = appendFrontier({ repo, run, stateDir: loadConfig().stateDir,
+        pairs: pairsArg.split(',').map((s: string) => s.trim()),
+        allowInRunDependencies: has('allow-in-run-dependencies'), evidence: driftEvidence, buildability: unsatisfiableEdges });
+      console.log(`native frontier append ${entry.number}: ${entry.pairs.length} pairs -> new batches ${entry.batches.join(', ')}`);
+      console.log('Previous manifests, item inventories, receipts and state remain unchanged. Resume the native controller for the fresh append drift review before scaffolding.');
+      break;
+    }
     let pages;
     if (pairsArg === 'next') {
       const maxPairs = Number(opt('max-pairs', String(MAX_RUN_PAIRS)));
@@ -444,6 +458,7 @@ switch (cmd) {
   }
 
   case 'start': {
+    assertNoAppendTransaction(stateDir);
     const run = opt('run');
     // Validate BEFORE detaching. A spec defect found by the detached child is a
     // blocker in a log nobody is reading yet; found here it is a message on the
