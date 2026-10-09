@@ -133,63 +133,85 @@ on a pinned import may resolve in the original mathematics library, including
 an original alias, without creating a local item. Owned references and logical
 or definition-discharge edges cannot use that original-only context.
 
-Every production native gate join now holds **before** attempting its complete
+Every production native gate join holds **before** attempting its complete
 battery, after all native and adopted writers drain. `pause-at` remains a stop
-after a stage and cannot replace this boundary. The controller writes
-`STATE_DIR/owner-gate-request.json`; the owner performs a fresh mathematical
-review against its current snapshot, then writes
+after a stage and cannot replace this boundary. Under CLAUDE.md rule 6, this
+pre-gate recertification checks **formatting and metadata only**, in one
+supplier-before-consumer pass. It requires no detailed mathematics or physics
+review, mathematical soundness verdict, or proof/source-reading attestation.
+The native mathematical, physical, source, and independent review gates still
+run their complete battery and retain their ordinary acceptance duties.
+
+The controller writes `STATE_DIR/owner-gate-request.json`; the owner checks the
+current frontier's formatting and metadata and writes
 `STATE_DIR/owner-gate-receipt.json`. The engine validates and consumes that
 receipt once. A failed battery, ordinary retry, changed input, or controller
-crash after consumption requires a new attempt request and fresh review. The
-engine retains its normal full failure diagnostics, repair routing, and gate
-history. This control neither dispatches reviewers nor proves mathematics.
+crash after consumption requires a new attempt request and fresh formatting and
+metadata checks. Native failure diagnostics, repair routing, and gate history
+remain in force.
 
-The request records the actual current manifest frontier, supplier-before-consumer
-item order, item carrier and manifest hashes, scoped supplier/current original
-hashes, native gate input files, and the exact complete resolved battery.
-Step-7 adapters retain their frozen subject selection; current-manifest native
-wrappers retain their current selection, and review covers their union. Outside
-suppliers remain prerequisite context. Pre-author claims bind their manifest
-and an absent carrier explicitly; plan-only gates require explicit plan review.
-An item gate cannot authorize an empty subject selection. Runtime reports,
-observer logs, and authorization requests are not mathematical inputs.
+The request records the actual current manifest frontier, dependency-ordered
+items, carrier and manifest hashes, relevant supplier/current original hashes,
+native gate input files, and the exact resolved battery. Step-7 frozen subjects
+and current-manifest wrapper subjects retain their existing scopes; the receipt
+covers their union. Outside suppliers remain prerequisite context. Hashing proof,
+source, and certification inputs preserves currency without reviewing their
+mathematical or physical arguments. Runtime observer reports and authorization
+requests are excluded from this input selection.
 
-An owner receipt has this shape (every requested item must appear once, in the
-request's order):
+Requests and receipts use version 2 and explicitly identify the limited scope.
+Every requested item must appear exactly once, in the request's order:
 
 ```json
 {
-  "version": 1,
+  "version": 2,
+  "recertificationScope": "formatting-metadata-only",
   "attempt": "COPY_CURRENT_REQUEST_ATTEMPT",
   "snapshotSha256": "COPY_CURRENT_REQUEST_SNAPSHOT_HASH",
   "reviewer": "owner identity",
   "writersDrained": true,
   "writerScopes": [],
   "reviewStartedAt": "ISO timestamp at or after request.createdAt",
-  "reviewedAt": "ISO timestamp after the review",
+  "reviewedAt": "ISO timestamp after the formatting and metadata checks",
   "items": [
     {
       "id": "def-example",
       "carrierSha256": "CURRENT_REQUEST_ITEM_HASH_OR_NULL",
       "manifestSha256": "CURRENT_REQUEST_MANIFEST_CLAIM_HASH_OR_NULL",
-      "verdict": "sound",
-      "review": "Current mathematical argument, qualifications and supplier checks.",
-      "evidence": [{ "path": "research/current-review.md", "sha256": "CURRENT_FILE_SHA256" }]
+      "verdict": "format-metadata-pass",
+      "formatting": {
+        "verdict": "pass",
+        "evidence": "Current structural headings, Markdown and applicable proof-step formatting checks."
+      },
+      "metadata": {
+        "verdict": "pass",
+        "evidence": "Current identity, kind, classification, provenance and declared dependency metadata checks."
+      }
     }
   ]
 }
 ```
 
-For plan-only gates, also supply `planReview` describing the current plan review.
-Evidence paths resolve against the physics workspace (absolute paths are also
-accepted). Each item needs actual current review evidence; an old unchanged
-certificate, an omitted item, an empty explanation, or a partial frontier cannot
-satisfy the receipt. The owner must drain external repair writers and attest no
-writer scopes remain. Native writers are checked independently by the engine.
-The engine rehashes the entire selected snapshot after validating all receipt
-rows and evidence, then archives the consumed request and receipt under
-`STATE_DIR/owner-gate-history/ATTEMPT.json` before starting the battery. Never
-copy verdicts into a new attempt without the required current review.
+Each check needs a nonempty, concrete explanation of the formatting or metadata
+checks actually performed. The receipt validates these separate pass records;
+it does not require a mathematical review narrative or reading an evidence file.
+Do not invent audit stamps or claim mathematical acceptance from a formatting
+pass. Pre-author items bind their actual manifest and explicitly absent carrier;
+check their scaffold structure and metadata without inventing an authored body.
+An item gate cannot authorize an empty subject selection.
+
+Plan-only gates may select nonempty page manifests before item inventories exist.
+Their receipts also require `planChecks` with separate `formatting` and `metadata`
+records using the same `{ "verdict": "pass", "evidence": "..." } shape.
+Old version-1 soundness receipts, omitted or out-of-order items, failed or missing
+check records, stale hashes, and partial frontiers cannot authorize an attempt.
+
+The owner must drain external repair writers and attest that no writer scopes
+remain. Native writers are checked independently by the engine. After validating
+the ordered receipt rows, the engine rehashes the entire selected snapshot and
+archives the consumed request and receipt under
+`STATE_DIR/owner-gate-history/ATTEMPT.json` before starting the native battery.
+Never copy checks into a new attempt without the required current pass.
 
 Logical dependency order uses `deps`. Definition discharges through
 `justified_by` remain current, hash-bound prerequisite context and may point to

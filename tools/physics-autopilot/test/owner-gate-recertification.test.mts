@@ -20,7 +20,6 @@ function fixture(t: any) {
   const manifests = [{ id: 'test-page', category: 'test', requires: [], items: [
     { id: 'def-consumer', deps: ['def-supplier'] }, { id: 'def-supplier', deps: [] }] }];
   writeFileSync(join(repo, 'research/demo-batch-1.pages.json'), JSON.stringify(manifests));
-  writeFileSync(join(repo, 'research/demo-review.md'), 'Actual supplier and consumer review evidence.');
   for (const [id, deps] of [['def-supplier', '[]'], ['def-consumer', '[def-supplier]']])
     writeFileSync(join(repo, `items/${id}.md`), `---\nid: ${id}\nkind: definition\ndeps: ${deps}\n---\n## Definition\nA precise claim.\n`);
   const gates: any[] = [{ id: 'first', argv: ['node', '-e', 'process.exit(0)'] }];
@@ -28,11 +27,12 @@ function fixture(t: any) {
   const args: any = { ctx, gates, stages };
   function receipt(edit: (receipt: any) => void = () => {}) {
     const request = JSON.parse(readFileSync(join(config.stateDir, 'owner-gate-request.json'), 'utf8'));
-    const receipt: any = { version: 1, attempt: request.attempt, snapshotSha256: request.snapshot.sha256,
+    const receipt: any = { version: 2, recertificationScope: 'formatting-metadata-only', attempt: request.attempt, snapshotSha256: request.snapshot.sha256,
       reviewer: 'owner', writersDrained: true, writerScopes: [], reviewStartedAt: request.createdAt,
       reviewedAt: new Date().toISOString(), items: request.snapshot.items.map((item: any) => ({ ...item,
-        verdict: 'sound', review: `Checked ${item.id} against current prerequisite and source evidence.`,
-        evidence: [{ path: 'research/demo-review.md', sha256: sha(readFileSync(join(repo, 'research/demo-review.md'), 'utf8')) }] })) };
+        verdict: 'format-metadata-pass',
+        formatting: { verdict: 'pass', evidence: `Checked ${item.id}: structural headings and Markdown formatting.` },
+        metadata: { verdict: 'pass', evidence: `Checked ${item.id}: current ID, kind, provenance and dependency metadata.` } })) };
     edit(receipt);
     writeFileSync(join(config.stateDir, 'owner-gate-receipt.json'), JSON.stringify(receipt));
   }
@@ -46,12 +46,19 @@ test('missing receipt holds; ordered complete current owner receipt authorizes o
   assert.equal(authorizeOwnerGate(f.args).ok, true);
   assert.match(authorizeOwnerGate(f.args).why!, /Stale/);
 });
-test('rejects omitted, unordered, unreviewed and writer-scoped receipts', t => {
+test('rejects empty, omitted, unordered, invalid format/metadata and writer-scoped receipts', t => {
   const f = fixture(t);
   assert.equal(authorizeOwnerGate(f.args).ok, false);
   for (const edit of [
-    (r: any) => r.items.pop(), (r: any) => r.items.reverse(),
-    (r: any) => r.items[0].review = '', (r: any) => r.items[0].evidence = [],
+    (r: any) => r.items = [], (r: any) => r.items.pop(), (r: any) => r.items.reverse(),
+    (r: any) => r.items[0].verdict = 'sound',
+    (r: any) => r.items[0].formatting.verdict = 'fail',
+    (r: any) => r.items[0].metadata.verdict = 'fail',
+    (r: any) => r.items[0].formatting.evidence = '',
+    (r: any) => r.items[0].metadata.evidence = '   ',
+    (r: any) => r.items[0].metadata = null,
+    (r: any) => r.version = 1,
+    (r: any) => r.recertificationScope = 'mathematical-soundness',
     (r: any) => r.writerScopes = ['items/def-supplier.md'],
     (r: any) => r.reviewStartedAt = '2000-01-01T00:00:00Z',
   ]) { f.receipt(edit); assert.equal(authorizeOwnerGate(f.args).ok, false); }
@@ -59,9 +66,9 @@ test('rejects omitted, unordered, unreviewed and writer-scoped receipts', t => {
   assert.match(authorizeOwnerGate({ ...f.args, writers: ['native-worker'] }).why!, /Live writers/);
   assert.equal(authorizeOwnerGate(f.args).ok, true);
 });
-test('mutated frontier, prerequisites, evidence or exact battery invalidate authorization', t => {
+test('mutated frontier, prerequisites or exact battery invalidate authorization', t => {
   const f = fixture(t);
-  for (const file of ['items/def-supplier.md', 'research/demo-review.md', 'research/demo-batch-1.pages.json']) {
+  for (const file of ['items/def-supplier.md', 'research/demo-batch-1.pages.json']) {
     authorizeOwnerGate(f.args); f.receipt();
     writeFileSync(join(f.repo, file), `${readFileSync(join(f.repo, file), 'utf8')}\n`);
     assert.equal(authorizeOwnerGate(f.args).ok, false);
@@ -161,15 +168,15 @@ test('comma paths, glob matches and implicit readiness are bound; observer repor
   writeFileSync(join(f.repo, 'research/demo-owner-observer.json'), '{"updated":true}');
   assert.equal(gateReviewSnapshot(f.ctx, f.gates, f.stages).sha256, snapshot.sha256);
 });
-test('current Step 7 certification and its transitive mathematical evidence invalidate stale receipts', t => {
+test('current Step 7 native certification inputs invalidate stale receipts without a detailed review', t => {
   const f = fixture(t), dir = join(f.repo, 'research/demo-step7-v2');
   mkdirSync(dir);
-  const evidence = join(dir, 'current-proof-review.json');
-  writeFileSync(evidence, '{"mathematicalEvidence":"current"}');
+  const evidence = join(dir, 'current-native-input.json');
+  writeFileSync(evidence, '{"nativeInput":"current"}');
   writeFileSync(join(dir, 'certification.json'), JSON.stringify({ evidence: { [evidence]: sha(readFileSync(evidence, 'utf8')) } }));
   f.gates[0].argv = ['node', 'tools/physics-support/step7-workflow.mjs', 'verify-wave', '--run', 'demo'];
   authorizeOwnerGate(f.args); f.receipt();
-  writeFileSync(evidence, '{"mathematicalEvidence":"changed"}');
+  writeFileSync(evidence, '{"nativeInput":"changed"}');
   assert.equal(authorizeOwnerGate(f.args).ok, false);
 });
 test('consumed durable history prevents replay after a crash before request replacement', t => {
@@ -199,4 +206,29 @@ test('native execution uses the exact authorized resolved descriptors and stamps
   assert.equal(calls, 2);
   assert.equal(readFileSync(marker, 'utf8'), 'authorized');
   assert.ok(state.stage(stage.id).gatesPassedAt);
+});
+test('formatting and metadata passes authorize without proof-review evidence or soundness attestation', t => {
+  const f = fixture(t);
+  authorizeOwnerGate(f.args); f.receipt();
+  const receipt = JSON.parse(readFileSync(join(f.config.stateDir, 'owner-gate-receipt.json'), 'utf8'));
+  assert.equal(receipt.recertificationScope, 'formatting-metadata-only');
+  assert.ok(receipt.items.every((item: any) => item.review === undefined && item.evidence === undefined && item.verdict !== 'sound'));
+  assert.equal(authorizeOwnerGate(f.args).ok, true);
+});
+test('plan-only gates require separate format and metadata passes without a mathematics review', t => {
+  const f = fixture(t);
+  const path = join(f.repo, 'research/demo-batch-1.pages.json');
+  const pages = JSON.parse(readFileSync(path, 'utf8'));
+  pages[0].items = []; writeFileSync(path, JSON.stringify(pages));
+  f.args.stages = ['1-drift'];
+  authorizeOwnerGate(f.args);
+  for (const checks of [undefined, { formatting: { verdict: 'pass', evidence: 'Checked page structure.' } },
+    { formatting: { verdict: 'fail', evidence: 'Malformed page structure.' }, metadata: { verdict: 'pass', evidence: 'Checked plan metadata.' } }]) {
+    f.receipt(r => r.planChecks = checks);
+    assert.equal(authorizeOwnerGate(f.args).ok, false);
+  }
+  f.receipt(r => r.planChecks = {
+    formatting: { verdict: 'pass', evidence: 'Checked current manifest structure and page headings.' },
+    metadata: { verdict: 'pass', evidence: 'Checked current page identities, kinds, classification and prerequisites.' } });
+  assert.equal(authorizeOwnerGate(f.args).ok, true);
 });

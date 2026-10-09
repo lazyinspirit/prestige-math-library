@@ -1,4 +1,5 @@
-// This is an authorization boundary, not an automatic mathematical reviewer.
+// This boundary certifies formatting and metadata only; native content gates
+// retain their mathematical and physical review responsibilities.
 import { existsSync, readFileSync, readdirSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
@@ -7,6 +8,9 @@ import { markdownFiles, readItem } from '../../physics-support/physics-content.m
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const json = value => JSON.stringify(value);
+const RECERTIFICATION_SCOPE = 'formatting-metadata-only';
+const checkPassed = check => check?.verdict === 'pass'
+  && typeof check.evidence === 'string' && check.evidence.trim().length > 0;
 const readJSON = path => JSON.parse(readFileSync(path, 'utf8'));
 function atomic(path, value) {
   mkdirSync(resolve(path, '..'), { recursive: true });
@@ -130,8 +134,8 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   }
   bind(join(research, 'plan-spec.json'));
   // Bind inputs selected by the native descriptors rather than operational
-  // run reports. Individually cited mathematical review evidence is separately
-  // rehashed when validating the owner's receipt.
+  // run reports. Hashing native proof and source inputs preserves currency;
+  // it does not require detailed mathematical or physical review here.
   const battery = gates.map(gate => ({ id: gate.id,
     argv: typeof gate.argv === 'function' ? gate.argv(ctx) : gate.argv,
     needs: typeof gate.needs === 'function' ? gate.needs() : gate.needs ?? [],
@@ -197,7 +201,7 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     // graph rather than including every historic round or progress report.
     bindCertificateEvidence(join(directory, 'certification.json'), bind, ctx.repo);
   }
-  const body = { run: ctx.run, repo: resolve(ctx.repo), stages, scopeKind: planOnly ? 'plan' : 'items',
+  const body = { recertificationScope: RECERTIFICATION_SCOPE, run: ctx.run, repo: resolve(ctx.repo), stages, scopeKind: planOnly ? 'plan' : 'items',
     pages: [...scope.pages].sort(), items: ordered, battery,
     inputs: [...inputs].sort(([a], [b]) => a.localeCompare(b)).map(([path, sha256]) => ({ path, sha256 })) };
   return { ...body, sha256: digest(json(body)) };
@@ -228,7 +232,8 @@ function filesBelowIfDirectory(path) {
 }
 
 /** Called only by the drained native level join. One owner receipt authorizes
- * exactly one full native battery; failed attempts and crashes need fresh review. */
+ * exactly one full native battery; failed attempts and crashes need fresh
+ * formatting/metadata checks, without a detailed content review. */
 export function authorizeOwnerGate({ ctx, gates, stages, writers = [] }) {
   if (writers.length) return { ok: false, why: `Live writers: ${writers.join(', ')}` };
   const requestPath = join(ctx.config.stateDir, 'owner-gate-request.json');
@@ -242,40 +247,35 @@ export function authorizeOwnerGate({ ctx, gates, stages, writers = [] }) {
     if (!request || request.consumedAt
       || existsSync(join(ctx.config.stateDir, 'owner-gate-history', `${request.attempt}.json`))
       || request.snapshot.sha256 !== snapshot.sha256) {
-      request = { version: 1, attempt: randomUUID(), createdAt: new Date().toISOString(), snapshot };
+      request = { version: 2, attempt: randomUUID(), createdAt: new Date().toISOString(), snapshot };
       atomic(requestPath, request);
     }
     if (!existsSync(receiptPath)) throw Error(`Missing owner recertification: ${receiptPath}`);
     const receipt = readJSON(receiptPath);
-    if (receipt.version !== 1 || receipt.attempt !== request.attempt || receipt.snapshotSha256 !== snapshot.sha256)
+    if (receipt.version !== 2 || receipt.recertificationScope !== RECERTIFICATION_SCOPE
+      || receipt.attempt !== request.attempt || receipt.snapshotSha256 !== snapshot.sha256)
       throw Error('Stale owner receipt: attempt or current frontier hash differs');
     if (!receipt.reviewer?.trim() || receipt.writersDrained !== true || !Array.isArray(receipt.writerScopes)
       || receipt.writerScopes.length) throw Error('Owner receipt must identify reviewer and attest every writer scope drained');
     const start = Date.parse(receipt.reviewStartedAt), end = Date.parse(receipt.reviewedAt);
     if (!Number.isFinite(start) || !Number.isFinite(end) || start < Date.parse(request.createdAt)
-      || end < start || end > Date.now()) throw Error('Owner review must follow this attempt request');
+      || end < start || end > Date.now()) throw Error('Owner formatting/metadata checks must follow this attempt request');
     if (!Array.isArray(receipt.items) || receipt.items.length !== snapshot.items.length)
       throw Error('Owner receipt must recertify the complete frontier');
     for (const [index, item] of snapshot.items.entries()) {
-      const reviewed = receipt.items[index];
-      if (reviewed.id !== item.id || reviewed.carrierSha256 !== item.carrierSha256
-        || reviewed.manifestSha256 !== item.manifestSha256 || reviewed.verdict !== 'sound'
-        || !reviewed.review?.trim() || !Array.isArray(reviewed.evidence) || !reviewed.evidence.length)
-        throw Error(`Missing current dependency-ordered mathematical recertification for ${item.id}`);
-      for (const evidence of reviewed.evidence) {
-        if (!evidence.path || !/^[a-f0-9]{64}$/.test(evidence.sha256)
-          || digest(readFileSync(resolve(ctx.repo, evidence.path))) !== evidence.sha256)
-          throw Error(`Missing or stale mathematical evidence for ${item.id}`);
-      }
+      const checked = receipt.items[index];
+      if (checked?.id !== item.id || checked.carrierSha256 !== item.carrierSha256
+        || checked.manifestSha256 !== item.manifestSha256 || checked.verdict !== 'format-metadata-pass'
+        || !checkPassed(checked.formatting) || !checkPassed(checked.metadata))
+        throw Error(`Missing current dependency-ordered formatting/metadata recertification for ${item.id}`);
     }
-    if (snapshot.scopeKind === 'plan' && !receipt.planReview?.trim()) throw Error('Plan gates require explicit current plan review');
-    // Re-read the complete frontier after receipt/evidence validation to reject
+    if (snapshot.scopeKind === 'plan'
+      && (!checkPassed(receipt.planChecks?.formatting) || !checkPassed(receipt.planChecks?.metadata)))
+      throw Error('Plan gates require explicit current formatting and metadata passes');
+    // Re-read the complete frontier after format/metadata receipt validation to reject
     // an input mutation during validation. Owner attestation covers external
     // editors; native inflight/adopted writers are checked at the caller.
     if (gateReviewSnapshot(ctx, resolvedGates, stages).sha256 !== snapshot.sha256) throw Error('Frontier changed during recertification validation');
-    for (const item of receipt.items) for (const evidence of item.evidence)
-      if (digest(readFileSync(resolve(ctx.repo, evidence.path))) !== evidence.sha256)
-        throw Error(`Mathematical evidence changed during validation for ${item.id}`);
     request.consumedAt = new Date().toISOString();
     atomic(join(ctx.config.stateDir, 'owner-gate-history', `${request.attempt}.json`), { request, receipt });
     atomic(requestPath, request);
