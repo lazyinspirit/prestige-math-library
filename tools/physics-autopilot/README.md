@@ -10,7 +10,9 @@ The default workspace is `physics/`, with private helpers in
 `tools/physics-support/`, independent briefs, state, and workflow revision.
 The stage files retain their inherited `mathlib*.mts` names.
 
-Every stage includes a mandatory physics-content gate. Physics theorems and
+Every content stage includes a mandatory physics-content gate. Step 2 only
+assigns batch groups through a bounded native tool and its structural assignment
+gate, without loading a model or content-review brief. Physics theorems and
 thought experiments share proof rules; postulates and reported experiments
 receive source and scope review. Mathematical suppliers are pinned read-only
 snapshots with unchanged canonical IDs. Mathematical consumers cannot use

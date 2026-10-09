@@ -1508,17 +1508,17 @@ export function authorResultAllowed(step, row) {
   if (row?.ok !== true || !row.ended_at || !row.started_at || !Array.isArray(row.covers)) return false;
   const label = String(row.label ?? '');
   if (Number(step) === 3) return row.role === 'alpha-high'
-    && /^(?:step3b-[a-z]|step3b-pair-[a-z0-9-]+)-[a-f0-9]{16}$/.test(label);
+    && /^(?:step3b-[a-z]+|step3b-pair-[a-z0-9-]+)-[a-f0-9]{16}$/.test(label);
   if (Number(step) === 5) return row.role === 'alpha'
-    && /^(?:5a-[a-z]|5a-batch-[1-9]\d*|5b-lead|gate-batch-[1-9]\d*-(?:[a-z]|all)|5a-gate-risk-report-[1-9]\d*-(?:[a-z]|unowned)|5[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
+    && /^(?:5a-[a-z]+|5a-batch-[1-9]\d*|5b-lead|gate-batch-[1-9]\d*-(?:[a-z]+|all)|5a-gate-risk-report-[1-9]\d*-(?:[a-z]+|unowned)|5[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
   if (Number(step) === 7) return (row.role === 'final-adjudicator'
-    && /^step7-fa-[a-z]-round-[1-9]\d*$/.test(label))
+    && /^step7-fa-[a-z]+-round-[1-9]\d*$/.test(label))
     || (row.role === 'alpha-adjudicate'
-      && /^(?:step7-v2-(?:initial|repeat)-r[1-9]\d*-u[a-zA-Z0-9_-]+|step7-[a-z]|step7-guard-(?:[a-z]|review)-round-[1-9]\d*|step7-preflight-(?:[a-z]|review)-[1-9]\d*|repair-8-(?:[a-z]-)?round-[1-9]\d*|cross-group-[a-z]-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]-)?[1-9]\d*)$/.test(label))
+      && /^(?:step7-v2-(?:initial|repeat)-r[1-9]\d*-u[a-zA-Z0-9_-]+|step7-[a-z]+|step7-guard-(?:[a-z]+|review)-round-[1-9]\d*|step7-preflight-(?:[a-z]+|review)-[1-9]\d*|repair-8-(?:[a-z]+-)?round-[1-9]\d*|cross-group-[a-z]+-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]+-)?[1-9]\d*)$/.test(label))
     || (row.role === 'alpha-repair'
       && /^step7-v2-(?:impact-initial|impact-repeat|gate)(?:-pass-[1-9]\d*)?-r[1-9]\d*-u[123]$/.test(label));
   return Number(step) === 8 && row.role === 'alpha'
-    && /^(?:step8-lead|step8-changes-adjudicate-[1-9]\d*|step8-carried-adjudicate-(?:[a-z]-)?[1-9]\d*|step8-gate-adjudication-[1-9]\d*|impact-close-[1-9]\d*|step8-close-adjudicate-[1-9]\d*|step8-close-carried-(?:[a-z]-)?[1-9]\d*|receipts(?:-fix-[1-9]\d*)?)$/.test(label);
+    && /^(?:step8-lead|step8-changes-adjudicate-[1-9]\d*|step8-carried-adjudicate-(?:[a-z]+-)?[1-9]\d*|step8-gate-adjudication-[1-9]\d*|impact-close-[1-9]\d*|step8-close-adjudicate-[1-9]\d*|step8-close-carried-(?:[a-z]+-)?[1-9]\d*|receipts(?:-fix-[1-9]\d*)?)$/.test(label);
 }
 
 function successfulAuthorResults(root, run, step) {

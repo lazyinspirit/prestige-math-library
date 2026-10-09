@@ -49,12 +49,29 @@ library. Local mathematical suppliers may be authored during a physics run,
 with purely mathematical dependencies. Ordinary supplier ordering, page
 prerequisites, B-leaf rules, and all source-retrieval gates remain in force.
 
-Every stage adds a mandatory physics-content gate: classification, kind prefixes,
+Every content stage adds a mandatory physics-content gate: classification, kind prefixes,
 mathematical boundary, relation resolution, DAG, and class-specific structure.
-Steps 1–2 validate the plan; later stages validate authored content. Class-specific
+Step 1 validates the plan; later content stages validate authored content.
+Step 2 is metadata bookkeeping with only its structural assignment gate. Class-specific
 item contracts and judge instructions distinguish source reviews from proofs.
 Proof layout may have zero steps only when every scoped item is explicitly
 nonproof; it cannot waive missing proofs for physics theorems or thought experiments.
+
+Step 2 runs `node tools/physics-support/alpha-groups.mjs --run RUN --generate`
+as a native mechanical tool, with a 120-second dispatch limit. It assigns only
+existing manifest batch/category metadata: keep categories together where they
+fit and split larger categories into stable chunks, without load balancing,
+dependency-edge optimization, source reading, content edits or item review.
+Every batch occurs exactly once, at most three per group, under the capacity-derived
+group cap (currently 80 for 80 batches). Alphabetic labels continue after `z`
+as `aa`, `ab`, etc. Existing structurally valid assignments are preserved byte
+for byte. Invalid assignments are archived with their exact prior bytes under
+`research/RUN-alpha-groups-history/SHA256.json` before replacement. Group inventory
+capacity does not change the separately configured global concurrency limit.
+Conflicting category/capacity metadata fails explicitly. No model,
+physics instructions or general Alpha brief loads during this dispatch. The sole
+Step-2 gate is `alpha-groups`; historical successful Alpha result names remain
+recognized and the native engine owns all transitions.
 
 Use the same pause/resume/status/retry controls through the physics entrypoint.
 Outside the authorized Step-7 loop, gate failures remain owner-held. Publication

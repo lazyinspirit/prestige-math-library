@@ -84,6 +84,21 @@ future stages defer selection until execution and write no run state.
 
 - Steps 1–4: review drift and scaffold, assign groups, audit scaffolds and
   author, then splice the plan.
+- Step 2 only assigns existing batches to groups. Native `2-assign` runs
+  `node tools/alpha-groups.mjs --run RUN --generate` as a mechanical tool with
+  a 120-second dispatch limit; no assignment model or author brief is loaded.
+  The generator uses only current batch/category metadata, keeps categories
+  together when they fit, and splits larger categories into stable chunks.
+  It performs no load balancing, dependency-edge search, source reading or
+  content review. Every batch occurs once, with at most three per group and
+  the capacity-derived group cap (currently 80 for 80 batches). Labels continue
+  after `z` as `aa`, `ab`, etc. Existing structurally valid assignments are
+  preserved byte for byte. Invalid assignments are archived with their exact prior
+  bytes under `research/RUN-alpha-groups-history/SHA256.json` before replacement.
+  Conflicting cohesion/capacity metadata fails explicitly. Group inventory
+  capacity does not change the separately configured global concurrency limit.
+  The sole Step-2 gate is structural `alpha-groups` validation; native transitions
+  and successful historical Alpha assignment results remain supported.
 - Steps 5–7: independent reader/refuter review and cross-group closure, frozen
   item judgment, then frontier repair, rejudgment and the scoped gate.
 - Steps 8–9: certify changed draft items and impacts, then close contracts,

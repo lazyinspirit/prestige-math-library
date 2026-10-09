@@ -27,6 +27,7 @@ import { loadAuditorCreatedCertifications } from '../../auditor-created-items.mj
 import { certifyCompletedAuditorItems } from '../../step3-auditor-items.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
+import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
 import { loadStep3, scopeHash, itemHash, checkStep3 } from '../../step3-decisions.mjs';
 import { step1Decision } from '../../step1-decisions.mjs';
 import { dependencyLevels, orderedItems } from '../../item-dependency-levels.mjs';
@@ -207,31 +208,15 @@ export function pairAuthorArtifacts(ctx: any, unit: string): string[] {
   return [...new Set(out)];
 }
 
-/**
- * Group Alphas: one per <=3 batches, read from the assignment an agent made at
- * stage `2-assign` and `tools/alpha-groups.mjs` validated.
- *
- * WHY THIS IS NOT A CHUNK OF THE SORTED LIST ANY MORE. It used to be exactly
- * that — `b.slice(i, i + 3)` — which is deterministic but not sound. On
- * `frontier-14` it handed one Alpha linear-algebra + number-theory +
- * category-theory, three unrelated subjects at once, while splitting topology's
- * three batches across two different Alphas so neither could see the
- * cross-references between its own pages. Minimising what crosses a group
- * boundary is a judgment about mathematical relatedness; category is a strong
- * proxy but does not settle the residual, because five categories over three
- * Alphas forces somebody to pair two singletons.
- *
- * The fallback is the old positional chunking, used only before the assignment
- * exists — `autopilot plan` and `doctor` both call this while `2-assign` is
- * still ahead of them, and neither dispatches anything.
- */
+/** Read the native Step-2 assignment. Planning/doctor use positional groups
+ * only before that validated artifact exists; neither dispatches this fallback. */
 export function alphaGroups(ctx: any, size = 3): Array<{ label: string; covers: string[] }> {
   const assigned = readAlphaGroups(ctx);
   if (assigned) return assigned;
   const b = batches(ctx);
   const out: any[] = [];
   for (let i = 0; i < b.length; i += size) {
-    out.push({ label: String.fromCharCode(97 + out.length), covers: b.slice(i, i + size) });
+    out.push({ label: alphabeticLabel(out.length), covers: b.slice(i, i + size) });
   }
   return out;
 }
@@ -1566,42 +1551,18 @@ export const stages = [
   //   the step-9 owner report           -> a supervisor agent, last stage
   // ASSIGN BATCHES TO ALPHAS BEFORE ANY ALPHA IS DISPATCHED (owner, 2026-08-16).
   //
-  // This is a judgment, not a chunking: minimise what crosses a group boundary,
-  // and keep each Alpha inside one category wherever a category fits in one.
-  // It is NOT `dispatch-planning` — the engine still decides which units are
-  // uncovered and what to dispatch. This decides only how already-owed work is
-  // grouped, and `alpha-groups.mjs` checks every structural property of the
-  // answer rather than trusting it: full coverage, no duplicate batch, the lane
-  // and per-group caps, a stated rationale, and no avoidable category split.
+  // Step 2 only groups current manifest batches through the native tool.
   {
     id: '2-assign',
-    label: 'assign batches to group Alphas',
+    label: 'assign batches to groups (mechanical)',
     units: () => ['all'],
-    // THE SAME PATTERN-VS-ROLE DEFECT `7-adjudicate` CARRIED, found by the
-    // class guard in `test/step7-groups.test.mts` on 2026-08-25. The plan moved
-    // to role `alpha-assign` when that lane was introduced (2026-08-24) and this
-    // line did not, so a re-run would write
-    // `alpha-assign-assign.result.json` and match nothing — the stage would
-    // re-dispatch a completed partition forever. It has not bitten only because
-    // frontier-18's `2-assign` ran before the lane existed and its result file
-    // records role `alpha`.
-    //
-    // Both spellings are recognised deliberately: the new one because it is what
-    // the plan now produces, the old one because frontier-18's result is on disk
-    // under it and narrowing the pattern would reopen a barrier the run passed
-    // days ago. Not written through `resultPattern`, which takes one role.
-    pattern: /^alpha-(?:assign-)?assign\.result\.json$/,
+    // Keep both historical Alpha result spellings and the new native result.
+    pattern: /^(?:tool-assign|alpha-(?:assign-)?assign)\.result\.json$/,
     artifacts: (ctx) => `research/${ctx.run}-alpha-groups.json`,
-    modelProfile: DEEPSEEK_FLASH_MAX,
     concurrency: 1,
-    plan: (ctx) => [{
-      role: 'alpha-assign',
-      label: 'assign',
-      job: 'partitioning',
-      covers: ['all'],
-      brief: 'briefs/alpha.md',
-      task: [`research/${ctx.run}-alpha-assign.task.md`, 'briefs/alpha-assign.md'],
-      timeout: 3600,
+    plan: (ctx) => [{ role: 'tool', label: 'assign',
+      job: 'bookkeeping-mechanical', covers: ['all'], timeout: 120,
+      argv: ['node', 'tools/alpha-groups.mjs', '--run', ctx.run, '--generate'],
     }],
     gates: (ctx) => [gate('alpha-groups', ['node', 'tools/alpha-groups.mjs', '--run', ctx.run], {
       liveness: { pattern: /(\d+) group\(s\) over/.source, min: 1, unit: 'groups' },
@@ -1899,13 +1860,13 @@ export const stages = [
     units: (ctx) => ['sweep', ...alphaGroups(ctx).map((g: any) => String(g.label))],
     // Two result-file families in one stage, so the pattern is written out
     // rather than derived: `resultPattern` takes one role. The group half is
-    // `<role>-<label>` with the label being the bare group letter, which is why
+    // `<role>-<label>` with a lowercase alphabetic group label, which is why
     // the repair round below is labelled `read-again-*` — digits and the
     // longer name keep it outside this pattern, so a re-read is never mistaken
     // for the unit's own coverage.
     pattern: /^(?:tool-judge-sweep|alpha-group-read-[a-z]+)\.result\.json$/,
-    // One judge-sweep controller plus one read-only lane for each of nine
-    // groups. The sweep's own item pool is independently bounded.
+    // One judge-sweep controller plus a read-only unit for every assigned group;
+    // global concurrency and the sweep's own item pool remain separately bounded.
     concurrency: MAX_GROUPS + 1,
     // The judge sweep is a TOOL RUN, not an agent dispatch — judge-sweep.mjs
     // owns its own lane pools, retry semantics and attestation. The A-page ids

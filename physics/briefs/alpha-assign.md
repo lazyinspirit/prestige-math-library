@@ -16,45 +16,27 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 ---
 
-# Assign batches to group Alphas
+# Step 2: native batch-group assignment
 
-**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
-
-This dispatch produces only `research/<run>-alpha-groups.json`. It assigns the
-run's existing batches to Alpha groups; it cannot create, split, merge, or
-renumber batches. Step 0 creates batches, and Step 1 fills their item lists.
-Do not review content, author mathematics, or drive a workflow transition.
-
-Read the current facts before choosing a partition:
+Step 2 runs a bounded deterministic tool. This reference brief is not loaded by
+the stage; no model job or general author/reviewer brief is dispatched.
 
 ```sh
-node tools/physics-support/alpha-groups.mjs --run <run> --facts
-```
-
-Write a JSON array of objects with `label`, `covers`, and `rationale` fields.
-The validator requires a single lowercase-letter label, a nonempty batch list,
-and a concrete rationale of at least 20 characters.
-
-The partition must cover every actual batch exactly once, use at most ten
-groups, and give no group more than three batches. Keep a category together
-whenever all of its batches fit in one group; the validator enforces this.
-
-Use the `items` count for every batch in `--facts` to balance authoring load.
-For each proposed group, sum the item counts of its covered batches and compare
-the group totals. Prefer a partition with similar group totals: avoid combining
-several large batches in one group while other groups have much less to author.
-Within the category and capacity constraints, reduce the largest group total
-and the spread between group totals before optimizing cross-group dependency
-edges or residual mathematical affinity. Do not pretend an indivisible large
-batch can be balanced by Step 2; report that limit explicitly. Include each
-group's item total and the load/coherence tradeoff in its rationale. Do not
-rely on batch-number order.
-
-Validate the finished artifact before returning:
-
-```sh
+node tools/physics-support/alpha-groups.mjs --run <run> --generate
 node tools/physics-support/alpha-groups.mjs --run <run>
 ```
 
-No permission prompts. Record a genuine blocker in the artifact's rationale or
-your final report rather than broadening the scope.
+The tool reads only current manifest batch IDs and category metadata. It writes
+`research/<run>-alpha-groups.json`, an array of `{label, covers, rationale}`.
+Each existing batch occurs exactly once, with at most three batches per group
+and the group cap derived from native batch capacity (currently 80 for 80 batches).
+This is assignment inventory, not concurrent workers; global concurrency stays unchanged.
+Labels are lowercase alphabetic identifiers: `a` through `z`, then `aa`, etc.
+
+Categories that fit in one group stay together. Larger categories split into
+stable chunks; remaining singleton batches fill available group space in stable
+category/batch order. Conflicting category or capacity metadata fails explicitly.
+An existing assignment that passes structural validation is preserved byte for
+byte on rerun. The tool neither changes batches nor reads item loads, dependency
+edges, sources or item bodies. It does not optimize partitions or review content.
+The native assignment gate validates the result; the engine owns transitions.
