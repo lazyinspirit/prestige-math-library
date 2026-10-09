@@ -222,6 +222,22 @@ pass. Pre-author items bind their actual manifest and explicitly absent carrier;
 check their scaffold structure and metadata without inventing an authored body.
 An item gate cannot authorize an empty subject selection.
 
+Finite smoke obligations select named checks from
+`tools/physics-support/finite-smoke.mjs` through each item's proof contract
+`finite_smoke` array. Supply an exact assertion excerpt from that item's current
+carrier; unknown check names and absent excerpts fail. An empty array produces
+no computation and cannot establish native gate liveness. Select an authentic
+bounded check of an authored assertion, rather than filling a coverage quota.
+`sr-guided-ring-sagnac-worked-reunions` checks the numerical guided-ring example
+at velocity ratio 3/5 and its inertial limit: it enumerates angular coincidences
+on an exact rational grid, derives clock conversion from the Minkowski norm,
+and derives both holonomies from rest-line orthogonality. The contract may give
+`expected_return_ticks` (units pi R/(4c)) and the four `expected_*delay` /
+`expected_*holonomy` rational pairs (units pi R/c). This tests the worked model's
+arithmetic and conventions; it establishes neither the general guided-ring
+theorem nor empirical applicability. Run its focused CLI regression with
+`node --test tools/physics-support/finite-smoke-sagnac.test.mjs`.
+
 Plan-only gates may select nonempty page manifests before item inventories exist.
 Their receipts also require `planChecks` with separate `formatting` and `metadata`
 records using the same `{ "verdict": "pass", "evidence": "..." } shape.

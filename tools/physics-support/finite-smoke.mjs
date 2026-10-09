@@ -87,6 +87,72 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  'sr-guided-ring-sagnac-worked-reunions': ({
+    expected_return_ticks = [20, 5],
+    expected_chart_delay = [15, 4],
+    expected_proper_delay = [3, 1],
+    expected_chart_holonomy = [15, 8],
+    expected_proper_holonomy = [3, 2],
+  } = {}) => {
+    // The worked example has beta=3/5. Use u=ct/(pi R), ticks u=k/4
+    // and angular phases in units pi/20. Enumerate coincidences modulo 40,
+    // independently of the theorem's closed-form return-time formulas.
+    // Every positive coincidence lies on this grid: the relative phases
+    // are k/10 and -2k/5 multiples of pi (k/4 at beta=0).
+    const fail = summary => ({ ok: false, summary });
+    const sameFraction = (actual, expected) => Array.isArray(expected)
+      && expected.length === 2 && expected.every(Number.isSafeInteger)
+      && expected[1] > 0
+      && BigInt(actual[0]) * BigInt(expected[1]) === BigInt(expected[0]) * BigInt(actual[1]);
+    if (!Array.isArray(expected_return_ticks) || expected_return_ticks.length !== 2
+      || !expected_return_ticks.every(Number.isSafeInteger)) return fail('expected_return_ticks must contain two integers');
+    let phaseCases = 0;
+    let rotating;
+    for (const materialRate of [3, 0]) {
+      const reunions = [[], []];
+      for (let tick = 1; tick <= 40; tick++) {
+        for (const [index, signalRate] of [[0, 5], [1, -5]]) {
+          if (((signalRate - materialRate) * tick) % 40 === 0) reunions[index].push(tick);
+          phaseCases++;
+        }
+      }
+      const expected = materialRate === 3 ? expected_return_ticks : [8, 8];
+      for (let direction = 0; direction < 2; direction++) {
+        if (reunions[direction][0] !== expected[direction])
+          return fail(`first reunion for material phase rate ${materialRate}, direction ${direction}: tick ${reunions[direction][0]}, expected ${expected[direction]}`);
+        // All later hits must be exact positive multiples of the first hit.
+        if (reunions[direction].some((tick, i) => tick !== (i + 1) * reunions[direction][0]))
+          return fail('reunion enumeration has an inconsistent winding sequence');
+      }
+      if (materialRate === 3) rotating = reunions.map(hits => hits[0]);
+      else if (reunions[0][0] - reunions[1][0] !== 0) return fail('inertial delay did not vanish');
+    }
+    const chartDelay = [rotating[0] - rotating[1], 4];
+    // Derive the clock factor from the Minkowski norm of the detector's
+    // tangent (5,3), rather than assume the example's gamma=5/4.
+    const normSquared = -5 * 5 + 3 * 3;
+    const clockNumerator = Math.sqrt(-normSquared);
+    if (!Number.isInteger(clockNumerator)) return fail('clock factor is not exact on the rational witness');
+    const properDelay = [chartDelay[0] * clockNumerator, chartDelay[1] * 5];
+    // A unit material-angle increment has tangent (a, beta*a+1).
+    // Orthogonality to (5,3) gives (-25+9)a+15=0, hence a=15/16.
+    // Integrating this constant slope over 2pi yields the holonomy in pi R/c.
+    const slope = [5 * 3, -normSquared];
+    if (-25 * slope[0] + 9 * slope[0] + 15 * slope[1] !== 0)
+      return fail('rest-line tangent is not Minkowski-orthogonal to the detector');
+    const chartHolonomy = [2 * slope[0], slope[1]];
+    const properHolonomy = [chartHolonomy[0] * clockNumerator, chartHolonomy[1] * 5];
+    for (const [name, actual, expected] of [
+      ['chart delay', chartDelay, expected_chart_delay],
+      ['proper delay', properDelay, expected_proper_delay],
+      ['chart holonomy', chartHolonomy, expected_chart_holonomy],
+      ['proper holonomy', properHolonomy, expected_proper_holonomy],
+    ]) if (!sameFraction(actual, expected)) return fail(`${name} is ${actual[0]}/${actual[1]}, expected ${JSON.stringify(expected)}`);
+    if (!sameFraction(chartDelay, [2 * chartHolonomy[0], chartHolonomy[1]])
+      || !sameFraction(properDelay, [2 * properHolonomy[0], properHolonomy[1]]))
+      return fail('delay is not twice the independently derived rest-line holonomy');
+    return { ok: true, summary: `enumerated ${phaseCases} exact angular-phase comparisons over 40 positive ticks for beta=3/5 and beta=0; first rotating reunions 20,5 (units pi R/(4c)), inertial reunions 8,8; checked chart/proper delays and both factor-2 holonomies from Minkowski orthogonality` };
+  },
   'max-cut-triangle-conditional-expectation': ({ expected_cut = 2 } = {}) => {
     // Count the eight placements and all fifteen prefixes independently of
     // the edge-contribution formula used by the worked example.
