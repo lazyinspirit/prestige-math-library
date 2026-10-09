@@ -61,6 +61,12 @@ item contracts and judge instructions distinguish source reviews from proofs.
 Proof layout may have zero steps only when every scoped item is explicitly
 nonproof; it cannot waive missing proofs for physics theorems or thought experiments.
 
+Step 3b item receipts use the minimal version-2 bookkeeping format described in
+../WORKFLOW.md: automatic identity/hash/time, decision and owner authority, defect
+types, and one concise repair sentence. Do not serialize confidence, examined
+dependency lists or detailed reviews. Step 3a and later stages retain their
+existing evidence requirements; legacy item receipts remain readable.
+
 Step 2 runs `node tools/physics-support/alpha-groups.mjs --run RUN --generate`
 as a native mechanical tool, with a 120-second dispatch limit. It assigns only
 existing manifest batch/category metadata: keep categories together where they

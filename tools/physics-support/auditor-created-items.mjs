@@ -13,6 +13,7 @@ import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
 import { split, yaml } from './pathway-lib.mjs';
+import { isMinimalItemReceipt } from './step3-decisions.mjs';
 
 const safe = (value, what = 'value') => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error(`Invalid ${what}`);
@@ -702,10 +703,10 @@ function provenanceRows(root, run, step, cache = new Map()) {
         throw Error(`${row.id}: missing owner recertification provenance`);
       const owner = read(ownerPath);
       if (sha(JSON.stringify(owner)) !== marker.sha256 || owner.at !== marker.at
-        || owner.version !== 1 || owner.run !== run || owner.phase !== 'item'
+        || !(owner.version === 1 || isMinimalItemReceipt(owner)) || owner.run !== run || owner.phase !== 'item'
         || owner.target !== row.id || owner.owner !== true || owner.decision !== 'repaired'
-        || owner.sha256 !== row.sha256 || !Array.isArray(owner.dependencies)
-        || JSON.stringify(owner.dependencies) !== JSON.stringify(row.dependencies)
+        || owner.sha256 !== row.sha256 || (owner.version === 1 && (!Array.isArray(owner.dependencies)
+          || JSON.stringify(owner.dependencies) !== JSON.stringify(row.dependencies)))
         || !String(owner.reason ?? '').trim())
         throw Error(`${row.id}: invalid owner recertification provenance`);
     }

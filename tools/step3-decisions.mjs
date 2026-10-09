@@ -19,12 +19,43 @@ const read = p => existsSync(p) ? json(p) : null;
 const loadedSnapshots = new WeakSet();
 const file = (root, run, stage, id, owner) => join(root, 'research',
   `${safe(run)}-step${stage}-${owner ? 'owner' : 'review'}-${safe(id)}.json`);
+const itemDecisions = owner => owner ? ['repaired', 'hold', 'reopen'] : ['accept', 'repaired', 'escalate'];
+function validateItemBookkeeping(reason, defects, decision) {
+  if (typeof reason !== 'string' || !reason.trim() || reason.length > 400 || /[\r\n]/.test(reason)
+    || /[.!?]\s+\S/.test(reason))
+    throw Error('Item reason must be one concise sentence (1–400 characters, no newlines)');
+  if (!Array.isArray(defects) || defects.some(value => typeof value !== 'string'
+    || !value.trim() || value.length > 80 || value !== value.trim() || /[\r\n]/.test(value)))
+    throw Error('Item defects must be an array of nonempty defect-type labels (1–80 characters, no newlines)');
+  if (decision !== 'accept' && !defects.length)
+    throw Error(`${decision} requires at least one defect type`);
+}
+function validateItemV2(row, id) {
+  const fields = ['version', 'run', 'phase', 'target', 'decision', 'owner', 'sha256', 'at', 'reason', 'defects',
+    ...(row.decision === 'reopen' ? ['reopens_review_sha256'] : [])];
+  if (row.version !== 2 || row.phase !== 'item' || typeof row.owner !== 'boolean'
+    || typeof row.run !== 'string' || typeof row.target !== 'string'
+    || !/^[a-zA-Z0-9_-]+$/.test(row.run) || !/^[a-zA-Z0-9_-]+$/.test(row.target)
+    || Object.keys(row).length !== fields.length || fields.some(key => !Object.prototype.hasOwnProperty.call(row, key))
+    || !itemDecisions(row.owner).includes(row.decision) || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')
+    || typeof row.at !== 'string' || !Number.isFinite(Date.parse(row.at))
+    || (row.decision === 'reopen' && !/^[a-f0-9]{64}$/.test(row.reopens_review_sha256 ?? '')))
+    throw Error(`Invalid version 2 Step 3 item receipt for ${id}`);
+  validateItemBookkeeping(row.reason, row.defects, row.decision);
+}
+export function isMinimalItemReceipt(row) {
+  if (!row || typeof row !== 'object' || Array.isArray(row)) return false;
+  try { validateItemV2(row, row.target); return true; } catch { return false; }
+}
 function receipt(s, phase, id, owner) {
   const row = read(file(s.root, s.run, phase === 'scope' ? '3a' : '3b', id, owner));
-  if (row && (row.version !== 1 || row.run !== s.run || row.phase !== phase || row.target !== id || row.owner !== owner))
+  if (row && (!((row.version === 1) || (phase === 'item' && row.version === 2))
+    || row.run !== s.run || row.phase !== phase || row.target !== id || row.owner !== owner))
     throw Error(`Invalid Step 3 receipt identity for ${id}`);
+  if (row?.version === 2) validateItemV2(row, id);
   return row;
 }
+const receiptItemHash = (s, id, row) => row.version === 1 ? itemHash(s, id, row.dependencies) : itemHash(s, id);
 
 function auditorCertifications(s) {
   if (Object.prototype.hasOwnProperty.call(s, 'auditorCertifications')) return s.auditorCertifications;
@@ -195,16 +226,16 @@ export function itemDecision(s, id) {
   const owner = receipt(s, 'item', id, true);
   let reopenedReviewHash = null;
   if (owner) {
-    if (!Array.isArray(owner.dependencies)) throw Error(`Missing dependency audit for ${id}`);
+    if (owner.version === 1 && !Array.isArray(owner.dependencies)) throw Error(`Missing dependency audit for ${id}`);
     if (owner.decision === 'reopen') {
       // Reopen is authority to do the named repair, not a mathematical verdict.
       // It deliberately survives the ensuing content change; only a fresh
-      // post-reopen author receipt can close the item.
+      // post-reopen bookkeeping receipt can close the item.
       if (!/^[a-f0-9]{64}$/.test(owner.reopens_review_sha256 ?? ''))
         throw Error(`Invalid owner reopen evidence for ${id}`);
       reopenedReviewHash = owner.reopens_review_sha256;
     } else {
-      if (owner.sha256 !== itemHash(s, id, owner.dependencies)) return { closed: false, owner: true, decision: owner,
+      if (owner.sha256 !== receiptItemHash(s, id, owner)) return { closed: false, owner: true, decision: owner,
         reason: `${id}: changed inputs require a current owner decision` };
       const closed = owner.decision === 'repaired';
       return { closed, owner: !closed, decision: owner, reason: closed ? undefined : `${id}: ${owner.reason}` };
@@ -216,19 +247,19 @@ export function itemDecision(s, id) {
   const review = receipt(s, 'item', id, false);
   if (reopenedReviewHash !== null && (!review || hash(review) === reopenedReviewHash)) return {
     closed: false, owner: false, decision: owner,
-    reason: `${id}: owner authorized repair; a fresh post-reopen item audit is required`,
+    reason: `${id}: owner authorized repair; a fresh post-reopen bookkeeping receipt is required`,
   };
   if (review) {
-    if (!Array.isArray(review.dependencies)) throw Error(`Missing dependency audit for ${id}`);
-    if (review.sha256 !== itemHash(s, id, review.dependencies)) {
+    if (review.version === 1 && !Array.isArray(review.dependencies)) throw Error(`Missing dependency audit for ${id}`);
+    if (review.sha256 !== receiptItemHash(s, id, review)) {
       if (review.decision === 'escalate') return { closed: false, owner: true, decision: review,
         reason: `${id}: changed inputs require a current owner decision` };
     } else {
-      const closed = ['accept', 'repaired'].includes(review.decision) && review.confidence === 1;
+      const closed = ['accept', 'repaired'].includes(review.decision) && (review.version === 2 || review.confidence === 1);
       return { closed, owner: !closed, decision: review, reason: closed ? undefined : `${id}: ${review.reason}` };
     }
   }
-  return { closed: false, reason: `${id}: current item audit required` };
+  return { closed: false, reason: `${id}: current item bookkeeping receipt required` };
 }
 
 export function checkStep3(s, phase) {
@@ -247,27 +278,25 @@ export function checkStep3(s, phase) {
 
 // Optional snapshot reuse is valid only for a stable, writer-drained pass. The
 // caller must re-load and check the complete current inventory before closure.
-export function recordStep3(root, { run, phase, page, item, decision, reason, owner = false, confidence, dependencies }, snapshot = undefined) {
-  if (!reason?.trim()) throw Error('An evidence/reason is required');
+export function recordStep3(root, { run, phase, page, item, decision, reason, owner = false, confidence, dependencies, defects = [] }, snapshot = undefined) {
+  if (typeof reason !== 'string' || !reason.trim()) throw Error('An evidence/reason is required');
   if (snapshot !== undefined && (!loadedSnapshots.has(snapshot) || resolve(snapshot.root) !== resolve(root) || snapshot.run !== run))
     throw Error('Stable Step 3 snapshot must be a loadStep3 context for the exact root and run');
   const s = snapshot ?? loadStep3(root, run), id = phase === 'scope' ? page : item;
   if (!['scope', 'item'].includes(phase)) throw Error('phase must be scope or item');
   const allowed = phase === 'scope' ? owner ? ['proceed', 'merge', 'enrich'] : ['sufficient', 'insufficient']
-    : owner ? ['repaired', 'hold', 'reopen'] : ['accept', 'repaired', 'escalate'];
+    : itemDecisions(owner);
   if (!allowed.includes(decision)) throw Error('Invalid decision for this role and phase');
-  if (!owner && phase === 'item' && decision !== 'escalate' && confidence !== 1)
-    throw Error('Less than 100% confidence requires escalation');
+  if (phase === 'item') validateItemBookkeeping(reason, defects, decision);
   if (!owner && phase === 'scope' && scopeDecision(s, id).owner)
     throw Error('Only the owner may change an owner scope decision');
   if (phase === 'item') {
     const pair = [...s.pairs].find(([, ps]) => ps.some(p => p.items.some(i => i.id === id)));
     // During concurrent Step 3b authoring, another group can change its own
-    // pair's scope. That must not prevent auditing an unchanged, approved pair.
+    // pair's scope. That must not prevent recording bookkeeping for an unchanged, approved pair.
     // The final Step 3 gate still requires every pair scope to be current.
     if (!pair || !scopeDecision(s, pair[0]).closed)
-      throw Error('Step 3a must clear for the item pair before item auditing');
-    if (!Array.isArray(dependencies)) throw Error('Record the examined dependency IDs, including an explicit empty list');
+      throw Error('Step 3a must clear for the item pair before item bookkeeping');
     const previous = itemDecision(s, id).decision;
     if (!owner && previous?.decision !== 'reopen' && (previous?.owner || previous?.decision === 'escalate'))
       throw Error('The owner must resolve this item decision');
@@ -276,10 +305,13 @@ export function recordStep3(root, { run, phase, page, item, decision, reason, ow
     ? receipt(s, 'item', id, false) : null;
   if (phase === 'item' && owner && decision === 'reopen' && reopenedReview?.decision !== 'escalate')
     throw Error('Owner reopen requires an existing escalation receipt');
-  const row = { version: 1, run, phase, target: id, decision, owner, confidence: owner ? null : confidence,
-    reason, ...(phase === 'item' ? { dependencies: [...new Set(dependencies)].sort() } : {}),
-    ...(reopenedReview ? { reopens_review_sha256: hash(reopenedReview) } : {}),
-    sha256: phase === 'scope' ? scopeHash(s, id) : itemHash(s, id, dependencies), at: new Date().toISOString() };
+  const row = phase === 'scope'
+    ? { version: 1, run, phase, target: id, decision, owner, confidence: owner ? null : confidence,
+      reason, sha256: scopeHash(s, id), at: new Date().toISOString() }
+    : { version: 2, run, phase, target: id, decision, owner, reason, defects: [...defects],
+      ...(reopenedReview ? { reopens_review_sha256: hash(reopenedReview) } : {}),
+      sha256: itemHash(s, id), at: new Date().toISOString() };
+  if (phase === 'item') validateItemV2(row, id);
   if (phase === 'item' && owner) preserveStep3OwnerReceipt(root, run, id);
   writeFileSync(file(root, run, phase === 'scope' ? '3a' : '3b', id, owner), JSON.stringify(row, null, 2) + '\n');
   return row;
@@ -301,7 +333,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
         decision: get('decision'), owner: args.includes('--owner'), reason: get('reason'),
         confidence: get('confidence') === undefined ? undefined : Number(get('confidence')),
         dependencies: get('dependencies') === undefined ? undefined : JSON.parse(get('dependencies')),
+        defects: get('defects') === undefined ? [] : JSON.parse(get('defects')),
       }), null, 2));
-    } else throw Error('Usage: step3-decisions.mjs check --run RUN --phase scope|final; record-scope --page ID; record-item --item ID --dependencies JSON');
+    } else throw Error('Usage: step3-decisions.mjs check --run RUN --phase scope|final; record-scope --page ID; record-item --item ID --decision DECISION --reason SENTENCE [--defects JSON]');
   } catch (e) { console.error(e.message); process.exitCode = 1; }
 }

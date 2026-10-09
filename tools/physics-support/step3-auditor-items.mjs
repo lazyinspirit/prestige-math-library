@@ -10,7 +10,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { itemHash, itemInputPaths, loadStep3, scopeHash } from './step3-decisions.mjs';
+import { itemHash, itemInputPaths, loadStep3, scopeHash, isMinimalItemReceipt } from './step3-decisions.mjs';
 import { authorResultAllowed, loadStep3AuditorProvenance } from './auditor-created-items.mjs';
 import { split, yaml } from './pathway-lib.mjs';
 
@@ -79,20 +79,22 @@ function currentOwnerRepair(s, id, dependencies, sha256) {
   const path = join(s.root, 'research', `${s.run}-step3b-owner-${safe(id)}.json`);
   if (!existsSync(path)) return null;
   const row = json(path);
-  if (row.version !== 1 || row.run !== s.run || row.phase !== 'item'
+  if (!(row.version === 1 || isMinimalItemReceipt(row)) || row.run !== s.run || row.phase !== 'item'
     || row.target !== id || row.owner !== true || row.decision !== 'repaired'
-    || row.sha256 !== sha256 || !Array.isArray(row.dependencies)
-    || JSON.stringify(row.dependencies) !== JSON.stringify(dependencies)
+    || row.sha256 !== sha256 || (row.version === 1 && (!Array.isArray(row.dependencies)
+      || JSON.stringify(row.dependencies) !== JSON.stringify(dependencies)))
     || !String(row.reason ?? '').trim()) return null;
+  // Receipt timestamps have millisecond precision; compare mtimes at that
+  // precision too. The exact input hash independently guards changed content.
   const decided = Date.parse(row.at);
   if (!Number.isFinite(decided) || itemInputPaths(s, id, dependencies)
-    .some(path => statSync(path).mtimeMs > decided)) return null;
+    .some(path => Math.floor(statSync(path).mtimeMs) > decided)) return null;
   return { sha256: digest(row), at: row.at };
 }
 
 // An ordinary Step-3b review can recertify a postbaseline addition after its
-// author window closes. It must be the current, independent, confidence-1
-// decision for the exact current hash and dependencies. The hash binds the
+// author window closes. It must be current authoring bookkeeping (or a legacy
+// confidence-1 decision) for the exact current input hash. The hash binds the
 // relevant shared-manifest entries, so only item-source mtimes must predate it.
 function currentOrdinaryReview(s, id, dependencies, sha256) {
   const ownerPath = join(s.root, 'research', `${s.run}-step3b-owner-${safe(id)}.json`);
@@ -104,17 +106,19 @@ function currentOrdinaryReview(s, id, dependencies, sha256) {
   const path = join(s.root, 'research', `${s.run}-step3b-review-${safe(id)}.json`);
   if (!existsSync(path)) return null;
   const row = json(path);
-  if (row.version !== 1 || row.run !== s.run || row.phase !== 'item'
+  if (!(row.version === 1 || isMinimalItemReceipt(row)) || row.run !== s.run || row.phase !== 'item'
     || row.target !== id || row.owner !== false
-    || !['accept', 'repaired'].includes(row.decision) || row.confidence !== 1
-    || row.sha256 !== sha256 || !Array.isArray(row.dependencies)
-    || JSON.stringify(row.dependencies) !== JSON.stringify(dependencies)
+    || !['accept', 'repaired'].includes(row.decision) || (row.version === 1 && row.confidence !== 1)
+    || row.sha256 !== sha256 || (row.version === 1 && (!Array.isArray(row.dependencies)
+      || JSON.stringify(row.dependencies) !== JSON.stringify(dependencies)))
     || !String(row.reason ?? '').trim()) return null;
+  // Receipt timestamps have millisecond precision; compare mtimes at that
+  // precision too. The exact input hash independently guards changed content.
   const decided = Date.parse(row.at);
   const itemRoot = join(s.root, 'items') + sep;
   if (!Number.isFinite(decided) || itemInputPaths(s, id, dependencies)
     .filter(path => path.startsWith(itemRoot) && path.endsWith('.md'))
-    .some(path => statSync(path).mtimeMs > decided)) return null;
+    .some(path => Math.floor(statSync(path).mtimeMs) > decided)) return null;
   return { sha256: digest(row), at: row.at };
 }
 

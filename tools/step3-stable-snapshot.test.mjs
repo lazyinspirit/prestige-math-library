@@ -20,7 +20,7 @@ function fixture(t) {
     { id: 'page-b', kind: 'B', companion: 'page-a', items: [] },
   ]));
   const scope = snapshot => recordStep3(root, { run: 'r', phase: 'scope', page: 'page-a', owner: true, decision: 'proceed', reason: 'Examined this scope.' }, snapshot);
-  const decide = (id, snapshot) => recordStep3(root, { run: 'r', phase: 'item', item: id, owner: true, decision: 'repaired',
+  const decide = (id, snapshot) => recordStep3(root, { run: 'r', phase: 'item', item: id, owner: true, decision: 'repaired', defects: ['proof'],
     dependencies: id === 'lem-consumer' ? ['lem-supplier'] : [], reason: 'Examined current proof and dependencies.' }, snapshot);
   return { root, write, item, scope, decide };
 }

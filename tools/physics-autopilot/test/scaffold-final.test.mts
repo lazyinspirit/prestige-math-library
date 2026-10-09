@@ -32,9 +32,12 @@ function fixture(t: any) {
   put('demo-batch-1.coverage.json', { pages: [{ page: 'a', sources: [] }] });
   put('plan-spec.json', { pages });
   put('demo-alpha-groups.json', [{ label: 'a', covers: ['1'] }]);
-  const record = (input: any) => recordStep3(root, { run: 'demo', reason: 'Exact evidence', ...input });
+  const record = (input: any) => recordStep3(root, { run: 'demo', reason: 'Exact evidence', ...input,
+    ...(input.phase === 'item' ? { defects: input.defects ??
+      (input.decision === 'accept' ? [] : ['Named fixture prerequisite or proof defect.']) } : {}),
+  });
   const scope = () => record({ phase: 'scope', page: 'a', decision: 'sufficient' });
-  const audit = (item: string, options = {}) => record({ phase: 'item', item, decision: 'accept', confidence: 1, dependencies: [], ...options });
+  const audit = (item: string, options = {}) => record({ phase: 'item', item, decision: 'accept', ...options });
   const check = (phase = 'final') => checkStep3(loadStep3(root, 'demo'), phase);
   return { root, put, pages, published, record, scope, audit, check, ctx: { repo: root, run: 'demo' } };
 }
@@ -506,10 +509,10 @@ test('owner gate repair recertifies an existing auditor-created item without for
   const ownerPath = join(f.root, 'research/demo-step3b-owner-lem-created.json');
   const owner = JSON.parse(readFileSync(ownerPath, 'utf8'));
   writeFileSync(ownerPath, JSON.stringify({ ...owner, reason: 'Tampered reason' }));
-  assert.throws(() => loadStep3AuditorProvenance(f.root, 'demo'), /invalid owner recertification provenance/);
+  assert.throws(() => loadStep3AuditorProvenance(f.root, 'demo'), /(?:invalid|missing) owner recertification provenance/);
 });
 
-test('a current independent confidence-1 repaired review recertifies a postbaseline addition', t => {
+test('a current minimal repaired review recertifies a postbaseline addition', t => {
   const f = fixture(t); f.scope(); writeAuditorBaseline(f.root, 'demo');
   f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', strategy: 'Direct', deps: [] });
   f.put('demo-batch-1.pages.json', f.pages);
@@ -527,7 +530,7 @@ test('a current independent confidence-1 repaired review recertifies a postbasel
   const repairedAt = new Date('2025-01-01T00:00:00.000Z');
   utimesSync(itemPath, repairedAt, repairedAt);
   const review = f.audit('lem-created', { decision: 'repaired', dependencies: [],
-    reason: 'Independent confidence-1 review after the mathematical repair.' });
+    reason: 'Current minimal receipt after the mathematical repair.' });
   const current = loadStep3(f.root, 'demo');
   assert.equal(review.sha256, itemHash(current, 'lem-created', []));
   assert.ok(itemInputPaths(current, 'lem-created', [])
@@ -571,14 +574,16 @@ test('shared batch and plan touches preserve a review, but a per-item manifest e
   const correctedAt = new Date('2025-01-01T00:00:00.000Z');
   utimesSync(itemPath, correctedAt, correctedAt);
   const review = f.audit('lem-created', { decision: 'repaired', dependencies: ['lem-planned'],
-    reason: 'Independent confidence-1 review after the proof correction.' });
+    reason: 'Current minimal receipt after the proof correction.' });
   const laterCarrierTime = new Date(Date.parse(review.at) + 5000);
   for (const path of [join(f.root, 'research/demo-batch-1.pages.json'), join(f.root, 'research/plan-spec.json')])
     utimesSync(path, laterCarrierTime, laterCarrierTime);
   const current = loadStep3(f.root, 'demo');
   assert.equal(review.owner, false);
-  assert.equal(review.confidence, 1);
-  assert.deepEqual(review.dependencies, ['lem-planned']);
+  assert.equal(review.version, 2);
+  assert.ok(!Object.hasOwn(review, 'confidence'));
+  assert.ok(!Object.hasOwn(review, 'dependencies'));
+  assert.deepEqual(review.defects, ['Named fixture prerequisite or proof defect.']);
   assert.equal(review.sha256, itemHash(current, 'lem-created', ['lem-planned']));
   assert.ok(itemInputPaths(current, 'lem-created', ['lem-planned'])
     .filter(path => path.startsWith(join(f.root, 'items') + '/') && path.endsWith('.md'))
@@ -613,7 +618,7 @@ for (const defect of ['stale', 'held', 'owner-held', 'non-independent']) test(`S
   certifyAuditorItems(f.root, 'demo');
   writeFileSync(itemPath, '---\nid: lem-created\nstatus: draft\ndeps: []\n---\n\nCorrected proof.\n');
   const review = f.audit('lem-created', { decision: 'repaired', dependencies: [],
-    reason: 'Independent confidence-1 review after authoring.' });
+    reason: 'Current minimal receipt after authoring.' });
   const reviewPath = join(f.root, 'research/demo-step3b-review-lem-created.json');
   if (defect === 'stale') {
     writeFileSync(itemPath, '---\nid: lem-created\nstatus: draft\ndeps: []\n---\n\nChanged after review.\n');
@@ -692,8 +697,11 @@ test('insufficient scope requires owner action; merge/enrich do not mean proceed
 
 test('every A/B item needs a decision; uncertainty escalates; owner repair bypasses rejudge', t => {
   const f = fixture(t); f.scope();
-  assert.throws(() => f.audit('lem-a', { confidence: .99 }), /100%/);
-  assert.throws(() => f.audit('lem-a', { dependencies: undefined }), /examined dependency/);
+  const minimal = f.audit('lem-a');
+  assert.equal(minimal.version, 2);
+  assert.ok(!Object.hasOwn(minimal, 'confidence'));
+  assert.ok(!Object.hasOwn(minimal, 'dependencies'));
+  assert.deepEqual(minimal.defects, []);
   f.audit('lem-a', { decision: 'escalate', confidence: undefined });
   assert.throws(() => f.audit('lem-a'), /owner must resolve/);
   f.record({ phase: 'item', item: 'lem-a', owner: true, decision: 'repaired', dependencies: ['lem-published'] });
@@ -712,7 +720,7 @@ test('owner reopen authorizes a fresh audit without certifying the repair', t =>
     reason: 'Supply the named local lemma and preserve the original claim.' });
   const open = f.check().work.find((w: any) => w.item === 'lem-a');
   assert.equal(open.owner, false);
-  assert.match(open.reason, /fresh post-reopen item audit/);
+  assert.match(open.reason, /fresh post-reopen bookkeeping receipt/);
   assert.notEqual(step3Plan(f.ctx, { label: 'a', covers: ['1'] }, 'final').label, before);
   f.audit('lem-a', { decision: 'repaired', dependencies: ['lem-published'] });
   assert.equal(f.check().accepted, 1);
@@ -728,11 +736,13 @@ test('proof changes invalidate the item and its consumers but not scope', t => {
   assert.equal(f.check().accepted, 0);
 });
 
-test('published and implicit dependency changes invalidate decisions', t => {
+test('published and frontmatter dependency changes invalidate minimal decisions', t => {
   const f = fixture(t); f.scope();
   const path = join(f.root, 'items/lem-implicit.md');
   writeFileSync(path, '---\nid: lem-implicit\ndeps: []\n---\nFirst proof');
-  f.audit('ex-c', { dependencies: ['lem-implicit'] });
+  writeFileSync(join(f.root, 'items/ex-c.md'),
+    '---\nid: ex-c\ndeps: [lem-implicit]\n---\nUses the additional supplier.');
+  f.audit('ex-c');
   const before = itemHash(loadStep3(f.root, 'demo'), 'ex-c', ['lem-implicit']);
   writeFileSync(path, '---\nid: lem-implicit\ndeps: []\n---\nChanged proof');
   assert.notEqual(itemHash(loadStep3(f.root, 'demo'), 'ex-c', ['lem-implicit']), before);
@@ -769,8 +779,9 @@ test('missing prerequisites can be escalated and forged receipt identities fail 
 test('final gate retains mechanical and cross-batch checks', t => {
   const f = fixture(t), s: any = stages.find(s => s.id === '3b-author');
   const ids = s.gates(f.ctx).map((g: any) => g.id).filter(id => id !== 'physics-content');
-  for (const id of ['step3-items', 'manifest-deps', 'scope-decisions', 'url-liveness', 'frontier-dependency-ledger', 'proof-contract', 'rendercheck'])
+  for (const id of ['step3-items', 'manifest-deps', 'scope-decisions', 'source-fetch-check', 'frontier-dependency-ledger', 'proof-contract', 'rendercheck'])
     assert.ok(ids.includes(id), `${id} missing`);
+  assert.ok(stages.find(s => s.id === '5b-cross').gates(f.ctx).some(g => g.id === 'url-liveness'));
   assert.ok(!ids.includes('splice-verify'), 'the author barrier precedes the splice');
   assert.ok(stages.find(s => s.id === '4-splice').gates(f.ctx).some(g => g.id === 'validate-plan'));
   assert.ok(ids.some((id: string) => /coverage/.test(id)));
@@ -826,7 +837,7 @@ test('escalations, unchanged incomplete audits and final mechanical failures nev
 
 test('prompts require concise scope decisions and impartial sequential dependency audits', () => {
   const base = new URL('../../../briefs/', import.meta.url);
-  assert.match(readFileSync(new URL('step3-scope.md', base), 'utf8'), /owner alone decides/);
+  assert.match(readFileSync(new URL('step3-scope.md', base), 'utf8'), /owner.*decides/i);
   const audit = readFileSync(new URL('group-author.md', base), 'utf8');
-  for (const re of [/one item\s+at a time/, /impartial/, /honest/, /authoritative sources/, /published item/, /cross-batch/, /confidence 1/, /still needs authored content/, /entire library/, /pairs still being constructed/]) assert.match(audit, re);
+  for (const re of [/one item\s+at a time/, /never pretend to understand/, /authoritative/, /published/, /cross-batch/, /Item bookkeeping/, /--defects/, /400 characters/, /Only the owner resolves escalations/, /Read sibling work/, /sibling supplier is unfinished/]) assert.match(audit, re);
 });

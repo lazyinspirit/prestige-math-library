@@ -3,6 +3,7 @@
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { join, sep } from 'node:path';
+import { isMinimalItemReceipt } from './step3-decisions.mjs';
 
 const safe = value => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid run or item ID');
@@ -15,9 +16,9 @@ export const step3OwnerHistoryPath = (root, run, id, hash) => {
   return join(root, 'research', `${safe(run)}-step3b-owner-history-${safe(id)}`, `${hash}.json`);
 };
 function validate(row, run, id) {
-  if (row.version !== 1 || row.run !== run || row.phase !== 'item' || row.target !== id || row.owner !== true
-    || !['repaired', 'hold', 'reopen'].includes(row.decision) || !Array.isArray(row.dependencies)
-    || row.dependencies.some(value => typeof value !== 'string') || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')
+  if (!(row.version === 1 || isMinimalItemReceipt(row)) || row.run !== run || row.phase !== 'item' || row.target !== id || row.owner !== true
+    || !['repaired', 'hold', 'reopen'].includes(row.decision)
+    || (row.version === 1 && (!Array.isArray(row.dependencies) || row.dependencies.some(value => typeof value !== 'string'))) || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')
     || !String(row.reason ?? '').trim() || !Number.isFinite(Date.parse(row.at)))
     throw Error(`${id}: invalid owner receipt for history`);
   return row;

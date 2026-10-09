@@ -31,7 +31,7 @@ function fixture(t) {
   };
   const decide = (id = 'lem-owner', deps = []) => {
     recordStep3(root, { run: 'r', phase: 'scope', page: 'page-a', owner: true, decision: 'proceed', reason: 'Reviewed current scope.' });
-    return recordStep3(root, { run: 'r', phase: 'item', item: id, owner: true, decision: 'repaired', dependencies: deps, reason: 'Examined current proof inputs.' });
+    return recordStep3(root, { run: 'r', phase: 'item', item: id, owner: true, decision: 'repaired', defects: ['proof'], dependencies: deps, reason: 'Examined current proof inputs.' });
   };
   const evidence = (id = 'lem-owner', changes = {}) => {
     const claim = step3OwnerCreationClaim(loadStep3(root, 'r'), id);
@@ -105,17 +105,20 @@ test('registrar rejects invented native fields, same author and unsupported time
   }
 });
 
-test('examined owner dependencies must include current declared dependencies', t => {
+test('minimal owner bookkeeping derives declared dependencies and rejects changed input currency', t => {
   const f = fixture(t); f.add('lem-owner', ['lem-base']); const e = f.evidence();
   recordStep3OwnerCreation(f.root, 'r', 'lem-owner', e.path);
-  f.decide('lem-owner', []);
-  assert.throws(() => certifyAuditorItems(f.root, 'r'), /examined dependencies/);
-  f.decide('lem-owner', ['lem-base']); assert.deepEqual(certifyAuditorItems(f.root, 'r').items, []);
+  const decision = f.decide('lem-owner');
+  assert.equal(decision.version, 2);
+  assert.equal(Object.hasOwn(decision, 'dependencies'), false);
+  assert.deepEqual(certifyAuditorItems(f.root, 'r').items, []);
+  f.write('items/lem-base.md', `${item('lem-base')}\nChanged supplier.\n`);
+  assert.throws(() => certifyAuditorItems(f.root, 'r'), /bookkeeping decision/);
+  f.decide('lem-owner'); assert.deepEqual(certifyAuditorItems(f.root, 'r').items, []);
   f.pages[0].items.find(row => row.id === 'lem-owner').deps = []; f.manifests();
   f.write('items/lem-owner.md', item('lem-owner').replace('deps: []', 'deps: [lem-base]'));
-  f.decide('lem-owner', []);
-  assert.throws(() => certifyAuditorItems(f.root, 'r'), /examined dependencies/);
-  f.decide('lem-owner', ['lem-base']); assert.deepEqual(certifyAuditorItems(f.root, 'r').items, []);
+  f.decide('lem-owner');
+  assert.deepEqual(certifyAuditorItems(f.root, 'r').items, []);
 });
 
 test('late sibling inputs permit genuine native own-file origin; late new helpers cannot borrow it', t => {
@@ -247,7 +250,7 @@ test('owner history is strict historical evidence, never a substitute for the cu
   utimesSync(join(f.root, `items/${id}.md`), new Date('2025-01-01T00:00:12Z'), new Date('2025-01-01T00:00:12Z'));
   f.decide(id); const certificate = certifyAuditorItems(f.root, 'r');
   // A new ordinary receipt automatically captures the actual old current file.
-  recordStep3(f.root, { run: 'r', phase: 'item', item: id, owner: true, decision: 'repaired',
+  recordStep3(f.root, { run: 'r', phase: 'item', item: id, owner: true, decision: 'repaired', defects: ['proof'],
     dependencies: [], reason: 'A second actual examination of the stable current proof.' });
   rmSync(join(f.root, `research/r-step3b-owner-${id}.json`));
   assert.equal(itemDecision(loadStep3(f.root, 'r'), id).closed, false);

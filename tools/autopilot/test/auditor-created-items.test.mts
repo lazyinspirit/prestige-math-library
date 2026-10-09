@@ -809,7 +809,7 @@ test('Step-3 first certification pairs original author provenance with a current
     decision: 'proceed', reason: 'Owner approved the current scope containing the necessary local supplier.',
     owner: true, confidence: undefined, dependencies: undefined });
   recordStep3(root, { run: 'r', phase: 'item', page: undefined, item: id,
-    decision: 'repaired', dependencies: [],
+    decision: 'repaired', defects: ['proof'], dependencies: [],
     reason: 'Owner checked the repaired proof and its current empty dependency closure.',
     owner: true, confidence: undefined });
 
@@ -830,7 +830,7 @@ test('Step-3 first certification pairs original author provenance with a current
   writeFileSync(itemPath, `${item(id)}\nLater owner proof repair.\n`);
   utimesSync(itemPath, repairedAt, repairedAt);
   recordStep3(root, { run: 'r', phase: 'item', page: undefined, item: id,
-    decision: 'repaired', dependencies: [], reason: 'Owner checked the later repaired proof.',
+    decision: 'repaired', defects: ['proof'], dependencies: [], reason: 'Owner checked the later repaired proof.',
     owner: true, confidence: undefined });
   const receipt = certifyAuditorItems(root, 'r');
   assert.equal(receipt.items.length, 1);

@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { itemHash, loadStep3 } from './step3-decisions.mjs';
+import { itemHash, loadStep3, isMinimalItemReceipt } from './step3-decisions.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 
 export const STEP3_OWNER_CREATION_POLICY = 'owner-spawned-step3-creation-v1';
@@ -121,6 +121,8 @@ export function currentStep3OwnerCreationDecision(s, id) {
   const path = join(s.root, 'research', `${s.run}-step3b-owner-${safe(id)}.json`);
   if (!existsSync(path)) return false;
   const row = json(path), live = s.items.get(id), deps = row.dependencies;
+  if (isMinimalItemReceipt(row)) return row.run === s.run && row.target === id
+    && row.owner === true && row.decision === 'repaired' && row.sha256 === itemHash(s, id);
   const text = readFileSync(join(s.root, 'items', `${safe(id)}.md`), 'utf8');
   const fm = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text)?.[1] ?? '';
   const declared = [...(live?.item.deps ?? []), ...(live?.item.justified_by ?? []), ...(live?.item.forward_refs ?? []),

@@ -12,6 +12,7 @@ import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
 import { split, yaml } from './pathway-lib.mjs';
+import { isMinimalItemReceipt } from './step3-decisions.mjs';
 import { currentHashesMany } from './step7-terminal-resolution.mjs';
 import { historicalStep3OwnerReceipt } from './step3-owner-history.mjs';
 import { archivedProofContext, recordOwnerContextArchive } from './step5-owner-context-history.mjs';
@@ -1629,10 +1630,10 @@ function provenanceRows(root, run, step, cache = new Map()) {
       const owner = historicalStep3OwnerReceipt(root, run, row.id, marker);
       if (!owner) throw Error(`${row.id}: missing owner recertification provenance`);
       if (sha(JSON.stringify(owner)) !== marker.sha256 || owner.at !== marker.at
-        || owner.version !== 1 || owner.run !== run || owner.phase !== 'item'
+        || !(owner.version === 1 || isMinimalItemReceipt(owner)) || owner.run !== run || owner.phase !== 'item'
         || owner.target !== row.id || owner.owner !== true || owner.decision !== 'repaired'
-        || owner.sha256 !== row.sha256 || !Array.isArray(owner.dependencies)
-        || JSON.stringify(owner.dependencies) !== JSON.stringify(row.dependencies)
+        || owner.sha256 !== row.sha256 || (owner.version === 1 && (!Array.isArray(owner.dependencies)
+          || JSON.stringify(owner.dependencies) !== JSON.stringify(row.dependencies)))
         || !String(owner.reason ?? '').trim())
         throw Error(`${row.id}: invalid owner recertification provenance`);
     }

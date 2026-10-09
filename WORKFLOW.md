@@ -312,6 +312,29 @@ future stages defer selection until execution and write no run state.
   uncertainty. A later dead URL does not undo a verified full-text fetch; live URL and
   backing checks run at Step 5b.
 
+### Step 3 item bookkeeping
+
+Step 3b item receipts in both engines use version 2: run/item identity, phase,
+decision, owner authority, input hash, timestamp, defect types and one concise
+sentence describing the repair or unresolved gap. The `reason` sentence is at
+most 400 characters with no newlines or interior sentence-ending punctuation;
+defect types are nonempty labels of at most 80 characters. `defects` is an array, empty for an
+unchanged acceptance and nonempty for repairs, escalations and owner directions.
+For example:
+
+```bash
+node tools/step3-decisions.mjs record-item --run RUN --item ITEM --decision repaired --defects '["dependency"]' --reason "Added the missing supplier and corrected its proof use."
+```
+
+Use `tools/physics-support/step3-decisions.mjs` in the physics workspace. The
+writer derives the current input hash from the actual dependency graph; authors
+do not serialize examined dependencies, confidence scores or detailed review
+evidence. Receipts track authoring status and repairs, not independent audits.
+Escalations still require owner resolution, and changed inputs still invalidate
+acceptance mechanically. Historical version-1 item receipts remain readable;
+Step 3a scope receipts and later-stage review and gate evidence keep their
+existing requirements.
+
 ### Owner-selected authoring of ready pairs
 
 An owner may explicitly request Step 3b for approved pairs while other pairs remain
@@ -378,8 +401,8 @@ No `author_result` field is accepted.
 
 Creation is origin only. The Step 3 certifier excludes a validated owner creation
 from auditor-created classification only after an ordinary current
-`recordStep3` owner `repaired` decision binds its current proof inputs and examined
-dependencies, including its declared manifest and authored dependencies. It emits
+`recordStep3` owner `repaired` bookkeeping decision binds its current proof inputs
+through the automatically derived manifest and authored dependency graph. It emits
 no auditor item or scope certificate for that creation. Scope approval, native
 unit coverage and mathematical acceptance remain their ordinary obligations.
 For a dependency-ordered pass after every writer drains, load one context with
