@@ -296,7 +296,8 @@ if (cmd === 'list') {
 }
 
 // ---------------------------------------------------------------------------
-if (cmd === 'check') {
+if (cmd === 'check' || cmd === 'coverage') {
+  if (cmd === 'coverage' && reconcilePlan) die('coverage is read-only; --reconcile-plan is forbidden');
   if (!existsSync(listPath)) die(`cross-group-edges: no work list at ${listPath} — run \`list\` first`, 1);
   const { edges, forwards, changes = [] } = JSON.parse(readFileSync(listPath, 'utf8'));
   const verdicts = existsSync(verdictPath)
@@ -311,7 +312,14 @@ if (cmd === 'check') {
   const FWD_OK = new Set(['orientation-reviewed', 'lemmas-added', 'dropped']);
 
   let errors = 0;
-  const err = (code, msg) => { console.error(`ERROR ${code}: ${msg}`); errors += 1; };
+  const coverageIssues = [], pendingReview = [];
+  const err = (code, msg, obligation = null) => {
+    if (cmd === 'coverage') {
+      if (obligation) pendingReview.push(obligation);
+      else coverageIssues.push({ code, message: msg });
+    } else console.error(`ERROR ${code}: ${msg}`);
+    errors += 1;
+  };
   const keyed = (rows, key, label) => {
     const out = new Map();
     for (const row of rows) {
@@ -334,13 +342,13 @@ if (cmd === 'check') {
 
   for (const e of edges) {
     const v = edgeV.get(pairKey(e.from, e.to));
-    if (!v) { err('edge-unverdicted', `[${e.from}] cites ${e.to} across batches/groups ${e.from_group}->${e.to_group} with no 5b verdict`); continue; }
+    if (!v) { err('edge-unverdicted', `[${e.from}] cites ${e.to} across batches/groups ${e.from_group}->${e.to_group} with no 5b verdict`, { kind: 'edge', ...e }); continue; }
     if (!EDGE_OK.has(v.verdict)) err('edge-verdict-invalid', `[${e.from}] -> ${e.to}: verdict ${JSON.stringify(v.verdict)} is not one of ${[...EDGE_OK].join(', ')}`);
     if (!String(v.note ?? '').trim()) err('edge-note-missing', `[${e.from}] -> ${e.to}: a verdict with no note is not a reading`);
   }
   for (const f of forwards) {
     const v = fwdV.get(pairKey(f.item, f.target));
-    if (!v) { err('forward-undecided', `[${f.item}] declares forward_refs "${f.target}" with no 5b decision — build the intermediate lemmas or drop the item`); continue; }
+    if (!v) { err('forward-undecided', `[${f.item}] declares forward_refs "${f.target}" with no 5b decision — build the intermediate lemmas or drop the item`, { kind: 'forward', ...f }); continue; }
     if (!FWD_OK.has(v.decision)) err('forward-decision-invalid', `[${f.item}] -> ${f.target}: decision ${JSON.stringify(v.decision)} is not one of ${[...FWD_OK].join(', ')}`);
     if (!String(v.note ?? '').trim()) err('forward-note-missing', `[${f.item}] -> ${f.target}: a decision with no note is not a reading`);
   }
@@ -348,7 +356,7 @@ if (cmd === 'check') {
   for (const change of changes) {
     const key = `${change.kind}\u0000${change.batch}\u0000${change.id}`;
     const verdict = changeV.get(key);
-    if (!verdict) { err('change-undecided', `${change.kind} [${change.id}] in batch ${change.batch} has no 5b verdict`); continue; }
+    if (!verdict) { err('change-undecided', `${change.kind} [${change.id}] in batch ${change.batch} has no 5b verdict`, change); continue; }
   }
   // A DECISION RECORDED BUT NOT APPLIED is the failure mode that made step-3
   // "applied" claims untrustworthy, so the outcome is read from disk NOW
@@ -440,13 +448,13 @@ if (cmd === 'check') {
   for (const e of now.edges) {
     const key = pairKey(e.from, e.to);
     if (!listed.has(key) && !edgeV.has(key)) {
-      err('edge-introduced-unverdicted', `[${e.from}] now cites ${e.to} across batches/groups ${e.from_group}->${e.to_group}; the edge appeared after the work list was written and carries no verdict`);
+      err('edge-introduced-unverdicted', `[${e.from}] now cites ${e.to} across batches/groups ${e.from_group}->${e.to_group}; the edge appeared after the work list was written and carries no verdict`, { kind: 'edge', ...e });
     }
   }
   for (const forward of now.forwards) {
     const key = pairKey(forward.item, forward.target);
     if (!listedForwards.has(key) && !fwdV.has(key)) {
-      err('forward-introduced-undecided', `[${forward.item}] now declares forward_refs "${forward.target}" but it appeared after the work list and has no decision`);
+      err('forward-introduced-undecided', `[${forward.item}] now declares forward_refs "${forward.target}" but it appeared after the work list and has no decision`, { kind: 'forward', ...forward });
     }
   }
 
@@ -467,7 +475,7 @@ if (cmd === 'check') {
   const currentChangeKeys = new Set(now.changes.map((change) => `${change.kind}\u0000${change.batch}\u0000${change.id}`));
   for (const change of now.changes) {
     const key = `${change.kind}\u0000${change.batch}\u0000${change.id}`;
-    if (!listedChangeKeys.has(key) && !changeV.has(key)) err('change-introduced-undecided', `${change.kind} [${change.id}] appeared after the work list with no verdict`);
+    if (!listedChangeKeys.has(key) && !changeV.has(key)) err('change-introduced-undecided', `${change.kind} [${change.id}] appeared after the work list with no verdict`, change);
   }
   for (const [key, verdict] of changeV) {
     const [kind, batch, id] = key.split('\u0000');
@@ -653,6 +661,16 @@ if (cmd === 'check') {
     }
   }
 
+  if (cmd === 'coverage') {
+    const unionCount = (a, b, key) => new Set([...a, ...b].map(key)).size;
+    const coverageJson = JSON.stringify({ version: 1, run, complete: errors === 0,
+      counts: { edges: unionCount(edges, now.edges, e => pairKey(e.from, e.to)),
+        forwards: unionCount(forwards, now.forwards, f => pairKey(f.item, f.target)),
+        changes: unionCount(changes, now.changes, c => `${c.kind}\u0000${c.batch}\u0000${c.id}`) },
+      pending: pendingReview, errors: coverageIssues });
+    await new Promise(resolve => process.stdout.write(coverageJson + '\n', resolve));
+    process.exit(0);
+  }
   console.log(`cross-group-edges: ${edges.length} edge(s), ${forwards.length} forward reference(s), ${changes.length} post-5a change(s), ${errors} error(s)`);
   process.exit(errors ? 1 : 0);
 }

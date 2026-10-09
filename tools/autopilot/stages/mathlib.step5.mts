@@ -1,6 +1,7 @@
 // Step 5: independent readers, read-only refuters, routed batch adjudication,
 // cross-group audit and closure.
 
+import { withStep5bReviewContinuation } from './step5b-review-continuation.mts';
 import { withRefuterContinuation } from './refuter-continuations.mts';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
@@ -260,7 +261,7 @@ export function step5Stages(d: any) {
       }],
       gatesWaived: 'The close tool reruns exact Step-5 routing, cross-edge, plan, and ledger checks before writing the immutable closure receipt; any nonzero check produces no successful result.',
     },
-  ].map(withRefuterContinuation);
+  ].map(stage => withStep5bReviewContinuation(withRefuterContinuation(stage), { physics: false }));
 }
 
 export default { step5Stages };

@@ -22,14 +22,14 @@
 
 import { readFileSync, writeFileSync, readdirSync, existsSync, realpathSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { join, basename } from 'node:path';
+import { join, basename, resolve as pathResolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemSurfaceHash, shortHash } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { logicalConsumers } from './impact-scope.mjs';
 import { parseItemScope, includesItem, unknownItems } from './item-scope.mjs';
 
-const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
+const REPO = pathResolve((process.argv.includes('--root') ? process.argv[process.argv.indexOf('--root') + 1] : undefined) ?? join(fileURLToPath(new URL('.', import.meta.url)), '..'));
 let itemScope;
 try { itemScope = parseItemScope(process.argv.slice(2)); }
 catch (cause) { die(cause.message); }
@@ -40,6 +40,16 @@ const fromLabel = option('--from');
 const toLabel = option('--to');
 const useCurrent = argv.includes('--current');
 const directBoundary = argv.includes('--direct-boundary');
+const runScope = option('--run');
+if (runScope) {
+  if (!/^[A-Za-z0-9._-]+$/.test(runScope)) die('invalid run selection');
+  if (itemScope.selected !== null) die('--run cannot be combined with --items-file');
+  const ids = readdirSync(join(REPO, 'research')).filter(name => name.startsWith(`${runScope}-batch-`) && name.endsWith('.pages.json'))
+    .flatMap(name => JSON.parse(readFileSync(join(REPO, 'research', name), 'utf8')))
+    .flatMap(page => (page.items ?? []).map(item => typeof item === 'string' ? item : item.id));
+  if (!ids.length || new Set(ids).size !== ids.length) die('run selection must be nonempty and unique');
+  itemScope = { ...itemScope, selected: new Set(ids) };
+}
 const receiptPath = option('--receipt');
 const templatePath = option('--template');
 const refreshPath = option('--refresh-receipt');

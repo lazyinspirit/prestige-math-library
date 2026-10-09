@@ -43,6 +43,8 @@ export interface Plan {
   profile?: string;
   label: string;
   job: string;
+  /** Immutable unfinished-review launch checkpoint; not a repair budget. */
+  reviewCheckpoint?: { completed: number; progress: string; task: string; taskSha256: string };
   covers?: Unit[];
   /** Path, or candidates tried in order — the first that exists wins. */
   brief?: string | string[];
@@ -183,6 +185,8 @@ export interface Stage {
   /** The file each unit owes. A result is not an artifact: a lane can exit zero
    *  having written its output to the wrong path. */
   artifacts?: (ctx: Ctx, u: Unit) => string | string[] | null;
+  /** Opt-in read-only artifact coverage; process success alone is not review completion. */
+  reviewCoverage?: (ctx: Ctx) => { complete: boolean; why: string };
   concurrency?: number;
   maxAttempts?: number;
   fallbackCount?: number;
@@ -289,6 +293,7 @@ export interface Config {
 }
 
 export interface DispatchRecord {
+  reviewCheckpoint?: Plan['reviewCheckpoint'];
   stage: string;
   role: string;
   label: string;

@@ -349,6 +349,14 @@ export class Executor {
         };
       }
     }
+    if (units.done && stage.reviewCoverage) {
+      if ([...this.inflight.values()].some(row => row.meta.stage === stage.id) || this.adoptedUnits(stage).size)
+        return { ...units, unitsDone: false, gatesPassed: false, done: false, missing: owed,
+          why: `${units.why}; review continuation writer active` };
+      const review = stage.reviewCoverage(ctx);
+      if (!review.complete) return { ...units, unitsDone: false, gatesPassed: false, done: false,
+        missing: owed, why: `${units.why}; ${review.why}` };
+    }
     // A STAGE WITH NO GATE CANNOT FAIL.
     //
     // This line used to read `Boolean(stage.gates) && stage.gates(ctx).length > 0`,
@@ -408,6 +416,7 @@ export class Executor {
     // hashing for a result already recorded.
     if (this.state.data.stages[stage.id]?.doneAt) return new Set(owed);
     const cov = covered(ctx.dispatchDir, stagePattern(stage, ctx), ctx.coversMap);
+    if (stage.reviewCoverage && !this.stageStatus(stage, ctx).unitsDone) return new Set();
     // A stage running in the legacy COUNT mode declares no coverage at all, so
     // there is no per-unit answer to give. Fall back to the only thing that mode
     // supports — the stage as a whole — rather than inventing a per-unit one.
@@ -818,7 +827,8 @@ export class Executor {
     // read back from the record it wrote. Computing it here as well produced a
     // second copy of the same quantity that the owner's `retry` command could
     // desynchronise (`attempt: 2, attempts: 0`).
-    const meta: any = { stage: stage.id, role: plan.role, label: plan.label, covers: plan.covers ?? [] };
+    const meta: any = { stage: stage.id, role: plan.role, label: plan.label, covers: plan.covers ?? [],
+      ...(plan.reviewCheckpoint ? { reviewCheckpoint: plan.reviewCheckpoint } : {}) };
     // Read the number back out of the record and carry it on `meta`, which is
     // what the in-flight status line renders. One computation, three readers.
     const attempt = this.state.recordDispatchStart(key, meta).attempt;

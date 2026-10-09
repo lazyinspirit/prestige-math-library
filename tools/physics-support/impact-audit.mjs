@@ -19,15 +19,16 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 // source in this window (or in the next window after a later repair).
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
-import { join, basename } from 'node:path';
+import { join, basename, resolve as pathResolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemSurfaceHash, shortHash } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { logicalConsumers } from './impact-scope.mjs';
 import { parseItemScope, includesItem, unknownItems } from './item-scope.mjs';
 
-const REPO = (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot));
-const itemScope = parseItemScope(process.argv.slice(2));
+const DEFAULT_REPO = (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot));
+const REPO = pathResolve((process.argv.includes('--root') ? process.argv[process.argv.indexOf('--root') + 1] : undefined) ?? DEFAULT_REPO);
+let itemScope = parseItemScope(process.argv.slice(2));
 const argv = itemScope.args;
 const asJson = argv.includes('--json');
 const touchesPath = option('--touches');
@@ -35,6 +36,16 @@ const fromLabel = option('--from');
 const toLabel = option('--to');
 const useCurrent = argv.includes('--current');
 const directBoundary = argv.includes('--direct-boundary');
+const runScope = option('--run');
+if (runScope) {
+  if (!/^[A-Za-z0-9._-]+$/.test(runScope)) die('invalid run selection');
+  if (itemScope.selected !== null) die('--run cannot be combined with --items-file');
+  const ids = readdirSync(join(REPO, 'research')).filter(name => name.startsWith(`${runScope}-batch-`) && name.endsWith('.pages.json'))
+    .flatMap(name => JSON.parse(readFileSync(join(REPO, 'research', name), 'utf8')))
+    .flatMap(page => (page.items ?? []).map(item => typeof item === 'string' ? item : item.id));
+  if (!ids.length || new Set(ids).size !== ids.length) die('run selection must be nonempty and unique');
+  itemScope = { ...itemScope, selected: new Set(ids) };
+}
 const receiptPath = option('--receipt');
 const templatePath = option('--template');
 if (!touchesPath || !fromLabel) usage();
@@ -253,7 +264,7 @@ else {
   for (const entry of warnings) console.warn(`WARN ${entry.code}: ${entry.message}`);
   for (const entry of errors) console.error(`ERROR ${entry.code}: ${entry.message}`);
 }
-process.exit(errors.length ? 1 : 0);
+process.exitCode = errors.length ? 1 : 0;
 
 function usage() {
   console.error('usage: node tools/physics-support/impact-audit.mjs --touches <touches.json> --from <snapshot-label> [--to <snapshot-label>] [--direct-boundary] [--receipt <impact.json> | --template <impact.json>] [--json]');

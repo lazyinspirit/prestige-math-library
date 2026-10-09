@@ -559,6 +559,40 @@ theorem. Native certification, missing creation evidence, supplied proofs and
 other item kinds do not qualify. Ordinary routing and prerequisite checks still
 apply; this exception does not change immutable reader scope or findings.
 
+## Step 5b unfinished-review continuation
+
+A successful lead process is a handoff, not proof that the review is complete.
+Only `5b-cross` opts into artifact review coverage. Before closure gates, the
+engine checks current cross-edge, forward and structural verdicts and both
+scoped direct-impact windows. The inspection is read-only and cannot create
+verdicts or bootstrap a missing receipt. Completed impact dispositions require
+current consumer and supplier hashes, the consumed clauses and actual use
+locations for every relevant changed supplier; justified exclusions remain
+explicit. Invalid or stale evidence holds for the owner.
+
+After a successful partial handoff, the engine launches a serial native
+continuation of the existing lead task for only the missing current obligations.
+Its immutable generated task and dispatch metadata capture the completed-count
+baseline and remaining-work identity. Another continuation requires an increase
+in valid completed obligations; changed ordering or mechanical index metadata
+alone does not count. A failed or no-progress continuation holds without
+spending another mathematical repair cycle or resetting any prior budget.
+Queued and adopted writers defer inspection and gates until they drain.
+
+The read-only inspector is `node tools/step5b-review-coverage.mjs --run RUN`.
+Add `--pending --limit 25` to fetch a bounded missing-work batch. Keep completed
+verdicts and their original review attribution. Each continuation writes a new
+label-bound Markdown checkpoint; never append to an earlier report whose exact
+bytes may be bound by a forward verdict. Reports should summarize counts and
+actual findings, referring to canonical verdict/impact artifacts rather than
+dumping mechanical indexes. Only complete current artifact coverage releases the
+normal closure gates; their substantive checks remain required.
+
+When rolling this guard into an already successful partial handoff, drain native
+writers and restart only the controller to load the new executor/stage code.
+Keep the same run, state, receipts and immutable baselines. Do not manually reset
+coverage, fake a result, or submit gates for the known incomplete handoff.
+
 ## Step 5b impact windows
 
 The lead task and engine gates use `--direct-boundary` for both impact windows:
