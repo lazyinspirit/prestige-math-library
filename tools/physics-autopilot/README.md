@@ -24,7 +24,7 @@ pre-existing failures; exact validation results are recorded in
 Website publishing and physics-view integration are separate work. This change
 has not dispatched authors or started a content build.
 
-The production entrypoint requires a single-use owner mathematical
+The production entrypoint requires a single-use owner formatting and metadata
 recertification receipt before every drained native gate battery. See the
 [receipt protocol](../../physics/WORKFLOW.md) for the current frontier request,
 per-item evidence, writer attestations, and retry behavior. Direct executor test
