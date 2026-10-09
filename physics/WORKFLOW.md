@@ -130,7 +130,10 @@ after mathematics prompt changes; add `--check` to verify alignment.
 
 `frontier --next` selects up to 80 pairs by default and `plan` enforces the same
 cap. `physics-autopilot.config.json` limits concurrent workers across all stages
-to 30 through `concurrency` and `globalConcurrency`.
+to 30 through `concurrency` and `globalConcurrency`. Run-labelled dispatches
+and nested judge-sweep calls additionally share the actual-agent budget with
+group readers, retaining their existing role/model caps and returning capacity
+when readers finish. Old workers must drain before a new budget rollout.
 
 Run-specific `research/RUN-owner-authoring-direction.md` is binding on drift,
 scaffolding, review, and authoring workers. Create it before planning or run

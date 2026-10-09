@@ -17,6 +17,7 @@ import { dirname, join, relative, resolve, resolve as pathResolve } from 'node:p
 import { homedir } from 'node:os';
 import { REPO } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
+import { workflowAgentBudget } from './workflow-agent-budget.mjs';
 import { parseCodexOutput, validateCodexOutput, validateCodexOutputSchema } from './codex-output-schema.mjs';
 import { findRollout, readDispatchUsage, readDispatchTerminal } from './dispatch-usage.mjs';
 import { checkPairAuthorArtifacts } from './dispatch-author-artifacts.mjs';
@@ -644,6 +645,10 @@ else writeAttemptFile(promptPath, stablePromptPath, prompt);
 
 const started = new Date();
 const release = await pool.acquire(role);
+let releaseBudget = () => {};
+try {
+  releaseBudget = await workflowAgentBudget({ repo: REPO, run }).acquire();
+} catch (error) { release(); throw error; }
 
 let temporaryHome = null;
 // Set only when `--session-home` was given. Never torn down: it carries the
@@ -745,9 +750,10 @@ const result = await new Promise((resolve) => {
   child.on('error', (error) => { stderr.append(error); finish(null); });
   child.on('close', finish);
   child.stdin.end(prompt);
+}).finally(() => {
+  releaseBudget();
+  release();
 });
-
-release();
 try {
   if (codexAuthPaths) persistRotatedCodexAuth({
     ...codexAuthPaths,

@@ -6,11 +6,12 @@
 
 import { existsSync, readFileSync } from 'node:fs';
 import { spawn } from 'node:child_process';
-import { tsxLoader } from './paths.mjs';
+import { REPO, tsxLoader } from './paths.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { MODELS, resolveLineup } from './models.mjs';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { createSlotPool } from './slots.mjs';
+import { workflowAgentBudget } from '../workflow-agent-budget.mjs';
 
 const argv = process.argv.slice(2);
 const option = (name) => {
@@ -127,6 +128,7 @@ const caps = Object.fromEntries(models.map((model) => [model, capFor(model)]));
 const slots = createSlotPool({
   root: '/tmp/prestige-math-library-judge-slots', caps, label: 'judge-sweep',
 });
+const agentBudget = workflowAgentBudget({ repo: REPO, run });
 
 const pending = [];
 for (const model of models) {
@@ -143,8 +145,10 @@ for (const model of models) {
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const capture = async (task, attempt) => {
   const release = await slots.acquire(task.model);
-  console.log(`[judge-sweep] start ${task.model} ${task.id} attempt ${attempt}`);
+  let releaseBudget = () => {};
   try {
+    if (agentBudget) releaseBudget = await agentBudget.acquire();
+    console.log(`[judge-sweep] start ${task.model} ${task.id} attempt ${attempt}`);
     return await new Promise((done) => {
       const child = spawn(process.execPath, [
         '--import', loader, 'tools/physics-support/judge.mts', `items/${task.id}.md`, '--model', task.model,
@@ -174,6 +178,7 @@ const capture = async (task, attempt) => {
       });
     });
   } finally {
+    releaseBudget();
     release();
   }
 };

@@ -468,8 +468,13 @@ fixes reach live gate descriptors without changing the recovery cap or stage ord
   the fallback for stages without an explicit cap; `globalConcurrency` caps
   each controller's total in-flight dispatches, not a host-wide shared pool.
   A machine budget below a stage's lane capacity queues pending units without
-  reducing the approved build scope. These caps do not bound subprocess
-  fan-out within a native tool.
+  reducing the approved build scope. A shared per-run actual-agent budget also
+  counts run-labelled dispatches and each nested judge-sweep model call, so
+  group readers and judges together stay at or below 30 (or a lower configured
+  limit). Existing role and model caps still apply. Released reader slots are
+  available to judges. The budget uses atomic heartbeat slots keyed by canonical
+  workspace and run; standalone judging keeps its existing caps. Deploy changes
+  after old workers drain, since already-running processes retain loaded code.
 
 - All agent lanes use `model_auto_compact_token_limit=500000` with scope `total`.
   The dispatcher and judge pass this explicitly for isolated Codex homes;
