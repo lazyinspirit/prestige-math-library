@@ -122,6 +122,35 @@ for (const engine of engines) {
       put(`research/${run}-impact.json`, impact);
       assert.equal(step5bReviewCoverage({ repo, run, physics: engine.physics }).complete, true);
       assert.equal(readFileSync(join(repo, `research/${run}-5b-verdicts.jsonl`), 'utf8'), originalVerdicts);
+      const cleanCount = step5bReviewCoverage({ repo, run, physics: engine.physics }).counts.completed;
+      // Successful-looking status and all current use hashes cannot resolve an
+      // explicitly retained source-domain defect or its required owner action.
+      impact.dispositions[0].review_outcome = 'confirmed_nonfatal';
+      impact.dispositions[0].owner_resolution_required = true;
+      put(`research/${run}-impact.json`, impact);
+      const heldBytes = readFileSync(join(repo, `research/${run}-impact.json`), 'utf8');
+      const ownerHeld = step5bReviewCoverage({ repo, run, physics: engine.physics });
+      assert.equal(ownerHeld.complete, false);
+      assert.equal(ownerHeld.counts.completed, cleanCount - 1);
+      assert.equal(ownerHeld.pending[0].owner_resolution_required, true);
+      assert.equal(ownerHeld.pending[0].owner_hold, true);
+      assert.equal(ownerHeld.pending[0].review_outcome, 'confirmed_nonfatal');
+      assert.ok(ownerHeld.errors.some((e: any) => e.code === 'owner-resolution-required'), 'only-owner work must not launch repeat readers');
+      assert.equal(readFileSync(join(repo, `research/${run}-impact.json`), 'utf8'), heldBytes, 'inspection preserves all evidence/flags');
+      // A separate unresolved edge remains independently reviewable.
+      put(`research/${run}-5b-verdicts.jsonl`, JSON.stringify(forward) + '\n');
+      const independent = step5bReviewCoverage({ repo, run, physics: engine.physics });
+      assert.equal(independent.complete, false); assert.equal(independent.errors.length, 0);
+      assert.ok(independent.pending.some((r: any) => r.kind === 'edge'));
+      assert.ok(independent.pending.some((r: any) => r.owner_hold === true));
+      put(`research/${run}-5b-verdicts.jsonl`, originalVerdicts);
+      // Only an actual owner disposition clears the retained flag; the helper
+      // itself neither creates the resolution nor changes the receipt.
+      impact.dispositions[0].owner_resolution = 'Owner reviewed and resolved the recorded source-domain obligation.';
+      impact.dispositions[0].owner_resolution_required = false;
+      put(`research/${run}-impact.json`, impact);
+      assert.equal(step5bReviewCoverage({ repo, run, physics: engine.physics }).complete, true);
+
       put('research/nested/forward-review.md', forwardEvidence + '\nAn appended checkpoint changes evidence bytes.');
       const evidenceChanged = step5bReviewCoverage({ repo, run, physics: engine.physics });
       assert.equal(evidenceChanged.complete, false);

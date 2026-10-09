@@ -570,6 +570,11 @@ current consumer and supplier hashes, the consumed clauses and actual use
 locations for every relevant changed supplier; justified exclusions remain
 explicit. Invalid or stale evidence holds for the owner.
 
+An explicit `owner_resolution_required: true` keeps an impact disposition
+pending even when its status otherwise indicates success. Independent reviews
+may continue; when only owner holds remain, the engine stops reader dispatches
+and keeps gates closed until those holds are resolved.
+
 After a successful partial handoff, the engine launches a serial native
 continuation of the existing lead task for only the missing current obligations.
 Its immutable generated task and dispatch metadata capture the completed-count

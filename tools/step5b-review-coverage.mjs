@@ -80,8 +80,11 @@ export function step5bReviewCoverage({ repo, run, physics = false }) {
       || !Array.isArray(impact.errors) || impact.summary?.errors !== impact.errors.length) throw Error('Malformed impact coverage');
     const required = impact.required_review, rows = receipt?.dispositions ?? [];
     const byId = new Map(rows.map(row => [row.id, row]));
-    const waiting = new Set(required.filter(id => !byId.has(id) || byId.get(id)?.status === 'pending'));
+    const waiting = new Set(required.filter(id => !byId.has(id) || byId.get(id)?.status === 'pending'
+      || byId.get(id)?.owner_resolution_required === true));
     for (const id of waiting) pending.push({ kind: 'impact', window: name, id,
+      ...(byId.get(id)?.owner_resolution_required === true ? { owner_resolution_required: true,
+        review_outcome: byId.get(id).review_outcome, owner_hold: true } : {}),
       suppliers: impact.impacts.filter(row => row.required_review.includes(id)).map(row => row.source) });
     if (!receipt) pending.push({ kind: 'impact-window', window: name, reason: 'reviewer-bound receipt not yet written' });
     for (const issue of impact.errors) {
@@ -122,11 +125,17 @@ export function step5bReviewCoverage({ repo, run, physics = false }) {
   const total = cross.counts.edges + cross.counts.forwards + cross.counts.changes + windows.reduce((n, w) => n + w.required, 0);
   const unique = [...new Map(pending.map(row => [JSON.stringify(row), row])).values()];
   const completed = total - unique.filter(row => row.kind !== 'impact-window').length;
+  const ownerHolds = unique.filter(row => row.owner_resolution_required === true);
+  // Do not dispatch a fresh reviewer when only owner decisions remain. Other
+  // independent unfinished obligations stay continuable without clearing flags.
+  if (ownerHolds.length && ownerHolds.length === unique.length)
+    errors.push({ code: 'owner-resolution-required', channel: 'impact',
+      message: `Only ${ownerHolds.length} explicit owner hold(s) remain; preserve their evidence and await owner resolution` });
   const result = { complete: unique.length === 0 && errors.length === 0, pending: unique, errors,
-    counts: { ...cross.counts, impact_windows: windows, completed: errors.length ? 0 : completed, pending: unique.length },
+    counts: { ...cross.counts, impact_windows: windows, completed: errors.some(error => error.code !== 'owner-resolution-required') ? 0 : completed, pending: unique.length, owner_holds: ownerHolds.length },
     progress: hash(JSON.stringify(unique.map(row => JSON.stringify(Object.fromEntries(
       ['kind','from','to','item','target','batch','id','window'].filter(k => row[k] !== undefined).map(k => [k,row[k]])))).sort())),
-    why: `${completed}/${total} current review obligations complete; ${unique.length} unfinished${errors.length ? `; ${errors.length} invalid/stale evidence hold(s)` : ''}` };
+    why: `${completed}/${total} current review obligations complete; ${unique.length} unfinished${errors.length ? `; ${errors.length} evidence/owner hold(s)` : ''}` };
   cache.set(key, { inputs, result });
   return result;
 }
