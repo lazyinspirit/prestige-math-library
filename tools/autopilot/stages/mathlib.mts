@@ -92,12 +92,16 @@ function batchDependencies(ctx: any, unit: string): string[] {
  * coverage record, and every current item-readiness receipt exist. The item
  * list is read dynamically because planning intentionally creates empty page
  * shells before the Beta fills them. */
-const scaffoldSnapshots = new WeakMap<object, {
+type ScaffoldSnapshot = {
   stamp: string;
   snapshot: any;
   levelCheck: ReturnType<typeof dependencyLevels>;
   itemStamps: Map<string, string>;
-}>();
+};
+// Executor.ctx() is transient; its config retains the controller's identity.
+// Scope the retained entries by repo/run as well, including diagnostic callers
+// that deliberately reuse a configuration object across different frontiers.
+const scaffoldSnapshots = new WeakMap<object, Map<string, ScaffoldSnapshot>>();
 
 function fileStamp(path: string): string {
   try {
@@ -106,7 +110,7 @@ function fileStamp(path: string): string {
   } catch { return 'missing'; }
 }
 
-function scaffoldSnapshot(ctx: any) {
+export function scaffoldSnapshot(ctx: any) {
   const dir = R(ctx, 'research');
   const files = readdirSync(dir)
     .filter((name: string) => name.startsWith(`${ctx.run}-batch-`)
@@ -114,15 +118,19 @@ function scaffoldSnapshot(ctx: any) {
     .sort();
   const stamp = [fileStamp(join(dir, 'plan-spec.json')),
     ...files.map((name: string) => `${name}:${fileStamp(join(dir, name))}`)].join('|');
-  let cached = scaffoldSnapshots.get(ctx);
+  const owner = ctx.config && typeof ctx.config === 'object' ? ctx.config : ctx;
+  const scope = JSON.stringify([ctx.repo, ctx.run]);
+  let scopes = scaffoldSnapshots.get(owner);
+  if (!scopes) { scopes = new Map(); scaffoldSnapshots.set(owner, scopes); }
+  let cached = scopes.get(scope);
   if (!cached || cached.stamp !== stamp) {
     const snapshot = loadStep3(ctx.repo, ctx.run);
     cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map() };
-    scaffoldSnapshots.set(ctx, cached);
+    scopes.set(scope, cached);
   } else {
     // Published and in-run item bodies can change without a manifest edit.
-    // Invalidate dependency bytes before checking the next unit in this same
-    // status pass; Step-1 receipt files themselves are read afresh below.
+    // Invalidate dependency bytes before checking the next unit or status pass;
+    // Step-1 receipt files themselves are read afresh below.
     for (const [id, prior] of cached.itemStamps) {
       if (fileStamp(R(ctx, 'items', `${id}.md`)) !== prior) {
         cached.snapshot.cache.clear();

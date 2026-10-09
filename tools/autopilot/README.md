@@ -31,7 +31,13 @@ allowing queued dispatch timers to launch ready workers.
 
 Step1 scaffold batches declare their same-stage in-run prerequisites to the
 executor. Their consumers wait for artifact-complete, stable transitive
-suppliers. Step3 pair authors can start across batches while an in-run supplier
+suppliers. Scaffold snapshots are cached by the controller's stable configuration
+identity and repository/run, so fresh context objects reuse parsed inventories.
+Plan, manifest and coverage mtime/ctime/size changes rebuild the snapshot;
+published and in-run item-body changes invalidate parsed dependency inputs.
+Readiness records are read afresh on every artifact check. This cache changes
+repeated parsing, not the conditions for releasing suppliers.
+Step3 pair authors can start across batches while an in-run supplier
 is unfinished; they flag exact missing items, author consumers, and leave
 unresolved item decisions escalated for reconciliation. Step3b audits each
 scaffold for authoring readiness, writes complete arguments and clears the
