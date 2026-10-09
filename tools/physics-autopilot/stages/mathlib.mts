@@ -2613,13 +2613,19 @@ for (const stage of stages) {
   }
 }
 
+// These joins precede item authoring. Validate current manifest scaffolds;
+// the completed 3b-author join and every later join require real carriers.
+const preAuthorPhysicsStages = new Set([
+  '1-drift', '1-drift-apply', '1-scaffold', '3a-scope', '3-baseline',
+]);
+
 for (const stage of stages) {
   // Assignment is metadata bookkeeping; its sole gate is alpha-groups.
   if (stage.id === '2-assign') continue;
   const existing = stage.gates;
   delete stage.gatesWaived;
   stage.gates = (ctx: any) => [
-    gate('physics-content', ['node', 'tools/physics-support/physics-check.mjs', '--run', ctx.run, ...(stage.id.startsWith('1') || stage.id.startsWith('2') ? ['--plan', 'research/plan-spec.json'] : [])]),
+    gate('physics-content', ['node', 'tools/physics-support/physics-check.mjs', '--run', ctx.run, ...(preAuthorPhysicsStages.has(stage.id) ? ['--plan', 'research/plan-spec.json'] : [])]),
     ...(typeof existing === 'function' ? existing(ctx) : existing ?? []),
   ];
 }

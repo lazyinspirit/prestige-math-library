@@ -51,7 +51,11 @@ prerequisites, B-leaf rules, and all source-retrieval gates remain in force.
 
 Every content stage adds a mandatory physics-content gate: classification, kind prefixes,
 mathematical boundary, relation resolution, DAG, and class-specific structure.
-Step 1 validates the plan; later content stages validate authored content.
+Pre-author joins `1-drift`, `1-drift-apply`, `1-scaffold`, `3a-scope` and
+`3-baseline` validate the plan overlaid with current manifest scaffolds, without
+requiring item or page carriers that have not yet been authored. The completed
+`3b-author` join and every later physics-content gate require actual carriers
+and class-specific body checks; they do not use scaffold plan mode.
 Step 2 is metadata bookkeeping with only its structural assignment gate. Class-specific
 item contracts and judge instructions distinguish source reviews from proofs.
 Proof layout may have zero steps only when every scoped item is explicitly
