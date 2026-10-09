@@ -90,6 +90,17 @@ refuses unrelated staged changes. See ../WORKFLOW.md for unchanged supervision,
 repair-loop, source-retrieval, and recovery semantics; replace engine/support
 paths with their physics equivalents.
 
+Step 5 routes draft suppliers in other current-run batches as
+`in-run-dependency`, with the assigned consumer, unique producer ownership,
+actual dependency path and bound pre-reader or current source observation.
+Historical findings remain historical when a producer repairs its source;
+current producer and consumer adjudication is still required. The physics
+splitter, collector, stamp and final check enforce these bindings as described
+in ../WORKFLOW.md. Outside published suppliers may use a sealed
+`context_accepted` disposition for the exact proved consumer use; their
+maintenance finding remains open, and the disposition never certifies or
+repairs the imported item.
+
 Website integration and publication of the physics view are separate work.
 This workflow builds and verifies physics content without altering math behavior.
 

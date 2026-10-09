@@ -107,7 +107,7 @@ console.log('1 item(s) routed; over 1 item(s) in fixture');\n`);
   const gate = (id: string, _argv: any, extra: any = {}) => ({ ...extra, id, argv: ['node', gateScript, id] });
   const groups = [{ label: 'a', covers: ['1', '2'] }];
   const stages: any[] = step5Stages({
-    gate, batches: () => ['1', '2'], alphaGroups: () => groups,
+    gate, planGate: () => gate('plan', []), batches: () => ['1', '2'], alphaGroups: () => groups,
     resultPattern: (role: string, label: string) => new RegExp(`^${role}-(?:${label})\\.result\\.json$`),
     repoWide: () => [gate('repo', [])], contractGates: () => [gate('contracts', [])],
     coverageGates: () => [gate('coverage', [])], policyItemGate: () => gate('policy', []),
@@ -142,7 +142,7 @@ console.log('1 item(s) routed; over 1 item(s) in fixture');\n`);
     concurrency: 30, maxAttempts: 1, coversMap: {}, dispatchStaggerMs: 0, adoptCommand: false } as any,
     stages, adapter, state, reporter: new Reporter({ dir: stateDir, intervalMs: 10 ** 9, sink: () => {} }) });
   for (let i = 0; i < 15 && !calls.includes('5a-batch-1'); i++) {
-    assert.equal(await ex.tick(), 'working');
+    assert.equal(await ex.tick(), 'working', JSON.stringify(state.data.blockers));
     await Promise.allSettled([...ex.inflight.values()].filter(d => d.meta.label !== 'refute-2').map(d => d.promise));
   }
   assert.ok(calls.includes('5a-batch-1'), 'batch 1 adjudicates while its sibling refuter is still working');
