@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { copyFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { copyFileSync, mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -275,4 +275,33 @@ test('run overlay rejects mismatched page selectors and ambiguous canonical item
   const wrongHome = f.gate();
   assert.equal(wrongHome.status, 1, output(wrongHome));
   assert.match(output(wrongHome), /\[frontier-selection\].*thm-selected has conflicting canonical ownership/);
+});
+
+test('before-apply checks scheduled page moves with current inventories and retains identity/dependency failures', t => {
+  const f = fixture(t); f.save();
+  const current = [
+    { ...f.pages[1], order: 0, items: [{ id: 'thm-current-only', kind: 'theorem', deps: [] }] },
+    { ...f.pages[2], order: 0.1, items: [{ id: 'ex-current-only', kind: 'example', deps: ['thm-current-only'] }] },
+  ];
+  for (let n = 1; n <= 3; n++) {
+    const a = { ...f.pages[1], id: `moved-${n}`, order: 4 + n * 2, companion: `moved-${n}-examples`, items: [] };
+    const b = { ...f.pages[2], id: a.companion, order: a.order + 1, requires: [a.id], items: [] };
+    f.pages.push(a, b); current.push({ ...a, order: -n * 2 }, { ...b, order: -n * 2 + 1 });
+  }
+  f.save();
+  const manifest = join(f.repo, 'research/run-test-batch-1.pages.json');
+  const execute = (before = false) => spawnSync(process.execPath, [tool, 'research/plan-spec.json', '--repo', f.repo, '--run', 'run-test', ...(before ? ['--before-apply'] : [])], { cwd: f.repo, encoding: 'utf8' });
+  writeFileSync(manifest, JSON.stringify(current));
+  const beforeBytes = readFileSync(manifest);
+  const strict = execute(); assert.equal(strict.status, 1, output(strict)); assert.match(output(strict), /\[prereq-order\]/);
+  const intended = execute(true); assert.equal(intended.status, 0, output(intended));
+  assert.deepEqual(readFileSync(manifest), beforeBytes);
+  current[0].items[0].deps = ['lem-unresolved-current'];
+  writeFileSync(manifest, JSON.stringify(current));
+  const unresolved = execute(true); assert.equal(unresolved.status, 1, output(unresolved)); assert.match(output(unresolved), /thm-current-only.*lem-unresolved-current/);
+  current[0].items[0].deps = [];
+  current[0].id = 'unknown-current'; writeFileSync(manifest, JSON.stringify(current));
+  const unknown = execute(true); assert.equal(unknown.status, 2, output(unknown)); assert.match(output(unknown), /must occur exactly once/);
+  const bare = spawnSync(process.execPath, [tool, 'research/plan-spec.json', '--repo', f.repo, '--before-apply'], { cwd: f.repo, encoding: 'utf8' });
+  assert.equal(bare.status, 2, output(bare)); assert.match(output(bare), /requires --run/);
 });

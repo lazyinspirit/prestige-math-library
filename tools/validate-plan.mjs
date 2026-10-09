@@ -4,6 +4,8 @@
 //
 //   node validate-plan.mjs plan-spec.json [--repo DIR] [--pages-file FILE] [--run RUN]
 // --run selects current manifest subjects; all suppliers remain graph context.
+// --before-apply uses canonical page metadata with those same current inventories
+// while native drift review precedes metadata SYNC; it requires --run.
 //
 // Guarantees checked (each a hard error unless marked WARN):
 //   1. resolve       every dep resolves to a planned item or an item already in items/
@@ -82,6 +84,9 @@ const repo = argVal('--repo') ?? REPO;
 const runPositions = args.flatMap((arg, i) => arg === '--run' ? [i] : []);
 if (runPositions.length > 1) die('--run may be specified once');
 const run = argVal('--run');
+const beforeApply = args.includes('--before-apply');
+if (args.filter(a => a === '--before-apply').length > 1) die('--before-apply may be specified once');
+if (beforeApply && !run) die('--before-apply requires --run and current manifest inventories');
 let selectedItemIds = null;
 let currentPages = null;
 if (runPositions.length) {
@@ -103,7 +108,7 @@ if (runPositions.length) {
 // still needs a recorded scope decision.
 const maxItems = Number(argVal('--max-items') ?? 100);
 const SET_THEORY_DEFERRED_PAGE = 'deferred-set-theory-beyond-choice';
-if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE] [--pages-file FILE] [--run RUN]');
+if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE] [--pages-file FILE] [--run RUN] [--before-apply]');
 
 // --rehomed: the owner-approved RE-HOME receipt (see the `dup-id` note below).
 // Absent, nothing changes: every clash between a planned id and an already
@@ -181,6 +186,8 @@ const warn = (code, msg) => warns.push(`[${code}] ${msg}`);
 if (currentPages) for (const page of currentPages) {
   if (spec.pages.filter(p => p.id === page.id).length !== 1)
     die(`frontier gate selection: page ${page.id} must occur exactly once in the plan`);
+  if (beforeApply && spec.pages.find(p => p.id === page.id).kind !== page.kind)
+    err('frontier-selection', `current manifest page ${page.id} kind conflicts with its canonical identity`);
   for (const item of page.items) {
     const homes = spec.pages.filter(p => (p.items ?? []).some(it => it.id === item.id));
     const occurrences = spec.pages.flatMap(p => (p.items ?? []).filter(it => it.id === item.id));
@@ -189,7 +196,11 @@ if (currentPages) for (const page of currentPages) {
   }
 }
 const currentPageById = new Map((currentPages ?? []).map(page => [page.id, page]));
-const pages = spec.pages.map(page => currentPageById.get(page.id) ?? page).sort((a, b) => a.order - b.order);
+const pages = spec.pages.map(page => {
+  const current = currentPageById.get(page.id);
+  if (!current) return page;
+  return beforeApply ? { ...page, items: current.items } : current;
+}).sort((a, b) => a.order - b.order);
 const pageOfItem = new Map();   // itemId -> page
 const itemById = new Map();     // itemId -> item
 const posInPage = new Map();    // itemId -> index within its page

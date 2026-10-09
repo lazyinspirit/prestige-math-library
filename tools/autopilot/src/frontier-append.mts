@@ -154,7 +154,7 @@ export function appendFrontier({ repo, run, stateDir, pairs, allowInRunDependenc
       `Write ${entry.report}, one ### PAGE_ID and one VERDICT line per assigned A page.`,
       'Allowed verdicts: no-drift, drift-applied, drift-reordered, drift-blocked. Apply only authorized plan corrections for these new pages; do not edit existing manifests/content, mint, rescope, or claim proof acceptance.',
       `Run node tools/tsx-run.mjs tools/autopilot/bin/frontier-append.mts check-review --run ${run} --generation ${number}.`,
-      `Run node tools/validate-plan.mjs research/plan-spec.json --run ${run}.`,
+      `Run node tools/validate-plan.mjs research/plan-spec.json --run ${run} --before-apply; current inventories are retained while intended canonical page metadata is checked before native SYNC.`,
       `Run node tools/validate-plan.mjs research/plan-spec.json --pages-file ${entry.archive}/new-pages.json to check all actual planned new item declarations even before scaffolding.`,
       'Name actual unresolved design/source prerequisites honestly; consult the full authoritative sources needed to assess the supplied designs. The engine owns review materialization.', '',
     ].join('\n'));
@@ -254,7 +254,7 @@ export function appendStages(stages: Stage[], ctx: Pick<Ctx, 'repo' | 'run'>): S
       artifacts: () => e.report,
       plan: () => [{ role: 'alpha', label, job: 'verification', covers: [unit], brief: 'briefs/alpha-drift.md', task: [e.task], timeout: 7200 }],
       gates: () => [{ id: `append-review-${e.number}`, argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'check-review', '--run', ctx.run, '--generation', String(e.number)], liveness: { pattern: 'APPEND_REVIEW (\\d+) page', min: e.pairs.length } },
-        { id: 'append-review-plan', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--run', ctx.run] },
+        { id: 'append-review-plan', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--run', ctx.run, '--before-apply'] },
         { id: 'append-planned-items', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--pages-file', `${e.archive}/new-pages.json`] }],
     }, { id: `1-append-apply-${e.number}`, label: `materialize appended drift ${e.number}`, units: () => [unit],
       pattern: new RegExp(`^tool-(?:tool-)?drift-append-apply-${e.number}\\.result\\.json$`), concurrency: 1,

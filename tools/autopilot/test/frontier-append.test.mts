@@ -117,6 +117,8 @@ test('saved Step1 completion cannot cover fresh append drift or launch scaffold 
   const gates = table[2].gates!({ repo: f.repo, run: 'demo' } as any);
   assert.equal(gates.length, 3);
   assert.ok(gates.some((g: any) => g.argv.includes('--run') && g.argv.includes('tools/validate-plan.mjs')));
+  assert.ok(gates.some((g: any) => g.argv.includes('--before-apply')));
+  assert.ok(!table[3].gates!({ repo: f.repo, run: 'demo' } as any).some((g: any) => g.argv.includes('--before-apply')));
   const planned = gates.find((g: any) => g.argv.includes('--pages-file'))!;
   assert.ok(!planned.argv.includes('--run'));
   assert.deepEqual(JSON.parse(readFileSync(join(f.repo, planned.argv.at(-1)!), 'utf8')), ['new-a', 'new-a-examples', 'new-b', 'new-b-examples']);

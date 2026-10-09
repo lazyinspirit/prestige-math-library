@@ -70,7 +70,12 @@ On normal restart, native generation-specific `1-append-drift-N` and
 appended pairs and uses a fresh `drift-review-append-N` label; an old review cannot
 satisfy it. Review gates check the full run plan and a persisted, nonempty new-page
 selection so planned item declarations are checked before the new inventories
-are scaffolded. After genuine successful review, the native apply tool merges the
+are scaffolded. The review's `validate-plan --run RUN --before-apply` checks
+intended canonical page metadata with all current manifest item inventories;
+old manifest order fields may still await native SYNC. This option requires
+`--run` and retains page identities, current item dependencies and supplier
+closure checks. After apply, ordinary `--run` validation strictly checks the
+synchronized live metadata. After genuine successful review, the native apply tool merges the
 attributed reports and runs normal metadata SYNC over the full frontier,
 preserving every item array and batch identity while updating approved plan
 orders and prerequisites. Scoped drift, plan and ledger gates must pass before
