@@ -1,5 +1,5 @@
 // Read-only current review coverage. Never writes verdicts, receipts, or state.
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync, realpathSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
@@ -131,7 +131,7 @@ export function step5bReviewCoverage({ repo, run, physics = false }) {
   return result;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(resolve(process.argv[1]))).href) {
   try {
     const args = process.argv.slice(2), option = key => args[args.indexOf(`--${key}`) + 1];
     const result = step5bReviewCoverage({ repo: args.includes('--root') ? option('root') : process.cwd(), run: option('run'), physics: args.includes('--physics') });
