@@ -20,3 +20,10 @@ their original source by the unchanged mathematical repair verifier.
 
 These helpers are deliberately separate so physics changes do not alter the
 mathematics workflow. See ../../physics/SCHEMA.md and ../../physics/WORKFLOW.md.
+
+`citation-urls.mjs` extracts URLs from decoded data. In coverage mode it excludes
+validly dropped sources and diagnostic fields: `historical_*`, `checks`,
+`recovery_attempts`, `failed_url_attempts`, and `source_resolution`. Preserved
+failed retrieval records do not reactivate old source URLs. Active source and
+citation fields remain visible, including dead URLs that still require checking;
+noncoverage traversal is unchanged. Collection never edits the coverage history.
