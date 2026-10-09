@@ -16,7 +16,7 @@ import {
 // which headings are legal. In particular, a counterexample item's citable
 // claim is `Statement refuted`; `Counterexample` is its witness and has never
 // been a valid source_section in proof-contract.mjs.
-const CITABLE_HEADINGS = ['Statement', 'Statement refuted', 'Definition', 'Example', 'Remark'];
+const CITABLE_HEADINGS = [...SOURCE_SECTIONS];
 
 function itemPath(id) { return `items/${id}.md`; }
 
@@ -36,7 +36,7 @@ function statementSection(id) {
 /** [L#]/[F#]/[A#] fact lines and the wikilink targets each declares. */
 function parseFacts(md) {
   return [...factParagraphs(splitFrontmatter(md).body).values()]
-    .map((fact) => ({ fact: fact.label, text: fact.text, targets: fact.links }));
+    .map((fact) => ({ fact: fact.label, text: fact.text, targets: [...new Set(fact.links)] }));
 }
 
 /** Numbered proof steps, including every continuation line. The same shared

@@ -132,12 +132,34 @@ export function externalContextReceipt(root, run, decision, target = null, group
       || ledgerRow.caught_at_stage !== '5a-adjudicate' || !['open', 'deferred'].includes(ledgerRow.disposition)
       || !(ledgerRow.adjudication_ref ?? []).some(ref => ref.path === decisionPath
         && ref.obligation === finding.obligation)) return reject('original outside defect row is not retained open/deferred');
-    return { valid: true, defect_id: maintenance.defect_id, seal: {
+    // A later binding correction may explicitly supersede an earlier row for
+    // this exact finding. Retain and seal every open row in that chain; this
+    // is neither outside-item acceptance nor maintenance-defect closure.
+    const supersededIds = new Set([ledgerRow.defect_id]), superseded = [];
+    if (!Array.isArray(ledgerRow.supersedes ?? [])) return reject('invalid outside superseded row chain');
+    const pendingSuperseded = [...(ledgerRow.supersedes ?? [])];
+    while (pendingSuperseded.length) {
+      const id = pendingSuperseded.shift();
+      if (typeof id !== 'string' || supersededIds.has(id)) return reject('invalid outside superseded row chain');
+      const matches = ledgerRows.filter(row => row.defect_id === id), prior = matches[0];
+      if (matches.length !== 1 || prior.run !== run || prior.subject !== finding.id
+        || prior.caught_at_stage !== '5a-adjudicate' || !['open', 'deferred'].includes(prior.disposition)
+        || !['class', 'subclass', 'severity', 'location', 'batch', 'consumer_id']
+          .every(key => prior[key] === ledgerRow[key])
+        || !(prior.adjudication_ref ?? []).some(ref => ref.path === decisionPath
+          && ref.obligation === finding.obligation)
+        || !Array.isArray(prior.supersedes ?? [])) return reject('outside superseded row is not the same retained finding');
+      supersededIds.add(id); superseded.push({ defect_id: id, ledger_row_sha256: hashValue(prior) });
+      pendingSuperseded.push(...(prior.supersedes ?? []));
+    }
+    return { valid: true, defect_id: maintenance.defect_id,
+      ...(superseded.length ? { defect_ids: [...supersededIds] } : {}), seal: {
       receipt_path: receiptPath, receipt_sha256: sha256(raw), finding_sha256: hashValue(finding),
       decision_path: decisionPath, decision_group: ownerGroup, assignment_group: scope.group,
       supplier_math_sha256: entry.supplier_math_sha256, consumer_math_sha256: entry.consumer_math_sha256,
       review_evidence: referenceHashes, maintenance_path: maintenance.path,
       maintenance_quote_sha256: sha256(maintenance.quote), ledger_row_sha256: hashValue(ledgerRow),
+      ...(superseded.length ? { superseded_rows: superseded } : {}),
     } };
   } catch (cause) { return reject(`context receipt unavailable: ${cause.message}`); }
 }

@@ -1200,3 +1200,16 @@ projection. It accepts no other evidence change or new mathematical verdict.
 The same binding preserves the original human ledger and admits its exact
 current native rendering. All230 other certificate evidence artifacts remain
 unchanged; neither history carrier changes a proof or a judgment.
+
+
+Step 5 contract regeneration uses the source headings allowed by the contract
+grammar and deduplicates repeated links within each fact. Physics Postulate and
+Observations quotations are retained as their own source sections; regeneration
+does not change boundary evidence or completed risk reviews.
+
+An outside-consumer context seal may retain an explicit `supersedes` chain for a
+corrected binding record. Every linked row must remain open or deferred, match
+the same run, supplier, defect classification, location, consumer and exact
+adjudication obligation, and be sealed by its current row hash. Missing rows,
+unrelated findings and cycles are rejected. This retains original evidence and
+its binding correction without accepting or repairing the outside item.

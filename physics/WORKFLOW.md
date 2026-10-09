@@ -282,3 +282,10 @@ certification inputs, and the current Step-7 certification's transitive evidence
 are also bound. Resolved descriptors authorize and execute the same battery,
 including its advisory remainder. Durable consumed history prevents authorization
 replay even if the controller crashes before replacing the request file.
+
+
+Step 5 regeneration retains all schema-supported citation sections, including
+Postulate and Observations, and emits one record per fact/source pair. Outside
+context seals retain explicitly superseded binding rows only for the same
+finding, with both original and corrected maintenance rows still open; the
+strict chain and hash checks are shared with the mathematics engine.

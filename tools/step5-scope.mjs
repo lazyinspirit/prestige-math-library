@@ -1311,7 +1311,7 @@ if (command === 'check') {
             }
             // Retain the original obligation and outside defect as context,
             // with no claim that the published interface was fixed or false.
-            contextualDefects.add(context.defect_id);
+            for (const id of context.defect_ids ?? [context.defect_id]) contextualDefects.add(id);
           }
           continue;
         }

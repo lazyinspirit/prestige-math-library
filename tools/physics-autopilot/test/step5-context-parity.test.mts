@@ -93,3 +93,37 @@ checkCase('rejects replacement of the original finding', f => { f.finding.eviden
 checkCase('rejects closing the immutable outside maintenance defect', f => {
   f.ledgerRow.disposition = 'resolved'; f.put('research/defect-ledger.jsonl', JSON.stringify(f.ledgerRow) + '\n');
 }, /original outside defect row is not retained/);
+
+
+test('seals an explicit same-finding superseded binding row and retains both defects open', () => {
+  const f = fixture();
+  try {
+    const prior = { ...f.ledgerRow, defect_id: 'original-binding' };
+    f.ledgerRow.supersedes = [prior.defect_id];
+    f.put('research/defect-ledger.jsonl', JSON.stringify(prior) + '\n' + JSON.stringify(f.ledgerRow) + '\n');
+    const result = f.check();
+    assert.equal(result.valid, true, result.error);
+    assert.deepEqual(result.defect_ids, ['outside-gap', 'original-binding']);
+    assert.deepEqual(result, mathContextReceipt(f.root, f.run, f.decision, f.finding, 'a'));
+    f.decision.context_evidence = result.seal; f.saveDecision();
+    assert.deepEqual(step5Escalations(f.root, f.run), []);
+    assert.equal(prior.disposition, 'open');
+    prior.disposition = 'resolved';
+    f.put('research/defect-ledger.jsonl', JSON.stringify(prior) + '\n' + JSON.stringify(f.ledgerRow) + '\n');
+    assert.equal(f.check().valid, false);
+  } finally { f.cleanup(); }
+});
+for (const mismatch of ['subject', 'location', 'obligation', 'cycle', 'missing']) test(`rejects superseded row ${mismatch}`, () => {
+  const f = fixture();
+  try {
+    const prior: any = { ...f.ledgerRow, defect_id: 'original-binding' };
+    f.ledgerRow.supersedes = [prior.defect_id];
+    if (mismatch === 'subject') prior.subject = 'another-supplier';
+    if (mismatch === 'location') prior.location = 'another-clause';
+    if (mismatch === 'obligation') prior.adjudication_ref = [{ ...prior.adjudication_ref[0], obligation: 'reader:1:2' }];
+    if (mismatch === 'cycle') prior.supersedes = [f.ledgerRow.defect_id];
+    f.put('research/defect-ledger.jsonl', (mismatch === 'missing' ? '' : JSON.stringify(prior) + '\n') + JSON.stringify(f.ledgerRow) + '\n');
+    assert.equal(f.check().valid, false);
+    assert.equal(mathContextReceipt(f.root, f.run, f.decision, f.finding, 'a').valid, false);
+  } finally { f.cleanup(); }
+});
