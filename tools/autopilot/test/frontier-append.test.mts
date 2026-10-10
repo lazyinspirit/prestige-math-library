@@ -115,7 +115,9 @@ test('saved Step1 completion cannot cover fresh append drift or launch scaffold 
   const table = appendStages(base, { repo: f.repo, run: 'demo' });
   assert.deepEqual(table.map(s => s.id), ['1-drift', '1-drift-apply', '1-append-drift-1', '1-append-apply-1', '1-scaffold']);
   const gates = table[2].gates!({ repo: f.repo, run: 'demo' } as any);
-  assert.equal(gates.length, 3);
+  assert.equal(gates.length, 4);
+  assert.equal(gates[0].id, 'append-frontier-metadata-recertify');
+  assert.equal(table[3].gates!({ repo: f.repo, run: 'demo' } as any)[0].id, 'append-frontier-metadata-recertify');
   assert.ok(gates.some((g: any) => g.argv.includes('--run') && g.argv.includes('tools/validate-plan.mjs')));
   assert.ok(gates.some((g: any) => g.argv.includes('--before-apply')));
   assert.ok(!table[3].gates!({ repo: f.repo, run: 'demo' } as any).some((g: any) => g.argv.includes('--before-apply')));

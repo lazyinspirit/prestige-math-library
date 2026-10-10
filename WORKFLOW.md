@@ -79,7 +79,12 @@ synchronized live metadata. After genuine successful review, the native apply to
 attributed reports and runs normal metadata SYNC over the full frontier,
 preserving every item array and batch identity while updating approved plan
 orders and prerequisites. Scoped drift, plan and ledger gates must pass before
-Beta work resumes. No state or gate stamp is edited by append. If interrupted,
+Beta work resumes. Each append gate battery first recertifies all current frontier
+items and the new declared inventories in dependency order for formatting,
+metadata and input hashes only. Each attempt writes a fresh immutable report;
+existing owner holds and repair counters remain intact. An owner exception for
+prerequisite append gates never permits the main build gates. No state or gate
+stamp is edited by append. If interrupted,
 inspect the archived transaction and its lock before recovery; do not replace
 populated manifests or manufacture review receipts.
 

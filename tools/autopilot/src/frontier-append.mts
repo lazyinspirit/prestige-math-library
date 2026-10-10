@@ -249,17 +249,18 @@ export function appendStages(stages: Stage[], ctx: Pick<Ctx, 'repo' | 'run'>): S
   if (index < 0 || !original || stages[index - 1]?.id !== '1-drift-apply') fail('unsupported native Step-1 stage table');
   const inserted: Stage[] = entries.flatMap((e: any) => {
     const label = `drift-review-append-${e.number}`, unit = `append-${e.number}`;
+    const recertify = () => ({ id: 'append-frontier-metadata-recertify', argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'recertify', '--run', ctx.run, '--generation', String(e.number)], liveness: { pattern: 'APPEND_RECERT (\\d+) item', min: 1 } });
     return [{ ...original, id: `1-append-drift-${e.number}`, label: `Step 1 — appended frontier drift ${e.number}`,
       units: () => [unit], pattern: new RegExp(`^alpha-(?:alpha-)?${label}\\.result\\.json$`), labelFor: () => label,
       artifacts: () => e.report,
       plan: () => [{ role: 'alpha', label, job: 'verification', covers: [unit], brief: 'briefs/alpha-drift.md', task: [e.task], timeout: 7200 }],
-      gates: () => [{ id: `append-review-${e.number}`, argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'check-review', '--run', ctx.run, '--generation', String(e.number)], liveness: { pattern: 'APPEND_REVIEW (\\d+) page', min: e.pairs.length } },
+      gates: () => [recertify(), { id: `append-review-${e.number}`, argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'check-review', '--run', ctx.run, '--generation', String(e.number)], liveness: { pattern: 'APPEND_REVIEW (\\d+) page', min: e.pairs.length } },
         { id: 'append-review-plan', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--run', ctx.run, '--before-apply'] },
         { id: 'append-planned-items', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--pages-file', `${e.archive}/new-pages.json`] }],
     }, { id: `1-append-apply-${e.number}`, label: `materialize appended drift ${e.number}`, units: () => [unit],
       pattern: new RegExp(`^tool-(?:tool-)?drift-append-apply-${e.number}\\.result\\.json$`), concurrency: 1,
       plan: () => [{ role: 'tool', label: `drift-append-apply-${e.number}`, job: 'bookkeeping-mechanical', covers: [unit], argv: ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/frontier-append.mts', 'apply', '--run', ctx.run, '--generation', String(e.number)], timeout: 600 }],
-      gates: () => [{ id: 'append-drift-scope', argv: ['node', 'tools/drift-review-check.mjs', '--run', ctx.run] }, { id: 'append-plan', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--run', ctx.run] },
+      gates: () => [recertify(), { id: 'append-drift-scope', argv: ['node', 'tools/drift-review-check.mjs', '--run', ctx.run] }, { id: 'append-plan', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--run', ctx.run] },
         { id: 'append-planned-items', argv: ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--pages-file', `${e.archive}/new-pages.json`] },
         { id: 'append-ledger', argv: ['node', 'tools/manifest-integrity.mjs', '--run', ctx.run] }], onHold: original.onHold,
     }];
