@@ -29,6 +29,7 @@ import { Executor } from '../src/executor.mts';
 import { makeExecAdapter } from '../src/adapters/exec.mts';
 import { writeCommand } from '../src/control.mts';
 import { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
+import { writeBatchDependencyLevels } from '../../batch-dependency-levels.mjs';
 import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
@@ -359,6 +360,7 @@ switch (cmd) {
     if (cap !== 1) die('plan: --cap must be 1 so each batch can be audited and authored in dependency-level order');
     const groups = packBatches(repo, pages, { cap });
     const written = writeManifests(repo, run, groups, { force: has('force') });
+    writeBatchDependencyLevels(repo, run);
     console.log(`step 0 for ${run}: ${pages.length} A/B pair(s) -> ${groups.length} batch(es), cap ${cap}\n`);
     for (const wr of written) console.log(`  batch ${wr.batch}: ${wr.pages.join(', ')}`);
 

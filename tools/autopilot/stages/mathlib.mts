@@ -30,6 +30,7 @@ import { loadStep3 } from '../../frontier-snapshot.mjs';
 import { step1Decision } from '../../step1-decisions.mjs';
 import { dependencyLevels, orderedItems } from '../../item-dependency-levels.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
+import { writeBatchDependencyLevels } from '../../batch-dependency-levels.mjs';
 import { batchInput, prerequisiteBatches, loopState, collectBatch, accepted, loopPattern, batchPlan } from '../../batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
 import { appendStages } from '../src/frontier-append.mts';
@@ -70,21 +71,6 @@ export function batches(ctx: any): string[] {
     .map((f: any) => f.replace(`${ctx.run}-batch-`, '').replace('.pages.json', ''))
     .filter((n: any) => /^\d+$/.test(n))
     .sort((a: any, b: any) => Number(a) - Number(b));
-}
-
-/** Direct prerequisite batches induced by in-run page requirements. */
-function batchDependencies(ctx: any, unit: string): string[] {
-  const { snapshot } = scaffoldSnapshot(ctx);
-  const batchForPage = new Map<string, string>();
-  for (const page of snapshot.pages) batchForPage.set(page.id, String(page.batch));
-  const out = new Set<string>();
-  for (const page of snapshot.pages.filter((row: any) => String(row.batch) === String(unit))) {
-    for (const requirement of page.requires ?? []) {
-      const dependency = batchForPage.get(requirement);
-      if (dependency && dependency !== String(unit)) out.add(dependency);
-    }
-  }
-  return [...out].sort((a, b) => Number(a) - Number(b));
 }
 
 /** A scaffold supplier is releasable only after its populated manifest,
@@ -1096,7 +1082,8 @@ export const stages = [
       role: 'tool', label: 'drift-apply', job: 'bookkeeping-mechanical', covers: ['all'],
       argv: ['node', 'tools/drift-apply.mjs', '--run', ctx.run], timeout: 600,
     }],
-    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate(ctx)],
+    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate(ctx),
+      gate('batch-dependency-levels', ['node', 'tools/batch-dependency-levels.mjs', 'check', '--run', ctx.run])],
     onHold: holdStep1,
   },
   {
@@ -1113,23 +1100,43 @@ export const stages = [
       ? DEEPSEEK_FLASH_MAX
       : undefined,
     units: (ctx: any) => batches(ctx),
-    unitPrerequisites: (ctx: any, unit: string) => batchDependencies(ctx, unit),
+    unitPrerequisites: (ctx: any, unit: string) => prerequisiteBatches(ctx.repo, ctx.run, unit),
     artifacts: (ctx: any, unit: string) => [...scaffoldArtifacts(ctx, unit), ...authorArtifacts(ctx, unit)],
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
     pattern: /^beta-(?:beta-)?batch-\d+\.result\.json$/,
     labelFor: (u) => `batch-${u}`,
     concurrency: MAX_RUN_BATCHES,
-    plan: (ctx, pending) => pending.map((u: any) => ({
-      role: 'beta',
-      label: `batch-${u}`,
-      job: 'scaffolding',
-      covers: [u],
-      brief: 'briefs/beta-scaffold.md',
-      task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
-      timeout: 14400,
-    })),
+    plan: (ctx, pending) => {
+      if (ctx.doctor) return pending.map(u => ({role:'beta',label:`batch-${u}`,job:'scaffolding',covers:[u],
+        brief:'briefs/beta-scaffold.md',task:[`research/${ctx.run}-beta-${u}.task.md`,`research/${ctx.run}-beta-batch.task.md`],timeout:14400}));
+      // Fresh scheduling metadata before every construction dispatch. Readiness
+      // still requires successful suppliers, finished carriers and drained writers.
+      const levels = writeBatchDependencyLevels(ctx.repo, ctx.run);
+      const levelFor = (u: string) => levels.batches.find((row: any) => row.batch === String(u))?.dependency_level ?? Infinity;
+      return [...pending].sort((a, b) => levelFor(a) - levelFor(b) || Number(a) - Number(b)).map((u: any) => {
+        const row = levels.batches.find((row: any) => row.batch === String(u));
+        if (!row) throw Error(`Missing dependency level for batch ${u}`);
+        const sources = [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`];
+        for (const source of sources) if (!existsSync(R(ctx, source)))
+          throw Error(`Missing construction task for batch ${u}: ${source}`);
+        const task = `research/${ctx.run}-beta-${u}-dependency-order.task.md`;
+        writeFileSync(R(ctx, task), [
+          `Batch ${u}: dependency_level ${row.dependency_level}; prerequisite batches: ${row.requires.join(', ') || 'none'}.`,
+          `Current scheduling input: ${levels.input_sha256}.`,
+          'Determine item inventories, logical deps and item dependency_level labels in the scaffold manifest before writing carriers. Author suppliers before consumers in ascending item level.',
+          ...sources.flatMap(source => ['', `<!-- Source: ${source} -->`, readFileSync(R(ctx, source), 'utf8')]),
+        ].join('\n'));
+        return { role: 'beta', label: `batch-${u}`, job: 'scaffolding', covers: [u],
+          brief: 'briefs/beta-scaffold.md', task, timeout: 14400 };
+      });
+    },
+    onProgress: ({ctx, executor, stage}: any) => {
+      if (!ctx.doctor && ![...executor.inflight.values()].some((d: any) => d.meta.stage === stage.id)
+        && !executor.adoptedUnits(stage).size) writeBatchDependencyLevels(ctx.repo, ctx.run);
+    },
     gates: (ctx) => [
+      gate('batch-dependency-levels', ['node', 'tools/batch-dependency-levels.mjs', 'check', '--run', ctx.run]),
       gate('step1-readiness', ['node', 'tools/step1-decisions.mjs', 'check', '--run', ctx.run]),
       gate('item-dependency-levels', ['node', 'tools/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       gate('step1-dependency-ledger', ['node', 'tools/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run, '--require-reviewed']),

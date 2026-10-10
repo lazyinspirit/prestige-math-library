@@ -22,6 +22,7 @@
 // resumed checkpoint: it preserves batch identities and item arrays while
 // refreshing only plan-owned metadata such as `requires` and `order`.
 
+import { writeBatchDependencyLevels } from './batch-dependency-levels.mjs';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -242,6 +243,7 @@ const step = (label, args) => {
 const ledgerArgs = ['tools/manifest-integrity.mjs', '--run', run, '--write-ledger', '--force'];
 if (allowInRunDependencies) ledgerArgs.push('--allow-in-run-dependencies');
 step('ledger', ledgerArgs);
+writeBatchDependencyLevels(repo, run);
 step('tasks', ['tools/run-tasks.mjs', '--run', run, '--force']);
 
 // covers.json maps a dispatch label to the units it covers; a new batch with no

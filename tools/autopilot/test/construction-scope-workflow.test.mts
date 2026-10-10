@@ -210,3 +210,37 @@ test('doctor describes empty planned batches without creating loop history',t=>{
   const plans=stage.plan({...f.ctx,doctor:true},['1','2']);assert.equal(plans.length,2);
   assert.ok(plans.every((plan:any)=>plan.role==='scope-reviewer'));assert.equal(existsSync(loopDir(f.repo,'demo','1')),false);
 });
+
+test('Step 1 refreshes batch levels before dispatch and uses actual supplier order',t=>{
+  const f=fixture(t),stage:any=stages.find(s=>s.id==='1-scaffold');
+  for(const batch of ['1','2'])writeFileSync(join(f.repo,'research',`demo-beta-${batch}.task.md`),`Construct batch ${batch}.`);
+  writeFileSync(join(f.repo,'research/demo-beta-batch.task.md'),'Shared construction and source instructions.');
+  const doctor=stage.plan({...f.ctx,doctor:true},['2'])[0];
+  assert.equal(doctor.role,'beta');
+  assert.equal(existsSync(join(f.repo,'research/demo-batch-dependency-levels.json')),false);
+  const sorted=stage.plan(f.ctx,['2','1']);
+  assert.deepEqual(sorted.map((plan:any)=>plan.covers[0]),['1','2']);
+  const first=stage.plan(f.ctx,['2'])[0];
+  const artifact=join(f.repo,'research/demo-batch-dependency-levels.json');
+  assert.deepEqual(JSON.parse(readFileSync(artifact,'utf8')).batches,[
+    {batch:'1',dependency_level:0,requires:[]},{batch:'2',dependency_level:1,requires:['1']},
+  ]);
+  assert.match(readFileSync(join(f.repo,first.task),'utf8'),/Batch 2: dependency_level 1; prerequisite batches: 1/);
+  assert.match(readFileSync(join(f.repo,first.task),'utf8'),/before writing carriers/);
+  assert.match(readFileSync(join(f.repo,first.task),'utf8'),/Construct batch 2/);
+  assert.match(readFileSync(join(f.repo,first.task),'utf8'),/Shared construction and source instructions/);
+  // Remove page/manifest edges; a body-only logical supplier still controls release.
+  const pages=JSON.parse(readFileSync(join(f.repo,'research/demo-batch-2.pages.json'),'utf8'));
+  pages[0].requires=[];pages[0].items[0].deps=[];
+  json(join(f.repo,'research/demo-batch-2.pages.json'),pages);
+  assert.deepEqual(stage.unitPrerequisites(f.ctx,'2'),['1']);
+  f.writeItem('lem-b',[]);
+  const refreshed=stage.plan(f.ctx,['2'])[0];
+  assert.deepEqual(stage.unitPrerequisites(f.ctx,'2'),[]);
+  assert.match(readFileSync(join(f.repo,refreshed.task),'utf8'),/Batch 2: dependency_level 0; prerequisite batches: none/);
+  // Cycles fail before a construction plan can be returned.
+  pages[0].requires=['pair-a'];json(join(f.repo,'research/demo-batch-2.pages.json'),pages);
+  const base=JSON.parse(readFileSync(join(f.repo,'research/demo-batch-1.pages.json'),'utf8'));
+  base[0].requires=['pair-b'];json(join(f.repo,'research/demo-batch-1.pages.json'),base);
+  assert.throws(()=>stage.plan(f.ctx,['1']),/Batch dependency cycle/);
+});

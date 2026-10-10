@@ -35,10 +35,11 @@ a proof strategy or successful process alone is not a completed carrier.
 Readiness records bind the finished carriers. Supplier batches release their
 consumers only after nonempty authored inventories and current readiness exist.
 
-Item `dependency_level` is recorded and independently checked in Step 1: zero
+Planning and the existing drift-apply join write `research/RUN-batch-dependency-levels.json` before construction. Before each Step 1 dispatch the engine recomputes this artifact from current page requirements and manifest/carrier logical dependencies, rejects batch cycles, and includes the batch level and suppliers in the worker task. Batch level is zero without in-run suppliers, otherwise one plus their maximum level. Existing transitive supplier completion, authored-carrier/readiness and writer-drain guards still release consumers; numeric levels do not replace them. External suppliers remain context.
+
+Item inventories and logical dependencies are determined in scaffold manifests before item carriers are written; authors compute labels there and construct carriers in ascending item level. Item `dependency_level` is recorded and independently checked in Step 1: zero
 without in-run logical suppliers, otherwise one plus the maximum supplier level.
-External suppliers remain context. No new level-recording system or rebatching
-is introduced. Logical dependencies must agree between authored bodies and
+External suppliers remain context. No rebatching or additional review stage is introduced. Logical dependencies must agree between authored bodies and
 manifests; aliases resolve to canonical suppliers. Definition discharges and
 nonlogical links are hash-bound context, not extra logical scheduling edges.
 
