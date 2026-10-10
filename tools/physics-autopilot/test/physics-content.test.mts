@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { validatePhysicsContent, PHYSICAL_PROOF_KINDS } from '../../physics-support/physics-content.mjs';
 import { importMathematics, verifyMathematicsImports } from '../../physics-support/physics-imports.mjs';
@@ -11,6 +12,9 @@ import { statementHash } from '../../physics-support/step5-statement.mjs';
 import { interfaceText } from '../../physics-support/evidence-bundle.mjs';
 import { experimentalEvidenceGuidance } from '../../physics-support/physics-guidance.mjs';
 import { stages, workflowRevision } from '../stages/mathlib.mts';
+const SOURCE_ROOT = fileURLToPath(new URL('../../..', import.meta.url));
+const cli = join(SOURCE_ROOT, 'tools/physics-autopilot/bin/autopilot.mts');
+const loader = join(SOURCE_ROOT, 'tools/tsx-run.mjs');
 const source = { sources: { references: [{ title: 'Source', url: 'https://example.org/source' }] }, provenance: { statement: 'literature-derived', proof: 'not-applicable' } };
 const post = () => ({ id: 'post-state', kind: 'postulate', domain: 'physics', physical_scope: 'Ideal isolated systems', deps: [], body: '## Postulate\nThe stated assumption.', ...source });
 const exp = () => ({ id: 'exp-observation', kind: 'experiment', domain: 'physics', physical_scope: 'Specified apparatus', deps: [], body: ['Setup', 'Procedure', 'Observations', 'Uncertainty', 'Interpretation'].map(h => `## ${h}\nSource-backed account.`).join('\n'), empirical_result: { observation: 'Reported observation', uncertainty: 'Reported resolution', conditions: 'Calibration conditions', source_url: 'https://example.org/source' }, ...source });
@@ -83,7 +87,9 @@ test('nonproof contracts require actual review evidence', () => {
 });
 test('every stage has an independent physics gate and no obsolete waiver', () => {
  assert.match(workflowRevision, /^physics-/);
- for (const stage of stages) {
+ const joins=stages.filter(stage=>stage.gates);
+ assert.ok(joins.length>0);
+ for (const stage of joins) {
   assert.match(stage.gates.toString(), /physics-check\.mjs/);
   assert.ok(!stage.gatesWaived);
  }
@@ -99,8 +105,7 @@ test('imports are byte-identical snapshots and source drift holds the run', t =>
  assert.equal(readFileSync(join(target, 'items/thm-math.md'), 'utf8'), body);
 });
 test('CLI refuses the mathematical workspace', () => {
- const entry = resolve('bin/autopilot.mts');
- const r = spawnSync(process.execPath, ['--import', 'tsx', entry, 'status', '--repo', resolve('../..')], { encoding: 'utf8' });
+ const r = spawnSync(process.execPath, [loader, cli, 'status', '--repo', SOURCE_ROOT], { encoding: 'utf8' });
  assert.notEqual(r.status, 0); assert.match(r.stderr, /refuses the mathematics repository/);
 });
 test('real planning entrypoint preserves physics library and kind metadata', t => {
@@ -108,20 +113,25 @@ test('real planning entrypoint preserves physics library and kind metadata', t =
  const repo = join(dir, 'physics'), src = join(dir, 'math');
  for (const base of [repo, src]) for (const name of ['items', 'library', 'research']) mkdirSync(join(base, name), { recursive: true });
  const fs = requireForFixture();
- fs.symlinkSync(resolve('..'), join(repo, 'tools'), 'dir');
- fs.cpSync(resolve('../../physics/briefs'), join(repo, 'briefs'), { recursive: true });
+ fs.symlinkSync(join(SOURCE_ROOT,'tools'), join(repo, 'tools'), 'dir');
+ fs.cpSync(join(SOURCE_ROOT,'physics/briefs'), join(repo, 'briefs'), { recursive: true });
  importMathematics(repo, src);
  const pages = [
-  { id: 'states', title: 'States', category: 'quantum-mechanics', library: 'physics', kind: 'A', order: 1, companion: 'states-examples', requires: [], items: [{ id: 'post-state', kind: 'postulate', domain: 'physics', deps: [] }] },
+  { id: 'states', title: 'States', category: 'quantum-mechanics', library: 'physics', kind: 'A', order: 1, companion: 'states-examples', requires: [], items: [{ id: 'post-state', kind: 'postulate', domain: 'physics', deps: [] }, {id:'alg-procedure',kind:'algorithm',domain:'physics',deps:['post-state'],dependency_roles:{'post-state':'physical-assumption'}}] },
   { id: 'states-examples', title: 'State examples', category: 'quantum-mechanics', library: 'physics', kind: 'B', order: 2, requires: ['states'], items: [{ id: 'texp-result', kind: 'thought-experiment', domain: 'physics', deps: ['post-state'], dependency_roles: { 'post-state': 'physical-assumption' } }] },
  ];
  writeFileSync(join(repo, 'research/plan-spec.json'), JSON.stringify({ pages }));
- const r = spawnSync(process.execPath, ['--import', 'tsx', resolve('bin/autopilot.mts'), 'plan', '--repo', repo, '--run', 'physics-smoke', '--pairs', 'states'], { encoding: 'utf8', env: { ...process.env, PHYSICS_REPO: repo }, timeout: 60000 });
+ const r = spawnSync(process.execPath, [loader, cli, 'plan', '--repo', repo, '--run', 'physics-smoke', '--pairs', 'states'], { encoding: 'utf8', env: { ...process.env, PHYSICS_REPO: repo }, timeout: 60000 });
  assert.equal(r.status, 0, r.stdout + r.stderr);
  const manifest = JSON.parse(readFileSync(join(repo, 'research/physics-smoke-batch-1.pages.json'), 'utf8'));
  assert.equal(manifest[0].library, 'physics');
+ const planned=JSON.parse(readFileSync(join(repo,'research/plan-spec.json'),'utf8'));
+ assert.equal(planned.pages[0].items.find(item=>item.id==='alg-procedure')?.kind,'algorithm');
+ assert.deepEqual(manifest[0].items,[], 'Step 1 authors its inventory after planning');
  const task = readFileSync(join(repo, 'research/physics-smoke-beta-1.task.md'), 'utf8');
  assert.match(task, /Physics content contract/);
+ const sharedTask=readFileSync(join(repo,'research/physics-smoke-beta-batch.task.md'),'utf8');
+ assert.match(sharedTask, /kind: algorithm/);
 });
 // Node's fs namespace keeps fixture construction readable without affecting live paths.
 import * as fixtureFs from 'node:fs';

@@ -35,7 +35,7 @@ const evidenceText = row => typeof row.reason === 'string' && row.reason.trim().
 const requireValue=(condition,message)=>{if(!condition)throw Error(message);};
 const verifyEvidence=evidence=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(existsSync(p)&&digest(readFileSync(p,'utf8'))===hash,`Step 5 evidence changed: ${p}`);};
 const rawHashes=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.sha256]));
-const creationId=/^(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const creationId=/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 function gateFrontier(root,run) {
   const path=join(workflowDir(root,run),'frontier.json');
   const frontier=existsSync(path)?read(path):initialize(root,run);

@@ -64,7 +64,7 @@ export function proofLayoutDependencies() {
 export function noProofRequired(scope, root = REPO) {
   return scope.files.length > 0 && scope.files.every(file => {
     const item = readItem(join(root, file));
-    return ['definition', 'remark', 'postulate', 'experiment'].includes(item.kind) && !/^## (Proof|Refutation|Verification|Counterexample)\s*$/m.test(item.body);
+    return ['definition', 'algorithm', 'remark', 'postulate', 'experiment'].includes(item.kind) && !/^## (Proof|Refutation|Verification|Counterexample)\s*$/m.test(item.body);
   });
 }
 

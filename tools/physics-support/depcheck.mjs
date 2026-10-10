@@ -61,7 +61,7 @@ const quiet = itemScope.args.includes('--quiet');
 const pendingAuditOk = itemScope.args.includes('--pending-audit-ok');
 
 const PREFIX_OF_KIND = {
-  definition: 'def', theorem: 'thm', lemma: 'lem', proposition: 'prop',
+  definition: 'def', algorithm: 'alg', theorem: 'thm', lemma: 'lem', proposition: 'prop',
   corollary: 'cor', example: 'ex', counterexample: 'cex',
   'false-statement': 'fs', remark: 'rem',
   postulate: 'post', 'physics-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp',
@@ -153,8 +153,8 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     err('provenance-statement-invalid', `${file}: provenance.statement must be ai-generated, ai-altered, or literature-derived`);
   if (selectedFile && provenancePresent && !PROOF_PROVENANCE_VALUES.has(provenanceProof))
     err('provenance-proof-invalid', `${file}: provenance.proof must be ai-generated, ai-altered, literature-derived, not-supplied, or not-applicable`);
-  if (selectedFile && provenanceProof === 'not-applicable' && !['definition', 'remark', 'postulate', 'experiment'].includes(kind))
-    err('provenance-proof-applicability', `${file}: provenance.proof: not-applicable is reserved for definitions and remarks`);
+  if (selectedFile && provenanceProof === 'not-applicable' && !['definition', 'algorithm', 'remark', 'postulate', 'experiment'].includes(kind))
+    err('provenance-proof-applicability', `${file}: provenance.proof: not-applicable is reserved for definitions, algorithms and remarks`);
 
   const links = [...body.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map((m) => m[1].trim());
 
@@ -384,7 +384,7 @@ for (const it of items.values()) {
   // still invisible, and only a human or a judge with the cited text can catch
   // that; but a wikilink in a step is mechanically checkable and now is checked.
   for (const s of [
-    section('Statement'), section('Statement refuted'), section('Facts & Assumptions'),
+    section('Statement'), section('Statement refuted'), section('Definition'), section('Facts & Assumptions'),
     section('Proof'), section('Refutation'), section('Counterexample'), section('Verification'),
   ])
     for (const m of s.matchAll(/\[\[([a-z0-9-]+)/g)) cited.add(m[1]);

@@ -130,7 +130,7 @@ function argVal(flag) {
 function die(msg) { console.error(msg); process.exit(2); }
 
 const PREFIX_OF_KIND = {
-  definition: 'def', theorem: 'thm', lemma: 'lem', proposition: 'prop',
+  definition: 'def', algorithm: 'alg', theorem: 'thm', lemma: 'lem', proposition: 'prop',
   corollary: 'cor', example: 'ex', counterexample: 'cex',
   'false-statement': 'fs', remark: 'rem',
   postulate: 'post', 'physics-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp',

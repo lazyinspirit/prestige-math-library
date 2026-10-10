@@ -41,7 +41,7 @@ export function isPublishedItem(root, id) {
 }
 
 function nonProofPrecheckNotApplicable(check, text, id, before) {
-  if (!['definition', 'remark', 'example'].includes(field(text, 'kind'))
+  if (!['definition', 'algorithm', 'remark', 'example'].includes(field(text, 'kind'))
     || field(text, 'kind') !== field(before, 'kind')
     || /^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before)
     || /^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(text)

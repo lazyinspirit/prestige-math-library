@@ -377,7 +377,7 @@ function step3ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         return (consumer.deps ?? []).includes(id) || links.includes(id);
       }).map(file => file.slice(0, -3)).sort();
     if (evidence.historical_delta_unknown !== true || evidence.baseline_manifest_entry !== undefined
-      || fm.kind !== (definitionReview ? 'definition' : 'lemma')
+      || (definitionReview ? !['definition', 'algorithm'].includes(fm.kind) : fm.kind !== 'lemma')
       || currentEntry?.kind !== fm.kind
       || evidence.owner_authorization?.owner !== true
       || !String(evidence.owner_authorization?.reason ?? '').trim()

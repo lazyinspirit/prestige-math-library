@@ -847,7 +847,7 @@ export function repairGateOutput(failure: any): string {
 export function itemsFromGateFailure(failure: any): string[] {
   const text = repairGateOutput(failure) || String(failure?.why ?? '');
   const grammar = '[a-z][a-z0-9]*(?:-[a-z0-9]+){2,}';
-  const itemGrammar = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)+';
+  const itemGrammar = '(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)+';
   const itemSummaryIds = [...text.matchAll(/^\s*items:\s*(.*)$/gmi)]
     .flatMap((m) => [...m[1].matchAll(new RegExp(itemGrammar, 'g'))].map((hit) => hit[0]));
   const subjects = text.split('\n').flatMap(line => {

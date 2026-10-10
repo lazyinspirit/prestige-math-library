@@ -24,7 +24,7 @@ export function scopedIntegrityErrors(report, id) {
 export function requiresOwningContract(source, created) {
   const frontmatter = source.split(/^---\s*$/m)[1] ?? '';
   const inherited = !created && /^status:\s*["']?published["']?\s*$/m.test(frontmatter);
-  const definition = /^kind:\s*["']?definition["']?\s*$/m.test(frontmatter)
+  const definition = /^kind:\s*["']?(?:definition|algorithm)["']?\s*$/m.test(frontmatter)
     && /^\s+proof:\s*["']?not-applicable["']?\s*$/m.test(frontmatter)
     && !/^## Proof\b/m.test(source);
   return !inherited && !definition;

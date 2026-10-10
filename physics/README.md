@@ -56,3 +56,5 @@ The Mathematical Universe excludes physics classes/domains and their mathematica
 consumer chains at its loading boundary. The mathematics workflow remains separate.
 
 The current six-step workflow and rebuild checklist are in [WORKFLOW.md](WORKFLOW.md) and [research/workflow-rebuild-plan.md](research/workflow-rebuild-plan.md).
+
+Algorithms (`alg-`) are definition-like procedures; see [SCHEMA.md](SCHEMA.md#algorithms).
