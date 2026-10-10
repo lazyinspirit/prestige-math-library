@@ -47,7 +47,7 @@ if (argv.includes('--require-proof-layout')) {
   try {
     const { verifyMathematicsImports } = await import('./physics-imports.mjs');
     const { loadPhysicsRepository, validatePhysicsContent } = await import('./physics-content.mjs');
-    verifyMathematicsImports(REPO);
+    verifyMathematicsImports(REPO, { run });
     const physicalErrors = validatePhysicsContent(loadPhysicsRepository(REPO));
     if (physicalErrors.length) throw Error(`physics-content: ${physicalErrors[0].code}: ${physicalErrors[0].message}`);
     const { verifyProofLayout } = await import('./proof-layout-receipt.mjs');

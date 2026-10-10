@@ -59,6 +59,13 @@ link/file substitutions and physical-file changes still fail integrity checks.
 Existing mutable-output and runtime exclusions remain unchanged. This does not
 alter readiness, caches or links; a new native snapshot records the policy.
 
+The standalone closeout import preflight passes the current run to the existing
+frontier import verifier. Every local snapshot remains pinned and classified;
+original-source guards follow the validated current manifests and their actual
+supplier/discharge closure, used aliases, direct owned references and prerequisite
+pages. Unrelated original drift is outside that closure. Invalid or empty run
+selections still fail; this does not refresh imports or change commit ownership.
+
 This compatibility change does not append corrections, alter decisions, rewrite
 original rows, certify content or charge a mathematical repair round. Validate
 the actual owning-run ledger after its metadata corrections and ownership
@@ -77,4 +84,5 @@ substantive fields or invalid ownership links:
 node --test tools/physics-support/defect-ledger-compat.test.mjs
 node --test tools/physics-support/step9-report-history.test.mjs
 node --test tools/physics-support/step9-report-tree.test.mjs
+node --test tools/physics-support/run-commit-import-scope.test.mjs
 ```
