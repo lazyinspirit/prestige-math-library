@@ -15,6 +15,18 @@ const run='fixture', reason='The proof and its supplier hypotheses were checked 
 const evidence={reason,uncertain:false,source_urls:[],familiar:true};
 const json=(path:string,value:any)=>writeFileSync(path,JSON.stringify(value,null,2)+'\n');
 
+test('Step 7 native batch adjudication receives only its own Step-6 digest',()=>{
+  const f=fixture();try{
+    const path=join(f.root,'research',`${run}-batch-1-step7-context.json`);
+    json(path,{group:'a',batches:['1'],concerns:[]});
+    prepareAdjudication(f.root,run,'initial',1);
+    const task=readFileSync(workerReport(f.root,run,'initial',1,'1').replace(/\.json$/,'.task.md'),'utf8');
+    assert.ok(task.includes(path));
+    assert.match(task,/rejection-blind Step-6 review digest first/);
+    assert.doesNotMatch(task,/alpha-a-step7-context/);
+  }finally{f.cleanup();}
+});
+
 test('Step 7 adjudication packs and tasks order rejected items by dependency level',()=>{
   const f=fixture();try{
     const manifest=join(f.root,'research',`${run}-batch-1.pages.json`);

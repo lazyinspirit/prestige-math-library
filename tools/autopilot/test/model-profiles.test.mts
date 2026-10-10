@@ -83,7 +83,7 @@ test('Step 3 scopes and authors use DeepSeek while Step 5 adjudication uses Sol 
 
   const judgeStage = stage('6-judge');
   const plans = judgeStage.plan(ctx, judgeStage.units(ctx));
-  for (const plan of plans.filter((candidate: any) => candidate.role === 'alpha-group-read')) {
+  for (const plan of plans.filter((candidate: any) => candidate.role === 'alpha-batch-read')) {
     assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.sol61High);
   }
   assert.equal(selected(judgeStage, plans.find((candidate: any) => candidate.role === 'tool')), undefined,
@@ -139,7 +139,7 @@ test('group Alpha resolves to Sol 6.1 high', () => {
 
 test('all ordinary dispatcher roles default to Sol 6.1 high', () => {
   for (const role of ['beta', 'reader', 'alpha-assign', 'alpha-high', 'alpha-report',
-    'alpha-adjudicate', 'alpha-repair', 'alpha-group-read', 'refuter', 'scaffolder', 'mechanic']) {
+    'alpha-adjudicate', 'alpha-repair', 'alpha-batch-read', 'refuter', 'scaffolder', 'mechanic']) {
     const result = spawnSync('node', ['tools/dispatch.mjs', '--role', role,
       '--brief', 'briefs/alpha.md', '--task', 'briefs/alpha.md',
       '--label', 'default-model-test', '--run', 'default-model-test', '--dry-run', '--json'],

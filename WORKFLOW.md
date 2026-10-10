@@ -4,7 +4,7 @@
   stage transitions. `CLAUDE.md` governs agents; `SCHEMA.md` governs content.
 - The stage definitions are `tools/autopilot/stages/mathlib.mts`,
   `mathlib.step5.mts` and `mathlib.step7.mts`. The eight-step revision is
-  `eight-step-v4-proof-coverage`. Use a fresh run and state directory when the workflow revision changes; old receipts cannot be adopted
+  `eight-step-v5-batch-review`. Use a fresh run and state directory when the workflow revision changes; old receipts cannot be adopted
   under new stage numbers. Both restart and hot reload reject a mismatched
   revision; old state and receipts remain unchanged.
 
@@ -472,6 +472,28 @@ supplier inputs require the ordinary current owner repair or independent review.
 This preserves native origin and never registers owner creation or rewrites the
 baseline, author result, prompt, or prior owner history.
 
+## Step 6 batch review
+
+Step 6 dispatches exactly one read-only `alpha-batch-read` reviewer per manifest
+batch alongside the stateless judge sweep, using GPT-6.1 Sol at high effort.
+Step-2 groups remain the assignment for stages that use groups; they do not
+combine Step-6 reviewer scopes. Each reviewer reads its batch in dependency
+order, including cited prerequisites and cross-batch seams, and returns a
+separate `research/RUN-batch-N-step7-context.json` digest through the dispatcher.
+The generated task is `research/RUN-batch-N-step6-read.task.md`. Each digest
+names its Step-7 owning group and exactly one batch. Its page, item and seam
+inventories must match that batch; empty concerns remain valid. Findings in a
+different batch use alerts, including when both batches share a group.
+
+Completion requires judge coverage and every batch digest. The digest gate
+retries only batches named in its diagnostics, preserving prior supported
+findings. Repair dispatches do not create original-unit coverage. Historical
+group review results cannot satisfy batch review units. Step-7 batch
+adjudication tasks point to their own digest; group context tasks list all their
+batches' digests. The shared actual-agent budget still caps readers and nested
+judge calls together at 30. Use a fresh run/state directory for revision
+`eight-step-v5-batch-review`; active workers retain their launch instructions.
+
 ## Controls
 
 The `frontier-39-step6-recovery.mts` table is restricted to run
@@ -503,7 +525,7 @@ fixes reach live gate descriptors without changing the recovery cap or stage ord
   A machine budget below a stage's lane capacity queues pending units without
   reducing the approved build scope. A shared per-run actual-agent budget also
   counts run-labelled dispatches and each nested judge-sweep model call, so
-  group readers and judges together stay at or below 30 (or a lower configured
+  batch reviewers and judges together stay at or below 30 (or a lower configured
   limit). Existing role and model caps still apply. Released reader slots are
   available to judges. The budget uses atomic heartbeat slots keyed by canonical
   workspace and run; standalone judging keeps its existing caps. Deploy changes

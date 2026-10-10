@@ -22,7 +22,7 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 `tools/physics-support/run-tasks.mjs` renders every Markdown file here except this README to
 `research/<run>-<template>.task.md`; `tools/physics-support/step7-scope.mjs` separately composes
-the historical Step 6/7 group tasks. Current Step-7 round tasks come from
+the Step-6 batch review tasks and Step-7 group context tasks. Current Step-7 round tasks come from
 `tools/physics-support/step7-workflow.mjs`, with `briefs/step7-adjudicator.md` and
 `briefs/step7-owner-repair.md`. The live eight-step stage table is the selection authority.
 
