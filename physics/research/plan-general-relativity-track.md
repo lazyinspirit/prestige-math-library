@@ -145,7 +145,7 @@ Original reservation (read together with the full required sources above):
 
 A page `gr-flat-and-newtonian-bridges`; B companion `gr-flat-and-newtonian-bridges-examples`. Category `general-relativity`; library `physics`.
 Order 245. Exact source inventory: `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json`.
-Declared earlier prerequisites: `gr-einstein-and-matter`, `sr-newtonian-bridge`.
+Declared earlier prerequisites: `gr-einstein-and-matter`; GR07 uses its local Q3/Q4 flat-linearization and controlled geodesic/Poisson arguments. The unused SR11 page edge was removed by delegated owner resolution; the approved GR claim is unchanged.
 
 Original reservation (read together with the full required sources above):
 
