@@ -192,6 +192,36 @@ export function checkAppendReview(repo: string, run: string, number: number): an
   return entry;
 }
 
+function sameItemsAndPageFields(before: Buffer, after: Buffer): boolean {
+  const normalize = (bytes: Buffer) => JSON.parse(bytes.toString()).map((page: any) => ({
+    ...page, items: [...page.items].sort((a: any, b: any) => a.id.localeCompare(b.id)),
+  }));
+  return JSON.stringify(normalize(before)) === JSON.stringify(normalize(after));
+}
+
+/** Explicit guarded recovery for formatting/order only, never a new baseline. */
+export function recoverAppendItemOrder(repo: string, run: string, number: number,
+  stateDir: string, scan = scanProcesses): any {
+  inactive(repo, run, stateDir, scan);
+  const entry = checkAppendReview(repo, run, number), archive = join(repo, entry.archive);
+  if (existsSync(join(archive, 'review-applied.json'))) fail('item-order recovery must precede append application');
+  const records = [];
+  for (const record of entry.preimages.filter((p: any) => p.path.endsWith('.pages.json'))) {
+    const before = readFileSync(join(repo, record.archive)), current = readFileSync(join(repo, record.path));
+    if (hash(before) !== record.sha256) fail(`archived manifest differs from original preimage: ${record.path}`);
+    if (hash(current) === record.sha256) continue;
+    if (!sameItemsAndPageFields(before, current)) fail(`recovery would change item objects or page fields: ${record.path}`);
+    records.push({ path: record.path, beforeSha256: record.sha256, afterSha256: hash(current) });
+  }
+  if (!records.length) fail('no item-order metadata change to recover');
+  const receipt = { version: 1, run, number, at: new Date().toISOString(),
+    action: 'guarded-item-array-order-recovery', records,
+    archivedPreimagesPreserved: true, itemObjectsAndPageFieldsUnchanged: true,
+    mathematicalRepairOrCounterReset: false };
+  writeFileSync(join(archive, 'item-order-recovery.json'), JSON.stringify(receipt, null, 2) + '\n', { flag: 'wx' });
+  return receipt;
+}
+
 export function applyAppendReview(repo: string, run: string, number: number): any {
   const entry = checkAppendReview(repo, run, number), archive = join(repo, entry.archive);
   const dir = join(repo, 'research', `${run}-dispatch`);
@@ -210,9 +240,17 @@ export function applyAppendReview(repo: string, run: string, number: number): an
     fail('archived original drift report differs from its recorded preimage');
   const receiptPath = join(archive, 'review-applied.json');
   const priorApplication = existsSync(receiptPath) ? read(receiptPath) : null;
+  const recoveryPath = join(archive, 'item-order-recovery.json');
+  const recovery = existsSync(recoveryPath) ? read(recoveryPath) : null;
   for (const record of entry.preimages.filter((p: any) => p.path.endsWith('.pages.json'))) {
     const expected = priorApplication?.manifests?.find((p: any) => p.path === record.path)?.sha256 ?? record.sha256;
-    if (hash(readFileSync(join(repo, record.path))) !== expected) fail(`prior manifest changed before append application: ${record.path}`);
+    const current = readFileSync(join(repo, record.path));
+    if (hash(current) === expected) continue;
+    const recovered = !priorApplication && recovery?.run === run && recovery?.number === number
+      && recovery.records?.find((p: any) => p.path === record.path && p.beforeSha256 === record.sha256 && p.afterSha256 === hash(current));
+    const before = readFileSync(join(repo, record.archive));
+    if (!recovered || hash(before) !== record.sha256 || !sameItemsAndPageFields(before, current))
+      fail(`prior manifest changed before append application: ${record.path}`);
   }
   for (const batch of entry.batches) {
     const pages = read(join(repo, 'research', `${run}-batch-${batch}.pages.json`));
@@ -236,7 +274,8 @@ export function applyAppendReview(repo: string, run: string, number: number): an
   const report = readFileSync(join(repo, entry.report), 'utf8');
   writeFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`), original + `\n\n<!-- native append review ${number}; original preimage retained in ${entry.archive} -->\n` + report);
   const receipt = { run, number, reportSha256: hash(report), originalReportSha256: hash(original), mergedReportSha256: hash(readFileSync(join(repo, 'research', `${run}-alpha-step1-drift.md`))),
-    manifests: paths.map(path => ({ path: relative(repo, path), sha256: hash(readFileSync(path)) })), inventoriesPreserved: true };
+    manifests: paths.map(path => ({ path: relative(repo, path), sha256: hash(readFileSync(path)) })), inventoriesPreserved: true,
+    ...(recovery ? { itemOrderRecoverySha256: hash(readFileSync(recoveryPath)) } : {}) };
   writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n');
   return receipt;
 }

@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, readdirSync, exist
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { appendFrontier, appendStages, checkAppendReview, applyAppendReview } from '../src/frontier-append.mts';
+import { appendFrontier, appendStages, checkAppendReview, applyAppendReview, recoverAppendItemOrder } from '../src/frontier-append.mts';
 import { unsatisfiableEdges } from '../src/frontier.mts';
 import { writeManifests } from '../../plan-manifests.mjs';
 import { Executor } from '../src/executor.mts';
@@ -177,6 +177,40 @@ test('modified archived historical report is refused before merge or inventory/s
   assert.deepEqual(readFileSync(statePath(f.stateDir)), state);
   for (let n = 0; n < 30; n++) assert.deepEqual(f.bytes(`demo-batch-${n + 1}.pages.json`), manifests[n]);
   assert.equal(existsSync(join(f.repo, e.archive, 'review-applied.json')), false);
+});
+
+test('guarded recovery permits only item-array order and preserves authentic preimages', t => {
+  const f = fixture(t), path = join(f.research, 'demo-batch-1.pages.json');
+  const pages = JSON.parse(readFileSync(path, 'utf8'));
+  pages[0].items.push({ ...pages[0].items[0], id: 'def-original-extra' });
+  writeFileSync(path, JSON.stringify(pages));
+  const e = appendFrontier(f.options), archived = readFileSync(join(f.repo, e.preimages.find((p: any) => p.path.endsWith('batch-1.pages.json')).archive));
+  pages[0].items.reverse(); writeFileSync(path, JSON.stringify(pages, null, 2));
+  writeFileSync(join(f.repo, e.report), '### new-a\nVERDICT: no-drift\n### new-b\nVERDICT: no-drift\n');
+  const dir = join(f.research, 'demo-dispatch'); mkdirSync(dir);
+  writeFileSync(join(dir, 'alpha-drift-review-append-1.result.json'), JSON.stringify({ run: 'demo', role: 'alpha', label: 'drift-review-append-1', covers: ['append-1'], ok: true, started_at: AT }));
+  assert.throws(() => applyAppendReview(f.repo, 'demo', 1), /prior manifest changed/);
+  const receipt = recoverAppendItemOrder(f.repo, 'demo', 1, f.stateDir, f.options.scan);
+  assert.equal(receipt.records.length, 1); assert.equal(receipt.mathematicalRepairOrCounterReset, false);
+  assert.deepEqual(readFileSync(join(f.repo, e.preimages.find((p: any) => p.path.endsWith('batch-1.pages.json')).archive)), archived);
+  const result = applyAppendReview(f.repo, 'demo', 1);
+  assert.ok(result.itemOrderRecoverySha256);
+  assert.deepEqual(JSON.parse(readFileSync(path, 'utf8'))[0].items, pages[0].items);
+});
+
+test('order recovery rejects changed mathematics, page fields and tampered archived data', t => {
+  const f = fixture(t), e = appendFrontier(f.options), path = join(f.research, 'demo-batch-1.pages.json');
+  writeFileSync(join(f.repo, e.report), '### new-a\nVERDICT: no-drift\n### new-b\nVERDICT: no-drift\n');
+  const original = readFileSync(path), pages = JSON.parse(original.toString());
+  pages[0].items[0].statement = 'Different mathematics'; writeFileSync(path, JSON.stringify(pages));
+  assert.throws(() => recoverAppendItemOrder(f.repo, 'demo', 1, f.stateDir, f.options.scan), /change item objects or page fields/);
+  const reordered = JSON.parse(original.toString()); reordered[0].order += 1; writeFileSync(path, JSON.stringify(reordered));
+  assert.throws(() => recoverAppendItemOrder(f.repo, 'demo', 1, f.stateDir, f.options.scan), /change item objects or page fields/);
+  writeFileSync(path, original);
+  const archived = e.preimages.find((p: any) => p.path.endsWith('batch-1.pages.json')).archive;
+  writeFileSync(join(f.repo, archived), '[]');
+  assert.throws(() => recoverAppendItemOrder(f.repo, 'demo', 1, f.stateDir, f.options.scan), /archived manifest differs/);
+  assert.equal(existsSync(join(f.repo, e.archive, 'item-order-recovery.json')), false);
 });
 
 test('normal CLI appends through actual ledger/task tools without replacing populated manifests', t => {
