@@ -23,6 +23,7 @@ import { itemHashGuard } from './item-hash.mjs';
 import { step5Escalations, externalContextReceipt } from './step5-escalations.mjs';
 import { step5Adjudicators } from './step5-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
+import { taxonomyOwnership } from './defect-ledger-taxonomy.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -1031,7 +1032,10 @@ if (command === 'check') {
       try { ledgerRows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line)); }
       catch (cause) { error('ledger-invalid', cause.message); }
     }
-    const mine = ledgerRows.filter((row) => row.run === run);
+    const ownershipErrors = [];
+    const ownership = taxonomyOwnership(ledgerRows.filter((row) => row.run === run), ownershipErrors);
+    for (const message of ownershipErrors) error('ledger-invalid', message);
+    const mine = ownership.activeRows;
     const earlyRows = mine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
     const referenced = new Map();
     const contextualDefects = new Set();
@@ -1169,7 +1173,12 @@ if (command === 'check') {
           error('decision-ledger-refs', `${decision.obligation} must name its exact defect id`);
         }
         const decisionRows = [];
-        for (const defectId of decision.defect_ids) {
+        for (const recordedDefectId of decision.defect_ids) {
+          const defectId = ownership.resolveDefectId(recordedDefectId);
+          if (!defectId) {
+            error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent or substantively superseded ${recordedDefectId}`);
+            continue;
+          }
           const prior = referenced.get(defectId);
           const sameLocation = (left, right) => String(left ?? '').trim().toLowerCase() === String(right ?? '').trim().toLowerCase();
           const sameObservedCarrier = /^[a-f0-9]{64}$/.test(prior?.target?.observed_sha256 ?? '')

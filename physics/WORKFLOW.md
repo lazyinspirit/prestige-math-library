@@ -101,6 +101,11 @@ current consumer and supplier hashes, the consumed clauses and actual use
 locations for every relevant changed supplier; justified exclusions remain
 explicit. Invalid or stale evidence holds for the owner.
 
+Defect-ledger corrections preserve original rows and sealed decision IDs. Active
+owners must use the closed schema; only hash-bound taxonomy corrections that
+preserve every substantive field can resolve an old decision ID to its canonical
+successor. See [the taxonomy and ownership rules](../tools/physics-support/defect-ledger-compat.md).
+
 An explicit `owner_resolution_required: true` keeps an impact disposition
 pending even when its status otherwise indicates success. Independent reviews
 may continue; when only owner holds remain, the engine stops reader dispatches

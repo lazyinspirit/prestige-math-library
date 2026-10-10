@@ -51,6 +51,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validateFrontier } from './step7-rounds.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
+import { taxonomyOwnership } from './defect-ledger-taxonomy.mjs';
 
 const STEP5_SCOPE_TOOL = fileURLToPath(new URL('./step5-scope.mjs', import.meta.url));
 const STEP5_CLOSE_TOOL = fileURLToPath(new URL('./step5-close.mjs', import.meta.url));
@@ -248,7 +249,10 @@ function validateRow(row, ids, opts = {}) {
   const errs = [];
   if (row.__parse_error) return [`unparseable jsonl at ${row.__parse_error}`];
   for (const f of MANDATORY) if (row[f] === undefined || row[f] === null || row[f] === '') errs.push(`${row.defect_id ?? '(no id)'}: missing ${f}`);
+  // Superseded rows retain their original taxonomy as immutable history.
+  // Active owners and new appends still require the closed canonical schema.
   for (const [f, dom] of Object.entries(ENUMS)) if (row[f] !== undefined
+    && !(opts.historicalTaxonomy && ['class', 'subclass', 'location'].includes(f))
     && (f !== 'location' ? !dom.includes(row[f]) : !locationAllowed(row, opts))) {
     errs.push(`${row.defect_id}: ${f} "${row[f]}" outside the closed enum`);
   }
@@ -267,9 +271,13 @@ function validateRow(row, ids, opts = {}) {
 function validate(rows, runFilter) {
   const ids = new Set();
   const errs = [];
+  // Validate backward, same-run/subject ownership before recognizing history.
+  // Invalid supersession remains an error and cannot waive an enum failure.
+  const selectedRows = runFilter ? rows.filter(row => row.run === runFilter) : rows;
+  const active = new Set(taxonomyOwnership(selectedRows, errs).activeRows);
   for (const row of rows) {
     if (runFilter && row.run !== runFilter) { if (row.defect_id) ids.add(row.defect_id); continue; }
-    errs.push(...validateRow(row, ids));
+    errs.push(...validateRow(row, ids, { historicalTaxonomy: !active.has(row) }));
   }
   return errs;
 }
@@ -394,6 +402,8 @@ if (cmd === 'append') {
       allowFrontier20Legacy: false,
       allowFrontier29ValidateOnly: false,
     }));
+    const incomingRuns = new Set(rows.map(row => row.run));
+    taxonomyOwnership([...existing, ...rows].filter(row => incomingRuns.has(row.run)), errs);
     if (errs.length) {
       console.error(`defect-ledger: ${errs.length} invalid row(s); nothing appended`);
       for (const e of errs) console.error(`  ${e}`);
