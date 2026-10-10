@@ -4,7 +4,7 @@
 
 2. **Scope and autonomy.** Preserve the approved scope and run-local owner directions. When owner decisions are delegated, act without routine approval requests. Do not expand scope, bypass gates, control unrelated runs, publish, or push. New content remains draft. Verify planning prerequisites before dispatch and the engine’s closeout commit at completion.
 
-3. **Repair team.** Assign flagged subjects to up to ten `gpt-6.1-sol` agents with exact item IDs and disjoint write scopes. Use medium effort for Steps 1–5 and 8, high for Steps 6–7; use fewer agents when appropriate and none without findings. Avoid active engine writers. The orchestrator owns integration and gate closure; handle agent command prompts without asking the owner.
+3. **Repair team.** Assign flagged subjects to up to fifteen `gpt-6.1-sol` agents with exact item IDs and disjoint write scopes. Use medium effort for Steps 1–5 and 8, high for Steps 6–7; use fewer agents when appropriate and none without findings. Avoid active engine writers. The orchestrator owns integration and gate closure; handle agent command prompts without asking the owner.
 
 4. **Mathematical integrity.** Understand claims, proofs, and actual dependencies before repair. Check arguments independently, consult authoritative full texts when uncertain, and report unresolved gaps. Never invent source reading, proof completion, confidence, or check results. Local checks are not independent audits. Preserve the richest sound approved claims; do not narrow them to avoid work. For substantial rebuilds, choose the least destructive sound route and record the trade-off.
 
