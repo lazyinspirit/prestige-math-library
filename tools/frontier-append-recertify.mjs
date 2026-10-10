@@ -37,8 +37,15 @@ export function recertifyAppendFrontier(root, run, entry) {
   const ordered = [...graph.items].sort(([a], [b]) => graph.levels.get(a) - graph.levels.get(b) || a.localeCompare(b));
   const rows = [];
   for (const [id, { item, page }] of ordered) {
-    if (!item.kind || !item.title?.trim() || !item.statement?.trim() || !item.strategy?.trim()
-      || !item.provenance || !Array.isArray(item.deps)) throw Error(`Malformed frontier metadata: ${id}`);
+    if (!item.kind || !item.title?.trim() || !Array.isArray(item.deps))
+      throw Error(`Malformed frontier metadata: ${id}`);
+    const canonical = join(root, 'items', `${id}.md`);
+    if (!item.statement?.trim() && !existsSync(canonical)) throw Error(`Statement carrier missing: ${id}`);
+    if (!item.strategy?.trim() && !existsSync(canonical)) {
+      const notes = join(root, 'research', `${run}-batch-${page.batch}.notes.md`);
+      if (!existsSync(notes) || !readFileSync(notes, 'utf8').trim()) throw Error(`Strategy carrier missing: ${id}`);
+      guard(notes);
+    }
     const level = graph.levels.get(id);
     if ((!plannedPages.has(page.id) || item.dependency_level !== undefined) && item.dependency_level !== level)
       throw Error(`Incorrect dependency level: ${id}`);

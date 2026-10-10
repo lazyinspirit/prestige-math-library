@@ -45,3 +45,23 @@ test('wrong old metadata, undeclared emptiness and missing suppliers fail closed
   f.write('demo-batch-1.pages.json', f.old);
   assert.throws(() => recertifyAppendFrontier(f.root, 'demo', f.entry), /Missing prerequisite context/);
 });
+
+test('scaffold provenance may be deferred to authoring without a false gate failure', t => {
+  const f = fixture(t);
+  delete (f.old[0].items[0] as any).provenance;
+  f.write('demo-batch-1.pages.json', f.old);
+  assert.equal(recertifyAppendFrontier(f.root, 'demo', f.entry).subjects, 4);
+});
+
+test('published summaries and batch-note strategies retain their actual carriers', t => {
+  const f = fixture(t);
+  delete (f.old[0].items[0] as any).statement; delete (f.old[0].items[0] as any).strategy;
+  writeFileSync(join(f.root, 'items', 'def-old.md'), '---\nid: def-old\nkind: definition\ndeps: []\n---\n## Statement\nExisting definition.\n');
+  delete (f.old[1].items[0] as any).strategy;
+  f.write('demo-batch-1.pages.json', f.old);
+  assert.throws(() => recertifyAppendFrontier(f.root, 'demo', f.entry), /Strategy carrier missing/);
+  writeFileSync(join(f.root, 'research', 'demo-batch-1.notes.md'), 'Existing item proof strategies.\n');
+  const report = recertifyAppendFrontier(f.root, 'demo', f.entry);
+  assert.equal(report.subjects, 4);
+  assert.ok(report.guards.some((g: any) => g.path === 'research/demo-batch-1.notes.md'));
+});

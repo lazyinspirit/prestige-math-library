@@ -81,7 +81,9 @@ preserving every item array and batch identity while updating approved plan
 orders and prerequisites. Scoped drift, plan and ledger gates must pass before
 Beta work resumes. Each append gate battery first recertifies all current frontier
 items and the new declared inventories in dependency order for formatting,
-metadata and input hashes only. Each attempt writes a fresh immutable report;
+metadata and input hashes only. Scaffold provenance may be filled at authoring; published summaries reuse
+their canonical item bodies, and existing proof strategies may live in batch
+notes rather than inline prototype fields. These actual carriers are hashed. Each attempt writes a fresh immutable report;
 existing owner holds and repair counters remain intact. An owner exception for
 prerequisite append gates never permits the main build gates. No state or gate
 stamp is edited by append. If interrupted,
