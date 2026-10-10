@@ -270,7 +270,7 @@ const usage = (message) => {
 
 if (listOnly) {
   console.log(isAudit ? 'AUDIT table — AUDIT-WORKFLOW.md steps A0 to A10 (A5 does not exist)'
-                      : 'BUILD table — LEVELS.md steps 1 to 9');
+                      : 'BUILD table — WORKFLOW.md steps 1 to 8');
   for (const [number, gates] of Object.entries(TABLE)) {
     console.log(`\nstep ${number}${gates.length ? '' : '  (no mechanical gate — judgment or agent work)'}`);
     for (const gate of gates) {

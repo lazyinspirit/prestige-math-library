@@ -6,7 +6,7 @@
 // generic "re-run a completed step" — coverage comes from successful result
 // receipts in the dispatch directory, and a stamped stage is never re-derived.
 // This command performs that surgery explicitly and reversibly, in the same
-// idiom as `recover-step8`: it archives the Step-5 result receipts and the
+// guarded-recovery idiom: it archives the Step-5 result receipts and the
 // Step-5 artifacts they produced, clears only the ten Step-5 stage records, and
 // arms `pause-at` so the re-run stops at its own boundary. Items, contracts,
 // manifests, judge ledgers and the Step-6/Step-7 receipts are left untouched.

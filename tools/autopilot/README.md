@@ -14,7 +14,7 @@ changing old completion stamps. Reviewed apply uses the normal metadata SYNC
 while preserving all item arrays; old reports remain attributable in archived
 preimages. See WORKFLOW.md for restart and interrupted-transaction requirements.
 
-- stages/mathlib.mts: Steps1–4, 6, 8–9, shared gates and scoped recovery.
+- stages/mathlib.mts: Steps1–4, 6 and 8, shared gates and guarded controls.
 - stages/mathlib.step5.mts: independent reader/refuter pass, routed group adjudication, cross-group audit and closure.
 - stages/mathlib.step7.mts: batch adjudication, three-owner impact repair, stable certification and both explicit repeat loops.
 - src/executor.mts: barriers, dispatch/adoption, owner escalation and hot reload.
@@ -44,7 +44,7 @@ is unfinished; they flag exact missing items, author consumers, and leave
 unresolved item decisions escalated for reconciliation. Step3b audits each
 scaffold for authoring readiness, writes complete arguments and clears the
 required integrity gates. Thorough independent mathematical audit and defect
-repair follow in Steps 5–8. Step3 authors sharing a batch still serialize
+repair follow in Steps 5–7. Step3 authors sharing a batch still serialize
 because their manifests are shared. The planner now places one A/B pair in
 each batch. Step1 scaffolders label every manifest item with its in-run
 dependency level; the Step1 gate recomputes the
@@ -82,7 +82,7 @@ honest about uncertainty and read authoritative sources when unsure. Logical
 validity governs decisions; authoritative sources can also contain mistakes.
 An artifact-complete unit retires its own stale stalemate blocker on the next
 controller tick, even while sibling units in that stage are still writing.
-Outside the explicitly authorized Step7 gate-repair loop, Step 1–9 failures are
+Outside the explicitly authorized Step7 gate-repair loop, Step 1–8 failures are
 owner-recertification holds: no failing gate invokes a stage repair hook or
 spends a repair budget. The owner/operator must repair every rejected item,
 refresh every certification invalidated by that repair, and retry the same gate;
@@ -106,7 +106,15 @@ After all writers drain, full Step3 recertification and native certification/gat
 are still required. Refresh cannot reopen a completed suffix or substitute for
 origin evidence; see [WORKFLOW.md](../../WORKFLOW.md) for the public control.
 
-Step 9 includes any run-local `deferred-pairs.json` and `deferred-items.json`
+The workflow has eight steps (`eight-step-v4-proof-coverage`). The former
+Step-8 review, scope-delta repair and spine/audit attestation stages and their
+recovery command are removed; closeout is now Step 8. Step 7 adds only the
+manifest-to-contract `proof-contract-coverage` completeness gate to its existing
+initial/retry battery. Closeout uses `level-coverage --mechanical` and retains
+current judgments, terminal ledger checks and readiness seals without requiring
+removed review receipts. Stage and artifact numbers require a fresh run.
+
+Step 8 includes any run-local `deferred-pairs.json` and `deferred-items.json`
 records in its sealed evidence packet. It rejects a deferred page or item that
 is still active in the run scope, and the rendered owner report names each
 documented deferral and its reason separately from the built inventory.
@@ -157,7 +165,7 @@ from requested registered profile names to effective registered profile names.
 The dispatcher applies it only to that run's new processes; result receipts
 record both `requested_profile` and the effective `profile`. Existing agents
 finish on their original profile. Remove the run-local override after the run.
-DeepSeek dispatches in Steps 2, 3, 6 and 9 require the
+DeepSeek dispatches in Steps 3, 6 and 8 require the
 repository's single-tool live web bridge. It prefers Tavily and falls back to
 Firecrawl when Tavily is not configured. Deterministic tool plans remain
 model-free.

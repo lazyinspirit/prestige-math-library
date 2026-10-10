@@ -4,7 +4,7 @@
 `research/<run>-<template>.task.md`; `tools/step7-scope.mjs` separately composes
 the historical Step 6/7 group tasks. Current Step-7 round tasks come from
 `tools/step7-workflow.mjs`, with `briefs/step7-adjudicator.md` and
-`briefs/step7-owner-repair.md`. The live stage table is the selection authority.
+`briefs/step7-owner-repair.md`. The live eight-step stage table is the selection authority.
 
 Templates contain only stage-specific inputs, write authority, required output,
 and focused gate work. Role-wide conduct and mathematical standards belong in
@@ -12,6 +12,9 @@ the dispatched role brief; run-specific page data belongs in generated tasks,
 batch manifests, scope receipts, and the plan.
 
 Step 1 uses `briefs/beta-scaffold.md`; Step 3 authors use `briefs/group-author.md`.
+Step 8 uses `alpha-step8.md` only for evidence-bound owner reporting. The former
+Step-8 scope review, impact closer, adjudication and audit/spine receipt templates
+are removed. Current report outputs and schemas use `step8-` names.
 
 `run-tasks.mjs` replaces only these placeholders:
 

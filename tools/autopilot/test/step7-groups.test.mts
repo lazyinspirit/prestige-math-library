@@ -455,7 +455,7 @@ test('published repair receipt has no judge or adjudication gate obligation', ()
     writeFileSync(path, [
       { kind: 'repaired', id: 'lem-cauchy-bounded', defect: 'A repaired published claim.', correction_basis: 'Direct mathematical correction.' },
       { kind: 'escalated', id: 'thm-parallelogram-law', why: 'A separate owner decision is pending.' },
-    ].map(JSON.stringify).join('\n') + '\n');
+    ].map(value => JSON.stringify(value)).join('\n') + '\n');
     const result = spawnSync('node', ['tools/step7-scope.mjs', 'published', '--run', run, '--out', receipt],
       { cwd: REPO, encoding: 'utf8' });
     assert.equal(result.status, 0, `${result.stdout}${result.stderr}`);

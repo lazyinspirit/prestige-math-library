@@ -1,31 +1,31 @@
+import { spawnSync } from './fixture-process.mts';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { stages } from '../stages/mathlib.mts';
-import { runContentHash, runScope } from '../../step9-lib.mjs';
-import { writeProofLayout } from '../../proof-layout.mjs';
+import { runContentHash, runScope } from '../../physics-support/step8-lib.mjs';
+import { writeProofLayout } from '../../physics-support/proof-layout.mjs';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
-const TOOL = join(REPO, 'tools', 'step9-report.mjs');
-const READY = join(REPO, 'tools', 'publication-ready.mjs');
+const TOOL = join(REPO, 'tools/physics-support', 'step8-report.mjs');
+const READY = join(REPO, 'tools/physics-support', 'publication-ready.mjs');
 const runTool = (root: string, command: string) => spawnSync(process.execPath,
   [TOOL, command, '--run', 'demo', '--root', root], { encoding: 'utf8' });
 const runReadiness = (root: string, mode: '--write' | '--verify', ...extra: string[]) => spawnSync(process.execPath,
   [READY, '--run', 'demo', mode, '--root', root, ...extra], { encoding: 'utf8' });
 
 function fixture() {
-  const root = mkdtempSync(join(tmpdir(), 'step9-evidence-'));
-  mkdirSync(join(root, 'research'));
-  mkdirSync(join(root, 'items'));
-  mkdirSync(join(root, 'tools'));
+  const root = mkdtempSync(join(tmpdir(), 'step8-evidence-'));
+  mkdirSync(join(root, 'research'), { recursive: true });
+  mkdirSync(join(root, 'items'), { recursive: true });
+  mkdirSync(join(root, 'tools'), { recursive: true }); mkdirSync(join(root, 'tools/physics-support'), { recursive: true });
   mkdirSync(join(root, 'library', 'analysis'), { recursive: true });
-  writeFileSync(join(root, 'tools', 'pathway-closure.mjs'), 'console.log("fixture pathway closed");\n');
+  writeFileSync(join(root, 'tools/physics-support', 'pathway-closure.mjs'), 'console.log("fixture pathway closed");\n');
   writeFileSync(join(root, 'research', 'demo-scope-ledger.json'), JSON.stringify({ pages: [{ id: 'page-a', kind: 'A', batch: '1' }] }));
-  writeFileSync(join(root, 'research', 'demo-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', items: ['thm-a'] }]));
   writeFileSync(join(root, 'research', 'demo-deferred-pairs.json'), JSON.stringify({ run: 'demo', deferred: [
     { page: 'future-pair', companion: 'future-pair-examples', reason: 'Its required supplier page is unbuilt.' },
   ] }));
@@ -50,19 +50,19 @@ function fixture() {
   writeFileSync(join(root, 'research', 'demo-judge-adjudications.jsonl'), '');
   writeFileSync(join(root, 'research', 'demo-judge-context-hashes.json'), JSON.stringify({ cached: 'before' }));
   writeFileSync(join(root, 'research', 'defect-ledger.jsonl'), [
-    JSON.stringify({ defect_id: 'demo-D001', run: 'demo', severity: 'fatal', subject: 'thm-a', class: 'accuracy',
+    JSON.stringify({ defect_id: 'demo-D001', run: 'demo', at: '2026-10-10', severity: 'fatal', subject: 'thm-a', class: 'accuracy',
       subclass: 'invalid-inference', location: 'proof-step', disposition: 'fixed', caught_at_stage: '7-adjudicate', caught_by_role: 'judge-terra', repair_cost: 'repair+rejudge' }),
-    JSON.stringify({ defect_id: 'demo-D002', run: 'demo', severity: 'fatal', subject: 'thm-a', class: 'accuracy',
+    JSON.stringify({ defect_id: 'demo-D002', run: 'demo', at: '2026-10-10', severity: 'fatal', subject: 'thm-a', class: 'accuracy',
       subclass: 'missing-hypothesis', location: 'statement', disposition: 'fixed', caught_at_stage: '7-adjudicate', caught_by_role: 'judge-terra', repair_cost: 'repair+rejudge' }),
   ].join('\n') + '\n');
   return root;
 }
 
-test('Step 9 scopes indentationless page inventories and hashes their item content', () => {
-  const root = mkdtempSync(join(tmpdir(), 'step9-block-scope-'));
+test('Step 8 scopes indentationless page inventories and hashes their item content', () => {
+  const root = mkdtempSync(join(tmpdir(), 'step8-block-scope-'));
   try {
-    mkdirSync(join(root, 'research'));
-    mkdirSync(join(root, 'items'));
+    mkdirSync(join(root, 'research'), { recursive: true });
+    mkdirSync(join(root, 'items'), { recursive: true });
     mkdirSync(join(root, 'library', 'algebra'), { recursive: true });
     writeFileSync(join(root, 'research', 'demo-scope-ledger.json'), JSON.stringify({
       pages: [{ id: 'block-page', kind: 'A', batch: '1' }],
@@ -72,7 +72,7 @@ test('Step 9 scopes indentationless page inventories and hashes their item conte
     writeFileSync(join(root, 'items', 'def-first.md'), 'first\n');
     writeFileSync(join(root, 'items', 'lem-second.md'), 'second\n');
 
-    assert.deepEqual(runScope('demo', root).items.map((row: any) => row.id), ['def-first', 'lem-second']);
+    assert.deepEqual(runScope('demo', root).items.map((row: any) => row.id).filter(id => id !== 'physics-content'), ['def-first', 'lem-second']);
     const before = runContentHash('demo', root);
     writeFileSync(join(root, 'items', 'lem-second.md'), 'changed second\n');
     assert.notEqual(runContentHash('demo', root), before);
@@ -81,13 +81,13 @@ test('Step 9 scopes indentationless page inventories and hashes their item conte
   }
 });
 
-test('Step 9 mechanically reconciles and renders every fatal row', () => {
+test('Step 8 mechanically reconciles and renders every fatal row', () => {
   const root = fixture();
   try {
     writeProofLayout('demo', root);
     let result = runTool(root, 'evidence');
     assert.equal(result.status, 0, result.stderr);
-    const evidence = JSON.parse(readFileSync(join(root, 'research', 'demo-step9-evidence.json'), 'utf8'));
+    const evidence = JSON.parse(readFileSync(join(root, 'research', 'demo-step8-evidence.json'), 'utf8'));
     assert.equal(evidence.defects.fatal_count, 2);
     assert.equal(evidence.verification.proof_layout.steps, 2);
     assert.equal(evidence.deferrals.pairs[0].page, 'future-pair');
@@ -98,7 +98,7 @@ test('Step 9 mechanically reconciles and renders every fatal row', () => {
     result = runTool(root, 'check-evidence');
     assert.equal(result.status, 0, result.stderr);
 
-    writeFileSync(join(root, 'research', 'demo-step9-report.response.json'), JSON.stringify({
+    writeFileSync(join(root, 'research', 'demo-step8-report.response.json'), JSON.stringify({
       version: 2,
       readiness_verdict: 'publishable-pending-owner-approval',
       executive_summary: 'The build is mathematically closed and ready for the owner’s final audit.',
@@ -108,14 +108,14 @@ test('Step 9 mechanically reconciles and renders every fatal row', () => {
     }));
     result = runTool(root, 'snapshot');
     assert.equal(result.status, 0, result.stderr);
-    mkdirSync(join(root, '.autopilot-demo'));
-    writeFileSync(join(root, '.autopilot-demo', 'events.jsonl'), 'first runtime event\n');
-    writeFileSync(join(root, '.autopilot-demo', 'events.jsonl'), 'later runtime event\n');
+    mkdirSync(join(root, '.physics-autopilot-demo'), { recursive: true });
+    writeFileSync(join(root, '.physics-autopilot-demo', 'events.jsonl'), 'first runtime event\n');
+    writeFileSync(join(root, '.physics-autopilot-demo', 'events.jsonl'), 'later runtime event\n');
     result = runTool(root, 'check-response');
     assert.equal(result.status, 0, result.stderr);
     result = runTool(root, 'render');
     assert.equal(result.status, 0, result.stderr);
-    const report = readFileSync(join(root, 'research', 'demo-step9-report.md'), 'utf8');
+    const report = readFileSync(join(root, 'research', 'demo-step8-report.md'), 'utf8');
     assert.match(report, /Proof layout: 1 items, 2 steps/);
     assert.equal((report.match(/demo-D001/g) ?? []).length, 1);
     assert.equal((report.match(/demo-D002/g) ?? []).length, 1);
@@ -132,11 +132,11 @@ test('Step 9 mechanically reconciles and renders every fatal row', () => {
     writeFileSync(join(root, 'items', 'thm-a.md'), 'unexpected mathematical mutation\n');
     result = runTool(root, 'check');
     assert.equal(result.status, 1);
-    assert.match(result.stderr, /step9-report-tree-changed.*items\/thm-a.md/);
+    assert.match(result.stderr, /step8-report-tree-changed.*items\/thm-a.md/);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test('Step 9 refuses to report an active item as deferred', () => {
+test('Step 8 refuses to report an active item as deferred', () => {
   const root = fixture();
   try {
     writeProofLayout('demo', root);
@@ -151,16 +151,16 @@ test('Step 9 refuses to report an active item as deferred', () => {
   }
 });
 
-test('Step 9 places evidence after final readiness and before the protected report', () => {
-  const ids = stages.map((stage: any) => stage.id);
-  for (const id of ['9-readiness-v2', '9-evidence-v2', '9-report-baseline-v2', '9-owner-report-v2', '9-owner-report-render-v2', '9-close-v2']) assert.ok(ids.includes(id));
-  assert.ok(ids.indexOf('9-readiness-v2') < ids.indexOf('9-evidence-v2'));
-  assert.ok(ids.indexOf('9-evidence-v2') < ids.indexOf('9-report-baseline-v2'));
-  assert.ok(ids.indexOf('9-report-baseline-v2') < ids.indexOf('9-owner-report-v2'));
+test('Step 8 places evidence after final readiness and before the protected report', () => {
+  const ids = stages.map((stage: any) => stage.id).filter(id => id !== 'physics-content');
+  for (const id of ['8-readiness-v2', '8-evidence-v2', '8-report-baseline-v2', '8-owner-report-v2', '8-owner-report-render-v2', '8-close-v2']) assert.ok(ids.includes(id));
+  assert.ok(ids.indexOf('8-readiness-v2') < ids.indexOf('8-evidence-v2'));
+  assert.ok(ids.indexOf('8-evidence-v2') < ids.indexOf('8-report-baseline-v2'));
+  assert.ok(ids.indexOf('8-report-baseline-v2') < ids.indexOf('8-owner-report-v2'));
   const ctx = { run: 'demo', repo: REPO };
-  const report: any = stages.find((stage: any) => stage.id === '9-owner-report-v2');
+  const report: any = stages.find((stage: any) => stage.id === '8-owner-report-v2');
   assert.equal(report.plan(ctx)[0].role, 'alpha-report');
-  assert.ok(report.gates(ctx).some((gate: any) => gate.id === 'step9-evidence'));
+  assert.ok(report.gates(ctx).some((gate: any) => gate.id === 'step8-evidence'));
 });
 
 test('publication readiness seals protected inputs without rejecting expected report outputs', () => {
@@ -173,14 +173,14 @@ test('publication readiness seals protected inputs without rejecting expected re
     assert.ok(receipt.protected_tree_files > 0);
     assert.match(receipt.protected_tree_sha256, /^[a-f0-9]{64}$/);
 
-    mkdirSync(join(root, '.autopilot-demo'));
-    writeFileSync(join(root, '.autopilot-demo', 'events.jsonl'), 'runtime state changes after sealing\n');
+    mkdirSync(join(root, '.physics-autopilot-demo'), { recursive: true });
+    writeFileSync(join(root, '.physics-autopilot-demo', 'events.jsonl'), 'runtime state changes after sealing\n');
     result = runReadiness(root, '--verify');
     assert.equal(result.status, 0, result.stderr);
     writeFileSync(join(root, 'research', 'demo-judge-context-hashes.json'), JSON.stringify({ cached: 'refreshed-by-closure-gate' }));
     result = runReadiness(root, '--verify');
     assert.equal(result.status, 0, result.stderr);
-    writeFileSync(join(root, 'research', 'demo-step9-report.md'), 'Expected owner report output.\n');
+    writeFileSync(join(root, 'research', 'demo-step8-report.md'), 'Expected owner report output.\n');
     result = runReadiness(root, '--verify', '--require-report');
     assert.equal(result.status, 0, result.stderr);
 
@@ -235,7 +235,7 @@ test('scope creation pins Git HEAD and refresh preserves the original baseline',
     const baseline = git('rev-parse', 'HEAD').stdout.trim();
     const path = join(root, 'research', 'fresh-scope-ledger.json');
     writeFileSync(join(root, 'research', 'fresh-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', kind: 'A', items: [] }]));
-    const writeLedger = () => spawnSync(process.execPath, [join(REPO, 'tools', 'manifest-integrity.mjs'),
+    const writeLedger = () => spawnSync(process.execPath, [join(REPO, 'tools/physics-support', 'manifest-integrity.mjs'),
       '--run', 'fresh', '--write-ledger', '--force'], { cwd: root, encoding: 'utf8' });
     assert.equal(writeLedger().status, 0);
     assert.equal(JSON.parse(readFileSync(path, 'utf8')).baseline_commit, baseline);

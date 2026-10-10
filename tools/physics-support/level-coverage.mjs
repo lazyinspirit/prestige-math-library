@@ -15,6 +15,7 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 // contract, an item omitted from either judge lane, and an Alpha audit receipt
 // that no longer matches the actual in-flight items and relationships.
 
+import { isProofBearing } from './proof-bearing.mjs';
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -52,19 +53,14 @@ const judgeTargetsPath = option('--judge-targets');
 const receiptPath = option('--audit-receipt');
 const spineReceiptPath = option('--spine-receipt');
 const templatePath = option('--template');
-// --judge-only: the JUDGE CLOSURE half of this gate, on its own.
-//
-// The full gate needs a merged contract, a spine receipt and a completed audit
-// receipt, none of which exist at step 6 or step 7 — so the only place it could
-// run was the very end of a build, which is exactly where frontier-14 found it
-// red with nothing left to do about it. Judge closure is answerable much
-// earlier: it needs the manifests, the ledger and the items on disk.
-//
-// Splitting it out here rather than writing a second tool is deliberate. The
-// predicate is subtle (context hash vs item hash, clause (a) vs clause (b),
-// exact-hash adjudication matching) and a second implementation of it would
-// drift from this one and then disagree with it at 3am.
+// --judge-only checks current verdict/adjudication closure at early joins.
+// --mechanical is the native closeout mode: contracts, provenance and current
+// configured judgments, without another review attestation. Explicit maintenance
+// audits may still supply their audit/spine receipts or generate a template.
+// All modes share the same currency predicate rather than divergent checkers.
 const judgeOnly = argv.includes('--judge-only');
+// Native closeout verifies existing evidence without a second audit attestation.
+const mechanical = argv.includes('--mechanical');
 // Later workflow stages may still carry published items in a manifest after a
 // maintenance repair. They remain in the nonjudge audit scope, but their repair
 // has no judge, rejudge, or adjudication obligation.
@@ -90,6 +86,8 @@ if (judgeOnly) {
   // cast against, which is trivially satisfied and answers nothing. A closure
   // gate that cannot fail is worse than no gate: it reports green.
   if (!verifyCurrent) { console.error('--judge-only requires --verify-current-context; otherwise it checks nothing'); process.exit(2); }
+} else if (mechanical) {
+  if (!contractsPath || !judgePath || !verifyCurrent || receiptPath || templatePath || spineReceiptPath) usage();
 } else if ((!receiptPath && !templatePath) || (receiptPath && templatePath)) usage();
 const errors = [];
 const warnings = [];
@@ -147,9 +145,6 @@ function resolvePath(path) { return path.startsWith('/') ? path : join(process.c
 function loadJson(path, code) {
   try { return JSON.parse(readFileSync(resolvePath(path), 'utf8')); }
   catch (cause) { error(code, `${path}: ${cause.message}`); return null; }
-}
-function isProofBearing(body) {
-  return /^## (?:Proof|Refutation|Counterexample|Verification)\s*$/m.test(body);
 }
 
 const items = new Map();
@@ -251,14 +246,14 @@ for (const id of scope) {
 const proofScope = scope.filter((id) => isProofBearing(items.get(resolve(id) ?? id)?.body ?? ''));
 
 // Auditor/adjudicator-created items are an explicit non-judge certification
-// class. Only Step-7/8 receipts are relevant here. The receipt is hash-bound to
+// class. Only current Step-7 receipts are relevant to native build closure here. The receipt is hash-bound to
 // all current item/manifest/contract carriers and never manufactures ledger rows.
 const auditorCertified = new Map();
 let auditorCertificationBlocked = false;
 {
   let rows = [];
   try { rows = loadAuditorCreatedCertifications((auditorCertificationsArg ?? '').split(',')
-    .map(value => value.trim()).filter(Boolean).map(resolvePath), { root: REPO, run: option('--run'), steps: [7, 8] }); }
+    .map(value => value.trim()).filter(Boolean).map(resolvePath), { root: REPO, run: option('--run'), steps: [7] }); }
   catch (cause) {
     auditorCertificationBlocked = true;
     error('auditor-certification-shape', cause.message);
@@ -652,7 +647,7 @@ if (outPath) {
     verified_against_current_context: verifyCurrent,
     scope: judgeScope.length,
     verdicts_complete: judgeCoverage.length,
-    // Legacy field retained while historical Step-9 receipts remain readable.
+    // Legacy field retained while historical Step-8 receipts remain readable.
     pairs_complete: judgeCoverage.length,
     terminal_resolved: terminalResolved.sort((a, b) => a.id.localeCompare(b.id)),
     terminal_superseded: terminalSuperseded.sort((a, b) => a.id.localeCompare(b.id)),
@@ -708,7 +703,8 @@ process.exitCode = errors.length ? 1 : 0;
 
 function usage() {
   console.error('usage: node tools/physics-support/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] [--terminal-resolutions <step7.jsonl>] [--audit --judge-targets <repair-targets.json>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
-  console.error('       judge closure alone (steps 7, 8, rejudge):');
+  console.error('       mechanical closeout: --mechanical --contracts FILE --judge-ledger FILE --verify-current-context MANIFEST...');
+  console.error('       judge closure alone (steps 6–8, rejudge):');
   console.error('       node tools/physics-support/level-coverage.mjs --judge-only --verify-current-context --judge-ledger <judge.jsonl> [--judge-adjudications <adj.jsonl>] [--terminal-resolutions <step7.jsonl>] [--allow-unadjudicated] [--allow-pending-rejudge] [--out <closure.json>] research/<run>-batch-*.pages.json');
   process.exit(2);
 }

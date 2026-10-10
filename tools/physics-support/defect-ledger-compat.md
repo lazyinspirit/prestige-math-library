@@ -40,7 +40,7 @@ fails terminal closure. Invalid supersession, ambiguous fatal ownership and
 malformed historical fields remain failures. Raw history, schema validation,
 generated-view freshness and the checked-row/liveness count remain intact.
 
-The standalone Step-9 evidence builder validates the owning run's complete
+The standalone Step-8 evidence builder validates the owning run's complete
 ledger with the same canonical validator before resolving active ownership.
 Active open rows block evidence closure regardless of severity. Superseded
 open observations retain their literal dispositions in the exhaustive fatal
@@ -82,7 +82,7 @@ substantive fields or invalid ownership links:
 
 ```bash
 node --test tools/physics-support/defect-ledger-compat.test.mjs
-node --test tools/physics-support/step9-report-history.test.mjs
-node --test tools/physics-support/step9-report-tree.test.mjs
+node --test tools/physics-support/step8-report-history.test.mjs
+node --test tools/physics-support/step8-report-tree.test.mjs
 node --test tools/physics-support/run-commit-import-scope.test.mjs
 ```

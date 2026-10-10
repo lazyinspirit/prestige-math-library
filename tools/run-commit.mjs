@@ -57,7 +57,7 @@ if (branch !== 'main') {
   process.exit(1);
 }
 
-// Opt-in only: the owner creates this policy before Step-9 protected-tree
+// Opt-in only: the owner creates this policy before Step-8 protected-tree
 // baselines. A deleted tracked policy must not silently restore whole-tree
 // staging. Runs without a policy retain their existing closeout behavior.
 const scopePolicy = `research/${run}-closeout-scope.json`;
@@ -101,7 +101,7 @@ if (receiptPath) {
   previousReceipt = existsSync(receiptPath) ? readFileSync(receiptPath) : null;
   mkdirSync(dirname(receiptPath), { recursive: true });
   writeFileSync(receiptPath, `${JSON.stringify({
-    role: 'tool', label: 'close-step9-v2', run, covers: ['all'], ok: true,
+    role: 'tool', label: 'close-step8-v2', run, covers: ['all'], ok: true,
     written_by: 'run-commit', ended_at: new Date().toISOString(),
   }, null, 2)}\n`);
   dirty = git('status', '--porcelain').split('\n').filter(Boolean);

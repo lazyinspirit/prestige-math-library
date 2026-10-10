@@ -517,3 +517,23 @@ test('a throw outside tick is caught and the loop keeps running', async () => {
     'the defect is an owner blocker');
   assert.ok(notifications.some((n) => n.kind === 'tick-error'));
 });
+
+
+test('hot reload refuses a renumbered revision without changing current coverage', async () => {
+  const fx = fixture(), stagesFile = join(fx.repo, 'revision-under-test.mts');
+  const source = (revision: string) => `export const workflowRevision = '${revision}';
+export const stages = [{ id: 's1', label: '${revision}', units: () => ['1'], pattern: /^worker-/,
+plan: () => [], gates: () => [{ id: 'g', argv: ['true'] }] }];`;
+  writeFileSync(stagesFile, source('old-nine-step'));
+  const first = await import(`${stagesFile}?v=first`);
+  const { ex, notifications } = makeExecutor(fx, first.stages, { stagesPath: stagesFile });
+  ex.state.data.workflowRevision = 'old-nine-step';
+  ex.state.save();
+  const before = readFileSync(ex.state.path, 'utf8');
+  writeFileSync(stagesFile, source('eight-step-v4-proof-coverage'));
+  utimesSync(stagesFile, new Date(), new Date(Date.now() + 5_000));
+  await ex.maybeReloadStages();
+  assert.equal(ex.stages[0].label, 'old-nine-step');
+  assert.equal(readFileSync(ex.state.path, 'utf8'), before);
+  assert.ok(notifications.some(n => n.kind === 'stages-reload-refused' && /fresh run/.test(n.message)));
+});

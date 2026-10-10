@@ -12,7 +12,7 @@ Read-only assignments report defects without editing.
 **Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
 
 For Step 3 onward, follow `briefs/tasks/frontier-dependency-ledger.md` within
-your write scope. Step 8's lead must refresh and read the unified frontier ledger.
+your write scope. The engine refreshes the unified frontier ledger at mutable joins.
 
 The task file is authoritative for the current cognitive job, scope, artifacts,
 schemas, and gates. Read it with [README.md](../README.md),
@@ -50,7 +50,7 @@ Current Step-7 dispatches also follow
 `step7-adjudicator.md` or `step7-owner-repair.md`; their tasks authorize assigned
 published downstream repairs across the whole library.
 
-At Steps 7 and 8, an item genuinely created and fully authored by an authorised
+At Step 7, an item genuinely created and fully authored by an authorised
 auditor/adjudicator is a separate certification class. Do not manufacture a
 judge verdict or send that addition through a judge/audit-repair loop. After a
 successful dispatch, the engine verifies the immutable pre-stage inventory and

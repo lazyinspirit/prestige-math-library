@@ -41,6 +41,7 @@
 // is found one stage later than it used to be; the level join still finds it,
 // and it still blocks before the next barrier.
 
+import { assertWorkflowRevision } from './workflow-revision.mts';
 import { existsSync, writeFileSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
@@ -234,6 +235,9 @@ export class Executor {
     this.stagesFingerprint = fingerprint;
     try {
       const mod = await import(`${pathToFileURL(this.stagesPath).href}?v=${encodeURIComponent(fingerprint)}`);
+      // Renumbering cannot adopt old coverage even when the completed prefix
+      // is unchanged. Keep this run's loaded table until an explicit cutover.
+      assertWorkflowRevision(this.state.data, mod.workflowRevision);
       const nextStages = typeof mod.stagesForRun === 'function' ? mod.stagesForRun(this.ctx()) : mod.stages;
       const problems = validateStages(nextStages, this.ctx());
       if (problems.length) {
@@ -1889,7 +1893,7 @@ export class Executor {
         // `fixRounds` was initialised and never read. So the only thing a
         // failing gate could ever do was hold. On frontier-14 that meant two
         // confirmed-fatal proofs became a paragraph in a markdown report
-        // instead of an authoring dispatch, and the run went to step 9 with
+        // instead of an authoring dispatch, and the run went to step 8 with
         // them open.
         //
         // The hook also could not have worked as written: it fired only when

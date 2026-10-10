@@ -11,8 +11,8 @@ try {
   };
   const run = value('--run'), step = Number(value('--step'));
   const touches = value('--touches'), label = value('--label');
-  if (!run || ![7, 8].includes(step) || !touches || !label)
-    throw Error('Usage: stage-touch-baseline.mjs --run RUN --step 7|8 --touches PATH --label LABEL');
+  if (!run || ![7].includes(step) || !touches || !label)
+    throw Error('Usage: stage-touch-baseline.mjs --run RUN --step 7 --touches PATH --label LABEL');
   const touchlog = fileURLToPath(new URL('./touchlog.mjs', import.meta.url));
   const result = spawnSync(process.execPath, [touchlog, 'snap', touches, label, '--idempotent'],
     { cwd: process.cwd(), encoding: 'utf8' });

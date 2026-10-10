@@ -1,6 +1,6 @@
 // Ownership comes from a detector's failing subject field, never an ID search
 // over its output: citations, inventories and upheld records are not defects.
-const ITEM = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*';
+const ITEM = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem|post|pthm|exp|texp)-[a-z0-9]+(?:-[a-z0-9]+)*';
 const itemFile = new RegExp(`^(?:.*?/)?items/(${ITEM})\\.md(?::|$)`);
 const errorHeader = new RegExp(`^ERROR\\s+[^\\s:]+(?:\\s+\\[(${ITEM})\\])?:`);
 
@@ -17,7 +17,7 @@ function subjectsFor(check, failure, valid) {
   let json;
   try { json = JSON.parse(output.trim()); } catch { /* Plain text is the default for most checks. */ }
   if (json && typeof json === 'object') {
-    if (['proof-contract', 'finite-smoke', 'risk-report', 'judge-closure', 'rendercheck', 'fwdcheck'].includes(check)) {
+    if (['proof-contract', 'proof-contract-coverage', 'finite-smoke', 'risk-report', 'judge-closure', 'rendercheck', 'fwdcheck'].includes(check)) {
       for (const row of rows(json.errors)) {
         if (!row || typeof row !== 'object') { ownerHeld = true; continue; }
         if (check === 'rendercheck') file(row.file);
@@ -37,8 +37,8 @@ function subjectsFor(check, failure, valid) {
     for (const line of lines) {
       const text = line.trim();
       if (/^(?:SyntaxError|TypeError|ReferenceError|RangeError|Error):/.test(text)) ownerHeld = true;
-      if (/^ERROR\b/.test(text) && !['proof-contract', 'finite-smoke', 'risk-report', 'judge-closure'].includes(check)) ownerHeld = true;
-      if (['proof-contract', 'finite-smoke', 'risk-report', 'judge-closure'].includes(check)) {
+      if (/^ERROR\b/.test(text) && !['proof-contract', 'proof-contract-coverage', 'finite-smoke', 'risk-report', 'judge-closure'].includes(check)) ownerHeld = true;
+      if (['proof-contract', 'proof-contract-coverage', 'finite-smoke', 'risk-report', 'judge-closure'].includes(check)) {
         const match = text.match(errorHeader);
         if (match) add(match[1]);
         else if (check === 'finite-smoke' && /^FAIL\s/.test(text)) add(text.match(new RegExp(`^FAIL \\[(${ITEM})\\]`))?.[1]);

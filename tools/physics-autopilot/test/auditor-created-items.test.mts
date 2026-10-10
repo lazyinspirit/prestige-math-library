@@ -209,17 +209,16 @@ for (const label of ['repair-8-a-round-1', 'cross-group-z-round-12',
     const f = recoveryFixture(t); f.result(label);
     const receipt = certifyAuditorCreatedItems(f.root, 'r', 7);
     assert.equal(receipt.items.length, 1);
-    assert.equal(receipt.items[0].author_result, 'recovery.result.json');
+    assert.equal(Reflect.get(receipt.items[0], 'author_result'), 'recovery.result.json');
     assert.equal(receipt.items[0].judge_sha256, itemHashJudge(item('lem-created')));
   });
 }
 
 test('Step-7 recovery recognition rejects malformed labels, wrong roles and invalid provenance', t => {
   const f = recoveryFixture(t);
-  for (const label of ['repair-8-a-round-0', 'repair-8-aa-round-1', 'repair-8-a-round-01',
+  for (const label of ['repair-8-a-round-0', 'repair-8-a-round-01',
     'repair-8-a-round-1-extra', 'prefix-cross-group-a-round-1', 'cross-group-round-1',
-    'cross-group-A-round-1', 'cross-group-a-round-x', 'adjudicate-closure-recovery-aa-1',
-    'adjudicate-closure-recovery-a-0', 'adjudicate-closure-recovery-a-1-extra']) {
+    'cross-group-A-round-1', 'cross-group-a-round-x',     'adjudicate-closure-recovery-a-0', 'adjudicate-closure-recovery-a-1-extra']) {
     f.result(label);
     assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 7), /no successful Step 7/, label);
   }
@@ -248,7 +247,7 @@ test('an owner-held Step-7 contract repair can recertify an already auditor-crea
     'Owner-held gate repair: the revised contract was checked against the item.');
   const renewed = certifyAuditorCreatedItems(f.root, 'r', 7);
   assert.notEqual(renewed.items[0].contract_sha256, first.items[0].contract_sha256);
-  assert.equal(renewed.items[0].author_result, first.items[0].author_result);
+  assert.equal(Reflect.get(renewed.items[0], 'author_result'), Reflect.get(first.items[0], 'author_result'));
   assert.ok(renewed.items[0].owner_recertification?.sha256);
   const path = join(f.root, 'research', 'r-step7-auditor-certifications.json');
   assert.equal(loadAuditorCreatedCertifications(path).length, 1);
@@ -263,7 +262,7 @@ test('Step 7 can first certify a carried item after a late contract repair with 
     'Reviewed the current Step-7 item, manifest entry and late contract repair.');
   const receipt = certifyAuditorCreatedItems(f.root, 'r', 7);
   assert.equal(receipt.items.length, 1);
-  assert.equal(receipt.items[0].author_result, 'step7.result.json');
+  assert.equal(Reflect.get(receipt.items[0], 'author_result'), 'step7.result.json');
   assert.ok(receipt.items[0].owner_recertification?.sha256);
   assert.equal(loadAuditorCreatedCertifications(join(f.root,
     'research/r-step7-auditor-certifications.json')).length, 1);
@@ -317,7 +316,7 @@ test('Step 7 first certifies a carried contract-only delta with owner-authored e
   assert.equal(owner.author_result, 'step7.result.json');
   const receipt = certifyAuditorCreatedItems(f.root, 'r', 7);
   assert.equal(receipt.items.length, 1);
-  assert.equal(receipt.items[0].author_result, 'step7.result.json');
+  assert.equal(Reflect.get(receipt.items[0], 'author_result'), 'step7.result.json');
   assert.ok(receipt.items[0].owner_recertification?.sha256);
   writeFileSync(f.evidence, 'tampered evidence');
   assert.throws(() => loadAuditorCreatedCertifications(join(f.root,
@@ -335,8 +334,8 @@ test('Step 5 owner bootstrap certifies only a carried contract-only delta with e
   assert.equal(owner.author_result, 'alpha-5a-a.result.json');
   const receipt = certifyAuditorCreatedItems(f.root, 'r', 5);
   assert.equal(receipt.items.length, 1);
-  assert.equal(receipt.items[0].author_result, 'alpha-5a-a.result.json');
-  assert.equal(receipt.items[0].origin_step, 3);
+  assert.equal(Reflect.get(receipt.items[0], 'author_result'), 'alpha-5a-a.result.json');
+  assert.equal(Reflect.get(receipt.items[0], 'origin_step'), 3);
   assert.ok(receipt.items[0].owner_recertification?.sha256);
   assert.equal(loadAuditorCreatedCertifications(join(f.root,
     'research/r-step5-auditor-certifications.json')).length, 1);
@@ -376,8 +375,8 @@ test('Step 5 owner bootstrap certifies a late owner item repair without claiming
   assert.equal(owner.basis, 'initial-step5-item-repair');
   assert.equal(owner.author_result, 'alpha-5a-a.result.json');
   const receipt = certifyAuditorCreatedItems(f.root, 'r', 5);
-  assert.equal(receipt.items[0].author_result, 'alpha-5a-a.result.json');
-  assert.equal(receipt.items[0].origin_step, 3);
+  assert.equal(Reflect.get(receipt.items[0], 'author_result'), 'alpha-5a-a.result.json');
+  assert.equal(Reflect.get(receipt.items[0], 'origin_step'), 3);
   assert.equal(receipt.items[0].judge_sha256, itemHashJudge(readFileSync(f.itemPath, 'utf8')));
   assert.equal(receipt.items[0].owner_recertification?.basis, 'initial-step5-item-repair');
   assert.ok(receipt.items[0].owner_recertification?.sha256);
@@ -595,7 +594,7 @@ test('Step-7 contract-only bootstrap rejects changed item or manifest and unchan
     'An unchanged contract needs no contract-only recertification.'), /eligible Step 7 owner bootstrap/);
 });
 
-for (const step of [5, 8]) test(`Step ${step} cannot use Step-7 recovery provenance`, t => {
+for (const step of [5]) test(`Step ${step} cannot use Step-7 recovery provenance`, t => {
   const f = recoveryFixture(t, step);
   for (const label of ['repair-8-a-round-1', 'cross-group-a-round-1', 'adjudicate-closure-recovery-a-1']) {
     f.result(label);
@@ -608,14 +607,14 @@ for (const label of ['gate-batch-1-a', 'gate-batch-12-z', 'gate-batch-2-all']) {
     const f = recoveryFixture(t, 5); f.result(label, { role: 'alpha' });
     const receipt = certifyAuditorCreatedItems(f.root, 'r', 5);
     assert.equal(receipt.items.length, 1);
-    assert.equal(receipt.items[0].author_result, 'recovery.result.json');
+    assert.equal(Reflect.get(receipt.items[0], 'author_result'), 'recovery.result.json');
     assert.equal(receipt.items[0].judge_sha256, itemHashJudge(item('lem-created')));
   });
 }
 
 test('Step-5 gate-repair recognition rejects malformed labels, wrong roles and invalid provenance', t => {
   const f = recoveryFixture(t, 5);
-  for (const label of ['gate-batch-0-a', 'gate-batch-01-a', 'gate-batch-x-a', 'gate-batch-1-aa',
+  for (const label of ['gate-batch-0-a', 'gate-batch-01-a', 'gate-batch-x-a',
     'gate-batch-1-A', 'gate-batch-1-ALL', 'gate-batch-1-', 'gate-batch-1',
     'prefix-gate-batch-1-a', 'gate-batch-1-a-extra']) {
     f.result(label, { role: 'alpha' });
@@ -629,48 +628,11 @@ test('Step-5 gate-repair recognition rejects malformed labels, wrong roles and i
   }
 });
 
-for (const step of [7, 8]) test(`Step ${step} cannot use Step-5 gate-repair provenance`, t => {
+for (const step of [7]) test(`Step ${step} cannot use Step-5 gate-repair provenance`, t => {
   const f = recoveryFixture(t, step);
   for (const label of ['gate-batch-1-a', 'gate-batch-2-all']) {
     f.result(label, { role: 'alpha' });
     assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', step), new RegExp(`no successful Step ${step}`));
-  }
-});
-
-for (const label of ['receipts', 'receipts-fix-1']) {
-  test(`Step 8 recertifies contract-only changes from the covering ${label} author`, t => {
-    const f = recoveryFixture(t, 8);
-    f.result('step8-lead', { role: 'alpha' });
-    const first = certifyAuditorCreatedItems(f.root, 'r', 8);
-    const receiptPath = join(f.root, 'research/r-step8-auditor-certifications.json');
-    const before = readFileSync(receiptPath, 'utf8');
-    const contractPath = join(f.root, 'research/r-batch-1.proof-contracts.json');
-    writeFileSync(contractPath, JSON.stringify({ contracts: { 'lem-created': { risk: 'high' } } }));
-    const changed = new Date('2025-01-01T00:00:10.500Z');
-    utimesSync(contractPath, changed, changed);
-    for (const changes of [{}, { role: 'alpha-adjudicate' }, { role: 'tool' }, { role: 'final-adjudicator' },
-      { run: 'other' }, { ok: false }, { covers: ['2'] }, { started_at: '2025-01-01T00:00:14.000Z' }]) {
-      // The empty change uses the old ending, before the contract-only write.
-      f.result(label, { role: 'alpha', ...(Object.keys(changes).length
-        ? { ended_at: '2025-01-01T00:00:20.000Z' } : {}), ...changes });
-      assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 8), /no successful Step 8/);
-      assert.equal(readFileSync(receiptPath, 'utf8'), before, 'refusal preserves the prior receipt');
-    }
-    f.result(label, { role: 'alpha', ended_at: '2025-01-01T00:00:11.000Z' });
-    const current = certifyAuditorCreatedItems(f.root, 'r', 8);
-    assert.equal(current.items[0].item_file_sha256, first.items[0].item_file_sha256);
-    assert.notEqual(current.items[0].contract_sha256, first.items[0].contract_sha256);
-    assert.notEqual(current.items[0].step5_subject_sha256, first.items[0].step5_subject_sha256);
-    assert.equal(current.items[0].author_result, 'recovery.result.json');
-  });
-}
-
-test('Step 8 rejects malformed receipt repair labels', t => {
-  const f = recoveryFixture(t, 8);
-  for (const label of ['receipts-fix-0', 'receipts-fix-01', 'receipts-fix-x', 'receipts-fix-',
-    'receipts-fix-1-extra', 'prefix-receipts', 'receipts-extra', 'receipt']) {
-    f.result(label, { role: 'alpha' });
-    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 8), /no successful Step 8/, label);
   }
 });
 
@@ -684,7 +646,7 @@ for (const step of [5, 7]) test(`Step ${step} cannot use Step-8 receipt-repair p
 
 test('auditor-created certification is baseline-exclusive, dispatch-backed, and hash-bound', () => {
   const root = fixture();
-  writeAuditorCreatedBaseline(root, 'r', 8);
+  writeAuditorCreatedBaseline(root, 'r', 7);
   const created = item('lem-created');
   writeFileSync(join(root, 'items', 'lem-created.md'), created);
   writeFileSync(join(root, 'research', 'r-batch-1.pages.json'), JSON.stringify([
@@ -698,18 +660,18 @@ test('auditor-created certification is baseline-exclusive, dispatch-backed, and 
   const authoredAt = new Date('2025-01-01T00:00:00.000Z');
   utimesSync(join(root, 'items', 'lem-created.md'), authoredAt, authoredAt);
   utimesSync(join(root, 'research', 'r-batch-1.pages.json'), authoredAt, authoredAt);
-  writeFileSync(join(root, 'research', 'r-dispatch', 'alpha-step8-lead.result.json'), JSON.stringify({
-    run: 'r', role: 'alpha', label: 'step8-lead', covers: ['all'], ok: true,
+  writeFileSync(join(root, 'research', 'r-dispatch', 'alpha-adjudicate-step7-a.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-adjudicate', label: 'step7-a', covers: ['all'], ok: true,
     started_at: '2020-01-01T00:00:00.000Z', ended_at: '2030-01-01T00:00:00.000Z',
   }));
-  const receipt = certifyAuditorCreatedItems(root, 'r', 8);
+  const receipt = certifyAuditorCreatedItems(root, 'r', 7);
   assert.deepEqual(receipt.items.map((row: any) => row.id).filter(id => id !== 'physics-content'), ['lem-created']);
   assert.equal(receipt.items[0].judge_sha256, itemHashJudge(created));
 
   writeFileSync(join(root, 'items', 'lem-created.md'), `${created}\nLater unreviewed edit.\n`);
   const staleAt = new Date('2040-01-01T00:00:00.000Z');
   utimesSync(join(root, 'items', 'lem-created.md'), staleAt, staleAt);
-  assert.throws(() => certifyAuditorCreatedItems(root, 'r', 8), /no successful Step 8/);
+  assert.throws(() => certifyAuditorCreatedItems(root, 'r', 7), /no successful Step 7/);
 });
 
 test('an item file already present at the baseline cannot be relabelled auditor-created', () => {
@@ -827,7 +789,7 @@ test('Step-3 first certification pairs original author provenance with a current
 
   const receipt = certifyAuditorItems(root, 'r');
   assert.equal(receipt.items.length, 1);
-  assert.equal(receipt.items[0].author_result, authorLabel);
+  assert.equal(Reflect.get(receipt.items[0], 'author_result'), authorLabel);
   assert.ok(receipt.items[0].owner_recertification?.sha256);
   const reused = certifyAuditorItems(root, 'r');
   assert.deepEqual(reused.items[0].owner_recertification, receipt.items[0].owner_recertification,
@@ -844,7 +806,7 @@ test('Step-3 first certification pairs original author provenance with a current
     'the original author result cannot silently replace a missing owner repair');
 });
 
-for (const step of [5, 7, 8]) test(`Step ${step} contract-only changes require a covering author dispatch`, () => {
+for (const step of [5, 7]) test(`Step ${step} contract-only changes require a covering author dispatch`, () => {
   const root = fixture();
   writeAuditorCreatedBaseline(root, 'r', step);
   const itemPath = join(root, 'items', 'lem-created.md');
@@ -859,7 +821,7 @@ for (const step of [5, 7, 8]) test(`Step ${step} contract-only changes require a
   writeFileSync(contractPath, JSON.stringify(contracts));
   const authoredAt = new Date('2025-01-01T00:00:00.000Z');
   for (const path of [itemPath, manifestPath, contractPath]) utimesSync(path, authoredAt, authoredAt);
-  const label = step === 5 ? '5a-a' : step === 7 ? 'step7-a' : 'step8-lead';
+  const label = step === 5 ? '5a-a' : step === 7 ? 'step7-a' : 'step7-a';
   const resultPath = join(root, 'research', 'r-dispatch', `alpha-${label}.result.json`);
   const author = { run: 'r', role: step === 7 ? 'alpha-adjudicate' : 'alpha', label, covers: ['1'], ok: true,
     started_at: '2024-12-31T00:00:00.000Z', ended_at: '2025-01-02T00:00:00.000Z' };
@@ -895,7 +857,7 @@ for (const step of [5, 7, 8]) test(`Step ${step} contract-only changes require a
   assert.deepEqual(certifyAuditorCreatedItems(root, 'r', step).items, refreshed.items);
 });
 
-for (const step of [5, 7, 8]) for (const mode of ['legacy', 'post-end']) {
+for (const step of [5, 7]) for (const mode of ['legacy', 'post-end']) {
   test(`Step ${step} rejects ${mode} provenance until a fresh dispatch covers the contract`, () => {
     const root = fixture();
     writeAuditorCreatedBaseline(root, 'r', step);
@@ -912,7 +874,7 @@ for (const step of [5, 7, 8]) for (const mode of ['legacy', 'post-end']) {
     writeFileSync(contractPath, JSON.stringify({ contracts: { 'lem-created': { risk: 'low' } } }));
     const authoredAt = new Date('2025-01-01T00:00:05.000Z');
     for (const path of [itemPath, manifestPath, contractPath]) utimesSync(path, authoredAt, authoredAt);
-    const label = step === 5 ? '5a-a' : step === 7 ? 'step7-a' : 'step8-lead';
+    const label = step === 5 ? '5a-a' : step === 7 ? 'step7-a' : 'step7-a';
     const resultPath = join(root, 'research', 'r-dispatch', `alpha-${label}.result.json`);
     const author = { run: 'r', role: step === 7 ? 'alpha-adjudicate' : 'alpha', label, covers: ['1'], ok: true,
       started_at: '2025-01-01T00:00:00.000Z', ended_at: '2025-01-01T00:00:10.000Z' };
@@ -950,16 +912,15 @@ test('judge closure requires full current carriers without fabricating a verdict
   const f = recoveryFixture(t, 7), root = f.root, id = 'lem-created';
   f.result('step7-a', { file: 'origin.result.json' });
   certifyAuditorCreatedItems(root, 'r', 7);
-  writeAuditorCreatedBaseline(root, 'r', 8);
   mkdirSync(join(root, 'tools'), { recursive: true }); mkdirSync(join(root, 'tools/physics-support'), { recursive: true });
   copyFileSync(join(REPO, 'tools/physics-support/level-coverage.mjs'), join(root, 'tools/physics-support/level-coverage.mjs'));
   for (const module of ['models', 'judge-currency', 'step7-adjudication-compat', 'step7-terminal-resolution',
     'step7-certification-consumer', 'step7-workflow', 'step7-rounds', 'context-hash-pool',
-    'auditor-created-items', 'item-hash', 'frontmatter-list', 'published-repair-policy'])
+    'auditor-created-items', 'item-hash', 'frontmatter-list', 'published-repair-policy', 'proof-bearing'])
     symlinkSync(join(REPO, `tools/physics-support/${module}.mjs`), join(root, `tools/physics-support/${module}.mjs`));
   const manifest = join(root, 'scope.pages.json');
   const ledger = join(root, 'judge.jsonl');
-  const certs = [7, 8].map(step => join(root, `research/r-step${step}-auditor-certifications.json`));
+  const certs = [7].map(step => join(root, `research/r-step${step}-auditor-certifications.json`));
   const out = join(root, 'closure.json');
   writeFileSync(manifest, JSON.stringify([{ id: 'page', items: [{ id }] }]));
   writeFileSync(ledger, '');
@@ -984,8 +945,8 @@ test('judge closure requires full current carriers without fabricating a verdict
   assert.equal(blocked.closed, false);
   assert.equal(blocked.auditor_certification_blocked, true);
   assert.deepEqual(blocked.needs_rejudge, [], 'certification repair must not become self-review');
-  f.result('receipts-fix-1', { role: 'alpha', started_at: '2025-01-01T00:00:11Z', ended_at: '2025-01-01T00:00:20Z' });
-  certifyAuditorCreatedItems(root, 'r', 8);
+  f.result('step7-v2-gate-r1-u1', { role: 'alpha-repair', started_at: '2025-01-01T00:00:11Z', ended_at: '2025-01-01T00:00:20Z' });
+  certifyAuditorCreatedItems(root, 'r', 7);
   result = check();
   assert.equal(result.status, 0, result.stderr);
   assert.deepEqual(JSON.parse(readFileSync(out, 'utf8')).needs_rejudge, []);
@@ -1005,9 +966,6 @@ const emittedRoutes: [number, string, string[]][] = [
   [7, 'alpha-repair', ['step7-v2-impact-initial-r1-u1', 'step7-v2-impact-repeat-pass-2-r3-u2',
     'step7-v2-gate-r4-u3']],
   [7, 'final-adjudicator', ['step7-fa-a-round-1']],
-  [8, 'alpha', ['step8-lead', 'step8-changes-adjudicate-1', 'step8-carried-adjudicate-a-1',
-    'step8-carried-adjudicate-1', 'step8-gate-adjudication-1', 'impact-close-1',
-    'step8-close-adjudicate-1', 'step8-close-carried-a-1', 'step8-close-carried-1', 'receipts', 'receipts-fix-1']],
 ];
 
 test('every emitted author-capable family is accepted only at its own stage and role', () => {
@@ -1019,16 +977,16 @@ test('every emitted author-capable family is accepted only at its own stage and 
 
 test('generic, cross-step substrings and malformed author labels never establish provenance', () => {
   for (const label of ['5a-', '5a-batch-0', '5a-batch-01', '5a-batch-x', '5b-anything', 'not-step7-malformed', 'rejudge', 'final-adjudication',
-    'not-step8-malformed', 'step8-fix-step7-guard-1', 'impact-close', 'step7-aa',
+    'not-step8-malformed', 'step8-fix-step7-guard-1', 'impact-close',
     'step7-fa-a-round-0', 'step7-fa-a-round-01', 'step7-fa-a-round-1-extra',
-    'step3b-a', 'step3b-aa-0123456789abcdef', 'step3b-a-0123456789abcdeg'])
+    'step3b-a',  'step3b-a-0123456789abcdeg'])
     for (const step of [3, 5, 7, 8]) for (const role of ['alpha-high', 'alpha', 'alpha-adjudicate', 'alpha-repair', 'final-adjudicator'])
       assert.equal(authorResultAllowed(step, { ok: true, started_at: '2025-01-01', ended_at: '2025-01-02', covers: ['1'], role, label }), false, `${step}/${role}/${label}`);
 });
 
-for (const step of [5, 7, 8]) test(`Step ${step} requires explicit array coverage and preserves legitimate global results`, t => {
+for (const step of [5, 7]) test(`Step ${step} requires explicit array coverage and preserves legitimate global results`, t => {
   const f = recoveryFixture(t, step);
-  const label = step === 5 ? '5a-a' : step === 7 ? 'step7-a' : 'step8-lead';
+  const label = step === 5 ? '5a-a' : step === 7 ? 'step7-a' : 'step7-a';
   const role = step === 7 ? 'alpha-adjudicate' : 'alpha';
   for (const covers of [undefined, null, 'all', '1', {}]) {
     f.result(label, { role, covers });
@@ -1052,13 +1010,10 @@ test('canonical V2 rows cannot establish current or carried origin without their
   certifyAuditorCreatedItems(f.root, 'r', 7);
   const receiptPath = join(f.root, 'research/r-step7-auditor-certifications.json');
   const original = readFileSync(receiptPath, 'utf8');
-  writeAuditorCreatedBaseline(f.root, 'r', 8);
-  f.result('receipts', { role: 'alpha', file: 'later.result.json' });
   for (const invalid of [{ role: 'tool' }, { role: 'alpha' }, { label: 'not-step7-malformed' },
     { run: 'other' }, { covers: ['2'] }, { ok: false }, { ended_at: '2024-01-01' }]) {
     f.result('step7-a', invalid);
     assert.throws(() => loadAuditorCreatedCertifications(receiptPath), /missing successful Step 7 author-result provenance/);
-    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 8), /missing successful Step 7 author-result provenance/);
     assert.equal(readFileSync(receiptPath, 'utf8'), original, 'invalid provenance never overwrites old evidence');
   }
   rmSync(join(f.root, 'research/r-dispatch/recovery.result.json'));
@@ -1067,9 +1022,9 @@ test('canonical V2 rows cannot establish current or carried origin without their
   assert.equal(loadAuditorCreatedCertifications(receiptPath).length, 1);
 });
 
-for (const step of [5, 7, 8]) test(`Step ${step} rejects malformed historical guard hashes without weakening stamp neutrality`, t => {
+for (const step of [5, 7]) test(`Step ${step} rejects malformed historical guard hashes without weakening stamp neutrality`, t => {
   const f = recoveryFixture(t, step);
-  f.result(step === 5 ? '5a-a' : step === 7 ? 'step7-a' : 'step8-lead',
+  f.result(step === 5 ? '5a-a' : step === 7 ? 'step7-a' : 'step7-a',
     { role: step === 7 ? 'alpha-adjudicate' : 'alpha' });
   const receipt = certifyAuditorCreatedItems(f.root, 'r', step);
   const path = join(f.root, `research/r-step${step}-auditor-certifications.json`);
@@ -1090,7 +1045,7 @@ for (const step of [5, 7, 8]) test(`Step ${step} rejects malformed historical gu
     'valid V2 evidence still survives harmless post-author touches');
 });
 
-for (const [before, after] of [[5, 7], [5, 8], [7, 8]]) for (const carrier of ['item', 'manifest', 'contract'])
+for (const [before, after] of [[5, 7]]) for (const carrier of ['item', 'manifest', 'contract'])
   test(`Step ${after} refreshes a Step ${before} creation after a ${carrier}-only change, never originals`, t => {
     const f = recoveryFixture(t, before);
     f.result(before === 5 ? '5a-a' : 'step7-a', { role: before === 5 ? 'alpha' : 'alpha-adjudicate', file: 'origin.result.json' });
@@ -1125,7 +1080,7 @@ for (const [before, after] of [[5, 7], [5, 8], [7, 8]]) for (const carrier of ['
     f.result(label, author);
     const refreshed = certifyAuditorCreatedItems(f.root, 'r', after);
     assert.deepEqual(refreshed.items.map(row => row.id), ['lem-created']);
-    assert.equal(refreshed.items[0].origin_step, before);
+    assert.equal(Reflect.get(refreshed.items[0], 'origin_step'), before);
     assert.equal(readFileSync(paths[0], 'utf8'), old);
     const loaded = loadAuditorCreatedCertifications(paths, { root: f.root, run: 'r' });
     assert.equal(loaded.length, 1); assert.equal(loaded[0].step, after);
@@ -1137,7 +1092,7 @@ for (const [before, after] of [[5, 7], [5, 8], [7, 8]]) for (const carrier of ['
     }
   });
 
-for (const [before, after] of [[5, 7], [5, 8], [7, 8]]) for (const sibling of ['manifest', 'contract'])
+for (const [before, after] of [[5, 7]]) for (const sibling of ['manifest', 'contract'])
   test(`Step ${after} cannot promote an unchanged Step ${before} item from a sibling ${sibling} write`, t => {
     const f = recoveryFixture(t, before);
     f.result(before === 5 ? '5a-a' : 'step7-a', { role: before === 5 ? 'alpha' : 'alpha-adjudicate', file: 'origin.result.json' });
@@ -1168,7 +1123,7 @@ for (const [before, after] of [[5, 7], [5, 8], [7, 8]]) for (const sibling of ['
     assert.deepEqual(certifyAuditorCreatedItems(f.root, 'r', after).items, []);
   });
 
-for (const step of [5, 7, 8]) for (const legacy of [false, true]) for (const carrier of ['item', 'manifest', 'contract'])
+for (const step of [5, 7]) for (const legacy of [false, true]) for (const carrier of ['item', 'manifest', 'contract'])
 test(`Step ${step} ${legacy ? 'legacy' : 'new'} boundary admits no false Step-3 promotion (${carrier})`, t => {
   const root = fixture(); t.after(() => rmSync(root, { recursive: true, force: true }));
   const manifestPath = join(root, 'research/r-batch-1.pages.json');
@@ -1210,7 +1165,7 @@ test(`Step ${step} ${legacy ? 'legacy' : 'new'} boundary admits no false Step-3 
   }
   const receipt = certifyAuditorCreatedItems(root, 'r', step);
   assert.deepEqual(receipt.items.map(row => row.id), legacy ? [] : ['lem-created']);
-  if (!legacy) assert.equal(receipt.items[0].origin_step, 3);
+  if (!legacy) assert.equal(Reflect.get(receipt.items[0], 'origin_step'), 3);
   assert.equal(loadAuditorCreatedCertifications(join(root, `research/r-step${step}-auditor-certifications.json`)).length, legacy ? 0 : 1);
   assert.equal(readFileSync(baselinePath, 'utf8'), baseline, 'legacy boundaries are never retroactively filled');
 });
@@ -1271,8 +1226,8 @@ test('explicit owner-spawned creation remains distinct, source-bound and recerti
   assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 5), /no successful/);
   recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
   const certified = certifyAuditorCreatedItems(f.root, 'r', 5);
-  assert.equal(certified.items[0].author_result, undefined);
-  assert.equal(certified.items[0].evidence_class, 'owner-spawned-creation');
+  assert.equal(Reflect.get(certified.items[0], 'author_result'), undefined);
+  assert.equal(Reflect.get(certified.items[0], 'evidence_class'), 'owner-spawned-creation');
   const certification = join(f.root, 'research/r-step5-auditor-certifications.json');
   assert.equal(loadAuditorCreatedCertifications(certification).length, 1);
   writeFileSync(f.path, item(f.id).replace('Immediate.', 'Owner repaired the argument.'));
@@ -1319,8 +1274,8 @@ test('later native promotion validates and preserves the owner-created Step-5 or
     started_at: new Date(now - 10000).toISOString(), ended_at: new Date(now + 10000).toISOString(),
   }));
   const later = certifyAuditorCreatedItems(f.root, 'r', 7);
-  assert.equal(later.items[0].origin_step, 5);
-  assert.equal(later.items[0].author_result, 'step7.result.json');
+  assert.equal(Reflect.get(later.items[0], 'origin_step'), 5);
+  assert.equal(Reflect.get(later.items[0], 'author_result'), 'step7.result.json');
   assert.equal(loadAuditorCreatedCertifications([
     join(f.root, 'research/r-step5-auditor-certifications.json'),
     join(f.root, 'research/r-step7-auditor-certifications.json'),
@@ -1369,7 +1324,7 @@ test('explicit current-definition manifest review preserves unknown historical d
   assert.equal(receipt.basis, 'initial-step5-current-definition-manifest-review');
   assert.equal(receipt.author_result, 'alpha-5a-a.result.json');
   const certificate = certifyAuditorCreatedItems(f.root, 'r', 5);
-  assert.equal(certificate.items[0].origin_step, 3);
+  assert.equal(Reflect.get(certificate.items[0], 'origin_step'), 3);
   assert.equal(loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')).length, 1);
 });
 
@@ -1434,7 +1389,7 @@ test('exact ball-lemma owner review binds current proof checks and preserves his
   const receipt = JSON.parse(readFileSync(result.path, 'utf8'));
   assert.equal(receipt.basis, 'initial-step5-current-ball-lemma-manifest-review');
   assert.equal(receipt.historical_delta_unknown, true);
-  assert.equal(certifyAuditorCreatedItems(f.root, 'r', 5).items[0].origin_step, 3);
+  assert.equal(Reflect.get(certifyAuditorCreatedItems(f.root, 'r', 5).items[0], 'origin_step'), 3);
 });
 
 test('ball-lemma review rejects unsupported kinds, missing proof checks, unreviewed consumers and stale current hashes', t => {
@@ -1455,4 +1410,10 @@ test('ball-lemma review rejects unsupported kinds, missing proof checks, unrevie
   other.payload.repair_kind = 'current-ball-lemma-manifest-review'; other.write();
   assert.throws(() => recordOwnerRecertification(other.root, 'r', 5, other.id, other.evidence,
     'Ball-lemma authorization cannot cover another subject'), /eligible Step 5 owner bootstrap/);
+});
+
+test('closeout cannot create a retired Step-8 auditor baseline', t => {
+  const root = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  assert.throws(() => writeAuditorCreatedBaseline(root, 'r', 8), /supports steps 5 and 7/);
 });

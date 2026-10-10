@@ -41,13 +41,13 @@ test('terminal diagnostics preserve empty completion and abort flags without tra
   const event = (type: string, extra = {}) => ({ timestamp: '2026-09-30T10:00:01Z',
     type: 'event_msg', payload: { type, ...extra } });
   writeFileSync(file, [event('task_started'), event('error', { message: 'private diagnostic' }),
-    event('task_complete', { last_agent_message: '' })].map(JSON.stringify).join('\n'));
+    event('task_complete', { last_agent_message: '' })].map(value => JSON.stringify(value)).join('\n'));
   const result: any = await readDispatchTerminal(file, '2026-09-30T10:00:00Z');
   assert.equal(result.task_completed, true);
   assert.equal(result.final_response_present, false);
   assert.equal(result.error_events, 1);
   assert.ok(!JSON.stringify(result).includes('private diagnostic'));
-  writeFileSync(file, [event('task_started'), event('turn_aborted')].map(JSON.stringify).join('\n'));
+  writeFileSync(file, [event('task_started'), event('turn_aborted')].map(value => JSON.stringify(value)).join('\n'));
   assert.equal((await readDispatchTerminal(file, '2026-09-30T10:00:00Z') as any).task_aborted, true);
 });
 

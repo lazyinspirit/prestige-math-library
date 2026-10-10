@@ -131,7 +131,7 @@ test('Step 3 dispatches each pair and serializes authors sharing a batch', t => 
   assert.match(task, /Audit scaffolds for authoring readiness/);
   assert.match(task, /Author every assigned item, including consumers with flagged unfinished suppliers/);
   assert.match(task, /clear all required Step-3 gates/);
-  assert.match(task, /Thorough independent mathematical audit and systematic defect repair follow in Steps 5–8/);
+  assert.match(task, /Thorough independent mathematical audit and systematic defect repair follow in Steps 5–7/);
 });
 
 test('Step 3 authors all pairs before cross-batch suppliers finish and flags them in tasks', t => {
@@ -586,7 +586,7 @@ test('shared batch and plan touches preserve a review, but a per-item manifest e
   assert.equal(review.version, 2);
   assert.ok(!Object.hasOwn(review, 'confidence'));
   assert.ok(!Object.hasOwn(review, 'dependencies'));
-  assert.deepEqual(review.defects, ['Named fixture prerequisite or proof defect.']);
+  assert.deepEqual(Reflect.get(review, 'defects'), ['Named fixture prerequisite or proof defect.']);
   assert.equal(review.sha256, itemHash(current, 'lem-created', ['lem-planned']));
   assert.ok(itemInputPaths(current, 'lem-created', ['lem-planned'])
     .filter(path => path.startsWith(join(f.root, 'items') + '/') && path.endsWith('.md'))
@@ -704,7 +704,7 @@ test('every A/B item needs a decision; uncertainty escalates; owner repair bypas
   assert.equal(minimal.version, 2);
   assert.ok(!Object.hasOwn(minimal, 'confidence'));
   assert.ok(!Object.hasOwn(minimal, 'dependencies'));
-  assert.deepEqual(minimal.defects, []);
+  assert.deepEqual(Reflect.get(minimal, 'defects'), []);
   f.audit('lem-a', { decision: 'escalate', confidence: undefined });
   assert.throws(() => f.audit('lem-a'), /owner must resolve/);
   f.record({ phase: 'item', item: 'lem-a', owner: true, decision: 'repaired', dependencies: ['lem-published'] });

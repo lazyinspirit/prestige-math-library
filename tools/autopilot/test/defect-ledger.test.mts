@@ -506,8 +506,8 @@ test('render leads with outcomes, never a bare total', () => {
 
 test('the check gate closes the ledger outside the bounded judge loop', async () => {
   const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['7-preflight', '8-scope', '9-contract-close']) {
+  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
+  for (const id of ['7.8-gate', '8-contract-close']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const g = st.gates(ctx).find((x: any) => {
       const argv = typeof x.argv === 'function' ? x.argv() : x.argv;
@@ -603,15 +603,15 @@ test('a pre-contract run with 5a reports and no decisions files remains historic
 
 test('only the terminal stage passes --no-open; earlier stages tolerate a deliberate open row', async () => {
   const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['7-preflight', '8-scope', '9-contract-close']) {
+  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
+  for (const id of ['7.8-gate', '8-contract-close']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const g = st.gates(ctx).find((x: any) => {
       const argv = typeof x.argv === 'function' ? x.argv() : x.argv;
       return argv.includes('tools/defect-ledger.mjs');
     });
     const argv = typeof g.argv === 'function' ? g.argv() : g.argv;
-    if (id === '9-contract-close') assert.ok(argv.includes('--no-open'), '9-contract-close is the no-open backstop');
+    if (id === '8-contract-close') assert.ok(argv.includes('--no-open'), '8-contract-close is the no-open backstop');
     else assert.ok(!argv.includes('--no-open'), `${id} must tolerate a nonfatal row left open for later work`);
   }
 });

@@ -194,7 +194,7 @@ Differential Geometry under the owner-approved 2026-10-07 rehome.
   and pathways.
 - `node tools/proof-layout.mjs items/<id>.md ...` checks step separation and
   blue tags using the actual renderer. Run it after the final item edit or
-  formatter. Step 9 requires 100% of numbered rows to have valid blue chips;
+  formatter. Step 8 requires 100% of numbered rows to have valid blue chips;
   the older line-based precheck's 70% threshold alone is insufficient.
 - `tools/content-policy.mjs` applies provenance, source, and generated-claim
   rules to an explicit run or audit scope. Other run gates and their commands

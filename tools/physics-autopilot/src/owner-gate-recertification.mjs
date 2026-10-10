@@ -172,15 +172,15 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     implicit.push(`${ctx.run}-step3-auditor-certifications.json`, `${ctx.run}-step3-auditor-baseline.json`);
   }
   if (toolNames.has('pathway-closure.mjs')) implicit.push(`${ctx.run}-pathway.json`, `${ctx.run}-pathway-closure.json`);
-  if (toolNames.has('publication-ready.mjs') || toolNames.has('step9-report.mjs')) {
+  if (toolNames.has('publication-ready.mjs') || toolNames.has('step8-report.mjs')) {
     for (const suffix of ['publication-readiness.json', 'pathway-closure.json', 'judge-closure.json',
       'judge.jsonl', 'judge-adjudications.jsonl', 'touches.json', 'deferred-pairs.json', 'deferred-items.json',
-      'step9-evidence.json', 'step9-report.response.json', 'step9-report.md', 'step9-report-integrity.json'])
+      'step8-evidence.json', 'step8-report.response.json', 'step8-report.md', 'step8-report-integrity.json'])
       implicit.push(`${ctx.run}-${suffix}`);
     implicit.push('defect-ledger.jsonl');
   }
   if (toolNames.has('auditor-created-items.mjs') || toolNames.has('step3-auditor-items.mjs')) {
-    for (const step of [3, 5, 7, 8]) for (const kind of ['baseline', 'certifications'])
+    for (const step of [3, 5, 7]) for (const kind of ['baseline', 'certifications'])
       implicit.push(`${ctx.run}-step${step}-auditor-${kind}.json`);
   }
   const names = readdirSync(research).sort();

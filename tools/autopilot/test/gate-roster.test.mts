@@ -16,7 +16,7 @@ const REPO: string = process.env.AUTOPILOT_TEST_REPO
 
 test('live URL and backing checks wait for Step 5b after fetched Step 3 sources', async () => {
   const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO };
+  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
   const ids = (stage: string) => mod.stages.find((s: any) => s.id === stage)
     .gates(ctx).map((g: any) => g.id);
   const author = ids('3b-author');
@@ -30,7 +30,7 @@ test('live URL and backing checks wait for Step 5b after fetched Step 3 sources'
 
 test('the step-7 window validates round evidence and repeats the complete battery', async () => {
   const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO };
+  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
   const gates = (id: string) => mod.stages.find((s: any) => s.id === id).gates(ctx);
   for (const id of ['7.1-adjudicate', '7.2-impact', '7.5-adjudicate', '7.6-impact']) {
     const rows = gates(id).filter((g: any) => g.id !== 'frontier-dependency-ledger');
@@ -55,12 +55,12 @@ test('the scope-loss gate never switches off once content exists', async () => {
   // briefs/alpha.md grants add/delete authority ("You may add or delete
   // in-flight items as needed"). Step 8 built two items on frontier-14.
   const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['5a-adjudicate', '5b-cross', '7.8-gate', '7.10-gate', '8-scope', '9-readiness-v2']) {
+  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
+  for (const id of ['5a-adjudicate', '5b-cross', '7.8-gate', '7.10-gate', '8-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
-      .map((argv: string[]) => argv.find((a) => a.startsWith('tools/')));
+      .map((argv: string[]) => argv.includes('--tool') ? `tools/${argv[argv.indexOf('--tool') + 1]}.mjs` : argv.find((a) => a.startsWith('tools/')));
     assert.ok(tools.includes('tools/manifest-integrity.mjs'),
       `${id} does not run manifest-integrity — scope loss is invisible to every other gate`);
   }
@@ -68,12 +68,12 @@ test('the scope-loss gate never switches off once content exists', async () => {
 
 test('prosecheck and depsource run at every repo-wide gate point', async () => {
   const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['3b-author', '5b-cross', '8-scope', '9-readiness-v2']) {
+  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
+  for (const id of ['3b-author', '5b-cross', '8-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
-      .map((argv: string[]) => argv.find((a) => a.startsWith('tools/')));
+      .map((argv: string[]) => argv.includes('--tool') ? `tools/${argv[argv.indexOf('--tool') + 1]}.mjs` : argv.find((a) => a.startsWith('tools/')));
     for (const tool of ['tools/prosecheck.mjs', 'tools/depsource.mjs']) {
       assert.ok(tools.includes(tool), `${id} does not run ${tool}`);
     }
@@ -82,7 +82,7 @@ test('prosecheck and depsource run at every repo-wide gate point', async () => {
 
 test('only Step 5b opens the routed published-repair audit window', async () => {
   const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO };
+  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
   const argvFor = (id: string) => {
     const st = mod.stages.find((s: any) => s.id === id);
     return st.gates(ctx)
@@ -97,7 +97,7 @@ test('only Step 5b opens the routed published-repair audit window', async () => 
   assert.ok(step5[depcheckIndex].argv.includes('--pending-audit-ok'),
     'Step 5b depcheck does not permit its routed repairs to await independent certification');
 
-  for (const id of ['3b-author', '8-scope', '9-readiness-v2']) {
+  for (const id of ['3b-author', '8-readiness-v2']) {
     const depcheck = argvFor(id).find((g: any) => g.id === 'depcheck');
     assert.ok(depcheck && !depcheck.argv.includes('--pending-audit-ok'),
       `${id} incorrectly weakens the published-audit invariant`);

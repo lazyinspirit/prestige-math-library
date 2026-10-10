@@ -1,6 +1,6 @@
 # Physics build operations
 
-The physics fork uses the same Steps 0–9 and deterministic transition engine as
+The physics fork uses the same planning and Steps 1–8 and deterministic transition engine as
 its mathematical baseline. It has independent supporting tools, briefs, schemas,
 content, and run state. No physics run may mutate the mathematics workspace.
 
@@ -82,6 +82,31 @@ Conflicting category/capacity metadata fails explicitly. No model,
 physics instructions or general Alpha brief loads during this dispatch. The sole
 Step-2 gate is `alpha-groups`; historical successful Alpha result names remain
 recognized and the native engine owns all transitions.
+
+## Steps 7–8
+
+The former Step 8 scope review, change-judging/repair suffix and whole-level
+spine/audit attestations are removed. The former Step 9 is now Step 8: terminal
+ledger closure, pathway completion, stamps, readiness, evidence-bound owner
+report and the physics-only closeout commit. Current report artifacts and tools
+use `step8-` names. Historical completed run artifacts retain their original
+names and bytes; they are not inputs to a newly numbered run.
+
+The sole additional Step-7 battery gate is `proof-contract-coverage`, using
+`tools/physics-support/proof-contract-coverage.mjs`. It derives the complete
+current manifest inventory and requires a merged contract for every actual
+Proof, Refutation, Counterexample or Verification section. It shares the
+mathematics engine's predicate and completeness check. Nonproof definitions,
+postulates and empirical observation carriers require no proof contract unless
+they supply such an argument. Missing, malformed, duplicate or empty scope
+fails closed. The existing gate repair, consumer maintenance and full-battery
+retry procedures handle failures; no additional cross-batch review is added.
+
+Closeout retains full mechanical provenance, contract and current-judge coverage
+through `level-coverage --mechanical`, without the removed audit/spine receipts.
+The workflow revision is `physics-eight-step-v4-proof-coverage`; use a fresh run and state
+directory. Do not install renumbered stages or refresh generated prompts beneath
+an active historical run. There is no `recover-step8` review-suffix command.
 
 Use the same pause/resume/status/retry controls through the physics entrypoint.
 Outside the authorized Step-7 loop, gate failures remain owner-held. Publication

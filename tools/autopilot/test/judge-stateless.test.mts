@@ -123,10 +123,10 @@ test('the Luna lineup dispatches gpt-6-luna with max reasoning', () => {
         JUDGE_TEST_CALLS: f.calls, JUDGE_LINEUP: 'sol' },
     });
     assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
-    const [call] = readFileSync(f.calls, 'utf8').trim().split('\n').map(JSON.parse);
+    const [call] = readFileSync(f.calls, 'utf8').trim().split('\n').map(value => JSON.parse(value));
     assert.equal(call.args[call.args.indexOf('--model') + 1], 'gpt-6-luna');
     assert.ok(call.args.includes('model_reasoning_effort="max"'));
-    const [verdict] = readFileSync(ledger, 'utf8').trim().split('\n').map(JSON.parse);
+    const [verdict] = readFileSync(ledger, 'utf8').trim().split('\n').map(value => JSON.parse(value));
     assert.equal(verdict.model, 'gpt-6-luna');
   } finally {
     rmSync(f.temp, { recursive: true, force: true });
@@ -148,7 +148,7 @@ test('a Sol judge sweep forwards high reasoning to each stateless item call', ()
         JUDGE_TEST_CALLS: f.calls },
     });
     assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
-    const [call] = readFileSync(f.calls, 'utf8').trim().split('\n').map(JSON.parse);
+    const [call] = readFileSync(f.calls, 'utf8').trim().split('\n').map(value => JSON.parse(value));
     assert.equal(call.args[call.args.indexOf('--model') + 1], 'gpt-6-sol');
     assert.ok(call.args.includes('model_reasoning_effort="high"'));
   } finally {

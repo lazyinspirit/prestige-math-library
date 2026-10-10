@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Shared, deterministic scope and hashing helpers for Step 9.
+// Shared, deterministic scope and hashing helpers for Step 8.
 //
 // The visual lane, its repair guard and the publication receipt must agree on
 // which pages were built.  Re-deriving that scope three different ways would

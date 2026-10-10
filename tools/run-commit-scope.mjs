@@ -6,7 +6,7 @@ import { accessSync, constants, copyFileSync, existsSync, lstatSync, mkdirSync,
   unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
-import { runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
+import { runScope, sha256, splitFrontmatter } from './step8-lib.mjs';
 import { verifyProofLayout } from './proof-layout-receipt.mjs';
 import { recordedPublishedRepair } from './published-repair-policy.mjs';
 
@@ -171,7 +171,7 @@ export function assertOutsidePreservationSame(actual, expected, label) {
 // Read-only inspection uses precisely the native closeout selectors. It does
 // not validate workflow gates or grant authority to change the captured state.
 export function inspectOutsidePreservation(root, run) {
-  const receipt = 'research/' + run + '-dispatch/tool-close-step9-v2.result.json';
+  const receipt = 'research/' + run + '-dispatch/tool-close-step8-v2.result.json';
   return captureOutsidePreservation(root, run, loadScope(root, run, receipt, [], true));
 }
 
@@ -305,8 +305,8 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     'research/published-consumer-supplier-ledger.md',
     ...selected.pages.map(row => row.file), ...selected.items.map(row => row.file),
     ...pathways,
-    ...['proof-layout.json', 'publication-readiness.json', 'step9-report-integrity.json',
-      'step9-report.response.json', 'step9-report.md', 'step9-evidence.json',
+    ...['proof-layout.json', 'publication-readiness.json', 'step8-report-integrity.json',
+      'step8-report.response.json', 'step8-report.md', 'step8-evidence.json',
       'pathway-closure.json', 'judge-closure.json'].map(name => 'research/' + run + '-' + name),
     finalReceipt]);
   const claimsPath = 'research/' + run + '-step5-published-claims.jsonl';
@@ -414,9 +414,9 @@ function workflowChecks(root, run, proofLayoutAlreadyChecked) {
   if (!proofLayoutAlreadyChecked) verifyProofLayout(run, root);
   for (const args of [
     ['tools/obligations.mjs', 'check', '--run', run, '--terminal'],
-    ['tools/step9-report.mjs', 'check', '--run', run, '--root', root],
-    ['tools/step9-report.mjs', 'check-evidence', '--run', run, '--root', root],
-    ['tools/step9-report.mjs', 'check-response', '--run', run, '--root', root],
+    ['tools/step8-report.mjs', 'check', '--run', run, '--root', root],
+    ['tools/step8-report.mjs', 'check-evidence', '--run', run, '--root', root],
+    ['tools/step8-report.mjs', 'check-response', '--run', run, '--root', root],
     ['tools/publication-ready.mjs', '--run', run, '--verify', '--require-report', '--root', root],
   ]) {
     const result = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
@@ -450,7 +450,7 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
   const onMain = () => {
     if (textGit(root, ['symbolic-ref', '--short', 'HEAD']) !== 'main') throw Error('closeout: scoped mode requires main');
   };
-  const receipt = 'research/' + run + '-dispatch/tool-close-step9-v2.result.json';
+  const receipt = 'research/' + run + '-dispatch/tool-close-step8-v2.result.json';
   if (finalReceipt && finalReceipt !== receipt) throw Error('closeout: scoped mode requires the normal final dispatch receipt ' + receipt);
   const oldReceiptBytes = existsSync(join(root, receipt)) ? readFileSync(join(root, receipt)) : null;
   const previous = oldReceiptBytes ? JSON.parse(decode(oldReceiptBytes)) : null;
@@ -478,7 +478,7 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
   }
   if (checkOnly) {
     if (!previous || previous.ok !== true || previous.run !== run
-      || previous.written_by !== 'run-commit' || previous.label !== 'close-step9-v2') throw Error('closeout: missing scoped final receipt');
+      || previous.written_by !== 'run-commit' || previous.label !== 'close-step8-v2') throw Error('closeout: missing scoped final receipt');
     committedAndCurrent(root, scope);
     onMain();
     refuseGitSideEffects(root, inspectionPaths, scope.reviewedHook);
@@ -504,7 +504,7 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
     });
     mkdirSync(dirname(join(root, receipt)), { recursive: true });
     writtenReceipt = Buffer.from(JSON.stringify({
-      role: 'tool', label: 'close-step9-v2', run, covers: ['all'], ok: true,
+      role: 'tool', label: 'close-step8-v2', run, covers: ['all'], ok: true,
       written_by: 'run-commit', ended_at: new Date().toISOString(),
       closeout_scope: {
         version: 1, policy: scope.policyPath, policy_sha256: scope.policySha256,

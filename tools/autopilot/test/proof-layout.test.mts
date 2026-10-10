@@ -163,10 +163,10 @@ test('failed and empty coverage cannot pass; absent receipts fail before staging
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test('Step 9 gates share readiness and verify receipts before commit without a new stage', () => {
+test('Step 8 gates share readiness and verify receipts before commit without a new stage', () => {
   const ctx = { run: 'demo', repo: REPO };
-  const ready = stages.find(s => s.id === '9-readiness-v2')!;
-  const close = stages.find(s => s.id === '9-close-v2')!;
+  const ready = stages.find(s => s.id === '8-readiness-v2')!;
+  const close = stages.find(s => s.id === '8-close-v2')!;
   for (const id of ['proof-step-separation', 'proof-blue-tags']) {
     assert.ok(ready.gates!(ctx).find(g => g.id === id)?.argv.includes('--write'));
     assert.ok(close.gates!(ctx).find(g => g.id === id)?.argv.includes('--verify'));

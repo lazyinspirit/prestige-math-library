@@ -3,7 +3,7 @@
 //
 // WHY THIS EXISTS. The pipeline's defect history lived in 28 append-only
 // adjudication ledgers (structured, but stage-blind: 7 of 3,920 rows carry a
-// stage), a dozen step-9 reports (rich, prose-only), reader/Alpha reports
+// stage), a dozen step-8 reports (rich, prose-only), reader/Alpha reports
 // with per-run numbering schemes, PREVENTIONS.md, 17 tool headers, and an
 // out-of-repo memory dir. Nothing could answer "what recurs", "what leaked
 // past step 5", or "which detector has ever actually been the catcher" — and
@@ -96,14 +96,14 @@ function acquireAppendLock(timeoutMs = 30_000) {
 
 const STAGES = ['1-scaffold', '2-assign', '3a-scope', '3-baseline', '3b-author', '4-splice', '4-baseline',
   '5a-prepare', '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross', '5b-close', '6-judge', '7-baseline',
-  '7-adjudicate', '7-rejudge', '8-scope', '8-receipt', '9-report',
+  '7-adjudicate', '7-rejudge', '8-scope', '8-receipt', '8-report',
   'A0', 'A1', 'A2', 'A3', 'A4', 'A6', 'A7', 'A8', 'A9', 'A10',
   'owner', 'escaped-to-publication', 'post-publication', 'unknown',
   // Historical rows keep their original stage identity; these are not active
   // engine aliases and never supply dispatch coverage for the new workflow.
   '3b-audit', '3-review', '3-fix', '3-recheck', '5-author', '6a-read',
   '6b-adjudicate', '6b-baseline', '6c-cross', '7-judge', '8-baseline',
-  '8-adjudicate', '8-rejudge', '9-scope', '9-receipt', '10-report'];
+  '8-adjudicate', '8-rejudge', '8-scope', '8-receipt', '10-report'];
 const ENUMS = {
   class: ['accuracy', 'richness', 'breaking-runtime', 'silent-runtime'],
   subclass: [
@@ -647,7 +647,7 @@ if (cmd === 'check') {
   }
 
   // (e) the terminal stage may not end with ANY open row, whatever its
-  // severity. `--no-open` is passed by the terminal 9-close gate alone: step 8 owns
+  // severity. `--no-open` is passed by the terminal closeout gates: Step 7 owns
   // sweeping the run's open rows (closing each whose recorded condition is
   // met, with evidence), so a row still open here is unfinished work the
   // owner must see, not a waivable detail.

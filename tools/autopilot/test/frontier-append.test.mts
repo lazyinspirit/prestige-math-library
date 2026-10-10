@@ -122,8 +122,9 @@ test('saved Step1 completion cannot cover fresh append drift or launch scaffold 
   assert.ok(gates.some((g: any) => g.argv.includes('--before-apply')));
   assert.ok(!table[3].gates!({ repo: f.repo, run: 'demo' } as any).some((g: any) => g.argv.includes('--before-apply')));
   const planned = gates.find((g: any) => g.argv.includes('--pages-file'))!;
-  assert.ok(!planned.argv.includes('--run'));
-  assert.deepEqual(JSON.parse(readFileSync(join(f.repo, planned.argv.at(-1)!), 'utf8')), ['new-a', 'new-a-examples', 'new-b', 'new-b-examples']);
+  const plannedArgv = typeof planned.argv === 'function' ? planned.argv() : planned.argv;
+  assert.ok(!plannedArgv.includes('--run'));
+  assert.deepEqual(JSON.parse(readFileSync(join(f.repo, plannedArgv.at(-1)!), 'utf8')), ['new-a', 'new-a-examples', 'new-b', 'new-b-examples']);
   const dispatchDir = join(f.research, 'demo-dispatch'); mkdirSync(dispatchDir);
   writeFileSync(join(dispatchDir, 'alpha-drift-review.result.json'), JSON.stringify({ ok: true, covers: ['drift'] }));
   const ex = new Executor({ config: { run: 'demo', repo: f.repo, stateDir: f.stateDir, dispatchDir, argv: ['true'], adoptCommand: false },
