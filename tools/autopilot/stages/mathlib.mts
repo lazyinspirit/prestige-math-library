@@ -1645,13 +1645,11 @@ export const stages = [
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
   }),
 
-  // The group partition, rendered BEFORE the sweep so the step-6 readers have
-  // their scope. `7-scope` runs the same tool again after the sweep, when the
-  // rejection rows exist; the content half — pages, items, seams — is identical
-  // and is what the reading half needs.
+  // Render each batch review scope and the Step-7 group context before the
+  // sweep so every reviewer has its exact page, item and seam inventory.
   {
     id: '6-scope',
-    label: 'partition the level by group (mechanical)',
+    label: 'render batch review scopes and adjudication groups (mechanical)',
     units: () => ['all'],
     pattern: resultPattern('tool', 'step6-scope'),
     artifacts: (ctx) => `research/${ctx.run}-step7-scope.json`,
@@ -1670,54 +1668,20 @@ export const stages = [
     ],
   },
 
-  // THE SWEEP AND THE GROUP PRE-READS RUN TOGETHER (owner, 2026-08-25).
-  //
-  // "Step 7 group alpha agents can be spawned, assigned groups, and can start
-  // reading A/B pairs they are tasked to adjudicate. All of these can be done
-  // during step 6." They are units of ONE stage rather than two stages, because
-  // the engine overlaps units inside a stage and serialises stages: a separate
-  // reading stage in front of the sweep would cost its own wall-clock, which is
-  // the thing the owner's instruction removes.
-  //
-  // WHAT THE PRE-READ BUYS. Each group reads its own pairs while no verdict
-  // exists and writes a durable digest. Step 7 starts fresh from that digest,
-  // so it receives the useful mathematical findings without paying again for
-  // an entire Step-6 transcript.
-  // A concern recorded here was found with nobody pointing at it, so a judge
-  // rejection landing in the same place is two independent readings agreeing —
-  // evidence of a different quality from agreeing with a rejection you were
-  // handed.
-  //
-  // WHY THE PRE-READ IS READ-ONLY, at the kernel rather than in the prompt. Step
-  // 7 judges a frozen text. An edit landing mid-sweep voids verdicts already cast
-  // against the old bytes and leaves the level judged in two states with nothing
-  // on disk recording it. `alpha-group-read` carries `--sandbox read-only`; its
-  // digest reaches disk through `--result-artifact`, which the DISPATCHER writes.
-  //
-  // QUOTA. Eight high-context group-reader lanes may run concurrently with the
-  // judge sweep. A cap is a ceiling the engine may use, never a quota it must
-  // spend: if lanes start dying on a limit, lower
-  // `alpha-group-read`'s cap rather than re-spending the loop.
+  // One read-only reviewer per batch runs alongside the frozen-text judge sweep.
+  // Each returns a separate durable digest for its Step-7 owning group. The
+  // shared actual-agent budget bounds readers and nested judge calls together.
   {
     id: '6-judge',
-    label: 'one stateless judge per item, with whole-group readers alongside',
-    modelProfile: (plan: any) => plan.role === 'alpha-group-read'
+    label: 'one stateless judge per item, with batch reviewers alongside',
+    modelProfile: (plan: any) => plan.role === 'alpha-batch-read'
       ? SOL61_HIGH
       : undefined,
-    // One unit for the sweep, one per group. The stage is done when the ledger
-    // is covered AND every group has a digest — which is what makes the reading
-    // a real obligation rather than a best-effort rider.
-    units: (ctx) => ['sweep', ...alphaGroups(ctx).map((g: any) => String(g.label))],
-    // Two result-file families in one stage, so the pattern is written out
-    // rather than derived: `resultPattern` takes one role. The group half is
-    // `<role>-<label>` with a lowercase alphabetic group label, which is why
-    // the repair round below is labelled `read-again-*` — digits and the
-    // longer name keep it outside this pattern, so a re-read is never mistaken
-    // for the unit's own coverage.
-    pattern: /^(?:tool-judge-sweep|alpha-group-read-[a-z]+)\.result\.json$/,
-    // One judge-sweep controller plus a read-only unit for every assigned group;
-    // global concurrency and the sweep's own item pool remain separately bounded.
-    concurrency: MAX_GROUPS + 1,
+    // Completion requires both judge coverage and every batch's own digest.
+    units: (ctx) => ['sweep', ...batches(ctx)],
+    // Repair labels cannot satisfy the original batch unit's coverage.
+    pattern: /^(?:tool-judge-sweep|alpha-batch-read-\d+)\.result\.json$/,
+    concurrency: MAX_RUN_BATCHES + 1,
     // The judge sweep is a TOOL RUN, not an agent dispatch — judge-sweep.mjs
     // owns its own lane pools, retry semantics and attestation. The A-page ids
     // are computed here rather than in a shell sub-invocation: the first
@@ -1747,17 +1711,17 @@ export const stages = [
             '--pages', aPages.join(',')],
         });
       }
-      for (const g of alphaGroups(ctx)) {
-        if (!pendingUnits.includes(String(g.label))) continue;
+      for (const b of batches(ctx)) {
+        if (!pendingUnits.includes(b)) continue;
         plans.push({
-          role: 'alpha-group-read',
-          label: String(g.label),
+          role: 'alpha-batch-read',
+          label: b,
           job: 'audit',
-          covers: [String(g.label)],
+          covers: [b],
           brief: 'briefs/alpha.md',
-          task: [`research/${ctx.run}-alpha-${g.label}-step6-read.task.md`, 'briefs/tasks/alpha-step6-read.md'],
+          task: [`research/${ctx.run}-batch-${b}-step6-read.task.md`, 'briefs/tasks/alpha-step6-read.md'],
           outputSchema: 'briefs/schemas/step7-context.json',
-          resultArtifact: `research/${ctx.run}-alpha-${g.label}-step7-context.json`,
+          resultArtifact: `research/${ctx.run}-batch-${b}-step7-context.json`,
           timeout: 21600,
         });
       }
@@ -1773,7 +1737,7 @@ export const stages = [
     //
     // The digest gate is what stops the reading from being a formality: a schema
     // -valid object with nothing in it exits zero, so the check is against the
-    // group's real size. It deliberately does NOT require a nonempty `concerns`
+    // batch's real size. It deliberately does NOT require a nonempty `concerns`
     // list — a careful reading that finds nothing thin is a result, and failing
     // it would teach the lane to manufacture concerns.
     gates: (ctx) => [
@@ -1795,18 +1759,18 @@ export const stages = [
       if (args.failure.id === 'step7-digests') {
         const text = `${args.failure.output ?? ''}\n${args.failure.why ?? ''}`;
         const named = new Set([...text.matchAll(
-          /group\s+([a-z]+)(?=\s*:|\s+(?:pages_read|items_read|seams_checked|batches)\s*:)/gi,
-        )].map((m) => m[1].toLowerCase()));
-        const groups = alphaGroups(args.ctx);
-        const selected = groups.filter((g: any) => named.has(String(g.label)));
-        const retry = selected.length ? selected : groups;
-        for (const g of retry) {
-          const repairTask = `research/${args.ctx.run}-alpha-${g.label}-step6-repair-${args.round}.task.md`;
+          /batch\s+(\d+)(?=\s*:|\s+(?:pages_read|items_read|seams_checked|batches)\s*:)/gi,
+        )].map((m) => m[1]));
+        const assigned = batches(args.ctx);
+        const selected = assigned.filter((b) => named.has(b));
+        const retry = selected.length ? selected : assigned;
+        for (const b of retry) {
+          const repairTask = `research/${args.ctx.run}-batch-${b}-step6-repair-${args.round}.task.md`;
           writeFileSync(R(args.ctx, repairTask), [
-            `# Step 6 digest correction — group ${g.label}`,
+            `# Step 6 digest correction — batch ${b}`,
             '',
-            `Read research/${args.ctx.run}-alpha-${g.label}-step6-read.task.md for the exact assigned scope.`,
-            `Inspect the existing research/${args.ctx.run}-alpha-${g.label}-step7-context.json and preserve supported findings.`,
+            `Read research/${args.ctx.run}-batch-${b}-step6-read.task.md for the exact assigned scope.`,
+            `Inspect the existing research/${args.ctx.run}-batch-${b}-step7-context.json and preserve supported findings.`,
             'Correct the specific failures below. Reopen the relevant items and sources where evidence is missing; do not repeat a completed reading solely to remove an extra JSON field.',
             'Return the complete corrected schema-constrained digest. Do not invent missing evidence or erase a substantive finding just to pass a gate.',
             '',
@@ -1815,16 +1779,16 @@ export const stages = [
             text,
           ].join('\n') + '\n');
           args.executor.start(args.stage, {
-            role: 'alpha-group-read',
+            role: 'alpha-batch-read',
             // Not `<label>` alone: that matches the stage pattern, and a repair
             // round must not be mistaken for the unit's own coverage.
-            label: `read-again-${g.label}-${args.round}`,
+            label: `read-again-${b}-${args.round}`,
             job: 'audit',
             covers: [],
             brief: 'briefs/alpha.md',
             task: repairTask,
             outputSchema: 'briefs/schemas/step7-context.json',
-            resultArtifact: `research/${args.ctx.run}-alpha-${g.label}-step7-context.json`,
+            resultArtifact: `research/${args.ctx.run}-batch-${b}-step7-context.json`,
             timeout: 21600,
           });
         }
@@ -2195,6 +2159,6 @@ for (const stage of stages) {
   }
 }
 
-export const workflowRevision = 'eight-step-v4-proof-coverage';
+export const workflowRevision = 'eight-step-v5-batch-review';
 export const stagesForRun = (ctx: any) => appendStages(stages, ctx);
 export default { stages, stagesForRun, batches, alphaGroups, workflowRevision };

@@ -101,7 +101,7 @@ const ROLES = Object.freeze({
   // terminal-resolution recorder make its one-item-at-a-time discipline
   // mechanical rather than aspirational.
   'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: MAX_GROUPS, web: true, requiresTask: true, why: 'Step-7 final adjudication after the one paid judge recheck; one independent Astra-medium agent per affected group, with authoritative web verification' },
-  // `alpha-group-read` — the step-6 pass that reads a group's A/B pairs while the
+  // `alpha-batch-read` — the step-6 pass that reads a batch's A/B pairs while the
   // judges are still sweeping (owner, 2026-08-25). Step 6 applies the Sol 6.1
   // high profile; the durable digest hands its findings to a fresh Sol 6.1 high
   // adjudicator at Step 7.
@@ -115,12 +115,12 @@ const ROLES = Object.freeze({
   // dispatcher writes the file, so a role that cannot write still produces one a
   // gate can read.
   //
-  // `alpha-group-read` — a rejection-blind whole-group read while the judges
+  // `alpha-batch-read` — a rejection-blind whole-batch read while the judges
   // sweep frozen text. Its schema-constrained digest is the Step-7 handoff; the
   // later Sol adjudicator starts fresh rather than replaying a long transcript.
   //
   // Read-only readers also consult authoritative web sources when unsure.
-  'alpha-group-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: MAX_GROUPS, why: 'Sol 6.1 high step-6 whole-group read; one read-only lane per group, handed to step 7 by compact digest' },
+  'alpha-batch-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: MAX_RUN_BATCHES, why: 'Sol 6.1 high step-6 whole-batch read; one read-only lane per batch, handed to step 7 by compact digest' },
   // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
   refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: MAX_RUN_BATCHES, why: 'one independent read-only refuter per batch; returns evidence, never edits' },
 
@@ -215,17 +215,10 @@ const imagePaths = options('--image').flatMap((value) => value.split(',')).map((
 const outputSchemaPath = option('--output-schema');
 const resultArtifactPath = option('--result-artifact');
 const requestedProfileName = option('--profile');
-// A CODEX_HOME that OUTLIVES the dispatch, so the conversation can be resumed.
-// Every other lane gets a throwaway home deleted on exit — deliberately, because
-// a long-lived shared home was once corrupted and bricked every codex call. A
-// role that names one here opts out of that for exactly one reason: step 7 must
-// re-enter step 6's conversation. Per-group and per-run, so no two lanes share
-// one; kept out of the repository so it never reaches git status, and out of
-// /tmp so codex can lay down its PATH helpers without warning.
+// Optional persistent homes and explicit session resume for callers that need
+// them. Step-6 batch reviewers use fresh sessions and hand off durable digests.
 const sessionHomeArg = option('--session-home');
-// Resume this conversation instead of starting a new one. The id comes from the
-// step-6 result record, never from `--last`: group Alphas run at once, so
-// "most recent" is whichever happened to finish last, which is not a group.
+// Never use an implicit most-recent session: concurrent dispatches are unrelated.
 const resumeSession = option('--resume-session');
 const timeoutSec = Number(option('--timeout') ?? 7200);
 const attemptArg = option('--attempt');
@@ -817,7 +810,7 @@ if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true 
 // model—materialises the schema-constrained final response. This keeps such a
 // role unable to edit the evidence it is judging while still giving the next
 // gate a durable JSON receipt. A missing or malformed final message turns the
-// dispatch red. Step-6 group readers use this path for their Step-7 digests.
+// dispatch red. Step-6 batch reviewers use this path for their Step-7 digests.
 // Validate locally as well: not every provider enforces --output-schema.
 if (resultArtifactPath && result.code === 0 && !result.timedOut) {
   try {

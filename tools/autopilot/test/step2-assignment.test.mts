@@ -29,7 +29,7 @@ for (const [name, stages, groups, author] of [['math', mathStages, mathGroups, m
       assert.ok((stage.pattern as RegExp).test(filename), filename);
     assert.equal((stage.pattern as RegExp).test('tool-other.result.json'), false);
   });
-  test(`${name}: aa survives planning fallback, assignment readers, group-reader routing and author provenance`, t => {
+  test(`${name}: aa survives planning fallback, assignment readers, batch-review routing and author provenance`, t => {
     const repo = mkdtempSync(join(tmpdir(), 'step2-native-'));
     t.after(() => rmSync(repo, { recursive: true, force: true }));
     mkdirSync(join(repo, 'research'));
@@ -40,8 +40,8 @@ for (const [name, stages, groups, author] of [['math', mathStages, mathGroups, m
       Array.from({ length: 80 }, (_, index) => ({ id: String(index + 1), categories: ['a'] })), { maxGroups: 27, maxBatches: 3 })));
     assert.equal(groups(ctx)[26].label, 'aa');
     const reader = stages.find(stage => stage.id === '6-judge')!;
-    assert.ok(reader.units(ctx).includes('aa'));
-    assert.ok(reader.pattern instanceof RegExp && reader.pattern.test('alpha-group-read-aa.result.json'));
+    assert.ok(reader.units(ctx).includes('80'));
+    assert.ok(reader.pattern instanceof RegExp && reader.pattern.test('alpha-batch-read-80.result.json'));
     const base = { ok: true, started_at: '2026-10-01', ended_at: '2026-10-02', covers: ['79', '80'] };
     for (const [step, role, label] of [
       [3, 'alpha-high', 'step3b-aa-0123456789abcdef'], [5, 'alpha', '5a-aa'],

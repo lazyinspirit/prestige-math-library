@@ -8,8 +8,9 @@ import { acquireControllerLock } from './controller-lock.mts';
 import { appendRegistry } from './frontier-append.mts';
 
 export const SOURCE_REVISION = 'batch-step7-rounds-v3-proof-layout';
-export const TARGET_REVISION = 'eight-step-v4-proof-coverage';
-const TARGET_TABLE_SHA256 = '7c45bb2747d107df1ce7b2aef3f1dd484c85169e6f9760cdd535ea655f3778ae';
+export const TARGET_REVISION = 'eight-step-v5-batch-review';
+// Exact reviewed tables, with or without the existing scaffold-only correction.
+const TARGET_TABLE_SHA256 = new Set(['c3af4d0704202d32eaea1e72165c723cc2fa518036f2e9b3fc5a19bbfa249352', '5b53ebb0dcefc6cefdfa50a2bcb509fb774a56f3847789a7df8b94864cb2c200']);
 const SOURCE_COMMIT = '891f9be373512a67e38d09d112eb05226bf734e0';
 export const PREFIX_STAGES = ['1-drift', '1-drift-apply', '1-scaffold', '2-assign', '3a-scope', '3-baseline', '3b-author'];
 const hash = (b: string | Buffer) => createHash('sha256').update(b).digest('hex');
@@ -59,7 +60,7 @@ function compatibility(repo: string) {
   const prior = spawnSync('git', ['--no-replace-objects', 'show', `${SOURCE_COMMIT}:${path}`], { cwd: repo, encoding: 'utf8' });
   if (prior.status !== 0) fail('reviewed source commit unavailable');
   const current = regularBytes(join(repo, path)).toString();
-  if (hash(current) !== TARGET_TABLE_SHA256) fail('reviewed target stage table changed, including helper/profile contracts');
+  if (!TARGET_TABLE_SHA256.has(hash(current))) fail('reviewed target stage table changed, including helper/profile contracts');
   if (!prior.stdout.includes(`workflowRevision = '${SOURCE_REVISION}'`)
     || !current.includes(`workflowRevision = '${TARGET_REVISION}'`)) fail('unsupported stage-table revisions');
   const prefix = (s: string) => {

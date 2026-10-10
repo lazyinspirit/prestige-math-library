@@ -49,6 +49,15 @@ test('changes only revision and pause, authentic full preimage and history prese
   writeFileSync(join(r.archiveDir, 'control.json'), '{}');
   assert.throws(() => migrate(f), /archive changed/);
 });
+test('batch-review migration requires a new exact-target owner authorization', () => {
+  assert.equal(TARGET_REVISION, 'eight-step-v5-batch-review');
+  const f = fixture();
+  const auth = JSON.parse(readFileSync(f.authorizationPath, 'utf8'));
+  writeFileSync(f.authorizationPath, body({ ...auth, to_revision: 'eight-step-v4-proof-coverage' }));
+  const before = readFileSync(join(f.stateDir, 'state.json'));
+  assert.throws(() => migrate(f), /explicit owner authorization/);
+  assert.deepEqual(readFileSync(join(f.stateDir, 'state.json')), before);
+});
 test('rejects raw hash changes, unsupported revisions, incomplete prefix, and later-stage state', () => {
   for (const mutate of [
     (f: any) => { f.state.workflowRevision = 'other'; f.save(); },

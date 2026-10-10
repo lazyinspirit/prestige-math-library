@@ -283,9 +283,12 @@ function writeTasks(root,pack,mode) {
     if(pack.gateRoutingVersion===1)frozen(gateInput,(pack.gateAssignments??{})[unit]??[]);
     if(existsSync(task)) continue;
     const assigned=pack.assignments[unit];
+    const batchDigest=join(root,'research',`${pack.run}-batch-${unit}-step7-context.json`);
     const entries=[`# Step 7 ${mode}: ${pack.phase}, round ${pack.round}, unit ${unit}`,
       `Read briefs/step7-${mode==='adjudicate'?'adjudicator':'owner-repair'}.md.`,
       `Frozen inputs: ${packPath(root,pack.run,pack.phase,pack.round)}.`,
+      mode==='adjudicate'&&existsSync(batchDigest)
+        ? `Read this batch's rejection-blind Step-6 review digest first: ${batchDigest}. Its findings are evidence, not authority; verify relevant concerns against the current item files and the assigned judge tuples.` : '',
       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
       'SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.',

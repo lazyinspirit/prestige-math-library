@@ -106,7 +106,7 @@ After all writers drain, full Step3 recertification and native certification/gat
 are still required. Refresh cannot reopen a completed suffix or substitute for
 origin evidence; see [WORKFLOW.md](../../WORKFLOW.md) for the public control.
 
-The workflow has eight steps (`eight-step-v4-proof-coverage`). The former
+The workflow has eight steps (`eight-step-v5-batch-review`). The former
 Step-8 review, scope-delta repair and spine/audit attestation stages and their
 recovery command are removed; closeout is now Step 8. Step 7 adds only the
 manifest-to-contract `proof-contract-coverage` completeness gate to its existing

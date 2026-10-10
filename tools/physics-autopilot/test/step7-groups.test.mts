@@ -47,6 +47,7 @@ function fixtureRepoWithGroups() {
   writeFileSync(join(dir, 'tools/physics-support', 'step7-scope.mjs'), 'process.exit(0);\n');
   writeFileSync(join(dir, 'research', 'demo-alpha-groups.json'),
     JSON.stringify([{ label: 'a', covers: ['1'] }, { label: 'b', covers: ['2'] }]));
+  for (const batch of ['1', '2']) writeFileSync(join(dir, 'research', `demo-batch-${batch}.pages.json`), '[]');
   writeFileSync(join(dir, 'research', 'demo-step7-scope.json'),
     JSON.stringify({ by_item: { 'thm-demo-x': 'a', 'thm-demo-y': 'b' } }));
   for (const label of ['a', 'b']) {
@@ -62,24 +63,24 @@ function fixtureRepoWithGroups() {
   return dir;
 }
 
-// THE STEP-6 PRE-READ (owner, 2026-08-25): the group Alphas are spawned,
-// assigned their groups and read their pairs WHILE the judges sweep. These tests
+// THE STEP-6 PRE-READ (owner, 2026-08-25): batch reviewers are spawned,
+// assigned one batch each and read their pairs WHILE the judges sweep. These tests
 // pin the two properties that make that safe and worth doing — the pre-read
 // cannot write, and it is a unit of the sweep's own stage rather than a stage in
 // front of it, which is the difference between overlapping the sweep and
 // delaying it.
-test('the group read is a unit of the sweep stage, not a stage before it', { skip: !existsSync(join(REPO, 'research/frontier-18-alpha-groups.json')) }, () => {
+test('the batch review is a unit of the sweep stage, not a stage before it', { skip: !existsSync(join(REPO, 'research/frontier-18-alpha-groups.json')) }, () => {
   const s = stage('6-judge');
   const ctx = { run: 'frontier-18', repo: REPO };
   const units = s.units(ctx).map(String);
   assert.ok(units.includes('sweep'), 'the sweep is one unit');
-  assert.ok(units.length > 1, 'and every group is another');
+  assert.ok(units.length > 1, 'and every batch is another');
   assert.ok(s.concurrency > 1, 'they must be able to run at once, or this is serial after all');
   const plans = s.plan(ctx, units);
   const sweep = plans.find((p: any) => p.role === 'tool');
-  const preads = plans.filter((p: any) => p.role === 'alpha-group-read');
+  const preads = plans.filter((p: any) => p.role === 'alpha-batch-read');
   assert.ok(sweep, 'the sweep is still dispatched here');
-  assert.equal(preads.length, units.length - 1, 'one reader per group');
+  assert.equal(preads.length, units.length - 1, 'one reviewer per batch');
   for (const p of preads) {
     assert.ok(s.pattern.test(`${p.role}-${p.label}.result.json`));
     assert.ok(p.outputSchema, 'a read-only role returns its digest through the schema path');
@@ -91,8 +92,8 @@ test('the group read is a unit of the sweep stage, not a stage before it', { ski
 test('the step-6 reader cannot write, and it is the kernel that says so', () => {
   const r = spawnSync('node', ['tools/physics-support/dispatch.mjs', '--check-read-only'], { cwd: REPO, encoding: 'utf8' });
   assert.equal(r.status, 0, r.stderr);
-  const line = r.stdout.split('\n').find((l) => l.startsWith('alpha-group-read'));
-  assert.ok(line, 'alpha-group-read must appear in the read-only attestation');
+  const line = r.stdout.split('\n').find((l) => l.startsWith('alpha-batch-read'));
+  assert.ok(line, 'alpha-batch-read must appear in the read-only attestation');
   assert.match(line!, /--sandbox read-only \(process-level\)/,
     'a prompt-level instruction is not the guarantee step 6 needs');
 });
@@ -105,12 +106,12 @@ test('digest recovery supplies exact diagnostics and the prior evidence instead 
     await s.onGateFailure({
       ctx: { run: 'demo', repo: root }, stage: s, round: 1,
       executor: { start: (_stage: any, plan: any) => started.push(plan) },
-      failure: { id: 'step7-digests', output: 'group b: schema $.seams_checked[0].opened: unexpected field' },
+      failure: { id: 'step7-digests', output: 'batch 2: schema $.seams_checked[0].opened: unexpected field' },
     });
     assert.equal(started.length, 1);
     const task = readFileSync(join(root, started[0].task), 'utf8');
     assert.match(task, /seams_checked\[0\]\.opened: unexpected field/);
-    assert.match(task, /demo-alpha-b-step7-context\.json/);
+    assert.match(task, /demo-batch-2-step7-context\.json/);
     assert.match(task, /preserve supported findings/);
     assert.deepEqual(started[0].covers, []);
   } finally { rmSync(root, { recursive: true, force: true }); }
@@ -123,12 +124,12 @@ test('a re-read round is not mistaken for the unit it repairs', { skip: !existsS
     ctx: { run: 'frontier-18', repo: REPO },
     executor: { start: (_x: any, p: any) => started.push(p) },
     stage: s, round: 1,
-    failure: { id: 'step7-digests', why: 'group c items_read: unexpected `def-external`' },
+    failure: { id: 'step7-digests', why: 'batch 3 items_read: unexpected `def-external`' },
   });
-  assert.equal(started.length, 1, 'only the group with a thin digest is re-read');
-  assert.match(started[0].label, /read-again-c-/);
+  assert.equal(started.length, 1, 'only the batch with a thin digest is re-read');
+  assert.match(started[0].label, /read-again-3-/);
   for (const p of started) {
-    assert.equal(p.role, 'alpha-group-read', 'and still read-only');
+    assert.equal(p.role, 'alpha-batch-read', 'and still read-only');
     assert.deepEqual(p.covers, [], 'a repair round manufactures no coverage');
     assert.ok(!s.pattern.test(`${p.role}-${p.label}.result.json`),
       `${p.label} would satisfy the stage's own coverage`);
@@ -141,7 +142,7 @@ test('a re-read round is not mistaken for the unit it repairs', { skip: !existsS
 test('the step-6 reader hands off a digest without a resumable session', { skip: !existsSync(join(REPO, 'research/frontier-18-alpha-groups.json')) }, () => {
   const ctx = { run: 'frontier-18', repo: REPO };
   const reader = stage('6-judge').plan(ctx, stage('6-judge').units(ctx).map(String))
-    .filter((p: any) => p.role === 'alpha-group-read');
+    .filter((p: any) => p.role === 'alpha-batch-read');
   assert.ok(reader.length, 'there are readers to check');
   for (const p of reader) {
     assert.match(p.resultArtifact, /-step7-context\.json$/);
@@ -216,7 +217,7 @@ test('the Step-7 group adjudicator lane keeps web search, network access and ear
 // `-c` flag that lane would never compact at all.
 test('every role lane carries the 500k auto-compaction rule, DeepSeek included', () => {
   const roles = ['beta', 'reader', 'refuter', 'alpha', 'alpha-high', 'alpha-report',
-    'alpha-adjudicate', 'final-adjudicator', 'alpha-group-read', 'alpha-assign',
+    'alpha-adjudicate', 'final-adjudicator', 'alpha-batch-read', 'alpha-assign',
     'scaffolder', 'mechanic'];
   for (const role of roles) {
     const result = spawnSync('node', ['tools/physics-support/dispatch.mjs',
@@ -287,7 +288,7 @@ test('render excludes published judge rejections from the adjudication queue', (
   }, (run) => {
     const generated = ['step7-scope.json', 'step7-alerts.json', 'alpha-a-step7.task.md',
       'alpha-a-step7-recovery.task.md', 'alpha-a-step7-preflight.task.md',
-      'alpha-a-step7-close.task.md', 'alpha-a-step6-read.task.md',
+      'alpha-a-step7-close.task.md', 'batch-1-step6-read.task.md',
       'step7-bundle-a.md'].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
     try {
       const rendered = render(run);
@@ -308,8 +309,8 @@ for (const subject of ['thm-demo-one', 'page-demo']) test(`Step-6 concern on ${s
       id: 'page-demo', kind: 'A', title: 'Demo', category: 'demo', order: 1,
       items: [{ id: 'thm-demo-one' }], requires: [],
     }],
-    'alpha-a-step7-context.json': {
-      group: 'a', pages_read: ['page-demo'], items_read: ['thm-demo-one'],
+    'batch-1-step7-context.json': {
+      group: 'a', batches: ['1'], pages_read: ['page-demo'], items_read: ['thm-demo-one'],
       conventions: [{ convention: 'Demo convention', fixed_by: 'thm-demo-one', matters_for: ['thm-demo-one'] }],
       load_bearing: [{ id: 'thm-demo-one', statement: 'Demo statement', used_by: [] }],
       published_dependencies: [],
@@ -320,7 +321,7 @@ for (const subject of ['thm-demo-one', 'page-demo']) test(`Step-6 concern on ${s
     const generated = [
       'step7-scope.json', 'step7-alerts.json', 'alpha-a-step7.task.md',
       'alpha-a-step7-recovery.task.md', 'alpha-a-step7-preflight.task.md',
-      'alpha-a-step7-close.task.md', 'alpha-a-step6-read.task.md',
+      'alpha-a-step7-close.task.md', 'batch-1-step6-read.task.md',
       'step7-alert-decisions.jsonl',
     ].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
     try {
@@ -363,8 +364,8 @@ test('a fatal reader warning requires an exact repaired post-state', () => {
       id: 'page-demo', kind: 'A', title: 'Demo', category: 'demo', order: 1,
       items: [{ id: READER_WARNING_ITEM }], requires: [],
     }],
-    'alpha-a-step7-context.json': {
-      group: 'a', pages_read: ['page-demo'], items_read: [READER_WARNING_ITEM],
+    'batch-1-step7-context.json': {
+      group: 'a', batches: ['1'], pages_read: ['page-demo'], items_read: [READER_WARNING_ITEM],
       conventions: [{ convention: 'Demo convention', fixed_by: READER_WARNING_ITEM, matters_for: [READER_WARNING_ITEM] }],
       load_bearing: [{ id: READER_WARNING_ITEM, statement: 'Demo statement', used_by: [] }],
       published_dependencies: [],
@@ -375,7 +376,7 @@ test('a fatal reader warning requires an exact repaired post-state', () => {
     const generated = [
       'step7-scope.json', 'step7-alerts.json', 'alpha-a-step7.task.md',
       'alpha-a-step7-recovery.task.md', 'alpha-a-step7-preflight.task.md',
-      'alpha-a-step7-close.task.md', 'alpha-a-step6-read.task.md',
+      'alpha-a-step7-close.task.md', 'batch-1-step6-read.task.md',
       'step7-alert-decisions.jsonl',
     ].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
     try {
@@ -489,7 +490,7 @@ test('step6 scope renders before the judge ledger exists', () => {
     const generated = [
       'step7-scope.json', 'step7-alerts.json', 'alpha-a-step7.task.md',
       'alpha-a-step7-recovery.task.md', 'alpha-a-step7-preflight.task.md',
-      'alpha-a-step7-close.task.md', 'alpha-a-step6-read.task.md',
+      'alpha-a-step7-close.task.md', 'batch-1-step6-read.task.md',
     ].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
     try {
       const r = render(run);
@@ -551,7 +552,7 @@ test('step7 digest coverage is an exact inventory, not a self-attested count', (
       items: [{ id: 'thm-demo-one' }, { id: 'lem-demo-two' }],
       requires: [],
     }],
-    'alpha-a-step7-context.json': {
+    'batch-1-step7-context.json': {
       group: 'a',
       pages_read: ['page-demo'],
       items_read: 2,
@@ -567,7 +568,7 @@ test('step7 digest coverage is an exact inventory, not a self-attested count', (
     const oldShape = command();
     assert.notEqual(oldShape.status, 0);
     assert.match(`${oldShape.stdout}${oldShape.stderr}`, /items_read: expected array/);
-    writeFileSync(join(REPO, 'research', `${run}-alpha-a-step7-context.json`), JSON.stringify({
+    writeFileSync(join(REPO, 'research', `${run}-batch-1-step7-context.json`), JSON.stringify({
       group: 'a',
       batches: ['1'],
       pages_read: ['page-demo'],
@@ -582,7 +583,7 @@ test('step7 digest coverage is an exact inventory, not a self-attested count', (
     const exact = command();
     assert.equal(exact.status, 0, `${exact.stdout}${exact.stderr}`);
     assert.match(exact.stdout, /2 item\(s\) opened/);
-    const path = join(REPO, 'research', `${run}-alpha-a-step7-context.json`);
+    const path = join(REPO, 'research', `${run}-batch-1-step7-context.json`);
     const incomplete = JSON.parse(readFileSync(path, 'utf8'));
     delete incomplete.concerns;
     writeFileSync(path, JSON.stringify(incomplete));

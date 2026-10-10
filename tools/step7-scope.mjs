@@ -9,7 +9,7 @@
 //   1. ONE READER FOR THE WHOLE LEVEL. frontier-18 is 796 items over ten
 //      batches in nine categories. A single adjudicator reads every rejection
 //      in every subject in one context window, and the last ones it reads are
-//      read with the least attention left. Steps 3 and 6 already decided this
+//      read with the least attention left. Step 3 already decided this
 //      question the other way: one Alpha per <=3 RELATED batches, assigned by
 //      `2-assign` for mathematical relatedness, not by position.
 //
@@ -95,16 +95,23 @@ const alertDecisionsPath = R('research', `${run}-step7-alert-decisions.jsonl`);
 const rulesPath = R('briefs/tasks/alpha-step7.md');
 const recoveryPath = R('briefs/tasks/alpha-step7-closure-recovery.md');
 const readPath = R('briefs/tasks/alpha-step6-read.md');
-const digestPath = (label) => R('research', `${run}-alpha-${label}-step7-context.json`);
+const digestPath = (batch) => R('research', `${run}-batch-${batch}-step7-context.json`);
+const batchScopes = (groups) => groups.flatMap(g => g.covers.map(batch => ({ label: batch, covers: [batch], group: g.label })));
 
 /** Every step-6 digest on disk. Missing or malformed ones are skipped here; the
  *  `digests` gate is what fails on them. */
 function readAllDigests() {
   const out = [];
-  for (const g of readGroups()) {
-    const p = digestPath(g.label);
+  for (const b of batchScopes(readGroups())) {
+    const p = digestPath(b.label);
     if (!existsSync(p)) continue;
-    try { out.push(readJson(p)); } catch { /* the digests gate reports it */ }
+    try {
+      const digest = readJson(p);
+      if (digest.group !== b.group || !Array.isArray(digest.batches)
+        || digest.batches.length !== 1 || digest.batches[0] !== b.label)
+        fail(`batch ${b.label}: digest identity does not match its assigned batch and group`);
+      out.push(digest);
+    } catch { /* the digests gate reports malformed JSON */ }
   }
   return out;
 }
@@ -172,7 +179,7 @@ function buildIndex(groups) {
  *  adjudicator. */
 function openRejections() {
   // `6-scope` deliberately renders this partition before the judge sweep so
-  // the group readers can start alongside it. At that point no judge ledger
+  // the batch reviewers can start alongside it. At that point no judge ledger
   // exists yet, and the honest rejection set is empty. Once `6-judge` has
   // written the ledger, the later `7-scope` render takes the strict path below
   // and partitions every recorded rejection.
@@ -212,13 +219,16 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
   const groupLabels = new Set(groups.map((g) => g.label));
   for (const digest of readAllDigests()) {
     const from = String(digest.group ?? '');
+    const fromBatch = String(digest.batches?.[0] ?? '');
     for (const raw of includeConcerns ? (digest.concerns ?? []) : []) {
       if (isPublishedItem(REPO, raw.id)) continue;
-      const owner = (index.itemOwner.get(raw.id) ?? index.pageOwner.get(raw.id))?.group;
+      const ownerRecord = index.itemOwner.get(raw.id) ?? index.pageOwner.get(raw.id);
+      const owner = ownerRecord?.group;
       const alert = {
         version: 1,
         source: 'step6-read',
         from_group: from,
+        from_batch: fromBatch,
         owning_group: owner ?? '',
         item: String(raw.id ?? ''),
         finding: String(raw.concern ?? ''),
@@ -228,7 +238,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
       alert.alert_id = step7AlertId(alert);
       if (!groupLabels.has(from)) problems.push(`${alert.alert_id}: unknown source group ${from}`);
       if (!owner) problems.push(`${alert.alert_id}: concern item ${alert.item} belongs to no run group`);
-      if (owner && owner !== from) problems.push(`${alert.alert_id}: concern item ${alert.item} is not owned by source group ${from}`);
+      if (ownerRecord && ownerRecord.batch !== fromBatch) problems.push(`${alert.alert_id}: concern item ${alert.item} is not owned by source batch ${fromBatch}`);
       if (!alert.finding.trim()) problems.push(`${alert.alert_id}: finding is empty`);
       alerts.push(alert);
     }
@@ -239,6 +249,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
         version: 1,
         source: 'step6-read',
         from_group: from,
+        from_batch: fromBatch,
         owning_group: owner ?? '',
         item: String(raw.item ?? ''),
         finding: String(raw.finding ?? ''),
@@ -248,7 +259,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
       alert.alert_id = step7AlertId(alert);
       if (!groupLabels.has(from)) problems.push(`${alert.alert_id}: unknown source group ${from}`);
       if (!owner) problems.push(`${alert.alert_id}: item ${alert.item} belongs to no run group`);
-      if (owner === from) problems.push(`${alert.alert_id}: source group owns ${alert.item}; this belongs in concerns`);
+      if (index.itemOwner.get(raw.item)?.batch === fromBatch) problems.push(`${alert.alert_id}: source batch owns ${alert.item}; this belongs in concerns`);
       if (!alert.finding.trim()) problems.push(`${alert.alert_id}: finding is empty`);
       alerts.push(alert);
     }
@@ -319,103 +330,36 @@ function itemLine(it) {
  *  are read by a fresh agent that knows nothing about the group. The BODY
  *  differs — the rules, or the reconstruction instructions — and is appended by
  *  the caller after a rule. Nothing here is a judgement about mathematics. */
-function groupHeader(g, index, seam, rejections, alerts, phase = 'step7') {
-  const reading = phase === 'step6';
+function groupHeader(g, index, seam, rejections, alerts) {
   const pages = index.pagesOf.get(g.label);
-  const aPages = pages.filter((p) => p.kind === 'A');
+  const aPages = pages.filter(p => p.kind === 'A');
   const nItems = pages.reduce((n, p) => n + (p.items ?? []).length, 0);
-  const mine = rejections.filter((r) => index.itemOwner.get(r.id)?.group === g.label);
+  const mine = rejections.filter(r => index.itemOwner.get(r.id)?.group === g.label);
   const byItem = new Map();
   for (const r of mine) (byItem.get(r.id) ?? byItem.set(r.id, []).get(r.id)).push(r);
-
-  const L = [];
-  L.push(`# ${reading ? 'Step 6 Alpha group reader — read-only digest' : 'Step 7 adjudication'} — group **${g.label}**, run \`${run}\``);
-  L.push('');
-  L.push(`${reading ? '- You are the read-only Step 6 Alpha group reader' : 'You are the group Alpha'} for batches ${g.covers.map((b) => `**${b}**`).join(', ')}: `
-    + `${aPages.length} A/B pair(s), ${pages.length} page(s), ${nItems} item(s)`
-    + `${reading ? '.' : `, ${mine.length} open rejection(s) over ${byItem.size} item(s).`}`);
-  L.push('');
-  if (reading) {
-    L.push('- Read every owned item and every listed seam before returning the compact');
-    L.push('  schema-constrained digest. That file, not this conversation, is the handoff');
-    L.push('  to a fresh Step-7 adjudicator. No judge verdict is supplied here.');
-    L.push('- Read items in dependency order across the group: suppliers before their');
-    L.push('  direct and indirect consumers, including prerequisites outside the group.');
-    L.push('- In the digest, `pages_read` is exactly the ids under **Your pages** and');
-    L.push('  `items_read` exactly the ids under **Your content**. External items you');
-    L.push('  open belong only in `published_dependencies`; never add them to those inventories.');
-  } else {
-    L.push('This is a fresh adjudication context. The durable digest below carries the');
-    L.push('findings from the rejection-blind whole-group reading at step 6 without');
-    L.push('replaying that reader\'s transcript. Nothing from step 3, step 5, or another');
-    L.push('group is assumed.');
+  const L = [
+    `# Step 7 adjudication — group **${g.label}**, run \`${run}\``, '',
+    `You are the group Alpha for batches ${g.covers.join(', ')}: ${aPages.length} A/B pair(s), ${pages.length} page(s), ${nItems} item(s), ${mine.length} open rejection(s) over ${byItem.size} item(s).`, '',
+    'This is a fresh adjudication context. Each batch has its own rejection-blind',
+    'Step-6 review digest; read all assigned batch digests before the verdicts.',
+    'The digests are notes, not authority. Where they and the item files disagree, the files win.', '',
+    '## Step-6 batch review digests', '',
+  ];
+  for (const batch of g.covers) {
+    const path = digestPath(batch);
+    L.push(`- Batch **${batch}**: \`${rel(path)}\`${existsSync(path) ? '' : ' — missing; the Step-6 digest gate must resolve this.'}`);
   }
-  if (reading) {
-    L.push('- Everything below is derived from disk by `tools/step7-scope.mjs`; no line');
-    L.push('  of it is a judgement about mathematics.');
-  } else {
-    L.push('Everything below is');
-    L.push('derived from disk by `tools/step7-scope.mjs`; no line of it is a judgement');
-    L.push('about mathematics.');
-  }
-  L.push('');
-
-  // The step-6 digest, when the reading half has produced one. Named first
-  // because reading it first is the whole reason it was written: it is this
-  // group's own account of the mathematics, recorded before any verdict
-  // existed, and its value is precisely that it was not shaped by the
-  // objections that follow.
-  if (!reading) {
-    const d = digestPath(g.label);
-    L.push('## What you recorded at step 6');
-    L.push('');
-    if (existsSync(d)) {
-      L.push(`\`${rel(d)}\` is what a group Alpha for this group wrote during step 6,`);
-      L.push('while the judges were still sweeping and no verdict existed. It records the');
-      L.push('conventions your pages fix, which items the rest lean on, which published');
-      L.push('dependencies were actually opened, and what already looked thin.');
-      L.push('');
-      L.push('**Its `concerns` list is evidence, not decoration.** Each entry was found with');
-      L.push('nobody suggesting where to look. A judge rejection landing at the same place is');
-      L.push('two independent readings agreeing and should be very hard to call a');
-      L.push('`false_positive`; a rejection landing nowhere near any of them is not thereby');
-      L.push('wrong, but it is the case to read most carefully against the text.');
-      L.push('');
-      L.push('It is notes, not authority. Where it and the item files disagree, the files win.');
-    } else {
-      L.push('**No step-6 digest exists for this group.** The reading half did not run or did');
-      L.push('not produce one, so you are meeting this mathematics for the first time with the');
-      L.push('rejections already in front of you. Read the pages before the verdicts anyway —');
-      L.push('the order matters more than where the notes came from.');
-    }
-    L.push('');
-  }
-
-  L.push(reading ? '## Read scope' : '## Read scope, write scope');
-  L.push('');
-  L.push(reading
-    ? '- **Read the entire assigned group and anything it cites.** `items/` holds every published item and'
-    : '**Audit and repair one item at a time. Inspect related items first only when necessary.** `items/` holds every published item and');
-  L.push('every item this run has built, and your sandbox is the repository root. Open');
-  L.push(`anything ${reading ? 'an owned item' : 'a rejection'} touches — a published dependency, another group's page,`);
-  L.push('a definition three levels down. Adjudicating a citation objection without');
-  L.push('opening the cited item is exactly what the refuter rule forbids.');
-  L.push('');
-  if (reading) {
-    L.push('- **This dispatch is read-only.** Record concerns about owned items and alerts');
-    L.push('  about other groups in the returned digest; do not repair anything.');
-    L.push('');
-  } else {
-    L.push('**You may write only inside your own group.** A `confirmed_fatal` licenses a');
-    L.push('repair to an item in the batches listed above. If a rejection\'s real defect');
-    L.push('lies in an item owned by another group, do not repair it: record the finding');
-    L.push(`in \`research/${run}-step7-cross-group.jsonl\` as`);
-    L.push('`{from_group, item, owning_group, finding, severity, source_rejection:{id,model,context_sha256}}`');
-    L.push('and adjudicate your own rejection on what is true. The source tuple is');
-    L.push('provenance only; it cannot license a repair to the target. The gate routes a');
-    L.push('stable alert to the owning group, and a finding nobody answers fails the stage.');
-    L.push('');
-  }
+  L.push('', 'Each digest records conventions, load-bearing claims, opened dependencies and concerns.',
+    'A concern independently agreeing with a judge rejection is evidence to examine carefully.', '',
+    '## Read scope, write scope', '',
+    '**Audit and repair one item at a time. Inspect related items first only when necessary.**',
+    'Open each relevant dependency, including published content and other groups.',
+    '**You may write only inside your own group.** A `confirmed_fatal` licenses repair',
+    'to an item in these batches. For a defect owned by another group, record a finding in',
+    `\`research/${run}-step7-cross-group.jsonl\` as`,
+    '`{from_group, item, owning_group, finding, severity, source_rejection:{id,model,context_sha256}}`.',
+    'The source tuple is provenance only; it cannot license repair to the target.',
+    'The gate routes a stable alert to the owning group; an unanswered finding fails the stage.', '');
 
   L.push('## Your pages');
   L.push('');
@@ -470,7 +414,7 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step7') {
   // Alerts are separate from judge evidence. They carry stable ids and require
   // an owning-group disposition; no source tuple is ever relabelled as though a
   // judge had rejected the target item.
-  if (!reading) {
+  {
     const incoming = alerts.filter((alert) => alert.owning_group === g.label);
     L.push('## Step-6 reader warnings');
     L.push('');
@@ -492,7 +436,7 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step7') {
     L.push('');
   }
 
-  if (!reading) {
+  {
     L.push('## Your rejections');
     L.push('');
     if (!mine.length) {
@@ -533,6 +477,34 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step7') {
   return L.join('\n');
 }
 
+/** Step 6 owns a single batch; Step-7 ownership remains the original group. */
+function batchHeader(batch, index, seam) {
+  const pages = index.pagesOf.get(batch.label);
+  const L = [
+    `# Step 6 batch reviewer — batch **${batch.label}**, run \`${run}\``, '',
+    `You are the only reviewer for batch **${batch.label}**. Step-7 owning group: **${batch.group}**.`,
+    `Return \`group: "${batch.group}"\` and \`batches: ["${batch.label}"]\`.`,
+    'Read every assigned page and item in dependency order, including cited prerequisites outside the batch.',
+    'This is read-only, rejection-blind work. Return findings through the schema-constrained digest.',
+    '`pages_read` and `items_read` must match the inventories below exactly.',
+    'Record findings on this batch in concerns and findings on another batch in alerts, even within the same Step-7 group.', '',
+    '## Your pages', '', '| batch | page | kind | requires |', '|---|---|---|---|',
+  ];
+  for (const page of pages)
+    L.push(`| ${batch.label} | \`${page.id}\` | ${page.kind} | ${(page.requires ?? []).join(', ') || '—'} |`);
+  L.push('', '## Your content, in full', '');
+  for (const page of pages) {
+    L.push(`### \`${page.id}\` — ${page.title ?? ''}`, '');
+    for (const item of page.items ?? []) L.push(itemLine(item));
+    L.push('');
+  }
+  L.push('## Your seams', '', 'Check each listed cross-batch edge for citation fidelity in both directions.');
+  const edges = [...seam.out, ...seam.in];
+  if (!edges.length) L.push('No dependency edge crosses this batch boundary.');
+  for (const edge of edges) L.push(`- \`${edge.from}\` requires \`${edge.to}\``);
+  return L.join('\n');
+}
+
 /** A per-group file: the derived context, a rule, then a template body.
  *
  *  Separate bodies are rendered per group — adjudication, closure recovery and
@@ -557,7 +529,7 @@ if (mode === 'render') {
   const orphans = rejections.filter((r) => !index.itemOwner.has(r.id));
 
   const scope = {
-    version: 2,
+    version: 3,
     run,
     rendered_from: {
       groups: rel(groupsPath),
@@ -586,8 +558,6 @@ if (mode === 'render') {
     const header = groupHeader(g, index, seam.get(g.label), rejections, alertReceipt.alerts);
     writeFileSync(R('research', `${run}-alpha-${g.label}-step7.task.md`), compose(header, rulesPath));
     writeFileSync(R('research', `${run}-alpha-${g.label}-step7-recovery.task.md`), compose(header, recoveryPath));
-    const readingHeader = groupHeader(g, index, seam.get(g.label), [], [], 'step6');
-    writeFileSync(R('research', `${run}-alpha-${g.label}-step6-read.task.md`), compose(readingHeader, readPath));
     // The evidence bundle is rendered from the same partition, so a repaired
     // item's bundle is refreshed whenever the scope is.
     const group = scope.groups.find((row) => row.label === g.label);
@@ -601,6 +571,14 @@ if (mode === 'render') {
       rejections: group.rejections,
     });
     writeFileSync(R('research', `${run}-step7-bundle-${g.label}.md`), bundle);
+  }
+
+  const assignedBatches = batchScopes(groups);
+  const batchIndex = buildIndex(assignedBatches);
+  const batchSeams = seams(assignedBatches, batchIndex);
+  for (const batch of assignedBatches) {
+    writeFileSync(R('research', `${run}-batch-${batch.label}-step6-read.task.md`),
+      compose(batchHeader(batch, batchIndex, batchSeams.get(batch.label)), readPath));
   }
 
   const total = rejections.length;
@@ -626,11 +604,11 @@ if (mode === 'render') {
 // The gate for the step-6 reading half. A read-only Alpha cannot write a file, so
 // its digest is materialised by `dispatch.mjs --result-artifact` from the
 // schema-constrained final message; what this checks is that the digest is the
-// group's OWN and is not vacuous.
+// batch's OWN and is not vacuous.
 //
 // Vacuity is the failure mode that matters. An agent that spent no time can
 // still return a schema-valid object — right shape, nothing in it — and the
-// dispatch exits zero. So the check is against the group's real size: a group
+// dispatch exits zero. So the check is against the batch's real size: a batch
 // that owns 200 items and reports reading 3 did not do this pass. An empty
 // `concerns` list is NOT vacuity and is never failed here: a careful reading
 // that finds nothing thin is a result, and failing it would teach the lane to
@@ -638,45 +616,53 @@ if (mode === 'render') {
 if (mode === 'digests') {
   const digestSchema = readJson(R('briefs', 'schemas', 'step7-context.json'));
   const groups = readGroups();
-  const index = buildIndex(groups);
+  const assignedBatches = batchScopes(groups);
+  const index = buildIndex(assignedBatches);
+  const batchSeams = seams(assignedBatches, index);
   const bad = [];
   let read = 0;
-  for (const g of groups) {
+  for (const g of assignedBatches) {
     const p = digestPath(g.label);
-    if (!existsSync(p)) { bad.push(`group ${g.label}: no ${rel(p)} — the step-6 read produced no digest`); continue; }
+    if (!existsSync(p)) { bad.push(`batch ${g.label}: no ${rel(p)} — the step-6 read produced no digest`); continue; }
     let d;
-    try { d = readJson(p); } catch (e) { bad.push(`group ${g.label}: ${rel(p)} is not valid JSON (${e.message})`); continue; }
+    try { d = readJson(p); } catch (e) { bad.push(`batch ${g.label}: ${rel(p)} is not valid JSON (${e.message})`); continue; }
     const schemaProblems = validateCodexOutput(d, digestSchema);
     if (schemaProblems.length) {
-      bad.push(...schemaProblems.map((problem) => `group ${g.label}: schema ${problem}`));
+      bad.push(...schemaProblems.map((problem) => `batch ${g.label}: schema ${problem}`));
       continue;
     }
-    if (String(d.group) !== g.label) bad.push(`group ${g.label}: digest reports group "${d.group}"`);
+    if (String(d.group) !== g.group) bad.push(`batch ${g.label}: digest reports group "${d.group}"`);
+    bad.push(...exactSetProblems(d.batches, [g.label], `batch ${g.label} batches`));
     const owned = index.pagesOf.get(g.label);
     const ownedPages = owned.map((p2) => p2.id);
     const ownedItems = owned.flatMap((p2) => (p2.items ?? []).map((item) => typeof item === 'string' ? item : item.id));
-    if (!Array.isArray(d.pages_read)) bad.push(`group ${g.label}: pages_read must be an exact id array`);
-    else bad.push(...exactSetProblems(d.pages_read.map(String), ownedPages, `group ${g.label} pages_read`));
-    if (!Array.isArray(d.items_read)) bad.push(`group ${g.label}: items_read must be an exact id array, not a self-attested count`);
-    else bad.push(...exactSetProblems(d.items_read.map(String), ownedItems, `group ${g.label} items_read`));
-    const expectedSeams = [...seams(groups, index).get(g.label).out, ...seams(groups, index).get(g.label).in]
+    if (!Array.isArray(d.pages_read)) bad.push(`batch ${g.label}: pages_read must be an exact id array`);
+    else bad.push(...exactSetProblems(d.pages_read.map(String), ownedPages, `batch ${g.label} pages_read`));
+    if (!Array.isArray(d.items_read)) bad.push(`batch ${g.label}: items_read must be an exact id array, not a self-attested count`);
+    else bad.push(...exactSetProblems(d.items_read.map(String), ownedItems, `batch ${g.label} items_read`));
+    const expectedSeams = [...batchSeams.get(g.label).out, ...batchSeams.get(g.label).in]
       .map((edge) => `${edge.from}\u0000${edge.to}`);
-    if (!Array.isArray(d.seams_checked)) bad.push(`group ${g.label}: seams_checked must be an exact edge array`);
+    if (!Array.isArray(d.seams_checked)) bad.push(`batch ${g.label}: seams_checked must be an exact edge array`);
     else bad.push(...exactSetProblems(d.seams_checked.map((edge) => `${edge?.from ?? ''}\u0000${edge?.to ?? ''}`),
-      expectedSeams, `group ${g.label} seams_checked`));
+      expectedSeams, `batch ${g.label} seams_checked`));
     if (!(d.conventions ?? []).length) {
-      bad.push(`group ${g.label}: no conventions recorded — every page fixes at least one`);
+      bad.push(`batch ${g.label}: no conventions recorded — every page fixes at least one`);
     }
     if (!(d.load_bearing ?? []).length) {
-      bad.push(`group ${g.label}: no load-bearing items recorded`);
+      bad.push(`batch ${g.label}: no load-bearing items recorded`);
     }
-    // An alert is for ANOTHER group. One aimed at an item the sender owns is a
+    // An alert is for ANOTHER batch. One aimed at an item the sender owns is a
     // defect it should have kept in `concerns` and adjudicated itself, and
-    // delivering it would send the group its own finding back.
+    // delivering it would send the batch its own finding back.
     for (const a of d.alerts ?? []) {
       const owner = index.itemOwner.get(a.item);
-      if (!owner) bad.push(`group ${g.label}: alert names \`${a.item}\`, which belongs to no group in this run`);
-      else if (owner.group === g.label) bad.push(`group ${g.label}: alert names \`${a.item}\`, which it owns — that is a concern, not an alert`);
+      if (!owner) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which belongs to no batch in this run`);
+      else if (owner.group === g.label) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which it owns — that is a concern, not an alert`);
+    }
+    for (const concern of d.concerns ?? []) {
+      const owner = index.itemOwner.get(concern.id) ?? index.pageOwner.get(concern.id);
+      if (!owner || owner.batch !== g.label)
+        bad.push(`batch ${g.label}: concern names \`${concern.id}\`, which it does not own — use alerts for other batches`);
     }
     read += Array.isArray(d.items_read) ? d.items_read.length : 0;
   }
@@ -685,7 +671,7 @@ if (mode === 'digests') {
     for (const b of bad) console.error(`  ${b}`);
     process.exit(1);
   }
-  console.log(`step7-scope --digests: ${groups.length} group(s) read their pairs, ${read} item(s) opened across the level`);
+  console.log(`step7-scope --digests: ${assignedBatches.length} batch(es) read their pairs, ${read} item(s) opened across the level`);
   process.exit(0);
 }
 
@@ -767,7 +753,7 @@ for (const o of orphans) problems.push(`rejection ${o.id} (${o.model}) belongs t
 // 4. Every Step-6 reader warning and later cross-group alert has a stable
 //    identity and a genuine owning-group disposition. Reader warnings may
 //    directly license a fatal repair; alerts never become judge rejections.
-const alertReceipt = collectAlerts(groups, index, { includeConcerns: scope.version === 2 });
+const alertReceipt = collectAlerts(groups, index, { includeConcerns: scope.version >= 2 });
 problems.push(...alertReceipt.problems);
 const alertById = new Map(alertReceipt.alerts.map((alert) => [alert.alert_id, alert]));
 // The same checker closes both renders. During `6-scope` the ledger does not
@@ -844,7 +830,7 @@ for (const alert of alertReceipt.alerts) {
     }
   }
 }
-writeFileSync(alertsPath, `${JSON.stringify({ version: scope.version === 2 ? 2 : 1, run, alerts: alertReceipt.alerts }, null, 2)}\n`);
+writeFileSync(alertsPath, `${JSON.stringify({ version: scope.version >= 2 ? 2 : 1, run, alerts: alertReceipt.alerts }, null, 2)}\n`);
 
 reportProblems();
 console.log(`step7-scope --check: ${scope.groups.length} group(s) scoped, `

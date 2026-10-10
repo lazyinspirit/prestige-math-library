@@ -83,6 +83,19 @@ physics instructions or general Alpha brief loads during this dispatch. The sole
 Step-2 gate is `alpha-groups`; historical successful Alpha result names remain
 recognized and the native engine owns all transitions.
 
+## Step 6 batch review
+
+Step 6 uses exactly one read-only `alpha-batch-read` reviewer per manifest batch,
+with GPT-6.1 Sol at high effort, alongside the judge sweep. Each owns only that
+batch's inventory and returns `research/RUN-batch-N-step7-context.json` through
+the dispatcher. The digest names the Step-7 group and exactly one batch; the gate
+checks exact page, item and cross-batch seam inventories. Another batch's digest
+or a historical group result cannot cover the batch. Gate retries target the
+failing batches. Findings outside the batch use alerts even within one group;
+Step-7 batch adjudication tasks link the corresponding digest. Step-2 group
+assignment and the shared 30-agent limit remain unchanged. See
+../WORKFLOW.md for the complete review and handoff rules.
+
 ## Steps 7–8
 
 The former Step 8 scope review, change-judging/repair suffix and whole-level
@@ -104,7 +117,7 @@ retry procedures handle failures; no additional cross-batch review is added.
 
 Closeout retains full mechanical provenance, contract and current-judge coverage
 through `level-coverage --mechanical`, without the removed audit/spine receipts.
-The workflow revision is `physics-eight-step-v4-proof-coverage`; use a fresh run and state
+The workflow revision is `physics-eight-step-v5-batch-review`; use a fresh run and state
 directory. Do not install renumbered stages or refresh generated prompts beneath
 an active historical run. There is no `recover-step8` review-suffix command.
 
@@ -201,7 +214,7 @@ after mathematics prompt changes; add `--check` to verify alignment.
 cap. `physics-autopilot.config.json` limits concurrent workers across all stages
 to 30 through `concurrency` and `globalConcurrency`. Run-labelled dispatches
 and nested judge-sweep calls additionally share the actual-agent budget with
-group readers, retaining their existing role/model caps and returning capacity
+batch reviewers, retaining their existing role/model caps and returning capacity
 when readers finish. Old workers must drain before a new budget rollout.
 
 Run-specific `research/RUN-owner-authoring-direction.md` is binding on drift,

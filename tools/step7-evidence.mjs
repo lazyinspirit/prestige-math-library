@@ -114,6 +114,7 @@ export function step7AlertId(alert) {
     : null;
   const payload = {
     source,
+    ...(source === 'step6-read' && alert.from_batch != null ? { from_batch: String(alert.from_batch) } : {}),
     from_group: String(alert.from_group ?? ''),
     owning_group: String(alert.owning_group ?? ''),
     item: String(alert.item ?? ''),

@@ -21,7 +21,7 @@ for (const [name, workflow, prefix] of [
     assert.deepEqual(ids.slice(ids.indexOf('7-freeze') + 1), closeout);
     assert.equal(new Set(ids).size, ids.length);
     assert.ok(ids.every(id => /^[1-8](?:\.\d+)?[ab]?-/.test(id)));
-    assert.match(workflow.workflowRevision, /eight-step-v4-proof-coverage$/);
+    assert.match(workflow.workflowRevision, /eight-step-v5-batch-review$/);
     const freeze = stage('7-freeze').plan(ctx)[0];
     assert.equal(freeze.argv[1], `${prefix}touchlog.mjs`);
     assert.equal(freeze.argv.at(-1), 'post-step7');
