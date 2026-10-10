@@ -41,22 +41,32 @@ export function batchInput(root, run, batch) {
 /** Actual item and page prerequisites; never infer order from batch numbers. */
 export function prerequisiteBatches(root, run, batch) {
   const snapshot = loadStep3(root, run), home = new Map(snapshot.pages.map(page => [page.id, page.batch]));
-  const library=readLibraryItems(root), canonical=new Set(library.map(item=>item.id)), aliases=new Map();
-  for(const item of library)for(const alias of item.aliases??[])if(!canonical.has(alias)){
-    assert(!aliases.has(alias)||aliases.get(alias)===item.id,`Ambiguous alias ${alias}`);aliases.set(alias,item.id);
-  }
-  const out = new Set();
+  const out = new Set(), deps = new Set();
   for (const page of snapshot.pages.filter(page => page.batch === String(batch))) {
     for (const id of page.requires ?? []) if (home.has(id) && home.get(id) !== String(batch)) out.add(home.get(id));
     for (const item of page.items ?? []) {
       const path=join(root,'items',`${item.id}.md`);
       const text=existsSync(path)?readFileSync(path,'utf8'):'';
       const fm=yaml().parse(text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1]??'')??{};
-      for (const id of new Set([...(item.deps??[]),...(fm.deps??[])])) {
-      const owner = snapshot.items.get(aliases.get(id)??id)?.page.batch;
-      if (owner && owner !== String(batch)) out.add(owner);
-      }
+      for (const id of [...(item.deps??[]),...(fm.deps??[])]) deps.add(id);
     }
+  }
+  // Most construction inventories are empty, and canonical dependencies already
+  // have manifest owners. Read the corpus only when a used ID needs aliases.
+  const unresolved = new Set([...deps].filter(id => !snapshot.items.has(id)
+    && !existsSync(join(root, 'items', `${id}.md`))));
+  const aliases = new Map();
+  if (unresolved.size) {
+    const library = readLibraryItems(root), canonical = new Set(library.map(item => item.id));
+    for (const item of library) for (const alias of item.aliases ?? [])
+      if (unresolved.has(alias) && !canonical.has(alias)) {
+        assert(!aliases.has(alias) || aliases.get(alias) === item.id, `Ambiguous alias ${alias}`);
+        aliases.set(alias, item.id);
+      }
+  }
+  for (const id of deps) {
+    const owner = snapshot.items.get(aliases.get(id) ?? id)?.page.batch;
+    if (owner && owner !== String(batch)) out.add(owner);
   }
   return [...out].sort((a,b) => Number(a)-Number(b));
 }

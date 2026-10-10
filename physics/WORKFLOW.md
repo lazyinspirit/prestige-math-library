@@ -69,6 +69,11 @@ The existing 30-agent global limit and 80-pair frontier limit remain.
 
 Use the actual logical supplier graph to finish prerequisite batches before
 consumer batches; within a batch follow the recorded item levels and pair order.
+Scheduling reads current manifests and the relevant authored carriers. Canonical
+dependency IDs resolve directly; the corpus alias index is loaded only when a
+used dependency requires alias resolution. Empty pre-authoring inventories do
+not require a corpus item scan. Each call observes current bytes; no dependency
+cache survives changes between controller ticks.
 Recompute and reconcile dependencies after edits. Blocked suppliers hold their
 consumers. Acceptance binds transitive supplier bytes; changed inputs invalidate
 it and require owner resolution before another handoff.
