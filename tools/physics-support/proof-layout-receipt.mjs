@@ -4,7 +4,7 @@ import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const CHECKER_REPO = fileURLToPath(new URL('../../', import.meta.url));
 import { REPO, WEB_DIR, precheckSource } from './paths.mjs';
-import { runScope, sha256 } from './step8-lib.mjs';
+import { runScope, sha256 } from './step6-lib.mjs';
 import { itemHashGuard, shortHash } from './item-hash.mjs';
 import { readItem } from './physics-content.mjs';
 import { LAYOUT_GATES } from './proof-layout-core.mjs';
@@ -54,7 +54,7 @@ export function proofLayoutDependencies() {
     ...sourceFiles(join(WEB_DIR, 'components/library')),
     ...sourceFiles(join(WEB_DIR, 'lib')),
     join(WEB_DIR, 'package.json'), join(WEB_DIR, 'tsconfig.json'), precheckSource(),
-    ...['proof-layout-core.mjs', 'proof-layout-render.mts', 'proof-layout.mjs', 'proof-layout-receipt.mjs', 'paths.mjs', 'step8-lib.mjs', 'frontmatter-list.mjs', 'item-hash.mjs', 'physics-content.mjs', 'physics-review.mjs', 'physics-interface.mjs'].map(f => join(CHECKER_REPO, 'tools/physics-support', f)),
+    ...['proof-layout-core.mjs', 'proof-layout-render.mts', 'proof-layout.mjs', 'proof-layout-receipt.mjs', 'paths.mjs', 'step6-lib.mjs', 'frontmatter-list.mjs', 'item-hash.mjs', 'physics-content.mjs', 'physics-review.mjs', 'physics-interface.mjs'].map(f => join(CHECKER_REPO, 'tools/physics-support', f)),
   ];
   for (const lock of ['package-lock.json', 'pnpm-lock.yaml', 'yarn.lock']) if (existsSync(join(WEB_DIR, lock))) files.push(join(WEB_DIR, lock));
   for (const pkg of ['react', 'react-dom', 'react-markdown', 'remark-math', 'rehype-katex', 'katex']) files.push(join(WEB_DIR, 'node_modules', pkg, 'package.json'));

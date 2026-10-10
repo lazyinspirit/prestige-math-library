@@ -77,7 +77,7 @@ test('the Alpha brief derives model identity from the registry', () => {
 });
 
 test('ledger shape checks accept known historical rows independently of active coverage', () => {
-  for (const rel of ['tools/physics-support/level-coverage.mjs', 'tools/physics-support/step7-guard.mjs']) {
+  for (const rel of ['tools/physics-support/level-coverage.mjs', 'tools/physics-support/step5-guard.mjs']) {
     const source = readFileSync(join(REPO, rel), 'utf8');
     assert.ok(
       !/\bJUDGES\.includes\(record\.model\)/.test(source)

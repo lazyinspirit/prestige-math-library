@@ -1,11 +1,11 @@
-// Summarize the configured session-judge ledger for the Step-8 owner report.
+// Summarize the configured session-judge ledger for the Step-6 owner report.
 // The ledger keeps every verdict, while the agreement section compares the
 // latest usable verdict for each item/model after any targeted re-judging. A
 // later null on the same prompt cannot erase an earlier complete verdict; a
 // later true/false verdict always remains decisive.
 import { existsSync, readFileSync } from "node:fs";
 import { JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
-import { adjudicationTypeResolver } from './step7-adjudication-compat.mjs';
+import { adjudicationTypeResolver } from './step5-adjudication-compat.mjs';
 const adjudicationType = adjudicationTypeResolver(process.cwd());
 
 const argv = process.argv.slice(2);
@@ -21,7 +21,7 @@ if (!ledger || (adjudicationsFlag >= 0 && !adjudicationsPath)) {
 // The lineup is resolved, never assumed; `lineup` is emitted so a saved report
 // says which configured models it actually compared.
 // THE COPY THAT USED TO LIVE HERE IS WHY tools/physics-support/models.mjs EXISTS. The
-// frontier-15 step-8 report was computed BY HAND because this table missed the
+// frontier-15 step-6 report was computed BY HAND because this table missed the
 // 2026-08-17 lane switch that judge.mts, judge-sweep.mjs, level-coverage.mjs and
 // run-wave.mjs all carried — the reporting tool was the one tool that could not
 // read the run it reports on. It now imports the registry, so it cannot fall

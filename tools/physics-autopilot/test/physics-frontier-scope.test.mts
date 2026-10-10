@@ -81,7 +81,7 @@ test('native authoring and post-author joins require actual carriers, pages and 
  const f = fixture(t), itemPath = join(f.root, 'items/post-selected.md');
  const original = readFileSync(itemPath, 'utf8');
  rmSync(itemPath);
- for (const id of ['3b-author', '4-splice', '4-baseline']) {
+ for (const id of ['3b-author', '3-splice', '3-baseline']) {
   const argv = stagePhysicsCommand(f.root, id);
   assert.equal(argv.includes('--plan'), false, id);
   const result = runStagePhysics(f.root, id);
@@ -89,13 +89,13 @@ test('native authoring and post-author joins require actual carriers, pages and 
   assert.match(result.stdout + result.stderr, /missing.*post-selected/i);
  }
  f.save('items/post-selected.md', original.replace('## Postulate\nAssumption.', '## Remarks\nMissing the required Postulate section.'));
- for (const id of ['3b-author', '4-splice']) {
+ for (const id of ['3b-author', '3-splice']) {
   const result = runStagePhysics(f.root, id);
   assert.notEqual(result.status, 0, id);
   assert.match(result.stdout + result.stderr, /postulate-section/);
  }
  f.save('items/post-selected.md', original);
- for (const id of ['3b-author', '4-splice']) {
+ for (const id of ['3b-author', '3-splice']) {
   const result = runStagePhysics(f.root, id);
   assert.equal(result.status, 0, `${id}: ${result.stdout}${result.stderr}`);
  }

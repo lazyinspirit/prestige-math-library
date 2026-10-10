@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+const LEGACY_AUTHOR_STEP = -1; // Historical authoring receipts are not current authority.
 import { realpathSync as physicsRealpath } from 'node:fs';
 // Certify items genuinely created and authored by an auditor/adjudicator.
 //
@@ -31,7 +31,7 @@ const BASELINE_POLICY = 'auditor-created-stage-bypass-v1';
 const CERTIFICATION_POLICY = 'auditor-created-stage-bypass-v2';
 const OWNER_RECERTIFICATION_POLICY = 'auditor-created-owner-recertification-v1';
 const CARRIER_KEYS = ['guard_sha256', 'judge_sha256', 'item_file_sha256',
-  'manifest_sha256', 'contract_sha256', 'step5_subject_sha256'];
+  'manifest_sha256', 'contract_sha256', 'step3_subject_sha256'];
 
 export const auditorCreatedBaselinePath = (root, run, step) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-auditor-baseline.json`);
@@ -41,9 +41,9 @@ const ownerRecertificationPath = (root, run, step, id, hashes) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-owner-recertification-${safe(id, 'item ID')}-${hashValue({ id, carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) }).slice(0, 16)}.json`);
 
 // Owner-spawned creation is a separate attestation class, never a native result.
-const OWNER_CREATION_POLICY = 'owner-spawned-step5-creation-v1';
+const OWNER_CREATION_POLICY = 'owner-spawned-step3-creation-v1';
 const ownerCreationPath = (root, run, id) => join(root, 'research',
-  `${safe(run, 'run')}-step5-owner-creation-${safe(id, 'item ID')}.json`);
+  `${safe(run, 'run')}-step3-owner-creation-${safe(id, 'item ID')}.json`);
 const researchFile = (root, path) => {
   const file = resolve(root, String(path ?? ''));
   const boundary = realpathSync(join(root, 'research'));
@@ -53,7 +53,7 @@ const researchFile = (root, path) => {
 };
 
 function validateOwnerCreation(root, run, id, receipt) {
-  const baseline = stageBaseline(root, run, 5);
+  const baseline = stageBaseline(root, run, 3);
   const timeline = receipt?.author?.timeline;
   const at = Date.parse(receipt?.attested_at), baselineAt = Date.parse(baseline.at);
   const known = timeline?.mode === 'known' && Number.isFinite(Date.parse(timeline.started_at))
@@ -67,7 +67,7 @@ function validateOwnerCreation(root, run, id, receipt) {
       'run', 'step', 'id', 'owner', 'owner_identity', 'author', 'attested_at', 'reason',
       'owner_held_escalation', 'baseline_sha256', 'page', 'batch', 'carriers', 'sources'].includes(key))
     || receipt.version !== 1 || receipt.policy !== OWNER_CREATION_POLICY
-    || receipt.run !== run || receipt.step !== 5 || receipt.id !== id
+    || receipt.run !== run || receipt.step !== 3 || receipt.id !== id
     || receipt.owner !== true || receipt.evidence_class !== 'owner-spawned-creation'
     || receipt.author_result !== undefined || receipt.owner_recertification !== undefined
     || typeof receipt.owner_identity !== 'string' || !receipt.owner_identity.trim()
@@ -107,7 +107,7 @@ function ownerCreation(root, run, id, marker = null) {
 }
 
 export function recordOwnerCreation(root, run, step, id, evidence) {
-  if (Number(step) !== 5) throw Error('Owner creation supports Step 5 only');
+  if (Number(step) !== 3) throw Error('Owner creation supports Step 3 only');
   safe(run, 'run'); safe(id, 'item ID');
   const receipt = read(researchFile(root, evidence));
   validateOwnerCreation(root, run, id, receipt);
@@ -147,49 +147,49 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
   const researchRoot = resolve(root, 'research');
   const evidenceText = evidencePath.startsWith(`${researchRoot}/`) && existsSync(evidencePath)
     ? readFileSync(evidencePath, 'utf8') : '';
-  const liveRow = step === 5 ? inventory(root, run).find(row => row.id === id) : null;
-  const step5Bootstrap = step === 5 && receipt.basis !== undefined && liveRow
-    ? bootstrapStep5Author(root, run, id, liveRow, hashes, evidenceText) : null;
+  const liveRow = step === 3 ? inventory(root, run).find(row => row.id === id) : null;
+  const step3Bootstrap = step === 3 && receipt.basis !== undefined && liveRow
+    ? bootstrapStep3Author(root, run, id, liveRow, hashes, evidenceText) : null;
   if (receipt.version !== 1 || receipt.policy !== OWNER_RECERTIFICATION_POLICY
     || receipt.run !== run || receipt.step !== Number(step) || receipt.id !== id
     || receipt.owner !== true || (authorResult ? receipt.author_result !== authorResult
       : receipt.author_result !== undefined || !receipt.owner_creation
         || !ownerCreation(root, run, id, receipt.owner_creation))
     || (basis && receipt.basis !== basis)
-    || (receipt.basis !== undefined && !(step === 5
-      ? ['initial-step5-contract-only', 'initial-step5-item-repair',
-        'initial-step5-source-metadata-repair', 'initial-step5-dependency-repair',
-        'initial-step5-current-definition-manifest-review',
-        'initial-step5-current-ball-lemma-manifest-review'].includes(receipt.basis)
-      : step === 7 && ['initial-step7-item-repair',
-        'initial-step7-contract-only'].includes(receipt.basis)))
-    || (step === 5 && receipt.basis !== undefined
-      && (!step5Bootstrap || step5Bootstrap.basis !== receipt.basis
-        || step5Bootstrap.result_file !== receipt.author_result))
-    || (['initial-step5-current-definition-manifest-review',
-      'initial-step5-current-ball-lemma-manifest-review'].includes(receipt.basis)
+    || (receipt.basis !== undefined && !(step === 3
+      ? ['initial-step3-contract-only', 'initial-step3-item-repair',
+        'initial-step3-source-metadata-repair', 'initial-step3-dependency-repair',
+        'initial-step3-current-definition-manifest-review',
+        'initial-step3-current-ball-lemma-manifest-review'].includes(receipt.basis)
+      : step === 5 && ['initial-step5-item-repair',
+        'initial-step5-contract-only'].includes(receipt.basis)))
+    || (step === 3 && receipt.basis !== undefined
+      && (!step3Bootstrap || step3Bootstrap.basis !== receipt.basis
+        || step3Bootstrap.result_file !== receipt.author_result))
+    || (['initial-step3-current-definition-manifest-review',
+      'initial-step3-current-ball-lemma-manifest-review'].includes(receipt.basis)
       && receipt.historical_delta_unknown !== true)
     || !String(receipt.reason ?? '').trim() || !Number.isFinite(Date.parse(receipt.at))
     || !evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
     || sha(evidenceText) !== receipt.evidence_sha256
-    || (step === 5 && !step5EvidenceBindsCurrentCarriers(
+    || (step === 3 && !step3EvidenceBindsCurrentCarriers(
       evidenceText, run, id, hashes))
     || CARRIER_KEYS.some(key => receipt.carriers?.[key] !== hashes[key]))
     throw Error(`${id}: invalid owner recertification receipt`);
   return { path: `research/${path.split('/').at(-1)}`, sha256: sha(bytes), basis: receipt.basis };
 }
 
-// A carried Step-5 item can be repaired by a Step-7 adjudicator before the
-// Step-7 certification gate first runs. If a shared batch contract is then
-// repaired outside that dispatch, there is no Step-7 receipt to recertify.
-// Admit an initial owner attestation when the item itself has a genuine Step-7
+// A carried Step-3 item can be repaired by a Step-5 adjudicator before the
+// Step-5 certification gate first runs. If a shared batch contract is then
+// repaired outside that dispatch, there is no Step-5 receipt to recertify.
+// Admit an initial owner attestation when the item itself has a genuine Step-5
 // content delta in a successful author window. A separate contract-only branch
 // covers a carried item whose item and manifest are byte-identical to the
-// Step-7 baseline, but whose exact contract entry changed after adjudication.
+// Step-5 baseline, but whose exact contract entry changed after adjudication.
 // Its owner receipt, rather than a fictional item write, binds that repair.
-function bootstrapStep7Author(root, run, id, row, hashes) {
-  if (!provenanceRows(root, run, 5).some(prior => prior.id === id)) return null;
-  const baseline = stageBaseline(root, run, 7);
+function bootstrapStep5Author(root, run, id, row, hashes) {
+  if (!provenanceRows(root, run, 3).some(prior => prior.id === id)) return null;
+  const baseline = stageBaseline(root, run, 5);
   const listed = baseline.items.some(value => value.id === id
     && value.page === row.page && String(value.batch) === row.batch);
   const before = baseline.item_carriers?.[id];
@@ -204,7 +204,7 @@ function bootstrapStep7Author(root, run, id, row, hashes) {
   const changedAt = itemChanged
     ? statSync(join(root, 'items', `${safe(id, 'item ID')}.md`)).mtimeMs : null;
   const baselineAt = Date.parse(baseline.at);
-  return successfulAuthorResults(root, run, 7).filter(author => {
+  return successfulAuthorResults(root, run, 5).filter(author => {
     const started = Date.parse(author.started_at), ended = Date.parse(author.ended_at);
     const covers = author.covers.map(String);
     return Number.isFinite(started) && Number.isFinite(ended) && started <= ended
@@ -213,25 +213,25 @@ function bootstrapStep7Author(root, run, id, row, hashes) {
       && (!covers.length || covers.includes('all') || covers.includes(row.batch));
   }).sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at))
     .map(author => ({ ...author, basis: itemChanged
-      ? 'initial-step7-item-repair' : 'initial-step7-contract-only' })).at(-1) ?? null;
+      ? 'initial-step5-item-repair' : 'initial-step5-contract-only' })).at(-1) ?? null;
 }
 
-// A Step-5 gate can first encounter a Step-3-created item whose current
+// A Step-3 gate can first encounter a Step-3-created item whose current
 // contract entry changed during a failed adjudicator attempt, or whose item
 // proof was repaired by the owner after adjudication. Keep the original Step-3
-// provenance. A successful Step-5 result supplies stage/batch context; the
+// provenance. A successful Step-3 result supplies stage/batch context; the
 // hash-bound owner receipt, not that result, attests either late repair.
-const step5BootstrapContext = new Map();
-function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '') {
+const step3BootstrapContext = new Map();
+function bootstrapStep3Author(root, run, id, row, hashes, evidenceText = '') {
   const key = `${root}\0${run}`;
-  if (!step5BootstrapContext.has(key)) {
-    step5BootstrapContext.set(key, {
-      origins: new Set(provenanceRows(root, run, 3).map(prior => prior.id)),
-      baseline: stageBaseline(root, run, 5),
-      authors: successfulAuthorResults(root, run, 5),
+  if (!step3BootstrapContext.has(key)) {
+    step3BootstrapContext.set(key, {
+      origins: new Set(provenanceRows(root, run, LEGACY_AUTHOR_STEP).map(prior => prior.id)),
+      baseline: stageBaseline(root, run, 3),
+      authors: successfulAuthorResults(root, run, 3),
     });
   }
-  const context = step5BootstrapContext.get(key);
+  const context = step3BootstrapContext.get(key);
   if (!context.origins.has(id)) return null;
   const baseline = context.baseline;
   const listed = baseline.items.some(value => value.id === id
@@ -247,7 +247,7 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '') {
     && before.manifest_sha256 === hashes.manifest_sha256;
   const manifestRepair = before.judge_sha256 !== hashes.judge_sha256
     && before.manifest_sha256 !== hashes.manifest_sha256
-    ? step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText) : null;
+    ? step3ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText) : null;
   if (!contractOnly && !itemRepair && !manifestRepair) return null;
   const baselineAt = Date.parse(baseline.at);
   const eligible = context.authors.filter(author => {
@@ -257,11 +257,11 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '') {
       && Number.isFinite(baselineAt) && started >= baselineAt
       && (!covers.length || covers.includes('all') || covers.includes(row.batch));
   }).sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at));
-  // A later successful Step-5 dispatch may cover the same batch without
+  // A later successful Step-3 dispatch may cover the same batch without
   // authoring this already reviewed carrier. Keep a current, hash-bound owner
   // receipt attached to its original eligible dispatch instead of silently
   // rebinding its authorship to that later dispatch.
-  const receiptPath = ownerRecertificationPath(root, run, 5, id, hashes);
+  const receiptPath = ownerRecertificationPath(root, run, 3, id, hashes);
   let preferred = null;
   if (existsSync(receiptPath)) {
     try { preferred = read(receiptPath).author_result; } catch { /* invalid receipt is checked below */ }
@@ -269,10 +269,10 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '') {
   const author = eligible.find(candidate => candidate.result_file === preferred)
     ?? eligible.at(-1);
   return author ? { ...author, basis: manifestRepair ?? (itemRepair
-    ? 'initial-step5-item-repair' : 'initial-step5-contract-only') } : null;
+    ? 'initial-step3-item-repair' : 'initial-step3-contract-only') } : null;
 }
 
-function step5EvidenceBindsCurrentCarriers(text, run, id, hashes) {
+function step3EvidenceBindsCurrentCarriers(text, run, id, hashes) {
   // Independent reviews report the three source carriers (raw item bytes,
   // canonical manifest entry and canonical contract entry); the normalized
   // guard/judge/subject hashes are derived deterministically from these inputs.
@@ -281,8 +281,8 @@ function step5EvidenceBindsCurrentCarriers(text, run, id, hashes) {
       .every(key => text.includes(hashes[key]));
 }
 
-function step5ManifestRepairEvidence(text) {
-  const match = text.match(/```step5-manifest-repair\s*\r?\n([\s\S]*?)\r?\n```/);
+function step3ManifestRepairEvidence(text) {
+  const match = text.match(/```step3-manifest-repair\s*\r?\n([\s\S]*?)\r?\n```/);
   if (!match) return null;
   try { return JSON.parse(match[1]); } catch { return null; }
 }
@@ -340,10 +340,10 @@ function dependencyMetadataMirrorsItem(root, id, currentEntry) {
 // explicitly owner-authorized current-definition review is a separate branch:
 // it preserves the unknown historical delta and binds the current projection,
 // actual source evidence and direct consumers without inventing a preimage.
-function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText) {
-  const evidence = step5ManifestRepairEvidence(evidenceText);
-  if (!evidence || evidence.version !== 1 || evidence.policy !== 'step5-manifest-repair-evidence-v1'
-    || evidence.run !== run || evidence.step !== 5 || evidence.id !== id
+function step3ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText) {
+  const evidence = step3ManifestRepairEvidence(evidenceText);
+  if (!evidence || evidence.version !== 1 || evidence.policy !== 'step3-manifest-repair-evidence-v1'
+    || evidence.run !== run || evidence.step !== 3 || evidence.id !== id
     || evidence.page !== row.page || String(evidence.batch) !== row.batch
     || evidence.baseline_manifest_sha256 !== before.manifest_sha256
     || evidence.current_manifest_sha256 !== hashes.manifest_sha256
@@ -405,7 +405,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
           const bytes = readFileSync(researchFile(root, link?.path), 'utf8');
           const check = JSON.parse(bytes);
           if (sha(bytes) !== link?.sha256 || check.version !== 1 || check.run !== run
-            || check.step !== 5 || check.id !== id || check.kind !== kind
+            || check.step !== 3 || check.id !== id || check.kind !== kind
             || check.exit_code !== 0 || !Number.isFinite(Date.parse(check.observed_at))
             || !Array.isArray(check.argv)
             || ['item_file_sha256', 'manifest_sha256', 'contract_sha256']
@@ -421,12 +421,12 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         } catch { return null; }
       }
     }
-    return definitionReview ? 'initial-step5-current-definition-manifest-review'
-      : 'initial-step5-current-ball-lemma-manifest-review';
+    return definitionReview ? 'initial-step3-current-definition-manifest-review'
+      : 'initial-step3-current-ball-lemma-manifest-review';
   }
   const oldEntry = evidence.baseline_manifest_entry, currentEntry = evidence.current_manifest_entry;
   if (!oldEntry || !currentEntry || oldEntry.id !== id || currentEntry.id !== id
-    || oldEntry.__step6_page_id !== row.page || currentEntry.__step6_page_id !== row.page
+    || oldEntry.__step4_page_id !== row.page || currentEntry.__step4_page_id !== row.page
     || hashValue(oldEntry) !== before.manifest_sha256
     || hashValue(currentEntry) !== hashes.manifest_sha256
     || !sameCanonical(currentEntry, row.manifest_entry)) return null;
@@ -445,7 +445,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       && sameExceptSourceReferenceFields(oldEntry, currentEntry)
       && sourceMetadataMirrorsItem(root, id, currentEntry)
       && evidence.review.changed_fields === 'sources.references[*].url,locator'
-      ? 'initial-step5-source-metadata-repair' : null;
+      ? 'initial-step3-source-metadata-repair' : null;
   }
   if (kind === 'dependency-addition') {
     const oldDeps = oldEntry.deps, newDeps = currentEntry.deps;
@@ -461,7 +461,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       || !sameCanonical(evidence.review.reviewed_new_dependencies, added)) return null;
     if (!added.every(dep => existsSync(join(root, 'items', `${safe(dep, 'dependency ID')}.md`)))) return null;
     if (evidence.review.changed_fields !== 'deps') return null;
-    return 'initial-step5-dependency-repair';
+    return 'initial-step3-dependency-repair';
   }
   return null;
 }
@@ -484,7 +484,7 @@ function sameExceptDependencyList(before, after, path = []) {
 /** @returns {any} */
 export function recordOwnerRecertification(root, run, step, id, evidence, reason) {
   step = Number(step);
-  if (![5, 7].includes(step)) throw Error('Owner recertification supports steps 5 and 7');
+  if (![3, 5].includes(step)) throw Error('Owner recertification supports steps 3 and 5');
   safe(run, 'run'); safe(id, 'item ID');
   if (!String(reason ?? '').trim()) throw Error(`${id}: owner recertification needs a reason`);
   const row = inventory(root, run).find(row => row.id === id);
@@ -498,16 +498,16 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
   const prior = existsSync(priorPath)
     ? provenanceRows(root, run, step).find(value => value.id === id) : null;
   const bootstrap = !prior
-    ? step === 5 ? bootstrapStep5Author(root, run, id, row, hashes, evidenceText)
-      : step === 7 ? bootstrapStep7Author(root, run, id, row, hashes) : null
+    ? step === 3 ? bootstrapStep3Author(root, run, id, row, hashes, evidenceText)
+      : step === 5 ? bootstrapStep5Author(root, run, id, row, hashes) : null
     : null;
   const creation = prior?.owner_creation ? ownerCreation(root, run, id, prior.owner_creation) : null;
   const authorResult = prior?.author_result ?? bootstrap?.result_file;
   if (!authorResult && !creation) throw Error(`${id}: no prior auditor-created certification to recertify or eligible Step ${step} owner bootstrap`);
   if (!evidenceText.includes(id))
     throw Error(`${id}: owner evidence must be a research file naming the item`);
-  if (step === 5 && !step5EvidenceBindsCurrentCarriers(evidenceText, run, id, hashes))
-    throw Error(`${id}: Step-5 owner evidence must name the active run and every exact current carrier hash`);
+  if (step === 3 && !step3EvidenceBindsCurrentCarriers(evidenceText, run, id, hashes))
+    throw Error(`${id}: Step-3 owner evidence must name the active run and every exact current carrier hash`);
   const path = ownerRecertificationPath(root, run, step, id, hashes);
   if (existsSync(path)) {
     ownerRecertification(root, run, step, id, hashes, authorResult, bootstrap?.basis ?? null);
@@ -519,8 +519,8 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     evidence_sha256: sha(readFileSync(evidencePath, 'utf8')),
     ...(creation ? { owner_creation: creation.marker } : { author_result: authorResult }),
     ...(bootstrap ? { basis: bootstrap.basis,
-      ...(['initial-step5-current-definition-manifest-review',
-        'initial-step5-current-ball-lemma-manifest-review'].includes(bootstrap.basis)
+      ...(['initial-step3-current-definition-manifest-review',
+        'initial-step3-current-ball-lemma-manifest-review'].includes(bootstrap.basis)
         ? { historical_delta_unknown: true } : {}) } : {}),
     carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) };
   writeFileSync(path, `${JSON.stringify(receipt, null, 2)}\n`);
@@ -538,7 +538,7 @@ function inventory(root, run) {
       const item = typeof rawItem === 'string' ? { id: rawItem } : rawItem;
       if (!item?.id) continue;
       items.push({ id: String(item.id), page: String(page.id), batch: String(match[1]),
-        manifest_entry: canonical({ ...item, __step6_page_id: String(page.id) }) });
+        manifest_entry: canonical({ ...item, __step4_page_id: String(page.id) }) });
     }
   }
   const ids = items.map(row => row.id);
@@ -548,7 +548,7 @@ function inventory(root, run) {
 
 export function writeAuditorCreatedBaseline(root, run, step) {
   safe(run, 'run');
-  if (![5, 7].includes(Number(step))) throw Error('Auditor baseline supports steps 5 and 7');
+  if (![3, 5].includes(Number(step))) throw Error('Auditor baseline supports steps 3 and 5');
   const path = auditorCreatedBaselinePath(root, run, step);
   const live = inventory(root, run);
   const current = {
@@ -579,16 +579,16 @@ export function writeAuditorCreatedBaseline(root, run, step) {
 export function authorResultAllowed(step, row) {
   if (row?.ok !== true || !row.ended_at || !row.started_at || !Array.isArray(row.covers)) return false;
   const label = String(row.label ?? '');
-  if (Number(step) === 3) return row.role === 'alpha-high'
+  if (Number(step) === LEGACY_AUTHOR_STEP) return row.role === 'alpha-high'
     && /^(?:step3b-[a-z]+|step3b-pair-[a-z0-9-]+)-[a-f0-9]{16}$/.test(label);
-  if (Number(step) === 5) return row.role === 'alpha'
-    && /^(?:5a-[a-z]+|5a-batch-[1-9]\d*|5b-lead|gate-batch-[1-9]\d*-(?:[a-z]+|all)|5a-gate-risk-report-[1-9]\d*-(?:[a-z]+|unowned)|5[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
-  if (Number(step) === 7) return (row.role === 'final-adjudicator'
-    && /^step7-fa-[a-z]+-round-[1-9]\d*$/.test(label))
+  if (Number(step) === 3) return row.role === 'alpha'
+    && /^(?:3a-[a-z]+|3a-batch-[1-9]\d*|3b-lead|gate-batch-[1-9]\d*-(?:[a-z]+|all)|3a-gate-risk-report-[1-9]\d*-(?:[a-z]+|unowned)|3[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
+  if (Number(step) === 5) return (row.role === 'final-adjudicator'
+    && /^step5-fa-[a-z]+-round-[1-9]\d*$/.test(label))
     || (row.role === 'alpha-adjudicate'
-      && /^(?:step7-v2-(?:initial|repeat)-r[1-9]\d*-u[a-zA-Z0-9_-]+|step7-[a-z]+|step7-guard-(?:[a-z]+|review)-round-[1-9]\d*|step7-preflight-(?:[a-z]+|review)-[1-9]\d*|repair-8-(?:[a-z]+-)?round-[1-9]\d*|cross-group-[a-z]+-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]+-)?[1-9]\d*)$/.test(label))
+      && /^(?:step5-v2-(?:initial|repeat)-r[1-9]\d*-u[a-zA-Z0-9_-]+|step5-[a-z]+|step5-guard-(?:[a-z]+|review)-round-[1-9]\d*|step5-preflight-(?:[a-z]+|review)-[1-9]\d*|repair-6-(?:[a-z]+-)?round-[1-9]\d*|cross-group-[a-z]+-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]+-)?[1-9]\d*)$/.test(label))
     || (row.role === 'alpha-repair'
-      && /^step7-v2-(?:impact-initial|impact-repeat|gate)(?:-pass-[1-9]\d*)?-r[1-9]\d*-u[123]$/.test(label));
+      && /^step5-v2-(?:impact-initial|impact-repeat|gate)(?:-pass-[1-9]\d*)?-r[1-9]\d*-u[123]$/.test(label));
   return false;
 }
 
@@ -625,7 +625,7 @@ function contractEntry(path, id) {
 
 function certificationRows(receipt, path, { steps = null } = {}) {
   if (receipt?.version !== 1 || receipt?.policy !== CERTIFICATION_POLICY
-    || ![5, 7, 8].includes(receipt?.step) || !Array.isArray(receipt?.items))
+    || ![3, 5, 6].includes(receipt?.step) || !Array.isArray(receipt?.items))
     throw Error(`Invalid auditor-created certification receipt: ${path}`);
   if (steps && !steps.includes(receipt.step)) return [];
   return receipt.items.map(row => ({ ...row, step: receipt.step, run: receipt.run }));
@@ -634,10 +634,10 @@ function certificationRows(receipt, path, { steps = null } = {}) {
 function stageBaseline(root, run, step) {
   const baseline = read(auditorCreatedBaselinePath(root, run, step));
   if (baseline?.version !== 1 || baseline.run !== run
-    || (step !== 3 && baseline.step !== step)
-    || baseline.policy !== (step === 3 ? 'auditor-authored-step3-bypass-v1' : BASELINE_POLICY)
+    || (step !== LEGACY_AUTHOR_STEP && baseline.step !== step)
+    || baseline.policy !== (step === LEGACY_AUTHOR_STEP ? 'auditor-authored-step3-bypass-v1' : BASELINE_POLICY)
     || !Array.isArray(baseline.items) || !Array.isArray(baseline.existing_item_files)
-    || (step === 3 && !Array.isArray(baseline.scopes)))
+    || (step === LEGACY_AUTHOR_STEP && !Array.isArray(baseline.scopes)))
     throw Error(`Invalid Step ${step} auditor baseline`);
   return baseline;
 }
@@ -652,7 +652,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
   const receipt = read(path), baseline = stageBaseline(root, run, step);
   if (receipt.run !== run || receipt.baseline_sha256 !== sha(JSON.stringify(baseline)))
     throw Error(`Invalid auditor-created certification identity: ${path}`);
-  const rows = step === 3
+  const rows = step === LEGACY_AUTHOR_STEP
     ? (receipt.version === 1 && receipt.policy === 'auditor-authored-step3-bypass-v2'
       && Array.isArray(receipt.items) ? receipt.items.map(row => ({ ...row, run, step })) : null)
     : certificationRows(receipt, path);
@@ -663,7 +663,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
   const authors = successfulAuthorResults(root, run, step);
   for (const row of rows) {
     const creation = row.owner_creation ? ownerCreation(root, run, row.id, row.owner_creation) : null;
-    if (creation && (step !== 5 || row.author_result !== undefined || row.origin_step !== undefined
+    if (creation && (step !== 3 || row.author_result !== undefined || row.origin_step !== undefined
       || row.evidence_class !== 'owner-spawned-creation'
       || row.page !== creation.receipt.page || String(row.batch) !== String(creation.receipt.batch)
       || (!row.owner_recertification && CARRIER_KEYS.some(key => row[key] !== creation.receipt.carriers[key]))))
@@ -673,17 +673,17 @@ function provenanceRows(root, run, step, cache = new Map()) {
     if (row.evidence_class === 'owner-spawned-creation' && !creation)
       throw Error(`${row.id}: missing owner creation provenance`);
     if (ids.has(row.id) || (!row.author_result && !creation) || !row.page || !row.batch
-      || (step === 3 && (!/^[a-f0-9]{64}$/.test(row.sha256 ?? '') || !Array.isArray(row.dependencies))))
+      || (step === LEGACY_AUTHOR_STEP && (!/^[a-f0-9]{64}$/.test(row.sha256 ?? '') || !Array.isArray(row.dependencies))))
       throw Error(`Invalid auditor-created item provenance: ${row.id}`);
     ids.add(row.id);
     // Receipts are engine-owned records of the historical write-window check;
     // their author link must still resolve to genuine dispatch evidence. Do not
     // compare current mtimes here: an unchanged V2 receipt survives file touches.
-    const v2Author = step === 7 ? step7V2Creation(root, run, row.id, row) : null;
+    const v2Author = step === 5 ? step5V2Creation(root, run, row.id, row) : null;
     if (!creation && !authors.some(author => {
       const started = Date.parse(author.started_at), ended = Date.parse(author.ended_at);
       const covers = author.covers.map(String);
-      const page = step === 3 ? read(join(root, 'research', `${run}-batch-${safe(String(row.batch))}.pages.json`))
+      const page = step === LEGACY_AUTHOR_STEP ? read(join(root, 'research', `${run}-batch-${safe(String(row.batch))}.pages.json`))
         .find(value => value.id === row.page) : null;
       const pair = page?.kind === 'A' ? page.id : page?.companion;
       const step3Covered = author.label.startsWith('step3b-pair-')
@@ -691,11 +691,11 @@ function provenanceRows(root, run, step, cache = new Map()) {
         : covers.includes(String(row.batch));
       return Number.isFinite(started) && Number.isFinite(ended) && started <= ended
         && (v2Author?.result_file === author.result_file
-        || (step === 3 ? author.label === row.author_result && author.result_file.startsWith('alpha-high-')
+        || (step === LEGACY_AUTHOR_STEP ? author.label === row.author_result && author.result_file.startsWith('alpha-high-')
           && step3Covered : author.result_file === row.author_result
           && (!covers.length || covers.includes('all') || covers.includes(String(row.batch)))));
     })) throw Error(`${row.id}: missing successful Step ${step} author-result provenance`);
-    if (step === 3 && row.owner_recertification !== undefined) {
+    if (step === LEGACY_AUTHOR_STEP && row.owner_recertification !== undefined) {
       const marker = row.owner_recertification;
       const ownerPath = join(root, 'research', `${run}-step3b-owner-${safe(row.id, 'item ID')}.json`);
       if (!/^[a-f0-9]{64}$/.test(marker?.sha256 ?? '') || !existsSync(ownerPath))
@@ -709,7 +709,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
         || !String(owner.reason ?? '').trim())
         throw Error(`${row.id}: invalid owner recertification provenance`);
     }
-    if (step !== 3 && row.owner_recertification !== undefined) {
+    if (step !== LEGACY_AUTHOR_STEP && row.owner_recertification !== undefined) {
       const marker = ownerRecertification(root, run, step, row.id, row, row.author_result);
       if (!marker || marker.path !== row.owner_recertification.path
         || marker.sha256 !== row.owner_recertification.sha256)
@@ -718,7 +718,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
         throw Error(`${row.id}: invalid owner recertification basis`);
     }
     const originStep = row.origin_step ?? step;
-    if (![3, 5, 7, 8].includes(originStep) || originStep > step)
+    if (![3, 5, 6].includes(originStep) || originStep > step)
       throw Error(`${row.id}: invalid auditor-created origin step`);
     if (!origins.has(originStep)) origins.set(originStep, stageBaseline(root, run, originStep));
     const origin = origins.get(originStep);
@@ -746,14 +746,14 @@ function carrierHashes(root, run, row) {
     contract_sha256: hashValue(contract), manifest_sha256: hashValue(row.manifest_entry) };
   return { guard_sha256: itemHashGuard(text), judge_sha256: itemHashJudge(text),
     item_file_sha256: itemFileSha, manifest_sha256: carrier.manifest_sha256,
-    contract_sha256: carrier.contract_sha256, step5_subject_sha256: hashValue(carrier) };
+    contract_sha256: carrier.contract_sha256, step3_subject_sha256: hashValue(carrier) };
 }
 
-// Rebuilt Step 7 binds new-item authorship directly into its centralized
+// Rebuilt Step 5 binds new-item authorship directly into its centralized
 // certificate. This survives later serialized edits to a shared manifest or
 // contract and avoids inferring per-item provenance from shared-file mtimes.
-function step7V2Creation(root, run, id, row, { requireCurrent = false } = {}) {
-  const path = join(root, 'research', `${run}-step7-v2`, 'certification.json');
+function step5V2Creation(root, run, id, row, { requireCurrent = false } = {}) {
+  const path = join(root, 'research', `${run}-step5-v2`, 'certification.json');
   if (!existsSync(path)) return null;
   const certificate = read(path), { sha256, ...payload } = certificate;
   if (certificate.version !== 2 || certificate.run !== run
@@ -773,29 +773,29 @@ function step7V2Creation(root, run, id, row, { requireCurrent = false } = {}) {
   const result = { ...read(resultPath), result_file: creation.author_result };
   const evidenceHash = certificate.evidence?.[resultPath]
     ?? certificate.evidence?.[`research/${run}-dispatch/${creation.author_result}`];
-  if (result.run !== run || !authorResultAllowed(7, result)
+  if (result.run !== run || !authorResultAllowed(5, result)
     || evidenceHash !== sha(readFileSync(resultPath, 'utf8'))) return null;
   return result;
 }
 
 // Step 3 checks currency with its transitive item/scope hash implementation;
 // share the same immutable-origin and surviving dispatch-link validation.
-export const loadStep3AuditorProvenance = (root, run) => provenanceRows(root, run, 3);
+export const loadStep3AuditorProvenance = (root, run) => provenanceRows(root, run, LEGACY_AUTHOR_STEP);
 
 const matchesCarriers = (certificate, row, hashes) => certificate?.page === row.page
   && String(certificate.batch) === row.batch
-  // Raw bytes and the old Step-5 composite remain historical audit evidence.
+  // Raw bytes and the old Step-3 composite remain historical audit evidence.
   // Judge add/remove is the sole normalization; other verification fields,
   // mathematical bytes, manifest entries and contracts must still match.
   && ['judge_sha256', 'manifest_sha256', 'contract_sha256']
     .every(key => certificate[key] === hashes[key])
   && typeof certificate.guard_sha256 === 'string' && /^[a-f0-9]{64}$/.test(certificate.guard_sha256)
   && /^[a-f0-9]{64}$/.test(certificate.item_file_sha256 ?? '')
-  && certificate.step5_subject_sha256 === hashValue({ item_sha256: certificate.item_file_sha256,
+  && certificate.step3_subject_sha256 === hashValue({ item_sha256: certificate.item_file_sha256,
     manifest_sha256: certificate.manifest_sha256, contract_sha256: certificate.contract_sha256 });
 
 // Every consumer uses this reader. Resolve later superseding evidence before
-// checking currency, so a valid Step-8 refresh can carry a now-stale Step-7 row.
+// checking currency, so a valid Step-5 refresh can carry a now-stale Step-5 row.
 // A stale latest row is an error, never a reason to silently schedule self-review.
 export function loadAuditorCreatedCertifications(paths, options = {}) {
   const selected = new Map();
@@ -841,7 +841,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
   const results = successfulAuthorResults(root, run, step);
   const earlier = new Map();
   const provenance = new Map();
-  for (const priorStep of [3, 5, 7].filter(value => value < step)) {
+  for (const priorStep of [3, 5].filter(value => value < step)) {
     for (const row of provenanceRows(root, run, priorStep, provenance)) earlier.set(row.id, row);
   }
   const additions = inventory(root, run).filter(row => !original.has(row.id) || earlier.has(row.id));
@@ -866,7 +866,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
     const contractPath = join(root, 'research', `${run}-batch-${batch}.proof-contracts.json`);
     if (!existsSync(itemPath)) throw Error(`${id}: auditor-created manifest item has no authored item file`);
     const hashes = carrierHashes(root, run, row);
-    const bootstrapEvidence = step === 5
+    const bootstrapEvidence = step === 3
       ? ownerEvidenceTextForCurrentCarriers(root, run, step, id, hashes) : '';
     const prior = priorById.get(id);
     const priorCurrent = prior && matchesCarriers(prior, row, hashes);
@@ -878,7 +878,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
       const before = baseline.item_carriers?.[id];
       if (!before || matchesCarriers(before, row, hashes)) continue;
     }
-    const creation = step === 5 && !carried ? ownerCreation(root, run, id) : null;
+    const creation = step === 3 && !carried ? ownerCreation(root, run, id) : null;
     if (creation) {
       if (row.page !== creation.receipt.page || row.batch !== String(creation.receipt.batch))
         throw Error(`${id}: owner creation home and batch cannot be changed by recertification`);
@@ -896,11 +896,11 @@ export function certifyAuditorCreatedItems(root, run, step) {
           ? { owner_recertification: priorCurrent ? prior.owner_recertification : owner } : {}) });
       continue;
     }
-    const v2Author = step === 7 ? step7V2Creation(root, run, id, row, { requireCurrent: true }) : null;
+    const v2Author = step === 5 ? step5V2Creation(root, run, id, row, { requireCurrent: true }) : null;
     const covering = priorCurrent || v2Author ? null : coveringResult(results, itemPath, manifestPath, contractPath, batch);
     const bootstrap = !priorCurrent && !covering && !prior && carried
-      ? step === 5 ? bootstrapStep5Author(root, run, id, row, hashes, bootstrapEvidence)
-        : step === 7 ? bootstrapStep7Author(root, run, id, row, hashes) : null
+      ? step === 3 ? bootstrapStep3Author(root, run, id, row, hashes, bootstrapEvidence)
+        : step === 5 ? bootstrapStep5Author(root, run, id, row, hashes) : null
       : null;
     const authorResult = prior?.author_result ?? bootstrap?.result_file;
     const owner = !priorCurrent && !covering && authorResult
@@ -934,8 +934,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(physicsRealpath(resolve
     const args = process.argv.slice(2), command = args[0];
     const value = flag => { const at = args.indexOf(flag); return at < 0 ? undefined : args[at + 1]; };
     const run = value('--run'), step = Number(value('--step'));
-    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-recertify --run RUN --step 5|7 --id ITEM --evidence research/FILE --reason TEXT';
-    if (!run || ![5, 7].includes(step)) throw Error(usage);
+    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 3|5; owner-create --run RUN --step 3 --id ITEM --evidence research/JSON; owner-recertify --run RUN --step 3|5 --id ITEM --evidence research/FILE --reason TEXT';
+    if (!run || ![3, 5].includes(step)) throw Error(usage);
     const result = command === 'baseline'
       ? writeAuditorCreatedBaseline(process.cwd(), run, step)
       : command === 'certify' ? certifyAuditorCreatedItems(process.cwd(), run, step)

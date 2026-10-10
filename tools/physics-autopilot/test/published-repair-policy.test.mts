@@ -42,7 +42,7 @@ function fixture(t: any) {
   const putReceipt = () => writeFileSync(join(root, receiptPath), JSON.stringify(receipt));
   writeFileSync(join(root, 'items', `${id}.md`), current);
   writeFileSync(join(root, 'research/before.md'), before);
-  writeFileSync(join(root, 'research/r-step5-published-claims.jsonl'), JSON.stringify(claim) + '\n');
+  writeFileSync(join(root, 'research/r-step3-published-claims.jsonl'), JSON.stringify(claim) + '\n');
   writeFileSync(join(root, 'research/published-consumer-supplier-ledger.md'),
     `<!-- local-published-repair:r:thm-repaired:begin -->${evidence}<!-- local-published-repair:r:thm-repaired:end -->\n`);
   putReceipt();
@@ -73,7 +73,7 @@ test('new publication cannot use an unpublished pre-carrier even with matching h
   f.receipt.before_raw_sha256 = sha(draft);
   f.receipt.pre_sha256 = itemHashGuard(draft);
   f.claim.pre_sha256 = itemHashGuard(draft);
-  writeFileSync(join(f.root, 'research/r-step5-published-claims.jsonl'), JSON.stringify(f.claim));
+  writeFileSync(join(f.root, 'research/r-step3-published-claims.jsonl'), JSON.stringify(f.claim));
   f.putReceipt();
   assert.equal(f.check().ok, false);
   assert.notEqual(f.depcheck().status, 0);
@@ -105,7 +105,7 @@ test('a claimed prior audit outside the verification block does not establish pu
   f.receipt.before_raw_sha256 = sha(before);
   f.receipt.pre_sha256 = itemHashGuard(before);
   f.claim.pre_sha256 = itemHashGuard(before);
-  writeFileSync(join(f.root, 'research/r-step5-published-claims.jsonl'), JSON.stringify(f.claim));
+  writeFileSync(join(f.root, 'research/r-step3-published-claims.jsonl'), JSON.stringify(f.claim));
   f.putReceipt();
   assert.equal(f.check().ok, false);
   assert.notEqual(f.depcheck().status, 0);
@@ -117,7 +117,7 @@ for (const defect of ['current-content', 'missing-receipt', 'wrong-owner', 'miss
     if (defect === 'current-content') writeFileSync(join(f.root, 'items', `${id}.md`), f.current.replace('Corrected.', 'Different.'));
     if (defect === 'missing-receipt') rmSync(join(f.root, receiptPath));
     if (defect === 'wrong-owner') { f.receipt.group = 'other'; f.putReceipt(); }
-    if (defect === 'missing-claim') rmSync(join(f.root, 'research/r-step5-published-claims.jsonl'));
+    if (defect === 'missing-claim') rmSync(join(f.root, 'research/r-step3-published-claims.jsonl'));
     if (defect === 'before-content') writeFileSync(join(f.root, 'research/before.md'), f.before + 'changed');
     if (defect === 'ledger-content') {
       const path = join(f.root, 'research/published-consumer-supplier-ledger.md');

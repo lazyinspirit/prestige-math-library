@@ -14,10 +14,10 @@ test('only structured identities change; mathematical evidence and hashes surviv
     defect_ids: ['d'], evidence: 'old Step 6b proves the claim', item_sha256: '6b',
     label: 'pre-6b', group: 'a', batch: '1' };
   assert.deepEqual(migrateJson(original, 'old', 'new', { d: 'new-d' }), {
-    run: 'new', stage: '5b-cross', step5_obligation: 'gate:new-d', defect_ids: ['new-d'],
-    evidence: original.evidence, item_sha256: '6b', label: 'pre-5a', group: 'a', batch: '1',
+    run: 'new', stage: '3b-cross', step3_obligation: 'gate:new-d', defect_ids: ['new-d'],
+    evidence: original.evidence, item_sha256: '6b', label: 'pre-3a', group: 'a', batch: '1',
   });
-  assert.equal(migrateSuffix('step6-hash-17-pre-6b.json'), 'step5-hash-17-pre-5a.json');
+  assert.equal(migrateSuffix('step6-hash-17-pre-6b.json'), 'step3-hash-17-pre-3a.json');
   assert.equal(selectedInput('batch-17.cross-batch-dependencies.json'), true);
   assert.equal(selectedInput('dispatch/alpha-6b-a.result.json'), false);
   assert.equal(selectedInput('alpha-6b.task.md'), false);
@@ -32,7 +32,7 @@ function fixture(t) {
     fs.writeFileSync(path.join(root, file), typeof value === 'string' ? value : JSON.stringify(value) + '\n');
   };
   const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
-  for (const tool of ['step6-scope', 'step5-scope', 'defect-ledger', 'run-tasks', 'frontier-dependency-ledger'])
+  for (const tool of ['step6-scope', 'step3-scope', 'defect-ledger', 'run-tasks', 'frontier-dependency-ledger'])
     write(`tools/physics-support/${tool}.mjs`, '// Fixture validator, not mathematical evidence.\nprocess.exit(0);\n');
   write('research/defect-ledger.jsonl', '');
   for (const name of ['old', 'origin']) write(`.physics-autopilot/${name}/state.json`, { run: name, paused: true, dispatches: {} });
@@ -54,8 +54,8 @@ test('export and migration preserve source evidence and create no model receipt'
   for (const [mode, run] of [['export', 'old'], ['prepare', 'new'], ['verify', 'new']]) {
     const r = f.invoke(mode, run); assert.equal(r.status, 0, r.stderr);
   }
-  const scope = f.read('research/new-step5-scope-1.json');
-  assert.equal(scope.baseline_sha256, sha(fs.readFileSync(path.join(f.root, 'research/new-step5-hash-1-pre-5a.json'))));
+  const scope = f.read('research/new-step3-scope-1.json');
+  assert.equal(scope.baseline_sha256, sha(fs.readFileSync(path.join(f.root, 'research/new-step3-hash-1-pre-3a.json'))));
   assert.deepEqual(fs.readdirSync(path.join(f.root, 'research/new-dispatch')), []);
   assert.equal(f.read('research/old-step6-scope-1.json').baseline_sha256, 'before');
   assert.notEqual(f.invoke('prepare').status, 0);
@@ -73,10 +73,10 @@ test('export refuses active sources and unsuccessful original review', t => {
 test('failed preparation resumes only unchanged derived evidence before runtime exists', t => {
   const f = fixture(t);
   assert.equal(f.invoke('export', 'old').status, 0);
-  f.write('tools/physics-support/step5-scope.mjs', 'process.exit(1);');
+  f.write('tools/physics-support/step3-scope.mjs', 'process.exit(1);');
   assert.notEqual(f.invoke('prepare').status, 0);
   assert.equal(fs.existsSync(path.join(f.root, '.physics-autopilot/new')), false);
-  f.write('tools/physics-support/step5-scope.mjs', 'process.exit(0);');
+  f.write('tools/physics-support/step3-scope.mjs', 'process.exit(0);');
   const r = f.invoke('prepare', 'new', ['--resume-preparation']);
   assert.equal(r.status, 0, r.stderr);
   assert.equal(f.invoke('verify').status, 0);
@@ -84,8 +84,8 @@ test('failed preparation resumes only unchanged derived evidence before runtime 
 test('partial preparation refuses overwritten evidence', t => {
   const f = fixture(t);
   assert.equal(f.invoke('export', 'old').status, 0);
-  f.write('tools/physics-support/step5-scope.mjs', 'process.exit(1);');
+  f.write('tools/physics-support/step3-scope.mjs', 'process.exit(1);');
   assert.notEqual(f.invoke('prepare').status, 0);
-  f.write('research/new-alpha-a-5a-decisions.json', { run: 'new', decisions: ['tampered'] });
+  f.write('research/new-alpha-a-3a-decisions.json', { run: 'new', decisions: ['tampered'] });
   assert.notEqual(f.invoke('prepare', 'new', ['--resume-preparation']).status, 0);
 });

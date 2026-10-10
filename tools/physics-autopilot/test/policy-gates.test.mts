@@ -18,7 +18,7 @@ const argvOf = (g: any): string[] => (typeof g.argv === 'function' ? g.argv() : 
 test('the post-authoring stages run content-policy in item mode', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['3b-author', '5b-cross']) {
+  for (const id of ['3b-author', '3b-cross']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const full = st.gates(ctx).filter((g: any) =>
       argvOf(g).includes('tools/physics-support/content-policy.mjs') && !argvOf(g).includes('--manifest-only'));
@@ -66,7 +66,7 @@ test('author closure checks authored content before plan splicing, not scaffold 
   const ctx = { run: 'frontier-14', repo: REPO };
   const gates = mod.stages.find((s: any) => s.id === '3b-author').gates(ctx);
   assert.ok(!gates.some((g: any) => argvOf(g).includes('--manifest-only')),
-    'scaffold mint checks reject newly authored IDs before Step 4 splices them');
+    'scaffold mint checks reject newly authored IDs before Step 3 splices them');
   assert.equal(gates.filter((g: any) => g.id === 'manifest-deps').length, 1);
   const policy = gates.filter((g: any) => g.id === 'content-policy-items');
   assert.equal(policy.length, 1);

@@ -1,7 +1,7 @@
 // Evidence bundles: the exact text a reviewer needs, assembled mechanically.
 //
 // WHY THIS EXISTS. A long-lived repair lane pays for its whole history on every
-// turn: phase-2-remaining-27's two Step-7 adjudicator lanes averaged ~130k input
+// turn: phase-2-remaining-27's two Step-5 adjudicator lanes averaged ~130k input
 // tokens per call over ~2,900 calls, while the stateless, pre-bundled judge pass
 // averaged 24k for the same kind of judgment. The difference is not the reading,
 // it is who assembles the context: the judge tool builds one compact prompt per
@@ -157,7 +157,7 @@ export function buildGroupBundle({
   const ids = [...new Set([...items, ...byItem.keys()])].sort();
 
   const head = [
-    `# Step-7 evidence bundle — group ${group} (run \`${run}\`)`,
+    `# Step-5 evidence bundle — group ${group} (run \`${run}\`)`,
     '',
     'Every block below is verbatim: each item\'s own claim section, its Facts section, and the',
     'recorded quote of every cited fact. Nothing here is a summary, so the bundle is evidence',

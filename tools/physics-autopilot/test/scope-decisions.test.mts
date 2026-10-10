@@ -97,7 +97,7 @@ test('unassigned coverage batches receive fallback decisions in every default op
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test('removed Step-8 scope preparation and render modes are unavailable', () => {
+test('removed Step-6 scope preparation and render modes are unavailable', () => {
   for (const mode of ['prepare', 'delta', 'render']) {
     const result = run('/tmp', [mode, '--run', 'demo']);
     assert.equal(result.status, 2);

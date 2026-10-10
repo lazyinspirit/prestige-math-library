@@ -1,37 +1,7 @@
-# Physics Autopilot
+# Physics workflow engine
 
-An independent fork of `tools/autopilot/`. Its original byte-for-byte snapshot
-is recorded in `../physics-autopilot-baseline.json`; adaptations never change
-the mathematics engine or its supporting tools and briefs.
+Use `physics/WORKFLOW.md` for the six-step stage table, run controls, owner holds and evidence procedures.
 
-Use [../../physics/WORKFLOW.md](../../physics/WORKFLOW.md) for commands and
-[../../physics/SCHEMA.md](../../physics/SCHEMA.md) for physics content rules.
-The default workspace is `physics/`, with private helpers in
-`tools/physics-support/`, independent briefs, state, and workflow revision.
-The stage files retain their inherited `mathlib*.mts` names.
+The rebuild plan is `physics/research/workflow-rebuild-plan.md`. Step 1 performs complete initial authoring; Step 2 is the bounded Luna-max whole-batch scope/prerequisite loop. Planning generates group metadata; accepted plan synchronization is part of the Step-2 mechanical handoff. There are no separate assignment or splice stages.
 
-Every content stage includes a mandatory physics-content gate. Step-1 joins,
-`3a-scope` and the pre-author `3-baseline` validate current manifest scaffolds.
-The completed `3b-author` join and later gates require authored carriers and
-class-specific bodies. Step 2 only
-assigns batch groups through a bounded native tool and its structural assignment
-gate, without loading a model or content-review brief. Physics theorems and
-thought experiments share proof rules; postulates and reported experiments
-receive source and scope review. Mathematical suppliers are pinned read-only
-snapshots with unchanged canonical IDs. Mathematical consumers cannot use
-physical justification, and mathematics pages cannot contain physical items.
-
-`npm run typecheck` checks the fork. `npm test` runs both the inherited engine
-regressions and physics-specific tests. The original mathematical suite contains
-pre-existing failures; exact validation results are recorded in
-`../../physics/research/workflow-implementation-validation.json`.
-
-Website publishing and physics-view integration are separate work. This change
-has not dispatched authors or started a content build.
-
-The production entrypoint requires a single-use owner formatting and metadata
-recertification receipt before every drained native gate battery. See the
-[receipt protocol](../../physics/WORKFLOW.md) for the current frontier request,
-per-item evidence, writer attestations, and retry behavior. Direct executor test
-fixtures enable this boundary with `ownerGateRecertification: true`; production
-configuration cannot disable it.
+Current revision: `physics-six-step-v1-construction-scope`. Use fresh run state. The engine owns all transitions and enforces the shared 30-agent cap. See `package.json` for typechecking and focused test commands.

@@ -18,12 +18,12 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 ---
 
-# Step 1 — scaffold construction
+# Step 1 — scaffolding and complete initial authoring
 
 **Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
 
 - Read CLAUDE.md, SCHEMA.md, WORKFLOW.md, the assigned task/designs, current plan and batch evidence. If `research/<run>-owner-authoring-direction.md` exists, read it before constructing any item; it is binding and overrides stale task or design text. The plan controls other design conflicts; record the conflict.
-- Write only assigned manifests, coverage, notes, item-readiness records and consumer-batch dependency inputs. Do not edit published content, shared plans, engine state or verdicts.
+- Write assigned manifests, items, complete A/B pages, proof contracts, coverage, notes, item-readiness records and consumer-batch dependency inputs. Do not edit published content, shared plans, engine state or verdicts.
 - Build each item once in prerequisite order. Preserve unchanged ready items. Record an outcome before moving to the next item.
 - Label every scaffold manifest item with `dependency_level`. Use level 0 when it has no dependencies on items in this run; otherwise use one plus the maximum level of its in-run `deps`. Published and other out-of-run suppliers do not raise this level. Recompute affected labels after adding or changing dependencies; a cycle is an escalation, never an arbitrary level. Run `node tools/physics-support/item-dependency-levels.mjs check --run RUN` after the batch's suppliers are scaffolded.
 - Verify actual transitive proof dependencies, including implicit uses and well-definedness. Read the necessary statements and proofs; check hypotheses, direction, conventions and axiom strength. Allow no missing, circular, forward or inadequate dependency; page membership and publication status are not proof checks.
@@ -49,7 +49,13 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 ## Completion
 
-- Record `ready` only when the item has a complete proof strategy and adequate met prerequisites; otherwise record `escalated`. Include examined dependency IDs and evidence in each record.
+- Record `ready` only after the complete authored item, adequate met prerequisites, page placement and proof contract exist; otherwise record `escalated`. Include examined dependency IDs and evidence in each record.
 - Use `node tools/physics-support/step1-decisions.mjs record --run RUN --item ID --decision ready|escalated --dependencies JSON --reason TEXT`. Never use `--owner` or overwrite an escalation.
 - Run coverage, whole-run manifest dependencies/policy, plan, external-reference and source checks. Record actual results and unresolved findings in batch notes.
 - Owner/operator reconciliation and the full engine gate follow construction; neither a worker exit nor a readiness record is independent mathematical approval. Step 3 provides that review.
+
+## Complete initial authoring
+
+You own every initial item and A/B page in your batch. Write complete conditional proofs, refutations, counterexamples and verification arguments, explicit definitions, and source-backed postulates/observations according to SCHEMA.md. A proof strategy is not an authored proof. Logical validity overrides literature authority; independently check claims and actual supplier uses. Never pretend to understand unfamiliar reasoning. Preserve approved claims and empirical qualifications. Escalate significant unmet prerequisites directly to the owner, even when their proposed placement is inside your batch; do not bury them in unfinished prose. Preserve all existing source-recovery, capacity, scope and owner-held escalation procedures.
+
+Generate item-specific proof contracts from the finished arguments, including actual numbered steps, claims, inputs, exact citation excerpts, boundary cases and genuine finite checks where applicable. Register every item in its manifest, coverage, contracts and page; update dependency levels after changes. Run proof-layout on explicitly changed item paths after final edits. Maintain concise checkpoint notes and batch-owned dependency evidence. Record readiness only after writing the final carrier so its input hash is current. Handoff requires nonempty item/page carriers and the batch proof-contract file; no later step supplies missing initial authoring. Independent review follows in Step 2.

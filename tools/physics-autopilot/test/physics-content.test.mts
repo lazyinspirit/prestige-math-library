@@ -7,7 +7,7 @@ import { spawnSync } from 'node:child_process';
 import { validatePhysicsContent, PHYSICAL_PROOF_KINDS } from '../../physics-support/physics-content.mjs';
 import { importMathematics, verifyMathematicsImports } from '../../physics-support/physics-imports.mjs';
 import { physicsReviewErrors, reviewInstruction } from '../../physics-support/physics-review.mjs';
-import { statementHash } from '../../physics-support/step7-statement.mjs';
+import { statementHash } from '../../physics-support/step5-statement.mjs';
 import { interfaceText } from '../../physics-support/evidence-bundle.mjs';
 import { experimentalEvidenceGuidance } from '../../physics-support/physics-guidance.mjs';
 import { stages, workflowRevision } from '../stages/mathlib.mts';

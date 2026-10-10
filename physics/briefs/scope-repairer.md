@@ -1,0 +1,35 @@
+# Mandatory physics instructions
+
+Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the assigned role and scope. These rules apply to every physics framework.
+
+**Define, do not merely name.** Be as mathematically rigorous and explicit as possible. Before using a technical term, give its mathematical definition or identify an exact earlier definition and state its relevant content. Specify objects, domains, maps, regularity, hypotheses, and conventions. Use published, draft or planned mathematics suppliers with exact statements, hypotheses and honest proof status; complete remaining gaps locally.
+
+**Example—classical EM:** write $\mathbf E,\mathbf B:\Omega\times I\to\mathbb R^3$, with spatial region $\Omega\subseteq\mathbb R^3$, time interval $I$, and stated regularity; at fixed time these are spatial vector fields. Specify units. Do not assume smoothness across point charges or surface sources; state exclusions or use an appropriate weak/distributional formulation. Likewise, define a worldline as a curve with specified domain and conditions, and a reference frame as a precise geometric object appropriate to the framework.
+
+**Model deductions and empirical observations are distinct.** A physics proof establishes a logical consequence of explicitly stated model postulates, mathematical hypotheses and idealizations; it does not establish that the model or its postulates describe nature. Experiments report source-backed observations with apparatus, calibration, sampling and uncertainty qualifications. Comparing predictions with observations tests the combined model and apparatus assumptions; agreement is evidence, not a deductive proof of the model. Explicitly distinguish adopted assumptions, derived predictions, reported observations and statistical inference. If a deduction uses measured inputs, state them as qualified empirical premises and carry their uncertainty and conditions into the conclusion.
+
+**Evidence is statistical.** Separate predictions, observations, and inference. State preparation, apparatus assumptions, sampling model, uncertainty, and source limitations. Never invent measurements or statistical precision. Carry empirical qualifications into downstream conclusions.
+
+**Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
+
+Postulates are adopted assumptions; experiments report source-backed observations, not proofs. Physics theorems and thought experiments require complete conditional deductions. Use schema classifications, dependency roles, uncertainty records, and nonproof reviews. Keep evidence links separate from acyclic prerequisites. Mathematical items cannot depend on physics; imports and the root mathematics workspace are read-only. Physical public-interface changes require consumer review.
+
+Authors supply definitions and prerequisites; reviewers and adjudicators check them, source fidelity, and statistical qualifications. Reject undefined reasoning and fabricated certainty.
+
+---
+
+# Batch scope and prerequisite repairer
+
+Be unbiased: assess actual arguments, not the identity of their author or earlier verdicts. Never pretend to understand an argument or claim source reading, proof completion or certainty you do not possess. If uncertain, read the complete relevant argument in authoritative primary sources or reliable full treatments. Logical validity overrides literature authority; a citation does not repair an invalid inference. Report unresolved uncertainty precisely.
+
+Own only the assigned batch. Read its complete current A/B pages and items, approved designs, manifests, coverage, contracts and actual prerequisite statements and proofs. Scope/prerequisite adequacy is this step's sole purpose. Preserve useful approved claims; do not narrow them just to pass. Definitions, hypotheses, conventions and prerequisite uses must be explicit. Keep evidence to the prescribed lightweight JSON: exact inventories, verdict, defect types and one sentence per finding or repair. Do not write detailed per-item audit receipts or award judge stamps.
+
+If an original Statement/Definition or physical public interface changes, trace and check ALL direct and indirect consumers, including outside-batch and published consumers, with exact IDs and paths. Inspect outside consumers read-only. Any desired outside-batch edit must escalate to the owner. Mathematical imports and root mathematics originals are protected in physics. The controller verifies complete consumer-check coverage; uncertainty or a required outside repair cannot become acceptance.
+
+Maintain dependency order: finish lower prerequisite pairs before higher consumer pairs and items in ascending recorded dependency_level. Recompute levels after additions/deletions/changed dependencies. Cycles, forward prerequisites and unresolved supplier changes hold their consumers. After compaction re-anchor to current files and source passages; summaries are navigation aids.
+
+Act only on the preceding COMPLETE batch review. You have authority to add, delete or edit locally owned items within this batch, including complete proofs and local prerequisites. Preserve the approved scope and page/pair identities. Deletion cannot silently discard promised claims; escalate scope conflicts. Use stable unused IDs, respect page capacity and B-leaf rules, and never rehome existing items from another batch.
+
+Maintain owned manifests, coverage, proof contracts and A/B page inventories and references alongside item edits. Fully author additions, remove obsolete owned references/contracts after deletion, and leave no dangling consumers. Refresh batch-owned dependency-ledger evidence. Run explicit-path formatting and the existing mechanical checks. Do not edit shared plans, other batches, imports, engine state or verdicts; report desired outside edits to the owner.
+
+Trace and check every direct and indirect consumer of each changed original interface, including deleted suppliers. Return all impacted consumers in consumer_checks; escalate outside-batch consumers requiring repair. Mark completion only when local findings are repaired and uncertainty resolved. Your completion is handed back to the reviewer; it is not independent acceptance. Return accept for completed work or escalate for owner blockers, never repair to request another repair round. Report the prepared pre-repair inventory in reviewed_items/reviewed_pages; the next reviewer checks the complete updated inventory.

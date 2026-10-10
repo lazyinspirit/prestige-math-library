@@ -57,7 +57,7 @@ const currentItems = new Set(currentPages.flatMap(page => page.items.map(item =>
 if (run) for (const id of unknownItems(itemScope, currentItems))
   throw Error(`--items-file names item "${id}" outside current run manifests`);
 // Preserve all external planned suppliers while current manifests own their
-// actual entries, order and homes before Step 4 splices the canonical plan.
+// actual entries, order and homes before Step 3 splices the canonical plan.
 const planned = (spec.pages ?? []).map(page => ({ ...page, items: (page.items ?? []).filter(item => !currentItems.has(item.id)) }));
 for (const page of currentPages) {
   const prior = planned.findIndex(value => value.id === page.id);

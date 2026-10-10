@@ -1,5 +1,5 @@
 import { spawnSync } from './fixture-process.mts';
-// Step 8 must classify the active singleton judge directly. The old reporter
+// Step 6 must classify the active singleton judge directly. The old reporter
 // destructured two models, so a complete singleton verdict was silently reported
 // as incomplete after the owner changed the judge lineup.
 import { test } from 'node:test';

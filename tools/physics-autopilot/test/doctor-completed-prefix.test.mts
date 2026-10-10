@@ -14,7 +14,7 @@ function fixture(t: any, { pendingFails = false, completedBadFlag = false, badSp
   writeFileSync(join(repo, 'research/r-scope-ledger.json'), JSON.stringify({ pages: [] }));
   const stateDir = join(repo, 'state');
   const state: any = { version: 1, run: 'r', workflowRevision: 'fixture-v1', startedAt: '2026-01-01T00:00:00Z',
-    stage: '5a-adjudicate', stages: {
+    stage: '3a-adjudicate', stages: {
       '3b-author': { enteredAt: '2026-01-01T00:00:01Z',
         gatesPassedAt: '2026-01-01T00:00:02Z', doneAt: '2026-01-01T00:00:02Z' },
     } };
@@ -24,10 +24,10 @@ function fixture(t: any, { pendingFails = false, completedBadFlag = false, badSp
     export const workflowRevision = 'fixture-v1';
     export const stages = [
       { id: '3b-author', pattern: /^author$/, units: () => { throw Error('historical mutable units'); },
-        ${badSpec ? '' : "plan: () => { throw Error('stale post-Step5 dependency_level'); },"}
+        ${badSpec ? '' : "plan: () => { throw Error('stale post-Step3 dependency_level'); },"}
         unitPrerequisites: () => [],
         gates: () => [{ id: 'old-gate', argv: ['node', 'tools/physics-support/dispatch.mjs', '${completedBadFlag ? '--missing' : '--known'}'] }] },
-      { id: '5a-adjudicate', pattern: /^adjudicate$/, units: () => ['current'],
+      { id: '3a-adjudicate', pattern: /^adjudicate$/, units: () => ['current'],
         plan: () => { ${pendingFails ? "throw Error('current plan broken');" : 'return [];'} },
         gates: () => [{ id: 'current-gate', argv: ['node', 'tools/physics-support/dispatch.mjs', '--known'] }] }
     ];
@@ -44,7 +44,7 @@ test('restart omits dynamic historical plans/units only for a durable completed 
   assert.match(result.notes.join('\n'), /durably completed prefix.*3b-author/);
   const fresh = await f.check({ stateDir: undefined });
   assert.ok(fresh.problems.some(p => /3b-author: units\(\) threw/.test(p)));
-  assert.ok(fresh.problems.some(p => /stale post-Step5 dependency_level/.test(p)));
+  assert.ok(fresh.problems.some(p => /stale post-Step3 dependency_level/.test(p)));
 });
 
 test('completed restart keeps current plans and historical static spec/gate flags checked', async t => {
@@ -65,14 +65,14 @@ test('mismatched, malformed, unpassed and nonprefix state never exempts historic
     (s: any) => { s.stages['3b-author'].doneAt = 'invalid'; },
     (s: any) => { s.stages['3b-author'].doneAt = '2025-01-01T00:00:00Z'; },
     (s: any) => { s.stages['3b-author'].skipped = true; },
-    (s: any) => { s.stages['3b-author'].routedTo = '5a-adjudicate'; },
-    (s: any) => { s.stages = { '5a-adjudicate': s.stages['3b-author'] }; },
+    (s: any) => { s.stages['3b-author'].routedTo = '3a-adjudicate'; },
+    (s: any) => { s.stages = { '3a-adjudicate': s.stages['3b-author'] }; },
   ]) {
     const f = fixture(t); mutation(f.state); f.write();
     const result = await f.check();
-    assert.ok(result.problems.some(p => /stale post-Step5 dependency_level/.test(p)));
+    assert.ok(result.problems.some(p => /stale post-Step3 dependency_level/.test(p)));
     assert.equal(result.notes.length, 0);
   }
   const malformed = fixture(t); malformed.write('broken state');
-  assert.ok((await malformed.check()).problems.some(p => /stale post-Step5 dependency_level/.test(p)));
+  assert.ok((await malformed.check()).problems.some(p => /stale post-Step3 dependency_level/.test(p)));
 });

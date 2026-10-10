@@ -334,7 +334,7 @@ for (const r of rows) {
       }
       // The other half of frontier-14's three false `checked` rows: the credited
       // step EXISTS but discharges nothing, because it only names the case.
-      // "the zero case is resolved in step 4.1: 'We treat the trivial
+      // "the zero case is resolved in step 3.1: 'We treat the trivial
       // $p$-subgroup and primes not dividing $|G|$.'" is a row whose own
       // evidence quote convicts it. Both halves are mechanical, so this stays
       // inside the tool's precision-first standard.

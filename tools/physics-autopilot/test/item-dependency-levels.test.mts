@@ -4,8 +4,8 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { dependencyLevels, orderedItems } from '../../physics-support/item-dependency-levels.mjs';
-import { prepareStep5AdjudicationOrder } from '../../physics-support/step5-adjudication-order.mjs';
-import { stages, step3PairPlan } from '../stages/mathlib.mts';
+import { prepareStep3AdjudicationOrder } from '../../physics-support/step3-adjudication-order.mjs';
+import { stages } from '../stages/mathlib.mts';
 
 const pages: any[] = [
   { id: 'a', kind: 'A', companion: 'b', order: 1, requires: [], batch: '1', items: [
@@ -35,14 +35,8 @@ test('scaffold levels follow the complete in-run item DAG and Step 3 orders assi
     '0:lem-base', '1:lem-middle', '2:thm-late', '2:thm-cross', '3:ex-final', '3:ex-cross',
   ]);
   const ctx = { repo: root, run: 'demo' };
-  const plan = step3PairPlan(ctx, 'a', 'final');
-  const task = readFileSync(join(root, plan.task), 'utf8');
-  assert.ok(task.indexOf('0. lem-base') < task.indexOf('1. lem-middle'));
-  assert.ok(task.indexOf('1. lem-middle') < task.indexOf('2. thm-late'));
-  assert.ok(task.indexOf('2. thm-late') < task.indexOf('3. ex-final'));
-  assert.ok(!task.includes('thm-cross'));
   const scaffold: any = stages.find(stage => stage.id === '1-scaffold');
-  const author: any = stages.find(stage => stage.id === '3b-author');
+  const author: any = stages.find(stage => stage.id === '2-scope-review');
   assert.ok(scaffold.gates(ctx).some(gate => gate.id === 'item-dependency-levels'));
   assert.ok(author.gates(ctx).some(gate => gate.id === 'item-dependency-levels'));
 });
@@ -56,30 +50,30 @@ test('stale labels and item cycles fail closed', () => {
   assert.match(dependencyLevels(cyclic).errors.join('\n'), /dependency cycle: .*lem-base/);
 });
 
-test('Step 5 group adjudication task orders routed items across batches', t => {
-  const root = mkdtempSync(join(tmpdir(), 'step5-level-order-'));
+test('Step 3 group adjudication task orders routed items across batches', t => {
+  const root = mkdtempSync(join(tmpdir(), 'step3-level-order-'));
   mkdirSync(join(root, 'research'), { recursive: true });
   t.after(() => rmSync(root, { recursive: true, force: true }));
   writeFileSync(join(root, 'research/demo-batch-1.pages.json'), JSON.stringify(pages.slice(0, 2)));
   writeFileSync(join(root, 'research/demo-batch-2.pages.json'), JSON.stringify(pages.slice(2)));
-  writeFileSync(join(root, 'research/demo-step5-scope-1.json'), JSON.stringify({
+  writeFileSync(join(root, 'research/demo-step3-scope-1.json'), JSON.stringify({
     run: 'demo', batch: '1', group: 'a', touched: ['thm-late', 'lem-base'],
     reader_findings: [{ id: 'lem-middle', obligation: 'reader:1:1' }],
   }));
-  writeFileSync(join(root, 'research/demo-step5-scope-2.json'), JSON.stringify({
+  writeFileSync(join(root, 'research/demo-step3-scope-2.json'), JSON.stringify({
     run: 'demo', batch: '2', group: 'a', touched: ['ex-cross'],
     refuter_findings: [{ id: 'thm-cross', obligation: 'refuter:2:1' }],
   }));
-  const path = prepareStep5AdjudicationOrder(root, 'demo', { label: 'a', covers: ['1', '2'] });
+  const path = prepareStep3AdjudicationOrder(root, 'demo', { label: 'a', covers: ['1', '2'] });
   const task = readFileSync(join(root, path), 'utf8');
   const ids = ['lem-base', 'lem-middle', 'thm-late', 'thm-cross', 'ex-cross'];
   assert.deepEqual(ids.map(id => task.indexOf(`, ${id} —`)).sort((a, b) => a - b),
     ids.map(id => task.indexOf(`, ${id} —`)));
   assert.match(task, /level 2: batch 2, thm-cross/);
-  const batchPath = prepareStep5AdjudicationOrder(root, 'demo', { label: 'batch-2', scopeGroup: 'a', covers: ['2'] });
-  assert.equal(batchPath, 'research/demo-alpha-batch-2-5a-order.task.md');
+  const batchPath = prepareStep3AdjudicationOrder(root, 'demo', { label: 'batch-2', scopeGroup: 'a', covers: ['2'] });
+  assert.equal(batchPath, 'research/demo-alpha-batch-2-3a-order.task.md');
   const batchTask = readFileSync(join(root, batchPath), 'utf8');
   assert.match(batchTask, /level 2: batch 2, thm-cross/);
   assert.doesNotMatch(batchTask, /level \d+: batch 1,/);
-  assert.throws(() => prepareStep5AdjudicationOrder(root, 'demo', { label: 'batch-2', scopeGroup: 'b', covers: ['2'] }), /scope identity mismatch/);
+  assert.throws(() => prepareStep3AdjudicationOrder(root, 'demo', { label: 'batch-2', scopeGroup: 'b', covers: ['2'] }), /scope identity mismatch/);
 });

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { existsSync as physicsExistsSync } from 'node:fs';
 const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
-// risk-report.mjs — identify structurally high-risk items for Step-5a review.
+// risk-report.mjs — identify structurally high-risk items for Step-3a review.
 //
 //   node tools/physics-support/risk-report.mjs research/level<n>-proof-contracts.json
 //   node tools/physics-support/risk-report.mjs research/level<n>-proof-contracts.json --require-reviewed
@@ -64,8 +64,8 @@ function main() {
       required: tier === 'high' || tier === 'critical',
       risk_review: review,
       routing: tier === 'high' || tier === 'critical'
-        ? ['Step-5a Alpha reads every step and cited source and records a risk_review disposition']
-        : ['ordinary Step-5a authored-content review'],
+        ? ['Step-3a Alpha reads every step and cited source and records a risk_review disposition']
+        : ['ordinary Step-3a authored-content review'],
     };
     if (finding.required && requireReviewed && !(review?.status === 'complete' && typeof review.reviewer === 'string' && review.reviewer.trim() && typeof review.notes === 'string' && review.notes.trim())) {
       errors.push({ code: 'risk-review-missing', message: `${id} is ${tier} risk and lacks a complete Alpha risk_review`, id });

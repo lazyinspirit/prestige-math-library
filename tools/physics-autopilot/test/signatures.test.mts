@@ -3,7 +3,7 @@ import { spawnSync } from './fixture-process.mts';
 // flag written from memory rather than read from the tool.
 //
 // Six invocations were checked by hand on the first real run and FOUR were
-// wrong — step7-guard, judge-sweep, merge-proof-contracts and touchlog all took
+// wrong — step5-guard, judge-sweep, merge-proof-contracts and touchlog all took
 // a `--run` or flag form that does not exist. Each would have failed hours into
 // an unattended build, in a stage nobody was watching.
 //
@@ -77,13 +77,13 @@ test('newly generated tasks cover every current stage, including the composed re
       { cwd: REPO, encoding: 'utf8' });
     assert.equal(result.status, 0, result.stdout + result.stderr);
   }
-  for (const name of ['alpha-5a-reader', 'alpha-5a-refuter', 'alpha-5a-adjudicate']) {
+  for (const name of ['alpha-3a-reader', 'alpha-3a-refuter', 'alpha-3a-adjudicate']) {
     assert.ok(existsSync(join(REPO, 'research', `${run}-${name}.task.md`)),
-      `${name} is a current Step-5a dispatch prompt`);
+      `${name} is a current Step-3a dispatch prompt`);
   }
-  assert.equal(existsSync(join(REPO, 'research', `${run}-alpha-5a-direct.task.md`)), false,
+  assert.equal(existsSync(join(REPO, 'research', `${run}-alpha-3a-direct.task.md`)), false,
     'direct group review was replaced, so its prompt must not be regenerated');
-  assert.ok(existsSync(join(REPO, 'research', `${run}-alpha-step7.task.md`)));
+  assert.ok(existsSync(join(REPO, 'research', `${run}-alpha-step5.task.md`)));
   const betaTask = readFileSync(join(REPO, 'research', `${run}-beta-1.task.md`), 'utf8');
   assert.match(betaTask, new RegExp(`research/${run}-owner-authoring-direction\\.md`));
   assert.match(betaTask, /binding and overrides stale task or design text/);

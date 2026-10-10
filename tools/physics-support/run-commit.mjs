@@ -92,7 +92,7 @@ if (receiptPath) {
   previousReceipt = existsSync(receiptPath) ? readFileSync(receiptPath) : null;
   mkdirSync(dirname(receiptPath), { recursive: true });
   writeFileSync(receiptPath, `${JSON.stringify({
-    role: 'tool', label: 'close-step8-v2', run, covers: ['all'], ok: true,
+    role: 'tool', label: 'close-step6-v2', run, covers: ['all'], ok: true,
     written_by: 'run-commit', ended_at: new Date().toISOString(),
   }, null, 2)}\n`);
   dirty = git('status', '--porcelain', '--', '.').split('\n').filter(Boolean);

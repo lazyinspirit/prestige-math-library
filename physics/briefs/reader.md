@@ -18,7 +18,7 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 ---
 
-# Step 5a reader
+# Step 3a reader
 
 **Proof formatting when editing items:** Separate numbered steps and the first
 step after introductory prose with blank lines. Keep each complete step in one
@@ -35,7 +35,7 @@ Read-only assignments report defects without editing.
 - Identify and flag every prerequisite the proof silently assumes but does not establish, and every other insufficiently justified proof step. For each, give the exact location, state what is assumed or missing and why the available hypotheses and dependencies do not supply it, and specify the proof or authoritative source needed to close the gap. Do not treat an unstated prerequisite as standard background.
 - Treat a short proof-step omission as nonfatal only when a competent reader closes it immediately. This never excuses a defective claim, definition, title, witness, computation, or citation.
 - Search authoritative sources when the mathematics is unfamiliar; record the exact statement and location that resolves the uncertainty.
-- Repair confirmed defects only in an in-flight assigned item or assigned A-page prose. Keep a proposed withdrawal present for the Step 5b lead. Do not edit another batch, `research/plan-spec.json`, B-page prose, or published content; do not judge, stamp, or self-certify.
+- Repair confirmed defects only in an in-flight assigned item or assigned A-page prose. Keep a proposed withdrawal present for the Step 3b lead. Do not edit another batch, `research/plan-spec.json`, B-page prose, or published content; do not judge, stamp, or self-certify.
 - When editing an item, make proof repairs mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats; remove repetition, filler, and padding. Add intermediate lemmas to meet unmet prerequisites when possible.
 - After a material item repair, update its affected proof contract, remove the stale `verification.judge` record, and run reflow and precheck for each changed item:
   `node tools/physics-support/tsx-run.mjs tools/physics-support/reflow.mts items/<id>.md` and

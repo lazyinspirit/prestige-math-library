@@ -3,7 +3,7 @@ import { realpathSync as physicsRealpath } from 'node:fs';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadStep3, itemHash } from './step3-decisions.mjs';
+import { loadStep3, itemHash } from './frontier-snapshot.mjs';
 
 const safe = value => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid run or item ID');

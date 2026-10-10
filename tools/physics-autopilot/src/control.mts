@@ -17,8 +17,8 @@
 //
 //   echo '{"command":"pause"}'                    > .physics-autopilot/control.json
 //   echo '{"command":"resume"}'                   > .physics-autopilot/control.json
-//   echo '{"command":"pause-at","stage":"3b-author"}' > .physics-autopilot/control.json
-//   echo '{"command":"skip","stage":"6-judge"}'   > .physics-autopilot/control.json
+//   echo '{"command":"pause-at","stage":"1-scaffold"}' > .physics-autopilot/control.json
+//   echo '{"command":"skip","stage":"4-judge"}'   > .physics-autopilot/control.json
 //   echo '{"command":"retry","unit":"3"}'         > .physics-autopilot/control.json
 //   echo '{"command":"stop"}'                     > .physics-autopilot/control.json
 //   echo '{"command":"report"}'                   > .physics-autopilot/control.json

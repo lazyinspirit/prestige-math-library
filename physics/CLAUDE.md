@@ -24,7 +24,7 @@ physical applicability conditions into every consuming physical conclusion.
 A physical item's declared scope and empirical qualifications form part of its
 public claim. Postulate formulations and experiment setup, procedure, observations,
 uncertainty, and interpretation are also public interfaces. Changes to them require
-direct-consumer review under the general statement-change rule. Verification stamps,
+direct and indirect consumer review under the general statement-change rule. Verification stamps,
 citations, and proof-only changes alone do not propagate. Mathematical items retain
 the original Statement/Definition interface rule.
 
@@ -53,3 +53,7 @@ Scaffolders and authors must supply missing mathematics locally or flag the exac
 open prerequisite. Reviewers, judges, and adjudicators must check these definitions
 and reject concealed prerequisite gaps or deductions resting on undefined terms.
 Preserve the distinction between mathematical precision and empirical certainty.
+
+## Current six-step numbering
+
+For outside Codex repair agents in this physics workflow, use medium effort for Steps 1–3 and 6 and high effort for Steps 4–5; this supersedes the older numerical mapping in ../CLAUDE.md for physics only. Engine-dispatched Step-2 scope reviewers and repairers use the owner-selected GPT-6 Luna max profile and follow their own briefs. Step 1 performs initial authoring, Step 2 reviews scope/prerequisites, Step 3 is independent review, Step 4 is batch review/judging, Step 5 adjudicates/repairs, and Step 6 closes out.

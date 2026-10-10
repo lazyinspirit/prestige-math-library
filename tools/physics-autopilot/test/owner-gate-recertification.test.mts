@@ -168,13 +168,13 @@ test('comma paths, glob matches and implicit readiness are bound; observer repor
   writeFileSync(join(f.repo, 'research/demo-owner-observer.json'), '{"updated":true}');
   assert.equal(gateReviewSnapshot(f.ctx, f.gates, f.stages).sha256, snapshot.sha256);
 });
-test('current Step 7 native certification inputs invalidate stale receipts without a detailed review', t => {
-  const f = fixture(t), dir = join(f.repo, 'research/demo-step7-v2');
+test('current Step 5 native certification inputs invalidate stale receipts without a detailed review', t => {
+  const f = fixture(t), dir = join(f.repo, 'research/demo-step5-v2');
   mkdirSync(dir);
   const evidence = join(dir, 'current-native-input.json');
   writeFileSync(evidence, '{"nativeInput":"current"}');
   writeFileSync(join(dir, 'certification.json'), JSON.stringify({ evidence: { [evidence]: sha(readFileSync(evidence, 'utf8')) } }));
-  f.gates[0].argv = ['node', 'tools/physics-support/step7-workflow.mjs', 'verify-wave', '--run', 'demo'];
+  f.gates[0].argv = ['node', 'tools/physics-support/step5-workflow.mjs', 'verify-wave', '--run', 'demo'];
   authorizeOwnerGate(f.args); f.receipt();
   writeFileSync(evidence, '{"nativeInput":"changed"}');
   assert.equal(authorizeOwnerGate(f.args).ok, false);

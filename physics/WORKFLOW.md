@@ -1,260 +1,136 @@
 # Physics build operations
 
-The physics fork uses the same planning and Steps 1–8 and deterministic transition engine as
-its mathematical baseline. It has independent supporting tools, briefs, schemas,
-content, and run state. No physics run may mutate the mathematics workspace.
+The deterministic `tools/physics-autopilot/` engine owns dispatches and transitions. The
+approved build checklist is [research/workflow-rebuild-plan.md](research/workflow-rebuild-plan.md); consult it when changing
+this workflow. Physics and its sibling engine have separate revisions,
+worker prompts, supporting tools, content and run state.
 
-From the repository root:
+## Six-step workflow
+
+| Step | Work | Agents and handoff |
+|---|---|---|
+| 1 | Prerequisite drift, scaffolding and complete initial authoring | Existing drift and scaffolding agents; authored items, A/B pages, contracts, source evidence and manifests |
+| 2 | Scope and prerequisite review/repair | One Luna-max reviewer and one Luna-max repairer per batch; complete current batch acceptance |
+| 3 | Independent review | Batch readers, refuters and adjudicators, followed by cross-batch review and closure |
+| 4 | Batch review and judging | Exactly one read-only Sol 6.1/high reviewer per batch plus the judge sweep |
+| 5 | Adjudication and repair | Existing native repair, consumer maintenance, certification and gate routes |
+| 6 | Closeout | Contracts, pathways, stamps, readiness, evidence, owner report and local closeout commit |
+
+The former Step 2 assignment stage and former Step 4 splice/integration stage
+are deleted. Necessary group metadata is generated mechanically during planning.
+Accepted manifests are transcribed into the canonical plan at Step 2's existing
+mechanical join, followed by the post-authoring snapshot. Neither operation has
+its own agent or workflow stage. The pre-authoring snapshot runs before Step 1
+construction. Initial item and page authoring happens entirely in Step 1;
+later stages retain their substantive review, repair and finalization duties.
+
+## Construction and escalation
+
+Step 1 keeps existing drift/source recovery, readiness, scope, page-capacity and
+owner-hold mechanisms and model assignments. Both drift reviewers and authors
+must escalate significant unmet prerequisites directly to the owner, giving the
+smallest missing supplier, consuming claims/steps and affected consumers.
+Scaffolding agents fully author all assigned items, pages and proof contracts;
+a proof strategy or successful process alone is not a completed carrier.
+Readiness records bind the finished carriers. Supplier batches release their
+consumers only after nonempty authored inventories and current readiness exist.
+
+Item `dependency_level` is recorded and independently checked in Step 1: zero
+without in-run logical suppliers, otherwise one plus the maximum supplier level.
+External suppliers remain context. No new level-recording system or rebatching
+is introduced. Logical dependencies must agree between authored bodies and
+manifests; aliases resolve to canonical suppliers. Definition discharges and
+nonlogical links are hash-bound context, not extra logical scheduling edges.
+
+## Whole-batch scope/prerequisite loop
+
+Each batch has two roles: `scope-reviewer` (read-only) and `scope-repairer`
+(batch-owned writes), both `gpt-6-luna-max`. Reuse their respective sessions
+where available. The reviewer examines the **entire current batch on every
+round**, including added items and A/B pages, before returning one consolidated
+report. Significant unmet prerequisites, insufficient scope, desired outside
+changes and unresolved uncertainty escalate directly to the owner.
+
+The sequence is review/accept -> repair -> review/accept -> repair -> final
+review/accept. A failed third review holds for the owner. Native history under
+`research/RUN-scope-review/batch-N/` persists the three-review/two-repair cap
+through crashes, retries and redispatches. Worker process retries never reset
+these counters. A failed process cannot advance the loop. Owner resolution never
+refunds rounds or falsifies a worker's acceptance.
+
+Repairers may add, delete or edit locally owned items in their batch, maintaining
+owned manifests, pages, coverage, contracts and dependency inputs. Preserve the
+approved claims and pair/page identities; do not delete promised scope merely
+to clear a finding. Desired outside-batch edits escalate. The dispatcher protects
+native loop history and reports; native collection rejects outside-batch edits.
+Reviewers can run concurrently on independent batches; repair write waves drain
+other batch workers and run singly so write boundaries have unambiguous ownership.
+The existing 30-agent global limit and 80-pair frontier limit remain.
+
+Use the actual logical supplier graph to finish prerequisite batches before
+consumer batches; within a batch follow the recorded item levels and pair order.
+Recompute and reconcile dependencies after edits. Blocked suppliers hold their
+consumers. Acceptance binds transitive supplier bytes; changed inputs invalidate
+it and require owner resolution before another handoff.
+
+Whenever an original Statement/Definition changes, **both roles trace and check
+all direct and indirect consumers**, using the union of old/current dependencies
+and aliases. Physical public-interface changes have the same duty in physics.
+Repair affected owned consumers and escalate desired outside changes. Every
+required consumer must appear in the repair and subsequent reviewer report.
+
+Receipts are lightweight: exact identity/inventory, round, verdict, current input
+hash, defect types and one-sentence findings/repairs. No detailed per-item audit
+narratives or self-awarded judge stamps. Both prompts require unbiased assessment,
+honest uncertainty, complete authoritative source reading when needed, and logical
+validity overriding literature authority.
+
+After the owner resolves a hold, from the content workspace run:
 
 ```bash
-node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts init
-node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts frontier --next
-node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts plan --run RUN --pairs PAGE_IDS
-node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts doctor --run RUN --state-dir physics/.physics-autopilot/RUN
-node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts start --run RUN --state-dir physics/.physics-autopilot/RUN --detach
+node tools/physics-support/batch-scope-review.mjs owner-resolve --run RUN --batch N --decision continue --reviewer OWNER --reason 'Exact resolution'
 ```
 
-`--repo` defaults to physics/. Never point it at the mathematics repository root.
-Without --state-dir, state defaults to physics/.physics-autopilot/. Keep the same
-run and state-dir throughout a run. The fork has its own workflow revision and
-physics-autopilot.config.json; mathematical receipts are not reusable.
+`continue` resumes remaining reviews without resetting counters. After three
+reviews, the owner must independently finish the whole-batch/consumer checks and
+use `--decision accept`; the exact current hash and inventory are recorded.
+Resume/retry the same controller only after this explicit resolution. An owner
+acceptance receives native completion coverage at the next controller tick.
 
-`init` imports byte-identical, read-only snapshots of published mathematical
-items and pages and records hashes and their original source root. It refuses
-to overwrite local authorship or altered imports. Run it before planning and
-only reconcile refreshed suppliers outside an active run. Gate checks compare
-both the snapshots and originals to the pinned hashes. Imports remain canonical
-mathematical IDs, not independently authored copies.
+## Independent review through closeout
 
-The Step-1 prerequisite-drift review uses the registered `gpt-6-luna-max`
-profile (GPT-6 Luna with max reasoning effort).
+Step 3 keeps the existing independent batch review, routed adjudication and
+unfinished cross-review continuation. A partial process handoff is not completed
+artifact coverage; continuations require actual completed-obligation progress.
+Source and empirical qualifications survive regeneration. Step 4's read-only
+batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
+cannot cover the inventory, and retries target only failing batches.
 
-The first physics prose-scaffold splice is recorded in
-`research/prose-scaffold-splice.json`. Its 13 `research/plan-*-track.md` design
-indexes connect canonical page IDs to the complete research prose, inventories
-and supplier ledgers. Like mathematics future tracks, planned A/B pages keep
-empty item arrays until scaffolding and authoring. The source inventories retain
-their exact claim scope and qualifications. Reproduce the mechanical splice with
-`python3 physics/research/splice-prose-scaffolds.py --write` from the repository
-root; it refuses to overwrite an independently changed plan.
+Step 5 retains the round-based adjudication/repair engine, supplier-before-consumer
+maintenance, frozen frontier guards and its complete gate battery. The additional
+`proof-contract-coverage` mechanical check still requires a contract for each
+actual proof-bearing carrier. No new substantive review gate is added. Step 6
+performs mechanical contract closure and emits `step6-` owner-report artifacts;
+its readiness and closeout commit remain evidence-bound. Publishing/pushing are
+owner actions, separate from this build.
 
-Use `frontier --next --max-pairs 10000` to list every currently eligible pair
-before the normal 80-pair run cap. Eligibility uses the engine's strictly
-greater-than-95% same-category publication rule; cross-category supplier edges
-remain declared and require ordinary Step-1 prerequisite resolution.
+## Run controls and cutover
 
-Edit research/plan-spec.json to plan physical A/B pages and reference imported
-math pages through P entries. Each local category and plan page declares its
-library. Local mathematical suppliers may be authored during a physics run,
-with purely mathematical dependencies. Ordinary supplier ordering, page
-prerequisites, B-leaf rules, and all source-retrieval gates remain in force.
+Use `node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts` with the ordinary
+`plan`, `doctor`, `start`, `status`, `pause`, `resume` and `retry` commands.
+`doctor` and generated task checks can run before authoring; they do not prepare
+or spend review rounds. No stage may install new prompts beneath a live old run.
+The new revision is `physics-six-step-v1-construction-scope`. Start a fresh run and state directory; historical
+receipts/revisions do not satisfy the rebuilt pipeline. Legacy authoring-prefix
+migration and ready-pair initial-authoring variants are not current entry routes.
+Preserve historical run evidence rather than relabeling it.
 
-Every content stage adds a mandatory physics-content gate: classification, kind prefixes,
-mathematical boundary, relation resolution, DAG, and class-specific structure.
-Pre-author joins `1-drift`, `1-drift-apply`, `1-scaffold`, `3a-scope` and
-`3-baseline` validate the plan overlaid with current manifest scaffolds, without
-requiring item or page carriers that have not yet been authored. The completed
-`3b-author` join and every later physics-content gate require actual carriers
-and class-specific body checks; they do not use scaffold plan mode.
-Step 2 is metadata bookkeeping with only its structural assignment gate. Class-specific
-item contracts and judge instructions distinguish source reviews from proofs.
-Proof layout may have zero steps only when every scoped item is explicitly
-nonproof; it cannot waive missing proofs for physics theorems or thought experiments.
+Item/page validators select current run manifests. Outside suppliers stay
+prerequisite context; do not validate or repair unrelated content. Closeout checks
+the engine's content commit. All owner-gate authorization remains one-attempt,
+current-hash-bound and formatting/metadata-only under CLAUDE.md.
 
-Step 3b item receipts use the minimal version-2 bookkeeping format described in
-../WORKFLOW.md: automatic identity/hash/time, decision and owner authority, defect
-types, and one concise repair sentence. Do not serialize confidence, examined
-dependency lists or detailed reviews. Step 3a and later stages retain their
-existing evidence requirements; legacy item receipts remain readable.
-
-Step 2 runs `node tools/physics-support/alpha-groups.mjs --run RUN --generate`
-as a native mechanical tool, with a 120-second dispatch limit. It assigns only
-existing manifest batch/category metadata: keep categories together where they
-fit and split larger categories into stable chunks, without load balancing,
-dependency-edge optimization, source reading, content edits or item review.
-Every batch occurs exactly once, at most three per group, under the capacity-derived
-group cap (currently 80 for 80 batches). Alphabetic labels continue after `z`
-as `aa`, `ab`, etc. Existing structurally valid assignments are preserved byte
-for byte. Invalid assignments are archived with their exact prior bytes under
-`research/RUN-alpha-groups-history/SHA256.json` before replacement. Group inventory
-capacity does not change the separately configured global concurrency limit.
-Conflicting category/capacity metadata fails explicitly. No model,
-physics instructions or general Alpha brief loads during this dispatch. The sole
-Step-2 gate is `alpha-groups`; historical successful Alpha result names remain
-recognized and the native engine owns all transitions.
-
-## Step 6 batch review
-
-Step 6 uses exactly one read-only `alpha-batch-read` reviewer per manifest batch,
-with GPT-6.1 Sol at high effort, alongside the judge sweep. Each owns only that
-batch's inventory and returns `research/RUN-batch-N-step7-context.json` through
-the dispatcher. The digest names the Step-7 group and exactly one batch; the gate
-checks exact page, item and cross-batch seam inventories. Another batch's digest
-or a historical group result cannot cover the batch. Gate retries target the
-failing batches. Findings outside the batch use alerts even within one group;
-Step-7 batch adjudication tasks link the corresponding digest. Step-2 group
-assignment and the shared 30-agent limit remain unchanged. See
-../WORKFLOW.md for the complete review and handoff rules.
-
-## Steps 7–8
-
-The former Step 8 scope review, change-judging/repair suffix and whole-level
-spine/audit attestations are removed. The former Step 9 is now Step 8: terminal
-ledger closure, pathway completion, stamps, readiness, evidence-bound owner
-report and the physics-only closeout commit. Current report artifacts and tools
-use `step8-` names. Historical completed run artifacts retain their original
-names and bytes; they are not inputs to a newly numbered run.
-
-The sole additional Step-7 battery gate is `proof-contract-coverage`, using
-`tools/physics-support/proof-contract-coverage.mjs`. It derives the complete
-current manifest inventory and requires a merged contract for every actual
-Proof, Refutation, Counterexample or Verification section. It shares the
-mathematics engine's predicate and completeness check. Nonproof definitions,
-postulates and empirical observation carriers require no proof contract unless
-they supply such an argument. Missing, malformed, duplicate or empty scope
-fails closed. The existing gate repair, consumer maintenance and full-battery
-retry procedures handle failures; no additional cross-batch review is added.
-
-Closeout retains full mechanical provenance, contract and current-judge coverage
-through `level-coverage --mechanical`, without the removed audit/spine receipts.
-The workflow revision is `physics-eight-step-v5-batch-review`; use a fresh run and state
-directory. Do not install renumbered stages or refresh generated prompts beneath
-an active historical run. There is no `recover-step8` review-suffix command.
-
-Use the same pause/resume/status/retry controls through the physics entrypoint.
-Outside the authorized Step-7 loop, gate failures remain owner-held. Publication
-and pushing remain owner actions. Closeout stages only workspace changes and
-refuses unrelated staged changes. See ../WORKFLOW.md for unchanged supervision,
-repair-loop, source-retrieval, and recovery semantics; replace engine/support
-paths with their physics equivalents.
-
-## Step 5b unfinished-review continuation
-
-A successful lead process is a handoff, not proof that the review is complete.
-Only `5b-cross` opts into artifact review coverage. Before closure gates, the
-engine checks current cross-edge, forward and structural verdicts and both
-scoped direct-impact windows. The inspection is read-only and cannot create
-verdicts or bootstrap a missing receipt. Completed impact dispositions require
-current consumer and supplier hashes, the consumed clauses and actual use
-locations for every relevant changed supplier; justified exclusions remain
-explicit. Invalid or stale evidence holds for the owner.
-
-Defect-ledger corrections preserve original rows and sealed decision IDs. Active
-owners must use the closed schema; only hash-bound taxonomy corrections that
-preserve every substantive field can resolve an old decision ID to its canonical
-successor. See [the taxonomy and ownership rules](../tools/physics-support/defect-ledger-compat.md).
-
-An explicit `owner_resolution_required: true` keeps an impact disposition
-pending even when its status otherwise indicates success. Independent reviews
-may continue; when only owner holds remain, the engine stops reader dispatches
-and keeps gates closed until those holds are resolved.
-
-After a successful partial handoff, the engine launches a serial native
-continuation of the existing lead task for only the missing current obligations.
-Its immutable generated task and dispatch metadata capture the completed-count
-baseline and remaining-work identity. Another continuation requires an increase
-in valid completed obligations; changed ordering or mechanical index metadata
-alone does not count. A failed or no-progress continuation holds without
-spending another mathematical repair cycle or resetting any prior budget.
-Queued and adopted writers defer inspection and gates until they drain.
-
-The read-only inspector is `node tools/step5b-review-coverage.mjs --run RUN --physics`.
-Add `--pending --limit 25` to fetch a bounded missing-work batch. Keep completed
-verdicts and their original review attribution. Each continuation writes a new
-label-bound Markdown checkpoint; never append to an earlier report whose exact
-bytes may be bound by a forward verdict. Reports should summarize counts and
-actual findings, referring to canonical verdict/impact artifacts rather than
-dumping mechanical indexes. Only complete current artifact coverage releases the
-normal closure gates; their substantive checks remain required.
-
-When rolling this guard into an already successful partial handoff, drain native
-writers and restart only the controller to load the new executor/stage code.
-Keep the same run, state, receipts and immutable baselines. Do not manually reset
-coverage, fake a result, or submit gates for the known incomplete handoff.
-
-Step 5 routes draft suppliers in other current-run batches as
-`in-run-dependency`, with the assigned consumer, unique producer ownership,
-actual dependency path and bound pre-reader or current source observation.
-Historical findings remain historical when a producer repairs its source;
-current producer and consumer adjudication is still required. The physics
-splitter, collector, stamp and final check enforce these bindings as described
-in ../WORKFLOW.md. Outside published suppliers may use a sealed
-`context_accepted` disposition for the exact proved consumer use; their
-maintenance finding remains open, and the disposition never certifies or
-repairs the imported item.
-
-Website integration and publication of the physics view are separate work.
-This workflow builds and verifies physics content without altering math behavior.
-
-Physics worker prompts require reading ../PHYSICS-CONTENT-MODEL.md, including
-the statistical-evidence and double-slit section. Stateless judges receive the
-concise physics agent instructions, including the EM and double-slit examples,
-directly in their context. Experiment contracts require a
-statistical_inference review; qualitative sources must remain qualitative.
-
-Imports also pin the mathematics library's existing B-leaf legacy policy.
-Nonlogical links in imported mathematical prose may refer back to unpublished
-mathematical context in the original library; those records are not imported as
-logical suppliers. New physics items must resolve their own references normally,
-and unpublished mathematical context cannot satisfy a physics prerequisite.
-
-Physics agents must also follow the mathematical-rigor and explicit-definitions
-section of ../PHYSICS-CONTENT-MODEL.md. Every worker brief includes this instruction;
-stateless physical judges receive its concise requirements directly. Define technical notions
-using the appropriate mathematical structures and supply missing prerequisites
-before accepting their consumers.
-
-Physics role briefs, task templates, judge conventions, and output schemas mirror
-the current mathematics engine prompts. Role duties are inline, with physics
-content requirements prepended and tool paths routed to the private physics tools.
-Run `node tools/physics-support/sync-agent-prompts.mjs` from the repository root
-after mathematics prompt changes; add `--check` to verify alignment.
-
-`frontier --next` selects up to 80 pairs by default and `plan` enforces the same
-cap. `physics-autopilot.config.json` limits concurrent workers across all stages
-to 30 through `concurrency` and `globalConcurrency`. Run-labelled dispatches
-and nested judge-sweep calls additionally share the actual-agent budget with
-batch reviewers, retaining their existing role/model caps and returning capacity
-when readers finish. Old workers must drain before a new budget rollout.
-
-Run-specific `research/RUN-owner-authoring-direction.md` is binding on drift,
-scaffolding, review, and authoring workers. Create it before planning or run
-`refresh-tasks --run RUN --force` before dispatch so every generated stage task
-names it; preserve the approved pair scope and exact supplier obligations.
-
-Item and page gates select only the current run's manifests through the private
-`frontier-item-gate.mjs` wrapper. Suppliers remain graph context; unrelated
-imported mathematics is not a formatting, audit, or repair subject. Plan gates
-also overlay current manifests before the Step-4 splice. Missing, malformed,
-duplicate, empty, or unknown selections fail closed. During planning only,
-nonempty page manifests may have empty item arrays; item gates require populated
-inventories and resolve their subjects against authored carriers. Scaffold
-content policy checks dependency structure before item carriers exist. The scoped
-external-item gate uses strict manifest mode at Step 1 for recorded-unproved,
-external-reference, and fallback provenance metadata, then validates full authored
-carriers after authoring.
-
-Native physics-content gates also scope original-source drift to the current
-run. All pinned local snapshots retain their byte hashes, mathematical
-classification, and publication checks. Relevant original suppliers remain
-hash-bound through actual authored edges, current scaffold edges, definition
-discharges, used aliases, and prerequisite/home pages. Unrelated original
-updates cannot hold the run; used identity ambiguity, changed supplier homes,
-relevant raw drift, missing originals, and publication withdrawals remain fatal.
-Standalone mathematics-import verification still checks every original. This
-selection never refreshes imports or changes the pinned receipt.
-
-Original-source scope traverses logical `deps` and definition `justified_by`
-discharges. Nonlogical `forward_refs`/`external_refs` on an imported supplier do
-not extend that prerequisite closure or require unpublished original context to
-be imported. References declared by owned frontier items retain their direct
-identity, original-source, and home checks without recursively acquiring the
-referenced item's proof-supplier cone.
-
-The physics-content validator follows the same distinction: a nonlogical pointer
-on a pinned import may resolve in the original mathematics library, including
-an original alias, without creating a local item. Owned references and logical
-or definition-discharge edges cannot use that original-only context.
+## Pre-gate recertification
 
 Every production native gate join holds **before** attempting its complete
 battery, after all native and adopted writers drain. `pause-at` remains a stop
@@ -276,7 +152,7 @@ remain in force.
 
 The request records the actual current manifest frontier, dependency-ordered
 items, carrier and manifest hashes, relevant supplier/current original hashes,
-native gate input files, and the exact resolved battery. Step-7 frozen subjects
+native gate input files, and the exact resolved battery. Step-5 frozen subjects
 and current-manifest wrapper subjects retain their existing scopes; the receipt
 covers their union. Outside suppliers remain prerequisite context. Hashing proof,
 source, and certification inputs preserves currency without reviewing their
@@ -324,50 +200,16 @@ pass. Pre-author items bind their actual manifest and explicitly absent carrier;
 check their scaffold structure and metadata without inventing an authored body.
 An item gate cannot authorize an empty subject selection.
 
-Finite smoke obligations select named checks from
-`tools/physics-support/finite-smoke.mjs` through each item's proof contract
-`finite_smoke` array. Supply an exact assertion excerpt from that item's current
-carrier; unknown check names and absent excerpts fail. An empty array produces
-no computation and cannot establish native gate liveness. Select an authentic
-bounded check of an authored assertion, rather than filling a coverage quota.
-`sr-guided-ring-sagnac-worked-reunions` checks the numerical guided-ring example
-at velocity ratio 3/5 and its inertial limit: it enumerates angular coincidences
-on an exact rational grid, derives clock conversion from the Minkowski norm,
-and derives both holonomies from rest-line orthogonality. The contract may give
-`expected_return_ticks` (units pi R/(4c)) and the four `expected_*delay` /
-`expected_*holonomy` rational pairs (units pi R/c). This tests the worked model's
-arithmetic and conventions; it establishes neither the general guided-ring
-theorem nor empirical applicability. Run its focused CLI regression with
-`node --test tools/physics-support/finite-smoke-sagnac.test.mjs`.
+## Physics isolation and prompts
 
-Plan-only gates may select nonempty page manifests before item inventories exist.
-Their receipts also require `planChecks` with separate `formatting` and `metadata`
-records using the same `{ "verdict": "pass", "evidence": "..." } shape.
-Old version-1 soundness receipts, omitted or out-of-order items, failed or missing
-check records, stale hashes, and partial frontiers cannot authorize an attempt.
+The physics cwd, content and state are `physics/`; never point the physics engine
+at the mathematical repository root. Imported mathematical snapshots and original
+mathematical suppliers are read-only. Preserve classification, exact model
+postulates, empirical premises, uncertainty and statistical qualifications.
+Physics theorems and thought experiments require complete conditional deductions;
+postulates and reported experiments receive the appropriate source reviews.
 
-The owner must drain external repair writers and attest that no writer scopes
-remain. Native writers are checked independently by the engine. After validating
-the ordered receipt rows, the engine rehashes the entire selected snapshot and
-archives the consumed request and receipt under
-`STATE_DIR/owner-gate-history/ATTEMPT.json` before starting the native battery.
-Never copy checks into a new attempt without the required current pass.
-
-Logical dependency order uses `deps`. Definition discharges through
-`justified_by` remain current, hash-bound prerequisite context and may point to
-a lemma whose logical dependencies include the definition. Their context
-traversal is cycle-safe; genuine logical dependency cycles still hold the gate.
-Before authoring, a selected local supplier page's actual manifest and absent
-carrier are bound explicitly. Missing external prerequisite pages remain fatal.
-Native comma-separated and glob path arguments, implicit run-local readiness and
-certification inputs, and the current Step-7 certification's transitive evidence
-are also bound. Resolved descriptors authorize and execute the same battery,
-including its advisory remainder. Durable consumed history prevents authorization
-replay even if the controller crashes before replacing the request file.
-
-
-Step 5 regeneration retains all schema-supported citation sections, including
-Postulate and Observations, and emits one record per fact/source pair. Outside
-context seals retain explicitly superseded binding rows only for the same
-finding, with both original and corrected maintenance rows still open; the
-strict chain and hash checks are shared with the mathematics engine.
+Physics role prompts are independently owned.
+`node tools/physics-support/sync-agent-prompts.mjs --check` checks their mandatory
+physics guidance; running it without `--check` refreshes that guidance only. It
+never overwrites the rebuilt role duties with mathematics prompts.

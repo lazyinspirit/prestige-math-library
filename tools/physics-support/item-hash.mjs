@@ -10,12 +10,12 @@
 //   itemHashGuard   the whole `verification:` block excluded.
 //                   tools/physics-support/touchlog.mjs      counts repairs per item across a
 //                                           level, driving twice-touched.
-//                   tools/physics-support/step7-guard.mjs   enforces R1: a nonfatal or
+//                   tools/physics-support/step5-guard.mjs   enforces R1: a nonfatal or
 //                                           false-positive rejection closes
 //                                           WITHOUT a content edit.
 //                   tools/physics-support/spine-audit.mjs   content_sha256 on the receipt.
 //                   THIS is the form an adjudication row's `item_sha256` must
-//                   carry: step7-guard matches it against a touchlog baseline.
+//                   carry: step5-guard matches it against a touchlog baseline.
 //
 //   itemHashJudge   only the two-space-indented `judge:` sub-block excluded;
 //                   the rest of `verification:` is IN.

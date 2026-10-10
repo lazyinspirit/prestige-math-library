@@ -1155,7 +1155,7 @@ export class Executor {
         for (const [stageId, st] of Object.entries<any>(this.state.data.stages)) {
           if (st.doneAt) continue;
           const stage = this.stages.find((candidate: Stage) => candidate.id === stageId);
-          // Step 7's one paid judge recheck is a lifetime ceiling. `retry` is
+          // Step 5's one paid judge recheck is a lifetime ceiling. `retry` is
           // still useful after the owner/session resolves the terminal blocker:
           // it invalidates the battery cache and re-runs the gates, but it may
           // not quietly buy another paid context.
@@ -1235,8 +1235,8 @@ export class Executor {
       // A GATES-WAIVED STAGE NEVER CARRIES A `doneAt` STAMP. `runGroupGates`
       // reaches its stamp loop only when the group has a non-empty gate list,
       // so keying the pause on the stamp alone made `pause-at` silently never
-      // fire for stages like `5b-close`, and phase-2-remaining-27 slid straight
-      // from the end of Step 5 into the Step-6 judge fan-out. `stageStatus` is
+      // fire for stages like `3b-close`, and phase-2-remaining-27 slid straight
+      // from the end of Step 3 into the Step-4 judge fan-out. `stageStatus` is
       // the engine's own definition of finished — units covered, artifacts on
       // disk, gates passed — and answers the same question for both kinds of
       // stage.
@@ -1308,11 +1308,11 @@ export class Executor {
     // so the engine would enter the next stage and start agents on top of live
     // work from the previous one.
     //
-    // On frontier-14 that was not theoretical. `6-judge`'s sweep was still
-    // running when `7-adjudicate` dispatched its Alpha. Every step-7 repair moved
+    // On frontier-14 that was not theoretical. `4-judge`'s sweep was still
+    // running when `5-adjudicate` dispatched its Alpha. Every step-5 repair moved
     // a pair's context hash, which re-armed the sweep on the item's untouched
     // page-mates; the ledger grew from 676 rows to 773 DURING adjudication, 26 of
-    // 29 fresh rejections were on items step 7 never touched, and 8 items flipped
+    // 29 fresh rejections were on items step 5 never touched, and 8 items flipped
     // pass to reject on byte-identical text from the same lane that had just
     // passed them. The engine manufactured the noise it then had to adjudicate.
     //
@@ -1493,7 +1493,7 @@ export class Executor {
       .filter((d: any) => d.meta.stage === stage.id)
       .flatMap((d: any) => d.meta.covers.map(String)));
     // Adoption must be scoped to THIS stage. A live dispatch covering unit 7
-    // for stage 5a says nothing about whether unit 7 is covered for stage preliminary —
+    // for stage 3a says nothing about whether unit 7 is covered for stage preliminary —
     // and treating it as coverage blocked a reader re-run behind an adjudicator
     // that was already working on the same batch. Match the live label against
     // the stage's own result pattern.
@@ -1692,7 +1692,7 @@ export class Executor {
       // clock. frontier-15 ran the 6-judge battery 29 times against unchanged
       // inputs during one account outage, re-probing archive.org each pass.
       // There is deliberately no clock-only backstop. Frontier-18 spent five
-      // hours re-running the same 22-gate Step-7 battery every 20 quiet ticks;
+      // hours re-running the same 22-gate Step-5 battery every 20 quiet ticks;
       // deterministic tools over unchanged bytes cannot produce a new answer.
       // A hand edit is re-armed by `autopilot retry`, and every engine-owned
       // mutation below already bumps state or the dispatch-dir fingerprint.
@@ -1777,7 +1777,7 @@ export class Executor {
         // `fixRounds` was initialised and never read. So the only thing a
         // failing gate could ever do was hold. On frontier-14 that meant two
         // confirmed-fatal proofs became a paragraph in a markdown report
-        // instead of an authoring dispatch, and the run went to step 8 with
+        // instead of an authoring dispatch, and the run went to step 6 with
         // them open.
         //
         // The hook also could not have worked as written: it fired only when
@@ -1976,7 +1976,7 @@ export class Executor {
     return [...ids];
   }
 
-  /** `gateAttempts` key. Step 5a and 5b are separate reviews, so neither may
+  /** `gateAttempts` key. Step 3a and 3b are separate reviews, so neither may
    * spend the other's allowance for the same gate and subject. */
   private static attemptKey(stageId: string, gateId: string, item: string): string {
     return `${stageId}\u0000${gateId}\u0000${item}`;

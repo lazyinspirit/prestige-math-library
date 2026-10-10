@@ -22,7 +22,7 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 The unified ledger is `research/<run>-cross-batch-dependencies.json`.
 It covers different batches in this run, including dependencies among pairs
-being built in the same frontier. It is separate from the Step-5 verdicts and
+being built in the same frontier. It is separate from the Step-3 verdicts and
 the published-consumer ledger.
 
 Step-3 adjudicators must identify every such page prerequisite and item
@@ -55,11 +55,11 @@ writers maintain these same rows immediately when dependencies change. Read-only
 reviewers report updates to the owning writer and do not write ledger files.
 Do not broaden mathematical edit authority to satisfy bookkeeping.
 
-The Step-3b final gate requires an input for every batch and a review row for
+The Step-2 scope/prerequisite gate requires an input for every batch and a review row for
 every declared cross-batch edge. An empty input is valid only when that
 consumer batch has no such dependencies.
 
-Step-7 repair owners maintain only the rows affected by their assigned repairs.
+Step-5 repair owners maintain only the rows affected by their assigned repairs.
 Record actual consumer uses and dispositions in the owning input rows and repair
-report. This ledger does not replace Step-5 verdicts or Step-7 certification and
+report. This ledger does not replace Step-3 verdicts or Step-5 certification and
 does not introduce another cross-batch review pass.

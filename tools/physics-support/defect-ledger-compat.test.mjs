@@ -11,7 +11,7 @@ const original = {
   defect_id: 'physics-operational-objects', run: 'physics-run', at: '2026-10-09',
   class: 'accuracy', subclass: 'undefined-operational-terms', severity: 'nonfatal',
   location: 'Setup, Procedure and Uncertainty', subject: 'exp-test',
-  caught_at_stage: '5a-adjudicate', caught_by_role: 'group-alpha', disposition: 'fixed',
+  caught_at_stage: '3a-adjudicate', caught_by_role: 'group-alpha', disposition: 'fixed',
 };
 const correction = {
   ...original, defect_id: 'physics-operational-objects-taxonomy',

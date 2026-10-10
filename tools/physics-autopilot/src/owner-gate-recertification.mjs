@@ -163,6 +163,12 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   // sweep observer/status reports or authorization state into this snapshot.
   const toolNames = new Set(battery.flatMap(gate => gate.argv.filter(arg => typeof arg === 'string').map(arg => arg.split('/').at(-1))));
   const implicit = [];
+  if (toolNames.has('batch-scope-review.mjs')) {
+    const directory=join(research, `${ctx.run}-scope-review`);
+    if(existsSync(directory))for(const file of filesBelow(directory)) {
+      if(!/-session\//.test(file)&&/\.(?:json|md)$/.test(file))bind(file);
+    }
+  }
   if (toolNames.has('step1-decisions.mjs')) for (const id of scope.items) implicit.push(`${ctx.run}-step1-${id}.json`);
   if (toolNames.has('drift-review-check.mjs')) implicit.push(`${ctx.run}-scope-ledger.json`, `${ctx.run}-alpha-step1-drift.md`);
   if (toolNames.has('frontier-dependency-ledger.mjs')) for (const name of manifests) implicit.push(name.replace('.pages.json', '.cross-batch-dependencies.json'));
@@ -172,10 +178,10 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     implicit.push(`${ctx.run}-step3-auditor-certifications.json`, `${ctx.run}-step3-auditor-baseline.json`);
   }
   if (toolNames.has('pathway-closure.mjs')) implicit.push(`${ctx.run}-pathway.json`, `${ctx.run}-pathway-closure.json`);
-  if (toolNames.has('publication-ready.mjs') || toolNames.has('step8-report.mjs')) {
+  if (toolNames.has('publication-ready.mjs') || toolNames.has('step6-report.mjs')) {
     for (const suffix of ['publication-readiness.json', 'pathway-closure.json', 'judge-closure.json',
       'judge.jsonl', 'judge-adjudications.jsonl', 'touches.json', 'deferred-pairs.json', 'deferred-items.json',
-      'step8-evidence.json', 'step8-report.response.json', 'step8-report.md', 'step8-report-integrity.json'])
+      'step6-evidence.json', 'step6-report.response.json', 'step6-report.md', 'step6-report-integrity.json'])
       implicit.push(`${ctx.run}-${suffix}`);
     implicit.push('defect-ledger.jsonl');
   }
@@ -184,8 +190,8 @@ export function gateReviewSnapshot(ctx, gates, stages) {
       implicit.push(`${ctx.run}-step${step}-auditor-${kind}.json`);
   }
   const names = readdirSync(research).sort();
-  if (toolNames.has('step5-scope.mjs')) for (const name of names) {
-    if (name.startsWith(`${ctx.run}-`) && /(?:-step5-(?:hash|scope|auditor-certifications|published-claims)|-refute-\d+|-reader-findings-\d+|-alpha-.*-5a-decisions)\b/.test(name)) implicit.push(name);
+  if (toolNames.has('step3-scope.mjs')) for (const name of names) {
+    if (name.startsWith(`${ctx.run}-`) && /(?:-step3-(?:hash|scope|auditor-certifications|published-claims)|-refute-\d+|-reader-findings-\d+|-alpha-.*-3a-decisions)\b/.test(name)) implicit.push(name);
   }
   // Coverage is consumed implicitly by scaffold/item decision loaders too.
   if (toolNames.has('step1-decisions.mjs') || toolNames.has('step3-decisions.mjs'))
@@ -194,9 +200,9 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     bindNativePath(`research/${name}`);
     if (name.endsWith('.json')) bindCertificateEvidence(join(research, name), bind, ctx.repo);
   }
-  if (toolNames.has('step7-workflow.mjs')) {
-    const directory = join(research, `${ctx.run}-step7-v2`);
-    for (const name of ['frontier.json', 'baseline.json', 'step6-verdicts.json', 'certification.json']) bind(join(directory, name));
+  if (toolNames.has('step5-workflow.mjs')) {
+    const directory = join(research, `${ctx.run}-step5-v2`);
+    for (const name of ['frontier.json', 'baseline.json', 'step4-verdicts.json', 'certification.json']) bind(join(directory, name));
     // Current certification owns a hash-bound evidence graph. Follow that
     // graph rather than including every historic round or progress report.
     bindCertificateEvidence(join(directory, 'certification.json'), bind, ctx.repo);

@@ -54,3 +54,5 @@ The website separates the Math Library and Physics Library; research scaffolds
 do not become published physics pages merely by appearing in its subject index.
 The Mathematical Universe excludes physics classes/domains and their mathematical
 consumer chains at its loading boundary. The mathematics workflow remains separate.
+
+The current six-step workflow and rebuild checklist are in [WORKFLOW.md](WORKFLOW.md) and [research/workflow-rebuild-plan.md](research/workflow-rebuild-plan.md).

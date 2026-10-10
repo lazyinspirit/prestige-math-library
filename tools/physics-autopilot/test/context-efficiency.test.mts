@@ -65,7 +65,7 @@ test('every agent, including final adjudicators, compacts at 500k', () => {
   for (const role of ['beta', 'reader', 'refuter', 'alpha', 'alpha-report', 'final-adjudicator']) {
     const result = spawnSync(process.execPath, [
       'tools/physics-support/dispatch.mjs', '--role', role, '--brief', 'briefs/alpha.md',
-      '--task', 'briefs/tasks/final-adjudicator-step7.md', '--run', 'context-test',
+      '--task', 'briefs/tasks/final-adjudicator-step5.md', '--run', 'context-test',
       '--label', 'context-test', '--dry-run', '--json',
     ], { cwd: REPO, encoding: 'utf8' });
     assert.equal(result.status, 0, result.stderr);

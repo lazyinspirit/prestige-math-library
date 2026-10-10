@@ -1,5 +1,5 @@
-// Shared repair fingerprint. Step 5's gate-triggered repair wave was deleted in
-// the 5a rebuild: a failing 5a/5b gate is an owner hold, so only the stages that
+// Shared repair fingerprint. Step 3's gate-triggered repair wave was deleted in
+// the 3a rebuild: a failing 3a/3b gate is an owner hold, so only the stages that
 // still own a repair loop (7-adjudicate and legacy paths) use this.
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
@@ -16,7 +16,7 @@ export function repairFingerprint(ctx: any): string {
   if (existsSync(join(ctx.repo, 'research'))) files.push(...readdirSync(join(ctx.repo, 'research'))
     .filter((name) => name.startsWith(`${ctx.run}-`) && (
       /-batch-\d+\.(pages|proof-contracts|coverage)\.json$/.test(name)
-      || /-alpha-(?:[a-z]+|batch-[1-9]\d*)-5a-decisions\.json$/.test(name)))
+      || /-alpha-(?:[a-z]+|batch-[1-9]\d*)-3a-decisions\.json$/.test(name)))
     .map((name) => `research/${name}`));
   for (const file of files.sort()) {
     const path = file.startsWith('/') ? file : join(ctx.repo, file);

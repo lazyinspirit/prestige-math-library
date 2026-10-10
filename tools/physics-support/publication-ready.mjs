@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-// Structured Step 8 verdict. This does not publish: it proves that workflow-
+// Structured Step 6 verdict. This does not publish: it proves that workflow-
 // owned work is closed and leaves only the owner's audit/status/push decisions.
 //
 // The receipt also seals the protected repository tree. The expensive final
 // gates run against that sealed tree at 9-readiness-v2; terminal verification
 // recomputes the digest instead of rerunning the same mathematical scans. Files
-// that Step 8 creates after readiness and the context-hash acceleration cache
+// that Step 6 creates after readiness and the context-hash acceleration cache
 // that closure verification refreshes are excluded. The authoritative closure
 // receipt is hashed separately below; mathematical and workflow inputs remain
 // protected.
@@ -14,7 +14,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { REPO } from './paths.mjs';
-import { runContentHash, runScope, sha256, splitFrontmatter } from './step8-lib.mjs';
+import { runContentHash, runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : null; };
@@ -40,12 +40,12 @@ function protectedTreeReceipt() {
   const mutableAfterReadiness = new Set([
     receiptRel,
     `research/${run}-judge-context-hashes.json`,
-    `research/${run}-step8-evidence.json`,
+    `research/${run}-step6-evidence.json`,
     // Created by the final readiness gates, checked separately before commit.
     `research/${run}-proof-layout.json`,
-    `research/${run}-step8-report-integrity.json`,
-    `research/${run}-step8-report.response.json`,
-    `research/${run}-step8-report.md`,
+    `research/${run}-step6-report-integrity.json`,
+    `research/${run}-step6-report.response.json`,
+    `research/${run}-step6-report.md`,
   ]);
   const dispatchPrefix = `research/${run}-dispatch/`;
   const files = [];
@@ -132,8 +132,8 @@ if (write) {
     if (JSON.stringify(saved.input_sha256) !== JSON.stringify(expected.input_sha256)) blockers.push(`${receiptRel}: input hashes are stale`);
     if ((saved.workflow_owned_blockers ?? []).length) blockers.push(`${receiptRel}: saved verdict contains open blockers`);
   }
-  if (requireReport && !existsSync(join(root, 'research', `${run}-step8-report.md`))) {
-    blockers.push(`missing research/${run}-step8-report.md`);
+  if (requireReport && !existsSync(join(root, 'research', `${run}-step6-report.md`))) {
+    blockers.push(`missing research/${run}-step6-report.md`);
   }
 }
 

@@ -1,0 +1,37 @@
+# Mandatory physics instructions
+
+Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the assigned role and scope. These rules apply to every physics framework.
+
+**Define, do not merely name.** Be as mathematically rigorous and explicit as possible. Before using a technical term, give its mathematical definition or identify an exact earlier definition and state its relevant content. Specify objects, domains, maps, regularity, hypotheses, and conventions. Use published, draft or planned mathematics suppliers with exact statements, hypotheses and honest proof status; complete remaining gaps locally.
+
+**Example—classical EM:** write $\mathbf E,\mathbf B:\Omega\times I\to\mathbb R^3$, with spatial region $\Omega\subseteq\mathbb R^3$, time interval $I$, and stated regularity; at fixed time these are spatial vector fields. Specify units. Do not assume smoothness across point charges or surface sources; state exclusions or use an appropriate weak/distributional formulation. Likewise, define a worldline as a curve with specified domain and conditions, and a reference frame as a precise geometric object appropriate to the framework.
+
+**Model deductions and empirical observations are distinct.** A physics proof establishes a logical consequence of explicitly stated model postulates, mathematical hypotheses and idealizations; it does not establish that the model or its postulates describe nature. Experiments report source-backed observations with apparatus, calibration, sampling and uncertainty qualifications. Comparing predictions with observations tests the combined model and apparatus assumptions; agreement is evidence, not a deductive proof of the model. Explicitly distinguish adopted assumptions, derived predictions, reported observations and statistical inference. If a deduction uses measured inputs, state them as qualified empirical premises and carry their uncertainty and conditions into the conclusion.
+
+**Evidence is statistical.** Separate predictions, observations, and inference. State preparation, apparatus assumptions, sampling model, uncertainty, and source limitations. Never invent measurements or statistical precision. Carry empirical qualifications into downstream conclusions.
+
+**Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
+
+Postulates are adopted assumptions; experiments report source-backed observations, not proofs. Physics theorems and thought experiments require complete conditional deductions. Use schema classifications, dependency roles, uncertainty records, and nonproof reviews. Keep evidence links separate from acyclic prerequisites. Mathematical items cannot depend on physics; imports and the root mathematics workspace are read-only. Physical public-interface changes require consumer review.
+
+Authors supply definitions and prerequisites; reviewers and adjudicators check them, source fidelity, and statistical qualifications. Reject undefined reasoning and fabricated certainty.
+
+---
+
+# Step 3a adjudication — adjudicator G, run `<run>`
+
+- Set `G` to the suffix of your dispatch label: `3a-batch-13` means `G` is `batch-13`; a retained legacy dispatch `3a-b` means `G` is `b`. Use that suffix in every path and in the decisions file's `group` field below. The scope file's original assignment group stays unchanged.
+- Work only on your `covers:` batches. New dispatches cover exactly one batch. For each batch, read `research/<run>-step3-scope-<i>.json`, its reader report and findings, refuter report, current carriers, and every cited dependency.
+- Follow `research/<run>-alpha-G-3a-order.task.md` within your dispatched batches. Adjudicate routed items from lowest to highest in-run dependency level, complete each item's risk review before moving higher, and keep all findings for one item together. Page-only obligations retain their own scope. Route affected consumers outside your dispatched batches to Step 3b rather than editing another adjudicator's files.
+- Decide exactly the routed obligations: `touched:BATCH:ID` and `page:BATCH:ID` for a changed carrier; `reader:BATCH:K` and `refuter:BATCH:K` for the K-th finding in that batch's reader or refuter artifact. `BATCH` is the batch ID, `ID` the carrier ID, and `K` a 1-based position. An untouched, unflagged item owes no decision.
+- Apply `briefs/alpha-step3.md` for review, verdict, repair, risk, ledger, and evidence rules.
+- Compare current carriers with `research/<run>-step3-hash-<i>-pre.json` and `research/<run>-step3-hash-<i>-post.json` to decide whether reader repairs were accepted, amended, or reverted.
+- Write `research/<run>-alpha-G-3a.md` with evidence, verdicts, repairs, sources, published findings, checks, and blockers.
+- Write `research/<run>-alpha-G-3a-decisions.json` as `{version:1,run,group,decisions}`. Include one entry per owed obligation with `obligation`, `id`, `route`, `verdict`, nonempty `evidence`, and `defect_ids`. Write both files even when `decisions` is empty.
+- Set `repair_confidence: 1` on every completed repair. Each `reader` and `flagged` decision must reference exactly one closed defect-ledger row.
+- An `in-run-dependency` finding retains its original consumer-batch obligation and exact `producer_batch`, `consumer_id`, dependency path, immutable producer pre-reader fingerprint and producer carrier at routing. Open and independently review the current producer proof, contract and manifest; retain `producer_batch` and `consumer_id` in your decision. The producer is outside your edit scope. A current unresolved producer defect must be escalated for its owning batch; source file presence, owner approval of a proposed correction or a pre-reader inventory does not certify the repaired proof.
+- Distinguish the original finding from the current source. `observation_basis: "unbound"` means no exact original observed-byte binding is available: keep `historical_delta_unknown: true` and a concrete `owner_resolution` of at least 40 characters explaining the authorized historical disposition, available source evidence and missing-byte limit. Still decide the finding with the normal verdict and exact closed ledger row after independent current proof review. Never mark a true historical finding false-positive merely because the current source was repaired, and never claim that the historical counterexample refutes the corrected current bytes.
+- Keep a proposed withdrawal present for the Step 3b lead; do not delete it.
+- Before closing, run `node tools/physics-support/risk-report.mjs research/<run>-batch-<i>.proof-contracts.json` for each owned batch. Record a complete `risk_review` for every HIGH or CRITICAL item it reports, then rerun each owned contract with `--require-reviewed`.
+- If a substantial unmet prerequisite blocks sound local repair, use `verdict: "escalated"`. Evidence must name the missing result, attempted local closure, sources consulted, and required owner decision.
+- Do not judge, stamp, or self-certify. The engine stamps decision hashes and runs the gate battery after this dispatch.

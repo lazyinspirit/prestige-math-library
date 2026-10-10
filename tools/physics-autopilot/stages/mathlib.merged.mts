@@ -1,24 +1,24 @@
 // A new run imports existing reviewed work through a verified checkpoint.
 // No prior author/reviewer dispatches or historical gate timestamps are invented.
 import { statSync } from 'node:fs';
-import { holdStep5 } from './step5-hold.mts';
+import { holdStep3 } from './step3-hold.mts';
 const canonicalUrl = new URL('./mathlib.mts', import.meta.url);
-const revision = ['./mathlib.mts', './mathlib.step5.mts'].map(path => {
+const revision = ['./mathlib.mts', './mathlib.step3.mts'].map(path => {
   const stat = statSync(new URL(path, import.meta.url));
   return `${stat.mtimeMs}:${stat.size}`;
 }).join(':');
 const { default: canonical, authoredContentGates } = await import(`${canonicalUrl.href}?v=${revision}`);
 const verify = (ctx: any) => ['node', 'tools/physics-autopilot/bin/migrate-checkpoint.mjs', 'verify', '--run', ctx.run];
-const first = canonical.stages.findIndex((stage: any) => stage.id === '5a-baseline');
+const first = canonical.stages.findIndex((stage: any) => stage.id === '3a-baseline');
 if (first < 0) throw new Error('canonical post-review continuation is missing');
-const adjudicate = canonical.stages.find((stage: any) => stage.id === '5a-adjudicate')!;
+const adjudicate = canonical.stages.find((stage: any) => stage.id === '3a-adjudicate')!;
 const joinGates = (ctx: any) => [
   ...authoredContentGates(ctx).map((gate: any) => ({ ...gate, id: `import-author-${gate.id}` })),
   ...adjudicate.gates!(ctx).map((gate: any) => ({ ...gate, id: `import-review-${gate.id}` })),
 ];
 export const workflowRevision = canonical.workflowRevision;
 export const stages = [{
-    id: '5a-import',
+    id: '3a-import',
     label: 'verify owner-authorized historical review checkpoints',
     units: () => ['all'],
     pattern: /^tool-merge-verify\.result\.json$/,
@@ -28,16 +28,16 @@ export const stages = [{
     gates: (ctx: any) => [{ id: 'merge-import-integrity', argv: verify(ctx),
       liveness: { pattern: 'checkpoint-import: (\\d+) items verified', min: 1, unit: 'imported items' } }],
   }, {
-    id: '5a-import-join',
+    id: '3a-import-join',
     label: 'full frontier gates after verified import',
     units: () => ['all'],
     pattern: /^tool-import-scope\.result\.json$/,
     concurrency: 1,
     modelProfile: adjudicate.modelProfile,
     plan: (ctx: any) => [{ role: 'tool', label: 'import-scope', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', 'tools/physics-support/step5-scope.mjs', 'check', '--run', ctx.run, '--phase', 'adjudicate'] }],
+      argv: ['node', 'tools/physics-support/step3-scope.mjs', 'check', '--run', ctx.run, '--phase', 'adjudicate'] }],
     gates: joinGates,
-    onHold: holdStep5,
+    onHold: holdStep3,
   }, ...canonical.stages.slice(first)];
 export const { batches, alphaGroups } = canonical;
 export default { stages, batches, alphaGroups, workflowRevision };

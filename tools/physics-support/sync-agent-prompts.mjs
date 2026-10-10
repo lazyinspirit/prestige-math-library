@@ -1,47 +1,24 @@
 #!/usr/bin/env node
-// Keep physics worker instructions aligned with the current mathematics briefs.
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { dirname, join, relative } from 'node:path';
+// Physics owns its role prompts. Refresh mandatory physics guidance only.
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-
-const repo = fileURLToPath(new URL('../../', import.meta.url));
-const source = join(repo, 'briefs');
-const target = join(repo, 'physics/briefs');
-const check = process.argv.includes('--check');
-const model = readFileSync(join(repo, 'PHYSICS-CONTENT-MODEL.md'), 'utf8');
-const section = model.split('## Concise physics agent instructions\n')[1]?.split('\n## ')[0];
-const guidance = section?.slice(section.indexOf('Read `CLAUDE.md`')).trim();
-if (!guidance?.startsWith('Read `CLAUDE.md`')) throw Error('Missing physics agent guidance');
-const prefix = `# Mandatory physics instructions\n\n${guidance}\n\n---\n\n`;
-let count = 0;
-const mismatches = [];
-function sync(dir) {
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const input = join(dir, entry.name);
-    if (entry.isDirectory()) { sync(input); continue; }
-    const path = relative(source, input);
-    const output = join(target, path);
-    let text = readFileSync(input, 'utf8');
-    // This shared template also contains mathematics run notes. Mirror its
-    // instructions without importing historical evidence into physics prompts.
-    if (path === 'tasks/frontier-dependency-ledger.md') {
-      const start = text.indexOf('The unified ledger is ');
-      if (start < 0) throw Error('Missing dependency ledger instructions');
-      const end = text.indexOf('\n## ', start);
-      text = '# Same-frontier dependency record\n\n' + text.slice(start, end < 0 ? undefined : end).trimEnd() + '\n';
-    }
-    if (!path.startsWith('schemas/')) {
-      text = prefix + text.replace(/tools\/(autopilot\/)?/g,
-        (_, engine) => engine ? 'tools/physics-autopilot/' : 'tools/physics-support/');
-    }
-    count++;
-    if (existsSync(output) && readFileSync(output, 'utf8') === text) continue;
-    if (check) mismatches.push(path);
-    else { mkdirSync(dirname(output), { recursive: true }); writeFileSync(output, text); }
-  }
-}
-sync(source);
-if (mismatches.length) {
-  console.error(`Physics prompts differ from mathematics: ${mismatches.join(', ')}`);
-  process.exitCode = 1;
-} else console.log(`${check ? 'Verified' : 'Synchronized'} ${count} physics prompt and schema files.`);
+const repo=fileURLToPath(new URL('../../',import.meta.url));
+const model=readFileSync(join(repo,'PHYSICS-CONTENT-MODEL.md'),'utf8');
+const section=model.split('## Concise physics agent instructions\n')[1]?.split('\n## ')[0];
+const guidance=section?.slice(section.indexOf('Read `CLAUDE.md`')).trim();
+if(!guidance?.startsWith('Read `CLAUDE.md`'))throw Error('Missing physics guidance');
+const prefix=`# Mandatory physics instructions\n\n${guidance}\n\n---\n\n`;
+const check=process.argv.includes('--check');let count=0;const failures=[];
+function walk(dir){for(const entry of readdirSync(dir,{withFileTypes:true})){
+  const path=join(dir,entry.name);
+  if(entry.isDirectory()){if(entry.name!=='schemas')walk(path);continue;}
+  if(!entry.name.endsWith('.md')||entry.name==='README.md')continue;
+  const text=readFileSync(path,'utf8');if(!text.startsWith('# Mandatory physics instructions'))continue;
+  const at=text.indexOf('\n---\n');if(at<0)throw Error(`Missing guidance boundary: ${path}`);
+  const desired=prefix+text.slice(at+5).replace(/^\n+/,'');count++;
+  if(text===desired)continue;if(check)failures.push(path);else writeFileSync(path,desired);
+}}
+walk(join(repo,'physics/briefs'));
+if(failures.length){console.error(failures.join('\n'));process.exitCode=1;}
+else console.log(`${check?'Verified':'Updated'} mandatory physics guidance in ${count} independently owned prompts.`);

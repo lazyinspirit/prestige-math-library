@@ -23,7 +23,7 @@
 // WHY. LEVELS.md names the gates for each step in prose, and the orchestrator has
 // been assembling those invocations by hand every time. That is fine while a
 // human is reading the output and remembering which of nineteen tools belongs to
-// step 5; it is not fine unattended, where "I ran the gates" has to mean exactly
+// step 3; it is not fine unattended, where "I ran the gates" has to mean exactly
 // one thing and be checkable afterwards. This is that one thing.
 //
 // TWO RULES THIS FILE KEEPS.
@@ -38,7 +38,7 @@
 //    checks what the sweep produced. Keeping them apart is what lets a driver
 //    re-gate a step after a crash without re-buying its verdicts.
 //
-// A MISSING RECEIPT IS A FAILURE, NOT A SKIP. If step 6's coverage gate has no
+// A MISSING RECEIPT IS A FAILURE, NOT A SKIP. If step 4's coverage gate has no
 // judge ledger to read, that is the single most dangerous thing an unattended run
 // could shrug at, so `needs` files are checked first and their absence fails the
 // step with `missing-receipt`.
@@ -234,7 +234,7 @@ const AUDIT_STEPS = {
   // unadjudicated rejection — useful arithmetic, not a passing gate.
   A7: [],
   A8: [
-    g('step7-guard.mjs', ['--touches', TOUCHES, '--baseline', 'pre-a8', '--adjudications', ADJUDICATIONS],
+    g('step5-guard.mjs', ['--touches', TOUCHES, '--baseline', 'pre-a8', '--adjudications', ADJUDICATIONS],
       { needs: [TOUCHES, ADJUDICATIONS], why: 'R1 — A8 is fatal-only, hash-bound to the pre-edit text' }),
     g('impact-audit.mjs', ['--touches', TOUCHES, '--from', 'pre-a8'], { needs: [TOUCHES] }),
     AUDIT_COVERAGE(),
@@ -280,7 +280,7 @@ if (listOnly) {
   console.log('\n  ~ = advisory, does not fail the step');
   console.log(isAudit
     ? '  A7 additionally requires judge-sweep.mjs to have RUN; that action spends and is not a gate.'
-    : '  Step 6 additionally requires judge-sweep.mjs to have RUN; that action spends and is not a gate.');
+    : '  Step 4 additionally requires judge-sweep.mjs to have RUN; that action spends and is not a gate.');
   process.exit(0);
 }
 
@@ -372,7 +372,7 @@ for (const gate of gates) {
   // NEVER LET THE TAIL UNDERSTATE THE BLOCKER (measured five times on run `zfc`).
   // `slice(-6)` shows the last six lines, and a caller who reads that as the
   // whole failure undercounts the work: step 3's risk-report printed 6 of 60
-  // missing risk reviews, the step-5 coverage receipt printed 1 of 43
+  // missing risk reviews, the step-3 coverage receipt printed 1 of 43
   // unreconciled plan entries, and level-coverage printed 1 of 10 warnings. Each
   // time a human or an agent briefed off the summary and planned against the
   // wrong number. So the tail stays short, but it is now always accompanied by

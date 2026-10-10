@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+// Historical receipt compatibility only; never used by the seven-step workflow.
 import { realpathSync as physicsRealpath } from 'node:fs';
 // Snapshot the scaffold inventory before Step 3 authoring, then certify only
 // genuinely new items created by successful Step 3 auditor/author dispatches.

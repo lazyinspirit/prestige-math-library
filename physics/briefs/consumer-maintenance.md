@@ -37,9 +37,9 @@ assigned existing items, output path and report schema. You are one of three
 disjoint maintenance lanes. Empty lanes return honest empty decisions.
 
 Edit only assigned items outside the immutable frontier. Published frontier
-items belong to ordinary Step 7 and are not your maintenance targets. No new
+items belong to ordinary Step 5 and are not your maintenance targets. No new
 items, unrelated edits, cosmetic improvements or weaker replacement claims.
-This assignment is separate from Step-7 repair, judgment, adjudication and gates.
+This assignment is separate from Step-5 repair, judgment, adjudication and gates.
 Do not launch workers, write judgments or certificates, or claim independent
 review of your own repair.
 
@@ -53,7 +53,7 @@ hypotheses. Record actual understanding, sources read and uncertainty honestly.
 Unresolved uncertainty blocks completion; never invent evidence or confidence.
 
 Keep item ownership disjoint. For necessary shared metadata work, acquire
-`node tools/physics-support/step7-shared-write-lock.mjs acquire --owner YOUR_DISPATCH_LABEL`,
+`node tools/physics-support/step5-shared-write-lock.mjs acquire --owner YOUR_DISPATCH_LABEL`,
 reread the current file, make and check the minimum change, then promptly use
 `release`. Exit 2 means busy: continue independent work and retry before edits.
 Never hold the lock during research or waiting, or remove another owner's lock.

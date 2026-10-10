@@ -4,8 +4,8 @@ import { spawnSync } from './fixture-process.mts';
 //
 // WHY. judge-sweep expands `--pages` via plan-spec.json, spliced once at step
 // 4; level-coverage computes closure from the batch manifests. briefs/alpha.md
-// licenses 5a/5b Alphas to add or delete in-flight items. An item added to a
-// manifest after step 4 therefore either escapes the sweep entirely or
+// licenses 3a/3b Alphas to add or delete in-flight items. An item added to a
+// manifest after step 3 therefore either escapes the sweep entirely or
 // hard-stops closure at a stage with no repair hook — silently divergent
 // scopes, caught only after the sweep has spent. splice-plan --verify makes
 // the divergence a failing gate; --update is the licensed remedy.
@@ -45,7 +45,7 @@ test('--verify passes when the plan and the manifests agree', () => {
 test('--verify sees a deps-only change the id list cannot — and the splice REFRESHES it', () => {
   // frontier-15 finding 10: a deps/strategy-only edit to a manifest item read
   // "already correct" under the id-only comparison and never propagated;
-  // step 4 mirrored two repaired objects into the plan by hand.
+  // step 3 mirrored two repaired objects into the plan by hand.
   const dir = fixture(['lem-a', 'thm-b'], ['lem-a', 'thm-b']);
   const manifest = JSON.parse(readFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), 'utf8'));
   manifest[0].items[1].deps = ['lem-a'];
@@ -88,18 +88,18 @@ test('--verify flags a dep on an UNBUILT page missing from requires, and only th
 });
 
 test('--verify fails naming the page and the divergent ids', () => {
-  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-5a'], ['lem-a', 'thm-b']);
+  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-3a'], ['lem-a', 'thm-b']);
   const r = run(dir, ['--run', 'r9', '--verify']);
   assert.equal(r.status, 1, 'divergent scopes must fail, not pass');
   assert.match(r.stderr, /demo-page/);
-  assert.match(r.stderr, /lem-added-at-5a/);
+  assert.match(r.stderr, /lem-added-at-3a/);
 });
 
 test('--update applies a licensed manifest change to the plan, loudly', () => {
-  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-5a'], ['lem-a', 'thm-b']);
+  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-3a'], ['lem-a', 'thm-b']);
   const r = run(dir, ['--run', 'r9', '--batch', '1', '--update']);
   assert.equal(r.status, 0, r.stderr);
-  assert.match(r.stdout, /\+ lem-added-at-5a/);
+  assert.match(r.stdout, /\+ lem-added-at-3a/);
   const spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
   assert.equal(spec.pages[0].items.length, 3);
   const again = run(dir, ['--run', 'r9', '--verify']);
@@ -135,7 +135,7 @@ test('an empty manifest cannot reuse a plan inventory with missing item files', 
   assert.deepEqual(manifest[0].items, [], 'partial reuse must never rewrite the manifest');
 });
 
-test('Step 5 reconciliation copies an adjudicated manifest requires change exactly', () => {
+test('Step 3 reconciliation copies an adjudicated manifest requires change exactly', () => {
   const dir = fixture(['lem-a'], ['lem-a']);
   const manifestPath = join(dir, 'research', 'r9-batch-1.pages.json');
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
@@ -159,7 +159,7 @@ test('Step 5 reconciliation copies an adjudicated manifest requires change exact
   writeFileSync(manifestPath, JSON.stringify(manifest));
   assert.equal(run(dir, ['--run', 'r9', '--batch', '1', '--update', '--accept-requires']).status, 0);
   spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
-  assert.deepEqual(spec.pages[0].requires, [], 'Step 5 reconciliation also removes stale plan-only requires');
+  assert.deepEqual(spec.pages[0].requires, [], 'Step 3 reconciliation also removes stale plan-only requires');
 });
 
 test('--update rejects a duplicate introduced by the projected manifest before writing', () => {
@@ -183,15 +183,15 @@ test('--update rejects a duplicate introduced by the projected manifest before w
 });
 
 test('a changed manifest without --update stays a hard error', () => {
-  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-5a'], ['lem-a', 'thm-b']);
+  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-3a'], ['lem-a', 'thm-b']);
   const r = run(dir, ['--run', 'r9', '--batch', '1']);
-  assert.equal(r.status, 1, 'the step-4 anti-drift guard must survive the new flags');
+  assert.equal(r.status, 1, 'the step-3 anti-drift guard must survive the new flags');
 });
 
 test('every repo-wide gate point verifies the two scopes agree', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
-  for (const id of ['5b-cross', '8-readiness-v2']) {
+  for (const id of ['3b-cross', '6-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const hit = st.gates(ctx).some((g: any) => {
       const argv = typeof g.argv === 'function' ? g.argv() : g.argv;
@@ -201,9 +201,9 @@ test('every repo-wide gate point verifies the two scopes agree', async () => {
   }
 });
 
-test('4-splice is one dispatch covering every batch (P4)', async () => {
+test('3-splice is one dispatch covering every batch (P4)', async () => {
   const mod = await import('../stages/mathlib.mts');
-  const st = mod.stages.find((s: any) => s.id === '4-splice');
+  const st = mod.stages.find((s: any) => s.id === '3-splice');
   const plans = st.plan({ run: 'frontier-14', repo: REPO }, ['1', '2', '3']);
   assert.equal(plans.length, 1, 'a per-batch dispatch costs a poll tick per batch for seconds of work');
   assert.ok(plans[0].argv.includes('--all'));

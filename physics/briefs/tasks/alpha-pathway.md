@@ -18,7 +18,7 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 ---
 
-# Step 8 — pathway closure, `{{run}}`
+# Step 6 — pathway closure, `{{run}}`
 
 Read `research/{{run}}-pathway.json` and
 `research/{{run}}-pathway-closure.json`. For every pending receipt row, rewrite

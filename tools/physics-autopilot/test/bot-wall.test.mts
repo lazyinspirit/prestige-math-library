@@ -29,7 +29,7 @@ const REPO: string = process.env.AUTOPILOT_TEST_REPO ?? resolve(HERE, '..', '..'
 // Recorded shapes, from real walls.
 const WALLED: [string, string, RegExp][] = [
   ['https://link.springer.com/chapter/10.1007/978-1-4757-4721-8_3',
-    'https://link.springer.com/chapter/10.1007/978-1-4757-4721-8_3?error=cookies_not_supported&code=8b1c',
+    'https://link.springer.com/chapter/10.1007/978-1-4757-4721-8_3?error=cookies_not_supported&code=6b1c',
     /cookie-consent interstitial/],
   ['https://www.nature.com/articles/nmeth.2019',
     'https://www.nature.com/articles/nmeth.2019?cookieAbsent=1',

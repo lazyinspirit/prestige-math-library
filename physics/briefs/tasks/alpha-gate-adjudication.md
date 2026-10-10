@@ -31,4 +31,4 @@ or reading-order change is an owner blocker.
 
 Return a dispatch report with the gate id, each finding, disposition, evidence,
 edit, rerun result, and unresolved blocker. This Step-3 repair route has no
-Step-5 group or lead artifact.
+Step-3 group or lead artifact.

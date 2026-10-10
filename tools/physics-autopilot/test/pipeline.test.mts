@@ -700,31 +700,31 @@ test('a cohort that is not a function is refused', () => {
 // The shipped table: which stages overlap is an owner decision, so assert it
 // ---------------------------------------------------------------------------
 
-test('Step-5a readers through group adjudication overlap; every other stage is a barrier', async () => {
+test('Step-3a readers through group adjudication overlap; every other stage is a barrier', async () => {
   const mod = await import('../stages/mathlib.mts');
   const byPipeline = new Map<string, string[]>();
   for (const s of mod.stages as any[]) {
     if (!s.pipeline) continue;
     byPipeline.set(s.pipeline, [...(byPipeline.get(s.pipeline) ?? []), s.id]);
   }
-  assert.deepEqual([...byPipeline], [['read', ['5a-read', '5a-split', '5a-refute', '5a-collect', '5a-adjudicate']]]);
+  assert.deepEqual([...byPipeline], [['read', ['3a-read', '3a-split', '3a-refute', '3a-collect', '3a-adjudicate']]]);
 });
 
 test('the do-not-relax stages are still barriers', async () => {
-  // The snapshots, the splice, the cross-level audit, the judge sweep, step 7,
-  // step 8 and the report. `4-baseline`, `5a-baseline` and `7-baseline` exist
+  // The snapshots, the splice, the cross-level audit, the judge sweep, step 5,
+  // step 6 and the report. `3-baseline`, `3a-baseline` and `5-baseline` exist
   // BECAUSE a stage boundary is the only place their ordering can be guaranteed;
-  // `5b-cross` edits items and would stale a verdict cast beside it — 97 rows,
+  // `3b-cross` edits items and would stale a verdict cast beside it — 97 rows,
   // once. `1-scaffold` and `2-assign` are here for a different reason: see the
   // cohort test below.
   const mod = await import('../stages/mathlib.mts');
-  const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '5a-prepare', '5a-baseline',
-    '5b-cross', '5b-close', '6-judge', '7-baseline', '7-scope',
-    '7.1-adjudicate', '7.2-impact', '7.3-certify', '7.4-rejudge', '7.5-adjudicate',
-    '7.6-impact', '7.7-certify', '7.8-gate', '7.9-repair', '7.10-gate', '7-freeze',
-    '8-contract-close', '8-snapshot-v2',
-    '8-pathway-sync-v2', '8-pathway-seed-v2', '8-pathway-author-v2',
-    '8-stamps-v2', '8-readiness-v2', '8-evidence-v2', '8-owner-report-v2', '8-close-v2'];
+  const serial = ['1-scaffold', '2-assign', '3-splice', '3-baseline', '3a-prepare', '3a-baseline',
+    '3b-cross', '3b-close', '4-judge', '5-baseline', '5-scope',
+    '5.1-adjudicate', '5.2-impact', '5.3-certify', '5.4-rejudge', '5.5-adjudicate',
+    '5.6-impact', '5.7-certify', '5.8-gate', '5.9-repair', '5.10-gate', '5-freeze',
+    '6-contract-close', '6-snapshot-v2',
+    '6-pathway-sync-v2', '6-pathway-seed-v2', '6-pathway-author-v2',
+    '6-stamps-v2', '6-readiness-v2', '6-evidence-v2', '6-owner-report-v2', '6-close-v2'];
   for (const id of serial) {
     const st: any = (mod.stages as any[]).find((s) => s.id === id);
     assert.ok(st, `${id} is missing from the table`);
@@ -756,20 +756,20 @@ test('no pipeline group starts before the batch assignment it depends on', async
 });
 
 test("authoring, independent review and adjudication precede the impact snapshot", async () => {
-  // `5a-baseline` is the `--to` endpoint of the 5b blast-radius diff, so it must
+  // `3a-baseline` is the `--to` endpoint of the 3b blast-radius diff, so it must
   // photograph text that already passed the group's gates. Stage order is what
   // guarantees it: no member of a group is done until the join is green, and the
   // snapshot stage is strictly later.
   const mod: any = await import('../stages/mathlib.mts');
   const ids = mod.stages.map((s: any) => s.id).filter(id => id !== 'physics-content');
   const author = ids.indexOf('3b-author');
-  assert.equal(mod.stages[author + 1].id, '4-splice');
-  assert.equal(mod.stages[author + 2].id, '4-baseline');
-  assert.equal(mod.stages[author + 3].id, '5a-prepare');
-  assert.deepEqual(ids.slice(ids.indexOf('5a-prepare'), ids.indexOf('5a-baseline') + 1),
-    ['5a-prepare', '5a-read', '5a-split', '5a-refute', '5a-collect',
-      '5a-adjudicate', '5a-baseline']);
-  assert.equal(mod.stages[ids.indexOf('5a-adjudicate') + 1].id, '5a-baseline',
+  assert.equal(mod.stages[author + 1].id, '3-splice');
+  assert.equal(mod.stages[author + 2].id, '3-baseline');
+  assert.equal(mod.stages[author + 3].id, '3a-prepare');
+  assert.deepEqual(ids.slice(ids.indexOf('3a-prepare'), ids.indexOf('3a-baseline') + 1),
+    ['3a-prepare', '3a-read', '3a-split', '3a-refute', '3a-collect',
+      '3a-adjudicate', '3a-baseline']);
+  assert.equal(mod.stages[ids.indexOf('3a-adjudicate') + 1].id, '3a-baseline',
     'the final snapshot immediately follows gated independent adjudication');
 });
 
@@ -802,7 +802,7 @@ test('batch adjudicator cohorts remain batch-local under assigned groups', async
   writeFileSync(join(repo, 'research', 'r-alpha-groups.json'), JSON.stringify({
     groups: [{ label: 'a', covers: ['1', '4'] }, { label: 'b', covers: ['2', '3', '5'] }],
   }));
-  for (const id of ['5a-adjudicate']) {
+  for (const id of ['3a-adjudicate']) {
     const st = mod.stages.find((s: any) => s.id === id);
     assert.equal(typeof st.cohort, 'function', `${id} must declare group ownership`);
     assert.deepEqual(st.cohort(ctx, '4'), ['4'], `${id} must own only its adjudicated batch`);

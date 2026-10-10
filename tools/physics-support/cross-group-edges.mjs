@@ -1,30 +1,30 @@
 #!/usr/bin/env node
-// cross-group-edges.mjs — 5b's exact cross-batch and post-5a work list.
+// cross-group-edges.mjs — 3b's exact cross-batch and post-3a work list.
 //
-// Owner, 2026-08-25: the lead Alpha at 5b has one job — "identify dependencies
+// Owner, 2026-08-25: the lead Alpha at 3b has one job — "identify dependencies
 // across batches managed by different alpha agents, and ensure syntactically
 // and semantically correct citations", plus a decision on any forward
 // reference that reaches this point.
 //
 // IDENTIFYING THE EDGES IS NOT THAT JOB. It is a join of the validated
-// `2-assign` partition against the items' own `deps`, which makes it a
+// planning partition against the items' own `deps`, which makes it a
 // function of files on disk and therefore code (CLAUDE.md, roles rule). The
 // Alpha is left with the only part no table can do: reading the citing use,
-// post-5a item, removal, or page edit and deciding whether it is sound.
+// post-3a item, removal, or page edit and deciding whether it is sound.
 //
-// WHY THE SCOPE NARROWED. 5b used to audit three edge classes — cross-batch,
+// WHY THE SCOPE NARROWED. 3b used to audit three edge classes — cross-batch,
 // backward-into-published, and forward references. The first is the only one
 // no other reader can see: a preliminary reader holds one batch, a group Alpha holds
 // its own two or three, and neither can see an edge landing in another
 // group's batch. Backward edges into published content are already covered by
 // the preliminary reader's duty to verify EVERY dependency citation in its batch, so
-// auditing them again at 5b was a second reading of the same edge, at
+// auditing them again at 3b was a second reading of the same edge, at
 // whole-level cost.
 //
 //   list  --run R    write the work list
 //   check --run R    gate: every edge and every forward reference has a verdict
 //
-// Verdicts: research/<run>-5b-verdicts.jsonl, one JSON object per line.
+// Verdicts: research/<run>-3b-verdicts.jsonl, one JSON object per line.
 //   {"kind":"edge","from":"<id>","to":"<id>","verdict":"accurate|repaired|struck","note":"..."}
 //   {"kind":"forward","item":"<id>","target":"<id>","decision":"orientation-reviewed|lemmas-added|dropped","note":"..."}
 // An orientation-reviewed row retains its visible forward link and binds an
@@ -36,7 +36,7 @@
 // pair `carrier_run` / `carrier_id`. Ordinary item and page gate verdicts may
 // not proxy their carrier this way.
 // A mechanical false-positive gate row is clean (`defect_ids: []`); confirmed
-// gate defects must own exactly one closed 5b defect row.
+// gate defects must own exactly one closed 3b defect row.
 
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
@@ -56,7 +56,7 @@ const run = opt('run');
 if (!run) die('usage: cross-group-edges.mjs list|check|carrier --run <run> [--id <subject>] [--root <repo>]');
 
 const listPath = R('research', `${run}-cross-group-edges.json`);
-const verdictPath = R('research', `${run}-5b-verdicts.jsonl`);
+const verdictPath = R('research', `${run}-3b-verdicts.jsonl`);
 const reconcilePlan = argv.includes('--reconcile-plan');
 
 const strList = (v) => (Array.isArray(v) ? v.filter((x) => typeof x === 'string') : []);
@@ -80,8 +80,8 @@ function ownership(ownerRun = run) {
         const id = it.id;
         batchOf.set(id, m[1]);
         batchItems.push(id);
-        // Match step5-scope's version-stable carrier schema, including history.
-        batchItemRows.push({ id, metadata: { ...it, __step6_page_id: String(p.id) } });
+        // Match step3-scope's version-stable carrier schema, including history.
+        batchItemRows.push({ id, metadata: { ...it, __step4_page_id: String(p.id) } });
       }
     }
     itemsByBatch.set(m[1], batchItems);
@@ -89,7 +89,7 @@ function ownership(ownerRun = run) {
     pagesByBatch.set(m[1], batchPages);
   }
   const gp = R('research', `${ownerRun}-alpha-groups.json`);
-  if (!existsSync(gp)) die(`cross-group-edges: no ${ownerRun}-alpha-groups.json — 2-assign has not run`);
+  if (!existsSync(gp)) die(`cross-group-edges: no ${ownerRun}-alpha-groups.json — planning group metadata is missing`);
   const raw = JSON.parse(readFileSync(gp, 'utf8'));
   const groupOf = new Map();
   for (const g of (Array.isArray(raw) ? raw : raw.groups ?? [])) {
@@ -134,18 +134,18 @@ function pageCarrier(page) {
 }
 
 /** Exact currency boundary between group adjudication and lead-Alpha work.
- * A 5b edit must become an explicit current-hash verdict; otherwise a proof-only
- * rewrite could bypass both the 5a decision and the public-surface impact gate. */
+ * A 3b edit must become an explicit current-hash verdict; otherwise a proof-only
+ * rewrite could bypass both the 3a decision and the public-surface impact gate. */
 function post5aChanges(owned) {
   const changes = [];
   for (const [batch, currentIds] of owned.itemsByBatch) {
-    const snapshotPath = R('research', `${run}-step5-hash-${batch}-post-5a.json`);
+    const snapshotPath = R('research', `${run}-step3-hash-${batch}-post-3a.json`);
     if (!existsSync(snapshotPath)) {
-      die(`cross-group-edges: missing exact post-5a carrier snapshot ${snapshotPath}`, 1);
+      die(`cross-group-edges: missing exact post-3a carrier snapshot ${snapshotPath}`, 1);
     }
     const snapshot = JSON.parse(readFileSync(snapshotPath, 'utf8'));
-    if (snapshot.run !== run || String(snapshot.batch) !== batch || snapshot.label !== 'post-5a') {
-      die(`cross-group-edges: invalid post-5a carrier snapshot ${snapshotPath}`, 1);
+    if (snapshot.run !== run || String(snapshot.batch) !== batch || snapshot.label !== 'post-3a') {
+      die(`cross-group-edges: invalid post-3a carrier snapshot ${snapshotPath}`, 1);
     }
     const before = new Set((snapshot.manifest ?? []).map(String));
     const current = new Set(currentIds.map(String));
@@ -185,7 +185,7 @@ function post5aChanges(owned) {
     || a.kind.localeCompare(b.kind) || a.id.localeCompare(b.id));
 }
 
-/** In-scope items, with the two frontmatter fields 5b reads.
+/** In-scope items, with the two frontmatter fields 3b reads.
  *
  *  Parsed with the RENDERER's YAML parser rather than a per-tool regex: the
  *  regex `list()` helper is hand-copied into six tools already, and a
@@ -232,7 +232,7 @@ function forwardUse(body, target) {
   return { linked, bearing };
 }
 
-/** The cross-batch edges, forward references, and post-5a changes on disk now.
+/** The cross-batch edges, forward references, and post-3a changes on disk now.
  *
  *  Shared by both subcommands on purpose. `list` writes the obligation; `check`
  *  recomputes and compares, because the Alpha edits items between the two and
@@ -291,7 +291,7 @@ if (cmd === 'list') {
   writeFileSync(listPath, JSON.stringify({ run, at: new Date().toISOString(), edges, forwards, changes }, null, 1) + '\n');
   if (!existsSync(verdictPath)) writeFileSync(verdictPath, '');
   console.log(`cross-group-edges: ${edges.length} cross-batch edge(s) and ${forwards.length} forward reference(s) `
-    + `and ${changes.length} post-5a change(s) over ${items.size} in-scope item(s)`);
+    + `and ${changes.length} post-3a change(s) over ${items.size} in-scope item(s)`);
   process.exit(0);
 }
 
@@ -342,13 +342,13 @@ if (cmd === 'check' || cmd === 'coverage') {
 
   for (const e of edges) {
     const v = edgeV.get(pairKey(e.from, e.to));
-    if (!v) { err('edge-unverdicted', `[${e.from}] cites ${e.to} across batches/groups ${e.from_group}->${e.to_group} with no 5b verdict`, { kind: 'edge', ...e }); continue; }
+    if (!v) { err('edge-unverdicted', `[${e.from}] cites ${e.to} across batches/groups ${e.from_group}->${e.to_group} with no 3b verdict`, { kind: 'edge', ...e }); continue; }
     if (!EDGE_OK.has(v.verdict)) err('edge-verdict-invalid', `[${e.from}] -> ${e.to}: verdict ${JSON.stringify(v.verdict)} is not one of ${[...EDGE_OK].join(', ')}`);
     if (!String(v.note ?? '').trim()) err('edge-note-missing', `[${e.from}] -> ${e.to}: a verdict with no note is not a reading`);
   }
   for (const f of forwards) {
     const v = fwdV.get(pairKey(f.item, f.target));
-    if (!v) { err('forward-undecided', `[${f.item}] declares forward_refs "${f.target}" with no 5b decision — build the intermediate lemmas or drop the item`, { kind: 'forward', ...f }); continue; }
+    if (!v) { err('forward-undecided', `[${f.item}] declares forward_refs "${f.target}" with no 3b decision — build the intermediate lemmas or drop the item`, { kind: 'forward', ...f }); continue; }
     if (!FWD_OK.has(v.decision)) err('forward-decision-invalid', `[${f.item}] -> ${f.target}: decision ${JSON.stringify(v.decision)} is not one of ${[...FWD_OK].join(', ')}`);
     if (!String(v.note ?? '').trim()) err('forward-note-missing', `[${f.item}] -> ${f.target}: a decision with no note is not a reading`);
   }
@@ -356,7 +356,7 @@ if (cmd === 'check' || cmd === 'coverage') {
   for (const change of changes) {
     const key = `${change.kind}\u0000${change.batch}\u0000${change.id}`;
     const verdict = changeV.get(key);
-    if (!verdict) { err('change-undecided', `${change.kind} [${change.id}] in batch ${change.batch} has no 5b verdict`, change); continue; }
+    if (!verdict) { err('change-undecided', `${change.kind} [${change.id}] in batch ${change.batch} has no 3b verdict`, change); continue; }
   }
   // A DECISION RECORDED BUT NOT APPLIED is the failure mode that made step-3
   // "applied" claims untrustworthy, so the outcome is read from disk NOW
@@ -442,7 +442,7 @@ if (cmd === 'check' || cmd === 'coverage') {
     err('forward-verdict-extra', `${key.replaceAll('\u0000', ' -> ')} is not a listed/current forward reference and has no defect row attesting an introduced repair`);
   }
   // An edge the Alpha's own repairs INTRODUCED is unaudited work, and the
-  // saved list cannot see it. 5b may add results and rewrite citations, so
+  // saved list cannot see it. 3b may add results and rewrite citations, so
   // this is a live case, not a hypothetical.
   const listed = new Set(edges.map((e) => pairKey(e.from, e.to)));
   for (const e of now.edges) {
@@ -509,13 +509,13 @@ if (cmd === 'check' || cmd === 'coverage') {
     }
     if (kind === 'page') {
       const stillChanged = currentChangeKeys.has(key);
-      if (verdict.verdict === 'reverted' && stillChanged) err('page-revert-not-applied', `[${id}] page edit was reverted but still differs from the post-5a baseline`);
-      if (['accepted', 'repaired'].includes(verdict.verdict) && !stillChanged) err('page-change-missing', `[${id}] page edit was accepted but no longer differs from the post-5a baseline`);
+      if (verdict.verdict === 'reverted' && stillChanged) err('page-revert-not-applied', `[${id}] page edit was reverted but still differs from the post-3a baseline`);
+      if (['accepted', 'repaired'].includes(verdict.verdict) && !stillChanged) err('page-change-missing', `[${id}] page edit was accepted but no longer differs from the post-3a baseline`);
     }
     if (['item', 'item-metadata'].includes(kind)) {
       const stillChanged = currentChangeKeys.has(key);
-      if (verdict.verdict === 'reverted' && stillChanged) err('item-revert-not-applied', `[${id}] item carrier was reverted but still differs from the post-5a baseline`);
-      if (['accepted', 'repaired'].includes(verdict.verdict) && !stillChanged) err('item-change-missing', `[${id}] item carrier was accepted but no longer differs from the post-5a baseline`);
+      if (verdict.verdict === 'reverted' && stillChanged) err('item-revert-not-applied', `[${id}] item carrier was reverted but still differs from the post-3a baseline`);
+      if (['accepted', 'repaired'].includes(verdict.verdict) && !stillChanged) err('item-change-missing', `[${id}] item carrier was accepted but no longer differs from the post-3a baseline`);
     }
     if (kind === 'page-addition') {
       err('page-scope-owner', `[${id}] page addition changes build scope and requires owner intervention`);
@@ -526,8 +526,8 @@ if (cmd === 'check' || cmd === 'coverage') {
   }
 
   // A repaired/removed mathematical obligation is a defect outcome, not only
-  // a structural verdict. Bind it to one closed Step-5b ledger row so the final
-  // report cannot omit defects that the 5b machine file says it repaired.
+  // a structural verdict. Bind it to one closed Step-3b ledger row so the final
+  // report cannot omit defects that the 3b machine file says it repaired.
   let ledger = [];
   const ledgerPath = R('research', 'defect-ledger.jsonl');
   if (existsSync(ledgerPath)) {
@@ -545,8 +545,8 @@ if (cmd === 'check' || cmd === 'coverage') {
       else usedDefects.set(id, obligation);
       const row = ledger.find((candidate) => candidate.defect_id === id);
       if (!row) { err('defect-ledger-absent', `${obligation} names absent ${id}`); continue; }
-      if (row.run !== run || row.subject !== subject || row.caught_at_stage !== '5b-cross') {
-        err('defect-ledger-mismatch', `${id} does not bind ${subject} at ${run}/5b-cross`);
+      if (row.run !== run || row.subject !== subject || row.caught_at_stage !== '3b-cross') {
+        err('defect-ledger-mismatch', `${id} does not bind ${subject} at ${run}/3b-cross`);
       }
       if (!allowedDispositions.includes(row.disposition)) {
         err('defect-ledger-disposition', `${id} has disposition ${row.disposition}, not one of ${allowedDispositions.join(', ')}`);
@@ -642,9 +642,9 @@ if (cmd === 'check' || cmd === 'coverage') {
       err('gate-defect-severity', `${ids[0]} is fatal, not nonfatal`);
     }
   }
-  for (const row of ledger.filter((candidate) => candidate.run === run && candidate.caught_at_stage === '5b-cross'
+  for (const row of ledger.filter((candidate) => candidate.run === run && candidate.caught_at_stage === '3b-cross'
     && !isPublishedItem(ROOT, candidate.subject))) {
-    if (!usedDefects.has(row.defect_id)) err('defect-ledger-unowned', `${row.defect_id} has no 5b verdict reference`);
+    if (!usedDefects.has(row.defect_id)) err('defect-ledger-unowned', `${row.defect_id} has no 3b verdict reference`);
   }
   const recognised = new Set(['edge', 'forward', 'gate', ...changeKinds]);
   for (const verdict of verdicts) if (!recognised.has(verdict.kind)) err('verdict-kind-invalid', `unknown verdict kind ${JSON.stringify(verdict.kind)}`);
@@ -671,7 +671,7 @@ if (cmd === 'check' || cmd === 'coverage') {
     await new Promise(resolve => process.stdout.write(coverageJson + '\n', resolve));
     process.exit(0);
   }
-  console.log(`cross-group-edges: ${edges.length} edge(s), ${forwards.length} forward reference(s), ${changes.length} post-5a change(s), ${errors} error(s)`);
+  console.log(`cross-group-edges: ${edges.length} edge(s), ${forwards.length} forward reference(s), ${changes.length} post-3a change(s), ${errors} error(s)`);
   process.exit(errors ? 1 : 0);
 }
 

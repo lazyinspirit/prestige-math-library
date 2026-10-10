@@ -3,14 +3,14 @@ import { spawnSync } from './fixture-process.mts';
 //
 // WHY. `itemHashGuard` excludes the whole `verification:` block and answers
 // "did the mathematics change?" — it is what a touchlog baseline holds and what
-// step7-guard matches a confirmed_fatal adjudication against. `itemHashJudge`
+// step5-guard matches a confirmed_fatal adjudication against. `itemHashJudge`
 // excludes only the two-space-indented `judge:` sub-block and answers "is this
 // verdict still about this text?" — it is what judge.mts writes on a verdict row
 // and what apply-judge-stamps validates a stamp with.
 //
 // Both were spelled inline, in four files, under the one name `item_sha256`.
 // That is invisible until it isn't: a row carrying the judge form can never
-// match a guard-form baseline, and step7-guard reads the non-match as an
+// match a guard-form baseline, and step5-guard reads the non-match as an
 // unlicensed edit — a false `nonfatal-edit` on a repair that was licensed.
 // Now they live in tools/physics-support/item-hash.mjs under names that cannot be confused, and
 // the two error messages that consume them say which form they expect.
@@ -120,7 +120,7 @@ test('nothing keeps a private copy of either normalisation any more', () => {
     /\^verification:\(\?:\\n\(\?:\[ \\t\]\+\.\*\\n\?\)\*/,
   ];
   for (const tool of ['judge.mts', 'apply-judge-stamps.mjs', 'spine-audit.mjs',
-    'touchlog.mjs', 'step7-guard.mjs']) {
+    'touchlog.mjs', 'step5-guard.mjs']) {
     const src = readFileSync(join(REPO, 'tools/physics-support', tool), 'utf8');
     for (const re of inline) {
       assert.doesNotMatch(src, re, `${tool} still spells a normalisation inline`);
@@ -132,7 +132,7 @@ test('nothing keeps a private copy of either normalisation any more', () => {
 test('whole-source pair interfaces exclude generated judge stamps', () => {
   const judge = readFileSync(join(REPO, 'tools/physics-support', 'judge.mts'), 'utf8');
   // The interface extractor lives in the shared evidence-bundle module since
-  // 2026-09-20 (judge.mts and the Step-7 bundle renderer both use it), so the
+  // 2026-09-20 (judge.mts and the Step-5 bundle renderer both use it), so the
   // invariant is asserted where it is implemented and that the judge uses it.
   const bundle = readFileSync(join(REPO, 'tools/physics-support', 'evidence-bundle.mjs'), 'utf8');
   assert.match(bundle, /\|\| stripJudgeStamp\(source\)\.trim\(\)/,
@@ -142,7 +142,7 @@ test('whole-source pair interfaces exclude generated judge stamps', () => {
 });
 
 test('the errors that consume these hashes say which form they expect', () => {
-  const guard = readFileSync(join(REPO, 'tools/physics-support', 'step7-guard.mjs'), 'utf8');
+  const guard = readFileSync(join(REPO, 'tools/physics-support', 'step5-guard.mjs'), 'utf8');
   assert.match(guard, /itemHashGuard/, 'judge-adjudication-unhashed must name the guard form');
   assert.match(guard, /NOT the judge-ledger form/i);
   assert.match(guard, /nonfatal-edit/);

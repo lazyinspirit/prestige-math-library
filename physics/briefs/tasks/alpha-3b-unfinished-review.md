@@ -1,0 +1,30 @@
+# Mandatory physics instructions
+
+Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the assigned role and scope. These rules apply to every physics framework.
+
+**Define, do not merely name.** Be as mathematically rigorous and explicit as possible. Before using a technical term, give its mathematical definition or identify an exact earlier definition and state its relevant content. Specify objects, domains, maps, regularity, hypotheses, and conventions. Use published, draft or planned mathematics suppliers with exact statements, hypotheses and honest proof status; complete remaining gaps locally.
+
+**Example—classical EM:** write $\mathbf E,\mathbf B:\Omega\times I\to\mathbb R^3$, with spatial region $\Omega\subseteq\mathbb R^3$, time interval $I$, and stated regularity; at fixed time these are spatial vector fields. Specify units. Do not assume smoothness across point charges or surface sources; state exclusions or use an appropriate weak/distributional formulation. Likewise, define a worldline as a curve with specified domain and conditions, and a reference frame as a precise geometric object appropriate to the framework.
+
+**Model deductions and empirical observations are distinct.** A physics proof establishes a logical consequence of explicitly stated model postulates, mathematical hypotheses and idealizations; it does not establish that the model or its postulates describe nature. Experiments report source-backed observations with apparatus, calibration, sampling and uncertainty qualifications. Comparing predictions with observations tests the combined model and apparatus assumptions; agreement is evidence, not a deductive proof of the model. Explicitly distinguish adopted assumptions, derived predictions, reported observations and statistical inference. If a deduction uses measured inputs, state them as qualified empirical premises and carry their uncertainty and conditions into the conclusion.
+
+**Evidence is statistical.** Separate predictions, observations, and inference. State preparation, apparatus assumptions, sampling model, uncertainty, and source limitations. Never invent measurements or statistical precision. Carry empirical qualifications into downstream conclusions.
+
+**Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
+
+Postulates are adopted assumptions; experiments report source-backed observations, not proofs. Physics theorems and thought experiments require complete conditional deductions. Use schema classifications, dependency roles, uncertainty records, and nonproof reviews. Keep evidence links separate from acyclic prerequisites. Mathematical items cannot depend on physics; imports and the root mathematics workspace are read-only. Physical public-interface changes require consumer review.
+
+Authors supply definitions and prerequisites; reviewers and adjudicators check them, source fidelity, and statistical qualifications. Reject undefined reasoning and fabricated certainty.
+
+---
+
+# Native Step3b unfinished-review continuation
+
+This is remaining review work, not a mathematical repair round or a fresh whole-scope audit. Follow the existing `alpha-3b-edges.md` task.
+
+- Inspect current coverage with `node tools/physics-support/step3b-review-coverage.mjs --run <run>`; fetch at most25 pending obligations at a time with `node tools/physics-support/step3b-review-coverage.mjs --run <run> --pending --limit 25`.
+- Review only the returned missing current obligations. Preserve every completed current-hash verdict and its original attribution, all prior receipts, immutable baselines and prior Markdown report bytes (forward evidence may hash those reports). Do not fabricate approvals from process success or copy notes from another obligation. Invalid/stale evidence is an owner hold, not permission to overwrite historical review.
+- Unfinished review does not grant another content-repair cycle. Before any proposed content repair, consult run-local per-item repair-budget and owner-exception records if present; retain all charged rounds and consumed exceptions across stages. Record and escalate a confirmed defect on a capped subject to the owner, rather than editing it or resetting the budget.
+- Append actual edge/forward/structural verdicts using the existing protocol; fill only genuinely pending direct-impact dispositions. For each reviewed impact consumer record `carrier_raw_sha256` plus `supplier_uses` with exact supplier ID/hash, consumed clause and use location. Preserve completed dispositions.
+- If work remains at timeout, write a concise checkpoint to the distinct label-bound report named in the immutable launch task: reviewed counts, remaining counts, actual unresolved defects, and the next pending-query command. Do not dump mechanical worklists or every unreviewed row into the report; the canonical computed index already owns them.
+- Recompute coverage after each batch. Completion means the read-only coverage inspector reports complete with no errors; exit0 alone is not review completion. A handoff with no new completed obligation holds for the owner. Do not request native closure gates while coverage is incomplete.

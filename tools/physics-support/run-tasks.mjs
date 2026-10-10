@@ -10,7 +10,7 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 //   1. A missing one is discovered by the stage that needs it, hours in.
 //      `doctor` catches only the ones a stage's own `plan()` reaches — the
 //      files a REPAIR ROUND reaches (source-scout, scaffold-fix,
-//      contract-audit, contract-rework, rework-certify, impact-close, step4)
+//      contract-audit, contract-rework, rework-certify, impact-close, step3)
 //      are invisible to it, so a run can pass doctor green and still block at
 //      02:00 on a file nobody knew was needed.
 //   2. The obvious way to produce them is to copy the previous run's and
@@ -73,7 +73,7 @@ if (!batches.length) {
   process.exit(2);
 }
 
-// One group Alpha per <=3 batches. Before `2-assign` writes the real assignment
+// Group metadata is generated during planning; no assignment workflow stage.
 // this is the same positional fallback `stages/mathlib.mts` uses, and it is only
 // used here to enumerate which group-labelled paths COULD be asked for.
 const groupLabels = [];
@@ -166,7 +166,7 @@ const render = (text) => text.replace(/\{\{([a-z_]+)\}\}/g, (_match, key) => {
 // Every task path in the table is a literal template string, so this sees all
 // of them.
 // A candidate list mixes template literals with plain quoted paths — the
-// `2-assign` stage falls back to `briefs/alpha-assign.md`, a role brief that is
+// planning stage falls back to `briefs/alpha-assign.md`, a role brief that is
 // not per-run. Reading only the backticked entries made that fallback invisible
 // and reported a satisfied stage as missing.
 function stageSources() {
@@ -324,6 +324,7 @@ for (const b of batches) {
       lines.push('Read every listed design location. Record which one controls and why.');
       lines.push('');
     }
+    lines.push('Step 1 must fully author every item, A/B page and proof contract; preserve escalation mechanisms and escalate significant unmet prerequisites to the owner.');
     lines.push('Read the complete design section and preserve its scope, conventions, warnings, and proof route. This generated file contains no mathematical review.');
     lines.push('');
     lines.push('Compare the design with `research/plan-spec.json`. The current plan controls this run; record every conflict in the batch notes.');

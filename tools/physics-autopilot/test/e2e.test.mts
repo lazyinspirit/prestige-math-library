@@ -282,7 +282,7 @@ test('no stage dispatches while another stage still has work in flight', async (
   //
   // The engine used to dispatch the current stage regardless of what was still
   // running elsewhere, because only the GATE block waited for in-flight work to
-  // drain. On frontier-14 that put step 7's adjudicating Alpha on top of step
+  // drain. On frontier-14 that put step 5's adjudicating Alpha on top of step
   // 7's still-running judge sweep: every repair moved a pair's context hash and
   // re-armed the sweep on untouched page-mates, the ledger grew by 97 rows
   // mid-adjudication, and 8 items flipped pass to reject on byte-identical text.
@@ -387,7 +387,7 @@ test('status reporting survives a transiently unreadable future-stage artifact',
 });
 
 test('adoption is scoped to the stage — a later stage\'s agent does not cover an earlier one', async () => {
-  // A 5a adjudicator running with --covers 7 blocked a preliminary reader re-run for
+  // A 3a adjudicator running with --covers 7 blocked a preliminary reader re-run for
   // batch 7, because adoption matched only the unit and not the stage.
   const fx = fixture();
   const ex = makeExecutor(fx, makeStages({ units: ['1'] }), {
