@@ -10,6 +10,7 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 // therefore be concise without gaining the power to omit or invent a defect.
 
 import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, writeFileSync, statSync, mkdirSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -17,6 +18,9 @@ import { runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
 import { resolveLineup } from './models.mjs';
 import { TERMINAL_REJUDGE_ROUNDS } from './step7-terminal-resolution.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
+import { activeOwnershipRows } from '../defect-ledger-ownership.mjs';
+
+const LEDGER_TOOL = fileURLToPath(new URL('./defect-ledger.mjs', import.meta.url));
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -126,6 +130,31 @@ function buildEvidence() {
   }
 
   const defects = jsonLines(paths.defects).filter((row) => row.run === run);
+  // Validate every owning-run history row before deriving present ownership.
+  const validation = spawnSync(process.execPath, [LEDGER_TOOL, 'validate',
+    '--run', run, '--ledger', paths.defects], { cwd: root, encoding: 'utf8' });
+  if (validation.error || validation.status !== 0)
+    die(`defect ledger validation failed: ${validation.error?.message ?? (validation.stderr || validation.stdout).trim()}`);
+  const ownershipErrors = [];
+  const active = new Set(activeOwnershipRows(defects, ownershipErrors));
+  if (ownershipErrors.length) die(`defect ledger ownership invalid: ${ownershipErrors.join('; ')}`);
+  const blockers = [...active].filter(row => ['open', 'unknown'].includes(row.disposition));
+  if (blockers.length) die(`defect ledger contains an incomplete or open active row: ${blockers
+    .map(row => `${row.defect_id} (${row.subject}): ${row.disposition}`).join('; ')}`);
+  const successors = new Map();
+  for (const row of defects) for (const id of row.supersedes ?? []) {
+    const next = successors.get(id) ?? [];
+    next.push(row);
+    successors.set(id, next);
+  }
+  const ownerCache = new Map();
+  const currentOwners = row => {
+    if (ownerCache.has(row.defect_id)) return ownerCache.get(row.defect_id);
+    const owners = active.has(row) ? [row.defect_id]
+      : [...new Set((successors.get(row.defect_id) ?? []).flatMap(currentOwners))].sort();
+    ownerCache.set(row.defect_id, owners);
+    return owners;
+  };
   const fatal = defects.filter((row) => row.severity === 'fatal').map((row) => ({
     defect_id: String(row.defect_id ?? ''),
     subject: String(row.subject ?? ''),
@@ -133,13 +162,14 @@ function buildEvidence() {
     subclass: String(row.subclass ?? 'unknown'),
     location: String(row.location ?? 'unknown'),
     disposition: String(row.disposition ?? 'unknown'),
+    ownership_status: active.has(row) ? 'active' : 'superseded',
+    current_owners: currentOwners(row),
     caught_at_stage: String(row.caught_at_stage ?? 'unknown'),
     caught_by_role: String(row.caught_by_role ?? 'unknown'),
     repair_cost: String(row.repair_cost ?? 'unknown'),
     recurrence_of: row.recurrence_of ? String(row.recurrence_of) : null,
     note: String(row.subclass_note ?? ''),
   })).sort((a, b) => a.defect_id.localeCompare(b.defect_id));
-  if (fatal.some((row) => !row.defect_id || !row.subject || ['open', 'unknown'].includes(row.disposition))) die('fatal defect ledger contains an incomplete or open row');
 
   const judgeRows = jsonLines(paths.judge);
   const latest = new Map();
@@ -218,7 +248,11 @@ function buildEvidence() {
     },
     defects: {
       total_rows: defects.length,
+      active_rows: active.size,
+      historical_rows: defects.length - active.size,
       fatal_count: fatal.length,
+      active_fatal_count: fatal.filter(row => row.ownership_status === 'active').length,
+      historical_fatal_count: fatal.filter(row => row.ownership_status === 'superseded').length,
       by_class: countBy(fatal, 'class'),
       by_subclass: countBy(fatal, 'subclass'),
       by_location: countBy(fatal, 'location'),
@@ -344,10 +378,15 @@ lines.push('',
   `- Evidence fingerprint: \`${evidence.evidence_sha256}\`.`, '',
   '## Fatal mathematical defects — exhaustive ledger table', '',
   `The run recorded ${evidence.defects.fatal_count} fatal defect row(s). Every row is reproduced below from the defect ledger.`, '',
-  '| Defect | Item / subject | Class | Subclass | Location | Disposition | Caught at |',
-  '|---|---|---|---|---|---|---|');
-for (const row of evidence.defects.fatal) lines.push(`| ${cell(row.defect_id)} | ${cell(row.subject)} | ${cell(row.class)} | ${cell(row.subclass)} | ${cell(row.location)} | ${cell(row.disposition)} | ${cell(row.caught_at_stage)} |`);
-if (!evidence.defects.fatal.length) lines.push('| — | — | — | — | — | none | — |');
+  `Current ownership: ${evidence.defects.active_fatal_count ?? evidence.defects.fatal_count} active fatal row(s); ${evidence.defects.historical_fatal_count ?? 0} superseded historical fatal row(s).`, '',
+  '| Defect | Item / subject | Class | Subclass | Location | Disposition | Ownership | Caught at |',
+  '|---|---|---|---|---|---|---|---|');
+for (const row of evidence.defects.fatal) {
+  const ownership = row.ownership_status === 'superseded'
+    ? `historical; superseded by ${(row.current_owners ?? []).join(', ')}` : 'active';
+  lines.push(`| ${cell(row.defect_id)} | ${cell(row.subject)} | ${cell(row.class)} | ${cell(row.subclass)} | ${cell(row.location)} | ${cell(row.disposition)} | ${cell(ownership)} | ${cell(row.caught_at_stage)} |`);
+}
+if (!evidence.defects.fatal.length) lines.push('| — | — | — | — | — | none | — | — |');
 lines.push('', `Grouped by class: ${Object.entries(evidence.defects.by_class).map(([name, count]) => `${name} ${count}`).join('; ') || 'none'}.`,
   `Grouped by location: ${Object.entries(evidence.defects.by_location).map(([name, count]) => `${name} ${count}`).join('; ') || 'none'}.`, '',
   '## Judge and adjudication record', '',

@@ -40,6 +40,15 @@ fails terminal closure. Invalid supersession, ambiguous fatal ownership and
 malformed historical fields remain failures. Raw history, schema validation,
 generated-view freshness and the checked-row/liveness count remain intact.
 
+The standalone Step-9 evidence builder validates the owning run's complete
+ledger with the same canonical validator before resolving active ownership.
+Active open rows block evidence closure regardless of severity. Superseded
+open observations retain their literal dispositions in the exhaustive fatal
+table, with explicit history/ownership annotations naming their current owners.
+Counts and grouped statistics still include every recorded fatal row, including
+outside-scope active deferred rows; separate active/history counts clarify the
+current state. No source row or substantive disposition is rewritten.
+
 This compatibility change does not append corrections, alter decisions, rewrite
 original rows, certify content or charge a mathematical repair round. Validate
 the actual owning-run ledger after its metadata corrections and ownership
@@ -56,4 +65,5 @@ substantive fields or invalid ownership links:
 
 ```bash
 node --test tools/physics-support/defect-ledger-compat.test.mjs
+node --test tools/physics-support/step9-report-history.test.mjs
 ```
