@@ -31,6 +31,15 @@ taxonomy-only chains to the active owner. It preserves exact decision files,
 obligation names, native reports and snapshots. Ordinary substantive supersession
 does not create an old-ID alias and still needs its own current decision.
 
+The standalone ledger check also uses validated active owners for open-defect
+agreement in both directions and for terminal `--no-open`. An original open
+observation superseded by a deferred or repaired row remains history and does
+not describe the current open state. Active fatal open rows still require
+closure agreement; every active open row, including a nonfatal one, still
+fails terminal closure. Invalid supersession, ambiguous fatal ownership and
+malformed historical fields remain failures. Raw history, schema validation,
+generated-view freshness and the checked-row/liveness count remain intact.
+
 This compatibility change does not append corrections, alter decisions, rewrite
 original rows, certify content or charge a mathematical repair round. Validate
 the actual owning-run ledger after its metadata corrections and ownership

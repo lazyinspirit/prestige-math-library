@@ -125,3 +125,99 @@ test('native append rejects a forged taxonomy-only successor without changing le
   assert.match(refused.stderr, /invalid or ambiguous taxonomy-only correction lineage/);
   assert.equal(readFileSync(f.ledger, 'utf8'), before);
 });
+
+const openRow = {
+  ...original, subclass: 'invalid-inference', location: 'proof-step',
+  severity: 'fatal', disposition: 'open',
+};
+
+function closureFixture(t, rows, openFatal = [], adjudications = []) {
+  const f = fixture(t, rows);
+  writeFileSync(join(f.cwd, 'adj.jsonl'), adjudications.map(row => JSON.stringify(row)).join('\n'));
+  writeFileSync(join(f.cwd, 'closure.json'), JSON.stringify({ open_fatal: openFatal }));
+  const rendered = f.run(['render']);
+  assert.equal(rendered.status, 0, rendered.stderr);
+  return {
+    ...f,
+    check: (extra = []) => f.run(['check', '--run', original.run,
+      '--adjudications', 'adj.jsonl', '--closure', 'closure.json', ...extra]),
+  };
+}
+
+test('superseded open observations do not survive a current deferred or repaired disposition', t => {
+  for (const disposition of ['deferred', 'fixed']) {
+    const f = closureFixture(t, [openRow, {
+      ...openRow, defect_id: 'current-defect', supersedes: [openRow.defect_id], disposition,
+    }]);
+    const before = readFileSync(f.ledger, 'utf8');
+    for (const extra of [[], ['--no-open']]) {
+      const checked = f.check(extra);
+      assert.equal(checked.status, 0, checked.stderr);
+      assert.match(checked.stdout, /2 defect row\(s\) checked/);
+    }
+    assert.equal(readFileSync(f.ledger, 'utf8'), before);
+  }
+});
+
+test('a closure cannot claim an open defect supported only by superseded history', t => {
+  const f = closureFixture(t, [openRow, {
+    ...openRow, defect_id: 'current-defect', supersedes: [openRow.defect_id], disposition: 'fixed',
+  }], [openRow.subject]);
+  const checked = f.check();
+  assert.notEqual(checked.status, 0);
+  assert.match(checked.stderr, /open_fatal with no open ledger row/);
+});
+
+test('active fatal open rows still require closure agreement and fail terminal no-open', t => {
+  const missing = closureFixture(t, [openRow]);
+  assert.match(missing.check().stderr, /is open in the ledger/);
+  const agreed = closureFixture(t, [openRow], [openRow.subject]);
+  assert.equal(agreed.check().status, 0);
+  const terminal = agreed.check(['--no-open']);
+  assert.notEqual(terminal.status, 0);
+  assert.match(terminal.stderr, /still open at the terminal stage/);
+});
+
+test('active nonfatal open rows pass ordinary closure but still fail terminal no-open', t => {
+  const f = closureFixture(t, [{ ...openRow, severity: 'nonfatal' }]);
+  assert.equal(f.check().status, 0);
+  const terminal = f.check(['--no-open']);
+  assert.notEqual(terminal.status, 0);
+  assert.match(terminal.stderr, /nonfatal.*still open at the terminal stage/);
+});
+
+test('open-state projection cannot conceal malformed lineage or malformed historical rows', t => {
+  for (const overrides of [
+    { subject: 'exp-other' },
+    { supersedes: ['future-row'] },
+    { supersedes: [openRow.defect_id, openRow.defect_id] },
+  ]) {
+    const f = closureFixture(t, [openRow, {
+      ...openRow, defect_id: 'current-defect', supersedes: [openRow.defect_id],
+      disposition: 'fixed', ...overrides,
+    }]);
+    const checked = f.check();
+    assert.notEqual(checked.status, 0);
+    assert.match(checked.stderr, /supersedes|same run and subject/);
+  }
+  const history = closureFixture(t, [{ ...openRow, severity: 'imaginary' }, {
+    ...openRow, defect_id: 'current-defect', supersedes: [openRow.defect_id], disposition: 'fixed',
+  }]);
+  const checked = history.check();
+  assert.notEqual(checked.status, 0);
+  assert.match(checked.stderr, /severity "imaginary" outside the closed enum/);
+});
+
+test('two active successors still cannot own the same fatal adjudication', t => {
+  const reference = { id: openRow.subject, item_sha256: 'claim', model: 'judge' };
+  const successor = {
+    ...openRow, supersedes: [openRow.defect_id], disposition: 'fixed', adjudication_ref: [reference],
+  };
+  const f = closureFixture(t, [openRow,
+    { ...successor, defect_id: 'first-successor' },
+    { ...successor, defect_id: 'second-successor' },
+  ], [], [{ id: openRow.subject, item_sha256: 'claim', model: 'judge', outcome: 'confirmed_fatal' }]);
+  const checked = f.check();
+  assert.notEqual(checked.status, 0);
+  assert.match(checked.stderr, /appears in 2 rows/);
+});

@@ -628,17 +628,19 @@ if (cmd === 'check') {
   // spent a step-7 repair round on the false positive. The reverse direction
   // is unconditional as before, and clause (e) is the terminal backstop that
   // keeps a nonfatal open row from surviving to publication.
+  // Superseded observations remain validated history; only active owners
+  // describe the current open state in either direction.
   if (closurePath && existsSync(closurePath)) {
     const closure = JSON.parse(readFileSync(closurePath, 'utf8'));
     const openFatal = new Set((closure.open_fatal ?? []).map(String).filter(id => {
       if (included(id)) return true;
       excluded.push({ kind: 'closure-open-fatal', evidence: id }); return false;
     }));
-    for (const r of mine.filter((x) => x.disposition === 'open' && x.severity === 'fatal')) {
+    for (const r of ownershipMine.filter((x) => x.disposition === 'open' && x.severity === 'fatal')) {
       if (!openFatal.has(String(r.subject))) errs.push(`${r.defect_id} is open in the ledger but ${r.subject} is not open in the closure receipt — one of them is stale`);
     }
     for (const id of openFatal) {
-      if (!mine.some((r) => r.subject === id && r.disposition === 'open')) {
+      if (!ownershipMine.some((r) => r.subject === id && r.disposition === 'open')) {
         errs.push(`closure names ${id} open_fatal with no open ledger row — exactly how two blockers lived only in markdown`);
       }
     }
@@ -650,7 +652,7 @@ if (cmd === 'check') {
   // met, with evidence), so a row still open here is unfinished work the
   // owner must see, not a waivable detail.
   if (given('no-open')) {
-    for (const r of mine.filter((x) => x.disposition === 'open')) {
+    for (const r of ownershipMine.filter((x) => x.disposition === 'open')) {
       errs.push(`${r.defect_id} (${r.severity}) is still open at the terminal stage: ${r.subject} — close it with evidence or it ships open`);
     }
   }
