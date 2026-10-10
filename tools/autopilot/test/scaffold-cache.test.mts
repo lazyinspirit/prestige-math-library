@@ -67,6 +67,25 @@ test('readiness records are read afresh even when the structural snapshot is reu
   assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
 });
 
+test('readiness cache protects missing supplier creation and receipt deletion', t => {
+  const f = fixture(t);
+  f.pages[0].items[0].deps.push('lem-future');
+  f.put('demo-batch-1.pages.json', f.pages);
+  f.ready();
+  assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  const cached = scaffoldSnapshot(f.ctx());
+  assert.equal(cached.itemStamps.get('lem-future'), 'missing');
+  const decision = cached.readiness.get('lem-local');
+  f.artifacts();
+  assert.equal(cached.readiness.get('lem-local'), decision, 'unchanged scans reuse the decision');
+  f.body('lem-future', 'New supplier proof');
+  assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  f.ready();
+  assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  rmSync(join(f.repo, 'research', 'demo-step1-lem-local.json'));
+  assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+});
+
 test('prerequisite scheduling reuses guarded pages and observes changed requirements', t => {
   const f = fixture(t);
   const later = [

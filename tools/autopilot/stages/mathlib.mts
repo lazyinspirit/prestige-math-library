@@ -97,6 +97,7 @@ type ScaffoldSnapshot = {
   snapshot: any;
   levelCheck: ReturnType<typeof dependencyLevels>;
   itemStamps: Map<string, string>;
+  readiness: Map<string, { stamp: string; closed: boolean }>;
 };
 // Executor.ctx() is transient; its config retains the controller's identity.
 // Scope the retained entries by repo/run as well, including diagnostic callers
@@ -125,7 +126,7 @@ export function scaffoldSnapshot(ctx: any) {
   let cached = scopes.get(scope);
   if (!cached || cached.stamp !== stamp) {
     const snapshot = loadStep3(ctx.repo, ctx.run);
-    cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map() };
+    cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map(), readiness: new Map() };
     scopes.set(scope, cached);
   } else {
     // Published and in-run item bodies can change without a manifest edit.
@@ -135,6 +136,7 @@ export function scaffoldSnapshot(ctx: any) {
       if (fileStamp(R(ctx, 'items', `${id}.md`)) !== prior) {
         cached.snapshot.cache.clear();
         cached.itemStamps.clear();
+        cached.readiness.clear();
         break;
       }
     }
@@ -157,12 +159,31 @@ function scaffoldArtifacts(ctx: any, unit: string): string[] {
       for (const item of Array.isArray(page?.items) ? page.items : []) {
         if (typeof item?.id === 'string' && item.id) {
           out.push(`research/${ctx.run}-step1-${item.id}.json`);
-          if (!step1Decision(snapshot, item.id).closed) complete = false;
+          const receiptPath = R(ctx, 'research', `${ctx.run}-step1-${item.id}.json`);
+          const receiptStamp = fileStamp(receiptPath);
+          let decision = cached.readiness.get(item.id);
+          if (!decision || decision.stamp !== receiptStamp) {
+            decision = { stamp: receiptStamp, closed: step1Decision(snapshot, item.id).closed };
+            cached.readiness.set(item.id, decision);
+            // Explicit examined inputs can include an absent external supplier.
+            // Its later creation must invalidate a cached readiness decision.
+            if (existsSync(receiptPath)) {
+              const row = JSON.parse(readFileSync(receiptPath, 'utf8'));
+              for (const id of row.dependencies ?? []) {
+                if (!cached.itemStamps.has(id)) cached.itemStamps.set(id, fileStamp(R(ctx, 'items', `${id}.md`)));
+              }
+            }
+          }
+          if (!decision.closed) complete = false;
           if (item.dependency_level !== levelCheck.levels.get(item.id)) complete = false;
         } else complete = false;
       }
     }
-    for (const id of snapshot.cache.keys()) {
+    // Include unresolved dependency leaves: the loader deliberately does not
+    // cache unknown items, but creating one changes the current input hash.
+    const inputIds = new Set<string>(snapshot.cache.keys());
+    for (const node of snapshot.cache.values()) for (const id of node.deps) inputIds.add(id);
+    for (const id of inputIds) {
       if (!cached.itemStamps.has(id)) cached.itemStamps.set(id, fileStamp(R(ctx, 'items', `${id}.md`)));
     }
   } catch {

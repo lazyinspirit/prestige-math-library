@@ -170,6 +170,10 @@ future stages defer selection until execution and write no run state.
 - Check status every ten minutes. Let running workers finish; intervene for a blocker or
   a stage that fails to close. A pause stops new dispatches, while workers already
   running continue.
+- Step-1 scheduling reuses readiness decisions only while their receipt stamps,
+  manifest/coverage/plan metadata and all consumed item-file stamps remain unchanged.
+  Supplier creation, deletion or edits invalidate the cache, including previously
+  absent dependency leaves. Native gate commands still perform fresh checks.
 - Outside Step 7's explicit repair loop, a failed gate is an owner hold. Repair every
   rejected item, finish all authorized writing that could change its covered content,
   wait for writers to drain, then refresh the invalidated decisions, contracts, reviews,
