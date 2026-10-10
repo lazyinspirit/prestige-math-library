@@ -4,7 +4,8 @@
   stage transitions. `CLAUDE.md` governs agents; `SCHEMA.md` governs content.
 - The stage definitions are `tools/autopilot/stages/mathlib.mts`,
   `mathlib.step5.mts` and `mathlib.step7.mts`. The eight-step revision is
-  `eight-step-v4-proof-coverage`. Use a fresh run and state directory when the workflow revision changes; old receipts cannot be adopted
+  `eight-step-v4-proof-coverage`. Use a fresh run and state directory when the workflow revision changes, except
+  for the explicitly owner-authorized Step-3b prefix migration below; old receipts cannot be adopted
   under new stage numbers. Both restart and hot reload reject a mismatched
   revision; old state and receipts remain unchanged.
 
@@ -1233,6 +1234,27 @@ closeout does not push, publish, change stages or revise the workflow.
   before `7-freeze`. A later substantive change must not reuse stale closure
   evidence; stop for an explicit recovery plan rather than bypassing currency
   checks or manufacturing audit receipts.
+- **Owner-authorized Step-3b revision migration:** The separate native command
+  `node tools/tsx-run.mjs tools/autopilot/bin/migrate-workflow-prefix.mts --run RUN --state-dir .autopilot/RUN --authorization AUTH.json`
+  accepts only an open `3b-author` in `batch-step7-rounds-v3-proof-layout` and
+  changes it to `eight-step-v4-proof-coverage`, leaving it paused. Authorization
+  must contain version 1, matching `run`, `authorized_by: "owner"`, a concrete
+  `authorization`, exact `from_revision` and `to_revision`,
+  `authorized_stage: "3b-author"` and `state_sha256` of the authentic raw state.
+  Stop the controller and drain all native run writers first. The command verifies
+  completed stage IDs including registered append generations against the reviewed
+  historical prefix. The sole completed-prefix gate difference is removal of
+  scaffold extcheck before item files exist; ordinary author extcheck remains
+  required. It refuses later stages, removed review/old closeout evidence,
+  incompatible prefix contracts and unresolved actual launches. Genuine terminal
+  results and event-proven never-launched reservations remain unchanged for native
+  restart collection/scheduling. An exclusive hash-bound archive preserves full
+  state, controls, events and repair/receipt hashes; its read-only receipt records
+  exactly the revision and pause changes. No dispatch, gate, repair history or
+  budget is reset. Repeating the same authorization is idempotent only while the
+  migrated state and archive remain unchanged. Other boundaries still require a
+  fresh run; the ordinary restart/reload revision guard remains strict.
+
 - **Historical checkpoint migration:** The current migration accepts only a verified
   merged post-review checkpoint. Export with the old integration checkout before
   installing the new workflow. The source must be paused and inactive, and the target
