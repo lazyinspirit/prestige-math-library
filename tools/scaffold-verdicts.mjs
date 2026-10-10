@@ -2,7 +2,7 @@
 // scaffold-verdicts — the step-3 closure predicate.
 //
 // WHY THIS EXISTS. Step 3 is where a thin scaffold is still cheap to fix: after
-// step 4 it is a rewrite. Alpha reviews every pair for breadth and depth and
+// step 3 it is a rewrite. Alpha reviews every pair for breadth and depth and
 // returns `sufficient` or `insufficient`. That verdict was written in markdown,
 // so the pipeline could not act on it — the review, the Beta fix and the
 // re-check ran once each, in a line, and whatever the re-check concluded, the

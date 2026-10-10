@@ -1,8 +1,8 @@
 // impact window — the blast-radius gate must diff across the edits it audits.
 //
-// WHY. The 5b gate ran `--from pre-author` with no `--to`; impact-audit
+// WHY. The 3b gate ran `--from pre-author` with no `--to`; impact-audit
 // defaults `after` to the ledger's LAST snapshot, and the only snapshot taken
-// by 5b time WAS pre-author — so the gate diffed the baseline against itself
+// by 3b time WAS pre-author — so the gate diffed the baseline against itself
 // and reported "0 changed" over any amount of authoring. The frontier-13 fix
 // ("baseline before authoring") moved the left endpoint and forgot the right
 // one. These tests pin both endpoints and the tool semantics they rely on.
@@ -34,9 +34,9 @@ const runTool = (args: string[]) =>
 test('a seeded interface edit between the two labels is reported, not zero', () => {
   const ledger = ledgerWith(
     snap('pre-author', { 'lem-a': 'aaaa', 'lem-b': 'bbbb' }),
-    snap('post-5a', { 'lem-a': 'aaaa', 'lem-b': 'BBBB' }),
+    snap('post-3a', { 'lem-a': 'aaaa', 'lem-b': 'BBBB' }),
   );
-  const r = runTool(['--touches', ledger, '--from', 'pre-author', '--to', 'post-5a', '--json']);
+  const r = runTool(['--touches', ledger, '--from', 'pre-author', '--to', 'post-3a', '--json']);
   assert.deepEqual(JSON.parse(r.stdout).changed, ['lem-b']);
 });
 
@@ -55,10 +55,10 @@ test('direct boundary examines one dependency hop; an edited intermediate claim 
 test('duplicate labels resolve to the NEWEST snapshot, so a re-entered stage sees later edits', () => {
   const ledger = ledgerWith(
     snap('pre-author', { 'lem-a': 'aaaa' }),
-    snap('post-5a', { 'lem-a': 'aaaa' }), // first gate attempt: nothing had changed
-    snap('post-5a', { 'lem-a': 'AAAA' }), // re-entry after a repair
+    snap('post-3a', { 'lem-a': 'aaaa' }), // first gate attempt: nothing had changed
+    snap('post-3a', { 'lem-a': 'AAAA' }), // re-entry after a repair
   );
-  const r = runTool(['--touches', ledger, '--from', 'pre-author', '--to', 'post-5a', '--json']);
+  const r = runTool(['--touches', ledger, '--from', 'pre-author', '--to', 'post-3a', '--json']);
   assert.deepEqual(JSON.parse(r.stdout).changed, ['lem-a'],
     'first-match label resolution hides every edit after the first same-label snapshot');
 });
@@ -66,33 +66,33 @@ test('duplicate labels resolve to the NEWEST snapshot, so a re-entered stage see
 test('a missing receipt bootstraps its own template and fails with the remedy', () => {
   const ledger = ledgerWith(
     snap('pre-author', { 'lem-a': 'aaaa' }),
-    snap('post-5a', { 'lem-a': 'AAAA' }),
+    snap('post-3a', { 'lem-a': 'AAAA' }),
   );
   const receipt = join(mkdtempSync(join(tmpdir(), 'impact-')), 'impact.json');
-  const r = runTool(['--touches', ledger, '--from', 'pre-author', '--to', 'post-5a', '--receipt', receipt]);
+  const r = runTool(['--touches', ledger, '--from', 'pre-author', '--to', 'post-3a', '--receipt', receipt]);
   assert.notEqual(r.status, 0, 'a missing receipt must fail the gate');
   assert.ok(existsSync(receipt), 'the template must be written where the receipt belongs');
   const template = JSON.parse(readFileSync(receipt, 'utf8'));
   assert.ok(Array.isArray(template.dispositions), 'template carries the pending dispositions to fill');
 });
 
-test('the 5b gate diffs pre-author -> post-5a, and a stage takes the post-5a snapshot first', async () => {
+test('the 3b gate diffs pre-author -> post-3a, and a stage takes the post-3a snapshot first', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ids = mod.stages.map((s: any) => s.id);
-  const bIdx = ids.indexOf('5a-baseline');
-  assert.ok(bIdx > -1, 'no 5a-baseline stage takes the post-5a snapshot');
-  assert.ok(bIdx > ids.indexOf('5a-adjudicate') && bIdx < ids.indexOf('5b-cross'),
-    `5a-baseline sits at index ${bIdx}, outside (5a-adjudicate, 5b-cross)`);
-  const cross = mod.stages.find((s: any) => s.id === '5b-cross');
+  const bIdx = ids.indexOf('3a-baseline');
+  assert.ok(bIdx > -1, 'no 3a-baseline stage takes the post-3a snapshot');
+  assert.ok(bIdx > ids.indexOf('3a-adjudicate') && bIdx < ids.indexOf('3b-cross'),
+    `3a-baseline sits at index ${bIdx}, outside (3a-adjudicate, 3b-cross)`);
+  const cross = mod.stages.find((s: any) => s.id === '3b-cross');
   const gate = cross.gates({ run: 'frontier-14', repo: REPO })
     .find((g: any) => g.id === 'impact-audit');
-  assert.ok(gate, '5b-cross has no impact-audit gate');
+  assert.ok(gate, '3b-cross has no impact-audit gate');
   const argv: string[] = typeof gate.argv === 'function' ? gate.argv() : gate.argv;
-  assert.equal(argv[argv.indexOf('--to') + 1], 'post-5a',
-    'without an explicit --to the gate diffs pre-author against the last snapshot, which at 5b IS pre-author');
-  assert.ok(argv.includes('--direct-boundary'), '5b reviews direct uses and follows later exported-interface changes as new events');
+  assert.equal(argv[argv.indexOf('--to') + 1], 'post-3a',
+    'without an explicit --to the gate diffs pre-author against the last snapshot, which at 3b IS pre-author');
+  assert.ok(argv.includes('--direct-boundary'), '3b reviews direct uses and follows later exported-interface changes as new events');
   const later = cross.gates({ run: 'frontier-14', repo: REPO })
-    .find((g: any) => g.id === 'impact-audit-5b');
+    .find((g: any) => g.id === 'impact-audit-3b');
   const laterArgv: string[] = typeof later.argv === 'function' ? later.argv() : later.argv;
-  assert.ok(laterArgv.includes('--direct-boundary'), 'post-5a repairs use the same direct stopping rule');
+  assert.ok(laterArgv.includes('--direct-boundary'), 'post-3a repairs use the same direct stopping rule');
 });

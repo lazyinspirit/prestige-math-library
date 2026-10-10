@@ -23,3 +23,5 @@
 - `galaxy/`: [interactive view](galaxy/README.md) of published items.
 - `prestige-intelligence` checkout: the website; [tools/paths.mjs](tools/paths.mjs)
   finds it, or `PRESTIGE_APP_DIR` points to it.
+
+The current six-step workflow and rebuild checklist are in [WORKFLOW.md](WORKFLOW.md) and [research/workflow-rebuild-plan.md](research/workflow-rebuild-plan.md).

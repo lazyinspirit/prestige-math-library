@@ -1,0 +1,120 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "enum": [
+        1
+      ]
+    },
+    "run": {
+      "type": "string"
+    },
+    "batch": {
+      "type": "string"
+    },
+    "round": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "input_sha256": {
+      "type": "string"
+    },
+    "reviewed_items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewed_pages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "accept",
+        "repair",
+        "escalate"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "prerequisite",
+              "scope",
+              "outside-batch",
+              "uncertainty",
+              "local"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "reason"
+        ]
+      }
+    },
+    "consumer_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "accept",
+              "repair",
+              "escalate"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "decision",
+          "reason"
+        ]
+      }
+    }
+  },
+  "required": [
+    "version",
+    "run",
+    "batch",
+    "round",
+    "input_sha256",
+    "reviewed_items",
+    "reviewed_pages",
+    "decision",
+    "reason",
+    "findings",
+    "consumer_checks"
+  ]
+}

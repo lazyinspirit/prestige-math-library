@@ -197,7 +197,7 @@ if (auditMode) for (const path of ledgerPaths) {
 // The Step-0 form also detects a newly minted id that would shadow an existing
 // item or another page's plan entry.  It deliberately allows a page's own
 // already-spliced entry, so the same manifest can be rechecked immediately
-// after Step 4.
+// after Step 3.
 const planHomes = new Map();
 try {
   const plan = JSON.parse(readFileSync(join(REPO, 'research', 'plan-spec.json'), 'utf8'));

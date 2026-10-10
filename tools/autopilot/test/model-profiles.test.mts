@@ -64,44 +64,39 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(deepseek.contextWindow, 1_048_576);
 });
 
-test('Step 3 scopes and authors use DeepSeek while Step 5 adjudication uses Sol 6.1 high', () => {
-  assert.equal(stage('3a-scope').modelProfile, MODEL_PROFILE_NAMES.deepseekFlashMax);
-  const authorStage = stage('3b-author');
-  assert.equal(authorStage.modelProfile, MODEL_PROFILE_NAMES.deepseekFlashMax);
-  const author = { role: 'alpha-high', job: 'authoring' };
-  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.deepseekFlashMax);
-  assert.equal(selected(authorStage, {
-    role: 'beta', job: 'authoring', label: 'author-recover-1-1',
-  }), MODEL_PROFILE_NAMES.deepseekFlashMax, 'Step 3 recovery authors use the same profile');
-  assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
+test('Step 2 scope roles use Luna max and later adjudication uses Sol 6.1 high', () => {
+  const scope = stage('2-scope-review');
+  assert.equal(scope.modelProfile, MODEL_PROFILE_NAMES.lunaMax);
+  for (const role of ['scope-reviewer', 'scope-repairer'])
+    assert.equal(selected(scope, { role }), MODEL_PROFILE_NAMES.lunaMax);
 
-  const adjudicate = stage('5a-adjudicate');
-  assert.equal(selected(adjudicate, adjudicate.plan({ ...ctx, doctor: true }, ['1'])[0]), MODEL_PROFILE_NAMES.sol61High,
-    'Step 5a adjudication runs on the Sol 6.1 high lane');
-  const cross = stage('5b-cross');
+  const adjudicate = stage('3a-adjudicate');
+  assert.equal(selected(adjudicate, { role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.sol61High,
+    'Step 3a adjudication runs on the Sol 6.1 high lane');
+  const cross = stage('3b-cross');
   assert.equal(selected(cross, cross.plan(ctx, ['all'])[0]), MODEL_PROFILE_NAMES.sol61High);
 
-  const judgeStage = stage('6-judge');
+  const judgeStage = stage('4-judge');
   const plans = judgeStage.plan(ctx, judgeStage.units(ctx));
   for (const plan of plans.filter((candidate: any) => candidate.role === 'alpha-batch-read')) {
     assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.sol61High);
   }
   assert.equal(selected(judgeStage, plans.find((candidate: any) => candidate.role === 'tool')), undefined,
-    'the judge tool is not a Step-6 reader agent');
+    'the judge tool is not a Step-4 reader agent');
   assert.deepEqual(plans.find((candidate: any) => candidate.role === 'tool').argv.slice(0, 8),
     ['node', 'tools/judge-sweep.mjs', '--run', ctx.run, '--lineup', 'sol61', '--effort', 'high']);
   assert.deepEqual(judgeStage.gates(ctx)[0].argv.slice(0, 4),
     ['env', 'JUDGE_LINEUP=sol61', 'node', 'tools/level-coverage.mjs']);
-  assert.match(stage('7.4-rejudge').label, /Sol 6\.1 high/);
-  assert.deepEqual(stage('7.8-gate').gates({ ...ctx, doctor: true })
+  assert.match(stage('5.4-rejudge').label, /Sol 6\.1 high/);
+  assert.deepEqual(stage('5.8-gate').gates({ ...ctx, doctor: true })
     .find((candidate: any) => candidate.id === 'judge-closure').argv.slice(0, 2),
     ['env', 'JUDGE_LINEUP=sol61']);
 });
 
-test('Step 5a readers and refuters run Sol 6.1 high, and the tool lanes stay model-free', () => {
+test('Step 3a readers and refuters run Sol 6.1 high, and the tool lanes stay model-free', () => {
   for (const [id, role, profile] of [
-    ['5a-read', 'reader', MODEL_PROFILE_NAMES.sol61High],
-    ['5a-refute', 'refuter', MODEL_PROFILE_NAMES.sol61High],
+    ['3a-read', 'reader', MODEL_PROFILE_NAMES.sol61High],
+    ['3a-refute', 'refuter', MODEL_PROFILE_NAMES.sol61High],
   ] as const) {
     const st = stage(id);
     const plan = st.plan(ctx, ['1'])[0];
@@ -109,7 +104,7 @@ test('Step 5a readers and refuters run Sol 6.1 high, and the tool lanes stay mod
     assert.equal(selected(st, plan), profile);
     assert.equal(selected(st, { role: 'tool' }), undefined, `${id} keeps its tool lane model-free`);
   }
-  for (const id of ['5a-prepare', '5a-split', '5a-collect', '5a-baseline', '5b-edges', '5b-close']) {
+  for (const id of ['3a-prepare', '3a-split', '3a-collect', '3a-baseline', '3b-edges', '3b-close']) {
     const st = stage(id);
     assert.equal(selected(st, st.plan(ctx, ['1'])[0]), undefined, `${id} is a deterministic tool stage`);
   }
@@ -125,8 +120,7 @@ test('Step 1 scaffolders use DeepSeek Flash max', () => {
 });
 
 test('group Alpha resolves to Sol 6.1 high', () => {
-  assert.equal(stage('2-assign').modelProfile, undefined,
-    'batch assignment is a native mechanical tool');
+  assert.ok(!stages.some((candidate: any) => candidate.id === '2-assign'), 'assignment has no workflow stage');
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'alpha', '--brief', 'briefs/alpha.md', '--label', 'alpha-model-test',
     '--run', 'alpha-model-test', '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
@@ -152,22 +146,18 @@ test('all ordinary dispatcher roles default to Sol 6.1 high', () => {
   }
 });
 
-test('Step-3 scope and authoring use DeepSeek Flash max', () => {
-  const scope = MODEL_PROFILES[stage('3a-scope').modelProfile];
-  assert.equal(scope.model, MODELS.deepseekFlash.id);
+test('Step-2 reviewer and repairer share the Luna max profile', () => {
+  const scope = MODEL_PROFILES[stage('2-scope-review').modelProfile];
+  assert.equal(scope.model, 'gpt-6-luna');
   assert.equal(scope.effort, 'max');
   assert.equal(scope.requestedEffort, 'max');
-  const author = MODEL_PROFILES[stage('3b-author').modelProfile];
-  assert.equal(author.model, MODELS.deepseekFlash.id);
-  assert.equal(author.effort, 'max');
-  assert.equal(author.requestedEffort, 'max');
 });
 
-test('Step-7 fatal group adjudicator uses Sol 6.1 high', () => {
+test('Step-5 fatal group adjudicator uses Sol 6.1 high', () => {
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'alpha-adjudicate', '--brief', 'briefs/alpha.md',
     '--profile', MODEL_PROFILE_NAMES.sol61High,
-    '--label', 'step7-alpha-model-test', '--run', 'step7-alpha-model-test',
+    '--label', 'step5-alpha-model-test', '--run', 'step5-alpha-model-test',
     '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const row = JSON.parse(result.stdout);
@@ -176,7 +166,7 @@ test('Step-7 fatal group adjudicator uses Sol 6.1 high', () => {
   assert.equal(row.provider_effort, 'high');
 });
 
-test('Step 8 closeout agents use DeepSeek Flash max', () => {
+test('Step 6 closeout agents use DeepSeek Flash max', () => {
   for (const s of stages.filter((candidate: any) => /^8-/.test(candidate.id))) {
     const expected = MODEL_PROFILE_NAMES.deepseekFlashMax;
     for (const role of ['alpha', 'alpha-high', 'alpha-report', 'beta']) {
@@ -186,18 +176,18 @@ test('Step 8 closeout agents use DeepSeek Flash max', () => {
     assert.equal(selected(s, { role: 'tool', job: 'bookkeeping-mechanical' }), undefined,
       `${s.id} changed a deterministic tool job into a model call`);
   }
-  assert.equal(selected(stage('7.1-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }),
-    MODEL_PROFILE_NAMES.sol61High, 'Step 7 selects the Sol 6.1 high adjudication profile');
-  assert.equal(stage('7.5-adjudicate').modelProfile, MODEL_PROFILE_NAMES.sol61High);
+  assert.equal(selected(stage('5.1-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }),
+    MODEL_PROFILE_NAMES.sol61High, 'Step 5 selects the Sol 6.1 high adjudication profile');
+  assert.equal(stage('5.5-adjudicate').modelProfile, MODEL_PROFILE_NAMES.sol61High);
   assert.equal(MODEL_PROFILES[MODEL_PROFILE_NAMES.sol61High].provider, 'openai');
   assert.equal(MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekFlashMax].provider, 'deepseek');
 });
 
-test('the shared Step-3 authoring brief mandates authoritative web verification', () => {
-  const source = readFileSync(join(REPO, 'briefs/group-author.md'), 'utf8');
+test('the Step-1 authoring brief mandates authoritative web verification', () => {
+  const source = readFileSync(join(REPO, 'briefs/beta-scaffold.md'), 'utf8');
   assert.match(source, /uncertain|unfamiliar|unsure/i);
-  assert.match(source, /consult complete authoritative arguments when uncertain/i);
-  assert.match(source, /authoritative sources/i);
+  assert.match(source, /read complete relevant arguments/i);
+  assert.match(source, /authoritative web sources/i);
 });
 
 test('the Step-1 scaffold brief mandates research and complete dependency closure', () => {
@@ -211,9 +201,10 @@ test('the Step-1 scaffold brief mandates research and complete dependency closur
   assert.match(source, /deferred-set-theory-beyond-choice/i);
 });
 
-test('Step 1 retains its scaffold brief; Step 3 has separate scope and audit prompts', () => {
+test('Step 1 constructs and Step 2 uses separate review and repair prompts', () => {
   for (const plan of stage('1-scaffold').plan(ctx, ['1'])) assert.equal(plan.brief, 'briefs/beta-scaffold.md');
   const code = readFileSync(join(REPO, 'tools/autopilot/stages/mathlib.mts'), 'utf8');
-  assert.match(code, /briefs\/step3-scope\.md/);
-  assert.match(code, /briefs\/group-author\.md/);
+  assert.match(code, /briefs\/scope-reviewer\.md/);
+  const repair = readFileSync(join(REPO, 'briefs/scope-repairer.md'), 'utf8');
+  assert.match(repair, /scope and prerequisite repairer/i);
 });

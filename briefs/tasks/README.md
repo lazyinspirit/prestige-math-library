@@ -1,30 +1,5 @@
-# Task templates
+# Workflow task templates
 
-`tools/run-tasks.mjs` renders every Markdown file here except this README to
-`research/<run>-<template>.task.md`; `tools/step7-scope.mjs` separately composes
-the Step-6 batch review tasks and Step-7 group context tasks. Current Step-7 round tasks come from
-`tools/step7-workflow.mjs`, with `briefs/step7-adjudicator.md` and
-`briefs/step7-owner-repair.md`. The live eight-step stage table is the selection authority.
+`run-tasks.mjs` renders these templates from current planning manifests and controlling designs. Step 1 uses `beta-scaffold.md` for complete initial authoring. Step 2 uses `scope-reviewer.md` and `scope-repairer.md`; its native controller writes exact immutable whole-batch round tasks. `scope-review-batch.md` is a descriptor for read-only preflight before carriers exist.
 
-Templates contain only stage-specific inputs, write authority, required output,
-and focused gate work. Role-wide conduct and mathematical standards belong in
-the dispatched role brief; run-specific page data belongs in generated tasks,
-batch manifests, scope receipts, and the plan.
-
-Step 1 uses `briefs/beta-scaffold.md`; Step 3 authors use `briefs/group-author.md`.
-Step 8 uses `alpha-step8.md` only for evidence-bound owner reporting. The former
-Step-8 scope review, impact closer, adjudication and audit/spine receipt templates
-are removed. Current report outputs and schemas use `step8-` names.
-
-`run-tasks.mjs` replaces only these placeholders:
-
-| placeholder | rendered value |
-|---|---|
-| `{{run}}` | run identifier |
-| `{{n_batches}}` | batch count |
-| `{{batch_table}}` | batch, category, pair, and Beta-task table |
-| `{{coverage_list}}` | comma-separated batch coverage paths |
-| `{{batch_glob}}` | run batch-path stem |
-
-Generic per-batch templates retain `<i>` for the dispatch batch. Do not add a
-template unless a current stage or task composer selects it.
+Steps 3–6 retain independent review, batch digest/judging, adjudication/repair and closeout. Batch digest tasks are generated mechanically by `step5-scope.mjs`, one per batch, for Step 4 and its Step-5 handoff. Group metadata is generated during planning. Use the current workflow documentation and saved rebuild plan; historical task files are not new-run authority.

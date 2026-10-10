@@ -28,9 +28,9 @@ for (const physical of [false, true]) test(`${physical ? 'physics' : 'math'} tas
   });
   assert.equal(r.status, 0, r.stderr + r.stdout);
   const tasks = readdirSync(join(root, 'research')).filter(f => f.endsWith('.task.md'));
-  assert.ok(tasks.includes('demo-alpha-step8.task.md'));
-  assert.ok(!tasks.some(f => /step9|receipts|step8-(?:adjudicate|gate-adjudication)/.test(f)));
-  assert.match(readFileSync(join(root, 'research/demo-alpha-step8.task.md'), 'utf8'), /demo-step8-evidence.json/);
+  assert.ok(tasks.includes('demo-alpha-step6.task.md'));
+  assert.ok(!tasks.some(f => /step9|receipts|step6-(?:adjudicate|gate-adjudication)/.test(f)));
+  assert.match(readFileSync(join(root, 'research/demo-alpha-step6.task.md'), 'utf8'), /demo-step6-evidence.json/);
   const checked = spawnSync(process.execPath, [join(root, path), '--run', 'demo', '--check'], {
     cwd: root, encoding: 'utf8', env: { ...process.env, ...(physical ? { PHYSICS_REPO: root } : {}) },
   });

@@ -33,7 +33,7 @@ import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
-import { reopenStep5 } from '../src/step5-reopen.mts';
+import { reopenStep3 } from '../src/step3-reopen.mts';
 import { appendFrontier, assertNoAppendTransaction, recoverAppendItemOrder } from '../src/frontier-append.mts';
 import type { Config } from '../src/types.mts';
 
@@ -179,7 +179,7 @@ async function buildExecutor(run?: string) {
   const stagesPath = resolve(config.stages);
   const mod = await import(stagesPath);
   // The executor hot-reloads the table and its sibling stage modules at tick
-  // boundaries (validated first, refused on problems). mathlib.step5.mts is a
+  // boundaries (validated first, refused on problems). mathlib.step3.mts is a
   // composed part of the table, not a separately restart-bound configuration.
   (config as any).stagesPath = stagesPath;
   config.stagesWatch = readdirSync(dirname(stagesPath))
@@ -217,25 +217,25 @@ async function buildExecutor(run?: string) {
 }
 
 switch (cmd) {
-  case 'reopen-step5': {
+  case 'reopen-step3': {
     const run = opt('run') ?? die('--run is required');
     const authorization = opt('authorization') ?? die('--authorization is required');
     const config = loadConfig();
     // Runs live in `.autopilot/<run>`; an explicit --state-dir still wins.
     const runStateDir = opt('state-dir') ? stateDir : join(repo, '.autopilot', run);
     try {
-      const result = reopenStep5({
+      const result = reopenStep3({
         repo,
         run,
         stateDir: runStateDir,
         dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`),
         authorizationPath: resolve(repo, authorization),
-        pauseAfter: opt('pause-after', '5b-close'),
+        pauseAfter: opt('pause-after', '3b-close'),
       });
-      console.log(`reopen-step5: ${result.reopenId} archived ${result.archived.length} file(s) and cleared `
-        + `${result.clearedStages.length} Step-5 stage record(s)`);
+      console.log(`reopen-step3: ${result.reopenId} archived ${result.archived.length} file(s) and cleared `
+        + `${result.clearedStages.length} Step-3 stage record(s)`);
       console.log(`  archive: ${result.archiveDir}`);
-      console.log('  run remains paused; start the controller and resume to re-run Step 5 to its boundary');
+      console.log('  run remains paused; start the controller and resume to re-run Step 3 to its boundary');
     } catch (error: any) {
       console.error(String(error?.message ?? error));
       process.exitCode = 1;

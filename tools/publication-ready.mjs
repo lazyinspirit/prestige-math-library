@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-// Structured Step 8 verdict. This does not publish: it proves that workflow-
+// Structured Step 6 verdict. This does not publish: it proves that workflow-
 // owned work is closed and leaves only the owner's audit/status/push decisions.
 //
 // The receipt also seals the run's subjects, prerequisite context and tools. The expensive final
 // gates run against that sealed tree at 9-readiness-v2; terminal verification
 // recomputes the digest instead of rerunning the same mathematical scans. Files
-// that Step 8 creates after readiness and the context-hash acceleration cache
+// that Step 6 creates after readiness and the context-hash acceleration cache
 // that closure verification refreshes are excluded. The authoritative closure
 // receipt is hashed separately below; mathematical and workflow inputs remain
 // protected.
@@ -14,7 +14,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, lstatSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { REPO } from './paths.mjs';
-import { protectedEntryHash, runContentHash, runScope, sha256, splitFrontmatter } from './step8-lib.mjs';
+import { protectedEntryHash, runContentHash, runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 
 const argv = process.argv.slice(2);
@@ -41,12 +41,12 @@ function protectedTreeReceipt(scope) {
   const mutableAfterReadiness = new Set([
     receiptRel,
     `research/${run}-judge-context-hashes.json`,
-    `research/${run}-step8-evidence.json`,
+    `research/${run}-step6-evidence.json`,
     // Created by the final readiness gates, checked separately before commit.
     `research/${run}-proof-layout.json`,
-    `research/${run}-step8-report-integrity.json`,
-    `research/${run}-step8-report.response.json`,
-    `research/${run}-step8-report.md`,
+    `research/${run}-step6-report-integrity.json`,
+    `research/${run}-step6-report.response.json`,
+    `research/${run}-step6-report.md`,
   ]);
   const dispatchPrefix = `research/${run}-dispatch/`;
   const files = new Set();
@@ -190,15 +190,15 @@ function protectedTreeReceipt(scope) {
   projections.set('library#prose-link-homes', JSON.stringify(linkHomes.sort((a, b) => a.file.localeCompare(b.file))));
 
   // Native workflow inputs, rather than every owner diagnostic bearing RUN.
-  const native = /^(?:batch-\d+\.(?:pages|contracts|proof-contracts|coverage|cross-batch-dependencies)\.json|(?:scope-ledger|selection|covers|cross-batch-dependencies|cross-group-edges|drift-evidence|audit-manifest|audit-coverage|spine-audit|proof-contracts|impact(?:-5b)?|touches|judge(?:-adjudications|-attempts|-stamps|-closure)?|pathway(?:-closure)?|splice-\d+|splice-refusals|step3-auditor-(?:baseline|certifications)|step5-(?:closure|blockers|auditor-baseline|auditor-certifications)|5b-verdicts|step7-(?:scope|alerts|alert-decisions|auditor-baseline)|closeout-scope)\.(?:json|jsonl)|(?:reader(?:-findings)?-\d+|refute-\d+|alpha-batch-\d+-5a(?:-decisions)?)\.(?:json|md)|owner-authoring-direction\.md)$/;
+  const native = /^(?:batch-\d+\.(?:pages|contracts|proof-contracts|coverage|cross-batch-dependencies)\.json|(?:scope-ledger|selection|covers|cross-batch-dependencies|cross-group-edges|drift-evidence|audit-manifest|audit-coverage|spine-audit|proof-contracts|impact(?:-3b)?|touches|judge(?:-adjudications|-attempts|-stamps|-closure)?|pathway(?:-closure)?|splice-\d+|splice-refusals|step3-auditor-(?:baseline|certifications)|step3-(?:closure|blockers|auditor-baseline|auditor-certifications)|3b-verdicts|step5-(?:scope|alerts|alert-decisions|auditor-baseline)|closeout-scope)\.(?:json|jsonl)|(?:reader(?:-findings)?-\d+|refute-\d+|alpha-batch-\d+-3a(?:-decisions)?)\.(?:json|md)|owner-authoring-direction\.md)$/;
   for (const name of readdirSync(join(root, 'research'))) {
     if (name.startsWith(`${run}-`) && native.test(name.slice(run.length + 1))) add(`research/${name}`);
   }
-  for (const suffix of ['obligations.jsonl', 'step7-terminal-resolutions.jsonl', 'step7-owner-prerequisite-repairs.jsonl', 'step7-auditor-certifications.json'])
+  for (const suffix of ['obligations.jsonl', 'step5-terminal-resolutions.jsonl', 'step5-owner-prerequisite-repairs.jsonl', 'step5-auditor-certifications.json'])
     add(`research/${run}-${suffix}`);
   for (const id of manifestItems) for (const stage of ['3a', '3b']) for (const role of ['owner', 'review'])
     add(`research/${run}-step${stage}-${role}-${id}.json`);
-  walk(join(root, 'research', `${run}-step7-v2`));
+  walk(join(root, 'research', `${run}-step5-v2`));
   for (const dir of ['tools', 'briefs']) walk(join(root, dir));
   for (const file of ['CLAUDE.md', 'AGENTS.md', 'README.md', 'SCHEMA.md', 'WORKFLOW.md', 'autopilot.config.json', '.gitignore',
     'package.json', 'package-lock.json', 'pnpm-lock.yaml', 'tsconfig.json', 'research/b-leaf-legacy-allowlist.json']) add(file);
@@ -350,8 +350,8 @@ if (write) {
     if (JSON.stringify(saved.input_sha256) !== JSON.stringify(expected.input_sha256)) blockers.push(`${receiptRel}: input hashes are stale`);
     if ((saved.workflow_owned_blockers ?? []).length) blockers.push(`${receiptRel}: saved verdict contains open blockers`);
   }
-  if (requireReport && !existsSync(join(root, 'research', `${run}-step8-report.md`))) {
-    blockers.push(`missing research/${run}-step8-report.md`);
+  if (requireReport && !existsSync(join(root, 'research', `${run}-step6-report.md`))) {
+    blockers.push(`missing research/${run}-step6-report.md`);
   }
 }
 

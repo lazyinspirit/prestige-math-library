@@ -11,3 +11,5 @@
 - Use `drift-minted` or `drift-rescoped` only to record explicitly authorized, applied plan amendments.
 - Write only the plan and task-named report. The engine's mechanical stage materializes decisions; do not edit manifests, tasks, scope ledgers or content.
 - An unresolved decision holds the run for the owner. There is no automatic re-review.
+
+Escalate every significant unmet prerequisite directly to the owner with the smallest missing supplier, consuming claims and affected consumers. Do not treat a significant gap as routine drift bookkeeping or defer it silently to authoring.

@@ -161,14 +161,14 @@ test('the budget still exhausts on genuine failures', async () => {
   rmSync(repo, { recursive: true, force: true });
 });
 
-// Step 7 issues one engine-controlled Terra sweep per durable round.
-test('7.4-rejudge isolates attempt identity by round without a gate repair hook', async (t) => {
+// Step 5 issues one engine-controlled Terra sweep per durable round.
+test('5.4-rejudge isolates attempt identity by round without a gate repair hook', async (t) => {
   const repo = fixtureRepo();
   t.after(() => rmSync(repo, { recursive: true, force: true }));
-  const rejudge: any = stages.find((s: any) => s.id === '7.4-rejudge');
-  const first = rejudge.plan({ repo, run: 'demo', stageRounds: { '7.4-rejudge': 1 } })[0];
-  const second = rejudge.plan({ repo, run: 'demo', stageRounds: { '7.4-rejudge': 2 } })[0];
-  assert.ok(first.argv.includes('tools/step7-workflow.mjs'));
+  const rejudge: any = stages.find((s: any) => s.id === '5.4-rejudge');
+  const first = rejudge.plan({ repo, run: 'demo', stageRounds: { '5.4-rejudge': 1 } })[0];
+  const second = rejudge.plan({ repo, run: 'demo', stageRounds: { '5.4-rejudge': 2 } })[0];
+  assert.ok(first.argv.includes('tools/step5-workflow.mjs'));
   assert.ok(first.argv.includes('judge'));
   assert.equal(first.argv[first.argv.indexOf('--round') + 1], '1');
   assert.equal(second.argv[second.argv.indexOf('--round') + 1], '2');

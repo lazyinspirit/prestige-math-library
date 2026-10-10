@@ -83,7 +83,7 @@ export function recordedPublishedRepair(root, id, text, receiptPath) {
       || sha(before) !== receipt.before_raw_sha256
       || itemHashGuard(before) !== receipt.pre_sha256 || receipt.pre_sha256 === current)
       return fail('pre-edit published carrier does not match the repair');
-    const claims = readResearch(`research/${receipt.run}-step5-published-claims.jsonl`)
+    const claims = readResearch(`research/${receipt.run}-step3-published-claims.jsonl`)
       .split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line));
     const claimsForItem = claims.filter((row) => row.id === id);
     const claim = claimsForItem[0];

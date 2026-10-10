@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { proofContractCoverage } from './proof-contract-coverage.mjs';
-import { gateDiagnostics } from './step7-gate-diagnostics.mjs';
+import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
 const repo = fileURLToPath(new URL('../', import.meta.url));
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'proof-coverage-'));
@@ -66,7 +66,7 @@ test('selected published proof omissions remain metadata obligations in native r
   const f = fixture(t);
   f.put('items/thm-demo-one.md', '---\nid: thm-demo-one\nstatus: published\ndeps: []\n---\n## Proof\nExisting published argument.\n');
   f.put('research/demo-judge.jsonl', '');
-  const { initialize, prepareGateRepairPack } = await import('./step7-workflow.mjs');
+  const { initialize, prepareGateRepairPack } = await import('./step5-workflow.mjs');
   initialize(f.root, 'demo');
   const failure = { id: 'proof-contract-coverage', code: 1,
     output: 'ERROR contract-missing-proof [thm-demo-one]: missing merged contract' };
@@ -84,7 +84,7 @@ test('physics proof-coverage diagnostics retain physical theorem ownership', asy
   const r = spawnSync(process.execPath, [join(repo, 'tools/physics-support/proof-contract-coverage.mjs'),
     '--root', f.root, '--run', 'demo', '--contracts', 'research/demo-proof-contracts.json'], { encoding: 'utf8' });
   assert.equal(r.status, 1);
-  const { gateDiagnostics: physicalDiagnostics } = await import('./physics-support/step7-gate-diagnostics.mjs');
+  const { gateDiagnostics: physicalDiagnostics } = await import('./physics-support/step5-gate-diagnostics.mjs');
   const [d] = physicalDiagnostics([{ id: 'proof-contract-coverage', code: 1, output: r.stdout + r.stderr }], [id, 'thm-demo-one', 'def-demo-two']);
   assert.deepEqual(d.subjects, [id]);assert.equal(d.ownerHeld, false);
 });

@@ -1,7 +1,7 @@
 # Stage creation provenance
 
 `auditor-created-items.mjs` preserves immutable baseline exclusion and native
-successful-dispatch policies. The explicit Step-5 owner creation class records
+successful-dispatch policies. The explicit Step-3 owner creation class records
 actual authorship by an owner-spawned repair agent resolving an owner-held
 escalation. It is an owner attestation, not a native dispatch result, independent
 review, adjudication, judgment, or certificate of successful local checks.
@@ -11,11 +11,11 @@ After integrating the actual new item, manifest entry and contract entry, the
 owner prepares a JSON attestation from retained evidence and records it with:
 
 ```sh
-node tools/auditor-created-items.mjs owner-create --run RUN --step 5 --id ITEM --evidence research/ATTESTATION.json
+node tools/auditor-created-items.mjs owner-create --run RUN --step 3 --id ITEM --evidence research/ATTESTATION.json
 ```
 
 The command validates and copies it to the immutable canonical origin file
-`research/RUN-step5-owner-creation-ITEM.json`. It refuses to replace a different
+`research/RUN-step3-owner-creation-ITEM.json`. It refuses to replace a different
 origin. Recording alone does not run certification or advance the workflow.
 The ordinary stage certification command consumes this class explicitly,
 recording `evidence_class: "owner-spawned-creation"` and a raw-file hash link in
@@ -27,7 +27,7 @@ be replaced with actual evidence; this is not a live receipt):
 ```json
 {
   "version": 1,
-  "policy": "owner-spawned-step5-creation-v1",
+  "policy": "owner-spawned-step3-creation-v1",
   "evidence_class": "owner-spawned-creation",
   "run": "RUN",
   "step": 5,
@@ -54,7 +54,7 @@ be replaced with actual evidence; this is not a live receipt):
     "item_file_sha256": "CURRENT_HASH",
     "manifest_sha256": "CURRENT_HASH",
     "contract_sha256": "CURRENT_HASH",
-    "step5_subject_sha256": "CURRENT_HASH"
+    "step3_subject_sha256": "CURRENT_HASH"
   },
   "sources": [
     { "role": "assignment", "path": "research/ACTUAL_ASSIGNMENT", "sha256": "RAW_FILE_HASH" },
@@ -82,7 +82,7 @@ used to infer this class's author interval.
 Carrier hashes use `itemHashGuard`/`itemHashJudge` from `item-hash.mjs`, raw item
 bytes for `item_file_sha256`, and recursively key-sorted compact JSON for the
 manifest and contract projections. The manifest projection is the exact item
-entry plus `__step6_page_id`; the contract projection is `contracts[ITEM]`, or
+entry plus `__step4_page_id`; the contract projection is `contracts[ITEM]`, or
 JSON null when absent. The subject hash uses the sorted object with
 `item_sha256` (raw item hash), `manifest_sha256`, and `contract_sha256`.
 Baseline digest uses `JSON.stringify` of the parsed baseline, without sorting.
@@ -106,7 +106,7 @@ and no native `author_result` or native-bootstrap basis. Missing or tampered
 origins, changed source evidence without a valid archive, a different home or
 batch, and stale current reports fail closed. This does not waive the initial
 mathematical review or certify the whole stage automatically. A later native
-Step-7/8 promotion still requires its genuine dispatch and item-specific stage
+Step-5/8 promotion still requires its genuine dispatch and item-specific stage
 delta; its `origin_step: 5` recursively validates this original owner evidence.
 Every downstream scope, coverage, guard and judge-stamp consumer uses the
 shared validating loader. Original source artifacts must remain byte-stable unless the supported exact-byte
@@ -121,11 +121,11 @@ binds its historical escalation bytes. Before updating that canonical decision,
 explicitly preserve the exact current original bytes for each affected origin:
 
 ```sh
-node tools/auditor-created-items.mjs owner-source-archive --run RUN --step 5 --id ITEM --source research/ORIGINAL_SOURCE.json --owner-identity /root --reason "Actual reason for preserving historical escalation before owner resolution"
+node tools/auditor-created-items.mjs owner-source-archive --run RUN --step 3 --id ITEM --source research/ORIGINAL_SOURCE.json --owner-identity /root --reason "Actual reason for preserving historical escalation before owner resolution"
 ```
 
 This narrowly supersedes the source-path-must-never-change rule only for the
-exact source bound by the immutable Step-5 owner creation origin. The command
+exact source bound by the immutable Step-3 owner creation origin. The command
 requires the source's current raw SHA256 to equal the origin's original source
 hash. It writes an immutable raw-byte archive and owner receipt under
 `research/`, using exclusive creation and read-only permissions. The receipt
@@ -147,16 +147,16 @@ manifest and contract carriers retain their existing recertification rules.
 
 ## Missing historical definition manifest projection
 
-For a genuinely Step-3-created definition whose Step-5 item and manifest both
+For a genuinely Step-3-created definition whose Step-3 item and manifest both
 changed, an owner can explicitly authorize a current-content review when the
 old manifest projection cannot be recovered. This grants no general manifest
 exemption and never labels the unknown change metadata-only. The existing
-Step-3 origin, immutable Step-5 home/batch and before hash, successful native
-Step-5 review context, and current owner receipt all remain mandatory.
+Step-3 origin, immutable Step-3 home/batch and before hash, successful native
+Step-3 review context, and current owner receipt all remain mandatory.
 
-The research evidence uses the existing fenced `step5-manifest-repair` JSON
-with policy `step5-manifest-repair-evidence-v1` and
-`repair_kind: "current-definition-manifest-review"`. Supply the run, step 5,
+The research evidence uses the existing fenced `step3-manifest-repair` JSON
+with policy `step3-manifest-repair-evidence-v1` and
+`repair_kind: "current-definition-manifest-review"`. Supply the run, step 3,
 id, page, batch, immutable `baseline_manifest_sha256`, current
 `current_manifest_sha256`, full `current_manifest_entry`, and
 `current_carriers` with exact raw item/manifest/contract hashes. Omit
@@ -173,7 +173,7 @@ be the sorted complete current list of item dependencies or exact wikilinks to
 the definition. Item frontmatter and manifest sources/deps must agree. Record
 the actual review of the definition, suppliers, metadata and consumer uses;
 never infer it from successful local tools. The resulting owner receipt has
-basis `initial-step5-current-definition-manifest-review` and retains
+basis `initial-step3-current-definition-manifest-review` and retains
 `historical_delta_unknown: true`. Its native result supplies review context,
 not attribution of the unknown late changes.
 
@@ -198,13 +198,13 @@ hashes. Strict contract argv must include `--strict`, `--items`, the exact id
 and its owning batch contract. Record actual stdout/stderr and preserve failed
 attempts separately; these are local checks, never independent audits.
 The owner receipt uses basis
-`initial-step5-current-ball-lemma-manifest-review` and retains
+`initial-step3-current-ball-lemma-manifest-review` and retains
 `historical_delta_unknown: true`, without inventing native authorship or an
 old manifest projection. Existing definition receipts keep their distinct basis.
 
 ## Current proof and manifest review with an unknown historical projection
 
-For a genuinely Step-3-created proof item whose Step-5 manifest changed,
+For a genuinely Step-3-created proof item whose Step-3 manifest changed,
 `current-proof-manifest-review` supports an explicit owner review when
 the original manifest projection is unavailable. It is available to lemmas,
 theorems, propositions and corollaries with a current supplied proof. Definitions
@@ -212,12 +212,12 @@ retain the separate `current-definition-manifest-review` branch. This is neither
 a metadata-only classification nor a claim that a native worker authored the
 current bytes.
 
-Use the existing fenced `step5-manifest-repair` JSON, policy
-`step5-manifest-repair-evidence-v1`, with run, step 5, id, unchanged page/batch,
+Use the existing fenced `step3-manifest-repair` JSON, policy
+`step3-manifest-repair-evidence-v1`, with run, step 3, id, unchanged page/batch,
 `baseline_manifest_sha256`, `current_manifest_sha256`, full exact
 `current_manifest_entry`, and `current_carriers` containing all six keys:
 `guard_sha256`, `judge_sha256`, `item_file_sha256`, `manifest_sha256`,
-`contract_sha256`, `step5_subject_sha256`. Set
+`contract_sha256`, `step3_subject_sha256`. Set
 `repair_kind: "current-proof-manifest-review"`, `historical_delta_unknown: true`,
 and omit `baseline_manifest_entry`.
 
@@ -225,9 +225,9 @@ and omit `baseline_manifest_entry`.
 the actual authority reason. Hash-bound immutable research `sources` must
 collectively contain the run, item and exact authority reason and substantiate
 the actual owner review. Never fabricate source reading. The genuinely
-successful completed native Step-5 dispatch supplies only eligible stage/batch
+successful completed native Step-3 dispatch supplies only eligible stage/batch
 context; the explicit owner receipt supplies current repair evidence. Genuine
-Step-3 origin, immutable Step-5 baseline membership and unchanged home/batch
+Step-3 origin, immutable Step-3 baseline membership and unchanged home/batch
 remain required.
 
 The `review` object must affirm `current_item_and_contract_checked`,
@@ -256,34 +256,34 @@ independent audit or a substitute for personal proof review.
 After writers drain and the owner has completed that review and those checks,
 use the ordinary `owner-recertify` command with this evidence and the actual
 reason, then the ordinary whole-stage `certify`. The resulting receipt retains
-`basis: "initial-step5-current-proof-manifest-review"` and
+`basis: "initial-step3-current-proof-manifest-review"` and
 `historical_delta_unknown: true`; certification preserves `origin_step: 3`.
 Missing origins, changed baseline/home, incomplete current hashes, altered
 source/check receipts, omitted suppliers/consumers or changed mathematical
 context fail closed. Existing native write-window routes remain unchanged.
 
-When the actual item bytes are unchanged from the immutable Step-5 baseline,
+When the actual item bytes are unchanged from the immutable Step-3 baseline,
 this same explicit full-review branch can cover a changed manifest (and any
 current contract maintenance). Set `current_item_unchanged: true` in the evidence.
 The tool verifies exact baseline/current raw item equality and records that
 same truthful flag in the owner receipt. A real manifest delta, genuine original
-Step-3 provenance, unchanged baseline home, completed native Step-5 context,
+Step-3 provenance, unchanged baseline home, completed native Step-3 context,
 all six current hashes, full proof/supplier/consumer review and actual focused
 checks remain mandatory. Historical manifest differences stay unknown; this
 neither labels them metadata-only nor attributes a current item write to a
 native worker. No artificial source edit is required. A no-delta subject cannot
 enter this branch, and ordinary contract-only, known source-reference delta,
-existing definition/special proof branches and Step-7 rules remain unchanged.
+existing definition/special proof branches and Step-5 rules remain unchanged.
 
 ## Historical proof-context archives
 
-A generic Step-5 current-proof recertification binds the guard hashes of its
+A generic Step-3 current-proof recertification binds the guard hashes of its
 suppliers and direct consumers. A later legitimate edit to those context items
 must not erase the original proof review. Root may preserve retained actual
 before-file bytes using an immutable sidecar:
 
 ```sh
-node tools/auditor-created-items.mjs owner-context-archive --run RUN --step 5 --id SUBJECT --certification research/RUN-step5-auditor-certifications.json --context-id CONTEXT --source research/ACTUAL-BEFORE.md --owner-identity /root --reason "Actual reason for preserving the originally reviewed context"
+node tools/auditor-created-items.mjs owner-context-archive --run RUN --step 3 --id SUBJECT --certification research/RUN-step3-auditor-certifications.json --context-id CONTEXT --source research/ACTUAL-BEFORE.md --owner-identity /root --reason "Actual reason for preserving the originally reviewed context"
 ```
 
 Registration requires an existing generic proof-review owner receipt bound by

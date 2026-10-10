@@ -5,7 +5,7 @@
 // 398 items carrying `verification.judge` — no stage owned the stamping act,
 // and when the owner ran the tool by hand it first refused the ledger (retired
 // Terra rows made a third lane under the exactly-two check) and then stamped
-// nothing (clause-(a)-only currency read every step-8-moved pair as unjudged).
+// nothing (clause-(a)-only currency read every step-6-moved pair as unjudged).
 // The owner rewrote both (2026-08-17); these tests lock the rewrite, the
 // `--verify` gate mode built on it, and the `${current}` ReferenceError the
 // rewrite left in the audit-targeted evidence block.
@@ -131,15 +131,15 @@ test('--items stamps an explicitly certified subset without needing a manifest-w
   assert.equal(result.status, 0, result.stderr);
 });
 
-test('a current Step-7 auditor-created certification needs no judge stamp or ledger pass', () => {
+test('a current Step-5 auditor-created certification needs no judge stamp or ledger pass', () => {
   const dir = fixture([]);
   writeFileSync(join(dir, 'research/r-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', items: [] }]));
   writeAuditorCreatedBaseline(dir, 'r', 7);
   writeFileSync(join(dir, 'items/lem-auditor-created.md'), itemText('lem-auditor-created'));
   writeFileSync(join(dir, 'research/r-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', items: [{ id: 'lem-auditor-created' }] }]));
   mkdirSync(join(dir, 'research/r-dispatch'));
-  writeFileSync(join(dir, 'research/r-dispatch/alpha-adjudicate-step7-a.result.json'), JSON.stringify({
-    run: 'r', role: 'alpha-adjudicate', label: 'step7-a', ok: true, covers: ['1'],
+  writeFileSync(join(dir, 'research/r-dispatch/alpha-adjudicate-step5-a.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-adjudicate', label: 'step5-a', ok: true, covers: ['1'],
     started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
   }));
   certifyAuditorCreatedItems(dir, 'r', 7);
@@ -148,7 +148,7 @@ test('a current Step-7 auditor-created certification needs no judge stamp or led
   // give this item no usable judge pass. Its separate receipt is the authority.
   writeLedger(dir, LANES.map((model) => ledgerRow('unrelated', model, false, '0'.repeat(64))));
   const result = spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
-    '--items', 'lem-auditor-created', '--run', 'r', '--auditor-certifications', 'research/r-step7-auditor-certifications.json', '--verify'],
+    '--items', 'lem-auditor-created', '--run', 'r', '--auditor-certifications', 'research/r-step5-auditor-certifications.json', '--verify'],
   { cwd: dir, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /1 auditor-created certified/);
@@ -158,9 +158,9 @@ test('a current Step-7 auditor-created certification needs no judge stamp or led
   }));
   const stale = spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
     '--items', 'lem-auditor-created', '--run', 'r', '--auditor-certifications',
-    'research/r-step7-auditor-certifications.json', '--verify'], { cwd: dir, encoding: 'utf8' });
+    'research/r-step5-auditor-certifications.json', '--verify'], { cwd: dir, encoding: 'utf8' });
   assert.equal(stale.status, 2);
-  assert.match(stale.stderr, /stale Step 7 auditor-created certification carriers/);
+  assert.match(stale.stderr, /stale Step 5 auditor-created certification carriers/);
 });
 
 for (const stampInitially of [false, true]) for (const precheck of [false, true])
@@ -180,11 +180,11 @@ test(`auditor certification survives judge-stamp add/remove, apply→verify→re
   for (const file of [path, manifest]) utimesSync(file, at, at);
   mkdirSync(join(dir, 'research/r-dispatch'));
   writeFileSync(join(dir, 'research/r-dispatch/author.result.json'), JSON.stringify({
-    run: 'r', role: 'alpha-adjudicate', label: 'step7-a', covers: ['1'], ok: true,
+    run: 'r', role: 'alpha-adjudicate', label: 'step5-a', covers: ['1'], ok: true,
     started_at: '2025-01-01T00:00:00Z', ended_at: '2025-01-01T00:00:10Z',
   }));
   const original = certifyAuditorCreatedItems(dir, 'r', 7);
-  const receiptPath = join(dir, 'research/r-step7-auditor-certifications.json');
+  const receiptPath = join(dir, 'research/r-step5-auditor-certifications.json');
   writeLedger(dir, LANES.map(model => ledgerRow('unrelated', model, false, '0'.repeat(64))));
   const check = (mode: string) => spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
     '--items', id, '--run', 'r', '--auditor-certifications', receiptPath, mode], { cwd: dir, encoding: 'utf8' });
@@ -199,7 +199,7 @@ test(`auditor certification survives judge-stamp add/remove, apply→verify→re
   writeFileSync(path, precheck ? plain.replace('precheck: pass', 'precheck: fail')
     : plain.replace('status: draft\n', 'status: draft\nverification:\n  precheck: fail\n'));
   assert.throws(() => loadAuditorCreatedCertifications(receiptPath), /stale/);
-  assert.throws(() => certifyAuditorCreatedItems(dir, 'r', 7), /no successful Step 7/);
+  assert.throws(() => certifyAuditorCreatedItems(dir, 'r', 7), /no successful Step 5/);
 });
 
 test('apply creates verification for a definition with no precheck and preserves verdict currency', () => {

@@ -40,23 +40,23 @@ path rather than repairing it yourself.
 Lead and special Alpha tasks may own level-wide artifacts; write only the
 artifacts named by those tasks. Never rename an established item id. Do not
 write judge verdicts or stamps. Published content, scope changes, deletion,
-and reading-order changes require the exact task-authorised protocol. Step-7
+and reading-order changes require the exact task-authorised protocol. Step-5
 adjudicators and all three owner repair agents may fully author new items only
 for genuine unmet prerequisites of assigned repairs. Use unique IDs and register
 each addition in the canonical registry/index, page, applicable manifest and
 contract. Resolve dependency and downstream effects before central certification
 and the complete gate battery. Otherwise report the issue without changing it.
-Current Step-7 dispatches also follow
-`step7-adjudicator.md` or `step7-owner-repair.md`; their tasks authorize assigned
+Current Step-5 dispatches also follow
+`step5-adjudicator.md` or `step5-owner-repair.md`; their tasks authorize assigned
 published downstream repairs across the whole library.
 
-At Step 7, an item genuinely created and fully authored by an authorised
+At Step 5, an item genuinely created and fully authored by an authorised
 auditor/adjudicator is a separate certification class. Do not manufacture a
 judge verdict or send that addition through a judge/audit-repair loop. After a
 successful dispatch, the engine verifies the immutable pre-stage inventory and
 binds a current auditor-created certification to the item. This does not widen
 write scope or waive content, dependency, source, rendering, proof-contract, or
-Step-7 task ownership rules. Existing-item edits still require ordinary
+Step-5 task ownership rules. Existing-item edits still require ordinary
 current judge evidence.
 
 ## Review and repair standard
@@ -84,7 +84,7 @@ its prior `verification.judge` record.
 
 Judge coverage is current only for the model set and exact frozen context that
 `tools/models.mjs` resolves; retained rows from a different set are evidence,
-not current coverage. Current Step-7 adjudication repairs every confirmed defect,
+not current coverage. Current Step-5 adjudication repairs every confirmed defect,
 including `confirmed_nonfatal`; `confirmed_fatal` additionally enters the fatal
 threshold count. A `false_positive` requires evidence without unnecessary edits.
 The task controls repair ownership, fresh downstream continuation and any

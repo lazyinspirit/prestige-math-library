@@ -296,7 +296,7 @@ test('retry re-arms the repair loop, not just the lanes', () => {
   assert.ok(notifications.some((n) => n.kind === 'retry-armed' && /repair rounds re-armed on 1 stage/.test(n.message)));
 });
 
-test('retry cannot reopen a terminal Step 7 repair budget', () => {
+test('retry cannot reopen a terminal Step 5 repair budget', () => {
   const fx = fixture();
   const stages = gatedStage(fx, [loggingGate(fx, 'g1')], {
     maxFixRounds: 2,
@@ -523,11 +523,11 @@ test('a pause-at marker stops the run at the named stage boundary', async () => 
   assert.deepEqual(gateRuns(fx), ['first'], 'the stage after the boundary never started');
 });
 
-// 2026-09-17: phase-2-remaining-27 armed `pause-at 5b-close` to stop at the end
-// of Step 5. `5b-close` waives its gates, and a gates-waived stage is finished
+// 2026-09-17: phase-2-remaining-27 armed `pause-at 3b-close` to stop at the end
+// of Step 3. `3b-close` waives its gates, and a gates-waived stage is finished
 // by coverage alone — it never reaches `runGroupGates`' stamp loop and so never
 // gets a `doneAt`. The pause keyed on that stamp, never fired, and the engine
-// walked into the Step-6 judge fan-out. Completion now comes from
+// walked into the Step-4 judge fan-out. Completion now comes from
 // `stageStatus`, the same predicate that advances the pipeline.
 test('a pause-at marker fires on a gates-waived stage, which carries no doneAt stamp', async () => {
   const fx = fixture();

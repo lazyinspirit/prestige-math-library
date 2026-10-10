@@ -17,8 +17,8 @@
 //
 //   echo '{"command":"pause"}'                    > .autopilot/control.json
 //   echo '{"command":"resume"}'                   > .autopilot/control.json
-//   echo '{"command":"pause-at","stage":"3b-author"}' > .autopilot/control.json
-//   echo '{"command":"skip","stage":"6-judge"}'   > .autopilot/control.json
+//   echo '{"command":"pause-at","stage":"1-scaffold"}' > .autopilot/control.json
+//   echo '{"command":"skip","stage":"4-judge"}'   > .autopilot/control.json
 //   echo '{"command":"retry","unit":"3"}'         > .autopilot/control.json
 //   echo '{"command":"stop"}'                     > .autopilot/control.json
 //   echo '{"command":"report"}'                   > .autopilot/control.json

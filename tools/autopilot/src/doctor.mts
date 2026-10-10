@@ -183,7 +183,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   //    used to call every stage's plan() against a synthetic unit list of
   //    '1'..'8', which was wrong in both directions: it reported `batch-8` on a
   //    seven-batch run, and it never reached a REPAIR ROUND's dispatches at
-  //    all — so `<run>-beta-source-scout.task.md`, `<run>-alpha-step4.task.md`,
+  //    all — so `<run>-beta-source-scout.task.md`, `<run>-scope-review.task.md`,
   //    `<run>-alpha-contract-audit.task.md` and four more could be absent with
   //    doctor green, and the run would block on one of them hours in. That is
   //    precisely the failure this file exists to prevent, so the enumeration
@@ -301,7 +301,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   //
   // A disposition and its ledger row are one act, and a run that confirmed fatal
   // defects while writing no rows has a ledger that is quietly not being kept —
-  // discovered, if at all, at step 8 when the rows can no longer be written
+  // discovered, if at all, at step 6 when the rows can no longer be written
   // from memory. `defect-ledger stats --coverage` computes the holes; the filter
   // to `run` is what makes it usable as a check.
   //

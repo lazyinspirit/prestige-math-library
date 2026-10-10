@@ -1,0 +1,212 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, existsSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, relative } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { batchInput, batchPlan, collectBatch, loopState, loopDir, accepted, loopPattern, prerequisiteBatches,
+  consumers, checkBatches, resolveOwner, captureRepairControl, verifyRepairControl } from '../../batch-scope-review.mjs';
+import { stages, workflowRevision } from '../stages/mathlib.mts';
+import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+import { State, statePath } from '../src/state.mts';
+import { Reporter } from '../src/reporter.mts';
+import { Executor } from '../src/executor.mts';
+import { makeExecAdapter } from '../src/adapters/exec.mts';
+
+const json=(path:string,value:any)=>writeFileSync(path,JSON.stringify(value,null,2)+'\n');
+function fixture(t:any){
+  const repo=mkdtempSync(join(tmpdir(),'scope-loop-'));
+  for(const dir of ['research','items','library/test','dispatch'])mkdirSync(join(repo,dir),{recursive:true});
+  t.after(()=>rmSync(repo,{recursive:true,force:true}));
+  mkdirSync(join(repo,'briefs/schemas'),{recursive:true});
+  for(const name of ['scope-reviewer.md','scope-repairer.md'])writeFileSync(join(repo,'briefs',name),'Read the whole assigned batch.');
+  json(join(repo,'briefs/schemas/batch-scope-review.json'),{type:'object'});
+  const ctx:any={repo,run:'demo',dispatchDir:join(repo,'dispatch')};
+  const item=(id:string,deps:string[],level:number)=>({id,kind:'lemma',title:id,deps,dependency_level:level});
+  const pages:any[]=[
+    {id:'pair-a',kind:'A',category:'test',title:'A',companion:'pair-a-examples',order:1,requires:[],items:[item('lem-a',[],0)]},
+    {id:'pair-a-examples',kind:'B',category:'test',title:'A examples',order:2,requires:['pair-a'],items:[item('ex-a',['lem-a'],1)]},
+    {id:'pair-b',kind:'A',category:'test',title:'B',companion:'pair-b-examples',order:3,requires:['pair-a'],items:[item('lem-b',['lem-a'],1)]},
+    {id:'pair-b-examples',kind:'B',category:'test',title:'B examples',order:4,requires:['pair-b'],items:[item('ex-b',['lem-b'],2)]},
+  ];
+  const writeItem=(id:string,deps:string[],statement='Original statement',aliases:string[]=[])=>{
+    writeFileSync(join(repo,'items',`${id}.md`),`---\nid: ${id}\nstatus: draft\ndeps: ${JSON.stringify(deps)}\naliases: ${JSON.stringify(aliases)}\n---\n\n## Statement\n${statement}\n\n## Proof\n1. Argument. [def] ∎\n`);
+  };
+  for(const page of pages){writeFileSync(join(repo,'library/test',`${page.id}.md`),`# ${page.title}\n`);for(const i of page.items)writeItem(i.id,i.deps);}
+  for(const batch of ['1','2']){
+    json(join(repo,'research',`demo-batch-${batch}.pages.json`),pages.slice((Number(batch)-1)*2,Number(batch)*2));
+    json(join(repo,'research',`demo-batch-${batch}.coverage.json`),{pages:[]});
+    json(join(repo,'research',`demo-batch-${batch}.proof-contracts.json`),{contracts:[]});
+  }
+  json(join(repo,'research/plan-spec.json'),{pages:pages.map(p=>({...p,items:[]}))});
+  json(join(repo,'research/demo-alpha-groups.json'),[{label:'a',covers:['1','2']}]);
+  return {ctx,repo,pages,writeItem};
+}
+function complete(f:any,batch:string,decision='accept',options:any={}){
+  const p=batchPlan(f.ctx,batch);assert.ok(p);
+  const state=loopState(f.repo,'demo',batch),input=state.prepared;
+  const row={version:1,run:'demo',batch,round:input.round,input_sha256:input.input_sha256,
+    reviewed_items:input.inventory.items,reviewed_pages:input.inventory.pages,decision,
+    reason:decision==='accept'?'Complete batch reviewed and obligations met.':'Batch needs local prerequisite repair.',
+    findings:decision==='accept'?[]:[{id:input.inventory.items[0],type:decision==='escalate'?'prerequisite':'local',reason:'Missing justified prerequisite use.'}],
+    consumer_checks:[],...options};
+  json(join(f.repo,p.resultArtifact),row);
+  json(join(f.ctx.dispatchDir,`${p.role}-${p.label}.result.json`),{run:'demo',role:p.role,label:p.label,covers:[batch],ok:true,session_id:`session-${p.role}`});
+  return {p,row,state:collectBatch(f.ctx,batch)};
+}
+
+test('whole-batch review -> repair -> whole-batch acceptance reuses roles and sessions',t=>{
+  const f=fixture(t);const first=complete(f,'1','repair');assert.equal(first.state.phase,'repair');
+  assert.equal(loopPattern(f.ctx,['1','2']).test(`${first.p.role}-${first.p.label}.result.json`),false);
+  const repair=batchPlan(f.ctx,'1');assert.equal(repair.role,'scope-repairer');
+  f.writeItem('lem-a',[],'Original statement');
+  complete(f,'1');assert.equal(loopState(f.repo,'demo','1').repairs.length,1);
+  const next=batchPlan(f.ctx,'1');assert.equal(next.role,'scope-reviewer');assert.equal(next.resumeSession,'session-scope-reviewer');
+  const text=readFileSync(join(f.repo,next.task),'utf8');assert.match(text,/ENTIRE batch/);assert.ok(text.indexOf('lem-a (level 0)')<text.indexOf('ex-a (level 1)'));
+  complete(f,'1');assert.equal(accepted(f.repo,'demo','1'),true);
+  complete(f,'2');assert.equal(checkBatches(f.repo,'demo'),2);
+});
+
+test('two repairs and three whole-batch reviews exhaust durably across reload and owner resolution',t=>{
+  const f=fixture(t);
+  for(let round=0;round<2;round++){complete(f,'1','repair');complete(f,'1');}
+  const third=complete(f,'1','repair');assert.equal(third.state.phase,'held');
+  assert.equal(loopState(f.repo,'demo','1').reviews.length,3);assert.equal(loopState(f.repo,'demo','1').repairs.length,2);
+  assert.throws(()=>batchPlan(f.ctx,'1'),/held for owner/);
+  assert.throws(()=>resolveOwner(f.repo,'demo','1',{decision:'continue',reason:'Resolved',reviewer:'owner'}),/exhausted/);
+  resolveOwner(f.repo,'demo','1',{decision:'accept',reason:'Owner independently resolved and checked the whole batch.',reviewer:'owner'});
+  const stage:any=stages.find(s=>s.id==='2-scope-review');
+  stage.onProgress({ctx:f.ctx,stage,executor:{inflight:new Map(),adoptedUnits:()=>new Set()}});
+  assert.equal(accepted(f.repo,'demo','1'),true);
+  assert.ok(existsSync(join(f.ctx.dispatchDir,'tool-scope-accepted-1.result.json')));
+  assert.equal(loopState(f.repo,'demo','1').repairs.length,2);
+});
+
+test('significant unmet prerequisites escalate immediately and prevent repair dispatch',t=>{
+  const f=fixture(t);assert.equal(complete(f,'1','escalate').state.phase,'held');
+  assert.equal(loopState(f.repo,'demo','1').repairs.length,0);assert.throws(()=>batchPlan(f.ctx,'1'),/held for owner/);
+});
+
+test('partial batch inventories and significant findings disguised as routine repair are rejected',t=>{
+  const f=fixture(t);
+  assert.throws(()=>complete(f,'1','repair',{reviewed_items:['lem-a']}),/Incomplete batch/);
+  assert.throws(()=>complete(f,'1','repair',{findings:[{id:'lem-a',type:'prerequisite',reason:'Significant gap.'}]}),/owner escalation/);
+});
+
+test('failed process output never advances the loop and stale supplier bytes invalidate acceptance',t=>{
+  const f=fixture(t);const p=batchPlan(f.ctx,'1');
+  json(join(f.ctx.dispatchDir,`${p.role}-${p.label}.result.json`),{run:'demo',role:p.role,covers:['1'],ok:false});
+  assert.equal(collectBatch(f.ctx,'1').reviews.length,0);
+  complete(f,'1');complete(f,'2');assert.equal(accepted(f.repo,'demo','2'),true);
+  f.writeItem('lem-a',[],'Changed supplier statement');assert.equal(accepted(f.repo,'demo','2'),false);
+  assert.equal(collectBatch(f.ctx,'2').phase,'held');
+});
+
+test('scheduling includes body-only logical dependencies and resolves aliases',t=>{
+  const f=fixture(t);const b=f.pages.slice(2).map(p=>({...p,requires:p.kind==='A'?[]:['pair-b'],items:p.items.map((i:any)=>({...i,deps:i.id==='lem-b'?[]:i.deps}))}));
+  json(join(f.repo,'research/demo-batch-2.pages.json'),b);
+  f.writeItem('lem-a',[],'Supplier',['supplier-alias']);f.writeItem('lem-b',['supplier-alias']);
+  assert.deepEqual(prerequisiteBatches(f.repo,'demo','2'),['1']);
+  assert.throws(()=>batchPlan(f.ctx,'2'),/authored logical deps differ/);
+  b[0].items[0].deps=['lem-a'];json(join(f.repo,'research/demo-batch-2.pages.json'),b);
+  complete(f,'2');f.writeItem('lem-a',[],'Changed supplier',['supplier-alias']);assert.equal(accepted(f.repo,'demo','2'),false);
+});
+
+test('consumer tracing keeps indirect, old-edge, old-alias and also-restated consumers',t=>{
+  const f=fixture(t);f.writeItem('lem-a',[],'Supplier',['old-alias']);f.writeItem('lem-b',['old-alias']);
+  const before=batchPlan(f.ctx,'1');const original=loopState(f.repo,'demo','1').prepared.before_items;
+  f.writeItem('lem-a',[],'Restated supplier');f.writeItem('lem-b',[],'Restated consumer');
+  const impact=consumers(f.repo,['lem-a','lem-b'],original);
+  assert.deepEqual(impact.map(x=>x.id),['ex-a','ex-b','lem-b']);
+  assert.ok(impact.find(x=>x.id==='ex-b').paths.some((path:string[])=>path.join(',')==='lem-a,lem-b,ex-b'));
+});
+
+test('repair and following reviewer must check every direct and indirect consumer',t=>{
+  const f=fixture(t);complete(f,'1','repair');const p=batchPlan(f.ctx,'1');
+  f.writeItem('lem-a',[],'Changed statement');
+  assert.throws(()=>complete(f,'1'),/consumer checks/);
+  const checks=consumers(f.repo,['lem-a']).map(row=>({id:row.id,decision:'accept',reason:'Current supplier use remains valid.'}));
+  complete(f,'1','accept',{consumer_checks:checks});
+  assert.throws(()=>complete(f,'1'),/consumer checks/);
+  complete(f,'1','accept',{consumer_checks:checks});assert.equal(accepted(f.repo,'demo','1'),true);
+});
+
+test('batch-local additions and deletions update the next full-batch review inventory',t=>{
+  const f=fixture(t);complete(f,'1','repair');batchPlan(f.ctx,'1');
+  const pages=JSON.parse(readFileSync(join(f.repo,'research/demo-batch-1.pages.json'),'utf8'));
+  pages[0].items.push({id:'lem-added',kind:'lemma',title:'Added',deps:[],dependency_level:0});
+  pages[1].items=[{id:'ex-replacement',kind:'example',title:'Replacement',deps:['lem-added'],dependency_level:1}];
+  json(join(f.repo,'research/demo-batch-1.pages.json'),pages);f.writeItem('lem-added',[]);f.writeItem('ex-replacement',['lem-added']);rmSync(join(f.repo,'items/ex-a.md'));
+  complete(f,'1');const review=batchPlan(f.ctx,'1');assert.match(readFileSync(join(f.repo,review.task),'utf8'),/lem-added/);
+  assert.deepEqual(loopState(f.repo,'demo','1').prepared.inventory.items,['lem-a','lem-added','ex-replacement']);
+  complete(f,'1');assert.equal(accepted(f.repo,'demo','1'),true);
+});
+
+test('outside-batch content and protected sibling round-counter edits cannot pass',t=>{
+  const f=fixture(t);complete(f,'1','repair');batchPlan(f.ctx,'1');batchPlan(f.ctx,'2');
+  const guard=captureRepairControl(f.repo,'demo','1'),path=join(loopDir(f.repo,'demo','2'),'state.json'),before=readFileSync(path);
+  json(path,{version:1,run:'demo',batch:'2',reviews:[],repairs:[],phase:'accepted'});
+  assert.throws(()=>verifyRepairControl(guard),/protected controller/);assert.ok(readFileSync(path).equals(before));
+  rmSync(loopDir(f.repo,'demo','1'),{recursive:true,force:true});
+  assert.throws(()=>verifyRepairControl(guard),/protected controller/);assert.equal(loopState(f.repo,'demo','1').phase,'repair');
+  const future=join(loopDir(f.repo,'demo','3'),'state.json');mkdirSync(loopDir(f.repo,'demo','3'),{recursive:true});json(future,{phase:'accepted'});
+  assert.throws(()=>verifyRepairControl(guard),/protected controller/);assert.equal(existsSync(future),false);
+  f.writeItem('lem-b',['lem-a'],'Unauthorized outside edit');assert.throws(()=>complete(f,'1'),/outside-batch file/);
+});
+
+test('six-step table has complete Step-1 carriers, Luna-max batch loop and no assignment/splice stages',t=>{
+  const f=fixture(t);assert.match(workflowRevision,/six-step/);
+  assert.deepEqual([...new Set(stages.map(s=>Number(s.id[0])))],[1,2,3,4,5,6]);
+  assert.ok(!stages.some(s=>/assign|splice/.test(s.id)));
+  const author:any=stages.find(s=>s.id==='1-scaffold'),loop:any=stages.find(s=>s.id==='2-scope-review');
+  assert.equal(loop.modelProfile,MODEL_PROFILE_NAMES.lunaMax);
+  assert.ok(author.artifacts(f.ctx,'1').includes('items/lem-a.md'));assert.ok(author.artifacts(f.ctx,'1').includes('library/test/pair-a.md'));
+  const gates=loop.gates(f.ctx);assert.ok(gates.some((g:any)=>g.id==='sync-accepted-plan'));assert.ok(gates.some((g:any)=>g.id==='post-author-snapshot'));
+  const gateOrder=gates.map((g:any)=>g.id);assert.ok(gateOrder.indexOf('batch-scope-review')<gateOrder.indexOf('sync-accepted-plan'));
+});
+
+test('real executor serializes prerequisite batches and transitions from acceptance into mechanical plan synchronization',async t=>{
+  const f=fixture(t),loop:any=stages.find(s=>s.id==='2-scope-review');
+  const fake=join(f.repo,'worker.mjs');
+  writeFileSync(fake,`import {readFileSync,writeFileSync,appendFileSync} from 'node:fs';import {join} from 'node:path';
+    const [role,label,batch,artifact]=process.argv.slice(2),dir=join(process.cwd(),'research/demo-scope-review','batch-'+batch);
+    const state=JSON.parse(readFileSync(join(dir,'state.json'),'utf8')),p=state.prepared;
+    appendFileSync('dispatch/order.log',batch+'\\n');
+    writeFileSync(artifact,JSON.stringify({version:1,run:'demo',batch,round:p.round,input_sha256:p.input_sha256,
+      reviewed_items:p.inventory.items,reviewed_pages:p.inventory.pages,decision:'accept',reason:'All scope and prerequisites checked.',findings:[],consumer_checks:[]}));
+    writeFileSync(join('dispatch',role+'-'+label+'.result.json'),JSON.stringify({run:'demo',role,label,covers:[batch],ok:true}));`);
+  const sync=loop.gates(f.ctx).find((g:any)=>g.id==='sync-accepted-plan');
+  const script=new URL('../../splice-plan.mjs',import.meta.url).pathname;
+  const scopeStage={...loop,gates:()=>[{id:'sync',argv:[process.execPath,script,'--run','demo','--all']}]};
+  const stateDir=join(f.repo,'state');mkdirSync(stateDir);
+  const config:any={run:'demo',repo:f.repo,stateDir,dispatchDir:f.ctx.dispatchDir,argv:[process.execPath,fake,'{role}','{label}','{covers}','{resultArtifact}'],
+    concurrency:30,globalConcurrency:30,dispatchStaggerMs:0,adoptCommand:false,ownerGateRecertification:false,maxAttempts:2};
+  const state=new State(statePath(stateDir));state.init('demo');
+  const reporter=new Reporter({dir:stateDir,sink:()=>{}});
+  const executor=new Executor({config,stages:[scopeStage],state,reporter,adapter:makeExecAdapter({argv:config.argv,cwd:f.repo})});
+  for(let i=0;i<40&&!state.data.finishedAt;i++){await executor.tick();await new Promise(r=>setTimeout(r,25));}
+  await Promise.all([...executor.inflight.values()].map(row=>row.promise));
+  assert.equal(accepted(f.repo,'demo','1'),true);assert.equal(accepted(f.repo,'demo','2'),true);
+  assert.deepEqual(readFileSync(join(f.repo,'dispatch/order.log'),'utf8').trim().split('\n'),['1','2']);
+  const plan=JSON.parse(readFileSync(join(f.repo,'research/plan-spec.json'),'utf8'));
+  assert.equal(plan.pages[0].items[0].id,'lem-a');assert.equal(plan.pages[2].items[0].id,'lem-b');
+});
+
+
+test('external supplier aliases bind acceptance to actual source bytes',t=>{
+  const f=fixture(t);f.writeItem('lem-external',[],'External supplier',['external-alias']);
+  const pages=JSON.parse(readFileSync(join(f.repo,'research/demo-batch-1.pages.json'),'utf8'));
+  pages[0].items[0].deps=['external-alias'];json(join(f.repo,'research/demo-batch-1.pages.json'),pages);
+  f.writeItem('lem-a',['external-alias']);complete(f,'1');assert.equal(accepted(f.repo,'demo','1'),true);
+  f.writeItem('lem-external',[],'Changed external supplier',['external-alias']);assert.equal(accepted(f.repo,'demo','1'),false);
+});
+
+test('doctor describes empty planned batches without creating loop history',t=>{
+  const f=fixture(t);for(const batch of ['1','2']){
+    const pages=JSON.parse(readFileSync(join(f.repo,'research',`demo-batch-${batch}.pages.json`),'utf8'));
+    json(join(f.repo,'research',`demo-batch-${batch}.pages.json`),pages.map((page:any)=>({...page,items:[]})));
+  }
+  const stage:any=stages.find(s=>s.id==='2-scope-review');
+  const plans=stage.plan({...f.ctx,doctor:true},['1','2']);assert.equal(plans.length,2);
+  assert.ok(plans.every((plan:any)=>plan.role==='scope-reviewer'));assert.equal(existsSync(loopDir(f.repo,'demo','1')),false);
+});
