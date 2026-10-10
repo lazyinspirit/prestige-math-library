@@ -5,9 +5,9 @@ Spliced on 2026-10-04 at the owner’s request, using the mathematics future-tra
 Read these complete required sources before drift review or scaffolding:
 
 - `research/first-principles-2026-10-03/relativity/scaffold/special-relativity.md` (SHA-256 65164864e0da328c1eaea8dcdad0aa816ab3ae294ebb77650ca0c4422021521c).
-- `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json` (SHA-256 1cae69cf78911a988a676b884f63625d1eca5c27bad6cc3826ad8c18e5ab34dd).
-- `research/first-principles-2026-10-03/relativity/scaffold/expanded-item-inventory.json` (SHA-256 550a64eee368036356035022ce7d22d7459d6e765e49a4a8aca19ce842838dc7).
-- `research/first-principles-2026-10-03/relativity/closure-ledger.json` (SHA-256 26c8a863b1402245962973ed20835345e89091f0ee256406b43ab20bbde9c8e6).
+- `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json` (SHA-256 af9d2ddb87af464bd8ab74877d7c61802bb8615647ecd49dc4be6fdd0c91a918).
+- `research/first-principles-2026-10-03/relativity/scaffold/expanded-item-inventory.json` (SHA-256 5e257538b9ffc9016444183239a958ddc88443078d82fb2915f3ea25a9c7f818).
+- `research/first-principles-2026-10-03/relativity/closure-ledger.json` (SHA-256 63ad16bcd39a4e0be4b16dd3af9eb64c70737602bb1bb3c0e0b55eec6a2d0736).
 
 The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims.
 

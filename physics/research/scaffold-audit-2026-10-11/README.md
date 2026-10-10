@@ -1,5 +1,7 @@
 # Physics prose-scaffold audit and repair
 
+This record preserves the original four-category audit. The subsequent owner-directed [GR repair](../gr-repair-2026-10-11/report.md) closes its three GR proof holds with local arguments; the GR holds, hashes and round counts below describe the earlier audit outcome.
+
 Owner commission: one GPT-6 Luna max auditor/repairer per category: non-relativistic classical mechanics, non-relativistic quantum mechanics, general relativity and thermodynamics. Each must ensure complete prerequisite coverage, mathematically explicit postulates/quantities and full reuse of adequate existing mathematics.
 
 Read root CLAUDE.md fully and physics/AGENTS.md, CLAUDE.md, README.md, SCHEMA.md, WORKFLOW.md and root PHYSICS-CONTENT-MODEL.md. Work from physics cwd. This is prose research repair only: no items/pages, original or imported mathematics edits, canonical plan-spec changes, engine controls/changes, publishing/pushing, worker commits or extra agents. Each worker owns its canonical track, detailed source prose scaffold and its audit directory listed in assignments.json. All other files are read-only; report exact necessary inventory/closure/hash changes for root integration, avoiding unrelated historical rewrites.

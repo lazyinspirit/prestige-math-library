@@ -4,12 +4,12 @@ Spliced on 2026-10-04 at the owner’s request, using the mathematics future-tra
 
 Read these complete required sources before drift review or scaffolding:
 
-- `research/first-principles-2026-10-03/relativity/scaffold/general-relativity.md` (SHA-256 b4b45774f74720f38b859579a75c1afbba92155058998cdcdb2169d50106b95d).
-- `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json` (SHA-256 1cae69cf78911a988a676b884f63625d1eca5c27bad6cc3826ad8c18e5ab34dd).
-- `research/first-principles-2026-10-03/relativity/scaffold/expanded-item-inventory.json` (SHA-256 550a64eee368036356035022ce7d22d7459d6e765e49a4a8aca19ce842838dc7).
-- `research/first-principles-2026-10-03/relativity/closure-ledger.json` (SHA-256 26c8a863b1402245962973ed20835345e89091f0ee256406b43ab20bbde9c8e6).
+- `research/first-principles-2026-10-03/relativity/scaffold/general-relativity.md` (SHA-256 5cd3e841874ee64793faa0debe4d2f863ccbe28629e1efe408fe951f109b326c).
+- `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json` (SHA-256 af9d2ddb87af464bd8ab74877d7c61802bb8615647ecd49dc4be6fdd0c91a918).
+- `research/first-principles-2026-10-03/relativity/scaffold/expanded-item-inventory.json` (SHA-256 5e257538b9ffc9016444183239a958ddc88443078d82fb2915f3ea25a9c7f818).
+- `research/first-principles-2026-10-03/relativity/closure-ledger.json` (SHA-256 63ad16bcd39a4e0be4b16dd3af9eb64c70737602bb1bb3c0e0b55eec6a2d0736).
 
-The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims. GR's published-mathematics audit uses no planned SR/EM/PDE mathematics. The checked SR postulates are draft PHYSICS items with flat-Minkowski scope; they do not supply curved-spacetime assumptions, and GR locally defines its geometry, observer quantities and physical postulates. The SR flat limit remains a comparison.
+The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims. GR's published-mathematics audit uses no planned SR/EM/PDE mathematics. The checked SR postulates are draft PHYSICS items with flat-Minkowski scope; they do not supply curved-spacetime assumptions, and GR locally defines its geometry, observer quantities and physical postulates. The three historical audit holds are resolved by the separate local-proof repair phase recorded in `research/gr-repair-2026-10-11/report.md`; production authoring and gates remain separate. The SR flat limit remains a comparison.
 
 ## Framework And Geometry
 
@@ -303,7 +303,7 @@ Original reservation (read together with the full required sources above):
     "GR11"
   ],
   "closure": "H0–H3",
-  "status": "H0–H2 locally supported, including the published-root H1 repair; H3 smooth splitting remains held because its complete mathematical proof is not locally supplied"
+  "status": "H0–H3 locally supplied; H3.1–H3.3 supplies the full smooth Cauchy temporal splitting kernel in the owner-directed 2026-10-11 repair phase"
 }
 ```
 
@@ -326,7 +326,7 @@ Original reservation (read together with the full required sources above):
     "GR13"
   ],
   "closure": "E0–E3",
-  "status": "E0–E2 and the stated scalar/interior-fluid branches are locally supported; the full E3 dust theorem remains held because its external mathematical proof is not an allowed supplier"
+  "status": "E0–E3 locally supplied; E3d–E3d.2 supplies the full smooth geodesic-dust reduction, residual closure and tilted constrained initialization in the owner-directed 2026-10-11 repair phase"
 }
 ```
 
@@ -349,6 +349,6 @@ Original reservation (read together with the full required sources above):
     "GR14"
   ],
   "closure": "H4",
-  "status": "H4 smooth maximal-development claim remains held because the boundary-extension and gluing proof is not locally supplied from published mathematics"
+  "status": "H4.1–H4.5 locally supplies the full smooth maximal-development boundary extension and universal Hausdorff gluing proof in the owner-directed 2026-10-11 repair phase"
 }
 ```
