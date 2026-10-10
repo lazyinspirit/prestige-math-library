@@ -1,8 +1,20 @@
+---
+external_draft_context:
+  - def-lorentz-form-and-inertia
+  - def-causal-classification-of-lorentz-vectors
+  - def-time-orientation-and-future-causal-sets
+  - lem-timelike-cone-has-two-convex-components
+  - lem-lorentz-form-has-orthonormal-basis
+  - def-lorentz-orthogonality-and-orthogonal-complement
+---
+
 # Owner direction — CM, QM and GR production build
 
 Build all 79 selected A/B pairs through the current six-step physics workflow: 18 non-relativistic classical mechanics, 22 non-relativistic quantum mechanics, 15 general relativity, and their 24 local mathematical prerequisite pairs. Preserve every approved claim in the current full prose designs, inventories, and linked local proofs. Do not substitute historical claim-hold records for the current research disposition.
 
 External mathematical premises ordinarily use currently published canonical root-library items with published recursive mathematical support. Owner exception (2026-10-11): existing draft items from Classical EM and Special Relativity may also be suppliers, provided their actual statements, definitions, complete arguments where applicable, prerequisites and consuming scope are inspected. This exception does not permit planned suppliers or assume a draft claim proved. New local mathematics in this run may supply consumers only after complete authoring, current readiness, and the ordinary dependency-ordered workflow checks; do not assume an unproved reservation. Carry physical assumptions and empirical qualifications from draft EM/SR suppliers into all consumers; mathematical supplier chains remain purely mathematical. Imported snapshots and mathematical originals are read-only.
+
+The `external_draft_context` IDs above record the existing SR carriers used by the current GR batches under that exception. They remain draft prerequisite context, outside this run's subject inventory; every consuming use still requires the ordinary semantic review. The list records permission to inspect and use their actual scope, not proof acceptance or publication.
 
 Read the current scaffold audit records at research/scaffold-audit-2026-10-11/ and the owner-directed GR repair at research/gr-repair-2026-10-11/report.md, including its local proof modules. The earlier GR holds are historical; the new local arguments still require production authoring and independent workflow acceptance. Explicitly define all postulates, quantities, frames, and worldlines, preserve empirical qualifications, and use the existing mathematics fully.
 

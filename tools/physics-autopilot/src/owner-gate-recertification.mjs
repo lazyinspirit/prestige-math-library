@@ -163,6 +163,7 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   // sweep observer/status reports or authorization state into this snapshot.
   const toolNames = new Set(battery.flatMap(gate => gate.argv.filter(arg => typeof arg === 'string').map(arg => arg.split('/').at(-1))));
   const implicit = [];
+  if (toolNames.has('audit-manifest.mjs')) implicit.push(`${ctx.run}-owner-authoring-direction.md`);
   if (toolNames.has('batch-scope-review.mjs')) {
     const directory=join(research, `${ctx.run}-scope-review`);
     if(existsSync(directory))for(const file of filesBelow(directory)) {

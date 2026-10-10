@@ -11,7 +11,7 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 // `justified_by` discharges, orientation-only `forward_refs`, and recorded
 // external mentions. It does NOT certify semantic correctness; it makes an
 // omitted reader check visible by classifying each relationship as same-batch,
-// cross-batch, published/backward, forward, or unresolved.
+// cross-batch, published/backward, authorized draft context, forward, or unresolved.
 //
 // TWO OF THOSE CLASSIFICATIONS ARE DEFECTS, AND THIS EXITS 1 ON THEM.
 //
@@ -20,8 +20,9 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 //                   downstream count of that batch is short by it.
 //   unresolved      a declared `deps` / `justified_by` / `external_refs` target
 //                   names no item and no alias, or names a DRAFT item that is
-//                   in no batch of this run — the level resting on content
-//                   nobody in this run is auditing.
+//                   in no batch of this run and not explicitly named as
+//                   owner-authorized EM/SR prerequisite context. Authorized
+//                   draft context still requires semantic review of its use.
 //
 // Until 2026-08-16 this file contained no `process.exit(1)` at all: it printed
 // `missing-source: 3` and exited 0, so the 3b gate that runs it could only ever
@@ -36,6 +37,7 @@ import { readFileSync, readdirSync, statSync, existsSync, writeFileSync } from '
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { yaml } from './pathway-lib.mjs';
 
 const REPO = (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot));
 const args = process.argv.slice(2);
@@ -91,6 +93,21 @@ for (const f of files) {
   for (const p of pages) for (const it of (p.items ?? [])) itemBatch.set(it.id, batch);
 }
 
+// The existing run-local owner direction supplies exact canonical IDs. A mixed
+// run selection cannot inherit another run's permission; absence permits none.
+const selectedRuns = new Set(files.map(file => basename(file).match(/^(.+)-batch-\d+\.pages\.json$/)?.[1]));
+const selectedRun = selectedRuns.size === 1 ? [...selectedRuns][0] : null;
+const directionFile = selectedRun ? `research/${selectedRun}-owner-authoring-direction.md` : null;
+const directionPath = directionFile && join(REPO, directionFile);
+let authorizedDrafts = new Set();
+if (directionPath && existsSync(directionPath)) {
+  const direction = yaml().parse(split(readFileSync(directionPath, 'utf8')).fm) ?? {};
+  const ids = direction.external_draft_context ?? [];
+  if (!Array.isArray(ids) || ids.some(id => typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(id)))
+    throw Error(`Invalid external_draft_context in ${directionFile}`);
+  authorizedDrafts = new Set(ids);
+}
+
 const items = new Map();
 const aliases = new Map();
 for (const full of walk(join(REPO, 'items')).filter((f) => f.endsWith('.md'))) {
@@ -100,6 +117,7 @@ for (const full of walk(join(REPO, 'items')).filter((f) => f.endsWith('.md'))) {
     id,
     file: full.slice(REPO.length + 1),
     status: scalar(fm, 'status') || 'draft',
+    domain: scalar(fm, 'domain'),
     statement_provenance: nested(fm, 'provenance', 'statement') || null,
     deps: list(fm, 'deps'),
     justified_by: list(fm, 'justified_by'),
@@ -111,11 +129,14 @@ for (const full of walk(join(REPO, 'items')).filter((f) => f.endsWith('.md'))) {
 const resolve = (id) => items.has(id) ? id : aliases.get(id);
 
 const home = new Map();
+const draftContextHomes = new Set();
 for (const full of walk(join(REPO, 'library')).filter((f) => f.endsWith('.md') && !basename(f).startsWith('_'))) {
   const { fm } = split(readFileSync(full, 'utf8'));
   const page = scalar(fm, 'page') || basename(full).replace(/\.md$/, '');
   const status = scalar(fm, 'status') || 'draft';
   for (const id of [...list(fm, 'items'), ...list(fm, 'examples')]) {
+    if (['special-relativity', 'classical-electromagnetism'].includes(full.slice(REPO.length + 1).split('/')[1]))
+      draftContextHomes.add(id);
     const existing = home.get(id);
     // A page is the public carrier.  Preserve its published home even if a
     // legacy item's own status was not promoted when the page was published.
@@ -137,6 +158,10 @@ function classify(source, target, edgeType) {
   if (targetBatch) return { target: resolved, kind: 'cross-batch' };
   if (targetItem.status === 'published' || home.get(resolved)?.status === 'published') {
     return { target: resolved, kind: 'published-backward' };
+  }
+  if (targetItem.status === 'draft' && ['mathematics', 'physics'].includes(targetItem.domain)
+    && authorizedDrafts.has(resolved) && draftContextHomes.has(resolved)) {
+    return { target: resolved, kind: 'external-draft-context' };
   }
   return { target: resolved, kind: 'unresolved' };
 }
@@ -168,6 +193,10 @@ for (const [id, batch] of itemBatch) {
         targetBatch: target ? itemBatch.get(target) ?? null : null,
         edge_type,
         kind: classified.kind,
+        ...(classified.kind === 'external-draft-context' ? {
+          target_status: items.get(target).status,
+          context_authority: directionFile,
+        } : {}),
         // Forward references and external mentions are not proof premises, but
         // their surrounding claims still need an explicit semantic read.
         requires_semantic_audit: true,
@@ -208,7 +237,7 @@ for (const e of defects) {
   say(e.kind === 'missing-source'
     ? `ERROR missing-source: ${e.batch} lists ${e.source}, which is on no page of items/`
     : `ERROR unresolved: ${e.source} (${e.batch}) declares ${e.edge_type} `
-      + `"${e.declared_target}", which resolves to no published or in-run item`);
+      + `"${e.declared_target}", which resolves to no published, in-run, or owner-authorized draft-context item`);
 }
 say(`audit-manifest: ${edges.length} relationship(s) over ${itemBatch.size} item(s) `
   + `in ${batches.size} batch(es); ${defects.length} defect(s)`);
