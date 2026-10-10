@@ -6,8 +6,6 @@ Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the ass
 
 **Example—classical EM:** write $\mathbf E,\mathbf B:\Omega\times I\to\mathbb R^3$, with spatial region $\Omega\subseteq\mathbb R^3$, time interval $I$, and stated regularity; at fixed time these are spatial vector fields. Specify units. Do not assume smoothness across point charges or surface sources; state exclusions or use an appropriate weak/distributional formulation. Likewise, define a worldline as a curve with specified domain and conditions, and a reference frame as a precise geometric object appropriate to the framework.
 
-**Model deductions and empirical observations are distinct.** A physics proof establishes a logical consequence of explicitly stated model postulates, mathematical hypotheses and idealizations; it does not establish that the model or its postulates describe nature. Experiments report source-backed observations with apparatus, calibration, sampling and uncertainty qualifications. Comparing predictions with observations tests the combined model and apparatus assumptions; agreement is evidence, not a deductive proof of the model. Explicitly distinguish adopted assumptions, derived predictions, reported observations and statistical inference. If a deduction uses measured inputs, state them as qualified empirical premises and carry their uncertainty and conditions into the conclusion.
-
 **Evidence is statistical.** Separate predictions, observations, and inference. State preparation, apparatus assumptions, sampling model, uncertainty, and source limitations. Never invent measurements or statistical precision. Carry empirical qualifications into downstream conclusions.
 
 **Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
@@ -44,9 +42,8 @@ actually removed. One row per `(kind, consumer, supplier)`; update it instead of
 appending duplicates. Only the consumer's owner edits its input file. Pair
 authors sharing a consumer batch run sequentially and preserve existing rows
 for sibling pairs. Route outside findings to that owner. Replace inputs
-atomically; never edit the unified ledger by hand. Step 8's serial lead may
-reconcile all batch inputs after the
-owning writers finish. After each input or dependency edit, run:
+atomically; never edit the unified ledger by hand. The engine merges current
+inputs after their owning writers finish. After each input or dependency edit, run:
 
 `node tools/physics-support/frontier-dependency-ledger.mjs refresh --run <run>`
 
@@ -56,17 +53,11 @@ writers maintain these same rows immediately when dependencies change. Read-only
 reviewers report updates to the owning writer and do not write ledger files.
 Do not broaden mathematical edit authority to satisfy bookkeeping.
 
-The Step-3b final gate and Step-8 join require an input for every batch and a review
-row for every declared cross-batch edge. An empty input is valid only when that
+The Step-3b final gate requires an input for every batch and a review row for
+every declared cross-batch edge. An empty input is valid only when that
 consumer batch has no such dependencies.
 
-Step 8's lead refreshes and reads the unified ledger before reviewing scope or
-impact. Reconcile open findings, orphaned reviews, missing batch reviews and any
-`removed` row whose declaration/use persists. Verify affected notes against
-current files; neither a recorded edge nor an old `verified` note proves adequacy.
-Record dispositions in the owning input rows and Step-8 report. Do not replace
-the required Step-5 edge verdicts or Step-8 certification with this ledger.
-
-## physics-em-sr-40-2026-10-08 — batch-35 Step 5a
-
-Owned consumers `pthm-em-uniform-ohmic-modal-decay` and `pthm-em-guide-completeness` retain the smooth PEC spectral supplier and wrapper IDs; their batch-35 input rows are open because `lem-em-smooth-pec-cavity-spectral-closure` (batch 16), Proof 1.1–2.1, assumes a normal collar not supplied by F1. Required closure: exact tubular-neighbourhood theorem, uniform radius from compact boundary, normal-coordinate/extension and Jacobian derivations, and producer proof/contract/manifest review. Current producer raw hash is `0fcaa564b9d4321387fc1d6769a385bde0ae790467acd93e2eb092d77ff850ec`. The consumer smooth branches remain escalated; rectangular and finite scalar branches have independent local checks. No withdrawal proposed. The batch-35 report and decisions preserve routing/pre-reader fingerprints. Geometry and open-guide trace qualifiers have only batch-35 consumers, all checked; no new cross-group interface impact.
+Step-7 repair owners maintain only the rows affected by their assigned repairs.
+Record actual consumer uses and dispositions in the owning input rows and repair
+report. This ledger does not replace Step-5 verdicts or Step-7 certification and
+does not introduce another cross-batch review pass.

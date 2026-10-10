@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { existsSync as physicsExistsSync } from 'node:fs';
 const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
-// Evidence-bound Step-9 reporting.
+// Evidence-bound Step-8 reporting.
 //
 // Expensive mathematical gates produce structured receipts before this tool
 // runs.  `evidence` reconciles those receipts and the append-only ledgers once;
@@ -13,12 +13,12 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, writeFileSync, lstatSync, mkdirSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
+import { runScope, sha256, splitFrontmatter } from './step8-lib.mjs';
 import { resolveLineup } from './models.mjs';
 import { TERMINAL_REJUDGE_ROUNDS } from './step7-terminal-resolution.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
 import { activeOwnershipRows } from '../defect-ledger-ownership.mjs';
-import { protectedEntryHash } from '../step9-lib.mjs';
+import { protectedEntryHash } from '../step8-lib.mjs';
 
 const LEDGER_TOOL = fileURLToPath(new URL('./defect-ledger.mjs', import.meta.url));
 
@@ -29,13 +29,13 @@ const run = value('--run');
 const root = resolve(value('--root') || (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot)));
 const die = (message) => { console.error(`ERROR ${message}`); process.exit(1); };
 const commands = ['evidence', 'check-evidence', 'snapshot', 'check', 'check-response', 'render'];
-if (!run || !commands.includes(command)) die(`usage: node tools/physics-support/step9-report.mjs <${commands.join('|')}> --run <run> [--root <repo>] [--in <response.json>] [--out <path>]`);
+if (!run || !commands.includes(command)) die(`usage: node tools/physics-support/step8-report.mjs <${commands.join('|')}> --run <run> [--root <repo>] [--in <response.json>] [--out <path>]`);
 
 const research = join(root, 'research');
-const responsePath = join(research, `${run}-step9-report.response.json`);
-const reportPath = join(research, `${run}-step9-report.md`);
-const evidencePath = join(research, `${run}-step9-evidence.json`);
-const integrityPath = join(research, `${run}-step9-report-integrity.json`);
+const responsePath = join(research, `${run}-step8-report.response.json`);
+const reportPath = join(research, `${run}-step8-report.md`);
+const evidencePath = join(research, `${run}-step8-evidence.json`);
+const integrityPath = join(research, `${run}-step8-report-integrity.json`);
 const readJson = (path, label = relative(root, path)) => {
   if (!existsSync(path)) die(`${label}: missing`);
   try { return JSON.parse(readFileSync(path, 'utf8')); }
@@ -280,15 +280,15 @@ function buildEvidence() {
 if (command === 'evidence') {
   const evidence = buildEvidence();
   writeFileSync(value('--out') || evidencePath, `${JSON.stringify(evidence, null, 2)}\n`);
-  console.log(`step9-evidence: ${evidence.build.pages} pages, ${evidence.build.items} items, ${evidence.defects.fatal_count} fatal defect row(s), closed`);
+  console.log(`step8-evidence: ${evidence.build.pages} pages, ${evidence.build.items} items, ${evidence.defects.fatal_count} fatal defect row(s), closed`);
   process.exit(0);
 }
 
 if (command === 'check-evidence') {
   const expected = buildEvidence();
   const recorded = readJson(value('--in') || evidencePath);
-  if (canonical(recorded) !== canonical(expected)) die('step9-evidence-stale: evidence does not match current receipts and ledgers');
-  console.log(`step9-evidence: ${recorded.defects.fatal_count} fatal defect row(s), exact and current`);
+  if (canonical(recorded) !== canonical(expected)) die('step8-evidence-stale: evidence does not match current receipts and ledgers');
+  console.log(`step8-evidence: ${recorded.defects.fatal_count} fatal defect row(s), exact and current`);
   process.exit(0);
 }
 
@@ -315,40 +315,40 @@ const tree = () => Object.fromEntries(files().sort().map((rel) => [rel,
 
 if (command === 'snapshot') {
   writeFileSync(integrityPath, `${JSON.stringify({ version: 1, run, protected_tree: tree() }, null, 2)}\n`);
-  console.log(`step9-report-integrity: snapshotted ${Object.keys(readJson(integrityPath).protected_tree).length} protected file(s)`);
+  console.log(`step8-report-integrity: snapshotted ${Object.keys(readJson(integrityPath).protected_tree).length} protected file(s)`);
   process.exit(0);
 }
 
 if (command === 'check') {
   const receipt = readJson(integrityPath);
-  if (receipt?.version !== 1 || receipt.run !== run || !receipt.protected_tree || typeof receipt.protected_tree !== 'object') die('step9-report-integrity-shape');
+  if (receipt?.version !== 1 || receipt.run !== run || !receipt.protected_tree || typeof receipt.protected_tree !== 'object') die('step8-report-integrity-shape');
   const now = tree();
   const paths = new Set([...Object.keys(receipt.protected_tree), ...Object.keys(now)]);
   const changed = [...paths].filter((path) => receipt.protected_tree[path] !== now[path]).sort();
-  if (changed.length) die(`step9-report-tree-changed: ${changed.join(', ')}`);
-  console.log(`step9-report-integrity: ${Object.keys(now).length} protected file(s) unchanged`);
+  if (changed.length) die(`step8-report-tree-changed: ${changed.join(', ')}`);
+  console.log(`step8-report-integrity: ${Object.keys(now).length} protected file(s) unchanged`);
   process.exit(0);
 }
 
 function parseResponse(path) {
   const response = readJson(path, relative(root, path));
   const nonempty = (text) => typeof text === 'string' && text.trim().length >= 20;
-  if (response?.version !== 2 || !nonempty(response.executive_summary)) die('step9-report-response-shape: version 2 and a substantive executive_summary are required');
+  if (response?.version !== 2 || !nonempty(response.executive_summary)) die('step8-report-response-shape: version 2 and a substantive executive_summary are required');
   const evidence = readJson(evidencePath);
-  if (response.readiness_verdict !== evidence.readiness.verdict) die('step9-report-response-readiness: verdict disagrees with mechanical evidence');
-  if (!Array.isArray(response.caveats) || response.caveats.some((row) => !nonempty(row))) die('step9-report-response-caveats');
-  if (!Array.isArray(response.owner_reading_priorities) || response.owner_reading_priorities.some((row) => !nonempty(row?.subject) || !nonempty(row?.reason))) die('step9-report-response-owner-priorities');
-  if (!Array.isArray(response.recommendations)) die('step9-report-response-recommendations');
+  if (response.readiness_verdict !== evidence.readiness.verdict) die('step8-report-response-readiness: verdict disagrees with mechanical evidence');
+  if (!Array.isArray(response.caveats) || response.caveats.some((row) => !nonempty(row))) die('step8-report-response-caveats');
+  if (!Array.isArray(response.owner_reading_priorities) || response.owner_reading_priorities.some((row) => !nonempty(row?.subject) || !nonempty(row?.reason))) die('step8-report-response-owner-priorities');
+  if (!Array.isArray(response.recommendations)) die('step8-report-response-recommendations');
   const ranks = response.recommendations.map((row) => row?.rank);
   if (response.recommendations.some((row) => !Number.isInteger(row?.rank) || !nonempty(row?.recommendation) || !nonempty(row?.impact)
     || !['low', 'medium', 'high'].includes(row?.risk) || !nonempty(row?.evidence))
-    || ranks.some((rank, index) => rank !== index + 1)) die('step9-report-response-recommendations: ranks must be contiguous and fields substantive');
+    || ranks.some((rank, index) => rank !== index + 1)) die('step8-report-response-recommendations: ranks must be contiguous and fields substantive');
   return { response, evidence };
 }
 
 if (command === 'check-response') {
   parseResponse(value('--in') || responsePath);
-  console.log('step9-report-response: structured interpretation matches evidence');
+  console.log('step8-report-response: structured interpretation matches evidence');
   process.exit(0);
 }
 
@@ -361,7 +361,7 @@ const terminalByResolver = Object.entries(evidence.verification.terminal_resolut
   return counts;
 }, {})).sort(([left], [right]) => left.localeCompare(right))
   .map(([resolver, count]) => `${resolver}: ${count}`).join('; ');
-const lines = [`# ${run} — Step 9 owner report`, '', response.executive_summary.trim(), '',
+const lines = [`# ${run} — Step 8 owner report`, '', response.executive_summary.trim(), '',
   '## What was built', '',
   `- ${evidence.build.pages} pages and ${evidence.build.items} items across ${evidence.build.categories.length} categories.`,
   `- Categories: ${evidence.build.categories.join(', ') || 'none'}.`,
@@ -414,4 +414,4 @@ lines.push('', '## Publication readiness', '',
   'This report does not publish, change status fields, push, or deploy.', '');
 mkdirSync(dirname(out), { recursive: true });
 writeFileSync(out, lines.join('\n'));
-console.log(`step9-report-render: wrote ${out} with ${evidence.defects.fatal_count} mechanically complete fatal row(s)`);
+console.log(`step8-report-render: wrote ${out} with ${evidence.defects.fatal_count} mechanically complete fatal row(s)`);

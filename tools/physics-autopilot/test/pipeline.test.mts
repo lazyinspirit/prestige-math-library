@@ -722,9 +722,9 @@ test('the do-not-relax stages are still barriers', async () => {
     '5b-cross', '5b-close', '6-judge', '7-baseline', '7-scope',
     '7.1-adjudicate', '7.2-impact', '7.3-certify', '7.4-rejudge', '7.5-adjudicate',
     '7.6-impact', '7.7-certify', '7.8-gate', '7.9-repair', '7.10-gate', '7-freeze',
-    '8-scope', '8-scope-render', '8-scope-freeze', '8-changes-judge', '8-close', '8-changes-stamp', '8-receipt', '9-contract-close', '9-snapshot-v2',
-    '9-pathway-sync-v2', '9-pathway-seed-v2', '9-pathway-author-v2',
-    '9-stamps-v2', '9-readiness-v2', '9-evidence-v2', '9-owner-report-v2', '9-close-v2'];
+    '8-contract-close', '8-snapshot-v2',
+    '8-pathway-sync-v2', '8-pathway-seed-v2', '8-pathway-author-v2',
+    '8-stamps-v2', '8-readiness-v2', '8-evidence-v2', '8-owner-report-v2', '8-close-v2'];
   for (const id of serial) {
     const st: any = (mod.stages as any[]).find((s) => s.id === id);
     assert.ok(st, `${id} is missing from the table`);
@@ -782,7 +782,7 @@ test('every pipelined stage in the shipped table names a dispatcher lane', async
   assert.deepEqual(validateStages(mod.stages as any, { run: 'frontier-14', repo, dispatchDir: '/tmp' }), []);
 });
 
-test('Alpha reviewers use the ASSIGNED group, not the positional fallback', async () => {
+test('batch adjudicator cohorts remain batch-local under assigned groups', async () => {
   // `cohort` must be the SAME grouping the plan fans out with, or the engine
   // waits for one set of batches and dispatches over another. At and after
   // `2-assign` that grouping is the assignment on disk, and it is deliberately
@@ -805,7 +805,7 @@ test('Alpha reviewers use the ASSIGNED group, not the positional fallback', asyn
   for (const id of ['5a-adjudicate']) {
     const st = mod.stages.find((s: any) => s.id === id);
     assert.equal(typeof st.cohort, 'function', `${id} must declare group ownership`);
-    assert.deepEqual(st.cohort(ctx, '4'), ['1', '4'], `${id} ownership ignored the assignment`);
-    assert.deepEqual(st.cohort(ctx, '2'), ['2', '3', '5']);
+    assert.deepEqual(st.cohort(ctx, '4'), ['4'], `${id} must own only its adjudicated batch`);
+    assert.deepEqual(st.cohort(ctx, '2'), ['2']);
   }
 });

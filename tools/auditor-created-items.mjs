@@ -1379,7 +1379,7 @@ function sameExceptDependencyList(before, after, path = []) {
 export function recordOwnerRecertification(root, run, step, id, evidence, reason,
   { refreshEvidence = false } = {}) {
   step = Number(step);
-  if (![5, 7, 8].includes(step)) throw Error('Owner recertification supports steps 5, 7, and 8');
+  if (![5, 7].includes(step)) throw Error('Owner recertification supports steps 5 and 7');
   safe(run, 'run'); safe(id, 'item ID');
   if (!String(reason ?? '').trim()) throw Error(`${id}: owner recertification needs a reason`);
   const row = inventory(root, run).find(row => row.id === id);
@@ -1477,7 +1477,7 @@ function inventory(root, run) {
 
 export function writeAuditorCreatedBaseline(root, run, step) {
   safe(run, 'run');
-  if (![5, 7, 8].includes(Number(step))) throw Error('Auditor baseline supports steps 5, 7, and 8');
+  if (![5, 7].includes(Number(step))) throw Error('Auditor baseline supports steps 5 and 7');
   const path = auditorCreatedBaselinePath(root, run, step);
   const live = inventory(root, run);
   const current = {
@@ -1518,8 +1518,7 @@ export function authorResultAllowed(step, row) {
       && /^(?:step7-v2-(?:initial|repeat)-r[1-9]\d*-u[a-zA-Z0-9_-]+|step7-[a-z]+|step7-guard-(?:[a-z]+|review)-round-[1-9]\d*|step7-preflight-(?:[a-z]+|review)-[1-9]\d*|repair-8-(?:[a-z]+-)?round-[1-9]\d*|cross-group-[a-z]+-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]+-)?[1-9]\d*)$/.test(label))
     || (row.role === 'alpha-repair'
       && /^step7-v2-(?:impact-initial|impact-repeat|gate)(?:-pass-[1-9]\d*)?-r[1-9]\d*-u[123]$/.test(label));
-  return Number(step) === 8 && row.role === 'alpha'
-    && /^(?:step8-lead|step8-changes-adjudicate-[1-9]\d*|step8-carried-adjudicate-(?:[a-z]+-)?[1-9]\d*|step8-gate-adjudication-[1-9]\d*|impact-close-[1-9]\d*|step8-close-adjudicate-[1-9]\d*|step8-close-carried-(?:[a-z]+-)?[1-9]\d*|receipts(?:-fix-[1-9]\d*)?)$/.test(label);
+  return false;
 }
 
 function successfulAuthorResults(root, run, step) {
@@ -1862,8 +1861,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const args = process.argv.slice(2), command = args[0];
     const value = flag => { const at = args.indexOf(flag); return at < 0 ? undefined : args[at + 1]; };
     const run = value('--run'), step = Number(value('--step'));
-    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-context-archive --run RUN --step 5 --id ITEM --certification research/JSON --context-id CONTEXT --source research/FILE --owner-identity /root --reason TEXT; owner-source-archive --run RUN --step 5 --id ITEM --source research/FILE --owner-identity OWNER --reason TEXT; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT [--refresh-evidence (identical-carrier dilation decision binding only)]';
-    if (!run || ![5, 7, 8].includes(step)) throw Error(usage);
+    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-context-archive --run RUN --step 5 --id ITEM --certification research/JSON --context-id CONTEXT --source research/FILE --owner-identity /root --reason TEXT; owner-source-archive --run RUN --step 5 --id ITEM --source research/FILE --owner-identity OWNER --reason TEXT; owner-recertify --run RUN --step 5|7 --id ITEM --evidence research/FILE --reason TEXT [--refresh-evidence (identical-carrier dilation decision binding only)]';
+    if (!run || ![5, 7].includes(step)) throw Error(usage);
     const result = command === 'baseline'
       ? writeAuditorCreatedBaseline(process.cwd(), run, step)
       : command === 'certify' ? certifyAuditorCreatedItems(process.cwd(), run, step)

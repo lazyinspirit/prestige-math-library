@@ -903,7 +903,15 @@ export function prepareGateRepairPack(root,run,phase,round,failures) {
   requireValue(diagnostics.length>0,'gate repair requires at least one failed diagnostic');
   const frontier=gateFrontier(root,run);
   const excluded=[...new Set(diagnostics.flatMap(row=>row.subjects).filter(id=>!frontier.has(id)))].sort();
-  for(const diagnostic of diagnostics)diagnostic.subjects=diagnostic.subjects.filter(id=>frontier.has(id));
+  for(const diagnostic of diagnostics) {
+    const originalSubjects = diagnostic.subjects;
+    diagnostic.subjects = originalSubjects.filter(id=>frontier.has(id));
+    // A missing contract for a selected published/reused proof is a run-owned
+    // metadata obligation, not authority to repair or rejudge published text.
+    // Preserve it for the existing diagnostic owner instead of excluding it.
+    if(diagnostic.id==='proof-contract-coverage' && diagnostic.subjects.length!==originalSubjects.length)
+      diagnostic.ownerHeld=true;
+  }
   const scoped=diagnostics.filter(row=>row.subjects.length||row.ownerHeld);
   requireValue(scoped.length>0,'Step 7.9: diagnostics contain only excluded out-of-frontier findings; rerun the frontier-scoped gate instead of launching repairs');
   const targets=[...new Set(diagnostics.flatMap(row=>row.subjects))].sort();

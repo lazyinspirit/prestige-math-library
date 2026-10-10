@@ -27,7 +27,7 @@ const base = (over: any = {}) => ({
 // --------------------------------------------------------------------------
 
 test('a terminal stage with an empty gate list is refused', () => {
-  const problems = validateStages([base({ id: '9-report', gates: () => [] })] as any, CTX);
+  const problems = validateStages([base({ id: '8-report', gates: () => [] })] as any, CTX);
   assert.ok(problems.length, 'a gateless terminal stage must not be accepted');
   assert.match(problems[0].message, /empty list|no `gates`/);
 });
@@ -35,7 +35,7 @@ test('a terminal stage with an empty gate list is refused', () => {
 test('the terminal stage may not waive its gates, however good the reason', () => {
   const problems = validateStages([
     base({ id: '8-x' }),
-    base({ id: '9-report', gates: undefined, gatesWaived: 'the report agent checks everything itself, honestly' }),
+    base({ id: '8-report', gates: undefined, gatesWaived: 'the report agent checks everything itself, honestly' }),
   ] as any, CTX);
   assert.ok(problems.some((p) => /TERMINAL/.test(p.message)),
     `expected the terminal-stage rule to fire, got ${JSON.stringify(problems)}`);
@@ -96,7 +96,7 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
       `${id} must not judge a repaired published item`);
     assert.ok(gateIds(id).includes('step7-round-certification'));
     assert.ok(!gateIds(id).includes('step7-published'), 'published repairs have no Step-7 item gate');
-    assert.ok(!gateIds(id).includes('level-coverage'), 'Step-8 audit receipt is not available yet');
+    assert.ok(!gateIds(id).includes('level-coverage'), 'full closeout coverage is a later-stage check');
   }
   assert.deepEqual(gateIds('7.9-repair'), ['frontier-dependency-ledger', 'step7-gate-recertify']);
   assert.equal(stage('7.4-rejudge').maxAttempts, 1);
@@ -106,13 +106,13 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   assert.equal(stages.indexOf(stage('7.10-gate')) + 1, stages.indexOf(stage('7-freeze')));
 
   for (const id of ['6-judge', '7.8-gate', '7.10-gate',
-    '8-scope', '8-changes-judge', '8-close', '9-readiness-v2']) {
+    '8-readiness-v2']) {
     assert.ok(!closureArgv(id).includes('--judge-session-run'), `${id} must certify current item evidence, not chat identity`);
   }
 
   // Later mathematical change stages retain direct closure until final
   // readiness seals the tree; reporting/commit stages may then reuse that seal.
-  for (const id of ['8-scope', '8-changes-judge', '8-close', '8-changes-stamp', '8-receipt', '9-contract-close', '9-readiness-v2']) {
+  for (const id of ['8-contract-close', '8-readiness-v2']) {
     const ids = gateIds(id);
     assert.ok(ids.includes('judge-closure') || ids.includes('level-coverage'), `${id} lacks direct closure`);
   }
@@ -123,7 +123,7 @@ test('final readiness runs whole-level closure once and terminal close verifies 
   const repo = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
   const ctx: any = { run: 'frontier-14', repo };
   const stage = (id: string): any => mod.stages.find((candidate: any) => candidate.id === id);
-  const readinessGates = stage('9-readiness-v2').gates(ctx);
+  const readinessGates = stage('8-readiness-v2').gates(ctx);
   const levelCoverage = readinessGates.find((gate: any) => gate.id === 'level-coverage');
   assert.ok(levelCoverage, 'final readiness owns the complete level scan');
   assert.ok(levelCoverage.argv.includes('--verify-current-context'),
@@ -134,7 +134,7 @@ test('final readiness runs whole-level closure once and terminal close verifies 
     'final readiness must not repeat the judge-only subset of level coverage');
   assert.ok(readinessGates.some((gate: any) => gate.id === 'publication-readiness'));
 
-  const closeGates = stage('9-close-v2').gates(ctx).filter(gate => gate.id !== 'physics-content').map((gate: any) => gate.id).filter(id => id !== 'physics-content');
+  const closeGates = stage('8-close-v2').gates(ctx).filter(gate => gate.id !== 'physics-content').map((gate: any) => gate.id).filter(id => id !== 'physics-content');
   assert.ok(closeGates.includes('report-integrity'), 'terminal close must reject protected-tree changes');
   assert.ok(closeGates.includes('publication-readiness'), 'terminal close must verify the sealed readiness receipt');
   assert.ok(closeGates.includes('tree-clean'), 'terminal close must verify the committed tree');

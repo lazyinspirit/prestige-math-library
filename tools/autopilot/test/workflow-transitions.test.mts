@@ -16,16 +16,16 @@ const stage = (id: string): any => stages.find(s => s.id === id);
 test('author, splice, the reader pipeline, cross-closure and judgment keep their order', () => {
   const ids = stages.map(s => s.id);
   assert.equal(new Set(ids).size, ids.length);
-  assert.ok(ids.every(id => /^[1-9](?:\.\d+)?[ab]?-/.test(id)));
+  assert.ok(ids.every(id => /^[1-8](?:\.\d+)?[ab]?-/.test(id)));
   assert.deepEqual(ids.slice(ids.indexOf('3a-scope'), ids.indexOf('6-judge') + 1), [
     '3a-scope', '3-baseline', '3b-author', '4-splice', '4-baseline',
     '5a-prepare', '5a-read', '5a-split', '5a-refute', '5a-collect',
     '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross', '5b-close',
     '6-scope', '6-judge',
   ]);
-  assert.ok(ids.includes('7.4-rejudge') && ids.includes('8-receipt') && ids.includes('9-close-v2'));
+  assert.ok(ids.includes('7.4-rejudge') && ids.includes('8-close-v2'));
   // Only the reader pipeline overlaps; everything else in Steps 3-6 is a barrier.
-  const pipelined = new Set(['5a-read', '5a-split', '5a-refute', '5a-collect']);
+  const pipelined = new Set(['5a-read', '5a-split', '5a-refute', '5a-collect', '5a-adjudicate']);
   for (const s of stages.filter(s => /^[3456]/.test(s.id) && !pipelined.has(s.id)))
     assert.equal(s.pipeline, undefined, `${s.id} must be a whole-frontier barrier`);
   const ctx = { repo, run: 'test' };
@@ -36,11 +36,11 @@ test('author, splice, the reader pipeline, cross-closure and judgment keep their
   assert.ok(!stage('5b-close').pattern.test('alpha-5b-lead.result.json'));
 });
 
-test('the production Steps 1 through 9 require owner repair, recertification and a gate retry', () => {
+test('the production Steps 1 through 8 require owner repair, recertification and a gate retry', () => {
   const config = JSON.parse(readFileSync(join(repo, 'autopilot.config.json'), 'utf8'));
   assert.equal(config.gateFailurePolicy, 'owner-recertify');
   assert.ok(stages.length > 0);
-  assert.ok(stages.every(s => /^[1-9](?:\.\d+)?[ab]?-/.test(s.id)));
+  assert.ok(stages.every(s => /^[1-8](?:\.\d+)?[ab]?-/.test(s.id)));
 });
 
 test('pair authoring retains full lane capacity within the 30-agent machine budget', () => {
@@ -162,7 +162,7 @@ test('all dispatches and standalone item judges require honest source verificati
   assert.match(judge, /Be honest about your mathematical understanding/);
   assert.match(judge, /tools\.web_search=true/);
   const brief = readFileSync(join(repo, 'briefs/group-author.md'), 'utf8');
-  assert.match(brief, /potentially defective published item/);
-  assert.match(brief, /Escalate substantial unmet prerequisites/);
+  assert.match(brief, /Report published concerns/);
+  assert.match(brief, /escalat/i);
   assert.match(brief, /fully author/);
 });

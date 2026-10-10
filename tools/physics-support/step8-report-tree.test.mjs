@@ -5,9 +5,9 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { protectedEntryHash } from '../step9-lib.mjs';
+import { protectedEntryHash } from '../step8-lib.mjs';
 
-const tool = fileURLToPath(new URL('./step9-report.mjs', import.meta.url));
+const tool = fileURLToPath(new URL('./step8-report.mjs', import.meta.url));
 function fixture(t) {
   const base = mkdtempSync(join(tmpdir(), 'physics-report-tree-'));
   t.after(() => rmSync(base, { recursive: true, force: true }));
@@ -20,7 +20,7 @@ function fixture(t) {
     run(command) {
       return spawnSync(process.execPath, [tool, command, '--run', 'demo', '--root', root], { encoding: 'utf8' });
     },
-    tree() { return JSON.parse(readFileSync(join(root, 'research/demo-step9-report-integrity.json'))).protected_tree; },
+    tree() { return JSON.parse(readFileSync(join(root, 'research/demo-step8-report-integrity.json'))).protected_tree; },
   };
 }
 
@@ -37,7 +37,7 @@ test('snapshot seals dangling cached OCR links and detects literal target change
   symlinkSync('../another-missing-package/changelog.gz', link);
   const changed = f.run('check');
   assert.notEqual(changed.status, 0);
-  assert.match(changed.stderr, /step9-report-tree-changed.*changelog.Debian.gz/);
+  assert.match(changed.stderr, /step8-report-tree-changed.*changelog.Debian.gz/);
 });
 
 test('external tools/directory/file links and cycles are sealed without following their targets', t => {
@@ -54,7 +54,7 @@ test('external tools/directory/file links and cycles are sealed without followin
   assert.equal(f.run('check').status, 0, 'external target bytes are outside the protected physical tree');
   unlinkSync(join(f.root, 'tools'));
   symlinkSync(join(f.outside, 'missing-directory'), join(f.root, 'tools'));
-  assert.match(f.run('check').stderr, /step9-report-tree-changed.*tools/);
+  assert.match(f.run('check').stderr, /step8-report-tree-changed.*tools/);
 });
 
 test('physical file mutations and link-to-file replacement remain protected', t => {
@@ -65,18 +65,18 @@ test('physical file mutations and link-to-file replacement remain protected', t 
   symlinkSync('source.txt', link);
   assert.equal(f.run('snapshot').status, 0);
   writeFileSync(file, 'changed physical bytes\n');
-  assert.match(f.run('check').stderr, /step9-report-tree-changed.*source.txt/);
+  assert.match(f.run('check').stderr, /step8-report-tree-changed.*source.txt/);
   writeFileSync(file, 'physical bytes\n');
   assert.equal(f.run('check').status, 0);
   unlinkSync(link);
   writeFileSync(link, 'source.txt');
-  assert.match(f.run('check').stderr, /step9-report-tree-changed.*source-link/);
+  assert.match(f.run('check').stderr, /step8-report-tree-changed.*source-link/);
 });
 
 test('existing mutable report, dispatch and runtime exclusions remain unchanged', t => {
   const f = fixture(t);
   assert.equal(f.run('snapshot').status, 0);
-  for (const file of ['research/demo-step9-report.response.json', 'research/demo-step9-report.md',
+  for (const file of ['research/demo-step8-report.response.json', 'research/demo-step8-report.md',
     'research/demo-dispatch/events.log', '.physics-autopilot-demo/events.jsonl']) {
     const path = join(f.root, file);
     mkdirSync(join(path, '..'), { recursive: true });

@@ -72,7 +72,7 @@ const ROLES = Object.freeze({
   // same-batch exclusion determine which authors may safely overlap.
   'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'pair authoring and pathway prose; full run width with stage ownership guards' },
   // Final reporting is read-only; source uncertainty still requires research.
-  'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 1, web: true, requiresTask: true, why: 'Step-9 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
+  'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 1, web: true, requiresTask: true, why: 'Step-8 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
   // `alpha-adjudicate` — step 7 ONLY (owner, 2026-08-24). The Step-7 stage
   // selects the Sol 6.1 high profile, matching the current role default.
   // Historical model identities remain in the registry for existing receipts.

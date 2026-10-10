@@ -45,8 +45,8 @@ function fixture() {
   };
   saveContext();
   const current = externalContextReceipt(root, run, decision, finding, 'a');
-  assert.equal(current.valid, true, current.error);
-  decision.context_evidence = current.seal;
+  assert.equal(current.valid, true, Reflect.get(current, 'error'));
+  decision.context_evidence = Reflect.get(current, 'seal');
   saveDecision();
   return { root, run, put, entry, decision, finding, scope, ledgerRow, saveContext, saveDecision,
     check: () => externalContextReceipt(root, run, decision, finding, 'a'),
@@ -56,7 +56,7 @@ function fixture() {
 function checkCase(name: string, mutate: (f: ReturnType<typeof fixture>) => void, error: RegExp) {
   test(name, () => {
     const f = fixture();
-    try { mutate(f); const result = f.check(); assert.equal(result.valid, false); assert.match(result.error!, error); }
+    try { mutate(f); const result = f.check(); assert.equal(result.valid, false); assert.match(Reflect.get(result, 'error')!, error); }
     finally { f.cleanup(); }
   });
 }
@@ -65,7 +65,7 @@ test('physics accepts only the current sealed owned use and retains the outside 
   const f = fixture();
   try {
     assert.deepEqual(f.check(), mathContextReceipt(f.root, f.run, f.decision, f.finding, 'a'));
-    assert.equal(f.check().defect_id, 'outside-gap');
+    assert.equal(Reflect.get(f.check(), 'defect_id'), 'outside-gap');
     assert.deepEqual(step5Escalations(f.root, f.run), []);
     assert.equal(JSON.parse(readFileSync(join(f.root, 'research/defect-ledger.jsonl'), 'utf8')).disposition, 'open');
     f.decision.context_evidence.supplier_math_sha256 = 'forged'; f.saveDecision();
@@ -102,10 +102,10 @@ test('seals an explicit same-finding superseded binding row and retains both def
     f.ledgerRow.supersedes = [prior.defect_id];
     f.put('research/defect-ledger.jsonl', JSON.stringify(prior) + '\n' + JSON.stringify(f.ledgerRow) + '\n');
     const result = f.check();
-    assert.equal(result.valid, true, result.error);
-    assert.deepEqual(result.defect_ids, ['outside-gap', 'original-binding']);
+    assert.equal(result.valid, true, Reflect.get(result, 'error'));
+    assert.deepEqual(Reflect.get(result, 'defect_ids'), ['outside-gap', 'original-binding']);
     assert.deepEqual(result, mathContextReceipt(f.root, f.run, f.decision, f.finding, 'a'));
-    f.decision.context_evidence = result.seal; f.saveDecision();
+    f.decision.context_evidence = Reflect.get(result, 'seal'); f.saveDecision();
     assert.deepEqual(step5Escalations(f.root, f.run), []);
     assert.equal(prior.disposition, 'open');
     prior.disposition = 'resolved';

@@ -6,8 +6,6 @@ Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the ass
 
 **Example—classical EM:** write $\mathbf E,\mathbf B:\Omega\times I\to\mathbb R^3$, with spatial region $\Omega\subseteq\mathbb R^3$, time interval $I$, and stated regularity; at fixed time these are spatial vector fields. Specify units. Do not assume smoothness across point charges or surface sources; state exclusions or use an appropriate weak/distributional formulation. Likewise, define a worldline as a curve with specified domain and conditions, and a reference frame as a precise geometric object appropriate to the framework.
 
-**Model deductions and empirical observations are distinct.** A physics proof establishes a logical consequence of explicitly stated model postulates, mathematical hypotheses and idealizations; it does not establish that the model or its postulates describe nature. Experiments report source-backed observations with apparatus, calibration, sampling and uncertainty qualifications. Comparing predictions with observations tests the combined model and apparatus assumptions; agreement is evidence, not a deductive proof of the model. Explicitly distinguish adopted assumptions, derived predictions, reported observations and statistical inference. If a deduction uses measured inputs, state them as qualified empirical premises and carry their uncertainty and conditions into the conclusion.
-
 **Evidence is statistical.** Separate predictions, observations, and inference. State preparation, apparatus assumptions, sampling model, uncertainty, and source limitations. Never invent measurements or statistical precision. Carry empirical qualifications into downstream conclusions.
 
 **Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
@@ -18,26 +16,14 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 ---
 
-# Step 8 — scope-denial delta review, `{{run}}`
+# Step 8 — owner evidence interpretation, `{{run}}`
 
-First follow `briefs/tasks/frontier-dependency-ledger.md`. Refresh and read
-`research/{{run}}-cross-batch-dependencies.json` for cross-batch scope and impact.
+Read only `research/{{run}}-step8-evidence.json`; open a named source artifact
+only to explain a caveat in that packet. Return exactly one object conforming to
+the supplied version-2 response schema.
 
-Read only pending rows in `research/{{run}}-step8-scope-delta.json`. Verify each
-reason and destination against the current closure, plan, published files, and
-cited source, then update its owning group scope-decision row to `stands` or
-`owner-decision` with concrete evidence.
-
-If `research/{{run}}-step8-mathematical-review.task.md` exists, also perform its
-explicitly scoped supervising review after the Step-7 freeze. Keep its blocking
-obligation open pending the engine's Step-8 recertification; do not judge or stamp
-your own repair. Record its evidence and exact changed IDs in your report.
-
-An overturned decline may add an in-scope result only when it needs no new page
-or forward dependency; write its manifest, coverage, contract, risk, splice,
-and impact updates. A new page, forward dependency, or reading-order change is
-an owner decision.
-
-Refresh and check all scope decisions, then write
-`research/{{run}}-alpha-step8-review.md`. Inspect each open run ledger row and
-close or defer that same row with evidence; render the ledger after an edit.
+Copy the packet's readiness verdict exactly. The response may interpret
+mathematical closure, material caveats, owner reading priorities, and
+evidence-supported recommendations; it must not reconstruct factual counts,
+duplicate the rendered ledger, mutate the repository, or change publication
+state.

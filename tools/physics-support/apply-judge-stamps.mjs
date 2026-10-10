@@ -79,7 +79,7 @@ const excludePublished = argv.includes('--exclude-published');
 const ordinaryScopes = [manifestsArg, itemsArg, targetedReceiptPath].filter(Boolean);
 if (!ledgerPath || ordinaryScopes.length !== 1
   || (verify && (apply || targetedReceiptPath))) {
-  console.error('usage: node tools/physics-support/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step7.jsonl>] [--auditor-certifications <step7.json,step8.json>] [--verify] [--apply] [--report <out.json>]');
+  console.error('usage: node tools/physics-support/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step7.jsonl>] [--auditor-certifications <step7.json>] [--verify] [--apply] [--report <out.json>]');
   process.exit(2);
 }
 
@@ -142,7 +142,7 @@ const auditorRows = new Map();
 {
   let loaded;
   try { loaded = loadAuditorCreatedCertifications(auditorCertificationsArg.split(',')
-    .map(entry => entry.trim()).filter(Boolean), { root: process.cwd(), run: value('--run'), steps: [7, 8] }); }
+    .map(entry => entry.trim()).filter(Boolean), { root: process.cwd(), run: value('--run'), steps: [7] }); }
   catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
   for (const row of loaded) {
     const prior = auditorRows.get(row.id);
@@ -328,7 +328,7 @@ for (const id of ids) {
   // Currency is tools/physics-support/judge-currency.mjs, the predicate level-coverage.mjs and
   // judge-sweep.mjs already share: a verdict is current against the CURRENT pair
   // context, or against byte-identical text of that item (owner, 2026-08-06).
-  // This tool read clause (a) alone, so on a level where any step-8 repair moved
+  // This tool read clause (a) alone, so on a level where any late repair moved
   // a page's pair context every untouched page-mate stamped as unjudged — 0 of
   // 398 on frontier-15, while the receipt gate read all 398 as covered. Three
   // readings of one rule was the defect judge-currency.mjs was written to end.

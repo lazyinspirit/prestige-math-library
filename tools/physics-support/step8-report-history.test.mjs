@@ -7,7 +7,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { writeProofLayout } from './proof-layout.mjs';
 
-const tool = fileURLToPath(new URL('./step9-report.mjs', import.meta.url));
+const tool = fileURLToPath(new URL('./step8-report.mjs', import.meta.url));
 const original = {
   defect_id: 'demo-original', run: 'demo', at: '2026-10-10',
   subject: 'thm-a', class: 'accuracy', subclass: 'invalid-inference',
@@ -16,7 +16,7 @@ const original = {
 };
 
 function fixture(t) {
-  const root = mkdtempSync(join(tmpdir(), 'physics-step9-history-'));
+  const root = mkdtempSync(join(tmpdir(), 'physics-step8-history-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   for (const dir of ['research', 'items', 'library/analysis']) mkdirSync(join(root, dir), { recursive: true });
   const json = (name, value) => writeFileSync(join(root, 'research', name), JSON.stringify(value));
@@ -42,7 +42,7 @@ function fixture(t) {
     run(command) {
       return spawnSync(process.execPath, [tool, command, '--run', 'demo', '--root', root], { encoding: 'utf8' });
     },
-    evidence() { return JSON.parse(readFileSync(join(root, 'research/demo-step9-evidence.json'))); },
+    evidence() { return JSON.parse(readFileSync(join(root, 'research/demo-step8-evidence.json'))); },
   };
 }
 
@@ -69,14 +69,14 @@ test('evidence and rendering preserve every fatal history row and its literal di
     assert.deepEqual(historical.current_owners, ['demo-current']);
     assert.equal(e.defects.fatal.find(row => row.defect_id === 'outside-current').disposition, 'deferred');
     assert.equal(f.run('check-evidence').status, 0);
-    writeFileSync(join(f.root, 'research/demo-step9-report.response.json'), JSON.stringify({
+    writeFileSync(join(f.root, 'research/demo-step8-report.response.json'), JSON.stringify({
       version: 2, readiness_verdict: 'publishable-pending-owner-approval',
       executive_summary: 'The fixture preserves the complete defect history and current ownership.',
       caveats: [], owner_reading_priorities: [], recommendations: [],
     }));
     const rendered = f.run('render');
     assert.equal(rendered.status, 0, rendered.stderr);
-    const report = readFileSync(join(f.root, 'research/demo-step9-report.md'), 'utf8');
+    const report = readFileSync(join(f.root, 'research/demo-step8-report.md'), 'utf8');
     assert.match(report, /recorded 4 fatal defect row/);
     assert.match(report, /demo-original.*\| open \| historical; superseded by demo-current/);
     assert.match(report, /outside-current.*\| deferred \| active/);

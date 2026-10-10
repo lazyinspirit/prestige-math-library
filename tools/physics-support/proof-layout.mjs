@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { REPO, WEB_DIR } from './paths.mjs';
-import { splitFrontmatter } from './step9-lib.mjs';
+import { splitFrontmatter } from './step8-lib.mjs';
 import { LAYOUT_GATES } from './proof-layout-core.mjs';
 import { proofLayoutInputs, proofLayoutPath, verifyProofLayout, noProofRequired } from './proof-layout-receipt.mjs';
 

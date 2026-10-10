@@ -46,13 +46,15 @@ for (const [name, stages, groups, author] of [['math', mathStages, mathGroups, m
     for (const [step, role, label] of [
       [3, 'alpha-high', 'step3b-aa-0123456789abcdef'], [5, 'alpha', '5a-aa'],
       [7, 'alpha-adjudicate', 'step7-aa'], [7, 'alpha-adjudicate', 'repair-8-aa-round-1'],
-      [7, 'final-adjudicator', 'step7-fa-aa-round-1'], [8, 'alpha', 'step8-carried-adjudicate-aa-1'],
+      [7, 'final-adjudicator', 'step7-fa-aa-round-1'],
     ] as const) {
       assert.equal(author(step, { ...base, role, label }), true, label);
       assert.equal(author(step, { ...base, role: 'tool', label }), false);
       assert.equal(author(step, { ...base, role, label, ok: false }), false);
     }
     assert.equal(author(7, { ...base, role: 'alpha-adjudicate', label: 'step7-aa1' }), false);
+    assert.equal(author(8, { ...base, role: 'alpha', label: 'step8-carried-adjudicate-aa-1' }), false,
+      'removed Step-8 repair routes cannot establish current author provenance');
   });
 }
 

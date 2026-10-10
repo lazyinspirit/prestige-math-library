@@ -1,5 +1,5 @@
 // Translate artifact identities, never mathematical prose or execution receipts.
-export const revision = 'group-authors-nine-step-v1';
+export const revision = 'eight-step-checkpoint-v2';
 const stages = {
   '3b-audit': '3b-author', '5-author': '3b-author',
   '6a-read': '5a-adjudicate', '6b-prepare': '5a-prepare',
@@ -7,7 +7,7 @@ const stages = {
   '6c-edges': '5b-edges', '6c-cross': '5b-cross', '6d-close': '5b-close',
   '7-judge': '6-judge', '8-baseline': '7-baseline',
   '8-adjudicate': '7-adjudicate', '8-rejudge': '7-rejudge',
-  '9-scope': '8-scope', '9-receipt': '8-receipt', '10-report': '9-report',
+  // Later historical labels remain provenance, not executable stage IDs.
 };
 export function migrateSuffix(suffix) {
   return suffix.replace(/^step6-(scope|hash|published-claims)/, 'step5-$1')

@@ -24,9 +24,8 @@ actually removed. One row per `(kind, consumer, supplier)`; update it instead of
 appending duplicates. Only the consumer's owner edits its input file. Pair
 authors sharing a consumer batch run sequentially and preserve existing rows
 for sibling pairs. Route outside findings to that owner. Replace inputs
-atomically; never edit the unified ledger by hand. Step 8's serial lead may
-reconcile all batch inputs after the
-owning writers finish. After each input or dependency edit, run:
+atomically; never edit the unified ledger by hand. The engine merges current
+inputs after their owning writers finish. After each input or dependency edit, run:
 
 `node tools/frontier-dependency-ledger.mjs refresh --run <run>`
 
@@ -36,17 +35,16 @@ writers maintain these same rows immediately when dependencies change. Read-only
 reviewers report updates to the owning writer and do not write ledger files.
 Do not broaden mathematical edit authority to satisfy bookkeeping.
 
-The Step-3b final gate and Step-8 join require an input for every batch and a review
-row for every declared cross-batch edge. An empty input is valid only when that
+The Step-3b final gate requires an input for every batch and a review row for
+every declared cross-batch edge. An empty input is valid only when that
 consumer batch has no such dependencies.
 
-Step 8's lead refreshes and reads the unified ledger before reviewing scope or
-impact. Reconcile open findings, orphaned reviews, missing batch reviews and any
-`removed` row whose declaration/use persists. Verify affected notes against
-current files; neither a recorded edge nor an old `verified` note proves adequacy.
-Record dispositions in the owning input rows and Step-8 report. Do not replace
-the required Step-5 edge verdicts or Step-8 certification with this ledger.
+Step-7 repair owners maintain only the rows affected by their assigned repairs.
+Record actual consumer uses and dispositions in the owning input rows and repair
+report. This ledger does not replace Step-5 verdicts or Step-7 certification and
+does not introduce another cross-batch review pass.
 
+## Historical run notes (not current worker instructions)
 
 <!-- frontier-41-ha-dt-29-alpha-batch-22-5a:begin -->
 Batch 22 Step-5a: current owned consumer uses are recorded in

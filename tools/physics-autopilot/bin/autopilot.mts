@@ -4,16 +4,15 @@
 //   autopilot frontier [--categories a,b]      complete future schedule
 //   autopilot frontier --next                  all-category >95%-published next set
 //   autopilot plan --run <name> --pairs a,b    step 0: batch, manifest, drift-check
-//   autopilot start --run <name> [--detach]    run steps 1..9 with nobody in the loop
+//   autopilot start --run <name> [--detach]    run steps 1..8 with nobody in the loop
 //   autopilot status                           current state, human-readable
 //   autopilot pause | resume | stop | report
 //   autopilot retry [--unit N]
-//   autopilot recover-step8 --run <name> --authorization <file>
 //
 // The daily shape this is built for:
 //   cd <repo> && autopilot frontier            # see what is buildable
 //   autopilot plan --run frontier-15 --pairs …  # step 0, mechanical
-//   autopilot start --run frontier-15 --detach  # steps 1..9, autonomous
+//   autopilot start --run frontier-15 --detach  # steps 1..8, autonomous
 //   autopilot status                            # any time, from anywhere
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, rmSync, openSync, closeSync, readdirSync } from 'node:fs';
@@ -33,7 +32,6 @@ import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
-import { recoverStep8 } from '../src/step8-recovery.mts';
 import { reopenStep5 } from '../src/step5-reopen.mts';
 import type { Config } from '../src/types.mts';
 
@@ -74,7 +72,7 @@ function loadConfig(): Config {
       // needed its own copy of every brief, and those copies diverged: this repo
       // carried a 409-line canonical Alpha brief covering steps 3/4/6/8 and a
       // 115-line per-run one covering step 3 only, and five stages dispatched
-      // the step-3 one to Alphas doing steps 7, 8 and 9.
+      // the step-3 one to Alphas doing review and closeout steps.
       '--var', 'run={run}', '--var', 'i={unit}', '--var', 'output={artifact}'],
     concurrency: 30,
     globalConcurrency: 30,
@@ -226,23 +224,6 @@ switch (cmd) {
     console.log(`physics init: ${receipt.files.length} published mathematics files imported into ${repo}`);
     break;
   }
-  case 'recover-step8': {
-    const run = opt('run') ?? die('--run is required');
-    const authorization = opt('authorization') ?? die('--authorization is required');
-    const config = loadConfig();
-    const result = recoverStep8({
-      repo,
-      run,
-      stateDir,
-      dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`),
-      authorizationPath: resolve(repo, authorization),
-    });
-    console.log(`recover-step8: ${result.recoveryId} reopened the Step-8 certification suffix`);
-    console.log(`  ${result.changed.length} changed item(s), ${result.archived.length} archived result file(s)`);
-    console.log('  run remains paused; start the controller, then resume after inspecting status');
-    break;
-  }
-
   case 'reopen-step5': {
     const run = opt('run') ?? die('--run is required');
     const authorization = opt('authorization') ?? die('--authorization is required');

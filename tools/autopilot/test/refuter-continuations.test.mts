@@ -78,7 +78,7 @@ test('native stage changes only correction label/task and retains model, schema 
   const configuredProfile = stage.modelProfile(plans[0]);
   assert.equal(configuredProfile, stage.modelProfile(plans[1]));
   assert.ok(typeof configuredProfile === 'string' && configuredProfile.length > 0);
-  assert.ok(Object.values(MODEL_PROFILE_NAMES).includes(configuredProfile));
+  assert.ok((Object.values(MODEL_PROFILE_NAMES) as string[]).includes(configuredProfile));
   assert.equal(plans[1].label, 'refute-8');
   assert.equal(plans[1].task, 'briefs/tasks/alpha-5a-refuter.md');
   assert.deepEqual(plans.map((p: any) => p.covers), [['7'], ['8']]);

@@ -1,4 +1,4 @@
-// Full closure at step 9: obligations, the close-out commit, and the
+// Full closure at step 8: obligations, the close-out commit, and the
 // contract-rework loop's routing.
 //
 // WHY. frontier-15 reached its owner pause with four chores no stage owned
@@ -76,7 +76,7 @@ test('run-commit commits a dirty tree on main and refuses any other branch', () 
   writeFileSync(join(dir, 'new-item.md'), 'draft content');
   let r = runTool(join(dir, 'tools', 'run-commit.mjs'), dir, ['--run', 'r9', '--check']);
   assert.equal(r.status, 1, 'a dirty tree fails the gate');
-  const receipt = 'research/r9-dispatch/tool-close-step9-v2.result.json';
+  const receipt = 'research/r9-dispatch/tool-close-step8-v2.result.json';
   r = runTool(join(dir, 'tools', 'run-commit.mjs'), dir, ['--run', 'r9', '--final-receipt', receipt]);
   assert.equal(r.status, 0, r.stderr);
   assert.match(r.stdout, /committed/);
@@ -96,12 +96,12 @@ test('run-commit commits a dirty tree on main and refuses any other branch', () 
 });
 
 test('the close stage delegates its receipt to run-commit instead of creating a second commit', () => {
-  const stage: any = stages.find((candidate: any) => candidate.id === '9-close-v2');
+  const stage: any = stages.find((candidate: any) => candidate.id === '8-close-v2');
   const plan = stage.plan({ run: 'demo', repo: REPO })[0];
   assert.equal(plan.writeReceipt, false);
   assert.ok(plan.argv.includes('--require-proof-layout'), 'verify both proof gates before writing a commit receipt or staging');
   assert.deepEqual(plan.argv.slice(-2), ['--final-receipt',
-    'research/demo-dispatch/tool-close-step9-v2.result.json']);
+    'research/demo-dispatch/tool-close-step8-v2.result.json']);
 });
 
 test('the 9-contract-close hook routes an open contract row to the owning Beta, then to the certifier', async () => {
@@ -112,7 +112,7 @@ test('the 9-contract-close hook routes an open contract row to the owning Beta, 
   }) + '\n');
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s10: any = stages.find((s: any) => s.id === '9-contract-close');
+  const s10: any = stages.find((s: any) => s.id === '8-contract-close');
   const args = { ctx: { run: 'demo', repo, dispatchDir: join(repo, 'research', 'demo-dispatch') }, executor, stage: s10, round: 1, failure: { id: 'defect-ledger', why: '' } };
 
   await s10.onGateFailure(args);
@@ -177,7 +177,7 @@ test('a quota-blocked rework is an outage on the obligation clock, not a burnt r
   }) + '\n');
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s10: any = stages.find((s: any) => s.id === '9-contract-close');
+  const s10: any = stages.find((s: any) => s.id === '8-contract-close');
   const report = await s10.onGateFailure({
     ctx: { run: 'demo', repo, dispatchDir: join(repo, 'research', 'demo-dispatch') },
     executor, stage: s10, round: 1, failure: { id: 'defect-ledger', why: '' },
@@ -190,7 +190,7 @@ test('a quota-blocked rework is an outage on the obligation clock, not a burnt r
 test('the 9-close-v2 hook dispatches a DUE block obligation and waits on undue clocks', async () => {
   const repo = mkdtempSync(join(tmpdir(), 'oblig-close-'));
   mkdirSync(join(repo, 'research'), { recursive: true });
-  const s10c: any = stages.find((s: any) => s.id === '9-close-v2');
+  const s10c: any = stages.find((s: any) => s.id === '8-close-v2');
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
 
@@ -211,31 +211,31 @@ test('the 9-close-v2 hook dispatches a DUE block obligation and waits on undue c
   assert.match(report?.outage?.reason ?? '', /unblock clock/);
 });
 
-test('9-close-v2 is the terminal stage and cannot waive', () => {
+test('8-close-v2 is the terminal stage and cannot waive', () => {
   const last: any = stages[stages.length - 1];
-  assert.equal(last.id, '9-close-v2');
+  assert.equal(last.id, '8-close-v2');
   assert.ok(!last.gatesWaived, 'the terminal stage may not waive');
   assert.ok(last.gates({ run: 'demo', repo: REPO }).length >= 2, 'obligations + tree-clean');
 });
 
-test('Step 9 stamps before readiness, then closes over a protected-tree receipt', () => {
+test('Step 8 stamps before readiness, then closes over a protected-tree receipt', () => {
   // The stamp still has an owning stage.  After readiness validates that stamped
   // tree, a read-only report cannot invalidate it; the terminal gate therefore
   // proves the protected tree is unchanged instead of repeating the full scan.
   const stage = (id: string): any => stages.find((s: any) => s.id === id);
   const ids = stages.map((s: any) => s.id);
-  assert.ok(ids.indexOf('9-stamps-v2') < ids.indexOf('9-readiness-v2'));
-  assert.ok(ids.indexOf('9-readiness-v2') < ids.indexOf('9-evidence-v2'));
-  assert.ok(ids.indexOf('9-evidence-v2') < ids.indexOf('9-report-baseline-v2'));
-  assert.ok(ids.indexOf('9-report-baseline-v2') < ids.indexOf('9-close-v2'));
-  const closeGates = stage('9-close-v2').gates({ run: 'demo', repo: REPO }).map((g: any) => g.id);
+  assert.ok(ids.indexOf('8-stamps-v2') < ids.indexOf('8-readiness-v2'));
+  assert.ok(ids.indexOf('8-readiness-v2') < ids.indexOf('8-evidence-v2'));
+  assert.ok(ids.indexOf('8-evidence-v2') < ids.indexOf('8-report-baseline-v2'));
+  assert.ok(ids.indexOf('8-report-baseline-v2') < ids.indexOf('8-close-v2'));
+  const closeGates = stage('8-close-v2').gates({ run: 'demo', repo: REPO }).map((g: any) => g.id);
   assert.ok(closeGates.includes('report-integrity'), 'the terminal gate proves no validated input changed');
   assert.ok(closeGates.includes('tree-clean'), 'the close-out commit still captures all final artifacts');
   assert.ok(!closeGates.includes('judge-stamps'), 'the unchanged-tree proof replaces duplicate stamp verification');
 });
 
 test('a protected-tree mismatch never receives an automatic close-out repair', async () => {
-  const s10c: any = stages.find((s: any) => s.id === '9-close-v2');
+  const s10c: any = stages.find((s: any) => s.id === '8-close-v2');
   const started: any[] = [];
   const report = await s10c.onGateFailure({
     ctx: { run: 'demo', repo: REPO }, executor: { start: (_stage: any, plan: any) => started.push(plan) },

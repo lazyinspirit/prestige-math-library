@@ -3,9 +3,10 @@
 - Run commands from the repository root. `tools/autopilot/` owns dispatch, gates and
   stage transitions. `CLAUDE.md` governs agents; `SCHEMA.md` governs content.
 - The stage definitions are `tools/autopilot/stages/mathlib.mts`,
-  `mathlib.step5.mts` and `mathlib.step7.mts`. Use a fresh run and state
-  directory when the workflow revision changes; old receipts cannot be adopted
-  under new stage numbers.
+  `mathlib.step5.mts` and `mathlib.step7.mts`. The eight-step revision is
+  `eight-step-v4-proof-coverage`. Use a fresh run and state directory when the workflow revision changes; old receipts cannot be adopted
+  under new stage numbers. Both restart and hot reload reject a mismatched
+  revision; old state and receipts remain unchanged.
 
 ## Prepare and start
 
@@ -153,8 +154,10 @@ future stages defer selection until execution and write no run state.
   and successful historical Alpha assignment results remain supported.
 - Steps 5–7: independent reader/refuter review and cross-group closure, frozen
   item judgment, then frontier repair, rejudgment and the scoped gate.
-- Steps 8–9: certify changed draft items and impacts, then close contracts,
-  pathways, readiness, the owner report and the run commit.
+- Step 8: close contracts and the defect ledger, pathways, readiness, the
+  evidence-bound owner report and the scoped run commit. There is no separate
+  post-Step-7 scope review, change-judging loop, or whole-level audit/spine
+  attestation stage.
 - Level coverage reads component provenance with the shared renderer YAML parser,
   accepting both block and flow mappings. Scoped malformed frontmatter, missing
   components, non-string values and values outside the schema enums remain errors;
@@ -162,9 +165,9 @@ future stages defer selection until execution and write no run state.
   Owner-report kind counts also decode YAML scalars, so quoted and plain
   spellings of the same kind contribute to one count.
   A checker correction that leaves item and mathematical evidence bytes unchanged
-  needs the ordinary failed-gate retry, without rewriting items or reopening the
-  Step-8 suffix merely to restyle equivalent YAML.
-- Step 9 readiness ends with `proof-step-separation` and `proof-blue-tags`.
+  needs the ordinary failed-gate retry, without rewriting items or reopening completed review merely to restyle
+  equivalent YAML.
+- Step 8 readiness ends with `proof-step-separation` and `proof-blue-tags`.
   They share one deterministic renderer pass and write
   `research/RUN-proof-layout.json`. Scope is the exact current manifest item
   inventory on the run's A/B pages, including their shared published items;
@@ -257,6 +260,24 @@ future stages defer selection until execution and write no run state.
   establish previously unbound reader observations. Immutable reader/refuter
   observations remain unchanged.
 
+- Step 7's complete initial and retry batteries include exactly one additional
+  gate, `proof-contract-coverage`, after merging the batch contracts. It derives
+  the nonempty selected inventory from all current run manifests, reads actual
+  supplied Proof, Refutation, Counterexample and Verification sections, and
+  requires each to appear in both the merged contract scope and its contract map.
+  Definitions and other carriers without a supplied argument need no proof
+  contract. This is a mechanical completeness check, not an independent review.
+  It rejects malformed, duplicate, empty or missing selections and missing item
+  files. An omitted proof cannot pass merely because contract validation or
+  gate liveness checked a smaller, nonempty set. Diagnostics enter the existing
+  Step-7 gate repair and full-battery retry path. No second consumer sweep or
+  scope-review stage is introduced.
+- Step 8 uses `level-coverage --mechanical` with current manifests, contracts,
+  judge evidence and Step-7 certifications. It retains provenance, complete
+  proof coverage and current judge/terminal checks without requiring the removed
+  `audit-coverage.json` or `spine-audit.json` attestations. Those receipt formats
+  remain available for explicit, separately requested maintenance audits.
+
 - Step 7 freezes `research/RUN-step7-v2/frontier.json`. Its adjudication, repair,
   rejudgment and item gates cover draft IDs in that frontier. Batch adjudicators resolve
   rejections; three owner lanes close disjoint frontier impacts; central certification
@@ -287,15 +308,7 @@ future stages defer selection until execution and write no run state.
   suppliers and actual direct consumers, with current item and context hashes and
   full-text source review. Native bytes remain historical evidence; the supplement
   cannot change verdicts, defect classification, confidence requirements or scope.
-- Step 8 derives both its changed-item receipt and initial judge dispatch from
-  the same owning-run manifest selector and immutable post-Step-7 baseline.
-  Subjects are the frozen frontier and legitimate owned additions; missing or
-  multiply owned subjects block. Unrelated work remains advisory context and is
-  excluded from this run's judgments, stamps and receipt-currency comparison.
-  A guarded owner recovery may add consumer verdict-currency targets named by
-  the current native closure and sealed owner authorization. Those targets must
-  be owned by the run and remain separate from its mathematical change receipt.
-- Step 9 readiness seals owned content and workflow evidence, substantive
+- Step 8 readiness seals owned content and workflow evidence, substantive
   supplier and formal proof context, relevant page homes/prerequisites, and
   validation code/configuration. Shared plan and ledger carriers use relevant
   record projections; bare navigation links protect identity and home resolution.
@@ -323,7 +336,7 @@ future stages defer selection until execution and write no run state.
   existing publication, not an independent audit or authority to publish a draft;
   a judge marker alone is insufficient.
   Operational dispatch and retry history belongs in run records, not that ledger.
-  Step 9 commits on main; new content stays draft. Publication status changes
+  Step 8 commits on main; new content stays draft. Publication status changes
   and pushing are owner acts.
 - Source-backed claims need recorded full-text retrieval, not just a URL or PDF page
   count. After an initial failure, search alternatives and make at most five recovery
@@ -1017,11 +1030,10 @@ items and external suppliers cannot contribute to its proof count. Liveness
 still measures work performed and retains each probe's validator exit status;
 the ordinary validator gates determine whether that work passed.
 
-Step-5 closure, Step-8 impact closure and Step-9 pathway gates use the same
-frontier selectors. Step-8 impact closure keeps the cumulative `pre-author`
-to latest snapshot window and its existing receipt, with full supplier context
-and only selected consumers as review subjects. The scoped prose check includes
-existing pathways of selected categories.
+Step-5 closure, Step-7 consumer maintenance and Step-8 pathway gates retain
+their existing frontier selectors and supplier context. The scoped prose check
+includes existing pathways of selected categories; no extra cross-batch or
+whole-library dependency review is added.
 
 Step-5 published-dependency findings outside the manifest inventory may close
 only their owned consumer use through `context_accepted`. The root receipt binds
@@ -1037,7 +1049,7 @@ their publication audit or formatting is not a gate on this run.
 
 ## Scoped closeout with unrelated work present
 
-Step-9 evidence validates the canonical defect-ledger history and supersession
+Step-8 evidence validates the canonical defect-ledger history and supersession
 links with the existing owning-run validator before checking active fatal
 obligations, and parses every global JSON row. It does not add taxonomy repair
 duties for unrelated historical runs. Version-3 evidence binds the complete
@@ -1053,7 +1065,7 @@ remain visible in the fatal-defect table, labelled historical with their current
 owner; they do not become current blockers. Active open or incomplete fatal
 rows and invalid ownership links still fail evidence generation.
 
-Step-9 readiness and report integrity seal physical files and exact symbolic-link
+Step-8 readiness and report integrity seal physical files and exact symbolic-link
 target bytes with distinct file/link hash prefixes. They do not follow directory
 links or external targets; physically present targets are protected at their own
 paths. Dangling links are included without changing them. Changes to this hashing
@@ -1093,7 +1105,7 @@ before rendering it again.
 
 `tools/run-commit.mjs` retains its existing whole-tree behavior for runs without
 a closeout scope policy. To preserve unrelated staged changes and working files,
-the owner may create `research/RUN-closeout-scope.json` **before** Step 9 seals
+the owner may create `research/RUN-closeout-scope.json` **before** Step 8 seals
 readiness and report integrity. This changes commit ownership only; mathematical,
 proof-layout, obligation, readiness and owner-report gates still apply. A missing
 tracked policy is an error, not a fallback to whole-tree staging.
@@ -1114,7 +1126,7 @@ Automatic ownership includes every selected page, its current items and existing
 category pathways, the scope ledger, canonical `research/plan-spec.json` and published
 supplier ledger, current published-repair claim targets with valid recorded repair
 evidence, and all Git-eligible `research/RUN-*` files and directories. It includes
-the policy and normal final `RUN-dispatch/tool-close-step9-v2.result.json`. Ignored
+the policy and normal final `RUN-dispatch/tool-close-step8-v2.result.json`. Ignored
 raw dispatch logs and transcripts are never force-added or copied. Required
 carriers must exist and be eligible for Git; existing selected-category pathways
 cannot be omitted. Absent category pathways remain governed by the native pathway
@@ -1215,22 +1227,12 @@ closeout does not push, publish, change stages or revise the workflow.
 
   It archives Step-5 receipts and generated artifacts, preserves Steps 6–7, and arms a
   pause after `5b-close` by default.
-- **Mathematical repair after Step 7:** Use `recover-step8` only with explicit owner
-  authorization, after repairing its named items and before Step 9 dispatches. Its
-  version-1 JSON needs `run`, a unique `recovery_id`, `baseline:"post-step7"`,
-  `authorized_by:"owner"`, the owner's `authorization` text, nonempty `required_targets`
-  within `allowed_targets`, and `reopen_stages` exactly
-  `["8-changes-judge","8-close","8-changes-stamp","8-receipt"]`.
-
-  ```bash
-  node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts recover-step8 --run RUN --state-dir .autopilot/RUN --authorization AUTH.json
-  ```
-
-  The command uses the same owning-run change selector to check the repair
-  allowlist against the `post-step7` snapshot; unrelated changes are not recovery
-  subjects. It requires a paused run, a stopped controller and drained writers,
-  archives the Step-8 suffix receipts, and leaves the run paused. Step-7 history remains
-  intact.
+- **Mathematical repair after Step 7:** The former `recover-step8` command and
+  post-Step-7 review/repair suffix are removed. Finish mathematical repairs and
+  their existing consumer maintenance, certification and judgment obligations
+  before `7-freeze`. A later substantive change must not reuse stale closure
+  evidence; stop for an explicit recovery plan rather than bypassing currency
+  checks or manufacturing audit receipts.
 - **Historical checkpoint migration:** The current migration accepts only a verified
   merged post-review checkpoint. Export with the old integration checkout before
   installing the new workflow. The source must be paused and inactive, and the target

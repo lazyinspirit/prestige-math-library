@@ -97,8 +97,10 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
     gate('step7-round-certification',tool(ctx,'check','final',1)),
     ...(step7GuardGate?[step7GuardGate(ctx)]:[]),
     ...repoWide(ctx),...contractGates(ctx,{reviewed:true}),
+    gate('proof-contract-coverage', ['node', 'tools/physics-support/proof-contract-coverage.mjs',
+      '--run', ctx.run, '--contracts', `research/${ctx.run}-proof-contracts.json`]),
     // Published maintenance and auditor additions are outside the immutable
-    // original frontier; their certification gates belong to later stages.
+    // original frontier; their maintenance evidence remains separately owned and validated.
     closureGate(ctx,{judgeLineup:'sol61'}),ledgerGate(ctx),
     ];
     // Doctor inspects future command descriptors before 7-scope creates the

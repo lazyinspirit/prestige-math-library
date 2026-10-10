@@ -31,7 +31,7 @@ test('Step 7 adjudication packs and tasks order rejected items by dependency lev
     assert.deepEqual(['thm-item-18','thm-item-19','thm-item-20'].map(id=>pack.dependency_levels[id]),[0,1,2]);
     const task=readFileSync(workerReport(f.root,run,'initial',1,'1').replace(/\.json$/,'.task.md'),'utf8');
     assert.match(task,/Assigned item order: 0:thm-item-0, 0:thm-item-18, 1:thm-item-19, 2:thm-item-20/);
-    const verdicts=readFileSync(ledger,'utf8').trim().split('\n').map(JSON.parse);
+    const verdicts=readFileSync(ledger,'utf8').trim().split('\n').map(value => JSON.parse(value));
     json(join(workflowDir(f.root,run),'judge-2.json'),{verdicts});
     const repeat=prepareAdjudication(f.root,run,'repeat',2);
     assert.deepEqual(repeat.assignments['1'].map((row:any)=>row.id),

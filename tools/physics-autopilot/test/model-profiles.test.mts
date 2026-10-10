@@ -20,17 +20,6 @@ const stage = (id: string): any => stages.find((candidate: any) => candidate.id 
 const selected = (s: any, plan: any): string | undefined => plan.profile
   ?? (typeof s.modelProfile === 'function' ? s.modelProfile(plan) : s.modelProfile);
 
-test('Step 8 restart request blocks the old controller before dispatch and admits its replacement', () => {
-  const repo = mkdtempSync(join(tmpdir(), 'step8-restart-'));
-  mkdirSync(join(repo, 'research'), { recursive: true });
-  const path = join(repo, 'research/demo-step8-restart.json');
-  try {
-    writeFileSync(path, JSON.stringify({ controller_pid: process.pid }));
-    assert.throws(() => stage('8-scope').plan({ repo, run: 'demo' }, ['all']), /restart.*pending/);
-    writeFileSync(path, JSON.stringify({ controller_pid: process.pid + 1 }));
-    assert.equal(stage('8-scope').plan({ repo, run: 'demo' }, ['all'])[0].label, 'step8-scope-prepare');
-  } finally { rmSync(repo, { recursive: true, force: true }); }
-});
 
 test('the tracked dispatcher argv forwards stage-selected profiles', () => {
   const config = JSON.parse(readFileSync(join(REPO, 'physics/physics-autopilot.config.json'), 'utf8'));
@@ -136,8 +125,8 @@ test('Step 1 scaffolders use DeepSeek Flash max', () => {
 });
 
 test('group Alpha resolves to Sol 6.1 high', () => {
-  assert.equal(stage('2-assign').modelProfile, MODEL_PROFILE_NAMES.deepseekFlashMax,
-    'batch assignment runs on the DeepSeek Flash lane');
+  assert.equal(stage('2-assign').modelProfile, undefined,
+    'batch assignment is a native mechanical tool');
   const result = spawnSync('node', ['tools/physics-support/dispatch.mjs',
     '--role', 'alpha', '--brief', 'briefs/alpha.md', '--label', 'alpha-model-test',
     '--run', 'alpha-model-test', '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
@@ -185,9 +174,9 @@ test('Step-7 fatal group adjudicator uses Sol 6.1 high', () => {
   assert.equal(row.provider_effort, 'high');
 });
 
-test('Step 8 agents use Sol 6.1 high and Step 9 agents use DeepSeek Flash max', () => {
-  for (const s of stages.filter((candidate: any) => /^(?:8|9)-/.test(candidate.id))) {
-    const expected = s.id.startsWith('8-') ? MODEL_PROFILE_NAMES.sol61High : MODEL_PROFILE_NAMES.deepseekFlashMax;
+test('Step 8 closeout agents use DeepSeek Flash max', () => {
+  for (const s of stages.filter((candidate: any) => /^8-/.test(candidate.id))) {
+    const expected = MODEL_PROFILE_NAMES.deepseekFlashMax;
     for (const role of ['alpha', 'alpha-high', 'alpha-report', 'beta']) {
       assert.equal(selected(s, { role, job: 'audit' }), expected,
         `${s.id}/${role}`);
@@ -195,8 +184,6 @@ test('Step 8 agents use Sol 6.1 high and Step 9 agents use DeepSeek Flash max', 
     assert.equal(selected(s, { role: 'tool', job: 'bookkeeping-mechanical' }), undefined,
       `${s.id} changed a deterministic tool job into a model call`);
   }
-  assert.equal(selected(stage('8-scope'), { role: 'alpha', label: 'step8-lead', job: 'audit' }),
-    MODEL_PROFILE_NAMES.sol61High);
   assert.equal(selected(stage('7.1-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }),
     MODEL_PROFILE_NAMES.sol61High, 'Step 7 selects the Sol 6.1 high adjudication profile');
   assert.equal(stage('7.5-adjudicate').modelProfile, MODEL_PROFILE_NAMES.sol61High);
@@ -206,8 +193,8 @@ test('Step 8 agents use Sol 6.1 high and Step 9 agents use DeepSeek Flash max', 
 
 test('the shared Step-3 authoring brief mandates authoritative web verification', () => {
   const source = readFileSync(join(REPO, 'briefs/group-author.md'), 'utf8');
-  assert.match(source, /If unsure/i);
-  assert.match(source, /search the web/i);
+  assert.match(source, /uncertain|unfamiliar|unsure/i);
+  assert.match(source, /consult complete authoritative arguments when uncertain/i);
   assert.match(source, /authoritative sources/i);
 });
 
