@@ -36,7 +36,7 @@ import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
 import { recoverStep8 } from '../src/step8-recovery.mts';
 import { reopenStep5 } from '../src/step5-reopen.mts';
-import { appendFrontier, assertNoAppendTransaction } from '../src/frontier-append.mts';
+import { appendFrontier, assertNoAppendTransaction, recoverAppendItemOrder } from '../src/frontier-append.mts';
 import type { Config } from '../src/types.mts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -302,6 +302,14 @@ switch (cmd) {
       console.log(`BLOCKED OUTSIDE SCOPE — ${blocked.length} pair(s) need a page this scope does not build:`);
       for (const b of blocked) console.log(`  ${b.id}  <- ${b.blockedBy.join(', ')}`);
     }
+    break;
+  }
+
+  case 'recover-item-order': {
+    const run = opt('run') ?? die('--run is required'), generation = Number(opt('generation'));
+    if (!Number.isInteger(generation) || generation < 1) die('--generation must be a positive integer');
+    const receipt = recoverAppendItemOrder(repo, run, generation, loadConfig().stateDir);
+    console.log(`APPEND_ORDER_RECOVERY ${receipt.records.length} manifest(s); original preimages retained`);
     break;
   }
 

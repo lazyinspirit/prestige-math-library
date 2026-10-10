@@ -224,3 +224,17 @@ test('normal CLI appends through actual ledger/task tools without replacing popu
   assert.equal(JSON.parse(f.bytes('demo-scope-ledger.json').toString()).pages.length, 60);
   assert.ok(existsSync(join(f.research, 'demo-beta-30.task.md')));
 });
+
+test('primary recovery CLI does not mistake its own launcher for a target writer', t => {
+  const f = fixture(t), source = process.cwd(), path = join(f.research, 'demo-batch-1.pages.json');
+  const pages = JSON.parse(readFileSync(path, 'utf8'));
+  pages[0].items.push({ ...pages[0].items[0], id: 'def-original-extra' });
+  writeFileSync(path, JSON.stringify(pages));
+  const e = appendFrontier(f.options);
+  pages[0].items.reverse(); writeFileSync(path, JSON.stringify(pages));
+  writeFileSync(join(f.repo, e.report), '### new-a\nVERDICT: no-drift\n### new-b\nVERDICT: no-drift\n');
+  cpSync(join(source, 'tools'), join(f.repo, 'tools'), { recursive: true });
+  const result = spawnSync(process.execPath, ['tools/tsx-run.mjs', 'tools/autopilot/bin/autopilot.mts', 'recover-item-order', '--run', 'demo', '--generation', '1', '--state-dir', f.stateDir], { cwd: f.repo, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.match(result.stdout, /APPEND_ORDER_RECOVERY 1 manifest/);
+});

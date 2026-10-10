@@ -92,7 +92,7 @@ populated manifests or manufacture review receipts.
 
 If a gate requires only item-array ordering after append captured its preimages,
 stop and drain the paused controller, then use
-`node tools/tsx-run.mjs tools/autopilot/bin/frontier-append.mts recover-item-order --run RUN --generation N --state-dir .autopilot/RUN`.
+`node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts recover-item-order --run RUN --generation N --state-dir .autopilot/RUN`.
 Recovery checks the authentic archived hashes and exact equality of every item
 object and page field, allowing only item-array permutations or serialization.
 It writes a separate immutable recovery receipt; it never replaces an original
