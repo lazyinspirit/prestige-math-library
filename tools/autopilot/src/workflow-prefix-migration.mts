@@ -1,17 +1,27 @@
-// Explicit recovery for the one reviewed revision transition at an open Step 3b.
+// Explicit recovery for the two reviewed revision transitions at an open Step 3b.
 // No stage, dispatch, repair budget, receipt or completion field is rewritten.
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, lstatSync, mkdirSync, writeFileSync, renameSync, rmSync, readlinkSync } from 'node:fs';
-import { join, resolve, relative } from 'node:path';
+import { join, resolve, relative, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { acquireControllerLock } from './controller-lock.mts';
 import { appendRegistry } from './frontier-append.mts';
 
 export const SOURCE_REVISION = 'batch-step7-rounds-v3-proof-layout';
-export const TARGET_REVISION = 'eight-step-v5-batch-review';
-// Exact reviewed tables, with or without the existing scaffold-only correction.
-const TARGET_TABLE_SHA256 = new Set(['c3af4d0704202d32eaea1e72165c723cc2fa518036f2e9b3fc5a19bbfa249352', '5b53ebb0dcefc6cefdfa50a2bcb509fb774a56f3847789a7df8b94864cb2c200']);
+export const TARGET_REVISION = 'eight-step-v4-proof-coverage';
+const TARGET_TABLE_SHA256 = '7c45bb2747d107df1ce7b2aef3f1dd484c85169e6f9760cdd535ea655f3778ae';
 const SOURCE_COMMIT = '891f9be373512a67e38d09d112eb05226bf734e0';
+export const BATCH_REVIEW_REVISION = 'eight-step-v5-batch-review';
+const BATCH_REVIEW_TABLE_SHA256 = '5b53ebb0dcefc6cefdfa50a2bcb509fb774a56f3847789a7df8b94864cb2c200';
+const V4_SOURCE_COMMIT = '74b7c622db0fb2c55b0dcb1c9ae085635f7f497e';
+const scaffoldBefore = '      ...policyGates(ctx), planGate(ctx), extGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx),';
+const scaffoldAfter = `      // Item validators resolve manifest IDs through authored item files. At
+      // Step 1 those files are deliberately absent; content-policy's
+      // manifest-only pass above checks the retired external-record fields
+      // that are available at this boundary. Run extcheck after authoring,
+      // when its manifest-scoped subjects resolve to real item carriers.
+      ...policyGates(ctx), planGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx),`;
+
 export const PREFIX_STAGES = ['1-drift', '1-drift-apply', '1-scaffold', '2-assign', '3a-scope', '3-baseline', '3b-author'];
 const hash = (b: string | Buffer) => createHash('sha256').update(b).digest('hex');
 const fail = (s: string): never => { throw new Error(`migrate-workflow-prefix: ${s}`); };
@@ -55,14 +65,18 @@ export function activeNativeWriters(repo: string, run: string): number[] {
   return found;
 }
 
-function compatibility(repo: string) {
+function compatibility(repo: string, from: string, to: string) {
+  const sourceCommit = from === SOURCE_REVISION ? SOURCE_COMMIT : V4_SOURCE_COMMIT;
+  const targetHash = to === TARGET_REVISION ? TARGET_TABLE_SHA256 : BATCH_REVIEW_TABLE_SHA256;
   const path = 'tools/autopilot/stages/mathlib.mts';
-  const prior = spawnSync('git', ['--no-replace-objects', 'show', `${SOURCE_COMMIT}:${path}`], { cwd: repo, encoding: 'utf8' });
+  const prior = spawnSync('git', ['--no-replace-objects', 'show', `${sourceCommit}:${path}`], { cwd: repo, encoding: 'utf8' });
   if (prior.status !== 0) fail('reviewed source commit unavailable');
+  const source = from === TARGET_REVISION ? prior.stdout.replace(scaffoldBefore, scaffoldAfter) : prior.stdout;
+  if (from === TARGET_REVISION && hash(source) !== TARGET_TABLE_SHA256) fail('reconstructed v4 source differs from first authentic migration');
   const current = regularBytes(join(repo, path)).toString();
-  if (!TARGET_TABLE_SHA256.has(hash(current))) fail('reviewed target stage table changed, including helper/profile contracts');
-  if (!prior.stdout.includes(`workflowRevision = '${SOURCE_REVISION}'`)
-    || !current.includes(`workflowRevision = '${TARGET_REVISION}'`)) fail('unsupported stage-table revisions');
+  if (hash(current) !== targetHash) fail('reviewed target stage table changed, including helper/profile contracts');
+  if (!source.includes(`workflowRevision = '${from}'`)
+    || !current.includes(`workflowRevision = '${to}'`)) fail('unsupported stage-table revisions');
   const prefix = (s: string) => {
     const start = s.indexOf('export const stages = ['), end = s.indexOf("    id: '4-splice'");
     if (start < 0 || end < start) fail('unsupported stage-table prefix');
@@ -70,11 +84,11 @@ function compatibility(repo: string) {
     // (its item files do not exist yet). It remains required after authoring.
     return s.slice(start, end).replace(/\/\/[^\n]*/g, '').replace('...policyGates(ctx), planGate(ctx), extGate(ctx), urlGate(ctx)', '...policyGates(ctx), planGate(ctx), urlGate(ctx)').replace(/\s+/g, '');
   };
-  if (prefix(prior.stdout) !== prefix(current)) fail('stage contracts through 3b-author changed beyond reviewed scaffold correction');
+  if (prefix(source) !== prefix(current)) fail('stage contracts through 3b-author changed beyond reviewed scaffold correction');
   const appendPath = 'tools/autopilot/src/frontier-append.mts';
-  const oldAppend = spawnSync('git', ['--no-replace-objects', 'show', `${SOURCE_COMMIT}:${appendPath}`], { cwd: repo });
+  const oldAppend = spawnSync('git', ['--no-replace-objects', 'show', `${sourceCommit}:${appendPath}`], { cwd: repo });
   if (oldAppend.status !== 0 || !oldAppend.stdout.equals(regularBytes(join(repo, appendPath)))) fail('dynamic append stage contracts changed');
-  return { source_commit: SOURCE_COMMIT, source_table_sha256: hash(prior.stdout), target_table_sha256: hash(current), prefix_sha256: hash(prefix(current)), append_sha256: hash(oldAppend.stdout), reviewed_exception: 'Completed scaffold extcheck removed; ordinary author extcheck remains mandatory.' };
+  return { source_commit: sourceCommit, committed_source_table_sha256: hash(prior.stdout), source_table_sha256: hash(source), target_table_sha256: hash(current), prefix_sha256: hash(prefix(current)), append_sha256: hash(oldAppend.stdout), reviewed_exception: from === SOURCE_REVISION ? 'Completed scaffold extcheck removed; ordinary author extcheck remains mandatory.' : 'v4 source reconstructed with the exact earlier scaffold correction; Step-1–3b prefix unchanged; Step-6 batch review remains future work.' };
 }
 
 export function migrateWorkflowPrefix({ repo, run, stateDir, authorizationPath }: {
@@ -83,11 +97,35 @@ export function migrateWorkflowPrefix({ repo, run, stateDir, authorizationPath }
   repo = resolve(repo); stateDir = resolve(stateDir);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(run)) fail('unsafe run name');
   const authBytes = regularBytes(authorizationPath), auth = JSON.parse(authBytes.toString());
+  const fromRevision = auth.from_revision, toRevision = auth.to_revision;
+  const supported = (fromRevision === SOURCE_REVISION && toRevision === TARGET_REVISION)
+    || (fromRevision === TARGET_REVISION && toRevision === BATCH_REVIEW_REVISION);
   if (auth.version !== 1 || auth.run !== run || auth.authorized_by !== 'owner'
-    || auth.from_revision !== SOURCE_REVISION || auth.to_revision !== TARGET_REVISION
+    || !supported
     || auth.authorized_stage !== '3b-author' || !/^[a-f0-9]{64}$/.test(auth.state_sha256 ?? '')
     || typeof auth.authorization !== 'string' || auth.authorization.trim().length < 40)
     fail('explicit owner authorization must bind run, stage, exact revisions and raw state SHA-256');
+  let previousMigration: any = null;
+  if (fromRevision === TARGET_REVISION) {
+    const previous = auth.previous_migration;
+    if (!previous || typeof previous.receipt_path !== 'string' || !/^[a-f0-9]{64}$/.test(previous.receipt_sha256 ?? '')
+      || !new RegExp(`^research/${run}-workflow-prefix-migration-[a-f0-9]{24}/receipt\\.json$`).test(previous.receipt_path))
+      fail('v4-to-v5 authorization must bind the first immutable migration receipt');
+    const previousPath = join(repo, previous.receipt_path), bytes = regularBytes(previousPath), receipt = JSON.parse(bytes.toString());
+    if (hash(bytes) !== previous.receipt_sha256 || receipt.version !== 1 || receipt.run !== run
+      || receipt.policy !== 'owner-workflow-prefix-migration-v1' || receipt.from_revision !== SOURCE_REVISION
+      || receipt.to_revision !== TARGET_REVISION || receipt.stage !== '3b-author'
+      || receipt.compatibility?.target_table_sha256 !== TARGET_TABLE_SHA256)
+      fail('previous migration identity/hash does not bind the reviewed v4 carrier');
+    for (const [name, digest] of Object.entries(receipt.archive_sha256 ?? {})) {
+      if (name !== name.split('/').pop() || hash(regularBytes(join(dirname(previousPath), name))) !== digest) fail(`previous migration archive changed: ${name}`);
+    }
+    if (receipt.archive_sha256?.['state.json'] !== receipt.before_raw_sha256
+      || receipt.archive_sha256?.['state.after.json'] !== receipt.after_raw_sha256
+      || receipt.archive_sha256?.['authorization.json'] !== receipt.authorization_sha256)
+      fail('previous migration lacks authentic state and authorization archives');
+    previousMigration = previous;
+  } else if (auth.previous_migration != null) fail('initial transition cannot substitute a previous migration');
   const archiveDir = join(repo, 'research', `${run}-workflow-prefix-migration-${hash(authBytes).slice(0, 24)}`);
   const receiptPath = join(archiveDir, 'receipt.json'), statePath = join(stateDir, 'state.json');
   const stateBytes = regularBytes(statePath), state = JSON.parse(stateBytes.toString());
@@ -104,7 +142,7 @@ export function migrateWorkflowPrefix({ repo, run, stateDir, authorizationPath }
   if (existsSync(receiptPath)) {
     const receipt = read(receiptPath);
     if (receipt.authorization_sha256 !== hash(authBytes) || receipt.before_raw_sha256 !== auth.state_sha256
-      || receipt.after_raw_sha256 !== hash(stateBytes) || state.workflowRevision !== TARGET_REVISION
+      || receipt.after_raw_sha256 !== hash(stateBytes) || state.workflowRevision !== toRevision
       || state.paused !== true) fail('existing migration does not match unchanged migrated state');
     for (const [name, digest] of Object.entries(receipt.archive_sha256 ?? {})) {
       if (hash(regularBytes(join(archiveDir, name))) !== digest) fail(`migration archive changed: ${name}`);
@@ -112,7 +150,7 @@ export function migrateWorkflowPrefix({ repo, run, stateDir, authorizationPath }
     return { archiveDir, receiptPath, idempotent: true };
   }
   if (existsSync(archiveDir)) fail('interrupted migration archive exists; inspect it without resetting history');
-  if (state.workflowRevision !== SOURCE_REVISION || hash(stateBytes) !== auth.state_sha256) fail('source revision or authorized raw state changed');
+  if (state.workflowRevision !== fromRevision || hash(stateBytes) !== auth.state_sha256) fail('source revision or authorized raw state changed');
   if (state.stage !== '3b-author' || state.finishedAt || state.stages?.['3b-author']?.doneAt) fail('only an open current 3b-author boundary is supported');
   if (existsSync(join(stateDir, 'frontier-append.lock'))) fail('append transaction unresolved');
   if (existsSync(join(stateDir, 'control.json'))) {
@@ -197,7 +235,7 @@ export function migrateWorkflowPrefix({ repo, run, stateDir, authorizationPath }
       evidence[relative(repo, p)] = hash(regularBytes(p));
     }
   }
-  const compatible = compatibility(repo);
+  const compatible = compatibility(repo, fromRevision, toRevision);
   // Preserve authentic runtime/control preimages before borrowing controller slot.
   const runtime = new Map<string, Buffer>();
   for (const name of readdirSync(stateDir).sort()) {
@@ -223,10 +261,11 @@ export function migrateWorkflowPrefix({ repo, run, stateDir, authorizationPath }
     for (const [name, bytes] of runtime) archive(name, bytes);
     archive('authorization.json', authBytes);
     archive('evidence-hashes.json', body(evidence));
-    state.workflowRevision = TARGET_REVISION; state.paused = true;
+    archive('target-stage-table.mts', regularBytes(join(repo, 'tools/autopilot/stages/mathlib.mts')));
+    state.workflowRevision = toRevision; state.paused = true;
     const after = body(state);
     archive('state.after.json', after);
-    const receipt = { version: 1, policy: 'owner-workflow-prefix-migration-v1', run, at: new Date().toISOString(), authorization_sha256: hash(authBytes), before_raw_sha256: hash(stateBytes), after_raw_sha256: hash(after), from_revision: SOURCE_REVISION, to_revision: TARGET_REVISION, stage: state.stage, verified_prefix: prefix, compatibility: compatible, preserved_unlaunched_reservations: reserved, preserved_uncollected_terminal_dispatches: terminal, changed_fields: ['workflowRevision', 'paused'], archive_sha256: archived };
+    const receipt = { version: 1, policy: 'owner-workflow-prefix-migration-v1', run, at: new Date().toISOString(), authorization_sha256: hash(authBytes), before_raw_sha256: hash(stateBytes), after_raw_sha256: hash(after), from_revision: fromRevision, to_revision: toRevision, stage: state.stage, previous_migration: previousMigration, verified_prefix: prefix, compatibility: compatible, preserved_unlaunched_reservations: reserved, preserved_uncollected_terminal_dispatches: terminal, changed_fields: ['workflowRevision', 'paused'], archive_sha256: archived };
     writeFileSync(receiptPath, body(receipt), { flag: 'wx', mode: 0o444 });
     const tmp = join(stateDir, 'state.workflow-prefix-migration.tmp');
     writeFileSync(tmp, after, { flag: 'wx' });

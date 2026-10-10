@@ -1258,13 +1258,20 @@ closeout does not push, publish, change stages or revise the workflow.
   checks or manufacturing audit receipts.
 - **Owner-authorized Step-3b revision migration:** The separate native command
   `node tools/tsx-run.mjs tools/autopilot/bin/migrate-workflow-prefix.mts --run RUN --state-dir .autopilot/RUN --authorization AUTH.json`
-  accepts only an open `3b-author` in `batch-step7-rounds-v3-proof-layout` and
-  changes it to `eight-step-v5-batch-review`, leaving it paused. Authorization
+  accepts only an open `3b-author` and the two exact transitions
+  `batch-step7-rounds-v3-proof-layout` → `eight-step-v4-proof-coverage`, then
+  `eight-step-v4-proof-coverage` → `eight-step-v5-batch-review`, leaving it
+  paused. Authorization
   must contain version 1, matching `run`, `authorized_by: "owner"`, a concrete
   `authorization`, exact `from_revision` and `to_revision`,
   `authorized_stage: "3b-author"` and `state_sha256` of the authentic raw state.
   A previous authorization targeting the group-review revision is insufficient;
-  the owner authorization must explicitly name the batch-review revision.
+  the owner authorization must explicitly name the batch-review revision and
+  bind the first immutable migration with `previous_migration.receipt_path` and
+  `previous_migration.receipt_sha256`. Its full archive is verified and retained.
+  The second transition reconstructs the reviewed v4 carrier from its committed
+  source plus only the exact earlier scaffold correction, then verifies the
+  unchanged Step-1–3b contracts and the pinned full v5 working table.
   Stop the controller and drain all native run writers first. The command verifies
   completed stage IDs including registered append generations against the reviewed
   historical prefix. The sole completed-prefix gate difference is removal of

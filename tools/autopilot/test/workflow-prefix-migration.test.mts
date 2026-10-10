@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, copyFileSync, symlinkSync, existsSync, rmSync, chmodSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
+import { join, resolve, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawn, spawnSync } from 'node:child_process';
-import { migrateWorkflowPrefix, PREFIX_STAGES, SOURCE_REVISION, TARGET_REVISION } from '../src/workflow-prefix-migration.mts';
+import { migrateWorkflowPrefix, PREFIX_STAGES, SOURCE_REVISION, TARGET_REVISION, BATCH_REVIEW_REVISION } from '../src/workflow-prefix-migration.mts';
 const root = resolve(import.meta.dirname, '../../..');
 const hash = (b: string | Buffer) => createHash('sha256').update(b).digest('hex');
 const body = (x: any) => JSON.stringify(x, null, 2) + '\n';
@@ -15,6 +15,12 @@ function fixture() {
   for (const p of ['tools/autopilot/stages/mathlib.mts', 'tools/autopilot/src/frontier-append.mts']) {
     mkdirSync(join(repo, p, '..'), { recursive: true }); copyFileSync(join(root, p), join(repo, p));
   }
+  const currentTable = readFileSync(join(root, 'tools/autopilot/stages/mathlib.mts'), 'utf8');
+  const scaffoldStart = currentTable.indexOf('      // Item validators resolve manifest IDs through authored item files. At');
+  const scaffoldEnd = currentTable.indexOf('    ],', scaffoldStart);
+  const recoveredV4 = spawnSync('git', ['--no-replace-objects', 'show', '74b7c622db0fb2c55b0dcb1c9ae085635f7f497e:tools/autopilot/stages/mathlib.mts'], { cwd: root, encoding: 'utf8' }).stdout.replace('      ...policyGates(ctx), planGate(ctx), extGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx),\n', currentTable.slice(scaffoldStart, scaffoldEnd));
+  assert.equal(hash(recoveredV4), '7c45bb2747d107df1ce7b2aef3f1dd484c85169e6f9760cdd535ea655f3778ae');
+  writeFileSync(join(repo, 'tools/autopilot/stages/mathlib.mts'), recoveredV4);
   const gitDir = spawnSync('git', ['rev-parse', '--absolute-git-dir'], { cwd: root, encoding: 'utf8' }).stdout.trim();
   symlinkSync(gitDir, join(repo, '.git'));
   const stages: any = {}; for (const id of PREFIX_STAGES) stages[id] = { enteredAt: 'x', gatesPassedAt: id === '3-baseline' ? null : 'x', doneAt: id === '3b-author' ? null : 'x', fixRounds: 2 };
@@ -50,10 +56,10 @@ test('changes only revision and pause, authentic full preimage and history prese
   assert.throws(() => migrate(f), /archive changed/);
 });
 test('batch-review migration requires a new exact-target owner authorization', () => {
-  assert.equal(TARGET_REVISION, 'eight-step-v5-batch-review');
+  assert.equal(BATCH_REVIEW_REVISION, 'eight-step-v5-batch-review');
   const f = fixture();
   const auth = JSON.parse(readFileSync(f.authorizationPath, 'utf8'));
-  writeFileSync(f.authorizationPath, body({ ...auth, to_revision: 'eight-step-v4-proof-coverage' }));
+  writeFileSync(f.authorizationPath, body({ ...auth, to_revision: BATCH_REVIEW_REVISION }));
   const before = readFileSync(join(f.stateDir, 'state.json'));
   assert.throws(() => migrate(f), /explicit owner authorization/);
   assert.deepEqual(readFileSync(join(f.stateDir, 'state.json')), before);
@@ -122,4 +128,36 @@ test('rejects a suffix launch event even when no suffix state/result was collect
   const f = fixture();
   writeFileSync(join(f.stateDir, 'events.jsonl'), JSON.stringify({ type: 'exec', command: 'exec: node tools/dispatch.mjs --run demo --label receipts' }) + '\n');
   assert.throws(() => migrate(f), /suffix execution event/);
+});
+
+test('second exact transition preserves the immutable first migration chain and all counters', () => {
+  const f = fixture(), first = migrate(f), firstBytes = readFileSync(first.receiptPath);
+  const firstReceipt = JSON.parse(firstBytes.toString());
+  copyFileSync(join(root, 'tools/autopilot/stages/mathlib.mts'), join(f.repo, 'tools/autopilot/stages/mathlib.mts'));
+  f.state.workflowRevision = TARGET_REVISION; f.state.paused = true; f.save();
+  const authorizeV5 = () => writeFileSync(f.authorizationPath, body({ version: 1, run: 'demo', authorized_by: 'owner', authorization: 'Owner authorization continues to the exact merged batch review revision while preserving this same run and history.', from_revision: TARGET_REVISION, to_revision: BATCH_REVIEW_REVISION, authorized_stage: '3b-author', state_sha256: hash(readFileSync(join(f.stateDir, 'state.json'))), previous_migration: { receipt_path: relative(f.repo, first.receiptPath), receipt_sha256: hash(firstBytes) } }));
+  authorizeV5();
+  const second = migrate(f);
+  assert.deepEqual(JSON.parse(readFileSync(join(f.stateDir, 'state.json'), 'utf8')), { ...f.state, workflowRevision: BATCH_REVIEW_REVISION, paused: true });
+  assert.deepEqual(readFileSync(first.receiptPath), firstBytes);
+  for (const [name, digest] of Object.entries(firstReceipt.archive_sha256)) assert.equal(hash(readFileSync(join(first.archiveDir, name))), digest);
+  const receipt = JSON.parse(readFileSync(second.receiptPath, 'utf8'));
+  assert.equal(receipt.previous_migration.receipt_sha256, hash(firstBytes));
+  assert.equal(receipt.compatibility.source_table_sha256, '7c45bb2747d107df1ce7b2aef3f1dd484c85169e6f9760cdd535ea655f3778ae');
+  assert.equal(receipt.compatibility.target_table_sha256, '5b53ebb0dcefc6cefdfa50a2bcb509fb774a56f3847789a7df8b94864cb2c200');
+  assert.equal(migrate(f).idempotent, true);
+  chmodSync(join(first.archiveDir, 'control.json'), 0o644); writeFileSync(join(first.archiveDir, 'control.json'), '{}');
+  assert.throws(() => migrate(f), /previous migration archive changed/);
+});
+test('second transition rejects missing prior binding and unreviewed outside-prefix helper changes', () => {
+  const f = fixture(), first = migrate(f), bytes = readFileSync(first.receiptPath);
+  f.state.workflowRevision = TARGET_REVISION; f.state.paused = true; f.save();
+  copyFileSync(join(root, 'tools/autopilot/stages/mathlib.mts'), join(f.repo, 'tools/autopilot/stages/mathlib.mts'));
+  const auth = { version: 1, run: 'demo', authorized_by: 'owner', authorization: 'Owner explicitly authorizes this exact same-run batch review migration while preserving all native work.', from_revision: TARGET_REVISION, to_revision: BATCH_REVIEW_REVISION, authorized_stage: '3b-author', state_sha256: hash(readFileSync(join(f.stateDir, 'state.json'))) };
+  writeFileSync(f.authorizationPath, body(auth));
+  assert.throws(() => migrate(f), /bind the first immutable migration/);
+  writeFileSync(f.authorizationPath, body({ ...auth, previous_migration: { receipt_path: relative(f.repo, first.receiptPath), receipt_sha256: hash(bytes) } }));
+  const table = join(f.repo, 'tools/autopilot/stages/mathlib.mts');
+  writeFileSync(table, readFileSync(table, 'utf8').replace('const STEP3_AUTHOR_PROFILE = DEEPSEEK_FLASH_MAX;', 'const STEP3_AUTHOR_PROFILE = LUNA_MAX;'));
+  assert.throws(() => migrate(f), /helper\/profile contracts/);
 });
