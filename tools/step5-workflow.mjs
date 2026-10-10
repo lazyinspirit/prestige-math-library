@@ -95,7 +95,7 @@ const verifyEvidence=(evidence,history=null)=>{for(const [p,hash]of Object.entri
       ||restoredRenderedLedgerHistory(history.root,history.run,history.certificate,p,hash))),
   `Step 5 evidence changed: ${p}`);};
 const rawHashes=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.sha256]));
-const creationId=/^(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const creationId=/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 function subjectScope(pack,created=[]) {
   if(pack.repair_scope!=='frontier')return null;
   requireValue(Array.isArray(pack.frontier_ids)&&pack.frontier_ids.length>0,'missing nonempty frozen frontier scope');
@@ -456,7 +456,7 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
   const primary=row.scope.filter(value=>value.role==='blocker');
   requireValue(primary.length===1&&primary[0].id===rejected.id,'owner supplement blocker scope mismatch');
   const prerequisites=row.scope.filter(value=>value.role==='prerequisite');
-  for(const value of prerequisites)requireValue(value.id!==rejected.id&&itemKind(root,value.id)==='definition'
+  for(const value of prerequisites)requireValue(value.id!==rejected.id&&['definition','algorithm'].includes(itemKind(root,value.id))
     &&discoverDownstream({items,repairedIds:[value.id]}).some(impact=>impact.id===rejected.id),
     'owner supplement prerequisite is not a necessary direct definition supplier');
   const suppliers=new Set([rejected.id,...prerequisites.map(value=>value.id)]);

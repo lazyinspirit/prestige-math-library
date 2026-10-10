@@ -1,6 +1,6 @@
 // Ownership comes from a detector's failing subject field, never an ID search
 // over its output: citations, inventories and upheld records are not defects.
-const ITEM = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*';
+const ITEM = '(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*';
 const itemFile = new RegExp(`^(?:.*?/)?items/(${ITEM})\\.md(?::|$)`);
 const errorHeader = new RegExp(`^ERROR\\s+[^\\s:]+(?:\\s+\\[(${ITEM})\\])?:`);
 

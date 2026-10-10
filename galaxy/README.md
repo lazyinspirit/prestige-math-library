@@ -205,3 +205,5 @@ add/edit/delete updates, retained camera and category filters, and reused GPU la
 Star tests cover exact transitive counts through diamonds and cycles, comparison
 with direct graph traversal, logarithmic growth, theorem luminosity boosts, glow caps and invariant core radii.
 Browser checks verify sphere shading and a black pixel beyond the halo boundary.
+
+Algorithm items have the same mathematical membership and visual treatment as definitions; execution loops do not create prerequisite cycles.

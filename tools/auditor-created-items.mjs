@@ -985,7 +985,7 @@ function step3ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       || (proofReview ? !['lemma', 'theorem', 'proposition', 'corollary'].includes(fm.kind)
         || fm.proved_here === false || fm.provenance?.proof === 'not-supplied'
         || !/^## Proof\s*\n\s*\S/m.test(split(itemText).body)
-        : fm.kind !== (definitionReview ? 'definition' : 'lemma'))
+        : (definitionReview ? !['definition', 'algorithm'].includes(fm.kind) : fm.kind !== 'lemma'))
       || currentEntry?.kind !== fm.kind
       || evidence.owner_authorization?.owner !== true
       || !String(evidence.owner_authorization?.reason ?? '').trim()

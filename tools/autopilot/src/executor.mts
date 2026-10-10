@@ -2070,7 +2070,7 @@ export class Executor {
   static itemsNamedBy(failure: GateResult): string[] {
     const text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
     const ids = new Set<string>();
-    const typed = /\b((?:def|thm|lem|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*)\b/g;
+    const typed = /\b((?:alg|def|thm|lem|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*)\b/g;
     for (const line of text.split(/\r?\n/)) {
       // Precheck emits FAIL/REPAIR headers, followed by indented proof text.
       // Only the header owns a diagnostic; PASS rows and cited suppliers do not.

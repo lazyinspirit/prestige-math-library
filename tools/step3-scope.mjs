@@ -501,7 +501,7 @@ function definitionWithoutProofContract(id) {
   if (!existsSync(path)) return false;
   try {
     const item = yaml().parse(split(readFileSync(path, 'utf8')).fm) ?? {};
-    return item.kind === 'definition' && item.provenance?.proof === 'not-applicable';
+    return ['definition', 'algorithm'].includes(item.kind) && item.provenance?.proof === 'not-applicable';
   } catch { return false; }
 }
 
@@ -981,7 +981,7 @@ if (command === 'check') {
       if (phase !== 'final') {
         for (const id of scope.items ?? []) if (!(manifests[batch] ?? []).includes(id)) error('scope-removal', `[${id}] authored item removed before 3b`);
         if (!sameSet(scope.pages ?? [], (pages[batch] ?? []).map((p) => p.id))) error('scope-page-change', `batch ${batch} changed its page scope`);
-        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] only local definitions and lemmas may be added at 3a`);
+        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] only local definitions, algorithms and lemmas may be added at 3a`);
       }
       continue;
     }
@@ -996,7 +996,7 @@ if (command === 'check') {
       error('scope-removal', `[${id}] post-reader item removed without a valid owner representation migration`);
     }
     for (const id of manifests[batch] ?? []) if (!currentPostIds.includes(id)
-      && !/^(def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
+      && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
     for (const message of hashSnapshotErrors(pre, batch, 'pre')) error('hash-invalid', `batch ${batch} pre ${message}`);
     for (const message of hashSnapshotErrors(post, batch, 'post')) error('hash-invalid', `batch ${batch} post ${message}`);
     if (scope.version !== 2) error('scope-identity', `batch ${batch} has unsupported scope version ${scope.version}`);

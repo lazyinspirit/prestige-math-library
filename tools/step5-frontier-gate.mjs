@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { validateFrontier } from './step5-rounds.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 
-const ITEM = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*';
+const ITEM = '(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*';
 const itemId = new RegExp(`^${ITEM}$`);
 const itemFile = new RegExp(`^(?:.*?/)?items/(${ITEM})\\.md:`);
 const native = new Set(['precheck', 'rendercheck', 'prosecheck']);

@@ -9,7 +9,7 @@
 
 - File: `items/<id>.md`. The frontmatter `id` must equal the filename stem.
   Keep IDs and aliases unique; `aliases: [old-id]` preserves old links.
-- `kind` determines the ID prefix: `definition` → `def-`, `theorem` → `thm-`,
+- `kind` determines the ID prefix: `definition` → `def-`, `algorithm` → `alg-`, `theorem` → `thm-`,
   `lemma` → `lem-`, `proposition` → `prop-`, `corollary` → `cor-`, `example` →
   `ex-`, `counterexample` → `cex-`, `false-statement` → `fs-`, `remark` → `rem-`.
 - `title` is the display name. `status` is `draft` or `published`; a missing or
@@ -40,7 +40,7 @@
 - Authored build batch items checked by `tools/content-policy.mjs` without
   `--audit` or `--manifest-only` require `provenance.statement` (`ai-generated`,
   `ai-altered`, or `literature-derived`) and `provenance.proof` (those values,
-  `not-supplied`, or `not-applicable`). Only definitions and remarks may use
+  `not-supplied`, or `not-applicable`). Only definitions, algorithms and remarks may use
   `not-applicable`. Either component marked `literature-derived` or `ai-altered`
   requires a `sources.references` URL. Legacy `authorship` is still readable;
   audited retagging removes it.
@@ -80,7 +80,7 @@
 ### Verification fields
 
 - `verification.precheck: pass` records a successful format check;
-  `n/a` applies when no proof phase is applicable, such as a definition or
+  `n/a` applies when no proof phase is applicable, such as a definition, algorithm or
   prose remark. Historical unproved archives may retain their original `n/a`
   marker. A format pass is not a proof of mathematical validity.
 - A published proved-here item needs `verification.audited` (owner audit) or
@@ -105,7 +105,7 @@
   markers in the canonical published ledger; that text identifies the item and
   current hash. `local_checks.precheck` and `.rendercheck` each record the
   actual command, successful output, exit code, check date and current content
-  hash. For a definition, remark, or example that has no phase proof in either the
+  hash. For a definition, algorithm, remark, or example that has no phase proof in either the
   original or corrected carrier and retains its kind, precheck records its actual
   one-file `--json` result with status `not-applicable`, zero checked proofs
   and zero failures; renderer and ownership checks remain mandatory.
@@ -113,9 +113,34 @@
   missing or mismatched evidence remains an error. There is no item gate,
   rejudgment or adjudication duty for this recorded repair state.
 
+### Algorithms
+
+An `algorithm` is a definition of a procedure, with the same provenance,
+well-definedness, dependency, review and publication rules as a mathematical
+definition. Use `## Definition` and state inputs, outputs, admissible conditions
+and exact instructions. Instructions may be prose, ordered lists or fenced
+pseudocode; branches and repetitive loops are operational instructions rather
+than phase-stratified proof steps.
+
+An algorithm may be a sequence or composition of smaller algorithms/procedures,
+and may invoke a smaller algorithm repeatedly. If large algorithm B uses small
+algorithm A, B lists A in `deps`: the graph edge is A → B. Declare an edge once
+regardless of the number of invocations. Execution loops do not create self-edges
+or relax the existing acyclic prerequisite graph.
+
+Algorithmic properties (correctness, termination, complexity, invariants, etc.)
+are mathematical consequences in separate lemmas, theorems, propositions,
+corollaries or other ordinary result kinds, with complete proofs. Their `deps`
+include the algorithm they analyze. Use `justified_by` for well-definedness
+results that depend on the algorithm, following the existing definition rule;
+do not add the reverse `deps` edge. Use `provenance.proof: not-applicable` when
+no proof is supplied, exactly as for definitions; any supplied argument retains
+all ordinary proof-format and contract checks. Changing the original procedure
+in `## Definition` triggers the same direct and indirect consumer duties.
+
 ## Item bodies
 
-- Use `## Definition` for a definition; `## Statement` and `## Proof` for a
+- Use `## Definition` for a definition or algorithm; `## Statement` and `## Proof` for a
   theorem, lemma, proposition, or corollary; `## Example` and optional
   `## Verification` for an example; `## Statement refuted` and
   `## Counterexample` for a counterexample; `## Statement` and

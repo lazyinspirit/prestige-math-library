@@ -140,3 +140,16 @@ test('consumer reach and theorem importance scale light, never the stellar body'
   assert.equal(capped.radius, STAR_RADIUS);
   assert.ok(projectedStarRadius(capped, { zoom: 180 }, 1) <= STAR_RADIUS * 12);
 });
+
+
+test('algorithm composition belongs in the mathematical universe with definition colours', async () => {
+  const { mathematicalItems } = await import('./math-boundary.mjs');
+  const { colorIndex } = await import('./galaxy-model.mjs');
+  const items = [{id:'alg-small',kind:'algorithm',aliases:['small-procedure']},
+    {id:'alg-composite',kind:'algorithm',deps:['small-procedure']},
+    {id:'lem-property',kind:'lemma',deps:['alg-composite']},
+    {id:'alg-physical',kind:'algorithm',domain:'physics'},
+    {id:'lem-physical',kind:'lemma',deps:['alg-physical']}];
+  assert.deepEqual(mathematicalItems(items).map(item=>item.id),['alg-small','alg-composite','lem-property']);
+  assert.equal(colorIndex('algorithm'),colorIndex('definition'));
+});

@@ -1,6 +1,6 @@
 // Fail closed: a mathematical view contains only mathematical items whose
 // known prerequisite closure is mathematical, including aliases.
-const mathematicalKinds = new Set(['definition', 'theorem', 'lemma', 'proposition', 'corollary', 'example', 'counterexample', 'false-statement', 'remark', 'def', 'thm', 'lem', 'prop', 'cor', 'ex', 'cex', 'fs', 'rem', 'false statement']);
+const mathematicalKinds = new Set(['definition', 'algorithm', 'theorem', 'lemma', 'proposition', 'corollary', 'example', 'counterexample', 'false-statement', 'remark', 'def', 'alg', 'thm', 'lem', 'prop', 'cor', 'ex', 'cex', 'fs', 'rem', 'false statement']);
 export const isMathematicalItem = item =>
   !/^(post|exp|pthm|texp)-/.test(item.id) &&
   (item.domain === undefined || item.domain === 'mathematics') && mathematicalKinds.has(item.kind ?? 'remark');

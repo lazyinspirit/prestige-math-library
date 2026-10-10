@@ -25,3 +25,5 @@
   finds it, or `PRESTIGE_APP_DIR` points to it.
 
 The current six-step workflow and rebuild checklist are in [WORKFLOW.md](WORKFLOW.md) and [research/workflow-rebuild-plan.md](research/workflow-rebuild-plan.md).
+
+Algorithms (`alg-`) are definition-like procedures; see [SCHEMA.md](SCHEMA.md#algorithms).

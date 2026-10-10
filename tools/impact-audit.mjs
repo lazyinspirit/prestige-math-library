@@ -126,8 +126,8 @@ function boundResearch(link) {
 }
 function originalClaim(text, kind) {
   const claims = [...split(text).body.matchAll(/^## (Statement|Definition)[ \t]*\r?\n[\s\S]*?(?=^## |$(?![\s\S]))/gm)];
-  const heading = kind === 'definition' ? 'Definition' : 'Statement';
-  if (!['definition', 'lemma', 'theorem', 'proposition', 'corollary'].includes(kind)
+  const heading = ['definition', 'algorithm'].includes(kind) ? 'Definition' : 'Statement';
+  if (!['definition', 'algorithm', 'lemma', 'theorem', 'proposition', 'corollary'].includes(kind)
     || claims.length !== 1 || claims[0][1] !== heading
     || !claims[0][0].replace(/^##[^\n]*\n/, '').trim())
     throw Error('claim preservation needs exactly one nonempty original Statement/Definition');
