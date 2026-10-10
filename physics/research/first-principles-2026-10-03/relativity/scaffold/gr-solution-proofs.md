@@ -1,5 +1,9 @@
 # Explicit GR solutions and controlled local approximations
 
+## Current GR audit qualification, 2026-10-11
+
+Q3 uses the complete local spherical-mean/Kirchhoff/Duhamel proof in general-relativity.md. Draft EM W1/W2 mathematical items and planned PDE/Fourier statements are not current mathematical suppliers. See [the current GR scaffold](general-relativity.md) and [audit report](../../../scaffold-audit-2026-10-11/general-relativity/audit-report.md). The older development below is retained as research evidence; its superseded supplier wording does not override the current owner restriction.
+
 2026-10-03. Mathematical calculations use G0–G6 of `gr-local-proofs.md`; Einstein/matter, ideal clocks and test geodesics are adopted physical premises. No calculation supplies observations, full nonlinear stability or a global uniqueness theorem.
 
 ## Q1 — Schwarzschild exterior and horizon extension

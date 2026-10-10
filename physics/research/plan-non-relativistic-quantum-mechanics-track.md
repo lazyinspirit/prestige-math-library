@@ -4,12 +4,14 @@ Spliced on 2026-10-04 at the owner’s request, using the mathematics future-tra
 
 Read these complete required sources before drift review or scaffolding:
 
-- `research/first-principles-2026-10-03/non-relativistic-quantum-mechanics/scaffold/prose-scaffold.md` (SHA-256 83c463fa07778f3b15c1704e1a465de89197a3b83804fdb978ec63fcac1d9933).
-- `research/first-principles-2026-10-03/non-relativistic-quantum-mechanics/scaffold/inventory.json` (SHA-256 6a51ae927f03c2d9b81b72b913610ca05acc7ef28f4cbc7a77a7cd4d7c97a6cd).
-- `research/first-principles-2026-10-03/non-relativistic-quantum-mechanics/scaffold/baseline-claim-coverage.json` (SHA-256 c777680a818dcc0eb8c3a7220fefe7b1dd36f110d6ea587feebeee3459537506).
-- `research/first-principles-2026-10-03/non-relativistic-quantum-mechanics/closure-ledger.json` (SHA-256 1bbadeb42be05db34d631bec80221075d5c072cff62c695c23521beb0f69aef1).
+- `research/first-principles-2026-10-03/non-relativistic-quantum-mechanics/scaffold/prose-scaffold.md` (SHA-256 07eba03efa17b0162d209e1558debb35fddcc7c4f8999a112c0cdbf7243e610b).
+- `research/first-principles-2026-10-03/non-relativistic-quantum-mechanics/scaffold/inventory.json` (SHA-256 a0de09f501a16257677598020967b7ff01ea164a4f67494d2acb8a1458263b9f).
+- `research/first-principles-2026-10-03/non-relativistic-quantum-mechanics/scaffold/baseline-claim-coverage.json` (SHA-256 3e4c97444d22b285abad6e12d0bc0ad1c5957c4151332d8b5594c9199000d3b2).
+- `research/first-principles-2026-10-03/non-relativistic-quantum-mechanics/closure-ledger.json` (SHA-256 691be1ffe5a708ca5a69295f970a0d792a3b3624df81762df2c48f09c08b74ae).
 
 The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims.
+
+**Current supplier rule (2026-10-11).** Mathematical premises must be currently published canonical root-library items, including all recursive mathematical dependencies. A draft `domain: mathematics` item is excluded regardless of its directory. A draft `domain: physics` item may supply a qualified physical assumption/result only after its actual statement, dependencies and consumer scope are checked; its mathematical support must still be published or proved locally. The repaired prose scaffold imports no draft physical result as a premise. The detailed current math-source and local-proof map is at `research/scaffold-audit-2026-10-11/quantum-mechanics/supplier-map.json`.
 
 ## Qm Math Composites
 
@@ -1643,7 +1645,7 @@ Original reservation (read together with the full required sources above):
     "Liouville turning-point transformation",
     "Stable weighted Airy Volterra connection",
     "Two-turn barrier tunnelling error",
-    "Draft stationary-phase packet application",
+    "Quadratic free-packet decay",
     "Mellin incoming and outgoing propagation",
     "Compact scattering defects",
     "Compact-support asymptotic completeness",
@@ -2092,8 +2094,8 @@ Original reservation (read together with the full required sources above):
       "status": "research-reservation-with-complete-conditional-argument; not production item"
     },
     {
-      "id": "nrqm-controlled-dynamics-draft-stationary-phase-packet-application",
-      "title": "Draft stationary-phase packet application",
+      "id": "nrqm-controlled-dynamics-quadratic-free-packet-decay",
+      "title": "Quadratic free-packet decay",
       "home": "qm-math-controlled-dynamics",
       "page_kind": "A",
       "domain": "mathematics",
@@ -2101,7 +2103,7 @@ Original reservation (read together with the full required sources above):
       "proof_file": "scaffold/mathematical-prerequisites.md",
       "claim_deps": [
         "nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
-        "nrqm-controlled-dynamics-concrete-three-dimensional-cook-existence"
+        "nrqm-composites-complex-gaussian-continuation"
       ],
       "status": "research-reservation-with-complete-conditional-argument; not production item"
     },

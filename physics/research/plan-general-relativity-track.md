@@ -4,18 +4,18 @@ Spliced on 2026-10-04 at the owner’s request, using the mathematics future-tra
 
 Read these complete required sources before drift review or scaffolding:
 
-- `research/first-principles-2026-10-03/relativity/scaffold/general-relativity.md` (SHA-256 fa5773fe362d26e41998218f4c94f7b00a2c18ed768cda574efd70ae51e0db39).
-- `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json` (SHA-256 8ace89078fa8c5e90a0fc480a53e540202ab116389b376e12c62ba191a865b21).
-- `research/first-principles-2026-10-03/relativity/scaffold/expanded-item-inventory.json` (SHA-256 38fa8f414ce7112d353d4ac0f7427362bda9527acb83caa412c42207e9b4146b).
-- `research/first-principles-2026-10-03/relativity/closure-ledger.json` (SHA-256 6bae19fafb0efaa2b1c1519014e217e0f14bf79cbd2129b39f9a8b19168d9ede).
+- `research/first-principles-2026-10-03/relativity/scaffold/general-relativity.md` (SHA-256 b4b45774f74720f38b859579a75c1afbba92155058998cdcdb2169d50106b95d).
+- `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json` (SHA-256 1cae69cf78911a988a676b884f63625d1eca5c27bad6cc3826ad8c18e5ab34dd).
+- `research/first-principles-2026-10-03/relativity/scaffold/expanded-item-inventory.json` (SHA-256 550a64eee368036356035022ce7d22d7459d6e765e49a4a8aca19ce842838dc7).
+- `research/first-principles-2026-10-03/relativity/closure-ledger.json` (SHA-256 26c8a863b1402245962973ed20835345e89091f0ee256406b43ab20bbde9c8e6).
 
-The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims.
+The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims. GR's published-mathematics audit uses no planned SR/EM/PDE mathematics. The checked SR postulates are draft PHYSICS items with flat-Minkowski scope; they do not supply curved-spacetime assumptions, and GR locally defines its geometry, observer quantities and physical postulates. The SR flat limit remains a comparison.
 
 ## Framework And Geometry
 
 A page `gr-framework-and-geometry`; B companion `gr-framework-and-geometry-examples`. Category `general-relativity`; library `physics`.
 Order 233. Exact source inventory: `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json`.
-Declared earlier prerequisites: `sr-observer-measurements`.
+Declared earlier prerequisites: none; the SR framework is comparative only.
 
 Original reservation (read together with the full required sources above):
 
@@ -25,12 +25,7 @@ Original reservation (read together with the full required sources above):
   "role": "A",
   "inventory": "def manifold/Lorentz metric/future orientation/units; post spacetime and classical domain; def metric-selected connection; post field/matter assumptions",
   "budget": 26,
-  "requires": [
-    "SR01",
-    "SR02",
-    "SR03",
-    "SR04"
-  ],
+  "requires": [],
   "closure": "G0/G7",
   "status": "exact stated local arguments available; see closure ledger for stronger obligations"
 }
@@ -161,10 +156,9 @@ Original reservation (read together with the full required sources above):
   "inventory": "pthm Minkowski vacuum model with Λ=0; rem local flatness/global topology caveat; M08/M17 controlled geodesic/Poisson bridge; explicit variable/coupling identification; first-use flat linearization/gauge mathematics before weak-field calculation",
   "budget": 40,
   "requires": [
-    "GR05",
-    "SR11"
+    "GR05"
   ],
-  "closure": "G7/Q4",
+  "closure": "G7/Q3/Q4; local flat and controlled-bridge arguments",
   "status": "exact stated local arguments available; see closure ledger for stronger obligations"
 }
 ```
@@ -237,7 +231,7 @@ Original reservation (read together with the full required sources above):
     "GR06",
     "GR07"
   ],
-  "closure": "Q3/G3; EM mathematical W1–W2",
+  "closure": "Q3/G3 plus the local published-math Duhamel/Kirchhoff proof in the GR scaffold",
   "status": "exact stated local arguments available; see closure ledger for stronger obligations"
 }
 ```
@@ -246,7 +240,7 @@ Original reservation (read together with the full required sources above):
 
 A page `gr-causal-and-initial-value-boundaries`; B companion `gr-causal-and-initial-value-boundaries-examples`. Category `general-relativity`; library `physics`.
 Order 253. Exact source inventory: `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json`.
-Declared earlier prerequisites: `gr-einstein-and-matter`, `sr-causality-and-signals`.
+Declared earlier prerequisites: `gr-einstein-and-matter`; causal geometry and its physical scope are stated locally in GR.
 
 Original reservation (read together with the full required sources above):
 
@@ -259,8 +253,7 @@ Original reservation (read together with the full required sources above):
   "requires": [
     "GR03",
     "GR04",
-    "GR05",
-    "SR05"
+    "GR05"
   ],
   "closure": "C3–C5 complete",
   "status": "exact stated local arguments available; see closure ledger for stronger obligations"
@@ -310,7 +303,7 @@ Original reservation (read together with the full required sources above):
     "GR11"
   ],
   "closure": "H0–H3",
-  "status": "complete exact stated research arguments / checked external proof supplier"
+  "status": "H0–H2 locally supported, including the published-root H1 repair; H3 smooth splitting remains held because its complete mathematical proof is not locally supplied"
 }
 ```
 
@@ -333,7 +326,7 @@ Original reservation (read together with the full required sources above):
     "GR13"
   ],
   "closure": "E0–E3",
-  "status": "complete exact stated research arguments / checked external proof supplier"
+  "status": "E0–E2 and the stated scalar/interior-fluid branches are locally supported; the full E3 dust theorem remains held because its external mathematical proof is not an allowed supplier"
 }
 ```
 
@@ -356,6 +349,6 @@ Original reservation (read together with the full required sources above):
     "GR14"
   ],
   "closure": "H4",
-  "status": "complete exact stated research arguments / checked external proof supplier"
+  "status": "H4 smooth maximal-development claim remains held because the boundary-extension and gluing proof is not locally supplied from published mathematics"
 }
 ```

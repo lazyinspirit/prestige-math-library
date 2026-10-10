@@ -1,5 +1,9 @@
 # Global Lorentzian suppliers and maximal development
 
+## Current GR audit qualification, 2026-10-11
+
+H1 is supplied by the complete local auxiliary-metric/endpoint/length repair in general-relativity.md. H3 smooth temporal splitting and H4 MGHD retain their full theorem reservations with required proof holds; external Bernal–Sánchez/Sbierski arguments are sources, not published library suppliers. See [the current GR scaffold](general-relativity.md) and [audit report](../../../scaffold-audit-2026-10-11/general-relativity/audit-report.md). The older development below is retained as research evidence; its superseded supplier wording does not override the current owner restriction.
+
 2026-10-03. Mathematical geometry with signature $(-+++)$ and smooth Hausdorff second-countable manifolds, time orientation and causal-curve conventions C3. For connected statements work on a connected component; a second-countable manifold has at most countably many open components. Adopt the Axiom of Choice for the explicit selected compact/weak subsequence and countable-atlas suppliers. No physical premise is used. These arguments close the stated M15 global causal/splitting branch and, together with E0–E3, the smooth M16 maximal-development branch. They assert maximality among globally hyperbolic developments, not completeness or all-time regularity.
 
 ## H0 — convex normal neighborhoods and local causal tools

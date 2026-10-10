@@ -2,9 +2,11 @@
 
 Spliced on 2026-10-04 at the owner’s request, using the mathematics future-track convention. Canonical item arrays remain empty until engine scaffolding and authoring. Preserve every promised claim and source qualification in the linked full designs and inventories. Resolve the exact source dependencies before accepting consumers.
 
+2026-10-11 audit addendum: the assigned prose scaffold was repaired for explicit state/process spaces, rest-frame scope, SI dimensions, primitive and derived quantities, reversible bath/work couplings, and published-only mathematical dependencies. The current audit report and supplier map are in `scaffold-audit-2026-10-11/thermodynamics/`. They pin 77 direct canonical mathematical suppliers and their 2,317-item published prerequisite closure; every selected physics import matches the current canonical item and `math-imports.json` bytes. The historical supplier reports remain unchanged and are not the current status/hash receipt. This addendum preserves the existing proposed item arrays, homes, order and budgets; no production item or canonical plan-spec was created or changed.
+
 Read these complete required sources before drift review or scaffolding:
 
-- `research/first-principles-2026-10-03/thermodynamics/scaffold/prose-scaffold.md` (SHA-256 1c4629ca19a0d7feffec1c4b78bb8caba30aaa09e77deacee546ffb867c670ff).
+- `research/first-principles-2026-10-03/thermodynamics/scaffold/prose-scaffold.md` (SHA-256 `3d65d214ccd3db944f6d951b309d9f987174b5ddb2de78230f1b9835b79c0fd8`).
 - `research/first-principles-2026-10-03/thermodynamics/baseline-claim-map.json` (SHA-256 fc652c88efa972ae8ef34e820fd27547e7350484a80e62ea23f8371fb96d5131).
 - `research/first-principles-2026-10-03/thermodynamics/closure-ledger.json` (SHA-256 b1dd3cbd1901c3909697ef06f372ac38bcd4e07d200df34105f407185c4bb12a).
 

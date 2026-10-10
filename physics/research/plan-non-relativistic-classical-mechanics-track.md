@@ -2,22 +2,24 @@
 
 Spliced on 2026-10-04 at the owner’s request, using the mathematics future-track convention. Canonical item arrays remain empty until engine scaffolding and authoring. Preserve every promised claim and source qualification in the linked full designs and inventories. Resolve the exact source dependencies before accepting consumers.
 
+**Current supplier rule (2026-10-11):** every external mathematical prerequisite must be a currently published canonical root item. The page-by-page published IDs below replace the historical prerequisite-page placeholders. Local sections D1, M1–M10 and E1–E30 are complete proof developments in the assigned scaffold; they are not root-plan or draft suppliers. Their exact direct source paths, current hashes and transitive status are in `research/scaffold-audit-2026-10-11/classical-mechanics/supplier-map.json`.
+
 Read these complete required sources before drift review or scaffolding:
 
-- `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/prose-scaffold.md` (SHA-256 ec98b38f2d53f604e849ea1add8b42dfce25ae452d52fada4957dd747203ac8a).
-- `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json` (SHA-256 8c24847142120238d7a2eb6afc48ed486a8392c8ca0fe95fe38b44c6071984a6).
-- `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/closure-ledger.json` (SHA-256 ed371b14263d722ab7a9461c7ebd3fe4d36363a96f8a48f3f77f505202f35145).
+- `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/prose-scaffold.md` (SHA-256 b13a26a468001a6bcbefe807811ebbebe63c58a5eb898fa8ae48dd2560067f9b).
+- `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json` (SHA-256 3b89a202af07bb6f9a6ffba99e6351cd89d53b3d5d76faa37535f9a239da976b).
+- `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/closure-ledger.json` (SHA-256 798dc2391c6c82218af9a50e1d5db55ac625d4b1b2786517b7699d1fb9b18ede).
 - `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/mathematical-prerequisites.md` (SHA-256 b2d173b9dc7011e282caa4884aedab89c1e12f02b67308109c306d2847ebb36e).
 
 The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims.
 
-Scope transfer: `CM-Math-geometry` moves E25 to `cm-math-rotation-double-cover`. E25 uses E2; dynamics uses earlier foundational geometry. The original reservation below is retained as provenance; use the transferred home when scaffolding.
+Scope transfer: `CM-Math-geometry` moves E25 to `cm-math-rotation-double-cover`. The published `ex-su-two-to-so-three-as-a-covering-homomorphism` supplies the double-cover conclusion under its stated countable-choice hypothesis; retain only E25’s local quaternion ODE-lift and angular-velocity reconstruction. E25 uses local E1 and E2; the original reservation below is retained as provenance. The source inventory and closure ledger still record E25 at its old home and require root reconciliation before scaffolding.
 
 ## Cm Math Geometry
 
 A page `cm-math-geometry`; B companion `cm-math-geometry-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 81. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `countability-and-uncountability`, `rank-theorems-and-embedded-submanifolds`, `regular-surfaces-and-surface-integrals`, `rn-as-a-normed-space`, `the-total-derivative`.
+Local proved mathematical sections: `D1`, `E1`, `M1`. Internal local proof dependencies: none. Published canonical mathematical suppliers: `def-countable-choice`, `def-cross-product-in-r3`, `def-euclidean-inner-product`, `thm-a-regular-level-set-is-an-embedded-submanifold`, `thm-chain-rule-for-total-derivatives`.
 
 Original reservation (read together with the full required sources above):
 
@@ -41,7 +43,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-balances`; B companion `cm-math-balances-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 83. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `picard-lindelof-and-first-order-odes`, `regular-surfaces-and-surface-integrals`, `the-total-derivative`.
+Local proved mathematical sections: `E11`, `M2`, `M10`. Internal local proof dependencies: `M2`. Published canonical mathematical suppliers: `def-cross-product-in-r3`, `thm-chain-rule-for-total-derivatives`, `thm-picard-lindelof-local-existence-and-uniqueness`.
 
 Original reservation (read together with the full required sources above):
 
@@ -64,7 +66,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-variations`; B companion `cm-math-variations-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 86. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-dynamics`, `constant-rank-submersions-and-regular-level-sets`, `inverse-and-implicit-function-theorems`, `properties-of-the-integral-and-the-working-ftc`, `the-fundamental-theorems-of-calculus`.
+Local proved mathematical sections: `E4`, `E5`, `E20`, `E22`, `M3`, `M4`, `M5`, `M6`. Internal local proof dependencies: `E2`, `E4`, `E20`, `M3`, `M4`, `M5`, `M6`, `M7`. Published canonical mathematical suppliers: `lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple`, `thm-a-regular-level-set-is-an-embedded-submanifold`, `thm-chain-rule-for-total-derivatives`, `thm-differentiation-under-the-integral-sign-on-a-compact-rectangle`, `thm-euclidean-inverse-function-theorem`, `thm-integration-by-parts`.
 
 Original reservation (read together with the full required sources above):
 
@@ -92,7 +94,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-central`; B companion `cm-math-central-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 88. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-balances`, `inverse-and-implicit-function-theorems`, `product-measures-and-the-fubini-tonelli-theorems`.
+Local proved mathematical sections: `E6`, `E10`, `M9`. Internal local proof dependencies: `M2`, `M9`, `M10`. Published canonical mathematical suppliers: `cor-c-one-change-of-variables-for-l-one-functions`, `thm-euclidean-inverse-function-theorem`.
 
 Original reservation (read together with the full required sources above):
 
@@ -115,7 +117,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-dynamics`; B companion `cm-math-dynamics-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 85. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-balances`, `cm-math-geometry`, `mixed-partials-taylor-and-extrema`, `modules-over-a-pid-and-canonical-forms`, `the-complex-exponential-and-eulers-formula`, `the-spectral-theorem-and-singular-value-decomposition`.
+Local proved mathematical sections: `E2`, `E12`, `E16`, `M7`. Internal local proof dependencies: `D1`, `E2`, `M10`. Published canonical mathematical suppliers: `cor-real-spectral-theorem-for-self-adjoint-endomorphisms`, `cor-second-order-taylor-expansion-with-the-hessian`, `thm-fundamental-theorem-of-algebra-minimum-modulus-proof`, `thm-gronwall-integral-inequality`, `thm-jordan-canonical-form-from-pid-module-structure`, `thm-poincare-recurrence-for-finite-measure-preserving-systems`.
 
 Original reservation (read together with the full required sources above):
 
@@ -139,7 +141,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-canonical`; B companion `cm-math-canonical-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 91. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-variations`, `hamiltonian-mechanics-and-completely-integrable-systems`, `product-measures-and-the-fubini-tonelli-theorems`, `the-exterior-derivative-and-cartan-calculus`, `vector-fields-flows-and-lie-derivatives`.
+Local proved mathematical sections: `E7`, `E18`, `E21`. Internal local proof dependencies: `E1`, `E2`, `E7`, `E21`, `M3`, `M10`. Published canonical mathematical suppliers: `cor-c-one-change-of-variables-for-l-one-functions`, `cor-every-smooth-vector-field-on-a-compact-manifold-is-complete`, `cor-local-normal-form-for-submersions`, `def-countable-choice`, `lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice`, `prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action`, `thm-cartans-magic-formula`, `thm-compact-connected-regular-fibres-are-tori`, `thm-euclidean-inverse-function-theorem`, `thm-liouville-arnold-action-angle-theorem`, `thm-poincare-lemma-for-differential-forms-on-star-shaped-domains`, `thm-poincare-lemma-for-star-shaped-domains`.
 
 Original reservation (read together with the full required sources above):
 
@@ -162,7 +164,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-approximation`; B companion `cm-math-approximation-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 93. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-dynamics`.
+Local proved mathematical sections: `E3`, `E8`. Internal local proof dependencies: `E2`, `M7`. Published canonical mathematical suppliers: none.
 
 Original reservation (read together with the full required sources above):
 
@@ -184,7 +186,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-continuum`; B companion `cm-math-continuum-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 95. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-dynamics`, `euclidean-surface-measure-divergence-and-green-identities`, `fejer-and-poisson-summability-of-fourier-series`, `product-measures-and-the-fubini-tonelli-theorems`, `uniform-convergence-of-functions`.
+Local proved mathematical sections: `E13`, `E14`, `E23`, `E24`, `E26`. Internal local proof dependencies: `E2`, `E13`, `E14`. Published canonical mathematical suppliers: `cor-c-one-change-of-variables-for-l-one-functions`, `def-countable-choice`, `lem-fejer-kernel-is-a-positive-approximate-identity`, `thm-divergence-theorem-for-bounded-c-one-euclidean-domains`, `thm-fejer-uniform-convergence-for-continuous-periodic-functions`, `thm-uniform-derivative-limit-on-a-closed-interval`.
 
 Original reservation (read together with the full required sources above):
 
@@ -209,7 +211,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-rigid`; B companion `cm-math-rigid-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 97. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-balances`, `cm-math-geometry`, `the-lebesgue-integral-and-the-convergence-theorems`, `the-spectral-theorem-and-singular-value-decomposition`.
+Local proved mathematical sections: `E9`, `M8`. Internal local proof dependencies: `M1`, `M8`, `M10`. Published canonical mathematical suppliers: `cor-real-spectral-theorem-for-self-adjoint-endomorphisms`, `thm-linearity-of-the-lebesgue-integral-on-l-one`.
 
 Original reservation (read together with the full required sources above):
 
@@ -231,7 +233,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-numerical`; B companion `cm-math-numerical-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 99. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `analyticity-liouville-and-morera`, `cm-math-canonical`, `goursat-and-cauchys-theorem-in-a-convex-domain`.
+Local proved mathematical sections: `E15`, `E29`. Internal local proof dependencies: `E1`, `E2`, `E7`, `E15`. Published canonical mathematical suppliers: `lem-cauchy-estimates-on-concentric-subdiscs`, `thm-cauchy-integral-formula-circle`.
 
 Original reservation (read together with the full required sources above):
 
@@ -265,7 +267,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-evidence`; B companion `cm-math-evidence-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 101. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `measures-and-their-basic-properties`, `the-lebesgue-integral-and-the-convergence-theorems`.
+Local proved mathematical sections: `E17`. Internal local proof dependencies: none. Published canonical mathematical suppliers: `def-integrable-real-and-complex-functions-and-their-integrals`, `def-measure`, `thm-linearity-of-the-lebesgue-integral-on-l-one`, `thm-monotone-convergence-for-the-integral`.
 
 Original reservation (read together with the full required sources above):
 
@@ -286,7 +288,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-verification`; B companion `cm-math-verification-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 103. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-approximation`, `cm-math-rigid`, `cm-math-variations`.
+Local proved mathematical sections: `E19`. Internal local proof dependencies: `E8`, `M3`, `M8`. Published canonical mathematical suppliers: none.
 
 Original reservation (read together with the full required sources above):
 
@@ -307,7 +309,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-chaos`; B companion `cm-math-chaos-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 105. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-canonical`, `completeness-and-uniform-continuity`.
+Local proved mathematical sections: `E27`. Internal local proof dependencies: `E2`, `E7`, `E12`, `M10`. Published canonical mathematical suppliers: `thm-banach-fixed-point`, `thm-smooth-dependence-of-ode-solutions-on-parameters`.
 
 Original reservation (read together with the full required sources above):
 
@@ -345,7 +347,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-kam`; B companion `cm-math-kam-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 107. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `analytic-majorants-and-the-cauchy-kovalevskaya-theorem`, `analyticity-liouville-and-morera`, `cm-math-canonical`, `goursat-and-cauchys-theorem-in-a-convex-domain`.
+Local proved mathematical sections: `E28`. Internal local proof dependencies: `E1`, `E2`, `E7`. Published canonical mathematical suppliers: `lem-cauchy-estimates-on-concentric-subdiscs`, `thm-cauchy-integral-formula-circle`, `thm-real-analytic-inverse-and-implicit-function-theorems`.
 
 Original reservation (read together with the full required sources above):
 
@@ -385,7 +387,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-fluid`; B companion `cm-math-fluid-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 109. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-continuum`, `orthonormal-bases-parseval-and-fourier-series`.
+Local proved mathematical sections: `E30`. Internal local proof dependencies: `E2`, `E24`. Published canonical mathematical suppliers: `def-countable-choice`, `thm-fourier-basis-and-parseval-on-the-n-torus`.
 
 Original reservation (read together with the full required sources above):
 
@@ -420,7 +422,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm-math-rotation-double-cover`; B companion `cm-math-rotation-double-cover-examples`. Category `non-relativistic-classical-mechanics-mathematics`; library `mathematics`.
 Order 111. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/closure-ledger.json`.
-Declared earlier prerequisites: `cm-math-dynamics`.
+Local proved mathematical sections: `E25`. Internal local proof dependencies: `E1`, `E2`. Published canonical mathematical suppliers: `ex-su-two-to-so-three-as-a-covering-homomorphism`.
 
 Original reservation (read together with the full required sources above):
 
@@ -436,7 +438,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm01-framework-quantities-and-geometry`; B companion `cm01-framework-quantities-and-geometry-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 113. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-geometry`.
+Local mathematical proof sections: `E1`, `M1`. Published canonical mathematical suppliers: `def-countable-choice`, `def-cross-product-in-r3`, `def-euclidean-inner-product`, `thm-a-regular-level-set-is-an-embedded-submanifold`, `thm-chain-rule-for-total-derivatives`. Earlier physical pages: none.
 
 Original reservation (read together with the full required sources above):
 
@@ -466,7 +468,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm02-forces-initial-data-and-newtonian-flow`; B companion `cm02-forces-initial-data-and-newtonian-flow-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 115. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-approximation`, `cm01-framework-quantities-and-geometry`.
+Local mathematical proof sections: `E2`, `E3`, `M10`. Published canonical mathematical suppliers: `thm-picard-lindelof-local-existence-and-uniqueness`. Earlier physical pages: `cm01-framework-quantities-and-geometry`.
 
 Original reservation (read together with the full required sources above):
 
@@ -495,7 +497,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm03-momentum-work-and-energy-balances`; B companion `cm03-momentum-work-and-energy-balances-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 117. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm02-forces-initial-data-and-newtonian-flow`.
+Local mathematical proof sections: `E1`, `M2`. Published canonical mathematical suppliers: `def-countable-choice`, `def-cross-product-in-r3`, `thm-a-regular-level-set-is-an-embedded-submanifold`, `thm-chain-rule-for-total-derivatives`. Earlier physical pages: `cm02-forces-initial-data-and-newtonian-flow`.
 
 Original reservation (read together with the full required sources above):
 
@@ -525,7 +527,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm04-one-dimensional-conservative-and-dissipative-models`; B companion `cm04-one-dimensional-conservative-and-dissipative-models-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 119. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-verification`, `cm03-momentum-work-and-energy-balances`.
+Local mathematical proof sections: `E3`, `E19`, `M7`. Published canonical mathematical suppliers: `cor-real-spectral-theorem-for-self-adjoint-endomorphisms`, `cor-second-order-taylor-expansion-with-the-hessian`. Earlier physical pages: `cm03-momentum-work-and-energy-balances`.
 
 Original reservation (read together with the full required sources above):
 
@@ -555,7 +557,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm05-two-body-central-forces-and-gravitation`; B companion `cm05-two-body-central-forces-and-gravitation-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 121. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-central`, `cm03-momentum-work-and-energy-balances`.
+Local mathematical proof sections: `E6`, `M2`, `M9`. Published canonical mathematical suppliers: `cor-c-one-change-of-variables-for-l-one-functions`, `def-cross-product-in-r3`, `thm-chain-rule-for-total-derivatives`, `thm-euclidean-inverse-function-theorem`. Earlier physical pages: `cm03-momentum-work-and-energy-balances`.
 
 Original reservation (read together with the full required sources above):
 
@@ -586,7 +588,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm06-regular-constraints-and-moving-frames`; B companion `cm06-regular-constraints-and-moving-frames-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 123. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-variations`, `cm03-momentum-work-and-energy-balances`.
+Local mathematical proof sections: `E5`, `E20`, `E22`, `M1`, `M6`. Published canonical mathematical suppliers: `def-cross-product-in-r3`, `def-euclidean-inner-product`, `lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple`, `thm-a-regular-level-set-is-an-embedded-submanifold`, `thm-chain-rule-for-total-derivatives`. Earlier physical pages: `cm03-momentum-work-and-energy-balances`.
 
 Original reservation (read together with the full required sources above):
 
@@ -616,7 +618,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm07-stationary-action-and-lagrangian-dynamics`; B companion `cm07-stationary-action-and-lagrangian-dynamics-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 125. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-verification`, `cm06-regular-constraints-and-moving-frames`.
+Local mathematical proof sections: `E4`, `E19`, `E20`, `M3`, `M5`. Published canonical mathematical suppliers: `thm-chain-rule-for-total-derivatives`, `thm-differentiation-under-the-integral-sign-on-a-compact-rectangle`, `thm-integration-by-parts`. Earlier physical pages: `cm06-regular-constraints-and-moving-frames`.
 
 Original reservation (read together with the full required sources above):
 
@@ -646,7 +648,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm08-symmetry-noether-and-conditional-conservation`; B companion `cm08-symmetry-noether-and-conditional-conservation-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 127. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm07-stationary-action-and-lagrangian-dynamics`.
+Local mathematical proof sections: `E4`, `M4`, `M5`. Published canonical mathematical suppliers: `thm-chain-rule-for-total-derivatives`, `thm-euclidean-inverse-function-theorem`. Earlier physical pages: `cm07-stationary-action-and-lagrangian-dynamics`.
 
 Original reservation (read together with the full required sources above):
 
@@ -676,7 +678,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm09-coupled-oscillations-and-approximation`; B companion `cm09-coupled-oscillations-and-approximation-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 129. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm04-one-dimensional-conservative-and-dissipative-models`, `cm07-stationary-action-and-lagrangian-dynamics`.
+Local mathematical proof sections: `E3`, `E8`, `E19`, `M7`. Published canonical mathematical suppliers: `cor-real-spectral-theorem-for-self-adjoint-endomorphisms`, `cor-second-order-taylor-expansion-with-the-hessian`. Earlier physical pages: `cm04-one-dimensional-conservative-and-dissipative-models`, `cm07-stationary-action-and-lagrangian-dynamics`.
 
 Original reservation (read together with the full required sources above):
 
@@ -705,7 +707,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm10-rigid-body-configuration-and-inertia`; B companion `cm10-rigid-body-configuration-and-inertia-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 131. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-rotation-double-cover`, `cm-math-verification`, `cm03-momentum-work-and-energy-balances`.
+Local mathematical proof sections: `E1`, `E19`, `E25`, `M8`. Published canonical mathematical suppliers: `cor-real-spectral-theorem-for-self-adjoint-endomorphisms`, `def-countable-choice`, `ex-su-two-to-so-three-as-a-covering-homomorphism`, `thm-a-regular-level-set-is-an-embedded-submanifold`, `thm-linearity-of-the-lebesgue-integral-on-l-one`. Earlier physical pages: `cm03-momentum-work-and-energy-balances`.
 
 Original reservation (read together with the full required sources above):
 
@@ -734,7 +736,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm11-rigid-body-dynamics-and-stability`; B companion `cm11-rigid-body-dynamics-and-stability-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 133. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm06-regular-constraints-and-moving-frames`, `cm10-rigid-body-configuration-and-inertia`.
+Local mathematical proof sections: `E9`, `M8`. Published canonical mathematical suppliers: `cor-real-spectral-theorem-for-self-adjoint-endomorphisms`, `thm-linearity-of-the-lebesgue-integral-on-l-one`. Earlier physical pages: `cm06-regular-constraints-and-moving-frames`, `cm10-rigid-body-configuration-and-inertia`.
 
 Original reservation (read together with the full required sources above):
 
@@ -764,7 +766,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm12-legendre-transformation-and-hamiltonian-mechanics`; B companion `cm12-legendre-transformation-and-hamiltonian-mechanics-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 135. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm07-stationary-action-and-lagrangian-dynamics`.
+Local mathematical proof sections: `E20`, `M4`. Published canonical mathematical suppliers: `thm-euclidean-inverse-function-theorem`. Earlier physical pages: `cm07-stationary-action-and-lagrangian-dynamics`.
 
 Original reservation (read together with the full required sources above):
 
@@ -794,7 +796,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm13-symplectic-geometry-and-canonical-methods`; B companion `cm13-symplectic-geometry-and-canonical-methods-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 137. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-numerical`, `cm12-legendre-transformation-and-hamiltonian-mechanics`.
+Local mathematical proof sections: `E1`, `E7`, `E15`. Published canonical mathematical suppliers: `cor-c-one-change-of-variables-for-l-one-functions`, `def-countable-choice`, `thm-a-regular-level-set-is-an-embedded-submanifold`, `thm-euclidean-inverse-function-theorem`. Earlier physical pages: `cm12-legendre-transformation-and-hamiltonian-mechanics`.
 
 Original reservation (read together with the full required sources above):
 
@@ -826,7 +828,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm14-hamilton-jacobi-and-integrability`; B companion `cm14-hamilton-jacobi-and-integrability-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 139. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-central`, `cm08-symmetry-noether-and-conditional-conservation`, `cm13-symplectic-geometry-and-canonical-methods`.
+Local mathematical proof sections: `E6`, `E7`, `E8`, `E18`, `E21`. Published canonical mathematical suppliers: `cor-c-one-change-of-variables-for-l-one-functions`, `cor-every-smooth-vector-field-on-a-compact-manifold-is-complete`, `cor-local-normal-form-for-submersions`, `def-countable-choice`, `lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice`, `prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action`, `thm-cartans-magic-formula`, `thm-compact-connected-regular-fibres-are-tori`, `thm-euclidean-inverse-function-theorem`, `thm-liouville-arnold-action-angle-theorem`, `thm-poincare-lemma-for-differential-forms-on-star-shaped-domains`, `thm-poincare-lemma-for-star-shaped-domains`. Earlier physical pages: `cm08-symmetry-noether-and-conditional-conservation`, `cm13-symplectic-geometry-and-canonical-methods`.
 
 Original reservation (read together with the full required sources above):
 
@@ -856,7 +858,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm15-scattering-and-impulse-model-boundaries`; B companion `cm15-scattering-and-impulse-model-boundaries-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 141. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-continuum`, `cm05-two-body-central-forces-and-gravitation`.
+Local mathematical proof sections: `E10`, `E11`, `E13`. Published canonical mathematical suppliers: `cor-c-one-change-of-variables-for-l-one-functions`, `def-countable-choice`, `thm-divergence-theorem-for-bounded-c-one-euclidean-domains`. Earlier physical pages: `cm05-two-body-central-forces-and-gravitation`.
 
 Original reservation (read together with the full required sources above):
 
@@ -885,7 +887,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm16-stability-perturbations-and-chaos`; B companion `cm16-stability-perturbations-and-chaos-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 143. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-chaos`, `cm-math-kam`, `cm09-coupled-oscillations-and-approximation`, `cm14-hamilton-jacobi-and-integrability`.
+Local mathematical proof sections: `D1`, `E2`, `E12`, `E16`, `E27`, `E28`, `M7`, `M10`. Published canonical mathematical suppliers: `cor-real-spectral-theorem-for-self-adjoint-endomorphisms`, `cor-second-order-taylor-expansion-with-the-hessian`, `lem-cauchy-estimates-on-concentric-subdiscs`, `thm-banach-fixed-point`, `thm-cauchy-integral-formula-circle`, `thm-fundamental-theorem-of-algebra-minimum-modulus-proof`, `thm-gronwall-integral-inequality`, `thm-jordan-canonical-form-from-pid-module-structure`, `thm-picard-lindelof-local-existence-and-uniqueness`, `thm-poincare-recurrence-for-finite-measure-preserving-systems`, `thm-real-analytic-inverse-and-implicit-function-theorems`, `thm-smooth-dependence-of-ode-solutions-on-parameters`. Earlier physical pages: `cm09-coupled-oscillations-and-approximation`, `cm14-hamilton-jacobi-and-integrability`.
 
 Original reservation (read together with the full required sources above):
 
@@ -918,7 +920,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm17-classical-continua-with-explicit-constitutive-assumptions`; B companion `cm17-classical-continua-with-explicit-constitutive-assumptions-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 145. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-fluid`, `cm07-stationary-action-and-lagrangian-dynamics`.
+Local mathematical proof sections: `D1`, `E13`, `E14`, `E23`, `E24`, `E26`, `E30`. Published canonical mathematical suppliers: `cor-c-one-change-of-variables-for-l-one-functions`, `def-countable-choice`, `lem-fejer-kernel-is-a-positive-approximate-identity`, `thm-divergence-theorem-for-bounded-c-one-euclidean-domains`, `thm-fejer-uniform-convergence-for-continuous-periodic-functions`, `thm-fourier-basis-and-parseval-on-the-n-torus`, `thm-uniform-derivative-limit-on-a-closed-interval`. Earlier physical pages: `cm07-stationary-action-and-lagrangian-dynamics`.
 
 Original reservation (read together with the full required sources above):
 
@@ -952,7 +954,7 @@ Original reservation (read together with the full required sources above):
 
 A page `cm18-measurement-uncertainty-and-later-bridges`; B companion `cm18-measurement-uncertainty-and-later-bridges-examples`. Category `non-relativistic-classical-mechanics`; library `physics`.
 Order 147. Exact source inventory: `research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/proposed-inventory.json`.
-Declared earlier prerequisites: `cm-math-evidence`, `cm-math-numerical`, `cm03-momentum-work-and-energy-balances`.
+Local mathematical proof sections: `E15`, `E17`, `E29`. Published canonical mathematical suppliers: `def-integrable-real-and-complex-functions-and-their-integrals`, `def-measure`, `lem-cauchy-estimates-on-concentric-subdiscs`, `thm-cauchy-integral-formula-circle`, `thm-linearity-of-the-lebesgue-integral-on-l-one`, `thm-monotone-convergence-for-the-integral`. Earlier physical pages: `cm03-momentum-work-and-energy-balances`.
 
 Original reservation (read together with the full required sources above):
 

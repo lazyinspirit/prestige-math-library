@@ -58,3 +58,5 @@ consumer chains at its loading boundary. The mathematics workflow remains separa
 The current six-step workflow and rebuild checklist are in [WORKFLOW.md](WORKFLOW.md) and [research/workflow-rebuild-plan.md](research/workflow-rebuild-plan.md).
 
 Algorithms (`alg-`) are definition-like procedures; see [SCHEMA.md](SCHEMA.md#algorithms).
+
+The [2026-10-11 published-only scaffold audits](research/scaffold-audit-2026-10-11/README.md) update classical mechanics, quantum mechanics, general relativity and thermodynamics. Their external mathematics uses published canonical suppliers; draft EM/SR physics is permitted only at its actual inspected scope. GR retains three explicit proof holds (smooth splitting, generic dust evolution and MGHD gluing); source and acceptance limits remain recorded. These are research dispositions, not production readiness.

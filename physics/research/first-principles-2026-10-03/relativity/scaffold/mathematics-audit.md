@@ -1,5 +1,9 @@
 # Mathematical supplier audit
 
+## Current GR audit, 2026-10-11
+
+[The repaired GR scaffold](general-relativity.md) is authoritative for its E0 Fourier/compact-Ascoli passage, Q3 local wave proof and H1 endpoint/length proof. H3 smooth temporal splitting, generic E3 dust evolution and H4 MGHD remain explicit required proof holds. All original statements are preserved; neither external papers nor planned/draft mathematical items discharge these holds. [The audit report](../../../scaffold-audit-2026-10-11/general-relativity/audit-report.md) gives exact scopes and consumer dispositions. Other local arguments remain qualified by their actual hypotheses; none of these updates constitutes production acceptance.
+
 2026-10-03 research audit. Read statements and complete proof/verification bodies of the 31 exact original files listed below. Publication/audit stamps are metadata, not this team's proof acceptance. Imports and originals were read only. Actual scoped SHA-256 comparisons are in [supplier-byte-check.json](supplier-byte-check.json); a match checks bytes, not mathematical suitability.
 
 All proposed needed mathematics is assigned to M01–M26 in [mathematical-prerequisites.md](mathematical-prerequisites.md). Elementary real/vector algebra uses the published finite-dimensional interfaces and the explicit S0/S2 constructions; S4 now gives the needed one-dimensional proper-time FTC/inverse/substitution argument, and G2 uses the actually reviewed choice-free Euclidean inverse and repaired parameter-dependent ODE proofs. Definitions of smoothness, germs, topology, bundle charts/sections, coordinate tangent bases, Lie brackets, pullback connections, determinant/adjugate and linear algebra appear in the suppliers' `deps` and `justified_by`. Their exact IDs can be recovered from the unchanged files; no claim of reading every transitive proof is made.

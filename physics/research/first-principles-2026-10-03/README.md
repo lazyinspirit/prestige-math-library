@@ -107,3 +107,7 @@ reported across the audits (the ODE parameter-dependence theorem and Euclidean-b
 measure lemma) are recorded in audit coordination; current canonical repairs
 were checked, and affected runtime snapshots need reconciliation before production
 certification. No original mathematics or snapshot was edited by these auditors.
+
+## Current published-only scaffold audit, 2026-10-11
+
+The [four-category audit and repair record](../scaffold-audit-2026-10-11/README.md) supersedes earlier supplier permissions and closure descriptions for the audited classical-mechanics, quantum-mechanics, GR and thermodynamics scaffolds. External mathematics is published canonical material only; complete local arguments remain separate. The owner allowed inspected draft Classical EM/SR physics items, without permitting draft mathematical items. GR H3 smooth splitting, generic E3 dust evolution and H4 MGHD retain full claims with required proof holds after two repair rounds; the earlier audit-completion descriptions above are historical and do not close these claims under the current restriction. Mechanics source/independent-acceptance qualifications and all other audit limits are explicit in the current reports. No engine run or publication was initiated by these repairs.

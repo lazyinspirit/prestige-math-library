@@ -6,8 +6,8 @@ Read these complete required sources before drift review or scaffolding:
 
 - `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/pathway-and-inventory.md` (SHA-256 d251643a202be972b8ac230b8b3063a01eca585919d5bf6fc9675d1d2c0252e2).
 - `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/prose-scaffold.md` (SHA-256 d272020b5ac35fdc0472b77490742d5699c891731294c5e39d6e4340954eb382).
-- `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/paired-inventory.json` (SHA-256 c4415ef13305dcbafc6906cb009c2e688254ab9bd59eee3e1f07559b0aed7458).
-- `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/supplier-map.json` (SHA-256 f6b56ca16e32000070538382e1927e7f73c9fa5b8fc55d8702b829e94ac024b1).
+- `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/paired-inventory.json` (SHA-256 05c2d7b2a20cc0ca19f7473f81d2e762a20247de0727fda0de1194aad96b684a).
+- `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/supplier-map.json` (SHA-256 f60185b0ca4718978bc930d1ef4808fb5f6d4b756798ba871e81102d2edcf7f8).
 - `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/closure-ledger.json` (SHA-256 d5e26774e01e7050ec7e80ffa44970c573b6e7c3e818a1a20418e84657e030d3).
 
 The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims.

@@ -1,5 +1,9 @@
 # Einstein evolution: corrected local analytic supplier
 
+## Current GR audit qualification, 2026-10-11
+
+The E0 compactness passage is superseded by the complete published-root Fourier/compact-range Ascoli repair in general-relativity.md. The generic E3 dust branch remains held; scalar and strict interior-fluid branches retain their stated local scope. See [the current GR scaffold](general-relativity.md) and [audit report](../../../scaffold-audit-2026-10-11/general-relativity/audit-report.md). The older development below is retained as research evidence; its superseded supplier wording does not override the current owner restriction.
+
 2026-10-03. This mathematical supplement addresses M16. Physical adoption of Einstein/matter equations remains G7. It is a high-regularity local result with an explicit solution topology, not a claim of optimal thresholds or global existence. The smooth global gluing/splitting source arguments are being checked separately; their retrieval alone is not closure.
 
 ## E0 — periodic symmetric hyperbolic systems, exact high-regularity branch
