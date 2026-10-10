@@ -1,0 +1,711 @@
+{
+  "role": "bayesian-05",
+  "assignment": "Computational inference: latent-variable EM, variational inference/ELBO, Laplace and integration, ABC/simulation-based inference, identifiability/approximation bias. Generic factorization and optimization prerequisites must be in Category 3 or earlier; no Category 4 dependency.",
+  "checked_date": "2026-10-11",
+  "scratchpad": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/bayesian-05/",
+  "extraction": "PDF text extracted page-by-page with PyMuPDF 1.27.2.3; page counts below are physical PDF pages. HTML sources were retained and converted to text with Python standard-library HTMLParser. Hashes are SHA256 of exact raw source and local extracted text bytes. Extraction is not itself evidence of reading; each read range/status is separately recorded.",
+  "sources": [
+    {
+      "id": "S01",
+      "title": "Lecture Notes on the EM Algorithm",
+      "authors": "Mário A. T. Figueiredo",
+      "year": "2004-05-19",
+      "publication": "Author lecture notes, Instituto de Telecomunicações / Instituto Superior Técnico",
+      "url": "https://www.lx.it.pt/~mtf/EM_algorithm.pdf",
+      "local_pdf": "em_figueiredo2004.pdf",
+      "local_text": "em_figueiredo2004.txt",
+      "read_status": "Relevant tutorial complete: PDF pp.1-7 (printed pp.1-7), §§1-4. Read incomplete/complete data setup, E/M definitions, auxiliary-function/KL monotonicity, GEM Q-ascent, fixed-point/stationarity discussion, and exponential-family update.",
+      "anchors": [
+        "§§1-4",
+        "observed log-likelihood/auxiliary-function identity",
+        "GEM Q-ascent",
+        "exponential-family sufficient-statistic update"
+      ],
+      "claims_and_hypotheses": "Ascent is for valid likelihoods and conditional latent distributions with defined expectations; exact M-step maximizes Q, GEM increases Q. The auxiliary identity establishes monotonicity only.",
+      "limitations": "The note's statement that zero KL forces parameter equality is false without parameter identifiability (conditional laws can coincide at different parameter values). Its exposition does not prove general convergence of the EM sequence; no such result is imported.",
+      "sha256_pdf": "ce4b5f8604a3b89369d3bb728affc76266b32cf6cd176bba341cd5e5362507b3",
+      "local_file_sizes_bytes": {
+        "em_figueiredo2004.pdf": 647350,
+        "em_figueiredo2004.txt": 85154
+      },
+      "physical_pdf_pages": 35,
+      "sha256_text": "d7e276792d4df4ec9e7672371743b19fe4ebb4b65b7db8ff30edcb2d94dbdd40"
+    },
+    {
+      "id": "S02",
+      "title": "Convex Optimization",
+      "authors": "Stephen Boyd and Lieven Vandenberghe",
+      "year": "2004",
+      "publication": "Cambridge University Press, Chapter 9",
+      "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+      "local_pdf": "optimization_boyd_vandenberghe_2004.pdf",
+      "local_text": "optimization_boyd_vandenberghe_2004.txt",
+      "read_status": "Relevant units complete: PDF pp.477-483 and 498-505; corresponding printed Chapter 9 §§9.2-9.3, pp.463-469, and §9.5, pp.484-491.",
+      "anchors": [
+        "§§9.2-9.3 descent directions and Armijo/backtracking",
+        "strong-convexity/smoothness gradient bounds on a sublevel set",
+        "§9.5 damped Newton, Hessian-Lipschitz error bound, line search, local quadratic phase"
+      ],
+      "claims_and_hypotheses": "Gradient rates require the stated positive lower and finite upper Hessian bounds on the relevant sublevel set and the specified step rule. Newton local rates require nonsingular positive curvature and local Hessian regularity; damping/globalization conditions are separate.",
+      "limitations": "These results do not establish global optimization of nonconvex statistical objectives or posterior unimodality. Exact coordinate-ascent nondecrease is proved directly in the planned VI pair.",
+      "sha256_pdf": "40d976c83c18cce1900eff8c41bd5ad408c102b813af39d05ff85678ccf8d76e",
+      "local_file_sizes_bytes": {
+        "optimization_boyd_vandenberghe_2004.pdf": 6881335,
+        "optimization_boyd_vandenberghe_2004.txt": 1923923
+      },
+      "physical_pdf_pages": 714,
+      "sha256_text": "acc9d12868dfbab794b9366c5050deab2c5932cb9cb34401ae452e8a2295ed3f"
+    },
+    {
+      "id": "S03",
+      "title": "Variational Inference: A Review for Statisticians",
+      "authors": "David M. Blei, Alp Kucukelbir, and Jon D. McAuliffe",
+      "year": "2017 (author version v9 dated 2018)",
+      "publication": "Journal of the American Statistical Association 112(518), 859-877; arXiv:1601.00670",
+      "url": "https://doi.org/10.1080/01621459.2017.1285773",
+      "local_pdf": "vi_blei2017.pdf",
+      "local_text": "vi_blei2017.txt",
+      "read_status": "Relevant exposition complete: PDF pp.1-11, full §1 and §2.1-2.5. Remaining paper not used for this assignment.",
+      "anchors": [
+        "posterior approximation and KL objective",
+        "ELBO/KL decomposition",
+        "mean-field family",
+        "coordinate-ascent update q_j proportional to exp(E_{-j} log joint)",
+        "local optima, Gaussian covariance underestimation, log-sum-exp/numerical notes"
+      ],
+      "claims_and_hypotheses": "The ELBO identity assumes a proper posterior and meaningful finite log expectations; coordinate maximization requires a well-defined normalizer and an attained exact optimum.",
+      "limitations": "Review-level derivations, not generic global convergence/calibration theorems. Its discussion expressly warns that reverse-KL mean-field can miss dependence and underestimate variance.",
+      "sha256_pdf": "21eea6bd5fb44a04f9c610da504803ceac7ebd24a88e49bde030eccdac3e6b62",
+      "local_file_sizes_bytes": {
+        "vi_blei2017.pdf": 1822810,
+        "vi_blei2017.txt": 134375
+      },
+      "physical_pdf_pages": 41,
+      "sha256_text": "5c33269c4ece2d94bf544663de8bd60febd0e11650d5f053791456d475040b8d"
+    },
+    {
+      "id": "S04",
+      "title": "An Introduction to Variational Methods for Graphical Models",
+      "authors": "Michael I. Jordan, Zoubin Ghahramani, Tommi Jaakkola, and Lawrence K. Saul",
+      "year": "1999",
+      "publication": "Machine Learning 37, 183-233",
+      "url": "https://doi.org/10.1023/A:1007665907178",
+      "local_pdf": "vi_jordan1999.pdf",
+      "local_text": "vi_jordan1999.txt",
+      "read_status": "Relevant independent derivation complete: PDF pp.31-38, printed pp.213-220, §§6.1-6.3.",
+      "anchors": [
+        "finite/discrete KL and Jensen evidence bound",
+        "EM as coordinate ascent in ELBO",
+        "mean-field factorization and multimodal/mode limitations"
+      ],
+      "claims_and_hypotheses": "Discrete finite-state calculations assume normalizable distributions and finite sums; continuous generalization requires measure/integrability hypotheses stated in BCS.",
+      "limitations": "No graphical-model or neural-network item is imported. The source supplies a second derivation, not a generic accuracy or convergence guarantee.",
+      "sha256_pdf": "bdd528780e1a2be8829573ff28b0477f98fe04ea73f985d366f7d09b83f00178",
+      "local_file_sizes_bytes": {
+        "vi_jordan1999.pdf": 560053,
+        "vi_jordan1999.txt": 146047
+      },
+      "physical_pdf_pages": 51,
+      "sha256_text": "fbd6e2ec0e467fe3af40577f9445d31655d637b88e7da95204615b9eb5d45837"
+    },
+    {
+      "id": "S05",
+      "title": "Laplace's Method for Integrals",
+      "authors": "Author not stated in the local PDF; UConn course note hosted under the Rozman course directory",
+      "year": "Spring 2025; last modified 2025-03-14",
+      "publication": "Course note, 8 pages",
+      "url": "https://www.phys.uconn.edu/~rozman/Courses/P2400_25S/",
+      "local_pdf": "laplace_uconn2025.pdf",
+      "local_text": "laplace_uconn2025.txt",
+      "read_status": "Entire 8-page note read.",
+      "anchors": [
+        "interior maximum leading asymptotic",
+        "endpoint-mode examples and differing orders",
+        "worked examples including Stirling"
+      ],
+      "claims_and_hypotheses": "Pedagogical leading expansions use local smoothness and mode assumptions visible in each example.",
+      "limitations": "Heuristic/tutorial exposition, not a rigorous multivariate domination or remainder theorem. Author is not printed in the local document; no identity inferred from the hosting path.",
+      "sha256_pdf": "16c9c2dd43d547d3b2efbef008d7751d6a3727d445d0de3c2d9d7eeae4f912fa",
+      "local_file_sizes_bytes": {
+        "laplace_uconn2025.pdf": 220201,
+        "laplace_uconn2025.txt": 21198
+      },
+      "physical_pdf_pages": 8,
+      "sha256_text": "05a6433388918e1e380086c779f65f05fe030abe4a0ed26d9cc7d0c7d3d0a4e0"
+    },
+    {
+      "id": "S06",
+      "title": "NIST Digital Library of Mathematical Functions, §2.3(iii): Laplace's Method",
+      "authors": "NIST DLMF editorial project",
+      "year": "online reference, retrieved 2026-10-11",
+      "publication": "DLMF Chapter 2, asymptotic approximations",
+      "url": "https://dlmf.nist.gov/2.3#iii",
+      "local_html": "laplace_dlmf23.html",
+      "local_text": "laplace_dlmf23.txt",
+      "read_status": "Section §2.3(iii) read at equations 2.3.13-2.3.18, including hypotheses (a)-(c); adjacent material and cited proof sources not read.",
+      "anchors": [
+        "unique endpoint minimum/asymptotic expansion",
+        "local expansions and approach to minimum",
+        "absolute convergence conditions (a)-(c)"
+      ],
+      "claims_and_hypotheses": "The source states an asymptotic expansion under its listed endpoint, local-expansion, localization and convergence hypotheses.",
+      "limitations": "It refers detailed proof/error bounds to Olver/Boyd/Wong; no full proof or remainder bound is claimed read here. The local multivariate interior theorem still requires a Cat3 proof.",
+      "sha256_html": "da5cb1d97a3fd4e8166aff64c5b1d1577c7f289181c43efee31e73e0c637116d",
+      "local_file_sizes_bytes": {
+        "laplace_dlmf23.html": 324069,
+        "laplace_dlmf23.txt": 24382
+      },
+      "sha256_text": "b708a4f016a96eb1f2da3c57e2efb19056a1600ebeee2a71f8000b4d7d138f9c"
+    },
+    {
+      "id": "S07",
+      "title": "Fundamentals of Numerical Computation, §5.6.1: Integration",
+      "authors": "Tobin A. Driscoll and Richard J. Braun",
+      "year": "online textbook, retrieved 2026-10-11",
+      "publication": "FNC Chapter 5, §5.6.1",
+      "url": "https://fncbook.com/integration/",
+      "local_html": "quadrature_fnc_integration.html",
+      "local_text": "quadrature_fnc_integration.txt",
+      "read_status": "Complete section §5.6.1, equations 5.6.1-5.6.9.",
+      "anchors": [
+        "uniform-grid composite trapezoid definition and algorithm",
+        "truncation error and O(h^2) statement",
+        "piecewise-linear/Euler-Maclaurin explanation"
+      ],
+      "claims_and_hypotheses": "Smoothness of integrand is needed for the second-order truncation assertion.",
+      "limitations": "The displayed O(h^2) derivation cites earlier §5.2.2, which was not read. BCS should prove the needed C^2 uniform bound locally rather than treat this as a completed supplier theorem.",
+      "sha256_html": "81e26b4895d123faffc635869e555c9a21b39c6541d185eb7194b0832683f350",
+      "local_file_sizes_bytes": {
+        "quadrature_fnc_integration.html": 1484630,
+        "quadrature_fnc_integration.txt": 33756
+      },
+      "sha256_text": "22ad0a4de9882b95fa4bb5a1afe41002d283657dea2db134168fa3382282319c"
+    },
+    {
+      "id": "S08",
+      "title": "Fundamentals and Recent Developments in Approximate Bayesian Computation",
+      "authors": "Jarno Lintusaari, Michael U. Gutmann, Ritabrata Dutta, Samuel Kaski, and Jukka Corander",
+      "year": "2017",
+      "publication": "Systematic Biology 66(1), e66-e82",
+      "url": "https://doi.org/10.1093/sysbio/syw077",
+      "local_pdf": "abc_lintusaari2016.pdf",
+      "local_text": "abc_lintusaari2016.txt",
+      "read_status": "Selected units read: PDF pp.1-6, 10-23, 46-47. Physical PDF has 47 pages; pp.24-45 not read.",
+      "anchors": [
+        "intro/simulator model and rejection ABC target, pp.1-6, 10-13",
+        "summary/tolerance and insufficiency, pp.14-18",
+        "MCMC-ABC target and acceptance ratio, pp.19-23",
+        "MCMC-ABC and SMC-ABC algorithms, appendix pp.46-47"
+      ],
+      "claims_and_hypotheses": "ABC induces a summary/tolerance target; summary reduction and tolerance introduce distinct approximation sources. ABC-MCMC/SMC algorithms require their own transition/resampling assumptions.",
+      "limitations": "Review/tutorial source; its cited asymptotic bandwidth rates are not proved here. Application/method pages 24-45 not used. Do not conflate exact ABC algorithm targeting its approximate law with exact full-data Bayes.",
+      "sha256_pdf": "c87e1b6827fc01f040deed0e61364e77598ece709869322c6062eece217d7429",
+      "local_file_sizes_bytes": {
+        "abc_lintusaari2016.pdf": 733497,
+        "abc_lintusaari2016.txt": 94978
+      },
+      "physical_pdf_pages": 47,
+      "sha256_text": "6dc714cf9cdd647d1f4bd2ad8e556064d7e45cdf28e96ae82a9e445662953a3d"
+    },
+    {
+      "id": "S09",
+      "title": "Constructing Summary Statistics for Approximate Bayesian Computation: Semi-automatic ABC",
+      "authors": "Paul Fearnhead and Dennis Prangle",
+      "year": "2012",
+      "publication": "Journal of the Royal Statistical Society: Series B 74(3), 419-474; arXiv:1004.1112",
+      "url": "https://doi.org/10.1111/j.1467-9868.2011.01010.x",
+      "local_pdf": "abc_fearnhead_prangle2012.pdf",
+      "local_text": "abc_fearnhead_prangle2012.txt",
+      "read_status": "Selected units and main proofs read: PDF pp.1-18 (intro, kernels/noisy ABC, Theorems 1-4) and pp.35-38 (Appendix A variance comments, Appendix B full proof of Lemma 1, Appendix C proof of Theorem 4). Pages 19-34 and 39-44 not read.",
+      "anchors": [
+        "kernel ABC targets and calibration/noisy ABC",
+        "Theorem 3: posterior mean is optimal summary for the stated squared-error loss",
+        "semi-automatic posterior-mean regression",
+        "Lemma 1 acceptance order and explicit smoothness/support assumptions",
+        "Theorem 4 proof"
+      ],
+      "claims_and_hypotheses": "The posterior-mean summary result is loss-specific; asymptotic acceptance statements use the article's explicit local smoothness/support conditions. Calibration is under prior-predictive repetition and the noise-augmented observation model.",
+      "limitations": "Do not turn calibration into fixed-parameter frequentist coverage. Application pages not read; no universal tolerance rate or coverage guarantee claimed.",
+      "sha256_pdf": "a32ceeedc63a7f0edd8040f390c71d36b7223123f521512a160edbcd4f30f923",
+      "local_file_sizes_bytes": {
+        "abc_fearnhead_prangle2012.pdf": 584852,
+        "abc_fearnhead_prangle2012.txt": 101864
+      },
+      "physical_pdf_pages": 44,
+      "sha256_text": "0ce7e3b17ed093ca791a5e52be2c189eab3c6696ba2b4ab630767f6bd0af3401"
+    },
+    {
+      "id": "S10",
+      "title": "Approximate Bayesian Computation in Population Genetics",
+      "authors": "Mark A. Beaumont, Wenyang Zhang, and David J. Balding",
+      "year": "2002",
+      "publication": "Genetics 162(4), 2025-2035",
+      "url": "https://doi.org/10.1093/genetics/162.4.2025",
+      "local_pdf": "abc_beaumont2002.pdf",
+      "local_text": "abc_beaumont2002.txt",
+      "read_status": "Algorithmic pages read: PDF pp.1-6, printed pp.2025-2030. Remaining example pages not relied upon.",
+      "anchors": [
+        "rejection ABC from summary statistics",
+        "local-linear regression adjustment",
+        "support and tolerance caveats"
+      ],
+      "claims_and_hypotheses": "Regression adjustment is a local approximation around accepted summaries and depends on support/tolerance and regression fit; it is not exact Bayes at nonzero tolerance.",
+      "limitations": "The worked population-genetics application is not used to establish a general theorem.",
+      "sha256_pdf": "6c73e8e79af002fd13a1b989bc12505bf40093c8d641d3c7fe4755ad4ab75788",
+      "local_file_sizes_bytes": {
+        "abc_beaumont2002.pdf": 178245,
+        "abc_beaumont2002.txt": 58087
+      },
+      "physical_pdf_pages": 12,
+      "sha256_text": "b44f7799d26dca12794112c2b48df00b96a334eb16fd261966e7a52c17c4239b"
+    },
+    {
+      "id": "S11",
+      "title": "Approximate Bayesian Computation: A Nonparametric Perspective",
+      "authors": "Michael G. B. Blum",
+      "year": "2010",
+      "publication": "Journal of the American Statistical Association 105(491), 1178-1187",
+      "url": "https://doi.org/10.1198/jasa.2010.tm09448",
+      "local_pdf": "abc_blum2010.pdf",
+      "local_text": "abc_blum2010.txt",
+      "read_status": "Selected units read: PDF pp.1-11 and 20-24, including Theorem 1, assumptions A1-A5, bias/variance discussion and Appendices A-C. Other pages not read.",
+      "anchors": [
+        "Theorem 1 and A1-A5",
+        "nonparametric bias/variance and summary dimension discussion",
+        "proofs in Appendices A-C"
+      ],
+      "claims_and_hypotheses": "The theorem depends on stated smoothness, support, bandwidth, and dimension assumptions.",
+      "limitations": "Appendix says the proof of Lemma 2 is in separate supplementary material not included here, so the full theorem route is incomplete in this reading. No universal linear/quadratic adjustment dominance is proposed.",
+      "sha256_pdf": "28fbee2925387cad2077fba1dbfd25414196afc332e6a6e57a0c033453913d80",
+      "local_file_sizes_bytes": {
+        "abc_blum2010.pdf": 467338,
+        "abc_blum2010.txt": 63996
+      },
+      "physical_pdf_pages": 28,
+      "sha256_text": "976e45467ad2f53fadcc001c6183d81ad34007e32e1cd88afd924cc4b040f097"
+    },
+    {
+      "id": "S12",
+      "title": "Lack of Confidence in ABC Model Choice",
+      "authors": "Christian P. Robert, Jean-Marie Cornuet, Jean-Michel Marin, and Natesh S. Pillai",
+      "year": "2011",
+      "publication": "Proceedings of the National Academy of Sciences 108(37), 15112-15117",
+      "url": "https://doi.org/10.1073/pnas.1102900108",
+      "local_pdf": "abc_robert2011.pdf",
+      "local_text": "abc_robert2011.txt",
+      "read_status": "Relevant theory read: PDF pp.1-4. Empirical appendices pp.5-9 not relied upon.",
+      "anchors": [
+        "true Bayes factor versus summary Bayes factor factorization",
+        "within-model versus across-model sufficiency",
+        "Gibbs-field special case",
+        "Poisson/geometric counterexample"
+      ],
+      "claims_and_hypotheses": "The exact factorization shows modelwise sufficiency alone need not preserve Bayes factors; special cross-model sufficiency can be sufficient in declared cases.",
+      "limitations": "A short critique/counterexample paper, not a universal model-choice theorem.",
+      "sha256_pdf": "f67d1d0041af19ba17edaa4974199affa1536701e1ac4145d09a5c2b06614fc9",
+      "local_file_sizes_bytes": {
+        "abc_robert2011.pdf": 557580,
+        "abc_robert2011.txt": 96336
+      },
+      "physical_pdf_pages": 9,
+      "sha256_text": "fe6861d24b2d972abd42e79929e0f0d62173e5e0c01ca0b1c10a2a31ce8cf782"
+    },
+    {
+      "id": "S13",
+      "title": "Variational Bayes with Synthetic Likelihood",
+      "authors": "Victor M.-H. Ong, David J. Nott, Minh-Ngoc Tran, S. A. Sisson, and C. C. Drovandi",
+      "year": "2018 author manuscript (arXiv v1 dated 2016)",
+      "publication": "arXiv:1608.03069",
+      "url": "https://arxiv.org/abs/1608.03069",
+      "local_pdf": "sl_price2018.pdf",
+      "local_text": "sl_price2018.txt",
+      "read_status": "Introductory model units read: PDF pp.1-4 only. The VBSL/optimizer remainder pp.5-30 is not used.",
+      "anchors": [
+        "synthetic likelihood definition",
+        "Gaussian-summary assumption",
+        "simulation-estimated mean/covariance plug-in",
+        "ideal vs finite-simulation/noisy target and unbiased-estimate discussion"
+      ],
+      "claims_and_hypotheses": "The method approximates the summary law by a Gaussian and uses simulator estimates of its moments; that modeling assumption and finite-simulation randomness are distinct.",
+      "limitations": "No later variational algorithm or performance statement is imported from unread pages.",
+      "sha256_pdf": "04d649315e50f76429feb10b992a436c222ceb6d65d216c202af5bb4e9eda301",
+      "local_file_sizes_bytes": {
+        "sl_price2018.pdf": 668495,
+        "sl_price2018.txt": 89253
+      },
+      "physical_pdf_pages": 30,
+      "sha256_text": "5ea0865e252a66c2468ecd6dc76c83695eecdad1a8d950d70e50ce41f11d130d"
+    },
+    {
+      "id": "S14",
+      "title": "Bayesian Inference Using Synthetic Likelihood: Asymptotics and Adjustments",
+      "authors": "David T. Frazier, David J. Nott, Christopher Drovandi, and Robert Kohn",
+      "year": "2023",
+      "publication": "Journal of the American Statistical Association 118(544), 2821-2832",
+      "url": "https://doi.org/10.1080/01621459.2022.2086132",
+      "local_pdf": "sl_bsl_asymptotics_frazier2023.pdf",
+      "local_text": "sl_bsl_asymptotics_frazier2023.txt",
+      "read_status": "Relevant theory read: PDF pp.2-8, corresponding to JASA pp.2821-2827. Remaining article pages not needed for assigned claims.",
+      "anchors": [
+        "three BSL approximation targets",
+        "ideal vs finite-simulation likelihood",
+        "summary CLT, unique pseudo-true mean map, full-rank derivative, covariance-variance and prior-tail/sub-Gaussian conditions",
+        "finite-simulation covariance condition (4)"
+      ],
+      "claims_and_hypotheses": "The reported asymptotic calibration requires the article's multiple regularity hypotheses, including covariance condition (4), not merely a Gaussian synthetic likelihood.",
+      "limitations": "All theorem proofs are in online supplements, which were not acquired or read. No BvM/coverage theorem is offered as a locally established result.",
+      "sha256_pdf": "93f53302db52c62aae974976725e01ce313244ac544bf2cd23b312eaa37b1948",
+      "local_file_sizes_bytes": {
+        "sl_bsl_asymptotics_frazier2023.pdf": 2149685,
+        "sl_bsl_asymptotics_frazier2023.txt": 89872
+      },
+      "physical_pdf_pages": 13,
+      "sha256_text": "b0e3a6439e3765e72fc4983045f56ed672171eb9afb3858766be07ac0c93e4b2"
+    },
+    {
+      "id": "S15",
+      "title": "Non-asymptotic Error Estimates for the Laplace Approximation in Bayesian Inverse Problems",
+      "authors": "Tapio Helin and Remo Kretschmann",
+      "year": "2021 author manuscript; acquired local version dated 2021-10-27",
+      "publication": "Bayesian inverse-problem article, 25-page author manuscript; not relied upon",
+      "local_pdf": "laplace_helin_kretschmann2022.pdf",
+      "local_text": "laplace_helin_kretschmann2022.txt",
+      "read_status": "Acquired and extracted (25-page PDF), but not read or relied on.",
+      "anchors": [],
+      "claims_and_hypotheses": "None credited.",
+      "limitations": "Different inverse-problem theorem regime; candidate only.",
+      "sha256_pdf": "150393331355962bd3383f620e94bbf933abe47eb78c15a1611e4ce08b7d06bc",
+      "local_file_sizes_bytes": {
+        "laplace_helin_kretschmann2022.pdf": 612602,
+        "laplace_helin_kretschmann2022.txt": 80391
+      },
+      "physical_pdf_pages": 25,
+      "sha256_text": "e9229c8d4f128d56002a800d03121f5b3ee85f82bb484551298e9f37c986f497"
+    },
+    {
+      "id": "S16",
+      "title": "The Asymptotic Approximation of Posterior Moments",
+      "authors": "Robert E. Kass, Luke Tierney, and Joseph B. Kadane",
+      "year": "1990",
+      "publication": "Journal of the American Statistical Association 85(411), 844-851",
+      "url": "https://doi.org/10.1080/01621459.1990.10474927",
+      "local_pdf": "laplace_kass1990.pdf",
+      "local_text": "laplace_kass1990.txt",
+      "read_status": "Acquired and extracted (16-page scan), but not read: extraction is image-only with no usable text layer.",
+      "anchors": [],
+      "claims_and_hypotheses": "None credited.",
+      "limitations": "Not used to propose the Tierney-Kadane relative O(n^-2) moment-ratio approximation.",
+      "sha256_pdf": "a357fb596e28f3c1de4fedc4a33dee2c50a23e2bfae544421b5843c044560f2e",
+      "local_file_sizes_bytes": {
+        "laplace_kass1990.pdf": 627841,
+        "laplace_kass1990.txt": 438
+      },
+      "physical_pdf_pages": 16,
+      "sha256_text": "7a6ff7828dfbe9db58170d29b3645633a39e979601b52efda1ecc3ca0ffadbdf"
+    },
+    {
+      "id": "S17",
+      "title": "Accurate Approximations for Posterior Moments and Marginal Densities",
+      "authors": "Luke Tierney and Joseph B. Kadane",
+      "year": "1986",
+      "publication": "Journal of the American Statistical Association 81(393), 82-86",
+      "url": "https://doi.org/10.1080/01621459.1986.10478240",
+      "local_pdf": "tk_tierney_kadane1986.pdf",
+      "local_text": "tk_tierney_kadane1986.txt",
+      "read_status": "Acquired and extracted (6-page scan), but not read: extraction is image-only with no usable text layer.",
+      "anchors": [],
+      "claims_and_hypotheses": "None credited.",
+      "limitations": "Not used to state the paper's asymptotic error theorem.",
+      "sha256_pdf": "539d9358e49fb9d6a77514ebc501f946bed52eef6b9063d64b7eb4af9fa7ed81",
+      "local_file_sizes_bytes": {
+        "tk_tierney_kadane1986.pdf": 1005262,
+        "tk_tierney_kadane1986.txt": 161
+      },
+      "physical_pdf_pages": 6,
+      "sha256_text": "722b0a61bd5d7dc5ca520c41a81564c87b355d3a8cd378b8e51351635a2cb3fd"
+    }
+  ],
+  "unavailable_or_metadata_only": [
+    {
+      "citation": "Dempster, Laird, and Rubin (1977), Maximum Likelihood from Incomplete Data via the EM Algorithm, JRSS B 39(1), 1-38, DOI 10.1111/j.2517-6161.1977.tb01600.x.",
+      "status": "Publisher landing page/abstract and metadata read only; full text subscriber-gated and not acquired/read. Figueiredo S01 is the proof source used."
+    },
+    {
+      "citation": "Rothenberg (1971), Identification in Parametric Models, Econometrica 39(3), 577-591.",
+      "status": "Candidate university PDF mirror returned 404. Not read and not relied on; no Fisher-information-rank iff local-identifiability result proposed."
+    }
+  ],
+  "checked_library_suppliers": {
+    "inspection": "Read live A-page bodies and exact item files; these are current published math suppliers. No live Bayesian/statistical computation page and no numerical-analysis page was found. Page/item hashes pin the inspection snapshot.",
+    "pages": [
+      {
+        "path": "library/probability/probability-spaces-random-variables-and-expectation.md",
+        "sha256": "7086e3b573b209bc084bae885afb63097e416bca446b5364e88a0f64e54153c2"
+      },
+      {
+        "path": "library/probability/independence-borel-cantelli-and-zero-one-laws.md",
+        "sha256": "2e4ca4a86354507b28246a1274c4ac0316e6f430f6476287828c5b9a4e130fae"
+      },
+      {
+        "path": "library/probability/conditional-expectation.md",
+        "sha256": "c9637a96498c5d03691401f95dea38f2c568541451b02660e8104e9bff33fa07"
+      },
+      {
+        "path": "library/probability/conditional-distributions-and-regular-conditional-probability.md",
+        "sha256": "66e5c5cec30c9cf8bafff22b64493a76ca50fb6a4372e374e2cde4319f257cd2"
+      },
+      {
+        "path": "library/measure-theory/the-lebesgue-integral-and-the-convergence-theorems.md",
+        "sha256": "8903c2d2bf0b370a72e27e01b93c264c4fe34a9e0e7779ada5d13eef79d40804"
+      },
+      {
+        "path": "library/measure-theory/product-measures-and-the-fubini-tonelli-theorems.md",
+        "sha256": "bb7b865f1a713b75bdc79942cca3888526f08a8645406ae252748d122caf60ab"
+      },
+      {
+        "path": "library/measure-theory/the-radon-nikodym-theorem-and-lebesgue-decomposition.md",
+        "sha256": "471a5f975489f1c429e78fb5a00d6cd09dcec39b05b8c6d0874522b50c8d65f0"
+      },
+      {
+        "path": "library/linear-algebra/direct-matrix-factorisations-lu-cholesky-and-qr.md",
+        "sha256": "8f195793eee8b983a297f6e5bd8318f2d88aaaa4f4a8cc2ec3e924db7f24a430"
+      },
+      {
+        "path": "library/linear-algebra/the-spectral-theorem-and-singular-value-decomposition.md",
+        "sha256": "6fc99ab099d2220bfa947b946d3fe27ba66d39ebeea06489c149c1eabbf1771b"
+      },
+      {
+        "path": "library/linear-algebra/matrix-differentiation-and-first-order-spectral-perturbation.md",
+        "sha256": "3bbf2adb0cac02dd5440bd3e9f95a46c2dd69b52c00a14600ef68c3a5febcdf3"
+      },
+      {
+        "path": "library/linear-algebra/matrix-norms-condition-numbers-and-numerical-stability.md",
+        "sha256": "fca90e9b4621b2f8ee9a334dd32b85f680a6bb3453acff2a029e2db53b694aea"
+      },
+      {
+        "path": "library/real-analysis/convex-and-semicontinuous-functions-on-rn.md",
+        "sha256": "954e3bf96f2e4c93dfb89ea5b92b77589cbbe698dc068140c1c9b9fdb3860ba9"
+      },
+      {
+        "path": "library/real-analysis/mixed-partials-taylor-and-extrema.md",
+        "sha256": "8e86482b9353551003a6091901c21fae597a10e2bb53ae25937f03aaf0dadce4"
+      },
+      {
+        "path": "library/real-analysis/the-real-gamma-and-beta-functions.md",
+        "sha256": "0363dabcdf6be56aa529ad06c4f4d5dd7b05b281218d86f224f571285b86a90b"
+      },
+      {
+        "path": "library/complex-analysis/the-gamma-function.md",
+        "sha256": "5101357a499424e597fd214e8e95f24afea1423b3e890131b6647b4158d03e1b"
+      }
+    ],
+    "items": [
+      {
+        "id": "def-probability-measure",
+        "sha256": "d27ccb062816799f7da52de7e2bd9452aa9426e76b5f3ac616f7f7693c1864ad"
+      },
+      {
+        "id": "def-random-element-and-real-random-variable",
+        "sha256": "f7603127a4aad84b5681c99c321e22658967eb76a07ffd3252b148730d5336a2"
+      },
+      {
+        "id": "def-law-or-distribution-of-a-random-element",
+        "sha256": "81c034663490da1430bd8bd62441e28ebdbb7e570bc82424d54bec4a24af864e"
+      },
+      {
+        "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "sha256": "6a564c6ba82a58c9886f9dfffd23f5ea8029ecf28e033895cd20654d26108f09"
+      },
+      {
+        "id": "thm-change-of-variables-for-expectation",
+        "sha256": "71d34cfc7af482c7d918612b6398f04f1a4b081621ad52cdd3b912c3c19bd423"
+      },
+      {
+        "id": "def-independent-random-elements",
+        "sha256": "a2f59b748bd970c48910f78608151f4e858a86d91a726fe247f51efecf60126b"
+      },
+      {
+        "id": "thm-independent-random-elements-have-product-joint-law",
+        "sha256": "d9e570aed8d4462b3d50f79472b59fe0bd8bb80d9739818d83629248a14bf456"
+      },
+      {
+        "id": "def-conditional-expectation-given-a-sigma-algebra",
+        "sha256": "4b5f639c1251c2f50264279443038d1eba99229329a3776969d2ba7466677070"
+      },
+      {
+        "id": "thm-conditional-expectation-exists-by-radon-nikodym",
+        "sha256": "2893a5870c378f045737f04950c0284d7983d993c15edb6d1481c04b71442ca2"
+      },
+      {
+        "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+        "sha256": "a1444a1037fc9dfa351defaf54b287336346f7b0c8c5af5f29f5970bde67ac1c"
+      },
+      {
+        "id": "thm-tower-property-of-conditional-expectation",
+        "sha256": "3501a77048df546fdba8adfc128a76c706878a69bf1218597796f5c8a4d5198f"
+      },
+      {
+        "id": "thm-conditional-jensen-inequality",
+        "sha256": "f74f1ccbf4c6a0c3042f66117d38abab1a80db8f3ddce5eafdfa23ca8c25d055"
+      },
+      {
+        "id": "thm-conditional-density-formula",
+        "sha256": "d8495feb56bd7796df60fffe8a9440eae66edff0a2accc16db392959156a8ee3"
+      },
+      {
+        "id": "thm-bayes-formula-for-dominated-kernels",
+        "sha256": "abd73c5b526df435a03e8d5189aa330da86cfdce64704b5d90eeba4a2073b19b"
+      },
+      {
+        "id": "def-measure-with-density",
+        "sha256": "e5ac92f139ecd887b6830e814407e1e896e6710fe4390028c5a957fee8f25697"
+      },
+      {
+        "id": "def-product-measure-on-sigma-finite-spaces",
+        "sha256": "ed724f7e5011bc9cb61abc90c27920155e6ab2f792464cf066ebd3387d97982b"
+      },
+      {
+        "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "sha256": "a99bb7e2d4edea2b0a7ee315d84d30da51f67fd66de31a916c03dadff54b4dfc"
+      },
+      {
+        "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+        "sha256": "805e764f513b1de1f1baf0a013b3c6a249400b0ff5198e264b0e9a32300cfc1a"
+      },
+      {
+        "id": "thm-dominated-convergence",
+        "sha256": "8e9c2624d146d37a0f13505e5eb85dc4cf0e68664f19c4f0c3bc47360f7d52ac"
+      },
+      {
+        "id": "thm-monotone-convergence-for-the-integral",
+        "sha256": "255cd962f7f5803f60cf40ac86513e62fcae4f6ec44724bd3efccdceb44f4cfb"
+      },
+      {
+        "id": "thm-jensens-integral-inequality",
+        "sha256": "6723d0a6673ae9ec1fea96e58d6eabf2217e9e6e46edb40eadf6d8639eab03e5"
+      },
+      {
+        "id": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+        "sha256": "54ec8c39c1c99f292be0dccfdd287eef134453324f282266f7941e48638f3bff"
+      },
+      {
+        "id": "thm-chain-rule-for-radon-nikodym-derivatives",
+        "sha256": "7a1b0d04701256b279bb3957bee2c07ef793d69cb929091cb700bb723a416d8b"
+      },
+      {
+        "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+        "sha256": "e10c6bdb599f6780406864cd7b74dc4405337cd6740da430b992ef0b7fb0f58c"
+      },
+      {
+        "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+        "sha256": "d6171c5a754db295e87a495c1a97cdc4dccd6de0aacd89c5a25e933894b2262d"
+      },
+      {
+        "id": "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional",
+        "sha256": "29e1069f086d1b19ea87ef4fb42c55dd5327074f8e582e45d88fffbc815ba2ac"
+      },
+      {
+        "id": "thm-derivative-of-matrix-inversion",
+        "sha256": "9b4f5a8dd2cf3c94384b14080e5483d3a3129a30bd0e5ae0144ced245b5f0224"
+      },
+      {
+        "id": "thm-determinant-differential-and-jacobis-formula",
+        "sha256": "eccd8091a39c0a7711365704dee1a29e413d6d52321d01e823fc9d8b8343e426"
+      },
+      {
+        "id": "thm-hessian-characterises-convexity",
+        "sha256": "23e55d059b394be38d86902fb18c1dc63eb3d627453717e7842d9e66bfd79875"
+      },
+      {
+        "id": "cor-local-minima-of-convex-functions-on-rn-are-global",
+        "sha256": "5c430aab529f9e9132d27d183c80a3c76df81bc5e5de9729eb8c944d045f2bca"
+      },
+      {
+        "id": "cor-strictly-convex-functions-have-at-most-one-minimizer",
+        "sha256": "f49e63803a86ee20e3ed251ba3668f744a124ed9545ca679d4bd07ca027cff30"
+      },
+      {
+        "id": "thm-fermat-for-euclidean-local-extrema",
+        "sha256": "825408c93c4a6813634cd42ad158a4cfac6df524451acc818c749d8f1518df9b"
+      },
+      {
+        "id": "thm-multivariable-second-derivative-test",
+        "sha256": "fc503e5acce130480765c5a132573d60af3298d564a5d6887621bdafbd533e40"
+      },
+      {
+        "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+        "sha256": "e56221dda7d782432568f55f4e8f3af1a64fcc098321400c49c7013a389e769b"
+      },
+      {
+        "id": "cor-multivariable-taylor-formula-with-peano-remainder",
+        "sha256": "25a80a0c34e90d0f2595a5e9921dab2ba75d270e50eff2fb49ea105a9f2dda75"
+      },
+      {
+        "id": "cor-second-order-taylor-expansion-with-the-hessian",
+        "sha256": "e01af03ad8e9c075274ead1f990244c200bc127502df64f58e2e1b0b7e12d7a9"
+      },
+      {
+        "id": "thm-gaussian-integral",
+        "sha256": "452a312708264d603c610ec1b5ef078060b3a727c532bff7e37f7f31ca54bfc9"
+      },
+      {
+        "id": "cor-real-gamma-one-half-is-root-pi",
+        "sha256": "9e6067e1dbc1888a0d0e6aa0e34f5ca99e7fc70df610c1a0f8113727b2d89e7c"
+      },
+      {
+        "id": "def-condition-number-of-a-nonsingular-linear-system",
+        "sha256": "bb6dc2a06a21bbd69a1a2825b703a48aaf2f3dcd75ca89a6835638f1bf3ee80c"
+      },
+      {
+        "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+        "sha256": "db1dee5b468447f3cb87365d94303d5779218a8f76f9606274644b2038ad1523"
+      },
+      {
+        "id": "thm-residual-to-forward-error-bounds-for-linear-systems",
+        "sha256": "2a7ebd49c8f5c70d6dc43fd73835b5cfec12f44027204b1b1414312abcc26ca3"
+      },
+      {
+        "id": "thm-local-conditioning-times-backward-error-controls-forward-error-to-first-order",
+        "sha256": "d8c71d490da7d37b2ca716633a05a2023ccbcf111b9a11f16b89e76fd81748af"
+      },
+      {
+        "id": "def-measure-kernel-and-probability-kernel",
+        "sha256": "4b5860cea50bbd271acd0c8964c5251a286c4c8eb8a3277e8de17b47cfa64793"
+      },
+      {
+        "id": "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+        "sha256": "8a3d0668cbc90b2a49401e710f03a894acdc5aa4a16257e906c9b3161df699b1"
+      }
+    ],
+    "planned_but_unpublished_interfaces": [
+      {
+        "category": "1",
+        "ids": [
+          "MSF-01 def-statistical-experiment",
+          "MSF-01 def-parametric-statistical-model",
+          "MSF-01 def-observational-equivalence",
+          "MSF-01 def-identifiability-of-an-estimand",
+          "MSF-01 thm-identifiability-iff-constant-on-equivalence-classes",
+          "MSF-02 def-statistic-and-estimator",
+          "MSF-04 def-dominated-statistical-experiment",
+          "MSF-04 def-likelihood-density",
+          "MSF-05 def-sufficient-statistic"
+        ],
+        "scope_note": "Draft only; MSF-05's countable factorization and standard-Borel proof scopes must not be conflated."
+      },
+      {
+        "category": "3",
+        "ids": [
+          "BCS-01 Bayesian model/prior/posterior interfaces",
+          "BCS-02 posterior propriety and dominated Bayes formula",
+          "BCS-13 through BCS-17 computational inference pairs",
+          "BCS-18 IID Monte Carlo integration",
+          "BCS-21 MH",
+          "BCS-27 SMC",
+          "BCS-38 numerical/statistical error"
+        ],
+        "scope_note": "Working scaffold read-only and unpublished; interfaces may change during author reconciliation."
+      }
+    ]
+  }
+}
