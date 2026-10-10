@@ -9,9 +9,8 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 // every exhaustive count and fatal-defect row mechanically.  The reporter can
 // therefore be concise without gaining the power to omit or invent a defect.
 
-import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { existsSync, readdirSync, readFileSync, writeFileSync, statSync, mkdirSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync, lstatSync, mkdirSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
@@ -19,6 +18,7 @@ import { resolveLineup } from './models.mjs';
 import { TERMINAL_REJUDGE_ROUNDS } from './step7-terminal-resolution.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
 import { activeOwnershipRows } from '../defect-ledger-ownership.mjs';
+import { protectedEntryHash } from '../step9-lib.mjs';
 
 const LEDGER_TOOL = fileURLToPath(new URL('./defect-ledger.mjs', import.meta.url));
 
@@ -303,13 +303,15 @@ function files(dir = root, out = []) {
     if (!rel || ignored.has(topLevel)
       || topLevel === '.physics-autopilot' || topLevel.startsWith('.physics-autopilot-')) continue;
     if (allowed.has(rel) || rel.startsWith(dispatchPrefix)) continue;
-    const stat = statSync(full);
-    if (stat.isDirectory()) files(full, out); else if (stat.isFile()) out.push(rel);
+    // Seal link identity, including dangling links; never traverse aliases.
+    const stat = lstatSync(full);
+    if (stat.isDirectory()) files(full, out);
+    else if (stat.isFile() || stat.isSymbolicLink()) out.push(rel);
   }
   return out;
 }
 const tree = () => Object.fromEntries(files().sort().map((rel) => [rel,
-  createHash('sha256').update(readFileSync(join(root, rel))).digest('hex')]));
+  protectedEntryHash(join(root, rel))]));
 
 if (command === 'snapshot') {
   writeFileSync(integrityPath, `${JSON.stringify({ version: 1, run, protected_tree: tree() }, null, 2)}\n`);

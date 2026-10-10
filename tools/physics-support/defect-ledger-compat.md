@@ -49,6 +49,16 @@ Counts and grouped statistics still include every recorded fatal row, including
 outside-scope active deferred rows; separate active/history counts clarify the
 current state. No source row or substantive disposition is rewritten.
 
+The standalone report snapshot follows the canonical physical-entry policy:
+`lstat` distinguishes real directories from links, and shared
+`protectedEntryHash` seals regular file bytes with a `file\0` prefix or literal
+symlink target bytes with a `symlink\0` prefix. Dangling cached links are sealed
+without resolving them. Directory aliases, cycles and external targets,
+including the linked tools tree, are never traversed. Link target changes,
+link/file substitutions and physical-file changes still fail integrity checks.
+Existing mutable-output and runtime exclusions remain unchanged. This does not
+alter readiness, caches or links; a new native snapshot records the policy.
+
 This compatibility change does not append corrections, alter decisions, rewrite
 original rows, certify content or charge a mathematical repair round. Validate
 the actual owning-run ledger after its metadata corrections and ownership
@@ -66,4 +76,5 @@ substantive fields or invalid ownership links:
 ```bash
 node --test tools/physics-support/defect-ledger-compat.test.mjs
 node --test tools/physics-support/step9-report-history.test.mjs
+node --test tools/physics-support/step9-report-tree.test.mjs
 ```
