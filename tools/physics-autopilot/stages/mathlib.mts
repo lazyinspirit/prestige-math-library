@@ -27,6 +27,7 @@ import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
 import { loadStep3 } from '../../physics-support/frontier-snapshot.mjs';
+import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
 import { step1Decision } from '../../physics-support/step1-decisions.mjs';
 import { dependencyLevels, orderedItems } from '../../physics-support/item-dependency-levels.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
@@ -68,19 +69,9 @@ export function batches(ctx: any): string[] {
     .sort((a: any, b: any) => Number(a) - Number(b));
 }
 
-/** Direct prerequisite batches induced by in-run page requirements. */
+/** Current prerequisite batches from page and actual logical item requirements. */
 function batchDependencies(ctx: any, unit: string): string[] {
-  const snapshot = loadStep3(ctx.repo, ctx.run);
-  const batchForPage = new Map<string, string>();
-  for (const page of snapshot.pages) batchForPage.set(page.id, String(page.batch));
-  const out = new Set<string>();
-  for (const page of snapshot.pages.filter((row: any) => String(row.batch) === String(unit))) {
-    for (const requirement of page.requires ?? []) {
-      const dependency = batchForPage.get(requirement);
-      if (dependency && dependency !== String(unit)) out.add(dependency);
-    }
-  }
-  return [...out].sort((a, b) => Number(a) - Number(b));
+  return prerequisiteBatches(ctx.repo, ctx.run, unit);
 }
 
 /** A scaffold supplier is releasable only after its populated manifest,
@@ -300,6 +291,10 @@ const policyItemGate = (ctx) => gate('content-policy-items', ['node', 'tools/phy
 });
 
 const planGate = (ctx: any) => frontierItemGate(ctx, 'validate-plan', 'validate-plan');
+const batchLevelsGate = (ctx: any) => ({
+  ...gate('batch-dependency-levels', ['node', 'tools/physics-support/batch-dependency-levels.mjs', 'check', '--run', ctx.run]),
+  ownerReviewInputs: [`research/${ctx.run}-batch-dependency-levels.json`],
+});
 
 /** The Step 1 drift review's teeth. The review is the `drift` unit of stage 1;
  *  this is what makes its report load-bearing rather than decorative. Fails on
@@ -1063,7 +1058,8 @@ export const stages = [
       role: 'tool', label: 'drift-apply', job: 'bookkeeping-mechanical', covers: ['all'],
       argv: ['node', 'tools/physics-support/drift-apply.mjs', '--run', ctx.run], timeout: 600,
     }],
-    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate(ctx)],
+    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate(ctx),
+      batchLevelsGate(ctx)],
     onHold: holdStep1,
   },
   {
@@ -1087,7 +1083,15 @@ export const stages = [
     pattern: /^beta-(?:beta-)?batch-\d+\.result\.json$/,
     labelFor: (u) => `batch-${u}`,
     concurrency: MAX_RUN_BATCHES,
-    plan: (ctx, pending) => pending.map((u: any) => ({
+    onProgress: ({ ctx, executor, stage }: any) => {
+      if (!ctx.doctor && !executor.inflight.size && !executor.adoptedUnits(stage).size)
+        writeBatchDependencyLevels(ctx.repo, ctx.run);
+    },
+    plan: (ctx, pending) => {
+      const levels = ctx.doctor ? null : writeBatchDependencyLevels(ctx.repo, ctx.run);
+      const levelByBatch = new Map(levels?.batches.map(row => [row.batch, row.dependency_level]) ?? []);
+      return [...pending].sort((a, b) => (levelByBatch.get(a) ?? 0) - (levelByBatch.get(b) ?? 0))
+        .map((u: any) => ({
       role: 'beta',
       label: `batch-${u}`,
       job: 'scaffolding',
@@ -1095,8 +1099,10 @@ export const stages = [
       brief: 'briefs/beta-scaffold.md',
       task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
       timeout: 14400,
-    })),
+    }));
+    },
     gates: (ctx) => [
+      batchLevelsGate(ctx),
       gate('step1-readiness', ['node', 'tools/physics-support/step1-decisions.mjs', 'check', '--run', ctx.run]),
       gate('item-dependency-levels', ['node', 'tools/physics-support/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       gate('step1-dependency-ledger', ['node', 'tools/physics-support/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run, '--require-reviewed']),

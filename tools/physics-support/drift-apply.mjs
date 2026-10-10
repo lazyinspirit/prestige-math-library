@@ -242,6 +242,7 @@ const step = (label, args) => {
 const ledgerArgs = ['tools/physics-support/manifest-integrity.mjs', '--run', run, '--write-ledger', '--force'];
 if (allowInRunDependencies) ledgerArgs.push('--allow-in-run-dependencies');
 step('ledger', ledgerArgs);
+step('batch-levels', ['tools/physics-support/batch-dependency-levels.mjs', 'write', '--run', run]);
 step('tasks', ['tools/physics-support/run-tasks.mjs', '--run', run, '--force']);
 
 // covers.json maps a dispatch label to the units it covers; a new batch with no

@@ -35,9 +35,16 @@ a proof strategy or successful process alone is not a completed carrier.
 Readiness records bind the finished carriers. Supplier batches release their
 consumers only after nonempty authored inventories and current readiness exist.
 
-Item `dependency_level` is recorded and independently checked in Step 1: zero
+Batch levels are computed mechanically during planning, recomputed after drift
+materialization and before construction dispatches, and recorded in
+`research/RUN-batch-dependency-levels.json`. The engine checks the current graph,
+including declared carrier dependencies, and waits for completed, current supplier
+content before releasing consumers. This adds no agent stage.
+
+Item `dependency_level` is determined before writing item/page carriers, recorded
+and independently checked in Step 1: zero
 without in-run logical suppliers, otherwise one plus the maximum supplier level.
-External suppliers remain context. No new level-recording system or rebatching
+External suppliers remain context. No rebatching or additional agent stage
 is introduced. Logical dependencies must agree between authored bodies and
 manifests; aliases resolve to canonical suppliers. Definition discharges and
 nonlogical links are hash-bound context, not extra logical scheduling edges.
