@@ -1,0 +1,2449 @@
+{
+  "version": 1,
+  "scope": [
+    "def-em-potential-gauge-and-field-conventions",
+    "lem-em-gauge-wave-reachability",
+    "lem-em-retarded-wave-kernel",
+    "lem-em-smooth-forced-maxwell-cauchy-system",
+    "lem-em-point-retarded-potential-and-fields",
+    "thm-em-retarded-point-distributional-maxwell",
+    "ex-em-causal-wave-kernel-prerequisites-explicit-checks"
+  ],
+  "contracts": {
+    "def-em-potential-gauge-and-field-conventions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "the Definition quantifies over an arbitrary open subset; no nonemptiness or emptiness of an object class is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the case k=0 is the explicit C^0 = continuous convention, and c>0 keeps the factor c^{-2} defined, as stated in the Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "k=1 is included: E, B and G are then C^0 by the regularity clause of the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the identically zero potential pair is an instance and yields E=B=0 and G=0 by the Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "closed time slabs are handled by the extension-sense clause of the Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "a definition performs no selection and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Definition contains no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the Definition contains no biconditional claim."
+        }
+      ]
+    },
+    "lem-em-gauge-wave-reachability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-em-potential-gauge-and-field-conventions",
+          "source_section": "Definition",
+          "quote": "Let $c>0$ and let $\\Omega\\subseteq\\mathbb R^3\\times\\mathbb R$ be open.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-laplacian-of-a-c2-function",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $f:U\\to\\mathbb R$ be $C^2$ in the sense of [[def-ck-and-multi-index-notation-in-several-variables]].",
+          "uses": [
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-em-wave-cauchy-kirchhoff",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), used through the cited published suppliers ([[def-countable-choice]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-curl-of-a-gradient-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $\\phi:U\\to\\mathbb R$ be $C^2$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F,G:U\\to\\mathbb R^n$ be $C^1$, let $f:U\\to\\mathbb R$ be $C^1$ and let $a,b\\in\\mathbb R$.",
+          "uses": [
+            "4.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F=(F_0,\\ldots,F_{n-1}):U\\to\\mathbb R^n$ be $C^1$ in ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.2",
+            "4.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.2",
+            "4.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.2",
+            "4.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "Since $A$ and $\\varphi$ are of class $C^\\infty$ on $Q$ in the extension sense, the field $\\operatorname{div}A$ and the partial derivative $\\partial_t\\varphi$ are of class $C^\\infty$ on $Q$ in the extension sense: they are finite sums of first partial derivatives of $C^\\infty$ functions, and first partial derivatives of $C^\\infty$ functions are again $C^\\infty$. Hence $G=\\operatorname{div}A+c^{-2}\\partial_t\\varphi$ is of class $C^\\infty$ on $Q$ in the extension sense.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "Apply [F3] with $a=b=0$ and $h=G$, which is legitimate because $G$ is of class $C^\\infty$ on the slab in the extension sense; the assumption [A1] is carried by that theorem. This supplies a function $\\chi$ of class $C^\\infty$ on $Q$ in the extension sense with $W\\chi=G$ on $\\mathbb R^3\\times(t_0,T)$, $\\chi(\\cdot,t_0)=0$ and $\\partial_t\\chi(\\cdot,t_0)=0$, proving (a).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "Since $\\chi$ is of class $C^\\infty$ in the extension sense, its partial derivatives $\\partial_t\\chi$ and $\\nabla\\chi$ are of class $C^\\infty$ in the extension sense; adding these to the $C^\\infty$ pair members, $T_\\chi(\\varphi,A)=(\\varphi-\\partial_t\\chi,A+\\nabla\\chi)$ is a potential pair of class $C^\\infty$ on $Q$ in the extension sense.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F8"
+          ]
+        },
+        {
+          "id": "d4.1",
+          "claim": "The magnetic field is unchanged: $\\operatorname{curl}(A+\\nabla\\chi)=\\operatorname{curl}A+\\operatorname{curl}\\nabla\\chi=\\operatorname{curl}A$, because $\\operatorname{curl}$ is linear and $\\operatorname{curl}\\nabla\\chi=0$ for the $C^\\infty$, hence $C^2$, function $\\chi$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "d4.2",
+          "claim": "The electric field is unchanged: expanding with the linearity of $\\nabla$ and $\\partial_t$, $-\\nabla(\\varphi-\\partial_t\\chi)-\\partial_t(A+\\nabla\\chi)=-\\nabla\\varphi-\\partial_tA+\\bigl(\\nabla\\partial_t\\chi-\\partial_t\\nabla\\chi\\bigr)$, and the bracket vanishes because each of its coordinates is a difference $\\partial_i\\partial_t\\chi-\\partial_t\\partial_i\\chi=0$ of mixed second partials of the $C^2$ function $\\chi$.",
+          "step": "4.2",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "d4.3",
+          "claim": "The Lorenz divergence of the transformed pair vanishes: $\\operatorname{div}(A+\\nabla\\chi)+c^{-2}\\partial_t(\\varphi-\\partial_t\\chi)=\\operatorname{div}A+\\operatorname{div}\\nabla\\chi+c^{-2}\\partial_t\\varphi-c^{-2}\\partial_t^2\\chi=G+\\Delta\\chi-c^{-2}\\partial_t^2\\chi=G-W\\chi=0$ on $\\mathbb R^3\\times(t_0,T)$, using $\\Delta\\chi=\\operatorname{div}\\nabla\\chi$ and the linearity of $\\operatorname{div}$ and $\\partial_t$.",
+          "step": "4.3",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F2",
+            "F6",
+            "F8"
+          ]
+        },
+        {
+          "id": "d5.1",
+          "claim": "For (d), if $\\chi_1,\\chi_2$ are $C^2$ on $Q$ in the extension sense, then each second partial derivative is additive, $\\partial_i\\partial_j(\\chi_1-\\chi_2)=\\partial_i\\partial_j\\chi_1-\\partial_i\\partial_j\\chi_2$, by applying the one-variable linearity of differentiation along coordinate lines twice; summing over $i=j$ and applying the definition of $W$ gives $W(\\chi_1-\\chi_2)=W\\chi_1-W\\chi_2=G-G=0$ on $\\mathbb R^3\\times(t_0,T)$. ∎",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the Statement requires t0<T, so the slab is nonempty; step 1.1 computes G on it and no step relies on an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "G=0 is covered: step 2.1 with h=0 gives chi=0, and steps 4.1-4.3 hold trivially."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "existence of one gauge function is step 2.1; uniqueness of differences is clause (d) in step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "a pair already in Lorenz gauge is the G=0 instance of step 2.1; no nondegeneracy is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the slab endpoints are handled by the extension sense and by the zero Cauchy data at t0 in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC_omega is declared in the Statement and used only through the wave theorem in step 2.1; [A1] records it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the lemma is a conjunction of one-directional existence and invariance claims, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the lemma is a conjunction of one-directional existence and invariance claims, not a biconditional."
+        }
+      ]
+    },
+    "lem-em-retarded-wave-kernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open, with $n\\ge1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-test-function-topology",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fixed-support-test-function-frechet-space",
+          "source_section": "Definition",
+          "quote": "For an integer $n\\ge1$, a compact $K\\subseteq\\Omega$, and an open set $\\Omega\\subseteq\\mathbb R^n$, put $\\math",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-distribution",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, a **distribution** is a continuous complex-linear map $u:\\mathcal D(\\Om",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-support-of-a-distribution",
+          "source_section": "Definition",
+          "quote": "For $u\\in\\mathcal D'(\\Omega)$, say $u$ **vanishes on** an open $V\\subseteq\\Omega$ if its restriction to $V$ is zero.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-polar-surface-measure-on-the-unit-sphere",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$.",
+          "uses": [
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to \\mathbb C$ belong to $L^1(\\mu \\times \\nu)$.",
+          "uses": [
+            "2.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $\\varphi$ be $C^1$ and injective on a neighborhood of $[a,b]$, and suppose $\\varphi'(x)\\ne0$ there.",
+          "uses": [
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$.",
+          "uses": [
+            "2.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.",
+          "uses": [
+            "2.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of $E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]).",
+          "uses": [
+            "2.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\\to f$ almost everywhere and $|f_n|\\l",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then $$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions $n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it ([[lem-metrics-on-rn]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $c\\in\\mathbb{R}^n$, and $r>0$, the Euclidean closed ball $\\overline B_2(c,r)$ and Euclidean sphere $S_2(c,r)$ are compact.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]], [[def-metric-space]]) and let $f :",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi \\in C_c^\\infty(\\mathbb{R}^n)$ satisfy $$ \\int_{\\mathbb{R}^n} \\varphi(x)\\,dx = 1.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-l-one-approximate-identity-on-rn",
+          "source_section": "Definition",
+          "quote": "An **$L^1$ approximate identity** on $\\mathbb{R}^n$ is a family $(K_\\varepsilon)_{\\varepsilon>0}$ of functions",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "prop-mollifier-families-are-l-one-approximate-identities",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $(K_\\varepsilon)_{\\varepsilon>0}$ be an $L^1$ approximate identity on $\\mathbb{R}^n$, and let $f : \\mathbb{R}^n \\to \\mathbb{C}$ be bounded and continuous.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "thm-em-wave-cauchy-kirchhoff",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), used through the cited published suppliers ([[def-countable-choice]]). Let $c>0$, $t_0\\in\\mathbb R$, $T>t_0$, let $a,b\\in C^\\infty(\\mathbb R^3)$ and let $h\\in C^\\infty(\\mathbb R^3\\times[t_0,T])$ in the extension sense that $h$ is the restriction of a $C^\\infty$ function on $\\mathbb R^3\\times J$ for some open interval $J\\supset[t_0,T]$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Write $W:=c^{-2}\\partial_t^2-\\Delta$, so that $c^2W=\\Box_c$ is the wave operator of speed $c$ ([[def-laplacian-of-a-c2-function]], [[def-wave-equation-cauchy-data-and-wave-speed]]). For $\\varphi\\in C^\\infty(\\mathbb R^3)$ and $s\\ge0$ let $H_\\varphi(x,s):=s\\,M_{cs}\\varphi(x)$, where $M_r\\varphi(x)=\\frac{1}{4\\pi}\\int_{S^2}\\varphi(x+rn)\\,d\\Omega(n)$ is the spherical mean of [[lem-em-spherical-mean-wave-identity]]. Define, with $s=t-t_0$, $$u(x,t):=\\partial_sH_a(x,s)+H_b(x,s)+c^2\\int_{t_0}^{t}H_{h(\\cdot,v)}(x,t-v)\\,dv,\\qquad (x,t)\\in\\mathbb R^3\\times[t_0,T],$$ where $h(\\cdot,v)$ denotes the map $x\\mapsto h(x,v)$ and $\\partial_sH_a$ is the partial derivative of $H_a$ in its second argument, evaluated at $s=t-t_0$. Then:\n\n(a) $u$ is of class $C^\\infty$ on $\\mathbb R^3\\times[t_0,T]$ in the extension sense, $Wu=h$ on $\\mathbb R^3\\times(t_0,T)$ (indeed on the open neighbourhood of the closed time interval on which the extension of $h$ is defined), $u(\\cdot,t_0)=a$ and $\\partial_tu(\\cdot,t_0)=b$.\n\n(b) Uniqueness: every $v\\in C^2(\\mathbb R^3\\times[t_0,T])$ in the extension sense with $Wv=h$ on $\\mathbb R^3\\times(t_0,T)$, $v(\\cdot,t_0)=a$ and $\\partial_tv(\\cdot,t_0)=b$ equals $u$.\n\n(c) Domain of dependence: let $\\tilde a,\\tilde b\\in C^\\infty(\\mathbb R^3)$, $\\tilde h\\in C^\\infty(\\mathbb R^3\\times[t_0,T])$ and let $\\tilde u$ be the corresponding solution. If $\\tilde a=a$ and $\\tilde b=b$ on the closed ball $\\overline B_{c(t_*-t_0)}(x_*)$ and $\\tilde h=h$ on the closed backward cone $K(x_*,t_*):=\\{(y,v)\\in\\mathbb R^3\\times[t_0,t_*]:|y-x_*|\\le c(t_*-v)\\}$ ([[def-forward-and-backward-wave-cones-domain-of-dependence-and-influence]]), then $\\tilde u(x_*,t_*)=u(x_*,t_*)$ for every $x_*\\in\\mathbb R^3$ and $t_*\\in[t_0,T]$.\n\n(d) Compact support: if $a$ vanishes off a compact $K_a\\subset\\mathbb R^3$, $b$ vanishes off a compact $K_b$, and $h(\\cdot,v)$ vanishes off a fixed compact $K_h$ for every $v\\in[t_0,T]$, then for every $t\\in[t_0,T]$ the function $u(\\cdot,t)$ has compact spatial support: if $K_a\\cup K_b\\cup K_h\\subseteq\\overline B_\\rho(0)$ for some $\\rho>0$ (which exists, [[thm-heine-borel-rn]]), then $u(x,t)=0$ whenever $|x|>\\rho+c(t-t_0)$.\n\nNo boundary condition on a finite spatial domain, no finite-total-energy hypothesis, and no decay of $a,b,h$ at infinity is assumed or asserted.",
+          "uses": [
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "def-regular-distribution-from-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, write $f\\in L^1_{\\mathrm{loc}}(\\Omega)$ when $f:\\Omega\\to\\mathbb C$ is ",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alp",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "thm-distributional-differentiation-is-continuous-and-commutes",
+          "source_section": "Statement",
+          "quote": "Distributional derivatives satisfy $\\partial^\\alpha\\partial^\\beta u=\\partial^{\\alpha+\\beta}u$ and are continuo",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "def-weak-and-strong-topologies-on-distributions",
+          "source_section": "Definition",
+          "quote": "On the distribution space of [[def-distribution]], the **weak distribution topology** is generated by the semi",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F23",
+          "source": "def-dirac-delta-and-its-derivatives",
+          "source_section": "Definition",
+          "quote": "For $a\\in\\Omega$, the **Dirac distribution at $a$** is the complex-linear functional $\\delta_a(\\varphi)=\\varph",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F24",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F25",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\\int (\\al",
+          "uses": [
+            "2.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "1.1 If $\\psi=0$, the defining integral is zero; otherwise fix $\\psi\\in\\mathcal D$ with nonempty support. The support of $\\psi$ is compact in $Q$, hence closed and bounded; choose $R>0$ with $\\operator",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F10",
+            "F13",
+            "F14",
+            "F15",
+            "A1"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "1.2 Fix $h\\in C_c^\\infty(Q)$ and $(x,t)\\in Q$. Since $\\operatorname{supp}h$ is compact, there is $\\rho>0$ with $\\operatorname{supp}h\\subseteq\\overline B_\\rho(0)\\times[-\\rho,\\rho]$, and $\\|h\\|_\\infty<\\",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F10",
+            "F13",
+            "F14",
+            "F15"
+          ]
+        },
+        {
+          "id": "d1.3",
+          "claim": "1.3 Fix $\\psi\\in\\mathcal D$ and put $F:=K\\circledast\\psi$, that is, $F(y,s)=\\frac{1}{4\\pi}\\int\\psi(y+z,s+|z|/c)|z|^{-1}dz$. Choose $M>0$ with $\\operatorname{supp}\\psi\\subseteq\\overline B_M(0)\\times[-M",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "2.1 Fix $(y_0,t_0)\\in C$ and a neighbourhood $U$ of it. Since $C\\subseteq Q$ is closed, take an open ball $W$ with $(y_0,t_0)\\in W\\subseteq U$. If $y_0\\ne0$: choose $0\\le\\psi\\le1$ in $\\mathcal D(Q)$ w",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F11",
+            "F12",
+            "F13",
+            "F24",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d2.2",
+          "claim": "2.2 With $F=K\\circledast\\psi$ as in step 1.3, $F$ is continuous at the origin and $F(0,0)=\\langle K,\\psi\\rangle$. Indeed, for a sequence $(y_n,s_n)\\to(0,0)$ with $|y_n|\\le M$ eventually, every nonzero",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F9",
+            "F13",
+            "F14",
+            "1.3"
+          ]
+        },
+        {
+          "id": "d2.3",
+          "claim": "2.3 Let $\\psi\\in\\mathcal D$ satisfy $\\operatorname{supp}\\psi\\cap C=\\varnothing$. For every $y\\ne0$ the point $(y,|y|/c)$ lies in $C$, so $\\psi(y,|y|/c)=0$; the exceptional set $\\{0\\}$ has Lebesgue mea",
+          "step": "2.3",
+          "inputs": [
+            "F10",
+            "F11",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d2.4",
+          "claim": "2.4 Let $t_0$ lie below and $T$ above the time support of $h$, so that $h$ vanishes on $\\mathbb R^3\\times(-\\infty,t_0]$ and on $\\mathbb R^3\\times[T,\\infty)$ and its restriction to $\\mathbb R^3\\times[t",
+          "step": "2.4",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F13",
+            "F19",
+            "F25",
+            "1.2"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "3.1 Since every point $(x_*,t_*)\\in Q$ lies in the interior of a slab $\\mathbb R^3\\times[t_0,T]$ with $t_0$ below and $T$ above the time support of $h$, step 2.4 shows that $K*h$ agrees with a $C^\\inf",
+          "step": "3.1",
+          "inputs": [
+            "F19",
+            "2.4"
+          ]
+        },
+        {
+          "id": "d3.2",
+          "claim": "3.2 The cone $C=\\{(y,t):t=|y|/c\\}$ is closed in $Q$, since $|y|$ is continuous, so $Q\\setminus C$ is open, and every test supported there has $\\operatorname{supp}\\psi\\cap C=\\varnothing$ and pairs to z",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "2.3",
+            "2.1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d4.1",
+          "claim": "4.1 Let $\\psi\\in\\mathcal D(Q)$. By step 3.1, $K*h$ is continuous, hence locally integrable, so $\\langle K*h,\\psi\\rangle$ is the regular-functional pairing $\\int_{(x,t)}(K*h)\\psi$ of the formula in ste",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "F8",
+            "F13",
+            "F20",
+            "F25",
+            "3.1",
+            "1.2"
+          ]
+        },
+        {
+          "id": "d5.1",
+          "claim": "5.1 Let $\\eta\\in C_c^\\infty(Q)$ satisfy $\\eta\\ge0$, $\\int\\eta=1$ and $\\operatorname{supp}\\eta\\subseteq\\overline B_1(0)$: start from [F24] with compact set $\\{0\\}$ inside $B_1(0)$, giving a cutoff equa",
+          "step": "5.1",
+          "inputs": [
+            "F24",
+            "A1",
+            "F16",
+            "F17",
+            "F18",
+            "F20",
+            "F21",
+            "F22",
+            "F23",
+            "3.1",
+            "4.1",
+            "1.3",
+            "2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the zero test gives pairing zero in step 1.1, and the empty support case is included in the support argument of step 3.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "c>0 is required by the Statement; the zero source h=0 gives K*h=0 with W(K*h)=0 in steps 2.4 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the single fundamental solution K is the subject of all clauses; step 5.1 proves WK=delta with a unit-mass bump."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the cone degenerates to the single apex at the origin and still has full support content there by step 2.1; no smoothness of K on C is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "closed time intervals enter through the wave theorem slab in step 2.4; the epsilon limits are handled in step 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC_omega is declared in the Statement and used through the polar formula and change-of-variables items in steps 1.1-1.3, 2.4 and 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "no biconditional claim is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no biconditional claim is made."
+        }
+      ]
+    },
+    "lem-em-smooth-forced-maxwell-cauchy-system": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-em-wave-cauchy-kirchhoff",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), used through the cited published suppliers ([[def-countable-choice]]). Let $c>0$, $t_0\\in\\mathbb R$, $T>t_0$, let $a,b\\in C^\\infty(\\mathbb R^3)$ and let $h\\in C^\\infty(\\mathbb R^3\\times[t_0,T])$ in the extension sense that $h$ is the restriction of a $C^\\infty$ function on $\\mathbb R^3\\times J$ for some open interval $J\\supset[t_0,T]$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Write $W:=c^{-2}\\partial_t^2-\\Delta$, so that $c^2W=\\Box_c$ is the wave operator of speed $c$ ([[def-laplacian-of-a-c2-function]], [[def-wave-equation-cauchy-data-and-wave-speed]]). For $\\varphi\\in C^\\infty(\\mathbb R^3)$ and $s\\ge0$ let $H_\\varphi(x,s):=s\\,M_{cs}\\varphi(x)$, where $M_r\\varphi(x)=\\frac{1}{4\\pi}\\int_{S^2}\\varphi(x+rn)\\,d\\Omega(n)$ is the spherical mean of [[lem-em-spherical-mean-wave-identity]]. Define, with $s=t-t_0$, $$u(x,t):=\\partial_sH_a(x,s)+H_b(x,s)+c^2\\int_{t_0}^{t}H_{h(\\cdot,v)}(x,t-v)\\,dv,\\qquad (x,t)\\in\\mathbb R^3\\times[t_0,T],$$ where $h(\\cdot,v)$ denotes the map $x\\mapsto h(x,v)$ and $\\partial_sH_a$ is the partial derivative of $H_a$ in its second argument, evaluated at $s=t-t_0$. Then:\n\n(a) $u$ is of class $C^\\infty$ on $\\mathbb R^3\\times[t_0,T]$ in the extension sense, $Wu=h$ on $\\mathbb R^3\\times(t_0,T)$ (indeed on the open neighbourhood of the closed time interval on which the extension of $h$ is defined), $u(\\cdot,t_0)=a$ and $\\partial_tu(\\cdot,t_0)=b$.\n\n(b) Uniqueness: every $v\\in C^2(\\mathbb R^3\\times[t_0,T])$ in the extension sense with $Wv=h$ on $\\mathbb R^3\\times(t_0,T)$, $v(\\cdot,t_0)=a$ and $\\partial_tv(\\cdot,t_0)=b$ equals $u$.\n\n(c) Domain of dependence: let $\\tilde a,\\tilde b\\in C^\\infty(\\mathbb R^3)$, $\\tilde h\\in C^\\infty(\\mathbb R^3\\times[t_0,T])$ and let $\\tilde u$ be the corresponding solution. If $\\tilde a=a$ and $\\tilde b=b$ on the closed ball $\\overline B_{c(t_*-t_0)}(x_*)$ and $\\tilde h=h$ on the closed backward cone $K(x_*,t_*):=\\{(y,v)\\in\\mathbb R^3\\times[t_0,t_*]:|y-x_*|\\le c(t_*-v)\\}$ ([[def-forward-and-backward-wave-cones-domain-of-dependence-and-influence]]), then $\\tilde u(x_*,t_*)=u(x_*,t_*)$ for every $x_*\\in\\mathbb R^3$ and $t_*\\in[t_0,T]$.\n\n(d) Compact support: if $a$ vanishes off a compact $K_a\\subset\\mathbb R^3$, $b$ vanishes off a compact $K_b$, and $h(\\cdot,v)$ vanishes off a fixed compact $K_h$ for every $v\\in[t_0,T]$, then for every $t\\in[t_0,T]$ the function $u(\\cdot,t)$ has compact spatial support: if $K_a\\cup K_b\\cup K_h\\subseteq\\overline B_\\rho(0)$ for some $\\rho>0$ (which exists, [[thm-heine-borel-rn]]), then $u(x,t)=0$ whenever $|x|>\\rho+c(t-t_0)$.\n\nNo boundary condition on a finite spatial domain, no finite-total-energy hypothesis, and no decay of $a,b,h$ at infinity is assumed or asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-the-curl-of-a-gradient-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $\\phi:U\\to\\mathbb R$ be $C^2$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-divergence-of-a-curl-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $F:U\\to\\mathbb R^3$ be $C^2$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-the-curl-of-a-curl-of-a-c2-field",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $F:U\\to\\mathbb R^3$ be $C^2$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F,G:U\\to\\mathbb R^n$ be $C^1$, let $f:U\\to\\mathbb R$ be $C^1$ and let $a,b\\in\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totall",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F=(F_0,\\ldots,F_{n-1}):U\\to\\mathbb R^n$ be $C^1$ in ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-laplacian-of-a-c2-function",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $f:U\\to\\mathbb R$ be $C^2$ in the sense of [[def-ck-and-multi-index-notation-in-several-variables]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-forward-and-backward-wave-cones-domain-of-dependence-and-influence",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $c>0$ and let $x_0\\in\\mathbb R^n$, $t_0\\ge0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ that is interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "1.1 Existence. Define $E$ componentwise by [F1] on the slab with data $E(\\cdot,t_0)=E_0$, $\\partial_tE(\\cdot,t_0)=c^2\\operatorname{curl}B_0-J(\\cdot,t_0)/\\varepsilon$ and source $-\\nabla\\rho/\\varepsilo",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "F9",
+            "A1"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "2.1 The first-order equations. Put $R:=E_t-c^2\\operatorname{curl}B+J/\\varepsilon$ and $Q:=B_t+\\operatorname{curl}E$. Since $\\partial_t$ commutes with $W$ on $C^\\infty$ functions and $\\operatorname{cur",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "3.1 The Gauss laws. Put $D:=\\operatorname{div}E-\\rho/\\varepsilon$. Since $W$ commutes with $\\operatorname{div}$ on extension-sense $C^3$ fields, $WD=\\operatorname{div}(WE)-(c^{-2}\\rho_{tt}-\\Delta\\rho)",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F7",
+            "2.1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d4.1",
+          "claim": "4.1 Uniqueness and the forced wave problems. Let $(\\tilde E,\\tilde B)$ be any second $C^\\infty$ solution of the first-order system on the slab in the extension sense with the same data. Taking diverge",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F11",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "d5.1",
+          "claim": "5.1 Domain of dependence. Let $(\\tilde\\rho,\\tilde J,\\tilde E_0,\\tilde B_0)$ be second data as in the Statement, with corresponding solution $(\\tilde E,\\tilde B)$ furnished by step 1.1, and fix $x_*\\in",
+          "step": "5.1",
+          "inputs": [
+            "F10",
+            "F1",
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the zero data E0=B0=0, rho=J=0 give the zero solution through steps 1.1 and 4.1; the empty spatial domain is not used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "zero sources and zero constraint defects are propagated in steps 3.1; the cone clause of step 5.1 is trivial for equal data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "existence and uniqueness of one solution is clause (a), proved in steps 1.1 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the vacuum case rho=J=0, E0=B0=0 is an instance of steps 1.1 and 5.1 and no nondegeneracy is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the initial time t0 enters through the prescribed data and their time derivatives in steps 1.1 and 2.1, and t*>t0 in step 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC_omega is declared and used through the wave theorem in steps 1.1, 2.1, 3.1, 4.1 and 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the lemma consists of existence, uniqueness and propagation claims, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the lemma consists of existence, uniqueness and propagation claims, not a biconditional."
+        }
+      ]
+    },
+    "lem-em-point-retarded-potential-and-fields": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-em-point-current-continuity",
+          "source_section": "Statement",
+          "quote": "**Proper-graph branch.** Let $I\\subseteq\\mathbb R$ be an open interval, let $z:I\\to\\mathbb R^3$ be a $C^1$ tra",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-em-global-retarded-root",
+          "source_section": "Statement",
+          "quote": "Let $c>0$, $0\\le v_*<c$, and $z:\\mathbb R\\to\\mathbb R^3$ be $C^1$ with $|z'(s)|\\le v_*$ for all $s$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-em-retarded-wave-kernel",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), used through the sphere and polar integrations be",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-em-potential-gauge-and-field-conventions",
+          "source_section": "Definition",
+          "quote": "Let $c>0$ and let $\\Omega\\subseteq\\mathbb R^3\\times\\mathbb R$ be open.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-regular-distribution-from-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, write $f\\in L^1_{\\mathrm{loc}}(\\Omega)$ when $f:\\Omega\\to\\mathbb C$ is ",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-distribution",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, a **distribution** is a continuous complex-linear map $u:\\mathcal D(\\Om",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-test-function-topology",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to \\mathbb C$ belong to $L^1(\\mu \\times \\nu)$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "source_section": "Statement",
+          "quote": "Let $m,n \\ge 1$. Under the identification $$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$ one has $$\\mathc",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\\int (\\al",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then $$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions $n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it ([[lem-metrics-on-rn]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]], [[def-metric-space]]) and let $f :",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$.",
+          "uses": [
+            "1.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$.",
+          "uses": [
+            "1.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F=(F_0,\\ldots,F_{n-1}):U\\to\\mathbb R^n$ be $C^1$ in ",
+          "uses": [
+            "1.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]].",
+          "uses": [
+            "1.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to",
+          "uses": [
+            "1.3",
+            "1.4",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F,G:U\\to\\mathbb R^n$ be $C^1$, let $f:U\\to\\mathbb R$ be $C^1$ and let $a,b\\in\\mathbb R$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "Since $z$ is $C^3$, it is $C^1$, and $I:=\\mathbb R$ is open; the graph map $s\\mapsto(z(s),s)$ into $\\Omega=\\mathbb R^3\\times\\mathbb R$ is proper because a compact subset of $\\Omega$ has bounded time coordinate, so its inverse image in $\\mathbb R$ is closed and bounded. Hence [F1] applies with $q,\\varepsilon_0$ as given: the functionals $\\rho,J$ of the Statement are distributions on $\\Omega$ and $\\partial_t\\rho+\\operatorname{div}J=0$, which is (a).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F11"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "Finiteness and bounds for the history pairings. Fix $\\psi\\in\\mathcal D(\\Omega)$; by compactness of its support choose reals $M\\ge0$ and $t_0\\le t_1$ with $\\operatorname{supp}\\psi\\subseteq\\{(x,t):|x|\\le M,\\ t_0\\le t\\le t_1\\}$, and put $A_\\psi:=\\sup|\\psi|<\\infty$, $Z:=|z(0)|$, $S:=\\max\\{0,(M+Z-ct_0)/(c-v_*)\\}$, $H:=\\max\\{S,|t_1|\\}$, $L:=1+M+Z+v_*H$, $T:=\\max\\{0,t_1+S\\}$ and $M_Q:=T\\sigma(S^2)L^2/(8\\pi)$. If $g(s,w):=(z(s)+w,s+|w|/c)$ lies in $\\operatorname{supp}\\psi$, then $s\\le t_1$; and for $s\\le0$ the bound $|z(s)|\\le Z+v_*|s|$ gives $t_0\\le s+|w|/c\\le-(1-v_*/c)|s|+(M+Z)/c$, so $s\\ge-S$. Also $|w|\\le M+|z(s)|\\le M+Z+v_*H<L$. Therefore $\\bigl|\\langle\\Phi,\\psi\\rangle\\bigr|\\le\\frac{|q|}{\\varepsilon_0}\\int_{-S}^{t_1}\\frac{1}{4\\pi}\\int_{B_L}\\frac{A_\\psi}{|w|}\\,dw\\,ds\\le\\frac{|q|M_Q A_\\psi}{\\varepsilon_0}$, and componentwise $\\bigl|\\langle\\Upsilon_j,\\psi\\rangle\\bigr|\\le\\mu_0|q|v_*M_Q A_\\psi$. These bounds are fixed-support seminorms, so $\\Phi$ and the components of $\\Upsilon$ are distributions.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F6",
+            "F10",
+            "F11",
+            "A1"
+          ]
+        },
+        {
+          "id": "d1.3",
+          "claim": "The retarded substitution map. Put $U:=\\mathbb R\\times(\\mathbb R^3\\setminus\\{0\\})$, $V:=\\Omega\\setminus\\Gamma$ and $g(s,w):=(z(s)+w,\\,s+|w|/c)$. Then $V$ is open: $\\Gamma$ is closed, since a convergent sequence $(z(s_j),s_j)\\to(x,t)$ has $s_j\\to t$, hence $x=z(t)$ by continuity. The map $g:U\\to V$ is a bijection with inverse $(x,t)\\mapsto(s(x,t),x-z(s(x,t)))$: the root $s(x,t)$ of [F2] exists, satisfies $x-z(s)\\ne0$ exactly off the worldline, and $s(x,t)$ is $C^1$ there because $z$ is $C^3$; conversely no image point lies on $\\Gamma$, for $|w|=|z(t)-z(s)|\\le v_*|t-s|=v_*|w|/c$ is impossible for $w\\ne0$. The map is $C^1$ with derivative matrix (in the order $s,w_1,w_2,w_3$) whose last row is $(1,w/(c|w|))$ and whose first column is $(z'(s),1)$ with the identity in the remaining block; expanding along the last row gives $\\det Dg(s,w)=-1+z'(s)\\cdot w/(c|w|)=-\\kappa(s,w)$, so $|\\det Dg|=\\kappa$, and $\\kappa\\ge1-v_*/c>0$ by [F2]. If $g(s,w)=g(s',w')$ then $|s-s'|=||w'|-|w||/c\\le|z(s')-z(s)|/c\\le(v_*/c)|s-s'|$, hence $s=s'$ and $w=w'$. By [F9], for every nonnegative Borel $h$ on $V$ one has $\\int_Vh=\\int_Uh(g)\\kappa\\,ds\\,dw$, and for every $f\\in L^1(V)$, $\\int_Vf=\\int_Uf(g)\\kappa\\,ds\\,dw$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F9",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "d1.4",
+          "claim": "Retarded derivative identities. On $V$, with $s=s(x,t)$ the root of [F2]: $s_t=1/\\kappa$ and $\\nabla s=-n/(c\\kappa)$. Hence $r_t=n\\cdot(-z'(s)s_t)=-cN/\\kappa$ and $\\nabla r=n/\\kappa$; $R_t=-z'(s)s_t=-c\\beta/\\kappa$ and $\\partial_iR=e_i+\\beta n_i/\\kappa$; $\\beta_t=\\dot\\beta s_t=\\dot\\beta/\\kappa$ and $\\partial_i\\beta=\\dot\\beta\\,\\partial_is=-\\dot\\beta n_i/(c\\kappa)$. Since $\\kappa=1-N$ and $D=\\kappa r=r-R\\cdot\\beta$, the product rules with the bilinearity of the inner product give $D_t=r_t-R_t\\cdot\\beta-R\\cdot\\beta_t=(c(|\\beta|^2-N)-rd)/\\kappa$ and, componentwise, $\\partial_iD=\\partial_ir-(\\partial_iR)\\cdot\\beta-R\\cdot\\partial_i\\beta=n_i(1-|\\beta|^2+rd/c)/\\kappa-\\beta_i$, that is, $\\nabla D=\\bigl((1-|\\beta|^2+rd/c)/\\kappa\\bigr)n-\\beta$.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F2",
+            "F12",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "Scalar pairing identity. Insert the kernel identity [F3] into the definition of $\\Phi$: $\\langle\\Phi,\\psi\\rangle=\\frac{q}{4\\pi\\varepsilon_0}\\int_{\\mathbb R}\\int_{\\mathbb R^3}\\psi(g(s,w))|w|^{-1}\\,dw\\,ds$. The double integral is absolutely convergent by the cylinder estimate of step 1.2, so Fubini's theorem reorders it, and the substitution identity of step 1.3 for the $L^1$ function $\\psi/(\\kappa r)$ on $V$ (whose absolute integral is finite by the same cylinder estimate) turns it into $\\langle\\Phi,\\psi\\rangle=\\int_V\\frac{C\\psi(x,t)}{\\kappa(x,t)r(x,t)}\\,dx\\,dt$, since $r(g(s,w))=|w|$, $\\kappa(g(s,w))=\\kappa(s,w)$ and the Jacobian factor $\\kappa$ cancels $\\kappa^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "F3",
+            "F7",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "d2.2",
+          "claim": "Vector pairing identity. Componentwise, $\\langle\\Upsilon_j,\\psi\\rangle=\\frac{\\mu_0q}{4\\pi}\\int_{\\mathbb R}\\int_{\\mathbb R^3}z_j'(s)\\psi(g(s,w))|w|^{-1}\\,dw\\,ds$; the double integral is absolutely bounded by $\\mu_0|q|v_*$ times the scalar majorant of step 1.2, Fubini applies, and the substitution of step 1.3 gives $\\langle\\Upsilon_j,\\psi\\rangle=\\frac{\\mu_0qc}{4\\pi}\\int_V\\frac{\\beta_j\\psi}{\\kappa r}\\,dx\\,dt$, where $\\beta_j(s)=\\beta_j(g(s,w))$ and $z_j'=c\\beta_j$. Since $\\frac{\\mu_0qc}{4\\pi}=\\mu_0\\varepsilon_0c\\cdot\\frac{q}{4\\pi\\varepsilon_0}=\\frac{C}{c}\\cdot c^2\\mu_0\\varepsilon_0=\\frac{C}{c}$, this is $\\langle\\Upsilon_j,\\psi\\rangle=\\int_V\\frac{\\beta_j(x,t)}{c}\\frac{C\\psi}{\\kappa r}\\,dx\\,dt$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "F3",
+            "F7",
+            "F9",
+            "F10",
+            "F14"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "Potentials and regular distributions. By [F2] the root is $C^3$ off the worldline, so $r,n$ are $C^3$, $\\beta$ is $C^2$, $\\kappa$ is $C^2$ and $D=\\kappa r$ is $C^2$ with $D>0$ on $V$; hence $\\varphi=C/D$ and $A=\\beta\\varphi/c$ are of class $C^2$ on $V$, and the identities of steps 2.1 and 2.2 read $\\langle\\Phi,\\psi\\rangle=\\int_V\\varphi\\psi$ and $\\langle\\Upsilon_j,\\psi\\rangle=\\int_V A_j\\psi$ for every test $\\psi$. The graph $\\Gamma$ is closed, hence Borel, and null: for each time $t$ its spatial section $\\{z(t)\\}$ is a singleton, so Tonelli together with the product identification of Euclidean measure gives $\\lambda_4(\\Gamma)=\\int_{\\mathbb R}\\lambda_3(\\{z(t)\\})\\,dt=0$. Therefore $\\int_V\\varphi\\psi=\\int_\\Omega\\widetilde\\varphi\\,\\psi$ and $\\int_VA_j\\psi=\\int_\\Omega\\widetilde A_j\\psi$ for the zero extensions. Finally $\\widetilde\\varphi,\\widetilde A$ are locally integrable: for a compact $Q\\subseteq\\Omega$ the substitution identity of step 1.3 and the cylinder bound of step 1.2 give $\\int_\\Omega|\\widetilde\\varphi|\\mathbf 1_Q\\le |C|\\int_U\\mathbf 1_Q(g)|w|^{-1}ds\\,dw\\le4\\pi |C|\\,M_{Q'}$ with $M_{Q'}=T'\\sigma(S^2)L'^2/(8\\pi)<\\infty$ for the window constants of $Q$. Hence the regular functionals of $\\widetilde\\varphi,\\widetilde A$ are distributions and $\\Phi=u_{\\widetilde\\varphi}$, $\\Upsilon=u_{\\widetilde A}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "d4.1",
+          "claim": "The electric field. On $V$, $\\nabla\\varphi=-C\\nabla D/D^2$, $\\varphi_t=-CD_t/D^2$ and $A=\\beta\\varphi/c$, so $A_t=(\\dot\\beta\\varphi/\\kappa+\\beta\\varphi_t)/c=\\dot\\beta C/(c\\kappa D)-\\beta CD_t/(cD^2)$ and $E=-\\nabla\\varphi-A_t=\\frac{C}{D^2}\\bigl(\\nabla D+\\frac{\\beta D_t}{c}\\bigr)-\\frac{C\\dot\\beta}{c\\kappa D}$. Substituting the identities of step 1.4, the bracket equals $\\frac{1}{\\kappa}\\bigl(1-|\\beta|^2+\\frac{rd}{c}\\bigr)(n-\\beta)$, so $E=C\\frac{(1-|\\beta|^2)(n-\\beta)+rd(n-\\beta)/c}{\\kappa^3r^2}-\\frac{C\\dot\\beta}{c\\kappa D}=\\frac{C}{\\kappa^3r^2}\\Bigl[(1-|\\beta|^2)(n-\\beta)+\\frac{r}{c}\\bigl(d(n-\\beta)-\\kappa\\dot\\beta\\bigr)\\Bigr]$, using $D=\\kappa r$ to write the second summand over the common denominator. The cross-product identity $n\\times((n-\\beta)\\times\\dot\\beta)=d(n-\\beta)-\\kappa\\dot\\beta$ of [F14] then gives the displayed electric field.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.4",
+            "step 3.1",
+            "F4",
+            "F12",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "d5.1",
+          "claim": "The magnetic field and regularity. By [F15] and the chain rule, $\\operatorname{curl}A=\\nabla(\\varphi/c)\\times\\beta+(\\varphi/c)\\operatorname{curl}\\beta$ with $\\operatorname{curl}\\beta=\\nabla s\\times\\dot\\beta$, so $\\operatorname{curl}A=-\\frac{C\\nabla D\\times\\beta}{cD^2}-\\frac{C\\,n\\times\\dot\\beta}{c^2\\kappa^2r}$. Substituting $\\nabla D$ from step 1.4 and using $n\\times(n-\\beta)=-n\\times\\beta$ gives $\\operatorname{curl}A=-C\\bigl[\\frac{1-|\\beta|^2+rd/c}{c\\kappa^3r^2}(n\\times\\beta)+\\frac{n\\times\\dot\\beta}{c^2\\kappa^2r}\\bigr]$. Crossing the field of step 4.1 with $n/c$ gives the same expression, because $n\\times n=0$, $n\\times(n-\\beta)=-n\\times\\beta$ and $n\\times(d(n-\\beta)-\\kappa\\dot\\beta)=-d(n\\times\\beta)-\\kappa(n\\times\\dot\\beta)$; hence $B=n\\times E/c$. Since for $z\\in C^3$ the root is $C^3$ and $\\nabla D,D_t,\\beta,\\dot\\beta,\\kappa,r,n$ are as in step 1.4 with $\\kappa r>0$ on $V$, both displayed fields are $C^1$ on $V$; the same computation with a $C^k$ trajectory uses the $C^k$ root branch of [F2] and gives $C^{k-2}$ fields, and the smooth branch gives smooth fields. ∎",
+          "step": "5.1",
+          "inputs": [
+            "step 1.4",
+            "step 4.1",
+            "F2",
+            "F4",
+            "F13",
+            "F14",
+            "F15"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the case q=0 gives vanishing pairings and vanishing potentials through steps 2.1, 2.2 and 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "beta=0 is admitted with kappa=1 and is computed in step 1.4; zero velocity v*=0 is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the unique retarded root of [F2] and the single retarded-history branch are the subject of steps 1.3-2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the static case v*=0 is included with kappa bounded below by 1-v_*/c, so no vanishing kappa occurs ([F2], step 1.4)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the history is all of R with no endpoints, so the finite-history endpoint variant of the current lemma is not invoked (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC_omega is declared and used through the polar formula and change-of-variables theorems in steps 1.2, 1.3, 2.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the lemma is a conjunction of pairing identities and field formulas, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the lemma is a conjunction of pairing identities and field formulas, not a biconditional."
+        }
+      ]
+    },
+    "thm-em-retarded-point-distributional-maxwell": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-em-point-retarded-potential-and-fields",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $c>0$, $q\\in\\mathbb R$, $\\varepsilon_0>0$, put $\\mu_0:=(c^2\\varepsilon_0)^{-1}$ and $C:=q/(4\\pi\\varepsilon_0)$, and let $z:\\mathbb R\\to\\mathbb R^3$ be of class $C^3$ with $|z'(s)|\\le v_*<c$ for every $s\\in\\mathbb R$ ([[def-vector-valued-derivative-and-integral]]). Write $\\Omega:=\\mathbb R^3\\times\\mathbb R$ and $\\Gamma:=\\{(z(s),s):s\\in\\mathbb R\\}\\subseteq\\Omega$. For $(x,t)\\in\\Omega\\setminus\\Gamma$ let $s=s(x,t)$ be the unique retarded root of [[lem-em-global-retarded-root]] with $t-s=|x-z(s)|/c$, and put $R:=x-z(s)$, $r:=|R|>0$, $n:=R/r$, $\\beta:=z'(s)/c$, $\\kappa:=1-n\\cdot\\beta$, $N:=n\\cdot\\beta$, $D:=\\kappa r$, $\\dot\\beta:=z''(s)/c$ and $d:=n\\cdot\\dot\\beta$ ([[def-euclidean-inner-product]]). Then:\n\n(a) the distributions $\\rho,J\\in\\mathcal D'(\\Omega)$ of [[lem-em-point-current-continuity]],\n\n$$\\langle\\rho,\\psi\\rangle=q\\int_{\\mathbb R}\\psi(z(s),s)\\,ds,\\qquad \\langle J,\\psi\\rangle=q\\int_{\\mathbb R}z'(s)\\,\\psi(z(s),s)\\,ds,$$\n\nsatisfy $\\partial_t\\rho+\\operatorname{div}J=0$.\n\n(b) Let $K$ be the retarded wave kernel of [[lem-em-retarded-wave-kernel]] and, for $\\psi\\in\\mathcal D(\\Omega)$ and $\\tau\\in\\mathbb R$, $y\\in\\mathbb R^3$, put $(K\\circledast\\psi)(y,\\tau):=\\langle K,\\psi(y+\\cdot,\\tau+\\cdot)\\rangle$. Define the retarded-history pairings by the explicit integrals\n\n$$\\langle\\Phi,\\psi\\rangle:=\\frac{q}{\\varepsilon_0}\\int_{\\mathbb R}(K\\circledast\\psi)(z(s),s)\\,ds,\\qquad \\langle\\Upsilon,\\psi\\rangle:=\\mu_0q\\int_{\\mathbb R}z'(s)(K\\circledast\\psi)(z(s),s)\\,ds.$$\n\nHere the second integral is componentwise. The notation $\\varepsilon_0^{-1}\\langle\\rho,K\\circledast\\psi\\rangle$ and $\\mu_0\\langle J,K\\circledast\\psi\\rangle$, if used, means precisely these explicit history integrals, rather than ordinary distribution action on a compactly supported test. These pairings define distributions on $\\Omega$, are finite for every $\\psi\\in\\mathcal D(\\Omega)$ and satisfy the exact retarded-convolution identities\n\n$$\\langle\\Phi,\\psi\\rangle=\\int_{\\Omega\\setminus\\Gamma}\\frac{C\\,\\psi(x,t)}{\\kappa(x,t)\\,r(x,t)}\\,dx\\,dt,\\qquad \\langle\\Upsilon,\\psi\\rangle=\\int_{\\Omega\\setminus\\Gamma}\\frac{\\beta(x,t)}{c}\\,\\frac{C\\,\\psi(x,t)}{\\kappa(x,t)\\,r(x,t)}\\,dx\\,dt$$\n\n(for $\\Upsilon$, componentwise against $\\psi\\in\\mathcal D(\\Omega)$; both integrands are continuous on the open set $\\Omega\\setminus\\Gamma$ and integrable there against $\\psi$). Consequently the potentials are the $C^2$ functions\n\n$$\\varphi:=\\frac{C}{D}=\\frac{C}{\\kappa r}:\\Omega\\setminus\\Gamma\\to\\mathbb R,\\qquad A:=\\frac{\\beta\\,\\varphi}{c}=\\frac{\\beta\\,C}{c\\,\\kappa r}:\\Omega\\setminus\\Gamma\\to\\mathbb R^3$$\n\noff the worldline, and the zero extensions $\\widetilde\\varphi,\\widetilde A$ on $\\Gamma$ belong to $L^1_{\\mathrm{loc}}(\\Omega)$; $\\Phi$ is the regular distribution of $\\widetilde\\varphi$, and $\\Upsilon$ that of $\\widetilde A$ ([[def-regular-distribution-from-a-locally-integrable-function]]).\n\n(c) Let $E:=-\\nabla\\varphi-\\partial_tA$ and $B:=\\operatorname{curl}A$ on $\\Omega\\setminus\\Gamma$ ([[def-em-potential-gauge-and-field-conventions]]). Then, off the worldline,\n\n$$E=C\\left[\\frac{(1-|\\beta|^2)(n-\\beta)}{\\kappa^3r^2}+\\frac{n\\times\\bigl((n-\\beta)\\times\\dot\\beta\\bigr)}{c\\,\\kappa^3r}\\right],\\qquad B=\\frac{n\\times E}{c}.$$\n\nThe fields $E,B$ are $C^1$ off the worldline. More generally, if $z\\in C^k$, $k\\ge3$, the retarded root is $C^k$, the potentials are $C^{k-1}$ and the fields are $C^{k-2}$ there; if $z\\in C^\\infty$, all these objects are smooth off the worldline. The result is a mathematical model computation for the stipulated uniformly subluminal smooth worldline and the retarded choice; no self-force law, no radiation-reaction postulate and no physical Maxwell coupling is asserted or proved.",
+          "uses": [
+            "1.3",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-em-retarded-wave-kernel",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), used through the sphere and polar integrations below ([[def-countable-choice]], [[def-polar-surface-measure-on-the-unit-sphere]], [[thm-polar-coordinates-formula-for-lebesgue-measure]]). Let $c>0$, write $Q:=\\mathbb R^3\\times\\mathbb R$, $\\mathcal D:=\\mathcal D(Q)$ for the test-function space of [[def-test-function-space-d-of-an-open-set]], and $C:=\\{(y,t)\\in Q:t=|y|/c\\}$ for the retarded cone. Define the functional $K$ on test functions by\n\n$$\\langle K,\\psi\\rangle:=\\frac{1}{4\\pi}\\int_{\\mathbb R^3}\\frac{\\psi(y,|y|/c)}{|y|}\\,dy\\qquad(\\psi\\in\\mathcal D).$$\n\nThen: (a) the integral converges absolutely for every $\\psi\\in\\mathcal D$, the functional $K$ is a distribution on $Q$ ([[def-distribution]]), $(K,\\psi)=0$ for every $\\psi$ with $\\operatorname{supp}\\psi\\cap C=\\varnothing$, and for every $(y_0,t_0)\\in C$ and every neighbourhood $U$ of $(y_0,t_0)$ there is $\\psi\\in\\mathcal D$ with $\\operatorname{supp}\\psi\\subseteq U$ and $\\langle K,\\psi\\rangle\\ne0$; consequently $\\operatorname{supp}K=C$. (b) For every $h\\in C_c^\\infty(Q)$ the function\n\n$$(K*h)(x,t):=\\int_{\\mathbb R^3}\\frac{h(y,\\,t-|x-y|/c)}{4\\pi\\,|x-y|}\\,dy$$\n\nis well defined (the integral converges absolutely), of class $C^\\infty$ on $Q$, and for every $\\psi\\in\\mathcal D$\n\n$$\\langle K*h,\\psi\\rangle=\\langle h,\\,K\\circledast\\psi\\rangle,\\qquad (K\\circledast\\psi)(y,s):=\\langle K,\\psi(y+\\cdot,s+\\cdot)\\rangle=\\frac{1}{4\\pi}\\int\\frac{\\psi(y+z,s+|z|/c)}{|z|}\\,dz;$$\n\nmoreover $W(K*h)=h$ on $Q$ in the classical pointwise sense, where $W=c^{-2}\\partial_t^2-\\Delta$ is the wave expression of [[def-wave-equation-cauchy-data-and-wave-speed]] and [[def-laplacian-of-a-c2-function]]. (c) Read $W=c^{-2}\\partial_t^2-\\Delta$ as the distributional operator built from [[def-distributional-derivative]]; then $WK=\\delta_{(0,0)}$ in the sense of [[def-dirac-delta-and-its-derivatives]], that is, $(WK)(\\psi)=\\psi(0,0)$ for every $\\psi\\in\\mathcal D$. This identifies $K$ as the retarded fundamental solution of $W$; no smoothness of $K$ itself on the cone is asserted, and the advanced fundamental solution is not treated.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-em-point-current-continuity",
+          "source_section": "Statement",
+          "quote": "**Proper-graph branch.** Let $I\\subseteq\\mathbb R$ be an open interval, let $z:I\\to\\mathbb R^3$ be a $C^1$ trajectory, put $\\gamma(t):=(z(t),t)$ and let $\\Omega\\subseteq\\mathbb R^4$ be open with $\\gamma[I]\\subseteq\\Omega$. Assume the graph map $\\gamma:I\\to\\Omega$ is **proper**: $\\gamma^{-1}[K]$ is a compact subset of $I$ for every compact $K\\subseteq\\Omega$. For $q\\in\\mathbb R$ and $\\psi\\in\\mathcal D(\\Omega)$ ([[def-test-function-space-d-of-an-open-set]]) define\n\n$$\\langle\\rho,\\psi\\rangle:=q\\int_I\\psi(z(t),t)\\,dt,\\qquad \\langle J,\\psi\\rangle:=q\\int_I z'(t)\\,\\psi(z(t),t)\\,dt,$$\n\nthe second integral being vector-valued with components $\\langle J_i,\\psi\\rangle=q\\int_Iz_i'(t)\\psi(z(t),t)\\,dt$. Then $\\rho$ and $J$ are distributions on $\\Omega$ ([[def-distribution]]) and, with the distributional derivative of [[def-distributional-derivative]],\n\n$$\\partial_t\\rho+\\operatorname{div}J=0\\qquad\\text{in }\\mathcal D'(\\Omega).$$\n\nProperness is automatic if $\\Omega=\\mathbb R^3\\times I$, and also if $I=\\mathbb R$.\n\n**Endpoint branch.** Suppose instead that $I=(a,b)$ is bounded with finite endpoints, that $z$ extends continuously to $[a,b]$, that the absolute improper integral $\\int_a^b\\lVert z'(t)\\rVert_2\\,dt$ is finite, and that both endpoint events $(z(a),a)$ and $(z(b),b)$ belong to $\\Omega$. Then the same formulas, with the integrals understood as improper integrals over $(a,b)$, define distributions $\\rho$ and $J$ on $\\Omega$, and\n\n$$\\partial_t\\rho+\\operatorname{div}J=q\\,\\delta_{(z(a),a)}-q\\,\\delta_{(z(b),b)},$$\n\nthe Dirac distributions being those of [[def-dirac-delta-and-its-derivatives]].\n\nMere graph containment $\\gamma[I]\\subseteq\\Omega$ does not make the pulled-back tests compactly supported, and it does not by itself give the source-free identity: in the endpoint branch the endpoint terms are present exactly as displayed, and they vanish on a test only when that test vanishes at the corresponding endpoint event. No Maxwell equation, no point self-force and no physical interpretation of $\\rho$ or $J$ is asserted; only the distributional identities for the prescribed support are proved.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alp",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-distributional-differentiation-is-continuous-and-commutes",
+          "source_section": "Statement",
+          "quote": "Distributional derivatives satisfy $\\partial^\\alpha\\partial^\\beta u=\\partial^{\\alpha+\\beta}u$ and are continuo",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-regular-distribution-from-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, write $f\\in L^1_{\\mathrm{loc}}(\\Omega)$ when $f:\\Omega\\to\\mathbb C$ is ",
+          "uses": [
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-locally-integrable-functions-embed-in-distributions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.",
+          "uses": [
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-the-divergence-of-a-curl-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $F:U\\to\\mathbb R^3$ be $C^2$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-the-curl-of-a-gradient-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $\\phi:U\\to\\mathbb R$ be $C^2$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-the-curl-of-a-curl-of-a-c2-field",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $F:U\\to\\mathbb R^3$ be $C^2$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\\to f$ almost everywhere and $|f_n|\\l",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-mean-value-inequality",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a < b$, and let $f : [a,b] \\to \\mathbb{",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\\int (\\al",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then $$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to \\mathbb C$ belong to $L^1(\\mu \\times \\nu)$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "source_section": "Statement",
+          "quote": "Let $m,n \\ge 1$. Under the identification $$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$ one has $$\\mathc",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at every point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]).",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of $E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]).",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "1.1 Fix $\\psi\\in\\mathcal D(Q)$ and put $F:=K\\circledast\\psi$, so that $F(y,s)=(4\\pi)^{-1}\\int\\psi(y+w,s+|w|/c)|w|^{-1}dw$. Then $F$ is of class $C^1$ on $Q$ and $\\partial_{y_i}F=K\\circledast(\\partial_",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "1.2 For every test $\\psi$ and every $(y,s)\\in Q$, $(K\\circledast W\\psi)(y,s)=\\psi(y,s)$. Indeed, with the translated test $\\chi(z,\\tau):=\\psi(y+z,s+\\tau)$ one has $(W\\psi)(y+\\cdot,s+\\cdot)=W\\chi$ by t",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F8"
+          ]
+        },
+        {
+          "id": "d1.3",
+          "claim": "1.3 Local integrability of the classical fields. On $V:=Q\\setminus\\Gamma$ the map $g(s,w):=(z(s)+w,s+|w|/c)$ is a $C^1$ diffeomorphism from $U:=\\mathbb R\\times(\\mathbb R^3\\setminus\\{0\\})$ onto $V$ wit",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F9",
+            "F11",
+            "F10",
+            "F13",
+            "A1"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "2.1 The history function $s\\mapsto F(z(s),s)$ is $C^1$ with compact support contained in a finite interval, and its derivative is $\\nabla_yF(z(s),s)\\cdot z'(s)+\\partial_sF(z(s),s)$. Indeed $F$ is $C^1",
+          "step": "2.1",
+          "inputs": [
+            "F8",
+            "F12",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d2.2",
+          "claim": "2.2 Zero-extension representatives of the first derivatives. Let $f$ be one of the components of $\\varphi$ and $A$ on $V$, with zero extension $\\widetilde f$, and let $D\\in\\{\\partial_t,\\partial_1,\\par",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F10",
+            "F12",
+            "1.3"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "3.1 The wave equations. For every test $\\psi$, $\\langle\\Phi,W\\psi\\rangle=\\frac{q}{\\varepsilon_0}\\int_{\\mathbb R}(K\\circledast W\\psi)(z(s),s)\\,ds=\\frac{q}{\\varepsilon_0}\\int_{\\mathbb R}\\psi(z(s),s)\\,ds",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "id": "d3.2",
+          "claim": "3.2 The Lorenz identity. For every test $\\psi$, using the definitions of the distributional derivatives and the identities of step 1.1, $\\langle\\operatorname{div}\\Upsilon+c^{-2}\\partial_t\\Phi,\\psi\\ran",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F12",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "d4.1",
+          "claim": "4.1 The four Maxwell equations. Using the distributional algebra for finite combinations of coordinate derivatives (which commutes in the sense $\\partial^\\alpha\\partial^\\beta=\\partial^{\\alpha+\\beta}$ ",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F4",
+            "3.2",
+            "3.1"
+          ]
+        },
+        {
+          "id": "d5.1",
+          "claim": "5.1 Off the worldline. For a test $\\psi$ supported in $V$ one has $\\langle\\rho,\\psi\\rangle=q\\int\\psi(z(s),s)ds=0$ and likewise $\\langle J,\\psi\\rangle=0$, since $\\psi$ vanishes on $\\Gamma$. By step 2.2",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F10",
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the zero test and q=0 cases give vanishing pairings, and the equations of steps 3.1-4.1 read 0=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "rho=J=0 is admitted and reduces the equations to the source-free clauses of step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "a single proper-history branch is treated; no claim of exactly two solutions or incoming-field uniqueness is made (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step1.3 includes a static trajectory with v*=0,kappa=1. The source graph is measure zero but not deleted from the distributional equations; r^-1 potentials and r^-2 fields are locally integrable. The proof does not claim integrability of field derivatives, whose Coulomb behavior can be r^-3."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the history interval is all of R with no endpoints, and the null graph Gamma carries no field values (Statement, step 1.3)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC_omega is declared and used through the polar formula, change of variables, Riemann-Lebesgue comparison and injectivity in steps 1.3, 2.2 and 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the theorem states equations and an identification, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the theorem states equations and an identification, not a biconditional."
+        }
+      ]
+    },
+    "ex-em-causal-wave-kernel-prerequisites-explicit-checks": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-em-global-retarded-root",
+          "source_section": "Statement",
+          "quote": "Let $c>0$, $0\\le v_*<c$, and $z:\\mathbb R\\to\\mathbb R^3$ be $C^1$ with $|z'(s)|\\le v_*$ for all $s$. For every $(x,t)\\in\\mathbb R^3\\times\\mathbb R$ there is exactly one real root $s=s(x,t)$ of $t-s=|x-z(s)|/c$, and $s\\le t$. Equality holds exactly when $x=z(t)$. Thus on the open off-instantaneous-worldline domain $D=\\{(x,t):x\\ne z(t)\\}$ one has $s<t$, $r=|x-z(s)|=c(t-s)>0$, and the root is $C^1$. With $n=(x-z(s))/r$, $\\beta=z'(s)/c$, and $\\kappa=1-n\\cdot\\beta$, its derivatives are $\\partial_t s=1/\\kappa$ and $\\nabla_xs=-n/(c\\kappa)$, where $1-v_*/c\\le\\kappa\\le1+v_*/c$. If $z$ is $C^k$, for an integer $k\\ge1$, the root is $C^k$ on $D$; in particular a $C^3$ trajectory gives a $C^3$ root. A smooth trajectory gives a smooth root. No higher regularity follows from a merely $C^1$ trajectory. These claims concern an all-time uniformly subluminal prescribed history; no finite-history or nonuniform-light-speed-limit assertion is made.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-em-point-retarded-potential-and-fields",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $c>0$, $q\\in\\mathbb R$, $\\varepsilon_0>0$, put $\\mu_0:=(c^2\\varepsilon_0)^{-1}$ and $C:=q/(4\\pi\\varepsilon_0)$, and let $z:\\mathbb R\\to\\mathbb R^3$ be of class $C^3$ with $|z'(s)|\\le v_*<c$ for every $s\\in\\mathbb R$ ([[def-vector-valued-derivative-and-integral]]). Write $\\Omega:=\\mathbb R^3\\times\\mathbb R$ and $\\Gamma:=\\{(z(s),s):s\\in\\mathbb R\\}\\subseteq\\Omega$. For $(x,t)\\in\\Omega\\setminus\\Gamma$ let $s=s(x,t)$ be the unique retarded root of [[lem-em-global-retarded-root]] with $t-s=|x-z(s)|/c$, and put $R:=x-z(s)$, $r:=|R|>0$, $n:=R/r$, $\\beta:=z'(s)/c$, $\\kappa:=1-n\\cdot\\beta$, $N:=n\\cdot\\beta$, $D:=\\kappa r$, $\\dot\\beta:=z''(s)/c$ and $d:=n\\cdot\\dot\\beta$ ([[def-euclidean-inner-product]]). Then:\n\n(a) the distributions $\\rho,J\\in\\mathcal D'(\\Omega)$ of [[lem-em-point-current-continuity]],\n\n$$\\langle\\rho,\\psi\\rangle=q\\int_{\\mathbb R}\\psi(z(s),s)\\,ds,\\qquad \\langle J,\\psi\\rangle=q\\int_{\\mathbb R}z'(s)\\,\\psi(z(s),s)\\,ds,$$\n\nsatisfy $\\partial_t\\rho+\\operatorname{div}J=0$.\n\n(b) Let $K$ be the retarded wave kernel of [[lem-em-retarded-wave-kernel]] and, for $\\psi\\in\\mathcal D(\\Omega)$ and $\\tau\\in\\mathbb R$, $y\\in\\mathbb R^3$, put $(K\\circledast\\psi)(y,\\tau):=\\langle K,\\psi(y+\\cdot,\\tau+\\cdot)\\rangle$. Define the retarded-history pairings by the explicit integrals\n\n$$\\langle\\Phi,\\psi\\rangle:=\\frac{q}{\\varepsilon_0}\\int_{\\mathbb R}(K\\circledast\\psi)(z(s),s)\\,ds,\\qquad \\langle\\Upsilon,\\psi\\rangle:=\\mu_0q\\int_{\\mathbb R}z'(s)(K\\circledast\\psi)(z(s),s)\\,ds.$$\n\nHere the second integral is componentwise. The notation $\\varepsilon_0^{-1}\\langle\\rho,K\\circledast\\psi\\rangle$ and $\\mu_0\\langle J,K\\circledast\\psi\\rangle$, if used, means precisely these explicit history integrals, rather than ordinary distribution action on a compactly supported test. These pairings define distributions on $\\Omega$, are finite for every $\\psi\\in\\mathcal D(\\Omega)$ and satisfy the exact retarded-convolution identities\n\n$$\\langle\\Phi,\\psi\\rangle=\\int_{\\Omega\\setminus\\Gamma}\\frac{C\\,\\psi(x,t)}{\\kappa(x,t)\\,r(x,t)}\\,dx\\,dt,\\qquad \\langle\\Upsilon,\\psi\\rangle=\\int_{\\Omega\\setminus\\Gamma}\\frac{\\beta(x,t)}{c}\\,\\frac{C\\,\\psi(x,t)}{\\kappa(x,t)\\,r(x,t)}\\,dx\\,dt$$\n\n(for $\\Upsilon$, componentwise against $\\psi\\in\\mathcal D(\\Omega)$; both integrands are continuous on the open set $\\Omega\\setminus\\Gamma$ and integrable there against $\\psi$). Consequently the potentials are the $C^2$ functions\n\n$$\\varphi:=\\frac{C}{D}=\\frac{C}{\\kappa r}:\\Omega\\setminus\\Gamma\\to\\mathbb R,\\qquad A:=\\frac{\\beta\\,\\varphi}{c}=\\frac{\\beta\\,C}{c\\,\\kappa r}:\\Omega\\setminus\\Gamma\\to\\mathbb R^3$$\n\noff the worldline, and the zero extensions $\\widetilde\\varphi,\\widetilde A$ on $\\Gamma$ belong to $L^1_{\\mathrm{loc}}(\\Omega)$; $\\Phi$ is the regular distribution of $\\widetilde\\varphi$, and $\\Upsilon$ that of $\\widetilde A$ ([[def-regular-distribution-from-a-locally-integrable-function]]).\n\n(c) Let $E:=-\\nabla\\varphi-\\partial_tA$ and $B:=\\operatorname{curl}A$ on $\\Omega\\setminus\\Gamma$ ([[def-em-potential-gauge-and-field-conventions]]). Then, off the worldline,\n\n$$E=C\\left[\\frac{(1-|\\beta|^2)(n-\\beta)}{\\kappa^3r^2}+\\frac{n\\times\\bigl((n-\\beta)\\times\\dot\\beta\\bigr)}{c\\,\\kappa^3r}\\right],\\qquad B=\\frac{n\\times E}{c}.$$\n\nThe fields $E,B$ are $C^1$ off the worldline. More generally, if $z\\in C^k$, $k\\ge3$, the retarded root is $C^k$, the potentials are $C^{k-1}$ and the fields are $C^{k-2}$ there; if $z\\in C^\\infty$, all these objects are smooth off the worldline. The result is a mathematical model computation for the stipulated uniformly subluminal smooth worldline and the retarded choice; no self-force law, no radiation-reaction postulate and no physical Maxwell coupling is asserted or proved.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-em-retarded-wave-kernel",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), used through the sphere and polar integrations below ([[def-countable-choice]], [[def-polar-surface-measure-on-the-unit-sphere]], [[thm-polar-coordinates-formula-for-lebesgue-measure]]). Let $c>0$, write $Q:=\\mathbb R^3\\times\\mathbb R$, $\\mathcal D:=\\mathcal D(Q)$ for the test-function space of [[def-test-function-space-d-of-an-open-set]], and $C:=\\{(y,t)\\in Q:t=|y|/c\\}$ for the retarded cone. Define the functional $K$ on test functions by\n\n$$\\langle K,\\psi\\rangle:=\\frac{1}{4\\pi}\\int_{\\mathbb R^3}\\frac{\\psi(y,|y|/c)}{|y|}\\,dy\\qquad(\\psi\\in\\mathcal D).$$\n\nThen: (a) the integral converges absolutely for every $\\psi\\in\\mathcal D$, the functional $K$ is a distribution on $Q$ ([[def-distribution]]), $(K,\\psi)=0$ for every $\\psi$ with $\\operatorname{supp}\\psi\\cap C=\\varnothing$, and for every $(y_0,t_0)\\in C$ and every neighbourhood $U$ of $(y_0,t_0)$ there is $\\psi\\in\\mathcal D$ with $\\operatorname{supp}\\psi\\subseteq U$ and $\\langle K,\\psi\\rangle\\ne0$; consequently $\\operatorname{supp}K=C$. (b) For every $h\\in C_c^\\infty(Q)$ the function\n\n$$(K*h)(x,t):=\\int_{\\mathbb R^3}\\frac{h(y,\\,t-|x-y|/c)}{4\\pi\\,|x-y|}\\,dy$$\n\nis well defined (the integral converges absolutely), of class $C^\\infty$ on $Q$, and for every $\\psi\\in\\mathcal D$\n\n$$\\langle K*h,\\psi\\rangle=\\langle h,\\,K\\circledast\\psi\\rangle,\\qquad (K\\circledast\\psi)(y,s):=\\langle K,\\psi(y+\\cdot,s+\\cdot)\\rangle=\\frac{1}{4\\pi}\\int\\frac{\\psi(y+z,s+|z|/c)}{|z|}\\,dz;$$\n\nmoreover $W(K*h)=h$ on $Q$ in the classical pointwise sense, where $W=c^{-2}\\partial_t^2-\\Delta$ is the wave expression of [[def-wave-equation-cauchy-data-and-wave-speed]] and [[def-laplacian-of-a-c2-function]]. (c) Read $W=c^{-2}\\partial_t^2-\\Delta$ as the distributional operator built from [[def-distributional-derivative]]; then $WK=\\delta_{(0,0)}$ in the sense of [[def-dirac-delta-and-its-derivatives]], that is, $(WK)(\\psi)=\\psi(0,0)$ for every $\\psi\\in\\mathcal D$. This identifies $K$ as the retarded fundamental solution of $W$; no smoothness of $K$ itself on the cone is asserted, and the advanced fundamental solution is not treated.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-em-potential-gauge-and-field-conventions",
+          "source_section": "Definition",
+          "quote": "Let $c>0$ and let $\\Omega\\subseteq\\mathbb R^3\\times\\mathbb R$ be open.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-em-gauge-wave-reachability",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), carried through [[thm-em-wave-cauchy-kirchhoff]] and its sphere integrations ([[def-countable-choice]]). Let $c>0$, $t_0<T$, and let $(\\varphi,A)$ be a potential pair of class $C^\\infty$ on the slab $Q:=\\mathbb R^3\\times[t_0,T]$ in the extension sense of [[def-em-potential-gauge-and-field-conventions]]: $\\varphi$ and $A$ are restrictions of $C^\\infty$ functions on $\\mathbb R^3\\times J$ for some open interval $J\\supset[t_0,T]$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Put $G:=G(\\varphi,A)=\\operatorname{div}A+c^{-2}\\partial_t\\varphi$ and $W=c^{-2}\\partial_t^2-\\Delta$. Then:\n\n(a) there is a gauge function $\\chi:\\mathbb R^3\\times[t_0,T]\\to\\mathbb R$ of class $C^\\infty$ in the extension sense with $\\chi(\\cdot,t_0)=0$, $\\partial_t\\chi(\\cdot,t_0)=0$ and $W\\chi=G$ on $\\mathbb R^3\\times(t_0,T)$;\n\n(b) the gauge-transformed pair $T_\\chi(\\varphi,A)=(\\varphi-\\partial_t\\chi,\\,A+\\nabla\\chi)$ is again of class $C^\\infty$ in the extension sense and its fields are unchanged:\n\n$$E(T_\\chi(\\varphi,A))=E(\\varphi,A),\\qquad B(T_\\chi(\\varphi,A))=B(\\varphi,A)\\qquad\\text{on }Q;$$\n\n(c) the transformed pair is in Lorenz gauge: $G(T_\\chi(\\varphi,A))=G-W\\chi=0$ on $\\mathbb R^3\\times(t_0,T)$;\n\n(d) if $\\chi_1,\\chi_2$ are of class $C^2$ on $Q$ in the extension sense and $W\\chi_1=W\\chi_2=G$ on $\\mathbb R^3\\times(t_0,T)$, then $W(\\chi_1-\\chi_2)=0$ on $\\mathbb R^3\\times(t_0,T)$.\n\nNothing is asserted about prescribed boundary values of $\\chi$ on a bounded spatial domain, about spatial decay of $\\chi$, or about Lorenz gauge fixing for a cavity problem with prescribed boundary data; the older global gauge promise on bounded domains is outside this result.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-laplacian-of-a-c2-function",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $f:U\\to\\mathbb R$ be $C^2$ in the sense of [[def-ck-and-multi-index-notation-in-several-variables]].",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F=(F_0,\\ldots,F_{n-1}):U\\to\\mathbb R^n$ be $C^1$ in ",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-the-curl-of-a-gradient-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $\\phi:U\\to\\mathbb R$ be $C^2$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F,G:U\\to\\mathbb R^n$ be $C^1$, let $f:U\\to\\mathbb R$ be $C^1$ and let $a,b\\in\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions $n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it ([[lem-metrics-on-rn]]).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "1.1 Static specialization (i). With $z\\equiv0$ the root equation reads $t-s=|x|/c$, whose unique solution is $s=t-|x|/c$; then $R=x$, $r=|x|$, $n=x/|x|$, $\\beta=0$, $N=0$, $\\kappa=1$, $D=|x|$ and $\\do",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "F4",
+            "F6",
+            "F9"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "1.2 Static Poisson kernel (i). Let $h\\in C_c^\\infty(\\mathbb R^3)$, fix a compact observation region $Q_0\\subseteq\\mathbb R^3\\times\\mathbb R$ and note that for $(x,t)\\in Q_0$ and $y$ in the support of ",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F7",
+            "F8",
+            "A1"
+          ]
+        },
+        {
+          "id": "d1.3",
+          "claim": "1.3 The gauge transformation (ii). For $\\varphi\\equiv0$ and $A=(x_1,0,0)$: $\\operatorname{div}A=\\partial_1x_1=1$, so $G=1$; $\\operatorname{curl}A=0$; $E=-\\partial_tA=0$. For $\\chi=-|x|^2/6$: $\\partial",
+          "step": "1.3",
+          "inputs": [
+            "F5",
+            "F4",
+            "F6",
+            "F9"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "2.1 Sharpness at the apex (iii). Let $0\\le\\psi\\in\\mathcal D(\\mathbb R^3\\times\\mathbb R)$ with $\\psi(0,0)>0$. By continuity and $\\psi(0,0)>0$ there are $a>0$ and $\\delta>0$ with $\\psi(y,|y|/c)\\ge a$ wh",
+          "step": "2.1",
+          "inputs": [
+            "F8",
+            "F3",
+            "F7",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the case h=0 in step 1.2 gives u=0 as the empty static-source instance; step 2.1 uses a nonempty test by hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the zero trajectory z=0 with v*=0 and kappa=1 is the subject of step 1.1; the zero fields of the gauge example are checked in step 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the single retarded root of step 1.1 and the unit constant G=1 of step 1.3 are the explicit instances checked."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the explicit gauge function chi lacks the zero Cauchy data of the existence construction; clause (d) reconciles this in step 1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the static source is cut off in time on compact observation regions in step 1.2, addressing the noncompact time support."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC_omega is declared and used through the polar formula and positivity criteria in step 2.1 and the kernel item in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the example records explicit computations, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the example records explicit computations, not a biconditional."
+        }
+      ]
+    }
+  }
+}

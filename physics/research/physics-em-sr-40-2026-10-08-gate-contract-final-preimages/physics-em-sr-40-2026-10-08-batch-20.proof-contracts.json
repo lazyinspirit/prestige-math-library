@@ -1,0 +1,789 @@
+{
+  "version": 1,
+  "level": "physics-em-sr-40-2026-10-08-batch-20",
+  "scope": [
+    "thm-em-uncertainty-analysis",
+    "ex-em-experiment-analysis-prerequisites-hypothesis-boundaries"
+  ],
+  "contracts": {
+    "thm-em-uncertainty-analysis": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "An interval is **open** when both of its written endpoints are excluded, that is for the forms $(a,b)$, $(a,\\infty)$, $(-\\infty,b)$ and $(-\\infty,\\infty)$; it is **closed**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-open-and-closed-in-r",
+          "source_section": "Definition",
+          "quote": "$U$ is **open** when for every $x \\in U$ there is a real $\\varepsilon > 0$ with $N_\\varepsilon(x) \\subseteq U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-neighbourhood-r",
+          "source_section": "Definition",
+          "quote": "**Punctured neighbourhoods are never empty.** The element $y := x + \\varepsilon/2$ satisfies $|y - x| = \\varepsilon/2$, which is $> 0$ and $< \\varepsilon$, so $y \\in N^{*}_\\varepsilon(x)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "**Every point of a nondegenerate interval is a limit point of it.** Let $J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two elements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real $\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$; then $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and order-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$, the point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same way. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real $\\varepsilon > 0$, that is, $p$ is a limit point of $J$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-limit-point-r",
+          "source_section": "Definition",
+          "quote": "$x$ is a **limit point** (or *accumulation point*) of $A$ when $N^{*}_\\varepsilon(x) \\cap A \\ne \\varnothing$ for every real $\\varepsilon > 0$: every punctured neighbourhood of $x$ meets $A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "the **derivative of $f$ at $c$** is $$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$",
+          "uses": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose $c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the restriction $f|_B : B \\to \\mathbb{R}$, and $$(f|_B)'(c) \\;=\\; f'(c) .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$ with $p_0'(c) = 0$ ([[def-derivative]]). 2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$, $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$; 2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "is defined near $0$, its derivative at $0$ is the **directional derivative** $$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$ For a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "For $i < n$ define the **standard unit vector** $e_i \\in F^{n}$ by $$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-function-limit",
+          "source_section": "Definition",
+          "quote": "We say that **$f(x)$ tends to $L$ as $x$ tends to $c$**, and write $$\\lim_{x \\to c} f(x) = L ,$$ when $$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ 0 < |x - c| < \\delta \\ \\Longrightarrow\\ |f(x) - L| < \\varepsilon\\ \\bigr],$$ where $\\varepsilon$ and $\\delta$ range over the **positive reals**",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "**Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-vector-valued-functions-limits-and-continuity",
+          "source_section": "Definition",
+          "quote": "Then $f$ is **continuous at $a$** when $$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ d_X(x,a) < \\delta \\ \\Longrightarrow\\ \\lVert f(x) - f(a)\\rVert_2 < \\varepsilon\\ \\bigr],$$ with $\\varepsilon, \\delta$ ranging over the positive reals",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that $$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$ where the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
+          "uses": [
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "For $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+          "source_section": "Statement",
+          "quote": "If a scalar-valued $f:U\\to\\mathbb R$ is totally differentiable at $a$, then $D_vf(a)=\\langle\\nabla f(a),v\\rangle$ for every $v$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "For scalar-valued $f$, its **gradient** is $$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number $$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$ the finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$ (extended by $0$ beyond $n$, as every finite list in this library is). The **Euclidean norm** of $x$ is $$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$",
+          "uses": [
+            "1.3",
+            "1.4",
+            "4.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-continuity-real",
+          "source_section": "Definition",
+          "quote": "$f$ is **continuous at $c$** when $$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ |x - c| < \\delta \\ \\Longrightarrow\\ |f(x) - f(c)| < \\varepsilon\\ \\bigr],$$ with $\\varepsilon$ and $\\delta$ ranging over the **positive reals**",
+          "uses": [
+            "1.3",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-metric-continuity",
+          "source_section": "Definition",
+          "quote": "$f$ is **continuous at $a$** if for every real $\\varepsilon > 0$ there is a real $\\delta > 0$ such that $$d_X(x,a) < \\delta \\;\\Longrightarrow\\; d_Y\\big(f(x), f(a)\\big) < \\varepsilon \\qquad \\text{for all } x \\in X .$$",
+          "uses": [
+            "1.3",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "thm-metric-continuity-characterisations",
+          "source_section": "Statement",
+          "quote": "**(a)** $f$ is continuous at every point of $X$ in the $\\varepsilon$-$\\delta$ sense ([[def-metric-continuity]]). - **(b)** $f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$ ([[def-metric-topology]]).",
+          "uses": [
+            "1.3",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "lem-real-and-metric-notions-agree",
+          "source_section": "Statement",
+          "quote": "**Continuity.** For every $c \\in A$: $f$ is continuous at $c$ in the sense of [[def-continuity-real]] if and only if $f$ is continuous at $c$ in the sense of [[def-metric-continuity]]. Consequently $f$ is continuous on $A$ if and only if it is continuous as a map of metric spaces.",
+          "uses": [
+            "1.3",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;",
+          "uses": [
+            "1.3",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "**(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute value being that of [[def-abs-value]].",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$** ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F23",
+          "source": "def-injection-surjection-bijection",
+          "source_section": "Definition",
+          "quote": "we write $f^{-1}[T] = \\{ x \\in A : f(x) \\in T \\}$ for the preimage of $T$;",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F24",
+          "source": "lem-em-bounded-error-model-comparison",
+          "source_section": "Statement",
+          "quote": "then every $\\theta\\in I$ compatible with those two simultaneous bounds satisfies $$|\\theta-\\theta_0|\\le\\frac{s+\\delta}{m};$$ equivalently, if a proposed $\\theta$ violates this bound, then the specified model-plus-error-bound pair is incompatible with the premises.",
+          "uses": [
+            "8.1",
+            "10.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The interval $I$ is one of the four open forms of [F1], hence an open subset of $\\mathbb R$; fix a real $\\varepsilon>0$ with $N_\\varepsilon(0)\\subseteq I$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "The function $F$ is totally differentiable at $p:=\\gamma(\\theta)=\\theta_0+\\theta u$, and $D_uF(p)=\\langle\\nabla F(p),u\\rangle$: as $F$ is of class $C^1$, each first partial derivative $\\partial_jF$ exists and is continuous on the open set $U$ by [F16], so [...",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F16",
+            "F14",
+            "F17"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "The path $\\gamma:I\\to U$ is continuous at every $\\theta'\\in I$: given a real $\\varepsilon>0$ take $\\delta:=\\varepsilon$; for $\\theta''\\in I$ with $|\\theta''-\\theta'|<\\delta$ one has $d_2\\bigl(\\gamma(\\theta''),\\gamma(\\theta')\\bigr)=\\lVert\\gamma(\\theta'')-\\ga...",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F19",
+            "F22",
+            "F21"
+          ]
+        },
+        {
+          "id": "d-1.4",
+          "claim": "The configuration displacement has Euclidean length $\\lVert\\gamma(\\theta)-\\theta_0\\rVert_2=\\lVert\\theta u\\rVert_2=|\\theta|\\,\\lVert u\\rVert_2=|\\theta|$, by the Euclidean norm of [F19], the homogeneity axiom (N2) of [F22] and $\\lVert u\\rVert_2=1$",
+          "step": "1.4",
+          "inputs": [
+            "F19",
+            "F22",
+            "given"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "For every $\\theta\\in I$ the components of the path satisfy $\\gamma_j(\\theta+t)=\\gamma_j(\\theta)+tu_j$ for every real $t$ with $\\theta+t\\in I$, since $\\gamma_j(\\theta+t)=(\\theta_0)_j+(\\theta+t)u_j=(\\theta_0)_j+\\theta u_j+tu_j=\\gamma_j(\\theta)+tu_j$ by field ...",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F7",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Each composite $\\partial_jF\\circ\\gamma:I\\to\\mathbb R$ is continuous: for open $V\\subseteq\\mathbb R$ the preimage $(\\partial_jF\\circ\\gamma)^{-1}[V]$ is, by [F23], the preimage $\\gamma^{-1}\\bigl[\\partial_jF^{-1}[V]\\bigr]$; the set $\\partial_jF^{-1}[V]$ is ope...",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "F16",
+            "F23",
+            "F21"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "For every $\\theta\\in I$ the partial derivative of $\\gamma_j$ in the direction $e_0=1$ equals its ordinary derivative, so $\\partial_0\\gamma_j(\\theta)=u_j$: by [F9] the directional derivative $D_{e_0}\\gamma_j(\\theta)$ is the limit at $0$ of $t\\mapsto\\bigl(\\ga...",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F9",
+            "F5",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "For every $\\theta\\in I$ the partial derivative of the path is the vector $\\partial_0\\gamma(\\theta)=u$: the quotient $q_\\theta(t):=\\bigl(\\gamma(\\theta+t)-\\gamma(\\theta)\\bigr)/t$ on its domain $\\{\\,t:t\\ne0,\\ \\theta+t\\in I\\,\\}$ has limit $\\partial_0\\gamma(\\the...",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F9",
+            "F11",
+            "F19",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "The only partial derivative of $\\gamma$ is the constant $\\partial_0\\gamma\\equiv u$ on $I$ by step 4.1 applied at every $\\theta\\in I$, and it is continuous at $\\theta$: given a real $\\varepsilon>0$, every $\\delta>0$ serves for the continuity condition of [F1...",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F12"
+          ]
+        },
+        {
+          "id": "d-6.1",
+          "claim": "The path $\\gamma$ is totally differentiable at $\\theta$ with $D\\gamma(\\theta)(1)=u$: the partial derivative $\\partial_0\\gamma$ exists on the neighbourhood $I$ of $\\theta$ in the open domain $I\\subseteq\\mathbb R$ and is continuous at $\\theta$ by step 5.1, so...",
+          "step": "6.1",
+          "inputs": [
+            "step 4.1",
+            "step 5.1",
+            "F13",
+            "F14",
+            "F15"
+          ]
+        },
+        {
+          "id": "d-7.1",
+          "claim": "The composite $g:=F\\circ\\gamma:I\\to\\mathbb R$ is totally differentiable at every $\\theta\\in I$ with $Dg(\\theta)=DF(\\gamma(\\theta))\\circ D\\gamma(\\theta)$ by the chain rule [F20], applied to the totally differentiable $\\gamma$ of step 6.1 and $F$ of step 1.2;...",
+          "step": "7.1",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "step 6.1",
+            "F20",
+            "F15",
+            "F9",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-8.1",
+          "claim": "The derivative $g'$ is continuous on $I$: on $I$ one has $g'(\\theta)=\\sum_{j<n}u_j\\,(\\partial_jF\\circ\\gamma)(\\theta)$ by step 7.1, the gradient definition [F18] and the inner product of [F19]; the composites are continuous by step 2.2, the dictionary of [F2...",
+          "step": "8.1",
+          "inputs": [
+            "step 2.2",
+            "step 7.1",
+            "F18",
+            "F19",
+            "F21",
+            "F24"
+          ]
+        },
+        {
+          "id": "d-9.1",
+          "claim": "The value of $g$ at the centre is $g(0)=F(\\theta_0+0\\cdot u)=F(\\theta_0)=0$, and $I$ has at least two elements with $0\\in I$ by step 1.1; the function $g:I\\to\\mathbb R$ is differentiable at every point of $I$ with continuous derivative by steps 7.1 and 8.1,...",
+          "step": "9.1",
+          "inputs": [
+            "step 1.1",
+            "step 7.1",
+            "step 8.1",
+            "given"
+          ]
+        },
+        {
+          "id": "d-10.1",
+          "claim": "The bounded-error model comparison [F24] now applies to $g$ on $I$ with centre $\\theta_0:=0$ and the recorded scalar $\\hat y$, $s$, $\\delta$ of the statement, because a model value $y=g(\\theta)=F(\\theta_0+\\theta u)$ at the candidate $\\theta\\in I$ is exactly...",
+          "step": "10.1",
+          "inputs": [
+            "step 1.4",
+            "step 9.1",
+            "F24",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: n >= 1 and 0 in I keep every object nonempty; step 1.1 exhibits a second point of I, so no construction here runs on an empty set, and an empty compatible candidate set would satisfy the inequality vacuously."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero direction is excluded by the hypothesis ||u||_2 = 1, and the bound m is positive; the zero candidate theta = 0 is covered by the interpolating lemma through step 10.1, and s = delta = 0 shrinks the conclusion to |theta| <= 0 there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows n = 1, where the path has the single coordinate index j = 0; the componentwise limit step 4.1 and the partial-derivative step 5.1 are stated for every j < n, hence include the one-index case, which is exactly the case specialised by the companion example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that the open interval I contains two distinct points, so I is nondegenerate and satisfies the lemma hypothesis of step 9.1; no degenerate interval is used, and the unit-norm hypothesis excludes the degenerate direction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval I is open, so its points are all interior and no endpoint of I is part of the domain; steps 1.1 to 10.1 quantify over points of the open interval only, and the lemma application of step 10.1 covers the centre and both sides of it through the lemma, whose endpoint case is proved inside the lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: step 2.2 invokes only the choice-free continuity/preimage equivalence of thm-metric-continuity-characterisations, and no family of nonempty sets is selected anywhere; this is recorded in the Remarks."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The only biconditional used is the componentwise limit criterion F11, cited in step 4.1 in its forward direction (the vector limit yields the coordinate limits)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction of F11 (coordinate limits give the vector limit) is not used; the remaining cited statements used as premises are implications or identities, so no other converse case arises."
+        }
+      ]
+    },
+    "ex-em-experiment-analysis-prerequisites-hypothesis-boundaries": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-em-uncertainty-analysis",
+          "source_section": "Statement",
+          "quote": "Let a recorded scalar $\\hat y\\in\\mathbb R$ satisfy $|\\hat y|\\le s$ with $s\\ge0$, and let a calibration-error bound $|y-\\hat y|\\le\\delta$ with $\\delta\\ge0$ hold for $y:=F(\\theta_0+\\theta u)$ at a candidate $\\theta\\in I$. Then $$|\\theta|\\le\\frac{s+\\delta}{m},$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "An interval is **open** when both of its written endpoints are excluded, that is for the forms $(a,b)$, $(a,\\infty)$, $(-\\infty,b)$ and $(-\\infty,\\infty)$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-open-and-closed-in-r",
+          "source_section": "Definition",
+          "quote": "are clopen.** The condition defining openness quantifies over the elements of the set, so it holds vacuously for $\\varnothing$; and for $x \\in \\mathbb{R}$ one has $N_1(x) \\subseteq \\mathbb{R}$, so $\\mathbb{R}$ is open.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "**Every point of a nondegenerate interval is a limit point of it.** Let $J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two elements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real $\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$; then $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and order-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$, the point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same way. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real $\\varepsilon > 0$, that is, $p$ is a limit point of $J$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-limit-point-r",
+          "source_section": "Definition",
+          "quote": "$x$ is a **limit point** (or *accumulation point*) of $A$ when $N^{*}_\\varepsilon(x) \\cap A \\ne \\varnothing$ for every real $\\varepsilon > 0$: every punctured neighbourhood of $x$ meets $A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$ with $p_0'(c) = 0$ ([[def-derivative]]). 2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$, $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$; 2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "the **derivative of $f$ at $c$** is $$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "is defined near $0$, its derivative at $0$ is the **directional derivative** $$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$ For a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "For $i < n$ define the **standard unit vector** $e_i \\in F^{n}$ by $$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "For scalar-valued $f$, its **gradient** is $$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number $$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$ the finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$ (extended by $0$ beyond $n$, as every finite list in this library is). The **Euclidean norm** of $x$ is $$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Then every $a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$; we write $s = \\sqrt{a}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Then $$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "The **absolute value** of $x \\in F$ is $$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "For $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "For $F(\\theta)=m\\theta$ the theorem's hypotheses are met at $n=1$, $U=\\mathbb R$, $\\theta_0=0$, $u=1$, $I=\\mathbb R$ with lower bound $m$: $\\mathbb R$ is an open interval containing $0$ and is open in itself [F2], the identity on $\\mathbb R$ is differentiab...",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F10",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "With the recorded $\\hat y=0$, $s=0$ and $y=F(\\theta)=m\\theta$ the two bounds read $0\\le0$ and $|m\\theta|\\le\\delta$; since $|m\\theta|=m\\,|\\theta|$ and $m>0$, the inequality $|m\\theta|\\le\\delta$ is equivalent to $|\\theta|\\le\\delta/m$ [F9]",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "For $F\\equiv0$ and $m=0$ the function is the scalar multiple $0\\cdot p_1$, differentiable everywhere with derivative $0$ [F4, F5], so $\\partial_0F(\\theta)=0$ and $\\nabla F(\\theta)=(0)$ [F6, F7], whence $\\langle\\nabla F(\\theta),1\\rangle=0$; this is not $\\ge ...",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "Every quantity above is a stipulated real parameter or a value of the explicitly displayed functions $\\theta\\mapsto m\\theta$ and $\\theta\\mapsto0$; no experimental data, sampling law, likelihood or statistical inference is used or asserted, and the displayed...",
+          "step": "2.1",
+          "inputs": [
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "No empty set occurs: m > 0 and the parameter theta ranges over R; step 1.2 shows the compatible set for delta >= 0 is the nonempty interval of theta with |theta| <= delta/m, which contains 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 treats delta = 0, where the bound becomes |theta| <= 0 and the only compatible candidate is theta = 0; step 1.3 treats the identically zero prediction with m = 0, which fails the theorem hypothesis; and no division by zero occurs because step 1.2 divides by m > 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The specialisation is at n = 1, where the single coordinate index 0 carries the gradient, the direction 1 and the partial derivative; step 1.1 verifies the unit norm of the direction 1 in R^1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case delta = 0 makes the compatible set the degenerate singleton {0} with bound 0 (step 1.2); the earlier attainments at the two endpoints of the compatible interval coalesce at 0, so no nondegenerate interval is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 shows the bound is attained at the two endpoints theta = +/- delta/m of the compatible interval, which are interior points of the parameter line for delta > 0 and coincide at 0 for delta = 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No selection from a family of nonempty sets is made; the witnesses theta = +/- delta/m are written out explicitly in step 1.2, and the alternative function is exhibited in step 1.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves and uses the forward direction |m theta| <= delta implies |theta| <= delta/m, obtained by dividing by m > 0 and using |m theta| = m |theta|."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 also uses the converse |theta| <= delta/m implies |m theta| <= delta, which is what makes the compatible set exactly the set of confined parameters."
+        }
+      ]
+    }
+  }
+}

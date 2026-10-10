@@ -1,0 +1,13 @@
+# Continuum observer/dust/fluid proposal
+
+Full before/after subject objects and the batch9 input hash are in JSON. All batch9/10 writers remain outside this helper's write scope: compare the final worker receipt, current subject hashes and other supplier-owner proposals before parent integration. These new proposal artifacts are the only writes; no commit, shared edit, native readiness or independent audit is claimed.
+
+The observer lemma now gives adapted-frame numerical coefficients rather than an adopted measured reading. It states precisely that S=0 is vanishing rest stress, while isotropic rest stress S=p h permits any p. The original observer reading and conditional dust energy/volume factorization are preserved as a parent migration obligation to the existing physical postulate.
+
+Dust retains positivity, the zero-density caveat, continuity/inertial-flow equivalence and all affine-flow conclusions, with conservation explicitly required before concluding an integral curve is straight. Fluid retains C1 regularity and the complete energy/Euler equivalence without dividing by ε+P. The moving-fluid example retains all components and the conditional inequality; its exact equality cases are β=0 or ε+P=0. Coordinate velocity uses −βc and speed |β|c for both signs of β.
+
+The transverse-profile example preserves positive profiles and also the nonnegative compact-transverse variant. It has no impossible nonzero compact support in all three spatial directions. Finite-box integrals remain constant; the correct slice-balance clause(b) uses opposite x1-face cancellation, since individual face fluxes can be nonzero. The static tension computation distinguishes the full x1 derivative of the energy term from the contracted divergence, whose energy derivative is ∂0ρ=0. Scalar plane-wave stress retains its full normalization, equations and nonnegative contractions, with a nonzero future-null generating direction only where f′≠0 and zero stress elsewhere.
+
+JSON records exact current suppliers, imported pins/home carriers, confirmed witnesses, and full direct/indirect consumers including the parent-owned physical postulates, local/integrated conservation results and continuum scope remark. It notes the C1/smooth supplier wording without strengthening the preserved C1 claims, and identifies unrelated boost/normalized-current interface defects as owner context. These defects are not edited here.
+
+Local JSON, dependency-role, duplicate-edge and formal-link checks pass. The only added direct published premise is the existing interval zero-derivative corollary. Original external Crowell/Tong/Carroll full texts were not newly retrieved or read; existing source references retain their provenance.

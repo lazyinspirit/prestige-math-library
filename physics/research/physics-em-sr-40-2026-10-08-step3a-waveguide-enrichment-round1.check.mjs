@@ -1,0 +1,9 @@
+import fs from 'node:fs';
+import {loadPhysicsRepository,validatePhysicsContent} from '/home/lazyinspirit/Projects/prestige-math-library/tools/physics-support/physics-content.mjs';
+const root='/home/lazyinspirit/Projects/prestige-math-library/physics';
+const nums=[35,18];const candidate35=JSON.parse(fs.readFileSync('/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-waveguide-enrichment-round1.after.pages.json'));const proposals=[...candidate35,...JSON.parse(fs.readFileSync('/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-waveguide-enrichment-round1.wrapper-after.pages.json'))];
+const files=fs.readdirSync(root+'/research').filter(f=>/^physics-em-sr-40-2026-10-08-batch-\d+\.pages\.json$/.test(f));const context=files.filter(f=>!nums.some(n=>f.endsWith(`batch-${n}.pages.json`))).flatMap(f=>JSON.parse(fs.readFileSync(root+'/research/'+f)));
+const selectedItems=new Set([...candidate35.flatMap(p=>p.items.map(i=>i.id)),'thm-em-waveguide-spectral-completeness']);
+const selectedPages=new Set(proposals.filter(p=>p.items.some(i=>selectedItems.has(i.id))).map(p=>p.id));
+const repo=loadPhysicsRepository(root,{pages:[...context,...proposals]},selectedPages);
+const errors=validatePhysicsContent({...repo,requireBodies:false,selectedItems,selectedPages});const result={selection:[...selectedItems],errors,note:'Scoped planning content check for all13 proposed native35 items plus exact wrapper18 strategy-homing metadata, failed scope and same-reviewer consumer closure; other items are dependency context only. Not native gate certification.'};fs.writeFileSync('/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-waveguide-enrichment-round1.physics-content-check.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));process.exitCode=errors.length?1:0;

@@ -1,0 +1,1064 @@
+{
+  "version": 1,
+  "run": "physics-em-sr-40-2026-10-08",
+  "scope": [
+    "def-em-guide-cavity-geometry",
+    "pthm-em-rectangular-mode-candidates",
+    "pthm-em-open-rectangular-guide-completeness",
+    "pthm-em-guide-completeness"
+  ],
+  "contracts": {
+    "def-em-guide-cavity-geometry": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition(a) fixes a,b,d>0 and nonempty guide/cavity regions. Definition(c) admits the zero L2 reflection field with zero divergences; the parity coordinate set is fixed and no nonempty field is demanded. Empty collections of coefficients therefore represent the zero field, while TE/TM/TEM are nonexclusive predicates including that field."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "the definition asserts no field equation, mode or energy claim, so no zero-data case arises"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "mode indices are not used in the definition"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "the edge, zero-length and sigma-to-infinity degeneracies are explicitly declared outside the definition in clauses (b) and (f)"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "clause (b) makes no pointwise statement on the edges of the box"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "the definition introduces objects and conventions only and uses no choice principle"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the definition states identifications and conventions, not a conditional equivalence"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the definition states identifications and conventions, not a conditional equivalence"
+        }
+      ]
+    },
+    "pthm-em-rectangular-mode-candidates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-em-macroscopic-maxwell",
+          "source_section": "Statement",
+          "quote": "Assume the smooth branch of the vacuum Maxwell postulate [[post-em-vacuum-maxwell]] on the laboratory region $U\\cong I\\times\\Omega$ of [[def-em-lab-geometry]]: fields $E,B:\\Omega\\times I\\to\\mathbb R^3$ jointly of class $C^1$ with the additional derivatives required by each equation existing and continuous, and continuous source densities $\\rho,J$ of [[def-em-sources]]. Let $P,M$ and the derived objects $\\rho_b,J_b,\\rho_f,J_f,D,H$ be those of [[def-em-polarization-magnetization]], with $P,M$ of class $C^2$, and use the operators of [[def-divergence-and-curl-of-a-c1-vector-field]] and [[def-directional-and-partial-derivatives]]. Then:\n\n**(a) [Bound-source conservation]** $\\partial_t\\rho_b+\\operatorname{div}J_b=0$ on $\\Omega\\times I$. Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the regular-distribution and classical-compatibility interfaces below. Identify continuous sources with their regular distributions using [[def-regular-distribution-from-a-locally-integrable-function]] and [[thm-locally-integrable-functions-embed-in-distributions]]. Then\n\n$$\\partial_t\\rho_f+\\operatorname{div}J_f=\\partial_t\\rho+\\operatorname{div}J$$\n\nas distributions on $U$, with derivatives as in [[def-distributional-derivative]]: the free pair is distributionally conserved exactly when the total pair is. Under the adopted four vacuum equations both sides are zero distributions, by [[thm-distributional-differentiation-is-continuous-and-commutes]]. These statements do not require classical derivatives of $\\rho,J$. Where the partial derivatives $\\partial_t\\rho$ and $\\partial_{x_i}J_i$ exist, the same identity holds pointwise by differentiating the free/bound decomposition; in particular, if these derivatives are continuous on $U$, both pairs satisfy the classical pointwise continuity equation. The bound-source conservation equation remains classical and uses only $P,M\\in C^2$.\n\n**(b) [Macroscopic equations]** On $\\Omega\\times I$,\n\n$$\\operatorname{div}D=\\rho_f,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}H=J_f+\\partial_tD.$$\n\n**(c) [Interpretation and scope]** Equations (b) are an exact rewriting of the adopted vacuum equations under the decomposition of [[def-em-polarization-magnetization]]: the two equations written in $E$ and $B$ are unchanged, and the $D$ and $H$ equations hold for every $C^2$ pair $(P,M)$, independently of any constitutive law. The classical bound identity of (a) uses the exchange of $\\partial_t$ with $\\operatorname{div}$ for $C^2$ data; the free/total identity is distributional in the stated continuous-source class, with its classical interpretation only under the additional derivatives stated in (a). The distributional conservation conclusion embeds the adopted smooth solution only; no macroscopic field-equation claim is made for the weak branch of the Maxwell postulate, for singular or sheet sources or for discontinuous $(P,M)$; no constitutive relation and no empirical statement is made.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-em-polarization-magnetization",
+          "source_section": "Definition",
+          "quote": "Let the laboratory region $U\\cong I\\times\\Omega$, its frame basis $(e_1,e_2,e_3)$, its units, its fields $E,B$ and its source densities $\\rho,J$ be those of [[def-em-lab-geometry]], [[def-em-si-conventions]], [[def-em-fields]] and [[def-em-sources]], and let the averaging convention be that of [[post-em-coarse-graining]], in whose sense the objects below are macroscopic. Any convolution used to instantiate that reading is taken on its declared exact interior-footprint domain, or under a declared locally integrable compatible extension covering every used footprint. Its every-time use requires every-time locally integrable spatial slices; joint spacetime local integrability alone supplies only the almost-every-time branch. The joint $C^2$ regularity specified below is a separate model hypothesis, not a consequence of spatial smoothing.\n\n**(a) [Polarization and magnetization]** The material model specifies two maps $P,M:\\Omega\\times I\\to\\mathbb R^3$ of class $C^2$ in the sense of [[def-ck-euclidean-maps-and-diffeomorphisms]] on the open set $\\Omega\\times I$: $P$ is the electric dipole moment per unit volume, in $\\mathrm C\\,\\mathrm m^{-2}$, and $M$ the magnetic dipole moment per unit volume, in $\\mathrm A\\,\\mathrm m^{-1}$, both read in the frame basis. They are data of the chosen material model: this definition does not compute them from $E$ and $B$, and no relation between $(P,M)$ and the fields is asserted here.\n\n**(b) [Bound sources]** Write $\\operatorname{div}$ and $\\operatorname{curl}$ for the divergence and curl of [[def-divergence-and-curl-of-a-c1-vector-field]] taken at fixed $t$, and $\\partial_t$ for the partial derivative of [[def-directional-and-partial-derivatives]] at fixed position, and define the bound charge density and bound current density by\n\n$$\\rho_b:=-\\operatorname{div}P,\\qquad J_b:=\\partial_tP+\\operatorname{curl}M.$$\n\nSince $P,M$ are jointly $C^2$, $\\rho_b$ and $J_b$ are continuous, indeed $C^1$, by the componentwise sum and product rules of [[thm-algebra-of-derivatives]]; $\\rho_b$ carries $\\mathrm C\\,\\mathrm m^{-3}$ and $J_b$ carries $\\mathrm A\\,\\mathrm m^{-2}$.\n\n**(c) [Free sources]** Define $\\rho_f:=\\rho-\\rho_b$ and $J_f:=J-J_b$, in the same units as $\\rho$ and $J$; these are the free charge and free current densities of the model. The decomposition $\\rho=\\rho_f+\\rho_b$, $J=J_f+J_b$ is part of the chosen material model: the same total pair $(\\rho,J)$ with a different pair $(P,M)$ is a different model.\n\n**(d) [Displacement and magnetic intensity]** Define the electric displacement and the magnetic intensity by\n\n$$D:=\\varepsilon_0E+P,\\qquad H:=\\mu_0^{-1}B-M,$$\n\nwhere $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\mu_0,c>0$ are the constants of [[def-em-si-conventions]]; $D$ carries $\\mathrm C\\,\\mathrm m^{-2}$ and $H$ carries $\\mathrm A\\,\\mathrm m^{-1}$.\n\n**(e) [Status]** This item fixes objects and the bound/free convention only. No field equation (the item `pthm-em-macroscopic-maxwell`), no constitutive relation (the item `post-em-material-closure`), no conservation of the bound pair (the item `pthm-em-macroscopic-maxwell`, clause (a)) and no identification of $P,M$ with microscopic dipole sums is asserted here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-em-guide-cavity-geometry",
+          "source_section": "Definition",
+          "quote": "Let the laboratory region $U\\cong I\\times\\Omega$, its frame basis $(e_1,e_2,e_3)$, its SI units and its fields $E,B$ be those of [[def-em-lab-geometry]], [[def-em-si-conventions]] and [[def-em-fields]]. Fix $a,b>0$, write $x_t=(x_1,x_2)$, $e_z:=e_3$, and define $\\nabla_t f=(\\partial_1f,\\partial_2f,0)$, $\\Delta_t f=\\partial_1^2f+\\partial_2^2f$ and $\\operatorname{div}_tu_t=\\partial_1u_1+\\partial_2u_2$ for the stated regularity, using [[def-directional-and-partial-derivatives]], [[def-divergence-and-curl-of-a-c1-vector-field]] and [[def-laplacian-of-a-c2-function]].\n(a) [Straight guide] A straight guide region is $\\Omega_A:=A\\times\\mathbb R$ where $A$ is either a bounded connected $C^1$ plane domain ([[def-bounded-c-k-domain-and-boundary-charts]]) or the explicit rectangular cross-section; the rectangle has corners and is treated by its open faces, not asserted to be a $C^1$ boundary domain, with longitudinal axis $e_z$; for a rectangular cross-section $A=R_{ab}:=(0,a)\\times(0,b)$ the region is called the rectangular guide and its walls are the four open faces $\\{x_1=0\\},\\{x_1=a\\},\\{x_2=0\\},\\{x_2=b\\}$. A rectangular cavity region is $\\Omega_c:=(0,a)\\times(0,b)\\times(0,d)$ for fixed $d>0$, with the six open faces as its walls. The separate smooth-cavity spectral branch uses an explicitly declared bounded $C^\\infty$ domain in $\\mathbb R^3$ with its smooth PEC boundary; it is not the rectangular reflection class. Spatial derivatives are taken at fixed $t$; the fields are defined on $\\Omega\\times I$ with the regularity declared by each theorem.\n(b) [PEC boundary model] On every open wall (a wall minus its edges) the ideal perfectly conducting boundary model declares the two conditions $n\\times E=0$ and $n\\cdot B=0$, where $n$ is the outward unit normal of that wall ($-e_1,+e_1,-e_2,+e_2$ on the four rectangular walls, and $\\pm e_j$ on the six cavity walls). Its physical reading is the ideal-conductor limit of the stationary interface conditions of [[pthm-em-material-stationary-jumps]]: with $E=B=0$ inside the ideal conductor the tangential electric field and the normal magnetic field vanish, while the surface-charge and surface-current readings $\\sigma_f=-n\\cdot D$ and $K_f=-n\\times H$ for the filling-side traces (the wall normal points from the filling into the conductor, so the jump is $0$ minus the filling trace) are determined by the traces and are not prescribed here. The supplier's hypotheses (a compact embedded $C^2$ hypersurface with one-sided $C^1$ fields) cover a smooth stationary interface, not the $\\sigma\\to\\infty$ idealization nor the box edges; the guide/cavity conditions on the open walls are therefore declared as an idealization of this definition, and no pointwise statement on the edges is made.\n(c) [Zero-normal-B reflection class] For the rectangular box $Q=\\prod_{j=1}^3(0,L_j)$ with $L=(a,b,d)$, the reflection class is the class of locally integrable fields $E,B$ on $Q$ whose extensions to the rectangular torus $\\prod_j\\mathbb R/(2L_j\\mathbb Z)$, defined by extending $E_1$ evenly across the $x_1$-walls and oddly across the $x_2$-, $x_3$-walls and cyclically for $E_2,E_3$, and extending $B_1$ oddly across $x_1$ and evenly across $x_2,x_3$ and cyclically for $B_2,B_3$, are $L^2$ fields, together with the distributional constraints that $\\operatorname{div}E$ and $\\operatorname{div}B$ vanish on the torus for the extensions. This is the declared weak PEC model used for the cavity initial-value problem; for smooth fields the parities give $n\\times E=0$ and $n\\cdot B=0$ on $\\partial Q$. Initial data not in this class (for example data with trapped normal $B$) are excluded, as are the general $H(\\operatorname{curl})$ boundary classes, which are defined by the mathematical suppliers and are not identified here with the classical conditions.\n(d) [TE, TM, TEM] For a guide or cavity field $(E,B)$, the longitudinal components are $E_z:=E\\cdot e_z$ and $B_z:=B\\cdot e_z$; the field is called TE (transverse electric) if $E_z\\equiv0$, TM (transverse magnetic) if $B_z\\equiv0$, and TEM if both vanish, always relative to the named axis $e_z$.\n(e) [Separated phasor convention] For $\\omega>0$ and $\\beta\\in\\mathbb C$, a $\\beta$-$\\omega$ separated phasor field on the guide is a real field of the form $F(x,t)=\\operatorname{Re}\\bigl(\\tilde F(x_1,x_2)e^{i(\\beta x_3-\\omega t)}\\bigr)$ with a complex amplitude $\\tilde F$, componentwise; $\\omega/(2\\pi)$ is the frequency and $\\beta$ the longitudinal propagation constant; when $\\beta$ is real, $\\beta>0$ describes propagation in the $+e_z$ direction under this phase convention, while a complex $\\beta$ gives the spatial factor $e^{-\\operatorname{Im}\\beta x_3}$ and may grow in the opposite direction; each consuming branch states its selection.\n(f) [Scope] The definition fixes the geometry, the PEC boundary model, the weak reflection class and the mode terminology; it asserts no field equation, no constitutive law and no existence or completeness of modes, Rectangular TE/TM candidates and the rectangular reflection class, declared smooth bounded PEC cavity spectral classes, and smooth straight-guide TEM potential branches (including the coaxial annulus) are within this geometry. No general non-rectangular TE/TM guide theory, circular-guide spectral classification, open-end or junction scattering, or arbitrary lossy model is supplied. The same stationary PEC geometry also hosts the explicitly declared constant scalar Ohmic cavity class and the full longitudinal finite-energy reflection class of the straight rectangular guide; constitutive and evolution claims belong to their consuming theorems, not this definition.\n\n**Conventions fixed by this definition.** The definition records objects and conditions only: the guide and cavity regions, their open walls and outward normals, the ideal PEC boundary conditions with their interface reading and excluded idealization, the zero-normal-$B$ reflection class with its distributional divergence constraints, the axis-relative TE/TM/TEM terminology, and the separated phasor encoding of real fields. It asserts no field equation, no constitutive relation, no existence, uniqueness or completeness of modes, and no dissipation or energy claim; those belong to the consuming theorems, each of which restates the branch of the material model it uses. The rectangular cross-section is treated through its four open faces and is not asserted to be a $C^1$ boundary domain, and no pointwise condition on box edges is made.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-em-separated-phasor-calculus",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega_t\\subseteq\\mathbb R^2$ be open, let $\\beta\\in\\mathbb C$, $\\omega>0$, and let $\\tilde F,\\tilde G:\\Omega_t\\to\\mathbb C^3$ be $C^1$ maps (componentwise, in the sense of [[def-ck-euclidean-maps-and-diffeomorphisms]]). Write $\\theta(x_3,t):=\\beta x_3-\\omega t$ and define $F:\\Omega_t\\times\\mathbb R\\times\\mathbb R\\to\\mathbb R^3$ by $F(x_1,x_2,x_3,t):=\\operatorname{Re}\\bigl(\\tilde F(x_1,x_2)e^{i\\theta(x_3,t)}\\bigr)$ componentwise, and $G$ likewise from $\\tilde G$; here $e^{i\\theta}$ is the complex exponential of [[def-complex-exponential]] and $\\operatorname{Re}$ the real part of [[def-complex-conjugate-real-imaginary-part-and-modulus]]. Then $F$ is $C^1$ and, for every point of the domain:\n(a) $\\partial_{x_j}F=\\operatorname{Re}\\bigl(\\partial_{x_j}\\tilde F\\,e^{i\\theta}\\bigr)$ for $j=1,2$, $\\partial_{x_3}F=\\operatorname{Re}\\bigl(i\\beta\\tilde F e^{i\\theta}\\bigr)$, $\\partial_tF=\\operatorname{Re}\\bigl(-i\\omega\\tilde F e^{i\\theta}\\bigr)$, where the divergence and curl are those of [[def-divergence-and-curl-of-a-c1-vector-field]] and the partial derivatives are those of [[def-directional-and-partial-derivatives]];\n(b) $\\operatorname{div}F=\\operatorname{Re}\\bigl((\\partial_1\\tilde F_1+\\partial_2\\tilde F_2+i\\beta\\tilde F_3)e^{i\\theta}\\bigr)$;\n(c) $\\operatorname{curl}F=\\operatorname{Re}\\bigl((\\partial_2\\tilde F_3-i\\beta\\tilde F_2,\\; i\\beta\\tilde F_1-\\partial_1\\tilde F_3,\\; \\partial_1\\tilde F_2-\\partial_2\\tilde F_1)e^{i\\theta}\\bigr)$;\n(d) [amplitude injectivity] if $C\\in\\mathbb C^3$ and $\\operatorname{Re}\\bigl(Ce^{i\\varphi_1}\\bigr)=\\operatorname{Re}\\bigl(Ce^{i\\varphi_2}\\bigr)=0$ for two real phases with $\\varphi_1-\\varphi_2\\notin\\pi\\mathbb Z$, then $C=0$; consequently, if $F=G$ on a nonempty open subset $U$ of $\\Omega_t\\times\\mathbb R\\times\\mathbb R$, then $\\tilde F=\\tilde G$ on the projection of $U$ to $\\Omega_t$ (a nonempty open subset of $\\Omega_t$).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-em-transverse-vector-identities",
+          "source_section": "Statement",
+          "quote": "Let $e_z$ be a unit vector of $\\mathbb R^3$ and identify $\\mathbb R^3=\\mathbb R^2\\oplus\\mathbb R e_z$ with transverse coordinates $(x_1,x_2)$; write $\\nabla_t h=(\\partial_1h,\\partial_2h)$, $\\Delta_t h=\\partial_1^2h+\\partial_2^2h$ and, for a transverse $C^1$ map $u_t$ with components $(u_1,u_2)$, $\\operatorname{div}_t u_t=\\partial_1u_1+\\partial_2u_2$ and $\\operatorname{curl}_2 u_t=\\partial_1u_2-\\partial_2u_1$; regard $h$, $\\nabla_th$, $u_t$ and $e_z\\times u_t$ as $z$-independent fields on $\\Omega_t\\times\\mathbb R$, with $e_z$ the third basis vector. Let $h:\\Omega_t\\to\\mathbb R$ be $C^2$ and $u_t:\\Omega_t\\to\\mathbb R^2$ be $C^1$. Then, with the divergence, curl, cross product and inner product of [[def-divergence-and-curl-of-a-c1-vector-field]], [[def-cross-product-in-r3]], [[def-euclidean-inner-product]]:\n(a) $\\operatorname{div}(e_z\\times\\nabla_th)=0$; $\\operatorname{curl}(e_z\\times\\nabla_th)=e_z\\,\\Delta_th$; $e_z\\times(e_z\\times\\nabla_th)=-\\nabla_th$; $\\nabla_th\\cdot(e_z\\times\\nabla_th)=0$; $e_z\\cdot(e_z\\times\\nabla_th)=0$; $|e_z\\times\\nabla_th|=|\\nabla_th|$;\n(b) $\\operatorname{curl}(e_zh)=-e_z\\times\\nabla_th$ and $\\operatorname{div}(e_zh)=\\partial_3h$ (which vanishes for $z$-independent $h$);\n(c) $\\operatorname{curl}(u_t)=e_z\\operatorname{curl}_2u_t$, $\\operatorname{div}(u_t)=\\operatorname{div}_tu_t$, and $e_z\\times u_t$ is transverse.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-em-rectangle-mode-profile-identities",
+          "source_section": "Statement",
+          "quote": "Let $L_1,L_2>0$ and $R:=(0,L_1)\\times(0,L_2)$. For integers $m,n\\ge0$ put $h_{mn}(x_1,x_2):=\\cos\\bigl(\\frac{m\\pi x_1}{L_1}\\bigr)\\cos\\bigl(\\frac{n\\pi x_2}{L_2}\\bigr)$ and $k_{mn}^2:=\\bigl(\\frac{m\\pi}{L_1}\\bigr)^2+\\bigl(\\frac{n\\pi}{L_2}\\bigr)^2$; for integers $m,n\\ge1$ put $e_{mn}(x_1,x_2):=\\sin\\bigl(\\frac{m\\pi x_1}{L_1}\\bigr)\\sin\\bigl(\\frac{n\\pi x_2}{L_2}\\bigr)$. Then, with $\\Delta=\\partial_1^2+\\partial_2^2$, $\\nabla=(\\partial_1,\\partial_2)$ and the Riemann integrals over the rectangle of [[def-multidimensional-rectangle-and-volume]]:\n(a) $\\Delta h_{mn}=-k_{mn}^2h_{mn}$ on $R$ and $\\partial_1h_{mn}=0$ on both faces $x_1\\in\\{0,L_1\\}$, $\\partial_2h_{mn}=0$ on both faces $x_2\\in\\{0,L_2\\}$; hence $\\partial_nh_{mn}=0$ on every open face of $\\partial R$;\n(b) $\\Delta e_{mn}=-k_{mn}^2e_{mn}$ on $R$ and $e_{mn}=0$ on $\\partial R$ for $m,n\\ge1$;\n(c) [orthogonality and norms] $\\int_Rh_{mn}h_{m'n'}=0$ unless $(m,n)=(m',n')$, and $\\int_Rh_{mn}^2=\\frac{L_1L_2}{4}(1+\\delta_{m0})(1+\\delta_{n0})$; $\\int_Re_{mn}e_{m'n'}=0$ unless $(m,n)=(m',n')$, and $\\int_Re_{mn}^2=\\frac{L_1L_2}{4}$ for $m,n\\ge1$; the mixed integrals are instead $$\\int_Rh_{mn}e_{pq}=J_{mp}(L_1)J_{nq}(L_2),\\qquad J_{mp}(L):=\\int_0^L\\cos(m\\pi x/L)\\sin(p\\pi x/L)\\,dx,$$ for $m,n\\ge0$, $p,q\\ge1$. Here $J_{mp}(L)=0$ when $m,p$ have matching parity (including $p=m$), and $J_{mp}(L)=2pL/[\\pi(p^2-m^2)]$ when their parities differ. In particular $\\int_Rh_{00}e_{11}=4L_1L_2/\\pi^2$, so the sine and cosine systems are not mutually orthogonal;\n(d) [Dirichlet-type identities] $\\int_R|\\nabla h_{mn}|^2=k_{mn}^2\\int_Rh_{mn}^2$ for all $m,n\\ge0$ and $\\int_R|\\nabla e_{mn}|^2=k_{mn}^2\\int_Re_{mn}^2$ for $m,n\\ge1$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. These are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "post-em-material-closure",
+          "source_section": "Postulate",
+          "quote": "Adopt as a modelling postulate of this framework the following constitutive branches for the material described by the macroscopic fields of [[def-em-polarization-magnetization]].\n\n**(a) [Material rest frame]** The relations below are stated in a material rest frame: an inertial frame $(o;e_0,e_1,e_2,e_3)$ of the Minkowski model of [[def-em-lab-geometry]] ([[def-inertial-frame-and-inertial-chart]]) in which the material element under consideration is at rest, with spatial basis $(e_1,e_2,e_3)$; when the material is at rest in the laboratory frame of [[def-em-lab-geometry]], the components below are the laboratory components. Boosting the material changes both the fields and the rest observer; this postulate does not assert that the relations below hold with the same constants in every frame.\n\n**(b) [Elementary inertial-rest branch]** In the rest frame, with constant symmetric positive-definite matrices $\\varepsilon,\\mu\\in\\mathbb R^{3\\times3}$ (the isotropic scalar cases $\\varepsilon=\\varepsilon\\mathbf 1$, $\\mu=\\mu\\mathbf 1$ with $\\varepsilon,\\mu>0$ included), the model takes\n\n$$D=\\varepsilon E,\\qquad B=\\mu H,\\qquad J_c=\\sigma E,$$\n\nwhere $\\sigma\\in\\mathbb R^{3\\times3}$ is symmetric positive semidefinite and $J_c$ is the conduction part of the free current, $J_f=J_c+J_{\\mathrm{ext}}$ for a declared external free current $J_{\\mathrm{ext}}$; local, linear and nondispersive (instantaneous) response is part of this restricted assumption. In the isotropic case an exact broadband interpretation of the constant-coefficient law additionally requires $\\varepsilon\\mu\\ge c^{-2}$, so that the characteristic speed $1/\\sqrt{\\varepsilon\\mu}$ does not exceed the vacuum speed $c$; without that condition, and in the anisotropic branch, the constant-coefficient law is a declared finite-band effective phase-response model and carries no universal front-speed claim.\n\n**(c) [Causal memory branch]** Alternatively, and again in the rest frame, the polarisation response to the electric history is the causal convolution\n\n$$P(t)=\\varepsilon_0\\int_0^\\infty K(s)\\,E(t-s)\\,ds$$\n\nfor a declared real matrix kernel $K:[0,\\infty)\\to\\mathbb R^{3\\times3}$ in $L^1(0,\\infty)$ ([[def-l-one-of-a-measure]]); the integral then converges absolutely for bounded continuous histories $E$ because $|K_{jk}(s)E_k(t-s)|\\le(\\sup|E_k|)|K_{jk}(s)|$. The kernel class actually used, together with causality and passivity, is part of the model and is analysed in the item `pthm-em-causal-dispersive-response`; neither causality nor passivity is automatic. A finitely-subtracted analytic response may instead be declared by a scalar transfer function $\\chi$ that is holomorphic on the open upper half-plane, of class $C^1$ on the real boundary away from a real subtraction point $\\omega_0$, holomorphic on a neighbourhood of $\\omega_0$ in $\\mathbb C$, and satisfies $|\\chi(z)|\\le C(1+|z|^{n-1})$ on $\\{\\operatorname{Im}z\\ge0\\}$ outside a compact set for some integer $n\\ge1$ and constant $C>0$ ([[def-complex-differentiability-holomorphic-and-entire]]).\n\n**(d) [Status]** These are adopted model assumptions, one branch at a time; the framework does not derive them from the vacuum equations or from coarse graining, and no microscopic mechanism, material data or empirical validity is claimed. Ferroelectric and ferromagnetic response, hysteresis, nonlinear response and general nonlocal response lie outside the branches declared here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Equivalence of the real and the amplitude equations] Let $E,H$ be separated fields with amplitudes $\\tilde E,\\tilde H$ on the guide region, and use the combinations of [F3]. Then the real equations $\\operatorname{div}D=0$, $\\operatorname{div}B=0$, $\\operatorname{curl}E=-\\partial_tB$, $\\operatorname{curl}H=\\partial_tD$ of [F1] hold if and only if the four amplitude equations $\\widehat{\\operatorname{div}}(\\tilde E)=0$, $\\widehat{\\operatorname{div}}(\\tilde H)=0$, $\\widehat{\\operatorname{curl}}(\\tilde E)=i\\omega\\mu\\tilde H$, $\\widehat{\\operatorname{curl}}(\\tilde H)=-i\\omega\\varepsilon\\tilde E$ hold on $(0,a)\\times(0,b)$: indeed, since $\\varepsilon,\\mu$ are constants, [F3](b),(c) give $\\operatorname{div}D=\\varepsilon\\operatorname{Re}\\bigl(\\widehat{\\operatorname{div}}(\\tilde E)e^{i\\theta}\\bigr)$, $\\operatorname{div}B=\\mu\\operatorname{Re}\\bigl(\\widehat{\\operatorname{div}}(\\tilde H)e^{i\\theta}\\bigr)$, $\\operatorname{curl}E=\\operatorname{Re}\\bigl(\\widehat{\\operatorname{curl}}(\\tilde E)e^{i\\theta}\\bigr)$, $\\operatorname{curl}H=\\operatorname{Re}\\bigl(\\widehat{\\operatorname{curl}}(\\tilde H)e^{i\\theta}\\bigr)$ and [F3](a) gives $\\partial_tB=\\mu\\operatorname{Re}(-i\\omega\\tilde He^{i\\theta})$, $\\partial_tD=\\varepsilon\\operatorname{Re}(-i\\omega\\tilde Ee^{i\\theta})$, so substituting the amplitude equations and taking real parts reproduces the real equations; conversely, the four actual real residuals are $\\operatorname{Re}(\\varepsilon\\widehat{\\operatorname{div}}(\\tilde E)e^{i\\theta})$, $\\operatorname{Re}(\\mu\\widehat{\\operatorname{div}}(\\tilde H)e^{i\\theta})$, $\\operatorname{Re}((\\widehat{\\operatorname{curl}}(\\tilde E)-i\\omega\\mu\\tilde H)e^{i\\theta})$ and $\\operatorname{Re}((\\widehat{\\operatorname{curl}}(\\tilde H)+i\\omega\\varepsilon\\tilde E)e^{i\\theta})$. If the real equations hold these residuals vanish for all times in a nonempty open interval. At each fixed spatial point, varying time supplies two real phases whose difference is not in $\\pi\\mathbb Z$ because $\\omega>0$; the nonzero spatial factor $e^{-\\operatorname{Im}\\beta x_3}$ may be cancelled. By [F3](d) each amplitude residual is therefore zero, proving the converse. All steps are complex-linear algebra in the amplitudes.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Smoothness of the constructed fields] In either family the amplitudes $\\tilde E,\\tilde H$ are finite sums of constant multiples of the components of $\\nabla_th$ or $\\nabla_te$ and of $h$ or $e$; the profiles $h,e$ are finite products of functions $\\cos\\frac{m\\pi x_1}{a}$, $\\cos\\frac{n\\pi x_2}{b}$, $\\sin\\frac{m\\pi x_1}{a}$, $\\sin\\frac{n\\pi x_2}{b}$ composed with affine functions, hence are $C^\\infty$ by [F6] (chain rule for the affine substitutions composed with the sine and cosine derivatives, and the product rule); and $e^{i\\theta}$ is $C^\\infty$ by [F6] (the cartesian form exhibits it as $e^{-qx_3}(\\cos\\varphi+i\\sin\\varphi)$ with affine $\\varphi$, a finite combination of products of smooth functions). Therefore $E=\\operatorname{Re}(\\tilde Ee^{i\\theta})$ and $B=\\mu\\operatorname{Re}(\\tilde He^{i\\theta})$, as finite sums of products of $C^\\infty$ complex functions and of their real parts, have all iterated partial derivatives existing and continuous: differentiating a product once in a coordinate lowers no regularity by [F6], so induction on the order gives $C^\\infty$, and in particular every derivative used below exists and is continuous.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "[Dispersion relation and cutoff] Let $k_c^2=\\omega^2\\varepsilon\\mu-\\beta^2>0$ and put $\\omega_c:=k_c/\\sqrt{\\varepsilon\\mu}>0$; the number $\\omega_c$ is well defined because $\\varepsilon\\mu>0$ and $k_c^2>0$ [F7]. Real $\\beta$ with $\\beta^2=\\omega^2\\varepsilon\\mu-k_c^2$ exist exactly when $\\omega^2\\varepsilon\\mu-k_c^2\\ge0$, i.e. $\\omega^2\\ge k_c^2/(\\varepsilon\\mu)=\\omega_c^2$, i.e. $\\omega\\ge\\omega_c$ (both $\\omega$ and $\\omega_c$ are positive); then the real solutions are $\\beta=\\pm\\sqrt{\\omega^2\\varepsilon\\mu-k_c^2}$ [F7], and $\\beta\\ne0$ exactly when $\\omega>\\omega_c$, while $\\beta=0$ occurs exactly at $\\omega=\\omega_c$. If $\\omega<\\omega_c$ the right side is negative and the two solutions of $\\beta^2=-(\\!k_c^2-\\omega^2\\varepsilon\\mu)$ are $\\beta=\\pm i\\sqrt{k_c^2-\\omega^2\\varepsilon\\mu}$ because $(i\\gamma)^2=-\\gamma^2$ for real $\\gamma$ [F7]. For any such root the phase factor obeys $e^{i\\theta}=e^{i\\beta x_3}e^{-i\\omega t}$, and $e^{i\\beta x_3}=e^{-\\operatorname{Im}\\beta\\,x_3}(\\cos(\\operatorname{Re}\\beta\\,x_3)+i\\sin(\\operatorname{Re}\\beta\\,x_3))$ by [F6], so the field carries the real modulation factor $e^{-\\operatorname{Im}\\beta\\,x_3}$ in the declared phase convention; on a declared half-guide $x_3\\ge0$ with $\\operatorname{Im}\\beta>0$ this factor decays, and no propagating-power claim is made. The verification of clauses (a) and (b) below uses only $\\beta^2=\\omega^2\\varepsilon\\mu-k^2$ (equivalently $k^2+\\beta^2=\\omega^2\\varepsilon\\mu$), so it covers imaginary and complex $\\beta$ as well.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[The TE family] Fix $m,n\\ge0$ with $(m,n)\\ne(0,0)$, put $h:=h_{mn}$, $k^2:=k_{mn}^2$ (so $k^2>0$ by [F5] and $k^2=\\omega^2\\varepsilon\\mu-\\beta^2=k_c^2$ by the required dispersion relation), and let $\\tilde E:=-\\frac{i\\omega\\mu}{k^2}\\,e_z\\times\\nabla_th$, $\\tilde H:=\\frac{i\\beta}{k^2}\\nabla_th+e_zh$, $E=\\operatorname{Re}(\\tilde Ee^{i\\theta})$, $B=\\mu\\operatorname{Re}(\\tilde He^{i\\theta})$. First, $e_z\\times\\nabla_th$ is transverse by [F4], so $\\tilde E_3=0$ and $E_z=\\operatorname{Re}(0)=0$: the field is TE. Second, the amplitude equations of step 1.1 hold: $\\widehat{\\operatorname{div}}(\\tilde E)=-\\frac{i\\omega\\mu}{k^2}\\bigl(\\partial_1(-\\partial_2h)+\\partial_2(\\partial_1h)+i\\beta\\cdot0\\bigr)=-\\frac{i\\omega\\mu}{k^2}\\operatorname{div}(e_z\\times\\nabla_th)=0$ by [F4]; $\\widehat{\\operatorname{div}}(\\tilde H)=\\frac{i\\beta}{k^2}(\\partial_1^2h+\\partial_2^2h)+i\\beta h=\\frac{i\\beta}{k^2}\\Delta_th+i\\beta h=\\frac{i\\beta}{k^2}(-k^2h)+i\\beta h=0$ by [F5]; $\\widehat{\\operatorname{curl}}(\\tilde E)=\\bigl(-i\\beta\\tilde E_2,\\ i\\beta\\tilde E_1,\\ \\partial_1\\tilde E_2-\\partial_2\\tilde E_1\\bigr)=\\bigl(-\\frac{\\beta\\omega\\mu}{k^2}\\partial_1h,\\ -\\frac{\\beta\\omega\\mu}{k^2}\\partial_2h,\\ -\\frac{i\\omega\\mu}{k^2}(\\partial_1^2h+\\partial_2^2h)\\bigr)=\\bigl(\\frac{i\\beta}{k^2}i\\omega\\mu\\,\\partial_1h,\\ \\frac{i\\beta}{k^2}i\\omega\\mu\\,\\partial_2h,\\ i\\omega\\mu h\\bigr)=i\\omega\\mu\\tilde H$, using $i\\beta\\tilde E_1=i\\beta\\frac{i\\omega\\mu}{k^2}\\partial_2h=-\\frac{\\beta\\omega\\mu}{k^2}\\partial_2h$ and $-\\frac{i\\omega\\mu}{k^2}(-k^2h)=i\\omega\\mu h$; and $\\widehat{\\operatorname{curl}}(\\tilde H)=\\bigl(\\partial_2h-i\\beta\\frac{i\\beta}{k^2}\\partial_2h,\\ i\\beta\\frac{i\\beta}{k^2}\\partial_1h-\\partial_1h,\\ \\frac{i\\beta}{k^2}(\\partial_1\\partial_2h-\\partial_2\\partial_1h)\\bigr)=\\bigl(1+\\frac{\\beta^2}{k^2}\\bigr)\\bigl(\\partial_2h,-\\partial_1h,0\\bigr)=\\frac{k^2+\\beta^2}{k^2}\\bigl(\\partial_2h,-\\partial_1h,0\\bigr)=\\frac{\\omega^2\\varepsilon\\mu}{k^2}\\bigl(\\partial_2h,-\\partial_1h,0\\bigr)=-i\\omega\\varepsilon\\tilde E$, where the last mixed-partial difference vanishes by the identity $\\operatorname{div}(e_z\\times\\nabla_th)=0$ of [F4] and the final equality uses $\\tilde E=-\\frac{i\\omega\\mu}{k^2}(-\\partial_2h,\\partial_1h,0)$. Third, the open-wall conditions: on $\\{x_1=0\\}$ and $\\{x_1=a\\}$ (normals $\\mp e_1$) the tangential components of $E$ are $E_2=\\operatorname{Re}\\bigl(-\\frac{i\\omega\\mu}{k^2}\\partial_1h\\,e^{i\\theta}\\bigr)=-\\frac{\\omega\\mu}{k^2}\\operatorname{Re}(i\\partial_1h\\,e^{i\\theta})=0$ and $E_3=0$, because $\\partial_1h=0$ there by [F5], and $n\\cdot B=\\mp B_1=\\mp\\mu\\operatorname{Re}\\bigl(\\frac{i\\beta}{k^2}\\partial_1h\\,e^{i\\theta}\\bigr)=0$; on $\\{x_2=0\\}$ and $\\{x_2=b\\}$ (normals $\\mp e_2$) the tangential components are $E_1=\\operatorname{Re}\\bigl(\\frac{i\\omega\\mu}{k^2}\\partial_2h\\,e^{i\\theta}\\bigr)=0$, since $\\partial_2h=0$ there by [F5], and $E_3=0$, while $n\\cdot B=\\mp B_2=\\mp\\mu\\operatorname{Re}\\bigl(\\frac{i\\beta}{k^2}\\partial_2h\\,e^{i\\theta}\\bigr)=0$. Hence $n\\times E=0$ and $n\\cdot B=0$ on every open wall, and clause (a) holds.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "[The TM family] Fix $m,n\\ge1$, put $e:=e_{mn}$ and $k^2:=k_{mn}^2=k_c^2>0$, and let $\\tilde E:=\\frac{i\\beta}{k^2}\\nabla_te+e_ze$, $\\tilde H:=\\frac{i\\omega\\varepsilon}{k^2}e_z\\times\\nabla_te$, $E=\\operatorname{Re}(\\tilde Ee^{i\\theta})$, $B=\\mu\\operatorname{Re}(\\tilde He^{i\\theta})$. Here $e_z\\times\\nabla_te$ is transverse by [F4], so $\\tilde H_3=0$ and $B_z=\\mu\\operatorname{Re}(0)=0$: the field is TM. The amplitude equations hold: $\\widehat{\\operatorname{div}}(\\tilde E)=\\frac{i\\beta}{k^2}(\\partial_1^2e+\\partial_2^2e)+i\\beta e=\\frac{i\\beta}{k^2}(-k^2e)+i\\beta e=0$ by [F5]; $\\widehat{\\operatorname{div}}(\\tilde H)=\\frac{i\\omega\\varepsilon}{k^2}\\bigl(\\partial_1(-\\partial_2e)+\\partial_2(\\partial_1e)\\bigr)+i\\beta\\cdot0=0$ by the identity $\\operatorname{div}(e_z\\times\\nabla_te)=0$ of [F4]; $\\widehat{\\operatorname{curl}}(\\tilde E)=\\bigl(\\partial_2e-i\\beta\\frac{i\\beta}{k^2}\\partial_2e,\\ i\\beta\\frac{i\\beta}{k^2}\\partial_1e-\\partial_1e,\\ \\frac{i\\beta}{k^2}(\\partial_1\\partial_2e-\\partial_2\\partial_1e)\\bigr)=\\frac{k^2+\\beta^2}{k^2}\\bigl(\\partial_2e,-\\partial_1e,0\\bigr)=\\frac{\\omega^2\\varepsilon\\mu}{k^2}\\bigl(\\partial_2e,-\\partial_1e,0\\bigr)=i\\omega\\mu\\tilde H$ (the mixed difference vanishes by [F4] and the final equality uses $\\tilde H=\\frac{i\\omega\\varepsilon}{k^2}(-\\partial_2e,\\partial_1e,0)$); and $\\widehat{\\operatorname{curl}}(\\tilde H)=\\bigl(-i\\beta\\tilde H_2,\\ i\\beta\\tilde H_1,\\ \\partial_1\\tilde H_2-\\partial_2\\tilde H_1\\bigr)=\\bigl(\\frac{\\beta\\omega\\varepsilon}{k^2}\\partial_1e,\\ \\frac{\\beta\\omega\\varepsilon}{k^2}\\partial_2e,\\ \\frac{i\\omega\\varepsilon}{k^2}(\\partial_1^2e+\\partial_2^2e)\\bigr)=\\frac{\\omega\\varepsilon\\beta}{k^2}\\nabla_te-i\\omega\\varepsilon e_ze=-i\\omega\\varepsilon\\tilde E$, using $\\frac{i\\omega\\varepsilon}{k^2}(-k^2e)=-i\\omega\\varepsilon e$, in agreement with $\\tilde E=\\frac{i\\beta}{k^2}\\nabla_te+e_ze$. The open-wall conditions: $e=0$ on $\\partial R$ by [F5], so $E_3=\\operatorname{Re}(ee^{i\\theta})=0$ on the walls; on $\\{x_1=0\\}$ and $\\{x_1=a\\}$ (normals $\\mp e_1$) the tangential components are $E_2=\\operatorname{Re}\\bigl(\\frac{i\\beta}{k^2}\\partial_2e\\,e^{i\\theta}\\bigr)=0$, since $\\partial_2e$ carries the factor $\\sin\\frac{m\\pi x_1}{a}$ vanishing there, and $E_3=0$, while $n\\cdot B=\\mp B_1=\\mp\\mu\\operatorname{Re}\\bigl(\\frac{i\\omega\\varepsilon}{k^2}(-\\partial_2e)e^{i\\theta}\\bigr)=0$; on $\\{x_2=0\\}$ and $\\{x_2=b\\}$ (normals $\\mp e_2$) the tangential components are $E_1=\\operatorname{Re}\\bigl(\\frac{i\\beta}{k^2}\\partial_1e\\,e^{i\\theta}\\bigr)=0$, since $\\partial_1e$ carries the factor $\\sin\\frac{n\\pi x_2}{b}$ vanishing there, and $E_3=0$, while $n\\cdot B=\\mp B_2=\\mp\\mu\\operatorname{Re}\\bigl(\\frac{i\\omega\\varepsilon}{k^2}\\partial_1e\\,e^{i\\theta}\\bigr)=0$. Hence the wall conditions hold and clause (b) follows.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "[Zero indices and nonvanishing] For $m=n=0$ one has $h_{00}\\equiv1$, so $\\nabla_th_{00}=0$ and $k_{00}^2=0$: the divided reconstruction formulas of the TE family are undefined, and this exclusion is by the reconstruction denominator. A purely longitudinal constant candidate has $\\tilde E=0$ and $\\tilde H=ce_z$; the Faraday amplitude equation of step 1.1 then reads $\\widehat{\\operatorname{curl}}(0)=(0,0,0)=i\\omega\\mu ce_z$, so $c=0$ because $\\omega\\mu>0$: it is excluded by the full field equations, not by divergence. Consistently $\\widehat{\\operatorname{div}}(ce_z)=i\\beta c$, which vanishes at $\\beta=0$, so the divergence equation alone would not exclude a constant longitudinal amplitude at $\\beta=0$; the exclusion uses Faraday as displayed. For $m=0$ or $n=0$ the TM profile vanishes identically, $e_{mn}\\equiv0$, so $\\tilde E=e_ze=0$ and $\\tilde H=0$; hence the TM indices are restricted to $m,n\\ge1$. Conversely, for $(m,n)\\ne(0,0)$ one has $\\nabla_th_{mn}\\ne0$: if $m\\ne0$ then $\\partial_1h_{mn}=-\\frac{m\\pi}{a}\\sin\\frac{m\\pi x_1}{a}\\cos\\frac{n\\pi x_2}{b}$ is nonzero at $x_1=\\frac a{2m}$ and an interior $x_2\\in(0,b)$ with $\\cos(n\\pi x_2/b)\\ne0$ (take $x_2=b/(4n)$ when $n>0$, and $x_2=b/2$ when $n=0$), and if $m=0$ then $n\\ne0$ and the analogous $\\partial_2h_{mn}$ is nonzero; and for $m,n\\ge1$ one has $e_{mn}\\ne0$, for instance at $x_1=\\frac a{2m},x_2=\\frac b{2n}$. Consequently the displayed amplitudes are nonzero for all admissible indices (the transverse parts are nonzero multiples of $\\nabla_th$ or $\\nabla_te$, and the longitudinal parts are nonzero profiles or vanish only when the corresponding index is excluded), and by the consequence clause of [F3](d) the real fields $E=\\operatorname{Re}(\\tilde Ee^{i\\theta})$, $B=\\mu\\operatorname{Re}(\\tilde He^{i\\theta})$ are not identically zero.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Conclusion and scope] Clauses (a) and (b) are steps 2.1 and 2.2: for every admissible index pair the displayed fields are $C^\\infty$ by step 1.2, satisfy the four source-free equations by steps 1.1 and the amplitude verifications, have their stated TE or TM property, and satisfy the PEC wall conditions on every open wall by the trace identities of [F5]; clause (c) is step 2.3; clause (d) is step 1.3, whose algebra covers real, zero and imaginary roots alike with the factor $e^{-\\operatorname{Im}\\beta\\,x_3}$ and the declared half-guide reading; and the argument used only the declared lossless isotropic scalar branch, the PEC model of the definition, the four macroscopic equations with $\\rho_f=J_f=0$ and the separated phasor calculus, with no completeness, uniqueness, lossy, dispersive, open-end or empirical assertion and no propagating-power claim below cutoff. This is clause (e).",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "F5",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The positive a,b and nonempty coordinate domains are fixed. The physical TE index set excludes (0,0), while each admissible index yields a nonzero profile by the interior witnesses of step 2.3. A zero TM index yields the identically zero sine profile and is expressly excluded, rather than used in a divided reconstruction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.3 treats the zero indices, the zero field and the beta=0 cutoff explicitly"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 2.1 and 2.2 treat the index restrictions m=0 or n=0 and the first admissible indices"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.3 covers the excluded degenerate index (0,0) and the cutoff case beta=0"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.1 and 2.2 evaluate the traces on the open faces x_j in {0,a} and {0,b}"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "all verifications are finite algebra and calculus and no choice principle is used"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves that the amplitude equations imply the real field equations"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.1 proves conversely that the real field equations imply the amplitude equations"
+        }
+      ]
+    },
+    "pthm-em-open-rectangular-guide-completeness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-em-macroscopic-maxwell",
+          "source_section": "Statement",
+          "quote": "Assume the smooth branch of the vacuum Maxwell postulate [[post-em-vacuum-maxwell]] on the laboratory region $U\\cong I\\times\\Omega$ of [[def-em-lab-geometry]]: fields $E,B:\\Omega\\times I\\to\\mathbb R^3$ jointly of class $C^1$ with the additional derivatives required by each equation existing and continuous, and continuous source densities $\\rho,J$ of [[def-em-sources]]. Let $P,M$ and the derived objects $\\rho_b,J_b,\\rho_f,J_f,D,H$ be those of [[def-em-polarization-magnetization]], with $P,M$ of class $C^2$, and use the operators of [[def-divergence-and-curl-of-a-c1-vector-field]] and [[def-directional-and-partial-derivatives]]. Then:\n\n**(a) [Bound-source conservation]** $\\partial_t\\rho_b+\\operatorname{div}J_b=0$ on $\\Omega\\times I$. Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the regular-distribution and classical-compatibility interfaces below. Identify continuous sources with their regular distributions using [[def-regular-distribution-from-a-locally-integrable-function]] and [[thm-locally-integrable-functions-embed-in-distributions]]. Then\n\n$$\\partial_t\\rho_f+\\operatorname{div}J_f=\\partial_t\\rho+\\operatorname{div}J$$\n\nas distributions on $U$, with derivatives as in [[def-distributional-derivative]]: the free pair is distributionally conserved exactly when the total pair is. Under the adopted four vacuum equations both sides are zero distributions, by [[thm-distributional-differentiation-is-continuous-and-commutes]]. These statements do not require classical derivatives of $\\rho,J$. Where the partial derivatives $\\partial_t\\rho$ and $\\partial_{x_i}J_i$ exist, the same identity holds pointwise by differentiating the free/bound decomposition; in particular, if these derivatives are continuous on $U$, both pairs satisfy the classical pointwise continuity equation. The bound-source conservation equation remains classical and uses only $P,M\\in C^2$.\n\n**(b) [Macroscopic equations]** On $\\Omega\\times I$,\n\n$$\\operatorname{div}D=\\rho_f,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}H=J_f+\\partial_tD.$$\n\n**(c) [Interpretation and scope]** Equations (b) are an exact rewriting of the adopted vacuum equations under the decomposition of [[def-em-polarization-magnetization]]: the two equations written in $E$ and $B$ are unchanged, and the $D$ and $H$ equations hold for every $C^2$ pair $(P,M)$, independently of any constitutive law. The classical bound identity of (a) uses the exchange of $\\partial_t$ with $\\operatorname{div}$ for $C^2$ data; the free/total identity is distributional in the stated continuous-source class, with its classical interpretation only under the additional derivatives stated in (a). The distributional conservation conclusion embeds the adopted smooth solution only; no macroscopic field-equation claim is made for the weak branch of the Maxwell postulate, for singular or sheet sources or for discontinuous $(P,M)$; no constitutive relation and no empirical statement is made.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-em-restricted-material-energy",
+          "source_section": "Statement",
+          "quote": "Assume the elementary inertial-rest branch of [[post-em-material-closure]]: constant symmetric positive-definite matrices $\\varepsilon,\\mu\\in\\mathbb R^{3\\times3}$ (isotropic scalar case included) with $D=\\varepsilon E$ and $B=\\mu H$, and the conduction relation $J_f=\\sigma E+J_{\\mathrm{ext}}$ with $\\sigma$ symmetric positive semidefinite and a declared external free current $J_{\\mathrm{ext}}$. Assume the smooth branch of [[post-em-vacuum-maxwell]] with the regularity hypotheses of [[pthm-em-macroscopic-maxwell]], so that its macroscopic equations hold on $\\Omega\\times I$. Define the stored-energy density and the energy-flux vector\n\n$$u:=\\tfrac12\\bigl(E\\cdot D+B\\cdot H\\bigr),\\qquad S:=E\\times H,$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]] and the cross product of [[def-cross-product-in-r3]]; $u$ carries $\\mathrm J\\,\\mathrm m^{-3}=\\mathrm{kg}\\,\\mathrm m^{-1}\\mathrm s^{-2}$ and $S$ carries $\\mathrm W\\,\\mathrm m^{-2}$. Then:\n\n**(a) [Local balance and positivity]** On $\\Omega\\times I$,\n\n$$\\partial_tu+\\operatorname{div}S=-J_f\\cdot E.$$\n\nMoreover $u=\\tfrac12(E\\cdot\\varepsilon E+H\\cdot\\mu H)\\ge0$, with $u(x,t)>0$ whenever $(E(x,t),H(x,t))\\ne(0,0)$.\n\n**(b) [Dissipation reading]** With $J_f=\\sigma E+J_{\\mathrm{ext}}$ and $\\sigma$ symmetric positive semidefinite, $E\\cdot\\sigma E\\ge0$ and the balance reads\n\n$$\\partial_tu+\\operatorname{div}S+E\\cdot\\sigma E=-J_{\\mathrm{ext}}\\cdot E;$$\n\nthe nonnegative term $E\\cdot\\sigma E$ is the Ohmic dissipation density of the model.\n\n**(c) [Fixed-volume balance]** Let $\\Omega'\\subseteq\\Omega$ be open with $\\overline{\\Omega'}\\subseteq\\Omega$ carrying the finite piecewise $C^1$ presentation of [[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]], let $t_0<t_1$ with $(t_0,t_1)\\subseteq I$, assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) as in that divergence theorem, and let $n$ be the outward unit normal of $\\partial\\Omega'$. Then for every $t\\in(t_0,t_1)$,\n\n$$\\frac{d}{dt}\\int_{\\Omega'}u(x,t)\\,dx=-\\int_{\\Omega'}J_f\\cdot E\\,dx-\\oint_{\\partial\\Omega'}S\\cdot n\\,dS.$$\n\n**(d) [Scope]** The density $u=\\tfrac12(E\\cdot D+B\\cdot H)$ is a stored-energy density only for this constant symmetric nondispersive model; for general dispersive, nonlocal, nonlinear or hysteretic response no instantaneous stored-energy density is defined or claimed by this item, and the general dispersive work balance is not supplied. The identities hold only where the fields and sources have the stated regularity, the fixed-volume form keeps its boundary term, and no conservation of $\\int_{\\Omega'}u$ is asserted unless that term vanishes. No empirical claim is made.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-em-rectangular-transverse-mode-completeness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $L>0$ and $R=(0,L_1)\\times(0,L_2)$ with $L_1,L_2>0$.\n(a) [One interval] The families $\\{\\cos(m\\pi x/L)\\}_{m\\ge0}$ and $\\{\\sin(m\\pi x/L)\\}_{m\\ge1}$ are orthogonal complete systems in the real Hilbert space $L^2(0,L)$ ([[def-l-p-space-as-a-quotient-by-null-functions]], [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]): each is orthogonal, and its closed linear span is all of $L^2(0,L)$.\n(b) [Rectangle] With $m,n$ ranging over $\\mathbb N_0$ in cosine slots and over $\\mathbb N_{\\ge1}$ in sine slots, each of the four product families $\\{\\cos\\frac{m\\pi x_1}{L_1}\\cos\\frac{n\\pi x_2}{L_2}\\}$, $\\{\\cos\\frac{m\\pi x_1}{L_1}\\sin\\frac{n\\pi x_2}{L_2}\\}$, $\\{\\sin\\frac{m\\pi x_1}{L_1}\\cos\\frac{n\\pi x_2}{L_2}\\}$ and $\\{\\sin\\frac{m\\pi x_1}{L_1}\\sin\\frac{n\\pi x_2}{L_2}\\}$ is an orthogonal complete system in $L^2(R)$; in particular the Neumann family $\\{h_{mn}\\}_{m,n\\ge0}$ and the Dirichlet family $\\{e_{mn}\\}_{m,n\\ge1}$ of [[lem-em-rectangle-mode-profile-identities]] are orthogonal complete systems in $L^2(R)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-em-rectangular-pec-energy-completeness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $Q=\\prod_{j=1}^3(0,L_j)$ with $L_j>0$ and let $\\varepsilon,\\mu>0$ be constants. Define the reflection boundary class by extending $E_1$ evenly across the $x_1$-walls and oddly across the $x_2,x_3$-walls, and cyclically for $E_2,E_3$; extend $B_1$ oddly across $x_1$ and evenly across $x_2,x_3$, cyclically for $B_2,B_3$. Work on the rectangular torus $\\prod_j\\mathbb R/(2L_j\\mathbb Z)$ in the real $L^2$ fields with these parities and distributional $\\operatorname{div}E=\\operatorname{div}B=0$. For smooth fields the parity class gives $n\\times E=0$ and $n\\cdot B=0$ on $\\partial Q$. Then: (i) the finite separated Fourier modes are dense in this class, and the class is complete for the $L^2$ pairing ([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]); (ii) for every initial datum in the class there is a unique $C(\\mathbb R;L^2)$ weak solution of $\\partial_tE=(\\varepsilon\\mu)^{-1}\\operatorname{curl}B$, $\\partial_tB=-\\operatorname{curl}E$ in the same class ([[def-distributional-derivative]]); (iii) the energy $\\tfrac12\\int_Q(\\varepsilon|E|^2+|B|^2/\\mu)\\,dx$ is constant along the solution. This is an explicit weak PEC model; it supplies neither trace regularity for arbitrary $H(\\operatorname{curl})$ fields nor completeness in lossy, open or non-rectangular guides.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-space-fourier-expansion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(e_i)_{i\\in I}$ be a complete orthonormal family in a real or complex Hilbert\nspace $H$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]) and\nlet $x\\in H$, with partial sums\n$P_Fx=\\sum_{i\\in F}\\langle x,e_i\\rangle e_i$ over finite $F\\subseteq I$. Then:\n\n1. $x$ is the norm limit of the finite-subset net $(P_Fx)$, that is\n   $$x=\\sum_{i\\in I}\\langle x,e_i\\rangle e_i$$\n   in the sense of convergence of the net of finite subsums;\n2. **the coefficients are unique**: if $(a_i)_{i\\in I}$ is a family in\n   $\\mathbb F$ whose finite-subset net $\\sum_{i\\in F}a_ie_i$ converges to $x$,\n   then $a_i=\\langle x,e_i\\rangle$ for every $i\\in I$;\n3. the support $\\{i : \\langle x,e_i\\rangle\\ne0\\}$ is at most countable, and the\n   expansion does not depend on an ordering: if $(i_k)_{k\\in\\mathbb N}$ is a\n   sequence of pairwise distinct elements of $I$ whose image contains the\n   support, then the sequence of partial sums\n   $\\sum_{k<n}\\langle x,e_{i_k}\\rangle e_{i_k}$ also converges to $x$.\n\nClaim 3 is the sense in which the expansion is **unconditional**: the sum is\nindependent of any ordering, because the finite-subset net converges and any\nenumeration of a set containing the support by pairwise distinct indices is\ncofinal in the squared mass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-plancherel",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and let $n\\ge1$. Fourier transformation on Schwartz space extends uniquely to a surjective complex-linear isometry $\\mathcal F_2:L^2(\\mathbb R^n;\\mathbb C)\\to L^2(\\mathbb R^n;\\mathbb C)$. It preserves the first-variable-linear inner product, and hence is unitary.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-l-two-fourier-inversion",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. On complex $L^2$, $\\mathcal F_2^2f=Rf$, $Rf(x)=f(-x)$, and $\\mathcal F_2^{-1}=R\\mathcal F_2$. For $f\\in L^2$, the truncated integrals $\\int_{|x|\\le R}f(x)e^{-2\\pi ix\\cdot\\xi}\\,dx$ converge in $L^2$ to $\\mathcal F_2f$ as $R\\to\\infty$. The corresponding positive-sign integrals converge in $L^2$ to $\\mathcal F_2^{-1}f$. No pointwise convergence is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The negative-sign, $2\\pi$-normalized Fourier transform is continuous $\\mathcal F:\\mathcal S\\to\\mathcal S$, and\n$$\\mathcal F(\\partial^\\alpha f)(\\xi)=(2\\pi i\\xi)^\\alpha\\widehat f(\\xi),\\qquad \\partial^\\beta\\widehat f=\\mathcal F((-2\\pi ix)^\\beta f).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, there exists $\\chi\\in C_c^\\infty(\\mathbb R^n)$ with $0\\le\\chi\\le1$, $\\chi=1$ on $|x|\\le1$, and $\\chi=0$ on $|x|\\ge2$. For $R>0$, $\\chi_R(x)=\\chi(x/R)$ satisfies $\\partial^\\beta\\chi_R(x)=R^{-|\\beta|}(\\partial^\\beta\\chi)(x/R)$. The construction requires no choice.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$\nThe test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]]. Its composition with $u$, multiplied by the indicated sign, is therefore a continuous complex-linear functional, so this definition produces a distribution. The pairing is bilinear, with no complex conjugation. For $\\alpha=0$ the operation is the identity; for one coordinate derivative its sign is minus. Every derivative of the zero distribution is zero, including on the empty domain. No choice axiom enters this construction. Compatibility with classical derivatives requires an integration-by-parts argument where it is used; it is not part of the definition.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-distributional-differentiation-is-continuous-and-commutes",
+          "source_section": "Statement",
+          "quote": "Distributional derivatives satisfy $\\partial^\\alpha\\partial^\\beta u=\\partial^{\\alpha+\\beta}u$ and are continuous linear maps on $\\mathcal D'(\\Omega)$ for both the weak and strong distribution topologies. These claims hold in ZF. Assuming Countable Choice for the cited Riemann-to-Lebesgue comparison, if $f\\in C^k(\\Omega;\\mathbb C)$ and $|\\alpha|\\le k$, then $\\partial^\\alpha u_f=u_{\\partial^\\alpha f}$. In particular distributional differentiation extends classical smooth differentiation.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-a-distribution-with-zero-derivatives-on-a-connected-open-set-is-constant",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the Lebesgue regular-distribution convention. If $\\Omega\\subseteq\\mathbb R^n$ is nonempty, open and connected and $\\partial_j u=0$ for every $1\\le j\\le n$, then there is a unique $c\\in\\mathbb C$ such that $u(\\psi)=c\\int\\psi$ for every test. Conversely every constant regular distribution has zero first derivatives. On a disconnected open set constants may differ on different connected components.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $F$ be its integral function\n([[def-the-integral-function]]), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous ([[def-continuity-real]]). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ ([[def-derivative]]) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\n[[def-derivative]] means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-globally-lipschitz-odes-have-global-solutions",
+          "source_section": "Statement",
+          "quote": "Let $F:\\mathbb R\\times\\mathbb R^n\\to\\mathbb R^n$ be continuous and suppose one $L\\ge0$ satisfies $\\|F(t,x)-F(t,y)\\|_2\\le L\\|x-y\\|_2$ for all $t,x,y$. Then every IVP for $x'=F(t,x)$ has a unique global solution.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-dependence-of-odes-on-initial-data-and-parameters",
+          "source_section": "Statement",
+          "quote": "Let $F(t,x,\\lambda)$ be continuous on an open time-state-parameter domain and locally state-Lipschitz with one constant on compact cylinders. Near fixed data $(t_0,x_0,\\lambda_0)$, the solutions supplied by Picard-Lindelof exist on one common compact time interval and depend jointly and uniformly continuously there on the initial time, initial state, and parameter. Quantitatively, if the common time interval has length at most $H$, $\\|F\\|_2\\le M$, and $F$ has state-Lipschitz constant $L$, then solutions through $(t_0,x_0)$ and $(s,y_0)$ satisfy\n\n$$\\|x(t)-y(t)\\|_2\\le e^{LH}\\bigl(\\|x_0-y_0\\|_2+M|s-t_0|+H\\,\\omega(\\|\\lambda-\\mu\\|_2)\\bigr),$$\n\nwhere $\\omega(r)\\to0$ is a uniform modulus for the parameter dependence of $F$ on that cylinder.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-em-uniform-ohmic-modal-decay",
+          "source_section": "Statement",
+          "quote": "Assume the constant isotropic inertial-rest material branch of [[post-em-material-closure]] with $\\varepsilon,\\mu>0$, $\\sigma\\ge0$, $D=\\varepsilon E$, $H=B/\\mu$, $J_{\\rm ext}=0$. The exact broadband physical reading additionally requires $\\varepsilon\\mu\\ge c^{-2}$ as in that closure; otherwise the positive coefficients define its finite-band effective phase model without a universal front-speed claim. Put $v^2=(\\varepsilon\\mu)^{-1}$ and $\\gamma=\\sigma/\\varepsilon$. The smooth equations of [[pthm-em-macroscopic-maxwell]] with initially zero volume charge give $E_t=v^2\\operatorname{curl}B-\\gamma E$, $B_t=-\\operatorname{curl}E$ and zero divergences; in the finite-energy classes below these first-order equations with the declared PEC weak/variational boundary realization are adopted explicitly, rather than deduced from a smooth-only postulate. The quadratic stored energy is $\\mathcal U(t)=\\tfrac12(\\varepsilon\\|E(t)\\|_2^2+\\mu^{-1}\\|B(t)\\|_2^2)$, consistent with [[pthm-em-restricted-material-energy]].\n(a) [Rectangular cavity] In the exact zero-normal-$B$ reflection-parity and divergence class of [[lem-em-rectangular-pec-energy-completeness]] and [[def-em-guide-cavity-geometry]](c), every initial pair has a unique $C(\\mathbb R;L^2)$ distributional solution of this damped system in the same class. Finite Fourier mode sums converge in energy norm uniformly on compact time intervals and are dense at every time. The Fourier coefficient equations at $k_j=\\pi n_j/L_j$ are $\\widehat E_t=iv^2 k\\times\\widehat B-\\gamma\\widehat E$, $\\widehat B_t=-ik\\times\\widehat E$, with both transverse constraints and the original parities retained.\n(b) [Smooth closed PEC cavity] Assume the full Axiom of Choice ([[def-axiom-of-choice]]) inherited from the smooth spectral and elliptic suppliers. On a bounded smooth cavity $\\Omega$, let $X,V,H$ and its smooth orthonormal eigenfields $u_j$, $\\lambda_j\\ge0$, be exactly [[lem-em-smooth-pec-cavity-spectral-closure]] and [[thm-em-waveguide-spectral-completeness]]. Define the full weak normal-zero divergence-free magnetic space $$M:=\\{B\\in L^2(\\Omega;\\mathbb R^3):\\int_\\Omega B\\cdot\\nabla\\psi=0\\text{ for every smooth scalar }\\psi\\text{ on }\\overline\\Omega\\}.$$ This is the distributional divergence constraint together with weak zero normal flux; for smooth fields it is $\\operatorname{div}B=0$, $n\\cdot B=0$. For every positive eigenvalue put $w_j=\\operatorname{curl}u_j/\\sqrt{\\lambda_j}$ and put $K_M=\\{B\\in M:\\operatorname{curl}B=0\\text{ distributionally}\\}$. Then $$M=\\overline{\\operatorname{span}\\{w_j:\\lambda_j>0\\}}^{L^2}\\mathbin{\\oplus}K_M.$$ The declared first-order PEC modal energy class is $H\\times M$, with weak modal equations $a_j'=v^2\\sqrt{\\lambda_j}b_j-\\gamma a_j$, $b_j'=-\\sqrt{\\lambda_j}a_j$ for positive modes, $a_j'=-\\gamma a_j$ for electric zero modes, and $(B,K_M)'=0$ for every kernel test. Define $D_M$ as the graph-norm completion of finite $w_j$ sums plus $K_M$, with norm squared $\\|w\\|_2^2+\\|\\operatorname{curl}w\\|_2^2$. The equivalent weak-in-time variational equations are $\\langle E_t,\\phi\\rangle=v^2\\langle B,\\operatorname{curl}\\phi\\rangle-\\gamma\\langle E,\\phi\\rangle$ for $\\phi\\in V$, and $\\langle B_t,\\psi\\rangle=-\\langle E,\\operatorname{curl}\\psi\\rangle$ for $\\psi\\in D_M$. They use the actual electric tangential-zero domain $V$ and magnetic normal-zero space $M$, with no claim of maximal-trace equality. For every initial pair in $H\\times M$ there is a unique $C(\\mathbb R;H\\times M)$ solution of that declared realization, which also satisfies the displayed evolution equations distributionally in the interior. Finite electric and paired-magnetic modal sums, with the exact static magnetic kernel component retained, converge uniformly on compact time intervals in energy norm. No equality with every maximal rough tangential-trace realization is asserted.\n(c) [Exact energy balance, decay and zero sectors] In both declared classes, for every $t_0<t_1$, $$\\mathcal U(t_1)+\\sigma\\int_{t_0}^{t_1}\\|E(t)\\|_2^2\\,dt=\\mathcal U(t_0),\\qquad \\mathcal U'(t)=-\\sigma\\|E(t)\\|_2^2\\le0.$$ For positive smooth-cavity modes $a_j''+\\gamma a_j'+v^2\\lambda_ja_j=0$. If $\\Delta_j=\\gamma^2/4-v^2\\lambda_j$ is positive, the two roots are $-\\gamma/2\\pm\\sqrt{\\Delta_j}$; if negative they are $-\\gamma/2\\pm i\\sqrt{-\\Delta_j}$; at zero include $(A+Bt)e^{-\\gamma t/2}$. This finite scalar characteristic classification applies to every parameter $\\lambda\\ge0$ and uses no choice principle; its general zero-eigenvalue associated-wave solutions and the narrower first-order compatibility are stated separately in (d). The full Choice premise belongs to the smooth-cavity spectral realization, not to these finite root formulas. For $\\sigma>0$ every positive mode decays, electric zero modes obey $a_j(t)=a_j(0)e^{-\\gamma t}$, and magnetic kernel data stay constant. In the smooth class the solution therefore tends in energy norm as $t\\to+\\infty$ to $(0,P_{K_M}B(0))$. For $\\sigma=0$ energy is constant, electric zero modes are static and the original lossless branch is recovered. The zero sectors are retained, not divided by their eigenvalues; no universal decay to zero in the presence of magnetic kernel data is claimed.\n(d) [Associated second-order branch] Independently of first-order compatibility, the same spectral basis gives the damped associated electric wave for every $q_0\\in V$, $q_1\\in H$, with $q\\in C(\\mathbb R;V)$, $q'\\in C(\\mathbb R;H)$ and modal convergence uniformly on compact times. Its coefficients satisfy $a_j''+\\gamma a_j'+v^2\\lambda_ja_j=0$ with arbitrary prescribed initial coefficients. At $\\lambda_j=0$ they are $\\alpha_j+\\beta_j(1-e^{-\\gamma t})/\\gamma$ when $\\gamma>0$, and $\\alpha_j+t\\beta_j$ when $\\gamma=0$. Such arbitrary second-order data need not arise from the first-order Maxwell system: its zero modes additionally satisfy $a_j'=-\\gamma a_j$. This broader wave is retained alongside the physical first-order branch. All square roots and real derivatives use [[thm-of-square-roots]], [[thm-sine-and-cosine-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]] and the real-component exponential formula [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]].\n(e) [Scope] The conductor occupies the declared cavity interior while its stationary walls obey the independent ideal PEC boundary model. No arbitrary loss tensor, memory law, changing interface, open-end, rough-wall or empirical conclusion is made. Countable Choice ([[def-countable-choice]]) suffices for the rectangular/Fourier branch; the smooth branch retains its actual full Choice premise. Weak energy balance is proved by modal limits and does not assert an unprovided nonlinear weak local Poynting theorem.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.\n\nThis is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F=(F_0,\\ldots,F_{n-1}):U\\to\\mathbb R^n$ be $C^1$ in the componentwise Euclidean sense of [[def-ck-euclidean-maps-and-diffeomorphisms]]. Then the **divergence** of $F$ is $\\operatorname{div}F:=\\sum_{i<n}\\partial_iF_i$, the function $U\\to\\mathbb R$ whose value at $p$ is $\\sum_{i<n}\\partial_iF_i(p)$. The partial derivatives are those of [[def-directional-and-partial-derivatives]], and the sum is the finite sum used throughout [[def-euclidean-inner-product]]. Since each $\\partial_iF_i$ is continuous on $U$, so is $\\operatorname{div}F$.\n\nNow let $n=3$ and let $F:U\\to\\mathbb R^3$ be $C^1$ on an open $U\\subseteq\\mathbb R^3$. Following [[def-cross-product-in-r3]], write the three coordinates of a point and of a vector as $x,y,z$ rather than $0,1,2$, so that $F=(F_x,F_y,F_z)$ means $F=(F_0,F_1,F_2)$ and $\\partial_x,\\partial_y,\\partial_z$ are $\\partial_0,\\partial_1,\\partial_2$. With that naming, the **curl** of $F$ is $\\operatorname{curl}F:=(\\partial_yF_z-\\partial_zF_y,\\ \\partial_zF_x-\\partial_xF_z,\\ \\partial_xF_y-\\partial_yF_x)$, a map $U\\to\\mathbb R^3$ each of whose coordinates is continuous on $U$. In this naming the divergence reads $\\operatorname{div}F=\\partial_xF_x+\\partial_yF_y+\\partial_zF_z$.\n\nBoth operators are defined pointwise from the first partial derivatives of the components, so no differentiability of $F$ beyond $C^1$ is used and no orientation or metric structure enters beyond the standard coordinates of [[def-jacobian-matrix-and-gradient]]. For a $C^1$ scalar function $f$ on $U$, the gradient $\\nabla f=(\\partial_0f,\\ldots,\\partial_{n-1}f)$ is that of [[def-jacobian-matrix-and-gradient]]; in the three-coordinate naming, $\\nabla f=(\\partial_xf,\\partial_yf,\\partial_zf)$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-complex-lp-completeness-density-and-inner-product",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. On every measure space, complex $L^p$ is complete for $1\\le p\\le\\infty$, and every norm-convergent sequence has a subsequence of measurable representatives converging a.e. to its limit. For finite $p$, finite simple functions with finite-measure support are dense, and on $\\mathbb R^n$ with Lebesgue measure, $n\\ge1$, complex $C_c^\\infty$ is dense. Complex $L^2$ has the first-variable-linear inner product $\\int f\\overline g$, its norm is $\\|\\cdot\\|_2$, and Cauchy\u2013Schwarz has the following equality criterion: if $g\\ne0$, equality iff $f=cg$ a.e.; if $g=0$, equality for all $f$. The finite-tuple version uses a common scalar across components.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "post-em-material-closure",
+          "source_section": "Postulate",
+          "quote": "Adopt as a modelling postulate of this framework the following constitutive branches for the material described by the macroscopic fields of [[def-em-polarization-magnetization]].\n\n**(a) [Material rest frame]** The relations below are stated in a material rest frame: an inertial frame $(o;e_0,e_1,e_2,e_3)$ of the Minkowski model of [[def-em-lab-geometry]] ([[def-inertial-frame-and-inertial-chart]]) in which the material element under consideration is at rest, with spatial basis $(e_1,e_2,e_3)$; when the material is at rest in the laboratory frame of [[def-em-lab-geometry]], the components below are the laboratory components. Boosting the material changes both the fields and the rest observer; this postulate does not assert that the relations below hold with the same constants in every frame.\n\n**(b) [Elementary inertial-rest branch]** In the rest frame, with constant symmetric positive-definite matrices $\\varepsilon,\\mu\\in\\mathbb R^{3\\times3}$ (the isotropic scalar cases $\\varepsilon=\\varepsilon\\mathbf 1$, $\\mu=\\mu\\mathbf 1$ with $\\varepsilon,\\mu>0$ included), the model takes\n\n$$D=\\varepsilon E,\\qquad B=\\mu H,\\qquad J_c=\\sigma E,$$\n\nwhere $\\sigma\\in\\mathbb R^{3\\times3}$ is symmetric positive semidefinite and $J_c$ is the conduction part of the free current, $J_f=J_c+J_{\\mathrm{ext}}$ for a declared external free current $J_{\\mathrm{ext}}$; local, linear and nondispersive (instantaneous) response is part of this restricted assumption. In the isotropic case an exact broadband interpretation of the constant-coefficient law additionally requires $\\varepsilon\\mu\\ge c^{-2}$, so that the characteristic speed $1/\\sqrt{\\varepsilon\\mu}$ does not exceed the vacuum speed $c$; without that condition, and in the anisotropic branch, the constant-coefficient law is a declared finite-band effective phase-response model and carries no universal front-speed claim.\n\n**(c) [Causal memory branch]** Alternatively, and again in the rest frame, the polarisation response to the electric history is the causal convolution\n\n$$P(t)=\\varepsilon_0\\int_0^\\infty K(s)\\,E(t-s)\\,ds$$\n\nfor a declared real matrix kernel $K:[0,\\infty)\\to\\mathbb R^{3\\times3}$ in $L^1(0,\\infty)$ ([[def-l-one-of-a-measure]]); the integral then converges absolutely for bounded continuous histories $E$ because $|K_{jk}(s)E_k(t-s)|\\le(\\sup|E_k|)|K_{jk}(s)|$. The kernel class actually used, together with causality and passivity, is part of the model and is analysed in the item `pthm-em-causal-dispersive-response`; neither causality nor passivity is automatic. A finitely-subtracted analytic response may instead be declared by a scalar transfer function $\\chi$ that is holomorphic on the open upper half-plane, of class $C^1$ on the real boundary away from a real subtraction point $\\omega_0$, holomorphic on a neighbourhood of $\\omega_0$ in $\\mathbb C$, and satisfies $|\\chi(z)|\\le C(1+|z|^{n-1})$ on $\\{\\operatorname{Im}z\\ge0\\}$ outside a compact set for some integer $n\\ge1$ and constant $C>0$ ([[def-complex-differentiability-holomorphic-and-entire]]).\n\n**(d) [Status]** These are adopted model assumptions, one branch at a time; the framework does not derive them from the vacuum equations or from coarse graining, and no microscopic mechanism, material data or empirical validity is claimed. Ferroelectric and ferromagnetic response, hysteresis, nonlinear response and general nonlocal response lie outside the branches declared here.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Complete mixed transform] With the characters of [F2], first form for each component the transverse coefficients $F_{mn}(z)=\\int_{T_{ab}^2}F(x_t,z)\\overline{\\phi_{mn}(x_t)}dx_t$ and then $\\widehat F_{mn}(\\xi)=\\mathcal F_2F_{mn}(\\xi)$ for the exact $2\\pi$-convention transform of [F3]; write $\\beta=2\\pi\\xi$. Then the map $F\\mapsto(\\widehat F_{mn})_{(m,n)\\in\\mathbb Z^2}$ is a unitary isomorphism of $L^2(T_{ab}^2\\times\\mathbb R)$ onto $\\ell^2(\\mathbb Z^2;L^2(\\mathbb R))$ and, for the reflection fields of the Statement, $\\|F\\|^2_{L^2(Q)}=\\frac14\\sum_{m,n}\\int_{\\mathbb R}|\\widehat F_{mn}(\\xi)|^2d\\xi$. Indeed the characters are orthonormal on the fundamental rectangle and, being products of the complete one-dimensional character systems, their finite span is dense in the transverse $L^2$ of each torus fibre by [F2]; Fubini\u2013Tonelli therefore gives, for almost every $z$, the transverse expansion together with $\\int_{T_{ab}^2}|F(x_t,z)|^2dx_t=\\sum_{m,n}|F_{mn}(z)|^2$ and, after integration in $z$, $\\|F\\|^2_{L^2(T_{ab}^2\\times\\mathbb R)}=\\sum_{m,n}\\|F_{mn}\\|^2_{L^2(\\mathbb R)}$. Applying the unitary Plancherel transform [F3] to each of the countably many scalar functions $F_{mn}\\in L^2(\\mathbb R)$ gives the coefficient map and the isometry on the torus product, with inverse from the $L^2$ inversion theorem of [F3]; the reflection extension doubles each transverse period, so the torus fundamental rectangle has $4ab$-area and the physical norm is one quarter of the extended norm, which is the displayed factor $\\frac14$. The parity relations follow from $\\phi_{-m,-n}=\\overline{\\phi_{mn}}$ and the transverse parities by the coordinate changes $x_j\\mapsto-x_j$ on the torus, and the reality relation $\\widehat F_{-m,-n}(-\\xi)=\\overline{\\widehat F_{mn}(\\xi)}$ holds first for real integrable compactly supported longitudinal data by the defining integral and passes to $L^2$ by density and continuity of the transform [F3]. No pointwise reconstruction is asserted.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Divergence constraints in coefficient form] For $K:=(\\pi m/a,\\pi n/b,2\\pi\\xi)$ the distributionally zero divergence of the extended field is equivalent to $K\\cdot\\widehat E=K\\cdot\\widehat B=0$ for almost every $\\xi$, and the finite-energy reflection class is exactly the class of coefficient families satisfying these almost-everywhere constraints together with the parities and $L^2$ summability. The derivative correspondence is proved on the dense test class of finite transverse-character sums times longitudinal Schwartz functions: for such a test $\\psi$, finite transverse integration by parts and the exact identity $\\mathcal F_2(\\partial_z\\psi)=2\\pi i\\xi\\widehat\\psi$ of [F3] turn the pairing $\\int F\\cdot\\nabla\\psi$ into the sum of the coefficient pairings against $iK\\cdot\\widehat F$, and the compactly supported smooth tests used in the definition are obtained by multiplying with cutoffs $\\chi_R$ of [F3] and passing to the limit, since the tests and their first derivatives converge in $L^2$ and all pairings are bounded by Cauchy\u2013Schwarz [F6]; conversely a test with $K\\cdot\\widehat F=0$ almost everywhere has zero weak divergence pairing, and the general compact smooth tests are reached through the transverse $L^2$ expansions of their derivatives and the Schwartz transform isomorphism [F3]. Hence the exact constrained class corresponds to the stated almost-everywhere coefficient constraints, not merely to a scalar basis without Gauss equations; for smooth fields the divergences vanish pointwise and the four-wall PEC conditions hold by the reading of [[def-em-guide-cavity-geometry]].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Unique energy evolution in the class] Adopt the constant-Ohmic first-order system of [F1] distributionally in the reflection class of step 2.1. For every initial pair in the class there is a unique $C(\\mathbb R;L^2(Q))$ solution in the same class, its mixed coefficients satisfy, for every $(m,n)$ and almost every $\\xi$, $\\partial_t\\widehat E=iv^2K\\times\\widehat B-\\gamma\\widehat E$ and $\\partial_t\\widehat B=-iK\\times\\widehat E$, and finite transverse sums with bounded longitudinal frequency truncations reconstruct the solution in energy norm uniformly on compact time intervals and are dense in the class at every time, retaining the divergence constraints and parities without dividing by $K$ or $|K|$. Existence: for each $(m,n,\\xi)$ the real and imaginary parts of the displayed system form a real finite-dimensional constant-coefficient linear system on all of $\\mathbb R$, hence a globally Lipschitz system with a unique global solution through the initial coefficients by [F5]; the solution matrix depends continuously on $\\xi$ uniformly on compact parameter and time sets by the continuous-dependence theorem [F5] (applied on a common bounded state cylinder, which the uniform energy bound below supplies), so multiplying the measurable initial coefficient vector by the continuous fundamental matrix gives measurable coefficient trajectories [F6]; no uncountable choice of solutions is made, and the construction uses only the countable families of coefficients. Energy: with $q:=\\varepsilon|\\widehat E|^2+\\mu^{-1}|\\widehat B|^2$, conjugation and the triple-product cancellation of the displayed system give $q'=-2\\sigma|\\widehat E|^2$, whence $q(t)\\le e^{2\\gamma T}q(0)$ for $|t|\\le T$ and forward contractivity at $\\sigma\\ge0$; the constraints $K\\cdot\\widehat E=K\\cdot\\widehat B=0$ and the parity and reality relations of step 1.1 are preserved because the right-hand side is linear, $K\\cdot(K\\times\\widehat B)=0$ and the parities are respected by the cross product with $K$. Cutoffs $|m|,|n|\\le N$, $|\\xi|\\le N$ preserve every relation; their initial energy tails tend to zero by Tonelli and dominated convergence [F4], and the uniform bound makes the time-dependent tails tend to zero uniformly on compact times; each truncated solution is strongly differentiable in $L^2$ with bounded multiplier $K$ on the cutoff, and its linear equations follow from the test derivative identity of step 2.1, so the compact-time $L^2$ limits are continuous, have the prescribed data and satisfy the equations against compact smooth tests. Uniqueness: for any weak $C_tL^2$ reflection solution and bounded spectral cutoff $N$, project to the cutoff coefficients; the test identity of step 2.1 turns the evolution into $f'=A_Nf$ distributionally in time in the cutoff Hilbert space with bounded constant matrix $A_N$, and the finite transverse tests and smooth frequency tests supported in the cutoff interval, whose inverse transforms are Schwartz, are dense in the cutoff space, so the identity extends to every cutoff vector by the bounded multiplier and Cauchy\u2013Schwarz [F6]. Subtracting the continuous Hilbert-valued primitive of $A_Nf$, constructed as the norm limit of finite Riemann sums (which is independent of the tags by the uniform oscillation bound on a compact interval, exists by completeness of $L^2$, has the correct derivative by the average-increment bound, and is the vector version of the primitive argument of [F4]), pairing with every fixed cutoff vector and applying the scalar zero-derivative distribution theorem [F4] identifies the difference with its constant initial value; the difference $d$ of two solutions with zero data satisfies $d(t)=\\int_0^tA_Nd(s)ds$, so on an interval of length $h$ with $h\\|A_N\\|<1$ the supremum norm forces $d=0$, and finitely iterating these intervals in either direction on any compact time interval gives $d=0$; letting the cutoffs exhaust the representation gives uniqueness of the whole field. The zero coefficient $K=0$ is treated directly by the same equations with $K=0$, without division by $K$ or $|K|$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "[Energy and dispersion] The total stored energy of the whole infinite guide is finite and equals $\\mathcal U(t)=\\frac18\\sum_{m,n}\\int_{\\mathbb R}(\\varepsilon|\\widehat E|^2+\\mu^{-1}|\\widehat B|^2)d\\xi$, and for every $t_0<t_1$ one has $\\mathcal U(t_1)+\\sigma\\int_{t_0}^{t_1}\\|E(t)\\|_{L^2(Q)}^2dt=\\mathcal U(t_0)$ with $\\mathcal U'(t)=-\\sigma\\|E(t)\\|_2^2$. Indeed, summing the finite/cutoff modal identities $q'=-2\\sigma|\\widehat E|^2$ of step 3.1 over the bounded cutoffs, integrating in $\\xi$ and summing the finite transverse indices gives the truncated balance, and dominated convergence with the compact-time tail bound of step 3.1 passes it to the limit; the physical energy carries the factor $\\frac12\\cdot\\frac14=\\frac18$ from step 1.1, and the dissipation term is continuous in time, so ordinary FTC [F4] gives the derivative form. At $\\sigma=0$ the energy is constant, and on the constrained coefficient subspace differentiating the first-order equation once and using $K\\times(K\\times e)=K(K\\cdot e)-|K|^2e$ together with $K\\cdot\\widehat E=0$ gives $\\widehat E''+v^2|K|^2\\widehat E=0$, that is $\\omega^2=v^2[(\\pi m/a)^2+(\\pi n/b)^2+\\beta^2]$ with $\\beta=2\\pi\\xi$; at $K=0$ the direct equations $\\widehat E'=-\\gamma\\widehat E$, $\\widehat B'=0$ are retained without dividing by $K$. For $\\sigma>0$ the electric equation is $\\widehat E''+\\gamma\\widehat E'+v^2|K|^2\\widehat E=0$ at $\\lambda=|K|^2\\ge0$ with the distinct/repeated-root alternatives of the finite-parameter classification [F5], including the zero-$K$ case; the zero-profile restrictions and individual cutoffs of the separated TE/TM candidates are unaffected, and no TE$_{00}$ mode is created by a scalar constant coefficient.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "[Scope] Clause (a) is steps 1.1 and 2.1, clause (b) is step 3.1, and clause (c) is step 4.1. The theorem supplies the complete longitudinal $L^2$ expansion of the declared straight rectangular guide with its lossless and constant-Ohmic energy evolutions and makes no completeness claim for arbitrary non-rectangular, dispersive, nonlocal, nonlinear, rough-wall or open-end/junction problems; the weak energy result is proved by linear mixed-transform evolution and modal limits, not by applying a nonlinear smooth Poynting identity to rough data, and no signal-speed or empirical inference is made.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The fixed index set Z2 is nonempty, but finite sums may be empty and then reconstruct zero initial fields and the zero solution. The linear coefficient system and energy identity of step 3.1 include zero data and K=0 without dividing by K; cutoff limits also cover identically zero tails."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 keeps the K=0 coefficient case without dividing by K or |K|"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "no distinguished one-element index case enters the transform or evolution arguments"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 includes the zero-frequency K=0 sector and the lossless sigma=0 boundary case"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 handles the cutoff endpoints by density and the frequency cutoffs of measure zero"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is declared and used for the uncountable Plancherel inversion, Tonelli and dominated-convergence steps in steps 1.1, 3.1 and 4.1"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 proves the forward correspondence from zero divergence to the coefficient constraints K.E-hat=K.B-hat=0"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 proves the converse by testing the almost-everywhere constraints against the dense test class"
+        }
+      ]
+    },
+    "pthm-em-guide-completeness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-em-rectangle-mode-profile-identities",
+          "source_section": "Statement",
+          "quote": "Let $L_1,L_2>0$ and $R:=(0,L_1)\\times(0,L_2)$. For integers $m,n\\ge0$ put $h_{mn}(x_1,x_2):=\\cos\\bigl(\\frac{m\\pi x_1}{L_1}\\bigr)\\cos\\bigl(\\frac{n\\pi x_2}{L_2}\\bigr)$ and $k_{mn}^2:=\\bigl(\\frac{m\\pi}{L_1}\\bigr)^2+\\bigl(\\frac{n\\pi}{L_2}\\bigr)^2$; for integers $m,n\\ge1$ put $e_{mn}(x_1,x_2):=\\sin\\bigl(\\frac{m\\pi x_1}{L_1}\\bigr)\\sin\\bigl(\\frac{n\\pi x_2}{L_2}\\bigr)$. Then, with $\\Delta=\\partial_1^2+\\partial_2^2$, $\\nabla=(\\partial_1,\\partial_2)$ and the Riemann integrals over the rectangle of [[def-multidimensional-rectangle-and-volume]]:\n(a) $\\Delta h_{mn}=-k_{mn}^2h_{mn}$ on $R$ and $\\partial_1h_{mn}=0$ on both faces $x_1\\in\\{0,L_1\\}$, $\\partial_2h_{mn}=0$ on both faces $x_2\\in\\{0,L_2\\}$; hence $\\partial_nh_{mn}=0$ on every open face of $\\partial R$;\n(b) $\\Delta e_{mn}=-k_{mn}^2e_{mn}$ on $R$ and $e_{mn}=0$ on $\\partial R$ for $m,n\\ge1$;\n(c) [orthogonality and norms] $\\int_Rh_{mn}h_{m'n'}=0$ unless $(m,n)=(m',n')$, and $\\int_Rh_{mn}^2=\\frac{L_1L_2}{4}(1+\\delta_{m0})(1+\\delta_{n0})$; $\\int_Re_{mn}e_{m'n'}=0$ unless $(m,n)=(m',n')$, and $\\int_Re_{mn}^2=\\frac{L_1L_2}{4}$ for $m,n\\ge1$; the mixed integrals are instead $$\\int_Rh_{mn}e_{pq}=J_{mp}(L_1)J_{nq}(L_2),\\qquad J_{mp}(L):=\\int_0^L\\cos(m\\pi x/L)\\sin(p\\pi x/L)\\,dx,$$ for $m,n\\ge0$, $p,q\\ge1$. Here $J_{mp}(L)=0$ when $m,p$ have matching parity (including $p=m$), and $J_{mp}(L)=2pL/[\\pi(p^2-m^2)]$ when their parities differ. In particular $\\int_Rh_{00}e_{11}=4L_1L_2/\\pi^2$, so the sine and cosine systems are not mutually orthogonal;\n(d) [Dirichlet-type identities] $\\int_R|\\nabla h_{mn}|^2=k_{mn}^2\\int_Rh_{mn}^2$ for all $m,n\\ge0$ and $\\int_R|\\nabla e_{mn}|^2=k_{mn}^2\\int_Re_{mn}^2$ for $m,n\\ge1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-em-rectangular-transverse-mode-completeness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $L>0$ and $R=(0,L_1)\\times(0,L_2)$ with $L_1,L_2>0$.\n(a) [One interval] The families $\\{\\cos(m\\pi x/L)\\}_{m\\ge0}$ and $\\{\\sin(m\\pi x/L)\\}_{m\\ge1}$ are orthogonal complete systems in the real Hilbert space $L^2(0,L)$ ([[def-l-p-space-as-a-quotient-by-null-functions]], [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]): each is orthogonal, and its closed linear span is all of $L^2(0,L)$.\n(b) [Rectangle] With $m,n$ ranging over $\\mathbb N_0$ in cosine slots and over $\\mathbb N_{\\ge1}$ in sine slots, each of the four product families $\\{\\cos\\frac{m\\pi x_1}{L_1}\\cos\\frac{n\\pi x_2}{L_2}\\}$, $\\{\\cos\\frac{m\\pi x_1}{L_1}\\sin\\frac{n\\pi x_2}{L_2}\\}$, $\\{\\sin\\frac{m\\pi x_1}{L_1}\\cos\\frac{n\\pi x_2}{L_2}\\}$ and $\\{\\sin\\frac{m\\pi x_1}{L_1}\\sin\\frac{n\\pi x_2}{L_2}\\}$ is an orthogonal complete system in $L^2(R)$; in particular the Neumann family $\\{h_{mn}\\}_{m,n\\ge0}$ and the Dirichlet family $\\{e_{mn}\\}_{m,n\\ge1}$ of [[lem-em-rectangle-mode-profile-identities]] are orthogonal complete systems in $L^2(R)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-hilbert-space-fourier-expansion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(e_i)_{i\\in I}$ be a complete orthonormal family in a real or complex Hilbert\nspace $H$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]) and\nlet $x\\in H$, with partial sums\n$P_Fx=\\sum_{i\\in F}\\langle x,e_i\\rangle e_i$ over finite $F\\subseteq I$. Then:\n\n1. $x$ is the norm limit of the finite-subset net $(P_Fx)$, that is\n   $$x=\\sum_{i\\in I}\\langle x,e_i\\rangle e_i$$\n   in the sense of convergence of the net of finite subsums;\n2. **the coefficients are unique**: if $(a_i)_{i\\in I}$ is a family in\n   $\\mathbb F$ whose finite-subset net $\\sum_{i\\in F}a_ie_i$ converges to $x$,\n   then $a_i=\\langle x,e_i\\rangle$ for every $i\\in I$;\n3. the support $\\{i : \\langle x,e_i\\rangle\\ne0\\}$ is at most countable, and the\n   expansion does not depend on an ordering: if $(i_k)_{k\\in\\mathbb N}$ is a\n   sequence of pairwise distinct elements of $I$ whose image contains the\n   support, then the sequence of partial sums\n   $\\sum_{k<n}\\langle x,e_{i_k}\\rangle e_{i_k}$ also converges to $x$.\n\nClaim 3 is the sense in which the expansion is **unconditional**: the sum is\nindependent of any ordering, because the finite-subset net converges and any\nenumeration of a set containing the support by pairwise distinct indices is\ncofinal in the squared mass.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).\n\n1. On **real** $L^2(\\mu)$ the formula\n   $$\\langle f,g\\rangle:=\\int fg\\,d\\mu$$is a well-defined inner product, linear in both variables, positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\\mu;\\mathbb C)$ the formula$$\\langle f,g\\rangle:=\\int f\\overline g\\,d\\mu$$\n   is a well-defined inner product, linear in the first variable and\n   conjugate-linear in the second, positive definite, with\n   $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu;\\mathbb C)$ is a complex\n   Hilbert space ([[def-complex-lp-and-euclidean-test-function-conventions]]).\n\nIn both cases the inner product induces exactly the established quotient\n$L^2$ norm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-em-rectangular-pec-energy-completeness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $Q=\\prod_{j=1}^3(0,L_j)$ with $L_j>0$ and let $\\varepsilon,\\mu>0$ be constants. Define the reflection boundary class by extending $E_1$ evenly across the $x_1$-walls and oddly across the $x_2,x_3$-walls, and cyclically for $E_2,E_3$; extend $B_1$ oddly across $x_1$ and evenly across $x_2,x_3$, cyclically for $B_2,B_3$. Work on the rectangular torus $\\prod_j\\mathbb R/(2L_j\\mathbb Z)$ in the real $L^2$ fields with these parities and distributional $\\operatorname{div}E=\\operatorname{div}B=0$. For smooth fields the parity class gives $n\\times E=0$ and $n\\cdot B=0$ on $\\partial Q$. Then: (i) the finite separated Fourier modes are dense in this class, and the class is complete for the $L^2$ pairing ([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]); (ii) for every initial datum in the class there is a unique $C(\\mathbb R;L^2)$ weak solution of $\\partial_tE=(\\varepsilon\\mu)^{-1}\\operatorname{curl}B$, $\\partial_tB=-\\operatorname{curl}E$ in the same class ([[def-distributional-derivative]]); (iii) the energy $\\tfrac12\\int_Q(\\varepsilon|E|^2+|B|^2/\\mu)\\,dx$ is constant along the solution. This is an explicit weak PEC model; it supplies neither trace regularity for arbitrary $H(\\operatorname{curl})$ fields nor completeness in lossy, open or non-rectangular guides.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$\nThe test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]]. Its composition with $u$, multiplied by the indicated sign, is therefore a continuous complex-linear functional, so this definition produces a distribution. The pairing is bilinear, with no complex conjugation. For $\\alpha=0$ the operation is the identity; for one coordinate derivative its sign is minus. Every derivative of the zero distribution is zero, including on the empty domain. No choice axiom enters this construction. Compatibility with classical derivatives requires an integration-by-parts argument where it is used; it is not part of the definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-em-guide-cavity-geometry",
+          "source_section": "Definition",
+          "quote": "Let the laboratory region $U\\cong I\\times\\Omega$, its frame basis $(e_1,e_2,e_3)$, its SI units and its fields $E,B$ be those of [[def-em-lab-geometry]], [[def-em-si-conventions]] and [[def-em-fields]]. Fix $a,b>0$, write $x_t=(x_1,x_2)$, $e_z:=e_3$, and define $\\nabla_t f=(\\partial_1f,\\partial_2f,0)$, $\\Delta_t f=\\partial_1^2f+\\partial_2^2f$ and $\\operatorname{div}_tu_t=\\partial_1u_1+\\partial_2u_2$ for the stated regularity, using [[def-directional-and-partial-derivatives]], [[def-divergence-and-curl-of-a-c1-vector-field]] and [[def-laplacian-of-a-c2-function]].\n(a) [Straight guide] A straight guide region is $\\Omega_A:=A\\times\\mathbb R$ where $A$ is either a bounded connected $C^1$ plane domain ([[def-bounded-c-k-domain-and-boundary-charts]]) or the explicit rectangular cross-section; the rectangle has corners and is treated by its open faces, not asserted to be a $C^1$ boundary domain, with longitudinal axis $e_z$; for a rectangular cross-section $A=R_{ab}:=(0,a)\\times(0,b)$ the region is called the rectangular guide and its walls are the four open faces $\\{x_1=0\\},\\{x_1=a\\},\\{x_2=0\\},\\{x_2=b\\}$. A rectangular cavity region is $\\Omega_c:=(0,a)\\times(0,b)\\times(0,d)$ for fixed $d>0$, with the six open faces as its walls. The separate smooth-cavity spectral branch uses an explicitly declared bounded $C^\\infty$ domain in $\\mathbb R^3$ with its smooth PEC boundary; it is not the rectangular reflection class. Spatial derivatives are taken at fixed $t$; the fields are defined on $\\Omega\\times I$ with the regularity declared by each theorem.\n(b) [PEC boundary model] On every open wall (a wall minus its edges) the ideal perfectly conducting boundary model declares the two conditions $n\\times E=0$ and $n\\cdot B=0$, where $n$ is the outward unit normal of that wall ($-e_1,+e_1,-e_2,+e_2$ on the four rectangular walls, and $\\pm e_j$ on the six cavity walls). Its physical reading is the ideal-conductor limit of the stationary interface conditions of [[pthm-em-material-stationary-jumps]]: with $E=B=0$ inside the ideal conductor the tangential electric field and the normal magnetic field vanish, while the surface-charge and surface-current readings $\\sigma_f=-n\\cdot D$ and $K_f=-n\\times H$ for the filling-side traces (the wall normal points from the filling into the conductor, so the jump is $0$ minus the filling trace) are determined by the traces and are not prescribed here. The supplier's hypotheses (a compact embedded $C^2$ hypersurface with one-sided $C^1$ fields) cover a smooth stationary interface, not the $\\sigma\\to\\infty$ idealization nor the box edges; the guide/cavity conditions on the open walls are therefore declared as an idealization of this definition, and no pointwise statement on the edges is made.\n(c) [Zero-normal-B reflection class] For the rectangular box $Q=\\prod_{j=1}^3(0,L_j)$ with $L=(a,b,d)$, the reflection class is the class of locally integrable fields $E,B$ on $Q$ whose extensions to the rectangular torus $\\prod_j\\mathbb R/(2L_j\\mathbb Z)$, defined by extending $E_1$ evenly across the $x_1$-walls and oddly across the $x_2$-, $x_3$-walls and cyclically for $E_2,E_3$, and extending $B_1$ oddly across $x_1$ and evenly across $x_2,x_3$ and cyclically for $B_2,B_3$, are $L^2$ fields, together with the distributional constraints that $\\operatorname{div}E$ and $\\operatorname{div}B$ vanish on the torus for the extensions. This is the declared weak PEC model used for the cavity initial-value problem; for smooth fields the parities give $n\\times E=0$ and $n\\cdot B=0$ on $\\partial Q$. Initial data not in this class (for example data with trapped normal $B$) are excluded, as are the general $H(\\operatorname{curl})$ boundary classes, which are defined by the mathematical suppliers and are not identified here with the classical conditions.\n(d) [TE, TM, TEM] For a guide or cavity field $(E,B)$, the longitudinal components are $E_z:=E\\cdot e_z$ and $B_z:=B\\cdot e_z$; the field is called TE (transverse electric) if $E_z\\equiv0$, TM (transverse magnetic) if $B_z\\equiv0$, and TEM if both vanish, always relative to the named axis $e_z$.\n(e) [Separated phasor convention] For $\\omega>0$ and $\\beta\\in\\mathbb C$, a $\\beta$-$\\omega$ separated phasor field on the guide is a real field of the form $F(x,t)=\\operatorname{Re}\\bigl(\\tilde F(x_1,x_2)e^{i(\\beta x_3-\\omega t)}\\bigr)$ with a complex amplitude $\\tilde F$, componentwise; $\\omega/(2\\pi)$ is the frequency and $\\beta$ the longitudinal propagation constant; when $\\beta$ is real, $\\beta>0$ describes propagation in the $+e_z$ direction under this phase convention, while a complex $\\beta$ gives the spatial factor $e^{-\\operatorname{Im}\\beta x_3}$ and may grow in the opposite direction; each consuming branch states its selection.\n(f) [Scope] The definition fixes the geometry, the PEC boundary model, the weak reflection class and the mode terminology; it asserts no field equation, no constitutive law and no existence or completeness of modes, Rectangular TE/TM candidates and the rectangular reflection class, declared smooth bounded PEC cavity spectral classes, and smooth straight-guide TEM potential branches (including the coaxial annulus) are within this geometry. No general non-rectangular TE/TM guide theory, circular-guide spectral classification, open-end or junction scattering, or arbitrary lossy model is supplied. The same stationary PEC geometry also hosts the explicitly declared constant scalar Ohmic cavity class and the full longitudinal finite-energy reflection class of the straight rectangular guide; constitutive and evolution claims belong to their consuming theorems, not this definition.\n\n**Conventions fixed by this definition.** The definition records objects and conditions only: the guide and cavity regions, their open walls and outward normals, the ideal PEC boundary conditions with their interface reading and excluded idealization, the zero-normal-$B$ reflection class with its distributional divergence constraints, the axis-relative TE/TM/TEM terminology, and the separated phasor encoding of real fields. It asserts no field equation, no constitutive relation, no existence, uniqueness or completeness of modes, and no dissipation or energy claim; those belong to the consuming theorems, each of which restates the branch of the material model it uses. The rectangular cross-section is treated through its four open faces and is not asserted to be a $C^1$ boundary domain, and no pointwise condition on box edges is made.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-em-waveguide-spectral-completeness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subset\\mathbb R^3$ be a bounded $C^\\infty$ domain in the local graph sense of [[def-bounded-c-k-domain-and-boundary-charts]], with outward Euclidean unit normal field $\\nu$ on $\\partial\\Omega$. Restate the class conventions of [[lem-em-smooth-pec-cavity-spectral-closure]]: $L^2:=L^2(\\Omega;\\mathbb R^3)$ is the real Hilbert space of square integrable vector fields with the inner product $\\langle u,v\\rangle=\\int_\\Omega u\\cdot v\\,dx$ induced by the Euclidean inner product of [[def-euclidean-inner-product]], and\n$$H(\\operatorname{curl})=\\{u\\in L^2:\\operatorname{curl}u\\in L^2\\},\\qquad H(\\operatorname{div})=\\{u\\in L^2:\\operatorname{div}u\\in L^2\\}$$\nare the graph spaces with norms $\\|u\\|^2_{H(\\operatorname{curl})}=\\|u\\|_2^2+\\|\\operatorname{curl}u\\|_2^2$ and $\\|u\\|^2_{H(\\operatorname{div})}=\\|u\\|_2^2+\\|\\operatorname{div}u\\|_2^2$, the curl and divergence being taken in the distributional sense; $X$ is the graph-norm closure in $H(\\operatorname{curl})\\cap H(\\operatorname{div})$ of the fields that are smooth on a neighbourhood of $\\overline\\Omega$ and satisfy $\\nu\\times u=0$ pointwise on $\\partial\\Omega$; and $V=\\{u\\in X:\\operatorname{div}u=0\\}$, $H=\\overline V^{\\,L^2}$. This is the explicit weak perfect-electric-conductor class of that item, not an identification with every maximal tangential-trace realisation.\n\nThen:\n\n(a) **Smooth PEC cavity.** The curl form $(u,v)\\mapsto\\int_\\Omega\\operatorname{curl}u\\cdot\\operatorname{curl}v$ on $V$ has a complete orthonormal $L^2$ eigenbasis $\\{u_j\\}$ with nonnegative eigenvalues $\\lambda_j$ of finite multiplicity, with $\\lambda_j\\to\\infty$ whenever $H$ is infinite dimensional and with the finite-dimensional zero eigenspace retained. Each eigenfield $u_j\\in V$ satisfies $\\int_\\Omega\\operatorname{curl}u_j\\cdot\\operatorname{curl}v=\\lambda_j\\int_\\Omega u_j\\cdot v$ for every $v\\in X$; the eigen-equation $\\operatorname{curl}\\operatorname{curl}u_j=\\lambda_ju_j$ holds distributionally together with the PEC trace; and $u_j$ has a $C^\\infty$ representative on $\\overline\\Omega$ for which $\\operatorname{div}u_j=0$, $\\nu\\times u_j=0$ and $\\partial_\\nu u_{j,n}+(\\operatorname{div}\\nu)u_{j,n}=0$ hold classically on $\\partial\\Omega$, where $u_{j,n}=u_j\\cdot\\nu$ and $\\nu$ is extended constant along collar normal lines. For every explicitly chosen positive mathematical speed $v_{\\mathrm{wave}}>0$ and every pair of data $q_0\\in V$, $q_1\\in H$, the associated second-order wave has coefficients solving $a_j''+v_{\\mathrm{wave}}^2\\lambda_ja_j=0$ with $a_j(0)=\\langle q_0,u_j\\rangle$ and $a_j'(0)=\\langle q_1,u_j\\rangle$, in the modal class of that item: its displacement lies in $C(\\mathbb R;V)$ and its velocity in $C(\\mathbb R;H)$, finite modal sums converge in $C(K;V)$ and $C(K;H)$ on every compact time interval $K$, and the finitely many $\\lambda_j=0$ modes are $a_j(t)=a_j(0)+ta_j'(0)$. The speed is a positive abstract mathematical parameter and has no physical dependency. The scalar auxiliary Dirichlet resolvent used inside the recorded cavity argument has, for every $q\\in L^2(\\Omega)$, a unique solution $\\varphi\\in H_0^1(\\Omega)\\cap H^2(\\Omega)$ of $(1-\\Delta)\\varphi=q$, with smooth zero-boundary approximants converging in $H^2$ and whose gradients converge in the PEC graph norm, by [[lem-em-dirichlet-resolvent-h-two-and-smooth-test-density]]. For smooth $q$ this solution is smooth on the closure by the same smooth-boundary bootstrap; no classical regularity for a general $L^2$ datum is asserted. Smooth unshifted scalar boundary problems have the classical upgrade of [[thm-em-elliptic-boundary-existence]] with $\\varepsilon=I$.\n\n(b) **Rectangular reflection-parity class.** Let $Q=\\prod_{j=1}^3(0,L_j)$ with $L_j>0$ and let $\\varepsilon,\\mu>0$ be constants. In the reflection boundary class of [[lem-em-rectangular-pec-energy-completeness]] (real $L^2$ fields on the torus $\\prod_j\\mathbb R/(2L_j\\mathbb Z)$ whose components carry the parities of that item and whose distributional divergences vanish), the finite separated Fourier modes are dense at every time, and every initial datum of the class has a unique $C(\\mathbb R;L^2)$ weak solution of $\\partial_tE=(\\varepsilon\\mu)^{-1}\\operatorname{curl}B$, $\\partial_tB=-\\operatorname{curl}E$ in the class, along which $\\tfrac12\\int_Q(\\varepsilon|E|^2+|B|^2/\\mu)\\,dx$ is constant.\n\nNo completeness is asserted in lossy, open-ended or non-smooth classes, and the constant-Ohmic and open-longitudinal branches are homed separately as physical items on the guide page; they are not mathematical premises or dependencies of this statement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-em-waveguide-spectral-completeness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\Omega\\subset\\mathbb R^3$ be a bounded $C^\\infty$ domain in the local graph sense of [[def-bounded-c-k-domain-and-boundary-charts]], with outward Euclidean unit normal field $\\nu$ on $\\partial\\Omega$. Restate the class conventions of [[lem-em-smooth-pec-cavity-spectral-closure]]: $L^2:=L^2(\\Omega;\\mathbb R^3)$ is the real Hilbert space of square integrable vector fields with the inner product $\\langle u,v\\rangle=\\int_\\Omega u\\cdot v\\,dx$ induced by the Euclidean inner product of [[def-euclidean-inner-product]], and\n$$H(\\operatorname{curl})=\\{u\\in L^2:\\operatorname{curl}u\\in L^2\\},\\qquad H(\\operatorname{div})=\\{u\\in L^2:\\operatorname{div}u\\in L^2\\}$$\nare the graph spaces with norms $\\|u\\|^2_{H(\\operatorname{curl})}=\\|u\\|_2^2+\\|\\operatorname{curl}u\\|_2^2$ and $\\|u\\|^2_{H(\\operatorname{div})}=\\|u\\|_2^2+\\|\\operatorname{div}u\\|_2^2$, the curl and divergence being taken in the distributional sense; $X$ is the graph-norm closure in $H(\\operatorname{curl})\\cap H(\\operatorname{div})$ of the fields that are smooth on a neighbourhood of $\\overline\\Omega$ and satisfy $\\nu\\times u=0$ pointwise on $\\partial\\Omega$; and $V=\\{u\\in X:\\operatorname{div}u=0\\}$, $H=\\overline V^{\\,L^2}$. This is the explicit weak perfect-electric-conductor class of that item, not an identification with every maximal tangential-trace realisation.\n\nThen:\n\n(a) **Smooth PEC cavity.** The curl form $(u,v)\\mapsto\\int_\\Omega\\operatorname{curl}u\\cdot\\operatorname{curl}v$ on $V$ has a complete orthonormal $L^2$ eigenbasis $\\{u_j\\}$ with nonnegative eigenvalues $\\lambda_j$ of finite multiplicity, with $\\lambda_j\\to\\infty$ whenever $H$ is infinite dimensional and with the finite-dimensional zero eigenspace retained. Each eigenfield $u_j\\in V$ satisfies $\\int_\\Omega\\operatorname{curl}u_j\\cdot\\operatorname{curl}v=\\lambda_j\\int_\\Omega u_j\\cdot v$ for every $v\\in X$; the eigen-equation $\\operatorname{curl}\\operatorname{curl}u_j=\\lambda_ju_j$ holds distributionally together with the PEC trace; and $u_j$ has a $C^\\infty$ representative on $\\overline\\Omega$ for which $\\operatorname{div}u_j=0$, $\\nu\\times u_j=0$ and $\\partial_\\nu u_{j,n}+(\\operatorname{div}\\nu)u_{j,n}=0$ hold classically on $\\partial\\Omega$, where $u_{j,n}=u_j\\cdot\\nu$ and $\\nu$ is extended constant along collar normal lines. For every explicitly chosen positive mathematical speed $v_{\\mathrm{wave}}>0$ and every pair of data $q_0\\in V$, $q_1\\in H$, the associated second-order wave has coefficients solving $a_j''+v_{\\mathrm{wave}}^2\\lambda_ja_j=0$ with $a_j(0)=\\langle q_0,u_j\\rangle$ and $a_j'(0)=\\langle q_1,u_j\\rangle$, in the modal class of that item: its displacement lies in $C(\\mathbb R;V)$ and its velocity in $C(\\mathbb R;H)$, finite modal sums converge in $C(K;V)$ and $C(K;H)$ on every compact time interval $K$, and the finitely many $\\lambda_j=0$ modes are $a_j(t)=a_j(0)+ta_j'(0)$. The speed is a positive abstract mathematical parameter and has no physical dependency. The scalar auxiliary Dirichlet resolvent used inside the recorded cavity argument has, for every $q\\in L^2(\\Omega)$, a unique solution $\\varphi\\in H_0^1(\\Omega)\\cap H^2(\\Omega)$ of $(1-\\Delta)\\varphi=q$, with smooth zero-boundary approximants converging in $H^2$ and whose gradients converge in the PEC graph norm, by [[lem-em-dirichlet-resolvent-h-two-and-smooth-test-density]]. For smooth $q$ this solution is smooth on the closure by the same smooth-boundary bootstrap; no classical regularity for a general $L^2$ datum is asserted. Smooth unshifted scalar boundary problems have the classical upgrade of [[thm-em-elliptic-boundary-existence]] with $\\varepsilon=I$.\n\n(b) **Rectangular reflection-parity class.** Let $Q=\\prod_{j=1}^3(0,L_j)$ with $L_j>0$ and let $\\varepsilon,\\mu>0$ be constants. In the reflection boundary class of [[lem-em-rectangular-pec-energy-completeness]] (real $L^2$ fields on the torus $\\prod_j\\mathbb R/(2L_j\\mathbb Z)$ whose components carry the parities of that item and whose distributional divergences vanish), the finite separated Fourier modes are dense at every time, and every initial datum of the class has a unique $C(\\mathbb R;L^2)$ weak solution of $\\partial_tE=(\\varepsilon\\mu)^{-1}\\operatorname{curl}B$, $\\partial_tB=-\\operatorname{curl}E$ in the class, along which $\\tfrac12\\int_Q(\\varepsilon|E|^2+|B|^2/\\mu)\\,dx$ is constant.\n\nNo completeness is asserted in lossy, open-ended or non-smooth classes, and the constant-Ohmic and open-longitudinal branches are homed separately as physical items on the guide page; they are not mathematical premises or dependencies of this statement.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-em-smooth-pec-cavity-spectral-closure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, as used by the complete variational, Sobolev-extension and compact-spectral suppliers. Let $\\Omega\\subset\\mathbb R^3$ be a bounded $C^\\infty$ domain. Define $H(\\operatorname{curl})=\\{u\\in L^2(\\Omega;\\mathbb R^3):\\operatorname{curl}u\\in L^2\\}$ and $H(\\operatorname{div})=\\{u\\in L^2:\\operatorname{div}u\\in L^2\\}$ with their graph norms, and let $X$ be the graph-norm closure in $H(\\operatorname{curl})\\cap H(\\operatorname{div})$ of the smooth fields on the closure with $n\\times u=0$; this is an explicit weak perfect-electric-conductor boundary class. Put $V=\\{u\\in X:\\operatorname{div}u=0\\}$ and $H=\\overline{V}^{\\,L^2}$. Then the curl form on $V$ has a complete orthonormal $L^2$ eigenbasis with nonnegative eigenvalues $\\lambda_j$ of finite multiplicity tending to infinity whenever $H$ is infinite dimensional, and the zero eigenspace is finite dimensional and must be retained when the topology allows it. Each eigenfield $u_j\\in V$ satisfies the full graph-class variational identity $\\int_\\Omega\\operatorname{curl}u_j\\cdot\\operatorname{curl}v=\\lambda_j\\int_\\Omega u_j\\cdot v$ for every $v\\in X$. The eigen equation is $\\operatorname{curl}\\operatorname{curl}u_j=\\lambda_ju_j$ distributionally with the PEC trace, and for every explicitly chosen mathematical speed $v_{\\mathrm{wave}}>0$ and every initial displacement $q_0\\in V$ and velocity $q_1\\in H$, the associated second-order wave has coefficients $a_j''+v_{\\mathrm{wave}}^2\\lambda_ja_j=0$ with those initial coefficients. Its displacement lies in $C(\\mathbb R;V)$ and its velocity in $C(\\mathbb R;H)$; finite modal sums converge respectively in $C(K;V)$ and $C(K;H)$ on every compact time interval $K$. The finite-dimensional $\\lambda=0$ sector is retained with $a_j(t)=a_j(0)+ta_j'(0)$. This speed is a positive abstract mathematical parameter, not a physical constant or prerequisite. No identification with every maximal tangential-trace realisation, and no lossy, open or non-smooth-domain spectral claim, is made.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$\nThe test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]]. Its composition with $u$, multiplied by the indicated sign, is therefore a continuous complex-linear functional, so this definition produces a distribution. The pairing is bilinear, with no complex conjugation. For $\\alpha=0$ the operation is the identity; for one coordinate derivative its sign is minus. Every derivative of the zero distribution is zero, including on the empty domain. No choice axiom enters this construction. Compatibility with classical derivatives requires an integration-by-parts argument where it is used; it is not part of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-euclidean-tubular-neighbourhood-theorem",
+          "source_section": "Statement",
+          "quote": "Assume countable choice $\\mathrm{AC}_\\omega$. Let $S\\subseteq\\mathbb R^m$ be an embedded smooth submanifold. Then there is a\npositive smooth function $\\delta:S\\to(0,\\infty)$ such that the restricted\nnormal addition map\n$$E:\\Omega_\\delta\\to\\mathbb R^m,\\qquad \\Omega_\\delta:=\\{(p,v)\\in N^\\perp S:\\|v\\|<\\delta(p)\\},$$\nis a diffeomorphism onto an open neighbourhood of $S$. In particular, $S$ has a\ntubular neighbourhood in $\\mathbb R^m$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-the-standard-smooth-step-function",
+          "source_section": "Definition",
+          "quote": "Let $\\beta$ be the standard flat function. The **standard smooth step function** is\n$$ \\sigma(t):=\\frac{\\beta(t)}{\\beta(t)+\\beta(1-t)}. $$\nBecause $\\beta$ is smooth and positive on $(0,\\infty)$, the denominator is positive on $(0,1)$, while $\\sigma(t)=0$ for $t\\le 0$ and $\\sigma(t)=1$ for $t\\ge 1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-em-restricted-material-energy",
+          "source_section": "Statement",
+          "quote": "Assume the elementary inertial-rest branch of [[post-em-material-closure]]: constant symmetric positive-definite matrices $\\varepsilon,\\mu\\in\\mathbb R^{3\\times3}$ (isotropic scalar case included) with $D=\\varepsilon E$ and $B=\\mu H$, and the conduction relation $J_f=\\sigma E+J_{\\mathrm{ext}}$ with $\\sigma$ symmetric positive semidefinite and a declared external free current $J_{\\mathrm{ext}}$. Assume the smooth branch of [[post-em-vacuum-maxwell]] with the regularity hypotheses of [[pthm-em-macroscopic-maxwell]], so that its macroscopic equations hold on $\\Omega\\times I$. Define the stored-energy density and the energy-flux vector\n\n$$u:=\\tfrac12\\bigl(E\\cdot D+B\\cdot H\\bigr),\\qquad S:=E\\times H,$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]] and the cross product of [[def-cross-product-in-r3]]; $u$ carries $\\mathrm J\\,\\mathrm m^{-3}=\\mathrm{kg}\\,\\mathrm m^{-1}\\mathrm s^{-2}$ and $S$ carries $\\mathrm W\\,\\mathrm m^{-2}$. Then:\n\n**(a) [Local balance and positivity]** On $\\Omega\\times I$,\n\n$$\\partial_tu+\\operatorname{div}S=-J_f\\cdot E.$$\n\nMoreover $u=\\tfrac12(E\\cdot\\varepsilon E+H\\cdot\\mu H)\\ge0$, with $u(x,t)>0$ whenever $(E(x,t),H(x,t))\\ne(0,0)$.\n\n**(b) [Dissipation reading]** With $J_f=\\sigma E+J_{\\mathrm{ext}}$ and $\\sigma$ symmetric positive semidefinite, $E\\cdot\\sigma E\\ge0$ and the balance reads\n\n$$\\partial_tu+\\operatorname{div}S+E\\cdot\\sigma E=-J_{\\mathrm{ext}}\\cdot E;$$\n\nthe nonnegative term $E\\cdot\\sigma E$ is the Ohmic dissipation density of the model.\n\n**(c) [Fixed-volume balance]** Let $\\Omega'\\subseteq\\Omega$ be open with $\\overline{\\Omega'}\\subseteq\\Omega$ carrying the finite piecewise $C^1$ presentation of [[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]], let $t_0<t_1$ with $(t_0,t_1)\\subseteq I$, assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) as in that divergence theorem, and let $n$ be the outward unit normal of $\\partial\\Omega'$. Then for every $t\\in(t_0,t_1)$,\n\n$$\\frac{d}{dt}\\int_{\\Omega'}u(x,t)\\,dx=-\\int_{\\Omega'}J_f\\cdot E\\,dx-\\oint_{\\partial\\Omega'}S\\cdot n\\,dS.$$\n\n**(d) [Scope]** The density $u=\\tfrac12(E\\cdot D+B\\cdot H)$ is a stored-energy density only for this constant symmetric nondispersive model; for general dispersive, nonlocal, nonlinear or hysteretic response no instantaneous stored-energy density is defined or claimed by this item, and the general dispersive work balance is not supplied. The identities hold only where the fields and sources have the stated regularity, the fixed-volume form keeps its boundary term, and no conservation of $\\int_{\\Omega'}u$ is asserted unless that term vanishes. No empirical claim is made.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Clause (a)] The families $\\{h_{mn}\\}$ and $\\{e_{mn}\\}$ are orthogonal complete systems in $L^2(R_{ab})$ by [F1], which gives the expansion statement. Each member with $(m,n)\\ne(0,0)$ has zero integral over $R_{ab}$ by the orthogonality of [F1] against $h_{00}=1$, so the closed linear span $S$ of $\\{h_{mn}:(m,n)\\ne(0,0)\\}$ is contained in the closed zero-mean subspace $Z=\\{f\\in L^2(R_{ab}):\\int_{R_{ab}}f=0\\}$; conversely, if $f\\in Z$, the expansion theorem [F1] applied to the complete orthonormal family obtained by normalizing all the $h_{mn}$ writes $f$ as the norm limit of its finite partial sums, and the coefficient of $h_{00}$ is $\\langle f,h_{00}\\rangle/\\|h_{00}\\|^2=\\int_{R_{ab}}f/ab=0$, so those partial sums use only indices $(m,n)\\ne(0,0)$ and $f\\in S$. Hence $S=Z$: the remaining Neumann profiles are complete in the zero-mean subspace and not in all of $L^2(R_{ab})$ because the constant function is orthogonal to them and nonzero. The constant $h_{00}=1$ stays in the full mathematical basis, while the physical TE candidate family excludes it by the Maxwell index restriction of [[pthm-em-rectangular-mode-candidates]] (c), so no nonzero positive-frequency TE reconstruction is asserted from the constant scalar profile; the Dirichlet profiles keep their full scalar completeness.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Clause (b)] By [F2] the finite separated Fourier modes are dense in the rectangular reflection class at every time, every initial datum in the class has a unique $C(\\mathbb R;L^2)$ weak solution of the lossless first-order system in the class, and the energy $\\frac12\\int_Q(\\varepsilon|E|^2+|B|^2/\\mu)$ is constant along the solution; this distributional system is the explicitly adopted weak material evolution of the reflection model. The energy equals $\\int_Qu$ for the weak stored-energy density $u=\\frac12(\\varepsilon|E|^2+\\mu^{-1}|B|^2)$ of [F5], which is defined almost everywhere and nonnegative; its integrability and constancy are furnished by the supplier, and no nonlinear weak Poynting identity is asserted. Finally, the four macroscopic equations with $D=\\varepsilon E$ and $H=B/\\mu$ follow distributionally from the two evolution equations and the divergence constraints of the class: $\\operatorname{div}D=\\varepsilon\\operatorname{div}E=0$ and $\\operatorname{div}B=0$ are the class constraints, $\\operatorname{curl}E=-\\partial_tB$ is the second evolution equation, and $\\operatorname{curl}H=\\mu^{-1}\\operatorname{curl}B=\\mu^{-1}(\\varepsilon\\mu)\\partial_tE=\\partial_tD$ uses the first evolution equation $\\partial_tE=(\\varepsilon\\mu)^{-1}\\operatorname{curl}B$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "[Clause (c), spectral content] Assume the full Axiom of Choice as in [F3], let $\\Omega$ be a bounded $C^\\infty$ cavity and let $X,V,H$, $\\{u_j\\}$, $\\lambda_j\\ge0$ be the classes and eigenbasis of [F3]. Then the curl form on $V$ has the complete orthonormal $L^2$ eigenbasis with nonnegative finite-multiplicity eigenvalues tending to infinity when $H$ is infinite dimensional and a finite-dimensional zero eigenspace retained; the eigen-equation holds distributionally with the PEC trace, each $u_j$ has a $C^\\infty$ representative on the closure, and the full-$X$ variational identity holds for every $v\\in X$. With $v_{\\mathrm{wave}}=(\\varepsilon\\mu)^{-1/2}>0$, the associated second-order electric wave has displacement in $C(\\mathbb R;V)$ and velocity in $C(\\mathbb R;H)$ for arbitrary initial data in $V\\times H$, finite modal sums converge in these norms uniformly on compact times, and its zero eigenmodes may be affine in time. These are the spectral and wave assertions of [F3], taken with the exact hypotheses of the suppliers.",
+          "step": "1.3",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Clause (c), first-order modal equation] Let $J$ be an open time interval and let a strong first-order solution obey the hypotheses of the Statement: $E\\in C^1(J;H)\\cap C(J;V)$, $B\\in C^1(J;L^2)\\cap C(J;H(\\operatorname{curl}))$, with the first-order equations holding as $L^2$ identities and both distributional divergence constraints, the magnetic normal-zero condition $\\int_\\Omega B(t)\\cdot\\nabla\\psi=0$ for every smooth scalar $\\psi$ on the closure, and $E(t)\\in V$ encoding the electric tangential-zero data; no magnetic membership in $X$ is assumed. Put $a_j(t):=\\langle E(t),u_j\\rangle$. To pair $\\operatorname{curl}B$ against the smooth eigenfield $u_j$, use the collar cutoff of [F4]: write $s$ for the inward normal coordinate in a tubular neighbourhood of the compact boundary, so that $|n\\times u_j|\\le Cs$ in the collar because $u_j$ is smooth on the closure with $n\\times u_j=0$, and let $\\eta_\\delta$ be the standard smooth step with $\\eta_\\delta=0$ for $s\\le\\delta$ and $1$ for $s\\ge2\\delta$. Then $\\eta_\\delta u_j\\to u_j$ and $\\operatorname{curl}(\\eta_\\delta u_j)\\to\\operatorname{curl}u_j$ in $L^2$ as $\\delta\\to0$, since the derivative-cutoff term is supported on a layer of volume $O(\\delta)$ and is bounded by $C/\\delta$ times $O(s)$; the distributional identity of [F4] on the compactly supported smooth test $\\eta_\\delta u_j$ gives $\\langle\\operatorname{curl}B,\\eta_\\delta u_j\\rangle=\\langle B,\\operatorname{curl}(\\eta_\\delta u_j)\\rangle$, and Cauchy\u2013Schwarz with the two limits gives $\\langle\\operatorname{curl}B,u_j\\rangle=\\langle B,\\operatorname{curl}u_j\\rangle$ for the actual graph-regular field $B$. Hence $a_j'=\\langle E',u_j\\rangle=v_{\\mathrm{wave}}^2\\langle\\operatorname{curl}B,u_j\\rangle=v_{\\mathrm{wave}}^2\\langle B,\\operatorname{curl}u_j\\rangle$ on $J$. The assumed $B\\in C^1(J;L^2)$ permits one further derivative: $a_j''=v_{\\mathrm{wave}}^2\\langle B',\\operatorname{curl}u_j\\rangle=-v_{\\mathrm{wave}}^2\\langle\\operatorname{curl}E,\\operatorname{curl}u_j\\rangle=-v_{\\mathrm{wave}}^2\\lambda_j\\langle E,u_j\\rangle$, where the last equality is the full-$X$ eigenvariational identity of [F3] tested at $v=E(t)\\in V\\subset X$; thus $a_j''+v_{\\mathrm{wave}}^2\\lambda_ja_j=0$, and $a_j$ is $C^2$ because $E$ and $B$ are $C^1$ in their norms. If $\\lambda_j=0$, the same identity at $v=u_j$ gives $\\|\\operatorname{curl}u_j\\|_2^2=0$, so $\\operatorname{curl}u_j=0$ and $a_j'=v_{\\mathrm{wave}}^2\\langle B,\\operatorname{curl}u_j\\rangle=0$: the electric zero modes are constant under first-order Maxwell evolution, while the unrestricted second-order wave of step 1.3 retains its affine zero modes. This distinguishes first-order Maxwell data from arbitrary second-order $V\\times H$ data; the pairing imposed no magnetic electric-type trace, and the divergence constraints and the declared weak magnetic normal condition remain part of the model.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Clause (d)] Clause (a) is step 1.1, clause (b) is step 1.2, and clause (c) is steps 1.3 and 2.1. Completeness is asserted only for the transverse $L^2$ profiles and for the two declared cavity classes with their exact hypotheses; this lossless theorem does not itself supply the longitudinal expansion or the dissipative evolution, which are supplied separately by [[pthm-em-open-rectangular-guide-completeness]] and [[pthm-em-uniform-ohmic-modal-decay]]. None of the statements supplies arbitrary lossy, dispersive, open-end scattering, non-smooth or exterior problems, or arbitrary non-rectangular guide problems beyond the declared smooth-cavity spectral class; no trace regularity for arbitrary $H(\\operatorname{curl})$ fields and no identification of the weak classes with every maximal tangential-trace realization is asserted, and the zero eigenvalues and zero modes are retained throughout. The inherited Axiom of Choice and Countable Choice cover the spectral, Fourier and collar suppliers, and no lossy or open-domain step was made.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Neumann index set includes its constant mode; deleting only that profile gives exactly the zero-mean subspace by step 1.1. Empty modal partial sums are the zero field in both supplied cavity classes, and step 1.3 retains every zero eigenmode. No completeness claim is inferred merely from an empty chosen finite sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 retain the zero-mean restrictions, the zero eigenvalues and the constant first-order zero modes"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 singles out the constant profile h00 as the one Neumann element excluded from the zero-mean subspace"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 covers lambda=0 with curl u_j=0 and the affine zero modes of the second-order branch"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 uses the collar cutoff approaching the boundary and the first-order coefficients at the endpoints of J"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the Axiom of Choice and Countable Choice are declared and used by the spectral, Fourier and collar suppliers in steps 1.1, 1.3 and 2.1"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the theorem asserts completeness and coefficient equations rather than an if-and-only-if claim"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the theorem asserts completeness and coefficient equations rather than an if-and-only-if claim"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,435 @@
+[
+  {
+    "order": 355,
+    "id": "em-empirical-tests-and-scope",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Empirical tests and limitations",
+    "companion": "em-empirical-tests-and-scope-examples",
+    "requires": [
+      "em-experiment-analysis-prerequisites",
+      "em-material-response",
+      "em-retarded-fields-and-radiation",
+      "em-vacuum-waves-and-polarization"
+    ],
+    "items": [
+      {
+        "id": "def-em-experiment-record-contract",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Report-backed operational evidence with uncertainty",
+        "reference": "definition-contracts.md#def-em-experiment-record-contract",
+        "design_state": "explicit-definition-contract; supplier-validation-recorded-separately",
+        "deps": [
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "def-em-fields",
+          "def-em-sources",
+          "def-em-fixed-test-geometry",
+          "def-em-vacuum-energy-flux",
+          "thm-continuous-implies-integrable"
+        ],
+        "dependency_roles": {
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "def-em-fixed-test-geometry": "formulation-prerequisite",
+          "def-em-vacuum-energy-flux": "formulation-prerequisite",
+          "thm-continuous-implies-integrable": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 13,
+        "statement": "Adopt the laboratory region with its inertial chart and fixed-time reading of [[def-em-lab-geometry]], the electric and magnetic fields of [[def-em-fields]], the charge parameter, frame charge and current densities and charge integrals of [[def-em-sources]], and the SI units and constants of [[def-em-si-conventions]]. This definition fixes the framework's report-record vocabulary; it selects no experiment, records no value, evaluates no indicator and asserts no measurement.\n\n(a) [Primary source] A *primary source* is a declared bibliographic identification of a report (author, title, date, publication, and the identification of the passages actually inspected) together with the declared limits of the reading: which parts of the report were read, which were not, and any carrier defects (for instance corrupted optical-character-recognition text of formulae or tables).\n\n(b) [Comparison quantity and measurand] Let $d\\ge1$ be an integer. A *comparison quantity* of dimension $d$ is a declared map from a declared condition set to $\\mathbb R^d$, with declared units, whose components are finite expressions in specified framework quantities. These may include the values of $E,B,\\rho,J$ at declared events, the charge parameter $q$, and the declared charge or current integrals of [[def-em-sources]]; declared field circulations and surface fluxes on the admitted fixed geometries of [[def-em-fixed-test-geometry]]; and declared finite-time or period averages of specified derived field quantities, including $u$ and $S$ of [[def-em-vacuum-energy-flux]]. An integral or average is admitted only with its domain, orientation where needed, integration convention and actual well-definedness hypotheses declared. For example, a component $Q(t)$ continuous on a declared compact interval $[a,b]$ inside the laboratory time domain, with $a<b$, has the finite Riemann average $(b-a)^{-1}\\int_a^b Q(t)\\,dt$ by [[thm-continuous-implies-integrable]]; a period average additionally declares the period and interval. Field fluxes inherit the regularity, compactness, boundary presentation and measure/choice conventions of their fixed-test supplier. A declared detector-response integral may be used only when its declared model and integral suppliers establish a finite real value. An extended nonnegative integral with value $+\\infty$ is not a component of this real-valued comparison map or a recorded finite rate. No existence or finiteness of an arbitrary field integral, distributional product or detector response is asserted. A *measurand* is a comparison quantity together with a declared condition description under which it is to be read. All quantities carry the SI conventions of [[def-em-si-conventions]].\n\n(c) [Apparatus and preparation description] An *apparatus-and-preparation description* is a declared finite record of the apparatus, the preparation, the controls and the environment in the report's own terms, with the identification of the passage of the primary source of (a) from which each item of the description is taken. The definition asserts only that the description is declared and finite; it asserts nothing about its correctness or completeness.\n\n(d) [Recorded data and reported observations] For an integer $d\\ge1$, a *recorded datum* is a vector $z_k\\in\\mathbb R^{d}$ with declared units together with a *condition annotation* $a_k$, a declared finite text identifying the declared run condition of the datum and, when the datum is taken from a report, its locator in the primary source. A *reported observation* is a declared finite text recording a qualitative observation of the report. A *record* is a finite tuple of recorded data and reported observations together with the declared condition annotations. The record contains no probability space, random variable, distribution, sampling law, independence assumption, likelihood or coverage statement.\n\n(e) [Calibration model] A *calibration model* is a tuple $(Z,c,\\delta)$ in which $Z$ is a declared nonempty set of *apparatus-output values*, $c:Z\\to\\mathbb R^d$ is a declared *calibration map* and $\\delta\\in[0,\\infty)$ is a declared *calibration-error bound*: it declares that for every output $o\\in Z$ obtained under the declared conditions, the value of the comparison quantity of (b) lies in the closed box $\\prod_{j=1}^d[c_j(o)-\\delta,\\,c_j(o)+\\delta]$ in the declared units. A calibration model is a declaration; the definition asserts no accuracy beyond the bound $\\delta$ and no statistical property of $c$ or $\\delta$. A declared *missing* calibration is recorded as missing, and no value or bound is then available from this clause.\n\n(f) [Uncertainty record] An *uncertainty record* is a finite tuple of declared bounds, each carrying a declared *source label* from the finite list $\\{calibration,\\ resolution,\\ systematic,\\ sampling-variability,\\ rounding,\\ other\\}$ and a declared value in the declared units; each entry is a declared constraint of the form of (e), and the record may state that a bound is unavailable. No entry is a standard-deviation convention, a coverage probability, a confidence level, a $p$-value, a posterior or a probability law.\n\n(g) [Analysis assumptions] An *analysis-assumption list* is a finite tuple of declared assumptions used to obtain the recorded data or to compare them with a model (binning, background model, selection rules, corrections, fitting or estimation procedure, independence or dependence of entries, and the treatment of the sources of uncertainty); declared omissions are recorded as omissions and are not filled in by the definition.\n\n(h) [Interpretation] An *interpretation* is a declared statement that identifies a specified model prediction and declares the result of comparing the record with it (support, constraint, failure to distinguish, or no conclusion), conditional on (a)-(g). The interpretation is part of the report account and not of the data; it asserts no probability, no significance level and no truth of any framework, and it records a comparison of a specified model, not of a whole theory.\n\n(i) [Well-definedness and scope] All components of (a)-(h) are finite tuples, real numbers, declared maps on declared sets and finite text labels; forming this finite vocabulary uses no choice principle. Evaluating a comparison quantity inherits every hypothesis and axiom of its actual suppliers, including countable choice when the selected fixed-test surface or Lebesgue-measure interface requires it; no measurability, integrability, completeness or differentiability is inferred merely from the record. A comparison quantity is evaluated only where the cited items supply its ingredients and a finite value. Missing source detail stays missing: no universal sampling law, precision, independence, coverage or calibration correctness is part of the definition, and none may be inferred from it. The definition is the framework-local vocabulary for the reports of this page; it does not assert that any laboratory realises a measurand or that any reported observation is correct.",
+        "strategy": "An explicit finite record definition, not a field or apparatus theorem. Clauses (a)-(h) declare finite tuples, real vectors, maps, labels, conditions and interpretations; calibration boxes require only the declared $\\delta\\ge0$. The enlarged clause (b) names the observables actually used by consumers: fixed-time electric flux on the admitted geometries of [[def-em-fixed-test-geometry]], and componentwise finite-time or period averages of the derived quantities of [[def-em-vacuum-energy-flux]]. Their evaluation is conditional on the cited contracts. In particular the latter definition makes $u,S$ continuous in the smooth branch, so restricting to a compact time interval gives real continuous components and [[thm-continuous-implies-integrable]] supplies finite Riemann integrals. It does not make weak-field products integrable automatically. The fixed-test geometry's compactness, orientation, regularity and countable-choice measure conventions remain explicit prerequisites of a selected flux evaluation. A further detector model must separately supply measurable integrands and finite values before its response can be a real comparison quantity; an extended infinite value is not a finite datum. The syntax of this vocabulary is choice-free, while selected evaluations carry their suppliers' axioms. Missing calibration, sampling or source information stays missing. No measurement, probability law, accuracy or correctness of an apparatus is deduced.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (GUM 1995 with minor corrections), Joint Committee for Guides in Metrology, first edition September 2008, 134 PDF pages",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf",
+              "locator": "Clause 2 (2.1-2.3.6, printed pp. 2-4), Clause 3 (3.1-3.4, printed pp. 4-8) and Clause 4.1 (printed p. 9), read in the complete 134-page PDF: metrological vocabulary, the definition of uncertainty of measurement and its notes (2.2.3), standard, Type A/Type B, combined and expanded uncertainty and coverage factor (2.3.1-2.3.6), the specification of the measurand and the incompleteness caveat (3.1.1-3.1.3), errors, effects and corrections (3.2), the enumerated sources of uncertainty (3.3.2) and the measurement model $Y=f(X_1,\\dots,X_N)$ (4.1.1); used for the record vocabulary only, with no numerical evaluation"
+            },
+            {
+              "title": "Michael Faraday, Experimental Researches in Electricity, Volume I, First Series (read 24 November 1831), 1849 collected second edition, Project Gutenberg transcription",
+              "url": "https://www.gutenberg.org/files/14986/14986-h/14986-h.htm",
+              "locator": "First Series paragraphs 1-33 (induction experiments); used as the report whose record fields (apparatus, preparation, reported observations, missing calibration and analysis detail) the definition formalises"
+            },
+            {
+              "title": "Heinrich Hertz, Electric Waves, authorized Jones English translation (Macmillan 1893), Chapter VII (Berlin Academy 2 February 1888; Wiedemann's Annalen 34 p. 661), Internet Archive OCR",
+              "url": "https://archive.org/download/electricwavesbe00hertgoog/electricwavesbe00hertgoog_djvu.txt",
+              "locator": "Chapter VII printed pp. 107-123; used as the report whose record fields the definition formalises"
+            },
+            {
+              "title": "Henry Cavendish, The Electrical Researches (ed. J. Clerk Maxwell, Cambridge 1879), Internet Archive OCR",
+              "url": "https://archive.org/download/electricalresea00cavegoog/electricalresea00cavegoog_djvu.txt",
+              "locator": "Arts. 217-235 (printed pp. 104-113) and arts. 244-249 (printed pp. 119-121); used as the report whose record fields the definition formalises"
+            }
+          ]
+        },
+        "physical_scope": "Framework-local vocabulary for report-backed operational evidence in classical electromagnetism: comparison quantities built from the fields and sources of the framework at declared events or regions in the SI units of the laboratory frame; apparatus-and-preparation descriptions; finite recorded data or reported qualitative observations with condition annotations; calibration models with a declared error bound; uncertainty records with declared source labels; analysis-assumption lists; and qualified interpretations. The definition asserts no measurement, no apparatus behaviour, no sampling law, no precision, no independence, no coverage, no calibration correctness, no empirical support and no value of any physical constant; it selects no experiment and missing report detail stays missing."
+      },
+      {
+        "id": "exp-em-induction-report",
+        "kind": "experiment",
+        "domain": "physics",
+        "title": "Faraday's 1831 induction experiments: reported transients and the iron-ring apparatus",
+        "reference": "completed-expansion-arguments.md#E1",
+        "design_state": "source-backed-qualified-primary-qualitative-account; no-invented-quantitative-inference",
+        "deps": [
+          "def-em-experiment-record-contract"
+        ],
+        "dependency_roles": {
+          "def-em-experiment-record-contract": "operational-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 14,
+        "statement": "**Primary source and reading limits.** Michael Faraday, *Experimental Researches in Electricity*, Volume I, First Series (read 24 November 1831), 1849 collected second edition, read in the Project Gutenberg transcription derived from BnF/Gallica images; the First Series paragraphs 1-33 were read completely, and no claim is made to have read the whole volume. This is an original report reprint transmitted by a later transcription, not a newly repeated experiment. The account below is the report's apparatus descriptions and reported observations, structured by the record contract of [[def-em-experiment-record-contract]]; it is not a deduction, and 'no perceived deflection' is everywhere the report's finite-resolution verbal observation.\n\n## Setup\n\nInsulated copper helices wound on a wooden cylinder, each containing about twenty-seven feet of wire and kept from touching by interposed twine, twelve helices superposed in the same direction with the first, third, fifth, seventh, ninth and eleventh joined into one helix and the remainder into a second (paragraph 6). A pair of two-hundred-and-three-foot coils interleaved as a spiral on a wooden block with metallic contact prevented by twine (paragraph 10). A small hollow helix wound on a glass tube into which a steel needle could be inserted (paragraph 13). Insulated zigzag wire boards moved relatively to one another (paragraph 18). A welded soft-iron ring, seven-eighths of an inch thick and six inches in external diameter, with three insulated helices of about twenty-four feet each, later driven by a battery of ten pairs of plates with a galvanometer connected three feet from the ring (paragraphs 27-28).\n\n## Procedure\n\nMaking and breaking the battery circuit of the inducing helix while the detector loop is kept complete (paragraphs 10-11); removing the inserted needle before breaking the battery contact, and the reverse order (paragraph 13); completing the detector circuit before the battery contact is made or broken (paragraph 17); moving the zigzag boards together and apart with a steady battery current (paragraphs 18-19); reversing the direction of the battery connection (paragraph 30); repeating with larger batteries and with charcoal contacts (paragraphs 31-32).\n\n## Observations\n\nA slight deflection of the galvanometer needle at the moment of completing the connection, always in one direction, with the opposite deflection at breaking, and no sustained perceived deflection under the continued steady battery connection (paragraphs 11 and 28-31); magnetization of an inserted steel needle, with opposite poles at make and at break and near-cancellation when both transients act on the same inserted needle (paragraphs 13-17); opposite transient deflections as the boards approach and recede, with return to the ordinary position when the movement ceases (paragraphs 18-20); a minute spark at the secondary helix with charcoal contacts (paragraph 32); and the control that, after the first effect, the galvanometer needle resumes its position under the continued battery current (paragraphs 28 and 33). These are reported finite-resolution qualitative observations.\n\n## Uncertainty\n\nThe read passages identify deflection direction, needle-pole comparison, battery reversal and background and timing controls, but supply no calibrated conversion from deflection to current, no detector response or transfer function, no trial-level dataset, no declared sampling law, no error bars and no formal significance test; dimensions, wire lengths and battery plate counts are historical approximate apparatus descriptions, not modern precision estimates. The sign interpretation of the induced current depends on galvanometer and needle response conventions. Missing information is retained as missing; no error bars, precision or independence are invented.\n\n## Interpretation\n\nThe reported observations support a transient induction model for the described apparatus under the stated apparatus assumptions and are qualitatively consistent with conditional framework predictions of transient induction where those are instantiated for the described circuits; they do not establish a universal exact induction law, do not isolate all auxiliary assumptions (magnetic inertia, switching transients, leakage, current history, geometry) and supply no quantitative model comparison. The empirical support is a nonlogical relation to the induction predictions, not a proof of any postulate, and the source limitations of the reading travel into any downstream conclusion.",
+        "strategy": "Source-backed experiment exposition, not a deductive proof. Author the five public sections and the recorded observations from the actually read paragraphs 1-33 of the stamped Project Gutenberg transcription (https://www.gutenberg.org/files/14986/14986-h/14986-h.htm, read extent and source limitations preserved in research/first-principles-2026-10-03/classical-electromagnetism/scaffold/faraday-primary-reading.json): apparatus from paragraphs 6, 10, 13, 18 and 27-28; procedure from paragraphs 10-11, 13, 17, 18-19 and 30; reported observations from paragraphs 11, 13-17, 18-20 and 28-33; uncertainty and interpretation from the absence of calibration, sampling and significance detail in those paragraphs. Keep the record structure of [[def-em-experiment-record-contract]] (source, apparatus/preparation, recorded data or reported observations, calibration model marked missing, uncertainty record, analysis assumptions, interpretation) and set `empirical_result` with the qualitative observation summary, the 'no calibration, dataset or sampling law reported' uncertainty statement, the stated apparatus conditions and the source URL. Do not transcribe a deflection-to-current model, a dataset or an uncertainty interval; the qualitative account remains qualitative. Leave provenance.proof not-applicable, with no Proof section and no proof-audit claim; independent source reviewers check faithfulness, calibration/sampling caveats and the interpretation against the stamped text.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Faraday, Experimental Researches in Electricity, Volume I, First Series (read 24 November 1831), 1849 collected second edition, Project Gutenberg transcription (URL stamped and hashed in the batch coverage file; sha256 61a33e232f34d99c2a526ccd5d1cac42c32190e90083b10b7dba51838be6f7f0)",
+              "url": "https://www.gutenberg.org/files/14986/14986-h/14986-h.htm",
+              "locator": "First Series, paragraphs 1-33 completely (apparatus paragraphs 6, 10, 13, 18, 27-28; procedure and observations paragraphs 10-11, 13, 17, 18-20, 28-33); no claim to have read the whole volume"
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (author-hosted, 236 pp.); modern account of Faraday's law and the moving-wire emf used only as the context of the conditional induction predictions named in the interpretation",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "Section 4.1 'Faraday's Law of Induction' printed pp. 67-69 (differential law (4.1), Stokes reduction and the circuit emf) and Section 4.1.1 'Faraday's Law for Moving Wires' printed pp. 69-71, read in the stamped complete 236-page author-hosted text"
+            }
+          ]
+        },
+        "empirical_result": {
+          "observation": "Reported make/break transient galvanometer deflections in opposite directions with no sustained perceived deflection under continued battery current; needle magnetization with opposite poles at make and break; opposite approach/recede deflections returning to the ordinary position when motion ceases; stronger iron-ring transients with battery-direction reversal (paragraphs 11, 13-17, 18-20, 28-33); qualitative finite-resolution observations only.",
+          "uncertainty": "No calibrated deflection-to-current conversion, detector response function, trial-level dataset, declared sampling law, error bars or significance test in the read paragraphs; apparatus dimensions are historical approximations; 'none perceived' is not an exact zero. No precision is inferred.",
+          "conditions": "Insulated copper helices and interleaved coil pairs, hollow helix with steel needle, zigzag wire boards, and a welded soft-iron ring with three insulated helices driven by batteries of up to one hundred pairs of plates, with make/break, battery-reversal, needle-insertion-order and detector-circuit-timing controls, as described in the First Series.",
+          "source_url": "https://www.gutenberg.org/files/14986/14986-h/14986-h.htm"
+        },
+        "physical_scope": "Primary-report account of Faraday's 1831 induction experiments for the described apparatus: transient deflections at make and break of the battery circuit, needle magnetization and reversal controls, relative-motion transients, and the soft-iron-ring apparatus. Qualitative observations with finite resolution; no calibrated current, no sampling law, no precision, no single quantitative model comparison, and no proof or refutation of any induction law or postulate is claimed."
+      },
+      {
+        "id": "exp-em-wave-propagation-report",
+        "kind": "experiment",
+        "domain": "physics",
+        "title": "Hertz's 1888 finite-velocity tests: sparks, wire nodes and qualitative interference",
+        "reference": "completed-expansion-arguments.md#E2",
+        "design_state": "source-backed-qualified-primary-qualitative-account; no-invented-quantitative-inference",
+        "deps": [
+          "def-em-experiment-record-contract"
+        ],
+        "dependency_roles": {
+          "def-em-experiment-record-contract": "operational-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 14,
+        "statement": "**Primary source and reading limits.** Heinrich Hertz, 'On the finite velocity of propagation of electromagnetic actions' (Berlin Academy, 2 February 1888; *Wiedemann's Annalen* 34 p. 661), in the authorized English *Electric Waves* translation (D. E. Jones, Macmillan 1893), Chapter VII, printed pp. 107-123; the complete chapter narrative was read in the Internet Archive OCR of `electricwavesbe00hertgoog`, whose tables are visibly scrambled and have not been reconstructed or recomputed, and the rest of the volume was not read. This is a primary-report translation with an OCR limitation, not a modern replication or a measured-$c$ precision source. The account below is the report's apparatus descriptions, procedures and reported observation indicators, structured by the record contract of [[def-em-experiment-record-contract]].\n\n## Setup\n\nA spark-excited primary conductor with brass end plates and a central spark gap drove rapid oscillations; circular or square secondary conductors with micrometer-adjusted spark gaps served as qualitative detectors; the comparison used waves on a long wire versus direct action through air, with tuned secondary orientations and adjustable additional wire length; the room was darkened, and reflections and nearby fixtures were apparatus concerns (chapter VII narrative, printed pp. 107-123).\n\n## Procedure\n\nLocating nodal points of the wire standing wave by moving the tuned secondary along the wire and marking their positions with paper riders; comparing spark strength and suppression at different positions along a defined baseline; changing the wire length in unit steps of the measured nodal distance and repeating; changing the distance between the primary and secondary circuits; and comparing the direct air-path action with the wire-wave action (chapter VII narrative).\n\n## Observations\n\nOrientation-dependent spark responses of the secondary detector; approximately recurring and roughly equally spaced nodal points along the wire; and changing signs of the interference indicator as the path length or the distance is varied. These are the reported observed indicators; the finite phase delay and the propagation speed of the order of light speed are the author's model-dependent inferences, requiring his assumed oscillator, detector, wire-wave and air-path phase interpretation.\n\n## Uncertainty\n\nThe report expressly treats its inferred absolute period from circuit theory as doubtful beyond order of magnitude; it supplies no modern calibrated spark-intensity transfer function, no independent absolute period calibration, no trial-level likelihood or sampling model, no confidence interval and no synchronized-clock travel-time measurement; the numerical tabular signs cannot be faithfully recovered from the OCR used, and no quantitative fit, exact speed or uncertainty interval is claimed here. The author's rough order-of-magnitude remarks are not confidence intervals.\n\n## Interpretation\n\nThe described apparatus observations qualitatively support finite-propagation and wave-interference models under the stated auxiliary assumptions; they do not deductively prove the Maxwell equations, do not exactly establish the value of $c$, and do not eliminate every alternative, since the comparison involves the assumed oscillator, detector and wire-wave models. The historical decomposition into separately propagating electrostatic and electromagnetic components is not promoted to a modern Lorentz-covariant theorem. The source limitations travel into any downstream historical or empirical conclusion, and the support is a nonlogical relation to the wave predictions.",
+        "strategy": "Source-backed experiment exposition, not a deductive proof. Author the five public sections from the actually read chapter VII narrative in the stamped Internet Archive OCR (https://archive.org/download/electricwavesbe00hertgoog/electricwavesbe00hertgoog_djvu.txt; read extent, OCR limitation and source limitations preserved in research/first-principles-2026-10-03/classical-electromagnetism/scaffold/hertz-primary-reading.json): apparatus and oscillator/detector description, the node-marking and wire-length comparison procedure, the orientation- and distance-dependent indicator observations, and the explicit separation of reported indicators from the author's model-dependent inferences. Keep the record structure of [[def-em-experiment-record-contract]] and set `empirical_result` with the qualitative indicator summary, the 'no calibrated transfer function, absolute period calibration, sampling law or confidence interval' uncertainty statement, the stated wire/air comparison conditions and the source URL. Do not reconstruct the scrambled numerical tables, do not invent counts or precision, and do not present the order-of-magnitude speed estimate as a measurement of $c$. Leave provenance.proof not-applicable with no Proof section; independent source reviewers check the reported-observation extent against the stamped text.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Heinrich Hertz, Electric Waves, authorized Jones English translation (Macmillan 1893), Chapter VII, Internet Archive OCR of electricwavesbe00hertgoog (URL stamped and hashed in the batch coverage file; sha256 e64ca355422b781ab29a54939bd1ca7bbd7e70062ed540fef250cbae9098be31)",
+              "url": "https://archive.org/download/electricwavesbe00hertgoog/electricwavesbe00hertgoog_djvu.txt",
+              "locator": "Chapter VII 'On the finite velocity of propagation of electromagnetic actions', printed pp. 107-123, complete narrative; tables scrambled in the OCR and not reconstructed; rest of the volume not read"
+            }
+          ]
+        },
+        "empirical_result": {
+          "observation": "Reported orientation-dependent spark responses of a tuned secondary detector, approximately recurring and roughly equally spaced nodal points along a long wire marked with paper riders, and changing signs of the interference indicator as wire length or distance is varied (chapter VII narrative, printed pp. 107-123).",
+          "uncertainty": "No calibrated spark-intensity transfer function, no independent absolute-period calibration, no trial-level likelihood or sampling model and no confidence interval; the author treats the circuit-theory period as doubtful beyond order of magnitude; the numerical tables are scrambled in the OCR used and were not reconstructed. The roughly light-speed value is a model-dependent inference, not a synchronized-clock measurement.",
+          "conditions": "Spark-excited primary conductor with brass end plates and central spark gap; circular/square secondary conductors with micrometer-adjusted spark gaps; comparison of direct air-path action with waves on a long wire, with adjustable wire length and tuned secondary orientation; darkened room with reflections present.",
+          "source_url": "https://archive.org/download/electricwavesbe00hertgoog/electricwavesbe00hertgoog_djvu.txt"
+        },
+        "physical_scope": "Primary-report account of Hertz's 1888 finite-velocity experiments: spark detection, wire standing-wave nodes, and qualitative interference indicators under the described oscillator, detector, wire and air-path models. Qualitative historical observations with an explicit OCR limitation; no calibrated intensity, period or speed, no sampling law, no confidence interval, no proof of the Maxwell equations and no exact measurement of $c$ is claimed."
+      },
+      {
+        "id": "exp-em-inverse-square-report",
+        "kind": "experiment",
+        "domain": "physics",
+        "title": "Cavendish's enclosed-globe inverse-square nulls with a sensitivity control",
+        "reference": "completed-expansion-arguments.md#E3",
+        "design_state": "source-backed-qualified-primary-qualitative-account; no-invented-quantitative-inference",
+        "deps": [
+          "def-em-experiment-record-contract"
+        ],
+        "dependency_roles": {
+          "def-em-experiment-record-contract": "operational-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 14,
+        "statement": "**Primary source and reading limits.** Henry Cavendish's original manuscripts as edited by J. Clerk Maxwell, *The Electrical Researches of the Honourable Henry Cavendish* (Cambridge 1879), 'Experimental determination of the law of electric force', arts. 217-235, printed pp. 104-113, with the detector and electrometer descriptions arts. 244-249, printed pp. 119-121; read in the Internet Archive OCR of `electricalresea00cavegoog`. The original apparatus, procedure, reported observations and sensitivity check are identifiable, but the fractional calibration ratios and the exponent computation are corrupted by the OCR and no numerical exponent limit is transcribed or recomputed here. The account below is the report's descriptions and observations structured by the record contract of [[def-em-experiment-record-contract]]; it is a reported finite-resolution null, not a proof that a true charge is exactly zero.\n\n## Setup\n\nA conducting inner globe 12.1 inches in diameter, supported by a glass stick coated with sealing wax, enclosed between two tinfoil-coated pasteboard hemispheres 13.3 inches in diameter with a small clearance, the two hemispheres applied to each other to form a complete sphere; a removable wire connected the inner globe and the hemispheres, and could be drawn out by a silk string; linked strings operated the apparatus so that the charging wire, the inner connecting wire and the hemispheres were successively separated (paragraphs 219-222). A coated glass jar and an electrometer monitored and repeated the charging level (paragraphs 224-225). The detector was a pair of pith balls about one-fifth of an inch in diameter on fine linen threads, later a straw electrometer with cork balls (paragraphs 244-249). A second experiment enclosed a wooden piece between two wooden drawers forming a hollow box (paragraph 235).\n\n## Procedure\n\nThe hemispheres were charged from a Leyden vial through a wire, which was then withdrawn; immediately afterwards the wire connecting the inner globe and the hemispheres was drawn out by the silk string, the hemispheres were separated without touching the inner globe, and the outer shells and charging wire were discharged; a pith-ball detector was then brought to the inner globe (paragraphs 220-222 and 226). For greater sensitivity the pith balls were precharged positively before the charge, the comparison being made against the negative-precharge case at monitored equal charging levels (paragraphs 228-229). The deliberate sensitivity control repeated the procedure with a smaller coated glass element carrying a known small charge (paragraph 230).\n\n## Observations\n\nSeveral repetitions without perceived pith-ball separation or signs of residual inner charge (paragraph 227); in the precharged-ball comparison, equal small residual separations for positive and negative precharge rather than a detectable charge-sign asymmetry (paragraphs 228-229); in the sensitivity control, the small deliberately imposed charge was visibly distinguished by the same detector (paragraph 230); and a corresponding qualitative null with the enclosed-box geometry (paragraph 235). The reported 'must be inversely as the square' inference (paragraph 232) is recorded as the author's conclusion from the null under his theory, not as a modern theorem.\n\n## Uncertainty\n\nThe read passages supply charge-level monitoring, the precharge comparison, a deliberate sensitivity check and the pith-ball and electrometer construction, but no calibrated charge transfer function, no trial-level sampling model, no confidence interval and no modern SI traceability. Insulation leakage, finite separation time, imperfect spherical geometry, shell holes, accidental contact and outside charges are apparatus-model and systematic conditions. The OCR cannot faithfully recover all fractional calibration ratios or the exponent calculation, so no numerical exponent bound, precision, likelihood or certainty is invented.\n\n## Interpretation\n\nAn ideal inverse-square enclosed-conductor equilibrium model predicts zero charge in the connected enclosed interior under its idealization, and the reported observations support that model within the apparatus sensitivity and auxiliary assumptions; they constrain specified alternative force laws only after an explicit response and sensitivity model, which the read passages do not supply in numerically usable form. A finite null cannot prove an exact exponent, and the empirical support is a nonlogical relation to the static prediction.",
+        "strategy": "Source-backed experiment exposition, not a deductive proof. Author the five public sections and `empirical_result` from the actually read arts. 217-235 and 244-249 of the stamped Internet Archive OCR (https://archive.org/download/electricalresea00cavegoog/electricalresea00cavegoog_djvu.txt; read extent and OCR limitation preserved in research/first-principles-2026-10-03/classical-electromagnetism/scaffold/cavendish-primary-reading.json): apparatus from arts. 219-222 and 244-249; procedure from arts. 220-226, 228-230; observations from arts. 227-235; uncertainty from the absent calibration ratios and sampling model, retaining the OCR corruption explicitly; interpretation restricted to the qualitative null and the sensitivity control. Keep the record structure of [[def-em-experiment-record-contract]] and set `empirical_result` with the qualitative null/sensitivity summary, the 'no calibrated transfer function, trial sampling law or numerical exponent bound' uncertainty statement, the stated apparatus conditions and the source URL. Do not transcribe the corrupted fractional ratios, do not invent an exponent limit, and do not promote art. 232's 'must' to an unconditional theorem. Leave provenance.proof not-applicable with no Proof section; independent source reviewers check the null and sensitivity-control reading against the stamped text.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henry Cavendish, The Electrical Researches of the Honourable Henry Cavendish (ed. J. Clerk Maxwell, Cambridge 1879), Internet Archive OCR of electricalresea00cavegoog (URL stamped and hashed in the batch coverage file; sha256 8c54fe399606a71186f8c0717e3bdd00ec614ccd2bb040ebbb3b2cf787135133)",
+              "url": "https://archive.org/download/electricalresea00cavegoog/electricalresea00cavegoog_djvu.txt",
+              "locator": "'Experimental determination of the law of electric force', arts. 217-235, printed pp. 104-113 (apparatus arts. 219-222, procedure arts. 220-230, observations arts. 227-235), and detector/electrometer descriptions arts. 244-249, printed pp. 119-121; fractional computations corrupted by the OCR and not recomputed"
+            }
+          ]
+        },
+        "empirical_result": {
+          "observation": "Several repetitions without perceived pith-ball separation or signs of residual inner charge on the enclosed globe (art. 227); equal small residual separations under positive and negative detector precharge rather than a sign asymmetry (arts. 228-229); a deliberately imposed small charge visibly distinguished by the same detector (art. 230); and a qualitative null with an enclosed-box geometry (art. 235).",
+          "uncertainty": "No calibrated charge transfer function, trial-level sampling model, confidence interval or numerical exponent bound in the read passages; the fractional calibration ratios and exponent computation are corrupted in the OCR and were not transcribed or recomputed; insulation leakage, finite separation time, imperfect geometry, shell holes, accidental contact and outside charges are apparatus-model conditions.",
+          "conditions": "Conducting inner globe enclosed between two tinfoil-coated pasteboard hemispheres with a removable inner-outer connecting wire and string-operated separation; charging from a Leyden vial with electrometer monitoring; pith-ball detector (about 1/5 inch balls) and later a straw electrometer; a second enclosed-box geometry.",
+          "source_url": "https://archive.org/download/electricalresea00cavegoog/electricalresea00cavegoog_djvu.txt"
+        },
+        "physical_scope": "Primary-report account of Cavendish's enclosed-globe null tests of the inverse-square law: reported absence of detectable charge in the connected enclosed interior, the precharge sign comparison, a deliberate small-charge sensitivity control and the box-geometry null. Qualitative finite-resolution nulls under the described apparatus; no numerical exponent limit, no calibrated sensitivity function, no sampling law and no proof of an exact exponent or of any force law is claimed."
+      },
+      {
+        "id": "pthm-em-specified-model-comparison",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conditional predictions and qualified experimental comparison",
+        "reference": "completed-expansion-arguments.md#U2",
+        "design_state": "complete-bounded-error-conditional-model-comparison; not-numerically-applied",
+        "deps": [
+          "pthm-em-integral-maxwell",
+          "pthm-em-wave-energy-average",
+          "def-em-fixed-test-geometry",
+          "def-em-experiment-record-contract",
+          "thm-em-uncertainty-analysis",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-em-integral-maxwell": "physical-result",
+          "pthm-em-wave-energy-average": "physical-result",
+          "def-em-fixed-test-geometry": "formulation-prerequisite",
+          "def-em-experiment-record-contract": "formulation-prerequisite",
+          "thm-em-uncertainty-analysis": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 20,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$, [[def-countable-choice]]) exactly as inherited from clause (a) of [[pthm-em-integral-maxwell]], which is used in clause (a)(i) below with its piecewise $C^1$ boundary and surface-measure conventions; no other choice principle is used. Let the laboratory region, its inertial chart, the fields $E,B$ and the source fields $\\rho,J$ be those named in [[pthm-em-integral-maxwell]], with its constants and units, and let $R$ be a record of [[def-em-experiment-record-contract]] (primary source, apparatus and preparation, recorded data or reported observations, calibration model, uncertainty record, analysis assumptions, interpretation). Write $I_t$ for the laboratory time interval. Let $I_\\theta\\subseteq\\mathbb R$ be a nonempty open parameter interval, $\\theta_0\\in I_\\theta$, and $f:I_\\theta\\to\\mathbb R$ a declared comparison map of class $C^1$ such that $f(\\theta_0)=0$ and $f'(\\theta)\\ge m>0$ for every $\\theta\\in I_\\theta$. Suppose the record's declared apparatus-and-calibration dictionary identifies the comparison quantity with the deviation $y=f(\\theta)$ of a declared model family from the exact framework reference prediction $y_0$ of clause (a), and declares the recorded deviation $\\hat y$ and the bounds $|\\hat y|\\le s$ and $|y-\\hat y|\\le\\delta$ with $s,\\delta\\ge0$.\n\n(a) [Exact framework reference predictions] (i) [Static branch] Assume the smooth branch of the adopted vacuum Maxwell equations with the regularity hypotheses of [[pthm-em-integral-maxwell]] (fields jointly $C^1$ on $\\Omega\\times I_t$ with the additional derivatives required by each displayed equation existing and continuous, sources continuous). Let $(V,\\nu_V)$ be a volume test geometry of [[def-em-fixed-test-geometry]] and let $t\\in I_t$ be such that $\\rho(\\cdot,t)$ vanishes identically on $V$. Then clause (a) of [[pthm-em-integral-maxwell]] gives $$\\oint_{\\partial V}E(\\cdot,t)\\cdot\\nu_V\\,dS=\\frac{1}{\\varepsilon_0}\\int_V\\rho(\\cdot,t)\\,d\\lambda_3=0.$$ On the smooth branch every admitted boundary $\\partial V$ whose enclosed volume $V$ is charge-free has vanishing electric flux; charge-freeness of the surface alone is insufficient, and the exact framework prediction for the enclosed-flux observable is the value $y_0=0$. (ii) [Wave branch] Let $(E,B)$ be the plane-wave solution of [[pthm-em-wave-energy-average]] with data $(k,\\omega,e)$ there, let $n$ be a unit vector and let $\\langle S\\rangle$ be the period average of its Poynting vector. Then that item gives the exact identity $\\langle S\\rangle\\cdot n=(\\varepsilon_0c/2)|e|^2(\\hat k\\cdot n)$; an idealised detector reading the time-averaged intensity through a plane with unit normal $n$ therefore has the exact framework prediction $y_0=(\\varepsilon_0c/2)|e|^2|\\hat k\\cdot n|$.\n\n(b) [Conditional confinement] Under the stated identifications, every parameter value $\\theta\\in I_\\theta$ compatible with the declared model family, the apparatus-and-calibration dictionary and the two declared bounds satisfies $$|\\theta-\\theta_0|\\le\\frac{s+\\delta}{m}.$$ Equivalently, a proposed $\\theta$ violating this bound is incompatible with the conjunction (specified family, dictionary, calibration bound, recorded bound); the conclusion is a deterministic statement about the declared bounds.\n\n(c) [Status and qualifications] The conclusion is conditional on the declared family, dictionary, calibration and recorded bounds and on the declared monotonicity margin $m$; it is not a sampling law, a likelihood, a confidence level, a coverage probability, a $p$-value or a probability that any model or framework is true, and it asserts no rejection error rate. Agreement of a record with a specified family, like disagreement with it, concerns the conjunction of that family with the apparatus, calibration and analysis assumptions; a discrepancy may lie in the family, the dictionary, the calibration or the analysis, and neither agreement nor disagreement proves or deductively falsifies the adopted framework. The three primary reports scaffolded on this page do not, in their actually inspected extents, supply a calibrated response transfer function, a trial-level dataset or a declared sampling law; therefore this item asserts no numerical bound and performs no numerical application for any of them. Empirical support and its constraints are nonlogical relations, not dependencies, and any consumer of this item inherits $s$, $\\delta$, $m$, the declared family, the record's conditions and the source limitations.",
+        "strategy": "**Proof technique:** instantiate the cited framework predictions, then apply the cited bounded-error analysis to the declared record dictionary. (a)(i): fix $(V,\\nu_V)$ and $t$ as in the statement; the smooth branch of [[pthm-em-integral-maxwell]] applies under its stated regularity hypotheses, and its clause (a) gives the flux identity; the integral of the identically vanishing function $\\rho(\\cdot,t)$ on $V$ is zero, so the flux is zero. Only the first Maxwell equation and the test-geometry vocabulary of [[def-em-fixed-test-geometry]] are used; no boundary, decay or symmetry hypothesis is added. (a)(ii): read the exact averaged-flux identity from clause (b) of [[pthm-em-wave-energy-average]] at the unit normal $n$; the absolute value records only that an intensity reading is nonnegative. (b): set $J_\\theta:=I_\\theta-\\theta_0=\\{r-\\theta_0:r\\in I_\\theta\\}$, an open displacement interval containing $0$. Apply [[thm-em-uncertainty-analysis]] with $n=1$, $U=I_\\theta$, base point $\\theta_0$, unit direction $u=1$, $F=f$ and the supplier's scalar displacement interval $J_\\theta$. Its path is $h\\mapsto\\theta_0+h\\in U$ for every $h\\in J_\\theta$, and $D_1F(\\theta_0+h)=f'(\\theta_0+h)\\ge m$. For a candidate $\\theta\\in I_\\theta$ take $h=\\theta-\\theta_0\\in J_\\theta$; the declared deviation is exactly $y=F(\\theta_0+h)=f(\\theta)$, so the supplier gives $|h|\\le(s+\\delta)/m$, the stated bound. Laboratory time $I_t$ is independent of this parameter and displacement interval. The record's declared bounds $|\\hat y|\\le s$ and calibration bound $|y-\\hat y|\\le\\delta$ are the mathematical hypotheses of that theorem; the identification of the record's quantities with the theorem's $y,\\hat y,s,\\delta$ is part of the declared dictionary and is not deducible from the record structure alone. (c): scope statement recording the conditional status and the absence of any numerically adequate premises in the three reports. No existence, sampling, likelihood or probability claim is made; $\\mathrm{AC}_\\omega$ is used only in clause (a)(i) through [[pthm-em-integral-maxwell]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (GUM 1995 with minor corrections), Joint Committee for Guides in Metrology, first edition September 2008, 134 PDF pages",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf",
+              "locator": "Clause 2.3.1-2.3.6 (standard, Type A/Type B, combined and expanded uncertainty, coverage factor, printed pp. 3-4), clause 3.3.3-3.3.7 (evaluation categories, standard and expanded uncertainty, printed pp. 6-7) and clause 4.1.1 (the measurement model $Y=f(X_1,\\dots,X_N)$, printed p. 9), read in the complete PDF; used as the source of the measurement-model and uncertainty vocabulary that clause (c) keeps separate from the declared bounds"
+            },
+            {
+              "title": "Michael Faraday, Experimental Researches in Electricity, Volume I, First Series (read 24 November 1831), 1849 collected second edition, Project Gutenberg transcription",
+              "url": "https://www.gutenberg.org/files/14986/14986-h/14986-h.htm",
+              "locator": "First Series paragraphs 1-33; the report whose record fields supply no calibrated response function, trial-level dataset or sampling law, the fact recorded by clause (c)"
+            },
+            {
+              "title": "Heinrich Hertz, Electric Waves, authorized Jones English translation (Macmillan 1893), Chapter VII, Internet Archive OCR",
+              "url": "https://archive.org/download/electricwavesbe00hertgoog/electricwavesbe00hertgoog_djvu.txt",
+              "locator": "Chapter VII printed pp. 107-123; qualitative indicators and order-of-magnitude inferences only, as recorded by clause (c)"
+            },
+            {
+              "title": "Henry Cavendish, The Electrical Researches (ed. J. Clerk Maxwell, Cambridge 1879), Internet Archive OCR",
+              "url": "https://archive.org/download/electricalresea00cavegoog/electricalresea00cavegoog_djvu.txt",
+              "locator": "Arts. 217-235 (printed pp. 104-113) and arts. 244-249 (printed pp. 119-121); qualitative nulls with corrupted calibration fractions, as recorded by clause (c)"
+            }
+          ]
+        },
+        "physical_scope": "Conditional statement about the smooth branch of the adopted Maxwell equations and about idealised plane-wave intensity: exact framework reference predictions (zero electric flux through an admitted boundary of a charge-free enclosed volume; the exact averaged plane-wave intensity through a plane), and, for any declared comparison family, apparatus-and-calibration dictionary and declared bounds satisfying the stated hypotheses, the deterministic confinement $|\\theta-\\theta_0|\\le(s+\\delta)/m$. Excluded: sampling laws, likelihoods, confidence levels, coverage, $p$-values, rejection error rates, numerical application to the three reports of this page, weak or singular branches of the equations, and any claim that agreement proves or disagreement refutes the framework. Inherits $\\mathrm{AC}_\\omega$ from the cited integral theorem for clause (a)(i)."
+      },
+      {
+        "id": "rem-em-classical-validity-limits",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Classical material, point-source and mechanical regimes and the quantum exclusions",
+        "reference": "core-conditional-proofs.md#K10",
+        "design_state": "explicit-scope-remark-no-established-speculation",
+        "deps": [
+          "rem-em-radiation-reaction-limits",
+          "post-em-material-closure",
+          "post-em-lorentz-coupling",
+          "pthm-em-classical-interference",
+          "def-em-fields"
+        ],
+        "dependency_roles": {
+          "rem-em-radiation-reaction-limits": "formulation-prerequisite",
+          "post-em-material-closure": "physical-assumption",
+          "post-em-lorentz-coupling": "physical-assumption",
+          "pthm-em-classical-interference": "physical-result",
+          "def-em-fields": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 24,
+        "statement": "Record the established scope limits of the classical electromagnetic results assembled in this framework, with no speculative content. Each clause names what is and is not supplied; the remark asserts no theorem and adds no result.\n\n(a) [Continuum and regularity regime] The fields of the framework are the maps of [[def-em-fields]] on the laboratory region, with the regularity class carried by each statement; the solved branches are the smooth and stated weak branches of the adopted equations, and every conclusion holds only under its own stated regularity, domain and boundary hypotheses. No discrete, atomic or finite-resolution structure of matter or charge is assumed, and none is derived.\n\n(b) [Material-model regime] The material results rest on the declared constitutive branches of [[post-em-material-closure]] (the elementary inertial-rest linear nondispersive Ohmic branch and the causal memory branch with its declared kernel or transfer-function hypotheses); arbitrary nonlinear, nonlocal, hysteretic, or beyond-branch anisotropic and strongly dispersive response is not established by this framework, and each declared branch carries its own regime of validity, including the finite-band qualification of the constant-coefficient branch.\n\n(c) [Singular sources and self-interaction] [[rem-em-radiation-reaction-limits]] records that the point-source self-field energy diverges under removal of the cutoff, that a product of the singular self-field with the charge's own distributional current is not defined by the adopted source model, and that the emitted-power results are prescribed-source statements determining no back-reaction. No self-force dynamics, runaway analysis, finite-size regularization or electromagnetic derivation of rest mass is supplied by this framework.\n\n(d) [External-force and mechanical coupling] Particle motion enters only through the adopted Lorentz coupling [[post-em-lorentz-coupling]] with a prescribed external field; the framework determines the motion of a specified test charge in a specified field and supplies no material law, no self-field dynamics and no derivation of the particle parameters. Any coupling to matter beyond the declared branches is an additional model assumption.\n\n(e) [Quantum and ontological exclusions] The framework adopts no quantisation of charge, no spin or magnetic-moment degree of freedom, no measurement postulates and no photon model. Its interference results, such as the coherent cross term of [[pthm-em-classical-interference]], are deterministic statements about classical wave fields; classical electromagnetic waves interfere, so an interference pattern alone neither establishes a quantum description nor falsifies classical electromagnetism, and the framework's field predictions do not single out an ontology of the underlying field or of a particle.\n\n(f) [Empirical status] The empirical content of this page is report-backed and qualitative: the records of the three primary reports, in their stated read extents, carry no calibrated response functions, trial-level datasets or declared sampling laws, so they support and constrain the specified models only within their declared apparatus, calibration and analysis assumptions; agreement does not prove the framework and disagreement does not deductively falsify it. No measurement, precision, probability or confidence level is invented or inferred by this remark.\n\n(g) [Status] This is a scope remark, not an established theorem; it records the limits of the results assembled here and asserts no new result, no measurement and no proof.",
+        "strategy": "A scope remark recording limits, not a proof. Each clause cites the item that carries the result whose scope is delimited: (a) the field definition and the regularity hypotheses of the statements; (b) the material-closure postulate and its declared branches; (c) the radiation-reaction limits remark; (d) the Lorentz-coupling postulate; (e) the deterministic interference theorem together with the framework's absence of quantum postulates; (f) the report accounts of this page. The remark asserts nothing beyond the cited statements: no self-force, no material law beyond the declared branches, no quantum claim, no empirical certainty. The clause (c) content is the recorded scope of [[rem-em-radiation-reaction-limits]] (the supplier's role in this manifest is formulation-prerequisite rather than the design's physical-result label, since a remark is not one of the established-result kinds; the dependency is on its recorded scope content). No choice principle is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Faraday, Experimental Researches in Electricity, Volume I, First Series (read 24 November 1831), 1849 collected second edition, Project Gutenberg transcription",
+              "url": "https://www.gutenberg.org/files/14986/14986-h/14986-h.htm",
+              "locator": "First Series paragraphs 1-33; the qualitative-reported account cited in clause (f) for the empirical-limitations record"
+            },
+            {
+              "title": "Heinrich Hertz, Electric Waves, authorized Jones English translation (Macmillan 1893), Chapter VII, Internet Archive OCR",
+              "url": "https://archive.org/download/electricwavesbe00hertgoog/electricwavesbe00hertgoog_djvu.txt",
+              "locator": "Chapter VII printed pp. 107-123; the qualitative-reported account cited in clause (f), including the author's order-of-magnitude qualifications"
+            },
+            {
+              "title": "Henry Cavendish, The Electrical Researches (ed. J. Clerk Maxwell, Cambridge 1879), Internet Archive OCR",
+              "url": "https://archive.org/download/electricalresea00cavegoog/electricalresea00cavegoog_djvu.txt",
+              "locator": "Arts. 217-235 (printed pp. 104-113); the qualitative null account cited in clause (f), including the corrupted calibration fractions"
+            },
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (GUM 1995 with minor corrections), 134 PDF pages",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf",
+              "locator": "Clauses 2.2-2.3 and 3.3 (printed pp. 2-7), read in the complete PDF; the source of the distinction between declared uncertainty components and coverage or confidence statements used in clause (f)"
+            }
+          ]
+        },
+        "physical_scope": "Scope statement for classical electromagnetism as assembled in this framework: continuum and regularity regime; the declared material-closure branches and their excluded nonlinear, nonlocal, hysteretic and beyond-branch responses; the point-source self-interaction exclusions; the external-force Lorentz coupling; the absence of quantum charge, spin, measurement and photon postulates, with the classical-wave interference statement; and the qualitative, report-backed status of the empirical content. The remark asserts no theorem, no measurement, no probability and no proof, and it carries the qualifications of every item it cites."
+      }
+    ]
+  },
+  {
+    "order": 356,
+    "id": "em-empirical-tests-and-scope-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Empirical tests and limitations — Examples",
+    "companion": "em-empirical-tests-and-scope",
+    "requires": [
+      "em-empirical-tests-and-scope"
+    ],
+    "items": [
+      {
+        "id": "ex-em-apparatus-model-ambiguity",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A discrepancy can test auxiliaries as well as field assumptions",
+        "reference": "worked-example-verifications.md#X8",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-em-experiment-record-contract",
+          "thm-reals-ordered-field"
+        ],
+        "dependency_roles": {
+          "def-em-experiment-record-contract": "formulation-prerequisite",
+          "thm-reals-ordered-field": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 14,
+        "statement": "Let the record vocabulary be that of [[def-em-experiment-record-contract]], and adopt a declared affine response model in which the model prediction for a recorded comparison quantity is $$y(s,b):=G\\,s+b,$$ where $G>0$ is a declared response coefficient (with declared units [recorded]/[source]), $s\\in\\mathbb R$ a declared source-strength parameter and $b\\in\\mathbb R$ a declared background parameter in the units of the recorded quantity; the model is part of the record's analysis assumptions. Then:\n\n(i) [Exact ambiguity] For every $\\delta\\in\\mathbb R$, $$y(s+\\delta,\\,b-G\\delta)=G(s+\\delta)+(b-G\\delta)=Gs+b=y(s,b),$$ by the field arithmetic of $\\mathbb R$ ([[thm-reals-ordered-field]] makes $\\mathbb R$ a totally ordered field). Hence the two parameter pairs $(s,b)$ and $(s+\\delta,b-G\\delta)$ produce the same predicted value at every recorded coordinate, and every recorded value or declared closed bound interval compatible with the prediction of one pair is compatible with the prediction of the other.\n\n(ii) [Nonidentifiability] When $G\\ne0$ and $\\delta\\ne0$ the two pairs are distinct, yet their model predictions coincide; consequently a comparison of the record with the affine model alone determines only the combination $Gs+b$, and cannot distinguish the pairs unless an additional independent declaration pins one of the two parameters, for example an independent background-calibration declaration fixing $b$ or an independent source-strength declaration fixing $s$.\n\n(iii) [Explicit instance] With $G=2$, $s=3$, $b=1$ and $\\delta=1$ one has $y(3,1)=2\\cdot3+1=7$ and $y(4,-1)=2\\cdot4-1=7$, so the pairs $(s,b)=(3,1)$ and $(4,-1)$ are indistinguishable by the recorded value $7$ alone; the same holds for every declared bound interval, since the two predictions coincide exactly.\n\n(iv) [Status] This is a deterministic algebraic nonidentifiability statement about the declared affine response model. It asserts no property of any apparatus, no historical value, no dataset and no statistical or probabilistic claim; it records that a discrepancy (or an agreement) can test the auxiliary background and calibration parameters as well as the field or source assumptions of a model, so that attributing a recorded outcome to one premise requires the independent declarations.",
+        "strategy": "Direct substitution and declared assumptions (the recorded research argument X8 of `worked-example-verifications.md`). In (i), expand and rearrange in the field $\\mathbb R$ ([[thm-reals-ordered-field]] supplies the ordered-field, hence field, axioms for $\\mathbb R$: distributivity gives $G(s+\\delta)=Gs+G\\delta$, associativity and commutativity of addition regroup $(Gs+G\\delta)+(b-G\\delta)$ as $Gs+(G\\delta-G\\delta)+b$, and $G\\delta-G\\delta=0$ with $Gs+0+b=Gs+b$). The same identity shows that any condition, bound interval or comparison expression depending only on the predicted value is unchanged, which proves (i) and the distinctness/nonidentifiability claim (ii) for $G\\ne0$, $\\delta\\ne0$. Clause (iii) is the explicit arithmetic instance $2\\cdot3+1=7=2\\cdot4-1$. Clause (iv) records the scope: no apparatus, historical, dataset or probabilistic claim is made, and the example uses only the record vocabulary and the real field arithmetic. An independent background or source-strength declaration, when available, is an additional hypothesis of any consumer, not a consequence of this example.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (GUM 1995 with minor corrections), Joint Committee for Guides in Metrology, first edition September 2008, 134 PDF pages",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf",
+              "locator": "JCGM 100:2008 clause 3.2 (printed p. 5) and clause 4.1.1 (printed p. 9), read in the complete PDF: corrections, influence quantities and the functional model $Y=f(X_1,\\dots,X_N)$ of which the affine model of this example is the two-parameter case"
+            },
+            {
+              "title": "Michael Faraday, Experimental Researches in Electricity, First Series (read 24 November 1831), Project Gutenberg transcription",
+              "url": "https://www.gutenberg.org/files/14986/14986-h/14986-h.htm",
+              "locator": "First Series paragraphs 1-33; an instance of a report with background, timing and detector-response auxiliaries that are not calibrated, motivating the declared affine model's ambiguity"
+            }
+          ]
+        },
+        "physical_scope": "Elementary conditional statement about a declared affine response model inside the framework's record vocabulary: the parameter pairs $(s,b)$ and $(s+\\delta,b-G\\delta)$ produce identical predictions, so a record compared with the model alone determines only $Gs+b$ and cannot separate the pairs without an independent background or source-strength declaration. It asserts nothing about any apparatus, no historical claim, no dataset, no sampling law and no probability; it is an exact algebraic nonidentifiability of the declared model."
+      },
+      {
+        "id": "ex-em-ideal-and-measured-fringes",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Ideal field intensity versus actual finite detector statistics",
+        "reference": "worked-example-verifications.md#X8",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "pthm-em-classical-interference",
+          "def-em-experiment-record-contract",
+          "def-em-plane-wave-definition",
+          "def-em-si-conventions",
+          "def-cross-product-in-r3",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-euclidean-inner-product",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-integral-over-a-measurable-set",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "lem-of-sign-rules",
+          "def-countable-choice",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_roles": {
+          "pthm-em-classical-interference": "physical-result",
+          "def-em-experiment-record-contract": "formulation-prerequisite",
+          "def-em-plane-wave-definition": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "lem-of-sign-rules": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "cor-continuous-functions-are-borel-measurable": "mathematical-premise",
+          "thm-borel-sets-are-lebesgue-measurable": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 21,
+        "statement": "Adopt the two-beam data and conclusions of [[pthm-em-classical-interference]]: the complex electric amplitude $\\alpha(x)=a_1e_1+a_2e_2e^{i\\delta(x)}$ and magnetic amplitude $\\beta(x)=a_1b_1+a_2b_2e^{i\\delta(x)}$ of its clause (a), with $\\delta(x)=(k_2-k_1)\\cdot x$, $b_j=k_j\\times e_j/\\omega$ ([[def-cross-product-in-r3]]) and the plane-wave solutions $(E_j,B_j)$ of [[def-em-plane-wave-definition]]; and its clause (b) averaged energy density $$\\langle u\\rangle(x)=\\frac{\\varepsilon_0}{4}|\\alpha(x)|^2+\\frac{1}{4\\mu_0}|\\beta(x)|^2$$ with the SI constants of [[def-em-si-conventions]], and assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$, [[def-countable-choice]]) exactly as inherited by the Lebesgue-measure and integral items cited in clause (ii), which are stated under that hypothesis; no other choice principle is used. Assume $a_1=a_2=:a>0$, $e_1=e_2=:e$ with real amplitude vector $e$, and $k_1\\ne k_2$ with $(k_2-k_1)\\times e\\ne0$; let $x_0$ be a point with $\\delta(x_0)\\equiv\\pi\\pmod{2\\pi}$.\n\n(i) [Ideal prediction and its vanishing] At such $x_0$ one has $\\alpha(x_0)=ae(1+e^{i\\delta(x_0)})=0$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]), hence the electric field of the superposition vanishes at $x_0$ for every $t$ and the electric term of the averaged energy density vanishes there. The full averaged energy density need not vanish: $\\beta(x_0)=a(b_1-b_2)=a\\bigl((k_1-k_2)\\times e\\bigr)/\\omega\\ne0$, so $\\langle u\\rangle(x_0)=|a(b_1-b_2)|^2/(4\\mu_0)>0$ ([[def-euclidean-inner-product]] for the positive-definite norm). Thus a claim that 'the ideal intensity vanishes at $x_0$' must name the quantity that vanishes.\n\n(ii) [Declared bin response and its finite-rate branch] Adopt a declared detector model with a Lebesgue-measurable bin $W\\subseteq\\mathbb R^3$, $x_0\\in W$ and $\\lambda_3(W)>0$, a finite real response coefficient $\\kappa\\ge0$, and a nonnegative density $b:W\\to[0,\\infty)$ measurable for the restricted Lebesgue sigma-algebra on $W$. Extend $b$ by zero off $W$. The declared response functional is the nonnegative Lebesgue integral\n$$R(W):=\\int_W\\bigl(\\kappa|\\alpha(x)|^2+b(x)\\bigr)\\,d\\lambda_3\\in[0,+\\infty].$$\nThe continuous real function $|\\alpha|^2$ is Borel measurable by [[cor-continuous-functions-are-borel-measurable]] and Lebesgue measurable by [[thm-borel-sets-are-lebesgue-measurable]]; the zero extension of $b$ is measurable since its positive superlevels are measurable subsets of $W$. Closure under nonnegative scaling and addition is supplied by [[prop-closure-properties-of-measurable-functions-used-by-the-integral]], and [[def-integral-over-a-measurable-set]] defines the extended integral. No boundedness or finite-volume condition on $W$ is imposed. If $\\int_W b\\,d\\lambda_3>0$, monotonicity gives\n$$R(W)\\ge\\int_W b\\,d\\lambda_3>0$$\neven though $|\\alpha(x_0)|^2=0$. For a constant $b=b_0>0$ this lower bound is $b_0\\lambda_3(W)$ by [[def-integral-of-a-nonnegative-simple-function]], [[prop-the-nonnegative-integral-agrees-with-the-simple-integral]] and [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]; it may be $+\\infty$. The *finite predicted rate* branch additionally requires $R(W)<\\infty$ and declared response units. A concrete sufficient case is $0<\\lambda_3(W)<\\infty$ and constant $0<b_0<\\infty$: the bound $|\\alpha|^2\\le4a^2|e|^2$ gives\n$$0<b_0\\lambda_3(W)\\le R(W)\\le(4\\kappa a^2|e|^2+b_0)\\lambda_3(W)<\\infty.$$\nFor $\\kappa=0$ the field contribution is the zero function, without forming $0\\cdot(+\\infty)$. Identifying a finite predicted response with a recorded comparison quantity still requires the apparatus, calibration and analysis declarations of [[def-em-experiment-record-contract]]. Thus a finite positive bin prediction is compatible with the ideal pointwise zero, but an extended infinite response is not a recorded finite rate, and neither response is an event probability.\n\n(iii) [Record versus prediction; statistical qualification] The data of [[def-em-experiment-record-contract]] are a finite tuple of real recorded values or reported observations with declared conditions, calibration and uncertainty. The predictions of (i)-(ii) are deterministic field quantities or a declared extended response functional, with a finite real rate only on its stated finite branch. Here an ideal fringe pattern describes spatial variation of a specified intensity or response; a single detection and a finite data tuple are separate records. Whether a finite record displays a specified visibility or pattern requires a declared criterion, calibration, binning, background and sampling assumptions, none supplied by the field calculation alone. No sampling law, probability of failing a visibility criterion, detection statistics or measured histogram is asserted. This example discriminates no classical or quantum ontology: classical electromagnetic waves interfere and the coherence calculation is a deterministic prediction of the classical model.",
+        "strategy": "Direct substitution and declared assumptions. (i): substitute the stated amplitude data into clause (a) of [[pthm-em-classical-interference]]; at $\\delta(x_0)\\equiv\\pi$ the factor $1+e^{i\\pi}=0$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]), giving $\\alpha(x_0)=0$ and vanishing electric field at $x_0$ for every $t$; the magnetic amplitude is $a(b_1-b_2)$ with $b_1-b_2=((k_1-k_2)\\times e)/\\omega\\ne0$ by the bilinearity of the cross product ([[def-cross-product-in-r3]]) and the nondegeneracy of the Euclidean norm ([[def-euclidean-inner-product]]), so the magnetic term of the averaged density is positive at $x_0$. (ii): $\\alpha$ is a smooth plane-wave amplitude, so $|\\alpha|^2$ is continuous. The cited continuous-to-Borel and Borel-to-Lebesgue suppliers, under the already stated $\\mathrm{AC}_\\omega$, supply its measurability. Restrict to measurable $W$; the explicitly measurable $b$ extends by zero, with positive superlevels measurable in the ambient space. The closure supplier makes the nonnegative sum measurable. Monotonicity applies in $[0,+\\infty]$ and proves the lower bound without finiteness. A positive constant background integrates to $b_0\\lambda_3(W)$ by the simple-integral suppliers. In the finite-volume constant-background branch, $\\alpha=ae(1+e^{i\\delta})$ and the unit modulus of the exponential and subadditivity of its scalar complex modulus ([[lem-complex-conjugation-and-modulus-laws]]) give $|\\alpha|\\le2a|e|$. Compare the entire integrand with the constant $4\\kappa a^2|e|^2+b_0$ and use the same monotonicity and simple-integral formula for the finite upper bound; this uses no unproved integral additivity and handles $\\kappa=0$ as the zero function. Unbounded or infinite-measure bins retain the extended response contract; only a separately verified finite response can enter the real-valued record vocabulary. (iii): the record structure is that of [[def-em-experiment-record-contract]], and the vanishing pointwise value is not by itself the bin response; no sampling model, probability, dataset or observation is introduced, and the classical-wave interference character of the prediction is that of [[pthm-em-classical-interference]] clause (d). The only choice assumption is $\\mathrm{AC}_\\omega$, declared for the Lebesgue-measure and integral interface used in clause (ii); no other choice principle is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (author-hosted, 236 pp.), Chapter 3 on waves and interference; used for the wave-interference and intensity conventions",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "Section 4.3.1 'Solving the Wave Equation' printed pp. 84-86 (the plane-wave solution (4.15)-(4.16), the principle of superposition and the complex notation (4.17) with the warning that quadratic quantities require the real part) and Section 4.3.2 'Polarisation' printed pp. 87-89, read in the stamped complete 236-page author-hosted text; used only for the classical superposition and interference conventions, with the detector model declared separately in the statement"
+            },
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (GUM 1995 with minor corrections), 134 PDF pages",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf",
+              "locator": "Clause 3.3.2 (enumerated sources of uncertainty, including finite resolution and incomplete definition of the measurand, printed p. 6) and clause 4.1.1 (the measurement model, printed p. 9), read in the complete PDF; used for the declared-response and background vocabulary of the bin model"
+            }
+          ]
+        },
+        "physical_scope": "Conditional classical-wave example separating an ideal pointwise electric zero from a declared measurable bin response with background. All measurable bins of positive measure and nonnegative measurable backgrounds remain allowed, with a response in $[0,+\\infty]$; a finite-rate interpretation requires a finite response and the declared apparatus/calibration dictionary. The finite-volume constant-positive-background case provides an explicit finite positive response despite the point zero. No data, sampling law, event probability or classical/quantum discrimination is inferred."
+      }
+    ]
+  }
+]

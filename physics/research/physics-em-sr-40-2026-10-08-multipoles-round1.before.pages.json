@@ -1,0 +1,632 @@
+[
+  {
+    "order": 333,
+    "id": "em-electrostatic-multipoles",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Electrostatic multipoles",
+    "companion": "em-electrostatic-multipoles-examples",
+    "requires": [
+      "em-boundary-and-spectral-prerequisites",
+      "em-electrostatics-in-vacuum",
+      "darboux-lhopital-and-taylor"
+    ],
+    "items": [
+      {
+        "id": "def-em-electric-moments",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Total charge, dipole moment, Cartesian moments and traceless quadrupole of a static charge distribution",
+        "reference": "definition-contracts.md#def-em-electric-moments",
+        "design_state": "explicit-definition-contract; supplier-validation-recorded-separately",
+        "dependency_level": 16,
+        "deps": [
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "def-em-sources",
+          "def-em-electrostatic-regime",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-l-one-of-a-measure",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "thm-monotonicity-of-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ],
+        "dependency_roles": {
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "def-em-electrostatic-regime": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-l-one-of-a-measure": "mathematical-premise",
+          "def-measure-null-set-and-almost-everywhere": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), inherited from the Lebesgue interface used below ([[def-countable-choice]]). Let the laboratory region, its chart, its spatial Euclidean structure and its units be those of [[def-em-lab-geometry]] and [[def-em-si-conventions]], and let $\\delta_{ij}$ be the Kronecker symbol in the $\\delta$-orthonormal basis $(e_1,e_2,e_3)$ of the frame, with $|y|$ the Euclidean norm of [[def-euclidean-inner-product]]. This definition assigns **source moments** to a static charge distribution in the fixed-time reading of [[def-em-electrostatic-regime]] (d) and (e). Two branches are declared.\n\n(a) [Absolutely continuous branch] Let $a>0$ and let $\\rho\\in L^1(\\mathbb R^3)$ be real ([[def-l-one-of-a-measure]]) and vanish $\\lambda_3$-almost everywhere outside the closed ball $\\overline B_a(0)=\\{y:|y|\\le a\\}$ ([[def-metric-ball]], [[def-measure-null-set-and-almost-everywhere]]). The **total charge** $Q$, the **dipole moment** $p$, the **degree-$l$ Cartesian moments** $M_{i_1\\dots i_l}$ and the **traceless quadrupole** $Q_{ij}$ are\n$$Q:=\\int_{\\mathbb R^3}\\rho\\,d\\lambda_3,\\qquad p_i:=\\int_{\\mathbb R^3}y_i\\,\\rho(y)\\,d\\lambda_3(y),$$\n$$M_{i_1\\dots i_l}:=\\int_{\\mathbb R^3}y_{i_1}\\cdots y_{i_l}\\,\\rho(y)\\,d\\lambda_3(y)\\quad(l\\ge0),\\qquad Q_{ij}:=\\int_{\\mathbb R^3}\\bigl(3y_iy_j-|y|^2\\delta_{ij}\\bigr)\\rho(y)\\,d\\lambda_3(y),$$\nwith $M^{(0)}:=Q$ and $M_i:=p_i$, indices in $\\{1,2,3\\}$, units C, C m, C m$^l$ and C m$^2$, and integrals in the sense of [[def-integral-over-a-measurable-set]] and [[def-integrable-real-and-complex-functions-and-their-integrals]]. Each integral is absolutely convergent: since $\\rho=0$ $\\lambda_3$-a.e. off $\\overline B_a(0)$ and the maps $y\\mapsto y_{i_1}\\cdots y_{i_l}$ and $y\\mapsto 3y_iy_j-|y|^2\\delta_{ij}$ are bounded there by $a^l$ and $4a^2$, the integrands are dominated $\\lambda_3$-a.e. by $a^l|\\rho|$ and $4a^2|\\rho|$, which lie in $L^1$ ([[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]). The traceless quadrupole is traceless, $\\sum_iQ_{ii}=0$, since $\\sum_i(3y_i^2-|y|^2)=0$ pointwise ([[thm-linearity-of-the-lebesgue-integral-on-l-one]]), and replacing $\\rho$ by an equal $\\lambda_3$-a.e. density changes no moment ([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]).\n\n(b) [General locally integrable branch] If instead $\\rho\\in L^1_{\\mathrm{loc}}(\\mathbb R^3)$ is real and $\\int_{\\mathbb R^3}|y|^l|\\rho(y)|\\,d\\lambda_3(y)<\\infty$ for a given $l\\ge0$, then the degree-$l$ Cartesian moments of the same formula are absolutely convergent and defined; if the $L$-th absolute moment is finite for some $L\\ge0$, then every degree $l\\le L$ is defined. No compact support and no $L^1$-membership is assumed in this branch.\n\n(c) [Finite system of stationary point charges] Let $N\\ge0$, $x_1,\\dots,x_N\\in\\mathbb R^3$ and $q_1,\\dots,q_N\\in\\mathbb R$ be charge parameters ([[def-em-sources]] (a)), read as the stationary point charges $q_k\\delta_{x_k}$ in the fixed-time reading of [[def-em-electrostatic-regime]] (e). Define\n$$Q:=\\sum_{k=1}^Nq_k,\\qquad p:=\\sum_{k=1}^Nq_kx_k,\\qquad M_{i_1\\dots i_l}:=\\sum_{k=1}^Nq_k\\,x_{k,i_1}\\cdots x_{k,i_l},\\qquad Q_{ij}:=\\sum_{k=1}^Nq_k\\bigl(3x_{k,i}x_{k,j}-|x_k|^2\\delta_{ij}\\bigr),$$\nfinite sums in the sense of [[def-finite-sum]] ([[lem-finite-sum-laws]]); again $\\sum_iQ_{ii}=0$. The points need not be distinct; charges at a common point add.\n\n(d) [Reference point and scope] Every moment is computed about the chart origin of [[def-em-lab-geometry]]; this origin is part of the definition. These are source moments of a prescribed static distribution — not momenta, rest masses, intrinsic spins, self-energies or dynamical quantities — and no field, force, equation of motion, equilibrium or empirical claim is made here; the static regime in which the source is read is the adopted idealisation of [[def-em-electrostatic-regime]] (f).",
+        "strategy": "An explicit type/domain/convention definition with its well-definedness checks displayed in the clauses: absolute convergence and null-set irrelevance in (a), the finite-absolute-moment hypothesis in (b), and the finite-sum identities in (c). The mathematical inputs are the Lebesgue interface ([[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]], [[def-l-one-of-a-measure]]), the pointwise bounds $|y_{i_1}\\cdots y_{i_l}|\\le a^l$ and $|3y_iy_j-|y|^2\\delta_{ij}|\\le4a^2$ on $\\overline B_a(0)$, the triangle and monotonicity estimates ([[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]), linearity of the integral ([[thm-linearity-of-the-lebesgue-integral-on-l-one]]), null-set irrelevance ([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]) and finite-sum algebra ([[def-finite-sum]], [[lem-finite-sum-laws]]). The physical reading uses only the fixed-time dictionary of [[def-em-electrostatic-regime]] (d), (e); no Choice beyond the declared $\\mathrm{AC}_\\omega$ of the measure interface is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "Section 3.4.2 printed pp. 149-151 (Eq. (3.98) p. 149, the dipole moment as the integral of r' rho; Eq. (3.100), the dipole moment of a collection of point charges; Eq. (3.101), p = qd for the physical dipole). Read in the stamped scanned full text, OCR cross-checked."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "Section 2.2.3 printed pp. 20-22 (Q = integral rho, p = integral r' rho, and the symmetric traceless quadrupole Q_ij = integral rho (3 r'_i r'_j - delta_ij r'^2)). Read in the stamped full text."
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, 3rd revised English edition (Pergamon 1971, 387 pp.; full text)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "Sections 40-41 printed pp. 95-100 (dipole moment d = sum e_a r_a, Eq. (40.3) p. 95, and quadrupole moment D_ab = sum e (3 x_a x_b - r^2 delta_ab), Eq. (41.3) p. 98; Gaussian units re-expressed in SI). Read in the stamped full text."
+            }
+          ]
+        },
+        "physical_scope": "Source moments (total charge, dipole moment, Cartesian moments, traceless quadrupole) of a prescribed static charge distribution read at fixed time in one named inertial frame: an absolutely continuous compactly supported $L^1$ density, a locally integrable density with a finite absolute moment of the stated order, or a finite system of stationary point charges. These are kinematic source characteristics: no field, force, dynamics, self-energy, stability or empirical content is asserted, and the static regime is an adopted idealisation."
+      },
+      {
+        "id": "pthm-em-moment-origin-change",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Origin shift of the source moments: $Q$, the dipole $p-Qb$, the Cartesian expansion and the traceless quadrupole",
+        "reference": "core-conditional-proofs.md#K4; mathematical-prerequisites.md#M06",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 17,
+        "deps": [
+          "def-em-electric-moments",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-l-one-of-a-measure",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "thm-monotonicity-of-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-em-electric-moments": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-l-one-of-a-measure": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), inherited from the Lebesgue interface ([[def-countable-choice]]). Let $a>0$ and let $\\rho\\in L^1(\\mathbb R^3)$ be real and vanish $\\lambda_3$-a.e. outside $\\overline B_a(0)$, or let $(x_k,q_k)_{k=1}^N$ be a finite system of stationary point charges, with the source moments of [[def-em-electric-moments]] branches (a) and (c) respectively. For $b\\in\\mathbb R^3$ define the moments **about the reference point $b$** by replacing, in each integrand of [[def-em-electric-moments]] (a) and in each summand of (c), the vector $y$ by $y-b$ (respectively $x_k$ by $x_k-b$):\n$$Q^{(b)}:=\\int_{\\mathbb R^3}\\rho\\,d\\lambda_3,\\quad p^{(b)}:=\\int_{\\mathbb R^3}(y-b)\\,\\rho(y)\\,d\\lambda_3(y),\\quad M^{(b)}_{i_1\\dots i_l}:=\\int_{\\mathbb R^3}\\prod_{r=1}^l(y-b)_{i_r}\\,\\rho(y)\\,d\\lambda_3(y),$$\n$$Q^{(b)}_{ij}:=\\int_{\\mathbb R^3}\\bigl(3(y-b)_i(y-b)_j-|y-b|^2\\delta_{ij}\\bigr)\\rho(y)\\,d\\lambda_3(y),$$\nand analogously with finite sums $M^{(b)}_{i_1\\dots i_l}=\\sum_{k=1}^N q_k\\prod_{r=1}^l(x_k-b)_{i_r}$ in the point-charge branch. Every displayed integral is absolutely convergent: $\\lambda_3$-a.e. on the support the monomials obey $|y_{i_1}\\cdots y_{i_l}|\\le a^l$ and, for $y-b$, $|y-b|^l\\le(|y|+|b|)^l$ and $|3(y-b)_i(y-b)_j-|y-b|^2\\delta_{ij}|\\le4(|y|+|b|)^2$, so the integrands are dominated by constants times $|\\rho|\\in L^1$ ([[def-em-electric-moments]] (a), [[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]). Then:\n(a) $Q^{(b)}=Q$ for every $b$;\n(b) $p^{(b)}=p-Qb$, so the dipole moment is independent of the reference point exactly when $Q=0$;\n(c) for every $l\\ge0$,\n$$M^{(b)}_{i_1\\dots i_l}=\\sum_{S\\subseteq\\{1,\\dots,l\\}}(-1)^{|S|}\\Bigl(\\prod_{r\\in S}b_{i_r}\\Bigr)M_{(i_r:\\,r\\notin S)},$$\nwhere $M_{(i_r:\\,r\\notin S)}$ is the Cartesian moment whose index list is the complement of $S$ and the empty index list is read as $Q$; in particular\n$$M^{(b)}_{ij}=M_{ij}-b_ip_j-b_jp_i+b_ib_jQ;$$\n(d) $Q^{(b)}_{ij}=Q_{ij}-3\\bigl(b_ip_j+b_jp_i\\bigr)+2(b\\cdot p)\\delta_{ij}+\\bigl(3b_ib_j-|b|^2\\delta_{ij}\\bigr)Q$; consequently, if $Q=0$ and $p=0$, then $Q^{(b)}_{ij}=Q_{ij}$ for every $b$ (the traceless quadrupole of a neutral, non-dipolar distribution is independent of the reference point);\n(e) [Scope] this is an exact identity between the declared source moments of [[def-em-electric-moments]]; it asserts nothing about fields, forces, dynamics or nature, and the reference point is a choice of coordinate origin, not an operation performed on the source.",
+        "strategy": "The theorem is the expansion of the polynomial $\\prod_{r=1}^l(y_{i_r}-b_{i_r})$ followed by termwise integration (or summation). For (a) and (b) the degrees $0$ and $1$ are immediate; constant multiples of $\\rho$ and of $y_i\\rho$ pass through the integral by linearity of the Lebesgue integral on $L^1$ ([[thm-linearity-of-the-lebesgue-integral-on-l-one]]), and the finite-sum branch by linearity of finite sums ([[def-finite-sum]], [[lem-finite-sum-laws]]). For (c), expand by finite distributivity,\n$$\\prod_{r=1}^l(y_{i_r}-b_{i_r})=\\sum_{S\\subseteq\\{1,\\dots,l\\}}(-1)^{|S|}\\Bigl(\\prod_{r\\in S}b_{i_r}\\Bigr)\\Bigl(\\prod_{r\\notin S}y_{i_r}\\Bigr),$$\nan identity of real polynomials proved by induction on $l$ (finitely many distribution steps, [[def-ck-euclidean-maps-and-diffeomorphisms]] for the polynomial calculus), and integrate term by term: each monomial is dominated $\\lambda_3$-a.e. by $a^l|\\rho|$ on the support, hence absolutely integrable by [[def-em-electric-moments]] (a), so the finitely many applications of linearity are legitimate and the constants $\\prod_{r\\in S}b_{i_r}$ factor out ([[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]). For (d), multiply the case $l=2$ by $3$ and subtract $\\delta_{ij}\\sum_kM^{(b)}_{kk}$, using $Q^{(b)}_{ij}=3M^{(b)}_{ij}-\\delta_{ij}\\sum_kM^{(b)}_{kk}$, $Q_{ij}=3M_{ij}-\\delta_{ij}\\sum_kM_{kk}$ and $\\sum_kM^{(b)}_{kk}=\\sum_kM_{kk}-2b\\cdot p+|b|^2Q$; this gives the displayed identity, and its four $b$-dependent terms vanish identically when $Q=0$ and $p=0$. Replacing $\\rho$ by an equal $\\lambda_3$-a.e. density changes no integral ([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]). The finite-sum branch repeats the same algebra with sums. No Choice beyond the declared $\\mathrm{AC}_\\omega$ is used; (e) records the scope.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "Section 3.4.3 printed pp. 151-152 (displacing the origin by a: the new dipole moment is p - Qa, and p is origin-independent when Q = 0). Read in the stamped scanned full text, OCR cross-checked."
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, 3rd revised English edition (Pergamon 1971, 387 pp.; full text)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "Section 40 printed p. 95 (d' = d when the total charge vanishes) and Section 41 printed p. 99 (the quadrupole moment is independent of the coordinate origin if the total charge and the dipole moment both vanish; Gaussian units re-expressed in SI). Read in the stamped full text."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "Section 2.2.3 printed pp. 20-22 (p = integral r' rho and Q_ij = integral rho (3 r'_i r'_j - delta_ij r'^2), the moments whose reference-point dependence is computed here). Read in the stamped full text."
+            }
+          ]
+        },
+        "physical_scope": "The exact reference-point dependence of the source moments of a static charge distribution: Q is reference-point independent, the dipole moment shifts by -Qb, every Cartesian moment has the displayed subset expansion, and the traceless quadrupole is reference-point independent for a neutral, non-dipolar distribution. The claim is a moment identity, not a statement about fields, forces, dynamics or empirical fact."
+      },
+      {
+        "id": "pthm-em-electric-dipole-torque",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "External force and torque on a small neutral charge distribution in a slowly varying electrostatic field",
+        "reference": "core-conditional-proofs.md#K4",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 18,
+        "deps": [
+          "def-em-electric-moments",
+          "post-em-lorentz-coupling",
+          "def-em-electromagnetic-tensor",
+          "def-em-relativistic-worldlines-frames",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "def-em-fields",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-l-one-of-a-measure",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-cross-product-in-r3",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "thm-monotonicity-of-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-em-electric-moments": "formulation-prerequisite",
+          "post-em-lorentz-coupling": "physical-assumption",
+          "def-em-electromagnetic-tensor": "formulation-prerequisite",
+          "def-em-relativistic-worldlines-frames": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-l-one-of-a-measure": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-measure-null-set-and-almost-everywhere": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), inherited from the Lebesgue interface ([[def-countable-choice]]). Let $a>0$ and let $\\rho\\in L^1(\\mathbb R^3)$ be real and vanish $\\lambda_3$-a.e. outside $\\overline B_a(0)$; let $E_{\\mathrm{ext}}:\\mathbb R^3\\to\\mathbb R^3$ be a prescribed external electric field ([[def-em-fields]]) that is continuous on $\\overline B_a(0)$ and Lipschitz there with constant $L\\ge0$, i.e. $|E_{\\mathrm{ext}}(x)-E_{\\mathrm{ext}}(x')|\\le L|x-x'|$ for all $x,x'\\in\\overline B_a(0)$. Consider the matter model in which the prescribed static distribution $\\rho$ is carried by a body at rest in the laboratory frame and the only electromagnetic force taken into account is the external-field part of the continuum coupling of [[post-em-lorentz-coupling]] (ii), namely the force density $\\rho E_{\\mathrm{ext}}$; the self-field of $\\rho$, all other fields, mechanical support and back-reaction are excluded by this model. Define the **total external force** and the **total external torque about the origin** by the componentwise Lebesgue integrals\n$$F:=\\int_{\\mathbb R^3}\\rho(y)\\,E_{\\mathrm{ext}}(y)\\,d\\lambda_3(y)\\in\\mathbb R^3,\\qquad \\tau:=\\int_{\\mathbb R^3}\\rho(y)\\,\\bigl(y\\times E_{\\mathrm{ext}}(y)\\bigr)\\,d\\lambda_3(y)\\in\\mathbb R^3,$$\nabsolutely convergent because on the support $|E_{\\mathrm{ext}}|\\le|E_{\\mathrm{ext}}(0)|+La$ and $|y\\times E_{\\mathrm{ext}}|\\le a(|E_{\\mathrm{ext}}(0)|+La)$, so each component is dominated by a constant times $|\\rho|\\in L^1$ ([[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]], [[def-cross-product-in-r3]], [[thm-cross-product-norm-is-the-two-vector-gram-determinant]], [[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]]). Then:\n(a) [Uniform force and torque expansions]\n$$F=Q\\,E_{\\mathrm{ext}}(0)+R_F,\\qquad |R_F|\\le L\\,a\\,\\|\\rho\\|_1,\\qquad \\tau=p\\times E_{\\mathrm{ext}}(0)+R_\\tau,\\qquad |R_\\tau|\\le L\\,a^2\\|\\rho\\|_1,$$\nwhere $Q$ and $p$ are the total charge and dipole moment of [[def-em-electric-moments]] (a) and $\\|\\rho\\|_1=\\int|\\rho|\\,d\\lambda_3$;\n(b) [Neutral distribution] if $Q=0$ then the leading force term vanishes, $F=R_F$ with $|R_F|\\le La\\|\\rho\\|_1$, and the torque is the ideal-dipole torque $p\\times E_{\\mathrm{ext}}(0)$ up to the bound $|R_\\tau|\\le La^2\\|\\rho\\|_1$; in this sense a neutral distribution of size $a$ in a field with Lipschitz constant $L$ carries the dipole torque $p\\times E_{\\mathrm{ext}}(0)$ with an explicit remainder;\n(c) [Reference-point shift] for any reference point $o\\in\\mathbb R^3$, the torque about $o$, $\\tau_o:=\\int_{\\mathbb R^3}\\rho(y)\\,(y-o)\\times E_{\\mathrm{ext}}(y)\\,d\\lambda_3(y)$, equals $\\tau-o\\times F$ exactly;\n(d) [Ideal pair of test charges at rest] let $q\\in\\mathbb R$ and $d\\in\\mathbb R^3\\setminus\\{0\\}$, put $a=|d|/2$, and consider the two stationary point charges $+q$ at $d/2$ and $-q$ at $-d/2$ ([[def-em-electric-moments]] (c)), each treated as a test charge at rest in the laboratory chart in the same prescribed external field $E_{\\mathrm{ext}}$, with the mutual interaction and the self-field of each charge excluded by the model. Then the spatial part of the adopted equation of motion of [[post-em-lorentz-coupling]] (i) at zero coordinate velocity is $m\\,dU^i/d\\tau=q'E^i_{\\mathrm{ext}}(x)$ for a charge $q'$ at $x$, because at rest $U=(c,0,0,0)$ and $U_0=-c$ ([[def-em-relativistic-worldlines-frames]] (b),(c)) while $F^{i0}=-E_i/c$ ([[def-em-electromagnetic-tensor]] (a)); consequently the total force and the total torque about the origin of the pair satisfy the expansions of (a) and (b) with $Q=0$, $p=qd$ and $|q|+|{-q}|=2|q|$ in place of $\\|\\rho\\|_1$: $F=R_F$ with $|R_F|\\le2|q|La$ and $\\tau=p\\times E_{\\mathrm{ext}}(0)+R_\\tau$ with $|R_\\tau|\\le2|q|La^2$;\n(e) [Scope] the statement is conditional on the explicitly stated matter model: only the prescribed external field acts on the distribution, the distribution is prescribed and at rest, and no self-force, back-reaction, mechanical equilibrium, stability or dynamics of the body is asserted; the external field is a datum, not solved for. Clause (d) is an instantaneous idealisation of two ideal point test charges with mutual interaction excluded; it is not a two-body dynamics, a bound-state or a stability statement. No radiation, medium response or empirical claim is made.",
+        "strategy": "Write $E_{\\mathrm{ext}}(y)=E_{\\mathrm{ext}}(0)+\\bigl(E_{\\mathrm{ext}}(y)-E_{\\mathrm{ext}}(0)\\bigr)$ $\\lambda_3$-a.e. on the support and integrate term by term. For (a), the constant term of the force gives $\\bigl(\\int\\rho\\,d\\lambda_3\\bigr)E_{\\mathrm{ext}}(0)=QE_{\\mathrm{ext}}(0)$, and the constant term of the torque gives $\\bigl(\\int\\rho(y)\\,y\\,d\\lambda_3(y)\\bigr)\\times E_{\\mathrm{ext}}(0)=p\\times E_{\\mathrm{ext}}(0)$ by linearity of the integral on $L^1$ and the bilinearity of the cross product ([[thm-linearity-of-the-lebesgue-integral-on-l-one]], [[lem-cross-product-is-bilinear-alternating-and-orthogonal]], [[def-cross-product-in-r3]]). For the force remainder, if $R_F\\ne0$ test it against the unit vector $u:=R_F/|R_F|$: $|R_F|=u\\cdot R_F=\\int\\rho(y)\\,u\\cdot\\bigl(E_{\\mathrm{ext}}(y)-E_{\\mathrm{ext}}(0)\\bigr)d\\lambda_3(y)\\le\\int|\\rho(y)|\\,|E_{\\mathrm{ext}}(y)-E_{\\mathrm{ext}}(0)|\\,d\\lambda_3(y)\\le L\\int|y|\\,|\\rho(y)|\\,d\\lambda_3(y)\\le La\\|\\rho\\|_1$, using $u\\cdot v\\le|v|$ ([[thm-cauchy-schwarz-and-the-euclidean-norm]]), the triangle and monotonicity rules for the integral ([[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) and $|y|\\le a$ $\\lambda_3$-a.e. on the support; the case $R_F=0$ is trivial. For the torque remainder, $\\bigl|\\int\\rho(y)\\,y\\times\\bigl(E_{\\mathrm{ext}}(y)-E_{\\mathrm{ext}}(0)\\bigr)d\\lambda_3(y)\\bigr|\\le\\int|\\rho(y)|\\,|y|\\,|E_{\\mathrm{ext}}(y)-E_{\\mathrm{ext}}(0)|\\,d\\lambda_3(y)\\le L\\int|y|^2|\\rho|\\,d\\lambda_3\\le La^2\\|\\rho\\|_1$, using $|y\\times v|\\le|y|\\,|v|$ ([[thm-cross-product-norm-is-the-two-vector-gram-determinant]], [[def-euclidean-inner-product]]). Since the two integrals are absolutely convergent, all interchanges are finitely many applications of linearity and the triangle rule. For (b) insert $Q=0$. For (c), subtract and add $o$: $\\int\\rho(y)(y-o)\\times E_{\\mathrm{ext}}(y)d\\lambda_3=\\tau-o\\times F$ by linearity and bilinearity of the cross product. For (d): at an instant of zero coordinate velocity the four-velocity has chart components $U=(c,0,0,0)$, hence $U_0=\\eta_{0\\mu}U^\\mu=-c$ and $U_i=0$ ([[def-em-relativistic-worldlines-frames]] (b),(c)); the adopted equation [[post-em-lorentz-coupling]] (i) then gives $m\\,dU^i/d\\tau=q'F^{i0}U_0=q'(-E_i/c)(-c)=q'E^i$ because $F^{i0}=-E_i/c$ ([[def-em-electromagnetic-tensor]] (a)). Summing the two instantaneous forces and computing the moments about the origin by finite sums gives the displayed force and torque, with $p=q(d/2)+(-q)(-d/2)=qd$ by [[def-em-electric-moments]] (c) and the bound $|R_\\tau|\\le|q|\\,(a)\\,(2La)=2|q|La^2$; the same expansion as (a) applies with the total variation $2|q|$ ([[def-finite-sum]], [[lem-finite-sum-laws]]). Clause (e) records the model assumptions. Countable Choice is used only through the Lebesgue integrals and their suppliers; the Lipschitz constant and the field values enter only through the displayed estimates, and the norm continuity of [[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]] is used to read the pointwise bounds. Changing $\\rho$ on a $\\lambda_3$-null set changes no integral ([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "Section 4.1.3 printed pp. 163-165 (torque N = p x E (4.4) on a dipole in a field, the force F = (p . grad)E (4.5) in a nonuniform field, and the reference-point shift N = (p x E) + (r x F) for a perfect dipole). Read in the stamped scanned full text, OCR cross-checked."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "Section 2.2.2 printed pp. 18-19 (the physical dipole of two opposite charges, its potential and its moment p = Qd). Read in the stamped full text."
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, 3rd revised English edition (Pergamon 1971, 387 pp.; full text)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "Section 40 printed pp. 95-97 (the dipole moment and the field of a neutral system of charges; only the external field acts on the declared test distribution in the present model). Read in the stamped full text."
+            }
+          ]
+        },
+        "physical_scope": "The external-field force and torque on a prescribed compactly supported static charge distribution in classical electrostatics, under an explicitly adopted matter model in which only the external field acts: the total force is $QE_{\\mathrm{ext}}(0)$ and the torque is $p\\times E_{\\mathrm{ext}}(0)$, each up to the stated Lipschitz remainder bounds; the self-field, back-reaction and support forces are excluded. The point-charge clause is an instantaneous idealisation of two ideal test charges at rest with mutual interaction excluded. No dynamics, equilibrium, stability, radiation or empirical claim is made; the external field is a prescribed datum."
+      },
+      {
+        "id": "pthm-em-electric-dipole-expansion",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Uniform Coulomb dipole expansion of a compactly supported charge density with an explicit remainder",
+        "reference": "core-conditional-proofs.md#K4; mathematical-prerequisites.md#M06",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 17,
+        "deps": [
+          "pthm-em-coulomb-solution",
+          "def-em-electric-moments",
+          "def-em-electrostatic-regime",
+          "def-em-si-conventions",
+          "def-em-fields",
+          "lem-em-coulomb-dipole-remainder",
+          "def-newtonian-potential",
+          "def-l-one-of-a-measure",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-countable-choice",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-integral-triangle-inequality",
+          "thm-monotonicity-of-the-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric"
+        ],
+        "dependency_roles": {
+          "pthm-em-coulomb-solution": "physical-result",
+          "def-em-electric-moments": "formulation-prerequisite",
+          "def-em-electrostatic-regime": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "lem-em-coulomb-dipole-remainder": "mathematical-premise",
+          "def-newtonian-potential": "mathematical-premise",
+          "def-l-one-of-a-measure": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-measure-null-set-and-almost-everywhere": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), inherited from the cited Lebesgue and Newtonian interfaces ([[def-countable-choice]]). Let $a>0$, let $\\rho\\in L^1(\\mathbb R^3)$ be real and vanish $\\lambda_3$-a.e. outside the closed ball $\\overline B_a(0)$ ([[def-metric-ball]], [[def-measure-null-set-and-almost-everywhere]]), let $Q$ and $p$ be the total charge and dipole moment of $\\rho$ about the chart origin ([[def-em-electric-moments]] (a)), let $\\|\\rho\\|_1:=\\int_{\\mathbb R^3}|\\rho|\\,d\\lambda_3$, and let $\\varphi:=\\varepsilon_0^{-1}N\\rho$, where $N\\rho$ is the Newtonian potential of [[def-newtonian-potential]] and $\\varepsilon_0$ is the constant of [[def-em-si-conventions]]. Then:\n(a) [Uniform monopole-dipole expansion] for every $x$ with $r:=|x|\\ge2a$ the integral $\\int_{\\mathbb R^3}\\rho(y)|x-y|^{-1}\\,d\\lambda_3(y)$ is absolutely convergent and equals $N\\rho(x)$, and\n$$\\varphi(x)=\\frac{Q}{4\\pi\\varepsilon_0r}+\\frac{p\\cdot x}{4\\pi\\varepsilon_0r^3}+R(x),\\qquad |R(x)|\\le\\frac{16\\,a^2\\|\\rho\\|_1}{4\\pi\\varepsilon_0r^3},$$\nthe bound being uniform over the whole exterior region $\\{x:|x|\\ge2a\\}$;\n(b) [Leading-term form] consequently, for $r\\ge2a$,\n$$\\Bigl|\\varphi(x)-\\frac{Q}{4\\pi\\varepsilon_0r}\\Bigr|\\le\\frac{|p|}{4\\pi\\varepsilon_0r^2}+\\frac{16\\,a^2\\|\\rho\\|_1}{4\\pi\\varepsilon_0r^3},$$\nand if $Q=0$ and $p\\ne0$, then along every direction with $p\\cdot n\\ne0$ the dipole term $p\\cdot x/(4\\pi\\varepsilon_0r^3)$ is the leading term of the expansion, the remainder bound decaying one power of $r$ faster;\n(c) [Physical reading] by [[pthm-em-coulomb-solution]] (c) the function $\\varphi$ is finite $\\lambda_3$-a.e., locally integrable, of class $C^\\infty$ and harmonic off $\\overline B_a(0)$, and satisfies $-\\Delta T_\\varphi=T_{\\rho/\\varepsilon_0}$ in $\\mathcal D'(\\mathbb R^3)$; the displayed expansion is therefore the exterior expansion of the potential of the compactly supported source $\\rho$ in the fixed-time reading of [[def-em-electrostatic-regime]] (e), and in the smooth branch ([[pthm-em-coulomb-solution]] (a)) the field $E:=-\\nabla\\varphi$ of [[def-em-fields]] realises the pure electrostatic regime of [[def-em-electrostatic-regime]] (c) with source $\\rho$;\n(d) [Scope and exclusions] the hypotheses are a real compactly supported $L^1$ density, the region $r\\ge2a$, and the framework's constants; $\\rho$ need not be continuous or bounded; the statement concerns $\\varphi$ itself, and no derivative estimate for $R$, no expansion of the field $E$, and no assertion on $|x|<2a$ or on the support of $\\rho$ is claimed.",
+        "strategy": "First, for $|x|\\ge2a$ and $\\lambda_3$-a.e. $y$ one has $\\rho(y)=0$ off $\\overline B_a(0)$, while for $y\\in\\overline B_a(0)$ one has $|x-y|\\ge r-a\\ge r/2>0$ ([[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]], [[def-metric-ball]], [[def-euclidean-inner-product]]); hence $|x-y|^{-1}\\le2/r$ on the support and the integral against $\\rho$ converges absolutely ([[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]], [[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]]). Since the kernel is bounded on the support and the support is $\\lambda_3$-a.e. contained in $\\overline B_a(0)$, the integral equals $N\\rho(x)$ by the defining formula of [[def-newtonian-potential]] ([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]). Because $\\Phi(z)=1/(4\\pi|z|)$ for $n=3$ ([[pthm-em-coulomb-solution]] (c)), one has $N\\rho(x)=(4\\pi)^{-1}\\int_{\\mathbb R^3}\\rho(y)|x-y|^{-1}\\,d\\lambda_3(y)$ and hence $\\varphi(x)=(4\\pi\\varepsilon_0)^{-1}\\int_{\\mathbb R^3}\\rho(y)|x-y|^{-1}\\,d\\lambda_3(y)$ for $r\\ge2a$. The monopole-dipole splitting of [[lem-em-coulomb-dipole-remainder]] applied with the same $a$ gives $\\int_{\\mathbb R^3}\\rho(y)|x-y|^{-1}\\,d\\lambda_3(y)=Q/r+p\\cdot x/r^3+R_0(x)$ with $|R_0(x)|\\le16a^2\\|\\rho\\|_1/r^3$ for all $r\\ge2a$; multiplying the identity by the constant $(4\\pi\\varepsilon_0)^{-1}$ (linearity of the integral on $L^1$, [[thm-linearity-of-the-lebesgue-integral-on-l-one]]) gives (a) with $R:=(4\\pi\\varepsilon_0)^{-1}R_0$ and the displayed bound $|R(x)|\\le16a^2\\|\\rho\\|_1/(4\\pi\\varepsilon_0r^3)$. Nothing at $r<2a$ is asserted, because the kernel singularity may meet the support there; the proof uses no differentiation of the remainder. For (b), $|p\\cdot x|\\le|p|\\,|x|$ by Cauchy-Schwarz for the Euclidean inner product ([[thm-cauchy-schwarz-and-the-euclidean-norm]]), so $|p\\cdot x|/r^3\\le|p|/r^2$, and the triangle inequality for the modulus completes the estimate. For (c), the regularity, the harmonicity off $\\overline B_a(0)$ and the identity $-\\Delta T_\\varphi=T_{\\rho/\\varepsilon_0}$ are exactly [[pthm-em-coulomb-solution]] (c) scaled by the positive constant $\\varepsilon_0^{-1}$; the fixed-time dictionary between the spatial equations and the weak four-dimensional reading is [[def-em-electrostatic-regime]] (e); in the smooth branch the pointwise equations and the field $E=-\\nabla\\varphi$ are those of [[pthm-em-coulomb-solution]] (a) ([[def-em-fields]] for the field object).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "Section 3.4.1 printed pp. 146-149 (Example 3.10 and Eqs. (3.91)-(3.96), the multipole expansion of the potential in powers of 1/r, whose leading two terms give the monopole-dipole splitting; the higher terms die off more rapidly with increasing r). Read in the stamped scanned full text, OCR cross-checked."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "Section 2.2.3 printed pp. 20-22 (the Taylor expansion (2.22) of 1/|r - r'| giving phi = (1/4 pi epsilon_0)(Q/r + p . r-hat / r^2 + ...)). Read in the stamped full text."
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, 3rd revised English edition (Pergamon 1971, 387 pp.; full text)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "Section 40 printed pp. 95-97 (dipole moment d (40.3), the potential phi = d . R / R^3 (40.7) and the field (40.8)-(40.11) of a neutral system at large distances; Gaussian units re-expressed in SI). Read in the stamped full text."
+            }
+          ]
+        },
+        "physical_scope": "The exterior potential of a compactly supported $L^1$ charge density in classical electrostatics: for $|x|\\ge2a$ the localised Newtonian potential equals the monopole term plus the dipole term plus an explicit remainder bounded by $16a^2\\|\\rho\\|_1/(4\\pi\\varepsilon_0|x|^3)$, uniformly in the exterior region. Only the potential is expanded; no derivative estimate of the remainder, no field expansion and no value on or inside the support are claimed."
+      },
+      {
+        "id": "pthm-em-electric-general-multipoles",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Convergent all-order spherical multipole expansion with monopole, dipole and quadrupole terms",
+        "reference": "core-conditional-proofs.md#K4; completed-expansion-arguments.md#H1-H3",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 18,
+        "deps": [
+          "pthm-em-electric-dipole-expansion",
+          "def-em-electric-moments",
+          "pthm-em-coulomb-solution",
+          "def-em-electrostatic-regime",
+          "def-em-si-conventions",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "thm-em-spherical-multipole-basis",
+          "lem-em-spherical-harmonic-basis-and-addition",
+          "lem-em-ball-poisson-series-boundary-convergence",
+          "lem-em-convergent-legendre-kernel",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-taylor-polynomial-and-remainder",
+          "lem-taylor-polynomial-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-real-power-continuity-and-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-l-one-of-a-measure",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-measure-null-set-and-almost-everywhere",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-integral-triangle-inequality",
+          "thm-monotonicity-of-the-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality"
+        ],
+        "dependency_roles": {
+          "pthm-em-electric-dipole-expansion": "physical-result",
+          "def-em-electric-moments": "formulation-prerequisite",
+          "pthm-em-coulomb-solution": "physical-result",
+          "def-em-electrostatic-regime": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "thm-em-spherical-multipole-basis": "mathematical-premise",
+          "lem-em-spherical-harmonic-basis-and-addition": "mathematical-premise",
+          "lem-em-ball-poisson-series-boundary-convergence": "mathematical-premise",
+          "lem-em-convergent-legendre-kernel": "mathematical-premise",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis": "mathematical-premise",
+          "def-taylor-polynomial-and-remainder": "mathematical-premise",
+          "lem-taylor-polynomial-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-l-one-of-a-measure": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-measure-null-set-and-almost-everywhere": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), inherited from the cited Lebesgue, spherical-harmonic and Newtonian interfaces ([[def-countable-choice]]). Let $a>0$ and let $\\rho\\in L^1(\\mathbb R^3)$ be real and vanish $\\lambda_3$-a.e. outside $\\overline B_a(0)$ ([[def-metric-ball]], [[def-measure-null-set-and-almost-everywhere]]); let $Q$, $p$ and $Q_{ij}$ be the total charge, dipole moment and traceless quadrupole of $\\rho$ about the chart origin ([[def-em-electric-moments]] (a)); let $\\varphi:=\\varepsilon_0^{-1}N\\rho$ be the potential of [[pthm-em-coulomb-solution]] (c) with the constants of [[def-em-si-conventions]]; and let $\\{Y_{lm}:l\\ge0,\\ m=1,\\dots,2l+1\\}$ be a real orthonormal basis of spherical harmonics of $L^2(S^2,d\\sigma)$ of degree $l$, with $d\\sigma$ the surface measure of total mass $4\\pi$ and the addition theorem of [[lem-em-spherical-harmonic-basis-and-addition]] ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-euclidean-inner-product]]). For every $l,m$ define the **spherical multipole moment of degree $l$**\n$$q_{lm}:=\\int_{\\mathbb R^3}|y|^l\\,Y_{lm}(y/|y|)\\,\\rho(y)\\,d\\lambda_3(y),$$\nabsolutely convergent because $|Y_{lm}|\\le((2l+1)/(4\\pi))^{1/2}$ on $S^2$ by the addition theorem and $|y|\\le a$ $\\lambda_3$-a.e. on the support, so the integrand is dominated by $a^l((2l+1)/(4\\pi))^{1/2}|\\rho|$ ([[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]). Write $x=rn$ with $r=|x|$ and $n\\in S^2$. Then:\n(a) [Exterior spherical multipole expansion] for every $x$ with $r>a$,\n$$\\varphi(x)=\\frac{1}{4\\pi\\varepsilon_0}\\sum_{l=0}^{\\infty}\\sum_{m=1}^{2l+1}\\frac{4\\pi}{2l+1}\\,\\frac{Y_{lm}(n)}{r^{l+1}}\\,q_{lm},$$\nthe series converging absolutely and uniformly on $\\{|x|\\ge r_0\\}$ for every $r_0>a$, with the tail after degree $N$ bounded by\n$$\\Bigl\\|\\,\\varphi-\\frac{1}{4\\pi\\varepsilon_0}\\sum_{l=0}^{N}\\sum_{m=1}^{2l+1}\\frac{4\\pi}{2l+1}\\frac{Y_{lm}(n)}{r^{l+1}}q_{lm}\\Bigr\\|_{\\infty,\\{|x|\\ge r_0\\}}\\le\\frac{\\|\\rho\\|_1\\,a^{N+1}}{4\\pi\\varepsilon_0\\,r_0^{N+2}\\,(1-a/r_0)};$$\n(b) [Monopole, dipole and quadrupole terms] the degree-$0$ and degree-$1$ terms of (a) are the monopole and dipole terms $Q/(4\\pi\\varepsilon_0r)$ and $p\\cdot x/(4\\pi\\varepsilon_0r^3)$, and for $r\\ge2a$ the difference between $\\varphi$ and the truncation after degree $1$ obeys the remainder bound of [[pthm-em-electric-dipole-expansion]]; the degree-$2$ term equals the traceless-quadrupole term\n$$\\frac{1}{8\\pi\\varepsilon_0r^3}\\,n_iQ_{ij}n_j;$$\n(c) [Regularity and termwise differentiation] $\\varphi$ is of class $C^\\infty$ on $\\{|x|>a\\}$, the series in (a) may be differentiated termwise to every order, the differentiated series converging uniformly on every compact subset of $\\{|x|>a\\}$; in particular the field $E:=-\\nabla\\varphi$ of [[def-em-fields]] equals $-\\frac{1}{4\\pi\\varepsilon_0}\\sum_{l,m}\\frac{4\\pi}{2l+1}\\nabla_x\\bigl(Y_{lm}(n)r^{-l-1}\\bigr)q_{lm}$ on $\\{|x|>a\\}$, with the same uniform convergence on compact subsets;\n(d) [Scope] the hypotheses are a real compactly supported $L^1$ density and the exterior region $r>a$; no claim is made on or inside $\\overline B_a(0)$, no convergence at $r=a$ is asserted, the theorem is not asserted for point or singular sources, and no empirical content is involved. The expansion is the exterior expansion of the potential of the static source $\\rho$ read in the fixed-time dictionary of [[def-em-electrostatic-regime]] (e).",
+        "strategy": "Scale the spherical multipole expansion of [[thm-em-spherical-multipole-basis]] (a)-(b) by the constant $(4\\pi\\varepsilon_0)^{-1}$, exactly as in [[pthm-em-electric-dipole-expansion]]: since $N\\rho(x)=(4\\pi)^{-1}\\int\\rho(y)|x-y|^{-1}d\\lambda_3(y)$ for the observation points considered, $\\varphi=(4\\pi\\varepsilon_0)^{-1}\\int\\rho(y)|x-y|^{-1}d\\lambda_3(y)$, and part (a) of the supplier gives the displayed series, its absolute and uniform convergence on exterior regions, and the stated tail bound, all multiplied by the constant $(4\\pi\\varepsilon_0)^{-1}$ ([[thm-linearity-of-the-lebesgue-integral-on-l-one]] for scaling the integral, [[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]]). The coefficients $q_{lm}$ are absolutely convergent by the addition theorem's bound $\\sum_{m=1}^{2l+1}Y_{lm}(n)^2=(2l+1)/(4\\pi)$ of [[lem-em-spherical-harmonic-basis-and-addition]], which gives $|Y_{lm}|\\le((2l+1)/(4\\pi))^{1/2}$, and by $|y|\\le a$ on the support ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). For (b): the degree-$0$ and degree-$1$ identifications and the remainder bound are parts of the supplier's clause (a) (with $Q=\\int\\rho$, $p=\\int y\\rho(y)d\\lambda_3(y)$ and the bound $16a^2\\|\\rho\\|_1/|x|^3$ for $|x|\\ge2a$), scaled by $(4\\pi\\varepsilon_0)^{-1}$, and they reproduce [[pthm-em-electric-dipole-expansion]] (a). For the degree-$2$ term, use the addition theorem at $l=2$: $\\sum_mY_{2m}(n)Y_{2m}(y/|y|)=\\frac{5}{4\\pi}P_2(n\\cdot y/|y|)$, so that\n$$\\sum_{m=1}^{5}Y_{2m}(n)q_{2m}=\\frac{5}{4\\pi}\\int_{\\mathbb R^3}|y|^2P_2\\Bigl(n\\cdot\\frac{y}{|y|}\\Bigr)\\rho(y)\\,d\\lambda_3(y),$$\nand the second Legendre polynomial is fixed by the defining identity $(1-2qz+q^2)^{-1/2}=\\sum_{l\\ge0}q^lP_l(z)$ of [[lem-em-convergent-legendre-kernel]]: the coefficient of $q^2$ in the Taylor expansion of the left side at $q=0$ is $\\frac12\\frac{d^2}{dq^2}(1-2qz+q^2)^{-1/2}\\big|_{q=0}=\\frac{3z^2-1}{2}$ (the first and second derivatives computed by the chain rule, [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[thm-real-power-continuity-and-derivatives]]), while that coefficient on the right side is $P_2(z)$ (uniqueness of Taylor coefficients, [[def-taylor-polynomial-and-remainder]], [[lem-taylor-polynomial-derivatives]]); hence $P_2(z)=(3z^2-1)/2$. Therefore $|y|^2P_2(n\\cdot y/|y|)=\\bigl(3(n\\cdot y)^2-|y|^2\\bigr)/2$, and\n$$\\sum_{m=1}^{5}Y_{2m}(n)q_{2m}=\\frac{5}{8\\pi}\\int_{\\mathbb R^3}\\bigl(3(n\\cdot y)^2-|y|^2\\bigr)\\rho(y)\\,d\\lambda_3(y)=\\frac{5}{8\\pi}\\,n_iQ_{ij}n_j$$\nby the definition of $Q_{ij}$ in [[def-em-electric-moments]] (a) and linearity of the integral; the degree-$2$ term of (a) is then $\\frac{1}{4\\pi\\varepsilon_0}\\cdot\\frac{4\\pi}{5}\\cdot\\frac{1}{r^3}\\cdot\\frac{5}{8\\pi}n_iQ_{ij}n_j=\\frac{n_iQ_{ij}n_j}{8\\pi\\varepsilon_0r^3}$. For (c): part (b) of [[thm-em-spherical-multipole-basis]] gives that $\\varphi$ is $C^\\infty$ on $\\{|x|>a\\}$ and that the series may be differentiated termwise to every order with uniform convergence of each differentiated series on compact subsets; the displayed field series is the termwise gradient, with [[def-em-fields]] for the field object. The fixed-time dictionary is [[def-em-electrostatic-regime]] (e). All estimates use the triangle and monotonicity rules for the Lebesgue integral ([[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]), the $\\lambda_3$-a.e. support convention ([[def-measure-null-set-and-almost-everywhere]], [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]) and the declared Countable Choice of the measure, harmonic and Newtonian interfaces; no convergence at $r=a$ and no point-source assertion is made.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "Section 3.4.1 printed pp. 148-149 (the general multipole expansion V = (1/4 pi epsilon_0) sum over n of (1/r^{n+1}) integral (r')^n P_n(cos theta') rho d tau', Eqs. (3.95)-(3.96): monopole, dipole, quadrupole, octopole hierarchy). Read in the stamped scanned full text, OCR cross-checked."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "Section 2.2.3 printed pp. 20-22 (the multipole expansion in spherical harmonics; the traceless quadrupole Q_ij and its potential term Delta phi = r_i r_j Q_ij / (2 . 4 pi epsilon_0 r^5)). Read in the stamped full text."
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, 3rd revised English edition (Pergamon 1971, 387 pp.; full text)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "Section 41 printed pp. 98-100 (the quadrupole potential in terms of D_ab, Eqs. (41.3)-(41.8), and the general 2^l-pole expansion in spherical harmonics, Eqs. (41.9)-(41.13); Gaussian units re-expressed in SI). Read in the stamped full text."
+            }
+          ]
+        },
+        "physical_scope": "The all-order exterior spherical multipole expansion of the potential of a compactly supported $L^1$ charge density: absolute and uniform convergence outside the support with an explicit geometric tail bound, the monopole, dipole and traceless-quadrupole terms, and termwise differentiability of the potential off the support. Only the exterior region is covered; no value on or inside the support, no point-source expansion and no empirical content are claimed."
+      }
+    ]
+  },
+  {
+    "order": 334,
+    "id": "em-electrostatic-multipoles-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Electrostatic multipoles — Examples",
+    "companion": "em-electrostatic-multipoles",
+    "requires": [
+      "em-electrostatic-multipoles"
+    ],
+    "items": [
+      {
+        "id": "ex-em-quadrupole-symmetry",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Four stationary point charges with vanishing total charge and dipole moment and traceless quadrupole diag(6qa^2,-6qa^2,0)",
+        "reference": "worked-example-verifications.md#X2",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 18,
+        "deps": [
+          "def-em-electric-moments",
+          "pthm-em-moment-origin-change",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-euclidean-inner-product",
+          "def-spatial-euclidean-structure-of-an-inertial-frame",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_roles": {
+          "def-em-electric-moments": "formulation-prerequisite",
+          "pthm-em-moment-origin-change": "physical-result",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-spatial-euclidean-structure-of-an-inertial-frame": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $q\\in\\mathbb R$ and $a>0$, let $(e_1,e_2,e_3)$ be the $\\delta$-orthonormal positively oriented basis of the laboratory frame ([[def-em-lab-geometry]], [[def-spatial-euclidean-structure-of-an-inertial-frame]]), and consider the four stationary point charges of [[def-em-electric-moments]] (c): $+q$ at $ae_1$, $+q$ at $-ae_1$, $-q$ at $ae_2$, $-q$ at $-ae_2$. Then:\n(a) $Q=0$ and $p=0$; more generally every odd Cartesian moment vanishes, $M_{i_1\\dots i_{2k+1}}=0$ for every $k\\ge0$ and all indices, because the configuration is invariant under the central reflection $x\\mapsto-x$ with the charges preserved;\n(b) the degree-$2$ Cartesian moment is $M_{ij}=2qa^2\\bigl(\\delta_{i1}\\delta_{j1}-\\delta_{i2}\\delta_{j2}\\bigr)$, i.e. $\\operatorname{diag}(2qa^2,-2qa^2,0)$ in the frame basis, and its trace vanishes;\n(c) the traceless quadrupole is $Q_{ij}=6qa^2\\bigl(\\delta_{i1}\\delta_{j1}-\\delta_{i2}\\delta_{j2}\\bigr)=\\operatorname{diag}(6qa^2,-6qa^2,0)$ and $\\sum_iQ_{ii}=0$; since $Q=p=0$, it is independent of the reference point by the origin-shift theorem ([[pthm-em-moment-origin-change]] (d));\n(d) [Scope] this is a finite source-moment computation for prescribed stationary point charges. No field, force, energy — in particular no claim that the self-energy of the point charges is finite —, dynamics, stability or empirical content is asserted.",
+        "strategy": "Insert the four points into the finite sums of [[def-em-electric-moments]] (c) and use $\\delta$-orthonormality of the frame basis: $Q=q+q-q-q=0$ and $p=q(ae_1)+q(-ae_1)+(-q)(ae_2)+(-q)(-ae_2)=0$. For (a), the configuration is invariant under $x\\mapsto-x$ with the charge of each point preserved ($+q$ at $\\pm ae_1$ and $-q$ at $\\pm ae_2$), so pairing each point with its image and reindexing the finite sum ([[def-finite-sum]], [[lem-finite-sum-laws]]) gives $M_{i_1\\dots i_{2k+1}}=\\sum_k q_k x_k^{\\otimes(2k+1)}=0$: the terms at $x$ and $-x$ contribute $q\\bigl(1+(-1)^{2k+1}\\bigr)x^{\\otimes(2k+1)}=0$. For (b), direct substitution gives $M_{ij}=q(ae_1)_i(ae_1)_j+q(-ae_1)_i(-ae_1)_j-q(ae_2)_i(ae_2)_j-q(-ae_2)_i(-ae_2)_j=2qa^2\\bigl(e_{1i}e_{1j}-e_{2i}e_{2j}\\bigr)=2qa^2\\bigl(\\delta_{i1}\\delta_{j1}-\\delta_{i2}\\delta_{j2}\\bigr)$, whose trace $2qa^2(1-1)$ vanishes; the components are read in the $\\delta$-orthonormal basis ([[def-euclidean-inner-product]], [[def-spatial-euclidean-structure-of-an-inertial-frame]]). For (c), use $Q_{ij}=\\sum_kq_k\\bigl(3x_{k,i}x_{k,j}-|x_k|^2\\delta_{ij}\\bigr)=3M_{ij}-\\delta_{ij}\\sum_kq_k|x_k|^2$ from [[def-em-electric-moments]] (c); each $|x_k|=a$, so $\\sum_kq_k|x_k|^2=a^2(q+q-q-q)=0$ and $Q_{ij}=3M_{ij}=6qa^2\\bigl(\\delta_{i1}\\delta_{j1}-\\delta_{i2}\\delta_{j2}\\bigr)$, with trace $6qa^2(1-1)=0$; the reference-point independence for $Q=p=0$ is clause (d) of [[pthm-em-moment-origin-change]]. The equality $|x_k|=a$ for $x_k=\\pm ae_1,\\pm ae_2$ uses $\\delta(e_r,e_r)=1$ ([[def-spatial-euclidean-structure-of-an-inertial-frame]]) and the Euclidean norm of [[def-euclidean-inner-product]] (with [[thm-cauchy-schwarz-and-the-euclidean-norm]] for reading norms of coordinate vectors). Clause (d) records that no field, energy or dynamics is computed. No Choice axiom is used: all sums are finite ([[lem-finite-sum-laws]]).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "Section 3.4.2 printed pp. 150-151 (the four charges at the corners of a square, Fig. 3.30: combining the charges in pairs makes the net dipole moment vanish and the configuration is a quadrupole; Eq. (3.100), the dipole moment of a collection of point charges). Read in the stamped scanned full text, OCR cross-checked."
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, 3rd revised English edition (Pergamon 1971, 387 pp.; full text)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "Section 41 printed p. 98 (the quadrupole moment D_ab = sum e (3 x_a x_b - r^2 delta_ab) by inserting the charges, and its tracelessness D_aa = 0, Eqs. (41.3)-(41.4); Gaussian units re-expressed in SI). Read in the stamped full text."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "Section 2.2.3 printed pp. 21-22 (the quadrupole moment Q_ij = integral rho (3 r'_i r'_j - delta_ij r'^2) as the next multipole after the dipole). Read in the stamped full text."
+            }
+          ]
+        },
+        "physical_scope": "A finite source-moment computation for four stationary point charges in a named inertial frame: vanishing total charge and dipole moment, vanishing odd Cartesian moments, and the exact traceless quadrupole $\\operatorname{diag}(6qa^2,-6qa^2,0)$. No field, force, self-energy, dynamics, stability or empirical claim is made."
+      },
+      {
+        "id": "ex-em-two-charge-dipole",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Exact two-charge dipole potential, its moments and the explicit far-field remainder",
+        "reference": "worked-example-verifications.md#X2",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 18,
+        "deps": [
+          "pthm-em-electric-dipole-expansion",
+          "def-em-electric-moments",
+          "pthm-em-moment-origin-change",
+          "pthm-em-coulomb-solution",
+          "def-em-electrostatic-regime",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "def-em-fields",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-l-one-of-a-measure",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-measure-null-set-and-almost-everywhere",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-integral-triangle-inequality",
+          "thm-monotonicity-of-the-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-real-power-continuity-and-derivatives",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-test-function-space-d-of-an-open-set",
+          "def-dirac-delta-and-its-derivatives",
+          "thm-distributional-differentiation-is-continuous-and-commutes",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-finite-sum",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_roles": {
+          "pthm-em-electric-dipole-expansion": "physical-result",
+          "def-em-electric-moments": "formulation-prerequisite",
+          "pthm-em-moment-origin-change": "physical-result",
+          "pthm-em-coulomb-solution": "physical-result",
+          "def-em-electrostatic-regime": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-l-one-of-a-measure": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-measure-null-set-and-almost-everywhere": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality": "mathematical-premise",
+          "thm-newton-leibniz-with-interior-derivative": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-distribution": "mathematical-premise",
+          "def-distributional-derivative": "mathematical-premise",
+          "def-regular-distribution-from-a-locally-integrable-function": "mathematical-premise",
+          "thm-locally-integrable-functions-embed-in-distributions": "mathematical-premise",
+          "def-test-function-space-d-of-an-open-set": "mathematical-premise",
+          "def-dirac-delta-and-its-derivatives": "mathematical-premise",
+          "thm-distributional-differentiation-is-continuous-and-commutes": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), inherited from the cited distribution and Lebesgue interfaces ([[def-countable-choice]]). Let $q\\in\\mathbb R$ and $d\\in\\mathbb R^3\\setminus\\{0\\}$, put $a:=|d|/2$, and let the source be the two stationary point charges $+q$ at $d/2$ and $-q$ at $-d/2$ (charge parameters in coulombs and the constant $\\varepsilon_0$ of [[def-em-si-conventions]]), with fixed-time reading $q\\delta_{d/2}-q\\delta_{-d/2}$ ([[def-em-electrostatic-regime]] (e), [[def-dirac-delta-and-its-derivatives]]). Define, with arbitrary values at the two points,\n$$\\varphi(x):=\\frac{q}{4\\pi\\varepsilon_0|x-d/2|}-\\frac{q}{4\\pi\\varepsilon_0|x+d/2|}\\qquad\\bigl(x\\notin\\{d/2,-d/2\\}\\bigr).$$\nThen:\n(a) [Exact potential and equations] $\\varphi$ is locally integrable on $\\mathbb R^3$ and of class $C^\\infty$ on $\\mathbb R^3\\setminus\\{d/2,-d/2\\}$; with $E:=-\\nabla\\varphi$ on that set ([[def-em-fields]]), the pair $(E,0)$ satisfies the distributional pure electrostatic equations\n$$\\operatorname{div}E=\\frac{q\\,\\delta_{d/2}-q\\,\\delta_{-d/2}}{\\varepsilon_0},\\qquad \\operatorname{curl}E=0\\qquad\\text{in }\\mathcal D'(\\mathbb R^3)$$\nof the fixed-time dictionary of [[def-em-electrostatic-regime]] (e) ([[pthm-em-coulomb-solution]] (d) for each point charge, added by linearity of distributional differentiation: [[def-distribution]], [[def-distributional-derivative]], [[def-regular-distribution-from-a-locally-integrable-function]], [[thm-locally-integrable-functions-embed-in-distributions]], [[def-test-function-space-d-of-an-open-set]], [[thm-distributional-differentiation-is-continuous-and-commutes]]);\n(b) [Moments] in the finite-sum branch of [[def-em-electric-moments]] (c) about the chart origin of [[def-em-lab-geometry]], $Q=0$, $p=qd$, every even Cartesian moment vanishes, $M_{i_1\\dots i_{2k+1}}=2q\\,(d/2)_{i_1}\\cdots(d/2)_{i_{2k+1}}$ for every $k\\ge0$, and the traceless quadrupole vanishes, $Q_{ij}=0$;\n(c) [Exact far-field comparison] for every $x$ with $r:=|x|\\ge2a=|d|$, the exact difference obeys the expansion form of [[pthm-em-electric-dipole-expansion]] with the point-pair total variation in place of $\\|\\rho\\|_1$:\n$$\\varphi(x)=\\frac{p\\cdot x}{4\\pi\\varepsilon_0r^3}+R(x),\\qquad |R(x)|\\le\\frac{16\\,a^2\\,(|q|+|{-q}|)}{4\\pi\\varepsilon_0r^3}=\\frac{8|q|a^2}{\\pi\\varepsilon_0r^3};$$\n(d) [Comparison with the compact-density theorem] the hypothesis of [[pthm-em-electric-dipole-expansion]] is an $L^1$ density and is not met by the point pair, so that theorem is not applied to it; the identity and bound of (c) are proved directly for the two kernels by the twice-fundamental-theorem computation used in that theorem's remainder, and the leading term, the $a^2$ decay and the appearance of the total variation agree with the compact-density expansion;\n(e) [Scope] the potential and the distributional equations are stated for the idealised singular source; no self-energy, self-force, dynamics, bound-state, stability or empirical claim is made for the pair.",
+        "strategy": "The individual point-charge objects and their distributional identities are those of [[pthm-em-coulomb-solution]] (d): for a charge $q'$ at $x_0$, $\\varphi_{q'}$ is locally integrable, $C^\\infty$ off $x_0$, $E_{q'}=-\\nabla\\varphi_{q'}$ off $x_0$, and $\\operatorname{div}E_{q'}=(q'/\\varepsilon_0)\\delta_{x_0}$, $\\operatorname{curl}E_{q'}=0$ in $\\mathcal D'(\\mathbb R^3)$. Summing the two locally integrable potentials gives the displayed $\\varphi$ (values at the two points are immaterial, [[def-regular-distribution-from-a-locally-integrable-function]], [[thm-locally-integrable-functions-embed-in-distributions]], [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]), and the distributional derivative of the sum is the sum of the distributional derivatives ([[thm-distributional-differentiation-is-continuous-and-commutes]], [[def-distribution]], [[def-distributional-derivative]]); adding the two point-charge identities componentwise and using [[def-dirac-delta-and-its-derivatives]] gives (a), and the fixed-time dictionary is [[def-em-electrostatic-regime]] (e). For (b), substitute into the finite sums of [[def-em-electric-moments]] (c): $Q=q+(-q)=0$, $p=q(d/2)+(-q)(-d/2)=qd$, and $M_{i_1\\dots i_l}=q(d/2)^{\\otimes l}+(-q)(-d/2)^{\\otimes l}=q\\bigl(1-(-1)^l\\bigr)(d/2)^{\\otimes l}$, which vanishes for even $l$ and equals $2q(d/2)^{\\otimes l}$ for odd $l$; since $M^{(2)}=0$ and $\\sum_kq_k|x_k|^2=qa^2+(-q)a^2=0$, the traceless quadrupole $Q_{ij}=3M_{ij}-\\delta_{ij}\\sum_kq_k|x_k|^2$ vanishes, consistent with the reference-point independence clause of [[pthm-em-moment-origin-change]] (d) because $Q=p=0$ ([[def-finite-sum]], [[lem-finite-sum-laws]], [[def-euclidean-inner-product]]). For (c), apply the twice-fundamental-theorem remainder computation to each of the two kernels directly, since the density theorem does not apply to the pair. Write $h_y(s):=|x-sy|^{-1}$ for $y\\in\\{d/2,-d/2\\}$; for $r\\ge2a$ and $s\\in[0,1]$ one has $|x-sy|\\ge r-a\\ge r/2$, the chain rule gives $h_y'(s)=\\frac{(x-sy)\\cdot y}{|x-sy|^3}$ and $h_y''(s)=-\\frac{|y|^2}{|x-sy|^3}+3\\frac{((x-sy)\\cdot y)^2}{|x-sy|^5}$ with $|h_y''(s)|\\le4|y|^2/|x-sy|^3\\le32|y|^2/r^3=32a^2/r^3$, and the identity $h_y(1)-h_y(0)-h_y'(0)=\\int_0^1(1-t)h_y''(t)\\,dt$ is the fundamental theorem applied to $\\frac{d}{dt}\\bigl[(1-t)h_y'(t)+h_y(t)\\bigr]=(1-t)h_y''(t)$ ([[thm-newton-leibniz-with-interior-derivative]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[thm-real-power-continuity-and-derivatives]], [[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]], [[def-metric-ball]], [[def-ck-euclidean-maps-and-diffeomorphisms]]), so $h_y(1)=1/r+x\\cdot y/r^3+R_y(x)$ with $|R_y(x)|\\le16|y|^2/r^3$ ([[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]). Substituting the two kernels with their charges and using $|y|=a$, with the two linear terms adding to $q(x\\cdot d)/r^3=p\\cdot x/r^3$,\n$$\\varphi(x)-\\frac{p\\cdot x}{4\\pi\\varepsilon_0r^3}=\\frac{q}{4\\pi\\varepsilon_0}\\bigl(R_{d/2}(x)-R_{-d/2}(x)\\bigr),\\qquad \\Bigl|\\varphi(x)-\\frac{p\\cdot x}{4\\pi\\varepsilon_0r^3}\\Bigr|\\le\\frac{|q|(16a^2+16a^2)}{4\\pi\\varepsilon_0r^3}=\\frac{32|q|a^2}{4\\pi\\varepsilon_0r^3}=\\frac{8|q|a^2}{\\pi\\varepsilon_0r^3},$$\nwhich is (c); reading it against [[pthm-em-electric-dipole-expansion]] gives (d). The two vector terms use the Euclidean inner product and norm ([[def-euclidean-inner-product]], [[thm-cauchy-schwarz-and-the-euclidean-norm]]); no differentiation of $\\varphi$ beyond the off-pole gradient is used and no value at the poles is asserted. For (e), no field energy is computed and the self-energy of a point charge is not claimed finite here. Countable Choice is used only through the cited distribution and Lebesgue interfaces; the potential and field of each charge are the idealised singular objects of [[pthm-em-coulomb-solution]] (d) and [[def-em-electrostatic-regime]] (e).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "Section 3.4.1 printed pp. 146-147 (Example 3.10: the exact potential of two opposite charges and its approximation by the dipole potential) and Section 3.4.2 printed pp. 149-151 (p = qd for the physical dipole and the remark that the dipole potential is only the approximate potential, higher multipole contributions being present). Read in the stamped scanned full text, OCR cross-checked."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "Section 2.2.2 printed pp. 18-19 (the physical dipole, its exact potential and its moment p = Qd) and Section 2.2.3 printed pp. 20-22 (the far-field multipole series for a general localised distribution). Read in the stamped full text."
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, 3rd revised English edition (Pergamon 1971, 387 pp.; full text)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "Section 40 printed pp. 95-97 (dipole moment d = sum e_a r_a (40.3), and for a neutral system the potential phi = d . R / R^3 (40.7) and the field (40.8)-(40.11); Gaussian units re-expressed in SI). Read in the stamped full text."
+            }
+          ]
+        },
+        "physical_scope": "The exact potential of two ideal stationary point charges of opposite sign, its distributional equations, its source moments ($Q=0$, $p=qd$, vanishing traceless quadrupole) and an explicit far-field remainder bound of order $a^2/r^3$ about the ideal-dipole potential. The source is singular; no self-energy, self-force, dynamics, bound-state, stability or empirical claim is made."
+      }
+    ]
+  }
+]

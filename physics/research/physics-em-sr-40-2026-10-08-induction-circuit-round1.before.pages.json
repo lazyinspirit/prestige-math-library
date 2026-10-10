@@ -1,0 +1,686 @@
+[
+  {
+    "order": 339,
+    "id": "em-induction-and-circuit-limits",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Induction and circuit approximations",
+    "companion": "em-induction-and-circuit-limits-examples",
+    "requires": [
+      "em-electrostatic-boundaries-and-conductors",
+      "em-magnetostatics-in-vacuum",
+      "em-material-response",
+      "picard-lindelof-and-first-order-odes"
+    ],
+    "items": [
+      {
+        "id": "def-em-moving-circuit-geometry",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "C2 moving material circuit: swept patch, single-valued material velocity, flux and electromotive force",
+        "reference": "definition-contracts.md#def-em-moving-circuit-geometry",
+        "design_state": "explicit-definition-contract; supplier-validation-recorded-separately",
+        "deps": [
+          "def-em-lab-geometry",
+          "def-em-fields",
+          "def-em-si-conventions",
+          "def-em-moving-patch",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "def-cross-product-in-r3",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-moving-patch": "mathematical-premise",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "statement": "Let the laboratory region $\\Omega\\times I$ and its inertial chart, the field objects $E,B$ and the units be those of [[def-em-lab-geometry]], [[def-em-fields]] and [[def-em-si-conventions]], with $c>0$.\n\n(a) [Moving material circuit] A moving material circuit on the laboratory region is the data $(D,r,v)$ specified as follows. $D\\subseteq\\mathbb R^2$ is a compact finite elementary Green region with its positive boundary orientation; $r:D\\times I\\to\\Omega$ extends to a $C^2$ map on a neighbourhood of $D\\times I$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $r_u\\times r_v\\ne0$ on the interior of $D$ and $r(\\cdot,t)$ injective on the interior of $D$ for every $t$ (embedded material sheet); and $v$ is a $C^1$ vector field on a neighbourhood of the swept set $\\{(r(u,w,t),t):(u,w)\\in D,\\ t\\in I\\}$ in $\\Omega\\times I$ satisfying the single-valued condition $v(r(u,w,t),t)=\\partial_tr(u,w,t)$ for all $(u,w)\\in D$ and all $t\\in I$. In the notation of [[def-em-moving-patch]] the map $r$ is the swept moving patch and $v$ is its single-valued velocity; material points of the circuit are the images of the parameter points $(u,w)$.\n\n(b) [Surface, boundary and flux] For $t\\in I$ put $S(t):=r(D,t)$ and let $C(t):=\\partial S(t)$ carry the boundary orientation induced by the positive orientation of $D$. For $B$ of class $C^1$ on a neighbourhood of the swept set, the magnetic flux of the circuit at time $t$ is the parametrized flux\n$$\\Phi_B(t):=\\int_D\\bigl\\langle B(r(u,w,t),t),\\,r_u(u,w,t)\\times r_v(u,w,t)\\bigr\\rangle\\,du\\,dw$$\nof [[def-em-moving-patch]]; its unit is the weber, $\\mathrm{Wb}=\\mathrm T\\,\\mathrm m^2$.\n\n(c) [Electromotive force] For $E,B$ continuous on a neighbourhood of the swept set, the electromotive force (emf) of the circuit at time $t$ is the vector line integral over the oriented closed path $C(t)$\n$$\\mathrm{emf}(t):=\\oint_{C(t)}\\bigl\\langle E(\\cdot,t)+v(\\cdot,t)\\times B(\\cdot,t),\\,d\\mathbf r\\bigr\\rangle$$\nin the convention of [[def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]], with the cross product of [[def-cross-product-in-r3]]; its unit is the volt, $1\\,\\mathrm V=1\\,\\mathrm{kg}\\,\\mathrm m^2\\,\\mathrm s^{-3}\\mathrm A^{-1}$. Under the framework's Lorentz coupling the integrand is the force per unit charge on a charge moving with the conductor material; the definition itself only names the line integral.\n\n(d) [Scope and exclusions] The fields are assumed of the stated regularity on a neighbourhood of the swept set: circuits passing through a point charge, a curve or surface singularity, or any place where the fields fail to be of that regularity are excluded (no singularity crossings). When the emf is interpreted through the framework's relativistic Lorentz coupling, material speeds are required to be subluminal, $|v|<c$. The definition asserts no conservation law and no relation between $\\mathrm{emf}$ and $\\Phi_B'$; in particular the flux concerns the single field $B$ and the emf the pair $(E,B)$, and neither object is claimed independent of the chosen parametrization.",
+        "strategy": "Explicit type/domain/convention definition. The integrand of $\\Phi_B$ is continuous on the compact parameter region $D$ because $B$ and $r$ are continuous on a neighbourhood of $D\\times I$ and $r_u,r_v$ are continuous; the flux is therefore a Riemann integral over a compact Jordan-measurable region in the moving-patch convention of [[def-em-moving-patch]]. The line integral is taken in the piecewise $C^1$ path convention of [[def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]]; the $C^2$ extension of $r$ and the single-valued $C^1$ condition on $v$ are exactly the hypotheses under which the moving-patch definition and its transport lemma are stated. Clause (d) records the no-singularity-crossing hypothesis and the subluminal condition; neither is used in the definition of the flux itself. No physical assertion beyond the definition is made, and no proof is claimed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "§4.1 and §4.1.1 printed pp. 67-71 (the moving rectangular circuit, the definition of the emf as the line integral of the force per unit charge, and the general moving loop C(t) with velocity field v): read in the retained complete text of the 236-page printing."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "§7.1.2-7.1.3 printed pp. 292-296 (the emf as the line integral of the force per unit charge around a circuit and the moving-loop ('motional emf') construction with the loop of Fig. 7.10): read in the stamped 596-page scan."
+            }
+          ]
+        },
+        "physical_scope": "Kinematic and definitional content only: the moving material circuit (a C2 embedded swept patch with a single-valued C1 material velocity), its magnetic flux and its electromotive force line integral, in the laboratory frame and units of the classical-electromagnetism framework. It excludes circuits crossing singular sources, requires subluminal material speeds when the relativistic force interpretation is used, and asserts no relation between emf and flux derivative and no dynamical or empirical claim.",
+        "inventory_expansion_required": false,
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-em-newtonian-linkage-symmetry",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Symmetry and Fubini representation of the Newtonian linkage pairing",
+        "reference": null,
+        "design_state": "new-local-mathematical-prerequisite; complete-Fubini-and-absolute-convergence-argument-supplied",
+        "deps": [
+          "def-newtonian-potential",
+          "lem-laplace-fundamental-kernel-is-locally-integrable",
+          "def-integral-over-a-measurable-set",
+          "def-euclidean-inner-product",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integral-triangle-inequality",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-newtonian-potential": "mathematical-premise",
+          "lem-laplace-fundamental-kernel-is-locally-integrable": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice ($\\mathrm{AC}_\\omega$) as carried by the Tonelli, Fubini and polar/kernel-local-integrability interfaces cited below ([[def-countable-choice]]). Let $N$ be the Newtonian potential transform of [[def-newtonian-potential]], so that for real $f\\in C_c^\\infty(\\mathbb R^3;\\mathbb R)$ ([[def-ck-euclidean-maps-and-diffeomorphisms]])\n$$Nf(x)=\\int_{\\mathbb R^3}\\frac{f(y)}{4\\pi|x-y|}\\,d\\lambda_3(y),$$\nand let $\\langle\\cdot,\\cdot\\rangle$ be the Euclidean inner product of [[def-euclidean-inner-product]]. For $u,v\\in C_c^\\infty(\\mathbb R^3;\\mathbb R^3)$ write $Nu:=(Nu_1,Nu_2,Nu_3)$ componentwise, so that the linkage pairing is the map\n$$B(u,v):=\\int_{\\mathbb R^3}\\langle u(x),Nv(x)\\rangle\\,d\\lambda_3(x).$$\nThen all three integrals\n$$\\int_{\\mathbb R^3}\\langle u(x),Nv(x)\\rangle\\,d\\lambda_3(x),\\qquad\\int_{\\mathbb R^3}\\langle Nu(x),v(x)\\rangle\\,d\\lambda_3(x),\\qquad\\frac1{4\\pi}\\int_{\\mathbb R^3}\\int_{\\mathbb R^3}\\frac{\\langle u(x),v(y)\\rangle}{|x-y|}\\,d\\lambda_3(y)\\,d\\lambda_3(x)$$\nconverge absolutely ([[def-integral-over-a-measurable-set]], [[thm-integral-triangle-inequality]]) and have the same value; therefore $B$ is well defined, real-valued, symmetric, $B(u,v)=B(v,u)$, and bilinear over $\\mathbb R$ in each argument. In particular the common value of the three integrals is unchanged by exchanging the two density fields $u$ and $v$ and the two integration variables.",
+        "strategy": "**Proof technique:** absolute convergence on a compact product, then Tonelli and Fubini. 1.1 Both supports lie in a closed ball $\\overline B_R(0)$; on the product $\\overline B_R(0)\\times\\overline B_R(0)$ the kernel $|x-y|^{-1}$ is locally integrable ([[lem-laplace-fundamental-kernel-is-locally-integrable]] for the normalised kernel, whose singularity is $|z|^{-1}$ in dimension three), and $|\\langle u(x),v(y)\\rangle|\\le\\|u\\|_\\infty\\|v\\|_\\infty$ ([[def-euclidean-inner-product]]); Tonelli's theorem ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]) applied to the nonnegative integrand $|\\langle u(x),v(y)\\rangle|/|x-y|$ shows that the iterated integral $\\int\\int|\\langle u(x),v(y)\\rangle|/|x-y|\\,d\\lambda_3(y)d\\lambda_3(x)$ is finite, so the double integral converges absolutely and Fubini ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]) computes it as either iterated integral. 1.2 Since $Nv$ is well defined by the same compactness and local integrability ([[def-newtonian-potential]]), the first two integrals equal the double integral by the definition of $N$ and Fubini again; the constant $1/(4\\pi)$ is the normalisation of the kernel. 1.3 Exchanging the names of the two variables $(x,y)$ in the absolutely convergent double integral leaves its value unchanged, which gives $B(u,v)=B(v,u)$; linearity in each slot follows by applying [[thm-linearity-of-the-lebesgue-integral-on-l-one]] to the inner integral and then to the outer integral. Countable Choice is inherited only through the Tonelli/Fubini and local-integrability interfaces; no stronger choice principle is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, 2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.6.1 and §2.7, printed pp. 33-37 (Newtonian potentials of compactly supported data, local integrability of the kernel and the far-field estimates); read in the previously stamped full text."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250601000000id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.3, equations (5.21)-(5.26), printed pp. 117-118 (the fundamental solution, the Newtonian potential of compactly supported data and its local integrability); read in the previously stamped archived author manuscript."
+            }
+          ]
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-em-newtonian-curl-field-energy",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Curl-field energy identity for Newtonian potentials of divergence-free compact currents",
+        "reference": null,
+        "design_state": "new-local-mathematical-prerequisite; complete-ball-excision-and-limit-argument-supplied",
+        "deps": [
+          "lem-em-smooth-newtonian-upgrade",
+          "def-newtonian-potential",
+          "thm-decay-of-the-newtonian-potential-of-compactly-supported-data",
+          "lem-em-newtonian-far-field-gradient",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "lem-the-divergence-and-curl-of-a-cross-product",
+          "cor-the-curl-of-a-curl-of-a-c2-field",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-laplacian-of-a-c2-function",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "thm-integral-triangle-inequality",
+          "def-integral-over-a-measurable-set",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "lem-em-smooth-newtonian-upgrade": "mathematical-premise",
+          "def-newtonian-potential": "mathematical-premise",
+          "thm-decay-of-the-newtonian-potential-of-compactly-supported-data": "mathematical-premise",
+          "lem-em-newtonian-far-field-gradient": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains": "mathematical-premise",
+          "lem-the-divergence-and-curl-of-a-cross-product": "mathematical-premise",
+          "cor-the-curl-of-a-curl-of-a-c2-field": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice ($\\mathrm{AC}_\\omega$) as carried by the Newtonian, polar and Lebesgue interfaces cited below ([[def-countable-choice]]). Let $\\mu_0>0$ be a real scalar parameter, let $J\\in C_c^\\infty(\\mathbb R^3;\\mathbb R^3)$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $\\operatorname{div}J=0$ ([[def-divergence-and-curl-of-a-c1-vector-field]]), and define componentwise\n$$A:=\\mu_0N(J),\\qquad A_i=\\mu_0\\,N(J_i),\\qquad N f(x)=\\int_{\\mathbb R^3}\\frac{f(y)}{4\\pi|x-y|}\\,d\\lambda_3(y),$$\nthe Newtonian vector potential of [[def-newtonian-potential]]. Then:\n(a) $A\\in C^2(\\mathbb R^3;\\mathbb R^3)$ with $\\operatorname{div}A=0$ and $-\\Delta A=\\mu_0J$ pointwise on $\\mathbb R^3$, componentwise ([[def-laplacian-of-a-c2-function]]);\n(b) there is $C>0$ with $|\\operatorname{curl}A(x)|\\le C/(1+|x|^2)$ for every $x\\in\\mathbb R^3$; hence $\\operatorname{curl}A\\in L^2(\\mathbb R^3;\\mathbb R^3)$ and $\\langle A,J\\rangle\\in L^1(\\mathbb R^3)$, both in the ordinary Lebesgue sense ([[def-integral-over-a-measurable-set]]);\n(c) the curl-field energy identity\n$$\\int_{\\mathbb R^3}|\\operatorname{curl}A|^2\\,d\\lambda_3=\\mu_0\\int_{\\mathbb R^3}\\langle A,J\\rangle\\,d\\lambda_3$$\nholds, and equivalently $\\frac12\\int_{\\mathbb R^3}\\langle A,J\\rangle\\,d\\lambda_3=\\frac1{2\\mu_0}\\int_{\\mathbb R^3}|\\operatorname{curl}A|^2\\,d\\lambda_3\\ge0$.\nThe identity is stated for the explicit smooth compact currents and the Newtonian construction; no uniqueness, no decay of $A$ itself beyond the curl bound of (b), and no extension to singular currents is claimed.",
+        "strategy": "**Proof technique:** the differentiated Newtonian identities, decay estimates, and one ball excision with a vanishing boundary flux. 1.1 By [[lem-em-smooth-newtonian-upgrade]] each $A_i=\\mu_0N(J_i)$ is smooth, $-\\Delta A_i=\\mu_0J_i$ and $D^\\alpha A_i=\\mu_0N(D^\\alpha J_i)$ for every multi-index; hence $\\operatorname{div}A=\\sum_i\\partial_iA_i=\\mu_0N(\\operatorname{div}J)=0$ pointwise and $A\\in C^\\infty$, which proves (a) ([[def-newtonian-potential]], [[def-divergence-and-curl-of-a-c1-vector-field]], [[def-laplacian-of-a-c2-function]]). 1.2 Decay: choose $R>0$ with $\\operatorname{supp}J\\subseteq B_R(0)$; the far-field asymptotics of the scalar Newtonian potential ([[thm-decay-of-the-newtonian-potential-of-compactly-supported-data]]) give $|A_i(x)|\\le c_1\\|J_i\\|_1/|x|$ for $|x|>2R$, and the far-field gradient bound ([[lem-em-newtonian-far-field-gradient]] with $n=3$) gives $|\\nabla A_i(x)|\\le c_2\\|J_i\\|_1/|x|^2$ there; since $|\\operatorname{curl}A|\\le\\sqrt2\\max_i|\\nabla A_i|$ off the support and $A$ is smooth on the compact region $\\overline B_{2R}(0)$ ([[def-metric-ball]]), the bound of (b) follows with a constant adjusted on the compact part ([[thm-integral-triangle-inequality]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]). 1.3 The pointwise identity $\\operatorname{div}(A\\times\\operatorname{curl}A)=\\langle\\operatorname{curl}A,\\operatorname{curl}A\\rangle-\\langle A,\\operatorname{curl}\\operatorname{curl}A\\rangle$ holds on $\\mathbb R^3$ ([[lem-the-divergence-and-curl-of-a-cross-product]], [[def-cross-product-in-r3]], [[def-euclidean-inner-product]]), and $\\operatorname{curl}\\operatorname{curl}A=\\nabla\\operatorname{div}A-\\Delta A=\\mu_0J$ ([[cor-the-curl-of-a-curl-of-a-c2-field]], step 1.1). 1.4 For every $r>2R$ the divergence theorem ([[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]]) on the ball $B_r(0)$ gives $\\oint_{\\partial B_r}(A\\times\\operatorname{curl}A)\\cdot\\nu\\,dS=\\int_{B_r}|\\operatorname{curl}A|^2-\\mu_0\\int_{B_r}\\langle A,J\\rangle$, and the boundary flux is bounded by $4\\pi r^2\\cdot c_3r^{-3}=4\\pi c_3/r\\to0$ by the decay bounds of step 1.2 ([[thm-integral-triangle-inequality]]). 1.5 Let $r\\to\\infty$. The nonnegative functions $|\\operatorname{curl}A|^2\\mathbf 1_{B_r}$ increase to $|\\operatorname{curl}A|^2$, so their integrals converge to $\\int_{\\mathbb R^3}|\\operatorname{curl}A|^2$ by monotone convergence ([[thm-monotone-convergence-for-the-integral]]); $\\langle A,J\\rangle$ is supported in $\\overline B_R$ and continuous, hence integrable, and $\\int_{B_r}\\langle A,J\\rangle\\to\\int_{\\mathbb R^3}\\langle A,J\\rangle$ by dominated convergence ([[thm-dominated-convergence]]). Substituting into step 1.4 and letting $r\\to\\infty$ gives (c). Countable Choice is inherited only through the cited Newtonian, polar and Lebesgue supplier interfaces.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, 2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.6.1-2.7, printed pp. 33-37 (the Newtonian potential of compactly supported data, $-\\Delta Nf=f$, the local integrability of the kernel and the $|\\nabla Nf|=O(|x|^{1-n})$ asymptotics); read in the previously stamped full text."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250601000000id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.3, equations (5.21)-(5.30), printed pp. 117-119 (fundamental solution, Newtonian potential identities and the gradient estimates used in the decay step); read in the previously stamped archived author manuscript."
+            }
+          ]
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 1
+      },
+      {
+        "id": "pthm-em-motional-emf",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Moving-loop electromotive force equals the negative flux derivative",
+        "reference": "core-conditional-proofs.md#K6",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-em-moving-circuit-geometry",
+          "def-em-fields",
+          "def-em-si-conventions",
+          "def-em-sources",
+          "def-em-fixed-test-geometry",
+          "post-em-lorentz-coupling",
+          "pthm-em-integral-maxwell",
+          "lem-em-moving-flux",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-em-moving-circuit-geometry": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "def-em-fixed-test-geometry": "formulation-prerequisite",
+          "post-em-lorentz-coupling": "physical-assumption",
+          "pthm-em-integral-maxwell": "physical-result",
+          "lem-em-moving-flux": "mathematical-premise",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice ($\\mathrm{AC}_\\omega$), with the exact meaning of [[def-countable-choice]], inherited from the Maxwell and transport suppliers below. Let $\\Omega\\times I$ be the laboratory region with $c>0$, $\\varepsilon_0$, $\\mu_0$ the constants of [[def-em-si-conventions]]; let $E,B$ be fields and $\\rho,J$ source fields of [[def-em-fields]] and [[def-em-sources]], jointly of class $C^2$ and $C^1$ respectively on $\\Omega\\times I$, satisfying the smooth branch of the vacuum Maxwell equations pointwise on $\\Omega\\times I$. Let $(D,r,v)$ be a moving material circuit of [[def-em-moving-circuit-geometry]] with time interval $I$, and fix a compact subinterval $J\\subseteq I$ such that the swept set $r(D\\times J)$ is compactly contained in $\\Omega$ (no singularity crossing). Put $S(t)=r(D,t)$, $C(t)=\\partial S(t)$ with the induced orientation.\n\nThen the flux $\\Phi_B:I\\to\\mathbb R$ of [[def-em-moving-circuit-geometry]] is differentiable at every $t\\in I$ with\n$$\\Phi_B'(t)=\\int_{S(t)}\\partial_tB(\\cdot,t)\\cdot n\\,dS-\\oint_{C(t)}(v\\times B)(\\cdot,t)\\cdot d\\mathbf r,$$\nfor every $t\\in J$ the frozen patch $(D,r(\\cdot,\\cdot,t))$ is a test geometry of [[def-em-fixed-test-geometry]], the fixed-patch Faraday identity\n$$\\int_{S(t)}\\partial_tB(\\cdot,t)\\cdot n\\,dS=-\\oint_{C(t)}E(\\cdot,t)\\cdot d\\mathbf r$$\nholds, and consequently the electromotive force of the circuit satisfies\n$$\\mathrm{emf}(t)=\\oint_{C(t)}(E+v\\times B)(\\cdot,t)\\cdot d\\mathbf r=-\\Phi_B'(t)\\qquad\\text{for every }t\\in J.$$\nThe physical reading, under the adopted coupling [[post-em-lorentz-coupling]], is that the work per unit charge of the electromagnetic force on charges moving with the conductor material equals minus the rate of change of the magnetic flux through the circuit. The result is conditional on the joint regularity, the smooth Maxwell branch and the no-singularity-crossing hypothesis; it asserts no fixed-loop formula for arbitrary moving loops, no field uniqueness, no statement about singular supports and no empirical claim.",
+        "strategy": "**Proof technique:** the flux-transport lemma of the research route [[lem-em-moving-flux]], the frozen-patch Faraday clause of [[pthm-em-integral-maxwell]], and linearity of the line integral. 1.1 The hypotheses of the moving-patch definition are met: $D$ is a compact finite elementary Green region, $r$ extends $C^2$ to a neighbourhood of $D\\times I$ with $r_u\\times r_v\\ne0$, and $v$ is single-valued of class $C^1$ on a neighbourhood of the swept set ([[def-em-moving-circuit-geometry]]); $B$ is $C^2$ on a neighbourhood of the swept set and $\\operatorname{div}B=0$ holds pointwise (smooth Maxwell branch), so [[lem-em-moving-flux]] gives differentiability of $\\Phi_B$ and the displayed transport formula. 1.2 Fix $t\\in J$ and freeze the patch: $(D,r(\\cdot,\\cdot,t))$ is a fixed oriented regular $C^2$ patch over the elementary region $D$ with a neighbourhood on which $E,B$ are $C^2$ and the smooth Maxwell equations hold, hence a test geometry of [[def-em-fixed-test-geometry]]; the differential-to-integral clause of [[pthm-em-integral-maxwell]] applied to it gives the fixed-patch Faraday identity, the flux function being differentiable with derivative $\\int_S\\partial_tB\\cdot n$ by the same clause. 1.3 Add the two integrals: by linearity and concatenation of vector line integrals ([[def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]]), $\\oint_C(E+v\\times B)\\cdot d\\mathbf r=\\oint_CE\\cdot d\\mathbf r+\\oint_C(v\\times B)\\cdot d\\mathbf r$, and substituting steps 1.1 and 1.2 at $t$ gives $\\operatorname{emf}(t)=-\\Phi_B'(t)$. The Lorentz-force interpretation of the integrand is the adopted coupling [[post-em-lorentz-coupling]] and is not used in the algebraic identity itself. Countable Choice is inherited from [[pthm-em-integral-maxwell]] and [[lem-em-moving-flux]]; no stronger choice principle is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "§4.1.1 printed pp. 69-71 (moving rectangular circuit; the general moving loop $C(t)$; derivation of $\\mathrm{d}\\Phi/\\mathrm{d}t=-\\oint_C(E+v\\times B)\\cdot d\\mathbf r$ via the swept surface and the flux rule); read in the retained complete text of the 236-page printing."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "§7.1.3 and §7.2.1 printed pp. 294-305 (motional emf, the flux rule $\\mathcal E=-\\mathrm{d}\\Phi/\\mathrm{d}t$ for motional emf and its caveat, and Faraday's law as the general statement); read in the stamped 596-page scan."
+            },
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "§4.2 printed pp. 104-108 (Faraday's law: the e.m.f. around a loop equals minus the rate of change of magnetic flux; the field equation $\\nabla\\times\\boldsymbol E=-\\partial\\boldsymbol B/\\partial t$); read in the stamped 364-page course book."
+            }
+          ]
+        },
+        "physical_scope": "The moving material-circuit flux rule $\\mathrm{emf}=-\\Phi_B'$ for the declared smooth compact test geometry: fields jointly C2, sources C1, the smooth vacuum-Maxwell branch, an embedded C2 swept patch with single-valued C1 material velocity, subluminal material speeds off singular supports, and no singularity crossings. It makes no claim about loops through singular sources, about self-fields, radiation or nonlinear/material effects, and carries no measurement.",
+        "inventory_expansion_required": false,
+        "dependency_level": 18
+      },
+      {
+        "id": "post-em-circuit-approximation",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Electro- and magneto-quasistatic lumped circuit model",
+        "reference": "definition-contracts.md#post-em-circuit-approximation",
+        "design_state": "explicit-adopted-postulate-contract; nonproof-source-scope-review",
+        "deps": [
+          "post-em-material-closure",
+          "def-em-steady-current-regime",
+          "def-em-si-conventions",
+          "def-em-lab-geometry"
+        ],
+        "dependency_roles": {
+          "post-em-material-closure": "formulation-prerequisite",
+          "def-em-steady-current-regime": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite"
+        },
+        "statement": "Adopt as a modelling postulate of this framework the following reduced circuit description, to be used only within its declared regime. Let the laboratory region, its chart and units and the compact smooth current class be those of [[def-em-lab-geometry]], [[def-em-si-conventions]] and [[def-em-steady-current-regime]], and let the material response be one of the branches of [[post-em-material-closure]].\n\n(a) [Circuit data] Fix a finite set of branches $\\alpha=1,\\dots,n$ (and capacitive branches $\\beta=1,\\dots,m$) and a time interval $J$. The model carries branch currents $I_\\alpha:J\\to\\mathbb R$, branch charges $Q_\\beta:J\\to\\mathbb R$, terminal potentials $V_\\alpha:J\\to\\mathbb R$, and constant matrices $L\\in\\mathbb R^{n\\times n}$, $C\\in\\mathbb R^{m\\times m}$ and $R\\in\\mathbb R^{n\\times n}$, with $L$ and $C$ symmetric, $C$ positive definite and $R$ symmetric positive semidefinite. The matrices, the terminal geometry and the choice of independent loops are fixed data of the model; they are declared, not derived here, and the smooth compact-current realization of the inductive couplings and its reciprocity are analysed separately on this page.\n\n(b) [Branch relations and network laws] In the declared regime the inductive branches obey the Faraday branch relation $V(t)=L\\dot I(t)$, i.e. each terminal potential is the rate of change of the branch flux linkage $\\Phi=L I$; the capacitive branches obey $V=C^{-1}Q$ (in the scalar case $V_\\beta=Q_\\beta/C_{\\beta\\beta}$); the resistive branches obey $V=RI$, the circuit form of the Ohmic relation of [[post-em-material-closure]]; and the network laws are Kirchhoff's current law at each node and loop voltage balance around each independent loop. The circuit-level bookkeeping quantities of the model are the flux linkage $LI$ and the stored energies $\\tfrac12I^{\\mathsf T}LI$ and $\\tfrac12Q^{\\mathsf T}C^{-1}Q$.\n\n(c) [Quasistatic regime declaration] The description is confined to configurations whose largest geometric extent $\\ell$ and shortest time scale $T$ of interest satisfy the quasistatic smallness condition $\\ell/(cT)\\ll1$, with negligible radiation and negligible leakage and with specified conductor geometry and ideal terminals. The inequality is a declared regime of validity of the model; no error bound for an arbitrary full Maxwell solution follows from it alone, and the model does not assert that every asymptotically small configuration is described to any particular accuracy.\n\n(d) [Status, units and scope] This is an adopted reduced model, not a deduction from the vacuum Maxwell equations; the matrices $L,C,R$ are model data, no microscopic constitutive law beyond the adopted branch of [[post-em-material-closure]] is asserted, and no radiation, distributed-element, nonlinear, hysteretic, leakage or proximity effect is included. SI units consistent with [[def-em-si-conventions]] are used: $V$ in volts, $I$ in amperes, $Q$ in coulombs, $t$ in seconds, $L$ in henries ($\\mathrm H=\\mathrm V\\,\\mathrm s\\,\\mathrm A^{-1}$), $C$ in farads ($\\mathrm F=\\mathrm C\\,\\mathrm V^{-1}$) and $R$ in ohms ($\\Omega=\\mathrm V\\,\\mathrm A^{-1}$). Where conductor matter moves, material speeds are subluminal, $|v|<c$, when the relativistic force interpretation is used.",
+        "strategy": "An adopted nonproof formulation; no derivation is supplied and none is claimed. The objects are those of the framework: the laboratory region and time interval of [[def-em-lab-geometry]], the units of [[def-em-si-conventions]], the compact smooth conserved-current class of [[def-em-steady-current-regime]](b), and the Ohmic branch of [[post-em-material-closure]]. The list of essential elementary idealisations is explicit: fixed branch geometry, ideal terminals, negligible radiation and leakage, a declared quasistatic smallness condition, and constant branch matrices. Clause (d) records that the reduction is a model assumption and that $L,C,R$ carry no microscopic or empirical content. Source/scope review covers the formulation, the quasistatic qualification and the non-derivation; the accompanying theorems of this page derive conditional consequences of the adopted model only.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "§7.5-7.7 printed pp. 225-241 (the circuit equation $V=L\\,\\mathrm dI/\\mathrm dt+RI$ for a coil, the LCR circuit equation $V=IR+L\\,\\mathrm dI/\\mathrm dt+\\int I\\,\\mathrm dt/C$ with ideal elements, and the transmission-line discussion of when a lumped description ceases to apply); read in the stamped 364-page course book."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "§4.1.3 printed pp. 74-77 (Ohm's law as an extra, material-dependent input and the elementary circuit calculations with a battery and resistance); read in the retained complete text of the 236-page printing."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "§7.2.3 printed pp. 310-317 (inductance as a circuit element, the back emf $-\\mathrm d\\Phi/\\mathrm dt$, and the RL circuit equation with time constant $\\tau=L/R$); read in the stamped 596-page scan."
+            }
+          ]
+        },
+        "physical_scope": "An adopted lumped-parameter circuit model in the electro- and magneto-quasistatic regime: fixed finite branch data, constant symmetric inductance and positive-definite capacitance matrices, positive-semidefinite resistance, ideal terminal relations, Kirchhoff laws, and a declared smallness condition on size over time scale. It is a reduced model with no derivation from full Maxwell theory, no radiation, leakage, distributed or nonlinear effects, and no empirical claim about any actual circuit.",
+        "inventory_expansion_required": false,
+        "dependency_level": 18
+      },
+      {
+        "id": "pthm-em-inductance-reciprocity",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Linear flux linkage, reciprocal mutual inductance and magnetic energy of compact smooth conserved currents",
+        "reference": "core-conditional-proofs.md#K6",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-em-steady-current-regime",
+          "def-em-si-conventions",
+          "pthm-em-magnetostatic-vector-potential",
+          "post-em-circuit-approximation",
+          "lem-em-newtonian-linkage-symmetry",
+          "lem-em-newtonian-curl-field-energy",
+          "def-newtonian-potential",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "cor-the-curl-of-a-curl-of-a-c2-field",
+          "def-laplacian-of-a-c2-function",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "cor-continuous-functions-are-borel-measurable",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-integral-over-a-measurable-set",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-em-steady-current-regime": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "pthm-em-magnetostatic-vector-potential": "physical-result",
+          "post-em-circuit-approximation": "physical-assumption",
+          "lem-em-newtonian-linkage-symmetry": "mathematical-premise",
+          "lem-em-newtonian-curl-field-energy": "mathematical-premise",
+          "def-newtonian-potential": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "cor-the-curl-of-a-curl-of-a-c2-field": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere": "mathematical-premise",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure": "mathematical-premise",
+          "cor-continuous-functions-are-borel-measurable": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice ($\\mathrm{AC}_\\omega$), with the exact meaning of [[def-countable-choice]]. Let $\\mu_0>0$, $c>0$, $\\varepsilon_0=(\\mu_0c^2)^{-1}$ be the constants of [[def-em-si-conventions]], and let $j_1,\\dots,j_n\\in C_c^\\infty(\\Omega;\\mathbb R^3)$ with $\\operatorname{div}j_\\alpha=0$ be fixed compact smooth conserved current profiles of the class of [[def-em-steady-current-regime]](b), extended by zero to $\\mathbb R^3$. Fix amplitudes $I\\in\\mathbb R^n$, put $J_I:=\\sum_{\\alpha=1}^nI_\\alpha j_\\alpha$, let $A_{J_I}$ be the Coulomb-gauge Newtonian vector potential of [[pthm-em-magnetostatic-vector-potential]] applied to the conserved current $J_I$, and let $B_{J_I}=\\operatorname{curl}A_{J_I}$. Define the linkage coefficients\n$$L_{\\alpha\\beta}:=\\frac{\\mu_0}{4\\pi}\\int_{\\mathbb R^3}\\int_{\\mathbb R^3}\\frac{\\langle j_\\alpha(x),j_\\beta(y)\\rangle}{|x-y|}\\,d\\lambda_3(y)\\,d\\lambda_3(x),\\qquad\\alpha,\\beta=1,\\dots,n .$$\nThen:\n(a) [Finiteness and self-energy] every $L_{\\alpha\\beta}$ is a finite real number: the defining double integral converges absolutely, and in particular every self-coefficient $L_{\\alpha\\alpha}$ is finite, so the compact smooth profiles carry a finite self-energy. This is a statement about the smooth profiles only; no finite value is assigned to a zero-radius thin-wire self-inductance.\n(b) [Reciprocity and flux linkage] $L_{\\alpha\\beta}=L_{\\beta\\alpha}$ for all $\\alpha,\\beta$; $A_{J_I}=\\sum_{\\alpha}I_\\alpha A_{j_\\alpha}$ componentwise; and for every $\\beta$ the linkage integral is\n$$\\int_{\\mathbb R^3}\\langle j_\\beta,A_{J_I}\\rangle\\,d\\lambda_3=\\sum_{\\alpha=1}^nL_{\\beta\\alpha}I_\\alpha .$$\nThus the numbers $L_{\\alpha\\beta}$ are the linkage coefficients of the profiles: the linkage of profile $\\beta$ with the field of the superposition is the linear combination $\\sum_\\alpha L_{\\beta\\alpha}I_\\alpha$.\n(c) [Magnetic energy and positivity] with $U(I):=\\frac12\\int_{\\mathbb R^3}\\langle J_I,A_{J_I}\\rangle\\,d\\lambda_3$,\n$$U(I)=\\frac12\\sum_{\\alpha,\\beta=1}^nL_{\\alpha\\beta}I_\\alpha I_\\beta=\\frac1{2\\mu_0}\\int_{\\mathbb R^3}|B_{J_I}|^2\\,d\\lambda_3\\ \\ge0,$$\nall quantities finite; moreover $U(I)=0$ holds precisely when $J_I=0$ on $\\mathbb R^3$. Consequently the symmetric matrix $L=(L_{\\alpha\\beta})$ is positive semidefinite, and it is positive definite exactly when the profiles are pointwise linearly independent, i.e. when $\\sum_\\alpha I_\\alpha j_\\alpha\\equiv0$ forces $I=0$.\n(d) [Scope] the theorem concerns fixed compact smooth conserved current profiles and their Coulomb-gauge fields. It asserts no thin-wire, sheet or singular self-inductance; no time-dependent, moving, radiating or material configuration; and no uniqueness of the vector potential. The identification of these coefficients with the inductance matrix of the adopted lumped circuit model, and of the linkage derivatives with terminal voltages, belongs to [[post-em-circuit-approximation]] and to the motional-emf result of this page, not to the field computation itself.",
+        "strategy": "**Proof technique:** the Fubini/symmetry lemma [[lem-em-newtonian-linkage-symmetry]], the curl-field energy identity [[lem-em-newtonian-curl-field-energy]], and the Fubini representation of the linkage integrals. 1.1 Components: $j_\\alpha$ is smooth, compactly supported and divergence-free, so [[pthm-em-magnetostatic-vector-potential]] applied to $J_I$ (equivalently to each $j_\\alpha$, whose sum is $J_I$) gives $A_{J_I}\\in C^\\infty$, $\\operatorname{div}A_{J_I}=0$, $-\\Delta A_{J_I}=\\mu_0J_I$ and $B_{J_I}=\\operatorname{curl}A_{J_I}$ with $\\operatorname{div}B_{J_I}=0$, $\\operatorname{curl}B_{J_I}=\\mu_0J_I$ pointwise; by linearity of the Lebesgue integral ([[thm-linearity-of-the-lebesgue-integral-on-l-one]], [[def-newtonian-potential]]) $A_{J_I}=\\sum_\\alpha I_\\alpha A_{j_\\alpha}$ with $A_{j_\\alpha}$ the potentials of the individual profiles. 1.2 [[lem-em-newtonian-linkage-symmetry]] applied to $(u,v)=(j_\\alpha,j_\\beta)$ shows that each $L_{\\alpha\\beta}$ is a finite real number given by the absolutely convergent double integral and that $L_{\\alpha\\beta}=L_{\\beta\\alpha}$; applied to $(j_\\beta,J_I)$ it gives $\\int\\langle j_\\beta,A_{J_I}\\rangle=\\mu_0\\sum_\\alpha I_\\alpha\\,(4\\pi)^{-1}\\iint\\langle j_\\beta(x),j_\\alpha(y)\\rangle/|x-y|=\\sum_\\alpha L_{\\beta\\alpha}I_\\alpha$, which is clause (b). 1.3 By the same symmetry, $\\sum_{\\alpha,\\beta}L_{\\alpha\\beta}I_\\alpha I_\\beta=\\mu_0\\int\\langle J_I,NJ_I\\rangle$, hence ([[lem-em-newtonian-curl-field-energy]] applied to the divergence-free current $J_I$ with parameter $\\mu_0$) $U(I)=\\frac12\\int\\langle J_I,A_{J_I}\\rangle=\\frac1{2\\mu_0}\\int|\\operatorname{curl}A_{J_I}|^2\\ge0$, the integrals being finite by the same lemma; this is the energy identity of (c). 1.4 Vanishing: if $U(I)=0$ then $\\int|B_{J_I}|^2=0$, and since $|B_{J_I}|^2$ is continuous and nonnegative, [[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]] gives $|B_{J_I}|=0$ almost everywhere ([[cor-continuous-functions-are-borel-measurable]]); continuity then forces $B_{J_I}=0$ everywhere (otherwise $|B_{J_I}|$ would exceed a positive constant on a ball of positive measure by [[lem-euclidean-balls-have-positive-finite-lebesgue-measure]] and [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]). Then $\\operatorname{curl}\\operatorname{curl}A_{J_I}=\\nabla\\operatorname{div}A_{J_I}-\\Delta A_{J_I}=\\mu_0J_I$ ([[cor-the-curl-of-a-curl-of-a-c2-field]], [[def-laplacian-of-a-c2-function]], [[def-divergence-and-curl-of-a-c1-vector-field]]) vanishes, so $J_I=0$; conversely $J_I=0$ gives $A_{J_I}=0$ and $U(I)=0$. Symmetry of $L$ and the vanishing criterion give the stated positive-definiteness characterisation. Countable Choice is inherited from the magnetostatic vector-potential theorem and the Newtonian and Lebesgue supplier interfaces.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "§7.4 printed pp. 222-225 (mutual inductance $\\Phi_2=MI_1$ as a linear consequence of the Biot-Savart law, the ideal two-solenoid evaluation $M=\\mu_0N_1N_2\\pi r^2l$ with $M=\\sqrt{L_1L_2}$ under perfect linkage, and the warning that flux leakage makes the actual mutual inductance smaller); read in the stamped 364-page course book."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "§7.2.3 printed pp. 310-317 (mutual inductance (7.21), the Neumann double-line formula (7.22), and the symmetry $M_{21}=M_{12}$ (7.23); self-inductance as an intrinsically positive geometrical quantity); read in the stamped 596-page scan."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "§4.1.2 printed pp. 71-73 (the inductance $L=\\Phi/I$, the solenoid evaluation and the identification of the magnetostatic energy $W=\\frac12LI^2=\\frac12I\\Phi=\\frac12\\int\\mathrm d^3x\\,J\\cdot A$); read in the retained complete text of the 236-page printing."
+            }
+          ]
+        },
+        "physical_scope": "Reciprocity, flux linkage and magnetic energy for fixed compact smooth conserved divergence-free current profiles and their Coulomb-gauge magnetostatic fields in vacuum: finite linkage coefficients $L_{\\alpha\\beta}=L_{\\beta\\alpha}$, the linear linkage $\\int j_\\beta\\cdot A_J=\\sum_\\alpha L_{\\beta\\alpha}I_\\alpha$, and the finite energy $\\frac12I^{\\mathsf T}LI=\\frac1{2\\mu_0}\\int|B|^2\\ge0$ with vanishing exactly for vanishing current. It excludes thin-wire/sheet self-inductances, moving or radiating configurations, material response and any empirical claim.",
+        "inventory_expansion_required": false,
+        "dependency_level": 19
+      },
+      {
+        "id": "pthm-em-inductor-energy",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Restricted inductor energy LI^2/2 and its identification with the frozen magnetic field energy",
+        "reference": "core-conditional-proofs.md#K6",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "post-em-circuit-approximation",
+          "pthm-em-inductance-reciprocity",
+          "pthm-em-motional-emf",
+          "def-em-steady-current-regime",
+          "def-em-si-conventions",
+          "def-interval",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-em-circuit-approximation": "physical-assumption",
+          "pthm-em-inductance-reciprocity": "physical-result",
+          "pthm-em-motional-emf": "physical-result",
+          "def-em-steady-current-regime": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-interval": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume the lumped circuit model of [[post-em-circuit-approximation]] with the units of [[def-em-si-conventions]], and assume Countable Choice ($\\mathrm{AC}_\\omega$) for clause (b), where it is inherited from the linkage suppliers.\n\n(a) [Terminal-energy bookkeeping] Let $J\\subseteq\\mathbb R$ be an interval ([[def-interval]]), let $t_0,t_1\\in J$, let $L\\in\\mathbb R^{n\\times n}$ be constant and symmetric, let $I:J\\to\\mathbb R^n$ be of class $C^1$ (regularity on a non-open interval is read in the open-neighbourhood restriction convention: the map extends to a $C^1$ map on an open interval containing $J$), and let $V(t):=L\\dot I(t)$ be the terminal-voltage vector of the inductive branches as adopted in [[post-em-circuit-approximation]] (the Faraday branch: the terminal voltage of a branch is the rate of change of its flux linkage $\\Phi=LI$). Then\n$$\\int_{t_0}^{t_1}\\langle V(t),I(t)\\rangle\\,dt=\\frac12\\langle I(t_1),LI(t_1)\\rangle-\\frac12\\langle I(t_0),LI(t_0)\\rangle ,$$\nand for $n=1$ with $L>0$ this reads $\\int_{t_0}^{t_1}V I\\,dt=\\frac12L\\bigl(I(t_1)^2-I(t_0)^2\\bigr)$: the accumulated terminal energy equals the change of the inductor bookkeeping energy $\\frac12LI^2$. The identity is exact for every $C^1$ current and fixed geometry; it uses only symmetry of $L$, the product rule and the fundamental theorem of calculus. For a changing geometry the mechanical work done on the circuit is an additional term and is not covered here.\n\n(b) [Identification with the frozen field energy] Suppose in addition that the currents are realized by fixed compact smooth conserved profiles $j_1,\\dots,j_n$ of the class of [[def-em-steady-current-regime]](b), with instantaneous source $J(t):=\\sum_\\alpha I_\\alpha(t)j_\\alpha$, and that the inductance matrix is the linkage matrix of those profiles in the sense of [[pthm-em-inductance-reciprocity]]: $L_{\\alpha\\beta}=\\mu_0(4\\pi)^{-1}\\iint\\langle j_\\alpha(x),j_\\beta(y)\\rangle/|x-y|$. Then for every $t\\in J$\n$$\\frac12\\langle I(t),LI(t)\\rangle=\\frac12\\int_{\\mathbb R^3}\\langle J(t),A_{J(t)}\\rangle\\,d\\lambda_3=\\frac1{2\\mu_0}\\int_{\\mathbb R^3}|B_{J(t)}|^2\\,d\\lambda_3\\ \\ge0,$$\nthe magnetic field energy of the frozen instantaneous configuration, and the terminal energy of (a) is the change of this field energy between $t_0$ and $t_1$. The relation between terminal voltages and flux derivatives is the content of [[pthm-em-motional-emf]]; the identification of the model's inductance matrix with the smooth-profile linkage matrix is part of the adopted model of [[post-em-circuit-approximation]].\n\n(c) [Scope] no radiation, distributed-element, material-loss, moving-geometry or thin-wire self-inductance claim is made; the frozen-configuration energy is not asserted to be the energy of a time-dependent full Maxwell solution.",
+        "strategy": "**Proof technique:** product rule plus the fundamental theorem of calculus for (a); the reciprocity theorem for (b). 1.1 The quadratic function $W(I)=\\frac12\\langle I,LI\\rangle$ is differentiable with $D W(I)\\dot I=\\langle L\\dot I,I\\rangle$ for symmetric $L$ ([[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]]); equivalently $\\frac{\\mathrm d}{\\mathrm dt}W(I(t))=\\langle\\dot I(t),LI(t)\\rangle=\\langle L\\dot I(t),I(t)\\rangle=\\langle V(t),I(t)\\rangle$. 1.2 Since $t\\mapsto\\langle V(t),I(t)\\rangle$ is continuous and equals the derivative of the $C^1$ function $W\\circ I$ on the interval $J$, the fundamental theorem of calculus in its second form ([[thm-ftc-second-part]]) gives the displayed integral identity of (a). For $n=1$ the quadratic form is $L I^2/2$ by inspection. 1.3 Clause (b) is [[pthm-em-inductance-reciprocity]](c) applied to the profiles $j_\\alpha$ and amplitudes $I(t)$ at each fixed $t$, combined with (a); the frozen instantaneous source is a legitimate input to the magnetostatic theorem at each time, and no time derivative of the fields is taken. 1.4 The mechanical-work caveat and the scope restrictions are those of the adopted model; the motional-emf theorem supplies the physical reading of the terminal voltage as a flux derivative, and no claim on a time-dependent Maxwell solution is made. Countable Choice is required only in clause (b), inherited through the linkage theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "§7.5 printed pp. 225-231 (the RL circuit equation $V=L\\,\\mathrm dI/\\mathrm dt+RI$, the battery work $\\int(V_1I_1+V_2I_2)\\,\\mathrm dt$ for two coupled coils splitting into Ohmic terms plus $\\frac12L_1I_1^2+\\frac12L_2I_2^2+MI_1I_2$, and the statement that the energy stored in an inductor is stored in the surrounding magnetic field); read in the stamped 364-page course book."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "§4.1.2 printed pp. 71-73 (the work $\\mathrm dW=\\mathcal E I\\,\\mathrm dt$ done against the induced emf when building a current, integrated to $W=\\frac12LI^2$, and its rewriting as the field energy $\\frac12\\int\\mathrm d^3x\\,J\\cdot A=(1/2\\mu_0)\\int\\mathrm d^3x\\,B\\cdot B$ under the assumption of sufficient decay at infinity); read in the retained complete text of the 236-page printing."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "§7.2.4 printed pp. 317-320 (the energy stored in a magnetic field, $\\frac12LI^2$ for a circuit and $U=\\frac1{2\\mu_0}\\int B^2\\,d\\tau$ for the field); read in the stamped 596-page scan."
+            }
+          ]
+        },
+        "physical_scope": "The restricted inductive-energy bookkeeping of the adopted lumped model: for fixed geometry and a constant symmetric inductance matrix the accumulated terminal energy is the change of $\\frac12I^{\\mathsf T}LI$, and for a smooth compact conserved-current realization this equals the change of the frozen magnetic field energy $\\frac1{2\\mu_0}\\int|B|^2$. It excludes changing geometry, radiation, distributed and material-loss effects, thin-wire self-inductance, and any empirical claim.",
+        "inventory_expansion_required": false,
+        "dependency_level": 20
+      },
+      {
+        "id": "pthm-em-rl-lc-dynamics",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Restricted RL decay and LC oscillation under the adopted circuit model",
+        "reference": "core-conditional-proofs.md#K6",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "post-em-circuit-approximation",
+          "pthm-em-inductor-energy",
+          "pthm-em-capacitance-energy",
+          "def-em-si-conventions",
+          "def-interval",
+          "thm-first-order-linear-ode-integrating-factor",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "thm-algebra-of-continuous-functions",
+          "def-complex-exponential",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-algebra-of-complex-derivatives",
+          "thm-chain-rule-for-complex-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-eulers-formula",
+          "thm-complex-trigonometric-hyperbolic-dictionary",
+          "cor-zero-derivative-implies-constant",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-em-circuit-approximation": "physical-assumption",
+          "pthm-em-inductor-energy": "physical-result",
+          "pthm-em-capacitance-energy": "physical-result",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-interval": "mathematical-premise",
+          "thm-first-order-linear-ode-integrating-factor": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "thm-algebra-of-continuous-functions": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann": "mathematical-premise",
+          "thm-algebra-of-complex-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-complex-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-eulers-formula": "mathematical-premise",
+          "thm-complex-trigonometric-hyperbolic-dictionary": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Let the lumped circuit model and its units be those of [[post-em-circuit-approximation]] and [[def-em-si-conventions]], let $J\\subseteq\\mathbb R$ be an interval ([[def-interval]]) and let $t_0\\in J$; regularity on a non-open interval is read in the open-neighbourhood restriction convention (extendability to a $C^k$ map on an open interval containing $J$). Assume Countable Choice ($\\mathrm{AC}_\\omega$), with the exact meaning of [[def-countable-choice]], for the identification of the capacitive energy with the two-conductor electrostatic energy of [[pthm-em-capacitance-energy]] in clause (b), where it is inherited from that theorem; the other clauses use no choice principle. The inductive energy is that of [[pthm-em-inductor-energy]].\n\n(a) [RL circuit] Let $L>0$ and $R\\ge0$ be constants and let $V:J\\to\\mathbb R$ be continuous. Then the initial value problem\n$$L\\dot I(t)+R\\,I(t)=V(t),\\qquad I(t_0)=I_0\\in\\mathbb R,$$\nhas exactly one $C^1$ solution on $J$, namely\n$$I(t)=\\exp\\!\\Bigl(-\\frac{R(t-t_0)}{L}\\Bigr)\\Bigl[I_0+\\frac1L\\int_{t_0}^{t}\\exp\\!\\Bigl(\\frac{R(s-t_0)}{L}\\Bigr)V(s)\\,ds\\Bigr],$$\nand along it the inductive bookkeeping energy satisfies the power identity\n$$\\frac{\\mathrm d}{\\mathrm dt}\\Bigl(\\frac12LI(t)^2\\Bigr)=L\\dot I(t)I(t)=V(t)I(t)-R\\,I(t)^2 ,$$\ni.e. the terminal power splits into the rate of change of the inductive energy and the Ohmic term $RI^2$. (For $R=0$ the same formula reduces to $I=I_0+L^{-1}\\int_{t_0}^tV$.)\n\n(b) [LC oscillation] Let $L>0$, $C>0$ and set $\\Omega:=(LC)^{-1/2}>0$, $z_0:=Q_0-\\mathrm i\\,I_0/\\Omega$, $w(t):=z_0\\exp(\\mathrm i\\Omega(t-t_0))$ with the complex exponential of [[def-complex-exponential]], and $Q(t):=\\operatorname{Re}w(t)$. Then $Q$ is of class $C^2$ on $J$, $Q(t_0)=Q_0$, $Q'(t_0)=I_0$, and\n$$L\\,Q''(t)+\\frac{Q(t)}{C}=0\\qquad\\text{on }J ;$$\nequivalently, with the real trigonometric functions of [[thm-eulers-formula]],\n$$Q(t)=Q_0\\cos\\bigl(\\Omega(t-t_0)\\bigr)+\\frac{I_0}{\\Omega}\\sin\\bigl(\\Omega(t-t_0)\\bigr).$$\nMoreover the total bookkeeping energy\n$$E(t):=\\frac12L\\,Q'(t)^2+\\frac{Q(t)^2}{2C}$$\nsatisfies $E'(t)=Q'(t)\\bigl(LQ''(t)+Q(t)/C\\bigr)=0$ on $J$, hence $E$ is constant with value $\\frac12LI_0^2+\\frac{Q_0^2}{2C}$: the capacitive term $\\frac12Q^2/C$ is the two-conductor electrostatic energy of [[pthm-em-capacitance-energy]] and the inductive term $\\frac12LI^2$ is that of [[pthm-em-inductor-energy]], so in the lossless loop the total stored bookkeeping energy is conserved.\n\n(c) [Scope] both statements are consequences of the expressly adopted circuit reduction, with the sign conventions and relations of [[post-em-circuit-approximation]]; they assert no general network completeness, no derivation from the full time-dependent Maxwell system, no radiation or distributed-element effect and no empirical claim.",
+        "strategy": "**Proof technique:** the published integrating-factor theorem for (a); an explicit complex-exponential candidate verified by differentiation and an energy-conservation comparison for (b).\n\n1.1 (a) With $p:=R/L$ constant and $q:=V/L$ continuous on $J$ ([[thm-algebra-of-continuous-functions]]), the integrating factor theorem [[thm-first-order-linear-ode-integrating-factor]] gives existence, uniqueness of the $C^1$ solution of the IVP in the sense of [[def-first-order-ode-initial-value-problem-and-solution]] and exactly the displayed formula. The power identity is the product rule ([[thm-algebra-of-derivatives]]) applied to $\\frac12LI^2$ together with the circuit equation.\n\n1.2 (b) The map $w$ is the restriction to the real interval $J$ of the entire function $z\\mapsto z_0\\exp(\\mathrm i\\Omega(z-t_0))$; the complex exponential is entire with derivative itself ([[thm-complex-exponential-is-entire-with-derivative-itself]]), the affine map is complex-linear, so the algebra and chain rules for complex derivatives ([[thm-algebra-of-complex-derivatives]], [[thm-chain-rule-for-complex-derivatives]]) give $w'=\\mathrm i\\Omega w$ and $w''=(\\mathrm i\\Omega)^2w=-\\Omega^2w$ on $J$; complex differentiability implies real differentiability with the complex-linear derivative ([[thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann]]) and the real chain rule ([[thm-chain-rule-for-total-derivatives]]) gives the corresponding real derivatives of the components. Taking real parts, $Q=\\operatorname{Re}w$ is $C^2$ with $Q'=\\operatorname{Re}w'$ and $Q''=\\operatorname{Re}w''=-\\Omega^2Q$, which is $LQ''+Q/C=0$ because $\\Omega^2=1/(LC)$; moreover $w(t_0)=Q_0-\\mathrm iI_0/\\Omega$ gives $Q(t_0)=Q_0$ and $Q'(t_0)=\\operatorname{Re}(\\mathrm i\\Omega z_0)=I_0$. Euler's formula ([[thm-eulers-formula]]) expands $\\exp(\\mathrm i\\Omega(t-t_0))=\\cos+\\mathrm i\\sin$ with the real power-series trigonometric functions, and the dictionary theorem [[thm-complex-trigonometric-hyperbolic-dictionary]] records that the complex trigonometric functions restrict to those real series, yielding the displayed cosine-sine form.\n\n1.3 (b) The energy identity is the product rule ([[thm-algebra-of-derivatives]]) applied to $E$: $E'=LQ'Q''+QQ'/C=Q'(LQ''+Q/C)=0$ by the equation of the previous step. Since $E$ is continuous on the interval $J$ with vanishing derivative at every interior point, [[cor-zero-derivative-implies-constant]] gives $E\\equiv E(t_0)=\\frac12LI_0^2+\\frac{Q_0^2}{2C}$. The electrostatic term is the two-conductor reading of [[pthm-em-capacitance-energy]](d) for the adopted capacitive branch and the inductive term is the bookkeeping energy of [[pthm-em-inductor-energy]](a); the signs and branch relations are those adopted in [[post-em-circuit-approximation]], so the verified equations are exactly the model equations. Countable Choice is inherited only through the [[pthm-em-capacitance-energy]] identification of clause (b); no stronger choice principle is used, and the complex-exponential and ODE suppliers are published mathematics.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "§7.5-7.6 printed pp. 225-234 (the RL rise $V=L\\,\\mathrm dI/\\mathrm dt+RI$, and the LCR circuit equation $V=IR+L\\,\\mathrm dI/\\mathrm dt+\\int I\\,\\mathrm dt/C$ with the ideal inductor and capacitor relations $V=L\\,\\mathrm dI/\\mathrm dt$, $V=q/C$ and resonance at $\\omega=1/\\sqrt{LC}$); read in the stamped 364-page course book."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "§7.2.3 printed pp. 310-317 (the battery-plus-RL circuit solution $I(t)=\\frac{\\mathcal E_0}{R}+k\\mathrm e^{-Rt/L}$ with time constant $\\tau=L/R$); read in the stamped 596-page scan."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "§4.1.3 printed pp. 74-77 (the resistance relation $\\mathcal E=IR$ as an additional material input, and the sliding-bar example solved with Ohm's law, $m\\ddot x=-B^2d^2\\dot x/R$); read in the retained complete text of the 236-page printing."
+            }
+          ]
+        },
+        "physical_scope": "Conditional dynamics of the adopted lumped circuit model: the unique C1 solution of the scalar RL initial value problem with continuous source voltage and its Ohmic power split, and the explicit C2 LC oscillation with conserved bookkeeping energy for L,C>0. The statements are confined to the declared lumped model, assume constant positive elements and fixed geometry, and exclude radiation, distributed and material-dispersive effects, general networks and any empirical claim.",
+        "inventory_expansion_required": false,
+        "dependency_level": 21
+      }
+    ]
+  },
+  {
+    "order": 340,
+    "id": "em-induction-and-circuit-limits-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Induction and circuit approximations — Examples",
+    "companion": "em-induction-and-circuit-limits",
+    "requires": [
+      "em-induction-and-circuit-limits"
+    ],
+    "items": [
+      {
+        "id": "texp-em-sliding-bar-emf",
+        "kind": "thought-experiment",
+        "domain": "physics",
+        "title": "Sliding bar on fixed rails: motional emf and mechanical-electrical power balance",
+        "reference": "core-conditional-proofs.md#K6",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-em-moving-circuit-geometry",
+          "def-em-fields",
+          "def-em-si-conventions",
+          "post-em-lorentz-coupling",
+          "pthm-em-motional-emf",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "thm-multidimensional-integral-properties",
+          "def-integral-over-a-measurable-set",
+          "def-countable-choice",
+          "def-em-lab-geometry"
+        ],
+        "dependency_roles": {
+          "def-em-moving-circuit-geometry": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "post-em-lorentz-coupling": "physical-assumption",
+          "pthm-em-motional-emf": "physical-result",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-multidimensional-integral-properties": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-em-lab-geometry": "formulation-prerequisite"
+        },
+        "statement": "Assume Countable Choice ($\\mathrm{AC}_\\omega$) where it is inherited from the transport supplier below. Idealised setup, all in the laboratory frame and units of [[def-em-lab-geometry]] and [[def-em-si-conventions]]. Fix $l>0$, $B_0\\ge0$, an interval $J$ and a $C^1$ function $x:J\\to[a_0,a_1]$ with $a_0<a_1$, $x(t)\\in(a_0,a_1)$ for all $t$ and $|x'(t)|<c$. Let the material circuit of [[def-em-moving-circuit-geometry]] be the rigid rectangular circuit whose two rails are the segments $\\{(s,\\pm l/2,0):s\\in[a_0,a_1]\\}$ at rest, whose left side is the fixed segment $\\{(a_0,w,0):|w|\\le l/2\\}$ at rest, and whose bar at time $t$ is the segment $\\{(x(t),w,0):|w|\\le l/2\\}$, moving with material velocity $v(t)=x'(t)e_1$ on the bar and zero elsewhere; the bar is rigid and slides on the rails without friction. The electromagnetic field is the declared external field $E=0$, $B=B_0e_3$ on $\\mathbb R^3$ (fields produced by the circuit itself are neglected); the bar is a straight homogeneous conductor of length $l$ and cross-section area $A>0$ carrying the lumped current $I(t)$ with uniform current density $J(t)=(I(t)/A)e_2$ on the bar; the rails and the closing side carry the same lumped current but have zero material velocity.\n\nThen, with the boundary orientation induced by the circuit's parametrisation (so that the enclosed normal is $e_3$ and the bar is traversed in the $+e_2$ direction):\n(a) [Motional emf] the flux is $\\Phi(t)=B_0\\,l\\,(x(t)-a_0)$ and the electromotive force of [[def-em-moving-circuit-geometry]] is\n$$\\mathrm{emf}(t)=-B_0\\,l\\,x'(t),$$\nso at speed $v=|x'|$ the magnitude is $|\\mathrm{emf}|=B_0lv$, with the sign fixed by the orientation and by the sign of $x'$\n(b) [Force on the bar] the total electromagnetic force on the bar, evaluated with the continuum force density of the adopted coupling [[post-em-lorentz-coupling]], is the absolutely convergent integral\n$$F(t)=\\int_{\\text{bar}}J(t)\\times B\\,d\\lambda_3=I(t)\\,l\\,e_2\\times B_0e_3=I(t)B_0l\\,e_1$$\n([[def-cross-product-in-r3]], [[def-euclidean-inner-product]], [[thm-multidimensional-integral-properties]], [[def-integral-over-a-measurable-set]]);\n(c) [Power balance] at every $t$, the mechanical power $F(t)\\cdot v(t)$ delivered by the field to the bar and the electrical power $\\mathrm{emf}(t)I(t)$ delivered by the emf to the circuit satisfy the exact identity\n$$F(t)\\cdot v(t)+\\mathrm{emf}(t)\\,I(t)=I(t)B_0lv(t)-B_0lv(t)I(t)=0 ;$$\nin the ideal model the device converts between mechanical and electrical power with no dissipation and no radiation.\n(d) [Scope] a hypothetical idealised computation under the stated assumptions, with no measurement: the motion $x$ is prescribed (no bar dynamics is derived), self-fields, radiation, friction, contact resistance, conductor deformation and any material constitutive law beyond the ideal conductor are neglected, and the model is exactly the one stated; it is not asserted that a physical apparatus realises these idealisations.",
+        "strategy": "**Verification.** (a) The frozen rectangular circuit is a $C^2$ moving patch $r(u,w,t)=(a_0+u(x(t)-a_0),\\,(w-\\tfrac12)l,\\,0)$ over the unit square with $r_u\\times r_w=l(x(t)-a_0)e_3\\ne0$, and the material velocity is the single-valued $C^1$ field $v=x'e_1$ on the bar and $0$ on the other sides; the field $B=B_0e_3$ is constant, hence $C^\\infty$ with $\\operatorname{div}B=0$, so [[pthm-em-motional-emf]] applies on $J$ and gives $\\mathrm{emf}=-\\Phi'$; the direct computation $\\Phi(t)=\\int_DB\\cdot(r_u\\times r_w)=B_0l(x(t)-a_0)$ and $\\Phi'=B_0lx'$ gives the displayed value. Equivalently, only the bar contributes to the line integral because $v=0$ elsewhere and $E=0$: $\\oint(v\\times B)\\cdot d\\mathbf r=\\int_{\\text{bar}}(x'e_1\\times B_0e_3)\\cdot e_2\\,dw=-B_0lx'l$. (b) On the bar $J=(I/A)e_2$ and $B=B_0e_3$ are constant, so by linearity of the multidimensional Riemann integral ([[thm-multidimensional-integral-properties]], [[def-integral-over-a-measurable-set]]) $F=\\int_{\\text{bar}}J\\times B\\,d\\lambda_3=(I/A)B_0e_1\\cdot Al=I B_0l e_1$ ([[def-cross-product-in-r3]]). (c) Substitute $v=x'e_1$ and the two results: $F\\cdot v=IB_0lx'$ and $\\mathrm{emf}\\,I=-B_0lx'I$, whose sum vanishes identically; this is the ideal mechanical-electrical power balance (compare the generator discussion of the cited treatments). No energy storage, dissipation or radiation is present in the declared model, and the identity is conditional on the adopted force density [[post-em-lorentz-coupling]]. Countable Choice is inherited from the transport supplier; the force integral is finite and explicit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "§7.1.3 printed pp. 294-296 (the primitive generator: a loop pulled at speed v through a uniform field, emf $=vBh$, the flux rule $\\mathcal E=-\\mathrm d\\Phi/\\mathrm dt$ for motional emf, and the work/power discussion showing that the person pulling the loop supplies the energy dissipated in the resistor while magnetic forces do no work); read in the stamped 596-page scan."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "§4.1.1 and §4.1.3 printed pp. 69-77 (the sliding bar: $\\mathcal E=vBd$, the Lorentz force $F=IBd\\hat x$ on the bar, and the coupled motion $m\\ddot x=IBd$ with $I=\\mathcal E/R$); read in the retained complete text of the 236-page printing."
+            }
+          ]
+        },
+        "physical_scope": "An idealised rigid rectangular circuit with a frictionless sliding bar in a uniform static magnetic field and no external electric field: the motional emf $|\\mathrm{emf}|=B_0lv$ with its orientation-determined sign, the Lorentz force $I l B_0$ on the bar under the adopted continuum coupling, and the exact ideal power balance between mechanical and electrical power. It is a hypothetical conditional computation with prescribed motion, no measurement, and no claim about friction, radiation, self-fields or deformation.",
+        "inventory_expansion_required": false,
+        "dependency_level": 19
+      },
+      {
+        "id": "ex-em-transformer-idealization",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Two-circuit mutual inductance, the perfect-linkage bound and ideal-transformer limitations",
+        "reference": "worked-example-verifications.md#X5",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "post-em-circuit-approximation",
+          "pthm-em-inductance-reciprocity",
+          "pthm-em-inductor-energy",
+          "def-em-steady-current-regime",
+          "def-em-si-conventions",
+          "thm-algebra-of-derivatives",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-em-circuit-approximation": "physical-assumption",
+          "pthm-em-inductance-reciprocity": "physical-result",
+          "pthm-em-inductor-energy": "physical-result",
+          "def-em-steady-current-regime": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "statement": "Assume the lumped circuit model of [[post-em-circuit-approximation]] with the units of [[def-em-si-conventions]], and let $L=\\begin{pmatrix}L_1&M\\\\M&L_2\\end{pmatrix}$ be a constant symmetric block of its inductance matrix with $L_1,L_2>0$. Let $I_1,I_2:J\\to\\mathbb R$ be $C^1$ currents on an interval $J$ with terminal voltages $V_\\alpha=\\sum_\\beta L_{\\alpha\\beta}\\dot I_\\beta$. Assume Countable Choice ($\\mathrm{AC}_\\omega$, [[def-countable-choice]]) for the realization and bounded-linking clauses (b), where it is inherited from the linkage and energy suppliers.\n\n(a) [Energy and instantaneous power] the stored inductive bookkeeping energy is\n$$W(t)=\\tfrac12L_1I_1(t)^2+\\tfrac12L_2I_2(t)^2+MI_1(t)I_2(t),$$\nand $V_1I_1+V_2I_2=\\dot W$ by part (a) of [[pthm-em-inductor-energy]]; the mutual term increases the energy for currents of the same sign and decreases it for opposite signs (as the sign of the product $I_1I_2$ indicates when $M>0$).\n\n(b) [Perfect linkage and the bound] if the two currents are realised by fixed compact smooth conserved profiles of the class of [[def-em-steady-current-regime]](b) with linkage matrix $L$ as in [[pthm-em-inductance-reciprocity]], then $W(t)\\ge0$ for all currents, and evaluating the quadratic form on $(\\sqrt{L_2},-\\sqrt{L_1})$ gives the bound\n$$|M|\\le\\sqrt{L_1L_2};$$\nmoreover if $M^2=L_1L_2$ (perfect linkage) then the null direction $I=(\\sqrt{L_2},-\\sqrt{L_1})$ has $J_I=0$ pointwise by the vanishing clause of [[pthm-em-inductance-reciprocity]](c).\n\n(c) [Ideal common-flux model] if $M=\\sqrt{L_1L_2}$, choose any $\\Lambda>0$ and set $N_1:=\\sqrt{L_1/\\Lambda}$, $N_2:=\\sqrt{L_2/\\Lambda}$; then $L_1=\\Lambda N_1^2$, $L_2=\\Lambda N_2^2$ and $M=\\Lambda N_1N_2$. Writing $\\Phi_c:=\\Lambda(N_1I_1+N_2I_2)$ for the common flux linkage, the terminal voltages are\n$$V_1=N_1\\dot\\Phi_c,\\qquad V_2=N_2\\dot\\Phi_c,\\qquad\\text{i.e.}\\qquad \\frac{V_1}{N_1}=\\frac{V_2}{N_2}=\\dot\\Phi_c,$$\nand the stored energy is $W=\\Phi_c^2/(2\\Lambda)$; equivalently the induced emfs $e_\\alpha:=-V_\\alpha$ satisfy $e_1/N_1=e_2/N_2=-\\dot\\Phi_c$. This is the explicitly adopted common-linkage ('ideal transformer') model with turns ratio $N_1:N_2$.\n\n(d) [Limitations] if the linkage is imperfect then $|M|<\\sqrt{L_1L_2}$ and the exact voltage-ratio relations fail; winding resistance, hysteresis and core loss, stray capacitance, magnetising current and finite permeability are outside the declared model and are not inferred from it. No measurement is involved; the statements are conditional computations in the ideal model.",
+        "strategy": "**Verification.** (a) is the two-dimensional instance of the quadratic form and power identity of [[pthm-em-inductor-energy]](a), together with the product rule ([[thm-algebra-of-derivatives]]). (b) is [[pthm-em-inductance-reciprocity]](c) applied to the two profiles: $W(t)=\\frac12\\sum_{\\alpha\\beta}L_{\\alpha\\beta}I_\\alpha I_\\beta\\ge0$, and substituting $I=(\\sqrt{L_2},-\\sqrt{L_1})$ gives $W=\\frac12L_1L_2+\\frac12L_2L_1-M\\sqrt{L_1L_2}=L_1L_2-M\\sqrt{L_1L_2}\\ge0$, i.e. $M\\le\\sqrt{L_1L_2}$; substituting the opposite sign gives the lower bound, hence $|M|\\le\\sqrt{L_1L_2}$. If $M^2=L_1L_2$ then that substitution yields $W=0$, so the associated current $J_I$ vanishes pointwise by the vanishing clause of the same theorem. (c) With $N_1,N_2,\\Lambda$ as defined, $L_1=\\Lambda N_1^2$ and $L_2=\\Lambda N_2^2$ by construction and $M=\\Lambda N_1N_2$ because $\\sqrt{\\Lambda N_1^2\\cdot\\Lambda N_2^2}=\\Lambda N_1N_2$; hence $V_1=L_1\\dot I_1+M\\dot I_2=\\Lambda N_1(N_1\\dot I_1+N_2\\dot I_2)=N_1\\dot\\Phi_c$ and likewise $V_2=N_2\\dot\\Phi_c$, while $W=\\frac12\\Lambda(N_1I_1+N_2I_2)^2=\\Phi_c^2/(2\\Lambda)$ by direct expansion. The sign convention is the terminal-voltage convention of [[post-em-circuit-approximation]]; the physically induced emfs are the negatives, as in the moving-loop result, which is why the stated ratios carry the common minus sign. (d) records the model boundaries; the example asserts nothing about a physical transformer and involves no measurement. Countable Choice is used only through the realization clauses (b) and is inherited from [[pthm-em-inductance-reciprocity]] and [[pthm-em-inductor-energy]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "§7.4 printed pp. 222-225 (the two-solenoid mutual inductance $M=\\mu_0N_1N_2\\pi r^2l$, $M=\\sqrt{L_1L_2}$ under perfect linkage and the warning that flux leakage reduces $M$); read in the stamped 364-page course book."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "§7.2.3 printed pp. 310-317 (reciprocity $M_{21}=M_{12}$ and the Neumann formula; Problem 7.20, where the equality of the two mutual inductances is confirmed); read in the stamped 596-page scan."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "§4.1.2 printed pp. 71-73 (inductance and the magnetostatic energy of a coil, used to identify the mutual term in the stored energy); read in the retained complete text of the 236-page printing."
+            }
+          ]
+        },
+        "physical_scope": "A conditional two-circuit computation in the adopted lumped model: the quadratic stored energy with its mutual term, the realisation bound $|M|\\le\\sqrt{L_1L_2}$ and the vanishing of the associated current in the perfect-linkage null direction, and the explicitly adopted common-flux ideal-transformer relations with turns ratio $N_1:N_2$. It excludes leakage, winding resistance, core loss, stray capacitance, magnetising current and finite permeability, and involves no measurement.",
+        "inventory_expansion_required": false,
+        "dependency_level": 21
+      },
+      {
+        "id": "ex-em-rl-time-response",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Exponential RL response under a constant terminal voltage",
+        "reference": "worked-example-verifications.md#X5",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "pthm-em-rl-lc-dynamics",
+          "def-em-si-conventions",
+          "thm-derivative-of-exponential",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "pthm-em-rl-lc-dynamics": "physical-result",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "statement": "In the RL branch of [[pthm-em-rl-lc-dynamics]] with the declared units of [[def-em-si-conventions]], let the source voltage be the constant $V_0\\in\\mathbb R$, let $R>0$ and $L>0$, and let $t_0\\in J$ and $I_0\\in\\mathbb R$. Then the unique $C^1$ solution of $L\\dot I+RI=V_0$, $I(t_0)=I_0$, is\n$$I(t)=\\frac{V_0}{R}+\\Bigl(I_0-\\frac{V_0}{R}\\Bigr)\\exp\\!\\Bigl(-\\frac{R(t-t_0)}{L}\\Bigr),\\qquad t\\in J .$$\nIn particular the deviation decays exponentially, $|I(t)-V_0/R|=|I_0-V_0/R|\\exp(-R(t-t_0)/L)$, with time constant $\\tau=L/R$, and if $J$ is unbounded above then $I(t)\\to V_0/R$ as $t\\to+\\infty$; $I\\equiv V_0/R$ is the unique stationary solution; and the transient part is the free decay $\\exp(-R(t-t_0)/L)$ of the initial deviation $I_0-V_0/R$. The computation is conditional on the adopted lumped model, constant elements and fixed geometry; no measurement is involved.",
+        "strategy": "**Verification.** The function $t\\mapsto\\exp(-R(t-t_0)/L)$ is differentiable with derivative $-(R/L)\\exp(-R(t-t_0)/L)$ by the chain rule for the affine substitution in the real exponential ([[thm-derivative-of-exponential]], [[thm-algebra-of-derivatives]]). Substituting the displayed $I$ gives $\\dot I=-(R/L)(I_0-V_0/R)\\exp(-R(t-t_0)/L)$, hence $L\\dot I+RI=V_0$ identically, and $I(t_0)=V_0/R+(I_0-V_0/R)=I_0$. Uniqueness of this solution within the RL theorem [[pthm-em-rl-lc-dynamics]](a) is inherited from the published integrating-factor theorem; the limit statement is the elementary fact that the exponential term tends to $0$ as $(t-t_0)\\to+\\infty$ and the special case $I_0=V_0/R$ is constant. No claim beyond the ideal model is made.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "§7.2.3 printed pp. 310-317 (the battery-plus-RL circuit: $I(t)=\\frac{\\mathcal E_0}{R}+k\\mathrm e^{-Rt/L}$, the initial condition $I(0)=0$ giving $k=-\\mathcal E_0/R$, and the time constant $\\tau=L/R$); read in the stamped 596-page scan."
+            },
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "§7.5 printed pp. 225-231 (the RL circuit equation $V=L\\,\\mathrm dI/\\mathrm dt+RI$ and its exponential approach to the steady current); read in the stamped 364-page course book."
+            }
+          ]
+        },
+        "physical_scope": "The exponential transient of the scalar RL circuit of the adopted lumped model under a constant source voltage and constant positive L and R, with time constant L/R. It carries the model's idealisations (fixed geometry, ideal elements, no radiation or distributed effects) and contains no measurement or empirical claim.",
+        "inventory_expansion_required": false,
+        "dependency_level": 22
+      }
+    ]
+  }
+]

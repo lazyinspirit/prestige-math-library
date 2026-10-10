@@ -1,0 +1,129 @@
+# Step 3b pair report — `sr-causality-and-signals` / `sr-causality-and-signals-examples`
+
+- Run: `physics-em-sr-40-2026-10-08` · role: alpha-high (Step 3b scaffold auditor and item author) · batch 5 (the only pair in the batch)
+- Pair: A `sr-causality-and-signals` (order 217) / B `sr-causality-and-signals-examples` (order 218), category `special-relativity`, library `physics`
+- Dispatch lineage (from the run state/events): `step3b-pair-sr-causality-and-signals-4ba8d61457303c91` (06:43:40Z, wrote the first draft of the carriers; no recorded completion) → `step3b-pair-sr-causality-and-signals-1ca4abc4de3ea38a` (07:22:53Z–07:40:01Z, exit 1 before handoff; audited, repaired one item, recorded first decisions at 07:36Z, refreshed the cross-batch rows and contracts) → `step3b-pair-sr-causality-and-signals-f1bcedb34be8bcc2` attempts 1–2 (instant dispatch failures 07:40–07:41Z) → attempt 3 (this handoff, from 07:46:31Z).
+- Owned inputs: `research/physics-em-sr-40-2026-10-08-batch-5.pages.json`, `...-batch-5.coverage.json`, `...-batch-5.notes.md`, `...-batch-5.cross-batch-dependencies.json`, `...-batch-5.proof-contracts.json`
+- Owned outputs: 16 item files, 2 library pages, the batch-5 proof contracts, Step 3b item decisions, this report. No carrier text was edited in the f1bcedb34be8bcc2 attempt; the only carrier edit of the whole dispatch is the earlier wave's repair of `lem-sr-spacelike-pairs-have-frame-dependent-time-order` (step 5.2 sign labels, re-verified below).
+
+## Owned item IDs and handoff status
+
+Order: ascending `dependency_level`, ties by page order and item ID (the dispatch order).
+
+| # | Level | Item | Page | Kind/domain | Decision at handoff |
+|---|---|---|---|---|---|
+| 1 | 8 | `def-sr-causal-reachability-in-affine-minkowski-space` | A | definition / mathematics | accept (current, 07:55:01Z) |
+| 2 | 8 | `lem-sr-spacelike-pairs-have-frame-dependent-time-order` | A | lemma / mathematics | repaired (sign-label repair of the earlier wave re-verified; current, 08:01:53Z) |
+| 3 | 9 | `lem-sr-future-causal-sums-and-inertial-coordinate-criterion` | A | lemma / mathematics | accept (current, 07:55:03Z) |
+| 4 | 9 | `post-sr-causal-signal-propagation` | A | postulate / physics | accept (current, 07:55:04Z) |
+| 5 | 9 | `ex-sr-boost-makes-spacelike-events-simultaneous` | B | example / mathematics | accept (current, 08:01:54Z) |
+| 6 | 10 | `ex-sr-antitelephone-relay-arrival-time` | B | example / mathematics | accept (current, 08:01:55Z) |
+| 7 | 10 | `ex-sr-causal-classification-of-explicit-displacements` | B | example / mathematics | accept (current, 07:55:07Z) |
+| 8 | 10 | `ex-sr-causal-diamond-in-one-plus-one` | B | example / mathematics | accept (current, 08:01:55Z) |
+| 9 | 10 | `ex-sr-parallel-null-displacements-compose-to-null` | B | example / mathematics | accept (current, 07:55:09Z) |
+| 10 | 10 | `ex-sr-superluminal-sweep-has-no-causal-connection` | B | example / mathematics | accept (current, 08:01:56Z) |
+| 11 | 11 | `thm-sr-future-cone-and-flat-domain-of-dependence` | A | theorem / mathematics | **escalate (owner-held)** — originally recorded 07:36:34Z; supplier now authored and the exact use reconciled; the decision tool reserves escalation resolution to the owner |
+| 12 | 12 | `pthm-sr-causal-signal-order-and-composition` | A | physics-theorem / physics | **escalate (owner-held)** — originally recorded 07:36:35Z; same owner action |
+| 13 | 12 | `cex-sr-null-separated-events-are-not-timelike-joinable` | B | counterexample / mathematics | accept (current, 07:59:46Z) |
+| 14 | 12 | `cex-sr-spacelike-time-order-is-not-absolute` | B | counterexample / mathematics | accept (current, 07:59:47Z) |
+| 15 | 12 | `ex-sr-null-legs-compose-to-a-timelike-displacement` | B | example / mathematics | accept (current, 07:59:48Z) |
+| 16 | 13 | `texp-sr-superluminal-relay-antitelephone` | A | thought-experiment / physics | **escalate (owner-held)** — originally recorded 07:36:39Z; same owner action |
+
+Manifest and frontmatter agree for all 16 items on kind, domain, deps, dependency roles, `dependency_level` and provenance; `node tools/physics-support/item-dependency-levels.mjs check --run physics-em-sr-40-2026-10-08` reports no error for any of the 473 run items (maximum level 24).
+
+## Independent audit performed in this attempt
+
+All 16 carriers were read end to end on current bytes, together with the exact suppliers used, and every load-bearing computation was re-derived. No mathematical defect requiring a carrier edit was found. Item-level evidence:
+
+1. `def-sr-causal-reachability-in-affine-minkowski-space` — the closed cones `Cbar^± = C^± ∪ N^± ∪ {0}`, the relations `≤`, `<`, the sets `J^±/I^±` (translations of the cones), causal diamonds, the piecewise `C¹` future-causal path class (one-sided difference-quotient tangents) and `R⁺` all check against `def-time-orientation-and-future-causal-sets`, `lem-timelike-cone-has-two-convex-components`, `def-causal-classification-of-lorentz-vectors`, `def-sr-regular-causal-curve-and-worldline`, `def-interval`. Clause (e) asserts no property of the relations and defers every property to later items; no choice.
+2. `lem-sr-spacelike-pairs-have-frame-dependent-time-order` — independent re-derivation of (a)–(e): `|D⁰|<|D_s|` from `η(D,D)>0`; the boost family `e'_a = B(be)⁻¹e_a`, `x_b = B(be)∘x`, `x_b⁰(q)−x_b⁰(p)=γ_b(D⁰−b|D_s|)`; the repaired step 5.2 now defines `b_+:=(c−1)/2`, `b_-:=(c+1)/2` so that `c−b_+=(c+1)/2>0>c−b_-=(c−1)/2` matches the displayed signs; both parameters lie in (−1,1). Scope (e) explicitly asserts no synchronization procedure.
+3. `lem-sr-future-causal-sums-and-inertial-coordinate-criterion` — (a) `C⁺=T₊`, `Cbar⁺={v⁰≥|v_s|}` and the past descriptions; nonzero `v∈Cbar⁺` has `v⁰>0` and `|v_s|≤v⁰`; future null iff `|v_s|=v⁰>0`. (b) finite sums by the triangle inequality, strict timelike case, and `v+w=0 ⇒ v=w=0`; induction on `k` uses no choice. (c) the coordinate criterion in the chart of any inertial frame.
+4. `post-sr-causal-signal-propagation` — nonproof class: the adopted restriction (i), ideal-light boundary case (ii) (whose coordinate content `v⁰=|v_vec|>0` is carried by the declared supplier `post-sr-ideal-clocks-and-light` (ii)), status (iii), explicit non-restriction of prearranged patterns (iv), scope (v). Sources are recorded with honest status: Crowell §4.7.1 is a defense-in-depth sketch, Crowell P1 is explicitly not re-minted, Tolman §§51–52 is one-way older-notation motivation; `provenance.proof: not-applicable`; `physics_review` present in the contracts.
+5. `ex-sr-boost-makes-spacelike-events-simultaneous` — `D=(11,13,0,0)`, `η=48>0`; time differences 0 at `b=11/13`, `+4` at `b=3/5`, `−13/5` at `b=12/13`; boosted spatial differences `√48`, `8`, `37/5` all exceed the time differences; boosts are proper orthochronous and preserve spacelike character.
+6. `ex-sr-antitelephone-relay-arrival-time` — recomputed all arithmetic: `t(B₁)=10/(11c)`, `x¹(B₁)=20/11 m`, `η=300/121>0`; `β=9/10`, `γ=10/√19`; `Δt' = x¹(B₁)/(γ(u−v))>0`; `Δt = x¹(B₁)(1−vu/c²)/(u−v) = −160/(121c)`; `t(A₁) = −50/(121c) = L(2u−v−vu²/c²)/(u−v)²`; the general closed formula was re-derived symbolically; `A₁−A₀` past timelike, return displacement spacelike.
+7. `ex-sr-causal-classification-of-explicit-displacements` — all five displacements re-checked exactly: `(5,3,0,0)` future timelike in `I⁺(p)`; `(5,5,0,0)` future null in `J⁺(p)∖I⁺(p)`; `(5,7,0,0)` spacelike with both criteria failing; `(5,−3,0,0)` future timelike and its companion `(−5,3,0,0)` past timelike in `I⁻(p)`.
+8. `ex-sr-causal-diamond-in-one-plus-one` — the diamond description `|u_s|≤u⁰≤2−|u_s|` and interior `I⁺(p)∩I⁻(q)`; the 1+1 square with vertices `(0,0),(1,1),(2,0),(1,−1)`, both diagonals of interval norm 2 m and area 2 m²; boost-block determinant `γ²(1−b²)=1` and image area `2|det(a,c)|=2 m²` with `a=γ(1,−b)`, `c=γ(−b,1)`; clause (d) keeps the area coordinate-theoretic and refuses a clock-reading identification.
+9. `ex-sr-parallel-null-displacements-compose-to-null` — `v=(1,1,0,0)`, `w=2v` future null; sum `(3,3,0,0)` future null with `q∈J⁺(p)∖I⁺(p)`; the full characterization required by the owner direction was verified line by line: for future causal `u=(a,p)`, `z=(b,q)` with null sum, `a+b=|p+q|≤|p|+|q|≤a+b` forces equality, hence `p·q=|p||q|` and `q=(b/a)p` (positive definiteness), so `z=(b/a)u` with `b/a>0`, and conversely positive multiples preserve nullness.
+10. `ex-sr-superluminal-sweep-has-no-causal-connection` — interval `(η−ξ)²(1−c²/w²)>0` for `w>c`; the boost `b=c/w` freezes the whole family and `b'>c/w` reverses the order while every pair stays spacelike; the example asserts no signal content.
+11. `thm-sr-future-cone-and-flat-domain-of-dependence` — (a) displacement of a piecewise `C¹` future-causal path via the weak-piecewise integrability supplier, with the strict timelike-tangent case; (b) `J⁺=R⁺` and the straight-segment characterizations including the `q=p` case; (c) antisymmetry/no nonconstant closed future-causal path; (d) time monotonicity; (e) the straight-worldline proper-time maximum `c⁻¹Σ∫√(−η(y',y')) ≤ T/c` with the equality case (`z₁'≡0`, strictly increasing reparametrization); (f) invariance under proper orthochronous affine Lorentz maps; (g) scope (no PDE claims, no choice). The cited supplier facts [L1]–[L11] match `lem-sr-weak-piecewise-causal-integrability`, `def-sr-piecewise-proper-time`, `def-sr-proper-time` and the calculus imports on current bytes; fact [L8] cites the by-now-authored `thm-sr-proper-orthochronous-lorentz-algebra` (see reconciliation below).
+12. `pthm-sr-causal-signal-order-and-composition` — clauses (i)–(vi): receipt in `J⁺` with `x⁰(q)>x⁰(p)` and the cone inequality in every inertial chart; relay composition with the strict case; no closed signal loop via antisymmetry; frame independence of signal reachability; spacelike pairs admit no signal although their time order is frame dependent; scope and no choice. Clause (v)'s converse was checked: observer-independent order with the emission earlier forces the displacement to be nonzero causal, and the earlier endpoint forces the future direction.
+13. `cex-sr-null-separated-events-are-not-timelike-joinable` — refutes exactly the displayed implication `q∈J⁺(p) ⇒ q∈I⁺(p)`; `D=(3,3,0,0)` future null; a future timelike worldline would force `D∈C⁺` by the theorem's clause (a), contradicting `η(D,D)=0`.
+14. `cex-sr-spacelike-time-order-is-not-absolute` — refutes exactly frame independence of the sign of the time difference; the two boost charts give `+4` and `−13/5` for the same spacelike pair; the contrast for causal pairs is correctly flagged as not part of the refutation.
+15. `ex-sr-null-legs-compose-to-a-timelike-displacement` — the two-leg path has future null tangents `(1,1,0,0)`, `(1,0,1,0)`, is continuous at `s=1`, and has total displacement `(2,1,1,0)` with `η=−2<0` and `2>√2`; the example correctly reads the theorem's strict clause as an implication, not an equivalence.
+16. `texp-sr-superluminal-relay-antitelephone` — re-derived (a)–(e): the relay model S1–S4 with `v>2u/(1+u²/c²)` (possible since `2u/(1+u²/c²)<c` for `u>c`); the two legs, `Δt<0 ⇔ v>c²/u` (implied by the hypothesis); the arrival `t(A₁)=L(2u−v−vu²/c²)/(u−v)²<0`; `A₁` in the strict past of `A₀`; incompatibility with the causal signal restriction (nonempty intersection of `Cbar⁺` and `Cbar⁻` argument); all availability and non-observation qualifications stated; no choice.
+
+Suppliers read at statement level (current bytes) for these checks include: `def-sr-affine-minkowski-model`, `def-time-orientation-and-future-causal-sets`, `def-causal-classification-of-lorentz-vectors`, `lem-timelike-cone-has-two-convex-components`, `def-sr-regular-causal-curve-and-worldline`, `def-inertial-frame-and-inertial-chart`, `def-spatial-euclidean-structure-of-an-inertial-frame`, `def-interval`, `def-lorentz-boost`, `lem-boost-is-proper-orthochronous-with-inverse`, `lem-lorentz-map-preserves-metric-and-causal-structure`, `def-lorentz-map-and-lorentz-group`, `def-sr-proper-time`, `def-sr-piecewise-proper-time`, `lem-sr-weak-piecewise-causal-integrability`, `pthm-sr-interval-and-cone-invariance`, `post-sr-ideal-clocks-and-light`, and `thm-sr-proper-orthochronous-lorentz-algebra`. Every cited claim, direction of inequality and hypothesis was matched to the supplier text; no mismatch was found.
+
+Candidate concerns considered and dismissed during the audit: (i) `post-sr-causal-signal-propagation` (ii) states the ideal-light coordinate equality; this is the content of its declared supplier `post-sr-ideal-clocks-and-light` (ii) (`v⁰=|v_vec|>0`), so no undeclared mathematical premise is loaded; (ii) `pthm-sr-causal-signal-order-and-composition` step 2.4 says "classification clauses of [L6]" while the trichotomy itself is `def-causal-classification-of-lorentz-vectors`, which fact [L6] also names in its citation group; the declared dependency and the use agree, so no edit was made.
+
+## Supplier reconciliation (the flagged unfinished supplier)
+
+`thm-sr-proper-orthochronous-lorentz-algebra` (batch 2, `sr-lorentz-transformations`) was the pair's one unauthored transitive supplier. Its carrier appeared on disk during this dispatch (`items/thm-sr-proper-orthochronous-lorentz-algebra.md`, mtime 2026-10-09 18:57:31 +1100). It was read provisionally as a sibling carrier; its Statement clause (iv) — "Every `L∈SO⁺(V,η)` preserves the interval `η(v,v)`, the causal classification of every nonzero vector, the future and past closed cones, the orientation, and the oriented volume form" — matches every cited use:
+
+- `thm-sr-future-cone-and-flat-domain-of-dependence`, fact [L8], cited in steps **3.2, 3.3, 4.1** (norm/causal-character/cone/orientation preservation used in the boost normalization and in clause (f)).
+- `pthm-sr-causal-signal-order-and-composition`, fact [L6], cited in steps **2.3, 2.4, 3.1** (chart independence of the causal classification and of the future/past alternative).
+- `texp-sr-superluminal-relay-antitelephone`, fact [L6], cited in step **4.1** (interval/causal-character invariance and closed-cone preservation for the return leg).
+
+The exact citation contracts (quote of clause (iv) with `source_section: Statement` and the complete citing-step lists) were added to `research/physics-em-sr-40-2026-10-08-batch-5.proof-contracts.json`; `proof-contract --strict` on the batch now reports **0 errors** (previously 3 `citation-fact-uncontracted` errors). The separately authored `pthm-sr-interval-and-cone-invariance` was also read: its clause (ii) supplies the chart independence statements that fact [L6] attributes to it, and its clause (i) the interval invariance — consistent with the uses.
+
+Decision status of the three consumers: the earlier wave recorded `escalate` receipts at 07:36Z while the supplier was unauthored. The decision tool (`step3-decisions.mjs`) reserves escalation resolution to the owner and refuses non-owner re-recording over an escalation, so the current status is the owner-held escalation ("changed inputs require a current owner decision"). With the supplier now authored, its exact use reconciled, the citation contracts recorded and the batch strict-contract gate green, the owner's remaining action on these three items is to record the post-reconciliation decision (or re-dispatch under the failed-gate policy). This report does not claim a closed decision for them.
+
+Cross-group note (routed, not this pair's write scope): the same supplier is also cited by `thm-sr-antisymmetric-observer-decomposition` (batch 23) and `ex-sr-perfect-fluid-rest-and-moving-frame`; their owners reconcile those uses. A depcheck finding on the new supplier itself is routed in "Sibling and run-level observations" below.
+
+## `sr-observer-measurements` inspection (dispatch directive)
+
+Re-checked at 19:0x local: the supplier page carrier `library/special-relativity/sr-observer-measurements.md` and its `-examples` companion still do not exist; 13/15 of the A-page items and 4/10 of the examples-companion items are authored. The edge is the A page's page-level `requires` prerequisite only — **no item of this pair consumes any batch-4 item** (checked against the manifest and the item files). `validate-plan` shows the declared order (`sr-observer-measurements` 215 < `sr-causality-and-signals` 217) and no ordering violation for this pair. The batch-5 cross-batch row for this edge remains `open` with refreshed evidence; it is not a blocker for the pair's own items.
+
+## Cross-batch rows
+
+`research/physics-em-sr-40-2026-10-08-batch-5.cross-batch-dependencies.json` now holds **104 rows: 103 `verified`, 1 `open`** (the `sr-observer-measurements` page edge above). In this attempt the three supplier rows for `thm-sr-proper-orthochronous-lorentz-algebra` were re-checked and changed from `open` to `verified`, each with the exact consumer fact, citing steps, the supplier clause read and the contract action taken. `frontier-dependency-ledger.mjs refresh --run physics-em-sr-40-2026-10-08` completes with no orphaned reviews for batch 5; the run-wide `--require-reviewed` flag is red only because other batches have not yet filed inputs (no batch-5 row is implicated).
+
+## Contract repairs performed in this attempt
+
+`boundary-audit --fail-on-contradicted --fail-on-template` previously failed on the batch: 5 template clusters (21 `not_applicable`/`checked` rows sharing text across items) and 4 contradicted candidates. Repairs, all in the batch-5 contract file only:
+
+- 21 template-cluster rows were replaced with item-specific dispositions (the `[one]` rows of the examples/pthm/texp; the `[empty]` rows of ex-boost/ex-antitelephone/ex-causal-classification/cex-null/cex-spacelike/ex-causal-diamond/pthm/texp; the `[one]` rows of ex-boost/ex-causal-classification/ex-causal-diamond; the `[endpoints]` rows of ex-parallel-null/cex-null/cex-spacelike), each naming the actual objects of that item.
+- Two `[endpoints]` rows were corrected from `not_applicable` to `checked` with step/statement-anchored evidence (`ex-sr-parallel-null-displacements-compose-to-null`, `cex-sr-null-separated-events-are-not-timelike-joinable`), because those items do use compact intervals with endpoint tangents.
+- Four sound-but-detector-inapplicable rows carry an item-specific `reviewed.upheld` record with a concrete reason: the definitional `iff` rows of `def-sr-causal-reachability-in-affine-minkowski-space` (both directions are the stipulations of (a)/(b); the substantive converse `R⁺=J⁺` is the theorem's clause (b)) and the `[empty]` rows of `lem-sr-spacelike-pairs-have-frame-dependent-time-order` and `texp-sr-superluminal-relay-antitelephone` (the detector fires on the word "family"; no index-set-indexed aggregate exists there).
+- Three exact citation contracts added for the reconciled supplier (see above).
+
+After the repairs: `boundary-audit` summary `{template_clusters: 0, contradicted_candidates: 0, upheld_by_review: 4}` (exit 0), `proof-contract --strict` 0 errors (1 advisory `shotgun-bracket` warning on item 2), `citation-fidelity --fail-on-missing-quote` exit 0, `finite-smoke` 0 errors.
+
+## Checks actually run (this attempt; exact results)
+
+| Check | Command | Result |
+|---|---|---|
+| precheck (16 items, explicit paths) | `node tools/tsx-run.mjs tools/physics-support/precheck.mts <16 items>` | `15 checked, 0 failing — all clean` (the postulate is a nonproof kind) |
+| proof layout (final, batched) | `node tools/physics-support/proof-layout.mjs <16 items>` | `16 items, 76 steps, 0 defects` |
+| rendering (18 files) | `node tools/physics-support/rendercheck.mjs <2 pages + 16 items>` | exit 0, all clean |
+| content policy | `node tools/physics-support/content-policy.mjs research/...-batch-5.pages.json` | `16 scoped item(s), 0 error(s), 0 warning(s)` |
+| manifest deps | `node tools/physics-support/manifest-deps.mjs research/...-batch-5.pages.json` | `16 item(s), 0 normalized, 0 error(s)` |
+| coverage | `node tools/physics-support/coverage-checklist.mjs research/...-batch-5.coverage.json --require-destination` | `1 page(s), 27 harvested result(s), 0 error(s), 0 warning(s)` |
+| strict proof contracts | `node tools/physics-support/proof-contract.mjs research/...-batch-5.proof-contracts.json --strict` | `0 error(s), 1 warning(s), 16/16 item(s) checked` |
+| boundary audit | `node tools/physics-support/boundary-audit.mjs research/...-batch-5.proof-contracts.json --fail-on-contradicted --fail-on-template --json` | exit 0; 0 template clusters, 0 contradicted, 4 upheld |
+| citation fidelity | `node tools/physics-support/citation-fidelity.mjs research/...-batch-5.proof-contracts.json --fail-on-missing-quote` | exit 0 |
+| finite smoke | `node tools/physics-support/finite-smoke.mjs research/...-batch-5.proof-contracts.json` | `0 error(s), 0 check(s) over 0/16 item(s) carrying obligations` |
+| risk report | `node tools/physics-support/risk-report.mjs research/...-batch-5.proof-contracts.json` | `0 error(s), 16 item(s) routed` |
+| dependency levels | `node tools/physics-support/item-dependency-levels.mjs check --run physics-em-sr-40-2026-10-08` | 473 items checked across 80 pages; no errors |
+| plan (frontier form) | `node tools/physics-support/frontier-item-gate.mjs --run ... --tool validate-plan` | no finding of any class for either page of this pair |
+| depcheck (frontier form) | same wrapper, `--tool depcheck` | no finding for any of the 16 items; run-wide reservations reported below |
+| fwdcheck (frontier form) | same wrapper, `--tool fwdcheck` | no finding for any of the 16 items |
+| Step 3 decisions | `node tools/physics-support/step3-decisions.mjs check --run ... --phase final` | 13/16 pair items closed (current receipts); 3 owner-held escalations listed above |
+| dependency ledger | `node tools/physics-support/frontier-dependency-ledger.mjs refresh --run ...` | refreshed and deduplicated; batch-5 input complete (103 verified / 1 open) |
+
+Decision-currency note: concurrent authoring in batches 1–4 changed bytes inside these items' transitive closures several times during this attempt (about 100 item files were modified run-wide between 18:50 and 19:01 local). Every receipt above was re-recorded against the bytes current at its `at` timestamp; if upstream bytes move again before the stage gate drains all writers, the three-day-old pattern repeats and the engine's post-drain recertification (or the failed-gate route) must re-record the affected receipts. No carrier text is involved in this churn.
+
+## Sibling and run-level observations (not this pair's blockers)
+
+- `items/thm-sr-proper-orthochronous-lorentz-algebra.md` (batch 2, the reconciled supplier): `depcheck` reports `[cited-not-in-deps] ... cites "def-lorentz-form-and-inertia" in Statement/Facts but it is not in deps`. Exact evidence: the item's Statement cites `[[def-lorentz-form-and-inertia]]` while its `deps` list omits it. Confidence: high (mechanical); required fix: add the dependency (and role/level) in batch 2's manifest and carrier. Routed to the `sr-lorentz-transformations` owner; not edited here.
+- `items/cex-sr-simultaneity-is-observer-dependent.md` and `items/cex-sr-uniform-low-speed-remainder-fails-near-light-speed.md` carry `[cited-not-in-deps]` findings (batches 4 and 6 respectively); routed to their owners.
+- Sibling `items/lem-sr-uniform-low-speed-taylor-remainder.md` (pair `sr-newtonian-bridge`): the earlier wave's run-wide rendercheck failure (5 errors) is **resolved**; the file now passes `rendercheck` clean. No action needed.
+- Run-wide `validate-plan` currently reports 42 `undeclared-prereq` and 33 `redundant-prereq` findings on EM pages (e.g. `em-elementary-mathematical-prerequisites`, `em-expanded-analysis-prerequisites`) and single findings on `sr-spacetime-primitives`/`sr-lorentz-transformations`; none on this pair's pages. These are pre-splice plan/manifest mismatches for Step 4 and the owning pairs, recorded here without hiding them.
+- Run-wide `fwdcheck` reports a `[page-link-unresolved]` wikilink `[[lem-em-spherical-mean-wave-identity]]` in `library/classical-electromagnetism-mathematics/em-wave-equation-prerequisites.md` (page prose cannot declare forward references), plus `focus-item-unknown` entries for planned-but-unauthored items — the normal mid-flight state; neither concerns this pair.
+- `finite-smoke` is vacuous over the whole run at this point (no batch contract carries a check the registry defines); `gate-liveness` therefore fails run-wide on that gate. No check in the registry applies to this pair's affine-Minkowski content, and no check was invented. Flagged for the owner's gate policy.
+
+## Open obligations and handoff
+
+- Completed: 16/16 assigned items authored and locally checked; both pages authored and registered; batch-5 manifest, coverage, contracts and cross-batch input complete and current; 13 of 16 item decisions recorded `accept`/`repaired` on current bytes; the other 3 are owner-held escalation receipts whose supplier, exact use and citation contract have now been reconciled.
+- Owner actions: (1) resolve the three escalation receipts (`thm-sr-future-cone-and-flat-domain-of-dependence`, `pthm-sr-causal-signal-order-and-composition`, `texp-sr-superluminal-relay-antitelephone`) now that `thm-sr-proper-orthochronous-lorentz-algebra` is authored and the use is contracted; (2) the page-carrier obligation for `sr-observer-measurements` (page-level only) remains with that pair's owner; (3) re-record any receipt the concurrent upstream authoring stales before the stage gate drains writers.
+- Added suppliers by this attempt: none (the supplier the pair needed was authored by its own batch-2 wave; only contracts/decisions/ledger rows were updated here). No published content, no imported mathematics, no item outside this pair was edited; no owner-only action was taken and no judge/audit stamp was added.

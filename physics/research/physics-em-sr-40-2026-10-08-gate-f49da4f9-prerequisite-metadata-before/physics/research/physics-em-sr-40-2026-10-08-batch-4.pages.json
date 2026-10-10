@@ -1,0 +1,1473 @@
+[
+  {
+    "order": 215,
+    "id": "sr-observer-measurements",
+    "kind": "A",
+    "category": "special-relativity",
+    "library": "physics",
+    "title": "Observer Measurements",
+    "companion": "sr-observer-measurements-examples",
+    "requires": [
+      "sr-worldlines-and-clocks",
+      "compactness-in-metric-spaces",
+      "connections-levi-civita-and-parallel-transport",
+      "euclidean-ordinary-differential-equations-with-smooth-dependence",
+      "geodesics-the-exponential-map-completeness-and-hopf-rinow",
+      "homotopy-and-homotopy-equivalence",
+      "line-integrals-and-the-gradient-theorem",
+      "picard-lindelof-and-first-order-odes",
+      "riemann-curvature-and-riemannian-submanifolds",
+      "the-de-rham-complex-homotopy-and-mayer-vietoris",
+      "the-exterior-derivative-and-cartan-calculus",
+      "the-fundamental-group",
+      "vector-fields-flows-and-lie-derivatives"
+    ],
+    "items": [
+      {
+        "id": "def-sr-chart-tetrad-and-congruence-distinction",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Charts, tetrads, observer congruences and adapted charts in affine Minkowski space",
+        "statement": "Work in the oriented time-oriented affine Minkowski space $(A,V,\\eta,C^+)$ ([[def-sr-affine-minkowski-model]]) with its inertial atlas ([[lem-affine-minkowski-charts-form-a-smooth-atlas]]) and the canonical identification of tangent spaces with $V$ ([[lem-tangent-space-of-affine-minkowski-space-is-v]]). The objects defined below are, in general, different objects, and the distinctions between them are part of the definition.\n\n**(a) Chart and inertial chart.** A **chart** of the model is a diffeomorphism $u:U\\to u(U)$ from a nonempty open subset $U\\subseteq A$ onto an open subset of $\\mathbb R^4$ ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]], [[def-smooth-manifold]]), written with components $(u^0,u^1,u^2,u^3)$. An **inertial chart** is the global chart $x(p)=E^{-1}(p-o)$ of an inertial frame $(o;e_0,e_1,e_2,e_3)$ ([[def-inertial-frame-and-inertial-chart]]). A general chart need not be inertial: if $x$ is an inertial chart and $N:x(U)\\to\\mathbb R^4$ is a diffeomorphism onto its image which is not the restriction of an affine map, then $u:=N\\circ x$ is a chart that is not inertial, because if $u$ were the inertial chart of a frame then $x\\circ u^{-1}=N^{-1}$ would be affine by [[lem-inertial-chart-transitions-are-affine-lorentz]] and hence $N=(N^{-1})^{-1}$ would be affine as the inverse of an affine bijection, a contradiction; the map $N(y)=(y^0,y^1+(y^0)^2,y^2,y^3)$ on $\\mathbb R^4$ is an explicit example.\n\n**(b) Tetrad at an event and tetrad field.** A **tetrad at $p\\in A$** is an ordered basis $(e_0,e_1,e_2,e_3)$ of $V$ with $\\eta(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ and $e_0$ future, $e_0\\in C^+$ ([[def-causal-classification-of-lorentz-vectors]], [[def-time-orientation-and-future-causal-sets]]): this is the basis of an inertial frame without an origin and without the orientation condition. A **tetrad field** on a nonempty open subset $\\Omega\\subseteq A$ is a tuple $(E_0,E_1,E_2,E_3)$ of smooth vector fields on $\\Omega$ ([[def-ck-tensor-field-on-minkowski-space]], type $(1,0)$) whose values at every $p\\in\\Omega$ form a tetrad at $p$. A tetrad field is **observer-adapted** to a prescribed congruence $n$ when $E_0=n$. Along a prescribed $C^1$ future timelike worldline $x:I\\to A$, observer adaptation means $E_0(x(s))=x'(s)/\\sqrt{-\\eta(x'(s),x'(s))}$ whenever $x(s)\\in\\Omega$; this is its normalized future unit tangent ([[def-sr-regular-causal-curve-and-worldline]]).\n\n**(c) Observer congruence.** An **observer congruence** on a nonempty open subset $\\Omega\\subseteq A$ is a smooth vector field $n:\\Omega\\to V$ with $\\eta(n,n)=-1$ and $n(p)\\in C^+$ for every $p\\in\\Omega$. Its **observers** are its maximal integral curves ([[def-integral-curve-of-a-vector-field]], [[thm-unique-maximal-integral-curve-through-each-point]]). Each observer is a future timelike worldline ([[def-sr-regular-causal-curve-and-worldline]]): its tangent at a parameter value $s$ is $n(x(s))$, which is future timelike, and it is regular because $\\eta(n,n)=-1$ makes $n$ nowhere zero. **Completeness** of the integral curves, a global product structure of $\\Omega$, and global synchronization are not asserted by this definition.\n\n**(d) Adapted chart.** For a congruence $n$ on $\\Omega$, an **$n$-adapted chart** is a chart $(u^0,u^1,u^2,u^3):U\\to\\mathbb R^4$ with $U$ a nonempty open subset of $\\Omega$ whose spatial coordinates $u^1,u^2,u^3$ are constant along every integral curve of $n$ contained in $U$. No global adapted chart is asserted, and $u^0$ is not required to be affine.\n\n**(e) Distinctions.** A chart need not be inertial, as in (a); a chart need not be $n$-adapted for any congruence. A tetrad field is not in general the coordinate frame of a chart: if $(E_0,E_1,E_2,E_3)$ is the coordinate frame of a chart $(v^0,v^1,v^2,v^3)$, that is, $E_a=\\partial/\\partial v^a$, then $[E_a,E_b]=0$ for all $a,b$ ([[def-lie-bracket-of-smooth-vector-fields]], [[prop-coordinate-formula-for-the-lie-bracket]]), so a tetrad field whose members do not commute pairwise is not the coordinate frame of a chart; no converse is claimed here. A congruence need not be the flow of a coordinate, and its pointwise rest spaces need not assemble into hypersurfaces; that integrability question is decided later on this page. In an inertial chart the coordinate frame is simultaneously the basis of an inertial frame, a constant tetrad field and the congruence of stationary observers, but the four notions are distinct in general.",
+        "strategy": "Define charts as open-domain diffeomorphisms, tetrads as pointwise Lorentz-orthonormal bases with a future time leg, unit congruences and adapted charts separately. Check the polynomial non-affine chart by its explicit inverse, normalize the along-worldline tangent and use maximal integral-curve existence. Coordinate frame commutation is only a necessary condition.",
+        "deps": [
+          "def-sr-affine-minkowski-model",
+          "lem-affine-minkowski-charts-form-a-smooth-atlas",
+          "def-inertial-frame-and-inertial-chart",
+          "lem-inertial-chart-transitions-are-affine-lorentz",
+          "def-lorentz-map-and-lorentz-group",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-manifold",
+          "lem-lorentz-form-has-orthonormal-basis",
+          "lem-future-oriented-inertial-frames-exist",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "def-ck-tensor-field-on-minkowski-space",
+          "lem-tangent-space-of-affine-minkowski-space-is-v",
+          "def-integral-curve-of-a-vector-field",
+          "thm-unique-maximal-integral-curve-through-each-point",
+          "def-lie-bracket-of-smooth-vector-fields",
+          "prop-coordinate-formula-for-the-lie-bracket",
+          "def-sr-regular-causal-curve-and-worldline"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "dependency_roles": {
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "lem-affine-minkowski-charts-form-a-smooth-atlas": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "lem-inertial-chart-transitions-are-affine-lorentz": "mathematical-premise",
+          "def-lorentz-map-and-lorentz-group": "mathematical-premise",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds": "mathematical-premise",
+          "def-smooth-manifold": "mathematical-premise",
+          "lem-lorentz-form-has-orthonormal-basis": "mathematical-premise",
+          "lem-future-oriented-inertial-frames-exist": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "def-ck-tensor-field-on-minkowski-space": "mathematical-premise",
+          "lem-tangent-space-of-affine-minkowski-space-is-v": "mathematical-premise",
+          "def-integral-curve-of-a-vector-field": "mathematical-premise",
+          "thm-unique-maximal-integral-curve-through-each-point": "mathematical-premise",
+          "def-lie-bracket-of-smooth-vector-fields": "mathematical-premise",
+          "prop-coordinate-formula-for-the-lie-bracket": "mathematical-premise",
+          "def-sr-regular-causal-curve-and-worldline": "mathematical-premise"
+        }
+      },
+      {
+        "id": "def-flat-covariant-derivative-on-affine-minkowski-space",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The flat covariant derivative on affine Minkowski space and fields along curves",
+        "statement": "Let (A,V,eta,C^+) be the affine Minkowski space with tangent spaces canonically identified with V, and let Omega be a nonempty open subset of A. (a) Vector fields. For smooth vector fields X,Y on Omega (def-ck-tensor-field-on-minkowski-space) define the covariant derivative of Y in the direction X at p by (nabla_X Y)(p) := (d/dt)|_{t=0} Y(p + t X(p)); in the inertial chart x of any inertial frame this is (nabla_X Y)^a = X^b partial_b Y^a. The value does not depend on the inertial chart: for another inertial chart x' = Lambda x + b one has partial'_a = (Lambda^{-1})^b_a partial_b and Y'^a = Lambda^a_b Y^b (thm-sr-tensor-and-current-transformation), and Lambda is constant, so (Lambda^{-1})^a_c X'^b partial'_b Y'^c = X^b partial_b Y^a. nabla_X Y is again a smooth vector field. (b) Covector and general tensor fields. For a smooth covector field alpha set (nabla_X alpha)(Y) := X(alpha(Y)) - alpha(nabla_X Y); for a type (r,s) tensor field T define nabla_X T by the derivation rule on the evaluation of T on smooth vector and covector fields, subtracting the covariant derivative of each vector argument and also subtracting the covariant derivative of each covector argument; Precisely, for $T:(V^*)^r\\times V^s\\to\\mathbb R$, $(\\nabla_XT)(\\alpha_1,\\ldots,\\alpha_r;Y_1,\\ldots,Y_s)=X[T(\\alpha_1,\\ldots,\\alpha_r;Y_1,\\ldots,Y_s)]-\\sum_iT(\\alpha_1,\\ldots,\\nabla_X\\alpha_i,\\ldots,\\alpha_r;Y_1,\\ldots,Y_s)-\\sum_jT(\\alpha_1,\\ldots,\\alpha_r;Y_1,\\ldots,\\nabla_XY_j,\\ldots,Y_s)$. In inertial coordinates every component of nabla_X T is X^b partial_b of that component, with no connection coefficients. (c) Properties. nabla is R-bilinear, C^infinity(Omega)-linear in X, satisfies nabla_X(fY) = X(f)Y + f nabla_X Y and the analogous Leibniz rules for tensor fields, is metric compatible (nabla eta = 0, because partial_a eta_{bc} = 0 in every inertial chart), is torsion-free (nabla_X Y - nabla_Y X = [X,Y], def-lie-bracket-of-smooth-vector-fields and prop-coordinate-formula-for-the-lie-bracket) and has zero curvature (nabla_X nabla_Y Z - nabla_Y nabla_X Z - nabla_{[X,Y]} Z = 0), the last by equality of mixed partial derivatives of the components (thm-young-mixed-partial-theorem). (d) Fields along a curve. If gamma: I -> A is a C^1 curve and W: I -> V is a C^1 field along it (def-vector-field-and-section-along-a-smooth-curve), the covariant derivative of W along gamma is the ordinary V-valued derivative DW/ds := W' (def-vector-valued-derivative-and-integral), because the canonical identification T_pA = V is independent of p; consequently parallel transport along any curve is the identity and a field is parallel exactly when it is constant. The derivative (d) is the one used for the acceleration of congruences, for Fermi-Walker transport and for the kinematic decomposition below; the model needs no Christoffel symbols or parallel-transport ODE in this formulation. (e) First-order C1 version. For C1 vector fields X,Y and C1 covector/tensor fields on Omega, the same directional/evaluation definitions are well-defined and have continuous coefficients: in an inertial chart $(\\nabla_XY)^a=X^b\\partial_bY^a$ and each tensor component is differentiated in the same way. The component recovery and subtraction of all argument derivatives remain valid. C1 scalar multiplication satisfies the same first-order Leibniz rules, metric compatibility remains $\\nabla\\eta=0$, and the first-order torsion identity uses the continuous coordinate bracket $[X,Y]^a=X^b\\partial_bY^a-Y^b\\partial_bX^a$. No C1 closure of this bracket or second covariant derivative of arbitrary C1 data is asserted. For C2 vector fields the second derivatives needed for the zero-curvature identity in(c) exist, and that identity follows by equality of the continuous mixed second partials. All original smooth-field properties and the C1 along-curve derivative in(d) are retained.",
+        "strategy": "Definition with well-definedness obligations. (i) The directional derivative in (a) is the derivative of the V-valued composite t |-> Y(p+tX(p)); its coordinate expression is the chain rule, and chart independence is the corrected identity X'^b partial'_b Y'^a=Lambda^a_c X^b partial_b Y^c, equivalently inverse-Lambda recovery of the unprimed components, using that inertial transitions are affine (their second derivatives vanish, so no inhomogeneous term appears) and their linear parts are constant. (ii) The extension in(b) subtracts the derivative of every argument, whether vector or covector. In an inertial chart use the constant coordinate basis and constant dual basis; their covariant derivatives vanish, so evaluating the rule on those bases leaves only X acting on each tensor component. For variable arguments the ordinary product rule cancels all their derivatives with the displayed subtractions. This proves the stated coordinate formula and the evaluation derivation rule; the coordinate expression has no Gamma terms because eta is constant and transition matrices are constant in inertial charts. (iii) The properties in (c) are coordinate computations: torsion-freeness is X^b partial_b Y^a - Y^b partial_b X^a = [X,Y]^a, zero curvature is the interchange of mixed partials, and metric compatibility is the constancy of the component matrix eta_{ab}. (iv) In (d), the canonical isomorphism T_pA = V is independent of p, so the covariant derivative along a curve coincides with the ordinary derivative and parallel transport is trivial; this is exactly what makes Fermi-Walker transport below an ordinary linear ODE. No choice principle is used. For(e), a C1 map Y has continuous differential, and differentiating $Y(p+tX(p))$ at zero gives $dY_p[X(p)]$; the continuous product of dY and X yields the claimed C0 field. The coordinate tensor rule is identical on constant bases, with the ordinary C1 product rule for variable arguments. Only first derivatives occur in the C1 Leibniz/metric/torsion assertions. When X,Y,Z are C2, the fields $\\nabla_YZ$ and $\\nabla_XZ$ are C1, so the two iterated derivatives and the bracket term in the curvature identity are defined; expansion cancels the first-order bracket terms and the remaining mixed second partials commute. This supplies the actual first-order C1 interface used by dust/fluid and the C1 Bell generator with its explicitly given C2 flow family, without treating C1 fields as smooth or promising a joint C2 flow for every C1 field.",
+        "deps": [
+          "def-sr-affine-minkowski-model",
+          "lem-tangent-space-of-affine-minkowski-space-is-v",
+          "def-ck-tensor-field-on-minkowski-space",
+          "thm-sr-tensor-and-current-transformation",
+          "def-inertial-frame-and-inertial-chart",
+          "def-lie-bracket-of-smooth-vector-fields",
+          "prop-coordinate-formula-for-the-lie-bracket",
+          "thm-young-mixed-partial-theorem",
+          "def-vector-valued-derivative-and-integral",
+          "def-vector-field-and-section-along-a-smooth-curve",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-zero-derivative-implies-constant",
+          "def-derivative",
+          "thm-algebra-of-derivatives"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Mathematical Tripos Part III General Relativity (Cambridge, October 12, 2022 revision): Sections 2.2-2.3 pp. 27-30 (Minkowski metric, causal classification, timelike proper time, observer measurements in an inertial chart, radar coordinates); Internet Archive copy of the original https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "dependency_level": 10,
+        "dependency_roles": {
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "lem-tangent-space-of-affine-minkowski-space-is-v": "mathematical-premise",
+          "def-ck-tensor-field-on-minkowski-space": "mathematical-premise",
+          "thm-sr-tensor-and-current-transformation": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-lie-bracket-of-smooth-vector-fields": "mathematical-premise",
+          "prop-coordinate-formula-for-the-lie-bracket": "mathematical-premise",
+          "thm-young-mixed-partial-theorem": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-vector-field-and-section-along-a-smooth-curve": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        }
+      },
+      {
+        "id": "def-sr-observer-congruence-and-kinematics",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Kinematics of an observer congruence: acceleration, expansion, shear, vorticity and Born rigidity",
+        "statement": "Let $n$ be an observer congruence on a nonempty open subset $\\Omega\\subseteq A$ ([[def-sr-chart-tetrad-and-congruence-distinction]]), let $\\nabla$ be the flat covariant derivative of the affine model ([[def-flat-covariant-derivative-on-affine-minkowski-space]]), and write $n_b:=\\eta_{bc}n^c$ for the associated covector field ([[def-ck-tensor-field-on-minkowski-space]]).\n\n**(a) Rest metric and projection.** Define $h(v,w):=\\eta(v,w)+\\eta(n,v)\\eta(n,w)$ for vectors at the same point, so that $h=\\eta+n^\\flat\\otimes n^\\flat$ in components. Then $h(v,w)=\\eta(h(v),h(w))$ for the orthogonal projection $h(v):=v+\\eta(n,v)n$ of [[thm-sr-proper-time-and-observer-decomposition]] clause (c). At every point $h$ is symmetric with radical spanned by $n(p)$, and its restriction to $n(p)^\\perp$ is positive definite ([[def-lorentz-orthogonality-and-orthogonal-complement]]).\n\n**(b) Acceleration.** The **acceleration** of the congruence is $a:=\\nabla_nn$. Then $\\eta(n,a)=0$ pointwise, because $2\\eta(n,\\nabla_nn)=n\\bigl(\\eta(n,n)\\bigr)=0$; consequently $a(p)$ is spacelike or zero by the causal classification ([[def-causal-classification-of-lorentz-vectors]]). In the model's physical interpretation the four-acceleration of the congruence observers is $c^2a$ and its magnitude is $c^2\\sqrt{\\eta(a,a)}$; the numerical units belong to the model's SI conventions and are not part of the affine geometry ([[def-sr-four-velocity-and-four-acceleration]]).\n\n**(c) Kinematic decomposition.** Set $\\theta_{ab}:=h_a{}^ch_b{}^d\\nabla_{(c}n_{d)}$ and $\\omega_{ab}:=h_a{}^ch_b{}^d\\nabla_{[c}n_{d]}$, where $\\nabla_{(c}n_{d)}=\\tfrac12(\\nabla_cn_d+\\nabla_dn_c)$ and $\\nabla_{[c}n_{d]}=\\tfrac12(\\nabla_cn_d-\\nabla_dn_c)$. Then\n\n$$\\nabla_an_b=-n_aa_b+\\theta_{ab}+\\omega_{ab},$$\n\nwith $\\theta$ symmetric, $\\omega$ antisymmetric, both horizontal ($\\theta_{ab}n^b=\\omega_{ab}n^b=n^a\\theta_{ab}=n^a\\omega_{ab}=0$), and this decomposition is unique with these properties. The tensor $\\theta$ is the **expansion (and shear) tensor**, $h^{ab}\\theta_{ab}$ is the **expansion scalar** (write it as $\\vartheta:=h^{ab}\\theta_{ab}$ to distinguish it from the tensor), the **shear tensor** is $\\sigma_{ab}:=\\theta_{ab}-(\\vartheta/3)h_{ab}$, and $\\omega$ is the **vorticity 2-tensor**. Here $h^{ab}:=\\eta^{ac}\\eta^{bd}h_{cd}$ and all indices are moved with $\\eta$.\n\n**(d) Born rigidity.** For a smooth covariant two-tensor $T$, the Lie derivative used here is $(\\mathcal L_nT)(X,Y):=n(T(X,Y))-T([n,X],Y)-T(X,[n,Y])$; brackets have the meaning given in the flat-derivative supplier. The congruence is **Born rigid** (it describes a rigid motion) when $\\mathcal L_nh=0$. Since $(\\mathcal L_nh)_{ab}=2\\theta_{ab}$, Born rigidity is equivalent to $\\theta_{ab}=0$ for every $a,b$, equivalently to the projected symmetrized derivative of $n^\\flat$ vanishing.\n\n**(e) Scope.** These are kinematic definitions for a prescribed smooth field $n$ on the affine model; no dynamical equation, matter model, global synchronization or completeness is assumed, and $a$, $\\theta$, $\\omega$ and $h$ are local objects on $\\Omega$.",
+        "strategy": "Expand h(v,w)=eta(h(v),h(w)). Differentiate eta(n,n)=-1 to obtain horizontal a. Project nabla n and split its symmetric and antisymmetric parts; define the scalar vartheta and shear separately. The explicit Lie-derivative formula gives L_n h=2theta, so rigidity means theta_ab=0 for all indices, not merely zero trace.",
+        "deps": [
+          "def-sr-chart-tetrad-and-congruence-distinction",
+          "def-flat-covariant-derivative-on-affine-minkowski-space",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-lorentz-orthogonality-and-orthogonal-complement",
+          "def-ck-tensor-field-on-minkowski-space",
+          "def-sr-affine-minkowski-model",
+          "def-sr-four-velocity-and-four-acceleration",
+          "thm-chain-rule"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Giulini, Algebraic and geometric structures of Special Relativity, arXiv:math-ph/0602018: Section 5.5 pp. 41-49 (Definition 7 and equation (123) of Born rigidity, equations (125)-(126), Proposition 14, Lemma 16, Theorem 15 part 1, Lemmas 17-18, Theorem 19 part 2); signature (+---) converted to (-+++)",
+              "url": "https://arxiv.org/pdf/math-ph/0602018"
+            },
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 12,
+        "dependency_roles": {
+          "def-sr-chart-tetrad-and-congruence-distinction": "mathematical-premise",
+          "def-flat-covariant-derivative-on-affine-minkowski-space": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-lorentz-orthogonality-and-orthogonal-complement": "mathematical-premise",
+          "def-ck-tensor-field-on-minkowski-space": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-sr-four-velocity-and-four-acceleration": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise"
+        }
+      },
+      {
+        "id": "def-sr-simultaneity-slice-and-rest-distance",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Simultaneity slices and rest distance relative to a future unit timelike vector",
+        "statement": "Let $(A,V,\\eta,C^+)$ be the affine Minkowski space ([[def-sr-affine-minkowski-model]]) and let $n\\in V$ be future unit timelike, $\\eta(n,n)=-1$ ([[def-causal-classification-of-lorentz-vectors]], [[def-time-orientation-and-future-causal-sets]]).\n\n**(a) Rest space.** The **rest space** of $n$ is the hyperplane $n^\\perp=\\{v\\in V:\\eta(n,v)=0\\}$; by [[thm-sr-proper-time-and-observer-decomposition]] clause (c) it is a three-dimensional linear subspace on which $\\eta$ restricts to a positive-definite symmetric form, and the orthogonal projection onto it is $h(v)=v+\\eta(n,v)n$ ([[def-lorentz-orthogonality-and-orthogonal-complement]]).\n\n**(b) Simultaneity slice.** For $p\\in A$ the **simultaneity slice of $p$ relative to $n$** is the affine hyperplane $H(p,n):=p+n^\\perp=\\{q\\in A:\\eta(n,q-p)=0\\}$; it contains $p$ and is three-dimensional, not a single point.\n\n**(c) Simultaneity relation.** Define $q\\sim_nq'$ if and only if $\\eta(n,q'-q)=0$, that is, if and only if $q'-q\\in n^\\perp$. Then $\\sim_n$ is an equivalence relation on $A$ whose equivalence classes are exactly the slices $H(p,n)$; reflexivity, symmetry and transitivity are consequences of $n^\\perp$ being a linear subspace and are not physical assumptions.\n\n**(d) Rest distance.** For $p,q$ with $q\\in H(p,n)$ define $d_n(p,q):=\\sqrt{\\eta(q-p,q-p)}$. This is a real number $\\ge0$, symmetric in $p,q$, vanishes exactly when $p=q$, and satisfies the triangle inequality on each slice, because the restriction of $\\eta$ to $n^\\perp$ is a positive-definite inner product.\n\n**(e) Dependence on $n$ and scope.** The relation $\\sim_n$ and the slices $H(p,n)$ depend on the chosen future unit timelike vector $n$: an event $q$ with $\\eta(n,q-p)=0$ generally has $\\eta(n',q-p)\\ne0$ for another future unit $n'$ (an explicit witness is given on this page). Simultaneity here is defined relative to a prescribed observer vector and is not an absolute relation. For a congruence $n(\\cdot)$ one may form the pointwise slices $H\\bigl(p,n(p)\\bigr)$; the separate integrability question concerns the tangent distribution $p\\mapsto n(p)^\\perp$, not the assertion that these affine hyperplanes themselves are its integral hypersurfaces. Integral hypersurfaces can be curved; no global foliation is asserted.",
+        "strategy": "The exact observer-decomposition supplier gives the positive-definite rest space and norm. Affine displacement addition proves the equivalence relation and its slice classes. For varying n(p), Frobenius concerns integral hypersurfaces tangent to the rest distribution rather than the affine pointwise slices themselves.",
+        "deps": [
+          "def-sr-affine-minkowski-model",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-lorentz-orthogonality-and-orthogonal-complement",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "dependency_level": 12,
+        "dependency_roles": {
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-lorentz-orthogonality-and-orthogonal-complement": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise"
+        }
+      },
+      {
+        "id": "def-sr-operational-radar-protocol",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The operational radar protocol of an ideal observer",
+        "statement": "Adopt the ideal-clock and ideal-light assumptions of [[post-sr-ideal-clocks-and-light]] and the SI conventions of [[def-sr-si-units-and-coordinate-conventions]]. Let $x:I\\to A$ be a future timelike worldline ([[def-sr-regular-causal-curve-and-worldline]]) with proper-time function $\\tau$ ([[def-sr-proper-time]]), and let $s_-<s_+$ be parameter values in $I$. Suppose an event $q$ and the events $e_-:=x(s_-)$, $e_+:=x(s_+)$ satisfy: $q-e_-$ is future null and $e_+-q$ is future null ([[def-causal-classification-of-lorentz-vectors]], [[def-time-orientation-and-future-causal-sets]], [[def-sr-affine-minkowski-model]]). Under the adopted ideal-light assumption an ideal ray is emitted at $e_-$, reaches $q$, and an ideal ray emitted at $q$ reaches $e_+$; the event $q$ is idealized as an instantaneous reflection that changes nothing else. The **radar protocol** of the observer assigns to $q$\n\n(i) the **radar time** $\\tau_{\\mathrm{rad}}(q):=\\tfrac12\\bigl(\\tau(s_-)+\\tau(s_+)\\bigr)$, the ideal clock's reading midway between emission and reception, and\n\n(ii) the **radar distance** $\\rho_{\\mathrm{rad}}(q):=\\tfrac{c}{2}\\bigl(\\tau(s_+)-\\tau(s_-)\\bigr)$, half the round-trip light time multiplied by $c$.\n\nTwo events measured by the same observer are **radar-simultaneous** when their radar times agree. The assignment does not change under increasing $C^1$ reparametrizations with everywhere positive derivative and the same clock origin of the observer's worldline, because the proper-time function does not ([[lem-sr-proper-time-reparametrization-invariance]]).\n\n**Conventions and scope.** (a) The protocol is a definition of an operational assignment conditional on the existence of the emission, reflection and reception events, and it assumes an available ideal reflector and ideal apparatus. (b) The split of the round trip into a \"time\" and a \"distance\" uses the symmetric convention in which half of the round-trip time is assigned to the outgoing and half to the returning segment; the protocol determines the round-trip quantity $\\tau(s_+)-\\tau(s_-)$ operationally, while the derived one-way assignment is a convention and does not measure a one-way light speed independently of a synchronization convention. (c) The conditional assignment is defined for the stated future timelike worldline, including an accelerated one, but no general existence, uniqueness or synchronization theorem for accelerated observers is asserted. Nothing is claimed about dispersive or absorbing media, finite-resolution apparatus, global single-valuedness or detector models, and no measurement outcome, statistical inference or empirical comparison is asserted.",
+        "strategy": "Define the conditional symmetric radar assignment from emission/reception proper-time readings under ideal clocks, vacuum light and an instantaneous reflector. Reparametrization uses everywhere-positive derivatives and a common clock origin. No general accelerated synchronization theorem follows, and ring rest-line synchronization differs from one observer radar assignment.",
+        "deps": [
+          "post-sr-ideal-clocks-and-light",
+          "def-sr-si-units-and-coordinate-conventions",
+          "def-sr-regular-causal-curve-and-worldline",
+          "def-sr-proper-time",
+          "lem-sr-proper-time-reparametrization-invariance",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "def-sr-affine-minkowski-model"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The radar protocol is defined for a future timelike worldline of the affine Minkowski model in the complete vacuum of the adopted ideal-light postulate, with ideal clocks and an available ideal reflector, and only for those events that are connected to the observer's worldline by the stated emission and reception null rays. The derived one-way time and distance assignment is a symmetric half-split convention, not an independent measurement of a one-way light speed; no general existence, uniqueness or synchronization result is asserted for accelerated observers; nothing is asserted about dispersive or absorbing media, finite-resolution apparatus, global single-valuedness, detector models, measurement outcomes, statistical inference or empirical comparison.",
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "dependency_level": 10,
+        "dependency_roles": {
+          "post-sr-ideal-clocks-and-light": "physical-assumption",
+          "def-sr-si-units-and-coordinate-conventions": "formulation-prerequisite",
+          "def-sr-regular-causal-curve-and-worldline": "mathematical-premise",
+          "def-sr-proper-time": "mathematical-premise",
+          "lem-sr-proper-time-reparametrization-invariance": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise"
+        }
+      },
+      {
+        "id": "lem-sr-radar-midpoint-for-inertial-observer",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The radar round trip of an inertial observer halves at the midpoint of the reception interval",
+        "statement": "Let $n$ be a future unit timelike vector, $\\eta(n,n)=-1$ ([[def-causal-classification-of-lorentz-vectors]], [[def-time-orientation-and-future-causal-sets]]), let $o$ be an event, and let $\\lambda_-<\\lambda_+$ be real numbers; put $e_-:=o+\\lambda_-n$ and $e_+:=o+\\lambda_+n$ ([[def-sr-affine-minkowski-model]]). For an event $q$ the following are equivalent:\n\n(i) $q-e_-$ is future null and $e_+-q$ is future null;\n\n(ii) there is $u\\in n^\\perp$ with $|u|:=\\sqrt{\\eta(u,u)}=(\\lambda_+-\\lambda_-)/2$ such that $q=o+\\tfrac{\\lambda_-+\\lambda_+}{2}n+u$.\n\nIn that case $q-e_-=\\tfrac{\\lambda_+-\\lambda_-}{2}n+u$ and $e_+-q=\\tfrac{\\lambda_+-\\lambda_-}{2}n-u$, the affine midpoint $m:=o+\\tfrac{\\lambda_-+\\lambda_+}{2}n=\\tfrac{e_-+e_+}{2}$ satisfies $\\eta(n,q-m)=0$ (so $q$ lies in the slice $H(m,n)$) and $|q-m|=(\\lambda_+-\\lambda_-)/2$ ([[def-sr-simultaneity-slice-and-rest-distance]]). In particular for fixed $e_-,e_+$ all admissible reflection events $q$ have the same midpoint $m$ and the same rest distance $(\\lambda_+-\\lambda_-)/2$, and differ only in the direction $u$ of $n^\\perp$.",
+        "strategy": "Decompose each null leg into its n component and horizontal part. Futurity gives two positive coefficients; their equal squared horizontal norm forces both coefficients to be half the reception interval. Conversely rho n plus/minus u are future null when rho>0 and |u|=rho. The affine midpoint and translated event witness m+rho e/|e| have the stated rest distance.",
+        "deps": [
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-sr-affine-minkowski-model",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "def-lorentz-orthogonality-and-orthogonal-complement",
+          "def-sr-simultaneity-slice-and-rest-distance"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "H. S. Reall, Mathematical Tripos Part III General Relativity (Cambridge, October 12, 2022 revision): Sections 2.2-2.3 pp. 27-30 (Minkowski metric, causal classification, timelike proper time, observer measurements in an inertial chart, radar coordinates); Internet Archive copy of the original https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13,
+        "dependency_roles": {
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "def-lorentz-orthogonality-and-orthogonal-complement": "mathematical-premise",
+          "def-sr-simultaneity-slice-and-rest-distance": "mathematical-premise"
+        }
+      },
+      {
+        "id": "pthm-sr-radar-synchronization-of-inertial-observers",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Radar synchronization of an inertial observer reproduces its inertial chart",
+        "statement": "Adopt [[post-sr-ideal-clocks-and-light]] (ideal clocks read proper time; ideal vacuum light rays are exactly the future null straight lines) and the SI conventions of [[def-sr-si-units-and-coordinate-conventions]]. Let $(o;e_0,e_1,e_2,e_3)$ be an inertial frame with chart $x$, put $n:=e_0$ (future unit, $\\eta(n,n)=-1$) and let $W:=x^{-1}(\\{(\\lambda,0,0,0):\\lambda\\in\\mathbb R\\})$ be the coordinate axis, a straight future timelike worldline whose proper time between the events with coordinates $(\\lambda_-,0,0,0)$ and $(\\lambda_+,0,0,0)$ is $(\\lambda_+-\\lambda_-)/c$ up to an additive constant ([[def-sr-proper-time]], [[def-inertial-frame-and-inertial-chart]]). Let $q$ be an event whose spatial coordinates $r:=\\bigl(x^1(q),x^2(q),x^3(q)\\bigr)$ are nonzero, and put $\\lambda_\\pm:=x^0(q)\\pm|r|$ with $|r|$ the Euclidean norm of [[def-spatial-euclidean-structure-of-an-inertial-frame]]. Then:\n\n(i) the events $e_-:=x^{-1}(\\lambda_-,0,0,0)$ and $e_+:=x^{-1}(\\lambda_+,0,0,0)$ lie on $W$, and $q-e_-$, $e_+-q$ are future null; hence the radar protocol of [[def-sr-operational-radar-protocol]] applies with emission $e_-$, reflection $q$ and reception $e_+$;\n\n(ii) the radar assignments are $\\tau_{\\mathrm{rad}}(q)=x^0(q)/c$ and $\\rho_{\\mathrm{rad}}(q)=|r|$ up to the additive constant of the observer's proper time: the radar time is the chart time of $q$ and the radar distance is the chart's rest-frame distance;\n\n(iii) consequently, on the region of events with nonzero spatial part, radar simultaneity of this observer coincides with chart simultaneity (equal radar times are equal $x^0$), and the radar distance equals the rest distance in the simultaneity slice $H(m,n)$ of the midpoint event $m:=x^{-1}\\bigl(x^0(q),0,0,0\\bigr)$ ([[def-sr-simultaneity-slice-and-rest-distance]]);\n\n(iv) scope and qualification: this is a conditional statement of the adopted ideal model, showing that the operational round-trip protocol reproduces the inertial chart's time and rest distance, so the operational content of inertial simultaneity is this two-way radar convention; it asserts no one-way light-speed measurement without a synchronization convention, no empirical calibration, no result for accelerated, rotating or dispersive situations, and no deviation from the model. The idealizations of the postulates are carried into the conclusion.",
+        "strategy": "For |r|>0 set lambda-plus/minus=x0(q) plus/minus |r|. The midpoint criterion supplies future-null legs. With one fixed clock origin tau(lambda)=lambda/c+constant, substitution gives radar time x0(q)/c+constant and distance |r|, so simultaneity agrees in the stated ideal off-axis scope.",
+        "deps": [
+          "def-sr-operational-radar-protocol",
+          "lem-sr-radar-midpoint-for-inertial-observer",
+          "post-sr-ideal-clocks-and-light",
+          "def-sr-si-units-and-coordinate-conventions",
+          "def-inertial-frame-and-inertial-chart",
+          "def-spatial-euclidean-structure-of-an-inertial-frame",
+          "def-sr-proper-time",
+          "def-sr-regular-causal-curve-and-worldline",
+          "def-sr-affine-minkowski-model",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-sr-simultaneity-slice-and-rest-distance"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The statement is conditional on the adopted ideal-clock and ideal-light postulates and on the SI coordinate conventions of the model; it concerns one inertial observer's straight worldline and those events off its axis whose spatial coordinates are nonzero, and it concludes only that the two-way radar protocol of the observer reproduces the inertial chart's time and rest-frame distance. It asserts no one-way light-speed measurement without a synchronization convention, no empirical calibration, no deviation from the ideal model, and nothing about accelerated, rotating, dispersive or finite-resolution situations. The idealizations of the postulates are carried into the conclusion.",
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Mathematical Tripos Part III General Relativity (Cambridge, October 12, 2022 revision): Sections 2.2-2.3 pp. 27-30 (Minkowski metric, causal classification, timelike proper time, observer measurements in an inertial chart, radar coordinates); Internet Archive copy of the original https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            }
+          ]
+        },
+        "dependency_level": 14,
+        "dependency_roles": {
+          "def-sr-operational-radar-protocol": "operational-prerequisite",
+          "lem-sr-radar-midpoint-for-inertial-observer": "mathematical-premise",
+          "post-sr-ideal-clocks-and-light": "physical-assumption",
+          "def-sr-si-units-and-coordinate-conventions": "formulation-prerequisite",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-spatial-euclidean-structure-of-an-inertial-frame": "mathematical-premise",
+          "def-sr-proper-time": "mathematical-premise",
+          "def-sr-regular-causal-curve-and-worldline": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-sr-simultaneity-slice-and-rest-distance": "mathematical-premise"
+        }
+      },
+      {
+        "id": "lem-sr-boost-time-length-and-velocity-formulas",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Coordinate formulas of a boost: clock rates, rod lengths, simultaneity and velocity transformation",
+        "statement": "Let $(o;e_0,e_1,e_2,e_3)$ and $(o';e'_0,e'_1,e'_2,e'_3)$ be inertial frames whose bases are related by a boost along the common first spatial direction with parameter $v$, $|v|<c$:\n\n$$e'_0=\\gamma\\Bigl(e_0+\\frac{v}{c}e_1\\Bigr),\\qquad e'_1=\\gamma\\Bigl(e_1+\\frac{v}{c}e_0\\Bigr),\\qquad e'_2=e_2,\\qquad e'_3=e_3,$$\n\nwhere $\\gamma=(1-v^2/c^2)^{-1/2}$, with charts $x$, $x'$ ([[def-lorentz-boost]], [[lem-inertial-chart-transitions-are-affine-lorentz]]). For arbitrary origins put $b:=-B(v/c)x(o')$, the constant translation vector, and write the affine transition as\n\n$$x'^0=\\gamma\\Bigl(x^0-\\frac{v}{c}x^1\\Bigr)+b^0,\\qquad x'^1=\\gamma\\Bigl(x^1-\\frac{v}{c}x^0\\Bigr)+b^1,\\qquad x'^2=x^2+b^2,\\qquad x'^3=x^3+b^3.$$\n\nThen:\n\n**(i) Clock rate.** The straight worldline $y(\\lambda):=x^{-1}\\bigl(\\lambda,\\tfrac{v}{c}\\lambda+a_1,a_2,a_3\\bigr)$ (coordinate velocity $(v,0,0)$, the worldline of a clock at rest in the frame $x'$) is future timelike, and the elapsed proper time between $\\lambda_0<\\lambda_1$ is $(\\lambda_1-\\lambda_0)/(c\\gamma)$; equivalently $d\\tau/dt=1/\\gamma$ along $y$, where $t$ is the coordinate time of $x$.\n\n**(ii) Length comparison.** For $L_0>0$ let $y_a,y_b$ be the two straight worldlines at rest in the frame $x'$ through the events with $x'$-coordinates $(\\lambda,0,0,0)$ and $(\\lambda,L_0,0,0)$. Then (a) at equal $x'$-times their $x'$-coordinate separation is $L_0$, while (b) at equal $x$-times their $x$-coordinate separation is $L_0/\\gamma$, so the measuring frame $x$ assigns the length $L_0/\\gamma$ to a rod of rest length $L_0$ at rest in $x'$; (c) symmetrically, for two worldlines at rest in $x$ with $x$-separation $L_0$ the separation at equal $x'$-times is $L_0/\\gamma$. In each case the comparison uses events at equal time in the measuring frame; comparing equal times of the other frame is a different pair of events.\n\n**(iii) Simultaneity.** If $x^0(q)-x^0(p)=0$ and $x^1(q)-x^1(p)=L$, then $x'^0(q)-x'^0(p)=-\\gamma\\frac{v}{c}L$; in particular simultaneity in the chart $x$ is not simultaneity in the chart $x'$ whenever $vL\\ne0$.\n\n**(iv) Velocity transformation.** Let $y:J\\to A$ be a $C^1$ future causal curve which in the chart $x$ is $t\\mapsto(ct,r(t))$ with coordinate velocity $w(t):=r'(t)\\in\\mathbb R^3$, $|w(t)|\\le c$ (the strict inequality is the timelike branch). Then the coordinate velocity $w'$ of $y$ in the chart $x'$ is given by $w'_1=(w_1-v)/(1-vw_1/c^2)$ and $w'_\\perp=w_\\perp/\\bigl(\\gamma(1-vw_1/c^2)\\bigr)$, the denominators being positive; moreover $|w'|<c$ when $|w|<c$, and $|w'|=c$ exactly when $|w|=c$.",
+        "strategy": "Use the passive affine transition B(v/c)x+b and discard b only in differences and derivatives. The constant timelike tangent gives Delta tau=Delta lambda/(c gamma). Endpoint events at equal measuring-frame time give L0/gamma, and temporal-coordinate differences give the simultaneity shift. Differentiate t-prime=x-prime0/c, obtaining dt-prime/dt=gamma(1-vw1/c2)>0; MVT and inverse difference quotients justify the velocity division. Expansion gives c2-|w-prime|2=(c2-|w|2)(1-v2/c2)/(1-vw1/c2)2, with both strict and null equality branches.",
+        "deps": [
+          "def-lorentz-boost",
+          "lem-boost-is-proper-orthochronous-with-inverse",
+          "def-lorentz-map-and-lorentz-group",
+          "def-inertial-frame-and-inertial-chart",
+          "lem-inertial-chart-transitions-are-affine-lorentz",
+          "def-sr-regular-causal-curve-and-worldline",
+          "def-sr-proper-time",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-spatial-euclidean-structure-of-an-inertial-frame",
+          "thm-chain-rule",
+          "def-derivative",
+          "def-causal-classification-of-lorentz-vectors",
+          "lem-timelike-cone-has-two-convex-components",
+          "def-time-orientation-and-future-causal-sets",
+          "cor-mean-value-theorem"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Mathematical Tripos Part III General Relativity (Cambridge, October 12, 2022 revision): Sections 2.2-2.3 pp. 27-30 (Minkowski metric, causal classification, timelike proper time, observer measurements in an inertial chart, radar coordinates); Internet Archive copy of the original https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            }
+          ]
+        },
+        "dependency_level": 12,
+        "dependency_roles": {
+          "def-lorentz-boost": "mathematical-premise",
+          "lem-boost-is-proper-orthochronous-with-inverse": "mathematical-premise",
+          "def-lorentz-map-and-lorentz-group": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "lem-inertial-chart-transitions-are-affine-lorentz": "mathematical-premise",
+          "def-sr-regular-causal-curve-and-worldline": "mathematical-premise",
+          "def-sr-proper-time": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-spatial-euclidean-structure-of-an-inertial-frame": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise"
+        }
+      },
+      {
+        "id": "pthm-sr-observer-time-length-and-velocity-measurements",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Time dilation, length contraction, simultaneity and velocity transformation for inertial observers",
+        "statement": "Adopt the ideal-clock and ideal-light assumptions of [[post-sr-ideal-clocks-and-light]] and the inertial-covariance assumption of [[post-sr-inertial-covariance]], and the SI coordinate conventions of [[def-sr-si-units-and-coordinate-conventions]]. Let the inertial frames and charts $x$, $x'$ related by a boost of parameter $v$ along the common first spatial direction be as in [[lem-sr-boost-time-length-and-velocity-formulas]], with $\\gamma=(1-v^2/c^2)^{-1/2}$. Then, as statements about the ideal model and not about any actual apparatus:\n\n**(i) Moving clocks run slow.** An ideal clock carried along the worldline $y(\\lambda)=x^{-1}\\bigl(\\lambda,\\tfrac{v}{c}\\lambda+a_1,a_2,a_3\\bigr)$ of clause (i) of the lemma reads between parameter values $\\lambda_0<\\lambda_1$ the time $(\\lambda_1-\\lambda_0)/(c\\gamma)$, and since the coordinate time of $x$ along $y$ is $t=\\lambda/c$, this is $(t_1-t_0)/\\gamma$; equivalently, between two events of the clock's history the coordinate time elapsed in $x$ is $\\Delta t=\\gamma\\,\\Delta\\tau$, where $\\Delta\\tau$ is the clock's reading ([[def-sr-proper-time]], [[def-sr-regular-causal-curve-and-worldline]]). Symmetrically, with $x$ and $x'$ interchanged, a clock at rest in $x$ runs slow by the same factor in the frame $x'$.\n\n**(ii) Length contraction.** For a rod at rest in the frame $x'$ of rest length $L_0>0$, with endpoints carried along the worldlines $y_a$, $y_b$ of clause (ii) of the lemma, the length assigned to it by the frame $x$ on a simultaneity slice of $x$ in the sense of [[def-sr-simultaneity-slice-and-rest-distance]] is $L_0/\\gamma$; symmetrically, a rod at rest in $x$ has length $L_0/\\gamma$ as measured by $x'$. Measured length here is defined by the stated protocol \u2014 the rest distance between the two endpoint events at equal time in the measuring frame \u2014 and it is not the optical appearance of a moving rod; no claim is made about a rod whose state of motion changes.\n\n**(iii) Relativity of simultaneity.** If two events $p,q$ satisfy $x^0(q)-x^0(p)=0$ and $x^1(q)-x^1(p)=L$, with vanishing transverse coordinate difference, then $x'^0(q)-x'^0(p)=-\\gamma\\tfrac{v}{c}L$, which is nonzero whenever $vL\\ne0$; hence simultaneity in $x$ is not simultaneity in $x'$ and is not an observer-independent relation. Each inertial frame's simultaneity is exactly the simultaneity relation of its time axis in the sense of [[def-sr-simultaneity-slice-and-rest-distance]], operationally reproduced by its radar protocol as established in [[pthm-sr-radar-synchronization-of-inertial-observers]].\n\n**(iv) Velocity transformation.** For a $C^1$ future timelike worldline with coordinate velocity $w$ in the frame $x$, $|w|<c$, the coordinate velocity $w'$ in the frame $x'$ is\n\n$$w'_1=\\frac{w_1-v}{1-vw_1/c^2},\\qquad w'_\\perp=\\frac{w_\\perp}{\\gamma\\bigl(1-vw_1/c^2\\bigr)},$$\n\nso relative velocities are not simply added; moreover $|w'|<c$ whenever $|w|<c$. Equivalently, $w'$ gives the spatial-basis components of the velocity of the worldline relative to the observer with four-velocity direction $e'_0$ in the sense of clause (d) of [[thm-sr-proper-time-and-observer-decomposition]] ([[def-sr-four-velocity-and-four-acceleration]]).\n\n**(v) Scope and qualification.** All clauses are conditional on the adopted ideal postulates (ideal clocks, ideal light, inertial covariance, flat spacetime) and on the stated measurement protocols. They carry no statistical or empirical claim; they say nothing about real clock errors, real rods, optical appearance, accelerating or deformable bodies, gravity or quantum effects; and they do not establish the exclusive truth of the model. The time, length and simultaneity assignments are protocol-relative: they involve the measuring frame and its simultaneity slice, which the radar theorem identifies operationally.",
+        "strategy": "Apply the mathematical boost lemma under adopted ideal-clock/light and inertial-covariance assumptions. Rod length is defined on the measuring frame simultaneity slice. The inverse boost gives the symmetric clock statement. Identify w-prime as the primed spatial-basis components of c h-prime(U/c)/(-eta(e-prime0,U/c)); all results remain conditional and nonempirical.",
+        "deps": [
+          "lem-sr-boost-time-length-and-velocity-formulas",
+          "post-sr-ideal-clocks-and-light",
+          "post-sr-inertial-covariance",
+          "pthm-sr-radar-synchronization-of-inertial-observers",
+          "def-sr-simultaneity-slice-and-rest-distance",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-sr-four-velocity-and-four-acceleration",
+          "def-sr-proper-time",
+          "def-sr-si-units-and-coordinate-conventions",
+          "def-inertial-frame-and-inertial-chart",
+          "def-spatial-euclidean-structure-of-an-inertial-frame",
+          "def-sr-regular-causal-curve-and-worldline"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Ideal clock, rod and signal measurements between inertial observers in flat classical special-relativistic spacetime: moving-clock time dilation, length contraction on the measuring frame's simultaneity slice, relativity of simultaneity, and the relativistic velocity transformation. Conditional on the adopted ideal postulates; excludes real apparatus and clock errors, optical appearance, accelerating or deformable bodies, gravity, quantum effects, and every empirical, statistical or ontological claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Mathematical Tripos Part III General Relativity (Cambridge, October 12, 2022 revision): Sections 2.2-2.3 pp. 27-30 (Minkowski metric, causal classification, timelike proper time, observer measurements in an inertial chart, radar coordinates); Internet Archive copy of the original https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            }
+          ]
+        },
+        "dependency_level": 15,
+        "dependency_roles": {
+          "lem-sr-boost-time-length-and-velocity-formulas": "mathematical-premise",
+          "post-sr-ideal-clocks-and-light": "physical-assumption",
+          "post-sr-inertial-covariance": "physical-assumption",
+          "pthm-sr-radar-synchronization-of-inertial-observers": "physical-result",
+          "def-sr-simultaneity-slice-and-rest-distance": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-sr-four-velocity-and-four-acceleration": "mathematical-premise",
+          "def-sr-proper-time": "mathematical-premise",
+          "def-sr-si-units-and-coordinate-conventions": "formulation-prerequisite",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-spatial-euclidean-structure-of-an-inertial-frame": "mathematical-premise",
+          "def-sr-regular-causal-curve-and-worldline": "mathematical-premise"
+        }
+      },
+      {
+        "id": "def-sr-fermi-walker-transport",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Fermi-Walker transport along a timelike worldline",
+        "statement": "Let $x:I\\to A$ be a $C^2$ future timelike worldline with four-velocity $U=dx/d\\tau$ and four-acceleration $A=dU/d\\tau$ ([[def-sr-four-velocity-and-four-acceleration]], [[def-sr-regular-causal-curve-and-worldline]]), so that $\\eta(U,U)=-c^2$ and $\\eta(U,A)=0$ ([[thm-sr-proper-time-and-observer-decomposition]]), write $s$ for its given parameter and $\\tau$ for its proper-time function, with $\\tau'(s)>0$, and let $X:I\\to V$ be a $C^1$ field along $x$ ([[def-vector-field-and-section-along-a-smooth-curve]]).\n\n**(a) Fermi\u2013Walker derivative.** The **Fermi\u2013Walker derivative of $X$** is\n\n$$\\frac{D_{\\mathrm{FW}}X}{d\\tau}:=\\frac{X'}{\\tau'}-\\frac{1}{c^2}\\bigl(\\eta(A,X)U-\\eta(U,X)A\\bigr),$$\n\nwhere $X'$ denotes differentiation with respect to $s$ and $dX/d\\tau:=X'/\\tau'$. Here $\\tau'=c^{-1}\\sqrt{-\\eta(x',x')}>0$ by [[def-sr-four-velocity-and-four-acceleration]]. The derivative $X'$ is the ordinary $V$-valued derivative of $X$, which is the covariant derivative of $X$ along $x$ in the flat model ([[def-flat-covariant-derivative-on-affine-minkowski-space]], clause (d)). The field $X$ is **Fermi\u2013Walker transported along $x$** when $D_{\\mathrm{FW}}X/d\\tau=0$, that is, when\n\n$$X'=\\frac{\\tau'}{c^2}\\bigl(\\eta(A,X)U-\\eta(U,X)A\\bigr).$$\n\n**(b) The four-velocity is Fermi\u2013Walker transported.** Substituting $X=U$ and using $\\eta(A,U)=0$ and $\\eta(U,U)=-c^2$ gives $D_{\\mathrm{FW}}U/d\\tau=U'/\\tau'-c^{-2}\\bigl(\\eta(A,U)U-\\eta(U,U)A\\bigr)=A-A=0$.\n\n**(c) Comparison with parallel transport.** If $A=0$ on an interval $J\\subseteq I$, then on $J$ the Fermi\u2013Walker equation reduces to $X'=0$ and coincides with ordinary parallel transport; if $A$ is not zero, the definition includes exactly the correction that also transports the time leg $U/c$ along the worldline.\n\n**(d) Fermi\u2013Walker transported tetrad.** A **Fermi\u2013Walker transported tetrad along $x$** is a tuple $(E_0,E_1,E_2,E_3)$ of $C^1$ fields along $x$ with $\\eta(E_a(s),E_b(s))=\\operatorname{diag}(-1,1,1,1)_{ab}$ at every $s\\in I$, $E_0=U/c$ future, and every $E_a$ Fermi\u2013Walker transported along $x$. These pairings make the four vectors a basis: pairing a linear relation with each $E_b$ forces every coefficient to vanish. Existence and uniqueness from initial data are proved in the following lemma; metric preservation is proved in the subsequent theorem. The physical interpretation as a nonrotating spatial frame carried by an accelerated observer is not asserted here; only the transport rule is defined.",
+        "strategy": "Define the generic-parameter derivative with tau-prime and the induced tensor derivation. The four-velocity substitution cancels by its exact norm/orthogonality supplier. Specify all tetrad pairings; the following ODE lemma supplies existence and uniqueness and the subsequent theorem supplies pairing preservation.",
+        "deps": [
+          "def-sr-regular-causal-curve-and-worldline",
+          "def-sr-four-velocity-and-four-acceleration",
+          "def-flat-covariant-derivative-on-affine-minkowski-space",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-vector-field-and-section-along-a-smooth-curve",
+          "def-ck-tensor-field-on-minkowski-space"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "dependency_level": 12,
+        "dependency_roles": {
+          "def-sr-regular-causal-curve-and-worldline": "mathematical-premise",
+          "def-sr-four-velocity-and-four-acceleration": "mathematical-premise",
+          "def-flat-covariant-derivative-on-affine-minkowski-space": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-vector-field-and-section-along-a-smooth-curve": "mathematical-premise",
+          "def-ck-tensor-field-on-minkowski-space": "mathematical-premise"
+        }
+      },
+      {
+        "id": "lem-sr-fermi-walker-transport-existence-and-uniqueness",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Existence, uniqueness and linearity of Fermi-Walker transport",
+        "statement": "Let $x:I\\to A$ be a $C^2$ future timelike worldline with four-velocity $U$ and four-acceleration $A$ ([[def-sr-four-velocity-and-four-acceleration]], [[def-sr-regular-causal-curve-and-worldline]]), let $\\tau_0\\in I$ and $X_0\\in V$. Then there is exactly one $C^1$ field $X:I\\to V$ along $x$ with $D_{\\mathrm{FW}}X/d\\tau=0$ and $X(\\tau_0)=X_0$ ([[def-sr-fermi-walker-transport]]); if $x$ is $C^k$ with $k\\ge2$ then $X$ is $C^{k-1}$. The map $X_0\\mapsto X$, from $V$ to the $C^1$ fields along $x$ satisfying the transport equation, is linear. Consequently, for every tetrad $(E_0(\\tau_0),\\dots,E_3(\\tau_0))$ at $x(\\tau_0)$ with $E_0(\\tau_0)=U(\\tau_0)/c$ there is a unique tuple of Fermi\u2013Walker transported fields with those initial values; whether that tuple remains a tetrad at every time is proved in the following item.",
+        "strategy": "In an inertial basis solve X-prime=C(s)X with C=tau-prime c^(-2)(U tensor A-flat-A tensor U-flat). Patch unique fundamental matrices on nondegenerate compact intervals containing the initial parameter; values agree on overlaps, defining a C1 solution without choice. Matrix-column embedding proves vector uniqueness, and X=Phi X0 gives existence/linearity. Differentiate X-prime=CX for C^(k-1) solution regularity. Time leg is U/c by uniqueness; preservation is deferred.",
+        "deps": [
+          "def-sr-fermi-walker-transport",
+          "def-ck-tensor-field-on-minkowski-space",
+          "def-sr-chart-tetrad-and-congruence-distinction",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval",
+          "def-sr-four-velocity-and-four-acceleration",
+          "def-flat-covariant-derivative-on-affine-minkowski-space",
+          "def-sr-regular-causal-curve-and-worldline",
+          "def-inertial-frame-and-inertial-chart",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "def-derivative"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "dependency_level": 13,
+        "dependency_roles": {
+          "def-sr-fermi-walker-transport": "mathematical-premise",
+          "def-ck-tensor-field-on-minkowski-space": "mathematical-premise",
+          "def-sr-chart-tetrad-and-congruence-distinction": "mathematical-premise",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-sr-four-velocity-and-four-acceleration": "mathematical-premise",
+          "def-flat-covariant-derivative-on-affine-minkowski-space": "mathematical-premise",
+          "def-sr-regular-causal-curve-and-worldline": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-ck-and-multi-index-notation-in-several-variables": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "def-derivative": "mathematical-premise"
+        }
+      },
+      {
+        "id": "thm-sr-local-congruence-adapted-charts-and-frobenius",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Local flow boxes, adapted charts and the Frobenius criterion for rest distributions",
+        "statement": "Let $\\Omega$ be a nonempty open subset of $A$ ([[def-sr-affine-minkowski-model]]).\n\n**(i) Flow box.** If $X$ is a smooth vector field on $\\Omega$ ([[def-ck-tensor-field-on-minkowski-space]]) and $X(p)\\ne0$ at a point $p\\in\\Omega$, then there is an open neighbourhood $U$ of $p$ in $\\Omega$ and a chart $(u^0,u^1,u^2,u^3):U\\to\\mathbb R^4$ in which $X=\\partial/\\partial u^0$; the integral curves of $X$ in $U$ are therefore the $u^0$-coordinate lines up to reparametrization. In particular every observer congruence $n$ on $\\Omega$ ([[def-sr-chart-tetrad-and-congruence-distinction]]) admits a local $n$-adapted chart, and in such a chart $n=\\partial/\\partial u^0$.\n\n**(ii) Frobenius criterion.** For a smooth nowhere-zero one-form $\\alpha$ on $\\Omega$ ([[def-closed-and-exact-differential-forms]]) let $D:=\\ker\\alpha$ be the hyperplane distribution $D_p=\\{v\\in V:\\alpha_p(v)=0\\}$. Then $D$ is integrable on $\\Omega$ (through every point there passes a local hypersurface whose tangent space at each of its points is the corresponding $D_p$) if and only if $\\alpha\\wedge d\\alpha=0$ on $\\Omega$ ([[def-wedge-product-of-differential-forms]]).\n\n**(iii) Rest distributions of observer congruences.** Let $n$ be an observer congruence on $\\Omega$ ([[def-sr-chart-tetrad-and-congruence-distinction]]), let $\\alpha:=n^\\flat$, and let $\\theta,\\omega$ be its expansion and vorticity ([[def-sr-observer-congruence-and-kinematics]]). Then:\n\n(a) $d\\alpha=2\\nabla_{[a}n_{b]}$, that is, $d\\alpha(X,Y)=(\\nabla_Xn^\\flat)(Y)-(\\nabla_Yn^\\flat)(X)$ for smooth vector fields $X,Y$;\n\n(b) for every $p$ and all $X,Y$ with $\\alpha(X)=\\alpha(Y)=0$ one has $d\\alpha(X,Y)=2\\omega(X,Y)$; consequently $(\\alpha\\wedge d\\alpha)(p)=0$ if and only if $\\omega(p)=0$, and on an open set $U\\subseteq\\Omega$ the following are equivalent: $\\alpha\\wedge d\\alpha=0$ on $U$, $\\omega=0$ on $U$, and the rest distribution $\\ker\\alpha$ is integrable on $U$;\n\n(c) when the rest distribution is integrable on $U$, its integral hypersurfaces are orthogonal to $n$ at every point and the restriction of $\\eta$ to each of them is positive definite, so they are rest slices of the congruence.\n\n**(iv) Scope.** All statements are local on $\\Omega$; no global foliation, global synchronization, completeness or product structure is asserted, and no claim is made about variable-rank or non-smooth distributions.",
+        "strategy": "(i) is the published flow-box theorem (thm-flow-box-theorem) applied on the manifold Omega, together with the identification of the integral curves with coordinate lines: in the chart X = partial/partial u^0, so the spatial coordinates are constant along the flow. (ii) is the published codimension-one Frobenius criterion (cor-codimension-one-frobenius-criterion) applied verbatim on the open subset of the smooth manifold A. (iii)(a) is the exterior-derivative identity d alpha(X,Y) = X(alpha(Y)) - Y(alpha(X)) - alpha([X,Y]) for a one-form (def-exterior-derivative-by-the-invariant-vector-field-formula) combined with the torsion-freeness nabla_X Y - nabla_Y X = [X,Y] of the flat connection (def-flat-covariant-derivative-on-affine-minkowski-space), giving d alpha_{ab} = nabla_a n_b - nabla_b n_a = 2 nabla_{[a}n_{b]}. (iii)(b) for horizontal X,Y the projections in omega_{ab} = h_a{}^c h_b{}^d nabla_{[c}n_{d]} act as the identity on horizontal arguments, so omega(X,Y) = (1/2) d alpha(X,Y); hence alpha wedge d alpha = 0 at a point (which means d alpha vanishes on all pairs of horizontal vectors there) is equivalent to omega = 0 there, and the integrability equivalence on an open set is (ii). (iii)(c) a leaf has tangent space ker alpha_p = n(p)^perp at each of its points, so it is orthogonal to n there, and the restriction of eta to n(p)^perp is positive definite by thm-sr-proper-time-and-observer-decomposition (c). All steps are local algebra plus the two cited theorems; no choice principle is used.",
+        "deps": [
+          "thm-flow-box-theorem",
+          "cor-codimension-one-frobenius-criterion",
+          "def-sr-affine-minkowski-model",
+          "lem-affine-minkowski-charts-form-a-smooth-atlas",
+          "def-sr-chart-tetrad-and-congruence-distinction",
+          "def-flat-covariant-derivative-on-affine-minkowski-space",
+          "def-sr-observer-congruence-and-kinematics",
+          "def-ck-tensor-field-on-minkowski-space",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "def-wedge-product-of-differential-forms",
+          "def-closed-and-exact-differential-forms",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-lie-bracket-of-smooth-vector-fields",
+          "prop-coordinate-formula-for-the-lie-bracket",
+          "def-lorentz-orthogonality-and-orthogonal-complement"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Giulini, Algebraic and geometric structures of Special Relativity, arXiv:math-ph/0602018: Section 5.5 pp. 41-49 (Definition 7 and equation (123) of Born rigidity, equations (125)-(126), Proposition 14, Lemma 16, Theorem 15 part 1, Lemmas 17-18, Theorem 19 part 2); signature (+---) converted to (-+++)",
+              "url": "https://arxiv.org/pdf/math-ph/0602018"
+            },
+            {
+              "title": "H. S. Reall, Mathematical Tripos Part III General Relativity (Cambridge, October 12, 2022 revision): Sections 2.2-2.3 pp. 27-30 (Minkowski metric, causal classification, timelike proper time, observer measurements in an inertial chart, radar coordinates); Internet Archive copy of the original https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13,
+        "dependency_roles": {
+          "thm-flow-box-theorem": "mathematical-premise",
+          "cor-codimension-one-frobenius-criterion": "mathematical-premise",
+          "def-sr-chart-tetrad-and-congruence-distinction": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "lem-affine-minkowski-charts-form-a-smooth-atlas": "mathematical-premise",
+          "def-flat-covariant-derivative-on-affine-minkowski-space": "mathematical-premise",
+          "def-sr-observer-congruence-and-kinematics": "mathematical-premise",
+          "def-ck-tensor-field-on-minkowski-space": "mathematical-premise",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula": "mathematical-premise",
+          "def-wedge-product-of-differential-forms": "mathematical-premise",
+          "def-closed-and-exact-differential-forms": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-lie-bracket-of-smooth-vector-fields": "mathematical-premise",
+          "prop-coordinate-formula-for-the-lie-bracket": "mathematical-premise",
+          "def-lorentz-orthogonality-and-orthogonal-complement": "mathematical-premise"
+        }
+      },
+      {
+        "id": "lem-sr-closed-one-form-primitive-on-simply-connected-open-sets",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "A closed 1-form on a simply connected open subset of the affine model has a primitive",
+        "statement": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space ([[def-sr-affine-minkowski-model]]), let $U\\subseteq A$ be a nonempty open subset which, with the topology of [[lem-affine-minkowski-charts-form-a-smooth-atlas]], is path-connected and simply connected ([[def-simply-connected]]), and let $\\alpha$ be a $C^1$ one-form on $U$ with $d\\alpha=0$ ([[def-closed-and-exact-differential-forms]]); here closedness of a $C^1$ one-form means that in an inertial chart ([[def-inertial-frame-and-inertial-chart]]) one has $\\alpha=\\sum_{i=0}^3 a_i\\,dx^i$ with $\\partial_i a_j=\\partial_j a_i$, the exterior derivative being understood by this coefficient formula ([[def-exterior-derivative-by-the-invariant-vector-field-formula]], [[thm-local-coordinate-formula-for-the-exterior-derivative]]). Then:\n\n(a) there is a $C^2$ function $F:U\\to\\mathbb R$ with $dF=\\alpha$;\n\n(b) for any two piecewise-$C^1$ paths $\\gamma_0,\\gamma_1$ in $U$ ([[def-piecewise-c1-path-connected-conservative-and-path-independent]]) with the same endpoints, the integrals of $\\alpha$ along them are equal, and consequently the integral of $\\alpha$ along every piecewise-$C^1$ loop in $U$ vanishes.\n\nIf $\\alpha$ is smooth, $F$ may be taken smooth.\n\n**Conventions (what the objects mean here).** Fix one inertial chart $x:A\\to\\mathbb R^4$ and put $\\Omega:=x(U)\\subseteq\\mathbb R^4$; by [[lem-affine-minkowski-charts-form-a-smooth-atlas]] the chart $x$ is a diffeomorphism of $A$ onto $\\mathbb R^4$ carrying the model's topology, and every other inertial chart $x'$ satisfies $x'=M^{-1}(x-b)$ for an invertible matrix $M$ and a vector $b$. The $C^1$ one-form $\\alpha$ is represented in the chart as $\\alpha=\\sum_{i=0}^3 a_i\\,dx^i$ with coefficient functions $a_i:\\Omega\\to\\mathbb R$ of class $C^1$; write $A:=(a_0,a_1,a_2,a_3):\\Omega\\to\\mathbb R^4$ for the coefficient field, so that $A$ is $C^1$ and closedness reads $\\partial_i a_j=\\partial_j a_i$ on $\\Omega$. For a piecewise-$C^1$ path $\\gamma$ in $U$ the integral is $\\int_\\gamma\\alpha:=\\int_{x\\circ\\gamma}A\\cdot d\\mathbf r$, the vector-field line integral of [[def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]]. For a $C^1$ function $F:U\\to\\mathbb R$ with $\\tilde F:=F\\circ x^{-1}$, the differential $dF$ is the one-form whose chart coefficients are the partial derivatives $\\partial_i\\tilde F$, and $dF=\\alpha$ means $\\partial_i\\tilde F=a_i$ on $\\Omega$ for all $i$. Under the transition $x'=M^{-1}(x-b)$ the chain rule gives $a'_j=\\sum_i M^i_j a_i$, $\\partial_j\\tilde F'=\\sum_i M^i_j\\,\\partial_i\\tilde F$ and $(x'\\circ\\gamma)'=M^{-1}(x\\circ\\gamma)'$, so the integral $\\int_\\gamma\\alpha$ and the identity $dF=\\alpha$ do not depend on which inertial chart is used; likewise, $F$ being $C^2$, respectively smooth, is chart-independent. It therefore suffices to prove the following statement about the open set $\\Omega\\subseteq\\mathbb R^4$ and the $C^1$ closed field $A$: every closed piecewise-$C^1$ path in $\\Omega$ has zero $A$-integral, the $A$-integral is path-independent on $\\Omega$, and there is a $C^2$ function $\\tilde F$ on $\\Omega$ with $\\nabla\\tilde F=A$ which can be taken smooth when $A$ is smooth.",
+        "strategy": "Use the exact published C1 closed-field primitive on each convex ball. A continuous based nullhomotopy has compact image and uniformly continuous coordinates, giving a finite mesh whose cell images and chords lie in such balls. Sum zero cell integrals, cancel internal edges, and compare bottom arcs to their chords. Thus loop integrals vanish, including singleton paths. Path independence defines the primitive by a unique integral value without choosing paths; local potential equality gives C2 or smoothness.",
+        "deps": [
+          "def-simply-connected",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-nullhomotopic-map-and-contractible-space",
+          "def-closed-and-exact-differential-forms",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "thm-chain-rule",
+          "thm-ftc-first-part",
+          "def-piecewise-c1-path-connected-conservative-and-path-independent",
+          "def-inertial-frame-and-inertial-chart",
+          "def-sr-affine-minkowski-model",
+          "lem-affine-minkowski-charts-form-a-smooth-atlas",
+          "def-continuity-real",
+          "def-derivative",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "def-piecewise-c1-path-operations-and-oriented-reparametrizations",
+          "lem-line-integrals-are-independent-of-the-piecewise-c1-partition",
+          "thm-line-integrals-under-reversal-and-concatenation",
+          "thm-line-integrals-under-oriented-reparametrization",
+          "cor-closed-exact-and-conservative-equivalence-on-star-shaped-domains",
+          "cor-conservative-fields-are-path-independent-and-have-zero-circulation",
+          "thm-gradient-theorem-for-line-integrals",
+          "def-based-loops-and-fundamental-group",
+          "cor-archimedean-reciprocal",
+          "def-metric-compactness",
+          "def-p-norms-on-rn",
+          "def-euclidean-inner-product",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-local-coordinate-formula-for-the-exterior-derivative",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-compactness-is-intrinsic"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Reyer Sjamaar, Manifolds and Differential Forms, revised edition 2017, Section 10.3, Theorem 10.15, printed p. 131 (PDF p. 137); smooth coefficient convention Section 2.1, printed p. 17 (PDF p. 23).",
+              "url": "https://pi.math.cornell.edu/~sjamaar/manifolds/manifold.pdf"
+            },
+            {
+              "title": "Jiri Lebl, Basic Analysis II, version 6.3, May 15, 2026, Section 9.3, Theorem 9.3.6 and proof, p. 87 (C1 one-form, C2 primitive on star-shaped open sets); global simply-connected statement discussed on p. 86.",
+              "url": "https://www.jirka.org/ra/realanal2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "dependency_roles": {
+          "def-simply-connected": "mathematical-premise",
+          "def-homotopy-relative-and-path-homotopy": "mathematical-premise",
+          "def-nullhomotopic-map-and-contractible-space": "mathematical-premise",
+          "def-closed-and-exact-differential-forms": "mathematical-premise",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-heine-cantor-metric": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "def-piecewise-c1-path-connected-conservative-and-path-independent": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "lem-affine-minkowski-charts-form-a-smooth-atlas": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths": "mathematical-premise",
+          "def-piecewise-c1-path-operations-and-oriented-reparametrizations": "mathematical-premise",
+          "lem-line-integrals-are-independent-of-the-piecewise-c1-partition": "mathematical-premise",
+          "thm-line-integrals-under-reversal-and-concatenation": "mathematical-premise",
+          "thm-line-integrals-under-oriented-reparametrization": "mathematical-premise",
+          "cor-closed-exact-and-conservative-equivalence-on-star-shaped-domains": "mathematical-premise",
+          "cor-conservative-fields-are-path-independent-and-have-zero-circulation": "mathematical-premise",
+          "thm-gradient-theorem-for-line-integrals": "mathematical-premise",
+          "def-based-loops-and-fundamental-group": "mathematical-premise",
+          "cor-archimedean-reciprocal": "mathematical-premise",
+          "def-metric-compactness": "mathematical-premise",
+          "def-p-norms-on-rn": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-continuous-partial-derivatives-imply-total-differentiability": "mathematical-premise",
+          "def-ck-and-multi-index-notation-in-several-variables": "mathematical-premise",
+          "thm-local-coordinate-formula-for-the-exterior-derivative": "mathematical-premise",
+          "thm-continuous-image-of-a-compact-space-is-compact": "mathematical-premise",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics": "mathematical-premise",
+          "lem-compactness-is-intrinsic": "mathematical-premise"
+        }
+      },
+      {
+        "id": "thm-sr-fermi-walker-and-rigid-observer-examples",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Fermi-Walker transport preserves the metric, and explicit rigid and non-rigid observer congruences",
+        "statement": "**(a) Preservation.** Let $x:I\\to A$ be a $C^2$ future timelike worldline and let $X,Y:I\\to V$ be $C^1$ Fermi\u2013Walker transported fields along $x$ ([[def-sr-fermi-walker-transport]]). Then $\\tau\\mapsto\\eta(X(\\tau),Y(\\tau))$ is constant on $I$; in particular Fermi\u2013Walker transport preserves norms and orthogonality, and the unique Fermi\u2013Walker transported family with initial values a tetrad $(E_0(\\tau_0),\\dots,E_3(\\tau_0))$ with $E_0(\\tau_0)=U(\\tau_0)/c$ is an orthonormal tetrad $(E_0(\\tau),\\dots,E_3(\\tau))$ at every $\\tau$ with $E_0(\\tau)=U(\\tau)/c$ (observer-adapted tetrad), by [[lem-sr-fermi-walker-transport-existence-and-uniqueness]].\n\n**(b) Rindler wedge congruence.** In an inertial chart $(x^0,x,y,z)$ consider $\\Phi(\\theta,\\rho,y,z):=(\\rho\\sinh\\theta,\\rho\\cosh\\theta,y,z)$ on $\\mathbb R\\times(0,\\infty)\\times\\mathbb R^2$, with $\\theta\\in\\mathbb R$ and $\\rho>0$. Then $\\Phi$ is a smooth bijection onto the right wedge $W:=\\{(x^0,x):x>|x^0|\\}$, with smooth inverse $\\rho=\\sqrt{x^2-(x^0)^2}$, $\\theta=\\tfrac12\\log\\bigl((x+x^0)/(x-x^0)\\bigr)$ ([[thm-hyperbolic-identities-and-derivatives]], [[def-hyperbolic-functions]]); the pullback of $\\eta$ is $g=-\\rho^2d\\theta^2+d\\rho^2+dy^2+dz^2$; the field $n:=\\rho^{-1}\\partial/\\partial\\theta$ is a future unit timelike field on $W$ whose congruence is Born rigid and irrotational, with acceleration $a=\\nabla_nn=\\rho^{-1}\\partial/\\partial\\rho$, hence $\\eta(a,a)=\\rho^{-2}$; its rest slices $\\theta=const$ are open subsets of hyperplanes orthogonal to $n$ with induced metric $d\\rho^2+dy^2+dz^2$ independent of $\\theta$; and the frame $(n,\\partial/\\partial\\rho,\\partial/\\partial y,\\partial/\\partial z)$ is a tetrad field which is not a coordinate frame, since $[n,\\partial/\\partial\\rho]=+(1/\\rho)n$ is nonzero ([[def-lie-bracket-of-smooth-vector-fields]]).\n\n**(c) Rigid rotation, ambient nonintegrability and ring holonomy.** Fix real $\\Omega$. In the inertial chart let $U_\\Omega$ be the open timelike region $r^2=(x^1)^2+(x^2)^2<c^2/\\Omega^2$ when $\\Omega\\ne0$, and the whole chart when $\\Omega=0$. On this four-dimensional open set put $K=\\partial_0+(\\Omega/c)(-x^2\\partial_1+x^1\\partial_2)$, $\\gamma(r)=(1-\\Omega^2r^2/c^2)^{-1/2}$, and $n=\\gamma(r)K$. This is a smooth future unit timelike Born-rigid congruence. If $\\Omega\\ne0$, its three-dimensional rest distribution in the ambient open set is nowhere integrable: its vorticity is nowhere zero and no ambient rest-simultaneity hypersurface exists locally. If $\\Omega=0$, $n=\\partial_0$ is inertial and irrotational, and the rest hypersurfaces are $x^0=const$. Now fix $R>0$ with $|\\Omega|R<c$ and restrict to the timelike ring cylinder $r=R$, $x^3=const$, whose rotating angle is $\\varphi=\\phi-\\Omega t$ modulo $2\\pi$, with $x^0=ct$. The ring observer $\\phi=\\phi_0+\\Omega t$ has $n=\\gamma(R)\\bigl(1,-(\\Omega R/c)\\sin\\phi,(\\Omega R/c)\\cos\\phi,0\\bigr)$. The induced metric is $-(c^2-\\Omega^2R^2)dt^2+2\\Omega R^2\\,dt\\,d\\varphi+R^2d\\varphi^2$. The ambient rest covector restricted to the cylinder is proportional to $-(c^2-\\Omega^2R^2)dt+\\Omega R^2d\\varphi$, so the one-dimensional rest distribution on that cylinder is locally integrable and satisfies $dt/d\\varphi=\\Omega R^2/(c^2-\\Omega^2R^2)$. After one positive circuit in the rotating label, its lift starting at $t=0$ has signed time offset $\\Delta t=2\\pi\\Omega R^2/(c^2-\\Omega^2R^2)$. For $\\Omega\\ne0$ it returns to the same rotating label at a different time and does not close as a ring rest-simultaneity curve; there is no globally single-valued real rest-synchronization time on the entire cylinder with $C^1$ regularity, $df(\\partial_t)>0$ and differential annihilating these rest lines. This global ring holonomy is distinct from the ambient local Frobenius obstruction. For $\\Omega=0$ the offset is zero and ring rest lines are $t=const$.\n\n**(d) Bell first-order field.** Let $q:J\\to\\mathbb R^3$ be $C^2$ with $q(t)=(q_1(t),0,0)$ and $|q_1'(t)|<c$, and consider the $C^1$ future unit field of the translated worldlines $x_\\xi(t)=(ct,q(t)+\\xi)$ parametrized by $\\xi$ in an open subset of $\\mathbb R^3$, with $n=\\gamma\\bigl(1,q_1'(t)/c,0,0\\bigr)$, $\\gamma=(1-q_1'(t)^2/c^2)^{-1/2}$, and unit longitudinal rest vector $s=\\gamma\\bigl(q_1'(t)/c,1,0,0\\bigr)$. For this $C^1$ field define the first-order rest projection $h^a{}_b=\\delta^a{}_b+n^an_b$ and projected deformation $\\theta_{ab}=h^c{}_ah^d{}_b\\partial_{(c}n_{d)}$, using the explicit first-order version of [[def-flat-covariant-derivative-on-affine-minkowski-space]]. These coordinate formulas need only $C^1$ $n$, give a continuous tensor, and agree with the smooth congruence definitions when $q$ is smooth; in this first-order sense Born rigidity means $\\theta=0$. Then\n\n$$\\theta(s,s)=s^as^b\\partial_an_b=\\gamma^3q_1'(t)q_1''(t)/c^3,$$\n\nwhich is nonzero exactly when $q_1'(t)q_1''(t)$ is nonzero; hence the congruence is not Born rigid on any neighbourhood of a parameter value with $q_1'(t)q_1''(t)\\ne0$, although for every fixed chart time $t$ the separation between the members labelled $\\xi_1$ and $\\xi_2$ is the constant $|\\xi_1-\\xi_2|$. A breaking or fracture conclusion about a material rod would additionally require an elasticity model and a failure criterion and is not a kinematic statement.",
+        "strategy": "(a) For Fermi-Walker transported X,Y, d/dtau eta(X,Y) = eta(X',Y) + eta(X,Y') and substituting X' = c^{-2}(eta(A,X)U - eta(U,X)A) and the analogous expression for Y' gives c^{-2}[eta(A,X)eta(U,Y) - eta(U,X)eta(A,Y) + eta(A,Y)eta(U,X) - eta(U,Y)eta(A,X)] = 0. The initial-tetrad family therefore remains orthonormal, and E_0 = U/c is transported by def-sr-fermi-walker-transport (b); uniqueness is lem-sr-fermi-walker-transport-existence-and-uniqueness. (b) Injectivity of Phi follows from x^2 - (x^0)^2 = rho^2 and the sign of x; the inverse formulas are the standard hyperbolic identities cosh^2 - sinh^2 = 1 and tanh(theta) = x^0/x, and both maps are smooth on their domains because rho > 0 and x - x^0 > 0. Differentiating Phi gives dx^0 = sinh theta d rho + rho cosh theta d theta, dx = cosh theta d rho + rho sinh theta d theta, so -(dx^0)^2 + dx^2 = -rho^2 d theta^2 + d rho^2. The field n is unit future by inspection; a direct computation with the metric gives nabla_{partial_theta} partial_theta = rho partial_rho and hence a = nabla_n n = rho^{-1} partial_rho; the rest slices are the theta-level sets, orthogonal to n because the metric has no theta-rho cross term, with the displayed induced metric independent of theta, so theta_{ab} = 0 and, since the slice is orthogonal to a field whose rest distribution is integrable, omega = 0; the commutator is [rho^{-1}partial_theta, partial_rho] = +(1/rho^2)partial_theta = +(1/rho)n. (c) K is future timelike exactly on the stated U_Omega and is Killing by direct coordinate differentiation. Projecting the symmetric derivative of n=gamma K to its rest space kills the derivative-of-gamma terms (K is parallel to n) and the Killing terms, so theta=0. Put kappa=eta(K,.)=-dx^0+(Omega/c)(x^1 dx^2-x^2 dx^1). Then d kappa=2(Omega/c)dx^1 wedge dx^2 and kappa wedge d kappa=-2(Omega/c)dx^0 wedge dx^1 wedge dx^2, nonzero exactly when Omega!=0. Since n-flat=gamma kappa, n-flat wedge d(n-flat)=gamma^2 kappa wedge d kappa; the stated ambient Frobenius/vorticity result follows, including at the axis by these smooth Cartesian formulas. The Omega=0 limit has the constant unit field. On the ring cylinder, substitute x^0=ct, x^1=Rcos(varphi+Omega t), x^2=Rsin(varphi+Omega t) to obtain the displayed metric and covector. Its one-dimensional kernel is the line field generated by partial_varphi+[Omega R^2/(c^2-Omega^2R^2)]partial_t, whose integral gives the signed holonomy. A globally defined time-oriented rest-synchronization function would have differential a positive multiple of dt-[Omega R^2/(c^2-Omega^2R^2)]dvarphi. Its integral around a fixed-t ring would have nonzero constant sign for Omega!=0, contradicting exactness of that differential. No local nonintegrability is attributed to the cylinder's one-dimensional rest-line field. (d) C2 q makes q1' C1, gamma C1 and n C1. Use the explicitly given first-order projected symmetric derivative of n; no smooth-only congruence or later connecting-field theorem is invoked. Write beta=q_1'/c, beta'=q_1''/c, x^0=ct and n_b=(-gamma,gamma beta,0,0), so partial_0=(1/c)d/dt and partial_1 n_b=0. Differentiation gives partial_0 n_0=-gamma^3 beta beta'/c and partial_0 n_1=gamma^3 beta'/c, using 1+gamma^2 beta^2=gamma^2. Contract with s=(gamma beta,gamma,0,0): s^0[s^0 partial_0 n_0+s^1 partial_0 n_1]=gamma^5 beta beta'(1-beta^2)/c=gamma^3 beta beta'/c=gamma^3 q_1' q_1''/c^3. Projection to the rest space does not change this contraction since s is rest-orthogonal. All transverse expansion components vanish, so it is nonzero exactly under the stated condition, and fixed chart-time separations remain xi_1-xi_2. The material fracture conclusion is excluded. All computations use finite algebra and the declared calculus, with no choice principle.",
+        "deps": [
+          "def-sr-fermi-walker-transport",
+          "lem-sr-fermi-walker-transport-existence-and-uniqueness",
+          "def-sr-observer-congruence-and-kinematics",
+          "thm-sr-local-congruence-adapted-charts-and-frobenius",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-sr-regular-causal-curve-and-worldline",
+          "def-inertial-frame-and-inertial-chart",
+          "def-flat-covariant-derivative-on-affine-minkowski-space",
+          "def-lorentz-orthogonality-and-orthogonal-complement",
+          "def-sr-affine-minkowski-model",
+          "thm-chain-rule",
+          "def-derivative",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "def-lie-bracket-of-smooth-vector-fields",
+          "def-sr-four-velocity-and-four-acceleration",
+          "def-wedge-product-of-differential-forms",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "def-closed-and-exact-differential-forms",
+          "thm-hyperbolic-identities-and-derivatives",
+          "def-hyperbolic-functions",
+          "thm-flow-box-theorem",
+          "def-sr-chart-tetrad-and-congruence-distinction",
+          "lem-timelike-cone-has-two-convex-components",
+          "def-ck-tensor-field-on-minkowski-space",
+          "cor-zero-derivative-implies-constant",
+          "cor-mean-value-theorem",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "def-natural-logarithm",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "D. Giulini, Algebraic and geometric structures of Special Relativity, arXiv:math-ph/0602018: Section 5.5 pp. 41-49 (Definition 7 and equation (123) of Born rigidity, equations (125)-(126), Proposition 14, Lemma 16, Theorem 15 part 1, Lemmas 17-18, Theorem 19 part 2); signature (+---) converted to (-+++)",
+              "url": "https://arxiv.org/pdf/math-ph/0602018"
+            }
+          ]
+        },
+        "dependency_level": 14,
+        "dependency_roles": {
+          "def-sr-fermi-walker-transport": "mathematical-premise",
+          "lem-sr-fermi-walker-transport-existence-and-uniqueness": "mathematical-premise",
+          "def-sr-observer-congruence-and-kinematics": "mathematical-premise",
+          "thm-sr-local-congruence-adapted-charts-and-frobenius": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-sr-regular-causal-curve-and-worldline": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-flat-covariant-derivative-on-affine-minkowski-space": "mathematical-premise",
+          "def-lorentz-orthogonality-and-orthogonal-complement": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "def-lie-bracket-of-smooth-vector-fields": "mathematical-premise",
+          "def-sr-four-velocity-and-four-acceleration": "mathematical-premise",
+          "def-wedge-product-of-differential-forms": "mathematical-premise",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula": "mathematical-premise",
+          "def-closed-and-exact-differential-forms": "mathematical-premise",
+          "thm-hyperbolic-identities-and-derivatives": "mathematical-premise",
+          "def-hyperbolic-functions": "mathematical-premise",
+          "thm-flow-box-theorem": "mathematical-premise",
+          "def-sr-chart-tetrad-and-congruence-distinction": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise",
+          "def-ck-tensor-field-on-minkowski-space": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "thm-sine-and-cosine-parametrize-the-unit-circle": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space": "mathematical-premise"
+        }
+      },
+      {
+        "id": "thm-sr-smooth-local-herglotz-noether",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The smooth local Herglotz-Noether classification of Born-rigid motions",
+        "statement": "Let $(A,V,\\eta,C^+)$ be the oriented time-oriented affine Minkowski space ([[def-sr-affine-minkowski-model]]), let $n$ be a smooth future unit timelike field on a nonempty open subset $\\Omega\\subseteq A$ ([[def-sr-chart-tetrad-and-congruence-distinction]]), with acceleration $a=\\nabla_nn$, rest metric $h$, expansion $\\theta$ and vorticity $\\omega$ ([[def-sr-observer-congruence-and-kinematics]]), and assume that $n$ is Born rigid, $\\theta=0$; write $a^\\flat:=\\eta(a,\\cdot)$.\n\n**(i) Preliminary identity.** For every smooth vector field $X$ on $\\Omega$ with $\\eta(n,X)=0$ one has $\\nabla_Xn=0$ if and only if $\\theta(X,\\cdot)=0$ and $\\omega(X,\\cdot)=0$. In particular, if $\\theta=\\omega=0$ on an open set $U\\subseteq\\Omega$, then $\\nabla_Xn=0$ for every vector field $X$ on $U$ tangent to the rest distribution $\\ker n^\\flat$.\n\n**(ii) Rotational case.** Let $U\\subseteq\\Omega$ be a flow box of $n$ with adapted coordinates $(s,y^1,y^2,y^3)$ in which $n=\\partial_s$ ([[thm-sr-local-congruence-adapted-charts-and-frobenius]]), and suppose that $\\omega$ is nowhere zero on $U$. Then the vorticity and the acceleration are **basic** on $U$: they are horizontal and their components in the adapted coframe do not depend on $s$, equivalently $\\mathcal L_n\\omega=0$ and $\\mathcal L_na^\\flat=0$. Moreover $da^\\flat=0$ on $U$, and for every primitive $F$ of the closed one-form $a^\\flat$ on the coordinate product box $U$ ([[thm-poincare-lemma-for-differential-forms-on-star-shaped-domains]]) the field $K:=e^Fn$ is a timelike Killing field, $\\nabla_aK_b+\\nabla_bK_a=0$, equivalently $\\mathcal L_K\\eta=0$. If $U$ is connected and simply connected and $\\omega$ is nowhere zero, then a single positive smooth function $f$ on $U$ satisfies $\\mathcal L_{fn}\\eta=0$ ([[lem-sr-closed-one-form-primitive-on-simply-connected-open-sets]]). Conversely, every future timelike Killing field on a connected open set, normalized as $n=K/\\sqrt{-\\eta(K,K)}$, is Born rigid, and its vorticity is either nowhere zero or identically zero on that set; hence its flow is rotational, in the sense of case (ii), exactly when its vorticity is nowhere zero.\n\n**(iii) Irrotational case.** Suppose $\\theta=\\omega=0$ on $\\Omega$. Then on a sufficiently small neighbourhood $U$ of every point the connected leaves of the rest distribution are open subsets of affine hyperplanes: there are a smooth future timelike curve $z:J\\to A$ with $\\eta(z',z')=-1$ and a smooth function $\\sigma:U\\to J$ such that, with\n\n$$N(x):=1+\\eta\\bigl(z''(\\sigma(x)),\\,x-z(\\sigma(x))\\bigr)>0,$$\n\nthe leaves of the rest distribution in $U$ are open subsets of the hyperplanes $H_s=z(s)+z'(s)^\\perp$, the field is $n=z'\\circ\\sigma$ on $U$, and\n\n$$d\\sigma(v)=-\\frac{\\eta(z'(\\sigma(x)),v)}{N(x)},\\qquad a=\\frac{z''\\circ\\sigma}{N},\\qquad \\nabla n=d\\sigma\\otimes(z''\\circ\\sigma);$$\n\nthe tubular label has derivative $1+\\eta(z''\\circ\\sigma,x-z\\circ\\sigma)$, which is nonzero and is taken positive on $U$. Conversely, for every smooth future timelike curve $z:J\\to A$ with $\\eta(z',z')=-1$, the field $n:=z'\\circ\\sigma$ on any tubular neighbourhood on which the label $\\sigma$ is unique with positive derivative is a smooth future unit irrotational Born-rigid congruence satisfying these same formulas.\n\n**(iv) Scope.** All statements are local on $\\Omega$; no global classification of rigid motions, no global orbit quotient, no completeness and no global restriction on the size of a rigid body is asserted beyond what the local formulas give. No choice principle is used. The rotational case is the local form of the Herglotz-Noether statement that a rotational Born-rigid motion is Killing; the irrotational case describes the orthogonal affine-plane families.",
+        "strategy": "Use the complete local coframe/flatness proof, with theta=0 as the standing hypothesis of clause (i). Construct the local quotient metric and basic orthonormal coframe, identify all connection entries by metric/torsion and Koszul identities, derive Rbar=-3omega tensor omega in three rest dimensions and the mixed identity. Differentiate to show vorticity and acceleration basic; contract d2theta0=0 using Cartan to prove da-flat=0. An exact primitive gives the positive Killing rescaling. A connected-domain Killing field is affine with constant skew derivative, whose Lorentzian-plane argument gives the vorticity dichotomy. In the irrotational branch construct connected affine-plane leaf portions and a unit integral curve before the implicit label; apply the choice-free Euclidean inverse theorem to (s,x) mapped to (eta(z-prime(s),x-z(s)),x), giving N>0, d sigma=-n-flat/N and a=z-double-prime/N. Verify the converse by vanishing rest derivatives. No global orbit quotient or AC is assumed.",
+        "deps": [
+          "def-sr-observer-congruence-and-kinematics",
+          "thm-sr-local-congruence-adapted-charts-and-frobenius",
+          "def-flat-covariant-derivative-on-affine-minkowski-space",
+          "def-sr-chart-tetrad-and-congruence-distinction",
+          "def-connection-one-form-in-a-local-frame",
+          "thm-curvature-two-form-structure-equation",
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "def-levi-civita-connection",
+          "def-riemann-curvature-four-tensor",
+          "thm-flow-box-theorem",
+          "thm-poincare-lemma-for-differential-forms-on-star-shaped-domains",
+          "lem-sr-closed-one-form-primitive-on-simply-connected-open-sets",
+          "def-closed-and-exact-differential-forms",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "def-wedge-product-of-differential-forms",
+          "thm-the-exterior-derivative-squares-to-zero",
+          "thm-cartans-magic-formula",
+          "def-lie-derivative-of-a-tensor-field",
+          "def-lie-derivative-of-a-differential-form",
+          "def-lie-derivative-of-a-vector-field",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "thm-gram-schmidt-orthonormalisation",
+          "def-integral-curve-of-a-vector-field",
+          "thm-unique-maximal-integral-curve-through-each-point",
+          "def-lie-bracket-of-smooth-vector-fields",
+          "def-ck-tensor-field-on-minkowski-space",
+          "def-inertial-frame-and-inertial-chart",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-sr-regular-causal-curve-and-worldline",
+          "def-lorentz-orthogonality-and-orthogonal-complement",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "def-sr-affine-minkowski-model",
+          "thm-chain-rule",
+          "def-derivative"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Giulini, Algebraic and geometric structures of Special Relativity, arXiv:math-ph/0602018: Section 5.5 pp. 41-49 (Definition 7 and equation (123) of Born rigidity, equations (125)-(126), Proposition 14, Lemma 16, Theorem 15 part 1, Lemmas 17-18, Theorem 19 part 2); signature (+---) converted to (-+++)",
+              "url": "https://arxiv.org/pdf/math-ph/0602018"
+            },
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 14,
+        "dependency_roles": {
+          "def-sr-observer-congruence-and-kinematics": "mathematical-premise",
+          "thm-sr-local-congruence-adapted-charts-and-frobenius": "mathematical-premise",
+          "def-flat-covariant-derivative-on-affine-minkowski-space": "mathematical-premise",
+          "def-sr-chart-tetrad-and-congruence-distinction": "mathematical-premise",
+          "def-connection-one-form-in-a-local-frame": "mathematical-premise",
+          "thm-curvature-two-form-structure-equation": "mathematical-premise",
+          "thm-fundamental-theorem-of-riemannian-geometry": "mathematical-premise",
+          "def-levi-civita-connection": "mathematical-premise",
+          "def-riemann-curvature-four-tensor": "mathematical-premise",
+          "thm-flow-box-theorem": "mathematical-premise",
+          "thm-poincare-lemma-for-differential-forms-on-star-shaped-domains": "mathematical-premise",
+          "lem-sr-closed-one-form-primitive-on-simply-connected-open-sets": "mathematical-premise",
+          "def-closed-and-exact-differential-forms": "mathematical-premise",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula": "mathematical-premise",
+          "def-wedge-product-of-differential-forms": "mathematical-premise",
+          "thm-the-exterior-derivative-squares-to-zero": "mathematical-premise",
+          "thm-cartans-magic-formula": "mathematical-premise",
+          "def-lie-derivative-of-a-tensor-field": "mathematical-premise",
+          "def-lie-derivative-of-a-differential-form": "mathematical-premise",
+          "def-lie-derivative-of-a-vector-field": "mathematical-premise",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space": "mathematical-premise",
+          "thm-gram-schmidt-orthonormalisation": "mathematical-premise",
+          "def-integral-curve-of-a-vector-field": "mathematical-premise",
+          "thm-unique-maximal-integral-curve-through-each-point": "mathematical-premise",
+          "def-lie-bracket-of-smooth-vector-fields": "mathematical-premise",
+          "def-ck-tensor-field-on-minkowski-space": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-sr-regular-causal-curve-and-worldline": "mathematical-premise",
+          "def-lorentz-orthogonality-and-orthogonal-complement": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "def-derivative": "mathematical-premise"
+        }
+      }
+    ]
+  },
+  {
+    "order": 216,
+    "id": "sr-observer-measurements-examples",
+    "kind": "B",
+    "category": "special-relativity",
+    "library": "physics",
+    "title": "Observer Measurements \u2014 Examples",
+    "companion": "sr-observer-measurements",
+    "requires": [
+      "sr-observer-measurements"
+    ],
+    "items": [
+      {
+        "id": "ex-sr-radar-round-trip-3-4-5",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Worked radar round trip: emission, reflection and reception at exact rational parameters",
+        "statement": "Adopt the ideal-clock, ideal-light, available-reflector and SI premises of [[def-sr-operational-radar-protocol]], and calibrate the observer's ideal clock to read $\\tau=0$ at $x^0=0$. In an inertial chart $(x^0,x^1,x^2,x^3)$ of the affine Minkowski model with metric $\\operatorname{diag}(-1,1,1,1)$ let the observer be at rest at the spatial origin, so that its worldline is $x^1=x^2=x^3=0$, let $T>0$, and let $q:=x^{-1}\\bigl(cT,\\tfrac35cT,0,0\\bigr)$, an event of chart time $T$ and spatial coordinate $(3cT/5,0,0)$. With $e_-:=x^{-1}\\bigl(\\tfrac25cT,0,0,0\\bigr)$ and $e_+:=x^{-1}\\bigl(\\tfrac85cT,0,0,0\\bigr)$ one has $q-e_-=\\bigl(\\tfrac35cT,\\tfrac35cT,0,0\\bigr)$ and $e_+-q=\\bigl(\\tfrac35cT,-\\tfrac35cT,0,0\\bigr)$; both displacements have $\\eta$-square $-\\tfrac{9}{25}c^2T^2+\\tfrac{9}{25}c^2T^2=0$ and positive time component, hence are future null, so the radar protocol applies with emission $e_-$, reflection $q$ and reception $e_+$ ([[def-sr-operational-radar-protocol]], [[lem-sr-radar-midpoint-for-inertial-observer]]). Since the observer is inertial, its proper time between the events with temporal coordinates $\\lambda_-=\\tfrac25cT$ and $\\lambda_+=\\tfrac85cT$ (chart times $2T/5$ and $8T/5$) is $(\\lambda_+-\\lambda_-)/c$ with the stated clock calibration, so the radar assignments are $\\tau_{\\mathrm{rad}}(q)=\\tfrac12\\bigl(\\tfrac25T+\\tfrac85T\\bigr)=T$, the chart time of $q$, and $\\rho_{\\mathrm{rad}}(q)=\\tfrac{c}{2}\\bigl(\\tfrac85T-\\tfrac25T\\bigr)=\\tfrac35cT$, the chart distance of $q$ from the observer. The same computation for $q':=x^{-1}\\bigl(cT,\\tfrac45cT,0,0\\bigr)$ gives $e'_-=x^{-1}\\bigl(\\tfrac15cT,0,0,0\\bigr)$, $e'_+=x^{-1}\\bigl(\\tfrac95cT,0,0,0\\bigr)$, radar time $T$ and radar distance $\\tfrac45cT$. Hence the two events $q$ and $q'$ of equal chart time are radar-simultaneous, with radar distances equal to their chart distances, in agreement with [[lem-sr-radar-midpoint-for-inertial-observer]].",
+        "strategy": "For T>0 evaluate the two future-null leg pairs and the calibrated readings tau(lambda)=lambda/c. Temporal coordinates 2cT/5 and 8cT/5 give chart times 2T/5 and 8T/5, radar time T and distance 3cT/5. The second pair uses coordinates cT/5 and 9cT/5, giving distance 4cT/5 and the same midpoint and radar time under the exact ideal protocol.",
+        "deps": [
+          "lem-sr-radar-midpoint-for-inertial-observer",
+          "def-sr-operational-radar-protocol",
+          "def-inertial-frame-and-inertial-chart",
+          "def-sr-affine-minkowski-model",
+          "def-sr-proper-time",
+          "def-sr-simultaneity-slice-and-rest-distance",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "lem-timelike-cone-has-two-convex-components",
+          "def-spatial-euclidean-structure-of-an-inertial-frame"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "H. S. Reall, Mathematical Tripos Part III General Relativity (Cambridge, October 12, 2022 revision): Sections 2.2-2.3 pp. 27-30 (Minkowski metric, causal classification, timelike proper time, observer measurements in an inertial chart, radar coordinates); Internet Archive copy of the original https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 14,
+        "dependency_roles": {
+          "lem-sr-radar-midpoint-for-inertial-observer": "mathematical-premise",
+          "def-sr-operational-radar-protocol": "operational-prerequisite",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-sr-proper-time": "mathematical-premise",
+          "def-sr-simultaneity-slice-and-rest-distance": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise",
+          "def-spatial-euclidean-structure-of-an-inertial-frame": "mathematical-premise"
+        },
+        "physical_scope": "Exact SI radar assignments for an inertial observer in complete vacuum under the ideal-clock and ideal-light assumptions of the radar protocol, with available ideal instantaneous reflectors and a clock calibrated to zero at the chart origin. Coordinates and rest distances have unit metre, T and proper/radar time have unit second, and c has unit metre per second. No finite-apparatus, material-medium, empirical-measurement or uncertainty claim is made."
+      },
+      {
+        "id": "ex-sr-time-dilation-at-beta-three-fifths",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Worked time dilation at speed 3c/5",
+        "statement": "In an inertial chart $x$ with metric $\\operatorname{diag}(-1,1,1,1)$ let $v=3c/5$, $\\gamma=(1-v^2/c^2)^{-1/2}=5/4$, and consider the smooth worldline $y:\\mathbb R\\to A$ whose $x$-coordinates are $y(t)=(ct,\\tfrac{3c}{5}t,0,0)$.\n\n(a) $y'(t)=(c,\\tfrac{3c}{5},0,0)$ and $\\eta(y',y')=-c^2+\\tfrac{9c^2}{25}=-\\tfrac{16}{25}c^2$, so $y$ is future timelike and its proper-time rate is $\\tau'(t)=\\tfrac1c\\sqrt{\\tfrac{16}{25}c^2}=\\tfrac45$: between coordinate times $t_0<t_1$ the model elapsed proper time is $\\tfrac45(t_1-t_0)=(t_1-t_0)/\\gamma$, with rate factor $4/5=1/\\gamma$ ([[def-sr-proper-time]], [[def-inertial-frame-and-inertial-chart]]).\n\n(b) The four-velocity is $U=y'/\\tau'=(\\tfrac{5c}{4},\\tfrac{3c}{4},0,0)$ with $\\eta(U,U)=-\\tfrac{25c^2}{16}+\\tfrac{9c^2}{16}=-c^2$, and the dimensionless velocity is $u=U/c=\\tfrac54(1,\\tfrac35,0,0)=\\gamma\\bigl(e_0+\\tfrac35e_1\\bigr)$ for the chart's first coordinate basis vector $e_0$: this is exactly the boost relation of clause (i) of [[lem-sr-boost-time-length-and-velocity-formulas]] ([[def-sr-four-velocity-and-four-acceleration]], [[thm-sr-proper-time-and-observer-decomposition]]).\n\n(c) Described in the boosted chart $x'$ in which the clock is at rest (boost speed $3c/5$ along the first axis, [[def-lorentz-boost]]), its $x'$-time rate equals its proper-time rate, and the inverse statement $\\Delta t=\\gamma\\,\\Delta\\tau$ holds with $\\gamma=5/4$.",
+        "strategy": "On the smooth all-real affine curve (ct,3ct/5,0,0), compute tangent square -16c2/25, proper-time rate 4/5 and U=(5c/4,3c/4,0,0) of square -c2. The passive boost makes the curve stationary and its primed coordinate-time increments equal model proper time; no physical clock reading is inferred from mathematics.",
+        "deps": [
+          "lem-sr-boost-time-length-and-velocity-formulas",
+          "def-lorentz-boost",
+          "def-sr-proper-time",
+          "def-sr-four-velocity-and-four-acceleration",
+          "def-inertial-frame-and-inertial-chart",
+          "thm-sr-proper-time-and-observer-decomposition"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-2.1 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 13,
+        "dependency_roles": {
+          "lem-sr-boost-time-length-and-velocity-formulas": "mathematical-premise",
+          "def-lorentz-boost": "mathematical-premise",
+          "def-sr-proper-time": "mathematical-premise",
+          "def-sr-four-velocity-and-four-acceleration": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise"
+        }
+      },
+      {
+        "id": "ex-sr-length-contraction-of-a-moving-rod",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Worked length contraction of a rod of rest length 5 at speed 3c/5",
+        "statement": "In an inertial chart $x$ let the chart $x'$ be related to $x$ by a boost of speed $v=3c/5$ along the first spatial axis, $\\gamma=5/4$, so that $x'^0=\\tfrac54\\bigl(x^0-\\tfrac35x^1\\bigr)$ and $x'^1=\\tfrac54\\bigl(x^1-\\tfrac35x^0\\bigr)$ ([[lem-sr-boost-time-length-and-velocity-formulas]], [[def-lorentz-boost]]). Let $L_0=5$ and let the rod at rest in $x'$ have endpoints on the worldlines $x'^1=0$ and $x'^1=5$, with vanishing transverse coordinates. Solving the transition for $x^1$ as a function of $x^0$ gives $x^1=\\tfrac35x^0$ on the first worldline and $x^1=\\tfrac35x^0+4$ on the second, so at every equal $x$-time the endpoints are separated by $4=L_0/\\gamma$ in the frame $x$. Explicit witness: the events $p:=x^{-1}(5,3,0,0)$ and $r:=x^{-1}(5,7,0,0)$ are simultaneous in $x$ (both have $x^0=5$) and separated by $4$; their $x'$-coordinates are $x'(p)=(4,0,0,0)$ and $x'(r)=(1,5,0,0)$, so they are not simultaneous in $x'$ but their $x'$-separation is $5=L_0$. Comparing events at equal $x'$-time instead: the events of the two worldlines with $x'^0=4$ are $x^{-1}(5,3,0,0)$ and $x^{-1}(35/4,37/4,0,0)$, the second of which has $x'^1=5$; at equal $x'$-time $4$ the endpoints are separated by $5$, the rest length. Thus the frame $x$ assigns length $4$ to a rod of rest length $5$ at rest in $x'$, exactly the contraction $L_0/\\gamma$ of clause (ii) of [[lem-sr-boost-time-length-and-velocity-formulas]], and the comparison uses the simultaneity slice of the measuring frame in the sense of [[def-sr-simultaneity-slice-and-rest-distance]].",
+        "strategy": "Exact rational computation: solve the two linear transition relations for x^1 as a function of x^0 on each worldline and subtract; verify the witness events by substituting into the transition, obtaining the exact values 4, 0, 1 and 5; the equal-x'-time event is obtained from x'^0 = 4 on the second worldline x^1 = (3/5)x^0 + 4, which gives x^0 = 35/4, x^1 = 37/4 and x'^1 = 5. All arithmetic is rational.",
+        "deps": [
+          "lem-sr-boost-time-length-and-velocity-formulas",
+          "def-lorentz-boost",
+          "def-sr-simultaneity-slice-and-rest-distance",
+          "def-inertial-frame-and-inertial-chart",
+          "def-sr-affine-minkowski-model"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 13,
+        "dependency_roles": {
+          "lem-sr-boost-time-length-and-velocity-formulas": "mathematical-premise",
+          "def-lorentz-boost": "mathematical-premise",
+          "def-sr-simultaneity-slice-and-rest-distance": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise"
+        }
+      },
+      {
+        "id": "ex-sr-velocity-transformation-worked",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Worked velocity transformation: collinear, transverse and null cases",
+        "statement": "Let $x$ and $x'$ be inertial charts related by a boost of parameter $v=3c/5$ along the first axis ($\\gamma=5/4$, [[def-lorentz-boost]], [[def-inertial-frame-and-inertial-chart]]).\n\n(a) **Collinear case.** A worldline with coordinate velocity $w=(4c/5,0,0)$ in $x$ has, by clause (iv) of [[lem-sr-boost-time-length-and-velocity-formulas]], $w'_1=(4c/5-3c/5)/(1-(3/5)(4/5))=(c/5)/(13/25)=5c/13$, so $|w'|=5c/13<c$; the Galilean difference $c/5$ is not the transformed velocity.\n\n(b) **Transverse case.** A worldline with $w=(0,c/2,0)$ has $w'_1=(0-3c/5)/(1-0)=-3c/5$ and $w'_2=(c/2)/((5/4)(1-0))=2c/5$, hence $|w'|=\\sqrt{9/25+4/25}\\,c=(\\sqrt{13}/5)c<c$.\n\n(c) **Null limit.** For $w=(c,0,0)$ the formula gives $w'_1=(c-3c/5)/(1-3/5)=c$ and $|w'|=c$: a null worldline is null in every inertial chart.\n\nIn each case take the affine coordinate curve $t\\mapsto(ct,wt)$ on $\\mathbb R$ with the stated constant $w$; the first two are future timelike and the third future null. The three cases verify the velocity transformation and the subluminality statement of clause (iv) of [[lem-sr-boost-time-length-and-velocity-formulas]].",
+        "strategy": "Evaluate the positive-denominator future-causal boost formulas at w=(4c/5,0,0), (0,c/2,0) and (c,0,0). Results are 5c/13, (-3c/5,2c/5,0), and c; the fixed-boost null denominator is 2/5, not zero. Each affine curve is on R. Compare the first result with the passive Galilean difference c/5.",
+        "deps": [
+          "lem-sr-boost-time-length-and-velocity-formulas",
+          "def-lorentz-boost",
+          "def-inertial-frame-and-inertial-chart"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "H. S. Reall, Mathematical Tripos Part III General Relativity (Cambridge, October 12, 2022 revision): Sections 2.2-2.3 pp. 27-30 (Minkowski metric, causal classification, timelike proper time, observer measurements in an inertial chart, radar coordinates); Internet Archive copy of the original https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 13,
+        "dependency_roles": {
+          "lem-sr-boost-time-length-and-velocity-formulas": "mathematical-premise",
+          "def-lorentz-boost": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise"
+        }
+      },
+      {
+        "id": "ex-sr-rindler-wedge-congruence-worked",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Worked Rindler wedge congruence: chart, metric, acceleration, rigidity and non-coordinate frame",
+        "statement": "In the inertial chart $(x^0,x,y,z)$ with metric $\\operatorname{diag}(-1,1,1,1)$ consider $\\Phi(\\theta,\\rho,y,z):=(\\rho\\sinh\\theta,\\rho\\cosh\\theta,y,z)$ on $\\mathbb R\\times(0,\\infty)\\times\\mathbb R^2$, with $\\theta\\in\\mathbb R$ and $\\rho>0$. Then:\n\n(a) the identities $x^2-(x^0)^2=\\rho^2$ and $x=\\rho\\cosh\\theta>0$ show that the image of $\\Phi$ is the right wedge $W=\\{x>|x^0|\\}$, and the inverse $\\rho=\\sqrt{x^2-(x^0)^2}$, $\\theta=\\tfrac12\\log\\bigl((x+x^0)/(x-x^0)\\bigr)$ is smooth on $W$; both maps are smooth, so $\\Phi$ is a diffeomorphism onto $W$;\n\n(b) differentiating gives $dx^0=\\sinh\\theta\\,d\\rho+\\rho\\cosh\\theta\\,d\\theta$ and $dx=\\cosh\\theta\\,d\\rho+\\rho\\sinh\\theta\\,d\\theta$, so the pullback metric is $-\\rho^2d\\theta^2+d\\rho^2+dy^2+dz^2$;\n\n(c) the field $n:=\\rho^{-1}\\partial_\\theta$ satisfies $\\eta(n,n)=-1$ and is future; computing with the pullback metric, the nonzero connection coefficients are $\\Gamma^\\rho_{\\theta\\theta}=\\rho$ and $\\Gamma^\\theta_{\\theta\\rho}=\\Gamma^\\theta_{\\rho\\theta}=1/\\rho$, so $\\nabla_{\\partial_\\theta}\\partial_\\theta=\\rho\\,\\partial_\\rho$ and the congruence acceleration is $a=\\nabla_nn=\\rho^{-1}\\partial_\\rho$ with $\\eta(a,a)=1/\\rho^2$; for example at $\\rho=2$ one has $|a|=1/2$ in reciprocal-length units;\n\n(d) the slices $\\theta=const$ are open subsets of hyperplanes through the origin with induced metric $d\\rho^2+dy^2+dz^2$, independent of $\\theta$; hence the congruence is Born rigid, and it is irrotational because its rest distribution is the tangent distribution of these slices;\n\n(e) the tetrad field $(n,\\partial_\\rho,\\partial_y,\\partial_z)$ is not a coordinate frame, since $[n,\\partial_\\rho]=[\\rho^{-1}\\partial_\\theta,\\partial_\\rho]=+\\rho^{-2}\\partial_\\theta=+(1/\\rho)n$ is nonzero, whereas the members of a coordinate frame commute.\n\nThis realizes the Rindler congruence of [[thm-sr-fermi-walker-and-rigid-observer-examples]] clause (b) with exact formulas.",
+        "strategy": "Verify the explicit two-sided inverse and determinant rho>0, invoking the choice-free smooth inverse theorem. Pull back the flat metric and differentiate the inertial components of the coordinate basis to obtain the three nonzero connection coefficients. Compute a=partial_rho/rho. Restricted slices x0=tanh(theta)x inside the wedge are valid also at theta=0; constant rest metric and vertical brackets give rigidity, while [n,partial_rho]=n/rho excludes a coordinate tetrad.",
+        "deps": [
+          "thm-sr-fermi-walker-and-rigid-observer-examples",
+          "def-sr-observer-congruence-and-kinematics",
+          "thm-sr-local-congruence-adapted-charts-and-frobenius",
+          "def-inertial-frame-and-inertial-chart",
+          "def-lie-bracket-of-smooth-vector-fields",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "lem-timelike-cone-has-two-convex-components",
+          "def-hyperbolic-functions",
+          "thm-hyperbolic-identities-and-derivatives",
+          "def-sr-affine-minkowski-model",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-flat-covariant-derivative-on-affine-minkowski-space",
+          "def-natural-logarithm",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "D. Giulini, Algebraic and geometric structures of Special Relativity, arXiv:math-ph/0602018: Section 5.5 pp. 41-49 (Definition 7 and equation (123) of Born rigidity, equations (125)-(126), Proposition 14, Lemma 16, Theorem 15 part 1, Lemmas 17-18, Theorem 19 part 2); signature (+---) converted to (-+++)",
+              "url": "https://arxiv.org/pdf/math-ph/0602018"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 15,
+        "dependency_roles": {
+          "thm-sr-fermi-walker-and-rigid-observer-examples": "mathematical-premise",
+          "def-sr-observer-congruence-and-kinematics": "mathematical-premise",
+          "thm-sr-local-congruence-adapted-charts-and-frobenius": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-lie-bracket-of-smooth-vector-fields": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise",
+          "def-hyperbolic-functions": "mathematical-premise",
+          "thm-hyperbolic-identities-and-derivatives": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds": "mathematical-premise",
+          "def-flat-covariant-derivative-on-affine-minkowski-space": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space": "mathematical-premise"
+        }
+      },
+      {
+        "id": "ex-sr-rigid-rotation-simultaneity-holonomy",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Worked rigid rotation: rest-space holonomy around the ring and failure of ring synchronization",
+        "statement": "Fix $R>0$ and let $\\Omega$ satisfy $\\Omega R=3c/5$, so that $\\gamma=(1-9/25)^{-1/2}=5/4$ and $c^2-\\Omega^2R^2=(16/25)c^2$. In the inertial chart the ring observer at angular position $\\phi=\\phi_0+\\Omega t$ (chart time $t$) has unit tangent\n\n$$n=\\gamma\\bigl(1,-\\tfrac35\\sin\\phi,\\tfrac35\\cos\\phi,0\\bigr)=\\tfrac54\\bigl(1,-\\tfrac35\\sin\\phi,\\tfrac35\\cos\\phi,0\\bigr),$$\n\nwhich is future unit because $\\gamma^2(-1+\\tfrac{9}{25})=-\\tfrac{25}{16}\\cdot\\tfrac{16}{25}=-1$. Writing the cylinder $r=R$ in the rotating angular coordinate $\\varphi:=\\phi-\\Omega t$, so that the point has inertial coordinates $\\bigl(ct,R\\cos(\\varphi+\\Omega t),R\\sin(\\varphi+\\Omega t)\\bigr)$, the induced metric is\n\n$$g=-\\bigl(c^2-\\Omega^2R^2\\bigr)dt^2+2\\Omega R^2\\,dt\\,d\\varphi+R^2\\,d\\varphi^2=-\\tfrac{16}{25}c^2dt^2+\\tfrac65cR\\,dt\\,d\\varphi+R^2d\\varphi^2 .$$\n\nThe rest-space covector of $n$ restricted to the cylinder is proportional to $-\\bigl(c^2-\\Omega^2R^2\\bigr)dt+\\Omega R^2d\\varphi=-\\tfrac{16}{25}c^2dt+\\tfrac35cR\\,d\\varphi$, so a curve tangent to the rest spaces satisfies $dt/d\\varphi=\\Omega R^2/(c^2-\\Omega^2R^2)=15R/(16c)$; integrating over one turn $\\varphi\\in[0,2\\pi]$ gives the nonzero chart-time offset\n\n$$\\Delta t=\\frac{2\\pi\\Omega R^2}{c^2-\\Omega^2R^2}=\\frac{15\\pi R}{8c}\\ne0 .$$\n\nHence the curve tangent to the rest spaces starting at the observer returns to the same rotating label at a strictly later chart time: the rest simultaneity of the rotating congruence does not close up around the ring, and no globally single-valued real rest-synchronization time with time-oriented nonzero differential exists on the whole cylinder. The ambient congruence extends to the smooth future unit rotating field $n=\\gamma(r)\\bigl[\\partial_0+(\\Omega/c)(-x^2\\partial_1+x^1\\partial_2)\\bigr]$ on $r<c/|\\Omega|$, which is Born rigid, and the three-dimensional ambient rest distribution is nowhere integrable because its Frobenius form is nonzero; the one-dimensional rest distribution on the cylinder is locally integrable, so its nonzero global holonomy checked above is a different obstruction. This preserves the distinction between ambient local nonintegrability and global ring synchronization failure.",
+        "strategy": "Compute the future unit field and pullback cylinder metric at Omega R=3c/5. The restricted rest covector gives exact slope 15R/(16c), and a 2pi circuit gives exact offset 15pi R/(8c). Apply the proved time-oriented synchronization obstruction. The ambient Frobenius three-form is -2gamma(r)^2(Omega/c)dx0 wedge dx1 wedge dx2; it is a local nonintegrability test distinct from the ring line-field holonomy.",
+        "deps": [
+          "thm-sr-fermi-walker-and-rigid-observer-examples",
+          "thm-sr-local-congruence-adapted-charts-and-frobenius",
+          "def-sr-observer-congruence-and-kinematics",
+          "def-sr-four-velocity-and-four-acceleration",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-inertial-frame-and-inertial-chart",
+          "def-sr-affine-minkowski-model",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-sine-and-cosine-parametrize-the-unit-circle"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "D. Giulini, Algebraic and geometric structures of Special Relativity, arXiv:math-ph/0602018: Section 5.5 pp. 41-49 (Definition 7 and equation (123) of Born rigidity, equations (125)-(126), Proposition 14, Lemma 16, Theorem 15 part 1, Lemmas 17-18, Theorem 19 part 2); signature (+---) converted to (-+++)",
+              "url": "https://arxiv.org/pdf/math-ph/0602018"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 15,
+        "dependency_roles": {
+          "thm-sr-fermi-walker-and-rigid-observer-examples": "mathematical-premise",
+          "thm-sr-local-congruence-adapted-charts-and-frobenius": "mathematical-premise",
+          "def-sr-observer-congruence-and-kinematics": "mathematical-premise",
+          "def-sr-four-velocity-and-four-acceleration": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "thm-sine-and-cosine-parametrize-the-unit-circle": "mathematical-premise"
+        }
+      },
+      {
+        "id": "ex-sr-bell-congruence-fails-born-rigidity",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Worked Bell-type translated congruence: constant launch-frame separation without Born rigidity",
+        "statement": "In an inertial chart let $q(t)=\\bigl(\\tfrac12\\alpha t^2,0,0\\bigr)$ with $\\alpha>0$, and consider the congruence of translated worldlines $x_\\xi(t)=\\bigl(ct,q(t)+\\xi\\bigr)$ for $\\xi$ in an open subset of $\\mathbb R^3$, defined while $|q_1'(t)|=\\alpha|t|<c$ ([[thm-sr-fermi-walker-and-rigid-observer-examples]] clause (d), [[def-inertial-frame-and-inertial-chart]]). Then $n=\\gamma\\bigl(1,\\alpha t/c,0,0\\bigr)$ with $\\gamma=(1-\\alpha^2t^2/c^2)^{-1/2}$ is a smooth future unit timelike field, and $s=\\gamma\\bigl(\\alpha t/c,1,0,0\\bigr)$ is a unit vector orthogonal to $n$. Direct computation of the expansion on $s$ gives\n\n$$\\theta(s,s)=s^as^b\\partial_an_b=\\gamma^3\\,\\frac{\\alpha^2t}{c^3},$$\n\nwhich is nonzero for every $t\\ne0$ on the subluminal domain; hence the congruence is not Born rigid on any neighbourhood of a time $t\\ne0$, and the failure is already present at $t=0$ on the two sides, where $\\theta(s,s)$ changes sign. Nevertheless, for every fixed chart time $t$ the separation between the member labelled $\\xi_1$ and the member labelled $\\xi_2$ is $|\\xi_1-\\xi_2|$, constant in $t$: the congruence has constant launch-frame separation while failing Born rigidity. This is the Bell-type translated congruence of the cited theorem; a physical conclusion about a breaking thread or rod would additionally require an elasticity model and a failure criterion and is not drawn here.",
+        "strategy": "Put beta=alpha t/c and beta'=alpha/c. With x^0=ct, partial_0 n_0=-gamma^3 alpha^2t/c^3 and partial_0 n_1=gamma^3 alpha/c^2. Contract with s=(gamma alpha t/c,gamma,0,0): theta(s,s)=gamma^5 alpha^2t(1-alpha^2t^2/c^2)/c^3=gamma^3 alpha^2t/c^3. This vanishes exactly at t=0 on the two-sided subluminal domain |t|<c/alpha. At c=1, beta=3/5 and beta'=1 the general contraction is75/64, while the discarded extra factor gives3075/1024. The translated members differ by the constant vector xi_1-xi_2 at a fixed chart time. No elasticity or breaking conclusion is drawn.",
+        "deps": [
+          "thm-sr-fermi-walker-and-rigid-observer-examples",
+          "def-sr-observer-congruence-and-kinematics",
+          "def-sr-four-velocity-and-four-acceleration",
+          "def-inertial-frame-and-inertial-chart",
+          "def-sr-affine-minkowski-model",
+          "thm-chain-rule"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "D. Giulini, Algebraic and geometric structures of Special Relativity, arXiv:math-ph/0602018: Section 5.5 pp. 41-49 (Definition 7 and equation (123) of Born rigidity, equations (125)-(126), Proposition 14, Lemma 16, Theorem 15 part 1, Lemmas 17-18, Theorem 19 part 2); signature (+---) converted to (-+++)",
+              "url": "https://arxiv.org/pdf/math-ph/0602018"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 15,
+        "dependency_roles": {
+          "thm-sr-fermi-walker-and-rigid-observer-examples": "mathematical-premise",
+          "def-sr-observer-congruence-and-kinematics": "mathematical-premise",
+          "def-sr-four-velocity-and-four-acceleration": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise"
+        }
+      },
+      {
+        "id": "cex-sr-born-rigid-motion-need-not-be-killing",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Counterexample: a Born-rigid congruence need not be a Killing congruence",
+        "statement": "**False claim:** every smooth Born-rigid future unit timelike field $n$ ([[def-sr-observer-congruence-and-kinematics]], [[def-sr-chart-tetrad-and-congruence-distinction]]) is locally a positive multiple of a Killing field: there is a positive smooth function $f$ on a neighbourhood of every point with $\\mathcal L_{fn}\\eta=0$ ([[thm-sr-smooth-local-herglotz-noether]]).",
+        "strategy": "The hyperbolic identities give an orthonormal pair (e_0,e_1), with e_0'=k e_1 and e_1'=k e_0. The FTC defines z'=e_0. Differentiating Phi gives partial_lambda Phi=N e_0, partial_xi Phi=e_1 and the constant transverse vectors; at0 the derivative is invertible, so the choice-free smooth inverse-function theorem gives an injective local chart. Shrink to a coordinate box with |lambda|,|xi|<epsilon L_0 and epsilon<1 to ensure N>=1-epsilon^2>0. The metric follows directly; its rest-slice metric is lambda-independent, so theta=0, and its rest distribution is the lambda foliation, so omega=0. Its Christoffel/flat-coordinate derivative gives a=(k/N)partial_xi, hence a-flat=(k/N)d xi. Differentiate k/(1+k xi) in lambda: k'/N^2=1/(L_0^2N^2), proving the displayed nonclosed acceleration form. For Born-rigid n, sym nabla n=-n-flat sym-tensor a-flat. The equation L_{f n}eta=0 is n-flat sym-tensor(df-f a-flat)=0; evaluation twice on n and once on n plus a rest vector forces df-f a-flat=0, hence d log f=a-flat. Applying d and the exterior-square-zero theorem contradicts the everywhere nonzero displayed two-form. This replaces the false Rindler counterexample while preserving the full intended claim. Its explicit local construction has no global quotient, tube completeness or material-model assumption, and uses no choice principle. The nonlogical Rindler clarification is checked directly from the A theorem: its metric \u2212rho^2 dtheta^2+drho^2+dy^2+dz^2 is theta-independent, hence partial_theta is Killing and rho n=partial_theta. It is not an example premise.",
+        "deps": [
+          "thm-sr-smooth-local-herglotz-noether",
+          "def-sr-observer-congruence-and-kinematics",
+          "def-sr-chart-tetrad-and-congruence-distinction",
+          "thm-sr-fermi-walker-and-rigid-observer-examples",
+          "def-flat-covariant-derivative-on-affine-minkowski-space",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "thm-ftc-first-part",
+          "def-hyperbolic-functions",
+          "thm-hyperbolic-identities-and-derivatives",
+          "thm-the-exterior-derivative-squares-to-zero",
+          "def-inertial-frame-and-inertial-chart",
+          "def-sr-affine-minkowski-model",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "lem-timelike-cone-has-two-convex-components"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Giulini, Algebraic and geometric structures of Special Relativity, arXiv:math-ph/0602018: Section 5.5 pp. 41-49 (Definition 7 and equation (123) of Born rigidity, equations (125)-(126), Proposition 14, Lemma 16, Theorem 15 part 1, Lemmas 17-18, Theorem 19 part 2); signature (+---) converted to (-+++)",
+              "url": "https://arxiv.org/pdf/math-ph/0602018"
+            },
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 15,
+        "dependency_roles": {
+          "thm-sr-smooth-local-herglotz-noether": "mathematical-premise",
+          "def-sr-observer-congruence-and-kinematics": "mathematical-premise",
+          "def-sr-chart-tetrad-and-congruence-distinction": "mathematical-premise",
+          "def-flat-covariant-derivative-on-affine-minkowski-space": "mathematical-premise",
+          "thm-sr-fermi-walker-and-rigid-observer-examples": "mathematical-premise",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "def-hyperbolic-functions": "mathematical-premise",
+          "thm-hyperbolic-identities-and-derivatives": "mathematical-premise",
+          "thm-the-exterior-derivative-squares-to-zero": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise"
+        }
+      },
+      {
+        "id": "cex-sr-simultaneity-is-observer-dependent",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Counterexample: simultaneity is relative to the observer vector",
+        "statement": "**False claim:** the simultaneity relation $\\eta(n,q-p)=0$ between events of the affine model is independent of the future unit timelike vector $n$ ([[def-sr-simultaneity-slice-and-rest-distance]]).\n\n**Counterexample.** In an inertial chart let $p:=x^{-1}(0,0,0,0)$ and $q:=x^{-1}(0,1,0,0)$, so that $d:=q-p$ is spacelike with $\\eta(d,d)=1$, and let $n:=e_0=(1,0,0,0)$ and $n':=\\gamma\\bigl(e_0+\\tfrac35e_1\\bigr)=\\tfrac54(1,\\tfrac35,0,0)$, a boost of speed $3c/5$ along the first axis. Then $\\eta(n',n')=\\tfrac{25}{16}\\bigl(-1+\\tfrac{9}{25}\\bigr)=-1$, so $n'$ is also a future unit timelike vector; $\\eta(n,d)=0$, so $p$ and $q$ are simultaneous relative to $n$ and lie in the slice $H(p,n)$; and $\\eta(n',d)=\\tfrac54\\cdot\\tfrac35=\\tfrac34\\ne0$, so $p$ and $q$ are not simultaneous relative to $n'$ and lie in different slices for $n'$. The two slices $H(p,n)$ and $H(p,n')$ are distinct three-dimensional affine hyperplanes through $p$. Hence simultaneity in the sense of [[def-sr-simultaneity-slice-and-rest-distance]] depends on the observer vector and is not an observer-independent relation.",
+        "strategy": "Evaluate d=e1, n=e0 and n-prime=B(-3/5)e0=(5/4,3/4,0,0). Pairings are 0 and 3/4, and e1 lies in n-perp but not n-prime-perp. Equal rest spaces for arbitrary future unit directions would force the projected second direction to vanish and hence the directions to coincide.",
+        "deps": [
+          "def-sr-simultaneity-slice-and-rest-distance",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-lorentz-boost",
+          "def-inertial-frame-and-inertial-chart",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-sr-affine-minkowski-model",
+          "lem-lorentz-map-preserves-metric-and-causal-structure",
+          "lem-boost-is-proper-orthochronous-with-inverse",
+          "def-lorentz-map-and-lorentz-group",
+          "lem-timelike-cone-has-two-convex-components"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 13,
+        "dependency_roles": {
+          "def-sr-simultaneity-slice-and-rest-distance": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-lorentz-boost": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "lem-lorentz-map-preserves-metric-and-causal-structure": "mathematical-premise",
+          "lem-boost-is-proper-orthochronous-with-inverse": "mathematical-premise",
+          "def-lorentz-map-and-lorentz-group": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise"
+        }
+      },
+      {
+        "id": "ex-sr-fermi-walker-transport-along-hyperbolic-motion",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Worked Fermi-Walker transport along uniformly accelerated hyperbolic motion",
+        "statement": "In an inertial chart with metric $\\operatorname{diag}(-1,1,1,1)$ let $\\alpha>0$ and consider the smooth worldline $x:\\mathbb R\\to A$ with inertial coordinates $x(\\tau)=\\frac{c^2}{\\alpha}\\bigl(\\sinh(\\alpha\\tau/c),\\cosh(\\alpha\\tau/c),0,0\\bigr)$, parametrized by $\\tau$; write $\\theta:=\\alpha\\tau/c$. Its derivatives are $U:=x'=c(\\cosh\\theta,\\sinh\\theta,0,0)$ and $A:=U'=\\alpha(\\sinh\\theta,\\cosh\\theta,0,0)$, and one computes $\\eta(U,U)=c^2(-\\cosh^2\\theta+\\sinh^2\\theta)=-c^2$, $\\eta(A,A)=\\alpha^2(-\\sinh^2\\theta+\\cosh^2\\theta)=\\alpha^2$ and $\\eta(U,A)=c\\alpha(-\\cosh\\theta\\sinh\\theta+\\sinh\\theta\\cosh\\theta)=0$; thus $\\tau$ is a proper-time parameter (up to an additive constant) and $U$ is the four-velocity of a uniformly accelerated worldline. Put $X_0:=U/c=(\\cosh\\theta,\\sinh\\theta,0,0)$ and $X_1:=(\\sinh\\theta,\\cosh\\theta,0,0)$; then $\\eta(X_0,X_0)=-1$, $\\eta(X_0,X_1)=0$ and $\\eta(X_1,X_1)=1$, so $(X_0,X_1)$ is an orthonormal pair. A direct substitution into the Fermi-Walker rule shows that both are Fermi-Walker transported: $X_0'=A/c$ equals $\\frac1{c^2}\\bigl(\\eta(A,X_0)U-\\eta(U,X_0)A\\bigr)=\\frac1{c^2}\\bigl(0+cA\\bigr)=A/c$, and $X_1'=\\frac{\\alpha}{c}X_0$ equals $\\frac1{c^2}\\bigl(\\eta(A,X_1)U-\\eta(U,X_1)A\\bigr)=\\frac1{c^2}\\bigl(\\alpha U-0\\bigr)=\\frac{\\alpha}{c}X_0$. Moreover $X_1$ is not parallel transported, since $X_1'=\\frac{\\alpha}{c}X_0\\ne0$ for $\\alpha>0$; Fermi-Walker transport therefore differs from parallel transport for accelerated motion. The norm $\\eta(X_1,X_1)=1$ is constant along the worldline, an instance of the preservation clause of [[thm-sr-fermi-walker-and-rigid-observer-examples]], and adjoining the constant fields $\\partial_y,\\partial_z$ gives a Fermi-Walker transported orthonormal tetrad $\\bigl(U/c,X_1,\\partial_y,\\partial_z\\bigr)$ along the hyperbolic worldline.",
+        "strategy": "Exact symbolic computation: differentiate x, U and X_0, X_1; evaluate the diagonal form on all displayed vectors; compare X_0' and X_1' with the two Fermi-Walker right-hand sides. Every step is finite algebra in the hyperbolic functions, using cosh^2 - sinh^2 = 1.",
+        "deps": [
+          "def-sr-fermi-walker-transport",
+          "lem-sr-fermi-walker-transport-existence-and-uniqueness",
+          "thm-sr-fermi-walker-and-rigid-observer-examples",
+          "def-sr-four-velocity-and-four-acceleration",
+          "def-sr-proper-time",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "def-inertial-frame-and-inertial-chart",
+          "def-sr-affine-minkowski-model",
+          "def-hyperbolic-functions",
+          "thm-hyperbolic-identities-and-derivatives",
+          "thm-chain-rule"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Crowell, Special Relativity, revision 2020-12-10 (author-published undergraduate textbook, 246 PDF pages): Sections 1.1-1.3 pp. 12-28 (vector representation of observer motion, operational radar calibration, time dilation, length-contraction road-trip example), Sections 3.5 and 3.7 pp. 60-68 (four-velocity, acceleration, projection operator), Section 3.9.3 pp. 73-74 (local failure of accelerated simultaneity), Sections 7.1-7.3 pp. 147-151 (Rindler coordinates and nonuniform proper acceleration), Section 8.1 pp. 165-169 (rotating synchronization), Section 9.5 pp. 205-211 (congruences, expansion, Born rigidity); signature (+---) converted to (-+++) and c = 1 formulas converted to x^0 = c t",
+              "url": "https://archive.org/download/sr_20220102/sr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997): Chapter 1 pp. 8-16 (inertial frames built from rigid rods and synchronized clocks, simultaneity, time dilation, length contraction) and pp. 26-27 (worldline, proper time (1.97)-(1.99), four-velocity); Chapter 3 pp. 68-71 (proper-time functional)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 15,
+        "dependency_roles": {
+          "def-sr-fermi-walker-transport": "mathematical-premise",
+          "lem-sr-fermi-walker-transport-existence-and-uniqueness": "mathematical-premise",
+          "thm-sr-fermi-walker-and-rigid-observer-examples": "mathematical-premise",
+          "def-sr-four-velocity-and-four-acceleration": "mathematical-premise",
+          "def-sr-proper-time": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-hyperbolic-functions": "mathematical-premise",
+          "thm-hyperbolic-identities-and-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise"
+        }
+      }
+    ]
+  }
+]

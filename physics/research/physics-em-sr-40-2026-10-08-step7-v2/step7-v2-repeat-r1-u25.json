@@ -1,0 +1,111 @@
+{
+  "run": "physics-em-sr-40-2026-10-08",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "25",
+  "input_sha256": "1d86a87a7ed6c19045cc6f4ff8059362327faaddc53dcb33c55c3af54d869954",
+  "decisions": [
+    {
+      "id": "ex-em-infinite-line-normalization",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "f064e6586a82f2650fcbf90755c6e1d5aa5d9c4a48f6c673b3bd28831fbf15aa",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F6 cited only the L1 Fubini statement, which assumes finite absolute product integral; step 6.1 supplied only an iterated bound. The missing prerequisite is Tonelli, already published and imported. The repair declares and quotes its exact nonnegative measurable/sigma-finite interface and uses it to establish absolute product integrability before applying Fubini to the distributional divergence and curl pairings.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-em-infinite-line-normalization",
+      "disposition": "repaired",
+      "post_sha256": "a579f65939256905364c5e4c7cb849f78ade75b5f077a72ca0c09617ab7c72f0",
+      "review_context_sha256": "d98a35263e9e544eb23276ef7cb5ff5fd2f6735aae2d15498e2980e608bdb002",
+      "reason": "Checked the nonnegative Tonelli and L1 Fubini hypotheses separately: finite-box exhaustions give sigma-finiteness; the translated point field with zero pole value is jointly Borel; the t-integral is bounded off the null axis by 1/(pi epsilon0 rho); transverse polar integration makes this bound integrable against each bounded compactly supported test derivative. Fubini then licenses the point-charge superposition pairings. Also checked the gradient, off-axis divergence/curl, cylinder seam and outward flux, reference-radius shift, non-star-shaped domain and both energy cutoffs. Example and physical_scope remain byte-identical; only proof, fact, dependency and contract metadata change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "id": "ex-em-infinite-line-normalization",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "location": "F6 and Verification steps 1.1, 5.1, 6.1",
+      "disposition": "fixed",
+      "reason": "The Fubini supplier assumes product L1 and cannot justify its own missing hypothesis from an iterated bound. The declared published Tonelli supplier now proves absolute product integrability for jointly Borel point-field/test-derivative integrands, using finite-box sigma-finiteness, the null axis and the explicit transverse 1/rho majorant. Prior independent records and original round evidence are preserved.",
+      "post_sha256": "a579f65939256905364c5e4c7cb849f78ade75b5f077a72ca0c09617ab7c72f0",
+      "evidence_path": "research/physics-em-sr-40-2026-10-08-step7-v2/step7-v2-repeat-r1-u25.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "id": "ex-em-infinite-line-normalization",
+      "reason": "No published supplier or consumer was repaired and no potentially defective published use was found. The existing published Tonelli statement and point-charge clause supply exactly the uses recorded here; public claims of the draft example remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "item": "ex-em-infinite-line-normalization",
+    "exact_claim": "E=lambda e_r/(2 pi epsilon0 rho) and phi=-lambda log(rho/r0)/(2 pi epsilon0); div E=rho_lambda/epsilon0 and curl E=0 as distributions on R3; logarithmic energy divergence.",
+    "conventions": "One-based spatial coordinates, SI epsilon0>0, AC_omega, zero extension of E on the axis and of each point kernel at its pole.",
+    "supplier_paths": [
+      "items/thm-tonelli-theorem-for-sigma-finite-product-spaces.md:Statement and Proof",
+      "items/thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces.md:Statement",
+      "items/thm-borel-products-of-euclidean-spaces-are-euclidean-borel.md:Statement",
+      "items/thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets.md:Statement",
+      "items/pthm-em-coulomb-solution.md:Statement(d) and Proof steps 7.1-8.1"
+    ],
+    "dependency_added": "thm-tonelli-theorem-for-sigma-finite-product-spaces (existing published import; no authored prerequisite)",
+    "checks": [
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-em-infinite-line-normalization.md",
+        "exit_code": 0,
+        "result": "1 item, 9 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/ex-em-infinite-line-normalization.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-em-infinite-line-normalization.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-em-sr-40-2026-10-08-batch-25.proof-contracts.json --strict --items ex-em-infinite-line-normalization --json",
+        "exit_code": 0,
+        "result": "Assigned entry passes; no errors or warnings"
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-em-sr-40-2026-10-08-proof-contracts.json --strict --items ex-em-infinite-line-normalization --json",
+        "exit_code": 0,
+        "result": "Assigned aggregate entry passes; no errors or warnings"
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step7-v2-repeat-r1-u25-items.json --json",
+        "exit_code": 0,
+        "result": "Focused item and owning page pass; 1434 prerequisite items and 298 prerequisite pages checked for cycles; no errors or warnings"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent rejudgment; no judges, stamps, certificates or round state written by this dispatch.",
+    "metadata_repairs": "Updated only the assigned entries in batch-25 and aggregate proof contracts under the shared-write lock. Added the exact Tonelli Statement quotation, synchronized changed derivations and F6/F10 uses, and refreshed stale lab-geometry and aggregate Coulomb quotations. Rank 3 laboratory fields and point-charge clause (d) are unchanged; the sharper compact-source decay still supports the normalization contrast.",
+    "interface_comparison": "Direct comparison before/after found the entire Example section and physical_scope byte-identical. No Statement, Definition, empirical qualification or newly authored prerequisite changed; downstream is empty.",
+    "check_history": "Initial contract diagnostics exposed missing use mappings and stale quotations; all were repaired and both focused strict checks subsequently passed. Precheck/rendercheck/proof-layout were repeated after the final item edit."
+  }
+}

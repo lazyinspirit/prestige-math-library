@@ -1,0 +1,1089 @@
+{
+  "version": 1,
+  "level": 0,
+  "scope": [
+    "lem-em-newtonian-kernel-curl-identity",
+    "post-em-coarse-graining",
+    "def-em-polarization-magnetization",
+    "pthm-em-macroscopic-maxwell",
+    "post-em-material-closure",
+    "pthm-em-causal-dispersive-response",
+    "pthm-em-restricted-material-energy",
+    "ex-em-constitutive-unit-counterexample"
+  ],
+  "contracts": {
+    "lem-em-newtonian-kernel-curl-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and $n\\ge2$. With $\\omega_{n-1}=|S^{n-1}|>0$ in the published chart/polar convention, set $\\Phi(x)=|x|^{2-n}/((n-2)\\omega_{n-1})$ for $n\\ge3$ and $\\Phi(x)=-(2\\pi)^{-1}\\log|x|$ for $n=2$, $x\\ne0$. Extend it as a locally integrable function at the pole. The one-dimensional analogue is $-\\tfrac12|x|$; the subsequent $n\\ge2$ Green theory does not silently include it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-newtonian-potential",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and $n\\ge2$. For a measurable compactly supported\n$f$, define\n$$Nf(x)=\\int_{\\mathbb R^n}\\Phi(x-y)f(y)\\,dy$$\nat each $x$ where the integral is absolutely finite. Whenever this integral\nis finite almost everywhere, $Nf$ also denotes its almost-everywhere class.\nThe following items establish everywhere convergence for bounded compact data\nand almost-everywhere convergence for compact $L^1$ data; the definition itself\nmakes no unconditional convergence claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. These are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F=(F_0,\\ldots,F_{n-1}):U\\to\\mathbb R^n$ be $C^1$ in the componentwise Euclidean sense of [[def-ck-euclidean-maps-and-diffeomorphisms]]. Then the **divergence** of $F$ is $\\operatorname{div}F:=\\sum_{i<n}\\partial_iF_i$, the function $U\\to\\mathbb R$ whose value at $p$ is $\\sum_{i<n}\\partial_iF_i(p)$. The partial derivatives are those of [[def-directional-and-partial-derivatives]], and the sum is the finite sum used throughout [[def-euclidean-inner-product]]. Since each $\\partial_iF_i$ is continuous on $U$, so is $\\operatorname{div}F$.\n\nNow let $n=3$ and let $F:U\\to\\mathbb R^3$ be $C^1$ on an open $U\\subseteq\\mathbb R^3$. Following [[def-cross-product-in-r3]], write the three coordinates of a point and of a vector as $x,y,z$ rather than $0,1,2$, so that $F=(F_x,F_y,F_z)$ means $F=(F_0,F_1,F_2)$ and $\\partial_x,\\partial_y,\\partial_z$ are $\\partial_0,\\partial_1,\\partial_2$. With that naming, the **curl** of $F$ is $\\operatorname{curl}F:=(\\partial_yF_z-\\partial_zF_y,\\ \\partial_zF_x-\\partial_xF_z,\\ \\partial_xF_y-\\partial_yF_x)$, a map $U\\to\\mathbb R^3$ each of whose coordinates is continuous on $U$. In this naming the divergence reads $\\operatorname{div}F=\\partial_xF_x+\\partial_yF_y+\\partial_zF_z$.\n\nBoth operators are defined pointwise from the first partial derivatives of the components, so no differentiability of $F$ beyond $C^1$ is used and no orientation or metric structure enters beyond the standard coordinates of [[def-jacobian-matrix-and-gradient]]. For a $C^1$ scalar function $f$ on $U$, the gradient $\\nabla f=(\\partial_0f,\\ldots,\\partial_{n-1}f)$ is that of [[def-jacobian-matrix-and-gradient]]; in the three-coordinate naming, $\\nabla f=(\\partial_xf,\\partial_yf,\\partial_zf)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.\n\nLet $n\\ge1$ and let $U,V\\subseteq\\mathbb R^n$ be open. A bijection $f:U\\to V$ is a **$C^k$ diffeomorphism** when both $f$ and $f^{-1}$ are $C^k$. For $k\\ge1$, a **local $C^k$ diffeomorphism at $a\\in U$** is a restriction $f|_P:P\\to Q$ between open neighbourhoods of $a$ and $f(a)$ that is a $C^k$ diffeomorphism. At $k=1$ this agrees with [[def-c-one-map-and-local-inverse]]: continuous first partial derivatives give the required total derivative by [[thm-continuous-partial-derivatives-imply-total-differentiability]], while continuity of the total derivative gives continuity of its matrix entries and hence of the first partial derivatives.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bounded-piecewise-c-one-euclidean-domain",
+          "source_section": "Definition",
+          "quote": "Under the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]], a finite piecewise $C^1$ presentation of a nonempty bounded open $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, consists of compact faces $S_1,\\ldots,S_q$ covering its boundary, each a compact Borel subset of a regular $C^1$ hypersurface patch, and a compact edge set $E\\subset\\partial\\Omega$. Require $S_j\\cap E$ to have surface measure zero in each face, using [[lem-surface-integral-is-independent-of-c-one-boundary-charts]]. E contains the boundaries of the faces relative to their patches and every overlap $S_i\\cap S_j$, i different from j. At every point outside E the domain boundary is locally a single $C^1$ graph with Omega on one side. Each face carries this actual outward unit normal off E. Values assigned to the normal on E do not affect its integral.\n\nFor a specified finite gluing also list the open pieces with disjoint interiors, the shared faces, and their opposite outward normals. Require the pieces to cover the final domain up to their boundary faces, and the exposed faces to give its specified presentation. Internal faces are counted twice before cancellation, once from each side. The phrase piecewise smooth by itself supplies none of this data.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. If Omega has the specified finite piecewise $C^1$ presentation and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, then $\\int_\\Omega\\operatorname{div}F=\\sum_j\\int_{S_j}F\\cdot\\nu_j\\,dS$, with faces counted once off E. All integrals are finite. In a specified finite gluing, the two fluxes on every shared face cancel.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.\n\nThis is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-em-smooth-newtonian-upgrade",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ($\\mathrm{AC}_\\omega$), with the exact meaning of [[def-countable-choice]]. Let $\\varepsilon_0>0$ be any scalar parameter and let $f\\in C_c^\\infty(\\mathbb R^3;\\mathbb R)$ and let $$Nf(x)=\\int_{\\mathbb R^3}\\frac{f(y)}{4\\pi|x-y|}\\,dy .$$ Then $Nf\\in C^\\infty(\\mathbb R^3)$, $-\\Delta Nf=f$ pointwise, and for every multi-index $\\alpha$ the spatial derivative satisfies $D^\\alpha Nf=N(D^\\alpha f)$. In particular, for smooth compactly supported $\\rho$ the field $E=-\\varepsilon_0^{-1}\\nabla N\\rho$ is smooth. The statement is about the explicit integral transform of compactly supported smooth data and does not assume smoothness of the kernel at the pole; the distributional identity $-\\Delta Nf=f$ is the one supplied by the Newtonian-potential theorem ([[thm-newtonian-potential-solves-poisson-distributionally]]), upgraded here from a distributional to a pointwise identity for smooth data.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since each $f_i$ is smooth and compactly supported, [F2] gives $A_i=N(f_i)\\in C^\\infty(\\mathbb R^3)$ with $D^\\alpha A_i=N(D^\\alpha f_i)$ for every multi-index $\\alpha$; in particular $A\\in C^\\infty(\\mathbb R^3;\\mathbb R^3)$ by [F3], and $\\partial_iA_i=N(\\partial_if_i)$ for each $i$. Summing over $i$ and using finite additivity of the integral [F8], $\\operatorname{div}A=\\sum_i\\partial_iA_i=N(\\sum_i\\partial_if_i)=N(\\operatorname{div}f)$ pointwise on $\\mathbb R^3$, which is the first displayed identity; its integral is absolutely convergent because $|\\operatorname{div}f|\\le\\|\\operatorname{div}f\\|_\\infty$ is bounded and compactly supported and $\\int_{B_R(x)}|x-y|^{-1}d\\lambda_3<+\\infty$ by [F7].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $x\\in\\mathbb R^3$ and $j,k\\in\\{1,2,3\\}$, let $\\Phi(z)=1/(4\\pi|z|)$, and choose $R>0$ with $\\operatorname{supp}f\\subset B_R(x)$. For $0<\\varepsilon<R$ let $\\Omega_\\varepsilon:=B_R(x)\\setminus\\overline{B_\\varepsilon(x)}$, presented as in [F5]. On a neighborhood of the compact closure the scalar product $y\\mapsto f_k(y)\\Phi(x-y)$ is $C^1$, and by [F4] its partial derivative is $\\partial_{y_j}(f_k\\Phi(x-y))=(\\partial_jf_k)(y)\\Phi(x-y)+f_k(y)\\partial_{y_j}\\Phi(x-y)$. Applying the divergence theorem [F5] to the field $f_k\\Phi(x-\\cdot)e_j$ on $\\Omega_\\varepsilon$ gives $\\int_{\\Omega_\\varepsilon}(\\partial_jf_k)\\Phi(x-y)\\,d\\lambda_3(y)=\\int_{\\partial B_R(x)}f_k\\Phi(x-y)(\\nu_R)_j\\,dS+\\int_{\\partial B_\\varepsilon(x)}f_k\\Phi(x-y)(\\nu_\\varepsilon)_j\\,dS-\\int_{\\Omega_\\varepsilon}f_k(y)\\partial_{y_j}\\Phi(x-y)\\,d\\lambda_3(y)$. The outer sphere contributes $0$ because $f=0$ there; the inner sphere term is bounded in absolute value, by [F8] and the bound $|\\Phi|=1/(4\\pi|y-x|)=1/(4\\pi\\varepsilon)$ there, by $\\|f_k\\|_\\infty\\frac1{4\\pi\\varepsilon}\\,|\\partial B_\\varepsilon(x)|=\\|f_k\\|_\\infty\\frac{|S^2|}{4\\pi}\\varepsilon\\to0$ as $\\varepsilon\\to0$ by [F6].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\varepsilon\\to0$ in the identity of step 1.2. The shell integrands $(\\partial_jf_k)\\Phi(x-y)\\mathbf 1_{\\Omega_\\varepsilon}$ are dominated on $B_R(x)$ by $\\|\\partial_jf_k\\|_\\infty|\\Phi|$, and the shell integrands $f_k\\partial_{y_j}\\Phi(x-y)\\mathbf 1_{\\Omega_\\varepsilon}$ by $\\|f_k\\|_\\infty|\\partial_{y_j}\\Phi|\\le\\|f_k\\|_\\infty\\frac{1}{4\\pi}|x-y|^{-2}$; both majorants are integrable on $B_R(x)$ by [F7], and both families converge pointwise off the null singleton $\\{x\\}$ to the corresponding unrestricted integrands. Dominated convergence [F9] therefore gives $\\int_{B_R(x)}(\\partial_jf_k)\\Phi(x-y)\\,d\\lambda_3(y)=-\\int_{B_R(x)}f_k(y)\\partial_{y_j}\\Phi(x-y)\\,d\\lambda_3(y)$; the left side is $N(\\partial_jf_k)(x)=\\partial_jA_k(x)$ by step 1.1, and since $\\partial_{y_j}\\Phi(x-y)=\\frac{x_j-y_j}{4\\pi|x-y|^3}$ for $y\\ne x$, this reads $\\partial_jA_k(x)=-\\frac1{4\\pi}\\int_{\\mathbb R^3}\\frac{f_k(y)(x_j-y_j)}{|x-y|^3}\\,dy$, the integral being absolutely convergent because $|f_k(y)(x_j-y_j)|\\le\\|f_k\\|_\\infty|x-y|$ on $B_R(x)$ and $\\int_{B_R(x)}|x-y|^{-2}d\\lambda_3<+\\infty$ by [F7].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F4",
+            "F7",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing the identity of step 2.1 with the alternating symbol, $(\\operatorname{curl}A)_i=\\varepsilon_{ijk}\\partial_jA_k=-\\frac1{4\\pi}\\int_{\\mathbb R^3}\\frac{\\varepsilon_{ijk}f_k(y)(x_j-y_j)}{|x-y|^3}\\,dy=\\frac1{4\\pi}\\int_{\\mathbb R^3}\\frac{(f(y)\\times(x-y))_i}{|x-y|^3}\\,dy$ by the component identity of [F10] and finite linearity of the integral [F8]; as this holds for each $i$, $\\operatorname{curl}A(x)=\\frac1{4\\pi}\\int_{\\mathbb R^3}\\frac{f(y)\\times(x-y)}{|x-y|^3}\\,dy$, and the integral is absolutely convergent because $|f(y)\\times(x-y)|\\le\\|f\\|_\\infty|x-y|$ and $\\int_{B_R(x)}|x-y|^{-2}<+\\infty$ by [F7]. With step 1.1 this proves both displayed identities at the arbitrary point $x$; the point was allowed to lie in $\\operatorname{supp}f$, since the excision argument only removed a ball around it and used the bound on the differentiated kernel, so no smoothness of the kernel at the pole is assumed. Countable Choice is used only through the polar and surface-measure interfaces [F11] and the stated choice assumption of the smooth-newtonian supplier, and no stronger principle occurs.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F7",
+            "F8",
+            "F10",
+            "F11"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For $f=0$ the potential $A$ vanishes by step 1.1 and both displayed identities reduce to $0=0$; the Statement requires no nonempty support, and $C_c^\\infty(\\mathbb R^3;\\mathbb R^3)$ contains the zero field."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-data case is the case $f=0$ of step 1.1; the point $x$ may lie in the (empty) support vacuously, and the differentiated-kernel estimates of step 2.1 remain valid because the majorants are finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction is componentwise over three coordinates and uses no counting family; the single multi-index case $\\alpha=e_i$ of steps 1.1 and 2.1 is the only indexing, and no index degenerates at one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The excision radius $\\varepsilon$ of step 1.2 is strictly positive and the ball radius $R$ is chosen with $\\operatorname{supp}f\\subset B_R(x)$; the degenerate case $x\\in\\operatorname{supp}f$ is explicitly included, since only the differentiated kernel is estimated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The outer sphere term of step 1.2 vanishes because $f=0$ on $\\partial B_R(x)$, and the inner sphere term of step 1.2 is bounded by $\\|f_k\\|_\\infty|S^2|\\varepsilon/4\\pi\\to0$; the limit $\\varepsilon\\to0$ is taken in step 2.1 by dominated convergence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is assumed in the Statement and inherited from the smooth-newtonian supplier in step 1.1 and the polar and surface-measure interfaces of steps 2.1 and 3.1; no further selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts two identities for the constructed field, not an equivalence or one-directional implication with hypotheses to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization (for example that a field with this curl must be a Newtonian potential) is asserted."
+        }
+      ],
+      "routine_steps": []
+    },
+    "post-em-coarse-graining": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The ## Postulate section fixes every object of the convention: the laboratory region U=I x Omega and frame of def-em-lab-geometry, the SI units of def-em-si-conventions, the fields of def-em-fields and sources of def-em-sources; a fixed nonnegative eta in C_c^infinity with integral one, ell>0, eta_ell(x)=ell^-3 eta(x/ell), K=supp eta, a declared radius bound R_eta with K in the closed ball of radius R_eta, the exact footprint x-ell K and the open interior averaging domain Omega_{ell,eta}={x in Omega: x-ell K in Omega}; the average F_ell(x,t)=int_Omega eta_ell(x-y)F(y,t)dy with its absolute existence, smoothness in x and derivative formula; the every-time versus almost-every-time input qualification; the compatible-extension branch with the explicit zero-extension integrability condition; the scale-separation, boundary-layer and no-constitutive-content clauses. The wording 'Adopt as a modelling postulate' and the explicit adopted status in ## Status and conventions make the assumption explicit."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The frontmatter physical_scope and clause (c)-(e) state the domain precisely: macroscopic reading only where a microscopic/observation scale separation is declared, no canonical ell, boundary-layer statements restricted to x in Omega with exterior averages governed separately, and no constitutive law or field equation supplied. Clause (e) records that no linear, local or instantaneous response is asserted and that the response assumption and the macroscopic-equation derivation are separate items."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Three independent textbook treatments are cited with locators and read in retained full texts: Tong, Electromagnetism, sec. 7.1 printed pp. 172-175 (matter described by averaged fields; the notes state the coarse-graining step is informal); Fitzpatrick node 69 (macroscopic dipole moment per unit volume absorbing atomic detail); Griffiths 3rd ed. sec. 4.4.1 printed pp. 179-180 (the material response is a model choice). The kernel/length/scale-separation convention itself is attributed to the framework, not to the sources, which is the honest account: no source fixes it."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No Proof, Refutation, Verification or Counterexample section appears; provenance.proof is not-applicable. ## Status and conventions states that the averaging, scale-separation and boundary conventions are adopted and not deduced from the vacuum equations, and that clauses (a)-(b) use only the named published mathematical suppliers (mollifier smoothing, Fubini, a.e.-equality and measure facts) under the declared Countable Choice convention. No empirical claim or measurement is manufactured."
+        }
+      }
+    },
+    "def-em-polarization-magnetization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition clauses (a)-(c): the zero model (P,M)=(0,0) on Omega x I is admissible; then rho_b=0, J_b=0, rho_f=rho, J_f=J, D=eps0 E and H=B/mu0. No nonemptiness is asserted, and the definitions remain meaningful on any open Omega x I."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition clauses (b)-(d): P=0 gives div P=0, so rho_b=0; M=0 gives curl M=0; d_tP=0 gives J_b=0; D=eps0 E and H=mu0^-1 B. The zero field case E=B=0 with (P,M)=(0,0) gives D=H=0. All identities are pointwise algebraic."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition clause (a): the maps P,M are vector-valued; the scalar coefficient one plays no special role. The definition has no counting parameter or indexed family to degenerate at one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition clause (c): the free/bound split is declared to be model data; the definition explicitly states that the same total (rho,J) with different (P,M) is a different model, and clause (e) excludes reading any decomposition of (rho,J) as canonical. No uniqueness of the split is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Omega and I are open (laboratory region of def-em-lab-geometry), so no boundary endpoints are part of the domain; no boundary trace or extension of P,M is asserted. Any use at an interface is a separate hypothesis of later interface results."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: no selection is performed; P and M are given model maps rather than chosen objects, and no sigma-algebra, cover or family is selected. The Countable Choice convention of post-em-coarse-graining is inherited only when a convolution is instantiated; the definition itself uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition clauses (b)-(d) are definitions of equality, not an equivalence statement; there is no 'if and only if' claim to split."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: the displayed definitions rho_b=-div P, J_b=d_tP+curl M, D=eps0 E+P, H=mu0^-1 B-M, rho_f=rho-rho_b, J_f=J-J_b are identities that fix the symbols; no converse direction is asserted."
+        }
+      ]
+    },
+    "pthm-em-macroscopic-maxwell": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "Adopt as a physical postulate of this framework the following four equations for the fields of [[def-em-fields]] and the sources of [[def-em-sources]]",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-em-polarization-magnetization",
+          "source_section": "Definition",
+          "quote": "$$\\rho_b:=-\\operatorname{div}P,\\qquad J_b:=\\partial_tP+\\operatorname{curl}M.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "For a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-distributional-differentiation-is-continuous-and-commutes",
+          "source_section": "Statement",
+          "quote": "Assuming Countable Choice for the cited Riemann-to-Lebesgue comparison, if $f\\in C^k(\\Omega;\\mathbb C)$ and $|\\alpha|\\le k$, then $\\partial^\\alpha u_f=u_{\\partial^\\alpha f}$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-distribution",
+          "source_section": "Definition",
+          "quote": "Write $\\langle u,\\varphi\\rangle=u(\\varphi)$; the pairing is linear in both arguments, with no conjugation.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-regular-distribution-from-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "$$\\langle u_f,\\varphi\\rangle=\\int_\\Omega f(x)\\varphi(x)\\,dx.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-locally-integrable-functions-embed-in-distributions",
+          "source_section": "Statement",
+          "quote": "The map $f\\mapsto u_f$, $u_f(\\varphi)=\\int_\\Omega f\\varphi$, is a complex-linear injection from $L^1_{\\mathrm{loc}}(\\Omega)$ modulo almost-everywhere equality into $\\mathcal D'(\\Omega)$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "$$\\varepsilon_0:=(\\mu_0c^2)^{-1}$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The bound pair is classically conserved: d_t rho_b + div J_b = 0, by cancellation of the mixed partials of the C^2 maps P and M.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "From the adopted Ampere-Maxwell identity, div curl B = 0 and div E = rho/eps0 give the distributional conservation of the total pair, d_t rho + div J = 0, with no classical derivatives of rho or J required.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "L4",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "The four macroscopic equations hold on Omega x I: div D = rho_f, div B = 0, curl E = -d_t B and curl H = J_f + d_t D.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "L1",
+            "L3",
+            "L6"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The free pair satisfies d_t rho_f + div J_f = d_t rho + div J = 0 distributionally; the free pair is distributionally conserved exactly when the total pair is.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "L4"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Under continuous partial derivatives of rho and J the same identity holds pointwise for both pairs; all claims (a)-(c) are established with the stated scope.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "L4",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the operators act on the nonempty open region Omega x I; the empty-set case is vacuous, and no nonemptiness of a level set or support is asserted, so no empty-case claim can fail."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.3: with P=M=0 the definitions give rho_b=0, J_b=0, D=eps0 E, H=mu0^-1 B, and every displayed identity reduces to the adopted vacuum equation; with E=B=0 and rho=J=0 the zero distribution has zero derivatives by L4, and steps 1.2-2.1 conclude 0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3: every identity is componentwise linear in the fields and dipole densities, so the component/space dimension (3, or the scalar case m=1 for each component) plays no special role; the scalar coefficient 1 is not singled out."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1 and 3.1: exactly the degenerate case in which rho and J have no classical derivatives is retained by the distributional identity; step 3.1 adds the classical conclusion only under the additional continuous derivatives, so no degenerate case is silently excluded or silently upgraded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Omega and I are open by def-em-lab-geometry, so no endpoint or interface trace is part of the claim; step 3.1 records that no weak-branch, singular-source or discontinuous-dipole claim is made. The scalar case of the bound conservation at t is not extended beyond the open domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is used exactly at steps 1.2 and 3.1, through the regular-distribution/classical-compatibility interfaces of L4 and the injectivity in L5; step 1.1 (the classical bound computation) and the substitution step 1.3 are choice-free, and no uncountable selection occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1: the equality d_t rho_f + div J_f = d_t rho + div J holds as an identity of distributions, so if the free pair is conserved (left side zero) then the total pair is conserved (right side zero)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1: conversely, if the total pair is conserved by step 1.2 (right side zero), the identity makes the left side the zero distribution, so the free pair is conserved; the 'exactly when' phrasing of the Statement is therefore the single equality of step 2.1."
+        }
+      ]
+    },
+    "post-em-material-closure": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The ## Postulate section fixes the frame and every object: the material rest frame is an inertial frame of the affine Minkowski model (def-inertial-frame-and-inertial-chart) of the laboratory geometry (def-em-lab-geometry), the fields are those of def-em-fields; clause (b) declares constant symmetric positive-definite 3x3 matrices epsilon, mu (isotropic scalar cases included), symmetric positive-semidefinite sigma, the decomposed free current J_f=J_c+J_ext, and states the separate isotropic broadband condition epsilon*mu>=c^-2 with its exact interpretation (characteristic speed <= c; otherwise a finite-band effective model with no universal front-speed claim); clause (c) declares the causal convolution P(t)=eps0 int_0^inf K(s)E(t-s)ds with K in L1(0,inf) and displays the absolute-convergence domination, or a finitely-subtracted analytic transfer function with holomorphy on the open upper half-plane, C^1 boundary regularity away from a real subtraction point, holomorphy near it, and the growth bound |chi(z)|<=C(1+|z|^{n-1}); clause (d) fixes the adopted status and the exclusions (ferroelectric, ferromagnetic, hysteresis, nonlinear, general nonlocal)."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The frontmatter physical_scope and clauses (a)-(d) state the scope: relations in a material rest frame, boosting changes fields and rest observer with no same-constants assertion in every frame; one branch at a time; no derivation from the vacuum equations or coarse graining; no microscopic mechanism, material data or empirical validity; explicit exclusions. The item is labelled an adopted modelling postulate."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Three independent textbook treatments with locators: Tong sec. 7.3 printed pp. 183-186 (D=eps E, B=mu H as the simplest linear materials, with the warning that eps is not as constant as pretended), sec. 7.6.1 printed pp. 205-208 (Ohmic form and DC limit) and sec. 7.5.4 printed pp. 199-205 (causal convolution, t<0 vanishing kernel, analyticity conventions); Griffiths sec. 4.4.1-4.4.2 printed pp. 179-188 and sec. 7.3.5-7.3.6 printed pp. 331-333; Fitzpatrick node 73 (linear magnetisation for simple materials). Read in retained full texts. The constant-coefficient and memory branches are attributed to the framework's own formulation, which is the honest account of a model choice."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No Proof, Refutation, Verification or Counterexample section; provenance.proof is not-applicable; ## Status and conventions states explicitly that the branches are adopted one at a time, are not derived from the vacuum equations, the averaging convention or material data, and are not asserted of any actual substance. The only mathematical content used (L1, holomorphy, absolute convergence of the convolution) is stated as a hypothesis with its elementary domination shown, not as a derived conclusion."
+        }
+      }
+    },
+    "pthm-em-causal-dispersive-response": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-em-material-closure",
+          "source_section": "Postulate",
+          "quote": "$$P(t)=\\varepsilon_0\\int_0^\\infty K(s)\\,E(t-s)\\,ds$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-em-causal-dispersive-response",
+          "source_section": "Statement",
+          "quote": "Then for every $t\\in\\mathbb R$ the integral $P(t):=\\int_0^\\infty K(s)E(t-s)\\,ds$ converges absolutely",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-em-causal-dispersive-response",
+          "source_section": "Statement",
+          "quote": "and this period-averaged work is nonnegative for every $e\\in\\mathbb C^d$ if and only if the Hermitian dissipative part $M(\\omega):=(\\chi(\\omega)-\\chi(\\omega)^*)/(2i)$ satisfies $e^*M(\\omega)e\\ge0$ for every $e\\in\\mathbb C^d$.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-em-finitely-subtracted-analytic-dispersion",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ be an integer, let $\\omega_0\\in\\mathbb R$, and let $\\chi$ be holomorphic on the upper half-plane and continuous on its closure",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "$$\\varepsilon_0:=(\\mu_0c^2)^{-1}$$",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$",
+          "uses": [
+            "1.5"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "Clause (a): the rest-frame response with eps0 K in L1(0,inf) is well defined for every t, bounded, continuous, linear and causal.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "Clause (b): the compact smooth-kernel and integrable branches give the announced transfer regularity, reality identity, growth bounds and dispersion relations; adding chi_infinity subtracts analytically only.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "L5"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "Clause (c): each declared finite subtraction order n with its own hypotheses obeys the n-subtracted relations; a bound at n0 implies bounds at every larger order under the same local hypotheses; the polynomial branch has transfer Q+chi_K.",
+          "step": "1.3",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "d-1.4",
+          "claim": "Clause (d), first part: the monochromatic period-averaged work equals (eps0 omega/2) Im(e* chi_tot(omega) e) and is nonnegative for every e iff M_tot(omega) is positive semidefinite.",
+          "step": "1.4",
+          "inputs": [
+            "L5",
+            "L3"
+          ]
+        },
+        {
+          "id": "d-1.5",
+          "claim": "Clause (d), instantaneous split: the exact work split into storage and antisymmetric terms, the identity M_tot=M_K+A/i, and the explicit skew example with averaged work +/- eps0 omega.",
+          "step": "1.5",
+          "inputs": [
+            "L5",
+            "L4"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "Assembly of clauses (a)-(e) with the model-conditional scope and per-branch Choice hypotheses.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "step 1.5",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.4: K=0 is in L^1 and gives the zero response and chi=0 with zero transfer and zero work; the empty-kernel case is included, and no nonemptiness of the frequency set (omega>0), amplitude set (e arbitrary including e=0, which gives zero work) or kernel support is assumed. The zero-amplitude case e=0 trivially satisfies the monotone criterion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.5: the zero history, zero kernel and zero transfer give zero response and zero work; the zero instantaneous matrix has S=A=0 and zero work; the criterion e*M_tot e>=0 holds with equality at e=0. All displayed identities reduce correctly at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.5: d=3 is fixed but every argument is entrywise and holds for any d>=1; the n=1 subtraction, the single-frequency omega>0 and the one-period average T=2pi/omega are the stated cases. The scalar case is the componentwise reading and no rank-one degeneracy is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 1.5: degenerate subtraction orders are handled explicitly (a growth bound at n0 does not justify lower orders; n=0 needs its own decay), the removable-value caveat covers chi-P_n vanishing to order n at omega_0, and a nonzero antisymmetric instantaneous part is shown to fail passivity for a suitable amplitude, so no degeneracy is silently assumed away."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2-1.3: the boundary behaviour is exactly the stated hypothesis (continuity on the closure and C^1 on the real boundary away from the subtraction point, holomorphy near omega_0); the t<0 endpoint of the causal kernel is the support convention of A1 (K supported in [0,inf), compact branch in (0,inf)), and the period integral is over a closed period [0,T] with periodic integrands."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is used for the smooth Riemann/Lebesgue comparison route and Dependent Choice in the integrable branches, exactly as carried from the suppliers L1 and L2 and restated in the Statement; the finite-dimensional work algebra of steps 1.4-1.5 adds no choice, and no selection of frequencies or amplitudes occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.4: if the period-averaged work is nonnegative for every amplitude e, the supplier's iff criterion gives e*M_tot(omega)e>=0 for every e, i.e. M_tot(omega) positive semidefinite."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.4: conversely, if M_tot(omega) is positive semidefinite then Im(e*chi_tot(omega)e)=e*M_tot(omega)e>=0 for every e, so the displayed work is nonnegative for every amplitude; this is the same identity read in the opposite direction."
+        }
+      ]
+    },
+    "pthm-em-restricted-material-energy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "pthm-em-macroscopic-maxwell",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{div}D=\\rho_f,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}H=J_f+\\partial_tD.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "(a) [Smooth branch] Let $E,B$ be jointly $C^1$ fields with the additional derivatives required by each equation existing and continuous, and let $\\rho,J$ be continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-em-material-closure",
+          "source_section": "Postulate",
+          "quote": "$$D=\\varepsilon E,\\qquad B=\\mu H,\\qquad J_c=\\sigma E,$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-the-divergence-and-curl-of-a-cross-product",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{div}(F\\times G)=\\langle\\operatorname{curl}F,G\\rangle-\\langle F,\\operatorname{curl}G\\rangle,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-em-parameter-integrals",
+          "source_section": "Statement",
+          "quote": "$$\\frac{d}{dt}\\int_Kf(x,t)\\,d\\lambda_n(x)=\\int_K\\partial_tf(x,t)\\,d\\lambda_n(x),$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. If Omega has the specified finite piecewise $C^1$ presentation and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, then $\\int_\\Omega\\operatorname{div}F=\\sum_j\\int_{S_j}F\\cdot\\nu_j\\,dS$, with faces counted once off E.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The two dotted curl equations E.curl H=E.J_f+E.d_tD and H.curl E=-H.d_tB hold on Omega x I.",
+          "step": "1.1",
+          "inputs": [
+            "A1"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "u=(E.eps E+H.mu H)/2 is nonnegative and strictly positive away from (E,H)=(0,0).",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "L2"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "J_f.E=E.sigma E+J_ext.E with E.sigma E>=0, the Ohmic reading.",
+          "step": "1.3",
+          "inputs": [
+            "A2",
+            "L2"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "div(E x H)=-(E.J_f+E.d_tD+H.d_tB) and d_t u=E.d_tD+H.d_tB give the local balance d_t u+div S=-J_f.E.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A2",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "The fixed-volume balance with the boundary flux follows by differentiation under the integral sign and the divergence theorem under AC_omega; the scope (d) is recorded.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "step 2.1",
+            "L3",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: the local balance is asserted on the nonempty open Omega x I; for the fixed-volume clause the empty interior and the case of zero enclosed flux are covered by the same identities (all integrals over the empty set vanish), and no nonempty-source assumption is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1 and 3.1: E=H=0 gives u=0, S=0 and the balance 0=0; J_f=0 gives flux-free balance; the zero field is the unique minimiser of u by positive definiteness (step 1.2), and the divergence theorem and differentiation under the integral sign apply to the zero fields."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1: the vector fields have three components and the fixed volume is a single specified piecewise C^1 domain; the dimensions m=3 and n=3 are fixed in the Statement, and the scalar case is only the componentwise reading of the inner products. The one-dimensional case n=1 in L3 is not used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1: degenerate cases are retained: sigma positive semidefinite (not necessarily definite, so zero dissipation directions are allowed), eps and mu positive definite (so u=0 only for E=H=0, shown in step 1.2), and no nondegeneracy of the fields or of the boundary presentation is assumed beyond the theorem's hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and repaired step 3.1: for each t in (t0,t1), choose a compact [a,b] contained in I with a<t<b. The parameter-integral lemma applies on this local closed interval; t0,t1 need not be in I. The boundary flux remains in the identity; no endpoint balance is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is assumed exactly in the fixed-volume clause (c) as the hypothesis of the divergence theorem L4 and is used only in step 3.1; the local balance, positivity and dissipation readings of steps 1.1-2.1 are choice-free, and no selection of exhaustion or normals occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.1: if E.sigma E>=0 (the dissipation term) then substituting J_f=sigma E+J_ext into the local balance gives the displayed dissipation reading with the nonnegative term on the left; the direction uses only the decomposition of A2."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.1: conversely the Ohmic reading is literally the local balance after moving E.sigma E from the right-hand side to the left; since both displays are the same identity written with the substitution J_f=sigma E+J_ext, the reverse direction is the same computation read backwards."
+        }
+      ]
+    },
+    "ex-em-constitutive-unit-counterexample": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "in F m$^{-1}$, consistent with the exact SI relation $\\varepsilon_0\\mu_0=1/c^2$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-em-polarization-magnetization",
+          "source_section": "Definition",
+          "quote": "$$D:=\\varepsilon_0E+P,\\qquad H:=\\mu_0^{-1}B-M,$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "post-em-material-closure",
+          "source_section": "Postulate",
+          "quote": "$$D=\\varepsilon E,\\qquad B=\\mu H,\\qquad J_c=\\sigma E,$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The dimension of eps0 D is C^3 s^2 kg^-1 m^-5, different from the dimension kg m s^-2 C^-1 of E, so E=eps0 D fails dimensionally.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "Solving D=eps0 E+P gives E=(D-P)/eps0; every constant law E=eta D with eta of dimension V m C^-1 is dimensionally admissible, so units do not determine eta or the response type.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "The memory-branch convolution is not an instantaneous multiplication: the explicit bounded continuous history E(t)=min(1,max(0,-t)) with K=1_[0,1] gives response eps0/2 at t=0 while an instantaneous law gives 0.",
+          "step": "1.3",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "Clauses (a)-(d) hold: the dimensional exclusion, the underdetermination by units, and the frequency-symbol/model-identification warning, with the stated scope.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example and step 1.3: the empty/vanishing history is the zero history, for which both the convolution and any instantaneous law give zero; the example asserts no nonemptiness and the dimensional computations are nonvacuous dimension equalities that do not depend on data being present."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.3: the zero field D=0, the vacuum case P=0 (for which E=eps0^-1 D) and the zero kernel K=0 are all included; the witness of step 1.3 uses E(0)=0 to separate the convolution from an instantaneous law, so the zero value at the time of interest is precisely the point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and steps 1.1-1.3: the scalar (isotropic) case is the one used; eta=eps^-1 and chi_e=eps/eps0-1 are scalars in the displayed comparison, and no matrix case is needed. The unit dimension is computed once; the componentwise generalisation is immediate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: the vacuum case P=0 is retained (E=eps0^-1 D), and no invertibility of eta or eps beyond the declared positive constants is assumed; step 1.3's witness kernel is allowed to be any fixed nonzero nonnegative L^1 kernel, including kernels with nonnegative values, so no strict positivity of the kernel is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3: the explicit bounded history is continuous at its transition points t=0 and t=-1 and the response is evaluated at t=0, an interior time of the declared history; the integral runs over the finite subinterval [0,1] and the convolution is absolutely convergent by the L^1 hypothesis, so no endpoint or regularity caveat is hidden."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: no choice principle is used; the dimension computations, the algebraic solution for E and the explicit witness with a fixed kernel and history are constructive, and L1 and L2 are choice-free conventions and definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2: if a constant eta of the stated dimension is declared, then the law E=eta D is dimensionally admissible, so dimensional consistency is necessary but not sufficient to determine eta; the forward reading of the 'units do not determine the law' claim is immediate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2: conversely, two different values eta and eta' both yield dimensionally admissible laws E=eta D and E=eta' D, so no unit computation selects one; the reverse reading is the same freedom observed from the other side, and no uniqueness of eta is claimed or implied."
+        }
+      ]
+    }
+  }
+}

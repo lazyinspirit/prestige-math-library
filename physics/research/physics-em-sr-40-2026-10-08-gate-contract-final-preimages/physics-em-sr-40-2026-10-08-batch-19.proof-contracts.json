@@ -1,0 +1,1485 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-em-causal-dispersive-response",
+    "thm-em-radiation-asymptotic-flux",
+    "ex-em-causal-response-and-radiation-prerequisites-hypothesis-boundaries"
+  ],
+  "contracts": {
+    "thm-em-causal-dispersive-response": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "For a complex measurable function $h=u+iv$ with $u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be **integrable** when $|h|$ is integrable, and then define $$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.3",
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-l-one-of-a-measure",
+          "source_section": "Definition",
+          "quote": "For a measure $\\mu$, write $$L^1(\\mu):=\\{f:X\\to\\mathbb C:\\ f \\text{ is integrable}\\}.$$ Here **integrable** is the notion introduced in [[def-integrable-real-and-complex-functions-and-their-integrals]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.3",
+            "2.5"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then $$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.5",
+            "2.6",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.5",
+            "2.6",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Since [[prop-closure-properties-of-measurable-functions-used-by-the-integral]] implies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$** by $$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$ where the integral on the right is the nonnegative Lebesgue integral of [[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.5",
+            "2.6",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.5",
+            "2.6",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "with the convention of [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Then $f\\in L^1(\\mu)$, $$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$ and hence $$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.4",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuity-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "for almost every $x$, the map $t\\mapsto f(x,t)$ is continuous on $I$; 3.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-differentiation-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "Then $$F(t):=\\int f(x,t)\\,d\\mu(x)$$ is differentiable on $I$, and $$F'(t)=\\int \\frac{\\partial f}{\\partial t}(x,t)\\,d\\mu(x),$$ with the same zero extension in the last integral.",
+          "uses": [
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "For $z\\in\\mathbb C$, define $$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.5",
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-complex-exponential-series-converges-everywhere",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$, the series $\\sum z^n/n!$ converges absolutely.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.5",
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and $$ \\exp'(z)=\\exp z $$ for every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.5",
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.5",
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.5",
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying $$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$ For every $z,w\\in\\mathbb C$, $$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$ $$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.5",
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Define $$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$ and define its **modulus** by $$|z|=\\sqrt{a^2+b^2}.$$ The real numbers are least-upper-bound complete ([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and is unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.5",
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-continuous-partials-and-cauchy-riemann-imply-holomorphic",
+          "source_section": "Statement",
+          "quote": "$$ Then $f$ is complex differentiable at $a$. Consequently, if these hypotheses hold at every point of $U$, then $f$ is holomorphic on $U$.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-differentiability-holomorphic-and-entire",
+          "source_section": "Definition",
+          "quote": "The function $f$ is **holomorphic on $U$** when it is complex differentiable at every point of $U$.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-cauchy-theorem-for-null-homotopic-loops",
+          "source_section": "Statement",
+          "quote": "If $\\gamma$ is path-homotopic relative to the endpoints to a constant loop in $\\Omega$, then $$\\int_\\gamma f(z)\\,dz=0.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Then $uv'$ and $u'v$ are integrable and $$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$ **The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without it the two integrals in the display need not exist at all, and the identity is then not false but ill-formed; that is the false statement that deletes it on the companion page.",
+          "uses": [
+            "2.6"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Then $f$ is Lebesgue measurable on $[a,b]$ and is integrable there, and its Lebesgue integral equals its Riemann integral: $$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$ This is the point at which the completeness of Lebesgue measure is used essentially: the proof obtains a Borel function equal to $f$ almost everywhere, and measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "2.6"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent: 1.",
+          "uses": [
+            "2.6"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.",
+          "uses": [
+            "2.6"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.7"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.7"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$; 4.",
+          "uses": [
+            "2.7"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number $$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$ the finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$ (extended by $0$ beyond $n$, as every finite list in this library is).",
+          "uses": [
+            "1.4",
+            "2.7",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-absolutely-continuous-function",
+          "source_section": "Definition",
+          "quote": "The function $f$ is **absolutely continuous** on $[a,b]$ if for every $\\varepsilon>0$ there is $\\delta>0$ such that every finite family of subintervals $[u_j,v_j]\\subseteq[a,b]$, indexed by $j<m$, whose open interiors are pairwise disjoint and which satisfies $$\\sum_{j<m}(v_j-u_j)<\\delta$$ also satisfies $$\\sum_{j<m}|f(v_j)-f(u_j)|<\\varepsilon.$$ Finite sums and the empty sum are those of [[def-finite-sum]] and [[lem-finite-sum-laws]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-em-integrable-causal-dispersion",
+          "source_section": "Statement",
+          "quote": "Then the entries of $\\chi$ are holomorphic functions on the upper half-plane ([[def-complex-domain]]), continuous and $C^1$ on its real boundary, bounded on the closed upper half-plane with $|\\chi_{jk}(z)|\\le|K_{jk}(0)|+\\|K'_{jk}\\|_1$ for $|z|\\ge1$, and the entrywise principal-value dispersion formulas hold: for real $\\omega$, $$\\operatorname{Re}\\chi_{jk}(\\omega)=\\frac1\\pi\\operatorname{PV}\\!\\int_{\\mathbb R}\\frac{\\operatorname{Im}\\chi_{jk}(\\xi)}{\\xi-\\omega}\\,d\\xi,\\qquad \\operatorname{Im}\\chi_{jk}(\\omega)=-\\frac1\\pi\\operatorname{PV}\\!\\int_{\\mathbb R}\\frac{\\operatorname{Re}\\chi_{jk}(\\xi)}{\\xi-\\omega}\\,d\\xi .$$ The sharper bound $|\\chi_{jk}(z)|\\le(|K_{jk}(0)|+\\|K\\prime_{jk}\\|_1)/|z|$ holds for every nonzero $z$ with $\\operatorname{Im}z\\ge0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-em-period-average",
+          "source_section": "Statement",
+          "quote": "**Scalar form.** Let $a,d\\in\\mathbb C$. Then\n\n$$\\frac1T\\int_0^T\\operatorname{Re}\\bigl(ae^{-i\\omega t}\\bigr)\\operatorname{Re}\\bigl(de^{-i\\omega t}\\bigr)\\,dt=\\frac12\\operatorname{Re}\\bigl(a\\overline d\\bigr).$$",
+          "uses": [
+            "3.3"
+          ],
+          "provisional": true
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "Fix $t\\in\\mathbb R$, $j\\le d$ and set $g_j(s):=\\sum_{k=1}^dK_{jk}(s)E_k(t-s)$ for $s>0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "Fix $z=x+iy\\in\\mathbb C$. The map $s\\mapsto e^{izs}$ is continuous, since it is the composition of the continuous linear map $s\\mapsto izs$ with the continuous exponential, and $K_{jk}$ is measurable;",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "_{jk}(0)|+\\|K_{jk}'\\|_1$ for $|z|\\ge1$ (which follows from its sharper $|z|^{-1}$ bound), together with the instantaneous-response subtraction for a real matrix $\\chi_\\infty$ and the scalar case $d=1$.",
+          "step": "1.3",
+          "inputs": [
+            "F13",
+            "F14",
+            "F8"
+          ]
+        },
+        {
+          "id": "d-1.4",
+          "claim": "Write $a_j=\\alpha_j+i\\beta_j$ and $e_j=p_j+iq_j$ for the components of $a=\\varepsilon_0\\chi(\\omega)e$ and $e$.",
+          "step": "1.4",
+          "inputs": [
+            "F12",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The preceding estimate is uniform in $t$, so $\\sup_{t\\in\\mathbb R}|P_j(t)|\\le M\\sum_{k=1}^d\\|K_{jk}\\|_1$ and $P=(P_1,\\dots,P_d)$ is bounded.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Fix $j$ and apply [F5] with $X=(0,\\infty)$ carrying Lebesgue measure, $I=\\mathbb R$ and $f(s,t):=\\sum_{k=1}^dK_{jk}(s)E_k(t-s)$: for every $t$ the function $f(\\cdot,t)$ is integrable by step 1.1;",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-2.3",
+          "claim": "inuous and agree on $(-\\infty,t_0]$, and if $t\\le t_0$, then for every $s>0$ the argument $t-s$ lies in $(-\\infty,t_0]$, so the integrands of step 1.1 agree pointwise and hence $P_{E_1}(t)=P_{E_2}(t)$;",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "d-2.4",
+          "claim": "(x+iy)s}$ is differentiable for every $s$ with derivative $isK_{jk}(s)e^{i(x+iy)s}$, and on the bounded parameter set this derivative is dominated by $(1+b)e^{b|y|}|K_{jk}(s)|$, an integrable function.",
+          "step": "2.4",
+          "inputs": [
+            "step 1.2",
+            "F3",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "d-2.5",
+          "claim": "erm gives $\\sum_{n\\le m}\\overline{(i\\omega s)^n/n!}=\\sum_{n\\le m}(-i\\omega s)^n/n!$, because conjugation is a continuous real-field automorphism with $\\overline i=-i$ and fixes the real numbers $1/n!$;",
+          "step": "2.5",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-2.6",
+          "claim": "parts of $s\\mapsto K_{jk}(s)$ and of $v(s):=e^{izs}/(iz)$ are differentiable with continuous derivatives, and $K_{jk}(0)=K_{jk}(b)=K_{jk}'(0)=K_{jk}'(b)=0$ because $\\operatorname{supp}K\\subseteq(0,b)$;",
+          "step": "2.6",
+          "inputs": [
+            "step 1.2",
+            "F10",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-2.7",
+          "claim": "Differentiating the expressions of step 1.4 and using [F11] together with the algebra of derivatives gives $P_j'(t)=\\omega(-\\alpha_j\\sin(\\omega t)+\\beta_j\\cos(\\omega t))$;",
+          "step": "2.7",
+          "inputs": [
+            "step 1.4",
+            "F11",
+            "F12",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "By step 2.4 and the linearity of the integral, $\\partial_y\\chi_{jk}(z)=\\int_0^\\infty(-s)K_{jk}(s)e^{izs}\\,ds=\\int_0^\\infty i\\bigl(isK_{jk}(s)e^{izs}\\bigr)ds=i\\,\\partial_x\\chi_{jk}(z)$ for every $z$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.4",
+            "F2",
+            "F8"
+          ]
+        },
+        {
+          "id": "d-3.2",
+          "claim": "Bounds and boundary continuity: for $z\\ne0$ with $\\operatorname{Im}z\\ge0$, step 2.6 and $|e^{izs}|\\le1$ for $s\\ge0$ give $|\\chi_{jk}(z)|\\le|z|^{-2}\\|K_{jk}''\\|_1$;",
+          "step": "3.2",
+          "inputs": [
+            "step 1.2",
+            "step 2.6",
+            "F2",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-3.3",
+          "claim": "0^T\\operatorname{Re}(e_je^{-i\\omega t})\\operatorname{Re}(d_je^{-i\\omega t})\\,dt=\\sum_{j=1}^d\\frac12\\operatorname{Re}\\bigl(e_j\\overline{d_j}\\bigr)=\\frac12\\operatorname{Re}\\bigl(e\\cdot\\overline d\\bigr)$.",
+          "step": "3.3",
+          "inputs": [
+            "step 2.7",
+            "F12",
+            "F15",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "Dispersion relations: fix real $\\omega$ and $j,k$, and put $\\varphi(z):=\\chi_{jk}(z)/(z-\\omega)$ for $z\\ne\\omega$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "F2",
+            "F4",
+            "F9"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "omega)e-e^*\\chi(\\omega)^*e\\bigr)/(2i)$, and $e^*\\chi(\\omega)^*e=\\sum_{j,k}\\overline{e_j}\\overline{\\chi_{kj}(\\omega)}e_k=\\overline{e^*\\chi(\\omega)e}$ because $\\chi(\\omega)^*$ is the conjugate transpose;",
+          "step": "5.1",
+          "inputs": [
+            "step 3.3",
+            "F12",
+            "F2",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The dimension is fixed at $d\\ge1$ and every sum defining the response is a finite sum over $k\\le d$; no union, index set or family in the statement can be empty, and the empty history is simply the zero history, for which every displayed bound holds with $0$ on both sides.",
+          "reviewed": {
+            "upheld": true,
+            "by": "step3b EM supplier repair reviewer",
+            "reason": "Response matrices have dimension d\u22651, so sums over their coordinate index are not empty. The zero history is allowed: linearity makes its response zero, and the convolution majorant has integral zero for that history."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero kernel $K=0$ and the zero history are admitted throughout: steps 1.1 and 1.2 give $P=0$ and $\\chi=0$ with all bounds trivial, the by-parts identity of step 2.6 holds for $z\ne0$ (the case $z=0$ is excluded there exactly because of the factor $z^{-2}$), and step 4.1 obtains $0=i\\pi\\cdot0$; in clause (d) the vector $e=0$ gives zero work and $M(\\omega)$ arbitrary, which is why the equivalence is stated for every $e$ including $e=0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case $d=1$ is admitted and is the scalar case recorded in clause (c) and used in the companion example; nothing in steps 1.1-5.1 uses $d\\ge2$, and the matrix notation degenerates to a scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate instances are the zero kernel, the zero history and $b\to0$ (a kernel supported in an arbitrarily short interval $(0,b)$): the by-parts identity of step 2.6 and the bound of step 3.2 contain the explicit factor $b$ or the norm $\\|K\\|_1$ and remain valid, and no nondegeneracy hypothesis is used anywhere."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The two endpoints in play are disposed of explicitly: in step 2.6 the boundary terms of both integrations by parts vanish because $\\operatorname{supp}K\\subseteq(0,b)$; in step 4.1 the indentation radius $\\delta\\downarrow0$ and the truncation $R\to\\infty$ are the two limiting endpoints of the contour, and their contributions $\to-i\\pi\\chi_{jk}(\\omega)$ and $\to0$ are computed. In steps 2.4 and 3.2 the boundary $\\operatorname{Im}z=0$ is handled by the dominated-convergence argument rather than by analytic continuation across it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "$\\mathrm{AC}_\\omega$ is assumed in the statement for the Riemann/Lebesgue comparison used in step 2.6, and $\\mathrm{DC}$ is assumed in clause (c) and inherited from the cited integrable-branch supplier at step 1.3; no other choice is made in steps 1.1-5.1 \u2014 the contour of step 4.1 is an explicit parametrized curve, not a selected family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The only equivalence in the statement is clause (d)'s: nonnegative period-averaged work for every $e$ implies positive semidefiniteness of $M(\\omega)$. Step 3.3 identifies the work with $(\u000barepsilon_0\\omega/2)e^*M(\\omega)e$, so the forward direction is immediate from $\u000barepsilon_0\\omega>0$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction of clause (d), that positive semidefiniteness of $M(\\omega)$ makes every period-averaged work nonnegative, is the same identity of step 3.3 read in the other direction, together with $\u000barepsilon_0\\omega/2>0$; both directions are stated and used at the end of step 5.1."
+        }
+      ]
+    },
+    "thm-em-radiation-asymptotic-flux": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "For a complex measurable function $h=u+iv$ with $u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be **integrable** when $|h|$ is integrable, and then define $$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Since [[prop-closure-properties-of-measurable-functions-used-by-the-integral]] implies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$** by $$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$ where the integral on the right is the nonnegative Lebesgue integral of [[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-l-one-of-a-measure",
+          "source_section": "Definition",
+          "quote": "For a measure $\\mu$, write $$L^1(\\mu):=\\{f:X\\to\\mathbb C:\\ f \\text{ is integrable}\\}.$$ Here **integrable** is the notion introduced in [[def-integrable-real-and-complex-functions-and-their-integrals]].",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$, then $$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number $$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$ the finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$ (extended by $0$ beyond $n$, as every finite list in this library is).",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "The empty surface has zero integral.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let U,V be open subsets of $\\mathbb R^m$, and let $T:U\\to V$ be a $C^1$ diffeomorphism. For every nonnegative Borel $h:V\\to[0,\\infty]$, $\\int_V h(y)\\,dy=\\int_U h(T(x))|\\det DT(x)|\\,dx$, with equality in $[0,\\infty]$ and $0\\cdot\\infty=0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.2",
+            "5.1",
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then $$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.2",
+            "5.1",
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.2",
+            "5.1",
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent: 1.",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.2",
+            "5.1",
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Then the Euclidean ball $B(x,r)$ is Lebesgue measurable and satisfies $$0<\\lambda(B(x,r))<\\infty.$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "with the convention of [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with $$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$ Equivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which $f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals the average rate of change across the whole interval.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-em-parameter-integrals",
+          "source_section": "Statement",
+          "quote": "Then $t\\mapsto\\int_Sf(\\sigma,t)\\,dS(\\sigma)$ is differentiable in the same relative sense with $$\\frac{d}{dt}\\int_Sf(\\sigma,t)\\,dS(\\sigma)=\\int_S\\partial_tf(\\sigma,t)\\,dS(\\sigma).$$ The statements are pointwise in $t$ and make no claim about moving parameter sets $K(t)$ or $S(t)$, about singularities crossing $K$ or $S$, about differentiability of $\\partial_tf$, or about differentiation in the spatial variables; only the one-dimensional parameter $t$ is differentiated.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$; 4.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-em-wave-cauchy-kirchhoff",
+          "source_section": "Statement",
+          "quote": "Then: (a) $u$ is of class $C^\\infty$ on $\\mathbb R^3\\times[t_0,T]$ in the extension sense, $Wu=h$ on $\\mathbb R^3\\times(t_0,T)$ (indeed on the open neighbourhood of the closed time interval on which the extension of $h$ is defined), $u(\\cdot,t_0)=a$ and $\\partial_tu(\\cdot,t_0)=b$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Then $\\sigma$ is a finite Borel measure on $S^{n-1}$, and for every Borel measurable $f : \\mathbb R^n \\to [0,\\infty]$, $$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$ Moreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this property.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "y|\\ge|x|-a>a$, so the maps $(x,t,y)\\mapsto\\rho(y,t-R/c)/R$ and $(x,t,y)\\mapsto\\mathbf J(y,t-R/c)/R$ are $C^\\infty$ on a neighbourhood of $\\{|x|>2a\\}\\times\\mathbb R\\times\\overline B_a$ by [F6] and [F7].",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": " $n\\in S^2$, expanding $R^2=(r-\\sigma)^2+|y|^2-\\sigma^2$ with $\\sigma=n\\cdot y$ gives $|R-(r-\\sigma)|=\\bigl||y|^2-\\sigma^2\\bigr|/(R+r-\\sigma)\\le a^2/r$ because $R+r-\\sigma\\ge r-\\sigma+|r-\\sigma|\\ge r$;",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F12"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "Field formulas: by [F6], $\\nabla_xR=\\mathbf N$, $\\nabla_x(t-R/c)=-\\mathbf N/c$ and $\\nabla_x\\times[\\mathbf J(y,t-R/c)]=-\\mathbf N\\times\\mathbf J_t(y,t-R/c)/c$, while $\\nabla_x(1/R)=-\\mathbf N/R^2$;",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F12",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Polar-coordinates identity: fix $|x|>2a$ and $t\\in\\mathbb R$, and let $h$ be either $\\rho$ or one component $J_k$;",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F14",
+            "F3",
+            "F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d-2.3",
+          "claim": "Continuity identity: fix $n,u$ and let $\\rho_0>a$;",
+          "step": "2.3",
+          "inputs": [
+            "step 1.2",
+            "F11",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Identification with the Cauchy solution: for $t\\in[t_0,T]$ substitute $r=c(t-v)$ in the identity of step 2.2;",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "F10",
+            "F8"
+          ]
+        },
+        {
+          "id": "d-3.2",
+          "claim": " 2.1 and the definition of $\\mathbf V$ give $\\mathbf E(rn,u+r/c)-\\mathbf E_{\\mathrm{lead}}(n,u,r)=\\frac{\\mu_0}{4\\pi}\\int_{B_a}(F_{\\mathrm{tot}}-F_{\\mathrm{lead}})\\,dy$ by the linearity of the integral.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 2.3",
+            "F12",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "The moments and V are jointly smooth by parameter integration on the fixed compact closed ball; boundary integrands vanish, so open/closed ball integrals agree.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.2",
+            "F12",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "d-4.2",
+          "claim": "_{\\mathrm{lead}}+\\boldsymbol\\rho_E$ and $\\mathbf B=n\\times\\mathbf E_{\\mathrm{lead}}/c+\\boldsymbol\\rho_B$ at $(rn,u+r/c)$ with $|\\boldsymbol\\rho_E|\\le\\Gamma_E/r^2$, $|\\boldsymbol\\rho_B|\\le\\Gamma_B/r^2$;",
+          "step": "4.2",
+          "inputs": [
+            "step 3.2",
+            "F12",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "+r/c)\\,d\\Omega(n)-\\frac{\\mu_0}{16\\pi^2c}\\int_{S^2}|n\\times\\mathbf V(n,u)|^2\\,d\\Omega(n)=\\int_{S^2}R(n,u,r)\\,d\\Omega(n)$ has absolute value at most $\\frac{C}{r}\\int_{S^2}1\\,d\\Omega$, which tends to $0$;",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 4.2",
+            "F13",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty index set or empty family appears: the spatial integrals are over the fixed nonempty ball $B_a$ with $a>0$ and the surface integral is over $S^2$; the only degenerate spatial case would be $a=0$, excluded by the statement hypothesis $a>0$, so no empty-domain instance can arise."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero source $\rho=\\mathbf J=0$ satisfies (H1), (H2): step 3.1 gives $\u000barphi=\\mathbf A=0$ for all times by the identification with the zero-data Cauchy solution, step 3.2 gives $\\mathbf E=\\mathbf B=0$ with $\\Gamma_E=\\Gamma_B=0$, and the limit of step 5.1 becomes $0=0$ because $\\mathbf V=0$. The constant $\\delta_y$ of step 1.2 is estimated in absolute value, so negative values present no difficulty."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No dimension, multiplicity or count is a parameter: $c,\\mu_0,a,t_0,T$ are fixed positive or ordered constants and the estimates are uniform in $n\\in S^2$, $u\\in[t_0,T]$ and $r\\ge2a$; the value one is not singled out, and no dimension index occurs in the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate configurations are $T=t_0$ (excluded by $T>t_0$), $t=t_0$ (step 3.1 then gives a vanishing source integral and an initial value that agrees with the zero-data Cauchy solution, as the source vanishes on $\\mathbb R^3\times(-\\infty,t_0)$), and $\\mathbf V(n,u)=0$ (then both sides of step 5.1 vanish). Spheres of zero radius do not occur since $r\\ge2a>0$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The temporal endpoints $t_0,T$ of the source support are handled by (H1) and are exactly where the boundary flux in step 2.3 vanishes; the radial endpoints are $r=2a$ (admitted in all estimates, with $r-a\\ge a$) and $r\to\\infty$ (the limit of step 5.1), and the angular integration is over the closed sphere, which is compact with finite surface measure by [F13]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "$\\mathrm{AC}_\\omega$ is assumed in the statement and used through the polar-coordinates formula [F9], the change of variables [F10], the surface integral [F13] and the divergence theorem [F11]; no other selection is made \u2014 the partition of unity of the surface integral is part of its definition, and the ball $B_{\rho_0}$ of step 2.3 is an explicit radius."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no equivalence: clauses (a), (b), (c) are implications from the hypotheses to the displayed identities and estimates, so there is no forward direction of an iff to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the same reason there is no reverse direction of an equivalence in the statement; the only converse-shaped point is the contrast in the companion example between the fixed-retarded-time limit and the fixed-observation-time flux, which is an independent computation rather than the converse of a stated equivalence."
+        }
+      ]
+    },
+    "ex-em-causal-response-and-radiation-prerequisites-hypothesis-boundaries": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$ provided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$, $$\\exp^{(m)}=\\exp.$$ In particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and $$f(x)=G'(x)\\qquad(a<x<b),$$ then $$\\int_a^b f=G(b)-G(a).$$ No derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Then $uv'$ and $u'v$ are integrable and $$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$ **The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without it the two integrals in the display need not exist at all, and the identity is then not false but ill-formed; that is the false statement that deletes it on the companion page.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Then $f$ is Lebesgue measurable on $[a,b]$ and is integrable there, and its Lebesgue integral equals its Riemann integral: $$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$ This is the point at which the completeness of Lebesgue measure is used essentially: the proof obtains a Borel function equal to $f$ almost everywhere, and measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Then $$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Then $f\\in L^1(\\mu)$, $$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$ and hence $$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Since [[prop-closure-properties-of-measurable-functions-used-by-the-integral]] implies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$** by $$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$ where the integral on the right is the nonnegative Lebesgue integral of [[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-l-one-of-a-measure",
+          "source_section": "Definition",
+          "quote": "For a measure $\\mu$, write $$L^1(\\mu):=\\{f:X\\to\\mathbb C:\\ f \\text{ is integrable}\\}.$$ Here **integrable** is the notion introduced in [[def-integrable-real-and-complex-functions-and-their-integrals]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "For a complex measurable function $h=u+iv$ with $u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be **integrable** when $|h|$ is integrable, and then define $$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent: 1.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-c1-lipschitz-ac-bv-hierarchy",
+          "source_section": "Statement",
+          "quote": "Every Lipschitz $f$ is absolutely continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-absolutely-continuous-function",
+          "source_section": "Definition",
+          "quote": "The function $f$ is **absolutely continuous** on $[a,b]$ if for every $\\varepsilon>0$ there is $\\delta>0$ such that every finite family of subintervals $[u_j,v_j]\\subseteq[a,b]$, indexed by $j<m$, whose open interiors are pairwise disjoint and which satisfies $$\\sum_{j<m}(v_j-u_j)<\\delta$$ also satisfies $$\\sum_{j<m}|f(v_j)-f(u_j)|<\\varepsilon.$$ Finite sums and the empty sum are those of [[def-finite-sum]] and [[lem-finite-sum-laws]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$; 4.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$, $$\\exp^{(m)}=\\exp.$$ In particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "For $z\\in\\mathbb C$, define $$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and $$ \\exp'(z)=\\exp z $$ for every $z\\in\\mathbb C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-complex-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f$ is complex differentiable at $a\\in U$ and $g$ is complex differentiable at $f(a)$, then $g\\circ f$ is complex differentiable at $a$ and $$ (g\\circ f)'(a)=g'(f(a))f'(a).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-primitive",
+          "source_section": "Definition",
+          "quote": "A **primitive** of $f$ on $U$ is a holomorphic function $F:U\\to\\mathbb C$ in the sense of [[def-complex-differentiability-holomorphic-and-entire]] such that $F'(z)=f(z)$ for every $z\\in U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fundamental-theorem-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "If $F'=f$ is continuous, then $$\\int_\\gamma f(z)\\,dz=F(\\gamma(b))-F(\\gamma(a)).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-line-integral-over-a-rectifiable-path",
+          "source_section": "Definition",
+          "quote": "Define $$\\int_\\gamma f(z)\\,dz:=\\int_a^b u(\\gamma(t))\\,dx(t)-\\int_a^b v(\\gamma(t))\\,dy(t)+i\\left(\\int_a^b v(\\gamma(t))\\,dx(t)+\\int_a^b u(\\gamma(t))\\,dy(t)\\right),$$ where the four integrals are the real Riemann\u2013Stieltjes integrals of [[def-riemann-stieltjes-sum-and-integral]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "source_section": "Statement",
+          "quote": "Then $$\\int_\\gamma f(z)\\,dz=\\sum_j\\int_{t_j}^{t_{j+1}}f(\\gamma(t))\\gamma'_j(t)\\,dt,$$ and $$\\int_\\gamma |f(z)|\\,|dz|=\\sum_j\\int_{t_j}^{t_{j+1}}|f(\\gamma(t))|\\,|\\gamma'_j(t)|\\,dt.$$ The real and imaginary parts of the first display are the published vector line integrals of $(u,-v)$ and $(v,u)$, while the second is the published scalar line integral.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Define $$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$ and define its **modulus** by $$|z|=\\sqrt{a^2+b^2}.$$ The real numbers are least-upper-bound complete ([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and is unique by [[thm-of-square-roots]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-em-causal-dispersive-response",
+          "source_section": "Statement",
+          "quote": "(d) (Monochromatic work and passivity.) Let $\\omega>0$, $e\\in\\mathbb C^d$, and let $\\varepsilon_0>0$ be a real parameter (a response normalization; the equivalence below is independent of its value).",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-em-radiation-asymptotic-flux",
+          "source_section": "Statement",
+          "quote": "Then $\\int_{B_a}\\rho_t(y,u+n\\cdot y/c)\\,dy=\\frac1c\\,n\\cdot\\mathbf V(n,u)$, and there are constants $\\Gamma_E,\\Gamma_B$, depending only on $a,c,\\mu_0$ and on the suprema of $|\\rho|,|\\rho_t|,|\\rho_{tt}|,|\\mathbf J|,|\\mathbf J_t|,|\\mathbf J_{tt}|$ on $\\overline B_a\\times[t_0,T]$, such that for every $n\\in S^2$, $u\\in[t_0,T]$ and $r\\ge2a$, with $\\mathbf E_{\\mathrm{lead}}(n,u,r):=\\frac{\\mu_0}{4\\pi r}n\\times(n\\times\\mathbf V(n,u))$, $$\\Bigl|\\mathbf E(rn,u+\\tfrac rc)-\\mathbf E_{\\mathrm{lead}}(n,u,r)\\Bigr|\\le\\frac{\\Gamma_E}{r^2},\\qquad \\Bigl|\\mathbf B(rn,u+\\tfrac rc)-\\frac{n\\times\\mathbf E_{\\mathrm{lead}}(n,u,r)}{c}\\Bigr|\\le\\frac{\\Gamma_B}{r^2}.$$ (c) (Retarded-time flux limit.) Let $\\mathbf S:=\\mu_0^{-1}\\mathbf E\\times\\mathbf B$ and let $d\\Omega$ be the surface measure on $S^2$ ([[def-surface-integral-on-a-compact-c-one-hypersurface]]).",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "**$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$** ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number $$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$ the finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$ (extended by $0$ beyond $n$, as every finite list in this library is).",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "The empty surface has zero integral.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The kernel $K(s)=-e^{-s}$ is of class $C^1$ on $[0,\\infty)$ with $K'=e^{-s}=-K$ by [F1] and [F6];",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "int_0^\\infty K(s)e^{izs}ds$ is well defined and holomorphic on $\\operatorname{Im}z>0$, continuous on the closed upper half-plane, and its boundary values satisfy the dispersion relations of clause (c).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F9"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Computation of the transfer function: fix $z$ with $\\operatorname{Im}z\\ge0$ and put $\\lambda:=iz-1$, so $\\lambda\\ne0$ and $|e^{\\lambda N}|=e^{-N}e^{-N\\operatorname{Im}z}\\le e^{-N}\\to0$ by [F8].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F4",
+            "F7",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": " step 3.1 gives $\\chi(\\omega)=-1/(1-i\\omega)=-(1+i\\omega)/(1+\\omega^2)$ by multiplication with the conjugate denominator, so $\\operatorname{Im}\\chi(\\omega)=-\\omega/(1+\\omega^2)<0$ for every $\\omega>0$;",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F4",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "Clause (ii): fix $t\\in\\mathbb R$, $n\\in S^2$ and $r>\\max\\{2a,a+c(t-t_0)\\}$, so $r>2a$ and $r-a>c(t-t_0)$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F10",
+            "F11",
+            "F12"
+          ]
+        },
+        {
+          "id": "d-6.1",
+          "claim": "mit along $t=u+r/c$ with $u$ fixed, that is, at fixed retarded time, whereas step 5.1 shows that the flux integral at fixed observation time $t$ is identically zero for every $r>\\max\\{2a,a+c(t-t_0)\\}$.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "F10"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one kernel and one radiation configuration; its sums are finite (a single component $d=1$ in clause (i)), and no union, product or index family that could be empty occurs, so there is no empty-case obligation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero frequency $\\omega=0$ is excluded in clause (i) by $\\omega>0$, and exactly this exclusion is used in step 4.1, where $\\operatorname{Im}\\chi(\\omega)=-\\omega/(1+\\omega^2)$ is strictly negative only for positive $\\omega$; the amplitude $e=0$ is admitted in the statement of the underlying work formula and gives zero work, so the strict negativity is asserted for $e\ne0$ only. Clause (ii) admits $\\mathbf E=\\mathbf B=0$ for the stated large $r$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Clause (i) is stated for $d=1$, where $M(\\omega)=\\operatorname{Im}\\chi(\\omega)$ is a scalar and $e^*\\chi(\\omega)e=|e|^2\\chi(\\omega)$; step 4.1 spells out this specialization and no higher-dimensional case is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The kernel $K(s)=-e^{-s}$ is nondegenerate ($K<0$ everywhere), so step 1.1 applies with no zero kernel, and $\\lambda=-1+iz$ never vanishes for $\\operatorname{Im}z\\ge0$; the degenerate threshold $r=\\max\\{2a,a+c(t-t_0)\\}$ in clause (ii) is excluded by the strict inequality, and at $r$ larger than it the flux integral vanishes identically by step 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoints are $N\to\\infty$ in the truncation of step 3.1, where $|e^{\\lambda N}|\\le e^{-N}\to0$ by [F8], and $\\omega=0$, excluded by $\\omega>0$ as in the zero case; the interval path $[0,N]$ of [F7] includes its endpoints, and the primitive is evaluated there by the fundamental theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "$\\mathrm{AC}_\\omega$ is declared in the statement and inherited from the surface-integral and measure-theoretic suppliers used in clause (ii); $\\mathrm{DC}$ is declared in clause (i) exactly because the integrable branch of the causal-response theorem assumes it (step 2.1). No further selection is made in the verification."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The only equivalence in play is clause (d) of the causal-response theorem quoted in [F9]; the forward direction, nonnegative work for every $e$ implies positive semidefiniteness of $M(\\omega)$, is instantiated in step 4.1 in its failure form: the work is strictly negative for a nonzero $e$, so no nonnegative-work conclusion holds and $M(\\omega)$ is not positive semidefinite."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction of that equivalence, positive semidefiniteness implying nonnegative work, is not claimed here; step 4.1 uses the instantaneous formula $e^*M(\\omega)e=|e|^2\\operatorname{Im}\\chi(\\omega)<0$ directly, which witnesses the failure of the hypothesis needed for that direction. The example therefore illustrates the boundary of the equivalence without asserting either direction as new content."
+        }
+      ]
+    }
+  }
+}

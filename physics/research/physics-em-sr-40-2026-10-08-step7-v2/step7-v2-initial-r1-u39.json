@@ -1,0 +1,104 @@
+{
+  "run": "physics-em-sr-40-2026-10-08",
+  "phase": "initial",
+  "round": 1,
+  "unit": "39",
+  "input_sha256": "abf4e458aa807c1279b7d6c26197bd7b0cbd023a33b6e1338fb93d991f410809",
+  "decisions": [
+    {
+      "id": "ex-em-compact-variation-example",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "309da621a5df8ac23fe8b2d04ff1f40d1ed4525a6ff26ceeb2309a771a9f33e7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The original quantity equations A_0=x^1 and E_1=c have incompatible SI dimensions (T m versus m, and V/m versus m/s), so the advertised SI configuration is ill-typed. The repaired example explicitly uses real numerical values in fixed coherent SI units: physical A_0(X)=(1 T)X^1, F_01=-1 T and E_1=c_phys(1 T). This is a dimensional/formulation defect, classified other; the differentiation and signs themselves were correct.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-em-compact-variation-example",
+      "disposition": "repaired",
+      "post_sha256": "b2a82de3015d778647576d5e8b4eafe62605c1988f15c6b2d575d4972db9fdd1",
+      "review_context_sha256": "d193ebc11e01b758f30247a2c01d3a21bc9b8ebddce497981d96f0d1ae89992d",
+      "reason": "Checked the actual action, tensor, SI and source definitions and all cited mathematical premise statements. The explicit numerical-value map gives F_phys=(1 T)F, gauge gradients in T m, and S_phys=(1 J s)S. The constant tensor has zero divergence; compact derivative slices have zero endpoint differences by the AComega-qualified Riemann-Lebesgue comparison, FTC and Fubini. Gauge cutoffs have derivatives +1/-1 on supp rho; positive compact-profile integrals give the claimed opposite signs, and integration by parts reproduces them. The source in (c) is a prescribed nonconserved test source, not a Maxwell solution or observation. This checks my repair locally and is not an independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-em-compact-variation-example",
+      "finding": "SI dimensional inconsistency in Example (b), with the same implicit numerical-value convention needed in (c).",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "status": "repaired",
+      "reason": "The original quantity equations A_0=x^1 and E_1=c have incompatible SI dimensions (T m versus m, and V/m versus m/s), so the advertised SI configuration is ill-typed. The repaired example explicitly uses real numerical values in fixed coherent SI units: physical A_0(X)=(1 T)X^1, F_01=-1 T and E_1=c_phys(1 T). This is a dimensional/formulation defect, classified other; the differentiation and signs themselves were correct.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_published_consumer_update",
+      "supplier": "ex-em-compact-variation-example",
+      "reason": "An exact ID/reference search across items and library found no direct item consumers or published consumers. The only home-page use is draft page em-action-and-variational-formulation-examples; its normalization clarification is recorded separately for maintenance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "claim_and_conventions": "All displayed formulas now explicitly concern coherent SI numerical values. Physical coordinates use m, potentials/variations T m, tensors/magnetic fields T, electric fields V/m, current A/m^2, density C/m^3, gauges T m^2, action J s. The four physical claims and the smooth finite-region scope, Countable Choice assumption, all dependencies and all seven proof steps remain intact. No new premise is needed.",
+    "sources_consulted": "Local supplier statements: def-em-field-action-definition Definition (a)-(b), def-em-electromagnetic-tensor Definition (a),(c),(d), def-em-si-conventions Definition (a)-(c), def-em-sources Definition (b)-(c); actual Statements of the other listed prerequisites. No external source was consulted or claimed read. The existing Tong/Binney citations are retained as provenance; the repair follows unit definitions and direct computation.",
+    "interface_comparison": "The Example acquires an explicit numerical-value definition and the physical interpretation of (b); Given inherits it. There is no Statement or Definition section. physical_scope and empirical qualifications are unchanged. Treated the new numerical convention conservatively as a physics interface clarification and inspected direct references.",
+    "consumer_examination": "No item consumer was found by exact ID/reference search across items and library, so downstream item inventory is empty. The sole direct page use is recorded in downstream_page_uses. A bounded search for A_0=x^1 also found the independent purely mathematical hypothesis-boundary example and its mathematics page; those use the real mathematical functional with kappa=1, not this physical example, and need no unit repair or downstream registration.",
+    "validation": [
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/ex-em-compact-variation-example.md",
+        "exit_code": 0,
+        "result": "PASS items/ex-em-compact-variation-example.md (direct); 1 checked, 0 failing \u2014 all clean"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-em-compact-variation-example.md",
+        "exit_code": 0,
+        "result": "OK \u2014 1 file(s); every math span parses under real KaTeX and every frontmatter block parses under renderer YAML parser; no delimiter or wikilink defects"
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-em-compact-variation-example.md",
+        "exit_code": 0,
+        "result": "proof-layout: 1 items, 7 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/step7-workflow.mjs review-contexts --run physics-em-sr-40-2026-10-08 --items ex-em-compact-variation-example",
+        "exit_code": 0,
+        "result": "Captured both review hashes immediately after completing the mathematical review. No subsequent item edits."
+      },
+      {
+        "command": "itemHashGuard current-carrier comparison with report review post_sha256",
+        "exit_code": 0,
+        "result": "Current carrier b2a82de3015d778647576d5e8b4eafe62605c1988f15c6b2d575d4972db9fdd1 matches reviewed guard."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff for controller collection and independent rejudgment; owning-page maintenance should add the one-sentence numerical-convention clarification. No workers, judges, gates, certifications or shared-ledger writes were launched."
+  },
+  "downstream_page_uses": [
+    {
+      "path": "library/classical-electromagnetism/em-action-and-variational-formulation-examples.md",
+      "section": "Compact variation and gauge-source sign",
+      "affected_use": "The page displays A_0=x^1, j^0=c rho(x^0), phi_pm=(2 pm u)zeta and gauge difference pm(integral rho)(integral psi), reproducing the example numeric formulas without stating their units convention.",
+      "invalidated_claim": "No stationarity or gauge-sign conclusion is invalidated; these numeric equations now require the example explicit SI numerical-value interpretation on the page.",
+      "minimality": "Add one sentence before the compact-variation paragraph that its coordinates, quantities and formulas use the linked example SI numerical-value convention. No formulas, claims or dependencies need change.",
+      "disposition": "outside_consumer_maintenance",
+      "reason": "The page is draft and outside the assigned item carrier write scope. Its exact computations remain sound under the explicit convention; route the local convention clarification to owning-page maintenance without a Step 7 item gate."
+    }
+  ]
+}

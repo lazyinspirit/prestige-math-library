@@ -1,0 +1,1482 @@
+{
+ "version": 1,
+ "run": "physics-em-sr-40-2026-10-08",
+ "batch": 39,
+ "scope": [
+  "def-em-field-action-definition",
+  "post-em-stationary-action-model",
+  "pthm-em-action-maxwell-variation",
+  "ex-em-stationary-not-minimum",
+  "pthm-em-action-gauge-source-compatibility",
+  "ex-em-compact-variation-example",
+  "pthm-em-particle-action-coupling"
+ ],
+ "contracts": {
+  "pthm-em-action-maxwell-variation": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-em-field-action-definition",
+     "source_section": "Definition",
+     "quote": "define the\n**field action** by\n\n$$S[A]:=c^{-1}\\int_U\\Bigl[-\\frac{1}{4\\mu_0}F_{\\mu\\nu}F^{\\mu\\nu}+j^\\nu A_\\nu\\Bigr]d\\lambda,$$\n\n$d\\lambda$ the four-dimensional Lebesgue measure in the chart coordinates, the\nintegral being that of [[def-integral-over-a-measurable-set]]. Then $S[A]$ is\na finite real number, in units of $\\mathrm{J\\,s}$: the density\n$-(4\\mu_0)^{-1}F_{\\mu\\nu}F^{\\mu\\nu}+j^\\nu A_\\nu$ carries\n$\\mathrm{J\\,m^{-3}}$, $d\\lambda$ carries $\\mathrm{m^4}$ and $c^{-1}$ carries\n$\\mathrm{s\\,m^{-1}}$ ([[def-em-si-conventions]]). With $\\kappa:=\\mu_0$,\n$J:=j$ and the same bounded open $U$, one has $S[A]=c^{-1}S_{\\rm math}[A]$,\nwhere $S_{\\rm math}$ is the real functional of\n[[lem-em-compact-field-variation]]; since $c^{-1}>0$, the first variation and\nthe stationarity of $S$ at $A$ are exactly those recorded there.\n\n(b) [Admissible field variations] The field variations are the real maps\n$h\\in C_c^\\infty(U;\\mathbb R^4)$, the real subspace of the test space of\n[[def-test-function-space-d-of-an-open-set]], extended by zero to $N$; for\nevery real $s$ the field $A+sh$ is smooth on $N$, and $s\\mapsto S[A+sh]$ is\nthe quadratic polynomial of clause (a) of\n[[lem-em-compact-field-variation]] with both coefficients multiplied by\n$c^{-1}$. The field $A$ is **stationary** for $S$ if\n$\\frac{d}{ds}\\big|_{s=0}S[A+sh]=0$ for every such $h$.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "2.2",
+      "3.1",
+      "4.1",
+      "6.1",
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-em-compact-field-variation",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$). Let $U\\subseteq\\mathbb R^4$ be a bounded open set, let $N\\subseteq\\mathbb R^4$ be an open neighbourhood of its closure, let $\\kappa>0$, and let $A:N\\to V=\\mathbb R^4$ and $J:N\\to V$ be smooth ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Use the Minkowski form $\\eta$ and the index conventions of [[def-em-minkowski-affine-space]]: $A^\\mu$ denotes the components of $A$ in the standard basis, $A_\\nu:=\\eta_{\\nu\\mu}A^\\mu$, $F_{\\mu\\nu}:=\\partial_\\mu A_\\nu-\\partial_\\nu A_\\mu$, $F^{\\mu\\nu}:=\\eta^{\\mu\\alpha}\\eta^{\\nu\\beta}F_{\\alpha\\beta}$, and $J^\\nu A_\\nu$ is the indicated contraction of the components of $J$ with the covector $A_\\nu$. Put $L:=-\\frac{1}{4\\kappa}F_{\\mu\\nu}F^{\\mu\\nu}+J^\\nu A_\\nu$ and $S[A]:=\\int_U L\\,d\\lambda$, the $4$-dimensional Lebesgue integral of $L$ over $U$. Then $S[A]$ is a finite real number, and for every $h\\in C_c^\\infty(U;V)$, with $h_\\nu:=\\eta_{\\nu\\mu}h^\\mu$ and $G_{\\mu\\nu}:=\\partial_\\mu h_\\nu-\\partial_\\nu h_\\mu$: (a) the map $s\\mapsto S[A+sh]$ is the quadratic polynomial $S[A]+s\\int_U\\ell_1\\,d\\lambda+s^2\\int_U\\ell_2\\,d\\lambda$, where $\\ell_1:=-\\kappa^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+J^\\nu h_\\nu$ and $\\ell_2:=-\\frac{1}{4\\kappa}G_{\\mu\\nu}G^{\\mu\\nu}$, so that its derivative at $s=0$ is $\\int_U\\bigl(-\\kappa^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+J^\\nu h_\\nu\\bigr)d\\lambda$; (b) that first variation also equals $\\int_U\\bigl(\\kappa^{-1}\\partial_\\mu F^{\\mu\\nu}+J^\\nu\\bigr)h_\\nu\\,d\\lambda$; (c) $A$ is stationary for $S$, meaning that the derivative in (a) vanishes for every $h\\in C_c^\\infty(U;V)$, if and only if $\\partial_\\mu F^{\\mu\\nu}=-\\kappa J^\\nu$ for every $\\nu$ on $U$, all derivatives being classical partial derivatives of the smooth field $A$.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "4.1",
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "pthm-em-tensor-maxwell-equivalence",
+     "source_section": "Statement",
+     "quote": "Let the laboratory region $U\\cong I\\times\\Omega$ with its inertial chart $x$,\nthe electric and magnetic fields $E,B$ of [[def-em-fields]], the source fields\n$(\\rho,J)$ of [[def-em-sources]] and the SI conventions of\n[[def-em-si-conventions]] with $\\varepsilon_0:=(\\mu_0c^2)^{-1}$ be those of the\nframework. Let $F$ be the electromagnetic two-form of\n[[def-em-electromagnetic-tensor]] with the components fixed there,\n$F_{0i}=-E_i/c$, $F_{ij}=\\epsilon_{ijk}B_k$, $F^{0i}=E_i/c$,\n$F^{ij}=\\epsilon_{ijk}B_k$ and\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, and let $j=(c\\rho,J)$ carry the\ntensor-component identification adopted in [[def-em-sources]]. Write\n$\\partial_0=c^{-1}\\partial_t$ and $\\partial_i$ for the coordinate partial\nderivatives of [[def-directional-and-partial-derivatives]], and\n$\\operatorname{div},\\operatorname{curl}$ for those of\n[[def-divergence-and-curl-of-a-c1-vector-field]]. Assume the smooth branch of\nthe vacuum Maxwell postulate [[post-em-vacuum-maxwell]]: $E,B$ are jointly\n$C^1$ on $\\Omega\\times I$ with the additional derivatives required by each\ndisplayed equation existing and continuous, and $\\rho,J$ are continuous. Then:\n\n(a) [Equivalence] On $I\\times\\Omega$ the four smooth-branch equations\n\n$$\\operatorname{div}E=\\rho/\\varepsilon_0,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}B=\\mu_0J+c^{-2}\\partial_tE$$\n\nhold if and only if the two systems\n\n$$(\\mathrm{TM1})\\quad \\partial_\\mu F^{\\mu\\nu}=-\\mu_0\\,j^\\nu\\quad(\\nu=0,1,2,3),$$\n\n$$(\\mathrm{TM2})\\quad \\partial_\\lambda F_{\\mu\\nu}+\\partial_\\mu F_{\\nu\\lambda}+\\partial_\\nu F_{\\lambda\\mu}=0\\quad(\\lambda,\\mu,\\nu\\in\\{0,1,2,3\\})$$\n\nhold on $I\\times\\Omega$.",
+     "uses": [
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "def-em-electromagnetic-tensor",
+     "source_section": "Definition",
+     "quote": "fix the ordered basis\n$(e_0,e_1,e_2,e_3)$ of the chart and the oriented volume form $\\varepsilon$ of\n[[def-oriented-minkowski-volume-form]], with $\\varepsilon_{0123}=+1$ and\n$\\eta=\\operatorname{diag}(-1,1,1,1)$.\n\n(a) [Components] For a field pair $(E,B)$ of class $C^k$, $k\\ge1$, define the\ncovariant components of the **electromagnetic two-form** $F$ in the chart by\n$F_{00}=0$, $F_{0i}:=-E_i/c$, $F_{ij}:=\\epsilon_{ijk}B_k$\n($i,j,k\\in\\{1,2,3\\}$) and $F_{ab}:=-F_{ba}$, the index-raised components being\n$F^{0i}=E_i/c$, $F^{i0}=-E_i/c$ and $F^{ij}=\\epsilon_{ijk}B_k$.",
+     "uses": [
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "def-em-electromagnetic-tensor",
+     "source_section": "Definition",
+     "quote": "conversely, if a $C^1$\ncovector field $A_\\mu$ on $U$ satisfies $F_{\\mu\\nu}=\\partial_\\mu A_\\nu\n-\\partial_\\nu A_\\mu$, then $E,B$ recovered from $F$ by clause (a) obey\n$E=-\\nabla\\varphi-\\partial_tA$ and $B=\\operatorname{curl}A$ with\n$\\varphi:=-cA_0$ and the spatial potential vector $A:=(A_1,A_2,A_3)$.",
+     "uses": [
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "def-em-sources",
+     "source_section": "Definition",
+     "quote": "(a) [Charge parameter] The framework takes a real **charge parameter**\n$q\\in\\mathbb R$, measured in coulombs, attached to a source; its sign is the\nsign of the source and it is a parameter of the model. Charge quantisation is\nnot asserted.\n\n(b) [Smooth source fields] A **smooth (volume) source field** on\n$\\Omega\\times I$ is a pair $(\\rho,J)$ of maps $\\rho:\\Omega\\times I\\to\\mathbb R$,\n$J:\\Omega\\times I\\to\\mathbb R^3$ that is continuous on $\\Omega\\times I$ and of\nclass $C^1$ wherever a displayed equation differentiates it; $\\rho$ is the\n**frame charge density** (C m$^{-3}$) and $J$ the **frame current density**\n(A m$^{-2}$). For each fixed $t\\in I$ retain the compact Jordan branch: if\n$V\\subseteq\\Omega$ is compact and Jordan measurable, define\n\n$$Q_R(V,t):=\\int_V\\rho(y,t)dy$$\n\nby [[def-riemann-integral-over-a-jordan-set]], with integrability supplied by\n[[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. For the\nfull measurable-volume branch assume Countable Choice ([[def-countable-choice]]),\nas required by the published Lebesgue-measure interface. If $V$ is any bounded\nLebesgue-measurable subset with compact closure $\\overline V\\subseteq\\Omega$,\ndefine\n\n$$Q(V,t):=\\int_V\\rho(y,t)d\\lambda_3(y)=\\int_{\\mathbb R^3}F_t(y)\\mathbf{1}_V(y)d\\lambda_3(y),$$\n\nwhere $F_t=\\rho(\\cdot,t)$ on $\\Omega$ and $0$ elsewhere; the signed integral is\ndefined through its positive and negative parts\n([[def-integral-over-a-measurable-set]],\n[[def-integrable-real-and-complex-functions-and-their-integrals]]). The\nfunction $F_t$ is Borel, and hence Lebesgue measurable: for every open\n$O\\subseteq\\mathbb R$ its preimage inside the open set $\\Omega$ is relatively\nopen in $\\Omega$, hence open in $\\mathbb R^3$, and the closed complement of\n$\\Omega$ is added precisely when $0\\in O$\n([[thm-continuous-preimages-of-borel-sets-are-borel]],\n[[thm-borel-sets-are-lebesgue-measurable]]). This integral is absolutely\nfinite: $\\rho(\\cdot,t)$ is bounded on the compact $\\overline V$ by\n[[thm-extreme-value-metric]], $V$ has finite Lebesgue measure by\n[[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]], and the\nmonotonicity and homogeneity of the nonnegative integral\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) bound\n$\\int|F_t|\\mathbf{1}_Vd\\lambda_3\\le M_t\\lambda_3(V)<\\infty$, the indicator\nintegral being its simple-function value\n([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]]); the\npositive and negative parts are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]. On\nthe compact Jordan branch, under the same Countable Choice assumption,\n$Q=Q_R$ by [[lem-riemann-lebesgue-comparison-for-distribution-test-integrands]].\nThe\nempty region has charge zero in both branches. The current flux remains\ndefined independently: for each oriented surface patch in $\\Omega$ the current\nflux at time $t$ is the surface integral of $J(\\cdot,t)$ in the induced\norientation, as defined in [[def-oriented-unit-normal-and-flux-of-a-surface-patch]].\nPoint sources and sheet sources are not source fields in this sense; they are\ndifferent objects, defined by their own pairings when the framework uses them.\n\n(c) [Covariant identification] Write $j:=(c\\rho,J)$, so $j^0=c\\rho$ and\n$j^i=J^i$.",
+     "uses": [
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "def-em-si-conventions",
+     "source_section": "Definition",
+     "quote": "The electric constant is defined within the\nframework by\n\n$$\\varepsilon_0:=(\\mu_0c^2)^{-1}$$\n\nin F m$^{-1}$,",
+     "uses": [
+      "1.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "thm-clairaut-schwarz-mixed-partials",
+     "source_section": "Statement",
+     "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+     "uses": [
+      "2.2"
+     ]
+    },
+    {
+     "fact": "F9",
+     "source": "def-countable-choice",
+     "source_section": "Definition",
+     "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+     "uses": [
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F10",
+     "source": "post-em-stationary-action-model",
+     "source_section": "Postulate",
+     "quote": "(i) [Field sector] A smooth field $A:N\\to\\mathbb R^4$ on the region $U$ of\nclause (a) of that definition is dynamically admissible exactly when it is\nstationary for the field action $S[A]$ under all compactly supported smooth\nvariations $h\\in C_c^\\infty(U;\\mathbb R^4)$ in the sense of clause (b) of that\ndefinition: $\\frac{d}{ds}\\big|_{s=0}S[A+sh]=0$ for every such $h$.",
+     "uses": [
+      "7.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "d-1.1",
+     "claim": "The data of [F1] meet the hypotheses of [F2] at $\\kappa:=\\mu_0$ and $J:=j$: $U$ is a bounded open subset of $\\mathbb R^4$ whose closure is a compact subset of the chart image, $N$ is an open neighbourhood of $\\overline U$, $\\mu_0>0$ by [F7], and $A,j$ are smooth on $N$; the integrand of [F1] is term-by-term the integrand of [F2] at these parameters, so $S[A]=c^{-1}S_{\\rm math}[A]$ and both integra",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "F7"
+     ]
+    },
+    {
+     "id": "d-2.1",
+     "claim": "Fix $h\\in C_c^\\infty(U;\\mathbb R^4)$. Clause (a) of [F2] presents $s\\mapsto S_{\\rm math}[A+sh]=a_0+a_1s+a_2s^2$ with finite real coefficients $a_0=S_{\\rm math}[A]$, $a_1=\\int_U\\bigl(-\\mu_0^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+j^\\nu h_\\nu\\bigr)d\\lambda$ and $a_2=\\int_U\\ell_2\\,d\\lambda$, hence step 1.1 gives $S[A+sh]=c^{-1}a_0+c^{-1}a_1s+c^{-1}a_2s^2$; in particular the first variation of $S$ at $A$ in ",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-2.2",
+     "claim": "Because $A$ is smooth on the open $N\\supseteq U$, every second partial derivative $\\partial_\\lambda\\partial_\\mu A_\\nu$ exists and is continuous on $U$, so [F8] applies: expanding $F_{\\mu\\nu}=\\partial_\\mu A_\\nu-\\partial_\\nu A_\\mu$ from [F1] gives $\\partial_\\lambda F_{\\mu\\nu}+\\partial_\\mu F_{\\nu\\lambda}+\\partial_\\nu F_{\\lambda\\mu}=(\\partial_\\lambda\\partial_\\mu A_\\nu-\\partial_\\lambda\\partial_\\nu A_\\m",
+     "step": "2.2",
+     "inputs": [
+      "F1",
+      "F8",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-3.1",
+     "claim": "Since $c^{-1}>0$, one has $c^{-1}a_1=0$ exactly when $a_1=0$; as $h$ was an arbitrary element of $C_c^\\infty(U;\\mathbb R^4)$ and the two variation classes coincide by [F1] and [F2], the field $A$ is stationary for $S$ in the sense of clause (b) of [F1] if and only if $A$ is stationary for $S_{\\rm math}$ in the sense of [F2].",
+     "step": "3.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "d-4.1",
+     "claim": "Applying clause (c) of [F2] with $\\kappa=\\mu_0$, $J=j$ and the field $A$ of step 1.1, the field $A$ is stationary for $S_{\\rm math}$ if and only if $\\partial_\\mu F^{\\mu\\nu}=-\\mu_0j^\\nu$ on $U$ for every $\\nu\\in\\{0,1,2,3\\}$, the derivatives being classical partial derivatives of the smooth $A$ by [F2]; combined with step 3.1 this proves (i)$\\Leftrightarrow$(ii), and it uses $\\mathrm{AC}_\\omega$ of ",
+     "step": "4.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "F9",
+      "step 1.1",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "d-5.1",
+     "claim": "If $A$ is stationary, then (ii) holds by the equivalence of step 4.1; that consequent statement is clause (a).",
+     "step": "5.1",
+     "inputs": [
+      "step 4.1"
+     ]
+    },
+    {
+     "id": "d-6.1",
+     "claim": "Put $\\varphi:=-cA_0$, $\\mathbf A:=(A_1,A_2,A_3)$, $E:=-\\nabla\\varphi-\\partial_t\\mathbf A$ and $B:=\\operatorname{curl}\\mathbf A$. Since $A_\\mu$ is the lowering of the smooth $A^\\mu$ and satisfies $F_{\\mu\\nu}=\\partial_\\mu A_\\nu-\\partial_\\nu A_\\mu$ by [F1], clause (c) of the potential dictionary [F5] identifies these $E,B$ with the fields whose component dictionary [F4] reproduces the same $F_{\\mu\\nu",
+     "step": "6.1",
+     "inputs": [
+      "F1",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "step 2.2",
+      "step 5.1"
+     ]
+    },
+    {
+     "id": "d-7.1",
+     "claim": "The argument used exactly the smooth class, the fixed component dictionary, the identification $S=c^{-1}S_{\\rm math}$ and the positive factor $c^{-1}$; it asserted no existence of a stationary field, imposed no boundary or decay condition, and used no weak, distributional, singular-source or non-potential-represented branch. The equivalence is conditional on the adopted stationarity principle [F10",
+     "step": "7.1",
+     "inputs": [
+      "F1",
+      "F10",
+      "F2",
+      "step 4.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The statement keeps the nonempty bounded open region of clause (a) of def-em-field-action-definition, so the empty region is excluded by type."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The statement is a biconditional for arbitrary smooth $(A,j)$; with $A=0$, $j=0$ both sides hold, and step 2.2 derives each direction without excluding the zero field or zero current."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no cardinality-one collection occurs; the statement concerns a single smooth pair $(A,j)$ on a fixed region."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The region is bounded open with compact closure in the chart image and $N$ is an open neighbourhood of the closure by the statement; $c^{-1}>0$ and $\\mu_0>0$ are used in steps 2.1 and 3.1, and $\\mu_0>0$ is used in step 2.2, and no degenerate region is admitted."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The variations are compactly supported in the open $U$ by [F1], and steps 1.1 and 4.1 record that no boundary or decay condition is imposed or used."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Countable Choice is assumed in the statement and used exactly at step 2.2 through lem-em-compact-field-variation; step 4.1 records the scope of that use, and no other choice principle appears."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Steps 2.1, 2.2, 3.1, 5.1 and 6.1 derive stationarity implies the inhomogeneous tensor equation and the laboratory equations, including the cyclic identity at step 2.2."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 2.2 proves the converse through clause (c) of the compact-variation lemma, giving the coefficient equation from stationarity in both directions."
+    }
+   ]
+  },
+  "ex-em-stationary-not-minimum": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-em-field-action-definition",
+     "source_section": "Definition",
+     "quote": "define the\n**field action** by\n\n$$S[A]:=c^{-1}\\int_U\\Bigl[-\\frac{1}{4\\mu_0}F_{\\mu\\nu}F^{\\mu\\nu}+j^\\nu A_\\nu\\Bigr]d\\lambda,$$\n\n$d\\lambda$ the four-dimensional Lebesgue measure in the chart coordinates, the\nintegral being that of [[def-integral-over-a-measurable-set]]. Then $S[A]$ is\na finite real number, in units of $\\mathrm{J\\,s}$: the density\n$-(4\\mu_0)^{-1}F_{\\mu\\nu}F^{\\mu\\nu}+j^\\nu A_\\nu$ carries\n$\\mathrm{J\\,m^{-3}}$, $d\\lambda$ carries $\\mathrm{m^4}$ and $c^{-1}$ carries\n$\\mathrm{s\\,m^{-1}}$ ([[def-em-si-conventions]]). With $\\kappa:=\\mu_0$,\n$J:=j$ and the same bounded open $U$, one has $S[A]=c^{-1}S_{\\rm math}[A]$,\nwhere $S_{\\rm math}$ is the real functional of\n[[lem-em-compact-field-variation]]; since $c^{-1}>0$, the first variation and\nthe stationarity of $S$ at $A$ are exactly those recorded there.\n\n(b) [Admissible field variations] The field variations are the real maps\n$h\\in C_c^\\infty(U;\\mathbb R^4)$, the real subspace of the test space of\n[[def-test-function-space-d-of-an-open-set]], extended by zero to $N$; for\nevery real $s$ the field $A+sh$ is smooth on $N$, and $s\\mapsto S[A+sh]$ is\nthe quadratic polynomial of clause (a) of\n[[lem-em-compact-field-variation]] with both coefficients multiplied by\n$c^{-1}$. The field $A$ is **stationary** for $S$ if\n$\\frac{d}{ds}\\big|_{s=0}S[A+sh]=0$ for every such $h$.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-em-compact-field-variation",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$). Let $U\\subseteq\\mathbb R^4$ be a bounded open set, let $N\\subseteq\\mathbb R^4$ be an open neighbourhood of its closure, let $\\kappa>0$, and let $A:N\\to V=\\mathbb R^4$ and $J:N\\to V$ be smooth ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Use the Minkowski form $\\eta$ and the index conventions of [[def-em-minkowski-affine-space]]: $A^\\mu$ denotes the components of $A$ in the standard basis, $A_\\nu:=\\eta_{\\nu\\mu}A^\\mu$, $F_{\\mu\\nu}:=\\partial_\\mu A_\\nu-\\partial_\\nu A_\\mu$, $F^{\\mu\\nu}:=\\eta^{\\mu\\alpha}\\eta^{\\nu\\beta}F_{\\alpha\\beta}$, and $J^\\nu A_\\nu$ is the indicated contraction of the components of $J$ with the covector $A_\\nu$. Put $L:=-\\frac{1}{4\\kappa}F_{\\mu\\nu}F^{\\mu\\nu}+J^\\nu A_\\nu$ and $S[A]:=\\int_U L\\,d\\lambda$, the $4$-dimensional Lebesgue integral of $L$ over $U$. Then $S[A]$ is a finite real number, and for every $h\\in C_c^\\infty(U;V)$, with $h_\\nu:=\\eta_{\\nu\\mu}h^\\mu$ and $G_{\\mu\\nu}:=\\partial_\\mu h_\\nu-\\partial_\\nu h_\\mu$: (a) the map $s\\mapsto S[A+sh]$ is the quadratic polynomial $S[A]+s\\int_U\\ell_1\\,d\\lambda+s^2\\int_U\\ell_2\\,d\\lambda$, where $\\ell_1:=-\\kappa^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+J^\\nu h_\\nu$ and $\\ell_2:=-\\frac{1}{4\\kappa}G_{\\mu\\nu}G^{\\mu\\nu}$, so that its derivative at $s=0$ is $\\int_U\\bigl(-\\kappa^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+J^\\nu h_\\nu\\bigr)d\\lambda$; (b) that first variation also equals $\\int_U\\bigl(\\kappa^{-1}\\partial_\\mu F^{\\mu\\nu}+J^\\nu\\bigr)h_\\nu\\,d\\lambda$; (c) $A$ is stationary for $S$, meaning that the derivative in (a) vanishes for every $h\\in C_c^\\infty(U;V)$, if and only if $\\partial_\\mu F^{\\mu\\nu}=-\\kappa J^\\nu$ for every $\\nu$ on $U$, all derivatives being classical partial derivatives of the smooth field $A$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-em-electromagnetic-tensor",
+     "source_section": "Definition",
+     "quote": "the invariants and square wedge\nof that theorem read\n\n$$\\tfrac12F_{ab}F^{ab}=|B|^2-|E|^2/c^2,",
+     "uses": [
+      "1.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "def-em-electromagnetic-tensor",
+     "source_section": "Definition",
+     "quote": "fix the ordered basis\n$(e_0,e_1,e_2,e_3)$ of the chart and the oriented volume form $\\varepsilon$ of\n[[def-oriented-minkowski-volume-form]], with $\\varepsilon_{0123}=+1$ and\n$\\eta=\\operatorname{diag}(-1,1,1,1)$.\n\n(a) [Components] For a field pair $(E,B)$ of class $C^k$, $k\\ge1$, define the\ncovariant components of the **electromagnetic two-form** $F$ in the chart by\n$F_{00}=0$, $F_{0i}:=-E_i/c$, $F_{ij}:=\\epsilon_{ijk}B_k$\n($i,j,k\\in\\{1,2,3\\}$) and $F_{ab}:=-F_{ba}$, the index-raised components being\n$F^{0i}=E_i/c$, $F^{i0}=-E_i/c$ and $F^{ij}=\\epsilon_{ijk}B_k$.",
+     "uses": [
+      "1.1",
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "def-em-si-conventions",
+     "source_section": "Definition",
+     "quote": "The electric constant is defined within the\nframework by\n\n$$\\varepsilon_0:=(\\mu_0c^2)^{-1}$$\n\nin F m$^{-1}$,",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "def-em-lab-geometry",
+     "source_section": "Definition",
+     "quote": "(a) [Chart restriction] $x(U)=\\{(ct,y):t\\in I,\\ y\\in\\Omega\\}$ and\n$\\Phi:U\\to I\\times\\Omega$, $\\Phi(p):=(x^0(p)/c,(x^1,x^2,x^3)(p))$, is a\nbijection, because the inertial chart $x:A\\to\\mathbb R^4$ is a bijection and\n$c>0$; its components are the **laboratory time coordinate**\n$t(p):=x^0(p)/c$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "lem-test-function-cutoffs-and-euclidean-localization",
+     "source_section": "Statement",
+     "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$.",
+     "uses": [
+      "3.1",
+      "4.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "thm-substitution",
+     "source_section": "Statement",
+     "quote": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ ([[def-derivative]]), with\n$\\varphi'$ integrable on $[c,d]$ ([[def-darboux-integral]]). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ ([[def-continuity-real]]).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of [[def-oriented-integral]].",
+     "uses": [
+      "1.1",
+      "5.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F9",
+     "source": "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+     "source_section": "Statement",
+     "quote": "Assume Countable Choice. Let $Q=\\prod_{i=1}^n[a_i,b_i]$ with $n\\ge1$ and $a_i<b_i$. If a bounded Borel real function $f$ on $Q$ is Riemann integrable, then it is Lebesgue integrable and the two integrals agree. The corresponding assertion for complex functions holds componentwise. In particular it applies to smooth compact test integrands and their bounded Borel zero extensions from compact Jordan regions.",
+     "uses": [
+      "1.1",
+      "5.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F10",
+     "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+     "source_section": "Statement",
+     "quote": "the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+     "uses": [
+      "1.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F11",
+     "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+     "source_section": "Statement",
+     "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+     "uses": [
+      "1.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F12",
+     "source": "thm-algebra-of-derivatives",
+     "source_section": "Statement",
+     "quote": "1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;",
+     "uses": [
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F13",
+     "source": "thm-chain-rule",
+     "source_section": "Statement",
+     "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$",
+     "uses": [
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F14",
+     "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+     "source_section": "Statement",
+     "quote": "1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+     "uses": [
+      "3.1",
+      "5.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F15",
+     "source": "lem-em-continuous-localization",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$, [[def-countable-choice]]).\n\n**Integral form.** Let $n,m\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^m$ be continuous. For a measurable $V\\subseteq U$ write, componentwise,\n\n$$\\int_V g\\,d\\lambda_n:=\\Bigl(\\int g_1\\chi_V\\,d\\lambda_n,\\ \\dots,\\ \\int g_m\\chi_V\\,d\\lambda_n\\Bigr),$$\n\neach component being the Lebesgue integral of the measurable function $g_i\\chi_V$ ([[def-integrable-real-and-complex-functions-and-their-integrals]], [[def-integral-over-a-measurable-set]]). A ball $V\\subseteq U$ is **compactly contained** in $U$ when its closure is a compact subset of $U$; for a Euclidean ball this means $\\overline V\\subseteq U$. If $\\int_Vg\\,d\\lambda_n=0$ for every ball $V$ compactly contained in $U$, then $g=0$ on $U$.",
+     "uses": [
+      "3.1",
+      "5.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F16",
+     "source": "thm-newton-leibniz-with-interior-derivative",
+     "source_section": "Statement",
+     "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$",
+     "uses": [
+      "5.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F17",
+     "source": "def-fixed-support-test-function-frechet-space",
+     "source_section": "Definition",
+     "quote": "For integers $m\\ge0$ set\n\n$$p_m(\\varphi)=\\max_{|\\alpha|\\le m}\\sup_{x\\in K}|\\partial^\\alpha\\varphi(x)|,\\qquad d(\\varphi,\\psi)=\\sum_{m=0}^\\infty2^{-m-1}\\min(1,p_m(\\varphi-\\psi)).$$",
+     "uses": [
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F18",
+     "source": "def-test-function-topology",
+     "source_section": "Definition",
+     "quote": "A seminorm means $q(av)=|a|q(v)$ and $q(v+w)\\le q(v)+q(w)$.\n\nThe **test-function topology** is the topology generated by translated finite intersections of sets $\\{\\varphi:q(\\varphi)<\\varepsilon\\}$, where $q\\in\\mathcal P$ and $\\varepsilon>0$.",
+     "uses": [
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F19",
+     "source": "def-countable-choice",
+     "source_section": "Definition",
+     "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+     "uses": [
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F20",
+     "source": "cor-archimedean-reciprocal",
+     "source_section": "Statement",
+     "quote": "Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.",
+     "uses": [
+      "6.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F21",
+     "source": "post-em-stationary-action-model",
+     "source_section": "Postulate",
+     "quote": "(i) [Field sector] A smooth field $A:N\\to\\mathbb R^4$ on the region $U$ of\nclause (a) of that definition is dynamically admissible exactly when it is\nstationary for the field action $S[A]$ under all compactly supported smooth\nvariations $h\\in C_c^\\infty(U;\\mathbb R^4)$ in the sense of clause (b) of that\ndefinition: $\\frac{d}{ds}\\big|_{s=0}S[A+sh]=0$ for every such $h$.",
+     "uses": [
+      "8.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "d-1.1",
+     "claim": "In the source-free case $j=0$, [F3] turns the density of [F1] into $-(4\\mu_0)^{-1}F_{\\mu\\nu}F^{\\mu\\nu}=|E|^2/(2\\mu_0c^2)-|B|^2/(2\\mu_0)$, so linearity of the integral gives $S[A]=(2c\\mu_0)^{-1}\\int_U(|E|^2/c^2-|B|^2)d\\lambda$; writing the time coordinate as $t=x^0/c$ multiplies the one-dimensional time integral by $c$ and carries $(-1,1)$ to $(-1/c,1/c)$ by [F6] and [F8], while the spatial coordin",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F10",
+      "F11",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F8",
+      "F9"
+     ]
+    },
+    {
+     "id": "d-2.1",
+     "claim": "At $A=0$ one has $F(A)=0$ and $j=0$, so the first-variation coefficient $-\\mu_0^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+j^\\nu h_\\nu$ of [F2] vanishes identically for every $h\\in C_c^\\infty(U;\\mathbb R^4)$; the action variation is $c^{-1}$ times its integral by [F1] and [F2], hence every compact first variation of $S$ at $A=0$ is zero and $A=0$ is stationary.",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-3.1",
+     "claim": "By [F7] with $\\Omega=U$ and $K=\\{(0,0,0,0)\\}$ there is $\\chi\\in C_c^\\infty(U)$ with $0\\le\\chi\\le1$ and $\\chi=1$ near the origin; then $\\theta:=x^1\\chi$ lies in $C_c^\\infty(U)$ and $\\partial_1\\theta(0)=\\chi(0)+0\\cdot\\partial_1\\chi(0)=1$, so $\\nabla_x\\theta\\not\\equiv0$. With covariant components $h_0=\\theta$, $h_i=0$ the dictionary [F4] gives $F_{0i}=-\\partial_i\\theta$, hence $E=c\\nabla_x\\theta$ and",
+     "step": "3.1",
+     "inputs": [
+      "F14",
+      "F15",
+      "F4",
+      "F7",
+      "step 1.1",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "d-4.1",
+     "claim": "Apply [F7] with $\\Omega=(-1/2,1/2)$ and $K=\\{0\\}$ four times (or once, taking all four bumps equal) to obtain nonzero nonnegative $\\eta,\\varphi,\\psi_2,\\psi_3\\in C_c^\\infty((-1/2,1/2))$, extended by zero to $\\mathbb R$; define $f_N(x):=\\eta(x^0)\\varphi(Nx^1)\\psi_2(x^2)\\psi_3(x^3)$ for integers $N\\ge1$ and let $h^{(N)}$ have $h^{(N)2}=f_N$ and all other contravariant components $0$. Since $\\operator",
+     "step": "4.1",
+     "inputs": [
+      "F12",
+      "F13",
+      "F4",
+      "F7",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "d-5.1",
+     "claim": "Because all integrands below are smooth with support in the fixed compact subset $(-1/2,1/2)^4\\subset U$, [F9] lets each Lebesgue integral be computed as the equal Riemann integral, and Fubini [F10] together with linearity [F11] factors each product of one-variable functions into a product of one-dimensional integrals: $\\int_U|E|^2/c^2\\,d\\lambda=\\int(\\eta')^2\\cdot\\int\\varphi(Nx^1)^2dx^1\\cdot\\int\\p",
+     "step": "5.1",
+     "inputs": [
+      "F10",
+      "F11",
+      "F14",
+      "F15",
+      "F16",
+      "F8",
+      "F9",
+      "step 3.1",
+      "step 4.1"
+     ]
+    },
+    {
+     "id": "d-6.1",
+     "claim": "Step 1.1 with $j=0$ and [F3] expresses $S[h^{(N)}]=(2c\\mu_0)^{-1}\\int_U(|E|^2/c^2-|B|^2)d\\lambda$, so step 5.1 gives $S[h^{(N)}]=(2c\\mu_0)^{-1}\\bigl((C_E-C_3)/N-C_BN\\bigr)$; since $C_B>0$, choose $N\\ge1$ with $C_BN>(C_E-C_3)/N$: if $C_E-C_3\\le0$ every $N$ works, while if $C_E-C_3>0$ then $\\varepsilon:=C_B/(C_E-C_3)>0$ and [F20] provides $n\\ge1$ with $1/n<\\varepsilon$, that is $n>(C_E-C_3)/C_B$; se",
+     "step": "6.1",
+     "inputs": [
+      "F1",
+      "F20",
+      "F3",
+      "step 1.1",
+      "step 5.1"
+     ]
+    },
+    {
+     "id": "d-7.1",
+     "claim": "For every real $\\lambda$ the scaling law of step 1.1 gives $S[\\lambda h_+ ]=\\lambda^2S[h_+]$ and $S[\\lambda h_-]=\\lambda^2S[h_-]$, so the signs of the two directions are preserved for nonzero $\\lambda$ and both action magnitudes tend to $0$ as $\\lambda\\to0$. In the fixed-support space [F17] each seminorm satisfies $p_m(\\lambda h)=|\\lambda|p_m(h)$ by definition of the maximum and supremum, and in t",
+     "step": "7.1",
+     "inputs": [
+      "F17",
+      "F18",
+      "step 1.1",
+      "step 3.1",
+      "step 6.1"
+     ]
+    },
+    {
+     "id": "d-8.1",
+     "claim": "Every object above is smooth and compactly supported in the box $U$, all integrals are the declared finite-region Lebesgue integrals, and the arguments used exactly [F7], [F8], [F9], [F14], [F15], [F16] and [F20]; Countable Choice [F19] enters only through the measure interface of [F9] and [F15], as inherited from the field-action sector. The computation concerns the adopted functional [F21] and a",
+     "step": "8.1",
+     "inputs": [
+      "F14",
+      "F15",
+      "F16",
+      "F19",
+      "F20",
+      "F21",
+      "F7",
+      "F8",
+      "F9",
+      "step 7.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Part (a) fixes the nonempty box $U=(-1,1)^4$ and the nonempty time interval $U_t$; step 3.1 uses a nonzero compactly supported $\\theta$, so no empty-region substitution occurs."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The zero field is exactly the stationary configuration of part (b), verified in step 2.1; step 6.1 then exhibits a fixed negative direction while step 3.1 exhibits the positive one."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no cardinality-one collection occurs; the example works with one direction at a time and four bump factors."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 4.1 keeps every support in the fixed compact subset $(-1/2,1/2)^4\\subset U$, step 3.1 builds $\\theta$ with $\\nabla_x\\theta\\not\\equiv0$, and step 5.1 proves $C_B>0$; no degenerate witness replaces the claimed strict signs."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "All bumps and the direction $\\theta$ are compactly supported in the open box, so the one-variable fundamental theorem of step 3.1 and the dilation identity of step 5.1 have no boundary terms; the time endpoints of $U_t$ are recorded in part (a)."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Countable Choice is assumed in the statement and used only through the measure statements of steps 3.1 and 5.1 and the comparison lemma [F9]; step 8.1 records that the computations are otherwise choice-free."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the example asserts exact computations and a non-extremum conclusion, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the example asserts no converse of any implication."
+    }
+   ]
+  },
+  "pthm-em-action-gauge-source-compatibility": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-em-field-action-definition",
+     "source_section": "Definition",
+     "quote": "define the\n**field action** by\n\n$$S[A]:=c^{-1}\\int_U\\Bigl[-\\frac{1}{4\\mu_0}F_{\\mu\\nu}F^{\\mu\\nu}+j^\\nu A_\\nu\\Bigr]d\\lambda,$$\n\n$d\\lambda$ the four-dimensional Lebesgue measure in the chart coordinates, the\nintegral being that of [[def-integral-over-a-measurable-set]]. Then $S[A]$ is\na finite real number, in units of $\\mathrm{J\\,s}$: the density\n$-(4\\mu_0)^{-1}F_{\\mu\\nu}F^{\\mu\\nu}+j^\\nu A_\\nu$ carries\n$\\mathrm{J\\,m^{-3}}$, $d\\lambda$ carries $\\mathrm{m^4}$ and $c^{-1}$ carries\n$\\mathrm{s\\,m^{-1}}$ ([[def-em-si-conventions]]). With $\\kappa:=\\mu_0$,\n$J:=j$ and the same bounded open $U$, one has $S[A]=c^{-1}S_{\\rm math}[A]$,\nwhere $S_{\\rm math}$ is the real functional of\n[[lem-em-compact-field-variation]]; since $c^{-1}>0$, the first variation and\nthe stationarity of $S$ at $A$ are exactly those recorded there.\n\n(b) [Admissible field variations] The field variations are the real maps\n$h\\in C_c^\\infty(U;\\mathbb R^4)$, the real subspace of the test space of\n[[def-test-function-space-d-of-an-open-set]], extended by zero to $N$; for\nevery real $s$ the field $A+sh$ is smooth on $N$, and $s\\mapsto S[A+sh]$ is\nthe quadratic polynomial of clause (a) of\n[[lem-em-compact-field-variation]] with both coefficients multiplied by\n$c^{-1}$. The field $A$ is **stationary** for $S$ if\n$\\frac{d}{ds}\\big|_{s=0}S[A+sh]=0$ for every such $h$.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-test-function-space-d-of-an-open-set",
+     "source_section": "Definition",
+     "quote": "The **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$: its members are smooth functions whose support, the closure in $\\Omega$ of their nonzero set, is a compact subset of $\\Omega$. Equivalently, the zero extension to $\\mathbb R^n$ is smooth with compact support contained in $\\Omega$: compactness gives a neighborhood of every boundary point disjoint from the support, where that extension vanishes. Functions are actual functions, not equivalence classes.\n\nPointwise addition and scalar multiplication make this a complex vector space; the support of a sum lies in the union of the two compact supports. The zero function has empty support. If $\\Omega=\\varnothing$ there is just the empty function, which is the zero vector. The topology is specified in subsequent definitions. Distribution pairings throughout this page are complex bilinear, with no conjugation on test functions. One may restrict all constructions to real scalars.",
+     "uses": [
+      "1.1",
+      "4.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-directional-and-partial-derivatives",
+     "source_section": "Definition",
+     "quote": "For a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "def-em-electromagnetic-tensor",
+     "source_section": "Definition",
+     "quote": "with $\\varepsilon_{0123}=+1$ and\n$\\eta=\\operatorname{diag}(-1,1,1,1)$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "thm-clairaut-schwarz-mixed-partials",
+     "source_section": "Statement",
+     "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+     "source_section": "Statement",
+     "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "def-regular-distribution-from-a-locally-integrable-function",
+     "source_section": "Definition",
+     "quote": "For a test $\\varphi$ as in [[def-test-function-space-d-of-an-open-set]], define the **regular functional**\n\n$$\\langle u_f,\\varphi\\rangle=\\int_\\Omega f(x)\\varphi(x)\\,dx.$$",
+     "uses": [
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "thm-distributional-differentiation-is-continuous-and-commutes",
+     "source_section": "Statement",
+     "quote": "Distributional derivatives satisfy $\\partial^\\alpha\\partial^\\beta u=\\partial^{\\alpha+\\beta}u$ and are continuous linear maps on $\\mathcal D'(\\Omega)$ for both the weak and strong distribution topologies. These claims hold in ZF. Assuming Countable Choice for the cited Riemann-to-Lebesgue comparison, if $f\\in C^k(\\Omega;\\mathbb C)$ and $|\\alpha|\\le k$, then $\\partial^\\alpha u_f=u_{\\partial^\\alpha f}$.",
+     "uses": [
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F9",
+     "source": "def-distributional-derivative",
+     "source_section": "Definition",
+     "quote": "its **distributional derivative** is\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$",
+     "uses": [
+      "4.1",
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F10",
+     "source": "lem-em-fundamental-variation-lemma",
+     "source_section": "Statement",
+     "quote": "Let $n,m\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^m$ be continuous. If $\\int_U\\langle g,h\\rangle\\,d\\lambda=0$ for every $h\\in C_c^\\infty(U;\\mathbb R^m)$, then $g=0$ on $U$.",
+     "uses": [
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F11",
+     "source": "pthm-em-charge-continuity",
+     "source_section": "Statement",
+     "quote": "(a) [Smooth branch] Let $E,B$ be jointly of class $C^2$ on $\\Omega\\times I$ and\n$\\rho,J$ of class $C^1$, and suppose the smooth branch of\n[[post-em-vacuum-maxwell]] holds with these fields and sources, in particular\n$\\operatorname{curl}B=\\mu_0J+c^{-2}\\partial_tE$. Then the continuity equation\n\n$$\\partial_t\\rho+\\operatorname{div}J=0$$\n\nholds pointwise on $\\Omega\\times I$",
+     "uses": [
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F12",
+     "source": "def-em-sources",
+     "source_section": "Definition",
+     "quote": "(a) [Charge parameter] The framework takes a real **charge parameter**\n$q\\in\\mathbb R$, measured in coulombs, attached to a source; its sign is the\nsign of the source and it is a parameter of the model. Charge quantisation is\nnot asserted.\n\n(b) [Smooth source fields] A **smooth (volume) source field** on\n$\\Omega\\times I$ is a pair $(\\rho,J)$ of maps $\\rho:\\Omega\\times I\\to\\mathbb R$,\n$J:\\Omega\\times I\\to\\mathbb R^3$ that is continuous on $\\Omega\\times I$ and of\nclass $C^1$ wherever a displayed equation differentiates it; $\\rho$ is the\n**frame charge density** (C m$^{-3}$) and $J$ the **frame current density**\n(A m$^{-2}$). For each fixed $t\\in I$ retain the compact Jordan branch: if\n$V\\subseteq\\Omega$ is compact and Jordan measurable, define\n\n$$Q_R(V,t):=\\int_V\\rho(y,t)dy$$\n\nby [[def-riemann-integral-over-a-jordan-set]], with integrability supplied by\n[[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. For the\nfull measurable-volume branch assume Countable Choice ([[def-countable-choice]]),\nas required by the published Lebesgue-measure interface. If $V$ is any bounded\nLebesgue-measurable subset with compact closure $\\overline V\\subseteq\\Omega$,\ndefine\n\n$$Q(V,t):=\\int_V\\rho(y,t)d\\lambda_3(y)=\\int_{\\mathbb R^3}F_t(y)\\mathbf{1}_V(y)d\\lambda_3(y),$$\n\nwhere $F_t=\\rho(\\cdot,t)$ on $\\Omega$ and $0$ elsewhere; the signed integral is\ndefined through its positive and negative parts\n([[def-integral-over-a-measurable-set]],\n[[def-integrable-real-and-complex-functions-and-their-integrals]]). The\nfunction $F_t$ is Borel, and hence Lebesgue measurable: for every open\n$O\\subseteq\\mathbb R$ its preimage inside the open set $\\Omega$ is relatively\nopen in $\\Omega$, hence open in $\\mathbb R^3$, and the closed complement of\n$\\Omega$ is added precisely when $0\\in O$\n([[thm-continuous-preimages-of-borel-sets-are-borel]],\n[[thm-borel-sets-are-lebesgue-measurable]]). This integral is absolutely\nfinite: $\\rho(\\cdot,t)$ is bounded on the compact $\\overline V$ by\n[[thm-extreme-value-metric]], $V$ has finite Lebesgue measure by\n[[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]], and the\nmonotonicity and homogeneity of the nonnegative integral\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) bound\n$\\int|F_t|\\mathbf{1}_Vd\\lambda_3\\le M_t\\lambda_3(V)<\\infty$, the indicator\nintegral being its simple-function value\n([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]]); the\npositive and negative parts are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]. On\nthe compact Jordan branch, under the same Countable Choice assumption,\n$Q=Q_R$ by [[lem-riemann-lebesgue-comparison-for-distribution-test-integrands]].\nThe\nempty region has charge zero in both branches. The current flux remains\ndefined independently: for each oriented surface patch in $\\Omega$ the current\nflux at time $t$ is the surface integral of $J(\\cdot,t)$ in the induced\norientation, as defined in [[def-oriented-unit-normal-and-flux-of-a-surface-patch]].\nPoint sources and sheet sources are not source fields in this sense; they are\ndifferent objects, defined by their own pairings when the framework uses them.\n\n(c) [Covariant identification] Write $j:=(c\\rho,J)$, so $j^0=c\\rho$ and\n$j^i=J^i$.",
+     "uses": [
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F13",
+     "source": "def-divergence-and-curl-of-a-c1-vector-field",
+     "source_section": "Definition",
+     "quote": "Then the **divergence** of $F$ is $\\operatorname{div}F:=\\sum_{i<n}\\partial_iF_i$, the function $U\\to\\mathbb R$ whose value at $p$ is $\\sum_{i<n}\\partial_iF_i(p)$. The partial derivatives are those of [[def-directional-and-partial-derivatives]], and the sum is the finite sum used throughout [[def-euclidean-inner-product]]. Since each $\\partial_iF_i$ is continuous on $U$, so is $\\operatorname{div}F$.\n\nNow let $n=3$ and let $F:U\\to\\mathbb R^3$ be $C^1$ on an open $U\\subseteq\\mathbb R^3$. Following [[def-cross-product-in-r3]], write the three coordinates of a point and of a vector as $x,y,z$ rather than $0,1,2$, so that $F=(F_x,F_y,F_z)$ means $F=(F_0,F_1,F_2)$ and $\\partial_x,\\partial_y,\\partial_z$ are $\\partial_0,\\partial_1,\\partial_2$. With that naming, the **curl** of $F$ is $\\operatorname{curl}F:=(\\partial_yF_z-\\partial_zF_y,\\ \\partial_zF_x-\\partial_xF_z,\\ \\partial_xF_y-\\partial_yF_x)$, a map $U\\to\\mathbb R^3$ each of whose coordinates is continuous on $U$. In this naming the divergence reads $\\operatorname{div}F=\\partial_xF_x+\\partial_yF_y+\\partial_zF_z$.",
+     "uses": [
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F14",
+     "source": "def-em-lab-geometry",
+     "source_section": "Definition",
+     "quote": "(a) [Chart restriction] $x(U)=\\{(ct,y):t\\in I,\\ y\\in\\Omega\\}$ and\n$\\Phi:U\\to I\\times\\Omega$, $\\Phi(p):=(x^0(p)/c,(x^1,x^2,x^3)(p))$, is a\nbijection, because the inertial chart $x:A\\to\\mathbb R^4$ is a bijection and\n$c>0$; its components are the **laboratory time coordinate**\n$t(p):=x^0(p)/c$",
+     "uses": [
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F15",
+     "source": "pthm-em-tensor-maxwell-equivalence",
+     "source_section": "Statement",
+     "quote": "Let the laboratory region $U\\cong I\\times\\Omega$ with its inertial chart $x$,\nthe electric and magnetic fields $E,B$ of [[def-em-fields]], the source fields\n$(\\rho,J)$ of [[def-em-sources]] and the SI conventions of\n[[def-em-si-conventions]] with $\\varepsilon_0:=(\\mu_0c^2)^{-1}$ be those of the\nframework. Let $F$ be the electromagnetic two-form of\n[[def-em-electromagnetic-tensor]] with the components fixed there,\n$F_{0i}=-E_i/c$, $F_{ij}=\\epsilon_{ijk}B_k$, $F^{0i}=E_i/c$,\n$F^{ij}=\\epsilon_{ijk}B_k$ and\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, and let $j=(c\\rho,J)$ carry the\ntensor-component identification adopted in [[def-em-sources]]. Write\n$\\partial_0=c^{-1}\\partial_t$ and $\\partial_i$ for the coordinate partial\nderivatives of [[def-directional-and-partial-derivatives]], and\n$\\operatorname{div},\\operatorname{curl}$ for those of\n[[def-divergence-and-curl-of-a-c1-vector-field]]. Assume the smooth branch of\nthe vacuum Maxwell postulate [[post-em-vacuum-maxwell]]: $E,B$ are jointly\n$C^1$ on $\\Omega\\times I$ with the additional derivatives required by each\ndisplayed equation existing and continuous, and $\\rho,J$ are continuous. Then:\n\n(a) [Equivalence] On $I\\times\\Omega$ the four smooth-branch equations\n\n$$\\operatorname{div}E=\\rho/\\varepsilon_0,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}B=\\mu_0J+c^{-2}\\partial_tE$$\n\nhold if and only if the two systems\n\n$$(\\mathrm{TM1})\\quad \\partial_\\mu F^{\\mu\\nu}=-\\mu_0\\,j^\\nu\\quad(\\nu=0,1,2,3),$$\n\n$$(\\mathrm{TM2})\\quad \\partial_\\lambda F_{\\mu\\nu}+\\partial_\\mu F_{\\nu\\lambda}+\\partial_\\nu F_{\\lambda\\mu}=0\\quad(\\lambda,\\mu,\\nu\\in\\{0,1,2,3\\})$$\n\nhold on $I\\times\\Omega$.",
+     "uses": [
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F16",
+     "source": "def-distribution",
+     "source_section": "Definition",
+     "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, a **distribution** is a continuous complex-linear map $u:\\mathcal D(\\Omega)\\to\\mathbb C$, with the test-function topology of [[def-test-function-topology]]. Their vector space is denoted $\\mathcal D'(\\Omega)$. Write $\\langle u,\\varphi\\rangle=u(\\varphi)$; the pairing is linear in both arguments, with no conjugation.",
+     "uses": [
+      "8.1"
+     ]
+    },
+    {
+     "fact": "F17",
+     "source": "def-countable-choice",
+     "source_section": "Definition",
+     "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+     "uses": [
+      "8.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "d-1.1",
+     "claim": "For $\\chi\\in C_c^\\infty(U;\\mathbb R)$ the components $(\\partial^\\sharp\\chi)^\\mu=\\eta^{\\mu\\nu}\\partial_\\nu\\chi$ are smooth on $U$ by [F4] and [F3], and their support is contained in the compact set $\\operatorname{supp}\\chi\\subseteq U$ by [F2], so $\\partial^\\sharp\\chi\\in C_c^\\infty(U;\\mathbb R^4)$ is an admissible field variation of [F1]; moreover $\\eta_{\\nu\\mu}\\eta^{\\mu\\alpha}=\\delta_\\nu^\\alpha$ fo",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+     ]
+    },
+    {
+     "id": "d-2.1",
+     "claim": "Since $\\chi$ is smooth, hence $C^2$, [F5] gives $\\partial_\\mu\\partial_\\nu\\chi=\\partial_\\nu\\partial_\\mu\\chi$ on $U$; therefore $F_{\\mu\\nu}(A+\\partial^\\sharp\\chi)=\\partial_\\mu(A_\\nu+\\partial_\\nu\\chi)-\\partial_\\nu(A_\\mu+\\partial_\\mu\\chi)=F_{\\mu\\nu}(A)+\\partial_\\mu\\partial_\\nu\\chi-\\partial_\\nu\\partial_\\mu\\chi=F_{\\mu\\nu}(A)$ on $U$ by step 1.1 and [F1], so the quadratic field term of $S$ is unchanged a",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "F4",
+      "F5",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-3.1",
+     "claim": "Because the field term is unchanged by step 2.1, the difference of the functionals is the difference of the source terms, and linearity [F6] of the integral gives $S[A+\\partial^\\sharp\\chi]-S[A]=c^{-1}\\int_Uj^\\nu\\bigl((A+\\partial^\\sharp\\chi)_\\nu-A_\\nu\\bigr)d\\lambda=c^{-1}\\int_Uj^\\mu\\partial_\\mu\\chi\\,d\\lambda$ by step 1.1; the integrand is smooth and compactly supported in $U$, so the integral is fi",
+     "step": "3.1",
+     "inputs": [
+      "F1",
+      "F6",
+      "step 1.1",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "d-4.1",
+     "claim": "Each $j^\\mu$ is smooth, hence locally integrable, with regular distribution $\\langle u_{j^\\mu},\\varphi\\rangle=\\int_Uj^\\mu\\varphi\\,d\\lambda$ by [F7]; the signed definition [F9] gives $\\langle\\partial_\\mu j^\\mu,\\chi\\rangle=-\\langle j^\\mu,\\partial_\\mu\\chi\\rangle$, and [F8] identifies the distributional derivative of $j^\\mu$ with the classical one, so $\\int_U(\\partial_\\mu j^\\mu)\\chi\\,d\\lambda=-\\int_Uj",
+     "step": "4.1",
+     "inputs": [
+      "F2",
+      "F7",
+      "F8",
+      "F9",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "d-5.1",
+     "claim": "If $\\partial_\\mu j^\\mu=0$ on $U$, the identity of step 4.1 gives $S[A+\\partial^\\sharp\\chi]=S[A]$ for every $\\chi\\in C_c^\\infty(U;\\mathbb R)$, which is the forward direction of clause (b).",
+     "step": "5.1",
+     "inputs": [
+      "step 4.1"
+     ]
+    },
+    {
+     "id": "d-6.1",
+     "claim": "Conversely, suppose $S[A+\\partial^\\sharp\\chi]=S[A]$ for every $\\chi\\in C_c^\\infty(U;\\mathbb R)$; by step 4.1 the continuous function $g:=\\partial_\\mu j^\\mu$ on the open $U$ (sum of the smooth derivatives $\\partial_\\mu j^\\mu$) satisfies $\\int_Ug\\chi\\,d\\lambda=0$ for every $\\chi\\in C_c^\\infty(U;\\mathbb R)$, so [F10] with $m=1$ gives $g=0$ on $U$, that is $\\partial_\\mu j^\\mu=0$ pointwise; hence compa",
+     "step": "6.1",
+     "inputs": [
+      "F10",
+      "step 4.1",
+      "step 5.1"
+     ]
+    },
+    {
+     "id": "d-7.1",
+     "claim": "Under the additional hypothesis of clause (c), the represented fields and sources lie in the class of [F11], so $\\partial_t\\rho+\\operatorname{div}J=0$ holds pointwise on $U$; in the chart $x^0=ct$ of [F14] the four-current identity reads $\\partial_\\mu j^\\mu=\\partial_0j^0+\\partial_iJ^i=c^{-1}\\partial_t(c\\rho)+\\operatorname{div}J=\\partial_t\\rho+\\operatorname{div}J=0$ by [F12] and [F13], where the eq",
+     "step": "7.1",
+     "inputs": [
+      "F11",
+      "F12",
+      "F13",
+      "F14",
+      "F15",
+      "step 6.1"
+     ]
+    },
+    {
+     "id": "d-8.1",
+     "claim": "If $j^\\mu$ is a distribution on $U$ in the sense of [F16], the signed definition [F9] applied coordinatewise gives $\\langle j^\\mu,\\partial_\\mu\\chi\\rangle=-\\langle\\partial_\\mu j^\\mu,\\chi\\rangle$ for every test function $\\chi$, so the gauge-difference pairing $c^{-1}\\sum_\\mu\\langle j^\\mu,\\partial_\\mu\\chi\\rangle$ equals $-c^{-1}\\langle\\partial_\\mu j^\\mu,\\chi\\rangle$ and vanishes for every compact gau",
+     "step": "8.1",
+     "inputs": [
+      "F1",
+      "F16",
+      "F17",
+      "F2",
+      "F9",
+      "step 3.1",
+      "step 4.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The statement keeps the nonempty bounded open region of def-em-field-action-definition, so the empty region is excluded by type."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 5.1 gives zero difference for the zero gauge parameter and for a conserved source, and step 8.1 treats the zero distribution; no zero case is excluded or claimed beyond the stated classes."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no cardinality-one collection occurs; the statement ranges over one gauge parameter and one four-current at a time."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.1 uses $\\eta=\\operatorname{diag}(-1,1,1,1)$ and its inverse identity $\\eta_{\\nu\\mu}\\eta^{\\mu\\alpha}=\\delta_\\nu^\\alpha$, so the lowering used throughout is invertible; the region hypotheses of the statement exclude degenerate regions."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 records that $\\chi$ is compactly supported in the open $U$, and step 4.1 that this is exactly why no boundary term appears in the integration by parts."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Countable Choice is assumed in the statement and enters through the fundamental lemma at step 6.1 and the distributional compatibility at step 4.1, as recorded in step 8.1; no other choice is used."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 5.1 proves that conservation of the smooth four-current implies invariance under every compact gauge variation."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 6.1 proves the converse for smooth sources from the fundamental variation lemma applied to the continuous function $\\partial_\\mu j^\\mu$."
+    }
+   ]
+  },
+  "ex-em-compact-variation-example": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-em-field-action-definition",
+     "source_section": "Definition",
+     "quote": "define the\n**field action** by\n\n$$S[A]:=c^{-1}\\int_U\\Bigl[-\\frac{1}{4\\mu_0}F_{\\mu\\nu}F^{\\mu\\nu}+j^\\nu A_\\nu\\Bigr]d\\lambda,$$\n\n$d\\lambda$ the four-dimensional Lebesgue measure in the chart coordinates, the\nintegral being that of [[def-integral-over-a-measurable-set]]. Then $S[A]$ is\na finite real number, in units of $\\mathrm{J\\,s}$: the density\n$-(4\\mu_0)^{-1}F_{\\mu\\nu}F^{\\mu\\nu}+j^\\nu A_\\nu$ carries\n$\\mathrm{J\\,m^{-3}}$, $d\\lambda$ carries $\\mathrm{m^4}$ and $c^{-1}$ carries\n$\\mathrm{s\\,m^{-1}}$ ([[def-em-si-conventions]]). With $\\kappa:=\\mu_0$,\n$J:=j$ and the same bounded open $U$, one has $S[A]=c^{-1}S_{\\rm math}[A]$,\nwhere $S_{\\rm math}$ is the real functional of\n[[lem-em-compact-field-variation]]; since $c^{-1}>0$, the first variation and\nthe stationarity of $S$ at $A$ are exactly those recorded there.\n\n(b) [Admissible field variations] The field variations are the real maps\n$h\\in C_c^\\infty(U;\\mathbb R^4)$, the real subspace of the test space of\n[[def-test-function-space-d-of-an-open-set]], extended by zero to $N$; for\nevery real $s$ the field $A+sh$ is smooth on $N$, and $s\\mapsto S[A+sh]$ is\nthe quadratic polynomial of clause (a) of\n[[lem-em-compact-field-variation]] with both coefficients multiplied by\n$c^{-1}$. The field $A$ is **stationary** for $S$ if\n$\\frac{d}{ds}\\big|_{s=0}S[A+sh]=0$ for every such $h$.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-em-compact-field-variation",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$). Let $U\\subseteq\\mathbb R^4$ be a bounded open set, let $N\\subseteq\\mathbb R^4$ be an open neighbourhood of its closure, let $\\kappa>0$, and let $A:N\\to V=\\mathbb R^4$ and $J:N\\to V$ be smooth ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Use the Minkowski form $\\eta$ and the index conventions of [[def-em-minkowski-affine-space]]: $A^\\mu$ denotes the components of $A$ in the standard basis, $A_\\nu:=\\eta_{\\nu\\mu}A^\\mu$, $F_{\\mu\\nu}:=\\partial_\\mu A_\\nu-\\partial_\\nu A_\\mu$, $F^{\\mu\\nu}:=\\eta^{\\mu\\alpha}\\eta^{\\nu\\beta}F_{\\alpha\\beta}$, and $J^\\nu A_\\nu$ is the indicated contraction of the components of $J$ with the covector $A_\\nu$. Put $L:=-\\frac{1}{4\\kappa}F_{\\mu\\nu}F^{\\mu\\nu}+J^\\nu A_\\nu$ and $S[A]:=\\int_U L\\,d\\lambda$, the $4$-dimensional Lebesgue integral of $L$ over $U$. Then $S[A]$ is a finite real number, and for every $h\\in C_c^\\infty(U;V)$, with $h_\\nu:=\\eta_{\\nu\\mu}h^\\mu$ and $G_{\\mu\\nu}:=\\partial_\\mu h_\\nu-\\partial_\\nu h_\\mu$: (a) the map $s\\mapsto S[A+sh]$ is the quadratic polynomial $S[A]+s\\int_U\\ell_1\\,d\\lambda+s^2\\int_U\\ell_2\\,d\\lambda$, where $\\ell_1:=-\\kappa^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+J^\\nu h_\\nu$ and $\\ell_2:=-\\frac{1}{4\\kappa}G_{\\mu\\nu}G^{\\mu\\nu}$, so that its derivative at $s=0$ is $\\int_U\\bigl(-\\kappa^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+J^\\nu h_\\nu\\bigr)d\\lambda$; (b) that first variation also equals $\\int_U\\bigl(\\kappa^{-1}\\partial_\\mu F^{\\mu\\nu}+J^\\nu\\bigr)h_\\nu\\,d\\lambda$; (c) $A$ is stationary for $S$, meaning that the derivative in (a) vanishes for every $h\\in C_c^\\infty(U;V)$, if and only if $\\partial_\\mu F^{\\mu\\nu}=-\\kappa J^\\nu$ for every $\\nu$ on $U$, all derivatives being classical partial derivatives of the smooth field $A$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "pthm-em-action-maxwell-variation",
+     "source_section": "Statement",
+     "quote": "Then the following are equivalent: (i) $A$ is stationary for $S$ under all\n$h\\in C_c^\\infty(U;\\mathbb R^4)$, i.e. the adopted field equation of\n[[post-em-stationary-action-model]] (i); (ii)\n$\\partial_\\mu F^{\\mu\\nu}=-\\mu_0j^\\nu$ at every point of $U$ for every\n$\\nu\\in\\{0,1,2,3\\}$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "pthm-em-action-gauge-source-compatibility",
+     "source_section": "Statement",
+     "quote": "(a) [Exact gauge difference, no boundary term] For every such $\\chi$ one has\n$F_{\\mu\\nu}(A+\\partial^\\sharp\\chi)=F_{\\mu\\nu}(A)$ on $U$, because\n$\\partial_\\mu\\partial_\\nu\\chi-\\partial_\\nu\\partial_\\mu\\chi=0$ for the smooth\n$\\chi$ ([[thm-clairaut-schwarz-mixed-partials]]); consequently the field term\nof $S$ is unchanged and\n\n$$S[A+\\partial^\\sharp\\chi]-S[A]=c^{-1}\\int_Uj^\\mu\\,\\partial_\\mu\\chi\\,d\\lambda=-c^{-1}\\int_U(\\partial_\\mu j^\\mu)\\,\\chi\\,d\\lambda,$$\n\nthe second equality being the distributional integration-by-parts identity for\nthe locally integrable fields $j^\\mu$ and the smooth compactly supported\n$\\chi$ ([[def-distributional-derivative]],\n[[def-regular-distribution-from-a-locally-integrable-function]],\n[[thm-distributional-differentiation-is-continuous-and-commutes]]); no\nboundary term arises precisely because $\\chi$ is compactly supported in $U$.\n\n(b) [Equivalence for smooth sources] If $\\partial_\\mu j^\\mu=0$ on $U$ (the\nsource is conserved), then $S[A+\\partial^\\sharp\\chi]=S[A]$ for every\n$\\chi\\in C_c^\\infty(U;\\mathbb R)$. Conversely, if\n$S[A+\\partial^\\sharp\\chi]=S[A]$ for every such $\\chi$, then\n$\\partial_\\mu j^\\mu=0$ pointwise on $U$: the function $\\partial_\\mu j^\\mu$ is\ncontinuous on the open $U$ and pairs to zero against every compactly supported\nsmooth $\\chi$, so [[lem-em-fundamental-variation-lemma]] applies. Hence for\nsmooth prescribed sources the invariance of the field action under all compact\ngauge variations is equivalent to the conservation of the four-current.",
+     "uses": [
+      "2.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "def-em-electromagnetic-tensor",
+     "source_section": "Definition",
+     "quote": "fix the ordered basis\n$(e_0,e_1,e_2,e_3)$ of the chart and the oriented volume form $\\varepsilon$ of\n[[def-oriented-minkowski-volume-form]], with $\\varepsilon_{0123}=+1$ and\n$\\eta=\\operatorname{diag}(-1,1,1,1)$.\n\n(a) [Components] For a field pair $(E,B)$ of class $C^k$, $k\\ge1$, define the\ncovariant components of the **electromagnetic two-form** $F$ in the chart by\n$F_{00}=0$, $F_{0i}:=-E_i/c$, $F_{ij}:=\\epsilon_{ijk}B_k$\n($i,j,k\\in\\{1,2,3\\}$) and $F_{ab}:=-F_{ba}$, the index-raised components being\n$F^{0i}=E_i/c$, $F^{i0}=-E_i/c$ and $F^{ij}=\\epsilon_{ijk}B_k$.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "def-em-si-conventions",
+     "source_section": "Definition",
+     "quote": "The electric constant is defined within the\nframework by\n\n$$\\varepsilon_0:=(\\mu_0c^2)^{-1}$$\n\nin F m$^{-1}$,",
+     "uses": [
+      "1.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "def-em-sources",
+     "source_section": "Definition",
+     "quote": "(a) [Charge parameter] The framework takes a real **charge parameter**\n$q\\in\\mathbb R$, measured in coulombs, attached to a source; its sign is the\nsign of the source and it is a parameter of the model. Charge quantisation is\nnot asserted.\n\n(b) [Smooth source fields] A **smooth (volume) source field** on\n$\\Omega\\times I$ is a pair $(\\rho,J)$ of maps $\\rho:\\Omega\\times I\\to\\mathbb R$,\n$J:\\Omega\\times I\\to\\mathbb R^3$ that is continuous on $\\Omega\\times I$ and of\nclass $C^1$ wherever a displayed equation differentiates it; $\\rho$ is the\n**frame charge density** (C m$^{-3}$) and $J$ the **frame current density**\n(A m$^{-2}$). For each fixed $t\\in I$ retain the compact Jordan branch: if\n$V\\subseteq\\Omega$ is compact and Jordan measurable, define\n\n$$Q_R(V,t):=\\int_V\\rho(y,t)dy$$\n\nby [[def-riemann-integral-over-a-jordan-set]], with integrability supplied by\n[[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. For the\nfull measurable-volume branch assume Countable Choice ([[def-countable-choice]]),\nas required by the published Lebesgue-measure interface. If $V$ is any bounded\nLebesgue-measurable subset with compact closure $\\overline V\\subseteq\\Omega$,\ndefine\n\n$$Q(V,t):=\\int_V\\rho(y,t)d\\lambda_3(y)=\\int_{\\mathbb R^3}F_t(y)\\mathbf{1}_V(y)d\\lambda_3(y),$$\n\nwhere $F_t=\\rho(\\cdot,t)$ on $\\Omega$ and $0$ elsewhere; the signed integral is\ndefined through its positive and negative parts\n([[def-integral-over-a-measurable-set]],\n[[def-integrable-real-and-complex-functions-and-their-integrals]]). The\nfunction $F_t$ is Borel, and hence Lebesgue measurable: for every open\n$O\\subseteq\\mathbb R$ its preimage inside the open set $\\Omega$ is relatively\nopen in $\\Omega$, hence open in $\\mathbb R^3$, and the closed complement of\n$\\Omega$ is added precisely when $0\\in O$\n([[thm-continuous-preimages-of-borel-sets-are-borel]],\n[[thm-borel-sets-are-lebesgue-measurable]]). This integral is absolutely\nfinite: $\\rho(\\cdot,t)$ is bounded on the compact $\\overline V$ by\n[[thm-extreme-value-metric]], $V$ has finite Lebesgue measure by\n[[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]], and the\nmonotonicity and homogeneity of the nonnegative integral\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) bound\n$\\int|F_t|\\mathbf{1}_Vd\\lambda_3\\le M_t\\lambda_3(V)<\\infty$, the indicator\nintegral being its simple-function value\n([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]]); the\npositive and negative parts are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]. On\nthe compact Jordan branch, under the same Countable Choice assumption,\n$Q=Q_R$ by [[lem-riemann-lebesgue-comparison-for-distribution-test-integrands]].\nThe\nempty region has charge zero in both branches. The current flux remains\ndefined independently: for each oriented surface patch in $\\Omega$ the current\nflux at time $t$ is the surface integral of $J(\\cdot,t)$ in the induced\norientation, as defined in [[def-oriented-unit-normal-and-flux-of-a-surface-patch]].\nPoint sources and sheet sources are not source fields in this sense; they are\ndifferent objects, defined by their own pairings when the framework uses them.\n\n(c) [Covariant identification] Write $j:=(c\\rho,J)$, so $j^0=c\\rho$ and\n$j^i=J^i$.",
+     "uses": [
+      "2.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "lem-test-function-cutoffs-and-euclidean-localization",
+     "source_section": "Statement",
+     "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$.",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "F9",
+     "source": "thm-newton-leibniz-with-interior-derivative",
+     "source_section": "Statement",
+     "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F10",
+     "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+     "source_section": "Statement",
+     "quote": "the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+     "uses": [
+      "2.1",
+      "2.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F11",
+     "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+     "source_section": "Statement",
+     "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+     "uses": [
+      "2.2"
+     ]
+    },
+    {
+     "fact": "F12",
+     "source": "thm-integration-by-parts",
+     "source_section": "Statement",
+     "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ ([[def-darboux-integral]]). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F13",
+     "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+     "source_section": "Statement",
+     "quote": "1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+     "uses": [
+      "2.2"
+     ]
+    },
+    {
+     "fact": "F14",
+     "source": "lem-em-continuous-localization",
+     "source_section": "Statement",
+     "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$, [[def-countable-choice]]).\n\n**Integral form.** Let $n,m\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^m$ be continuous. For a measurable $V\\subseteq U$ write, componentwise,\n\n$$\\int_V g\\,d\\lambda_n:=\\Bigl(\\int g_1\\chi_V\\,d\\lambda_n,\\ \\dots,\\ \\int g_m\\chi_V\\,d\\lambda_n\\Bigr),$$\n\neach component being the Lebesgue integral of the measurable function $g_i\\chi_V$ ([[def-integrable-real-and-complex-functions-and-their-integrals]], [[def-integral-over-a-measurable-set]]). A ball $V\\subseteq U$ is **compactly contained** in $U$ when its closure is a compact subset of $U$; for a Euclidean ball this means $\\overline V\\subseteq U$. If $\\int_Vg\\,d\\lambda_n=0$ for every ball $V$ compactly contained in $U$, then $g=0$ on $U$.",
+     "uses": [
+      "2.2",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F15",
+     "source": "def-directional-and-partial-derivatives",
+     "source_section": "Definition",
+     "quote": "For a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$.",
+     "uses": [
+      "1.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F16",
+     "source": "def-countable-choice",
+     "source_section": "Definition",
+     "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+     "uses": [
+      "4.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "d-1.1",
+     "claim": "With $j\\equiv0$ and $A=0$ one has $F(A)=0$ by [F1], so the coefficient $-\\mu_0^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+j^\\nu h_\\nu$ of [F2] vanishes identically on $U$ for every $h\\in C_c^\\infty(U;\\mathbb R^4)$; the first variation is $c^{-1}$ times the integral of that coefficient by [F1], hence it is zero for every $h$ and $A=0$ is stationary. This is part (a).",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "F6"
+     ]
+    },
+    {
+     "id": "d-1.2",
+     "claim": "For the potential $A_0=x^1$, $A_1=A_2=A_3=0$ of part (b), [F15] gives $\\partial_1A_0=1$ and $\\partial_0A_1=0$, so the dictionary [F5] yields $F_{01}=\\partial_0A_1-\\partial_1A_0=-1$; raising indices with $\\eta^{00}\\eta^{11}=(-1)(1)=-1$ gives $F^{01}=+1$ and $F^{10}=-1$, and all remaining components vanish because the other $A_\\nu$ are constant; the inverse dictionary of [F5] then gives $E_1=-cF_{01",
+     "step": "1.2",
+     "inputs": [
+      "F15",
+      "F5"
+     ]
+    },
+    {
+     "id": "d-1.3",
+     "claim": "For part (c), apply [F8] with $\\Omega=(-1/4,1/4)$ and $K=\\{0\\}$, with $\\Omega=(-1,1)$ and $K=[-1/2,1/2]$, and with $\\Omega=(-1,1)^3$ and $K=\\{0\\}$; this gives nonzero nonnegative $\\rho\\in C_c^\\infty((-1/4,1/4))$, $\\zeta\\in C_c^\\infty((-1,1))$ with $\\zeta=1$ near $[-1/2,1/2]$, and nonzero nonnegative $\\psi\\in C_c^\\infty((-1,1)^3)$, all extended by zero. Set $\\varphi_\\pm(u):=(2\\pm u)\\zeta(u)$ and $\\",
+     "step": "1.3",
+     "inputs": [
+      "F8"
+     ]
+    },
+    {
+     "id": "d-2.1",
+     "claim": "With $j\\equiv0$ the equation $\\partial_\\mu F^{\\mu\\nu}=-\\mu_0j^\\nu=0$ of step 1.2 is exactly the coefficient equation of [F3], so [F3] gives that $A$ is stationary; directly, for every $h\\in C_c^\\infty(U;\\mathbb R^4)$ the first variation is $c^{-1}\\int_U\\bigl(-\\mu_0^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu\\bigr)d\\lambda=-(c\\mu_0)^{-1}\\int_U\\bigl(F^{01}\\partial_0h_1+F^{10}\\partial_1h_0\\bigr)d\\lambda=-(c\\mu_",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "F10",
+      "F2",
+      "F3",
+      "F9",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "d-2.2",
+     "claim": "For every smooth potential $A$ on a neighbourhood of $\\overline U$, [F4] gives $S[A+\\partial^\\sharp\\chi_\\pm]-S[A]=c^{-1}\\int_Uj^\\mu\\partial_\\mu\\chi_\\pm\\,d\\lambda$; with the source $j^0=c\\rho(x^0)$, $j^i=0$ of step 1.3 and the convention [F7], the integrand is $j^0\\partial_0\\chi_\\pm=c\\rho(x^0)\\varphi_\\pm'(x^0)\\psi(x^1,x^2,x^3)$, whose support lies in the compact box $[-1/4,1/4]\\times(-1,1)^3$; Fubi",
+     "step": "2.2",
+     "inputs": [
+      "F10",
+      "F11",
+      "F13",
+      "F14",
+      "F4",
+      "F7",
+      "step 1.3"
+     ]
+    },
+    {
+     "id": "d-3.1",
+     "claim": "For the same data, the second form of [F4] gives $S[A+\\partial^\\sharp\\chi_\\pm]-S[A]=-c^{-1}\\int_U(\\partial_\\mu j^\\mu)\\chi_\\pm\\,d\\lambda$; here $\\partial_\\mu j^\\mu=\\partial_0(c\\rho(x^0))=c\\rho'(x^0)$ by [F7] and [F15], so the right-hand side is $-\\int_U\\rho'(x^0)\\varphi_\\pm(x^0)\\psi\\,d\\lambda=-\\bigl(\\int_{-1}^1\\rho'\\varphi_\\pm\\,dx^0\\bigr)\\bigl(\\int\\psi\\bigr)$ by Fubini [F10]; the one-variable integ",
+     "step": "3.1",
+     "inputs": [
+      "F10",
+      "F12",
+      "F15",
+      "F4",
+      "F7",
+      "step 2.2"
+     ]
+    },
+    {
+     "id": "d-4.1",
+     "claim": "The computation used exact substitutions in the declared box functional, the one-variable fundamental theorem for compactly supported functions and the factoring of the four-dimensional integral by Fubini; it used no existence of sources or fields, no numerical value of $\\mu_0$, no global gauge statement and no globally monotone compact function. All integrals are the finite-region Lebesgue integr",
+     "step": "4.1",
+     "inputs": [
+      "F1",
+      "F14",
+      "F16",
+      "F6",
+      "step 3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The box $U=(-1,1)^4$ and the supports of $\\rho,\\zeta,\\psi$ are nonempty by construction in step 1.3; empty supports are excluded by the nonzero choices."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Part (a) is exactly the source-free zero field, verified in step 1.1, and the conserved constant-source case is handled at the end of step 3.1; the zero field and zero source cases are therefore covered and neither is used as a substitute for the strict signs."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no cardinality-one collection occurs; the example fixes one potential, one source profile and one pair of gauge directions."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.2 gives the constant nonzero field components $F_{01}=-1$, $F^{01}=+1$, $F^{10}=-1$, and step 2.2 proves strict positivity of both factor integrals, so no degenerate or vanishing witness stands in for the claimed signs."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 uses that $h$ is compactly supported in the open $U$ and step 3.1 that $\\rho$ and $\\varphi_\\pm$ are compactly supported, so the fundamental theorem and integration by parts have no boundary terms."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Countable Choice is inherited as declared and enters only through the positivity and measure statements [F13] and [F14] used in step 2.2; step 4.1 records the scope."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the example asserts exact computations and signs; the gauge theorem equivalence is invoked at the end of step 3.1 only for the conserved case."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the example asserts no converse of any implication."
+    }
+   ]
+  },
+  "pthm-em-particle-action-coupling": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-em-particle-curve-variation",
+     "source_section": "Statement",
+     "quote": "For fixed-endpoint $C^2$ variations $h:[a,b]\\to V$ with $h(a)=h(b)=0$ and for $m,c>0$ and real $q$ consider\n\n$$S[X]=-mc\\int_a^b\\sqrt{-\\eta(\\dot X,\\dot X)}\\,ds+q\\int_a^bA_\\mu(X)\\dot X^\\mu\\,ds .$$",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F1",
+     "source": "def-em-field-action-definition",
+     "source_section": "Definition",
+     "quote": "(c) [Particle functional] Let $m>0$ and $q\\in\\mathbb R$ ([[def-em-sources]]\n(a)), let $[a,b]$ be a nondegenerate compact interval, let $X:[a,b]\\to A$ be a\n$C^2$ future timelike massive worldline ([[def-em-relativistic-worldlines-frames]]\n(a)), and let $A_\\mu$ be a $C^2$ covector field on a neighbourhood of the\nimage of $X$. The **particle functional** is the one of\n[[lem-em-particle-curve-variation]],\n\n$$S_{\\rm pt}[X]:=-mc\\int_a^b\\sqrt{-\\eta(\\dot X,\\dot X)}\\,ds+q\\int_a^bA_\\mu(X)\\dot X^\\mu\\,ds,$$\n\nwith admissible variations the fixed-endpoint $C^2$ variations\n$h:[a,b]\\to V$, $h(a)=h(b)=0$, of that lemma;",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-em-particle-curve-variation",
+     "source_section": "Statement",
+     "quote": "Then for each such $h$ the curve $X+\\varepsilon h$ remains future timelike for all sufficiently small $|\\varepsilon|$, and stationarity of $S$ under all such variations is equivalent to\n\n$$m\\frac{dU_\\nu}{d\\tau}=qF_{\\nu\\mu}U^\\mu,\\qquad\\frac{d\\tau}{ds}=\\frac{\\sqrt{-\\eta(\\dot X,\\dot X)}}c,\\qquad F=dA,$$",
+     "uses": [
+      "1.1",
+      "2.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-em-relativistic-worldlines-frames",
+     "source_section": "Definition",
+     "quote": "(a) [Worldlines] A **worldline** is a regular causal curve $x:J\\to A$ in one of\nthe regularity classes of [[def-sr-regular-causal-curve-and-worldline]] ($J$ an\norder-convex subset of $\\mathbb R$ with at least two elements). A **massive\nworldline** is a $C^k$ future timelike worldline, $k\\ge1$, with everywhere\nnonzero future timelike tangent; a **light ray** is a $C^1$ future null curve\nwith everywhere nonzero future null tangent. Along a null curve the integrand\n$-\\eta(x',x')$ of the proper-time construction\n([[def-sr-proper-time]]) vanishes identically, so that construction yields no\nproper-time parametrization of it, and a light ray is never treated as a\nmassive worldline. A worldline is a curve in spacetime; its reading $r\\circ x$\nin a named laboratory chart is a coordinate description of it, not an object of\nanother observer.\n\n(b) [Four-velocity and four-acceleration] For a massive worldline the\nfour-velocity $U$ and, when it is $C^2$, the four-acceleration $A$ are those of\n[[def-sr-four-velocity-and-four-acceleration]]; wherever defined they satisfy\n$\\eta(U,U)=-c^2$ and $\\eta(U,A)=0$, by\n[[thm-sr-proper-time-and-observer-decomposition]].",
+     "uses": [
+      "1.1",
+      "2.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "thm-sr-proper-time-and-observer-decomposition",
+     "source_section": "Statement",
+     "quote": "(a) Norm of the four-velocity.** Let $x : I \\to A$ be a $C^{1}$ future\ntimelike worldline with four-velocity $U$\n([[def-sr-four-velocity-and-four-acceleration]]). Then\n$\\eta(U(s),U(s)) = -c^{2}$ for every $s \\in I$;",
+     "uses": [
+      "2.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "lem-em-antisymmetric-tensor-contraction",
+     "source_section": "Statement",
+     "quote": "Since $\\eta$ is\nnondegenerate, for each $u\\in V$ there is exactly one $\\Phi(u)\\in V$ with\n$\\eta(\\Phi(u),w)=F(w,u)$ for all $w\\in V$\n([[thm-bilinear-forms-correspond-to-linear-maps-into-the-dual]],\n[[def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form]]), and\n$\\Phi:V\\to V$ is linear ([[def-linear-map]]); with\n$F_{\\alpha\\beta}:=F(e_\\alpha,e_\\beta)$ in the fixed ordered basis\n$(e_0,e_1,e_2,e_3)$ of [[def-em-minkowski-affine-space]] and $(\\eta^{\\mu\\alpha})$\nthe inverse matrix of $(\\eta_{\\alpha\\beta})$, one has\n$\\Phi(u)^\\mu=\\sum_{\\alpha,\\beta}\\eta^{\\mu\\alpha}F_{\\alpha\\beta}u^\\beta$, the\nindex-raised form of $F$.",
+     "uses": [
+      "3.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "def-em-electromagnetic-tensor",
+     "source_section": "Definition",
+     "quote": "conversely, if a $C^1$\ncovector field $A_\\mu$ on $U$ satisfies $F_{\\mu\\nu}=\\partial_\\mu A_\\nu\n-\\partial_\\nu A_\\mu$, then $E,B$ recovered from $F$ by clause (a) obey\n$E=-\\nabla\\varphi-\\partial_tA$ and $B=\\operatorname{curl}A$ with\n$\\varphi:=-cA_0$ and the spatial potential vector $A:=(A_1,A_2,A_3)$. Here\n$\\nabla$ and $\\operatorname{curl}$ are those of\n[[def-divergence-and-curl-of-a-c1-vector-field]] in the spatial coordinates,\nand the spatial cross-product conventions of [[def-cross-product-in-r3]] are\nused. The definition does not assert that every field pair admits such a\npotential; where a $C^1$ potential represents the $C^1$-or-better field of\nclause (a), the field is closed in the explicit sense\n$\\partial_\\lambda F_{\\mu\\nu}+\\partial_\\mu F_{\\nu\\lambda}\n+\\partial_\\nu F_{\\lambda\\mu}=0$. This conclusion does not require second\nclassical derivatives of the potential: put\n$H_{\\lambda\\mu\\nu}:=\\partial_\\lambda F_{\\mu\\nu}+\\partial_\\mu F_{\\nu\\lambda}\n+\\partial_\\nu F_{\\lambda\\mu}$, which is continuous because $F$ is $C^1$; for\nevery smooth compactly supported test $\\psi$, substituting $F=dA$ and\nintegrating by parts twice, moving the derivatives first onto $\\psi$\n([[lem-sr-compact-variation-and-fundamental-lemma]] (b)) and then off the\npotential factors after commuting only the smooth test derivatives\n([[thm-clairaut-schwarz-mixed-partials]]), gives $\\int H\\psi=0$; the\nfundamental lemma (a) of [[lem-sr-compact-variation-and-fundamental-lemma]]\nthen gives $H=0$. The framework's potential theorems establish existence only\nunder their stated hypotheses; [[def-directional-and-partial-derivatives]]\nsupplies the coordinate derivatives $\\partial_\\mu$ used throughout.\n\n(d) [Four-current and index-raising operator] With the adopted four-current\n$j=(c\\rho,J)$ of [[def-em-sources]], the raised-index operator $\\Phi$ of\n[[lem-em-antisymmetric-tensor-contraction]], defined pointwise on $V$ by\n$\\eta(\\Phi(u),w)=F(w,u)$, satisfies\n$\\Phi(u)^\\mu=\\eta^{\\mu\\alpha}F_{\\alpha\\beta}u^\\beta$;",
+     "uses": [
+      "3.1",
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "def-em-sources",
+     "source_section": "Definition",
+     "quote": "(a) [Charge parameter] The framework takes a real **charge parameter**\n$q\\in\\mathbb R$, measured in coulombs, attached to a source; its sign is the\nsign of the source and it is a parameter of the model.",
+     "uses": [
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "def-em-si-conventions",
+     "source_section": "Definition",
+     "quote": "(c) [Mechanical quantities] A rest mass parameter $m$ carries the kilogram",
+     "uses": [
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "pthm-em-relativistic-lorentz-force",
+     "source_section": "Statement",
+     "quote": " the adopted equation of motion is $$m\\,\\frac{dU}{d\\tau}=q\\,\\Phi(U),\\qquad \\eta(\\Phi(u),w)=F(w,u),$$ $U$ the four-velocity of [[def-em-relativistic-worldlines-frames]] (b) with $\\eta(U,U)=-c^2$. Let $t\\mapsto r(t)$ be the laboratory chart reading of the worldline, $v:=r'$ its coordinate velocity and $\\gamma:=(1-|v|^2/c^2)^{-1/2}$, so that $U=\\gamma(c,v)$ ([[thm-sr-proper-time-and-observer-decomposition]] (e)). Then, wherever the worldline is $C^2$: (a) [Coordinate force and power] with the coordinate three-momentum $p:=m\\gamma v$ of [[pthm-sr-momentum-and-four-force]] (a), $$\\frac{dp}{dt}=q\\,(E+v\\times B),\\qquad \\frac{d(\\gamma mc^2)}{dt}=q\\,E\\cdot v,$",
+     "uses": [
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F9",
+     "source": "post-em-stationary-action-model",
+     "source_section": "Postulate",
+     "quote": "(ii) [Particle sector] For a prescribed external four-potential $A_\\mu$ on a\nneighbourhood of the image of a $C^2$ future timelike massive worldline $X$,\nthe motion is dynamically admissible exactly when $X$ is stationary for the\nparticle functional $S_{\\rm pt}$ of clause (c) of that definition under all\nfixed-endpoint $C^2$ variations.",
+     "uses": [
+      "5.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "d-1.1",
+     "claim": "The data meet the hypotheses of [F2]: $[a,b]$ is a nondegenerate compact interval, $X$ is a $C^2$ future timelike curve by [F3] and the statement's class, and $A_\\mu$ is $C^2$ on a neighbourhood of the image of $X$ by assumption; the functional of [F1] is literally the functional of [F2] in the framework's conventions. Hence for every fixed-endpoint $C^2$ variation $h$ the curve $X+\\varepsilon h$ ",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "F3"
+     ]
+    },
+    {
+     "id": "d-2.1",
+     "claim": "The curve $X$ of step 1.1 is the framework's massive worldline by [F3] and the functional $S_{\\rm pt}$ is the framework's particle functional by [F1]; the four-velocity $U$ and proper time $\\tau$ occurring in the coefficient equation of [F2] are the four-velocity and proper-time parameter of that same curve, the objects to which [F2] refers through the observer-decomposition theorem, and they sati",
+     "step": "2.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-3.1",
+     "claim": "Lowering the index in [F5], $(\\Phi(U))_\\nu=\\eta_{\\nu\\mu}\\Phi(U)^\\mu=\\eta_{\\nu\\mu}\\eta^{\\mu\\alpha}F_{\\alpha\\beta}U^\\beta=F_{\\nu\\beta}U^\\beta=F_{\\nu\\mu}U^\\mu$, and [F6] identifies this $\\Phi$ and the potential relation $F=dA$ with the framework's two-form; since $u\\mapsto\\eta(u,\\cdot)$ is injective (the form is nondegenerate), the component equation $m\\,dU_\\nu/d\\tau=qF_{\\nu\\mu}U^\\mu$ holds for every",
+     "step": "3.1",
+     "inputs": [
+      "F5",
+      "F6",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "d-4.1",
+     "claim": "Under the adopted coupling (iii), [F8] applies with the prescribed external field of [F6] and the $C^2$ worldline of the statement, so the coordinate force and power laws $\\frac{dp}{dt}=q(E+v\\times B)$ and $\\frac{d(\\gamma mc^2)}{dt}=qE\\cdot v$ hold wherever the laboratory reading is $C^2$, with $p=m\\gamma v$ and $U=\\gamma(c,v)$ as recorded there.",
+     "step": "4.1",
+     "inputs": [
+      "F6",
+      "F8",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "d-5.1",
+     "claim": "The equivalence (i)$\\Leftrightarrow$(ii)$\\Leftrightarrow$(iii) was obtained by instantiating the choice-free finite-interval curve lemma [F2], identifying the framework's worldline objects through [F3] and [F4], and lowering the index through [F5] and [F6]; the potential is prescribed and external, the particle's own field, radiation reaction and self-force are excluded, and the whole statement is",
+     "step": "5.1",
+     "inputs": [
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "F9",
+      "step 4.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The statement requires a nondegenerate compact interval $[a,b]$, so the empty interval is excluded by type."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The charge parameter may be zero; steps 1.1 and 3.1 state the equivalence for every real $q$, and at $q=0$ both sides reduce to $m\\,dU_\\nu/d\\tau=0$, so the zero-charge case is covered rather than excluded."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The statement concerns one particle on one worldline with the single fixed-endpoint variation class of the curve lemma [F2], as instantiated in step 1.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The interval is nondegenerate, the tangent is future timelike hence nowhere zero, and step 3.1 uses that the lowering map $u\\mapsto\\eta(u,\\cdot)$ is injective because the form is nondegenerate."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 applies the curve lemma with fixed endpoints $h(a)=h(b)=0$ and records that $X+\\varepsilon h$ remains future timelike for all sufficiently small $|\\varepsilon|$; no endpoint regularity beyond the stated $C^2$ one-sided class is used."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The statement declares the particle sector choice-free, and steps 1.1 to 5.1 use only the finite-interval Riemann curve lemma [F2] and the framework identifications; no AC-qualified supplier is invoked."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 2.1 give stationarity implies the lowered coefficient equation, and step 3.1 converts the lowered equation into the raised coupling."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 3.1 proves the converse by the injectivity of the lowering map, so the raised coupling implies the component equation and hence, through steps 1.1 and 2.1, stationarity."
+    }
+   ]
+  },
+  "def-em-field-action-definition": {
+   "citations": [],
+   "derivations": [],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Definition clause (a) requires $U$ nonempty, and clause (c) requires a nondegenerate compact interval $[a,b]$; empty regions and empty intervals are excluded by the stated type."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Definition clauses (a) and (c): $A=0$ and $j=0$ are admitted, the zero variation is a legitimate member of both variation classes, and the functionals vanish at the zero fields; nothing in the definition excludes the zero case."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "the definition introduces two functionals, a variation class and a predicate; no cardinality-one collection occurs and no such case is claimed."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Definition clause (a) requires the closure of $U$ to be a compact subset of the chart image and clause (c) a nondegenerate interval; degenerate regions and intervals are excluded by the stated hypotheses."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Definition clause (b) uses variations compactly supported in the open $U$ and clause (c) fixed-endpoint variations $h(a)=h(b)=0$; no boundary condition on the fields or the worldline is asserted."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The field sector assumes Countable Choice exactly as inherited from lem-em-compact-field-variation, and the particle sector is declared choice-free; the definition itself selects nothing."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "a definition introduces objects and terminology and asserts no implication."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "a definition asserts no converse."
+    }
+   ]
+  },
+  "post-em-stationary-action-model": {
+   "physics_review": {
+    "formulation": {
+     "verdict": "pass",
+     "evidence": "The postulate adopts, by reference to the precise functionals, variation classes and stationarity predicate of def-em-field-action-definition, that a smooth field is dynamically admissible exactly when it is stationary for S[A] under all h in C_c^inf(U;R^4), and that the motion of a C^2 future timelike massive worldline in a prescribed external C^2 four-potential is dynamically admissible exactly when the worldline is stationary for S_pt under all fixed-endpoint C^2 variations; both clauses quantify over the exact classes fixed by that definition, with c, mu_0, epsilon_0 and the SI dictionary of def-em-si-conventions."
+    },
+    "scope": {
+     "verdict": "pass",
+     "evidence": "The scope text states that this is an adopted assumption of the model, not a theorem and not an empirical result; it asserts stationarity only and explicitly not minimality, existence, uniqueness, symmetry-forcing, uniqueness of the action, coupling of the sectors, any Noether machinery or matter dynamics beyond the prescribed potential, and it records that the conditional Euler-Lagrange deductions are separate items on the same page."
+    },
+    "sources": {
+     "verdict": "pass",
+     "evidence": "Two HTTP(S) references with locators: Tong chapter 5 section 5.5 printed pp. 118-127 (the action principle introduced and used, not derived) and Landau-Lifshitz section 16 printed p. 44 footnote 2 (the form of the interaction term cannot be fixed by general considerations alone) together with section 27; the monograph's Gaussian-unit forms are read only for the structure of the principle and the adopted functional is the SI functional of def-em-field-action-definition."
+    },
+    "non_derivation": {
+     "verdict": "pass",
+     "evidence": "No Proof or Refutation section is present and provenance.proof is not-applicable; the text states explicitly that the adoption is neither a theorem nor a derivation from the remaining postulates nor an empirical result, and it reports no experiment, measurement or empirical certainty."
+    }
+   }
+  }
+ }
+}

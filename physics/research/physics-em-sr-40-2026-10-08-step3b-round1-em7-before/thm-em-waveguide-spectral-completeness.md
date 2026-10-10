@@ -1,0 +1,83 @@
+---
+id: thm-em-waveguide-spectral-completeness
+kind: theorem
+title: Spectral completeness of the declared PEC waveguide and cavity classes
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 6
+deps: [def-axiom-of-choice, def-bounded-c-k-domain-and-boundary-charts, def-ck-euclidean-maps-and-diffeomorphisms, def-countable-choice, def-euclidean-inner-product, lem-em-pec-cavity-eigenfield-boundary-regularity, lem-em-rectangular-pec-energy-completeness, lem-em-smooth-pec-cavity-spectral-closure, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, thm-choice-implies-dependent-implies-countable-choice, thm-em-elliptic-boundary-existence]
+dependency_roles:
+  def-axiom-of-choice: mathematical-premise
+  def-bounded-c-k-domain-and-boundary-charts: mathematical-premise
+  def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
+  def-countable-choice: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  lem-em-pec-cavity-eigenfield-boundary-regularity: mathematical-premise
+  lem-em-rectangular-pec-energy-completeness: mathematical-premise
+  lem-em-smooth-pec-cavity-spectral-closure: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  thm-chain-rule-for-total-derivatives: mathematical-premise
+  thm-choice-implies-dependent-implies-countable-choice: mathematical-premise
+  thm-em-elliptic-boundary-existence: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "P. Arbenz, R. Geus, S. Adam, On Solving Maxwell Eigenvalue Problems for Accelerating Cavities (ICAP 2000)"
+      url: "https://people.inf.ethz.ch/arbenz/icap2000.pdf"
+    - title: "J. K. Hunter, Notes on Partial Differential Equations (UC Davis)"
+      url: "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
+---
+
+## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\Omega\subset\mathbb R^3$ be a bounded $C^\infty$ domain in the local graph sense of [[def-bounded-c-k-domain-and-boundary-charts]], with outward Euclidean unit normal field $\nu$ on $\partial\Omega$. Restate the class conventions of [[lem-em-smooth-pec-cavity-spectral-closure]]: $L^2:=L^2(\Omega;\mathbb R^3)$ is the real Hilbert space of square integrable vector fields with the inner product $\langle u,v\rangle=\int_\Omega u\cdot v\,dx$ induced by the Euclidean inner product of [[def-euclidean-inner-product]], and
+$$H(\operatorname{curl})=\{u\in L^2:\operatorname{curl}u\in L^2\},\qquad H(\operatorname{div})=\{u\in L^2:\operatorname{div}u\in L^2\}$$
+are the graph spaces with norms $\|u\|^2_{H(\operatorname{curl})}=\|u\|_2^2+\|\operatorname{curl}u\|_2^2$ and $\|u\|^2_{H(\operatorname{div})}=\|u\|_2^2+\|\operatorname{div}u\|_2^2$, the curl and divergence being taken in the distributional sense; $X$ is the graph-norm closure in $H(\operatorname{curl})\cap H(\operatorname{div})$ of the fields that are smooth on a neighbourhood of $\overline\Omega$ and satisfy $\nu\times u=0$ pointwise on $\partial\Omega$; and $V=\{u\in X:\operatorname{div}u=0\}$, $H=\overline V^{\,L^2}$. This is the explicit weak perfect-electric-conductor class of that item, not an identification with every maximal tangential-trace realisation.
+
+Then:
+
+(a) **Smooth PEC cavity.** The curl form $(u,v)\mapsto\int_\Omega\operatorname{curl}u\cdot\operatorname{curl}v$ on $V$ has a complete orthonormal $L^2$ eigenbasis $\{u_j\}$ with nonnegative eigenvalues $\lambda_j$ of finite multiplicity, with $\lambda_j\to\infty$ whenever $H$ is infinite dimensional and with the finite-dimensional zero eigenspace retained. Each eigenfield $u_j\in V$ satisfies $\int_\Omega\operatorname{curl}u_j\cdot\operatorname{curl}v=\lambda_j\int_\Omega u_j\cdot v$ for every $v\in X$; the eigen-equation $\operatorname{curl}\operatorname{curl}u_j=\lambda_ju_j$ holds distributionally together with the PEC trace; and $u_j$ has a $C^\infty$ representative on $\overline\Omega$ for which $\operatorname{div}u_j=0$, $\nu\times u_j=0$ and $\partial_\nu u_{j,n}+(\operatorname{div}\nu)u_{j,n}=0$ hold classically on $\partial\Omega$, where $u_{j,n}=u_j\cdot\nu$ and $\nu$ is extended constant along collar normal lines. For every explicitly chosen positive mathematical speed $v_{\mathrm{wave}}>0$ and every pair of data $q_0\in V$, $q_1\in H$, the associated second-order wave has coefficients solving $a_j''+v_{\mathrm{wave}}^2\lambda_ja_j=0$ with $a_j(0)=\langle q_0,u_j\rangle$ and $a_j'(0)=\langle q_1,u_j\rangle$, in the modal class of that item: its displacement lies in $C(\mathbb R;V)$ and its velocity in $C(\mathbb R;H)$, finite modal sums converge in $C(K;V)$ and $C(K;H)$ on every compact time interval $K$, and the finitely many $\lambda_j=0$ modes are $a_j(t)=a_j(0)+ta_j'(0)$. The speed is a positive abstract mathematical parameter and has no physical dependency. The shifted scalar auxiliary boundary problems used inside the recorded cavity argument are solvable, with the stated classical regularity, by [[thm-em-elliptic-boundary-existence]] applied with $\varepsilon=I$.
+
+(b) **Rectangular reflection-parity class.** Let $Q=\prod_{j=1}^3(0,L_j)$ with $L_j>0$ and let $\varepsilon,\mu>0$ be constants. In the reflection boundary class of [[lem-em-rectangular-pec-energy-completeness]] (real $L^2$ fields on the torus $\prod_j\mathbb R/(2L_j\mathbb Z)$ whose components carry the parities of that item and whose distributional divergences vanish), the finite separated Fourier modes are dense at every time, and every initial datum of the class has a unique $C(\mathbb R;L^2)$ weak solution of $\partial_tE=(\varepsilon\mu)^{-1}\operatorname{curl}B$, $\partial_tB=-\operatorname{curl}E$ in the class, along which $\tfrac12\int_Q(\varepsilon|E|^2+|B|^2/\mu)\,dx$ is constant.
+
+No completeness is asserted in lossy, open-ended or non-smooth classes, and the constant-Ohmic and open-longitudinal branches are homed separately as physical items on the guide page; they are not mathematical premises or dependencies of this statement.
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice; a bounded $C^\infty$ domain $\Omega\subset\mathbb R^3$ with outward unit normal $\nu$; the graph spaces $H(\operatorname{curl})$, $H(\operatorname{div})$ and the class $X$, subspace $V$ and space $H$ of the Statement; a positive speed $v_{\mathrm{wave}}$ and data $q_0\in V$, $q_1\in H$; positive constants $L_j$, $\varepsilon$, $\mu$ for part (b).
+
+[L1] **Smooth PEC cavity spectral closure** ([[lem-em-smooth-pec-cavity-spectral-closure]]): for a bounded $C^\infty$ domain $\Omega$, with $X$ the graph-norm closure in $H(\operatorname{curl})\cap H(\operatorname{div})$ of the smooth-on-closure fields with $n\times u=0$, $V=\{u\in X:\operatorname{div}u=0\}$ and $H=\overline V^{\,L^2}$, the curl form on $V$ has a complete orthonormal $L^2$ eigenbasis with nonnegative eigenvalues $\lambda_j$ of finite multiplicity tending to infinity whenever $H$ is infinite dimensional, the zero eigenspace is finite dimensional and retained; each eigenfield $u_j\in V$ satisfies the full graph-class variational identity $\int_\Omega\operatorname{curl}u_j\cdot\operatorname{curl}v=\lambda_j\int_\Omega u_j\cdot v$ for every $v\in X$ and the distributional eigen-equation $\operatorname{curl}\operatorname{curl}u_j=\lambda_ju_j$ with the PEC trace; and for every explicitly chosen mathematical speed $v_{\mathrm{wave}}>0$ and all $q_0\in V$, $q_1\in H$ the associated second-order wave has coefficients $a_j''+v_{\mathrm{wave}}^2\lambda_ja_j=0$, displacement in $C(\mathbb R;V)$, velocity in $C(\mathbb R;H)$, finite modal sums converging in $C(K;V)$ and $C(K;H)$ on every compact time interval $K$, and affine $\lambda=0$ modes $a_j(t)=a_j(0)+ta_j'(0)$. The speed is an abstract positive mathematical parameter.
+
+[L2] **Eigenfield boundary regularity** ([[lem-em-pec-cavity-eigenfield-boundary-regularity]]): if $u\in X$ with $X$ as in [L1], $\operatorname{div}u=0$ weakly and $\lambda\ge0$ satisfies $\int_\Omega\operatorname{curl}u\cdot\operatorname{curl}v=\lambda\int_\Omega u\cdot v$ for every $v\in X$, then $u\in H^m(\Omega;\mathbb R^3)$ for every integer $m\ge1$ and $u$ has a $C^\infty$ representative on the closure for which $\operatorname{curl}\operatorname{curl}u=\lambda u$, $\operatorname{div}u=0$, $\nu\times u=0$ and $\partial_\nu u_n+(\operatorname{div}\nu)u_n=0$ hold classically, with $u_n=u\cdot\nu$ and the normal extended constant along collar normal lines; zero eigenvalues and disconnected domains are included.
+
+[L3] **Scalar elliptic boundary existence** ([[thm-em-elliptic-boundary-existence]]): for a bounded $C^\infty$ domain, uniformly positive smooth coefficient $\varepsilon$ and smooth right-hand side $\rho$ on the closure, the weak Dirichlet problem with smooth boundary data and the weak compatible Neumann problem each have exactly one solution modulo the stated normalisation, which is $C^\infty$ on the closure and satisfies the classical equation and boundary values; the existence content is that of the weak solvability lemmas and edge, junction and non-smooth regimes are excluded.
+
+[L4] **Rectangular PEC energy completeness** ([[lem-em-rectangular-pec-energy-completeness]]): for $Q=\prod_j(0,L_j)$ with $L_j>0$ and constants $\varepsilon,\mu>0$, in the reflection boundary class with distributional $\operatorname{div}E=\operatorname{div}B=0$ the finite separated Fourier modes are dense and the class is $L^2$-complete, every initial datum has a unique $C(\mathbb R;L^2)$ weak solution of $\partial_tE=(\varepsilon\mu)^{-1}\operatorname{curl}B$, $\partial_tB=-\operatorname{curl}E$ in the class, and the energy $\tfrac12\int_Q(\varepsilon|E|^2+|B|^2/\mu)\,dx$ is constant along it; the item assumes Countable Choice and supplies neither trace regularity for arbitrary $H(\operatorname{curl})$ fields nor completeness in lossy, open or non-rectangular guides.
+
+[L5] **Choice principles:** the Axiom of Choice states that every family of nonempty sets has a choice function ([[def-axiom-of-choice]]); it implies the Axiom of Dependent Choice and the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[thm-choice-implies-dependent-implies-countable-choice]]), the latter meaning that every sequence of nonempty sets has a choice function ([[def-countable-choice]]).
+
+[L6] **Conventions:** a map is $C^\infty$ on the closure when it is the restriction of a smooth map on a neighbourhood of the closure ([[def-ck-euclidean-maps-and-diffeomorphisms]]); the Euclidean inner product is that of [[def-euclidean-inner-product]]; and the classical product, sum and chain rules used to read the differentiated identities of [L2] are those of [[thm-algebra-of-derivatives]] and [[thm-chain-rule-for-total-derivatives]].
+
+**Choice accounting.** The Axiom of Choice is assumed in the Statement. It is used by [L1]–[L3], whose statements declare it, and it supplies through [L5] the Countable Choice assumed by the rectangular supplier [L4]. No further choice principle is used, and the wrapper introduces no selection.
+
+## Proof
+
+**Proof technique:** direct.
+
+**Given:** The Axiom of Choice, the bounded $C^\infty$ domain $\Omega$, the classes $X$, $V$, $H$ and the data of the Statement.
+
+1.1 **The definitions agree and the cavity conclusions apply.** The class $X$, the subspace $V$ and the space $H$ of the Statement are exactly those of [L1] for the same domain $\Omega$: the same graph-norm closure of the same smooth fields on the closure with $\nu\times u=0$, the same divergence-free subspace and the same closed $L^2$ span, and the Axiom of Choice assumed in the Statement is the choice assumption of [L1], whose meaning is fixed by [L5]. Hence all conclusions of [L1] hold in the present setting: the curl form on $V$ has a complete orthonormal $L^2$ eigenbasis $\{u_j\}$ with nonnegative eigenvalues $\lambda_j$ of finite multiplicity and $\lambda_j\to\infty$ whenever $H$ is infinite dimensional, the zero eigenspace is finite dimensional and retained, each eigenfield satisfies the full $X$ variational identity and the distributional eigen-equation with the PEC trace, and the modal wave expansion with the chosen positive speed $v_{\mathrm{wave}}$ has the stated initial coefficients, the stated continuities on compact intervals and affine zero modes. [L1, L5]
+
+1.2 **Rectangular class.** [L4] states exactly the assertions of part (b) for the reflection boundary class with constants $\varepsilon,\mu>0$: density of the finite separated Fourier modes at every time, unique $C(\mathbb R;L^2)$ weak solutions of the two equations in the class for every initial datum, and constancy of $\tfrac12\int_Q(\varepsilon|E|^2+|B|^2/\mu)\,dx$. Its Countable Choice hypothesis is available in the present setting: the Statement assumes the Axiom of Choice, and the implication to Countable Choice is the choice supplier [L5]. [L4, L5]
+
+2.1 **Smooth eigenfields.** Fix $j$. By step 1.1, $u_j\in X$, $\operatorname{div}u_j=0$ weakly and the full $X$ variational identity holds for $u_j$ with $\lambda_j\ge0$; hence the hypotheses of [L2] are satisfied and $u_j\in H^m(\Omega;\mathbb R^3)$ for every integer $m\ge1$ with a $C^\infty$ representative on $\overline\Omega$, for which the classical relations $\operatorname{curl}\operatorname{curl}u_j=\lambda_ju_j$, $\operatorname{div}u_j=0$, $\nu\times u_j=0$ and $\partial_\nu u_{j,n}+(\operatorname{div}\nu)u_{j,n}=0$ hold, with $u_{j,n}=u_j\cdot\nu$ and $\nu$ extended constant along collar normal lines; the Euclidean pairing and the reading of the differentiated identities are those of [L6]. In particular the zero eigenvalues $\lambda_j=0$ are included and no eigenfield is discarded. [L2, L6, step 1.1]
+
+3.1 **Scalar auxiliary boundary problems.** The auxiliary problems used inside the recorded proof of [L1] are scalar Dirichlet or compatible Neumann problems $-\operatorname{div}(\varepsilon\nabla w)=\rho$ with $\varepsilon=I$ on the same bounded $C^\infty$ domain and smooth data on the closure; by [L3] each of them has exactly one weak solution in $H^1(\Omega)$ (modulo the stated normalisation), which is $C^\infty$ on the closure and satisfies the classical equation and boundary values. This is the only role of the scalar elliptic theorem here: the vector eigenfield regularity claimed in part (a) is supplied by [L2] as in step 2.1, not by the scalar theorem. [L3, step 1.1]
+
+4.1 **Assembly, exclusions and choice accounting.** Part (a) is steps 1.1, 2.1 and 3.1: step 1.1 transfers the spectral completeness, multiplicity, growth, zero-mode retention, full-$X$ identity, distributional eigen-equation and modal wave expansion from [L1]; step 2.1 upgrades every eigenfield to a $C^\infty$ field on the closure satisfying the classical PEC relations, including the zero eigenvalues; and step 3.1 records that the scalar auxiliary solvability used in the cavity argument is that of [L3]. Part (b) is step 1.2, which is [L4] verbatim in the present notation. Nothing outside the declared classes is asserted: no lossy, open-ended or non-smooth spectral completeness, no identification with every maximal tangential-trace realisation, and no physical reading of the abstract speed $v_{\mathrm{wave}}$; the constant-Ohmic and open-longitudinal branches are homed on the guide page as separate physical items and are not used here. The Axiom of Choice is used only through [L1]–[L3] and, through its Countable Choice consequence [L5], through [L4]; no other choice principle and no choice of data beyond the explicit open set $\{v_{\mathrm{wave}}>0\}$ occurs. This proves all assertions. [given, L5, step 1.1, step 1.2, step 2.1, step 3.1, algebra] ∎

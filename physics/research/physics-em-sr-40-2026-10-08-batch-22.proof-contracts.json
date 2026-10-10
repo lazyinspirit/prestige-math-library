@@ -1,0 +1,681 @@
+{
+  "version": 1,
+  "level": "physics-em-sr-40-2026-10-08",
+  "scope": [
+    "thm-em-retarded-root-and-fields",
+    "ex-em-wave-equation-prerequisites-hypothesis-boundaries"
+  ],
+  "contracts": {
+    "thm-em-retarded-root-and-fields": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-em-global-retarded-root",
+          "source_section": "Statement",
+          "quote": "Let $c>0$, $0\\le v_*<c$, and $z:\\mathbb R\\to\\mathbb R^3$ be $C^1$ with $|z'(s)|\\le v_*$ for all $s$. For every $(x,t)\\in\\mathbb R^3\\times\\mathbb R$ there is exactly one real root $s=s(x,t)$ of $t-s=|x-z(s)|/c$, and $s\\le t$. Equality holds exactly when $x=z(t)$. Thus on the open off-instantaneous-worldline domain $D=\\{(x,t):x\\ne z(t)\\}$ one has $s<t$, $r=|x-z(s)|=c(t-s)>0$, and the root is $C^1$. With $n=(x-z(s))/r$, $\\beta=z'(s)/c$, and $\\kappa=1-n\\cdot\\beta$, its derivatives are $\\partial_t s=1/\\kappa$ and $\\nabla_xs=-n/(c\\kappa)$, where $1-v_*/c\\le\\kappa\\le1+v_*/c$. If $z$ is $C^k$, for an integer $k\\ge1$, the root is $C^k$ on $D$; in particular a $C^3$ trajectory gives a $C^3$ root. A smooth trajectory gives a smooth root. No higher regularity follows from a merely $C^1$ trajectory. These claims concern an all-time uniformly subluminal prescribed history; no finite-history or nonuniform-light-speed-limit assertion is made.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.**",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "**Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.",
+          "uses": [
+            "1.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-em-point-current-continuity",
+          "source_section": "Statement",
+          "quote": "**Proper-graph branch.** Let $I\\subseteq\\mathbb R$ be an open interval, let $z:I\\to\\mathbb R^3$ be a $C^1$ trajectory, put $\\gamma(t):=(z(t),t)$ and let $\\Omega\\subseteq\\mathbb R^4$ be open with $\\gamma[I]\\subseteq\\Omega$. Assume the graph map $\\gamma:I\\to\\Omega$ is **proper**: $\\gamma^{-1}[K]$ is a compact subset of $I$ for every compact $K\\subseteq\\Omega$. For $q\\in\\mathbb R$ and $\\psi\\in\\mathcal D(\\Omega)$ ([[def-test-function-space-d-of-an-open-set]]) define\n\n$$\\langle\\rho,\\psi\\rangle:=q\\int_I\\psi(z(t),t)\\,dt,\\qquad \\langle J,\\psi\\rangle:=q\\int_I z'(t)\\,\\psi(z(t),t)\\,dt,$$\n\nthe second integral being componentwise, so $J=(J_1,J_2,J_3)$ is a triple of distributions, with components $\\langle J_i,\\psi\\rangle=q\\int_Iz_i'(t)\\psi(z(t),t)\\,dt$. Then $\\rho$ and $J$ are distributions on $\\Omega$ ([[def-distribution]]) and, with the distributional derivative of [[def-distributional-derivative]],\n\n$$\\partial_t\\rho+\\operatorname{div}J=0\\qquad\\text{in }\\mathcal D'(\\Omega).$$\n\nComplex integrals mean $\\int w:=\\int\\operatorname{Re}w+i\\int\\operatorname{Im}w$, with the same componentwise convention for improper limits. In formulas involving complex tests, $\\langle u,w\\rangle:=\\sum_{j=1}^3u_jw_j$ for $u\\in\\mathbb R^3$ and $w\\in\\mathbb C^3$, with no conjugation. This extends the real coordinate pairing; estimates on $J$ mean estimates on each component.\n\nIn the proper branch, an integral over $I$ means the proper integral over any compact subinterval containing the pulled-back support, with the integrand zero near its ends; additivity makes this independent of the subinterval. For $I=\\varnothing$ both functionals are defined to be zero. Properness is automatic if $\\Omega=\\mathbb R^3\\times I$, and also if $I=\\mathbb R$.\n\n**Endpoint branch.** Suppose instead that $I=(a,b)$ is bounded with finite endpoints, that $z$ extends continuously to $[a,b]$, that the absolute improper integral $\\int_a^b\\lVert z'(t)\\rVert_2\\,dt$ is finite, and that both endpoint events $(z(a),a)$ and $(z(b),b)$ belong to $\\Omega$. Then the same formulas, with the integrals understood as improper integrals over $(a,b)$, define distributions $\\rho$ and $J$ on $\\Omega$, and\n\n$$\\partial_t\\rho+\\operatorname{div}J=q\\,\\delta_{(z(a),a)}-q\\,\\delta_{(z(b),b)},$$\n\nthe Dirac distributions being those of [[def-dirac-delta-and-its-derivatives]].\n\nMere graph containment $\\gamma[I]\\subseteq\\Omega$ does not make the pulled-back tests compactly supported, and it does not by itself give the source-free identity: in the endpoint branch the endpoint terms are exactly as displayed. Each individual endpoint contribution vanishes on a test if and only if $q=0$ or that test vanishes at the corresponding endpoint event. Their total pairing vanishes if and only if $q=0$ or $\\psi(z(a),a)=\\psi(z(b),b)$. No Maxwell equation, no point self-force and no physical interpretation of $\\rho$ or $J$ is asserted; only the distributional identities for the prescribed support are proved.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-em-retarded-wave-kernel",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), used through the sphere and polar integrations below ([[def-countable-choice]], [[def-polar-surface-measure-on-the-unit-sphere]], [[thm-polar-coordinates-formula-for-lebesgue-measure]]). Let $c>0$, write $Q:=\\mathbb R^3\\times\\mathbb R$, $\\mathcal D:=\\mathcal D(Q)$ for the test-function space of [[def-test-function-space-d-of-an-open-set]], and $C:=\\{(y,t)\\in Q:t=|y|/c\\}$ for the retarded cone. Define the functional $K$ on test functions by\n\n$$\\langle K,\\psi\\rangle:=\\frac{1}{4\\pi}\\int_{\\mathbb R^3}\\frac{\\psi(y,|y|/c)}{|y|}\\,dy\\qquad(\\psi\\in\\mathcal D).$$\n\nThen: (a) the integral converges absolutely for every $\\psi\\in\\mathcal D$, the functional $K$ is a distribution on $Q$ ([[def-distribution]]), $(K,\\psi)=0$ for every $\\psi$ with $\\operatorname{supp}\\psi\\cap C=\\varnothing$, and for every $(y_0,t_0)\\in C$ and every neighbourhood $U$ of $(y_0,t_0)$ there is $\\psi\\in\\mathcal D$ with $\\operatorname{supp}\\psi\\subseteq U$ and $\\langle K,\\psi\\rangle\\ne0$; consequently $\\operatorname{supp}K=C$. (b) For every $h\\in C_c^\\infty(Q)$ the function\n\n$$(K*h)(x,t):=\\int_{\\mathbb R^3}\\frac{h(y,\\,t-|x-y|/c)}{4\\pi\\,|x-y|}\\,dy$$\n\nis well defined (the integral converges absolutely), of class $C^\\infty$ on $Q$, and for every $\\psi\\in\\mathcal D$\n\n$$\\langle K*h,\\psi\\rangle=\\langle h,\\,K\\circledast\\psi\\rangle,\\qquad (K\\circledast\\psi)(y,s):=\\langle K,\\psi(y+\\cdot,s+\\cdot)\\rangle=\\frac{1}{4\\pi}\\int\\frac{\\psi(y+z,s+|z|/c)}{|z|}\\,dz;$$\n\nmoreover $W(K*h)=h$ on $Q$ in the classical pointwise sense, where $W=c^{-2}\\partial_t^2-\\Delta$ is the wave expression of [[def-wave-equation-cauchy-data-and-wave-speed]] and [[def-laplacian-of-a-c2-function]]. (c) Read $W=c^{-2}\\partial_t^2-\\Delta$ as the distributional operator built from [[def-distributional-derivative]]; then $WK=\\delta_{(0,0)}$ in the sense of [[def-dirac-delta-and-its-derivatives]], that is, $(WK)(\\psi)=\\psi(0,0)$ for every $\\psi\\in\\mathcal D$. This identifies $K$ as the retarded fundamental solution of $W$; no smoothness of $K$ itself on the cone is asserted, and the advanced fundamental solution is not treated.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-em-point-retarded-potential-and-fields",
+          "source_section": "Statement",
+          "quote": "(b) Let $K$ be the retarded wave kernel of [[lem-em-retarded-wave-kernel]] and, for $\\psi\\in\\mathcal D(\\Omega)$ and $\\tau\\in\\mathbb R$, $y\\in\\mathbb R^3$, put $(K\\circledast\\psi)(y,\\tau):=\\langle K,\\psi(y+\\cdot,\\tau+\\cdot)\\rangle$. Define the retarded-history pairings by the explicit integrals\n\n$$\\langle\\Phi,\\psi\\rangle:=\\frac{q}{\\varepsilon_0}\\int_{\\mathbb R}(K\\circledast\\psi)(z(s),s)\\,ds,\\qquad \\langle\\Upsilon,\\psi\\rangle:=\\mu_0q\\int_{\\mathbb R}z'(s)(K\\circledast\\psi)(z(s),s)\\,ds.$$\n\nHere the second integral is componentwise. The notation $\\varepsilon_0^{-1}\\langle\\rho,K\\circledast\\psi\\rangle$ and $\\mu_0\\langle J,K\\circledast\\psi\\rangle$, if used, means precisely these explicit history integrals, rather than ordinary distribution action on a compactly supported test. These pairings define distributions on $\\Omega$, are finite for every $\\psi\\in\\mathcal D(\\Omega)$ and satisfy the exact retarded-convolution identities\n\n$$\\langle\\Phi,\\psi\\rangle=\\int_{\\Omega\\setminus\\Gamma}\\frac{C\\,\\psi(x,t)}{\\kappa(x,t)\\,r(x,t)}\\,dx\\,dt,\\qquad \\langle\\Upsilon,\\psi\\rangle=\\int_{\\Omega\\setminus\\Gamma}\\frac{\\beta(x,t)}{c}\\,\\frac{C\\,\\psi(x,t)}{\\kappa(x,t)\\,r(x,t)}\\,dx\\,dt$$\n\n(for $\\Upsilon$, componentwise against $\\psi\\in\\mathcal D(\\Omega)$; both integrands are continuous on the open set $\\Omega\\setminus\\Gamma$ and integrable there against $\\psi$). Consequently the potentials are the $C^2$ functions\n\n$$\\varphi:=\\frac{C}{D}=\\frac{C}{\\kappa r}:\\Omega\\setminus\\Gamma\\to\\mathbb R,\\qquad A:=\\frac{\\beta\\,\\varphi}{c}=\\frac{\\beta\\,C}{c\\,\\kappa r}:\\Omega\\setminus\\Gamma\\to\\mathbb R^3$$\n\noff the worldline, and the zero extensions $\\widetilde\\varphi,\\widetilde A$ on $\\Gamma$ belong to $L^1_{\\mathrm{loc}}(\\Omega)$; $\\Phi$ is the regular distribution of $\\widetilde\\varphi$, and $\\Upsilon$ that of $\\widetilde A$ ([[def-regular-distribution-from-a-locally-integrable-function]]).",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-em-point-retarded-potential-and-fields",
+          "source_section": "Statement",
+          "quote": "(c) Let $E:=-\\nabla\\varphi-\\partial_tA$ and $B:=\\operatorname{curl}A$ on $\\Omega\\setminus\\Gamma$ ([[def-em-potential-gauge-and-field-conventions]]). Then, off the worldline,\n\n$$E=C\\left[\\frac{(1-|\\beta|^2)(n-\\beta)}{\\kappa^3r^2}+\\frac{n\\times\\bigl((n-\\beta)\\times\\dot\\beta\\bigr)}{c\\,\\kappa^3r}\\right],\\qquad B=\\frac{n\\times E}{c}.$$\n\nThe fields $E,B$ are $C^1$ off the worldline. More generally, if $z\\in C^k$, $k\\ge3$, the retarded root is $C^k$, the potentials are $C^{k-1}$ and the fields are $C^{k-2}$ there; if $z\\in C^\\infty$, all these objects are smooth off the worldline. The result is a mathematical model computation for the stipulated uniformly subluminal smooth worldline and the retarded choice; no self-force law, no radiation-reaction postulate and no physical Maxwell coupling is asserted or proved.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-em-potential-gauge-and-field-conventions",
+          "source_section": "Definition",
+          "quote": "its **electric field** and **magnetic field** are\n\n$$E(\\varphi,A):=-\\nabla\\varphi-\\partial_tA,\\qquad B(\\varphi,A):=\\operatorname{curl}A,$$\n\nwhere $\\nabla$ is the gradient of [[def-jacobian-matrix-and-gradient]], $\\partial_t$ is the partial derivative of [[def-directional-and-partial-derivatives]], and $\\operatorname{div}$ and $\\operatorname{curl}$ are those of [[def-divergence-and-curl-of-a-c1-vector-field]]. Both $E(\\varphi,A)$ and $B(\\varphi,A)$ are maps $\\Omega\\to\\mathbb R^3$ of class $C^{k-1}$.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.\n\nThis is the right-handed **cross product**.",
+          "uses": [
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.",
+          "uses": [
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "Step 1.1 derives 0 <= v_* < c from the norm bound, applies the C^3 branch of the global retarded-root lemma, and uses the word-derivative C^k convention of F3.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "1.2 The norm term. Fix $(x,t)\\in\\Omega\\setminus\\Gamma$ with root $s$ and put $R=x-z(s)$, $r=\\lVert R\\rVert_2>0$, $n=R/r$; I show that $\\psi(s'):=\\lVert x-z(s')\\rVert_2$ is differentiable at $s'=s$ wit",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "d1.3",
+          "claim": "1.3 The ray family. Fix $s_0\\in\\mathbb R$ and $n\\in\\mathbb R^3$ with $\\lVert n\\rVert_2=1$, and let $r>0$; put $x_r:=z(s_0)+rn$ and $t_r:=s_0+r/c$. Then $t_r-s_0=r/c=\\lVert x_r-z(s_0)\\rVert_2/c$, so $s",
+          "step": "1.3",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "2.1 Emission-time Jacobian. With the fixed $x$ of step 1.2, the function $g_x(s'):=s'+\\frac{1}{c}\\lVert x-z(s')\\rVert_2$ is differentiable at $s'=s$, as the sum of the identity map, whose derivative i",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d2.2",
+          "claim": "2.2 Clause (b). The definitions of the retarded-history pairings in clause (b) coincide with [F8], with the same signed constant $C=q/(4\\pi\\varepsilon_0)$, the same $\\beta=z'(s)/c$ and $\\kappa=1-n\\cdo",
+          "step": "2.2",
+          "inputs": [
+            "F8",
+            "F7",
+            "F6",
+            "F12",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d2.3",
+          "claim": "2.3 Clause (c). By step 1.1 and [F8] the pair $(\\varphi,A)$ is a $C^2$ potential pair on $\\Omega\\setminus\\Gamma$, so [F10] identifies its fields as $E=-\\nabla\\varphi-\\partial_tA$ and $B=\\operatorname{",
+          "step": "2.3",
+          "inputs": [
+            "F8",
+            "F10",
+            "F9",
+            "F11",
+            "F5",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "3.1 The far-zone expansion. At the event $(x_r,t_r)$ of step 1.3 the retarded data are the root $s_0$, the separation $x_r-z(s_0)=rn$, the retarded distance $\\lVert x_r-z(s_0)\\rVert_2=r$, which is the",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F11",
+            "1.3",
+            "2.3"
+          ]
+        },
+        {
+          "id": "d4.1",
+          "claim": "4.1 Assembly. Steps 1.1 and 2.1 give clause (a): at every event off the worldline there is a unique retarded root strictly below the observation time, the root map is $C^3$, $\\partial_ts=\\kappa^{-1}$,",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "1.3",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 treat every event of the nonempty set $\\Omega\\setminus\\Gamma$: for any $t_0$ and any $x\\ne z(t_0)$ such an event exists, so no claim is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.3 keeps the signed constant $C=q/(4\\pi\\varepsilon_0)$ and uses $\\lvert C\\rvert$ in the bound; the case $q=0$ (so $C=0$) is included and makes every field formula and bound vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 and the bound of step 2.3 use $\\lVert n\\rVert_2=1$, which holds because $n=R/r$ with $r=\\lVert R\\rVert_2>0$; the unit direction is intrinsic to the construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves $\\kappa\\ge1-v_*/c>0$, so the substitution denominator $1-n\\cdot\\beta$ never degenerates; the potential zero-denominator case is excluded by the uniform speed bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 places the root strictly below the observation time ($s<t$) and the ray parameter satisfies $r>0$ in step 3.1; no endpoint value of the half-line $(-\\infty,t)$ is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes $\\mathrm{AC}_\\omega$ with its exact use in clause (b); step 2.2 locates that use in the supplier change-of-variables corollaries, and no other selection occurs (steps 1.2, 1.3, 3.1 and 1.3 use only the given data)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the direction displayed in clause (d): the expansion together with the remainder bound yields the uniform limit of $rE$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The word \"equivalently\" in clause (d) records the same expansion with the error bound multiplied by $r$, not an independent converse implication; step 3.1 proves that reformulation directly."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read all four Statement clauses, F1-F12 and every proof step 1.1-4.1; matched each cited source interface. C3 all-time z and |z′(0)|<=v* imply 0<=v*<c. Independently checked global root monotonicity/IVT and squared-equation IFT, the off-graph domain and derivative signs. Reviewed current batch-21 kernel and point-potential proofs, contracts and manifest: finite history cylinder, Borel nonnegative substitution before L1 substitution, absolute Jacobian kappa, graph nullity, local L1 zero extensions, C2 potentials/C1 fields, and coordinate triple product. The current F2 norm and both final QED/tag orders are corrected; historical reader findings remain confirmed. Checked emission derivative, q=0, signed negative q, v*=0, every positive ray radius, on-graph equality and direction-uniform |C|(1+v*/c)/(1-v*/c)^3/r error for rE at fixed emission time. AComega is carried to clause (b); no arbitrary Choice, self-force, energy/flux or empirical assertion is used. Tong sections 6.4.1 and 6.4.3, equations (6.33)-(6.45), were read from the author-hosted PDF; formal delta notation is replaced locally by exact pairings. Other cited books and every transitive imported proof were not audited. Reader F3 repair matches the exact word-derivative definition; original preimage recovered with matching pre hash. Scoped strict contract check exposed three stale verbatim quotations after producer corrections; F6,F8,F9 now quote the independently reviewed current Statement clauses. This is audit synchronization, not a new mathematical defect."
+      }
+    },
+    "ex-em-wave-equation-prerequisites-hypothesis-boundaries": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-wave-equation-cauchy-data-and-wave-speed",
+          "source_section": "Definition",
+          "quote": "The **wave operator** of speed $c$ is\n$$\\Box_c:=\\partial_t^2-c^2\\Delta ,$$\nand the **wave equation with source** $f$ is the equation $\\Box_cu=f$ on a slab $\\mathbb R^n\\times(0,T)$; the equation is **homogeneous** when $f=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-laplacian-of-a-c2-function",
+          "source_section": "Definition",
+          "quote": "the **Laplacian** of $f$ is\n\n$$\\Delta f:=\\operatorname{div}\\nabla f=\\sum_{i<n}\\partial_i\\partial_if,$$\n\nwith the gradient of [[def-jacobian-matrix-and-gradient]] and the divergence of [[def-divergence-and-curl-of-a-c1-vector-field]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "For $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "source_section": "Statement",
+          "quote": "Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.**",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-continuity-real",
+          "source_section": "Definition",
+          "quote": "$f$ is **continuous at $c$** when\n\n$$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ |x - c| < \\delta \\ \\Longrightarrow\\ |f(x) - f(c)| < \\varepsilon\\ \\bigr],$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-borel-and-lebesgue-measurable-function-on-rn",
+          "source_section": "Definition",
+          "quote": "A function $f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is **Borel measurable** when\n  it is measurable as a map\n\n  $$f : (\\mathbb{R}^n,\\mathcal{B}(\\mathbb{R}^n)) \\to (\\mathbb{R}^m,\\mathcal{B}(\\mathbb{R}^m))$$\n\n  in the sense of [[def-measurable-function-between-measurable-spaces]].",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]])",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "lem-em-global-retarded-root",
+          "source_section": "Statement",
+          "quote": "Let $c>0$, $0\\le v_*<c$, and $z:\\mathbb R\\to\\mathbb R^3$ be $C^1$ with $|z'(s)|\\le v_*$ for all $s$. For every $(x,t)\\in\\mathbb R^3\\times\\mathbb R$ there is exactly one real root $s=s(x,t)$ of $t-s=|x-z(s)|/c$, and $s\\le t$. Equality holds exactly when $x=z(t)$. Thus on the open off-instantaneous-worldline domain $D=\\{(x,t):x\\ne z(t)\\}$ one has $s<t$, $r=|x-z(s)|=c(t-s)>0$, and the root is $C^1$. With $n=(x-z(s))/r$, $\\beta=z'(s)/c$, and $\\kappa=1-n\\cdot\\beta$, its derivatives are $\\partial_t s=1/\\kappa$ and $\\nabla_xs=-n/(c\\kappa)$, where $1-v_*/c\\le\\kappa\\le1+v_*/c$. If $z$ is $C^k$, for an integer $k\\ge1$, the root is $C^k$ on $D$; in particular a $C^3$ trajectory gives a $C^3$ root. A smooth trajectory gives a smooth root. No higher regularity follows from a merely $C^1$ trajectory. These claims concern an all-time uniformly subluminal prescribed history; no finite-history or nonuniform-light-speed-limit assertion is made.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "thm-em-retarded-root-and-fields",
+          "source_section": "Statement",
+          "quote": "(a) [Root and emission-time Jacobian] For every $(x,t)\\in\\Omega\\setminus\\Gamma$ (equivalently $x\\ne z(t)$) there is exactly one $s=s(x,t)<t$ with $t-s=|x-z(s)|/c$. The map $s:\\Omega\\setminus\\Gamma\\to\\mathbb R$ is of class $C^3$, and with $R:=x-z(s)$, $r:=|R|$, $n:=R/r$, $\\beta:=z'(s)/c$ and $\\kappa:=1-n\\cdot\\beta$ ([[def-euclidean-inner-product]]) one has $$\\partial_ts(x,t)=\\kappa^{-1},\\qquad \\nabla_xs(x,t)=-\\frac{n}{c\\,\\kappa},\\qquad \\kappa\\in[1-v_*/c,\\,1+v_*/c],$$ so $\\kappa\\ge 1-v_*/c>0$ uniformly on $\\Omega\\setminus\\Gamma$. Moreover, for the fixed $x$ and near the root, the function $s'\\mapsto s'+|x-z(s')|/c$ is differentiable at $s'=s$ with derivative $\\kappa(x,t)$: this emission-time Jacobian $1-n\\cdot\\beta$ is the denominator produced by the delta substitution of clause (b).",
+          "uses": [
+            "1.3",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "thm-em-wave-cauchy-kirchhoff",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), used through the cited published suppliers ([[def-countable-choice]]). Let $c>0$, $t_0\\in\\mathbb R$, $T>t_0$, let $a,b\\in C^\\infty(\\mathbb R^3)$ and let $h\\in C^\\infty(\\mathbb R^3\\times[t_0,T])$ in the extension sense that $h$ is the restriction of a $C^\\infty$ function on $\\mathbb R^3\\times J$ for some open interval $J\\supset[t_0,T]$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Write $W:=c^{-2}\\partial_t^2-\\Delta$, so that $c^2W=\\Box_c$ is the wave operator of speed $c$ ([[def-laplacian-of-a-c2-function]], [[def-wave-equation-cauchy-data-and-wave-speed]]). For $\\varphi\\in C^\\infty(\\mathbb R^3)$ and $s\\ge0$ let $H_\\varphi(x,s):=s\\,M_{cs}\\varphi(x)$, where $M_r\\varphi(x)=\\frac{1}{4\\pi}\\int_{S^2}\\varphi(x+rn)\\,d\\Omega(n)$ is the spherical mean of [[lem-em-spherical-mean-wave-identity]]. Define, with $s=t-t_0$, $$u(x,t):=\\partial_sH_a(x,s)+H_b(x,s)+c^2\\int_{t_0}^{t}H_{h(\\cdot,v)}(x,t-v)\\,dv,\\qquad (x,t)\\in\\mathbb R^3\\times[t_0,T],$$ where $h(\\cdot,v)$ denotes the map $x\\mapsto h(x,v)$ and $\\partial_sH_a$ is the partial derivative of $H_a$ in its second argument, evaluated at $s=t-t_0$. Then:\n\n(a) $u$ is of class $C^\\infty$ on $\\mathbb R^3\\times[t_0,T]$ in the extension sense, $Wu=h$ on $\\mathbb R^3\\times(t_0,T)$ (indeed on the open neighbourhood of the closed time interval on which the extension of $h$ is defined), $u(\\cdot,t_0)=a$ and $\\partial_tu(\\cdot,t_0)=b$.\n\n(b) Uniqueness: every $v\\in C^2(\\mathbb R^3\\times[t_0,T])$ in the extension sense with $Wv=h$ on $\\mathbb R^3\\times(t_0,T)$, $v(\\cdot,t_0)=a$ and $\\partial_tv(\\cdot,t_0)=b$ equals $u$.\n\n(c) Domain of dependence: let $\\tilde a,\\tilde b\\in C^\\infty(\\mathbb R^3)$, $\\tilde h\\in C^\\infty(\\mathbb R^3\\times[t_0,T])$ and let $\\tilde u$ be the corresponding solution. If $\\tilde a=a$ and $\\tilde b=b$ on the closed ball $\\overline B_{c(t_*-t_0)}(x_*)$ and $\\tilde h=h$ on the closed backward cone $K(x_*,t_*):=\\{(y,v)\\in\\mathbb R^3\\times[t_0,t_*]:|y-x_*|\\le c(t_*-v)\\}$ ([[def-forward-and-backward-wave-cones-domain-of-dependence-and-influence]]), then $\\tilde u(x_*,t_*)=u(x_*,t_*)$ for every $x_*\\in\\mathbb R^3$ and $t_*\\in[t_0,T]$.\n\n(d) Compact support: if $a$ vanishes off a compact $K_a\\subset\\mathbb R^3$, $b$ vanishes off a compact $K_b$, and $h(\\cdot,v)$ vanishes off a fixed compact $K_h$ for every $v\\in[t_0,T]$, then for every $t\\in[t_0,T]$ the function $u(\\cdot,t)$ has compact spatial support: if $K_a\\cup K_b\\cup K_h\\subseteq\\overline B_\\rho(0)$ for some $\\rho>0$ (which exists, [[thm-heine-borel-rn]]), then $u(x,t)=0$ whenever $|x|>\\rho+c(t-t_0)$.\n\nNo boundary condition on a finite spatial domain, no finite-total-energy hypothesis, and no decay of $a,b,h$ at infinity is assumed or asserted.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-wave-energy-and-energy-flux",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $c>0$, let $U\\subseteq\\mathbb R^n$ be open, let $I\\subseteq\\mathbb R$\nbe an open interval and let $u:U\\times I\\to\\mathbb R$ be $C^2$\n([[def-ck-and-multi-index-notation-in-several-variables]]). Write\n$u_t:=\\partial_tu$ and let\n\n$$Du:=(\\partial_0u,\\ldots,\\partial_{n-1}u)$$\n\nbe the spatial gradient of [[def-jacobian-matrix-and-gradient]], a $C^1$ field\n$U\\times I\\to\\mathbb R^n$ whose Euclidean norm is $|Du|$\n([[def-euclidean-inner-product]]).\n\nThe **kinetic density**, **potential density** and **energy density** of $u$ are\nthe continuous functions\n\n$$e_{\\mathrm{kin}}:=\\frac12u_t^2,\\qquad e_{\\mathrm{pot}}:=\\frac{c^2}{2}|Du|^2,\\qquad e:=e_{\\mathrm{kin}}+e_{\\mathrm{pot}}=\\frac12\\bigl(u_t^2+c^2|Du|^2\\bigr),$$\n\nand the **energy flux** is the $C^1$ vector field\n\n$$q:=-c^2u_t\\,Du$$\n\n([[def-divergence-and-curl-of-a-c1-vector-field]]). For a Lebesgue-measurable\n$\\Omega\\subseteq U$ and a time $t\\in I$ with\n$\\int_\\Omega e(x,t)\\,dx<\\infty$, the **total energy in $\\Omega$** is the real\nnumber\n\n$$E_\\Omega(t):=\\int_\\Omega e(x,t)\\,dx$$\n\n([[def-nonnegative-lebesgue-integral]]); when the integral is infinite the total\nenergy is $+\\infty$ and no real value is assigned.\n\n**Sign convention.** If $\\Omega$ is admissible for the divergence theorem with\noutward unit normal $\\nu$, then $\\int_{\\partial\\Omega}q\\cdot\\nu\\,dS$ is the\nenergy leaving $\\Omega$ across $\\partial\\Omega$ per unit time. This is the\nconvention under which the pointwise identity\n$\\partial_te+\\operatorname{div}q=u_t\\,\\Box_cu$ of\n[[lem-local-wave-energy-conservation-law]] holds with\n$\\Box_c=\\partial_t^2-c^2\\Delta$\n([[def-wave-equation-cauchy-data-and-wave-speed]]): the flux vector\n$q=-c^2u_tDu$ points in the direction of energy transport, and\n$\\operatorname{div}q$ is the local rate at which energy leaves a point.\n\n**Speed convention.** The gradient term carries the exact factor $c^2$, so at\nunit speed the energy density is the familiar\n$\\frac12u_t^2+\\frac12|Du|^2$ and the flux is $-u_tDu$. The general-speed\nstatements of this page are rendered at $c>0$ throughout.\n\nNo equation for $u$, no finiteness of a particular integral and no regularity of\nany boundary are asserted here: each statement that uses these objects states\nits own hypotheses, and sufficient settings in which $E_\\Omega$ is finite and constant\nare supplied by [[thm-conservation-of-total-wave-energy]].",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "1.1 Smoothness and the wave equation. The map $\\pi(x,t):=x_1-ct$ is affine, hence $C^\\infty$ from [F3]; $f$ is $C^\\infty$ and $u=f\\circ\\pi$ is therefore $C^\\infty$ on $\\mathbb R^3\\times\\mathbb R$ by t",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "The curve of part (ii). Let $c>0$, $a>0$ and $z(s):=(g(s),0,0)$ with $g(s):=\\sqrt{c^2s^2+a^2}$. For every integer $m\\ge0$, induction using [F13] gives $(d/dy)^m y^{1/2}=\\bigl(\\prod_{j=0}^{m-1}(1/2-j)\\bigr)y^{1/2-m}$ on $(0,\\infty)$, with the empty product equal to $1$; each derivative is continuous by [F13], so $y\\mapsto\\sqrt y$ is $C^\\infty$ by [F3]. The polynomial $s\\mapsto c^2s^2+a^2$ takes values in $(0,\\infty)$ and is $C^\\infty$ by direct repeated differentiation, so $g$ is $C^\\infty$ on $\\mathbb R$ by [F4], and $z$ is $C^\\infty$ by [F3]. The chain rule [F5] with $(\\sqrt x)'=1/(2\\sqrt x)$ [F13] gives $g'(s)=c^2s/g(s)$, so $z'(s)=(c^2s/g(s),0,0)$ [F8, F9] and $\\lVert z'(s)\\rVert_2=c^2\\lvert s\\rvert/g(s)$ [F10]. One has $\\lVert z'(s)\\rVert_2<c$ for every $s$ because $c^2\\lvert s\\rvert<c\\,g(s)$ is equivalent to $c^2s^2<c^2s^2+a^2$, true for $a>0$; and $c^2\\lvert s\\rvert/g(s)=c\\cdot\\frac{c\\lvert s\\rvert}{\\sqrt{c^2s^2+a^2}}\\to c$ as $\\lvert s\\rvert\\to\\infty$, so $\\sup_{s}\\lVert z'(s)\\rVert_2=c$ and there is no $v_*<c$ with $\\lVert z'(s)\\rVert_2\\le v_*$ for all $s$. [F3, F4, F5, F6, F8, F9, F10, F13, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F13",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "F6"
+          ]
+        },
+        {
+          "id": "d1.3",
+          "claim": "1.3 Events on the worldline. Let $z$ be $C^1$ with $|z'|\\le v_*<c$ and let $x=z(t)$ for some $t\\in\\mathbb R$; then $0=t-t=|x-z(t)|/c$, so $s=t$ solves $t-s=|x-z(s)|/c$. Applying [F18] at the event $(x",
+          "step": "1.3",
+          "inputs": [
+            "F18",
+            "F19",
+            "F10"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "2.1 The nonzero level set. If $f=0$, step 1.1 gives $u=0$ and $U=\\varnothing$; the nonemptiness and divergence claims concern only $f\\ne0$. Assume $f\\ne0$. The profile $f$ is differentiable on $\\mathb",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F14",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d2.2",
+          "claim": "2.2 The spatial $L^2$ norm diverges. Assume $f\\ne0$; pick $s_0$ with $f(s_0)\\ne0$ and put $\\eta:=\\lvert f(s_0)\\rvert^2/4>0$. Continuity of $f$ at $s_0$ [F14, F15] gives $\\delta>0$ with $\\lvert f(s)-f(",
+          "step": "2.2",
+          "inputs": [
+            "F14",
+            "F15",
+            "F4",
+            "F3",
+            "F16",
+            "F11",
+            "F12",
+            "F20",
+            "F21",
+            "F17",
+            "1.1"
+          ]
+        },
+        {
+          "id": "d2.3",
+          "claim": "2.3 No root at the origin for the curve of part (ii). With $z$ as in step 1.2, suppose a root $s<0$ existed for the observation $(x,t)=(0,0)$: then $-s=\\lvert x-z(s)\\rvert/c=\\lVert z(s)\\rVert_2/c=\\sqr",
+          "step": "2.3",
+          "inputs": [
+            "F19",
+            "F6",
+            "F10",
+            "1.2"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "3.1 Audit. Step 1.1 proves the smoothness and $Wu=0$ claims of (i), step 2.1 the structure, nonemptiness and unboundedness of the nonzero level set, and step 2.2 the divergence of the spatial $L^2$ no",
+          "step": "3.1",
+          "inputs": [
+            "F18",
+            "F12",
+            "F16",
+            "F17",
+            "1.1",
+            "2.1",
+            "2.2",
+            "1.2",
+            "2.3",
+            "1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step2.1 handles f=0 with u=0,U empty; nonemptiness and both infinite L2/energy conclusions require f nonzero and are proved in step2.2. The positive closed interval for the derivative profile is constructed by MVT and continuity, not assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step2.1 includes f=0,u=0; step2.2 requires nonzero profile and produces eta>0 and a positive derivative-profile interval. Steps1.2 and2.3 exclude a=0 and compute the degeneration as s tends to minus infinity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step1.1 and step2.2 retain arbitrary c>0; step1.2 and step2.3 retain arbitrary a>0, without a unit normalization. Step 1.2 derives all square-root derivatives on the positive domain by induction from F13 before composing with c^2 s^2+a^2; a>0 prevents the singular endpoint y=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step2.3 computes kappa approaching zero along the nonuniformly subluminal curve; step1.3 gives the on-worldline root s=t and explains why strict retardation is unavailable there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step2.2 chooses a closed interval strictly inside the continuity neighbourhood (the preliminary estimate holds for distance less than2delta). The noncompact transverse boxes and derivative-profile boxes give exact unbounded integrals; no excluded root endpoint is added."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step2.2 carries Countable Choice through Euclidean box measure and measurability for part(i); the algebraic curve/root arguments in step1.2, step1.3 and step2.3 use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional; each clause is a one-directional exhibited computation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional; each clause is a one-directional exhibited computation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read Example clauses (i)-(iii), F1-F21 and all seven Verification steps with exact cited Definition/Statement interfaces, plus root, current, point-potential, kernel and wave-Cauchy arguments. Recomputed u_tt=c^2 f double-prime, Delta u=f double-prime and Wu=0. f=0 gives empty nonzero set and zero integrals; for f nonzero a positive-profile interval and boxes of volume |I|(2R)^2 prove infinite spatial L2. MVT applied between a nonzero value and a point outside compact support yields f prime nonzero somewhere, so the independent derivative-profile box bound proves infinite wave energy; infinite L2 alone was not used for energy. Nonzero set is exactly (ct+U)xR2 for arbitrary nonempty open U and can be disconnected, supporting the fatal B-page finding and its product-set repair. Countable Choice is explicit only for the measure/measurability interfaces in (i); remaining computations are choice-free. Rechecked the induction (empty-product base case) for every derivative of y^(1/2) on y>0 and its composition with c^2 s^2+a^2; a>0 excludes y=0. Speed at s=0 is zero, speed is below c at each finite s and tends to c at both infinities; the origin root equation has no solution and kappa tends to zero for negative-time emission parameters. For uniformly subluminal C1 histories the root at x=z(t) is exactly s=t; the off-graph condition is essential. Reconstructed the pre-reader item by reversing only the reported introductory definition, F13 and curve-step edits using stored earlier text; its raw hash exactly matches 75e1469402e2684054f97a13821f3ee3bd31c0ee8b212a46207c9e3c0801dd2d. Current item matches the post fingerprint. Reader repair is accepted without another item edit. No measured input, physical identification, inference, finite precision or empirical confirmation is asserted."
+      },
+      "coordinate_repair": {
+        "phase": "initial",
+        "round": 1,
+        "unit": "22",
+        "evidence": "Zero-based x=(x_0,x_1,x_2): the profile f(x_1-ct) has gradient (0,f\\prime(x_1-ct),0) and nonzero set R x (ct+U) x R. Both lower-bound boxes constrain x_1 and leave x_0,x_2 free; their volumes and divergent L2/energy estimates are unchanged. The first-coordinate trajectory (g,0,0) points along e_0, so n=-e_0 and beta tends to -e_0 in step 2.3. This supersedes the coordinate assertions in the historical risk_review notes; its review attribution is preserved."
+      }
+    }
+  }
+}

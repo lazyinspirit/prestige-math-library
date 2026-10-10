@@ -1,0 +1,62 @@
+# Batch-9 continuum flux and Hodge correction proposal
+
+Proposal only for `physics-em-sr-40-2026-10-08`. The batch-9 baseline was read while batches 9/10 still had live writers and is provisional. Before integration, reread native manifests and compare the item hashes in the JSON; retain any writer self-repair and adapt the focused corrections to the drained baseline. No production item, native manifest, plan, readiness, task, import, ledger, or engine file was edited. All five full before/after scaffold items and direct supplier inspections are in the accompanying JSON.
+
+## Confirmed findings and preserved interfaces
+
+- Current `thm-sr-stress-balance-and-finite-flux` is sound as a four-dimensional finite-box theorem. Preserve its statement and finite-region restrictions. Its continuity step can be sharpened without a new theorem: the continuous `partial_0 T^{0b}` is bounded on the box (continuous rectangle integrability includes boundedness), say by `M`; FTC gives `|Q^b(s)-Q^b(r)|≤Vol(K) M |s-r|`. All faces are three-dimensional coordinate Riemann integrals. Symmetry is harmless, although not required by the flux calculation.
+- Current `thm-sr-antisymmetric-observer-decomposition` already has the correct contraction `F_ab(*F)^ab=−4 e·b`; the negative wedge sign reported upstream is absent from the currently read manifest. Keep that contraction and the reconstruction, star square, all six field-transform components and optional physical scope. Explicitly add the promised four-form identity `F∧F=+2(e·b)epsilon` with a fully specified standard wedge/component normalization; its SI version is `−2(E·B)epsilon/c`. If `kappa=(F∧F)(e0,e1,e2,e3)` is the standard four-form component, then `E·B=−c kappa/2`. The coefficient `−c/4` would be correct only for a separately defined quantity twice this standard coefficient; do not use it with the notation `(F∧F)0123`.
+- `ex-sr-box-flux-balance-worked` and `cex-sr-divergence-free-stress-energy-with-varying-slice-momentum` use two-dimensional integrals while invoking the four-dimensional theorem with arbitrary transverse intervals. Retain their tensor witnesses and all intervals, declare `A=(d2−c2)(d3−c3)>0`, and multiply every volume, relevant face, and slice integral by `A`. Transverse faces vanish because their tensor components vanish; that fact does not remove the transverse factor from the remaining integrals.
+- `cex-sr-prescribed-stress-energy-need-not-be-conserved`: `F in C1` implies `T in C1`, not necessarily smooth. On a nonempty connected open set its force vanishes identically iff `F` is constant. Nonconstant means the force is **not identically zero**; it need not be nonzero at every point. Preserve the general C1 claim and add the smooth witness `F(x)=(x1)^2`, whose force is zero on `x1=0` and nonzero off that plane.
+
+## Independent mathematical reconstruction of Hodge conventions
+
+The native orientation supplier declares `epsilon0123=+1`, the metric is `diag(−1,1,1,1)`, and the dual is `(*F)ab=(1/2)epsilon_ab{}^{cd} Fcd`. Let `theta^a` denote the dual coframe and use the standard form convention `F=(1/2)sum_ab F_ab theta^a∧theta^b=sum_a<b F_ab theta^a∧theta^b`. The square wedge is defined explicitly by
+
+$$ (F\wedge F)(v_0,v_1,v_2,v_3)=2[F(v_0,v_1)F(v_2,v_3)-F(v_0,v_2)F(v_1,v_3)+F(v_0,v_3)F(v_1,v_2)]. $$
+
+This is alternating and multilinear by direct expansion; it is the standard exterior product of the alternating two-form with itself. There is no silent omission of the combinatorial factor.
+
+For an oriented rest frame `n=e0`, put `a_i=theta0∧thetai` and `s_1=theta2∧theta3`, `s_2=theta3∧theta1`, `s_3=theta1∧theta2`. Direct use of the dual definition gives `*a_i=−s_i` and `*s_i=a_i`. Hence `*²=−1` on all six basis two-forms. The observer contractions give `e_i=F_i0`, `b_i=−(1/2)epsilon_ijk F_jk`, so
+
+$$ F=-\sum_i e_i a_i-\sum_i b_i s_i,\qquad *F=-\sum_i b_i a_i+\sum_i e_i s_i. $$
+
+Since `nflat=−theta0`, these formulas give exactly `F=nflat∧e−*(nflat∧b)`. The contraction formulas follow by raising both indices of the time-spatial block, which changes its sign, and counting both orders of each skew pair. The two independent scalar invariants are explicitly $I_1=\tfrac12F_{ab}F^{ab}$ and $I_2=F_{ab}(*F)^{ab}$; the four-form square is the dependent expression $F\wedge F=-\tfrac12 I_2\varepsilon$.
+
+$$ \tfrac12 F_{ab}F^{ab}=|b|^2-|e|^2,\qquad F_{ab}(*F)^{ab}=-4e\cdot b. $$
+
+Each `a_i∧s_i=epsilon`; all unmatched mixed terms and two purely temporal or purely spatial terms vanish. Because two-forms commute under wedge, `F∧F=2sum_i e_i b_i epsilon`. The witness `F01=F23=1`, all other independent components zero, gives `e1=b1=−1`, `F∧F=2epsilon`, `F_ab(*F)^ab=−4`, and `*²F=−F`. This simultaneously distinguishes the correct wedge sign from the correct negative contraction.
+
+Existence of the adapted rest frame is not assumed from an arbitrary orthonormal-basis theorem: the earlier observer theorem proves that `nperp` is three-dimensional and positive definite. Apply finite Gram–Schmidt to a basis of that rest space, and, if necessary, reverse one of the three spatial vectors to obtain the specified orientation. This uses finite choices only, no AC. The proposal adds the exact pinned Gram–Schmidt supplier and the right-handed cross-product definition used in the vector boost formula.
+
+To preserve the richest interpretation of “the independent quadratic invariants,” the proposed strategy proves completeness among homogeneous quadratic polynomials invariant under proper orthochronous Lorentz maps. Spatial half-turns force each of the `e–e`, `b–b`, and `e–b` coefficient blocks to be diagonal; proper spatial rotations permuting the coordinate axes force each diagonal to be scalar. Thus a rotation-invariant quadratic polynomial is `A|e|²+B|b|²+C e·b`. For the passive axis-one boost, take `e=(0,1,0), b=0`. The exact component law gives `e′=(0,gamma,0)` and `b′=(0,0,gamma beta)`, so invariance forces `A gamma²+B gamma² beta²=A`. Since `gamma²−1=gamma² beta²`, any nonzero allowed `beta` forces `A+B=0`. Both remaining expressions are tensor contractions (the second also a ratio of oriented four-forms), hence invariant under all proper Lorentz maps. They are linearly independent by setting first `b=0,e≠0`, then `e=b≠0`. Under orientation reversal the pseudoscalar changes sign; no improper-frame scalar claim is made.
+
+The optional SI identification `F^{i0}=E_i/c`, `F^{ij}=−epsilon_ijk B_k` yields `e=−E/c`, `b=B`. Under the actual passive boost matrix `Lambda00=Lambda11=gamma`, `Lambda01=Lambda10=−gamma beta`, direct multiplication of both raised indices gives
+
+$$ E'_1=E_1,\quad E'_2=\gamma(E_2-vB_3),\quad E'_3=\gamma(E_3+vB_2), $$
+
+$$ B'_1=B_1,\quad B'_2=\gamma(B_2+vE_3/c^2),\quad B'_3=\gamma(B_3-vE_2/c^2),\quad v=\beta c. $$
+
+These are exactly the currently promised cross-product formulas. At `beta=0` use `gamma=1`; the supplier's separate zero-boost branch is respected. No electromagnetic equations, detector interpretation or dynamical adoption is inferred from this algebra.
+
+## Correct four-dimensional flux witnesses
+
+Take transverse intervals `[c2,d2]`, `[c3,d3]` with positive lengths and area `A`. For the worked field `T00=x0`, `T01=T10=x1`, `T11=x0`, all other components zero, set `Delta t=t2−t1`, `Delta x=x2−x1`. The bulk `b=0` integral is `2A Delta t Delta x`. The temporal face difference is `A Delta t Delta x`, and the axis-one face difference is `A Delta t Delta x`; transverse face terms vanish. For `b=1` each opposite pair cancels, and `b=2,3` vanish. For example `A=6`, `Delta t=2`, `Delta x=3` gives bulk `72` and the two nonzero differences `36+36`.
+
+For the divergence-free field `T00=x0`, `T01=T10=−x1`, `T11=x0`, let `K=[0,L]×[c2,d2]×[c3,d3]`, `L>0`. Its full slice integral is `Q0(s)=A L s`, and the only nonzero side-flux difference for `b=0` on `[s1,s2]` is `−A L(s2−s1)`. Thus `Delta Q0=+A L(s2−s1)`, as the finite-box theorem states. With `A=6,L=2,s2−s1=3`, it is `36`. This is a counterexample to dropping isolation, not a claimed solution of a selected matter model.
+
+For `T^{ab}=F eta^{ab}`, the inverse metric is nondegenerate, so `f=0` is equivalent to all partial derivatives of `F` vanishing. The exact published connected-open zero-derivative theorem, applied to a C1 scalar (hence totally differentiable), yields constancy. The proposal adds that genuine supplier. For the smooth witness `F=(x1)^2` on `R4`, `f=(0,2x1,0,0)`; its zero plane prevents any everywhere-nonzero interpretation. In a primed chart the scalar component is `F'(x')=F(Lambda^{-1}(x'−a))`; covariance of `F eta` does not mean keeping the same coordinate formula while changing the point. Its transformed divergence follows the earlier tensor law.
+
+## Consumers and evidence limits
+
+The JSON records direct and transitive consumers from **current native manifests**, separately from research-only EM consumers. Present native S9 consumers include the matter-isolation postulate and integrated-conservation physics theorem (parent-owned), the transverse-profile dust example (disjoint observer lane), and the two owned flux examples. The S9 statement is unchanged, so its improved continuity proof alone does not propagate a statement-change review duty. The Hodge extension clarifies an existing research promise; any supplied corrected Hodge interface must be reviewed against `def-em-electromagnetic-tensor`, `pthm-em-lorentz-field-transform`, `pthm-em-observer-field-and-doppler` when their native carriers exist. The EM research closure also records S9 uses by `pthm-em-covariant-stress-energy`; the SR–EM mapping additionally names `pthm-em-coupled-total-conservation`. These research IDs are not invented native authored consumers.
+
+Pinned mathematical statements were read and compared to the actual hypotheses. All direct imported snapshots and root originals are checked against import receipts in the JSON. Provenance and source URLs are preserved for S8/S9; S8’s Carroll locator is corrected to the bounded Hodge/wedge passages actually read; examples/counterexamples remain `ai-generated` with allowed roles and are not converted into logical suppliers. I read the cached authoritative full-text **bounded passages** Carroll equations (1.79)–(1.88), printed pp. 21–23, and Crowell §§9.3.1–9.3.2, printed pp. 192–193, plus the opening of §9.3.3. This was reading existing local full-text extractions, not a new network retrieval, a reading of either whole book, or a new source gate receipt. The cached passages match the wedge normalization, star-square signature rule and finite-box FTC route. The local mathematical derivation establishes the adapted-frame signs; a citation does not replace it. No publication, independent model audit, readiness stamp or gate success is claimed.
+
+## Additive source-harvest reconciliation
+
+The parent confirmed that the mathematical proposal is integrated and root-reviewed. The remaining proposal is additive coverage reconciliation only: extend Carroll's existing locator; append nine disposed source rows for the actual cached passages, including the adjacent exterior-derivative and cohomology content read for disposition; append one canonical row for the local invariant-completeness adaptation. All seven existing Carroll rows, all existing canonical rows, the other sources, URLs, and original fetch/recovery stamps remain byte-value identical in the candidate objects.
+
+The original read was cached lines 1164–1270 inclusive. The source-reconciliation confirmation reread lines 1155–1278 inclusive. Literal numbered text excerpts for every new row are in `physics-em-sr-40-2026-10-08-continuum-flux-hodge-proposal.coverage-reconciliation.json`; no continuation beyond line 1278 or fresh retrieval is claimed. The extra tail covers only the displayed three-dimensional cross-product illustration and beginning of its parity discussion. The invariant-classification proof is labeled local/canonical support, never a numbered Carroll theorem.
+
+The exact full candidate is `physics-em-sr-40-2026-10-08-continuum-flux-hodge-proposal.harvest.coverage.json`. Its private sibling `.harvest.pages.json` is a byte-identical snapshot of the current native batch-9 manifest, used only for item-ID cross-checking. The local coverage-checklist command with `--require-destination --json` passed: one page, 59 harvested rows, zero errors and zero warnings. This is a candidate structure check, not shared integration, readiness refresh or a new source-fetch certification.

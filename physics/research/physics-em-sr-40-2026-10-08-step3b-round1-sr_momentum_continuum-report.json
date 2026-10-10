@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "run": "physics-em-sr-40-2026-10-08",
+  "round": 1,
+  "reviewer": "step3b_sr_momentum_continuum_repair",
+  "status": "owned-24-official-decisions-recorded",
+  "failed_subjects": [
+    "lem-sr-four-momentum-in-inertial-frame",
+    "lem-sr-four-force-and-work-energy-identities",
+    "lem-sr-collision-necessary-conditions",
+    "pthm-sr-momentum-and-four-force",
+    "ex-sr-four-momentum-at-beta-three-fifths",
+    "ex-sr-four-momentum-boost-to-rest",
+    "ex-sr-equal-mass-head-on-collision-mass",
+    "ex-sr-perfectly-inelastic-collision-rest-mass",
+    "ex-sr-null-pair-invariant-mass",
+    "ex-sr-stationary-target-threshold",
+    "cex-sr-kinetic-energy-is-observer-dependent",
+    "lem-sr-scalar-field-euler-lagrange",
+    "lem-sr-scalar-field-hilbert-stress-energy",
+    "lem-sr-dust-conservation-equivalence",
+    "lem-sr-perfect-fluid-conservation-equations",
+    "thm-sr-stress-balance-and-finite-flux",
+    "post-sr-matter-models-and-evolution",
+    "post-sr-matter-isolation-and-total-stress-energy",
+    "pthm-sr-local-stress-energy-conservation",
+    "pthm-sr-integrated-conservation-for-isolated-matter",
+    "rem-sr-continuum-force-and-conservation-scope",
+    "ex-sr-dust-stress-energy-under-a-boost",
+    "ex-sr-perfect-fluid-rest-and-moving-frame",
+    "ex-sr-constant-velocity-dust-with-transverse-profile"
+  ],
+  "changed_items": [
+    {
+      "path": "physics/items/lem-sr-four-momentum-in-inertial-frame.md",
+      "raw_sha256": "6c7d56b79f139cf6e3e785fb001b2c32341bf601a1793c55fee6d20c3117c003"
+    },
+    {
+      "path": "physics/items/lem-sr-collision-necessary-conditions.md",
+      "raw_sha256": "5f1535f1214f2d12cc7683fda5d4ce5f84c47d907a03446b3df72687918c9dfa"
+    },
+    {
+      "path": "physics/items/lem-sr-perfect-fluid-conservation-equations.md",
+      "raw_sha256": "959e4547781f9e7135140829c0880aa2976fecfdcbaa911f835175288dbfd868"
+    },
+    {
+      "path": "physics/items/lem-sr-scalar-field-hilbert-stress-energy.md",
+      "raw_sha256": "7ab0592cea705835bfe4d74945ee260fde455860c276cb59ecd3073c1356cff4"
+    },
+    {
+      "path": "physics/items/thm-sr-stress-balance-and-finite-flux.md",
+      "raw_sha256": "7f72ce5be2d29b2c60e75a874ec23dd8e6fd0f828e411fc35867b0186b922713"
+    }
+  ],
+  "confirmed_defects": [
+    {
+      "id": "lem-sr-four-momentum-in-inertial-frame",
+      "defect": "Original Statement clause(c) subtracts scalar beta P^0 from vector bold p_parallel, missing axis vector s; proof1.3 divides by |beta|² at zero boost.",
+      "repair": "Owner-authorized type correction inserts s preserving scalar law; proof explicitly splits identity case B(0)=I.",
+      "affected_consumers": "Full 60-carrier dependency cone saved before Statement edit in momentum-statement-impact-cone receipt.",
+      "smallest_missing_prerequisite": "None after direction factor and identity branch; final recursive supplier pins still require freeze."
+    },
+    {
+      "id": "lem-sr-perfect-fluid-conservation-equations",
+      "defect": "Proof1.1 omits (epsilon+P)theta from product derivative; proof2.1 later restores term without support.",
+      "repair": "Restore full product derivative in proof1.1; Statement preserved.",
+      "affected_consumers": [
+        "post-sr-matter-models-and-evolution",
+        "pthm-sr-local-stress-energy-conservation",
+        "ex-sr-perfect-fluid-rest-and-moving-frame"
+      ],
+      "smallest_missing_prerequisite": "Full product rule, supplied locally by F1."
+    },
+    {
+      "id": "lem-sr-collision-necessary-conditions",
+      "defect": "Proof4.1 cites null-total step2.2 for massive two-leg mass-shell identity.",
+      "repair": "Correct reference and contract input to actual step2.3.",
+      "affected_consumers": [
+        "pthm-sr-momentum-and-four-force",
+        "ex-sr-stationary-target-threshold"
+      ],
+      "smallest_missing_prerequisite": "Existing step2.3; no new lemma."
+    }
+  ],
+  "warning_dispositions": [
+    {
+      "id": "lem-sr-scalar-field-euler-lagrange",
+      "result": "retained-sound-heuristic-warning",
+      "evidence": "Step1.1 actually needs all four tagged derivative/continuity facts F4,F5,F6,F7 to differentiate the relative density and establish continuous parameter derivative. Later reverse direction uses only zero integrand and step3.1; collection uses prior steps. No mathematical defect from fact distribution."
+    },
+    {
+      "id": "lem-sr-scalar-field-hilbert-stress-energy",
+      "result": "repaired-attribution",
+      "evidence": "Proof1.3 now cites iterated product/chain rules actually used to establish smoothness; compact metric variation, uniform nondegeneracy via finite compact cover, relative action and uniqueness by independent symmetric tests remain intact."
+    },
+    {
+      "id": "thm-sr-stress-balance-and-finite-flux",
+      "result": "repaired-attribution",
+      "evidence": "Tag actual integral additivity/zero-integral uses in sub-box balance and zero-flux conclusion. Preserve finite boxes, one chart, no four-vector or noncompact conclusion."
+    }
+  ],
+  "checks": [
+    {
+      "tool": "precheck",
+      "evidence_file": "physics/research/physics-em-sr-40-2026-10-08-step3b-round1-sr_momentum_continuum-precheck.txt",
+      "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts physics/items/lem-sr-four-momentum-in-inertial-frame.md physics/items/lem-sr-four-force-and-work-energy-identities.md physics/items/lem-sr-collision-necessary-conditions.md physics/items/pthm-sr-momentum-and-four-force.md physics/items/ex-sr-four-momentum-at-beta-three-fifths.md physics/items/ex-sr-four-momentum-boost-to-rest.md physics/items/ex-sr-equal-mass-head-on-collision-mass.md physics/items/ex-sr-perfectly-inelastic-collision-rest-mass.md physics/items/ex-sr-null-pair-invariant-mass.md physics/items/ex-sr-stationary-target-threshold.md physics/items/cex-sr-kinetic-energy-is-observer-dependent.md physics/items/lem-sr-scalar-field-euler-lagrange.md physics/items/lem-sr-scalar-field-hilbert-stress-energy.md physics/items/lem-sr-dust-conservation-equivalence.md physics/items/lem-sr-perfect-fluid-conservation-equations.md physics/items/thm-sr-stress-balance-and-finite-flux.md physics/items/post-sr-matter-models-and-evolution.md physics/items/post-sr-matter-isolation-and-total-stress-energy.md physics/items/pthm-sr-local-stress-energy-conservation.md physics/items/pthm-sr-integrated-conservation-for-isolated-matter.md physics/items/rem-sr-continuum-force-and-conservation-scope.md physics/items/ex-sr-dust-stress-energy-under-a-boost.md physics/items/ex-sr-perfect-fluid-rest-and-moving-frame.md physics/items/ex-sr-constant-velocity-dust-with-transverse-profile.md",
+      "exit_code": 0,
+      "stdout": "PASS physics/items/lem-sr-four-momentum-in-inertial-frame.md (direct)\nPASS physics/items/lem-sr-four-force-and-work-energy-identities.md (direct)\nPASS physics/items/lem-sr-collision-necessary-conditions.md (direct)\nPASS physics/items/pthm-sr-momentum-and-four-force.md (direct)\nPASS physics/items/ex-sr-four-momentum-at-beta-three-fifths.md (direct)\nPASS physics/items/ex-sr-four-momentum-boost-to-rest.md (direct)\nPASS physics/items/ex-sr-equal-mass-head-on-collision-mass.md (direct)\nPASS physics/items/ex-sr-perfectly-inelastic-collision-rest-mass.md (direct)\nPASS physics/items/ex-sr-null-pair-invariant-mass.md (direct)\nPASS physics/items/ex-sr-stationary-target-threshold.md (direct)\nPASS physics/items/cex-sr-kinetic-energy-is-observer-dependent.md (direct)\nPASS physics/items/lem-sr-scalar-field-euler-lagrange.md (direct)\nPASS physics/items/lem-sr-scalar-field-hilbert-stress-energy.md (direct)\nPASS physics/items/lem-sr-dust-conservation-equivalence.md (direct)\nPASS physics/items/lem-sr-perfect-fluid-conservation-equations.md (direct)\nPASS physics/items/thm-sr-stress-balance-and-finite-flux.md (direct)\nPASS physics/items/post-sr-matter-models-and-evolution.md (nonproof structure)\nPASS physics/items/post-sr-matter-isolation-and-total-stress-energy.md (nonproof structure)\nPASS physics/items/pthm-sr-local-stress-energy-conservation.md (direct)\nPASS physics/items/pthm-sr-integrated-conservation-for-isolated-matter.md (direct)\nPASS physics/items/ex-sr-dust-stress-energy-under-a-boost.md (direct)\nPASS physics/items/ex-sr-perfect-fluid-rest-and-moving-frame.md (direct)\nPASS physics/items/ex-sr-constant-velocity-dust-with-transverse-profile.md (direct)\n\n23 checked, 0 failing — all clean\n",
+      "stderr": ""
+    },
+    {
+      "tool": "rendercheck",
+      "evidence_file": "physics/research/physics-em-sr-40-2026-10-08-step3b-round1-sr_momentum_continuum-rendercheck.txt",
+      "command": "node tools/physics-support/rendercheck.mjs items/lem-sr-four-momentum-in-inertial-frame.md items/lem-sr-four-force-and-work-energy-identities.md items/lem-sr-collision-necessary-conditions.md items/pthm-sr-momentum-and-four-force.md items/ex-sr-four-momentum-at-beta-three-fifths.md items/ex-sr-four-momentum-boost-to-rest.md items/ex-sr-equal-mass-head-on-collision-mass.md items/ex-sr-perfectly-inelastic-collision-rest-mass.md items/ex-sr-null-pair-invariant-mass.md items/ex-sr-stationary-target-threshold.md items/cex-sr-kinetic-energy-is-observer-dependent.md items/lem-sr-scalar-field-euler-lagrange.md items/lem-sr-scalar-field-hilbert-stress-energy.md items/lem-sr-dust-conservation-equivalence.md items/lem-sr-perfect-fluid-conservation-equations.md items/thm-sr-stress-balance-and-finite-flux.md items/post-sr-matter-models-and-evolution.md items/post-sr-matter-isolation-and-total-stress-energy.md items/pthm-sr-local-stress-energy-conservation.md items/pthm-sr-integrated-conservation-for-isolated-matter.md items/rem-sr-continuum-force-and-conservation-scope.md items/ex-sr-dust-stress-energy-under-a-boost.md items/ex-sr-perfect-fluid-rest-and-moving-frame.md items/ex-sr-constant-velocity-dust-with-transverse-profile.md",
+      "exit_code": 0,
+      "stdout": "\nOK — 24 file(s): no wikilink inside math, no nested or unbalanced\ndelimiters, no multiline display block, every math span parses under the real\nKaTeX, and every frontmatter block parses under the renderer's YAML parser.\n",
+      "stderr": ""
+    },
+    {
+      "tool": "proof-layout",
+      "evidence_file": "physics/research/physics-em-sr-40-2026-10-08-step3b-round1-sr_momentum_continuum-proof-layout.txt",
+      "command": "node tools/proof-layout.mjs physics/items/lem-sr-four-momentum-in-inertial-frame.md physics/items/lem-sr-collision-necessary-conditions.md physics/items/lem-sr-perfect-fluid-conservation-equations.md physics/items/lem-sr-scalar-field-hilbert-stress-energy.md physics/items/thm-sr-stress-balance-and-finite-flux.md",
+      "exit_code": 0,
+      "stdout": "proof-layout: 5 items, 38 steps, 0 defects\n",
+      "stderr": ""
+    }
+  ],
+  "current_failed_subject_pins": [
+    {
+      "path": "physics/items/lem-sr-four-momentum-in-inertial-frame.md",
+      "raw_sha256": "6c7d56b79f139cf6e3e785fb001b2c32341bf601a1793c55fee6d20c3117c003"
+    },
+    {
+      "path": "physics/items/lem-sr-four-force-and-work-energy-identities.md",
+      "raw_sha256": "75e62aed6701f028153c5152b196162fed68bdc4787a77f5f05a7da01b2008d2"
+    },
+    {
+      "path": "physics/items/lem-sr-collision-necessary-conditions.md",
+      "raw_sha256": "5f1535f1214f2d12cc7683fda5d4ce5f84c47d907a03446b3df72687918c9dfa"
+    },
+    {
+      "path": "physics/items/pthm-sr-momentum-and-four-force.md",
+      "raw_sha256": "236afe3ae8c5e447c9277c3eb3be11e204f22b4603e0d7826a9e510684a485fc"
+    },
+    {
+      "path": "physics/items/ex-sr-four-momentum-at-beta-three-fifths.md",
+      "raw_sha256": "12f1e1e69159eac1ca1b516ca75efac0634e3fef5c603c93f713f985e4d5a603"
+    },
+    {
+      "path": "physics/items/ex-sr-four-momentum-boost-to-rest.md",
+      "raw_sha256": "4c32d997803aef2fd53e5cf0085533b96f2411118797db8a20bcb746e9cec798"
+    },
+    {
+      "path": "physics/items/ex-sr-equal-mass-head-on-collision-mass.md",
+      "raw_sha256": "1f0213432380ba567c0446cd5bccfbf203ce6bdcea8da8e51366af700384d329"
+    },
+    {
+      "path": "physics/items/ex-sr-perfectly-inelastic-collision-rest-mass.md",
+      "raw_sha256": "9dde65c87e327814bf19b4945941d933adb10679aaac7c9d2f780466b40e9f67"
+    },
+    {
+      "path": "physics/items/ex-sr-null-pair-invariant-mass.md",
+      "raw_sha256": "13a0eb3b362e499ffd592ac94a42ef98ae727dc29144ae5e934133a980ba7626"
+    },
+    {
+      "path": "physics/items/ex-sr-stationary-target-threshold.md",
+      "raw_sha256": "984070c611ee6ea086b279b7dc73d0525f39257037af7d2c4f7bb82446377cf7"
+    },
+    {
+      "path": "physics/items/cex-sr-kinetic-energy-is-observer-dependent.md",
+      "raw_sha256": "c9e87c473fe97c0fb4fd4054d62c8ab1f994a679299192bc728c4a8b44acb425"
+    },
+    {
+      "path": "physics/items/lem-sr-scalar-field-euler-lagrange.md",
+      "raw_sha256": "f2af87c15b269f38aa1eb9c0fe4335b52c136d3b6b6a00d301c4c90206fc5083"
+    },
+    {
+      "path": "physics/items/lem-sr-scalar-field-hilbert-stress-energy.md",
+      "raw_sha256": "7ab0592cea705835bfe4d74945ee260fde455860c276cb59ecd3073c1356cff4"
+    },
+    {
+      "path": "physics/items/lem-sr-dust-conservation-equivalence.md",
+      "raw_sha256": "79ef16fe4f50a1995b77bbfcd9cacacea294a95fd7656451da9b59f05adbd695"
+    },
+    {
+      "path": "physics/items/lem-sr-perfect-fluid-conservation-equations.md",
+      "raw_sha256": "959e4547781f9e7135140829c0880aa2976fecfdcbaa911f835175288dbfd868"
+    },
+    {
+      "path": "physics/items/thm-sr-stress-balance-and-finite-flux.md",
+      "raw_sha256": "7f72ce5be2d29b2c60e75a874ec23dd8e6fd0f828e411fc35867b0186b922713"
+    },
+    {
+      "path": "physics/items/post-sr-matter-models-and-evolution.md",
+      "raw_sha256": "af36795e2a02c27c6a4be29c51e41f04495e59e4dec9cd2142e98d2e1f44b3eb"
+    },
+    {
+      "path": "physics/items/post-sr-matter-isolation-and-total-stress-energy.md",
+      "raw_sha256": "f32f14c7efce0b92dc5bac785e77090db2615b21271ef0af0bed8a450e2ea14b"
+    },
+    {
+      "path": "physics/items/pthm-sr-local-stress-energy-conservation.md",
+      "raw_sha256": "fe64e7594a2f107e758ed0c9430e8f85fcd64b14af974397229f61bc21ac4db7"
+    },
+    {
+      "path": "physics/items/pthm-sr-integrated-conservation-for-isolated-matter.md",
+      "raw_sha256": "fa1f83c0c4d1831da0c46508b9fa13704165fc467852f158f734ac2e9d57ba8a"
+    },
+    {
+      "path": "physics/items/rem-sr-continuum-force-and-conservation-scope.md",
+      "raw_sha256": "a526a91f2f006a9d1c12c41eb0d4f79da1406b68aafed10916061017d0799ab8"
+    },
+    {
+      "path": "physics/items/ex-sr-dust-stress-energy-under-a-boost.md",
+      "raw_sha256": "449a895a57ff9de694669dd06146bb41b7b1679e84f6002d4b8fe65362404b18"
+    },
+    {
+      "path": "physics/items/ex-sr-perfect-fluid-rest-and-moving-frame.md",
+      "raw_sha256": "b36f231d0afafc7c0311ddb94b3e4db6190b6b2ae1a17bcddae164379a5c6094"
+    },
+    {
+      "path": "physics/items/ex-sr-constant-velocity-dust-with-transverse-profile.md",
+      "raw_sha256": "3e31b2634a9ff49c629efb95a72746b65de8875ce7d6b92d6b73bc5deb2f09d4"
+    }
+  ],
+  "remaining_gaps": [
+    "Root metadata integration or additional foreign supplier edits require a fresh recursive hash refresh; the24 decisions bind actual current carriers.",
+    "Original-Statement 60-carrier focused impact receipt is complete; any foreign official receipt writes are serialized under root ownership and have not been performed here.",
+    "The retained Euler shotgun warning is a documented true-positive concentration heuristic with no missing mathematical premise or invalid step."
+  ],
+  "source_reading": "Local original Statements/Definitions and actual arguments/required supplier uses reviewed. No new external full-text retrieval is claimed. Independent algebra and compact-variation/finite-box reasoning supplied review basis.",
+  "official_decisions_file": "physics/research/physics-em-sr-40-2026-10-08-step3b-round1-sr_momentum_continuum-decision-results.json"
+}

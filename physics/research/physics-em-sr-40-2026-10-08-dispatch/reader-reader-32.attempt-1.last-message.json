@@ -1,0 +1,32 @@
+{
+  "batch": "32",
+  "findings": [
+    {
+      "id": "lem-em-parameter-integrals",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "pthm-em-poynting-balance",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "9825553c02247e9b748cda3bd2bb4c08f1dc40fc315f3c6970bbb6b481a70186"
+      },
+      "location": "Statement, Set form (line 47); Given; Facts F2-F3; Proof 1.1-3.1.",
+      "defect": "missing-hypothesis",
+      "evidence": "The Set form invokes Lebesgue measure as a measure space and signed-integral linearity/triangle rules without carrying the Countable Choice premise under which this library constructs that space. def-lebesgue-measure-and-the-lebesgue-sigma-algebra and thm-lebesgue-measure-is-a-complete-measure explicitly require AC_omega for the sigma-algebra/measure construction; only the Surface form of this lemma states AC_omega. Carry that premise into the Set form, or prove the result relative to an explicitly supplied finite measure space. The assigned consumer already assumes AC_omega in its fixed-volume branch, so this finding concerns the supplier interface, not a false conditional conclusion in the consumer.",
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-em-quadratic-stress-identity",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "pthm-em-angular-balance",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "7475d1ca23ef784d965cdac79a71ab19d5ab9aef16892cca453779b6f1d3bde7"
+      },
+      "location": "Statement, final paragraph (line 50), final product-domain expression.",
+      "defect": "ill-formed",
+      "evidence": "The final domain is stored as U followed by a literal tab and imes I, rather than the LaTeX product U\\times I. The earlier angular hypotheses and formulas correctly specify U\\times I, so the mathematical argument is recoverable; correct this final presentation defect in the owning batch 13.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Opened all seven assigned items and both pages; reviewed exact claim-specific suppliers and relevant proofs/source passages, repaired owned defects, updated contracts, and completed scoped precheck, rendering, dependency and 42-step layout checks. This is not a whole-closure or downstream whole-item audit. Two batch-13 supplier findings bind observed bytes still current at completion. A batch-36 downstream consumer sign defect in pthm-em-dipole-radiation F3 and required outside-owner contract refreshes are recorded in the Markdown report for Step-5b manual routing; that downstream subject is outside the assigned dependency closure and cannot truthfully be encoded as an in-run-dependency under this schema."
+}

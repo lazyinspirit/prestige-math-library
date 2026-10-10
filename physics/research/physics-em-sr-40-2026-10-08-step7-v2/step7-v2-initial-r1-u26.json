@@ -1,0 +1,92 @@
+{
+  "run": "physics-em-sr-40-2026-10-08",
+  "phase": "initial",
+  "round": 1,
+  "unit": "26",
+  "input_sha256": "abf4e458aa807c1279b7d6c26197bd7b0cbd023a33b6e1338fb93d991f410809",
+  "decisions": [
+    {
+      "id": "ex-em-parallel-plate-capacitor",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "e765af53208569b66a32b7c71c760271e5792abbc931c44f2bf307e4d2d08405",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Clause (d), F4 and Verification 3.1 attribute scalar capacitance and energy conclusions to arbitrary prescribed conductor potentials. The actual supplier pthm-em-capacitance-energy(a)-(c) gives q=Cv and U=1/2 sum_j v_j q_j with a matrix C; its clause (d) gives the cited scalar identities only when one conductor is driven and all other conductors and the outer boundary are grounded. This omitted hypothesis invalidates the advertised comparison, although the separate infinite-plane calculation is sound. Repaired the comparison and F4 without changing the model or its direct calculation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-em-parallel-plate-capacitor",
+      "disposition": "repaired",
+      "post_sha256": "f818ba81e594079d96439b3838950668b1adc6f585b372b8459cc82998c7e8d0",
+      "review_context_sha256": "21b24aa9a9b26569ecd6fd8856dea75ee4e459629bddb90c7e625c1714811c75",
+      "reason": "Checked the complete example and actual capacitance supplier Statement and Proof. The downward piecewise field gives the positive upper and negative lower sheet divergence by Fubini and FTC; horizontal test derivatives integrate to zero, so curl vanishes. For measurable P of finite positive area A, the Borel representative and null-envelope completion argument gives slab measure Ad, whence Q=sigma A, V=sigma d/epsilon0, C=epsilon0 A/d>0 and U=sigma^2 Ad/(2 epsilon0). The repaired comparison now uses exactly the bounded theorem's single-driven-terminal clause and separately states its general matrix formula. No measured inputs or approximation theorem enter. This is local repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "ex-em-parallel-plate-capacitor",
+      "action": "record-repaired-finding",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The scalar comparison omitted pthm-em-capacitance-energy(d)'s one-driven-terminal restriction; clause (d), F4 and Verification 3.1 now state it and distinguish the general matrix formula. Preserve the original rejection tuple.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "Infinite planes at x3=+/-d/2, density +/-sigma with sigma>0, downward E=-sigma/epsilon0 e3 inside and zero outside; continuous piecewise affine potential; AC_omega for the direct integral/distribution calculation. Finite positive measurable area A gives local slab energy, not finite whole-plane energy.",
+    "source_paths_and_locators": [
+      "items/pthm-em-capacitance-energy.md: Statement (a)-(d),(f), Proof 2.1-4.1",
+      "items/ex-em-parallel-plate-capacitor.md: Example (a)-(d), Facts F1-F4, Verification 1.1-3.1",
+      "research/physics-em-sr-40-2026-10-08-batch-26.proof-contracts.json: contracts.ex-em-parallel-plate-capacitor",
+      "library/classical-electromagnetism/em-electrostatic-boundaries-and-conductors-examples.md: parallel-plate paragraph"
+    ],
+    "source_reading": "No external source was retrieved or claimed read. The repaired comparison follows directly from the local supplier statement and its complete proof; the distribution and energy computations are familiar mathematics checked directly.",
+    "interface_comparison": "Only the Example clause (d) comparison changes; no Statement or Definition heading exists. Model formulas (a)-(c) and physical_scope are unchanged. Consumer inventory conservatively treats the Example comparison as a public claim change.",
+    "consumer_examination": [
+      {
+        "path": "library/classical-electromagnetism/em-electrostatic-boundaries-and-conductors-examples.md",
+        "affected_use": "The page states the piecewise field/potential, divergence and curl, voltage and scalar local-slab energy formulas, and exclusion of infinite planes from bounded geometry.",
+        "disposition": "unchanged-sound",
+        "invalidated_claim": "None: the page makes no general bounded-conductor scalar claim.",
+        "minimality": "All referenced ideal-model formulas are unchanged and remain proved directly, so no page repair is necessary."
+      }
+    ],
+    "item_consumers": "Searched current items and library for the exact item ID; only its own carrier and owning examples page refer to it. No direct item dependency/reference consumers exist.",
+    "published_ledger_proposal": "No published carrier was changed and no potentially defective published consumer was found; no published-consumer ledger update is proposed.",
+    "validation": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-em-sr-40-2026-10-08-batch-26.proof-contracts.json --strict --items ex-em-parallel-plate-capacitor",
+        "result": "exit 0; 0 errors, 0 warnings, 1/1 checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/ex-em-parallel-plate-capacitor.md",
+        "result": "exit 0; 1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-em-parallel-plate-capacitor.md",
+        "result": "exit 0; 1 file, YAML and all KaTeX expressions parse"
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-em-parallel-plate-capacitor.md",
+        "result": "exit 0; 1 item, 6 steps, 0 defects"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and schedules independent rejudgment and any remaining run obligations; no judges, stamps, gates or certification were launched by this dispatch.",
+    "contract_repair": "Acquired step7-shared-write lock as step7-v2-initial-r1-u26, reread batch-26 contract, changed only this item's derivation 3.1 claim, ran its focused strict contract check, and released the lock. Supplier quotation already contains the exact single-terminal restriction and was preserved.",
+    "correction_note": "The first render check caught an escaping error in the newly written F4; corrected the text, checked its mathematics again, bound the final review hashes immediately, and reran precheck/rendercheck successfully. Final text has no unintended control characters."
+  }
+}

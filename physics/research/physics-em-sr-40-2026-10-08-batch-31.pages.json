@@ -1,0 +1,656 @@
+[
+  {
+    "order": 341,
+    "id": "em-potentials-and-gauge",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Potentials and gauge",
+    "companion": "em-potentials-and-gauge-examples",
+    "requires": [
+      "em-boundary-and-spectral-prerequisites",
+      "em-primitives-and-postulates",
+      "em-wave-equation-prerequisites",
+      "mixed-partials-taylor-and-extrema",
+      "partitions-of-unity-and-paracompactness",
+      "sine-cosine-and-the-definition-of-pi",
+      "the-seifert-van-kampen-theorem",
+      "em-causal-wave-kernel-prerequisites"
+    ],
+    "items": [
+      {
+        "id": "pthm-em-spacetime-potentials",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Smooth scalar and vector potentials on a star-shaped space-time region",
+        "reference": "core-conditional-proofs.md#K7 and mathematical-prerequisites.md#M05; interfaces aligned to lem-em-joint-smooth-potentials and def-em-potential-gauge-and-field-conventions",
+        "design_state": "complete-exact-conditional-research-argument; local second application of the published joint-regularity supplier; not an independent acceptance",
+        "deps": [
+          "lem-em-joint-smooth-potentials",
+          "post-em-vacuum-maxwell",
+          "def-em-potential-gauge-and-field-conventions",
+          "def-em-fields",
+          "def-star-shaped-open-subset-of-rn",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-directional-and-partial-derivatives",
+          "thm-clairaut-schwarz-mixed-partials",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "thm-algebra-of-derivatives",
+          "thm-the-divergence-of-a-curl-vanishes",
+          "thm-the-curl-of-a-gradient-vanishes"
+        ],
+        "dependency_roles": {
+          "lem-em-joint-smooth-potentials": "mathematical-premise",
+          "post-em-vacuum-maxwell": "physical-assumption",
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-star-shaped-open-subset-of-rn": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-the-divergence-of-a-curl-vanishes": "mathematical-premise",
+          "thm-the-curl-of-a-gradient-vanishes": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $c>0$, let $k\\ge2$ be an integer, let $\\Omega\\subseteq\\mathbb R^3$ be an open set that is star-shaped with respect to a point $a\\in\\Omega$ ([[def-star-shaped-open-subset-of-rn]]), and let $I\\subseteq\\mathbb R$ be an interval with at least two elements ([[def-interval]]). Joint regularity on $\\Omega\\times I$ is read in the restriction convention of [[lem-em-joint-smooth-potentials]]: a map on $\\Omega\\times I$ is **jointly $C^m$** when it is the restriction of a $C^m$ map on some open neighbourhood of $\\Omega\\times I$ in $\\mathbb R^4$. For open $I$ this is the ordinary open-domain class of [[def-ck-euclidean-maps-and-diffeomorphisms]] and agrees with the field class of [[def-em-fields]]; for non-open $I$ it is the convention that makes the statements below meaningful, and no time jet is asserted beyond the restricted values.\n\nLet $E,B:\\Omega\\times I\\to\\mathbb R^3$ be jointly $C^k$ and satisfy the two source-free Maxwell equations of [[post-em-vacuum-maxwell]] pointwise on $\\Omega\\times I$:\n\n$$\\operatorname{div}B=0,\\qquad\\operatorname{curl}E=-\\partial_tB,$$\n\nwith the divergence and curl of [[def-divergence-and-curl-of-a-c1-vector-field]] and the partial derivative $\\partial_t$ at fixed position of [[def-directional-and-partial-derivatives]] (at included endpoints of a non-open $I$, as relative derivatives in the restriction convention). Then there are a scalar potential $\\varphi:\\Omega\\times I\\to\\mathbb R$ that is jointly $C^{k-1}$ and a vector potential $A:\\Omega\\times I\\to\\mathbb R^3$ that is jointly $C^k$, both in the restriction convention, with\n\n$$B=\\operatorname{curl}A,\\qquad E=-\\nabla\\varphi-\\partial_tA\\qquad\\text{on }\\Omega\\times I,$$\n\nso that $(\\varphi,A)$ is a potential pair whose field pair is $(E,B)$, in the vocabulary of [[def-em-potential-gauge-and-field-conventions]]. If $E$ and $B$ are jointly $C^\\infty$, then $\\varphi$ and $A$ may be chosen jointly $C^\\infty$. Conversely, if $\\varphi$ and $A$ are jointly $C^\\infty$ on $\\Omega\\times I$ in the restriction convention and $E:=-\\nabla\\varphi-\\partial_tA$, $B:=\\operatorname{curl}A$ are their field pair, then $\\operatorname{div}B=0$ and $\\operatorname{curl}E=-\\partial_tB$ on $\\Omega\\times I$.\n\nThe theorem asserts existence on the stated star-shaped domain only: it claims no global potential on a general open set, no boundary, decay or growth condition on the potentials, and no uniqueness. Potentials are auxiliary objects of the framework and are not claimed to be observable.",
+        "strategy": "Radial-witness construction of [[lem-em-joint-smooth-potentials]] applied twice, following the research route core-conditional-proofs.md#K7. (i) Vector step: $B$ is jointly $C^k$ with $\\operatorname{div}B(\\cdot,t)=0$ for every $t$, so the lemma supplies $A(x,t)=\\int_0^1s\\,B(a+s(x-a),t)\\times(x-a)\\,ds$, jointly $C^k$ on $\\Omega\\times I$, with $\\operatorname{curl}A(\\cdot,t)=B(\\cdot,t)$ for every $t$. (ii) Define $C:=E+\\partial_tA$. Since $E$ is jointly $C^k$ and $A$ jointly $C^k$ with $k\\ge2$, $C$ is jointly $C^{k-1}$; the commutativity of $\\partial_t$ with the coordinate partial derivatives on the $C^2$ field $A$ ([[thm-clairaut-schwarz-mixed-partials]], componentwise) and the linearity of curl ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]) give $\\operatorname{curl}C(\\cdot,t)=\\operatorname{curl}E(\\cdot,t)+\\partial_t\\operatorname{curl}A(\\cdot,t)=-\\partial_tB(\\cdot,t)+\\partial_tB(\\cdot,t)=0$ for every $t$. (iii) Apply the lemma's scalar clause to $C$ (legitimate because $k-1\\ge1$): the corrected negative radial witness $\\varphi(x,t)=-\\int_0^1\\langle C(a+s(x-a),t),x-a\\rangle\\,ds$ is jointly $C^{k-1}$ and $\\nabla\\varphi(\\cdot,t)=-C(\\cdot,t)$ for every $t$, that is $E=-\\nabla\\varphi-\\partial_tA$; the substitution uses the componentwise linearity of $\\nabla$ and $\\partial_t$ ([[thm-algebra-of-derivatives]]). (iv) The smooth clause is the lemma's $C^\\infty$ clause. (v) Conversely a jointly $C^\\infty$ pair gives $\\operatorname{div}B=\\operatorname{div}\\operatorname{curl}A=0$ ([[thm-the-divergence-of-a-curl-vanishes]]) and $\\operatorname{curl}E=-\\operatorname{curl}\\nabla\\varphi-\\partial_t\\operatorname{curl}A=-\\partial_tB$, using $\\operatorname{curl}\\nabla\\varphi=0$ ([[thm-the-curl-of-a-gradient-vanishes]]) and the equality of the spatial/time mixed partials of the vector field $A$ ([[thm-clairaut-schwarz-mixed-partials]]). No choice principle, boundary condition, decay or non-star-shaped generality is used. The same interval convention is carried through both applications: choose a Ck extension of E and B, construct the radial A extension on its open radial-admissibility neighbourhood, and apply the scalar construction to the C(k-1) extension of E+A_t. Their restrictions are the asserted potentials on the original product, with relative derivatives at included endpoints. No finite-k case is discarded.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, Third Revised English Edition (Course of Theoretical Physics vol. 2, Pergamon Press 1971, 387 pp.)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "\u00a716 printed pp. 44-45 (the four-potential A_k and its relation to the scalar and vector potentials) and \u00a717 printed pp. 46-48, equations (17.3)-(17.4): E = -grad phi - (1/c) dA/dt and H = curl A"
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a75.3.1 printed pp. 105-106: the potential representation E = -grad phi - dA/dt, B = curl A as the general solution of the two source-free Maxwell equations"
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a710.1.1 printed pp. 416-418: the potential formulation and the two inhomogeneous equations for V and A on which the potential representation rests"
+            }
+          ]
+        },
+        "physical_scope": "The fields and potentials of the classical vacuum electromagnetic framework of [[def-em-fields]], [[post-em-vacuum-maxwell]] and [[def-em-potential-gauge-and-field-conventions]] on a single inertial laboratory region over a star-shaped spatial region. The only physical hypothesis used is the pair of source-free Maxwell equations (absence of magnetic charge and Faraday's law) as adopted in the postulate; no source equation, no regularity beyond the stated joint class, and no assertion that the potentials are observable are included. The star-shaped hypothesis is a genuine restriction on the spatial region, and the companion examples exhibit a divergence-free field on a non-star-shaped region with no global vector potential.",
+        "dependency_level": 14
+      },
+      {
+        "id": "def-em-gauge-transformation",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Potential representations, gauge transformations and gauge equivalence of the framework's fields",
+        "reference": "definition-contracts.md#def-em-gauge-transformation; vocabulary supplied by def-em-potential-gauge-and-field-conventions",
+        "design_state": "explicit-definition-contract; class bookkeeping and the smooth group action are stated exactly; reachability is excluded by contract",
+        "deps": [
+          "def-em-potential-gauge-and-field-conventions",
+          "def-em-lab-geometry",
+          "def-em-fields",
+          "def-em-si-conventions",
+          "pthm-em-spacetime-potentials",
+          "lem-em-joint-smooth-potentials",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "pthm-em-spacetime-potentials": "physical-result",
+          "lem-em-joint-smooth-potentials": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $c>0$, let $U\\cong I\\times\\Omega$ be the laboratory region of [[def-em-lab-geometry]] with its restricted inertial chart, let fields and units be those of [[def-em-fields]] and [[def-em-si-conventions]], and let the scalar-vector potential vocabulary on that region be that of [[def-em-potential-gauge-and-field-conventions]]: a **potential pair** $(\\varphi,A)$ of class $C^k$ on $\\Omega\\times I$ consists of $\\varphi:\\Omega\\times I\\to\\mathbb R$ and $A:\\Omega\\times I\\to\\mathbb R^3$ of class $C^k$ jointly in the sense of [[def-ck-euclidean-maps-and-diffeomorphisms]], and for a non-open time interval $I$ the joint classes in this item are read in the open-neighbourhood restriction convention of [[lem-em-joint-smooth-potentials]] (for open $I$ this is the ordinary class of [[def-ck-euclidean-maps-and-diffeomorphisms]]); for $k\\ge1$ the **field pair** is\n\n$$E(\\varphi,A):=-\\nabla\\varphi-\\partial_tA,\\qquad B(\\varphi,A):=\\operatorname{curl}A,$$\n\nwhere $\\nabla$ is the gradient, $\\operatorname{div}$ and $\\operatorname{curl}$ are those of [[def-divergence-and-curl-of-a-c1-vector-field]], and $\\partial_t$ is the partial derivative at fixed position of [[def-directional-and-partial-derivatives]]. For $k\\ge1$ the **Lorenz divergence** of the pair is $G(\\varphi,A):=\\operatorname{div}A+c^{-2}\\partial_t\\varphi$. The definitions in this item are stated on the laboratory region; the framework's fields are those of [[def-em-fields]], and no field equation is assumed anywhere below.\n\n(a) [Representations] Let $k\\ge2$ be an integer and let $(E,B)$ be a field pair of class $C^{k-1}$ on $\\Omega\\times I$, meaning $E,B:\\Omega\\times I\\to\\mathbb R^3$ of class $C^{k-1}$ jointly as in [[def-em-fields]]. A **potential representation of class $C^k$** of $(E,B)$ is a potential pair $(\\varphi,A)$ of class $C^k$ on $\\Omega\\times I$ whose field pair is $(E,B)$, that is, $E=-\\nabla\\varphi-\\partial_tA$ and $B=\\operatorname{curl}A$ on $\\Omega\\times I$. More generally, a potential pair of class $C^1$ represents a specified field pair whenever these two identities hold, even if the fields have greater regularity than the defining derivatives alone guarantee. This definition asserts neither existence nor uniqueness. On a star-shaped spatial region [[pthm-em-spacetime-potentials]] supplies $\\varphi\\in C^{r-1}$ and $A\\in C^r$ for jointly $C^r$ field data, $r\\ge2$, and smooth potentials for smooth data; it does not assert a $C^r$ scalar potential for merely $C^r$ data. Equality of field pairs does not by itself assert gauge relatedness on an arbitrary region; a converse needs its own domain and regularity hypotheses.\n\n(b) [Gauge functions and gauge equivalence] A **gauge function** of class $C^m$, $m\\ge2$, on $\\Omega\\times I$ is a function $\\chi:\\Omega\\times I\\to\\mathbb R$ of class $C^m$ jointly; its **gauge transformation** sends a potential pair $(\\varphi,A)$ of class $C^m$ to\n\n$$T_\\chi(\\varphi,A):=(\\varphi-\\partial_t\\chi,\\ A+\\nabla\\chi),$$\n\na potential pair of class $C^{m-1}$. Two potential pairs are **gauge related** when one is the gauge transform of the other by some gauge function. On pairs and generators of class $C^\\infty$, $T_0$ is the identity and $T_{\\chi_1}\\bigl(T_{\\chi_2}(\\varphi,A)\\bigr)=T_{\\chi_1+\\chi_2}(\\varphi,A)$ for all $C^\\infty$ generators $\\chi_1,\\chi_2$; hence gauge relatedness is an equivalence relation on the $C^\\infty$ potential pairs, the inverse of $T_\\chi$ being $T_{-\\chi}$. For a fixed finite class the transform drops one order, and relatedness is used only through the transform it records.\n\n(c) [Conditions] A potential pair is **in Lorenz gauge** on $\\Omega\\times I$ when $G(\\varphi,A)=\\operatorname{div}A+c^{-2}\\partial_t\\varphi=0$ throughout $\\Omega\\times I$, and **in Coulomb gauge** in the chosen spatial chart when $\\operatorname{div}A=0$ throughout $\\Omega\\times I$. These are properties of a pair in the stated conventions. The existence of a gauge function achieving either condition, with or without prescribed initial or boundary data, is a separate PDE conclusion with its own hypotheses and is not asserted by this definition.\n\n(d) [Physical status] The physical content of a representation is its field pair $(E,B)$ of [[def-em-fields]]; the values of $\\varphi$, of $A$ and of any gauge function are convention dependent and are auxiliary, and gauge related representations have the same field pair. The scalar potential $\\varphi$ carries the volt, the vector potential $A$ carries the tesla metre, and a gauge function carries V s $=$ T m$^2$, so its time derivative and gradient have the units of $\\varphi$ and $A$, respectively, consistently with [[def-em-si-conventions]]. No value of $\\varphi$ or $A$ is by itself an observable or evidence for a field.",
+        "strategy": "A vocabulary and bookkeeping definition over the exact interfaces of [[def-em-potential-gauge-and-field-conventions]]; it makes no existence or solvability claim. Obligations checked: (i) the field-pair formulas and the transform are those of the cited definition, so the regularity statements (a $C^m$ pair gives $C^{m-1}$ fields; a $C^m$ generator gives a $C^{m-1}$ transform) are inherited exactly; (ii) the composition identity is the componentwise linearity of the coordinate partial derivatives, $\\partial_t(\\chi_1+\\chi_2)=\\partial_t\\chi_1+\\partial_t\\chi_2$ and $\\nabla(\\chi_1+\\chi_2)=\\nabla\\chi_1+\\nabla\\chi_2$ ([[thm-algebra-of-derivatives]], [[def-directional-and-partial-derivatives]]), together with $T_0=\\mathrm{id}$; the inverse of $T_\\chi$ is $T_{-\\chi}$, so the relation is reflexive, symmetric and transitive on $C^\\infty$ pairs; (iii) the definition deliberately separates the two gauge conditions from their reachability: no conclusion that a pair can be put in either gauge, with or without prescribed data, is drawn here (compare [[pthm-em-spacetime-potentials]] for existence of representations and the gauge-reachability theorem later on this page for the two declared branches); (iv) no choice principle, no domain hypothesis beyond the laboratory region, and no Maxwell equation is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a73.2.2 printed pp. 48-49 (the gauge transformation A' = A + grad chi and the use of chi to adjust the divergence) and \u00a75.3.1 printed pp. 105-106, eq. (5.13): phi -> phi - dchi/dt, A -> A + grad chi, with chi = chi(x,t)"
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, Third Revised English Edition (Course of Theoretical Physics vol. 2, Pergamon Press 1971, 387 pp.)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "\u00a718 printed pp. 49-50, eqs. (18.1) and (18.3): the four-potential transformation A'_k = A_k - df/dx^k, equivalently A' = A + grad f and phi' = phi - (1/c) df/dt, with f an arbitrary function of the coordinates and the time; the fields are unchanged and only gauge-invariant quantities have physical meaning"
+            }
+          ]
+        },
+        "physical_scope": "The auxiliary potential vocabulary of the framework: potential representations of the adopted field pairs of [[def-em-fields]], their gauge transformations and the two named gauge conditions, in the single inertial laboratory chart. The item records that only the field pair is physical content and that the definition asserts no existence of representations (a separate theorem does, under its own hypotheses) and no reachability of a gauge condition (a separate PDE conclusion with its own domain and data hypotheses). No empirical claim is made and no convention of another unit system or framework is imported.",
+        "dependency_level": 15
+      },
+      {
+        "id": "pthm-em-gauge-invariance",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Gauge transformations preserve the field pair: invariance of the electric and magnetic fields",
+        "reference": "core-conditional-proofs.md#K7",
+        "design_state": "complete-exact-conditional-research-argument; sign and regularity conventions of def-em-potential-gauge-and-field-conventions",
+        "deps": [
+          "def-em-gauge-transformation",
+          "def-em-potential-gauge-and-field-conventions",
+          "def-em-fields",
+          "lem-em-joint-smooth-potentials",
+          "thm-the-curl-of-a-gradient-vanishes",
+          "thm-clairaut-schwarz-mixed-partials",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "thm-algebra-of-total-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-em-gauge-transformation": "formulation-prerequisite",
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "lem-em-joint-smooth-potentials": "mathematical-premise",
+          "thm-the-curl-of-a-gradient-vanishes": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules": "mathematical-premise",
+          "thm-algebra-of-total-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $c>0$, let $\\Omega\\subseteq\\mathbb R^3$ be open, let $I\\subseteq\\mathbb R$ be an interval with at least two elements ([[def-interval]]), let $k\\ge2$ be an integer, let $(\\varphi,A)$ be a potential pair of class $C^k$ jointly on $\\Omega\\times I$ and let $\\chi$ be a gauge function of class $C^k$ jointly on $\\Omega\\times I$, all in the conventions of [[def-em-potential-gauge-and-field-conventions]] and [[def-em-gauge-transformation]]: $E(\\varphi,A)=-\\nabla\\varphi-\\partial_tA$, $B(\\varphi,A)=\\operatorname{curl}A$ and $T_\\chi(\\varphi,A)=(\\varphi-\\partial_t\\chi,\\ A+\\nabla\\chi)$; for a non-open $I$ the joint $C^k$ classes are read in the open-neighbourhood restriction convention of [[lem-em-joint-smooth-potentials]] (for open $I$ this is the ordinary class of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\n\nThen $T_\\chi(\\varphi,A)$ is a potential pair of class $C^{k-1}$ jointly on $\\Omega\\times I$ and its field pair is the field pair of $(\\varphi,A)$:\n\n$$E(T_\\chi(\\varphi,A))=E(\\varphi,A),\\qquad B(T_\\chi(\\varphi,A))=B(\\varphi,A)\\qquad\\text{on }\\Omega\\times I,$$\n\nthe common values being maps $\\Omega\\times I\\to\\mathbb R^3$ of class $C^{k-1}$ jointly, that is, fields of the framework in the sense of [[def-em-fields]]. In particular gauge related potential representations of one field pair have equal field pairs: the electric and magnetic fields are gauge invariants of the framework, and no value of $\\varphi$, of $A$ or of $\\chi$ is asserted to be observable.\n\nThe proof uses only the defining formulas, the vanishing of $\\operatorname{curl}\\nabla\\chi$ for the $C^2$ function $\\chi$ and the equality of the time-space mixed partials $\\partial_t\\partial_i\\chi=\\partial_i\\partial_t\\chi$; no Maxwell equation, no hypothesis on $\\Omega$ beyond openness, and no choice principle is used.",
+        "strategy": "Magnetic field: $\\operatorname{curl}(A+\\nabla\\chi)=\\operatorname{curl}A+\\operatorname{curl}\\nabla\\chi=\\operatorname{curl}A$ by linearity of the curl ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]) and $\\operatorname{curl}\\nabla\\chi=0$ ([[thm-the-curl-of-a-gradient-vanishes]], applicable because $\\chi$ is $C^2$, indeed $C^k$ with $k\\ge2$). Electric field: componentwise, $-\\nabla(\\varphi-\\partial_t\\chi)-\\partial_t(A+\\nabla\\chi)=-\\nabla\\varphi-\\partial_tA+(\\nabla\\partial_t\\chi-\\partial_t\\nabla\\chi)$, where the bracket vanishes by equality of the mixed second partials of the $C^2$ function $\\chi$ ([[thm-clairaut-schwarz-mixed-partials]]) and the componentwise linearity of $\\nabla$ and $\\partial_t$ is [[thm-algebra-of-total-derivatives]] and [[def-directional-and-partial-derivatives]]. Regularity: $\\partial_t\\chi$ and $\\nabla\\chi$ are $C^{k-1}$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), so the transformed pair is $C^{k-1}$ and the two displayed field expressions are legitimate there; the common value equals the $C^{k-1}$ map $E(\\varphi,A)$, resp. $B(\\varphi,A)$, supplied by [[def-em-potential-gauge-and-field-conventions]]. No further hypothesis is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a73.2.2 printed p. 48 and \u00a75.3.1 printed pp. 105-106: A -> A + grad chi and phi -> phi - dchi/dt leave B = curl A and E = -grad phi - dA/dt unchanged"
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, Third Revised English Edition (Course of Theoretical Physics vol. 2, Pergamon Press 1971, 387 pp.)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "\u00a718 printed pp. 49-50: the replacement (18.3) does not change the electric and magnetic fields determined from (17.3)-(17.4); only gauge-invariant quantities have physical meaning"
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a710.1.2 printed pp. 419-420: E and B are unchanged when A -> A + grad lambda and V -> V - dlambda/dt"
+            }
+          ]
+        },
+        "physical_scope": "The gauge invariance of the field pair of the classical vacuum electromagnetic framework on a laboratory region: gauge related potential representations of the framework's fields, in the conventions of [[def-em-potential-gauge-and-field-conventions]], define the same electric and magnetic fields. The statement is conditional on the joint regularity of the pair and the generator; it contains no claim about the existence of generators meeting prescribed data, no empirical claim, and no assertion that a particular gauge is convenient or available.",
+        "dependency_level": 16
+      },
+      {
+        "id": "pthm-em-lorenz-gauge-wave-form",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Maxwell's equations in potential form: the Lorenz divergence, the decoupled wave equations and residual generators",
+        "reference": "core-conditional-proofs.md#K7",
+        "design_state": "complete-exact-conditional-research-argument; the exact algebraic identities are stated with their pointwise-regularity hypotheses; solvability is left to the reachability theorem",
+        "deps": [
+          "pthm-em-spacetime-potentials",
+          "def-em-gauge-transformation",
+          "pthm-em-gauge-invariance",
+          "post-em-vacuum-maxwell",
+          "def-em-potential-gauge-and-field-conventions",
+          "def-em-fields",
+          "def-em-sources",
+          "lem-em-joint-smooth-potentials",
+          "cor-the-curl-of-a-curl-of-a-c2-field",
+          "def-laplacian-of-a-c2-function",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-algebra-of-derivatives",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "thm-the-divergence-of-a-curl-vanishes",
+          "thm-the-curl-of-a-gradient-vanishes",
+          "def-directional-and-partial-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "pthm-em-spacetime-potentials": "physical-result",
+          "def-em-gauge-transformation": "formulation-prerequisite",
+          "pthm-em-gauge-invariance": "physical-result",
+          "post-em-vacuum-maxwell": "physical-assumption",
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "lem-em-joint-smooth-potentials": "mathematical-premise",
+          "cor-the-curl-of-a-curl-of-a-c2-field": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules": "mathematical-premise",
+          "thm-the-divergence-of-a-curl-vanishes": "mathematical-premise",
+          "thm-the-curl-of-a-gradient-vanishes": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $c>0$, let $\\Omega\\subseteq\\mathbb R^3$ be open, let $I\\subseteq\\mathbb R$ be an interval with at least two elements ([[def-interval]]), and let $(\\varphi,A)$ be a potential pair of class $C^2$ jointly on $\\Omega\\times I$ in the restriction convention of [[lem-em-joint-smooth-potentials]] ([[def-em-potential-gauge-and-field-conventions]]): for open $I$ this is the ordinary open-domain class of [[def-ck-euclidean-maps-and-diffeomorphisms]], and for non-open $I$ the pair is the restriction of a $C^2$ pair on an open neighbourhood of $\\Omega\\times I$, with relative derivatives at included endpoints and no time jet beyond the restricted values. Write $(E,B)$ for the field pair of $(\\varphi,A)$ ([[def-em-fields]]) and\n\n$$G:=\\operatorname{div}A+c^{-2}\\partial_t\\varphi,\\qquad W:=c^{-2}\\partial_t^2-\\Delta$$\n\nfor the Lorenz divergence and the wave expression of [[def-em-potential-gauge-and-field-conventions]], with $\\Delta$ the Laplacian of [[def-laplacian-of-a-c2-function]]. Let $\\rho:\\Omega\\times I\\to\\mathbb R$ and $J:\\Omega\\times I\\to\\mathbb R^3$ be continuous source fields of the framework ([[def-em-sources]]).\n\n(a) [Exact identities] Independently of any field equation,\n\n$$\\operatorname{div}E=W\\varphi-\\partial_tG,\\qquad \\operatorname{curl}B-c^{-2}\\partial_tE=WA+\\nabla G\\qquad\\text{on }\\Omega\\times I.$$\n\nConsequently the sourced Maxwell equations of [[post-em-vacuum-maxwell]] hold for $(E,B,\\rho,J)$ if and only if\n\n$$W\\varphi-\\partial_tG=\\frac{\\rho}{\\varepsilon_0},\\qquad WA+\\nabla G=\\mu_0J\\qquad\\text{on }\\Omega\\times I,$$\n\nwith $\\varepsilon_0=(\\mu_0c^2)^{-1}$ the constant of that postulate.\n\n(b) [Gauge shift] If $\\chi:\\Omega\\times I\\to\\mathbb R$ is a gauge function of class $C^2$ jointly on $\\Omega\\times I$ ([[def-em-gauge-transformation]]), then $G(T_\\chi(\\varphi,A))=G-W\\chi$ on $\\Omega\\times I$ and the transformed pair has the same field pair $(E,B)$ ([[pthm-em-gauge-invariance]]); hence $T_\\chi(\\varphi,A)$ is in Lorenz gauge if and only if $W\\chi=G$ on $\\Omega\\times I$.\n\n(c) [Decoupling in Lorenz gauge] Suppose in addition that the given pair is in Lorenz gauge, $G=0$ on $\\Omega\\times I$. Then its field pair solves the sourced Maxwell system of [[post-em-vacuum-maxwell]] if and only if the pair satisfies the decoupled sourced wave equations\n\n$$W\\varphi=\\rho/\\varepsilon_0,\\qquad WA=\\mu_0J\\qquad\\text{on }\\Omega\\times I.$$\n\nThe two source-free equations $\\operatorname{div}B=0$ and $\\operatorname{curl}E=-\\partial_tB$ hold automatically for every potential pair of class $C^2$. For an arbitrary given potential pair, the conjunction of Lorenz gauge with these two wave equations implies the sourced Maxwell system, but Maxwell's equations alone do not impose $G=0$ on that representative: their exact equivalent conditions remain the residual equations of (a), whose right-hand sides retain $\\partial_tG$ and $\\nabla G$.\n\n(d) [Residual generators] If the $C^2$ gauge function of (b) satisfies $W\\chi=0$ on $\\Omega\\times I$, then the transform of a pair in Lorenz gauge is again in Lorenz gauge and has the same field pair. When $\\Omega$ is nonempty the Lorenz condition does not determine the pair: the generator $\\chi(x,t)=x_1$, read in numerical SI components with gauge units as in [[def-em-gauge-transformation]], has $W\\chi=0$ and changes $A$ by the nonzero constant vector $(1,0,0)$.\n\n(e) [Scope] The identities and equivalences are properties of the given $C^2$ representation. No gauge function with $W\\chi=G$, and no generator meeting prescribed initial or boundary values, is asserted to exist; that is a separate PDE conclusion with its own hypotheses, treated by the gauge-reachability theorem later on this page. No boundary, decay or initial condition on the pair is imposed, and no empirical claim or observability of $\\varphi$ or $A$ is included. A pair of class $C^1$ defines $E$, $B$ and $G$ but need not possess the second derivatives appearing in $W\\varphi$, $WA$, $\\Delta$ or $\\partial_tG$, so $C^2$ is the exact standing regularity here.",
+        "strategy": "(a) Componentwise expansion using the sum rules for divergence and curl ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]), the vector identity $\\operatorname{curl}\\operatorname{curl}A=\\nabla\\operatorname{div}A-\\Delta A$ for the $C^2$ field $A$ ([[cor-the-curl-of-a-curl-of-a-c2-field]]), the definition $\\Delta\\varphi=\\operatorname{div}\\nabla\\varphi$ ([[def-laplacian-of-a-c2-function]]) and the equality of mixed partials of the $C^2$ functions $\\varphi,A$ ([[thm-clairaut-schwarz-mixed-partials]]): $\\operatorname{div}E=-\\Delta\\varphi-\\partial_t\\operatorname{div}A=W\\varphi-\\partial_tG$, and $\\operatorname{curl}B-c^{-2}\\partial_tE=\\operatorname{curl}\\operatorname{curl}A+c^{-2}\\partial_t\\nabla\\varphi+c^{-2}\\partial_t^2A=\\nabla\\operatorname{div}A-\\Delta A+c^{-2}\\partial_t\\nabla\\varphi+c^{-2}\\partial_t^2A=WA+\\nabla G$. The two source-free equations hold automatically for a potential pair by [[thm-the-divergence-of-a-curl-vanishes]] and [[thm-the-curl-of-a-gradient-vanishes]] with the linearity of curl ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]); hence the equivalence with the sourced system. (b) Direct expansion of $T_\\chi$: $G(T_\\chi(\\varphi,A))=\\operatorname{div}A+\\Delta\\chi+c^{-2}\\partial_t\\varphi-c^{-2}\\partial_t^2\\chi=G-W\\chi$, using linearity and the $C^2$ mixed-partials identity for $\\chi$ ([[thm-clairaut-schwarz-mixed-partials]], [[def-directional-and-partial-derivatives]]); the field part is [[pthm-em-gauge-invariance]]. (c) Under the explicitly imposed hypothesis $G=0$, the continuously defined derivatives $\\partial_tG$ and $\\nabla G$ vanish. Substitution in (a) turns the two sourced residual equations exactly into $W\\varphi=\\rho/\\varepsilon_0$ and $WA=\\mu_0J$. Conversely those two wave equations with $G=0$ make the residual equations hold, and the two source-free equations were already proved for every potential pair. There is no inference from Maxwell alone to a gauge condition; (d) is (b) with $G=0$ and $W\\chi=0$. All statements are pointwise on $\\Omega\\times I$; the constants $\\varepsilon_0=(\\mu_0c^2)^{-1}$ are those of the framework postulates ([[post-em-vacuum-maxwell]]). No choice principle, no hypothesis on the shape of $\\Omega$ and no solvability of $W\\chi=G$ is used. The decoupling inference uses a time interval with at least two elements, so relative endpoint derivatives are determined; singleton use requires ambient hypotheses before restriction. The explicit residual nonuniqueness witness requires a nonempty spatial domain.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a76.1 printed pp. 134-135, eqs. (6.1)-(6.4): the potential formulation, the reduction of the Maxwell equations to the sourced wave equation in Lorentz gauge, and the gauge-transformation identity for the divergence"
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, Third Revised English Edition (Course of Theoretical Physics vol. 2, Pergamon Press 1971, 387 pp.)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "\u00a718 printed pp. 49-50: the gauge transformation and its effect on the potentials, with the fields unchanged"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "\u00a77.1 printed pp. 167-170, eqs. (7.1)-(7.2): the d'Alembert operator and the wave equation normalization u_tt = c^2 Delta u converted to the framework's W = c^{-2} d_t^2 - Delta"
+            }
+          ]
+        },
+        "physical_scope": "Exact pointwise identities for a given jointly C^2 potential representation of the adopted sourced vacuum Maxwell system. The sourced Maxwell equations are equivalent to the residual equations in (a). Within the separately declared Lorenz gauge G=0 they are equivalent to the two decoupled sourced wave equations. Maxwell alone does not select a gauge representative. Homogeneous-wave gauge generators preserve Lorenz gauge and the fields. No gauge solvability, prescribed data, boundary, decay, empirical observation or observability of potentials is asserted.",
+        "dependency_level": 17
+      },
+      {
+        "id": "pthm-em-gauge-reachability",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Gauge reachability: Lorenz gauge on the all-space slab and Coulomb gauge on a bounded smooth domain, with residual freedom",
+        "reference": "core-conditional-proofs.md#K7 and completed-expansion-arguments.md#W6; bounded-domain branch closed locally with the published elliptic resolvent and higher-order Dirichlet estimates; branch (b) parameter/ambient extension and compatible boundary-family estimates: physics-em-sr-40-2026-10-08-gauge-reachability-regularity-proposal.md",
+        "design_state": "complete branch argument preserving the two Lorenz/Coulomb settings and restoring smooth parameter-dependent admissible Dirichlet/Neumann boundary data; incompatible data remain excluded",
+        "deps": [
+          "pthm-em-lorenz-gauge-wave-form",
+          "def-em-gauge-transformation",
+          "pthm-em-gauge-invariance",
+          "pthm-em-spacetime-potentials",
+          "lem-em-gauge-wave-reachability",
+          "thm-em-elliptic-boundary-existence",
+          "lem-em-joint-smooth-potentials",
+          "lem-em-zero-boundary-coercivity",
+          "thm-higher-order-boundary-regularity-for-dirichlet-problems",
+          "thm-higher-order-sobolev-embedding",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-em-potential-gauge-and-field-conventions",
+          "def-em-fields",
+          "def-star-shaped-open-subset-of-rn",
+          "def-interval",
+          "def-laplacian-of-a-c2-function",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-algebra-of-derivatives",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-zero-derivative-implies-constant",
+          "cor-primitives-of-a-continuous-function",
+          "def-oriented-integral",
+          "cor-first-green-identity-on-a-bounded-c-one-domain",
+          "lem-em-parameter-dependent-smooth-poisson-boundary-solvers",
+          "lem-em-parameter-integrals",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets"
+        ],
+        "dependency_roles": {
+          "pthm-em-lorenz-gauge-wave-form": "physical-result",
+          "def-em-gauge-transformation": "formulation-prerequisite",
+          "pthm-em-gauge-invariance": "physical-result",
+          "pthm-em-spacetime-potentials": "physical-result",
+          "lem-em-gauge-wave-reachability": "mathematical-premise",
+          "thm-em-elliptic-boundary-existence": "mathematical-premise",
+          "lem-em-joint-smooth-potentials": "mathematical-premise",
+          "lem-em-zero-boundary-coercivity": "mathematical-premise",
+          "thm-higher-order-boundary-regularity-for-dirichlet-problems": "mathematical-premise",
+          "thm-higher-order-sobolev-embedding": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-bounded-c-k-domain-and-boundary-charts": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-star-shaped-open-subset-of-rn": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "cor-primitives-of-a-continuous-function": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "cor-first-green-identity-on-a-bounded-c-one-domain": "mathematical-premise",
+          "lem-em-parameter-dependent-smooth-poisson-boundary-solvers": "mathematical-premise",
+          "lem-em-parameter-integrals": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ in branch (a), and the Axiom of Choice together with $\\mathrm{AC}_\\omega$ as declared by its weak-solvability lemmas in branch (b) ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $c>0$ and let $(\\varphi,A)$ be a potential pair of the framework ([[def-em-potential-gauge-and-field-conventions]], [[def-em-fields]]) with field pair $(E,B)$ and Lorenz divergence $G=\\operatorname{div}A+c^{-2}\\partial_t\\varphi$.\n\n(a) [All-space slab; Lorenz gauge] Let $t_0<T$ and let $(\\varphi,A)$ be of class $C^\\infty$ in the extension sense on $\\mathbb R^3\\times[t_0,T]$ (the restriction of a $C^\\infty$ pair on $\\mathbb R^3\\times J$ for some open interval $J\\supset[t_0,T]$; [[def-ck-euclidean-maps-and-diffeomorphisms]]). Then there is a gauge function $\\chi$ of class $C^\\infty$ in the extension sense on $\\mathbb R^3\\times[t_0,T]$ with $\\chi(\\cdot,t_0)=0$, $\\partial_t\\chi(\\cdot,t_0)=0$ and $W\\chi=G$ on $\\mathbb R^3\\times(t_0,T)$; the transformed pair $T_\\chi(\\varphi,A)$ is in Lorenz gauge on $\\mathbb R^3\\times(t_0,T)$, has the same field pair $(E,B)$, and any two such gauge functions differ by a solution of $W\\chi=0$. This is the exact content of [[lem-em-gauge-wave-reachability]] read for potential pairs of the framework; its physical content is that every smooth potential representation of a field pair on a slab admits a Lorenz-gauge representative with zero gauge Cauchy data at $t_0$, without changing the fields.\n\n(b) [Bounded smooth domain; Coulomb gauge with admissible boundary families] Let $\\Omega\\subset\\mathbb R^3$ be a bounded $C^\\infty$ graph domain ([[def-bounded-c-k-domain-and-boundary-charts]]), let $I\\subseteq\\mathbb R$ be an arbitrary interval, possibly unbounded, and let $(\\varphi,A)$ be $C^\\infty$ on an actual neighbourhood of $\\overline\\Omega\\times\\overline I$. Prescribe either (i) a Dirichlet family $g_D(p,t)$ smooth in boundary charts on a neighbourhood of $\\partial\\Omega\\times\\overline I$, or (ii) an outward conormal family $\\kappa(p,t)$ with the same smoothness and the compatibility $\\int_{\\Omega_j}\\varepsilon_0\\operatorname{div}A(\\cdot,t)\\,dx+\\int_{\\partial\\Omega_j}\\kappa(\\cdot,t)\\,dS=0$ for every connected component $\\Omega_j$ of $\\Omega$ and every $t\\in I$. Then there is a gauge generator $\\psi$, the restriction of one $C^\\infty$ function on an actual open neighbourhood of $\\overline\\Omega\\times\\overline I$, such that $\\operatorname{div}(A+\\nabla\\psi)=0$ on $\\Omega\\times I$. In case (i), $\\psi(p,t)=g_D(p,t)$ on $\\partial\\Omega\\times I$, and its restriction to $\\Omega\\times I$ is unique with those Dirichlet values. In case (ii), $\\varepsilon_0\\partial_\\nu\\psi(p,t)=\\kappa(p,t)$ there, and imposing $\\int_{\\Omega_j}\\psi(\\cdot,t)\\,dx=0$ for every component and every $t$ gives a unique generator on $\\Omega\\times I$; without that normalization it is unique modulo smooth time-dependent spatial constants on each component. The transformed pair $T_\\psi(\\varphi,A)$ is in Coulomb gauge and has the same physical field pair ([[pthm-em-gauge-invariance]]). Any two Coulomb-gauge generators differ by a function spatially harmonic at every $t$; equal Dirichlet data eliminate that residual freedom, whereas equal Neumann data leave only the componentwise constants just described. Zero Dirichlet data are the corresponding special case. These uniqueness statements concern generator values on $\\Omega\\times I$. For $I$ with at least two elements, they also determine the transformed potential pair in the Dirichlet or normalized Neumann case, since spatial and relative time derivatives of equal smooth restrictions agree. For singleton $I$, the ambient time derivative of the generator is not determined by its restricted values, so uniqueness of the transformed pair is not asserted. Auxiliary ambient continuations away from the physical region need not be unique.\n\n(c) [Residual freedom on star-shaped domains] Let $\\Omega\\subseteq\\mathbb R^3$ be open and star-shaped ([[def-star-shaped-open-subset-of-rn]]) and let $(\\varphi,A)$, $(\\tilde\\varphi,\\tilde A)$ be two potential pairs of class $C^2$ jointly on $\\Omega\\times I$ ([[def-interval]]) with the same field pair, both in Lorenz gauge. If $I$ is non-open, these $C^2$ classes and the resulting generator use the open-neighbourhood restriction convention of [[lem-em-joint-smooth-potentials]]; for the physical open laboratory interval they have their ordinary $C^2$ meaning. If a degenerate $I$ is used in this branch, choose the ambient $C^2$ extensions as part of the data: the same-field and Lorenz conditions refer to these extensions on an ambient time neighbourhood before restriction, and their time jets are not determined uniquely by the restricted values alone. Then there is a gauge function $\\chi$ of class $C^2$ jointly with $(\\tilde\\varphi,\\tilde A)=T_\\chi(\\varphi,A)$ and $W\\chi=0$ on $\\Omega\\times I$.\n\n(d) [Scope] Nothing is asserted about gauge functions meeting arbitrary prescribed boundary or initial restrictions: in (a) the gauge function has zero Cauchy data at $t_0$ and no spatial boundary condition or decay, and $\\Omega$ is all of $\\mathbb R^3$; in (b) the datum is either a smooth time-dependent Dirichlet family or a smooth outward conormal family satisfying the stated componentwise compatibility at every physical time, with zero-mean normalization for Neumann uniqueness; the older promise of a global Lorenz gauge on a bounded domain with prescribed boundary data is explicitly outside this result. The Coulomb-gauge statement concerns the spatial divergence in the chosen inertial chart, and the instantaneous appearance of the Coulomb potential is a property of the representation, not a signal: only the field pair $(E,B)$ is physical content ([[def-em-fields]]).",
+        "strategy": "(a) is [[lem-em-gauge-wave-reachability]] with its hypotheses and countable choice carried verbatim; the pair of the framework enters only through the vocabulary, so nothing is reproved. (b) The fixed-time smooth Dirichlet and compatible Neumann interfaces are those of [[thm-em-elliptic-boundary-existence]], and their parameter-compatible ambient smoothness, exact boundary lifts, complete natural-Neumann estimates and normalized uniqueness are supplied by the earlier pure-mathematical [[lem-em-parameter-dependent-smooth-poisson-boundary-solvers]]. Use the original open neighbourhood of the potentials and of the boundary family to choose an open time interval $J$ containing $\\overline I$ by compactness of each fixed spatial/boundary fibre; only $\\overline\\Omega\\times K$, with compact $K\\subset J$, is used for derivative bounds, never compactness of all $\\overline I$. Put $F_t=\\varepsilon_0\\operatorname{div}A(\\cdot,t)$. In the Dirichlet case the supplier constructs a fixed finite-chart spatial lift $H_t=L_Dg_D(\\cdot,t)$ and the zero-trace operator $R$ for $-\\varepsilon_0\\Delta$ from its exact weak solver, including every $L^2$ source, with its higher-order bounds. Set $\\psi_t=H_t+R(F_t+\\varepsilon_0\\Delta H_t)$. Differentiation includes the lift at every order: $\\partial_t^j\\psi_t=L_D\\partial_t^jg_D+R(\\partial_t^jF_t+\\varepsilon_0\\Delta L_D\\partial_t^jg_D)$. Thus the spatial equation is $-\\varepsilon_0\\Delta\\psi_t=F_t$ and the Dirichlet family is exact. In the Neumann case use the same supplier's compatible normalized weak solver and natural-boundary estimates. Compatibility is imposed only for $t\\in I$: on an open $J$, define $c_j(t)=\\int_{\\Omega_j}F_t+\\int_{\\partial\\Omega_j}\\kappa_t$ and the auxiliary bulk extension $\\widehat F_t=F_t-c_j(t)/|\\Omega_j|$ on each of the finitely many components. It is smooth, compatible for all $t\\in J$ and agrees with $F_t$ on $I$; no equation for the gauge outside the physical interval is promised. Apply the parameter solver to $(\\widehat F,\\kappa)$ with zero mean on each component. In either case locally uniform compact-time difference-quotient estimates give all mixed derivatives up to the boundary, and the supplier's fixed parameter-preserving Seeley construction supplies one actual ambient $C^\\infty$ continuation, not merely separate finite-order Sobolev representatives. The resulting generator obeys $\\Delta\\psi=-\\operatorname{div}A$ on every physical time, with the requested boundary data, so it is Coulomb gauge and preserves the fields by [[pthm-em-gauge-invariance]]. Elliptic uniqueness gives the stated normalized uniqueness on $\\Omega\\times I$; subtracting any two Coulomb generators gives $\\Delta\\chi=0$ and the listed Dirichlet/Neumann residual freedom. This argument retains the Axiom of Choice and Countable Choice hypotheses of the variational, chart and Sobolev suppliers, and imposes no global time bounds or extra regularity restriction. (c) Put $\\delta\\varphi=\\tilde\\varphi-\\varphi$ and $\\delta A=\\tilde A-A$. Equality of the field pairs gives $\\operatorname{curl}\\delta A=0$ and $\\nabla\\delta\\varphi+\\partial_t\\delta A=0$. Apply the corrected scalar lemma to $C=\\delta A$ and denote its negative-gradient witness by $\\phi_{\\delta A}(x,t)=-\\int_0^1\\langle\\delta A(a+s(x-a),t),x-a\\rangle ds$. Then $\\nabla\\phi_{\\delta A}=-\\delta A$ and $\\phi_{\\delta A}$ is jointly $C^2$. Take $$\\chi_0=-\\phi_{\\delta A}=\\int_0^1\\langle\\delta A(a+s(x-a),t),x-a\\rangle ds,$$ so $\\nabla\\chi_0=\\delta A$. This additional negation is essential; using the lemma's negative-gradient witness itself as the gauge generator would reverse the vector-potential difference. Mixed partials of the $C^2$ function $\\chi_0$ now give $\\nabla(\\delta\\varphi+\\partial_t\\chi_0)=\\nabla\\delta\\varphi+\\partial_t\\delta A=0$. For fixed t, restrict this $C^1$ scalar to each radial segment $a+s(x-a)$; the chain rule gives zero derivative, and cor-zero-derivative-implies-constant gives its common value $h(t)=\\delta\\varphi(a,t)+\\partial_t\\chi_0(a,t)$. Since $\\chi_0(a,t)=0$ for every t, the time derivative there is zero, so $h(t)=\\delta\\varphi(a,t)$ (in particular h is C1; indeed C2 under the stated hypotheses). For nondegenerate I, fix $t_*\\in I$ and set $$\\eta(t)=-\\int_{t_*}^{t}h(u)du.$$ cor-primitives-of-a-continuous-function gives $\\eta'=-h$ on I, with relative endpoint derivatives; since h is C1, eta is C2. Put $\\chi=\\chi_0+\\eta$. Then $\\nabla\\chi=\\delta A$ and $\\partial_t\\chi=\\partial_t\\chi_0-h=-\\delta\\varphi$, so $T_\\chi(\\varphi,A)=(\\tilde\\varphi,\\tilde A)$. Finally the unchanged exact gauge-shift identity in pthm-em-lorenz-gauge-wave-form(b) gives $0=G(\\tilde\\varphi,\\tilde A)=G(\\varphi,A)-W\\chi=-W\\chi$, hence $W\\chi=0$. The corrected radial construction gives chi0 as a C2 restriction from an open radial-admissibility neighbourhood. At the centre, the data extension gives h(t)=delta phi(a,t) on an open time neighbourhood; take the interval component containing I and construct the time primitive there. Adding this primitive to the chi0 extension yields a C2 extension on the intersection neighbourhood of Omega x I. Thus the asserted generator retains the same regularity convention at included endpoints of nondegenerate time intervals. Degenerate interval restrictions do not supply unique time jets: any use of this time-derivative branch there carries chosen ambient extensions and the same-field/Lorenz hypotheses on an ambient time neighbourhood, to which the nondegenerate construction applies before restriction. On an empty restriction there are no pointwise equations to prove. The physical laboratory branch already uses a nonempty open time interval.  This residual construction uses no choice principle; the preexisting Choice assumptions in branches (a)-(b) remain exactly as stated. The linearity of $\\nabla$ and $\\partial_t$ used throughout is [[thm-algebra-of-derivatives]] and [[def-directional-and-partial-derivatives]]; $H^m$ notation is [[def-sobolev-space-wkp-and-its-norm]], and the elliptic problems use the domains of [[def-bounded-c-k-domain-and-boundary-charts]]. The declared Choice assumptions enter only through the elliptic existence theorem and the wave supplier and are carried in the statement. No claim beyond (a)-(c) is made. Dirichlet and normalized Neumann uniqueness concern generator values for arbitrary I; they imply transformed-pair uniqueness only when I has at least two elements, as Proof 3.1 now establishes.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a76.1 printed pp. 134-135 (the claim and proof that a gauge function with square-box chi = f can always be found, reducing the Maxwell equations to the sourced wave equation) and \u00a73.2.2 printed pp. 48-49 (the Coulomb-gauge construction by solving the Poisson equation for chi)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "\u00a77.1 printed pp. 167-170, Theorem 7.2 and Corollary 7.3 with (7.11)-(7.12): existence, uniqueness and regularity for the wave Cauchy problem with source and zero data on a slab"
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a710.1.3 printed pp. 421-423: the Coulomb gauge div A = 0 with the Poisson equation for the scalar potential, the Lorentz gauge, and the explicit remark that the instantaneous appearance of the Coulomb potential is not a measurable signal because only E and B are observable"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (UC Davis, revised 18 June 2014, complete 242-page two-quarter graduate notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a74.12 printed pp. 116-117, Theorem 4.31 and Corollary 4.32: the higher-order H^{k+2} Dirichlet estimate and the C^infty regularity for smooth data used in the parameter-smoothness argument of branch (b)"
+            }
+          ]
+        },
+        "physical_scope": "Gauge reachability for potential representations of the classical vacuum electromagnetic framework, in exactly two declared branches: the all-space smooth slab branch, where a Lorenz-gauge representative with zero gauge Cauchy data exists (carrying countable choice through the wave supplier), and the bounded smooth-domain branch, where a Coulomb-gauge generator with prescribed smooth parameter-dependent Dirichlet data exists with unique values on the physical region, or with componentwise-compatible smooth Neumann flux data exists with unique values after zero-mean normalization; these generator-value uniqueness statements determine a unique transformed potential pair when the physical time interval has at least two elements (carrying the choice assumptions declared by the elliptic supplier). The item also classifies residual freedom on star-shaped domains. It makes no empirical claim, asserts nothing about arbitrary prescribed boundary or initial restrictions, and does not claim that gauge conditions are physically observable.",
+        "dependency_level": 18
+      }
+    ]
+  },
+  {
+    "order": 342,
+    "id": "em-potentials-and-gauge-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Potentials and gauge \u2014 Examples",
+    "companion": "em-potentials-and-gauge",
+    "requires": [
+      "em-potentials-and-gauge"
+    ],
+    "items": [
+      {
+        "id": "ex-em-topological-potential-obstructions",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Topological obstructions to global potentials: a curl-free loop field and a divergence-free sphere-flux field",
+        "reference": "worked-example-verifications.md#X5",
+        "design_state": "complete-exact-conditional-research-argument; the vector obstruction is sharpened from C^2 to C^1 potentials by patch Stokes plus internal edge cancellation",
+        "deps": [
+          "pthm-em-spacetime-potentials",
+          "post-em-vacuum-maxwell",
+          "def-vector-potential-of-a-c1-vector-field",
+          "def-closed-and-exact-c1-vector-fields",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "lem-a-vector-line-integral-pulls-back-to-the-parameter-region",
+          "thm-gradient-theorem-for-line-integrals",
+          "thm-ftc-second-part",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-jordan-fubini-by-sections",
+          "def-riemann-integral-over-a-jordan-set",
+          "def-type-i-type-ii-and-elementary-green-regions",
+          "def-positive-orientation-for-elementary-region-boundaries",
+          "def-the-induced-boundary-chain-of-a-c2-surface-patch",
+          "thm-the-classical-stokes-theorem-for-a-c2-surface-patch",
+          "thm-line-integrals-under-reversal-and-concatenation",
+          "thm-radial-straight-line-map-on-punctured-rn",
+          "lem-radial-normalisation-is-continuous",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "def-simply-connected",
+          "def-path-connected",
+          "cor-euclidean-spheres-are-path-connected",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-based-loops-and-fundamental-group",
+          "cor-homotopy-relative-and-path-homotopy-are-equivalence-relations",
+          "cor-linear-maps-with-finite-dimensional-domain-are-bounded",
+          "thm-bounded-linear-operator-equivalences",
+          "lem-algebra-of-continuous-real-maps-on-a-space",
+          "thm-path-connected-implies-connected",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-real-power-continuity-and-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-star-shaped-open-subset-of-rn",
+          "def-euclidean-inner-product",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "pthm-em-spacetime-potentials": "physical-result",
+          "post-em-vacuum-maxwell": "physical-assumption",
+          "def-vector-potential-of-a-c1-vector-field": "mathematical-premise",
+          "def-closed-and-exact-c1-vector-fields": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths": "mathematical-premise",
+          "lem-a-vector-line-integral-pulls-back-to-the-parameter-region": "mathematical-premise",
+          "thm-gradient-theorem-for-line-integrals": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "thm-quarter-turn-values-and-shift-formulas": "mathematical-premise",
+          "thm-sine-and-cosine-parametrize-the-unit-circle": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "def-admissible-regular-parametrized-surface-patch": "mathematical-premise",
+          "def-oriented-unit-normal-and-flux-of-a-surface-patch": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-jordan-fubini-by-sections": "mathematical-premise",
+          "def-riemann-integral-over-a-jordan-set": "mathematical-premise",
+          "def-type-i-type-ii-and-elementary-green-regions": "mathematical-premise",
+          "def-positive-orientation-for-elementary-region-boundaries": "mathematical-premise",
+          "def-the-induced-boundary-chain-of-a-c2-surface-patch": "mathematical-premise",
+          "thm-the-classical-stokes-theorem-for-a-c2-surface-patch": "mathematical-premise",
+          "thm-line-integrals-under-reversal-and-concatenation": "mathematical-premise",
+          "thm-radial-straight-line-map-on-punctured-rn": "mathematical-premise",
+          "lem-radial-normalisation-is-continuous": "mathematical-premise",
+          "thm-higher-dimensional-spheres-are-simply-connected": "mathematical-premise",
+          "def-simply-connected": "mathematical-premise",
+          "def-path-connected": "mathematical-premise",
+          "cor-euclidean-spheres-are-path-connected": "mathematical-premise",
+          "def-homotopy-relative-and-path-homotopy": "mathematical-premise",
+          "def-based-loops-and-fundamental-group": "mathematical-premise",
+          "cor-homotopy-relative-and-path-homotopy-are-equivalence-relations": "mathematical-premise",
+          "cor-linear-maps-with-finite-dimensional-domain-are-bounded": "mathematical-premise",
+          "thm-bounded-linear-operator-equivalences": "mathematical-premise",
+          "lem-algebra-of-continuous-real-maps-on-a-space": "mathematical-premise",
+          "thm-path-connected-implies-connected": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-star-shaped-open-subset-of-rn": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Write points of $\\mathbb R^3$ as $x=(x,y,z)$ with the Euclidean inner product and norm of [[def-euclidean-inner-product]], and let $U_1:=\\mathbb R^3\\setminus\\{(0,0,z):z\\in\\mathbb R\\}$ and $U_2:=\\mathbb R^3\\setminus\\{0\\}$ be the complements of the $z$-axis and of the origin, two open sets.\n\n(a) [Scalar obstruction] On $U_1$ the field\n\n$$F(x,y,z):=\\frac{(-y,\\,x,\\,0)}{x^2+y^2}$$\n\nis of class $C^\\infty$, satisfies $\\operatorname{curl}F=0$ on $U_1$ with the curl of [[def-divergence-and-curl-of-a-c1-vector-field]], and is not the gradient of any $C^2$ function on $U_1$, in the sense of exactness of [[def-closed-and-exact-c1-vector-fields]]. Its circulation around the positively oriented unit circle $\\gamma(t)=(\\cos t,\\sin t,0)$, $t\\in[0,2\\pi]$, in the sense of [[def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]], equals $2\\pi$; the gradient theorem would force circulation zero for a gradient of a $C^2$ function. Hence a curl-free smooth field on a connected open set need not have a global scalar potential, and the star-shaped hypothesis of [[pthm-em-spacetime-potentials]] cannot be dropped.\n\n(b) [Vector obstruction] On $U_2$ the field\n\n$$B(x):=\\frac{x}{\\lVert x\\rVert_2^{\\,3}}$$\n\nis of class $C^\\infty$ and satisfies $\\operatorname{div}B=0$, but there is no vector potential $A$ of class $C^1$ on $U_2$ with $\\operatorname{curl}A=B$ in the sense of [[def-vector-potential-of-a-c1-vector-field]]. Indeed the flux of $B$ through the unit sphere in the orientation of the spherical parametrization $\\Phi(\\phi,\\theta):=(\\sin\\phi\\cos\\theta,\\ \\sin\\phi\\sin\\theta,\\ \\cos\\phi)$ is $4\\pi$, while the classical Stokes theorem applied to the two closed hemispherical $C^2$ patches with induced boundary chains forces that flux to equal a sum of boundary circulations which cancels to zero.\n\n(c) [The punctured space is simply connected] $\\mathbb R^3\\setminus\\{0\\}$ is simply connected in the sense of [[def-simply-connected]]: it is path-connected and every based loop in it is null-homotopic. Consequently simple connectivity of the domain is by itself not sufficient for the existence of a vector potential.\n\n(d) [Scope] The two obstructions have different characters: (a) is detected by the circulation of a closed loop, (b) by the flux through a closed surface. The fields displayed are smooth mathematical witnesses on the punctured open sets; the framework's postulate [[post-em-vacuum-maxwell]] excludes magnetic charge, and no physical source, physical singularity or empirical claim is attached to them.",
+        "strategy": "(a) Differentiate the components of $F$ by the quotient rule ([[thm-algebra-of-derivatives]]) to get $\\operatorname{curl}F=0$; parametrize the unit circle, use the pullback identity for vector line integrals and the sine/cosine derivative and Pythagorean identities to get $F(\\gamma(t))\\cdot\\gamma'(t)=1$, and evaluate $\\int_0^{2\\pi}1\\,dt=2\\pi$ by the fundamental theorem ([[thm-ftc-second-part]]). The gradient theorem for a $C^2$ potential gives zero circulation around the closed curve $\\gamma$, so $F$ is not a gradient ([[thm-gradient-theorem-for-line-integrals]], [[def-closed-and-exact-c1-vector-fields]]). (b) Compute $\\operatorname{div}B=\\sum_i\\partial_i(x_i\\|x\\|_2^{-3})=3\\|x\\|_2^{-3}-3\\|x\\|_2^{-5}\\sum_ix_i^2=0$ by the chain and product rules ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[thm-real-power-continuity-and-derivatives]]). For the flux, differentiate $\\Phi$ to get $\\Phi_\\phi\\times\\Phi_\\theta=\\sin\\phi\\,\\Phi$ ([[def-cross-product-in-r3]], [[lem-cross-product-is-bilinear-alternating-and-orthogonal]], [[thm-sine-and-cosine-derivatives]]); since $B(\\Phi)=\\Phi$ on the unit sphere, the integrand is $\\sin\\phi$, and Fubini with the fundamental theorem evaluate the double integral as $4\\pi$ ([[thm-jordan-fubini-by-sections]], [[thm-ftc-second-part]], [[def-riemann-integral-over-a-jordan-set]]). Suppose $A$ is $C^1$ on the open set $U_2$ with $\\operatorname{curl}A=B$. Each hemisphere rectangle is a finite elementary Green region with its positive boundary chain and the spherical parametrization restricted to it is a $C^2$ regular patch whose image lies in $U_2$, so the classical Stokes theorem applies to each ([[def-type-i-type-ii-and-elementary-green-regions]], [[def-positive-orientation-for-elementary-region-boundaries]], [[def-the-induced-boundary-chain-of-a-c2-surface-patch]], [[thm-the-classical-stokes-theorem-for-a-c2-surface-patch]]). In each hemisphere the induced boundary chain has four entries: one equator arc, two meridian arcs with the same image and opposite orientations, and one degenerate polar arc; the two meridian integrals cancel by reversal ([[thm-line-integrals-under-reversal-and-concatenation]]) and the degenerate one is zero. Hence the north circulation is the equator integral and the south circulation is its reverse, so their sum is zero; summing the two Stokes identities gives zero for the total flux of $B$ over the sphere, contradicting $4\\pi\\ne0$, and no such $A$ exists. (c) For the basepoint reduction, $L$ and $L^{-1}$ are linear maps of $\\mathbb R^3$, hence bounded and continuous on the finite-dimensional space ([[cor-linear-maps-with-finite-dimensional-domain-are-bounded]], [[thm-bounded-linear-operator-equivalences]]), so a null-homotopy of $L\\circ\\gamma$ composed with $L^{-1}$ is one of $\\gamma$; for a basepoint on the unit sphere, $H$ is the continuous radial homotopy of [[thm-radial-straight-line-map-on-punctured-rn]] fixing the unit sphere, so it deforms the loop to a loop in $S^2$ rel basepoint ([[def-homotopy-relative-and-path-homotopy]], [[def-based-loops-and-fundamental-group]]), which is null-homotopic rel basepoint by simple connectivity of $S^2$ ([[thm-higher-dimensional-spheres-are-simply-connected]]); composing with the inclusion and concatenating gives the required null-homotopy in $\\mathbb R^3\\setminus\\{0\\}$. Path connectedness of $\\mathbb R^3\\setminus\\{0\\}$ is seen by routing through the unit sphere ([[cor-euclidean-spheres-are-path-connected]], [[def-path-connected]]). (d) is the comparison of the two mechanisms: circulation versus flux. All suppliers are published items used at their stated hypotheses; no choice principle is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a73.2.1 printed p. 47 (magnetic monopoles and the inverse-square field) and \u00a73.2.4 printed pp. 52-53 (the linking-number discussion of the curl-free field near a line), \u00a73.2.2 printed pp. 48-49 (the vector potential and gauge freedom)"
+            },
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, Third Revised English Edition (Course of Theoretical Physics vol. 2, Pergamon Press 1971, 387 pp.)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "\u00a716 printed pp. 44-45 and \u00a718 printed p. 49: the potential representation of the fields and the non-uniqueness of the potentials"
+            }
+          ]
+        },
+        "physical_scope": "A mathematical example delimiting the hypotheses of the framework's potential-existence theorem: curl-free and divergence-free smooth fields on two explicit punctured spatial regions that admit no global scalar, respectively vector, potential, showing that the star-shaped hypothesis is substantive and that simple connectivity is not sufficient for a vector potential. The fields are mathematical witnesses on the punctured regions; the framework's postulate excludes magnetic charge, and no physical source, no physical singularity and no empirical claim is asserted.",
+        "dependency_level": 15
+      },
+      {
+        "id": "ex-em-pure-gauge-fields",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Nonzero pure-gauge potentials representing the zero field pair",
+        "reference": "worked-example-verifications.md#X5",
+        "design_state": "complete-exact-conditional-research-argument; explicit constant instance with the linear gauge function",
+        "deps": [
+          "pthm-em-gauge-invariance",
+          "def-em-gauge-transformation",
+          "def-em-potential-gauge-and-field-conventions",
+          "def-em-fields",
+          "lem-em-joint-smooth-potentials",
+          "thm-the-curl-of-a-gradient-vanishes",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "thm-algebra-of-total-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "pthm-em-gauge-invariance": "physical-result",
+          "def-em-gauge-transformation": "formulation-prerequisite",
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "lem-em-joint-smooth-potentials": "mathematical-premise",
+          "thm-the-curl-of-a-gradient-vanishes": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "thm-algebra-of-total-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\Omega\\subseteq\\mathbb R^3$ be open and let $I\\subseteq\\mathbb R$ be an interval ([[def-interval]]); for a possibly non-open $I$, the joint classes below are read in the restriction convention of [[lem-em-joint-smooth-potentials]] (for open $I$ this is the ordinary class of [[def-ck-euclidean-maps-and-diffeomorphisms]]). Let $\\chi:\\Omega\\times I\\to\\mathbb R$ be of class $C^2$ jointly. If $I$ is a singleton, choose one ambient $C^2$ extension as part of the data and define the potential pair and all its derivatives by the same ambient formulas before restriction; singleton values of $\\chi$ alone do not determine these time derivatives. For an empty product all identities below are vacuous.\n\nThen the pair\n\n$$(\\varphi,A):=T_\\chi(0,0)=(-\\partial_t\\chi,\\ \\nabla\\chi)$$\n\nis a potential pair of class $C^1$ jointly on $\\Omega\\times I$ whose field pair is the zero field pair:\n\n$$E(\\varphi,A)=E(0,0)=0,\\qquad B(\\varphi,A)=\\operatorname{curl}\\nabla\\chi=0\\qquad\\text{on }\\Omega\\times I$$\n\n([[def-em-potential-gauge-and-field-conventions]]), the electric identity by the gauge invariance of [[pthm-em-gauge-invariance]] applied to the zero pair, whose field pair is $(0,0)$, and the magnetic identity also directly by [[thm-the-curl-of-a-gradient-vanishes]] for the $C^2$ function $\\chi$.\n\nAll displayed quantities may be read as numerical SI components: $x$ in m, $t$ in s, $\\chi$ in V s, $a$ in T m and $\\beta$ in V, as in [[def-em-gauge-transformation]]; in particular $e_1$ below specifies a vector-potential component of one T m.\n\nExplicit instance: for $a\\in\\mathbb R^3$, $\\beta\\in\\mathbb R$ and $\\chi(x,t)=a\\cdot x-\\beta t$ on $\\mathbb R^3\\times\\mathbb R$, the pair is the constant pair $(\\varphi,A)=(\\beta,a)$, with $E=-\\nabla\\beta-\\partial_t a=0$ and $B=\\operatorname{curl}a=0$ by [[def-divergence-and-curl-of-a-c1-vector-field]] and the vanishing of all first derivatives of a constant ([[thm-algebra-of-total-derivatives]], [[def-directional-and-partial-derivatives]]). This pair is nonzero if and only if $(\\beta,a)\\ne(0,0)$; for $\\beta=0$ and $a=0$ it is exactly the zero pair. To exhibit noninjectivity explicitly, take $\\beta=0$ and $a=e_1=(1,0,0)$ on $\\mathbb R^3\\times\\mathbb R$. Then $(\\varphi,A)=(0,e_1)$ and $(0,0)$ are distinct potential pairs with the same zero field pair. Thus the map from potential pairs to field pairs of [[def-em-fields]] is not injective: nonzero potentials may represent the zero field pair (pure-gauge fields), and no nonzero value of $\\varphi$ or $A$ alone is evidence for a nonzero field, consistently with [[pthm-em-gauge-invariance]] and [[def-em-gauge-transformation]]. The example is a statement about the representation of the zero field configuration; it asserts no Maxwell equation, no source configuration and no empirical situation.",
+        "strategy": "Apply the gauge transformation $T_\\chi$ to the zero pair $(0,0)$, using the linearity of the componentwise partial derivatives and of the gradient ([[thm-algebra-of-total-derivatives]], [[def-directional-and-partial-derivatives]]). The field pair of the zero pair is $(0,0)$; by [[pthm-em-gauge-invariance]] the transformed pair has the same field pair, which is $(0,0)$. The explicit formulas are then recomputed directly: with $\\chi(x,t)=a\\cdot x-\\beta t$ one has $\\partial_t\\chi=-\\beta$ and $\\nabla\\chi=a$, so $(\\varphi,A)=(\\beta,a)$; the fields of a constant pair vanish because every partial derivative of a constant is zero ([[def-divergence-and-curl-of-a-c1-vector-field]], [[def-directional-and-partial-derivatives]]). Both computations use only the definitions; no choice principle and no hypothesis on $\\Omega$ or $I$ beyond openness and being an interval are used. The formula $(\\varphi,A)=(\\beta,a)$ includes all zero and nonzero parameter choices. Equality of this constant pair to zero is equivalent, component by component, to $\\beta=0$ and $a=0$. Noninjectivity is established by the particular nonzero witness $a=e_1$, $\\beta=0$, compared with the zero pair; it is not inferred by claiming that every parameter choice is nonzero. On singleton time domains choose the ambient extension as data and apply invariance on open boxes before restriction; empty products are vacuous.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, Third Revised English Edition (Course of Theoretical Physics vol. 2, Pergamon Press 1971, 387 pp.)",
+              "url": "http://www.elegio.it/mc2/LandauLifshitz_TheClassicalTheoryOfFields_text.pdf",
+              "locator": "\u00a718 printed p. 50: the addition of constants to the vector and scalar potentials does not affect the field intensities, since E and H contain only derivatives of A and phi"
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a75.3.1 printed pp. 105-106: the gauge transformation phi -> phi - dchi/dt, A -> A + grad chi with the fields unchanged"
+            }
+          ]
+        },
+        "physical_scope": "An example of gauge representations of the zero field pair: the full linear-generator family includes the zero potential pair at zero parameters and nonzero constant pairs at nonzero parameter tuples. An explicit nonzero witness demonstrates noninjectivity of the potential-to-field map. It asserts no source model, Maxwell equation, empirical situation or observable potential value.",
+        "dependency_level": 17
+      },
+      {
+        "id": "ex-em-residual-lorenz-example",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A homogeneous-wave gauge generator changes Lorenz potentials without changing their fields",
+        "reference": "worked-example-verifications.md#X5",
+        "design_state": "complete-exact-conditional-research-argument; explicit real cosinusoidal generator with |k| = omega/c",
+        "deps": [
+          "pthm-em-lorenz-gauge-wave-form",
+          "pthm-em-gauge-invariance",
+          "def-em-gauge-transformation",
+          "def-em-potential-gauge-and-field-conventions",
+          "def-em-complex-plane-wave",
+          "def-laplacian-of-a-c2-function",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-euclidean-inner-product",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "def-directional-and-partial-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-eulers-formula"
+        ],
+        "dependency_roles": {
+          "pthm-em-lorenz-gauge-wave-form": "physical-result",
+          "pthm-em-gauge-invariance": "physical-result",
+          "def-em-gauge-transformation": "formulation-prerequisite",
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-em-complex-plane-wave": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "def-wave-equation-cauchy-data-and-wave-speed": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-eulers-formula": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $c>0$, let $k\\in\\mathbb R^3\\setminus\\{0\\}$, put $\\omega:=c\\lVert k\\rVert_2>0$ ([[def-euclidean-inner-product]]), and let\n\n$$\\chi(x,t):=\\cos(k\\cdot x-\\omega t),$$\n\nthe real part, by $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$ of [[thm-eulers-formula]], of the complex plane wave $e^{i(k\\cdot x-\\omega t)}$ of [[def-em-complex-plane-wave]] with wave vector $k$ and frequency $\\omega=c\\lVert k\\rVert_2$. For the SI interpretation, use numerical components $x$ in m, $t$ in s, $k$ in m$^{-1}$ and $\\omega$ in s$^{-1}$, so the phase is dimensionless, and give this gauge generator amplitude one V s as in [[def-em-gauge-transformation]]; the displayed $\\chi$ is its numerical value in V s. Then $\\chi$ is of class $C^\\infty$ on $\\mathbb R^3\\times\\mathbb R$ and $W\\chi=0$, where $W=c^{-2}\\partial_t^2-\\Delta$ is the wave expression of [[def-em-potential-gauge-and-field-conventions]] (the normalization $W=c^{-2}\\Box_c$ of the wave operator of [[def-wave-equation-cauchy-data-and-wave-speed]], [[def-laplacian-of-a-c2-function]]); indeed $\\partial_t^2\\chi=-\\omega^2\\chi$, $\\Delta\\chi=-\\lVert k\\rVert_2^2\\chi$ and $\\omega^2=c^2\\lVert k\\rVert_2^2$, so $W\\chi=c^{-2}(-c^2\\lVert k\\rVert_2^2\\chi)+\\lVert k\\rVert_2^2\\chi=0$ ([[thm-sine-and-cosine-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]]).\n\nConsequently, for every potential pair $(\\varphi,A)$ of class $C^2$ jointly on $\\mathbb R^3\\times\\mathbb R$ ([[def-em-potential-gauge-and-field-conventions]]), the gauge-transformed pair satisfies\n\n$$G(T_\\chi(\\varphi,A))=G(\\varphi,A)\\qquad\\text{and}\\qquad E(T_\\chi(\\varphi,A))=E(\\varphi,A),\\quad B(T_\\chi(\\varphi,A))=B(\\varphi,A)$$\n\non $\\mathbb R^3\\times\\mathbb R$ ([[pthm-em-lorenz-gauge-wave-form]], [[pthm-em-gauge-invariance]], [[def-em-gauge-transformation]]); in particular, if $(\\varphi,A)$ is in Lorenz gauge then $T_\\chi(\\varphi,A)$ is again in Lorenz gauge with the same field pair. Explicitly $\\partial_t\\chi=\\omega\\sin(k\\cdot x-\\omega t)$ and $\\nabla\\chi=-k\\sin(k\\cdot x-\\omega t)$, so $\\varphi'=\\varphi-\\omega\\sin(k\\cdot x-\\omega t)$ and $A'=A-k\\sin(k\\cdot x-\\omega t)$. The zero pair is in Lorenz gauge, and its transform $(-\\omega\\sin(k\\cdot x-\\omega t),\\ -k\\sin(k\\cdot x-\\omega t))$ is a nonzero pair that remains in Lorenz gauge and still represents the zero field pair: it is nonzero because otherwise $\\partial_t\\chi$ would vanish identically, forcing $\\partial_t^2\\chi=0$, whereas $\\partial_t^2\\chi(0,0)=-\\omega^2\\ne0$. Thus the Lorenz condition does not determine the potential pair. The example is the residual generator $W\\chi=0$ of [[pthm-em-lorenz-gauge-wave-form]] on the free-space branch; on a bounded domain with prescribed gauge boundary data the admissible generators are restricted, and no such data-dependent claim is made here.",
+        "strategy": "Compute with the chain and product rules: $\\partial_t\\chi=\\omega\\sin\\theta$, $\\partial_t^2\\chi=-\\omega^2\\cos\\theta$, $\\nabla\\chi=-k\\sin\\theta$ and $\\Delta\\chi=-|k|^2\\cos\\theta$ at $\\theta=k\\cdot x-\\omega t$ ([[thm-sine-and-cosine-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[def-laplacian-of-a-c2-function]], [[def-directional-and-partial-derivatives]]). Substitute $\\omega^2=c^2|k|^2$ to get $W\\chi=0$. Then use the gauge-shift identity and field invariance of [[pthm-em-lorenz-gauge-wave-form]](b) and [[pthm-em-gauge-invariance]]; the class bookkeeping is that of [[def-em-gauge-transformation]]. No choice principle is used and no boundary condition is imposed, matching the free-space branch of the gauge-reachability statement on this page.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a76.1 printed pp. 134-135: the gauge transformation of the potential and the wave equation square-box chi = f whose homogeneous case leaves the gauge condition and the fields unchanged"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "\u00a77.1 printed pp. 167-170, eqs. (7.1)-(7.4): the plane-wave solutions of the homogeneous wave equation and the dispersion relation underlying |k| = omega/c"
+            }
+          ]
+        },
+        "physical_scope": "An example on the free-space branch of the framework's gauge structure: a cosinusoidal gauge generator satisfying the homogeneous wave equation changes a Lorenz potential pair while preserving the Lorenz condition and the field pair. It asserts no bounded-domain or prescribed-data gauge statement and no empirical claim.",
+        "dependency_level": 18
+      }
+    ]
+  }
+]

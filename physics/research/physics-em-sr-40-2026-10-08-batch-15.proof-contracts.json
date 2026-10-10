@@ -1,0 +1,961 @@
+{
+  "version": 1,
+  "run": "physics-em-sr-40-2026-10-08",
+  "batch": 15,
+  "scope": [
+    "lem-em-fundamental-variation-lemma",
+    "lem-em-compact-field-variation",
+    "ex-em-variational-mathematical-prerequisites-hypothesis-boundaries"
+  ],
+  "contracts": {
+    "lem-em-fundamental-variation-lemma": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-em-continuous-localization",
+          "source_section": "Statement",
+          "quote": "If $\\int_Vg\\,d\\lambda_n=0$ for every ball $V$ compactly contained in $U$, then $g=0$ on $U$.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+          "uses": [
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "define the **integral of $f$ over $E$**",
+          "uses": [
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "the real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at $a$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "The function is **integrable** when both integrals are finite",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "the integral on the right is the nonnegative Lebesgue integral",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "it has a maximum and a minimum",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-compact-subset-is-closed-and-bounded",
+          "source_section": "Statement",
+          "quote": "Then $K$ is closed in $X$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "is Lebesgue measurable with",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "then its nonnegative Lebesgue integral equals its simple integral",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "**simple integral** is",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-metric-continuity",
+          "source_section": "Definition",
+          "quote": "is **continuous at $a$** if for every real $\\varepsilon > 0$ there is a real $\\delta > 0$ such that",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "is the **open ball**",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose the conclusion fails: $g(p)\\ne0$ for some $p\\in U$. If $m=1$, put $u:=g$; then $u$ is continuous and the hypothesis reads $\\int_Uu\\psi\\,d\\lambda=0$ for every $\\psi\\in C_c^\\infty(U;\\mathbb R)$. If $m\\ge2$, choose $i<m$ with $g_i(p)\\ne0$ and put $u:=g_i$; for every $\\psi\\in C_c^\\infty(U;\\mathbb R)$ the function $\\psi e_i$ lies in $C_c^\\infty(U;\\mathbb R^m)$ with $\\langle g,\\psi e_i\\rangle=g_i\\psi$ by [F4], so the hypothesis gives $\\int_Uu\\psi\\,d\\lambda=0$. In both cases $u:U\\to\\mathbb R$ is continuous with $u(p)\\ne0$, and replacing $u$ by $-u$ preserves the vanishing pairing because $\\int_U(-u)\\psi\\,d\\lambda=-\\int_Uu\\psi\\,d\\lambda$ by [F5]; hence we may assume $u(p)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Continuity of $u$ at $p$ with $u(p)>0$ yields $\\delta>0$ with $B(p,\\delta)\\subseteq U$ and $u(x)\\ge u(p)/2$ for every $x\\in B(p,\\delta)$: taking $\\varepsilon:=u(p)/2>0$ in [F7] gives $\\delta_0>0$ with $|u(x)-u(p)|<u(p)/2$ for $d(p,x)<\\delta_0$, and since $U$ is open one may shrink $\\delta_0$ to a $\\delta>0$ with $B(p,\\delta)\\subseteq U$, the bound remaining valid on the smaller ball.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F1] with $\\Omega:=B(p,\\delta)$ and $K:=\\{p\\}$: there is $\\chi\\in C_c^\\infty(B(p,\\delta))$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $p$. Extended by zero, $\\chi$ lies in $C_c^\\infty(U;\\mathbb R)$ and satisfies $\\operatorname{supp}\\chi\\subseteq B(p,\\delta)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $\\varphi:=u\\chi$, extended by zero to $\\mathbb R^n$. Then $\\varphi$ is continuous and compactly supported in $U$ by [F4] and [F1], satisfies $\\varphi\\ge0$ on $U$ because $\\varphi=0$ where $\\chi=0$ and $\\varphi(x)=u(x)\\chi(x)\\ge(u(p)/2)\\chi(x)\\ge0$ for $x\\in B(p,\\delta)$ by step 2.1, and has $\\varphi(p)=u(p)>0$; hence $\\varphi$ is not the zero function.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The hypothesis at the admissible test function $\\chi$ gives $\\int_Uu\\chi\\,d\\lambda=0$, that is $\\int_U\\varphi\\,d\\lambda=0$: since $\\varphi\\ge0$, the signed integral equals the nonnegative integral of $\\varphi$ over the measurable set $U$ by [F5], and that integral is a finite real number by [F6].",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "given",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "By the contrapositive localization [F2] applied to the continuous function $\\varphi$ with $\\varphi(p)\\ne0$, there is a ball $V$ compactly contained in $U$ with $\\int_V\\varphi\\,d\\lambda\\ne0$; as $\\varphi\\ge0$, monotonicity in [F3] applied to the zero function below $\\varphi\\chi_V$ gives $\\int_V\\varphi\\,d\\lambda\\ge0$, so this integral is strictly positive.",
+          "step": "5.2",
+          "inputs": [
+            "step 4.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Since $V\\subseteq U$, the nonnegative measurable functions $\\varphi\\chi_V$ and $\\varphi\\chi_U$ satisfy $\\varphi\\chi_V\\le\\varphi\\chi_U$ pointwise, so monotonicity in [F3] gives $\\int_V\\varphi\\,d\\lambda\\le\\int_U\\varphi\\,d\\lambda=0$, contradicting step 5.2; therefore no point $p\\in U$ with $g(p)\\ne0$ exists and $g=0$ on $U$.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "step 5.2",
+            "F3",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 assumes a point p in U with g(p) != 0; when U is empty no such point exists and the implication is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: if g is the zero function the conclusion g = 0 on U holds, and the contradiction assumption g(p) != 0 fails."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the scalar case m = 1 directly and reduces every m >= 2 to a scalar component g_i; n = 1 is included because only openness of U, balls and continuity are used."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter regime occurs: n, m >= 1 are fixed by the statement, and the only special value, g(p) = 0, is excluded from the contradiction in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "U is open and the argument uses only the interior point p and balls B(p, delta) inside U with delta > 0 (steps 2.1 and 3.1); no interval endpoint or boundary value occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement declares AC_omega; step 5.2 uses the localization lemma [F2] and step 5.1 uses the Borel measurability fact in [F6], both stated under AC_omega, while the cutoff lemma [F1] and the order rules [F3] are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a single implication, not a biconditional; the contrapositive form of the localization lemma used in step 5.2 is an instance of [F2]."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a single implication, not a biconditional; no reverse direction is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-15; localization owner exception follow-through /root/step3b_em_supplier_repair",
+        "notes": "Completed native Alpha15 independently reviewed all seven local steps and exact cited interfaces; its sole recorded hold was localization F2/proof5.2. Current whole local proof re-read: canonical i<m component tests, sign reversal, smooth cutoff with compact support, continuous zero-extended nonnegative product, finite integrals and monotonicity remain valid. The repaired localization18ff0202… supplies the required scalar contrapositive under unchanged AComega; component0 is now typed. Published def-function-space explicitly identifies F1 with F by evaluation at coordinate0, supporting the scalar m=1 notation. EmptyU, n=m=1, zero tests and arbitraryfinite vector dimension are preserved. No carrier repair or new source-book reading was undertaken; native source-locator reading remains attributed to Alpha15. Prior repair counts and the consumed owner exception are unchanged."
+      }
+    },
+    "lem-em-compact-field-variation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-em-minkowski-affine-space",
+          "source_section": "Definition",
+          "quote": "**The Minkowski form.** Define\n\n$$\\eta(v,w):=-v^0w^0+v^1w^1+v^2w^2+v^3w^3,\\qquad v,w\\in V .$$\n\nThis is the standard bilinear form $\\langle x,y\\rangle=\\sum_{i<n}x_iy_i$ of\n[[def-standard-bilinear-form-on-a-coordinate-space]] with the sign of the first\ncoordinate reversed, together with the Euclidean inner product of\n[[def-euclidean-inner-product]] on the last three coordinates; directly from the\nformula, for fixed $w$ the assignment $v\\mapsto\\eta(v,w)$ is a linear combination\nof the component functions $v\\mapsto v^a$, hence linear, and similarly in $w$,\nso $\\eta$ is a bilinear form, and $\\eta(v,w)=\\eta(w,v)$ for all $v,w$, so it is\nsymmetric ([[def-bilinear-symmetric-skew-and-alternating-forms]]). Its matrix in\nthe ordered basis $(e_0,e_1,e_2,e_3)$ is\n\n$$(\\eta(e_a,e_b))_{a,b}=\\operatorname{diag}(-1,1,1,1),$$\n\nand this matrix is its own inverse, the product of\n$\\operatorname{diag}(-1,1,1,1)$ with itself being the identity matrix\n([[def-matrix-product-and-identity-matrix]]); in particular it is invertible, so\n$\\eta$ is nondegenerate\n([[def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form]]).",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$.",
+          "uses": [
+            "2.2",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "Equivalently, the zero extension to $\\mathbb R^n$ is smooth with compact support contained in $\\Omega$",
+          "uses": [
+            "2.2",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "it has a maximum and a minimum",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-compact-subset-is-closed-and-bounded",
+          "source_section": "Statement",
+          "quote": "Then $K$ is closed in $X$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "is Lebesgue measurable with",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "then its nonnegative Lebesgue integral equals its simple integral",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "**simple integral** is",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "The function is **integrable** when both integrals are finite",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "The **Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "every Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue measurable",
+          "uses": [
+            "2.1",
+            "2.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "The function is **integrable** when both integrals are finite",
+          "uses": [
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "the integral on the right is the nonnegative Lebesgue integral",
+          "uses": [
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+          "uses": [
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is",
+          "uses": [
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "For a standard basis vector $e_j$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-classical-derivatives-are-weak-derivatives",
+          "source_section": "Statement",
+          "quote": "the componentwise classical derivative $\\partial^\\alpha u$ is locally integrable and is the weak derivative $D^\\alpha u$",
+          "uses": [
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-weak-derivative-of-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "We say that $v$ is the **weak derivative** $D^\\alpha u$ if",
+          "uses": [
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "$P$ is\n   differentiable at every $c \\in \\mathbb{R}$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-em-fundamental-variation-lemma",
+          "source_section": "Statement",
+          "quote": "then $g=0$ on $U$.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The conventions of [F1] fix the index conventions of the Statement, and $x\\mapsto F_{\\mu\\nu}(x)$ and $x\\mapsto F^{\\mu\\nu}(x)$ are smooth on $N$ because $A$ is smooth and $\\eta^{\\mu\\alpha}\\eta^{\\nu\\beta}$ is constant; hence $L$ is smooth on $N$. The closure $\\overline U$ is a compact subset of $N$ by [F4], so [F3] with $\\Omega:=N$ and $K:=\\overline U$ yields $\\chi\\in C_c^\\infty(N)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on $\\overline U$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The product $L\\chi$, defined to be $0$ outside $\\operatorname{supp}\\chi$, is continuous with compact support, so $\\int_{\\mathbb R^4}|L\\chi|\\,d\\lambda<+\\infty$ by [F5]; since $\\chi=1$ on $U$, the nonnegative measurable functions $|L|\\chi_U$ and $|L|\\chi$ satisfy $|L|\\chi_U\\le|L|\\chi$ pointwise on $\\mathbb R^4$, so [F6] gives $\\int_U|L|\\,d\\lambda\\le\\int_{\\mathbb R^4}|L\\chi|\\,d\\lambda<+\\infty$; hence $L$ is integrable over $U$ and $S[A]=\\int_U L\\,d\\lambda$ is a finite real number.",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "The zero extension of $h$ to $N$ is smooth with compact support in $U$ by [F2], and for every real $s$ the map $A+sh:N\\to V$ is smooth with components $(A+sh)_\\nu=A_\\nu+sh_\\nu$ by [F1] and [F7]; every product below vanishes outside the compact set $\\operatorname{supp}h\\subseteq U$, so the corresponding integrands are continuous with compact support and integrable by [F5].",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For every real $s$ and all $\\mu,\\nu$ one has $F(s)_{\\mu\\nu}=F_{\\mu\\nu}+sG_{\\mu\\nu}$ and $F(s)^{\\mu\\nu}=F^{\\mu\\nu}+sG^{\\mu\\nu}$ on $U$, where $F(s)_{\\mu\\nu}:=\\partial_\\mu(A+sh)_\\nu-\\partial_\\nu(A+sh)_\\mu$ and $F(s)^{\\mu\\nu}:=\\eta^{\\mu\\alpha}\\eta^{\\nu\\beta}F(s)_{\\alpha\\beta}$: the first identity is linearity of the partial derivative, $\\partial_\\mu(A_\\nu+sh_\\nu)=\\partial_\\mu A_\\nu+s\\partial_\\mu h_\\nu$ and $\\partial_\\nu(A_\\mu+sh_\\mu)=\\partial_\\nu A_\\mu+s\\partial_\\nu h_\\mu$ [F7], and the second follows by multiplying by the constant coefficients $\\eta^{\\mu\\alpha}\\eta^{\\nu\\beta}$ and collecting terms [F1].",
+          "inputs": [
+            "step 2.2",
+            "F1",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Multiplying out with step 3.1 gives $F(s)_{\\mu\\nu}F(s)^{\\mu\\nu}=F_{\\mu\\nu}F^{\\mu\\nu}+2sF_{\\mu\\nu}G^{\\mu\\nu}+s^2G_{\\mu\\nu}G^{\\mu\\nu}$, and $F_{\\mu\\nu}G^{\\mu\\nu}=F^{\\mu\\nu}G_{\\mu\\nu}=2F^{\\mu\\nu}\\partial_\\mu h_\\nu$: the first equality renames the summation indices, and in the second one substitutes $G_{\\mu\\nu}=\\partial_\\mu h_\\nu-\\partial_\\nu h_\\mu$, relabels $\\mu\\leftrightarrow\\nu$ in the second sum and uses $F^{\\nu\\mu}=-F^{\\mu\\nu}$, so the two sums coincide. Since $(A+sh)_\\nu=A_\\nu+sh_\\nu$, the source term is $J^\\nu(A+sh)_\\nu=J^\\nu A_\\nu+sJ^\\nu h_\\nu$, and therefore $L(A+sh)=L+s\\ell_1+s^2\\ell_2$ pointwise on $U$ with $\\ell_1=-\\kappa^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+J^\\nu h_\\nu$ and $\\ell_2=-\\frac{1}{4\\kappa}G_{\\mu\\nu}G^{\\mu\\nu}$.",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "The functions $L$, $\\ell_1$, $\\ell_2$ are integrable over $U$ by steps 2.1 and 2.2, so linearity of the integral [F6] applied to step 4.1 gives $S[A+sh]=\\int_U(L+s\\ell_1+s^2\\ell_2)\\,d\\lambda=S[A]+s\\int_U\\ell_1\\,d\\lambda+s^2\\int_U\\ell_2\\,d\\lambda$ for every real $s$; thus $s\\mapsto S[A+sh]$ is the polynomial $P(s)=a_0+a_1s+a_2s^2$ with the finite real coefficients $a_0=S[A]$, $a_1=\\int_U\\ell_1\\,d\\lambda$ and $a_2=\\int_U\\ell_2\\,d\\lambda$, and [F9] gives $P'(0)=a_1=\\int_U\\bigl(-\\kappa^{-1}F^{\\mu\\nu}\\partial_\\mu h_\\nu+J^\\nu h_\\nu\\bigr)d\\lambda$. This is (a).",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 4.1",
+            "F6",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "For each fixed $\\nu$ the functions $x\\mapsto F^{\\mu\\nu}(x)$, $\\mu=0,1,2,3$, are of class $C^1$ on the open $U$ by step 1.1, and $h_\\nu\\in C_c^\\infty(U;\\mathbb R)$ by [F2]; applying [F8] to each of the four functions and summing over $\\mu$ gives $\\int_U F^{\\mu\\nu}\\partial_\\mu h_\\nu\\,d\\lambda=-\\int_U(\\partial_\\mu F^{\\mu\\nu})h_\\nu\\,d\\lambda$. Substituting this into step 5.1 and using linearity [F6] yields $\\int_U\\ell_1\\,d\\lambda=\\int_U\\bigl(\\kappa^{-1}\\partial_\\mu F^{\\mu\\nu}+J^\\nu\\bigr)h_\\nu\\,d\\lambda$, which is (b).",
+          "inputs": [
+            "step 5.1",
+            "F2",
+            "F6",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "step": "7.1",
+          "claim": "Put $C^\\nu:=\\kappa^{-1}\\partial_\\mu F^{\\mu\\nu}+J^\\nu$; each $C^\\nu$ is continuous on $U$ by step 1.1, and by steps 5.1 and 6.1 the first variation of $S$ at $A$ in the direction $h$ equals $\\int_UC^\\nu h_\\nu\\,d\\lambda=\\int_U\\langle C,k\\rangle\\,d\\lambda$, where $k:=(h_\\nu)_\\nu\\in C_c^\\infty(U;\\mathbb R^4)$ and the pairing is that of [F11]. Assume first that $A$ is stationary, so that this first variation vanishes for every $h\\in C_c^\\infty(U;V)$. Given any $k\\in C_c^\\infty(U;\\mathbb R^4)$, [F2] provides $h\\in C_c^\\infty(U;V)$ with $h_\\nu=k_\\nu$, so $\\int_U\\langle C,k\\rangle\\,d\\lambda=0$; the fundamental variation lemma [F10] applied to the continuous array $C$ gives $C=0$ on $U$, that is $\\partial_\\mu F^{\\mu\\nu}=-\\kappa J^\\nu$ on $U$ for every $\\nu$.",
+          "inputs": [
+            "step 5.1",
+            "step 6.1",
+            "F2",
+            "F10",
+            "F11",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "step": "8.1",
+          "claim": "Conversely, if $\\partial_\\mu F^{\\mu\\nu}=-\\kappa J^\\nu$ on $U$ for every $\\nu$, then $C=0$ and steps 5.1 and 6.1 give vanishing first variation for every $h\\in C_c^\\infty(U;V)$, so $A$ is stationary; hence stationarity is equivalent to the coefficient equation, which is (c). The point $h\\in C_c^\\infty(U;V)$ was arbitrary throughout, so (a)-(c) hold as stated; existence of a stationary field $A$ and the identifications of $\\kappa$, $A$ and $J$ with physical quantities are not asserted, and the Axiom of Countable Choice entered only through [F5], [F8] and [F10], the expansions of steps 3.1-5.1 being choice-free.",
+          "inputs": [
+            "step 5.1",
+            "step 6.1",
+            "step 7.1",
+            "given",
+            "F5",
+            "F8",
+            "F10",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "When U is empty, closure(U) is empty and compact; step 1.1 then has chi = 0 in effect and step 2.1 gives S[A] = 0, while C_c^infinity(U;V) = {0} makes (a)-(c) hold vacuously, the coefficient equation being quantified over the empty set U."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 with h = 0 gives G = 0 and ell_1 = ell_2 = 0, and step 5.1 includes s = 0, where P(0) = S[A]."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 6.1 and 7.1 treat each index nu and each mu separately in finite sums, so the single-index case is covered; kappa > 0 is a fixed positive parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no degenerate parameter regime: U is open with closure inside N and kappa > 0; the closest special cases, the zero variation and s = 0, are covered as the zero case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Compact support of h removes boundary terms: [F8] applies only to test functions in C_c^infinity(U;R), so the conversion in step 6.1 has no boundary contribution, and step 2.2 records that h and its derivatives vanish outside the compact set supp h contained in U."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC_omega is declared; it enters through [F5] in step 2.1 (box measure and Borel measurability), through [F8] in step 6.1, and through the fundamental variation lemma [F10] in step 7.1, while the expansions of steps 3.1-5.1 are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 7.1 proves that stationarity of A forces the coefficient equation partial_mu F^{mu nu} = -kappa J^nu on U."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 8.1 proves that the coefficient equation makes every first variation vanish, so A is stationary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-15; localization owner exception follow-through /root/step3b_em_supplier_repair",
+        "notes": "Completed native Alpha15 independently reviewed all nine local steps, direct interfaces, weak-derivative compatibility and both stationarity directions; its sole recorded hold was F10/proof7.1 through fundamental variation/localization. Current whole local proof re-read: compact closure/cutoff domination gives finite S, compact variations extend smoothly, constant eta makes the antisymmetric factor2 and exact quadratic polynomial, compact tests give integration by parts, and the invertible lowering map covers all numerical tests. The repaired localization18ff0202… closes fundamental F2/proof5.2, hence this proof7.1 coefficient extraction; proof8.1 establishes the reverse. All0..3 indices, emptyU, h=0,s=0,kappa>0, positive source coupling and purely mathematical/no-existence scope remain intact. No carrier repair or new source-book reading was undertaken; native Tong/CoV reading remains attributed to Alpha15. Prior repair counts and the consumed owner exception are unchanged."
+      }
+    },
+    "ex-em-variational-mathematical-prerequisites-hypothesis-boundaries": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-em-minkowski-affine-space",
+          "source_section": "Definition",
+          "quote": "and this matrix is its own inverse",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-em-compact-field-variation",
+          "source_section": "Statement",
+          "quote": "Put $L:=-\\frac{1}{4\\kappa}F_{\\mu\\nu}F^{\\mu\\nu}+J^\\nu A_\\nu$ and $S[A]:=\\int_U L\\,d\\lambda$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "For a standard basis vector $e_j$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "is the constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$ with $p_0'(c) = 0$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "is Lebesgue measurable with",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "then its nonnegative Lebesgue integral equals its simple integral",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "**simple integral** is",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "The **Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "every Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue measurable",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "The function is **integrable** when both integrals are finite",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "the integral on the right is the nonnegative Lebesgue integral",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "v-1-1",
+          "step": "1.1",
+          "claim": "Part (i): for $r=(a,b)\\ne0$, $|S(r)-S(0,0)|/\\lVert r\\rVert_2=|a^2-b^2|/\\sqrt{a^2+b^2}\\le\\sqrt{a^2+b^2}\\to0$ as $r\\to0$. Thus [L5] gives $DS(0,0)=0$. For every $\\varepsilon\\ne0$, $S(\\varepsilon,0)-S(0,0)=\\varepsilon^2>0$ and $S(0,\\varepsilon)-S(0,0)=-\\varepsilon^2<0$; taking $|\\varepsilon|$ arbitrarily small shows that the origin is neither a local minimum nor a local maximum. The stationarity equivalence in (c) of [[lem-em-compact-field-variation]] and the coefficient extraction through [[lem-em-fundamental-variation-lemma]] impose first-order conditions, with no minimality or existence assertion. This branch is choice-free.",
+          "inputs": [
+            "given",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "v-1-2",
+          "step": "1.2",
+          "claim": "Part (ii), first witness: for $A_0=(x^1)^2$ and $A_1=A_2=A_3=0$, so that $A^0=-(x^1)^2$ by [L1], [L2] and [L3] give $F_{01}=\\partial_0A_1-\\partial_1A_0=-2x^1$ and $F_{10}=2x^1$ with all remaining $F_{\\mu\\nu}$ zero; raising both indices by the constant matrix $\\eta^{\\mu\\nu}=\\eta_{\\mu\\nu}$ of [L1] gives $F^{01}=2x^1$, $F^{10}=-2x^1$ and all remaining $F^{\\mu\\nu}$ zero, hence $\\partial_\\mu F^{\\mu0}=\\partial_1F^{10}=-2$, which differs from $-\\kappa J^0=0$, so the coefficient equation fails at $\\nu=0$. The variation with $h_0\\equiv1$ and $h_1=h_2=h_3=0$ has $h^0\\equiv-1$ and is smooth but not compactly supported in $U$. Along it $(A+sh)_0=(x^1)^2+s$ and $(A+sh)_i=0$, so $F_{01}(s)=-2x^1$ and $F(s)_{\\mu\\nu}F(s)^{\\mu\\nu}=-8(x^1)^2$ are independent of $s$, whence $L(s)=2(x^1)^2$ for every $s$ by [L2] with $\\kappa=1$ and $J=0$; the integral $S[A+sh]=\\int_U2(x^1)^2\\,d\\lambda$ is therefore independent of $s$ by [L4], so this smooth noncompact direction has first variation $0$ although the field equation fails.",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "v-2-1",
+          "step": "2.1",
+          "claim": "Part (ii), second witness: for $A_0=x^1$, $A_1=A_2=A_3=0$ and $J=0$, one has $F_{01}=\\partial_0A_1-\\partial_1A_0=-1$ constant, so every $\\partial_\\mu F^{\\mu\\nu}=0$ and the coefficient equations $\\partial_\\mu F^{\\mu\\nu}=-\\kappa J^\\nu$ all hold; the variation with $h_0=x^1$ and $h_1=h_2=h_3=0$ has $h^0=-x^1$ by [L1]. Along it $(A+sh)_0=(1+s)x^1$, so $F_{01}(s)=-(1+s)$ and $F(s)_{\\mu\\nu}F(s)^{\\mu\\nu}=-2(1+s)^2$, whence $L(s)=\\frac12(1+s)^2$ by [L2]; since $\\lambda(U)=16$ by [L4], $S[A+sh]=8(1+s)^2$, whose derivative at $s=0$ is $16\\ne0$. Thus the converse direction in (c) of [[lem-em-compact-field-variation]] would fail if the compactly supported variation class were extended to all smooth directions, so the compact-support hypothesis is essential exactly for the boundary-free coefficient conversion, and part (ii) is the branch that carries $\\mathrm{AC}_\\omega$.",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two witnesses are explicit: U = (-1,1)^4 in part (ii) and R^2 in part (i) are nonempty, and the example quantifies over no empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the zero total derivative directly using the quadratic remainder bound; step 1.2 gives first variation zero for the constant-in-s first witness, and step 2.1 gives derivative 16 at s=0 for the second witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers kappa-free part (i); step 1.2 and step 2.1 specialize kappa = 1 and J = 0, so the single positive scaling and single vanishing source case are explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter occurs: U = (-1,1)^4 has positive finite measure, kappa = 1 > 0, and the only vanishing objects (J = 0, the z-derivative of the saddle) are evaluated explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 is exactly the endpoint case of the compact-support hypothesis: the variation h_0 = 1 is smooth but not compactly supported in U, and the first variation vanishes while the field equation fails; step 2.1 is the complementary noncompact direction with nonzero first variation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Part (i) is choice-free (step 1.1); part (ii) carries AC_omega through the Lebesgue integrals of [L4] used in steps 1.2 and 2.1, exactly as in the compact-field supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no biconditional of its own; it exhibits two boundary witnesses against the compact-support class of the compact-field equivalence, whose two directions are proved in lem-em-compact-field-variation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse direction is claimed in this example; the second witness documents the failure of the converse when the variation class is enlarged beyond compact support."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-15",
+        "notes": "Independently reviewed the three complete verification steps, each direct cited definition/statement, all contract claims and the two page summaries. The zero derivative of x^2-y^2 follows from the norm remainder bound <=norm(r), and arbitrarily small axis values have opposite strict signs, so neither local extremum is present. Named coordinate derivatives along (1,0),(0,1) resolve zero-based derivative convention. First witness: F01=-2x1, F10=2x1, raised F01=2x1,F10=-2x1; divergence at nu=0=-2 and F:F=-8(x1)^2, hence L=2(x1)^2. Constant lowered h0 gives constant action and is noncompact. Second witness: A0=x1 has constant F and zero divergence, while h0=x1 yields F01(s)=-(1+s), L(s)=(1+s)^2/2, volume16, S(s)=8(1+s)^2 and Sprime(0)=16. Both support closures relative to U are U, which is noncompact, and both polynomial fields/variations extend smoothly to R4. The first witness tests the integration-by-parts conversion only; the second disproves extending the stationarity converse to all smooth variations. Continuity, finite integrals, sign conventions and the exactly confined AC_omega field branch are explicit. Figueroa-O’Farrill §8 printed p10 supports indefinite-Hessian context; its unrelated semidefinite-extremum claim is not used. Reader statement, indexing and remainder repairs are sound; no empirical premise or claim of minimality/existence is added. The exact witness verifications do not use the malformed localization clause. Nevertheless the declared fundamental/compact-field prerequisite chain remains open at batch13, so this completed witness risk review does not certify that chain or close its escalation."
+      }
+    }
+  }
+}

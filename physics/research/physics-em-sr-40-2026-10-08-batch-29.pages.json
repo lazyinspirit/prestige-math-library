@@ -1,0 +1,757 @@
+[
+  {
+    "order": 337,
+    "id": "em-material-response",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Material response and stationary interfaces",
+    "companion": "em-material-response-examples",
+    "requires": [
+      "em-causal-response-and-radiation-prerequisites",
+      "em-maxwell-integral-and-constraints",
+      "density-separability-and-convolution-in-lp",
+      "cantor-set-baire-and-measure-zero",
+      "sard-theorem-and-transversality"
+    ],
+    "items": [
+      {
+        "id": "post-em-coarse-graining",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Declared averaging kernel, macroscopic scale assumptions and averaged fields",
+        "reference": "definition-contracts.md#post-em-coarse-graining",
+        "design_state": "explicit-adopted-postulate-contract; nonproof-source-scope-review",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "def-em-sources",
+          "def-locally-integrable-function-on-r-n",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-countable-union-of-null-is-null",
+          "thm-heine-borel-rn",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "lem-test-function-cutoffs-and-euclidean-localization"
+        ],
+        "dependency_roles": {
+          "def-complex-lp-and-euclidean-test-function-conventions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "def-locally-integrable-function-on-r-n": "mathematical-premise",
+          "lem-complex-translation-and-approximate-identity-interfaces": "mathematical-premise",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump": "mathematical-premise",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-countable-union-of-null-is-null": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality": "mathematical-premise",
+          "lem-test-function-cutoffs-and-euclidean-localization": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Adopt as a modelling postulate of this framework the following coarse-graining convention for matter. Let the laboratory region $U\\cong I\\times\\Omega$, its frame basis $(e_1,e_2,e_3)$, its units, its fields and its sources be those of [[def-em-lab-geometry]], [[def-em-si-conventions]], [[def-em-fields]] and [[def-em-sources]], and assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), the hypothesis of the smoothing theorem cited in clause (b).\n\n**(a) [Averaging length, kernel and footprint]** Fix $\\ell>0$ and nonnegative $\\eta\\in C_c^\\infty(\\mathbb R^3)$ with $\\int\\eta=1$, in the Euclidean test-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]]. Put $\\eta_\\ell(x)=\\ell^{-3}\\eta(x/\\ell)$, $K=\\operatorname{supp}\\eta$ and choose a declared finite bound $R_\\eta>0$ with $K\\subseteq\\overline B_{R_\\eta}(0)$. The kernel and length are fixed data; the imported mass-one mollifier definition [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]] does not require $K\\subseteq\\overline B_1(0)$. At $x$ the exact averaging footprint is $x-\\ell K$. Define the open interior averaging domain\n\n$$\\Omega_{\\ell,\\eta}:=\\{x\\in\\Omega:x-\\ell K\\subseteq\\Omega\\}.$$\n\nThe sufficient condition $\\operatorname{dist}(x,\\mathbb R^3\\setminus\\Omega)>\\ell R_\\eta$ implies membership. If the additional unit-support condition $K\\subseteq\\overline B_1(0)$ is declared, the original sufficient region $\\operatorname{dist}(x,\\mathbb R^3\\setminus\\Omega)>\\ell$ and the ball $B_\\ell(x)$ are valid special cases; unit support is not inferred from mass one.\n\n**(b) [Averaged fields and input regularity]** For an open spatial domain $V$, locally integrable means measurable and absolutely integrable on every compact subset of $V$, componentwise for maps to $\\mathbb R^m$, $m=1$ or $3$ ([[def-locally-integrable-function-on-r-n]]). First suppose $F:\\Omega\\times I\\to\\mathbb R^m$ has a locally integrable spatial slice $F(\\cdot,t)$ for every $t$ under consideration. No integrability across the boundary of $\\Omega$ is required for the interior branch. Define, for $x\\in\\Omega_{\\ell,\\eta}$,\n\n$$F_\\ell(x,t)=\\int_\\Omega\\eta_\\ell(x-y)F(y,t)\\,dy.$$\n\nThe compact footprint lies in $\\Omega$, so this integral exists absolutely, and for each such $t$ it is smooth in $x$ on $\\Omega_{\\ell,\\eta}$ with\n\n$$\\partial_x^\\alpha F_\\ell(x,t)=\\int_\\Omega(\\partial^\\alpha\\eta_\\ell)(x-y)F(y,t)\\,dy$$\n\nfor every multi-index; these are applications of the pinned mollifier smoothing supplier [[thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign]] after localization: near a fixed $x_0\\in\\Omega_{\\ell,\\eta}$, compactness of $x_0-\\ell K\\subset\\Omega$ gives a small closed ball $Q$ of averaging centres whose footprints have compact union inside $\\Omega$. Choose $\\zeta\\in C_c^\\infty(\\Omega)$ equal to one near that union ([[lem-test-function-cutoffs-and-euclidean-localization]]); the zero extension of $\\zeta F(\\cdot,t)$ is globally locally integrable and its mollification agrees with the displayed average on the interior of $Q$. This also proves that $\\Omega_{\\ell,\\eta}$ is open, without assuming that the zero extension of $F$ itself is locally integrable. For each admissible fixed $t$ the spatial convolution is measurable in $x$ and independent of a.e.-equal spatial representatives ([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]); no joint $(x,t)$ measurability follows from the every-slice hypothesis alone. Joint $L^1_{\\mathrm{loc}}(\\Omega\\times I)$ input alone instead gives these slice statements for almost every $t$, by local Fubini on compact spatial/time exhaustions ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]], [[thm-countable-union-of-null-is-null]], [[thm-heine-borel-rn]]); it gives no every-time slice claim. A claim for every $t$ must explicitly supply locally integrable slices for every $t$ (for example jointly continuous fields supply that condition). A spacetime a.e. class alone determines the resulting averages only for almost every $t$; changing an exceptional time slice may change its pointwise-time assignment. Spatial smoothing asserts no time differentiability or joint smoothness without separately stated time hypotheses.\n\n**[Compatible extension branch]** If a declared extension $\\widehat F(\\cdot,t)$ agrees with $F$ a.e. on $\\Omega$ and is locally integrable on an open larger spatial domain $V$, use the same formula there for all $x$ whose compact footprint lies in $V$. If $V=\\mathbb R^3$ and every declared slice is globally locally integrable, the average is defined and spatially smooth on all $\\mathbb R^3\\times I$. If only joint local integrability of the extension is supplied, the global spatial conclusion is for almost every $t$ unless the every-slice hypothesis is added. The zero extension is an allowed choice only when it meets this local-integrability condition: equivalently, at each declared $t$, $\\int_{Q\\cap\\Omega}|F(y,t)|\\,dy<\\infty$ for every compact $Q\\subset\\mathbb R^3$. Mere local integrability inside $\\Omega$ does not imply that boundary condition. All these extension and per-time conditions are part of the declared configuration, with the original interior branch retaining every locally integrable spatial input.\n\n**(c) [Macroscopic reading and scale separation]** The framework reads its macroscopic fields and source densities as such averages only in situations where a separation of microscopic and observation scales is stated for the problem at hand; the averaging length and the actual kernel footprint (or its radius bound $\\ell R_\\eta$) are part of that statement, and no canonical value of $\\ell$ is asserted. This is a formulation choice for the macroscopic description, not a consequence of the vacuum equations.\n\n**(d) [Boundary handling]** For requested averages at $x\\in\\Omega$, boundary handling concerns the locations where $x-\\ell K$ is not contained in the original spatial domain. The region $\\{x\\in\\Omega:\\operatorname{dist}(x,\\partial\\Omega)\\le\\ell R_\\eta\\}$ is a sufficient enclosing boundary layer, with $\\ell$ in place of $\\ell R_\\eta$ only in the declared unit-support special case. Every requested average at an exterior location $x\\notin\\Omega$ must separately satisfy the extension/domain conditions of (b); the interior boundary-layer statement makes no claim to enclose exterior locations. In the interior layer a zero-extension average is used only under the compatible-extension hypothesis of (b). Otherwise one must declare another locally integrable extension, a boundary-layer model with its own well-definedness hypotheses, or restrict the averaging domain to the exact interior footprint domain. No boundary model is supplied by local integrability alone. An extension does not automatically extend a microscopic field equation across the original boundary; any averaging of such equations must either declare their validity on all used extended footprints or retain the resulting boundary distribution terms. These boundary qualifications do not impose a constitutive law.\n\n**(e) [No constitutive content]** Coarse graining reorganises the description; it does not by itself produce a constitutive relation between averaged fields and averaged sources, and no linear, local or instantaneous response is asserted by this postulate. Such a response is the separate assumption `post-em-material-closure`, and the derivation of macroscopic field equations from the vacuum equations is the separate result `pthm-em-macroscopic-maxwell`.",
+        "strategy": "An adopted nonproof formulation: the macroscopic identification and scale-separation/boundary conventions are adopted, not deduced from vacuum Maxwell or asserted empirically. Its mathematical referent is checked against the exact published mollifier contract, which permits any smooth compactly supported mass-one kernel and requires locally integrable input on the region used by its compact translates; it imposes no unit support.\n\nInterior applicability: for x0 in the exact footprint domain, x0-ell K is compact inside Omega. A sufficiently small closed ball of x-values about x0 has all its translated kernel supports in one compact Q contained in Omega. This follows from compactness and openness, and proves the footprint domain open. At each admissible t let f_Q be F(.,t) on Q and zero elsewhere. Since Q is compact inside Omega, f_Q belongs to global L1 and hence L1loc. The published mollifier smoothing theorem applied to f_Q gives a smooth convolution and every derivative by differentiating the kernel. In that small x-neighbourhood it equals the declared interior integral, and every derivative has support inside Q as well. This proves absolute existence, spatial smoothness and the derivative formula for arbitrary interior L1loc data. Spatial a.e. representatives give equal integrals for each x because translated kernel weights are bounded and have compact support. Compactness of K gives its finite support-radius bound; no equality to 1 is assumed.\n\nSlice qualification: exhaust Omega by compact sets K_j={x:|x|<=j,dist(x,R3 minus Omega)>=1/j} (use the usual convention if Omega=R3), and the open laboratory interval by compact subintervals. On each compact product joint local integrability makes F absolutely integrable. Apply the L1 Fubini theorem to these compact restrictions extended by zero to the Euclidean product. Outside a null exceptional time set the spatial integrals on each K_j are finite; a countable union of these exceptional sets is null under the already declared countable-choice convention. Thus a.e. time slices are locally integrable, because every compact subset of Omega lies in some K_j. It does not prove every-time slices or uniquely determine assignments at exceptional times. No time derivative is inferred. The compatible-extension branch uses the same precise supplier with its hypotheses checked on the declared larger domain; the all-space branch applies only when the extension is globally L1loc per slice. Zero extension has that property exactly when its absolute integral on Q equals the finite integral over Q intersect Omega for every global compact Q. A field such as 1/x1 on x1>0 fails this condition, so no unconditional boundary extension is asserted.\n\nThe enclosing boundary-layer claim is restricted to x inside Omega; requested exterior averages are governed separately by the footprint/extension conditions. Measurability in the every-slice branch refers to x at each admissible fixed t, with no unassumed joint measurability. Clauses (c)-(e) retain the adopted macroscopic reading, require the actual kernel footprint in scale separation, and distinguish smoothing from constitutive closure and field equations. No deductive proof of this modelling postulate is supplied or claimed. These local applicability arguments and inherited mathematical supplier pins are not independent source/audit acceptance.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.1 printed pp. 172-175 (PDF pp. 180-183): matter is described through macroscopic averaged fields (polarisation as a dipole-moment density), and the notes state explicitly that the coarse-graining step is informal; the precise kernel, averaging length and scale-separation convention of this postulate are the framework's own formulation. Read in the retained 236-page full text."
+            },
+            {
+              "title": "R. Fitzpatrick, Electromagnetism (University of Texas at Austin course), node 69: Polarization",
+              "url": "https://farside.ph.utexas.edu/teaching/em/lectures/node69.html",
+              "locator": "node 69, opening paragraph: a neutral molecular medium is described macro- \\u00adscopically by the dipole moment per unit volume, with the microscopic atomic detail absorbed into $\\mathbf P$; read in the retained offline full text of the course."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a74.4.1 printed pp. 179-180: the constitutive discussion states that the polarisation of a dielectric 'ordinarily results from an electric field' and that the material response is a model choice; read in the stamped 596-page scan."
+            }
+          ]
+        },
+        "physical_scope": "The declared smoothing convention for matter: a fixed smooth unit-mass kernel and averaging length, the definition and interior spatial regularity of the spatial averages of locally integrable fields on the laboratory region, the every-time versus almost-every-time input qualification, the compatible-extension branch, the scale-separation and boundary-layer conventions, and the explicit statement that averaging supplies neither a constitutive law nor a field equation. A modelling postulate of the framework, not derived from the vacuum equations and not an empirical claim.",
+        "dependency_level": 13
+      },
+      {
+        "id": "def-em-polarization-magnetization",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Polarization, magnetization, bound and free sources, and the fields D and H",
+        "reference": "definition-contracts.md#def-em-polarization-magnetization",
+        "design_state": "explicit-definition-contract; supplier-validation-recorded-separately",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "def-em-sources",
+          "post-em-coarse-graining",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "post-em-coarse-graining": "formulation-prerequisite",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let the laboratory region $U\\cong I\\times\\Omega$, its frame basis $(e_1,e_2,e_3)$, its units, its fields $E,B$ and its source densities $\\rho,J$ be those of [[def-em-lab-geometry]], [[def-em-si-conventions]], [[def-em-fields]] and [[def-em-sources]], and let the averaging convention be that of [[post-em-coarse-graining]], in whose sense the objects below are macroscopic. Any convolution used to instantiate that reading is taken on its declared exact interior-footprint domain, or under a declared locally integrable compatible extension covering every used footprint. Its every-time use requires every-time locally integrable spatial slices; joint spacetime local integrability alone supplies only the almost-every-time branch. The joint $C^2$ regularity specified below is a separate model hypothesis, not a consequence of spatial smoothing.\n\n**(a) [Polarization and magnetization]** The material model specifies two maps $P,M:\\Omega\\times I\\to\\mathbb R^3$ of class $C^2$ in the sense of [[def-ck-euclidean-maps-and-diffeomorphisms]] on the open set $\\Omega\\times I$: $P$ is the electric dipole moment per unit volume, in $\\mathrm C\\,\\mathrm m^{-2}$, and $M$ the magnetic dipole moment per unit volume, in $\\mathrm A\\,\\mathrm m^{-1}$, both read in the frame basis. They are data of the chosen material model: this definition does not compute them from $E$ and $B$, and no relation between $(P,M)$ and the fields is asserted here.\n\n**(b) [Bound sources]** Write $\\operatorname{div}$ and $\\operatorname{curl}$ for the divergence and curl of [[def-divergence-and-curl-of-a-c1-vector-field]] taken at fixed $t$, and $\\partial_t$ for the partial derivative of [[def-directional-and-partial-derivatives]] at fixed position, and define the bound charge density and bound current density by\n\n$$\\rho_b:=-\\operatorname{div}P,\\qquad J_b:=\\partial_tP+\\operatorname{curl}M.$$\n\nSince $P,M$ are jointly $C^2$, $\\rho_b$ and $J_b$ are continuous, indeed $C^1$, by the componentwise sum and product rules of [[thm-algebra-of-derivatives]]; $\\rho_b$ carries $\\mathrm C\\,\\mathrm m^{-3}$ and $J_b$ carries $\\mathrm A\\,\\mathrm m^{-2}$.\n\n**(c) [Free sources]** Define $\\rho_f:=\\rho-\\rho_b$ and $J_f:=J-J_b$, in the same units as $\\rho$ and $J$; these are the free charge and free current densities of the model. The decomposition $\\rho=\\rho_f+\\rho_b$, $J=J_f+J_b$ is part of the chosen material model: the same total pair $(\\rho,J)$ with a different pair $(P,M)$ is a different model.\n\n**(d) [Displacement and magnetic intensity]** Define the electric displacement and the magnetic intensity by\n\n$$D:=\\varepsilon_0E+P,\\qquad H:=\\mu_0^{-1}B-M,$$\n\nwhere $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\mu_0,c>0$ are the constants of [[def-em-si-conventions]]; $D$ carries $\\mathrm C\\,\\mathrm m^{-2}$ and $H$ carries $\\mathrm A\\,\\mathrm m^{-1}$.\n\n**(e) [Status]** This item fixes objects and the bound/free convention only. No field equation (the item `pthm-em-macroscopic-maxwell`), no constitutive relation (the item `post-em-material-closure`), no conservation of the bound pair (the item `pthm-em-macroscopic-maxwell`, clause (a)) and no identification of $P,M$ with microscopic dipole sums is asserted here.",
+        "strategy": "An explicit type/domain/convention definition. The regions, fields and sources are those of the named suppliers; the derivatives in (b) are the published divergence, curl and partial derivative; the constants and units are those of [[def-em-si-conventions]]; the $C^2$ class is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]; the macroscopic reading is the convention of [[post-em-coarse-graining]], with its actual footprint/compatible-extension and slice hypotheses carried whenever convolution is used. Joint C2 regularity of the model maps is assumed separately; the spatial averaging operation proves neither time differentiability nor the existence of microscopic dipole sums. The definition records explicitly that $(P,M)$ are model data read in the laboratory frame basis, that the bound/free split is a modelling choice, and that no constitutive relation between $(P,M)$ and $(E,B)$ is included. Well-definedness of $\\rho_b,J_b$ as continuous fields is the componentwise sum/product differentiability calculus of [[thm-algebra-of-derivatives]]. No field equation, no derivative of the physical fields and no microscopic interpretation is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a7\u00a77.1.1-7.1.2 printed pp. 173-178 (PDF pp. 181-186): $\\mathbf P=n\\mathbf p$, the bound charge $\\rho_{\\rm bound}=-\\nabla\\cdot\\mathbf P$ (7.5), the displacement $\\mathbf D=\\epsilon_0\\mathbf E+\\mathbf P$ (7.6) and $\\nabla\\cdot\\mathbf D=\\rho_{\\rm free}$ (7.7); \u00a7\u00a77.2.1-7.2.2 printed pp. 180-183 (PDF pp. 188-191): the bound current $\\mathbf J_{\\rm bound}=\\nabla\\times\\mathbf M$ (7.10), the completion by $\\partial\\mathbf P/\\partial t$ and $\\mathbf H=\\mathbf B/\\mu_0-\\mathbf M$ (7.11) with $\\nabla\\times\\mathbf H=\\mathbf J_{\\rm free}$ (7.12). Read in the retained 236-page full text."
+            },
+            {
+              "title": "R. Fitzpatrick, Electromagnetism (University of Texas at Austin course), node 69: Polarization",
+              "url": "https://farside.ph.utexas.edu/teaching/em/lectures/node69.html",
+              "locator": "node 69: $\\mathbf P$ as dipole moment per unit volume, the bound charge density relation and $\\mathbf D=\\epsilon_0\\mathbf E+\\mathbf P$; read in the retained offline full text of the course."
+            },
+            {
+              "title": "R. Fitzpatrick, Electromagnetism (University of Texas at Austin course), node 73: Magnetization",
+              "url": "https://farside.ph.utexas.edu/teaching/em/lectures/node73.html",
+              "locator": "node 73: the atomic-current description of $\\mathbf M$ as magnetic moment per unit volume and the magnetisation current $\\mathbf j=\\nabla\\times\\mathbf M$; read in the retained offline full text of the course."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a74.3.1 printed pp. 175-178, equations (4.21)-(4.22): $\\mathbf D=\\epsilon_0\\mathbf E+\\mathbf P$ and $\\nabla\\cdot\\mathbf D=\\rho_f$; \u00a76.2.1 printed pp. 263-266, equations (6.11)-(6.16): the bound volume current $\\mathbf J_b=\\nabla\\times\\mathbf M$ and the polarisation current $\\mathbf J_p=\\partial\\mathbf P/\\partial t$; read in the stamped 596-page scan."
+            }
+          ]
+        },
+        "physical_scope": "The macroscopic polarization P and magnetization M as dipole-moment densities of the chosen material model, the derived bound charge and bound current densities, the free/bound source decomposition, and the displacement D and magnetic intensity H, in SI units on the laboratory region in a fixed inertial frame. Definitions and conventions only: no field equation, no constitutive law, no conservation statement and no microscopic identification.",
+        "dependency_level": 14
+      },
+      {
+        "id": "pthm-em-macroscopic-maxwell",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The macroscopic Maxwell equations in terms of D, H and the free sources",
+        "reference": "core-conditional-proofs.md#K5",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-polarization-magnetization",
+          "def-em-si-conventions",
+          "def-em-sources",
+          "post-em-vacuum-maxwell",
+          "thm-algebra-of-derivatives",
+          "thm-clairaut-schwarz-mixed-partials",
+          "def-countable-choice",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-distributional-differentiation-is-continuous-and-commutes",
+          "thm-integration-by-parts",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "dependency_roles": {
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "post-em-vacuum-maxwell": "physical-assumption",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-distribution": "mathematical-premise",
+          "def-distributional-derivative": "mathematical-premise",
+          "def-regular-distribution-from-a-locally-integrable-function": "mathematical-premise",
+          "thm-locally-integrable-functions-embed-in-distributions": "mathematical-premise",
+          "thm-distributional-differentiation-is-continuous-and-commutes": "mathematical-premise",
+          "thm-integration-by-parts": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "lem-test-function-cutoffs-and-euclidean-localization": "mathematical-premise",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the smooth branch of the vacuum Maxwell postulate [[post-em-vacuum-maxwell]] on the laboratory region $U\\cong I\\times\\Omega$ of [[def-em-lab-geometry]]: fields $E,B:\\Omega\\times I\\to\\mathbb R^3$ jointly of class $C^1$ with the additional derivatives required by each equation existing and continuous, and continuous source densities $\\rho,J$ of [[def-em-sources]]. Let $P,M$ and the derived objects $\\rho_b,J_b,\\rho_f,J_f,D,H$ be those of [[def-em-polarization-magnetization]], with $P,M$ of class $C^2$, and use the operators of [[def-divergence-and-curl-of-a-c1-vector-field]] and [[def-directional-and-partial-derivatives]]. Then:\n\n**(a) [Bound-source conservation]** $\\partial_t\\rho_b+\\operatorname{div}J_b=0$ on $\\Omega\\times I$. Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the regular-distribution and classical-compatibility interfaces below. Identify continuous sources with their regular distributions using [[def-regular-distribution-from-a-locally-integrable-function]] and [[thm-locally-integrable-functions-embed-in-distributions]]. Then\n\n$$\\partial_t\\rho_f+\\operatorname{div}J_f=\\partial_t\\rho+\\operatorname{div}J$$\n\nas distributions on $U$, with derivatives as in [[def-distributional-derivative]]: the free pair is distributionally conserved exactly when the total pair is. Under the adopted four vacuum equations both sides are zero distributions, by [[thm-distributional-differentiation-is-continuous-and-commutes]]. These statements do not require classical derivatives of $\\rho,J$. Where the partial derivatives $\\partial_t\\rho$ and $\\partial_{x_i}J_i$ exist, the same identity holds pointwise by differentiating the free/bound decomposition; in particular, if these derivatives are continuous on $U$, both pairs satisfy the classical pointwise continuity equation. The bound-source conservation equation remains classical and uses only $P,M\\in C^2$.\n\n**(b) [Macroscopic equations]** On $\\Omega\\times I$,\n\n$$\\operatorname{div}D=\\rho_f,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}H=J_f+\\partial_tD.$$\n\n**(c) [Interpretation and scope]** Equations (b) are an exact rewriting of the adopted vacuum equations under the decomposition of [[def-em-polarization-magnetization]]: the two equations written in $E$ and $B$ are unchanged, and the $D$ and $H$ equations hold for every $C^2$ pair $(P,M)$, independently of any constitutive law. The classical bound identity of (a) uses the exchange of $\\partial_t$ with $\\operatorname{div}$ for $C^2$ data; the free/total identity is distributional in the stated continuous-source class, with its classical interpretation only under the additional derivatives stated in (a). The distributional conservation conclusion embeds the adopted smooth solution only; no macroscopic field-equation claim is made for the weak branch of the Maxwell postulate, for singular or sheet sources or for discontinuous $(P,M)$; no constitutive relation and no empirical statement is made.",
+        "strategy": "**Proof technique:** direct substitution, componentwise. (a): from [[def-em-polarization-magnetization]](b), $\\operatorname{div}J_b=\\operatorname{div}\\partial_tP+\\operatorname{div}\\operatorname{curl}M$. The second term vanishes: in components $\\operatorname{div}\\operatorname{curl}M=\\sum_{i,j,k=1}^3\\epsilon_{ijk}\\partial_i\\partial_jM_k$, and pairwise cancellation of the mixed partials $\\partial_i\\partial_jM_k=\\partial_j\\partial_iM_k$ is [[thm-clairaut-schwarz-mixed-partials]] applied to the $C^2$ components of $M$; the first term equals $\\partial_t\\operatorname{div}P$ by the same theorem applied to the $C^2$ components of $P$; adding $-\\partial_t\\operatorname{div}P$ gives zero. Linearity of $\\partial_t$, $\\operatorname{div}$ and $\\operatorname{curl}$ is [[thm-algebra-of-derivatives]] read componentwise. (b): Gauss's law $\\operatorname{div}E=(\\rho_f+\\rho_b)/\\varepsilon_0$ together with $\\rho_b=-\\operatorname{div}P$ gives $\\operatorname{div}(\\varepsilon_0E+P)=\\rho_f$, i.e. $\\operatorname{div}D=\\rho_f$. The equations $\\operatorname{div}B=0$ and $\\operatorname{curl}E=-\\partial_tB$ are unchanged. Ampere's law $\\operatorname{curl}B=\\mu_0J+c^{-2}\\partial_tE$ with $J=J_f+\\partial_tP+\\operatorname{curl}M$ gives, after dividing by $\\mu_0$ and moving $\\operatorname{curl}M$ to the left, $\\operatorname{curl}(\\mu_0^{-1}B-M)=J_f+\\partial_tP+\\varepsilon_0\\partial_tE$, where $(\\mu_0c^2)^{-1}=\\varepsilon_0$; the right-hand side is $J_f+\\partial_t(\\varepsilon_0E+P)=J_f+\\partial_tD$, so $\\operatorname{curl}H=J_f+\\partial_tD$. (c) records the scope: the identities are conditional on the adopted postulates and on $P,M\\in C^2$; no constitutive content is used. For the free/total identity, subtract the regular distributions of the classical bound pair from those of the continuous total pair and differentiate linearly. Under $\\mathrm{AC}_\\omega$, [[thm-distributional-differentiation-is-continuous-and-commutes]] identifies the $C^1$ bound derivatives with their classical regular distributions, so their sum is zero; this proves the distributional identity without differentiating the merely continuous total sources classically. Embed the four adopted $C^1$ Maxwell equations and apply spatial divergence to Ampere: commuting distributional derivatives cancels $\\operatorname{div}\\operatorname{curl}B$ and Gauss gives $\\partial_t\\rho+\\operatorname{div}J=0$. If the displayed source derivatives exist, linearity gives the pointwise free/total identity; if they are continuous, classical compatibility and injectivity of the regular-distribution embedding give pointwise zero. Only the regular-distribution/classical-compatibility branch invokes $\\mathrm{AC}_\\omega$; the classical bound calculation and the macroscopic substitution in (b) remain choice-free.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.3 printed pp. 183-184 (PDF pp. 191-192): the completion of the bound current by $\\partial\\mathbf P/\\partial t$ from bound-charge continuity, $\\nabla\\times\\mathbf H-\\partial\\mathbf D/\\partial t=\\mathbf J_{\\rm free}$ and the four macroscopic equations (7.13). Read in the retained 236-page full text."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a77.3.5 printed pp. 328-331, equations (7.49)-(7.55): the separation $\\rho=\\rho_f+\\rho_b$, $\\mathbf J=\\mathbf J_f+\\mathbf J_b+\\mathbf J_p$ with $\\rho_b=-\\nabla\\cdot\\mathbf P$, $\\mathbf J_b=\\nabla\\times\\mathbf M$, $\\mathbf J_p=\\partial\\mathbf P/\\partial t$, the resulting $\\mathbf D=\\epsilon_0\\mathbf E+\\mathbf P$ and the Maxwell equations in matter. Read in the stamped 596-page scan."
+            }
+          ]
+        },
+        "physical_scope": "The macroscopic Maxwell equations div D=rho_f, div B=0, curl E=-d_tB, curl H=J_f+d_tD, together with the conservation of the bound source pair, as a conditional consequence of the adopted smooth vacuum equations and the bound/free decomposition, for C^2 macroscopic dipole densities on the laboratory region. No constitutive law, no weak-branch or singular-source claim and no empirical statement. Free/total conservation is distributional for the continuous-source class under AC_omega, and classical under the stated additional source derivatives.",
+        "dependency_level": 15
+      },
+      {
+        "id": "post-em-material-closure",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Declared material-closure branches: linear nondispersive Ohmic response and the causal memory branch",
+        "reference": "definition-contracts.md#post-em-material-closure",
+        "design_state": "explicit-adopted-postulate-contract; nonproof-source-scope-review",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-polarization-magnetization",
+          "def-em-si-conventions",
+          "def-inertial-frame-and-inertial-chart",
+          "def-l-one-of-a-measure",
+          "pthm-em-macroscopic-maxwell"
+        ],
+        "dependency_roles": {
+          "def-complex-differentiability-holomorphic-and-entire": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-inertial-frame-and-inertial-chart": "formulation-prerequisite",
+          "def-l-one-of-a-measure": "mathematical-premise",
+          "pthm-em-macroscopic-maxwell": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Adopt as a modelling postulate of this framework the following constitutive branches for the material described by the macroscopic fields of [[def-em-polarization-magnetization]].\n\n**(a) [Material rest frame]** The relations below are stated in a material rest frame: an inertial frame $(o;e_0,e_1,e_2,e_3)$ of the Minkowski model of [[def-em-lab-geometry]] ([[def-inertial-frame-and-inertial-chart]]) in whose coordinates each modelled material element has fixed spatial position $x$, hence history $t\\mapsto(ct,x)$ on the declared time interval. When this is the laboratory frame, the components below are laboratory components. Boosting the material changes both the fields and the rest observer; this postulate does not assert that the relations below hold with the same constants in every frame.\n\n**(b) [Elementary inertial-rest branch]** In the rest frame, with constant symmetric positive-definite matrices $\\varepsilon,\\mu\\in\\mathbb R^{3\\times3}$ (the isotropic scalar cases $\\varepsilon=\\varepsilon\\mathbf 1$, $\\mu=\\mu\\mathbf 1$ with $\\varepsilon,\\mu>0$ included), the model takes\n\n$$D=\\varepsilon E,\\qquad B=\\mu H,\\qquad J_c=\\sigma E,$$\n\nwhere $\\sigma\\in\\mathbb R^{3\\times3}$ is symmetric positive semidefinite and $J_c$ is the conduction part of the free current, $J_f=J_c+J_{\\mathrm{ext}}$ for a declared external free current $J_{\\mathrm{ext}}:\\Omega\\times I\\to\\mathbb R^3$ in $\\mathrm A\\,\\mathrm m^{-2}$. For a real matrix $T$, symmetric means $T^{\\mathsf T}=T$, positive definite means $v^{\\mathsf T}Tv>0$ for every nonzero $v\\in\\mathbb R^3$, and positive semidefinite means $v^{\\mathsf T}Tv\\ge0$ for every $v$. Entries of $\\varepsilon,\\mu,\\sigma$ carry respectively $\\mathrm F\\,\\mathrm m^{-1}$, $\\mathrm H\\,\\mathrm m^{-1}$ and $\\mathrm S\\,\\mathrm m^{-1}$, where $\\mathrm F=\\mathrm C/\\mathrm V$, $\\mathrm H=\\mathrm T\\,\\mathrm m^2/\\mathrm A$ and $\\mathrm S=\\mathrm A/\\mathrm V$; these make the three displayed relations dimensionally consistent. Local, linear and nondispersive (instantaneous) response is part of this restricted assumption. In the isotropic case an exact broadband interpretation of the constant-coefficient law additionally requires $\\varepsilon\\mu\\ge c^{-2}$, so that the characteristic speed $1/\\sqrt{\\varepsilon\\mu}$ does not exceed the vacuum speed $c$; without that condition, and in the anisotropic branch, the constant-coefficient law is a declared finite-band effective phase-response model and carries no universal front-speed claim.\n\n**(c) [Causal memory branch]** Alternatively, at each fixed material position $x$, declare a bounded continuous full history $E_x:\\mathbb R\\to\\mathbb R^3$ in $\\mathrm V\\,\\mathrm m^{-1}$ and its response $P_x:\\mathbb R\\to\\mathbb R^3$ in $\\mathrm C\\,\\mathrm m^{-2}$. Write $E(t)=E_x(t)$ and $P(t)=P_x(t)$ in the following formula; any field on a smaller time interval uses a declared full-history extension, not unspecified past values. The polarisation response is the causal convolution\n\n$$P(t)=\\varepsilon_0\\int_0^\\infty K(s)\\,E(t-s)\\,ds$$\n\nfor a declared real matrix kernel $K:[0,\\infty)\\to\\mathbb R^{3\\times3}$ with entries in $L^1(0,\\infty)$ ([[def-l-one-of-a-measure]]) and units $\\mathrm s^{-1}$; the integral then converges absolutely because $|K_{jk}(s)E_k(t-s)|\\le(\\sup|E_k|)|K_{jk}(s)|$. The convolution uses only the past history; its continuity and causality are proved in `pthm-em-causal-dispersive-response`, while passivity is an additional model condition. Spatial or temporal differentiability of the resulting fields requires separate hypotheses when used. A finitely-subtracted analytic response may instead be declared by a dimensionless scalar transfer function $\\chi$ that is holomorphic on the open upper half-plane, continuous on its closure, of class $C^1$ on the real boundary away from a real subtraction point $\\omega_0$, holomorphic on a neighbourhood of $\\omega_0$ in $\\mathbb C$, and satisfies $|\\chi(z)|\\le C(1+|z|^{n-1})$ on $\\{\\operatorname{Im}z\\ge0\\}$ outside a compact set for some integer $n\\ge1$ and constant $C>0$ ([[def-complex-differentiability-holomorphic-and-entire]]). Here $z,\\omega_0$ are numerical angular frequencies in $\\mathrm s^{-1}$ and the growth bound uses those SI numerical coordinates. Require also $\\chi(-\\omega)=\\overline{\\chi(\\omega)}$ for every real $\\omega$, hence $\\chi(0)\\in\\mathbb R$, so that the response is defined on real harmonic histories independently of their representation. For $\\omega\\ne0$ the amplitude at that frequency is unique and reversing frequency conjugates it; the symmetry gives the same real output. At $\\omega=0$ only $\\operatorname{Re}e$ determines the input, and real $\\chi(0)$ makes the output depend only on that input. For $e\\in\\mathbb C^3$, real $\\omega$, and componentwise real part, declaring this transfer means adopting the harmonic relation $E(t)=\\operatorname{Re}(e e^{-i\\omega t})\\mapsto P(t)=\\operatorname{Re}(\\varepsilon_0\\chi(\\omega)e e^{-i\\omega t})$; upper-half-plane holomorphy alone does not construct a time-domain response for arbitrary histories.\n\n**(d) [Status]** These are adopted model assumptions, one branch at a time; the framework does not derive them from the vacuum equations or from coarse graining, and no microscopic mechanism, material data or empirical validity is claimed. Ferroelectric and ferromagnetic response, hysteresis, nonlinear response and general nonlocal response lie outside the branches declared here.",
+        "strategy": "An adopted nonproof formulation. The objects are those of [[def-em-polarization-magnetization]]; the macroscopic field equations whose formulation the closure completes are those of [[pthm-em-macroscopic-maxwell]]; the rest-frame notion is the inertial frame of [[def-inertial-frame-and-inertial-chart]] used by [[def-em-lab-geometry]], and the memory-branch kernel class is the $L^1$ notion of [[def-l-one-of-a-measure]], whose absolute convergence for bounded continuous histories is the elementary domination displayed in the statement. The finitely-subtracted branch uses the holomorphy notion of [[def-complex-differentiability-holomorphic-and-entire]] and states its growth and boundary hypotheses explicitly rather than hiding them. Clause (d) records that the branches are assumptions with no microscopic or empirical content. No proof is supplied and none is claimed, in accordance with the nonproof status of a postulate; the source and scope review covers the formulation, the rest-frame and scale qualifications and the non-derivation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.3 printed p. 184 (PDF p. 192): 'in the simplest, linear materials' $\\mathbf D=\\epsilon\\mathbf E$ and $\\mathbf B=\\mu\\mathbf H$, with the warning that the permittivity is not as constant as it is pretended there; \u00a77.5.4 printed pp. 200-204 (PDF pp. 208-212): response functions, the causal convolution and its analyticity; \u00a77.6.1 printed pp. 205-206 (PDF pp. 213-214): Ohm's law $\\mathbf J=\\sigma\\mathbf E$ and its DC limit. Read in the retained 236-page full text."
+            },
+            {
+              "title": "R. Fitzpatrick, Electromagnetism (University of Texas at Austin course), node 78: Magnetic energy",
+              "url": "https://farside.ph.utexas.edu/teaching/em/lectures/node78.html",
+              "locator": "node 78: Ohm's law $\\mathbf j_t=\\sigma(\\mathbf E+\\mathbf E')$, the ohmic heating $j_t^2/\\sigma$, and the statement that $W=\\frac12\\int\\mathbf H\\cdot\\mathbf B$ holds only for a linear magnetisation relation, with the hysteresis loop as a failure case; read in the retained offline full text of the course."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a74.4.1 printed pp. 179-181, equations (4.30)-(4.32): $\\mathbf P=\\epsilon_0\\chi_e\\mathbf E$, $\\mathbf D=\\epsilon\\mathbf E$ and the 'linear dielectric' definition; \u00a76.4.1 printed pp. 274-278, equations (6.28)-(6.31): $\\mathbf M=\\chi_m\\mathbf H$ and $\\mathbf B=\\mu\\mathbf H$ for linear magnetic media; \u00a77.1.1 printed pp. 296-299: Ohm's law $\\mathbf J=\\sigma\\mathbf E$ as a phenomenological relation. Read in the stamped 596-page scan."
+            },
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "\\u00a76.2 and \\u00a76.7 printed pp. 194-207: the dielectric-tensor generalisation D=\\u03b50\\u03b5\\u00b7E (6.12), the warning that linearity fails for strong fields, and M=\\u03c7mH, B=\\u03bcH for linear magnetic media; read in the fetched complete 364-page course book."
+            }
+          ]
+        },
+        "physical_scope": "Declared material-closure branches for the macroscopic fields: a constant symmetric linear nondispersive branch with positive-definite epsilon, mu and positive-semidefinite Ohmic sigma, with the isotropic broadband condition epsilon*mu >= c^-2 stated separately, and a causal memory branch with an L1 kernel or an explicitly finitely-subtracted analytic transfer function satisfying real-history symmetry, all stated in a material rest frame. Adopted model assumptions: no derivation, no microscopic mechanism, no material data and no empirical claim; hysteresis, nonlinear and general nonlocal response are excluded.",
+        "dependency_level": 16
+      },
+      {
+        "id": "pthm-em-material-stationary-jumps",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Stationary macroscopic interface jump conditions for D, B, E and H",
+        "reference": "core-conditional-proofs.md#K5",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-countable-choice",
+          "def-cross-product-in-r3",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-polarization-magnetization",
+          "def-em-si-conventions",
+          "def-em-sources",
+          "def-em-surface-distribution",
+          "def-em-weak-sources",
+          "def-euclidean-inner-product",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "def-test-function-space-d-of-an-open-set",
+          "lem-em-interface-derivatives",
+          "pthm-em-macroscopic-maxwell",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "prop-the-image-of-a-lower-dimensional-c1-manifold-is-null",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-fundamental-lemma-of-the-calculus-of-variations",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "thm-integration-by-parts",
+          "cor-graph-of-a-measurable-function-is-lebesgue-null"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-distribution": "mathematical-premise",
+          "def-distributional-derivative": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "def-em-surface-distribution": "mathematical-premise",
+          "def-em-weak-sources": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-regular-distribution-from-a-locally-integrable-function": "mathematical-premise",
+          "def-test-function-space-d-of-an-open-set": "mathematical-premise",
+          "lem-em-interface-derivatives": "mathematical-premise",
+          "pthm-em-macroscopic-maxwell": "physical-result",
+          "thm-locally-integrable-functions-embed-in-distributions": "mathematical-premise",
+          "def-surface-integral-on-a-compact-c-one-hypersurface": "mathematical-premise",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts": "mathematical-premise",
+          "prop-the-image-of-a-lower-dimensional-c1-manifold-is-null": "mathematical-premise",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions": "mathematical-premise",
+          "lem-test-function-cutoffs-and-euclidean-localization": "mathematical-premise",
+          "lem-fundamental-lemma-of-the-calculus-of-variations": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal": "mathematical-premise",
+          "thm-integration-by-parts": "mathematical-premise",
+          "cor-graph-of-a-measurable-function-is-lebesgue-null": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), the hypothesis under which [[lem-em-interface-derivatives]] and the surface conventions of [[def-em-weak-sources]] are stated, and let the laboratory region $U\\cong I\\times\\Omega$ and its units be those of [[def-em-lab-geometry]] and [[def-em-si-conventions]].\n\nLet $S\\subset\\Omega$ be a fixed compact embedded $C^2$ hypersurface with a chosen unit normal $n$ pointing from the side $\\Omega_-$ to the side $\\Omega_+$ ([[def-em-surface-distribution]]), let $\\sigma_f:S\\times I\\to\\mathbb R$ and $K_f:S\\times I\\to\\mathbb R^3$ be continuous with $K_f(x,t)\\cdot n(x)=0$ for all $(x,t)$ (a free surface charge density in $\\mathrm C\\,\\mathrm m^{-2}$ and a tangential free surface current density in $\\mathrm A\\,\\mathrm m^{-1}$, both stationary in $t$), and let $\\rho_v:(\\Omega\\setminus S)\\times I\\to\\mathbb R$ and $J_v:(\\Omega\\setminus S)\\times I\\to\\mathbb R^3$ be continuous and locally integrable on $\\Omega\\times I$. Let $E,B,D,H:\\Omega\\times I\\to\\mathbb R^3$ be locally integrable on $\\Omega\\times I$ and of class $C^1$ on $(\\Omega\\setminus S)\\times I$, with the joint one-sided $C^1$ extension property: around every $(x_0,t_0)\\in S\\times I$, each side of each field is the restriction of a $C^1$ function on an open spacetime neighbourhood of the corresponding closed side of a smaller stationary graph cylinder, so that the fields and their first space and time derivatives extend continuously to that side, locally uniformly on compact cylinders. Write $[F]=F_+-F_-$ for the jump of the one-sided traces.\n\n**[Thin-interface hypothesis]** Suppose that $E,B,D,H$ satisfy the four macroscopic equations of [[pthm-em-macroscopic-maxwell]] in the distributional sense on $U$ with the source pair $\\rho_f=\\rho_v+\\sigma_f\\delta_S$, $J_f=J_v+K_f\\delta_S$, where the stationary-sheet pairings are those of [[def-em-weak-sources]](c) and the equations are $\\operatorname{div}D=\\rho_f$, $\\operatorname{div}B=0$, $\\operatorname{curl}E=-\\partial_tB$, $\\operatorname{curl}H=J_f+\\partial_tD$ as identities in the sense of [[def-distribution]], the fields being identified with their regular distributions ([[def-regular-distribution-from-a-locally-integrable-function]], [[thm-locally-integrable-functions-embed-in-distributions]]) and $\\psi$ ranging over $C_c^\\infty(U)$ ([[def-test-function-space-d-of-an-open-set]], [[def-distributional-derivative]]). This thin-interface solution hypothesis is a modelling assumption of the statement: it is the natural weakening of the smooth macroscopic equations to fields with a common stationary discontinuity, and it is not deduced from the smooth-region equations alone.\n\nThen, pointwise on $S\\times I$,\n\n$$n\\cdot[D]=\\sigma_f,\\qquad n\\cdot[B]=0,\\qquad n\\times[E]=0,\\qquad n\\times[H]=K_f,$$\n\nwith the Euclidean inner and cross products of the one-sided traces ([[def-euclidean-inner-product]], [[def-cross-product-in-r3]]); equivalently $\\sigma_f=n\\cdot[D]$ and $K_f=n\\times[H]$ recover the free sheet densities from the field jumps.\n\n**[Weak-trace branch]** If instead of the joint extension hypothesis the fields have the original one-sided spatial $C^1$ extensions at each time and, in addition, the piecewise first spatial and temporal derivatives are in $L^1_{\\mathrm{loc}}(U)$ and the one-sided field traces are measurable and locally integrable on $S\\times I$ with respect to $dS\\,dt$, then the same four identities hold as identities of sheet distributions and for $dS\\,dt$-almost every $(x,t)$; since the traces are spatially continuous at each fixed time, they hold for every $x\\in S$ for almost every $t$, and at every $(x,t)$ whenever the jump densities are additionally jointly continuous. Merely having one-sided spatial $C^1$ traces separately at every time does not justify the last upgrade.\n\n**[Scope]** In the joint one-sided spacetime $C^1$ extension branch, stationarity and the joint extensions make $\\partial_tD$ and $\\partial_tB$ locally bounded near $S$ and hence locally integrable, contributing no delta terms. In the weak-trace branch the explicitly assumed locally integrable temporal derivatives provide this conclusion instead. No magnetic charge and no magnetic surface current are present in the sources; no dipolar sheet layer (a concentrated dipole distribution in $P$ or $M$, which would make the fields non-integrable) is included. No existence theorem for fields with singular sources is asserted, no constitutive law is used, and no empirical claim is made.",
+        "strategy": "**Proof technique:** apply [[lem-em-interface-derivatives]] to the four fields and match the coefficients of the surface distribution. By [[lem-em-interface-derivatives]] ($\\mathrm{AC}_\\omega$ declared), for $C^1$-off-$S$ fields with one-sided $C^1$ traces, $\\operatorname{div}D=\\{\\operatorname{div}D\\}_{\\mathrm{piecewise}}+n\\cdot[D]\\,\\delta_S$ and $\\operatorname{curl}H=\\{\\operatorname{curl}H\\}_{\\mathrm{piecewise}}+n\\times[H]\\,\\delta_S$, with the analogous identities for $B$ and $E$. Substituting into the distributional identities of the hypothesis and using the sheet pairings of [[def-em-weak-sources]](c), the regular parts reproduce the off-interface macroscopic equations and the coefficients of $\\delta_S$ give, one equation at a time, $n\\cdot[D]=\\sigma_f$ (from $\\operatorname{div}D=\\rho_f$), $n\\cdot[B]=0$ (from $\\operatorname{div}B=0$), $n\\times[E]=0$ and $n\\times[H]=K_f$: the right-hand sides $\\partial_tB$ and $J_f+\\partial_tD$ carry no delta term because $S$ is stationary and the joint one-sided $C^1$ hypothesis makes $\\partial_tB$ and $\\partial_tD$ locally bounded near $S$, hence locally integrable. Since the two-sided traces are continuous on $S\\times I$, the distributional coefficient identities are the displayed pointwise identities. The weak-trace branch replaces the pointwise trace argument by the $dS\\,dt$-almost-everywhere sheet identity plus the spatial-continuity upgrade. No constitutive relation and no field equation beyond the assumed distributional identities is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.3 printed pp. 185-186 (PDF pp. 193-194), equations (7.17)-(7.20): $\\hat{\\mathbf n}\\cdot(\\mathbf D_2-\\mathbf D_1)=\\sigma$, $\\hat{\\mathbf n}\\cdot(\\mathbf B_2-\\mathbf B_1)=0$, $\\hat{\\mathbf n}\\times(\\mathbf E_2-\\mathbf E_1)=0$, $\\hat{\\mathbf n}\\times(\\mathbf H_2-\\mathbf H_1)=\\mathbf K$, with $\\hat{\\mathbf n}$ pointing from region 1 into region 2 and $\\sigma$ the free surface charge. Read in the retained 236-page full text."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a77.3.6 printed pp. 331-333, equations (7.59)-(7.62): the pillbox and loop derivations of $D^\\perp_1-D^\\perp_2=\\sigma_f$, $B^\\perp_1-B^\\perp_2=0$, $\\mathbf E^\\parallel_1-\\mathbf E^\\parallel_2=0$ and $\\mathbf H^\\parallel_1-\\mathbf H^\\parallel_2=\\mathbf K_f\\times\\hat{\\mathbf n}$. Read in the stamped 596-page scan."
+            },
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "\\u00a76.3 'Boundary conditions for E and D' printed p. 197, equations (6.13)-(6.15), and \\u00a76.9 'Boundary conditions for B and H' printed p. 210, equations (6.39)-(6.42); read in the fetched complete 364-page course book."
+            }
+          ]
+        },
+        "physical_scope": "The stationary-interface jump conditions n.D=sigma_f, n.B=0, n x E=0, n x H=K_f (jumps of the one-sided traces) for macroscopic fields with a common stationary discontinuity and free sheet sources, concluded from the distributional macroscopic equations under the explicit joint one-sided C1 (or stated weak-trace) hypotheses, with AC_omega carried. A conditional field result: no existence, no constitutive law, no moving interface, no magnetic charge, no magnetic sheet and no dipolar sheet layer; no empirical claim.",
+        "dependency_level": 16
+      },
+      {
+        "id": "pthm-em-causal-dispersive-response",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Specified causal material response: transfer function, dispersion relations and the passivity condition",
+        "reference": "completed-expansion-arguments.md#D1",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-em-fields",
+          "def-em-si-conventions",
+          "lem-em-finitely-subtracted-analytic-dispersion",
+          "post-em-material-closure",
+          "thm-em-causal-dispersive-response",
+          "thm-algebra-of-derivatives",
+          "def-euclidean-inner-product",
+          "lem-em-period-average",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "lem-em-finitely-subtracted-analytic-dispersion": "mathematical-premise",
+          "post-em-material-closure": "physical-assumption",
+          "thm-em-causal-dispersive-response": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-em-period-average": "mathematical-premise",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the memory branch of the material-closure postulate [[post-em-material-closure]] in a material rest frame, and assume the hypotheses of the mathematical suppliers [[thm-em-causal-dispersive-response]] and [[lem-em-finitely-subtracted-analytic-dispersion]]: Countable Choice for the smooth comparison route and, in the integrable branches, Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]]). Let $E:\\mathbb R\\to\\mathbb R^3$ be the electric-field history in the material rest frame, read componentwise in its spatial basis ([[def-em-fields]]), and let $P$ be the polarisation response declared by the model.\n\n**(a) [Causal response]** If the kernel of [[post-em-material-closure]](c) satisfies $K\\in L^1(0,\\infty;\\mathbb R^{3\\times3})$, then for every bounded continuous history $E$ the response $P(t)=\\varepsilon_0\\int_0^\\infty K(s)E(t-s)\\,ds$ is well defined for every $t$, bounded and continuous, linear in $E$, and causal: histories equal on $(-\\infty,t_0]$ produce responses equal on $(-\\infty,t_0]$.\n\n**(b) [Transfer function and dispersion relations]** If $K$ is smooth with compact support in $(0,\\infty)$, the transfer function $\\chi(z)=\\int_0^\\infty K(s)e^{izs}\\,ds$ is entire, satisfies $\\chi(-\\omega)=\\overline{\\chi(\\omega)}$ for real $\\omega$, obeys $|\\chi_{jk}(z)|\\le\\|K_{jk}''\\|_{L^1}|z|^{-2}$ for $z\\ne0$ with $\\operatorname{Im}z\\ge0$ (with the whole-plane bound carrying the exponential factor $e^{b\\max(0,-\\operatorname{Im}z)}$ when $\\operatorname{supp}K\\subseteq(0,b)$), and its entries satisfy the principal-value dispersion relations of [[thm-em-causal-dispersive-response]](b). If $K$ is locally absolutely continuous on $[0,\\infty)$ with $K,K'\\in L^1$ and $sK\\in L^1$, then $\\chi$ is holomorphic on the open upper half-plane, continuous with continuous first derivative on the real boundary, obeys the stated growth bound, and satisfies the same pair of relations; an instantaneous real part $\\chi_\\infty$ may be added to the model, and the relations apply to $\\chi_{\\mathrm{total}}-\\chi_\\infty$ for $\\chi_{\\mathrm{total}}=\\chi_\\infty+\\chi$.\n\n**(c) [Finitely-subtracted and polynomial branches]** For each specified integer $n\\ge1$ for which the full hypotheses of [[lem-em-finitely-subtracted-analytic-dispersion]] hold for the declared response transfer function, its $n$-subtracted relations apply entrywise. Any transfer-only physical branch additionally requires $\\chi(-\\omega)=\\overline{\\chi(\\omega)}$ entrywise for every real $\\omega$, including real $\\chi(0)$, as in [[post-em-material-closure]](c); scalar transfers act as scalar matrices. These hypotheses include upper-half-plane holomorphy, continuity on the closed upper half-plane, the stated boundary $C^1$ regularity, holomorphy near the real subtraction point $\\omega_0$, and the order-specific growth bound $|\\chi_{jk}(z)|\\le C_{jk}(1+|z|^{n-1})$ outside a compact set. The Taylor polynomial and residual are\n\n$$P_n(z)=\\sum_{j=0}^{n-1}\\frac{\\chi^{(j)}(\\omega_0)}{j!}(z-\\omega_0)^j,\\qquad f_n(z)=\\frac{\\chi(z)-P_n(z)}{(z-\\omega_0)^n},$$\n\nwith removable values and the boundary $C^1$ hypothesis read entrywise as in the supplier. A growth bound for one order $n_0$ permits every order $n\\ge n_0$ under the same local analytic and boundary hypotheses; it does not justify lower orders for which the required growth fails. The unsubtracted $n=0$ case is included only under its own decay and boundary hypotheses: $P_0=0$, $f_0=\\chi$, growth $O(1/|z|)$, and factor $(\\omega-\\omega_0)^0=1$ with the supplier's principal-value convention. The separate constitutive-polynomial branch declares the normalized polarisation $P/\\varepsilon_0=\\sum_{j=0}^mA_jE^{(j)}+K*E$, with real scalar coefficients (acting as scalar matrices) or real $3\\times3$ matrices $A_j$ whose entries carry $\\mathrm s^j$, and $K$ satisfying the supplier's integrable causal hypotheses, is causal on histories with bounded continuous derivatives through order $m$. Its transfer is $Q(z)+\\chi_K(z)$ with $Q(z)=\\sum_{j=0}^mA_j(-iz)^j$. Subtracting the declared $Q$ leaves the proved relations for $\\chi_K$, without assuming that $Q$ is the Taylor polynomial $P_n$.\n\n**(d) [Monochromatic work, instantaneous work and passivity]** Let $\\omega>0$, $e\\in\\mathbb C^3$ and $E(t)=\\operatorname{Re}(e e^{-i\\omega t})$. Write $\\chi_{\\mathrm{tot}}(\\omega)$ for the full transfer matrix used in the response: it is $\\chi(\\omega)$ without an instantaneous term and $\\chi_\\infty+\\chi(\\omega)$ when the arbitrary real instantaneous matrix $\\chi_\\infty\\in\\mathbb R^{3\\times3}$ is present. For a transfer-function-only branch adopt $P(t)=\\operatorname{Re}(\\varepsilon_0\\chi_{\\mathrm{tot}}(\\omega)e e^{-i\\omega t})$ as the harmonic response convention; in a kernel or normalized polynomial branch this follows by substitution. Here $e$ has units $\\mathrm V\\,\\mathrm m^{-1}$, $\\chi_{\\mathrm{tot}}$ is dimensionless, $e^*$ denotes conjugate transpose, $(C^*)_{jk}=\\overline{C_{kj}}$ for a complex matrix $C$, a matrix $H$ is Hermitian when $H^*=H$ and is positive semidefinite when $v^*Hv\\ge0$ for every $v\\in\\mathbb C^3$, in the convention of [[thm-em-causal-dispersive-response]](d), and $\\langle g\\rangle:=T^{-1}\\int_0^Tg(t)\\,dt$ with $T=2\\pi/\\omega$. The period-averaged work per unit volume, in $\\mathrm W\\,\\mathrm m^{-3}$, is\n\n$$\\langle E\\cdot\\partial_tP\\rangle=\\frac{\\varepsilon_0\\omega}{2}\\operatorname{Im}(e^*\\chi_{\\mathrm{tot}}(\\omega)e).$$\n\nIt is nonnegative for every $e$ if and only if the full Hermitian dissipative part\n\n$$M_{\\mathrm{tot}}(\\omega)=\\frac{\\chi_{\\mathrm{tot}}(\\omega)-\\chi_{\\mathrm{tot}}(\\omega)^*}{2i}$$\n\nis positive semidefinite. This frequencywise monochromatic passivity is an additional model condition, not a consequence of causality or dispersion.\n\nFor the instantaneous part set $S=(\\chi_\\infty+\\chi_\\infty^{\\mathsf T})/2$ and $A=(\\chi_\\infty-\\chi_\\infty^{\\mathsf T})/2$, so $S^{\\mathsf T}=S$ and $A^{\\mathsf T}=-A$. For any real $C^1$ history its exact instantaneous work split is\n\n$$E\\cdot\\partial_t(\\varepsilon_0\\chi_\\infty E)=\\frac{d}{dt}\\left(\\frac{\\varepsilon_0}{2}E\\cdot S E\\right)+\\varepsilon_0 E\\cdot A\\partial_tE.$$\n\nThe symmetric part therefore supplies the quadratic storage term; no positivity of that term is asserted unless $S$ is additionally positive semidefinite. The antisymmetric part has $E\\cdot A E=0$ but can supply nonzero work over a cycle. Its monochromatic contribution is $\\varepsilon_0\\omega\\operatorname{Im}(e^*A e)/2$, and\n\n$$M_{\\mathrm{tot}}(\\omega)=M_K(\\omega)+A/i,\\qquad M_K(\\omega)=\\frac{\\chi(\\omega)-\\chi(\\omega)^*}{2i}.$$\n\nThus only a symmetric real instantaneous matrix contributes purely this storage term for all histories; for an arbitrary real instantaneous matrix the passivity test must include its antisymmetric contribution. For example, $\\chi_\\infty=\\begin{pmatrix}0&1&0\\\\-1&0&0\\\\0&0&0\\end{pmatrix}$, $K=0$ and $e=(1,i,0)^{\\mathsf T}$ give $E=(\\cos\\omega t,\\sin\\omega t,0)$, zero quadratic storage and averaged work $\\varepsilon_0\\omega>0$. The opposite circular amplitude $(1,-i,0)^{\\mathsf T}$ gives averaged work $-\\varepsilon_0\\omega$, so this instantaneous response is causal but fails the all-amplitude passivity condition.\n\n**(e) [Scope]** The response is declared in the material rest frame of [[post-em-material-closure]](a); boosting the material changes the fields and the rest observer, and no frame-independent instantaneous response law is asserted. The framework does not claim that any particular material realises these branches, no microscopic mechanism is derived, and no empirical statement is made.",
+        "strategy": "**Proof technique:** supplier identification for the analytic branches, followed by finite-dimensional work calculations.\n\n(a)\u2013(b) Apply the fully stated mathematical response supplier entrywise to the declared rest-frame kernel and multiply its convolution by the framework's positive normalization $\\varepsilon_0$. This retains existence, continuity, boundedness, linearity, causality, the stated entire or upper-half-plane analytic transfer, reality identity, decay and dispersion conditions. Adding any real constant matrix changes only the total transfer, and the dispersion formulas remain those for $\\chi_{\\mathrm{tot}}-\\chi_\\infty$; this analytic subtraction asserts no work or storage property.\n\n(c) Fix an order $n$ satisfying the exact finite-subtraction supplier hypotheses. Taylor expansion near $\\omega_0$ makes the zero in $\\chi-P_n$ removable after division by $(z-\\omega_0)^n$, and the order-specific growth yields $f_n(z)=O(1/|z|)$ in the closed upper half-plane. The supplier's boundary contour proof then gives its two principal-value relations. Do not apply it to a lower order without that order's growth bound. If the bound holds at $n_0$, then $1+|z|^{n_0-1}\\le2(1+|z|^{n-1})$ for $|z|\\ge1$ and $n\\ge n_0$, so the growth bound also holds at every larger order. Local holomorphy near $\\omega_0$ supplies all the corresponding Taylor derivatives and removable boundary regularity; away from that point division by a nonzero polynomial preserves the stated $C^1$ boundary property. The distinct $n=0$ branch requires its own decay. For the constitutive polynomial, the derivative multiplier on $e^{-i\\omega t}$ is $(-i\\omega)^j$, so the declared transfer polynomial is exactly $Q$, and the remainder $\\chi_K$ uses the integrable supplier rather than an assumed Taylor identification.\n\n(d) Apply clause (d) of [[thm-em-causal-dispersive-response]] to the whole monochromatic transfer matrix. Its proof uses the finite period-average identity and makes no analytic, decay, symmetry or memory-kernel assumption about that matrix, so it applies equally to $\\chi_{\\mathrm{tot}}$. The identity $e^*M_{\\mathrm{tot}}e=\\operatorname{Im}(e^*\\chi_{\\mathrm{tot}}e)$ proves the exact positive-semidefinite criterion. For arbitrary real $\\chi_\\infty$, decompose it as $S+A$. The coordinate product rule and symmetry give $\\frac{d}{dt}(E^{\\mathsf T}SE)=2E^{\\mathsf T}S\\partial_tE$, whereas $E^{\\mathsf T}AE=0$ by transposition. Hence the displayed exact work split. On a periodic history the storage derivative has zero average. Because a real symmetric $S$ is Hermitian, $e^*Se$ is real; the remaining average is the stated antisymmetric quadratic form. The real matrix identity $\\chi_\\infty^*=\\chi_\\infty^{\\mathsf T}$ gives $(\\chi_\\infty-\\chi_\\infty^*)/(2i)=A/i$ and the total dissipative-part formula. In the explicit skew example, $\\chi_\\infty e=(i,-1,0)^{\\mathsf T}$ and $e^*\\chi_\\infty e=2i$; directly $\\partial_tE=\\omega(-\\sin\\omega t,\\cos\\omega t,0)$ and $\\chi_\\infty\\partial_tE=\\omega E$, giving work $\\varepsilon_0\\omega$ at every time. Replacing $i$ by $-i$ reverses the work. More generally, if a real antisymmetric matrix has $A_{jk}=a\\ne0$, choosing $e=e_j+i e_k$ yields $e^*Ae=2ia$, hence nonzero cycle work. Therefore pure storage for all histories requires $A=0$, while $A=0$ suffices. No sign condition for an arbitrary matrix or positivity of storage is inferred from reality alone.\n\n(e) Retain the material-rest-frame scope, every stated Choice hypothesis and the absence of microscopic or empirical conclusions. These finite-dimensional corrections add no Choice assumption and no material-realization claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.5.4 printed pp. 200-204 (PDF pp. 208-212): the response function and causal convolution (7.39)-(7.40), the requirement $\\tilde\\alpha(t)=0$ for $t<0$, the analyticity of $\\alpha(\\omega)$ in $\\operatorname{Im}\\omega>0$, and the Kramers-Kronig relations with the explicit caveat that $\\alpha$ must fall off faster than $1/|\\omega|$ at infinity. Read in the retained 236-page full text."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a74.4.1 printed pp. 179-181, equations (4.30)-(4.33): the linear-dielectric polarisation $\\mathbf P=\\epsilon_0\\chi_e\\mathbf E$, the permittivity $\\epsilon=\\epsilon_0(1+\\chi_e)$ and the statement that the response is a model of many (but not all) substances; read in the stamped 596-page scan."
+            }
+          ]
+        },
+        "physical_scope": "The causal polarisation response of the memory branch of the material-closure postulate, with the transfer function, its regularity and growth properties, the principal-value dispersion relations (unsubtracted, instantaneous-subtracted, finitely Taylor-subtracted and constitutive-polynomial branches) and the monochromatic work formula together with the exact positive-semidefiniteness criterion for passivity. Conditional on the declared kernel or transfer-function hypotheses and on AC_omega (and Dependent Choice in the integrable branches); passivity is not inferred from causality; no material, microscopic or empirical claim. For arbitrary real instantaneous matrices, storage is assigned only to the symmetric quadratic part and the antisymmetric part is retained in work and in the total frequencywise passivity criterion. Each finite subtraction order requires its own growth and regularity hypotheses; higher allowed orders are retained.",
+        "dependency_level": 17
+      },
+      {
+        "id": "pthm-em-restricted-material-energy",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Energy balance and Ohmic dissipation for the constant nondispersive linear model",
+        "reference": "core-conditional-proofs.md#K5",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-countable-choice",
+          "def-cross-product-in-r3",
+          "def-directional-and-partial-derivatives",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-polarization-magnetization",
+          "def-em-si-conventions",
+          "def-em-sources",
+          "def-euclidean-inner-product",
+          "lem-em-parameter-integrals",
+          "lem-the-divergence-and-curl-of-a-cross-product",
+          "post-em-material-closure",
+          "post-em-vacuum-maxwell",
+          "pthm-em-macroscopic-maxwell",
+          "thm-algebra-of-derivatives",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "prop-the-image-of-a-lower-dimensional-c1-manifold-is-null",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-em-parameter-integrals": "mathematical-premise",
+          "lem-the-divergence-and-curl-of-a-cross-product": "mathematical-premise",
+          "post-em-material-closure": "physical-assumption",
+          "post-em-vacuum-maxwell": "physical-assumption",
+          "pthm-em-macroscopic-maxwell": "physical-result",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains": "mathematical-premise",
+          "prop-the-image-of-a-lower-dimensional-c1-manifold-is-null": "mathematical-premise",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the elementary inertial-rest branch of [[post-em-material-closure]]: constant symmetric positive-definite matrices $\\varepsilon,\\mu\\in\\mathbb R^{3\\times3}$ (isotropic scalar case included) with $D=\\varepsilon E$ and $B=\\mu H$, and the conduction relation $J_f=\\sigma E+J_{\\mathrm{ext}}$ with $\\sigma$ symmetric positive semidefinite and a declared external free current $J_{\\mathrm{ext}}$. Assume the smooth branch of [[post-em-vacuum-maxwell]] with the regularity hypotheses of [[pthm-em-macroscopic-maxwell]], so that its macroscopic equations hold on $\\Omega\\times I$. Define the stored-energy density and the energy-flux vector\n\n$$u:=\\tfrac12\\bigl(E\\cdot D+B\\cdot H\\bigr),\\qquad S:=E\\times H,$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]] and the cross product of [[def-cross-product-in-r3]]; $u$ carries $\\mathrm J\\,\\mathrm m^{-3}=\\mathrm{kg}\\,\\mathrm m^{-1}\\mathrm s^{-2}$ and $S$ carries $\\mathrm W\\,\\mathrm m^{-2}$. Then:\n\n**(a) [Local balance and positivity]** On $\\Omega\\times I$,\n\n$$\\partial_tu+\\operatorname{div}S=-J_f\\cdot E.$$\n\nMoreover $u=\\tfrac12(E\\cdot\\varepsilon E+H\\cdot\\mu H)\\ge0$, with $u(x,t)>0$ whenever $(E(x,t),H(x,t))\\ne(0,0)$.\n\n**(b) [Dissipation reading]** With $J_f=\\sigma E+J_{\\mathrm{ext}}$ and $\\sigma$ symmetric positive semidefinite, $E\\cdot\\sigma E\\ge0$ and the balance reads\n\n$$\\partial_tu+\\operatorname{div}S+E\\cdot\\sigma E=-J_{\\mathrm{ext}}\\cdot E;$$\n\nthe nonnegative term $E\\cdot\\sigma E$ is the Ohmic dissipation density of the model.\n\n**(c) [Fixed-volume balance]** Let $\\Omega'\\subseteq\\Omega$ be open with $\\overline{\\Omega'}\\subseteq\\Omega$ carrying the finite piecewise $C^1$ presentation of [[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]], let $t_0<t_1$ with $(t_0,t_1)\\subseteq I$, assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) as in that divergence theorem, and let $n$ be the outward unit normal of $\\partial\\Omega'$. Then for every $t\\in(t_0,t_1)$,\n\n$$\\frac{d}{dt}\\int_{\\Omega'}u(x,t)\\,dx=-\\int_{\\Omega'}J_f\\cdot E\\,dx-\\oint_{\\partial\\Omega'}S\\cdot n\\,dS.$$\n\n**(d) [Scope]** The density $u=\\tfrac12(E\\cdot D+B\\cdot H)$ is a stored-energy density only for this constant symmetric nondispersive model; for general dispersive, nonlocal, nonlinear or hysteretic response no instantaneous stored-energy density is defined or claimed by this item, and the general dispersive work balance is not supplied. The identities hold only where the fields and sources have the stated regularity, the fixed-volume form keeps its boundary term, and conservation of $\\int_{\\Omega\\prime}u$ requires the sum of outward flux and volume work on the right of (c) to vanish, not merely zero boundary flux. No empirical claim is made.",
+        "strategy": "**Proof technique:** dot the macroscopic curl equations with the complementary fields and use the cross-product divergence identity. (a): by [[pthm-em-macroscopic-maxwell]], $\\operatorname{curl}H=J_f+\\partial_tD$ and $\\operatorname{curl}E=-\\partial_tB$. Taking the Euclidean inner product ([[def-euclidean-inner-product]]) of the first with $E$ and of the second with $H$ gives $E\\cdot\\operatorname{curl}H=E\\cdot J_f+E\\cdot\\partial_tD$ and $H\\cdot\\operatorname{curl}E=-H\\cdot\\partial_tB$. By [[lem-the-divergence-and-curl-of-a-cross-product]], $\\operatorname{div}(E\\times H)=H\\cdot\\operatorname{curl}E-E\\cdot\\operatorname{curl}H$; subtracting the two scalar equations from this identity gives $\\operatorname{div}S+\\partial_t\\bigl(\\tfrac12E\\cdot D+\\tfrac12B\\cdot H\\bigr)+J_f\\cdot E=0$, because the symmetry of $\\varepsilon$ gives $E\\cdot\\partial_tD=\\tfrac12\\partial_t(E\\cdot\\varepsilon E)$ and the symmetry of $\\mu$ gives $H\\cdot\\partial_tB=\\tfrac12\\partial_t(H\\cdot\\mu H)$, using $D=\\varepsilon E$, $B=\\mu H$ and the product rule of [[thm-algebra-of-derivatives]]. Positivity is positive definiteness of $\\varepsilon,\\mu$: $u$ is a sum of two nonnegative quadratic forms, vanishing only when $E=H=0$. (b): $J_f\\cdot E=E\\cdot\\sigma E+J_{\\mathrm{ext}}\\cdot E$ and $E\\cdot\\sigma E\\ge0$ for symmetric positive semidefinite $\\sigma$. (c): [[lem-em-parameter-integrals]] differentiates $t\\mapsto\\int_{\\Omega'}u$ under the integral sign and [[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]] converts $\\int_{\\Omega'}\\operatorname{div}S$ into the boundary flux; $\\mathrm{AC}_\\omega$ is exactly the hypothesis of that divergence theorem and is used only in this clause. (d) records the restrictions. No constitutive assumption beyond the declared closure branch, and no empirical premise, is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Fitzpatrick, Electromagnetism (University of Texas at Austin course), node 78: Magnetic energy",
+              "url": "https://farside.ph.utexas.edu/teaching/em/lectures/node78.html",
+              "locator": "node 78: Ohm's law (886), the ohmic heating rate $j_t^2/\\sigma$ (887), the vector identity $\\nabla\\cdot(\\mathbf E\\times\\mathbf H)=\\mathbf H\\cdot(\\nabla\\times\\mathbf E)-\\mathbf E\\cdot(\\nabla\\times\\mathbf H)$ (889), and $W=\\frac12\\int\\mathbf H\\cdot\\mathbf B$ (893)-(894) for linear media, with the hysteresis-loop failure discussed; read in the retained offline full text of the course."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a74.4.3 printed pp. 191-193, equations (4.57)-(4.58): $\\Delta W=\\int(\\Delta\\mathbf D)\\cdot\\mathbf E\\,d\\tau$ valid for any material, and $W=\\frac12\\int\\mathbf D\\cdot\\mathbf E\\,d\\tau$ for a linear dielectric; read in the stamped 596-page scan."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.6.1 printed pp. 205-206 (PDF pp. 213-214): Ohm's law $\\mathbf J=\\sigma\\mathbf E$ and the dissipative reading of the real part of the conductivity; \u00a77.6.2 printed p. 207 (PDF p. 215): the macroscopic equations with free charge and current (7.49). Read in the retained 236-page full text."
+            },
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "\\u00a76.5 'Energy density within a dielectric medium' printed p. 203, equations (6.34)-(6.38), and \\u00a76.11 'Magnetic energy' printed p. 213: the ohmic heating rate, the magnetic energy \\u00bd\\u222bH\\u00b7B for linear media and the hysteresis-loop failure; read in the fetched complete 364-page course book."
+            }
+          ]
+        },
+        "physical_scope": "The local and fixed-volume energy balance d_t u + div(E x H) = -J_f.E with u=(E.D+B.H)/2 and the Ohmic dissipation reading E.sigma E>=0 for the constant symmetric nondispersive linear model with symmetric positive-semidefinite sigma, under AC_omega for the fixed-volume form. Restricted to this model: no stored-energy claim for dispersive, nonlocal, nonlinear or hysteretic media; boundary term retained; no conservation assertion and no empirical claim.",
+        "dependency_level": 17
+      }
+    ]
+  },
+  {
+    "order": 338,
+    "id": "em-material-response-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Material response and stationary interfaces \u2014 Examples",
+    "companion": "em-material-response",
+    "requires": [
+      "em-material-response"
+    ],
+    "items": [
+      {
+        "id": "ex-em-constitutive-unit-counterexample",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Matching units does not determine the permittivity or the response law",
+        "reference": "worked-example-verifications.md#X4",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-polarization-magnetization",
+          "def-em-si-conventions",
+          "post-em-material-closure",
+          "pthm-em-causal-dispersive-response",
+          "thm-ftc-second-part"
+        ],
+        "dependency_roles": {
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "post-em-material-closure": "physical-assumption",
+          "pthm-em-causal-dispersive-response": "physical-result",
+          "thm-ftc-second-part": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**(a) [Dimensional exclusion of $E=\\varepsilon_0D$]** In the SI conventions of [[def-em-si-conventions]]: the electric constant $\\varepsilon_0=(\\mu_0c^2)^{-1}$ carries $\\mathrm F\\,\\mathrm m^{-1}=\\mathrm C^2\\mathrm s^2\\,\\mathrm{kg}^{-1}\\mathrm m^{-3}$, the displacement $D$ of [[def-em-polarization-magnetization]] carries $\\mathrm C\\,\\mathrm m^{-2}$, and the electric field $E$ of [[def-em-fields]] carries $\\mathrm V\\,\\mathrm m^{-1}=\\mathrm{kg}\\,\\mathrm m\\,\\mathrm s^{-2}\\mathrm C^{-1}$. The product $\\varepsilon_0D$ therefore carries $\\mathrm F\\,\\mathrm C\\,\\mathrm m^{-3}=\\mathrm C^3\\mathrm s^2\\,\\mathrm{kg}^{-1}\\mathrm m^{-5}$, which is not the dimension of $E$: the proposed identification $E=\\varepsilon_0D$ fails dimensionally in SI and cannot be a field relation of the framework.\n\n**(b) [Units do not determine the law]** Solving the definition $D=\\varepsilon_0E+P$ of [[def-em-polarization-magnetization]] gives $E=(D-P)/\\varepsilon_0$, which in vacuum ($P=0$) reads $E=\\varepsilon_0^{-1}D$. Any proposed law $E=\\eta D$ with a constant $\\eta>0$ of dimension $\\mathrm V\\,\\mathrm m\\,\\mathrm C^{-1}$ is dimensionally admissible; dimensional consistency therefore does not identify $\\eta$, and it does not determine whether the response is local, linear or instantaneous. In the model of [[post-em-material-closure]] the scalar relation is $D=\\varepsilon E$, i.e. $\\eta=\\varepsilon^{-1}$, and $\\varepsilon$ (or $\\chi_e=\\varepsilon/\\varepsilon_0-1$) is fixed by the declared material model, not by units.\n\n**(c) [Frequency-domain symbols are not instantaneous coefficients]** In the memory branch of [[post-em-material-closure]](c) the response is a causal convolution in time; a scalar $\\varepsilon(\\omega)$ introduced in the harmonic description is defined for a single harmonic history $E(t)=\\operatorname{Re}(e e^{-i\\omega t})$ by the response $D(t)=\\operatorname{Re}(\\varepsilon(\\omega)e e^{-i\\omega t})$; for a scalar kernel this means $\\varepsilon(\\omega)=\\varepsilon_0(1+\\int_0^\\infty K(s)e^{i\\omega s}ds)$. This is the harmonic convention of [[pthm-em-causal-dispersive-response]], not an assumption that an arbitrary bounded continuous history has a Fourier transform. The framework therefore does not read $\\varepsilon(\\omega)$ as an instantaneous multiplicative coefficient in the time domain: doing so silently replaces the convolution by an instantaneous law and is a model-identification error of the same kind as (a).\n\n**(d) [Scope]** A dimensional and model-identification statement about the framework's own conventions; it asserts no measurement, no material property and no empirical claim.",
+        "strategy": "**Proof technique:** direct dimensional computation and immediate consequences of the definitions. (a): the units of $\\varepsilon_0$, $D$ and $E$ are those of [[def-em-si-conventions]]; the derived-unit identities $\\mathrm F=\\mathrm C\\,\\mathrm V^{-1}$ and $\\mathrm V=\\mathrm{kg}\\,\\mathrm m^2\\mathrm s^{-2}\\mathrm C^{-1}$ give $\\mathrm F\\,\\mathrm m^{-1}=\\mathrm C^2\\mathrm s^2\\mathrm{kg}^{-1}\\mathrm m^{-3}$ and $\\mathrm V\\,\\mathrm m^{-1}=\\mathrm{kg}\\,\\mathrm m\\,\\mathrm s^{-2}\\mathrm C^{-1}$; multiplying the first by $\\mathrm C\\,\\mathrm m^{-2}$ gives $\\mathrm F\\,\\mathrm C\\,\\mathrm m^{-3}$, a different combination of the base units $\\mathrm{kg},\\mathrm m,\\mathrm s,\\mathrm C$. (b): $D=\\varepsilon_0E+P$ is a definition of [[def-em-polarization-magnetization]], and solving it is elementary algebra; the vacuum constant $\\eta=\\varepsilon_0^{-1}$ has the dimension of $E/D$ while being a model constant. (c): the memory branch is a convolution in time by [[post-em-material-closure]](c); a harmonic symbol acts on Fourier components and does not define an instantaneous coefficient. No physical measurement and no particular material is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a74.4.1 printed pp. 179-181, equations (4.30)-(4.34): the polarisation $\\mathbf P=\\epsilon_0\\chi_e\\mathbf E$, the permittivity $\\epsilon=\\epsilon_0(1+\\chi_e)$ and the warning that the permittivity does not convey information beyond the material's susceptibility. Read in the stamped 596-page scan."
+            },
+            {
+              "title": "BIPM, Le Systeme international d'unites / The International System of Units (SI), 9th edition (Bureau International des Poids et Mesures, 2019, 214 pp., bilingual French-English)",
+              "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+              "locator": "\u00a72.3.3-\u00a72.3.4 (English printed pp. 129-140): the coulomb, volt, farad and tesla as derived units with their defining relations, from which $\\mathrm F\\,\\mathrm m^{-1}=\\mathrm C^2\\mathrm s^2\\mathrm{kg}^{-1}\\mathrm m^{-3}$ and $\\mathrm V\\,\\mathrm m^{-1}=\\mathrm{kg}\\,\\mathrm m\\,\\mathrm s^{-2}\\mathrm C^{-1}$. Read in the stamped 214-page bilingual PDF."
+            }
+          ]
+        },
+        "physical_scope": "A worked dimensional and model-identification example for the framework's SI conventions: the proposed law E=eps0 D is excluded by dimensional analysis, dimensionally admissible laws do not determine the permittivity or the response law, and a frequency-domain symbol epsilon(omega) is not an instantaneous time-domain coefficient. No measurement, no material data and no empirical claim.",
+        "dependency_level": 17
+      },
+      {
+        "id": "ex-em-dielectric-interface-example",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Planar dielectric interface with prescribed free surface charge",
+        "reference": "worked-example-verifications.md#X4",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "def-cross-product-in-r3",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-polarization-magnetization",
+          "def-em-si-conventions",
+          "def-euclidean-inner-product",
+          "post-em-material-closure",
+          "pthm-em-material-stationary-jumps",
+          "def-countable-choice",
+          "pthm-em-macroscopic-maxwell",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-test-function-space-d-of-an-open-set",
+          "thm-ftc-second-part",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integration-by-parts",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "thm-dominated-convergence",
+          "cor-graph-of-a-measurable-function-is-lebesgue-null",
+          "lem-fundamental-lemma-of-the-calculus-of-variations"
+        ],
+        "dependency_roles": {
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "post-em-material-closure": "physical-assumption",
+          "pthm-em-material-stationary-jumps": "physical-result",
+          "def-countable-choice": "mathematical-premise",
+          "pthm-em-macroscopic-maxwell": "physical-result",
+          "def-distribution": "mathematical-premise",
+          "def-distributional-derivative": "mathematical-premise",
+          "def-test-function-space-d-of-an-open-set": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-integration-by-parts": "mathematical-premise",
+          "lem-test-function-cutoffs-and-euclidean-localization": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "cor-graph-of-a-measurable-function-is-lebesgue-null": "mathematical-premise",
+          "lem-fundamental-lemma-of-the-calculus-of-variations": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let the laboratory frame, coordinates $(x,y,z)$ and units be those of [[def-em-lab-geometry]] and [[def-em-si-conventions]], and let $S=\\{z=0\\}\\cap\\Omega$ be a stationary planar interface with unit normal $n=e_z$ pointing from the side $\\Omega_-=\\Omega\\cap\\{z<0\\}$ to the side $\\Omega_+=\\Omega\\cap\\{z>0\\}$. Suppose each half-space carries a homogeneous linear dielectric at rest in the laboratory frame in the elementary branch of [[post-em-material-closure]]: constants $\\varepsilon_1,\\varepsilon_2\\in(0,\\infty)$ with $D=\\varepsilon_1E$ on $\\Omega_-$ and $D=\\varepsilon_2E$ on $\\Omega_+$. Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and let $E,B,D,H$ be locally integrable, $C^1$ off the plane and jointly one-sided $C^1$ up to it on every compact test cylinder, as in the joint branch of [[pthm-em-material-stationary-jumps]]. Assume locally the four distributional macroscopic equations of [[pthm-em-macroscopic-maxwell]], with volume sources $\\rho_v,J_v$ continuous off the plane and locally integrable across it, free charge $\\rho_f=\\rho_v+\\sigma_f\\delta_S$ for a constant $\\sigma_f\\in\\mathbb R$ in $\\mathrm C\\,\\mathrm m^{-2}$, and free current $J_f=J_v$ (no free sheet current). Here the plane distribution is defined locally by $\\langle\\delta_S,\\psi\\rangle=\\int\\psi(x,y,0,t)\\,dx\\,dy\\,dt$ for compactly supported tests on the laboratory region; no global compactness of this plane is asserted. These are the local planar counterparts of the compact-interface hypotheses in [[pthm-em-material-stationary-jumps]]. Write $E_{j\\,t}$, $E_{j\\,n}$ for the tangential and normal parts of the one-sided trace $E_j$ and $D_j$ ($j=1$ on $\\Omega_-$, $j=2$ on $\\Omega_+$), defined by $E_{jn}:=n\\cdot E_j$ and $E_{jt}:=E_j-E_{jn}n$, with the analogous definitions for $D_j$ and $B_j$ ([[def-euclidean-inner-product]]). Then:\n\n**(a) [Tangential field]** $n\\times[E]=0$, i.e. $E_{2t}=E_{1t}$: the tangential electric field is continuous across the interface.\n\n**(b) [Normal displacement]** $n\\cdot[D]=\\sigma_f$, i.e. $\\varepsilon_2E_{2n}-\\varepsilon_1E_{1n}=\\sigma_f$, hence $E_{2n}=\\frac{\\varepsilon_1}{\\varepsilon_2}E_{1n}+\\frac{\\sigma_f}{\\varepsilon_2}$.\n\n**(c) [No free sheet charge]** If $\\sigma_f=0$, then $\\varepsilon_2E_{2n}=\\varepsilon_1E_{1n}$ and $E_{2n}=\\frac{\\varepsilon_1}{\\varepsilon_2}E_{1n}$: the normal component is scaled by the positive ratio $\\varepsilon_1/\\varepsilon_2$, so $E_{2n}$ and $E_{1n}$ have the same sign (and vanish together). Precisely, $E_{2n}=E_{1n}$ if and only if $(\\varepsilon_1-\\varepsilon_2)E_{1n}=0$: equality holds when the normal field is zero even for unequal permittivities; if $E_{1n}\\ne0$, it holds exactly when $\\varepsilon_1=\\varepsilon_2$. A free surface charge $\\sigma_f\\ne0$ modifies the normal condition as displayed and is not silently set to zero.\n\n**(d) [Magnetic companions]** $n\\cdot[B]=0$ and, with $K_f=0$, $n\\times[H]=0$; for nonmagnetic media with $H=\\mu_0^{-1}B$ on both sides this gives $B_{2n}=B_{1n}$ and $B_{2t}=B_{1t}$.\n\n**(e) [Scope]** A local interface computation under the stated model hypotheses: it solves the electric jump relations against the linear constitutive relations on the two sides and asserts no global field configuration, no existence of the fields, no constitutive law beyond the declared branch and no empirical claim.",
+        "strategy": "**Proof technique:** local compact-test interface integration by parts, followed by substitution of the constitutive relations. The generally noncompact plane is not substituted into a globally compact-interface theorem. On each compact test cylinder, split the $z$ integral at zero; [[thm-integration-by-parts]] applied to the one-sided continuously differentiable factors on each side gives $\\partial_z F_j=\\{\\partial_zF_j\\}+[F_j]\\delta_S$, while tangential derivatives have no sheet term. The compact-support integrands and their piecewise derivatives are bounded on the two closed half-cylinders and integrable; [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]] therefore integrates these identities over $x,y,t$ and gives $\\operatorname{div}F=\\{\\operatorname{div}F\\}+e_z\\cdot[F]\\delta_S$ and $\\operatorname{curl}F=\\{\\operatorname{curl}F\\}+e_z\\times[F]\\delta_S$. Joint one-sided $C^1$ regularity bounds all regular terms locally, and time differentiation at this fixed plane contributes no sheet term. Insert these formulas into the assumed four distributional equations. To isolate a continuous sheet coefficient, test with a fixed tangential/time test times a rescaled normal cutoff supplied by [[lem-test-function-cutoffs-and-euclidean-localization]], equal to one at zero and supported in $|z|<h$; the regular difference terms are locally integrable (field derivatives are locally bounded, and volume sources are locally integrable), so their integrals tend to zero as $h\\to0$ by [[thm-dominated-convergence]], dominated by their absolute values on a fixed compact cylinder; the plane is a volume-null set, whereas the sheet pairing is unchanged. Thus the four continuous coefficients agree pointwise. This proves the local identities $n\\cdot[D]=\\sigma_f$, $n\\cdot[B]=0$, $n\\times[E]=0$, $n\\times[H]=0$, with precisely the signs of the compact-interface theorem. (a)-(b): in particular $n\\times[E]=0$ and $n\\cdot[D]=\\sigma_f$ pointwise on $S$; decomposing $E_j=E_{j\\,t}+E_{j\\,n}\\,n$ and using $D_j=\\varepsilon_jE_j$ from [[post-em-material-closure]] (with the constant scalars $\\varepsilon_1,\\varepsilon_2>0$) yields the displayed scalar relations, and solving the second for $E_{2n}$ is division by the positive constant $\\varepsilon_2$. (c): set $\\sigma_f=0$ in (b); subtract $E_{1n}$ to obtain $E_{2n}-E_{1n}=((\\varepsilon_1-\\varepsilon_2)/\\varepsilon_2)E_{1n}$. Since $\\varepsilon_2>0$, its vanishing is exactly the displayed product condition; division by $E_{1n}$ is permitted only in the nonzero branch. (d): the remaining two local identities just proved; in the nonmagnetic case $H=\\mu_0^{-1}B$ on both sides, so $n\\times[H]=0$ reads $n\\times[B]=0$. The tangential/normal decomposition uses [[def-euclidean-inner-product]] and [[def-cross-product-in-r3]]. (e) records the scope. Only the jump theorem, the declared constitutive branch and elementary algebra are used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.3 printed pp. 185-186 (PDF pp. 193-194), equations (7.17)-(7.20): the normal-D and tangential-E matching conditions at a dielectric interface with free surface charge $\\sigma$. Read in the retained 236-page full text."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a74.3.3 printed p. 178 and \u00a77.3.6 printed pp. 331-333, equations (7.59)-(7.64): the normal-D and tangential-E boundary conditions and their linear-medium form $\\epsilon_1E^\\perp_1-\\epsilon_2E^\\perp_2=\\sigma_f$. Read in the stamped 596-page scan."
+            },
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "\\u00a76.3 'Boundary conditions for E and D' printed p. 197, equations (6.13)-(6.15): the pillbox and loop derivation of the electric matching conditions at a dielectric interface; read in the fetched complete 364-page course book."
+            }
+          ]
+        },
+        "physical_scope": "The explicit planar dielectric-interface calculation: continuity of the tangential electric field and the normal displacement jump eps2 E_2n - eps1 E_1n = sigma_f (with E_2n=(eps1/eps2)E_1n+sigma_f/eps2) for two homogeneous linear dielectrics at rest, with the magnetic companions n.B=0 and n x H=0 when K_f=0. A local conditional field computation; no global configuration, no existence statement and no empirical claim.",
+        "dependency_level": 17
+      },
+      {
+        "id": "ex-em-dielectric-sphere-example",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Uniform-field dielectric sphere: candidate solution and its class",
+        "reference": "worked-example-verifications.md#X4",
+        "design_state": "complete-exact-conditional-research-argument",
+        "deps": [
+          "cor-classical-dirichlet-and-poisson-problems-are-unique",
+          "cor-first-green-identity-on-a-bounded-c-one-domain",
+          "cor-harmonic-cauchy-estimates-in-supremum-norm",
+          "def-countable-choice",
+          "def-cross-product-in-r3",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-polarization-magnetization",
+          "def-em-si-conventions",
+          "def-euclidean-inner-product",
+          "def-laplacian-of-a-c2-function",
+          "post-em-material-closure",
+          "pthm-em-material-stationary-jumps",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-real-power-continuity-and-derivatives",
+          "lem-em-interface-derivatives",
+          "pthm-em-macroscopic-maxwell",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-heine-borel-rn"
+        ],
+        "dependency_roles": {
+          "cor-classical-dirichlet-and-poisson-problems-are-unique": "mathematical-premise",
+          "cor-first-green-identity-on-a-bounded-c-one-domain": "mathematical-premise",
+          "cor-harmonic-cauchy-estimates-in-supremum-norm": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "post-em-material-closure": "physical-assumption",
+          "pthm-em-material-stationary-jumps": "physical-result",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "lem-em-interface-derivatives": "mathematical-premise",
+          "pthm-em-macroscopic-maxwell": "physical-result",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let the laboratory frame and units be those of [[def-em-lab-geometry]] and [[def-em-si-conventions]], with spatial coordinates $x=(x_1,x_2,x_3)$, $z=x_3$, $r=|x|$ and the applied field along $e_3$. The potentials below are functions on the full ball and full exterior in $\\mathbb R^3$; their physical fields are restricted to the laboratory region, while (c)-(d) concern the full exterior. Fix a radius $a>0$ in metres with $\\overline B_a\\subseteq\\Omega$, so that the interface $S=\\{r=a\\}$ below lies in the laboratory region, a field magnitude $E_0>0$ in $\\mathrm V\\,\\mathrm m^{-1}$ and constants $\\varepsilon_{\\mathrm{in}},\\varepsilon_{\\mathrm{out}}\\in(0,\\infty)$ (the interior and exterior permittivities of the elementary branch of [[post-em-material-closure]], the material being at rest in the laboratory frame), and put\n\n$$C:=\\frac{3\\varepsilon_{\\mathrm{out}}}{\\varepsilon_{\\mathrm{in}}+2\\varepsilon_{\\mathrm{out}}},\\qquad d:=\\frac{E_0a^3(\\varepsilon_{\\mathrm{in}}-\\varepsilon_{\\mathrm{out}})}{\\varepsilon_{\\mathrm{in}}+2\\varepsilon_{\\mathrm{out}}}.$$\n\nConsider the time-independent potentials\n\n$$\\varphi_{\\mathrm{in}}(x):=-C\\,E_0\\,z\\quad(r<a),\\qquad \\varphi_{\\mathrm{out}}(x):=-E_0\\,z+\\frac{d\\,z}{r^3}\\quad(r>a),$$\n\nwith fields $E:=-\\nabla\\varphi$ and $D:=\\varepsilon_{\\mathrm{in}}E$ inside, $D:=\\varepsilon_{\\mathrm{out}}E$ outside ($E$ being of the class of [[def-em-fields]] restricted to this time-independent configuration). The coefficient $C$ is dimensionless and $d$ has units $\\mathrm V\\,\\mathrm m^2$, so both potentials carry volts. Write $S=\\{r=a\\}$, $n=e_r:=x/r$ for the outward unit normal, and $\\partial_r\\varphi:=n\\cdot\\nabla\\varphi$. For a trace $F$, its normal and tangential parts are $n\\cdot F$ and $F-(n\\cdot F)n$. Then:\n\n**(a) [Harmonicity]** $\\Delta\\varphi_{\\mathrm{in}}=0$ on $r<a$ and $\\Delta\\varphi_{\\mathrm{out}}=0$ on $r>a$ in the classical sense of [[def-laplacian-of-a-c2-function]], and the potentials and their first derivatives extend continuously to the closed sides of $S$.\n\n**(b) [Interface conditions]** With one-sided traces at $r=a$, $\\varphi_{\\mathrm{in}}=\\varphi_{\\mathrm{out}}$ and $\\varepsilon_{\\mathrm{in}}\\,\\partial_r\\varphi_{\\mathrm{in}}=\\varepsilon_{\\mathrm{out}}\\,\\partial_r\\varphi_{\\mathrm{out}}$ on $S$. Potential-trace equality implies tangential-electric continuity, and the weighted radial-derivative equality is equivalent to normal-$D$ continuity. Tangential-electric continuity alone determines the potential-trace difference only up to an additive constant; the displayed potentials have that constant fixed to zero. These electric matching identities hold independently of any magnetic completion. In addition, declare the static completion $B=H=0$, $\\rho_f=J_f=0$, with any constant symmetric positive-definite permeability and the zero-conductivity branch $\\sigma=0$, $J_{\\mathrm{ext}}=0$ of [[post-em-material-closure]]. The four fields then satisfy all four thin-interface macroscopic equations distributionally with $\\sigma_f=K_f=0$, and the joint one-sided regularity at the compact sphere verifies the hypotheses of [[pthm-em-material-stationary-jumps]]. Assume its inherited $\\mathrm{AC}_\\omega$ convention ([[def-countable-choice]]) for this distribution/surface reading.\n\n**(c) [Asymptotics]** $\\varphi_{\\mathrm{out}}(x)+E_0z=dz/r^3$ and $\\nabla(\\varphi_{\\mathrm{out}}+E_0z)=O(r^{-3})$ as $r\\to\\infty$: the difference from the applied uniform potential decays like $r^{-2}$ and its gradient like $r^{-3}$.\n\n**(d) [Uniqueness in the declared class]** Assume Countable Choice ([[def-countable-choice]]), as required by the Green and harmonic derivative-estimate interfaces used in this branch. Let $(\\tilde\\varphi_{\\mathrm{in}},\\tilde\\varphi_{\\mathrm{out}})$ be $C^2$ on the closed ball $\\overline{B_a}$ respectively on every closed exterior region $\\{a\\le r\\le R\\}$, harmonic on $r<a$ and $r>a$, satisfying the same interface conditions (b), and satisfying $|\\tilde\\varphi_{\\mathrm{out}}+E_0z|\\le M/r$ for some $M$ and all sufficiently large $r$. Then $\\tilde\\varphi_{\\mathrm{in}}=\\varphi_{\\mathrm{in}}$ and $\\tilde\\varphi_{\\mathrm{out}}=\\varphi_{\\mathrm{out}}$. Hence the displayed pair is the unique solution of the dielectric-sphere transmission problem in that class, existence being exhibited explicitly; the uniqueness proof uses only the Green identity, the matching conditions and the decay, with no maximum principle.\n\n**(e) [Fields, polarisation and induced dipole]** On $r<a$ the field is uniform, $E=C E_0e_3$ with $D=\\varepsilon_{\\mathrm{in}}CE_0e_3$; outside, the field is the applied uniform field plus $E_p=-\\nabla\\Phi_p$, where the dipole potential in a uniform background of permittivity $\\varepsilon_{\\mathrm{out}}$ is here defined as $\\Phi_p(x):=(p\\cdot x)/(4\\pi\\varepsilon_{\\mathrm{out}}|x|^3)$ for $x\\ne0$. Its effective moment is $p=4\\pi\\varepsilon_{\\mathrm{out}}d e_3$ in $\\mathrm C\\,\\mathrm m$; this field identification on $r>a$ asserts no point source inside the actual sphere; the interior polarisation is $P_{\\mathrm{in}}=(\\varepsilon_{\\mathrm{in}}-\\varepsilon_0)CE_0e_3$ and the bound surface charge density on $S$ is $\\sigma_b=n\\cdot(P_{\\mathrm{in}}-P_{\\mathrm{out}})$, the singular coefficient of $\\rho_b=-\\operatorname{div}P$ at $S$ (with the exterior polarisation $P_{\\mathrm{out}}=(\\varepsilon_{\\mathrm{out}}-\\varepsilon_0)E_{\\mathrm{out}}$).\n\n**(f) [Regime and scope]** The computation is a quasistatic result of the declared linear branch at $\\sigma_f=0$; using $p$ as a dynamic wave polarisability of the sphere requires a separate quasistatic/dipole approximation and is not asserted here. The example asserts no material data and no empirical claim.\n\nCompactness of $S$ follows from its closedness and boundedness ([[thm-heine-borel-rn]]). Its smooth surface charts are obtained by solving $x_j=\\pm\\sqrt{a^2-\\sum_{i\\ne j}x_i^2}$ near any point where $x_j\\ne0$; such a coordinate exists because $a>0$.",
+        "strategy": "**Proof technique:** explicit substitution plus a Green-identity uniqueness argument. (a): $\\varphi_{\\mathrm{in}}$ is linear and $\\varphi_{\\mathrm{out}}=-E_0z+d z/r^3$; the second partials are computed with [[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]] and [[thm-real-power-continuity-and-derivatives]], giving $\\Delta z=0$, $\\Delta(r^{-3})=6r^{-5}$ and hence $\\Delta(d z/r^3)=d(z\\cdot6r^{-5}+2(-3z r^{-5}))=0$ by the product rule; both sides extend smoothly to $r=a$ from their own side. (b): evaluate $\\varphi_{\\mathrm{in}}(a)=-CE_0a\\cos\\theta$ and $\\varphi_{\\mathrm{out}}(a)=(-E_0a+d/a^2)\\cos\\theta$, whose equality is $C=1-d/(E_0a^3)$; the radial derivatives are $-CE_0\\cos\\theta$ and $(-E_0-2d/a^3)\\cos\\theta$, whose equality after weighting by $\\varepsilon_{\\mathrm{in}},\\varepsilon_{\\mathrm{out}}$ is $\\varepsilon_{\\mathrm{in}}C=\\varepsilon_{\\mathrm{out}}(1+2d/(E_0a^3))$. The linear system has determinant $\\varepsilon_{\\mathrm{in}}+2\\varepsilon_{\\mathrm{out}}>0$ and the displayed solution, so the interface equations hold; the equivalence with the jump conditions uses $E=-\\nabla\\varphi$, $D=\\varepsilon E$ and [[pthm-em-material-stationary-jumps]] with $\\sigma_f=0$. For the stated static completion, harmonicity gives $\\operatorname{div}D=0$ on each side and the matched normal displacement removes its sheet coefficient; the piecewise potential is continuous, so its tangential-gradient jump vanishes and $\\operatorname{curl}E=0$ distributionally. The mathematical fixed-interface identities of [[lem-em-interface-derivatives]] give these regular-plus-sheet formulas under the declared joint one-sided smoothness and $\\mathrm{AC}_\\omega$. Also $\\operatorname{div}B=0$ and $\\operatorname{curl}H=J_f+\\partial_tD=0$ because all fields are static and $B=H=J_f=0$. Thus this is an explicit local-integrable distributional macroscopic solution, not merely an assumption that potentials supplied missing fields; no microscopic-realisation or empirical claim is added. (c) is immediate from $|z|\\le r$. (d): the difference $(w_{\\mathrm{in}},w_{\\mathrm{out}})$ is harmonic on each side with matching traces $f=\\tilde\\varphi_{\\mathrm{in}}-\\varphi_{\\mathrm{in}}$ on $S$ and flux continuity $\\varepsilon_{\\mathrm{in}}\\partial_rw_{\\mathrm{in}}=\\varepsilon_{\\mathrm{out}}\\partial_rw_{\\mathrm{out}}$, and $|w_{\\mathrm{out}}|\\le(M+|d|)/r\\to0$ uniformly. Apply the first Green identity [[cor-first-green-identity-on-a-bounded-c-one-domain]] to $u=v=w_{\\mathrm{in}}$ on the ball and to $u=v=w_{\\mathrm{out}}$ on the annulus $\\{a<r<R\\}$ (both are bounded C^1 domains and the functions are $C^2$ up to the boundary): since $\\Delta w=0$, this gives $\\int_{B_a}|\\nabla w_{\\mathrm{in}}|^2=\\oint_S w_{\\mathrm{in}}\\partial_rw_{\\mathrm{in}}$ and $\\int_{a<r<R}|\\nabla w_{\\mathrm{out}}|^2=\\oint_{\\{r=R\\}}w_{\\mathrm{out}}\\partial_rw_{\\mathrm{out}}-\\oint_S w_{\\mathrm{out}}\\partial_rw_{\\mathrm{out}}$, all with the outward normal of the respective domain. Multiply the first by $\\varepsilon_{\\mathrm{in}}$ and the second by $\\varepsilon_{\\mathrm{out}}$ and add: the two surface terms on $S$ cancel by $w_{\\mathrm{in}}=w_{\\mathrm{out}}=f$ and $\\varepsilon_{\\mathrm{in}}\\partial_rw_{\\mathrm{in}}=\\varepsilon_{\\mathrm{out}}\\partial_rw_{\\mathrm{out}}$, while the term on $\\{r=R\\}$ tends to $0$ as $R\\to\\infty$ by $|w_{\\mathrm{out}}|=O(R^{-1})$ and $|\\nabla w_{\\mathrm{out}}|=O(R^{-2})$ ([[cor-harmonic-cauchy-estimates-in-supremum-norm]] on balls of radius $R/2$). Since $\\varepsilon_{\\mathrm{in}},\\varepsilon_{\\mathrm{out}}>0$, both gradients vanish, so $w_{\\mathrm{in}}$ (on the ball) and $w_{\\mathrm{out}}$ (on $\\{r>a\\}$) are constant; $w_{\\mathrm{out}}\\to0$ at infinity forces $w_{\\mathrm{out}}=0$, hence the common trace $f=0$, and then $w_{\\mathrm{in}}=0$ by uniqueness for the classical Dirichlet problem [[cor-classical-dirichlet-and-poisson-problems-are-unique]](1) applied on the ball to $w_{\\mathrm{in}}$ and the zero function. $\\mathrm{AC}_\\omega$ is carried from the Green-identity and Dirichlet-uniqueness suppliers. (e): $E_{\\mathrm{in}}=-\\nabla\\varphi_{\\mathrm{in}}=CE_0e_3$; the exterior potential is the uniform potential plus the standard dipole term $p\\cdot x/(4\\pi\\varepsilon_{\\mathrm{out}}r^3)$ with $p=4\\pi\\varepsilon_{\\mathrm{out}}d\\,e_3$, and the bound surface charge is the singular coefficient $-n\\cdot[P]$ of $\\rho_b=-\\operatorname{div}P$, with the one-sided polarisations from $D=\\varepsilon E$. (f) records the regime. No empirical premise and no material data are used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Fitzpatrick, Electromagnetism (University of Texas at Austin course), node 71: Boundary value problems with dielectrics",
+              "url": "https://farside.ph.utexas.edu/teaching/em/lectures/node71.html",
+              "locator": "node 71, second example: the dielectric sphere of radius $a$ and dielectric constant $\\epsilon$ in a uniform $z$-directed field, with the potentials $-E_0r\\cos\\theta+E_0\\alpha a^3\\cos\\theta/r^2$ outside and $-E_1r\\cos\\theta$ inside, the matching conditions (835), (838)-(841), and the bound surface charge (842); read in the retained offline full text of the course."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall 1999, 596 pp.; full scanned text)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a74.4.2 printed pp. 186-188, Example 4.7: 'A sphere of homogeneous linear dielectric material is placed in an otherwise uniform electric field $\\mathbf E_0$', solved by the same potentials with the boundary conditions $V_{\\rm in}=V_{\\rm out}$ and $\\epsilon\\,\\partial V_{\\rm in}/\\partial r=\\epsilon_0\\,\\partial V_{\\rm out}/\\partial r$ (no free charge); read in the stamped 596-page scan."
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.1.2 printed pp. 176-178 (PDF pp. 184-186), the dielectric-sphere example with a charge at the centre: the modified Gauss law determines $\\mathbf D$ directly and the bound surface charge produces the field discontinuity; used here only as the source's companion illustration of the same interface structure. Read in the retained 236-page full text."
+            },
+            {
+              "title": "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course (University of Texas at Austin; complete course book, 364 pp.)",
+              "url": "http://www.physics.ntua.gr/ph03/doc/Fitzpatrick.R.@.Classical.Electromagnetism.pdf",
+              "locator": "\\u00a76.4 'Boundary value problems with dielectrics' printed pp. 198-203: the uniform-field dielectric sphere with the matching conditions and the interior uniform field; read in the fetched complete 364-page course book."
+            }
+          ]
+        },
+        "physical_scope": "The explicit uniform-field dielectric-sphere candidate of the quasistatic linear branch: the two harmonic potentials, their matching at r=a with sigma_f=0, the O(r^-2) decay of the difference from the applied uniform potential, uniqueness in the declared decay class, the uniform interior field C E0 e_z, the exterior dipole moment p=4 pi eps_out d e_z and the bound surface charge. Conditional on the declared constants and interface hypotheses; no dynamic polarisability, no material data and no empirical claim.",
+        "dependency_level": 17
+      }
+    ]
+  }
+]

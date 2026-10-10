@@ -1,0 +1,355 @@
+{
+  "run": "physics-em-sr-40-2026-10-08",
+  "phase": "initial",
+  "round": 1,
+  "unit": "35",
+  "input_sha256": "abf4e458aa807c1279b7d6c26197bd7b0cbd023a33b6e1338fb93d991f410809",
+  "decisions": [
+    {
+      "id": "lem-em-rectangular-transverse-mode-completeness",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "8c772889840da7ee7dcf702c8a5b6d79fd03967c325f9bd82fc6debaf622f70c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Step 5.1 asserted a false coefficient conversion: with v_i=u_i/||u_i||, <f,v_i>v_i=(<f,u_i>/||u_i||^2)u_i. At L=4, f=c_0=1, ||c_0||=2 and the normalized coefficient is 2, so multiplying it by 2 yields 4c_0 rather than c_0. Repaired with the exact identity and division rule; the Statement and its already-established completeness claims are unchanged. The fatal type is logic because the displayed expansion inference was false, not a missing citation. Also corrected squared-norm terminology in step 2.3.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-em-guide-cavity-geometry",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "14a195d123c4a14880bae2c692886b2aa380e224936b5a57b17d00504e27024d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Clause (b) used E=B=0 in the conductor to replace the D,H jumps by minus the filling traces. That does not follow: def-em-polarization-magnetization(d) gives D=P and H=-M when E=B=0, with no constitutive relation fixing P,M. The stationary-jump supplier concludes sigma_f=n dot(D_cond-D_fill), K_f=n cross(H_cond-H_fill); I repaired the definition to use these general readings and to make the filling-only formulas conditional on D_cond=H_cond=0. The fatal type is logic because the missing conductor-side assumption makes the original inference invalid.",
+      "uncertain": false,
+      "source_urls": [
+        "https://farside.ph.utexas.edu/teaching/em/lectures/node105.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "pthm-em-rectangular-mode-candidates",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "3fabfbf6585d4fa5744f94d793b4146c40ffad6c7bebf1229c61a56e668ccff4",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The original TE H_z=h_mn and TM E_z=e_mn assigned dimensionless profiles to SI field quantities with units A/m and V/m, without a numerical-component convention. This is a physical quantity/unit interface defect (other), rather than a wrong curl calculation or missing dependency citation. Added positive real longitudinal amplitude quantities H_* (A/m) and E_* (V/m) to both field pairs and explicit units for all parameters. The proof uses scaled real profiles, so each linear eigen/divergence/curl/trace identity holds unchanged. Also repaired the nonfatal cutoff parenthetical: TE H_t and TM E_t vanish at beta=0, while both complete field pairs remain nonzero.",
+      "uncertain": false,
+      "source_urls": [
+        "https://farside.ph.utexas.edu/teaching/em/lectures/node105.html"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-em-rectangular-transverse-mode-completeness",
+      "disposition": "repaired",
+      "post_sha256": "25fe8d6c5dd4d08ad2b02704568f6e73e9578edc5ebdb374d614a0a78884f35a",
+      "review_context_sha256": "65073aedf90f7510122795ebb278a3c55cce0ffcb5e97779cbc07b77d759139f",
+      "reason": "Checked interval inner products, even/odd torus reduction, the local closed-span projection argument, Fubini section estimates and countable exceptional-set union. The real Hilbert Fourier supplier uses linear-first inner products and finite-subset nets under AC_omega; step 5.1 now uses exactly its normalized sums and the correct unnormalized coefficient. No Statement change or downstream propagation. This is a local repair review, not independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-em-guide-cavity-geometry",
+      "disposition": "repaired",
+      "post_sha256": "78a98ea1f7338aaaf1628f2d0e23a9ee335178690ef0c084108174ae6000c794",
+      "review_context_sha256": "6755dd59061d023ac32b3b8cea9f68f541568297e5d3b1b84a49dd8c1e93621b",
+      "reason": "Checked orientation n from filling to conductor against pthm-em-material-stationary-jumps Statement and full proof. Its joint one-sided spacetime C1, thin-source distributional and AC_omega hypotheses are now explicit in the illustrative reading; no extension to corners or conductivity limit is inferred. The declared geometry, PEC conditions, reflection class and TE/TM definitions are unchanged. Fitzpatrick node105 equations 1300-1301 support the ideal E,B wall reading, without determining D,H. Direct consumers use unchanged conditions except the coaxial current computation, which is routed to its frontier owner.",
+      "uncertain": false,
+      "source_urls": [
+        "https://farside.ph.utexas.edu/teaching/em/lectures/node105.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "pthm-em-rectangular-mode-candidates",
+      "disposition": "repaired",
+      "post_sha256": "7c9833df0331ebdc54e1e789a8207ec2eaa69c4458de2813c1ebddba005ddcd7",
+      "review_context_sha256": "60cf1361a052511cc58f1312de263f98889e58cd61e1ce5160ad050415589af7",
+      "reason": "Recomputed TE and TM amplitude curls and divergences with h=H_*h_mn and e=E_*e_mn, checked each open-face zero trace, and checked real-amplitude equivalence, nonvanishing, zero-index exclusions and both real/imaginary cutoff roots under omega>0. (beta/k^2)grad is dimensionless; (omega mu/k^2)grad has V/A and (omega epsilon/k^2)grad has A/V, so all field terms have consistent SI units. Fitzpatrick node105 equations 1304 and 1312 retain dimensionful B_0 and E_0 in longitudinal profiles, consistent with the repair (B_0=mu H_*). Direct-consumer uses and required owner repairs are recorded separately; this is a local repair review, not independent review of my changes.",
+      "uncertain": false,
+      "source_urls": [
+        "https://farside.ph.utexas.edu/teaching/em/lectures/node105.html"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "pthm-em-rectangular-mode-candidates",
+    "pthm-em-guide-dispersion-energy",
+    "pthm-em-uniform-ohmic-modal-decay",
+    "pthm-em-open-rectangular-guide-completeness",
+    "pthm-em-guide-completeness",
+    "ex-em-te-ten-example",
+    "ex-em-rectangular-cavity-example",
+    "ex-em-tem-topology-example"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "subject": "lem-em-rectangular-transverse-mode-completeness",
+      "run": "physics-em-sr-40-2026-10-08",
+      "phase": "initial",
+      "round": 1,
+      "unit": "35",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "context_sha256": "8c772889840da7ee7dcf702c8a5b6d79fd03967c325f9bd82fc6debaf622f70c",
+      "post_sha256": "25fe8d6c5dd4d08ad2b02704568f6e73e9578edc5ebdb374d614a0a78884f35a",
+      "disposition": "fixed",
+      "reason": "Step 5.1 asserted a false coefficient conversion: with v_i=u_i/||u_i||, <f,v_i>v_i=(<f,u_i>/||u_i||^2)u_i. At L=4, f=c_0=1, ||c_0||=2 and the normalized coefficient is 2, so multiplying it by 2 yields 4c_0 rather than c_0. Repaired with the exact identity and division rule; the Statement and its already-established completeness claims are unchanged. The fatal type is logic because the displayed expansion inference was false, not a missing citation. Also corrected squared-norm terminology in step 2.3.",
+      "evidence_path": "research/physics-em-sr-40-2026-10-08-step7-v2/step7-v2-initial-r1-u35.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "subject": "def-em-guide-cavity-geometry",
+      "run": "physics-em-sr-40-2026-10-08",
+      "phase": "initial",
+      "round": 1,
+      "unit": "35",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "context_sha256": "14a195d123c4a14880bae2c692886b2aa380e224936b5a57b17d00504e27024d",
+      "post_sha256": "78a98ea1f7338aaaf1628f2d0e23a9ee335178690ef0c084108174ae6000c794",
+      "disposition": "fixed",
+      "reason": "Clause (b) used E=B=0 in the conductor to replace the D,H jumps by minus the filling traces. That does not follow: def-em-polarization-magnetization(d) gives D=P and H=-M when E=B=0, with no constitutive relation fixing P,M. The stationary-jump supplier concludes sigma_f=n dot(D_cond-D_fill), K_f=n cross(H_cond-H_fill); I repaired the definition to use these general readings and to make the filling-only formulas conditional on D_cond=H_cond=0. The fatal type is logic because the missing conductor-side assumption makes the original inference invalid.",
+      "evidence_path": "research/physics-em-sr-40-2026-10-08-step7-v2/step7-v2-initial-r1-u35.json",
+      "uncertain": false,
+      "source_urls": [
+        "https://farside.ph.utexas.edu/teaching/em/lectures/node105.html"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "subject": "pthm-em-rectangular-mode-candidates",
+      "run": "physics-em-sr-40-2026-10-08",
+      "phase": "initial",
+      "round": 1,
+      "unit": "35",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "context_sha256": "3fabfbf6585d4fa5744f94d793b4146c40ffad6c7bebf1229c61a56e668ccff4",
+      "post_sha256": "7c9833df0331ebdc54e1e789a8207ec2eaa69c4458de2813c1ebddba005ddcd7",
+      "disposition": "fixed",
+      "reason": "The original TE H_z=h_mn and TM E_z=e_mn assigned dimensionless profiles to SI field quantities with units A/m and V/m, without a numerical-component convention. This is a physical quantity/unit interface defect (other), rather than a wrong curl calculation or missing dependency citation. Added positive real longitudinal amplitude quantities H_* (A/m) and E_* (V/m) to both field pairs and explicit units for all parameters. The proof uses scaled real profiles, so each linear eigen/divergence/curl/trace identity holds unchanged. Also repaired the nonfatal cutoff parenthetical: TE H_t and TM E_t vanish at beta=0, while both complete field pairs remain nonzero.",
+      "evidence_path": "research/physics-em-sr-40-2026-10-08-step7-v2/step7-v2-initial-r1-u35.json",
+      "uncertain": false,
+      "source_urls": [
+        "https://farside.ph.utexas.edu/teaching/em/lectures/node105.html"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "The complete direct dependency/reference inventories for the two changed interfaces contain only draft items inside the frozen frontier. No defective published use or outside-frontier consumer was found in these examined uses; preserve existing unrelated published-maintenance records without change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed first assigned item: corrected 5.1 coefficient conversion and 2.3 squared-norm label. Supplier statements consulted locally: thm-hilbert-space-fourier-expansion Statement (AC_omega, complete orthonormal family, finite-subset net), def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis Definition; other exact dependencies support the torus/Fubini argument. No external source-reading claim. Contract mirror update pending shared-write lock; focused checks pending final batch. Next: PEC jump reading and direct-consumer examination, then SI amplitude normalization.",
+    "Completed geometry review and captured current hashes before candidate edits. Definition(b) changed only its sheet-source reading and explicit supplier qualifications; all eight direct item consumers are draft frozen-frontier items. ex-em-tem-topology-example Verification 3.1 uses K_f=-n cross H to obtain I=2pi a H_phi(a) and needs an explicit conductor-side n cross H_cond=0 assumption (full H_cond=0 suffices). Do not edit that unassigned consumer; route to frontier owner. Other consumer uses are unchanged geometry/PEC/parity and remain sound for this event. Owning contract citation mirror remains pending shared lock; focused checks pending. Next: explicit dimensionful candidate amplitudes.",
+    "Completed candidate review and immediately captured hashes. Statement changed to dimensionful amplitude factors; physical_scope and empirical qualifications unchanged. The exact mathematical suppliers consulted are lem-em-separated-phasor-calculus Statement (C1 complex amplitudes, omega>0 and two-phase injectivity), lem-em-transverse-vector-identities Statement (real C2 profiles), lem-em-rectangle-mode-profile-identities Statement (Neumann/Dirichlet eigen-identities and zero traces), post-em-material-closure(b) and pthm-em-macroscopic-maxwell(b). All curl calculations apply to the scaled real profiles. Four direct candidate consumers identified; required owner repairs affect the energy and two example statements, while guide-completeness uses only unchanged TE00 exclusion. Precheck passed 2 proof carriers; rendercheck passed all 3 carriers. Contract synchronization remains pending shared-lock acquisition; final proof-layout and report consistency checks pending.",
+    "Direct dependency/reference scan found eight geometry consumers and four candidate consumers, all draft and inside frontier.json. Every affected use is bound in downstream_reviews with its current exact snippet, path and raw carrier hash. No outside-frontier or published item discovery; downstream_uses is unnecessary because all inventory members are declared graph consumers. Canonical ledger proposals pending final report integration.",
+    "Owning metadata now synchronized under tools/physics-support/step7-shared-write-lock.mjs acquire/reread/edit/check/release: only the three assigned entries of research/physics-em-sr-40-2026-10-08-batch-35.proof-contracts.json were changed. Updated derivation excerpts and inputs, appended new review notes without altering historical attribution, and refreshed the assigned geometry supplier quote. An initial exact-excerpt check exposed trailing newlines on final-step claims; corrected them and repeated the checks successfully. The focused proof-contract check then exposed the stale full polarization Definition quote. Read its current expanded moment clause and unchanged D,H clause(d); replaced the assigned F1 quote by exact clause(d), and reran the focused check successfully (0 errors, 0 warnings, 3/3). No item guard or review hash changed in these metadata-only synchronizations.",
+    "Actual focused checks: node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/lem-em-rectangular-transverse-mode-completeness.md items/def-em-guide-cavity-geometry.md items/pthm-em-rectangular-mode-candidates.md: exit 0, two proof carriers checked and passing, definition correctly skipped. node tools/physics-support/rendercheck.mjs with the same three paths: exit 0, all three YAML/KaTeX carriers pass. node tools/physics-support/proof-contract.mjs research/physics-em-sr-40-2026-10-08-batch-35.proof-contracts.json --items lem-em-rectangular-transverse-mode-completeness,def-em-guide-cavity-geometry,pthm-em-rectangular-mode-candidates --strict: final exit 0, 0 errors, 0 warnings, 3/3 checked. After final item edits, node tools/physics-support/proof-layout.mjs with all three changed paths was run once: exit 0, 3 items, 17 steps, 0 defects. No subsequent item edit or formatter was run.",
+    "The first optional content-policy invocation mistakenly supplied Markdown item paths to a manifest-only CLI and failed with three batch-read errors; this was command misuse, not a content finding. Corrected by projecting the current batch-35.pages.json in memory to the three assigned IDs and passing its JSON to node tools/physics-support/content-policy.mjs /dev/stdin. The authentic scope count and final result are recorded below. This did not write or replace a manifest or run baseline.",
+    "Report identity, exact three rejected tuple coverage, three assigned draft/frontier item reviews, no created items, and all eight unique downstream IDs checked successfully. No assigned gate diagnostics were supplied, so gate_resolutions is empty. No judges, judgments, stamps, central certificates or round state were written. All assigned carrier repairs are complete with no unresolved mathematical uncertainty; the four necessary unassigned frontier consumer repairs and the examples-page synchronization remain explicitly routed to the controller/owners before certification.",
+    "Corrected optional content-policy check completed: current batch-35 manifest projected in memory to exactly the three assigned IDs, subprocess node tools/physics-support/content-policy.mjs /dev/stdin, exit 0: content-policy: 3 scoped item(s), 0 error(s), 0 warning(s). All requested local repair and formatting obligations are complete; only separately owned consumer follow-up remains."
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "def-em-guide-cavity-geometry",
+      "id": "pthm-em-rectangular-mode-candidates",
+      "path": "items/pthm-em-rectangular-mode-candidates.md",
+      "line": 66,
+      "snippet": "[F2] The guide region is",
+      "consumer_raw_sha256": "385c797f12b81e1719e2ea5040fad8fedbb473ff43eed759256752bf66fbf6b3",
+      "affected_use": "F2 and proof 2.1-2.2 use the rectangular open-wall normals, n cross E=0, n dot B=0 and axis-relative TE/TM definitions; neither sheet source is used.",
+      "disposition": "remains_sound",
+      "invalidated_claim": "No claim is invalidated by the corrected D,H sheet reading.",
+      "minimality": "The consumed geometry and two homogeneous boundary conditions are unchanged; assigned candidate repair addresses its separate unit defect.",
+      "route": "assigned-reviewed"
+    },
+    {
+      "supplier": "def-em-guide-cavity-geometry",
+      "id": "pthm-em-guide-dispersion-energy",
+      "path": "items/pthm-em-guide-dispersion-energy.md",
+      "line": 57,
+      "snippet": "the guide, TEM and phasor conventions of [[def-em-guide-cavity-geometry]]",
+      "consumer_raw_sha256": "05840a05f1b9808144b6607035df96a972a5ea8460c63881442bfd75f1979f6d",
+      "affected_use": "Given and F1 use the guide and separated real-field convention for time averaging, not conductor-side D,H or sheet densities.",
+      "disposition": "remains_sound",
+      "invalidated_claim": "No claim is invalidated by the geometry change.",
+      "minimality": "No geometry-driven repair: real phasor convention and transverse section are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-em-guide-cavity-geometry",
+      "id": "pthm-em-uniform-ohmic-modal-decay",
+      "path": "items/pthm-em-uniform-ohmic-modal-decay.md",
+      "line": 68,
+      "snippet": "reflection-parity and divergence class of [[lem-em-rectangular-pec-energy-completeness]]",
+      "consumer_raw_sha256": "129dbc213ddb3a89acb6a916f41552eea0744c3c6ddfe6c034be07e819a62c56",
+      "affected_use": "Statement(a), Given and rectangular evolution use the zero-normal-B parity/divergence class of Definition(c).",
+      "disposition": "remains_sound",
+      "invalidated_claim": "No reflection-class or modal evolution claim is invalidated.",
+      "minimality": "Definition(c) is byte-unchanged; no conductor sheet reading enters the weak coefficient evolution.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-em-guide-cavity-geometry",
+      "id": "pthm-em-open-rectangular-guide-completeness",
+      "path": "items/pthm-em-open-rectangular-guide-completeness.md",
+      "line": 63,
+      "snippet": "On the infinite straight rectangular guide",
+      "consumer_raw_sha256": "44b6d9fd79ec3089355c03e819122aa3e2a52d9b3d28682e966397fc9dd77e06",
+      "affected_use": "Statement opening defines the infinite-guide L2 parity class; proof 2.1 reads classical PEC only when extensions are continuous.",
+      "disposition": "remains_sound",
+      "invalidated_claim": "No finite-energy or trace claim is invalidated by the sheet reading.",
+      "minimality": "Guide geometry and reflection conventions remain identical, and no D,H conductor-side trace is used.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-em-guide-cavity-geometry",
+      "id": "pthm-em-guide-completeness",
+      "path": "items/pthm-em-guide-completeness.md",
+      "line": 54,
+      "snippet": "PEC and reflection-class conventions of [[def-em-guide-cavity-geometry]]",
+      "consumer_raw_sha256": "6218c9d450dd7e830124fec331d10b873c2ffe0c14482ef2644956b37d103500",
+      "affected_use": "Statement and F2 use the box parity/divergence class and smooth PEC conditions for spectral and energy evolution.",
+      "disposition": "remains_sound",
+      "invalidated_claim": "No spectral completeness or reflection evolution conclusion is invalidated.",
+      "minimality": "Only the illustrative sheet-source reading changed; these arguments use unchanged homogeneous boundary or parity conditions.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-em-guide-cavity-geometry",
+      "id": "ex-em-te-ten-example",
+      "path": "items/ex-em-te-ten-example.md",
+      "line": 36,
+      "snippet": "In the rectangular guide of [[def-em-guide-cavity-geometry]]",
+      "consumer_raw_sha256": "22b7c7105b1e9931c341b34f08751e5aae9cfa4fafdfc9ce6ab110810ad7d89b",
+      "affected_use": "Example, Given and Verification 1.1 instantiate the open rectangular guide and the axis-relative TE classification.",
+      "disposition": "remains_sound",
+      "invalidated_claim": "No TE10 geometry claim is invalidated by the sheet-source correction.",
+      "minimality": "No conductor charge/current is computed; geometry remains unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-em-guide-cavity-geometry",
+      "id": "ex-em-rectangular-cavity-example",
+      "path": "items/ex-em-rectangular-cavity-example.md",
+      "line": 41,
+      "snippet": "the box geometry, its six open walls and the PEC conditions of [[def-em-guide-cavity-geometry]]",
+      "consumer_raw_sha256": "ed44dfdb26f2e1129ac2eefe7c2277098c6c828ff766ea45cfe7d70fd9403bb5",
+      "affected_use": "Given and six-face verification use the cavity box, outward normals and homogeneous PEC conditions.",
+      "disposition": "remains_sound",
+      "invalidated_claim": "No cavity resonance or six-face condition is invalidated by this event.",
+      "minimality": "All consumed boundary and geometric clauses are unchanged; no sheet source is inferred.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-em-guide-cavity-geometry",
+      "id": "ex-em-tem-topology-example",
+      "path": "items/ex-em-tem-topology-example.md",
+      "line": 91,
+      "snippet": "\\tilde K_f=-n\\times\\tilde H=\\tilde H_\\varphi(a)e_z",
+      "consumer_raw_sha256": "2460fd2e00c7a8f66a4bcc5cff92bfd8278c405e2d147363ed303498b82d313e",
+      "affected_use": "Verification 3.1 explicitly replaces the conductor-minus-filling H jump by minus the filling magnetic intensity and then integrates the axial free-sheet current.",
+      "disposition": "repair_required",
+      "invalidated_claim": "The identification I=2pi a H_phi(a), and the interpretation of W_m=(1/2)L I^2 as conductor current, are unsupported without the additional conductor-side trace model.",
+      "minimality": "Adopt explicitly n cross H_cond=0 on the inner conductor (H_cond=0 suffices) and the thin-interface/ideal wall-current reading; retain the potential, field, energy and LC formulas. Revise the Example if this assumption is added there, then inspect its direct consumers only.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "pthm-em-rectangular-mode-candidates",
+      "id": "pthm-em-guide-completeness",
+      "path": "items/pthm-em-guide-completeness.md",
+      "line": 80,
+      "snippet": "the physical TE candidate family excludes it by the Maxwell index restriction",
+      "consumer_raw_sha256": "6218c9d450dd7e830124fec331d10b873c2ffe0c14482ef2644956b37d103500",
+      "affected_use": "Proof 1.1 cites candidate clause(c) solely to exclude the constant h00 profile from positive-frequency TE reconstruction.",
+      "disposition": "remains_sound",
+      "invalidated_claim": "No zero-mean basis or TE00 exclusion claim is invalidated.",
+      "minimality": "Positive H_* preserves the same zero-index exclusion, so no amplitude convention is needed in this use.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "pthm-em-rectangular-mode-candidates",
+      "id": "pthm-em-guide-dispersion-energy",
+      "path": "items/pthm-em-guide-dispersion-energy.md",
+      "line": 50,
+      "snippet": "U=\\frac{\\mu^2\\varepsilon\\omega^2}{2k_c^2}\\int_{R_{ab}}h_{mn}^2",
+      "consumer_raw_sha256": "05840a05f1b9808144b6607035df96a972a5ea8460c63881442bfd75f1979f6d",
+      "affected_use": "Statement(b), F1, and proof 2.1-2.2 copy the unscaled candidate fields and evaluate energy and flux quadratically in the dimensionless profiles.",
+      "disposition": "repair_required",
+      "invalidated_claim": "For arbitrary dimensionful H_*,E_* introduced by the supplier, Statement(b) misses H_*^2 in both TE formulas and E_*^2 in both TM formulas, and the displayed SI energies have incorrect dimensions.",
+      "minimality": "Multiply both TE energy/flux formulas by H_*^2 and both TM formulas by E_*^2; update F1 and corresponding calculations, preserving dimensionless profile norms in (a), transport/speed relations in (c) and cutoff bounds in (d). The Statement change triggers only its next direct hop.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "pthm-em-rectangular-mode-candidates",
+      "id": "ex-em-te-ten-example",
+      "path": "items/ex-em-te-ten-example.md",
+      "line": 36,
+      "snippet": "\\tilde H=\\bigl(-i\\beta\\tfrac{a}{\\pi}\\sin\\tfrac{\\pi x_1}{a},\\,0,\\,\\cos\\tfrac{\\pi x_1}{a}\\bigr)",
+      "consumer_raw_sha256": "22b7c7105b1e9931c341b34f08751e5aae9cfa4fafdfc9ce6ab110810ad7d89b",
+      "affected_use": "Example amplitudes, F1 and Verification 1.1 instantiate TE10 but omit the now-explicit longitudinal magnetic amplitude quantity.",
+      "disposition": "repair_required",
+      "invalidated_claim": "The Example purports to give SI field amplitudes while its magnetic vector is dimensionless; it must select and carry H_* from supplier(a).",
+      "minimality": "Choose H_*>0 in A/m (or explicitly H_*=1 A/m) and multiply both displayed TE10 amplitudes and the corresponding real-field expression by it; cutoff, polarization and lowest-mode comparison are unchanged. Update copied F1 and Verification algebra, then examine direct consumers of the changed Example.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "pthm-em-rectangular-mode-candidates",
+      "id": "ex-em-rectangular-cavity-example",
+      "path": "items/ex-em-rectangular-cavity-example.md",
+      "line": 37,
+      "snippet": "E_{\\mathrm{sp}}(x):=e_1\\sin\\frac{\\pi x_2}{b}\\sin\\frac{\\pi x_3}{d}",
+      "consumer_raw_sha256": "ed44dfdb26f2e1129ac2eefe7c2277098c6c828ff766ea45cfe7d70fd9403bb5",
+      "affected_use": "Example and Given define a dimensionless spatial electric profile; F3 and Verification 3.1 identify it with the cutoff TM(1,1) candidate without E_*.",
+      "disposition": "repair_required",
+      "invalidated_claim": "The electric field and its B reconstruction lack V/m normalization, and the exact equality to supplier(b) now requires the declared E_*.",
+      "minimality": "Choose E_*>0 in V/m (unit choice allowed), multiply E_sp by E_*, retain B=-(curl E_sp)sin(omega t)/omega, and insert E_* in F3 and the cutoff identification. Resonance and all six zero wall conditions remain unchanged; examine direct consumers after its Statement/Example interface changes.",
+      "route": "frontier-owner"
+    }
+  ],
+  "downstream_page_uses": [
+    {
+      "supplier": "def-em-guide-cavity-geometry",
+      "path": "library/classical-electromagnetism/em-waveguides-and-cavities.md",
+      "affected_use": "Geometry paragraph names the interface reading but supplies no filling-only D,H formula; description remains sound.",
+      "disposition": "remains_sound"
+    },
+    {
+      "supplier": "pthm-em-rectangular-mode-candidates",
+      "path": "library/classical-electromagnetism/em-waveguides-and-cavities.md",
+      "affected_use": "Candidates paragraph names the TE/TM separated families and cutoff without specifying unit amplitudes; content remains sound.",
+      "disposition": "remains_sound"
+    },
+    {
+      "supplier": "pthm-em-rectangular-mode-candidates",
+      "path": "library/classical-electromagnetism/em-waveguides-and-cavities-examples.md",
+      "affected_use": "TE10 paragraph reproduces both unscaled amplitudes; cavity paragraph defines E_sp without E_*. Synchronize dimensionful factors when their consumer owners repair the two examples.",
+      "disposition": "repair_required",
+      "route": "frontier-consumer-owner"
+    }
+  ]
+}

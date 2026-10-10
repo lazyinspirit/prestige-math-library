@@ -1,0 +1,11 @@
+# Material dispersion: focused round-one correction proposal
+
+This proposal changes only `pthm-em-causal-dispersive-response`. The JSON records full before/after objects and hashes, the complete actually read mathematical suppliers, source evidence, exact counterexamples and consumer checks. No shared file or native state changed.
+
+The mathematical work supplier is correct: its period-average and positive-semidefinite criterion apply to any full complex transfer matrix. The physics consumer incorrectly turned an arbitrary real instantaneous matrix into pure storage. The proposed correction retains the arbitrary matrix, decomposes it into symmetric and antisymmetric parts, proves the exact work split, and applies passivity to the total transfer. Symmetric storage is not claimed positive without an extra positive-semidefinite assumption. The skew matrix with entries (1,2)=1 and (2,1)=-1 has zero real quadratic storage yet yields opposite nonzero averaged work for the two circular amplitudes; causality cannot remove that term.
+
+The finite-subtraction supplier fixes an order and requires its matching growth bound. The proposal quantifies over every order satisfying those hypotheses; a bound at order n0 also permits higher orders, preserving that valid family. It does not imply lower-order formulas. The entire response chi(z)=z^2 satisfies the order-three branch but not the order-two growth hypothesis; applying the latter formula would falsely return zero for its real part. The separate constitutive polynomial and the independently qualified unsubtracted branch remain intact.
+
+I read the full mathematical response and finite-subtraction statements and proofs, and Tong Section 7.5.4, printed pp.200–204, from the retained full author PDF. Source permissions do not certify the proof. There are no current direct logical consumers of the physics theorem. Related material-postulate, symmetric restricted-energy, unit and scalar negative-kernel example claims do not use either rejected assertion and need no change. The separate coarse-grain and bound/free lanes are untouched.
+
+This is round one of at most two review/repair rounds. Parent integration must compare the final stable worker carrier and preserve existing source history and concurrent repairs. No independent audit, readiness certificate or gate result is claimed.

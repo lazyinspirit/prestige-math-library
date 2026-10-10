@@ -1,0 +1,59 @@
+{
+  "run": "physics-em-sr-40-2026-10-08",
+  "round": 1,
+  "supplier": "lem-em-outgoing-source-helmholtz-and-diffraction",
+  "supplier_raw_sha256": "ba0ae0d7fc7e66c3469f9b5f45b04be11e6e92e58b65a84fc14791988fe63251",
+  "statement": "Assume Countable Choice ($\\mathrm{AC}_\\omega$), with the exact meaning of [[def-countable-choice]]. For $k>0$ define $G_k(x)=e^{ik|x|}/(4\\pi|x|)$ off the origin, a locally integrable complex function. Then\n\n$$(-\\Delta-k^2)G_k=\\delta_0$$\n\ndistributionally ([[def-laplacian-of-a-c2-function]]). For $a>0$ and a finite complex measure $\\alpha$ supported in the closed ball $\\overline{B_a(0)}$, the field $u=G_k*\\alpha$ is smooth outside the support, solves $(\\Delta+k^2)u=0$ there and is outgoing: for $x=rn$, $r\\ge2a$,\n\n$$u(rn)=\\frac{e^{ikr}}{4\\pi r}\\int e^{-ikn\\cdot y}\\,d\\alpha(y)+O\\!\\Bigl(\\frac{\\|\\alpha\\|_{\\mathrm{TV}}}{r}\\Bigl[\\frac{a}{r}+\\frac{ka^2}{r}\\Bigr]\\Bigr)$$\n\nuniformly in direction, and $r(\\partial_ru-iku)=O(r^{-1})$ uniformly. For a planar aperture $y=(y_1,y_2,0)$ with observation $x=(\\xi_1,\\xi_2,z)$, $z>0$, $|\\xi|\\le b$, $a+b\\ll z$, the Fresnel approximation replaces $R=|x-y|$ by $z+|\\xi-y|^2/(2z)$ and $1/R$ by $1/z$ with phase error $O(k(a+b)^4/z^3)$ and relative amplitude error $O((a+b)^2/z^2)$, hence absolute field error $O(\\|\\alpha\\|_{\\mathrm{TV}}z^{-1}[(a+b)^2/z^2+k(a+b)^4/z^3])$. Aperture data are an explicitly specified scalar source, not asserted to be the unknown exact Maxwell boundary traces, and no uniqueness or existence for arbitrary obstacle boundary data is claimed.",
+  "supplier_check": "For |y|\u2264a,r\u22652a,a>0: |rn-sy|\u2265r-a\u2265r/2>0 for every s\u2208[0,1]. Taylor, amplitude and radial derivative bounds therefore include r=2a. Compact closed support gives derivative bounds away from support. Fresnel estimates depend only |y_t|\u2264a. Support is total-variation support; complex cancellation is insufficient. All rich claims retained.",
+  "diagnosis_correction": "Initial report incorrectly described aperture consumers as invalid: their existing containing-open-ball regularity and direct closed-radius estimates were sufficient already. Extension aligns source interface and removes stale explanatory text, without pretending a consumer proof gap existed.",
+  "consumers": [
+    {
+      "id": "ex-em-rectangular-aperture",
+      "raw_sha256": "5243a23b175820dcfce574eab40a82752db1a66da393fd0e7a6ebcc92d804430",
+      "affected_use_verdict": "sound",
+      "reason": "Indirect aperture source: rectangle corners satisfy |y|\u2264sqrt(a\u00b2+b\u00b2), positive radius; parent theorem applies at r=2a-prime without changing sinc computation or intensity error."
+    },
+    {
+      "id": "lem-em-exterior-outgoing-scalar-uniqueness",
+      "raw_sha256": "24e5712bfd3693cb4fc0373abfc129ae207e7912e706815f278942a2c0422254",
+      "affected_use_verdict": "sound",
+      "reason": "Indirect fundamental-kernel/modal-context use through DtN and representation; uniqueness uses Green identity and imaginary DtN positivity, not source support restriction. Their consumed branches unchanged."
+    },
+    {
+      "id": "lem-em-exterior-vector-helmholtz-mixed-boundary-existence",
+      "raw_sha256": "cfd8a12d3e9c0e397f614ffa53851a4b42ea43e0de2dd303c33be7e8e8b13163",
+      "affected_use_verdict": "sound",
+      "reason": "Indirect scalar uniqueness/DtN use. Fredholm and mixed-boundary construction consumes modal traces, not a measure support radius. Closed-support strengthening changes no existence premise."
+    },
+    {
+      "id": "lem-em-helmholtz-boundary-representation",
+      "raw_sha256": "f7f89e23dd1acd66ad33d5480c2193102aa99b91e9e595d3448257e06c5cb35c",
+      "affected_use_verdict": "sound",
+      "reason": "Direct Given consumes only local integrability, off-pole PDE and distributional delta normalization. Punctured Green sign and exterior boundary terms unchanged; no source measure radius used."
+    },
+    {
+      "id": "lem-em-sphere-outgoing-dirichlet-to-neumann-map",
+      "raw_sha256": "4b0afdcd84592dd48a8aadfecfd669050a9a488624d18bff49f6d0cdbfed378f",
+      "affected_use_verdict": "sound",
+      "reason": "Indirect via representation smooth modal branch: uses radial harmonic expansion, uniform Sommerfeld residual and derivative bounds, no source measure support assumption."
+    },
+    {
+      "id": "post-em-scalar-aperture-model",
+      "raw_sha256": "67a14a2976dca302e10a070a5668fe52a79abf357d623d284bb0055fbaf1fc84",
+      "affected_use_verdict": "sound",
+      "reason": "Direct aperture data finite measure supported in compact S\u2282{|y|\u2264a}, a>0. Total variation support meets new closed-ball premise. Well-definedness paragraph updated to current closed support supplier; halfspace separation x3>0 retains absolute bound."
+    },
+    {
+      "id": "pthm-em-pec-monochromatic-exterior-scattering",
+      "raw_sha256": "e6dd969b00dc1a7704791adfc99b3b0c97f12f10a5169540ee32d056e4f97c27",
+      "affected_use_verdict": "sound",
+      "reason": "Indirect exterior vector/DtN/representation branches concern actual boundary traces; no convolution source radius premise used. Exact PEC problem and full-Choice assumptions unchanged."
+    },
+    {
+      "id": "pthm-em-scalar-aperture-diffraction",
+      "raw_sha256": "b5b300c0d39d3e0e0673b565729be627bcb56a832e8b6167b6b3e4b1ca6a9e1e",
+      "affected_use_verdict": "sound",
+      "reason": "Direct F2 open-ball specialization remains valid under stronger closed-ball source. Existing proof1.1 uses containing A=a+1 for off-support regularity. Proof1.2/2.1 directly derive closed-radius bounds with |y|\u2264a and r\u22652a; all denominators\u2265r/2 including endpoint. Fresnel1.3 uses s\u2264eta0\u00b2<1. No Maxwell or trace identification added."
+    }
+  ]
+}

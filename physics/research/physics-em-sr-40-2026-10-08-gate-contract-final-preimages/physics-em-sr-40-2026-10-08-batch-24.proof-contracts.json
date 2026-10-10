@@ -1,0 +1,2707 @@
+{
+  "version": 1,
+  "level": "physics-em-sr-40-2026-10-08",
+  "scope": [
+    "lem-em-coordinate-cell-localization",
+    "lem-em-surface-density-localization",
+    "def-em-fixed-test-geometry",
+    "def-em-weak-sources",
+    "pthm-em-integral-maxwell",
+    "post-em-distributional-vacuum-maxwell",
+    "pthm-em-charge-continuity",
+    "pthm-em-fixed-vacuum-jumps",
+    "pthm-em-gauss-constraint-propagation",
+    "ex-em-nonconserved-switched-charge",
+    "texp-em-displacement-current-surface-choice"
+  ],
+  "contracts": {
+    "lem-em-coordinate-cell-localization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "A subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a real $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the **sphere** of **centre** $x$ and **radius** $r$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-metric-continuity",
+          "source_section": "Definition",
+          "quote": "$f$ is **continuous at $a$** if for every real $\\varepsilon > 0$ there is a real $\\delta > 0$ such that $$d_X(x,a) < \\delta \\;\\Longrightarrow\\;",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number $$\\langle x, y\\rangle \\;:=\\;",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$ is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]). 2.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]], [[def-metric-space]]) and let $f :",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Then $R^{\\circ}$ is open and $\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every** set $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue measurable with $$\\lambda_n(R) \\;=\\;",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then $f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $Q=\\prod_{i=1}^n[a_i,b_i]$ with $n\\ge1$ and $a_i<b_i$. If a bounded Borel real function $f$ on $Q$ is Riemann integrable, then it is Lebesgue integrable and the two integrals agree.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "For integrable $f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function $\\alpha f+\\beta g$ is integrable and its integral is $\\alpha\\int_Qf+\\beta\\int_Qg$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-multidimensional-darboux-sums",
+          "source_section": "Definition",
+          "quote": "Let $f:Q\\to\\mathbb R$ be bounded on a nondegenerate rectangle and let $P$ be a grid. For each cell $Q_i$, put $$m_i:=\\inf f[Q_i],\\quad M_i:=\\sup f[Q_i],\\quad L(f,P):=\\sum_i m_i\\operatorname{vol}(Q_i),\\quad U(f,P):=\\sum_i M_i\\operatorname{vol}(Q_i).$$ The extrema exist as finite reals because each nonempty image is bounded ([[def-bounded-set]], [[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[lem-sup-unique]]), and the sums use the iterated convention of [[def-multidimensional-grid-partition]].",
+          "uses": [
+            "1.3",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-multidimensional-grid-partition",
+          "source_section": "Definition",
+          "quote": "Repeated splitting of finite sums and induction on $m$ give $$\\sum_i\\operatorname{vol}(Q_i)=\\operatorname{vol}(Q).$$ These statements include boundary overlaps:",
+          "uses": [
+            "1.3",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-multidimensional-darboux-integral",
+          "source_section": "Definition",
+          "quote": "The function is **Riemann integrable over $Q$** when the two values agree.",
+          "uses": [
+            "1.3",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-multidimensional-refinement-inequalities",
+          "source_section": "Statement",
+          "quote": "If $P'$ refines a grid $P$, then $L(f,P)\\le L(f,P')\\le U(f,P')\\le U(f,P)$.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Then there is a natural number $n \\ge 1$ such that $$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$ where $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and $1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]).",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose that $g(p)\\ne0$ for some $p\\in U$.",
+          "step": "1.1",
+          "inputs": [
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By continuity of $g$ at $p$ with $\\varepsilon=g(p)/2>0$ there is $\\delta_1>0$ with $|g(x)-g(p)|<g(p)/2$ for every $x\\in U$ with $d_2(x,p)<\\delta_1$;",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "It remains to verify the sharpness clause.",
+          "step": "1.3",
+          "inputs": [
+            "F10",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The set $Q$ is a nonempty compact subset of $\\mathbb R^n$ and the restriction $g|_Q$ is continuous for the subspace metric, so it is bounded and attains its extrema;",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The constant $c:=g(p)/2>0$ has Riemann integral $c\\,\\ell^n$ over $Q$: for every grid $P$ of $Q$ every cell satisfies $m_i=M_i=c$, so $L(c,P)=U(c,P)=c\\sum_i\\operatorname{vol}(Q_i)=c\\operatorname{vol}(Q)=c\\,\\ell^n$ by ;",
+          "step": "2.2",
+          "inputs": [
+            "F10",
+            "F5",
+            "F8",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Let $P$ be any grid of $Q$ and let $P''$ be the grid with first-coordinate partition the union of the first-coordinate breakpoints of $P$ with their reflections $t\\mapsto2p_1-t$, and with the remaining coordinate partitions those of $P$;",
+          "step": "2.3",
+          "inputs": [
+            "F10",
+            "F11",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $g(x)>c$ for every $x\\in Q$ by step 1.2 and both $g|_Q$ and the constant $c$ are Riemann integrable on $Q$, monotonicity gives $\\int_Qg\\,d\\lambda_n\\ge c\\,\\ell^n>0$, where step 2.1 identifies the Lebesgue integral of $g$ with its Riemann integral and step 2.2 evaluates the constant.",
+          "step": "3.1",
+          "inputs": [
+            "F9",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For each integer $m\\ge1$ let $P_m$ be the grid with first-coordinate breakpoints $p_1+ka/m$ for $-m\\le k\\le m$ and single intervals of length $2a$ in the remaining coordinates.",
+          "step": "3.2",
+          "inputs": [
+            "F12",
+            "F7",
+            "F8",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The function $g(x)=x_1-p_1$ is continuous and nonzero on $\\mathbb R^n$, and step 3.2 shows $\\int_Qg\\,d\\lambda_n=0$ for the cube $Q$ of step 1.3 centred at $p$;",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: if U were empty the cube hypothesis is vacuous and g=0 on U holds vacuously; the contradiction argument runs only for a point p in U, so no empty case is excluded or silently used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: if g(p)=0 no contradiction is needed; the argument is invoked only when g(p) is nonzero, and the constant function 0 satisfies the hypothesis with vanishing integrals."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.2-3.2 hold for n=1: the cube is a closed interval, the factor (2a)^{n-1} is 1, and the mirror map is the involution x |-> 2p_1-x of that interval; the planar clause of the Statement is the case n=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2 constructs the cube with side l=delta/sqrt(n)>0, and the hypothesis of the Statement ranges only over cubes of positive side length; degenerate cubes are never used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.3 uses closed grid partitions of the closed cube Q and step 3.2 sums over all cells including the extreme ones; the cube satisfies Q contained in U, so no boundary point of U enters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: AC_omega is declared as the ambient Lebesgue-interface convention; the argument makes only finitely many choices (delta, grid refinements) and uses no countable selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "steps 1.1-3.1 prove the stated implication: vanishing of all cube integrals forces g=0 pointwise."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse is asserted; the sharpness paragraph of the Statement records a nonzero function whose integrals vanish over a proper subfamily and is not an equivalence claim."
+        }
+      ]
+    },
+    "lem-em-surface-density-localization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "A subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a real $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]).",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-metric-continuity",
+          "source_section": "Definition",
+          "quote": "d_Y\\big(f(x), f(a)\\big) < \\varepsilon \\qquad \\text{for all } x \\in X .$$ $f$ is **continuous** (globally, or on $X$) if it is continuous at every point of $X$. **The same condition in balls.** Since $d_X(x,a) < \\delta$ says $x \\in B_X(a,\\delta)$ and $d_Y(f(x),f(a)) < \\varepsilon$ says $f(x) \\in B_Y(f(a),\\varepsilon)$ ([[def-metric-ball]]), continuity at $a$ reads:",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the **sphere** of **centre** $x$ and **radius** $r$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "The same chart formula restricts to a compact Borel face contained in a regular patch.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "source_section": "Statement",
+          "quote": "The chart integral on a compact embedded $C^1$ hypersurface defines a finite Borel measure independent of the finite charts and subordinate partitions.",
+          "uses": [
+            "1.3",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ there is a fixed smooth $b:\\mathbb R^n\\to[0,1]$, equal to one on $\\overline B_1(0)$ and with support contained in $B_2(0)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "We write $\\partial^\\alpha$ for the multi-index convention there, and $\\partial^0\\varphi=\\varphi$. The **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$:",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Its **nonnegative Lebesgue integral** is $$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$ where the simple integral on the right is the one from [[def-integral-of-a-nonnegative-simple-function]].",
+          "uses": [
+            "1.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$. 2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$, the integral of the zero function is $0$.",
+          "uses": [
+            "1.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a nonnegative simple measurable function ([[def-nonnegative-simple-measurable-function]]) on a measure space $(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and $c_j\\ge0$. Its **simple integral** is $$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$ where $\\mu$ is the given measure ([[def-measure]]) and the convention $0\\cdot(+\\infty)=0$ is fixed once and for all. The next lemma proves that this value is independent of the chosen simple representation.",
+          "uses": [
+            "1.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative Lebesgue integral equals its simple integral:",
+          "uses": [
+            "1.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$ ([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and $\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every** set $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue measurable with $$\\lambda_n(R) \\;=\\;",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Its positive and negative parts are $$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$ they are measurable by [[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and satisfy $f=f^+-f^-$ and $|f|=f^++f^-$. The **Lebesgue integral of a real measurable function** is defined whenever at most one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case $$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$ The function is **integrable** when both integrals are finite, equivalently when $\\int|f|\\,d\\mu<+\\infty$.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it:",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume that $a(x_0)\\ne0$ for some $x_0\\in S$ and put $m:=|a(x_0)|/2>0$;",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Continuity of $a$ at $x_0$ gives $\\delta_1>0$ with $|a(x)-a(x_0)|<m$ for every $x\\in S$ with $d_2(x,x_0)<\\delta_1$, hence $\\sigma a(x)>m$;",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The function $a\\psi$ is bounded on the compact $S$, so $\\int_S|a\\psi|\\,dS\\le C\\,S(S)<\\infty$ by monotonicity of the nonnegative surface integral and finiteness of the surface measure, and the signed integral $\\int_Sa\\psi\\,dS$ is defined;",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The chart family of the class covers $S$, so $x_0\\in S\\cap O$ for one of its charts $X:V\\to S\\cap O$ with $V\\subseteq\\mathbb R^2$ open and $X$ regular, injective and $C^1$;",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Choose $R>0$ with $\\overline B_R(x_0)\\subseteq O$ and put $r:=R/2$;",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By continuity of $X$ at $u_0$ there is $\\delta>0$ with $X \\subseteq B_r(x_0)$, so choosing $\\ell>0$ with $\\ell/\\sqrt2<\\delta$ and $\\ell$ small enough that the closed axis-parallel square $C:=u_0+ ^2$ lies in $V$ gives $C\\subseteq B(u_0,\\delta)$ and $X(C)\\subseteq B_r(x_0)$;",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The chart density $J=J_X$ is continuous and strictly positive on $V$, so by continuity at $u_0$ there is $\\beta>0$ with $J\\ge\\beta$ on $C$;",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "On the support of $\\psi$ intersected with $S$ the sign $\\sigma$ is constant and $|\\sigma a|>m$;",
+          "step": "5.2",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Monotonicity of the nonnegative surface integral, applied through the chart formula, and the evaluation of step 5.1 give $\\sigma\\int_Sa\\psi\\,dS=\\int_S\\sigma a\\psi\\,dS\\ge m\\,S(X(C))\\ge m\\beta\\ell^2>0$, so $\\int_Sa\\psi\\,dS\\ne0$;",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.3",
+            "step 5.1",
+            "step 5.2"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "For the equal-density clause let $a,b:S\\to\\mathbb R$ be continuous with $\\int_Sa\\psi\\,dS=\\int_Sb\\psi\\,dS$ for every $\\psi\\in C_c^\\infty(\\Omega)$;",
+          "step": "7.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "step 6.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 7.1: for an empty hypersurface the hypothesis is vacuous and a=0 on S holds; the splitting point x_0 in S never exists, so the argument is correctly vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 7.1 reduces the equal-density clause to the difference c=a-b and step 6.1 gives c=0; the zero density pairs to zero against every test and is included."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "no cardinality-one case occurs; the proof works chart by chart and the parameter square constructed in step 4.1 is nondegenerate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 chooses the closed square C with side l>0, and F6 gives lambda_2(C)=l^2>0; no degenerate cell or vanishing-area set carries the positivity argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "S is compact inside the open set Omega; the bump of step 3.1 is supported strictly inside Omega, so no boundary condition of Omega or S is invoked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the Statement declares AC_omega for the surface-measure interface, and step 4.1 makes finitely many choices (chart, radius R, side l); no countable selection occurs in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "steps 1.1-6.1 prove the stated implication: vanishing of all test pairings forces a=0 pointwise on S."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the equivalently-clause of the Statement is derived in step 7.1 from the same implication applied to a difference; it is not the converse direction of the vanishing criterion."
+        }
+      ]
+    },
+    "def-em-fixed-test-geometry": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition clause (a) requires a volume test geometry to be a nonempty bounded open set, and clause (b) admits nonempty parameter regions; empty sets are excluded by explicit type, not by convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition clauses (a)-(b): the flux conventions are linear and admit the zero field and zero circulation; the definition asserts no differential equation, so no zero case is excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "the data are a pair (V,nu_V) or a pair (D,r) by definition; no cardinality-one collection occurs and none is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition clause (a) uses closed boxes with a_i<b_i and clause (b) requires r_u x r_v nonzero on the interior of D, so degenerate boxes and rank-deficient parametrizations are excluded; the affine instance is regular."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition clause (c) states the regularity convention on neighbourhoods of the compact test sets with closure V contained in Omega; nothing is asserted away from those neighbourhoods."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definitions (a)-(d): AC_omega is the convention already carried by the imported finite piecewise C^1 boundary presentations and the compact C^1 surface measure; the definition itself selects nothing."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "a definition introduces terminology and conventions and asserts no implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "a definition asserts no converse; the instances are verified by the clauses themselves, not as an equivalence."
+        }
+      ]
+    },
+    "def-em-weak-sources": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition clause (e): the solution predicate is an identity for the source pair, and the zero fields with zero volume and singular parts satisfy all four residual pairings vacuously; no existence is asserted in any case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition clauses (a)-(c): the zero fields are locally integrable and the zero densities, the zero current and q=0 are admitted; clause (e) then reduces to the zero distribution."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "the definition may be used with a single trajectory or a single stationary sheet, and no counting or finite-cardinality claim occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition clauses (b)-(c): constant trajectories with z'=0 are admitted, and the tangential condition K.n=0 includes K=0; no nondegeneracy is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition clause (b) states the finite-endpoint variant with its hypotheses (continuous extension to [a,b], finite absolute improper integral, endpoint events in U) and its endpoint deltas q delta_gamma(a) - q delta_gamma(b)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the opening clause carries the AC_omega convention of def-em-surface-distribution; the definition makes no selection of points, charts or sequences."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the definition introduces the predicate but asserts no implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the definition asserts no converse; the statement that singular parts require their own physical adoption is a scope clause, not an equivalence."
+        }
+      ]
+    },
+    "pthm-em-integral-maxwell": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "(a) [Smooth branch] Let $E,B$ be jointly $C^1$ fields with the additional derivatives required by each equation existing and continuous, and let $\\rho,J$ be continuous. Then, with the divergence and curl of [[def-divergence-and-curl-of-a-c1-vector-field]] and the partial derivative $\\partial_t$ at fixed position of [[def-directional-and-partial-derivatives]], $$\\operatorname{div}E=\\rho/\\varepsilon_0,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}B=\\mu_0J+c^{-2}\\partial_tE.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "The electric constant is defined within the framework by $$\\varepsilon_0:=(\\mu_0c^2)^{-1}$$ in F m$^{-1}$, consistent with the exact SI relation $\\varepsilon_0\\mu_0=1/c^2$, so that $c^2\\varepsilon_0\\mu_0=1$ and $\\varepsilon_0$ inherits the relative standard uncertainty of $\\mu_0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-em-fixed-test-geometry",
+          "source_section": "Definition",
+          "quote": "For every closed axis-parallel box $K=\\prod_{i<3}[a_i,b_i]\\subseteq\\Omega$ with $a_i<b_i$, its open interior $V=\\prod_{i<3}(a_i,b_i)$ is a volume test geometry and $\\overline V=K$;",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "set $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue measurable with $$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$. Then $$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "The partial derivatives are those of [[def-directional-and-partial-derivatives]], and the sum is the finite sum used throughout [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "These are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "source_section": "Statement",
+          "quote": "If Omega has the specified finite piecewise $C^1$ presentation and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, then $\\int_\\Omega\\operatorname{div}F=\\sum_j\\int_{S_j}F\\cdot\\nu_j\\,dS$, with faces counted once off E. All integrals are finite.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-the-classical-stokes-theorem-for-a-c2-surface-patch",
+          "source_section": "Statement",
+          "quote": "$$\\oint_{\\varphi(\\partial D)}F\\cdot d\\mathbf r=\\int_D\\bigl\\langle(\\operatorname{curl}F)\\circ\\varphi,\\ \\varphi_u\\times\\varphi_v\\bigr\\rangle.$$ The right-hand side is the flux of $\\operatorname{curl}F$ through the patch in the orientation induced by $\\varphi$, in the sense of [[def-oriented-unit-normal-and-flux-of-a-surface-patch]].",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "source_section": "Statement",
+          "quote": "In particular it applies to smooth compact test integrands and their bounded Borel zero extensions from compact Jordan regions.",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-em-parameter-integrals",
+          "source_section": "Statement",
+          "quote": "**Set form.** Let $K\\subseteq\\mathbb R^n$ be compact, Lebesgue measurable and of finite Lebesgue measure $\\lambda_n(K)<\\infty$, let $a<b$, and let $f$ be a real-valued function, defined and continuous together with its partial derivative $\\partial_tf$ on an open neighbourhood of $K\\times[a,b]$ in $\\mathbb R^{n+1}$.",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-em-coordinate-cell-localization",
+          "source_section": "Statement",
+          "quote": "In particular, for $n=2$, a continuous function on an open subset of the plane whose integral over every closed axis-parallel square contained in its domain vanishes is identically zero.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it:",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-em-fields",
+          "source_section": "Definition",
+          "quote": "Let the laboratory region $U\\cong I\\times\\Omega$, its spatial Euclidean structure and its units be those of [[def-em-lab-geometry]] and [[def-em-si-conventions]], and let $k\\ge1$. An **electric field of class $C^k$** on the region is a map $E:\\Omega\\times I\\to\\mathbb R^3$ that is of class $C^k$ in the sense of [[def-ck-euclidean-maps-and-diffeomorphisms]];",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-em-sources",
+          "source_section": "Definition",
+          "quote": "Let the laboratory region and its chart be those of [[def-em-lab-geometry]], with the units of [[def-em-si-conventions]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "every symbol is a quantity of this framework and the laboratory structure is that of [[def-em-lab-geometry]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-em-lab-geometry",
+          "source_section": "Definition",
+          "quote": "its components are the **laboratory time coordinate** $t(p):=x^0(p)/c$ and the **laboratory position** $r(p):=(x^1(p),x^2(p),x^3(p))$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the volume identities of (a), fix $t\\in I$ and a volume test geometry $(V,\\nu_V)$;",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the patch identities of (a), fix a patch test geometry $(D,r)$ and put $S=r $, with parameter derivatives $r_u,r_v$ and oriented area vector $r_u\\times r_v$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For clause (b), fix a closed axis-parallel box $K=\\prod_{i<3} \\subseteq\\Omega$ with $a_i<b_i$ and let $V$ be its open interior, a volume test geometry with $\\overline V=K$ by .",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For the curl equations fix a point $p\\in\\Omega$ and let $(j,k)$ be the cyclic pair with $e_j\\times e_k=e_i$ for a coordinate index $i$.",
+          "step": "1.4",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove that the smooth-branch equations imply all the integral identities of (a) for every volume and patch test geometry, and steps 1.3 and 1.4 prove the converse for the same exact class;",
+          "step": "2.1",
+          "inputs": [
+            "F10",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: if the declared class of test geometries were empty both directions are vacuous; the recovery in steps 1.3-1.4 only uses nonempty boxes and squares, whose existence follows from Omega being nonempty and open."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1-1.2: the zero fields and zero sources satisfy the differential equations and every integral identity; the identities are linear, so the zero case is covered in both directions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "statement and steps 1.3-1.4: the recovery quantifies over all closed boxes and all affine squares, and the Statement records that a single selected volume or patch does not suffice; no step relies on one test geometry."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.3 uses boxes with a_i<b_i and step 1.4 uses squares with side l>0, exactly the class of F2; degenerate boxes and squares are excluded from the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "I is an open interval and both directions are asserted at interior times t in I; step 1.2 uses a compact interval around t, so no endpoint of I is needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "statement: AC_omega is the convention of the divergence theorem and the surface-measure interface used in steps 1.1-1.4; the proof itself makes finitely many choices and no countable selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "steps 1.1-1.2 prove that the smooth differential equations imply the volume and patch integral identities for every test geometry of the class."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "steps 1.3-1.4 prove the converse by cube/square localization for the exact class of test geometries."
+        }
+      ]
+    },
+    "post-em-distributional-vacuum-maxwell": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The four distributional vacuum equations div E = rho/eps0, div B = 0, curl E = -partial_t B and curl B = mu0 J + c^-2 partial_t E are required to hold in D'(U) for field/source tuples of def-em-weak-sources(a)-(d) through its solution predicate (e), with eps0=(mu0 c^2)^-1 from def-em-si-conventions; the source classes are exactly the declared C1 point trajectories (proper graph, or finite-endpoint data) and the stationary tangential surface-charge and surface-current sheets, and the text excludes products of distributions and states the residual pairing meaning of the four identities."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The scope clause records that this is an additional adopted assumption of the framework in the named flat inertial laboratory model, covering only the declared singular-source classes; it asserts no existence, no conservation of matter, no self-force, no matter dynamics, no material response and no empirical claim, and it records that the original L1-only postulate neither covers nor implies the adoption and that both coincide when the singular part vanishes."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Three HTTP(S) references with locators: Chew sections 1.2, 3.3.2-3.3.3 and 4.3-4.3.4 (Maxwell equations presented as postulates; point-charge delta and Poisson/Green equations; surface-charge and current delta sources with singularity matching); Tong sections 1.1 and 1.2.1 (point density and current delta, surface charge/current dictionary); Landau-Lifshitz sections 28 and 30 (delta-function point charges and the field equations). The postulate restricts these textbook models to the framework's declared point and stationary-sheet types and its SI conventions rather than adopting the books' numerical mu0."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No Proof or Refutation section is present and provenance.proof is not-applicable; the text states explicitly that the adoption is a physical assumption, not a theorem about sources and not a consequence of the original locally integrable source branch, and it reports no experiment, measurement or empirical certainty."
+        }
+      }
+    },
+    "pthm-em-charge-continuity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "(a) [Smooth branch] Let $E,B$ be jointly $C^1$ fields with the additional derivatives required by each equation existing and continuous, and let $\\rho,J$ be continuous. Then, with the divergence and curl of [[def-divergence-and-curl-of-a-c1-vector-field]] and the partial derivative $\\partial_t$ at fixed position of [[def-directional-and-partial-derivatives]], $$\\operatorname{div}E=\\rho/\\varepsilon_0,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}B=\\mu_0J+c^{-2}\\partial_tE.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "$$\\varepsilon_0:=(\\mu_0c^2)^{-1}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-em-distributional-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "This is a physical adoption of the classical vacuum idealisation in that source class, not a theorem about sources and not a consequence of the original locally integrable source branch of [[post-em-vacuum-maxwell]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-divergence-of-a-curl-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $F:U\\to\\mathbb R^3$ be $C^2$. Then $\\operatorname{curl}F$ is a $C^1$ field on $U$ and $$\\operatorname{div}(\\operatorname{curl}F)=0\\qquad\\text{on }U.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$; 2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "The partial derivatives are those of [[def-directional-and-partial-derivatives]], and the sum is the finite sum used throughout [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative** $$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$ For a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. These are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-distribution",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, a **distribution** is a continuous complex-linear map $u:\\mathcal D(\\Omega)\\to\\mathbb C$, with the test-function topology of [[def-test-function-topology]]. Their vector space is denoted $\\mathcal D'(\\Omega)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is $$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$ The test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "Coordinate derivatives act on these two parts separately. We write $\\partial^\\alpha$ for the multi-index convention there, and $\\partial^0\\varphi=\\varphi$. The **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$:",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-distributional-differentiation-is-continuous-and-commutes",
+          "source_section": "Statement",
+          "quote": "Distributional derivatives satisfy $\\partial^\\alpha\\partial^\\beta u=\\partial^{\\alpha+\\beta}u$ and are continuous linear maps on $\\mathcal D'(\\Omega)$ for both the weak and strong distribution topologies.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-regular-distribution-from-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "This extends [[def-locally-integrable-function-on-r-n]]:",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-locally-integrable-functions-embed-in-distributions",
+          "source_section": "Statement",
+          "quote": "It is continuous from the local $L^1$ topology, generated by $f\\mapsto\\int_K|f|$ for compact $K\\subseteq\\Omega$, to the strong distribution topology.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the smooth branch, the identity $\\operatorname{div}(\\operatorname{curl}B)=0$ holds pointwise.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the distributional branch, fix $\\psi\\in C_c^\\infty(\\Omega\\times I)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The locally integrable case of the Statement is clause (a) of the embedding of : locally integrable fields and sources have well-defined regular distributions, and the argument of step 1.2 applies unchanged.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "statement and step 2.1: the zero source and field case satisfies the four identities and the continuity conclusion reads 0=0; the laboratory region is nonempty by def-em-lab-geometry, so only the vacuous residual case arises."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1-1.2 divide by mu_0, which is strictly positive by def-em-si-conventions, so the division is legitimate; the zero-density case gives partial_t 0 + div 0 = 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "no cardinality-one case occurs; the argument is a componentwise cancellation over three coordinate indices."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Omega and I are open and nonempty; no degenerate interval, vanishing measure or rank failure is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "both branches are identities on the open region and no endpoint value of I or boundary value on the spatial boundary is invoked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "statement: the derivative compatibility argument is choice-free; AC_omega is retained only by the declared singular-source formulation referenced in clause (b)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2 prove the continuity conclusion under the four equations in the smooth and distributional branches."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse is asserted; the statement is a compatibility implication and explicitly denies conservation-of-matter readings."
+        }
+      ]
+    },
+    "pthm-em-fixed-vacuum-jumps": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-em-surface-distribution",
+          "source_section": "Definition",
+          "quote": "Such an $S$ is a compact embedded $C^1$ hypersurface, so the surface integral and the surface measure $S(A)=\\int_S\\mathbf 1_A\\,dS$ of [[def-surface-integral-on-a-compact-c-one-hypersurface]] and [[lem-surface-integral-is-independent-of-c-one-boundary-charts]] apply;",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "For a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-em-lab-geometry",
+          "source_section": "Definition",
+          "quote": "The objects $I,\\Omega,t,r,\\delta$ and the identification $\\mathbb R^3\\cong n^\\perp$ belong to the named frame;",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-em-weak-sources",
+          "source_section": "Definition",
+          "quote": "When the singular parts vanish, its four identities are the same as the locally integrable weak branch of [[post-em-vacuum-maxwell]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-em-distributional-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "the locally integrable field pair and the volume-plus-singular source pair of [[def-em-weak-sources]](a)-(d) must satisfy its solution predicate (e).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "Then the same four identities hold in the sense of [[def-distribution]]:",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-em-interface-derivatives",
+          "source_section": "Statement",
+          "quote": "Then, away from the edge $\\partial S$ of the interface and in the distributional sense, $$\\partial_iF_j=\\{\\partial_iF_j\\}+n_i\\,[F_j]\\,\\delta_S\\qquad(i,j\\in\\{1,2,3\\}),$$ and consequently $$\\operatorname{div}F=\\{\\operatorname{div}F\\}_{\\mathrm{piecewise}}+n\\cdot[F]\\,\\delta_S,\\qquad \\operatorname{curl}F=\\{\\operatorname{curl}F\\}_{\\mathrm{piecewise}}+n\\times[F]\\,\\delta_S,$$ as distributions on the open set $\\Omega\\setminus\\partial S$:",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-em-surface-density-localization",
+          "source_section": "Statement",
+          "quote": "Equivalently, if two continuous densities on $S$ pair equally against every test function, then they are equal pointwise on $S$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "source_section": "Statement",
+          "quote": "Under the page measure convention, if a finite family of open sets $U_j\\subset\\mathbb R^n$ covers compact K, there are smooth nonnegative $\\chi_j$ with compact support in $U_j$ such that $\\sum_j\\chi_j=1$ on a neighborhood of K.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$. Every open cover of $\\Omega$ admits an at most countable locally finite smooth partition of unity with compact supports, each support contained in some cover member.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ there is a fixed smooth $b:\\mathbb R^n\\to[0,1]$, equal to one on $\\overline B_1(0)$ and with support contained in $B_2(0)$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f :",
+          "uses": [
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$",
+          "uses": [
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "source_section": "Statement",
+          "quote": "The corresponding assertion for complex functions holds componentwise. In particular it applies to smooth compact test integrands and their bounded Borel zero extensions from compact Jordan regions.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "1. **Degenerate boxes.** If $a_i \\le b_i$ are reals with $a_{i_0} = b_{i_0}$ for some $i_0 < n$, then every set $R$ between the open box $\\{x :",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "it gives measure $0$ to all of them whenever $a_i = b_i$ for some $i<n$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and $\\lambda_n$ is a measure on it ([[def-measure]]); 2.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$ For every $m\\in\\mathbb N$ one also has $$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$ including $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "For $c=0$, the integral of the zero function is $0$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a nonnegative simple measurable function ([[def-nonnegative-simple-measurable-function]]) on a measure space $(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and $c_j\\ge0$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative Lebesgue integral equals its simple integral:",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Since [[prop-closure-properties-of-measurable-functions-used-by-the-integral]] implies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$** by $$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$ where the integral on the right is the nonnegative Lebesgue integral of [[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "1. $\\mathbb{Q}_{\\mathbb{R}}$ is dense in $\\mathbb{R}$, that is, $\\overline{\\mathbb{Q}_{\\mathbb{R}}} = \\mathbb{R}$ ([[def-limit-point-r]]);",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-distribution",
+          "source_section": "Definition",
+          "quote": "Sums and scalar multiples remain continuous and linear, so the indicated collection is a complex vector space.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is $$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$ The test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "We write $\\partial^\\alpha$ for the multi-index convention there, and $\\partial^0\\varphi=\\varphi$. The **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$: its members are smooth functions whose support, the closure in $\\Omega$ of their nonzero set, is a compact subset of $\\Omega$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-regular-distribution-from-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "This extends [[def-locally-integrable-function-on-r-n]]:",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-locally-integrable-functions-embed-in-distributions",
+          "source_section": "Statement",
+          "quote": "It is continuous from the local $L^1$ topology, generated by $f\\mapsto\\int_K|f|$ for compact $K\\subseteq\\Omega$, to the strong distribution topology. In particular local $L^1$ convergence implies strong distribution convergence.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-fundamental-lemma-of-the-calculus-of-variations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $g\\in L^1_{\\mathrm{loc}}(\\Omega;\\mathbb C)$ ([[def-locally-integrable-function-as-a-regular-distribution]]) satisfy\n$$\\int_\\Omega g\\,\\varphi\\,dx=0\\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega)$$\n([[def-test-function-space-d-of-an-open-set]]). Then $g=0$ almost everywhere on $\\Omega$. Moreover, if $g$ is real-valued and $\\int_\\Omega g\\varphi\\,dx\\ge0$ for every nonnegative $\\varphi\\in C_c^\\infty(\\Omega)$, then $g\\ge0$ almost everywhere.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the joint one-sided regularity, each side of $S\\times I$ carries a $C^1$ extension to a closed side of a smaller stationary graph cylinder; on each compact closed half-cylinder the extensions and their first spatial and temporal derivatives are bounded, so the piecewise first derivatives of $E,B$ are locally bounded and locally integrable on $U$, while the volume sources are locally integrable by hypothesis, their one-sided traces and jumps are jointly continuous, and the jump densities are bounded on compact subsets of $S\\times I$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The interface $S$ is Lebesgue-null in $\\mathbb R^3$: in the finite graph charts of [F1] every normal section of the graph over the parameter plane is a singleton, so Fubini and the nullity of singletons give $\\lambda_3(S)=0$, and the finitely many charts cover $S$; hence $S\\times I$ has four-dimensional measure zero locally and every locally integrable function vanishing off $S\\times I$ represents the zero distribution.",
+          "step": "1.2",
+          "inputs": [
+            "F7",
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Spacetime interface formula for a component: for each fixed $t$ the spatial restriction of the hypothesis satisfies the interface-derivative lemma on the spatial slice, so for a compactly supported spacetime test $\\psi$ the identity $\\partial_iF_j=\\{\\partial_iF_j\\}+n_i[F_j]\\,\\delta_S$ may be applied slicewise and integrated in $t$; a time-independent finite partition of unity subordinate to stationary graph neighbourhoods of the spatial support of $\\psi$, with cutoffs as in [F5], makes the terms $F_j\\partial_i\\psi$, $(\\partial_iF_j)\\psi$ and $n_i[F_j]\\psi$ absolutely integrable on the compact support, because the piecewise derivatives and the continuous jumps are bounded there and the surface measure of the compact sheet is finite by [F1]; Fubini [F6] then justifies integrating the slicewise identity, giving $\\partial_iF_j=\\{\\partial_iF_j\\}+n_i[F_j]\\otimes\\delta_{S\\times I}$ for the spacetime distribution, where the sheet term acts as $\\int_I\\int_Sn_i[F_j]\\psi\\,dS\\,dt$. For the time derivative, on each spatial side the field is $C^1$, and compact-support integration by parts on a compact interval containing the time support of each spatially localized piece, followed by the Riemann-Lebesgue comparison and Fubini, gives $-\\int F_j\\partial_t\\psi=\\int(\\partial_tF_j)\\psi$ with no endpoint contribution, so $\\partial_tF_j=\\{\\partial_tF_j\\}$ carries no sheet term: the interface is stationary.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the formula of step 1.3 to each of the four weak Maxwell identities. Off the sheet the fields and sources are $C^1$ and continuous, so the classical residuals $h_1=\\operatorname{div}E-\\rho_v/\\varepsilon_0$, $h_2=\\operatorname{div}B$, $h_3=\\operatorname{curl}E+\\partial_tB$, $h_4=\\operatorname{curl}B-\\mu_0J_v-c^{-2}\\partial_tE$ are continuous on the open set $U\\setminus(S\\times I)$; against every test supported in that open set the four weak identities reduce to $\\int h_\\ell\\psi=0$, and the sign-and-bump argument of [F8] (a positive value of a continuous $h_\\ell$ at a point persists with a fixed sign on a small axis-parallel cube of positive measure, on which a bump equal to one on a smaller cube, supplied by [F5], makes $\\int h_\\ell\\psi$ strictly nonzero) forces $h_\\ell=0$ on $U\\setminus(S\\times I)$. Each residual is locally integrable on $U$ and vanishes off the null set $S\\times I$ by step 1.2, hence represents the zero regular distribution; subtracting the off-sheet parts from the four identities leaves four sheet identities whose densities are $n\\cdot[E]-\\sigma/\\varepsilon_0$, $n\\cdot[B]$, $n\\times[E]$ and $n\\times[B]-\\mu_0K$, each multiplied by the sheet distribution $\\delta_{S\\times I}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.2",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $a_1=n\\cdot[E]-\\sigma/\\varepsilon_0$, $a_2=n\\cdot[B]$, $a_3\\in\\mathbb R^3$ with components of $n\\times[E]$, and $a_4=n\\times[B]-\\mu_0K$ for the continuous sheet densities of step 2.1. For a fixed spatial test $\\varphi\\in\\mathcal D(\\Omega)$ and each component density $a$ of these four, the function $H_\\varphi(t):=\\int_Sa(x,t)\\varphi(x)\\,dS$ is continuous on $I$: on a compact time interval the joint continuity of $a$ on the compact sheet gives uniform convergence as $t\\to t_0$, and $|H_\\varphi(t)-H_\\varphi(t_0)|\\le S(S)\\|\\varphi\\|_\\infty\\sup_{x\\in S}|a(x,t)-a(x,t_0)|$ tends to $0$. Testing the sheet identity with $\\varphi(x)\\eta(t)$ for $\\eta\\in C_c^\\infty(I)$ gives $\\int_IH_\\varphi(t)\\eta(t)\\,dt=0$ for every such $\\eta$; the one-dimensional sign-and-bump argument of [F8] then gives $H_\\varphi(t)=0$ for every $t\\in I$. Since $\\varphi$ was an arbitrary ambient test, the surface-density localization lemma [F4] applied at each fixed $t$ to the continuous density $a(\\cdot,t)$ gives $a(\\cdot,t)=0$ on $S$; hence all four pointwise jump identities $n\\cdot[E]=\\sigma/\\varepsilon_0$, $n\\cdot[B]=0$, $n\\times[E]=0$, $n\\times[B]=\\mu_0K$ hold on $S\\times I$, and the equivalent solved forms for $\\sigma$ and $K$ follow by dividing by $\\varepsilon_0>0$ and $\\mu_0>0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F8",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the general weak-trace branch the same interface formula of step 1.3 is available with the weaker justification: the one-sided spatial $C^1$ extensions give the slicewise lemma at every time, the additional local $L^1$ hypotheses on the piecewise first derivatives make the localized terms of step 1.3 integrable, the measurable locally integrable traces make the sheet pairings $\\int_I\\int_Sa\\psi\\,dS\\,dt$ well defined by the ordinary integrals for every test $\\psi$, and Fubini still applies; the temporal identity holds because each fixed off-sheet point has a $C^1$ dependence in $t$ and integration by parts against a compactly supported test is justified by the integrable derivative. Consequently each of the four sheet pairings of the Statement vanishes for every test; no product of distributions is formed, only the pairing of a locally integrable sheet density with a compact smooth test. For the almost-everywhere conclusion, use the countable family of ambient bumps with rational centres and rational radii $0<r<R$ with $\\overline B_R(q)\\subseteq\\Omega$, each fixed by the scaled-bump construction of [F5] rather than chosen per instance; for each such spatial test $\\varphi$, Fubini gives $H_\\varphi(t)=\\int_Sa(x,t)\\varphi(x)\\,dS\\in L^1_{\\mathrm{loc}}(I)$, and product tests $\\varphi(x)\\eta(t)$ give $\\int_IH_\\varphi\\eta=0$ for all temporal tests. Thus [F9] gives a null set of exceptional times for each such test, and the countable union of these null sets is null by [F7]. At each remaining time $t$, if some continuous-in-$x$ density $a(\\cdot,t)$ were nonzero at a point $x_0\\in S$, its fixed sign would persist on a small graph neighbourhood of $x_0$; density of the rationals [F8] provides one of the rational balls inside that neighbourhood whose inner ball contains $x_0$, and a positive-area graph cell inside that inner ball, as in [F4], makes the pairing nonzero against the corresponding bump, a contradiction. Hence all four identities hold at every $x\\in S$ for almost every $t\\in I$; if the jump densities are additionally jointly continuous, the same positive-area-cell argument applied on nondegenerate time intervals upgrades the identities to all $(x,t)$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.3",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 1.1-3.1 prove the four pointwise jump identities under the joint one-sided regularity, and step 4.1 proves the weak-trace branch with its almost-everywhere and continuity upgrades; the sources used are exactly the stationary tangential sheet and volume parts, so no normal sheet current, magnetic sheet source, moving interface or product of distributions enters, and the normal $n$ points from $\\Omega_-$ to $\\Omega_+$ with $[F]=F_+-F_-$ throughout. The separate adoption [F2] is what makes the starting identities physical for the singular-source model; no empirical claim or measurement enters the deduction.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "statement and step 3.1: for an empty interface S every pairing vanishes and the conclusion is vacuous; the splitting point x_0 in S never exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: vanishing sigma and K with continuous traces enter the localization only through the densities a_1,...,a_4; the zero jump [F]=0 is admitted and yields a_i=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "no finite-cardinality argument occurs; the localization is by arbitrary ambient tests on the compact sheet and its components are not counted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 localizes pointwise on S using continuity of the densities; the tangential condition includes K=0 and no nondegeneracy of the sheet beyond the embedded C^2 structure is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement: S is a compact embedded C^2 hypersurface in the sense of def-em-surface-distribution with no edge, and the weak-trace branch states its almost-everywhere and continuity upgrades; no endpoint of I is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "statement: AC_omega is declared for the interface and surface-measure definitions; step 4.1 fixes one countable family of rational bumps once, with no instance-dependent selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1 (main pointwise branch) and step 4.1 (weak-trace branch) prove the four jump identities."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse is asserted; the solved forms for sigma and K are algebraic rearrangements."
+        }
+      ]
+    },
+    "pthm-em-gauss-constraint-propagation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "The partial derivatives are those of [[def-directional-and-partial-derivatives]], and the sum is the finite sum used throughout [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "These are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$; 2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-em-fields",
+          "source_section": "Definition",
+          "quote": "At fixed $t\\in I$ the maps $E(\\cdot,t),B(\\cdot,t):\\Omega\\to \\mathbb R^3$ are real spatial vector fields on the region $\\Omega$, read in the $\\delta$-orthonormal basis $(e_1,e_2,e_3)$ of the frame.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-em-sources",
+          "source_section": "Definition",
+          "quote": "Let the laboratory region and its chart be those of [[def-em-lab-geometry]], with the units of [[def-em-si-conventions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-em-lab-geometry",
+          "source_section": "Definition",
+          "quote": "then $\\partial_{y_i}F$ (at fixed $t$) and $\\partial_tF$ (at fixed $y$) are the partial derivatives of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "Adopt the SI system of units for this framework, with the following quantity table and conventions; every symbol is a quantity of this framework and the laboratory structure is that of [[def-em-lab-geometry]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "Let $\\operatorname{div}$, $\\operatorname{curl}$ and $\\partial_t$ act as distributional derivatives, componentwise, and let $\\psi$ range over $C_c^\\infty(I\\times\\Omega)$ ([[def-test-function-space-d-of-an-open-set]]). Then the same four identities hold in the sense of [[def-distribution]]:",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-em-distributional-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "In the flat classical laboratory model of [[def-em-lab-geometry]], with the positive constants and SI conventions of [[def-em-si-conventions]], adopt the following additional physical assumption for models using the declared point or stationary-sheet sources: the locally integrable field pair and the volume-plus-singular source pair of [[def-em-weak-sources]](a)-(d) must satisfy its solution predicate (e).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-em-weak-sources",
+          "source_section": "Definition",
+          "quote": "adoption for the declared singular-source models is made separately, after this definition.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-divergence-of-a-curl-vanishes",
+          "source_section": "Statement",
+          "quote": "Then $\\operatorname{curl}F$ is a $C^1$ field on $U$ and $$\\operatorname{div}(\\operatorname{curl}F)=0\\qquad\\text{on }U.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "[a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and differentiable at every point of $(a,b)$ as a function on $[a,b]$ ([[def-derivative]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "They are the intervals the nested interval property is stated for, and the phrase *closed bounded interval* always carries the hypothesis $a \\le b$ in this library. **Length.** The **length** of a bounded interval presented by its endpoints $a \\le b$ is $$\\ell = b - a \\;\\ge\\;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-distribution",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, a **distribution** is a continuous complex-linear map $u:\\mathcal D(\\Omega)\\to\\mathbb C$, with the test-function topology of [[def-test-function-topology]].",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is $$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$ The test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]].",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "The **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$:",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-distributional-differentiation-is-continuous-and-commutes",
+          "source_section": "Statement",
+          "quote": "Distributional derivatives satisfy $\\partial^\\alpha\\partial^\\beta u=\\partial^{\\alpha+\\beta}u$ and are continuous linear maps on $\\mathcal D'(\\Omega)$ for both the weak and strong distribution topologies.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-regular-distribution-from-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "This extends [[def-locally-integrable-function-on-r-n]]:",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-locally-integrable-functions-embed-in-distributions",
+          "source_section": "Statement",
+          "quote": "It is continuous from the local $L^1$ topology, generated by $f\\mapsto\\int_K|f|$ for compact $K\\subseteq\\Omega$, to the strong distribution topology. In particular local $L^1$ convergence implies strong distribution convergence.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-em-charge-continuity",
+          "source_section": "Statement",
+          "quote": "The conclusion is a compatibility condition:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Then the image $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a maximum and a minimum ([[def-max-min]]):",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "a bounded Lebesgue measurable set therefore has finite measure, and every compact subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single nonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "source_section": "Statement",
+          "quote": "Under the identification $$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$ one has $$\\mathcal B(\\mathbb R^m)\\otimes\\mathcal B(\\mathbb R^n) = \\mathcal B(\\mathbb R^{m+n}).$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "source_section": "Statement",
+          "quote": "Under the identification $$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$ the product measure $\\lambda_m \\times \\lambda_n$ and the Euclidean Lebesgue measure $\\lambda_{m+n}$ agree on every Borel subset of $\\mathbb R^{m+n}$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$; 3. after assigning the value $0$ on the exceptional parameter sets, the section-integral functions are integrable;",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{i=1}^n[a_i,b_i]$ with $n\\ge1$ and $a_i<b_i$. If a bounded Borel real function $f$ on $Q$ is Riemann integrable, then it is Lebesgue integrable and the two integrals agree. The corresponding assertion for complex functions holds componentwise.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable $f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and differ from $f(c)$; both are exhibited on the companion page, by an integrable function with no primitive and by a false statement about the integral function.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Then the Euclidean ball $B(x,r)$ is Lebesgue measurable and satisfies $$0<\\lambda(B(x,r))<\\infty.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ there is a fixed smooth $b:\\mathbb R^n\\to[0,1]$, equal to one on $\\overline B_1(0)$ and with support contained in $B_2(0)$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "For $c=0$, the integral of the zero function is $0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Since [[prop-closure-properties-of-measurable-functions-used-by-the-integral]] implies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$** by $$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$ where the integral on the right is the nonnegative Lebesgue integral of [[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the smooth branch, mixed partials commute and the divergence of a curl vanishes, so $\\partial_tD_B=\\operatorname{div}(\\partial_tB)=-\\operatorname{div}(\\operatorname{curl}E)=0$ pointwise, and $\\partial_tD_E=\\operatorname{div}(\\partial_tE)-\\varepsilon_0^{-1}\\partial_t\\rho=c^2\\operatorname{div}(\\operatorname{curl}B)-c^2\\mu_0\\operatorname{div}J-\\varepsilon_0^{-1}\\partial_t\\rho=-\\varepsilon_0^{-1}(\\operatorname{div}J+\\partial_t\\rho)=0$ pointwise, using $c^2\\mu_0=\\varepsilon_0^{-1}$ and the separately assumed continuity in the last equality.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the distributional branch the identical componentwise cancellation holds: for every test, the distributional divergence of the distributional curl of $B$ pairs to $\\sum_{i,j,k}\\varepsilon_{ijk}\\langle\\partial_i\\partial_jB_k,\\psi\\rangle$, which the commuting derivatives and the antisymmetry of $\\varepsilon_{ijk}$ present as its own negative, hence zero;",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For the continuous-representative statement assume $\\partial_th=0$ in $\\mathcal D'(U)$ for a continuous $h$, and let $\\varphi\\in C_c^\\infty(\\Omega)$.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In clause (c), a smooth solution of the full postulate satisfies the two evolution equations and, by the smooth branch of ], source continuity;",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.1 prove the smooth and distributional propagation statements, the persistence and nonzero-persistence readings for the smooth branch, the time independence of a continuous representative of a defect under Countable Choice, and the full-Maxwell corollaries and their converse;",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "statement and step 2.1: the zero-defect instance (both Gauss defects identically zero) is included, and the converse statement covers adding the zero Gauss equations to the evolution pair."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.3 admits the zero continuous representative; the argument proves constancy, and the constant 0 is allowed, while the nonzero-persistence reading is step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "no cardinality-one case occurs; the argument is componentwise over three coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.3 uses the primitive H of a compactly supported temporal test with vanishing total integral and a nonnegative bump beta of integral one; the time interval I is nonempty and open by def-interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.3 integrates compactly supported temporal tests inside the open interval I and H vanishes off the support of eta, so no endpoint value of I is needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "statement: AC_omega is confined to the continuous-representative localization of step 1.3 and to the inherited singular-source formulation; steps 1.1-1.2 and 2.1 are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "steps 1.1-1.3 prove that the two evolution equations with independent source continuity propagate both Gauss defects and preserve their zero or nonzero values."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 proves the converse: evolution plus continuity plus zero defects at one time give all four Maxwell identities."
+        }
+      ]
+    },
+    "ex-em-nonconserved-switched-charge": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-distributional-derivative",
+          "source_section": "Definition",
+          "quote": "For a distribution $u\\in\\mathcal D'(\\Omega)$ in the convention of [[def-distribution]] and a multi-index $\\alpha\\in\\mathbb N_0^n$, its **distributional derivative** is $$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle\\qquad(\\varphi\\in\\mathcal D(\\Omega)).$$ The test derivative is a continuous linear endomorphism by [[thm-test-function-operations-are-continuous]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-distribution",
+          "source_section": "Definition",
+          "quote": "For open $\\Omega\\subseteq\\mathbb R^n$, a **distribution** is a continuous complex-linear map $u:\\mathcal D(\\Omega)\\to\\mathbb C$, with the test-function topology of [[def-test-function-topology]]. Their vector space is denoted $\\mathcal D'(\\Omega)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "Equivalently, the zero extension to $\\mathbb R^n$ is smooth with compact support contained in $\\Omega$:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dirac-delta-and-its-derivatives",
+          "source_section": "Definition",
+          "quote": "For $a\\in\\Omega$, the **Dirac distribution at $a$** is the complex-linear functional $\\delta_a(\\varphi)=\\varphi(a)$ on $\\mathcal D(\\Omega)$, with the bilinear convention of [[def-distribution]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ there is a fixed smooth $b:\\mathbb R^n\\to[0,1]$, equal to one on $\\overline B_1(0)$ and with support contained in $B_2(0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-em-charge-continuity",
+          "source_section": "Statement",
+          "quote": "Then the continuity equation $$\\partial_t\\rho+\\operatorname{div}J=0$$ holds pointwise on $\\Omega\\times I$, where $\\operatorname{div}$ is the divergence of [[def-divergence-and-curl-of-a-c1-vector-field]] and $\\partial_t$ the partial time derivative of [[def-directional-and-partial-derivatives]]. (b) [Distributional branch] Let $E,B,\\rho,J$ be distributions on $\\Omega\\times I$ ([[def-distribution]], [[def-distributional-derivative]]);",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-em-weak-sources",
+          "source_section": "Definition",
+          "quote": "When the singular parts vanish, its four identities are the same as the locally integrable weak branch of [[post-em-vacuum-maxwell]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-em-distributional-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "This is a physical adoption of the classical vacuum idealisation in that source class, not a theorem about sources and not a consequence of the original locally integrable source branch of [[post-em-vacuum-maxwell]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "Adopt as a physical postulate of this framework the following four equations for the fields of [[def-em-fields]] and the sources of [[def-em-sources]] on the laboratory region $U\\cong I\\times\\Omega$ of [[def-em-lab-geometry]], with $\\mu_0>0$, $c>0$, $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and the SI units of [[def-em-si-conventions]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-em-point-current-continuity",
+          "source_section": "Statement",
+          "quote": "**Endpoint branch.** Suppose instead that $I=(a,b)$ is bounded with finite endpoints, that $z$ extends continuously to $[a,b]$, that the absolute improper integral $\\int_a^b\\lVert z'(t)\\rVert_2\\,dt$ is finite, and that both endpoint events $(z(a),a)$ and $(z(b),b)$ belong to $\\Omega$. Then the same formulas, with the integrals understood as improper integrals over $(a,b)$, define distributions $\\rho$ and $J$ on $\\Omega$, and $$\\partial_t\\rho+\\operatorname{div}J=q\\,\\delta_{(z(a),a)}-q\\,\\delta_{(z(b),b)},$$ the Dirac distributions being those of [[def-dirac-delta-and-its-derivatives]].",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each compact test support $K$, choose $T>0$ larger than its positive time coordinates. Then $|\\langle\\rho,\\psi\\rangle|\\le|q|T\\sup_K|\\psi|$ for tests supported in $K$, so the displayed linear functional is a distribution. For every test $\\psi$, choose such a $T$ and apply the finite-endpoint branch [F4] to the constant trajectory $z=0$ on $(0,T)$: its derivative integral is zero and both endpoint events lie in $U$. Its density agrees with the switched density on $\\partial_t\\psi$ because that test vanishes for $t\\ge T$, and its zero current agrees with $J$. Thus $\\langle\\partial_t\\rho,\\psi\\rangle=q\\psi(0,0)-q\\psi(0,T)=q\\psi(0,0)$, the last term vanishing by the choice of $T$; hence $\\partial_t\\rho=q\\,\\delta_{(0,0)}$ as distributions, and this is nonzero because $q\\ne0$ and a compactly supported smooth test equals one at the origin. The divergence of the zero distribution is zero, so $\\partial_t\\rho+\\operatorname{div}J=q\\,\\delta_{(0,0)}\\ne0$ in $\\mathcal D'(U)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose locally integrable fields $E,B$ on $U$ satisfied the four weak residual identities with the source pair $(\\rho,0)$ in the formal residual reading of the solution predicate.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The failure is exactly the omitted endpoint term: the endpoint clause of the point-current supplier evaluates the same trajectory over a bounded history $I_0=(a,b)$ as $\\partial_t\\rho_{\\mathrm{pt}}+\\operatorname{div}J_{\\mathrm{pt}}=q\\delta_{\\gamma(a)}-q\\delta_{\\gamma(b)}$, so a switched charge with $J=0$ and no endpoint term is precisely the case in which that endpoint contribution has been dropped;",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.2 establish: the switched-history pair has $\\partial_t\\rho+\\operatorname{div}J=q\\delta_{(0,0)}\\ne0$;",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 evaluates the pairing against an arbitrary test, including tests vanishing at the origin, and proves the distributional identity; the off-support contributions vanish and no empty case is excepted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "statement: q is fixed nonzero for the nonzero delta claim, and the q=0 case would give the zero distribution with both sides vanishing; the example states q not equal to 0 explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "no cardinality-one case occurs; the source is a single switched charge and no counting argument is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2: the trajectory z=0 is constant (a degenerate but declared point-source case); its omitted endpoint term is exactly the failure the example exhibits."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement and step 2.2: the appearance event (0,0) is the left endpoint of the history (0,infinity); properness fails there, and the endpoint clause supplies the compensating deltas on a bounded history."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "statement: the ambient AC_omega convention is inherited from def-em-weak-sources; the computation of steps 1.1-2.2 is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "steps 1.1-2.2 prove the incompatibility and identify the omitted endpoint term."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse is asserted; the example is a one-directional incompatibility witness for the declared model."
+        }
+      ]
+    },
+    "texp-em-displacement-current-surface-choice": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "the pairings $$\\langle\\operatorname{div}E-\\rho/\\varepsilon_0,\\psi\\rangle,\\qquad \\langle\\operatorname{div}B,\\psi\\rangle,\\qquad \\langle\\operatorname{curl}E+\\partial_tB,\\psi\\rangle,\\qquad \\langle\\operatorname{curl}B-\\mu_0J-c^{-2}\\partial_tE,\\psi\\rangle$$ all vanish for every such $\\psi$, all derivatives being distributional derivatives ([[def-distributional-derivative]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "The exact defining values of $c$ and $e$ fix numerical conventions of the SI;",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-em-charge-continuity",
+          "source_section": "Statement",
+          "quote": "(a) [Smooth branch] Let $E,B$ be jointly of class $C^2$ on $\\Omega\\times I$ and $\\rho,J$ of class $C^1$, and suppose the smooth branch of [[post-em-vacuum-maxwell]] holds with these fields and sources, in particular $\\operatorname{curl}B=\\mu_0J+c^{-2}\\partial_tE$. Then the continuity equation $$\\partial_t\\rho+\\operatorname{div}J=0$$ holds pointwise on $\\Omega\\times I$, where $\\operatorname{div}$ is the divergence of [[def-divergence-and-curl-of-a-c1-vector-field]] and $\\partial_t$ the partial time derivative of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "Then the **divergence** of $F$ is $\\operatorname{div}F:=\\sum_{i<n}\\partial_iF_i$, the function $U\\to\\mathbb R$ whose value at $p$ is $\\sum_{i<n}\\partial_iF_i(p)$. The partial derivatives are those of [[def-directional-and-partial-derivatives]], and the sum is the finite sum used throughout [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative** $$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$ For a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. These are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$; 2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "source_section": "Statement",
+          "quote": "If Omega has the specified finite piecewise $C^1$ presentation and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, then $\\int_\\Omega\\operatorname{div}F=\\sum_j\\int_{S_j}F\\cdot\\nu_j\\,dS$, with faces counted once off E.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bounded-piecewise-c-one-euclidean-domain",
+          "source_section": "Definition",
+          "quote": "For a specified finite gluing also list the open pieces with disjoint interiors, the shared faces, and their opposite outward normals.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-em-integral-maxwell",
+          "source_section": "Statement",
+          "quote": "(a) [Differential implies integral] If the smooth branch of [[post-em-vacuum-maxwell]] holds pointwise on $\\Omega\\times I$, then for every volume test geometry $(V,\\nu_V)$ and every $t\\in I$, $$\\oint_{\\partial V}E(\\cdot,t)\\cdot\\nu_V\\,dS=\\frac{1}{\\varepsilon_0}\\int_V\\rho(\\cdot,t)\\,d\\lambda_3,\\qquad \\oint_{\\partial V}B(\\cdot,t)\\cdot\\nu_V\\,dS=0,$$ and for every patch test geometry $(D,r)$ the flux functions $t\\mapsto\\int_SB(\\cdot,t)\\cdot n_S\\,dS$ and $t\\mapsto\\int_SE(\\cdot,t)\\cdot n_S\\,dS$ are differentiable on $I$ and, for every $t\\in I$, $$\\oint_{\\partial S}E(\\cdot,t)\\cdot d\\mathbf r=-\\frac{d}{dt}\\int_SB(\\cdot,t)\\cdot n_S\\,dS,\\qquad \\oint_{\\partial S}B(\\cdot,t)\\cdot d\\mathbf r=\\mu_0\\int_SJ(\\cdot,t)\\cdot n_S\\,dS+c^{-2}\\frac{d}{dt}\\int_SE(\\cdot,t)\\cdot n_S\\,dS.$$ (b) [Integral implies differential] Conversely, suppose the two volume identities of (a) hold for every volume test geometry and every $t\\in I$, and that for every patch test geometry the two flux functions are differentiable on $I$ and the two patch identities of (a) hold for every $t\\in I$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+          "source_section": "Definition",
+          "quote": "For a continuous vector field $F$, the flux in the orientation induced by $\\varphi$ is $\\int_D(F\\circ\\varphi)\\cdot(\\varphi_u\\times\\varphi_v)$. This is the scalar Riemann integral of a continuous function on $D$ ([[def-surface-area-and-scalar-surface-integral-of-a-patch]], [[def-euclidean-inner-product]]);",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-the-induced-boundary-chain-of-a-c2-surface-patch",
+          "source_section": "Definition",
+          "quote": "For a continuous vector field $F$ on a set containing $\\varphi[D]$, the **circulation of $F$ around the induced boundary chain** is the finite sum $$\\oint_{\\varphi(\\partial D)}F\\cdot d\\mathbf r:=\\sum_{l=1}^m\\int_{\\varphi\\circ\\sigma_l}F\\cdot d\\mathbf r,$$ with the vector line integrals of [[def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "source_section": "Definition",
+          "quote": "The **scalar line integral with respect to arc length** and the **vector-field line integral** are $$\\int_\\gamma f\\,ds:=\\sum_{i<m}\\int_{t_i}^{t_{i+1}}f(\\gamma(t))\\lVert v_i(t)\\rVert_2\\,dt,$$ $$\\int_\\gamma F\\cdot d\\mathbf r:=\\sum_{i<m}\\int_{t_i}^{t_{i+1}}\\langle F(\\gamma(t)),v_i(t)\\rangle\\,dt,$$ where the inner product is [[def-euclidean-inner-product]]. The summands exist by [[thm-continuous-implies-integrable]]. Independence of the admissible partition is proved in [[lem-line-integrals-are-independent-of-the-piecewise-c1-partition]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-em-fixed-test-geometry",
+          "source_section": "Definition",
+          "quote": "(b) [Patch test geometry] A **patch test geometry** in $\\Omega$ is a regular $C^2$ surface patch $(D,r)$ over a finite elementary Green region in the sense of [[def-the-induced-boundary-chain-of-a-c2-surface-patch]] ([[def-type-i-type-ii-and-elementary-green-regions]], [[def-admissible-regular-parametrized-surface-patch]]):",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-type-i-type-ii-and-elementary-green-regions",
+          "source_section": "Definition",
+          "quote": "A **finite elementary Green region** is a nonempty finite union $D=D_1\\cup\\cdots\\cup D_N$ of elementary Green regions with pairwise disjoint interiors.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "At $k=1$ this agrees with [[def-c-one-map-and-local-inverse]]:",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-the-standard-smooth-step-function",
+          "source_section": "Definition",
+          "quote": "The **standard smooth step function** is $$ \\sigma(t):=\\frac{\\beta(t)}{\\beta(t)+\\beta(1-t)}. $$ Because $\\beta$ is smooth and positive on $(0,\\infty)$, the denominator is positive on $(0,1)$, while $\\sigma(t)=0$ for $t\\le 0$ and $\\sigma(t)=1$ for $t\\ge 1$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ there is a fixed smooth $b:\\mathbb R^n\\to[0,1]$, equal to one on $\\overline B_1(0)$ and with support contained in $B_2(0)$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$, let $x\\in\\mathbb{R}^n$, and let $r>0$. Then the Euclidean ball $B(x,r)$ is Lebesgue measurable and satisfies $$0<\\lambda(B(x,r))<\\infty.$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{i=1}^n[a_i,b_i]$ with $n\\ge1$ and $a_i<b_i$. If a bounded Borel real function $f$ on $Q$ is Riemann integrable, then it is Lebesgue integrable and the two integrals agree.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-em-lab-geometry",
+          "source_section": "Definition",
+          "quote": "then $\\partial_{y_i}F$ (at fixed $t$) and $\\partial_tF$ (at fixed $y$) are the partial derivatives of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-em-fields",
+          "source_section": "Definition",
+          "quote": "Let the laboratory region $U\\cong I\\times\\Omega$, its spatial Euclidean structure and its units be those of [[def-em-lab-geometry]] and [[def-em-si-conventions]], and let $k\\ge1$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-em-sources",
+          "source_section": "Definition",
+          "quote": "Let the laboratory region and its chart be those of [[def-em-lab-geometry]], with the units of [[def-em-si-conventions]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "every symbol is a quantity of this framework and the laboratory structure is that of [[def-em-lab-geometry]].",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $G:=J+\\varepsilon_0\\partial_tE$, a $C^1$ field on a neighbourhood of $\\overline V$ by the regularity of the data.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For (c), verify the smooth equations by direct substitution: $\\operatorname{div}E=(t/\\varepsilon_0)\\chi'(z)$ and $\\operatorname{div}B=0$;",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Splitting $G=J+\\varepsilon_0\\partial_tE$ in the equality of step 1.1 and using linearity of the surface integrals in the integrand gives $\\int_{S_1}J\\cdot n_1-\\int_{S_2}J\\cdot n_2=-\\varepsilon_0(\\int_{S_1}\\partial_tE\\cdot n_1-\\int_{S_2}\\partial_tE\\cdot n_2)$, which is (b);",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For (c), the graphs $r_1(u,v)=(u,v,-2\\eta(u,v))$ and $r_2(u,v)=(u,v,0)$ have parameter derivatives with cross products $r_{1,u}\\times r_{1,v}=(2\\eta_u,2\\eta_v,1)$ and $r_{2,u}\\times r_{2,v}=e_z$, both nonzero on the interior of $D$;",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove (a) and (b) under the stated hypotheses, and steps 1.2 and 2.2 verify that the declared smooth slab data satisfy every hypothesis of (a) and (b) with $\\int_{S_1}J\\cdot n_1\\,dS<0=\\int_{S_2}J\\cdot n_2\\,dS$, so the conduction-only flux genuinely depends on the spanning surface while the total current flux does not;",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 uses the nonempty region V enclosed between the two patches as given data; if no such region is given the hypotheses are not met, and the flux difference identity of step 2.1 is an identity that holds whenever they are."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.2 includes the zero total-current case: the declared slab data have G=J+eps0 partial_t E=0 and both total fluxes vanish, while the conduction fluxes differ."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "no cardinality-one case occurs; the statement is about a given pair of patch test geometries and the proof fixes that pair."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2 verifies that both graph patches are regular (area vectors (2 eta_u,2 eta_v,1) and e_z are nonzero on the interior of D); the square seam is a finite union of segments of surface measure zero and the presentation hypotheses of F2 are met."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.2 checks the seam and the boundary chains: both induced boundary chains are the square image at height zero, so the two patches span the same closed loop and the restricted parameter region D=[-1,1]^2 is explicitly stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "statement: AC_omega is the convention of the test-geometry, surface-measure and divergence-theorem items; the construction of step 1.2 fixes an explicit smooth step and performs no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1: the identity of part (b) shows that vanishing of the conduction-flux difference implies vanishing of the displacement-flux difference, dividing by eps0>0; steps 1.1 and 1.2 prove (a) and the declared slab data satisfy every hypothesis."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1: the same displayed identity reads in the reverse direction, vanishing of the displacement-flux difference implies vanishing of the conduction-flux difference; these are the two directions of the exactly-when clause of (b), and part (a) is an equality rather than a one-sided implication."
+        }
+      ]
+    }
+  }
+}

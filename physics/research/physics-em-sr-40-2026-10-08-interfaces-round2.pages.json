@@ -1,0 +1,692 @@
+[
+  {
+    "order": 347,
+    "id": "em-wave-interfaces-and-conductors",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Wave interfaces and conductors",
+    "companion": "em-wave-interfaces-and-conductors-examples",
+    "requires": [
+      "em-material-response",
+      "em-vacuum-waves-and-polarization"
+    ],
+    "items": [
+      {
+        "id": "lem-em-exponential-character-open-set-independence",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Distinct exponential characters are linearly independent on a nonempty open set, and the real-part grouping rule",
+        "reference": "core-conditional-proofs.md#K8; scaffold-added necessary prerequisite (see research/physics-em-sr-40-2026-10-08-batch-34.notes.md)",
+        "design_state": "new-local-prerequisite; complete-proof-strategy",
+        "dependency_level": 0,
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "def-complex-exponential",
+          "def-euclidean-inner-product",
+          "def-complex-numbers-and-arithmetic",
+          "thm-complex-numbers-form-a-field",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_roles": {
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "thm-complex-numbers-form-a-field": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be a nonempty open set, let $\\lambda_1,\\dots,\\lambda_m\\in\\mathbb C^n$ ($m\\ge1$) be pairwise distinct, and let $c_1,\\dots,c_m\\in\\mathbb C^q$ for some $q\\ge1$ (the scalar case $q=1$ included; all statements below are componentwise). Write $\\lambda_j\\cdot z$ for the componentwise bilinear extension of the Euclidean inner product of [[def-euclidean-inner-product]]; the variable $z$ remains real and $e^{iw}$ for the complex exponential of [[def-complex-exponential]] at $iw$, and consider the $\\mathbb C^q$-valued map $F(z):=\\sum_{j=1}^m c_j\\,e^{i\\lambda_j\\cdot z}$ on $U$. Then: (a) [Complex independence] if $F(z)=0$ for every $z\\in U$, then $c_1=\\dots=c_m=0$. (b) [Real-part grouping rule] if $\\operatorname{Re}F(z)=0$ for every $z\\in U$, then for every $\\nu\\in\\mathbb C^n$ the grouped coefficient $$C_\\nu:=\\sum_{\\lambda_j=\\nu} c_j+\\sum_{\\lambda_j=-\\overline\\nu}\\overline{c_j}$$ vanishes; in particular $c_j=0$ whenever $\\lambda_j\\ne-\\overline{\\lambda_j}$ and $\\lambda_j\\notin\\{\\lambda_k,-\\overline{\\lambda_k}:k\\ne j\\}$. At a self-paired frequency $\\nu=-\\overline\\nu$ the coefficient is $2\\operatorname{Re}\\sum_{\\lambda_j=\\nu}c_j$; in particular at $\\nu=0$ only the real part is constrained, and a purely imaginary coefficient is allowed. (c) [Scope] no hypothesis beyond pairwise distinctness of the $\\lambda_j$ and nonemptiness and openness of $U$ is used; $\\lambda_j=0$ is allowed and the $\\lambda_j$ need not be nonzero, ordered or normalized. The statement concerns the open set $U$ and asserts nothing on sets with empty interior, where distinct characters can agree.",
+        "strategy": "Prove (a) by induction on the dimension $n$, for complex frequencies throughout. For $n=1$, on any open interval contained in $U$ apply $L_{j_0}:=\\prod_{j\\ne j_0}(d/dt-i\\lambda_j)$ to $F(t)=\\sum_jc_je^{i\\lambda_jt}$. The entire-exponential derivative and chain/sum rules ([[thm-complex-exponential-is-entire-with-derivative-itself]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]]) give $L_{j_0}F=c_{j_0}\\prod_{j\\ne j_0}i(\\lambda_{j_0}-\\lambda_j)e^{i\\lambda_{j_0}t}$. Every factor is nonzero for distinct complex frequencies, and the complex field has no zero divisors, so vanishing of $F$ on the interval forces $c_{j_0}=0$; this uses derivatives, never a false implication from a nonzero phase difference to unequal exponential values. For $n>1$, choose an open product neighbourhood $J\\times V\\subset U$, split $z=(z_1,z')$ and group by the first complex coordinate $\\mu=\\lambda_{j1}$. Write $F(z_1,z')=\\sum_\\mu e^{i\\mu z_1}P_\\mu(z')$ with $P_\\mu=\\sum_{\\lambda_{j1}=\\mu}c_je^{i\\lambda_j'\\cdot z'}$. At each $z'\\in V$, the one-dimensional result gives $P_\\mu(z')=0$. Within a fixed group the remaining complex coordinate tails are distinct, so the induction hypothesis on the nonempty real open set $V$ forces all its $c_j=0$. This proves componentwise complex independence. For (b), at real $z$ conjugation gives $\\overline{e^{i\\lambda\\cdot z}}=e^{-i\\overline\\lambda\\cdot z}$; thus $2\\operatorname{Re}F=\\sum_jc_je^{i\\lambda_j\\cdot z}+\\sum_j\\overline c_je^{-i\\overline{\\lambda_j}\\cdot z}$. Group distinct frequencies and apply (a), yielding the stated $C_\\nu$. At a self-paired frequency $\\nu=-\\overline\\nu$, that coefficient is $2\\operatorname{Re}\\sum_{\\lambda_j=\\nu}c_j$, not the coefficient itself. In particular at zero frequency a purely imaginary coefficient is allowed. At a non-self-paired frequency without another equal or negative-conjugate frequency, the grouped coefficient is just $c_j$ and must vanish. The proof uses finite products, derivative rules and complex arithmetic only; no choice principle. \u220e",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Physicspages, 'Linearly independent exponentials' (post of 26 December 2024, 2 pp.)",
+              "url": "http://physicspages.com/pdf/Mathematics/Linearly%20independent%20exponentials.pdf",
+              "locator": "Theorem 1 and its inductive proof (divide by one exponential and differentiate, one frequency at a time): distinct exponentials $e^{\\lambda_1 z},\\dots,e^{\\lambda_m z}$ are linearly independent on the plane. Read in full; the finite-frequency annihilating-operator computation of this item is the operator-product form of the same argument."
+            },
+            {
+              "title": "J. S. Milne, Fields and Galois Theory (v5.10), Theorem 5.14 (Dedekind)",
+              "url": "https://www.jmilne.org/math/Books/FT0.pdf",
+              "locator": "Theorem 5.14 with proof, printed pp. 85-86: every finite set of distinct group homomorphisms $G\\to F^{\\times}$ is linearly independent. Read directly in the fetched PDF; for the group $(\\mathbb R^n,+)$ the maps $z\\mapsto e^{i\\lambda\\cdot z}$ are distinct characters, so the theorem is the everywhere-vanishing case of clause (a), while the item's induction supplies the localization from a nonempty open set and the real-part grouping of clause (b)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-em-admittance-interface-solve",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The two-equation interface admittance system: solution formulas and the normal-flux identity",
+        "reference": "core-conditional-proofs.md#K8; scaffold-added necessary prerequisite (see research/physics-em-sr-40-2026-10-08-batch-34.notes.md)",
+        "design_state": "new-local-prerequisite; complete-proof-strategy",
+        "dependency_level": 3,
+        "deps": [
+          "def-complex-numbers-and-arithmetic",
+          "thm-complex-numbers-form-a-field",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-em-interface-wave-linear-system"
+        ],
+        "dependency_roles": {
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "thm-complex-numbers-form-a-field": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-em-interface-wave-linear-system": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $Y_1,Y_2\\in\\mathbb C$ with $Y_1+Y_2\\ne0$, and let $E_i,E_r,E_t\\in\\mathbb C$ satisfy the two linear equations $$E_i+E_r=E_t,\\qquad Y_1(E_i-E_r)=Y_2E_t.$$ Then: (a) [Solution] If $E_i\\ne0$, then $$r:=\\frac{E_r}{E_i}=\\frac{Y_1-Y_2}{Y_1+Y_2},\\qquad t:=\\frac{E_t}{E_i}=\\frac{2Y_1}{Y_1+Y_2};$$ if $E_i=0$ then $E_r=E_t=0$ and the field ratios are undefined. Throughout (b)-(d), $r,t$ denote the displayed algebraic transfer coefficients $(Y_1-Y_2)/(Y_1+Y_2)$ and $2Y_1/(Y_1+Y_2)$, which are defined independently of $E_i$; when $E_i\\ne0$ they equal the field ratios of (a). (b) [Normal-flux identity] If $Y_1>0$ is real (the incident side admittance), then $$|r|^2+\\frac{\\operatorname{Re}Y_2}{Y_1}\\,|t|^2=1,$$ and explicitly $|t|^2=\\dfrac{4Y_1^2}{|Y_1+Y_2|^2}$ and $|r|^2=1-\\dfrac{4Y_1\\operatorname{Re}Y_2}{|Y_1+Y_2|^2}$. The second summand $(\\operatorname{Re}Y_2/Y_1)|t|^2$ is nonnegative if and only if $\\operatorname{Re}Y_2\\ge0$; it is the normal-flux coefficient of a passive transmitted medium and may be negative for an active one, in which case $|r|>1$ and the identity carries no energy-conservation reading. (c) [Pure-imaginary admittance] If $Y_1>0$ is real and $Y_2$ is purely imaginary, then $|r|=1$, $\\operatorname{Re}Y_2\\,|t|^2=0$ and $|t|^2=\\dfrac{4Y_1^2}{Y_1^2+|Y_2|^2}>0$; in particular $r\\ne0$ and $t\\ne0$. (d) [Real-positive specialisation] If $Y_1,Y_2>0$ are real, then $r=(Y_1-Y_2)/(Y_1+Y_2)$ and $t=2Y_1/(Y_1+Y_2)$ are real and $|r|^2+(Y_2/Y_1)|t|^2=1$; with $Y_j=1/Z_j$, $Z_j>0$, this is $r=(Z_2-Z_1)/(Z_1+Z_2)$, $t=2Z_2/(Z_1+Z_2)$ and $R+T=1$ for $R=|r|^2$, $T=(Z_1/Z_2)|t|^2$, in agreement with [[lem-em-interface-wave-linear-system]]. (e) [Scope] The lemma is pure algebra of $\\mathbb C$; the labels 'incident', 'reflected' and 'transmitted' and the interpretation of the second summand as a flux fraction belong to the consuming physical theorem, not to this lemma.",
+        "strategy": "Part (a): substitute $E_r=E_t-E_i$ (from the first equation) into the second: $Y_1(2E_i-E_t)=Y_2E_t$, i.e. $2Y_1E_i=(Y_1+Y_2)E_t$; since $Y_1+Y_2\\ne0$ this gives $E_t=2Y_1E_i/(Y_1+Y_2)$, and then $E_r=E_t-E_i=(Y_1-Y_2)E_i/(Y_1+Y_2)$ ([[def-complex-numbers-and-arithmetic]], field arithmetic [[thm-complex-numbers-form-a-field]]). If $E_i\\ne0$ the two ratios are the displayed $r$ and $t$; if $E_i=0$ both $E_r$ and $E_t$ vanish and no ratio is defined. Part (b): use $|z|^2=z\\overline z$ and the binomial identity $|Y_1+Y_2|^2-|Y_1-Y_2|^2=4\\operatorname{Re}(Y_1\\overline{Y_2})$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]], [[lem-complex-conjugation-and-modulus-laws]]): for real $Y_1>0$ the right side is $4Y_1\\operatorname{Re}Y_2$, so $|r|^2=|Y_1-Y_2|^2/|Y_1+Y_2|^2=1-4Y_1\\operatorname{Re}Y_2/|Y_1+Y_2|^2$ while $|t|^2=4Y_1^2/|Y_1+Y_2|^2$; adding $(\\operatorname{Re}Y_2/Y_1)|t|^2$ cancels the correction term and yields the asserted identity. The sign and active-medium remarks follow from $|r|^2\\ge0$ and $|r|>1\\iff\\operatorname{Re}Y_2<0$ whenever $|t|>0$. Part (c): for $Y_2=i\\beta$, $\\beta\\in\\mathbb R$, and real $Y_1>0$ one has $\\overline{Y_1+Y_2}=Y_1-Y_2$, hence $|r|=|Y_1-Y_2|/|Y_1+Y_2|=1$, and the identity of (b) gives $\\operatorname{Re}Y_2\\,|t|^2=0$; moreover $Y_1+Y_2\\ne0$ because $Y_1>0$, so $|t|^2=4Y_1^2/(Y_1^2+\\beta^2)>0$. Part (d): substituting $Y_j=1/Z_j$ with $Z_j>0$ into (a) gives $r=(1/Z_1-1/Z_2)/(1/Z_1+1/Z_2)=(Z_2-Z_1)/(Z_1+Z_2)$ and $t=2Z_2/(Z_1+Z_2)$, and (b) gives $|r|^2+(Z_1/Z_2)|t|^2=1$, i.e. $R+T=1$ for the stated $R,T$. All divisions are by nonzero complex numbers; no choice principle is used. \u220e",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.4.1 printed pp. 189-191: the $s$- and $p$-polarised Fresnel amplitude systems and their solutions (7.26)-(7.27), obtained by matching the tangential fields; the interface-system algebra abstracted here is that computation with the admittances left general and complex."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a79.3.2 printed pp. 384-386, Eqs. (9.78)-(9.82): the two-equation normal-incidence system $E_{0i}+E_{0r}=E_{0t}$, $E_{0i}-E_{0r}=\\beta E_{0t}$ and its solution; \u00a79.3.3 printed pp. 389-391, Eqs. (9.105)-(9.109): the analogous parallel-polarisation system $E_{0i}-E_{0r}=\\beta E_{0t}$, $E_{0i}+E_{0r}=\\alpha E_{0t}$ with real positive coefficients."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-em-medium-wave-parameters",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Homogeneous isotropic medium parameters: phase speed, impedance, refractive index, complex propagation constant and skin depth",
+        "reference": "definition-contracts.md#def-em-medium-wave-parameters",
+        "design_state": "explicit-definition-contract; supplier-validation-recorded-separately",
+        "dependency_level": 17,
+        "deps": [
+          "post-em-material-closure",
+          "def-em-polarization-magnetization",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "thm-of-square-roots",
+          "thm-every-complex-number-has-a-square-root",
+          "def-complex-numbers-and-arithmetic",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "dependency_roles": {
+          "post-em-material-closure": "formulation-prerequisite",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "thm-of-square-roots": "mathematical-premise",
+          "thm-every-complex-number-has-a-square-root": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the elementary inertial-rest branch of [[post-em-material-closure]] in the laboratory region $U\\cong I\\times\\Omega$ of [[def-em-lab-geometry]] with the units of [[def-em-si-conventions]], in its isotropic scalar case: the material is at rest in the laboratory frame, and the constitutive relations of [[def-em-polarization-magnetization]] hold with constant scalars $\\varepsilon>0$ (F$\\,$m$^{-1}$), $\\mu>0$ (H$\\,$m$^{-1}$) and $\\sigma\\ge0$ (S$\\,$m$^{-1}$), so that $D=\\varepsilon E$, $B=\\mu H$ and the free current is $J_f=\\sigma E+J_{\\mathrm{ext}}$ for a declared external free current $J_{\\mathrm{ext}}$. Write $c>0$ for the exact vacuum speed of [[def-em-si-conventions]] and let $\\omega>0$ (s$^{-1}$) be an angular frequency. Define: (a) [Lossless parameters] with $\\sqrt{\\cdot}$ the nonnegative square root of [[thm-of-square-roots]], $$v:=(\\varepsilon\\mu)^{-1/2}\\quad(\\mathrm m\\,\\mathrm s^{-1}),\\qquad Z:=\\Bigl(\\frac{\\mu}{\\varepsilon}\\Bigr)^{1/2}\\quad(\\Omega),\\qquad n:=\\frac{c}{v}=c(\\varepsilon\\mu)^{1/2}\\quad(\\text{dimensionless}),\\qquad k(\\omega):=\\frac{\\omega}{v};$$ $v$ is the phase speed, $Z$ the wave impedance, $n$ the refractive index relative to vacuum and $k(\\omega)$ the real wavenumber of the lossless case. (b) [Complex propagation constant] put $a:=\\mu\\varepsilon\\omega^{2}>0$, $b:=\\mu\\sigma\\omega\\ge0$, $r:=\\sqrt{a^{2}+b^{2}}$ and $$p(\\omega):=\\sqrt{\\frac{r+a}{2}},\\qquad q(\\omega):=\\sqrt{\\frac{r-a}{2}},\\qquad \\kappa(\\omega):=p(\\omega)+i\\,q(\\omega).$$ Then $\\kappa(\\omega)$ is the unique $k\\in\\mathbb C$ with $\\operatorname{Re}k\\ge0$, $\\operatorname{Im}k\\ge0$ and $k^{2}=\\varepsilon\\mu\\omega^{2}+i\\mu\\sigma\\omega=a+ib$; in the lossless case $\\sigma=0$ one has $b=0$, $q=0$ and $\\kappa(\\omega)=k(\\omega)=p(\\omega)$ real. (The explicit formula is the one of [[thm-every-complex-number-has-a-square-root]]; the verification $p^{2}-q^{2}=a$, $2pq=b$ and the uniqueness of the root with $\\operatorname{Re}k\\ge0$, $\\operatorname{Im}k\\ge0$ are recorded in the strategy.) (c) [Skin depth] call $\\delta(\\omega):=1/q(\\omega)$ (m) the skin depth if $\\sigma>0$, and set $\\delta(\\omega):=+\\infty$ if $\\sigma=0$: for $\\kappa(\\omega)=p+iq$ and $x_3\\in\\mathbb R$ the modulus of $e^{i(\\kappa x_3-\\omega t)}$ equals $e^{-q x_3}$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]), so $\\delta$ is the distance in which that modulus decays by the factor $1/e$ in the direction of increasing $x_3$; for $\\sigma=0$ there is no attenuation and $\\delta$ is infinite rather than a division by zero. (d) [Status and scope] This item fixes objects, units, branch conventions and terminology only. It asserts no field equation, no dispersion relation for a solution, no attenuation of any concrete field and no material validity. The parameters are declared for the isotropic scalar constant-coefficient branch at rest in the laboratory frame; for $\\varepsilon\\mu<c^{-2}$ the branch is, by [[post-em-material-closure]](b), a declared finite-band effective phase-response model with no universal front-speed claim, while $\\varepsilon\\mu\\ge c^{-2}$ is the exact broadband case. No measured value, precision or empirical statement is included.",
+        "strategy": "An explicit type/domain/convention definition. The material assumptions, the rest-frame clause, the isotropic scalar case and the finite-band caveat are those of [[post-em-material-closure]](a)-(b) read with [[def-em-polarization-magnetization]]; the unit system and the exact constant $c$ are those of [[def-em-si-conventions]]; the laboratory chart is that of [[def-em-lab-geometry]]. The only content beyond notation is the well-definedness of $\\kappa(\\omega)$ in (b): with $a>0$, $b\\ge0$ and $r=\\sqrt{a^{2}+b^{2}}$ one has $p^{2}-q^{2}=(r+a)/2-(r-a)/2=a$ and $(2pq)^{2}=4\\cdot(r+a)(r-a)/4=r^{2}-a^{2}=b^{2}$, so $2pq=b$ because $p,q\\ge0$ ([[thm-of-square-roots]]); hence $\\kappa^{2}=p^{2}-q^{2}+2ipq=a+ib$. The square roots of $a+ib$ are $\\pm\\kappa$ ([[thm-every-complex-number-has-a-square-root]]); if $b>0$ then $p,q>0$ and exactly one of $\\pm\\kappa$ has both parts nonnegative, while if $b=0$ then $r=a$, $p=\\sqrt a$, $q=0$ and again exactly one of $\\pm p$ has nonnegative real part. So the two selection conditions $\\operatorname{Re}k\\ge0$, $\\operatorname{Im}k\\ge0$ pick out the same unique element that the explicit formula defines, and the two descriptions agree. The modulus statement in (c) is the computation $|e^{i(p+iq)x_3}|=e^{-q x_3}$ for real $x_3$ from [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. No field equation, material law beyond the cited branch or empirical input is used.",
+        "physical_scope": "Definition of parameters of the isotropic scalar constant-coefficient material branch of [[post-em-material-closure]] at rest in the laboratory frame: phase speed, impedance and refractive index of the lossless case and the complex propagation constant and skin depth of the Ohmic case, with SI units. Excluded: anisotropic response, frequency dependence of $\\varepsilon,\\mu,\\sigma$, spatially varying material, moving media and any empirical value or measured datum.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.5.2 printed pp. 194-198 (frequency-dependent response, speed and index in a medium; the constant-coefficient scalar case) and \u00a77.6.2 printed pp. 207-209: $\\varepsilon_{\\mathrm{eff}}=\\varepsilon+i\\sigma/\\omega$, the dispersion relation $k\\cdot k=\\mu\\varepsilon_{\\mathrm{eff}}\\omega^{2}$, the root selection and the skin depth $\\delta=\\sqrt{2/(\\mu\\omega\\sigma)}$ in the low-frequency regime; the sign convention is $e^{i(k\\cdot x-\\omega t)}$."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a79.3.1 printed pp. 382-383: $v=1/\\sqrt{\\varepsilon\\mu}$, the index $n=\\sqrt{\\varepsilon\\mu/(\\varepsilon_0\\mu_0)}$ and the transcription of the vacuum plane-wave results to a linear medium; \u00a79.4.1 printed pp. 394-395: the complex wave number $k^{2}=\\mu\\varepsilon\\omega^{2}+i\\mu\\sigma\\omega$ and the skin depth $d=1/\\kappa$ defined as the $1/e$ amplitude-decay distance. The scan is a retained 596-page third-edition copy with OCR noise; the displayed formulas were cross-checked against Tong and against the local computations recorded in the batch notes."
+            }
+          ]
+        }
+      },
+      {
+        "id": "pthm-em-medium-plane-wave-fields",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Plane-wave fields in a homogeneous Ohmic medium: amplitude conditions, dispersion, averaged flux and the evanescent branch",
+        "reference": "core-conditional-proofs.md#K8 (admittance and flux ingredients); scaffold-added necessary prerequisite (see research/physics-em-sr-40-2026-10-08-batch-34.notes.md)",
+        "design_state": "new-local-prerequisite; complete-exact-conditional-argument-specified",
+        "dependency_level": 18,
+        "deps": [
+          "post-em-material-closure",
+          "pthm-em-macroscopic-maxwell",
+          "def-em-polarization-magnetization",
+          "pthm-em-restricted-material-energy",
+          "def-em-medium-wave-parameters",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "def-em-complex-plane-wave",
+          "def-complex-exponential",
+          "lem-em-period-average",
+          "def-directional-and-partial-derivatives",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-of-square-roots"
+        ],
+        "dependency_roles": {
+          "post-em-material-closure": "physical-assumption",
+          "pthm-em-macroscopic-maxwell": "physical-result",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "pthm-em-restricted-material-energy": "physical-result",
+          "def-em-medium-wave-parameters": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-complex-plane-wave": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "lem-em-period-average": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the elementary inertial-rest branch of [[post-em-material-closure]] in its isotropic scalar case at rest in the laboratory frame, with constants $\\varepsilon,\\mu>0$ and $\\sigma\\ge0$, the constitutive relations $D=\\varepsilon E$, $B=\\mu H$ of [[def-em-polarization-magnetization]], the macroscopic equations of [[pthm-em-macroscopic-maxwell]], the fields of [[def-em-fields]] on the laboratory region of [[def-em-lab-geometry]] with the units of [[def-em-si-conventions]], and the parameters and phase convention of [[def-em-medium-wave-parameters]]. Consider a declared region with vanishing free charge density and no external free current, so that $\\rho_f=0$ and the free current is the conduction current $J_f=\\sigma E$. Let $k\\in\\mathbb C^{3}$, $\\omega>0$ and $e,h\\in\\mathbb C^{3}$, and for $(x,t)\\in\\mathbb R^{3}\\times\\mathbb R$ define $E(x,t):=\\operatorname{Re}\\bigl(e\\,e^{i(k\\cdot x-\\omega t)}\\bigr)$ and $H(x,t):=\\operatorname{Re}\\bigl(h\\,e^{i(k\\cdot x-\\omega t)}\\bigr)$ componentwise, i.e. with the phase convention $e^{i(k\\cdot x-\\omega t)}$ and the real-part encoding of [[def-em-complex-plane-wave]]; put $D:=\\varepsilon E$, $B:=\\mu H$ and $J_f:=\\sigma E$. Extend the Euclidean inner and cross products to $\\mathbb C^{3}$ by the same componentwise polynomial formulas ([[def-euclidean-inner-product]], [[def-cross-product-in-r3]], [[lem-cross-product-is-bilinear-alternating-and-orthogonal]]). Then: (a) [Amplitude vanishing] if $\\operatorname{Re}\\bigl(w\\,e^{i(k\\cdot x-\\omega t)}\\bigr)=0$ for some $w\\in\\mathbb C^{3}$ and all $(x,t)$ in a nonempty open subset of $\\mathbb R^{3}\\times\\mathbb R$, then $w=0$. (b) [Amplitude conditions] the quadruple $(E,H,D,B)$ satisfies the four source-free macroscopic equations $\\operatorname{div}D=0$, $\\operatorname{div}B=0$, $\\operatorname{curl}E=-\\partial_tB$, $\\operatorname{curl}H=J_f+\\partial_tD$ on $\\mathbb R^{3}\\times\\mathbb R$ if and only if $$k\\cdot e=0,\\qquad k\\cdot h=0,\\qquad k\\times e=\\omega\\mu\\,h,\\qquad k\\times h=-(\\omega\\varepsilon+i\\sigma)\\,e .$$ (c) [Structure, dispersion and solution family] if $e\\ne0$ and (b) holds, then $h=k\\times e/(\\omega\\mu)$, $k\\cdot h=0$, $e\\cdot h=0$ and $k\\cdot k=\\varepsilon\\mu\\omega^{2}+i\\mu\\sigma\\omega$; conversely, if $k\\in\\mathbb C^{3}\\setminus\\{0\\}$ and $\\omega>0$ satisfy $k\\cdot k=\\varepsilon\\mu\\omega^{2}+i\\mu\\sigma\\omega$, then for every $e\\in\\mathbb C^{3}$ with $k\\cdot e=0$ the pair $(e,\\,k\\times e/(\\omega\\mu))$ satisfies (b), with $(e,h)=(0,0)$ if and only if $e=0$; on the dispersion relation the solution set of (b) for fixed $(k,\\omega)$ is exactly $\\{(e,\\,k\\times e/(\\omega\\mu)):k\\cdot e=0\\}$, a complex two-dimensional space when $k\\ne0$; off the dispersion relation the only solution is $e=h=0$. (d) [Lossless propagating waves: instantaneous identities and period averages] if in addition $\\sigma=0$ and $k\\in\\mathbb R^{3}$ with $e\\ne0$, then $|k|^{2}=\\varepsilon\\mu\\omega^{2}$, $|k|=k(\\omega)$ in the notation of [[def-em-medium-wave-parameters]], and for every $(x,t)$ $k\\cdot E=k\\cdot B=0$, $E\\cdot B=0$, $B=\\hat k\\times E/v$ and $|B|=|E|/v$ with $\\hat k=k/|k|$; the period-$T$ averages with $T=2\\pi/\\omega$ ([[lem-em-period-average]]) satisfy, for $u=\\tfrac12(E\\cdot D+B\\cdot H)$ and $S=E\\times H$ of [[pthm-em-restricted-material-energy]], $$\\langle u\\rangle=\\frac{\\varepsilon}{2}|e|^{2},\\qquad \\langle S\\rangle=\\frac{|e|^{2}}{2\\mu\\omega}\\,k=\\frac{|e|^{2}}{2Z}\\,\\hat k=v\\,\\langle u\\rangle\\hat k .$$ (e) [Evanescent waves] if $\\sigma=0$, $n'\\in\\mathbb R^{3}$ is a unit vector, $k=\\kappa_0+i\\beta n'$ with $\\kappa_0\\in\\mathbb R^{3}$, $\\kappa_0\\cdot n'=0$, $\\beta>0$ and $k\\cdot k=\\varepsilon\\mu\\omega^{2}$ (so $|\\kappa_0|^{2}=\\varepsilon\\mu\\omega^{2}+\\beta^{2}$ and $\\kappa_0\\ne0$), and if $e\\ne0$ satisfies $k\\cdot e=0$, then the field factorizes exactly as $E(x,t)=e^{-\\beta\\,n'\\cdot x}\\,\\operatorname{Re}\\bigl(e\\,e^{i(\\kappa_0\\cdot x-\\omega t)}\\bigr)$, and the time-averaged flux satisfies $\\langle S\\rangle=e^{-2\\beta n'\\cdot x}\\,\\tfrac12\\operatorname{Re}(e\\times\\overline h)$ with normal component $\\langle S\\cdot n'\\rangle=-\\dfrac{e^{-2\\beta n'\\cdot x}}{2\\mu\\omega}\\operatorname{Re}\\bigl[(e\\cdot n')(\\kappa_0\\cdot\\overline e)\\bigr]$; this normal component is in fact zero for every such transverse amplitude. For the transverse-electric polarisation $e=E_0(n'\\times\\hat\\kappa_0)$, $E_0\\in\\mathbb C\\setminus\\{0\\}$, and for the transverse-magnetic data $h=H_0\\hat y'$ with $\\hat y':=n'\\times\\hat\\kappa_0$, $H_0\\in\\mathbb C\\setminus\\{0\\}$ and electric amplitude $e=-(k\\times\\hat y')H_0/(\\omega\\varepsilon)$, the normal component vanishes identically, $\\langle S\\cdot n'\\rangle\\equiv0$, while the tangential averaged flux is positive: $\\langle S\\cdot\\hat\\kappa_0\\rangle=\\dfrac{|\\kappa_0||e|^{2}}{2\\mu\\omega}e^{-2\\beta n'\\cdot x}>0$ in the transverse-electric case and $\\langle S\\cdot\\hat\\kappa_0\\rangle=\\dfrac{|\\kappa_0||h|^{2}}{2\\omega\\varepsilon}e^{-2\\beta n'\\cdot x}>0$ in the transverse-magnetic case. (f) [Scope] the four equations are verified only for the explicit ideal whole-space plane-wave fields; for $k$ with $\\operatorname{Im}k\\ne0$ the factor $e^{-\\operatorname{Im}k\\cdot x}$ grows in some directions, so clauses (b)-(e) are read on regions where the model declares the field bounded (in (e), on the half-space $n'\\cdot x>0$). No completeness, energy-finiteness, boundary, interface, material-validity or empirical claim is made, and the finite-band caveat of [[post-em-material-closure]](b) applies whenever $\\varepsilon\\mu<c^{-2}$.",
+        "strategy": "Clause (a): let $Z$ be the open set and pick $(x_0,t_0)\\in Z$; by openness the vertical segment $\\{x_0\\}\\times(t_0-\\delta,t_0+\\delta)$ lies in $Z$ for some $\\delta>0$, so $g(t):=\\operatorname{Re}\\bigl(W e^{-i\\omega t}\\bigr)$ with $W:=w\\,e^{ik\\cdot x_0}$ vanishes on $(t_0-\\delta,t_0+\\delta)$. Differentiating $g$ at $t_0$ (the exponential is entire, [[thm-complex-exponential-is-entire-with-derivative-itself]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]]) gives $\\operatorname{Re}(W e^{-i\\omega t_0})=0$ and $\\operatorname{Re}(-i\\omega W e^{-i\\omega t_0})=0$; writing $W e^{-i\\omega t_0}=u+iv$ these are $u=0$ and $\\omega v=0$, so $W e^{-i\\omega t_0}=0$ and hence $W=0$ because $\\omega>0$ and the exponential is nonzero; since $e^{ik\\cdot x_0}\\ne0$ ([[def-complex-exponential]]) we get $w=0$. Clause (b): first note the derivative identities for a component $\\operatorname{Re}(e_i e^{i(k\\cdot x-\\omega t)})$: the partial $x_j$-derivative equals $\\operatorname{Re}(i k_j e_i e^{i\\theta})$ with $\\theta=k\\cdot x-\\omega t$, and the $t$-derivative equals $\\operatorname{Re}(-i\\omega e_i e^{i\\theta})$; these are the chain rule applied to $x\\mapsto k\\cdot x$ and $t\\mapsto-\\omega t$ composed with the entire exponential, and are used componentwise in [[def-divergence-and-curl-of-a-c1-vector-field]] and [[def-directional-and-partial-derivatives]]. Hence $\\operatorname{div}D=\\varepsilon\\operatorname{Re}(i\\,k\\cdot e\\,e^{i\\theta})$, $\\operatorname{div}B=\\mu\\operatorname{Re}(i\\,k\\cdot h\\,e^{i\\theta})$, $\\operatorname{curl}E=\\operatorname{Re}(i\\,k\\times e\\,e^{i\\theta})$, $\\partial_tB=\\operatorname{Re}(-i\\omega\\mu h\\,e^{i\\theta})$, $\\operatorname{curl}H=\\operatorname{Re}(i\\,k\\times h\\,e^{i\\theta})$ and $J_f+\\partial_tD=\\operatorname{Re}\\bigl((\\sigma-i\\omega\\varepsilon)e\\,e^{i\\theta}\\bigr)$ with the componentwise complex cross product ([[lem-cross-product-is-bilinear-alternating-and-orthogonal]]). Each equation is therefore of the form $\\operatorname{Re}(w\\,e^{i\\theta})=0$ on the open set $\\mathbb R^{3}\\times\\mathbb R$, so (a) reduces it to the corresponding complex coefficient identity; comparing coefficients gives exactly the four displayed conditions ($k\\cdot h=0$ is redundant given $k\\times e=\\omega\\mu h$ and $k\\cdot e=0$ but is kept for symmetry). Clause (c): from (b), $\\omega\\ne0$ and $\\mu>0$ give $h=k\\times e/(\\omega\\mu)$; $k\\cdot h=(k\\cdot(k\\times e))/(\\omega\\mu)=0$ and $e\\cdot h=(e\\cdot(k\\times e))/(\\omega\\mu)=0$ by the scalar triple-product identity ([[lem-cross-product-is-bilinear-alternating-and-orthogonal]]). Crossing $k\\times e=\\omega\\mu h$ with $k$ and substituting $k\\times h=-(\\omega\\varepsilon+i\\sigma)e$ gives $k(k\\cdot e)-(k\\cdot k)e=-\\omega^{2}\\mu\\varepsilon\\,e-i\\omega\\mu\\sigma\\,e$; with $k\\cdot e=0$ and $e\\ne0$ this is $k\\cdot k=\\varepsilon\\mu\\omega^{2}+i\\mu\\sigma\\omega$. Conversely, given $k\\cdot k=\\varepsilon\\mu\\omega^{2}+i\\mu\\sigma\\omega$ and $k\\cdot e=0$, the four conditions are verified by the same triple-product expansion, and $h=0$ forces $k\\times e=0$, hence $e=\\alpha k$ for some $\\alpha\\in\\mathbb C$. Then $0=k\\cdot e=\\alpha(k\\cdot k)$ forces $\\alpha=0$, since $k\\cdot k=\\varepsilon\\mu\\omega^2+i\\mu\\sigma\\omega\\ne0$ has positive real part. Thus $e=0$; nonzero complex vectors may be isotropic in the bilinear pairing, so no contrary assertion is used. Clause (d): with $\\sigma=0$ and $k$ real, $k\\cdot k=|k|^{2}=\\varepsilon\\mu\\omega^{2}$ gives $|k|=\\omega(\\varepsilon\\mu)^{1/2}=k(\\omega)$ ([[thm-of-square-roots]], [[def-em-medium-wave-parameters]]); real-linearity of $k\\mapsto k\\times E$ and of the inner product gives $k\\cdot E=k\\cdot B=0$ and $B=\\mu H=\\mu\\operatorname{Re}\\bigl((k\\times e)/(\\omega\\mu)e^{i\\theta}\\bigr)=\\hat k\\times E/v$ pointwise, whence $E\\cdot B=0$ and $|B|=|E|/v$ (the cross product with the unit vector $\\hat k$ is an isometry on $\\hat k^{\\perp}$, to which $E$ and $B$ belong). The averaged identities follow from $\\operatorname{Re}z=(z+\\overline z)/2$ and [[lem-em-period-average]] applied componentwise: $\\langle|E|^{2}\\rangle=|e|^{2}/2$, $\\langle|H|^{2}\\rangle=|h|^{2}/2=|e|^{2}/(2Z^{2})$ with $|h|=|e|/Z$, so $\\langle u\\rangle=\\tfrac12(\\varepsilon|e|^{2}/2+\\mu|e|^{2}/(2Z^{2}))=\\varepsilon|e|^{2}/2$ because $\\mu/Z^{2}=\\varepsilon$; and $\\langle S\\rangle=\\tfrac12\\operatorname{Re}(e\\times\\overline h)=\\tfrac12\\operatorname{Re}\\bigl(e\\times(k\\times\\overline e)\\bigr)/(\\mu\\omega)=|e|^{2}k/(2\\mu\\omega)$ by the expansion of the double cross product. Clause (e): with $k=\\kappa_0+i\\beta n'$ and $\\kappa_0\\cdot n'=0$ one has $k\\cdot x=\\kappa_0\\cdot x+i\\beta\\,n'\\cdot x$ in the bilinear pairing, and $k\\cdot k=|\\kappa_0|^{2}-\\beta^{2}$; taking the real part of $e^{i(k\\cdot x-\\omega t)}=e^{-\\beta n'\\cdot x}e^{i(\\kappa_0\\cdot x-\\omega t)}$ gives the stated factorization, and $\\langle S\\rangle=e^{-2\\beta n'\\cdot x}\\tfrac12\\operatorname{Re}(e\\times\\overline h)$ follows from [[lem-em-period-average]] applied to the real fields of the factorized form. The exact double-cross expansion is $e\\times\\overline h=[\\overline k\\,|e|^2-\\overline e(e\\cdot\\overline k)]/(\\mu\\omega)$. Since $\\overline k\\cdot n'=-i\\beta$ and $e\\cdot\\overline k=\\kappa_0\\cdot e-i\\beta e\\cdot n'$, its real normal component is $-\\operatorname{Re}[\\overline{e\\cdot n'}(\\kappa_0\\cdot e)]/(\\mu\\omega)$, equal to the displayed formula. Transversality gives $\\kappa_0\\cdot e=-i\\beta e\\cdot n'$, so this real part is zero for every transverse amplitude. With $K=|\\kappa_0|$ and the positive triad $(\\hat\\kappa_0,\\hat y',n')$, the TE data $e=E_0\\hat y'$ give $h=E_0(Kn'-i\\beta\\hat\\kappa_0)/(\\mu\\omega)$ and $\\operatorname{Re}(e\\times\\overline h)=K|E_0|^2\\hat\\kappa_0/(\\mu\\omega)$. The TM data $h=H_0\\hat y'$ give $e=H_0(i\\beta\\hat\\kappa_0-Kn')/(\\omega\\varepsilon)$ and $\\operatorname{Re}(e\\times\\overline h)=K|H_0|^2\\hat\\kappa_0/(\\omega\\varepsilon)$. Multiplication by the common positive factor $e^{-2\\beta n'\\cdot x}/2$ gives both stated tangential positive fluxes and zero normal fluxes. Clause (f) is a scope statement. No choice principle is used anywhere in clauses (a)-(e). \u220e",
+        "physical_scope": "Exact conditional statement about ideal plane-wave fields in a homogeneous isotropic Ohmic medium at rest, on the laboratory chart: the four macroscopic equations hold if and only if the four complex amplitude conditions hold, with the dispersion relation, transverse structure, lossless period-averaged energy density and flux, and the evanescent decay and normal-flux identities. Excluded: general bounded-field or finite-energy existence theory, interfaces, anisotropic or dispersive media, nonlinear response, ideal conductors, any completeness of the plane-wave family, and all empirical statements.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.4.1 printed pp. 189-191: the plane-wave amplitude relations $\\hat k\\times E=vB$ and the tangential matching conditions used with the amplitudes; \u00a77.6.2 printed pp. 207-209: the conductor ansatz (7.50)-(7.51) with $J=\\sigma(\\omega)E$, the effective permittivity $\\varepsilon_{\\mathrm{eff}}=\\varepsilon+i\\sigma/\\omega$, the dispersion relation (7.54) $k\\cdot k=\\mu\\varepsilon_{\\mathrm{eff}}\\omega^{2}$ and the transverse-field conclusion; \u00a77.4.2 printed pp. 191-193: the decaying transmitted solution beyond the critical angle."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a79.3.1 printed pp. 382-383: Maxwell's equations in a linear medium, the transcription $v=1/\\sqrt{\\varepsilon\\mu}$, the energy density (9.71), the Poynting vector (9.72) and the intensity (9.73); \u00a79.3.3 printed pp. 387-388, Eqs. (9.89)-(9.94): $B=\\frac1v(k\\times E)$ and the exponential-factor matching; \u00a79.4.1 printed pp. 393-396: the attenuated plane waves (9.123)-(9.138), transversality, the complex wave number (9.124), the magnetic amplitude relation (9.131) and the phase lag (9.135)-(9.136). Retained 596-page scan with OCR noise; the displayed relations were cross-checked against Tong and the local computations in the batch notes."
+            }
+          ]
+        }
+      },
+      {
+        "id": "pthm-em-phase-matching",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Phase matching at a plane interface: common tangential wavevector and frequency, the reflection law and Snell's law",
+        "reference": "core-conditional-proofs.md#K8",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 19,
+        "deps": [
+          "def-em-medium-wave-parameters",
+          "pthm-em-medium-plane-wave-fields",
+          "pthm-em-material-stationary-jumps",
+          "post-em-material-closure",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "lem-em-exponential-character-open-set-independence",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-of-square-roots",
+          "def-principal-inverse-sine-and-cosine"
+        ],
+        "dependency_roles": {
+          "def-em-medium-wave-parameters": "formulation-prerequisite",
+          "pthm-em-medium-plane-wave-fields": "physical-result",
+          "pthm-em-material-stationary-jumps": "formulation-prerequisite",
+          "post-em-material-closure": "physical-assumption",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "lem-em-exponential-character-open-set-independence": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "def-principal-inverse-sine-and-cosine": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the elementary inertial-rest branch of [[post-em-material-closure]] in the lossless isotropic scalar case: two homogeneous media at rest in the laboratory chart of [[def-em-lab-geometry]] (frame basis $(e_1,e_2,e_3)$, units of [[def-em-si-conventions]]), medium 1 in $\\{x_3<0\\}$ with constants $\\varepsilon_1,\\mu_1>0$ and medium 2 in $\\{x_3>0\\}$ with constants $\\varepsilon_2,\\mu_2>0$, both with $\\sigma=0$, sharing the plane interface $S:=\\{x_3=0\\}$ with unit normal $n:=e_3$, and the plane-wave amplitude conditions and solution structure of [[pthm-em-medium-plane-wave-fields]] in each medium. Let $\\omega_i,\\omega_r,\\omega_t>0$, $k_i,k_r,k_t\\in\\mathbb C^{3}$, $e_i,e_r,e_t\\in\\mathbb C^{3}\\setminus\\{0\\}$, and put $h_j:=k_j\\times e_j/(\\mu_j\\omega_j)$ for $j\\in\\{i,r,t\\}$ where $\\mu_i=\\mu_r=\\mu_1$ and $\\mu_t=\\mu_2$, so that each triple satisfies the conditions of [[pthm-em-medium-plane-wave-fields]](b)-(c) in its own medium: $k_j\\cdot e_j=0$, $k_j\\times e_j=\\omega_j\\mu h_j$, $k_j\\times h_j=-\\omega_j\\varepsilon e_j$ and $k_j\\cdot k_j=\\varepsilon\\mu\\omega_j^{2}$ with $(\\varepsilon,\\mu)=(\\varepsilon_1,\\mu_1)$ for $j=i,r$ and $(\\varepsilon_2,\\mu_2)$ for $j=t$. Assume the declared normal orientation conditions $k_i\\cdot n\\in\\mathbb R_{>0}$ and $k_r\\cdot n\\in\\mathbb R_{<0}$; no order is placed on a complex number. Tangential components may be complex. Algebraic phase matching permits every complex transmitted wavevector satisfying its amplitude conditions and dispersion relation, including a zero normal root at critical incidence. No outgoing or non-growth condition is required here. A consuming Fresnel construction may optionally select a root $k_t\\cdot n$ of $(k_t\\cdot n)^2=\\varepsilon_2\\mu_2\\omega_t^2-\\kappa_t\\cdot\\kappa_t$, where $\\kappa_t:=k_t-(k_t\\cdot n)n$, with $\\operatorname{Im}(k_t\\cdot n)\\ge0$ and $\\operatorname{Re}(k_t\\cdot n)\\ge0$ when its imaginary part is zero. Such a selection is a declared additional branch assumption of that construction, not a restriction on this theorem or an inferred material realization. Complex tangential phases may grow along the unbounded interface; no global tangential boundedness is asserted. Define the wave fields $E_j(x,t):=\\operatorname{Re}\\bigl(e_j e^{i(k_j\\cdot x-\\omega_jt)}\\bigr)$, $H_j(x,t):=\\operatorname{Re}\\bigl(h_j e^{i(k_j\\cdot x-\\omega_jt)}\\bigr)$, which are fields of [[def-em-fields]], and let $E:=E_i+E_r$, $H:=H_i+H_r$ on the medium-1 side and $E:=E_t$, $H:=H_t$ on the medium-2 side. [Interface hypothesis] assume that for all $(y,t)\\in\\mathbb R^{2}\\times I$, with $I\\subseteq\\mathbb R$ a nonempty open interval, the one-sided traces at $(y,0,t)$ satisfy the four stationary interface identities with no free surface charge or current, $$n\\cdot\\bigl(\\varepsilon_2E_t-\\varepsilon_1(E_i+E_r)\\bigr)=0,\\qquad n\\cdot\\bigl(\\mu_2H_t-\\mu_1(H_i+H_r)\\bigr)=0,$$ $$n\\times\\bigl(E_t-(E_i+E_r)\\bigr)=0,\\qquad n\\times\\bigl(H_t-(H_i+H_r)\\bigr)=0 .$$ Then: (a) [Phase matching] with $\\kappa_j:=k_j-(k_j\\cdot n)n$ the tangential wavevector, $\\kappa_i=\\kappa_r=\\kappa_t$ and $\\omega_i=\\omega_r=\\omega_t$. (b) [Geometry] if $\\kappa_i\\ne0$ then $k_i,k_r,k_t$ all lie in the complex two-dimensional subspace $\\operatorname{span}_{\\mathbb C}\\{\\kappa_i,n\\}$ (a real plane when the wavevectors are real); if $\\kappa_i=0$ then all three wavevectors are parallel to $n$. (c) [Propagating waves: reflection law and Snell's law] if in addition $k_i,k_r,k_t\\in\\mathbb R^{3}$, then with $\\theta_j\\in[0,\\pi/2]$ defined by $\\sin\\theta_j=|\\kappa_j|/|k_j|$ (well defined because the real dispersion relation gives $|k_j|>0$; the incident and reflected angles are below $\\pi/2$, and the transmitted angle may equal $\\pi/2$) one has $\\theta_r=\\theta_i$ and, writing $v_j=(\\varepsilon_j\\mu_j)^{-1/2}$ and $n_j=c/v_j$ for the parameters of [[def-em-medium-wave-parameters]], $$n_1\\sin\\theta_i=n_2\\sin\\theta_t.$$ If $\\theta_i>0$, this is equivalently $\\sin\\theta_t/\\sin\\theta_i=v_2/v_1=n_1/n_2$. At normal incidence $\\theta_i=0$ it gives $\\theta_t=0$ without forming $0/0$. (d) [Hypotheses actually used] the proof uses only the two tangential identities $n\\times[E]=0$ and $n\\times[H]=0$ and the nonzero-wave hypotheses $e_j\\ne0$ together with $k_j\\cdot k_j\\ne0$; the two normal identities are recorded because they belong to the interface model, but they are not used. If the reflected wave is absent ($e_r=h_r=0$), the same argument matches the incident and transmitted actual waves; it does not determine the absent reflected wave's frequency or wavevector, which a Fresnel construction may conventionally assign the common phase. (e) [Scope] the wave data are given: no existence of interface-consistent data, no reflection or transmission amplitudes, no energy fluxes and no well-posedness are claimed. Complex transmitted wavevectors are covered by (a) and (b) (the evanescent case of [[pthm-em-medium-plane-wave-fields]](e) satisfies $k_t\\cdot n\\ne0$); the physical propagating or evanescent character of the transmitted wave, the angle selection in the real case and the amplitudes are treated by the interface items that consume this theorem. The four interface identities are the stationary plane-interface conditions of the model; for compact interfaces they follow from the distributional jump theorem [[pthm-em-material-stationary-jumps]], and on the noncompact plane they are the stated interface hypothesis. No material dispersion, absorption, anisotropy, moving medium or nonlinearity is covered, and no empirical claim is made.",
+        "strategy": "On the interface use the six-component tangential trace coefficient $A_j:=(e_j^{\\tau},h_j^{\\tau})$ and the complex frequency $\\lambda_j=(\\kappa_j,-\\omega_j)\\in\\mathbb C^3$. Every actual nonzero wave has $A_j\\ne0$: if both tangential parts vanished, $e_j=an$ and $h_j=bn$; $k_j\\times e_j=\\omega_j\\mu_jh_j$ equates a tangential vector with a normal one, hence $h_j=0$, and $k_j\\times h_j=-\\omega_j\\varepsilon_je_j$ then forces $e_j=0$. The two tangential boundary identities give $\\operatorname{Re}(A_ie^{i\\lambda_i\\cdot z}+A_re^{i\\lambda_r\\cdot z}-A_te^{i\\lambda_t\\cdot z})=0$ on the open real set $\\mathbb R^2\\times I$. Apply [[lem-em-exponential-character-open-set-independence]](b), which permits complex spatial frequencies. The negative-conjugate partner of each $\\lambda_j$ has positive last coordinate $+\\omega_j$, whereas every actual frequency has last coordinate $-\\omega_j<0$, so no such partner is among the actual frequencies. If the three actual frequencies were not all equal, some frequency group among three nonzero terms would be a singleton; its vector coefficient would be $\\pm A_j\\ne0$, contradicting the lemma. Therefore all three actual waves match. If the reflected amplitude vanishes, the remaining two nonzero coefficients likewise require $\\lambda_i=\\lambda_t$; no conclusion about the zero wave's arbitrary labels follows. This proves (a) and the absent-wave qualification. For (b), each matched wavevector is $\\kappa+(k_j\\cdot n)n$, so it lies in the declared complex span; in the real case this is ordinary real coplanarity. For (c), the real dispersion relations give $|k_i|=|k_r|=\\omega/v_1$ and $|k_t|=\\omega/v_2$. The common tangential magnitude is $|k_j|\\sin\\theta_j$, hence $\\theta_r=\\theta_i$ by injectivity of sine on $[0,\\pi/2]$, and $(\\omega/v_1)\\sin\\theta_i=(\\omega/v_2)\\sin\\theta_t$, i.e. the product form of Snell's law. Division by $\\sin\\theta_i$ is made only for positive incidence angle; normal incidence is covered by the product identity. Outgoing/non-growth normal-root selection is optional additional data for a consuming Fresnel construction; it is not a hypothesis of this theorem and is not used in the frequency-independence proof. The interface conditions remain explicit assumptions on the noncompact plane, with no use of the compact jump theorem's distributional clause and no inherited choice principle. \u220e",
+        "physical_scope": "Conditional phase-matching theorem for three monochromatic plane waves at a plane interface between two homogeneous isotropic lossless media at rest, under the stated stationary interface identities: the tangential wavevector and angular frequency agree, the wavevectors are coplanar with the normal, and in the propagating case the reflection law and Snell's law follow. Excluded: reflection and transmission amplitudes, energy fluxes, existence of interface-consistent data, absorbing, dispersive, anisotropic, moving or nonlinear media, and any empirical claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.4 printed pp. 185-188: the incident/reflected/transmitted ansatz with possibly different frequencies, the boundary conditions (7.17)-(7.20) with no surface charge or current, the phase-factor equality 'for all time', the equality of the tangential components of the wavevectors (7.22)-(7.24), the law of reflection $\\theta_I=\\theta_R$ and Snell's law (7.25); the source derives the result from the interface matching conditions in exactly this form."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a79.3.3 printed pp. 387-388, Eqs. (9.92)-(9.100): all three waves share the source frequency, the identical $x,y,t$ dependence of the boundary conditions forces (9.94) $k_I\\cdot r=k_R\\cdot r=k_T\\cdot r$ on the interface and then (9.95)-(9.98) the separate equality of components, yielding the first law (plane of incidence), the law of reflection (9.99) and Snell's law (9.100); Problem 9.15 printed p. 392 records the one-variable exponential-identity argument. Retained scan with OCR noise; the argument was cross-checked against Tong and the character lemma recorded on this page."
+            }
+          ]
+        }
+      },
+      {
+        "id": "pthm-em-conducting-skin-depth",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conducting-medium propagation: the exact attenuation constant, the skin depth and its good- and poor-conductor regimes",
+        "reference": "core-conditional-proofs.md#K8",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 19,
+        "deps": [
+          "def-em-medium-wave-parameters",
+          "pthm-em-medium-plane-wave-fields",
+          "post-em-material-closure",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "thm-every-complex-number-has-a-square-root",
+          "thm-of-square-roots",
+          "lem-of-square-monotone",
+          "prop-of-multiply-inequalities",
+          "lem-of-sign-rules",
+          "def-complex-numbers-and-arithmetic",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-principal-inverse-tangent",
+          "thm-sine-and-cosine-addition-formulas"
+        ],
+        "dependency_roles": {
+          "def-em-medium-wave-parameters": "formulation-prerequisite",
+          "pthm-em-medium-plane-wave-fields": "physical-result",
+          "post-em-material-closure": "physical-assumption",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "thm-every-complex-number-has-a-square-root": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "lem-of-square-monotone": "mathematical-premise",
+          "prop-of-multiply-inequalities": "mathematical-premise",
+          "lem-of-sign-rules": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "def-principal-inverse-tangent": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the elementary inertial-rest branch of [[post-em-material-closure]] in the isotropic scalar case at rest in the laboratory frame with constants $\\varepsilon,\\mu>0$ and $\\sigma>0$, the fields of [[def-em-fields]] on the laboratory region of [[def-em-lab-geometry]] and the plane-wave structure of [[pthm-em-medium-plane-wave-fields]]: let $\\omega>0$, $e\\in\\mathbb C^{3}\\setminus\\{0\\}$, $n$ a unit vector and $k=\\lambda n$, $\\lambda\\in\\mathbb C$, and let $E(x,t)=\\operatorname{Re}\\bigl(e\\,e^{i(k\\cdot x-\\omega t)}\\bigr)$ be a plane-wave field satisfying the amplitude conditions of [[pthm-em-medium-plane-wave-fields]](b) with $k\\cdot e=0$. Put $a:=\\mu\\varepsilon\\omega^{2}>0$, $b:=\\mu\\sigma\\omega>0$, $r:=\\sqrt{a^{2}+b^{2}}$ and let $p,q>0$ be the quantities of [[def-em-medium-wave-parameters]]. Then: (a) [Exact propagation constant and decay] $\\lambda^{2}=k\\cdot k=\\varepsilon\\mu\\omega^{2}+i\\mu\\sigma\\omega=a+ib$, so $\\lambda=\\pm(p+iq)$; if $x_3':=n\\cdot x$, then for $\\lambda=p+iq$ $$E(x,t)=e^{-q x_3'}\\,\\operatorname{Re}\\bigl(e\\,e^{i(p x_3'-\\omega t)}\\bigr),$$ so the field oscillates with wavenumber $p$ and its amplitude decays in the direction of increasing $x_3'$ at the exact rate $q$; with $\\lambda=-(p+iq)$ the exact formula is $E(x,t)=e^{q x_3'}\\operatorname{Re}(e\\,e^{i(-p x_3'-\\omega t)})$, which grows in that direction, so the decaying branch is the one with $\\lambda=p+iq$, in agreement with the selection rule of [[def-em-medium-wave-parameters]](b). (b) [Exact skin depth] $q^{2}=\\bigl(\\sqrt{a^{2}+b^{2}}-a\\bigr)/2$, $p^{2}=\\bigl(\\sqrt{a^{2}+b^{2}}+a\\bigr)/2$, $pq=b/2=\\mu\\sigma\\omega/2$, and the skin depth of [[def-em-medium-wave-parameters]] equals the exact closed expression $$\\delta(\\omega)=\\frac{1}{q}=\\frac{\\sqrt{2\\,(r+a)}}{b}=\\frac{\\sqrt{2\\bigl(\\sqrt{a^{2}+b^{2}}+a\\bigr)}}{\\mu\\sigma\\omega}.$$ (c) [Good-conductor regime] put $t:=a/b=\\varepsilon\\omega/\\sigma>0$. For every $t\\le1/4$ the exact value satisfies the explicit bounds $$\\bigl|q-\\sqrt{b/2}\\bigr|\\le2t\\sqrt{b/2}=\\frac{2\\varepsilon\\omega}{\\sigma}\\sqrt{\\frac{\\mu\\sigma\\omega}{2}},\\qquad \\bigl|\\delta-\\sqrt{2/b}\\bigr|\\le4t\\sqrt{2/b}=\\frac{4\\varepsilon\\omega}{\\sigma}\\sqrt{\\frac{2}{\\mu\\sigma\\omega}} ;$$ equivalently $\\delta=\\sqrt{2/(\\mu\\sigma\\omega)}\\,\\bigl(1+O(\\varepsilon\\omega/\\sigma)\\bigr)$ in the declared regime $\\varepsilon\\omega/\\sigma\\le1/4$, with the displayed explicit remainder bounds. (d) [Poor-conductor regime] put $t':=b/a=\\sigma/(\\varepsilon\\omega)>0$. For every $t'\\le1/2$ the exact value satisfies $$\\Bigl|q-\\frac{\\sigma}{2}\\sqrt{\\frac{\\mu}{\\varepsilon}}\\Bigr|\\le\\frac{t'^{2}}{4}\\cdot\\frac{\\sigma}{2}\\sqrt{\\frac{\\mu}{\\varepsilon}},\\qquad\\Bigl|\\delta-\\frac{2}{\\sigma}\\sqrt{\\frac{\\varepsilon}{\\mu}}\\Bigr|\\le\\frac{t'^{2}}{2}\\cdot\\frac{2}{\\sigma}\\sqrt{\\frac{\\varepsilon}{\\mu}},$$ so in this regime $\\delta$ is frequency-independent up to the displayed relative error $O\\bigl((\\sigma/(\\varepsilon\\omega))^{2}\\bigr)$. (e) [Phase relation for a real amplitude] if $e\\in\\mathbb R^{3}$ and $\\lambda=p+iq$, then $$E(x,t)=e^{-q x_3'}e\\cos(px_3'-\\omega t),\\qquad H(x,t)=\\frac{e^{-q x_3'}}{\\mu\\omega}\\bigl(p\\cos(px_3'-\\omega t)-q\\sin(px_3'-\\omega t)\\bigr)\\,(n\\times e),$$ and the ratio of the quadrature to the in-phase coefficient is $q/p=\\sqrt{1+t^{2}}-t$ with $1-2t\\le q/p\\le1$ for every $t\\le1/2$; in particular $q/p\\to1$ as $t\\downarrow0$, so the magnetic scalar factor is $\\sqrt{p^2+q^2}\\cos(px_3'-\\omega t+\\eta)$ with $\\eta:=\\arctan(q/p)\\to\\pi/4$ (45 degrees), not a 90-degree quadrature phase shift. At fixed position with the $e^{-i\\omega t}$ convention this corresponds to the stated signed $+\\eta$ phase in the decreasing phase variable. (f) [Limits and scope] for $\\sigma=0$ one has $b=0$, $q=0$, no attenuation and $\\delta=+\\infty$, and the approximations of (c) and (d) are not applicable; the ideal-conductor limit $\\sigma\\to\\infty$ is not covered by this theorem, which works inside the finite-Ohmic branch of [[post-em-material-closure]] (a separate boundary model is needed for an ideal conductor); the frequency dependence of $\\sigma$ (Drude or other) is not supplied, and $\\sigma$ is the declared constant of the branch; the conclusions are exact identities for the ideal plane-wave field and carry no empirical content, no measured conductivity and no claim about any laboratory field.",
+        "strategy": "(a): clause (c) of [[pthm-em-medium-plane-wave-fields]] gives $k\\cdot k=\\varepsilon\\mu\\omega^{2}+i\\mu\\sigma\\omega$; with $k=\\lambda n$ and $n$ a unit vector this is $\\lambda^{2}=a+ib$, whose two roots are $\\pm(p+iq)$ by the explicit square-root formula of [[thm-every-complex-number-has-a-square-root]] used in [[def-em-medium-wave-parameters]](b) (the verification $p^{2}-q^{2}=a$, $2pq=b$ is that of the definition). Writing $k\\cdot x=\\lambda\\,x_3'$ and $e^{i\\lambda x_3'}=e^{ipx_3'}e^{-qx_3'}$ real-extracts to the displayed factorization ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]); for $\\lambda=-(p+iq)$ the exponent $e^{qx_3'}$ grows in the $+n$ direction. (b): $q^{2}=(r-a)/2$ and $p^{2}=(r+a)/2$ by the definition of $p,q$; $(pq)^{2}=((r+a)(r-a))/4=(r^{2}-a^{2})/4=b^{2}/4$ and $p,q\\ge0$ give $pq=b/2$ ([[thm-of-square-roots]]); and $\\delta^{2}=1/q^{2}=2/(r-a)=2(r+a)/((r-a)(r+a))=2(r+a)/b^{2}$, so $\\delta=\\sqrt{2(r+a)}/b$ because $\\delta>0$ and $b>0$ ([[lem-of-square-monotone]]). (c): write $q^{2}=\\frac{b}{2}\\bigl(\\sqrt{1+t^{2}}-t\\bigr)$ with $t=a/b$ and $\\sqrt{1+t^{2}}-t=\\bigl(\\sqrt{1+t^{2}}+t\\bigr)^{-1}$; since $1\\le\\sqrt{1+t^{2}}\\le1+t$ for $t\\ge0$ one gets $\\frac{1}{1+2t}\\le\\sqrt{1+t^{2}}-t\\le\\frac{1}{1+t}\\le1$, and $\\frac{1}{1+2t}\\ge1-2t$ ([[prop-of-multiply-inequalities]], [[lem-of-sign-rules]], [[lem-of-square-monotone]]). Hence $\\sqrt{\\frac{b}{2}}\\,\\sqrt{1-2t}\\le q\\le\\sqrt{\\frac{b}{2}}$; for $t\\le1/4$ monotonicity of the square root gives $\\sqrt{1-2t}\\ge1-2t$, so $|q-\\sqrt{b/2}|\\le2t\\sqrt{b/2}$. For $\\delta=1/q$ one has $\\sqrt{2/b}\\le\\delta\\le\\sqrt{2/b}/(1-2t)\\le\\sqrt{2/b}\\,(1+4t)$ for $t\\le1/4$, because $1/(1-s)\\le1+2s$ for $0\\le s\\le1/2$ with $s=2t$; this is the second bound. (d): with $s:=b/a$ one has $q^{2}=\\frac{a}{2}(\\sqrt{1+s^{2}}-1)$ and $q/q_{t}=\\sqrt{2/(1+\\sqrt{1+s^{2}})}$ for $q_{t}=\\frac{\\sigma}{2}\\sqrt{\\mu/\\varepsilon}=\\sqrt a\\,s/2$, so $q\\le q_{t}$ and, since $\\sqrt{1+s^{2}}\\le1+s^{2}/2$, $q/q_{t}\\ge1/\\sqrt{1+s^{2}/4}\\ge1-s^{2}/4$ ([[lem-of-square-monotone]], [[prop-of-multiply-inequalities]]); hence $|q-q_{t}|\\le(s^{2}/4)q_{t}$. For $\\delta=1/q$ and $\\delta_{t}=1/q_{t}$ one has $\\delta/\\delta_{t}\\le1/(1-s^{2}/4)\\le1+s^{2}/2$ whenever $s^{2}/4\\le1/2$, which holds for $s\\le1/2$; this gives the second displayed bound. The identification $\\sqrt a=\\omega\\sqrt{\\mu\\varepsilon}$ and $s/2=\\sigma/(2\\varepsilon\\omega)$ produce the stated coefficients. (e): with $e$ real, $h=\\lambda(n\\times e)/(\\mu\\omega)=(p+iq)(n\\times e)/(\\mu\\omega)$ from clause (c) of [[pthm-em-medium-plane-wave-fields]], and real extraction gives $H=e^{-qx_3'}\\bigl(p\\cos(px_3'-\\omega t)-q\\sin(px_3'-\\omega t)\\bigr)(n\\times e)/(\\mu\\omega)$ and $E=e^{-qx_3'}e\\cos(px_3'-\\omega t)$; the ratio is $q/p=\\sqrt{(r-a)/(r+a)}=\\sqrt{1+t^{2}}-t$ (rationalize and use $t=a/b$), and $1-2t\\le\\sqrt{1+t^{2}}-t\\le1$ was established in (c). Put $\\eta=\\arctan(q/p)$ using [[def-principal-inverse-tangent]]. Since $p,q>0$, $\\cos\\eta=p/\\sqrt{p^2+q^2}$ and $\\sin\\eta=q/\\sqrt{p^2+q^2}$; [[thm-sine-and-cosine-addition-formulas]] gives $p\\cos\\theta-q\\sin\\theta=\\sqrt{p^2+q^2}\\cos(\\theta+\\eta)$. Continuity of the principal inverse tangent and $q/p\\to1$ give $\\eta\\to\\arctan1=\\pi/4$. (f) is a scope statement: the separately defined $\\sigma=0$ branch of [[def-em-medium-wave-parameters]] has $b=0$, $r=a>0$, $p=\\sqrt a$, $q=0$, no attenuation and $\\delta=+\\infty$ by its clause (c) convention. This branch is obtained directly from the definitions, not by substituting zero into expressions containing $1/b$, $1/q$ or $1/\\sigma$. The divided formulas and approximation regimes of (b)-(e) retain their stated positive-conductivity hypotheses and are not evaluated at zero. No choice principle is used. \u220e",
+        "physical_scope": "Exact conditional statement about a monochromatic plane-wave field in a homogeneous isotropic Ohmic medium at rest with constant scalar $\\varepsilon,\\mu>0$ and $\\sigma>0$: the exact complex propagation constant and decay, the closed-form skin depth, explicit bounded remainder inequalities in the good-conductor regime $\\varepsilon\\omega/\\sigma\\le1/4$ and the poor-conductor regime $\\sigma/(\\varepsilon\\omega)\\le1/2$, and the phase relation. Excluded: $\\sigma=0$ (no attenuation, infinite skin depth), the ideal-conductor limit, frequency-dependent or tensor conductivity, anisotropy, dispersion, nonlinearity, any laboratory material and all empirical claims.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.6.2 printed pp. 207-209: the conductor ansatz with $J=\\sigma(\\omega)E$, the effective permittivity $\\varepsilon_{\\mathrm{eff}}=\\varepsilon+i\\sigma/\\omega$, the dispersion relation (7.54), the low-frequency Drude regime $\\sigma(\\omega)\\approx\\sigma_{\\mathrm{DC}}$ with $k=k_1+ik_2=\\sqrt{\\mu\\omega\\sigma_{\\mathrm{DC}}/2}\\,(1+i)$, the skin depth $\\delta=1/k_2=\\sqrt{2/(\\mu\\omega\\sigma_{\\mathrm{DC}})}$ and the $\\pi/4$ phase statement; the high-frequency plasma-frequency discussion is disposed separately in the coverage file and is not used here."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a79.4.1 printed pp. 393-396: the modified wave equations (9.122), the attenuated plane waves (9.123), the complex wave number (9.124) $k^{2}=\\mu\\varepsilon\\omega^{2}+i\\mu\\sigma\\omega$, the decomposition $k=k+i\\kappa$ (9.125) and the skin depth $d=1/\\kappa$ (9.128); Problems 9.19(a),(b),(c) printed pp. 395-396 state the poor-conductor frequency-independent skin depth, the good-conductor depth $\\lambda/2\\pi$ and the $\\pi/4$ phase lag. Retained scan with OCR noise; the exact formulas were cross-checked against Tong and against the local computations in the batch notes."
+            }
+          ]
+        }
+      },
+      {
+        "id": "pthm-em-normal-fresnel",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Normal-incidence amplitudes and the flux budget, with the Ohmic transmitting medium",
+        "reference": "core-conditional-proofs.md#K8",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 20,
+        "deps": [
+          "pthm-em-medium-plane-wave-fields",
+          "pthm-em-phase-matching",
+          "pthm-em-material-stationary-jumps",
+          "post-em-material-closure",
+          "def-em-medium-wave-parameters",
+          "def-em-polarization-magnetization",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "lem-em-interface-wave-linear-system",
+          "lem-em-admittance-interface-solve",
+          "lem-em-period-average",
+          "pthm-em-restricted-material-energy",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-of-square-roots",
+          "thm-every-complex-number-has-a-square-root",
+          "def-complex-numbers-and-arithmetic",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-em-exponential-character-open-set-independence",
+          "thm-ftc-second-part",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "def-improper-integral-at-infinity",
+          "thm-exponential-limits-and-range",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "dependency_roles": {
+          "pthm-em-medium-plane-wave-fields": "physical-result",
+          "pthm-em-phase-matching": "physical-result",
+          "pthm-em-material-stationary-jumps": "formulation-prerequisite",
+          "post-em-material-closure": "physical-assumption",
+          "def-em-medium-wave-parameters": "formulation-prerequisite",
+          "def-em-polarization-magnetization": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "lem-em-interface-wave-linear-system": "mathematical-premise",
+          "lem-em-admittance-interface-solve": "mathematical-premise",
+          "lem-em-period-average": "mathematical-premise",
+          "pthm-em-restricted-material-energy": "physical-result",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "thm-every-complex-number-has-a-square-root": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-em-exponential-character-open-set-independence": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable": "mathematical-premise",
+          "def-improper-integral-at-infinity": "mathematical-premise",
+          "thm-exponential-limits-and-range": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the following plane-interface material setting, with the same explicitly adopted stationary interface identities as [[pthm-em-phase-matching]] (including its absent-wave qualification), at normal incidence: medium 1 in $\\{x_3<0\\}$ with $\\varepsilon_1,\\mu_1>0$, $\\sigma_1=0$, medium 2 in $\\{x_3>0\\}$ with $\\varepsilon_2,\\mu_2>0$ and either $\\sigma_2=0$ (lossless) or $\\sigma_2>0$ (Ohmic), both homogeneous and at rest in the laboratory chart, with the plane interface $S=\\{x_3=0\\}$ and normal $n=e_3$. Let $\\omega_i,\\omega_r,\\omega_t>0$ and let three plane waves of [[pthm-em-medium-plane-wave-fields]] be given with wavevectors $k_i=k_1n$ ($k_1>0$), $k_r=-k_1n$ and $k_t=k\\,n$, where for $\\sigma_2=0$ one takes $k=\\omega_t/v_2>0$ and for $\\sigma_2>0$ one takes $k=\\kappa_2(\\omega_t)=p+iq$ with the complex propagation constant of [[def-em-medium-wave-parameters]]; amplitudes $e_i\\in\\mathbb C^{3}\\setminus\\{0\\}$ and $e_r,e_t\\in\\mathbb C^{3}$ and $h_j=k_j\\times e_j/(\\mu_j\\omega_j)$ satisfying the conditions of [[pthm-em-medium-plane-wave-fields]](b)-(c) in their media, and the four stationary interface identities of [[pthm-em-phase-matching]] holding on $\\mathbb R^{2}\\times I$ for a nonempty open interval $I$. Then: (a) [Common frequency] The transmitted amplitude is nonzero and $\\omega_i=\\omega_t=:\\omega$ for some $\\omega>0$. If $e_r\\ne0$, then $\\omega_r=\\omega$ as well; if $e_r=0$, assign $\\omega_r=\\omega$ conventionally, since an absent field cannot determine a frequency. Matching is proved directly from the interface characters, so the lossless-only physical scope of [[pthm-em-phase-matching]] is not used to infer the Ohmic branch. (b) [Amplitude system and solution] all three electric amplitudes are tangential to $S$, and the two tangential interface identities reduce to $$e_i+e_r=e_t,\\qquad Y_1\\,(e_i-e_r)=Y_2\\,e_t,\\qquad Y_1:=\\frac{k_1}{\\mu_1\\omega}>0,\\qquad Y_2:=\\frac{k}{\\mu_2\\omega};$$ hence $e_r=r\\,e_i$ and $e_t=t\\,e_i$ with the complex scalars $$r=\\frac{Y_1-Y_2}{Y_1+Y_2},\\qquad t=\\frac{2Y_1}{Y_1+Y_2};$$ in particular the reflected and transmitted electric phasors are parallel to the incident one (normal-incidence polarisation preservation), and $t\\ne0$. The reflection coefficient is zero exactly when $Y_1=Y_2$, in particular at a lossless impedance-matched interface; the zero reflected field remains part of the theorem. (c) [Lossless transmitting medium] if $\\sigma_2=0$ then $Y_2=1/Z_2>0$ with $Z_2=\\sqrt{\\mu_2/\\varepsilon_2}$ of [[def-em-medium-wave-parameters]], so $$r=\\frac{Z_2-Z_1}{Z_1+Z_2}\\in\\mathbb R,\\qquad t=\\frac{2Z_2}{Z_1+Z_2}\\in\\mathbb R,$$ in agreement with [[lem-em-interface-wave-linear-system]]; the period-$T$ averaged normal fluxes of the stored-energy model, $T=2\\pi/\\omega$ ([[pthm-em-medium-plane-wave-fields]](d), [[pthm-em-restricted-material-energy]]), are $\\langle S_i\\cdot n\\rangle=\\frac{|e_i|^{2}}{2Z_1}$, $\\langle S_r\\cdot n\\rangle=-\\frac{|e_r|^{2}}{2Z_1}$ and $\\langle S_t\\cdot n\\rangle=\\frac{|e_t|^{2}}{2Z_2}$, and with $R:=r^{2}$, $T:=\\frac{Z_1}{Z_2}t^{2}=\\frac{4Z_1Z_2}{(Z_1+Z_2)^{2}}$ one has $R+T=1$; $R$ is the reflected and $T$ the transmitted fraction of the incident normal averaged flux. (d) [Ohmic transmitting medium] if $\\sigma_2>0$ then $Y_2=\\kappa_2(\\omega)/(\\mu_2\\omega)$ has $\\operatorname{Re}Y_2=p/(\\mu_2\\omega)>0$, and $$r=\\frac{Y_1-Y_2}{Y_1+Y_2},\\qquad t=\\frac{2Y_1}{Y_1+Y_2},\\qquad |r|^{2}+\\frac{\\operatorname{Re}Y_2}{Y_1}\\,|t|^{2}=1 .$$ The second summand is the fraction of the incident period-averaged normal flux that enters the conductor at the interface; the transmitted field has the exact decay factor $e^{-qx_3}$ (the explicit factorization $e^{i(p+iq)x_3}=e^{-qx_3}e^{ipx_3}$) and, by the Ohmic dissipation clause of [[pthm-em-restricted-material-energy]], the entering flux is absorbed in the conductor: the reflected fraction $|r|^{2}$ and the absorbed fraction $(\\operatorname{Re}Y_2/Y_1)|t|^{2}$ add to $1$. (e) [Scope] no existence or uniqueness of interface-consistent data, no oblique incidence, no anisotropic or dispersive media, no ideal conductor ($\\sigma_2=\\infty$), no nonlinear response and no empirical claim is made. The interface identities are the stationary plane-interface conditions of the model, supplied for compact interfaces by [[pthm-em-material-stationary-jumps]]; the flux identities are the model's stored-energy and Ohmic-dissipation reading, not an observational claim.",
+        "strategy": "(a): transversality with the nonzero normal wave numbers makes every electric amplitude tangential. The nonzero incident coefficient cannot be cancelled alone. Apply [[lem-em-exponential-character-open-set-independence]](b) to the tangential electric and magnetic traces, whose actual frequencies are $-\\omega_j<0$. If $e_t=0$, the electric trace requires a nonzero reflected wave at the incident frequency with $e_r=-e_i$, but the magnetic trace then gives $Y_1(e_i-e_r)=2Y_1e_i=0$, impossible. Thus $e_t\\ne0$. Any distinct grouping of two or three actual nonzero waves has a singleton nonzero electric coefficient and contradicts character independence; hence incident and transmitted frequencies match, and reflected frequency matches when reflected amplitude is nonzero. Assign the common frequency conventionally to an absent reflected wave. This argument works for both lossless and Ohmic medium2 because the interface spatial phase is zero and all frequencies are positive. (b): the amplitude equations of [[pthm-em-medium-plane-wave-fields]] give $h_i=Y_1n\\times e_i$, $h_r=-Y_1n\\times e_r$, $h_t=Y_2n\\times e_t$. Injectivity of real-part encoding at positive frequency makes the tangential boundary identities precisely $e_i+e_r=e_t$ and $Y_1(e_i-e_r)=Y_2e_t$. Since $Y_1>0$ and $\\operatorname{Re}Y_2>0$, $Y_1+Y_2\\ne0$; [[lem-em-admittance-interface-solve]] applied componentwise yields $r,t$. The numerator of $t$ is $2Y_1\\ne0$; the numerator of $r$ can vanish and does so exactly for $Y_2=Y_1$. In the Ohmic branch $q>0$, so $\\operatorname{Im}Y_2>0$ and $r\\ne0$, whereas the matched lossless branch has $r=0$. (c): $Y_j=1/Z_j>0$ in the lossless branch gives the stated real formulas. [[pthm-em-medium-plane-wave-fields]](d) gives the three signed normal fluxes (with zero flux for a zero reflected amplitude), and [[lem-em-admittance-interface-solve]](b),(d) gives $R+T=1$. Only the local stored-energy/flux clauses of [[pthm-em-restricted-material-energy]] are consumed. (d): $k=p+iq$, $p,q>0$ and $2pq=\\mu_2\\sigma_2\\omega$ give $\\operatorname{Re}Y_2=p/(\\mu_2\\omega)>0$, and the same algebra lemma yields the complex flux budget. Direct period averaging using [[lem-em-period-average]] gives the transmitted normal flux per unit transverse area $F(z)=p|e_t|^2e^{-2qz}/(2\\mu_2\\omega)$ and the Ohmic dissipation density $d(z)=\\sigma_2|e_t|^2e^{-2qz}/2$. The identity $2pq=\\mu_2\\sigma_2\\omega$ gives $F'(z)=-d(z)$, consistent with [[pthm-em-restricted-material-energy]](b). For every $L>0$, the integrand $d$ is continuous on $[0,L]$ and Riemann integrable by [[thm-continuous-on-a-rectangle-is-riemann-integrable]] in dimension1; the exponential antiderivative is differentiable through both endpoints. The fundamental theorem [[thm-ftc-second-part]] applied to the exponential antiderivative gives $\\int_0^L d(z)\\,dz=\\sigma_2|e_t|^2(1-e^{-2qL})/(4q)=F(0)-F(L)$. Since $q>0$, $e^{-2qL}\\to0$; defining the improper integral by this limit as in [[def-improper-integral-at-infinity]], $\\int_0^\\infty d(z)\\,dz=\\sigma_2|e_t|^2/(4q)=F(0)$. This is absorbed flux per unit transverse area, never total energy or power over the infinite plane. The exact convergent exponential integral establishes the absorption statement without integrating an unbounded three-dimensional volume. The boundary and material laws remain adopted model premises; no fixed-volume or weak-source clause is used and no choice principle is inherited. \u220e",
+        "physical_scope": "Conditional normal-incidence reflection and transmission theorem at a plane interface between two homogeneous isotropic scalar media at rest, the second either lossless or Ohmic: the amplitude system, the reflection and transmission amplitudes, the flux budget $R+T=1$ in the lossless case and $|r|^{2}+(\\operatorname{Re}Y_2/Y_1)|t|^{2}=1$ with the absorbed fraction in the Ohmic case. Excluded: oblique incidence, anisotropic, dispersive or nonlinear media, ideal conductors, mobile media, existence or uniqueness of interface-consistent data, and all empirical claims.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.4.1 printed pp. 189-190: the normal-polarisation interface system $E_I+E_R=E_T$ and $(E_I-E_R)/v_1\\cos\\theta_I=(E_T/v_2)\\cos\\theta_T$, reducing at $\\theta=0$ to the two-equation system solved here, with the solution (7.26); \u00a77.6.2 printed pp. 207-208 for the complex propagation constant of the Ohmic medium entering the transmitted admittance."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a79.3.2 printed pp. 384-386, Eqs. (9.74)-(9.88): the normal-incidence boundary conditions (9.74), the amplitude system (9.78)-(9.81), the solutions (9.82), the intensity coefficients (9.86)-(9.87) with $R+T=1$ (9.88), Problem 9.13 (exact coefficients without $\\mu_1=\\mu_2=\\mu_0$) and Problem 9.14 (the reflected and transmitted polarisations must lie along the incident one); \u00a79.4.2 printed pp. 396-398, Eqs. (9.139)-(9.147): the analogous normal-incidence system at a conducting surface with the complex $\\beta=k_2/(\\mu_2v_2\\cdot\\ldots)$ and the total-reflection limit (9.148). Retained scan with OCR noise; the formulas were cross-checked against Tong and the local algebra in the batch notes."
+            }
+          ]
+        }
+      },
+      {
+        "id": "pthm-em-oblique-fresnel",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Oblique-incidence TE and TM Fresnel amplitudes, the flux budget, Brewster's angle and total internal reflection",
+        "reference": "core-conditional-proofs.md#K8",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 20,
+        "deps": [
+          "pthm-em-medium-plane-wave-fields",
+          "pthm-em-phase-matching",
+          "pthm-em-material-stationary-jumps",
+          "post-em-material-closure",
+          "def-em-medium-wave-parameters",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "lem-em-admittance-interface-solve",
+          "lem-em-period-average",
+          "pthm-em-restricted-material-energy",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-of-square-roots",
+          "thm-every-complex-number-has-a-square-root",
+          "def-complex-numbers-and-arithmetic",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-principal-inverse-tangent",
+          "def-principal-inverse-sine-and-cosine"
+        ],
+        "dependency_roles": {
+          "pthm-em-medium-plane-wave-fields": "physical-result",
+          "pthm-em-phase-matching": "physical-result",
+          "pthm-em-material-stationary-jumps": "formulation-prerequisite",
+          "post-em-material-closure": "physical-assumption",
+          "def-em-medium-wave-parameters": "formulation-prerequisite",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "lem-em-admittance-interface-solve": "mathematical-premise",
+          "lem-em-period-average": "mathematical-premise",
+          "pthm-em-restricted-material-energy": "physical-result",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "thm-every-complex-number-has-a-square-root": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "def-principal-inverse-tangent": "mathematical-premise",
+          "def-principal-inverse-sine-and-cosine": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the following plane-interface setting with the same stationary interface identities as [[pthm-em-phase-matching]]: two homogeneous isotropic lossless scalar media at rest (medium 1 in $\\{x_3<0\\}$, constants $\\varepsilon_1,\\mu_1>0$; medium 2 in $\\{x_3>0\\}$, constants $\\varepsilon_2,\\mu_2>0$; both $\\sigma=0$), the plane interface $S=\\{x_3=0\\}$ with normal $n=e_3$, and the plane-wave structure of [[pthm-em-medium-plane-wave-fields]]. Let $\\omega>0$, let $\\kappa\\in\\mathbb R^{2}$ (identified with the tangential plane $\\{x_3=0\\}$) satisfy $0<|\\kappa|<K_1:=\\omega(\\varepsilon_1\\mu_1)^{1/2}$, put $k_{13}:=\\sqrt{K_1^{2}-|\\kappa|^{2}}>0$ and define wavevectors $$k_i:=\\kappa+k_{13}\\,n,\\qquad k_r:=\\kappa-k_{13}\\,n,\\qquad k_t:=\\kappa+k_{t3}\\,n,$$ where $k_{t3}\\in\\mathbb C$ satisfies $k_{t3}^{2}=K_2^{2}-|\\kappa|^{2}$ with $K_2:=\\omega(\\varepsilon_2\\mu_2)^{1/2}$ and is selected by non-growth in the $x_3>0$ half-space: $$k_{t3}=\\sqrt{K_2^{2}-|\\kappa|^{2}}>0\\ \\ (|\\kappa|<K_2),\\qquad k_{t3}=0\\ \\ (|\\kappa|=K_2),\\qquad k_{t3}=i\\beta,\\ \\beta:=\\sqrt{|\\kappa|^{2}-K_2^{2}}>0\\ \\ (|\\kappa|>K_2).$$ [This transmitted phase data is the interface-consistent, bounded choice: the propagating and evanescent branches of [[pthm-em-medium-plane-wave-fields]](d),(e); the common $(\\kappa,\\omega)$ is declared here for each actual wave, also when a reflected amplitude is zero or the critical transmitted root is zero; the nonzero phase-matching theorem explains this matching where its hypotheses apply, and an absent reflected field has no determined phase labels.] Fix the orthonormal tangential frame $\\hat\\kappa:=\\kappa/|\\kappa|$ and $\\hat y:=n\\times\\hat\\kappa$, and consider the two polarisations: (s) [transverse electric] $e_i=E_i\\hat y$, $e_r=E_r\\hat y$, $e_t=E_t\\hat y$ with $E_i,E_r,E_t\\in\\mathbb C$, $E_i\\ne0$, and $h_j:=k_j\\times e_j/(\\mu_j\\omega)$; (p) [transverse magnetic] $h_i=H_i\\hat y$, $h_r=H_r\\hat y$, $h_t=H_t\\hat y$ with $H_i,H_r,H_t\\in\\mathbb C$, $H_i\\ne0$, and electric amplitudes $e_j:=-(k_j\\times\\hat y)H_j/(\\omega\\varepsilon_j)$ (the same computation shows that in both cases the pairs satisfy the amplitude conditions of [[pthm-em-medium-plane-wave-fields]](b) in their media). For each polarisation define the amplitudes along the fixed tangential directions $E^{(s)}_j:=e_j\\cdot\\hat y$ and, in the case (p), $E^{(p)}_j:=e_j\\cdot\\hat x$ with $\\hat x:=\\hat\\kappa$; assume the four stationary interface identities of [[pthm-em-phase-matching]] hold on $\\mathbb R^{2}\\times I$ for a nonempty open interval $I$. Then: (a) [Amplitude system] for $\\chi=s$ in every branch, and for $\\chi=p$ when $k_{t3}\\ne0$, the tangential interface identities reduce to $$E^{\\chi}_i+E^{\\chi}_r=E^{\\chi}_t,\\qquad Y^{\\chi}_1\\bigl(E^{\\chi}_i-E^{\\chi}_r\\bigr)=Y^{\\chi}_2E^{\\chi}_t,$$ with the admittances $$Y^s_1=\\frac{k_{13}}{\\mu_1\\omega},\\qquad Y^p_1=\\frac{\\varepsilon_1\\omega}{k_{13}},\\qquad Y^s_2=\\frac{k_{t3}}{\\mu_2\\omega},\\qquad Y^p_2=\\frac{\\varepsilon_2\\omega}{k_{t3}}\\quad(k_{t3}\\ne0).$$ Write $k_{j3}:=k_j\\cdot n$ for the signed components, so $k_{i3}=k_{13}$ and $k_{r3}=-k_{13}$. Here $Y_1^\\chi>0$ uses the positive incident normal magnitude $k_{13}$, whereas the signed reflected component is $k_r\\cdot n=-k_{13}$; $Y_1^\\chi$ is not defined from that negative component. No $Y_2^p$ is defined at $k_{t3}=0$. hence, whenever $Y^{\\chi}_1+Y^{\\chi}_2\\ne0$, $$r_\\chi:=\\frac{E^{\\chi}_r}{E^{\\chi}_i}=\\frac{Y^{\\chi}_1-Y^{\\chi}_2}{Y^{\\chi}_1+Y^{\\chi}_2},\\qquad t_\\chi:=\\frac{E^{\\chi}_t}{E^{\\chi}_i}=\\frac{2Y^{\\chi}_1}{Y^{\\chi}_1+Y^{\\chi}_2}$$ ([[lem-em-admittance-interface-solve]](a)); the reflected and transmitted amplitude symbols are defined by these fixed-direction conventions, and sign conventions for full vector amplitudes may reverse a reflected amplitude relative to this convention. (b) [Propagating branch and Snell's law] if $|\\kappa|<K_2$ then all three wavevectors are real, $Y_1^s,Y_1^p,Y_2^s,Y_2^p>0$ are real, and with $\\theta_j\\in(0,\\pi/2)$ defined by $\\sin\\theta_j=|\\kappa|/|k_j|$ one has $\\theta_r=\\theta_i$ and $n_1\\sin\\theta_i=n_2\\sin\\theta_t$, $n_j=c(\\varepsilon_j\\mu_j)^{1/2}$ ([[pthm-em-phase-matching]](c), [[def-em-medium-wave-parameters]]); the period-averaged normal fluxes are $Y^{\\chi}_1|E^{\\chi}_i|^{2}/2$, $-Y^{\\chi}_1|E^{\\chi}_r|^{2}/2$ and $Y^{\\chi}_2|E^{\\chi}_t|^{2}/2$, so $$R_\\chi:=|r_\\chi|^{2},\\qquad T_\\chi:=\\frac{Y^{\\chi}_2}{Y^{\\chi}_1}|t_\\chi|^{2},\\qquad R_\\chi+T_\\chi=1 .$$ (c) [Brewster condition] In the finite-admittance branches, $r_\\chi=0$ if and only if $Y^{\\chi}_1=Y^{\\chi}_2$; in particular, if $\\mu_1=\\mu_2$ and $|\\kappa|<K_2$, for unequal indices $n_1\\ne n_2$, $r_p=0$ holds at exactly one admissible incidence angle $\\theta_B\\in(0,\\pi/2)$, characterised by $\\tan\\theta_B=n_2/n_1$, and $r_s\\ne0$ at that angle. For equal indices $n_1=n_2$ (and equal permeabilities), the media are identical, $Y_1^\\chi=Y_2^\\chi$ and $r_s=r_p=0$, $t_s=t_p=1$ for every allowed incidence angle; there is no unique distinguished Brewster angle. (d) [Total internal reflection] if $|\\kappa|>K_2$ (which requires $n_1>n_2$, $|\\kappa|=K_1\\sin\\theta_i$ with $\\theta_i>\\theta_c:=\\arcsin(n_2/n_1)$ in the notation of (b)), then $Y^{s}_2=i\\beta/(\\mu_2\\omega)$ and $Y^{p}_2=-i\\varepsilon_2\\omega/\\beta$ are purely imaginary, $$|r_s|=|r_p|=1,\\qquad t_s,t_p\\ne0,\\qquad |t_\\chi|^{2}=\\frac{4(Y^{\\chi}_1)^{2}}{(Y^{\\chi}_1)^{2}+|Y^{\\chi}_2|^{2}}>0,$$ the transmitted field decays as $e^{-\\beta x_3}$ and its period-averaged normal flux vanishes identically while its tangential averaged flux does not vanish ([[pthm-em-medium-plane-wave-fields]](e)); the reflected wave carries the whole incident normal averaged flux. (e) [Critical angle] if $|\\kappa|=K_2$ then $k_{t3}=0$: the transmitted wave travels along the interface, its tangential electric amplitude vanishes in the (p) case and $Y^{s}_2=0$ in the (s) case, and $r_s=1$, $t_s=2$, $r_p=-1$, $t_p=0$ with vanishing transmitted normal averaged flux. The critical TM branch is solved from the nonsingular equations $E_i^p+E_r^p=k_{t3}H_t/(\\omega\\varepsilon_2)=0$ and $H_i+H_r=H_t$, not by dividing by $k_{t3}$; they give $H_r=H_i$ and $H_t=2H_i$. The transmitted TM electric vector can have a nonzero normal component even though its tangential amplitude is zero. (f) [Scope] the statements are conditional on the interface identities and on the given wave data; no existence or uniqueness of interface-consistent data is claimed. Excluded: anisotropic media, complex $\\varepsilon$ or $\\mu$ and absorption in either medium (only the lossless dielectric case with the evanescent transmitted branch is covered), dispersive media, moving media, the ideal conductor, nonlinear response, and all claims about signal speeds, group velocities, information transfer or empirical data. The statements for $Y^{\\chi}_1+Y^{\\chi}_2=0$ (which cannot occur in the stated branches, where $\\operatorname{Re}Y^{\\chi}_1>0$ and $\\operatorname{Re}Y^{\\chi}_2\\ge0$) are excluded; the notation 'angle of refraction' is used only where $k_t$ is real.",
+        "strategy": "Polarisation data: for (s), $e_j=E_j\\hat y$ gives $k_j\\cdot e_j=E_j(k_j\\cdot\\hat y)=0$ (because $k_j=\\kappa+k_{j3}n$ and $\\hat y\\perp\\kappa,n$); for (p), $e_j=-(k_j\\times\\hat y)H_j/(\\omega\\varepsilon_j)$ gives $k_j\\cdot e_j=0$ as well, and $k_j\\times e_j=k_j\\times\\bigl(-(k_j\\times\\hat y)H_j/(\\omega\\varepsilon_j)\\bigr)=H_j\\bigl[(k_j\\cdot k_j)\\hat y-k_j(k_j\\cdot\\hat y)\\bigr]/(\\omega\\varepsilon_j)=H_j(k_j\\cdot k_j)\\hat y/(\\omega\\varepsilon_j)=\\omega\\mu_jh_j$ using $k_j\\cdot k_j=\\varepsilon_j\\mu_j\\omega^{2}$ and $k_j\\cdot\\hat y=0$ ([[lem-cross-product-is-bilinear-alternating-and-orthogonal]], [[pthm-em-medium-plane-wave-fields]](b)). So both polarisations satisfy the amplitude conditions in the respective media. (a): with the common interface phase the tangential electric identity is the coefficient identity $e^{\\tau}_i+e^{\\tau}_r=e^{\\tau}_t$ (where $v^{\\tau}=v-(v\\cdot n)n$); for (s) this is $E_i\\hat y+E_r\\hat y=E_t\\hat y$, i.e. the scalar identity; for (p) the tangential part of $e_j$ is $(e_j\\cdot\\hat x)\\hat x$ because $e_j$ lies in $\\operatorname{span}\\{\\kappa,n\\}$ (as $k_j\\times\\hat y\\perp\\hat y$ and $k_j\\in\\operatorname{span}\\{\\kappa,n\\}$), so the identity is $E^{(p)}_i+E^{(p)}_r=E^{(p)}_t$. The tangential magnetic identity $n\\times h_i+n\\times h_r=n\\times h_t$ similarly becomes, after taking components in the fixed direction and expressing $h_j$ through the electric amplitude: for (s), $h_j=(k_j\\times e_j)/(\\mu_j\\omega)$ has tangential component in the $\\hat\\kappa$-direction equal to $-k_{j3}E_j/(\\mu_j\\omega)$ (the reflected sign included, since $k_{r3}=-k_{13}$), which yields $Y^{s}_1(E^{s}_i-E^{s}_r)=Y^{s}_2E^{s}_t$ with $Y^s_1=k_{13}/(\\mu_1\\omega)$, $Y^s_2=k_{t3}/(\\mu_2\\omega)$; for (p), $e_j=-(k_j\\times\\hat y)H_j/(\\omega\\varepsilon_j)$ has $\\hat\\kappa$-component $k_{j3}H_j/(\\omega\\varepsilon_j)$ and the magnetic identity $H_i+H_r=H_t$ gives, after expressing $H_j$ in the amplitudes, $Y^{p}_1(E^{p}_i-E^{p}_r)=Y^{p}_2E^{p}_t$ with $Y^p_1=\\varepsilon_1\\omega/k_{13}$, $Y^p_2=\\varepsilon_2\\omega/k_{t3}$ for $k_{t3}\\ne0$; both are instances of the two-equation system of [[lem-em-admittance-interface-solve]], whose clause (a) gives the displayed $r_\\chi,t_\\chi$ (the determinant $Y^{\\chi}_1+Y^{\\chi}_2$ is nonzero in each branch: in the propagating branch both are real positive, in the evanescent branch the real part of the sum is $Y^{\\chi}_1>0$). (b): the real-propagation statement is [[pthm-em-phase-matching]](c) applied with the common $(\\kappa,\\omega)$; The admittance magnitudes $Y_1^s=k_{13}/(\\mu_1\\omega)$, $Y_1^p=\\varepsilon_1\\omega/k_{13}$, $Y_2^s=k_{t3}/(\\mu_2\\omega)$ and $Y_2^p=\\varepsilon_2\\omega/k_{t3}$ are real and positive because $k_{13}>0$ and $k_{t3}>0$. The reflected signed normal component is $k_{r3}=-k_{13}$, so its normal-flux coefficient is $-Y_1^\\chi$, not a positive admittance. The flux identities are clauses (d),(e) of [[pthm-em-medium-plane-wave-fields]]: for (s) the normal flux of wave $j$ is $|e_j|^{2}k_{j3}/(2\\mu_j\\omega)=(k_{j3}/(\\mu_j\\omega))|E_j^s|^2/2$, giving respectively $+Y_1^s|E_i^s|^2/2$, $-Y_1^s|E_r^s|^2/2$ and $+Y_2^s|E_t^s|^2/2$; for (p), $E_j^p=k_{j3}H_j/(\\omega\\varepsilon_j)$ and the normal flux is $k_{j3}|H_j|^2/(2\\omega\\varepsilon_j)=(\\varepsilon_j\\omega/k_{j3})|E_j^p|^2/2$. The latter coefficient is negative for the reflected wave; writing it as $-Y_1^p$ gives the signed reflected flux. Thus both polarisations use $+Y_1$ for incidence and $-Y_1$ for reflection, and $+Y_2$ for transmission. Substituting the amplitudes gives $R_\\chi+T_\\chi=1$ by [[lem-em-admittance-interface-solve]](b) with the real positive magnitudes $Y_1^\\chi,Y_2^\\chi$. (c): Away from the critical TM branch, the finite-admittance formula gives $r_\\chi=0$ exactly for $Y_1^\\chi=Y_2^\\chi$. For equal permeabilities and unequal positive indices, equality of TE admittances would imply $k_{13}=k_{t3}$ and hence $K_1=K_2$, impossible. The TM equality is $n_1\\cos\\theta_t=n_2\\cos\\theta_i$ together with Snell $n_1\\sin\\theta_i=n_2\\sin\\theta_t$. Squaring and eliminating $\\sin\\theta_t$ gives $(n_1^2-n_2^2)[n_2^2-(n_1^2+n_2^2)\\sin^2\\theta_i]=0$. For unequal indices divide only by the nonzero first factor to obtain $\\sin^2\\theta_i=n_2^2/(n_1^2+n_2^2)$ and $\\tan\\theta_i=n_2/n_1$; strict monotonicity of tangent on $(0,\\pi/2)$ gives uniqueness, and $\\sin\\theta_t=n_1/\\sqrt{n_1^2+n_2^2}<1$ proves admissibility. For equal indices and permeabilities the two media are identical: Snell gives $\\theta_t=\\theta_i$, both admittances agree at every allowed angle, and $r_s=r_p=0$, $t_s=t_p=1$. No uniqueness inference follows in that degenerate branch. (d): for $|\\kappa|>K_2$ the selection $k_{t3}=i\\beta$ gives $Y^{s}_2=k_{t3}/(\\mu_2\\omega)=i\\beta/(\\mu_2\\omega)$ and $Y^{p}_2=\\varepsilon_2\\omega/(i\\beta)=-i\\varepsilon_2\\omega/\\beta$, both purely imaginary ([[def-complex-numbers-and-arithmetic]]); clause (c) of [[lem-em-admittance-interface-solve]] gives $|r_\\chi|=1$ and $|t_\\chi|^{2}=4(Y^{\\chi}_1)^{2}/((Y^{\\chi}_1)^{2}+|Y^{\\chi}_2|^{2})>0$; the transmitted field structure, decay and normal-flux vanishing are clause (e) of [[pthm-em-medium-plane-wave-fields]] applied to the transverse polarisations (the (s) case is the $e$ polarisation $n'\\times\\hat\\kappa_0$ with $n'=n$, $\\kappa_0=\\kappa$; the (p) case is the corresponding $h$ polarisation). The reflected flux equals the incident flux because $|r_\\chi|=1$. (e): At critical incidence solve without defining $Y_2^p$. The TE equations have $Y_2^s=0$, so $E_r^s=E_i^s$ and $E_t^s=2E_i^s$, giving $r_s=1$, $t_s=2$. For TM, $E_i^p=k_{13}H_i/(\\omega\\varepsilon_1)$, $E_r^p=-k_{13}H_r/(\\omega\\varepsilon_1)$ and $E_t^p=0$. The electric boundary identity forces $H_r=H_i$; the magnetic one gives $H_t=H_i+H_r=2H_i$. Thus $r_p=-1$, $t_p=0$ as ratios of the nonzero incident tangential electric amplitude. The transmitted electric vector is $-\\kappa\\times\\hat y\\,H_t/(\\omega\\varepsilon_2)$, a normal vector that need not vanish. Both transmitted normal fluxes are zero by direct $\\operatorname{Re}(e_t\\times\\overline h_t)\\cdot n/2$ calculation (or the real-wave normal factor $k_{t3}=0$). The four interface identities are consistent: the normal D jump for TM reduces to $H_t=H_i+H_r$, and the normal B jump for TE to $E_t^s=E_i^s+E_r^s$. All critical conclusions are therefore established by finite equations. (f) is a scope statement. All divisions are by nonzero complex numbers; no choice principle is used. \u220e",
+        "physical_scope": "Conditional oblique-incidence Fresnel theorem for two homogeneous isotropic lossless scalar media at rest at a plane interface, under the stated interface identities: the TE and TM admittance systems, amplitude formulas, the flux budget $R_\\chi+T_\\chi=1$ in the propagating branch, the Brewster condition and the total-internal-reflection identities $|r_\\chi|=1$ with decaying transmitted field. Excluded: absorbing, dispersive, anisotropic, moving or nonlinear media, the ideal conductor, existence or uniqueness of interface-consistent data, signal- and group-velocity claims, and all empirical claims.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.4.1 printed pp. 190-191: the parallel-polarisation interface system $E_I\\cos\\theta_I+E_R\\cos\\theta_R=E_T\\cos\\theta_T$, $(E_I-E_R)/v_1=E_T/v_2$ and its solution (7.27), together with Brewster's angle $\\tan\\theta_B=n_2/n_1$ from $n_1\\cos\\theta_T=n_2\\cos\\theta_I$ and $\\theta_I+\\theta_T=\\pi/2$; \u00a77.4.2 printed pp. 191-193: total internal reflection with $\\sin\\theta_C=n_2/n_1$, the imaginary normal component $k_T\\cdot\\hat x=\\pm i\\omega\\alpha/v_2$ and the decaying evanescent transmitted wave. The tangential-electric fixed-direction convention with the reflected sign is the one used in these formulas."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a79.3.3 printed pp. 389-392, Eqs. (9.101)-(9.116): the boundary-condition system (9.101), the parallel-polarisation equations (9.103)-(9.108), Fresnel's equations (9.109), Brewster's angle (9.111)-(9.112) and the intensity coefficients (9.113)-(9.116) with $R+T=1$; Problem 9.16 printed p. 392: the perpendicular-polarisation Fresnel equations, the absence of a Brewster angle for that polarisation and the normal-incidence reduction; Problem 9.37 printed pp. 413-414: the evanescent transmitted field $E_T=E_{0T}e^{-Kz}e^{i(kx-\\omega t)}$ with $k=\\frac{\\omega}{c}n_1\\sin\\theta_I$, the reflection coefficient of magnitude one, and the statement that the evanescent field transports no energy into medium 2 on average. Retained scan with OCR noise; the formulas were cross-checked against Tong and the local computations in the batch notes."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 348,
+    "id": "em-wave-interfaces-and-conductors-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Wave interfaces and conductors \u2014 Examples",
+    "companion": "em-wave-interfaces-and-conductors",
+    "requires": [
+      "em-wave-interfaces-and-conductors"
+    ],
+    "items": [
+      {
+        "id": "ex-em-skin-depth-approximation-example",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Numerical check of the good-conductor skin-depth bounds and the $\\sigma=0$ exclusion",
+        "reference": "worked-example-verifications.md#X7",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 20,
+        "deps": [
+          "pthm-em-conducting-skin-depth",
+          "def-em-medium-wave-parameters",
+          "post-em-material-closure"
+        ],
+        "dependency_roles": {
+          "pthm-em-conducting-skin-depth": "physical-result",
+          "def-em-medium-wave-parameters": "formulation-prerequisite",
+          "post-em-material-closure": "physical-assumption"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Adopt the isotropic scalar Ohmic branch of [[post-em-material-closure]] at rest and the exact quantities of [[def-em-medium-wave-parameters]] and [[pthm-em-conducting-skin-depth]]. Let the declared parameters be $$\\varepsilon=4\\ \\mathrm F\\,\\mathrm m^{-1},\\qquad \\mu=1\\ \\mathrm H\\,\\mathrm m^{-1},\\qquad \\sigma=100\\ \\mathrm S\\,\\mathrm m^{-1},\\qquad \\omega=3\\ \\mathrm s^{-1};$$ these are declared model parameters of the illustration, not measured values of any material. The numerical evaluations below use these SI units: $a,b,r$ have unit $\\mathrm m^{-2}$, $p,q$ have unit $\\mathrm m^{-1}$, and $\\delta$ has unit m; $t=a/b$ is dimensionless. Then: (i) $a=\\mu\\varepsilon\\omega^{2}=36$, $b=\\mu\\sigma\\omega=300$, $r=\\sqrt{a^{2}+b^{2}}=\\sqrt{91296}$ and $t=a/b=3/25=0.12\\le1/4$, so the good-conductor regime of [[pthm-em-conducting-skin-depth]](c) applies; (ii) the exact propagation and attenuation constants are $p=\\sqrt{(r+36)/2}$ and $q=\\sqrt{(r-36)/2}$, with $pq=b/2=150$ exactly; the decimal evaluations $r\\approx302.15228$, $p\\approx13.00293$, $q\\approx11.53586$ satisfy $q<\\sqrt{b/2}=\\sqrt{150}\\approx12.24745$ with $$|q-\\sqrt{150}|\\approx0.71159\\le 2t\\sqrt{150}=0.24\\sqrt{150}\\approx2.93939,$$ and for the skin depth $\\delta=1/q\\approx0.08669$ against $\\sqrt{2/b}=1/\\sqrt{150}\\approx0.08165$ one has $$|\\delta-\\sqrt{2/b}|\\approx0.00504\\le 4t\\sqrt{2/b}=0.48\\sqrt{2/b}\\approx0.03919 .$$ Thus the exact skin depth satisfies the stated good-conductor bound with the margin predicted by the theorem. (iii) for $\\sigma=0$ (same $\\varepsilon,\\mu,\\omega$) one has $b=0$, $q=0$, no attenuation and $\\delta=+\\infty$ by the convention of [[def-em-medium-wave-parameters]](c); the inequalities of (ii) do not apply, consistently with the exclusion recorded in [[pthm-em-conducting-skin-depth]](f). (iv) [Scope] the computation is an exact check of the stated inequalities for the declared model parameters (with dimensionless ratio $t$); it reports no measurement, no material identification and no empirical claim, and the decimal evaluations are displayed only as approximate illustrations of the exact expressions.",
+        "strategy": "Direct substitution in the theorem: $a=\\mu\\varepsilon\\omega^{2}=1\\cdot4\\cdot9=36$ and $b=\\mu\\sigma\\omega=1\\cdot100\\cdot3=300$; $r=\\sqrt{36^{2}+300^{2}}=\\sqrt{1296+90000}=\\sqrt{91296}$; $t=36/300=3/25$; $pq=\\sqrt{(r^{2}-a^{2})/4}=b/2=150$ by the exact identity of [[pthm-em-conducting-skin-depth]](b). The two inequalities are the displayed bounds of that theorem specialised to $t=3/25$; the decimal values are rounded evaluations of the exact radicals, computed as $r=\\sqrt{91296}$, $q=\\sqrt{(r-36)/2}$, $\\delta=1/q$, and displayed to five decimals. The $\\sigma=0$ clause is the convention $\\delta=+\\infty$ of [[def-em-medium-wave-parameters]](c) together with $q=0$ at $b=0$. No empirical input or measurement enters.",
+        "physical_scope": "Numerical illustration for declared model parameters in the isotropic scalar Ohmic branch: the good-conductor bounds $|q-\\sqrt{b/2}|\\le2t\\sqrt{b/2}$ and $|\\delta-\\sqrt{2/b}|\\le4t\\sqrt{2/b}$ at $\\varepsilon\\omega/\\sigma=0.12$ and the exclusion of $\\sigma=0$ from the finite-depth approximation. Excluded: any measured conductivity, any laboratory material, and any experimental or statistical claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.6.2 printed pp. 207-209: the skin depth $\\delta=\\sqrt{2/(\\mu\\omega\\sigma_{\\mathrm{DC}})}$ and its regime of validity in the low-frequency Ohmic conductor; the numerical values here are declared dimensionless illustrations of that closed form, not data from the source."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a79.4.1 printed pp. 394-395 and Problem 9.19(a),(b) printed p. 396: the good-conductor skin depth $\\delta=\\lambda/(2\\pi)$ and the poor-conductor frequency-independent depth; the monotone comparison of the exact $q$ with $\\sqrt{\\mu\\sigma\\omega/2}$ used here is the quantitative form of the source's 'good conductor' discussion. Retained scan with OCR noise; the bounds were verified by the local computation in the batch notes."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-em-brewster-angle-example",
+        "kind": "example",
+        "domain": "physics",
+        "title": "The Brewster angle at an equal-permeability interface and the surviving $s$-reflection",
+        "reference": "worked-example-verifications.md#X7",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 21,
+        "deps": [
+          "pthm-em-oblique-fresnel",
+          "def-em-medium-wave-parameters",
+          "post-em-material-closure"
+        ],
+        "dependency_roles": {
+          "pthm-em-oblique-fresnel": "physical-result",
+          "def-em-medium-wave-parameters": "formulation-prerequisite",
+          "post-em-material-closure": "physical-assumption"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Adopt the setting of [[pthm-em-oblique-fresnel]] with two lossless media at rest, equal permeabilities $\\mu_1=\\mu_2=:\\mu>0$ and declared refractive indices $n_1=1$, $n_2=3/2$ (declared model parameters, not optical measurements), so that $\\varepsilon_j=n_j^{2}/(c^{2}\\mu)$ and $K_j=n_j\\omega/c$ in the notation of [[def-em-medium-wave-parameters]]. Then: (i) [Brewster angle] by [[pthm-em-oblique-fresnel]](c) the TM amplitude vanishes exactly at the unique angle $\\theta_B\\in(0,\\pi/2)$ with $\\tan\\theta_B=n_2/n_1=3/2$, i.e. $\\sin\\theta_B=3/\\sqrt{13}$, $\\cos\\theta_B=2/\\sqrt{13}$; the transmitted angle satisfies $n_1\\sin\\theta_B=n_2\\sin\\theta_t$, hence $\\sin\\theta_t=2/\\sqrt{13}$, and $\\theta_B+\\theta_t=\\pi/2$; (ii) [Amplitudes] at $\\theta_i=\\theta_B$ one has $Y^{p}_1=Y^{p}_2=\\sqrt{13}/(2c\\mu)$, hence $r_p=0$ and $t_p=1$; the remaining $s$-amplitudes are $Y^{s}_1=2/(\\sqrt{13}c\\mu)$, $Y^{s}_2=9/(2\\sqrt{13}c\\mu)$ and $$r_s=\\frac{2/\\sqrt{13}-9/(2\\sqrt{13})}{2/\\sqrt{13}+9/(2\\sqrt{13})}=-\\frac{5}{13},\\qquad t_s=\\frac{8}{13};$$ (iii) [Flux budget] with $R_s=|r_s|^{2}=25/169$ and $T_s=(Y^{s}_2/Y^{s}_1)|t_s|^{2}=(9/4)(64/169)=144/169$ one has $R_s+T_s=169/169=1$ exactly, while the TM channel has $R_p=0$, $T_p=1$; (iv) [Scope] the numbers are declared model parameters; the example is a deterministic computation of the classical interface model, reports no measurement, and a pure TM incident wave has zero reflected field at the Brewster angle. For incident data with a nonzero TE component, the surviving reflected field is TE-polarised because $r_p=0$ and $r_s\\ne0$; no unpolarised-beam statistics are modelled here.",
+        "strategy": "Substitution in [[pthm-em-oblique-fresnel]]: $K_j=n_j\\omega/c$ and the admittances are $Y^{s}_j=k_{j3}/(\\mu\\omega)$, $Y^{p}_j=\\varepsilon_j\\omega/k_{j3}$ with $k_{13}=(\\omega/c)\\cos\\theta_B=(2/\\sqrt{13})(\\omega/c)$ and, at $\\theta_t$ with $\\sin\\theta_t=2/\\sqrt{13}$, $k_{t3}=(3\\omega/(2c))(3/\\sqrt{13})=(9/(2\\sqrt{13}))(\\omega/c)$; hence $Y^{s}_1=2/(\\sqrt{13}c\\mu)$, $Y^{s}_2=(9/4)Y^{s}_1=9/(2\\sqrt{13}c\\mu)$ and $Y^{p}_1=\\varepsilon_1\\omega/k_{13}=\\sqrt{13}/(2c\\mu)=Y^{p}_2$ (the equality $Y^{p}_1=Y^{p}_2$ is exactly the Brewster condition of [[pthm-em-oblique-fresnel]](c) and gives $r_p=(Y^{p}_1-Y^{p}_2)/(Y^{p}_1+Y^{p}_2)=0$, $t_p=1$). The $s$-amplitudes follow from the admittance formulas of that theorem by factoring $1/(\\sqrt{13}c\\mu)$ from numerator and denominator: $r_s=(4/2-9/2)/(4/2+9/2)=-5/13$ and $t_s=2\\cdot(4/2)/(13/2)=8/13$; the flux identities are clause (b) of the same theorem: $T_s=(Y^{s}_2/Y^{s}_1)|t_s|^{2}=(9/4)\\cdot(64/169)=144/169$, and $25/169+144/169=1$ exactly. The angles: $\\sin\\theta_t=n_1\\sin\\theta_B/n_2=(2/3)(3/\\sqrt{13})=2/\\sqrt{13}=\\cos\\theta_B$ gives $\\theta_B+\\theta_t=\\pi/2$. All numbers are exact rational or quadratic-irrational expressions; no empirical input, no measurement and no statistical claim is used.",
+        "physical_scope": "Deterministic example of the oblique-incidence interface model for two declared lossless media with equal permeabilities and indices $n_1=1$, $n_2=3/2$: the unique Brewster angle $\\tan\\theta_B=n_2/n_1$, $r_p=0$, $t_p=1$, the surviving $s$-reflection $r_s=-5/13$ with $R_s+T_s=1$ exactly. Excluded: measured refractive indices, absorption, interfaces between unequal permeabilities, unpolarised-beam statistics and every empirical claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.4.1 printed pp. 190-191: Brewster's angle from $n_1\\cos\\theta_T=n_2\\cos\\theta_I$ and $\\theta_I+\\theta_T=\\pi/2$, giving $\\tan\\theta_B=n_2/n_1$ and the statement that in the 'normal' (s) polarisation no such quenching occurs; the numerical instance $n_1=1$, $n_2=3/2$ is evaluated here from the formulas, not copied from the source."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "\u00a79.3.3 printed pp. 390-391, Eqs. (9.109)-(9.112): Fresnel's equations for the parallel polarisation and Brewster's angle $\\tan\\theta_B=n_2/n_1$ for $\\mu_1=\\mu_2$; Problem 9.16 printed p. 392: the perpendicular polarisation has no Brewster angle and its reflected wave is never zero unless the media are optically indistinguishable. Retained scan with OCR noise; the exact rational values were verified by the local computation in the batch notes."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-em-evanescent-flux-example",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Total internal reflection: decaying transmitted field, vanishing normal flux and the reflection phase",
+        "reference": "worked-example-verifications.md#X7",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 21,
+        "deps": [
+          "pthm-em-oblique-fresnel",
+          "pthm-em-medium-plane-wave-fields",
+          "def-em-medium-wave-parameters",
+          "post-em-material-closure",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-principal-inverse-tangent"
+        ],
+        "dependency_roles": {
+          "pthm-em-oblique-fresnel": "physical-result",
+          "pthm-em-medium-plane-wave-fields": "physical-result",
+          "def-em-medium-wave-parameters": "formulation-prerequisite",
+          "post-em-material-closure": "physical-assumption",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "def-principal-inverse-tangent": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Adopt the setting of [[pthm-em-oblique-fresnel]] with equal permeabilities $\\mu_1=\\mu_2=:\\mu>0$ and declared indices $n_1=3/2$, $n_2=1$ (declared model parameters, not measurements), choose the tangential wavevector $\\kappa=(6\\omega/(5c))e_1$, so $\\hat\\kappa=e_1$ and $\\hat y=n\\times\\hat\\kappa=e_2$, and take the transverse-electric polarisation $e_j=E_j\\hat y$. Let the incidence angle be given by $\\sin\\theta_i=4/5$, which exceeds the critical angle $\\theta_c$ with $\\sin\\theta_c=n_2/n_1=2/3$, so $|\\kappa|=K_1\\sin\\theta_i=(6/5)(\\omega/c)>(\\omega/c)=K_2$. Then with $\\beta=\\sqrt{|\\kappa|^{2}-K_2^{2}}=(\\sqrt{11}/5)(\\omega/c)$ and $k_{13}=(\\omega/c)(3/2)(3/5)=(9/10)(\\omega/c)$: (i) [Reflection] $Y^{s}_1=9/(10\\mu c)$, $Y^{s}_2=i\\sqrt{11}/(5\\mu c)$ and $$r_s=\\frac{9/10-i\\sqrt{11}/5}{9/10+i\\sqrt{11}/5},\\qquad |r_s|=1,\\qquad t_s=\\frac{9/5}{9/10+i\\sqrt{11}/5},\\qquad |t_s|^{2}=\\frac{324}{125};$$ the reflection factor is the phase $r_s=e^{-2i\\varphi}$ with $\\varphi=\\arctan\\!\\bigl(2\\sqrt{11}/9\\bigr)\\approx0.63514703$ (about $36.39124^\\circ$), i.e. the reflected wave acquires the phase $-2\\varphi\\approx-1.27029406$ (about $-72.78249^\\circ$); (ii) [Transmitted field] the transmitted field is $E_t(x,t)=e^{-\\beta x_3}\\operatorname{Re}\\bigl(E_t\\hat y\\,e^{i(|\\kappa|x_1-\\omega t)}\\bigr)$ with $\\beta=(\\sqrt{11}/5)(\\omega/c)$: it decays by the factor $e^{-\\sqrt{11}/5}\\approx0.51514$ when $x_3$ increases by $c/\\omega$, its period-averaged normal flux vanishes identically, $\\langle S_t\\cdot n\\rangle\\equiv0$, while its tangential averaged flux is positive, $\\langle S_t\\cdot\\hat\\kappa\\rangle=e^{-2\\beta x_3}\\,\\frac{(6/5)(\\omega/c)|E_t|^{2}}{2\\mu\\omega}=e^{-2\\beta x_3}\\frac{3|E_t|^{2}}{5\\mu c}$; (iii) [Flux budget] $|r_s|^{2}+(\\operatorname{Re}Y^{s}_2/Y^{s}_1)|t_s|^{2}=1+0=1$, so the whole incident normal averaged flux is reflected, while the evanescent field carries a tangential averaged flux only; (iv) [Scope] the example is an exact deterministic computation of the lossless interface model for declared parameters; it reports no measurement, and the presence of a tangential evanescent flux is not a claim about information speed or signal propagation.",
+        "strategy": "Substitution in [[pthm-em-oblique-fresnel]](d): $K_1=(3/2)(\\omega/c)$, $\\kappa=(6\\omega/(5c))e_1$, $|\\kappa|=K_1\\sin\\theta_i=(6/5)(\\omega/c)$, $\\hat\\kappa=e_1$ and $\\hat y=e_2$, $\\beta=\\sqrt{(36/25-1)}(\\omega/c)=(\\sqrt{11}/5)(\\omega/c)$, $k_{13}=K_1\\cos\\theta_i=(3/2)(3/5)(\\omega/c)$ (because $\\cos\\theta_i=3/5$), so $Y^{s}_1=k_{13}/(\\mu\\omega)=9/(10\\mu c)$ and $Y^{s}_2=i\\beta/(\\mu\\omega)=i\\sqrt{11}/(5\\mu c)$. Then $r_s=(Y^{s}_1-Y^{s}_2)/(Y^{s}_1+Y^{s}_2)$, whose numerator is the complex conjugate of its denominator, so $|r_s|=1$; $|t_s|^{2}=|2Y^{s}_1|^{2}/|Y^{s}_1+Y^{s}_2|^{2}=(81/25)/(81/100+11/25)=324/125$ by [[lem-complex-conjugation-and-modulus-laws|the modulus laws]]; the phase is the argument of the denominator and satisfies $\\tan\\varphi=(\\sqrt{11}/5)/(9/10)=2\\sqrt{11}/9$, hence $r_s=e^{-2i\\varphi}$. The decay and normal-flux vanishing are clause (e) of [[pthm-em-medium-plane-wave-fields]] with $n'=n$, $\\kappa_0=\\kappa$ and the transverse-electric polarisation; the tangential-flux value is its displayed formula $|\\kappa_0||e|^{2}/(2\\mu\\omega)=|\\kappa||E_t|^{2}/(2\\mu\\omega)$ with $|\\kappa|=(6/5)(\\omega/c)$. The flux budget is clause (d) of [[pthm-em-oblique-fresnel]] with $\\operatorname{Re}Y^{s}_2=0$. The decimal values are rounded evaluations of the exact expressions $\\arctan(2\\sqrt{11}/9)$ and $e^{-\\sqrt{11}/5}$. No empirical input is used.",
+        "physical_scope": "Deterministic example of total internal reflection in the lossless interface model for declared indices $n_1=3/2$, $n_2=1$ at $\\sin\\theta_i=4/5$: the unit-modulus reflection factor with its phase, the evanescent transmitted field with decay factor $e^{-\\beta x_3}$, the vanishing normal and positive tangential averaged fluxes. Excluded: measured indices, absorption, information-speed or signal-propagation claims, and every empirical statement.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 author-hosted revision, 236 pp.)",
+              "url": "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf",
+              "locator": "\u00a77.4.2 printed pp. 191-193: total internal reflection beyond $\\sin\\theta_C=n_2/n_1$, the imaginary normal component of the transmitted wavevector and the decaying evanescent solution $E_{\\mathrm{trans}}=E_T e^{(ik_T\\cdot\\hat z-\\omega t)}e^{\\mp\\omega\\alpha x/v_2}$; the explicit numbers here are evaluated from those formulas and the interface amplitudes, not copied from the source."
+            },
+            {
+              "title": "David J. Griffiths, Introduction to Electrodynamics, 3rd edition (Prentice Hall, 1999, 596-page retained scan)",
+              "url": "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf",
+              "locator": "Problem 9.37 printed pp. 413-414: the evanescent transmitted field $E_T=E_{0T}e^{-Kz}e^{i(kx-\\omega t)}$ with $k=(\\omega/c)n_1\\sin\\theta_I$, $K=(\\omega/c)\\sqrt{n_1^{2}\\sin^{2}\\theta_I-n_2^{2}}$, the reflection coefficient of magnitude one for both polarisations and the statement that no energy is transmitted into medium 2 on average (part (f)); \u00a79.3.3 printed pp. 388-390 for the amplitude formulas used. Retained scan with OCR noise; the displayed numbers were verified by the local computation in the batch notes."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

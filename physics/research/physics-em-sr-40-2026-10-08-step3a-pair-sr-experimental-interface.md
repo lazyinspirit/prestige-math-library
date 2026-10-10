@@ -1,0 +1,36 @@
+# Step 3a SR experimental-interface scope review — round one
+
+Run: physics-em-sr-40-2026-10-08. Failed gate: 024970f4. Pair: `sr-experimental-interface` / `sr-experimental-interface-examples`, batch 12, orders 231/232. Proposed decision: **sufficient**. This reviews scope, source coverage and prerequisite availability; it is not proof acceptance or source-fidelity certification.
+
+## Missing output and alternate-report search
+
+The canonical `research/physics-em-sr-40-2026-10-08-step3a-pair-sr-experimental-interface.md` and `...-step3a-review-sr-experimental-interface.json` are absent. Searching current research filenames for this pair and Step 3a found its task/prompt and terminal result carriers, but no alternate completed scope report. The terminal result `...-dispatch/alpha-step3a-pair-sr-experimental-interface-cfd91e8b3d7ea22a.result.json` has process exit 0 and `ok: true`, yet its terminal summary has `task_completed: false` and no final-response event; the recorded tail explicitly says no report or decision was produced after sandbox setup errors. Its preliminary scope impression and earlier source notes are not a completed review. The environment-cause narrative is attributed to that worker; this review does not independently certify it.
+
+## Intended scope and current inventory
+
+The controlling Experimental Interface section of `research/plan-special-relativity-track.md` and the SR12/SR12B inventory reserve operational model/data/calibration/uncertainty vocabulary, a primary-report queue, a comparison obligation requiring M20, and worked examples/countermodels. They forbid invented experiments, rather than forbidding experiments after actual primary retrieval. The binding owner direction, Fifth reconciliation, requires completion of the specified comparison, retains all four research families, and identifies the actual five-page Botermann optical Doppler report and its conditional analysis.
+
+| Approved role | Current item and scope evidence |
+|---|---|
+| Operational vocabulary | `def-sr-experiment-interface-vocabulary` explicitly defines finite run configurations, prediction maps with an interpretation obligation, condition-annotated records, calibration maps and declared bounds; probability and empirical realization are excluded. |
+| Primary-report queue | `rem-sr-primary-report-research-queue` retains ether/light, particle lifetime, accelerator and transported-clock families. It identifies the actually supplied optical report while distinguishing unread destinations and RMS/SME context. |
+| Qualified empirical record | `exp-sr-stored-lithium-ion-doppler-time-dilation-2014` records setup, OODR procedure, calibration and beam controls, finite scans/fits, frequency estimates, the reported one-sigma budget, unreported raw-data/covariance limits and conditional interpretation. |
+| Specified model comparison / M20 | `pthm-sr-specified-model-comparison` includes joint calibrated/nuisance feasibility, exact positive-frequency hard-bound propagation, separately defined reported-estimate scale criteria, and a qualified SR versus explicitly specified Gamma=1 comparison. It carries atomic/resonance and apparatus assumptions and does not claim significance, coverage or unique validation of SR. |
+| Worked arithmetic | `ex-sr-operational-record-arithmetic-worked` gives the longitudinal Doppler model, inverse consistency interval, zero-bound singleton and positive-bound interval, with declared illustrative values only. |
+| Countermodel | `cex-sr-bounded-record-does-not-identify-the-parameter` gives the same explicit configuration and two distinct compatible parameter witnesses inline, without using the B example as a prerequisite or claiming empirical inference. |
+
+The current A page has four items and B has two. These adequately realize the approved role; the inventory budgets are ceilings/reservations, not an obligation to fabricate sixteen experiments. No scope omission or pair merger is recommended. The other primary-report families are expressly research destinations in the design and binding direction; leaving them queued does not delete a promised current experiment. Historical M20 notes saying that no report existed are superseded by the current supplied experiment/comparison and the binding direction, not evidence of an unmet current prerequisite.
+
+## Coverage and prerequisites
+
+Current coverage has four source records: Crowell, Carroll, Tong and the Botermann primary report. All have existing retrieval stamps. Its source and canonical harvest accounts for the vocabulary, contextual geometry/Doppler suppliers, four-family queue, current experiment, separate comparison and both illustrative B items. Deferred geometrical material resolves to earlier SR pages; unread historical experiments remain honestly owner/research destinations. Gravitational redshift, RMS/SME translations and prospective apparatus are explicitly outside this flat specified comparison. These dispositions are appropriate to the approved scope and do not masquerade as empirical evidence.
+
+The executed coverage-checklist command on the exact batch-12 coverage returned exit 0: one coverage entry, thirty harvested results, zero errors and zero warnings. This is coverage metadata validation, not a fresh retrieval or statistical/source audit.
+
+All twenty-five distinct direct prerequisite targets (fifty-two edges) resolve as current in-run scaffold suppliers or pinned published mathematics. Every supplier home lies in the appropriate A/B page's declared requires closure; all dependency-role key sets match the declared edges. Current pair metadata agrees with canonical plan orders, companion relation and A requirements `sr-forces-and-continuum` and `sr-light-and-doppler`; those earlier closures contain the required SR03/SR07–09 vocabulary and Doppler suppliers. Imported mathematics hashes used here match their pins. No confirmed absent prerequisite was found. In-run draft proof obligations remain owed in their own later stages; resolution is not a claim they are independently proved or published.
+
+## Decision and limits
+
+Recommend `sufficient`, with reason identifying this report and the above design/coverage/prerequisite evidence. Root must record the official reviewer receipt and canonical report through the native workflow; this isolated review writes neither one, nor an owner proceed record. The current native scope hash is `576c3f51ce5dc1ec5f2180e819dbbab7283b4c5b201e4931a31d2eb583ea94d5`.
+
+This is the first review/repair round for the missing-receipt escalation, of at most two. No scaffold, plan, source stamp, readiness, shared decision, controller or imported mathematics was changed. No detailed proof review, new external reading, empirical reanalysis, gate attempt, proof audit or broad frozen-interface integration was performed. Read current CLAUDE, README, physics instructions, content model and scope brief; inspected current pair statements/scopes, design reservation, binding direction, coverage, plan and dependency metadata. Existing primary-reading claims are attributed to their recorded source evidence, rather than newly claimed here. The initial read-only module hash probe failed because the CLI import treated stdin's `-` as a path; rerunning with `node -e` returned the exact native hash without any record mutation.

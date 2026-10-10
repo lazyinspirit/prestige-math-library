@@ -1,0 +1,495 @@
+[
+  {
+    "order": 321,
+    "id": "em-causal-wave-kernel-prerequisites",
+    "kind": "A",
+    "category": "classical-electromagnetism-mathematics",
+    "library": "mathematics",
+    "title": "Causal kernels, gauge and point fields after wave existence",
+    "companion": "em-causal-wave-kernel-prerequisites-examples",
+    "requires": [
+      "em-wave-equation-prerequisites",
+      "density-separability-and-convolution-in-lp",
+      "fubini-and-change-of-variables",
+      "the-topology-of-euclidean-space"
+    ],
+    "items": [
+      {
+        "id": "def-em-potential-gauge-and-field-conventions",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Scalar-vector potential pairs, gauge transformation, Lorenz divergence and the wave expression",
+        "reference": "definition-contracts.md#def-em-gauge-transformation and definition-contracts.md#def-em-retarded-point-geometry (locally constructed mathematical vocabulary; recorded in the batch notes)",
+        "design_state": "complete-exact-definition-from-literature-conventions; added by this scaffolder as a necessary prerequisite for lem-em-gauge-wave-reachability and lem-em-point-retarded-potential-and-fields",
+        "dependency_level": 0,
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-laplacian-of-a-c2-function",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-directional-and-partial-derivatives"
+        ],
+        "dependency_roles": {
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "def-wave-equation-cauchy-data-and-wave-speed": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $c>0$ and let $\\Omega\\subseteq\\mathbb R^3\\times\\mathbb R$ be open. A **scalar-vector potential pair** of class $C^k$ on $\\Omega$ (for an integer $k\\ge0$) is a pair $(\\varphi,A)$ with $\\varphi:\\Omega\\to\\mathbb R$ and $A:\\Omega\\to\\mathbb R^3$ each of class $C^k$ in the sense of [[def-ck-euclidean-maps-and-diffeomorphisms]] (the components of $A$ componentwise). For such a pair with $k\\ge1$ its **electric field** and **magnetic field** are $$E(\\varphi,A):=-\\nabla\\varphi-\\partial_tA,\\qquad B(\\varphi,A):=\\operatorname{curl}A,$$ where $\\nabla$ is the gradient of [[def-jacobian-matrix-and-gradient]], $\\partial_t$ is the partial derivative of [[def-directional-and-partial-derivatives]] and $\\operatorname{curl}$ and $\\operatorname{div}$ are those of [[def-divergence-and-curl-of-a-c1-vector-field]]; both $E(\\varphi,A)$ and $B(\\varphi,A)$ are maps $\\Omega\\to\\mathbb R^3$ of class $C^{k-1}$. For $k\\ge1$ the **Lorenz divergence** of the pair is the function $$G(\\varphi,A):=\\operatorname{div}A+c^{-2}\\partial_t\\varphi,$$ also of class $C^{k-1}$, and the pair is **in Lorenz gauge** on $\\Omega$ when $G(\\varphi,A)=0$ throughout $\\Omega$. For $k\\ge2$ and a $C^k$ function $\\chi:\\Omega\\to\\mathbb R$ (a **gauge function**) the **gauge transform** of the pair is $$T_{\\chi}(\\varphi,A):=(\\varphi-\\partial_t\\chi,\\ A+\\nabla\\chi),$$ again a potential pair, of class $C^{k-1}$. Finally, for a $C^2$ function $u:\\Omega\\to\\mathbb R$ put $$Wu:=c^{-2}\\partial_t^2u-\\Delta u,$$ with $\\Delta$ the Laplacian of [[def-laplacian-of-a-c2-function]] and $\\partial_t^2$ the second partial derivative in $t$ ([[def-directional-and-partial-derivatives]]); this is the normalization $W=c^{-2}\\Box_c$ of the wave operator of speed $c$ of [[def-wave-equation-cauchy-data-and-wave-speed]]. For a $C^2$ map $U:\\Omega\\to\\mathbb R^m$ with components $U_1,\\dots,U_m$, one writes $WU:=(WU_1,\\dots,WU_m)$ componentwise. Nothing in this definition asserts that a gauge function with prescribed auxiliary data exists, that every potential pair is gauge equivalent to a pair in Lorenz gauge, or that $Wu=g$ is solvable: those are conclusions with their own hypotheses. The signs $-\\nabla\\varphi-\\partial_tA$ and $A+\\nabla\\chi$, the factor $c^{-2}$ in $G$ and the spelling *Lorenz* are part of the convention.",
+        "strategy": "Vocabulary and regularity audit; a definition asserts no existence theorem. (i) If $\\varphi,A$ are $C^k$ then $\\nabla\\varphi$ and the three partial derivatives $\\partial_tA_i$ are $C^{k-1}$ ([[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]], [[def-ck-euclidean-maps-and-diffeomorphisms]]), so $E(\\varphi,A)$ is a $C^{k-1}$ map $\\Omega\\to\\mathbb R^3$ and likewise $B(\\varphi,A)$ and $G(\\varphi,A)$ for $k\\ge1$, since the curl and divergence of a $C^1$ field are computed pointwise from first partial derivatives ([[def-divergence-and-curl-of-a-c1-vector-field]]). (ii) For a $C^k$ gauge function with $k\\ge2$, $\\partial_t\\chi$ and $\\nabla\\chi$ are $C^{k-1}$, so $T_\\chi(\\varphi,A)$ is a pair of class $C^{k-1}$. (iii) The wave expression is the stated normalization: [[def-wave-equation-cauchy-data-and-wave-speed]] fixes $\\Box_c=\\partial_t^2-c^2\\Delta$, so $c^{-2}\\Box_c=c^{-2}\\partial_t^2-\\Delta=W$, and $\\Delta$ is the Laplacian of [[def-laplacian-of-a-c2-function]]. (iv) No solvability is asserted: existence of $\\chi$ with $W\\chi=G$ is supplied later on this page under slab hypotheses, and it carries the Axiom of Countable Choice through the cited wave theorem. The definition is stated on an arbitrary open $\\Omega\\subseteq\\mathbb R^3\\times\\mathbb R$ so that both the full slab and complements of worldlines are instances.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/em/electro.pdf",
+              "locator": "§6.1, printed pp. 134-135: the gauge potential $A^\\mu=(\\phi/c,-A)$, the gauge transformation $A^\\mu\\to A^\\mu+\\partial^\\mu\\chi$, the Lorenz gauge condition $\\partial_\\mu A^\\mu=0$ and the identity $\\Box=(1/c^2)\\partial^2/\\partial t^2-\\nabla^2$; §6.4.3, printed p. 161: the field conventions $E=-\\nabla\\phi-\\partial A/\\partial t$ and $B=\\nabla\\times A$ with $\\kappa=1-\\hat R\\cdot v/c$"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 167-170, equations (7.1) and (7.11)-(7.12): the wave operator normalization $u_{tt}=c^2\\Delta u$ resp. $u_{tt}=\\Delta u+f$ used on this page"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-em-retarded-wave-kernel",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The retarded wave kernel is a distribution supported on the cone, solves the point-wave equation, and convolves to the retarded solution",
+        "reference": "completed-expansion-arguments.md#W3",
+        "design_state": "complete-local-branch-argument",
+        "dependency_level": 3,
+        "deps": [
+          "thm-em-wave-cauchy-kirchhoff",
+          "def-countable-choice",
+          "def-distribution",
+          "def-test-function-space-d-of-an-open-set",
+          "def-test-function-topology",
+          "def-fixed-support-test-function-frechet-space",
+          "def-distributional-derivative",
+          "thm-distributional-differentiation-is-continuous-and-commutes",
+          "def-dirac-delta-and-its-derivatives",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-laplacian-of-a-c2-function",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+          "thm-dominated-convergence",
+          "thm-integral-triangle-inequality",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-monotonicity-of-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-l-one-approximate-identity-on-rn",
+          "cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_roles": {
+          "thm-em-wave-cauchy-kirchhoff": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-distribution": "mathematical-premise",
+          "def-test-function-space-d-of-an-open-set": "mathematical-premise",
+          "def-test-function-topology": "mathematical-premise",
+          "def-fixed-support-test-function-frechet-space": "mathematical-premise",
+          "def-distributional-derivative": "mathematical-premise",
+          "thm-distributional-differentiation-is-continuous-and-commutes": "mathematical-premise",
+          "def-dirac-delta-and-its-derivatives": "mathematical-premise",
+          "def-wave-equation-cauchy-data-and-wave-speed": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "def-polar-surface-measure-on-the-unit-sphere": "mathematical-premise",
+          "thm-polar-coordinates-formula-for-lebesgue-measure": "mathematical-premise",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere": "mathematical-premise",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "cor-euclidean-closed-balls-and-spheres-are-compact": "mathematical-premise",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump": "mathematical-premise",
+          "def-l-one-approximate-identity-on-rn": "mathematical-premise",
+          "cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), used through the sphere and polar integrations below ([[def-countable-choice]], [[def-polar-surface-measure-on-the-unit-sphere]], [[thm-polar-coordinates-formula-for-lebesgue-measure]]). Let $c>0$, write $Q:=\\mathbb R^3\\times\\mathbb R$, $\\mathcal D:=\\mathcal D(Q)$ for the test-function space of [[def-test-function-space-d-of-an-open-set]], and $C:=\\{(y,t)\\in Q:t=|y|/c\\}$ for the retarded cone. Define the functional $K$ on test functions by $$\\langle K,\\psi\\rangle:=\\frac{1}{4\\pi}\\int_{\\mathbb R^3}\\frac{\\psi(y,|y|/c)}{|y|}\\,dy\\qquad(\\psi\\in\\mathcal D).$$ Then: (a) the integral converges absolutely for every $\\psi\\in\\mathcal D$, the functional $K$ is a distribution on $Q$ ([[def-distribution]]), $(K,\\psi)=0$ for every $\\psi$ with $\\operatorname{supp}\\psi\\cap C=\\varnothing$, and for every $(y_0,t_0)\\in C$ and every neighbourhood $U$ of $(y_0,t_0)$ there is $\\psi\\in\\mathcal D$ with $\\operatorname{supp}\\psi\\subseteq U$ and $\\langle K,\\psi\\rangle\\ne0$; consequently $\\operatorname{supp}K=C$. (b) For every $h\\in C_c^\\infty(Q)$ the function $$(K*h)(x,t):=\\int_{\\mathbb R^3}\\frac{h(y,\\,t-|x-y|/c)}{4\\pi\\,|x-y|}\\,dy$$ is well defined (the integral converges absolutely), of class $C^\\infty$ on $Q$, and for every $\\psi\\in\\mathcal D$ $$\\langle K*h,\\psi\\rangle=\\langle h,\\,K\\circledast\\psi\\rangle,\\qquad (K\\circledast\\psi)(y,s):=\\langle K,\\psi(y+\\cdot,s+\\cdot)\\rangle=\\frac{1}{4\\pi}\\int\\frac{\\psi(y+z,s+|z|/c)}{|z|}\\,dz;$$ moreover $W(K*h)=h$ on $Q$ in the classical pointwise sense, where $W=c^{-2}\\partial_t^2-\\Delta$ is the wave expression of [[def-wave-equation-cauchy-data-and-wave-speed]] and [[def-laplacian-of-a-c2-function]]. (c) Read $W=c^{-2}\\partial_t^2-\\Delta$ as the distributional operator built from [[def-distributional-derivative]]; then $WK=\\delta_{(0,0)}$ in the sense of [[def-dirac-delta-and-its-derivatives]], that is, $(WK)(\\psi)=\\psi(0,0)$ for every $\\psi\\in\\mathcal D$. This identifies $K$ as the retarded fundamental solution of $W$; no smoothness of $K$ itself on the cone is asserted, and the advanced fundamental solution is not treated.",
+        "strategy": "Assume $\\mathrm{AC}_\\omega$. (a) Well-definedness and continuity: fix $\\psi\\in\\mathcal D$ with support in a compact set, choose $R>0$ with $\\operatorname{supp}\\psi\\subseteq B_R(0)\\times[-R,R]$ ([[thm-heine-borel-rn]]), and let $M:=\\sup|\\psi|<\\infty$ on the compact support ([[thm-extreme-value-metric]]). Then $|\\langle K,\\psi\\rangle|\\le\\frac{M}{4\\pi}\\int_{B_R}|y|^{-1}dy$ ([[thm-integral-triangle-inequality]], [[thm-monotonicity-of-the-integral]]), and by [[thm-polar-coordinates-formula-for-lebesgue-measure]] applied to the nonnegative Borel function $y\\mapsto|y|^{-1}\\mathbf 1_{B_R}(y)$, with $d\\sigma$ the polar measure of [[def-polar-surface-measure-on-the-unit-sphere]], $\\int_{B_R}|y|^{-1}dy=\\int_0^Rr^{-1}\\sigma(S^2)r^2\\,dr=\\tfrac12\\sigma(S^2)R^2<\\infty$. Hence the integral converges absolutely and the bound is a fixed-support seminorm of [[def-fixed-support-test-function-frechet-space]] on each $\\mathcal D_K$, i.e. $K$ is continuous for the LF topology of [[def-test-function-topology]]: $K\\in\\mathcal D'$. Support: if $\\operatorname{supp}\\psi\\cap C=\\varnothing$ then $\\psi(y,|y|/c)=0$ for every $y\\ne0$, so the integrand vanishes off the null set $\\{0\\}$ and $\\langle K,\\psi\\rangle=0$. Conversely fix $(y_0,t_0)\\in C$ and a neighbourhood $U$. If $y_0\\ne0$, take a nonnegative bump $\\psi$ supported in a small ball inside $U$ about $(y_0,t_0)$ with $\\psi(y_0,t_0)>0$: by continuity $\\psi(\\cdot,|\\cdot|/c)$ is positive on a neighbourhood of $y_0$, a set of positive measure, and $|y|^{-1}$ is bounded there, so $\\langle K,\\psi\\rangle>0$ ([[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]], [[lem-euclidean-balls-have-positive-finite-lebesgue-measure]]). If $y_0=0$, then $t_0=0$ and $\\psi(y,t)=\\rho(|y|)\\eta(t)$ with nonnegative bump factors supported in a small ball about the origin inside $U$ and positive at the origin gives $\\langle K,\\psi\\rangle=\\frac{1}{4\\pi}\\int\\rho(|y|)\\eta(|y|/c)|y|^{-1}dy>0$ by the same positivity argument. Hence no point of $C$ is outside the support and $\\operatorname{supp}K=C$. (b) For fixed $(x,t)$ the defining integral converges absolutely: if $\\operatorname{supp}h\\subseteq\\overline B_\\rho(0)\\times[-\\rho,\\rho]$ and $(y,t-|x-y|/c)\\in\\operatorname{supp}h$, then $y\\in\\overline B_{\\rho+|x|}(0)$; $|h|\\le\\|h\\|_\\infty$ and $1/(4\\pi|x-y|)$ is integrable over that compact ball by the same polar computation, so [[thm-monotonicity-of-the-integral]] gives absolute convergence. Pairing identity: substitute $x=y+z$ in the $x$-integral and $t=s+|z|/c$ in the $t$-integral (two translations of Lebesgue measure, [[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]) and interchange the $y$- and $(z,t)$-integrations with [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]] (the integrand is continuous on the compact product of the supports): $\\langle K*h,\\psi\\rangle=\\frac{1}{4\\pi}\\int h(y,s)\\Bigl[\\int\\frac{\\psi(y+z,s+|z|/c)}{|z|}dz\\Bigr]dyds=\\langle h,K\\circledast\\psi\\rangle$, the inner bracket being exactly the definition of $K$ applied to the test function $(z,u)\\mapsto\\psi(y+z,s+u)$ (its support is compact). Identification with the wave solution: let $h\\in C_c^\\infty(Q)$ and $t_0$ below the time support of $h$. Apply [[thm-em-wave-cauchy-kirchhoff]] with $a=b=0$ and source $h$ on the slab $\\mathbb R^3\\times[t_0,T]$, $T$ above the time support: its solution is $u(x,t)=c^2\\int_{t_0}^tH_{h(\\cdot,v)}(x,t-v)\\,dv$ with $H_\\varphi(x,s)=sM_{cs}\\varphi(x)$, $M_{r}\\varphi(x)=\\frac{1}{4\\pi}\\int_{S^2}\\varphi(x+rn)\\,d\\Omega(n)$. Writing the sphere average as an integral over the sphere and using [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]] on the compact rectangle $[t_0,t]\\times S^2$, the substitution $r=c(t-v)$ with the absolute derivative ([[cor-one-dimensional-change-of-variables-with-absolute-derivative]]) turns the integral into $u(x,t)=\\int_0^{c(t-t_0)}r\\,\\frac{1}{4\\pi}\\int_{S^2}h(x+rn,t-r/c)\\,d\\Omega(n)\\,dr$. The chart surface measure on $S^2$ agrees with the polar measure $\\sigma$ ([[lem-euclidean-chart-measure-agrees-with-polar-surface-measure]], $n=3$), so applying [[thm-polar-coordinates-formula-for-lebesgue-measure]] to the nonnegative Borel function $y\\mapsto|h(x+y,t-|y|/c)|(4\\pi|y|)^{-1}\\mathbf 1_{|y|\\le c(t-t_0)}$ (and passing to positive and negative parts, [[prop-order-and-scalar-rules-for-the-nonnegative-integral]], [[thm-monotonicity-of-the-integral]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]]) gives $u(x,t)=\\int_{|y|\\le c(t-t_0)}\\frac{h(x+y,\\,t-|y|/c)}{4\\pi|y|}\\,dy$; the omitted range $|y|>c(t-t_0)$ has $t-|y|/c<t_0$, where $h=0$. After the reflection $y\\mapsto-y$ this is $(K*h)(x,t)$ on the whole slab. Since for every point $(x_*,t_*)\\in Q$ one can choose a slab $[t_0,T]$ containing it with $t_0$ below and $T$ above the time support of $h$, [[thm-em-wave-cauchy-kirchhoff]] gives $Wu=h$ at that point and $K*h=u$ there; hence $K*h$ (well defined on all of $Q$ and smooth on every slab) is $C^\\infty$ on $Q$ and $W(K*h)=h$ pointwise. (c) Let $\\eta\\in C_c^\\infty(Q)$ be a nonnegative bump with $\\int\\eta=1$ and $\\operatorname{supp}\\eta\\subseteq\\overline B_1(0)$ and let $\\eta_\\varepsilon$ be its mollifier family ([[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]], [[def-l-one-approximate-identity-on-rn]]). By (b), $W(K*\\eta_\\varepsilon)=\\eta_\\varepsilon$ for every $\\varepsilon>0$. For bounded continuous $\\varphi$, $\\langle\\eta_\\varepsilon,\\varphi\\rangle\\to\\varphi(0)$: convolve with the reflected bump and apply [[cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions]] at the origin. Hence for every $\\psi\\in\\mathcal D$, $\\langle K*\\eta_\\varepsilon,\\psi\\rangle=\\langle\\eta_\\varepsilon,K\\circledast\\psi\\rangle\\to(K\\circledast\\psi)(0,0)=\\langle K,\\psi\\rangle$, because $K\\circledast\\psi$ is continuous (its defining integral is dominated by $2\\|\\psi\\|_\\infty/(4\\pi|z|)$ on a compact $z$-set, so [[thm-dominated-convergence]] applies as $(y,s)\\to(0,0)$), i.e. $K*\\eta_\\varepsilon\\to K$ in the weak topology of $\\mathcal D'$. The distributional operator $W=c^{-2}\\partial_t^2-\\Delta$ is a continuous linear map on $\\mathcal D'$ for the weak topology, being a finite linear combination of derivatives, each of which is continuous linear ([[thm-distributional-differentiation-is-continuous-and-commutes]], [[def-distributional-derivative]]); therefore $WK=W(\\lim_\\varepsilon K*\\eta_\\varepsilon)=\\lim_\\varepsilon W(K*\\eta_\\varepsilon)=\\lim_\\varepsilon\\eta_\\varepsilon=\\delta_{(0,0)}$ in $\\mathcal D'$ ([[def-dirac-delta-and-its-derivatives]]). No smoothness of $K$ on the cone is claimed or used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 167-170, equations (7.9)-(7.12), Theorem 7.2 and Corollary 7.3: the Kirchhoff formula, the (4\\pi)^{-1}\\int_{S^2} sphere-average convention and the Duhamel source term (t-s)\\int_{S^2}f(s,x+(t-s)\\omega)d\\sigma_2(\\omega) read in full, including the proof of Theorem 7.2"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto lecture-note textbook, 2026 printing, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.1.1-§9.1.2, printed pp. 281-284, equations (9.1.4) and (9.1.8)-(9.1.12): the 3D wave solution with speed c in the form (4\\pi c^2 t)^{-1}\\int_{S(x,ct)}h\\,d\\sigma and the general source case; Chapter 11, printed pp. 330-339, §11.1-§11.2 and Exercise 11.2.6(e): distributions, the convolution of distributions one factor of which has compact support, and the rule \\partial(f*g)=(\\partial f)*g=f*(\\partial g)"
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/em/electro.pdf",
+              "locator": "§6.1.2, printed pp. 140-142: the retarded Green's function $G_{\\mathrm{ret}}$, the delta-identity (6.36) $t'+R(t')/c=t$ and the retarded-potential formula (6.7)-(6.11), read as the physics-level counterpart of the kernel statement"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-em-gauge-wave-reachability",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Every smooth potential pair on a slab can be put in Lorenz gauge by a wave-equation gauge function, without changing the fields",
+        "reference": "completed-expansion-arguments.md#W6",
+        "design_state": "complete-local-branch-argument",
+        "dependency_level": 3,
+        "deps": [
+          "thm-em-wave-cauchy-kirchhoff",
+          "def-em-potential-gauge-and-field-conventions",
+          "def-countable-choice",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-laplacian-of-a-c2-function",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-directional-and-partial-derivatives",
+          "thm-the-curl-of-a-gradient-vanishes",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-total-derivatives",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules"
+        ],
+        "dependency_roles": {
+          "thm-em-wave-cauchy-kirchhoff": "mathematical-premise",
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "def-wave-equation-cauchy-data-and-wave-speed": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-the-curl-of-a-gradient-vanishes": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-algebra-of-total-derivatives": "mathematical-premise",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), carried through [[thm-em-wave-cauchy-kirchhoff]] and its sphere integrations ([[def-countable-choice]]). Let $c>0$, $t_0<T$, and let $(\\varphi,A)$ be a potential pair of class $C^\\infty$ on the slab $Q:=\\mathbb R^3\\times[t_0,T]$ in the extension sense of [[def-em-potential-gauge-and-field-conventions]]: $\\varphi$ and $A$ are restrictions of $C^\\infty$ functions on $\\mathbb R^3\\times J$ for some open interval $J\\supset[t_0,T]$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Put $G:=G(\\varphi,A)=\\operatorname{div}A+c^{-2}\\partial_t\\varphi$ and $W=c^{-2}\\partial_t^2-\\Delta$. Then: (a) there is a gauge function $\\chi:\\mathbb R^3\\times[t_0,T]\\to\\mathbb R$ of class $C^\\infty$ in the extension sense with $\\chi(\\cdot,t_0)=0$, $\\partial_t\\chi(\\cdot,t_0)=0$ and $W\\chi=G$ on $\\mathbb R^3\\times(t_0,T)$; (b) the gauge-transformed pair $T_\\chi(\\varphi,A)=(\\varphi-\\partial_t\\chi,\\,A+\\nabla\\chi)$ is again of class $C^\\infty$ in the extension sense and its fields are unchanged: $$E(T_\\chi(\\varphi,A))=E(\\varphi,A),\\qquad B(T_\\chi(\\varphi,A))=B(\\varphi,A)\\qquad\\text{on }Q;$$ (c) the transformed pair is in Lorenz gauge: $G(T_\\chi(\\varphi,A))=G-W\\chi=0$ on $\\mathbb R^3\\times(t_0,T)$; (d) if $\\chi_1,\\chi_2$ are of class $C^2$ on $Q$ in the extension sense and $W\\chi_1=W\\chi_2=G$ on $\\mathbb R^3\\times(t_0,T)$, then $W(\\chi_1-\\chi_2)=0$ on $\\mathbb R^3\\times(t_0,T)$. Nothing is asserted about prescribed boundary values of $\\chi$ on a bounded spatial domain, about spatial decay of $\\chi$, or about Lorenz gauge fixing for a cavity problem with prescribed boundary data; the older global gauge promise on bounded domains is outside this result.",
+        "strategy": "Assume $\\mathrm{AC}_\\omega$. (a) $G=\\operatorname{div}A+c^{-2}\\partial_t\\varphi$ is $C^\\infty$ on $Q$ in the extension sense, being a sum of the divergence of a smooth field and a partial derivative of a smooth function ([[def-em-potential-gauge-and-field-conventions]], [[def-divergence-and-curl-of-a-c1-vector-field]], [[def-directional-and-partial-derivatives]]). Apply [[thm-em-wave-cauchy-kirchhoff]] with $a=b=0$ and source $h=G$; it supplies a function $\\chi$ of class $C^\\infty$ on $Q$ in the extension sense with $W\\chi=G$ on $\\mathbb R^3\\times(t_0,T)$ and $\\chi(\\cdot,t_0)=0$, $\\partial_t\\chi(\\cdot,t_0)=0$. (b) $\\partial_t\\chi$ and $\\nabla\\chi$ are $C^\\infty$, so $T_\\chi(\\varphi,A)$ is a $C^\\infty$ pair in the extension sense ([[def-em-potential-gauge-and-field-conventions]]; sums and products of smooth functions, [[thm-algebra-of-derivatives]] and [[def-ck-euclidean-maps-and-diffeomorphisms]] componentwise). Magnetic field: $B(T_\\chi(\\varphi,A))=\\operatorname{curl}(A+\\nabla\\chi)=\\operatorname{curl}A+\\operatorname{curl}\\nabla\\chi=\\operatorname{curl}A$, using linearity of the curl ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]) and $\\operatorname{curl}\\nabla\\chi=0$ for the $C^2$ (indeed $C^\\infty$) function $\\chi$ ([[thm-the-curl-of-a-gradient-vanishes]]). Electric field: $-\\nabla(\\varphi-\\partial_t\\chi)-\\partial_t(A+\\nabla\\chi)=-\\nabla\\varphi-\\partial_tA+(\\nabla\\partial_t\\chi-\\partial_t\\nabla\\chi)$ componentwise, and the bracket vanishes by equality of mixed second partials of the $C^\\infty$ function $\\chi$ ([[thm-clairaut-schwarz-mixed-partials]]); the componentwise linearity of $\\nabla$ and $\\partial_t$ is [[thm-algebra-of-total-derivatives]] and [[thm-algebra-of-derivatives]]. Hence $E(T_\\chi(\\varphi,A))=E(\\varphi,A)$ on $Q$. (c) Direct expansion using linearity and $\\operatorname{div}\\nabla\\chi=\\Delta\\chi$ ([[def-laplacian-of-a-c2-function]], [[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]): $$G(T_\\chi(\\varphi,A))=\\operatorname{div}A+\\operatorname{div}\\nabla\\chi+c^{-2}\\partial_t\\varphi-c^{-2}\\partial_t^2\\chi=G+\\Delta\\chi-c^{-2}\\partial_t^2\\chi=G-W\\chi=0$$ on $\\mathbb R^3\\times(t_0,T)$. (d) $W=c^{-2}\\partial_t^2-\\Delta$ is linear on $C^2$ functions: each second partial of $\\chi_1-\\chi_2$ is the difference of the second partials (one-variable linearity applied along coordinate lines, [[def-directional-and-partial-derivatives]], [[thm-algebra-of-derivatives]]), so $W(\\chi_1-\\chi_2)=W\\chi_1-W\\chi_2=G-G=0$. No boundary or decay hypothesis is used; the construction is the free-space wave solution of [[thm-em-wave-cauchy-kirchhoff]], and it inherits that theorem's countable-choice premise.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/em/electro.pdf",
+              "locator": "§6.1, printed pp. 134-135: the gauge transformation $A^\\mu\\to A^\\mu+\\partial^\\mu\\chi$, the claim that the Lorenz condition $\\partial_\\mu A^\\mu=0$ can always be arranged by a gauge function solving $\\Box\\chi=f$, with the reduction $\\partial_\\mu A'^\\mu=\\partial_\\mu A^\\mu+\\Box\\chi$ and its use in (6.4)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 167-170, Corollary 7.3 and (7.11)-(7.12): existence and smoothness of the solution of $u_{tt}=c^2\\Delta u+f$ with prescribed Cauchy data on a slab, the supplier of the gauge function $\\chi$ via $W\\chi=G$"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-em-smooth-forced-maxwell-cauchy-system",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The smooth forced Maxwell Cauchy system on a slab: existence, uniqueness, Gauss constraints and the c-cone of dependence",
+        "reference": "completed-expansion-arguments.md#W7",
+        "design_state": "complete-exact-conditional-research-argument",
+        "dependency_level": 3,
+        "deps": [
+          "thm-em-wave-cauchy-kirchhoff",
+          "def-countable-choice",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-laplacian-of-a-c2-function",
+          "def-wave-equation-cauchy-data-and-wave-speed",
+          "def-forward-and-backward-wave-cones-domain-of-dependence-and-influence",
+          "def-jacobian-matrix-and-gradient",
+          "def-directional-and-partial-derivatives",
+          "thm-the-curl-of-a-gradient-vanishes",
+          "thm-the-divergence-of-a-curl-vanishes",
+          "cor-the-curl-of-a-curl-of-a-c2-field",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-total-derivatives"
+        ],
+        "dependency_roles": {
+          "thm-em-wave-cauchy-kirchhoff": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "def-wave-equation-cauchy-data-and-wave-speed": "mathematical-premise",
+          "def-forward-and-backward-wave-cones-domain-of-dependence-and-influence": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-the-curl-of-a-gradient-vanishes": "mathematical-premise",
+          "thm-the-divergence-of-a-curl-vanishes": "mathematical-premise",
+          "cor-the-curl-of-a-curl-of-a-c2-field": "mathematical-premise",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-algebra-of-total-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) through [[thm-em-wave-cauchy-kirchhoff]] ([[def-countable-choice]]). Let $c,\\varepsilon,\\mu>0$ with $\\varepsilon\\mu c^2=1$, let $t_0<T$, and let $\\rho:\\mathbb R^3\\times[t_0,T]\\to\\mathbb R$ and $J:\\mathbb R^3\\times[t_0,T]\\to\\mathbb R^3$ be of class $C^\\infty$ in the extension sense (restrictions of $C^\\infty$ functions on $\\mathbb R^3\\times J$ for some open $J\\supset[t_0,T]$, [[def-ck-euclidean-maps-and-diffeomorphisms]]) satisfying the continuity equation $$\\partial_t\\rho+\\operatorname{div}J=0\\qquad\\text{on }\\mathbb R^3\\times(t_0,T).$$ Let $E_0,B_0\\in C^\\infty(\\mathbb R^3;\\mathbb R^3)$ satisfy $\\operatorname{div}E_0=\\rho(\\cdot,t_0)/\\varepsilon$ and $\\operatorname{div}B_0=0$ on $\\mathbb R^3$. Then: (a) the first-order system $$\\partial_tE=c^2\\operatorname{curl}B-\\frac{J}{\\varepsilon},\\qquad \\partial_tB=-\\operatorname{curl}E\\qquad\\text{on }\\mathbb R^3\\times(t_0,T),$$ with $E(\\cdot,t_0)=E_0$, $B(\\cdot,t_0)=B_0$, has exactly one solution $(E,B)$ with $E,B$ of class $C^\\infty$ on $\\mathbb R^3\\times[t_0,T]$ in the extension sense; (b) this solution obeys both Gauss laws on $\\mathbb R^3\\times(t_0,T)$: $\\operatorname{div}E=\\rho/\\varepsilon$ and $\\operatorname{div}B=0$; (c) (domain of dependence) if $(\\tilde\\rho,\\tilde J,\\tilde E_0,\\tilde B_0)$ is second data of the same kind and, for some $x_*\\in\\mathbb R^3$ and $t_*\\in(t_0,T]$, one has $\\tilde E_0=E_0$, $\\tilde B_0=B_0$ on the closed base ball $\\overline B_{c(t_*-t_0)}(x_*)$ and $\\tilde\\rho=\\rho$, $\\tilde J=J$ on the closed backward cone $K(x_*,t_*)=\\{(y,v):|y-x_*|\\le c(t_*-v),\\ t_0\\le v\\le t_*\\}$ ([[def-forward-and-backward-wave-cones-domain-of-dependence-and-influence]]), then $\\tilde E(x_*,t_*)=E(x_*,t_*)$ and $\\tilde B(x_*,t_*)=B(x_*,t_*)$. This is a statement about the stipulated smooth system with coefficients and sources given; no physical identification of $(E,B)$ with an electromagnetic field, no finite-domain boundary problem and no decay at spatial infinity is asserted.",
+        "strategy": "Assume $\\mathrm{AC}_\\omega$. Throughout, $\\operatorname{curl}$, $\\operatorname{div}$ and the wave expression $W=c^{-2}\\partial_t^2-\\Delta$ are those of [[def-divergence-and-curl-of-a-c1-vector-field]], [[def-laplacian-of-a-c2-function]] and [[def-wave-equation-cauchy-data-and-wave-speed]], applied componentwise to vector fields; mixed second partials of $C^\\infty$ functions commute ([[thm-clairaut-schwarz-mixed-partials]]), and divergence and curl are linear ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]); $\\operatorname{div}\\operatorname{curl}Z=0$ ([[thm-the-divergence-of-a-curl-vanishes]]) and $\\operatorname{curl}\\operatorname{curl}Z=\\nabla\\operatorname{div}Z-\\Delta Z$ ([[cor-the-curl-of-a-curl-of-a-c2-field]]). Note $1/(\\varepsilon c^2)=\\mu$ and $c^2\\mu=1/\\varepsilon$ by $\\varepsilon\\mu c^2=1$. (1) Existence. Define $E$ componentwise as the solution of [[thm-em-wave-cauchy-kirchhoff]] for the source $-\\nabla\\rho/\\varepsilon-\\mu\\partial_tJ$ with data $E(\\cdot,t_0)=E_0$, $\\partial_tE(\\cdot,t_0)=c^2\\operatorname{curl}B_0-J(\\cdot,t_0)/\\varepsilon$, and $B$ componentwise for the source $\\mu\\operatorname{curl}J$ with data $B(\\cdot,t_0)=B_0$, $\\partial_tB(\\cdot,t_0)=-\\operatorname{curl}E_0$. All sources and data are smooth in the extension sense, so W2 supplies $E,B\\in C^\\infty$ on the slab in the extension sense. (2) The first-order equations hold. Put $R:=E_t-c^2\\operatorname{curl}B+J/\\varepsilon$ and $Q:=B_t+\\operatorname{curl}E$. Since $\\operatorname{curl}$ commutes with $W$ on $C^\\infty$ fields, $W(E_t)=(WE)_t=-\\nabla\\rho_t/\\varepsilon-\\mu J_{tt}$ and $c^2W(\\operatorname{curl}B)=c^2\\mu\\operatorname{curl}\\operatorname{curl}J=c^2\\mu(\\nabla\\operatorname{div}J-\\Delta J)$ and $W(J/\\varepsilon)=c^{-2}J_{tt}/\\varepsilon-\\Delta J/\\varepsilon=\\mu J_{tt}-c^2\\mu\\Delta J$; adding gives $WR=-\\nabla\\rho_t/\\varepsilon-c^2\\mu\\nabla\\operatorname{div}J=-\\nabla(\\rho_t+\\operatorname{div}J)/\\varepsilon=0$ by the continuity equation. Similarly $WQ=(WB)_t+\\operatorname{curl}(WE)=\\mu\\operatorname{curl}J_t+\\operatorname{curl}(-\\nabla\\rho/\\varepsilon-\\mu J_t)=-\\mu\\operatorname{curl}J_t+\\mu\\operatorname{curl}J_t=0$ using $\\operatorname{curl}\\nabla\\rho=0$ ([[thm-the-curl-of-a-gradient-vanishes]]) and $\\operatorname{curl}(J_t)=(\\operatorname{curl}J)_t$. At $t_0$: $R(t_0)=E_t(t_0)-c^2\\operatorname{curl}B_0+J(\\cdot,t_0)/\\varepsilon=0$ and $Q(t_0)=B_t(t_0)+\\operatorname{curl}E_0=0$ by the prescribed data. Moreover $R_t(t_0)=c^2\\nabla(\\operatorname{div}E_0-\\rho(\\cdot,t_0)/\\varepsilon)+(J_t(\\cdot,t_0)/\\varepsilon-c^2\\mu J_t(\\cdot,t_0))=0$ and $Q_t(t_0)=c^2\\nabla\\operatorname{div}B_0+(c^2\\mu-1/\\varepsilon)\\operatorname{curl}J(\\cdot,t_0)=0$, the computations using $E_{tt}(t_0)=c^2\\Delta E_0+c^2(WE)(t_0)$, $B_{tt}(t_0)=c^2\\Delta B_0+c^2\\mu\\operatorname{curl}J(\\cdot,t_0)$, $E_t(t_0)=c^2\\operatorname{curl}B_0-J(\\cdot,t_0)/\\varepsilon$, $B_t(t_0)=-\\operatorname{curl}E_0$ and the constraint and normalization identities. Hence $R,Q$ are smooth solutions of $W(\\cdot)=0$ with zero data, and the uniqueness clause of [[thm-em-wave-cauchy-kirchhoff]] gives $R=Q=0$ on the slab, i.e. $E_t=c^2\\operatorname{curl}B-J/\\varepsilon$ and $B_t=-\\operatorname{curl}E$. (3) Constraints. $D:=\\operatorname{div}E-\\rho/\\varepsilon$ satisfies $WD=\\operatorname{div}(WE)-(c^{-2}\\rho_{tt}-\\Delta\\rho)/\\varepsilon=-\\Delta\\rho/\\varepsilon-\\mu\\operatorname{div}J_t-(c^{-2}\\rho_{tt}-\\Delta\\rho)/\\varepsilon=-\\mu(\\operatorname{div}J_t+\\rho_{tt})=0$, the last equality being the time derivative of the continuity equation; $D(t_0)=\\operatorname{div}E_0-\\rho(\\cdot,t_0)/\\varepsilon=0$ and $D_t(t_0)=\\operatorname{div}(c^2\\operatorname{curl}B_0-J(\\cdot,t_0)/\\varepsilon)-\\rho_t(\\cdot,t_0)/\\varepsilon=-(\\operatorname{div}J+\\rho_t)(\\cdot,t_0)/\\varepsilon=0$ (using $\\operatorname{div}\\operatorname{curl}=0$). W2 uniqueness gives $D=0$, i.e. $\\operatorname{div}E=\\rho/\\varepsilon$. Likewise $W(\\operatorname{div}B)=\\operatorname{div}(WB)=\\mu\\operatorname{div}\\operatorname{curl}J=0$, $\\operatorname{div}B(t_0)=0$ and $\\partial_t\\operatorname{div}B(t_0)=-\\operatorname{div}\\operatorname{curl}E_0=0$, so $\\operatorname{div}B=0$. (4) Uniqueness and cones. If $(\\tilde E,\\tilde B)$ is any second $C^\\infty$ solution of the system with the same data, then by (3) applied to it, $\\operatorname{div}\\tilde E=\\rho/\\varepsilon$ and $\\operatorname{div}\\tilde B=0$; differentiating $\\tilde B_t=-\\operatorname{curl}\\tilde E$ and using $\\operatorname{curl}\\operatorname{curl}=\\nabla\\operatorname{div}-\\Delta$ gives $c^{-2}\\tilde E_{tt}=-\\operatorname{curl}\\operatorname{curl}\\tilde E-\\mu\\tilde J_t$, hence $W\\tilde E=-\\nabla\\operatorname{div}\\tilde E-\\mu J_t=-\\nabla\\rho/\\varepsilon-\\mu J_t$, and similarly $W\\tilde B=\\mu\\operatorname{curl}J$; the initial data and their time derivatives coincide with the data used to build $E,B$ (the derivatives are determined by the system and the data, e.g. $\\tilde E_t(\\cdot,t_0)=c^2\\operatorname{curl}B_0-J(\\cdot,t_0)/\\varepsilon$). By the uniqueness clause of [[thm-em-wave-cauchy-kirchhoff]] componentwise, $\\tilde E=E$ and $\\tilde B=B$. For (c), the difference fields solve the same wave problems with data agreeing on the closed base ball and sources agreeing on the closed cone (the sources are the local differential expressions $-\\nabla\\rho/\\varepsilon-\\mu J_t$ and $\\mu\\operatorname{curl}J$, which agree on the open cone because $\\rho,J$ agree there, and the initial time-derivative data agree because $J(\\cdot,t_0)$ agrees on the base ball, which lies in $K$); the cone clause (c) of [[thm-em-wave-cauchy-kirchhoff]] applied componentwise gives $\\tilde E(x_*,t_*)=E(x_*,t_*)$, $\\tilde B(x_*,t_*)=B(x_*,t_*)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 167-173, Corollary 7.3, (7.11)-(7.12) and Problem 7.9: the Duhamel solution and the reduction of the vacuum Maxwell system $B_t=-\\operatorname{curl}E$, $\\mu_0\\varepsilon_0E_t=\\operatorname{curl}B$, $\\operatorname{div}E=\\operatorname{div}B=0$ to component wave equations with $c=(\\mu_0\\varepsilon_0)^{-1/2}$ via the hint that the components of $E$ and $B$ satisfy the wave equation"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto lecture-note textbook, 2026 printing, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.1.1-§9.1.2, printed pp. 281-284, equations (9.1.1)-(9.1.12): the Cauchy problem for $u_{tt}-c^2\\Delta u=f$ with general data and the representation of the inhomogeneous solution; §9.2.1-§9.2.3, printed pp. 289-292, equations (9.2.1)-(9.2.5) and Proposition 9.2.1: the local energy identity and the domain-of-dependence argument for the wave equation"
+            },
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/em/electro.pdf",
+              "locator": "§6.1.3, printed pp. 142-143: the conservation-law mechanism $\\partial_\\mu J^\\mu=0\\Rightarrow\\partial_\\mu A^\\mu=0$ for the retarded potential, the physics-level counterpart of the constraint propagation used in (3)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-em-point-retarded-potential-and-fields",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Retarded Liénard-Wiechert potentials and fields of a uniformly subluminal smooth point source",
+        "reference": "completed-expansion-arguments.md#R2",
+        "design_state": "complete-local-branch-argument",
+        "dependency_level": 4,
+        "deps": [
+          "lem-em-global-retarded-root",
+          "lem-em-retarded-wave-kernel",
+          "lem-em-point-current-continuity",
+          "def-em-potential-gauge-and-field-conventions",
+          "def-countable-choice",
+          "def-vector-valued-derivative-and-integral",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-clairaut-schwarz-mixed-partials",
+          "def-jacobian-matrix-and-gradient",
+          "def-directional-and-partial-derivatives",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-euclidean-inner-product",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-monotonicity-of-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "def-distribution",
+          "def-test-function-topology"
+        ],
+        "dependency_roles": {
+          "lem-em-global-retarded-root": "mathematical-premise",
+          "lem-em-retarded-wave-kernel": "mathematical-premise",
+          "lem-em-point-current-continuity": "mathematical-premise",
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules": "mathematical-premise",
+          "cor-c-one-change-of-variables-for-l-one-functions": "mathematical-premise",
+          "def-regular-distribution-from-a-locally-integrable-function": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness": "mathematical-premise",
+          "thm-polar-coordinates-formula-for-lebesgue-measure": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel": "mathematical-premise",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets": "mathematical-premise",
+          "def-distribution": "mathematical-premise",
+          "def-test-function-topology": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $c>0$, $q\\in\\mathbb R$, $\\varepsilon_0>0$, put $\\mu_0:=(c^2\\varepsilon_0)^{-1}$ and $C:=q/(4\\pi\\varepsilon_0)$, and let $z:\\mathbb R\\to\\mathbb R^3$ be of class $C^3$ with $|z'(s)|\\le v_*<c$ for every $s\\in\\mathbb R$ ([[def-vector-valued-derivative-and-integral]]). Write $\\Omega:=\\mathbb R^3\\times\\mathbb R$ and $\\Gamma:=\\{(z(s),s):s\\in\\mathbb R\\}\\subseteq\\Omega$. For $(x,t)\\in\\Omega\\setminus\\Gamma$ let $s=s(x,t)$ be the unique retarded root of [[lem-em-global-retarded-root]] with $t-s=|x-z(s)|/c$, and put $R:=x-z(s)$, $r:=|R|>0$, $n:=R/r$, $\\beta:=z'(s)/c$, $\\kappa:=1-n\\cdot\\beta$, $N:=n\\cdot\\beta$, $D:=\\kappa r$, $\\dot\\beta:=z''(s)/c$ and $d:=n\\cdot\\dot\\beta$ ([[def-euclidean-inner-product]]). Then: (a) the distributions $\\rho,J\\in\\mathcal D'(\\Omega)$ of [[lem-em-point-current-continuity]], $$\\langle\\rho,\\psi\\rangle=q\\int_{\\mathbb R}\\psi(z(s),s)\\,ds,\\qquad \\langle J,\\psi\\rangle=q\\int_{\\mathbb R}z'(s)\\,\\psi(z(s),s)\\,ds,$$ satisfy $\\partial_t\\rho+\\operatorname{div}J=0$. (b) Let $K$ be the retarded wave kernel of [[lem-em-retarded-wave-kernel]] and, for $\\psi\\in\\mathcal D(\\Omega)$ and $\\tau\\in\\mathbb R$, $y\\in\\mathbb R^3$, put $(K\\circledast\\psi)(y,\\tau):=\\langle K,\\psi(y+\\cdot,\\tau+\\cdot)\\rangle$. Define the retarded-history pairings by the explicit integrals\n$$\\langle\\Phi,\\psi\\rangle:=\\frac{q}{\\varepsilon_0}\\int_{\\mathbb R}(K\\circledast\\psi)(z(s),s)\\,ds,\\qquad\n\\langle\\Upsilon,\\psi\\rangle:=\\mu_0q\\int_{\\mathbb R}z'(s)(K\\circledast\\psi)(z(s),s)\\,ds.$$\nHere the second integral is componentwise. The notation $\\varepsilon_0^{-1}\\langle\\rho,K\\circledast\\psi\\rangle$ and $\\mu_0\\langle J,K\\circledast\\psi\\rangle$, if used, means precisely these explicit history integrals, rather than ordinary distribution action on a compactly supported test. These pairings define distributions on $\\Omega$, are finite for every $\\psi\\in\\mathcal D(\\Omega)$ and satisfy the exact retarded-convolution identities $$\\langle\\Phi,\\psi\\rangle=\\int_{\\Omega\\setminus\\Gamma}\\frac{C\\,\\psi(x,t)}{\\kappa(x,t)\\,r(x,t)}\\,dx\\,dt,\\qquad \\langle\\Upsilon,\\psi\\rangle=\\int_{\\Omega\\setminus\\Gamma}\\frac{\\beta(x,t)}{c}\\,\\frac{C\\,\\psi(x,t)}{\\kappa(x,t)\\,r(x,t)}\\,dx\\,dt$$ (for $\\Upsilon$, componentwise against $\\psi\\in\\mathcal D(\\Omega)$; both integrands are continuous on the open set $\\Omega\\setminus\\Gamma$ and integrable there against $\\psi$). Consequently the potentials are the $C^2$ functions $$\\varphi:=\\frac{C}{D}=\\frac{C}{\\kappa r}:\\Omega\\setminus\\Gamma\\to\\mathbb R,\\qquad A:=\\frac{\\beta\\,\\varphi}{c}=\\frac{\\beta\\,C}{c\\,\\kappa r}:\\Omega\\setminus\\Gamma\\to\\mathbb R^3$$ off the worldline, and the zero extensions $\\widetilde\\varphi,\\widetilde A$ on $\\Gamma$ belong to $L^1_{\\mathrm{loc}}(\\Omega)$; $\\Phi$ is the regular distribution of $\\widetilde\\varphi$, and $\\Upsilon$ that of $\\widetilde A$ ([[def-regular-distribution-from-a-locally-integrable-function|regular distribution]]). (c) Let $E:=-\\nabla\\varphi-\\partial_tA$ and $B:=\\operatorname{curl}A$ on $\\Omega\\setminus\\Gamma$ ([[def-em-potential-gauge-and-field-conventions]]). Then, off the worldline, $$E=C\\left[\\frac{(1-|\\beta|^2)(n-\\beta)}{\\kappa^3r^2}+\\frac{n\\times\\bigl((n-\\beta)\\times\\dot\\beta\\bigr)}{c\\,\\kappa^3r}\\right],\\qquad B=\\frac{n\\times E}{c}.$$ The fields $E,B$ are $C^1$ off the worldline. More generally, if $z\\in C^k$, $k\\ge3$, the retarded root is $C^k$, the potentials are $C^{k-1}$ and the fields are $C^{k-2}$ there; if $z\\in C^\\infty$, all these objects are smooth off the worldline. The result is a mathematical model computation for the stipulated uniformly subluminal smooth worldline and the retarded choice; no self-force law, no radiation-reaction postulate and no physical Maxwell coupling is asserted or proved.",
+        "strategy": "Assume $\\mathrm{AC}_\\omega$, as stipulated in the statement. (a) Apply [[lem-em-point-current-continuity]] to the $C^1$ curve $z$ on $\\mathbb R$; $C^3$ is a special case, and its all-time graph is proper because a compact ambient set bounds the time coordinate.\n(b) Fix a compact observation set $Q\\subseteq\\{(x,t):|x|\\le M,\\ t_0\\le t\\le t_1\\}$, and tests supported in $Q$. If $g(s,y):=(z(s)+y,s+|y|/c)\\in Q$, then $s\\le t_1$. For $s\\le0$, using $|z(s)|\\le Z+v_*|s|$ with $Z:=|z(0)|$ gives\n$$t_0\\le s+|y|/c=s+|x-z(s)|/c\\le -(1-v_*/c)|s|+(M+Z)/c.$$\nThus $s\\ge-S$, where $S:=\\max\\{0,(M+Z-ct_0)/(c-v_*)\\}$. If $[-S,t_1]$ is empty no contributing point exists. Otherwise set $H:=\\max(S,|t_1|)$ and $L:=1+M+Z+v_*H$. Every contributing $y$ has $|y|\\le M+|z(s)|<L$. Consequently the pulled-back support lies in the bounded closed cylinder $[-S,t_1]\\times\\overline B_L$, possibly approaching $y=0$; it need not be compact inside $U:=\\mathbb R\\times(\\mathbb R^3\\setminus\\{0\\})$.\nOn that cylinder, $|\\psi(g(s,y))|/(4\\pi|y|)\\le\\|\\psi\\|_\\infty/(4\\pi|y|)$. The polar formula [[thm-polar-coordinates-formula-for-lebesgue-measure]] gives $\\int_{B_L}|y|^{-1}dy=\\sigma(S^2)L^2/2<\\infty$. Borel product identification [[thm-borel-products-of-euclidean-spaces-are-euclidean-borel]] and the Euclidean/product-measure bridge [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]] allow [[thm-tonelli-theorem-for-sigma-finite-product-spaces]] for the absolute value. Then [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]] identifies the double integral with the explicit iterated history integral. In particular, with $T:=\\max(0,t_1+S)$ and $M_Q:=T\\sigma(S^2)L^2/(8\\pi)$,\n$$|\\langle\\Phi,\\psi\\rangle|\\le |q|M_Q\\|\\psi\\|_\\infty/\\varepsilon_0,\\qquad\n|\\langle\\Upsilon_j,\\psi\\rangle|\\le\\mu_0|q|v_*M_Q\\|\\psi\\|_\\infty.$$\nThe seminorm $\\psi\\mapsto|\\langle\\Phi,\\psi\\rangle|$ restricts continuously to each fixed-support test space by these bounds, and likewise for each component of $\\Upsilon$. Thus [[def-test-function-topology]] and [[def-distribution]] prove distribution continuity directly; no action of $\\rho$ or $J$ on a noncompact test is assumed.\nThe graph $\\Gamma$ is closed: convergence of $(z(s_j),s_j)$ forces $s_j\\to t$ and $z(s_j)\\to z(t)$. Thus $V:=\\Omega\\setminus\\Gamma$ is open. On $U$, $g$ is $C^1$, and in coordinate order $(s,y_1,y_2,y_3)$ its determinant is $-\\kappa(s,y)$, with $\\kappa=1-(y/|y|)\\cdot z'(s)/c\\ge1-v_*/c>0$. If $g(s,y)=g(s',y')$, then $|s-s'|=||y'|-|y||/c\\le|z(s')-z(s)|/c\\le(v_*/c)|s-s'|$, so $s=s'$ and $y=y'$. No image point belongs to $\\Gamma$: otherwise $|y|=|z(t)-z(s)|\\le v_*(t-s)=v_*|y|/c$, contradicting $y\\ne0$. Conversely every point of $V$ has the unique retarded root supplied by [[lem-em-global-retarded-root]], giving inverse $(x,t)\\mapsto(s(x,t),x-z(s(x,t)))$. Its $C^1$ regularity follows from that supplier's $C^3$ branch on the open domain $x\\ne z(t)$, using this consumer's $C^3$ hypothesis. No exclusion of the entire spatial trajectory is imposed. Therefore $g:U\\to V$ is a $C^1$ diffeomorphism.\nFor any compact $Q\\subseteq\\Omega$, the nonnegative Borel substitution lemma [[lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness]] applied to $1_Q/(\\kappa r)$ on $V$ yields\n$$\\int_V\\frac{1_Q}{\\kappa r}\\,dx\\,dt=\\int_U\\frac{1_Q(g(s,y))}{|y|}\\,ds\\,dy<\\infty.$$\nThe same bound holds for $|\\beta|/(c\\kappa r)$ since $|\\beta|\\le v_*/c$. Extend the potentials by zero on the closed graph. These extensions are Borel and locally integrable on all of $\\Omega$. Applying the same Borel substitution first to the absolute value of $\\psi/(\\kappa r)$ establishes its $L^1$ integrability on $V$, and [[cor-c-one-change-of-variables-for-l-one-functions]] then gives the scalar pairing formula in the statement. Apply it componentwise to $z'(s)$-weighted data for the vector formula. Its prefactor is\n$$\\frac{\\mu_0qz'(s)}{4\\pi\\kappa r}=\\frac{\\mu_0qc\\beta}{4\\pi\\kappa r}=\\frac{\\mu_0c\\varepsilon_0 C\\beta}{\\kappa r}=\\frac{C\\beta}{c\\kappa r},$$\nsince $\\mu_0c^2\\varepsilon_0=1$. The regular-distribution identities mean the zero extensions, as in [[def-regular-distribution-from-a-locally-integrable-function]]; tests may be nonzero on $\\Gamma$. The retarded root is $C^3$ on $V$, and $r,n$ are $C^3$ while $\\beta,\\kappa,D$ are $C^2$ with $D>0$, so the potentials are $C^2$. The same composition argument gives the matching $C^k$ and $C^\\infty$ branches.\n(c) Derivatives of the retarded data: from $t-s=r/c$ and R1, $\\nabla s=-n/(c\\kappa)$, $s_t=1/\\kappa$, hence $\\nabla r=n/\\kappa$ and $r_t=-cN/\\kappa$ (chain rule, [[thm-chain-rule-for-total-derivatives]]); $R=x-z(s)$ gives $\\partial_iR=e_i+\\beta\\,n_i/\\kappa$ and $\\beta=z'(s)/c$ gives $\\partial_i\\beta=-\\dot\\beta\\,n_i/(c\\kappa)$, while $\\beta_t=\\dot\\beta/\\kappa$ (componentwise chain rule and [[thm-algebra-of-derivatives]], [[def-jacobian-matrix-and-gradient]]). Since $D=r-R\\cdot\\beta$, the product rules for the Euclidean pairing give $D_t=r_t-R_t\\cdot\\beta-R\\cdot\\beta_t=(c(|\\beta|^2-N)-rd)/\\kappa$ and $\\partial_iD=\\partial_ir-(\\partial_iR)\\cdot\\beta-R\\cdot\\partial_i\\beta$, hence $\\nabla D=((1-|\\beta|^2+rd/c)/\\kappa)\\,n-\\beta$; the required product rules are the coordinatewise one-variable product rule ([[thm-algebra-of-derivatives]], [[def-directional-and-partial-derivatives]], [[def-euclidean-inner-product]]). Then $\\varphi=C/D$ gives $\\nabla\\varphi=-C\\nabla D/D^2$, $\\varphi_t=-CD_t/D^2$, and $A=\\beta\\varphi/c$ gives $A_t=(\\beta_t\\varphi+\\beta\\varphi_t)/c=\\dot\\beta C/(c\\kappa D)-\\beta CD_t/(cD^2)$, so $$E=-\\nabla\\varphi-A_t=\\frac{C}{D^2}\\Bigl(\\nabla D+\\frac{\\beta D_t}{c}\\Bigr)-\\frac{C\\dot\\beta}{c\\kappa D}.$$ The bracket equals $\\frac{(1-|\\beta|^2)(n-\\beta)+(rd/c)(n-\\beta)}{\\kappa}$ (substituting the two displayed identities and $\\kappa=1-N$), and writing the second term over the common denominator $\\kappa^3r^2$ replaces its numerator by $-r\\kappa\\dot\\beta/c$, giving $E=\\frac{C}{\\kappa^3r^2}\\bigl[(1-|\\beta|^2)(n-\\beta)+\\frac{r}{c}\\bigl(d(n-\\beta)-\\kappa\\dot\\beta\\bigr)\\bigr]$; the coordinate triple-product identity $n\\times((n-\\beta)\\times\\dot\\beta)=d(n-\\beta)-\\kappa\\dot\\beta$ (expand both sides with [[def-cross-product-in-r3]], [[def-euclidean-inner-product]], [[lem-cross-product-is-bilinear-alternating-and-orthogonal]]) yields the displayed $E$. For the magnetic field, $\\operatorname{curl}(\\beta\\varphi/c)=\\nabla(\\varphi/c)\\times\\beta+(\\varphi/c)\\operatorname{curl}\\beta$ ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]), and $\\operatorname{curl}\\beta=\\nabla s\\times\\dot\\beta$ by the coordinate formula applied to $\\beta=z'(s(x,t))/c$ ([[def-divergence-and-curl-of-a-c1-vector-field]], [[thm-chain-rule-for-total-derivatives]]); substituting $\\nabla\\varphi=-C\\nabla D/D^2$ and $\\nabla s=-n/(c\\kappa)$ gives $$B=-C\\left[\\frac{1-|\\beta|^2+rd/c}{c\\kappa D^2}\\,n\\times\\beta+\\frac{n\\times\\dot\\beta}{c^2\\kappa D}\\right].$$ Crossing the displayed $E$ with $n/c$ gives this same expression by $n\\times(n-\\beta)=-n\\times\\beta$ and $D=\\kappa r$, proving $B=n\\times E/c$. Both displayed fields are $C^1$ off the worldline, and no derivative of $z$ beyond the third order and no bound on $\\Gamma$ at infinity is used; the caveats in the statement are exactly those of the research branch argument.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/em/electro.pdf",
+              "locator": "§6.4.1, printed pp. 157-159, equations (6.30)-(6.36): the point charge density $\\rho=q\\delta^3(x-r(t))$, the current $J=qv\\delta^3(x-r(t))$, the delta-substitution $\\int dt'\\,R(t')^{-1}\\delta(t-f(t'))$ with $f(t')=t'+R(t')/c$, and the Liénard-Wiechert potentials $\\phi=\\frac{q}{4\\pi\\epsilon_0}\\frac{1}{\\kappa R}$, $A=\\frac{q\\mu_0}{4\\pi}\\frac{v}{\\kappa R}$ at the retarded root (6.36); §6.4.3, printed pp. 161-164, equations (6.39)-(6.45): the retarded derivatives with $\\kappa=1-\\hat R\\cdot v/c$, the field formulas (6.42) $E=\\frac{q}{4\\pi\\epsilon_0}[\\frac{\\hat R-v/c}{\\gamma^2\\kappa^3R^2}+\\frac{\\hat R\\times((\\hat R-v/c)\\times a)}{\\kappa^3Rc^2}]$ and (6.44)-(6.45) $B=\\hat R\\times E/c$, read against the design's normalization $C=q/(4\\pi\\epsilon_0)$, $\\beta=z'/c$, $\\dot\\beta=z''/c$"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto lecture-note textbook, 2026 printing, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Chapter 11, printed pp. 330-344, §11.1-§11.3: distributional pairings, differentiation and convolution (Exercise 11.2.6(d)-(e)), the distributional setting in which the point sources and the retarded convolution are read"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 167-170, Corollary 7.3 (7.11)-(7.12): the Duhamel representation whose (t-s)-weighted sphere average is the structural input for the retarded history estimate in (b)"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 322,
+    "id": "em-causal-wave-kernel-prerequisites-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism-mathematics",
+    "library": "mathematics",
+    "title": "Causal kernels, gauge and point fields after wave existence — Examples",
+    "companion": "em-causal-wave-kernel-prerequisites",
+    "requires": [
+      "em-causal-wave-kernel-prerequisites"
+    ],
+    "items": [
+      {
+        "id": "ex-em-causal-wave-kernel-prerequisites-explicit-checks",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Explicit checks of the retarded kernel, the static Liénard-Wiechert specialization and an explicit Lorenz-gauge transformation",
+        "reference": "batch-21-local-construction (see research/physics-em-sr-40-2026-10-08-batch-21.notes.md); the design reserves no example for this B page, and this example checks lem-em-retarded-wave-kernel(a), lem-em-gauge-wave-reachability(b)-(c) and lem-em-point-retarded-potential-and-fields(c) in explicit instances",
+        "design_state": "scaffolder-constructed-explicit-mathematical-example; recorded in the batch notes",
+        "dependency_level": 5,
+        "deps": [
+          "lem-em-point-retarded-potential-and-fields",
+          "lem-em-gauge-wave-reachability",
+          "lem-em-retarded-wave-kernel",
+          "def-em-potential-gauge-and-field-conventions",
+          "def-countable-choice",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-laplacian-of-a-c2-function",
+          "def-euclidean-inner-product",
+          "thm-algebra-of-derivatives",
+          "thm-the-curl-of-a-gradient-vanishes",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-monotonicity-of-the-integral",
+          "thm-heine-borel-rn",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-em-global-retarded-root"
+        ],
+        "dependency_roles": {
+          "lem-em-point-retarded-potential-and-fields": "mathematical-premise",
+          "lem-em-gauge-wave-reachability": "mathematical-premise",
+          "lem-em-retarded-wave-kernel": "mathematical-premise",
+          "def-em-potential-gauge-and-field-conventions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-laplacian-of-a-c2-function": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-the-curl-of-a-gradient-vanishes": "mathematical-premise",
+          "lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules": "mathematical-premise",
+          "thm-polar-coordinates-formula-for-lebesgue-measure": "mathematical-premise",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere": "mathematical-premise",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "lem-test-function-cutoffs-and-euclidean-localization": "mathematical-premise",
+          "lem-em-global-retarded-root": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$. (i) Static specialization. Take $z\\equiv0$ (so $v_*=0$), $q\\in\\mathbb R$, $\\varepsilon_0>0$, in the setting of [[lem-em-point-retarded-potential-and-fields]]. Then for $x\\ne0$ the root is $s=t-|x|/c$, $r=|x|$, $n=x/|x|$, $\\beta=0$, $\\kappa=1$, $\\dot\\beta=0$, so the potentials and fields are $\\varphi=C/|x|$, $A=0$, $E=C\\,x/|x|^3$, $B=0$. Thus the retarded formulas reduce exactly to the Coulomb field with the convention $C=q/(4\\pi\\varepsilon_0)$, and the kernel's explicit retarded-history integral reproduces the time-independent Poisson kernel $1/(4\\pi|x-y|)$: for a static spatial source $h\\in C_c^\\infty(\\mathbb R^3)$, define the all-time retarded extension by\n$$u(x,t):=\\frac1{4\\pi}\\int_{\\mathbb R^3}\\frac{h(y)}{|x-y|}\\,dy.$$\nIndeed the retarded time is $t-|x-y|/c$ and evaluating the static source there leaves $h(y)$ unchanged. This finite integral is the extension of the compact spacetime-source formula by source-time cutoffs on each compact observation region; a time-independent nonzero source is not itself compactly supported in spacetime. (ii) Explicit Lorenz-gauge transformation. On $\\Omega=\\mathbb R^3\\times\\mathbb R$ take $\\varphi\\equiv0$ and $A(x,t)=(x_1,0,0)$. Then $G(\\varphi,A)=\\operatorname{div}A=1$ and $E=-\\partial_tA=0$, $B=\\operatorname{curl}A=0$. The quadratic function $\\chi(x,t):=-|x|^2/6$ satisfies $W\\chi=G$: indeed $\\partial_t^2\\chi=0$ and $\\Delta\\chi=-1$, so $W\\chi=c^{-2}\\cdot0-(-1)=1=G$ ([[def-laplacian-of-a-c2-function]], [[def-em-potential-gauge-and-field-conventions]]). Its gauge transform is $T_\\chi(\\varphi,A)=(0,\\ ((2/3)x_1,-x_2/3,-x_3/3))$, which satisfies $G(T_\\chi(\\varphi,A))=\\frac23-\\frac13-\\frac13=0$ and has the same fields: $E(T_\\chi(\\varphi,A))=0=E(\\varphi,A)$ and $B(T_\\chi(\\varphi,A))=0=B(\\varphi,A)$. This checks clauses (b) and (c) of [[lem-em-gauge-wave-reachability]] in an instance where $G$ is a nonzero constant and where the gauge function does not have the zero Cauchy data used in the existence construction of that lemma; by its clause (d), the difference of this $\\chi$ and the zero-data solution of $W\\chi=G$ solves the homogeneous wave equation, which is why both may be used. (iii) Sharpness of the kernel support at the apex. For a nonnegative $\\psi\\in\\mathcal D(\\mathbb R^3\\times\\mathbb R)$ with $\\psi(0,0)>0$ one has $\\langle K,\\psi\\rangle=\\frac{1}{4\\pi}\\int\\psi(y,|y|/c)|y|^{-1}dy>0$, so $(0,0)\\in\\operatorname{supp}K$ and the apex is not an artefact of the definition; the same computation with a bump near $(y_0,|y_0|/c)$, $y_0\\ne0$, shows that every point of the cone is in the support. These are mathematical checks of the pair's conventions and hypotheses; no measurement, physical field identification, or empirical claim is made.",
+        "strategy": "(i) With $z\\equiv0$ the equation $t-s=|x|/c$ has the unique solution $s=t-|x|/c$ for $x\\ne0$ ([[lem-em-global-retarded-root]] with $v_*=0$); then $R=x$, $r=|x|$, $n=x/|x|$, $\\beta=0$, $\\kappa=1$, $D=|x|$, so [[lem-em-point-retarded-potential-and-fields]] gives $\\varphi=C/|x|$, $A=0$, and its field formulas give $E=C(1-0)(n-0)/(1\\cdot|x|^2)=Cn/|x|^2=Cx/|x|^3$ and $B=n\\times E/c=C\\,n\\times n/(c|x|^2)=0$. For the static kernel computation, $h\\in C_c^\\infty(\\mathbb R^3)$ is bounded with compact spatial support. On a compact observation region, $|x-y|$ is uniformly bounded for $y\\in\\operatorname{supp}h$; hence all contributing source times $s=t-|x-y|/c$ lie in a fixed bounded interval. A smooth time cutoff from [[lem-test-function-cutoffs-and-euclidean-localization]] equal to one there makes the source compact in spacetime; [[lem-em-retarded-wave-kernel]](b) applies to it and its evaluation gives exactly the displayed Poisson integral. This integral is finite by the same local $|x-y|^{-1}$ polar bound as in the point-source lemma. Thus the static formula is a justified extension of the compact-source statement. (ii) $\\operatorname{div}A=\\partial_1x_1=1$ and $\\operatorname{curl}A=0$ by the coordinate formulas of [[def-divergence-and-curl-of-a-c1-vector-field]]; $\\Delta(-|x|^2/6)=-\\frac16\\cdot6=-1$ because $\\Delta|x|^2=6$ (componentwise second derivatives, [[def-laplacian-of-a-c2-function]], [[thm-algebra-of-derivatives]]); hence $W\\chi=1=G$. The transformed pair is $(0-\\partial_t\\chi,\\ A+\\nabla\\chi)$ with $\\nabla\\chi=-x/3$ ([[def-jacobian-matrix-and-gradient]]), and $\\operatorname{div}A'=\\frac23-\\frac13-\\frac13=0$ ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]), while $\\operatorname{curl}A'=0$ and $-\\nabla0-\\partial_tA'=0$ directly from the coordinate formulas. The logical role of clause (d) is [[lem-em-gauge-wave-reachability]](d), which covers the difference of any two solutions with the same right-hand side. (iii) At the apex, continuity and $\\psi(0,0)>0$ give $a,\\delta>0$ such that $\\psi(y,|y|/c)\\ge a$ for $|y|<\\delta$. Its integral against $1/|y|$ is strictly positive by the polar formula and positive measure of Euclidean balls. At any nonapex cone point, [[lem-test-function-cutoffs-and-euclidean-localization]] gives in every neighborhood a nonnegative test positive at that point; continuity gives a small positive-radius ball of $y$-values with a positive lower bound on the pulled-back test and $|y|$ bounded away from zero. The same integral is strictly positive. These neighborhood tests establish every cone point belongs to the support, including the apex; no factorization of an arbitrary test into radial and time factors is assumed. No clause of [[lem-em-gauge-wave-reachability]] about boundary data is used or contradicted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (2026 printing)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/em/electro.pdf",
+              "locator": "§6.4.2, printed pp. 159-161, equations (6.37)-(6.38): the constant-velocity example and the explicit retarded root; §6.4.3, printed pp. 161-164: the field computation in the static limit $v=0$ (the $1/R^2$ Coulomb term)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§7.1, printed pp. 167-170, (7.11)-(7.12): the wave expression and Duhamel conventions checked by the explicit $W\\chi=1$ computation"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto lecture-note textbook, 2026 printing, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§9.1.1, printed pp. 281-282, (9.1.4): the $c$-dependence of the fundamental solution, the convention used when the static branch $c\\to$ fixed is read off the retarded kernel"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

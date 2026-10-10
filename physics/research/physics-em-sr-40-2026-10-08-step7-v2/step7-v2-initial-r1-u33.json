@@ -1,0 +1,335 @@
+{
+  "run": "physics-em-sr-40-2026-10-08",
+  "phase": "initial",
+  "round": 1,
+  "unit": "33",
+  "input_sha256": "abf4e458aa807c1279b7d6c26197bd7b0cbd023a33b6e1338fb93d991f410809",
+  "decisions": [
+    {
+      "id": "pthm-em-general-wave-ivp",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "88f5017acd0d0a8fb20169ec2d1a53217f1f8b1495489ac42e6b77c4817319e7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1(d) falsely bounded propagation using only the source support radius: at t=t0 a nonzero smooth compact bump outside that ball gives u=a, contradicting the restatement. The actual Statement(d) and step 6.3 already put both initial fields and their curls in the chosen ball, so this does not invalidate the Maxwell theorem. Restored the exact scalar supplier condition Ka union Kb union Kh subset of the radius-rho ball.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-em-wave-energy-average",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "952d6cfd0dccbc186a420d47c989ec3398fb1c31203d359bb958818a4a6548e1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The momentum-balance Statement assumes Lorentz continuum coupling (ii), and Poynting Statement(c) uses it for the physical interpretation. Original F4 and proof 4.2 applied these interfaces from source-free Maxwell alone and claimed their physical readings without an applicable matter model. The numerical average formulas remain correct; restored the additional interpretation premise in Statement(d), F4, A1 and proof 4.2, defining an empty-matter model with zero densities, fluxes and electromagnetic source terms. Algebraic clauses (a)-(c) and (e) retain their original hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "pthm-em-general-wave-ivp",
+      "disposition": "repaired",
+      "post_sha256": "579045d6fd446bab33f6298d4ecd61e3813642e208d5247b274b780affc1842b",
+      "review_context_sha256": "90e29e3b799e69b50de909f63e167efd20e79946dceb82dde2385cecdc736622",
+      "reason": "Corrected only F1(d). Checked thm-em-wave-cauchy-kirchhoff Statement(d) and proof 6.1: all three supports must lie in the same ball. In consumer proof 6.3, compact K is closed, so data vanish on a neighbourhood outside K and their curls vanish there; Ka=Kb=K and Kh={0} meet the corrected hypothesis for rho>0. Checked the six scalar constructions, zero wave defects and initial derivatives, Gauss propagation, C2 uniqueness, cone comparison, and moving-ball energy estimate with |S|<=cu and time reversal. Statement and physical_scope unchanged. No new prerequisite, AC change or propagation is required. Also examined the later def-em-lab-geometry Definition(c) change: derivatives are now explicitly limited to k>=1; all applications here are jointly C-infinity or C2, so the unchanged Statement and proof remain sound. Updated that exact F11 contract quote. Focused precheck, rendercheck, strict proof-contract, physics-content, manifest comparison and final batched proof-layout checks pass.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-em-wave-energy-average",
+      "disposition": "repaired",
+      "post_sha256": "3f91ca6b78abe80d2a1482115217ba6cd74c709f5f60d01b74a3ba1955215bd4",
+      "review_context_sha256": "5d4a6229feacb13be2bbaf7a1ef836b40ff8faef10dce100d45cf6231a65fb94",
+      "reason": "Checked the scalar and vector period-average proof, complex conjugation, Hermitian magnetic norm by separate real and imaginary parts, stress cancellation, signed plane-normal contraction, and cubic box divergence for every nonzero amplitude. Added Lorentz coupling (ii) only for the physical balance interpretation, defined the empty-matter model explicitly, and verified zero matter force and power under it. Supplier Poynting(a) and momentum(a) now apply with all their hypotheses; periodic derivatives average to zero and computed constant averages are divergence-free. Owning page and manifest record the same qualification. Owning contract F4/A1 citations and new proof-step inputs are synchronized. Focused precheck, item/page rendercheck, strict proof-contract, physics-content, manifest comparison and final batched proof-layout checks pass. This is local adjudication of the repair, not an independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "texp-em-radiation-pressure-example",
+    "pthm-em-dipole-scattering-cross-section",
+    "pthm-em-specified-model-comparison",
+    "pthm-em-classical-interference",
+    "ex-em-plane-wave-infinite-energy"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "pthm-em-general-wave-ivp",
+      "outcome": "confirmed_nonfatal",
+      "finding": "False F1(d) omitted initial support containment, but actual application in step 6.3 satisfies the full supplier hypotheses.",
+      "resolution": "Repaired F1(d) by requiring Ka union Kb union Kh contained in the same closed ball; original Statement and scope retained.",
+      "path": "research/defect-ledger.jsonl",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "defect-ledger",
+      "id": "pthm-em-wave-energy-average",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "finding": "Unlicensed physical balance interpretation and narrower momentum theorem application without Lorentz continuum coupling (ii).",
+      "resolution": "Explicit conditional interpretation premise for an empty-matter model; complete supplier hypotheses checked; algebraic average formulas preserved.",
+      "path": "research/defect-ledger.jsonl",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "defect-ledger",
+      "id": "texp-em-radiation-pressure-example",
+      "route": "frontier-owner",
+      "finding": "Proof 2.1 invokes pthm-em-momentum-balance(b) with only smooth source-free Maxwell and A3=AComega; the supplier Statement explicitly also assumes Lorentz continuum coupling(ii).",
+      "resolution": "Proposed separate owner repair only; outside this unit write scope, no item edit or adjudication performed. Numerical average use of the repaired supplier remains sound.",
+      "path": "research/defect-ledger.jsonl",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no_updates",
+      "reason": "All five direct item consumers of the changed wave-energy-average interface are draft original-frontier items; none is published or outside the frontier. No published consumer finding or repair is claimed.",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "pthm-em-general-wave-ivp",
+      "claim": "Constrained smooth whole-space Maxwell existence, uniqueness, support propagation and smooth finite-energy conservation; SI epsilon0=1/(mu0 c^2), AComega.",
+      "evidence": [
+        "items/thm-em-wave-cauchy-kirchhoff.md: Statement(d), Proof 6.1",
+        "items/pthm-em-general-wave-ivp.md: F1(d), Proof 6.3",
+        "items/pthm-em-poynting-balance.md: Statement(a) licenses the local algebraic identity without matter coupling",
+        "research/physics-em-sr-40-2026-10-08-batch-33.proof-contracts.json: existing F1 citation already includes the correct full Statement(d)",
+        "library/classical-electromagnetism/em-vacuum-waves-and-polarization.md: constrained initial-value paragraph remains sound"
+      ],
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/pthm-em-general-wave-ivp.md",
+          "exit_code": 0,
+          "result": "1 checked, 0 failing"
+        },
+        {
+          "command": "node tools/physics-support/rendercheck.mjs items/pthm-em-general-wave-ivp.md",
+          "exit_code": 0,
+          "result": "OK, 1 file"
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Completed this unit; controller collects this evidence and routes the separate draft-consumer finding to its frontier owner."
+    },
+    {
+      "id": "pthm-em-wave-energy-average",
+      "evidence": [
+        "items/pthm-em-poynting-balance.md: Statement(a), (c)",
+        "items/pthm-em-momentum-balance.md: Statement preamble, (a), (c), Proof 1.1-2.1",
+        "items/post-em-lorentz-coupling.md: Postulate(ii)",
+        "items/lem-em-period-average.md: complete scalar and vector proof",
+        "items/def-em-vacuum-energy-flux.md: Definition(e)",
+        "items/def-em-vacuum-stress-momentum.md: Definition(f)"
+      ],
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/pthm-em-wave-energy-average.md",
+          "exit_code": 0,
+          "result": "1 checked, 0 failing"
+        },
+        {
+          "command": "node tools/physics-support/rendercheck.mjs items/pthm-em-wave-energy-average.md",
+          "exit_code": 0,
+          "result": "OK, 1 file"
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Completed this unit; controller collects this evidence and routes the separate draft-consumer finding to its frontier owner."
+    },
+    {
+      "interface_comparison": "IVP Statement and physical_scope unchanged. Wave-energy-average Statement(c) adds a conditional physical-reading qualifier; Statement(d) states the additional coupling premise and zero matter model; physical_scope carries that premise. Statement(a),(b),(e) and every numerical average formula are unchanged. Direct item and page uses were inspected; no further consumer Statement changes were made.",
+      "created_prerequisites": "None; the already available post-em-lorentz-coupling(ii) supplies the exact missing assumption.",
+      "proof_layout": {
+        "command": "node tools/physics-support/proof-layout.mjs items/pthm-em-general-wave-ivp.md items/pthm-em-wave-energy-average.md",
+        "exit_code": 0,
+        "result": "2 items, 20 steps, 0 defects"
+      },
+      "unresolved_obligations": [],
+      "next_action": "Completed this unit; controller collects this evidence and routes the separate draft-consumer finding to its frontier owner."
+    },
+    {
+      "final_validation": [
+        {
+          "check": "precheck",
+          "result": "Both explicit changed item paths pass; one item per invocation, 0 failing.",
+          "exit_code": 0
+        },
+        {
+          "check": "rendercheck",
+          "result": "Both changed items and the owning page pass YAML, delimiter and real KaTeX rendering checks.",
+          "exit_code": 0
+        },
+        {
+          "command": "node tools/physics-support/proof-contract.mjs research/physics-em-sr-40-2026-10-08-batch-33.proof-contracts.json --strict --items pthm-em-general-wave-ivp,pthm-em-wave-energy-average --json",
+          "result": "ok:true; errors:[]; warnings:[]; exactly the two assigned items checked.",
+          "exit_code": 0
+        },
+        {
+          "check": "validatePhysicsContent(loadPhysicsRepository(cwd), selectedItems={the two assigned IDs}, selectedPages={})",
+          "result": "[]: no selected content or dependency-closure errors.",
+          "exit_code": 0
+        },
+        {
+          "check": "Targeted manifest comparison using actual YAML parser, deep strict equality and exact Statement sections",
+          "result": "Both assigned statements, deps, dependency roles, physical_scope, provenance and sources match their owning manifest.",
+          "exit_code": 0
+        },
+        {
+          "command": "node tools/physics-support/proof-layout.mjs items/pthm-em-general-wave-ivp.md items/pthm-em-wave-energy-average.md",
+          "result": "2 items, 20 steps, 0 defects. Run after the final item edits; no subsequent item edit or formatter.",
+          "exit_code": 0
+        }
+      ],
+      "review_context_refresh": {
+        "id": "pthm-em-general-wave-ivp",
+        "previous_review_context_sha256": "782513695accc3a75397f6c53e6a50006449c9ce5f5485fe388a262786e2edf6",
+        "current_review_context_sha256": "90e29e3b799e69b50de909f63e167efd20e79946dceb82dde2385cecdc736622",
+        "examined_effect": "Current def-em-lab-geometry Definition(c) replaces unqualified derivatives with derivatives for k>=1. The assigned IVP fields are C-infinity/C2, so every actual F11 use in 1.1,3.1,5.1,6.1,6.4 still meets the clarified condition. The same supplier change is a direct formulation context for the energy item through its definitions; all its fields are C-infinity. Both reviews were completed on this examined stable state before the final batched review-contexts command."
+      },
+      "unresolved_obligations": [],
+      "independent_review_claimed": false,
+      "new_judgments_or_stamps_written": false
+    }
+  ],
+  "downstream_uses": {
+    "texp-em-radiation-pressure-example": "Consumes clauses (a)-(c): I=epsilon0*c*E0^2/2 and averaged sigma33=-I/c; these algebraic formulas and their amplitude hypotheses are unchanged.",
+    "pthm-em-dipole-scattering-cross-section": "Consumes clause (b) only, I_inc=|e|^2/(2*mu0*c), as the nonzero incident-flux denominator of the model cross section.",
+    "pthm-em-specified-model-comparison": "Consumes clause(b), averaged S dot n=epsilon0*c*|e|^2*(khat dot n)/2, followed by the explicitly adopted apparatus dictionary magnitude convention.",
+    "pthm-em-classical-interference": "Consumes clauses(a),(b) for the diagonal single-wave terms and the equal-wavevector reduction to the single amplitude a1*e1+a2*e2.",
+    "ex-em-plane-wave-infinite-energy": "Consumes clause(a), averaged u=epsilon0*|e|^2/2 for e=E0*e1, with the zero-independent positive spatial mean."
+  },
+  "consumer_examinations": [
+    {
+      "id": "texp-em-radiation-pressure-example",
+      "supplier": "pthm-em-wave-energy-average",
+      "path": "items/texp-em-radiation-pressure-example.md",
+      "locations": "Statement incident flux/stress; F2; Proof 1.1",
+      "affected_use": "Consumes clauses (a)-(c): I=epsilon0*c*E0^2/2 and averaged sigma33=-I/c; these algebraic formulas and their amplitude hypotheses are unchanged.",
+      "invalidated_claim": "None from the supplier interface repair: consumed algebraic average identities were preserved.",
+      "minimality": "The assigned supplier change invalidates no numerical pressure or stress formula. Consumer Proof 2.1 separately invokes momentum-balance(b) without explicitly adopting Lorentz coupling(ii); A3 is only AComega. Route that pre-existing prerequisite defect to its frontier owner.",
+      "disposition": "unchanged_use_sound",
+      "route": "frontier-owner",
+      "consumer_raw_sha256": "1c3ed11870585d7a5586d92c560c6a50dfb0bb15fdddca09f88da2b7f667e8c4",
+      "exact_snippets": [
+        "[F2] Plane-wave averages ([[pthm-em-wave-energy-average]]): for a transverse plane wave with amplitude $e$, wavevector $k$ with $|k|=\\omega/c$ and $b=k\\times e/\\omega$, one has $\\langle S\\rangle=I\\hat k$, $I=\\frac{\\varepsilon_0c}{2}|e|^2$, and componentwise $\\langle\\sigma_{ij}\\rangle=-\\langle u\\rangle\\hat k_i\\hat k_j$ with $\\langle u\\rangle=I/c$, so in particular $\\langle\\sigma_{33}\\rangle=-I/c$ for $k=Ke_3$."
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-em-dipole-scattering-cross-section",
+      "supplier": "pthm-em-wave-energy-average",
+      "path": "items/pthm-em-dipole-scattering-cross-section.md",
+      "locations": "Statement preamble; F2; Proof 4.1; Source notes",
+      "affected_use": "Consumes clause (b) only, I_inc=|e|^2/(2*mu0*c), as the nonzero incident-flux denominator of the model cross section.",
+      "invalidated_claim": "None from the supplier interface repair: consumed algebraic average identities were preserved.",
+      "minimality": "Unchanged formula and nonzero amplitude condition suffice. No use of supplier clause(d) or its matter balance interpretation was found at these uses.",
+      "disposition": "unchanged_use_sound",
+      "route": "frontier-owner",
+      "consumer_raw_sha256": "4aff1e9d55daf5e8567d78336047ddd5cd5f4a5676bc653f1f0f3397c194e485",
+      "exact_snippets": [
+        "[F2] Incident plane wave: $(E_{\\rm inc},B_{\\rm inc})$ are the plane-wave fields of [[def-em-plane-wave-definition]] with amplitude $e$ and $b=\\kappa\\times e/\\omega$, $|\\kappa|=\\omega/c$, satisfying the smooth source-free vacuum Maxwell equations by [[pthm-em-plane-wave-maxwell]]; their period-averaged flux satisfies $\\langle S_{\\rm inc}\\rangle=I_{\\rm inc}\\hat\\kappa$ with $I_{\\rm inc}=\\frac{\\varepsilon_0c}{2}|e|^2=\\frac{|e|^2}{2\\mu_0c}$ ([[pthm-em-wave-energy-average]], [[def-em-si-conventions]])."
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-em-specified-model-comparison",
+      "supplier": "pthm-em-wave-energy-average",
+      "path": "items/pthm-em-specified-model-comparison.md",
+      "locations": "Statement (a)(ii); F4; Proof 1.2",
+      "affected_use": "Consumes clause(b), averaged S dot n=epsilon0*c*|e|^2*(khat dot n)/2, followed by the explicitly adopted apparatus dictionary magnitude convention.",
+      "invalidated_claim": "None from the supplier interface repair: consumed algebraic average identities were preserved.",
+      "minimality": "Unchanged signed average identity suffices. No added coupling is needed for this deterministic comparison quantity or its existing statistical exclusions.",
+      "disposition": "unchanged_use_sound",
+      "route": "frontier-owner",
+      "consumer_raw_sha256": "f8644ced2281f9b850c56ab24deaea2277d8257b584705c8b813ac1eb2721c52",
+      "exact_snippets": [
+        "[F4] For the plane-wave solution with data $(k,\\omega,e)$ the period average of the Poynting vector is $\\langle S\\rangle=\\frac{\\varepsilon_0c}{2}|e|^2\\hat k$, so $\\langle S\\rangle\\cdot n=\\frac{\\varepsilon_0c}{2}|e|^2(\\hat k\\cdot n)$ for every unit vector $n$ ([[pthm-em-wave-energy-average]], clause (b))."
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-em-classical-interference",
+      "supplier": "pthm-em-wave-energy-average",
+      "path": "items/pthm-em-classical-interference.md",
+      "locations": "Statement (b), (c); F6; Proof 3.2",
+      "affected_use": "Consumes clauses(a),(b) for the diagonal single-wave terms and the equal-wavevector reduction to the single amplitude a1*e1+a2*e2.",
+      "invalidated_claim": "None from the supplier interface repair: consumed algebraic average identities were preserved.",
+      "minimality": "Those formulas remain valid for every complex transverse amplitude without the additional interpretation premise. No use of clause(d) was found.",
+      "disposition": "unchanged_use_sound",
+      "route": "frontier-owner",
+      "consumer_raw_sha256": "60102febbba7cb7eeb1afc1006cd84119712667a9465de0f4f66c9dae449448c",
+      "exact_snippets": [
+        "[F6] Single-wave averages ([[pthm-em-wave-energy-average]]): for a single transverse plane wave with amplitude $\\tilde e$, wavevector $\\tilde k$, $|\\tilde k|=\\omega/c$, the period-averaged energy density and Poynting vector are $\\langle u\\rangle=\\frac{\\varepsilon_0}{2}|\\tilde e|^2$ and $\\langle S\\rangle=\\frac{\\varepsilon_0c}{2}|\\tilde e|^2\\hat k$."
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-em-plane-wave-infinite-energy",
+      "supplier": "pthm-em-wave-energy-average",
+      "path": "items/ex-em-plane-wave-infinite-energy.md",
+      "locations": "Example (i); F3; Verification uses of F3",
+      "affected_use": "Consumes clause(a), averaged u=epsilon0*|e|^2/2 for e=E0*e1, with the zero-independent positive spatial mean.",
+      "invalidated_claim": "None from the supplier interface repair: consumed algebraic average identities were preserved.",
+      "minimality": "Unchanged average formula suffices for its explicit density and box-divergence calculation. Its separate compact-data comparison uses the unchanged IVP Statement(d).",
+      "disposition": "unchanged_use_sound",
+      "route": "frontier-owner",
+      "consumer_raw_sha256": "642cec3b15832ae22947afcfaf104909a6e22050d27f4db605a2c25aaa63237e",
+      "exact_snippets": [
+        "[F3] Plane-wave averages ([[pthm-em-wave-energy-average]](a)): for this class of plane waves $\\langle u\\rangle=\\frac{\\varepsilon_0}{2}|e|^2$, independent of $x$ and of the starting time, where the average is taken over the period $T=2\\pi/\\omega$; in particular the real-amplitude identity $\\frac1T\\int_0^T\\cos^2(\\phi_0-\\omega s)\\,ds=\\frac12$ is the scalar case of [[lem-em-period-average]]."
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "page_examinations": [
+    {
+      "path": "library/classical-electromagnetism/em-vacuum-waves-and-polarization.md",
+      "affected_use": "Energy, momentum and flux averages paragraph formerly presented the two balance theorems with only periodicity and local identities.",
+      "disposition": "repaired",
+      "minimality": "Added the conditional Lorentz continuum-coupling(ii) premise and explicit empty-matter model to this single balance-reading sentence; all average formulas and other page paragraphs retained."
+    }
+  ],
+  "owner_findings": [
+    {
+      "id": "texp-em-radiation-pressure-example",
+      "route": "frontier-owner batch 33, separate ordinary owner work",
+      "path": "items/texp-em-radiation-pressure-example.md",
+      "location": "Statement(i), F3 and Proof 2.1",
+      "affected_use": "Proof 2.1 invokes pthm-em-momentum-balance(b) with only smooth source-free Maxwell and A3=AComega; the supplier Statement explicitly also assumes Lorentz continuum coupling(ii).",
+      "invalidated_claim": "The cited fixed-volume theorem application lacks an explicit applicable coupling premise; the calculated constant incident stress remains valid independently.",
+      "minimality": "Specify an applicable empty-matter coupling model for the vacuum box, or derive constancy directly from the incident plane-wave stress already computed in Proof 1.1. No pressure formula or boundary-force postulate needs weakening.",
+      "consumer_affected_snippet": "the momentum balance [F3](b) with $i=3$ and the hypothesis [A3] gives",
+      "supplier_required_snippet": "Assume the smooth branch of [[post-em-vacuum-maxwell]] and clause (ii) of\n[[post-em-lorentz-coupling]]",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ]
+}
