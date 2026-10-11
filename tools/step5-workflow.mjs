@@ -89,6 +89,84 @@ function restoredRenderedLedgerHistory(root, run, certificate, path, expected) {
     'source41 derived ledger history binding changed');
   return true;
 }
+// Gate 2 observed the ledger before a later native schema repair. Preserve
+// that exact historical input; this does not certify the current ledger.
+function repairedRun44LedgerHistory(history,path,expected) {
+  const run='frontier-44-special-representation-examples-28-six-step';
+  const original='cda4f8517f01cb4fd434823f612d2c16cd349fc15b2599dc3363b0327921d085';
+  if(!history||history.run!==run||expected!==original
+    ||resolve(history.root,path)!==join(resolve(history.root),'research','defect-ledger.jsonl'))return false;
+  const root=history.root,dir=workflowDir(root,run),base=join(root,'research',`${run}-owner-escalation-repairs`,
+    'resume-20261011','step5-ledger-operator','history'),marker=join(base,'historical-ledger-receipt.json');
+  if(!existsSync(marker))return false;
+  const receipt=read(marker),{sha256,...payload}=receipt;
+  requireValue(sha256===digest(payload)&&receipt.version===1&&receipt.run===run
+    &&receipt.policy==='step5-native-ledger-schema-history-v1'&&receipt.owner_identity==='/root'
+    &&receipt.historical_only===true&&receipt.original_sha256===original
+    &&Array.isArray(receipt.bindings),'invalid historical Step 5 ledger receipt');
+  const bound=(path)=>receipt.bindings.some(binding=>resolve(root,binding.path)===resolve(root,path));
+  for(const binding of receipt.bindings){
+    const path=resolve(root,binding.path);
+    requireValue(path.startsWith(resolve(root,'research')+'/')&&existsSync(path)
+      &&digest(readFileSync(path,'utf8'))===binding.sha256,
+      `historical ledger binding changed: ${binding.path}`);
+  }
+  const archive=resolve(root,receipt.archive),nativeAfter=resolve(root,receipt.native_after_archive),ownerAfter=resolve(root,receipt.owner_after_archive);
+  requireValue([archive,ownerAfter].every(path=>path.startsWith(resolve(base)+'/'))
+    &&nativeAfter.startsWith(resolve(dir,'supporting-metadata')+'/')
+    &&[archive,nativeAfter,ownerAfter].every(bound),'historical ledger archives are not authenticated');
+  const beforeBytes=readFileSync(archive,'utf8'),afterBytes=readFileSync(nativeAfter,'utf8'),ownerBytes=readFileSync(ownerAfter,'utf8');
+  requireValue(digest(beforeBytes)===original,'historical ledger preimage changed');
+  const oldReportPath=join(dir,'step5-v2-gate-r2-u1.json'),oldPackPath=join(dir,'gate-2.json');
+  const collectedPath=join(dir,'gate-2-collected.json'),certificatePath=join(dir,'certification-gate-2.json');
+  requireValue([oldReportPath,oldPackPath,collectedPath,certificatePath].every(bound),'missing original gate-2 ledger authority');
+  const oldReport=read(oldReportPath),oldPack=read(oldPackPath),collected=read(collectedPath),certificate=read(certificatePath);
+  const {sha256:certificateHash,...certificatePayload}=certificate;
+  requireValue(oldReport.run===run&&oldReport.phase==='gate'&&oldReport.round===2&&oldReport.unit==='1'
+    &&oldReport.input_sha256===digest(oldPack)&&oldReport.supporting_evidence?.['research/defect-ledger.jsonl']===original
+    &&collected.run===run&&collected.phase==='gate'&&collected.round===2
+    &&collected.evidence?.['research/defect-ledger.jsonl']===original
+    &&certificateHash==='00ef54bbcf603e321a945c6fd4514a1abd187fbd701383b5d28bbeccf51cf194'
+    &&certificateHash===digest(certificatePayload)&&certificate.evidence?.['research/defect-ledger.jsonl']===original,
+    'historical ledger differs from the original native gate-2 input');
+  const reportPath=join(dir,'step5-v2-gate-r3-u1.json'),packPath=join(dir,'gate-3.json');
+  const dispatchPath=join(root,'research',`${run}-dispatch`,'alpha-repair-step5-v2-gate-r3-u1.result.json');
+  requireValue([reportPath,packPath,dispatchPath].every(bound),'missing native ledger repair authority');
+  const report=read(reportPath),pack=read(packPath),dispatch=read(dispatchPath);
+  requireValue(report.run===run&&report.phase==='gate'&&report.round===3&&report.unit==='1'
+    &&report.input_sha256===digest(pack)&&pack.run===run&&pack.phase==='gate'&&pack.round===3
+    &&dispatch.ok===true&&dispatch.run===run&&dispatch.role==='alpha-repair'
+    &&dispatch.label===workerLabel('gate',3,'1')&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
+    &&report.ledger_before_sha256===original&&report.ledger_after_sha256===digest(afterBytes)
+    &&report.supporting_evidence?.['research/defect-ledger.jsonl']===digest(afterBytes)
+    &&Array.isArray(report.ledger_schema_repairs)&&report.ledger_schema_repairs.length===11,
+    'historical ledger lacks its successful native schema-repair transition');
+  const prior=beforeBytes.split(/(?<=\n)/).filter(Boolean),next=afterBytes.split(/(?<=\n)/).filter(Boolean);
+  requireValue(prior.length===next.length,'native ledger schema repair changed inventory');
+  const changes=new Map(report.ledger_schema_repairs.map(row=>[row.defect_id,row])),seen=new Set();
+  for(let index=0;index<prior.length;index++){
+    if(prior[index]===next[index])continue;
+    const before=JSON.parse(prior[index]),after=JSON.parse(next[index]),change=changes.get(before.defect_id);
+    requireValue(change&&!seen.has(before.defect_id)&&before.run===run&&after.defect_id===before.defect_id
+      &&digest(prior[index])===change.before_row_raw_sha256&&digest(next[index])===change.after_row_raw_sha256
+      &&JSON.stringify(change.original_fields)===JSON.stringify({severity:{present:false,value:null}})
+      &&!Object.hasOwn(before,'severity')&&after.severity===change.reconciled_fields.severity,
+      'unbound native ledger schema delta');
+    delete after.severity;delete after.schema_reconciliation.gate_round_3;
+    requireValue(JSON.stringify(before)===JSON.stringify(after),'native ledger repair changed an original finding');
+    seen.add(before.defect_id);
+  }
+  requireValue(seen.size===11,'missing native ledger schema deltas');
+  requireValue(ownerBytes.startsWith(afterBytes)&&bound(receipt.owner_append_rows)&&bound(receipt.owner_integration_receipt),
+    'owner ledger reconciliation did not preserve the native ledger bytes');
+  const appended=ownerBytes.slice(afterBytes.length).split(/\r?\n/).filter(Boolean).map(JSON.parse),rows=read(resolve(root,receipt.owner_append_rows));
+  requireValue(appended.length===7&&JSON.stringify(appended)===JSON.stringify(rows)
+    &&rows.every(row=>row.run===run&&row.caught_by_role==='orchestrator'
+      &&row.classification_kind==='owner-severity-assessment-of-recorded-repair'
+      &&row.original_author_classification_claimed===false&&row.supersedes?.length===1
+      &&changes.has(row.supersedes[0])),'owner ledger history is not the exact seven attributed append-only corrections');
+  return true;
+}
 // Worker supporting metadata describes the bytes observed at that handoff,
 // while the owning batch carriers remain writable by later native workers.
 // This run's recovery binds exact historical bytes to unchanged native reports;
@@ -189,6 +267,7 @@ function supportingMetadataHistory(history,path,expected) {
 const verifyEvidence=(evidence,history=null)=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(
   existsSync(p)&&(digest(readFileSync(p,'utf8'))===hash
     ||history&&(supportingMetadataHistory(history,p,hash)
+      ||repairedRun44LedgerHistory(history,p,hash)
       ||restoredLedgerHistory(history.root,history.run,history.certificate??{},p,hash)
       ||restoredRenderedLedgerHistory(history.root,history.run,history.certificate??{},p,hash))),
   `Step 5 evidence changed: ${p}`);};

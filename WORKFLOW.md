@@ -201,6 +201,12 @@ archived successor deltas within completed native repair assignments. This
 preserves historical evidence only; current review contexts and every gate still
 apply to the actual current carriers.
 
+The same run's gate-2 ledger input retains its exact archived preimage through
+the authenticated gate-3 schema repair and seven owner-attributed append-only
+severity corrections. The historical certificate and native reports stay
+unchanged. This byte-history bridge grants no current ledger-schema exemption;
+the ordinary strict ledger checks still apply to the current ledger.
+
 The frontier-44 six-step defect ledger retains its original frozen Step-3
 taxonomy bytes. `defect-ledger validate` and `check` interpret the historical
 aliases only after matching the original 1,284-row projection's pinned hash
