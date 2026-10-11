@@ -113,6 +113,35 @@ unfinished cross-review continuation. A partial process handoff is not completed
 artifact coverage; continuations require actual completed-obligation progress.
 Source and empirical qualifications survive regeneration.
 
+An existing successful Step-3a `accepted_repair` verdict may retain its native
+meaning after accompanying metadata reconciliation through explicit
+`source_identical_acceptance_continuities` entries in the run's owner repair
+evidence. Each guard binds the genuine native completion, assignment, report,
+archived accepted decision and immutable reader-post carrier, requires exact
+current source claim/dependency mirrors and an actual strict contract pass,
+and preserves missing historical manifest projections as explicitly unknown.
+This records acceptance continuity, never new worker coverage; it neither
+stamps decisions nor waives any other gate.
+
+The ordinary continuity case requires identical raw source bytes. A separately
+hash-proven complete reader-post source preimage may also establish metadata
+continuity when the entire current body is exactly identical and parsed
+frontmatter differs only in `dependency_level`, `verification` or
+`provenance`. Status, run, dependencies, sources, assumptions, proof strategy
+and all other fields remain unchanged. Owner/delegated audit, source-audit and
+published-repair markers may not be added or changed through this exception.
+An unknown source delta is never classified as metadata from hashes alone.
+A definition, algorithm or remark with no numbered proof may retain the exact
+original/current null contract; proof-bearing missing contracts remain errors.
+
+For a validated same-ID prerequisite rehome, native assignment and reader-post
+snapshot bindings retain their original batch. Only current manifest and
+contract lookups use the authenticated current home. Mechanical source-level
+or verification changes require the complete archived before source to match
+the immutable post-reader raw hash and the actual current mathematical source
+to match the authenticated before/after rehome archives. Invalid receipts,
+changed proof bodies and unsupported current contract inputs fail closed.
+
 When a reader repairs some defects but cannot resolve another in the same
 draft, the owner may retain its original open finding through
 `RUN-step3-owner-partial-reader-repairs.json`. This routing-only record binds
@@ -160,6 +189,8 @@ The new revision is `six-step-v1-construction-scope`. Start a fresh run and stat
 receipts/revisions do not satisfy the rebuilt pipeline. Legacy authoring-prefix
 migration and ready-pair initial-authoring variants are not current entry routes.
 Preserve historical run evidence rather than relabeling it. The retained authoring claim-resolution API is documented in [tools/step3-owner-creation.md](tools/step3-owner-creation.md); it supplies historical origin continuity only.
+
+Guarded same-ID relocation of proved prerequisites uses [tools/step3-owner-rehomes.md](tools/step3-owner-rehomes.md). It preserves the original Step-3a obligation batches while hashing actual current homes; it grants no new review coverage.
 
 Current Step-3 owner repair helpers use `tools/auditor-created-items.mjs
 owner-create --run RUN --step 3 --id ITEM --evidence research/JSON` after

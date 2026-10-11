@@ -22,6 +22,7 @@ import { step3Escalations, externalContextReceipt } from './step3-escalations.mj
 import { step3Adjudicators } from './step3-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { loadOwnerIdMigrations } from './step3-owner-id-migrations.mjs';
+import { loadStep3OwnerRehomes, projectOwnerRehomeBatches, ownerRehomeCarrierBatch } from './step3-owner-rehomes.mjs';
 import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
 import { loadOwnerHistoricalRoutes } from './step3-owner-historical-routes.mjs';
 import { isCertifiedOwnerContextAddition } from './step3-owner-context-addition.mjs';
@@ -30,6 +31,7 @@ import { draftOwnerMatcher } from './run-draft-ownership.mjs';
 import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
 import { unboundReaderObservations } from './step3-owner-unbound-reader-observations.mjs';
 import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
+import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -67,7 +69,7 @@ const readJson = (path, what) => {
   catch (cause) { fail(`${what} at ${path} is invalid JSON (${cause.message})`, 1); }
 };
 
-function manifestItems() {
+function currentManifestItems() {
   const batches = {};
   for (const name of readdirSync(R('research'))) {
     const match = name.match(new RegExp(`^${run}-batch-(\\d+)\\.pages\\.json$`));
@@ -78,6 +80,25 @@ function manifestItems() {
       .map((item) => typeof item === 'string' ? item : item?.id).filter(Boolean));
   }
   return batches;
+}
+
+let ownerRehomeRows = null;
+function ownerRehomes() {
+  if (ownerRehomeRows === null) {
+    try { ownerRehomeRows = loadStep3OwnerRehomes(ROOT, run); }
+    catch (cause) { fail(`step3-scope: ${cause.message}`, 1); }
+  }
+  return ownerRehomeRows;
+}
+// Original native readers/refuters/Alpha retain their exact obligation batches.
+// This view is Step3a routing only, never new-home execution coverage.
+function manifestItems() {
+  return projectOwnerRehomeBatches(currentManifestItems(), ownerRehomes());
+}
+function currentOwnerContract(id, historicalBatch, fallback = null) {
+  const batch = ownerRehomeCarrierBatch(ownerRehomes(), id, historicalBatch);
+  if (batch === String(historicalBatch)) return fallback ?? null;
+  return readJson(R('research', `${run}-batch-${batch}.proof-contracts.json`), `rehome current batch ${batch} contract`).contracts?.[id] ?? null;
 }
 
 function manifestPages() {
@@ -183,6 +204,9 @@ function manifestMetadata(batch) {
       itemOrder: items.map((item) => String(item.id)),
     });
   }
+  for (const row of ownerRehomes().filter(row => row.from_batch === String(batch))) {
+    itemRows.set(row.id, canonical({ ...row.current_manifest_entry, __step4_page_id: row.to_page }));
+  }
   return { itemRows, pageRows };
 }
 
@@ -197,7 +221,7 @@ function liveFingerprints(batch) {
       const path = R('items', `${id}.md`);
       return [id, {
         item_sha256: existsSync(path) ? sha256(readFileSync(path)) : null,
-        contract_sha256: hashValue(contract.contracts?.[id] ?? null),
+        contract_sha256: hashValue(currentOwnerContract(id, batch, contract.contracts?.[id])),
         manifest_sha256: hashValue(metadata.itemRows.get(id) ?? { id }),
       }];
     })),
@@ -533,7 +557,8 @@ function definitionWithCurrentContract(id, current) {
 function producerCarrier(id, producer) {
   const owners = Object.entries(manifestItems()).filter(([, ids]) => ids.includes(id)).map(([batch]) => batch);
   if (owners.length !== 1 || owners[0] !== String(producer)) return undefined;
-  const contractPath = R('research', `${run}-batch-${producer}.proof-contracts.json`);
+  const currentBatch = ownerRehomeCarrierBatch(ownerRehomes(), id, producer);
+  const contractPath = R('research', `${run}-batch-${currentBatch}.proof-contracts.json`);
   if (!existsSync(contractPath) || (!readJson(contractPath, `producer ${producer} proof contract`).contracts?.[id]
     && !definitionWithoutProofContract(id)) || !manifestMetadata(String(producer)).itemRows.has(id)) return undefined;
   const carrier = liveFingerprints(String(producer)).items[id];
@@ -729,7 +754,7 @@ if (command === 'hash') {
     const path = R('items', `${id}.md`);
     return [id, {
       item_sha256: existsSync(path) ? sha256(readFileSync(path)) : null,
-      contract_sha256: hashValue(contract.contracts?.[id] ?? null),
+      contract_sha256: hashValue(currentOwnerContract(id, batch, contract.contracts?.[id])),
       manifest_sha256: hashValue(metadata.itemRows.get(id) ?? { id }),
     }];
   }));
@@ -1262,11 +1287,12 @@ if (command === 'check') {
       if (target.route !== 'touched' || !before || !current
         || before.item_sha256 !== current.item_sha256
         || before.manifest_sha256 !== current.manifest_sha256) return false;
-      if (!contractsByBatch.has(target.batch)) {
-        contractsByBatch.set(target.batch, readJson(R('research', `${run}-batch-${target.batch}.proof-contracts.json`),
-          `batch ${target.batch} proof contract`).contracts ?? {});
+      const currentBatch = ownerRehomeCarrierBatch(ownerRehomes(), target.id, target.batch);
+      if (!contractsByBatch.has(currentBatch)) {
+        contractsByBatch.set(currentBatch, readJson(R('research', `${run}-batch-${currentBatch}.proof-contracts.json`),
+          `batch ${currentBatch} proof contract`).contracts ?? {});
       }
-      const entry = contractsByBatch.get(target.batch)[target.id];
+      const entry = contractsByBatch.get(currentBatch)[target.id];
       if (!entry || !Object.hasOwn(entry, 'risk_review')) return false;
       const { risk_review: _riskReview, ...withoutReview } = entry;
       return hashValue(withoutReview) === before.contract_sha256
@@ -1691,7 +1717,9 @@ if (command === 'check') {
               const preValue = target.route === 'page' ? pageCarrier(preRaw, target.order_anchor) : preRaw;
               const postValue = target.route === 'page' ? pageCarrier(postRaw, target.order_anchor) : postRaw;
               if (decision.verdict === 'accepted_repair' && currentSha !== hashValue(postValue)
-                && !riskReviewOnlyDelta(target, postValue, currentValue)) {
+                && !riskReviewOnlyDelta(target, postValue, currentValue)
+                && !(ownerEvidence?.source_identical_acceptance_continuities ?? []).some(entry =>
+                  sourceIdenticalAcceptanceContinuity(ROOT, run, decision, target, postValue, currentValue, entry))) {
                 error('decision-not-applied', `[${target.id}] accepted_repair no longer matches the reader result`);
               }
               if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)) {
