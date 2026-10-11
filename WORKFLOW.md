@@ -259,6 +259,14 @@ prerequisite context; do not validate or repair unrelated content. Closeout chec
 the engine's content commit. All owner-gate authorization remains one-attempt,
 current-hash-bound and formatting/metadata-only under CLAUDE.md.
 
+Proof-layout subjects are exactly the nonempty current manifest inventory, with
+unique manifest and actual page ownership. Extra page entries are allowed only
+as explicitly declared published prerequisite context in
+`research/RUN-proof-layout-context.json`, bound to the owner-approved
+`RUN-rehomed.json` evidence and current source hashes. These context inputs are
+sealed by the receipt but do not receive frontier proof-layout audits; unknown,
+duplicate, unpublished or stale context entries fail closed.
+
 ## Pre-gate recertification
 
 Outside Codex supervisors follow CLAUDE.md: resolve escalations before gates and

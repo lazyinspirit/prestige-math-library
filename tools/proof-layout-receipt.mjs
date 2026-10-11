@@ -17,7 +17,7 @@ export function proofLayoutScope(run, root = REPO) {
     || touches.snapshots.some(s => !s.hashes || typeof s.hashes !== 'object')) throw Error('proof-layout: missing or malformed touch snapshots');
   // The current batch manifests own validator subjects. Touch snapshots are
   // historical corpus inventories, including retired IDs and unrelated repairs;
-  // they must not create Step-6 subjects (CLAUDE.md §25).
+  // they must not create Step-6 subjects (CLAUDE.md §8).
   const manifestFiles = [...new Set(scope.pages.map(page => {
     if (!/^\d+$/.test(page.batch)) throw Error(`proof-layout: page ${page.id} has no valid manifest batch`);
     return `research/${run}-batch-${page.batch}.pages.json`;
@@ -44,6 +44,7 @@ export function proofLayoutScope(run, root = REPO) {
     throw Error(`proof-layout: manifest item ${id} is absent from current run pages`);
   };
   const pages = new Map();
+  const manifestOwners = new Map();
   for (const file of manifestFiles) {
     if (!existsSync(join(root, file))) throw Error(`proof-layout: missing ${file}`);
     const raw = JSON.parse(readFileSync(join(root, file), 'utf8'));
@@ -53,17 +54,71 @@ export function proofLayoutScope(run, root = REPO) {
       if (typeof row.id !== 'string' || pages.has(row.id) || !Array.isArray(row.items) || !row.items.length) {
         throw Error(`proof-layout: invalid or duplicate manifest page ${row.id}`);
       }
-      pages.set(row.id, [...new Set(row.items.map(item => canonical(typeof item === 'string' ? item : item?.id)))].sort());
+      const ids = row.items.map(item => canonical(typeof item === 'string' ? item : item?.id));
+      for (const id of ids) {
+        if (manifestOwners.has(id)) throw Error(`proof-layout: duplicate manifest ownership for ${id}`);
+        manifestOwners.set(id, row.id);
+      }
+      pages.set(row.id, ids.sort());
     }
   }
-  if (pages.size !== scope.pages.length || scope.pages.some(page =>
-    JSON.stringify(pages.get(page.id)) !== JSON.stringify([...new Set(page.items)].sort()))) {
-    throw Error('proof-layout: current manifests and run pages disagree');
+  if (pages.size !== scope.pages.length || scope.pages.some(page => !pages.has(page.id))) {
+    throw Error('proof-layout: current manifest and run page families disagree');
+  }
+  const actualOwners = new Map();
+  const extras = [];
+  for (const page of scope.pages) {
+    for (const id of page.items) {
+      if (actualOwners.has(id)) throw Error(`proof-layout: duplicate page ownership for ${id}`);
+      actualOwners.set(id, page.id);
+      if (!manifestOwners.has(id)) extras.push({ id, page: page.id });
+      else if (manifestOwners.get(id) !== page.id) throw Error(`proof-layout: wrong page ownership for ${id}`);
+    }
+    for (const id of pages.get(page.id)) {
+      if (!page.items.includes(id)) throw Error(`proof-layout: manifest item ${id} is absent from its current run page`);
+    }
+  }
+  // Published prerequisites placed on a frontier page are context, never new
+  // proof subjects. Require an explicit, byte-bound owner rehome declaration;
+  // arbitrary extra IDs (including drafts) continue to fail closed.
+  const contextInputs = [];
+  if (extras.length) {
+    const declarationFile = `research/${run}-proof-layout-context.json`;
+    const declaration = JSON.parse(readFileSync(join(root, declarationFile), 'utf8'));
+    const evidenceFile = `research/${run}-rehomed.json`;
+    const evidenceBytes = readFileSync(join(root, evidenceFile));
+    const evidence = JSON.parse(evidenceBytes);
+    if (declaration.version !== 1 || declaration.policy !== 'published-rehome-prerequisite-context-v1'
+      || declaration.run !== run || declaration.approved_by !== 'owner' || !declaration.owner_identity
+      || declaration.independent_execution_coverage_adopted !== false
+      || declaration.evidence?.path !== evidenceFile || declaration.evidence.sha256 !== sha256(evidenceBytes)
+      || evidence.version !== 1 || evidence.run !== run || evidence.approved_by !== 'owner'
+      || !evidence.owner_identity || evidence.independent_execution_coverage_adopted !== false
+      || !Array.isArray(evidence.items) || !Array.isArray(declaration.items)
+      || declaration.items.length !== extras.length) throw Error('proof-layout: invalid published context declaration');
+    const declared = new Set();
+    for (const row of declaration.items) {
+      const extra = extras.find(item => item.id === row.id && item.page === row.page);
+      const origins = evidence.items.filter(item => item.id === row.id && item.to_page === row.page);
+      if (!extra || declared.has(row.id) || origins.length !== 1
+        || origins[0].role !== 'existing published prerequisite context; not a new frontier claim'
+        || origins[0].source_changed_by_positional_rehome !== false) throw Error(`proof-layout: unlicensed context ${row.id}`);
+      declared.add(row.id);
+      const file = `items/${row.id}.md`;
+      const bytes = readFileSync(join(root, file));
+      const fm = splitFrontmatter(bytes.toString('utf8')).frontmatter;
+      if (!/^[a-f0-9]{64}$/.test(row.source_raw_sha256 ?? '') || sha256(bytes) !== row.source_raw_sha256
+        || !/^status:\s*published\s*$/m.test(fm) || !new RegExp(`^id:\\s*${row.id}\\s*$`, 'm').test(fm)) {
+        throw Error(`proof-layout: stale or unpublished context ${row.id}`);
+      }
+      contextInputs.push(file);
+    }
+    contextInputs.push(declarationFile, evidenceFile);
   }
   const files = [...new Set([...pages.values()].flat())].sort().map(id => `items/${id}.md`);
   if (!files.length) throw Error('proof-layout: empty item scope');
-  return { pages: scope.pages.map(p => ({ id: p.id, kind: p.kind, file: p.file, items: p.items })), files,
-    inputs: [...new Set([scope.ledger, touchFile, ...manifestFiles, ...scope.pages.map(p => p.file), ...files])].sort() };
+  return { pages: scope.pages.map(p => ({ id: p.id, kind: p.kind, file: p.file, items: pages.get(p.id) })), files,
+    inputs: [...new Set([scope.ledger, touchFile, ...manifestFiles, ...scope.pages.map(p => p.file), ...files, ...contextInputs])].sort() };
 }
 
 function sourceFiles(dir) {
