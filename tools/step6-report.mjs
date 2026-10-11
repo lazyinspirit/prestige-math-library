@@ -288,7 +288,10 @@ if (command === 'check-evidence') {
   process.exit(0);
 }
 
-const ignored = new Set(['.git', 'node_modules']);
+// The sibling physics workflow owns its complete root-relative namespace.
+// Math tools and evidence outside that namespace remain protected. The
+// physics-support reporter independently snapshots its own content root.
+const ignored = new Set(['.git', 'node_modules', 'physics']);
 const allowed = new Set([relative(root, responsePath), relative(root, reportPath), relative(root, integrityPath)]);
 const dispatchPrefix = `research/${run}-dispatch/`;
 function files(dir = root, out = []) {

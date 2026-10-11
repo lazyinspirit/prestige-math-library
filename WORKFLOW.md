@@ -192,6 +192,13 @@ performs mechanical contract closure and emits `step6-` owner-report artifacts;
 its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
+The mathematics Step-6 report-integrity snapshot excludes the root-relative
+`physics/` namespace owned by the independent physics workflow. Mathematics
+sources, shared tools and run evidence retain their existing protection; the
+physics reporter continues to seal its own content root. When correcting an
+overbroad report baseline, archive its original exact bytes before taking a
+fresh native snapshot and retrying the gate.
+
 Worker supporting evidence for mutable batch manifests and proof contracts is
 archived as exact content-addressed bytes at collection. The original worker
 report remains unchanged; later native repairs may update the live batch carrier.
