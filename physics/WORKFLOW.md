@@ -81,6 +81,14 @@ dependency IDs resolve directly; the corpus alias index is loaded only when a
 used dependency requires alias resolution. Empty pre-authoring inventories do
 not require a corpus item scan. Each call observes current bytes; no dependency
 cache survives changes between controller ticks.
+
+Construction readiness reuses a run-local snapshot and per-item decisions across
+controller contexts while their inputs remain unchanged. Every use checks current
+manifest, coverage, plan, consumed supplier and missing-dependency file stamps;
+receipt stamps also invalidate cached decisions. Changed inputs clear dependency
+bytes and decisions together. If alias lookup was needed, the entire item inventory
+is stamp-bound and its change also rebuilds alias resolution. This cache accelerates
+scheduling without keeping acceptance current after an input change.
 Recompute and reconcile dependencies after edits. Blocked suppliers hold their
 consumers. Acceptance binds transitive supplier bytes; changed inputs invalidate
 it and require owner resolution before another handoff.

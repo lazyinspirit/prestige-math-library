@@ -20,7 +20,7 @@
 import { readdirSync, existsSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { itemHashGuard, shortHash } from '../../physics-support/item-hash.mjs';
 import { isPublishedItem } from '../../physics-support/published-repair-policy.mjs';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
@@ -78,12 +78,17 @@ function batchDependencies(ctx: any, unit: string): string[] {
  * coverage record, and every current item-readiness receipt exist. The item
  * list is read dynamically because planning intentionally creates empty page
  * shells before the Beta fills them. */
-const scaffoldSnapshots = new WeakMap<object, {
+// Executor contexts are short-lived; the guarded run inputs, rather than the
+// context object's identity, determine whether readiness can be reused.
+type ScaffoldSnapshot = {
   stamp: string;
   snapshot: any;
   levelCheck: ReturnType<typeof dependencyLevels>;
   itemStamps: Map<string, string>;
-}>();
+  aliasStamp: string | null;
+  decisions: Map<string, { receiptStamp: string; closed: boolean }>;
+};
+const scaffoldSnapshots = new Map<string, ScaffoldSnapshot>();
 
 function fileStamp(path: string): string {
   try {
@@ -93,6 +98,7 @@ function fileStamp(path: string): string {
 }
 
 function scaffoldSnapshot(ctx: any) {
+  const key = `${resolve(ctx.repo)}\0${ctx.run}`;
   const dir = R(ctx, 'research');
   const files = readdirSync(dir)
     .filter((name: string) => name.startsWith(`${ctx.run}-batch-`)
@@ -100,24 +106,43 @@ function scaffoldSnapshot(ctx: any) {
     .sort();
   const stamp = [fileStamp(join(dir, 'plan-spec.json')),
     ...files.map((name: string) => `${name}:${fileStamp(join(dir, name))}`)].join('|');
-  let cached = scaffoldSnapshots.get(ctx);
+  let cached = scaffoldSnapshots.get(key);
   if (!cached || cached.stamp !== stamp) {
     const snapshot = loadStep3(ctx.repo, ctx.run);
-    cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map() };
-    scaffoldSnapshots.set(ctx, cached);
+    cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map(),
+      aliasStamp: null, decisions: new Map() };
+    scaffoldSnapshots.set(key, cached);
   } else {
     // Published and in-run item bodies can change without a manifest edit.
     // Invalidate dependency bytes before checking the next unit in this same
     // status pass; Step-1 receipt files themselves are read afresh below.
     for (const [id, prior] of cached.itemStamps) {
       if (fileStamp(R(ctx, 'items', `${id}.md`)) !== prior) {
-        cached.snapshot.cache.clear();
-        cached.itemStamps.clear();
+        invalidateScaffoldInputs(cached);
         break;
       }
     }
+    // Alias lookup reads the entire item inventory. A previously unrelated
+    // carrier can acquire/remove an alias, or a new canonical carrier can
+    // replace an alias, so guard that inventory whenever lookup was used.
+    if (cached.aliasStamp !== null && cached.aliasStamp !== scaffoldAliasStamp(ctx)) {
+      invalidateScaffoldInputs(cached);
+    }
   }
   return cached;
+}
+
+function scaffoldAliasStamp(ctx: any): string {
+  return readdirSync(R(ctx, 'items')).filter(name => name.endsWith('.md')).sort()
+    .map(name => `${name}:${fileStamp(R(ctx, 'items', name))}`).join('|');
+}
+
+function invalidateScaffoldInputs(cached: ScaffoldSnapshot): void {
+  cached.snapshot.cache.clear();
+  delete cached.snapshot.aliases;
+  cached.itemStamps.clear();
+  cached.aliasStamp = null;
+  cached.decisions.clear();
 }
 
 function scaffoldArtifacts(ctx: any, unit: string): string[] {
@@ -135,14 +160,25 @@ function scaffoldArtifacts(ctx: any, unit: string): string[] {
       for (const item of Array.isArray(page?.items) ? page.items : []) {
         if (typeof item?.id === 'string' && item.id) {
           out.push(`research/${ctx.run}-step1-${item.id}.json`);
-          if (!step1Decision(snapshot, item.id).closed) complete = false;
+          const receiptStamp = fileStamp(R(ctx, 'research', `${ctx.run}-step1-${item.id}.json`));
+          let decision = cached.decisions.get(item.id);
+          if (!decision || decision.receiptStamp !== receiptStamp) {
+            decision = { receiptStamp, closed: step1Decision(snapshot, item.id).closed };
+            cached.decisions.set(item.id, decision);
+          }
+          if (!decision.closed) complete = false;
           if (item.dependency_level !== levelCheck.levels.get(item.id)) complete = false;
         } else complete = false;
       }
     }
-    for (const id of snapshot.cache.keys()) {
+    // Missing leaves are not cached by dependency(), but their creation must
+    // invalidate a readiness hash that previously included a missing marker.
+    const inputs = new Set<string>(snapshot.cache.keys());
+    for (const input of snapshot.cache.values()) for (const id of input.deps) inputs.add(id);
+    for (const id of inputs) {
       if (!cached.itemStamps.has(id)) cached.itemStamps.set(id, fileStamp(R(ctx, 'items', `${id}.md`)));
     }
+    if (snapshot.aliases && cached.aliasStamp === null) cached.aliasStamp = scaffoldAliasStamp(ctx);
   } catch {
     complete = false;
   }

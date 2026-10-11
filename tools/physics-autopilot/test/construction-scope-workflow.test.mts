@@ -8,6 +8,7 @@ import { batchInput, batchPlan, collectBatch, loopState, loopDir, accepted, loop
   consumers, checkBatches, resolveOwner, captureRepairControl, verifyRepairControl } from '../../physics-support/batch-scope-review.mjs';
 import { stages, workflowRevision } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
+import { recordStep1 } from '../../physics-support/step1-decisions.mjs';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
 import { Executor } from '../src/executor.mts';
@@ -54,6 +55,61 @@ function complete(f:any,batch:string,decision='accept',options:any={}){
   json(join(f.ctx.dispatchDir,`${p.role}-${p.label}.result.json`),{run:'demo',role:p.role,label:p.label,covers:[batch],ok:true,session_id:`session-${p.role}`});
   return {p,row,state:collectBatch(f.ctx,batch)};
 }
+
+function readyScaffold(f:any,batch:string) {
+  const pages=JSON.parse(readFileSync(join(f.repo,'research',`demo-batch-${batch}.pages.json`),'utf8'));
+  for(const page of pages)for(const item of page.items)recordStep1(f.repo,{run:'demo',item:item.id,
+    decision:'ready',owner:true,reason:'Fixture carrier inputs recorded for readiness currency.',dependencies:item.deps});
+}
+function scaffoldComplete(f:any,batch:string) {
+  const stage:any=stages.find(s=>s.id==='1-scaffold');
+  // The executor creates a fresh context on successive status/readiness calls.
+  return !stage.artifacts({...f.ctx},batch).some((path:string)=>path.endsWith('.scaffold-incomplete'));
+}
+
+test('scaffold readiness across fresh contexts invalidates changed suppliers and receipt decisions',t=>{
+  const f=fixture(t);readyScaffold(f,'1');readyScaffold(f,'2');
+  assert.equal(scaffoldComplete(f,'2'),true);assert.equal(scaffoldComplete(f,'2'),true);
+  f.writeItem('lem-a',[],'Changed supplier statement');assert.equal(scaffoldComplete(f,'2'),false);
+  readyScaffold(f,'2');assert.equal(scaffoldComplete(f,'2'),true);
+  recordStep1(f.repo,{run:'demo',item:'lem-b',decision:'escalated',owner:true,
+    reason:'Exact unresolved fixture prerequisite.',dependencies:['lem-a']});
+  assert.equal(scaffoldComplete(f,'2'),false);
+  readyScaffold(f,'2');assert.equal(scaffoldComplete(f,'2'),true);
+});
+
+test('scaffold readiness invalidates creation and deletion of a previously missing dependency',t=>{
+  const f=fixture(t);f.writeItem('lem-a',['lem-external']);readyScaffold(f,'1');
+  assert.equal(scaffoldComplete(f,'1'),true);
+  f.writeItem('lem-external',[],'Newly supplied prerequisite');assert.equal(scaffoldComplete(f,'1'),false);
+  readyScaffold(f,'1');assert.equal(scaffoldComplete(f,'1'),true);
+  rmSync(join(f.repo,'items/lem-external.md'));assert.equal(scaffoldComplete(f,'1'),false);
+});
+
+test('scaffold readiness rebuilds aliases on reassignment and canonical alias-file creation',t=>{
+  const f=fixture(t);f.writeItem('lem-external',[],'External supplier',['external-alias']);
+  f.writeItem('lem-a',['external-alias']);readyScaffold(f,'1');assert.equal(scaffoldComplete(f,'1'),true);
+  f.writeItem('lem-external',[],'External supplier');f.writeItem('lem-other',[],'Replacement supplier',['external-alias']);
+  assert.equal(scaffoldComplete(f,'1'),false);
+  readyScaffold(f,'1');assert.equal(scaffoldComplete(f,'1'),true);
+  f.writeItem('external-alias',[],'Canonical replacement');assert.equal(scaffoldComplete(f,'1'),false);
+});
+
+test('scaffold readiness invalidates ambiguous aliases introduced by an unrelated carrier',t=>{
+  const f=fixture(t);f.writeItem('lem-external',[],'External supplier',['external-alias']);
+  f.writeItem('lem-a',['external-alias']);readyScaffold(f,'1');assert.equal(scaffoldComplete(f,'1'),true);
+  f.writeItem('lem-other',[],'Other supplier',['external-alias']);assert.equal(scaffoldComplete(f,'1'),false);
+});
+
+test('scaffold readiness invalidates manifest and planned supplier changes',t=>{
+  const f=fixture(t);readyScaffold(f,'1');assert.equal(scaffoldComplete(f,'1'),true);
+  const manifest=join(f.repo,'research/demo-batch-1.pages.json'),pages=JSON.parse(readFileSync(manifest,'utf8'));
+  pages[0].requires=['outside-context'];json(manifest,pages);assert.equal(scaffoldComplete(f,'1'),false);
+  const planFile=join(f.repo,'research/plan-spec.json'),plan=JSON.parse(readFileSync(planFile,'utf8'));
+  plan.pages.push({id:'outside-context',kind:'P',order:0,items:[{id:'lem-planned',deps:[],statement:'Initial'}]});
+  json(planFile,plan);f.writeItem('lem-a',['lem-planned']);readyScaffold(f,'1');assert.equal(scaffoldComplete(f,'1'),true);
+  plan.pages.at(-1).items[0].statement='Changed';json(planFile,plan);assert.equal(scaffoldComplete(f,'1'),false);
+});
 
 test('whole-batch review -> repair -> whole-batch acceptance reuses roles and sessions',t=>{
   const f=fixture(t);const first=complete(f,'1','repair');assert.equal(first.state.phase,'repair');
