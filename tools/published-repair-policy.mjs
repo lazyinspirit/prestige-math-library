@@ -122,3 +122,50 @@ export function recordedPublishedRepair(root, id, text, receiptPath) {
     return fail(`unreadable local repair evidence: ${error.message}`);
   }
 }
+
+/** Close ownership of an untouched published prerequisite. This records no
+ * repair, audit or acceptance, and cannot authorize initial publication. */
+export function unchangedPublishedClaim(root, run, claim, text) {
+  const fail = reason => ({ ok: false, reason });
+  const receiptPath = `research/${run}-published-noop-closure.json`;
+  try {
+    if (!/^[a-zA-Z0-9_-]+$/.test(run) || claim.run !== run || claim.version !== 1
+      || !/^[a-z][a-z0-9-]*$/.test(claim.id ?? '')
+      || !/^[a-zA-Z0-9_-]+$/.test(claim.group ?? '')
+      || !Number.isFinite(Date.parse(claim.claimed_at))) return fail('invalid unchanged ownership claim');
+    if (field(text, 'id') !== claim.id || field(text, 'status') !== 'published'
+      || field(text, 'proved_here') === 'false' || itemHashGuard(text) !== claim.pre_sha256)
+      return fail('ownership claim has changed or is not a published proved item');
+    const claimsText = readFileSync(join(root, `research/${run}-step3-published-claims.jsonl`), 'utf8');
+    const claims = claimsText.split(/\r?\n/).filter(Boolean).map(JSON.parse);
+    const matches = claims.filter(row => row.id === claim.id);
+    if (matches.length !== 1 || JSON.stringify(matches[0]) !== JSON.stringify(claim))
+      return fail('missing or ambiguous exact unchanged ownership claim');
+    const closureText = readFileSync(join(root, `research/${run}-step3-closure.json`), 'utf8');
+    const receipt = JSON.parse(readFileSync(join(root, receiptPath), 'utf8'));
+    if (receipt.version !== 1 || receipt.kind !== 'unchanged-published-ownership-closure'
+      || receipt.run !== run || receipt.authorized_by !== 'owner'
+      || receipt.claims_sha256 !== sha(claimsText) || receipt.step3_closure_sha256 !== sha(closureText)
+      || !Number.isFinite(Date.parse(receipt.recorded_at))
+      || Date.parse(receipt.recorded_at) < Date.parse(claim.claimed_at)
+      || !Array.isArray(receipt.claims)) return fail('invalid unchanged ownership closure receipt');
+    const rows = receipt.claims.filter(row => row.id === claim.id), row = rows[0];
+    if (rows.length !== 1 || row.group !== claim.group || row.pre_sha256 !== claim.pre_sha256
+      || row.current_raw_sha256 !== sha(text)) return fail('unchanged ownership closure is stale or ambiguous');
+    const commit = row.prior_publication_commit;
+    if (!/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(commit ?? '')) return fail('missing prior publication commit');
+    const original = spawnSync('git', ['--no-replace-objects', '-C', root, 'show',
+      `${commit}:items/${claim.id}.md`], { maxBuffer: 16 * 1024 * 1024 });
+    if (original.status !== 0) return fail('unreadable original published carrier');
+    const before = original.stdout.toString('utf8');
+    if (sha(before) !== row.before_raw_sha256 || itemHashGuard(before) !== claim.pre_sha256
+      || field(before, 'id') !== claim.id || field(before, 'status') !== 'published'
+      || field(before, 'proved_here') === 'false'
+      || !hasCommittedPriorPublication(root, claim.id, before, commit, claim.claimed_at))
+      return fail('original committed publication does not authenticate the unchanged claim');
+    const closure = spawnSync(process.execPath, ['tools/step3-close.mjs', 'verify', '--run', run, '--root', root],
+      { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+    if (closure.status !== 0) return fail('original frozen Step-3 closure is not intact');
+    return { ok: true, receipt: receiptPath, receipt_sha256: sha(readFileSync(join(root, receiptPath))) };
+  } catch (error) { return fail(`unreadable unchanged ownership evidence: ${error.message}`); }
+}

@@ -192,6 +192,16 @@ performs mechanical contract closure and emits `step6-` owner-report artifacts;
 its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
+Closeout may close an unchanged published prerequisite ownership claim through
+`research/RUN-published-noop-closure.json` (`unchanged-published-ownership-closure`,
+version 1). This separate owner-authorized receipt binds the exact claim ledger,
+original frozen Step-3 closure, unique claim, current raw carrier and canonical
+pre-edit hash, and an ancestor publication committed before the ownership claim.
+Native Step-3 closure verification must still pass. This records no mathematical
+repair, audit, acceptance or initial publication. A changed canonical hash still
+requires the ordinary recorded published repair; neither claim nor native evidence
+is rewritten. The no-op receipt itself belongs to the sealed closeout scope.
+
 The mathematics Step-6 report-integrity snapshot excludes the root-relative
 `physics/` namespace owned by the independent physics workflow. Mathematics
 sources, shared tools and run evidence retain their existing protection; the

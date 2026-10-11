@@ -8,7 +8,7 @@ import { dirname, isAbsolute, join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
 import { verifyProofLayout } from './proof-layout-receipt.mjs';
-import { recordedPublishedRepair } from './published-repair-policy.mjs';
+import { recordedPublishedRepair, unchangedPublishedClaim } from './published-repair-policy.mjs';
 
 const decoder = new TextDecoder('utf-8', { fatal: true });
 const decode = bytes => decoder.decode(bytes);
@@ -312,7 +312,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   const claimsPath = 'research/' + run + '-step3-published-claims.jsonl';
   const claimsText = existsSync(join(root, claimsPath)) ? readFileSync(join(root, claimsPath), 'utf8') : '';
   const claims = claimsText.split('\n').filter(line => line.trim()).map(line => JSON.parse(line));
-  const seenClaims = new Set();
+  const seenClaims = new Set(), noopClosures = [];
   for (const claim of claims) {
     if (claim.version !== 1 || claim.run !== run || !/^[a-z][a-z0-9-]*$/.test(claim.id ?? '')
       || seenClaims.has(claim.id)) throw Error('closeout: invalid or duplicate published ownership claim');
@@ -320,9 +320,16 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     const path = 'items/' + claim.id + '.md';
     regularPath(root, path);
     const current = readFileSync(join(root, path), 'utf8'), fm = splitFrontmatter(current).frontmatter;
-    const receipt = /^ {2}repair:\s*(\S+)\s*$/m.exec(fm)?.[1];
+    const receipt = /^ {2}repair:\s*(?:"([^"\n]+)"|'([^'\n]+)'|([^\s'"]+))\s*$/m.exec(fm)?.slice(1).find(Boolean);
     const recorded = recordedPublishedRepair(root, claim.id, current, receipt);
-    if (!recorded.ok) throw Error('closeout: unclosed published ownership ' + claim.id + ': ' + recorded.reason);
+    if (!recorded.ok) {
+      const unchanged = unchangedPublishedClaim(root, run, claim, current);
+      if (!unchanged.ok) throw Error('closeout: unclosed published ownership ' + claim.id
+        + ': ' + recorded.reason + '; unchanged closure: ' + unchanged.reason);
+      regularPath(root, unchanged.receipt);
+      required.add(unchanged.receipt);
+      noopClosures.push({ id: claim.id, sha256: unchanged.receipt_sha256 });
+    }
     required.add(path);
   }
   const additional = new Set();
@@ -377,7 +384,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   if (ignored.length) throw Error('closeout: required/authorized artifact is ignored by Git: ' + ignored[0]);
   return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook,
     contextSha256: sha256(JSON.stringify({ selected, required: [...required].sort(),
-      claims: sha256(claimsText), additional: policy.additional_paths })) };
+      claims: sha256(claimsText), noopClosures, additional: policy.additional_paths })) };
 }
 
 function refuseCrossScopeRenames(root, scope) {
