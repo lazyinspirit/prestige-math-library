@@ -17,7 +17,7 @@ test('Step-3 closure accepts a successful validator with output above the defaul
     for (const name of ['cross-group-edges', 'step3-scope', 'splice-plan', 'defect-ledger', 'frontier-item-gate']) {
       writeFileSync(join(root, 'tools', `${name}.mjs`), 'process.exit(0);\n');
     }
-    writeFileSync(join(root, 'tools', 'validate-plan.mjs'), "process.stdout.write('x'.repeat(2 * 1024 * 1024));\n");
+    writeFileSync(join(root, 'tools', 'splice-plan.mjs'), "process.stdout.write('x'.repeat(2 * 1024 * 1024));\n");
     writeFileSync(join(root, 'research', 'r-alpha-a-3a.md'), '# reviewed\n');
     const result = spawnSync(process.execPath,
       [TOOL, 'close', '--run', 'r', '--root', root], { cwd: root, encoding: 'utf8' });
